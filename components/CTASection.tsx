@@ -1,0 +1,99 @@
+
+import React, { useEffect, useRef, useState } from 'react';
+import Button from './Button';
+import { PieChart } from 'lucide-react';
+// PixelGlobe removed
+
+interface CTASectionProps {
+  onOpenBooking: () => void;
+  onVisibilityChange?: (visible: boolean) => void;
+}
+
+const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChange }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [hasRevealed, setHasRevealed] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasRevealed(true);
+        }
+        onVisibilityChange?.(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, [onVisibilityChange]);
+
+  return (
+    <section 
+      ref={sectionRef} 
+      className={`pt-12 pb-24 md:pt-32 md:pb-48 bg-transparent relative overflow-visible transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        hasRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+      }`}
+    >
+      <div className="container mx-auto px-6 relative z-10">
+        
+        {/* Main Simplified CTA Card */}
+        <div className="flex justify-center overflow-visible">
+            <div className="w-full max-w-5xl bg-[#050505]/40 border border-white/10 rounded-[3rem] md:rounded-[4rem] p-10 md:p-20 relative overflow-visible group shadow-[0_40px_100px_rgba(0,0,0,0.6)] backdrop-blur-3xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#61F6FD]/5 via-transparent to-[#F62961]/5 opacity-40 rounded-[3rem] md:rounded-[4rem]"></div>
+              
+              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 overflow-visible">
+                  
+                  {/* Text Content */}
+                  <div className="flex-1 text-center md:text-left z-30">
+                      <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md">
+                          <PieChart size={14} className="text-[#25D366]" />
+                          <span className="text-white/60 font-black uppercase tracking-[0.4em] text-[10px]">READY TO SYNC?</span>
+                      </div>
+                      
+                      <h2 className="text-5xl md:text-8xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-8">
+                          LET'S GET <br/> <span className="text-[#25D366]">SOCIALNOW</span>
+                      </h2>
+                      
+                      <p className="text-gray-400 font-bold text-lg md:text-2xl leading-tight mb-12 max-w-lg mx-auto md:mx-0 italic">
+                        "Ontdek wat wij voor jouw merk kunnen doen! Wij vertalen rauwe ambitie naar schaalbare resultaten."
+                      </p>
+
+                      <div className="flex justify-center md:justify-start">
+                        <Button 
+                          variant="green" 
+                          icon={true} 
+                          onClick={onOpenBooking} 
+                          triggerOnHover
+                          className="shadow-[0_0_30px_rgba(37,211,102,0.25)]"
+                        >
+                          LANCEER JOUW SUCCES
+                        </Button>
+                      </div>
+                  </div>
+                  
+                  {/* Visual Center - Alleen zichtbaar op Desktop (md+) */}
+                  <div className="hidden md:flex relative w-80 h-80 items-center justify-center overflow-visible">
+                      {/* Background Circles - Made EVEN MORE visible */}
+                      <div className="absolute w-[180%] aspect-square border-[4px] border-[#61F6FD]/70 rounded-full animate-[spin_55s_linear_infinite] shadow-[0_0_50px_rgba(97,246,253,0.4)]"></div>
+                      <div className="absolute w-[150%] aspect-square border-[4px] border-[#F62961]/70 rounded-full animate-[spin_45s_linear_infinite_reverse] shadow-[0_0_50px_rgba(246,41,97,0.4)]"></div>
+                      <div className="absolute w-[120%] aspect-square border-[3px] border-dashed border-[#F7E644]/80 rounded-full animate-[spin_65s_linear_infinite] shadow-[0_0_50px_rgba(247,230,68,0.4)]"></div>
+                      
+                      {/* Pixel Globe Center REMOVED as requested */}
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
+    </section>
+  );
+};
+
+export default CTASection;
