@@ -4,6 +4,7 @@ import Button from './Button';
 import { Star } from 'lucide-react';
 import ScrollTypewriter from './ScrollTypewriter';
 import BinaryTagline from './BinaryTagline';
+import { PixelGlobe } from './PixelGlobe';
 
 interface HeroProps {
   startAnimation: boolean;
@@ -49,17 +50,16 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
         setShowCycle(true);
         const interval = setInterval(() => {
           setShowCycleQuote(false);
-          // Small delay before switching text to allow quote to fade
           setTimeout(() => {
             setWordIndex(prev => (prev + 1) % words.length);
-            setTimeout(() => setShowCycleQuote(true), 400);
-          }, 400);
-        }, 3200); // Increased interval for "slow and smooth"
-        
-        setTimeout(() => setShowCycleQuote(true), 400);
-        
+            setTimeout(() => setShowCycleQuote(true), 300);
+          }, 300);
+        }, 2000); // Faster cycling
+
+        setTimeout(() => setShowCycleQuote(true), 300);
+
         return () => clearInterval(interval);
-      }, 1200);
+      }, 600); // Start faster
       return () => clearTimeout(startTimeout);
     }
   }, [startAnimation]);
@@ -73,13 +73,27 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
   
   return (
     <div className="relative min-h-[100svh] flex flex-col justify-center select-none overflow-hidden bg-transparent">
+      {/* PixelGlobe Background - Starts with entrance animation from logo */}
+      {startAnimation && (
+        <div className="absolute inset-0 z-[1] pointer-events-none opacity-30">
+          <PixelGlobe
+            scaleMultiplier={0.5}
+            type="all"
+            opacity={0.6}
+            entranceAnimation={true}
+            glowEnabled={true}
+            largeParticles={true}
+          />
+        </div>
+      )}
+
       {/* Background Decor */}
-      <div 
-        className="absolute inset-0 z-0 opacity-[0.07] pointer-events-none" 
-        style={{ 
-          backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 1px, transparent 1px)`, 
-          backgroundSize: '80px 80px', 
-          maskImage: 'radial-gradient(circle at center, black 30%, transparent 100%)', 
+      <div
+        className="absolute inset-0 z-0 opacity-[0.07] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 1px, transparent 1px)`,
+          backgroundSize: '80px 80px',
+          maskImage: 'radial-gradient(circle at center, black 30%, transparent 100%)',
           WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 100%)'
         }}
       ></div>
@@ -98,15 +112,15 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
           </div>
 
           <div className="w-full max-w-[1600px]">
-              <h1 className="font-black uppercase tracking-tighter text-white leading-[0.7] md:leading-[0.75]">
-                <div className="text-5xl sm:text-7xl md:text-8xl lg:text-[11rem] xl:text-[14rem] mb-[-0.1em] flex items-center justify-center gap-2 md:gap-4">
+              <h1 className="font-black uppercase tracking-tighter text-white leading-[0.85]">
+                <div className="text-4xl sm:text-6xl md:text-7xl lg:text-[8rem] xl:text-[9rem] flex items-center justify-center gap-2 md:gap-4">
                   <span className="text-[#F7E644]">"</span>
                   <ScrollTypewriter text='THE NEXT' delay={100} start={startAnimation} withHighlight={false} />
                 </div>
-                <div className="text-6xl sm:text-8xl md:text-[9rem] lg:text-[13rem] xl:text-[16rem] text-white/95 mb-[-0.1em] flex justify-center">
+                <div className="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] xl:text-[11rem] flex justify-center hero-gradient-text">
                   <ScrollTypewriter text="GENERATION" delay={400} start={startAnimation} withHighlight={false} />
                 </div>
-                <div className="flex items-center justify-center flex-wrap text-5xl sm:text-7xl md:text-8xl lg:text-[11rem] xl:text-[14rem]">
+                <div className="flex items-center justify-center flex-wrap text-4xl sm:text-6xl md:text-7xl lg:text-[8rem] xl:text-[9rem]">
                   <div className="flex items-center">
                     <ScrollTypewriter text="OF" delay={800} start={startAnimation} withHighlight={false} />
                     <div className="relative inline-flex items-center h-[1.1em] ml-3 md:ml-10">
@@ -131,12 +145,12 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
           </div>
           
           <p className={`max-w-3xl mx-auto text-gray-400 text-sm md:text-2xl mb-10 md:mb-16 font-medium leading-relaxed px-6 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.4s' }}>
-            Branding, design en marketing strategisch versterkt met AI-technologie. <span className="text-white font-black italic">Voor merken die de toekomst vormgeven.</span>
+            Wij bouwen websites, applicaties en digitale projecten met AI als fundament. <span className="text-white font-black italic">Voor bedrijven die de toekomst vormgeven.</span>
           </p>
 
           <div className={`flex flex-col items-center gap-10 md:gap-12 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.6s' }}>
             <div className="relative group">
-                <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-12 text-sm md:text-xl shadow-[0_20px_60px_rgba(37,211,102,0.3)]">LANCEER JOUW SUCCES</Button>
+                <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-12 text-sm md:text-xl shadow-[0_20px_60px_rgba(37,211,102,0.3)]">START JOUW PROJECT</Button>
             </div>
 
             <div onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' })} className="flex flex-col items-center gap-6 cursor-pointer group pb-4 scale-90 md:scale-100">

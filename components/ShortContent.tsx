@@ -1,5 +1,5 @@
 
-import React, { useRef, useState, useEffect, memo, useMemo } from 'react';
+import React, { useRef, useState, useEffect, memo, useMemo, useCallback } from 'react';
 import { Activity, Volume2, Database, Network, Shield } from 'lucide-react';
 
 const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: number; duration?: number; start: boolean; suffix?: string }) => {
@@ -22,7 +22,7 @@ const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: num
 interface VideoCardProps {
   src: string;
   isFocused: boolean;
-  priority: boolean; 
+  priority: boolean;
   onEnter: () => void;
   onLeave: () => void;
 }
@@ -32,15 +32,18 @@ const VideoCard = memo(({ src, isFocused, priority, onEnter, onLeave }: VideoCar
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const hasLoadedOnce = useRef(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video || hasError) return;
 
     if (priority) {
-      if (!video.src || video.src === "" || !video.src.includes(src)) {
+      // Only set src the first time this card becomes priority
+      if (!hasLoadedOnce.current) {
         video.src = src;
         video.load();
+        hasLoadedOnce.current = true;
       }
       const playPromise = video.play();
       if (playPromise !== undefined) {
@@ -52,12 +55,8 @@ const VideoCard = memo(({ src, isFocused, priority, onEnter, onLeave }: VideoCar
         });
       }
     } else {
+      // ONLY pause - never clear src to prevent re-downloads
       video.pause();
-      if (video.src !== "") {
-        video.src = "";
-        video.load();
-        setIsLoaded(false);
-      }
     }
   }, [priority, src, hasError]);
 
@@ -68,15 +67,15 @@ const VideoCard = memo(({ src, isFocused, priority, onEnter, onLeave }: VideoCar
   }, [isFocused]);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       className={`
-        shrink-0 w-[220px] md:w-[340px] h-[380px] md:h-[600px] rounded-[2rem] md:rounded-[3rem] 
+        shrink-0 w-[220px] md:w-[340px] h-[380px] md:h-[600px] rounded-[2rem] md:rounded-[3rem]
         relative transition-all duration-700 bg-black border-2 overflow-hidden cursor-pointer snap-center z-10
-        ${isFocused 
-          ? '!scale-[1.02] !z-20 border-[#25D366] shadow-[0_0_100px_rgba(37,211,102,0.2)]' 
+        ${isFocused
+          ? '!scale-[1.02] !z-20 border-[#25D366] shadow-[0_0_100px_rgba(37,211,102,0.2)]'
           : 'border-white/5 opacity-40'}
       `}
       style={{ transform: 'translateZ(0)' }}
@@ -93,7 +92,7 @@ const VideoCard = memo(({ src, isFocused, priority, onEnter, onLeave }: VideoCar
           loop
           muted
           playsInline
-          preload="none" 
+          preload="metadata"
           onError={() => setHasError(true)}
           onPlaying={() => setIsLoaded(true)}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -101,7 +100,7 @@ const VideoCard = memo(({ src, isFocused, priority, onEnter, onLeave }: VideoCar
       )}
 
       <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-20 transition-opacity ${isFocused ? 'opacity-0' : 'opacity-100'}`}></div>
-      
+
       <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 p-2 md:p-3 rounded-full bg-black/50 backdrop-blur-2xl border border-white/10 transition-all duration-500 transform z-30 ${isFocused ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>
         <Volume2 className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] text-[#25D366]" />
       </div>
@@ -135,27 +134,27 @@ const ShortContent: React.FC = () => {
 
   const duplicatedSources = useMemo(() => [...videoSources, ...videoSources], [videoSources]);
 
+  const handleScroll = useCallback(() => {
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current;
+    const centerX = container.getBoundingClientRect().left + container.offsetWidth / 2;
+    const children = Array.from(container.children[0].children) as HTMLElement[];
+
+    const distances = children.map((child, index) => {
+      const rect = child.getBoundingClientRect();
+      const childCenter = rect.left + rect.width / 2;
+      return { index, dist: Math.abs(centerX - childCenter) };
+    });
+
+    const top3 = distances
+      .sort((a, b) => a.dist - b.dist)
+      .slice(0, 3)
+      .map(d => d.index);
+
+    setVisibleIndices(top3);
+  }, []);
+
   useEffect(() => {
-    const handleScroll = () => {
-      if (!scrollContainerRef.current) return;
-      const container = scrollContainerRef.current;
-      const centerX = container.getBoundingClientRect().left + container.offsetWidth / 2;
-      const children = Array.from(container.children[0].children) as HTMLElement[];
-      
-      const distances = children.map((child, index) => {
-        const rect = child.getBoundingClientRect();
-        const childCenter = rect.left + rect.width / 2;
-        return { index, dist: Math.abs(centerX - childCenter) };
-      });
-
-      const top3 = distances
-        .sort((a, b) => a.dist - b.dist)
-        .slice(0, 3)
-        .map(d => d.index);
-
-      setVisibleIndices(top3);
-    };
-
     const container = scrollContainerRef.current;
     if (container) {
       container.addEventListener('scroll', handleScroll, { passive: true });
@@ -166,7 +165,7 @@ const ShortContent: React.FC = () => {
         clearInterval(interval);
       };
     }
-  }, []);
+  }, [handleScroll]);
 
   return (
     <section className="py-24 md:py-48 bg-black overflow-hidden relative border-t border-white/5">
@@ -183,13 +182,13 @@ const ShortContent: React.FC = () => {
       <div ref={scrollContainerRef} className="relative w-full overflow-x-auto no-scrollbar py-12 md:py-20 z-10">
         <div className="flex gap-4 md:gap-10 animate-scroll items-center w-max" style={{ animationDuration: '60s' }}>
           {duplicatedSources.map((src, i) => (
-            <VideoCard 
-              key={`${src}-${i}`} 
-              src={src} 
+            <VideoCard
+              key={`${src}-${i}`}
+              src={src}
               priority={visibleIndices.includes(i)}
-              isFocused={focusedIndex === i} 
-              onEnter={() => setFocusedIndex(i)} 
-              onLeave={() => setFocusedIndex(null)} 
+              isFocused={focusedIndex === i}
+              onEnter={() => setFocusedIndex(i)}
+              onLeave={() => setFocusedIndex(null)}
             />
           ))}
         </div>

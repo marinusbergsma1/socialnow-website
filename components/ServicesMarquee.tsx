@@ -7,30 +7,30 @@ import {
 } from 'lucide-react';
 
 const row1 = [
-  { name: "Brand Strategy", icon: Target, color: "rgb(97, 246, 253)" },
-  { name: "Visual Identity", icon: Palette, color: "rgb(37, 211, 102)" },
-  { name: "Website & UI/UX Design", icon: Earth, color: "rgb(246, 41, 97)" },
-  { name: "Digital Experience", icon: Smartphone, color: "rgb(247, 230, 68)" },
-  { name: "Campaign Design", icon: Target, color: "rgb(97, 246, 253)" },
-  { name: "Social Media", icon: Smartphone, color: "rgb(37, 211, 102)" },
+  { name: "AI Website Development", icon: Cpu, color: "rgb(97, 246, 253)" },
+  { name: "Next-Gen Web Apps", icon: Earth, color: "rgb(37, 211, 102)" },
+  { name: "AI Automation", icon: Zap, color: "rgb(246, 41, 97)" },
+  { name: "Project Development", icon: Lightbulb, color: "rgb(247, 230, 68)" },
+  { name: "UX/UI Design", icon: Palette, color: "rgb(97, 246, 253)" },
+  { name: "Brand Strategy", icon: Target, color: "rgb(37, 211, 102)" },
 ];
 
 const row2 = [
-  { name: "Short Form Content", icon: Film, color: "rgb(37, 211, 102)" },
-  { name: "Motion Design", icon: Layers, color: "rgb(247, 230, 68)" },
-  { name: "Video & Content Production", icon: Camera, color: "rgb(246, 41, 97)" },
+  { name: "Motion Design", icon: Layers, color: "rgb(37, 211, 102)" },
+  { name: "Video & Content Production", icon: Camera, color: "rgb(247, 230, 68)" },
+  { name: "Short Form Content", icon: Film, color: "rgb(246, 41, 97)" },
   { name: "3D & CGI Design", icon: Box, color: "rgb(97, 246, 253)" },
-  { name: "Print & Offline Media", icon: Layers, color: "rgb(37, 211, 102)" },
-  { name: "Event & Environmental Design", icon: MapIcon, color: "rgb(246, 41, 97)" },
+  { name: "Social Media", icon: Smartphone, color: "rgb(37, 211, 102)" },
+  { name: "Campaign Design", icon: Target, color: "rgb(246, 41, 97)" },
 ];
 
 const row3 = [
-  { name: "Media Buying", icon: Zap, color: "rgb(247, 230, 68)" },
-  { name: "AI Coding & Algorithmic Ads", icon: Cpu, color: "rgb(97, 246, 253)" },
-  { name: "Brand Psychology", icon: Target, color: "rgb(37, 211, 102)" },
-  { name: "Neuro-Marketing", icon: Eye, color: "rgb(246, 41, 97)" },
-  { name: "Motion Branding", icon: Layers, color: "rgb(247, 230, 68)" },
-  { name: "Verbal Identity", icon: MessageSquare, color: "rgb(97, 246, 253)" },
+  { name: "AI-Powered Branding", icon: Cpu, color: "rgb(247, 230, 68)" },
+  { name: "Full-Stack Development", icon: Earth, color: "rgb(97, 246, 253)" },
+  { name: "Digital Strategy", icon: Target, color: "rgb(37, 211, 102)" },
+  { name: "Creative Direction", icon: Eye, color: "rgb(246, 41, 97)" },
+  { name: "Visual Identity", icon: Palette, color: "rgb(247, 230, 68)" },
+  { name: "Performance Marketing", icon: Zap, color: "rgb(97, 246, 253)" },
 ];
 
 const ServicesMarquee: React.FC = () => {

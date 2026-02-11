@@ -12,17 +12,23 @@ interface PixelGlobeProps {
   scaleMultiplier?: number;
   type?: 'cyan' | 'pink' | 'yellow' | 'all';
   opacity?: number;
+  entranceAnimation?: boolean;
+  glowEnabled?: boolean;
+  largeParticles?: boolean;
 }
 
-export const PixelGlobe: React.FC<PixelGlobeProps> = ({ 
-  scaleMultiplier = 0.36, 
+export const PixelGlobe: React.FC<PixelGlobeProps> = ({
+  scaleMultiplier = 0.36,
   type = 'all',
-  opacity = 1 
+  opacity = 1,
+  entranceAnimation = false,
+  glowEnabled = false,
+  largeParticles = false,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationFrameId = useRef<number>(null);
-  
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -47,18 +53,22 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       }
     };
 
+    // Increased particle counts for more impact
     if (type === 'all' || type === 'cyan') {
-      generateSphere(type === 'cyan' ? 2400 : 1200, 0.7, 0, 0, 0, '#61F6FD');
+      const count = largeParticles ? 2000 : (type === 'cyan' ? 2400 : 1200);
+      generateSphere(count, 0.7, 0, 0, 0, '#61F6FD');
     }
     if (type === 'all' || type === 'pink') {
       const pOff = type === 'pink' ? 0 : 0.65;
       const pyOff = type === 'pink' ? 0 : -0.6;
-      generateSphere(type === 'pink' ? 1600 : 600, type === 'pink' ? 0.7 : 0.35, pOff, pyOff, 0.2, '#F62961');
+      const count = largeParticles ? 1000 : (type === 'pink' ? 1600 : 600);
+      generateSphere(count, type === 'pink' ? 0.7 : 0.35, pOff, pyOff, 0.2, '#F62961');
     }
     if (type === 'all' || type === 'yellow') {
       const yOff = type === 'yellow' ? 0 : -0.85;
       const yyOff = type === 'yellow' ? 0 : 0.5;
-      generateSphere(type === 'yellow' ? 1200 : 450, type === 'yellow' ? 0.7 : 0.25, yOff, yyOff, -0.1, '#F7E644');
+      const count = largeParticles ? 800 : (type === 'yellow' ? 1200 : 450);
+      generateSphere(count, type === 'yellow' ? 0.7 : 0.25, yOff, yyOff, -0.1, '#F7E644');
     }
 
     let rotX = 0;
@@ -66,18 +76,22 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
     let targetRotX = 0;
     let targetRotY = 0;
 
+    // Entrance animation state
+    let entranceProgress = entranceAnimation ? 0 : 1;
+    const entranceDuration = 2.5; // seconds
+    let startTime: number | null = null;
+
     const resize = (entries: ResizeObserverEntry[]) => {
-      // Use requestAnimationFrame to avoid "ResizeObserver loop completed with undelivered notifications"
       window.requestAnimationFrame(() => {
         if (!entries.length) return;
-        
+
         for (let entry of entries) {
           const { width: newWidth, height: newHeight } = entry.contentRect;
           width = Math.floor(newWidth);
           height = Math.floor(newHeight);
-          
+
           if (!canvas || !ctx) return;
-          
+
           const dpr = Math.min(window.devicePixelRatio || 1, 2);
           canvas.width = width * dpr;
           canvas.height = height * dpr;
@@ -105,19 +119,31 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
     let time = 0;
     const sortedPoints = [...points];
 
-    const render = () => {
+    const render = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp;
+
+      // Update entrance progress
+      if (entranceAnimation && entranceProgress < 1) {
+        const elapsed = (timestamp - startTime) / 1000;
+        entranceProgress = Math.min(1, elapsed / entranceDuration);
+        // Ease out cubic
+        entranceProgress = 1 - Math.pow(1 - entranceProgress, 3);
+      }
+
       time += 0.007;
       ctx.clearRect(0, 0, width, height);
-      
+
       rotX += (targetRotX - rotX) * 0.05;
       rotY += (targetRotY - rotY) * 0.05;
-      
+
       const autoRot = time * (type === 'all' ? 0.22 : 0.3);
       const effectiveRotX = rotX;
       const effectiveRotY = rotY + autoRot;
 
       const containerMin = Math.min(width, height);
-      const baseRadius = containerMin * scaleMultiplier * 0.75; 
+      // Scale grows from 0 to full during entrance
+      const entranceScale = entranceAnimation ? entranceProgress : 1;
+      const baseRadius = containerMin * scaleMultiplier * 0.75 * entranceScale;
       const centerX = width / 2;
       const centerY = height / 2;
       const breatheScale = 1 + Math.sin(time * 1.1) * 0.03;
@@ -127,6 +153,11 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
         const bz = b.x * Math.sin(effectiveRotY) + b.z * Math.cos(effectiveRotY);
         return bz - az;
       });
+
+      // Set glow if enabled
+      if (glowEnabled) {
+        ctx.shadowBlur = 4;
+      }
 
       for (let i = 0; i < sortedPoints.length; i++) {
         const p = sortedPoints[i];
@@ -148,38 +179,51 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
           const perspectiveScale = (rz + 2.5) / 3.5;
           const px = centerX + rx * baseRadius * breatheScale;
           const py = centerY + ry * baseRadius * breatheScale;
-          
-          const pointAlpha = Math.min(1, Math.max(0.1, (rz + 1.8) / 2.5)) * opacity;
-          const size = Math.max(0.8, 2 * perspectiveScale); 
-          
+
+          const pointAlpha = Math.min(1, Math.max(0.1, (rz + 1.8) / 2.5)) * opacity * entranceScale;
+          // Larger particles when largeParticles is enabled
+          const size = largeParticles
+            ? Math.max(1.5, 3.5 * perspectiveScale)
+            : Math.max(0.8, 2 * perspectiveScale);
+
           ctx.fillStyle = p.color;
           ctx.globalAlpha = pointAlpha;
+
+          if (glowEnabled) {
+            ctx.shadowColor = p.color;
+          }
+
           ctx.fillRect(px - size/2, py - size/2, size, size);
         }
       }
-      
+
+      // Reset
       ctx.globalAlpha = 1;
-      animationFrameId.current = requestAnimationFrame(render);
+      if (glowEnabled) {
+        ctx.shadowBlur = 0;
+        ctx.shadowColor = 'transparent';
+      }
+      animationFrameId.current = requestAnimationFrame(renderWithTimestamp);
+    };
+
+    const renderWithTimestamp = (timestamp: number) => {
+      if (!isVisible) {
+        animationFrameId.current = null;
+        return;
+      }
+      render(timestamp);
     };
 
     let isVisible = true;
     const visibilityObserver = new IntersectionObserver((entries) => {
       isVisible = entries[0]?.isIntersecting ?? true;
       if (isVisible && !animationFrameId.current) {
-        animationFrameId.current = requestAnimationFrame(renderLoop);
+        animationFrameId.current = requestAnimationFrame(renderWithTimestamp);
       }
     }, { threshold: 0 });
     if (containerRef.current) visibilityObserver.observe(containerRef.current);
 
-    const renderLoop = () => {
-      if (!isVisible) {
-        animationFrameId.current = null;
-        return;
-      }
-      render();
-    };
-
-    animationFrameId.current = requestAnimationFrame(renderLoop);
+    animationFrameId.current = requestAnimationFrame(renderWithTimestamp);
 
     return () => {
       observer.disconnect();
@@ -187,7 +231,7 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       window.removeEventListener('mousemove', handleMouseMove);
       if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
     };
-  }, [scaleMultiplier, type, opacity]);
+  }, [scaleMultiplier, type, opacity, entranceAnimation, glowEnabled, largeParticles]);
 
   return (
     <div ref={containerRef} className="w-full h-full relative flex items-center justify-center overflow-visible">

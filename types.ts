@@ -1,16 +1,18 @@
 
 export interface Project {
   id: number;
+  slug: string;
   title: string;
   category: string;
-  client?: string; // New
-  year?: string;   // New
-  services?: string[]; // New
+  client?: string;
+  year?: string;
+  services?: string[];
   description: string;
   image: string;
-  video?: string; // Optional video URL
+  video?: string;
   align: 'left' | 'right';
   gallery?: string[];
+  url?: string;
 }
 
 export interface TeamMember {

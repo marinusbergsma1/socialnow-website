@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Button from './Button';
 import { PieChart } from 'lucide-react';
-// PixelGlobe removed
+import { PixelGlobe } from './PixelGlobe';
 
 interface CTASectionProps {
   onOpenBooking: () => void;
@@ -56,7 +56,7 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
                       </h2>
                       
                       <p className="text-gray-400 font-bold text-lg md:text-2xl leading-tight mb-12 max-w-lg mx-auto md:mx-0 italic">
-                        "Ontdek wat wij voor jouw merk kunnen doen! Wij vertalen rauwe ambitie naar schaalbare resultaten."
+                        "Ontdek wat AI-powered development voor jouw project kan betekenen. Van idee tot lancering, wij bouwen de toekomst."
                       </p>
 
                       <div className="flex justify-center md:justify-start">
@@ -67,19 +67,28 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
                           triggerOnHover
                           className="shadow-[0_0_30px_rgba(37,211,102,0.25)]"
                         >
-                          LANCEER JOUW SUCCES
+                          START JOUW PROJECT
                         </Button>
                       </div>
                   </div>
                   
                   {/* Visual Center - Alleen zichtbaar op Desktop (md+) */}
                   <div className="hidden md:flex relative w-80 h-80 items-center justify-center overflow-visible">
-                      {/* Background Circles - Made EVEN MORE visible */}
+                      {/* Background Circles */}
                       <div className="absolute w-[180%] aspect-square border-[4px] border-[#61F6FD]/70 rounded-full animate-[spin_55s_linear_infinite] shadow-[0_0_50px_rgba(97,246,253,0.4)]"></div>
                       <div className="absolute w-[150%] aspect-square border-[4px] border-[#F62961]/70 rounded-full animate-[spin_45s_linear_infinite_reverse] shadow-[0_0_50px_rgba(246,41,97,0.4)]"></div>
                       <div className="absolute w-[120%] aspect-square border-[3px] border-dashed border-[#F7E644]/80 rounded-full animate-[spin_65s_linear_infinite] shadow-[0_0_50px_rgba(247,230,68,0.4)]"></div>
-                      
-                      {/* Pixel Globe Center REMOVED as requested */}
+
+                      {/* PixelGlobe Center */}
+                      <div className="absolute inset-0 z-10">
+                        <PixelGlobe
+                          scaleMultiplier={0.45}
+                          type="all"
+                          opacity={0.8}
+                          glowEnabled={true}
+                          largeParticles={true}
+                        />
+                      </div>
                   </div>
               </div>
             </div>

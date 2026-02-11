@@ -77,7 +77,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
         </div>
 
         <div className="border-t border-zinc-900 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-600 uppercase tracking-widest">
-          <p>Copyright © 2000, SocialNow All Rights Reserved</p>
+          <p>Copyright © 2025, SocialNow All Rights Reserved</p>
           <p>Designed by us</p>
         </div>
       </div>
