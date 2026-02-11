@@ -93,8 +93,8 @@ export const allProjects: Project[] = [
     category: "AI Web Development",
     client: "VDZ Brigade",
     year: "2025",
-    services: ["AI Website Development", "UX/UI Design", "Web Development", "Responsive Design"],
-    description: "Een volledig AI-powered website ontwikkeld voor VDZ Brigade. Modern, snel en toekomstbestendig gebouwd met de nieuwste webtechnologieën en AI-gestuurde ontwikkelprocessen.",
+    services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "Responsive Design"],
+    description: "Voor VDZ Brigade ontwikkelden wij een complete website met AI-gestuurde technologie. Een modern platform dat de dienstverlening helder communiceert, met responsief design en snelle laadtijden op elk apparaat.",
     image: "https://i.ibb.co/WWZCxsb2/CRAFTURE-FASTX-PERSWAND-400x2200-1.webp",
     align: 'right',
     url: "https://vdz-brigade.nl",
@@ -107,8 +107,8 @@ export const allProjects: Project[] = [
     category: "AI Web Development",
     client: "Divine Machines",
     year: "2025",
-    services: ["AI Website Development", "UX/UI Design", "Web Development", "Creative Direction"],
-    description: "Een stijlvolle en high-performance website voor Divine Machines, volledig ontwikkeld met AI-driven development. Van concept tot deployment, gebouwd voor snelheid en impact.",
+    services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "Creative Direction"],
+    description: "Een high-performance website voor Divine Machines, ontwikkeld met AI-driven development. Strak design, technische precisie en een naadloze gebruikerservaring staan centraal in dit project.",
     image: "https://i.ibb.co/yBXWFYqx/RAVEG-Hyperpower.webp",
     align: 'left',
     url: "https://divinemachines.nl",
@@ -116,7 +116,7 @@ export const allProjects: Project[] = [
   }
 ];
 
-export const featuredProjects = allProjects.filter(p => [1, 5, 2, 3, 4].includes(p.id));
+export const featuredProjects = allProjects.filter(p => [6, 7, 1, 5, 2, 3, 4].includes(p.id));
 export const webProjects = allProjects.filter(p => p.url);
 
 export function getProjectBySlug(slug: string): Project | undefined {

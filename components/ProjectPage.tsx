@@ -1,13 +1,62 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProjectBySlug, getAdjacentProjects, allProjects } from '../data/projects';
 import Button from './Button';
 import ProgressiveImage from './ProgressiveImage';
 import {
   ArrowLeft, User, Calendar, Layers, ChevronLeft, ChevronRight,
-  ExternalLink, Globe, Terminal
+  ExternalLink, Globe
 } from 'lucide-react';
+
+// Lazy video for gallery items
+const LazyGalleryVideo: React.FC<{ src: string; className?: string }> = ({ src, className = "" }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && videoRef.current && !hasLoaded) {
+          videoRef.current.src = src;
+          videoRef.current.load();
+          setHasLoaded(true);
+          videoRef.current.play().catch(() => {
+            if (videoRef.current) {
+              videoRef.current.muted = true;
+              videoRef.current.play().catch(() => {});
+            }
+          });
+        }
+      },
+      { rootMargin: '200px', threshold: 0.1 }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [src, hasLoaded]);
+
+  return (
+    <div ref={containerRef} className={`relative ${className}`}>
+      {!hasLoaded && (
+        <div className="absolute inset-0 bg-[#0a0a0a] flex items-center justify-center z-10">
+          <div className="w-6 h-6 border-2 border-white/10 border-t-white/40 rounded-full animate-spin"></div>
+        </div>
+      )}
+      <video
+        ref={videoRef}
+        loop
+        muted
+        playsInline
+        preload="none"
+        className={`w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-[1.01] ${className}`}
+      />
+    </div>
+  );
+};
 
 const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }) => {
   const { slug } = useParams<{ slug: string }>();
@@ -53,7 +102,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
           >
             <ChevronLeft size={20} />
           </button>
-          <span className="text-[10px] font-black uppercase tracking-widest px-2 min-w-[50px] text-center">
+          <span className="text-[10px] font-bold uppercase tracking-widest px-2 min-w-[50px] text-center">
             {currentIndex + 1} / {allProjects.length}
           </span>
           <button
@@ -86,9 +135,9 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
         {/* Hero Content */}
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16 lg:p-24">
           <div className="max-w-6xl mx-auto">
-            <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-white/10 text-[10px] font-black uppercase tracking-widest text-[#F62961] bg-white/5 backdrop-blur-md">
+            <span className="inline-block px-4 py-1.5 mb-6 rounded-full border border-white/10 text-[11px] font-bold uppercase tracking-widest text-[#61F6FD] bg-white/5 backdrop-blur-md">
               {project.category}
-            </div>
+            </span>
             <h1 className="text-4xl md:text-7xl lg:text-8xl font-black uppercase text-white leading-[0.85] tracking-tighter mb-6">
               {project.title}
             </h1>
@@ -97,7 +146,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366] text-sm font-black uppercase tracking-widest hover:bg-[#25D366]/20 transition-all backdrop-blur-md"
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366] text-sm font-bold uppercase tracking-widest hover:bg-[#25D366]/20 transition-all backdrop-blur-md"
               >
                 <Globe size={16} />
                 Bekijk live website
@@ -113,7 +162,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
           {/* Left: Description */}
           <div className="lg:w-[60%]">
-            <p className="text-gray-300 leading-relaxed font-medium text-lg md:text-xl border-l-2 border-white/20 pl-6 italic">
+            <p className="text-gray-300 leading-relaxed text-lg md:text-xl border-l-2 border-white/20 pl-6">
               {project.description}
             </p>
           </div>
@@ -124,7 +173,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
               <div>
                 <div className="flex items-center gap-2 text-gray-500 mb-2">
                   <User size={12} className="text-[#61F6FD]" />
-                  <span className="text-[10px] font-black uppercase tracking-widest">Klant</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Klant</span>
                 </div>
                 <p className="text-white font-bold text-sm uppercase tracking-tight">{project.client || "Confidential"}</p>
               </div>
@@ -132,7 +181,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
               <div>
                 <div className="flex items-center gap-2 text-gray-500 mb-2">
                   <Calendar size={12} className="text-[#F62961]" />
-                  <span className="text-[10px] font-black uppercase tracking-widest">Jaar</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Jaar</span>
                 </div>
                 <p className="text-white font-bold text-sm uppercase tracking-tight">{project.year || "2024"}</p>
               </div>
@@ -140,11 +189,11 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
               <div className="col-span-2">
                 <div className="flex items-center gap-2 text-gray-500 mb-4">
                   <Layers size={12} className="text-[#F7E644]" />
-                  <span className="text-[10px] font-black uppercase tracking-widest">Services</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Services</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {project.services?.map((service, i) => (
-                    <span key={i} className="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] text-gray-300 font-black uppercase tracking-widest">
+                    <span key={i} className="px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-[11px] text-gray-300 font-bold uppercase tracking-wider">
                       {service}
                     </span>
                   ))}
@@ -168,11 +217,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
             {project.gallery.map((item, idx) => (
               <div key={idx} className="w-full rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/5 shadow-lg bg-[#0a0a0a] group relative">
                 {item.endsWith('.mp4') ? (
-                  <video
-                    src={item}
-                    autoPlay loop muted playsInline
-                    className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-[1.01]"
-                  />
+                  <LazyGalleryVideo src={item} />
                 ) : (
                   <img
                     alt={`${project.title} detail ${idx + 1}`}
@@ -191,7 +236,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
       {/* Navigation to Adjacent Projects */}
       <div className="max-w-6xl mx-auto px-6 md:px-12 pb-24">
         <div className="border-t border-white/10 pt-12 flex flex-col items-center gap-12">
-          <p className="text-gray-500 text-[10px] font-black uppercase tracking-[0.4em]">Navigeer door onze cases</p>
+          <p className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.3em]">Navigeer door onze cases</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
             {/* Previous Case */}
@@ -201,7 +246,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
             >
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#F62961]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="relative z-10">
-                <span className="text-[#F62961] text-[10px] font-black uppercase tracking-[0.3em] block mb-3 opacity-60 group-hover:opacity-100 transition-opacity">Vorige Case</span>
+                <span className="text-[#F62961] text-[10px] font-bold uppercase tracking-[0.2em] block mb-3 opacity-60 group-hover:opacity-100 transition-opacity">Vorige Case</span>
                 <h3 className="text-xl md:text-2xl font-black uppercase text-white flex items-center gap-3 tracking-tighter">
                   <ChevronLeft size={24} className="group-hover:-translate-x-2 transition-transform text-[#F62961]" />
                   {prev.title}
@@ -216,7 +261,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
             >
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-bl from-[#61F6FD]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="relative z-10">
-                <span className="text-[#61F6FD] text-[10px] font-black uppercase tracking-[0.3em] block mb-3 opacity-60 group-hover:opacity-100 transition-opacity">Volgende Case</span>
+                <span className="text-[#61F6FD] text-[10px] font-bold uppercase tracking-[0.2em] block mb-3 opacity-60 group-hover:opacity-100 transition-opacity">Volgende Case</span>
                 <h3 className="text-xl md:text-2xl font-black uppercase text-white flex items-center md:justify-end gap-3 tracking-tighter">
                   {next.title}
                   <ChevronRight size={24} className="group-hover:translate-x-2 transition-transform text-[#61F6FD]" />
@@ -227,7 +272,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
 
           <button
             onClick={() => navigate('/')}
-            className="text-white/40 hover:text-[#61F6FD] font-black uppercase tracking-[0.4em] text-[10px] transition-colors mt-4"
+            className="text-white/40 hover:text-[#61F6FD] font-bold uppercase tracking-[0.3em] text-[10px] transition-colors mt-4"
           >
             Terug naar overzicht
           </button>

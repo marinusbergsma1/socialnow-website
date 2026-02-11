@@ -92,7 +92,7 @@ const VideoCard = memo(({ src, isFocused, priority, onEnter, onLeave }: VideoCar
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="none"
           onError={() => setHasError(true)}
           onPlaying={() => setIsLoaded(true)}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -201,16 +201,16 @@ const ShortContent: React.FC = () => {
             { label: "Likes", end: 500, icon: Database, color: "#61F6FD", id: "02" },
             { label: "Reach", end: 800, icon: Shield, color: "#F62961", id: "03" }
           ].map((stat, i) => (
-             <div key={i} className="relative p-10 md:p-20 rounded-[4rem] bg-[#050505] border border-white/10 transition-all duration-700 flex flex-col items-center overflow-hidden group">
-                <div className="absolute top-0 right-0 w-40 h-40 blur-[100px] opacity-[0.03] group-hover:opacity-[0.1] transition-opacity" style={{ backgroundColor: stat.color }}></div>
-                <div className="flex items-center gap-4 mb-14 opacity-30 group-hover:opacity-60 transition-opacity">
-                  <stat.icon size={20} style={{ color: stat.color }} />
-                  <span className="text-[12px] font-black tracking-[0.6em] text-white uppercase">METRIC_OS_{stat.id}</span>
+             <div key={i} className="relative p-8 md:p-14 rounded-[3rem] bg-[#050505] border border-white/10 transition-all duration-700 flex flex-col items-center group">
+                <div className="absolute top-0 right-0 w-40 h-40 blur-[100px] opacity-[0.03] group-hover:opacity-[0.08] transition-opacity" style={{ backgroundColor: stat.color }}></div>
+                <div className="flex items-center gap-3 mb-8 opacity-30 group-hover:opacity-50 transition-opacity">
+                  <stat.icon size={16} style={{ color: stat.color }} />
+                  <span className="text-[10px] font-bold tracking-[0.4em] text-white/60 uppercase">METRIC_OS_{stat.id}</span>
                 </div>
-                <h4 className="text-8xl md:text-[11rem] font-black mb-6 tracking-tighter" style={{ color: stat.color }}>
+                <h4 className="text-7xl md:text-[8rem] font-black mb-4 tracking-tighter" style={{ color: stat.color }}>
                   <CountUp end={stat.end} start={statsVisible} suffix="m+" />
                 </h4>
-                <span className="block text-white uppercase font-black tracking-[0.5em] text-xl">{stat.label}</span>
+                <span className="block text-white uppercase font-bold tracking-[0.3em] text-base">{stat.label}</span>
               </div>
           ))}
         </div>

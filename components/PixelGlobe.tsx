@@ -59,16 +59,16 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       generateSphere(count, 0.7, 0, 0, 0, '#61F6FD');
     }
     if (type === 'all' || type === 'pink') {
-      const pOff = type === 'pink' ? 0 : 0.65;
-      const pyOff = type === 'pink' ? 0 : -0.6;
-      const count = largeParticles ? 1000 : (type === 'pink' ? 1600 : 600);
-      generateSphere(count, type === 'pink' ? 0.7 : 0.35, pOff, pyOff, 0.2, '#F62961');
+      const pOff = type === 'pink' ? 0 : 0.60;
+      const pyOff = type === 'pink' ? 0 : -0.55;
+      const count = largeParticles ? 1000 : (type === 'pink' ? 1600 : 700);
+      generateSphere(count, type === 'pink' ? 0.7 : 0.40, pOff, pyOff, 0.2, '#F62961');
     }
     if (type === 'all' || type === 'yellow') {
-      const yOff = type === 'yellow' ? 0 : -0.85;
-      const yyOff = type === 'yellow' ? 0 : 0.5;
-      const count = largeParticles ? 800 : (type === 'yellow' ? 1200 : 450);
-      generateSphere(count, type === 'yellow' ? 0.7 : 0.25, yOff, yyOff, -0.1, '#F7E644');
+      const yOff = type === 'yellow' ? 0 : -0.75;
+      const yyOff = type === 'yellow' ? 0 : 0.45;
+      const count = largeParticles ? 1200 : (type === 'yellow' ? 1200 : 700);
+      generateSphere(count, type === 'yellow' ? 0.7 : 0.40, yOff, yyOff, -0.1, '#F7E644');
     }
 
     let rotX = 0;

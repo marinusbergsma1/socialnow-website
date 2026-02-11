@@ -1,8 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Project } from '../types';
-import { Terminal, Database, Zap, SearchCode, ArrowRight, Plus, Cpu, Volume2, Activity, Shield, BarChart3, Fingerprint, Globe } from 'lucide-react';
+import { Terminal, SearchCode, Plus, Cpu, Volume2, Database, Globe, ExternalLink } from 'lucide-react';
 import BeforeAfterSlider from './BeforeAfterSlider';
 import ProgressiveImage from './ProgressiveImage';
 import Button from './Button';
@@ -14,44 +13,65 @@ const accentColors = ['#61F6FD', '#F62961', '#F7E644', '#25D366'];
 // Lazy video component for featured sections
 const LazyVideo: React.FC<{
   src: string;
-  videoRef?: React.RefObject<HTMLVideoElement | null>;
   isHovered: boolean;
   className?: string;
-}> = ({ src, videoRef: externalRef, isHovered, className = "" }) => {
-  const { containerRef, videoRef: internalRef, hasLoadedOnce } = useVideoIntersection(src, {
+}> = ({ src, isHovered, className = "" }) => {
+  const { containerRef, videoRef, hasLoadedOnce } = useVideoIntersection(src, {
     rootMargin: '300px',
     threshold: 0.1,
     autoPlay: true,
   });
 
-  // Sync external ref if provided
-  const actualVideoRef = externalRef || internalRef;
-
-  // Handle mute/unmute on hover
   useEffect(() => {
-    const video = actualVideoRef.current;
+    const video = videoRef.current;
     if (!video) return;
     video.muted = !isHovered;
     if (isHovered) {
       video.play().catch(() => {});
     }
-  }, [isHovered, actualVideoRef]);
+  }, [isHovered, videoRef]);
 
   return (
     <div ref={containerRef} className={`relative w-full h-full ${className}`}>
-      {/* Loading placeholder */}
       {!hasLoadedOnce && (
         <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-10">
           <div className="w-8 h-8 border-2 border-white/10 border-t-[#61F6FD] rounded-full animate-spin"></div>
         </div>
       )}
       <video
-        ref={actualVideoRef}
+        ref={videoRef}
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="none"
         className="w-full h-full object-contain"
+      />
+    </div>
+  );
+};
+
+// Lazy gallery video for case study cards
+const LazyGalleryVideo: React.FC<{ src: string }> = ({ src }) => {
+  const { containerRef, videoRef, hasLoadedOnce } = useVideoIntersection(src, {
+    rootMargin: '200px',
+    threshold: 0.1,
+    autoPlay: true,
+  });
+
+  return (
+    <div ref={containerRef} className="w-full h-full relative">
+      {!hasLoadedOnce && (
+        <div className="absolute inset-0 bg-zinc-900 flex items-center justify-center">
+          <div className="w-4 h-4 border border-white/10 border-t-white/40 rounded-full animate-spin"></div>
+        </div>
+      )}
+      <video
+        ref={videoRef}
+        loop
+        muted
+        playsInline
+        preload="none"
+        className="w-full h-full object-cover"
       />
     </div>
   );
@@ -71,9 +91,6 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
   const webdesignRef = useRef<HTMLDivElement>(null);
   const betcityRef = useRef<HTMLDivElement>(null);
   const lacRef = useRef<HTMLDivElement>(null);
-
-  const webdesignVideoRef = useRef<HTMLVideoElement>(null);
-  const betcityVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     let ticking = false;
@@ -130,16 +147,16 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
         <div className="flex flex-col items-center mb-12 md:mb-32 text-center relative z-10 scroll-reveal">
            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 bg-white/5 mb-8 backdrop-blur-md">
              <Cpu size={14} className="text-[#61F6FD]" />
-             <span className="text-white/60 font-black uppercase tracking-[0.4em] text-[10px]">CASE STUDY ENGINE // V2.0</span>
+             <span className="text-white/60 font-bold uppercase tracking-[0.3em] text-[10px]">FEATURED WORK</span>
            </div>
 
            <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8] relative text-white flex flex-wrap justify-center items-center">
              <span className="inline-flex items-center whitespace-nowrap">
-               <span className="text-[#F7E644] mr-2 md:mr-6 drop-shadow-[0_0_20px_rgba(247,230,68,0.4)]">"</span>
+               <span className="text-[#F7E644] mr-2 md:mr-6">"</span>
                FEATURED
              </span>
              <span className="mx-2 md:mx-4">WORK</span>
-             <span className="text-[#F7E644] drop-shadow-[0_0_20px_rgba(247,230,68,0.4)]">"</span>
+             <span className="text-[#F7E644]">"</span>
            </h2>
         </div>
 
@@ -154,7 +171,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
             <div className="text-center flex flex-col items-center">
                <div className="flex items-center gap-3 mb-4 opacity-40">
                   <Globe size={14} className="text-[#61F6FD]" />
-                  <span className="text-[10px] font-mono tracking-[0.5em] text-white uppercase">ID_WEB_NEXT_GEN</span>
+                  <span className="text-[10px] font-mono tracking-[0.3em] text-white/60 uppercase">Next Gen Webdesign</span>
                </div>
                <h3 className="text-4xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none">
                   Next Gen <span className="text-[#61F6FD]">Webdesign</span>
@@ -165,7 +182,6 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
             <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(${webdesignScale})` }}>
                <LazyVideo
                  src="https://storage.googleapis.com/socialnow_branding/SocialNow%20NEXT%20GEN%20WEBDESIGN.mp4"
-                 videoRef={webdesignVideoRef}
                  isHovered={isWebdesignHovered}
                />
                <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 p-2 md:p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/20 transition-all duration-500 transform z-20 ${isWebdesignHovered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-4'}`}>
@@ -186,7 +202,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
             <div className="text-center flex flex-col items-center">
                <div className="flex items-center gap-3 mb-4 opacity-40">
                   <Terminal size={14} className="text-[#0071BC]" />
-                  <span className="text-[10px] font-mono tracking-[0.5em] text-white uppercase">ID_BET_MOTION_OS</span>
+                  <span className="text-[10px] font-mono tracking-[0.3em] text-white/60 uppercase">Motion Design</span>
                </div>
                <h3 className="text-4xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none">
                   Motion <span className="text-[#0071BC]">Design</span>
@@ -197,7 +213,6 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
             <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(${betcityScale})` }}>
               <LazyVideo
                 src="https://storage.googleapis.com/video-slider/FEATURED/BetCity-branded%20bumper%20ad%20-%20.mp4"
-                videoRef={betcityVideoRef}
                 isHovered={isBetcityHovered}
               />
               <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 p-2 md:p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/20 transition-all duration-500 transform z-20 ${isBetcityHovered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-4'}`}>
@@ -213,7 +228,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
             <div className="text-center flex flex-col items-center">
                <div className="flex items-center gap-3 mb-4 opacity-40">
                   <Database size={14} className="text-[#F7E644]" />
-                  <span className="text-[10px] font-mono tracking-[0.5em] text-white uppercase">ID_LAC_IMPRESSION_ALPHA</span>
+                  <span className="text-[10px] font-mono tracking-[0.3em] text-white/60 uppercase">Artist Impressions</span>
                </div>
                <h3 className="text-4xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none">
                   Artist <span className="text-[#F7E644]">Impressions</span>
@@ -236,7 +251,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
            <div className="flex flex-col items-center mb-12 md:mb-32 text-center scroll-reveal">
                <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 bg-white/5 mb-8 backdrop-blur-md">
                  <SearchCode size={14} className="text-[#F7E644]" />
-                 <span className="text-white/60 font-black uppercase tracking-[0.4em] text-[10px]">DEEP DIVE // CASE ARCHIVES</span>
+                 <span className="text-white/60 font-bold uppercase tracking-[0.3em] text-[10px]">CASE STUDIES</span>
                </div>
                <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8] relative text-white flex flex-wrap justify-center items-center">
                  <span className="inline-flex items-center whitespace-nowrap">
@@ -269,47 +284,61 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
 
                       {/* Project Media */}
                       <div className="w-full lg:w-[55%] relative z-10 cursor-pointer" onClick={() => openProject(project.slug)}>
-                        <div className="rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 shadow-xl transition-transform duration-700 bg-black/40 backdrop-blur-xl group-hover:scale-[1.01] h-auto overflow-visible">
+                        <div className="rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 shadow-xl transition-transform duration-700 bg-black/40 backdrop-blur-xl group-hover:scale-[1.01] h-auto">
                           <div className="w-full flex flex-col p-2 md:p-4 gap-2 md:gap-4 h-auto">
                             <div className="w-full aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-lg relative bg-black/20">
                               <ProgressiveImage src={project.image} alt={project.title} className="w-full h-full block" objectFit="cover" />
                             </div>
 
-                            <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 h-auto">
-                              {project.gallery?.slice(0, 3).map((img, i) => (
-                                <div key={i} className="rounded-lg md:rounded-xl overflow-hidden relative border border-white/10 bg-zinc-900 shadow-2xl transition-transform hover:scale-105 aspect-[2/3]">
-                                  {img.endsWith('.mp4') ? (
-                                    <video src={img} autoPlay loop muted playsInline className="w-full h-full object-cover" />
-                                  ) : (
-                                    <img src={img} alt="" className="w-full h-full object-cover" />
-                                  )}
-                                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                                </div>
-                              ))}
-                            </div>
+                            {project.gallery && project.gallery.length > 0 && (
+                              <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 h-auto">
+                                {project.gallery.slice(0, 3).map((img, i) => (
+                                  <div key={i} className="rounded-lg md:rounded-xl overflow-hidden relative border border-white/10 bg-zinc-900 shadow-2xl transition-transform hover:scale-105 aspect-[2/3]">
+                                    {img.endsWith('.mp4') ? (
+                                      <LazyGalleryVideo src={img} />
+                                    ) : (
+                                      <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
+                                    )}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
 
-                      {/* Project Text Intel */}
-                      <div className="w-full lg:w-[45%] flex flex-col justify-center p-5 md:p-12 relative z-20 text-center lg:text-left">
-                        <div className="flex items-center justify-center lg:justify-start gap-2 md:gap-3 mb-3 md:mb-5">
+                      {/* Project Text */}
+                      <div className="w-full lg:w-[45%] flex flex-col justify-center p-5 md:p-10 relative z-20 text-center lg:text-left">
+                        <div className="flex items-center justify-center lg:justify-start gap-2 md:gap-3 mb-3 md:mb-4">
                           <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: color }}></div>
-                          <span className="text-xs md:text-lg font-black tracking-[0.2em] uppercase" style={{ color: color }}>
-                            0{idx + 1} / {project.category}
+                          <span className="text-xs md:text-sm font-bold tracking-[0.15em] uppercase" style={{ color: color }}>
+                            {project.category}
                           </span>
                         </div>
-                        <h3 className="text-2xl md:text-5xl font-black uppercase text-white mb-4 md:mb-6 leading-tight tracking-tighter">
+                        <h3 className="text-2xl md:text-4xl font-black uppercase text-white mb-4 md:mb-5 leading-tight tracking-tighter">
                           {project.title}
                         </h3>
 
-                        <p className="text-gray-400 text-sm md:text-xl leading-relaxed mb-10 md:mb-12 font-medium italic opacity-80">
-                          "{project.description}"
+                        <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 md:mb-10">
+                          {project.description}
                         </p>
 
-                        <div className="flex flex-wrap justify-center lg:justify-start gap-2 mb-8 md:mb-12">
+                        {project.url && (
+                          <a
+                            href={project.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-[#25D366] text-sm font-bold mb-6 hover:underline"
+                          >
+                            <ExternalLink size={14} />
+                            Bekijk live website
+                          </a>
+                        )}
+
+                        <div className="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 md:mb-8">
                           {project.services?.map((service, i) => (
-                            <span key={i} className="text-[8px] md:text-[10px] uppercase font-black text-white/40 border border-white/5 px-3 py-2 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+                            <span key={i} className="text-[9px] md:text-[11px] uppercase font-bold text-white/50 border border-white/10 px-3 py-1.5 rounded-lg bg-white/[0.03]">
                               {service}
                             </span>
                           ))}
@@ -321,7 +350,6 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
                             icon
                             onClick={() => openProject(project.slug)}
                             triggerOnHover
-                            className="!min-w-[240px]"
                           >
                             BEKIJK DE CASE
                           </Button>
@@ -340,7 +368,6 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
                    icon
                    onClick={() => setShowAll(true)}
                    triggerOnHover
-                   className="shadow-[0_20px_60px_rgba(37,211,102,0.2)]"
                  >
                    LOAD MORE
                  </Button>
