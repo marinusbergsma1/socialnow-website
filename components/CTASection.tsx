@@ -72,14 +72,8 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
                       </div>
                   </div>
                   
-                  {/* Visual Center - Alleen zichtbaar op Desktop (md+) */}
+                  {/* Visual Center - PixelGlobe Logo Elementen */}
                   <div className="hidden md:flex relative w-80 h-80 items-center justify-center overflow-visible">
-                      {/* Background Circles */}
-                      <div className="absolute w-[180%] aspect-square border-[4px] border-[#61F6FD]/70 rounded-full animate-[spin_55s_linear_infinite] shadow-[0_0_50px_rgba(97,246,253,0.4)]"></div>
-                      <div className="absolute w-[150%] aspect-square border-[4px] border-[#F62961]/70 rounded-full animate-[spin_45s_linear_infinite_reverse] shadow-[0_0_50px_rgba(246,41,97,0.4)]"></div>
-                      <div className="absolute w-[120%] aspect-square border-[3px] border-dashed border-[#F7E644]/80 rounded-full animate-[spin_65s_linear_infinite] shadow-[0_0_50px_rgba(247,230,68,0.4)]"></div>
-
-                      {/* PixelGlobe Center */}
                       <div className="absolute inset-0 z-10">
                         <PixelGlobe
                           scaleMultiplier={0.45}
@@ -95,12 +89,6 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
         </div>
       </div>
 
-      <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </section>
   );
 };

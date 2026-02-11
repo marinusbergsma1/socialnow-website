@@ -272,12 +272,8 @@ const ProjectsPage: React.FC<ProjectsPageProps> = ({ isOpen, onClose }) => {
                     </div>
                     
                     <div className="relative w-64 h-64 md:w-96 md:h-96 flex items-center justify-center overflow-visible">
-                        <div className="absolute w-[160%] md:w-[190%] aspect-square border-2 border-[#61F6FD]/30 rounded-full animate-[spin_55s_linear_infinite] shadow-[0_0_20px_rgba(97,246,253,0.05)]"></div>
-                        <div className="absolute w-[130%] md:w-[155%] aspect-square border-2 border-[#F62961]/30 rounded-full animate-[spin_45s_linear_infinite_reverse] shadow-[0_0_20px_rgba(246,41,97,0.05)]"></div>
-                        <div className="absolute w-[100%] md:w-[120%] aspect-square border border-dashed border-[#F7E644]/40 rounded-full animate-[spin_35s_linear_infinite] shadow-[0_0_15px_rgba(247,230,68,0.05)]"></div>
-                        
                         <div className="absolute inset-0 flex items-center justify-center z-10 overflow-visible">
-                            <PixelGlobe scaleMultiplier={0.25} />
+                            <PixelGlobe scaleMultiplier={0.25} glowEnabled={true} largeParticles={true} />
                         </div>
 
                         {[0, 60, 120, 180, 240, 300].map((deg, i) => (

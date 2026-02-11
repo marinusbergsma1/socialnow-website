@@ -83,16 +83,9 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
                   {/* UNIFIED HIGH-END VISUAL CORE */}
                   <div className="relative w-full flex items-center justify-center p-12 overflow-visible">
                       <div className="relative w-64 h-64 md:w-96 md:h-96 flex items-center justify-center overflow-visible">
-                          {/* 3 ORBITAL CIRCLES - UPDATED TO BE MORE VISIBLE */}
-                          <div className="absolute w-[160%] md:w-[190%] aspect-square border-[4px] border-[#61F6FD]/70 rounded-full animate-[spin_55s_linear_infinite] shadow-[0_0_50px_rgba(97,246,253,0.4)]"></div>
-                          <div className="absolute w-[130%] md:w-[155%] aspect-square border-[4px] border-[#F62961]/70 rounded-full animate-[spin_45s_linear_infinite_reverse] shadow-[0_0_50px_rgba(246,41,97,0.4)]"></div>
-                          <div className="absolute w-[100%] md:w-[120%] aspect-square border-[3px] border-dashed border-[#F7E644]/80 rounded-full animate-[spin_35s_linear_infinite] shadow-[0_0_50px_rgba(247,230,68,0.4)]"></div>
-                          
-                          {/* PIXEL GLOBE CORE */}
+                          {/* PIXEL GLOBE - Logo Elementen */}
                           <div className="absolute inset-0 flex items-center justify-center z-10 overflow-visible">
-                              <PixelGlobe scaleMultiplier={0.3} />
-                              <div className="absolute w-[250%] h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent rotate-45 opacity-10 pointer-events-none"></div>
-                              <div className="absolute w-[250%] h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent -rotate-45 opacity-10 pointer-events-none"></div>
+                              <PixelGlobe scaleMultiplier={0.3} glowEnabled={true} largeParticles={true} />
                           </div>
 
                           {/* PIXEL NODES - 230PX TRANSLATION */}
