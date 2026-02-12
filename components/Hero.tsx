@@ -4,6 +4,7 @@ import Button from './Button';
 import { Star } from 'lucide-react';
 import ScrollTypewriter from './ScrollTypewriter';
 import BinaryTagline from './BinaryTagline';
+import { PixelGlobe } from './PixelGlobe';
 
 interface HeroProps {
   startAnimation: boolean;
@@ -71,6 +72,20 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
 
   return (
     <div className="relative min-h-[100svh] flex flex-col justify-center select-none overflow-hidden bg-transparent">
+      {/* PixelGlobe Background - beeldmerk */}
+      {startAnimation && (
+        <div className="absolute inset-0 z-[1] pointer-events-none opacity-30">
+          <PixelGlobe
+            scaleMultiplier={0.5}
+            type="all"
+            opacity={0.6}
+            entranceAnimation={true}
+            glowEnabled={true}
+            largeParticles={true}
+          />
+        </div>
+      )}
+
       {/* Background Decor */}
       <div
         className="absolute inset-0 z-0 opacity-[0.07] pointer-events-none"
@@ -97,17 +112,20 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
 
           <div className="w-full max-w-[1600px]">
               <h1 className="font-black uppercase tracking-tighter text-white leading-[0.85]">
-                <div className="text-4xl sm:text-6xl md:text-7xl lg:text-[8rem] xl:text-[9rem] flex items-center justify-center gap-2 md:gap-4">
+                {/* THE NEXT */}
+                <div className="text-[2rem] sm:text-5xl md:text-7xl lg:text-[8rem] xl:text-[9rem] flex items-center justify-center gap-2 md:gap-4">
                   <span className="text-[#F7E644]">"</span>
                   <ScrollTypewriter text='THE NEXT' delay={100} start={startAnimation} withHighlight={false} />
                 </div>
-                <div className="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] xl:text-[11rem] flex justify-center hero-gradient-text">
+                {/* GENERATION */}
+                <div className="text-[2.5rem] sm:text-6xl md:text-[8rem] lg:text-[10rem] xl:text-[11rem] flex justify-center hero-gradient-text">
                   <ScrollTypewriter text="GENERATION" delay={400} start={startAnimation} withHighlight={false} />
                 </div>
-                <div className="flex items-center justify-center flex-wrap text-4xl sm:text-6xl md:text-7xl lg:text-[8rem] xl:text-[9rem]">
-                  <div className="flex items-center">
+                {/* OF + cycling word */}
+                <div className="text-[2rem] sm:text-5xl md:text-7xl lg:text-[8rem] xl:text-[9rem]">
+                  <div className="flex items-center justify-center">
                     <ScrollTypewriter text="OF" delay={800} start={startAnimation} withHighlight={false} />
-                    <div className="relative inline-flex items-center h-[1.1em] ml-3 md:ml-10">
+                    <div className="relative inline-flex items-center h-[1.1em] ml-2 md:ml-10">
                       {showCycle ? (
                         <span key={wordIndex} className={`${words[wordIndex].color} animate-fade-in-right transition-colors duration-1000 flex items-center drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]`}>
                           {words[wordIndex].text}
