@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Globe, ExternalLink, Code, ChevronLeft, ChevronRight, Maximize2, ChevronDown } from 'lucide-react';
+import { Globe, ExternalLink, Code, ChevronLeft, ChevronRight, ChevronUp, Maximize2, ChevronDown } from 'lucide-react';
 import { webShowcaseProjects } from '../data/projects';
 
 // Detect if we're inside an iframe (to prevent recursive loading)
@@ -658,30 +658,41 @@ const WebShowcase: React.FC = () => {
         <div style={{ height: '60vh' }} />
       </section>
 
-      {/* ═══ REELS-STYLE Mobile Fullscreen ═══ */}
+      {/* ═══ REELS-STYLE Mobile Fullscreen — Vertical Swipe (like Instagram Reels) ═══ */}
       {isMobileReels && (
         <div
           className="fixed inset-0 z-[9999] bg-black flex flex-col"
-          onTouchStart={handleTouchStart}
+          onTouchStart={(e) => {
+            touchStart.current = e.touches[0].clientY;
+          }}
           onTouchEnd={(e) => {
             if (touchStart.current === null) return;
-            const diff = touchStart.current - e.changedTouches[0].clientX;
+            const diff = touchStart.current - e.changedTouches[0].clientY;
             if (Math.abs(diff) > 50) {
-              if (diff > 0) goNext();
-              else goPrev();
+              if (diff > 0) goNext();   // swipe UP = next
+              else goPrev();            // swipe DOWN = previous
             }
             touchStart.current = null;
           }}
         >
-          {/* Full-screen mobile iframe */}
+          {/* Full-screen mobile iframe — vertical slide transitions */}
           <div className="flex-1 relative overflow-hidden">
             {webShowcaseProjects.map((project, idx) => {
+              // Calculate vertical offset for Reels-style sliding
+              const diff = idx - activeIndex;
+              const translateY = isTransitioning ? 0 : diff * 100;
+
               if (shouldUseUnlock(project)) {
                 return (
                   <div
                     key={`reels-${project.id}`}
-                    className={`absolute inset-0 transition-opacity duration-300 flex items-center justify-center ${idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
-                    style={{ background: 'radial-gradient(ellipse at center, rgba(37,211,102,0.08) 0%, rgba(0,0,0,0.95) 70%)' }}
+                    className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]"
+                    style={{
+                      transform: `translateY(${translateY}%)`,
+                      opacity: Math.abs(diff) > 1 ? 0 : 1,
+                      zIndex: idx === activeIndex ? 10 : 5 - Math.abs(diff),
+                      background: 'radial-gradient(ellipse at center, rgba(37,211,102,0.08) 0%, rgba(0,0,0,0.95) 70%)',
+                    }}
                   >
                     <div className="flex flex-col items-center gap-4 text-center px-8">
                       <span className="text-2xl">🔒</span>
@@ -701,7 +712,12 @@ const WebShowcase: React.FC = () => {
               return (
                 <div
                   key={`reels-wrap-${project.id}`}
-                  className={`absolute inset-0 overflow-hidden transition-opacity duration-300 ${idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                  className="absolute inset-0 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]"
+                  style={{
+                    transform: `translateY(${translateY}%)`,
+                    opacity: Math.abs(diff) > 1 ? 0 : 1,
+                    zIndex: idx === activeIndex ? 10 : 5 - Math.abs(diff),
+                  }}
                 >
                   <iframe
                     src={project.url}
@@ -715,14 +731,40 @@ const WebShowcase: React.FC = () => {
                     }}
                     sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
                   />
+                  {/* Scroll-through overlay — prevents iframe from capturing touch */}
+                  <div className="absolute inset-0 z-20" />
                 </div>
               );
             })}
+
+            {/* Vertical swipe hints */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 opacity-20 animate-bounce z-30 pointer-events-none">
+              <ChevronUp size={22} className="text-white" />
+            </div>
+            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 opacity-20 animate-bounce z-30 pointer-events-none">
+              <ChevronDown size={22} className="text-white" />
+            </div>
+
+            {/* Right-side dot indicators (like Reels) */}
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-30 pointer-events-none">
+              {webShowcaseProjects.map((_, idx) => (
+                <div
+                  key={`dot-${idx}`}
+                  className="rounded-full transition-all duration-300"
+                  style={{
+                    width: idx === activeIndex ? '6px' : '4px',
+                    height: idx === activeIndex ? '6px' : '4px',
+                    background: idx === activeIndex ? '#61F6FD' : 'rgba(255,255,255,0.25)',
+                    boxShadow: idx === activeIndex ? '0 0 8px rgba(97,246,253,0.5)' : 'none',
+                  }}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Bottom bar — project info + navigation */}
           <div
-            className="flex items-center justify-between px-4 py-3 safe-area-pb"
+            className="flex items-center justify-between px-4 py-3 safe-area-pb relative z-40"
             style={{
               background: 'rgba(0, 0, 0, 0.8)',
               backdropFilter: 'blur(20px)',
@@ -757,14 +799,6 @@ const WebShowcase: React.FC = () => {
               <Globe size={12} />
               Live
             </a>
-          </div>
-
-          {/* Swipe hint dots */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-2 opacity-30">
-            <ChevronLeft size={20} className="text-white" />
-          </div>
-          <div className="absolute top-1/2 -translate-y-1/2 right-2 opacity-30">
-            <ChevronRight size={20} className="text-white" />
           </div>
         </div>
       )}
