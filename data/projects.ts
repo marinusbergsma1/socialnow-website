@@ -3,21 +3,6 @@ import { Project } from '../types';
 // --- WEB DESIGN & DEVELOPMENT SHOWCASE (aparte sectie op homepage) ---
 export const webShowcaseProjects: Project[] = [
   {
-    id: 10,
-    slug: "socialnow-website",
-    title: "SocialNow",
-    category: "AI Web Development",
-    client: "SocialNow",
-    year: "2026",
-    services: ["AI Website Development", "Full-Stack React", "3D Animation", "UX/UI Design"],
-    description: "Onze eigen website — gebouwd met React, Vite, en AI-gestuurde development. 3D PixelGlobe beeldmerk, infinite video slider, live website previews en cutting-edge design.",
-    image: `${import.meta.env.BASE_URL}screenshots/socialnow-hero.jpg`,
-    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/socialnow-full.jpg`,
-    align: 'left',
-    url: "https://marinusbergsma1.github.io/socialnow-website/",
-    gallery: []
-  },
-  {
     id: 6,
     slug: "vdz-brigade-website",
     title: "VDZ Brigade",
@@ -75,6 +60,21 @@ export const webShowcaseProjects: Project[] = [
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/newblack-full.jpg`,
     align: 'left',
     url: "https://newblack.netlify.app/",
+    gallery: []
+  },
+  {
+    id: 10,
+    slug: "socialnow-website",
+    title: "SocialNow",
+    category: "AI Web Development",
+    client: "SocialNow",
+    year: "2026",
+    services: ["AI Website Development", "Full-Stack React", "3D Animation", "UX/UI Design"],
+    description: "Onze eigen website — gebouwd met React, Vite, en AI-gestuurde development. 3D PixelGlobe beeldmerk, infinite video slider, live website previews en cutting-edge design.",
+    image: `${import.meta.env.BASE_URL}screenshots/socialnow-hero.jpg`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/socialnow-full.jpg`,
+    align: 'left',
+    url: "https://marinusbergsma1.github.io/socialnow-website/",
     gallery: []
   }
 ];
