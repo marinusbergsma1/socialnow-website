@@ -176,10 +176,11 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={() => handleMouseLeave(i)}
             >
-              <div className="w-full rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden bg-black relative transition-all duration-300"
+              <div className="w-full overflow-hidden bg-black relative"
                 style={{
                   height: `${cardHeight}px`,
-                  boxShadow: isHovered ? '0 0 40px rgba(37,211,102,0.4), inset 0 0 30px rgba(37,211,102,0.05)' : 'none',
+                  borderRadius: isMobile ? '1rem' : '2.5rem',
+                  boxShadow: isHovered && !isMobile ? '0 0 40px rgba(37,211,102,0.4)' : 'none',
                 }}
               >
                 <video
@@ -191,6 +192,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
                   playsInline
                   preload="metadata"
                   className="w-full h-full object-cover pointer-events-none"
+                  style={{ borderRadius: isMobile ? '1rem' : '2.5rem' }}
                 />
               </div>
             </div>
