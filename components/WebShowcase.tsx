@@ -172,11 +172,11 @@ const WebShowcase: React.FC = () => {
 
               {/* Iframe wrapper */}
               <div className="relative flex-1 min-w-0">
-              {/* Top action bar */}
-              <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
+              {/* Action bar — above iframe */}
+              <div className="flex items-center justify-end gap-2 mb-3">
                 <button
                   onClick={toggleFullscreen}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/70 backdrop-blur-xl border border-white/20 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-white/10 hover:border-white/30 transition-all"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-white/10 hover:border-white/30 transition-all"
                 >
                   <Maximize2 size={12} />
                   Fullscreen
@@ -185,7 +185,7 @@ const WebShowcase: React.FC = () => {
                   href={activeProject.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/70 backdrop-blur-xl border border-white/20 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[#25D366]/20 hover:border-[#25D366]/40 hover:text-[#25D366] transition-all"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[#25D366]/20 hover:border-[#25D366]/40 hover:text-[#25D366] transition-all"
                 >
                   <Globe size={12} />
                   Bekijk live
