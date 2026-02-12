@@ -1,16 +1,16 @@
 import { Project } from '../types';
 
-export const allProjects: Project[] = [
-  // --- WEB DESIGN & DEVELOPMENT ---
+// --- WEB DESIGN & DEVELOPMENT SHOWCASE (aparte sectie op homepage) ---
+export const webShowcaseProjects: Project[] = [
   {
     id: 6,
     slug: "vdz-brigade-website",
-    title: "VDZ Brigade Website",
+    title: "VDZ Brigade",
     category: "AI Web Development",
     client: "VDZ Brigade",
     year: "2025",
     services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "Responsive Design"],
-    description: "Voor VDZ Brigade ontwikkelden wij een complete website met AI-gestuurde technologie. Een modern platform dat de dienstverlening helder communiceert, met responsief design en snelle laadtijden op elk apparaat.",
+    description: "Een complete website met AI-gestuurde technologie. Modern platform met responsief design en snelle laadtijden.",
     image: `${import.meta.env.BASE_URL}screenshots/vdz-brigade-hero.jpg`,
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/vdz-brigade-full.jpg`,
     align: 'right',
@@ -20,12 +20,12 @@ export const allProjects: Project[] = [
   {
     id: 7,
     slug: "divine-machines-website",
-    title: "Divine Machines Website",
+    title: "Divine Machines",
     category: "AI Web Development",
     client: "Divine Machines",
     year: "2025",
     services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "Creative Direction"],
-    description: "Een high-performance website voor Divine Machines, ontwikkeld met AI-driven development. Strak design, technische precisie en een naadloze gebruikerservaring staan centraal in dit project.",
+    description: "High-performance website met AI-driven development. Strak design en technische precisie.",
     image: `${import.meta.env.BASE_URL}screenshots/divine-machines-hero.jpg`,
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/divine-machines-full.jpg`,
     align: 'left',
@@ -35,34 +35,37 @@ export const allProjects: Project[] = [
   {
     id: 8,
     slug: "vintage-watches-website",
-    title: "Vintage Watches Website",
+    title: "Vintage Watches",
     category: "Web Design & Development",
     client: "Vintage Watches De Meesters",
     year: "2025",
     services: ["Web Design", "Web Development", "E-Commerce", "UX/UI Design"],
-    description: "Een luxueuze, donkere website voor Vintage Watches De Meesters. Met een premium uitstraling die past bij het merk: goud-accenten, elegante typografie en een naadloze browse-ervaring voor het verkennen van exclusieve horloges en goudinkoop.",
+    description: "Luxueuze, donkere website met premium uitstraling. Goud-accenten en elegante typografie.",
     image: `${import.meta.env.BASE_URL}screenshots/vintage-watches-hero.jpg`,
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/vintage-watches-full.jpg`,
     align: 'right',
-    url: "https://socialnow-vintagewatchesdemeesters.github.io/website/goud-verkopen.html",
+    url: "https://socialnow-vintagewatchesdemeesters.github.io/website/index.html",
     gallery: []
   },
   {
     id: 9,
     slug: "newblack-website",
-    title: "NewBlack Fashion Agency",
+    title: "NewBlack Fashion",
     category: "Web Design & Development",
     client: "NewBlack",
     year: "2025",
     services: ["Web Design", "Web Development", "Branding", "Creative Direction"],
-    description: "Een stijlvolle, high-end website voor NewBlack Fashion Agency. Minimalistisch design gecombineerd met krachtige typografie en een premium gevoel dat past bij de internationale fashion industrie. Gebouwd voor merken die de toekomst van mode vormgeven.",
+    description: "Stijlvolle high-end website voor de internationale fashion industrie. Minimalistisch en krachtig.",
     image: `${import.meta.env.BASE_URL}screenshots/newblack-hero.jpg`,
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/newblack-full.jpg`,
     align: 'left',
     url: "https://newblack.netlify.app/",
     gallery: []
-  },
-  // --- BRANDING & CAMPAIGNS ---
+  }
+];
+
+// --- CASE STUDIES (branding, campaigns, etc.) ---
+export const allProjects: Project[] = [
   {
     id: 1,
     slug: "universal-sony-banners",
@@ -150,8 +153,7 @@ export const allProjects: Project[] = [
   }
 ];
 
-export const featuredProjects = allProjects.filter(p => [6, 7, 8, 9, 1, 5, 2, 3, 4].includes(p.id));
-export const webProjects = allProjects.filter(p => p.url);
+export const featuredProjects = allProjects.filter(p => [1, 5, 2, 3, 4].includes(p.id));
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return allProjects.find(p => p.slug === slug);

@@ -22,6 +22,7 @@ import ContactPage from './components/ContactPage';
 import ProjectsPage from './components/ProjectsPage';
 import ServicesMarquee from './components/ServicesMarquee';
 import Hero from './components/Hero';
+import WebShowcase from './components/WebShowcase';
 
 const HomePage: React.FC<{
   loading: boolean;
@@ -35,6 +36,10 @@ const HomePage: React.FC<{
 
       <div className="scroll-reveal">
         <Clients />
+      </div>
+
+      <div className="scroll-reveal">
+        <WebShowcase />
       </div>
 
       <ProjectShowcase
