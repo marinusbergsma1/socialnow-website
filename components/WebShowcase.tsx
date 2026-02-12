@@ -195,7 +195,7 @@ const WebShowcase: React.FC = () => {
 
               {/* Iframe container */}
               <div className="rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl relative"
-                style={{ height: '70vh', minHeight: '400px' }}
+                style={{ height: '80vh', minHeight: '500px' }}
               >
                 {/* Loading state */}
                 {!iframeLoaded[activeIndex] && (
