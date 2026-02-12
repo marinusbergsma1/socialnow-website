@@ -43,8 +43,8 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
               <div className="absolute inset-0 bg-gradient-to-br from-[#61F6FD]/5 via-transparent to-[#F62961]/5 opacity-40 rounded-[3rem] md:rounded-[4rem]"></div>
               
               {/* PixelGlobe Beeldmerk */}
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 opacity-40 pointer-events-none">
-                <PixelGlobe scaleMultiplier={0.45} type="all" opacity={0.9} glowEnabled={true} largeParticles={true} />
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 opacity-50 pointer-events-none">
+                <PixelGlobe scaleMultiplier={0.45} type="all" opacity={1} glowEnabled={true} largeParticles={true} scrollReactive={true} />
               </div>
 
               <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 overflow-visible">

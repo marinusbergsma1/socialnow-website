@@ -279,8 +279,8 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#61F6FD]/5 via-transparent to-[#F62961]/5 opacity-30 rounded-[5rem]"></div>
                 
                 {/* PixelGlobe Beeldmerk */}
-                <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 w-64 h-64 md:w-[28rem] md:h-[28rem] opacity-40 pointer-events-none">
-                  <PixelGlobe scaleMultiplier={0.35} type="all" opacity={0.8} glowEnabled={true} largeParticles={true} />
+                <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 w-64 h-64 md:w-[28rem] md:h-[28rem] opacity-50 pointer-events-none">
+                  <PixelGlobe scaleMultiplier={0.35} type="all" opacity={1} glowEnabled={true} largeParticles={true} scrollReactive={true} />
                 </div>
 
                 <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-20 overflow-visible">

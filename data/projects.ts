@@ -63,6 +63,21 @@ export const webShowcaseProjects: Project[] = [
     gallery: []
   },
   {
+    id: 11,
+    slug: "divine-machines-website",
+    title: "Divine Machines",
+    category: "Web Design & Development",
+    client: "Divine Machines",
+    year: "2024",
+    services: ["Web Design", "Web Development", "UX/UI Design", "Responsive Design"],
+    description: "Een krachtige, donkere website voor Divine Machines. High-end design met sterke visuele impact en naadloze gebruikerservaring.",
+    image: `${import.meta.env.BASE_URL}screenshots/divine-machines-hero.jpg`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/divine-machines-full.jpg`,
+    align: 'right',
+    url: "https://divinemachines.nl",
+    gallery: []
+  },
+  {
     id: 10,
     slug: "socialnow-website",
     title: "SocialNow",

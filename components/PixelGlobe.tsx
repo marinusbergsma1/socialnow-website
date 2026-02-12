@@ -15,6 +15,7 @@ interface PixelGlobeProps {
   entranceAnimation?: boolean;
   glowEnabled?: boolean;
   largeParticles?: boolean;
+  scrollReactive?: boolean;
 }
 
 export const PixelGlobe: React.FC<PixelGlobeProps> = ({
@@ -24,6 +25,7 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
   entranceAnimation = false,
   glowEnabled = false,
   largeParticles = false,
+  scrollReactive = false,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -105,6 +107,24 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
     const observer = new ResizeObserver(resize);
     if (containerRef.current) observer.observe(containerRef.current);
 
+    // Scroll-reactive rotation
+    let scrollRotY = 0;
+    let scrollRotX = 0;
+    const handleScroll = () => {
+      if (!scrollReactive) return;
+      const scrollY = window.scrollY;
+      const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollProgress = pageHeight > 0 ? scrollY / pageHeight : 0;
+      // Full 360° rotation over the page scroll + extra tilt
+      scrollRotY = scrollProgress * Math.PI * 4;
+      scrollRotX = Math.sin(scrollProgress * Math.PI * 2) * 0.4;
+    };
+
+    if (scrollReactive) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll(); // Initial position
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
@@ -137,8 +157,8 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       rotY += (targetRotY - rotY) * 0.05;
 
       const autoRot = time * (type === 'all' ? 0.22 : 0.3);
-      const effectiveRotX = rotX;
-      const effectiveRotY = rotY + autoRot;
+      const effectiveRotX = rotX + (scrollReactive ? scrollRotX : 0);
+      const effectiveRotY = rotY + autoRot + (scrollReactive ? scrollRotY : 0);
 
       const containerMin = Math.min(width, height);
       // Scale grows from 0 to full during entrance
@@ -229,9 +249,10 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       observer.disconnect();
       visibilityObserver.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
+      if (scrollReactive) window.removeEventListener('scroll', handleScroll);
       if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
     };
-  }, [scaleMultiplier, type, opacity, entranceAnimation, glowEnabled, largeParticles]);
+  }, [scaleMultiplier, type, opacity, entranceAnimation, glowEnabled, largeParticles, scrollReactive]);
 
   return (
     <div ref={containerRef} className="w-full h-full relative flex items-center justify-center overflow-visible">

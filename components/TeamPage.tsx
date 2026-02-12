@@ -194,8 +194,8 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                 <span className="text-white font-black uppercase tracking-[0.6em] text-[10px]">HUMAN ARCHITECTURE INDEX</span>
               </div>
               {/* PixelGlobe Beeldmerk */}
-              <div className="absolute right-0 top-0 w-72 h-72 md:w-96 md:h-96 opacity-35 pointer-events-none">
-                <PixelGlobe scaleMultiplier={0.25} type="all" opacity={0.8} glowEnabled={true} largeParticles={true} />
+              <div className="absolute right-0 top-0 w-72 h-72 md:w-96 md:h-96 opacity-50 pointer-events-none">
+                <PixelGlobe scaleMultiplier={0.25} type="all" opacity={1} glowEnabled={true} largeParticles={true} scrollReactive={true} />
               </div>
 
               <h1 className="text-4xl md:text-7xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-10">

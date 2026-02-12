@@ -13,6 +13,7 @@ const WebShowcase: React.FC = () => {
   );
   const [isFullscreen, setIsFullscreen] = useState(false);
   const iframeContainerRef = useRef<HTMLDivElement>(null);
+  const thumbTrackRef = useRef<HTMLDivElement>(null);
 
   const activeProject = webShowcaseProjects[activeIndex];
 
@@ -39,6 +40,25 @@ const WebShowcase: React.FC = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isFullscreen]);
+
+  // Auto-center active thumbnail
+  useEffect(() => {
+    if (!thumbTrackRef.current) return;
+    const track = thumbTrackRef.current;
+    const activeThumb = track.children[activeIndex] as HTMLElement;
+    if (!activeThumb) return;
+
+    const trackRect = track.getBoundingClientRect();
+    const thumbRect = activeThumb.getBoundingClientRect();
+    const scrollLeft = track.scrollLeft;
+    const thumbCenter = thumbRect.left - trackRect.left + scrollLeft + thumbRect.width / 2;
+    const trackCenter = trackRect.width / 2;
+
+    track.scrollTo({
+      left: thumbCenter - trackCenter,
+      behavior: 'smooth'
+    });
+  }, [activeIndex]);
 
   // Toggle fullscreen
   const toggleFullscreen = () => setIsFullscreen(prev => !prev);
@@ -186,21 +206,25 @@ const WebShowcase: React.FC = () => {
                 </p>
               </div>
 
-              {/* Right: thumbnail navigation */}
+              {/* Right: thumbnail navigation with arrows */}
               <div className="flex items-center gap-3">
                 <button
                   onClick={goPrev}
-                  className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/20 transition-all"
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/20 hover:border-[#61F6FD]/40 hover:text-[#61F6FD] transition-all flex-shrink-0"
                 >
-                  <ChevronLeft size={18} />
+                  <ChevronLeft size={20} />
                 </button>
 
-                <div className="flex gap-2">
+                <div
+                  ref={thumbTrackRef}
+                  className="flex gap-2 overflow-x-auto scrollbar-hide scroll-smooth"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                >
                   {webShowcaseProjects.map((project, idx) => (
                     <button
                       key={project.id}
                       onClick={() => setActiveIndex(idx)}
-                      className={`relative w-16 h-10 md:w-20 md:h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                      className={`relative w-16 h-10 md:w-20 md:h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 flex-shrink-0 ${
                         idx === activeIndex
                           ? 'border-[#61F6FD] shadow-[0_0_15px_rgba(97,246,253,0.3)] scale-110'
                           : 'border-white/10 opacity-40 hover:opacity-70 hover:border-white/30'
@@ -217,9 +241,9 @@ const WebShowcase: React.FC = () => {
 
                 <button
                   onClick={goNext}
-                  className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/20 transition-all"
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/20 hover:border-[#61F6FD]/40 hover:text-[#61F6FD] transition-all flex-shrink-0"
                 >
-                  <ChevronRight size={18} />
+                  <ChevronRight size={20} />
                 </button>
               </div>
             </div>

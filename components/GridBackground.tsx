@@ -20,14 +20,15 @@ const GridBackground: React.FC<GridBackgroundProps> = ({ hide = false, startAnim
 
       {/* PixelGlobe Beeldmerk - 3 gekleurde bollen */}
       {startAnimation && (
-        <div className="absolute inset-0 z-[5] opacity-30">
+        <div className="absolute inset-0 z-[5] opacity-40">
           <PixelGlobe
             scaleMultiplier={0.5}
             type="all"
-            opacity={0.6}
+            opacity={0.7}
             entranceAnimation={true}
             glowEnabled={true}
             largeParticles={true}
+            scrollReactive={true}
           />
         </div>
       )}
