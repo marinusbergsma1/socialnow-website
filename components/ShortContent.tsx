@@ -216,9 +216,9 @@ const InfiniteVideoSlider: React.FC<{
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  const cardWidth = isMobile ? 80 : 280;
-  const cardHeight = isMobile ? 142 : 530;
-  const gap = isMobile ? 8 : 20;
+  const cardWidth = isMobile ? 80 : 340;
+  const cardHeight = isMobile ? 142 : 604;
+  const gap = isMobile ? 8 : 24;
   const totalItemWidth = cardWidth + gap;
   const setLength = videos.length;
   const totalSetWidth = totalItemWidth * setLength;
@@ -371,9 +371,9 @@ const InfiniteVideoSlider: React.FC<{
                   preload={isMobile ? 'none' : 'metadata'}
                   className="w-full h-full object-cover pointer-events-none"
                 />
-                {/* Tap hint overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none flex items-end justify-center pb-4">
-                  <span className="text-white/70 text-[10px] font-bold uppercase tracking-widest">Tap voor fullscreen</span>
+                {/* Tap hint overlay — desktop only */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none hidden md:flex items-end justify-center pb-4">
+                  <span className="text-white/70 text-[10px] font-bold uppercase tracking-widest">Klik voor fullscreen</span>
                 </div>
               </div>
             </div>
