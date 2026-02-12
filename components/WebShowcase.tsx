@@ -172,21 +172,92 @@ const WebShowcase: React.FC = () => {
     return isSelf && isInIframe;
   };
 
-  // Desktop preview render — screenshots only, no iframes (iframes only in fullscreen)
-  const renderDesktopPreview = (project: typeof activeProject, idx: number) => {
-    const isActive = idx === activeIndex && !isTransitioning;
+  // ═══ DESKTOP: Live iframe preview ═══
+  const renderDesktopIframe = (project: typeof activeProject, idx: number) => {
+    const isActive = idx === activeIndex;
+
+    if (shouldUseUnlock(project)) {
+      return (
+        <div
+          key={`desk-${project.id}`}
+          className={`absolute inset-0 transition-opacity duration-400 ${isActive && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+        >
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover object-top"
+            loading={idx < 2 ? 'eager' : 'lazy'}
+          />
+        </div>
+      );
+    }
 
     return (
       <div
         key={`desk-${project.id}`}
-        className={`absolute inset-0 transition-opacity duration-400 ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+        className={`absolute inset-0 transition-opacity duration-400 ${isActive && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
       >
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover object-top"
-          loading={idx < 2 ? 'eager' : 'lazy'}
+        {/* Loading skeleton */}
+        {!iframeLoaded[idx] && (
+          <div className="absolute inset-0 flex items-center justify-center z-20 bg-black/80">
+            <div className="flex flex-col items-center gap-3">
+              <div className="w-6 h-6 border-2 border-white/20 border-t-[#25D366] rounded-full animate-spin" />
+              <span className="text-white/20 text-[9px] font-bold uppercase tracking-[0.3em]">Loading</span>
+            </div>
+          </div>
+        )}
+        <iframe
+          src={project.url}
+          title={project.title}
+          className={`w-full h-full border-0 transition-opacity duration-500 ${iframeLoaded[idx] ? 'opacity-100' : 'opacity-0'}`}
+          style={{ colorScheme: 'normal' }}
+          onLoad={() => handleIframeLoad(idx)}
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
         />
+      </div>
+    );
+  };
+
+  // ═══ DESKTOP: Mobile iframe sidebar ═══
+  const renderMobileIframe = (project: typeof activeProject, idx: number) => {
+    const isActive = idx === activeIndex;
+
+    if (shouldUseUnlock(project)) {
+      return (
+        <div
+          key={`mob-${project.id}`}
+          className={`absolute inset-0 transition-opacity duration-400 ${isActive && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+        >
+          <img
+            src={project.fullPageScreenshot || project.image}
+            alt={project.title}
+            className="w-full h-full object-cover object-top"
+          />
+        </div>
+      );
+    }
+
+    return (
+      <div
+        key={`mob-${project.id}`}
+        className={`absolute inset-0 transition-opacity duration-400 ${isActive && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+      >
+        <div
+          className="absolute top-0 left-0 origin-top-left"
+          style={{
+            width: '375px',
+            height: `${Math.round(375 * (812 / 375))}px`,
+            transform: `scale(${mobileScale})`,
+          }}
+        >
+          <iframe
+            src={project.url}
+            title={`${project.title} - Mobile`}
+            className="w-full h-full border-0"
+            style={{ colorScheme: 'normal' }}
+            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+          />
+        </div>
       </div>
     );
   };
@@ -300,7 +371,7 @@ const WebShowcase: React.FC = () => {
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <button
                     onClick={toggleFullscreen}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60 text-[9px] font-bold uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all"
+                    className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60 text-[9px] font-bold uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all"
                   >
                     <Maximize2 size={10} />
                     <span className="hidden sm:inline">Fullscreen</span>
@@ -318,7 +389,7 @@ const WebShowcase: React.FC = () => {
                 </div>
               </div>
 
-              {/* ═══ MOBILE: Desktop-style 16:9 screenshot preview (< lg) — NO iframes ═══ */}
+              {/* ═══ MOBILE: PC screenshot headers met doorlink (< lg) ═══ */}
               <div className="flex lg:hidden items-center gap-1.5">
                 {/* Left arrow */}
                 <button
@@ -328,7 +399,7 @@ const WebShowcase: React.FC = () => {
                   <ChevronLeft size={14} strokeWidth={1.5} />
                 </button>
 
-                {/* 16:9 Desktop screenshot preview — Glassmorphism */}
+                {/* 16:9 Desktop screenshot — clickable link to live site */}
                 <div className="relative flex-1 min-w-0">
                   <a
                     href={activeProject.url}
@@ -352,7 +423,7 @@ const WebShowcase: React.FC = () => {
                         style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)' }}
                       />
 
-                      {/* Screenshot images — instant load, no iframes! */}
+                      {/* PC screenshot images */}
                       {webShowcaseProjects.map((project, idx) => (
                         <div
                           key={`smob-${project.id}`}
@@ -382,10 +453,10 @@ const WebShowcase: React.FC = () => {
                 </button>
               </div>
 
-              {/* ═══ DESKTOP: 16:9 + Mobile side-by-side (lg+) ═══ */}
+              {/* ═══ DESKTOP: Live iframes — 16:9 + Mobile side-by-side (lg+) ═══ */}
               <div className="hidden lg:flex items-stretch gap-3 md:gap-5">
 
-                {/* Left arrow — minimal */}
+                {/* Left arrow */}
                 <button
                   onClick={goPrev}
                   className="w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-white/[0.06] flex items-center justify-center text-white/20 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all flex-shrink-0 self-center"
@@ -393,7 +464,7 @@ const WebShowcase: React.FC = () => {
                   <ChevronLeft size={18} strokeWidth={1.5} />
                 </button>
 
-                {/* Desktop Preview — 16:9 — Glassmorphism */}
+                {/* Desktop Preview — 16:9 — Live iframe */}
                 <div className="relative flex-1 min-w-0">
                   <div
                     className="rounded-2xl overflow-hidden relative"
@@ -410,19 +481,19 @@ const WebShowcase: React.FC = () => {
                     <div className="absolute top-0 left-[10%] right-[10%] h-[1px] pointer-events-none z-40"
                       style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)' }}
                     />
-                    {/* Desktop screenshots */}
-                    {webShowcaseProjects.map((project, idx) => renderDesktopPreview(project, idx))}
+                    {/* Live iframes */}
+                    {webShowcaseProjects.map((project, idx) => renderDesktopIframe(project, idx))}
 
                     {/* Subtle bottom gradient */}
                     <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/30 to-transparent pointer-events-none z-30 rounded-b-2xl" />
                   </div>
                 </div>
 
-                {/* Desktop: Mobile Preview — screenshot, no iframes */}
-                <div className="flex flex-shrink-0 items-stretch" style={{ width: 'clamp(120px, 11vw, 180px)' }}>
+                {/* Desktop: Mobile Preview — live iframe in phone frame */}
+                <div className="flex flex-shrink-0 items-stretch" style={{ width: 'clamp(140px, 12vw, 200px)' }}>
                   <div
                     ref={mobileContainerRef}
-                    className="rounded-[1.2rem] xl:rounded-[1.5rem] overflow-hidden relative w-full"
+                    className="rounded-[1.5rem] xl:rounded-[2rem] overflow-hidden relative w-full"
                     style={{
                       background: 'rgba(255, 255, 255, 0.03)',
                       backdropFilter: 'blur(40px) saturate(180%)',
@@ -435,20 +506,8 @@ const WebShowcase: React.FC = () => {
                     <div className="absolute top-0 left-[15%] right-[15%] h-[1px] pointer-events-none z-40"
                       style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)' }}
                     />
-                    {/* Mobile screenshots */}
-                    {webShowcaseProjects.map((project, idx) => (
-                      <div
-                        key={`mob-${project.id}`}
-                        className={`absolute inset-0 transition-opacity duration-400 ${idx === activeIndex && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
-                      >
-                        <img
-                          src={project.fullPageScreenshot || project.image}
-                          alt={project.title}
-                          className="w-full h-full object-cover object-top"
-                          loading={idx < 2 ? 'eager' : 'lazy'}
-                        />
-                      </div>
-                    ))}
+                    {/* Mobile live iframes */}
+                    {webShowcaseProjects.map((project, idx) => renderMobileIframe(project, idx))}
 
                     {/* Phone notch */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[35%] h-[2.5%] bg-black rounded-b-lg z-30" />
@@ -458,7 +517,7 @@ const WebShowcase: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Right arrow — minimal */}
+                {/* Right arrow */}
                 <button
                   onClick={goNext}
                   className="w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-white/[0.06] flex items-center justify-center text-white/20 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all flex-shrink-0 self-center"
