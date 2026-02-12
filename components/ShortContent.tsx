@@ -191,6 +191,16 @@ const ShortContent: React.FC = () => {
     { src: `${base}videos/viral-cho.mp4` },
     { src: `${base}videos/muse-mode.mp4` },
     { src: `${base}videos/bakboord.mp4` },
+    { src: "https://storage.googleapis.com/video-slider/909%20Festival_Aftermovie%20in%20Reverse.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/CHIN%20CHIN%20CLUB%20-%20DINE%26DANCE.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/CHIN%20CHIN%20CLUB%20FREAKY.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/VIRAL%20BRYAN%20MG.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/viral_chiq-edition_v1.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/viral_pretty-girls-edition_v1.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/newyear_supperclub_countdown_1day.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/VIRAL_17-02_PROMO-VID.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/WEEK%2046%20-%20Friday%20-%20FRIDAY%20FRESHNESS.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/jobdex_vid_oranjebloesem_personeel.mp4" },
   ];
 
   // Stats observer
