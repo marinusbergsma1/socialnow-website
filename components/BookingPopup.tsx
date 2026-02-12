@@ -17,8 +17,9 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
       <div className="relative z-10 w-full h-full md:h-auto md:max-w-5xl bg-transparent flex flex-col md:flex-row animate-[fadeInUp_0.5s_cubic-bezier(0.16,1,0.3,1)] shadow-[0_40px_120px_rgba(0,0,0,1)] overflow-y-auto md:overflow-visible custom-scrollbar">
         
         {/* Close Button */}
-        <button 
-          onClick={onClose} 
+        <button
+          onClick={onClose}
+          aria-label="Sluiten"
           className="absolute top-6 right-6 z-[70] p-4 rounded-full bg-white/5 hover:bg-[#F62961] transition-all text-white border border-white/10 backdrop-blur-md shadow-2xl group"
         >
           <X size={20} className="group-hover:rotate-90 transition-transform duration-300" />

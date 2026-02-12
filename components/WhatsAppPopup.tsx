@@ -9,10 +9,16 @@ const WhatsAppPopup: React.FC = () => {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsAtTop(window.scrollY < window.innerHeight * 0.8);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setIsAtTop(window.scrollY < window.innerHeight * 0.8);
+        ticking = false;
+      });
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -57,7 +63,7 @@ const WhatsAppPopup: React.FC = () => {
                 </div>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+            <button onClick={() => setIsOpen(false)} aria-label="WhatsApp sluiten" className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
               <X size={16} />
             </button>
           </div>

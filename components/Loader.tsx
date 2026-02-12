@@ -13,12 +13,12 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
 
   useEffect(() => {
     isMounted.current = true;
-    // Responsive source selection
-    const isPC = window.innerWidth > 1024;
-    const src = isPC 
-      ? "https://storage.googleapis.com/video-slider/SocialNow%20Logo%20animatie%20PC.mp4" 
+    // Responsive source selection (safe for SSR — runs only in useEffect)
+    const isPC = typeof window !== 'undefined' && window.innerWidth > 1024;
+    const src = isPC
+      ? "https://storage.googleapis.com/video-slider/SocialNow%20Logo%20animatie%20PC.mp4"
       : "https://storage.googleapis.com/video-slider/Logo%20Animatie/SocialNow%20Logo%20Animatie%202026.mp4";
-    
+
     setVideoSrc(src);
 
     // Safety fallback: if the video doesn't fire onEnded within 9 seconds, proceed to site.
@@ -65,14 +65,22 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
   const handleVideoEnd = () => {
     if (!isMounted.current) return;
     setIsExiting(true);
-    // Smooth transition to reveal the site
     setTimeout(() => {
       if (isMounted.current) onComplete();
     }, 800);
   };
 
+  // Handle video load errors — skip loader immediately
+  const handleVideoError = () => {
+    if (!isMounted.current || isExiting) return;
+    setIsExiting(true);
+    setTimeout(() => {
+      if (isMounted.current) onComplete();
+    }, 400);
+  };
+
   return (
-    <div 
+    <div
       onClick={handleOverlayClick}
       className={`fixed inset-0 z-[10001] bg-black flex items-center justify-center cursor-pointer transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
         isExiting ? 'opacity-0 scale-110 blur-2xl pointer-events-none' : 'opacity-100'
@@ -80,12 +88,13 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     >
       <div className="absolute inset-0 z-0 overflow-hidden bg-black pointer-events-none">
         {videoSrc && (
-          <video 
+          <video
             ref={videoRef}
             src={videoSrc}
             playsInline
             autoPlay
             onEnded={handleVideoEnd}
+            onError={handleVideoError}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover"
           />
         )}

@@ -1,9 +1,8 @@
 
-import React, { useState, useLayoutEffect, useEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import ProjectShowcase from './components/ProjectShowcase';
-import ProjectPage from './components/ProjectPage';
 import Clients from './components/Clients';
 import ShortContent from './components/ShortContent';
 import Reviews from './components/Reviews';
@@ -19,11 +18,21 @@ import BookingPopup from './components/BookingPopup';
 import BentoGridSection from './components/BentoGridSection';
 import TeamPage from './components/TeamPage';
 import ContactPage from './components/ContactPage';
-import ProjectsPage from './components/ProjectsPage';
 import ServicesMarquee from './components/ServicesMarquee';
-import ServicesPage from './components/ServicesPage';
 import Hero from './components/Hero';
 import WebShowcase from './components/WebShowcase';
+
+// Lazy-load sub-pages for code splitting
+const ProjectsPage = lazy(() => import('./components/ProjectsPage'));
+const ServicesPage = lazy(() => import('./components/ServicesPage'));
+const ProjectPage = lazy(() => import('./components/ProjectPage'));
+
+// Minimal fallback while lazy components load
+const PageLoader = () => (
+  <div className="min-h-screen bg-black flex items-center justify-center">
+    <div className="w-6 h-6 border-2 border-white/20 border-t-[#25D366] rounded-full animate-spin" />
+  </div>
+);
 
 const HomePage: React.FC<{
   loading: boolean;
@@ -90,8 +99,14 @@ const App: React.FC = () => {
   const isSubPage = isProjectPage || isProjectsPage || isServicesPage;
 
   useLayoutEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      document.documentElement.style.setProperty('--scroll-y', window.scrollY.toString());
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--scroll-y', window.scrollY.toString());
+        ticking = false;
+      });
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -142,19 +157,25 @@ const App: React.FC = () => {
           <Route
             path="/projecten"
             element={
-              <ProjectsPage onOpenBooking={() => setIsBookingOpen(true)} />
+              <Suspense fallback={<PageLoader />}>
+                <ProjectsPage onOpenBooking={() => setIsBookingOpen(true)} />
+              </Suspense>
             }
           />
           <Route
             path="/diensten"
             element={
-              <ServicesPage onOpenBooking={() => setIsBookingOpen(true)} />
+              <Suspense fallback={<PageLoader />}>
+                <ServicesPage onOpenBooking={() => setIsBookingOpen(true)} />
+              </Suspense>
             }
           />
           <Route
             path="/project/:slug"
             element={
-              <ProjectPage onOpenBooking={() => setIsBookingOpen(true)} />
+              <Suspense fallback={<PageLoader />}>
+                <ProjectPage onOpenBooking={() => setIsBookingOpen(true)} />
+              </Suspense>
             }
           />
         </Routes>

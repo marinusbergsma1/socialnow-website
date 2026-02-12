@@ -34,12 +34,13 @@ const Clients: React.FC = () => {
         {/* Repeating the logos 4 times to ensure seamless loop on wide screens with smaller logos */}
         {[...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos].map((logo, index) => (
           <div key={index} className="flex items-center justify-center h-20 md:h-32 min-w-[140px] md:min-w-[240px] relative group cursor-pointer">
-             <img 
-               src={logo} 
-               alt={`Client Logo ${index}`} 
+             <img
+               src={logo}
+               alt={`Client Logo ${(index % clientLogos.length) + 1}`}
                className="h-full w-auto max-w-[120px] md:max-w-[200px] object-contain transition-all duration-500 opacity-80 hover:opacity-100 hover:scale-110 grayscale brightness-[2]"
                loading="lazy"
                decoding="async"
+               style={{ aspectRatio: '3 / 1' }}
              />
           </div>
         ))}

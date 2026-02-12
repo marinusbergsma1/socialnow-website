@@ -52,7 +52,7 @@ const LazyVideo: React.FC<{
         loop
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         className="w-full h-full object-contain"
       />
     </div>
@@ -80,7 +80,7 @@ const LazyGalleryVideo: React.FC<{ src: string }> = ({ src }) => {
         loop
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         className="w-full h-full object-cover"
       />
     </div>

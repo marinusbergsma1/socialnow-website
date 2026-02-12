@@ -38,10 +38,10 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
       isClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
     }`}>
 
-      {/* Background map */}
+      {/* Background map — static on mobile for performance, animated on desktop */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-15 overflow-hidden">
         <div
-          className="absolute inset-0 w-[200%] h-[200%] -left-1/2 -top-1/2 animate-[slow-map-move_120s_linear_infinite]"
+          className="absolute inset-0 w-full h-full md:w-[200%] md:h-[200%] md:-left-1/2 md:-top-1/2 md:animate-[slow-map-move_120s_linear_infinite]"
           style={{
             backgroundImage: `url('https://i.ibb.co/LdtFKCpG/BG-Social-Now-Scherm.webp')`,
             backgroundSize: 'cover',
@@ -58,6 +58,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
         <img src="https://i.ibb.co/RTsSXFm8/Logo-Social-Now-Lengte.webp" alt="Logo" className="w-28 md:w-36" />
         <button
           onClick={handleClose}
+          aria-label="Sluiten"
           className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 bg-white/[0.03] flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all"
         >
           <X size={18} />

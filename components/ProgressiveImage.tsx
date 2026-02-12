@@ -10,54 +10,73 @@ interface ProgressiveImageProps {
   objectFit?: 'cover' | 'contain';
 }
 
-const ProgressiveImage: React.FC<ProgressiveImageProps> = ({ 
-  src, 
-  alt, 
-  className = "", 
-  width, 
+const ProgressiveImage: React.FC<ProgressiveImageProps> = ({
+  src,
+  alt,
+  className = "",
+  width,
   height,
   objectFit = 'cover'
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showRealImage, setShowRealImage] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
+    if (!src) { setHasError(true); return; }
+    setIsLoaded(false);
+    setShowRealImage(false);
+    setHasError(false);
+
     const img = new Image();
     img.src = src;
     img.onload = () => {
       setIsLoaded(true);
       setTimeout(() => setShowRealImage(true), 50);
     };
+    img.onerror = () => {
+      setHasError(true);
+      setIsLoaded(true);
+      setShowRealImage(true);
+    };
   }, [src]);
 
   return (
     <div className={`relative overflow-hidden bg-transparent ${className}`} style={{ width, height }}>
-      {/* Lage kwaliteit / Blur laag */}
-      <div 
-        className={`absolute inset-0 transition-opacity duration-1000 ease-out ${showRealImage ? 'opacity-0' : 'opacity-100'}`}
-        style={{
-          backgroundImage: `url(${src})`,
-          backgroundSize: objectFit,
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          filter: 'blur(20px) saturate(1.5)',
-          transform: 'scale(1.05)',
-          willChange: 'filter, opacity'
-        }}
-      />
-      
-      {/* De echte afbeelding */}
-      <img
-        src={src}
-        alt={alt}
-        className={`w-full h-full transition-all duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none will-change-[opacity,transform] ${
-          objectFit === 'cover' ? 'object-cover' : 'object-contain'
-        } ${
-          showRealImage ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02]'
-        }`}
-        loading="lazy"
-        decoding="async"
-      />
+      {hasError ? (
+        <div className="absolute inset-0 bg-zinc-900 flex items-center justify-center">
+          <span className="text-white/20 text-xs font-bold uppercase tracking-widest">Laden mislukt</span>
+        </div>
+      ) : (
+        <>
+          {/* Lage kwaliteit / Blur laag */}
+          <div
+            className={`absolute inset-0 transition-opacity duration-1000 ease-out ${showRealImage ? 'opacity-0' : 'opacity-100'}`}
+            style={{
+              backgroundImage: `url(${src})`,
+              backgroundSize: objectFit,
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              filter: 'blur(20px) saturate(1.5)',
+              transform: 'scale(1.05)',
+              willChange: 'filter, opacity'
+            }}
+          />
+
+          {/* De echte afbeelding */}
+          <img
+            src={src}
+            alt={alt}
+            className={`w-full h-full transition-all duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none will-change-[opacity,transform] ${
+              objectFit === 'cover' ? 'object-cover' : 'object-contain'
+            } ${
+              showRealImage ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02]'
+            }`}
+            loading="lazy"
+            decoding="async"
+          />
+        </>
+      )}
       
       {/* Scanline / Loading effect */}
       {!isLoaded && (

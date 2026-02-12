@@ -207,10 +207,11 @@ const InfiniteVideoSlider: React.FC<{
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   // Responsive card dimensions
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 768);
+    onResize();
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
@@ -224,11 +225,17 @@ const InfiniteVideoSlider: React.FC<{
 
   const autoSpeed = isMobile ? 0.5 : 0.8;
 
-  const allVideos = [...videos, ...videos, ...videos, ...videos, ...videos];
+  // Fewer duplicates on mobile (3x vs 5x) = less DOM nodes & memory
+  const allVideos = isMobile
+    ? [...videos, ...videos, ...videos]
+    : [...videos, ...videos, ...videos, ...videos, ...videos];
+
+  const numSets = isMobile ? 3 : 5;
 
   useEffect(() => {
-    positionRef.current = totalSetWidth * 2;
-  }, [totalSetWidth]);
+    // Start in the middle set
+    positionRef.current = totalSetWidth * Math.floor(numSets / 2);
+  }, [totalSetWidth, numSets]);
 
   const animate = useCallback(() => {
     if (!isDragging.current && !isPaused.current) {
@@ -241,7 +248,8 @@ const InfiniteVideoSlider: React.FC<{
       }
     }
 
-    if (positionRef.current >= totalSetWidth * 3) positionRef.current -= totalSetWidth;
+    // Seamless wrap within middle sets
+    if (positionRef.current >= totalSetWidth * (numSets - 1)) positionRef.current -= totalSetWidth;
     if (positionRef.current <= totalSetWidth) positionRef.current += totalSetWidth;
 
     if (trackRef.current) {
@@ -249,7 +257,7 @@ const InfiniteVideoSlider: React.FC<{
     }
 
     animationRef.current = requestAnimationFrame(animate);
-  }, [totalSetWidth, autoSpeed]);
+  }, [totalSetWidth, autoSpeed, numSets]);
 
   useEffect(() => {
     animationRef.current = requestAnimationFrame(animate);
@@ -360,7 +368,7 @@ const InfiniteVideoSlider: React.FC<{
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload={isMobile ? 'none' : 'metadata'}
                   className="w-full h-full object-cover pointer-events-none"
                 />
                 {/* Tap hint overlay */}

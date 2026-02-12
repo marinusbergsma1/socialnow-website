@@ -45,8 +45,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
     };
 
     const handleGlobalTouchMove = (e: TouchEvent) => {
-      if (isDragging) {
-        // Prevent scrolling on mobile while dragging
+      if (isDragging && e.touches?.length > 0) {
         if (e.cancelable) e.preventDefault();
         handleMove(e.touches[0].clientX);
       }

@@ -115,7 +115,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             <Button variant="green" icon onClick={onOpenBooking} className="scale-90 origin-right !h-[48px]" triggerOnHover>Kennismaken</Button>
           </div>
 
-          <button className="lg:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)}>
+          <button className="lg:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? 'Menu sluiten' : 'Menu openen'}>
             {isOpen ? <X /> : <Menu />}
           </button>
       </nav>

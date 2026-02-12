@@ -21,6 +21,7 @@ const LazyImage: React.FC<{ src: string; alt: string; className?: string }> = ({
   const imgRef = useRef<HTMLImageElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [inView, setInView] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const el = imgRef.current;
@@ -33,6 +34,10 @@ const LazyImage: React.FC<{ src: string; alt: string; className?: string }> = ({
     return () => observer.disconnect();
   }, []);
 
+  if (hasError) {
+    return <div className="h-full w-full bg-zinc-900" />;
+  }
+
   return (
     <img
       ref={imgRef}
@@ -40,6 +45,7 @@ const LazyImage: React.FC<{ src: string; alt: string; className?: string }> = ({
       alt={alt}
       className={`${className} transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
       onLoad={() => setLoaded(true)}
+      onError={() => setHasError(true)}
       decoding="async"
     />
   );
@@ -54,23 +60,25 @@ const MarqueeRow: React.FC<{ images: typeof imagesRow1; speed: number; reverse?:
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
   }, []);
 
   const cardHeight = isMobile ? 100 : 260;
   const gap = isMobile ? 12 : 24;
 
-  // Duplicate enough times to fill screen + buffer (6x for wide screens)
-  const allImages = [...images, ...images, ...images, ...images, ...images, ...images];
+  // Fewer duplicates on mobile (4x) vs desktop (6x) for less DOM nodes
+  const numSets = isMobile ? 4 : 6;
+  const allImages = Array.from({ length: numSets }, () => images).flat();
 
   // Measure single set width after render
   useEffect(() => {
     if (!trackRef.current) return;
-    // Total scrollWidth / number of sets = single set width
-    singleSetWidthRef.current = trackRef.current.scrollWidth / 6;
-    // Start in the middle (at set 3) so reverse direction also has room
-    posRef.current = singleSetWidthRef.current * 2;
-  }, [isMobile, images.length]);
+    singleSetWidthRef.current = trackRef.current.scrollWidth / numSets;
+    posRef.current = singleSetWidthRef.current * Math.floor(numSets / 3);
+  }, [isMobile, images.length, numSets]);
 
   const animate = useCallback(() => {
     const singleSetWidth = singleSetWidthRef.current;
