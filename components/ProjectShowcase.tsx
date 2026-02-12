@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Terminal, SearchCode, Plus, Cpu, Volume2, Database, Globe, ExternalLink } from 'lucide-react';
+import { Terminal, SearchCode, Cpu, Volume2, Database, Globe, ExternalLink } from 'lucide-react';
 import BeforeAfterSlider from './BeforeAfterSlider';
 import ProgressiveImage from './ProgressiveImage';
 import Button from './Button';
@@ -181,7 +181,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
           <div className="relative flex justify-center items-center overflow-hidden">
             <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(${webdesignScale})` }}>
                <LazyVideo
-                 src="https://storage.googleapis.com/socialnow_branding/SocialNow%20NEXT%20GEN%20WEBDESIGN.mp4"
+                 src={`${import.meta.env.BASE_URL}videos/nextgen-webdesign.mp4`}
                  isHovered={isWebdesignHovered}
                />
                <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 p-2 md:p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/20 transition-all duration-500 transform z-20 ${isWebdesignHovered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-4'}`}>
@@ -212,7 +212,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
           <div className="relative flex justify-center items-center overflow-hidden">
             <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(${betcityScale})` }}>
               <LazyVideo
-                src="https://storage.googleapis.com/video-slider/FEATURED/BetCity-branded%20bumper%20ad%20-%20.mp4"
+                src={`${import.meta.env.BASE_URL}videos/betcity-bumper.mp4`}
                 isHovered={isBetcityHovered}
               />
               <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 p-2 md:p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/20 transition-all duration-500 transform z-20 ${isBetcityHovered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-4'}`}>

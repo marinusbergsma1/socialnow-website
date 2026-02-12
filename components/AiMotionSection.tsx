@@ -76,7 +76,7 @@ const AiMotionSection: React.FC = () => {
                         style={{ transform: `scale(${scale})` }}
                     >
                         <video 
-                            src="https://storage.googleapis.com/video-slider/FEATURED/SocialNow%20Ai%20Showcase%20-%20Part%201%20%26%202.mp4" 
+                            src={`${import.meta.env.BASE_URL}videos/ai-showcase.mp4`} 
                             autoPlay 
                             loop 
                             muted 

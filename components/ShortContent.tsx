@@ -124,13 +124,14 @@ const ShortContent: React.FC = () => {
   }, []);
 
   // Reduced to 5 optimal loading videos
+  const base = import.meta.env.BASE_URL;
   const videoSources = useMemo(() => [
-    "https://storage.googleapis.com/video-slider/RAVEG%20DYADIUM%20STORY.mp4",
+    `${base}videos/raveg-dyadium.mp4`,
     "https://storage.googleapis.com/video-slider/HD/Supperclub%20x%20SocialNow%20Promotion.mp4",
-    "https://storage.googleapis.com/video-slider/HD/VIRAL%20CHO%20LIVE%20NEW.mp4",
-    "https://storage.googleapis.com/video-slider/HD/MUSE%20MODE%20TEAM%20VIDEO.mp4",
-    "https://storage.googleapis.com/video-slider/HD/Bakboord%20x%20Supperclub%20Cruise%20promotievideo.mp4"
-  ], []);
+    `${base}videos/viral-cho.mp4`,
+    `${base}videos/muse-mode.mp4`,
+    `${base}videos/bakboord.mp4`
+  ], [base]);
 
   const duplicatedSources = useMemo(() => [...videoSources, ...videoSources], [videoSources]);
 
