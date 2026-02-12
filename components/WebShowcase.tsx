@@ -490,7 +490,7 @@ const WebShowcase: React.FC = () => {
                 </div>
 
                 {/* Desktop: Mobile Preview — live iframe in phone frame */}
-                <div className="flex flex-shrink-0 items-stretch" style={{ width: 'clamp(140px, 12vw, 200px)' }}>
+                <div className="flex flex-shrink-0 items-stretch" style={{ width: 'clamp(160px, 14vw, 240px)' }}>
                   <div
                     ref={mobileContainerRef}
                     className="rounded-[1.5rem] xl:rounded-[2rem] overflow-hidden relative w-full"
