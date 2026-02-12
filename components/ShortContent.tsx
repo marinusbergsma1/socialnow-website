@@ -177,12 +177,8 @@ const ReelsOverlay: React.FC<{
         ))}
       </div>
 
-      {/* Bottom hint */}
-      <div className="absolute bottom-6 left-0 right-0 flex justify-center z-10 pointer-events-none">
-        <span className="text-white/30 text-[10px] font-bold uppercase tracking-widest">
-          Swipe om te navigeren
-        </span>
-      </div>
+      {/* Bottom spacer for safe area */}
+      <div className="h-6" />
     </div>
   );
 };
@@ -225,12 +221,12 @@ const InfiniteVideoSlider: React.FC<{
 
   const autoSpeed = isMobile ? 0.5 : 0.8;
 
-  // Fewer duplicates on mobile (3x vs 5x) = less DOM nodes & memory
+  // Fewer duplicates = less DOM nodes & memory (3x mobile, 4x desktop)
   const allVideos = isMobile
     ? [...videos, ...videos, ...videos]
-    : [...videos, ...videos, ...videos, ...videos, ...videos];
+    : [...videos, ...videos, ...videos, ...videos];
 
-  const numSets = isMobile ? 3 : 5;
+  const numSets = isMobile ? 3 : 4;
 
   useEffect(() => {
     // Start in the middle set
@@ -308,20 +304,11 @@ const InfiniteVideoSlider: React.FC<{
     isPaused.current = true;
     velocityRef.current = 0;
     setHoveredIndex(idx);
-    const video = videoRefs.current[idx];
-    if (video) {
-      video.muted = false;
-      video.volume = 0.4;
-    }
   }, []);
 
-  const handleMouseLeave = useCallback((idx: number) => {
+  const handleMouseLeave = useCallback((_idx: number) => {
     isPaused.current = false;
     setHoveredIndex(null);
-    const video = videoRefs.current[idx];
-    if (video) {
-      video.muted = true;
-    }
   }, []);
 
   return (
@@ -368,13 +355,9 @@ const InfiniteVideoSlider: React.FC<{
                   loop
                   muted
                   playsInline
-                  preload={isMobile ? 'none' : 'metadata'}
+                  preload="none"
                   className="w-full h-full object-cover pointer-events-none"
                 />
-                {/* Tap hint overlay — desktop only */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none hidden md:flex items-end justify-center pb-4">
-                  <span className="text-white/70 text-[10px] font-bold uppercase tracking-widest">Klik voor fullscreen</span>
-                </div>
               </div>
             </div>
           );
@@ -450,7 +433,7 @@ const ShortContent: React.FC = () => {
             {[
               { label: "Followers", end: 2, id: "01", color: "#25D366" },
               { label: "Likes", end: 500, id: "02", color: "#F62961" },
-              { label: "Reach", end: 800, id: "03", color: "#61F6FD" }
+              { label: "Reach", end: 800, id: "03", color: "#5BA4F5" }
             ].map((stat, i) => (
               <div key={i} className="relative p-3 md:p-6 rounded-xl md:rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-700 flex flex-col items-center group hover:border-white/[0.12]">
                 <h4 className="text-2xl md:text-5xl font-black mb-0.5 md:mb-1 tracking-tighter" style={{ color: stat.color }}>

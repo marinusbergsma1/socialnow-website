@@ -85,7 +85,7 @@ const Reviews: React.FC<ReviewsProps> = ({ onOpenBooking }) => {
           {reviewsData.map((review, index) => (
             <div 
               key={index} 
-              className={`group relative backdrop-blur-3xl p-10 rounded-[2.5rem] border transition-all duration-700 flex flex-col hover:-translate-y-4 shadow-2xl ${activeIndex === index ? 'bg-black/90 border-[#61F6FD]/40 shadow-[0_20px_60px_rgba(97,246,253,0.15)]' : 'bg-zinc-950/80 border-white/10 hover:border-white/20'}`}
+              className={`group relative backdrop-blur-3xl p-10 rounded-[2.5rem] border transition-all duration-700 flex flex-col hover:-translate-y-4 shadow-2xl ${activeIndex === index ? 'bg-black/90 border-[#5BA4F5]/40 shadow-[0_20px_60px_rgba(97,246,253,0.15)]' : 'bg-zinc-950/80 border-white/10 hover:border-white/20'}`}
             >
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white/10">
@@ -93,7 +93,7 @@ const Reviews: React.FC<ReviewsProps> = ({ onOpenBooking }) => {
                 </div>
                 <div>
                   <h4 className="font-black text-white text-lg leading-tight uppercase tracking-tighter">{review.name}</h4>
-                  <p className="text-[#61F6FD] text-[10px] font-black uppercase tracking-widest">{review.role}</p>
+                  <p className="text-[#5BA4F5] text-[10px] font-black uppercase tracking-widest">{review.role}</p>
                 </div>
               </div>
 

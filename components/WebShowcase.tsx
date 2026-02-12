@@ -276,7 +276,7 @@ const WebShowcase: React.FC = () => {
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#25D366] animate-pulse flex-shrink-0" />
                   <span className="text-white font-black uppercase tracking-tight text-xs md:text-lg truncate">{activeProject.title}</span>
-                  <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.3em] text-[#61F6FD] hidden sm:inline flex-shrink-0">{activeProject.category}</span>
+                  <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.3em] text-[#5BA4F5] hidden sm:inline flex-shrink-0">{activeProject.category}</span>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <button onClick={() => setIsFullscreen(true)} className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60 text-[9px] font-bold uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all" aria-label="Fullscreen">
@@ -365,7 +365,7 @@ const WebShowcase: React.FC = () => {
                 <div ref={thumbTrackRef} className="flex gap-1 md:gap-1.5 overflow-x-auto scrollbar-hide scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   {webShowcaseProjects.map((project, idx) => (
                     <button key={project.id} onClick={() => goToIndex(idx)} aria-label={`Ga naar ${project.title}`}
-                      className={`relative rounded-sm md:rounded-md overflow-hidden transition-all duration-300 flex-shrink-0 ${idx === activeIndex ? 'ring-1 ring-[#61F6FD]/60 shadow-[0_0_10px_rgba(97,246,253,0.2)] scale-110 opacity-100' : 'opacity-30 hover:opacity-60'}`}
+                      className={`relative rounded-sm md:rounded-md overflow-hidden transition-all duration-300 flex-shrink-0 ${idx === activeIndex ? 'ring-1 ring-[#5BA4F5]/60 shadow-[0_0_10px_rgba(97,246,253,0.2)] scale-110 opacity-100' : 'opacity-30 hover:opacity-60'}`}
                       style={{ width: idx === activeIndex ? '36px' : '30px', height: idx === activeIndex ? '22px' : '19px' }}>
                       <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
                     </button>
@@ -404,7 +404,7 @@ const WebShowcase: React.FC = () => {
                 <div className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
                 <span className="text-white font-black uppercase tracking-tight text-sm">{activeProject.title}</span>
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#61F6FD]">{activeProject.category}</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#5BA4F5]">{activeProject.category}</span>
             </div>
             <div className="flex items-center gap-3">
               <button onClick={goPrev} aria-label="Vorige" className="w-8 h-8 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/20 transition-all"><ChevronLeft size={16} /></button>

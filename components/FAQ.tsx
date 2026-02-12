@@ -6,7 +6,7 @@ const faqs = [
   {
     question: "Wat kost een rebranding traject gemiddeld?",
     answer: "Elk traject is maatwerk. Een high-end rebranding start doorgaans vanaf \u20AC2.500. Dit omvat volledige merkstrategie, visuele identiteit, typografie en uitgebreide Brand OS guidelines voor alle kanalen.",
-    color: "#61F6FD"
+    color: "#5BA4F5"
   },
   {
     question: "Hoe integreert SocialNow AI in het proces?",
@@ -26,7 +26,7 @@ const faqs = [
   {
     question: "Welke data gebruiken jullie voor design?",
     answer: "We analyseren markttrends, consumentengedrag en concurrentie-data. Door deze inzichten te combineren met brute creativiteit, bouwen we merken die niet alleen mooi zijn, maar ook converteren.",
-    color: "#61F6FD"
+    color: "#5BA4F5"
   },
   {
     question: "Hoe ziet het kennismakingsproces eruit?",

@@ -49,7 +49,7 @@ const ImpressionSection: React.FC<ImpressionSectionProps> = ({ onOpenBooking, on
         const x = Math.cos(angle * (Math.PI / 180)) * distance;
         const y = Math.sin(angle * (Math.PI / 180)) * distance;
         const rotation = Math.random() * 1000; 
-        const color = ['#F62961', '#F7E644', '#61F6FD', '#ffffff'][Math.floor(Math.random() * 4)];
+        const color = ['#F62961', '#F7E644', '#5BA4F5', '#ffffff'][Math.floor(Math.random() * 4)];
         return { id: i, width: isStreamer ? 4 : 8, height: isStreamer ? 24 : 8, x, y, rotation, color, delay: Math.random() * 0.1 };
     });
   }, []);

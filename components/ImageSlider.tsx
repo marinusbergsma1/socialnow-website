@@ -69,8 +69,8 @@ const MarqueeRow: React.FC<{ images: typeof imagesRow1; speed: number; reverse?:
   const cardHeight = isMobile ? 100 : 260;
   const gap = isMobile ? 12 : 24;
 
-  // Fewer duplicates on mobile (4x) vs desktop (6x) for less DOM nodes
-  const numSets = isMobile ? 4 : 6;
+  // Fewer duplicates = less DOM nodes & memory (3x mobile, 4x desktop)
+  const numSets = isMobile ? 3 : 4;
   const allImages = Array.from({ length: numSets }, () => images).flat();
 
   // Measure single set width after render

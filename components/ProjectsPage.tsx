@@ -5,7 +5,7 @@ import { allProjects } from '../data/projects';
 import ProgressiveImage from './ProgressiveImage';
 import Button from './Button';
 
-const accentColors = ['#61F6FD', '#F62961', '#F7E644', '#25D366'];
+const accentColors = ['#5BA4F5', '#F62961', '#F7E644', '#25D366'];
 
 const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }) => {
   const navigate = useNavigate();
@@ -135,7 +135,7 @@ const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
       {/* CTA Section */}
       <div className="max-w-5xl mx-auto px-6 md:px-12 pb-32">
         <div className="relative rounded-[3rem] md:rounded-[4rem] border border-white/10 bg-white/[0.02] p-10 md:p-20 text-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/5 via-transparent to-[#61F6FD]/5 opacity-50" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/5 via-transparent to-[#5BA4F5]/5 opacity-50" />
           <div className="relative z-10">
             <h2 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-6">
               Klaar voor <span className="text-[#25D366]">jouw project</span>?

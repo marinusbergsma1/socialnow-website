@@ -30,10 +30,10 @@ const reviewsData = [
 
 const words = [
   { text: "BRANDING", color: "text-[#25D366]" },
-  { text: "DESIGN", color: "text-[#61F6FD]" },
+  { text: "DESIGN", color: "text-[#5BA4F5]" },
   { text: "MARKETING", color: "text-[#F7E644]" },
   { text: "STRATEGY", color: "text-[#F62961]" },
-  { text: "AI", color: "text-[#61F6FD]" }
+  { text: "AI", color: "text-[#5BA4F5]" }
 ];
 
 const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
@@ -86,7 +86,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
         <div className="container mx-auto px-6 text-center flex flex-col items-center justify-center">
 
           <div className={`transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`}>
-             <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-2xl border border-white/10 px-6 py-2.5 rounded-full mb-8 md:mb-10 hover:border-[#61F6FD]/50 transition-colors">
+             <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-2xl border border-white/10 px-6 py-2.5 rounded-full mb-8 md:mb-10 hover:border-[#5BA4F5]/50 transition-colors">
                <div className="relative flex h-2.5 w-2.5">
                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#25D366]"></span>
@@ -144,7 +144,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                <div className="bg-black/90 backdrop-blur-xl border border-white/10 rounded-full px-4 md:px-6 py-2 shadow-2xl transition-all duration-700 group-hover:border-white/30 flex items-center gap-2 md:gap-4 max-w-[95vw] md:max-w-none">
                   <div className="flex -space-x-3 shrink-0">
                     {reviewsData.map((review, i) => (
-                      <div key={i} className={`w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-black overflow-hidden transition-all duration-700 ${activeReviewIndex === i ? 'scale-110 z-10 border-[#61F6FD] shadow-[0_0_20px_rgba(97,246,253,0.4)]' : 'opacity-40 grayscale scale-90'}`}>
+                      <div key={i} className={`w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-black overflow-hidden transition-all duration-700 ${activeReviewIndex === i ? 'scale-110 z-10 border-[#5BA4F5] shadow-[0_0_20px_rgba(97,246,253,0.4)]' : 'opacity-40 grayscale scale-90'}`}>
                         <img src={review.image} alt={review.name} className="w-full h-full object-cover" />
                       </div>
                     ))}
@@ -154,7 +154,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                     <p className="text-white font-black uppercase tracking-widest text-[10px] md:text-xs leading-none">
                       {reviewsData[activeReviewIndex].name}
                     </p>
-                    <p className="text-[#61F6FD] font-bold uppercase tracking-widest text-[8px] md:text-[9px] leading-none mt-1 opacity-80">
+                    <p className="text-[#5BA4F5] font-bold uppercase tracking-widest text-[8px] md:text-[9px] leading-none mt-1 opacity-80">
                       {reviewsData[activeReviewIndex].handle}
                     </p>
                   </div>

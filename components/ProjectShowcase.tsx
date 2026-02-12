@@ -8,7 +8,7 @@ import Button from './Button';
 import { useVideoIntersection } from '../hooks/useVideoIntersection';
 import { featuredProjects as projects } from '../data/projects';
 
-const accentColors = ['#61F6FD', '#F62961', '#F7E644', '#25D366'];
+const accentColors = ['#5BA4F5', '#F62961', '#F7E644', '#25D366'];
 
 // Lazy video component for featured sections
 const LazyVideo: React.FC<{
@@ -43,7 +43,7 @@ const LazyVideo: React.FC<{
     <div ref={containerRef} className={`relative w-full h-full ${className}`}>
       {!hasLoadedOnce && (
         <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-10">
-          <div className="w-8 h-8 border-2 border-white/10 border-t-[#61F6FD] rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-2 border-white/10 border-t-[#5BA4F5] rounded-full animate-spin"></div>
         </div>
       )}
       <video
@@ -169,11 +169,11 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
           <div className="flex flex-col items-center mb-6 md:mb-10 px-6">
             <div className="text-center flex flex-col items-center">
                <div className="flex items-center gap-3 mb-4 opacity-40">
-                  <Globe size={14} className="text-[#61F6FD]" />
+                  <Globe size={14} className="text-[#5BA4F5]" />
                   <span className="text-[10px] font-mono tracking-[0.3em] text-white/60 uppercase">Next Gen Webdesign</span>
                </div>
                <h3 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-none">
-                  Next Gen <span className="text-[#61F6FD]">Webdesign</span>
+                  Next Gen <span className="text-[#5BA4F5]">Webdesign</span>
                </h3>
             </div>
           </div>
@@ -185,7 +185,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
                  restartOnView={true}
                />
                <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 p-2 md:p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/20 transition-all duration-500 transform z-20 ${isWebdesignHovered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-4'}`}>
-                <Volume2 className="w-4 h-4 md:w-6 md:h-6 text-[#61F6FD]" />
+                <Volume2 className="w-4 h-4 md:w-6 md:h-6 text-[#5BA4F5]" />
               </div>
             </div>
           </div>

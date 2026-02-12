@@ -124,7 +124,7 @@ const WebsitePreview: React.FC<{ screenshot: string; url: string; title: string 
           {/* Scroll progress indicator */}
           <div className="absolute top-2 right-2 bottom-2 w-1 rounded-full bg-white/5 z-10">
             <div
-              className="w-full rounded-full bg-[#61F6FD]/40 transition-all duration-150"
+              className="w-full rounded-full bg-[#5BA4F5]/40 transition-all duration-150"
               style={{ height: `${Math.max(10, (1 / 6) * 100)}%`, transform: `translateY(${scrollProgress * 500}%)` }}
             ></div>
           </div>
@@ -189,7 +189,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
         {/* Hero Content */}
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 lg:p-20">
           <div className="max-w-5xl mx-auto">
-            <span className="inline-block px-4 py-1.5 mb-4 rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-widest text-[#61F6FD] bg-white/5 backdrop-blur-md">
+            <span className="inline-block px-4 py-1.5 mb-4 rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-widest text-[#5BA4F5] bg-white/5 backdrop-blur-md">
               {project.category}
             </span>
             <h1 className="text-3xl md:text-5xl lg:text-7xl font-black uppercase text-white leading-[0.9] tracking-tighter mb-5">
@@ -226,7 +226,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
             <div className="grid grid-cols-2 gap-y-6 gap-x-6 border-t border-b border-white/10 py-6">
               <div>
                 <div className="flex items-center gap-2 text-gray-500 mb-2">
-                  <User size={12} className="text-[#61F6FD]" />
+                  <User size={12} className="text-[#5BA4F5]" />
                   <span className="text-[10px] font-bold uppercase tracking-widest">Klant</span>
                 </div>
                 <p className="text-white font-bold text-sm uppercase tracking-tight">{project.client || "Confidential"}</p>
@@ -268,7 +268,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
       {project.fullPageScreenshot && project.url && (
         <div className="max-w-5xl mx-auto px-6 md:px-12 pb-20">
           <div className="flex items-center gap-3 mb-6">
-            <Monitor size={16} className="text-[#61F6FD]" />
+            <Monitor size={16} className="text-[#5BA4F5]" />
             <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/50">Website Preview</h2>
           </div>
           <WebsitePreview
@@ -326,14 +326,14 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
             {/* Next Case */}
             <button
               onClick={() => navigate(`/project/${next.slug}`)}
-              className="group relative rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8 cursor-pointer hover:bg-white/10 hover:border-[#61F6FD] transition-all overflow-hidden text-left md:text-right"
+              className="group relative rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8 cursor-pointer hover:bg-white/10 hover:border-[#5BA4F5] transition-all overflow-hidden text-left md:text-right"
             >
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-bl from-[#61F6FD]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-bl from-[#5BA4F5]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="relative z-10">
-                <span className="text-[#61F6FD] text-[10px] font-bold uppercase tracking-[0.2em] block mb-2 opacity-60 group-hover:opacity-100 transition-opacity">Volgende Case</span>
+                <span className="text-[#5BA4F5] text-[10px] font-bold uppercase tracking-[0.2em] block mb-2 opacity-60 group-hover:opacity-100 transition-opacity">Volgende Case</span>
                 <h3 className="text-lg md:text-xl font-black uppercase text-white flex items-center md:justify-end gap-3 tracking-tighter">
                   {next.title}
-                  <ChevronRight size={20} className="group-hover:translate-x-2 transition-transform text-[#61F6FD]" />
+                  <ChevronRight size={20} className="group-hover:translate-x-2 transition-transform text-[#5BA4F5]" />
                 </h3>
               </div>
             </button>
@@ -341,7 +341,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
 
           <button
             onClick={() => navigate('/projecten')}
-            className="text-white/40 hover:text-[#61F6FD] font-bold uppercase tracking-[0.3em] text-[10px] transition-colors mt-2"
+            className="text-white/40 hover:text-[#5BA4F5] font-bold uppercase tracking-[0.3em] text-[10px] transition-colors mt-2"
           >
             Alle projecten bekijken
           </button>

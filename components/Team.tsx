@@ -103,7 +103,7 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
         {founder && (
             <div className="mb-12 md:mb-24 flex justify-center px-0 md:px-4">
                 <div className="w-full max-w-6xl bg-white/[0.02] border border-white/10 rounded-[2.5rem] md:rounded-[4rem] p-6 md:p-16 relative overflow-hidden group">
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#61F6FD]/5 via-transparent to-[#F62961]/5 opacity-40"></div>
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#5BA4F5]/5 via-transparent to-[#F62961]/5 opacity-40"></div>
                     <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-16">
                         <div className="w-full md:w-[40%] h-[350px] md:h-[500px] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl shrink-0">
                             <ProgressiveImage 
@@ -146,8 +146,8 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
                     <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 pr-4">
                         <h4 className="text-sm md:text-xl font-black uppercase text-white mb-1 tracking-tight leading-none">{member.name}</h4>
                         <div className="flex items-center gap-2">
-                            <div className="w-2 md:w-4 h-[1px] bg-[#61F6FD]"></div>
-                            <p className="text-[7px] md:text-[10px] font-bold uppercase tracking-widest text-gray-400 group-hover:text-[#61F6FD] transition-colors line-clamp-1">{member.role}</p>
+                            <div className="w-2 md:w-4 h-[1px] bg-[#5BA4F5]"></div>
+                            <p className="text-[7px] md:text-[10px] font-bold uppercase tracking-widest text-gray-400 group-hover:text-[#5BA4F5] transition-colors line-clamp-1">{member.role}</p>
                         </div>
                     </div>
                 </div>

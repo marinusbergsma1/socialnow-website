@@ -135,7 +135,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
       icon: <Users size={20} />,
       title: 'Kennismaken',
       desc: 'In een gratis gesprek bespreken we jouw doelen, uitdagingen en ambities. Wij luisteren en stellen de juiste vragen.',
-      color: '#61F6FD',
+      color: '#5BA4F5',
     },
     {
       step: '03',
@@ -217,7 +217,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
 
       {/* Glow accents */}
       <div className="fixed top-0 right-0 w-[600px] h-[600px] bg-[#25D366]/[0.04] rounded-full blur-[200px] pointer-events-none z-0" />
-      <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-[#61F6FD]/[0.03] rounded-full blur-[200px] pointer-events-none z-0" />
+      <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-[#5BA4F5]/[0.03] rounded-full blur-[200px] pointer-events-none z-0" />
 
       {/* Top bar */}
       <div className="sticky top-0 z-[210] w-full px-6 py-5 md:px-12 md:py-6 flex items-center justify-between backdrop-blur-2xl border-b border-white/[0.06] bg-black/80">
@@ -425,7 +425,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { label: 'Projecten', end: 50, suffix: '+', color: '#25D366' },
-              { label: 'Tevreden klanten', end: 40, suffix: '+', color: '#61F6FD' },
+              { label: 'Tevreden klanten', end: 40, suffix: '+', color: '#5BA4F5' },
               { label: 'Jaar ervaring', end: 8, suffix: '+', color: '#F7E644' },
               { label: 'Reactietijd', end: 1, suffix: ' uur', color: '#F62961' },
             ].map((stat, i) => (
@@ -478,7 +478,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
               <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/20 mb-4">Waarom SocialNow</h3>
               <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-[0.9] mb-6">
                 Geen excuses,<br />
-                alleen <span className="text-[#61F6FD]">resultaat</span>.
+                alleen <span className="text-[#5BA4F5]">resultaat</span>.
               </h2>
               <p className="text-white/35 text-sm font-medium leading-relaxed max-w-md">
                 Wij zijn geen doorsnee bureau. Met de kracht van AI en een obsessie voor kwaliteit bouwen we merken die opvallen.
@@ -504,7 +504,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
         {/* ─── TEAM / PERSONAL TOUCH ─── */}
         <div ref={teamReveal.ref} className={`mb-20 md:mb-28 transition-all duration-1000 delay-100 ${teamReveal.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="rounded-3xl border border-white/[0.06] bg-white/[0.02] overflow-hidden relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/[0.03] via-transparent to-[#61F6FD]/[0.03] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/[0.03] via-transparent to-[#5BA4F5]/[0.03] pointer-events-none" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
               {/* Image side */}

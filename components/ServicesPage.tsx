@@ -23,7 +23,7 @@ const services: ServiceItem[] = [
     title: "AI Website Development",
     description: "Custom websites gebouwd met AI-assistentie. Sneller, slimmer en geoptimaliseerd voor conversie. Van concept tot lancering in weken, niet maanden.",
     icon: Cpu,
-    color: "#61F6FD",
+    color: "#5BA4F5",
     span: "md:col-span-2",
   },
   {
@@ -55,13 +55,13 @@ const services: ServiceItem[] = [
     title: "3D & CGI",
     description: "Fotorealistische 3D-renders en CGI. Product visualisaties, environments en artist impressions op het hoogste niveau.",
     icon: Box,
-    color: "#61F6FD",
+    color: "#5BA4F5",
   },
   {
     title: "Full-Stack Development",
     description: "Schaalbare web applicaties met moderne tech stacks. React, Node.js, TypeScript — performance en betrouwbaarheid.",
     icon: Earth,
-    color: "#61F6FD",
+    color: "#5BA4F5",
   },
   {
     title: "Video Production",
@@ -191,7 +191,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
 
           {/* Card 1: AI Automatisering */}
-          <div className="group rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-500 hover:border-[#61F6FD]/30"
+          <div className="group rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-500 hover:border-[#5BA4F5]/30"
             style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
             <div className="p-6 md:p-8">
               <h3 className="text-lg md:text-xl font-black uppercase text-white tracking-tight leading-tight mb-3">
@@ -206,7 +206,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
               <div className="rounded-2xl p-4 md:p-5 space-y-2 relative overflow-hidden" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)' }}>
                 {/* Workflow nodes connected by lines */}
                 {[
-                  { icon: Bot, label: 'AI Chatbot', sub: 'Klantenservice 24/7', color: '#61F6FD', active: true },
+                  { icon: Bot, label: 'AI Chatbot', sub: 'Klantenservice 24/7', color: '#5BA4F5', active: true },
                   { icon: Workflow, label: 'E-mail Flows', sub: 'Automatisch verzonden', color: '#25D366', active: true },
                   { icon: BarChart3, label: 'Rapportages', sub: 'Wekelijks gegenereerd', color: '#F7E644', active: false },
                 ].map((node, i, arr) => {
@@ -259,7 +259,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
               <div className="rounded-2xl p-4 md:p-5 space-y-2.5 relative overflow-hidden" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)' }}>
                 {[
                   { icon: BarChart3, title: 'Campagne Analyse', time: 'Real-time', color: '#25D366', status: 'live' },
-                  { icon: Bot, title: 'Content Generatie', time: 'AI Draft klaar', color: '#61F6FD', status: 'done' },
+                  { icon: Bot, title: 'Content Generatie', time: 'AI Draft klaar', color: '#5BA4F5', status: 'done' },
                   { icon: TrendingUp, title: 'Trend Voorspelling', time: 'Q2 Forecast', color: '#F7E644', status: 'pending' },
                 ].map((task, i) => {
                   const TaskIcon = task.icon;
@@ -276,11 +276,11 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
                       </div>
                       <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
                         task.status === 'live' ? 'bg-[#25D366]/20' :
-                        task.status === 'done' ? 'bg-[#61F6FD]/20' :
+                        task.status === 'done' ? 'bg-[#5BA4F5]/20' :
                         'bg-white/5'
                       }`}>
                         {task.status === 'live' && <div className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />}
-                        {task.status === 'done' && <CheckCircle2 size={10} className="text-[#61F6FD]" />}
+                        {task.status === 'done' && <CheckCircle2 size={10} className="text-[#5BA4F5]" />}
                         {task.status === 'pending' && <Clock size={10} className="text-white/30" />}
                       </div>
                     </div>
@@ -308,7 +308,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
                 <div className="space-y-4">
                   {[
                     { label: 'Design & Prototype', progress: 100, color: '#25D366', icon: Palette },
-                    { label: 'AI Code Generation', progress: 100, color: '#61F6FD', icon: Code2 },
+                    { label: 'AI Code Generation', progress: 100, color: '#5BA4F5', icon: Code2 },
                     { label: 'Testing & Deploy', progress: 75, color: '#F7E644', icon: Settings },
                   ].map((step, i) => {
                     const StepIcon = step.icon;

@@ -28,7 +28,7 @@ const Dock: React.FC<DockProps> = ({ onOpenBooking }) => {
   const dockItems = [
     { id: 'home', icon: Home, label: 'HOME', action: () => window.scrollTo({ top: 0, behavior: 'smooth' }), color: 'white' },
     { id: 'projects', icon: Layers, label: 'PROJECTEN', action: () => document.getElementById('projecten')?.scrollIntoView({ behavior: 'smooth' }), color: '#F7E644' },
-    { id: 'services', icon: Cpu, label: 'DIENSTEN', action: () => document.getElementById('expertise-ecosysteem')?.scrollIntoView({ behavior: 'smooth' }), color: '#61F6FD' },
+    { id: 'services', icon: Cpu, label: 'DIENSTEN', action: () => document.getElementById('expertise-ecosysteem')?.scrollIntoView({ behavior: 'smooth' }), color: '#5BA4F5' },
     { id: 'team', icon: Users, label: 'TEAM', action: () => document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' }), color: '#F62961' },
     { id: 'contact', icon: Phone, label: 'CONTACT', action: onOpenBooking, color: 'white' },
     { id: 'book', icon: Calendar, label: 'START', action: onOpenBooking, color: '#25D366', special: true },

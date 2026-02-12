@@ -40,7 +40,7 @@ const Button: React.FC<ButtonProps> = ({
   } else if (variant === 'outline') {
     variantClasses = "bg-transparent border-white text-white hover:border-white hover:text-black";
   } else if (variant === 'ghost') {
-    variantClasses = "bg-transparent border-transparent text-white hover:text-[#61F6FD]";
+    variantClasses = "bg-transparent border-transparent text-white hover:text-[#5BA4F5]";
   }
 
   return (

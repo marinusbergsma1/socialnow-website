@@ -107,7 +107,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                 >
                   <span className="relative inline-block">
                     {link.name}
-                    <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-[#61F6FD] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left shadow-[0_0_10px_#61F6FD]"></span>
+                    <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-[#5BA4F5] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left shadow-[0_0_10px_#5BA4F5]"></span>
                   </span>
                 </a>
               ))}
@@ -128,7 +128,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link)}
-                className="block text-4xl font-black uppercase text-white tracking-tighter border-b border-white/5 pb-6 hover:text-[#61F6FD] transition-colors"
+                className="block text-4xl font-black uppercase text-white tracking-tighter border-b border-white/5 pb-6 hover:text-[#5BA4F5] transition-colors"
               >
                 {link.name}
               </a>
