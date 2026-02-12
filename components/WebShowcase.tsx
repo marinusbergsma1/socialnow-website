@@ -110,23 +110,46 @@ const WebShowcase: React.FC = () => {
                   </div>
                 )}
 
-                {/* Render all iframes but only show active one */}
-                {webShowcaseProjects.map((project, idx) => (
-                  <iframe
-                    key={project.id}
-                    src={project.url}
-                    title={`${project.title} - Live Preview`}
-                    className={`w-full h-full border-0 transition-opacity duration-500 ${
-                      idx === activeIndex ? 'opacity-100 relative' : 'opacity-0 absolute inset-0 pointer-events-none'
-                    }`}
-                    style={{
-                      colorScheme: 'normal',
-                    }}
-                    onLoad={() => handleIframeLoad(idx)}
-                    sandbox="allow-scripts allow-same-origin allow-popups"
-                    loading={idx === 0 ? 'eager' : 'lazy'}
-                  />
-                ))}
+                {/* Render all iframes but only show active one — SocialNow gets screenshot fallback to avoid recursive iframe */}
+                {webShowcaseProjects.map((project, idx) => {
+                  const isSelf = project.url?.includes('socialnow-website');
+                  if (isSelf) {
+                    return (
+                      <div
+                        key={project.id}
+                        className={`w-full h-full overflow-y-auto transition-opacity duration-500 ${
+                          idx === activeIndex ? 'opacity-100 relative' : 'opacity-0 absolute inset-0 pointer-events-none'
+                        }`}
+                      >
+                        <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
+                          <img
+                            src={project.fullPageScreenshot}
+                            alt={`${project.title} website`}
+                            className="w-full h-auto block"
+                            loading="lazy"
+                            onLoad={() => handleIframeLoad(idx)}
+                          />
+                        </a>
+                      </div>
+                    );
+                  }
+                  return (
+                    <iframe
+                      key={project.id}
+                      src={project.url}
+                      title={`${project.title} - Live Preview`}
+                      className={`w-full h-full border-0 transition-opacity duration-500 ${
+                        idx === activeIndex ? 'opacity-100 relative' : 'opacity-0 absolute inset-0 pointer-events-none'
+                      }`}
+                      style={{
+                        colorScheme: 'normal',
+                      }}
+                      onLoad={() => handleIframeLoad(idx)}
+                      sandbox="allow-scripts allow-same-origin allow-popups"
+                      loading={idx === 0 ? 'eager' : 'lazy'}
+                    />
+                  );
+                })}
               </div>
 
               {/* Subtle gradient at bottom */}
@@ -243,20 +266,39 @@ const WebShowcase: React.FC = () => {
             </div>
           </div>
 
-          {/* Fullscreen iframe */}
-          <div className="flex-1 relative">
-            {webShowcaseProjects.map((project, idx) => (
-              <iframe
-                key={`fs-${project.id}`}
-                src={project.url}
-                title={`${project.title} - Fullscreen Preview`}
-                className={`w-full h-full border-0 ${
-                  idx === activeIndex ? 'block' : 'hidden'
-                }`}
-                style={{ colorScheme: 'normal' }}
-                sandbox="allow-scripts allow-same-origin allow-popups"
-              />
-            ))}
+          {/* Fullscreen iframe / screenshot fallback */}
+          <div className="flex-1 relative overflow-hidden">
+            {webShowcaseProjects.map((project, idx) => {
+              const isSelf = project.url?.includes('socialnow-website');
+              if (isSelf) {
+                return (
+                  <div
+                    key={`fs-${project.id}`}
+                    className={`w-full h-full overflow-y-auto ${
+                      idx === activeIndex ? 'block' : 'hidden'
+                    }`}
+                  >
+                    <img
+                      src={project.fullPageScreenshot}
+                      alt={`${project.title} website`}
+                      className="w-full h-auto block"
+                    />
+                  </div>
+                );
+              }
+              return (
+                <iframe
+                  key={`fs-${project.id}`}
+                  src={project.url}
+                  title={`${project.title} - Fullscreen Preview`}
+                  className={`w-full h-full border-0 ${
+                    idx === activeIndex ? 'block' : 'hidden'
+                  }`}
+                  style={{ colorScheme: 'normal' }}
+                  sandbox="allow-scripts allow-same-origin allow-popups"
+                />
+              );
+            })}
           </div>
         </div>
       )}
