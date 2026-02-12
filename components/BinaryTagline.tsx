@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 
 const BinaryTagline: React.FC = () => {
-  const text1 = "AI-DRIVEN DEVELOPMENT // ";
-  const text2 = "BUILT FOR THE FUTURE";
+  const text1 = "HUMAN CREATIVITY POWERED BY ";
+  const text2 = "AI TECHNOLOGY";
   const [displayText1, setDisplayText1] = useState("");
   const [displayText2, setDisplayText2] = useState("");
   const [isTypingText1, setIsTypingText1] = useState(false);
