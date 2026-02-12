@@ -3,6 +3,9 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Globe, ExternalLink, Code, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import { webShowcaseProjects } from '../data/projects';
 
+// Detect if we're inside an iframe (to prevent recursive loading)
+const isInIframe = typeof window !== 'undefined' && window.self !== window.top;
+
 const WebShowcase: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [iframeLoaded, setIframeLoaded] = useState<boolean[]>(
@@ -49,6 +52,55 @@ const WebShowcase: React.FC = () => {
     }
     return () => { document.body.style.overflow = ''; };
   }, [isFullscreen]);
+
+  // Helper: should this project use screenshot fallback?
+  // Only use screenshot for SocialNow when we're already inside an iframe (prevents infinite recursion)
+  const shouldUseScreenshot = (project: typeof activeProject) => {
+    const isSelf = project.url?.includes('socialnow-website');
+    return isSelf && isInIframe;
+  };
+
+  const renderPreview = (project: typeof activeProject, idx: number, isFS: boolean) => {
+    if (shouldUseScreenshot(project)) {
+      // Screenshot fallback — only when nested in iframe
+      return (
+        <div
+          key={isFS ? `fs-${project.id}` : project.id}
+          className={isFS
+            ? `w-full h-full overflow-y-auto ${idx === activeIndex ? 'block' : 'hidden'}`
+            : `w-full h-full overflow-y-auto transition-opacity duration-500 ${idx === activeIndex ? 'opacity-100 relative' : 'opacity-0 absolute inset-0 pointer-events-none'}`
+          }
+        >
+          <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
+            <img
+              src={project.fullPageScreenshot}
+              alt={`${project.title} website`}
+              className="w-full h-auto block"
+              loading="lazy"
+              onLoad={() => !isFS && handleIframeLoad(idx)}
+            />
+          </a>
+        </div>
+      );
+    }
+
+    // Live iframe — default for all projects
+    return (
+      <iframe
+        key={isFS ? `fs-${project.id}` : project.id}
+        src={project.url}
+        title={`${project.title} - ${isFS ? 'Fullscreen' : 'Live'} Preview`}
+        className={isFS
+          ? `w-full h-full border-0 ${idx === activeIndex ? 'block' : 'hidden'}`
+          : `w-full h-full border-0 transition-opacity duration-500 ${idx === activeIndex ? 'opacity-100 relative' : 'opacity-0 absolute inset-0 pointer-events-none'}`
+        }
+        style={{ colorScheme: 'normal' }}
+        onLoad={!isFS ? () => handleIframeLoad(idx) : undefined}
+        sandbox="allow-scripts allow-same-origin allow-popups"
+        loading={idx === 0 ? 'eager' : 'lazy'}
+      />
+    );
+  };
 
   return (
     <>
@@ -110,46 +162,8 @@ const WebShowcase: React.FC = () => {
                   </div>
                 )}
 
-                {/* Render all iframes but only show active one — SocialNow gets screenshot fallback to avoid recursive iframe */}
-                {webShowcaseProjects.map((project, idx) => {
-                  const isSelf = project.url?.includes('socialnow-website');
-                  if (isSelf) {
-                    return (
-                      <div
-                        key={project.id}
-                        className={`w-full h-full overflow-y-auto transition-opacity duration-500 ${
-                          idx === activeIndex ? 'opacity-100 relative' : 'opacity-0 absolute inset-0 pointer-events-none'
-                        }`}
-                      >
-                        <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
-                          <img
-                            src={project.fullPageScreenshot}
-                            alt={`${project.title} website`}
-                            className="w-full h-auto block"
-                            loading="lazy"
-                            onLoad={() => handleIframeLoad(idx)}
-                          />
-                        </a>
-                      </div>
-                    );
-                  }
-                  return (
-                    <iframe
-                      key={project.id}
-                      src={project.url}
-                      title={`${project.title} - Live Preview`}
-                      className={`w-full h-full border-0 transition-opacity duration-500 ${
-                        idx === activeIndex ? 'opacity-100 relative' : 'opacity-0 absolute inset-0 pointer-events-none'
-                      }`}
-                      style={{
-                        colorScheme: 'normal',
-                      }}
-                      onLoad={() => handleIframeLoad(idx)}
-                      sandbox="allow-scripts allow-same-origin allow-popups"
-                      loading={idx === 0 ? 'eager' : 'lazy'}
-                    />
-                  );
-                })}
+                {/* Render previews */}
+                {webShowcaseProjects.map((project, idx) => renderPreview(project, idx, false))}
               </div>
 
               {/* Subtle gradient at bottom */}
@@ -266,39 +280,9 @@ const WebShowcase: React.FC = () => {
             </div>
           </div>
 
-          {/* Fullscreen iframe / screenshot fallback */}
+          {/* Fullscreen previews */}
           <div className="flex-1 relative overflow-hidden">
-            {webShowcaseProjects.map((project, idx) => {
-              const isSelf = project.url?.includes('socialnow-website');
-              if (isSelf) {
-                return (
-                  <div
-                    key={`fs-${project.id}`}
-                    className={`w-full h-full overflow-y-auto ${
-                      idx === activeIndex ? 'block' : 'hidden'
-                    }`}
-                  >
-                    <img
-                      src={project.fullPageScreenshot}
-                      alt={`${project.title} website`}
-                      className="w-full h-auto block"
-                    />
-                  </div>
-                );
-              }
-              return (
-                <iframe
-                  key={`fs-${project.id}`}
-                  src={project.url}
-                  title={`${project.title} - Fullscreen Preview`}
-                  className={`w-full h-full border-0 ${
-                    idx === activeIndex ? 'block' : 'hidden'
-                  }`}
-                  style={{ colorScheme: 'normal' }}
-                  sandbox="allow-scripts allow-same-origin allow-popups"
-                />
-              );
-            })}
+            {webShowcaseProjects.map((project, idx) => renderPreview(project, idx, true))}
           </div>
         </div>
       )}
