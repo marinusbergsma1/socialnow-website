@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Globe, ExternalLink, Code, ChevronLeft, ChevronRight, ChevronUp, Maximize2, ChevronDown } from 'lucide-react';
+import { Globe, ExternalLink, Code, ChevronLeft, ChevronRight, Maximize2, ChevronDown } from 'lucide-react';
 import { webShowcaseProjects } from '../data/projects';
 
 // Detect if we're inside an iframe (to prevent recursive loading)
@@ -12,14 +12,10 @@ const WebShowcase: React.FC = () => {
     webShowcaseProjects.map(() => false)
   );
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isMobileReels, setIsMobileReels] = useState(false);
   const [scale, setScale] = useState(0.6);
   const [isSticky, setIsSticky] = useState(false);
   const [mobileScale, setMobileScale] = useState(0.4);
-  const [smallMobileScale, setSmallMobileScale] = useState(0.56);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [reelsIndex, setReelsIndex] = useState(0);
-  const [reelsScale, setReelsScale] = useState(1);
   const sectionRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const thumbTrackRef = useRef<HTMLDivElement>(null);
@@ -87,9 +83,6 @@ const WebShowcase: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // smallMobileScale no longer needed — mobile uses screenshots instead of iframes
-  void smallMobileScale;
-
   // Scroll-driven grow animation
   useEffect(() => {
     const handleScroll = () => {
@@ -138,51 +131,18 @@ const WebShowcase: React.FC = () => {
     });
   }, [activeIndex]);
 
-  // Reels scale calculation
-  useEffect(() => {
-    if (!isMobileReels) return;
-    const calc = () => setReelsScale(window.innerWidth / 375);
-    calc();
-    window.addEventListener('resize', calc);
-    return () => window.removeEventListener('resize', calc);
-  }, [isMobileReels]);
-
-  // Reels navigation — NO wrapping, stops at edges
-  const reelsNext = useCallback(() => {
-    setReelsIndex((prev) => Math.min(prev + 1, webShowcaseProjects.length - 1));
-  }, []);
-
-  const reelsPrev = useCallback(() => {
-    setReelsIndex((prev) => Math.max(prev - 1, 0));
-  }, []);
-
-  // Sync reelsIndex → activeIndex (so bottom bar and other parts update)
-  useEffect(() => {
-    if (isMobileReels) {
-      setActiveIndex(reelsIndex);
-    }
-  }, [reelsIndex, isMobileReels]);
-
-  // When opening Reels, sync current activeIndex → reelsIndex
-  useEffect(() => {
-    if (isMobileReels) {
-      setReelsIndex(activeIndex);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMobileReels]);
-
   // Toggle fullscreen
   const toggleFullscreen = () => setIsFullscreen(prev => !prev);
 
-  // Prevent body scroll when fullscreen or reels mode
+  // Prevent body scroll when fullscreen
   useEffect(() => {
-    if (isFullscreen || isMobileReels) {
+    if (isFullscreen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
     return () => { document.body.style.overflow = ''; };
-  }, [isFullscreen, isMobileReels]);
+  }, [isFullscreen]);
 
   // Touch swipe support for mobile
   const touchStart = useRef<number | null>(null);
@@ -413,38 +373,38 @@ const WebShowcase: React.FC = () => {
                 </div>
               </div>
 
-              {/* ═══ MOBILE: Screenshot-based preview (< lg) — NO iframes for fast loading ═══ */}
-              <div className="flex lg:hidden flex-col items-center gap-4">
-                {/* Phone + arrows row */}
-                <div className="flex items-center gap-3 justify-center w-full">
-                  {/* Left arrow */}
-                  <button
-                    onClick={goPrev}
-                    className="w-9 h-9 rounded-full border border-white/[0.08] bg-white/[0.03] flex items-center justify-center text-white/30 active:text-white active:bg-white/10 transition-all flex-shrink-0"
-                  >
-                    <ChevronLeft size={18} strokeWidth={1.5} />
-                  </button>
+              {/* ═══ MOBILE: Desktop-style 16:9 screenshot preview (< lg) — NO iframes ═══ */}
+              <div className="flex lg:hidden items-center gap-2">
+                {/* Left arrow */}
+                <button
+                  onClick={goPrev}
+                  className="w-8 h-8 rounded-full border border-white/[0.08] bg-white/[0.03] flex items-center justify-center text-white/30 active:text-white active:bg-white/10 transition-all flex-shrink-0"
+                >
+                  <ChevronLeft size={16} strokeWidth={1.5} />
+                </button>
 
-                  {/* Mobile phone frame — uses SCREENSHOT instead of iframe — tap to open Reels */}
-                  <button
-                    className="flex-shrink-0 cursor-pointer active:scale-[0.97] transition-transform duration-200"
-                    style={{ width: 'min(200px, 48vw)' }}
-                    onClick={() => setIsMobileReels(true)}
+                {/* 16:9 Desktop screenshot preview — Glassmorphism */}
+                <div className="relative flex-1 min-w-0">
+                  <a
+                    href={activeProject.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
                   >
                     <div
-                      className="rounded-[1.8rem] overflow-hidden relative"
+                      className="rounded-xl overflow-hidden relative"
                       style={{
-                        aspectRatio: '9 / 19.5',
+                        aspectRatio: '16 / 9',
                         background: 'rgba(255, 255, 255, 0.03)',
                         backdropFilter: 'blur(40px) saturate(180%)',
                         WebkitBackdropFilter: 'blur(40px) saturate(180%)',
-                        border: '2px solid rgba(255, 255, 255, 0.1)',
-                        boxShadow: '0 12px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(37, 211, 102, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
                       }}
                     >
                       {/* Top edge highlight */}
                       <div className="absolute top-0 left-[10%] right-[10%] h-[1px] pointer-events-none z-40"
-                        style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)' }}
+                        style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)' }}
                       />
 
                       {/* Screenshot images — instant load, no iframes! */}
@@ -454,7 +414,7 @@ const WebShowcase: React.FC = () => {
                           className={`absolute inset-0 transition-opacity duration-500 ${idx === activeIndex && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
                         >
                           <img
-                            src={project.fullPageScreenshot || project.image}
+                            src={project.image}
                             alt={project.title}
                             className="w-full h-full object-cover object-top"
                             loading={idx < 2 ? 'eager' : 'lazy'}
@@ -462,39 +422,19 @@ const WebShowcase: React.FC = () => {
                         </div>
                       ))}
 
-                      {/* Phone notch — Dynamic Island style */}
-                      <div className="absolute top-[1.5%] left-1/2 -translate-x-1/2 w-[28%] h-[2.8%] bg-black rounded-full z-30" />
-                      {/* Bottom home indicator */}
-                      <div className="absolute bottom-[1.5%] left-1/2 -translate-x-1/2 w-[28%] h-[0.5%] bg-white/25 rounded-full z-30" />
-
-                      {/* Subtle gradient overlay at bottom */}
-                      <div className="absolute bottom-0 left-0 right-0 h-[30%] z-20 pointer-events-none"
-                        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)' }}
-                      />
-
-                      {/* Tap to expand label */}
-                      <div className="absolute bottom-[8%] left-0 right-0 z-30 flex justify-center pointer-events-none">
-                        <span className="text-[8px] font-black uppercase tracking-[0.3em] text-white/60 bg-black/50 px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10">
-                          Tap om te bekijken
-                        </span>
-                      </div>
+                      {/* Subtle bottom gradient */}
+                      <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/30 to-transparent pointer-events-none z-30 rounded-b-xl" />
                     </div>
-                  </button>
-
-                  {/* Right arrow */}
-                  <button
-                    onClick={goNext}
-                    className="w-9 h-9 rounded-full border border-white/[0.08] bg-white/[0.03] flex items-center justify-center text-white/30 active:text-white active:bg-white/10 transition-all flex-shrink-0"
-                  >
-                    <ChevronRight size={18} strokeWidth={1.5} />
-                  </button>
+                  </a>
                 </div>
 
-                {/* Project title + category below phone */}
-                <div className="text-center">
-                  <h3 className="text-white font-black uppercase tracking-tight text-base">{activeProject.title}</h3>
-                  <p className="text-[#61F6FD] text-[9px] font-bold uppercase tracking-[0.3em] mt-1">{activeProject.category}</p>
-                </div>
+                {/* Right arrow */}
+                <button
+                  onClick={goNext}
+                  className="w-8 h-8 rounded-full border border-white/[0.08] bg-white/[0.03] flex items-center justify-center text-white/30 active:text-white active:bg-white/10 transition-all flex-shrink-0"
+                >
+                  <ChevronRight size={16} strokeWidth={1.5} />
+                </button>
               </div>
 
               {/* ═══ DESKTOP: 16:9 + Mobile side-by-side (lg+) ═══ */}
@@ -688,160 +628,6 @@ const WebShowcase: React.FC = () => {
         {/* Spacer for scroll distance after sticky releases */}
         <div style={{ height: '60vh' }} />
       </section>
-
-      {/* ═══ REELS-STYLE Mobile Fullscreen — Vertical Swipe (like Instagram Reels) ═══ */}
-      {isMobileReels && (
-        <div
-          className="fixed inset-0 z-[9999] bg-black flex flex-col"
-          onTouchStart={(e) => {
-            touchStart.current = e.touches[0].clientY;
-          }}
-          onTouchEnd={(e) => {
-            if (touchStart.current === null) return;
-            const diff = touchStart.current - e.changedTouches[0].clientY;
-            if (Math.abs(diff) > 60) {
-              if (diff > 0) reelsNext();   // swipe UP = next
-              else reelsPrev();            // swipe DOWN = previous
-            }
-            touchStart.current = null;
-          }}
-        >
-          {/* Full-screen mobile iframe — vertical slide transitions */}
-          <div className="flex-1 relative overflow-hidden">
-            {webShowcaseProjects.map((project, idx) => {
-              // Calculate vertical offset for Reels-style sliding
-              const offset = idx - reelsIndex;
-              const translateY = offset * 100;
-
-              // Only render nearby slides for performance
-              if (Math.abs(offset) > 1) return null;
-
-              if (shouldUseUnlock(project)) {
-                return (
-                  <div
-                    key={`reels-${project.id}`}
-                    className="absolute inset-0 flex items-center justify-center"
-                    style={{
-                      transform: `translateY(${translateY}%)`,
-                      transition: 'transform 0.45s cubic-bezier(0.32, 0.72, 0, 1)',
-                      willChange: 'transform',
-                      zIndex: idx === reelsIndex ? 10 : 5,
-                      background: 'radial-gradient(ellipse at center, rgba(37,211,102,0.08) 0%, rgba(0,0,0,0.95) 70%)',
-                    }}
-                  >
-                    <div className="flex flex-col items-center gap-4 text-center px-8">
-                      <span className="text-2xl">🔒</span>
-                      <h3 className="text-xl font-black uppercase text-white tracking-tighter">INCEPTION</h3>
-                      <a
-                        href="https://wa.me/31637404577"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#25D366] text-black font-black uppercase tracking-wider text-[10px]"
-                      >
-                        UNLOCK <ExternalLink size={12} />
-                      </a>
-                    </div>
-                  </div>
-                );
-              }
-              return (
-                <div
-                  key={`reels-wrap-${project.id}`}
-                  className="absolute inset-0 overflow-hidden"
-                  style={{
-                    transform: `translateY(${translateY}%)`,
-                    transition: 'transform 0.45s cubic-bezier(0.32, 0.72, 0, 1)',
-                    willChange: 'transform',
-                    zIndex: idx === reelsIndex ? 10 : 5,
-                  }}
-                >
-                  <iframe
-                    src={project.url}
-                    title={`${project.title} - Reels`}
-                    className="border-0 origin-top-left absolute top-0 left-0"
-                    style={{
-                      width: '375px',
-                      height: '812px',
-                      transform: `scale(${reelsScale})`,
-                      colorScheme: 'normal',
-                    }}
-                    sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
-                  />
-                  {/* Scroll-through overlay — prevents iframe from capturing touch */}
-                  <div className="absolute inset-0 z-20" />
-                </div>
-              );
-            })}
-
-            {/* Vertical swipe hints — only show when there's something to swipe to */}
-            {reelsIndex > 0 && (
-              <div className="absolute top-4 left-1/2 -translate-x-1/2 opacity-25 animate-bounce z-30 pointer-events-none">
-                <ChevronUp size={24} className="text-white" />
-              </div>
-            )}
-            {reelsIndex < webShowcaseProjects.length - 1 && (
-              <div className="absolute bottom-20 left-1/2 -translate-x-1/2 opacity-25 animate-bounce z-30 pointer-events-none">
-                <ChevronDown size={24} className="text-white" />
-              </div>
-            )}
-
-            {/* Right-side dot indicators (like Reels) */}
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-2.5 z-30 pointer-events-none">
-              {webShowcaseProjects.map((_, idx) => (
-                <div
-                  key={`dot-${idx}`}
-                  className="rounded-full transition-all duration-300"
-                  style={{
-                    width: idx === reelsIndex ? '7px' : '5px',
-                    height: idx === reelsIndex ? '7px' : '5px',
-                    background: idx === reelsIndex ? '#61F6FD' : 'rgba(255,255,255,0.25)',
-                    boxShadow: idx === reelsIndex ? '0 0 10px rgba(97,246,253,0.6)' : 'none',
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Bottom bar — project info + navigation */}
-          <div
-            className="flex items-center justify-between px-4 py-3 safe-area-pb relative z-40"
-            style={{
-              background: 'rgba(0, 0, 0, 0.85)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              paddingBottom: 'max(12px, env(safe-area-inset-bottom))',
-            }}
-          >
-            {/* Back button */}
-            <button
-              onClick={() => setIsMobileReels(false)}
-              className="flex items-center gap-2 px-3 py-2 rounded-full border border-white/10 text-white text-[10px] font-bold uppercase tracking-widest active:bg-white/10"
-            >
-              <ChevronLeft size={14} />
-              Terug
-            </button>
-
-            {/* Project name */}
-            <div className="flex-1 text-center px-2">
-              <span className="text-white font-black uppercase tracking-tight text-xs truncate block">{activeProject.title}</span>
-              <span className="text-white/30 text-[8px] font-bold uppercase tracking-[0.3em]">
-                {reelsIndex + 1}/{webShowcaseProjects.length}
-              </span>
-            </div>
-
-            {/* External link */}
-            <a
-              href={activeProject.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#25D366] text-black text-[10px] font-bold uppercase tracking-wider"
-            >
-              <Globe size={12} />
-              Live
-            </a>
-          </div>
-        </div>
-      )}
 
       {/* Fullscreen overlay */}
       {isFullscreen && (
