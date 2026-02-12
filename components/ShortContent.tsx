@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, memo } from 'react';
+import React, { useRef, useState, useEffect, memo, useCallback } from 'react';
 import { Activity, Database, Shield, Network } from 'lucide-react';
 
 // ─── CountUp ────────────────────────────────────────────────────────────
@@ -19,28 +19,134 @@ const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: num
   return <span>{Math.floor(count)}{suffix}</span>;
 });
 
-// ─── Simple Video Card ──────────────────────────────────────────────────
-const VideoCard: React.FC<{ src: string; title: string; subtitle: string }> = memo(({ src, title, subtitle }) => {
+// ─── Infinite Loop Slider ───────────────────────────────────────────────
+const InfiniteVideoSlider: React.FC<{ videos: { src: string; title: string; subtitle: string }[] }> = ({ videos }) => {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number>(0);
+  const positionRef = useRef(0);
+  const speedRef = useRef(0.5);
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragStartPos = useRef(0);
+  const lastDragX = useRef(0);
+  const velocity = useRef(0);
+  const [, forceRender] = useState(0);
+
+  // Card dimensions
+  const cardWidth = typeof window !== 'undefined' && window.innerWidth < 768 ? 220 : 300;
+  const gap = typeof window !== 'undefined' && window.innerWidth < 768 ? 16 : 24;
+  const totalItemWidth = cardWidth + gap;
+  const setLength = videos.length;
+  const totalSetWidth = totalItemWidth * setLength;
+
+  // We render 3 copies: [set][set][set] for seamless loop
+  const allVideos = [...videos, ...videos, ...videos];
+
+  // Start position in the middle set
+  useEffect(() => {
+    positionRef.current = totalSetWidth;
+    forceRender(n => n + 1);
+  }, [totalSetWidth]);
+
+  // Animation loop
+  const animate = useCallback(() => {
+    if (!isDragging.current) {
+      // Apply velocity (from drag release) with friction
+      if (Math.abs(velocity.current) > 0.1) {
+        positionRef.current += velocity.current;
+        velocity.current *= 0.95;
+      } else {
+        // Normal auto-scroll
+        positionRef.current += speedRef.current;
+        velocity.current = 0;
+      }
+
+      // Seamless loop: wrap around
+      if (positionRef.current >= totalSetWidth * 2) {
+        positionRef.current -= totalSetWidth;
+      }
+      if (positionRef.current <= 0) {
+        positionRef.current += totalSetWidth;
+      }
+    }
+
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translateX(${-positionRef.current}px)`;
+    }
+
+    animationRef.current = requestAnimationFrame(animate);
+  }, [totalSetWidth]);
+
+  useEffect(() => {
+    animationRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationRef.current);
+  }, [animate]);
+
+  // Mouse drag
+  const onPointerDown = (e: React.PointerEvent) => {
+    isDragging.current = true;
+    dragStartX.current = e.clientX;
+    lastDragX.current = e.clientX;
+    dragStartPos.current = positionRef.current;
+    velocity.current = 0;
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!isDragging.current) return;
+    const dx = e.clientX - lastDragX.current;
+    velocity.current = -dx;
+    lastDragX.current = e.clientX;
+    const totalDx = e.clientX - dragStartX.current;
+    positionRef.current = dragStartPos.current - totalDx;
+  };
+
+  const onPointerUp = () => {
+    isDragging.current = false;
+  };
+
   return (
-    <div className="flex-shrink-0 w-[220px] md:w-[300px] snap-center">
-      <div className="w-full h-[380px] md:h-[530px] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 bg-black relative group hover:border-[#25D366]/40 transition-all duration-500">
-        <video
-          src={src}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-          <p className="text-white font-black uppercase text-sm md:text-base tracking-tight leading-tight">{title}</p>
-          <p className="text-white/40 text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1">{subtitle}</p>
-        </div>
+    <div
+      className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+      style={{ touchAction: 'pan-y' }}
+    >
+      <div
+        ref={trackRef}
+        className="flex will-change-transform"
+        style={{ gap: `${gap}px` }}
+      >
+        {allVideos.map((video, i) => (
+          <div
+            key={i}
+            className="flex-shrink-0 select-none"
+            style={{ width: `${cardWidth}px` }}
+          >
+            <div className="w-full h-[380px] md:h-[530px] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 bg-black relative group hover:border-[#25D366]/40 transition-all duration-500">
+              <video
+                src={video.src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                className="w-full h-full object-cover pointer-events-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 pointer-events-none">
+                <p className="text-white font-black uppercase text-sm md:text-base tracking-tight leading-tight">{video.title}</p>
+                <p className="text-white/40 text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1">{video.subtitle}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
-});
+};
 
 // ─── Main Component ─────────────────────────────────────────────────────
 const ShortContent: React.FC = () => {
@@ -75,19 +181,9 @@ const ShortContent: React.FC = () => {
         </h2>
       </div>
 
-      {/* Simple Horizontal Scroll Slider */}
-      <div className="relative px-6 md:px-12">
-        <div className="flex gap-4 md:gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 scroll-smooth">
-          {/* Spacer for centering on desktop */}
-          <div className="flex-shrink-0 w-[calc(50vw-160px)] md:w-[calc(50vw-200px)]" />
-
-          {videos.map((video, i) => (
-            <VideoCard key={i} src={video.src} title={video.title} subtitle={video.subtitle} />
-          ))}
-
-          {/* End spacer */}
-          <div className="flex-shrink-0 w-[calc(50vw-160px)] md:w-[calc(50vw-200px)]" />
-        </div>
+      {/* Infinite Loop Video Slider */}
+      <div className="relative">
+        <InfiniteVideoSlider videos={videos} />
       </div>
 
       {/* Stats */}

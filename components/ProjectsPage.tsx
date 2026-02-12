@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Layers, User, Calendar, Globe, ArrowUpRight } from 'lucide-react';
+import { Layers, Globe, ArrowUpRight } from 'lucide-react';
 import { allProjects } from '../data/projects';
 import ProgressiveImage from './ProgressiveImage';
 import Button from './Button';
+
+const accentColors = ['#61F6FD', '#F62961', '#F7E644', '#25D366'];
 
 const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }) => {
   const navigate = useNavigate();
@@ -16,7 +18,6 @@ const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
     <div className="min-h-screen bg-black text-white">
       {/* Hero Header */}
       <div className="relative pt-32 md:pt-48 pb-16 md:pb-24 px-6 text-center overflow-hidden">
-        {/* Background grid */}
         <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{
           backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
           backgroundSize: '80px 80px'
@@ -38,101 +39,94 @@ const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
         </div>
       </div>
 
-      {/* Project List */}
+      {/* Project Grid - Clean 2-column masonry-style */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 pb-32">
-        <div className="flex flex-col gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {allProjects.map((project, idx) => {
-            const hasUrl = !!project.url;
-            const colors = ['#61F6FD', '#F62961', '#F7E644', '#25D366'];
-            const accentColor = colors[idx % colors.length];
+            const accentColor = accentColors[idx % accentColors.length];
+            const isLarge = idx === 0 || idx === 3; // First and fourth are large
 
             return (
-              <div
+              <button
                 key={project.id}
-                className="group relative rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/5 bg-[#050505] cursor-pointer transition-all duration-700 hover:border-white/15 hover:bg-[#080808]"
                 onClick={() => navigate(`/project/${project.slug}`)}
+                className={`group relative rounded-[2rem] overflow-hidden border border-white/5 bg-[#050505] text-left transition-all duration-500 hover:border-white/15 hover:bg-[#080808] focus:outline-none ${isLarge ? 'md:col-span-2' : ''}`}
               >
-                <div className="flex flex-col md:flex-row">
-                  {/* Image */}
-                  <div className="relative w-full md:w-[45%] aspect-[16/10] md:aspect-auto overflow-hidden">
-                    <ProgressiveImage
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full transition-transform duration-1000 group-hover:scale-105"
-                      objectFit="cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#050505] hidden md:block" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent md:hidden" />
+                {/* Image */}
+                <div className={`relative w-full overflow-hidden ${isLarge ? 'aspect-[21/9]' : 'aspect-[4/3]'}`}>
+                  <ProgressiveImage
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full transition-transform duration-1000 group-hover:scale-105"
+                    objectFit="cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/20 to-transparent" />
 
-                    {/* Category pill */}
-                    <div className="absolute top-5 left-5">
-                      <span className="inline-block px-4 py-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-black uppercase tracking-widest text-white/80">
-                        {project.category}
+                  {/* Category pill */}
+                  <div className="absolute top-5 left-5">
+                    <span
+                      className="inline-block px-4 py-2 rounded-full bg-black/60 backdrop-blur-md border text-[10px] font-black uppercase tracking-widest text-white/90"
+                      style={{ borderColor: `${accentColor}40` }}
+                    >
+                      {project.category}
+                    </span>
+                  </div>
+
+                  {/* Live badge */}
+                  {project.url && (
+                    <div className="absolute top-5 right-5">
+                      <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#25D366]/20 border border-[#25D366]/30 text-[10px] font-black uppercase tracking-widest text-[#25D366] backdrop-blur-md">
+                        <Globe size={12} />
+                        Live
                       </span>
                     </div>
+                  )}
+                </div>
 
-                    {/* Live badge */}
-                    {hasUrl && (
-                      <div className="absolute top-5 right-5">
-                        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#25D366]/20 border border-[#25D366]/30 text-[10px] font-black uppercase tracking-widest text-[#25D366] backdrop-blur-md">
-                          <Globe size={12} />
-                          Live
-                        </span>
-                      </div>
+                {/* Content */}
+                <div className="p-6 md:p-8">
+                  <h3 className="text-xl md:text-3xl font-black uppercase text-white tracking-tighter leading-none mb-3 group-hover:text-[#25D366] transition-colors duration-500">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-5 max-w-xl">
+                    {project.description}
+                  </p>
+
+                  {/* Services */}
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {project.services?.slice(0, 3).map((s, i) => (
+                      <span key={i} className="px-3 py-1 rounded-lg bg-white/5 border border-white/5 text-[9px] font-bold text-white/40 uppercase tracking-widest">
+                        {s}
+                      </span>
+                    ))}
+                    {(project.services?.length || 0) > 3 && (
+                      <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/5 text-[9px] font-bold text-white/30 uppercase tracking-widest">
+                        +{(project.services?.length || 0) - 3}
+                      </span>
                     )}
                   </div>
 
-                  {/* Content */}
-                  <div className="flex-1 p-6 md:p-10 lg:p-12 flex flex-col justify-center">
-                    <h3 className="text-2xl md:text-4xl lg:text-5xl font-black uppercase text-white tracking-tighter leading-none mb-4 group-hover:text-[#25D366] transition-colors duration-500">
-                      {project.title}
-                    </h3>
-
-                    <div className="flex items-center gap-6 mb-5">
-                      {project.client && (
-                        <div className="flex items-center gap-2">
-                          <User size={12} style={{ color: accentColor }} />
-                          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{project.client}</span>
-                        </div>
-                      )}
-                      {project.year && (
-                        <div className="flex items-center gap-2">
-                          <Calendar size={12} className="text-white/30" />
-                          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{project.year}</span>
-                        </div>
-                      )}
-                    </div>
-
-                    <p className="text-gray-500 text-sm md:text-base leading-relaxed line-clamp-2 mb-6 max-w-xl">
-                      {project.description}
-                    </p>
-
-                    {/* Services */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.services?.slice(0, 4).map((s, i) => (
-                        <span key={i} className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/5 text-[9px] font-bold text-white/40 uppercase tracking-widest">
-                          {s}
-                        </span>
-                      ))}
-                      {(project.services?.length || 0) > 4 && (
-                        <span className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/5 text-[9px] font-bold text-white/30 uppercase tracking-widest">
-                          +{(project.services?.length || 0) - 4}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* CTA */}
-                    <div className="flex items-center gap-4">
-                      <span className="text-[11px] font-black text-white/30 uppercase tracking-widest group-hover:text-[#25D366]/60 transition-colors">
-                        Bekijk case
-                      </span>
-                      <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#25D366] group-hover:border-[#25D366] transition-all duration-500">
-                        <ArrowUpRight size={16} className="text-white/40 group-hover:text-black transition-colors" />
-                      </div>
+                  {/* CTA */}
+                  <div className="flex items-center gap-3">
+                    <span className="text-[11px] font-black text-white/30 uppercase tracking-widest group-hover:text-[#25D366]/60 transition-colors">
+                      Bekijk case
+                    </span>
+                    <div
+                      className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-transparent transition-all duration-500"
+                      style={{ backgroundColor: undefined }}
+                    >
+                      <ArrowUpRight size={14} className="text-white/40 group-hover:text-black transition-colors" style={{ }} />
                     </div>
                   </div>
                 </div>
-              </div>
+
+                {/* Hover accent glow */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ backgroundColor: accentColor }}
+                />
+              </button>
             );
           })}
         </div>

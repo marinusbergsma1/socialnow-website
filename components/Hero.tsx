@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import { Star } from 'lucide-react';
+import ScrollTypewriter from './ScrollTypewriter';
 import BinaryTagline from './BinaryTagline';
 
 interface HeroProps {
@@ -27,8 +28,39 @@ const reviewsData = [
   }
 ];
 
+const words = [
+  { text: "BRANDING", color: "text-[#25D366]" },
+  { text: "DESIGN", color: "text-[#61F6FD]" },
+  { text: "MARKETING", color: "text-[#F7E644]" },
+  { text: "STRATEGY", color: "text-[#F62961]" },
+  { text: "AI", color: "text-[#61F6FD]" }
+];
+
 const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [showCycle, setShowCycle] = useState(false);
+  const [showCycleQuote, setShowCycleQuote] = useState(false);
   const [activeReviewIndex, setActiveReviewIndex] = useState(0);
+
+  useEffect(() => {
+    if (startAnimation) {
+      const startTimeout = setTimeout(() => {
+        setShowCycle(true);
+        const interval = setInterval(() => {
+          setShowCycleQuote(false);
+          setTimeout(() => {
+            setWordIndex(prev => (prev + 1) % words.length);
+            setTimeout(() => setShowCycleQuote(true), 300);
+          }, 300);
+        }, 2000);
+
+        setTimeout(() => setShowCycleQuote(true), 300);
+
+        return () => clearInterval(interval);
+      }, 600);
+      return () => clearTimeout(startTimeout);
+    }
+  }, [startAnimation]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -65,30 +97,42 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
 
           <div className="w-full max-w-[1600px]">
               <h1 className="font-black uppercase tracking-tighter text-white leading-[0.85]">
-                <div className={`text-4xl sm:text-6xl md:text-7xl lg:text-[8rem] xl:text-[9rem] transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`}>
-                  <span className="text-[#F7E644]">"</span> HUMAN
+                <div className="text-4xl sm:text-6xl md:text-7xl lg:text-[8rem] xl:text-[9rem] flex items-center justify-center gap-2 md:gap-4">
+                  <span className="text-[#F7E644]">"</span>
+                  <ScrollTypewriter text='THE NEXT' delay={100} start={startAnimation} withHighlight={false} />
                 </div>
-                <div className={`text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] xl:text-[11rem] hero-gradient-text transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.2s' }}>
-                  CREATIVITY
+                <div className="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] xl:text-[11rem] flex justify-center hero-gradient-text">
+                  <ScrollTypewriter text="GENERATION" delay={400} start={startAnimation} withHighlight={false} />
                 </div>
-                <div className={`text-4xl sm:text-6xl md:text-7xl lg:text-[8rem] xl:text-[9rem] transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.4s' }}>
-                  POWERED BY
-                </div>
-                <div className={`text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] xl:text-[11rem] transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.6s' }}>
-                  <span className="text-[#61F6FD]">AI</span> <span className="text-[#F62961]">TECHNOLOGY</span> <span className="text-[#F7E644]">"</span>
+                <div className="flex items-center justify-center flex-wrap text-4xl sm:text-6xl md:text-7xl lg:text-[8rem] xl:text-[9rem]">
+                  <div className="flex items-center">
+                    <ScrollTypewriter text="OF" delay={800} start={startAnimation} withHighlight={false} />
+                    <div className="relative inline-flex items-center h-[1.1em] ml-3 md:ml-10">
+                      {showCycle ? (
+                        <span key={wordIndex} className={`${words[wordIndex].color} animate-fade-in-right transition-colors duration-1000 flex items-center drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]`}>
+                          {words[wordIndex].text}
+                          <span className={`text-[#F7E644] ml-2 md:ml-6 transition-all duration-700 ${showCycleQuote ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+                            "
+                          </span>
+                        </span>
+                      ) : (
+                        <span className="opacity-0">BRANDING</span>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </h1>
           </div>
 
-          <div className={`transition-all duration-1000 mt-4 md:mt-14 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1s' }}>
+          <div className={`transition-all duration-1000 mt-4 md:mt-14 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.2s' }}>
             <BinaryTagline />
           </div>
 
-          <p className={`max-w-3xl mx-auto text-gray-400 text-sm md:text-2xl mb-10 md:mb-16 font-medium leading-relaxed px-6 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.2s' }}>
+          <p className={`max-w-3xl mx-auto text-gray-400 text-sm md:text-2xl mb-10 md:mb-16 font-medium leading-relaxed px-6 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.4s' }}>
             Wij bouwen websites, applicaties en digitale projecten met AI als fundament. <span className="text-white font-black italic">Voor bedrijven die de toekomst vormgeven.</span>
           </p>
 
-          <div className={`flex flex-col items-center gap-10 md:gap-12 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.4s' }}>
+          <div className={`flex flex-col items-center gap-10 md:gap-12 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.6s' }}>
             <div className="relative group">
                 <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-12 text-sm md:text-xl shadow-[0_20px_60px_rgba(37,211,102,0.3)]">START JOUW PROJECT</Button>
             </div>
