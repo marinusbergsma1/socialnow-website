@@ -448,12 +448,12 @@ const ShortContent: React.FC = () => {
         <div className="container mx-auto px-6 mt-8 md:mt-24 z-10" ref={statsRef}>
           <div className="grid grid-cols-3 gap-2 md:gap-6 text-center">
             {[
-              { label: "Followers", end: 2, id: "01" },
-              { label: "Likes", end: 500, id: "02" },
-              { label: "Reach", end: 800, id: "03" }
+              { label: "Followers", end: 2, id: "01", color: "#25D366" },
+              { label: "Likes", end: 500, id: "02", color: "#F62961" },
+              { label: "Reach", end: 800, id: "03", color: "#61F6FD" }
             ].map((stat, i) => (
-              <div key={i} className="relative p-3 md:p-6 rounded-xl md:rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-700 flex flex-col items-center">
-                <h4 className="text-2xl md:text-5xl font-black mb-0.5 md:mb-1 tracking-tighter text-white">
+              <div key={i} className="relative p-3 md:p-6 rounded-xl md:rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-700 flex flex-col items-center group hover:border-white/[0.12]">
+                <h4 className="text-2xl md:text-5xl font-black mb-0.5 md:mb-1 tracking-tighter" style={{ color: stat.color }}>
                   <CountUp end={stat.end} start={statsVisible} suffix="m+" />
                 </h4>
                 <span className="block text-white/30 uppercase font-bold tracking-[0.25em] text-[7px] md:text-[10px]">{stat.label}</span>
