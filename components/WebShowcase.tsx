@@ -129,7 +129,7 @@ const WebShowcase: React.FC = () => {
         }
         style={{ colorScheme: 'normal' }}
         onLoad={!isFS ? () => handleIframeLoad(idx) : undefined}
-        sandbox="allow-scripts allow-same-origin allow-popups"
+        sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
         loading={idx === 0 ? 'eager' : 'lazy'}
       />
     );
