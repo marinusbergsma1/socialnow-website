@@ -37,13 +37,18 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
+    // Mobile performance: detect and reduce particle count significantly
+    const isMobile = window.innerWidth < 768;
+    const mobileFactor = isMobile ? 0.3 : 1; // 30% particles on mobile
+
     let width = 0;
     let height = 0;
     const points: Point[] = [];
 
     const generateSphere = (count: number, radius: number, offsetX: number, offsetY: number, offsetZ: number, color: string) => {
-      for (let i = 0; i < count; i++) {
-        const y = 1 - (i / (count - 1)) * 2;
+      const adjustedCount = Math.round(count * mobileFactor);
+      for (let i = 0; i < adjustedCount; i++) {
+        const y = 1 - (i / (adjustedCount - 1)) * 2;
         const radiusAtY = Math.sqrt(1 - y * y);
         const theta = 2.399963229728653 * i;
         points.push({
@@ -55,7 +60,7 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       }
     };
 
-    // Increased particle counts for more impact
+    // Particle counts (reduced on mobile via mobileFactor)
     if (type === 'all' || type === 'cyan') {
       const count = largeParticles ? 2000 : (type === 'cyan' ? 2400 : 1200);
       generateSphere(count, 0.7, 0, 0, 0, '#61F6FD');
@@ -94,7 +99,7 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
 
           if (!canvas || !ctx) return;
 
-          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2);
           canvas.width = width * dpr;
           canvas.height = height * dpr;
           canvas.style.width = `${width}px`;
@@ -168,14 +173,17 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       const centerY = height / 2;
       const breatheScale = 1 + Math.sin(time * 1.1) * 0.03;
 
-      sortedPoints.sort((a, b) => {
-        const az = a.x * Math.sin(effectiveRotY) + a.z * Math.cos(effectiveRotY);
-        const bz = b.x * Math.sin(effectiveRotY) + b.z * Math.cos(effectiveRotY);
-        return bz - az;
-      });
+      // Skip sorting on mobile — massive perf gain, barely noticeable
+      if (!isMobile) {
+        sortedPoints.sort((a, b) => {
+          const az = a.x * Math.sin(effectiveRotY) + a.z * Math.cos(effectiveRotY);
+          const bz = b.x * Math.sin(effectiveRotY) + b.z * Math.cos(effectiveRotY);
+          return bz - az;
+        });
+      }
 
-      // Set glow if enabled
-      if (glowEnabled) {
+      // Set glow if enabled (disabled on mobile for performance)
+      if (glowEnabled && !isMobile) {
         ctx.shadowBlur = 4;
       }
 
@@ -209,7 +217,7 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
           ctx.fillStyle = p.color;
           ctx.globalAlpha = pointAlpha;
 
-          if (glowEnabled) {
+          if (glowEnabled && !isMobile) {
             ctx.shadowColor = p.color;
           }
 
