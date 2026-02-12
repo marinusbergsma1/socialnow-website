@@ -8,7 +8,6 @@ import {
 } from 'recharts';
 import ScrollTypewriter from './ScrollTypewriter';
 import Button from './Button';
-import { PixelGlobe } from './PixelGlobe';
 
 interface BentoGridSectionProps {
   isOpen: boolean;
@@ -77,8 +76,6 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
   const [wordIndex, setWordIndex] = useState(0);
   const [showWord, setShowWord] = useState(false);
   const [showQuote, setShowQuote] = useState(false);
-  const nodeColors = ["#61F6FD", "#25D366", "#F62961", "#F7E644", "#61F6FD", "#25D366"];
-
   useEffect(() => {
     if (isOpen) {
       const originalOverflow = document.body.style.overflow;
@@ -298,21 +295,6 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
                         <Button variant="green" icon={true} IconComponent={Send} onClick={onClose} className="!px-20 !h-20 !text-xl shadow-[0_0_50px_rgba(37,211,102,0.4)]">LANCEER JOUW MERK</Button>
                     </div>
                     
-                    <div className="relative w-80 h-80 md:w-[35rem] md:h-[35rem] flex items-center justify-center overflow-visible">
-                        <div className="absolute inset-0 flex items-center justify-center z-10 overflow-visible">
-                            <PixelGlobe scaleMultiplier={0.35} />
-                        </div>
-
-                        {[0, 60, 120, 180, 240, 300].map((deg, i) => (
-                            <div
-                                key={deg}
-                                className="absolute w-10 h-10 md:w-16 md:h-16 rounded-[1.5rem] bg-black border border-white/10 flex items-center justify-center transform group-hover:scale-125 transition-transform duration-700 z-20 shadow-2xl"
-                                style={{ transform: `rotate(${deg}deg) translate(min(280px, 35vw)) rotate(-${deg}deg)` }}
-                            >
-                                <div className="w-3 md:w-4 h-3 md:h-4 rounded-full shadow-[0_0_15px_currentColor]" style={{ backgroundColor: nodeColors[i], color: nodeColors[i] }}></div>
-                            </div>
-                        ))}
-                    </div>
                 </div>
               </div>
           </div>

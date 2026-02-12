@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProjectBySlug, getAdjacentProjects, allProjects } from '../data/projects';
 import Button from './Button';
@@ -9,49 +9,16 @@ import {
   ExternalLink, Globe
 } from 'lucide-react';
 
-// Lazy video for gallery items
+// Lazy video for gallery items - uses direct src attribute
 const LazyGalleryVideo: React.FC<{ src: string; className?: string }> = ({ src, className = "" }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [hasLoaded, setHasLoaded] = useState(false);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && videoRef.current && !hasLoaded) {
-          videoRef.current.src = src;
-          videoRef.current.load();
-          setHasLoaded(true);
-          videoRef.current.play().catch(() => {
-            if (videoRef.current) {
-              videoRef.current.muted = true;
-              videoRef.current.play().catch(() => {});
-            }
-          });
-        }
-      },
-      { rootMargin: '200px', threshold: 0.1 }
-    );
-
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, [src, hasLoaded]);
-
   return (
-    <div ref={containerRef} className={`relative ${className}`}>
-      {!hasLoaded && (
-        <div className="absolute inset-0 bg-[#0a0a0a] flex items-center justify-center z-10">
-          <div className="w-6 h-6 border-2 border-white/10 border-t-white/40 rounded-full animate-spin"></div>
-        </div>
-      )}
+    <div className={`relative ${className}`}>
       <video
-        ref={videoRef}
+        src={src}
+        autoPlay
         loop
         muted
         playsInline
-        preload="none"
         className={`w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-[1.01] ${className}`}
       />
     </div>

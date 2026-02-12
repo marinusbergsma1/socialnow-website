@@ -40,10 +40,11 @@ const LazyVideo: React.FC<{
       )}
       <video
         ref={videoRef}
+        src={src}
         loop
         muted
         playsInline
-        preload="none"
+        preload="auto"
         className="w-full h-full object-contain"
       />
     </div>
@@ -67,10 +68,11 @@ const LazyGalleryVideo: React.FC<{ src: string }> = ({ src }) => {
       )}
       <video
         ref={videoRef}
+        src={src}
         loop
         muted
         playsInline
-        preload="none"
+        preload="auto"
         className="w-full h-full object-cover"
       />
     </div>

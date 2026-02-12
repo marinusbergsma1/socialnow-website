@@ -7,10 +7,9 @@ interface UseVideoIntersectionOptions {
 }
 
 /**
- * Hook that manages video loading and playback based on viewport visibility.
- * - Only sets video src when element is near the viewport (lazy loading)
+ * Hook that manages video playback based on viewport visibility.
+ * - Video src is set directly via the HTML attribute (not via JS)
  * - Plays video when visible, pauses when not
- * - Never clears src to prevent re-downloads
  * - Returns refs and state for the consumer to use
  */
 export function useVideoIntersection(
@@ -27,7 +26,6 @@ export function useVideoIntersection(
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
 
   // Intersection Observer: track visibility
   useEffect(() => {
@@ -45,48 +43,43 @@ export function useVideoIntersection(
     return () => observer.disconnect();
   }, [rootMargin, threshold]);
 
-  // Load src once when first visible, play/pause based on visibility
+  // Play/pause based on visibility
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    if (isVisible) {
-      // First time visible: set src and load
-      if (!hasLoadedOnce && src) {
-        video.src = src;
-        video.load();
-        setHasLoadedOnce(true);
+    if (isVisible && autoPlay) {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setHasLoadedOnce(true))
+          .catch(() => {
+            video.muted = true;
+            video.play()
+              .then(() => setHasLoadedOnce(true))
+              .catch(() => {});
+          });
       }
-
-      // Play when visible (if autoPlay enabled)
-      if (autoPlay && hasLoadedOnce) {
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => setIsPlaying(true))
-            .catch(() => {
-              // Retry muted (browser autoplay policy)
-              video.muted = true;
-              video.play()
-                .then(() => setIsPlaying(true))
-                .catch(() => {});
-            });
-        }
-      }
-    } else {
-      // Not visible: just pause, DON'T clear src
-      if (hasLoadedOnce) {
-        video.pause();
-        setIsPlaying(false);
-      }
+    } else if (!isVisible && hasLoadedOnce) {
+      video.pause();
     }
-  }, [isVisible, hasLoadedOnce, src, autoPlay]);
+  }, [isVisible, hasLoadedOnce, autoPlay]);
+
+  // Mark loaded once when video can play
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleCanPlay = () => setHasLoadedOnce(true);
+    video.addEventListener('canplay', handleCanPlay);
+    return () => video.removeEventListener('canplay', handleCanPlay);
+  }, []);
 
   return {
     containerRef,
     videoRef,
     isVisible,
     hasLoadedOnce,
-    isPlaying,
+    src, // Pass this as the src attribute on the video element
   };
 }

@@ -12,7 +12,6 @@ import {
 import Button from './Button';
 import ScrollTypewriter from './ScrollTypewriter';
 import ProgressiveImage from './ProgressiveImage';
-import { PixelGlobe } from './PixelGlobe';
 
 interface TeamPageProps {
   isOpen: boolean;
@@ -144,8 +143,6 @@ const teamDetailed = [
 
 const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
   const [isClosing, setIsClosing] = useState(false);
-  const nodeColors = ["#61F6FD", "#25D366", "#F62961", "#F7E644", "#61F6FD", "#25D366"];
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -330,21 +327,6 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                         <Button variant="green" icon={true} IconComponent={Send} onClick={handleClose} className="!px-14 !text-lg shadow-[0_0_30px_rgba(37,211,102,0.2)]">Neem Contact Op</Button>
                     </div>
                     
-                    <div className="relative w-64 h-64 md:w-96 md:h-96 flex items-center justify-center overflow-visible">
-                        <div className="absolute inset-0 flex items-center justify-center z-10 overflow-visible">
-                            <PixelGlobe scaleMultiplier={0.25} glowEnabled={true} largeParticles={true} />
-                        </div>
-
-                        {[0, 60, 120, 180, 240, 300].map((deg, i) => (
-                            <div 
-                                key={deg} 
-                                className="absolute w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-black border border-white/10 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500 z-20"
-                                style={{ transform: `rotate(${deg}deg) translate(230px) rotate(-${deg}deg)` }}
-                            >
-                                <div className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full" style={{ backgroundColor: nodeColors[i] }}></div>
-                            </div>
-                        ))}
-                    </div>
                 </div>
               </div>
           </div>

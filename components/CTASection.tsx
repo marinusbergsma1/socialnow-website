@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Button from './Button';
 import { PieChart } from 'lucide-react';
-import { PixelGlobe } from './PixelGlobe';
 
 interface CTASectionProps {
   onOpenBooking: () => void;
@@ -72,18 +71,6 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
                       </div>
                   </div>
                   
-                  {/* Visual Center - PixelGlobe Logo Elementen */}
-                  <div className="hidden md:flex relative w-80 h-80 items-center justify-center overflow-visible">
-                      <div className="absolute inset-0 z-10">
-                        <PixelGlobe
-                          scaleMultiplier={0.45}
-                          type="all"
-                          opacity={0.8}
-                          glowEnabled={true}
-                          largeParticles={true}
-                        />
-                      </div>
-                  </div>
               </div>
             </div>
         </div>

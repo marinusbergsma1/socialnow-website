@@ -164,13 +164,3 @@ body {
   scrollbar-width: none;
 }
 
-/* Video carousel slide gap */
-.video-carousel {
-  --slide-gap: 250px;
-}
-
-@media (min-width: 768px) {
-  .video-carousel {
-    --slide-gap: 400px;
-  }
-}

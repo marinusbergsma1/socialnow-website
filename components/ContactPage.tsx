@@ -6,7 +6,6 @@ import {
   Linkedin, Instagram, Twitter, Facebook, ArrowRight
 } from 'lucide-react';
 import Button from './Button';
-import { PixelGlobe } from './PixelGlobe';
 
 interface ContactPageProps {
   isOpen: boolean;
@@ -15,8 +14,6 @@ interface ContactPageProps {
 
 const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
   const [isClosing, setIsClosing] = useState(false);
-  const nodeColors = ["#61F6FD", "#25D366", "#F62961", "#F7E644", "#61F6FD", "#25D366"];
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -80,26 +77,6 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
                       </p>
                   </div>
 
-                  {/* UNIFIED HIGH-END VISUAL CORE */}
-                  <div className="relative w-full flex items-center justify-center p-12 overflow-visible">
-                      <div className="relative w-64 h-64 md:w-96 md:h-96 flex items-center justify-center overflow-visible">
-                          {/* PIXEL GLOBE - Logo Elementen */}
-                          <div className="absolute inset-0 flex items-center justify-center z-10 overflow-visible">
-                              <PixelGlobe scaleMultiplier={0.3} glowEnabled={true} largeParticles={true} />
-                          </div>
-
-                          {/* PIXEL NODES - 230PX TRANSLATION */}
-                          {[0, 60, 120, 180, 240, 300].map((deg, i) => (
-                              <div 
-                                  key={deg} 
-                                  className="absolute w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-black border border-white/10 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500 z-20"
-                                  style={{ transform: `rotate(${deg}deg) translate(230px) rotate(-${deg}deg)` }}
-                              >
-                                  <div className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full" style={{ backgroundColor: nodeColors[i] }}></div>
-                              </div>
-                          ))}
-                      </div>
-                  </div>
 
                   {/* Address & Direct info */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
