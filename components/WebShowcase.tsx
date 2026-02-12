@@ -83,8 +83,15 @@ const WebShowcase: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Scroll-driven grow animation
+  // Scroll-driven grow animation (desktop only — skip on mobile for performance)
   useEffect(() => {
+    const isMobile = window.innerWidth < 1024;
+    if (isMobile) {
+      setScale(1);
+      setIsSticky(false);
+      return;
+    }
+
     const handleScroll = () => {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
@@ -319,13 +326,13 @@ const WebShowcase: React.FC = () => {
           </div>
         </div>
 
-        {/* Sticky showcase container */}
+        {/* Sticky showcase container (sticky only on desktop) */}
         <div
           ref={stickyRef}
-          className="sticky top-0 z-20"
-          style={{ minHeight: '100vh' }}
+          className="lg:sticky lg:top-0 z-20"
+          style={{ minHeight: window.innerWidth >= 1024 ? '100vh' : 'auto' }}
         >
-          <div className="h-screen flex flex-col items-center justify-center px-4 md:px-8 relative">
+          <div className="lg:h-screen flex flex-col items-center justify-center px-4 md:px-8 relative py-8 lg:py-0">
 
             {/* Grow-animated wrapper */}
             <div
@@ -625,8 +632,8 @@ const WebShowcase: React.FC = () => {
           </div>
         </div>
 
-        {/* Spacer for scroll distance after sticky releases */}
-        <div style={{ height: '60vh' }} />
+        {/* Spacer for scroll distance after sticky releases (desktop only) */}
+        <div className="hidden lg:block" style={{ height: '60vh' }} />
       </section>
 
       {/* Fullscreen overlay */}

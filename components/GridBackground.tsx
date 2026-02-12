@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PixelGlobe } from './PixelGlobe';
 
 interface GridBackgroundProps {
@@ -8,6 +8,12 @@ interface GridBackgroundProps {
 }
 
 const GridBackground: React.FC<GridBackgroundProps> = ({ hide = false, startAnimation = false }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
   return (
     <div className={`fixed inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-1000 ${hide ? 'opacity-0' : 'opacity-100'}`}>
       {/* Modern Grid Background */}
@@ -18,8 +24,8 @@ const GridBackground: React.FC<GridBackgroundProps> = ({ hide = false, startAnim
           </div>
       </div>
 
-      {/* PixelGlobe Beeldmerk - 3 gekleurde bollen */}
-      {startAnimation && (
+      {/* PixelGlobe Beeldmerk — hidden on mobile for performance */}
+      {startAnimation && !isMobile && (
         <div className="absolute inset-0 z-[5] opacity-40">
           <PixelGlobe
             scaleMultiplier={0.5}
