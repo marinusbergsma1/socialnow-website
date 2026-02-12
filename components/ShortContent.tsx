@@ -26,7 +26,7 @@ const ReelsOverlay: React.FC<{
   onClose: () => void;
 }> = ({ videos, startIndex, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(startIndex);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const touchStartY = useRef(0);
