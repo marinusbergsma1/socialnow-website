@@ -3,6 +3,21 @@ import { Project } from '../types';
 // --- WEB DESIGN & DEVELOPMENT SHOWCASE (aparte sectie op homepage) ---
 export const webShowcaseProjects: Project[] = [
   {
+    id: 10,
+    slug: "socialnow-website",
+    title: "SocialNow",
+    category: "AI Web Development",
+    client: "SocialNow",
+    year: "2026",
+    services: ["AI Website Development", "Full-Stack React", "3D Animation", "UX/UI Design"],
+    description: "Onze eigen website — gebouwd met React, Vite, en AI-gestuurde development. 3D PixelGlobe beeldmerk, infinite video slider, live website previews en cutting-edge design.",
+    image: `${import.meta.env.BASE_URL}screenshots/socialnow-hero.jpg`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/socialnow-full.jpg`,
+    align: 'left',
+    url: "https://marinusbergsma1.github.io/socialnow-website/",
+    gallery: []
+  },
+  {
     id: 6,
     slug: "vdz-brigade-website",
     title: "VDZ Brigade",
@@ -19,17 +34,17 @@ export const webShowcaseProjects: Project[] = [
   },
   {
     id: 7,
-    slug: "divine-machines-website",
-    title: "Divine Machines",
+    slug: "raveg-bounce-my-curls",
+    title: "RAVEG Bounce My Curls",
     category: "AI Web Development",
-    client: "Divine Machines",
+    client: "RAVEG",
     year: "2025",
-    services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "Creative Direction"],
-    description: "High-performance website met AI-driven development. Strak design en technische precisie.",
-    image: `${import.meta.env.BASE_URL}screenshots/divine-machines-hero.jpg`,
-    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/divine-machines-full.jpg`,
+    services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "E-Commerce"],
+    description: "Een AI-gebouwde product website voor RAVEG's Bounce My Curls haarverzorgingslijn. Modern, strak en conversion-gericht.",
+    image: `${import.meta.env.BASE_URL}screenshots/raveg-bounce-hero.jpg`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/raveg-bounce-full.jpg`,
     align: 'left',
-    url: "https://divinemachines.nl",
+    url: "https://raveg-bounce-my-curls-21026081538.us-west1.run.app/",
     gallery: []
   },
   {
