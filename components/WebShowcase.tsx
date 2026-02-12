@@ -265,7 +265,7 @@ const WebShowcase: React.FC = () => {
 
             {/* Grow-animated wrapper */}
             <div
-              className="w-full max-w-[1600px] transition-transform duration-100 ease-out will-change-transform"
+              className="w-full max-w-[1400px] transition-transform duration-100 ease-out will-change-transform"
               style={{ transform: `scale(${scale})` }}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
@@ -313,12 +313,25 @@ const WebShowcase: React.FC = () => {
                 </button>
               </div>
 
-              {/* ═══ DESKTOP: Live iframe only (lg+) — NO mobile sidebar ═══ */}
-              <div className="hidden lg:flex items-center gap-5">
-                <button onClick={goPrev} aria-label="Vorige" className="w-10 h-10 rounded-full border border-white/[0.06] flex items-center justify-center text-white/20 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all flex-shrink-0">
-                  <ChevronLeft size={18} strokeWidth={1.5} />
+              {/* ═══ DESKTOP: Live iframe with side previews (lg+) ═══ */}
+              <div className="hidden lg:flex items-center gap-4 relative">
+                {/* Previous site peek (left) */}
+                <button onClick={goPrev} aria-label="Vorige" className="relative w-[12%] flex-shrink-0 group cursor-pointer">
+                  <div className="rounded-xl overflow-hidden relative opacity-25 group-hover:opacity-40 transition-all duration-500 scale-[0.92] group-hover:scale-[0.95]" style={{ aspectRatio: '16 / 9', ...glassStyle }}>
+                    {(() => {
+                      const prevIdx = (activeIndex - 1 + webShowcaseProjects.length) % webShowcaseProjects.length;
+                      const prevProject = webShowcaseProjects[prevIdx];
+                      return <img src={prevProject.image} alt={prevProject.title} className="w-full h-full object-cover object-top" loading="lazy" />;
+                    })()}
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center backdrop-blur-md">
+                      <ChevronLeft size={14} className="text-white" strokeWidth={2} />
+                    </div>
+                  </div>
                 </button>
 
+                {/* Main center iframe */}
                 <div className="relative flex-1 min-w-0">
                   <div className="rounded-2xl overflow-hidden relative" style={{ aspectRatio: '16 / 9', ...glassStyle }}>
                     <div className="absolute top-0 left-[10%] right-[10%] h-[1px] pointer-events-none z-40" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)' }} />
@@ -327,8 +340,20 @@ const WebShowcase: React.FC = () => {
                   </div>
                 </div>
 
-                <button onClick={goNext} aria-label="Volgende" className="w-10 h-10 rounded-full border border-white/[0.06] flex items-center justify-center text-white/20 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all flex-shrink-0">
-                  <ChevronRight size={18} strokeWidth={1.5} />
+                {/* Next site peek (right) */}
+                <button onClick={goNext} aria-label="Volgende" className="relative w-[12%] flex-shrink-0 group cursor-pointer">
+                  <div className="rounded-xl overflow-hidden relative opacity-25 group-hover:opacity-40 transition-all duration-500 scale-[0.92] group-hover:scale-[0.95]" style={{ aspectRatio: '16 / 9', ...glassStyle }}>
+                    {(() => {
+                      const nextIdx = (activeIndex + 1) % webShowcaseProjects.length;
+                      const nextProject = webShowcaseProjects[nextIdx];
+                      return <img src={nextProject.image} alt={nextProject.title} className="w-full h-full object-cover object-top" loading="lazy" />;
+                    })()}
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center backdrop-blur-md">
+                      <ChevronRight size={14} className="text-white" strokeWidth={2} />
+                    </div>
+                  </div>
                 </button>
               </div>
 
@@ -367,7 +392,7 @@ const WebShowcase: React.FC = () => {
           </div>
         </div>
 
-        <div className="hidden lg:block" style={{ height: '60vh' }} />
+        <div className="hidden lg:block" style={{ height: '25vh' }} />
       </section>
 
       {/* Fullscreen overlay */}
