@@ -176,10 +176,9 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={() => handleMouseLeave(i)}
             >
-              <div className="w-full rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden bg-black relative border-2 transition-all duration-300"
+              <div className="w-full rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden bg-black relative transition-all duration-300"
                 style={{
                   height: `${cardHeight}px`,
-                  borderColor: isHovered ? '#25D366' : 'rgba(255,255,255,0.1)',
                   boxShadow: isHovered ? '0 0 40px rgba(37,211,102,0.4), inset 0 0 30px rgba(37,211,102,0.05)' : 'none',
                 }}
               >
