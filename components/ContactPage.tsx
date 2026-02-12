@@ -186,10 +186,6 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
           50% { transform: scale(1.1) translate(-30px, -30px); }
           100% { transform: scale(1) translate(0, 0); }
         }
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
       `}</style>
     </div>
   );

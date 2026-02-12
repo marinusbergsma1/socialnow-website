@@ -296,10 +296,6 @@ const ProjectsPage: React.FC<ProjectsPageProps> = ({ isOpen, onClose }) => {
           0% { transform: translateY(-100vh); }
           100% { transform: translateY(100vh); }
         }
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
       `}</style>
     </div>
   );
