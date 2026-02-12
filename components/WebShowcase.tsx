@@ -147,8 +147,18 @@ const WebShowcase: React.FC = () => {
 
           {/* Main showcase area */}
           <div className="max-w-6xl mx-auto">
-            {/* Live website iframe preview */}
-            <div className="relative mb-8" ref={iframeContainerRef}>
+            {/* Live website iframe preview with side arrows */}
+            <div className="relative mb-8 flex items-center gap-3 md:gap-5" ref={iframeContainerRef}>
+              {/* Left arrow - next to iframe */}
+              <button
+                onClick={goPrev}
+                className="hidden md:flex w-12 h-12 lg:w-14 lg:h-14 rounded-full border border-white/10 bg-white/5 items-center justify-center hover:bg-white/20 hover:border-[#61F6FD]/40 hover:text-[#61F6FD] transition-all flex-shrink-0 backdrop-blur-md"
+              >
+                <ChevronLeft size={24} />
+              </button>
+
+              {/* Iframe wrapper */}
+              <div className="relative flex-1 min-w-0">
               {/* Top action bar */}
               <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
                 <button
@@ -188,6 +198,15 @@ const WebShowcase: React.FC = () => {
 
               {/* Subtle gradient at bottom */}
               <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/40 to-transparent pointer-events-none rounded-b-3xl"></div>
+              </div>{/* end iframe wrapper */}
+
+              {/* Right arrow - next to iframe */}
+              <button
+                onClick={goNext}
+                className="hidden md:flex w-12 h-12 lg:w-14 lg:h-14 rounded-full border border-white/10 bg-white/5 items-center justify-center hover:bg-white/20 hover:border-[#61F6FD]/40 hover:text-[#61F6FD] transition-all flex-shrink-0 backdrop-blur-md"
+              >
+                <ChevronRight size={24} />
+              </button>
             </div>
 
             {/* Project info + navigation */}
