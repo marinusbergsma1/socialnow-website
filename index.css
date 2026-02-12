@@ -164,9 +164,13 @@ body {
   scrollbar-width: none;
 }
 
-/* Responsive optimizations */
-@media (max-width: 768px) {
-  .animate-scroll {
-    animation-duration: calc(var(--scroll-duration, 40s) / 2);
+/* Video carousel slide gap */
+.video-carousel {
+  --slide-gap: 250px;
+}
+
+@media (min-width: 768px) {
+  .video-carousel {
+    --slide-gap: 400px;
   }
 }

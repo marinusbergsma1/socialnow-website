@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import Button from './Button';
 
@@ -14,8 +15,11 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const isHomePage = location.pathname === '/' || location.pathname === '';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,33 +31,51 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
   const navLinks: NavLink[] = [
     { name: 'Home', href: '#home' },
-    { name: 'Projecten', href: '#projecten' },
+    { name: 'Projecten', href: '/projecten', action: 'navigate' },
     { name: 'Diensten', href: '#expertise-ecosysteem' },
     { name: 'Team', href: '#team' },
     { name: 'Contact', href: '#contact', action: 'booking' },
   ];
 
   const handleLinkClick = (e: React.MouseEvent, link: NavLink) => {
+      e.preventDefault();
+
       if (link.action === 'booking') {
-          e.preventDefault();
           onOpenBooking();
           setIsOpen(false);
           return;
       }
 
+      if (link.action === 'navigate') {
+          navigate(link.href);
+          setIsOpen(false);
+          return;
+      }
+
       if (link.href.startsWith('#')) {
-          e.preventDefault();
           const targetId = link.href.substring(1);
           if (targetId === 'home') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (!isHomePage) {
+              navigate('/');
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
             setIsOpen(false);
             return;
           }
-          const target = document.getElementById(targetId);
-          if (target) {
-              target.scrollIntoView({ behavior: 'smooth' });
-              setIsOpen(false);
+          // If not on home page, navigate to home first then scroll
+          if (!isHomePage) {
+            navigate('/');
+            // Let it render, then scroll after a short delay
+            setTimeout(() => {
+              const target = document.getElementById(targetId);
+              if (target) target.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+          } else {
+            const target = document.getElementById(targetId);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
           }
+          setIsOpen(false);
       }
   };
 
@@ -66,7 +88,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             : 'top-0 left-0 w-full bg-transparent px-6 md:px-12 py-10 border-transparent'
         }`}
       >
-          <a href="#home" onClick={(e) => { e.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'}); }} className={`block transition-all duration-500 ${scrolled ? 'w-32' : 'w-40 md:w-56'}`}>
+          <a href="#home" onClick={(e) => { e.preventDefault(); if (!isHomePage) { navigate('/'); } else { window.scrollTo({top: 0, behavior: 'smooth'}); } }} className={`block transition-all duration-500 ${scrolled ? 'w-32' : 'w-40 md:w-56'}`}>
             <img
               src="https://i.ibb.co/RTsSXFm8/Logo-Social-Now-Lengte.webp"
               alt="SocialNow Logo"

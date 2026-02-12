@@ -19,6 +19,7 @@ import BookingPopup from './components/BookingPopup';
 import BentoGridSection from './components/BentoGridSection';
 import TeamPage from './components/TeamPage';
 import ContactPage from './components/ContactPage';
+import ProjectsPage from './components/ProjectsPage';
 import ServicesMarquee from './components/ServicesMarquee';
 import Hero from './components/Hero';
 
@@ -78,6 +79,8 @@ const App: React.FC = () => {
 
   const location = useLocation();
   const isProjectPage = location.pathname.startsWith('/project/');
+  const isProjectsPage = location.pathname === '/projecten';
+  const isSubPage = isProjectPage || isProjectsPage;
 
   useLayoutEffect(() => {
     const handleScroll = () => {
@@ -98,20 +101,20 @@ const App: React.FC = () => {
     return () => observer.disconnect();
   }, [loading, location.pathname]);
 
-  // Skip loader on project pages (direct URL access)
+  // Skip loader on sub-pages (direct URL access)
   useEffect(() => {
-    if (isProjectPage && loading) {
+    if (isSubPage && loading) {
       setLoading(false);
     }
-  }, [isProjectPage, loading]);
+  }, [isSubPage, loading]);
 
   const anyModalOpen = loading || isServicesOpen || isTeamOpen || isContactOpen;
 
   return (
     <div className="bg-black text-white min-h-screen font-sans selection:bg-[#25D366] selection:text-black">
-      {!isProjectPage && loading && <Loader onComplete={() => setLoading(false)} />}
+      {!isSubPage && loading && <Loader onComplete={() => setLoading(false)} />}
 
-      {!isProjectPage && <GridBackground hide={anyModalOpen} />}
+      {!isSubPage && <GridBackground hide={anyModalOpen} />}
 
       {!loading && <Navbar onOpenBooking={() => setIsBookingOpen(true)} />}
 
@@ -130,6 +133,12 @@ const App: React.FC = () => {
             }
           />
           <Route
+            path="/projecten"
+            element={
+              <ProjectsPage onOpenBooking={() => setIsBookingOpen(true)} />
+            }
+          />
+          <Route
             path="/project/:slug"
             element={
               <ProjectPage onOpenBooking={() => setIsBookingOpen(true)} />
@@ -138,8 +147,8 @@ const App: React.FC = () => {
         </Routes>
       </div>
 
-      {!isProjectPage && !loading && <Footer onOpenBooking={() => setIsBookingOpen(true)} />}
-      {isProjectPage && <Footer onOpenBooking={() => setIsBookingOpen(true)} />}
+      {!isSubPage && !loading && <Footer onOpenBooking={() => setIsBookingOpen(true)} />}
+      {isSubPage && <Footer onOpenBooking={() => setIsBookingOpen(true)} />}
 
       {!loading && <WhatsAppPopup />}
 

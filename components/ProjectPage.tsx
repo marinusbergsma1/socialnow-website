@@ -271,10 +271,10 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
           </div>
 
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/projecten')}
             className="text-white/40 hover:text-[#61F6FD] font-bold uppercase tracking-[0.3em] text-[10px] transition-colors mt-4"
           >
-            Terug naar overzicht
+            Alle projecten bekijken
           </button>
         </div>
       </div>
