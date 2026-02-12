@@ -124,14 +124,15 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
             <h3 className="text-xl md:text-2xl font-black uppercase text-white tracking-tight mb-2">Nog vragen?</h3>
             <p className="text-gray-500 text-sm font-bold">We reageren binnen 24 uur.</p>
           </div>
-          <Button
-            variant="green"
-            icon
-            IconComponent={MessageCircle}
-            onClick={onOpenContact}
+          <a
+            href="https://wa.me/31637404577"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-black font-black uppercase tracking-wider text-xs md:text-sm hover:bg-[#20bd5a] transition-all shadow-[0_0_20px_rgba(37,211,102,0.15)] hover:shadow-[0_0_30px_rgba(37,211,102,0.3)]"
           >
+            <MessageCircle size={16} />
             Stel je vraag
-          </Button>
+          </a>
         </div>
       </div>
     </section>
