@@ -168,23 +168,23 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Fixed Project Counter */}
-      <div className="fixed top-6 right-6 z-50">
-        <div className="flex items-center gap-2 bg-black/60 backdrop-blur-xl border border-white/10 rounded-full px-2 py-2 shadow-lg">
+      {/* Fixed Project Counter — positioned below navbar */}
+      <div className="fixed top-24 right-6 z-40">
+        <div className="flex items-center gap-1 bg-black/70 backdrop-blur-xl border border-white/10 rounded-full px-1.5 py-1.5 shadow-lg">
           <button
             onClick={() => navigate(`/project/${prev.slug}`)}
-            className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
+            className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={16} />
           </button>
-          <span className="text-[10px] font-bold uppercase tracking-widest px-2 min-w-[50px] text-center">
-            {currentIndex + 1} / {allProjects.length}
+          <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 min-w-[40px] text-center text-white/60">
+            {currentIndex + 1}/{allProjects.length}
           </span>
           <button
             onClick={() => navigate(`/project/${next.slug}`)}
-            className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
+            className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={16} />
           </button>
         </div>
       </div>
