@@ -5,7 +5,7 @@ import { getProjectBySlug, getAdjacentProjects, allProjects } from '../data/proj
 import Button from './Button';
 import ProgressiveImage from './ProgressiveImage';
 import {
-  ArrowLeft, User, Calendar, Layers, ChevronLeft, ChevronRight,
+  User, Calendar, Layers, ChevronLeft, ChevronRight,
   ExternalLink, Globe
 } from 'lucide-react';
 
@@ -46,16 +46,6 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Fixed Back Button */}
-      <div className="fixed top-6 left-6 z-50">
-        <button
-          onClick={() => navigate('/')}
-          className="bg-black/60 backdrop-blur-xl border border-white/10 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all shadow-lg hover:scale-110 active:scale-95"
-        >
-          <ArrowLeft size={18} />
-        </button>
-      </div>
-
       {/* Fixed Project Counter */}
       <div className="fixed top-6 right-6 z-50">
         <div className="flex items-center gap-2 bg-black/60 backdrop-blur-xl border border-white/10 rounded-full px-2 py-2 shadow-lg">
@@ -173,18 +163,18 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
         </div>
       </div>
 
-      {/* Gallery - compact grid layout */}
+      {/* Gallery - naast elkaar, niet inkorten */}
       {project.gallery && project.gallery.length > 0 && (
-        <div className="max-w-5xl mx-auto px-6 md:px-12 pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="max-w-6xl mx-auto px-6 md:px-12 pb-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {project.gallery.map((item, idx) => (
-              <div key={idx} className="rounded-2xl md:rounded-3xl overflow-hidden border border-white/5 bg-[#0a0a0a] group relative aspect-[3/4]">
+              <div key={idx} className="rounded-2xl md:rounded-3xl overflow-hidden border border-white/5 bg-[#0a0a0a] group relative">
                 {item.endsWith('.mp4') ? (
                   <GalleryVideo src={item} />
                 ) : (
                   <img
                     alt={`${project.title} detail ${idx + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
                     loading="lazy"
                     decoding="async"
                     src={item}

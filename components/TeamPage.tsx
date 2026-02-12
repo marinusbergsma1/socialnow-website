@@ -12,6 +12,7 @@ import {
 import Button from './Button';
 import ScrollTypewriter from './ScrollTypewriter';
 import ProgressiveImage from './ProgressiveImage';
+import { PixelGlobe } from './PixelGlobe';
 
 interface TeamPageProps {
   isOpen: boolean;
@@ -192,6 +193,11 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                 <Network size={16} className="text-[#61F6FD]" />
                 <span className="text-white font-black uppercase tracking-[0.6em] text-[10px]">HUMAN ARCHITECTURE INDEX</span>
               </div>
+              {/* PixelGlobe Beeldmerk */}
+              <div className="absolute right-0 top-0 w-72 h-72 md:w-96 md:h-96 opacity-15 pointer-events-none">
+                <PixelGlobe scaleMultiplier={0.25} type="all" opacity={0.5} glowEnabled={true} largeParticles={true} />
+              </div>
+
               <h1 className="text-5xl md:text-9xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-12">
                  THE <br/> <span className="text-white">TEAM</span>
               </h1>

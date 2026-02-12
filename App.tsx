@@ -114,7 +114,7 @@ const App: React.FC = () => {
     <div className="bg-black text-white min-h-screen font-sans selection:bg-[#25D366] selection:text-black">
       {!isSubPage && loading && <Loader onComplete={() => setLoading(false)} />}
 
-      {!isSubPage && <GridBackground hide={anyModalOpen} />}
+      {!isSubPage && <GridBackground hide={anyModalOpen} startAnimation={!loading} />}
 
       {!loading && <Navbar onOpenBooking={() => setIsBookingOpen(true)} />}
 

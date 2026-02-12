@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Button from './Button';
 import { PieChart } from 'lucide-react';
+import { PixelGlobe } from './PixelGlobe';
 
 interface CTASectionProps {
   onOpenBooking: () => void;
@@ -41,8 +42,13 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
             <div className="w-full max-w-5xl bg-[#050505]/40 border border-white/10 rounded-[3rem] md:rounded-[4rem] p-10 md:p-20 relative overflow-visible group shadow-[0_40px_100px_rgba(0,0,0,0.6)] backdrop-blur-3xl">
               <div className="absolute inset-0 bg-gradient-to-br from-[#61F6FD]/5 via-transparent to-[#F62961]/5 opacity-40 rounded-[3rem] md:rounded-[4rem]"></div>
               
+              {/* PixelGlobe Beeldmerk */}
+              <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-80 h-80 opacity-20 pointer-events-none">
+                <PixelGlobe scaleMultiplier={0.45} type="all" opacity={0.8} glowEnabled={true} largeParticles={true} />
+              </div>
+
               <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 overflow-visible">
-                  
+
                   {/* Text Content */}
                   <div className="flex-1 text-center md:text-left z-30">
                       <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md">

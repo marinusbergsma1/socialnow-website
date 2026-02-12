@@ -8,6 +8,7 @@ import {
 } from 'recharts';
 import ScrollTypewriter from './ScrollTypewriter';
 import Button from './Button';
+import { PixelGlobe } from './PixelGlobe';
 
 interface BentoGridSectionProps {
   isOpen: boolean;
@@ -277,24 +278,29 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
               <div className="w-full max-w-6xl bg-white/[0.01] border border-white/10 rounded-[5rem] p-12 md:p-32 relative overflow-visible group transition-all duration-1000 shadow-3xl backdrop-blur-xl">
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#61F6FD]/5 via-transparent to-[#F62961]/5 opacity-30 rounded-[5rem]"></div>
                 
+                {/* PixelGlobe Beeldmerk */}
+                <div className="hidden lg:block absolute right-12 top-1/2 -translate-y-1/2 w-[28rem] h-[28rem] opacity-20 pointer-events-none">
+                  <PixelGlobe scaleMultiplier={0.35} type="all" opacity={0.6} glowEnabled={true} largeParticles={true} />
+                </div>
+
                 <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-20 overflow-visible">
                     <div className="flex-1 text-center lg:text-left z-30">
                         <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-12 backdrop-blur-md">
                             <Shield size={18} className="text-[#61F6FD]" />
                             <span className="text-white font-black uppercase tracking-[0.6em] text-[11px]">INTEGRATED BRAND OS V.4</span>
                         </div>
-                        
+
                         <h2 className="text-5xl md:text-9xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-14">
                             KLAAR OM TE <br/> <span className="text-[#25D366]">SYNCEN?</span>
                         </h2>
-                        
+
                         <p className="text-gray-400 font-bold text-2xl md:text-4xl leading-tight mb-16 italic">
                             Wij vertalen rauwe ambitie naar <span className="text-white">visuele monumenten</span>. Onze strategie is gecodeerd voor totale markt-dominantie.
                         </p>
-                        
+
                         <Button variant="green" icon={true} IconComponent={Send} onClick={onClose} className="!px-20 !h-20 !text-xl shadow-[0_0_50px_rgba(37,211,102,0.4)]">LANCEER JOUW MERK</Button>
                     </div>
-                    
+
                 </div>
               </div>
           </div>

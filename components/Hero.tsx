@@ -118,7 +118,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                   <ScrollTypewriter text='THE NEXT' delay={100} start={startAnimation} withHighlight={false} />
                 </div>
                 {/* GENERATION */}
-                <div className="text-[2.5rem] sm:text-6xl md:text-[8rem] lg:text-[10rem] xl:text-[11rem] flex justify-center hero-gradient-text">
+                <div className="text-[2.5rem] sm:text-6xl md:text-[8rem] lg:text-[10rem] xl:text-[11rem] flex justify-center">
                   <ScrollTypewriter text="GENERATION" delay={400} start={startAnimation} withHighlight={false} />
                 </div>
                 {/* OF + cycling word */}
