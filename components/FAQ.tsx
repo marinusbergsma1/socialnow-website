@@ -59,7 +59,7 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
               <span className="text-white/50 font-black uppercase tracking-[0.4em] text-[9px]">FAQ</span>
             </div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.85]">
-              GOT <span className="text-[#F7E644]">Q&rsquo;s</span><span className="text-[#F7E644]">?</span>
+              VRAGEN<span className="text-[#F7E644]">?</span>
             </h2>
           </div>
           <p className="text-gray-500 text-sm md:text-base font-bold max-w-xs leading-relaxed">
