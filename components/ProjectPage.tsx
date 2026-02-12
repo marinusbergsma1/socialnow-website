@@ -282,9 +282,9 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
       {/* Gallery - naast elkaar, niet inkorten */}
       {project.gallery && project.gallery.length > 0 && (
         <div className="max-w-6xl mx-auto px-6 md:px-12 pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
+          <div className="grid grid-cols-3 gap-3 md:gap-4 items-start">
             {project.gallery.map((item, idx) => (
-              <div key={idx} className="rounded-2xl md:rounded-3xl overflow-hidden border border-white/5 bg-[#0a0a0a] group relative">
+              <div key={idx} className="rounded-xl md:rounded-2xl overflow-hidden border border-white/5 bg-[#0a0a0a] group relative">
                 {item.endsWith('.mp4') ? (
                   <GalleryVideo src={item} />
                 ) : (

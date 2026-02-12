@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   const navLinks: NavLink[] = [
     { name: 'Home', href: '#home' },
     { name: 'Projecten', href: '/projecten', action: 'navigate' },
-    { name: 'Diensten', href: '#expertise-ecosysteem' },
+    { name: 'Diensten', href: '/diensten', action: 'navigate' },
     { name: 'Team', href: '#team' },
     { name: 'Contact', href: '#contact', action: 'booking' },
   ];
@@ -121,7 +121,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
       </nav>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 z-[90] bg-black/98 backdrop-blur-3xl flex flex-col pt-32 px-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
+      <div className={`fixed inset-0 z-[90] bg-black flex flex-col pt-32 px-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
           <div className="flex flex-col gap-6">
             {navLinks.map((link) => (
               <a

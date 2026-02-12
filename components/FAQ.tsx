@@ -55,11 +55,11 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-16 md:mb-24">
           <div>
             <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/10 bg-white/5 mb-6 backdrop-blur-md">
-              <Zap size={12} className="text-[#F7E644]" />
+              <Zap size={12} className="text-white/50" />
               <span className="text-white/50 font-black uppercase tracking-[0.4em] text-[9px]">FAQ</span>
             </div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.85]">
-              VRAGEN<span className="text-[#F7E644]">?</span>
+              VRAGEN &amp; ANTWOORDEN
             </h2>
           </div>
           <p className="text-gray-500 text-sm md:text-base font-bold max-w-xs leading-relaxed">
@@ -135,7 +135,7 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
             href="https://wa.me/31637404577"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-black font-black uppercase tracking-wider text-xs md:text-sm hover:bg-[#20bd5a] transition-all shadow-[0_0_20px_rgba(37,211,102,0.15)] hover:shadow-[0_0_30px_rgba(37,211,102,0.3)]"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-white font-black uppercase tracking-wider text-xs md:text-sm hover:bg-[#20bd5a] transition-all shadow-[0_0_20px_rgba(37,211,102,0.15)] hover:shadow-[0_0_30px_rgba(37,211,102,0.3)]"
           >
             <MessageCircle size={16} />
             Stel je vraag

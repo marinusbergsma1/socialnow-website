@@ -88,8 +88,8 @@ body {
   height: 100%;
   width: 100%;
   background-color: hsl(0, 0%, 3%);
-  background-image: radial-gradient(#1E1E1E 1px, transparent 1px);
-  background-size: 16px 16px;
+  background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 .glow-1 {

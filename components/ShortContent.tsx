@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, memo, useCallback } from 'react';
-import { Activity, Database, Shield, Network } from 'lucide-react';
+import { Activity, Database, Shield, Network, X, ChevronUp, ChevronDown, Volume2, VolumeX } from 'lucide-react';
 
 // ─── CountUp ────────────────────────────────────────────────────────────
 const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: number; duration?: number; start: boolean; suffix?: string }) => {
@@ -19,8 +19,179 @@ const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: num
   return <span>{Math.floor(count)}{suffix}</span>;
 });
 
+// ─── Reels Fullscreen Overlay ────────────────────────────────────────────
+const ReelsOverlay: React.FC<{
+  videos: { src: string }[];
+  startIndex: number;
+  onClose: () => void;
+}> = ({ videos, startIndex, onClose }) => {
+  const [currentIndex, setCurrentIndex] = useState(startIndex);
+  const [isMuted, setIsMuted] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const touchStartY = useRef(0);
+  const touchDeltaY = useRef(0);
+  const [swipeOffset, setSwipeOffset] = useState(0);
+
+  // Lock body scroll
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  // Keyboard nav
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowUp' && currentIndex > 0) goTo(currentIndex - 1);
+      if (e.key === 'ArrowDown' && currentIndex < videos.length - 1) goTo(currentIndex + 1);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [currentIndex, videos.length]);
+
+  // Sync mute state
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+      videoRef.current.volume = 0.5;
+    }
+  }, [isMuted, currentIndex]);
+
+  const goTo = (idx: number) => {
+    if (isTransitioning || idx < 0 || idx >= videos.length) return;
+    setIsTransitioning(true);
+    const direction = idx > currentIndex ? -1 : 1;
+    setSwipeOffset(direction * 100);
+    setTimeout(() => {
+      setCurrentIndex(idx);
+      setSwipeOffset(direction * -100);
+      setTimeout(() => {
+        setSwipeOffset(0);
+        setIsTransitioning(false);
+      }, 50);
+    }, 250);
+  };
+
+  // Touch handling for vertical swipe
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartY.current = e.touches[0].clientY;
+    touchDeltaY.current = 0;
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    touchDeltaY.current = e.touches[0].clientY - touchStartY.current;
+    // Show partial swipe feedback
+    const pct = (touchDeltaY.current / window.innerHeight) * 100;
+    setSwipeOffset(Math.max(-30, Math.min(30, pct)));
+  };
+
+  const onTouchEnd = () => {
+    const threshold = 60;
+    if (touchDeltaY.current < -threshold && currentIndex < videos.length - 1) {
+      goTo(currentIndex + 1);
+    } else if (touchDeltaY.current > threshold && currentIndex > 0) {
+      goTo(currentIndex - 1);
+    } else {
+      setSwipeOffset(0);
+    }
+    touchDeltaY.current = 0;
+  };
+
+  return (
+    <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
+      {/* Video */}
+      <div
+        className="absolute inset-0 flex items-center justify-center"
+        style={{
+          transform: `translateY(${swipeOffset}%)`,
+          transition: isTransitioning ? 'none' : swipeOffset === 0 ? 'transform 0.3s ease-out' : 'none',
+        }}
+      >
+        <video
+          ref={videoRef}
+          key={videos[currentIndex].src}
+          src={videos[currentIndex].src}
+          autoPlay
+          loop
+          muted={isMuted}
+          playsInline
+          className="w-full h-full object-contain"
+        />
+      </div>
+
+      {/* Top bar */}
+      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4 md:p-6 bg-gradient-to-b from-black/60 to-transparent">
+        <div className="flex items-center gap-3">
+          <span className="text-white/60 text-xs font-bold uppercase tracking-widest">
+            {currentIndex + 1} / {videos.length}
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setIsMuted(!isMuted)}
+            className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all"
+          >
+            {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+          </button>
+          <button
+            onClick={onClose}
+            className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all"
+          >
+            <X size={18} />
+          </button>
+        </div>
+      </div>
+
+      {/* Navigation arrows (desktop) */}
+      <div className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 flex-col gap-3 z-10">
+        <button
+          onClick={() => goTo(currentIndex - 1)}
+          disabled={currentIndex === 0}
+          className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+        >
+          <ChevronUp size={20} />
+        </button>
+        <button
+          onClick={() => goTo(currentIndex + 1)}
+          disabled={currentIndex === videos.length - 1}
+          className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+        >
+          <ChevronDown size={20} />
+        </button>
+      </div>
+
+      {/* Progress dots (right side) */}
+      <div className="absolute right-3 md:hidden top-1/2 -translate-y-1/2 flex flex-col gap-1.5 z-10">
+        {videos.map((_, i) => (
+          <div
+            key={i}
+            className={`w-1.5 rounded-full transition-all duration-300 ${
+              i === currentIndex ? 'h-6 bg-white' : 'h-1.5 bg-white/30'
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Bottom hint */}
+      <div className="absolute bottom-6 left-0 right-0 flex justify-center z-10 pointer-events-none">
+        <span className="text-white/30 text-[10px] font-bold uppercase tracking-widest">
+          Swipe om te navigeren
+        </span>
+      </div>
+    </div>
+  );
+};
+
 // ─── Infinite Loop Slider ───────────────────────────────────────────────
-const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }) => {
+const InfiniteVideoSlider: React.FC<{
+  videos: { src: string }[];
+  onVideoClick: (index: number) => void;
+}> = ({ videos, onVideoClick }) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>(0);
   const positionRef = useRef(0);
@@ -31,6 +202,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   const lastPointerX = useRef(0);
   const lastPointerTime = useRef(0);
   const velocityRef = useRef(0);
+  const hasDragged = useRef(false);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -50,38 +222,27 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   const setLength = videos.length;
   const totalSetWidth = totalItemWidth * setLength;
 
-  // Auto-scroll speed — consistent visual speed regardless of card size
   const autoSpeed = isMobile ? 0.5 : 0.8;
 
-  // We render 5 copies for seamless wrapping
   const allVideos = [...videos, ...videos, ...videos, ...videos, ...videos];
 
-  // Start in the middle
   useEffect(() => {
     positionRef.current = totalSetWidth * 2;
   }, [totalSetWidth]);
 
-  // Animation loop - smooth with translate3d
   const animate = useCallback(() => {
     if (!isDragging.current && !isPaused.current) {
       if (Math.abs(velocityRef.current) > 0.3) {
-        // Momentum from drag
         positionRef.current += velocityRef.current;
         velocityRef.current *= 0.96;
       } else {
-        // Auto scroll
         positionRef.current += autoSpeed;
         velocityRef.current = 0;
       }
     }
 
-    // Seamless wrap
-    if (positionRef.current >= totalSetWidth * 3) {
-      positionRef.current -= totalSetWidth;
-    }
-    if (positionRef.current <= totalSetWidth) {
-      positionRef.current += totalSetWidth;
-    }
+    if (positionRef.current >= totalSetWidth * 3) positionRef.current -= totalSetWidth;
+    if (positionRef.current <= totalSetWidth) positionRef.current += totalSetWidth;
 
     if (trackRef.current) {
       trackRef.current.style.transform = `translate3d(${-positionRef.current}px, 0, 0)`;
@@ -95,9 +256,9 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     return () => cancelAnimationFrame(animationRef.current);
   }, [animate]);
 
-  // Pointer events for drag/slide
   const onPointerDown = useCallback((e: React.PointerEvent) => {
     isDragging.current = true;
+    hasDragged.current = false;
     dragStartX.current = e.clientX;
     dragStartPos.current = positionRef.current;
     lastPointerX.current = e.clientX;
@@ -108,13 +269,14 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
 
   const onPointerMove = useCallback((e: React.PointerEvent) => {
     if (!isDragging.current) return;
+    const dx = e.clientX - dragStartX.current;
+    if (Math.abs(dx) > 5) hasDragged.current = true;
+
     const now = Date.now();
     const dt = now - lastPointerTime.current;
-    const dx = e.clientX - lastPointerX.current;
+    const moveDx = e.clientX - lastPointerX.current;
 
-    if (dt > 0) {
-      velocityRef.current = (-dx / dt) * 16; // normalize to ~60fps
-    }
+    if (dt > 0) velocityRef.current = (-moveDx / dt) * 16;
 
     lastPointerX.current = e.clientX;
     lastPointerTime.current = now;
@@ -127,7 +289,13 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     isDragging.current = false;
   }, []);
 
-  // Hover: pause slider + enable audio
+  const handleVideoClick = useCallback((globalIndex: number) => {
+    if (hasDragged.current) return;
+    // Map the global duplicated index back to the original video index
+    const originalIndex = globalIndex % setLength;
+    onVideoClick(originalIndex);
+  }, [setLength, onVideoClick]);
+
   const handleMouseEnter = useCallback((idx: number) => {
     isPaused.current = true;
     velocityRef.current = 0;
@@ -155,7 +323,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
-      style={{ touchAction: 'pan-y', overflow: 'clip', padding: `${isMobile ? 50 : 60}px 0` }}
+      style={{ touchAction: 'pan-y', overflow: 'clip', padding: `${isMobile ? 30 : 40}px 0` }}
     >
       <div
         ref={trackRef}
@@ -170,18 +338,19 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
               className="flex-shrink-0 transition-transform duration-300 ease-out origin-center"
               style={{
                 width: `${cardWidth}px`,
-                transform: isHovered ? 'scale(1.08)' : 'scale(1)',
+                transform: isHovered ? 'scale(1.05)' : 'scale(1)',
                 zIndex: isHovered ? 10 : 1,
               }}
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={() => handleMouseLeave(i)}
+              onClick={() => handleVideoClick(i)}
             >
-              <div className="w-full bg-black relative"
+              <div className="w-full bg-black relative group"
                 style={{
                   height: `${cardHeight}px`,
-                  borderRadius: isMobile ? '1rem' : '2.5rem',
+                  borderRadius: isMobile ? '1rem' : '1.5rem',
                   overflow: 'hidden',
-                  boxShadow: isHovered ? '0 0 40px rgba(37,211,102,0.4)' : 'none',
+                  boxShadow: isHovered ? '0 0 30px rgba(37,211,102,0.3)' : 'none',
                 }}
               >
                 <video
@@ -194,6 +363,10 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
                   preload="metadata"
                   className="w-full h-full object-cover pointer-events-none"
                 />
+                {/* Tap hint overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none flex items-end justify-center pb-4">
+                  <span className="text-white/70 text-[10px] font-bold uppercase tracking-widest">Tap voor fullscreen</span>
+                </div>
               </div>
             </div>
           );
@@ -207,6 +380,8 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
 const ShortContent: React.FC = () => {
   const base = import.meta.env.BASE_URL;
   const [statsVisible, setStatsVisible] = useState(false);
+  const [reelsOpen, setReelsOpen] = useState(false);
+  const [reelsStartIndex, setReelsStartIndex] = useState(0);
   const statsRef = useRef<HTMLDivElement>(null);
 
   const videos = [
@@ -226,6 +401,11 @@ const ShortContent: React.FC = () => {
     { src: "https://storage.googleapis.com/video-slider/jobdex_vid_oranjebloesem_personeel.mp4" },
   ];
 
+  const handleVideoClick = useCallback((index: number) => {
+    setReelsStartIndex(index);
+    setReelsOpen(true);
+  }, []);
+
   // Stats observer
   useEffect(() => {
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setStatsVisible(true); }, { threshold: 0.1 });
@@ -234,46 +414,55 @@ const ShortContent: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-24 md:py-36 bg-black overflow-hidden relative border-t border-white/5">
-      {/* Header */}
-      <div className="container mx-auto px-6 relative z-10 text-center mb-12 md:mb-20">
-        <div className="inline-flex items-center gap-4 px-8 py-3 rounded-full border border-white/10 bg-white/5 mb-10 backdrop-blur-xl">
-          <Network size={16} className="text-[#61F6FD]" />
-          <span className="text-white font-black uppercase tracking-[0.4em] text-[10px]">CONTENT_OS_SYNC // V3.2</span>
+    <>
+      <section className="py-16 md:py-28 bg-black overflow-hidden relative border-t border-white/5">
+        {/* Header */}
+        <div className="container mx-auto px-6 relative z-10 text-center mb-8 md:mb-14">
+          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/10 bg-white/5 mb-6 backdrop-blur-xl">
+            <Network size={14} className="text-white/40" />
+            <span className="text-white/50 font-bold uppercase tracking-[0.3em] text-[9px]">Short Form Content</span>
+          </div>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-none mb-4">
+            SHORT FORM CONTENT
+          </h2>
+          <p className="text-gray-500 text-sm md:text-base font-medium max-w-lg mx-auto">
+            Van virale reels tot branded content. Wij maken scroll-stopping video's die converteren.
+          </p>
         </div>
-        <h2 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase text-white tracking-tighter leading-none mb-10">
-          SHORT FORM <br/> <span className="text-[#F7E644]">&ldquo;</span>CONTENT<span className="text-[#F7E644]">&rdquo;</span>
-        </h2>
-      </div>
 
-      {/* Infinite Loop Video Slider */}
-      <div className="relative">
-        <InfiniteVideoSlider videos={videos} />
-      </div>
+        {/* Infinite Loop Video Slider */}
+        <div className="relative">
+          <InfiniteVideoSlider videos={videos} onVideoClick={handleVideoClick} />
+        </div>
 
-      {/* Stats */}
-      <div className="container mx-auto px-6 mt-24 md:mt-32 z-10" ref={statsRef}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 text-center">
-          {[
-            { label: "Followers", end: 2, icon: Activity, color: "#F7E644", id: "01" },
-            { label: "Likes", end: 500, icon: Database, color: "#61F6FD", id: "02" },
-            { label: "Reach", end: 800, icon: Shield, color: "#F62961", id: "03" }
-          ].map((stat, i) => (
-            <div key={i} className="relative p-8 md:p-10 rounded-[2.5rem] bg-[#050505] border border-white/10 transition-all duration-700 flex flex-col items-center group">
-              <div className="absolute top-0 right-0 w-40 h-40 blur-[100px] opacity-[0.03] group-hover:opacity-[0.08] transition-opacity" style={{ backgroundColor: stat.color }} />
-              <div className="flex items-center gap-3 mb-6 opacity-30 group-hover:opacity-50 transition-opacity">
-                <stat.icon size={16} style={{ color: stat.color }} />
-                <span className="text-[10px] font-bold tracking-[0.4em] text-white/60 uppercase">METRIC_OS_{stat.id}</span>
+        {/* Stats */}
+        <div className="container mx-auto px-6 mt-16 md:mt-24 z-10" ref={statsRef}>
+          <div className="grid grid-cols-3 gap-3 md:gap-8 text-center">
+            {[
+              { label: "Followers", end: 2, icon: Activity, color: "#F7E644", id: "01" },
+              { label: "Likes", end: 500, icon: Database, color: "#61F6FD", id: "02" },
+              { label: "Reach", end: 800, icon: Shield, color: "#F62961", id: "03" }
+            ].map((stat, i) => (
+              <div key={i} className="relative p-5 md:p-8 rounded-2xl md:rounded-3xl bg-[#080808] border border-white/8 transition-all duration-700 flex flex-col items-center group">
+                <h4 className="text-3xl md:text-5xl font-black mb-1 tracking-tighter" style={{ color: stat.color }}>
+                  <CountUp end={stat.end} start={statsVisible} suffix="m+" />
+                </h4>
+                <span className="block text-white/60 uppercase font-bold tracking-[0.2em] text-[10px] md:text-xs">{stat.label}</span>
               </div>
-              <h4 className="text-6xl md:text-7xl font-black mb-3 tracking-tighter" style={{ color: stat.color }}>
-                <CountUp end={stat.end} start={statsVisible} suffix="m+" />
-              </h4>
-              <span className="block text-white uppercase font-bold tracking-[0.3em] text-sm">{stat.label}</span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Reels Fullscreen Overlay */}
+      {reelsOpen && (
+        <ReelsOverlay
+          videos={videos}
+          startIndex={reelsStartIndex}
+          onClose={() => setReelsOpen(false)}
+        />
+      )}
+    </>
   );
 };
 

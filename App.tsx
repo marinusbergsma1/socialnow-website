@@ -21,6 +21,7 @@ import TeamPage from './components/TeamPage';
 import ContactPage from './components/ContactPage';
 import ProjectsPage from './components/ProjectsPage';
 import ServicesMarquee from './components/ServicesMarquee';
+import ServicesPage from './components/ServicesPage';
 import Hero from './components/Hero';
 import WebShowcase from './components/WebShowcase';
 
@@ -85,7 +86,8 @@ const App: React.FC = () => {
   const location = useLocation();
   const isProjectPage = location.pathname.startsWith('/project/');
   const isProjectsPage = location.pathname === '/projecten';
-  const isSubPage = isProjectPage || isProjectsPage;
+  const isServicesPage = location.pathname === '/diensten';
+  const isSubPage = isProjectPage || isProjectsPage || isServicesPage;
 
   useLayoutEffect(() => {
     const handleScroll = () => {
@@ -141,6 +143,12 @@ const App: React.FC = () => {
             path="/projecten"
             element={
               <ProjectsPage onOpenBooking={() => setIsBookingOpen(true)} />
+            }
+          />
+          <Route
+            path="/diensten"
+            element={
+              <ServicesPage onOpenBooking={() => setIsBookingOpen(true)} />
             }
           />
           <Route

@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { MessageCircle, X, Send, Smartphone, ArrowRight } from 'lucide-react';
-import { PixelGlobe } from './PixelGlobe';
 
 const WhatsAppPopup: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,8 +46,8 @@ const WhatsAppPopup: React.FC = () => {
           {/* Header — with PixelGlobe beeldmerk */}
           <div className="p-4 flex items-center justify-between border-b border-white/10">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden relative">
-                <PixelGlobe scaleMultiplier={0.45} type="all" opacity={1} glowEnabled={true} largeParticles={false} />
+              <div className="w-10 h-10 rounded-full overflow-hidden relative bg-black/50 flex items-center justify-center p-1.5">
+                <img src={`${import.meta.env.BASE_URL}beeldmerk-v6.png`} alt="SocialNow" className="w-full h-full object-contain" />
               </div>
               <div>
                 <h4 className="font-black text-white text-sm uppercase tracking-tight">SocialNow</h4>
@@ -77,7 +76,7 @@ const WhatsAppPopup: React.FC = () => {
               href="https://wa.me/31637404577"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 w-full bg-[#25D366] hover:bg-[#20bd5a] text-black font-black uppercase tracking-wider text-xs py-3.5 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(37,211,102,0.15)] hover:shadow-[0_0_30px_rgba(37,211,102,0.3)] group"
+              className="flex items-center justify-center gap-3 w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-black uppercase tracking-wider text-xs py-3.5 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(37,211,102,0.15)] hover:shadow-[0_0_30px_rgba(37,211,102,0.3)] group"
             >
               <Send size={14} className="group-hover:-rotate-12 transition-transform" />
               Start WhatsApp Chat
@@ -102,8 +101,8 @@ const WhatsAppPopup: React.FC = () => {
       >
         {showPromo ? (
           <div className="flex items-center gap-3 whitespace-nowrap animate-[fadeIn_0.3s_ease-out]">
-            <Smartphone size={24} className="shrink-0 text-black" />
-            <span className="text-xs font-bold text-left leading-tight text-black">
+            <Smartphone size={24} className="shrink-0 text-white" />
+            <span className="text-xs font-bold text-left leading-tight text-white">
               Let op: Boekingen voor Q1 2026<br/>stromen momenteel snel vol!
             </span>
           </div>
