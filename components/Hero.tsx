@@ -4,7 +4,6 @@ import Button from './Button';
 import { Star } from 'lucide-react';
 import ScrollTypewriter from './ScrollTypewriter';
 import BinaryTagline from './BinaryTagline';
-import { PixelGlobe } from './PixelGlobe';
 
 interface HeroProps {
   startAnimation: boolean;
@@ -72,20 +71,6 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
 
   return (
     <div className="relative min-h-[100svh] flex flex-col justify-center select-none overflow-hidden bg-transparent">
-      {/* PixelGlobe Background - beeldmerk */}
-      {startAnimation && (
-        <div className="absolute inset-0 z-[1] pointer-events-none opacity-30">
-          <PixelGlobe
-            scaleMultiplier={0.5}
-            type="all"
-            opacity={0.6}
-            entranceAnimation={true}
-            glowEnabled={true}
-            largeParticles={true}
-          />
-        </div>
-      )}
-
       {/* Background Decor */}
       <div
         className="absolute inset-0 z-0 opacity-[0.07] pointer-events-none"
