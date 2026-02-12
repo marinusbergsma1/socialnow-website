@@ -34,16 +34,24 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Card dimensions
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const cardWidth = isMobile ? 200 : 280;
-  const gap = isMobile ? 12 : 20;
+  // Responsive card dimensions
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth < 768);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  const cardWidth = isMobile ? 160 : 280;
+  const cardHeight = isMobile ? 320 : 530;
+  const gap = isMobile ? 10 : 20;
   const totalItemWidth = cardWidth + gap;
   const setLength = videos.length;
   const totalSetWidth = totalItemWidth * setLength;
 
-  // Auto-scroll speed (pixels per frame at 60fps)
-  const autoSpeed = 0.8;
+  // Auto-scroll speed — consistent visual speed regardless of card size
+  const autoSpeed = isMobile ? 0.5 : 0.8;
 
   // We render 5 copies for seamless wrapping
   const allVideos = [...videos, ...videos, ...videos, ...videos, ...videos];
@@ -80,7 +88,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     }
 
     animationRef.current = requestAnimationFrame(animate);
-  }, [totalSetWidth]);
+  }, [totalSetWidth, autoSpeed]);
 
   useEffect(() => {
     animationRef.current = requestAnimationFrame(animate);
@@ -159,15 +167,20 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
           return (
             <div
               key={i}
-              className="flex-shrink-0"
-              style={{ width: `${cardWidth}px` }}
+              className="flex-shrink-0 transition-transform duration-300 ease-out origin-center"
+              style={{
+                width: `${cardWidth}px`,
+                transform: isHovered ? 'scale(1.08)' : 'scale(1)',
+                zIndex: isHovered ? 10 : 1,
+              }}
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={() => handleMouseLeave(i)}
             >
-              <div className="w-full h-[380px] md:h-[530px] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-black relative border-2 transition-colors duration-300"
+              <div className="w-full rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden bg-black relative border-2 transition-all duration-300"
                 style={{
+                  height: `${cardHeight}px`,
                   borderColor: isHovered ? '#25D366' : 'rgba(255,255,255,0.1)',
-                  boxShadow: isHovered ? '0 0 30px rgba(37,211,102,0.3), inset 0 0 30px rgba(37,211,102,0.05)' : 'none',
+                  boxShadow: isHovered ? '0 0 40px rgba(37,211,102,0.4), inset 0 0 30px rgba(37,211,102,0.05)' : 'none',
                 }}
               >
                 <video
