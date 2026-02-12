@@ -155,7 +155,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
-      style={{ touchAction: 'pan-y', overflow: 'clip', padding: `${isMobile ? 20 : 30}px 0` }}
+      style={{ touchAction: 'pan-y', overflow: 'clip', padding: `${isMobile ? 50 : 60}px 0` }}
     >
       <div
         ref={trackRef}

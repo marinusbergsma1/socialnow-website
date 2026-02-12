@@ -12,11 +12,16 @@ const WebShowcase: React.FC = () => {
     webShowcaseProjects.map(() => false)
   );
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isMobileReels, setIsMobileReels] = useState(false);
   const [scale, setScale] = useState(0.6);
   const [isSticky, setIsSticky] = useState(false);
+  const [mobileScale, setMobileScale] = useState(0.4);
+  const [smallMobileScale, setSmallMobileScale] = useState(0.56);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const thumbTrackRef = useRef<HTMLDivElement>(null);
+  const mobileContainerRef = useRef<HTMLDivElement>(null);
 
   const activeProject = webShowcaseProjects[activeIndex];
 
@@ -29,9 +34,31 @@ const WebShowcase: React.FC = () => {
     });
   }, []);
 
-  // Navigation
-  const goNext = () => setActiveIndex((prev) => (prev + 1) % webShowcaseProjects.length);
-  const goPrev = () => setActiveIndex((prev) => (prev - 1 + webShowcaseProjects.length) % webShowcaseProjects.length);
+  // Navigation with synchronized transition
+  const goNext = useCallback(() => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveIndex((prev) => (prev + 1) % webShowcaseProjects.length);
+      setTimeout(() => setIsTransitioning(false), 50);
+    }, 200);
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveIndex((prev) => (prev - 1 + webShowcaseProjects.length) % webShowcaseProjects.length);
+      setTimeout(() => setIsTransitioning(false), 50);
+    }, 200);
+  }, []);
+
+  const goToIndex = useCallback((idx: number) => {
+    if (idx === activeIndex) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveIndex(idx);
+      setTimeout(() => setIsTransitioning(false), 50);
+    }, 200);
+  }, [activeIndex]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -42,7 +69,32 @@ const WebShowcase: React.FC = () => {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isFullscreen]);
+  }, [isFullscreen, goNext, goPrev]);
+
+  // Calculate mobile iframe scale based on container size (desktop sidebar)
+  useEffect(() => {
+    if (!mobileContainerRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const containerWidth = entry.contentRect.width;
+        const newScale = containerWidth / 375;
+        setMobileScale(newScale);
+      }
+    });
+    observer.observe(mobileContainerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // Calculate small-mobile scale (for < lg phone preview)
+  useEffect(() => {
+    const calc = () => {
+      const containerW = Math.min(220, window.innerWidth * 0.55);
+      setSmallMobileScale(containerW / 375);
+    };
+    calc();
+    window.addEventListener('resize', calc);
+    return () => window.removeEventListener('resize', calc);
+  }, []);
 
   // Scroll-driven grow animation
   useEffect(() => {
@@ -51,9 +103,6 @@ const WebShowcase: React.FC = () => {
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Calculate how far the section is scrolled into view
-      // Start growing when section top enters bottom 80% of viewport
-      // Fully grown when section top hits 20% from top
       const enterPoint = windowHeight * 0.8;
       const fullPoint = windowHeight * 0.15;
 
@@ -65,7 +114,7 @@ const WebShowcase: React.FC = () => {
         setIsSticky(true);
       } else {
         const progress = 1 - (rect.top - fullPoint) / (enterPoint - fullPoint);
-        const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
         setScale(0.55 + eased * 0.45);
         setIsSticky(false);
       }
@@ -98,15 +147,15 @@ const WebShowcase: React.FC = () => {
   // Toggle fullscreen
   const toggleFullscreen = () => setIsFullscreen(prev => !prev);
 
-  // Prevent body scroll when fullscreen
+  // Prevent body scroll when fullscreen or reels mode
   useEffect(() => {
-    if (isFullscreen) {
+    if (isFullscreen || isMobileReels) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
     return () => { document.body.style.overflow = ''; };
-  }, [isFullscreen]);
+  }, [isFullscreen, isMobileReels]);
 
   // Touch swipe support for mobile
   const touchStart = useRef<number | null>(null);
@@ -135,7 +184,7 @@ const WebShowcase: React.FC = () => {
       return (
         <div
           key={`desk-${project.id}`}
-          className={`absolute inset-0 transition-opacity duration-500 flex items-center justify-center ${idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+          className={`absolute inset-0 transition-opacity duration-400 flex items-center justify-center ${idx === activeIndex && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
           style={{ background: 'radial-gradient(ellipse at center, rgba(37,211,102,0.08) 0%, rgba(0,0,0,0.95) 70%)' }}
           ref={() => handleIframeLoad(idx)}
         >
@@ -161,52 +210,22 @@ const WebShowcase: React.FC = () => {
     }
 
     return (
-      <iframe
+      <div
         key={`desk-${project.id}`}
-        src={project.url}
-        title={`${project.title} - Desktop Preview`}
-        className={`absolute inset-0 w-full h-full border-0 transition-opacity duration-500 ${idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
-        style={{ colorScheme: 'normal' }}
-        onLoad={() => handleIframeLoad(idx)}
-        sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
-        loading={idx === 0 ? 'eager' : 'lazy'}
-      />
-    );
-  };
-
-  // Mobile iframe render
-  const renderMobilePreview = (project: typeof activeProject, idx: number) => {
-    if (shouldUseUnlock(project)) {
-      return (
-        <div
-          key={`mob-${project.id}`}
-          className={`absolute inset-0 transition-opacity duration-500 flex items-center justify-center ${idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
-          style={{ background: 'radial-gradient(ellipse at center, rgba(37,211,102,0.06) 0%, rgba(0,0,0,0.95) 70%)' }}
-        >
-          <div className="flex flex-col items-center gap-3 text-center px-4">
-            <span className="text-lg">🔒</span>
-            <p className="text-white/40 text-[9px] font-bold uppercase tracking-widest">Inception</p>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <iframe
-        key={`mob-${project.id}`}
-        src={project.url}
-        title={`${project.title} - Mobile Preview`}
-        className={`absolute inset-0 border-0 transition-opacity duration-500 ${idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
-        style={{
-          colorScheme: 'normal',
-          width: '375px',
-          height: '812px',
-          transform: 'scale(var(--mobile-scale))',
-          transformOrigin: 'top left',
-        }}
-        sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
-        loading="lazy"
-      />
+        className={`absolute inset-0 transition-opacity duration-400 ${idx === activeIndex && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+      >
+        <iframe
+          src={project.url}
+          title={`${project.title} - Desktop Preview`}
+          className="w-full h-full border-0"
+          style={{ colorScheme: 'normal' }}
+          onLoad={() => handleIframeLoad(idx)}
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+          loading={idx === 0 ? 'eager' : 'lazy'}
+        />
+        {/* Scroll-through overlay — prevents iframe from capturing scroll */}
+        <div className="absolute inset-0 z-20" />
+      </div>
     );
   };
 
@@ -273,6 +292,30 @@ const WebShowcase: React.FC = () => {
                   <span className="text-[#F7E644] ml-2 md:ml-6">&rdquo;</span>
                 </span>
               </h2>
+
+              {/* USP tags */}
+              <div className="flex flex-wrap justify-center gap-2 md:gap-3 mt-8">
+                {[
+                  { label: 'INCL. CMS', color: '#61F6FD' },
+                  { label: 'BACK-END', color: '#F7E644' },
+                  { label: 'ANALYTICS', color: '#25D366' },
+                  { label: 'AI CHATBOT', color: '#F62961' },
+                  { label: 'SEO', color: '#61F6FD' },
+                  { label: 'RESPONSIVE', color: '#F7E644' },
+                ].map((usp) => (
+                  <span
+                    key={usp.label}
+                    className="px-3 md:px-4 py-1.5 rounded-full text-[8px] md:text-[9px] font-black uppercase tracking-[0.25em]"
+                    style={{
+                      color: usp.color,
+                      border: `1px solid ${usp.color}20`,
+                      background: `${usp.color}08`,
+                    }}
+                  >
+                    {usp.label}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -303,14 +346,14 @@ const WebShowcase: React.FC = () => {
                 }}
               >
                 {/* Project info left */}
-                <div className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse"></div>
-                  <span className="text-white font-black uppercase tracking-tight text-sm md:text-lg">{activeProject.title}</span>
-                  <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#61F6FD] hidden sm:inline">{activeProject.category}</span>
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse flex-shrink-0"></div>
+                  <span className="text-white font-black uppercase tracking-tight text-sm md:text-lg truncate">{activeProject.title}</span>
+                  <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#61F6FD] hidden sm:inline flex-shrink-0">{activeProject.category}</span>
                 </div>
 
                 {/* Actions right */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-shrink-0">
                   <button
                     onClick={toggleFullscreen}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60 text-[9px] font-bold uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all"
@@ -331,13 +374,116 @@ const WebShowcase: React.FC = () => {
                 </div>
               </div>
 
-              {/* Preview area: Desktop + Mobile side by side with arrows */}
-              <div className="flex items-center gap-2 md:gap-4">
+              {/* ═══ MOBILE: Phone-style preview (< lg) ═══ */}
+              <div className="flex lg:hidden items-center gap-2 justify-center">
+                {/* Left arrow */}
+                <button
+                  onClick={goPrev}
+                  className="w-8 h-8 rounded-full border border-white/[0.06] flex items-center justify-center text-white/20 hover:text-white transition-all flex-shrink-0"
+                >
+                  <ChevronLeft size={16} strokeWidth={1.5} />
+                </button>
+
+                {/* Mobile phone frame — tap to open Reels mode */}
+                <button
+                  className="flex-shrink-0 cursor-pointer active:scale-95 transition-transform"
+                  style={{ width: 'min(220px, 55vw)' }}
+                  onClick={() => setIsMobileReels(true)}
+                >
+                  <div
+                    className="rounded-[1.5rem] overflow-hidden relative"
+                    style={{
+                      aspectRatio: '9 / 19.5',
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      backdropFilter: 'blur(40px) saturate(180%)',
+                      WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+                    }}
+                  >
+                    {/* Top edge highlight */}
+                    <div className="absolute top-0 left-[15%] right-[15%] h-[1px] pointer-events-none z-40"
+                      style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)' }}
+                    />
+
+                    {/* Loading spinner */}
+                    {!iframeLoaded[activeIndex] && (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center z-20 bg-[#080808]">
+                        <div className="w-6 h-6 border-2 border-white/10 border-t-[#61F6FD] rounded-full animate-spin mb-2"></div>
+                        <span className="text-white/20 text-[8px] font-bold uppercase tracking-[0.3em]">Laden...</span>
+                      </div>
+                    )}
+
+                    {/* Mobile iframes */}
+                    {webShowcaseProjects.map((project, idx) => {
+                      if (shouldUseUnlock(project)) {
+                        return (
+                          <div
+                            key={`smob-${project.id}`}
+                            className={`absolute inset-0 transition-opacity duration-400 flex items-center justify-center ${idx === activeIndex && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                            style={{ background: 'radial-gradient(ellipse at center, rgba(37,211,102,0.06) 0%, rgba(0,0,0,0.95) 70%)' }}
+                            ref={() => handleIframeLoad(idx)}
+                          >
+                            <div className="flex flex-col items-center gap-3 text-center px-4">
+                              <span className="text-lg">🔒</span>
+                              <p className="text-white/40 text-[8px] font-bold uppercase tracking-widest">Inception</p>
+                            </div>
+                          </div>
+                        );
+                      }
+                      return (
+                        <div
+                          key={`smob-wrap-${project.id}`}
+                          className={`absolute inset-0 overflow-hidden transition-opacity duration-400 ${idx === activeIndex && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                        >
+                          <iframe
+                            src={project.url}
+                            title={`${project.title} - Mobile`}
+                            className="border-0 origin-top-left absolute top-0 left-0"
+                            style={{
+                              width: '375px',
+                              height: '812px',
+                              transform: `scale(${smallMobileScale})`,
+                              colorScheme: 'normal',
+                            }}
+                            onLoad={() => handleIframeLoad(idx)}
+                            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+                            loading={idx === 0 ? 'eager' : 'lazy'}
+                          />
+                          {/* Scroll-through overlay */}
+                          <div className="absolute inset-0 z-20" />
+                        </div>
+                      );
+                    })}
+
+                    {/* Phone notch */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[35%] h-[2.5%] bg-black rounded-b-lg z-30" />
+                    {/* Bottom home indicator */}
+                    <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-[30%] h-[0.5%] bg-white/20 rounded-full z-30" />
+
+                    {/* Tap to expand hint */}
+                    <div className="absolute inset-0 z-40 flex items-end justify-center pb-[12%] opacity-0 hover:opacity-100 transition-opacity">
+                      <span className="text-[8px] font-bold uppercase tracking-widest text-white/50 bg-black/60 px-3 py-1 rounded-full backdrop-blur-sm">Tap to expand</span>
+                    </div>
+                  </div>
+                </button>
+
+                {/* Right arrow */}
+                <button
+                  onClick={goNext}
+                  className="w-8 h-8 rounded-full border border-white/[0.06] flex items-center justify-center text-white/20 hover:text-white transition-all flex-shrink-0"
+                >
+                  <ChevronRight size={16} strokeWidth={1.5} />
+                </button>
+              </div>
+
+              {/* ═══ DESKTOP: 16:9 + Mobile side-by-side (lg+) ═══ */}
+              <div className="hidden lg:flex items-stretch gap-3 md:gap-5">
 
                 {/* Left arrow — minimal */}
                 <button
                   onClick={goPrev}
-                  className="hidden md:flex w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-white/[0.06] items-center justify-center text-white/20 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all flex-shrink-0"
+                  className="w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-white/[0.06] flex items-center justify-center text-white/20 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all flex-shrink-0 self-center"
                 >
                   <ChevronLeft size={18} strokeWidth={1.5} />
                 </button>
@@ -345,7 +491,7 @@ const WebShowcase: React.FC = () => {
                 {/* Desktop Preview — 16:9 — Glassmorphism */}
                 <div className="relative flex-1 min-w-0">
                   <div
-                    className="rounded-xl md:rounded-2xl overflow-hidden relative"
+                    className="rounded-2xl overflow-hidden relative"
                     style={{
                       aspectRatio: '16 / 9',
                       background: 'rgba(255, 255, 255, 0.03)',
@@ -375,12 +521,12 @@ const WebShowcase: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Mobile Preview — iPhone ratio — Glassmorphism */}
-                <div className="hidden lg:block flex-shrink-0" style={{ width: 'clamp(140px, 12vw, 200px)' }}>
+                {/* Desktop: Mobile Preview — iPhone ratio — Glassmorphism — same height as desktop */}
+                <div className="flex flex-shrink-0 items-stretch" style={{ width: 'clamp(120px, 11vw, 180px)' }}>
                   <div
-                    className="rounded-[1.5rem] overflow-hidden relative"
+                    ref={mobileContainerRef}
+                    className="rounded-[1.2rem] xl:rounded-[1.5rem] overflow-hidden relative w-full"
                     style={{
-                      aspectRatio: '9 / 19.5',
                       background: 'rgba(255, 255, 255, 0.03)',
                       backdropFilter: 'blur(40px) saturate(180%)',
                       WebkitBackdropFilter: 'blur(40px) saturate(180%)',
@@ -392,13 +538,13 @@ const WebShowcase: React.FC = () => {
                     <div className="absolute top-0 left-[15%] right-[15%] h-[1px] pointer-events-none z-40"
                       style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)' }}
                     />
-                    {/* Mobile iframes — scaled down to fit */}
+                    {/* Mobile iframes — dynamically scaled */}
                     {webShowcaseProjects.map((project, idx) => {
                       if (shouldUseUnlock(project)) {
                         return (
                           <div
                             key={`mob-${project.id}`}
-                            className={`absolute inset-0 transition-opacity duration-500 flex items-center justify-center ${idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                            className={`absolute inset-0 transition-opacity duration-400 flex items-center justify-center ${idx === activeIndex && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
                             style={{ background: 'radial-gradient(ellipse at center, rgba(37,211,102,0.06) 0%, rgba(0,0,0,0.95) 70%)' }}
                           >
                             <div className="flex flex-col items-center gap-2 text-center px-2">
@@ -411,7 +557,7 @@ const WebShowcase: React.FC = () => {
                       return (
                         <div
                           key={`mob-wrap-${project.id}`}
-                          className={`absolute inset-0 overflow-hidden transition-opacity duration-500 ${idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                          className={`absolute inset-0 overflow-hidden transition-opacity duration-400 ${idx === activeIndex && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
                         >
                           <iframe
                             src={project.url}
@@ -420,7 +566,7 @@ const WebShowcase: React.FC = () => {
                             style={{
                               width: '375px',
                               height: '812px',
-                              transform: `scale(var(--mob-scale, 0.35))`,
+                              transform: `scale(${mobileScale})`,
                               colorScheme: 'normal',
                             }}
                             sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
@@ -431,14 +577,17 @@ const WebShowcase: React.FC = () => {
                     })}
 
                     {/* Phone notch */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[40%] h-[3%] bg-[#080808] rounded-b-lg z-30" />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[35%] h-[2.5%] bg-black rounded-b-lg z-30" />
+
+                    {/* Bottom home indicator */}
+                    <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-[30%] h-[0.5%] bg-white/20 rounded-full z-30" />
                   </div>
                 </div>
 
                 {/* Right arrow — minimal */}
                 <button
                   onClick={goNext}
-                  className="hidden md:flex w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-white/[0.06] items-center justify-center text-white/20 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all flex-shrink-0"
+                  className="w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-white/[0.06] flex items-center justify-center text-white/20 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all flex-shrink-0 self-center"
                 >
                   <ChevronRight size={18} strokeWidth={1.5} />
                 </button>
@@ -462,7 +611,7 @@ const WebShowcase: React.FC = () => {
                   {webShowcaseProjects.map((project, idx) => (
                     <button
                       key={project.id}
-                      onClick={() => setActiveIndex(idx)}
+                      onClick={() => goToIndex(idx)}
                       className={`relative rounded-md overflow-hidden transition-all duration-300 flex-shrink-0 ${
                         idx === activeIndex
                           ? 'ring-1 ring-[#61F6FD]/60 shadow-[0_0_10px_rgba(97,246,253,0.2)] scale-110 opacity-100'
@@ -508,6 +657,117 @@ const WebShowcase: React.FC = () => {
         {/* Spacer for scroll distance after sticky releases */}
         <div style={{ height: '60vh' }} />
       </section>
+
+      {/* ═══ REELS-STYLE Mobile Fullscreen ═══ */}
+      {isMobileReels && (
+        <div
+          className="fixed inset-0 z-[9999] bg-black flex flex-col"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={(e) => {
+            if (touchStart.current === null) return;
+            const diff = touchStart.current - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) {
+              if (diff > 0) goNext();
+              else goPrev();
+            }
+            touchStart.current = null;
+          }}
+        >
+          {/* Full-screen mobile iframe */}
+          <div className="flex-1 relative overflow-hidden">
+            {webShowcaseProjects.map((project, idx) => {
+              if (shouldUseUnlock(project)) {
+                return (
+                  <div
+                    key={`reels-${project.id}`}
+                    className={`absolute inset-0 transition-opacity duration-300 flex items-center justify-center ${idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                    style={{ background: 'radial-gradient(ellipse at center, rgba(37,211,102,0.08) 0%, rgba(0,0,0,0.95) 70%)' }}
+                  >
+                    <div className="flex flex-col items-center gap-4 text-center px-8">
+                      <span className="text-2xl">🔒</span>
+                      <h3 className="text-xl font-black uppercase text-white tracking-tighter">INCEPTION</h3>
+                      <a
+                        href="https://wa.me/31637404577"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#25D366] text-black font-black uppercase tracking-wider text-[10px]"
+                      >
+                        UNLOCK <ExternalLink size={12} />
+                      </a>
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <div
+                  key={`reels-wrap-${project.id}`}
+                  className={`absolute inset-0 overflow-hidden transition-opacity duration-300 ${idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                >
+                  <iframe
+                    src={project.url}
+                    title={`${project.title} - Reels`}
+                    className="border-0 origin-top-left absolute top-0 left-0"
+                    style={{
+                      width: '375px',
+                      height: '812px',
+                      transform: `scale(${window.innerWidth / 375})`,
+                      colorScheme: 'normal',
+                    }}
+                    sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Bottom bar — project info + navigation */}
+          <div
+            className="flex items-center justify-between px-4 py-3 safe-area-pb"
+            style={{
+              background: 'rgba(0, 0, 0, 0.8)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              paddingBottom: 'max(12px, env(safe-area-inset-bottom))',
+            }}
+          >
+            {/* Back button */}
+            <button
+              onClick={() => setIsMobileReels(false)}
+              className="flex items-center gap-2 px-3 py-2 rounded-full border border-white/10 text-white text-[10px] font-bold uppercase tracking-widest"
+            >
+              <ChevronLeft size={14} />
+              Terug
+            </button>
+
+            {/* Project name */}
+            <div className="flex-1 text-center px-2">
+              <span className="text-white font-black uppercase tracking-tight text-xs truncate block">{activeProject.title}</span>
+              <span className="text-white/30 text-[8px] font-bold uppercase tracking-[0.3em]">
+                {activeIndex + 1}/{webShowcaseProjects.length}
+              </span>
+            </div>
+
+            {/* External link */}
+            <a
+              href={activeProject.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#25D366] text-black text-[10px] font-bold uppercase tracking-wider"
+            >
+              <Globe size={12} />
+              Live
+            </a>
+          </div>
+
+          {/* Swipe hint dots */}
+          <div className="absolute top-1/2 -translate-y-1/2 left-2 opacity-30">
+            <ChevronLeft size={20} className="text-white" />
+          </div>
+          <div className="absolute top-1/2 -translate-y-1/2 right-2 opacity-30">
+            <ChevronRight size={20} className="text-white" />
+          </div>
+        </div>
+      )}
 
       {/* Fullscreen overlay */}
       {isFullscreen && (
@@ -561,22 +821,6 @@ const WebShowcase: React.FC = () => {
           </div>
         </div>
       )}
-
-      {/* CSS for mobile iframe scaling */}
-      <style>{`
-        :root {
-          --mob-scale: 0.35;
-        }
-        @media (min-width: 1024px) and (max-width: 1279px) {
-          :root { --mob-scale: 0.37; }
-        }
-        @media (min-width: 1280px) and (max-width: 1535px) {
-          :root { --mob-scale: 0.42; }
-        }
-        @media (min-width: 1536px) {
-          :root { --mob-scale: 0.48; }
-        }
-      `}</style>
     </>
   );
 };
