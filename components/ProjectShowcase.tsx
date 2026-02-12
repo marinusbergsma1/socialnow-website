@@ -15,12 +15,20 @@ const LazyVideo: React.FC<{
   src: string;
   isHovered: boolean;
   className?: string;
-}> = ({ src, isHovered, className = "" }) => {
-  const { containerRef, videoRef, hasLoadedOnce } = useVideoIntersection(src, {
+  restartOnView?: boolean;
+}> = ({ src, isHovered, className = "", restartOnView = false }) => {
+  const { containerRef, videoRef, hasLoadedOnce, isVisible } = useVideoIntersection(src, {
     rootMargin: '300px',
     threshold: 0.1,
     autoPlay: true,
   });
+
+  // Restart video from beginning when it becomes visible
+  useEffect(() => {
+    if (restartOnView && isVisible && videoRef.current) {
+      videoRef.current.currentTime = 0;
+    }
+  }, [isVisible, restartOnView, videoRef]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -185,6 +193,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
                <LazyVideo
                  src={`${import.meta.env.BASE_URL}videos/nextgen-webdesign.mp4`}
                  isHovered={isWebdesignHovered}
+                 restartOnView={true}
                />
                <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 p-2 md:p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/20 transition-all duration-500 transform z-20 ${isWebdesignHovered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-4'}`}>
                 <Volume2 className="w-4 h-4 md:w-6 md:h-6 text-[#61F6FD]" />
