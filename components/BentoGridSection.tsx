@@ -192,7 +192,14 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
           </div>
 
           <div className="mb-32 md:mb-36 flex justify-center px-2">
-              <div className="w-full max-w-7xl bg-white/[0.005] border border-white/10 rounded-[4rem] p-10 md:p-16 relative overflow-hidden group shadow-3xl backdrop-blur-3xl">
+              <div className="w-full max-w-7xl rounded-[4rem] p-10 md:p-16 relative overflow-hidden group"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.02)',
+                  backdropFilter: 'blur(40px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+                  border: '1px solid rgba(255, 255, 255, 0.06)',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04)',
+                }}>
                   <div className="relative z-10">
                       <div className="text-center mb-20 md:mb-24">
                           <h4 className="text-[#61F6FD] font-black uppercase tracking-[0.8em] text-[11px] mb-6">INTERNAL WORKFLOW // PROTOCOL V.2</h4>
@@ -275,7 +282,14 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
           </div>
 
           <div className="mb-32 md:mb-36 flex justify-center px-4 overflow-visible">
-              <div className="w-full max-w-6xl bg-white/[0.01] border border-white/10 rounded-[4rem] p-10 md:p-20 relative overflow-visible group transition-all duration-1000 shadow-3xl backdrop-blur-xl">
+              <div className="w-full max-w-6xl rounded-[4rem] p-10 md:p-20 relative overflow-visible group transition-all duration-1000"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.02)',
+                  backdropFilter: 'blur(40px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+                  border: '1px solid rgba(255, 255, 255, 0.06)',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04)',
+                }}>
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#61F6FD]/5 via-transparent to-[#F62961]/5 opacity-30 rounded-[5rem]"></div>
                 
                 {/* PixelGlobe Beeldmerk */}

@@ -118,8 +118,15 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
           })}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-16 md:mt-24 flex flex-col md:flex-row items-center justify-between gap-8 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] bg-white/[0.02] border border-white/10">
+        {/* Bottom CTA — Glassmorphism */}
+        <div className="mt-16 md:mt-24 flex flex-col md:flex-row items-center justify-between gap-8 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem]"
+          style={{
+            background: 'rgba(255, 255, 255, 0.03)',
+            backdropFilter: 'blur(40px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+          }}>
           <div className="text-center md:text-left">
             <h3 className="text-xl md:text-2xl font-black uppercase text-white tracking-tight mb-2">Nog vragen?</h3>
             <p className="text-gray-500 text-sm font-bold">We reageren binnen 24 uur.</p>

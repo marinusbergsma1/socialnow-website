@@ -150,12 +150,12 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
 
   return (
     <div
-      className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing select-none"
+      className="relative w-full cursor-grab active:cursor-grabbing select-none"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
-      style={{ touchAction: 'pan-y' }}
+      style={{ touchAction: 'pan-y', overflow: 'clip', padding: `${isMobile ? 20 : 30}px 0` }}
     >
       <div
         ref={trackRef}
@@ -176,11 +176,12 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={() => handleMouseLeave(i)}
             >
-              <div className="w-full overflow-hidden bg-black relative"
+              <div className="w-full bg-black relative"
                 style={{
                   height: `${cardHeight}px`,
                   borderRadius: isMobile ? '1rem' : '2.5rem',
-                  boxShadow: isHovered && !isMobile ? '0 0 40px rgba(37,211,102,0.4)' : 'none',
+                  overflow: 'hidden',
+                  boxShadow: isHovered ? '0 0 40px rgba(37,211,102,0.4)' : 'none',
                 }}
               >
                 <video
@@ -192,7 +193,6 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
                   playsInline
                   preload="metadata"
                   className="w-full h-full object-cover pointer-events-none"
-                  style={{ borderRadius: isMobile ? '1rem' : '2.5rem' }}
                 />
               </div>
             </div>
