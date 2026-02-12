@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Send, Smartphone } from 'lucide-react';
+import { MessageCircle, X, Send, Smartphone, ArrowRight } from 'lucide-react';
+import { PixelGlobe } from './PixelGlobe';
 
 const WhatsAppPopup: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,17 +9,10 @@ const WhatsAppPopup: React.FC = () => {
   const [showPromo, setShowPromo] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Track scroll position to only animate during "Title and Header" (Top of page)
   useEffect(() => {
     const handleScroll = () => {
-      // Check if we are roughly within the first viewport height (Hero/Header area)
-      if (window.scrollY < window.innerHeight * 0.8) {
-        setIsAtTop(true);
-      } else {
-        setIsAtTop(false);
-      }
+      setIsAtTop(window.scrollY < window.innerHeight * 0.8);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -26,21 +20,15 @@ const WhatsAppPopup: React.FC = () => {
   const handleMouseEnter = () => {
     setShowPromo(true);
     if (timerRef.current) clearTimeout(timerRef.current);
-    
-    // Auto revert after 3 seconds as requested
     timerRef.current = setTimeout(() => {
       setShowPromo(false);
     }, 3000);
   };
 
-  const handleMouseLeave = () => {
-    // We let the timer finish to fulfill the "animeert na 3 seconden weer terug" requirement
-    // even if the mouse leaves early, providing a consistent experience.
-  };
+  const handleMouseLeave = () => {};
 
   return (
     <div className="fixed bottom-6 right-6 z-[90] flex flex-col items-end">
-      {/* Custom Keyframes for the "Occasional Glow" effect */}
       <style>{`
         @keyframes ripple-glow {
           0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); transform: scale(1); }
@@ -49,66 +37,63 @@ const WhatsAppPopup: React.FC = () => {
         }
         .animate-ripple {
           animation: ripple-glow 3s infinite;
-          animation-delay: 2s; /* Wait 2s between pulses */
+          animation-delay: 2s;
         }
       `}</style>
 
       {/* Popup Window */}
       {isOpen && (
-        <div className="mb-4 w-72 md:w-80 bg-[#050505] rounded-2xl shadow-2xl overflow-hidden animate-[fadeInUp_0.3s_ease-out] border border-white/10 backdrop-blur-xl">
-          {/* Header */}
-          <div className="bg-black/80 p-4 flex items-center justify-between border-b border-white/10 h-24">
-            <div className="flex items-center gap-4">
-              {/* Logo Increased Size from w-20 to w-24 */}
-              <div className="w-24 h-24 bg-black rounded-full flex items-center justify-center overflow-hidden border border-[#25D366]/30 shadow-lg -ml-4">
-                 <img 
-                   src="https://i.ibb.co/RkXjxKLb/Social-Now-Logo-Breed-Wit.webp" 
-                   alt="SocialNow" 
-                   className="w-full h-full object-contain scale-110" 
-                 />
+        <div className="mb-4 w-72 md:w-80 bg-[#0a0a0a] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden animate-[fadeInUp_0.3s_ease-out] border border-white/10">
+          {/* Header — with PixelGlobe beeldmerk */}
+          <div className="p-4 flex items-center justify-between border-b border-white/10">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full overflow-hidden relative">
+                <PixelGlobe scaleMultiplier={0.45} type="all" opacity={1} glowEnabled={true} largeParticles={false} />
               </div>
               <div>
-                <h4 className="font-bold text-white text-sm">SocialNow Support</h4>
-                <p className="text-[#25D366] text-xs font-medium">Online</p>
+                <h4 className="font-black text-white text-sm uppercase tracking-tight">SocialNow</h4>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse"></div>
+                  <p className="text-[#25D366] text-[10px] font-bold uppercase tracking-widest">Online</p>
+                </div>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white transition-colors self-start mt-1">
-              <X size={20} />
+            <button onClick={() => setIsOpen(false)} className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+              <X size={16} />
             </button>
           </div>
-          
-          {/* Body */}
-          <div className="bg-[#0a0a0a] p-4 h-64 overflow-y-auto flex flex-col gap-3 relative">
-             <div className="absolute inset-0 opacity-5 bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')]"></div>
-             
-             {/* Message from support */}
-             <div className="bg-[#111] border border-white/10 p-3 rounded-tr-xl rounded-br-xl rounded-bl-xl max-w-[85%] shadow-sm relative z-10 self-start">
-                <p className="text-gray-200 text-sm">Hi! 👋 Hoe kunnen we je helpen met je branding of marketing?</p>
-                <span className="text-[10px] text-gray-500 block text-right mt-1">10:00</span>
-             </div>
+
+          {/* Body — message bubble */}
+          <div className="p-4 min-h-[120px] flex flex-col justify-center">
+            <div className="bg-white/5 border border-white/10 p-4 rounded-2xl rounded-tl-sm max-w-[90%]">
+              <p className="text-gray-200 text-sm leading-relaxed">Hey! Hoe kunnen we je helpen met je project?</p>
+              <span className="text-[10px] text-gray-600 block text-right mt-2 font-bold">Nu</span>
+            </div>
           </div>
 
-          {/* Footer / Input (Fake) */}
-          <div className="bg-black/80 p-3 border-t border-white/10 flex gap-2">
-             <a 
-               href="https://wa.me/31637404577" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               className="flex-grow bg-[#25D366] hover:bg-[#20bd5a] text-black font-black uppercase tracking-wider text-xs py-3 px-4 rounded-full flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(37,211,102,0.2)] hover:shadow-[0_0_30px_rgba(37,211,102,0.4)]"
-             >
-               <Send size={16} /> Start Chat
-             </a>
+          {/* CTA Button */}
+          <div className="p-4 pt-0">
+            <a
+              href="https://wa.me/31637404577"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 w-full bg-[#25D366] hover:bg-[#20bd5a] text-black font-black uppercase tracking-wider text-xs py-3.5 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(37,211,102,0.15)] hover:shadow-[0_0_30px_rgba(37,211,102,0.3)] group"
+            >
+              <Send size={14} className="group-hover:-rotate-12 transition-transform" />
+              Start WhatsApp Chat
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            </a>
           </div>
         </div>
       )}
 
       {/* Toggle Button */}
-      <button 
+      <button
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={() => setIsOpen(!isOpen)}
         className={`
-          bg-[#25D366] rounded-full flex items-center justify-center text-white 
+          bg-[#25D366] rounded-full flex items-center justify-center text-white
           shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_0_30px_rgba(37,211,102,0.6)]
           transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] relative group overflow-hidden
           ${showPromo ? 'w-[320px] h-14 md:h-16 px-6' : 'w-14 h-14 md:w-16 md:h-16 hover:scale-110'}
@@ -124,7 +109,7 @@ const WhatsAppPopup: React.FC = () => {
           </div>
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-             {isOpen ? <X size={28} /> : <MessageCircle size={32} />}
+            {isOpen ? <X size={28} /> : <MessageCircle size={28} />}
           </div>
         )}
       </button>

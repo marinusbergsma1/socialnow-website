@@ -25,6 +25,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   const animationRef = useRef<number>(0);
   const positionRef = useRef(0);
   const isDragging = useRef(false);
+  const isPaused = useRef(false);
   const dragStartX = useRef(0);
   const dragStartPos = useRef(0);
   const lastPointerX = useRef(0);
@@ -54,7 +55,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
 
   // Animation loop - smooth with translate3d
   const animate = useCallback(() => {
-    if (!isDragging.current) {
+    if (!isDragging.current && !isPaused.current) {
       if (Math.abs(velocityRef.current) > 0.3) {
         // Momentum from drag
         positionRef.current += velocityRef.current;
@@ -118,8 +119,10 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     isDragging.current = false;
   }, []);
 
-  // Hover audio
+  // Hover: pause slider + enable audio
   const handleMouseEnter = useCallback((idx: number) => {
+    isPaused.current = true;
+    velocityRef.current = 0;
     setHoveredIndex(idx);
     const video = videoRefs.current[idx];
     if (video) {
@@ -129,6 +132,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   }, []);
 
   const handleMouseLeave = useCallback((idx: number) => {
+    isPaused.current = false;
     setHoveredIndex(null);
     const video = videoRefs.current[idx];
     if (video) {
@@ -160,7 +164,12 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={() => handleMouseLeave(i)}
             >
-              <div className={`w-full h-[380px] md:h-[530px] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-black relative transition-all duration-300 ${isHovered ? 'border-2 border-[#25D366] shadow-[0_0_30px_rgba(37,211,102,0.3)] scale-[1.02]' : 'border border-white/10'}`}>
+              <div className="w-full h-[380px] md:h-[530px] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-black relative border-2 transition-colors duration-300"
+                style={{
+                  borderColor: isHovered ? '#25D366' : 'rgba(255,255,255,0.1)',
+                  boxShadow: isHovered ? '0 0 30px rgba(37,211,102,0.3), inset 0 0 30px rgba(37,211,102,0.05)' : 'none',
+                }}
+              >
                 <video
                   ref={el => { videoRefs.current[i] = el; }}
                   src={video.src}
