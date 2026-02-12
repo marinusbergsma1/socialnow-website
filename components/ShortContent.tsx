@@ -20,58 +20,62 @@ const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: num
 });
 
 // ─── Infinite Loop Slider ───────────────────────────────────────────────
-const InfiniteVideoSlider: React.FC<{ videos: { src: string; title: string; subtitle: string }[] }> = ({ videos }) => {
+const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>(0);
   const positionRef = useRef(0);
-  const speedRef = useRef(0.5);
   const isDragging = useRef(false);
   const dragStartX = useRef(0);
   const dragStartPos = useRef(0);
-  const lastDragX = useRef(0);
-  const velocity = useRef(0);
-  const [, forceRender] = useState(0);
+  const lastPointerX = useRef(0);
+  const lastPointerTime = useRef(0);
+  const velocityRef = useRef(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   // Card dimensions
-  const cardWidth = typeof window !== 'undefined' && window.innerWidth < 768 ? 220 : 300;
-  const gap = typeof window !== 'undefined' && window.innerWidth < 768 ? 16 : 24;
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const cardWidth = isMobile ? 200 : 280;
+  const gap = isMobile ? 12 : 20;
   const totalItemWidth = cardWidth + gap;
   const setLength = videos.length;
   const totalSetWidth = totalItemWidth * setLength;
 
-  // We render 3 copies: [set][set][set] for seamless loop
-  const allVideos = [...videos, ...videos, ...videos];
+  // Auto-scroll speed (pixels per frame at 60fps)
+  const autoSpeed = 0.8;
 
-  // Start position in the middle set
+  // We render 5 copies for seamless wrapping
+  const allVideos = [...videos, ...videos, ...videos, ...videos, ...videos];
+
+  // Start in the middle
   useEffect(() => {
-    positionRef.current = totalSetWidth;
-    forceRender(n => n + 1);
+    positionRef.current = totalSetWidth * 2;
   }, [totalSetWidth]);
 
-  // Animation loop
+  // Animation loop - smooth with translate3d
   const animate = useCallback(() => {
     if (!isDragging.current) {
-      // Apply velocity (from drag release) with friction
-      if (Math.abs(velocity.current) > 0.1) {
-        positionRef.current += velocity.current;
-        velocity.current *= 0.95;
+      if (Math.abs(velocityRef.current) > 0.3) {
+        // Momentum from drag
+        positionRef.current += velocityRef.current;
+        velocityRef.current *= 0.96;
       } else {
-        // Normal auto-scroll
-        positionRef.current += speedRef.current;
-        velocity.current = 0;
-      }
-
-      // Seamless loop: wrap around
-      if (positionRef.current >= totalSetWidth * 2) {
-        positionRef.current -= totalSetWidth;
-      }
-      if (positionRef.current <= 0) {
-        positionRef.current += totalSetWidth;
+        // Auto scroll
+        positionRef.current += autoSpeed;
+        velocityRef.current = 0;
       }
     }
 
+    // Seamless wrap
+    if (positionRef.current >= totalSetWidth * 3) {
+      positionRef.current -= totalSetWidth;
+    }
+    if (positionRef.current <= totalSetWidth) {
+      positionRef.current += totalSetWidth;
+    }
+
     if (trackRef.current) {
-      trackRef.current.style.transform = `translateX(${-positionRef.current}px)`;
+      trackRef.current.style.transform = `translate3d(${-positionRef.current}px, 0, 0)`;
     }
 
     animationRef.current = requestAnimationFrame(animate);
@@ -82,32 +86,59 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string; title: string; subt
     return () => cancelAnimationFrame(animationRef.current);
   }, [animate]);
 
-  // Mouse drag
-  const onPointerDown = (e: React.PointerEvent) => {
+  // Pointer events for drag/slide
+  const onPointerDown = useCallback((e: React.PointerEvent) => {
     isDragging.current = true;
     dragStartX.current = e.clientX;
-    lastDragX.current = e.clientX;
     dragStartPos.current = positionRef.current;
-    velocity.current = 0;
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
-  };
+    lastPointerX.current = e.clientX;
+    lastPointerTime.current = Date.now();
+    velocityRef.current = 0;
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  }, []);
 
-  const onPointerMove = (e: React.PointerEvent) => {
+  const onPointerMove = useCallback((e: React.PointerEvent) => {
     if (!isDragging.current) return;
-    const dx = e.clientX - lastDragX.current;
-    velocity.current = -dx;
-    lastDragX.current = e.clientX;
+    const now = Date.now();
+    const dt = now - lastPointerTime.current;
+    const dx = e.clientX - lastPointerX.current;
+
+    if (dt > 0) {
+      velocityRef.current = (-dx / dt) * 16; // normalize to ~60fps
+    }
+
+    lastPointerX.current = e.clientX;
+    lastPointerTime.current = now;
+
     const totalDx = e.clientX - dragStartX.current;
     positionRef.current = dragStartPos.current - totalDx;
-  };
+  }, []);
 
-  const onPointerUp = () => {
+  const onPointerUp = useCallback(() => {
     isDragging.current = false;
-  };
+  }, []);
+
+  // Hover audio
+  const handleMouseEnter = useCallback((idx: number) => {
+    setHoveredIndex(idx);
+    const video = videoRefs.current[idx];
+    if (video) {
+      video.muted = false;
+      video.volume = 0.4;
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback((idx: number) => {
+    setHoveredIndex(null);
+    const video = videoRefs.current[idx];
+    if (video) {
+      video.muted = true;
+    }
+  }, []);
 
   return (
     <div
-      className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing"
+      className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing select-none"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -119,30 +150,31 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string; title: string; subt
         className="flex will-change-transform"
         style={{ gap: `${gap}px` }}
       >
-        {allVideos.map((video, i) => (
-          <div
-            key={i}
-            className="flex-shrink-0 select-none"
-            style={{ width: `${cardWidth}px` }}
-          >
-            <div className="w-full h-[380px] md:h-[530px] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 bg-black relative group hover:border-[#25D366]/40 transition-all duration-500">
-              <video
-                src={video.src}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="w-full h-full object-cover pointer-events-none"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 pointer-events-none">
-                <p className="text-white font-black uppercase text-sm md:text-base tracking-tight leading-tight">{video.title}</p>
-                <p className="text-white/40 text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1">{video.subtitle}</p>
+        {allVideos.map((video, i) => {
+          const isHovered = hoveredIndex === i;
+          return (
+            <div
+              key={i}
+              className="flex-shrink-0"
+              style={{ width: `${cardWidth}px` }}
+              onMouseEnter={() => handleMouseEnter(i)}
+              onMouseLeave={() => handleMouseLeave(i)}
+            >
+              <div className={`w-full h-[380px] md:h-[530px] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-black relative transition-all duration-300 ${isHovered ? 'border-2 border-[#25D366] shadow-[0_0_30px_rgba(37,211,102,0.3)] scale-[1.02]' : 'border border-white/10'}`}>
+                <video
+                  ref={el => { videoRefs.current[i] = el; }}
+                  src={video.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="w-full h-full object-cover pointer-events-none"
+                />
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -155,10 +187,10 @@ const ShortContent: React.FC = () => {
   const statsRef = useRef<HTMLDivElement>(null);
 
   const videos = [
-    { src: `${base}videos/raveg-dyadium.mp4`, title: "RAVEG DYADIUM", subtitle: "Story Campaign" },
-    { src: `${base}videos/viral-cho.mp4`, title: "VIRAL CHO", subtitle: "Live Content" },
-    { src: `${base}videos/muse-mode.mp4`, title: "MUSE MODE", subtitle: "Team Video" },
-    { src: `${base}videos/bakboord.mp4`, title: "BAKBOORD", subtitle: "x Supperclub" },
+    { src: `${base}videos/raveg-dyadium.mp4` },
+    { src: `${base}videos/viral-cho.mp4` },
+    { src: `${base}videos/muse-mode.mp4` },
+    { src: `${base}videos/bakboord.mp4` },
   ];
 
   // Stats observer
