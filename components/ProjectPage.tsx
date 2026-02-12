@@ -168,27 +168,6 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Fixed Project Counter — positioned below navbar */}
-      <div className="fixed top-24 right-6 z-40">
-        <div className="flex items-center gap-1 bg-black/70 backdrop-blur-xl border border-white/10 rounded-full px-1.5 py-1.5 shadow-lg">
-          <button
-            onClick={() => navigate(`/project/${prev.slug}`)}
-            className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
-          >
-            <ChevronLeft size={16} />
-          </button>
-          <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 min-w-[40px] text-center text-white/60">
-            {currentIndex + 1}/{allProjects.length}
-          </span>
-          <button
-            onClick={() => navigate(`/project/${next.slug}`)}
-            className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
-          >
-            <ChevronRight size={16} />
-          </button>
-        </div>
-      </div>
-
       {/* Hero Section */}
       <div className="relative w-full h-[50vh] md:h-[70vh] overflow-hidden">
         {project.image.endsWith('.mp4') ? (
