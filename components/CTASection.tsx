@@ -31,7 +31,7 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
   return (
     <section 
       ref={sectionRef} 
-      className={`pt-12 pb-24 md:pt-32 md:pb-48 bg-transparent relative overflow-visible transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+      className={`pt-12 pb-24 md:pt-24 md:pb-36 bg-transparent relative overflow-visible transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         hasRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
       }`}
     >
@@ -39,7 +39,7 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
         
         {/* Main Simplified CTA Card */}
         <div className="flex justify-center overflow-visible">
-            <div className="w-full max-w-5xl bg-[#050505]/40 border border-white/10 rounded-[3rem] md:rounded-[4rem] p-10 md:p-20 relative overflow-visible group shadow-[0_40px_100px_rgba(0,0,0,0.6)] backdrop-blur-3xl">
+            <div className="w-full max-w-5xl bg-[#050505]/40 border border-white/10 rounded-[3rem] md:rounded-[4rem] p-10 md:p-16 relative overflow-visible group shadow-[0_40px_100px_rgba(0,0,0,0.6)] backdrop-blur-3xl">
               <div className="absolute inset-0 bg-gradient-to-br from-[#61F6FD]/5 via-transparent to-[#F62961]/5 opacity-40 rounded-[3rem] md:rounded-[4rem]"></div>
               
               {/* PixelGlobe Beeldmerk */}
@@ -56,11 +56,11 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
                           <span className="text-white/60 font-black uppercase tracking-[0.4em] text-[10px]">READY TO SYNC?</span>
                       </div>
                       
-                      <h2 className="text-5xl md:text-8xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-8">
+                      <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-8">
                           LET'S GET <br/> <span className="text-[#25D366]">SOCIALNOW</span>
                       </h2>
                       
-                      <p className="text-gray-400 font-bold text-lg md:text-2xl leading-tight mb-12 max-w-lg mx-auto md:mx-0 italic">
+                      <p className="text-gray-400 font-bold text-lg md:text-xl leading-tight mb-10 max-w-lg mx-auto md:mx-0 italic">
                         "Ontdek wat AI-powered development voor jouw project kan betekenen. Van idee tot lancering, wij bouwen de toekomst."
                       </p>
 

@@ -130,7 +130,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
   const visibleProjects = showAll ? projects : projects.slice(0, 3);
 
   return (
-    <section id="projecten" className="bg-transparent pt-12 md:pt-48 pb-2 md:pb-10 relative overflow-hidden">
+    <section id="projecten" className="bg-transparent pt-12 md:pt-36 pb-2 md:pb-10 relative overflow-hidden">
       {/* Background technical lines */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none">
           <svg width="100%" height="100%">
@@ -146,13 +146,13 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
       </div>
 
       <div className="container mx-auto px-6 relative z-10 max-w-full overflow-hidden">
-        <div className="flex flex-col items-center mb-12 md:mb-32 text-center relative z-10 scroll-reveal">
+        <div className="flex flex-col items-center mb-12 md:mb-24 text-center relative z-10 scroll-reveal">
            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 bg-white/5 mb-8 backdrop-blur-md">
              <Cpu size={14} className="text-[#61F6FD]" />
              <span className="text-white/60 font-bold uppercase tracking-[0.3em] text-[10px]">FEATURED WORK</span>
            </div>
 
-           <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8] relative text-white flex flex-wrap justify-center items-center">
+           <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.8] relative text-white flex flex-wrap justify-center items-center">
              <span className="inline-flex items-center whitespace-nowrap">
                <span className="text-[#F7E644] mr-2 md:mr-6">"</span>
                FEATURED
@@ -167,7 +167,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
           ref={webdesignRef}
           onMouseEnter={() => setIsWebdesignHovered(true)}
           onMouseLeave={() => setIsWebdesignHovered(false)}
-          className="relative w-full max-w-6xl mx-auto mb-20 md:mb-64 group cursor-pointer"
+          className="relative w-full max-w-6xl mx-auto mb-16 md:mb-40 group cursor-pointer"
         >
           <div className="flex flex-col items-center mb-6 md:mb-10 px-6">
             <div className="text-center flex flex-col items-center">
@@ -175,7 +175,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
                   <Globe size={14} className="text-[#61F6FD]" />
                   <span className="text-[10px] font-mono tracking-[0.3em] text-white/60 uppercase">Next Gen Webdesign</span>
                </div>
-               <h3 className="text-4xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none">
+               <h3 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-none">
                   Next Gen <span className="text-[#61F6FD]">Webdesign</span>
                </h3>
             </div>
@@ -198,7 +198,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
           ref={betcityRef}
           onMouseEnter={() => setIsBetcityHovered(true)}
           onMouseLeave={() => setIsBetcityHovered(false)}
-          className="relative w-full max-w-6xl mx-auto mb-16 md:mb-48 group cursor-pointer"
+          className="relative w-full max-w-6xl mx-auto mb-16 md:mb-36 group cursor-pointer"
         >
           <div className="flex flex-col items-center mb-6 md:mb-10 px-6">
             <div className="text-center flex flex-col items-center">
@@ -206,7 +206,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
                   <Terminal size={14} className="text-[#0071BC]" />
                   <span className="text-[10px] font-mono tracking-[0.3em] text-white/60 uppercase">Motion Design</span>
                </div>
-               <h3 className="text-4xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none">
+               <h3 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-none">
                   Motion <span className="text-[#0071BC]">Design</span>
                </h3>
             </div>
@@ -225,14 +225,14 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
         </div>
 
         {/* --- HIGHLIGHT 3: ARTIST IMPRESSIONS --- */}
-        <div ref={lacRef} className="relative w-full max-w-6xl mx-auto mb-16 md:mb-48">
+        <div ref={lacRef} className="relative w-full max-w-6xl mx-auto mb-16 md:mb-36">
           <div className="flex flex-col items-center mb-6 md:mb-10 px-6">
             <div className="text-center flex flex-col items-center">
                <div className="flex items-center gap-3 mb-4 opacity-40">
                   <Database size={14} className="text-[#F7E644]" />
                   <span className="text-[10px] font-mono tracking-[0.3em] text-white/60 uppercase">Artist Impressions</span>
                </div>
-               <h3 className="text-4xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none">
+               <h3 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-none">
                   Artist <span className="text-[#F7E644]">Impressions</span>
                </h3>
             </div>
@@ -249,13 +249,13 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
         </div>
 
         {/* --- GRID OF STUDIES --- */}
-        <div className="mt-12 md:mt-32 mb-16 md:mb-32 max-w-6xl mx-auto">
-           <div className="flex flex-col items-center mb-12 md:mb-32 text-center scroll-reveal">
+        <div className="mt-12 md:mt-24 mb-16 md:mb-24 max-w-6xl mx-auto">
+           <div className="flex flex-col items-center mb-12 md:mb-24 text-center scroll-reveal">
                <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 bg-white/5 mb-8 backdrop-blur-md">
                  <SearchCode size={14} className="text-[#F7E644]" />
                  <span className="text-white/60 font-bold uppercase tracking-[0.3em] text-[10px]">CASE STUDIES</span>
                </div>
-               <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8] relative text-white flex flex-wrap justify-center items-center">
+               <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.8] relative text-white flex flex-wrap justify-center items-center">
                  <span className="inline-flex items-center whitespace-nowrap">
                     <span className="text-[#F7E644] mr-2 md:mr-6">"</span>
                     CASE

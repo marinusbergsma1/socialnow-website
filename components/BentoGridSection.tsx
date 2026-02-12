@@ -163,19 +163,19 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
       <div className="relative z-[180] w-full h-full overflow-y-auto overflow-x-hidden py-12 md:py-32 px-4 md:px-8 custom-scrollbar">
         <div className="container mx-auto max-w-7xl pb-40">
           
-          <div className="mb-32 text-center px-4">
+          <div className="mb-20 md:mb-24 text-center px-4">
              <div className="relative z-10">
-                <div className="inline-flex items-center gap-4 px-8 py-3 rounded-full bg-white/5 border border-white/10 mb-12 backdrop-blur-md">
+                <div className="inline-flex items-center gap-4 px-8 py-3 rounded-full bg-white/5 border border-white/10 mb-10 backdrop-blur-md">
                   <Workflow size={18} className="text-[#61F6FD]" />
                   <span className="text-white font-black uppercase tracking-[0.6em] text-[11px]">INTEGRATED BRAND ARCHITECTURE OS</span>
                 </div>
-                
-                <h2 className="font-black uppercase tracking-tighter text-white leading-[0.75] mb-12">
+
+                <h2 className="font-black uppercase tracking-tighter text-white leading-[0.75] mb-10">
                   <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 flex items-center justify-center">
                     <span className="text-[#F7E644] mr-4 md:mr-8">"</span>
                     <ScrollTypewriter text='ONZE EXPERTISE' delay={300} start={true} withHighlight={false} />
                   </div>
-                  <div className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] mb-[-0.1em] flex justify-center items-center h-[1.1em]">
+                  <div className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl mb-[-0.1em] flex justify-center items-center h-[1.1em]">
                     {showWord ? (
                       <span key={wordIndex} className={`${cyclingWords[wordIndex].color} animate-fade-in-up transition-all duration-700 flex items-center`}>
                         {cyclingWords[wordIndex].text}
@@ -191,33 +191,33 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
              </div>
           </div>
 
-          <div className="mb-48 flex justify-center px-2">
-              <div className="w-full max-w-7xl bg-white/[0.005] border border-white/10 rounded-[5rem] p-10 md:p-24 relative overflow-hidden group shadow-3xl backdrop-blur-3xl">
+          <div className="mb-32 md:mb-36 flex justify-center px-2">
+              <div className="w-full max-w-7xl bg-white/[0.005] border border-white/10 rounded-[4rem] p-10 md:p-16 relative overflow-hidden group shadow-3xl backdrop-blur-3xl">
                   <div className="relative z-10">
-                      <div className="text-center mb-32">
-                          <h4 className="text-[#61F6FD] font-black uppercase tracking-[0.8em] text-[11px] mb-8">INTERNAL WORKFLOW // PROTOCOL V.2</h4>
-                          <h3 className="text-5xl md:text-9xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-12">
+                      <div className="text-center mb-20 md:mb-24">
+                          <h4 className="text-[#61F6FD] font-black uppercase tracking-[0.8em] text-[11px] mb-6">INTERNAL WORKFLOW // PROTOCOL V.2</h4>
+                          <h3 className="text-4xl md:text-7xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-8">
                               DE <span className="text-[#F7E644]">OS FLOW</span>
                           </h3>
-                          <div className="h-2 w-64 bg-white/10 mx-auto rounded-full"></div>
+                          <div className="h-1.5 w-48 bg-white/10 mx-auto rounded-full"></div>
                       </div>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                           {brandingMethodology.map((m, i) => {
                               const Icon = m.icon;
                               return (
-                                  <div key={i} className="relative z-10 bg-[#030303] border border-white/5 rounded-[3.5rem] p-12 md:p-14 backdrop-blur-3xl group/card hover:border-white/20 transition-all duration-700 min-h-[500px] flex flex-col justify-between shadow-3xl overflow-hidden border-t-2" style={{ borderTopColor: m.color }}>
-                                      <div className="absolute -bottom-6 -right-6 text-[12rem] font-black text-white/[0.03] pointer-events-none italic tracking-tighter select-none">{m.step}</div>
+                                  <div key={i} className="relative z-10 bg-[#030303] border border-white/5 rounded-[2.5rem] p-8 md:p-10 backdrop-blur-3xl group/card hover:border-white/20 transition-all duration-700 min-h-[380px] flex flex-col justify-between shadow-3xl overflow-hidden border-t-2" style={{ borderTopColor: m.color }}>
+                                      <div className="absolute -bottom-6 -right-6 text-[10rem] font-black text-white/[0.03] pointer-events-none italic tracking-tighter select-none">{m.step}</div>
                                       <div className="relative z-10">
-                                          <div className="w-24 h-24 rounded-[2.5rem] bg-white/[0.03] border border-white/10 flex items-center justify-center group-hover/card:scale-110 group-hover/card:bg-white/10 transition-all duration-700 mb-12 shadow-2xl">
-                                              <Icon size={44} style={{ color: m.color }} />
+                                          <div className="w-16 h-16 rounded-[1.5rem] bg-white/[0.03] border border-white/10 flex items-center justify-center group-hover/card:scale-110 group-hover/card:bg-white/10 transition-all duration-700 mb-8 shadow-2xl">
+                                              <Icon size={32} style={{ color: m.color }} />
                                           </div>
-                                          <h4 className="text-white font-black uppercase text-3xl mb-8 tracking-tighter group-hover/card:text-[#F7E644] transition-colors">{m.title}</h4>
-                                          <p className="text-gray-400 text-base font-bold leading-relaxed italic">"{m.desc}"</p>
+                                          <h4 className="text-white font-black uppercase text-xl md:text-2xl mb-5 tracking-tighter group-hover/card:text-[#F7E644] transition-colors">{m.title}</h4>
+                                          <p className="text-gray-400 text-sm font-bold leading-relaxed italic">"{m.desc}"</p>
                                       </div>
-                                      <div className="flex items-center gap-4 mt-12 pt-8 border-t border-white/5">
-                                          <Terminal size={16} className="text-white/20" />
-                                          <span className="text-[10px] font-mono text-white/20 tracking-[0.4em] uppercase">SYSTEM_NODE_{m.step}</span>
+                                      <div className="flex items-center gap-4 mt-8 pt-6 border-t border-white/5">
+                                          <Terminal size={14} className="text-white/20" />
+                                          <span className="text-[9px] font-mono text-white/20 tracking-[0.4em] uppercase">SYSTEM_NODE_{m.step}</span>
                                       </div>
                                   </div>
                               );
@@ -227,32 +227,32 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
               </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-48">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 mb-32 md:mb-36">
               {services.map((service, idx) => {
                   const Icon = service.icon;
                   return (
-                      <div 
-                        key={service.id} 
-                        className="group relative bg-[#040404] border border-white/[0.05] rounded-[5rem] p-12 md:p-20 overflow-hidden transition-all duration-700 hover:border-white/15 shadow-3xl"
+                      <div
+                        key={service.id}
+                        className="group relative bg-[#040404] border border-white/[0.05] rounded-[3.5rem] p-10 md:p-14 overflow-hidden transition-all duration-700 hover:border-white/15 shadow-3xl"
                       >
                           <div className="relative z-10">
-                              <div className="flex justify-between items-start mb-16">
-                                  <div className="w-28 h-28 rounded-[3rem] bg-white/[0.03] flex items-center justify-center group-hover:bg-white/[0.08] transition-all duration-700 border border-white/[0.1] shadow-3xl">
-                                      <Icon size={56} style={{ color: service.color }} />
+                              <div className="flex justify-between items-start mb-10">
+                                  <div className="w-20 h-20 rounded-[2rem] bg-white/[0.03] flex items-center justify-center group-hover:bg-white/[0.08] transition-all duration-700 border border-white/[0.1] shadow-3xl">
+                                      <Icon size={40} style={{ color: service.color }} />
                                   </div>
                                   <div className="text-right">
-                                      <span className="text-[11px] font-black uppercase tracking-[0.5em] block opacity-40 mb-3">RESONANCE METRIC</span>
-                                      <div className="flex items-center justify-end gap-4 mt-1">
-                                          <TrendingUp size={20} className="text-[#25D366]" />
-                                          <span className="text-lg font-black text-white uppercase tracking-widest">{service.impact}</span>
+                                      <span className="text-[10px] font-black uppercase tracking-[0.5em] block opacity-40 mb-2">RESONANCE METRIC</span>
+                                      <div className="flex items-center justify-end gap-3 mt-1">
+                                          <TrendingUp size={16} className="text-[#25D366]" />
+                                          <span className="text-sm font-black text-white uppercase tracking-widest">{service.impact}</span>
                                       </div>
                                   </div>
                               </div>
-                              <h3 className="text-4xl md:text-6xl font-black text-white leading-none uppercase tracking-tighter mb-10">{service.title}</h3>
-                              <p className="text-gray-400 text-xl leading-relaxed mb-12 font-medium italic border-l-4 border-white/10 pl-8">"{service.description}"</p>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                                  <div className="space-y-4">
-                                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 block mb-4">Kern Componenten</span>
+                              <h3 className="text-3xl md:text-4xl font-black text-white leading-none uppercase tracking-tighter mb-6">{service.title}</h3>
+                              <p className="text-gray-400 text-base leading-relaxed mb-10 font-medium italic border-l-4 border-white/10 pl-6">"{service.description}"</p>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                  <div className="space-y-3">
+                                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 block mb-3">Kern Componenten</span>
                                       {service.subServices.map((f, i) => (
                                           <div key={i} className="flex items-center gap-4 text-xs font-black uppercase tracking-widest text-gray-500 hover:text-white transition-colors duration-300">
                                               <div className="w-2 h-2 rounded-full shadow-[0_0_8px_currentColor]" style={{ backgroundColor: service.color, color: service.color }}></div>
@@ -274,8 +274,8 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
               })}
           </div>
 
-          <div className="mb-48 flex justify-center px-4 overflow-visible">
-              <div className="w-full max-w-6xl bg-white/[0.01] border border-white/10 rounded-[5rem] p-12 md:p-32 relative overflow-visible group transition-all duration-1000 shadow-3xl backdrop-blur-xl">
+          <div className="mb-32 md:mb-36 flex justify-center px-4 overflow-visible">
+              <div className="w-full max-w-6xl bg-white/[0.01] border border-white/10 rounded-[4rem] p-10 md:p-20 relative overflow-visible group transition-all duration-1000 shadow-3xl backdrop-blur-xl">
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#61F6FD]/5 via-transparent to-[#F62961]/5 opacity-30 rounded-[5rem]"></div>
                 
                 {/* PixelGlobe Beeldmerk */}
@@ -290,38 +290,38 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
                             <span className="text-white font-black uppercase tracking-[0.6em] text-[11px]">INTEGRATED BRAND OS V.4</span>
                         </div>
 
-                        <h2 className="text-5xl md:text-9xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-14">
+                        <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-10">
                             KLAAR OM TE <br/> <span className="text-[#25D366]">SYNCEN?</span>
                         </h2>
 
-                        <p className="text-gray-400 font-bold text-2xl md:text-4xl leading-tight mb-16 italic">
+                        <p className="text-gray-400 font-bold text-xl md:text-2xl leading-tight mb-12 italic">
                             Wij vertalen rauwe ambitie naar <span className="text-white">visuele monumenten</span>. Onze strategie is gecodeerd voor totale markt-dominantie.
                         </p>
 
-                        <Button variant="green" icon={true} IconComponent={Send} onClick={onClose} className="!px-20 !h-20 !text-xl shadow-[0_0_50px_rgba(37,211,102,0.4)]">LANCEER JOUW MERK</Button>
+                        <Button variant="green" icon={true} IconComponent={Send} onClick={onClose} className="!px-14 !h-16 !text-base shadow-[0_0_50px_rgba(37,211,102,0.4)]">LANCEER JOUW MERK</Button>
                     </div>
 
                 </div>
               </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
               {[
                   { icon: TrendingUp, color: "#25D366", label: "Markt Groei", value: "+124%", desc: "Gemiddelde Performance" },
                   { icon: CircleDollarSign, color: "#F7E644", label: "Maandelijkse ROI", value: "€14.5k", desc: "Per Campagne" },
                   { icon: BarChart3, color: "#F62961", label: "Conversie", value: "4.8%", desc: "Direct Verkeer" },
                   { icon: Target, color: "#61F6FD", label: "System Uptime", value: "99.9%", desc: "Operationeel 24/7" }
               ].map((stat, i) => (
-                <div 
-                    key={i} 
-                    className="bg-[#050505] border border-white/10 rounded-[3rem] p-12 group hover:border-white/30 transition-all duration-700 shadow-3xl animate-fade-in-up hover:-translate-y-4"
+                <div
+                    key={i}
+                    className="bg-[#050505] border border-white/10 rounded-[2rem] p-8 md:p-10 group hover:border-white/30 transition-all duration-700 shadow-3xl animate-fade-in-up hover:-translate-y-3"
                 >
-                    <div className="w-16 h-16 rounded-2xl bg-black border border-white/10 flex items-center justify-center mb-10 group-hover:scale-110 group-hover:bg-white/5 transition-all duration-700 shadow-2xl">
-                        <stat.icon size={28} style={{ color: stat.color }} />
+                    <div className="w-12 h-12 rounded-xl bg-black border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-white/5 transition-all duration-700 shadow-2xl">
+                        <stat.icon size={22} style={{ color: stat.color }} />
                     </div>
-                    <span className="text-[11px] font-black uppercase tracking-[0.5em] text-white/40 mb-3 block">{stat.label}</span>
-                    <div className="text-4xl font-black text-white mb-3 tracking-tighter">{stat.value}</div>
-                    <div className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">{stat.desc}</div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.5em] text-white/40 mb-2 block">{stat.label}</span>
+                    <div className="text-3xl font-black text-white mb-2 tracking-tighter">{stat.value}</div>
+                    <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{stat.desc}</div>
                 </div>
               ))}
           </div>

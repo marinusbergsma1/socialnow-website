@@ -54,7 +54,7 @@ const Reviews: React.FC<ReviewsProps> = ({ onOpenBooking }) => {
   }, []);
 
   return (
-    <section id="reviews" className="py-32 bg-transparent relative overflow-hidden">
+    <section id="reviews" className="py-24 md:py-32 bg-transparent relative overflow-hidden">
       <div 
         className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
         style={{ 
@@ -67,7 +67,7 @@ const Reviews: React.FC<ReviewsProps> = ({ onOpenBooking }) => {
 
       <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-8xl font-black uppercase text-white tracking-tighter leading-none mb-6 flex flex-wrap justify-center items-center">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-none mb-6 flex flex-wrap justify-center items-center">
             <span className="inline-flex items-center whitespace-nowrap">
               <span className="text-[#F7E644] mr-2 md:mr-6 leading-none">"</span>
               DIT ZEGGEN

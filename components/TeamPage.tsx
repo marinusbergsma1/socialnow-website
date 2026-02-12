@@ -187,8 +187,8 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
           </button>
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-7xl pt-24 pb-48 px-6">
-          <div className="text-center mb-32 relative px-4">
+      <div className="relative z-10 container mx-auto max-w-7xl pt-20 pb-36 px-6">
+          <div className="text-center mb-20 md:mb-24 relative px-4">
               <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-10 backdrop-blur-md">
                 <Network size={16} className="text-[#61F6FD]" />
                 <span className="text-white font-black uppercase tracking-[0.6em] text-[10px]">HUMAN ARCHITECTURE INDEX</span>
@@ -198,19 +198,19 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                 <PixelGlobe scaleMultiplier={0.25} type="all" opacity={0.5} glowEnabled={true} largeParticles={true} />
               </div>
 
-              <h1 className="text-5xl md:text-9xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-12">
+              <h1 className="text-4xl md:text-7xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-10">
                  THE <br/> <span className="text-white">TEAM</span>
               </h1>
-              <p className="text-gray-400 font-bold text-xl md:text-3xl max-w-4xl mx-auto italic leading-tight">
+              <p className="text-gray-400 font-bold text-lg md:text-2xl max-w-3xl mx-auto italic leading-tight">
                  "Gecentreerde intelligentie, schaalbaar talent. Wij zijn het besturingssysteem van moderne groei."
               </p>
           </div>
 
-          <div className="space-y-24 md:space-y-48">
+          <div className="space-y-16 md:space-y-24">
               {teamDetailed.map((member, idx) => (
-                  <div key={member.id} className={`flex flex-col ${idx % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-12 md:gap-24 items-stretch bg-[#050505] border border-white/10 rounded-[4rem] p-8 md:p-16 relative overflow-hidden group hover:border-white/20 transition-all duration-700 shadow-3xl`}>
+                  <div key={member.id} className={`flex flex-col ${idx % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-10 md:gap-16 items-stretch bg-[#050505] border border-white/10 rounded-[3rem] p-6 md:p-12 relative overflow-hidden group hover:border-white/20 transition-all duration-700 shadow-3xl`}>
                       <div className="w-full md:w-[40%] relative shrink-0">
-                          <div className="relative w-full h-[450px] md:h-full min-h-[500px] rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl group-hover:border-white/30 transition-all duration-700">
+                          <div className="relative w-full h-[400px] md:h-full min-h-[420px] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-3xl group-hover:border-white/30 transition-all duration-700">
                              <ProgressiveImage 
                                 src={member.image} 
                                 alt={member.name} 
@@ -239,17 +239,17 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                           </div>
                       </div>
 
-                      <div className="flex-1 flex flex-col justify-between py-6">
-                          <div className="space-y-12">
-                              <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                      <div className="flex-1 flex flex-col justify-between py-4">
+                          <div className="space-y-8">
+                              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                                   <div className="w-full">
-                                      <h2 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tight leading-[0.9] mb-8 px-1 break-words">{member.name}</h2>
-                                      <div className="flex items-center gap-6">
-                                          <div className="h-[3px] w-16" style={{ backgroundColor: member.color }}></div>
-                                          <span className="text-sm font-black uppercase tracking-[0.4em]" style={{ color: member.role === 'FOUNDER & CREATIVE ART DIRECTOR' ? member.color : '#61F6FD' }}>{member.role}</span>
+                                      <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight leading-[0.9] mb-5 px-1 break-words">{member.name}</h2>
+                                      <div className="flex items-center gap-4">
+                                          <div className="h-[2px] w-12" style={{ backgroundColor: member.color }}></div>
+                                          <span className="text-xs font-black uppercase tracking-[0.3em]" style={{ color: member.role === 'FOUNDER & CREATIVE ART DIRECTOR' ? member.color : '#61F6FD' }}>{member.role}</span>
                                       </div>
                                   </div>
-                                  <div className="bg-white/5 border border-white/10 p-6 rounded-[2rem] backdrop-blur-md">
+                                  <div className="bg-white/5 border border-white/10 p-4 rounded-[1.5rem] backdrop-blur-md">
                                       <div className="flex items-center gap-3 mb-3">
                                           <Activity size={16} className="text-[#25D366]" />
                                           <span className="text-[10px] font-black text-[#25D366] uppercase tracking-[0.2em]">{member.status}</span>
@@ -261,12 +261,12 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                                       </div>
                                   </div>
                               </div>
-                              <p className="text-gray-400 text-xl md:text-3xl font-medium leading-tight max-w-4xl border-l-4 border-white/10 pl-10 italic">
+                              <p className="text-gray-400 text-base md:text-xl font-medium leading-relaxed max-w-3xl border-l-4 border-white/10 pl-8 italic">
                                  {member.bio}
                               </p>
                               
-                              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-12 border-t border-white/10">
-                                  <div className="h-80 relative bg-black/40 rounded-[3rem] border border-white/10 p-6 group/radar">
+                              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-8 border-t border-white/10">
+                                  <div className="h-64 relative bg-black/40 rounded-[2rem] border border-white/10 p-5 group/radar">
                                       <div className="absolute top-6 left-6 flex items-center gap-2 z-10">
                                           <BarChart3 size={18} className="text-[#61F6FD]" />
                                           <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">NEURAL_METRICS</span>
@@ -279,17 +279,17 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                                           </RadarChart>
                                       </ResponsiveContainer>
                                   </div>
-                                  <div className="flex flex-col justify-center gap-10">
-                                      <div className="flex flex-wrap items-center gap-6">
-                                          <div className="w-16 h-16 rounded-[1.5rem] bg-white/5 flex items-center justify-center border border-white/10 hover:border-[#61F6FD] transition-all cursor-pointer group/link shadow-xl">
-                                              <Linkedin size={24} className="text-white/60 group-hover/link:text-white transition-colors" />
+                                  <div className="flex flex-col justify-center gap-6">
+                                      <div className="flex flex-wrap items-center gap-4">
+                                          <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 hover:border-[#61F6FD] transition-all cursor-pointer group/link shadow-xl">
+                                              <Linkedin size={20} className="text-white/60 group-hover/link:text-white transition-colors" />
                                           </div>
-                                          <div className="w-16 h-16 rounded-[1.5rem] bg-white/5 flex items-center justify-center border border-white/10 hover:border-[#F62961] transition-all cursor-pointer group/link shadow-xl">
-                                              <Mail size={24} className="text-white/60 group-hover/link:text-white transition-colors" />
+                                          <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 hover:border-[#F62961] transition-all cursor-pointer group/link shadow-xl">
+                                              <Mail size={20} className="text-white/60 group-hover/link:text-white transition-colors" />
                                           </div>
-                                          <a href="https://wa.me/31637404577" target="_blank" className="flex-1 flex items-center justify-center gap-5 h-16 rounded-[1.5rem] bg-[#25D366]/10 border border-[#25D366]/20 hover:border-[#25D366] transition-all group/chat shadow-xl">
-                                              <Terminal size={20} className="text-[#25D366]/60 group-hover/chat:text-[#25D366] transition-colors" />
-                                              <span className="text-xs font-black uppercase tracking-widest text-[#25D366]">ESTABLISH LINK</span>
+                                          <a href="https://wa.me/31637404577" target="_blank" className="flex-1 flex items-center justify-center gap-4 h-12 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 hover:border-[#25D366] transition-all group/chat shadow-xl">
+                                              <Terminal size={16} className="text-[#25D366]/60 group-hover/chat:text-[#25D366] transition-colors" />
+                                              <span className="text-[10px] font-black uppercase tracking-widest text-[#25D366]">ESTABLISH LINK</span>
                                           </a>
                                       </div>
                                   </div>
@@ -300,22 +300,22 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
               ))}
           </div>
 
-          <div className="mt-48 mb-24 flex justify-center px-4 overflow-visible">
-              <div className="w-full max-w-6xl bg-white/[0.02] border border-white/10 rounded-[4rem] p-10 md:p-24 relative overflow-visible group transition-all duration-1000 scale-100 opacity-100 shadow-3xl">
+          <div className="mt-24 md:mt-32 mb-16 md:mb-20 flex justify-center px-4 overflow-visible">
+              <div className="w-full max-w-6xl bg-white/[0.02] border border-white/10 rounded-[3rem] p-10 md:p-16 relative overflow-visible group transition-all duration-1000 scale-100 opacity-100 shadow-3xl">
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#61F6FD]/5 via-transparent to-[#F62961]/5 opacity-40 rounded-[4rem]"></div>
                 
-                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-16 overflow-visible">
+                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 overflow-visible">
                     <div className="flex-1 text-center md:text-left z-30">
-                        <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 mb-10 backdrop-blur-md">
+                        <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md">
                             <Shield size={14} className="text-[#61F6FD]" />
                             <span className="text-white/60 font-black uppercase tracking-[0.4em] text-[10px]">INTEGRATED BRAND OS</span>
                         </div>
-                        
-                        <h2 className="text-4xl md:text-8xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-12">
+
+                        <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-10">
                             LET'S GET <br/> <span className="text-[#25D366]">SOCIALNOW</span>
                         </h2>
-                        
-                        <p className="text-gray-400 font-bold text-lg md:text-2xl leading-tight mb-12">
+
+                        <p className="text-gray-400 font-bold text-lg md:text-xl leading-tight mb-10">
                             Wij vertalen rauwe ambitie naar <span className="text-white">geïntegreerde visuele ecosystemen</span>. Onze strategie is gecodeerd voor dominantie.
                         </p>
                         
@@ -330,7 +330,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                             </div>
                         </div>
 
-                        <Button variant="green" icon={true} IconComponent={Send} onClick={handleClose} className="!px-14 !text-lg shadow-[0_0_30px_rgba(37,211,102,0.2)]">Neem Contact Op</Button>
+                        <Button variant="green" icon={true} IconComponent={Send} onClick={handleClose} className="!px-12 !text-base shadow-[0_0_30px_rgba(37,211,102,0.2)]">Neem Contact Op</Button>
                     </div>
                     
                 </div>
@@ -338,24 +338,24 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
           </div>
 
           {/* STATS GRID - ANIMATED STAGGERED */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                   { icon: TrendingUp, color: "#25D366", label: "Impact", value: "+124%", desc: "Groei Rate" },
                   { icon: CircleDollarSign, color: "#F7E644", label: "ROI", value: "€14.5k", desc: "Gemiddeld / mnd" },
                   { icon: BarChart3, color: "#F62961", label: "Conversion", value: "4.8%", desc: "Opt-in Rate" },
                   { icon: Target, color: "#61F6FD", label: "Performance", value: "99.8%", desc: "Peak Efficiency" }
               ].map((stat, i) => (
-                <div 
-                    key={i} 
-                    className="bg-white/[0.02] border border-white/10 rounded-[2.5rem] p-10 group hover:border-white/20 transition-all shadow-3xl animate-fade-in-up"
+                <div
+                    key={i}
+                    className="bg-white/[0.02] border border-white/10 rounded-[2rem] p-8 group hover:border-white/20 transition-all shadow-3xl animate-fade-in-up"
                     style={{ animationDelay: `${0.5 + (i * 0.1)}s` }}
                 >
-                    <div className="w-14 h-14 rounded-2xl bg-black border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                        <stat.icon size={24} style={{ color: stat.color }} />
+                    <div className="w-12 h-12 rounded-xl bg-black border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <stat.icon size={20} style={{ color: stat.color }} />
                     </div>
                     <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 mb-2 block">{stat.label}</span>
-                    <div className="text-3xl font-black text-white mb-2">{stat.value}</div>
-                    <div className="text-xs font-bold text-gray-500 uppercase tracking-widest">{stat.desc}</div>
+                    <div className="text-2xl font-black text-white mb-2">{stat.value}</div>
+                    <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{stat.desc}</div>
                 </div>
               ))}
           </div>

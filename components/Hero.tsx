@@ -110,19 +110,19 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
              </div>
           </div>
 
-          <div className="w-full max-w-[1600px]">
+          <div className="w-full max-w-[1400px]">
               <h1 className="font-black uppercase tracking-tighter text-white leading-[0.85]">
                 {/* THE NEXT */}
-                <div className="text-[2rem] sm:text-5xl md:text-7xl lg:text-[8rem] xl:text-[9rem] flex items-center justify-center gap-2 md:gap-4">
+                <div className="text-[2rem] sm:text-5xl md:text-6xl lg:text-[6.5rem] xl:text-[7.5rem] flex items-center justify-center gap-2 md:gap-4">
                   <span className="text-[#F7E644]">"</span>
                   <ScrollTypewriter text='THE NEXT' delay={100} start={startAnimation} withHighlight={false} />
                 </div>
                 {/* GENERATION */}
-                <div className="text-[2.5rem] sm:text-6xl md:text-[8rem] lg:text-[10rem] xl:text-[11rem] flex justify-center">
+                <div className="text-[2.5rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] xl:text-[9.5rem] flex justify-center">
                   <ScrollTypewriter text="GENERATION" delay={400} start={startAnimation} withHighlight={false} />
                 </div>
                 {/* OF + cycling word */}
-                <div className="text-[2rem] sm:text-5xl md:text-7xl lg:text-[8rem] xl:text-[9rem]">
+                <div className="text-[2rem] sm:text-5xl md:text-6xl lg:text-[6.5rem] xl:text-[7.5rem]">
                   <div className="flex items-center justify-center">
                     <ScrollTypewriter text="OF" delay={800} start={startAnimation} withHighlight={false} />
                     <div className="relative inline-flex items-center h-[1.1em] ml-2 md:ml-10">
@@ -146,7 +146,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
             <BinaryTagline />
           </div>
 
-          <p className={`max-w-3xl mx-auto text-gray-400 text-sm md:text-2xl mb-10 md:mb-16 font-medium leading-relaxed px-6 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.4s' }}>
+          <p className={`max-w-2xl mx-auto text-gray-400 text-sm md:text-xl mb-10 md:mb-14 font-medium leading-relaxed px-6 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.4s' }}>
             Wij bouwen websites, applicaties en digitale projecten met AI als fundament. <span className="text-white font-black italic">Voor bedrijven die de toekomst vormgeven.</span>
           </p>
 

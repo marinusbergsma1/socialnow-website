@@ -201,14 +201,14 @@ const ShortContent: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-24 md:py-48 bg-black overflow-hidden relative border-t border-white/5">
+    <section className="py-24 md:py-36 bg-black overflow-hidden relative border-t border-white/5">
       {/* Header */}
-      <div className="container mx-auto px-6 relative z-10 text-center mb-12 md:mb-24">
+      <div className="container mx-auto px-6 relative z-10 text-center mb-12 md:mb-20">
         <div className="inline-flex items-center gap-4 px-8 py-3 rounded-full border border-white/10 bg-white/5 mb-10 backdrop-blur-xl">
           <Network size={16} className="text-[#61F6FD]" />
           <span className="text-white font-black uppercase tracking-[0.4em] text-[10px]">CONTENT_OS_SYNC // V3.2</span>
         </div>
-        <h2 className="text-5xl md:text-[10rem] font-black uppercase text-white tracking-tighter leading-none mb-10">
+        <h2 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase text-white tracking-tighter leading-none mb-10">
           SHORT FORM <br/> <span className="text-[#F7E644]">&ldquo;</span>CONTENT<span className="text-[#F7E644]">&rdquo;</span>
         </h2>
       </div>
@@ -219,23 +219,23 @@ const ShortContent: React.FC = () => {
       </div>
 
       {/* Stats */}
-      <div className="container mx-auto px-6 mt-32 md:mt-40 z-10" ref={statsRef}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
+      <div className="container mx-auto px-6 mt-24 md:mt-32 z-10" ref={statsRef}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 text-center">
           {[
             { label: "Followers", end: 2, icon: Activity, color: "#F7E644", id: "01" },
             { label: "Likes", end: 500, icon: Database, color: "#61F6FD", id: "02" },
             { label: "Reach", end: 800, icon: Shield, color: "#F62961", id: "03" }
           ].map((stat, i) => (
-            <div key={i} className="relative p-8 md:p-14 rounded-[3rem] bg-[#050505] border border-white/10 transition-all duration-700 flex flex-col items-center group">
+            <div key={i} className="relative p-8 md:p-10 rounded-[2.5rem] bg-[#050505] border border-white/10 transition-all duration-700 flex flex-col items-center group">
               <div className="absolute top-0 right-0 w-40 h-40 blur-[100px] opacity-[0.03] group-hover:opacity-[0.08] transition-opacity" style={{ backgroundColor: stat.color }} />
-              <div className="flex items-center gap-3 mb-8 opacity-30 group-hover:opacity-50 transition-opacity">
+              <div className="flex items-center gap-3 mb-6 opacity-30 group-hover:opacity-50 transition-opacity">
                 <stat.icon size={16} style={{ color: stat.color }} />
                 <span className="text-[10px] font-bold tracking-[0.4em] text-white/60 uppercase">METRIC_OS_{stat.id}</span>
               </div>
-              <h4 className="text-7xl md:text-[8rem] font-black mb-4 tracking-tighter" style={{ color: stat.color }}>
+              <h4 className="text-6xl md:text-7xl font-black mb-3 tracking-tighter" style={{ color: stat.color }}>
                 <CountUp end={stat.end} start={statsVisible} suffix="m+" />
               </h4>
-              <span className="block text-white uppercase font-bold tracking-[0.3em] text-base">{stat.label}</span>
+              <span className="block text-white uppercase font-bold tracking-[0.3em] text-sm">{stat.label}</span>
             </div>
           ))}
         </div>

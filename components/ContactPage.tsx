@@ -60,13 +60,13 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
           </button>
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-7xl pt-24 pb-48 px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
-              
+      <div className="relative z-10 container mx-auto max-w-7xl pt-20 pb-36 px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
               {/* Left Side: Info & Visuals */}
-              <div className="space-y-16">
+              <div className="space-y-12">
                   <div>
-                      <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-10 backdrop-blur-md">
+                      <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md">
                         <Terminal size={16} className="text-[#61F6FD]" />
                         <span className="text-white font-black uppercase tracking-[0.6em] text-[10px]">CONTACT_NODE_V1</span>
                       </div>
@@ -75,10 +75,10 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
                         <PixelGlobe scaleMultiplier={0.3} type="all" opacity={0.5} glowEnabled={true} largeParticles={true} />
                       </div>
 
-                      <h1 className="text-5xl md:text-9xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-12">
+                      <h1 className="text-4xl md:text-7xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-10">
                          LET'S <br/> <span className="text-[#25D366]">CONNECT</span>
                       </h1>
-                      <p className="text-gray-400 font-bold text-xl md:text-3xl max-w-xl italic leading-tight">
+                      <p className="text-gray-400 font-bold text-lg md:text-2xl max-w-xl italic leading-tight">
                          "Wij vertalen ambitie naar resultaat. Jouw merk is onze blauwdruk voor groei."
                       </p>
                   </div>
@@ -100,15 +100,15 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* Right Side: Contact Channels */}
-              <div className="space-y-12">
-                  <div className="bg-[#050505] border border-white/10 rounded-[4rem] p-10 md:p-16 shadow-3xl">
-                      <h3 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mb-12">NEEM <span className="text-[#F7E644]">DIRECT</span> CONTACT OP</h3>
+              <div className="space-y-10">
+                  <div className="bg-[#050505] border border-white/10 rounded-[3rem] p-8 md:p-12 shadow-3xl">
+                      <h3 className="text-2xl md:text-4xl font-black text-white uppercase tracking-tighter mb-8">NEEM <span className="text-[#F7E644]">DIRECT</span> CONTACT OP</h3>
                       
                       <div className="space-y-6">
                           {/* WhatsApp */}
-                          <a href="https://wa.me/31637404577" target="_blank" className="group flex items-center justify-between p-8 rounded-[2.5rem] border border-[#25D366]/20 bg-[#25D366]/[0.02] hover:bg-[#25D366]/10 transition-all duration-500">
+                          <a href="https://wa.me/31637404577" target="_blank" className="group flex items-center justify-between p-6 rounded-[2rem] border border-[#25D366]/20 bg-[#25D366]/[0.02] hover:bg-[#25D366]/10 transition-all duration-500">
                               <div className="flex items-center gap-6">
-                                  <div className="w-16 h-16 rounded-2xl bg-[#25D366] text-black flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                                  <div className="w-14 h-14 rounded-xl bg-[#25D366] text-black flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
                                       <MessageSquare size={28} />
                                   </div>
                                   <div>
@@ -120,9 +120,9 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
                           </a>
 
                           {/* Email */}
-                          <a href="mailto:info@socialnow.nl" className="group flex items-center justify-between p-8 rounded-[2.5rem] border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-500">
+                          <a href="mailto:info@socialnow.nl" className="group flex items-center justify-between p-6 rounded-[2rem] border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-500">
                               <div className="flex items-center gap-6">
-                                  <div className="w-16 h-16 rounded-2xl bg-white/5 text-[#61F6FD] flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform">
+                                  <div className="w-14 h-14 rounded-xl bg-white/5 text-[#61F6FD] flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform">
                                       <Mail size={28} />
                                   </div>
                                   <div>
@@ -134,9 +134,9 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
                           </a>
 
                           {/* Phone */}
-                          <a href="tel:+31637404577" className="group flex items-center justify-between p-8 rounded-[2.5rem] border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-500">
+                          <a href="tel:+31637404577" className="group flex items-center justify-between p-6 rounded-[2rem] border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-500">
                               <div className="flex items-center gap-6">
-                                  <div className="w-16 h-16 rounded-2xl bg-white/5 text-[#F62961] flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform">
+                                  <div className="w-14 h-14 rounded-xl bg-white/5 text-[#F62961] flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform">
                                       <Phone size={28} />
                                   </div>
                                   <div>
@@ -148,11 +148,11 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
                           </a>
                       </div>
 
-                      <div className="mt-16 pt-16 border-t border-white/5">
-                          <h4 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.6em] mb-10 text-center">VOLG HET ECOSYSTEEM</h4>
-                          <div className="flex justify-center gap-6">
+                      <div className="mt-10 pt-10 border-t border-white/5">
+                          <h4 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.6em] mb-8 text-center">VOLG HET ECOSYSTEEM</h4>
+                          <div className="flex justify-center gap-4">
                               {[Linkedin, Instagram, Twitter, Facebook].map((Icon, i) => (
-                                  <div key={i} className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all cursor-pointer shadow-xl">
+                                  <div key={i} className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all cursor-pointer shadow-xl">
                                       <Icon size={20} />
                                   </div>
                               ))}
