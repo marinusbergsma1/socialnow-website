@@ -13,6 +13,7 @@ export interface Project {
   align: 'left' | 'right';
   gallery?: string[];
   url?: string;
+  fullPageScreenshot?: string;
 }
 
 export interface TeamMember {

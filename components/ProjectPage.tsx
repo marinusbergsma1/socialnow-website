@@ -1,12 +1,12 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProjectBySlug, getAdjacentProjects, allProjects } from '../data/projects';
 import Button from './Button';
 import ProgressiveImage from './ProgressiveImage';
 import {
   User, Calendar, Layers, ChevronLeft, ChevronRight,
-  ExternalLink, Globe
+  ExternalLink, Globe, Monitor, MousePointer
 } from 'lucide-react';
 
 // Simple video for gallery items
@@ -20,6 +20,128 @@ const GalleryVideo: React.FC<{ src: string }> = ({ src }) => (
     className="w-full h-auto block"
   />
 );
+
+// Scrollable website preview — swipe through the full page, click to visit
+const WebsitePreview: React.FC<{ screenshot: string; url: string; title: string }> = ({ screenshot, url, title }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container || !isAutoScrolling) return;
+
+    let animationId: number;
+    let startTime: number | null = null;
+    const duration = 8000; // 8 seconds to auto-scroll down
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease in-out
+      const eased = progress < 0.5
+        ? 2 * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+      if (container) {
+        const maxScroll = container.scrollHeight - container.clientHeight;
+        container.scrollTop = eased * maxScroll * 0.3; // Only scroll 30% down
+      }
+
+      if (progress < 1 && isAutoScrolling) {
+        animationId = requestAnimationFrame(animate);
+      }
+    };
+
+    const timeout = setTimeout(() => {
+      animationId = requestAnimationFrame(animate);
+    }, 1500);
+
+    return () => {
+      clearTimeout(timeout);
+      cancelAnimationFrame(animationId);
+    };
+  }, [isAutoScrolling]);
+
+  const handleScroll = () => {
+    setIsAutoScrolling(false);
+    const container = scrollRef.current;
+    if (!container) return;
+    const maxScroll = container.scrollHeight - container.clientHeight;
+    setScrollProgress(maxScroll > 0 ? container.scrollTop / maxScroll : 0);
+  };
+
+  return (
+    <div className="relative group">
+      {/* Browser chrome frame */}
+      <div className="rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 bg-[#111] shadow-2xl">
+        {/* Browser top bar */}
+        <div className="flex items-center gap-3 px-4 py-3 bg-[#1a1a1a] border-b border-white/10">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-[#ff5f57]"></div>
+            <div className="w-3 h-3 rounded-full bg-[#febc2e]"></div>
+            <div className="w-3 h-3 rounded-full bg-[#28c840]"></div>
+          </div>
+          <div className="flex-1 flex justify-center">
+            <div className="flex items-center gap-2 bg-white/5 rounded-lg px-4 py-1.5 text-xs text-white/40 font-mono max-w-[400px] w-full">
+              <Globe size={12} className="text-white/30 shrink-0" />
+              <span className="truncate">{url.replace(/^https?:\/\//, '')}</span>
+            </div>
+          </div>
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] text-[10px] font-bold uppercase tracking-widest hover:bg-[#25D366]/20 transition-all"
+          >
+            <ExternalLink size={10} />
+            Live
+          </a>
+        </div>
+
+        {/* Scrollable screenshot container */}
+        <div className="relative">
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            onMouseEnter={() => setIsAutoScrolling(false)}
+            onTouchStart={() => setIsAutoScrolling(false)}
+            className="overflow-y-auto overflow-x-hidden cursor-grab active:cursor-grabbing"
+            style={{ maxHeight: '70vh' }}
+          >
+            <a href={url} target="_blank" rel="noopener noreferrer" className="block">
+              <img
+                src={screenshot}
+                alt={`${title} - Full website preview`}
+                className="w-full h-auto block"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+          </div>
+
+          {/* Scroll progress indicator */}
+          <div className="absolute top-2 right-2 bottom-2 w-1 rounded-full bg-white/5 z-10">
+            <div
+              className="w-full rounded-full bg-[#61F6FD]/40 transition-all duration-150"
+              style={{ height: `${Math.max(10, (1 / 6) * 100)}%`, transform: `translateY(${scrollProgress * 500}%)` }}
+            ></div>
+          </div>
+
+          {/* Gradient overlays for scroll hint */}
+          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#111] to-transparent pointer-events-none z-10"></div>
+        </div>
+
+        {/* Bottom bar with hint */}
+        <div className="flex items-center justify-center gap-3 px-4 py-3 bg-[#1a1a1a] border-t border-white/10">
+          <MousePointer size={12} className="text-white/30 animate-bounce" />
+          <span className="text-[10px] text-white/30 font-bold uppercase tracking-widest">Scroll om door de site te bladeren — Klik om te bezoeken</span>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }) => {
   const { slug } = useParams<{ slug: string }>();
@@ -162,6 +284,21 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
           </div>
         </div>
       </div>
+
+      {/* Full-page scrollable website preview */}
+      {project.fullPageScreenshot && project.url && (
+        <div className="max-w-5xl mx-auto px-6 md:px-12 pb-20">
+          <div className="flex items-center gap-3 mb-6">
+            <Monitor size={16} className="text-[#61F6FD]" />
+            <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/50">Website Preview</h2>
+          </div>
+          <WebsitePreview
+            screenshot={project.fullPageScreenshot}
+            url={project.url}
+            title={project.title}
+          />
+        </div>
+      )}
 
       {/* Gallery - naast elkaar, niet inkorten */}
       {project.gallery && project.gallery.length > 0 && (
