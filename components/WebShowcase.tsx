@@ -73,33 +73,46 @@ const WebShowcase: React.FC = () => {
     return () => { document.body.style.overflow = ''; };
   }, [isFullscreen]);
 
-  // Helper: should this project use screenshot fallback?
-  // Only use screenshot for SocialNow when we're already inside an iframe (prevents infinite recursion)
-  const shouldUseScreenshot = (project: typeof activeProject) => {
+  // Helper: should this project use unlock fallback?
+  // Only for SocialNow when we're already inside an iframe (prevents infinite recursion)
+  const shouldUseUnlock = (project: typeof activeProject) => {
     const isSelf = project.url?.includes('socialnow-website');
     return isSelf && isInIframe;
   };
 
   const renderPreview = (project: typeof activeProject, idx: number, isFS: boolean) => {
-    if (shouldUseScreenshot(project)) {
-      // Screenshot fallback — only when nested in iframe
+    if (shouldUseUnlock(project)) {
+      // "Unlock" screen — prevents inception infinite loop
       return (
         <div
           key={isFS ? `fs-${project.id}` : project.id}
           className={isFS
-            ? `w-full h-full overflow-y-auto ${idx === activeIndex ? 'block' : 'hidden'}`
-            : `w-full h-full overflow-y-auto transition-opacity duration-500 ${idx === activeIndex ? 'opacity-100 relative' : 'opacity-0 absolute inset-0 pointer-events-none'}`
+            ? `w-full h-full ${idx === activeIndex ? 'flex' : 'hidden'} items-center justify-center`
+            : `w-full h-full transition-opacity duration-500 flex items-center justify-center ${idx === activeIndex ? 'opacity-100 relative' : 'opacity-0 absolute inset-0 pointer-events-none'}`
           }
+          style={{ background: 'radial-gradient(ellipse at center, rgba(37,211,102,0.08) 0%, rgba(0,0,0,0.95) 70%)' }}
+          ref={() => { if (!isFS) handleIframeLoad(idx); }}
         >
-          <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
-            <img
-              src={project.fullPageScreenshot}
-              alt={`${project.title} website`}
-              className="w-full h-auto block"
-              loading="lazy"
-              onLoad={() => !isFS && handleIframeLoad(idx)}
-            />
-          </a>
+          <div className="flex flex-col items-center gap-6 md:gap-8 text-center px-8 max-w-lg">
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+              <span className="text-2xl md:text-3xl">🔒</span>
+            </div>
+            <h3 className="text-2xl md:text-4xl font-black uppercase text-white tracking-tighter leading-tight">
+              INCEPTION <span className="text-[#25D366]">DEPTH</span> REACHED
+            </h3>
+            <p className="text-gray-500 text-sm md:text-base font-bold">
+              Je kijkt naar een website, in een website, in een website...
+            </p>
+            <a
+              href="https://wa.me/31637404577"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-black font-black uppercase tracking-wider text-xs md:text-sm hover:bg-[#20bd5a] transition-all shadow-[0_0_30px_rgba(37,211,102,0.3)] hover:shadow-[0_0_50px_rgba(37,211,102,0.5)]"
+            >
+              NEEM CONTACT OP TO UNLOCK
+              <ExternalLink size={14} />
+            </a>
+          </div>
         </div>
       );
     }
