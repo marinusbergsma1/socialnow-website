@@ -17,7 +17,7 @@ const GalleryVideo: React.FC<{ src: string }> = ({ src }) => (
     loop
     muted
     playsInline
-    className="w-full h-auto object-cover"
+    className="w-full h-full object-cover"
   />
 );
 
@@ -168,13 +168,13 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
         <div className="max-w-6xl mx-auto px-6 md:px-12 pb-20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {project.gallery.map((item, idx) => (
-              <div key={idx} className="rounded-2xl md:rounded-3xl overflow-hidden border border-white/5 bg-[#0a0a0a] group relative">
+              <div key={idx} className="rounded-2xl md:rounded-3xl overflow-hidden border border-white/5 bg-[#0a0a0a] group relative aspect-[4/5]">
                 {item.endsWith('.mp4') ? (
                   <GalleryVideo src={item} />
                 ) : (
                   <img
                     alt={`${project.title} detail ${idx + 1}`}
-                    className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                     loading="lazy"
                     decoding="async"
                     src={item}
