@@ -302,7 +302,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
                             </div>
 
                             {project.gallery && project.gallery.length > 0 && (
-                              <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 h-auto">
+                              <div className="w-full grid grid-cols-3 gap-2 md:gap-3 h-auto">
                                 {project.gallery.slice(0, 3).map((img, i) => (
                                   <div key={i} className="rounded-lg md:rounded-xl overflow-hidden relative border border-white/10 bg-zinc-900 shadow-2xl transition-transform hover:scale-105 aspect-[2/3]">
                                     {img.endsWith('.mp4') ? (
