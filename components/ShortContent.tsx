@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, memo, useCallback } from 'react';
-import { Activity, Database, Shield, Network, X, ChevronUp, ChevronDown, Volume2, VolumeX } from 'lucide-react';
+import { X, ChevronUp, ChevronDown, Volume2, VolumeX } from 'lucide-react';
 
 // ─── CountUp ────────────────────────────────────────────────────────────
 const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: number; duration?: number; start: boolean; suffix?: string }) => {
@@ -215,9 +215,9 @@ const InfiniteVideoSlider: React.FC<{
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  const cardWidth = isMobile ? 160 : 280;
-  const cardHeight = isMobile ? 320 : 530;
-  const gap = isMobile ? 10 : 20;
+  const cardWidth = isMobile ? 80 : 280;
+  const cardHeight = isMobile ? 142 : 530;
+  const gap = isMobile ? 8 : 20;
   const totalItemWidth = cardWidth + gap;
   const setLength = videos.length;
   const totalSetWidth = totalItemWidth * setLength;
@@ -323,7 +323,7 @@ const InfiniteVideoSlider: React.FC<{
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
-      style={{ touchAction: 'pan-y', overflow: 'clip', padding: `${isMobile ? 30 : 40}px 0` }}
+      style={{ touchAction: 'pan-y', overflow: 'clip', padding: `${isMobile ? 16 : 40}px 0` }}
     >
       <div
         ref={trackRef}
@@ -348,7 +348,7 @@ const InfiniteVideoSlider: React.FC<{
               <div className="w-full bg-black relative group"
                 style={{
                   height: `${cardHeight}px`,
-                  borderRadius: isMobile ? '1rem' : '1.5rem',
+                  borderRadius: isMobile ? '0.6rem' : '1.5rem',
                   overflow: 'hidden',
                   boxShadow: isHovered ? '0 0 30px rgba(37,211,102,0.3)' : 'none',
                 }}
@@ -415,17 +415,18 @@ const ShortContent: React.FC = () => {
 
   return (
     <>
-      <section className="py-16 md:py-28 bg-black overflow-hidden relative border-t border-white/5">
+      <section className="py-10 md:py-28 bg-transparent overflow-hidden relative border-t border-white/5">
+        {/* Background watermark */}
+        <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.03] select-none overflow-hidden">
+          <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">MOTION</h2>
+        </div>
+
         {/* Header */}
-        <div className="container mx-auto px-6 relative z-10 text-center mb-8 md:mb-14">
-          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/10 bg-white/5 mb-6 backdrop-blur-xl">
-            <Network size={14} className="text-white/40" />
-            <span className="text-white/50 font-bold uppercase tracking-[0.3em] text-[9px]">Short Form Content</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-none mb-4">
+        <div className="container mx-auto px-6 relative z-10 text-center mb-4 md:mb-14">
+          <h2 className="text-2xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-none mb-3 md:mb-4">
             SHORT FORM CONTENT
           </h2>
-          <p className="text-gray-500 text-sm md:text-base font-medium max-w-lg mx-auto">
+          <p className="text-gray-500 text-xs md:text-base font-medium max-w-lg mx-auto">
             Van virale reels tot branded content. Wij maken scroll-stopping video's die converteren.
           </p>
         </div>
@@ -436,18 +437,18 @@ const ShortContent: React.FC = () => {
         </div>
 
         {/* Stats */}
-        <div className="container mx-auto px-6 mt-16 md:mt-24 z-10" ref={statsRef}>
-          <div className="grid grid-cols-3 gap-3 md:gap-8 text-center">
+        <div className="container mx-auto px-6 mt-8 md:mt-24 z-10" ref={statsRef}>
+          <div className="grid grid-cols-3 gap-2 md:gap-6 text-center">
             {[
-              { label: "Followers", end: 2, icon: Activity, color: "#F7E644", id: "01" },
-              { label: "Likes", end: 500, icon: Database, color: "#61F6FD", id: "02" },
-              { label: "Reach", end: 800, icon: Shield, color: "#F62961", id: "03" }
+              { label: "Followers", end: 2, id: "01" },
+              { label: "Likes", end: 500, id: "02" },
+              { label: "Reach", end: 800, id: "03" }
             ].map((stat, i) => (
-              <div key={i} className="relative p-5 md:p-8 rounded-2xl md:rounded-3xl bg-[#080808] border border-white/8 transition-all duration-700 flex flex-col items-center group">
-                <h4 className="text-3xl md:text-5xl font-black mb-1 tracking-tighter" style={{ color: stat.color }}>
+              <div key={i} className="relative p-3 md:p-6 rounded-xl md:rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-700 flex flex-col items-center">
+                <h4 className="text-2xl md:text-5xl font-black mb-0.5 md:mb-1 tracking-tighter text-white">
                   <CountUp end={stat.end} start={statsVisible} suffix="m+" />
                 </h4>
-                <span className="block text-white/60 uppercase font-bold tracking-[0.2em] text-[10px] md:text-xs">{stat.label}</span>
+                <span className="block text-white/30 uppercase font-bold tracking-[0.25em] text-[7px] md:text-[10px]">{stat.label}</span>
               </div>
             ))}
           </div>

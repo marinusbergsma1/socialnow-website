@@ -50,6 +50,7 @@ const MarqueeRow: React.FC<{ images: typeof imagesRow1; speed: number; reverse?:
   const trackRef = useRef<HTMLDivElement>(null);
   const posRef = useRef(0);
   const animRef = useRef<number>(0);
+  const singleSetWidthRef = useRef(0);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -59,12 +60,36 @@ const MarqueeRow: React.FC<{ images: typeof imagesRow1; speed: number; reverse?:
   const cardHeight = isMobile ? 100 : 260;
   const gap = isMobile ? 12 : 24;
 
+  // Duplicate enough times to fill screen + buffer (6x for wide screens)
+  const allImages = [...images, ...images, ...images, ...images, ...images, ...images];
+
+  // Measure single set width after render
+  useEffect(() => {
+    if (!trackRef.current) return;
+    // Total scrollWidth / number of sets = single set width
+    singleSetWidthRef.current = trackRef.current.scrollWidth / 6;
+    // Start in the middle (at set 3) so reverse direction also has room
+    posRef.current = singleSetWidthRef.current * 2;
+  }, [isMobile, images.length]);
+
   const animate = useCallback(() => {
+    const singleSetWidth = singleSetWidthRef.current;
+    if (singleSetWidth === 0) {
+      animRef.current = requestAnimationFrame(animate);
+      return;
+    }
+
     posRef.current += reverse ? -speed : speed;
+
+    // Seamless wrap: keep position within middle sets
+    if (posRef.current >= singleSetWidth * 4) {
+      posRef.current -= singleSetWidth;
+    }
+    if (posRef.current <= singleSetWidth) {
+      posRef.current += singleSetWidth;
+    }
+
     if (trackRef.current) {
-      const halfWidth = trackRef.current.scrollWidth / 2;
-      if (!reverse && posRef.current >= halfWidth) posRef.current -= halfWidth;
-      if (reverse && Math.abs(posRef.current) >= halfWidth) posRef.current += halfWidth;
       trackRef.current.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
     }
     animRef.current = requestAnimationFrame(animate);
@@ -74,9 +99,6 @@ const MarqueeRow: React.FC<{ images: typeof imagesRow1; speed: number; reverse?:
     animRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animRef.current);
   }, [animate]);
-
-  // Duplicate images for seamless loop
-  const allImages = [...images, ...images];
 
   return (
     <div className="overflow-hidden relative">
@@ -88,7 +110,7 @@ const MarqueeRow: React.FC<{ images: typeof imagesRow1; speed: number; reverse?:
         {allImages.map((img, i) => (
           <div
             key={i}
-            className="flex-none overflow-hidden border border-white/8 bg-[#0a0a0a] flex items-center justify-center hover:border-white/20 transition-colors duration-300"
+            className="flex-none overflow-hidden bg-[#0a0a0a] flex items-center justify-center"
             style={{ height: `${cardHeight}px`, borderRadius: isMobile ? '0.8rem' : '1.5rem' }}
           >
             <LazyImage

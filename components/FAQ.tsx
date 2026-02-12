@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
-import { Plus, Minus, MessageCircle, Zap, ArrowRight } from 'lucide-react';
-import Button from './Button';
+import { Plus, Minus, MessageCircle } from 'lucide-react';
 
 const faqs = [
   {
@@ -48,21 +47,22 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
   };
 
   return (
-    <section className="py-24 md:py-36 bg-transparent relative overflow-hidden">
+    <section className="py-20 md:py-36 bg-transparent relative overflow-hidden">
+      {/* Background watermark */}
+      <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.03] select-none overflow-hidden">
+        <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">FAQ</h2>
+      </div>
+
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
 
         {/* Minimal header */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-16 md:mb-24">
           <div>
-            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/10 bg-white/5 mb-6 backdrop-blur-md">
-              <Zap size={12} className="text-white/50" />
-              <span className="text-white/50 font-black uppercase tracking-[0.4em] text-[9px]">FAQ</span>
-            </div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.85]">
-              VRAGEN &amp; ANTWOORDEN
+              VRAGEN &amp;<br className="md:hidden" /> ANTWOORDEN
             </h2>
           </div>
-          <p className="text-gray-500 text-sm md:text-base font-bold max-w-xs leading-relaxed">
+          <p className="text-gray-500 text-sm md:text-base font-medium max-w-xs leading-relaxed">
             De antwoorden op de meest gestelde vragen over onze werkwijze.
           </p>
         </div>
@@ -118,27 +118,19 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
           })}
         </div>
 
-        {/* Bottom CTA — Glassmorphism */}
-        <div className="mt-16 md:mt-24 flex flex-col md:flex-row items-center justify-between gap-8 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem]"
-          style={{
-            background: 'rgba(255, 255, 255, 0.03)',
-            backdropFilter: 'blur(40px) saturate(180%)',
-            WebkitBackdropFilter: 'blur(40px) saturate(180%)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
-          }}>
-          <div className="text-center md:text-left">
-            <h3 className="text-xl md:text-2xl font-black uppercase text-white tracking-tight mb-2">Nog vragen?</h3>
-            <p className="text-gray-500 text-sm font-bold">We reageren binnen 24 uur.</p>
-          </div>
+        {/* Bottom note */}
+        <div className="mt-12 md:mt-20 pt-8 border-t border-white/[0.06] flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-white/20 text-xs font-bold uppercase tracking-[0.2em]">
+            Staat jouw vraag er niet bij?
+          </p>
           <a
             href="https://wa.me/31637404577"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-white font-black uppercase tracking-wider text-xs md:text-sm hover:bg-[#20bd5a] transition-all shadow-[0_0_20px_rgba(37,211,102,0.15)] hover:shadow-[0_0_30px_rgba(37,211,102,0.3)]"
+            className="inline-flex items-center gap-2 text-white/40 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
           >
-            <MessageCircle size={16} />
-            Stel je vraag
+            <MessageCircle size={14} />
+            Stel je vraag via WhatsApp
           </a>
         </div>
       </div>

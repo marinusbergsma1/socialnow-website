@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Globe, ExternalLink, Code, ChevronLeft, ChevronRight, Maximize2, ChevronDown } from 'lucide-react';
+import { Globe, ExternalLink, ChevronLeft, ChevronRight, Maximize2, ChevronDown } from 'lucide-react';
 import { webShowcaseProjects } from '../data/projects';
 
 // Detect if we're inside an iframe (to prevent recursive loading)
@@ -235,49 +235,31 @@ const WebShowcase: React.FC = () => {
   return (
     <>
       <section ref={sectionRef} className="relative bg-transparent overflow-visible">
+        {/* Background watermark */}
+        <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.03] select-none overflow-hidden">
+          <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">WEBSITES</h2>
+        </div>
+
         {/* Section Header */}
-        <div className="pt-10 md:pt-32 pb-4 md:pb-12">
+        <div className="pt-8 md:pt-32 pb-3 md:pb-12">
           <div className="container mx-auto px-6 relative z-10">
             <div className="flex flex-col items-center text-center">
-              <div className="inline-flex items-center gap-3 px-5 py-2.5 md:px-6 md:py-3 rounded-full border border-white/10 bg-white/5 mb-4 md:mb-8 backdrop-blur-md">
-                <Code size={14} className="text-[#61F6FD]" />
-                <span className="text-white/60 font-bold uppercase tracking-[0.3em] text-[10px]">WEB DESIGN & DEVELOPMENT</span>
-              </div>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.8] text-white flex flex-wrap justify-center items-center">
+              <h2 className="text-2xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.85] text-white flex flex-wrap justify-center items-center">
                 <span className="inline-flex items-center whitespace-nowrap">
-                  <span className="text-[#F7E644] mr-2 md:mr-6">&ldquo;</span>
+                  <span className="text-[#F7E644] mr-1 md:mr-6">&ldquo;</span>
                   WEBSITES
                 </span>
-                <span className="mx-2 md:mx-4">WE</span>
+                <span className="mx-1.5 md:mx-4">WE</span>
                 <span className="inline-flex items-center whitespace-nowrap">
                   BUILT
-                  <span className="text-[#F7E644] ml-2 md:ml-6">&rdquo;</span>
+                  <span className="text-[#F7E644] ml-1 md:ml-6">&rdquo;</span>
                 </span>
               </h2>
 
-              {/* USP tags */}
-              <div className="flex flex-wrap justify-center gap-1.5 md:gap-3 mt-4 md:mt-8">
-                {[
-                  { label: 'INCL. CMS', color: '#61F6FD' },
-                  { label: 'BACK-END', color: '#F7E644' },
-                  { label: 'ANALYTICS', color: '#25D366' },
-                  { label: 'AI CHATBOT', color: '#F62961' },
-                  { label: 'SEO', color: '#61F6FD' },
-                  { label: 'RESPONSIVE', color: '#F7E644' },
-                ].map((usp) => (
-                  <span
-                    key={usp.label}
-                    className="px-3 md:px-4 py-1.5 rounded-full text-[8px] md:text-[9px] font-black uppercase tracking-[0.25em]"
-                    style={{
-                      color: usp.color,
-                      border: `1px solid ${usp.color}20`,
-                      background: `${usp.color}08`,
-                    }}
-                  >
-                    {usp.label}
-                  </span>
-                ))}
-              </div>
+              {/* USP line */}
+              <p className="mt-3 md:mt-6 text-[8px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/30">
+                CMS · Back-end · Analytics · AI Chatbot · SEO · Responsive
+              </p>
             </div>
           </div>
         </div>
@@ -288,7 +270,7 @@ const WebShowcase: React.FC = () => {
           className="lg:sticky lg:top-0 z-20"
           style={{ minHeight: window.innerWidth >= 1024 ? '100vh' : 'auto' }}
         >
-          <div className="lg:h-screen flex flex-col items-center justify-center px-4 md:px-8 relative py-4 lg:py-0">
+          <div className="lg:h-screen flex flex-col items-center justify-center px-2 md:px-8 relative py-2 lg:py-0">
 
             {/* Grow-animated wrapper */}
             <div
@@ -299,7 +281,7 @@ const WebShowcase: React.FC = () => {
             >
               {/* Action bar — above previews — Glassmorphism */}
               <div
-                className="flex items-center justify-between mb-3 md:mb-4 px-4 md:px-5 py-2.5 rounded-full"
+                className="flex items-center justify-between mb-2 md:mb-4 px-3 md:px-5 py-2 md:py-2.5 rounded-full"
                 style={{
                   background: 'rgba(255, 255, 255, 0.03)',
                   backdropFilter: 'blur(20px) saturate(150%)',
@@ -309,9 +291,9 @@ const WebShowcase: React.FC = () => {
               >
                 {/* Project info left */}
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse flex-shrink-0"></div>
-                  <span className="text-white font-black uppercase tracking-tight text-sm md:text-lg truncate">{activeProject.title}</span>
-                  <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#61F6FD] hidden sm:inline flex-shrink-0">{activeProject.category}</span>
+                  <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#25D366] animate-pulse flex-shrink-0"></div>
+                  <span className="text-white font-black uppercase tracking-tight text-xs md:text-lg truncate">{activeProject.title}</span>
+                  <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.3em] text-[#61F6FD] hidden sm:inline flex-shrink-0">{activeProject.category}</span>
                 </div>
 
                 {/* Actions right */}
@@ -337,13 +319,13 @@ const WebShowcase: React.FC = () => {
               </div>
 
               {/* ═══ MOBILE: Desktop-style 16:9 screenshot preview (< lg) — NO iframes ═══ */}
-              <div className="flex lg:hidden items-center gap-2">
+              <div className="flex lg:hidden items-center gap-1.5">
                 {/* Left arrow */}
                 <button
                   onClick={goPrev}
-                  className="w-8 h-8 rounded-full border border-white/[0.08] bg-white/[0.03] flex items-center justify-center text-white/30 active:text-white active:bg-white/10 transition-all flex-shrink-0"
+                  className="w-6 h-6 rounded-full border border-white/[0.08] bg-white/[0.03] flex items-center justify-center text-white/30 active:text-white active:bg-white/10 transition-all flex-shrink-0"
                 >
-                  <ChevronLeft size={16} strokeWidth={1.5} />
+                  <ChevronLeft size={14} strokeWidth={1.5} />
                 </button>
 
                 {/* 16:9 Desktop screenshot preview — Glassmorphism */}
@@ -394,9 +376,9 @@ const WebShowcase: React.FC = () => {
                 {/* Right arrow */}
                 <button
                   onClick={goNext}
-                  className="w-8 h-8 rounded-full border border-white/[0.08] bg-white/[0.03] flex items-center justify-center text-white/30 active:text-white active:bg-white/10 transition-all flex-shrink-0"
+                  className="w-6 h-6 rounded-full border border-white/[0.08] bg-white/[0.03] flex items-center justify-center text-white/30 active:text-white active:bg-white/10 transition-all flex-shrink-0"
                 >
-                  <ChevronRight size={16} strokeWidth={1.5} />
+                  <ChevronRight size={14} strokeWidth={1.5} />
                 </button>
               </div>
 
@@ -428,15 +410,7 @@ const WebShowcase: React.FC = () => {
                     <div className="absolute top-0 left-[10%] right-[10%] h-[1px] pointer-events-none z-40"
                       style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)' }}
                     />
-                    {/* Loading spinner */}
-                    {!iframeLoaded[activeIndex] && (
-                      <div className="absolute inset-0 flex flex-col items-center justify-center z-20 bg-[#080808]">
-                        <div className="w-8 h-8 border-2 border-white/10 border-t-[#61F6FD] rounded-full animate-spin mb-3"></div>
-                        <span className="text-white/20 text-[9px] font-bold uppercase tracking-[0.3em]">Laden...</span>
-                      </div>
-                    )}
-
-                    {/* Desktop iframes */}
+                    {/* Desktop screenshots */}
                     {webShowcaseProjects.map((project, idx) => renderDesktopPreview(project, idx))}
 
                     {/* Subtle bottom gradient */}
@@ -494,30 +468,30 @@ const WebShowcase: React.FC = () => {
               </div>
 
               {/* Bottom bar: thumbnails + mobile arrows */}
-              <div className="mt-4 md:mt-6 flex items-center justify-center gap-3">
+              <div className="mt-3 md:mt-6 flex items-center justify-center gap-2 md:gap-3">
                 {/* Mobile arrows */}
                 <button
                   onClick={goPrev}
-                  className="md:hidden w-8 h-8 rounded-full border border-white/[0.06] flex items-center justify-center text-white/20 hover:text-white transition-all flex-shrink-0"
+                  className="md:hidden w-6 h-6 rounded-full border border-white/[0.06] flex items-center justify-center text-white/20 hover:text-white transition-all flex-shrink-0"
                 >
-                  <ChevronLeft size={16} strokeWidth={1.5} />
+                  <ChevronLeft size={12} strokeWidth={1.5} />
                 </button>
 
                 <div
                   ref={thumbTrackRef}
-                  className="flex gap-1.5 overflow-x-auto scrollbar-hide scroll-smooth"
+                  className="flex gap-1 md:gap-1.5 overflow-x-auto scrollbar-hide scroll-smooth"
                   style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
                   {webShowcaseProjects.map((project, idx) => (
                     <button
                       key={project.id}
                       onClick={() => goToIndex(idx)}
-                      className={`relative rounded-md overflow-hidden transition-all duration-300 flex-shrink-0 ${
+                      className={`relative rounded-sm md:rounded-md overflow-hidden transition-all duration-300 flex-shrink-0 ${
                         idx === activeIndex
                           ? 'ring-1 ring-[#61F6FD]/60 shadow-[0_0_10px_rgba(97,246,253,0.2)] scale-110 opacity-100'
                           : 'opacity-30 hover:opacity-60'
                       }`}
-                      style={{ width: idx === activeIndex ? '52px' : '44px', height: idx === activeIndex ? '32px' : '28px' }}
+                      style={{ width: idx === activeIndex ? '36px' : '30px', height: idx === activeIndex ? '22px' : '19px' }}
                     >
                       <img
                         src={project.image}
@@ -531,15 +505,15 @@ const WebShowcase: React.FC = () => {
                 {/* Mobile arrows */}
                 <button
                   onClick={goNext}
-                  className="md:hidden w-8 h-8 rounded-full border border-white/[0.06] flex items-center justify-center text-white/20 hover:text-white transition-all flex-shrink-0"
+                  className="md:hidden w-6 h-6 rounded-full border border-white/[0.06] flex items-center justify-center text-white/20 hover:text-white transition-all flex-shrink-0"
                 >
-                  <ChevronRight size={16} strokeWidth={1.5} />
+                  <ChevronRight size={12} strokeWidth={1.5} />
                 </button>
               </div>
 
               {/* Subtle project details */}
-              <div className="mt-3 text-center">
-                <p className="text-white/15 text-[9px] font-bold uppercase tracking-[0.5em]">
+              <div className="mt-2 md:mt-3 text-center">
+                <p className="text-white/15 text-[8px] md:text-[9px] font-bold uppercase tracking-[0.5em]">
                   {activeProject.client} — {activeProject.year}
                 </p>
               </div>

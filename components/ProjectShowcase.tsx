@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Terminal, SearchCode, Cpu, Volume2, Database, Globe, ExternalLink } from 'lucide-react';
+import { Terminal, SearchCode, Volume2, Database, Globe, ExternalLink } from 'lucide-react';
 import BeforeAfterSlider from './BeforeAfterSlider';
 import ProgressiveImage from './ProgressiveImage';
 import Button from './Button';
@@ -139,27 +139,13 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
 
   return (
     <section id="projecten" className="bg-transparent pt-12 md:pt-36 pb-2 md:pb-10 relative overflow-hidden">
-      {/* Background technical lines */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none">
-          <svg width="100%" height="100%">
-              <line x1="0" y1="20%" x2="100%" y2="20%" stroke="white" strokeWidth="0.5" strokeDasharray="5,15" />
-              <line x1="0" y1="40%" x2="100%" y2="40%" stroke="white" strokeWidth="0.5" strokeDasharray="5,15" />
-              <line x1="0" y1="60%" x2="100%" y2="60%" stroke="white" strokeWidth="0.5" strokeDasharray="5,15" />
-              <line x1="0" y1="80%" x2="100%" y2="80%" stroke="white" strokeWidth="0.5" strokeDasharray="5,15" />
-          </svg>
-      </div>
-
+      {/* Background watermark */}
       <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.03] select-none">
-        <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">ARCHIVE</h2>
+        <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">CASES</h2>
       </div>
 
       <div className="container mx-auto px-6 relative z-10 max-w-full overflow-hidden">
         <div className="flex flex-col items-center mb-12 md:mb-24 text-center relative z-10 scroll-reveal">
-           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 bg-white/5 mb-8 backdrop-blur-md">
-             <Cpu size={14} className="text-[#61F6FD]" />
-             <span className="text-white/60 font-bold uppercase tracking-[0.3em] text-[10px]">FEATURED WORK</span>
-           </div>
-
            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.8] relative text-white flex flex-wrap justify-center items-center">
              <span className="inline-flex items-center whitespace-nowrap">
                <span className="text-[#F7E644] mr-2 md:mr-6">"</span>
@@ -168,6 +154,9 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
              <span className="mx-2 md:mx-4">WORK</span>
              <span className="text-[#F7E644]">"</span>
            </h2>
+           <p className="mt-3 md:mt-5 text-[8px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/20">
+             Webdesign · Branding · Motion · Video
+           </p>
         </div>
 
         {/* --- HIGHLIGHT 1: NEXT GEN WEBDESIGN --- */}
