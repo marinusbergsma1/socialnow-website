@@ -26,7 +26,8 @@ const ReelsOverlay: React.FC<{
   onClose: () => void;
 }> = ({ videos, startIndex, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(startIndex);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [showMuteHint, setShowMuteHint] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const touchStartY = useRef(0);
@@ -57,6 +58,44 @@ const ReelsOverlay: React.FC<{
       videoRef.current.volume = 0.5;
     }
   }, [isMuted, currentIndex]);
+
+  // Auto-unmute attempt — works if user has interacted with page before opening overlay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.muted = false;
+        videoRef.current.play().then(() => {
+          setIsMuted(false);
+          setShowMuteHint(false);
+        }).catch(() => {
+          // Browser blocked unmute — user needs to tap
+          if (videoRef.current) {
+            videoRef.current.muted = true;
+          }
+          setIsMuted(true);
+        });
+      }
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [currentIndex]);
+
+  // Tap on video to toggle mute
+  const handleVideoTap = () => {
+    if (isMuted) {
+      setIsMuted(false);
+      setShowMuteHint(false);
+      if (videoRef.current) {
+        videoRef.current.muted = false;
+        videoRef.current.volume = 0.5;
+        videoRef.current.play().catch(() => {});
+      }
+    } else {
+      setIsMuted(true);
+      if (videoRef.current) {
+        videoRef.current.muted = true;
+      }
+    }
+  };
 
   const goTo = (idx: number) => {
     if (isTransitioning || idx < 0 || idx >= videos.length) return;
@@ -120,12 +159,22 @@ const ReelsOverlay: React.FC<{
           loop
           muted={isMuted}
           playsInline
-          className="w-full h-full object-contain"
+          preload="auto"
+          className="w-full h-full object-cover"
+          onClick={handleVideoTap}
         />
       </div>
 
+      {/* Tap-to-unmute hint */}
+      {showMuteHint && isMuted && (
+        <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 animate-pulse pointer-events-none">
+          <Volume2 size={16} className="text-[#25D366]" />
+          <span className="text-white text-xs font-bold uppercase tracking-widest">Tik voor geluid</span>
+        </div>
+      )}
+
       {/* Top bar */}
-      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4 md:p-6 bg-gradient-to-b from-black/60 to-transparent">
+      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4 md:p-6 bg-gradient-to-b from-black/60 to-transparent" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}>
         <div className="flex items-center gap-3">
           <span className="text-white/60 text-xs font-bold uppercase tracking-widest">
             {currentIndex + 1} / {videos.length}
@@ -133,14 +182,16 @@ const ReelsOverlay: React.FC<{
         </div>
         <div className="flex items-center gap-2">
           <button
-            onClick={() => setIsMuted(!isMuted)}
-            className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all"
+            onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); setShowMuteHint(false); }}
+            className={`w-11 h-11 md:w-10 md:h-10 rounded-full border flex items-center justify-center text-white transition-all active:scale-90 ${
+              !isMuted ? 'bg-[#25D366]/20 border-[#25D366]/40' : 'bg-white/10 border-white/20 hover:bg-white/20'
+            }`}
           >
-            {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+            {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} className="text-[#25D366]" />}
           </button>
           <button
-            onClick={onClose}
-            className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all"
+            onClick={(e) => { e.stopPropagation(); onClose(); }}
+            className="w-11 h-11 md:w-10 md:h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all active:scale-90"
           >
             <X size={18} />
           </button>
@@ -178,7 +229,7 @@ const ReelsOverlay: React.FC<{
       </div>
 
       {/* Bottom spacer for safe area */}
-      <div className="h-6" />
+      <div style={{ height: 'max(1.5rem, env(safe-area-inset-bottom))' }} />
     </div>
   );
 };
