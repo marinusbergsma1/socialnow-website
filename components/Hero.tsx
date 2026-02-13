@@ -71,9 +71,9 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
 
   return (
     <div className="relative min-h-[100svh] flex flex-col justify-center select-none overflow-hidden bg-transparent">
-      {/* Background Decor */}
+      {/* Background Decor — desktop only */}
       <div
-        className="absolute inset-0 z-0 opacity-[0.07] pointer-events-none"
+        className="hidden md:block absolute inset-0 z-0 opacity-[0.07] pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 1px, transparent 1px)`,
           backgroundSize: '80px 80px',
@@ -86,7 +86,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
         <div className="container mx-auto px-6 text-center flex flex-col items-center justify-center">
 
           <div className={`transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`}>
-             <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-2xl border border-white/10 px-6 py-2.5 rounded-full mb-8 md:mb-10 hover:border-[#5BA4F5]/50 transition-colors">
+             <div className="inline-flex items-center gap-3 bg-white/5 md:backdrop-blur-2xl border border-white/10 px-6 py-2.5 rounded-full mb-8 md:mb-10 hover:border-[#5BA4F5]/50 transition-colors">
                <div className="relative flex h-2.5 w-2.5">
                  <span className="hidden md:inline-flex animate-ping absolute h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#25D366]"></span>
@@ -112,7 +112,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                     <ScrollTypewriter text="OF" delay={800} start={startAnimation} withHighlight={false} />
                     <div className="relative inline-flex items-center h-[1.1em] ml-2 md:ml-10">
                       {showCycle ? (
-                        <span key={wordIndex} className={`${words[wordIndex].color} animate-fade-in-right transition-colors duration-1000 flex items-center drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]`}>
+                        <span key={wordIndex} className={`${words[wordIndex].color} animate-fade-in-right transition-colors duration-1000 flex items-center md:drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]`}>
                           {words[wordIndex].text}
                           <span className={`text-[#F7E644] ml-2 md:ml-6 transition-all duration-700 ${showCycleQuote ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
                             "
@@ -137,11 +137,11 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
 
           <div className={`flex flex-col items-center gap-10 md:gap-12 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.6s' }}>
             <div className="relative group">
-                <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-12 text-sm md:text-xl shadow-[0_20px_60px_rgba(37,211,102,0.3)]">START JOUW PROJECT</Button>
+                <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-12 text-sm md:text-xl md:shadow-[0_20px_60px_rgba(37,211,102,0.3)]">START JOUW PROJECT</Button>
             </div>
 
             <div onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' })} className="flex flex-col items-center gap-6 cursor-pointer group pb-4 scale-90 md:scale-100">
-               <div className="bg-black/90 backdrop-blur-xl border border-white/10 rounded-full px-4 md:px-6 py-2 shadow-2xl transition-all duration-700 group-hover:border-white/30 flex items-center gap-2 md:gap-4 max-w-[95vw] md:max-w-none">
+               <div className="bg-black/90 md:backdrop-blur-xl border border-white/10 rounded-full px-4 md:px-6 py-2 md:shadow-2xl transition-colors duration-700 group-hover:border-white/30 flex items-center gap-2 md:gap-4 max-w-[95vw] md:max-w-none">
                   <div className="flex -space-x-3 shrink-0">
                     {reviewsData.map((review, i) => (
                       <div key={i} className={`w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-black overflow-hidden transition-all duration-700 ${activeReviewIndex === i ? 'scale-110 z-10 border-[#5BA4F5] shadow-[0_0_20px_rgba(97,246,253,0.4)]' : 'opacity-40 grayscale scale-90'}`}>
@@ -160,7 +160,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                   </div>
                </div>
 
-               <div className="bg-black/90 backdrop-blur-xl border border-white/10 rounded-full px-8 py-3 shadow-2xl flex items-center gap-4 group cursor-pointer hover:border-white/40 transition-all">
+               <div className="bg-black/90 md:backdrop-blur-xl border border-white/10 rounded-full px-8 py-3 md:shadow-2xl flex items-center gap-4 group cursor-pointer hover:border-white/40 transition-colors">
                   <div className="flex text-[#F7E644]">
                     {[1, 2, 3, 4, 5].map((s) => (
                       <Star key={s} size={14} fill="currentColor" strokeWidth={0} />
@@ -176,7 +176,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
         </div>
       </section>
 
-      <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 ${startAnimation ? 'opacity-30' : 'opacity-0'}`} style={{ animationDelay: '2.2s' }}>
+      <div className={`hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 ${startAnimation ? 'opacity-30' : 'opacity-0'}`} style={{ animationDelay: '2.2s' }}>
           <div className="w-[1px] h-16 bg-gradient-to-b from-white to-transparent animate-bounce"></div>
       </div>
     </div>

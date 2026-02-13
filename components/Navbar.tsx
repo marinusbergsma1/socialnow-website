@@ -91,7 +91,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
       <nav
         className={`fixed z-[100] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between ${
           scrolled
-            ? 'top-0 left-0 w-full bg-black/80 backdrop-blur-3xl border-b border-white/10 px-6 md:px-12 py-5 shadow-2xl'
+            ? 'top-0 left-0 w-full bg-black/90 md:bg-black/80 md:backdrop-blur-3xl border-b border-white/10 px-6 md:px-12 py-5 md:shadow-2xl'
             : 'top-0 left-0 w-full bg-transparent px-6 md:px-12 py-10 border-transparent'
         }`}
       >

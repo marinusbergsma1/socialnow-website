@@ -239,8 +239,8 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
       isClosing ? 'opacity-0 scale-[0.98]' : 'opacity-100 scale-100'
     }`}>
 
-      {/* Background — subtle animated map texture */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-10 overflow-hidden">
+      {/* Background — subtle animated map texture (desktop only — heavy filter + image) */}
+      <div className="hidden md:block fixed inset-0 z-0 pointer-events-none opacity-10 overflow-hidden">
         <div
           className="absolute inset-0 w-full h-full md:w-[200%] md:h-[200%] md:-left-1/2 md:-top-1/2 md:animate-[slow-map-move_120s_linear_infinite]"
           style={{
@@ -254,13 +254,13 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
         <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-[#030303]/60 to-[#030303]" />
       </div>
 
-      {/* Ambient glow accents */}
-      <div className="fixed top-0 right-0 w-[700px] h-[700px] bg-[#25D366]/[0.03] rounded-full blur-[250px] pointer-events-none z-0" />
-      <div className="fixed bottom-0 left-0 w-[600px] h-[600px] bg-[#5BA4F5]/[0.025] rounded-full blur-[250px] pointer-events-none z-0" />
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#F62961]/[0.015] rounded-full blur-[300px] pointer-events-none z-0" />
+      {/* Ambient glow accents — desktop only (GPU-heavy blur) */}
+      <div className="hidden md:block fixed top-0 right-0 w-[700px] h-[700px] bg-[#25D366]/[0.03] rounded-full blur-[250px] pointer-events-none z-0" />
+      <div className="hidden md:block fixed bottom-0 left-0 w-[600px] h-[600px] bg-[#5BA4F5]/[0.025] rounded-full blur-[250px] pointer-events-none z-0" />
+      <div className="hidden md:block fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#F62961]/[0.015] rounded-full blur-[300px] pointer-events-none z-0" />
 
       {/* ─── STICKY HEADER ─── */}
-      <div className="sticky top-0 z-[210] w-full px-5 py-4 md:px-10 md:py-5 flex items-center justify-between backdrop-blur-2xl border-b border-white/[0.05] bg-[#030303]/85">
+      <div className="sticky top-0 z-[210] w-full px-5 py-4 md:px-10 md:py-5 flex items-center justify-between md:backdrop-blur-2xl border-b border-white/[0.05] bg-[#030303]/95 md:bg-[#030303]/85">
         <img src="https://i.ibb.co/RTsSXFm8/Logo-Social-Now-Lengte.webp" alt="SocialNow" className="w-24 md:w-32 opacity-80" />
         <div className="flex items-center gap-3">
           <a
@@ -700,7 +700,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
           <div className="rounded-3xl border border-[#25D366]/15 bg-[#25D366]/[0.02] p-8 md:p-14 lg:p-16 relative overflow-hidden">
             {/* Glows */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/[0.04] via-transparent to-[#25D366]/[0.02] pointer-events-none" />
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-[#25D366]/[0.06] rounded-full blur-[150px] pointer-events-none" />
+            <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-[#25D366]/[0.06] rounded-full blur-[150px] pointer-events-none" />
 
             <div className="relative flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
               <div className="flex-1 text-center lg:text-left">
