@@ -21,9 +21,9 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
 
     setVideoSrc(src);
 
-    // Safety fallback: if the video doesn't fire onEnded within 9 seconds, proceed to site.
+    // Safety fallback: if the video doesn't fire onEnded within 4 seconds, proceed to site.
     const fallbackTimer = setTimeout(() => {
-      if (!isExiting && isMounted.current) {
+      if (isMounted.current) {
         setIsExiting(true);
         setTimeout(onComplete, 800);
       }
@@ -33,16 +33,17 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
       isMounted.current = false;
       clearTimeout(fallbackTimer);
     };
-  }, [isExiting, onComplete]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // Attempt to play automatically
+  // Attempt to play automatically & clean up on unmount
   useEffect(() => {
     if (videoSrc && videoRef.current) {
       const playPromise = videoRef.current.play();
-      
+
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          // Autoplay with sound was blocked. 
+          // Autoplay with sound was blocked.
           // We must mute to at least show the animation, as requested "Zonder de knop".
           if (videoRef.current && isMounted.current) {
             videoRef.current.muted = true;
@@ -51,6 +52,15 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
         });
       }
     }
+
+    // Stop video completely on unmount so it doesn't keep playing in the background
+    return () => {
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.removeAttribute('src');
+        videoRef.current.load();
+      }
+    };
   }, [videoSrc]);
 
   // If the user clicks anywhere on the black loading screen, try to unmute.

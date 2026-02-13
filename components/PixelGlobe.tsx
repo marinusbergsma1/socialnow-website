@@ -63,7 +63,7 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
     // Particle counts (reduced on mobile via mobileFactor)
     if (type === 'all' || type === 'cyan') {
       const count = largeParticles ? 2000 : (type === 'cyan' ? 2400 : 1200);
-      generateSphere(count, 0.7, 0, 0, 0, '#5BA4F5');
+      generateSphere(count, 0.7, 0, 0, 0, '#00A3E0');
     }
     if (type === 'all' || type === 'pink') {
       const pOff = type === 'pink' ? 0 : 0.60;

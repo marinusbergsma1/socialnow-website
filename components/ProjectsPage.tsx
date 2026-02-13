@@ -6,7 +6,7 @@ import ProgressiveImage from './ProgressiveImage';
 import Button from './Button';
 import { useSEO } from '../hooks/useSEO';
 
-const accentColors = ['#5BA4F5', '#F62961', '#F7E644', '#25D366'];
+const accentColors = ['#00A3E0', '#F62961', '#F7E644', '#25D366'];
 
 const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }) => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
           backgroundSize: '80px 80px'
         }} />
 
-        <div className="relative z-10 max-w-5xl mx-auto">
+        <div className="relative z-10 max-w-5xl mx-auto scroll-reveal">
           <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-10 backdrop-blur-md">
             <Layers size={16} className="text-[#F7E644]" />
             <span className="text-white font-black uppercase tracking-[0.5em] text-[10px]">PROJECT ARCHIVE</span>
@@ -57,7 +57,8 @@ const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
               <button
                 key={project.id}
                 onClick={() => navigate(`/project/${project.slug}`)}
-                className={`group relative rounded-[2rem] overflow-hidden border border-white/5 bg-[#050505] text-left transition-all duration-500 hover:border-white/15 hover:bg-[#080808] focus:outline-none ${isLarge ? 'md:col-span-2' : ''}`}
+                className={`group relative rounded-[2rem] overflow-hidden border border-white/5 bg-[#050505] text-left transition-all duration-500 hover:border-white/15 hover:bg-[#080808] focus:outline-none scroll-reveal ${isLarge ? 'md:col-span-2' : ''}`}
+                style={{ transitionDelay: `${idx * 120}ms` }}
               >
                 {/* Image */}
                 <div className={`relative w-full overflow-hidden ${isLarge ? 'aspect-[21/9]' : 'aspect-[4/3]'}`}>
@@ -140,9 +141,9 @@ const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
       </div>
 
       {/* CTA Section */}
-      <div className="max-w-5xl mx-auto px-6 md:px-12 pb-32">
+      <div className="max-w-5xl mx-auto px-6 md:px-12 pb-32 scroll-reveal">
         <div className="relative rounded-[3rem] md:rounded-[4rem] border border-white/10 bg-white/[0.02] p-10 md:p-20 text-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/5 via-transparent to-[#5BA4F5]/5 opacity-50" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/5 via-transparent to-[#00A3E0]/5 opacity-50" />
           <div className="relative z-10">
             <h2 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-6">
               Klaar voor <span className="text-[#25D366]">jouw project</span>?

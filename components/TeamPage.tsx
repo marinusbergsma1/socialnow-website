@@ -34,7 +34,7 @@ const teamDetailed = [
       { subject: 'CGI', A: 140 }
     ],
     status: "CORE_ACTIVE",
-    color: "#5BA4F5",
+    color: "#00A3E0",
     meta: { CPU: "98%", LATENCY: "12ms", UPTIME: "99.9%" }
   },
   { 
@@ -102,7 +102,7 @@ const teamDetailed = [
       { subject: 'Strategy', A: 130 }
     ],
     status: "COMM_STABLE",
-    color: "#5BA4F5",
+    color: "#00A3E0",
     meta: { CPU: "89%", LATENCY: "30ms", UPTIME: "99.7%" }
   },
   { 
@@ -169,7 +169,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
     }`}>
       
       <div className="fixed inset-0 z-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 1px, transparent 1px)`, backgroundSize: '80px 80px' }}></div>
-      <div className="fixed top-0 left-0 w-full h-[2px] bg-[#5BA4F5] shadow-[0_0_20px_#5BA4F5] z-[160] opacity-30 animate-[scan-sweep_4s_linear_infinite]"></div>
+      <div className="fixed top-0 left-0 w-full h-[2px] bg-[#00A3E0] shadow-[0_0_20px_#00A3E0] z-[160] opacity-30 animate-[scan-sweep_4s_linear_infinite]"></div>
 
       <div className="sticky top-0 z-[170] w-full px-6 py-6 md:px-12 md:py-8 flex items-center justify-between backdrop-blur-3xl border-b border-white/5 bg-black/80">
           <div className="flex items-center gap-6">
@@ -190,7 +190,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
       <div className="relative z-10 container mx-auto max-w-7xl pt-20 pb-36 px-6">
           <div className="text-center mb-20 md:mb-24 relative px-4">
               <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-10 backdrop-blur-md">
-                <Network size={16} className="text-[#5BA4F5]" />
+                <Network size={16} className="text-[#00A3E0]" />
                 <span className="text-white font-black uppercase tracking-[0.6em] text-[10px]">HUMAN ARCHITECTURE INDEX</span>
               </div>
               {/* PixelGlobe Beeldmerk */}
@@ -246,7 +246,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                                       <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight leading-[0.9] mb-5 px-1 break-words">{member.name}</h2>
                                       <div className="flex items-center gap-4">
                                           <div className="h-[2px] w-12" style={{ backgroundColor: member.color }}></div>
-                                          <span className="text-xs font-black uppercase tracking-[0.3em]" style={{ color: member.role === 'FOUNDER & CREATIVE ART DIRECTOR' ? member.color : '#5BA4F5' }}>{member.role}</span>
+                                          <span className="text-xs font-black uppercase tracking-[0.3em]" style={{ color: member.role === 'FOUNDER & CREATIVE ART DIRECTOR' ? member.color : '#00A3E0' }}>{member.role}</span>
                                       </div>
                                   </div>
                                   <div className="bg-white/5 border border-white/10 p-4 rounded-[1.5rem] backdrop-blur-md">
@@ -268,7 +268,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-8 border-t border-white/10">
                                   <div className="h-64 relative bg-black/40 rounded-[2rem] border border-white/10 p-5 group/radar">
                                       <div className="absolute top-6 left-6 flex items-center gap-2 z-10">
-                                          <BarChart3 size={18} className="text-[#5BA4F5]" />
+                                          <BarChart3 size={18} className="text-[#00A3E0]" />
                                           <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">NEURAL_METRICS</span>
                                       </div>
                                       <ResponsiveContainer width="100%" height="100%">
@@ -281,7 +281,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                                   </div>
                                   <div className="flex flex-col justify-center gap-6">
                                       <div className="flex flex-wrap items-center gap-4">
-                                          <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 hover:border-[#5BA4F5] transition-all cursor-pointer group/link shadow-xl">
+                                          <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 hover:border-[#00A3E0] transition-all cursor-pointer group/link shadow-xl">
                                               <Linkedin size={20} className="text-white/60 group-hover/link:text-white transition-colors" />
                                           </div>
                                           <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 hover:border-[#F62961] transition-all cursor-pointer group/link shadow-xl">
@@ -302,12 +302,12 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
 
           <div className="mt-24 md:mt-32 mb-16 md:mb-20 flex justify-center px-4 overflow-visible">
               <div className="w-full max-w-6xl bg-white/[0.02] border border-white/10 rounded-[3rem] p-10 md:p-16 relative overflow-visible group transition-all duration-1000 scale-100 opacity-100 shadow-3xl">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#5BA4F5]/5 via-transparent to-[#F62961]/5 opacity-40 rounded-[4rem]"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#00A3E0]/5 via-transparent to-[#F62961]/5 opacity-40 rounded-[4rem]"></div>
                 
                 <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 overflow-visible">
                     <div className="flex-1 text-center md:text-left z-30">
                         <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md">
-                            <Shield size={14} className="text-[#5BA4F5]" />
+                            <Shield size={14} className="text-[#00A3E0]" />
                             <span className="text-white/60 font-black uppercase tracking-[0.4em] text-[10px]">INTEGRATED BRAND OS</span>
                         </div>
 
@@ -321,7 +321,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                         
                         <div className="flex flex-wrap justify-center md:justify-start gap-6 mb-12">
                             <div className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-4">
-                                <Shield size={18} className="text-[#5BA4F5]" />
+                                <Shield size={18} className="text-[#00A3E0]" />
                                 <span className="text-[11px] font-black text-white/60 uppercase tracking-widest">Brand Protection</span>
                             </div>
                             <div className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-4">
@@ -343,7 +343,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
                   { icon: TrendingUp, color: "#25D366", label: "Impact", value: "+124%", desc: "Groei Rate" },
                   { icon: CircleDollarSign, color: "#F7E644", label: "ROI", value: "€14.5k", desc: "Gemiddeld / mnd" },
                   { icon: BarChart3, color: "#F62961", label: "Conversion", value: "4.8%", desc: "Opt-in Rate" },
-                  { icon: Target, color: "#5BA4F5", label: "Performance", value: "99.8%", desc: "Peak Efficiency" }
+                  { icon: Target, color: "#00A3E0", label: "Performance", value: "99.8%", desc: "Peak Efficiency" }
               ].map((stat, i) => (
                 <div
                     key={i}

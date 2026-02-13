@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { TeamMember } from '../types';
 import { Plus, Shield, PieChart, Activity, Cpu, Terminal } from 'lucide-react';
 import ScrollTypewriter from './ScrollTypewriter';
@@ -70,6 +70,106 @@ const team: TeamItem[] = [
   }
 ];
 
+// 3D tilt hook for team cards
+function useTeamTilt(intensity = 8) {
+  const ref = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>(0);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      const rotateX = (0.5 - y) * intensity;
+      const rotateY = (x - 0.5) * intensity;
+      el.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.04, 1.04, 1.04)`;
+    });
+  }, [intensity]);
+
+  const handleMouseLeave = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    cancelAnimationFrame(rafRef.current);
+    el.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+  }, []);
+
+  return { ref, handleMouseMove, handleMouseLeave };
+}
+
+const TeamMemberCard: React.FC<{ member: TeamItem; index: number }> = ({ member, index }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { ref: tiltRef, handleMouseMove, handleMouseLeave } = useTeamTilt(10);
+
+  const setRefs = useCallback((node: HTMLDivElement | null) => {
+    (cardRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+    (tiltRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+  }, [tiltRef]);
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => setIsVisible(true), index * 120);
+        observer.disconnect();
+      }
+    }, { threshold: 0.15 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [index]);
+
+  // Each card flips in from a slightly different angle
+  const flipAngles = [
+    { rx: 15, ry: -12 },   // top-left tilt
+    { rx: -10, ry: -8 },   // bottom-left tilt
+    { rx: 12, ry: 10 },    // top-right tilt
+    { rx: -8, ry: 14 },    // bottom-right tilt
+    { rx: 18, ry: 0 },     // top flip
+    { rx: -14, ry: -6 },   // bottom-left
+  ];
+  const angle = flipAngles[index % flipAngles.length];
+
+  return (
+    <div
+      ref={setRefs}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="group relative h-[240px] md:h-[400px] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-sm hover:border-white/30"
+      style={{
+        transformStyle: 'preserve-3d',
+        willChange: 'transform, opacity',
+        transition: 'transform 0.5s cubic-bezier(0.03, 0.98, 0.52, 0.99), opacity 0.6s ease-out, border-color 0.5s',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible
+          ? 'perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
+          : `perspective(600px) rotateX(${angle.rx}deg) rotateY(${angle.ry}deg) translateY(50px) scale3d(0.9, 0.9, 0.9)`,
+      }}
+    >
+      {/* Gloss overlay */}
+      <div className="absolute inset-0 z-10 rounded-[1.5rem] md:rounded-[3rem] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%, rgba(0,0,0,0.15) 100%)' }}
+      />
+      <ProgressiveImage
+        src={member.image || ""}
+        alt={member.name || ""}
+        className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${member.imgCustomClass || ""}`}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90 transition-opacity duration-300"></div>
+      <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 pr-4" style={{ transform: 'translateZ(15px)' }}>
+        <h4 className="text-sm md:text-xl font-black uppercase text-white mb-1 tracking-tight leading-none">{member.name}</h4>
+        <div className="flex items-center gap-2">
+          <div className="w-2 md:w-4 h-[1px] bg-[#00A3E0]"></div>
+          <p className="text-[7px] md:text-[10px] font-bold uppercase tracking-widest text-gray-400 group-hover:text-[#00A3E0] transition-colors line-clamp-1">{member.role}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
   const founder = team.find(m => m.name === "Marinus Bergsma");
   const otherMembers = team.filter(m => m.name !== "Marinus Bergsma" && m.type === 'member');
@@ -77,12 +177,12 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
 
   return (
     <section id="team" className="py-12 md:py-48 bg-transparent text-white relative overflow-hidden">
-      <div 
-        className="absolute inset-0 z-0 opacity-[0.06] pointer-events-none" 
-        style={{ 
-          backgroundImage: `linear-gradient(to right, rgba(37, 211, 102, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(37, 211, 102, 0.4) 1px, transparent 1px)`, 
-          backgroundSize: '40px 40px', 
-          maskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)', 
+      <div
+        className="absolute inset-0 z-0 opacity-[0.06] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(to right, rgba(37, 211, 102, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(37, 211, 102, 0.4) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+          maskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)',
           WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)',
           animation: 'team-grid-scroll 20s linear infinite'
         }}
@@ -103,12 +203,12 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
         {founder && (
             <div className="mb-12 md:mb-24 flex justify-center px-0 md:px-4">
                 <div className="w-full max-w-6xl bg-white/[0.02] border border-white/10 rounded-[2.5rem] md:rounded-[4rem] p-6 md:p-16 relative overflow-hidden group">
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#5BA4F5]/5 via-transparent to-[#F62961]/5 opacity-40"></div>
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#00A3E0]/5 via-transparent to-[#F62961]/5 opacity-40"></div>
                     <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-16">
                         <div className="w-full md:w-[40%] h-[350px] md:h-[500px] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl shrink-0">
-                            <ProgressiveImage 
-                                src={founder.image || ""} 
-                                alt={founder.name || ""} 
+                            <ProgressiveImage
+                                src={founder.image || ""}
+                                alt={founder.name || ""}
                                 className="w-full h-full transition-transform duration-700 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
@@ -122,11 +222,14 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
                             <h3 className="text-3xl md:text-5xl font-black uppercase text-white mb-6 tracking-tighter leading-none">
                               Marinus Bergsma
                             </h3>
-                            
-                            <p className="text-gray-400 text-base md:text-2xl leading-relaxed mb-6 md:mb-12 font-medium italic">
-                                "Onze missie: merken laten groeien door creatieve kracht en slimme technologie te combineren."
+
+                            <p className="text-gray-400 text-base md:text-2xl leading-relaxed mb-4 md:mb-8 font-medium italic">
+                                "Ik startte SocialNow met één overtuiging: de beste merken worden gebouwd door mensen die technologie omarmen, niet vrezen."
                             </p>
-                            
+                            <p className="text-gray-600 text-xs md:text-sm leading-relaxed mb-6 md:mb-12 font-medium max-w-lg">
+                                Van Amsterdam Light Festival en AZ Alkmaar tot het opbouwen van een eigen creatief bureau — Marinus richtte SocialNow op in 2021 met de missie om concept, creatie en realisatie samen te brengen. Vandaag leidt hij een team van 7 specialisten vanuit Amsterdam.
+                            </p>
+
                             <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="w-full md:w-auto">Kennismaken</Button>
                         </div>
                     </div>
@@ -134,28 +237,14 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
             </div>
         )}
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto px-1 md:px-0">
-            {otherMembers.map((member) => (
-                <div key={member.id} className="group relative h-[240px] md:h-[400px] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-sm transition-all duration-500 hover:border-white/30 hover:-translate-y-2">
-                    <ProgressiveImage 
-                        src={member.image || ""} 
-                        alt={member.name || ""} 
-                        className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${member.imgCustomClass || ""}`}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 pr-4">
-                        <h4 className="text-sm md:text-xl font-black uppercase text-white mb-1 tracking-tight leading-none">{member.name}</h4>
-                        <div className="flex items-center gap-2">
-                            <div className="w-2 md:w-4 h-[1px] bg-[#5BA4F5]"></div>
-                            <p className="text-[7px] md:text-[10px] font-bold uppercase tracking-widest text-gray-400 group-hover:text-[#5BA4F5] transition-colors line-clamp-1">{member.role}</p>
-                        </div>
-                    </div>
-                </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto px-1 md:px-0" style={{ perspective: '1000px' }}>
+            {otherMembers.map((member, index) => (
+                <TeamMemberCard key={member.id} member={member} index={index} />
             ))}
             <div className="group relative h-[240px] md:h-[400px] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden border-2 border-dashed border-[#25D366]/30 hover:border-[#25D366] bg-white/[0.02] transition-all duration-500 flex flex-col items-center justify-center text-center cursor-pointer" onClick={onOpenBooking}>
                <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-[#25D366] flex items-center justify-center mb-4 shadow-[0_0_20px_rgba(37,211,102,0.4)] group-hover:scale-110 transition-transform"><Plus size={16} className="text-black" strokeWidth={3} /></div>
-               <h4 className="text-sm md:text-xl font-black uppercase text-white mb-1 leading-none group-hover:text-[#25D366] transition-colors">JOIN THE TEAM</h4>
-               <p className="text-gray-400 font-bold text-[8px] md:text-[10px] max-w-[80%] leading-relaxed">Sluit je aan bij het OS.</p>
+               <h4 className="text-sm md:text-xl font-black uppercase text-white mb-1 leading-none group-hover:text-[#25D366] transition-colors">GROW WITH US</h4>
+               <p className="text-gray-400 font-bold text-[8px] md:text-[10px] max-w-[80%] leading-relaxed">Amsterdam's snelstgroeiende creative studio zoekt talent.</p>
             </div>
         </div>
       </div>

@@ -40,7 +40,7 @@ const GrowthLogic: React.FC = () => {
 
   return (
     <section id="growth-logic" className="py-24 md:py-48 bg-transparent relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#5BA4F5]/30 to-transparent"></div>
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00A3E0]/30 to-transparent"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center mb-24 md:mb-40 text-center">
@@ -50,12 +50,12 @@ const GrowthLogic: React.FC = () => {
           </div>
           
           <h2 className="text-5xl md:text-[10rem] font-black uppercase tracking-tighter leading-[0.8] mb-12 text-white">
-            DATA <span className="text-[#F7E644]">DRIVEN</span><br/>
-            <span className="text-[#5BA4F5]">DOMINANTIE.</span>
+            GEEN <span className="text-[#F7E644]">GOKKEN.</span><br/>
+            <span className="text-[#00A3E0]">ALLEEN DATA.</span>
           </h2>
-          
+
           <p className="max-w-4xl mx-auto text-gray-400 text-lg md:text-3xl font-medium leading-tight italic">
-            "Wij baseren design niet op gevoel, maar op <span className="text-white font-black italic">architectonische precisie</span> en marktdata. Uw merk is een ecosysteem van groei."
+            "Elk pixel heeft een reden. Elk besluit is onderbouwd. Wij bouwen merken op een fundament van <span className="text-white font-black italic">data, niet onderbuikgevoel.</span>"
           </p>
         </div>
 
@@ -97,7 +97,7 @@ const GrowthLogic: React.FC = () => {
                 <h3 className="text-2xl md:text-4xl font-black uppercase text-white tracking-tighter mb-2">STRATEGISCH DNA</h3>
                 <p className="text-gray-500 text-xs md:text-sm font-bold uppercase tracking-widest">Kwaliteitswaarborging per discipline</p>
               </div>
-              <Shield className="text-[#5BA4F5] opacity-40" />
+              <Shield className="text-[#00A3E0] opacity-40" />
             </div>
             
             <div className="h-64 md:h-80 w-full flex justify-center">
@@ -105,7 +105,7 @@ const GrowthLogic: React.FC = () => {
                 <RadarChart cx="50%" cy="50%" outerRadius="80%" data={strategyData}>
                   <PolarGrid stroke="#333" />
                   <PolarAngleAxis dataKey="subject" tick={{ fill: '#888', fontSize: 10, fontWeight: 'bold' }} />
-                  <Radar name="Strategy" dataKey="A" stroke="#5BA4F5" fill="#5BA4F5" fillOpacity={0.6} />
+                  <Radar name="Strategy" dataKey="A" stroke="#00A3E0" fill="#00A3E0" fillOpacity={0.6} />
                 </RadarChart>
               </ResponsiveContainer>
             </div>
@@ -117,7 +117,7 @@ const GrowthLogic: React.FC = () => {
           {[
             { label: 'OS UPTIME', value: '100%', icon: Database, color: '#25D366' },
             { label: 'ROI FACTOR', value: '12.4x', icon: Zap, color: '#F7E644' },
-            { label: 'LATENCY', value: '4ms', icon: Cpu, color: '#5BA4F5' },
+            { label: 'LATENCY', value: '4ms', icon: Cpu, color: '#00A3E0' },
             { label: 'CONVERSION', value: '98%', icon: TrendingUp, color: '#F62961' }
           ].map((stat, i) => (
             <div 

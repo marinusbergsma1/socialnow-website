@@ -4,33 +4,33 @@ import { Plus, Minus, MessageCircle } from 'lucide-react';
 
 const faqs = [
   {
-    question: "Wat kost een rebranding traject gemiddeld?",
-    answer: "Elk traject is maatwerk. Een high-end rebranding start doorgaans vanaf \u20AC2.500. Dit omvat volledige merkstrategie, visuele identiteit, typografie en uitgebreide Brand OS guidelines voor alle kanalen.",
-    color: "#5BA4F5"
+    question: "Wat kost een website bij SocialNow?",
+    answer: "Transparantie first: een one-pager start vanaf \u20AC1.500, een business website vanaf \u20AC3.500, en custom projecten op maat. AI maakt ons sneller, en dat voordeel geven we door. Elk project begint met een gratis intake.",
+    color: "#00A3E0"
   },
   {
-    question: "Hoe integreert SocialNow AI in het proces?",
-    answer: "Wij gebruiken AI als multiplier. Van neurale heatmapping voor design-validatie tot AI-gedreven copywriting en predictive analytics om de effectiviteit van visuals te testen voordat ze live gaan.",
+    question: "Hoe snel staat mijn website live?",
+    answer: "Een website in 2\u20134 weken. Een web app in 4\u20138 weken. Ja, echt. AI versnelt ons design- en development-proces met 50% \u2014 zonder in te leveren op kwaliteit. Spoed? Bespreekbaar.",
     color: "#F7E644"
   },
   {
-    question: "Wat is de gemiddelde doorlooptijd?",
-    answer: "Een intensieve rebranding duurt gemiddeld 4 tot 8 weken. We werken in sprints om de snelheid hoog te houden zonder in te leveren op de brute kwaliteit waar we om bekend staan.",
+    question: "Hoe gebruiken jullie AI precies?",
+    answer: "AI zit in ons hele proces: van design-validatie met neurale heatmaps tot code-generatie en performance-optimalisatie. Het resultaat: snellere delivery, minder bugs, en websites die bewezen beter presteren.",
     color: "#25D366"
   },
   {
-    question: "Werken jullie ook met maandelijkse retainers?",
-    answer: "Zeker. Voor merken die continu willen domineren bieden we Brand Management pakketten aan. Hierbij fungeren we als jullie externe creative department voor design, content en marketing.",
+    question: "Kan ik mijn website zelf aanpassen na oplevering?",
+    answer: "Absoluut. We bouwen met een gebruiksvriendelijk CMS zodat je zelf teksten, afbeeldingen en pagina\u2019s kunt beheren. En als je hulp nodig hebt: we bieden maandelijkse support-pakketten aan.",
     color: "#F62961"
   },
   {
-    question: "Welke data gebruiken jullie voor design?",
-    answer: "We analyseren markttrends, consumentengedrag en concurrentie-data. Door deze inzichten te combineren met brute creativiteit, bouwen we merken die niet alleen mooi zijn, maar ook converteren.",
-    color: "#5BA4F5"
+    question: "Wat als ik ook een app of web applicatie nodig heb?",
+    answer: "Daar zijn we sterk in. Van SaaS-platforms tot e-commerce en dashboards \u2014 we bouwen full-stack met dezelfde AI-versnelde aanpak. Alles onder \u00E9\u00E9n dak, \u00E9\u00E9n team.",
+    color: "#00A3E0"
   },
   {
-    question: "Hoe ziet het kennismakingsproces eruit?",
-    answer: "We starten altijd met een Deep Dive sessie. Hierin analyseren we de huidige status van je merk en de rauwe ambitie. Na deze sessie ontvang je een op maat gemaakt voorstel voor jouw Next Gen merk.",
+    question: "Hoe ziet een samenwerking eruit?",
+    answer: "Het begint met een vrijblijvend gesprek van 30 minuten. Daarna een voorstel op maat. Bij akkoord starten we direct. Geen eindeloze meetings, geen bureaucratie \u2014 gewoon bouwen.",
     color: "#F7E644"
   }
 ];
@@ -59,11 +59,11 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-16 md:mb-24">
           <div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.85]">
-              VRAGEN &amp;<br className="md:hidden" /> ANTWOORDEN
+              DIRECT<br className="md:hidden" /> ANTWOORD
             </h2>
           </div>
           <p className="text-gray-500 text-sm md:text-base font-medium max-w-xs leading-relaxed">
-            De antwoorden op de meest gestelde vragen over onze werkwijze.
+            Geen sales talk. Gewoon eerlijke antwoorden op de vragen die je echt hebt.
           </p>
         </div>
 
@@ -103,14 +103,16 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
                 </button>
 
                 <div
-                  className={`overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
-                    isOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
+                  className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+                    isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                   }`}
                 >
-                  <div className="pb-8 md:pb-10 pl-10 md:pl-[4.5rem] pr-14">
-                    <p className="text-gray-400 leading-relaxed text-sm md:text-base font-medium max-w-2xl">
-                      {faq.answer}
-                    </p>
+                  <div className="overflow-hidden">
+                    <div className="pb-8 md:pb-10 pl-10 md:pl-[4.5rem] pr-14">
+                      <p className="text-gray-400 leading-relaxed text-sm md:text-base font-medium max-w-2xl">
+                        {faq.answer}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -121,7 +123,7 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
         {/* Bottom note */}
         <div className="mt-12 md:mt-20 pt-8 border-t border-white/[0.06] flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/20 text-xs font-bold uppercase tracking-[0.2em]">
-            Staat jouw vraag er niet bij?
+            Vraag niet beantwoord?
           </p>
           <a
             href="https://wa.me/31637404577"
@@ -130,7 +132,7 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
             className="inline-flex items-center gap-2 text-white/40 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
           >
             <MessageCircle size={14} />
-            Stel je vraag via WhatsApp
+            WhatsApp ons — reactie binnen 2 uur
           </a>
         </div>
       </div>

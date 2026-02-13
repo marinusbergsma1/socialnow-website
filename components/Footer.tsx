@@ -34,13 +34,12 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-20">
             <div className="lg:max-w-2xl">
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase text-white tracking-tighter leading-[0.9] mb-6">
-                Laten we samen<br />
-                iets <span className="text-[#25D366]">uitzonderlijks</span><br />
-                bouwen.
+                Het volgende grote<br />
+                merk? Dat kan het <span className="text-[#25D366]">jouwe</span><br />
+                zijn.
               </h2>
               <p className="text-white/40 text-sm md:text-base font-medium leading-relaxed max-w-md">
-                Van ambitieus idee tot onvergetelijk merk. Wij combineren strategie,
-                design en technologie om merken te bouwen die domineren.
+                Sinds 2021 helpen wij merken groeien met een unieke mix van creativiteit en technologie. Van concept en creatie tot realisatie — alles onder één dak, vanuit Amsterdam.
               </p>
             </div>
             <div className="flex flex-col justify-end gap-4">
@@ -87,7 +86,9 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                 'Short Form Content',
                 '3D & CGI',
                 'Full-Stack Development',
-                'Video Production'
+                'Video Production',
+                'AI Automation',
+                'Social Media'
               ].map((s) => (
                 <li key={s}>
                   <span className="text-white/40 text-xs font-medium hover:text-white transition-colors cursor-default">

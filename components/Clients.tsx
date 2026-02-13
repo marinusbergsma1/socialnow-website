@@ -13,6 +13,9 @@ const clientLogos = [
 const Clients: React.FC = () => {
   return (
     <section className="bg-transparent pt-4 pb-10 md:pt-12 md:pb-24 overflow-hidden relative">
+      <p className="text-center text-[10px] md:text-xs font-black uppercase tracking-[0.4em] text-white/20 mb-4 md:mb-8">
+        VERTROUWD DOOR MARKTLEIDERS
+      </p>
       <style>{`
         .client-scroll {
           --scroll-duration: 60s;

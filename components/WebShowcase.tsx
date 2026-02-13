@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { Globe, ExternalLink, ChevronLeft, ChevronRight, Maximize2, ChevronDown } from 'lucide-react';
 import { webShowcaseProjects } from '../data/projects';
 
@@ -12,14 +12,56 @@ const WebShowcase: React.FC = () => {
     webShowcaseProjects.map(() => false)
   );
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [scale, setScale] = useState(0.6);
   const [isSticky, setIsSticky] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const scaleWrapperRef = useRef<HTMLDivElement>(null);
   const thumbTrackRef = useRef<HTMLDivElement>(null);
 
   const activeProject = webShowcaseProjects[activeIndex];
+
+  // Clip-path reveal with green scanlines
+  const [revealProgress, setRevealProgress] = useState(0);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        if (!headerRef.current) { ticking = false; return; }
+        const rect = headerRef.current.getBoundingClientRect();
+        const windowH = window.innerHeight;
+        // Start revealing when header enters bottom 80%, complete when at 20%
+        const start = windowH * 0.85;
+        const end = windowH * 0.25;
+        if (rect.top > start) {
+          setRevealProgress(0);
+        } else if (rect.top < end) {
+          setRevealProgress(1);
+        } else {
+          const raw = 1 - (rect.top - end) / (start - end);
+          // Ease out cubic for smooth feel
+          setRevealProgress(1 - Math.pow(1 - raw, 3));
+        }
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Clip path: wipes from left to right
+  const clipStyle = useMemo(() => ({
+    clipPath: `inset(0 ${Math.round((1 - revealProgress) * 100)}% 0 0)`,
+    transition: 'clip-path 0.05s linear',
+  }), [revealProgress]);
+
+  // Scanline overlay opacity — visible during reveal, fades out when done
+  const scanlineOpacity = revealProgress > 0 && revealProgress < 1 ? 0.6 : 0;
 
   // SSR-safe responsive check with resize listener
   useEffect(() => {
@@ -75,33 +117,44 @@ const WebShowcase: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isFullscreen, goNext, goPrev]);
 
-  // Scroll-driven grow animation (desktop only)
+  // Scroll-driven grow animation (desktop only) — uses CSS vars to avoid re-renders
   useEffect(() => {
     if (!isDesktop) {
-      setScale(1);
+      scaleWrapperRef.current?.style.setProperty('--showcase-scale', '1');
       setIsSticky(false);
       return;
     }
 
+    let ticking = false;
     const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const enterPoint = windowHeight * 0.8;
-      const fullPoint = windowHeight * 0.15;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        if (!sectionRef.current) { ticking = false; return; }
+        const rect = sectionRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const enterPoint = windowHeight * 0.8;
+        const fullPoint = windowHeight * 0.15;
 
-      if (rect.top > enterPoint) {
-        setScale(0.55);
-        setIsSticky(false);
-      } else if (rect.top < fullPoint) {
-        setScale(1);
-        setIsSticky(true);
-      } else {
-        const progress = 1 - (rect.top - fullPoint) / (enterPoint - fullPoint);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        setScale(0.55 + eased * 0.45);
-        setIsSticky(false);
-      }
+        let newScale: number;
+        let sticky: boolean;
+        if (rect.top > enterPoint) {
+          newScale = 0.55;
+          sticky = false;
+        } else if (rect.top < fullPoint) {
+          newScale = 1;
+          sticky = true;
+        } else {
+          const progress = 1 - (rect.top - fullPoint) / (enterPoint - fullPoint);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          newScale = 0.55 + eased * 0.45;
+          sticky = false;
+        }
+
+        scaleWrapperRef.current?.style.setProperty('--showcase-scale', String(newScale));
+        setIsSticky(sticky);
+        ticking = false;
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -237,7 +290,7 @@ const WebShowcase: React.FC = () => {
         </div>
 
         {/* Section Header */}
-        <div className="pt-8 md:pt-32 pb-3 md:pb-12">
+        <div ref={headerRef} className="pt-8 md:pt-32 pb-3 md:pb-12" style={clipStyle}>
           <div className="container mx-auto px-6 relative z-10">
             <div className="flex flex-col items-center text-center">
               <h2 className="text-2xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.85] text-white flex flex-wrap justify-center items-center">
@@ -245,14 +298,14 @@ const WebShowcase: React.FC = () => {
                   <span className="text-[#F7E644] mr-1 md:mr-6">&ldquo;</span>
                   WEBSITES
                 </span>
-                <span className="mx-1.5 md:mx-4">WE</span>
+                <span className="mx-1.5 md:mx-4">DIE</span>
                 <span className="inline-flex items-center whitespace-nowrap">
-                  BUILT
+                  CONVERTEREN
                   <span className="text-[#F7E644] ml-1 md:ml-6">&rdquo;</span>
                 </span>
               </h2>
               <p className="mt-3 md:mt-6 text-[8px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/30">
-                CMS · Back-end · Analytics · AI Chatbot · SEO · Responsive
+                AI-Powered · Sub-Seconde Laadtijden · 99.9% Uptime · SEO-First
               </p>
             </div>
           </div>
@@ -262,11 +315,22 @@ const WebShowcase: React.FC = () => {
         <div className={`${isDesktop ? 'lg:sticky lg:top-0' : ''} z-20`}
           style={{ minHeight: isDesktop ? '100vh' : 'auto' }}>
           <div className="lg:h-screen flex flex-col items-center justify-center px-2 md:px-8 relative py-2 lg:py-0">
+            {/* Green scanline overlay — visible during clip-path reveal */}
+            <div
+              className="absolute inset-0 pointer-events-none z-50"
+              style={{
+                opacity: scanlineOpacity,
+                transition: 'opacity 0.4s ease',
+                background: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(37, 211, 102, 0.04) 2px, rgba(37, 211, 102, 0.04) 4px)`,
+                mixBlendMode: 'screen',
+              }}
+            />
 
             {/* Grow-animated wrapper */}
             <div
+              ref={scaleWrapperRef}
               className="w-full max-w-[1400px] transition-transform duration-100 ease-out will-change-transform"
-              style={{ transform: `scale(${scale})` }}
+              style={{ transform: `scale(var(--showcase-scale, 0.6))` }}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
@@ -276,7 +340,7 @@ const WebShowcase: React.FC = () => {
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#25D366] animate-pulse flex-shrink-0" />
                   <span className="text-white font-black uppercase tracking-tight text-xs md:text-lg truncate">{activeProject.title}</span>
-                  <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.3em] text-[#5BA4F5] hidden sm:inline flex-shrink-0">{activeProject.category}</span>
+                  <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.3em] text-[#00A3E0] hidden sm:inline flex-shrink-0">{activeProject.category}</span>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <button onClick={() => setIsFullscreen(true)} className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60 text-[9px] font-bold uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all" aria-label="Fullscreen">
@@ -365,7 +429,7 @@ const WebShowcase: React.FC = () => {
                 <div ref={thumbTrackRef} className="flex gap-1 md:gap-1.5 overflow-x-auto scrollbar-hide scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   {webShowcaseProjects.map((project, idx) => (
                     <button key={project.id} onClick={() => goToIndex(idx)} aria-label={`Ga naar ${project.title}`}
-                      className={`relative rounded-sm md:rounded-md overflow-hidden transition-all duration-300 flex-shrink-0 ${idx === activeIndex ? 'ring-1 ring-[#5BA4F5]/60 shadow-[0_0_10px_rgba(97,246,253,0.2)] scale-110 opacity-100' : 'opacity-30 hover:opacity-60'}`}
+                      className={`relative rounded-sm md:rounded-md overflow-hidden transition-all duration-300 flex-shrink-0 ${idx === activeIndex ? 'ring-1 ring-[#00A3E0]/60 shadow-[0_0_10px_rgba(0,163,224,0.2)] scale-110 opacity-100' : 'opacity-30 hover:opacity-60'}`}
                       style={{ width: idx === activeIndex ? '36px' : '30px', height: idx === activeIndex ? '22px' : '19px' }}>
                       <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
                     </button>
@@ -404,7 +468,7 @@ const WebShowcase: React.FC = () => {
                 <div className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
                 <span className="text-white font-black uppercase tracking-tight text-sm">{activeProject.title}</span>
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#5BA4F5]">{activeProject.category}</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#00A3E0]">{activeProject.category}</span>
             </div>
             <div className="flex items-center gap-3">
               <button onClick={goPrev} aria-label="Vorige" className="w-8 h-8 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/20 transition-all"><ChevronLeft size={16} /></button>

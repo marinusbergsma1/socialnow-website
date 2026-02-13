@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import Button from './Button';
@@ -21,6 +21,33 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const isHomePage = location.pathname === '/' || location.pathname === '';
+
+  // Animated pill indicator
+  const navContainerRef = useRef<HTMLDivElement>(null);
+  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const [pillStyle, setPillStyle] = useState<{ left: number; width: number; opacity: number }>({ left: 0, width: 0, opacity: 0 });
+
+  const updatePill = useCallback((el: HTMLAnchorElement | null) => {
+    if (!el || !navContainerRef.current) {
+      setPillStyle(prev => ({ ...prev, opacity: 0 }));
+      return;
+    }
+    const containerRect = navContainerRef.current.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    setPillStyle({
+      left: elRect.left - containerRect.left - 10,
+      width: elRect.width + 20,
+      opacity: 1,
+    });
+  }, []);
+
+  const handleNavMouseEnter = useCallback((idx: number) => {
+    updatePill(linkRefs.current[idx]);
+  }, [updatePill]);
+
+  const handleNavMouseLeave = useCallback(() => {
+    setPillStyle(prev => ({ ...prev, opacity: 0 }));
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,22 +127,38 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
             <img
               src="https://i.ibb.co/RTsSXFm8/Logo-Social-Now-Lengte.webp"
               alt="SocialNow Logo"
+              width={224}
+              height={40}
               className="w-full h-auto object-contain"
             />
           </a>
 
           <div className="hidden lg:flex items-center gap-10">
-            <div className="flex items-center gap-10 mr-4">
-              {navLinks.map((link) => (
+            <div ref={navContainerRef} className="relative flex items-center gap-10 mr-4" onMouseLeave={handleNavMouseLeave}>
+              {/* Animated pill indicator */}
+              <div
+                className="nav-pill"
+                style={{
+                  left: `${pillStyle.left}px`,
+                  width: `${pillStyle.width}px`,
+                  height: '32px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  opacity: pillStyle.opacity,
+                }}
+              />
+              {navLinks.map((link, idx) => (
                 <a
                   key={link.name}
+                  ref={(el) => { linkRefs.current[idx] = el; }}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link)}
-                  className="relative group text-[11px] font-black uppercase text-gray-400 hover:text-white transition-all tracking-[0.2em]"
+                  onMouseEnter={() => handleNavMouseEnter(idx)}
+                  className="relative group text-[11px] font-black uppercase text-gray-400 hover:text-white transition-all tracking-[0.2em] z-10"
                 >
                   <span className="relative inline-block">
                     {link.name}
-                    <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-[#5BA4F5] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left shadow-[0_0_10px_#5BA4F5]"></span>
+                    <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-[#00A3E0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left shadow-[0_0_10px_#00A3E0]"></span>
                   </span>
                 </a>
               ))}
@@ -131,18 +174,19 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
       {/* Mobile Menu */}
       <div className={`fixed inset-0 z-[90] bg-black flex flex-col pt-32 px-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
           <div className="flex flex-col gap-6">
-            {navLinks.map((link) => (
+            {navLinks.map((link, i) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link)}
-                className="block text-4xl font-black uppercase text-white tracking-tighter border-b border-white/5 pb-6 hover:text-[#5BA4F5] transition-colors"
+                className={`block text-4xl font-black uppercase text-white tracking-tighter border-b border-white/5 pb-6 hover:text-[#00A3E0] transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+                style={{ transitionDelay: isOpen ? `${i * 60 + 100}ms` : '0ms' }}
               >
                 {link.name}
               </a>
             ))}
           </div>
-          <div className="mt-8 lg:mt-16">
+          <div className={`mt-8 lg:mt-16 transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`} style={{ transitionDelay: isOpen ? `${navLinks.length * 60 + 200}ms` : '0ms' }}>
             <Button variant="green" icon onClick={() => { setIsOpen(false); onOpenBooking(); }} triggerOnHover className="w-full !h-[50px] !text-sm">Kennismaken</Button>
           </div>
       </div>

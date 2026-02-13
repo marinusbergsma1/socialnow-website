@@ -18,7 +18,7 @@ export const webShowcaseProjects: Project[] = [
     gallery: [],
     metrics: [
       { label: "Laadtijd", value: "<1.5s", color: "#25D366" },
-      { label: "Mobiele Score", value: "95+", color: "#5BA4F5" },
+      { label: "Mobiele Score", value: "95+", color: "#00A3E0" },
       { label: "Doorlooptijd", value: "3 weken", color: "#F7E644" }
     ]
   },
@@ -38,7 +38,7 @@ export const webShowcaseProjects: Project[] = [
     gallery: [],
     metrics: [
       { label: "Conversie Boost", value: "+180%", color: "#25D366" },
-      { label: "Bounce Rate", value: "-35%", color: "#5BA4F5" },
+      { label: "Bounce Rate", value: "-35%", color: "#00A3E0" },
       { label: "Doorlooptijd", value: "2 weken", color: "#F7E644" }
     ]
   },
@@ -77,7 +77,7 @@ export const webShowcaseProjects: Project[] = [
     url: "https://newblack.netlify.app/",
     gallery: [],
     metrics: [
-      { label: "Brand Awareness", value: "+320%", color: "#5BA4F5" },
+      { label: "Brand Awareness", value: "+320%", color: "#00A3E0" },
       { label: "Mobiele Score", value: "98", color: "#25D366" },
       { label: "Doorlooptijd", value: "4 weken", color: "#F7E644" }
     ]
@@ -98,7 +98,7 @@ export const webShowcaseProjects: Project[] = [
     gallery: [],
     metrics: [
       { label: "Online Verkoop", value: "+150%", color: "#25D366" },
-      { label: "Laadtijd", value: "<2s", color: "#5BA4F5" },
+      { label: "Laadtijd", value: "<2s", color: "#00A3E0" },
       { label: "Klant Retentie", value: "+85%", color: "#F62961" }
     ]
   },
@@ -118,7 +118,7 @@ export const webShowcaseProjects: Project[] = [
     gallery: [],
     metrics: [
       { label: "Lighthouse Score", value: "95+", color: "#25D366" },
-      { label: "AI-Powered", value: "100%", color: "#5BA4F5" },
+      { label: "AI-Powered", value: "100%", color: "#00A3E0" },
       { label: "Doorlooptijd", value: "5 dagen", color: "#F62961" }
     ]
   }
@@ -143,7 +143,7 @@ export const allProjects: Project[] = [
       "https://i.ibb.co/mV9FkFZy/UNIVERSAL-NOHARDFEELINGS-FRAMES.webp"
     ],
     metrics: [
-      { label: "Social Bereik", value: "2M+", color: "#5BA4F5" },
+      { label: "Social Bereik", value: "2M+", color: "#00A3E0" },
       { label: "Engagement", value: "+340%", color: "#25D366" },
       { label: "Campagnes", value: "12+", color: "#F7E644" }
     ]
@@ -166,7 +166,7 @@ export const allProjects: Project[] = [
     ],
     metrics: [
       { label: "Volgers Groei", value: "+25K", color: "#F62961" },
-      { label: "Impressies", value: "5M+", color: "#5BA4F5" },
+      { label: "Impressies", value: "5M+", color: "#00A3E0" },
       { label: "Engagement Rate", value: "8.2%", color: "#25D366" }
     ]
   },
@@ -189,7 +189,7 @@ export const allProjects: Project[] = [
     metrics: [
       { label: "Merkherkenning", value: "+400%", color: "#25D366" },
       { label: "Social Groei", value: "10K+", color: "#F62961" },
-      { label: "Video Views", value: "500K+", color: "#5BA4F5" }
+      { label: "Video Views", value: "500K+", color: "#00A3E0" }
     ]
   },
   {
@@ -210,7 +210,7 @@ export const allProjects: Project[] = [
     ],
     metrics: [
       { label: "Bezoekers", value: "15K+", color: "#F7E644" },
-      { label: "Social Bereik", value: "1.2M", color: "#5BA4F5" },
+      { label: "Social Bereik", value: "1.2M", color: "#00A3E0" },
       { label: "Edities", value: "4", color: "#25D366" }
     ]
   },
@@ -233,7 +233,7 @@ export const allProjects: Project[] = [
     metrics: [
       { label: "Merkbeleving", value: "+250%", color: "#F62961" },
       { label: "Oppervlakte", value: "400m\u00B2", color: "#F7E644" },
-      { label: "Materialen", value: "15+", color: "#5BA4F5" }
+      { label: "Materialen", value: "15+", color: "#00A3E0" }
     ]
   }
 ];

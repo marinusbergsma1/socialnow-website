@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Project } from '../types';
 import Button from './Button';
 import {
@@ -64,18 +64,20 @@ interface ProjectModalProps {
   onOpenBooking: () => void;
 }
 
-const ProjectModal: React.FC<ProjectModalProps> = ({ 
-  project, 
+const ProjectModal: React.FC<ProjectModalProps> = ({
+  project,
   projects,
-  onClose, 
-  onNext, 
-  onPrev, 
-  onOpenBooking 
+  onClose,
+  onNext,
+  onPrev,
+  onOpenBooking
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
     if (project) {
+      setIsClosing(false);
       document.body.style.overflow = 'hidden';
       if (scrollRef.current) scrollRef.current.scrollTo(0, 0);
     } else {
@@ -84,7 +86,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
     return () => { document.body.style.overflow = 'unset'; };
   }, [project]);
 
-  if (!project) return null;
+  const handleClose = useCallback(() => {
+    setIsClosing(true);
+    setTimeout(() => {
+      onClose();
+      setIsClosing(false);
+    }, 400);
+  }, [onClose]);
+
+  if (!project && !isClosing) return null;
 
   const currentIndex = projects.findIndex(p => p.id === project.id);
   const totalProjects = projects.length;
@@ -93,11 +103,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
   const nextProject = projects[(currentIndex + 1) % totalProjects];
 
   return (
-    <div className="fixed inset-0 z-[10000] flex items-center justify-center animate-fade-in-up">
+    <div className={`fixed inset-0 z-[10000] flex items-center justify-center transition-all duration-400 ${isClosing ? 'opacity-0 scale-95' : 'animate-fade-in-up'}`}>
       {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/95 backdrop-blur-2xl transition-opacity duration-500" 
-        onClick={onClose}
+      <div
+        className={`absolute inset-0 bg-black/95 backdrop-blur-2xl transition-opacity duration-400 ${isClosing ? 'opacity-0' : 'opacity-100'}`}
+        onClick={handleClose}
       ></div>
       
       {/* Modal Container */}
@@ -116,8 +126,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
         {/* Navigation Header */}
         <div className="absolute top-0 left-0 w-full z-50 px-4 py-4 md:px-8 md:py-6 flex justify-between items-center pointer-events-none">
-          <button 
-            onClick={onClose}
+          <button
+            onClick={handleClose}
             className="pointer-events-auto bg-black/40 backdrop-blur-xl border border-white/10 text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all shadow-lg hover:scale-110 active:scale-95"
           >
             <ArrowLeft size={18} />
@@ -185,7 +195,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                   <div className="grid grid-cols-2 gap-y-4 md:gap-y-8 gap-x-4 border-t border-b border-white/10 py-6 md:py-8 mb-6 md:mb-8">
                     <div>
                       <div className="flex items-center gap-2 text-gray-500 mb-1.5 md:mb-2">
-                        <User size={12} className="text-[#5BA4F5]" /> 
+                        <User size={12} className="text-[#00A3E0]" /> 
                         <span className="text-[10px] font-black uppercase tracking-widest">Klant</span>
                       </div>
                       <p className="text-white font-bold text-xs md:text-base uppercase tracking-tight">{project.client || "Confidential"}</p>
@@ -280,14 +290,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     {/* Next Case Card */}
                     <div 
                       onClick={onNext}
-                      className="group relative rounded-[1.5rem] md:rounded-[2.5rem] border border-white/10 bg-white/5 p-6 md:p-10 cursor-pointer hover:bg-white/10 hover:border-[#5BA4F5] transition-all overflow-hidden backdrop-blur-md text-left md:text-right"
+                      className="group relative rounded-[1.5rem] md:rounded-[2.5rem] border border-white/10 bg-white/5 p-6 md:p-10 cursor-pointer hover:bg-white/10 hover:border-[#00A3E0] transition-all overflow-hidden backdrop-blur-md text-left md:text-right"
                     >
-                      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-bl from-[#5BA4F5]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-bl from-[#00A3E0]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                       <div className="relative z-10">
-                        <span className="text-[#5BA4F5] text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] block mb-2 md:mb-3 opacity-60 group-hover:opacity-100 transition-opacity">Volgende Case</span>
+                        <span className="text-[#00A3E0] text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] block mb-2 md:mb-3 opacity-60 group-hover:opacity-100 transition-opacity">Volgende Case</span>
                         <h3 className="text-base md:text-2xl font-black uppercase text-white flex items-center md:justify-end gap-2 md:gap-3 tracking-tighter">
                           {nextProject.title}
-                          <ChevronRight size={24} className="group-hover:translate-x-2 transition-transform text-[#5BA4F5]" /> 
+                          <ChevronRight size={24} className="group-hover:translate-x-2 transition-transform text-[#00A3E0]" /> 
                         </h3>
                       </div>
                     </div>
@@ -296,7 +306,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
                   <button 
                     onClick={onClose}
-                    className="relative overflow-hidden rounded-full group cursor-pointer transition-all duration-300 border-2 active:scale-95 bg-transparent border-transparent text-white/40 hover:text-[#5BA4F5] mt-2 md:mt-4"
+                    className="relative overflow-hidden rounded-full group cursor-pointer transition-all duration-300 border-2 active:scale-95 bg-transparent border-transparent text-white/40 hover:text-[#00A3E0] mt-2 md:mt-4"
                   >
                     <div className="relative z-10 flex items-center justify-center font-black uppercase tracking-[0.4em] text-[10px] md:text-xs px-6 py-3 gap-2">
                       <span className="transition-colors duration-300 ">Terug naar overzicht</span>

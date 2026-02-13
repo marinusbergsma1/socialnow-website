@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, memo, useCallback } from 'react';
+import React, { useRef, useState, useEffect, memo, useCallback, useMemo } from 'react';
 import { Activity, Database, Heart, Volume2, VolumeX } from 'lucide-react';
 
 // Global audio context: only one video can be unmuted at a time across the entire page
@@ -47,90 +47,111 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   const lastPointerTime = useRef(0);
   const velocityRef = useRef(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [unmutedIndex, setUnmutedIndex] = useState<number | null>(null);
   const dragDistRef = useRef(0);
 
-  const [isMobile, setIsMobile] = useState(false);
+  // Use refs for screen dimensions to avoid re-renders that kill video playback
+  const isMobileRef = useRef(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+  const screenWidthRef = useRef(typeof window !== 'undefined' ? window.innerWidth : 375);
+  const [, forceUpdate] = useState(0);
 
   useEffect(() => {
-    const onResize = () => setIsMobile(window.innerWidth < 768);
+    const onResize = () => {
+      const wasMobile = isMobileRef.current;
+      isMobileRef.current = window.innerWidth < 768;
+      screenWidthRef.current = window.innerWidth;
+      // Only re-render if mobile breakpoint actually changed
+      if (wasMobile !== isMobileRef.current) {
+        forceUpdate(n => n + 1);
+      }
+    };
     onResize();
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  const cardWidth = isMobile ? 170 : 340;
-  const cardHeight = isMobile ? 302 : 604;
-  const gap = isMobile ? 12 : 24;
+  const isMobile = isMobileRef.current;
+  const screenWidth = screenWidthRef.current;
+
+  // Desktop: responsive card width showing ~3.5 cards in viewport
+  const cardWidth = isMobile
+    ? Math.round(screenWidth * 0.56)
+    : Math.min(480, Math.max(380, Math.round(screenWidth * 0.27)));
+  const cardHeight = Math.round(cardWidth * (16 / 9));
+  const gap = isMobile ? 14 : 32;
   const totalItemWidth = cardWidth + gap;
   const setLength = videos.length;
   const totalSetWidth = totalItemWidth * setLength;
 
-  const autoSpeed = isMobile ? 0.4 : 0.8;
+  const autoSpeed = isMobile ? 0.5 : 0.6;
 
-  const allVideos = isMobile
-    ? [...videos, ...videos]
-    : [...videos, ...videos, ...videos];
+  // Refs for animation values to prevent rAF loop restarts (= frame-skip = stutter)
+  const totalSetWidthRef = useRef(totalSetWidth);
+  const autoSpeedRef = useRef(autoSpeed);
+  useEffect(() => { totalSetWidthRef.current = totalSetWidth; }, [totalSetWidth]);
+  useEffect(() => { autoSpeedRef.current = autoSpeed; }, [autoSpeed]);
 
-  const numSets = isMobile ? 2 : 3;
+  // Memoize allVideos to prevent React from recreating video DOM elements on re-render
+  const allVideos = useMemo(() => [...videos, ...videos, ...videos], [videos]);
 
+  // Start in the middle set
   useEffect(() => {
-    positionRef.current = totalSetWidth * Math.floor(numSets / 2);
-  }, [totalSetWidth, numSets]);
+    positionRef.current = totalSetWidth;
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translate3d(${-positionRef.current}px, 0, 0)`;
+    }
+  }, [totalSetWidth]);
 
-  // Intersection Observer: play/pause videos based on visibility
+  // Ensure all slider videos are playing — keep retrying continuously
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target.querySelector('video') as HTMLVideoElement | null;
-          if (!video) return;
-          if (entry.isIntersecting) {
-            video.play().catch(() => {
-              video.muted = true;
-              video.play().catch(() => {});
-            });
-          } else {
-            video.pause();
-            // If this video was unmuted and scrolled away, mute it
-            if (!video.muted) {
-              video.muted = true;
-            }
-          }
-        });
-      },
-      { rootMargin: '100px', threshold: 0.1 }
-    );
+    let cancelled = false;
+    const playAll = () => {
+      if (cancelled) return;
+      videoRefs.current.forEach((vid) => {
+        // Skip the intentionally unmuted video to prevent race conditions
+        if (vid && vid.paused && vid !== globalUnmutedVideo) {
+          vid.muted = true;
+          vid.play().catch(() => {});
+        }
+      });
+      if (!cancelled) {
+        setTimeout(playAll, 2000);
+      }
+    };
+    const timer = setTimeout(playAll, 500);
+    return () => { cancelled = true; clearTimeout(timer); };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    cardRefs.current.forEach((card) => {
-      if (card) observer.observe(card);
-    });
-
-    return () => observer.disconnect();
-  }, [allVideos.length]);
-
+  // Stable animate callback — reads all changing values via refs, no dependencies
   const animate = useCallback(() => {
+    const tsw = totalSetWidthRef.current;
+    const speed = autoSpeedRef.current;
+
     if (!isDragging.current && !isPaused.current) {
       if (Math.abs(velocityRef.current) > 0.3) {
         positionRef.current += velocityRef.current;
-        velocityRef.current *= 0.96;
+        velocityRef.current *= 0.95;
       } else {
-        positionRef.current += autoSpeed;
+        positionRef.current += speed;
         velocityRef.current = 0;
       }
     }
 
-    if (positionRef.current >= totalSetWidth * (numSets - 1)) positionRef.current -= totalSetWidth;
-    if (positionRef.current <= totalSetWidth) positionRef.current += totalSetWidth;
+    // Seamless wrap
+    if (positionRef.current >= tsw * 2) {
+      positionRef.current -= tsw;
+    }
+    if (positionRef.current <= 0) {
+      positionRef.current += tsw;
+    }
 
     if (trackRef.current) {
       trackRef.current.style.transform = `translate3d(${-positionRef.current}px, 0, 0)`;
     }
 
     animationRef.current = requestAnimationFrame(animate);
-  }, [totalSetWidth, autoSpeed, numSets]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     animationRef.current = requestAnimationFrame(animate);
@@ -165,9 +186,8 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     isDragging.current = false;
   }, []);
 
-  // Unified tap-to-unmute (works on both mobile and desktop)
+  // Tap/click to toggle sound — works on both mobile and desktop
   const handleTap = useCallback((idx: number) => {
-    if (!isMobile) return;
     if (dragDistRef.current > 10) return;
 
     const vid = videoRefs.current[idx];
@@ -184,43 +204,32 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
       muteGlobalVideo();
       // Mute all slider videos
       videoRefs.current.forEach((v) => { if (v) v.muted = true; });
-      // Unmute this one
+      // Unmute this one and play with sound
       vid.muted = false;
       vid.volume = 0.5;
+      // Robust play: reload if stalled
+      if (vid.readyState < 3) {
+        vid.load();
+      }
       vid.play().catch(() => {});
       globalUnmutedVideo = vid;
       globalUnmuteListener = () => setUnmutedIndex(null);
       setUnmutedIndex(idx);
     }
-  }, [isMobile, unmutedIndex]);
+  }, [unmutedIndex]);
 
-  // Desktop hover handlers
+  // Desktop hover handlers — only pause/resume slider animation, don't control mute
   const handleMouseEnter = useCallback((idx: number) => {
     if (window.innerWidth < 768) return;
     isPaused.current = true;
     velocityRef.current = 0;
     setHoveredIndex(idx);
-    muteGlobalVideo();
-    const vid = videoRefs.current[idx];
-    if (vid) {
-      vid.muted = false;
-      vid.volume = 0.3;
-      globalUnmutedVideo = vid;
-      globalUnmuteListener = null;
-    }
   }, []);
 
-  const handleMouseLeave = useCallback((idx: number) => {
+  const handleMouseLeave = useCallback((_idx: number) => {
     if (window.innerWidth < 768) return;
     isPaused.current = false;
     setHoveredIndex(null);
-    const vid = videoRefs.current[idx];
-    if (vid) {
-      vid.muted = true;
-      if (globalUnmutedVideo === vid) {
-        globalUnmutedVideo = null;
-      }
-    }
   }, []);
 
   return (
@@ -243,49 +252,74 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
           return (
             <div
               key={i}
-              ref={el => { cardRefs.current[i] = el; }}
               className="flex-shrink-0 relative"
               style={{
                 width: `${cardWidth}px`,
-                transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-                transition: isHovered ? 'transform 0.3s ease-out' : 'none',
+                transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
+                transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 zIndex: isHovered || isUnmuted ? 10 : 1,
               }}
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={() => handleMouseLeave(i)}
               onClick={() => handleTap(i)}
             >
-              <div className="w-full bg-black"
+              <div className="w-full bg-black relative"
                 style={{
                   height: `${cardHeight}px`,
-                  borderRadius: isMobile ? '1rem' : '1.5rem',
+                  borderRadius: isMobile ? '1rem' : '1.25rem',
                   overflow: 'hidden',
-                  boxShadow: isHovered ? '0 0 30px rgba(37,211,102,0.3)' : isUnmuted ? '0 0 20px rgba(37,211,102,0.2)' : 'none',
+                  border: isHovered
+                    ? '1px solid rgba(37, 211, 102, 0.3)'
+                    : isUnmuted
+                      ? '1px solid rgba(37, 211, 102, 0.15)'
+                      : '1px solid rgba(255, 255, 255, 0.06)',
+                  boxShadow: isHovered
+                    ? '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(37, 211, 102, 0.15)'
+                    : '0 8px 32px rgba(0, 0, 0, 0.4)',
+                  transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
                 }}
               >
                 <video
                   ref={el => { videoRefs.current[i] = el; }}
                   src={video.src}
+                  autoPlay
                   loop
                   muted
                   playsInline
                   preload="metadata"
                   className="w-full h-full object-cover pointer-events-none"
                 />
+                {/* Gradient overlay for depth */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 pointer-events-none"
+                  style={{
+                    height: '40%',
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 100%)',
+                    opacity: isHovered ? 0.6 : 0.3,
+                    transition: 'opacity 0.4s ease',
+                  }}
+                />
               </div>
-              {/* Sound indicator */}
-              {isMobile && (
-                <div className={`absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
-                  isUnmuted ? 'bg-[#25D366] scale-110' : 'bg-black/60 scale-90'
+              {/* Sound indicator — pill with label */}
+              <div
+                className={`absolute bottom-5 right-5 flex items-center gap-1.5 rounded-full px-3 py-2 transition-all duration-300 ${
+                  isUnmuted
+                    ? 'bg-[#25D366] shadow-[0_0_20px_rgba(37,211,102,0.3)]'
+                    : 'bg-black/70 backdrop-blur-md border border-white/10'
                 }`}
-                  style={{ backdropFilter: isUnmuted ? 'none' : 'blur(8px)' }}
+              >
+                {isUnmuted
+                  ? <Volume2 size={14} className="text-black" />
+                  : <VolumeX size={14} className="text-white/50" />
+                }
+                <span
+                  className={`text-[9px] font-bold uppercase tracking-wider ${
+                    isUnmuted ? 'text-black' : 'text-white/40'
+                  }`}
                 >
-                  {isUnmuted
-                    ? <Volume2 size={14} className="text-black" />
-                    : <VolumeX size={14} className="text-white/70" />
-                  }
-                </div>
-              )}
+                  {isUnmuted ? 'ON' : 'TAP'}
+                </span>
+              </div>
             </div>
           );
         })}
@@ -324,8 +358,8 @@ const ShortContent: React.FC = () => {
     { src: "https://storage.googleapis.com/video-slider/jobdex_vid_oranjebloesem_personeel.mp4" },
   ];
 
-  // Mobile: max 3 videos for performance (6 DOM nodes with 2x duplication). Desktop: all videos.
-  const videos = isMobileMain ? allVideos.slice(0, 3) : allVideos;
+  // Mobile: 6 videos for smooth infinite loop (18 DOM nodes with 3x duplication). Desktop: all videos.
+  const videos = isMobileMain ? allVideos.slice(0, 6) : allVideos;
 
   // Stats observer
   useEffect(() => {
@@ -344,15 +378,18 @@ const ShortContent: React.FC = () => {
       {/* Header */}
       <div className="container mx-auto px-6 relative z-10 text-center mb-4 md:mb-14">
         <h2 className="text-2xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-none mb-3 md:mb-4">
-          SHORT FORM CONTENT
+          CONTENT DIE VIRAL GAAT
         </h2>
         <p className="text-gray-500 text-xs md:text-base font-medium max-w-lg mx-auto">
-          Van virale reels tot branded content. Wij maken scroll-stopping video's die converteren.
+          Van 0 naar 2 miljoen volgers. Wij creëren de reels waarover jouw doelgroep praat, deelt en koopt.
         </p>
       </div>
 
       {/* Infinite Loop Video Slider */}
       <div className="relative">
+        {/* Edge fades */}
+        <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
         <InfiniteVideoSlider videos={videos} />
       </div>
 
@@ -360,9 +397,9 @@ const ShortContent: React.FC = () => {
       <div className="container mx-auto px-6 mt-8 md:mt-24 z-10" ref={statsRef}>
         <div className="grid grid-cols-3 gap-2 md:gap-6">
           {[
-            { label: "Followers", end: 2, id: "01", color: "#F7E644", icon: Activity },
-            { label: "Likes", end: 500, id: "02", color: "#5BA4F5", icon: Database },
-            { label: "Reach", end: 800, id: "03", color: "#F62961", icon: Heart }
+            { label: "Volgers gegenereerd", end: 2, id: "01", color: "#F7E644", icon: Activity },
+            { label: "Totaal engagement", end: 500, id: "02", color: "#00A3E0", icon: Database },
+            { label: "Views bereikt", end: 800, id: "03", color: "#F62961", icon: Heart }
           ].map((stat, i) => {
             const Icon = stat.icon;
             return (

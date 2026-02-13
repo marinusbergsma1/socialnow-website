@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import { ArrowRight, LucideIcon } from 'lucide-react';
 
 interface ButtonProps {
@@ -12,25 +12,47 @@ interface ButtonProps {
   triggerOnHover?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ 
-  children, 
-  variant = 'primary', 
-  onClick, 
-  className = '', 
+const Button: React.FC<ButtonProps> = ({
+  children,
+  variant = 'primary',
+  onClick,
+  className = '',
   icon = false,
   IconComponent = ArrowRight, // Default to ArrowRight
-  triggerOnHover = false 
+  triggerOnHover = false
 }) => {
   const isGreen = variant === 'green';
   const isPink = variant === 'pink';
   const isGlass = variant === 'glass';
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const rafRef = useRef<number>(0);
+
+  // Magnetic hover effect — button subtly pulls toward cursor
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    const el = btnRef.current;
+    if (!el) return;
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      el.style.transform = `translate(${x * 0.15}px, ${y * 0.25}px)`;
+    });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    const el = btnRef.current;
+    if (!el) return;
+    cancelAnimationFrame(rafRef.current);
+    el.style.transform = 'translate(0px, 0px)';
+  }, []);
 
   // STRENG: Vaste hoogte aangepast voor mobiel (h-[46px]) vs desktop (h-[54px])
   const baseClasses = "relative overflow-hidden rounded-full group cursor-pointer transition-all duration-300 border-2 active:scale-95 h-[46px] md:h-[54px] !py-0 min-w-[160px] md:min-w-[200px] flex items-center justify-center";
-  
+
   let variantClasses = "";
   if (isGreen) {
-    variantClasses = "bg-transparent backdrop-blur-md border-[#25D366] text-white hover:shadow-[0_0_25px_rgba(37,211,102,0.5)]";
+    variantClasses = "bg-transparent backdrop-blur-md border-[#25D366] text-white hover:shadow-[0_0_25px_rgba(37,211,102,0.5)] neon-glow-green";
   } else if (isPink) {
     variantClasses = "bg-transparent backdrop-blur-md border-[#F62961] text-white hover:shadow-[0_0_25px_rgba(246,41,97,0.5)]";
   } else if (isGlass) {
@@ -40,13 +62,17 @@ const Button: React.FC<ButtonProps> = ({
   } else if (variant === 'outline') {
     variantClasses = "bg-transparent border-white text-white hover:border-white hover:text-black";
   } else if (variant === 'ghost') {
-    variantClasses = "bg-transparent border-transparent text-white hover:text-[#5BA4F5]";
+    variantClasses = "bg-transparent border-transparent text-white hover:text-[#00A3E0]";
   }
 
   return (
     <button
+      ref={btnRef}
       onClick={onClick}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className={`${baseClasses} ${variantClasses} ${className}`}
+      style={{ transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease' }}
     >
       {/* Background Fill Layer */}
       {isGreen && <div className="absolute inset-0 bg-[#25D366] translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}

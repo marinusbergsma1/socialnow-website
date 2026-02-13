@@ -9,7 +9,7 @@ import { useVideoIntersection } from '../hooks/useVideoIntersection';
 import { muteGlobalVideo } from './ShortContent';
 import { featuredProjects as projects } from '../data/projects';
 
-const accentColors = ['#5BA4F5', '#F62961', '#F7E644', '#25D366'];
+const accentColors = ['#00A3E0', '#F62961', '#F7E644', '#25D366'];
 
 // Lazy video component for featured sections — with tap-to-unmute on mobile
 const LazyVideo: React.FC<{
@@ -76,7 +76,7 @@ const LazyVideo: React.FC<{
     <div ref={containerRef} className={`relative w-full h-full ${className}`} onClick={handleTap}>
       {!hasLoadedOnce && (
         <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-10">
-          <div className="w-8 h-8 border-2 border-white/10 border-t-[#5BA4F5] rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-2 border-white/10 border-t-[#00A3E0] rounded-full animate-spin"></div>
         </div>
       )}
       <video
@@ -160,10 +160,6 @@ const LazyGalleryVideo: React.FC<{ src: string }> = ({ src }) => {
 
 const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBooking }) => {
   const navigate = useNavigate();
-  const [webdesignScale, setWebdesignScale] = useState(0.85);
-  const [betcityScale, setBetcityScale] = useState(0.85);
-  const [lacScale, setLacScale] = useState(0.85);
-
   const [showAll, setShowAll] = useState(false);
 
   const [isWebdesignHovered, setIsWebdesignHovered] = useState(false);
@@ -173,26 +169,27 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
   const betcityRef = useRef<HTMLDivElement>(null);
   const lacRef = useRef<HTMLDivElement>(null);
 
+  // Scroll-driven scale — uses CSS custom properties to avoid re-renders
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const updateScale = (ref: React.RefObject<HTMLDivElement | null>, setScale: (s: number) => void) => {
+        const updateScale = (ref: React.RefObject<HTMLDivElement | null>) => {
           if (!ref.current) return;
           const rect = ref.current.getBoundingClientRect();
           const viewportHeight = window.innerHeight;
           const center = viewportHeight / 2;
           const elementCenter = rect.top + rect.height / 2;
           const distance = Math.abs(center - elementCenter);
-          let newScale = 1.05 - (distance / viewportHeight) * 0.25;
-          setScale(Math.max(0.85, Math.min(newScale, 1.05)));
+          const newScale = Math.max(0.85, Math.min(1.05 - (distance / viewportHeight) * 0.25, 1.05));
+          ref.current.style.setProperty('--scale', String(newScale));
         };
 
-        updateScale(webdesignRef, setWebdesignScale);
-        updateScale(betcityRef, setBetcityScale);
-        updateScale(lacRef, setLacScale);
+        updateScale(webdesignRef);
+        updateScale(betcityRef);
+        updateScale(lacRef);
         ticking = false;
       });
     };
@@ -220,9 +217,9 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.8] relative text-white flex flex-wrap justify-center items-center">
              <span className="inline-flex items-center whitespace-nowrap">
                <span className="text-[#F7E644] mr-2 md:mr-6">"</span>
-               FEATURED
+               ONS BESTE
              </span>
-             <span className="mx-2 md:mx-4">WORK</span>
+             <span className="mx-2 md:mx-4">WERK</span>
              <span className="text-[#F7E644]">"</span>
            </h2>
            <p className="mt-3 md:mt-5 text-[8px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/20">
@@ -240,23 +237,23 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
           <div className="flex flex-col items-center mb-6 md:mb-10 px-6">
             <div className="text-center flex flex-col items-center">
                <div className="flex items-center gap-3 mb-4 opacity-40">
-                  <Globe size={14} className="text-[#5BA4F5]" />
+                  <Globe size={14} className="text-[#00A3E0]" />
                   <span className="text-[10px] font-mono tracking-[0.3em] text-white/60 uppercase">Next Gen Webdesign</span>
                </div>
                <h3 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-none">
-                  Next Gen <span className="text-[#5BA4F5]">Webdesign</span>
+                  Next Gen <span className="text-[#00A3E0]">Webdesign</span>
                </h3>
             </div>
           </div>
           <div className="relative flex justify-center items-center overflow-hidden">
-            <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(${webdesignScale})` }}>
+            <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
                <LazyVideo
                  src={`${import.meta.env.BASE_URL}videos/nextgen-webdesign.mp4`}
                  isHovered={isWebdesignHovered}
                  restartOnView={true}
                />
                <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 p-2 md:p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/20 transition-all duration-500 transform z-20 ${isWebdesignHovered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-4'}`}>
-                <Volume2 className="w-4 h-4 md:w-6 md:h-6 text-[#5BA4F5]" />
+                <Volume2 className="w-4 h-4 md:w-6 md:h-6 text-[#00A3E0]" />
               </div>
             </div>
           </div>
@@ -272,22 +269,22 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
           <div className="flex flex-col items-center mb-6 md:mb-10 px-6">
             <div className="text-center flex flex-col items-center">
                <div className="flex items-center gap-3 mb-4 opacity-40">
-                  <Terminal size={14} className="text-[#0071BC]" />
+                  <Terminal size={14} className="text-[#0077CC]" />
                   <span className="text-[10px] font-mono tracking-[0.3em] text-white/60 uppercase">Motion Design</span>
                </div>
                <h3 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-none">
-                  Motion <span className="text-[#0071BC]">Design</span>
+                  Motion <span className="text-[#0077CC]">Design</span>
                </h3>
             </div>
           </div>
           <div className="relative flex justify-center items-center overflow-hidden">
-            <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(${betcityScale})` }}>
+            <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
               <LazyVideo
                 src={`${import.meta.env.BASE_URL}videos/betcity-bumper.mp4`}
                 isHovered={isBetcityHovered}
               />
               <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 p-2 md:p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/20 transition-all duration-500 transform z-20 ${isBetcityHovered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-4'}`}>
-                <Volume2 className="w-4 h-4 md:w-6 md:h-6 text-[#0071BC]" />
+                <Volume2 className="w-4 h-4 md:w-6 md:h-6 text-[#0077CC]" />
               </div>
             </div>
           </div>
@@ -307,7 +304,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
             </div>
           </div>
           <div className="relative flex justify-center items-center group overflow-hidden">
-            <div className="relative w-full transition-all duration-[1200ms] ease-out" style={{ transform: `scale(${lacScale})` }}>
+            <div className="relative w-full transition-all duration-[1200ms] ease-out" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
               <BeforeAfterSlider
                 beforeImage="https://i.ibb.co/Wv382j1y/Eternal-Sundown-Afbeelding-Before-geconverteerd-van-png-1.webp"
                 afterImage="https://i.ibb.co/dsDCqX5t/Eternal-Sundown-Afbeelding-After.webp"
@@ -322,15 +319,15 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
            <div className="flex flex-col items-center mb-12 md:mb-24 text-center scroll-reveal">
                <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 bg-white/5 mb-8 backdrop-blur-md">
                  <SearchCode size={14} className="text-[#F7E644]" />
-                 <span className="text-white/60 font-bold uppercase tracking-[0.3em] text-[10px]">CASE STUDIES</span>
+                 <span className="text-white/60 font-bold uppercase tracking-[0.3em] text-[10px]">BEWEZEN RESULTATEN</span>
                </div>
                <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.8] relative text-white flex flex-wrap justify-center items-center">
                  <span className="inline-flex items-center whitespace-nowrap">
                     <span className="text-[#F7E644] mr-2 md:mr-6">"</span>
-                    CASE
+                    BEWEZEN
                  </span>
                  <span className="inline-flex items-center whitespace-nowrap ml-2 md:ml-4">
-                    STUDIES
+                    RESULTATEN
                     <span className="text-[#F7E644] ml-2 md:ml-6">"</span>
                  </span>
                </h2>
@@ -422,7 +419,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
                             onClick={() => openProject(project.slug)}
                             triggerOnHover
                           >
-                            BEKIJK DE CASE
+                            ONTDEK HET VERHAAL
                           </Button>
                         </div>
                       </div>

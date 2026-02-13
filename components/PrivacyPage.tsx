@@ -27,18 +27,20 @@ const PrivacyPage: React.FC = () => {
           Terug
         </button>
 
-        <h1 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter mb-4">
-          Privacybeleid
-        </h1>
-        <p className="text-white/30 text-xs font-bold uppercase tracking-widest mb-12">
-          Laatst bijgewerkt: februari 2026
-        </p>
+        <div className="scroll-reveal">
+          <h1 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter mb-4">
+            Privacybeleid
+          </h1>
+          <p className="text-white/30 text-xs font-bold uppercase tracking-widest mb-12">
+            Laatst bijgewerkt: februari 2026
+          </p>
+        </div>
 
-        <div className="prose prose-invert max-w-none space-y-8 text-gray-300 text-sm leading-relaxed">
+        <div className="prose prose-invert max-w-none space-y-8 text-gray-300 text-sm leading-relaxed scroll-reveal">
 
           <section>
             <h2 className="text-lg font-black uppercase text-white tracking-tight mb-3">1. Wie zijn wij</h2>
-            <p>SocialNow is een creatief bureau gevestigd aan de Amstelstraat 43G, 1017DA Amsterdam, Nederland. KVK-nummer: 90877179. Voor vragen over privacy kun je contact opnemen via <a href="mailto:info@socialnow.nl" className="text-[#5BA4F5] hover:underline">info@socialnow.nl</a>.</p>
+            <p>SocialNow is een creatief bureau gevestigd aan de Amstelstraat 43G, 1017DA Amsterdam, Nederland. KVK-nummer: 90877179. Voor vragen over privacy kun je contact opnemen via <a href="mailto:info@socialnow.nl" className="text-[#00A3E0] hover:underline">info@socialnow.nl</a>.</p>
           </section>
 
           <section>
@@ -77,7 +79,7 @@ const PrivacyPage: React.FC = () => {
               <li>Overdracht van je gegevens (dataportabiliteit)</li>
               <li>Het indienen van een klacht bij de Autoriteit Persoonsgegevens</li>
             </ul>
-            <p className="mt-3">Neem contact op via <a href="mailto:info@socialnow.nl" className="text-[#5BA4F5] hover:underline">info@socialnow.nl</a> om een van deze rechten uit te oefenen.</p>
+            <p className="mt-3">Neem contact op via <a href="mailto:info@socialnow.nl" className="text-[#00A3E0] hover:underline">info@socialnow.nl</a> om een van deze rechten uit te oefenen.</p>
           </section>
 
           <section>

@@ -15,19 +15,20 @@ export default defineConfig({
     }
   },
   build: {
-    // Chunk splitting for better caching
     rollupOptions: {
       output: {
         manualChunks: {
           'vendor': ['react', 'react-dom', 'react-router-dom'],
           'ui': ['lucide-react'],
           'charts': ['recharts'],
+          'smooth-scroll': ['lenis'],
         }
       }
     },
-    // Disable sourcemaps for smaller production output
     sourcemap: false,
-    // Target modern browsers for smaller bundle
     target: 'es2020',
+    minify: 'esbuild',
+    // Warn on large chunks
+    chunkSizeWarningLimit: 200,
   }
 });

@@ -30,10 +30,10 @@ const reviewsData = [
 
 const words = [
   { text: "BRANDING", color: "text-[#25D366]" },
-  { text: "DESIGN", color: "text-[#5BA4F5]" },
+  { text: "DESIGN", color: "text-[#00A3E0]" },
   { text: "MARKETING", color: "text-[#F7E644]" },
   { text: "STRATEGY", color: "text-[#F62961]" },
-  { text: "AI", color: "text-[#5BA4F5]" }
+  { text: "AI", color: "text-[#00A3E0]" }
 ];
 
 const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
@@ -86,12 +86,12 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
         <div className="container mx-auto px-6 text-center flex flex-col items-center justify-center">
 
           <div className={`transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`}>
-             <div className="inline-flex items-center gap-3 bg-white/5 md:backdrop-blur-2xl border border-white/10 px-6 py-2.5 rounded-full mb-8 md:mb-10 hover:border-[#5BA4F5]/50 transition-colors">
+             <div className="inline-flex items-center gap-3 bg-white/5 md:backdrop-blur-2xl border border-white/10 px-6 py-2.5 rounded-full mb-8 md:mb-10 hover:border-[#00A3E0]/50 transition-colors">
                <div className="relative flex h-2.5 w-2.5">
                  <span className="hidden md:inline-flex animate-ping absolute h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#25D366]"></span>
                </div>
-               <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] text-white">BEREIKBAAR VOOR Q1 2026</span>
+               <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] text-white">SLECHTS 3 PLEKKEN VRIJ IN Q1 2026</span>
              </div>
           </div>
 
@@ -132,20 +132,20 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
           </div>
 
           <p className={`max-w-2xl mx-auto text-gray-400 text-sm md:text-xl mb-10 md:mb-14 font-medium leading-relaxed px-6 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.4s' }}>
-            Wij bouwen websites, applicaties en digitale projecten met AI als fundament. <span className="text-white font-black italic">Voor bedrijven die de toekomst vormgeven.</span>
+            Concept, creatie en realisatie onder één dak. Wij bouwen websites die converteren, merken die domineren en content die viral gaat — van idee tot lancering in weken. <span className="text-white font-black italic">Voor ambitieuze bedrijven die hun markt willen leiden.</span>
           </p>
 
           <div className={`flex flex-col items-center gap-10 md:gap-12 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.6s' }}>
             <div className="relative group">
-                <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-12 text-sm md:text-xl md:shadow-[0_20px_60px_rgba(37,211,102,0.3)]">START JOUW PROJECT</Button>
+                <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-12 text-sm md:text-xl md:shadow-[0_20px_60px_rgba(37,211,102,0.3)]">CLAIM JOUW PLEK</Button>
             </div>
 
             <div onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' })} className="flex flex-col items-center gap-6 cursor-pointer group pb-4 scale-90 md:scale-100">
                <div className="bg-black/90 md:backdrop-blur-xl border border-white/10 rounded-full px-4 md:px-6 py-2 md:shadow-2xl transition-colors duration-700 group-hover:border-white/30 flex items-center gap-2 md:gap-4 max-w-[95vw] md:max-w-none">
                   <div className="flex -space-x-3 shrink-0">
                     {reviewsData.map((review, i) => (
-                      <div key={i} className={`w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-black overflow-hidden transition-all duration-700 ${activeReviewIndex === i ? 'scale-110 z-10 border-[#5BA4F5] shadow-[0_0_20px_rgba(97,246,253,0.4)]' : 'opacity-40 grayscale scale-90'}`}>
-                        <img src={review.image} alt={review.name} className="w-full h-full object-cover" />
+                      <div key={i} className={`w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-black overflow-hidden transition-all duration-700 ${activeReviewIndex === i ? 'scale-110 z-10 border-[#00A3E0] shadow-[0_0_20px_rgba(0,163,224,0.4)]' : 'opacity-40 grayscale scale-90'}`}>
+                        <img src={review.image} alt={review.name} width={48} height={48} className="w-full h-full object-cover" />
                       </div>
                     ))}
                   </div>
@@ -154,7 +154,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                     <p className="text-white font-black uppercase tracking-widest text-[10px] md:text-xs leading-none">
                       {reviewsData[activeReviewIndex].name}
                     </p>
-                    <p className="text-[#5BA4F5] font-bold uppercase tracking-widest text-[8px] md:text-[9px] leading-none mt-1 opacity-80">
+                    <p className="text-[#00A3E0] font-bold uppercase tracking-widest text-[8px] md:text-[9px] leading-none mt-1 opacity-80">
                       {reviewsData[activeReviewIndex].handle}
                     </p>
                   </div>
@@ -168,7 +168,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                   </div>
                   <div className="h-4 w-[1px] bg-white/20"></div>
                   <p className="text-white font-black uppercase tracking-widest text-[10px] md:text-[11px]">
-                    4.9/5 <span className="text-white/40 mx-2">|</span> LEES REVIEWS
+                    4.9/5 <span className="text-white/40 mx-2">|</span> 50+ PROJECTEN <span className="text-white/40 mx-2">|</span> LEES REVIEWS
                   </p>
                </div>
             </div>

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { X, Phone, MessageCircle, Mail, ArrowRight, CheckCircle2, Send, User, Building2 } from 'lucide-react';
 
 interface BookingPopupProps {
@@ -13,8 +13,22 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
   const [activeTab, setActiveTab] = useState<Tab>('contact');
   const [formData, setFormData] = useState({ name: '', email: '', company: '', budget: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
-  if (!isOpen) return null;
+  // Reset closing state when popup opens
+  useEffect(() => {
+    if (isOpen) setIsClosing(false);
+  }, [isOpen]);
+
+  const handleClose = useCallback(() => {
+    setIsClosing(true);
+    setTimeout(() => {
+      onClose();
+      setIsClosing(false);
+    }, 400);
+  }, [onClose]);
+
+  if (!isOpen && !isClosing) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,13 +42,13 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
 
   return (
     <div role="dialog" aria-modal="true" aria-label="Contact opnemen" className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-4">
-      <div className="absolute inset-0 bg-black/95 backdrop-blur-3xl transition-opacity duration-300" onClick={onClose}></div>
+      <div className={`absolute inset-0 bg-black/95 backdrop-blur-3xl transition-opacity duration-400 ${isClosing ? 'opacity-0' : 'opacity-100'}`} onClick={handleClose}></div>
 
-      <div data-lenis-prevent className="relative z-10 w-full h-full md:h-auto md:max-w-5xl bg-transparent flex flex-col md:flex-row animate-[fadeInUp_0.5s_cubic-bezier(0.16,1,0.3,1)] shadow-[0_40px_120px_rgba(0,0,0,1)] overflow-y-auto md:overflow-visible custom-scrollbar">
+      <div data-lenis-prevent className={`relative z-10 w-full h-full md:h-auto md:max-w-5xl bg-transparent flex flex-col md:flex-row shadow-[0_40px_120px_rgba(0,0,0,1)] overflow-y-auto md:overflow-visible custom-scrollbar transition-all duration-400 ${isClosing ? 'opacity-0 translate-y-8 scale-95' : 'opacity-100 translate-y-0 scale-100 animate-[fadeInUp_0.5s_cubic-bezier(0.16,1,0.3,1)]'}`}>
 
         {/* Close Button */}
         <button
-          onClick={onClose}
+          onClick={handleClose}
           aria-label="Sluiten"
           className="absolute top-6 right-6 z-[70] p-4 rounded-full bg-white/5 hover:bg-[#F62961] transition-all text-white border border-white/10 backdrop-blur-md shadow-2xl group"
         >
@@ -102,7 +116,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                  onClick={() => { setActiveTab('form'); setSubmitted(false); }}
                  className={`px-5 py-2.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${
                    activeTab === 'form'
-                     ? 'bg-[#5BA4F5] text-black'
+                     ? 'bg-[#00A3E0] text-black'
                      : 'bg-white/5 text-white/40 border border-white/10 hover:text-white hover:border-white/20'
                  }`}
                >
@@ -136,10 +150,10 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
 
                      {/* Phone */}
                      <a href="tel:+31637404577"
-                        className="group flex items-center justify-between p-6 md:p-5 rounded-[2rem] border border-white/5 bg-white/[0.02] hover:border-[#0071BC] hover:bg-[#0071BC]/10 transition-all duration-700 hover:shadow-[0_0_50px_rgba(0,113,188,0.2)]"
+                        className="group flex items-center justify-between p-6 md:p-5 rounded-[2rem] border border-white/5 bg-white/[0.02] hover:border-[#0077CC] hover:bg-[#0077CC]/10 transition-all duration-700 hover:shadow-[0_0_50px_rgba(0,119,204,0.2)]"
                      >
                          <div className="flex items-center gap-5 md:gap-6">
-                             <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/5 text-[#0071BC] flex items-center justify-center border border-[#0071BC]/20 group-hover:scale-110 transition-transform duration-500">
+                             <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/5 text-[#0077CC] flex items-center justify-center border border-[#0077CC]/20 group-hover:scale-110 transition-transform duration-500">
                                  <Phone size={24} />
                              </div>
                              <div>
@@ -147,7 +161,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                                  <p className="text-gray-500 text-[10px] md:text-[11px] font-bold tracking-widest uppercase">+31 6 37 40 45 77</p>
                              </div>
                          </div>
-                         <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 group-hover:bg-[#0071BC] group-hover:text-white group-hover:border-transparent transition-all duration-300">
+                         <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 group-hover:bg-[#0077CC] group-hover:text-white group-hover:border-transparent transition-all duration-300">
                              <ArrowRight size={20} />
                          </div>
                      </a>
@@ -184,7 +198,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                      </p>
                      <button
                        onClick={() => { setSubmitted(false); setFormData({ name: '', email: '', company: '', budget: '', message: '' }); }}
-                       className="mt-8 text-[#5BA4F5] text-[11px] font-black uppercase tracking-widest hover:underline"
+                       className="mt-8 text-[#00A3E0] text-[11px] font-black uppercase tracking-widest hover:underline"
                      >
                        Nog een aanvraag versturen
                      </button>
@@ -202,7 +216,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                              value={formData.name}
                              onChange={(e) => setFormData(d => ({ ...d, name: e.target.value }))}
                              placeholder="Je volledige naam"
-                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 pl-11 py-3 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#5BA4F5]/50 focus:bg-white/[0.07] transition-all"
+                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 pl-11 py-3 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#00A3E0]/50 focus:bg-white/[0.07] transition-all"
                            />
                          </div>
                        </div>
@@ -216,7 +230,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                              value={formData.email}
                              onChange={(e) => setFormData(d => ({ ...d, email: e.target.value }))}
                              placeholder="je@bedrijf.nl"
-                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 pl-11 py-3 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#5BA4F5]/50 focus:bg-white/[0.07] transition-all"
+                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 pl-11 py-3 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#00A3E0]/50 focus:bg-white/[0.07] transition-all"
                            />
                          </div>
                        </div>
@@ -232,7 +246,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                              value={formData.company}
                              onChange={(e) => setFormData(d => ({ ...d, company: e.target.value }))}
                              placeholder="Bedrijfsnaam"
-                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 pl-11 py-3 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#5BA4F5]/50 focus:bg-white/[0.07] transition-all"
+                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 pl-11 py-3 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#00A3E0]/50 focus:bg-white/[0.07] transition-all"
                            />
                          </div>
                        </div>
@@ -241,7 +255,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                          <select
                            value={formData.budget}
                            onChange={(e) => setFormData(d => ({ ...d, budget: e.target.value }))}
-                           className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-medium focus:outline-none focus:border-[#5BA4F5]/50 focus:bg-white/[0.07] transition-all appearance-none"
+                           className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-medium focus:outline-none focus:border-[#00A3E0]/50 focus:bg-white/[0.07] transition-all appearance-none"
                          >
                            <option value="" className="bg-[#111]">Selecteer budget</option>
                            <option value="< €1.500" className="bg-[#111]">&lt; €1.500</option>
@@ -260,13 +274,13 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                          value={formData.message}
                          onChange={(e) => setFormData(d => ({ ...d, message: e.target.value }))}
                          placeholder="Waar kan SocialNow je mee helpen? Beschrijf kort je project, doelen en timeline."
-                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#5BA4F5]/50 focus:bg-white/[0.07] transition-all resize-none"
+                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#00A3E0]/50 focus:bg-white/[0.07] transition-all resize-none"
                        />
                      </div>
 
                      <button
                        type="submit"
-                       className="w-full flex items-center justify-center gap-3 bg-[#5BA4F5] hover:bg-[#4A93E4] text-black font-black uppercase tracking-widest text-sm py-4 rounded-2xl transition-all duration-300 hover:shadow-[0_0_40px_rgba(91,164,245,0.3)] mt-2"
+                       className="w-full flex items-center justify-center gap-3 bg-[#00A3E0] hover:bg-[#0092C7] text-black font-black uppercase tracking-widest text-sm py-4 rounded-2xl transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,163,224,0.3)] mt-2"
                      >
                        <Send size={16} />
                        Verstuur Aanvraag

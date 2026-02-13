@@ -21,7 +21,7 @@ const tiers: PricingTier[] = [
     price: 'Vanaf €1.500',
     period: 'eenmalig',
     description: 'Perfect voor startups en ondernemers die snel online willen met een professionele website.',
-    color: '#5BA4F5',
+    color: '#00A3E0',
     features: [
       'Responsive one-page website',
       'AI-gestuurde development',
@@ -98,7 +98,7 @@ const PricingPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
       </div>
 
       {/* Header */}
-      <div className="container mx-auto px-6 max-w-6xl mb-16 md:mb-24 text-center">
+      <div className="container mx-auto px-6 max-w-6xl mb-16 md:mb-24 text-center scroll-reveal">
         <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#25D366]/5 border border-[#25D366]/20 mb-8">
           <Sparkles size={14} className="text-[#25D366]" />
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#25D366]">Transparante Prijzen</span>
@@ -118,10 +118,11 @@ const PricingPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
           {tiers.map((tier, i) => (
             <div
               key={i}
-              className={`relative rounded-2xl md:rounded-3xl p-8 md:p-10 flex flex-col transition-all duration-500 hover:border-white/20 ${
+              className={`relative rounded-2xl md:rounded-3xl p-8 md:p-10 flex flex-col transition-all duration-500 hover:border-white/20 scroll-reveal ${
                 tier.popular ? 'border-2' : 'border'
               }`}
               style={{
+                transitionDelay: `${i * 120}ms`,
                 background: tier.popular ? `rgba(37, 211, 102, 0.03)` : 'rgba(255, 255, 255, 0.02)',
                 borderColor: tier.popular ? `${tier.color}40` : 'rgba(255, 255, 255, 0.06)',
               }}
@@ -174,7 +175,7 @@ const PricingPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
       </div>
 
       {/* FAQ / Extra info */}
-      <div className="container mx-auto px-6 max-w-4xl mb-20">
+      <div className="container mx-auto px-6 max-w-4xl mb-20 scroll-reveal">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           <div className="rounded-2xl p-6 md:p-8" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
             <h3 className="text-base font-black uppercase text-white tracking-tight mb-3">Wat zit er altijd inbegrepen?</h3>
@@ -200,7 +201,7 @@ const PricingPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
       </div>
 
       {/* Bottom CTA */}
-      <div className="container mx-auto px-6 max-w-4xl">
+      <div className="container mx-auto px-6 max-w-4xl scroll-reveal">
         <div className="rounded-2xl md:rounded-3xl p-8 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
           <div>
             <h3 className="text-xl md:text-3xl font-black uppercase text-white tracking-tight mb-2">

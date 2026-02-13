@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 const servicesRow1 = [
-  { name: "DIGITAL EXPERIENCE", color: "#5BA4F5" },
+  { name: "DIGITAL EXPERIENCE", color: "#00A3E0" },
   { name: "CAMPAIGN DESIGN", color: "#25D366" },
   { name: "SOCIAL MEDIA", color: "#F7E644" },
   { name: "BRAND STRATEGY", color: "#25D366" },
   { name: "VISUAL IDENTITY", color: "#F62961" },
-  { name: "WEBSITE & UI/UX DESIGN", color: "#5BA4F5" },
+  { name: "WEBSITE & UI/UX DESIGN", color: "#00A3E0" },
   { name: "AI WEBSITE DEVELOPMENT", color: "#25D366" },
   { name: "CREATIVE DIRECTION", color: "#F7E644" },
 ];
@@ -20,7 +20,7 @@ const servicesRow2 = [
   { name: "VIDEO & CONTENT PRODUCTION", color: "#F62961" },
   { name: "3D & CGI DESIGN", color: "#25D366" },
   { name: "PRINT & OFFLINE MEDIA", color: "#25D366" },
-  { name: "EVENT & ENVIRONMENTAL DESIGN", color: "#5BA4F5" },
+  { name: "EVENT & ENVIRONMENTAL DESIGN", color: "#00A3E0" },
   { name: "FULL-STACK DEVELOPMENT", color: "#F7E644" },
 ];
 
@@ -30,7 +30,7 @@ const servicesRow3 = [
   { name: "NEURO-MARKETING", color: "#F62961" },
   { name: "MOTION BRANDING", color: "#25D366" },
   { name: "VERBAL IDENTITY", color: "#F7E644" },
-  { name: "MEDIA BUYING", color: "#5BA4F5" },
+  { name: "MEDIA BUYING", color: "#00A3E0" },
   { name: "AI AUTOMATION", color: "#25D366" },
 ];
 

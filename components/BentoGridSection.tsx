@@ -33,14 +33,14 @@ const strategyRadarData = [
 ];
 
 const cyclingWords = [
-  { text: "SYSTEMEN", color: "text-[#5BA4F5]" },
+  { text: "SYSTEMEN", color: "text-[#00A3E0]" },
   { text: "ENGINES", color: "text-[#25D366]" },
   { text: "PROTOCOLLEN", color: "text-[#F7E644]" },
   { text: "OPLOSSINGEN", color: "text-[#F62961]" }
 ];
 
 const brandingMethodology = [
-  { step: "01", title: "Discovery & Data", icon: SearchCode, desc: "Diepgaande analyse van marktsegmentatie en consumentengedrag via AI-gedreven data-modellen.", color: "#5BA4F5", status: "SCANNING" },
+  { step: "01", title: "Discovery & Data", icon: SearchCode, desc: "Diepgaande analyse van marktsegmentatie en consumentengedrag via AI-gedreven data-modellen.", color: "#00A3E0", status: "SCANNING" },
   { step: "02", title: "Archetype Coding", icon: Fingerprint, desc: "Definiëren van de psychologische kern en het merk-archetype voor maximale resonantie.", color: "#F62961", status: "ENCODING" },
   { step: "03", title: "Visual OS", icon: Layers, desc: "Bouwen van een visueel besturingssysteem inclusief Identity, Motion en CGI assets.", color: "#25D366", status: "BUILDING" },
   { step: "04", title: "Market Launch", icon: Rocket, desc: "Gecoördineerde lancering met high-velocity content engines en performance targeting.", color: "#F7E644", status: "INITIALIZING" }
@@ -52,7 +52,7 @@ const services = [
     title: "MERK INTELLIGENTIE",
     category: "Het Fundament",
     icon: Brain,
-    color: "#5BA4F5",
+    color: "#00A3E0",
     label: "Strategische Architectuur",
     impact: "98% Resonantie",
     description: "Wij engineeren de psychologische fundamenten van jouw merk. Geen gokwerk, maar harde data over marktsegmentatie en merk-positionering die jouw doelgroep direct raakt.",
@@ -166,7 +166,7 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
           <div className="mb-20 md:mb-24 text-center px-4">
              <div className="relative z-10">
                 <div className="inline-flex items-center gap-4 px-8 py-3 rounded-full bg-white/5 border border-white/10 mb-10 backdrop-blur-md">
-                  <Workflow size={18} className="text-[#5BA4F5]" />
+                  <Workflow size={18} className="text-[#00A3E0]" />
                   <span className="text-white font-black uppercase tracking-[0.6em] text-[11px]">INTEGRATED BRAND ARCHITECTURE OS</span>
                 </div>
 
@@ -202,7 +202,7 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
                 }}>
                   <div className="relative z-10">
                       <div className="text-center mb-20 md:mb-24">
-                          <h4 className="text-[#5BA4F5] font-black uppercase tracking-[0.8em] text-[11px] mb-6">INTERNAL WORKFLOW // PROTOCOL V.2</h4>
+                          <h4 className="text-[#00A3E0] font-black uppercase tracking-[0.8em] text-[11px] mb-6">INTERNAL WORKFLOW // PROTOCOL V.2</h4>
                           <h3 className="text-4xl md:text-7xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-8">
                               DE <span className="text-[#F7E644]">OS FLOW</span>
                           </h3>
@@ -290,7 +290,7 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
                   border: '1px solid rgba(255, 255, 255, 0.06)',
                   boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04)',
                 }}>
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#5BA4F5]/5 via-transparent to-[#F62961]/5 opacity-30 rounded-[5rem]"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#00A3E0]/5 via-transparent to-[#F62961]/5 opacity-30 rounded-[5rem]"></div>
                 
                 {/* PixelGlobe Beeldmerk */}
                 <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 w-64 h-64 md:w-[28rem] md:h-[28rem] opacity-50 pointer-events-none">
@@ -300,7 +300,7 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
                 <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-20 overflow-visible">
                     <div className="flex-1 text-center lg:text-left z-30">
                         <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-12 backdrop-blur-md">
-                            <Shield size={18} className="text-[#5BA4F5]" />
+                            <Shield size={18} className="text-[#00A3E0]" />
                             <span className="text-white font-black uppercase tracking-[0.6em] text-[11px]">INTEGRATED BRAND OS V.4</span>
                         </div>
 
@@ -324,7 +324,7 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
                   { icon: TrendingUp, color: "#25D366", label: "Markt Groei", value: "+124%", desc: "Gemiddelde Performance" },
                   { icon: CircleDollarSign, color: "#F7E644", label: "Maandelijkse ROI", value: "€14.5k", desc: "Per Campagne" },
                   { icon: BarChart3, color: "#F62961", label: "Conversie", value: "4.8%", desc: "Direct Verkeer" },
-                  { icon: Target, color: "#5BA4F5", label: "System Uptime", value: "99.9%", desc: "Operationeel 24/7" }
+                  { icon: Target, color: "#00A3E0", label: "System Uptime", value: "99.9%", desc: "Operationeel 24/7" }
               ].map((stat, i) => (
                 <div
                     key={i}

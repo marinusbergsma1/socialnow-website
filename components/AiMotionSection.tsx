@@ -1,13 +1,13 @@
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import ScrollTypewriter from './ScrollTypewriter';
 import { Volume2, VolumeX } from 'lucide-react';
 import { muteGlobalVideo } from './ShortContent';
+import { useScrollProgress } from '../hooks/useScrollProgress';
 
 const AiMotionSection: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
-    const [scale, setScale] = useState(0.85);
     const [isUnmuted, setIsUnmuted] = useState(false);
 
     const handleTap = () => {
@@ -26,34 +26,18 @@ const AiMotionSection: React.FC = () => {
         }
     };
 
-    // Scroll Scale Animation
-    useEffect(() => {
-        const handleScroll = () => {
-            if (!containerRef.current) return;
-            const rect = containerRef.current.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-            
-            // Calculate center distance
-            const elementCenter = rect.top + (rect.height / 2);
-            const center = viewportHeight / 2;
-            const distance = Math.abs(center - elementCenter);
-            const maxDist = viewportHeight;
-            
-            if (maxDist > 0) {
-               // Scale logic: 1.05 at center, down to 0.85 at edges
-               let newScale = 1.05 - (distance / maxDist) * 0.35;
-               // Ensure scale is finite and within bounds
-               if (Number.isFinite(newScale)) {
-                   newScale = Math.max(0.85, Math.min(newScale, 1.05));
-                   setScale(newScale);
-               }
-            }
-        };
-        
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll(); // Initial check
-        return () => window.removeEventListener('scroll', handleScroll);
+    // Scroll Scale Animation — uses CSS custom properties to avoid re-renders
+    const scrollCallback = useCallback((rect: DOMRect, viewportHeight: number) => {
+        const elementCenter = rect.top + (rect.height / 2);
+        const center = viewportHeight / 2;
+        const distance = Math.abs(center - elementCenter);
+        let newScale = 1.05 - (distance / viewportHeight) * 0.35;
+        if (Number.isFinite(newScale)) {
+            newScale = Math.max(0.85, Math.min(newScale, 1.05));
+            containerRef.current?.style.setProperty('--video-scale', String(newScale));
+        }
     }, []);
+    useScrollProgress(containerRef, scrollCallback);
 
     return (
         <section className="pt-12 pb-24 bg-transparent relative overflow-visible">
@@ -85,14 +69,14 @@ const AiMotionSection: React.FC = () => {
                 >
                     {/* Blue Glow Background */}
                     <div 
-                       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#0071BC] rounded-full blur-[120px] opacity-30 pointer-events-none transition-opacity duration-700"
-                       style={{ transform: `translate(-50%, -50%) scale(${scale})` }}
+                       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#0077CC] rounded-full blur-[120px] opacity-30 pointer-events-none transition-opacity duration-700"
+                       style={{ transform: `translate(-50%, -50%) scale(var(--video-scale, 0.85))`, willChange: 'transform' }}
                     ></div>
                     
                     {/* Video Container */}
                     <div
-                        className="relative z-10 w-full aspect-video rounded-none overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,113,188,0.5)] bg-black transition-transform duration-100 ease-out cursor-pointer"
-                        style={{ transform: `scale(${scale})` }}
+                        className="relative z-10 w-full aspect-video rounded-none overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,119,204,0.5)] bg-black transition-transform duration-100 ease-out cursor-pointer"
+                        style={{ transform: `scale(var(--video-scale, 0.85))`, willChange: 'transform' }}
                         onClick={handleTap}
                     >
                         <video

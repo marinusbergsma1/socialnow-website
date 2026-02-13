@@ -3,14 +3,6 @@
   <head>
     <meta charset="UTF-8" />
 
-    <!-- Google Analytics 4 — Vervang G-XXXXXXXXXX door je eigen Measurement ID -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>SocialNow | AI-Powered Web & Project Development Amsterdam</title>
     <meta name="description" content="SocialNow is een creatief bureau in Amsterdam gespecialiseerd in AI-gestuurde webontwikkeling, branding, UX/UI design en social media marketing. Van concept tot lancering in weken." />
@@ -48,138 +40,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="icon" type="image/png" href="https://i.ibb.co/84mFCJsq/Social-Now-Favicon.png" />
 
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "@id": "https://socialnow.nl/#organization",
-      "name": "SocialNow",
-      "alternateName": "SocialNow Agency",
-      "description": "SocialNow - Websites, apps en projecten bouwen met AI. Toekomstgerichte ontwikkeling voor bedrijven die vooroplopen.",
-      "url": "https://socialnow.nl",
-      "logo": "https://i.ibb.co/RkXjxKLb/Social-Now-Logo-Breed-Wit.webp",
-      "image": "https://i.ibb.co/RkXjxKLb/Social-Now-Logo-Breed-Wit.webp",
-      "telephone": "+31637404577",
-      "email": "info@socialnow.nl",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Amstelstraat 43G",
-        "addressLocality": "Amsterdam",
-        "postalCode": "1017DA",
-        "addressCountry": "NL"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 52.3656,
-        "longitude": 4.8989
-      },
-      "areaServed": {
-        "@type": "Country",
-        "name": "Netherlands"
-      },
-      "priceRange": "€€€",
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "bestRating": "5",
-        "ratingCount": "15"
-      },
-      "sameAs": [
-        "https://www.instagram.com/socialnow.nl",
-        "https://www.linkedin.com/company/socialnow-nl"
-      ],
-      "knowsAbout": [
-        "AI Website Development",
-        "Brand Strategy",
-        "UX/UI Design",
-        "Motion Design",
-        "Short Form Content",
-        "3D & CGI",
-        "Full-Stack Development",
-        "Video Production",
-        "AI Automation",
-        "Social Media Marketing",
-        "Creative Direction"
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Digital Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "AI Website Development",
-              "description": "Websites bouwen met AI als fundament voor snellere ontwikkeling en betere resultaten."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Brand Strategy",
-              "description": "Strategische merkpositionering voor bedrijven die de toekomst vormgeven."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "UX/UI Design",
-              "description": "Gebruiksvriendelijk en visueel design dat converteert."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Social Media Marketing",
-              "description": "Social media strategie en content die merken laat groeien."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Video Production",
-              "description": "Professionele videoproductie en short-form content voor maximale impact."
-            }
-          }
-        ]
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "SocialNow",
-      "url": "https://socialnow.nl",
-      "publisher": {
-        "@id": "https://socialnow.nl/#organization"
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://socialnow.nl/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-
+    <!-- Resource hints — preconnect for critical origins, dns-prefetch as fallback -->
     <link rel="preconnect" href="https://i.ibb.co" />
-    <link rel="preconnect" href="https://storage.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" as="style" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" />
-    <link rel="preload" href="https://i.ibb.co/RkXjxKLb/Social-Now-Logo-Breed-Wit.webp" as="image" type="image/webp" />
+    <link rel="dns-prefetch" href="https://i.ibb.co" />
+    <link rel="dns-prefetch" href="https://storage.googleapis.com" />
+    <!-- Preload critical fonts and hero assets -->
+    <link rel="preload" href="/fonts/inter-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin-700.woff2" as="font" type="font/woff2" crossorigin />
     <!-- GitHub Pages SPA redirect handler -->
     <script>
       (function(l) {
@@ -209,5 +76,59 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
+
+    <!-- JSON-LD Structured Data — placed at end of body to not block parsing -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://socialnow.nl/#organization",
+      "name": "SocialNow",
+      "alternateName": "SocialNow Agency",
+      "description": "SocialNow - Websites, apps en projecten bouwen met AI. Toekomstgerichte ontwikkeling voor bedrijven die vooroplopen.",
+      "url": "https://socialnow.nl",
+      "logo": "https://i.ibb.co/RkXjxKLb/Social-Now-Logo-Breed-Wit.webp",
+      "image": "https://i.ibb.co/RkXjxKLb/Social-Now-Logo-Breed-Wit.webp",
+      "telephone": "+31637404577",
+      "email": "info@socialnow.nl",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Amstelstraat 43G",
+        "addressLocality": "Amsterdam",
+        "postalCode": "1017DA",
+        "addressCountry": "NL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 52.3656,
+        "longitude": 4.8989
+      },
+      "areaServed": { "@type": "Country", "name": "Netherlands" },
+      "priceRange": "€€€",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "ratingCount": "15" },
+      "sameAs": ["https://www.instagram.com/socialnow.nl","https://www.linkedin.com/company/socialnow-nl"],
+      "knowsAbout": ["AI Website Development","Brand Strategy","UX/UI Design","Motion Design","Short Form Content","3D & CGI","Full-Stack Development","Video Production","AI Automation","Social Media Marketing","Creative Direction"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Digital Services",
+        "itemListElement": [
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Website Development","description":"Websites bouwen met AI als fundament voor snellere ontwikkeling en betere resultaten."}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Brand Strategy","description":"Strategische merkpositionering voor bedrijven die de toekomst vormgeven."}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"UX/UI Design","description":"Gebruiksvriendelijk en visueel design dat converteert."}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Social Media Marketing","description":"Social media strategie en content die merken laat groeien."}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Video Production","description":"Professionele videoproductie en short-form content voor maximale impact."}}
+        ]
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebSite","name":"SocialNow","url":"https://socialnow.nl","publisher":{"@id":"https://socialnow.nl/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://socialnow.nl/?q={search_term_string}","query-input":"required name=search_term_string"}}
+    </script>
   </body>
 </html>

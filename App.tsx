@@ -3,22 +3,12 @@ import React, { useState, useLayoutEffect, useEffect, useRef, lazy, Suspense } f
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import Navbar from './components/Navbar';
-import ProjectShowcase from './components/ProjectShowcase';
+import Hero from './components/Hero';
 import Clients from './components/Clients';
-import ShortContent from './components/ShortContent';
-import Reviews from './components/Reviews';
-import ImageSlider from './components/ImageSlider';
-import Team from './components/Team';
-import FAQ from './components/FAQ';
-import CTASection from './components/CTASection';
-import Footer from './components/Footer';
+import CertificationBadges from './components/CertificationBadges';
+import ErrorBoundary from './components/ErrorBoundary';
 import Loader from './components/Loader';
 import GridBackground from './components/GridBackground';
-import WhatsAppPopup from './components/WhatsAppPopup';
-import ErrorBoundary from './components/ErrorBoundary';
-import ServicesMarquee from './components/ServicesMarquee';
-import Hero from './components/Hero';
-import WebShowcase from './components/WebShowcase';
 import NotFound from './components/NotFound';
 import { useSEO } from './hooks/useSEO';
 
@@ -33,6 +23,21 @@ function lazyRetry(importFn: () => Promise<{ default: React.ComponentType<any> }
     })
   );
 }
+
+// Lazy-load below-fold homepage sections — keeps initial bundle small
+const WebShowcase = lazyRetry(() => import('./components/WebShowcase'));
+const ProjectShowcase = lazyRetry(() => import('./components/ProjectShowcase'));
+const ShortContent = lazyRetry(() => import('./components/ShortContent'));
+const ServicesMarquee = lazyRetry(() => import('./components/ServicesMarquee'));
+const ProcessSection = lazyRetry(() => import('./components/ProcessSection'));
+const Reviews = lazyRetry(() => import('./components/Reviews'));
+const ImageSlider = lazyRetry(() => import('./components/ImageSlider'));
+const Team = lazyRetry(() => import('./components/Team'));
+const FAQ = lazyRetry(() => import('./components/FAQ'));
+const CTASection = lazyRetry(() => import('./components/CTASection'));
+const Footer = lazyRetry(() => import('./components/Footer'));
+const WhatsAppPopup = lazyRetry(() => import('./components/WhatsAppPopup'));
+const PixelCursor = lazyRetry(() => import('./components/PixelCursor'));
 
 // Lazy-load popup/modal components — only loaded when opened
 const BookingPopup = lazyRetry(() => import('./components/BookingPopup'));
@@ -75,38 +80,46 @@ const HomePage: React.FC<{
       </div>
 
       <div className="scroll-reveal">
-        <WebShowcase />
+        <CertificationBadges />
       </div>
 
-      <ProjectShowcase
-        onOpenBooking={onOpenBooking}
-      />
+      <Suspense fallback={null}>
+        <div className="scroll-reveal">
+          <WebShowcase />
+        </div>
 
-      <div className="scroll-reveal">
-        <ShortContent />
-      </div>
+        <ProjectShowcase onOpenBooking={onOpenBooking} />
 
-      <div className="scroll-reveal">
-        <ServicesMarquee />
-      </div>
+        <div className="scroll-reveal">
+          <ShortContent />
+        </div>
 
-      <div className="scroll-reveal">
-        <Reviews onOpenBooking={onOpenBooking} />
-      </div>
+        <div className="scroll-reveal">
+          <ServicesMarquee />
+        </div>
 
-      <div className="scroll-reveal">
-        <ImageSlider />
-      </div>
+        <div className="scroll-reveal">
+          <ProcessSection onOpenBooking={onOpenBooking} />
+        </div>
 
-      <div className="scroll-reveal">
-        <Team onOpenBooking={onOpenBooking} />
-      </div>
+        <div className="scroll-reveal">
+          <Reviews onOpenBooking={onOpenBooking} />
+        </div>
 
-      <div className="scroll-reveal">
-        <FAQ onOpenContact={onOpenBooking} />
-      </div>
+        <div className="scroll-reveal">
+          <ImageSlider />
+        </div>
 
-      <CTASection onOpenBooking={onOpenBooking} />
+        <div className="scroll-reveal">
+          <Team onOpenBooking={onOpenBooking} />
+        </div>
+
+        <div className="scroll-reveal">
+          <FAQ onOpenContact={onOpenBooking} />
+        </div>
+
+        <CTASection onOpenBooking={onOpenBooking} />
+      </Suspense>
     </main>
   );
 };
@@ -202,7 +215,7 @@ const App: React.FC = () => {
 
   return (
     <ErrorBoundary>
-    <div className="bg-black text-white min-h-screen font-sans selection:bg-[#25D366] selection:text-black">
+    <div className="bg-black text-white min-h-screen font-sans selection:bg-[#25D366] selection:text-black grain-overlay">
       <a href="#main-content" className="skip-to-content">Ga naar inhoud</a>
 
       {!isSubPage && loading && <Loader onComplete={() => setLoading(false)} />}
@@ -280,10 +293,14 @@ const App: React.FC = () => {
         </Routes>
       </div>
 
-      {!isSubPage && !loading && <Footer onOpenBooking={() => setIsBookingOpen(true)} />}
-      {isSubPage && <Footer onOpenBooking={() => setIsBookingOpen(true)} />}
+      <Suspense fallback={null}>
+        {!isSubPage && !loading && <Footer onOpenBooking={() => setIsBookingOpen(true)} />}
+        {isSubPage && <Footer onOpenBooking={() => setIsBookingOpen(true)} />}
 
-      {!loading && <WhatsAppPopup />}
+        {!loading && <WhatsAppPopup />}
+
+        {!loading && <PixelCursor />}
+      </Suspense>
 
       <ErrorBoundary>
         <Suspense fallback={null}>

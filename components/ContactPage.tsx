@@ -69,7 +69,7 @@ const FAQItem: React.FC<{ q: string; a: string; index: number }> = ({ q, a, inde
           <span className="text-[10px] font-black tracking-[0.3em] text-white/15 flex-shrink-0">0{index + 1}</span>
           <h4 className="text-white font-bold text-sm md:text-[15px] tracking-tight leading-snug">{q}</h4>
         </div>
-        <div className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 transition-all duration-500 ${open ? 'bg-[#5BA4F5] border-[#5BA4F5] rotate-180' : 'bg-white/[0.03]'}`}>
+        <div className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 transition-all duration-500 ${open ? 'bg-[#00A3E0] border-[#00A3E0] rotate-180' : 'bg-white/[0.03]'}`}>
           <ChevronDown size={14} className={`transition-colors ${open ? 'text-black' : 'text-white/40'}`} />
         </div>
       </button>
@@ -169,16 +169,16 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
       href: 'tel:+31637404577',
       external: false,
       icon: <Phone size={24} />,
-      iconBg: 'border border-[#5BA4F5]/20 bg-[#5BA4F5]/[0.05]',
-      iconText: 'text-[#5BA4F5]',
+      iconBg: 'border border-[#00A3E0]/20 bg-[#00A3E0]/[0.05]',
+      iconText: 'text-[#00A3E0]',
       title: 'Bellen',
       subtitle: '+31 6 37 40 45 77',
       subtitleColor: 'text-white/30',
       borderColor: 'border-white/[0.06]',
       bgColor: 'bg-white/[0.02]',
-      hoverBg: 'hover:bg-[#5BA4F5]/[0.04]',
-      hoverBorder: 'hover:border-[#5BA4F5]/20',
-      hoverArrow: 'group-hover:text-[#5BA4F5]',
+      hoverBg: 'hover:bg-[#00A3E0]/[0.04]',
+      hoverBorder: 'hover:border-[#00A3E0]/20',
+      hoverArrow: 'group-hover:text-[#00A3E0]',
       glow: '',
     },
     {
@@ -202,24 +202,24 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
 
   const processSteps = [
     { step: '01', icon: <MessageCircle size={22} />, title: 'Eerste Contact', desc: 'Neem vrijblijvend contact op. We reageren altijd binnen 1 uur op WhatsApp en dezelfde dag per e-mail.', color: '#25D366', status: 'LIVE' },
-    { step: '02', icon: <Users size={22} />, title: 'Kennismaken', desc: 'Gratis intake van 30 minuten. We bespreken je doelen, ambities en hoe we daar samen komen.', color: '#5BA4F5', status: 'DISCOVER' },
+    { step: '02', icon: <Users size={22} />, title: 'Kennismaken', desc: 'Gratis intake van 30 minuten. We bespreken je doelen, ambities en hoe we daar samen komen.', color: '#00A3E0', status: 'DISCOVER' },
     { step: '03', icon: <Send size={22} />, title: 'Voorstel op maat', desc: 'Transparant voorstel met scope, tijdlijn en investering. Geen kleine lettertjes of verborgen kosten.', color: '#F7E644', status: 'PROPOSE' },
     { step: '04', icon: <Rocket size={22} />, title: 'Aan de slag', desc: 'Na akkoord starten we direct. Vast aanspreekpunt, wekelijkse updates en een transparant proces.', color: '#F62961', status: 'LAUNCH' },
   ];
 
   const services = [
-    { icon: <Code2 size={20} />, title: 'AI Websites & Apps', desc: 'Next-gen websites en applicaties gebouwd met AI als fundament.', color: '#5BA4F5' },
+    { icon: <Code2 size={20} />, title: 'AI Websites & Apps', desc: 'Next-gen websites en applicaties gebouwd met AI als fundament.', color: '#00A3E0' },
     { icon: <Layers size={20} />, title: 'Branding & Identiteit', desc: 'Visuele identiteiten die resoneren en je merk onvergetelijk maken.', color: '#F62961' },
     { icon: <Target size={20} />, title: 'Marketing & Strategie', desc: 'Data-gedreven campagnes die converteren en je bereik maximaliseren.', color: '#25D366' },
     { icon: <Cpu size={20} />, title: 'AI Automation', desc: 'Slimme workflows en automatisering die je bedrijf efficiënter maken.', color: '#F7E644' },
-    { icon: <BarChart3 size={20} />, title: 'Growth & Performance', desc: 'Van SEO tot performance marketing — meetbare groei als doel.', color: '#5BA4F5' },
+    { icon: <BarChart3 size={20} />, title: 'Growth & Performance', desc: 'Van SEO tot performance marketing — meetbare groei als doel.', color: '#00A3E0' },
     { icon: <Briefcase size={20} />, title: 'Consultancy', desc: 'Strategisch advies over digitale transformatie en AI-implementatie.', color: '#F62961' },
   ];
 
   const whyUsItems = [
     { icon: <Zap size={22} />, title: 'Razendsnelle oplevering', desc: 'Dankzij AI-workflows leveren wij projecten tot 3x sneller op dan traditionele bureaus.', color: '#F7E644' },
     { icon: <Shield size={22} />, title: 'Transparante prijzen', desc: 'Geen verborgen kosten. Je weet exact waar je aan toe bent voordat we starten.', color: '#25D366' },
-    { icon: <Globe size={22} />, title: 'Altijd bereikbaar', desc: 'WhatsApp reactie binnen 1 uur. Persoonlijk contact, geen helpdesk of ticketsysteem.', color: '#5BA4F5' },
+    { icon: <Globe size={22} />, title: 'Altijd bereikbaar', desc: 'WhatsApp reactie binnen 1 uur. Persoonlijk contact, geen helpdesk of ticketsysteem.', color: '#00A3E0' },
     { icon: <Award size={22} />, title: 'Bewezen resultaten', desc: '50+ succesvolle projecten. Van startup tot enterprise — altijd top kwaliteit.', color: '#F62961' },
     { icon: <HeartHandshake size={22} />, title: 'Persoonlijke aanpak', desc: 'Geen account managers. Direct contact met de founder voor maximale betrokkenheid.', color: '#25D366' },
     { icon: <MousePointerClick size={22} />, title: 'AI-first aanpak', desc: 'We zetten AI in als versneller — sneller, slimmer en voordeliger zonder kwaliteitsverlies.', color: '#F7E644' },
@@ -256,7 +256,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
 
       {/* Ambient glow accents — desktop only (GPU-heavy blur) */}
       <div className="hidden md:block fixed top-0 right-0 w-[700px] h-[700px] bg-[#25D366]/[0.03] rounded-full blur-[250px] pointer-events-none z-0" />
-      <div className="hidden md:block fixed bottom-0 left-0 w-[600px] h-[600px] bg-[#5BA4F5]/[0.025] rounded-full blur-[250px] pointer-events-none z-0" />
+      <div className="hidden md:block fixed bottom-0 left-0 w-[600px] h-[600px] bg-[#00A3E0]/[0.025] rounded-full blur-[250px] pointer-events-none z-0" />
       <div className="hidden md:block fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#F62961]/[0.015] rounded-full blur-[300px] pointer-events-none z-0" />
 
       {/* ─── STICKY HEADER ─── */}
@@ -341,7 +341,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
               { label: 'Afgeronde projecten', end: 50, suffix: '+', color: '#25D366' },
-              { label: 'Tevreden klanten', end: 40, suffix: '+', color: '#5BA4F5' },
+              { label: 'Tevreden klanten', end: 40, suffix: '+', color: '#00A3E0' },
               { label: 'Jaar ervaring', end: 8, suffix: '+', color: '#F7E644' },
               { label: 'Max. reactietijd', end: 1, suffix: ' uur', prefix: '<', color: '#F62961' },
             ].map((stat, i) => (
@@ -365,7 +365,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
           <div className="mb-8">
             <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/20 mb-3">Neem contact op</h3>
             <h2 className="text-2xl md:text-4xl font-black uppercase text-white tracking-tighter leading-[0.9]">
-              Kies jouw <span className="text-[#5BA4F5]">kanaal</span>
+              Kies jouw <span className="text-[#00A3E0]">kanaal</span>
             </h2>
           </div>
 
@@ -565,7 +565,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
           <div className="mb-8">
             <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/20 mb-3">Waarom wij</h3>
             <h2 className="text-2xl md:text-4xl font-black uppercase text-white tracking-tighter leading-[0.9]">
-              Geen excuses,<br />alleen <span className="text-[#5BA4F5]">resultaat</span>.
+              Geen excuses,<br />alleen <span className="text-[#00A3E0]">resultaat</span>.
             </h2>
           </div>
 
@@ -591,7 +591,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
         {/* ═══════════════════════════════════════════ */}
         <div ref={teamReveal.ref} className={`mb-16 md:mb-24 transition-all duration-1000 ${teamReveal.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="rounded-3xl border border-white/[0.06] bg-white/[0.02] overflow-hidden relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/[0.02] via-transparent to-[#5BA4F5]/[0.02] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/[0.02] via-transparent to-[#00A3E0]/[0.02] pointer-events-none" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
               {/* Image */}
