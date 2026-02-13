@@ -88,7 +88,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
           <div className={`transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`}>
              <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-2xl border border-white/10 px-6 py-2.5 rounded-full mb-8 md:mb-10 hover:border-[#5BA4F5]/50 transition-colors">
                <div className="relative flex h-2.5 w-2.5">
-                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
+                 <span className="hidden md:inline-flex animate-ping absolute h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#25D366]"></span>
                </div>
                <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] text-white">BEREIKBAAR VOOR Q1 2026</span>

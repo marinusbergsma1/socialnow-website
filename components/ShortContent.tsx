@@ -221,12 +221,12 @@ const InfiniteVideoSlider: React.FC<{
 
   const autoSpeed = isMobile ? 0.5 : 0.8;
 
-  // Fewer duplicates = less DOM nodes & memory (3x mobile, 4x desktop)
+  // Fewer duplicates = less DOM nodes & memory (2x mobile, 3x desktop)
   const allVideos = isMobile
-    ? [...videos, ...videos, ...videos]
-    : [...videos, ...videos, ...videos, ...videos];
+    ? [...videos, ...videos]
+    : [...videos, ...videos, ...videos];
 
-  const numSets = isMobile ? 3 : 4;
+  const numSets = isMobile ? 2 : 3;
 
   useEffect(() => {
     // Start in the middle set
@@ -386,12 +386,19 @@ const ShortContent: React.FC = () => {
   const [reelsStartIndex, setReelsStartIndex] = useState(0);
   const statsRef = useRef<HTMLDivElement>(null);
 
-  const videos = [
+  const [isMobileMain, setIsMobileMain] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobileMain(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  const allVideos = [
     { src: `${base}videos/raveg-dyadium.mp4` },
     { src: `${base}videos/viral-cho.mp4` },
     { src: `${base}videos/muse-mode.mp4` },
     { src: `${base}videos/bakboord.mp4` },
-    { src: "https://storage.googleapis.com/video-slider/909%20Festival_Aftermovie%20in%20Reverse.mp4" },
     { src: "https://storage.googleapis.com/video-slider/CHIN%20CHIN%20CLUB%20-%20DINE%26DANCE.mp4" },
     { src: "https://storage.googleapis.com/video-slider/CHIN%20CHIN%20CLUB%20FREAKY.mp4" },
     { src: "https://storage.googleapis.com/video-slider/VIRAL%20BRYAN%20MG.mp4" },
@@ -402,6 +409,9 @@ const ShortContent: React.FC = () => {
     { src: "https://storage.googleapis.com/video-slider/WEEK%2046%20-%20Friday%20-%20FRIDAY%20FRESHNESS.mp4" },
     { src: "https://storage.googleapis.com/video-slider/jobdex_vid_oranjebloesem_personeel.mp4" },
   ];
+
+  // Mobile: max 5 videos for performance. Desktop: all videos.
+  const videos = isMobileMain ? allVideos.slice(0, 5) : allVideos;
 
   const handleVideoClick = useCallback((index: number) => {
     setReelsStartIndex(index);

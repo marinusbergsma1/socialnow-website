@@ -27,7 +27,7 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
         setIsExiting(true);
         setTimeout(onComplete, 800);
       }
-    }, 9000);
+    }, 4000);
 
     return () => {
       isMounted.current = false;

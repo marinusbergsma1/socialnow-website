@@ -13,5 +13,21 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, '.'),
     }
+  },
+  build: {
+    // Chunk splitting for better caching
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui': ['lucide-react'],
+          'charts': ['recharts'],
+        }
+      }
+    },
+    // Disable sourcemaps for smaller production output
+    sourcemap: false,
+    // Target modern browsers for smaller bundle
+    target: 'es2020',
   }
 });

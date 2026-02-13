@@ -14,10 +14,11 @@ import Footer from './components/Footer';
 import Loader from './components/Loader';
 import GridBackground from './components/GridBackground';
 import WhatsAppPopup from './components/WhatsAppPopup';
-import BookingPopup from './components/BookingPopup';
-import BentoGridSection from './components/BentoGridSection';
-import TeamPage from './components/TeamPage';
-import ContactPage from './components/ContactPage';
+// Lazy-load popup/modal components — only loaded when opened
+const BookingPopup = lazy(() => import('./components/BookingPopup'));
+const BentoGridSection = lazy(() => import('./components/BentoGridSection'));
+const TeamPage = lazy(() => import('./components/TeamPage'));
+const ContactPage = lazy(() => import('./components/ContactPage'));
 import ServicesMarquee from './components/ServicesMarquee';
 import Hero from './components/Hero';
 import WebShowcase from './components/WebShowcase';
@@ -186,25 +187,32 @@ const App: React.FC = () => {
 
       {!loading && <WhatsAppPopup />}
 
-      <BookingPopup
-        isOpen={isBookingOpen}
-        onClose={() => setIsBookingOpen(false)}
-      />
-
-      <BentoGridSection
-        isOpen={isServicesOpen}
-        onClose={() => setIsServicesOpen(false)}
-      />
-
-      <TeamPage
-        isOpen={isTeamOpen}
-        onClose={() => setIsTeamOpen(false)}
-      />
-
-      <ContactPage
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
-      />
+      <Suspense fallback={null}>
+        {isBookingOpen && (
+          <BookingPopup
+            isOpen={isBookingOpen}
+            onClose={() => setIsBookingOpen(false)}
+          />
+        )}
+        {isServicesOpen && (
+          <BentoGridSection
+            isOpen={isServicesOpen}
+            onClose={() => setIsServicesOpen(false)}
+          />
+        )}
+        {isTeamOpen && (
+          <TeamPage
+            isOpen={isTeamOpen}
+            onClose={() => setIsTeamOpen(false)}
+          />
+        )}
+        {isContactOpen && (
+          <ContactPage
+            isOpen={isContactOpen}
+            onClose={() => setIsContactOpen(false)}
+          />
+        )}
+      </Suspense>
     </div>
   );
 };

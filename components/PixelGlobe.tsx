@@ -39,7 +39,7 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
 
     // Mobile performance: detect and reduce particle count significantly
     const isMobile = window.innerWidth < 768;
-    const mobileFactor = isMobile ? 0.3 : 1; // 30% particles on mobile
+    const mobileFactor = isMobile ? 0.15 : 1; // 15% particles on mobile for performance
 
     let width = 0;
     let height = 0;
@@ -139,7 +139,10 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       targetRotX = -y * 1.5;
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    // Only track mouse on desktop — no hover on mobile
+    if (!isMobile) {
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    }
 
     let time = 0;
     const sortedPoints = [...points];
