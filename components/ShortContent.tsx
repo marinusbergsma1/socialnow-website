@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, memo, useCallback } from 'react';
-import { X, ChevronUp, ChevronDown, Volume2, VolumeX } from 'lucide-react';
+import { X, ChevronUp, ChevronDown, Volume2, VolumeX, Activity, Database, Heart } from 'lucide-react';
 
 // ─── CountUp ────────────────────────────────────────────────────────────
 const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: number; duration?: number; start: boolean; suffix?: string }) => {
@@ -304,11 +304,22 @@ const InfiniteVideoSlider: React.FC<{
     isPaused.current = true;
     velocityRef.current = 0;
     setHoveredIndex(idx);
+    // Unmute hovered video
+    const vid = videoRefs.current[idx];
+    if (vid) {
+      vid.muted = false;
+      vid.volume = 0.3;
+    }
   }, []);
 
   const handleMouseLeave = useCallback((_idx: number) => {
     isPaused.current = false;
     setHoveredIndex(null);
+    // Mute the video again
+    const vid = videoRefs.current[_idx];
+    if (vid) {
+      vid.muted = true;
+    }
   }, []);
 
   return (
@@ -429,19 +440,29 @@ const ShortContent: React.FC = () => {
 
         {/* Stats */}
         <div className="container mx-auto px-6 mt-8 md:mt-24 z-10" ref={statsRef}>
-          <div className="grid grid-cols-3 gap-2 md:gap-6 text-center">
+          <div className="grid grid-cols-3 gap-2 md:gap-6">
             {[
-              { label: "Followers", end: 2, id: "01", color: "#25D366" },
-              { label: "Likes", end: 500, id: "02", color: "#F62961" },
-              { label: "Reach", end: 800, id: "03", color: "#5BA4F5" }
-            ].map((stat, i) => (
-              <div key={i} className="relative p-3 md:p-6 rounded-xl md:rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-700 flex flex-col items-center group hover:border-white/[0.12]">
-                <h4 className="text-2xl md:text-5xl font-black mb-0.5 md:mb-1 tracking-tighter" style={{ color: stat.color }}>
-                  <CountUp end={stat.end} start={statsVisible} suffix="m+" />
-                </h4>
-                <span className="block text-white/30 uppercase font-bold tracking-[0.25em] text-[7px] md:text-[10px]">{stat.label}</span>
-              </div>
-            ))}
+              { label: "Followers", end: 2, id: "01", color: "#F7E644", icon: Activity },
+              { label: "Likes", end: 500, id: "02", color: "#5BA4F5", icon: Database },
+              { label: "Reach", end: 800, id: "03", color: "#F62961", icon: Heart }
+            ].map((stat, i) => {
+              const Icon = stat.icon;
+              return (
+                <div key={i} className="relative p-4 md:p-8 rounded-xl md:rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-700 group hover:border-white/[0.12]">
+                  {/* Metric label */}
+                  <div className="flex items-center gap-1.5 md:gap-2 mb-3 md:mb-6">
+                    <Icon size={12} style={{ color: stat.color }} className="opacity-60" />
+                    <span className="text-white/20 uppercase font-mono font-bold tracking-[0.3em] text-[7px] md:text-[10px]">METRIC_OS_{stat.id}</span>
+                  </div>
+                  {/* Big number */}
+                  <h4 className="text-3xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none" style={{ color: stat.color }}>
+                    <CountUp end={stat.end} start={statsVisible} suffix="m+" />
+                  </h4>
+                  {/* Label */}
+                  <span className="block text-white/25 uppercase font-bold tracking-[0.3em] text-[7px] md:text-[10px] mt-1 md:mt-3">{stat.label}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
