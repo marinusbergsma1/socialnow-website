@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, memo, useCallback } from 'react';
-import { Activity, Database, Heart } from 'lucide-react';
+import { Activity, Database, Heart, Volume2, VolumeX } from 'lucide-react';
 
 // ─── CountUp ────────────────────────────────────────────────────────────
 const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: number; duration?: number; start: boolean; suffix?: string }) => {
@@ -33,6 +33,8 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   const velocityRef = useRef(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [mutedIndex, setMutedIndex] = useState<number | null>(null);
+  const dragDistRef = useRef(0);
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -43,14 +45,14 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  const cardWidth = isMobile ? 80 : 340;
-  const cardHeight = isMobile ? 142 : 604;
-  const gap = isMobile ? 8 : 24;
+  const cardWidth = isMobile ? 170 : 340;
+  const cardHeight = isMobile ? 302 : 604;
+  const gap = isMobile ? 12 : 24;
   const totalItemWidth = cardWidth + gap;
   const setLength = videos.length;
   const totalSetWidth = totalItemWidth * setLength;
 
-  const autoSpeed = isMobile ? 0.5 : 0.8;
+  const autoSpeed = isMobile ? 0.4 : 0.8;
 
   const allVideos = isMobile
     ? [...videos, ...videos]
@@ -94,6 +96,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     dragStartPos.current = positionRef.current;
     lastPointerX.current = e.clientX;
     lastPointerTime.current = Date.now();
+    dragDistRef.current = 0;
     velocityRef.current = 0;
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   }, []);
@@ -103,6 +106,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     const now = Date.now();
     const dt = now - lastPointerTime.current;
     const moveDx = e.clientX - lastPointerX.current;
+    dragDistRef.current += Math.abs(moveDx);
     if (dt > 0) velocityRef.current = (-moveDx / dt) * 16;
     lastPointerX.current = e.clientX;
     lastPointerTime.current = now;
@@ -114,7 +118,33 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     isDragging.current = false;
   }, []);
 
-  // Desktop-only hover handlers
+  // Tap-to-unmute on mobile
+  const handleTap = useCallback((idx: number) => {
+    if (!isMobile) return;
+    // Only register as tap if drag distance is small
+    if (dragDistRef.current > 10) return;
+
+    // Mute all other videos first
+    videoRefs.current.forEach((vid, i) => {
+      if (vid && i !== idx) vid.muted = true;
+    });
+
+    const vid = videoRefs.current[idx];
+    if (!vid) return;
+
+    if (mutedIndex === idx) {
+      // Already unmuted → mute it
+      vid.muted = true;
+      setMutedIndex(null);
+    } else {
+      // Unmute this one
+      vid.muted = false;
+      vid.volume = 0.5;
+      setMutedIndex(idx);
+    }
+  }, [isMobile, mutedIndex]);
+
+  // Desktop hover handlers
   const handleMouseEnter = useCallback((idx: number) => {
     if (window.innerWidth < 768) return;
     isPaused.current = true;
@@ -148,25 +178,27 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
       >
         {allVideos.map((video, i) => {
           const isHovered = !isMobile && hoveredIndex === i;
+          const isUnmuted = isMobile && mutedIndex === i;
           return (
             <div
               key={i}
-              className="flex-shrink-0"
+              className="flex-shrink-0 relative"
               style={{
                 width: `${cardWidth}px`,
                 transform: isHovered ? 'scale(1.05)' : 'scale(1)',
                 transition: isHovered ? 'transform 0.3s ease-out' : 'none',
-                zIndex: isHovered ? 10 : 1,
+                zIndex: isHovered || isUnmuted ? 10 : 1,
               }}
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={() => handleMouseLeave(i)}
+              onClick={() => handleTap(i)}
             >
               <div className="w-full bg-black"
                 style={{
                   height: `${cardHeight}px`,
-                  borderRadius: isMobile ? '0.6rem' : '1.5rem',
+                  borderRadius: isMobile ? '1rem' : '1.5rem',
                   overflow: 'hidden',
-                  boxShadow: isHovered ? '0 0 30px rgba(37,211,102,0.3)' : 'none',
+                  boxShadow: isHovered ? '0 0 30px rgba(37,211,102,0.3)' : isUnmuted ? '0 0 20px rgba(37,211,102,0.2)' : 'none',
                 }}
               >
                 <video
@@ -176,10 +208,21 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
                   loop
                   muted
                   playsInline
-                  preload="none"
+                  preload="metadata"
                   className="w-full h-full object-cover pointer-events-none"
                 />
               </div>
+              {/* Mobile: sound indicator */}
+              {isMobile && (
+                <div className={`absolute bottom-3 right-3 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${
+                  isUnmuted ? 'bg-[#25D366] scale-100' : 'bg-black/50 scale-90'
+                }`}>
+                  {isUnmuted
+                    ? <Volume2 size={12} className="text-black" />
+                    : <VolumeX size={12} className="text-white/60" />
+                  }
+                </div>
+              )}
             </div>
           );
         })}
@@ -218,8 +261,8 @@ const ShortContent: React.FC = () => {
     { src: "https://storage.googleapis.com/video-slider/jobdex_vid_oranjebloesem_personeel.mp4" },
   ];
 
-  // Mobile: max 4 videos for performance. Desktop: all videos.
-  const videos = isMobileMain ? allVideos.slice(0, 4) : allVideos;
+  // Mobile: max 3 videos for performance (6 DOM nodes with 2x duplication). Desktop: all videos.
+  const videos = isMobileMain ? allVideos.slice(0, 3) : allVideos;
 
   // Stats observer
   useEffect(() => {
