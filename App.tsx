@@ -138,7 +138,7 @@ const App: React.FC = () => {
 
       {!isSubPage && <GridBackground hide={anyModalOpen} startAnimation={!loading} />}
 
-      {!loading && <Navbar onOpenBooking={() => setIsBookingOpen(true)} />}
+      {!loading && <Navbar onOpenBooking={() => setIsBookingOpen(true)} onOpenContact={() => setIsContactOpen(true)} />}
 
       <div
         key={location.pathname}

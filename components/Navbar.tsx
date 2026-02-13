@@ -12,9 +12,10 @@ interface NavLink {
 
 interface NavbarProps {
   onOpenBooking: () => void;
+  onOpenContact?: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
+const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
@@ -34,11 +35,17 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
     { name: 'Projecten', href: '/projecten', action: 'navigate' },
     { name: 'Diensten', href: '/diensten', action: 'navigate' },
     { name: 'Team', href: '#team' },
-    { name: 'Contact', href: '#contact', action: 'booking' },
+    { name: 'Contact', href: '#contact', action: 'contact' },
   ];
 
   const handleLinkClick = (e: React.MouseEvent, link: NavLink) => {
       e.preventDefault();
+
+      if (link.action === 'contact') {
+          onOpenContact?.();
+          setIsOpen(false);
+          return;
+      }
 
       if (link.action === 'booking') {
           onOpenBooking();
