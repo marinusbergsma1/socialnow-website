@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, memo, useCallback } from 'react';
-import { X, ChevronUp, ChevronDown, Volume2, VolumeX, Activity, Database, Heart } from 'lucide-react';
+import { X, ChevronUp, ChevronDown, Volume2, VolumeX, Activity, Database, Heart, MessageCircle, Loader2 } from 'lucide-react';
 
 // ─── CountUp ────────────────────────────────────────────────────────────
 const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: number; duration?: number; start: boolean; suffix?: string }) => {
@@ -19,20 +19,20 @@ const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: num
   return <span>{Math.floor(count)}{suffix}</span>;
 });
 
-// ─── Reels Fullscreen Overlay ────────────────────────────────────────────
+// ─── Reels Fullscreen Overlay (CSS scroll-snap) ─────────────────────────
 const ReelsOverlay: React.FC<{
   videos: { src: string }[];
   startIndex: number;
   onClose: () => void;
-}> = ({ videos, startIndex, onClose }) => {
+  onOpenContact?: () => void;
+}> = ({ videos, startIndex, onClose, onOpenContact }) => {
   const [currentIndex, setCurrentIndex] = useState(startIndex);
   const [isMuted, setIsMuted] = useState(true);
   const [showMuteHint, setShowMuteHint] = useState(true);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const touchStartY = useRef(0);
-  const touchDeltaY = useRef(0);
-  const [swipeOffset, setSwipeOffset] = useState(0);
+  const [loadingStates, setLoadingStates] = useState<Record<number, boolean>>({});
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const hasScrolled = useRef(false);
 
   // Lock body scroll
   useEffect(() => {
@@ -40,133 +40,184 @@ const ReelsOverlay: React.FC<{
     return () => { document.body.style.overflow = ''; };
   }, []);
 
-  // Keyboard nav
+  // Scroll to startIndex on mount
+  useEffect(() => {
+    if (containerRef.current && !hasScrolled.current) {
+      hasScrolled.current = true;
+      containerRef.current.scrollTo({
+        top: startIndex * window.innerHeight,
+        behavior: 'instant' as ScrollBehavior,
+      });
+    }
+  }, [startIndex]);
+
+  // IntersectionObserver: detect which video is visible, auto-play/pause
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const idx = Number((entry.target as HTMLElement).dataset.index);
+          if (isNaN(idx)) return;
+
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+            setCurrentIndex(idx);
+            const vid = videoRefs.current[idx];
+            if (vid) {
+              vid.muted = isMuted;
+              vid.volume = 0.5;
+              vid.play().catch(() => {});
+            }
+          } else {
+            const vid = videoRefs.current[idx];
+            if (vid) vid.pause();
+          }
+        });
+      },
+      { root: container, threshold: 0.6 }
+    );
+
+    container.querySelectorAll<HTMLElement>('[data-index]').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Sync mute across all loaded videos
+  useEffect(() => {
+    videoRefs.current.forEach((vid) => {
+      if (vid) {
+        vid.muted = isMuted;
+        vid.volume = 0.5;
+      }
+    });
+  }, [isMuted]);
+
+  // Keyboard navigation
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowUp' && currentIndex > 0) goTo(currentIndex - 1);
-      if (e.key === 'ArrowDown' && currentIndex < videos.length - 1) goTo(currentIndex + 1);
+      if (e.key === 'ArrowDown') scrollToIndex(currentIndex + 1);
+      if (e.key === 'ArrowUp') scrollToIndex(currentIndex - 1);
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [currentIndex, videos.length]);
+  }, [currentIndex, onClose]);
 
-  // Sync mute state
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = isMuted;
-      videoRef.current.volume = 0.5;
-    }
-  }, [isMuted, currentIndex]);
+  const scrollToIndex = useCallback((idx: number) => {
+    if (idx < 0 || idx > videos.length) return; // videos.length = CTA slide
+    containerRef.current?.scrollTo({
+      top: idx * window.innerHeight,
+      behavior: 'smooth',
+    });
+  }, [videos.length]);
 
-  // Auto-unmute attempt — works if user has interacted with page before opening overlay
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (videoRef.current) {
-        videoRef.current.muted = false;
-        videoRef.current.play().then(() => {
-          setIsMuted(false);
-          setShowMuteHint(false);
-        }).catch(() => {
-          // Browser blocked unmute — user needs to tap
-          if (videoRef.current) {
-            videoRef.current.muted = true;
-          }
-          setIsMuted(true);
-        });
-      }
-    }, 300);
-    return () => clearTimeout(timer);
-  }, [currentIndex]);
+  const handleVideoTap = useCallback(() => {
+    setIsMuted((prev) => !prev);
+    setShowMuteHint(false);
+  }, []);
 
-  // Tap on video to toggle mute
-  const handleVideoTap = () => {
-    if (isMuted) {
-      setIsMuted(false);
-      setShowMuteHint(false);
-      if (videoRef.current) {
-        videoRef.current.muted = false;
-        videoRef.current.volume = 0.5;
-        videoRef.current.play().catch(() => {});
-      }
-    } else {
-      setIsMuted(true);
-      if (videoRef.current) {
-        videoRef.current.muted = true;
-      }
-    }
-  };
+  const handleCanPlay = useCallback((idx: number) => {
+    setLoadingStates((prev) => ({ ...prev, [idx]: false }));
+  }, []);
 
-  const goTo = (idx: number) => {
-    if (isTransitioning || idx < 0 || idx >= videos.length) return;
-    setIsTransitioning(true);
-    const direction = idx > currentIndex ? -1 : 1;
-    setSwipeOffset(direction * 100);
-    setTimeout(() => {
-      setCurrentIndex(idx);
-      setSwipeOffset(direction * -100);
-      setTimeout(() => {
-        setSwipeOffset(0);
-        setIsTransitioning(false);
-      }, 50);
-    }, 250);
-  };
-
-  // Touch handling for vertical swipe
-  const onTouchStart = (e: React.TouchEvent) => {
-    touchStartY.current = e.touches[0].clientY;
-    touchDeltaY.current = 0;
-  };
-
-  const onTouchMove = (e: React.TouchEvent) => {
-    touchDeltaY.current = e.touches[0].clientY - touchStartY.current;
-    // Show partial swipe feedback
-    const pct = (touchDeltaY.current / window.innerHeight) * 100;
-    setSwipeOffset(Math.max(-30, Math.min(30, pct)));
-  };
-
-  const onTouchEnd = () => {
-    const threshold = 60;
-    if (touchDeltaY.current < -threshold && currentIndex < videos.length - 1) {
-      goTo(currentIndex + 1);
-    } else if (touchDeltaY.current > threshold && currentIndex > 0) {
-      goTo(currentIndex - 1);
-    } else {
-      setSwipeOffset(0);
-    }
-    touchDeltaY.current = 0;
-  };
+  const handleWaiting = useCallback((idx: number) => {
+    setLoadingStates((prev) => ({ ...prev, [idx]: true }));
+  }, []);
 
   return (
-    <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center"
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-    >
-      {/* Video */}
+    <div className="fixed inset-0 z-[200] bg-black">
+      {/* Scroll-snap container */}
       <div
-        className="absolute inset-0 flex items-center justify-center"
+        ref={containerRef}
+        className="h-full w-full overflow-y-scroll no-scrollbar"
         style={{
-          transform: `translateY(${swipeOffset}%)`,
-          transition: isTransitioning ? 'none' : swipeOffset === 0 ? 'transform 0.3s ease-out' : 'none',
+          scrollSnapType: 'y mandatory',
+          overscrollBehaviorY: 'contain',
+          WebkitOverflowScrolling: 'touch',
         }}
       >
-        <video
-          ref={videoRef}
-          key={videos[currentIndex].src}
-          src={videos[currentIndex].src}
-          autoPlay
-          loop
-          muted={isMuted}
-          playsInline
-          preload="auto"
-          className="w-full h-full object-cover"
-          onClick={handleVideoTap}
-        />
+        {videos.map((video, i) => {
+          const isNear = Math.abs(i - currentIndex) <= 1;
+          const isLoading = loadingStates[i] !== false && isNear;
+          return (
+            <div
+              key={i}
+              data-index={i}
+              className="relative flex items-center justify-center bg-black"
+              style={{ height: '100vh', width: '100%', scrollSnapAlign: 'start' }}
+              onClick={handleVideoTap}
+            >
+              {isNear ? (
+                <video
+                  ref={(el) => { videoRefs.current[i] = el; }}
+                  src={video.src}
+                  loop
+                  muted={isMuted}
+                  playsInline
+                  preload={i === currentIndex ? 'auto' : 'metadata'}
+                  onCanPlay={() => handleCanPlay(i)}
+                  onWaiting={() => handleWaiting(i)}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-black" />
+              )}
+
+              {/* Loading spinner */}
+              {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <Loader2 size={32} className="text-white/40 animate-spin" />
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+        {/* ─── Stop Doomscrolling CTA ─── */}
+        <div
+          data-index={videos.length}
+          className="relative flex flex-col items-center justify-center bg-black px-8 gap-5"
+          style={{ height: '100vh', width: '100%', scrollSnapAlign: 'start' }}
+        >
+          <div className="w-16 h-16 rounded-full bg-[#25D366]/10 border border-[#25D366]/20 flex items-center justify-center mb-2">
+            <MessageCircle size={28} className="text-[#25D366]" />
+          </div>
+          <p className="text-white/30 text-[10px] uppercase tracking-[0.4em] font-bold">Klaar met scrollen?</p>
+          <h3 className="text-white text-2xl md:text-5xl font-black text-center leading-tight">
+            Stop doomscrolling.<br />
+            <span className="text-[#25D366]">Neem contact op.</span>
+          </h3>
+          <p className="text-white/30 text-xs md:text-sm text-center max-w-sm">
+            Wil je ook zulke content? Laten we het hebben over jouw merk.
+          </p>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onClose();
+              onOpenContact?.();
+            }}
+            className="mt-4 px-8 py-4 bg-[#25D366] text-black font-black text-sm uppercase tracking-wider rounded-full hover:bg-[#20bd5a] transition-all active:scale-95 shadow-lg shadow-[#25D366]/20"
+          >
+            Neem contact op
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); onClose(); }}
+            className="text-white/30 text-xs hover:text-white/50 transition-colors mt-1"
+          >
+            Of sluit deze reels
+          </button>
+        </div>
       </div>
 
+      {/* ─── Floating UI overlay ─── */}
+
       {/* Tap-to-unmute hint */}
-      {showMuteHint && isMuted && (
+      {showMuteHint && isMuted && currentIndex < videos.length && (
         <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 animate-pulse pointer-events-none">
           <Volume2 size={16} className="text-[#25D366]" />
           <span className="text-white text-xs font-bold uppercase tracking-widest">Tik voor geluid</span>
@@ -174,13 +225,16 @@ const ReelsOverlay: React.FC<{
       )}
 
       {/* Top bar */}
-      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4 md:p-6 bg-gradient-to-b from-black/60 to-transparent" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}>
+      <div
+        className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4 md:p-6 bg-gradient-to-b from-black/60 via-black/20 to-transparent pointer-events-none"
+        style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}
+      >
         <div className="flex items-center gap-3">
           <span className="text-white/60 text-xs font-bold uppercase tracking-widest">
-            {currentIndex + 1} / {videos.length}
+            {Math.min(currentIndex + 1, videos.length)} / {videos.length}
           </span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 pointer-events-auto">
           <button
             onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); setShowMuteHint(false); }}
             className={`w-11 h-11 md:w-10 md:h-10 rounded-full border flex items-center justify-center text-white transition-all active:scale-90 ${
@@ -198,38 +252,35 @@ const ReelsOverlay: React.FC<{
         </div>
       </div>
 
-      {/* Navigation arrows (desktop) */}
+      {/* Desktop navigation arrows */}
       <div className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 flex-col gap-3 z-10">
         <button
-          onClick={() => goTo(currentIndex - 1)}
+          onClick={() => scrollToIndex(currentIndex - 1)}
           disabled={currentIndex === 0}
           className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
         >
           <ChevronUp size={20} />
         </button>
         <button
-          onClick={() => goTo(currentIndex + 1)}
-          disabled={currentIndex === videos.length - 1}
+          onClick={() => scrollToIndex(currentIndex + 1)}
+          disabled={currentIndex >= videos.length}
           className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
         >
           <ChevronDown size={20} />
         </button>
       </div>
 
-      {/* Progress dots (right side) */}
-      <div className="absolute right-3 md:hidden top-1/2 -translate-y-1/2 flex flex-col gap-1.5 z-10">
-        {videos.map((_, i) => (
+      {/* Progress dots (mobile) */}
+      <div className="absolute right-3 md:hidden top-1/2 -translate-y-1/2 flex flex-col gap-1.5 z-10 pointer-events-none">
+        {[...videos, null].map((_, i) => (
           <div
             key={i}
             className={`w-1.5 rounded-full transition-all duration-300 ${
-              i === currentIndex ? 'h-6 bg-white' : 'h-1.5 bg-white/30'
+              i === currentIndex ? 'h-6 bg-white' : i === videos.length ? 'h-2 bg-[#25D366]/50' : 'h-1.5 bg-white/30'
             }`}
           />
         ))}
       </div>
-
-      {/* Bottom spacer for safe area */}
-      <div style={{ height: 'max(1.5rem, env(safe-area-inset-bottom))' }} />
     </div>
   );
 };
@@ -430,7 +481,7 @@ const InfiniteVideoSlider: React.FC<{
 };
 
 // ─── Main Component ─────────────────────────────────────────────────────
-const ShortContent: React.FC = () => {
+const ShortContent: React.FC<{ onOpenContact?: () => void }> = ({ onOpenContact }) => {
   const base = import.meta.env.BASE_URL;
   const [statsVisible, setStatsVisible] = useState(false);
   const [reelsOpen, setReelsOpen] = useState(false);
@@ -534,6 +585,7 @@ const ShortContent: React.FC = () => {
           videos={videos}
           startIndex={reelsStartIndex}
           onClose={() => setReelsOpen(false)}
+          onOpenContact={onOpenContact}
         />
       )}
     </>

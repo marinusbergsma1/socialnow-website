@@ -58,7 +58,7 @@ const HomePage: React.FC<{
       />
 
       <div className="scroll-reveal">
-        <ShortContent />
+        <ShortContent onOpenContact={() => setIsContactOpen(true)} />
       </div>
 
       <div className="scroll-reveal">
