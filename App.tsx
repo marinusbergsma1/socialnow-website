@@ -1,6 +1,7 @@
 
-import React, { useState, useLayoutEffect, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useLayoutEffect, useEffect, useRef, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import ProjectShowcase from './components/ProjectShowcase';
 import Clients from './components/Clients';
@@ -14,19 +15,37 @@ import Footer from './components/Footer';
 import Loader from './components/Loader';
 import GridBackground from './components/GridBackground';
 import WhatsAppPopup from './components/WhatsAppPopup';
-// Lazy-load popup/modal components — only loaded when opened
-const BookingPopup = lazy(() => import('./components/BookingPopup'));
-const BentoGridSection = lazy(() => import('./components/BentoGridSection'));
-const TeamPage = lazy(() => import('./components/TeamPage'));
-const ContactPage = lazy(() => import('./components/ContactPage'));
+import ErrorBoundary from './components/ErrorBoundary';
 import ServicesMarquee from './components/ServicesMarquee';
 import Hero from './components/Hero';
 import WebShowcase from './components/WebShowcase';
+import NotFound from './components/NotFound';
+import { useSEO } from './hooks/useSEO';
+
+// Retry lazy imports once on chunk load failure (e.g. network error on mobile)
+function lazyRetry(importFn: () => Promise<{ default: React.ComponentType<any> }>) {
+  return lazy(() =>
+    importFn().catch((err) => {
+      console.warn('[SocialNow] Chunk load failed, retrying...', err);
+      return new Promise<{ default: React.ComponentType<any> }>((resolve, reject) => {
+        setTimeout(() => importFn().then(resolve).catch(reject), 1000);
+      });
+    })
+  );
+}
+
+// Lazy-load popup/modal components — only loaded when opened
+const BookingPopup = lazyRetry(() => import('./components/BookingPopup'));
+const BentoGridSection = lazyRetry(() => import('./components/BentoGridSection'));
+const TeamPage = lazyRetry(() => import('./components/TeamPage'));
+const ContactPage = lazyRetry(() => import('./components/ContactPage'));
 
 // Lazy-load sub-pages for code splitting
-const ProjectsPage = lazy(() => import('./components/ProjectsPage'));
-const ServicesPage = lazy(() => import('./components/ServicesPage'));
-const ProjectPage = lazy(() => import('./components/ProjectPage'));
+const ProjectsPage = lazyRetry(() => import('./components/ProjectsPage'));
+const ServicesPage = lazyRetry(() => import('./components/ServicesPage'));
+const ProjectPage = lazyRetry(() => import('./components/ProjectPage'));
+const PrivacyPage = lazyRetry(() => import('./components/PrivacyPage'));
+const PricingPage = lazyRetry(() => import('./components/PricingPage'));
 
 // Minimal fallback while lazy components load
 const PageLoader = () => (
@@ -39,6 +58,12 @@ const HomePage: React.FC<{
   loading: boolean;
   onOpenBooking: () => void;
 }> = ({ loading, onOpenBooking }) => {
+  useSEO({
+    title: 'SocialNow | AI-Powered Web & Project Development Amsterdam',
+    description: 'SocialNow is een creatief bureau in Amsterdam gespecialiseerd in AI-gestuurde webontwikkeling, branding, UX/UI design en social media marketing.',
+    path: '/',
+  });
+
   return (
     <main className={`transition-all duration-1000 ${loading ? 'opacity-0' : 'opacity-100'}`}>
       <div id="home">
@@ -93,11 +118,53 @@ const App: React.FC = () => {
   const [isTeamOpen, setIsTeamOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
 
+  const lenisRef = useRef<Lenis | null>(null);
+
   const location = useLocation();
   const isProjectPage = location.pathname.startsWith('/project/');
   const isProjectsPage = location.pathname === '/projecten';
   const isServicesPage = location.pathname === '/diensten';
-  const isSubPage = isProjectPage || isProjectsPage || isServicesPage;
+  const isPrivacyPage = location.pathname === '/privacy';
+  const isPricingPage = location.pathname === '/prijzen';
+  const isSubPage = isProjectPage || isProjectsPage || isServicesPage || isPrivacyPage || isPricingPage;
+
+  // Lenis smooth scroll
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      touchMultiplier: 2,
+    });
+    lenisRef.current = lenis;
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+      lenisRef.current = null;
+    };
+  }, []);
+
+  // Stop Lenis during loader & modals, resume when done
+  useEffect(() => {
+    const lenis = lenisRef.current;
+    if (!lenis) return;
+    const anyOpen = loading || isBookingOpen || isServicesOpen || isTeamOpen || isContactOpen;
+    if (anyOpen) {
+      lenis.stop();
+    } else {
+      lenis.start();
+    }
+  }, [loading, isBookingOpen, isServicesOpen, isTeamOpen, isContactOpen]);
+
+  // Scroll to top on route change
+  useEffect(() => {
+    lenisRef.current?.scrollTo(0, { immediate: true });
+  }, [location.pathname]);
 
   useLayoutEffect(() => {
     let ticking = false;
@@ -134,7 +201,10 @@ const App: React.FC = () => {
   const anyModalOpen = loading || isServicesOpen || isTeamOpen || isContactOpen;
 
   return (
+    <ErrorBoundary>
     <div className="bg-black text-white min-h-screen font-sans selection:bg-[#25D366] selection:text-black">
+      <a href="#main-content" className="skip-to-content">Ga naar inhoud</a>
+
       {!isSubPage && loading && <Loader onComplete={() => setLoading(false)} />}
 
       {!isSubPage && <GridBackground hide={anyModalOpen} startAnimation={!loading} />}
@@ -142,6 +212,7 @@ const App: React.FC = () => {
       {!loading && <Navbar onOpenBooking={() => setIsBookingOpen(true)} onOpenContact={() => setIsContactOpen(true)} />}
 
       <div
+        id="main-content"
         key={location.pathname}
         className="animate-page-fade-in"
       >
@@ -158,27 +229,54 @@ const App: React.FC = () => {
           <Route
             path="/projecten"
             element={
-              <Suspense fallback={<PageLoader />}>
-                <ProjectsPage onOpenBooking={() => setIsBookingOpen(true)} />
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<PageLoader />}>
+                  <ProjectsPage onOpenBooking={() => setIsBookingOpen(true)} />
+                </Suspense>
+              </ErrorBoundary>
             }
           />
           <Route
             path="/diensten"
             element={
-              <Suspense fallback={<PageLoader />}>
-                <ServicesPage onOpenBooking={() => setIsBookingOpen(true)} />
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<PageLoader />}>
+                  <ServicesPage onOpenBooking={() => setIsBookingOpen(true)} />
+                </Suspense>
+              </ErrorBoundary>
             }
           />
           <Route
             path="/project/:slug"
             element={
-              <Suspense fallback={<PageLoader />}>
-                <ProjectPage onOpenBooking={() => setIsBookingOpen(true)} />
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<PageLoader />}>
+                  <ProjectPage onOpenBooking={() => setIsBookingOpen(true)} />
+                </Suspense>
+              </ErrorBoundary>
             }
           />
+          <Route
+            path="/prijzen"
+            element={
+              <ErrorBoundary>
+                <Suspense fallback={<PageLoader />}>
+                  <PricingPage onOpenBooking={() => setIsBookingOpen(true)} />
+                </Suspense>
+              </ErrorBoundary>
+            }
+          />
+          <Route
+            path="/privacy"
+            element={
+              <ErrorBoundary>
+                <Suspense fallback={<PageLoader />}>
+                  <PrivacyPage />
+                </Suspense>
+              </ErrorBoundary>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
 
@@ -187,33 +285,36 @@ const App: React.FC = () => {
 
       {!loading && <WhatsAppPopup />}
 
-      <Suspense fallback={null}>
-        {isBookingOpen && (
-          <BookingPopup
-            isOpen={isBookingOpen}
-            onClose={() => setIsBookingOpen(false)}
-          />
-        )}
-        {isServicesOpen && (
-          <BentoGridSection
-            isOpen={isServicesOpen}
-            onClose={() => setIsServicesOpen(false)}
-          />
-        )}
-        {isTeamOpen && (
-          <TeamPage
-            isOpen={isTeamOpen}
-            onClose={() => setIsTeamOpen(false)}
-          />
-        )}
-        {isContactOpen && (
-          <ContactPage
-            isOpen={isContactOpen}
-            onClose={() => setIsContactOpen(false)}
-          />
-        )}
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={null}>
+          {isBookingOpen && (
+            <BookingPopup
+              isOpen={isBookingOpen}
+              onClose={() => setIsBookingOpen(false)}
+            />
+          )}
+          {isServicesOpen && (
+            <BentoGridSection
+              isOpen={isServicesOpen}
+              onClose={() => setIsServicesOpen(false)}
+            />
+          )}
+          {isTeamOpen && (
+            <TeamPage
+              isOpen={isTeamOpen}
+              onClose={() => setIsTeamOpen(false)}
+            />
+          )}
+          {isContactOpen && (
+            <ContactPage
+              isOpen={isContactOpen}
+              onClose={() => setIsContactOpen(false)}
+            />
+          )}
+        </Suspense>
+      </ErrorBoundary>
     </div>
+    </ErrorBoundary>
   );
 };
 

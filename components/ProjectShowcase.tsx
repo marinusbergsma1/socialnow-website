@@ -1,16 +1,17 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Terminal, SearchCode, Volume2, Database, Globe, ExternalLink } from 'lucide-react';
+import { Terminal, SearchCode, Volume2, VolumeX, Database, Globe, ExternalLink } from 'lucide-react';
 import BeforeAfterSlider from './BeforeAfterSlider';
 import ProgressiveImage from './ProgressiveImage';
 import Button from './Button';
 import { useVideoIntersection } from '../hooks/useVideoIntersection';
+import { muteGlobalVideo } from './ShortContent';
 import { featuredProjects as projects } from '../data/projects';
 
 const accentColors = ['#5BA4F5', '#F62961', '#F7E644', '#25D366'];
 
-// Lazy video component for featured sections
+// Lazy video component for featured sections — with tap-to-unmute on mobile
 const LazyVideo: React.FC<{
   src: string;
   isHovered: boolean;
@@ -22,6 +23,7 @@ const LazyVideo: React.FC<{
     threshold: 0.1,
     autoPlay: true,
   });
+  const [isMobileUnmuted, setIsMobileUnmuted] = useState(false);
 
   // Restart video from beginning when it becomes visible
   useEffect(() => {
@@ -30,17 +32,48 @@ const LazyVideo: React.FC<{
     }
   }, [isVisible, restartOnView, videoRef]);
 
+  // Desktop hover: unmute on hover
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
-    video.muted = !isHovered;
+    if (!video || window.innerWidth < 768) return;
     if (isHovered) {
+      muteGlobalVideo();
+      video.muted = false;
+      video.volume = 0.3;
       video.play().catch(() => {});
+    } else {
+      video.muted = true;
     }
   }, [isHovered, videoRef]);
 
+  // Re-mute when scrolled out of view
+  useEffect(() => {
+    if (!isVisible && isMobileUnmuted) {
+      const video = videoRef.current;
+      if (video) video.muted = true;
+      setIsMobileUnmuted(false);
+    }
+  }, [isVisible, isMobileUnmuted, videoRef]);
+
+  const handleTap = () => {
+    if (window.innerWidth >= 768) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isMobileUnmuted) {
+      video.muted = true;
+      setIsMobileUnmuted(false);
+    } else {
+      muteGlobalVideo();
+      video.muted = false;
+      video.volume = 0.5;
+      video.play().catch(() => {});
+      setIsMobileUnmuted(true);
+    }
+  };
+
   return (
-    <div ref={containerRef} className={`relative w-full h-full ${className}`}>
+    <div ref={containerRef} className={`relative w-full h-full ${className}`} onClick={handleTap}>
       {!hasLoadedOnce && (
         <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-10">
           <div className="w-8 h-8 border-2 border-white/10 border-t-[#5BA4F5] rounded-full animate-spin"></div>
@@ -55,20 +88,49 @@ const LazyVideo: React.FC<{
         preload="metadata"
         className="w-full h-full object-contain"
       />
+      {/* Mobile sound indicator */}
+      <div className={`absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 md:hidden ${
+        isMobileUnmuted ? 'bg-[#25D366] scale-110' : 'bg-black/60 scale-90'
+      }`}
+        style={{ backdropFilter: isMobileUnmuted ? 'none' : 'blur(8px)' }}
+      >
+        {isMobileUnmuted
+          ? <Volume2 size={14} className="text-black" />
+          : <VolumeX size={14} className="text-white/70" />
+        }
+      </div>
     </div>
   );
 };
 
-// Lazy gallery video for case study cards
+// Lazy gallery video for case study cards — with tap-to-unmute
 const LazyGalleryVideo: React.FC<{ src: string }> = ({ src }) => {
   const { containerRef, videoRef, hasLoadedOnce } = useVideoIntersection(src, {
     rootMargin: '200px',
     threshold: 0.1,
     autoPlay: true,
   });
+  const [isUnmuted, setIsUnmuted] = useState(false);
+
+  const handleTap = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isUnmuted) {
+      video.muted = true;
+      setIsUnmuted(false);
+    } else {
+      muteGlobalVideo();
+      video.muted = false;
+      video.volume = 0.5;
+      video.play().catch(() => {});
+      setIsUnmuted(true);
+    }
+  };
 
   return (
-    <div ref={containerRef} className="w-full h-full relative">
+    <div ref={containerRef} className="w-full h-full relative" onClick={handleTap}>
       {!hasLoadedOnce && (
         <div className="absolute inset-0 bg-zinc-900 flex items-center justify-center">
           <div className="w-4 h-4 border border-white/10 border-t-white/40 rounded-full animate-spin"></div>
@@ -83,6 +145,15 @@ const LazyGalleryVideo: React.FC<{ src: string }> = ({ src }) => {
         preload="metadata"
         className="w-full h-full object-cover"
       />
+      {/* Sound indicator */}
+      <div className={`absolute bottom-2 right-2 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-200 ${
+        isUnmuted ? 'bg-[#25D366] scale-110' : 'bg-black/60 scale-90'
+      }`}>
+        {isUnmuted
+          ? <Volume2 size={10} className="text-black" />
+          : <VolumeX size={10} className="text-white/70" />
+        }
+      </div>
     </div>
   );
 };

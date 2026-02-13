@@ -4,11 +4,18 @@ import { Layers, Globe, ArrowUpRight } from 'lucide-react';
 import { allProjects } from '../data/projects';
 import ProgressiveImage from './ProgressiveImage';
 import Button from './Button';
+import { useSEO } from '../hooks/useSEO';
 
 const accentColors = ['#5BA4F5', '#F62961', '#F7E644', '#25D366'];
 
 const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }) => {
   const navigate = useNavigate();
+
+  useSEO({
+    title: 'Projecten',
+    description: 'Bekijk ons portfolio van AI-gedreven websites, branding projecten en digitale campagnes. Van concept tot resultaat.',
+    path: '/projecten',
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);

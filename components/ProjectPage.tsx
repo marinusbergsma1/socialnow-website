@@ -4,22 +4,105 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getProjectBySlug, getAdjacentProjects, allProjects } from '../data/projects';
 import Button from './Button';
 import ProgressiveImage from './ProgressiveImage';
+import { muteGlobalVideo } from './ShortContent';
 import {
   User, Calendar, Layers, ChevronLeft, ChevronRight,
-  ExternalLink, Globe, Monitor, MousePointer
+  ExternalLink, Globe, Monitor, MousePointer, Volume2, VolumeX,
+  TrendingUp
 } from 'lucide-react';
+import { useSEO } from '../hooks/useSEO';
 
-// Simple video for gallery items
-const GalleryVideo: React.FC<{ src: string }> = ({ src }) => (
-  <video
-    src={src}
-    autoPlay
-    loop
-    muted
-    playsInline
-    className="w-full h-auto block"
-  />
-);
+// Tappable video with unmute support for gallery items
+const GalleryVideo: React.FC<{ src: string }> = ({ src }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isUnmuted, setIsUnmuted] = useState(false);
+
+  const handleTap = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isUnmuted) {
+      video.muted = true;
+      setIsUnmuted(false);
+    } else {
+      muteGlobalVideo();
+      video.muted = false;
+      video.volume = 0.5;
+      video.play().catch(() => {});
+      setIsUnmuted(true);
+    }
+  };
+
+  return (
+    <div className="relative" onClick={handleTap}>
+      <video
+        ref={videoRef}
+        src={src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full h-auto block"
+      />
+      <div className={`absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
+        isUnmuted ? 'bg-[#25D366] scale-110' : 'bg-black/60 scale-90'
+      }`}
+        style={{ backdropFilter: isUnmuted ? 'none' : 'blur(8px)' }}
+      >
+        {isUnmuted
+          ? <Volume2 size={14} className="text-black" />
+          : <VolumeX size={14} className="text-white/70" />
+        }
+      </div>
+    </div>
+  );
+};
+
+// Hero video with tap-to-unmute (covers full container)
+const HeroVideo: React.FC<{ src: string }> = ({ src }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isUnmuted, setIsUnmuted] = useState(false);
+
+  const handleTap = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isUnmuted) {
+      video.muted = true;
+      setIsUnmuted(false);
+    } else {
+      muteGlobalVideo();
+      video.muted = false;
+      video.volume = 0.5;
+      video.play().catch(() => {});
+      setIsUnmuted(true);
+    }
+  };
+
+  return (
+    <div className="relative w-full h-full" onClick={handleTap}>
+      <video
+        ref={videoRef}
+        src={src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full h-full object-cover"
+      />
+      <div className={`absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 z-20 ${
+        isUnmuted ? 'bg-[#25D366] scale-110' : 'bg-black/60 scale-90'
+      }`}
+        style={{ backdropFilter: isUnmuted ? 'none' : 'blur(8px)' }}
+      >
+        {isUnmuted
+          ? <Volume2 size={16} className="text-black" />
+          : <VolumeX size={16} className="text-white/70" />
+        }
+      </div>
+    </div>
+  );
+};
 
 // Scrollable website preview — swipe through the full page, click to visit
 const WebsitePreview: React.FC<{ screenshot: string; url: string; title: string }> = ({ screenshot, url, title }) => {
@@ -148,6 +231,12 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
   const navigate = useNavigate();
   const project = slug ? getProjectBySlug(slug) : undefined;
 
+  useSEO({
+    title: project ? `${project.title} — ${project.category}` : 'Project niet gevonden',
+    description: project?.description || 'Dit project bestaat niet of is verplaatst.',
+    path: slug ? `/project/${slug}` : '',
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
@@ -171,11 +260,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
       {/* Hero Section */}
       <div className="relative w-full h-[50vh] md:h-[70vh] overflow-hidden">
         {project.image.endsWith('.mp4') ? (
-          <video
-            src={project.image}
-            autoPlay loop muted playsInline
-            className="w-full h-full object-cover"
-          />
+          <HeroVideo src={project.image} />
         ) : (
           <ProgressiveImage
             src={project.image}
@@ -210,6 +295,36 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
           </div>
         </div>
       </div>
+
+      {/* Metrics Bar */}
+      {project.metrics && project.metrics.length > 0 && (
+        <div className="max-w-5xl mx-auto px-6 md:px-12 -mt-2 md:mt-0">
+          <div className="grid grid-cols-3 gap-3 md:gap-4">
+            {project.metrics.map((metric, i) => (
+              <div
+                key={i}
+                className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-6 text-center overflow-hidden group"
+              >
+                <div
+                  className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity"
+                  style={{ background: `radial-gradient(circle at center, ${metric.color || '#25D366'}, transparent 70%)` }}
+                />
+                <div className="relative">
+                  <p
+                    className="text-2xl md:text-4xl font-black tracking-tight mb-1"
+                    style={{ color: metric.color || '#25D366' }}
+                  >
+                    {metric.value}
+                  </p>
+                  <p className="text-[10px] md:text-xs text-white/40 font-bold uppercase tracking-[0.15em]">
+                    {metric.label}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Project Details */}
       <div className="max-w-5xl mx-auto px-6 md:px-12 py-12 md:py-20">

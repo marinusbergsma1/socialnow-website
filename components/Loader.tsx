@@ -91,6 +91,7 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
           <video
             ref={videoRef}
             src={videoSrc}
+            poster="https://i.ibb.co/RkXjxKLb/Social-Now-Logo-Breed-Wit.webp"
             playsInline
             autoPlay
             onEnded={handleVideoEnd}

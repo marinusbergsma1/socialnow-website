@@ -1,11 +1,59 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Project } from '../types';
 import Button from './Button';
-import { 
-  X, ArrowLeft, User, Calendar, Layers, ChevronLeft, ChevronRight, 
-  ArrowRight, Activity, Terminal
+import {
+  X, ArrowLeft, User, Calendar, Layers, ChevronLeft, ChevronRight,
+  ArrowRight, Activity, Terminal, Volume2, VolumeX
 } from 'lucide-react';
+import { muteGlobalVideo } from './ShortContent';
+
+// Tappable video with unmute support
+const TappableVideo: React.FC<{ src: string; className?: string }> = ({ src, className = "" }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isUnmuted, setIsUnmuted] = useState(false);
+
+  const handleTap = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isUnmuted) {
+      video.muted = true;
+      setIsUnmuted(false);
+    } else {
+      muteGlobalVideo();
+      video.muted = false;
+      video.volume = 0.5;
+      video.play().catch(() => {});
+      setIsUnmuted(true);
+    }
+  };
+
+  return (
+    <div className="relative" onClick={handleTap}>
+      <video
+        ref={videoRef}
+        src={src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className={className}
+      />
+      <div className={`absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
+        isUnmuted ? 'bg-[#25D366] scale-110' : 'bg-black/60 scale-90'
+      }`}
+        style={{ backdropFilter: isUnmuted ? 'none' : 'blur(8px)' }}
+      >
+        {isUnmuted
+          ? <Volume2 size={14} className="text-black" />
+          : <VolumeX size={14} className="text-white/70" />
+        }
+      </div>
+    </div>
+  );
+};
 
 interface ProjectModalProps {
   project: Project | null;
@@ -104,7 +152,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         </div>
 
         {/* Main Content Area */}
-        <div ref={scrollRef} className="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar relative z-10">
+        <div ref={scrollRef} data-lenis-prevent className="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar relative z-10">
           <div className="flex flex-col lg:flex-row min-h-full">
             
             {/* Left Column: Fixed Content on Desktop */}
@@ -113,11 +161,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
               {/* Mobile Hero Image - Geforceerd 16:9 (aspect-video) met object-cover */}
               <div className="lg:hidden w-full aspect-video relative bg-black">
                 {project.image.endsWith('.mp4') ? (
-                  <video src={project.image} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                  <TappableVideo src={project.image} className="w-full h-full object-cover" />
                 ) : (
                   <img className="w-full h-full object-cover" alt="Hero" loading="eager" src={project.image} />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
               </div>
 
               <div className="p-6 md:p-12 lg:pt-32 pb-8 md:pb-12 flex flex-col h-full justify-between">
@@ -182,7 +230,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 {/* Desktop Hero Image - Geforceerd 16:9 (aspect-video) met object-cover */}
                 <div className="hidden lg:block w-full aspect-video rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl relative group bg-[#0a0a0a]">
                   {project.image.endsWith('.mp4') ? (
-                    <video src={project.image} autoPlay loop muted playsInline className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.02]" />
+                    <TappableVideo src={project.image} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.02]" />
                   ) : (
                     <img alt="Hero" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.02]" loading="eager" src={project.image} />
                   )}
@@ -192,21 +240,17 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 {project.gallery?.map((item, idx) => (
                   <div key={idx} className="w-full rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-white/5 shadow-lg bg-[#0a0a0a] group relative">
                     {item.endsWith('.mp4') ? (
-                      <video 
-                        src={item} 
-                        autoPlay 
-                        loop 
-                        muted 
-                        playsInline 
-                        className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-[1.01]" 
+                      <TappableVideo
+                        src={item}
+                        className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-[1.01]"
                       />
                     ) : (
-                      <img 
-                        alt={`Detail ${idx}`} 
-                        className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-[1.01]" 
-                        loading="lazy" 
+                      <img
+                        alt={`Detail ${idx}`}
+                        className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-[1.01]"
+                        loading="lazy"
                         decoding="async"
-                        src={item} 
+                        src={item}
                       />
                     )}
                   </div>

@@ -7,6 +7,7 @@ import {
   BarChart3, Sparkles, Palette, Settings, Workflow
 } from 'lucide-react';
 import Button from './Button';
+import { useSEO } from '../hooks/useSEO';
 
 interface ServiceItem {
   title: string;
@@ -83,6 +84,12 @@ const services: ServiceItem[] = [
 
 const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }) => {
   const navigate = useNavigate();
+
+  useSEO({
+    title: 'Diensten',
+    description: 'Van AI website development en branding tot motion design en automation. Ontdek alle diensten van SocialNow Amsterdam.',
+    path: '/diensten',
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);

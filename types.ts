@@ -1,4 +1,10 @@
 
+export interface ProjectMetric {
+  label: string;
+  value: string;
+  color?: string;
+}
+
 export interface Project {
   id: number;
   slug: string;
@@ -14,6 +20,7 @@ export interface Project {
   gallery?: string[];
   url?: string;
   fullPageScreenshot?: string;
+  metrics?: ProjectMetric[];
 }
 
 export interface TeamMember {

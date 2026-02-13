@@ -11,11 +11,16 @@ export const webShowcaseProjects: Project[] = [
     year: "2025",
     services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "Responsive Design"],
     description: "Een complete website met AI-gestuurde technologie. Modern platform met responsief design en snelle laadtijden.",
-    image: `${import.meta.env.BASE_URL}screenshots/vdz-brigade-hero.jpg`,
-    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/vdz-brigade-full.jpg`,
+    image: `${import.meta.env.BASE_URL}screenshots/vdz-brigade-hero.webp`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/vdz-brigade-full.webp`,
     align: 'right',
     url: "https://vdz-brigade.nl",
-    gallery: []
+    gallery: [],
+    metrics: [
+      { label: "Laadtijd", value: "<1.5s", color: "#25D366" },
+      { label: "Mobiele Score", value: "95+", color: "#5BA4F5" },
+      { label: "Doorlooptijd", value: "3 weken", color: "#F7E644" }
+    ]
   },
   {
     id: 7,
@@ -26,11 +31,16 @@ export const webShowcaseProjects: Project[] = [
     year: "2025",
     services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "E-Commerce"],
     description: "Een AI-gebouwde product website voor RAVEG's Bounce My Curls haarverzorgingslijn. Modern, strak en conversion-gericht.",
-    image: `${import.meta.env.BASE_URL}screenshots/raveg-bounce-hero.jpg`,
-    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/raveg-bounce-full.jpg`,
+    image: `${import.meta.env.BASE_URL}screenshots/raveg-bounce-hero.webp`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/raveg-bounce-full.webp`,
     align: 'left',
     url: "https://raveg-bounce-my-curls-21026081538.us-west1.run.app/",
-    gallery: []
+    gallery: [],
+    metrics: [
+      { label: "Conversie Boost", value: "+180%", color: "#25D366" },
+      { label: "Bounce Rate", value: "-35%", color: "#5BA4F5" },
+      { label: "Doorlooptijd", value: "2 weken", color: "#F7E644" }
+    ]
   },
   {
     id: 8,
@@ -41,11 +51,16 @@ export const webShowcaseProjects: Project[] = [
     year: "2025",
     services: ["Web Design", "Web Development", "E-Commerce", "UX/UI Design"],
     description: "Luxueuze, donkere website met premium uitstraling. Goud-accenten en elegante typografie.",
-    image: `${import.meta.env.BASE_URL}screenshots/vintage-watches-hero.jpg`,
-    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/vintage-watches-full.jpg`,
+    image: `${import.meta.env.BASE_URL}screenshots/vintage-watches-hero.webp`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/vintage-watches-full.webp`,
     align: 'right',
     url: "https://socialnow-vintagewatchesdemeesters.github.io/website/index.html",
-    gallery: []
+    gallery: [],
+    metrics: [
+      { label: "Sessieduur", value: "+210%", color: "#F7E644" },
+      { label: "Pagina's/Sessie", value: "4.2x", color: "#25D366" },
+      { label: "Premium Look", value: "100%", color: "#F62961" }
+    ]
   },
   {
     id: 9,
@@ -56,11 +71,16 @@ export const webShowcaseProjects: Project[] = [
     year: "2025",
     services: ["Web Design", "Web Development", "Branding", "Creative Direction"],
     description: "Stijlvolle high-end website voor de internationale fashion industrie. Minimalistisch en krachtig.",
-    image: `${import.meta.env.BASE_URL}screenshots/newblack-hero.jpg`,
-    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/newblack-full.jpg`,
+    image: `${import.meta.env.BASE_URL}screenshots/newblack-hero.webp`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/newblack-full.webp`,
     align: 'left',
     url: "https://newblack.netlify.app/",
-    gallery: []
+    gallery: [],
+    metrics: [
+      { label: "Brand Awareness", value: "+320%", color: "#5BA4F5" },
+      { label: "Mobiele Score", value: "98", color: "#25D366" },
+      { label: "Doorlooptijd", value: "4 weken", color: "#F7E644" }
+    ]
   },
   {
     id: 11,
@@ -71,11 +91,16 @@ export const webShowcaseProjects: Project[] = [
     year: "2024",
     services: ["Web Design", "Web Development", "UX/UI Design", "Responsive Design"],
     description: "Een krachtige, donkere website voor Divine Machines. High-end design met sterke visuele impact en naadloze gebruikerservaring.",
-    image: `${import.meta.env.BASE_URL}screenshots/divine-machines-hero.jpg`,
-    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/divine-machines-full.jpg`,
+    image: `${import.meta.env.BASE_URL}screenshots/divine-machines-hero.webp`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/divine-machines-full.webp`,
     align: 'right',
     url: "https://divinemachines.nl",
-    gallery: []
+    gallery: [],
+    metrics: [
+      { label: "Online Verkoop", value: "+150%", color: "#25D366" },
+      { label: "Laadtijd", value: "<2s", color: "#5BA4F5" },
+      { label: "Klant Retentie", value: "+85%", color: "#F62961" }
+    ]
   },
   {
     id: 10,
@@ -86,11 +111,16 @@ export const webShowcaseProjects: Project[] = [
     year: "2026",
     services: ["AI Website Development", "Full-Stack React", "3D Animation", "UX/UI Design"],
     description: "Onze eigen website — gebouwd met React, Vite, en AI-gestuurde development. 3D PixelGlobe beeldmerk, infinite video slider, live website previews en cutting-edge design.",
-    image: `${import.meta.env.BASE_URL}screenshots/socialnow-hero.jpg`,
+    image: `${import.meta.env.BASE_URL}screenshots/socialnow-hero.webp`,
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/socialnow-full.jpg`,
     align: 'left',
     url: "https://marinusbergsma1.github.io/socialnow-website/",
-    gallery: []
+    gallery: [],
+    metrics: [
+      { label: "Lighthouse Score", value: "95+", color: "#25D366" },
+      { label: "AI-Powered", value: "100%", color: "#5BA4F5" },
+      { label: "Doorlooptijd", value: "5 dagen", color: "#F62961" }
+    ]
   }
 ];
 
@@ -111,6 +141,11 @@ export const allProjects: Project[] = [
       "https://i.ibb.co/nNb5FYBq/WARNER-FLASH-FRAMES.webp",
       "https://i.ibb.co/d4Xvg2Nd/UNIVERSAL-OPENHEIMER-FRAMES.webp",
       "https://i.ibb.co/mV9FkFZy/UNIVERSAL-NOHARDFEELINGS-FRAMES.webp"
+    ],
+    metrics: [
+      { label: "Social Bereik", value: "2M+", color: "#5BA4F5" },
+      { label: "Engagement", value: "+340%", color: "#25D366" },
+      { label: "Campagnes", value: "12+", color: "#F7E644" }
     ]
   },
   {
@@ -128,6 +163,11 @@ export const allProjects: Project[] = [
       "https://i.ibb.co/HDnNddpm/header-Bouadu-v2-2.webp",
       "https://i.ibb.co/BKYLR4wG/AZ-25-K-Volgers-Post.webp",
       "https://i.ibb.co/RkHCGbNS/AZ-Boadu-Bedankt-Post.webp"
+    ],
+    metrics: [
+      { label: "Volgers Groei", value: "+25K", color: "#F62961" },
+      { label: "Impressies", value: "5M+", color: "#5BA4F5" },
+      { label: "Engagement Rate", value: "8.2%", color: "#25D366" }
     ]
   },
   {
@@ -145,6 +185,11 @@ export const allProjects: Project[] = [
       "/socialnow-website/videos/raveg-dyadium.mp4",
       "https://storage.googleapis.com/video-slider/RAVEG_HYPERPOWER_VID_EN_2_STORY.mp4",
       "https://storage.googleapis.com/video-slider/RAVEG_HYPERPOWER_VID_EN_4_STORY.mp4"
+    ],
+    metrics: [
+      { label: "Merkherkenning", value: "+400%", color: "#25D366" },
+      { label: "Social Groei", value: "10K+", color: "#F62961" },
+      { label: "Video Views", value: "500K+", color: "#5BA4F5" }
     ]
   },
   {
@@ -162,6 +207,11 @@ export const allProjects: Project[] = [
       "https://i.ibb.co/HD1RJt2z/1200x1200-Kids-Heroes-Koningshoek2-1.webp",
       "https://i.ibb.co/LXBkrK52/1200x1200-Kids-Heroes-Koningshoek3-1.webp",
       "https://i.ibb.co/tTCTL6DZ/Slider-Mobiel-Kids-Heroes-Koningshoek-1.webp"
+    ],
+    metrics: [
+      { label: "Bezoekers", value: "15K+", color: "#F7E644" },
+      { label: "Social Bereik", value: "1.2M", color: "#5BA4F5" },
+      { label: "Edities", value: "4", color: "#25D366" }
     ]
   },
   {
@@ -179,6 +229,11 @@ export const allProjects: Project[] = [
       "https://i.ibb.co/8D1GLhGM/Bannert.webp",
       "https://i.ibb.co/xSTR7yV9/Meeting-Room-2.webp",
       "https://i.ibb.co/998R1QP8/IMG-1686.webp"
+    ],
+    metrics: [
+      { label: "Merkbeleving", value: "+250%", color: "#F62961" },
+      { label: "Oppervlakte", value: "400m\u00B2", color: "#F7E644" },
+      { label: "Materialen", value: "15+", color: "#5BA4F5" }
     ]
   }
 ];

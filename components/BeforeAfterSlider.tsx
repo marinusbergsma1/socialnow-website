@@ -59,7 +59,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
       window.addEventListener('mousemove', handleGlobalMouseMove);
       window.addEventListener('mouseup', handleGlobalMouseUp);
       window.addEventListener('touchmove', handleGlobalTouchMove, { passive: false });
-      window.addEventListener('touchend', handleGlobalTouchEnd);
+      window.addEventListener('touchend', handleGlobalTouchEnd, { passive: true });
     }
 
     return () => {

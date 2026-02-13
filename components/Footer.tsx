@@ -174,6 +174,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                 href="https://www.instagram.com/socialnow.nl/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="SocialNow op Instagram"
                 className="w-8 h-8 rounded-full border border-white/[0.08] bg-white/[0.03] flex items-center justify-center text-white/30 hover:text-white hover:border-white/20 hover:bg-white/10 transition-all"
               >
                 <Instagram size={14} />
@@ -182,6 +183,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                 href="https://www.linkedin.com/company/socialnow-nl/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="SocialNow op LinkedIn"
                 className="w-8 h-8 rounded-full border border-white/[0.08] bg-white/[0.03] flex items-center justify-center text-white/30 hover:text-white hover:border-white/20 hover:bg-white/10 transition-all"
               >
                 <Linkedin size={14} />
@@ -190,6 +192,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                 href="https://wa.me/31637404577"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Stuur ons een WhatsApp bericht"
                 className="w-8 h-8 rounded-full border border-white/[0.08] bg-white/[0.03] flex items-center justify-center text-white/30 hover:text-[#25D366] hover:border-[#25D366]/30 transition-all"
               >
                 <MessageCircle size={14} />
@@ -223,7 +226,8 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             </a>
             <span className="text-white/10">|</span>
             <a
-              href="#"
+              href="/privacy"
+              onClick={(e) => handleNavClick(e, '/privacy')}
               className="text-white/15 text-[9px] font-bold uppercase tracking-[0.2em] hover:text-white/40 transition-colors"
             >
               Privacy

@@ -235,7 +235,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
   ];
 
   return (
-    <div className={`fixed inset-0 z-[200] bg-[#030303] overflow-y-auto overflow-x-hidden custom-scrollbar transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+    <div data-lenis-prevent className={`fixed inset-0 z-[200] bg-[#030303] overflow-y-auto overflow-x-hidden custom-scrollbar transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
       isClosing ? 'opacity-0 scale-[0.98]' : 'opacity-100 scale-100'
     }`}>
 

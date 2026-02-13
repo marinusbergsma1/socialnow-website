@@ -2,10 +2,29 @@
 import React, { useRef, useState, useEffect } from 'react';
 import ScrollTypewriter from './ScrollTypewriter';
 import { Volume2, VolumeX } from 'lucide-react';
+import { muteGlobalVideo } from './ShortContent';
 
 const AiMotionSection: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
     const [scale, setScale] = useState(0.85);
+    const [isUnmuted, setIsUnmuted] = useState(false);
+
+    const handleTap = () => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        if (isUnmuted) {
+            video.muted = true;
+            setIsUnmuted(false);
+        } else {
+            muteGlobalVideo();
+            video.muted = false;
+            video.volume = 0.5;
+            video.play().catch(() => {});
+            setIsUnmuted(true);
+        }
+    };
 
     // Scroll Scale Animation
     useEffect(() => {
@@ -71,18 +90,31 @@ const AiMotionSection: React.FC = () => {
                     ></div>
                     
                     {/* Video Container */}
-                    <div 
-                        className="relative z-10 w-full aspect-video rounded-none overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,113,188,0.5)] bg-black transition-transform duration-100 ease-out"
+                    <div
+                        className="relative z-10 w-full aspect-video rounded-none overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,113,188,0.5)] bg-black transition-transform duration-100 ease-out cursor-pointer"
                         style={{ transform: `scale(${scale})` }}
+                        onClick={handleTap}
                     >
-                        <video 
-                            src={`${import.meta.env.BASE_URL}videos/ai-showcase.mp4`} 
-                            autoPlay 
-                            loop 
-                            muted 
-                            playsInline 
+                        <video
+                            ref={videoRef}
+                            src={`${import.meta.env.BASE_URL}videos/ai-showcase.mp4`}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
                             className="w-full h-full object-cover"
                         />
+                        {/* Sound indicator */}
+                        <div className={`absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 ${
+                            isUnmuted ? 'bg-[#25D366] scale-110' : 'bg-black/60 scale-90'
+                        }`}
+                            style={{ backdropFilter: isUnmuted ? 'none' : 'blur(8px)' }}
+                        >
+                            {isUnmuted
+                                ? <Volume2 size={16} className="text-black" />
+                                : <VolumeX size={16} className="text-white/70" />
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

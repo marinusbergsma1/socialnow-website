@@ -160,7 +160,7 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
         <X size={28} className="group-hover:rotate-90 transition-transform duration-500" />
       </button>
 
-      <div className="relative z-[180] w-full h-full overflow-y-auto overflow-x-hidden py-12 md:py-32 px-4 md:px-8 custom-scrollbar">
+      <div data-lenis-prevent className="relative z-[180] w-full h-full overflow-y-auto overflow-x-hidden py-12 md:py-32 px-4 md:px-8 custom-scrollbar">
         <div className="container mx-auto max-w-7xl pb-40">
           
           <div className="mb-20 md:mb-24 text-center px-4">

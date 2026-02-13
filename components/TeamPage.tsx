@@ -164,7 +164,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
   if (!isOpen && !isClosing) return null;
 
   return (
-    <div className={`fixed inset-0 z-[150] bg-black overflow-y-auto overflow-x-hidden custom-scrollbar transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+    <div data-lenis-prevent className={`fixed inset-0 z-[150] bg-black overflow-y-auto overflow-x-hidden custom-scrollbar transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
       isClosing ? 'opacity-0 scale-95 blur-2xl' : 'opacity-100 scale-100 blur-0'
     }`}>
       

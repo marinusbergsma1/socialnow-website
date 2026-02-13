@@ -1,6 +1,21 @@
 import React, { useRef, useState, useEffect, memo, useCallback } from 'react';
 import { Activity, Database, Heart, Volume2, VolumeX } from 'lucide-react';
 
+// Global audio context: only one video can be unmuted at a time across the entire page
+let globalUnmutedVideo: HTMLVideoElement | null = null;
+let globalUnmuteListener: (() => void) | null = null;
+
+export function muteGlobalVideo() {
+  if (globalUnmutedVideo) {
+    globalUnmutedVideo.muted = true;
+    globalUnmutedVideo = null;
+  }
+  if (globalUnmuteListener) {
+    globalUnmuteListener();
+    globalUnmuteListener = null;
+  }
+}
+
 // ─── CountUp ────────────────────────────────────────────────────────────
 const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: number; duration?: number; start: boolean; suffix?: string }) => {
   const [count, setCount] = useState(0);
@@ -32,8 +47,9 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   const lastPointerTime = useRef(0);
   const velocityRef = useRef(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [mutedIndex, setMutedIndex] = useState<number | null>(null);
+  const [unmutedIndex, setUnmutedIndex] = useState<number | null>(null);
   const dragDistRef = useRef(0);
 
   const [isMobile, setIsMobile] = useState(false);
@@ -63,6 +79,37 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   useEffect(() => {
     positionRef.current = totalSetWidth * Math.floor(numSets / 2);
   }, [totalSetWidth, numSets]);
+
+  // Intersection Observer: play/pause videos based on visibility
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target.querySelector('video') as HTMLVideoElement | null;
+          if (!video) return;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {
+              video.muted = true;
+              video.play().catch(() => {});
+            });
+          } else {
+            video.pause();
+            // If this video was unmuted and scrolled away, mute it
+            if (!video.muted) {
+              video.muted = true;
+            }
+          }
+        });
+      },
+      { rootMargin: '100px', threshold: 0.1 }
+    );
+
+    cardRefs.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, [allVideos.length]);
 
   const animate = useCallback(() => {
     if (!isDragging.current && !isPaused.current) {
@@ -118,31 +165,34 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     isDragging.current = false;
   }, []);
 
-  // Tap-to-unmute on mobile
+  // Unified tap-to-unmute (works on both mobile and desktop)
   const handleTap = useCallback((idx: number) => {
     if (!isMobile) return;
-    // Only register as tap if drag distance is small
     if (dragDistRef.current > 10) return;
-
-    // Mute all other videos first
-    videoRefs.current.forEach((vid, i) => {
-      if (vid && i !== idx) vid.muted = true;
-    });
 
     const vid = videoRefs.current[idx];
     if (!vid) return;
 
-    if (mutedIndex === idx) {
+    if (unmutedIndex === idx) {
       // Already unmuted → mute it
       vid.muted = true;
-      setMutedIndex(null);
+      globalUnmutedVideo = null;
+      globalUnmuteListener = null;
+      setUnmutedIndex(null);
     } else {
+      // Mute any globally unmuted video first
+      muteGlobalVideo();
+      // Mute all slider videos
+      videoRefs.current.forEach((v) => { if (v) v.muted = true; });
       // Unmute this one
       vid.muted = false;
       vid.volume = 0.5;
-      setMutedIndex(idx);
+      vid.play().catch(() => {});
+      globalUnmutedVideo = vid;
+      globalUnmuteListener = () => setUnmutedIndex(null);
+      setUnmutedIndex(idx);
     }
-  }, [isMobile, mutedIndex]);
+  }, [isMobile, unmutedIndex]);
 
   // Desktop hover handlers
   const handleMouseEnter = useCallback((idx: number) => {
@@ -150,8 +200,14 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     isPaused.current = true;
     velocityRef.current = 0;
     setHoveredIndex(idx);
+    muteGlobalVideo();
     const vid = videoRefs.current[idx];
-    if (vid) { vid.muted = false; vid.volume = 0.3; }
+    if (vid) {
+      vid.muted = false;
+      vid.volume = 0.3;
+      globalUnmutedVideo = vid;
+      globalUnmuteListener = null;
+    }
   }, []);
 
   const handleMouseLeave = useCallback((idx: number) => {
@@ -159,7 +215,12 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     isPaused.current = false;
     setHoveredIndex(null);
     const vid = videoRefs.current[idx];
-    if (vid) vid.muted = true;
+    if (vid) {
+      vid.muted = true;
+      if (globalUnmutedVideo === vid) {
+        globalUnmutedVideo = null;
+      }
+    }
   }, []);
 
   return (
@@ -178,10 +239,11 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
       >
         {allVideos.map((video, i) => {
           const isHovered = !isMobile && hoveredIndex === i;
-          const isUnmuted = isMobile && mutedIndex === i;
+          const isUnmuted = unmutedIndex === i;
           return (
             <div
               key={i}
+              ref={el => { cardRefs.current[i] = el; }}
               className="flex-shrink-0 relative"
               style={{
                 width: `${cardWidth}px`,
@@ -204,7 +266,6 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
                 <video
                   ref={el => { videoRefs.current[i] = el; }}
                   src={video.src}
-                  autoPlay
                   loop
                   muted
                   playsInline
@@ -212,14 +273,16 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
                   className="w-full h-full object-cover pointer-events-none"
                 />
               </div>
-              {/* Mobile: sound indicator */}
+              {/* Sound indicator */}
               {isMobile && (
-                <div className={`absolute bottom-3 right-3 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${
-                  isUnmuted ? 'bg-[#25D366] scale-100' : 'bg-black/50 scale-90'
-                }`}>
+                <div className={`absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
+                  isUnmuted ? 'bg-[#25D366] scale-110' : 'bg-black/60 scale-90'
+                }`}
+                  style={{ backdropFilter: isUnmuted ? 'none' : 'blur(8px)' }}
+                >
                   {isUnmuted
-                    ? <Volume2 size={12} className="text-black" />
-                    : <VolumeX size={12} className="text-white/60" />
+                    ? <Volume2 size={14} className="text-black" />
+                    : <VolumeX size={14} className="text-white/70" />
                   }
                 </div>
               )}
