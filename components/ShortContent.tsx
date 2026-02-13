@@ -66,8 +66,6 @@ const ReelsOverlay: React.FC<{
             setCurrentIndex(idx);
             const vid = videoRefs.current[idx];
             if (vid) {
-              vid.muted = isMuted;
-              vid.volume = 0.5;
               vid.play().catch(() => {});
             }
           } else {
