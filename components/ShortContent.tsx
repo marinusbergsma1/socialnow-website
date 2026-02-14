@@ -63,6 +63,41 @@ const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: num
   return <span>{Math.floor(count)}{suffix}</span>;
 });
 
+// ─── Lazy Slider Video — only loads src when near viewport (mobile) ──────
+const LazySliderVideo = React.forwardRef<HTMLVideoElement, { src: string; isMobile: boolean }>(
+  ({ src, isMobile }, ref) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [shouldLoad, setShouldLoad] = useState(!isMobile);
+
+    useEffect(() => {
+      if (!isMobile || shouldLoad) return;
+      const el = containerRef.current;
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) { setShouldLoad(true); obs.disconnect(); } },
+        { rootMargin: '200px', threshold: 0 }
+      );
+      obs.observe(el);
+      return () => obs.disconnect();
+    }, [isMobile, shouldLoad]);
+
+    return (
+      <div ref={containerRef} className="w-full h-full">
+        <video
+          ref={ref}
+          src={shouldLoad ? src : undefined}
+          autoPlay={shouldLoad}
+          loop
+          muted
+          playsInline
+          preload={isMobile ? "none" : "metadata"}
+          className="w-full h-full object-cover pointer-events-none"
+        />
+      </div>
+    );
+  }
+);
+
 // ─── Infinite Loop Video Slider ───────────────────────────────────────────
 const InfiniteVideoSlider: React.FC<{ videos: { src: string; hdSrc?: string }[] }> = ({ videos }) => {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -380,15 +415,10 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string; hdSrc?: string }[] 
                   transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
                 }}
               >
-                <video
+                <LazySliderVideo
                   ref={el => { videoRefs.current[i] = el; }}
                   src={video.src}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload={isMobile ? "none" : "metadata"}
-                  className="w-full h-full object-cover pointer-events-none"
+                  isMobile={isMobile}
                 />
                 {/* Gradient overlay for depth */}
                 <div
