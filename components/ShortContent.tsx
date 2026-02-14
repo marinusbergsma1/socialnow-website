@@ -64,7 +64,7 @@ const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: num
 });
 
 // ─── Infinite Loop Video Slider ───────────────────────────────────────────
-const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }) => {
+const InfiniteVideoSlider: React.FC<{ videos: { src: string; hdSrc?: string }[] }> = ({ videos }) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>(0);
   const positionRef = useRef(0);
@@ -79,6 +79,9 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [unmutedIndex, setUnmutedIndex] = useState<number | null>(null);
   const dragDistRef = useRef(0);
+  // Track which videos have been upgraded to HD
+  const hdLoadedRef = useRef<Set<number>>(new Set());
+  const hdLoadingRef = useRef<Set<number>>(new Set());
 
   // Use refs for screen dimensions to avoid re-renders that kill video playback
   const isMobileRef = useRef(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
@@ -114,6 +117,50 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   const totalSetWidth = totalItemWidth * setLength;
 
   const autoSpeed = isMobile ? 0.5 : 0.6;
+
+  // Upgrade a video to HD when the user interacts with it
+  const upgradeToHD = useCallback((idx: number) => {
+    const originalIdx = idx % videos.length;
+    const video = videos[originalIdx];
+    if (!video.hdSrc || hdLoadedRef.current.has(originalIdx) || hdLoadingRef.current.has(originalIdx)) return;
+
+    hdLoadingRef.current.add(originalIdx);
+
+    // Preload HD video in background
+    const preloader = document.createElement('video');
+    preloader.preload = 'auto';
+    preloader.src = video.hdSrc;
+
+    const onCanPlay = () => {
+      hdLoadedRef.current.add(originalIdx);
+      hdLoadingRef.current.delete(originalIdx);
+      // Swap all duplicates of this video to HD
+      videoRefs.current.forEach((vid, i) => {
+        if (vid && (i % videos.length) === originalIdx) {
+          const currentTime = vid.currentTime;
+          const wasMuted = vid.muted;
+          const wasVolume = vid.volume;
+          vid.src = video.hdSrc!;
+          vid.currentTime = currentTime;
+          vid.muted = wasMuted;
+          vid.volume = wasVolume;
+          vid.play().catch(() => {});
+        }
+      });
+      preloader.removeEventListener('canplaythrough', onCanPlay);
+      preloader.remove();
+    };
+
+    preloader.addEventListener('canplaythrough', onCanPlay, { once: true });
+    // Timeout: don't wait forever for HD
+    setTimeout(() => {
+      if (!hdLoadedRef.current.has(originalIdx)) {
+        hdLoadingRef.current.delete(originalIdx);
+        preloader.removeEventListener('canplaythrough', onCanPlay);
+        preloader.remove();
+      }
+    }, 15000);
+  }, [videos]);
 
   // Refs for animation values to prevent rAF loop restarts (= frame-skip = stutter)
   const totalSetWidthRef = useRef(totalSetWidth);
@@ -222,6 +269,9 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     const vid = videoRefs.current[idx];
     if (!vid) return;
 
+    // Start loading HD version when user taps
+    upgradeToHD(idx);
+
     if (unmutedIndex === idx) {
       // Already unmuted → mute it
       vid.muted = true;
@@ -248,7 +298,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
       globalUnmuteListener = () => setUnmutedIndex(null);
       setUnmutedIndex(idx);
     }
-  }, [unmutedIndex]);
+  }, [unmutedIndex, upgradeToHD]);
 
   // Desktop hover handlers — pause slider + unmute audio on hover
   const handleMouseEnter = (idx: number) => {
@@ -256,6 +306,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     isPaused.current = true;
     velocityRef.current = 0;
     setHoveredIndex(idx);
+    upgradeToHD(idx);
 
     // Unmute on hover
     const vid = videoRefs.current[idx];
@@ -372,12 +423,12 @@ const ShortContent: React.FC = () => {
   }, []);
 
   const allVideos = [
-    { src: "https://storage.googleapis.com/video-slider/HD/freaky_2_years.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/HD/newyear_supperclub_countdown_1day_v1%20(1080p).mp4" },
-    { src: "https://storage.googleapis.com/video-slider/VIRAL_17-02_PROMO-VID.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/HD/kleine_john_%26_chavante_viral_v1%20(1080p).mp4" },
-    { src: "https://storage.googleapis.com/video-slider/HD/Bakboord%20x%20Supperclub%20Cruise%20promotievideo.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/HD/jobdex_vid_oranjebloesem_personeel_v1%20(1080p).mp4" },
+    { src: "https://storage.googleapis.com/video-slider/CHIN%20CHIN%20CLUB%20FREAKY.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/freaky_2_years.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/newyear_supperclub_countdown_1day.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/newyear_supperclub_countdown_1day_v1%20(1080p).mp4" },
+    { src: "https://storage.googleapis.com/video-slider/VIRAL_17-02_PROMO-VID.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/VIRAL_17-02_PROMO-VID.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/VIRAL%20-%20kleine_john_%26_chavante_viral.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/kleine_john_%26_chavante_viral_v1%20(1080p).mp4" },
+    { src: "https://storage.googleapis.com/video-slider/Bakboord%20x%20Supperclub%20Cruise%20promotievideo.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/Bakboord%20x%20Supperclub%20Cruise%20promotievideo.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/jobdex_vid_oranjebloesem_personeel.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/jobdex_vid_oranjebloesem_personeel_v1%20(1080p).mp4" },
     { src: "https://storage.googleapis.com/video-slider/RAVEG_HYPERPOWER_VID_EN_2_STORY.mp4" },
   ];
 
