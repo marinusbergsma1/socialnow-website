@@ -38,7 +38,7 @@ const GridBackground: React.FC<GridBackgroundProps> = ({ hide = false, startAnim
                 entranceAnimation={true}
                 glowEnabled={true}
                 largeParticles={true}
-                scrollReactive={true}
+                scrollReactive={false}
               />
             </div>
           )}

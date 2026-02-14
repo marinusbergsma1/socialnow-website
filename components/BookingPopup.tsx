@@ -44,7 +44,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
     <div role="dialog" aria-modal="true" aria-label="Contact opnemen" className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-4">
       <div className={`absolute inset-0 bg-black/95 backdrop-blur-3xl transition-opacity duration-400 ${isClosing ? 'opacity-0' : 'opacity-100'}`} onClick={handleClose}></div>
 
-      <div data-lenis-prevent className={`relative z-10 w-full h-full md:h-auto md:max-w-5xl bg-transparent flex flex-col md:flex-row shadow-[0_40px_120px_rgba(0,0,0,1)] overflow-y-auto md:overflow-visible custom-scrollbar transition-all duration-400 ${isClosing ? 'opacity-0 translate-y-8 scale-95' : 'opacity-100 translate-y-0 scale-100 animate-[fadeInUp_0.5s_cubic-bezier(0.16,1,0.3,1)]'}`}>
+      <div className={`relative z-10 w-full h-full md:h-auto md:max-w-5xl bg-transparent flex flex-col md:flex-row shadow-[0_40px_120px_rgba(0,0,0,1)] overflow-y-auto md:overflow-visible custom-scrollbar transition-all duration-400 ${isClosing ? 'opacity-0 translate-y-8 scale-95' : 'opacity-100 translate-y-0 scale-100 animate-[fadeInUp_0.5s_cubic-bezier(0.16,1,0.3,1)]'}`}>
 
         {/* Close Button */}
         <button

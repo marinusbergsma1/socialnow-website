@@ -162,7 +162,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         </div>
 
         {/* Main Content Area */}
-        <div ref={scrollRef} data-lenis-prevent className="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar relative z-10">
+        <div ref={scrollRef} className="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar relative z-10">
           <div className="flex flex-col lg:flex-row min-h-full">
             
             {/* Left Column: Fixed Content on Desktop */}

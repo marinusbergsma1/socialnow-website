@@ -1,14 +1,13 @@
 
-import React, { useState, useLayoutEffect, useEffect, useRef, lazy, Suspense } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Clients from './components/Clients';
 import CertificationBadges from './components/CertificationBadges';
 import ErrorBoundary from './components/ErrorBoundary';
 import Loader from './components/Loader';
-import GridBackground from './components/GridBackground';
+const GridBackground = lazyRetry(() => import('./components/GridBackground'));
 import NotFound from './components/NotFound';
 import { useSEO } from './hooks/useSEO';
 
@@ -131,8 +130,6 @@ const App: React.FC = () => {
   const [isTeamOpen, setIsTeamOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
 
-  const lenisRef = useRef<Lenis | null>(null);
-
   const location = useLocation();
   const isProjectPage = location.pathname.startsWith('/project/');
   const isProjectsPage = location.pathname === '/projecten';
@@ -141,57 +138,10 @@ const App: React.FC = () => {
   const isPricingPage = location.pathname === '/prijzen';
   const isSubPage = isProjectPage || isProjectsPage || isServicesPage || isPrivacyPage || isPricingPage;
 
-  // Lenis smooth scroll
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 2,
-    });
-    lenisRef.current = lenis;
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-      lenisRef.current = null;
-    };
-  }, []);
-
-  // Stop Lenis during loader & modals, resume when done
-  useEffect(() => {
-    const lenis = lenisRef.current;
-    if (!lenis) return;
-    const anyOpen = loading || isBookingOpen || isServicesOpen || isTeamOpen || isContactOpen;
-    if (anyOpen) {
-      lenis.stop();
-    } else {
-      lenis.start();
-    }
-  }, [loading, isBookingOpen, isServicesOpen, isTeamOpen, isContactOpen]);
-
   // Scroll to top on route change
   useEffect(() => {
-    lenisRef.current?.scrollTo(0, { immediate: true });
+    window.scrollTo(0, 0);
   }, [location.pathname]);
-
-  useLayoutEffect(() => {
-    let ticking = false;
-    const handleScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        document.documentElement.style.setProperty('--scroll-y', window.scrollY.toString());
-        ticking = false;
-      });
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     if (loading) return;
@@ -220,7 +170,11 @@ const App: React.FC = () => {
 
       {!isSubPage && loading && <Loader onComplete={() => setLoading(false)} />}
 
-      {!isSubPage && <GridBackground hide={anyModalOpen} startAnimation={!loading} />}
+      {!isSubPage && (
+        <Suspense fallback={null}>
+          <GridBackground hide={anyModalOpen} startAnimation={!loading} />
+        </Suspense>
+      )}
 
       {!loading && <Navbar onOpenBooking={() => setIsBookingOpen(true)} onOpenContact={() => setIsContactOpen(true)} />}
 

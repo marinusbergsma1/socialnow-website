@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { Globe, ExternalLink, ChevronLeft, ChevronRight, Maximize2, ChevronDown } from 'lucide-react';
+import { Globe, ExternalLink, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import { webShowcaseProjects } from '../data/projects';
 
 // Detect if we're inside an iframe (to prevent recursive loading)
@@ -12,11 +12,9 @@ const WebShowcase: React.FC = () => {
     webShowcaseProjects.map(() => false)
   );
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isSticky, setIsSticky] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const scaleWrapperRef = useRef<HTMLDivElement>(null);
   const thumbTrackRef = useRef<HTMLDivElement>(null);
 
   const activeProject = webShowcaseProjects[activeIndex];
@@ -117,50 +115,7 @@ const WebShowcase: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isFullscreen, goNext, goPrev]);
 
-  // Scroll-driven grow animation (desktop only) — uses CSS vars to avoid re-renders
-  useEffect(() => {
-    if (!isDesktop) {
-      scaleWrapperRef.current?.style.setProperty('--showcase-scale', '1');
-      setIsSticky(false);
-      return;
-    }
-
-    let ticking = false;
-    const handleScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        if (!sectionRef.current) { ticking = false; return; }
-        const rect = sectionRef.current.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const enterPoint = windowHeight * 0.8;
-        const fullPoint = windowHeight * 0.15;
-
-        let newScale: number;
-        let sticky: boolean;
-        if (rect.top > enterPoint) {
-          newScale = 0.55;
-          sticky = false;
-        } else if (rect.top < fullPoint) {
-          newScale = 1;
-          sticky = true;
-        } else {
-          const progress = 1 - (rect.top - fullPoint) / (enterPoint - fullPoint);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          newScale = 0.55 + eased * 0.45;
-          sticky = false;
-        }
-
-        scaleWrapperRef.current?.style.setProperty('--showcase-scale', String(newScale));
-        setIsSticky(sticky);
-        ticking = false;
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isDesktop]);
+  // No scroll-driven scale animation — showcase renders at full size
 
   // Auto-center active thumbnail
   useEffect(() => {
@@ -311,9 +266,8 @@ const WebShowcase: React.FC = () => {
           </div>
         </div>
 
-        {/* Sticky showcase container (desktop only) */}
-        <div className={`${isDesktop ? 'lg:sticky lg:top-0' : ''} z-20`}
-          style={{ minHeight: isDesktop ? '100vh' : 'auto' }}>
+        {/* Showcase container */}
+        <div className="z-20">
           <div className="lg:h-screen flex flex-col items-center justify-center px-2 md:px-8 relative py-2 lg:py-0">
             {/* Green scanline overlay — visible during clip-path reveal */}
             <div
@@ -326,11 +280,8 @@ const WebShowcase: React.FC = () => {
               }}
             />
 
-            {/* Grow-animated wrapper */}
             <div
-              ref={scaleWrapperRef}
-              className="w-full max-w-[1400px] transition-transform duration-100 ease-out will-change-transform"
-              style={{ transform: `scale(var(--showcase-scale, 0.6))` }}
+              className="w-full max-w-[1400px]"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
@@ -447,16 +398,9 @@ const WebShowcase: React.FC = () => {
               </div>
             </div>
 
-            {/* Scroll indicator */}
-            <div className={`absolute bottom-6 left-1/2 -translate-x-1/2 transition-opacity duration-500 ${isSticky ? 'opacity-40' : 'opacity-0'}`}>
-              <div className="flex flex-col items-center gap-1 animate-bounce">
-                <ChevronDown size={16} className="text-white/30" strokeWidth={1.5} />
-              </div>
-            </div>
           </div>
         </div>
 
-        <div className="hidden lg:block" style={{ height: '25vh' }} />
       </section>
 
       {/* Fullscreen overlay */}
