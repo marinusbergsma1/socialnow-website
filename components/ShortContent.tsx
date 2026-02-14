@@ -462,8 +462,9 @@ const ShortContent: React.FC = () => {
     { src: "https://storage.googleapis.com/video-slider/RAVEG_HYPERPOWER_VID_EN_2_STORY.mp4" },
   ];
 
-  // Mobile: 4 videos to reduce DOM nodes and network requests. Desktop: all videos.
-  const videos = isMobileMain ? allVideos.slice(0, 4) : allVideos;
+  // Mobile: 3 lightest videos (~5 MB) for fast load. Desktop: all videos.
+  const mobileVideos = [allVideos[0], allVideos[2], allVideos[3]]; // FREAKY 2MB, VIRAL 2.2MB, kleine_john 2.6MB
+  const videos = isMobileMain ? mobileVideos : allVideos;
 
   // Stats observer
   useEffect(() => {
