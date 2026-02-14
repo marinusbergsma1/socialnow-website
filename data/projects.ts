@@ -182,7 +182,7 @@ export const allProjects: Project[] = [
     image: "https://i.ibb.co/yBXWFYqx/RAVEG-Hyperpower.webp",
     align: 'left',
     gallery: [
-      "/socialnow-website/videos/raveg-dyadium.mp4",
+      "https://storage.googleapis.com/video-slider/RAVEG%20DYADIUM%20STORY.mp4",
       "https://storage.googleapis.com/video-slider/RAVEG_HYPERPOWER_VID_EN_2_STORY.mp4",
       "https://storage.googleapis.com/video-slider/RAVEG_HYPERPOWER_VID_EN_4_STORY.mp4"
     ],

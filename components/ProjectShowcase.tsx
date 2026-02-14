@@ -85,7 +85,7 @@ const LazyVideo: React.FC<{
         loop
         muted
         playsInline
-        preload="metadata"
+        preload={window.innerWidth < 768 ? "none" : "metadata"}
         className="w-full h-full object-contain"
       />
       {/* Mobile sound indicator */}
@@ -142,7 +142,7 @@ const LazyGalleryVideo: React.FC<{ src: string }> = ({ src }) => {
         loop
         muted
         playsInline
-        preload="metadata"
+        preload={window.innerWidth < 768 ? "none" : "metadata"}
         className="w-full h-full object-cover"
       />
       {/* Sound indicator */}
@@ -248,7 +248,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
           <div className="relative flex justify-center items-center overflow-hidden">
             <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
                <LazyVideo
-                 src={`${import.meta.env.BASE_URL}videos/nextgen-webdesign.mp4`}
+                 src="https://storage.googleapis.com/video-slider/FEATURED/SocialNow%20Ai%20Showcase%20-%20Part%201%20%26%202.mp4"
                  isHovered={isWebdesignHovered}
                  restartOnView={true}
                />
@@ -280,7 +280,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
           <div className="relative flex justify-center items-center overflow-hidden">
             <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
               <LazyVideo
-                src={`${import.meta.env.BASE_URL}videos/betcity-bumper.mp4`}
+                src="https://storage.googleapis.com/video-slider/FEATURED/BetCity-branded%20bumper%20ad%20-%20.mp4"
                 isHovered={isBetcityHovered}
               />
               <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 p-2 md:p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/20 transition-all duration-500 transform z-20 ${isBetcityHovered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-4'}`}>
