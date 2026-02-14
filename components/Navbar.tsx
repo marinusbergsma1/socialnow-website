@@ -35,8 +35,8 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
     const containerRect = navContainerRef.current.getBoundingClientRect();
     const elRect = el.getBoundingClientRect();
     setPillStyle({
-      left: elRect.left - containerRect.left - 10,
-      width: elRect.width + 20,
+      left: elRect.left - containerRect.left,
+      width: elRect.width,
       opacity: 1,
     });
   }, []);
@@ -130,20 +130,21 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
               width={224}
               height={40}
               className="w-full h-auto object-contain"
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
             />
           </a>
 
           <div className="hidden lg:flex items-center gap-10">
             <div ref={navContainerRef} className="relative flex items-center gap-10 mr-4" onMouseLeave={handleNavMouseLeave}>
-              {/* Animated pill indicator */}
+              {/* Animated underline indicator */}
               <div
                 className="nav-pill"
                 style={{
                   left: `${pillStyle.left}px`,
                   width: `${pillStyle.width}px`,
-                  height: '32px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
+                  height: '2px',
+                  bottom: '-6px',
+                  top: 'auto',
                   opacity: pillStyle.opacity,
                 }}
               />
@@ -156,10 +157,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
                   onMouseEnter={() => handleNavMouseEnter(idx)}
                   className="relative group text-[11px] font-black uppercase text-gray-400 hover:text-white transition-all tracking-[0.2em] z-10"
                 >
-                  <span className="relative inline-block">
-                    {link.name}
-                    <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-[#00A3E0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left shadow-[0_0_10px_#00A3E0]"></span>
-                  </span>
+                  {link.name}
                 </a>
               ))}
             </div>

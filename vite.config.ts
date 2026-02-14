@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/socialnow-website/',
+  base: '/',
   server: {
     port: 3000,
     host: '0.0.0.0',
@@ -20,6 +20,7 @@ export default defineConfig({
         manualChunks: {
           'vendor': ['react', 'react-dom', 'react-router-dom'],
           'ui': ['lucide-react'],
+          // Recharts is ~180KB gzipped — isolate so it only loads on pages that need it
           'charts': ['recharts'],
         }
       }
@@ -27,6 +28,7 @@ export default defineConfig({
     sourcemap: false,
     target: 'es2020',
     minify: 'esbuild',
+    cssMinify: true,
     // Warn on large chunks
     chunkSizeWarningLimit: 200,
   }

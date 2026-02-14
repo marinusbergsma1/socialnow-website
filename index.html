@@ -38,15 +38,20 @@
     <meta name="theme-color" content="#000000" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <link rel="icon" type="image/png" href="https://i.ibb.co/84mFCJsq/Social-Now-Favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
 
     <!-- Resource hints — preconnect for critical origins, dns-prefetch as fallback -->
-    <link rel="preconnect" href="https://i.ibb.co" />
+    <link rel="preconnect" href="https://i.ibb.co" crossorigin />
     <link rel="dns-prefetch" href="https://i.ibb.co" />
+    <link rel="preconnect" href="https://storage.googleapis.com" crossorigin />
     <link rel="dns-prefetch" href="https://storage.googleapis.com" />
-    <!-- Preload critical fonts and hero assets -->
+    <!-- Preload critical fonts (only 400 + 700 for initial render) -->
     <link rel="preload" href="/fonts/inter-latin-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Preload above-fold hero reviewer avatar -->
+    <link rel="preload" href="https://i.ibb.co/mFGckZkS/Niels-Groen.webp" as="image" type="image/webp" fetchpriority="low" />
+    <!-- Hint browser to prefetch below-fold images early on fast connections -->
+    <link rel="preconnect" href="https://i.ibb.co" />
     <!-- GitHub Pages SPA redirect handler -->
     <script>
       (function(l) {
@@ -75,7 +80,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <script type="module" src="/index.tsx" fetchpriority="high"></script>
 
     <!-- JSON-LD Structured Data — placed at end of body to not block parsing -->
     <script type="application/ld+json">

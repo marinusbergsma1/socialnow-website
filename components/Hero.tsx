@@ -43,23 +43,32 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
   const [activeReviewIndex, setActiveReviewIndex] = useState(0);
 
   useEffect(() => {
-    if (startAnimation) {
-      const startTimeout = setTimeout(() => {
-        setShowCycle(true);
-        const interval = setInterval(() => {
-          setShowCycleQuote(false);
-          setTimeout(() => {
-            setWordIndex(prev => (prev + 1) % words.length);
-            setTimeout(() => setShowCycleQuote(true), 300);
-          }, 300);
-        }, 2000);
+    if (!startAnimation) return;
 
-        setTimeout(() => setShowCycleQuote(true), 300);
+    let intervalId: ReturnType<typeof setInterval>;
+    let quoteTimers: ReturnType<typeof setTimeout>[] = [];
 
-        return () => clearInterval(interval);
-      }, 600);
-      return () => clearTimeout(startTimeout);
-    }
+    const startTimeout = setTimeout(() => {
+      setShowCycle(true);
+      intervalId = setInterval(() => {
+        setShowCycleQuote(false);
+        const t1 = setTimeout(() => {
+          setWordIndex(prev => (prev + 1) % words.length);
+          const t2 = setTimeout(() => setShowCycleQuote(true), 300);
+          quoteTimers.push(t2);
+        }, 300);
+        quoteTimers.push(t1);
+      }, 2000);
+
+      const initQuote = setTimeout(() => setShowCycleQuote(true), 300);
+      quoteTimers.push(initQuote);
+    }, 600);
+
+    return () => {
+      clearTimeout(startTimeout);
+      clearInterval(intervalId);
+      quoteTimers.forEach(clearTimeout);
+    };
   }, [startAnimation]);
 
   useEffect(() => {
@@ -88,7 +97,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
           <div className={`transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`}>
              <div className="inline-flex items-center gap-3 bg-white/5 md:backdrop-blur-2xl border border-white/10 px-6 py-2.5 rounded-full mb-8 md:mb-10 hover:border-[#00A3E0]/50 transition-colors">
                <div className="relative flex h-2.5 w-2.5">
-                 <span className="hidden md:inline-flex animate-ping absolute h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
+                 <span className="hidden md:inline-flex animate-ping absolute h-full w-full rounded-full bg-[#25D366] opacity-75" aria-hidden="true"></span>
                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#25D366]"></span>
                </div>
                <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] text-white">SLECHTS 3 PLEKKEN VRIJ IN Q1 2026</span>
@@ -98,16 +107,16 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
           <div className="w-full max-w-[1400px]">
               <h1 className="font-black uppercase tracking-tighter text-white leading-[0.85]">
                 {/* THE NEXT */}
-                <div className="text-[2rem] sm:text-5xl md:text-6xl lg:text-[6.5rem] xl:text-[7.5rem] flex items-center justify-center gap-2 md:gap-4">
+                <div className="text-[2.6rem] sm:text-5xl md:text-6xl lg:text-[6.5rem] xl:text-[7.5rem] flex items-center justify-center gap-2 md:gap-4">
                   <span className="text-[#F7E644]">"</span>
                   <ScrollTypewriter text='THE NEXT' delay={100} start={startAnimation} withHighlight={false} />
                 </div>
                 {/* GENERATION */}
-                <div className="text-[2.5rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] xl:text-[9.5rem] flex justify-center">
+                <div className="text-[3.2rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] xl:text-[9.5rem] flex justify-center">
                   <ScrollTypewriter text="GENERATION" delay={400} start={startAnimation} withHighlight={false} />
                 </div>
                 {/* OF + cycling word */}
-                <div className="text-[2rem] sm:text-5xl md:text-6xl lg:text-[6.5rem] xl:text-[7.5rem]">
+                <div className="text-[2.6rem] sm:text-5xl md:text-6xl lg:text-[6.5rem] xl:text-[7.5rem]">
                   <div className="flex items-center justify-center">
                     <ScrollTypewriter text="OF" delay={800} start={startAnimation} withHighlight={false} />
                     <div className="relative inline-flex items-center h-[1.1em] ml-2 md:ml-10">
@@ -145,7 +154,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                   <div className="flex -space-x-3 shrink-0">
                     {reviewsData.map((review, i) => (
                       <div key={i} className={`w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-black overflow-hidden transition-all duration-700 ${activeReviewIndex === i ? 'scale-110 z-10 border-[#00A3E0] shadow-[0_0_20px_rgba(0,163,224,0.4)]' : 'opacity-40 grayscale scale-90'}`}>
-                        <img src={review.image} alt={review.name} width={48} height={48} className="w-full h-full object-cover" />
+                        <img src={review.image} alt={review.name} width={48} height={48} className="w-full h-full object-cover" loading={i === 0 ? "eager" : "lazy"} decoding="async" />
                       </div>
                     ))}
                   </div>

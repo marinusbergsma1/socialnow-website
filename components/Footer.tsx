@@ -202,10 +202,21 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           </div>
         </div>
 
+        {/* ─── GECERTIFICEERD & ERKEND ─── */}
+        <div className="border-t border-white/[0.06] py-10 md:py-14">
+          <p className="text-center text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em] text-white/15 mb-6 md:mb-8">
+            Gecertificeerd & Erkend
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-30 hover:opacity-50 transition-opacity duration-500">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Partner" className="h-6 md:h-7 brightness-0 invert" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Meta_Platforms_Inc._logo_%28cropped%29.svg" alt="Meta Business Partner" className="h-6 md:h-7 brightness-0 invert" />
+          </div>
+        </div>
+
         {/* ─── BOTTOM BAR ─── */}
         <div className="border-t border-white/[0.06] py-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6">
-            <a href="#" className="block w-28 md:w-32 opacity-40 hover:opacity-70 transition-opacity">
+            <a href="#" className="block w-28 md:w-32 opacity-80 hover:opacity-100 transition-opacity">
               <img
                 src="https://i.ibb.co/RkXjxKLb/Social-Now-Logo-Breed-Wit.webp"
                 alt="SocialNow Logo"

@@ -31,12 +31,20 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
             <p className="text-white/50 text-sm mb-6">
               Er is een onverwachte fout opgetreden. Probeer het opnieuw.
             </p>
-            <button
-              onClick={() => this.setState({ hasError: false })}
-              className="px-6 py-3 bg-[#25D366] text-black text-sm font-semibold rounded-full hover:bg-[#20bd5a] transition-colors"
-            >
-              Opnieuw proberen
-            </button>
+            <div className="flex gap-3 justify-center">
+              <button
+                onClick={() => this.setState({ hasError: false })}
+                className="px-6 py-3 bg-[#25D366] text-black text-sm font-semibold rounded-full hover:bg-[#20bd5a] transition-colors"
+              >
+                Opnieuw proberen
+              </button>
+              <button
+                onClick={() => window.location.reload()}
+                className="px-6 py-3 bg-white/10 text-white text-sm font-semibold rounded-full hover:bg-white/20 transition-colors border border-white/20"
+              >
+                Pagina herladen
+              </button>
+            </div>
           </div>
         </div>
       );

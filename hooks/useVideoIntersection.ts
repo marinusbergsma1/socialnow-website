@@ -53,11 +53,14 @@ export function useVideoIntersection(
       if (playPromise !== undefined) {
         playPromise
           .then(() => setHasLoadedOnce(true))
-          .catch(() => {
+          .catch((err) => {
+            if (import.meta.env.DEV) console.debug('[SocialNow] Video autoplay blocked, trying muted:', err);
             video.muted = true;
             video.play()
               .then(() => setHasLoadedOnce(true))
-              .catch(() => {});
+              .catch((muteErr) => {
+                if (import.meta.env.DEV) console.debug('[SocialNow] Muted autoplay also failed:', muteErr);
+              });
           });
       }
     } else if (!isVisible && hasLoadedOnce) {

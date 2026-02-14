@@ -36,8 +36,13 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
     const body = encodeURIComponent(
       `Naam: ${formData.name}\nE-mail: ${formData.email}\nBedrijf: ${formData.company || '-'}\nBudget: ${formData.budget || '-'}\n\nBericht:\n${formData.message}`
     );
-    window.open(`mailto:info@socialnow.nl?subject=${subject}&body=${body}`, '_self');
-    setSubmitted(true);
+    try {
+      window.open(`mailto:info@socialnow.nl?subject=${subject}&body=${body}`, '_self');
+      setSubmitted(true);
+    } catch {
+      window.location.href = `mailto:info@socialnow.nl?subject=${subject}&body=${body}`;
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -58,7 +63,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
         {/* Profile Image Float - Refined for Desktop */}
         <div className="relative md:absolute -mb-20 md:mb-0 mt-16 md:mt-0 md:-top-16 md:-left-16 z-[60] w-32 h-32 md:w-52 md:h-52 self-center md:self-auto shrink-0">
              <div className="w-full h-full rounded-full overflow-hidden border-[6px] border-[#0a0a0a] shadow-[0_25px_60px_rgba(0,0,0,0.8)] bg-[#111]">
-                  <img src="https://i.ibb.co/Z65DDRMG/Marinus-Bergsma-V2.webp" alt="Marinus Bergsma" className="w-full h-full object-cover" loading="eager" />
+                  <img src="https://i.ibb.co/Z65DDRMG/Marinus-Bergsma-V2.webp" alt="Marinus Bergsma" className="w-full h-full object-cover" loading="eager" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
              </div>
              <div className="absolute bottom-2 right-2 md:bottom-6 md:right-6 w-7 h-7 md:w-10 md:h-10 bg-[#25D366] rounded-full border-[5px] border-[#0a0a0a] shadow-xl"></div>
         </div>
@@ -96,7 +101,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
 
              <div className="mb-10 text-center md:text-left">
                  <h2 className="text-3xl md:text-5xl font-black uppercase text-white flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-4 md:gap-6 leading-none whitespace-nowrap tracking-tighter">
-                    LET'S GET <img src="https://i.ibb.co/RTsSXFm8/Logo-Social-Now-Lengte.webp" alt="SocialNow" className="h-10 md:h-14 object-contain inline-block" />
+                    LET'S GET <img src="https://i.ibb.co/RTsSXFm8/Logo-Social-Now-Lengte.webp" alt="SocialNow" className="h-10 md:h-14 object-contain inline-block" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                  </h2>
              </div>
 

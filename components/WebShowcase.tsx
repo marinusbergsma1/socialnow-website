@@ -65,7 +65,7 @@ const WebShowcase: React.FC = () => {
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 1024);
     check();
-    window.addEventListener('resize', check);
+    window.addEventListener('resize', check, { passive: true });
     return () => window.removeEventListener('resize', check);
   }, []);
 
@@ -228,13 +228,17 @@ const WebShowcase: React.FC = () => {
     );
   };
 
-  const glassStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    backdropFilter: 'blur(40px) saturate(180%)',
-    WebkitBackdropFilter: 'blur(40px) saturate(180%)',
-    border: '1px solid rgba(255, 255, 255, 0.08)',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
-  };
+  const glassStyle = isDesktop
+    ? {
+        background: 'rgba(255, 255, 255, 0.03)',
+        backdropFilter: 'blur(40px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+      }
+    : {
+        background: 'rgba(10, 10, 10, 0.95)',
+        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)',
+      };
 
   return (
     <>
@@ -312,12 +316,18 @@ const WebShowcase: React.FC = () => {
                 <div className="relative flex-1 min-w-0">
                   <a href={activeProject.url} target="_blank" rel="noopener noreferrer" className="block">
                     <div className="rounded-xl overflow-hidden relative" style={{ aspectRatio: '16 / 9', ...glassStyle }}>
-                      <div className="absolute top-0 left-[10%] right-[10%] h-[1px] pointer-events-none z-40" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)' }} />
-                      {webShowcaseProjects.map((project, idx) => (
-                        <div key={`smob-${project.id}`} className={`absolute inset-0 transition-opacity duration-500 ${idx === activeIndex && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
-                          <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top" loading={idx < 2 ? 'eager' : 'lazy'} />
-                        </div>
-                      ))}
+                        {webShowcaseProjects.map((project, idx) => {
+                        // Only render active + adjacent slides on mobile to reduce DOM and image loads
+                        const isNearActive = Math.abs(idx - activeIndex) <= 1 ||
+                          (activeIndex === 0 && idx === webShowcaseProjects.length - 1) ||
+                          (activeIndex === webShowcaseProjects.length - 1 && idx === 0);
+                        if (!isNearActive) return null;
+                        return (
+                          <div key={`smob-${project.id}`} className={`absolute inset-0 transition-opacity duration-500 ${idx === activeIndex && !isTransitioning ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
+                            <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top" loading={idx === activeIndex ? 'eager' : 'lazy'} decoding="async" />
+                          </div>
+                        );
+                      })}
                       <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/30 to-transparent pointer-events-none z-30 rounded-b-xl" />
                     </div>
                   </a>
@@ -349,7 +359,6 @@ const WebShowcase: React.FC = () => {
                 {/* Main center iframe */}
                 <div className="relative flex-1 min-w-0">
                   <div className="rounded-2xl overflow-hidden relative" style={{ aspectRatio: '16 / 9', ...glassStyle }}>
-                    <div className="absolute top-0 left-[10%] right-[10%] h-[1px] pointer-events-none z-40" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)' }} />
                     {webShowcaseProjects.map((project, idx) => renderDesktopIframe(project, idx))}
                     <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/30 to-transparent pointer-events-none z-30 rounded-b-2xl" />
                   </div>

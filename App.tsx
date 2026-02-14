@@ -4,7 +4,6 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Clients from './components/Clients';
-import CertificationBadges from './components/CertificationBadges';
 import ErrorBoundary from './components/ErrorBoundary';
 import Loader from './components/Loader';
 const GridBackground = lazyRetry(() => import('./components/GridBackground'));
@@ -17,7 +16,12 @@ function lazyRetry(importFn: () => Promise<{ default: React.ComponentType<any> }
     importFn().catch((err) => {
       console.warn('[SocialNow] Chunk load failed, retrying...', err);
       return new Promise<{ default: React.ComponentType<any> }>((resolve, reject) => {
-        setTimeout(() => importFn().then(resolve).catch(reject), 1000);
+        setTimeout(() => {
+          importFn().then(resolve).catch((retryErr) => {
+            console.error('[SocialNow] Chunk load failed after retry:', retryErr);
+            reject(retryErr);
+          });
+        }, 1000);
       });
     })
   );
@@ -78,10 +82,6 @@ const HomePage: React.FC<{
         <Clients />
       </div>
 
-      <div className="scroll-reveal">
-        <CertificationBadges />
-      </div>
-
       <Suspense fallback={null}>
         <div className="scroll-reveal">
           <WebShowcase />
@@ -123,8 +123,11 @@ const HomePage: React.FC<{
   );
 };
 
+// Skip loader on returning visits within the same session
+const hasSeenLoader = typeof sessionStorage !== 'undefined' && sessionStorage.getItem('sn_loaded') === '1';
+
 const App: React.FC = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!hasSeenLoader);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isTeamOpen, setIsTeamOpen] = useState(false);
@@ -145,13 +148,39 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (loading) return;
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) entry.target.classList.add('is-visible');
       });
     }, { threshold: 0.05 });
-    document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+
+    // Observe existing + any newly added scroll-reveal elements
+    const observeAll = () => {
+      document.querySelectorAll('.scroll-reveal:not(.is-visible)').forEach((el) => {
+        observer.observe(el);
+      });
+    };
+    observeAll();
+
+    // Watch for NEW scroll-reveal elements from lazy-loaded components
+    // Throttle on mobile to prevent excessive callback firing during lazy component mounts
+    let mutationTimer: ReturnType<typeof setTimeout> | null = null;
+    const throttledObserveAll = () => {
+      if (mutationTimer) return;
+      mutationTimer = setTimeout(() => {
+        observeAll();
+        mutationTimer = null;
+      }, 150);
+    };
+    const mutationObserver = new MutationObserver(throttledObserveAll);
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      mutationObserver.disconnect();
+      if (mutationTimer) clearTimeout(mutationTimer);
+    };
   }, [loading, location.pathname]);
 
   // Skip loader on sub-pages (direct URL access)
@@ -168,7 +197,7 @@ const App: React.FC = () => {
     <div className="bg-black text-white min-h-screen font-sans selection:bg-[#25D366] selection:text-black grain-overlay">
       <a href="#main-content" className="skip-to-content">Ga naar inhoud</a>
 
-      {!isSubPage && loading && <Loader onComplete={() => setLoading(false)} />}
+      {!isSubPage && loading && <Loader onComplete={() => { sessionStorage.setItem('sn_loaded', '1'); setLoading(false); }} />}
 
       {!isSubPage && (
         <Suspense fallback={null}>

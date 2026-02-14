@@ -1,9 +1,38 @@
 import React, { useRef, useState, useEffect, memo, useCallback, useMemo } from 'react';
-import { Activity, Database, Heart, Volume2, VolumeX } from 'lucide-react';
+import { Activity, Database, Heart } from 'lucide-react';
 
 // Global audio context: only one video can be unmuted at a time across the entire page
 let globalUnmutedVideo: HTMLVideoElement | null = null;
 let globalUnmuteListener: (() => void) | null = null;
+
+// Audio unlock: browsers require a user gesture (click/tap) before allowing programmatic unmute.
+// Once unlocked, hover-based unmuting works for the rest of the session.
+let audioUnlocked = false;
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+  // Create + resume an AudioContext to signal to the browser that audio is user-initiated
+  try {
+    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    if (ctx.state === 'suspended') ctx.resume();
+    // Also play+pause a silent video to warm up the media pipeline
+    const silentVideo = document.createElement('video');
+    silentVideo.muted = false;
+    silentVideo.volume = 0.01;
+    silentVideo.src = 'data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAA';
+    silentVideo.play().catch(() => {});
+    setTimeout(() => { silentVideo.pause(); silentVideo.remove(); }, 100);
+  } catch (_) { /* ignore */ }
+  document.removeEventListener('click', unlockAudio, true);
+  document.removeEventListener('touchstart', unlockAudio, true);
+  document.removeEventListener('pointerdown', unlockAudio, true);
+}
+// Register unlock listeners globally (once)
+if (typeof document !== 'undefined') {
+  document.addEventListener('click', unlockAudio, true);
+  document.addEventListener('touchstart', unlockAudio, true);
+  document.addEventListener('pointerdown', unlockAudio, true);
+}
 
 export function muteGlobalVideo() {
   if (globalUnmutedVideo) {
@@ -67,7 +96,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
       }
     };
     onResize();
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
@@ -92,34 +121,34 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   useEffect(() => { totalSetWidthRef.current = totalSetWidth; }, [totalSetWidth]);
   useEffect(() => { autoSpeedRef.current = autoSpeed; }, [autoSpeed]);
 
-  // Memoize allVideos to prevent React from recreating video DOM elements on re-render
-  const allVideos = useMemo(() => [...videos, ...videos, ...videos], [videos]);
+  // Duplicate videos for seamless infinite loop (2x instead of 3x to reduce DOM elements)
+  const allVideos = useMemo(() => [...videos, ...videos], [videos]);
 
-  // Start in the middle set
+  // Start at beginning of first set
   useEffect(() => {
-    positionRef.current = totalSetWidth;
+    positionRef.current = 0;
     if (trackRef.current) {
-      trackRef.current.style.transform = `translate3d(${-positionRef.current}px, 0, 0)`;
+      trackRef.current.style.transform = `translate3d(0px, 0, 0)`;
     }
   }, [totalSetWidth]);
 
-  // Ensure all slider videos are playing — keep retrying continuously
+  // Ensure all slider videos are playing — retry with longer interval for performance
   useEffect(() => {
     let cancelled = false;
+    const retryInterval = isMobile ? 8000 : 4000;
     const playAll = () => {
       if (cancelled) return;
       videoRefs.current.forEach((vid) => {
-        // Skip the intentionally unmuted video to prevent race conditions
         if (vid && vid.paused && vid !== globalUnmutedVideo) {
           vid.muted = true;
           vid.play().catch(() => {});
         }
       });
       if (!cancelled) {
-        setTimeout(playAll, 2000);
+        setTimeout(playAll, retryInterval);
       }
     };
-    const timer = setTimeout(playAll, 500);
+    const timer = setTimeout(playAll, isMobile ? 1000 : 500);
     return () => { cancelled = true; clearTimeout(timer); };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -138,11 +167,11 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
       }
     }
 
-    // Seamless wrap
-    if (positionRef.current >= tsw * 2) {
+    // Seamless wrap (2x duplication)
+    if (positionRef.current >= tsw) {
       positionRef.current -= tsw;
     }
-    if (positionRef.current <= 0) {
+    if (positionRef.current < 0) {
       positionRef.current += tsw;
     }
 
@@ -188,7 +217,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
 
   // Tap/click to toggle sound — works on both mobile and desktop
   const handleTap = useCallback((idx: number) => {
-    if (dragDistRef.current > 10) return;
+    if (dragDistRef.current > 20) return;
 
     const vid = videoRefs.current[idx];
     if (!vid) return;
@@ -207,30 +236,51 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
       // Unmute this one and play with sound
       vid.muted = false;
       vid.volume = 0.5;
-      // Robust play: reload if stalled
-      if (vid.readyState < 3) {
-        vid.load();
-      }
-      vid.play().catch(() => {});
+      vid.play().catch(() => {
+        // If play fails, try muted first then unmute
+        vid.muted = true;
+        vid.play().then(() => {
+          vid.muted = false;
+          vid.volume = 0.5;
+        }).catch(() => {});
+      });
       globalUnmutedVideo = vid;
       globalUnmuteListener = () => setUnmutedIndex(null);
       setUnmutedIndex(idx);
     }
   }, [unmutedIndex]);
 
-  // Desktop hover handlers — only pause/resume slider animation, don't control mute
-  const handleMouseEnter = useCallback((idx: number) => {
+  // Desktop hover handlers — pause slider + unmute audio on hover
+  const handleMouseEnter = (idx: number) => {
     if (window.innerWidth < 768) return;
     isPaused.current = true;
     velocityRef.current = 0;
     setHoveredIndex(idx);
-  }, []);
 
-  const handleMouseLeave = useCallback((_idx: number) => {
+    // Unmute on hover
+    const vid = videoRefs.current[idx];
+    if (!vid) return;
+    muteGlobalVideo();
+    videoRefs.current.forEach((v) => { if (v && v !== vid) v.muted = true; });
+    vid.muted = false;
+    vid.volume = 0.3;
+    vid.play().catch(() => {});
+    globalUnmutedVideo = vid;
+    globalUnmuteListener = () => setUnmutedIndex(null);
+    setUnmutedIndex(idx);
+  };
+
+  const handleMouseLeave = (_idx: number) => {
     if (window.innerWidth < 768) return;
     isPaused.current = false;
     setHoveredIndex(null);
-  }, []);
+
+    // Mute on leave
+    videoRefs.current.forEach((v) => { if (v) v.muted = true; });
+    globalUnmutedVideo = null;
+    globalUnmuteListener = null;
+    setUnmutedIndex(null);
+  };
 
   return (
     <div
@@ -286,7 +336,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload={isMobile ? "none" : "metadata"}
                   className="w-full h-full object-cover pointer-events-none"
                 />
                 {/* Gradient overlay for depth */}
@@ -300,26 +350,6 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
                   }}
                 />
               </div>
-              {/* Sound indicator — pill with label */}
-              <div
-                className={`absolute bottom-5 right-5 flex items-center gap-1.5 rounded-full px-3 py-2 transition-all duration-300 ${
-                  isUnmuted
-                    ? 'bg-[#25D366] shadow-[0_0_20px_rgba(37,211,102,0.3)]'
-                    : 'bg-black/70 backdrop-blur-md border border-white/10'
-                }`}
-              >
-                {isUnmuted
-                  ? <Volume2 size={14} className="text-black" />
-                  : <VolumeX size={14} className="text-white/50" />
-                }
-                <span
-                  className={`text-[9px] font-bold uppercase tracking-wider ${
-                    isUnmuted ? 'text-black' : 'text-white/40'
-                  }`}
-                >
-                  {isUnmuted ? 'ON' : 'TAP'}
-                </span>
-              </div>
             </div>
           );
         })}
@@ -330,7 +360,6 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
 
 // ─── Main Component ─────────────────────────────────────────────────────
 const ShortContent: React.FC = () => {
-  const base = import.meta.env.BASE_URL;
   const [statsVisible, setStatsVisible] = useState(false);
   const statsRef = useRef<HTMLDivElement>(null);
 
@@ -338,28 +367,22 @@ const ShortContent: React.FC = () => {
   useEffect(() => {
     const check = () => setIsMobileMain(window.innerWidth < 768);
     check();
-    window.addEventListener('resize', check);
+    window.addEventListener('resize', check, { passive: true });
     return () => window.removeEventListener('resize', check);
   }, []);
 
   const allVideos = [
-    { src: `${base}videos/raveg-dyadium.mp4` },
-    { src: `${base}videos/viral-cho.mp4` },
-    { src: `${base}videos/muse-mode.mp4` },
-    { src: `${base}videos/bakboord.mp4` },
-    { src: "https://storage.googleapis.com/video-slider/CHIN%20CHIN%20CLUB%20-%20DINE%26DANCE.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/CHIN%20CHIN%20CLUB%20FREAKY.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/VIRAL%20BRYAN%20MG.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/viral_chiq-edition_v1.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/viral_pretty-girls-edition_v1.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/newyear_supperclub_countdown_1day.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/freaky_2_years.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/newyear_supperclub_countdown_1day_v1%20(1080p).mp4" },
     { src: "https://storage.googleapis.com/video-slider/VIRAL_17-02_PROMO-VID.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/WEEK%2046%20-%20Friday%20-%20FRIDAY%20FRESHNESS.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/jobdex_vid_oranjebloesem_personeel.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/kleine_john_%26_chavante_viral_v1%20(1080p).mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/Bakboord%20x%20Supperclub%20Cruise%20promotievideo.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/jobdex_vid_oranjebloesem_personeel_v1%20(1080p).mp4" },
+    { src: "https://storage.googleapis.com/video-slider/RAVEG_HYPERPOWER_VID_EN_2_STORY.mp4" },
   ];
 
-  // Mobile: 6 videos for smooth infinite loop (18 DOM nodes with 3x duplication). Desktop: all videos.
-  const videos = isMobileMain ? allVideos.slice(0, 6) : allVideos;
+  // Mobile: 4 videos to reduce DOM nodes and network requests. Desktop: all videos.
+  const videos = isMobileMain ? allVideos.slice(0, 4) : allVideos;
 
   // Stats observer
   useEffect(() => {

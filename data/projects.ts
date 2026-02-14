@@ -112,7 +112,7 @@ export const webShowcaseProjects: Project[] = [
     services: ["AI Website Development", "Full-Stack React", "3D Animation", "UX/UI Design"],
     description: "Onze eigen website — gebouwd met React, Vite, en AI-gestuurde development. 3D PixelGlobe beeldmerk, infinite video slider, live website previews en cutting-edge design.",
     image: `${import.meta.env.BASE_URL}screenshots/socialnow-hero.webp`,
-    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/socialnow-full.jpg`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/socialnow-full.webp`,
     align: 'left',
     url: "https://marinusbergsma1.github.io/socialnow-website/",
     gallery: [],

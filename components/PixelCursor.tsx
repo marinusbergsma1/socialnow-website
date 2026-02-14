@@ -21,6 +21,9 @@ const GREENS = [
   '#86EFAC',   // green-300 (lighter)
 ];
 
+// Skip entirely on touch/mobile devices — no canvas, no RAF loop, no memory
+const isPointerCoarse = typeof window !== 'undefined' && matchMedia('(pointer: coarse)').matches;
+
 const PixelCursor: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pixelsRef = useRef<Pixel[]>([]);
@@ -31,6 +34,8 @@ const PixelCursor: React.FC = () => {
   const isTouchRef = useRef(false);
 
   useEffect(() => {
+    if (isPointerCoarse) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -153,6 +158,8 @@ const PixelCursor: React.FC = () => {
       window.removeEventListener('touchstart', onTouchStart);
     };
   }, []);
+
+  if (isPointerCoarse) return null;
 
   return (
     <canvas

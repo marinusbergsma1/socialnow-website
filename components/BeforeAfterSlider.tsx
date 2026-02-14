@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { MoveHorizontal } from 'lucide-react';
 
 interface BeforeAfterSliderProps {
@@ -21,16 +21,16 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleMove = (clientX: number) => {
+  const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
     const percent = (x / rect.width) * 100;
     setSliderPosition(percent);
-  };
+  }, []);
 
-  const handleMouseDown = () => setIsDragging(true);
-  const handleTouchStart = () => setIsDragging(true);
+  const handleMouseDown = useCallback(() => setIsDragging(true), []);
+  const handleTouchStart = useCallback(() => setIsDragging(true), []);
   
   // Attach global event listeners for dragging
   useEffect(() => {
@@ -70,9 +70,9 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
     };
   }, [isDragging]);
 
-  const handleLocalClick = (e: React.MouseEvent) => {
+  const handleLocalClick = useCallback((e: React.MouseEvent) => {
      handleMove(e.clientX);
-  };
+  }, [handleMove]);
 
   return (
     <div 
@@ -83,18 +83,24 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         onClick={handleLocalClick}
     >
       {/* AFTER Image (Background - Impression) */}
-      <img 
-        src={afterImage} 
-        alt="After" 
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" 
+      <img
+        src={afterImage}
+        alt="After"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+        loading="lazy"
+        decoding="async"
+        onError={(e) => { e.currentTarget.style.opacity = '0'; }}
       />
 
       {/* BEFORE Image (Foreground - Reality - clipped) */}
-      <img 
-        src={beforeImage} 
-        alt="Before" 
+      <img
+        src={beforeImage}
+        alt="Before"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }} 
+        loading="lazy"
+        decoding="async"
+        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+        onError={(e) => { e.currentTarget.style.opacity = '0'; }}
       />
 
       {/* Slider Handle Line */}
@@ -106,8 +112,8 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-[#050505] border-2 border-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,0,0,0.8)] transition-transform duration-300 ${isDragging ? 'scale-110 border-[#F7E644]' : 'scale-100 hover:scale-105'}`}>
             <MoveHorizontal size={24} className={`transition-colors duration-300 ${isDragging ? 'text-[#F7E644]' : 'text-white'}`} />
             
-            {/* Pulsing ring when idle */}
-            <div className="absolute inset-0 rounded-full border-2 border-white opacity-50 animate-ping"></div>
+            {/* Pulsing ring when idle — hidden on mobile to save GPU */}
+            <div className="hidden md:block absolute inset-0 rounded-full border-2 border-white opacity-50 animate-ping"></div>
          </div>
       </div>
       

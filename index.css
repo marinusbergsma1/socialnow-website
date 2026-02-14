@@ -258,7 +258,7 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 180px 180px;
-  animation: grain-shift 8s steps(10) infinite;
+  animation: grain-shift 12s steps(4) infinite;
 }
 
 @keyframes grain-shift {
@@ -274,23 +274,55 @@ body {
   90% { transform: translate(-10%, 10%); }
 }
 
-/* ═══ Neon glow pulse for green CTA buttons ═══ */
-@keyframes neon-glow-green {
-  0%, 100% { box-shadow: 0 0 5px rgba(37, 211, 102, 0.3), 0 0 20px rgba(37, 211, 102, 0.1); }
-  50% { box-shadow: 0 0 10px rgba(37, 211, 102, 0.5), 0 0 40px rgba(37, 211, 102, 0.2), 0 0 80px rgba(37, 211, 102, 0.1); }
+/* Disable grain overlay on mobile for performance */
+@media (max-width: 767px) {
+  .grain-overlay::after {
+    display: none;
+  }
+
+  /* Disable expensive backdrop-blur on mobile — causes compositing overhead */
+  .backdrop-blur-md,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Reduce box-shadow complexity on mobile */
+  .neon-glow-green::before {
+    display: none;
+  }
+
+  /* Simplify nav-pill animation on mobile */
+  .nav-pill {
+    transition: left 0.2s ease, width 0.2s ease, opacity 0.2s ease;
+  }
 }
 
+/* ═══ Neon glow pulse for green CTA buttons (opacity-based for performance) ═══ */
 .neon-glow-green {
-  animation: neon-glow-green 3s ease-in-out infinite;
+  position: relative;
+  box-shadow: 0 0 5px rgba(37, 211, 102, 0.3), 0 0 20px rgba(37, 211, 102, 0.1);
+}
+
+.neon-glow-green::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 10px rgba(37, 211, 102, 0.5), 0 0 40px rgba(37, 211, 102, 0.2), 0 0 80px rgba(37, 211, 102, 0.1);
+  opacity: 0;
+  animation: neon-glow-fade 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes neon-glow-fade {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
 }
 
 /* ═══ Aurora background effect ═══ */
-@keyframes aurora-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 @keyframes aurora-float-1 {
   0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
   33% { transform: translate(30px, -20px) scale(1.1); opacity: 0.5; }
@@ -308,34 +340,24 @@ body {
   50% { transform: translate(20px, -40px) scale(1.2); opacity: 0.45; }
 }
 
-/* ═══ Scanline overlay for clip-path reveals ═══ */
-@keyframes scanline-move {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
+/* Disable aurora animations on mobile for GPU performance */
+@media (max-width: 767px) {
+  [style*="aurora-float"] {
+    animation: none !important;
+  }
 }
 
-.scanline-overlay::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(37, 211, 102, 0.03) 2px,
-    rgba(37, 211, 102, 0.03) 4px
-  );
-}
-
-/* ═══ Navbar pill indicator ═══ */
+/* ═══ Navbar underline indicator ═══ */
 .nav-pill {
   position: absolute;
-  border-radius: 9999px;
-  background: rgba(0, 163, 224, 0.12);
-  border: 1px solid rgba(0, 163, 224, 0.25);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 1px;
+  background: #00A3E0;
+  border: none;
+  box-shadow: 0 0 8px rgba(0, 163, 224, 0.6), 0 0 20px rgba(0, 163, 224, 0.2);
+  transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
+  will-change: left, width, opacity;
 }
 
