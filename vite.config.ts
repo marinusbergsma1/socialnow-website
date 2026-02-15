@@ -31,5 +31,7 @@ export default defineConfig({
     cssMinify: true,
     // Warn on large chunks
     chunkSizeWarningLimit: 200,
+    // Asset inlining: inline small assets (< 8KB) as base64 to reduce HTTP requests
+    assetsInlineLimit: 8192,
   }
 });

@@ -24,6 +24,11 @@ const WebShowcase: React.FC = () => {
   const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Skip clip-path reveal animation on mobile — expensive scroll handler
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setRevealProgress(1);
+      return;
+    }
     let ticking = false;
     const handleScroll = () => {
       if (ticking) return;
@@ -32,7 +37,6 @@ const WebShowcase: React.FC = () => {
         if (!headerRef.current) { ticking = false; return; }
         const rect = headerRef.current.getBoundingClientRect();
         const windowH = window.innerHeight;
-        // Start revealing when header enters bottom 80%, complete when at 20%
         const start = windowH * 0.85;
         const end = windowH * 0.25;
         if (rect.top > start) {
@@ -41,7 +45,6 @@ const WebShowcase: React.FC = () => {
           setRevealProgress(1);
         } else {
           const raw = 1 - (rect.top - end) / (start - end);
-          // Ease out cubic for smooth feel
           setRevealProgress(1 - Math.pow(1 - raw, 3));
         }
         ticking = false;

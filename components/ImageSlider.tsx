@@ -65,7 +65,8 @@ const MarqueeRow: React.FC<{ images: SliderImage[]; speed: number; reverse?: boo
   const singleSetWidthRef = useRef(0);
   const isPausedRef = useRef(false);
 
-  const numSets = 3;
+  const isMobileRow = typeof window !== 'undefined' && window.innerWidth < 768;
+  const numSets = isMobileRow ? 2 : 3;
   const allImgs = Array.from({ length: numSets }, () => images).flat();
 
   const speedRef = useRef(speed);

@@ -73,7 +73,7 @@ const BinaryTagline: React.FC = () => {
 
   return (
     <div className="transition-all duration-1000 mb-6 md:mb-10 mt-2 md:mt-6 min-h-[1.5em] opacity-80">
-      <div className="text-[#25D366] text-[11px] sm:text-xs md:text-xl font-black uppercase tracking-[0.4em] drop-shadow-[0_0_12px_rgba(37,211,102,0.4)] px-4 flex justify-center flex-wrap">
+      <div className="text-[#25D366] text-[11px] sm:text-xs md:text-xl font-black uppercase tracking-[0.4em] md:drop-shadow-[0_0_12px_rgba(37,211,102,0.4)] px-4 flex justify-center flex-wrap">
         <span className="mr-1 relative inline-block">
           <span className="relative z-0 whitespace-pre">{displayText1}</span>
         </span>

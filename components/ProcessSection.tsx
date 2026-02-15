@@ -165,9 +165,9 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenBooking }) => {
 
   return (
     <section ref={sectionRef} className="py-20 md:py-36 bg-transparent relative overflow-hidden">
-      {/* Animated grid background (reuse Team.tsx) */}
+      {/* Animated grid background — desktop only for performance */}
       <div
-        className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none"
+        className="hidden md:block absolute inset-0 z-0 opacity-[0.04] pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(to right, rgba(37, 211, 102, 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(37, 211, 102, 0.3) 1px, transparent 1px)`,
           backgroundSize: '60px 60px',

@@ -444,14 +444,6 @@ const ShortContent: React.FC = () => {
   const [statsVisible, setStatsVisible] = useState(false);
   const statsRef = useRef<HTMLDivElement>(null);
 
-  const [isMobileMain, setIsMobileMain] = useState(false);
-  useEffect(() => {
-    const check = () => setIsMobileMain(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check, { passive: true });
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
   const allVideos = [
     { src: "https://storage.googleapis.com/video-slider/CHIN%20CHIN%20CLUB%20FREAKY.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/freaky_2_years.mp4" },
     { src: "https://storage.googleapis.com/video-slider/newyear_supperclub_countdown_1day.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/newyear_supperclub_countdown_1day_v1%20(1080p).mp4" },
@@ -462,9 +454,7 @@ const ShortContent: React.FC = () => {
     { src: "https://storage.googleapis.com/video-slider/RAVEG_HYPERPOWER_VID_EN_2_STORY.mp4" },
   ];
 
-  // Mobile: 3 lightest videos (~5 MB) for fast load. Desktop: all videos.
-  const mobileVideos = [allVideos[0], allVideos[2], allVideos[3]]; // FREAKY 2MB, VIRAL 2.2MB, kleine_john 2.6MB
-  const videos = isMobileMain ? mobileVideos : allVideos;
+  const videos = allVideos;
 
   // Stats observer
   useEffect(() => {

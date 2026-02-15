@@ -248,7 +248,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
           <div className="relative flex justify-center items-center overflow-hidden">
             <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
                <LazyVideo
-                 src="https://storage.googleapis.com/video-slider/FEATURED/SocialNow%20Ai%20Showcase%20-%20Part%201%20%26%202.mp4"
+                 src={`${import.meta.env.BASE_URL}videos/nextgen-webdesign.mp4`}
                  isHovered={isWebdesignHovered}
                  restartOnView={true}
                />

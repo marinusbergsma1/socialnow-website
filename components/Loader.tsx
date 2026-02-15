@@ -24,8 +24,8 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
 
     // Safety fallback: if the video doesn't fire onEnded, proceed to site.
     // Give enough time for the logo animation to finish before showing the site.
-    const fallbackMs = isMobileDevice ? 4000 : 6000;
-    const exitMs = isMobileDevice ? 400 : 600;
+    const fallbackMs = isMobileDevice ? 3000 : 6000;
+    const exitMs = isMobileDevice ? 300 : 600;
     const fallbackTimer = setTimeout(() => {
       if (isMounted.current) {
         setIsExiting(true);
@@ -40,23 +40,8 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Attempt to play automatically & clean up on unmount
+  // Clean up video on unmount so it doesn't keep playing in the background
   useEffect(() => {
-    if (videoRef.current) {
-      const playPromise = videoRef.current.play();
-
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Autoplay with sound was blocked — mute to at least show the animation
-          if (videoRef.current && isMounted.current) {
-            videoRef.current.muted = true;
-            videoRef.current.play().catch(() => {});
-          }
-        });
-      }
-    }
-
-    // Stop video completely on unmount so it doesn't keep playing in the background
     return () => {
       if (videoRef.current) {
         videoRef.current.pause();
@@ -66,13 +51,8 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // If the user clicks anywhere on the black loading screen, try to unmute.
-  // This is a subtle way to get audio if autoplay was blocked.
   const handleOverlayClick = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = false;
-      videoRef.current.play().catch(() => {});
-    }
+    // Clicking the loader doesn't do anything — video is always muted for fast autoplay
   };
 
   const handleVideoEnd = () => {
@@ -105,6 +85,8 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
           src={videoSrc}
           playsInline
           autoPlay
+          muted
+          preload="auto"
           onEnded={handleVideoEnd}
           onError={handleVideoError}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-contain"

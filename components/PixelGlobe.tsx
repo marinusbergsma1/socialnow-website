@@ -60,21 +60,21 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       }
     };
 
-    // Particle counts (reduced on mobile via mobileFactor)
+    // Particle counts — reduced for better GPU perf (mobile via mobileFactor)
     if (type === 'all' || type === 'cyan') {
-      const count = largeParticles ? 2000 : (type === 'cyan' ? 2400 : 1200);
+      const count = largeParticles ? 1400 : (type === 'cyan' ? 1600 : 800);
       generateSphere(count, 0.7, 0, 0, 0, '#00A3E0');
     }
     if (type === 'all' || type === 'pink') {
       const pOff = type === 'pink' ? 0 : 0.60;
       const pyOff = type === 'pink' ? 0 : -0.55;
-      const count = largeParticles ? 1000 : (type === 'pink' ? 1600 : 700);
+      const count = largeParticles ? 700 : (type === 'pink' ? 1100 : 500);
       generateSphere(count, type === 'pink' ? 0.7 : 0.40, pOff, pyOff, 0.2, '#F62961');
     }
     if (type === 'all' || type === 'yellow') {
       const yOff = type === 'yellow' ? 0 : -0.75;
       const yyOff = type === 'yellow' ? 0 : 0.45;
-      const count = largeParticles ? 1200 : (type === 'yellow' ? 1200 : 700);
+      const count = largeParticles ? 800 : (type === 'yellow' ? 800 : 500);
       generateSphere(count, type === 'yellow' ? 0.7 : 0.40, yOff, yyOff, -0.1, '#F7E644');
     }
 
@@ -99,7 +99,7 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
 
           if (!canvas || !ctx) return;
 
-          const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+          const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
           canvas.width = width * dpr;
           canvas.height = height * dpr;
           canvas.style.width = `${width}px`;
@@ -190,12 +190,15 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
         ctx.shadowBlur = 4;
       }
 
+      // Pre-compute trig values outside the loop
+      const cosY = Math.cos(effectiveRotY);
+      const sinY = Math.sin(effectiveRotY);
+      const cosX = Math.cos(effectiveRotX);
+      const sinX = Math.sin(effectiveRotX);
+      const scaledRadius = baseRadius * breatheScale;
+
       for (let i = 0; i < sortedPoints.length; i++) {
         const p = sortedPoints[i];
-        const cosY = Math.cos(effectiveRotY);
-        const sinY = Math.sin(effectiveRotY);
-        const cosX = Math.cos(effectiveRotX);
-        const sinX = Math.sin(effectiveRotX);
 
         let rx = p.x * cosY - p.z * sinY;
         let rz = p.x * sinY + p.z * cosY;
@@ -208,8 +211,8 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
 
         if (rz > -2.5) {
           const perspectiveScale = (rz + 2.5) / 3.5;
-          const px = centerX + rx * baseRadius * breatheScale;
-          const py = centerY + ry * baseRadius * breatheScale;
+          const px = centerX + rx * scaledRadius;
+          const py = centerY + ry * scaledRadius;
 
           const pointAlpha = Math.min(1, Math.max(0.1, (rz + 1.8) / 2.5)) * opacity * entranceScale;
           // Larger particles when largeParticles is enabled

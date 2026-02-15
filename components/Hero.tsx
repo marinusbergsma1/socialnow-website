@@ -121,7 +121,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                     <ScrollTypewriter text="OF" delay={800} start={startAnimation} withHighlight={false} />
                     <div className="relative inline-flex items-center h-[1.1em] ml-2 md:ml-10">
                       {showCycle ? (
-                        <span key={wordIndex} className={`${words[wordIndex].color} animate-fade-in-right transition-colors duration-1000 flex items-center md:drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]`}>
+                        <span key={wordIndex} className={`${words[wordIndex].color} animate-fade-in-right transition-colors duration-1000 flex items-center`}>
                           {words[wordIndex].text}
                           <span className={`text-[#F7E644] ml-2 md:ml-6 transition-all duration-700 ${showCycleQuote ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
                             "
@@ -153,7 +153,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                <div className="bg-black/90 md:backdrop-blur-xl border border-white/10 rounded-full px-4 md:px-6 py-2 md:shadow-2xl transition-colors duration-700 group-hover:border-white/30 flex items-center gap-2 md:gap-4 max-w-[95vw] md:max-w-none">
                   <div className="flex -space-x-3 shrink-0">
                     {reviewsData.map((review, i) => (
-                      <div key={i} className={`w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-black overflow-hidden transition-all duration-700 ${activeReviewIndex === i ? 'scale-110 z-10 border-[#00A3E0] shadow-[0_0_20px_rgba(0,163,224,0.4)]' : 'opacity-40 grayscale scale-90'}`}>
+                      <div key={i} className={`w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-black overflow-hidden transition-all duration-700 ${activeReviewIndex === i ? 'scale-110 z-10 border-[#00A3E0] md:shadow-[0_0_20px_rgba(0,163,224,0.4)]' : 'opacity-40 grayscale scale-90'}`}>
                         <img src={review.image} alt={review.name} width={48} height={48} className="w-full h-full object-cover" loading={i === 0 ? "eager" : "lazy"} decoding="async" />
                       </div>
                     ))}

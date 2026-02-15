@@ -34,8 +34,8 @@ const Clients: React.FC = () => {
             WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)'
         }}
       >
-        {/* Repeating the logos 4 times to ensure seamless loop on wide screens with smaller logos */}
-        {[...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos].map((logo, index) => (
+        {/* Repeat logos for seamless loop — 3x on mobile, 4x on desktop */}
+        {Array.from({ length: typeof window !== 'undefined' && window.innerWidth < 768 ? 3 : 4 }, () => clientLogos).flat().map((logo, index) => (
           <div key={index} className="flex items-center justify-center h-20 md:h-32 min-w-[140px] md:min-w-[240px] relative group cursor-pointer">
              <img
                src={logo}
