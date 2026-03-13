@@ -4,33 +4,33 @@ import { Plus, Minus, MessageCircle } from 'lucide-react';
 
 const faqs = [
   {
-    question: "Wat kost een website bij SocialNow?",
-    answer: "Transparantie first: een one-pager start vanaf \u20AC1.500, een business website vanaf \u20AC3.500, en custom projecten op maat. AI maakt ons sneller, en dat voordeel geven we door. Elk project begint met een gratis intake.",
-    color: "#00A3E0"
-  },
-  {
-    question: "Hoe snel staat mijn website live?",
-    answer: "Een website in 2\u20134 weken. Een web app in 4\u20138 weken. Ja, echt. AI versnelt ons design- en development-proces met 50% \u2014 zonder in te leveren op kwaliteit. Spoed? Bespreekbaar.",
-    color: "#F7E644"
-  },
-  {
-    question: "Hoe gebruiken jullie AI precies?",
-    answer: "AI zit in ons hele proces: van design-validatie met neurale heatmaps tot code-generatie en performance-optimalisatie. Het resultaat: snellere delivery, minder bugs, en websites die bewezen beter presteren.",
+    question: "Wat krijg ik precies gratis?",
+    answer: "Je kiest: 10 branded story's + 10 posts compleet in jouw huisstijl, of een complete website demo met AI-systeem ter waarde van \u20AC10.000. Beide gratis en vrijblijvend. De content-actie loopt tot eind maart 2026.",
     color: "#25D366"
   },
   {
-    question: "Kan ik mijn website zelf aanpassen na oplevering?",
-    answer: "Absoluut. We bouwen met een gebruiksvriendelijk CMS zodat je zelf teksten, afbeeldingen en pagina\u2019s kunt beheren. En als je hulp nodig hebt: we bieden maandelijkse support-pakketten aan.",
-    color: "#F62961"
-  },
-  {
-    question: "Wat als ik ook een app of web applicatie nodig heb?",
-    answer: "Daar zijn we sterk in. Van SaaS-platforms tot e-commerce en dashboards \u2014 we bouwen full-stack met dezelfde AI-versnelde aanpak. Alles onder \u00E9\u00E9n dak, \u00E9\u00E9n team.",
+    question: "Hoe werkt de content automation?",
+    answer: "Ons AI-systeem leest dagelijks je advertentieresultaten, analyseert wat werkt voor jouw doelgroep, en vertaalt dat direct naar je contentplanner. Elke maand automatisch ingepland \u2014 je zit nooit zonder content en je strategie is altijd up-to-date.",
     color: "#00A3E0"
   },
   {
-    question: "Hoe ziet een samenwerking eruit?",
-    answer: "Het begint met een vrijblijvend gesprek van 30 minuten. Daarna een voorstel op maat. Bij akkoord starten we direct. Geen eindeloze meetings, geen bureaucratie \u2014 gewoon bouwen.",
+    question: "Wat zit er in het website + AI pakket?",
+    answer: "Een complete website die werkt als je beste verkoper: overtuigt bezoekers, beantwoordt vragen via AI-chat en regelt afspraken \u2014 dag en nacht. Plus CRM, analytics dashboard en branded content. Alles onder \u00E9\u00E9n dak.",
+    color: "#F7E644"
+  },
+  {
+    question: "Hoe snel kan ik resultaten verwachten?",
+    answer: "VDZ-Brigade ging van nul naar veertien afspraken per week binnen 1 maand. Je ontvangt je gratis demo of content binnen 1 week na je discovery call. Geen maandenlange trajecten.",
+    color: "#F62961"
+  },
+  {
+    question: "Wat als ik al een website heb?",
+    answer: "Dan maken we een gratis demo-upgrade van je huidige site. We laten zien hoe jouw bestaande site kan werken als een compleet verkoopsysteem met AI, analytics en geautomatiseerde content.",
+    color: "#00A3E0"
+  },
+  {
+    question: "Wat kost het na de gratis periode?",
+    answer: "Content Automation start vanaf \u20AC3.000 per maand \u2014 inclusief branded content, planning, ads-optimalisatie en analytics. E\u00E9n partij die alles doet, geen losse freelancers of dure bureaus meer.",
     color: "#F7E644"
   }
 ];

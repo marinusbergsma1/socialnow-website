@@ -73,7 +73,7 @@ const HomePage: React.FC<{
   });
 
   return (
-    <main className={`transition-all duration-1000 ${loading ? 'opacity-0' : 'opacity-100'}`}>
+    <main className={`transition-opacity duration-1000 ease-out ${loading ? 'opacity-0' : 'opacity-100'}`}>
       <div id="home">
         <Hero startAnimation={!loading} onOpenBooking={onOpenBooking} />
       </div>
@@ -205,7 +205,9 @@ const App: React.FC = () => {
         </Suspense>
       )}
 
-      {!loading && <Navbar onOpenBooking={() => setIsBookingOpen(true)} onOpenContact={() => setIsContactOpen(true)} />}
+      <div className={`transition-opacity duration-700 ease-out ${loading ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+        <Navbar onOpenBooking={() => setIsBookingOpen(true)} onOpenContact={() => setIsContactOpen(true)} />
+      </div>
 
       <div
         id="main-content"

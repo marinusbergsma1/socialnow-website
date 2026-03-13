@@ -3,9 +3,6 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { Globe, ExternalLink, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import { webShowcaseProjects } from '../data/projects';
 
-// Detect if we're inside an iframe (to prevent recursive loading)
-const isInIframe = typeof window !== 'undefined' && window.self !== window.top;
-
 const WebShowcase: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [iframeLoaded, setIframeLoaded] = useState<boolean[]>(
@@ -161,22 +158,9 @@ const WebShowcase: React.FC = () => {
     touchStart.current = null;
   };
 
-  // Self-link detection
-  const shouldUseUnlock = (project: typeof activeProject) => {
-    return (project.url?.includes('socialnow-website') && isInIframe);
-  };
-
   // Desktop: live iframe
   const renderDesktopIframe = (project: typeof activeProject, idx: number) => {
     const isActive = idx === activeIndex && !isTransitioning;
-
-    if (shouldUseUnlock(project)) {
-      return (
-        <div key={`desk-${project.id}`} className={`absolute inset-0 transition-opacity duration-400 ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
-          <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top" loading={idx < 2 ? 'eager' : 'lazy'} />
-        </div>
-      );
-    }
 
     return (
       <div key={`desk-${project.id}`} className={`absolute inset-0 transition-opacity duration-400 ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
@@ -202,26 +186,6 @@ const WebShowcase: React.FC = () => {
 
   // Fullscreen render
   const renderFullscreenPreview = (project: typeof activeProject, idx: number) => {
-    if (shouldUseUnlock(project)) {
-      return (
-        <div key={`fs-${project.id}`} className={`w-full h-full ${idx === activeIndex ? 'flex' : 'hidden'} items-center justify-center`}
-          style={{ background: 'radial-gradient(ellipse at center, rgba(37,211,102,0.08) 0%, rgba(0,0,0,0.95) 70%)' }}>
-          <div className="flex flex-col items-center gap-6 text-center px-8 max-w-lg">
-            <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-              <span className="text-2xl">🔒</span>
-            </div>
-            <h3 className="text-2xl md:text-4xl font-black uppercase text-white tracking-tighter">
-              INCEPTION <span className="text-[#25D366]">DEPTH</span> REACHED
-            </h3>
-            <a href="https://wa.me/31637404577" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-black font-black uppercase tracking-wider text-xs hover:bg-[#20bd5a] transition-all shadow-[0_0_30px_rgba(37,211,102,0.3)]">
-              NEEM CONTACT OP <ExternalLink size={14} />
-            </a>
-          </div>
-        </div>
-      );
-    }
-
     return (
       <iframe key={`fs-${project.id}`} src={project.url} title={`${project.title} - Fullscreen`}
         className={`w-full h-full border-0 ${idx === activeIndex ? 'block' : 'hidden'}`}
@@ -262,12 +226,12 @@ const WebShowcase: React.FC = () => {
                 </span>
                 <span className="mx-1.5 md:mx-4">DIE</span>
                 <span className="inline-flex items-center whitespace-nowrap">
-                  CONVERTEREN
+                  VERKOPEN
                   <span className="text-[#F7E644] ml-1 md:ml-6">&rdquo;</span>
                 </span>
               </h2>
               <p className="mt-3 md:mt-6 text-[8px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/30">
-                AI-Powered · Sub-Seconde Laadtijden · 99.9% Uptime · SEO-First
+                AI-Chatbot · CRM-Systeem · Analytics Dashboard · Geautomatiseerde Content
               </p>
             </div>
           </div>
@@ -292,20 +256,40 @@ const WebShowcase: React.FC = () => {
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
-              {/* Action bar */}
-              <div className="flex items-center justify-between mb-2 md:mb-4 px-3 md:px-5 py-2 md:py-2.5 rounded-full"
-                style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(20px) saturate(150%)', WebkitBackdropFilter: 'blur(20px) saturate(150%)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#25D366] animate-pulse flex-shrink-0" />
-                  <span className="text-white font-black uppercase tracking-tight text-xs md:text-lg truncate">{activeProject.title}</span>
-                  <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.3em] text-[#00A3E0] hidden sm:inline flex-shrink-0">{activeProject.category}</span>
+              {/* Project header card */}
+              <div className="flex items-center justify-between mb-3 md:mb-5 px-4 md:px-6 py-3 md:py-4 rounded-2xl border border-white/[0.08]"
+                style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)' }}>
+
+                {/* Links: Project info */}
+                <div className="flex items-center gap-3 md:gap-5 min-w-0">
+                  {/* Navigatie dots */}
+                  <div className="hidden md:flex items-center gap-1.5">
+                    {webShowcaseProjects.map((_, idx) => (
+                      <button key={idx} onClick={() => goToIndex(idx)}
+                        className={`h-2 rounded-full transition-all duration-300 ${idx === activeIndex ? 'bg-[#25D366] w-5 shadow-[0_0_8px_rgba(37,211,102,0.5)]' : 'bg-white/15 hover:bg-white/30 w-2'}`} />
+                    ))}
+                  </div>
+
+                  {/* Divider */}
+                  <div className="hidden md:block w-px h-6 bg-white/10" />
+
+                  {/* Titel + categorie */}
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-white font-black uppercase tracking-tight text-sm md:text-xl leading-tight truncate">{activeProject.title}</span>
+                    <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">{activeProject.category} · {activeProject.year}</span>
+                  </div>
                 </div>
+
+                {/* Rechts: Acties */}
                 <div className="flex items-center gap-2 flex-shrink-0">
-                  <button onClick={() => setIsFullscreen(true)} className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60 text-[9px] font-bold uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all" aria-label="Fullscreen">
-                    <Maximize2 size={10} /><span className="hidden sm:inline">Fullscreen</span>
+                  {/* Project counter */}
+                  <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/20 hidden md:inline">{activeIndex + 1}/{webShowcaseProjects.length}</span>
+
+                  <button onClick={() => setIsFullscreen(true)} className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/60 text-[9px] font-bold uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all" aria-label="Fullscreen">
+                    <Maximize2 size={12} /> Fullscreen
                   </button>
-                  <a href={activeProject.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60 text-[9px] font-bold uppercase tracking-widest hover:bg-[#25D366]/20 hover:border-[#25D366]/40 hover:text-[#25D366] transition-all" aria-label="Open live site">
-                    <Globe size={10} /><span className="hidden sm:inline">Live</span><ExternalLink size={9} />
+                  <a href={activeProject.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] text-[9px] font-bold uppercase tracking-widest hover:bg-[#25D366]/20 hover:border-[#25D366]/40 transition-all" aria-label="Open live site">
+                    <Globe size={12} /> Live <ExternalLink size={10} />
                   </a>
                 </div>
               </div>

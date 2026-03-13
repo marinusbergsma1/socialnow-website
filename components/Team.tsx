@@ -23,50 +23,57 @@ const team: TeamItem[] = [
     name: "Marinus Bergsma", 
     role: "Founder & Creative Art Director", 
     specialRole: true,
-    image: "https://i.ibb.co/Z65DDRMG/Marinus-Bergsma-V2.webp" 
+    image: `${import.meta.env.BASE_URL}images/Marinus-Bergsma-V2.webp` 
   },
   { 
     id: 2, 
     type: 'member',
     name: "Jos Hollenberg", 
     role: "Marketeer / SEO Engineer", 
-    image: "https://i.ibb.co/BH6HsfGv/Jos-Hollenberg-1.webp" 
+    image: `${import.meta.env.BASE_URL}images/Jos-Hollenberg-1.webp` 
   },
   { 
     id: 3, 
     type: 'member',
     name: "Sergio Jovovic", 
     role: "Creative Marketing Designer", 
-    image: "https://i.ibb.co/NgSnWFM6/Sergio-Jovovic.webp" 
+    image: `${import.meta.env.BASE_URL}images/Sergio-Jovovic.webp` 
   },
   { 
     id: 4, 
     type: 'member',
     name: "Carmel Boon", 
     role: "Video & Motion Editor", 
-    image: "https://i.ibb.co/zWVR40Qr/Carmel-Boon-V2.webp" 
+    image: `${import.meta.env.BASE_URL}images/Carmel-Boon-V2.webp` 
   },
   { 
     id: 5, 
     type: 'member',
     name: "Emma Peperkamp", 
     role: "Social Media Strategist", 
-    image: "https://i.ibb.co/8nTGbKXz/Emma-Peperkamp-V2.webp" 
+    image: `${import.meta.env.BASE_URL}images/Emma-Peperkamp-V2.webp` 
   },
   {
     id: 6,
     type: 'member',
     name: "Nick van Keulen",
     role: "Google Ads Expert", 
-    image: "https://i.ibb.co/nMgfTpCz/Nick-VK.webp"
+    image: `${import.meta.env.BASE_URL}images/Nick-VK.webp`
   },
   {
     id: 7,
     type: 'member',
     name: "Sid van Kalken",
     role: "Webdeveloper",
-    image: "https://storage.googleapis.com/socialnow-team/Sid%20van%20Kalken.png",
+    image: `${import.meta.env.BASE_URL}images/Sid-van-Kalken.webp`,
     imgCustomClass: "[&>img]:!object-[50%_10%] [&>img]:!scale-[1.3] group-hover:[&>img]:!scale-[1.35]"
+  },
+  {
+    id: 8,
+    type: 'member',
+    name: "Michel Pluister",
+    role: "Software Engineer",
+    image: `${import.meta.env.BASE_URL}images/Michel-Pluister.webp`
   }
 ];
 
@@ -176,7 +183,7 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   return (
-    <section id="team" className="py-12 md:py-48 bg-transparent text-white relative overflow-hidden">
+    <section id="team" className="py-12 md:py-48 bg-transparent text-white relative overflow-x-clip">
       <div
         className="absolute inset-0 z-0 opacity-[0.06] pointer-events-none"
         style={{

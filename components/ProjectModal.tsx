@@ -173,7 +173,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 {project.image.endsWith('.mp4') ? (
                   <TappableVideo src={project.image} className="w-full h-full object-cover" />
                 ) : (
-                  <img className="w-full h-full object-cover" alt="Hero" loading="eager" src={project.image} />
+                  <img className="w-full h-full object-cover" alt={`${project.title} hero afbeelding`} loading="eager" src={project.image} />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
               </div>
@@ -242,7 +242,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                   {project.image.endsWith('.mp4') ? (
                     <TappableVideo src={project.image} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.02]" />
                   ) : (
-                    <img alt="Hero" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.02]" loading="eager" src={project.image} />
+                    <img alt={`${project.title} hero afbeelding`} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.02]" loading="eager" src={project.image} />
                   )}
                 </div>
 

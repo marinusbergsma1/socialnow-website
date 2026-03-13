@@ -1,93 +1,21 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  ChevronLeft, MessageCircle,
-  Bot, TrendingUp, Code2, CheckCircle2, Clock,
-  BarChart3, Sparkles, Palette, Settings, Workflow
+  ChevronLeft, MessageCircle, ArrowRight,
+  Bot, TrendingUp, Code2, CheckCircle2,
+  BarChart3, Sparkles, Globe, Zap,
+  Calendar, Target, Layers, Shield
 } from 'lucide-react';
 import Button from './Button';
 import { useSEO } from '../hooks/useSEO';
-
-interface ServiceItem {
-  title: string;
-  description: string;
-  color: string;
-  span?: string;
-}
-
-const services: ServiceItem[] = [
-  {
-    title: "AI Website Development",
-    description: "Custom websites gebouwd met AI-assistentie. Sneller, slimmer en geoptimaliseerd voor conversie. Van concept tot lancering in weken, niet maanden.",
-    color: "#00A3E0",
-    span: "md:col-span-2",
-  },
-  {
-    title: "Brand Strategy",
-    description: "Strategische merkpositionering die resoneert met je doelgroep. Data-gedreven beslissingen, geen gokwerk.",
-    color: "#25D366",
-  },
-  {
-    title: "UX/UI Design",
-    description: "Intuitive interfaces die converteren. Elke pixel telt, elke interactie is doordacht.",
-    color: "#F7E644",
-  },
-  {
-    title: "Motion Design",
-    description: "Van logo-animaties tot volledige brand videos. Dynamische content die je merk tot leven brengt op elk platform.",
-    color: "#25D366",
-  },
-  {
-    title: "Short Form Content",
-    description: "Scroll-stopping reels en shorts die viral gaan. Wij kennen de algoritmes en maken content die converteert.",
-    color: "#F62961",
-    span: "md:col-span-2",
-  },
-  {
-    title: "3D & CGI",
-    description: "Fotorealistische 3D-renders en CGI. Product visualisaties, environments en artist impressions op het hoogste niveau.",
-    color: "#00A3E0",
-  },
-  {
-    title: "Full-Stack Development",
-    description: "Schaalbare web applicaties met moderne tech stacks. React, Node.js, TypeScript — performance en betrouwbaarheid.",
-    color: "#00A3E0",
-  },
-  {
-    title: "Video Production",
-    description: "Van conceptontwikkeling tot postproductie. Aftermovies, commercials, branded content en meer.",
-    color: "#F7E644",
-    span: "md:col-span-2",
-  },
-  {
-    title: "AI Automation",
-    description: "Automatiseer repetitieve taken met AI. Chatbots, content generatie, data-analyse — meer output met minder effort.",
-    color: "#F62961",
-  },
-  {
-    title: "Social Media",
-    description: "Strategie, planning en uitvoering. Organisch groeien en betaald adverteren op alle platformen.",
-    color: "#25D366",
-  },
-  {
-    title: "Creative Direction",
-    description: "Creatieve leiding over campagnes en merkuitingen. Consistentie en kwaliteit op elk touchpoint.",
-    color: "#F62961",
-  },
-  {
-    title: "Project Development",
-    description: "Van idee tot realisatie. Wij begeleiden het volledige traject: planning, development, lancering en optimalisatie.",
-    color: "#F7E644",
-  },
-];
 
 const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }) => {
   const navigate = useNavigate();
 
   useSEO({
-    title: 'Diensten',
-    description: 'Van AI website development en branding tot motion design en automation. Ontdek alle diensten van SocialNow Amsterdam.',
+    title: 'Diensten — Content Automation & AI Website Systemen',
+    description: 'Website, CRM, content, advertenties én analytics — allemaal geautomatiseerd onder één dak. Content Automation vanaf €3.000/maand. Ontvang gratis 10 story\'s + 10 posts of een website demo ter waarde van €10.000.',
     path: '/diensten',
   });
 
@@ -108,261 +36,353 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
         </button>
       </div>
 
-      {/* Header */}
-      <div className="container mx-auto px-6 max-w-6xl mb-16 md:mb-24 scroll-reveal">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-6">
-          Onze Diensten
+      {/* ─── HERO ─── */}
+      <div className="container mx-auto px-6 max-w-6xl mb-20 md:mb-32">
+        <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#25D366]/5 border border-[#25D366]/20 mb-6">
+          <Sparkles size={14} className="text-[#25D366]" />
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#25D366]">AI-GEDREVEN AUTOMATION</span>
+        </div>
+        <h1 className="text-4xl md:text-6xl lg:text-8xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-6">
+          Stop met jongleren<br />
+          tussen <span className="text-[#F62961]">6 partijen</span>.
         </h1>
-        <p className="text-gray-400 text-base md:text-lg font-medium max-w-2xl leading-relaxed">
-          Van strategie tot uitvoering. Wij combineren creativiteit met technologie om merken te bouwen die opvallen en resultaat leveren.
+        <p className="text-gray-400 text-base md:text-xl font-medium max-w-2xl leading-relaxed mb-10">
+          Website laten bouwen bij bureau A, content bij freelancer B, ads bij C, CRM bij D... En dan hopen dat het allemaal op elkaar aansluit? Wij pakken het anders aan.
         </p>
+        <div className="flex flex-wrap gap-3">
+          <Button variant="green" icon onClick={onOpenBooking} triggerOnHover>
+            PLAN JE GRATIS CALL
+          </Button>
+          <a
+            href="https://wa.me/31637404577"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 bg-white/5 text-white text-xs font-bold uppercase tracking-wider hover:bg-white/10 transition-all"
+          >
+            <MessageCircle size={14} />
+            WhatsApp
+          </a>
+        </div>
       </div>
 
-      {/* Bento Grid */}
+      {/* ─── HET PROBLEEM ─── */}
       <div className="container mx-auto px-6 max-w-6xl mb-20 md:mb-32">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-          {services.map((service, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {/* Zonder SocialNow */}
+          <div className="rounded-2xl md:rounded-3xl p-8 md:p-10 border border-[#F62961]/20 bg-[#F62961]/[0.02]">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#F62961] mb-6">Zonder automation</p>
+            <ul className="space-y-4">
+              {[
+                'Losse freelancers die niet samenwerken',
+                'Content die niet aansluit op je advertenties',
+                'Geen inzicht in wat écht werkt',
+                'Elke maand handmatig plannen en posten',
+                'Website die er mooi uitziet maar niet verkoopt',
+                'Duizenden euro\'s aan losse facturen',
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-400 text-sm font-medium">
+                  <span className="text-[#F62961] mt-0.5 shrink-0">✕</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Met SocialNow */}
+          <div className="rounded-2xl md:rounded-3xl p-8 md:p-10 border border-[#25D366]/20 bg-[#25D366]/[0.02]">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#25D366] mb-6">Met SocialNow</p>
+            <ul className="space-y-4">
+              {[
+                'Eén team dat alles afstemt en uitvoert',
+                'AI analyseert ad-data en maakt content die converteert',
+                'Real-time dashboard met alle metrics',
+                'Automatisch ingepland — elke maand, elke week',
+                'Website die werkt als je beste verkoper, 24/7',
+                'Eén factuur, alles onder controle',
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-300 text-sm font-medium">
+                  <CheckCircle2 size={16} className="text-[#25D366] mt-0.5 shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* ─── WAT JE KRIJGT ─── */}
+      <div className="container mx-auto px-6 max-w-6xl mb-20 md:mb-32">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-4">
+            Eén systeem.<br /><span className="text-[#25D366]">Alles geregeld.</span>
+          </h2>
+          <p className="text-gray-500 text-sm md:text-base font-medium max-w-xl mx-auto">
+            Website, CRM, content, advertenties én analytics — volledig geïntegreerd en geautomatiseerd door AI.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          {[
+            {
+              icon: Globe,
+              title: 'AI Website Systeem',
+              desc: 'Complete website die overtuigt, vragen beantwoordt via AI-chat en afspraken regelt — dag en nacht. Inclusief CRM en analytics.',
+              color: '#00A3E0',
+            },
+            {
+              icon: Layers,
+              title: 'Content Automation',
+              desc: 'AI leest dagelijks je ad-resultaten, analyseert wat werkt en vertaalt dat naar je contentplanner. Elke maand automatisch ingepland.',
+              color: '#25D366',
+            },
+            {
+              icon: Target,
+              title: 'Advertentie Optimalisatie',
+              desc: 'AI-gedreven campagnes die zichzelf optimaliseren. Budget gaat naar wat werkt, niet naar gokken.',
+              color: '#F62961',
+            },
+            {
+              icon: BarChart3,
+              title: 'Analytics Dashboard',
+              desc: 'Real-time inzicht in al je kanalen. Conversies, bereik, engagement — alles op één plek.',
+              color: '#F7E644',
+            },
+            {
+              icon: Bot,
+              title: 'AI Chatbot',
+              desc: 'Beantwoordt klantvragen 24/7 in jouw tone-of-voice. Plant afspraken en kwalificeert leads automatisch.',
+              color: '#00A3E0',
+            },
+            {
+              icon: Calendar,
+              title: 'Branded Content',
+              desc: '60+ stuks content per maand in jouw huisstijl. Story\'s, posts, reels — allemaal automatisch ingepland.',
+              color: '#25D366',
+            },
+          ].map((service, i) => {
+            const Icon = service.icon;
+            return (
               <div
                 key={i}
-                className={`group relative rounded-2xl md:rounded-3xl p-6 md:p-8 transition-all duration-500 hover:border-white/20 scroll-reveal ${service.span || ''}`}
+                className="group rounded-2xl md:rounded-3xl p-6 md:p-8 transition-all duration-500 hover:border-white/20"
                 style={{
-                  transitionDelay: `${i * 80}ms`,
                   background: 'rgba(255, 255, 255, 0.02)',
                   border: '1px solid rgba(255, 255, 255, 0.06)',
                 }}
               >
-                {/* Subtle top accent */}
-                <div
-                  className="absolute top-0 left-6 right-6 h-[1px] opacity-20"
-                  style={{ background: `linear-gradient(90deg, transparent, ${service.color}, transparent)` }}
-                />
-
-                {/* Color dot + title */}
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: service.color }} />
-                  <h3 className="text-sm md:text-base font-black uppercase text-white tracking-tight leading-tight">
-                    {service.title}
-                  </h3>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                  style={{ background: `${service.color}10`, border: `1px solid ${service.color}20` }}>
+                  <Icon size={22} style={{ color: service.color }} />
                 </div>
+                <h3 className="text-sm md:text-base font-black uppercase text-white tracking-tight leading-tight mb-3">
+                  {service.title}
+                </h3>
                 <p className="text-gray-500 text-xs md:text-sm font-medium leading-relaxed">
-                  {service.description}
+                  {service.desc}
                 </p>
               </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      {/* ─── AI EXPLAINER SECTION ─── */}
+      {/* ─── RESULTATEN ─── */}
       <div className="container mx-auto px-6 max-w-6xl mb-20 md:mb-32">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-12 md:mb-16 scroll-reveal">
-          <div>
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#25D366]/5 border border-[#25D366]/20 mb-6">
-              <Sparkles size={14} className="text-[#25D366]" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#25D366]">AI-Powered</span>
-            </div>
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase text-white tracking-tighter leading-[0.85]">
-              Waarom AI met<br />
-              <span className="text-[#25D366]">SocialNow</span>?
-            </h2>
-          </div>
-          <p className="text-gray-500 text-sm md:text-base font-medium max-w-sm leading-relaxed">
-            Wij integreren AI in elk proces — van automatisering tot marketing tot development. Slimmer werken, sneller resultaat.
-          </p>
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-4">
+            Bewezen <span className="text-[#F7E644]">resultaten</span>
+          </h2>
         </div>
 
-        {/* AI Explainer Cards — 3 columns with mini-UI illustrations */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-
-          {/* Card 1: AI Automatisering */}
-          <div className="group rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-500 hover:border-[#00A3E0]/30"
-            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="p-6 md:p-8">
-              <h3 className="text-lg md:text-xl font-black uppercase text-white tracking-tight leading-tight mb-3">
-                Handmatig Werk,<br />Geautomatiseerd
-              </h3>
-              <p className="text-gray-500 text-xs md:text-sm font-medium leading-relaxed">
-                Repetitieve taken kosten uren per week. Onze AI-workflows automatiseren content planning, e-mail flows en rapportages — zodat jij kunt focussen op groei.
-              </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="rounded-2xl md:rounded-3xl p-8 md:p-10 border border-white/[0.06] bg-white/[0.02]">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-2 h-2 rounded-full bg-[#00A3E0]" />
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#00A3E0]">VDZ-BRIGADE</span>
             </div>
-            {/* Mini UI: Automation Workflow */}
-            <div className="px-6 md:px-8 pb-6 md:pb-8">
-              <div className="rounded-2xl p-4 md:p-5 space-y-2 relative overflow-hidden" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)' }}>
-                {/* Workflow nodes connected by lines */}
-                {[
-                  { icon: Bot, label: 'AI Chatbot', sub: 'Klantenservice 24/7', color: '#00A3E0', active: true },
-                  { icon: Workflow, label: 'E-mail Flows', sub: 'Automatisch verzonden', color: '#25D366', active: true },
-                  { icon: BarChart3, label: 'Rapportages', sub: 'Wekelijks gegenereerd', color: '#F7E644', active: false },
-                ].map((node, i, arr) => {
-                  const NodeIcon = node.icon;
-                  return (
-                    <div key={i}>
-                      <div className="flex items-center gap-3 p-3 rounded-xl"
-                        style={{ background: node.active ? `${node.color}05` : 'transparent', border: '1px solid rgba(255,255,255,0.04)' }}>
-                        <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
-                          style={{ background: `${node.color}10`, border: `1px solid ${node.color}20` }}>
-                          <NodeIcon size={16} style={{ color: node.color }} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <span className="text-[11px] font-bold text-white block leading-tight">{node.label}</span>
-                          <span className="text-[9px] font-bold text-white/30 uppercase tracking-wider">{node.sub}</span>
-                        </div>
-                        {node.active && (
-                          <div className="flex items-center gap-1">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
-                            <span className="text-[8px] font-black text-[#25D366]">LIVE</span>
-                          </div>
-                        )}
-                      </div>
-                      {/* Connector line */}
-                      {i < arr.length - 1 && (
-                        <div className="flex justify-center py-0.5">
-                          <div className="w-px h-3 bg-gradient-to-b from-white/10 to-white/5" />
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2: AI Marketing */}
-          <div className="group rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-500 hover:border-[#25D366]/30"
-            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="p-6 md:p-8">
-              <h3 className="text-lg md:text-xl font-black uppercase text-white tracking-tight leading-tight mb-3">
-                Data Zonder<br />Actie
-              </h3>
-              <p className="text-gray-500 text-xs md:text-sm font-medium leading-relaxed">
-                Analytics alleen sturen niet. Onze AI analyseert campagne-data, voorspelt trends en genereert content die converteert — real-time en data-driven.
-              </p>
-            </div>
-            {/* Mini UI: Task/Notification Cards */}
-            <div className="px-6 md:px-8 pb-6 md:pb-8">
-              <div className="rounded-2xl p-4 md:p-5 space-y-2.5 relative overflow-hidden" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)' }}>
-                {[
-                  { icon: BarChart3, title: 'Campagne Analyse', time: 'Real-time', color: '#25D366', status: 'live' },
-                  { icon: Bot, title: 'Content Generatie', time: 'AI Draft klaar', color: '#00A3E0', status: 'done' },
-                  { icon: TrendingUp, title: 'Trend Voorspelling', time: 'Q2 Forecast', color: '#F7E644', status: 'pending' },
-                ].map((task, i) => {
-                  const TaskIcon = task.icon;
-                  return (
-                    <div key={i} className="flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-white/[0.03]"
-                      style={{ background: i === 0 ? 'rgba(37,211,102,0.05)' : 'transparent', border: '1px solid rgba(255,255,255,0.04)' }}>
-                      <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
-                        style={{ background: `${task.color}10`, border: `1px solid ${task.color}20` }}>
-                        <TaskIcon size={16} style={{ color: task.color }} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <span className="text-[11px] font-bold text-white block leading-tight">{task.title}</span>
-                        <span className="text-[9px] font-bold text-white/30 uppercase tracking-wider">{task.time}</span>
-                      </div>
-                      <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
-                        task.status === 'live' ? 'bg-[#25D366]/20' :
-                        task.status === 'done' ? 'bg-[#00A3E0]/20' :
-                        'bg-white/5'
-                      }`}>
-                        {task.status === 'live' && <div className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />}
-                        {task.status === 'done' && <CheckCircle2 size={10} className="text-[#00A3E0]" />}
-                        {task.status === 'pending' && <Clock size={10} className="text-white/30" />}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: AI Web Development */}
-          <div className="group rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-500 hover:border-[#F7E644]/30"
-            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="p-6 md:p-8">
-              <h3 className="text-lg md:text-xl font-black uppercase text-white tracking-tight leading-tight mb-3">
-                Weken Wachten,<br />Dagen Bouwen
-              </h3>
-              <p className="text-gray-500 text-xs md:text-sm font-medium leading-relaxed">
-                Traditionele development duurt maanden. Met AI-assistentie bouwen wij performante websites in een fractie van de tijd — zonder concessies op kwaliteit.
-              </p>
-            </div>
-            {/* Mini UI: Development Pipeline / Timeline */}
-            <div className="px-6 md:px-8 pb-6 md:pb-8">
-              <div className="rounded-2xl p-5 md:p-6 relative overflow-hidden" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)' }}>
-                {/* Pipeline steps */}
-                <div className="space-y-4">
-                  {[
-                    { label: 'Design & Prototype', progress: 100, color: '#25D366', icon: Palette },
-                    { label: 'AI Code Generation', progress: 100, color: '#00A3E0', icon: Code2 },
-                    { label: 'Testing & Deploy', progress: 75, color: '#F7E644', icon: Settings },
-                  ].map((step, i) => {
-                    const StepIcon = step.icon;
-                    return (
-                      <div key={i}>
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            <StepIcon size={12} style={{ color: step.color }} />
-                            <span className="text-[10px] font-bold text-white/60">{step.label}</span>
-                          </div>
-                          <span className="text-[9px] font-black" style={{ color: step.color }}>{step.progress}%</span>
-                        </div>
-                        <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
-                          <div className="h-full rounded-full transition-all duration-1000"
-                            style={{ width: `${step.progress}%`, background: step.color, boxShadow: `0 0 10px ${step.color}40` }} />
-                        </div>
-                      </div>
-                    );
-                  })}
+            <h3 className="text-2xl md:text-4xl font-black text-white tracking-tighter mb-3">
+              0 → 14 afspraken<span className="text-[#00A3E0]">/week</span>
+            </h3>
+            <p className="text-gray-500 text-sm font-medium leading-relaxed mb-6">
+              Van nul online aanwezigheid naar 14 gekwalificeerde afspraken per week. Binnen 1 maand na lancering van het complete systeem.
+            </p>
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { label: 'Afspraken', value: '14/week' },
+                { label: 'Conversie', value: '+340%' },
+                { label: 'Doorlooptijd', value: '4 weken' },
+              ].map((stat) => (
+                <div key={stat.label} className="bg-white/5 rounded-xl p-3 text-center">
+                  <span className="text-white font-black text-sm block">{stat.value}</span>
+                  <span className="text-white/30 text-[9px] font-bold uppercase tracking-wider">{stat.label}</span>
                 </div>
-                {/* Bottom stat */}
-                <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Workflow size={12} className="text-[#25D366]" />
-                    <span className="text-[9px] font-bold text-white/40 uppercase tracking-wider">Pipeline Status</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
-                    <span className="text-[9px] font-black text-[#25D366]">DEPLOYING</span>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
+          <div className="rounded-2xl md:rounded-3xl p-8 md:p-10 border border-white/[0.06] bg-white/[0.02]">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-2 h-2 rounded-full bg-[#25D366]" />
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#25D366]">RAVEG</span>
+            </div>
+            <h3 className="text-2xl md:text-4xl font-black text-white tracking-tighter mb-3">
+              Volledig <span className="text-[#25D366]">geautomatiseerd</span>
+            </h3>
+            <p className="text-gray-500 text-sm font-medium leading-relaxed mb-6">
+              Van content tot ads — alles draait automatisch. Branding, website en social media onder één dak. Een samenwerking die nooit stopt.
+            </p>
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { label: 'Content/maand', value: '60+' },
+                { label: 'Engagement', value: '+300%' },
+                { label: 'Tijd bespaard', value: '120u/m' },
+              ].map((stat) => (
+                <div key={stat.label} className="bg-white/5 rounded-xl p-3 text-center">
+                  <span className="text-white font-black text-sm block">{stat.value}</span>
+                  <span className="text-white/30 text-[9px] font-bold uppercase tracking-wider">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Process section */}
-      <div className="container mx-auto px-6 max-w-6xl mb-20 md:mb-32 scroll-reveal">
+      {/* ─── WERKWIJZE ─── */}
+      <div className="container mx-auto px-6 max-w-6xl mb-20 md:mb-32">
         <h2 className="text-2xl md:text-4xl font-black uppercase text-white tracking-tighter mb-10 md:mb-14">
-          Werkwijze
+          Zo simpel is het
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-3xl">
           {[
-            { step: "01", title: "Discovery", desc: "Analyse van je merk, markt en doelgroep. We identificeren kansen en definiëren de strategie." },
-            { step: "02", title: "Concept", desc: "Creatieve richting en ontwerp. Van moodboards tot wireframes en prototypes." },
-            { step: "03", title: "Productie", desc: "Development, design en content creatie. Alles wordt gebouwd met oog voor detail." },
-            { step: "04", title: "Lancering", desc: "Go-live, optimalisatie en doorlopende ondersteuning. Wij blijven betrokken na lancering." },
+            { step: '01', title: 'Discovery Call', desc: '30 minuten om jouw situatie te begrijpen. We analyseren je huidige setup en laten zien waar de grootste kansen liggen. Gratis en vrijblijvend.', color: '#25D366' },
+            { step: '02', title: 'Wij Leveren', desc: 'Binnen 1 week ontvang je 10 branded story\'s + 10 posts in jouw huisstijl, of een complete website demo met AI-systeem ter waarde van €10.000. Gratis.', color: '#00A3E0' },
           ].map((phase, i) => (
             <div
               key={i}
-              className="rounded-2xl md:rounded-3xl p-6 md:p-8 relative"
+              className="rounded-2xl md:rounded-3xl p-8 md:p-10 relative"
               style={{
                 background: 'rgba(255, 255, 255, 0.02)',
                 border: '1px solid rgba(255, 255, 255, 0.06)',
               }}
             >
-              <span className="text-white/10 text-5xl md:text-6xl font-black absolute top-4 right-6 select-none">{phase.step}</span>
-              <div className="relative z-10">
-                <h4 className="text-base md:text-lg font-black uppercase text-white tracking-tight mb-3">{phase.title}</h4>
-                <p className="text-gray-500 text-xs md:text-sm font-medium leading-relaxed">{phase.desc}</p>
-              </div>
+              <span className="text-3xl font-black tracking-tighter mb-4 block" style={{ color: phase.color }}>{phase.step}</span>
+              <h4 className="text-base md:text-lg font-black uppercase text-white tracking-tight mb-3">{phase.title}</h4>
+              <p className="text-gray-500 text-xs md:text-sm font-medium leading-relaxed">{phase.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* CTA */}
-      <div className="container mx-auto px-6 max-w-6xl scroll-reveal">
+      {/* ─── PRICING / UPSELL ─── */}
+      <div className="container mx-auto px-6 max-w-6xl mb-20 md:mb-32">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-4">
+            Content Automation
+          </h2>
+          <p className="text-gray-500 text-sm md:text-base font-medium max-w-xl mx-auto">
+            Eén partij die alles doet. Geen losse freelancers, geen dure bureaus meer.
+          </p>
+        </div>
+
+        <div className="max-w-2xl mx-auto">
+          <div className="rounded-2xl md:rounded-3xl p-8 md:p-12 border border-[#25D366]/30 bg-[#25D366]/[0.02] relative overflow-hidden">
+            {/* Popular badge */}
+            <div className="absolute top-0 right-0 bg-[#25D366] text-black text-[9px] font-black uppercase tracking-widest px-4 py-2 rounded-bl-2xl">
+              Meest gekozen
+            </div>
+
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#25D366] mb-4">Content Automation Pakket</p>
+            <div className="flex items-baseline gap-2 mb-6">
+              <span className="text-4xl md:text-6xl font-black text-white tracking-tighter">€3.000</span>
+              <span className="text-gray-500 text-sm font-bold">/maand</span>
+            </div>
+
+            <p className="text-gray-400 text-sm font-medium leading-relaxed mb-8 max-w-lg">
+              Alles wat je nodig hebt om consistent te groeien. Branded content, automatische planning, advertentie-optimalisatie en analytics — volledig gedekt.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-10">
+              {[
+                '60+ stuks branded content/maand',
+                'AI-gedreven contentplanner',
+                'Advertentie optimalisatie',
+                'Analytics dashboard',
+                'Story\'s, posts & reels',
+                'Maandelijkse rapportage',
+                'Dedicated account manager',
+                'Onbeperkt revisies',
+              ].map((feature, i) => (
+                <div key={i} className="flex items-center gap-2.5 text-gray-300 text-sm font-medium">
+                  <CheckCircle2 size={14} className="text-[#25D366] shrink-0" />
+                  {feature}
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="flex-1">
+                PLAN JE GRATIS CALL
+              </Button>
+            </div>
+          </div>
+
+          {/* Add-ons */}
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="rounded-2xl p-6 border border-white/[0.06] bg-white/[0.02]">
+              <div className="flex items-center gap-3 mb-3">
+                <Globe size={16} className="text-[#00A3E0]" />
+                <span className="text-xs font-black uppercase text-white tracking-tight">Website + AI Systeem</span>
+              </div>
+              <p className="text-gray-500 text-xs font-medium leading-relaxed mb-3">
+                Complete website met AI-chatbot, CRM en analytics. Eenmalige investering, daarna onderhoud.
+              </p>
+              <span className="text-[#00A3E0] text-xs font-black uppercase tracking-wider">Vraag offerte aan</span>
+            </div>
+            <div className="rounded-2xl p-6 border border-white/[0.06] bg-white/[0.02]">
+              <div className="flex items-center gap-3 mb-3">
+                <Shield size={16} className="text-[#F7E644]" />
+                <span className="text-xs font-black uppercase text-white tracking-tight">Brand Strategy</span>
+              </div>
+              <p className="text-gray-500 text-xs font-medium leading-relaxed mb-3">
+                Huisstijl, merkpositionering en brand guidelines. Eén keer goed neerzetten, altijd consistent.
+              </p>
+              <span className="text-[#F7E644] text-xs font-black uppercase tracking-wider">Vraag offerte aan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ─── GRATIS AANBIEDINGEN ─── */}
+      <div className="container mx-auto px-6 max-w-6xl mb-20 md:mb-32">
+        <div className="text-center mb-10">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#F7E644] mb-3">ACTIE LOOPT TOT EIND MAART 2026</p>
+          <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-[0.85]">
+            Start gratis
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+          <div className="p-6 md:p-8 rounded-2xl border border-[#25D366]/20 bg-[#25D366]/5">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#25D366] mb-3">GRATIS CONTENT PAKKET</p>
+            <h3 className="text-white font-black text-lg md:text-xl uppercase tracking-tight mb-2">10 Story's + 10 Posts</h3>
+            <p className="text-gray-400 text-sm mb-4">Compleet in jouw huisstijl of een verbeterde versie daarvan. Binnen 1 week geleverd.</p>
+            <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="!text-sm">
+              CLAIM JE CONTENT
+            </Button>
+          </div>
+          <div className="p-6 md:p-8 rounded-2xl border border-[#00A3E0]/20 bg-[#00A3E0]/5">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#00A3E0] mb-3">GRATIS WEBSITE DEMO</p>
+            <h3 className="text-white font-black text-lg md:text-xl uppercase tracking-tight mb-2">Ter waarde van €10.000</h3>
+            <p className="text-gray-400 text-sm mb-4">Complete website met AI-systeem, CRM en analytics. Gratis en vrijblijvend als live demo.</p>
+            <Button variant="outline" icon onClick={onOpenBooking} className="!text-sm !border-[#00A3E0]/50 hover:!border-[#00A3E0] !text-[#00A3E0]">
+              VRAAG JE DEMO AAN
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* ─── BOTTOM CTA ─── */}
+      <div className="container mx-auto px-6 max-w-6xl">
         <div
           className="rounded-2xl md:rounded-3xl p-8 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8"
           style={{
@@ -372,15 +392,15 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
         >
           <div>
             <h3 className="text-xl md:text-3xl font-black uppercase text-white tracking-tight mb-2">
-              Klaar om te starten?
+              Klaar om alles te automatiseren?
             </h3>
             <p className="text-gray-500 text-sm font-medium">
-              Plan een vrijblijvend kennismakingsgesprek en ontdek wat wij voor jouw project kunnen betekenen.
+              Plan een gratis discovery call en ontdek wat ons AI-systeem voor jouw bedrijf kan betekenen.
             </p>
           </div>
           <div className="flex gap-3 shrink-0">
-            <Button variant="green" icon onClick={onOpenBooking} className="!h-[48px]">
-              Kennismaken
+            <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="!h-[48px]">
+              Plan je Call
             </Button>
             <a
               href="https://wa.me/31637404577"

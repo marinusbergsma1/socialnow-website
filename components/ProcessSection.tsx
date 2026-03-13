@@ -11,34 +11,18 @@ const steps = [
   {
     number: "01",
     title: "DISCOVERY CALL",
-    description: "30 minuten om jouw ambitie te begrijpen. Gratis en vrijblijvend.",
-    detail: "We analyseren jouw markt, doelgroep en concurrentie met AI-tools om direct scherp in kaart te brengen waar de kansen liggen.",
+    description: "30 minuten om jouw situatie te begrijpen. Gratis en vrijblijvend.",
+    detail: "We analyseren jouw huidige website, content en advertenties. Je ontvangt direct inzicht in waar de grootste kansen liggen voor groei met automation.",
     label: "INTAKE_NODE",
     color: "#25D366"
   },
   {
     number: "02",
-    title: "STRATEGIE & CONCEPT",
-    description: "AI-ondersteunde analyse + creative concepting. Binnen 1 week een voorstel.",
-    detail: "AI genereert wireframes en moodboards op basis van data. Jij kiest de richting, wij verfijnen tot pixel-perfect.",
-    label: "AI_ANALYSIS",
-    color: "#00A3E0"
-  },
-  {
-    number: "03",
-    title: "DESIGN & DEVELOPMENT",
-    description: "Iteratief bouwen met wekelijkse updates. Jij ziet elke stap.",
-    detail: "Geautomatiseerde code-reviews, real-time quality checks en AI-versnelde design iteraties zorgen voor snelheid zonder compromis.",
-    label: "BUILD_ENGINE",
-    color: "#F7E644"
-  },
-  {
-    number: "04",
-    title: "LAUNCH & GROEI",
-    description: "Live gaan is pas het begin. 30 dagen gratis nazorg inbegrepen.",
-    detail: "Monitoring dashboards en geautomatiseerde performance alerts houden jouw project scherp na lancering.",
+    title: "WIJ LEVEREN",
+    description: "Binnen 1 week ontvang je jouw gratis demo — content of website.",
+    detail: "10 branded story's + 10 posts in jouw huisstijl, óf een complete website demo met AI-systeem ter waarde van €10.000. Gratis en vrijblijvend.",
     label: "DEPLOY_OPS",
-    color: "#F62961"
+    color: "#00A3E0"
   }
 ];
 
@@ -196,29 +180,20 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenBooking }) => {
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase text-white tracking-tighter leading-[0.85] flex flex-wrap justify-center items-center">
             <span className="inline-flex items-center whitespace-nowrap">
               <span className="text-[#F7E644] mr-2 md:mr-4">"</span>
-              VAN IDEE TOT
+              ZO SIMPEL
             </span>
-            <span className="mx-2 md:mx-3">LANCERING</span>
-            <span className="inline-flex items-center whitespace-nowrap">
-              IN 4 STAPPEN
-              <span className="text-[#F7E644] ml-2 md:ml-4">"</span>
-            </span>
+            <span className="mx-2 md:mx-3">IS HET</span>
+            <span className="text-[#F7E644] ml-2 md:ml-4">"</span>
           </h2>
         </div>
 
         {/* Subtitle — explains automation */}
         <p className="text-center text-gray-500 text-xs md:text-sm font-medium max-w-xl mx-auto mb-14 md:mb-20 leading-relaxed">
-          Ons AI-versnelde proces bespaart je weken. Van branding en design tot development en lancering — elke stap is geoptimaliseerd met slimme automatisering zodat jij sneller live gaat zonder in te leveren op kwaliteit.
+          Geen wekenlange trajecten, geen eindeloze meetings. Eén gesprek, en wij leveren. Binnen 1 week zie je resultaat — gratis en vrijblijvend.
         </p>
 
-        {/* Connection line (desktop only) */}
-        <div className="hidden lg:block relative mb-4">
-          <div className="absolute top-1/2 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-[#25D366]/20 via-[#00A3E0]/20 via-[#F7E644]/20 to-[#F62961]/20" />
-          <div className="absolute top-1/2 left-[12.5%] right-[12.5%] h-px animate-pulse" style={{ background: 'linear-gradient(90deg, #25D36630, #00A3E030, #F7E64430, #F6296130)' }} />
-        </div>
-
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-14 md:mb-20" style={{ perspective: '1000px' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto mb-14 md:mb-20" style={{ perspective: '1000px' }}>
           {steps.map((step, index) => (
             <StepCard key={step.number} step={step} index={index} isVisible={isVisible} />
           ))}
@@ -227,7 +202,7 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenBooking }) => {
         {/* CTA */}
         <div className="flex justify-center">
           <Button variant="green" icon onClick={onOpenBooking} triggerOnHover>
-            START BIJ STAP 1
+            PLAN JE GRATIS CALL
           </Button>
         </div>
       </div>

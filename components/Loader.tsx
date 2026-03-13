@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 interface LoaderProps {
   onComplete: () => void;
@@ -18,24 +18,50 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
   const videoSrc = getLoaderSrc();
   const videoRef = useRef<HTMLVideoElement>(null);
   const isMounted = useRef(true);
+  const hasCompleted = useRef(false);
+
+  // Single exit function to prevent double-fires
+  const triggerExit = useCallback((delayMs = 400) => {
+    if (hasCompleted.current || !isMounted.current) return;
+    hasCompleted.current = true;
+    setIsExiting(true);
+    setTimeout(() => {
+      if (isMounted.current) onComplete();
+    }, delayMs);
+  }, [onComplete]);
 
   useEffect(() => {
     isMounted.current = true;
+    hasCompleted.current = false;
 
-    // Safety fallback: if the video doesn't fire onEnded, proceed to site.
-    // Give enough time for the logo animation to finish before showing the site.
-    const fallbackMs = isMobileDevice ? 3000 : 6000;
-    const exitMs = isMobileDevice ? 300 : 600;
-    const fallbackTimer = setTimeout(() => {
-      if (isMounted.current) {
-        setIsExiting(true);
-        setTimeout(onComplete, exitMs);
+    const video = videoRef.current;
+    let canPlayFired = false;
+
+    // Track if video actually starts playing
+    const onCanPlay = () => { canPlayFired = true; };
+    if (video) {
+      video.addEventListener('canplay', onCanPlay, { once: true });
+    }
+
+    // If video hasn't even started loading after 4s, skip (broken network)
+    const networkCheck = setTimeout(() => {
+      if (!canPlayFired && !hasCompleted.current) {
+        triggerExit(300);
       }
-    }, fallbackMs);
+    }, 4000);
+
+    // Safety fallback: absolute max wait of 15s to prevent infinite loader
+    const safetyTimer = setTimeout(() => {
+      triggerExit(300);
+    }, 15000);
 
     return () => {
       isMounted.current = false;
-      clearTimeout(fallbackTimer);
+      clearTimeout(networkCheck);
+      clearTimeout(safetyTimer);
+      if (video) {
+        video.removeEventListener('canplay', onCanPlay);
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -51,32 +77,24 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleOverlayClick = () => {
-    // Clicking the loader doesn't do anything — video is always muted for fast autoplay
-  };
-
   const handleVideoEnd = () => {
-    if (!isMounted.current) return;
-    setIsExiting(true);
-    setTimeout(() => {
-      if (isMounted.current) onComplete();
-    }, 600);
+    triggerExit(500);
   };
 
-  // Handle video load errors — skip loader immediately
   const handleVideoError = () => {
-    if (!isMounted.current || isExiting) return;
-    setIsExiting(true);
-    setTimeout(() => {
-      if (isMounted.current) onComplete();
-    }, 400);
+    triggerExit(200);
+  };
+
+  // Allow clicking/tapping to skip the loader
+  const handleSkip = () => {
+    triggerExit(300);
   };
 
   return (
     <div
-      onClick={handleOverlayClick}
-      className={`fixed inset-0 z-[10001] bg-black flex items-center justify-center cursor-pointer transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        isExiting ? 'opacity-0 scale-110 blur-2xl pointer-events-none' : 'opacity-100'
+      onClick={handleSkip}
+      className={`fixed inset-0 z-[10001] bg-black flex items-center justify-center cursor-pointer transition-all duration-[500ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        isExiting ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100'
       }`}
     >
       <div className="absolute inset-0 z-0 overflow-hidden bg-black pointer-events-none">
@@ -91,16 +109,11 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
           onError={handleVideoError}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-contain"
         />
-        <div className="absolute inset-0 bg-black/5"></div>
       </div>
-      
-      {/* Subtle indicator that sound is coming/available */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-20 pointer-events-none">
-          <div className="flex gap-1 items-end h-4">
-              {[0.4, 0.7, 0.5, 0.9, 0.3].map((h, i) => (
-                  <div key={i} className="w-1 bg-white rounded-full animate-pulse" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.1}s` }}></div>
-              ))}
-          </div>
+
+      {/* Skip hint */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-30 pointer-events-none">
+        <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/50">Tik om over te slaan</p>
       </div>
     </div>
   );

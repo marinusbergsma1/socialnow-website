@@ -65,9 +65,9 @@ const ImpressionSection: React.FC<ImpressionSectionProps> = ({ onOpenBooking, on
   }, []);
 
   const galleryImages = [
-      "https://i.ibb.co/SDKqJK5k/Light-Art-Collection-Artwork.webp", 
-      "https://i.ibb.co/RpS1gGDc/Butterfly-Effect-Light-Art-Collection.webp",
-      "https://i.ibb.co/HD1xVQK4/Infinita-Light-Art-Collection.webp"
+      `${import.meta.env.BASE_URL}images/Light-Art-Collection-Artwork.webp`, 
+      `${import.meta.env.BASE_URL}images/Butterfly-Effect-Light-Art-Collection.webp`,
+      `${import.meta.env.BASE_URL}images/Infinita-Light-Art-Collection.webp`
   ];
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -89,7 +89,7 @@ const ImpressionSection: React.FC<ImpressionSectionProps> = ({ onOpenBooking, on
       <div ref={stickyRef} className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
         <div className="absolute inset-0 w-full h-full">
             <img
-               src="https://i.ibb.co/Wv382j1y/Eternal-Sundown-Afbeelding-Before-geconverteerd-van-png-1.webp"
+               src={`${import.meta.env.BASE_URL}images/Eternal-Sundown-Afbeelding-Before-geconverteerd-van-png-1.webp`}
                className="w-full h-full object-cover filter brightness-[0.6] grayscale-[0.2]"
                alt="Reality"
                loading="lazy"
@@ -103,7 +103,7 @@ const ImpressionSection: React.FC<ImpressionSectionProps> = ({ onOpenBooking, on
             style={{ clipPath: `circle(var(--clip-radius, 0%) at 50% 50%)`, willChange: 'clip-path' }}
         >
             <img
-               src="https://i.ibb.co/dsDCqX5t/Eternal-Sundown-Afbeelding-After.webp"
+               src={`${import.meta.env.BASE_URL}images/Eternal-Sundown-Afbeelding-After.webp`}
                className="w-full h-full object-cover"
                alt="Impression"
                loading="lazy"

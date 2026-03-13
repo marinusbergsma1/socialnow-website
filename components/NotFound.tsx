@@ -28,7 +28,7 @@ const NotFound: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             to="/"
-            className="group flex items-center gap-2.5 bg-[#25D366] text-black text-xs font-bold uppercase tracking-[0.15em] px-7 py-3.5 rounded-full hover:shadow-[0_0_25px_rgba(37,211,102,0.5)] transition-all duration-300"
+            className="group flex items-center gap-2.5 bg-[#25D366] text-white text-xs font-bold uppercase tracking-[0.15em] px-7 py-3.5 rounded-full hover:shadow-[0_0_25px_rgba(37,211,102,0.5)] transition-all duration-300"
           >
             <Home className="w-4 h-4" />
             Naar Home

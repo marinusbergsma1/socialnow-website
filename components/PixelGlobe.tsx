@@ -130,6 +130,10 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       handleScroll(); // Initial position
     }
 
+    // Mouse position for particle repulsion effect (screen space)
+    let mouseScreenX = -9999;
+    let mouseScreenY = -9999;
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
@@ -137,11 +141,22 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       const y = (e.clientY - rect.top) / rect.height - 0.5;
       targetRotY = x * 1.5;
       targetRotX = -y * 1.5;
+      // Store screen-space mouse position for repulsion
+      mouseScreenX = e.clientX - rect.left;
+      mouseScreenY = e.clientY - rect.top;
+    };
+
+    const handleMouseLeave = () => {
+      mouseScreenX = -9999;
+      mouseScreenY = -9999;
     };
 
     // Only track mouse on desktop — no hover on mobile
     if (!isMobile) {
       window.addEventListener('mousemove', handleMouseMove, { passive: true });
+      if (containerRef.current) {
+        containerRef.current.addEventListener('mouseleave', handleMouseLeave);
+      }
     }
 
     let time = 0;
@@ -197,6 +212,10 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       const sinX = Math.sin(effectiveRotX);
       const scaledRadius = baseRadius * breatheScale;
 
+      // Mouse repulsion settings (subtle, desktop only)
+      const repulsionRadius = containerMin * 0.18; // area of influence
+      const repulsionStrength = containerMin * 0.06; // max displacement in px
+
       for (let i = 0; i < sortedPoints.length; i++) {
         const p = sortedPoints[i];
 
@@ -211,8 +230,24 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
 
         if (rz > -2.5) {
           const perspectiveScale = (rz + 2.5) / 3.5;
-          const px = centerX + rx * scaledRadius;
-          const py = centerY + ry * scaledRadius;
+          let px = centerX + rx * scaledRadius;
+          let py = centerY + ry * scaledRadius;
+
+          // Subtle mouse repulsion: push particles away from cursor
+          if (!isMobile && mouseScreenX > -999) {
+            const dx = px - mouseScreenX;
+            const dy = py - mouseScreenY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < repulsionRadius && dist > 0.1) {
+              const force = (1 - dist / repulsionRadius);
+              // Smooth cubic falloff for a natural feel
+              const smoothForce = force * force * (3 - 2 * force);
+              const pushX = (dx / dist) * smoothForce * repulsionStrength;
+              const pushY = (dy / dist) * smoothForce * repulsionStrength;
+              px += pushX;
+              py += pushY;
+            }
+          }
 
           const pointAlpha = Math.min(1, Math.max(0.1, (rz + 1.8) / 2.5)) * opacity * entranceScale;
           // Larger particles when largeParticles is enabled
@@ -263,6 +298,9 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       observer.disconnect();
       visibilityObserver.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
+      if (containerRef.current) {
+        containerRef.current.removeEventListener('mouseleave', handleMouseLeave);
+      }
       if (scrollReactive) window.removeEventListener('scroll', handleScroll);
       if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
     };

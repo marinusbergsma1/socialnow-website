@@ -217,13 +217,13 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.8] relative text-white flex flex-wrap justify-center items-center">
              <span className="inline-flex items-center whitespace-nowrap">
                <span className="text-[#F7E644] mr-2 md:mr-6">"</span>
-               ONS BESTE
+               UITGELICHT
              </span>
              <span className="mx-2 md:mx-4">WERK</span>
              <span className="text-[#F7E644]">"</span>
            </h2>
            <p className="mt-3 md:mt-5 text-[8px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/20">
-             Webdesign · Branding · Motion · Video
+             Websites · Content Automation · AI-Systemen · Branding
            </p>
         </div>
 
@@ -306,8 +306,8 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
           <div className="relative flex justify-center items-center group overflow-hidden">
             <div className="relative w-full transition-all duration-[1200ms] ease-out" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
               <BeforeAfterSlider
-                beforeImage="https://i.ibb.co/Wv382j1y/Eternal-Sundown-Afbeelding-Before-geconverteerd-van-png-1.webp"
-                afterImage="https://i.ibb.co/dsDCqX5t/Eternal-Sundown-Afbeelding-After.webp"
+                beforeImage={`${import.meta.env.BASE_URL}images/Eternal-Sundown-Afbeelding-Before-geconverteerd-van-png-1.webp`}
+                afterImage={`${import.meta.env.BASE_URL}images/Eternal-Sundown-Afbeelding-After.webp`}
                 className="rounded-none shadow-2xl !aspect-video border border-white/5"
               />
             </div>
@@ -319,7 +319,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
            <div className="flex flex-col items-center mb-12 md:mb-24 text-center scroll-reveal">
                <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 bg-white/5 mb-8 backdrop-blur-md">
                  <SearchCode size={14} className="text-[#F7E644]" />
-                 <span className="text-white/60 font-bold uppercase tracking-[0.3em] text-[10px]">BEWEZEN RESULTATEN</span>
+                 <span className="text-white/60 font-bold uppercase tracking-[0.3em] text-[10px]">ECHTE RESULTATEN MET AI</span>
                </div>
                <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.8] relative text-white flex flex-wrap justify-center items-center">
                  <span className="inline-flex items-center whitespace-nowrap">
@@ -365,7 +365,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
                                     {img.endsWith('.mp4') ? (
                                       <LazyGalleryVideo src={img} />
                                     ) : (
-                                      <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
+                                      <img src={img} alt={`${project.title} galerij ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
                                     )}
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                                   </div>

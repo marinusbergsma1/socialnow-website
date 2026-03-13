@@ -71,32 +71,42 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
         {/* Main CTA */}
         <div className="text-center mb-16 md:mb-24">
           <h2 className="text-4xl md:text-7xl lg:text-8xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-6">
-            Jouw concurrent<br />
-            <span className="text-[#25D366]">wacht niet.</span>
+            STOP MET GOKKEN<br />
+            <span className="text-[#25D366]">OP SUCCES.</span>
           </h2>
           <p className="text-gray-500 text-sm md:text-lg font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
-            Een team van 7 specialisten in branding, design, development en AI — klaar om jouw merk te laten groeien.
-            30 minuten. Geen verplichtingen. De eerste stap? Een simpel gesprek.
+            Eén systeem. Eén team. Website, CRM, content, advertenties én analytics — allemaal geautomatiseerd en op elkaar afgestemd. Actie loopt tot eind maart 2026.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-              variant="green"
-              icon={true}
-              onClick={onOpenBooking}
-              triggerOnHover
-            >
-              Boek je gratis sessie
-            </Button>
-            <a
-              href="https://wa.me/31637404577"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 text-white/50 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
-            >
-              Of WhatsApp nu
-              <ArrowRight size={14} />
-            </a>
+
+          {/* Two offer cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
+            <div className="p-6 md:p-8 rounded-2xl border border-[#25D366]/20 bg-[#25D366]/5 text-left">
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#25D366] mb-3">GRATIS CONTENT PAKKET</p>
+              <h3 className="text-white font-black text-lg md:text-xl uppercase tracking-tight mb-2">10 Story's + 10 Posts</h3>
+              <p className="text-gray-400 text-sm mb-4">Compleet in jouw huisstijl of een verbeterde versie daarvan. Binnen 1 week geleverd.</p>
+              <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="!text-sm">
+                CLAIM JE CONTENT
+              </Button>
+            </div>
+            <div className="p-6 md:p-8 rounded-2xl border border-[#00A3E0]/20 bg-[#00A3E0]/5 text-left">
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#00A3E0] mb-3">GRATIS WEBSITE DEMO</p>
+              <h3 className="text-white font-black text-lg md:text-xl uppercase tracking-tight mb-2">Ter waarde van €10.000</h3>
+              <p className="text-gray-400 text-sm mb-4">Complete website met AI-systeem, CRM en analytics. Gratis en vrijblijvend als live demo.</p>
+              <Button variant="outline" icon onClick={onOpenBooking} className="!text-sm !border-[#00A3E0]/50 hover:!border-[#00A3E0] !text-[#00A3E0]">
+                VRAAG JE DEMO AAN
+              </Button>
+            </div>
           </div>
+
+          <a
+            href="https://wa.me/31637404577"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 text-white/50 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+          >
+            Of WhatsApp nu
+            <ArrowRight size={14} />
+          </a>
         </div>
 
         {/* Info grid */}

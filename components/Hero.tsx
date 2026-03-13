@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import { Star } from 'lucide-react';
-import ScrollTypewriter from './ScrollTypewriter';
-import BinaryTagline from './BinaryTagline';
 
 interface HeroProps {
   startAnimation: boolean;
@@ -14,26 +12,27 @@ const reviewsData = [
   {
     name: "Niels Groen",
     handle: "RAVEG",
-    image: "https://i.ibb.co/mFGckZkS/Niels-Groen.webp"
+    image: `${import.meta.env.BASE_URL}images/Niels-Groen.webp`
   },
   {
     name: "Albert Deltour",
     handle: "LIGHT ART COLLECTION",
-    image: "https://i.ibb.co/FbghZnyG/66ed2e6a48aae627d6698e31-Albert-Deltour.webp"
+    image: `${import.meta.env.BASE_URL}images/66ed2e6a48aae627d6698e31-Albert-Deltour.webp`
   },
   {
     name: "Hussein Awqati",
     handle: "DIVINE MACHINES",
-    image: "https://i.ibb.co/xKKZT9Fg/Hussein.webp"
+    image: `${import.meta.env.BASE_URL}images/Hussein.webp`
   }
 ];
 
 const words = [
-  { text: "BRANDING", color: "text-[#25D366]" },
-  { text: "DESIGN", color: "text-[#00A3E0]" },
-  { text: "MARKETING", color: "text-[#F7E644]" },
-  { text: "STRATEGY", color: "text-[#F62961]" },
-  { text: "AI", color: "text-[#00A3E0]" }
+  { text: "CRM SYSTEMEN", color: "text-[#25D366]" },
+  { text: "BRANDED CONTENT", color: "text-[#00A3E0]" },
+  { text: "WEBSITES", color: "text-[#F7E644]" },
+  { text: "ADVERTENTIES", color: "text-[#F62961]" },
+  { text: "ANALYTICS", color: "text-[#00A3E0]" },
+  { text: "GROEI", color: "text-[#25D366]" }
 ];
 
 const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
@@ -50,6 +49,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
 
     const startTimeout = setTimeout(() => {
       setShowCycle(true);
+
       intervalId = setInterval(() => {
         setShowCycleQuote(false);
         const t1 = setTimeout(() => {
@@ -62,7 +62,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
 
       const initQuote = setTimeout(() => setShowCycleQuote(true), 300);
       quoteTimers.push(initQuote);
-    }, 600);
+    }, 200);
 
     return () => {
       clearTimeout(startTimeout);
@@ -100,25 +100,25 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                  <span className="hidden md:inline-flex animate-ping absolute h-full w-full rounded-full bg-[#25D366] opacity-75" aria-hidden="true"></span>
                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#25D366]"></span>
                </div>
-               <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] text-white">SLECHTS 3 PLEKKEN VRIJ IN Q1 2026</span>
+               <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] text-white">ACTIE LOOPT TOT EIND MAART 2026</span>
              </div>
           </div>
 
-          <div className="w-full max-w-[1400px]">
+          <div className={`w-full max-w-[1400px] transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.1s' }}>
               <h1 className="font-black uppercase tracking-tighter text-white leading-[0.85]">
-                {/* THE NEXT */}
+                {/* ONE AUTOMATION */}
                 <div className="text-[2.6rem] sm:text-5xl md:text-6xl lg:text-[6.5rem] xl:text-[7.5rem] flex items-center justify-center gap-2 md:gap-4">
                   <span className="text-[#F7E644]">"</span>
-                  <ScrollTypewriter text='THE NEXT' delay={100} start={startAnimation} withHighlight={false} />
+                  <span>ONE AUTOMATION</span>
                 </div>
-                {/* GENERATION */}
+                {/* SOLUTION */}
                 <div className="text-[3.2rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] xl:text-[9.5rem] flex justify-center">
-                  <ScrollTypewriter text="GENERATION" delay={400} start={startAnimation} withHighlight={false} />
+                  SOLUTION
                 </div>
-                {/* OF + cycling word */}
+                {/* FOR: + cycling word */}
                 <div className="text-[2.6rem] sm:text-5xl md:text-6xl lg:text-[6.5rem] xl:text-[7.5rem]">
                   <div className="flex items-center justify-center">
-                    <ScrollTypewriter text="OF" delay={800} start={startAnimation} withHighlight={false} />
+                    <span>FOR:</span>
                     <div className="relative inline-flex items-center h-[1.1em] ml-2 md:ml-10">
                       {showCycle ? (
                         <span key={wordIndex} className={`${words[wordIndex].color} animate-fade-in-right transition-colors duration-1000 flex items-center`}>
@@ -128,7 +128,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                           </span>
                         </span>
                       ) : (
-                        <span className="opacity-0">BRANDING</span>
+                        <span className="opacity-0">BRANDED CONTENT</span>
                       )}
                     </div>
                   </div>
@@ -136,19 +136,26 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
               </h1>
           </div>
 
-          <div className={`transition-all duration-1000 mt-4 md:mt-14 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.2s' }}>
-            <BinaryTagline />
+          <div className={`transition-all duration-700 mt-6 md:mt-14 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.3s' }}>
+            <p className="text-[11px] md:text-sm font-bold uppercase tracking-[0.3em] text-[#25D366]">
+              Website · CRM · Content · Ads · Analytics — Eén systeem
+            </p>
           </div>
 
-          <p className={`max-w-2xl mx-auto text-gray-400 text-sm md:text-xl mb-10 md:mb-14 font-medium leading-relaxed px-6 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.4s' }}>
-            Concept, creatie en realisatie onder één dak. Wij bouwen websites die converteren, merken die domineren en content die viral gaat — van idee tot lancering in weken. <span className="text-white font-black italic">Voor ambitieuze bedrijven die hun markt willen leiden.</span>
+          <p className={`max-w-2xl mx-auto text-gray-400 text-sm md:text-xl mb-10 md:mb-14 font-medium leading-relaxed px-6 mt-6 md:mt-8 transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.5s' }}>
+            Stop met duizenden te investeren in losse partijen. Eén AI-gestuurd systeem voor je website, content, advertenties én analytics — automatisch ingepland, continu geoptimaliseerd. <span className="text-white font-black italic">Bewezen bij RAVEG, VDZ-Brigade en meer.</span>
           </p>
 
-          <div className={`flex flex-col items-center gap-10 md:gap-12 transition-all duration-1000 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '1.6s' }}>
-            <div className="relative group">
-                <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-12 text-sm md:text-xl md:shadow-[0_20px_60px_rgba(37,211,102,0.3)]">CLAIM JOUW PLEK</Button>
-            </div>
+          <div className={`flex flex-col sm:flex-row items-center gap-4 md:gap-6 transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.7s' }}>
+            <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-8 md:!px-12 text-sm md:text-lg md:shadow-[0_20px_60px_rgba(37,211,102,0.3)]">
+              10 GRATIS STORY'S + POSTS
+            </Button>
+            <Button variant="outline" icon onClick={onOpenBooking} className="relative !px-8 md:!px-12 text-sm md:text-lg !border-[#00A3E0]/50 hover:!border-[#00A3E0] !text-[#00A3E0]">
+              GRATIS WEBSITE DEMO
+            </Button>
+          </div>
 
+          <div className={`flex flex-col items-center gap-6 mt-10 md:mt-12 transition-all duration-700 ${startAnimation ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.9s' }}>
             <div onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' })} className="flex flex-col items-center gap-6 cursor-pointer group pb-4 scale-90 md:scale-100">
                <div className="bg-black/90 md:backdrop-blur-xl border border-white/10 rounded-full px-4 md:px-6 py-2 md:shadow-2xl transition-colors duration-700 group-hover:border-white/30 flex items-center gap-2 md:gap-4 max-w-[95vw] md:max-w-none">
                   <div className="flex -space-x-3 shrink-0">
@@ -185,7 +192,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
         </div>
       </section>
 
-      <div className={`hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 ${startAnimation ? 'opacity-30' : 'opacity-0'}`} style={{ animationDelay: '2.2s' }}>
+      <div className={`hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 ${startAnimation ? 'opacity-30' : 'opacity-0'}`} style={{ animationDelay: '1s' }}>
           <div className="w-[1px] h-16 bg-gradient-to-b from-white to-transparent animate-bounce"></div>
       </div>
     </div>

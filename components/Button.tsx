@@ -88,7 +88,7 @@ const Button: React.FC<ButtonProps> = ({
 
         {icon && (
           <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-white shadow-md ml-2 md:ml-4 ${isGreen ? 'bg-[#25D366]' : isPink ? 'bg-[#F62961]' : 'bg-white/10'}`}>
-            <IconComponent size={18} className={`transition-colors duration-300 ${isGreen || isPink ? 'text-white group-hover:text-black' : 'text-white'}`} />
+            <IconComponent size={18} className={`transition-colors duration-300 ${isGreen ? 'text-white group-hover:text-[#25D366]' : isPink ? 'text-white group-hover:text-[#F62961]' : 'text-white'}`} />
           </div>
         )}
       </div>

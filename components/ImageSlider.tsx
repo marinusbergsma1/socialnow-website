@@ -10,15 +10,15 @@ interface SliderImage {
 }
 
 const allImages: SliderImage[] = [
-  { src: "https://i.ibb.co/VcsQ9tLr/1400-Mark-Johnson-LUV-YOU-STILL-1.webp", title: "LUV YOU STILL", category: "ARTWORK" },
-  { src: "https://i.ibb.co/WWZCxsb2/CRAFTURE-FASTX-PERSWAND-400x2200-1.webp", title: "FAST X CAMPAIGN", category: "CAMPAIGN", slug: "universal-sony-banners" },
-  { src: "https://i.ibb.co/993HhMHM/C4-FEED-30-korting.webp", title: "C4 PERFORMANCE", category: "SOCIAL" },
-  { src: "https://i.ibb.co/356nWH7t/header-Bouadu-v2-1.webp", title: "BOADU ARTWORK", category: "ARTWORK", slug: "az-alkmaar-socials" },
-  { src: "https://i.ibb.co/wZwdpDnY/666f15bbb49442553d264e6d-PRINT-BIND.webp", title: "PRINT & BIND OFFICE", category: "BRANDING", slug: "print-bind-interieur" },
-  { src: "https://i.ibb.co/BHRWPBQD/Light-Art-Collection.webp", title: "LIGHT ART COLLECTION", category: "ARTWORK" },
-  { src: "https://i.ibb.co/VYkkWJbf/Soulful-Special-Event-Header-1.webp", title: "SOULFUL SPECIALS", category: "EVENT" },
-  { src: "https://i.ibb.co/gMXD7pDW/THE-HEALTH-HOUSE-CONCEPT-1.webp", title: "THE HEALTH HOUSE", category: "BRANDING" },
-  { src: "https://i.ibb.co/67P1fyDT/THH-VALENTINE-SALE-STORY-2024-1200x1200-1200x1200-1.webp", title: "VALENTINE SPECIAL", category: "CAMPAIGN" }
+  { src: `${import.meta.env.BASE_URL}images/1400-Mark-Johnson-LUV-YOU-STILL-1.webp`, title: "LUV YOU STILL", category: "ARTWORK" },
+  { src: `${import.meta.env.BASE_URL}images/CRAFTURE-FASTX-PERSWAND-400x2200-1.webp`, title: "FAST X CAMPAIGN", category: "CAMPAIGN", slug: "universal-sony-banners" },
+  { src: `${import.meta.env.BASE_URL}images/C4-FEED-30-korting.webp`, title: "C4 PERFORMANCE", category: "SOCIAL" },
+  { src: `${import.meta.env.BASE_URL}images/header-Bouadu-v2-1.webp`, title: "BOADU ARTWORK", category: "ARTWORK", slug: "az-alkmaar-socials" },
+  { src: `${import.meta.env.BASE_URL}images/666f15bbb49442553d264e6d-PRINT-BIND.webp`, title: "PRINT & BIND OFFICE", category: "BRANDING", slug: "print-bind-interieur" },
+  { src: `${import.meta.env.BASE_URL}images/Light-Art-Collection.webp`, title: "LIGHT ART COLLECTION", category: "ARTWORK" },
+  { src: `${import.meta.env.BASE_URL}images/Soulful-Special-Event-Header-1.webp`, title: "SOULFUL SPECIALS", category: "EVENT" },
+  { src: `${import.meta.env.BASE_URL}images/THE-HEALTH-HOUSE-CONCEPT-1.webp`, title: "THE HEALTH HOUSE", category: "BRANDING" },
+  { src: `${import.meta.env.BASE_URL}images/THH-VALENTINE-SALE-STORY-2024-1200x1200-1200x1200-1.webp`, title: "VALENTINE SPECIAL", category: "CAMPAIGN" }
 ];
 
 const imagesRow1 = allImages.slice(0, 5);

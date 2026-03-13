@@ -53,7 +53,7 @@ const WhatsAppPopup: React.FC = () => {
           <div className="p-4 flex items-center justify-between border-b border-white/10">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full overflow-hidden relative bg-black/50 flex items-center justify-center p-1.5">
-                <img src={`${import.meta.env.BASE_URL}beeldmerk-v6.png`} alt="SocialNow" className="w-full h-full object-contain" />
+                <img src={`${import.meta.env.BASE_URL}beeldmerk-v6.webp`} alt="SocialNow" className="w-full h-full object-contain" />
               </div>
               <div>
                 <h4 className="font-black text-white text-sm uppercase tracking-tight">SocialNow</h4>

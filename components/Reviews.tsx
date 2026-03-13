@@ -13,18 +13,18 @@ const reviewsData = [
     name: "Niels Groen",
     handle: "RAVEG",
     role: "RAVEG",
-    image: "https://i.ibb.co/mFGckZkS/Niels-Groen.webp",
+    image: `${import.meta.env.BASE_URL}images/Niels-Groen.webp`,
     stars: 5,
     status: "CORE_CLIENT",
     meta: { CPU: "96%", SYNC: "100%" },
-    text: "Wij werken sinds de start met SocialNow voor onze branding, website en social media. Een samenwerking die ik nooit zal opgeven!"
+    text: "Sinds we met SocialNow werken is alles geautomatiseerd — van content tot ads. Eén partij voor branding, website en social media. Een samenwerking die ik nooit zal opgeven!"
   },
   {
     id: "REV_02",
     name: "Albert Deltour",
     handle: "LIGHT ART COLLECTION",
     role: "Light Art Collection",
-    image: "https://i.ibb.co/FbghZnyG/66ed2e6a48aae627d6698e31-Albert-Deltour.webp",
+    image: `${import.meta.env.BASE_URL}images/66ed2e6a48aae627d6698e31-Albert-Deltour.webp`,
     stars: 5,
     status: "CORE_CLIENT",
     meta: { CPU: "92%", SYNC: "100%" },
@@ -35,7 +35,7 @@ const reviewsData = [
     name: "Hussein Awqati",
     handle: "DIVINE MACHINES",
     role: "Divine Machines",
-    image: "https://i.ibb.co/xKKZT9Fg/Hussein.webp",
+    image: `${import.meta.env.BASE_URL}images/Hussein.webp`,
     stars: 5,
     status: "VERIFIED_PARTNER",
     meta: { CPU: "88%", SYNC: "98%" },
@@ -187,7 +187,7 @@ const Reviews: React.FC<ReviewsProps> = ({ onOpenBooking }) => {
             </span>
           </h2>
           <p className="text-white/30 text-xs md:text-sm font-bold uppercase tracking-[0.2em] mt-4">
-            4.9/5 gemiddelde beoordeling · 95% herhaalaankopen · branding, websites & content
+            4.9/5 gemiddelde beoordeling · 95% herhaalaankopen · website, content & automation
           </p>
         </div>
 

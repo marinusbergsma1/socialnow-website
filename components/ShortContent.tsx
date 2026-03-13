@@ -90,7 +90,7 @@ const LazySliderVideo = React.forwardRef<HTMLVideoElement, { src: string; isMobi
           loop
           muted
           playsInline
-          preload={isMobile ? "none" : "metadata"}
+          preload={isMobile ? "metadata" : "auto"}
           className="w-full h-full object-cover pointer-events-none"
         />
       </div>
@@ -99,7 +99,7 @@ const LazySliderVideo = React.forwardRef<HTMLVideoElement, { src: string; isMobi
 );
 
 // ─── Infinite Loop Video Slider ───────────────────────────────────────────
-const InfiniteVideoSlider: React.FC<{ videos: { src: string; hdSrc?: string }[] }> = ({ videos }) => {
+const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>(0);
   const positionRef = useRef(0);
@@ -114,9 +114,6 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string; hdSrc?: string }[] 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [unmutedIndex, setUnmutedIndex] = useState<number | null>(null);
   const dragDistRef = useRef(0);
-  // Track which videos have been upgraded to HD
-  const hdLoadedRef = useRef<Set<number>>(new Set());
-  const hdLoadingRef = useRef<Set<number>>(new Set());
 
   // Use refs for screen dimensions to avoid re-renders that kill video playback
   const isMobileRef = useRef(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
@@ -152,50 +149,6 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string; hdSrc?: string }[] 
   const totalSetWidth = totalItemWidth * setLength;
 
   const autoSpeed = isMobile ? 0.5 : 0.6;
-
-  // Upgrade a video to HD when the user interacts with it
-  const upgradeToHD = useCallback((idx: number) => {
-    const originalIdx = idx % videos.length;
-    const video = videos[originalIdx];
-    if (!video.hdSrc || hdLoadedRef.current.has(originalIdx) || hdLoadingRef.current.has(originalIdx)) return;
-
-    hdLoadingRef.current.add(originalIdx);
-
-    // Preload HD video in background
-    const preloader = document.createElement('video');
-    preloader.preload = 'auto';
-    preloader.src = video.hdSrc;
-
-    const onCanPlay = () => {
-      hdLoadedRef.current.add(originalIdx);
-      hdLoadingRef.current.delete(originalIdx);
-      // Swap all duplicates of this video to HD
-      videoRefs.current.forEach((vid, i) => {
-        if (vid && (i % videos.length) === originalIdx) {
-          const currentTime = vid.currentTime;
-          const wasMuted = vid.muted;
-          const wasVolume = vid.volume;
-          vid.src = video.hdSrc!;
-          vid.currentTime = currentTime;
-          vid.muted = wasMuted;
-          vid.volume = wasVolume;
-          vid.play().catch(() => {});
-        }
-      });
-      preloader.removeEventListener('canplaythrough', onCanPlay);
-      preloader.remove();
-    };
-
-    preloader.addEventListener('canplaythrough', onCanPlay, { once: true });
-    // Timeout: don't wait forever for HD
-    setTimeout(() => {
-      if (!hdLoadedRef.current.has(originalIdx)) {
-        hdLoadingRef.current.delete(originalIdx);
-        preloader.removeEventListener('canplaythrough', onCanPlay);
-        preloader.remove();
-      }
-    }, 15000);
-  }, [videos]);
 
   // Refs for animation values to prevent rAF loop restarts (= frame-skip = stutter)
   const totalSetWidthRef = useRef(totalSetWidth);
@@ -304,9 +257,6 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string; hdSrc?: string }[] 
     const vid = videoRefs.current[idx];
     if (!vid) return;
 
-    // Start loading HD version when user taps
-    upgradeToHD(idx);
-
     if (unmutedIndex === idx) {
       // Already unmuted → mute it
       vid.muted = true;
@@ -333,7 +283,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string; hdSrc?: string }[] 
       globalUnmuteListener = () => setUnmutedIndex(null);
       setUnmutedIndex(idx);
     }
-  }, [unmutedIndex, upgradeToHD]);
+  }, [unmutedIndex]);
 
   // Desktop hover handlers — pause slider + unmute audio on hover
   const handleMouseEnter = (idx: number) => {
@@ -341,7 +291,6 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string; hdSrc?: string }[] 
     isPaused.current = true;
     velocityRef.current = 0;
     setHoveredIndex(idx);
-    upgradeToHD(idx);
 
     // Unmute on hover
     const vid = videoRefs.current[idx];
@@ -444,14 +393,22 @@ const ShortContent: React.FC = () => {
   const [statsVisible, setStatsVisible] = useState(false);
   const statsRef = useRef<HTMLDivElement>(null);
 
+  // HD als primaire bron — geen SD→HD switch meer (= geen zwart moment)
   const allVideos = [
-    { src: "https://storage.googleapis.com/video-slider/CHIN%20CHIN%20CLUB%20FREAKY.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/freaky_2_years.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/newyear_supperclub_countdown_1day.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/newyear_supperclub_countdown_1day_v1%20(1080p).mp4" },
-    { src: "https://storage.googleapis.com/video-slider/VIRAL_17-02_PROMO-VID.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/VIRAL_17-02_PROMO-VID.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/VIRAL%20-%20kleine_john_%26_chavante_viral.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/kleine_john_%26_chavante_viral_v1%20(1080p).mp4" },
-    { src: "https://storage.googleapis.com/video-slider/Bakboord%20x%20Supperclub%20Cruise%20promotievideo.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/Bakboord%20x%20Supperclub%20Cruise%20promotievideo.mp4" },
-    { src: "https://storage.googleapis.com/video-slider/jobdex_vid_oranjebloesem_personeel.mp4", hdSrc: "https://storage.googleapis.com/video-slider/HD/jobdex_vid_oranjebloesem_personeel_v1%20(1080p).mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/freaky_2_years.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/newyear_supperclub_countdown_1day_v1%20(1080p).mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/VIRAL_17-02_PROMO-VID.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/kleine_john_%26_chavante_viral_v1%20(1080p).mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/Bakboord%20x%20Supperclub%20Cruise%20promotievideo.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/jobdex_vid_oranjebloesem_personeel_v1%20(1080p).mp4" },
     { src: "https://storage.googleapis.com/video-slider/RAVEG_HYPERPOWER_VID_EN_2_STORY.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/909%20Festival_Aftermovie%20in%20Reverse%203.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/DINE%26DANCE%20VB_2.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/VIRAL%20BRYAN%20MG%20-%20V2%202.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/VIRAL_CHIQ-EDITION%202.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/VIRAL_PRETTY-GIRLS-EDITION%202.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/WEEK%2046%20-%20Friday%20-%20FRIDAY%20FRESHNESS.mp4" },
+    { src: "https://storage.googleapis.com/video-slider/HD/MUSE%20MODE%20TEAM%20VIDEO.mp4" },
   ];
 
   const videos = allVideos;
@@ -473,10 +430,10 @@ const ShortContent: React.FC = () => {
       {/* Header */}
       <div className="container mx-auto px-6 relative z-10 text-center mb-4 md:mb-14">
         <h2 className="text-2xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-none mb-3 md:mb-4">
-          CONTENT DIE VIRAL GAAT
+          CONTENT DIE ZICHZELF PLANT
         </h2>
         <p className="text-gray-500 text-xs md:text-base font-medium max-w-lg mx-auto">
-          Van 0 naar 2 miljoen volgers. Wij creëren de reels waarover jouw doelgroep praat, deelt en koopt.
+          Elke maand automatisch ingepland. AI analyseert je ad-resultaten en vertaalt dat direct naar geoptimaliseerde content. Geen gokwerk, alleen groei.
         </p>
       </div>
 
@@ -492,9 +449,9 @@ const ShortContent: React.FC = () => {
       <div className="container mx-auto px-6 mt-8 md:mt-24 z-10" ref={statsRef}>
         <div className="grid grid-cols-3 gap-2 md:gap-6">
           {[
-            { label: "Volgers gegenereerd", end: 2, id: "01", color: "#F7E644", icon: Activity },
-            { label: "Totaal engagement", end: 500, id: "02", color: "#00A3E0", icon: Database },
-            { label: "Views bereikt", end: 800, id: "03", color: "#F62961", icon: Heart }
+            { label: "Content per maand", end: 60, id: "01", color: "#F7E644", icon: Activity, suffix: "+" },
+            { label: "Uur bespaard per maand", end: 120, id: "02", color: "#00A3E0", icon: Database, suffix: "+" },
+            { label: "Hogere engagement", end: 300, id: "03", color: "#F62961", icon: Heart, suffix: "%" }
           ].map((stat, i) => {
             const Icon = stat.icon;
             return (
@@ -506,7 +463,7 @@ const ShortContent: React.FC = () => {
                 </div>
                 {/* Big number */}
                 <h4 className="text-3xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none" style={{ color: stat.color }}>
-                  <CountUp end={stat.end} start={statsVisible} suffix="m+" />
+                  <CountUp end={stat.end} start={statsVisible} suffix={(stat as any).suffix || "m+"} />
                 </h4>
                 {/* Label */}
                 <span className="block text-white/25 uppercase font-bold tracking-[0.3em] text-[7px] md:text-[10px] mt-1 md:mt-3">{stat.label}</span>

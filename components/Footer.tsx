@@ -34,12 +34,12 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-20">
             <div className="lg:max-w-2xl">
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase text-white tracking-tighter leading-[0.9] mb-6">
-                Het volgende grote<br />
-                merk? Dat kan het <span className="text-[#25D366]">jouwe</span><br />
-                zijn.
+                Eén systeem.<br />
+                Eén <span className="text-[#25D366]">team</span>.<br />
+                Alles geregeld.
               </h2>
               <p className="text-white/40 text-sm md:text-base font-medium leading-relaxed max-w-md">
-                Sinds 2021 helpen wij merken groeien met een unieke mix van creativiteit en technologie. Van concept en creatie tot realisatie — alles onder één dak, vanuit Amsterdam.
+                Website, CRM, content, advertenties én analytics — allemaal geautomatiseerd en op elkaar afgestemd. Eén AI-gedreven partner voor al je groei, vanuit Amsterdam.
               </p>
             </div>
             <div className="flex flex-col justify-end gap-4">
@@ -79,16 +79,16 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/25 mb-6">Diensten</h4>
             <ul className="space-y-3">
               {[
-                'AI Website Development',
+                'AI Website Systemen',
+                'Content Automation',
+                'CRM & Analytics',
+                'Branded Content',
+                'Advertentie Optimalisatie',
+                'AI Chatbot',
+                'Social Media Automation',
                 'Brand Strategy',
-                'UX/UI Design',
                 'Motion Design',
-                'Short Form Content',
-                '3D & CGI',
-                'Full-Stack Development',
-                'Video Production',
-                'AI Automation',
-                'Social Media'
+                'Video Production'
               ].map((s) => (
                 <li key={s}>
                   <span className="text-white/40 text-xs font-medium hover:text-white transition-colors cursor-default">
@@ -218,7 +218,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6">
             <a href="#" className="block w-28 md:w-32 opacity-80 hover:opacity-100 transition-opacity">
               <img
-                src="https://i.ibb.co/RkXjxKLb/Social-Now-Logo-Breed-Wit.webp"
+                src={`${import.meta.env.BASE_URL}images/Social-Now-Logo-Breed-Wit.webp`}
                 alt="SocialNow Logo"
                 className="w-full h-auto"
               />

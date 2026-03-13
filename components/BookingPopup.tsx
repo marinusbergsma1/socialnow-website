@@ -7,10 +7,13 @@ interface BookingPopupProps {
   onClose: () => void;
 }
 
-type Tab = 'contact' | 'form';
+type Tab = 'booking' | 'contact' | 'form';
+
+// TODO: Vervang dit door je echte Cal.com URL zodra je account klaar is
+const CAL_COM_URL = ''; // bijv. 'https://cal.com/socialnow/discovery-call'
 
 const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
-  const [activeTab, setActiveTab] = useState<Tab>('contact');
+  const [activeTab, setActiveTab] = useState<Tab>(CAL_COM_URL ? 'booking' : 'contact');
   const [formData, setFormData] = useState({ name: '', email: '', company: '', budget: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -63,7 +66,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
         {/* Profile Image Float - Refined for Desktop */}
         <div className="relative md:absolute -mb-20 md:mb-0 mt-16 md:mt-0 md:-top-16 md:-left-16 z-[60] w-32 h-32 md:w-52 md:h-52 self-center md:self-auto shrink-0">
              <div className="w-full h-full rounded-full overflow-hidden border-[6px] border-[#0a0a0a] shadow-[0_25px_60px_rgba(0,0,0,0.8)] bg-[#111]">
-                  <img src="https://i.ibb.co/Z65DDRMG/Marinus-Bergsma-V2.webp" alt="Marinus Bergsma" className="w-full h-full object-cover" loading="eager" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                  <img src={`${import.meta.env.BASE_URL}images/Marinus-Bergsma-V2.webp`} alt="Marinus Bergsma" className="w-full h-full object-cover" loading="eager" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
              </div>
              <div className="absolute bottom-2 right-2 md:bottom-6 md:right-6 w-7 h-7 md:w-10 md:h-10 bg-[#25D366] rounded-full border-[5px] border-[#0a0a0a] shadow-xl"></div>
         </div>
@@ -74,7 +77,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
 
              <div className="relative z-10 text-center md:text-left pt-16 md:pt-4">
                 <h3 className="text-white font-black uppercase text-2xl mb-2 tracking-tight">Marinus Bergsma</h3>
-                <div className="inline-block bg-[#25D366] text-black px-3 py-1 mb-10 transform -rotate-1 shadow-lg">
+                <div className="inline-block bg-[#25D366] text-white px-3 py-1 mb-10 transform -rotate-1 shadow-lg">
                    <p className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em]">Founder & Creative Director</p>
                 </div>
 
@@ -101,17 +104,29 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
 
              <div className="mb-10 text-center md:text-left">
                  <h2 className="text-3xl md:text-5xl font-black uppercase text-white flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-4 md:gap-6 leading-none whitespace-nowrap tracking-tighter">
-                    LET'S GET <img src="https://i.ibb.co/RTsSXFm8/Logo-Social-Now-Lengte.webp" alt="SocialNow" className="h-10 md:h-14 object-contain inline-block" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                    LET'S GET <img src={`${import.meta.env.BASE_URL}images/Logo-Social-Now-Lengte.webp`} alt="SocialNow" className="h-10 md:h-14 object-contain inline-block" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                  </h2>
              </div>
 
              {/* Tab Switcher */}
-             <div className="flex gap-2 mb-8">
+             <div className="flex gap-2 mb-8 flex-wrap">
+               {CAL_COM_URL && (
+                 <button
+                   onClick={() => setActiveTab('booking')}
+                   className={`px-5 py-2.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${
+                     activeTab === 'booking'
+                       ? 'bg-[#25D366] text-white'
+                       : 'bg-white/5 text-white/40 border border-white/10 hover:text-white hover:border-white/20'
+                   }`}
+                 >
+                   Plan een Call
+                 </button>
+               )}
                <button
                  onClick={() => setActiveTab('contact')}
                  className={`px-5 py-2.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${
                    activeTab === 'contact'
-                     ? 'bg-[#25D366] text-black'
+                     ? 'bg-[#25D366] text-white'
                      : 'bg-white/5 text-white/40 border border-white/10 hover:text-white hover:border-white/20'
                  }`}
                >
@@ -121,7 +136,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                  onClick={() => { setActiveTab('form'); setSubmitted(false); }}
                  className={`px-5 py-2.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${
                    activeTab === 'form'
-                     ? 'bg-[#00A3E0] text-black'
+                     ? 'bg-[#00A3E0] text-white'
                      : 'bg-white/5 text-white/40 border border-white/10 hover:text-white hover:border-white/20'
                  }`}
                >
@@ -129,7 +144,16 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                </button>
              </div>
 
-             {activeTab === 'contact' ? (
+             {activeTab === 'booking' && CAL_COM_URL ? (
+               <div className="w-full rounded-2xl overflow-hidden bg-white/5 border border-white/10" style={{ minHeight: '500px' }}>
+                 <iframe
+                   src={CAL_COM_URL}
+                   title="Plan een discovery call"
+                   className="w-full border-0"
+                   style={{ height: '550px', colorScheme: 'normal' }}
+                 />
+               </div>
+             ) : activeTab === 'contact' ? (
                <>
                  <p className="text-gray-600 text-[10px] md:text-xs font-black uppercase tracking-[0.5em] mb-6">MAAK DIRECT VERBINDING</p>
 
@@ -140,7 +164,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                         className="group flex items-center justify-between p-6 md:p-5 rounded-[2rem] border border-[#25D366]/30 bg-[#25D366]/[0.02] hover:border-[#25D366] hover:bg-[#25D366]/10 transition-all duration-700 hover:shadow-[0_0_50px_rgba(37,211,102,0.2)]"
                      >
                          <div className="flex items-center gap-5 md:gap-6">
-                             <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-[#25D366] text-black flex items-center justify-center shadow-[0_0_25px_rgba(37,211,102,0.4)] group-hover:scale-110 transition-transform duration-500">
+                             <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-[#25D366] text-white flex items-center justify-center shadow-[0_0_25px_rgba(37,211,102,0.4)] group-hover:scale-110 transition-transform duration-500">
                                  <MessageCircle size={24} strokeWidth={2.5} />
                              </div>
                              <div>
@@ -148,7 +172,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                                  <p className="text-[#25D366] text-[10px] md:text-[11px] font-black tracking-[0.2em] uppercase">SNELSTE REACTIE</p>
                              </div>
                          </div>
-                         <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 group-hover:bg-[#25D366] group-hover:text-black group-hover:border-transparent transition-all duration-300">
+                         <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 group-hover:bg-[#25D366] group-hover:text-white group-hover:border-transparent transition-all duration-300">
                              <ArrowRight size={20} />
                          </div>
                      </a>
@@ -285,7 +309,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
 
                      <button
                        type="submit"
-                       className="w-full flex items-center justify-center gap-3 bg-[#00A3E0] hover:bg-[#0092C7] text-black font-black uppercase tracking-widest text-sm py-4 rounded-2xl transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,163,224,0.3)] mt-2"
+                       className="w-full flex items-center justify-center gap-3 bg-[#00A3E0] hover:bg-[#0092C7] text-white font-black uppercase tracking-widest text-sm py-4 rounded-2xl transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,163,224,0.3)] mt-2"
                      >
                        <Send size={16} />
                        Verstuur Aanvraag

@@ -135,7 +135,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
       external: true,
       icon: <MessageCircle size={24} />,
       iconBg: 'bg-[#25D366]',
-      iconText: 'text-black',
+      iconText: 'text-white',
       title: 'WhatsApp',
       subtitle: 'Snelste reactie — altijd binnen 1 uur',
       subtitleColor: 'text-[#25D366]/60',
@@ -146,7 +146,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
       hoverArrow: 'group-hover:text-[#25D366]',
       badge: 'AANBEVOLEN',
       badgeBg: 'bg-[#25D366]',
-      badgeText: 'text-black',
+      badgeText: 'text-white',
       glow: 'group-hover:shadow-[0_0_60px_rgba(37,211,102,0.08)]',
     },
     {
@@ -244,7 +244,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
         <div
           className="absolute inset-0 w-full h-full md:w-[200%] md:h-[200%] md:-left-1/2 md:-top-1/2 md:animate-[slow-map-move_120s_linear_infinite]"
           style={{
-            backgroundImage: `url('https://i.ibb.co/LdtFKCpG/BG-Social-Now-Scherm.webp')`,
+            backgroundImage: `url('${import.meta.env.BASE_URL}images/BG-Social-Now-Scherm.webp')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             filter: 'grayscale(1) contrast(1.2) invert(1)',
@@ -261,13 +261,13 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
 
       {/* ─── STICKY HEADER ─── */}
       <div className="sticky top-0 z-[210] w-full px-5 py-4 md:px-10 md:py-5 flex items-center justify-between md:backdrop-blur-2xl border-b border-white/[0.05] bg-[#030303]/95 md:bg-[#030303]/85">
-        <img src="https://i.ibb.co/RTsSXFm8/Logo-Social-Now-Lengte.webp" alt="SocialNow" className="w-24 md:w-32 opacity-80" />
+        <img src={`${import.meta.env.BASE_URL}images/Logo-Social-Now-Lengte.webp`} alt="SocialNow" className="w-24 md:w-32 opacity-80" />
         <div className="flex items-center gap-3">
           <a
             href="https://wa.me/31637404577"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#25D366] text-black font-black uppercase text-[10px] tracking-[0.15em] hover:scale-105 hover:shadow-[0_0_30px_rgba(37,211,102,0.3)] transition-all duration-300"
+            className="hidden md:inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#25D366] text-white font-black uppercase text-[10px] tracking-[0.15em] hover:scale-105 hover:shadow-[0_0_30px_rgba(37,211,102,0.3)] transition-all duration-300"
           >
             <MessageCircle size={14} strokeWidth={2.5} />
             Direct contact
@@ -315,7 +315,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
               href="https://wa.me/31637404577"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#25D366] text-black font-black uppercase text-[11px] tracking-[0.1em] hover:scale-[1.03] hover:shadow-[0_0_50px_rgba(37,211,102,0.35)] transition-all duration-300"
+              className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#25D366] text-white font-black uppercase text-[11px] tracking-[0.1em] hover:scale-[1.03] hover:shadow-[0_0_50px_rgba(37,211,102,0.35)] transition-all duration-300"
             >
               <MessageCircle size={16} strokeWidth={2.5} />
               Start een gesprek
@@ -409,7 +409,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
                 <div className="absolute top-0 right-0 w-28 h-28 bg-[#25D366]/[0.04] rounded-full blur-[60px] pointer-events-none" />
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#25D366]/30 shadow-lg flex-shrink-0 relative">
-                    <img src="https://i.ibb.co/Z65DDRMG/Marinus-Bergsma-V2.webp" alt="Marinus Bergsma" className="w-full h-full object-cover" loading="lazy" />
+                    <img src={`${import.meta.env.BASE_URL}images/Marinus-Bergsma-V2.webp`} alt="Marinus Bergsma" className="w-full h-full object-cover" loading="lazy" />
                     <div className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-[#25D366] border-2 border-[#030303]" />
                   </div>
                   <div>
@@ -597,7 +597,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
               {/* Image */}
               <div className="relative h-64 md:h-auto md:min-h-[440px] overflow-hidden">
                 <img
-                  src="https://i.ibb.co/Z65DDRMG/Marinus-Bergsma-V2.webp"
+                  src={`${import.meta.env.BASE_URL}images/Marinus-Bergsma-V2.webp`}
                   alt="Marinus Bergsma — Founder SocialNow"
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -646,7 +646,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
                   href="https://wa.me/31637404577"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#25D366] text-black font-black uppercase text-[10px] tracking-[0.1em] hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(37,211,102,0.35)] transition-all duration-300 w-fit"
+                  className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#25D366] text-white font-black uppercase text-[10px] tracking-[0.1em] hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(37,211,102,0.35)] transition-all duration-300 w-fit"
                 >
                   <MessageCircle size={14} strokeWidth={2.5} />
                   Stuur mij een bericht
@@ -717,7 +717,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
                   href="https://wa.me/31637404577"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-black font-black uppercase text-xs tracking-[0.1em] hover:scale-[1.03] hover:shadow-[0_0_50px_rgba(37,211,102,0.4)] transition-all duration-300"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-white font-black uppercase text-xs tracking-[0.1em] hover:scale-[1.03] hover:shadow-[0_0_50px_rgba(37,211,102,0.4)] transition-all duration-300"
                 >
                   <MessageCircle size={18} strokeWidth={2.5} />
                   WhatsApp ons
@@ -740,7 +740,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
         {/* ═══════════════════════════════════════════ */}
         <div className="pt-8 border-t border-white/[0.05] flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-5">
-            <img src="https://i.ibb.co/RTsSXFm8/Logo-Social-Now-Lengte.webp" alt="SocialNow" className="w-24 opacity-30" />
+            <img src={`${import.meta.env.BASE_URL}images/Logo-Social-Now-Lengte.webp`} alt="SocialNow" className="w-24 opacity-30" />
             <span className="text-white/10 text-[9px] font-bold uppercase tracking-[0.15em]">
               © {new Date().getFullYear()} SocialNow — All Rights Reserved
             </span>

@@ -24,7 +24,7 @@ const teamDetailed = [
     id: 1, 
     name: "Marinus Bergsma", 
     role: "FOUNDER & CREATIVE ART DIRECTOR", 
-    image: "https://i.ibb.co/Z65DDRMG/Marinus-Bergsma-V2.webp",
+    image: `${import.meta.env.BASE_URL}images/Marinus-Bergsma-V2.webp`,
     bio: "Met meer dan 10 jaar ervaring in high-end design en digitale strategie. Marinus is de architect achter de visuele identiteit van SocialNow en bewaakt de creatieve integriteit van elk project.",
     expertise: [
       { subject: 'Strategy', A: 150 },
@@ -41,7 +41,7 @@ const teamDetailed = [
     id: 2, 
     name: "Jos Hollenberg", 
     role: "MARKETEER / SEO ENGINEER", 
-    image: "https://i.ibb.co/BH6HsfGv/Jos-Hollenberg-1.webp",
+    image: `${import.meta.env.BASE_URL}images/Jos-Hollenberg-1.webp`,
     bio: "De data-engine van het team. Jos vertaalt complexe algoritmes naar vindbare strategieën en zorgt dat merken niet alleen mooi zijn, maar ook dominant in de zoekresultaten.",
     expertise: [
       { subject: 'SEO', A: 150 },
@@ -58,7 +58,7 @@ const teamDetailed = [
     id: 3, 
     name: "Sergio Jovovic", 
     role: "CREATIVE DIRECTOR", 
-    image: "https://i.ibb.co/NgSnWFM6/Sergio-Jovovic.webp",
+    image: `${import.meta.env.BASE_URL}images/Sergio-Jovovic.webp`,
     bio: "Sergio brengt rauwe creativiteit naar het digitale spectrum. Zijn focus ligt op het doorbreken van conventies en het bouwen van visuele ecosystemen die blijven hangen.",
     expertise: [
       { subject: 'Art Dir', A: 145 },
@@ -75,7 +75,7 @@ const teamDetailed = [
     id: 4, 
     name: "Carmel Boon", 
     role: "VIDEO & MOTION EDITOR", 
-    image: "https://i.ibb.co/zWVR40Qr/Carmel-Boon-V2.webp",
+    image: `${import.meta.env.BASE_URL}images/Carmel-Boon-V2.webp`,
     bio: "Verantwoordelijk voor de high-velocity content. Carmel snijdt door de ruis met video-montages die geoptimaliseerd zijn voor aandacht en conversie op elk platform.",
     expertise: [
       { subject: 'Editing', A: 150 },
@@ -92,7 +92,7 @@ const teamDetailed = [
     id: 5, 
     name: "Emma Peperkamp", 
     role: "SOCIAL MEDIA STRATEGIST", 
-    image: "https://i.ibb.co/8nTGbKXz/Emma-Peperkamp-V2.webp",
+    image: `${import.meta.env.BASE_URL}images/Emma-Peperkamp-V2.webp`,
     bio: "De stem van het merk in de digitale arena. Emma beheerst de taal van algoritmes en trends, en vertaalt merkwaarden naar virale content die échte connecties bouwt op elk platform.",
     expertise: [
       { subject: 'Viral', A: 150 },
@@ -109,7 +109,7 @@ const teamDetailed = [
     id: 6, 
     name: "Nick Van Keulen", 
     role: "PERFORMANCE ENGINEER", 
-    image: "https://i.ibb.co/nMgfTpCz/Nick-VK.webp",
+    image: `${import.meta.env.BASE_URL}images/Nick-VK.webp`,
     bio: "Performance specialist met een laserfocus op conversie. Nick beheert complexe Google Ads ecosystemen en zorgt dat elke klik wordt omgezet in meetbare waarde en schaalbare groei.",
     expertise: [
       { subject: 'SEM', A: 150 },
@@ -126,7 +126,7 @@ const teamDetailed = [
     id: 7,
     name: "Sid van Kalken",
     role: "WEBDEVELOPER",
-    image: "https://storage.googleapis.com/socialnow-team/Sid%20van%20Kalken.png",
+    image: `${import.meta.env.BASE_URL}images/Sid-van-Kalken.webp`,
     bio: "De architect achter de code. Sid bouwt razendsnelle, schaalbare web-ecosystemen die design naadloos verbinden met functionaliteit. Code is zijn taal, performance zijn religie.",
     expertise: [
       { subject: 'React', A: 150 },
@@ -139,6 +139,23 @@ const teamDetailed = [
     color: "#F7E644",
     meta: { CPU: "99%", LATENCY: "1ms", UPTIME: "100%" },
     imgCustomClass: "[&>img]:!object-[50%_10%] [&>img]:!scale-[1.3] group-hover:[&>img]:!scale-[1.35]"
+  },
+  {
+    id: 8,
+    name: "Michel Pluister",
+    role: "SOFTWARE ENGINEER",
+    image: `${import.meta.env.BASE_URL}images/Michel-Pluister.webp`,
+    bio: "Michel bouwt schaalbare applicaties met een focus op clean code en performance. Van backend-architectuur tot frontend-implementatie — hij zorgt dat elk project robuust en toekomstbestendig is.",
+    expertise: [
+      { subject: 'Backend', A: 145 },
+      { subject: 'Frontend', A: 130 },
+      { subject: 'DevOps', A: 120 },
+      { subject: 'API', A: 140 },
+      { subject: 'Testing', A: 135 }
+    ],
+    status: "CODE_ACTIVE",
+    color: "#00A3E0",
+    meta: { CPU: "94%", LATENCY: "3ms", UPTIME: "99.8%" }
   }
 ];
 
@@ -164,16 +181,16 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
   if (!isOpen && !isClosing) return null;
 
   return (
-    <div className={`fixed inset-0 z-[150] bg-black overflow-y-auto overflow-x-hidden custom-scrollbar transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+    <div className={`fixed inset-0 z-[150] bg-black overflow-y-auto overflow-x-hidden custom-scrollbar transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overscroll-contain ${
       isClosing ? 'opacity-0 scale-95 blur-2xl' : 'opacity-100 scale-100 blur-0'
-    }`}>
+    }`} style={{ WebkitOverflowScrolling: 'touch' }}>
       
       <div className="fixed inset-0 z-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 1px, transparent 1px)`, backgroundSize: '80px 80px' }}></div>
       <div className="fixed top-0 left-0 w-full h-[2px] bg-[#00A3E0] shadow-[0_0_20px_#00A3E0] z-[160] opacity-30 animate-[scan-sweep_4s_linear_infinite]"></div>
 
       <div className="sticky top-0 z-[170] w-full px-6 py-6 md:px-12 md:py-8 flex items-center justify-between backdrop-blur-3xl border-b border-white/5 bg-black/80">
           <div className="flex items-center gap-6">
-              <img src="https://i.ibb.co/RTsSXFm8/Logo-Social-Now-Lengte.webp" alt="Logo" className="w-32 md:w-44" />
+              <img src={`${import.meta.env.BASE_URL}images/Logo-Social-Now-Lengte.webp`} alt="Logo" className="w-32 md:w-44" />
               <div className="hidden lg:flex items-center gap-4 border-l border-white/10 pl-6">
                   <div className="flex items-center gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse"></div>

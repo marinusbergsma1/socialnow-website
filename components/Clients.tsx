@@ -3,11 +3,11 @@ import React from 'react';
 
 // Updated client logos to webp, removed AZ logo as requested
 const clientLogos = [
-  "https://i.ibb.co/zhbN3MHJ/AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp",
-  "https://i.ibb.co/wZzBQThQ/CHIN-CHIN-CLUB-LOGO.webp",
-  "https://i.ibb.co/LdGrn7GN/MOJO-LOGO.webp",
-  "https://i.ibb.co/JWX4gwhw/SUPPERCLUB-LOGO.webp",
-  "https://i.ibb.co/yFy07Gxw/UNDER-ARMOUR-LOGO-1.webp"
+  `${import.meta.env.BASE_URL}images/AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp`,
+  `${import.meta.env.BASE_URL}images/CHIN-CHIN-CLUB-LOGO.webp`,
+  `${import.meta.env.BASE_URL}images/MOJO-LOGO.webp`,
+  `${import.meta.env.BASE_URL}images/SUPPERCLUB-LOGO.webp`,
+  `${import.meta.env.BASE_URL}images/UNDER-ARMOUR-LOGO-1.webp`,
 ];
 
 const Clients: React.FC = () => {
