@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
 import Button from './Button';
+import { GlassEffect } from './ui/liquid-glass';
 
 interface CTASectionProps {
   onOpenBooking: () => void;
@@ -74,23 +75,63 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
             STOP MET GOKKEN<br />
             <span className="text-[#25D366]">OP SUCCES.</span>
           </h2>
-          <p className="text-gray-500 text-sm md:text-lg font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
-            Eén systeem. Eén team. Website, CRM, content, advertenties én analytics — allemaal geautomatiseerd en op elkaar afgestemd. Actie loopt tot eind maart 2026.
+          <p className="text-gray-500 text-sm md:text-lg font-medium max-w-2xl mx-auto mb-4 leading-relaxed">
+            Plan een gratis call en ontdek of je in aanmerking komt voor ons gratis content pakket of een website demo t.w.v. €10.000.
+          </p>
+          <p className="text-[#25D366] text-xs md:text-sm font-black uppercase tracking-widest mb-10">
+            Actie loopt tot eind maart 2026
           </p>
 
-          {/* Two offer cards */}
+          {/* Two offer cards — liquid glass on desktop */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
-            <div className="p-6 md:p-8 rounded-2xl border border-[#25D366]/20 bg-[#25D366]/5 text-left">
+            {/* Green card */}
+            <div className="hidden md:block">
+              <GlassEffect
+                className="rounded-2xl p-6 md:p-8 text-left w-full cursor-default"
+                style={{
+                  borderLeft: '2px solid rgba(37,211,102,0.4)',
+                  borderTop: '1px solid rgba(37,211,102,0.15)',
+                }}
+              >
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#25D366] mb-3">GRATIS CONTENT PAKKET</p>
+                <h3 className="text-white font-black text-lg md:text-xl uppercase tracking-tight mb-2">10 Story's + 10 Posts</h3>
+                <p className="text-gray-300 text-sm mb-4">Compleet in jouw huisstijl of een verbeterde versie daarvan. Binnen 1 week geleverd.</p>
+                <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="!text-sm">
+                  CLAIM JE CONTENT
+                </Button>
+              </GlassEffect>
+            </div>
+            {/* Green card mobile fallback */}
+            <div className="md:hidden p-6 rounded-2xl border border-[#25D366]/20 bg-[#25D366]/5 text-left">
               <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#25D366] mb-3">GRATIS CONTENT PAKKET</p>
-              <h3 className="text-white font-black text-lg md:text-xl uppercase tracking-tight mb-2">10 Story's + 10 Posts</h3>
+              <h3 className="text-white font-black text-lg uppercase tracking-tight mb-2">10 Story's + 10 Posts</h3>
               <p className="text-gray-400 text-sm mb-4">Compleet in jouw huisstijl of een verbeterde versie daarvan. Binnen 1 week geleverd.</p>
               <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="!text-sm">
                 CLAIM JE CONTENT
               </Button>
             </div>
-            <div className="p-6 md:p-8 rounded-2xl border border-[#00A3E0]/20 bg-[#00A3E0]/5 text-left">
+
+            {/* Cyan card */}
+            <div className="hidden md:block">
+              <GlassEffect
+                className="rounded-2xl p-6 md:p-8 text-left w-full cursor-default"
+                style={{
+                  borderLeft: '2px solid rgba(0,163,224,0.4)',
+                  borderTop: '1px solid rgba(0,163,224,0.15)',
+                }}
+              >
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#00A3E0] mb-3">GRATIS WEBSITE DEMO</p>
+                <h3 className="text-white font-black text-lg md:text-xl uppercase tracking-tight mb-2">Ter waarde van €10.000</h3>
+                <p className="text-gray-300 text-sm mb-4">Complete website met AI-systeem, CRM en analytics. Gratis en vrijblijvend als live demo.</p>
+                <Button variant="outline" icon onClick={onOpenBooking} className="!text-sm !border-[#00A3E0]/50 hover:!border-[#00A3E0] !text-[#00A3E0]">
+                  VRAAG JE DEMO AAN
+                </Button>
+              </GlassEffect>
+            </div>
+            {/* Cyan card mobile fallback */}
+            <div className="md:hidden p-6 rounded-2xl border border-[#00A3E0]/20 bg-[#00A3E0]/5 text-left">
               <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#00A3E0] mb-3">GRATIS WEBSITE DEMO</p>
-              <h3 className="text-white font-black text-lg md:text-xl uppercase tracking-tight mb-2">Ter waarde van €10.000</h3>
+              <h3 className="text-white font-black text-lg uppercase tracking-tight mb-2">Ter waarde van €10.000</h3>
               <p className="text-gray-400 text-sm mb-4">Complete website met AI-systeem, CRM en analytics. Gratis en vrijblijvend als live demo.</p>
               <Button variant="outline" icon onClick={onOpenBooking} className="!text-sm !border-[#00A3E0]/50 hover:!border-[#00A3E0] !text-[#00A3E0]">
                 VRAAG JE DEMO AAN
@@ -98,11 +139,18 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
             </div>
           </div>
 
+          <button
+            onClick={onOpenBooking}
+            className="inline-flex items-center gap-2 px-8 py-4 mt-2 text-white text-sm font-black uppercase tracking-widest hover:text-[#25D366] transition-colors border border-white/10 rounded-full hover:border-[#25D366]/50"
+          >
+            Plan een gratis call
+            <ArrowRight size={16} />
+          </button>
           <a
             href="https://wa.me/31637404577"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 text-white/50 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 mt-2 text-white/40 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
           >
             Of WhatsApp nu
             <ArrowRight size={14} />

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import Button from './Button';
+import { GlassFilter } from './ui/liquid-glass';
 
 interface NavLink {
   name: string;
@@ -60,8 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
   const navLinks: NavLink[] = [
     { name: 'Home', href: '#home' },
     { name: 'Projecten', href: '/projecten', action: 'navigate' },
-    { name: 'Diensten', href: '/diensten', action: 'navigate' },
-    { name: 'Prijzen', href: '/prijzen', action: 'navigate' },
+    { name: 'Diensten & Prijzen', href: '/diensten', action: 'navigate' },
     { name: 'Team', href: '#team' },
     { name: 'Contact', href: '#contact', action: 'contact' },
   ];
@@ -114,27 +114,52 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
       }
   };
 
+  const isScrolledOrSubPage = scrolled || !isHomePage;
+
   return (
     <>
+      {/* GlassFilter SVG — rendered once, reused by all glass components on the page */}
+      <GlassFilter />
       <nav
         className={`fixed z-[100] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between ${
-          (scrolled || !isHomePage)
-            ? 'top-0 left-0 w-full bg-black/90 md:bg-black/80 md:backdrop-blur-3xl border-b border-white/10 px-6 md:px-12 py-5 md:shadow-2xl'
+          isScrolledOrSubPage
+            ? 'top-0 left-0 w-full bg-black/80 border-b border-white/10 px-6 md:px-12 py-5 md:shadow-2xl'
             : 'top-0 left-0 w-full bg-transparent px-6 md:px-12 py-10 border-transparent'
         }`}
       >
-          <a href="#home" onClick={(e) => { e.preventDefault(); if (!isHomePage) { navigate('/'); } else { window.scrollTo({top: 0, behavior: 'smooth'}); } }} className={`block transition-all duration-500 ${scrolled ? 'w-32' : 'w-40 md:w-56'}`}>
+        {/* Liquid glass background layer — desktop only, visible when scrolled */}
+        {isScrolledOrSubPage && (
+          <div
+            className="absolute inset-0 z-0 pointer-events-none hidden md:block"
+            style={{
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              filter: 'url(#glass-distortion)',
+              background: 'rgba(0, 0, 0, 0.55)',
+              isolation: 'isolate',
+            }}
+          />
+        )}
+          <a href="#home" onClick={(e) => { e.preventDefault(); if (!isHomePage) { navigate('/'); } else { window.scrollTo({top: 0, behavior: 'smooth'}); } }} className={`relative z-10 flex items-center transition-all duration-500`}>
+            {/* Mobile: beeldmerk only */}
+            <img
+              src={`${import.meta.env.BASE_URL}beeldmerk-v6.webp`}
+              alt="SocialNow"
+              width={40}
+              height={40}
+              className={`md:hidden transition-all duration-500 ${scrolled ? 'w-8 h-8' : 'w-10 h-10'}`}
+            />
+            {/* Desktop: full logo with text */}
             <img
               src={`${import.meta.env.BASE_URL}images/Logo-Social-Now-Lengte.webp`}
-              alt="SocialNow Logo"
-              width={224}
-              height={40}
-              className="w-full h-auto object-contain"
-              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+              alt="SocialNow"
+              width={200}
+              height={50}
+              className={`hidden md:block transition-all duration-500 ${scrolled ? 'h-8' : 'h-10'} w-auto`}
             />
           </a>
 
-          <div className="hidden lg:flex items-center gap-10">
+          <div className="relative z-10 hidden lg:flex items-center gap-10">
             <div ref={navContainerRef} className="relative flex items-center gap-10 mr-4" onMouseLeave={handleNavMouseLeave}>
               {/* Animated underline indicator */}
               <div
@@ -164,7 +189,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
             <Button variant="green" icon onClick={onOpenBooking} className="scale-90 origin-right !h-[48px]" triggerOnHover>Kennismaken</Button>
           </div>
 
-          <button className="lg:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? 'Menu sluiten' : 'Menu openen'}>
+          <button className="relative z-10 lg:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? 'Menu sluiten' : 'Menu openen'}>
             {isOpen ? <X /> : <Menu />}
           </button>
       </nav>

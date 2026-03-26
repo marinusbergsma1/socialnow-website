@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { 
+import {
   X, Layers, Brain, Target, Activity, Workflow, Palette, TrendingUp, Code, Zap, Shield, SearchCode, PieChart, Fingerprint, Send, Rocket, Terminal, BarChart3, CircleDollarSign
 } from 'lucide-react';
-import { 
-  AreaChart, Area, ResponsiveContainer, 
-  Radar, RadarChart, PolarGrid, PolarAngleAxis 
+import {
+  AreaChart, Area, ResponsiveContainer,
+  Radar, RadarChart, PolarGrid, PolarAngleAxis
 } from 'recharts';
 import ScrollTypewriter from './ScrollTypewriter';
 import Button from './Button';
 import { PixelGlobe } from './PixelGlobe';
+import { CursorDrivenParticleTypography } from './ui/cursor-particles-typography';
 
 interface BentoGridSectionProps {
   isOpen: boolean;
@@ -77,6 +78,15 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
   const [wordIndex, setWordIndex] = useState(0);
   const [showWord, setShowWord] = useState(false);
   const [showQuote, setShowQuote] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 768);
+    const handleResize = () => setIsDesktop(window.innerWidth >= 768);
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       const originalOverflow = document.body.style.overflow;
@@ -232,6 +242,30 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
                       </div>
                   </div>
               </div>
+          </div>
+
+          {/* Cursor Particle Typography — interactive interlude, desktop only */}
+          <div className="mb-16 md:mb-24 flex flex-col items-center">
+            {isDesktop ? (
+              <div className="w-full max-w-4xl relative">
+                <div className="text-[10px] font-black uppercase tracking-[0.6em] text-white/20 text-center mb-2">HOVER VOOR INTERACTIE</div>
+                <CursorDrivenParticleTypography
+                  text="AUTOMATION"
+                  fontSize={160}
+                  fontFamily="Inter, sans-serif"
+                  particleSize={2}
+                  particleDensity={4}
+                  dispersionStrength={60}
+                  returnSpeed={0.07}
+                  color="#00A3E0"
+                  className="min-h-[220px]"
+                />
+              </div>
+            ) : (
+              <div className="text-center">
+                <h3 className="text-5xl sm:text-6xl font-black uppercase tracking-tighter text-[#00A3E0]">AUTOMATION</h3>
+              </div>
+            )}
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 mb-32 md:mb-36">

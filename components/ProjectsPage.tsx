@@ -22,7 +22,7 @@ const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen text-white">
       {/* Hero Header */}
       <div className="relative pt-32 md:pt-48 pb-16 md:pb-24 px-6 text-center overflow-hidden">
         <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{

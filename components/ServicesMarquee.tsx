@@ -6,32 +6,47 @@ import { ArrowRight } from 'lucide-react';
 const servicesRow1 = [
   { name: "DIGITAL EXPERIENCE", color: "#00A3E0" },
   { name: "CAMPAIGN DESIGN", color: "#25D366" },
+  { name: "SEO-OPTIMALISATIE", color: "#00A3E0" },
   { name: "SOCIAL MEDIA", color: "#F7E644" },
   { name: "BRAND STRATEGY", color: "#25D366" },
+  { name: "TECHNISCHE SEO", color: "#00A3E0" },
   { name: "VISUAL IDENTITY", color: "#F62961" },
   { name: "WEBSITE & UI/UX DESIGN", color: "#00A3E0" },
+  { name: "GOOGLE ADS", color: "#F7E644" },
   { name: "AI WEBSITE DEVELOPMENT", color: "#25D366" },
   { name: "CREATIVE DIRECTION", color: "#F7E644" },
+  { name: "CORE WEB VITALS", color: "#00A3E0" },
 ];
 
 const servicesRow2 = [
   { name: "SHORT FORM CONTENT", color: "#F62961" },
+  { name: "LOKALE SEO", color: "#25D366" },
   { name: "MOTION DESIGN", color: "#25D366" },
+  { name: "META ADS", color: "#F62961" },
   { name: "VIDEO & CONTENT PRODUCTION", color: "#F62961" },
+  { name: "GEO-TARGETING", color: "#00A3E0" },
   { name: "3D & CGI DESIGN", color: "#25D366" },
+  { name: "PERFORMANCE MAX", color: "#F7E644" },
   { name: "PRINT & OFFLINE MEDIA", color: "#25D366" },
-  { name: "EVENT & ENVIRONMENTAL DESIGN", color: "#00A3E0" },
+  { name: "GOOGLE SHOPPING", color: "#F7E644" },
   { name: "FULL-STACK DEVELOPMENT", color: "#F7E644" },
+  { name: "CONVERSIE-OPTIMALISATIE", color: "#25D366" },
 ];
 
 const servicesRow3 = [
   { name: "AI CODING & ALGORITHMIC ADS", color: "#F7E644" },
+  { name: "ZOEKWOORDSTRATEGIE", color: "#00A3E0" },
   { name: "BRAND PSYCHOLOGY", color: "#25D366" },
+  { name: "RETARGETING", color: "#F62961" },
   { name: "NEURO-MARKETING", color: "#F62961" },
+  { name: "LINK BUILDING", color: "#25D366" },
   { name: "MOTION BRANDING", color: "#25D366" },
+  { name: "GOOGLE Mijn BEDRIJF", color: "#F7E644" },
   { name: "VERBAL IDENTITY", color: "#F7E644" },
+  { name: "A/B TESTING", color: "#00A3E0" },
   { name: "MEDIA BUYING", color: "#00A3E0" },
   { name: "AI AUTOMATION", color: "#25D366" },
+  { name: "ANALYTICS & TRACKING", color: "#F7E644" },
 ];
 
 const MarqueeRow: React.FC<{ services: typeof servicesRow1; duration: string; reverse?: boolean }> = ({ services, duration, reverse }) => {

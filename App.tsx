@@ -42,6 +42,11 @@ const Footer = lazyRetry(() => import('./components/Footer'));
 const WhatsAppPopup = lazyRetry(() => import('./components/WhatsAppPopup'));
 const PixelCursor = lazyRetry(() => import('./components/PixelCursor'));
 
+// v2.0 — New sections
+const AIMetricsSection = lazyRetry(() => import('./components/AIMetricsSection'));
+const TechStackSection = lazyRetry(() => import('./components/TechStackSection'));
+const WorkflowBlock = lazyRetry(() => import('./components/WorkflowBlock'));
+
 // Lazy-load popup/modal components — only loaded when opened
 const BookingPopup = lazyRetry(() => import('./components/BookingPopup'));
 const BentoGridSection = lazyRetry(() => import('./components/BentoGridSection'));
@@ -83,6 +88,11 @@ const HomePage: React.FC<{
       </div>
 
       <Suspense fallback={null}>
+        {/* v2.0: AI Metrics section after Clients */}
+        <div className="scroll-reveal">
+          <AIMetricsSection />
+        </div>
+
         <div className="scroll-reveal">
           <WebShowcase />
         </div>
@@ -95,6 +105,16 @@ const HomePage: React.FC<{
 
         <div className="scroll-reveal">
           <ServicesMarquee />
+        </div>
+
+        {/* v2.0: Tech stack section after ServicesMarquee */}
+        <div className="scroll-reveal">
+          <TechStackSection />
+        </div>
+
+        {/* v2.0: Workflow automation visualization — inspired by 21st.dev N8N Workflow Block */}
+        <div className="scroll-reveal px-4 md:px-6 py-0 container mx-auto max-w-7xl">
+          <WorkflowBlock />
         </div>
 
         <div className="scroll-reveal">
@@ -199,11 +219,9 @@ const App: React.FC = () => {
 
       {!isSubPage && loading && <Loader onComplete={() => { sessionStorage.setItem('sn_loaded', '1'); setLoading(false); }} />}
 
-      {!isSubPage && (
-        <Suspense fallback={null}>
-          <GridBackground hide={anyModalOpen} startAnimation={!loading} />
-        </Suspense>
-      )}
+      <Suspense fallback={null}>
+        <GridBackground hide={anyModalOpen} startAnimation={!loading || isSubPage} />
+      </Suspense>
 
       <div className={`transition-opacity duration-700 ease-out ${loading ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <Navbar onOpenBooking={() => setIsBookingOpen(true)} onOpenContact={() => setIsContactOpen(true)} />
@@ -259,7 +277,7 @@ const App: React.FC = () => {
             element={
               <ErrorBoundary>
                 <Suspense fallback={<PageLoader />}>
-                  <PricingPage onOpenBooking={() => setIsBookingOpen(true)} />
+                  <ServicesPage onOpenBooking={() => setIsBookingOpen(true)} />
                 </Suspense>
               </ErrorBoundary>
             }

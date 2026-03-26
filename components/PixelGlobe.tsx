@@ -60,21 +60,21 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       }
     };
 
-    // Particle counts — reduced for better GPU perf (mobile via mobileFactor)
+    // Particle counts — reduced for better perf (mobile via mobileFactor)
     if (type === 'all' || type === 'cyan') {
-      const count = largeParticles ? 1400 : (type === 'cyan' ? 1600 : 800);
+      const count = largeParticles ? 1000 : (type === 'cyan' ? 1600 : 800);
       generateSphere(count, 0.7, 0, 0, 0, '#00A3E0');
     }
     if (type === 'all' || type === 'pink') {
       const pOff = type === 'pink' ? 0 : 0.60;
       const pyOff = type === 'pink' ? 0 : -0.55;
-      const count = largeParticles ? 700 : (type === 'pink' ? 1100 : 500);
+      const count = largeParticles ? 500 : (type === 'pink' ? 1100 : 500);
       generateSphere(count, type === 'pink' ? 0.7 : 0.40, pOff, pyOff, 0.2, '#F62961');
     }
     if (type === 'all' || type === 'yellow') {
       const yOff = type === 'yellow' ? 0 : -0.75;
       const yyOff = type === 'yellow' ? 0 : 0.45;
-      const count = largeParticles ? 800 : (type === 'yellow' ? 800 : 500);
+      const count = largeParticles ? 500 : (type === 'yellow' ? 800 : 500);
       generateSphere(count, type === 'yellow' ? 0.7 : 0.40, yOff, yyOff, -0.1, '#F7E644');
     }
 
@@ -146,9 +146,16 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       mouseScreenY = e.clientY - rect.top;
     };
 
+    // Bubble-pop state: burst outward on mouse leave, then reform
+    let burstProgress = 0; // 0 = no burst, 1 = full burst
+    let burstActive = false;
+
     const handleMouseLeave = () => {
       mouseScreenX = -9999;
       mouseScreenY = -9999;
+      // Trigger bubble pop
+      burstProgress = 1;
+      burstActive = true;
     };
 
     // Only track mouse on desktop — no hover on mobile
@@ -161,6 +168,7 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
 
     let time = 0;
     const sortedPoints = [...points];
+    let sortFrame = 0;
 
     const render = (timestamp: number) => {
       if (startTime === null) startTime = timestamp;
@@ -173,13 +181,13 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
         entranceProgress = 1 - Math.pow(1 - entranceProgress, 3);
       }
 
-      time += 0.007;
+      time += 0.009;
       ctx.clearRect(0, 0, width, height);
 
       rotX += (targetRotX - rotX) * 0.05;
       rotY += (targetRotY - rotY) * 0.05;
 
-      const autoRot = time * (type === 'all' ? 0.22 : 0.3);
+      const autoRot = time * (type === 'all' ? 0.28 : 0.35);
       const effectiveRotX = rotX + (scrollReactive ? scrollRotX : 0);
       const effectiveRotY = rotY + autoRot + (scrollReactive ? scrollRotY : 0);
 
@@ -189,10 +197,21 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
       const baseRadius = containerMin * scaleMultiplier * 0.75 * entranceScale;
       const centerX = width / 2;
       const centerY = height / 2;
-      const breatheScale = 1 + Math.sin(time * 1.1) * 0.03;
+      // Bubble-burst: particles only push outward, never contract inward
+      const breatheScale = 1 + (Math.sin(time * 0.5) + 1) * 0.015;
 
-      // Skip sorting on mobile — massive perf gain, barely noticeable
-      if (!isMobile) {
+      // Decay burst over time (reform after pop)
+      if (burstActive) {
+        burstProgress *= 0.88; // fast snap-back
+        if (burstProgress < 0.005) {
+          burstProgress = 0;
+          burstActive = false;
+        }
+      }
+
+      // Sort every 4 frames on desktop (skip on mobile) — big perf gain, barely noticeable
+      sortFrame++;
+      if (!isMobile && sortFrame % 4 === 0) {
         sortedPoints.sort((a, b) => {
           const az = a.x * Math.sin(effectiveRotY) + a.z * Math.cos(effectiveRotY);
           const bz = b.x * Math.sin(effectiveRotY) + b.z * Math.cos(effectiveRotY);
@@ -232,6 +251,18 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
           const perspectiveScale = (rz + 2.5) / 3.5;
           let px = centerX + rx * scaledRadius;
           let py = centerY + ry * scaledRadius;
+
+          // Bubble-pop burst: push particles outward from center
+          if (burstProgress > 0.005) {
+            const dx = px - centerX;
+            const dy = py - centerY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist > 0.1) {
+              const burstForce = burstProgress * containerMin * 0.25;
+              px += (dx / dist) * burstForce;
+              py += (dy / dist) * burstForce;
+            }
+          }
 
           // Subtle mouse repulsion: push particles away from cursor
           if (!isMobile && mouseScreenX > -999) {

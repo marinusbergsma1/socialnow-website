@@ -17,7 +17,7 @@ const PrivacyPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white pt-28 md:pt-36 pb-20">
+    <div className="min-h-screen text-white pt-28 md:pt-36 pb-20">
       <div className="container mx-auto px-6 max-w-3xl">
         <button
           onClick={() => navigate('/')}

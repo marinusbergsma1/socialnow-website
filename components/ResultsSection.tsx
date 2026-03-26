@@ -82,15 +82,15 @@ const results = [
     icon: TrendingUp
   },
   {
-    client: "RAVEG",
+    client: "VDZ-BRIGADE",
     status: "ACTIVE_PARTNERSHIP",
-    context: "Van festival branding tot virale campagnes die uitverkochte edities opleveren.",
-    metric1: "Volledige rebranding",
-    metric2: "Uitverkocht in 48 uur",
-    stat: 120,
-    statPrefix: "€",
-    statSuffix: "K+",
-    statLabel: "earned media",
+    context: "Van nul online aanwezigheid naar 6 leads per dag. Branding vanaf 0, AI-content en analytics — investering 10x terugverdiend.",
+    metric1: "Eerste 3 opdrachten: €10K–€30K",
+    metric2: "In slechts 2 maanden",
+    stat: 10,
+    statPrefix: "",
+    statSuffix: "x",
+    statLabel: "ROI behaald",
     color: "#F62961",
     icon: Zap
   }

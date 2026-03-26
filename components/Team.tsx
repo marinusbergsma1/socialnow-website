@@ -206,39 +206,36 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
           </h2>
         </div>
 
-        {/* Founder Section Wrapped in OS Card */}
+        {/* Founder Section */}
         {founder && (
-            <div className="mb-12 md:mb-24 flex justify-center px-0 md:px-4">
-                <div className="w-full max-w-6xl bg-white/[0.02] border border-white/10 rounded-[2.5rem] md:rounded-[4rem] p-6 md:p-16 relative overflow-hidden group">
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#00A3E0]/5 via-transparent to-[#F62961]/5 opacity-40"></div>
-                    <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-16">
-                        <div className="w-full md:w-[40%] h-[350px] md:h-[500px] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl shrink-0">
-                            <ProgressiveImage
-                                src={founder.image || ""}
-                                alt={founder.name || ""}
-                                className="w-full h-full transition-transform duration-700 group-hover:scale-105"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                            <div className="absolute bottom-6 left-6">
-                                <h3 className="text-xl md:text-2xl font-black uppercase text-white leading-none">{founder.name}</h3>
-                                <p className="text-[#F7E644] font-bold tracking-widest text-[9px] md:text-[10px] uppercase mt-2">{founder.role}</p>
-                            </div>
+            <div className="mb-12 md:mb-24 max-w-6xl mx-auto px-0 md:px-4">
+                <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+                    <div className="w-full md:w-[40%] h-[350px] md:h-[500px] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl shrink-0 group">
+                        <ProgressiveImage
+                            src={founder.image || ""}
+                            alt={founder.name || ""}
+                            className="w-full h-full transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                        <div className="absolute bottom-6 left-6">
+                            <h3 className="text-xl md:text-2xl font-black uppercase text-white leading-none">{founder.name}</h3>
+                            <p className="text-[#F7E644] font-bold tracking-widest text-[9px] md:text-[10px] uppercase mt-2">{founder.role}</p>
                         </div>
+                    </div>
 
-                        <div className="flex-1 text-center md:text-left">
-                            <h3 className="text-3xl md:text-5xl font-black uppercase text-white mb-6 tracking-tighter leading-none">
-                              Marinus Bergsma
-                            </h3>
+                    <div className="flex-1 text-center md:text-left">
+                        <h3 className="text-3xl md:text-5xl font-black uppercase text-white mb-6 tracking-tighter leading-none">
+                          Marinus Bergsma
+                        </h3>
 
-                            <p className="text-gray-400 text-base md:text-2xl leading-relaxed mb-4 md:mb-8 font-medium italic">
-                                "Ik startte SocialNow met één overtuiging: de beste merken worden gebouwd door mensen die technologie omarmen, niet vrezen."
-                            </p>
-                            <p className="text-gray-600 text-xs md:text-sm leading-relaxed mb-6 md:mb-12 font-medium max-w-lg">
-                                Van Amsterdam Light Festival en AZ Alkmaar tot het opbouwen van een eigen creatief bureau — Marinus richtte SocialNow op in 2021 met de missie om concept, creatie en realisatie samen te brengen. Vandaag leidt hij een team van 7 specialisten vanuit Amsterdam.
-                            </p>
+                        <p className="text-gray-400 text-base md:text-2xl leading-relaxed mb-4 md:mb-8 font-medium italic">
+                            "Ik startte SocialNow met één overtuiging: de beste merken worden gebouwd door mensen die technologie omarmen, niet vrezen."
+                        </p>
+                        <p className="text-gray-600 text-xs md:text-sm leading-relaxed mb-6 md:mb-12 font-medium max-w-lg">
+                            Van Amsterdam Light Festival en AZ Alkmaar tot het opbouwen van een eigen creatief bureau — Marinus richtte SocialNow op in 2021 met de missie om concept, creatie en realisatie samen te brengen. Vandaag leidt hij een team van 7 specialisten vanuit Amsterdam.
+                        </p>
 
-                            <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="w-full md:w-auto">Kennismaken</Button>
-                        </div>
+                        <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="w-full md:w-auto">Kennismaken</Button>
                     </div>
                 </div>
             </div>

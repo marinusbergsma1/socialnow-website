@@ -198,8 +198,8 @@ const WebShowcase: React.FC = () => {
   const glassStyle = isDesktop
     ? {
         background: 'rgba(255, 255, 255, 0.03)',
-        backdropFilter: 'blur(40px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+        backdropFilter: 'blur(20px) saturate(150%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(150%)',
         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
       }
     : {
@@ -346,7 +346,14 @@ const WebShowcase: React.FC = () => {
                 {/* Main center iframe */}
                 <div className="relative flex-1 min-w-0">
                   <div className="rounded-2xl overflow-hidden relative" style={{ aspectRatio: '16 / 9', ...glassStyle }}>
-                    {webShowcaseProjects.map((project, idx) => renderDesktopIframe(project, idx))}
+                    {/* Only render active + adjacent iframes to avoid loading all 5 simultaneously */}
+                    {webShowcaseProjects.map((project, idx) => {
+                      const isNearActive = idx === activeIndex ||
+                        idx === (activeIndex + 1) % webShowcaseProjects.length ||
+                        idx === (activeIndex - 1 + webShowcaseProjects.length) % webShowcaseProjects.length;
+                      if (!isNearActive) return null;
+                      return renderDesktopIframe(project, idx);
+                    })}
                     <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/30 to-transparent pointer-events-none z-30 rounded-b-2xl" />
                   </div>
                 </div>

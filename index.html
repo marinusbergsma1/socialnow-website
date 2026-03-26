@@ -48,19 +48,8 @@
     <link rel="preload" href="/fonts/inter-latin-700.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Preload above-fold hero reviewer avatar -->
     <link rel="preload" href="/images/Niels-Groen.webp" as="image" type="image/webp" fetchpriority="low" />
-    <!-- GitHub Pages SPA redirect handler -->
-    <script>
-      (function(l) {
-        if (l.search[1] === '/' ) {
-          var decoded = l.search.slice(1).split('&').map(function(s) {
-            return s.replace(/~and~/g, '&')
-          }).join('?');
-          window.history.replaceState(null, null,
-            l.pathname.slice(0, -1) + decoded + l.hash
-          );
-        }
-      }(window.location))
-    </script>
+    <!-- Preload font weight 900 (used site-wide as font-black) -->
+    <link rel="preload" href="/fonts/inter-latin-900.woff2" as="font" type="font/woff2" crossorigin />
     <script>
       window.addEventListener('error', (e) => {
         if (e.message === 'ResizeObserver loop completed with undelivered notifications') {
@@ -114,7 +103,7 @@
       },
       "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "ratingCount": "15" },
       "sameAs": ["https://www.instagram.com/socialnow.nl","https://www.linkedin.com/company/socialnow-nl"],
-      "knowsAbout": ["AI Website Systemen","Content Automation","CRM & Analytics","Branded Content","Advertentie Optimalisatie","AI Chatbot","Social Media Automation","Brand Strategy","Motion Design","Video Production"],
+      "knowsAbout": ["AI Website Systemen","Content Automation","CRM & Analytics","Branding","Advertentie Optimalisatie","AI Chatbot","Social Media Automation","Brand Strategy","Motion Design","Video Production"],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Digital Services",
@@ -123,7 +112,7 @@
           {"@type":"Offer","itemOffered":{"@type":"Service","name":"Content Automation","description":"Geautomatiseerde branded content op basis van AI-analyse van advertentieresultaten."}},
           {"@type":"Offer","itemOffered":{"@type":"Service","name":"CRM & Analytics","description":"Volledig geïntegreerd CRM-systeem met real-time analytics dashboard."}},
           {"@type":"Offer","itemOffered":{"@type":"Service","name":"Advertentie Optimalisatie","description":"AI-gedreven advertentieoptimalisatie voor maximale ROI."}},
-          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Branded Content","description":"Professionele branded content in jouw huisstijl, automatisch ingepland."}}
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Branding","description":"Huisstijl, merkpositionering en brand guidelines. Eén keer goed neerzetten, altijd consistent."}}
         ]
       }
     }

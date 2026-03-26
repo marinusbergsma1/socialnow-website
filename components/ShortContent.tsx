@@ -67,15 +67,17 @@ const CountUp = memo(({ end, duration = 2000, start, suffix = "m+" }: { end: num
 const LazySliderVideo = React.forwardRef<HTMLVideoElement, { src: string; isMobile: boolean }>(
   ({ src, isMobile }, ref) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [shouldLoad, setShouldLoad] = useState(!isMobile);
+    const [shouldLoad, setShouldLoad] = useState(false);
 
+    // Lazy load ALL videos (mobile + desktop) — only load when near viewport
     useEffect(() => {
-      if (!isMobile || shouldLoad) return;
+      if (shouldLoad) return;
       const el = containerRef.current;
       if (!el) return;
+      const margin = isMobile ? '200px' : '600px';
       const obs = new IntersectionObserver(
         ([entry]) => { if (entry.isIntersecting) { setShouldLoad(true); obs.disconnect(); } },
-        { rootMargin: '200px', threshold: 0 }
+        { rootMargin: margin, threshold: 0 }
       );
       obs.observe(el);
       return () => obs.disconnect();
@@ -90,7 +92,7 @@ const LazySliderVideo = React.forwardRef<HTMLVideoElement, { src: string; isMobi
           loop
           muted
           playsInline
-          preload={isMobile ? "metadata" : "auto"}
+          preload="none"
           className="w-full h-full object-cover pointer-events-none"
         />
       </div>

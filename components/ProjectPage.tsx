@@ -243,7 +243,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-black flex flex-col items-center justify-center gap-8">
+      <div className="min-h-screen flex flex-col items-center justify-center gap-8">
         <h1 className="text-4xl font-black text-white uppercase tracking-tighter">Project niet gevonden</h1>
         <Button variant="green" icon onClick={() => navigate('/')}>
           TERUG NAAR HOME
@@ -256,7 +256,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
   const currentIndex = allProjects.findIndex(p => p.slug === slug);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen text-white">
       {/* Hero Section */}
       <div className="relative w-full h-[50vh] md:h-[70vh] overflow-hidden">
         {project.image.endsWith('.mp4') ? (
