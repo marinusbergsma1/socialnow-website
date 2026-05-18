@@ -3,6 +3,26 @@ import { Project } from '../types';
 // --- WEB DESIGN & DEVELOPMENT SHOWCASE (aparte sectie op homepage) ---
 export const webShowcaseProjects: Project[] = [
   {
+    id: 12,
+    slug: "ilgordo-website",
+    title: "Il Gordo",
+    category: "AI Web Development",
+    client: "Il Gordo Amsterdam",
+    year: "2026",
+    services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "Brand Storytelling"],
+    description: "Comfort food restaurant in hartje Amsterdam. Strakke, hongerige website met sterke food-fotografie en directe reservering.",
+    image: `${import.meta.env.BASE_URL}screenshots/ilgordo-hero.webp`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/ilgordo-full.webp`,
+    align: 'left',
+    url: "https://ilgordo.nl",
+    gallery: [],
+    metrics: [
+      { label: "Laadtijd", value: "<1.2s", color: "#25D366" },
+      { label: "Mobiele Score", value: "98+", color: "#00A3E0" },
+      { label: "Doorlooptijd", value: "2 weken", color: "#F7E644" }
+    ]
+  },
+  {
     id: 6,
     slug: "vdz-brigade-website",
     title: "VDZ Brigade",
