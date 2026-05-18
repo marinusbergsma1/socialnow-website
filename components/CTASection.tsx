@@ -79,7 +79,7 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
             Plan een gratis call en ontdek of je in aanmerking komt voor ons gratis content pakket of een website demo t.w.v. €10.000.
           </p>
           <p className="text-[#25D366] text-xs md:text-sm font-black uppercase tracking-widest mb-10">
-            Actie loopt tot eind maart 2026
+            Live om jou verder te helpen
           </p>
 
           {/* Two offer cards — liquid glass on desktop */}

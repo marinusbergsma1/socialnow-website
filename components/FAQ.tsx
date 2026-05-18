@@ -5,7 +5,7 @@ import { Plus, Minus, MessageCircle } from 'lucide-react';
 const faqs = [
   {
     question: "Wat krijg ik precies gratis?",
-    answer: "Je kiest: 10 branded story's + 10 posts compleet in jouw huisstijl, of een complete website demo met AI-systeem ter waarde van \u20AC10.000. Beide gratis en vrijblijvend. De content-actie loopt tot eind maart 2026.",
+    answer: "Je kiest: 10 branded story's + 10 posts compleet in jouw huisstijl, of een complete website demo met AI-systeem ter waarde van \u20AC10.000. Beide gratis en vrijblijvend.",
     color: "#25D366"
   },
   {

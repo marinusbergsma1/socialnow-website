@@ -29,6 +29,7 @@ function lazyRetry(importFn: () => Promise<{ default: React.ComponentType<any> }
 
 // Lazy-load below-fold homepage sections — keeps initial bundle small
 const WebShowcase = lazyRetry(() => import('./components/WebShowcase'));
+const SocialMediaSlider = lazyRetry(() => import('./components/SocialMediaSlider'));
 const ProjectShowcase = lazyRetry(() => import('./components/ProjectShowcase'));
 const ShortContent = lazyRetry(() => import('./components/ShortContent'));
 const ServicesMarquee = lazyRetry(() => import('./components/ServicesMarquee'));
@@ -91,6 +92,10 @@ const HomePage: React.FC<{
         {/* v2.0: AI Metrics section after Clients */}
         <div className="scroll-reveal">
           <AIMetricsSection />
+        </div>
+
+        <div className="scroll-reveal">
+          <SocialMediaSlider />
         </div>
 
         <div className="scroll-reveal">

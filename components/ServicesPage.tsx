@@ -342,7 +342,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F7E644] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F7E644]"></span>
                 </span>
-                <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#F7E644]">ACTIE LOOPT TOT EIND MAART 2026</span>
+                <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#F7E644]">LIVE OM JOU VERDER TE HELPEN</span>
               </div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F62961]/15 border border-[#F62961]/30">
                 <span className="relative flex h-2 w-2">

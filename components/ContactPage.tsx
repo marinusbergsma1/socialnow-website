@@ -220,7 +220,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
     { icon: <Zap size={22} />, title: 'Razendsnelle oplevering', desc: 'Dankzij AI-workflows leveren wij projecten tot 3x sneller op dan traditionele bureaus.', color: '#F7E644' },
     { icon: <Shield size={22} />, title: 'Transparante prijzen', desc: 'Geen verborgen kosten. Je weet exact waar je aan toe bent voordat we starten.', color: '#25D366' },
     { icon: <Globe size={22} />, title: 'Altijd bereikbaar', desc: 'WhatsApp reactie binnen 1 uur. Persoonlijk contact, geen helpdesk of ticketsysteem.', color: '#00A3E0' },
-    { icon: <Award size={22} />, title: 'Bewezen resultaten', desc: '50+ succesvolle projecten. Van startup tot enterprise — altijd top kwaliteit.', color: '#F62961' },
+    { icon: <Award size={22} />, title: 'Bewezen resultaten', desc: '100+ succesvolle projecten. Van startup tot enterprise — altijd top kwaliteit.', color: '#F62961' },
     { icon: <HeartHandshake size={22} />, title: 'Persoonlijke aanpak', desc: 'Geen account managers. Direct contact met de founder voor maximale betrokkenheid.', color: '#25D366' },
     { icon: <MousePointerClick size={22} />, title: 'AI-first aanpak', desc: 'We zetten AI in als versneller — sneller, slimmer en voordeliger zonder kwaliteitsverlies.', color: '#F7E644' },
   ];
@@ -340,7 +340,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose }) => {
         <div ref={statsReveal.ref} className={`mb-16 md:mb-24 transition-all duration-1000 ${statsReveal.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
-              { label: 'Afgeronde projecten', end: 50, suffix: '+', color: '#25D366' },
+              { label: 'Afgeronde projecten', end: 100, suffix: '+', color: '#25D366' },
               { label: 'Tevreden klanten', end: 40, suffix: '+', color: '#00A3E0' },
               { label: 'Jaar ervaring', end: 8, suffix: '+', color: '#F7E644' },
               { label: 'Max. reactietijd', end: 1, suffix: ' uur', prefix: '<', color: '#F62961' },

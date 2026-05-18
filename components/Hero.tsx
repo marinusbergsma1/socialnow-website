@@ -168,14 +168,14 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                    <span className="animate-ping absolute h-full w-full rounded-full bg-[#25D366] opacity-75" aria-hidden="true"></span>
                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#25D366]"></span>
                  </div>
-                 <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] text-white">ACTIE LOOPT TOT EIND MAART 2026</span>
+                 <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] text-white">LIVE OM JOU VERDER TE HELPEN</span>
                </GlassEffect>
                {/* Mobile fallback — no glass */}
                <div className="md:hidden inline-flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-2.5 rounded-full">
                  <div className="relative flex h-2.5 w-2.5">
                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#25D366]"></span>
                  </div>
-                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">ACTIE LOOPT TOT EIND MAART 2026</span>
+                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">LIVE OM JOU VERDER TE HELPEN</span>
                </div>
              </div>
           </div>
@@ -257,7 +257,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                   </div>
                   <div className="h-4 w-[1px] bg-white/20"></div>
                   <p className="text-white font-black uppercase tracking-widest text-[10px] md:text-[11px]">
-                    4.9/5 <span className="text-white/40 mx-2">|</span> 50+ PROJECTEN <span className="text-white/40 mx-2">|</span> LEES REVIEWS
+                    4.9/5 <span className="text-white/40 mx-2">|</span> 100+ PROJECTEN <span className="text-white/40 mx-2">|</span> LEES REVIEWS
                   </p>
                </div>
             </div>
