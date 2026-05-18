@@ -3,6 +3,26 @@ import { Project } from '../types';
 // --- WEB DESIGN & DEVELOPMENT SHOWCASE (aparte sectie op homepage) ---
 export const webShowcaseProjects: Project[] = [
   {
+    id: 13,
+    slug: "primefone-website",
+    title: "PrimeFone",
+    category: "AI Web Development",
+    client: "PrimeFone",
+    year: "2026",
+    services: ["AI Website Development", "E-Commerce", "Conversion Optimization", "Full-Stack Development"],
+    description: "Premium e-commerce voor refurbished iPhones en Samsung-toestellen. 55-punten kwaliteitscontrole, snelle checkout, conversie-gedreven design.",
+    image: `${import.meta.env.BASE_URL}screenshots/primefone-hero.webp`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/primefone-full.webp`,
+    align: 'right',
+    url: "https://primefone-mvbas2fw.manus.space/",
+    gallery: [],
+    metrics: [
+      { label: "Laadtijd", value: "<1.3s", color: "#25D366" },
+      { label: "Conversie Boost", value: "+150%", color: "#00A3E0" },
+      { label: "Doorlooptijd", value: "2 weken", color: "#F7E644" }
+    ]
+  },
+  {
     id: 12,
     slug: "ilgordo-website",
     title: "Il Gordo",
