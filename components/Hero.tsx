@@ -257,7 +257,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                   </div>
                   <div className="h-4 w-[1px] bg-white/20"></div>
                   <p className="text-white font-black uppercase tracking-widest text-[10px] md:text-[11px]">
-                    4.9/5 <span className="text-white/40 mx-2">|</span> 50+ PROJECTEN <span className="text-white/40 mx-2">|</span> LEES REVIEWS
+                    4.9/5 <span className="text-white/40 mx-2">|</span> 100+ PROJECTEN <span className="text-white/40 mx-2">|</span> LEES REVIEWS
                   </p>
                </div>
             </div>
