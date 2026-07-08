@@ -3,6 +3,25 @@ import { Project } from '../types';
 // --- WEB DESIGN & DEVELOPMENT SHOWCASE (aparte sectie op homepage) ---
 export const webShowcaseProjects: Project[] = [
   {
+    id: 10,
+    slug: "vastiq-website",
+    title: "VASTIQ",
+    category: "AI Platform Development",
+    client: "VASTIQ",
+    year: "2026",
+    services: ["AI Platform Development", "Brand Identity", "Full-Stack Development", "Data Intelligence"],
+    description: "Real-estate intelligence platform voor de Nederlandse markt: woningwaarderingen op echte data, 12-maands prognoses en onderhandelingsinzicht — platform én merkidentiteit uit één hand.",
+    image: `${import.meta.env.BASE_URL}images/cases/vastiq-hero.webp`,
+    align: 'left',
+    url: "https://vastiq.ai",
+    gallery: [],
+    metrics: [
+      { label: "Waarderingen", value: "Live data", color: "#25D366" },
+      { label: "Prognoses", value: "12 mnd", color: "#00A3E0" },
+      { label: "Platform + merk", value: "1 systeem", color: "#F7E644" }
+    ]
+  },
+  {
     id: 13,
     slug: "primefone-website",
     title: "PrimeFone",
