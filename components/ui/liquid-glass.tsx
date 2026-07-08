@@ -180,7 +180,7 @@ export const GlassFilter: React.FC = () => {
         <feDisplacementMap
           in="SourceGraphic"
           in2="map"
-          scale="210"
+          scale="130"
           xChannelSelector="R"
           yChannelSelector="G"
         />
@@ -207,7 +207,7 @@ export const GlassFilter: React.FC = () => {
         <feDisplacementMap
           in="SourceGraphic"
           in2="map"
-          scale="80"
+          scale="55"
           xChannelSelector="R"
           yChannelSelector="G"
         />
