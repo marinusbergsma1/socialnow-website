@@ -187,10 +187,9 @@ const ImageSlider: React.FC = () => {
       {isVisible && <MarqueeRow images={imagesRow1} speed={isMobile ? 0.35 : 0.5} cardHeight={cardHeight} gap={gap} onCardClick={handleCardClick} />}
       {isVisible && <MarqueeRow images={imagesRow2} speed={isMobile ? 0.25 : 0.4} reverse cardHeight={cardHeight} gap={gap} onCardClick={handleCardClick} />}
 
-      {/* Milo rijdt op zijn rode motor in ~5s van links naar rechts door een
-          beeldvullende 16:9-strook. Transparante webm (zwart weggekeyd) + mp4-
-          fallback via .sn-milo; loopt continu. */}
-      <div className="sn-milo relative w-full aspect-video mt-4 md:mt-8">
+      {/* Milo rijdt op zijn rode motor — klein vlakje, niet beeldvullend.
+          Transparante webm (zwart weggekeyd) + mp4-fallback via .sn-milo. */}
+      <div className="sn-milo relative w-40 md:w-56 aspect-video mt-4 md:mt-6 ml-5 md:ml-8">
         <video
           autoPlay
           muted
@@ -198,7 +197,7 @@ const ImageSlider: React.FC = () => {
           loop
           preload="metadata"
           aria-hidden="true"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         >
           <source src={`${import.meta.env.BASE_URL}video/milo-motor-loop.webm`} type="video/webm" />
           <source src={`${import.meta.env.BASE_URL}video/milo-motor-loop.mp4`} type="video/mp4" />
