@@ -160,12 +160,14 @@ export const GlassFilter: React.FC = () => {
       {/* Liquid Glass lens voor .sn-warp-tile: de achtergrond buigt zichtbaar
           om de randen heen (displacement-map: centrum neutraal, rim sterk),
           zoals Apple's Liquid Glass. Blur komt daarna via de CSS-keten. */}
+      {/* Regio ruimer dan het element: anders heeft blur/warp aan de randen
+          geen data en blijft daar een rauwe, ongefilterde band zichtbaar */}
       <filter
         id="sn-warp"
-        x="0%"
-        y="0%"
-        width="100%"
-        height="100%"
+        x="-25%"
+        y="-25%"
+        width="150%"
+        height="150%"
         colorInterpolationFilters="sRGB"
       >
         <feImage
@@ -189,10 +191,10 @@ export const GlassFilter: React.FC = () => {
           scale zou de backdrop over het midden heen spiegelen */}
       <filter
         id="sn-warp-nav"
-        x="0%"
-        y="0%"
-        width="100%"
-        height="100%"
+        x="-25%"
+        y="-60%"
+        width="150%"
+        height="220%"
         colorInterpolationFilters="sRGB"
       >
         <feImage
