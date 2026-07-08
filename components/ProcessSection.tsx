@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Cpu } from 'lucide-react';
 import Button from './Button';
 
@@ -9,128 +8,67 @@ interface ProcessSectionProps {
 
 const steps = [
   {
-    number: "01",
-    title: "DISCOVERY CALL",
-    description: "30 minuten om jouw situatie te begrijpen. Gratis en vrijblijvend.",
-    detail: "We analyseren jouw huidige website, content en advertenties. Je ontvangt direct inzicht in waar de grootste kansen liggen voor groei met automation.",
-    label: "INTAKE_NODE",
-    color: "#25D366"
+    number: '01',
+    title: 'DISCOVERY CALL',
+    description: '30 minuten om jouw situatie te begrijpen. Gratis en vrijblijvend.',
+    detail: 'We analyseren jouw huidige website, content en advertenties. Je ontvangt direct inzicht in waar de grootste kansen liggen voor groei met automation.',
+    label: 'INTAKE_NODE',
+    color: '#25D366',
   },
   {
-    number: "02",
-    title: "WIJ LEVEREN",
-    description: "Binnen 1 week ontvang je jouw gratis demo — content of website.",
-    detail: "10 branded story's + 10 posts in jouw huisstijl, óf een complete website demo met AI-systeem ter waarde van €10.000. Gratis en vrijblijvend.",
-    label: "DEPLOY_OPS",
-    color: "#00A3E0"
-  }
+    number: '02',
+    title: 'WIJ LEVEREN',
+    description: 'Binnen 1 week ontvang je je gratis proof of concept.',
+    detail: "Binnen 1 week ontvang je je gratis proof of concept: een complete website demo én rebranding. Gratis en vrijblijvend.",
+    label: 'DEPLOY_OPS',
+    color: '#00A3E0',
+  },
 ];
 
-// 3D tilt hook (reuse pattern from Reviews.tsx)
-function useProcessTilt(intensity = 8) {
-  const ref = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number>(0);
+const StepCard: React.FC<{ step: typeof steps[0]; index: number; isVisible: boolean }> = ({ step, index, isVisible }) => (
+  <div
+    className="sn-warp-tile group relative p-6 md:p-8 rounded-xl overflow-hidden transition-all duration-500 hover:border-white/25"
+    style={{
+      opacity: isVisible ? 1 : 0,
+      transform: isVisible ? 'none' : 'translateY(28px)',
+      transitionDelay: `${index * 120}ms`,
+    }}
+  >
+    {/* Accent top line in step color */}
+    <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${step.color}, transparent)` }} />
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    cancelAnimationFrame(rafRef.current);
-    rafRef.current = requestAnimationFrame(() => {
-      const rect = el.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      const rotateX = (0.5 - y) * intensity;
-      const rotateY = (x - 0.5) * intensity;
-      el.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
-    });
-  }, [intensity]);
-
-  const handleMouseLeave = useCallback(() => {
-    const el = ref.current;
-    if (!el) return;
-    cancelAnimationFrame(rafRef.current);
-    el.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-  }, []);
-
-  return { ref, handleMouseMove, handleMouseLeave };
-}
-
-const StepCard: React.FC<{ step: typeof steps[0]; index: number; isVisible: boolean }> = ({ step, index, isVisible }) => {
-  const { ref: tiltRef, handleMouseMove, handleMouseLeave } = useProcessTilt(10);
-
-  // Staggered 3D flip-in angles (reuse pattern from Team.tsx)
-  const flipAngles = [
-    { rx: 12, ry: -10 },
-    { rx: -8, ry: -12 },
-    { rx: 10, ry: 8 },
-    { rx: -12, ry: 10 },
-  ];
-  const angle = flipAngles[index % flipAngles.length];
-
-  return (
-    <div
-      ref={tiltRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="group relative p-6 md:p-8 rounded-2xl md:rounded-3xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm hover:border-white/[0.15]"
-      style={{
-        transformStyle: 'preserve-3d',
-        willChange: 'transform, opacity',
-        transition: 'transform 0.5s cubic-bezier(0.03, 0.98, 0.52, 0.99), opacity 0.6s ease-out, border-color 0.5s',
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible
-          ? 'perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
-          : `perspective(600px) rotateX(${angle.rx}deg) rotateY(${angle.ry}deg) translateY(40px) scale3d(0.92, 0.92, 0.92)`,
-        transitionDelay: `${index * 150}ms`,
-      }}
-    >
-      {/* Gloss overlay (reuse Reviews.tsx) */}
-      <div className="absolute inset-0 rounded-2xl md:rounded-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%, rgba(0,0,0,0.1) 100%)' }}
-      />
-
-      {/* Terminal label */}
-      <div className="flex items-center gap-2 mb-4" style={{ transform: 'translateZ(10px)' }}>
-        <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: step.color }} />
-        <span className="text-[8px] md:text-[9px] font-mono font-bold text-white/30 tracking-widest uppercase">{step.label}_{step.number}</span>
-      </div>
-
-      {/* Step number */}
-      <div className="flex items-center gap-3 mb-4" style={{ transform: 'translateZ(15px)' }}>
-        <span
-          className="text-2xl md:text-3xl font-black tracking-tighter leading-none"
-          style={{ color: step.color }}
-        >
-          {step.number}
-        </span>
-        <div className="flex-1 h-px bg-white/10"></div>
-      </div>
-
-      {/* Title */}
-      <h3 className="text-xs md:text-sm font-black uppercase text-white tracking-tight mb-2 leading-tight" style={{ transform: 'translateZ(12px)' }}>
-        {step.title}
-      </h3>
-
-      {/* Description */}
-      <p className="text-gray-500 text-[11px] md:text-xs font-medium leading-relaxed mb-3" style={{ transform: 'translateZ(8px)' }}>
-        {step.description}
-      </p>
-
-      {/* AI automation detail */}
-      <div className="border-t border-white/[0.06] pt-3 mt-auto" style={{ transform: 'translateZ(5px)' }}>
-        <p className="text-white/25 text-[10px] md:text-[11px] font-medium leading-relaxed italic">
-          {step.detail}
-        </p>
-      </div>
-
-      {/* Hover glow */}
-      <div
-        className="absolute inset-0 rounded-2xl md:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ boxShadow: `inset 0 0 40px ${step.color}10, 0 0 30px ${step.color}08` }}
-      />
+    {/* Terminal label */}
+    <div className="flex items-center gap-2 mb-5">
+      <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: step.color }} />
+      <span className="text-[9px] font-mono font-bold text-white/40 tracking-widest uppercase">{step.label}_{step.number}</span>
     </div>
-  );
-};
+
+    {/* Step number */}
+    <div className="flex items-center gap-3 mb-4">
+      <span className="text-3xl md:text-4xl font-black tracking-tighter leading-none" style={{ color: step.color }}>
+        {step.number}
+      </span>
+      <div className="flex-1 h-px bg-white/10" />
+    </div>
+
+    {/* Title */}
+    <h3 className="text-sm md:text-base font-black uppercase text-white tracking-tight mb-2 leading-tight">{step.title}</h3>
+
+    {/* Description */}
+    <p className="text-gray-400 text-xs md:text-sm font-medium leading-relaxed mb-4">{step.description}</p>
+
+    {/* AI automation detail */}
+    <div className="border-t border-white/[0.08] pt-4">
+      <p className="text-white/45 text-[11px] md:text-xs font-medium leading-relaxed">{step.detail}</p>
+    </div>
+
+    {/* Hover glow */}
+    <div
+      className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+      style={{ boxShadow: `inset 0 0 40px ${step.color}12` }}
+    />
+  </div>
+);
 
 const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenBooking }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -148,52 +86,34 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenBooking }) => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-36 bg-transparent relative overflow-hidden">
-      {/* Animated grid background — desktop only for performance */}
-      <div
-        className="hidden md:block absolute inset-0 z-0 opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(to right, rgba(37, 211, 102, 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(37, 211, 102, 0.3) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
-          maskImage: 'radial-gradient(circle at center, black 30%, transparent 80%)',
-          WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 80%)',
-          animation: 'process-grid-scroll 25s linear infinite'
-        }}
-      />
-
-      {/* Background watermark */}
-      <div className="hidden md:block absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.015] select-none overflow-hidden">
-        <h2 className="text-[18vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">PROCESS</h2>
-      </div>
-
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+    <section ref={sectionRef} className="py-20 md:py-28 relative">
+      <div className="container mx-auto max-w-5xl px-4 md:px-6 relative z-10">
         {/* AI Badge */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/10 bg-[#0e0e12]">
             <Cpu size={14} className="text-[#25D366]" />
             <span className="text-white/50 font-black uppercase tracking-[0.4em] text-[9px] md:text-[10px]">AI-POWERED WORKFLOW</span>
           </div>
         </div>
 
-        {/* Header — smaller than before */}
-        <div className="text-center mb-6 md:mb-10">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase text-white tracking-tighter leading-[0.85] flex flex-wrap justify-center items-center">
-            <span className="inline-flex items-center whitespace-nowrap">
-              <span className="text-[#F7E644] mr-2 md:mr-4">"</span>
-              ZO SIMPEL
+        {/* Header */}
+        <div className="text-center mb-5">
+          <h2 className="text-4xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none inline-flex flex-wrap justify-center items-center gap-x-3">
+            <span className="inline-flex items-center">
+              <span className="text-[#F7E644] mr-2 md:mr-3">"</span>ZO SIMPEL
             </span>
-            <span className="mx-2 md:mx-3">IS HET</span>
-            <span className="text-[#F7E644] ml-2 md:ml-4">"</span>
+            <span>IS HET</span>
+            <span className="text-[#F7E644] ml-2 md:ml-3">"</span>
           </h2>
         </div>
 
-        {/* Subtitle — explains automation */}
-        <p className="text-center text-gray-500 text-xs md:text-sm font-medium max-w-xl mx-auto mb-14 md:mb-20 leading-relaxed">
+        {/* Subtitle */}
+        <p className="text-center text-neutral-400 text-sm md:text-base font-medium max-w-xl mx-auto mb-12 md:mb-14 leading-relaxed">
           Geen wekenlange trajecten, geen eindeloze meetings. Eén gesprek, en wij leveren. Binnen 1 week zie je resultaat — gratis en vrijblijvend.
         </p>
 
-        {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto mb-14 md:mb-20" style={{ perspective: '1000px' }}>
+        {/* Steps — bento */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-w-3xl mx-auto mb-12">
           {steps.map((step, index) => (
             <StepCard key={step.number} step={step} index={index} isVisible={isVisible} />
           ))}
@@ -206,13 +126,6 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenBooking }) => {
           </Button>
         </div>
       </div>
-
-      <style>{`
-        @keyframes process-grid-scroll {
-          0% { background-position: 0 0; }
-          100% { background-position: 60px 60px; }
-        }
-      `}</style>
     </section>
   );
 };

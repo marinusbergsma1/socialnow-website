@@ -40,8 +40,11 @@ export default {
           to: { opacity: '1' },
         },
         pageFadeIn: {
+          // Eindstaat MOET 'none' zijn: een blijvende transform/filter (ook waarde 0)
+          // maakt #main-content een backdrop root, waardoor backdrop-filter van de
+          // glass-tiles de globe-canvas erachter nooit kan bereiken.
           from: { opacity: '0', transform: 'translateY(12px)', filter: 'blur(4px)' },
-          to: { opacity: '1', transform: 'translateY(0)', filter: 'blur(0)' },
+          to: { opacity: '1', transform: 'none', filter: 'none' },
         },
         moveBackground: {
           '0%, 100%': { backgroundPosition: '0% 50%' },

@@ -101,8 +101,8 @@ const ReviewCard: React.FC<{ review: typeof reviewsData[0]; index: number; isAct
       ref={setRefs}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`group relative backdrop-blur-3xl p-10 rounded-[2.5rem] border flex flex-col shadow-2xl transition-colors duration-700 ${
-        isActive ? 'bg-black/90 border-[#00A3E0]/40 shadow-[0_20px_60px_rgba(0,163,224,0.15)]' : 'bg-zinc-950/80 border-white/10 hover:border-white/20'
+      className={`sn-warp-tile group relative p-10 rounded-[2.5rem] flex flex-col shadow-2xl transition-colors duration-700 ${
+        isActive ? '!border-[#00A3E0]/40 shadow-[0_20px_60px_rgba(0,163,224,0.15)]' : 'hover:!border-white/20'
       }`}
       style={{
         transformStyle: 'preserve-3d',
@@ -192,7 +192,7 @@ const Reviews: React.FC<ReviewsProps> = ({ onOpenBooking }) => {
         </div>
 
         {/* Detailed Review Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 w-full max-w-7xl" style={{ perspective: '1200px' }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 w-full max-w-7xl">
           {reviewsData.map((review, index) => (
             <ReviewCard key={review.id} review={review} index={index} isActive={activeIndex === index} />
           ))}

@@ -38,15 +38,14 @@ const Reviews = lazyRetry(() => import('./components/Reviews'));
 const ImageSlider = lazyRetry(() => import('./components/ImageSlider'));
 const Team = lazyRetry(() => import('./components/Team'));
 const FAQ = lazyRetry(() => import('./components/FAQ'));
-const CTASection = lazyRetry(() => import('./components/CTASection'));
 const Footer = lazyRetry(() => import('./components/Footer'));
 const WhatsAppPopup = lazyRetry(() => import('./components/WhatsAppPopup'));
 const PixelCursor = lazyRetry(() => import('./components/PixelCursor'));
 
 // v2.0 — New sections
-const AIMetricsSection = lazyRetry(() => import('./components/AIMetricsSection'));
-const TechStackSection = lazyRetry(() => import('./components/TechStackSection'));
-const WorkflowBlock = lazyRetry(() => import('./components/WorkflowBlock'));
+// v2.1 — Bento features grid ("WAT WIJ BOUWEN") vervangt de oude AIMetricsSection ("BEWEZEN IMPACT")
+const BentoFeaturesSection = lazyRetry(() => import('./components/BentoFeaturesSection'));
+const PricingStrip = lazyRetry(() => import('./components/PricingStrip'));
 
 // Lazy-load popup/modal components — only loaded when opened
 const BookingPopup = lazyRetry(() => import('./components/BookingPopup'));
@@ -74,7 +73,7 @@ const HomePage: React.FC<{
 }> = ({ loading, onOpenBooking }) => {
   useSEO({
     title: 'SocialNow | AI-Powered Web & Project Development Amsterdam',
-    description: 'SocialNow is een creatief bureau in Amsterdam gespecialiseerd in AI-gestuurde webontwikkeling, branding, UX/UI design en social media marketing.',
+    description: 'Je website, CRM, content en advertenties — allemaal samen in 1 overzichtelijke AI chat. Custom AI Solutions uit Amsterdam. Gratis proof of concept: website demo én rebranding.',
     path: '/',
   });
 
@@ -89,9 +88,9 @@ const HomePage: React.FC<{
       </div>
 
       <Suspense fallback={null}>
-        {/* v2.0: AI Metrics section after Clients */}
+        {/* v2.1: Bento features grid ("WAT WIJ BOUWEN") after Clients */}
         <div className="scroll-reveal">
-          <AIMetricsSection />
+          <BentoFeaturesSection onOpenBooking={onOpenBooking} />
         </div>
 
         <div className="scroll-reveal">
@@ -112,14 +111,9 @@ const HomePage: React.FC<{
           <ServicesMarquee />
         </div>
 
-        {/* v2.0: Tech stack section after ServicesMarquee */}
+        {/* v2.1: Glasheldere prijzen op de homepage */}
         <div className="scroll-reveal">
-          <TechStackSection />
-        </div>
-
-        {/* v2.0: Workflow automation visualization — inspired by 21st.dev N8N Workflow Block */}
-        <div className="scroll-reveal px-4 md:px-6 py-0 container mx-auto max-w-7xl">
-          <WorkflowBlock />
+          <PricingStrip onOpenBooking={onOpenBooking} />
         </div>
 
         <div className="scroll-reveal">
@@ -141,8 +135,6 @@ const HomePage: React.FC<{
         <div className="scroll-reveal">
           <FAQ onOpenContact={onOpenBooking} />
         </div>
-
-        <CTASection onOpenBooking={onOpenBooking} />
       </Suspense>
     </main>
   );
@@ -235,7 +227,7 @@ const App: React.FC = () => {
       <div
         id="main-content"
         key={location.pathname}
-        className="animate-page-fade-in"
+        className="animate-page-fade-in relative z-10"
       >
         <Routes location={location}>
           <Route
@@ -334,6 +326,7 @@ const App: React.FC = () => {
             <ContactPage
               isOpen={isContactOpen}
               onClose={() => setIsContactOpen(false)}
+              onOpenBooking={() => setIsBookingOpen(true)}
             />
           )}
         </Suspense>

@@ -1,166 +1,136 @@
 
 import React, { useEffect, useState } from 'react';
-import { 
-  X, Shield, PieChart, TrendingUp, Zap, Fingerprint,
-  Terminal, Network, Cpu, Code, Layers, Globe,
-  Linkedin, Mail, ArrowRight, UserCheck, Activity,
-  Database, HardDrive, BarChart3, Send, CircleDollarSign, Target
-} from 'lucide-react';
-import { 
-  Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer 
-} from 'recharts';
+import { X, Plus, Send, Zap, MessagesSquare, UserCheck } from 'lucide-react';
 import Button from './Button';
-import ScrollTypewriter from './ScrollTypewriter';
 import ProgressiveImage from './ProgressiveImage';
-import { PixelGlobe } from './PixelGlobe';
 
 interface TeamPageProps {
   isOpen: boolean;
   onClose: () => void;
+  /** Optioneel: opent de booking-popup na sluiten. Valt terug op onClose. */
+  onOpenBooking?: () => void;
 }
 
-const teamDetailed = [
-  { 
-    id: 1, 
-    name: "Marinus Bergsma", 
-    role: "FOUNDER & CREATIVE ART DIRECTOR", 
-    image: `${import.meta.env.BASE_URL}images/Marinus-Bergsma-V2.webp`,
-    bio: "Met meer dan 10 jaar ervaring in high-end design en digitale strategie. Marinus is de architect achter de visuele identiteit van SocialNow en bewaakt de creatieve integriteit van elk project.",
-    expertise: [
-      { subject: 'Strategy', A: 150 },
-      { subject: 'VFX', A: 130 },
-      { subject: 'Brand DNA', A: 145 },
-      { subject: 'Ops', A: 110 },
-      { subject: 'CGI', A: 140 }
-    ],
-    status: "CORE_ACTIVE",
-    color: "#00A3E0",
-    meta: { CPU: "98%", LATENCY: "12ms", UPTIME: "99.9%" }
+const BASE = import.meta.env.BASE_URL;
+
+const founder = {
+  name: 'Marinus Bergsma',
+  role: 'Founder & Creative Art Director',
+  tag: 'FOUNDER_OS',
+  color: '#F7E644',
+  image: `${BASE}images/Marinus-Bergsma-V2.webp`,
+  quote:
+    '"Ik startte SocialNow met één overtuiging: de beste merken worden gebouwd door mensen die technologie omarmen, niet vrezen."',
+  sub:
+    'Van Amsterdam Light Festival en AZ Alkmaar tot een eigen studio. Marinus richtte SocialNow op in 2021 en bewaakt elk concept persoonlijk — geen accountmanager ertussen.',
+};
+
+interface CrewMember {
+  id: number;
+  name: string;
+  role: string;
+  tag: string;
+  line: string;
+  color: string;
+  image: string;
+  imgCustomClass?: string;
+}
+
+const crew: CrewMember[] = [
+  {
+    id: 2,
+    name: 'Jos Hollenberg',
+    role: 'Marketeer / SEO Engineer',
+    tag: 'SEO_ENGINE',
+    line: 'Zorgt dat je gevonden wordt vóór je concurrent.',
+    color: '#25D366',
+    image: `${BASE}images/Jos-Hollenberg-1.webp`,
   },
-  { 
-    id: 2, 
-    name: "Jos Hollenberg", 
-    role: "MARKETEER / SEO ENGINEER", 
-    image: `${import.meta.env.BASE_URL}images/Jos-Hollenberg-1.webp`,
-    bio: "De data-engine van het team. Jos vertaalt complexe algoritmes naar vindbare strategieën en zorgt dat merken niet alleen mooi zijn, maar ook dominant in de zoekresultaten.",
-    expertise: [
-      { subject: 'SEO', A: 150 },
-      { subject: 'Data', A: 145 },
-      { subject: 'Ads', A: 120 },
-      { subject: 'Logic', A: 130 },
-      { subject: 'Growth', A: 140 }
-    ],
-    status: "DATA_SYNC",
-    color: "#25D366",
-    meta: { CPU: "84%", LATENCY: "5ms", UPTIME: "100%" }
+  {
+    id: 3,
+    name: 'Sergio Jovovic',
+    role: 'Creative Marketing Designer',
+    tag: 'DESIGN_LAB',
+    line: 'Maakt merken die je niet kunt negeren.',
+    color: '#F62961',
+    image: `${BASE}images/Sergio-Jovovic.webp`,
   },
-  { 
-    id: 3, 
-    name: "Sergio Jovovic", 
-    role: "CREATIVE DIRECTOR", 
-    image: `${import.meta.env.BASE_URL}images/Sergio-Jovovic.webp`,
-    bio: "Sergio brengt rauwe creativiteit naar het digitale spectrum. Zijn focus ligt op het doorbreken van conventies en het bouwen van visuele ecosystemen die blijven hangen.",
-    expertise: [
-      { subject: 'Art Dir', A: 145 },
-      { subject: 'Motion', A: 140 },
-      { subject: 'Concepts', A: 150 },
-      { subject: 'Design', A: 135 },
-      { subject: 'Story', A: 130 }
-    ],
-    status: "CREATIVE_RUN",
-    color: "#F62961",
-    meta: { CPU: "92%", LATENCY: "25ms", UPTIME: "99.4%" }
+  {
+    id: 4,
+    name: 'Carmel Boon',
+    role: 'Video & Motion Editor',
+    tag: 'MOTION_LAB',
+    line: 'Knipt aandacht uit elke seconde beeld.',
+    color: '#F7E644',
+    image: `${BASE}images/Carmel-Boon-V2.webp`,
   },
-  { 
-    id: 4, 
-    name: "Carmel Boon", 
-    role: "VIDEO & MOTION EDITOR", 
-    image: `${import.meta.env.BASE_URL}images/Carmel-Boon-V2.webp`,
-    bio: "Verantwoordelijk voor de high-velocity content. Carmel snijdt door de ruis met video-montages die geoptimaliseerd zijn voor aandacht en conversie op elk platform.",
-    expertise: [
-      { subject: 'Editing', A: 150 },
-      { subject: 'Speed', A: 145 },
-      { subject: 'Audio', A: 120 },
-      { subject: 'Color', A: 130 },
-      { subject: 'VFX', A: 110 }
-    ],
-    status: "RENDER_LIVE",
-    color: "#F7E644",
-    meta: { CPU: "95%", LATENCY: "40ms", UPTIME: "98.9%" }
+  {
+    id: 5,
+    name: 'Emma Peperkamp',
+    role: 'Social Media Strategist',
+    tag: 'SOCIAL_OPS',
+    line: 'Spreekt vloeiend algoritme.',
+    color: '#00A3E0',
+    image: `${BASE}images/Emma-Peperkamp-V2.webp`,
   },
-  { 
-    id: 5, 
-    name: "Emma Peperkamp", 
-    role: "SOCIAL MEDIA STRATEGIST", 
-    image: `${import.meta.env.BASE_URL}images/Emma-Peperkamp-V2.webp`,
-    bio: "De stem van het merk in de digitale arena. Emma beheerst de taal van algoritmes en trends, en vertaalt merkwaarden naar virale content die échte connecties bouwt op elk platform.",
-    expertise: [
-      { subject: 'Viral', A: 150 },
-      { subject: 'Community', A: 140 },
-      { subject: 'Content', A: 145 },
-      { subject: 'Trends', A: 135 },
-      { subject: 'Strategy', A: 130 }
-    ],
-    status: "COMM_STABLE",
-    color: "#00A3E0",
-    meta: { CPU: "89%", LATENCY: "30ms", UPTIME: "99.7%" }
-  },
-  { 
-    id: 6, 
-    name: "Nick Van Keulen", 
-    role: "PERFORMANCE ENGINEER", 
-    image: `${import.meta.env.BASE_URL}images/Nick-VK.webp`,
-    bio: "Performance specialist met een laserfocus op conversie. Nick beheert complexe Google Ads ecosystemen en zorgt dat elke klik wordt omgezet in meetbare waarde en schaalbare groei.",
-    expertise: [
-      { subject: 'SEM', A: 150 },
-      { subject: 'Tracking', A: 145 },
-      { subject: 'Analytics', A: 140 },
-      { subject: 'ROI', A: 150 },
-      { subject: 'Scaling', A: 135 }
-    ],
-    status: "PERF_SYNC",
-    color: "#25D366",
-    meta: { CPU: "96%", LATENCY: "8ms", UPTIME: "99.9%" }
+  {
+    id: 6,
+    name: 'Nick van Keulen',
+    role: 'Google Ads Expert',
+    tag: 'ADS_OPS',
+    line: 'Elke euro adspend moet zichzelf terugverdienen.',
+    color: '#25D366',
+    image: `${BASE}images/Nick-VK.webp`,
   },
   {
     id: 7,
-    name: "Sid van Kalken",
-    role: "WEBDEVELOPER",
-    image: `${import.meta.env.BASE_URL}images/Sid-van-Kalken.webp`,
-    bio: "De architect achter de code. Sid bouwt razendsnelle, schaalbare web-ecosystemen die design naadloos verbinden met functionaliteit. Code is zijn taal, performance zijn religie.",
-    expertise: [
-      { subject: 'React', A: 150 },
-      { subject: 'Next.js', A: 145 },
-      { subject: 'Perf', A: 150 },
-      { subject: 'Logic', A: 140 },
-      { subject: 'Backend', A: 125 }
-    ],
-    status: "SYSTEM_ARCH",
-    color: "#F7E644",
-    meta: { CPU: "99%", LATENCY: "1ms", UPTIME: "100%" },
-    imgCustomClass: "[&>img]:!object-[50%_10%] [&>img]:!scale-[1.3] group-hover:[&>img]:!scale-[1.35]"
+    name: 'Sid van Kalken',
+    role: 'Webdeveloper',
+    tag: 'WEB_STACK',
+    line: 'Bouwt sites die laden voor je knippert.',
+    color: '#F62961',
+    image: `${BASE}images/Sid-van-Kalken.webp`,
+    imgCustomClass:
+      '[&>img]:!object-[50%_10%] [&>img]:!scale-[1.3] group-hover:[&>img]:!scale-[1.35]',
   },
   {
     id: 8,
-    name: "Michel Pluister",
-    role: "SOFTWARE ENGINEER",
-    image: `${import.meta.env.BASE_URL}images/Michel-Pluister.webp`,
-    bio: "Michel bouwt schaalbare applicaties met een focus op clean code en performance. Van backend-architectuur tot frontend-implementatie — hij zorgt dat elk project robuust en toekomstbestendig is.",
-    expertise: [
-      { subject: 'Backend', A: 145 },
-      { subject: 'Frontend', A: 130 },
-      { subject: 'DevOps', A: 120 },
-      { subject: 'API', A: 140 },
-      { subject: 'Testing', A: 135 }
-    ],
-    status: "CODE_ACTIVE",
-    color: "#00A3E0",
-    meta: { CPU: "94%", LATENCY: "3ms", UPTIME: "99.8%" }
-  }
+    name: 'Michel Pluister',
+    role: 'Software Engineer',
+    tag: 'CODE_CORE',
+    line: 'Koppelt je CRM, chat en data aan elkaar.',
+    color: '#00A3E0',
+    image: `${BASE}images/Michel-Pluister.webp`,
+  },
 ];
 
-const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
+const pillars = [
+  {
+    tag: 'DIRECT_LINE',
+    icon: MessagesSquare,
+    color: '#25D366',
+    title: 'Geen tussenlagen',
+    copy: 'Je praat direct met de specialist die je werk maakt. Vandaag gevraagd, vandaag geschakeld.',
+  },
+  {
+    tag: 'AI_CORE',
+    icon: Zap,
+    color: '#00A3E0',
+    title: 'AI doet het zware werk',
+    copy: 'Je website, CRM, content en advertenties — allemaal samen in 1 overzichtelijke AI chat. Wij nemen de beslissingen, het systeem doet de rest.',
+  },
+  {
+    tag: 'SENIOR_ONLY',
+    icon: UserCheck,
+    color: '#F62961',
+    title: 'Alleen specialisten',
+    copy: 'Geen junioren die op jouw project leren. Acht mensen, acht vakgebieden, nul overhead.',
+  },
+];
+
+const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose, onOpenBooking }) => {
   const [isClosing, setIsClosing] = useState(false);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -173,209 +143,243 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose }) => {
 
   const handleClose = () => {
     setIsClosing(true);
+    setTimeout(() => { onClose(); }, 600);
+  };
+
+  const handleCta = () => {
+    setIsClosing(true);
     setTimeout(() => {
       onClose();
+      onOpenBooking?.();
     }, 600);
   };
 
   if (!isOpen && !isClosing) return null;
 
   return (
-    <div className={`fixed inset-0 z-[150] bg-black overflow-y-auto overflow-x-hidden custom-scrollbar transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overscroll-contain ${
-      isClosing ? 'opacity-0 scale-95 blur-2xl' : 'opacity-100 scale-100 blur-0'
-    }`} style={{ WebkitOverflowScrolling: 'touch' }}>
-      
-      <div className="fixed inset-0 z-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 1px, transparent 1px)`, backgroundSize: '80px 80px' }}></div>
-      <div className="fixed top-0 left-0 w-full h-[2px] bg-[#00A3E0] shadow-[0_0_20px_#00A3E0] z-[160] opacity-30 animate-[scan-sweep_4s_linear_infinite]"></div>
+    <div
+      className={`fixed inset-0 z-[150] bg-black overflow-y-auto overflow-x-hidden custom-scrollbar transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overscroll-contain ${
+        isClosing ? 'opacity-0 scale-95 blur-2xl' : 'opacity-100 scale-100 blur-0'
+      }`}
+      style={{ WebkitOverflowScrolling: 'touch' }}
+    >
+      {/* Subtiel raster + scanlijn — terminal-esthetiek */}
+      <div
+        className="fixed inset-0 z-0 opacity-[0.05] pointer-events-none"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.4) 1px, transparent 1px)',
+          backgroundSize: '80px 80px',
+        }}
+      ></div>
+      <div className="fixed top-0 left-0 w-full h-[2px] bg-[#25D366] shadow-[0_0_20px_#25D366] z-[160] opacity-20 animate-[scan-sweep_5s_linear_infinite]"></div>
 
+      {/* Sticky header */}
       <div className="sticky top-0 z-[170] w-full px-6 py-6 md:px-12 md:py-8 flex items-center justify-between backdrop-blur-3xl border-b border-white/5 bg-black/80">
-          <div className="flex items-center gap-6">
-              <img src={`${import.meta.env.BASE_URL}images/Logo-Social-Now-Lengte.webp`} alt="Logo" className="w-32 md:w-44" />
-              <div className="hidden lg:flex items-center gap-4 border-l border-white/10 pl-6">
-                  <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse"></div>
-                      <span className="text-[10px] font-mono text-white/40 tracking-widest uppercase">SYNC_V4.0</span>
-                  </div>
-              </div>
+        <div className="flex items-center gap-6">
+          <img src={`${BASE}images/Logo-Social-Now-Lengte.webp`} alt="SocialNow logo" className="w-32 md:w-44" />
+          <div className="hidden lg:flex items-center gap-2 border-l border-white/10 pl-6">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse"></div>
+            <span className="text-[10px] font-mono text-white/40 tracking-widest uppercase">TEAM_ROSTER / AMS</span>
           </div>
-          <button onClick={handleClose} className="group relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 text-white hover:bg-[#F62961] transition-all overflow-hidden shadow-2xl">
-             <X size={24} className="group-hover:rotate-90 transition-transform duration-500 relative z-10" />
-             <div className="absolute inset-0 bg-gradient-to-tr from-[#F62961] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </button>
+        </div>
+        <button
+          onClick={handleClose}
+          aria-label="Sluiten"
+          className="group relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 text-white hover:bg-[#F62961] transition-all overflow-hidden shadow-2xl"
+        >
+          <X size={24} className="group-hover:rotate-90 transition-transform duration-500 relative z-10" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#F62961] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        </button>
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-7xl pt-20 pb-36 px-6">
-          <div className="text-center mb-20 md:mb-24 relative px-4">
-              <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-10 backdrop-blur-md">
-                <Network size={16} className="text-[#00A3E0]" />
-                <span className="text-white font-black uppercase tracking-[0.6em] text-[10px]">HUMAN ARCHITECTURE INDEX</span>
-              </div>
-              {/* PixelGlobe Beeldmerk */}
-              <div className="absolute right-0 top-0 w-72 h-72 md:w-96 md:h-96 opacity-50 pointer-events-none">
-                <PixelGlobe scaleMultiplier={0.25} type="all" opacity={1} glowEnabled={true} largeParticles={true} scrollReactive={true} />
-              </div>
+      <div className="relative z-10 container mx-auto max-w-6xl pt-16 md:pt-24 pb-32 px-6">
+        {/* 1. HERO — compact */}
+        <div className="mb-16 md:mb-24 animate-fade-in-up">
+          <span className="font-mono text-[10px] tracking-[0.4em] text-[#25D366] uppercase block mb-6">
+            /// 8_SPECIALISTEN + 1_AI
+          </span>
+          <h1 className="text-5xl md:text-8xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-6">
+            HET TEAM<br />ACHTER <span className="text-[#25D366]">DE AI</span>
+          </h1>
+          <p className="text-gray-400 font-bold text-lg md:text-2xl max-w-2xl leading-tight">
+            Acht specialisten in Amsterdam. Eén AI-systeem dat het zware werk doet. Geen managementlagen, geen ruis.
+          </p>
+        </div>
 
-              <h1 className="text-4xl md:text-7xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-10">
-                 THE <br/> <span className="text-white">TEAM</span>
-              </h1>
-              <p className="text-gray-400 font-bold text-lg md:text-2xl max-w-3xl mx-auto italic leading-tight">
-                 "Gecentreerde intelligentie, schaalbaar talent. Wij zijn het besturingssysteem van moderne groei."
-              </p>
-          </div>
-
-          <div className="space-y-16 md:space-y-24">
-              {teamDetailed.map((member, idx) => (
-                  <div key={member.id} className={`flex flex-col ${idx % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-10 md:gap-16 items-stretch bg-[#050505] border border-white/10 rounded-[3rem] p-6 md:p-12 relative overflow-hidden group hover:border-white/20 transition-all duration-700 shadow-3xl`}>
-                      <div className="w-full md:w-[40%] relative shrink-0">
-                          <div className="relative w-full h-[400px] md:h-full min-h-[420px] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-3xl group-hover:border-white/30 transition-all duration-700">
-                             <ProgressiveImage 
-                                src={member.image} 
-                                alt={member.name} 
-                                className={`w-full h-full transition-transform duration-1000 group-hover:scale-105 ${(member as any).imgCustomClass || ""}`} 
-                             />
-                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent opacity-80"></div>
-                             <div className="absolute bottom-8 left-8 right-8">
-                                <div className="flex flex-col gap-4">
-                                    <div className="flex items-center gap-3 bg-black/80 backdrop-blur-xl border border-white/10 p-5 rounded-2xl">
-                                        <div className="w-3 h-3 rounded-full bg-[#25D366] animate-pulse"></div>
-                                        <div>
-                                            <span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">NODE_ID</span>
-                                            <span className="text-xs font-mono text-white font-black uppercase">SN_CR_{member.id}</span>
-                                        </div>
-                                    </div>
-                                    <div className="grid grid-cols-3 gap-2">
-                                        {Object.entries(member.meta).map(([key, val]) => (
-                                            <div key={key} className="bg-white/5 border border-white/5 p-2 rounded-xl text-center">
-                                                <span className="text-[8px] text-white/30 block mb-1 uppercase tracking-tighter">{key}</span>
-                                                <span className="text-[10px] text-white font-black uppercase">{val}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                             </div>
-                          </div>
-                      </div>
-
-                      <div className="flex-1 flex flex-col justify-between py-4">
-                          <div className="space-y-8">
-                              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                                  <div className="w-full">
-                                      <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight leading-[0.9] mb-5 px-1 break-words">{member.name}</h2>
-                                      <div className="flex items-center gap-4">
-                                          <div className="h-[2px] w-12" style={{ backgroundColor: member.color }}></div>
-                                          <span className="text-xs font-black uppercase tracking-[0.3em]" style={{ color: member.role === 'FOUNDER & CREATIVE ART DIRECTOR' ? member.color : '#00A3E0' }}>{member.role}</span>
-                                      </div>
-                                  </div>
-                                  <div className="bg-white/5 border border-white/10 p-4 rounded-[1.5rem] backdrop-blur-md">
-                                      <div className="flex items-center gap-3 mb-3">
-                                          <Activity size={16} className="text-[#25D366]" />
-                                          <span className="text-[10px] font-black text-[#25D366] uppercase tracking-[0.2em]">{member.status}</span>
-                                      </div>
-                                      <div className="flex gap-1 items-end h-6">
-                                          {[0.3, 0.8, 0.5, 0.9, 0.4, 0.7, 0.6].map((h, i) => (
-                                              <div key={i} className="w-1.5 bg-white/20 rounded-full" style={{ height: `${h * 100}%` }}></div>
-                                          ))}
-                                      </div>
-                                  </div>
-                              </div>
-                              <p className="text-gray-400 text-base md:text-xl font-medium leading-relaxed max-w-3xl border-l-4 border-white/10 pl-8 italic">
-                                 {member.bio}
-                              </p>
-                              
-                              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-8 border-t border-white/10">
-                                  <div className="h-64 relative bg-black/40 rounded-[2rem] border border-white/10 p-5 group/radar">
-                                      <div className="absolute top-6 left-6 flex items-center gap-2 z-10">
-                                          <BarChart3 size={18} className="text-[#00A3E0]" />
-                                          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">NEURAL_METRICS</span>
-                                      </div>
-                                      <ResponsiveContainer width="100%" height="100%">
-                                          <RadarChart cx="50%" cy="50%" outerRadius="80%" data={member.expertise}>
-                                              <PolarGrid stroke="#333" />
-                                              <PolarAngleAxis dataKey="subject" tick={{ fill: '#888', fontSize: 10, fontWeight: '900' }} />
-                                              <Radar name={member.name} dataKey="A" stroke={member.color} fill={member.color} fillOpacity={0.6} />
-                                          </RadarChart>
-                                      </ResponsiveContainer>
-                                  </div>
-                                  <div className="flex flex-col justify-center gap-6">
-                                      <div className="flex flex-wrap items-center gap-4">
-                                          <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 hover:border-[#00A3E0] transition-all cursor-pointer group/link shadow-xl">
-                                              <Linkedin size={20} className="text-white/60 group-hover/link:text-white transition-colors" />
-                                          </div>
-                                          <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 hover:border-[#F62961] transition-all cursor-pointer group/link shadow-xl">
-                                              <Mail size={20} className="text-white/60 group-hover/link:text-white transition-colors" />
-                                          </div>
-                                          <a href="https://wa.me/31637404577" target="_blank" className="flex-1 flex items-center justify-center gap-4 h-12 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 hover:border-[#25D366] transition-all group/chat shadow-xl">
-                                              <Terminal size={16} className="text-[#25D366]/60 group-hover/chat:text-[#25D366] transition-colors" />
-                                              <span className="text-[10px] font-black uppercase tracking-widest text-[#25D366]">ESTABLISH LINK</span>
-                                          </a>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              ))}
-          </div>
-
-          <div className="mt-24 md:mt-32 mb-16 md:mb-20 flex justify-center px-4 overflow-visible">
-              <div className="w-full max-w-6xl bg-white/[0.02] border border-white/10 rounded-[3rem] p-10 md:p-16 relative overflow-visible group transition-all duration-1000 scale-100 opacity-100 shadow-3xl">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#00A3E0]/5 via-transparent to-[#F62961]/5 opacity-40 rounded-[4rem]"></div>
-                
-                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 overflow-visible">
-                    <div className="flex-1 text-center md:text-left z-30">
-                        <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md">
-                            <Shield size={14} className="text-[#00A3E0]" />
-                            <span className="text-white/60 font-black uppercase tracking-[0.4em] text-[10px]">INTEGRATED BRAND OS</span>
-                        </div>
-
-                        <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.8] mb-10">
-                            LET'S GET <br/> <span className="text-[#25D366]">SOCIALNOW</span>
-                        </h2>
-
-                        <p className="text-gray-400 font-bold text-lg md:text-xl leading-tight mb-10">
-                            Wij vertalen rauwe ambitie naar <span className="text-white">geïntegreerde visuele ecosystemen</span>. Onze strategie is gecodeerd voor dominantie.
-                        </p>
-                        
-                        <div className="flex flex-wrap justify-center md:justify-start gap-6 mb-12">
-                            <div className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-4">
-                                <Shield size={18} className="text-[#00A3E0]" />
-                                <span className="text-[11px] font-black text-white/60 uppercase tracking-widest">Brand Protection</span>
-                            </div>
-                            <div className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-4">
-                                <PieChart size={18} className="text-[#25D366]" />
-                                <span className="text-[11px] font-black text-white/60 uppercase tracking-widest">Market Analytics</span>
-                            </div>
-                        </div>
-
-                        <Button variant="green" icon={true} IconComponent={Send} onClick={handleClose} className="!px-12 !text-base shadow-[0_0_30px_rgba(37,211,102,0.2)]">Neem Contact Op</Button>
-                    </div>
-                    
-                </div>
-              </div>
-          </div>
-
-          {/* STATS GRID - ANIMATED STAGGERED */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                  { icon: TrendingUp, color: "#25D366", label: "Impact", value: "+124%", desc: "Groei Rate" },
-                  { icon: CircleDollarSign, color: "#F7E644", label: "ROI", value: "€14.5k", desc: "Gemiddeld / mnd" },
-                  { icon: BarChart3, color: "#F62961", label: "Conversion", value: "4.8%", desc: "Opt-in Rate" },
-                  { icon: Target, color: "#00A3E0", label: "Performance", value: "99.8%", desc: "Peak Efficiency" }
-              ].map((stat, i) => (
-                <div
-                    key={i}
-                    className="bg-white/[0.02] border border-white/10 rounded-[2rem] p-8 group hover:border-white/20 transition-all shadow-3xl animate-fade-in-up"
-                    style={{ animationDelay: `${0.5 + (i * 0.1)}s` }}
+        {/* 2. FOUNDER */}
+        <div className="mb-16 md:mb-24 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <div className="sn-warp-tile rounded-[2rem] md:rounded-[3rem] overflow-hidden">
+            <div className="flex flex-col md:flex-row items-stretch">
+              <div className="relative w-full md:w-[42%] h-[380px] md:h-auto md:min-h-[520px] shrink-0 group">
+                <ProgressiveImage
+                  src={founder.image}
+                  alt={founder.name}
+                  className="w-full h-full absolute inset-0 transition-transform duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent opacity-80"></div>
+                <span
+                  className="absolute top-5 left-5 font-mono text-[10px] tracking-widest px-3 py-1.5 rounded-md bg-black/70 border"
+                  style={{ borderColor: `${founder.color}55`, color: founder.color }}
                 >
-                    <div className="w-12 h-12 rounded-xl bg-black border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <stat.icon size={20} style={{ color: stat.color }} />
-                    </div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 mb-2 block">{stat.label}</span>
-                    <div className="text-2xl font-black text-white mb-2">{stat.value}</div>
-                    <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{stat.desc}</div>
-                </div>
-              ))}
+                  {founder.tag}
+                </span>
+              </div>
+              <div className="flex-1 flex flex-col justify-center p-8 md:p-14">
+                <span className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-4 block">01 / FOUNDER</span>
+                <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-none mb-3">
+                  {founder.name}
+                </h2>
+                <p className="text-[#F7E644] font-bold tracking-widest text-[10px] uppercase mb-8">{founder.role}</p>
+                <p className="text-white text-xl md:text-3xl font-bold italic leading-tight mb-6">
+                  {founder.quote}
+                </p>
+                <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-lg">
+                  {founder.sub}
+                </p>
+              </div>
+            </div>
           </div>
+        </div>
+
+        {/* 3. CREW GRID */}
+        <div className="mb-16 md:mb-24">
+          <div className="flex items-end justify-between mb-8 md:mb-12">
+            <h2 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none">
+              DE <span className="text-[#00A3E0]">CREW</span>
+            </h2>
+            <span className="font-mono text-[10px] tracking-widest text-white/30 uppercase hidden md:block">
+              INDEX 02—08
+            </span>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+            {crew.map((member, index) => (
+              <div
+                key={member.id}
+                className="sn-warp-tile group relative h-[260px] md:h-[380px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden animate-fade-in-up"
+                style={{ animationDelay: `${0.1 + index * 0.06}s` }}
+              >
+                <ProgressiveImage
+                  src={member.image}
+                  alt={member.name}
+                  className={`w-full h-full absolute inset-0 transition-transform duration-700 group-hover:scale-105 ${member.imgCustomClass || ''}`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent opacity-90"></div>
+                <span
+                  className="absolute top-3 left-3 md:top-5 md:left-5 z-10 font-mono text-[8px] md:text-[10px] tracking-widest px-2 py-1 md:px-3 md:py-1.5 rounded-md bg-black/70 border"
+                  style={{ borderColor: `${member.color}55`, color: member.color }}
+                >
+                  {member.tag}
+                </span>
+                <span className="absolute top-3 right-3 md:top-5 md:right-5 z-10 font-mono text-[9px] md:text-[11px] text-white/25">
+                  {String(index + 2).padStart(2, '0')}
+                </span>
+                <div className="absolute bottom-4 md:bottom-6 left-4 md:left-6 right-4 md:right-6 z-10">
+                  <h3 className="text-sm md:text-xl font-black uppercase text-white tracking-tight leading-none mb-1.5">
+                    {member.name}
+                  </h3>
+                  <p
+                    className="text-[7px] md:text-[10px] font-bold uppercase tracking-widest mb-2 transition-colors"
+                    style={{ color: member.color }}
+                  >
+                    {member.role}
+                  </p>
+                  <p className="text-gray-400 text-[9px] md:text-[11px] font-medium leading-snug md:opacity-0 md:group-hover:opacity-100 md:translate-y-1 md:group-hover:translate-y-0 transition-all duration-500">
+                    {member.line}
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            {/* Talent-kaart */}
+            <button
+              onClick={handleCta}
+              className="group relative h-[260px] md:h-[380px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border-2 border-dashed border-[#25D366]/30 hover:border-[#25D366] bg-white/[0.02] transition-all duration-500 flex flex-col items-center justify-center text-center cursor-pointer"
+            >
+              <span className="absolute top-3 left-3 md:top-5 md:left-5 font-mono text-[8px] md:text-[10px] tracking-widest px-2 py-1 md:px-3 md:py-1.5 rounded-md bg-black/70 border border-[#25D366]/30 text-[#25D366]">
+                OPEN_SLOT
+              </span>
+              <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-[#25D366] flex items-center justify-center mb-4 shadow-[0_0_20px_rgba(37,211,102,0.4)] group-hover:scale-110 transition-transform">
+                <Plus size={16} className="text-black" strokeWidth={3} />
+              </div>
+              <h3 className="text-sm md:text-xl font-black uppercase text-white mb-1 leading-none group-hover:text-[#25D366] transition-colors">
+                GROW WITH US
+              </h3>
+              <p className="text-gray-400 font-bold text-[8px] md:text-[10px] max-w-[80%] leading-relaxed">
+                Amsterdam's snelstgroeiende creative studio zoekt talent.
+              </p>
+            </button>
+          </div>
+        </div>
+
+        {/* 4. 8 MENSEN + 1 AI-SYSTEEM */}
+        <div className="mb-16 md:mb-24">
+          <div className="max-w-3xl mb-10 md:mb-14">
+            <span className="font-mono text-[10px] tracking-[0.4em] text-[#00A3E0] uppercase block mb-5">
+              /// WAAROM_KLEIN_WERKT
+            </span>
+            <h2 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-[0.9]">
+              8 MENSEN <span className="text-[#25D366]">+ 1 AI-SYSTEEM</span>
+            </h2>
+            <p className="text-gray-400 font-bold text-base md:text-xl mt-5 leading-tight">
+              Daarom leveren wij meer dan een bureau van veertig man.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            {pillars.map((pillar, i) => (
+              <div
+                key={pillar.tag}
+                className="sn-warp-tile rounded-[1.5rem] md:rounded-[2rem] p-7 md:p-9 animate-fade-in-up"
+                style={{ animationDelay: `${0.1 + i * 0.1}s` }}
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div
+                    className="w-11 h-11 rounded-xl bg-black border flex items-center justify-center"
+                    style={{ borderColor: `${pillar.color}44` }}
+                  >
+                    <pillar.icon size={18} style={{ color: pillar.color }} />
+                  </div>
+                  <span className="font-mono text-[9px] tracking-widest" style={{ color: pillar.color }}>
+                    {pillar.tag}
+                  </span>
+                </div>
+                <h3 className="text-lg md:text-xl font-black uppercase text-white tracking-tight mb-3">
+                  {pillar.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{pillar.copy}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 5. CTA */}
+        <div className="sn-warp-tile rounded-[2rem] md:rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/5 via-transparent to-[#00A3E0]/5 pointer-events-none"></div>
+          <div className="relative z-10">
+            <span className="font-mono text-[10px] tracking-[0.4em] text-[#25D366] uppercase block mb-6">
+              /// ESTABLISH_LINK
+            </span>
+            <h2 className="text-4xl md:text-7xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-6">
+              KENNIS<wbr />MAKEN?
+            </h2>
+            <p className="text-gray-400 font-bold text-base md:text-xl max-w-xl mx-auto leading-tight mb-10">
+              Plan een gesprek met Marinus. Binnen 30 minuten weet je wat AI voor jouw merk kan doen.
+            </p>
+            <div className="flex flex-col items-center gap-6">
+              <Button variant="green" icon IconComponent={Send} onClick={handleCta} triggerOnHover className="!px-12 !text-base shadow-[0_0_30px_rgba(37,211,102,0.2)]">
+                Plan een gesprek
+              </Button>
+              <a
+                href="https://wa.me/31637404577"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[10px] tracking-widest text-white/40 uppercase hover:text-[#25D366] transition-colors"
+              >
+                OF APP DIRECT → +31 6 37 40 45 77
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <style>{`

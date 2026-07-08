@@ -345,14 +345,14 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
                     style={{ top: `${stickyTop}px` }}
                   >
                     <div
-                      className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center relative z-10 bg-[#0a0a0a]/98 backdrop-blur-3xl border rounded-[2rem] md:rounded-[3rem] p-4 md:p-8 shadow-2xl overflow-hidden transition-all duration-500 hover:border-white/20`}
+                      className={`sn-warp-tile flex flex-col ${idx % 2 === 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center relative z-10 rounded-[2rem] md:rounded-[3rem] p-4 md:p-8 shadow-2xl overflow-hidden transition-all duration-500 hover:border-white/20`}
                       style={{ borderColor: `${color}4d` }}
                     >
                       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent to-white/5 opacity-30 pointer-events-none"></div>
 
                       {/* Project Media */}
                       <div className="w-full lg:w-[55%] relative z-10 cursor-pointer" onClick={() => openProject(project.slug)}>
-                        <div className="rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 shadow-xl transition-transform duration-700 bg-black/40 backdrop-blur-xl group-hover:scale-[1.01] h-auto">
+                        <div className="rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 bg-black/30 shadow-xl transition-transform duration-700 group-hover:scale-[1.01] h-auto">
                           <div className="w-full flex flex-col p-2 md:p-4 gap-2 md:gap-4 h-auto">
                             <div className="w-full aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-lg relative bg-black/20">
                               <ProgressiveImage src={project.image} alt={project.title} className="w-full h-full block" objectFit="cover" />

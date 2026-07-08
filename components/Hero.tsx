@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
 import { Star } from 'lucide-react';
-import { GlassEffect } from './ui/liquid-glass';
 
 interface HeroProps {
   startAnimation: boolean;
@@ -161,66 +160,46 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
         <div className="container mx-auto px-6 text-center flex flex-col items-center justify-center">
 
           <div className={`transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`}>
-             {/* Liquid glass badge — desktop uses glass effect, mobile uses simple bg */}
+             {/* Live-badge (opaque zodat de achtergrond-orb er niet overheen valt) */}
              <div className="inline-flex mb-8 md:mb-10">
-               <GlassEffect className="hidden md:inline-flex items-center gap-3 px-6 py-2.5 rounded-full hover:border-[#00A3E0]/50 transition-colors cursor-default">
+               <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#0e0e12] border border-white/10">
                  <div className="relative flex h-2.5 w-2.5">
                    <span className="animate-ping absolute h-full w-full rounded-full bg-[#25D366] opacity-75" aria-hidden="true"></span>
                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#25D366]"></span>
                  </div>
-                 <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] text-white">LIVE OM JOU VERDER TE HELPEN</span>
-               </GlassEffect>
-               {/* Mobile fallback — no glass */}
-               <div className="md:hidden inline-flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-2.5 rounded-full">
-                 <div className="relative flex h-2.5 w-2.5">
-                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#25D366]"></span>
-                 </div>
-                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">LIVE OM JOU VERDER TE HELPEN</span>
+                 <span className="text-[11px] font-black uppercase tracking-[0.4em] text-white">LIVE</span>
                </div>
              </div>
           </div>
 
           <div className={`w-full max-w-[1400px] transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.1s' }}>
-              <h1 className="font-black uppercase tracking-tighter text-white leading-[0.85] text-center">
-                <div className="block text-[2.2rem] sm:text-4xl md:text-5xl lg:text-[5.5rem] xl:text-[6.5rem]">
-                  <span className="text-[#F7E644]">"</span> THE NEXT
+              <h1 className="sn-vhs font-black uppercase tracking-tighter text-white leading-[0.9] text-center">
+                <div className="block text-[2rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.5rem]">
+                  JE WEBSITE, CRM,
                 </div>
-                <div className="block text-[2.2rem] sm:text-4xl md:text-5xl lg:text-[5.5rem] xl:text-[6.5rem]">
-                  GENERATION OF
+                <div className="block text-[2rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.5rem]">
+                  CONTENT &amp; ADS
                 </div>
-                {/* Cycling word — same size, clean alignment */}
-                <div className="text-[2.2rem] sm:text-4xl md:text-5xl lg:text-[5.5rem] xl:text-[6.5rem]">
-                  <div className="relative inline-flex items-center h-[1.1em]">
-                    {showCycle ? (
-                      <span key={wordIndex} className={`${words[wordIndex].color} animate-fade-in-right transition-colors duration-1000`}>
-                        {words[wordIndex].text}
-                      </span>
-                    ) : (
-                      <span className="opacity-0">AUTOMATION</span>
-                    )}
-                  </div>
-                  <span className="text-[#F7E644]"> "</span>
+                <div className="block text-[2rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.5rem] text-[#25D366]">
+                  IN ÉÉN AI CHAT.
                 </div>
               </h1>
           </div>
 
           <div className={`transition-all duration-700 mt-6 md:mt-14 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.3s' }}>
             <p className="text-sm md:text-lg font-black uppercase tracking-[0.15em] text-white/80">
-              HUMAN CREATIVITY POWERED BY{' '}
-              <BinaryReveal text="AI TECHNOLOGY" />
+              CUSTOM{' '}
+              <BinaryReveal text="AI SOLUTIONS" />
             </p>
           </div>
 
           <p className={`max-w-2xl mx-auto text-gray-400 text-sm md:text-xl mb-6 md:mb-8 font-medium leading-relaxed px-6 mt-6 md:mt-8 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.5s' }}>
-            Ontvang een <span className="text-white font-black">gratis live website demo</span> én <span className="text-white font-black">20 creatives of ads</span> — zonder aanbetaling. Wij zoeken 5 bedrijven in Q2 die klaar zijn voor AI. Plan een call en bewijs dat jij er één van bent.
+            Start met een <span className="text-white font-black">gratis proof of concept</span>: een complete <span className="text-white font-black">website demo</span> én <span className="text-white font-black">rebranding</span>. Je ziet het werken vóórdat je iets betaalt.
           </p>
 
           <div className={`flex flex-col sm:flex-row items-center gap-4 md:gap-6 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.7s' }}>
-            <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-8 md:!px-12 text-sm md:text-lg md:shadow-[0_20px_60px_rgba(37,211,102,0.3)]">
-              CLAIM JE GRATIS CONTENT
-            </Button>
-            <Button variant="outline" icon onClick={onOpenBooking} className="relative !px-8 md:!px-12 text-sm md:text-lg !border-[#00A3E0]/50 hover:!border-[#00A3E0] !text-[#00A3E0]">
-              GRATIS WEBSITE DEMO
+            <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-8 md:!px-14 text-sm md:text-lg md:shadow-[0_20px_60px_rgba(37,211,102,0.3)]">
+              CLAIM JE GRATIS PROOF OF CONCEPT
             </Button>
           </div>
 

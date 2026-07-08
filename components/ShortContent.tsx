@@ -448,7 +448,7 @@ const ShortContent: React.FC = () => {
       </div>
 
       {/* Stats */}
-      <div className="container mx-auto px-6 mt-8 md:mt-24 z-10" ref={statsRef}>
+      <div className="container mx-auto px-6 mt-8 md:mt-24 relative z-10" ref={statsRef}>
         <div className="grid grid-cols-3 gap-2 md:gap-6">
           {[
             { label: "Content per maand", end: 60, id: "01", color: "#F7E644", icon: Activity, suffix: "+" },
@@ -457,7 +457,7 @@ const ShortContent: React.FC = () => {
           ].map((stat, i) => {
             const Icon = stat.icon;
             return (
-              <div key={i} className="relative p-4 md:p-8 rounded-xl md:rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-colors duration-700 group hover:border-white/[0.12]">
+              <div key={i} className="sn-warp-tile relative p-4 md:p-8 rounded-xl md:rounded-2xl transition-colors duration-700 group hover:border-white/[0.12]">
                 {/* Metric label */}
                 <div className="flex items-center gap-1.5 md:gap-2 mb-3 md:mb-6">
                   <Icon size={12} style={{ color: stat.color }} className="opacity-60" />

@@ -145,7 +145,7 @@ const TeamMemberCard: React.FC<{ member: TeamItem; index: number }> = ({ member,
       ref={setRefs}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="group relative h-[240px] md:h-[400px] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-sm hover:border-white/30"
+      className="sn-warp-tile group relative h-[240px] md:h-[400px] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden hover:border-white/30"
       style={{
         transformStyle: 'preserve-3d',
         willChange: 'transform, opacity',
@@ -241,7 +241,7 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
             </div>
         )}
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto px-1 md:px-0" style={{ perspective: '1000px' }}>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto px-1 md:px-0">
             {otherMembers.map((member, index) => (
                 <TeamMemberCard key={member.id} member={member} index={index} />
             ))}

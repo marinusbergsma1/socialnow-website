@@ -5,7 +5,7 @@ import { Plus, Minus, MessageCircle } from 'lucide-react';
 const faqs = [
   {
     question: "Wat krijg ik precies gratis?",
-    answer: "Je kiest: 10 branded story's + 10 posts compleet in jouw huisstijl, of een complete website demo met AI-systeem ter waarde van \u20AC10.000. Beide gratis en vrijblijvend.",
+    answer: "Een gratis proof of concept: een complete website demo \u00E9n rebranding. Je ziet het werken v\u00F3\u00F3rdat je iets betaalt \u2014 gratis en vrijblijvend.",
     color: "#25D366"
   },
   {

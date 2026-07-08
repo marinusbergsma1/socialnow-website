@@ -134,12 +134,53 @@ export const GlassButton: React.FC<{
 };
 
 // SVG Filter Component — render once per page
-export const GlassFilter: React.FC = () => (
+export const GlassFilter: React.FC = () => {
+  // Echte backdrop-warp (SVG-displacement in backdrop-filter) werkt alleen in
+  // Chromium — Safari (WebKit bug 245510) en Firefox vallen terug op blur+saturate.
+  React.useEffect(() => {
+    try {
+      const isChromium = /Chrom(e|ium)/.test(navigator.userAgent);
+      const supportsUrl =
+        typeof CSS !== "undefined" && CSS.supports("backdrop-filter", "url(#sn-warp)");
+      document.documentElement.classList.toggle("sn-warp", isChromium && supportsUrl);
+    } catch {
+      /* geen detectie mogelijk → frosted fallback */
+    }
+  }, []);
+
+  return (
   <svg
     style={{ display: "none", position: "absolute", width: 0, height: 0 }}
     aria-hidden="true"
   >
     <defs>
+      {/* Warp-filter voor .sn-warp-tile — vervormt wat er áchter het glas ligt */}
+      <filter
+        id="sn-warp"
+        x="-20%"
+        y="-20%"
+        width="140%"
+        height="140%"
+        colorInterpolationFilters="sRGB"
+      >
+        {/* Lage frequentie + hoge scale = grove, vloeiende golven die je écht
+            ziet; fijne korrel verdwijnt in de blur en leest als "alleen blur" */}
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.005 0.009"
+          numOctaves="1"
+          seed="7"
+          result="noise"
+        />
+        <feGaussianBlur in="noise" stdDeviation="3" result="soft" />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="soft"
+          scale="150"
+          xChannelSelector="R"
+          yChannelSelector="G"
+        />
+      </filter>
       <filter
         id="glass-distortion"
         x="0%"
@@ -190,4 +231,5 @@ export const GlassFilter: React.FC = () => (
       </filter>
     </defs>
   </svg>
-);
+  );
+};
