@@ -429,7 +429,7 @@ const MiloPlant: React.FC = () => {
     <div
       ref={hostRef}
       aria-hidden="true"
-      className="sn-milo absolute bottom-[calc(100%-0.5em)] right-[-0.15em] w-12 md:w-32 lg:w-36 pointer-events-none select-none z-10"
+      className="sn-milo absolute bottom-[calc(100%-0.7em)] right-[-1em] w-40 md:w-80 lg:w-[26rem] pointer-events-none select-none z-10"
     >
       {/* webm met echt alpha-kanaal (zwart weggekeyd) — mp4 als fallback */}
       <video ref={videoRef} muted playsInline preload="metadata">
@@ -472,7 +472,10 @@ const ShortContent: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-10 md:py-28 bg-transparent overflow-hidden relative border-t border-white/5">
+    // overflow-x-clip i.p.v. overflow-hidden: horizontaal geknipt (marquee)
+    // maar Milo + plant mogen verticaal boven de sectie uitkomen zonder
+    // afsnijden. Geen border-t: die gaf een zichtbare edge dwars door Milo.
+    <section className="py-10 md:py-28 bg-transparent [overflow-x:clip] [overflow-y:visible] relative">
       {/* Background watermark — desktop only */}
       <div className="hidden md:block absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.12] select-none overflow-hidden">
         <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">MOTION</h2>
