@@ -123,22 +123,14 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
       <nav
         className={`fixed z-[100] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between ${
           isScrolledOrSubPage
-            ? 'top-0 left-0 w-full bg-black/80 border-b border-white/10 px-6 md:px-12 py-5 md:shadow-2xl'
+            ? 'top-0 left-0 w-full bg-black/80 md:bg-transparent border-b border-white/10 px-6 md:px-12 py-5 md:shadow-2xl'
             : 'top-0 left-0 w-full bg-transparent px-6 md:px-12 py-10 border-transparent'
         }`}
       >
-        {/* Liquid glass background layer — desktop only, visible when scrolled */}
+        {/* Liquid glass background layer — desktop only, visible when scrolled.
+            Styling via .sn-navbar-glass: frosted fallback + lens-warp in Chromium */}
         {isScrolledOrSubPage && (
-          <div
-            className="absolute inset-0 z-0 pointer-events-none hidden md:block"
-            style={{
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              filter: 'url(#glass-distortion)',
-              background: 'rgba(0, 0, 0, 0.55)',
-              isolation: 'isolate',
-            }}
-          />
+          <div className="sn-navbar-glass absolute inset-0 z-0 pointer-events-none hidden md:block" />
         )}
           <a href="#home" onClick={(e) => { e.preventDefault(); if (!isHomePage) { navigate('/'); } else { window.scrollTo({top: 0, behavior: 'smooth'}); } }} className={`relative z-10 flex items-center transition-all duration-500`}>
             {/* Mobile: beeldmerk only */}

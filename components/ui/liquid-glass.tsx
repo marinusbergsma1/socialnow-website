@@ -1,4 +1,5 @@
 import React from "react";
+import { LENS_MAP } from "./lens-map";
 
 // Types
 interface GlassEffectProps {
@@ -150,33 +151,63 @@ export const GlassFilter: React.FC = () => {
 
   return (
   <svg
-    style={{ display: "none", position: "absolute", width: 0, height: 0 }}
+    style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }}
     aria-hidden="true"
+    focusable="false"
   >
+    {/* NB: géén display:none — dan negeert Chromium de filter-referentie */}
     <defs>
-      {/* Warp-filter voor .sn-warp-tile — vervormt wat er áchter het glas ligt */}
+      {/* Liquid Glass lens voor .sn-warp-tile: de achtergrond buigt zichtbaar
+          om de randen heen (displacement-map: centrum neutraal, rim sterk),
+          zoals Apple's Liquid Glass. Blur komt daarna via de CSS-keten. */}
       <filter
         id="sn-warp"
-        x="-20%"
-        y="-20%"
-        width="140%"
-        height="140%"
+        x="0%"
+        y="0%"
+        width="100%"
+        height="100%"
         colorInterpolationFilters="sRGB"
       >
-        {/* Lage frequentie + hoge scale = grove, vloeiende golven die je écht
-            ziet; fijne korrel verdwijnt in de blur en leest als "alleen blur" */}
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.005 0.009"
-          numOctaves="1"
-          seed="7"
-          result="noise"
+        <feImage
+          href={LENS_MAP}
+          x="0%"
+          y="0%"
+          width="100%"
+          height="100%"
+          preserveAspectRatio="none"
+          result="map"
         />
-        <feGaussianBlur in="noise" stdDeviation="3" result="soft" />
         <feDisplacementMap
           in="SourceGraphic"
-          in2="soft"
+          in2="map"
           scale="150"
+          xChannelSelector="R"
+          yChannelSelector="G"
+        />
+      </filter>
+      {/* Zachtere lens voor de navbar: die is maar ~64px hoog, dus dezelfde
+          scale zou de backdrop over het midden heen spiegelen */}
+      <filter
+        id="sn-warp-nav"
+        x="0%"
+        y="0%"
+        width="100%"
+        height="100%"
+        colorInterpolationFilters="sRGB"
+      >
+        <feImage
+          href={LENS_MAP}
+          x="0%"
+          y="0%"
+          width="100%"
+          height="100%"
+          preserveAspectRatio="none"
+          result="map"
+        />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="map"
+          scale="55"
           xChannelSelector="R"
           yChannelSelector="G"
         />

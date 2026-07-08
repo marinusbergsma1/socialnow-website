@@ -229,6 +229,16 @@ const App: React.FC = () => {
         id="main-content"
         key={location.pathname}
         className="animate-page-fade-in relative z-10"
+        onAnimationEnd={(e) => {
+          // fill-mode forwards houdt de transform/filter-animatie actief (ook op
+          // eindwaarde none) en maakt #main-content zo een backdrop root — dan
+          // bereikt de glass-blur/lens van de tiles de globe erachter nooit.
+          // Klasse weghalen zodra de fade klaar is; bij routewissel geeft de
+          // key-prop een vers element mét klasse, dus de fade blijft werken.
+          if (e.target === e.currentTarget && e.animationName === 'pageFadeIn') {
+            e.currentTarget.classList.remove('animate-page-fade-in');
+          }
+        }}
       >
         <Routes location={location}>
           <Route
