@@ -91,7 +91,10 @@
 
 html, body {
   max-width: 100%;
-  overflow-x: hidden;
+  /* clip i.p.v. hidden: 'hidden' maakt body een scroll-container waardoor
+     position:sticky (de globe-achtergrond) nooit plakt; clip knipt alleen af */
+  overflow-x: hidden; /* fallback voor oudere browsers */
+  overflow-x: clip;
   margin: 0;
   padding: 0;
   background-color: #000;
@@ -220,61 +223,6 @@ body {
 }
 
 /* ═══ VHS-ruis over de hele site (subtiele analoge statische korrel) ═══ */
-/* Mini-scanlines + subtiele RGB-fringe ("kleine color blur") als overlay op
-   alles — puur zwarte site, CRT/VHS-textuur. Werk-media wordt via een
-   dynamisch masker uitgespaard (zie useWorkAboveOverlay). */
-.grain-overlay::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9997;
-  pointer-events: none;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.22) 0 1px,
-      transparent 1px 3px
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      rgba(255, 45, 85, 0.035) 0 2px,
-      rgba(0, 229, 255, 0.035) 2px 4px
-    );
-  mask-image: var(--sn-work-mask-image, none);
-  mask-position: var(--sn-work-mask-pos, 0 0);
-  mask-size: var(--sn-work-mask-size, auto);
-  mask-repeat: no-repeat;
-  mask-composite: exclude;
-  -webkit-mask-image: var(--sn-work-mask-image, none);
-  -webkit-mask-position: var(--sn-work-mask-pos, 0 0);
-  -webkit-mask-size: var(--sn-work-mask-size, auto);
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-composite: xor;
-}
-.grain-overlay::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  pointer-events: none;
-  opacity: 0.09;
-  mix-blend-mode: screen;
-  mask-image: var(--sn-work-mask-image, none);
-  mask-position: var(--sn-work-mask-pos, 0 0);
-  mask-size: var(--sn-work-mask-size, auto);
-  mask-repeat: no-repeat;
-  mask-composite: exclude;
-  -webkit-mask-image: var(--sn-work-mask-image, none);
-  -webkit-mask-position: var(--sn-work-mask-pos, 0 0);
-  -webkit-mask-size: var(--sn-work-mask-size, auto);
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-composite: xor;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 180px 180px;
-  animation: grain-shift 12s steps(4) infinite;
-}
-
 @keyframes grain-shift {
   0%, 100% { transform: translate(0, 0); }
   10% { transform: translate(-5%, -10%); }
@@ -290,10 +238,6 @@ body {
 
 /* Disable grain overlay on mobile for performance */
 @media (max-width: 767px) {
-  .grain-overlay::after {
-    display: none;
-  }
-
   /* Disable expensive backdrop-blur on mobile — causes compositing overhead */
   .backdrop-blur-md,
   .backdrop-blur-xl,
@@ -411,7 +355,11 @@ body {
    Chromium (html.sn-warp): SVG-displacement in backdrop-filter → de
    particle-orb áchter de tile vervormt zichtbaar door het glas. */
 /* ═══ VHS/CRT-titels: fijne scanlines, subtiele RGB-fringe, zachte glow.
-   Geen glitch, geen bewegende band — rustige analoge textuur. ═══ */
+   Geen glitch, geen bewegende band — rustige analoge textuur.
+   Automatisch op elke titel (h1/h2/h3); uitzetten per element met .sn-vhs-off ═══ */
+h1:not(.sn-vhs-off),
+h2:not(.sn-vhs-off),
+h3:not(.sn-vhs-off),
 .sn-vhs {
   position: relative;
   text-shadow:
@@ -420,6 +368,9 @@ body {
     0 0 14px rgba(255, 255, 255, 0.2);
 }
 /* Fijne, onopvallende scanlines (alleen textuur — geen zichtbare band) */
+h1:not(.sn-vhs-off)::after,
+h2:not(.sn-vhs-off)::after,
+h3:not(.sn-vhs-off)::after,
 .sn-vhs::after {
   content: '';
   position: absolute;

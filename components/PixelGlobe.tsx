@@ -221,7 +221,7 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
 
       // Set glow if enabled (disabled on mobile for performance)
       if (glowEnabled && !isMobile) {
-        ctx.shadowBlur = 4;
+        ctx.shadowBlur = 9;
       }
 
       // Pre-compute trig values outside the loop
@@ -281,10 +281,11 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
           }
 
           const pointAlpha = Math.min(1, Math.max(0.1, (rz + 1.8) / 2.5)) * opacity * entranceScale;
-          // Larger particles when largeParticles is enabled
+          // Dikke retro-pixels: groter en gesnapt op een 2px-grid zodat ze
+          // echt als blokjes lezen (chunky CRT-look)
           const size = largeParticles
-            ? Math.max(1.5, 3.5 * perspectiveScale)
-            : Math.max(0.8, 2 * perspectiveScale);
+            ? Math.max(3, Math.round((5.5 * perspectiveScale) / 2) * 2)
+            : Math.max(2, Math.round((3 * perspectiveScale) / 2) * 2);
 
           ctx.fillStyle = p.color;
           ctx.globalAlpha = pointAlpha;
@@ -293,7 +294,7 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
             ctx.shadowColor = p.color;
           }
 
-          ctx.fillRect(px - size/2, py - size/2, size, size);
+          ctx.fillRect(Math.round(px - size/2), Math.round(py - size/2), size, size);
         }
       }
 
