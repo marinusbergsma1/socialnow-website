@@ -158,7 +158,7 @@ const WebsitePreview: React.FC<{ screenshot: string; url: string; title: string 
   return (
     <div className="relative group">
       {/* Browser chrome frame */}
-      <div className="rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 bg-[#111] shadow-2xl">
+      <div data-sn-work className="rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 bg-[#111] shadow-2xl">
         {/* Browser top bar */}
         <div className="flex items-center gap-3 px-4 py-3 bg-[#1a1a1a] border-b border-white/10">
           <div className="flex gap-1.5">
@@ -304,6 +304,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
               <div
                 key={i}
                 className="sn-warp-tile relative rounded-2xl p-4 md:p-6 text-center overflow-hidden group"
+                style={{ '--sn-glow': `${metric.color || '#25D366'}66` } as React.CSSProperties}
               >
                 <div
                   className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity"

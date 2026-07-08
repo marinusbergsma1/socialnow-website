@@ -323,7 +323,7 @@ const WebShowcase: React.FC = () => {
 
                 <div className="relative flex-1 min-w-0">
                   <a href={activeProject.url} target="_blank" rel="noopener noreferrer" className="block">
-                    <div className="rounded-xl overflow-hidden relative" style={{ aspectRatio: '16 / 9', ...glassStyle }}>
+                    <div data-sn-work className="rounded-xl overflow-hidden relative" style={{ aspectRatio: '16 / 9', ...glassStyle }}>
                         {webShowcaseProjects.map((project, idx) => {
                         // Only render active + adjacent slides on mobile to reduce DOM and image loads
                         const isNearActive = Math.abs(idx - activeIndex) <= 1 ||
@@ -366,7 +366,7 @@ const WebShowcase: React.FC = () => {
 
                 {/* Main center iframe */}
                 <div className="relative flex-1 min-w-0">
-                  <div className="rounded-2xl overflow-hidden relative" style={{ aspectRatio: '16 / 9', ...glassStyle }}>
+                  <div data-sn-work className="rounded-2xl overflow-hidden relative" style={{ aspectRatio: '16 / 9', ...glassStyle }}>
                     {/* Only render active + adjacent iframes to avoid loading all 5 simultaneously */}
                     {webShowcaseProjects.map((project, idx) => {
                       const isNearActive = idx === activeIndex ||
@@ -429,7 +429,7 @@ const WebShowcase: React.FC = () => {
 
       {/* Fullscreen overlay */}
       {isFullscreen && (
-        <div className="fixed inset-0 z-[9999] bg-black flex flex-col">
+        <div data-sn-work className="fixed inset-0 z-[9999] bg-black flex flex-col">
           <div className="flex items-center justify-between px-6 py-3 bg-[#0a0a0a] border-b border-white/10">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-3">

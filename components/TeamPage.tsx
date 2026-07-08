@@ -198,7 +198,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                 {stat}
               </span>
             ))}
-            <span className="sn-warp-tile rounded-full px-4 py-2 md:px-5 md:py-2.5 font-mono text-[9px] md:text-[10px] tracking-widest uppercase !border-[#F7E644]/30 text-[#F7E644]">
+            <span className="sn-warp-tile rounded-full px-4 py-2 md:px-5 md:py-2.5 font-mono text-[9px] md:text-[10px] tracking-widest uppercase !border-[#F7E644]/30 text-[#F7E644]" style={{ '--sn-glow': 'rgba(247,230,68,0.45)' } as React.CSSProperties}>
               {daysToFive()} DAGEN TOT 5 JAAR SOCIALNOW
             </span>
           </div>
@@ -325,7 +325,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
               })}
             </div>
 
-            <div className="sn-warp-tile rounded-[2rem] overflow-hidden relative min-h-[560px]">
+            <div className="sn-warp-tile rounded-[2rem] overflow-hidden relative min-h-[560px]" style={{ '--sn-glow': `${activeMember.color}66` } as React.CSSProperties}>
               <div key={activeMember.id} className="absolute inset-0 animate-fade-in group">
                 <ProgressiveImage
                   src={activeMember.image}
@@ -366,6 +366,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
               <div
                 key={member.id}
                 className="sn-warp-tile group relative h-[260px] rounded-[1.5rem] overflow-hidden"
+                style={{ '--sn-glow': `${member.color}66` } as React.CSSProperties}
               >
                 <ProgressiveImage
                   src={member.image}
@@ -434,7 +435,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
               <div
                 key={pillar.tag}
                 className="sn-warp-tile rounded-[1.5rem] md:rounded-[2rem] p-7 md:p-9 animate-fade-in-up"
-                style={{ animationDelay: `${0.1 + i * 0.1}s` }}
+                style={{ animationDelay: `${0.1 + i * 0.1}s`, '--sn-glow': `${pillar.color}66` } as React.CSSProperties}
               >
                 <div className="flex items-center justify-between mb-6">
                   <div

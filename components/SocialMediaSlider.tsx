@@ -209,7 +209,7 @@ const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[] }> = ({ posts }) => {
       onPointerCancel={onPointerUp}
       style={{ touchAction: 'pan-y', overflow: 'clip', padding: `${isMobile ? 16 : 40}px 0` }}
     >
-      <div ref={trackRef} className="flex will-change-transform" style={{ gap: `${gap}px` }}>
+      <div ref={trackRef} data-sn-work className="flex will-change-transform" style={{ gap: `${gap}px` }}>
         {allPosts.map((post, i) => {
           const isHovered = !isMobile && hoveredIndex === i;
           return (

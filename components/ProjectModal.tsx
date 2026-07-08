@@ -111,7 +111,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
       ></div>
       
       {/* Modal Container */}
-      <div className="relative w-full h-full md:w-[95%] md:h-[90%] max-w-[1800px] bg-[#050505]/80 backdrop-blur-3xl border border-white/10 rounded-[0] md:rounded-[3rem] overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.8)] flex flex-col">
+      <div data-sn-work className="relative w-full h-full md:w-[95%] md:h-[90%] max-w-[1800px] bg-[#050505]/80 backdrop-blur-3xl border border-white/10 rounded-[0] md:rounded-[3rem] overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.8)] flex flex-col">
         
         {/* Background Grid Pattern */}
 

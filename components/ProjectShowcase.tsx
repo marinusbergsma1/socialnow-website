@@ -246,7 +246,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
             </div>
           </div>
           <div className="relative flex justify-center items-center overflow-hidden">
-            <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
+            <div data-sn-work className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
                <LazyVideo
                  src={`${import.meta.env.BASE_URL}videos/nextgen-webdesign.mp4`}
                  isHovered={isWebdesignHovered}
@@ -278,7 +278,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
             </div>
           </div>
           <div className="relative flex justify-center items-center overflow-hidden">
-            <div className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
+            <div data-sn-work className="relative w-full aspect-video rounded-none overflow-hidden shadow-2xl transition-all duration-[1200ms] ease-out bg-black border border-white/5" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
               <LazyVideo
                 src="https://storage.googleapis.com/video-slider/FEATURED/BetCity-branded%20bumper%20ad%20-%20.mp4"
                 isHovered={isBetcityHovered}
@@ -304,7 +304,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
             </div>
           </div>
           <div className="relative flex justify-center items-center group overflow-hidden">
-            <div className="relative w-full transition-all duration-[1200ms] ease-out" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
+            <div data-sn-work className="relative w-full transition-all duration-[1200ms] ease-out" style={{ transform: `scale(var(--scale, 0.85))`, willChange: 'transform' }}>
               <BeforeAfterSlider
                 beforeImage={`${import.meta.env.BASE_URL}images/Eternal-Sundown-Afbeelding-Before-geconverteerd-van-png-1.webp`}
                 afterImage={`${import.meta.env.BASE_URL}images/Eternal-Sundown-Afbeelding-After.webp`}

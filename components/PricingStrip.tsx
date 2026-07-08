@@ -69,6 +69,7 @@ const PricingStrip: React.FC<PricingStripProps> = ({ onOpenBooking }) => (
             className={`sn-warp-tile relative rounded-xl p-7 md:p-8 flex flex-col ${
               tier.highlight ? '!border-[#25D366]/60' : ''
             }`}
+            style={{ '--sn-glow': `${tier.color}66` } as React.CSSProperties}
           >
             {tier.highlight && (
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#25D366] text-black text-[10px] font-black uppercase tracking-widest whitespace-nowrap">
@@ -101,6 +102,33 @@ const PricingStrip: React.FC<PricingStripProps> = ({ onOpenBooking }) => (
             )}
           </div>
         ))}
+      </div>
+
+      {/* Custom AI solutions — buiten de pakketten, opvallend geel */}
+      <div
+        className="sn-warp-tile relative rounded-xl mt-3 md:mt-4 p-7 md:p-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10 !border-[#F7E644]/50"
+        style={{ '--sn-glow': 'rgba(247, 230, 68, 0.5)' } as React.CSSProperties}
+      >
+        <div className="absolute -top-3 left-6 md:left-10 px-4 py-1 rounded-full bg-[#F7E644] text-black text-[10px] font-black uppercase tracking-widest whitespace-nowrap">
+          Custom AI Solutions
+        </div>
+        <div className="flex-1">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-3 text-[#F7E644]">
+            Buiten het pakket
+          </p>
+          <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-white leading-none mb-3">
+            Iets anders nodig? <span className="text-[#F7E644]">Wij bouwen het.</span>
+          </h3>
+          <p className="text-gray-400 text-sm md:text-base font-medium leading-snug max-w-xl">
+            Custom AI-integraties, automations en interne tools op maat: van een AI-agent
+            gekoppeld aan je eigen systemen tot volledige workflows die zichzelf draaien.
+          </p>
+        </div>
+        <div className="shrink-0">
+          <Button variant="outline" icon onClick={onOpenBooking} className="!text-sm justify-center !border-[#F7E644]/60 hover:!border-[#F7E644] !text-[#F7E644]">
+            BESPREEK JE IDEE
+          </Button>
+        </div>
       </div>
 
       {/* Proof of concept CTA — prominent */}

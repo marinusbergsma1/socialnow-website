@@ -175,7 +175,7 @@ const ImageSlider: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-10 md:py-20 bg-transparent overflow-hidden relative flex flex-col gap-3 md:gap-5 z-20 touch-pan-y"
+      data-sn-work className="py-10 md:py-20 bg-transparent overflow-hidden relative flex flex-col gap-3 md:gap-5 z-20 touch-pan-y"
     >
       <div className="px-5 md:px-8 mb-4 md:mb-6">
         <p className="text-[10px] md:text-[11px] font-semibold tracking-[0.25em] md:tracking-[0.3em] uppercase text-white/40 mb-1 md:mb-2">Portfolio</p>

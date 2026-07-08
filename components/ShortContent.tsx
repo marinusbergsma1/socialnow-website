@@ -330,7 +330,7 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
     >
       <div
         ref={trackRef}
-        className="flex will-change-transform"
+        data-sn-work className="flex will-change-transform"
         style={{ gap: `${gap}px` }}
       >
         {allVideos.map((video, i) => {

@@ -182,6 +182,50 @@ const App: React.FC = () => {
     return () => document.removeEventListener('animationend', strip);
   }, []);
 
+  // Werk-media boven de retro-overlays: knip gaten in het scanline/ruis-masker
+  // op de posities van [data-sn-work] elementen (viewport-coords, want de
+  // overlays zijn fixed). Zo blijft al het werk altijd volledig zichtbaar.
+  useEffect(() => {
+    const root = document.querySelector('.grain-overlay') as HTMLElement | null;
+    if (!root) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const els = document.querySelectorAll('[data-sn-work]');
+      const images: string[] = ['linear-gradient(#fff,#fff)'];
+      const positions: string[] = ['0px 0px'];
+      const sizes: string[] = ['100% 100%'];
+      els.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.width < 2 || r.height < 2) return;
+        if (r.bottom < 0 || r.top > window.innerHeight || r.right < 0 || r.left > window.innerWidth) return;
+        images.push('linear-gradient(#fff,#fff)');
+        positions.push(`${Math.round(r.left)}px ${Math.round(r.top)}px`);
+        sizes.push(`${Math.round(r.width)}px ${Math.round(r.height)}px`);
+      });
+      if (images.length === 1) {
+        root.style.removeProperty('--sn-work-mask-image');
+        root.style.removeProperty('--sn-work-mask-pos');
+        root.style.removeProperty('--sn-work-mask-size');
+      } else {
+        root.style.setProperty('--sn-work-mask-image', images.join(', '));
+        root.style.setProperty('--sn-work-mask-pos', positions.join(', '));
+        root.style.setProperty('--sn-work-mask-size', sizes.join(', '));
+      }
+    };
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    const iv = window.setInterval(schedule, 600); // vangt layout-shifts en laden op
+    schedule();
+    return () => {
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      clearInterval(iv);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   useEffect(() => {
     if (loading) return;
 
