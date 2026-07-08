@@ -387,22 +387,16 @@ h3:not(.sn-vhs-off)::after,
    tekst kan staan zonder die af te dekken + subtiele VHS-scanlines ═══ */
 /* NB: geen position hier — dat zou Tailwind's absolute/relative op het
    element overschrijven (utilities komen eerder in de bundel) */
-.sn-milo > video {
+.sn-milo > video,
+.sn-milo > img {
   mix-blend-mode: screen;
   display: block;
   width: 100%;
-}
-.sn-milo::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.18) 0 1px,
-    transparent 1px 3px
-  );
-  mix-blend-mode: multiply;
+  /* VHS-scanlines als mask op de beeldpixels zelf: zichtbaar op Milo, maar
+     nooit een overlay-blok over watermarks/achtergrond (het oude ::after met
+     multiply verdonkerde het hele videovlak tot een zichtbaar zwart blok) */
+  -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 1px, rgba(0, 0, 0, 0.72) 1px 3px);
+  mask-image: repeating-linear-gradient(to bottom, #000 0 1px, rgba(0, 0, 0, 0.72) 1px 3px);
 }
 
 /* Frosted glass (de aangeleverde .glass-card) + gloeiende outline die rondloopt */

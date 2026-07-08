@@ -187,20 +187,19 @@ const ImageSlider: React.FC = () => {
       {isVisible && <MarqueeRow images={imagesRow1} speed={isMobile ? 0.35 : 0.5} cardHeight={cardHeight} gap={gap} onCardClick={handleCardClick} />}
       {isVisible && <MarqueeRow images={imagesRow2} speed={isMobile ? 0.25 : 0.4} reverse cardHeight={cardHeight} gap={gap} onCardClick={handleCardClick} />}
 
-      {/* Milo scheurt op zijn motor met een wheelie door het portfolio */}
-      <div className="container mx-auto px-5 md:px-8 mt-6 md:mt-10 relative z-10">
-        <div className="sn-milo relative w-full aspect-video rounded-2xl md:rounded-[2rem] overflow-hidden border border-white/10 bg-black">
-          {/* TODO: vervangen door milo-wheelie-loop.mp4 zodra de Higgsfield-
-              credits zijn aangevuld (video-generatie stond klaar) */}
-          <img
-            src={`${import.meta.env.BASE_URL}images/milo-motor-wheelie.png`}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover"
-          />
-        </div>
+      {/* Milo op zijn motor — mini, in een lage beeldvullende strook die
+          direct aansluit op de slider hierboven (geen extra tussenruimte).
+          TODO: vervangen door milo-wheelie-loop.mp4 (5s van links naar
+          rechts) zodra de Higgsfield-credits zijn aangevuld. */}
+      <div className="sn-milo relative w-full h-20 md:h-36 overflow-hidden">
+        <img
+          src={`${import.meta.env.BASE_URL}images/milo-motor-wheelie.png`}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          className="!w-auto h-full object-contain"
+        />
       </div>
     </section>
   );
