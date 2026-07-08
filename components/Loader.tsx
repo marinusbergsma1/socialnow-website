@@ -5,22 +5,15 @@ interface LoaderProps {
   onComplete: () => void;
 }
 
-// Compute video src immediately (no useState waterfall)
-const isMobileDevice = typeof window !== 'undefined' && window.innerWidth <= 1024;
-const getLoaderSrc = () => {
-  return isMobileDevice
-    ? "https://storage.googleapis.com/video-slider/Logo%20Animatie/SocialNow%20Logo%20Animatie%202026.mp4"
-    : "https://storage.googleapis.com/video-slider/SocialNow%20Logo%20animatie%20PC.mp4";
-};
+const VIDEO_SRC = `${import.meta.env.BASE_URL}video/header-intro.mp4`;
 
 const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
   const [isExiting, setIsExiting] = useState(false);
-  const videoSrc = getLoaderSrc();
   const videoRef = useRef<HTMLVideoElement>(null);
   const isMounted = useRef(true);
   const hasCompleted = useRef(false);
 
-  // Single exit function to prevent double-fires
+  // Single exit function to prevent double-fires: fade out, then onComplete
   const triggerExit = useCallback((delayMs = 400) => {
     if (hasCompleted.current || !isMounted.current) return;
     hasCompleted.current = true;
@@ -34,34 +27,26 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     isMounted.current = true;
     hasCompleted.current = false;
 
+    // Kick off playback explicitly so we can catch autoplay-block rejections
     const video = videoRef.current;
-    let canPlayFired = false;
-
-    // Track if video actually starts playing
-    const onCanPlay = () => { canPlayFired = true; };
     if (video) {
-      video.addEventListener('canplay', onCanPlay, { once: true });
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay blocked: skip the opener almost immediately
+          triggerExit(300);
+        });
+      }
     }
 
-    // If video hasn't even started loading after 4s, skip (broken network)
-    const networkCheck = setTimeout(() => {
-      if (!canPlayFired && !hasCompleted.current) {
-        triggerExit(300);
-      }
-    }, 4000);
-
-    // Safety fallback: absolute max wait of 15s to prevent infinite loader
+    // Safety net: if onEnded never fires (e.g. stalled playback), exit after 6s
     const safetyTimer = setTimeout(() => {
-      triggerExit(300);
-    }, 15000);
+      triggerExit(400);
+    }, 6000);
 
     return () => {
       isMounted.current = false;
-      clearTimeout(networkCheck);
       clearTimeout(safetyTimer);
-      if (video) {
-        video.removeEventListener('canplay', onCanPlay);
-      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -78,38 +63,37 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleVideoEnd = () => {
-    triggerExit(500);
+    triggerExit(400);
   };
 
   const handleVideoError = () => {
     triggerExit(200);
   };
 
-  // Allow clicking/tapping to skip the loader
+  // Allow clicking/tapping anywhere to skip the opener
   const handleSkip = () => {
-    triggerExit(300);
+    triggerExit(400);
   };
 
   return (
     <div
       onClick={handleSkip}
-      className={`fixed inset-0 z-[10001] bg-black flex items-center justify-center cursor-pointer transition-all duration-[500ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        isExiting ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100'
+      className={`fixed inset-0 z-[10001] bg-black flex items-center justify-center cursor-pointer transition-opacity duration-[400ms] ease-out ${
+        isExiting ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      <div className="absolute inset-0 z-0 overflow-hidden bg-black pointer-events-none">
-        <video
-          ref={videoRef}
-          src={videoSrc}
-          playsInline
-          autoPlay
-          muted
-          preload="auto"
-          onEnded={handleVideoEnd}
-          onError={handleVideoError}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-contain"
-        />
-      </div>
+      {/* Mobile: 16:9 band vertically centered on black. Desktop (md+): fullscreen cover. */}
+      <video
+        ref={videoRef}
+        src={VIDEO_SRC}
+        autoPlay
+        muted
+        playsInline
+        preload="auto"
+        onEnded={handleVideoEnd}
+        onError={handleVideoError}
+        className="w-full object-contain pointer-events-none md:absolute md:inset-0 md:h-full md:object-cover"
+      />
 
       {/* Skip hint */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-30 pointer-events-none">
