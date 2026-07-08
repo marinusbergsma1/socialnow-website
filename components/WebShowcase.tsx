@@ -188,7 +188,7 @@ const WebShowcase: React.FC = () => {
           </div>
         )}
         <iframe
-          src={project.url}
+          src={project.previewUrl || project.url}
           title={project.title}
           className={`w-full h-full border-0 transition-opacity duration-500 ${iframeLoaded[idx] ? 'opacity-100' : 'opacity-0'}`}
           style={{ colorScheme: 'normal' }}
@@ -209,7 +209,7 @@ const WebShowcase: React.FC = () => {
       );
     }
     return (
-      <iframe key={`fs-${project.id}`} src={project.url} title={`${project.title} - Fullscreen`}
+      <iframe key={`fs-${project.id}`} src={project.previewUrl || project.url} title={`${project.title} - Fullscreen`}
         className={`w-full h-full border-0 ${idx === activeIndex ? 'block' : 'hidden'}`}
         style={{ colorScheme: 'normal' }}
         sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"

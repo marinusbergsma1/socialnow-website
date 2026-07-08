@@ -19,6 +19,8 @@ export interface Project {
   align: 'left' | 'right';
   gallery?: string[];
   url?: string;
+  /** Same-origin mirror voor de live embed (omzeilt X-Frame-Options) */
+  previewUrl?: string;
   fullPageScreenshot?: string;
   metrics?: ProjectMetric[];
   /** Site blokkeert iframes (X-Frame-Options); toon het beeld i.p.v. live embed */

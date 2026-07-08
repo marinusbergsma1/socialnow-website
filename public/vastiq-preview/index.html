@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VASTIQ — Real-Estate Intelligence for the Dutch Market</title>
+    <meta name="description" content="VASTIQ is the data-intelligence platform for the Dutch real-estate market: transparent valuations, 12-month price forecasts and opportunity detection — your negotiation advantage, built on real transaction data." />
+    <link rel="canonical" href="https://vastiq.socialnow.nl/" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Favicon (SVG — crisp on every density) + Safari pinned-tab mask + theme color. -->
+    <link rel="icon" type="image/svg+xml" href="/vastiq-preview/favicon.svg" />
+    <link rel="apple-touch-icon" href="/vastiq-preview/favicon.svg" />
+    <link rel="mask-icon" href="/vastiq-preview/favicon.svg" color="#0D1F17" />
+    <meta name="theme-color" content="#0D1F17" />
+
+    <!-- Open Graph (social previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="VASTIQ" />
+    <meta property="og:title" content="VASTIQ — Real-Estate Intelligence for the Dutch Market" />
+    <meta property="og:description" content="Transparent valuations, 12-month price forecasts and opportunity detection — your negotiation advantage, built on real transaction data." />
+    <meta property="og:url" content="https://vastiq.socialnow.nl/" />
+    <meta property="og:image" content="https://vastiq.socialnow.nl/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="VASTIQ — real-estate intelligence, grounded in real data" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="nl_NL" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="VASTIQ — Real-Estate Intelligence for the Dutch Market" />
+    <meta name="twitter:description" content="Transparent valuations, 12-month price forecasts and opportunity detection — your negotiation advantage, built on real transaction data." />
+    <meta name="twitter:image" content="https://vastiq.socialnow.nl/og-image.png" />
+
+    <!-- LCP: preconnect to the image CDN + preload the homepage hero so it
+         starts downloading before the JS bundle parses. -->
+    <link rel="preconnect" href="https://d2xsxph8kpxj0f.cloudfront.net" crossorigin />
+    <link rel="preload" as="image" fetchpriority="high" href="/vastiq-preview/hero-poster.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Load the font stylesheet without blocking render: preload as style, then
+         flip to stylesheet on load. display=swap already paints fallback text
+         immediately, so this removes the render-blocking request (LCP/FCP win).
+         <noscript> keeps it working with JS disabled. -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Schibsted+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Schibsted+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    </noscript>
+
+    <!-- Structured data: who we are + sitewide search -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://vastiq.socialnow.nl/#organization",
+          "name": "VASTIQ",
+          "url": "https://vastiq.socialnow.nl/",
+          "description": "Data-intelligence platform for the Dutch real-estate market.",
+          "logo": "https://vastiq.socialnow.nl/og-image.png",
+          "image": "https://vastiq.socialnow.nl/og-image.png",
+          "email": "info@socialnow.nl",
+          "areaServed": { "@type": "Country", "name": "Netherlands" },
+          "knowsLanguage": ["nl", "en"],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": "info@socialnow.nl",
+            "telephone": "+31637404577",
+            "availableLanguage": ["nl", "en"]
+          },
+          "sameAs": ["https://www.socialnow.nl"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://vastiq.socialnow.nl/#website",
+          "url": "https://vastiq.socialnow.nl/",
+          "name": "VASTIQ",
+          "publisher": { "@id": "https://vastiq.socialnow.nl/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://vastiq.socialnow.nl/property-valuation?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+    <script>try{history.replaceState(null,"","/")}catch(e){}</script>
+    <script type="module" crossorigin src="/vastiq-preview/assets/index-C9IWTnRh.js"></script>
+    <link rel="modulepreload" crossorigin href="/vastiq-preview/assets/vendor-gp-EFVzM.js">
+    <link rel="modulepreload" crossorigin href="/vastiq-preview/assets/vendor-icons-alUFCQ8X.js">
+    <link rel="stylesheet" crossorigin href="/vastiq-preview/assets/index-DDDLtYMI.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<!--
+  VASTIQ favicon — official beeldmerk (trend line rising into the circle pin,
+  /BRANDING/LOGO/SVG/VASTIQ BEELDMERK TURQOISE.svg) in sage #95C4A1 on the
+  forest tile (#0D1F17). SVG so it stays crisp at 16/32/180 across light +
+  dark UI chrome.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="6" fill="#0D1F17"/>
+  <g transform="translate(4,7.07) scale(0.065)">
+    <path fill="#95C4A1" fill-rule="evenodd" d="M273.33,34.89c-34.5,0-62.46,27.97-62.46,62.46h0c0,11.23,3.96,23.31,10.12,35.26l-41.82,41.82-50.07-50.07-95.86,101.07,15.06,14.28,81.2-85.61,49.67,49.67,52.89-52.89c11.84,17.15,26.56,32.9,38.47,44.06,1.57,1.47,4.02,1.47,5.59,0,24.09-22.56,59.67-63.91,59.67-97.6s-27.97-62.46-62.46-62.46ZM273.33,130.78c-18.46,0-33.42-14.96-33.42-33.42s14.97-33.42,33.42-33.42,33.42,14.97,33.42,33.42-14.97,33.42-33.42,33.42Z"/>
+  </g>
+</svg>
