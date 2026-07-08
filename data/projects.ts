@@ -10,7 +10,7 @@ export const webShowcaseProjects: Project[] = [
     client: "VASTIQ",
     year: "2026",
     services: ["AI Platform Development", "Brand Identity", "Full-Stack Development", "Data Intelligence"],
-    description: "Real-estate intelligence platform voor de Nederlandse markt: woningwaarderingen op echte data, 12-maands prognoses en onderhandelingsinzicht — platform én merkidentiteit uit één hand.",
+    description: "Real-estate intelligence platform voor de Nederlandse markt: woningwaarderingen op echte data, 12-maands prognoses en onderhandelingsinzicht. Platform én merkidentiteit uit één hand.",
     image: `${import.meta.env.BASE_URL}images/cases/vastiq-hero.webp`,
     align: 'left',
     url: "https://vastiq.ai",

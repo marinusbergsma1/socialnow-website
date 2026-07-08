@@ -396,7 +396,7 @@ const WebShowcase: React.FC = () => {
 
               <div className="mt-2 md:mt-3 text-center">
                 <p className="text-white/15 text-[8px] md:text-[9px] font-bold uppercase tracking-[0.5em]">
-                  {activeProject.client} — {activeProject.year}
+                  {activeProject.client}, {activeProject.year}
                 </p>
               </div>
             </div>

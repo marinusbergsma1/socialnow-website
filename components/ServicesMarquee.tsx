@@ -111,7 +111,7 @@ const ServicesMarquee: React.FC = () => {
             ÉÉN VOORSTEL. <span className="text-[#25D366]">ALLES ERIN.</span>
           </h2>
           <p className="text-neutral-400 mt-4 max-w-2xl mx-auto">
-            Website, CRM, content en advertenties werken als één systeem — aangestuurd via één AI chat. Dit zit er allemaal in.
+            Website, CRM, content en advertenties werken als één systeem, aangestuurd via één AI chat. Dit zit er allemaal in.
           </p>
         </div>
 

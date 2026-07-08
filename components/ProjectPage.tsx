@@ -219,7 +219,7 @@ const WebsitePreview: React.FC<{ screenshot: string; url: string; title: string 
         {/* Bottom bar with hint */}
         <div className="flex items-center justify-center gap-3 px-4 py-3 bg-[#1a1a1a] border-t border-white/10">
           <MousePointer size={12} className="text-white/30 animate-bounce" />
-          <span className="text-[10px] text-white/30 font-bold uppercase tracking-widest">Scroll om door de site te bladeren — Klik om te bezoeken</span>
+          <span className="text-[10px] text-white/30 font-bold uppercase tracking-widest">Scroll om door de site te bladeren. Klik om te bezoeken</span>
         </div>
       </div>
     </div>

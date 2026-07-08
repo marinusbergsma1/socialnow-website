@@ -198,7 +198,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
           </p>
 
           <div className={`flex flex-col sm:flex-row items-center gap-4 md:gap-6 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.7s' }}>
-            <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-8 md:!px-14 text-sm md:text-lg md:shadow-[0_20px_60px_rgba(37,211,102,0.3)]">
+            <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-5 md:!px-7 text-sm md:text-lg md:shadow-[0_20px_60px_rgba(37,211,102,0.3)]">
               CLAIM JE GRATIS PROOF OF CONCEPT
             </Button>
           </div>

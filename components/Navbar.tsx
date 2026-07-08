@@ -62,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
     { name: 'Home', href: '#home' },
     { name: 'Projecten', href: '/projecten', action: 'navigate' },
     { name: 'Diensten & Prijzen', href: '/diensten', action: 'navigate' },
-    { name: 'Team', href: '#team' },
+    { name: 'Team', href: '/team', action: 'navigate' },
     { name: 'Contact', href: '#contact', action: 'contact' },
   ];
 

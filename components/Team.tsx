@@ -232,7 +232,7 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
                             "Ik startte SocialNow met één overtuiging: de beste merken worden gebouwd door mensen die technologie omarmen, niet vrezen."
                         </p>
                         <p className="text-gray-600 text-xs md:text-sm leading-relaxed mb-6 md:mb-12 font-medium max-w-lg">
-                            Van Amsterdam Light Festival en AZ Alkmaar tot het opbouwen van een eigen creatief bureau — Marinus richtte SocialNow op in 2021 met de missie om concept, creatie en realisatie samen te brengen. Vandaag leidt hij een team van 7 specialisten vanuit Amsterdam.
+                            Van Amsterdam Light Festival en AZ Alkmaar tot het opbouwen van een eigen creatief bureau. Marinus richtte SocialNow op in 2021 met de missie om concept, creatie en realisatie samen te brengen. Vandaag leidt hij een team van 7 specialisten vanuit Amsterdam.
                         </p>
 
                         <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="w-full md:w-auto">Kennismaken</Button>

@@ -209,7 +209,7 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
             WAT WIJ <span className="text-[#25D366]">BOUWEN</span>
           </h2>
           <p className="text-neutral-400 mt-3 max-w-2xl mx-auto">
-            Je website, je CRM, je content en je advertenties — allemaal samen in 1 overzichtelijke AI chat.
+            Je website, je CRM, je content en je advertenties: allemaal samen in 1 overzichtelijke AI chat.
           </p>
         </div>
 
@@ -217,9 +217,9 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 py-10">
           {/* Tile 1 — Publiceer overal tegelijk */}
           <div className="sn-warp-tile p-8 rounded-xl group lg:col-span-2">
-            <h3 className="text-lg font-semibold text-white py-2">Content — elke dag posten</h3>
+            <h3 className="text-lg font-semibold text-white py-2">Content: elke dag posten</h3>
             <p className="text-sm font-normal text-neutral-400 max-w-sm">
-              Elke dag content op al je kanalen, volledig uit handen — Reels, TikTok, LinkedIn en meer.
+              Elke dag content op al je kanalen, volledig uit handen: Reels, TikTok, LinkedIn en meer.
             </p>
             <div className="h-[20rem] rounded-xl z-40 bg-[rgba(40,40,40,0.30)] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_0%,transparent_100%)]">
               <div className="p-8 overflow-hidden h-full">
@@ -368,7 +368,7 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
             </div>
             <h3 className="text-lg font-semibold text-white py-2">Alles in één AI chat</h3>
             <p className="text-sm font-normal text-neutral-400 max-w-sm">
-              Vraag, stuur bij en zie resultaat — je hele marketing in 1 overzichtelijke chat.
+              Vraag, stuur bij en zie resultaat: je hele marketing in 1 overzichtelijke chat.
             </p>
             <div className="pt-3">
               <GenerateButton onClick={onOpenBooking} />
@@ -415,7 +415,7 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
             </div>
             <h3 className="text-lg font-semibold text-white py-2">CRM &amp; opvolging</h3>
             <p className="text-sm font-normal text-neutral-400 max-w-sm">
-              Elke lead automatisch opgevolgd — niets valt meer tussen wal en schip.
+              Elke lead automatisch opgevolgd. Niets valt meer tussen wal en schip.
             </p>
           </div>
 

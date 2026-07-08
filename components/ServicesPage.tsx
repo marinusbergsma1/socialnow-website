@@ -92,7 +92,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
       {/* ─── HERO ─── */}
       <div className="container mx-auto px-6 max-w-6xl mb-20 md:mb-32 text-center">
         <h1 className="text-4xl md:text-6xl font-black uppercase text-white tracking-tighter leading-[0.9] mb-6">
-          Je website, CRM, content & ads —<br /><span className="text-[#25D366]">in één AI chat.</span>
+          Je website, CRM, content & ads<br /><span className="text-[#25D366]">in één AI chat.</span>
         </h1>
         <p className="text-gray-400 text-sm md:text-base font-medium max-w-xl mx-auto">
           Start met een gratis proof of concept: een complete website demo én rebranding.
@@ -141,15 +141,15 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
             Wat je <span className="text-[#25D366]">krijgt</span>
           </h2>
           <p className="text-gray-500 text-sm md:text-base font-medium max-w-xl mx-auto">
-            Website, CRM, content, advertenties én analytics — volledig geïntegreerd en geautomatiseerd door AI.
+            Website, CRM, content, advertenties én analytics: volledig geïntegreerd en geautomatiseerd door AI.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {[
-            { icon: Globe, title: 'AI Website Systeem', desc: 'Complete website die overtuigt, vragen beantwoordt via AI-chat en afspraken regelt — dag en nacht.', color: '#00A3E0' },
+            { icon: Globe, title: 'AI Website Systeem', desc: 'Complete website die overtuigt, vragen beantwoordt via AI-chat en afspraken regelt, dag en nacht.', color: '#00A3E0' },
             { icon: Layers, title: 'Content Automation', desc: 'AI leest dagelijks je ad-resultaten, analyseert wat werkt en vertaalt dat naar je contentplanner.', color: '#25D366' },
             { icon: Target, title: 'Advertentie Optimalisatie', desc: 'AI-gedreven campagnes die zichzelf optimaliseren. Budget gaat naar wat werkt.', color: '#F62961' },
-            { icon: BarChart3, title: 'Analytics Dashboard', desc: 'Real-time inzicht in al je kanalen. Conversies, bereik, engagement — alles op één plek.', color: '#F7E644' },
+            { icon: BarChart3, title: 'Analytics Dashboard', desc: 'Real-time inzicht in al je kanalen. Conversies, bereik, engagement: alles op één plek.', color: '#F7E644' },
           ].map((service, i) => {
             const Icon = service.icon;
             return (
@@ -215,7 +215,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
             Investeer in <span className="text-[#25D366]">resultaat</span>
           </h2>
           <p className="text-gray-400 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
-            Van one-pager tot volledige web apps — gebouwd met AI voor maximale snelheid en kwaliteit. Geen verborgen kosten.
+            Van one-pager tot volledige web apps, gebouwd met AI voor maximale snelheid en kwaliteit. Geen verborgen kosten.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
@@ -274,13 +274,13 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
         <div className="sn-warp-tile rounded-2xl md:rounded-3xl p-8 md:p-10">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-2 h-2 rounded-full bg-[#00A3E0]" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#00A3E0]">CASE STUDY — VDZ-BRIGADE</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#00A3E0]">CASE STUDY: VDZ-BRIGADE</span>
           </div>
           <h3 className="text-2xl md:text-4xl font-black text-white tracking-tighter mb-3">
             0 → 6 leads<span className="text-[#00A3E0]">/dag</span>
           </h3>
           <p className="text-gray-500 text-sm font-medium leading-relaxed mb-4">
-            Van nul online aanwezigheid naar 6 gekwalificeerde leads per dag — in slechts 2 maanden. Branding vanaf 0 opgebouwd, AI-content ingezet, analytics continu gemonitord.
+            Van nul online aanwezigheid naar 6 gekwalificeerde leads per dag, in slechts 2 maanden. Branding vanaf 0 opgebouwd, AI-content ingezet, analytics continu gemonitord.
           </p>
           <p className="text-gray-400 text-xs font-bold leading-relaxed mb-6">
             De eerste 3 opdrachten: tussen <span className="text-white">€10.000 en €30.000</span>. Totale investering? <span className="text-[#25D366] font-black">10x terugverdiend.</span>

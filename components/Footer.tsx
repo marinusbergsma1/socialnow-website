@@ -39,7 +39,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                 Alles geregeld.
               </h2>
               <p className="text-white/40 text-sm md:text-base font-medium leading-relaxed max-w-md">
-                Website, CRM, content, advertenties én analytics — allemaal geautomatiseerd en op elkaar afgestemd. Eén AI-gedreven partner voor al je groei, vanuit Amsterdam.
+                Website, CRM, content, advertenties én analytics: allemaal geautomatiseerd en op elkaar afgestemd. Eén AI-gedreven partner voor al je groei, vanuit Amsterdam.
               </p>
             </div>
             <div className="flex flex-col justify-end gap-4">
@@ -129,7 +129,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             <ul className="space-y-3">
               {[
                 { label: 'Over Ons', href: '#home' },
-                { label: 'Team', href: '#team' },
+                { label: 'Team', href: '/team' },
                 { label: 'Diensten', href: '/diensten' },
                 { label: 'Werkwijze', href: '/diensten' },
                 { label: 'Contact', action: 'booking' as const },

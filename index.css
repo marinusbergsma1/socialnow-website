@@ -362,70 +362,26 @@ body {
    Basis: frosted glass (blur + saturate) — werkt overal.
    Chromium (html.sn-warp): SVG-displacement in backdrop-filter → de
    particle-orb áchter de tile vervormt zichtbaar door het glas. */
-/* ═══ VHS-titels: RGB-split, scanlines en periodieke tracking-glitch ═══ */
+/* ═══ VHS/CRT-titels: fijne scanlines, subtiele RGB-fringe, zachte glow.
+   Geen glitch, geen bewegende band — rustige analoge textuur. ═══ */
 .sn-vhs {
   position: relative;
   text-shadow:
-    2px 0 rgba(255, 0, 60, 0.45),
-    -2px 0 rgba(0, 229, 255, 0.45);
-  animation: sn-vhs-glitch 5s infinite steps(1, end);
+    1px 0 rgba(255, 0, 60, 0.25),
+    -1px 0 rgba(0, 229, 255, 0.25),
+    0 0 14px rgba(255, 255, 255, 0.2);
 }
-/* Scanlines + langzaam rollende tracking-band over de titel */
+/* Fijne, onopvallende scanlines (alleen textuur — geen zichtbare band) */
 .sn-vhs::after {
   content: '';
   position: absolute;
-  inset: -0.1em 0;
+  inset: 0;
   pointer-events: none;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0 3px,
-      rgba(0, 0, 0, 0.28) 3px 4px
-    ),
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(255, 255, 255, 0.05) 48%,
-      rgba(255, 255, 255, 0.09) 50%,
-      rgba(255, 255, 255, 0.05) 52%,
-      transparent 100%
-    );
-  background-size: 100% 100%, 100% 220%;
-  animation: sn-vhs-track 7s linear infinite;
-}
-@keyframes sn-vhs-glitch {
-  0%, 88%, 100% {
-    text-shadow: 2px 0 rgba(255, 0, 60, 0.45), -2px 0 rgba(0, 229, 255, 0.45);
-    transform: none;
-  }
-  89% {
-    text-shadow: 7px 0 rgba(255, 0, 60, 0.65), -7px 0 rgba(0, 229, 255, 0.65);
-    transform: translateX(3px) skewX(-1.5deg);
-  }
-  90% {
-    text-shadow: -5px 0 rgba(255, 0, 60, 0.6), 5px 0 rgba(0, 229, 255, 0.6);
-    transform: translateX(-3px);
-  }
-  91% {
-    text-shadow: 3px 0 rgba(255, 0, 60, 0.5), -3px 0 rgba(0, 229, 255, 0.5);
-    transform: translateX(1px) skewX(0.8deg);
-  }
-  92% {
-    text-shadow: 2px 0 rgba(255, 0, 60, 0.45), -2px 0 rgba(0, 229, 255, 0.45);
-    transform: none;
-  }
-}
-@keyframes sn-vhs-track {
-  0% { background-position: 0 0, 0 -110%; }
-  100% { background-position: 0 0, 0 110%; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .sn-vhs {
-    animation: none;
-  }
-  .sn-vhs::after {
-    animation: none;
-  }
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.14) 0 1px,
+    transparent 1px 3px
+  );
 }
 
 /* Frosted glass (de aangeleverde .glass-card) + gloeiende outline die rondloopt */

@@ -48,7 +48,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose, onOpenBookin
     external?: boolean;
     onClick?: () => void;
   }[] = [
-    { label: 'Plan een gratis call', sub: '30 min — gratis proof of concept', icon: <Calendar size={22} />, color: '#F62961', onClick: handleBooking },
+    { label: 'Plan een gratis call', sub: '30 min, gratis proof of concept', icon: <Calendar size={22} />, color: '#F62961', onClick: handleBooking },
     { label: 'WhatsApp', sub: 'Reactie binnen 1 uur', icon: <MessageCircle size={22} />, color: '#25D366', href: 'https://wa.me/31637404577', external: true },
     { label: 'E-mail', sub: 'info@socialnow.nl', icon: <Mail size={22} />, color: '#F7E644', href: 'mailto:info@socialnow.nl' },
     { label: 'Bellen', sub: '+31 6 37 40 45 77', icon: <Phone size={22} />, color: '#00A3E0', href: 'tel:+31637404577' },

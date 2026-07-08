@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, MessageSquare } from 'lucide-react';
+import { Check } from 'lucide-react';
 import Button from './Button';
 
 /**
@@ -35,7 +35,7 @@ const tiers = [
     period: 'per maand',
     color: '#25D366',
     highlight: true,
-    features: ['Elke dag posten — volledig uit handen', 'Website, CRM, content & ads', 'Alles samen in 1 overzichtelijke AI chat', 'Advertenties gestuurd op data'],
+    features: ['Elke dag posten, volledig uit handen', 'Website, CRM, content & ads', 'Alles samen in 1 overzichtelijke AI chat', 'Advertenties gestuurd op data'],
   },
 ];
 
@@ -50,7 +50,7 @@ const PricingStrip: React.FC<PricingStripProps> = ({ onOpenBooking }) => (
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#25D366]" />
           </span>
           <span className="text-[10px] font-black uppercase tracking-[0.35em] text-white">
-            Gratis proof of concept — demo &amp; rebranding
+            Gratis proof of concept: demo &amp; rebranding
           </span>
         </div>
         <h2 className="font-black uppercase tracking-tighter text-white leading-none text-4xl md:text-6xl">
@@ -103,13 +103,13 @@ const PricingStrip: React.FC<PricingStripProps> = ({ onOpenBooking }) => (
         ))}
       </div>
 
-      {/* Micro-CTA */}
-      <p className="text-center mt-8 text-white/40 text-xs font-bold uppercase tracking-widest">
-        <button onClick={onOpenBooking} className="inline-flex items-center gap-2 hover:text-[#25D366] transition-colors cursor-pointer">
-          <MessageSquare size={13} />
-          Eerst zien? Claim je gratis proof of concept →
-        </button>
-      </p>
+      {/* Proof of concept CTA — prominent */}
+      <div className="text-center mt-10 md:mt-12">
+        <p className="text-white/50 text-sm font-bold uppercase tracking-widest mb-4">Eerst zien voordat je iets betaalt?</p>
+        <Button variant="outline" icon onClick={onOpenBooking} className="!text-sm md:!text-base !px-6 md:!px-8 !border-[#25D366]/60 hover:!border-[#25D366] !text-[#25D366]">
+          CLAIM JE GRATIS PROOF OF CONCEPT
+        </Button>
+      </div>
     </div>
   </section>
 );

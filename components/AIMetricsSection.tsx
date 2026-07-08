@@ -199,7 +199,7 @@ const AIMetricsSection: React.FC = () => {
             BEWEZEN <span className="text-[#25D366]">IMPACT</span>
           </h2>
           <p className="text-gray-400 font-bold text-lg md:text-xl max-w-2xl mx-auto">
-            Geen mooie beloftes — alleen <span className="text-white">harde cijfers</span> van echte projecten.
+            Geen mooie beloftes, alleen <span className="text-white">harde cijfers</span> van echte projecten.
           </p>
         </div>
 

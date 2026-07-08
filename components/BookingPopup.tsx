@@ -288,8 +288,8 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
                          >
                            <option value="" className="bg-[#111]">Selecteer budget</option>
                            <option value="< €1.500" className="bg-[#111]">&lt; €1.500</option>
-                           <option value="€1.500 - €5.000" className="bg-[#111]">€1.500 - €5.000</option>
-                           <option value="€5.000 - €15.000" className="bg-[#111]">€5.000 - €15.000</option>
+                           <option value="€1.500 - €5.000" className="bg-[#111]">€1.500 tot €5.000</option>
+                           <option value="€5.000 - €15.000" className="bg-[#111]">€5.000 tot €15.000</option>
                            <option value="€15.000+" className="bg-[#111]">€15.000+</option>
                          </select>
                        </div>

@@ -41,7 +41,7 @@ const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
           </h1>
 
           <p className="text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed font-medium">
-            Van branding tot AI-gedreven webontwikkeling — bekijk ons portfolio van visuele oplossingen die resultaat leveren.
+            Van branding tot AI-gedreven webontwikkeling: bekijk ons portfolio van visuele oplossingen die resultaat leveren.
           </p>
         </div>
       </div>

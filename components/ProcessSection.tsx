@@ -109,7 +109,7 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenBooking }) => {
 
         {/* Subtitle */}
         <p className="text-center text-neutral-400 text-sm md:text-base font-medium max-w-xl mx-auto mb-12 md:mb-14 leading-relaxed">
-          Geen wekenlange trajecten, geen eindeloze meetings. Eén gesprek, en wij leveren. Binnen 1 week zie je resultaat — gratis en vrijblijvend.
+          Geen wekenlange trajecten, geen eindeloze meetings. Eén gesprek, en wij leveren. Binnen 1 week zie je resultaat, gratis en vrijblijvend.
         </p>
 
         {/* Steps — bento */}

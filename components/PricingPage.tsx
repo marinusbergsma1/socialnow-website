@@ -30,7 +30,7 @@ const categories: PricingCategory[] = [
     label: 'Webdesign',
     icon: <Globe size={16} />,
     color: '#00A3E0',
-    subtitle: 'Van one-pager tot volledige web apps — gebouwd met AI voor maximale snelheid en kwaliteit.',
+    subtitle: 'Van one-pager tot volledige web apps, gebouwd met AI voor maximale snelheid en kwaliteit.',
     tiers: [
       {
         name: 'One-Pager',
@@ -94,7 +94,7 @@ const categories: PricingCategory[] = [
     label: 'Social Media',
     icon: <Instagram size={16} />,
     color: '#F62961',
-    subtitle: 'Consistent content, strategie en groei voor jouw socials — volledig uit handen.',
+    subtitle: 'Consistent content, strategie en groei voor jouw socials, volledig uit handen.',
     tiers: [
       {
         name: 'Starter',
@@ -178,7 +178,7 @@ const categories: PricingCategory[] = [
         name: 'Content Dag',
         price: 'Vanaf €2.500',
         period: 'per dag',
-        description: 'Een volledige dag content creatie — foto, video en behind-the-scenes.',
+        description: 'Een volledige dag content creatie: foto, video en behind-the-scenes.',
         color: '#25D366',
         popular: true,
         features: [
@@ -218,7 +218,7 @@ const categories: PricingCategory[] = [
     label: 'Branding',
     icon: <Palette size={16} />,
     color: '#25D366',
-    subtitle: 'Van logo tot complete merkidentiteit — wij bouwen merken die de status quo uitdagen.',
+    subtitle: 'Van logo tot complete merkidentiteit. Wij bouwen merken die de status quo uitdagen.',
     tiers: [
       {
         name: 'Visual Identity',

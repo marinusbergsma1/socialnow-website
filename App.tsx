@@ -50,10 +50,10 @@ const PricingStrip = lazyRetry(() => import('./components/PricingStrip'));
 // Lazy-load popup/modal components — only loaded when opened
 const BookingPopup = lazyRetry(() => import('./components/BookingPopup'));
 const BentoGridSection = lazyRetry(() => import('./components/BentoGridSection'));
-const TeamPage = lazyRetry(() => import('./components/TeamPage'));
 const ContactPage = lazyRetry(() => import('./components/ContactPage'));
 
 // Lazy-load sub-pages for code splitting
+const TeamPage = lazyRetry(() => import('./components/TeamPage'));
 const ProjectsPage = lazyRetry(() => import('./components/ProjectsPage'));
 const ServicesPage = lazyRetry(() => import('./components/ServicesPage'));
 const ProjectPage = lazyRetry(() => import('./components/ProjectPage'));
@@ -147,7 +147,6 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState(!hasSeenLoader);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const [isTeamOpen, setIsTeamOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
 
   const location = useLocation();
@@ -156,7 +155,8 @@ const App: React.FC = () => {
   const isServicesPage = location.pathname === '/diensten';
   const isPrivacyPage = location.pathname === '/privacy';
   const isPricingPage = location.pathname === '/prijzen';
-  const isSubPage = isProjectPage || isProjectsPage || isServicesPage || isPrivacyPage || isPricingPage;
+  const isTeamPage = location.pathname === '/team';
+  const isSubPage = isProjectPage || isProjectsPage || isServicesPage || isPrivacyPage || isPricingPage || isTeamPage;
 
   // Scroll to top on route change
   useEffect(() => {
@@ -207,7 +207,7 @@ const App: React.FC = () => {
     }
   }, [isSubPage, loading]);
 
-  const anyModalOpen = loading || isServicesOpen || isTeamOpen || isContactOpen;
+  const anyModalOpen = loading || isServicesOpen || isContactOpen;
 
   return (
     <ErrorBoundary>
@@ -255,6 +255,16 @@ const App: React.FC = () => {
               <ErrorBoundary>
                 <Suspense fallback={<PageLoader />}>
                   <ServicesPage onOpenBooking={() => setIsBookingOpen(true)} />
+                </Suspense>
+              </ErrorBoundary>
+            }
+          />
+          <Route
+            path="/team"
+            element={
+              <ErrorBoundary>
+                <Suspense fallback={<PageLoader />}>
+                  <TeamPage onOpenBooking={() => setIsBookingOpen(true)} />
                 </Suspense>
               </ErrorBoundary>
             }
@@ -314,12 +324,6 @@ const App: React.FC = () => {
             <BentoGridSection
               isOpen={isServicesOpen}
               onClose={() => setIsServicesOpen(false)}
-            />
-          )}
-          {isTeamOpen && (
-            <TeamPage
-              isOpen={isTeamOpen}
-              onClose={() => setIsTeamOpen(false)}
             />
           )}
           {isContactOpen && (

@@ -1,13 +1,13 @@
 
-import React, { useEffect, useState } from 'react';
-import { X, Plus, Send, Zap, MessagesSquare, UserCheck } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ChevronLeft, Plus, Send, Zap, MessagesSquare, UserCheck } from 'lucide-react';
 import Button from './Button';
 import ProgressiveImage from './ProgressiveImage';
+import { useSEO } from '../hooks/useSEO';
 
 interface TeamPageProps {
-  isOpen: boolean;
-  onClose: () => void;
-  /** Optioneel: opent de booking-popup na sluiten. Valt terug op onClose. */
+  /** Optioneel: opent de booking-popup. */
   onOpenBooking?: () => void;
 }
 
@@ -22,7 +22,7 @@ const founder = {
   quote:
     '"Ik startte SocialNow met één overtuiging: de beste merken worden gebouwd door mensen die technologie omarmen, niet vrezen."',
   sub:
-    'Van Amsterdam Light Festival en AZ Alkmaar tot een eigen studio. Marinus richtte SocialNow op in 2021 en bewaakt elk concept persoonlijk — geen accountmanager ertussen.',
+    'Van Amsterdam Light Festival en AZ Alkmaar tot een eigen studio. Marinus richtte SocialNow op in 2021 en bewaakt elk concept persoonlijk, zonder accountmanager ertussen.',
 };
 
 interface CrewMember {
@@ -117,7 +117,7 @@ const pillars = [
     icon: Zap,
     color: '#00A3E0',
     title: 'AI doet het zware werk',
-    copy: 'Je website, CRM, content en advertenties — allemaal samen in 1 overzichtelijke AI chat. Wij nemen de beslissingen, het systeem doet de rest.',
+    copy: 'Je website, CRM, content en advertenties: allemaal samen in 1 overzichtelijke AI chat. Wij nemen de beslissingen, het systeem doet de rest.',
   },
   {
     tag: 'SENIOR_ONLY',
@@ -128,72 +128,49 @@ const pillars = [
   },
 ];
 
-const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose, onOpenBooking }) => {
-  const [isClosing, setIsClosing] = useState(false);
+const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
+  const navigate = useNavigate();
+
+  useSEO({
+    title: 'Team',
+    description:
+      'Het team achter de AI: acht specialisten in Amsterdam plus één AI-systeem dat het zware werk doet. Geen managementlagen, geen ruis — direct contact met de makers.',
+    path: '/team',
+  });
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      setIsClosing(false);
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isOpen]);
-
-  const handleClose = () => {
-    setIsClosing(true);
-    setTimeout(() => { onClose(); }, 600);
-  };
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleCta = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      onClose();
-      onOpenBooking?.();
-    }, 600);
+    onOpenBooking?.();
   };
 
-  if (!isOpen && !isClosing) return null;
-
   return (
-    <div
-      className={`fixed inset-0 z-[150] bg-black overflow-y-auto overflow-x-hidden custom-scrollbar transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overscroll-contain ${
-        isClosing ? 'opacity-0 scale-95 blur-2xl' : 'opacity-100 scale-100 blur-0'
-      }`}
-      style={{ WebkitOverflowScrolling: 'touch' }}
-    >
+    <div className="min-h-screen text-white pt-28 md:pt-36 pb-20 relative">
       {/* Subtiel raster + scanlijn — terminal-esthetiek */}
       <div
-        className="fixed inset-0 z-0 opacity-[0.05] pointer-events-none"
+        className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"
         style={{
           backgroundImage:
             'linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.4) 1px, transparent 1px)',
           backgroundSize: '80px 80px',
         }}
       ></div>
-      <div className="fixed top-0 left-0 w-full h-[2px] bg-[#25D366] shadow-[0_0_20px_#25D366] z-[160] opacity-20 animate-[scan-sweep_5s_linear_infinite]"></div>
+      <div className="absolute top-0 left-0 w-full h-[2px] bg-[#25D366] shadow-[0_0_20px_#25D366] z-0 opacity-20 animate-[scan-sweep_5s_linear_infinite] pointer-events-none"></div>
 
-      {/* Sticky header */}
-      <div className="sticky top-0 z-[170] w-full px-6 py-6 md:px-12 md:py-8 flex items-center justify-between backdrop-blur-3xl border-b border-white/5 bg-black/80">
-        <div className="flex items-center gap-6">
-          <img src={`${BASE}images/Logo-Social-Now-Lengte.webp`} alt="SocialNow logo" className="w-32 md:w-44" />
-          <div className="hidden lg:flex items-center gap-2 border-l border-white/10 pl-6">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse"></div>
-            <span className="text-[10px] font-mono text-white/40 tracking-widest uppercase">TEAM_ROSTER / AMS</span>
-          </div>
-        </div>
+      {/* Back button */}
+      <div className="relative z-10 container mx-auto px-6 max-w-6xl mb-8">
         <button
-          onClick={handleClose}
-          aria-label="Sluiten"
-          className="group relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 text-white hover:bg-[#F62961] transition-all overflow-hidden shadow-2xl"
+          onClick={() => navigate('/')}
+          className="inline-flex items-center gap-2 text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors"
         >
-          <X size={24} className="group-hover:rotate-90 transition-transform duration-500 relative z-10" />
-          <div className="absolute inset-0 bg-gradient-to-tr from-[#F62961] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <ChevronLeft size={14} />
+          Terug
         </button>
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-6xl pt-16 md:pt-24 pb-32 px-6">
+      <div className="relative z-10 container mx-auto max-w-6xl pb-12 px-6">
         {/* 1. HERO — compact */}
         <div className="mb-16 md:mb-24 animate-fade-in-up">
           <span className="font-mono text-[10px] tracking-[0.4em] text-[#25D366] uppercase block mb-6">
@@ -249,7 +226,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ isOpen, onClose, onOpenBooking }) =
               DE <span className="text-[#00A3E0]">CREW</span>
             </h2>
             <span className="font-mono text-[10px] tracking-widest text-white/30 uppercase hidden md:block">
-              INDEX 02—08
+              INDEX 02 → 08
             </span>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">

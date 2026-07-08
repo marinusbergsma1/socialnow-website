@@ -22,7 +22,7 @@ const NotFound: React.FC = () => {
 
         <p className="text-white/60 text-base sm:text-lg mb-10 leading-relaxed">
           Deze pagina bestaat niet of is verplaatst.<br />
-          Geen zorgen — we brengen je terug.
+          Geen zorgen, we brengen je terug.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

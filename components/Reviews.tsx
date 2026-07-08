@@ -17,7 +17,7 @@ const reviewsData = [
     stars: 5,
     status: "CORE_CLIENT",
     meta: { CPU: "96%", SYNC: "100%" },
-    text: "Sinds we met SocialNow werken is alles geautomatiseerd — van content tot ads. Eén partij voor branding, website en social media. Een samenwerking die ik nooit zal opgeven!"
+    text: "Sinds we met SocialNow werken is alles geautomatiseerd, van content tot ads. Eén partij voor branding, website en social media. Een samenwerking die ik nooit zal opgeven!"
   },
   {
     id: "REV_02",

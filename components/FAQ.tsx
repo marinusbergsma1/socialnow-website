@@ -5,17 +5,17 @@ import { Plus, Minus, MessageCircle } from 'lucide-react';
 const faqs = [
   {
     question: "Wat krijg ik precies gratis?",
-    answer: "Een gratis proof of concept: een complete website demo \u00E9n rebranding. Je ziet het werken v\u00F3\u00F3rdat je iets betaalt \u2014 gratis en vrijblijvend.",
+    answer: "Een gratis proof of concept: een complete website demo \u00E9n rebranding. Je ziet het werken v\u00F3\u00F3rdat je iets betaalt, gratis en vrijblijvend.",
     color: "#25D366"
   },
   {
     question: "Hoe werkt de content automation?",
-    answer: "Ons AI-systeem leest dagelijks je advertentieresultaten, analyseert wat werkt voor jouw doelgroep, en vertaalt dat direct naar je contentplanner. Elke maand automatisch ingepland \u2014 je zit nooit zonder content en je strategie is altijd up-to-date.",
+    answer: "Ons AI-systeem leest dagelijks je advertentieresultaten, analyseert wat werkt voor jouw doelgroep, en vertaalt dat direct naar je contentplanner. Elke maand automatisch ingepland. Je zit nooit zonder content en je strategie is altijd up-to-date.",
     color: "#00A3E0"
   },
   {
     question: "Wat zit er in het website + AI pakket?",
-    answer: "Een complete website die werkt als je beste verkoper: overtuigt bezoekers, beantwoordt vragen via AI-chat en regelt afspraken \u2014 dag en nacht. Plus CRM, analytics dashboard en branded content. Alles onder \u00E9\u00E9n dak.",
+    answer: "Een complete website die werkt als je beste verkoper: overtuigt bezoekers, beantwoordt vragen via AI-chat en regelt afspraken, dag en nacht. Plus CRM, analytics dashboard en branded content. Alles onder \u00E9\u00E9n dak.",
     color: "#F7E644"
   },
   {
@@ -30,7 +30,7 @@ const faqs = [
   },
   {
     question: "Wat kost het na de gratis periode?",
-    answer: "Content Automation start vanaf \u20AC3.000 per maand \u2014 inclusief branded content, planning, ads-optimalisatie en analytics. E\u00E9n partij die alles doet, geen losse freelancers of dure bureaus meer.",
+    answer: "Content Automation start vanaf \u20AC3.000 per maand, inclusief branded content, planning, ads-optimalisatie en analytics. E\u00E9n partij die alles doet, geen losse freelancers of dure bureaus meer.",
     color: "#F7E644"
   }
 ];
@@ -132,7 +132,7 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
             className="inline-flex items-center gap-2 text-white/40 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
           >
             <MessageCircle size={14} />
-            WhatsApp ons — reactie binnen 2 uur
+            WhatsApp ons: reactie binnen 2 uur
           </a>
         </div>
       </div>
