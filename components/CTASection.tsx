@@ -63,7 +63,7 @@ const CTASection: React.FC<CTASectionProps> = ({ onOpenBooking, onVisibilityChan
       </div>
 
       {/* Background watermark */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.02] select-none">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.08] select-none">
         <h2 className="text-[30vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">LET'S GO</h2>
       </div>
 

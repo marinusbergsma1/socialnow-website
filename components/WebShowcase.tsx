@@ -233,7 +233,7 @@ const WebShowcase: React.FC = () => {
     <>
       <section ref={sectionRef} className="relative bg-transparent overflow-visible">
         {/* Background watermark */}
-        <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.03] select-none overflow-hidden">
+        <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.08] select-none overflow-hidden">
           <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">WEBSITES</h2>
         </div>
 

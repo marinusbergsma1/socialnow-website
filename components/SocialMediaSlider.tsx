@@ -321,7 +321,7 @@ const SocialMediaSlider: React.FC = () => {
 
   return (
     <section className="py-10 md:py-28 bg-transparent overflow-hidden relative border-t border-white/5">
-      <div className="hidden md:block absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.03] select-none overflow-hidden">
+      <div className="hidden md:block absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.08] select-none overflow-hidden">
         <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">SOCIAL</h2>
       </div>
 

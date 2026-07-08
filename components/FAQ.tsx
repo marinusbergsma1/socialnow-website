@@ -49,37 +49,34 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
   return (
     <section className="py-12 md:py-20 bg-transparent relative overflow-hidden">
       {/* Background watermark */}
-      <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.03] select-none overflow-hidden">
+      <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.08] select-none overflow-hidden">
         <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">FAQ</h2>
       </div>
 
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
 
-        {/* Minimal header + Milo de leraar die naar de vragen wijst */}
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-8 md:mb-10">
-          <div>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.85]">
-              DIRECT<br className="md:hidden" /> ANTWOORD
-            </h2>
-            <p className="text-gray-500 text-sm md:text-base font-medium max-w-xs leading-relaxed mt-4">
-              Geen sales talk. Gewoon eerlijke antwoorden op de vragen die je echt hebt.
-            </p>
-          </div>
-          {/* Milo speelt zijn wijs-loop, blijft 15s stilstaan en herhaalt dan */}
+        {/* Header */}
+        <div className="mb-8 md:mb-12">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.85]">
+            DIRECT<br className="md:hidden" /> ANTWOORD
+          </h2>
+          <p className="text-gray-500 text-sm md:text-base font-medium max-w-xs leading-relaxed mt-4">
+            Geen sales talk. Gewoon eerlijke antwoorden op de vragen die je echt hebt.
+          </p>
+        </div>
+
+        {/* Milo groot links, de vragen rechts van hem */}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,380px)_1fr] gap-8 lg:gap-12 items-center">
           <video
             src={`${import.meta.env.BASE_URL}video/milo-faq-loop.mp4`}
             autoPlay
             muted
             playsInline
+            loop
             preload="metadata"
             aria-hidden="true"
-            className="w-44 md:w-64 lg:w-72 shrink-0 self-center md:self-end pointer-events-none select-none"
-            onEnded={(e) => {
-              const v = e.currentTarget;
-              window.setTimeout(() => { v.currentTime = 0; v.play().catch(() => {}); }, 15000);
-            }}
+            className="w-56 md:w-80 lg:w-full max-w-[380px] mx-auto lg:mx-0 pointer-events-none select-none"
           />
-        </div>
 
         {/* Clean stacked FAQ items */}
         <div className="space-y-0">
@@ -132,6 +129,7 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
               </div>
             );
           })}
+        </div>
         </div>
 
         {/* Bottom note */}

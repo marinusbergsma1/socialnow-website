@@ -208,7 +208,7 @@ const ProjectShowcase: React.FC<{ onOpenBooking?: () => void; }> = ({ onOpenBook
   return (
     <section id="projecten" className="bg-transparent pt-12 md:pt-36 pb-2 md:pb-10 relative overflow-hidden">
       {/* Background watermark */}
-      <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.03] select-none">
+      <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.08] select-none">
         <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">CASES</h2>
       </div>
 
