@@ -2,7 +2,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { TeamMember } from '../types';
 import { Plus, Shield, PieChart, Activity, Cpu, Terminal } from 'lucide-react';
-import ScrollTypewriter from './ScrollTypewriter';
 import Button from './Button';
 import ProgressiveImage from './ProgressiveImage';
 
@@ -77,6 +76,39 @@ const team: TeamItem[] = [
   }
 ];
 
+// Jubileum-teller: SocialNow bestaat op 1 november 2026 vijf jaar (opgericht november 2021)
+const ANNIVERSARY_DATE = new Date(2026, 10, 1); // 1 november 2026
+
+const AnniversaryCountdown: React.FC = () => {
+  const [daysLeft, setDaysLeft] = useState<number>(() =>
+    Math.ceil((ANNIVERSARY_DATE.getTime() - Date.now()) / 86400000)
+  );
+
+  useEffect(() => {
+    // Update per uur is genoeg voor een dagen-teller
+    const interval = setInterval(() => {
+      setDaysLeft(Math.ceil((ANNIVERSARY_DATE.getTime() - Date.now()) / 86400000));
+    }, 60 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="sn-warp-tile inline-flex items-center gap-3 md:gap-4 rounded-full px-5 md:px-7 py-2.5 md:py-3 max-w-full">
+      <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-white whitespace-nowrap">
+        <span className="text-[#F7E644]">5 JAAR</span> SOCIALNOW
+      </span>
+      <span className="h-3 w-px bg-white/20 shrink-0" aria-hidden="true"></span>
+      <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-white/60 whitespace-nowrap">
+        {daysLeft > 0 ? (
+          <>nog <span className="text-[#25D366] font-black">{daysLeft}</span> dagen</>
+        ) : (
+          <>sinds november 2021</>
+        )}
+      </span>
+    </div>
+  );
+};
+
 // 3D tilt hook for team cards
 function useTeamTilt(intensity = 8) {
   const ref = useRef<HTMLDivElement>(null);
@@ -100,7 +132,8 @@ function useTeamTilt(intensity = 8) {
     const el = ref.current;
     if (!el) return;
     cancelAnimationFrame(rafRef.current);
-    el.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    // 'none' i.p.v. identiteits-transform: geen blijvende transform op de warp-tile
+    el.style.transform = 'none';
   }, []);
 
   return { ref, handleMouseMove, handleMouseLeave };
@@ -151,8 +184,9 @@ const TeamMemberCard: React.FC<{ member: TeamItem; index: number }> = ({ member,
         willChange: 'transform, opacity',
         transition: 'transform 0.5s cubic-bezier(0.03, 0.98, 0.52, 0.99), opacity 0.6s ease-out, border-color 0.5s',
         opacity: isVisible ? 1 : 0,
+        // In rust 'none': een blijvende transform op de sn-warp-tile maakt de rand/glas instabiel bij scroll
         transform: isVisible
-          ? 'perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
+          ? 'none'
           : `perspective(600px) rotateX(${angle.rx}deg) rotateY(${angle.ry}deg) translateY(50px) scale3d(0.9, 0.9, 0.9)`,
       }}
     >
@@ -197,13 +231,15 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12 md:mb-24 scroll-reveal">
-          <h2 className="text-3xl md:text-8xl font-black uppercase mb-6 flex justify-center items-center tracking-tighter leading-none flex-wrap">
+          {/* Vloeiende clamp-maat: kop blijft altijd op één regel binnen het scherm, wordt nooit afgekapt */}
+          <h2 className="text-[clamp(1.5rem,7vw,6rem)] font-black uppercase mb-6 flex justify-center items-center tracking-tighter leading-none">
             <span className="inline-flex items-center whitespace-nowrap">
               <span className="text-[#F7E644] mr-2 md:mr-6 leading-none">"</span>
               WIJ ZIJN SOCIALNOW!
               <span className="text-[#F7E644] ml-2 md:ml-6 leading-none">"</span>
             </span>
           </h2>
+          <AnniversaryCountdown />
         </div>
 
         {/* Founder Section */}

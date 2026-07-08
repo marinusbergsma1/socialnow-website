@@ -331,10 +331,18 @@ const SocialMediaSlider: React.FC = () => {
           <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/60">@socialnow.nl</span>
         </div>
         <h2 className="text-2xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-none mb-3 md:mb-4">
-          VOLG ONS OP SOCIALMEDIA
+          DAGELIJKS <span className="text-[#25D366]">NIEUW WERK</span>
         </h2>
         <p className="text-gray-500 text-xs md:text-base font-medium max-w-lg mx-auto">
-          Live updates van onze nieuwste werk, achter-de-schermen en AI-experimenten. Tik op een post om 'm op Instagram te bekijken.
+          <a
+            href="https://www.instagram.com/socialnow.nl/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white font-bold hover:text-[#25D366] transition-colors"
+          >
+            Volg @socialnow.nl
+          </a>
+          {' '}en zie ons nieuwste werk, achter-de-schermen en AI-experimenten. Tik op een post om 'm op Instagram te bekijken.
         </p>
       </div>
 

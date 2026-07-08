@@ -13,7 +13,8 @@ export const webShowcaseProjects: Project[] = [
     description: "Real-estate intelligence platform voor de Nederlandse markt: woningwaarderingen op echte data, 12-maands prognoses en onderhandelingsinzicht. Platform én merkidentiteit uit één hand.",
     image: `${import.meta.env.BASE_URL}images/cases/vastiq-hero.webp`,
     align: 'left',
-    url: "https://vastiq.ai",
+    // Tijdelijk: vastiq.ai weigert momenteel verbindingen, daarom de socialnow.nl mirror
+    url: "https://vastiq.socialnow.nl/",
     gallery: [],
     metrics: [
       { label: "Waarderingen", value: "Live data", color: "#25D366" },

@@ -175,7 +175,14 @@ body {
 
 .container {
   max-width: 100% !important;
-  overflow-x: hidden;
+  /* clip i.p.v. hidden: 'hidden' maakt van elke container een scroll-container
+     (overflow-y wordt dan 'auto'). Zodra kinderen met een transform (bijv. de
+     3D-flip van teamkaarten) tijdelijk buiten de container steken, kaapt die
+     inner-scroll het wielscrollen en schuift de sectiekop weg / raakt afgekapt.
+     'clip' knipt alleen af en kan nooit intern scrollen. */
+  overflow-x: hidden; /* fallback voor oudere browsers */
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 /* Skip to content — accessible navigation */

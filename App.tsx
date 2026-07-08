@@ -88,13 +88,14 @@ const HomePage: React.FC<{
       </div>
 
       <Suspense fallback={null}>
-        {/* v2.1: Bento features grid ("WAT WIJ BOUWEN") after Clients */}
-        <div className="scroll-reveal">
-          <BentoFeaturesSection onOpenBooking={onOpenBooking} />
-        </div>
-
+        {/* Instagram-feed direct na Clients: social media is core business */}
         <div className="scroll-reveal">
           <SocialMediaSlider />
+        </div>
+
+        {/* v2.1: Bento features grid ("WAT WIJ BOUWEN") */}
+        <div className="scroll-reveal">
+          <BentoFeaturesSection onOpenBooking={onOpenBooking} />
         </div>
 
         <div className="scroll-reveal">

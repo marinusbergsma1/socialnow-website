@@ -258,6 +258,10 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             <span className="text-white/15 text-[9px] font-bold uppercase tracking-[0.2em]">
               KVK 90877179
             </span>
+            <span className="text-white/10">|</span>
+            <span className="text-white/15 text-[9px] font-bold uppercase tracking-[0.2em]">
+              Sinds 2021
+            </span>
           </div>
         </div>
       </div>
