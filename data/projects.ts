@@ -118,6 +118,8 @@ export const webShowcaseProjects: Project[] = [
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/raveg-bounce-full.webp`,
     align: 'left',
     url: "https://raveg-hairstyling.com/",
+    // raveg-hairstyling.com stuurt X-Frame-Options DENY + frame-ancestors none
+    noEmbed: true,
     gallery: [],
     metrics: [
       { label: "Conversie Boost", value: "+180%", color: "#25D366" },

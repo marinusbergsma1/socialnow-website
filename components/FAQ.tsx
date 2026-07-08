@@ -47,7 +47,7 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
   };
 
   return (
-    <section className="py-20 md:py-36 bg-transparent relative overflow-hidden">
+    <section className="py-12 md:py-20 bg-transparent relative overflow-hidden">
       {/* Background watermark */}
       <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.03] select-none overflow-hidden">
         <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">FAQ</h2>
@@ -55,16 +55,30 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
 
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
 
-        {/* Minimal header */}
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-16 md:mb-24">
+        {/* Minimal header + Milo de leraar die naar de vragen wijst */}
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-8 md:mb-10">
           <div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.85]">
               DIRECT<br className="md:hidden" /> ANTWOORD
             </h2>
+            <p className="text-gray-500 text-sm md:text-base font-medium max-w-xs leading-relaxed mt-4">
+              Geen sales talk. Gewoon eerlijke antwoorden op de vragen die je echt hebt.
+            </p>
           </div>
-          <p className="text-gray-500 text-sm md:text-base font-medium max-w-xs leading-relaxed">
-            Geen sales talk. Gewoon eerlijke antwoorden op de vragen die je echt hebt.
-          </p>
+          {/* Milo speelt zijn wijs-loop, blijft 15s stilstaan en herhaalt dan */}
+          <video
+            src={`${import.meta.env.BASE_URL}video/milo-faq-loop.mp4`}
+            autoPlay
+            muted
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+            className="w-44 md:w-64 lg:w-72 shrink-0 self-center md:self-end pointer-events-none select-none"
+            onEnded={(e) => {
+              const v = e.currentTarget;
+              window.setTimeout(() => { v.currentTime = 0; v.play().catch(() => {}); }, 15000);
+            }}
+          />
         </div>
 
         {/* Clean stacked FAQ items */}
@@ -75,7 +89,7 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
               <div key={index} className="border-t border-white/10 last:border-b">
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full flex items-center justify-between py-7 md:py-9 text-left group"
+                  className="w-full flex items-center justify-between py-4 md:py-5 text-left group"
                 >
                   <div className="flex items-center gap-5 md:gap-8">
                     <span
