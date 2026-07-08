@@ -25,10 +25,6 @@ const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
     <div className="min-h-screen text-white">
       {/* Hero Header */}
       <div className="relative pt-32 md:pt-48 pb-16 md:pb-24 px-6 text-center overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{
-          backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
-          backgroundSize: '80px 80px'
-        }} />
 
         <div className="relative z-10 max-w-5xl mx-auto scroll-reveal">
           <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-10 backdrop-blur-md">

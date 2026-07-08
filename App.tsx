@@ -6,7 +6,6 @@ import Hero from './components/Hero';
 import Clients from './components/Clients';
 import ErrorBoundary from './components/ErrorBoundary';
 import Loader from './components/Loader';
-const GridBackground = lazyRetry(() => import('./components/GridBackground'));
 import NotFound from './components/NotFound';
 import { useSEO } from './hooks/useSEO';
 
@@ -235,10 +234,6 @@ const App: React.FC = () => {
       <a href="#main-content" className="skip-to-content">Ga naar inhoud</a>
 
       {!isSubPage && loading && <Loader onComplete={() => { sessionStorage.setItem('sn_loaded', '1'); setLoading(false); }} />}
-
-      <Suspense fallback={null}>
-        <GridBackground hide={anyModalOpen} startAnimation={!loading || isSubPage} />
-      </Suspense>
 
       <div className={`transition-opacity duration-700 ease-out ${loading ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <Navbar onOpenBooking={() => setIsBookingOpen(true)} onOpenContact={() => setIsContactOpen(true)} />

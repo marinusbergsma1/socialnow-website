@@ -220,6 +220,19 @@ body {
 }
 
 /* ═══ VHS-ruis over de hele site (subtiele analoge statische korrel) ═══ */
+/* Mini-scanlines als overlay op alles — puur zwarte site, VHS-textuur */
+.grain-overlay::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.22) 0 1px,
+    transparent 1px 3px
+  );
+}
 .grain-overlay::after {
   content: '';
   position: fixed;
@@ -459,8 +472,7 @@ html.sn-warp .sn-navbar-glass {
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: url(#sn-warp-nav) blur(16px) saturate(170%);
   -webkit-backdrop-filter: url(#sn-warp-nav) blur(16px) saturate(170%);
-  /* Donkere rand langs de onderkant: dik-glas profiel zoals de referentie */
-  box-shadow: inset 0 -16px 22px -16px rgba(0, 0, 0, 0.85), inset 0 8px 16px -12px rgba(0, 0, 0, 0.6);
+  /* Geen inset-schaduw: las als een "rare zwarte balk" door de pagina */
 }
 /* Mobiel: blur + animatie uit (GPU) → rustige donkere kaart met vaste rand */
 @media (max-width: 768px) {

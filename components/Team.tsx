@@ -217,16 +217,6 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
 
   return (
     <section id="team" className="py-12 md:py-48 bg-transparent text-white relative overflow-x-clip">
-      <div
-        className="absolute inset-0 z-0 opacity-[0.06] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(to right, rgba(37, 211, 102, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(37, 211, 102, 0.4) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-          maskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)',
-          WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)',
-          animation: 'team-grid-scroll 20s linear infinite'
-        }}
-      ></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12 md:mb-24 scroll-reveal">

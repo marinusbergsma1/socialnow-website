@@ -166,17 +166,6 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
 
   return (
     <div className="min-h-screen text-white pt-28 md:pt-36 pb-20 relative">
-      {/* Subtiel raster + scanlijn — terminal-esthetiek */}
-      <div
-        className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.4) 1px, transparent 1px)',
-          backgroundSize: '80px 80px',
-        }}
-      ></div>
-      <div className="absolute top-0 left-0 w-full h-[2px] bg-[#25D366] shadow-[0_0_20px_#25D366] z-0 opacity-20 animate-[scan-sweep_5s_linear_infinite] pointer-events-none"></div>
-
       {/* Back button */}
       <div className="relative z-10 container mx-auto px-6 max-w-6xl mb-8">
         <button
@@ -497,12 +486,6 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
         </div>
       </div>
 
-      <style>{`
-        @keyframes scan-sweep {
-          0% { transform: translateY(-100vh); }
-          100% { transform: translateY(100vh); }
-        }
-      `}</style>
     </div>
   );
 };

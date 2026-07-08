@@ -164,15 +164,6 @@ const Reviews: React.FC<ReviewsProps> = ({ onOpenBooking }) => {
   return (
     <section id="reviews" className="py-24 md:py-32 bg-transparent relative overflow-hidden">
       {/* Background grid — desktop only */}
-      <div
-        className="hidden md:block absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-          maskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)',
-          WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)'
-        }}
-      />
 
       <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
         <div className="text-center mb-16">

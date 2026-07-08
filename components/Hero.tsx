@@ -146,15 +146,6 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
   return (
     <div className="relative min-h-[100svh] flex flex-col justify-center select-none overflow-hidden bg-transparent">
       {/* Background Decor — desktop only */}
-      <div
-        className="hidden md:block absolute inset-0 z-0 opacity-[0.07] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 1px, transparent 1px)`,
-          backgroundSize: '80px 80px',
-          maskImage: 'radial-gradient(circle at center, black 30%, transparent 100%)',
-          WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 100%)'
-        }}
-      ></div>
 
       <section className="flex-grow flex flex-col items-center justify-center pt-24 pb-12 relative z-10">
         <div className="container mx-auto px-6 text-center flex flex-col items-center justify-center">
