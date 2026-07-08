@@ -21,6 +21,8 @@ export interface Project {
   url?: string;
   fullPageScreenshot?: string;
   metrics?: ProjectMetric[];
+  /** Site blokkeert iframes (X-Frame-Options); toon het beeld i.p.v. live embed */
+  noEmbed?: boolean;
 }
 
 export interface TeamMember {

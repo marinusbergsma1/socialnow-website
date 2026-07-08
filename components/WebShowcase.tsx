@@ -158,9 +158,17 @@ const WebShowcase: React.FC = () => {
     touchStart.current = null;
   };
 
-  // Desktop: live iframe
+  // Desktop: live iframe (of beeld wanneer de site iframes blokkeert)
   const renderDesktopIframe = (project: typeof activeProject, idx: number) => {
     const isActive = idx === activeIndex && !isTransitioning;
+
+    if (project.noEmbed) {
+      return (
+        <div key={`desk-${project.id}`} className={`absolute inset-0 transition-opacity duration-400 ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
+          <img src={project.image} alt={project.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+        </div>
+      );
+    }
 
     return (
       <div key={`desk-${project.id}`} className={`absolute inset-0 transition-opacity duration-400 ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
@@ -186,6 +194,13 @@ const WebShowcase: React.FC = () => {
 
   // Fullscreen render
   const renderFullscreenPreview = (project: typeof activeProject, idx: number) => {
+    if (project.noEmbed) {
+      return (
+        <img key={`fs-${project.id}`} src={project.image} alt={`${project.title} - Fullscreen`}
+          className={`w-full h-full object-contain bg-black ${idx === activeIndex ? 'block' : 'hidden'}`}
+        />
+      );
+    }
     return (
       <iframe key={`fs-${project.id}`} src={project.url} title={`${project.title} - Fullscreen`}
         className={`w-full h-full border-0 ${idx === activeIndex ? 'block' : 'hidden'}`}

@@ -15,6 +15,8 @@ export const webShowcaseProjects: Project[] = [
     align: 'left',
     // Tijdelijk: vastiq.ai weigert momenteel verbindingen, daarom de socialnow.nl mirror
     url: "https://vastiq.socialnow.nl/",
+    // VASTIQ stuurt X-Frame-Options: SAMEORIGIN; live embed geblokkeerd → toon het beeld
+    noEmbed: true,
     gallery: [],
     metrics: [
       { label: "Waarderingen", value: "Live data", color: "#25D366" },
