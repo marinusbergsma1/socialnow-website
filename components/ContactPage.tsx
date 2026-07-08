@@ -59,8 +59,8 @@ const ContactPage: React.FC<ContactPageProps> = ({ isOpen, onClose, onOpenBookin
       role="dialog"
       aria-modal="true"
       aria-label="Contact"
-      className={`fixed inset-0 z-[200] bg-[#030303] overflow-y-auto overflow-x-hidden custom-scrollbar transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        isClosing ? 'opacity-0 scale-[0.98]' : 'opacity-100 scale-100'
+      className={`fixed inset-0 z-[200] bg-[#030303]/85 overflow-y-auto overflow-x-hidden custom-scrollbar transition-opacity duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        isClosing ? 'opacity-0' : 'opacity-100'
       }`}
     >
       <button

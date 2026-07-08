@@ -165,7 +165,14 @@ const WebShowcase: React.FC = () => {
     if (project.noEmbed) {
       return (
         <div key={`desk-${project.id}`} className={`absolute inset-0 transition-opacity duration-400 ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
-          <img src={project.image} alt={project.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+          <a href={project.url} target="_blank" rel="noopener noreferrer" className="group/ne block w-full h-full relative">
+            <img src={project.image} alt={project.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+            <div className="absolute inset-0 flex items-end justify-center pb-8 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/ne:opacity-100 transition-opacity duration-300">
+              <span className="sn-warp-tile rounded-full px-6 py-3 text-white text-[11px] font-black uppercase tracking-[0.25em] flex items-center gap-2">
+                Bekijk live <span aria-hidden>↗</span>
+              </span>
+            </div>
+          </a>
         </div>
       );
     }
@@ -272,8 +279,7 @@ const WebShowcase: React.FC = () => {
               onTouchEnd={handleTouchEnd}
             >
               {/* Project header card */}
-              <div className="flex items-center justify-between mb-3 md:mb-5 px-4 md:px-6 py-3 md:py-4 rounded-2xl border border-white/[0.08]"
-                style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)' }}>
+              <div className="sn-warp-tile flex items-center justify-between mb-3 md:mb-5 px-4 md:px-6 py-3 md:py-4 rounded-2xl">
 
                 {/* Links: Project info */}
                 <div className="flex items-center gap-3 md:gap-5 min-w-0">

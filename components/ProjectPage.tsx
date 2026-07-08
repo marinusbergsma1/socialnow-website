@@ -303,7 +303,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
             {project.metrics.map((metric, i) => (
               <div
                 key={i}
-                className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-6 text-center overflow-hidden group"
+                className="sn-warp-tile relative rounded-2xl p-4 md:p-6 text-center overflow-hidden group"
               >
                 <div
                   className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity"
@@ -426,7 +426,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
             {/* Previous Case */}
             <button
               onClick={() => navigate(`/project/${prev.slug}`)}
-              className="group relative rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8 cursor-pointer hover:bg-white/10 hover:border-[#F62961] transition-all overflow-hidden text-left"
+              className="sn-warp-tile group relative rounded-2xl p-6 md:p-8 cursor-pointer hover:!border-[#F62961] transition-all overflow-hidden text-left"
             >
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#F62961]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="relative z-10">
@@ -441,7 +441,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
             {/* Next Case */}
             <button
               onClick={() => navigate(`/project/${next.slug}`)}
-              className="group relative rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8 cursor-pointer hover:bg-white/10 hover:border-[#00A3E0] transition-all overflow-hidden text-left md:text-right"
+              className="sn-warp-tile group relative rounded-2xl p-6 md:p-8 cursor-pointer hover:!border-[#00A3E0] transition-all overflow-hidden text-left md:text-right"
             >
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-bl from-[#00A3E0]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="relative z-10">

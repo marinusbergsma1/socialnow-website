@@ -66,7 +66,8 @@ function useTilt3D(intensity = 12) {
     const el = ref.current;
     if (!el) return;
     cancelAnimationFrame(rafRef.current);
-    el.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    // Leegmaken i.p.v. 0-waarden: een blijvende transform houdt het glas instabiel
+    el.style.transform = '';
   }, []);
 
   return { ref, handleMouseMove, handleMouseLeave };
@@ -106,11 +107,11 @@ const ReviewCard: React.FC<{ review: typeof reviewsData[0]; index: number; isAct
       }`}
       style={{
         transformStyle: 'preserve-3d',
-        willChange: 'transform, opacity',
         transition: 'transform 0.4s cubic-bezier(0.03, 0.98, 0.52, 0.99), opacity 0.6s ease-out, border-color 0.7s, box-shadow 0.7s',
         opacity: isVisible ? 1 : 0,
+        // In rust 'none' — blijvende 0-waarde transforms houden het glas instabiel
         transform: isVisible
-          ? 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
+          ? 'none'
           : `perspective(800px) rotateX(${index % 2 === 0 ? 12 : -8}deg) rotateY(${index === 0 ? -15 : index === 2 ? 15 : 0}deg) translateY(60px) scale3d(0.92, 0.92, 0.92)`,
       }}
     >

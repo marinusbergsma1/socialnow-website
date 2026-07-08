@@ -208,8 +208,10 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
           </p>
 
           <div className={`flex flex-col items-center gap-6 mt-10 md:mt-12 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.9s' }}>
-            <div onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' })} className="flex flex-col items-center gap-6 cursor-pointer group pb-4 scale-90 md:scale-100">
-               <div className="bg-black/90 md:backdrop-blur-xl border border-white/10 rounded-full px-4 md:px-6 py-2 md:shadow-2xl transition-colors duration-700 group-hover:border-white/30 flex items-center gap-2 md:gap-4 max-w-[95vw] md:max-w-none">
+            {/* Geen scale-utilities op deze wrapper: ook scale-100 is een blijvende
+                transform en zou de pills hun backdrop (globe) afnemen */}
+            <div onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' })} className="flex flex-col items-center gap-6 cursor-pointer group pb-4">
+               <div className="sn-warp-tile rounded-full px-4 md:px-6 py-2 md:shadow-2xl transition-colors duration-700 group-hover:border-white/30 flex items-center gap-2 md:gap-4 max-w-[95vw] md:max-w-none">
                   <div className="flex -space-x-3 shrink-0">
                     {reviewsData.map((review, i) => (
                       <div key={i} className={`w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-black overflow-hidden transition-all duration-700 ${activeReviewIndex === i ? 'scale-110 z-10 border-[#00A3E0] md:shadow-[0_0_20px_rgba(0,163,224,0.4)]' : 'opacity-40 grayscale scale-90'}`}>
@@ -228,7 +230,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
                   </div>
                </div>
 
-               <div className="bg-black/90 md:backdrop-blur-xl border border-white/10 rounded-full px-8 py-3 md:shadow-2xl flex items-center gap-4 group cursor-pointer hover:border-white/40 transition-colors">
+               <div className="sn-warp-tile rounded-full px-8 py-3 md:shadow-2xl flex items-center gap-4 group cursor-pointer hover:border-white/40 transition-colors">
                   <div className="flex text-[#F7E644]">
                     {[1, 2, 3, 4, 5].map((s) => (
                       <Star key={s} size={14} fill="currentColor" strokeWidth={0} />

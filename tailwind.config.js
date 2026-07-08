@@ -29,11 +29,11 @@ export default {
         },
         fadeInUp: {
           from: { opacity: '0', transform: 'translateY(30px)' },
-          to: { opacity: '1', transform: 'translateY(0)' },
+          to: { opacity: '1', transform: 'none' },
         },
         fadeInRight: {
           from: { opacity: '0', transform: 'translateX(30px)', filter: 'blur(10px)' },
-          to: { opacity: '1', transform: 'translateX(0)', filter: 'blur(0)' },
+          to: { opacity: '1', transform: 'none', filter: 'none' },
         },
         fadeIn: {
           from: { opacity: '0' },
@@ -52,7 +52,7 @@ export default {
         },
         counterUp: {
           from: { opacity: '0', transform: 'translateY(20px)' },
-          to: { opacity: '1', transform: 'translateY(0)' },
+          to: { opacity: '1', transform: 'none' },
         },
         pulseGlowCyan: {
           '0%, 100%': { boxShadow: '0 0 5px rgba(0,163,224,0.3), 0 0 20px rgba(0,163,224,0.1)' },

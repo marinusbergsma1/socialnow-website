@@ -164,6 +164,25 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
+  // Entrance-animaties (fill-mode forwards) blijven na afloop "actief" en maken
+  // hun element/wrapper een backdrop root — dan is het warp-glas erin dood.
+  // Strip de klasse zodra de animatie klaar is; de eindstand is toch de
+  // natuurlijke stijl (opacity 1, transform none).
+  useEffect(() => {
+    const ENTRANCE: Record<string, string> = {
+      fadeInUp: 'animate-fade-in-up',
+      fadeIn: 'animate-fade-in',
+      fadeInRight: 'animate-fade-in-right',
+      counterUp: 'animate-counter-up',
+    };
+    const strip = (e: AnimationEvent) => {
+      const cls = ENTRANCE[e.animationName];
+      if (cls && e.target instanceof HTMLElement) e.target.classList.remove(cls);
+    };
+    document.addEventListener('animationend', strip);
+    return () => document.removeEventListener('animationend', strip);
+  }, []);
+
   useEffect(() => {
     if (loading) return;
 

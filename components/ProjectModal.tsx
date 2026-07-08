@@ -275,7 +275,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     {/* Previous Case Card */}
                     <div 
                       onClick={onPrev}
-                      className="group relative rounded-[1.5rem] md:rounded-[2.5rem] border border-white/10 bg-white/5 p-6 md:p-10 cursor-pointer hover:bg-white/10 hover:border-[#F62961] transition-all overflow-hidden backdrop-blur-md text-left"
+                      className="sn-warp-tile group relative rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 cursor-pointer hover:!border-[#F62961] transition-all overflow-hidden text-left"
                     >
                       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#F62961]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                       <div className="relative z-10">
@@ -290,7 +290,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     {/* Next Case Card */}
                     <div 
                       onClick={onNext}
-                      className="group relative rounded-[1.5rem] md:rounded-[2.5rem] border border-white/10 bg-white/5 p-6 md:p-10 cursor-pointer hover:bg-white/10 hover:border-[#00A3E0] transition-all overflow-hidden backdrop-blur-md text-left md:text-right"
+                      className="sn-warp-tile group relative rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 cursor-pointer hover:!border-[#00A3E0] transition-all overflow-hidden text-left md:text-right"
                     >
                       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-bl from-[#00A3E0]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                       <div className="relative z-10">
