@@ -71,7 +71,6 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,380px)_1fr] gap-8 lg:gap-12 items-center">
           <div className="sn-milo relative w-56 md:w-80 lg:w-full max-w-[380px] mx-auto lg:mx-0 pointer-events-none select-none">
             <video
-              src={`${import.meta.env.BASE_URL}video/milo-faq-loop.mp4`}
               autoPlay
               muted
               playsInline
@@ -82,7 +81,10 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
                 const t = e.currentTarget.currentTime;
                 setPointHl(t > 1.2 && t < 6.2);
               }}
-            />
+            >
+              <source src={`${import.meta.env.BASE_URL}video/milo-faq-loop.webm`} type="video/webm" />
+              <source src={`${import.meta.env.BASE_URL}video/milo-faq-loop.mp4`} type="video/mp4" />
+            </video>
           </div>
 
         {/* Clean stacked FAQ items */}

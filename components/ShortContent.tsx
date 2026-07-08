@@ -429,9 +429,13 @@ const MiloPlant: React.FC = () => {
     <div
       ref={hostRef}
       aria-hidden="true"
-      className="sn-milo absolute bottom-[calc(100%-0.35em)] right-[-0.15em] w-16 md:w-36 lg:w-44 pointer-events-none select-none z-10"
+      className="sn-milo absolute bottom-[calc(100%-0.5em)] right-[-0.15em] w-12 md:w-32 lg:w-36 pointer-events-none select-none z-10"
     >
-      <video ref={videoRef} src={`${import.meta.env.BASE_URL}video/milo-plant-loop.mp4`} muted playsInline preload="metadata" />
+      {/* webm met echt alpha-kanaal (zwart weggekeyd) — mp4 als fallback */}
+      <video ref={videoRef} muted playsInline preload="metadata">
+        <source src={`${import.meta.env.BASE_URL}video/milo-plant-loop.webm`} type="video/webm" />
+        <source src={`${import.meta.env.BASE_URL}video/milo-plant-loop.mp4`} type="video/mp4" />
+      </video>
     </div>
   );
 };
