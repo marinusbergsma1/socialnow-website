@@ -402,11 +402,15 @@ body {
 }
 
 .sn-warp-tile {
-  /* Donker frosted glas — vlakke tint, geen gradients of glans */
+  /* Licht frosted glas — vlakke tint, geen gradients of glans.
+     Bewust GEEN url()-lensfilter op tiles: Chromium laat SVG-referentie-
+     filters in backdrop-filter op sommige paginaposities stilletjes
+     doodvallen (glas verdwijnt na scrollen) — pure blur is overal stabiel.
+     De echte lens-warp leeft op de navbar (.sn-navbar-glass). */
   position: relative;
-  background: rgba(10, 12, 16, 0.62);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(26px) saturate(185%);
+  -webkit-backdrop-filter: blur(26px) saturate(185%);
   border: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   animation: sn-glow-rotate 9s linear infinite;
@@ -434,16 +438,7 @@ body {
   filter: drop-shadow(0 0 3px rgba(37, 211, 102, 0.3));
   pointer-events: none;
 }
-/* Chromium (html.sn-warp): échte Liquid Glass — de lens-map (#sn-warp) buigt
-   de achtergrond zichtbaar om de randen, daarna heavy frost. Tint iets opener
-   zodat de warp door het glas heen leesbaar blijft. */
-html.sn-warp .sn-warp-tile {
-  /* Open tint: de gewarpte/geblurde achtergrond moet het beeld zíjn */
-  background: rgba(12, 15, 20, 0.32);
-  backdrop-filter: url(#sn-warp) blur(26px) saturate(185%);
-  -webkit-backdrop-filter: url(#sn-warp) blur(26px) saturate(185%);
-}
-/* Heel subtiel dik-glas randje — mag de edge-warp nooit verduisteren */
+/* Heel subtiel dik-glas randje — mag de frost nooit verduisteren */
 .sn-warp-tile::after {
   content: '';
   position: absolute;

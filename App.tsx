@@ -231,7 +231,7 @@ const App: React.FC = () => {
 
   return (
     <ErrorBoundary>
-    <div className="bg-black text-white min-h-screen font-sans selection:bg-[#25D366] selection:text-black grain-overlay">
+    <div className="relative bg-black text-white min-h-screen font-sans selection:bg-[#25D366] selection:text-black grain-overlay">
       <a href="#main-content" className="skip-to-content">Ga naar inhoud</a>
 
       {!isSubPage && loading && <Loader onComplete={() => { sessionStorage.setItem('sn_loaded', '1'); setLoading(false); }} />}

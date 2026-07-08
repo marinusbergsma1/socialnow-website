@@ -27,21 +27,28 @@ const GridBackground: React.FC<GridBackgroundProps> = ({ hide = false, startAnim
   }, [startAnimation, isMobile]);
 
   return (
-    <div className={`fixed inset-0 z-0 overflow-hidden pointer-events-none bg-black transition-opacity duration-1000 ${hide ? 'opacity-0' : 'opacity-100'}`}>
-      {/* Globes only — desktop for performance */}
-      {!isMobile && startAnimation && (
-        <div className={`absolute inset-0 z-[5] transition-opacity duration-[2500ms] ease-out ${globeVisible ? 'opacity-60' : 'opacity-0'}`}>
-          <PixelGlobe
-            scaleMultiplier={0.55}
-            type="all"
-            opacity={0.85}
-            entranceAnimation={true}
-            glowEnabled={true}
-            largeParticles={true}
-            scrollReactive={false}
-          />
-        </div>
-      )}
+    // NIET position:fixed: een fixed backdrop-provider leeft in een eigen
+    // compositor-laag en Chromium's backdrop-filter capteert die vanuit een
+    // gescrollde context onbetrouwbaar (glas "sterft" op sommige scroll-
+    // posities). absolute + sticky geeft exact hetzelfde beeld, maar in
+    // dezelfde scroll-laag als de tiles → capture werkt overal.
+    <div className={`absolute inset-0 z-0 pointer-events-none transition-opacity duration-1000 ${hide ? 'opacity-0' : 'opacity-100'}`}>
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
+        {/* Globes only — desktop for performance */}
+        {!isMobile && startAnimation && (
+          <div className={`absolute inset-0 z-[5] transition-opacity duration-[2500ms] ease-out ${globeVisible ? 'opacity-60' : 'opacity-0'}`}>
+            <PixelGlobe
+              scaleMultiplier={0.55}
+              type="all"
+              opacity={0.85}
+              entranceAnimation={true}
+              glowEnabled={true}
+              largeParticles={true}
+              scrollReactive={false}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
