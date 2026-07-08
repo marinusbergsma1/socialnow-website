@@ -187,19 +187,22 @@ const ImageSlider: React.FC = () => {
       {isVisible && <MarqueeRow images={imagesRow1} speed={isMobile ? 0.35 : 0.5} cardHeight={cardHeight} gap={gap} onCardClick={handleCardClick} />}
       {isVisible && <MarqueeRow images={imagesRow2} speed={isMobile ? 0.25 : 0.4} reverse cardHeight={cardHeight} gap={gap} onCardClick={handleCardClick} />}
 
-      {/* Milo op zijn motor — mini, in een lage beeldvullende strook die
-          direct aansluit op de slider hierboven (geen extra tussenruimte).
-          TODO: vervangen door milo-wheelie-loop.mp4 (5s van links naar
-          rechts) zodra de Higgsfield-credits zijn aangevuld. */}
-      <div className="sn-milo relative w-full h-20 md:h-36 overflow-hidden">
-        <img
-          src={`${import.meta.env.BASE_URL}images/milo-motor-wheelie.png`}
-          alt=""
+      {/* Milo rijdt op zijn rode motor in ~5s van links naar rechts door een
+          beeldvullende 16:9-strook. Transparante webm (zwart weggekeyd) + mp4-
+          fallback via .sn-milo; loopt continu. */}
+      <div className="sn-milo relative w-full aspect-video mt-4 md:mt-8">
+        <video
+          autoPlay
+          muted
+          playsInline
+          loop
+          preload="metadata"
           aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          className="!w-auto h-full object-contain"
-        />
+          className="w-full h-full object-cover"
+        >
+          <source src={`${import.meta.env.BASE_URL}video/milo-motor-loop.webm`} type="video/webm" />
+          <source src={`${import.meta.env.BASE_URL}video/milo-motor-loop.mp4`} type="video/mp4" />
+        </video>
       </div>
     </section>
   );
