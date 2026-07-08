@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Plus, Send, Zap, MessagesSquare, UserCheck } from 'lucide-react';
 import Button from './Button';
@@ -128,8 +128,26 @@ const pillars = [
   },
 ];
 
+const tickerValues = [
+  'GEEN POESPAS',
+  'DIRECTE LIJNEN',
+  'AI-FIRST',
+  'ELKE DAG POSTEN',
+  'SINDS 2021',
+  '500+ PROJECTEN',
+  'AMSTERDAM',
+];
+
+/** Dagen tot het 5-jarig bestaan (1 november 2026). */
+const daysToFive = () => {
+  const target = new Date('2026-11-01T00:00:00+01:00').getTime();
+  return Math.max(0, Math.ceil((target - Date.now()) / 86_400_000));
+};
+
 const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
   const navigate = useNavigate();
+  const [active, setActive] = useState(0);
+  const activeMember = crew[active];
 
   useSEO({
     title: 'Team',
@@ -171,17 +189,30 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
       </div>
 
       <div className="relative z-10 container mx-auto max-w-6xl pb-12 px-6">
-        {/* 1. HERO — compact */}
-        <div className="mb-16 md:mb-24 animate-fade-in-up">
+        {/* 1. HERO — VHS-titel + stats + countdown */}
+        <div className="mb-14 md:mb-20 animate-fade-in-up">
           <span className="font-mono text-[10px] tracking-[0.4em] text-[#25D366] uppercase block mb-6">
-            /// 8_SPECIALISTEN + 1_AI
+            /// CREW_DOSSIER · AMSTERDAM
           </span>
-          <h1 className="text-5xl md:text-8xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-6">
+          <h1 className="sn-vhs text-5xl md:text-8xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-6">
             HET TEAM<br />ACHTER <span className="text-[#25D366]">DE AI</span>
           </h1>
-          <p className="text-gray-400 font-bold text-lg md:text-2xl max-w-2xl leading-tight">
+          <p className="text-gray-400 font-bold text-lg md:text-2xl max-w-2xl leading-tight mb-8">
             Acht specialisten in Amsterdam. Eén AI-systeem dat het zware werk doet. Geen managementlagen, geen ruis.
           </p>
+          <div className="flex flex-wrap items-center gap-2 md:gap-3">
+            {['500+ PROJECTEN', 'SINDS 2021', '8 SPECIALISTEN + 1 AI'].map((stat) => (
+              <span
+                key={stat}
+                className="sn-warp-tile rounded-full px-4 py-2 md:px-5 md:py-2.5 font-mono text-[9px] md:text-[10px] tracking-widest text-white/80 uppercase"
+              >
+                {stat}
+              </span>
+            ))}
+            <span className="sn-warp-tile rounded-full px-4 py-2 md:px-5 md:py-2.5 font-mono text-[9px] md:text-[10px] tracking-widest uppercase !border-[#F7E644]/30 text-[#F7E644]">
+              {daysToFive()} DAGEN TOT 5 JAAR SOCIALNOW
+            </span>
+          </div>
         </div>
 
         {/* 2. FOUNDER */}
@@ -219,7 +250,33 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
           </div>
         </div>
 
-        {/* 3. CREW GRID */}
+        {/* 3. WAARDEN-TICKER — geen glas hierbinnen (transform-wrapper) */}
+        <div className="relative overflow-hidden mb-16 md:mb-24 py-4 border-y border-white/10">
+          <div
+            className="flex whitespace-nowrap"
+            style={{ animation: 'tickerSlide 32s linear infinite', width: 'max-content' }}
+          >
+            {[0, 1].map((dup) => (
+              <span key={dup} className="flex items-center" aria-hidden={dup === 1}>
+                {tickerValues.map((v, i) => (
+                  <span key={`${dup}-${v}`} className="flex items-center">
+                    <span className="font-black uppercase tracking-tighter text-2xl md:text-4xl text-white/90 px-4">
+                      {v}
+                    </span>
+                    <span
+                      className="text-2xl md:text-4xl px-4"
+                      style={{ color: ['#25D366', '#00A3E0', '#F62961', '#F7E644'][i % 4] }}
+                    >
+                      ·
+                    </span>
+                  </span>
+                ))}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* 4. CREW INDEX — interactief dossier: lijst links, live preview rechts */}
         <div className="mb-16 md:mb-24">
           <div className="flex items-end justify-between mb-8 md:mb-12">
             <h2 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none">
@@ -229,67 +286,148 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
               INDEX 02 → 08
             </span>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+
+          {/* Desktop: index + preview */}
+          <div className="hidden lg:grid grid-cols-[1fr_1.05fr] gap-6 items-stretch">
+            <div className="sn-warp-tile rounded-[2rem] p-3 flex flex-col justify-center">
+              {crew.map((member, index) => {
+                const isActive = index === active;
+                return (
+                  <button
+                    key={member.id}
+                    onMouseEnter={() => setActive(index)}
+                    onFocus={() => setActive(index)}
+                    onClick={() => setActive(index)}
+                    className={`group/row flex items-center gap-5 text-left px-5 py-4 rounded-2xl transition-colors duration-300 ${
+                      isActive ? 'bg-white/[0.06]' : 'hover:bg-white/[0.03]'
+                    }`}
+                  >
+                    <span
+                      className="w-1 self-stretch rounded-full transition-all duration-300"
+                      style={{ background: isActive ? member.color : 'rgba(255,255,255,0.08)' }}
+                    ></span>
+                    <span className="font-mono text-[11px] text-white/25 w-7 shrink-0">
+                      {String(index + 2).padStart(2, '0')}
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span
+                        className={`block font-black uppercase tracking-tight text-lg leading-none truncate transition-colors duration-300 ${
+                          isActive ? 'text-white' : 'text-white/55'
+                        }`}
+                      >
+                        {member.name}
+                      </span>
+                      <span className="block text-[10px] font-bold uppercase tracking-widest mt-1.5 text-white/30">
+                        {member.role}
+                      </span>
+                    </span>
+                    <span
+                      className="font-mono text-[9px] tracking-widest px-2.5 py-1 rounded-md border shrink-0 transition-opacity duration-300"
+                      style={{
+                        borderColor: `${member.color}55`,
+                        color: member.color,
+                        opacity: isActive ? 1 : 0.35,
+                      }}
+                    >
+                      {member.tag}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="sn-warp-tile rounded-[2rem] overflow-hidden relative min-h-[560px]">
+              <div key={activeMember.id} className="absolute inset-0 animate-fade-in group">
+                <ProgressiveImage
+                  src={activeMember.image}
+                  alt={activeMember.name}
+                  className={`w-full h-full absolute inset-0 ${activeMember.imgCustomClass || ''}`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90"></div>
+                <span
+                  className="absolute top-6 left-6 font-mono text-[10px] tracking-widest px-3 py-1.5 rounded-md bg-black/70 border"
+                  style={{ borderColor: `${activeMember.color}55`, color: activeMember.color }}
+                >
+                  {activeMember.tag}
+                </span>
+                <span className="absolute top-6 right-6 font-mono text-[11px] text-white/30">
+                  {String(active + 2).padStart(2, '0')} / 08
+                </span>
+                <div className="absolute bottom-8 left-8 right-8">
+                  <h3 className="text-3xl md:text-4xl font-black uppercase text-white tracking-tighter leading-none mb-2">
+                    {activeMember.name}
+                  </h3>
+                  <p
+                    className="text-[11px] font-bold uppercase tracking-widest mb-3"
+                    style={{ color: activeMember.color }}
+                  >
+                    {activeMember.role}
+                  </p>
+                  <p className="text-gray-300 text-sm font-medium leading-snug max-w-sm">
+                    {activeMember.line}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobiel: kaart-grid */}
+          <div className="grid lg:hidden grid-cols-2 gap-3">
             {crew.map((member, index) => (
               <div
                 key={member.id}
-                className="sn-warp-tile group relative h-[260px] md:h-[380px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden animate-fade-in-up"
-                style={{ animationDelay: `${0.1 + index * 0.06}s` }}
+                className="sn-warp-tile group relative h-[260px] rounded-[1.5rem] overflow-hidden"
               >
                 <ProgressiveImage
                   src={member.image}
                   alt={member.name}
-                  className={`w-full h-full absolute inset-0 transition-transform duration-700 group-hover:scale-105 ${member.imgCustomClass || ''}`}
+                  className={`w-full h-full absolute inset-0 ${member.imgCustomClass || ''}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent opacity-90"></div>
                 <span
-                  className="absolute top-3 left-3 md:top-5 md:left-5 z-10 font-mono text-[8px] md:text-[10px] tracking-widest px-2 py-1 md:px-3 md:py-1.5 rounded-md bg-black/70 border"
+                  className="absolute top-3 left-3 z-10 font-mono text-[8px] tracking-widest px-2 py-1 rounded-md bg-black/70 border"
                   style={{ borderColor: `${member.color}55`, color: member.color }}
                 >
                   {member.tag}
                 </span>
-                <span className="absolute top-3 right-3 md:top-5 md:right-5 z-10 font-mono text-[9px] md:text-[11px] text-white/25">
+                <span className="absolute top-3 right-3 z-10 font-mono text-[9px] text-white/25">
                   {String(index + 2).padStart(2, '0')}
                 </span>
-                <div className="absolute bottom-4 md:bottom-6 left-4 md:left-6 right-4 md:right-6 z-10">
-                  <h3 className="text-sm md:text-xl font-black uppercase text-white tracking-tight leading-none mb-1.5">
+                <div className="absolute bottom-4 left-4 right-4 z-10">
+                  <h3 className="text-sm font-black uppercase text-white tracking-tight leading-none mb-1.5">
                     {member.name}
                   </h3>
-                  <p
-                    className="text-[7px] md:text-[10px] font-bold uppercase tracking-widest mb-2 transition-colors"
-                    style={{ color: member.color }}
-                  >
+                  <p className="text-[7px] font-bold uppercase tracking-widest" style={{ color: member.color }}>
                     {member.role}
-                  </p>
-                  <p className="text-gray-400 text-[9px] md:text-[11px] font-medium leading-snug md:opacity-0 md:group-hover:opacity-100 md:translate-y-1 md:group-hover:translate-y-0 transition-all duration-500">
-                    {member.line}
                   </p>
                 </div>
               </div>
             ))}
+          </div>
 
-            {/* Talent-kaart */}
-            <button
-              onClick={handleCta}
-              className="group relative h-[260px] md:h-[380px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border-2 border-dashed border-[#25D366]/30 hover:border-[#25D366] bg-white/[0.02] transition-all duration-500 flex flex-col items-center justify-center text-center cursor-pointer"
-            >
-              <span className="absolute top-3 left-3 md:top-5 md:left-5 font-mono text-[8px] md:text-[10px] tracking-widest px-2 py-1 md:px-3 md:py-1.5 rounded-md bg-black/70 border border-[#25D366]/30 text-[#25D366]">
-                OPEN_SLOT
-              </span>
-              <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-[#25D366] flex items-center justify-center mb-4 shadow-[0_0_20px_rgba(37,211,102,0.4)] group-hover:scale-110 transition-transform">
-                <Plus size={16} className="text-black" strokeWidth={3} />
-              </div>
-              <h3 className="text-sm md:text-xl font-black uppercase text-white mb-1 leading-none group-hover:text-[#25D366] transition-colors">
+          {/* Talent-kaart */}
+          <button
+            onClick={handleCta}
+            className="sn-warp-tile group relative w-full mt-6 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden !border-2 !border-dashed !border-[#25D366]/30 hover:!border-[#25D366] transition-all duration-500 flex items-center justify-center gap-5 py-8 md:py-10 cursor-pointer"
+          >
+            <span className="absolute top-3 left-4 font-mono text-[8px] md:text-[10px] tracking-widest text-[#25D366]/70">
+              OPEN_SLOT
+            </span>
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_0_20px_rgba(37,211,102,0.4)] group-hover:scale-110 transition-transform">
+              <Plus size={16} className="text-black" strokeWidth={3} />
+            </div>
+            <div className="text-left">
+              <h3 className="text-sm md:text-xl font-black uppercase text-white leading-none group-hover:text-[#25D366] transition-colors">
                 GROW WITH US
               </h3>
-              <p className="text-gray-400 font-bold text-[8px] md:text-[10px] max-w-[80%] leading-relaxed">
+              <p className="text-gray-400 font-bold text-[8px] md:text-[10px] mt-1.5">
                 Amsterdam's snelstgroeiende creative studio zoekt talent.
               </p>
-            </button>
-          </div>
+            </div>
+          </button>
         </div>
 
-        {/* 4. 8 MENSEN + 1 AI-SYSTEEM */}
+        {/* 5. 8 MENSEN + 1 AI-SYSTEEM */}
         <div className="mb-16 md:mb-24">
           <div className="max-w-3xl mb-10 md:mb-14">
             <span className="font-mono text-[10px] tracking-[0.4em] text-[#00A3E0] uppercase block mb-5">
@@ -329,7 +467,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
           </div>
         </div>
 
-        {/* 5. CTA */}
+        {/* 6. CTA */}
         <div className="sn-warp-tile rounded-[2rem] md:rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/5 via-transparent to-[#00A3E0]/5 pointer-events-none"></div>
           <div className="relative z-10">
