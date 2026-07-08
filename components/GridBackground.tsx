@@ -56,7 +56,7 @@ const LazyGlobe: React.FC<{ visible: boolean; entrance: boolean }> = ({ visible,
 };
 
 /** Documenthoogtes (in vh) waar een globe-instantie leeft */
-const GLOBE_SPOTS = [0, 210, 420, 640, 860, 1080, 1300, 1520];
+const GLOBE_SPOTS = [0];
 
 const GridBackground: React.FC<GridBackgroundProps> = ({ hide = false, startAnimation = false }) => {
   const [isMobile, setIsMobile] = useState(false);

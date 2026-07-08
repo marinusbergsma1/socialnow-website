@@ -41,6 +41,8 @@ interface FAQProps {
 
 const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  // Licht de eerste vraag op terwijl Milo in zijn loop wijst
+  const [pointHl, setPointHl] = useState(false);
 
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -49,7 +51,7 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
   return (
     <section className="py-12 md:py-20 bg-transparent relative overflow-hidden">
       {/* Background watermark */}
-      <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.08] select-none overflow-hidden">
+      <div className="absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.12] select-none overflow-hidden">
         <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">FAQ</h2>
       </div>
 
@@ -67,16 +69,21 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
 
         {/* Milo groot links, de vragen rechts van hem */}
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,380px)_1fr] gap-8 lg:gap-12 items-center">
-          <video
-            src={`${import.meta.env.BASE_URL}video/milo-faq-loop.mp4`}
-            autoPlay
-            muted
-            playsInline
-            loop
-            preload="metadata"
-            aria-hidden="true"
-            className="w-56 md:w-80 lg:w-full max-w-[380px] mx-auto lg:mx-0 pointer-events-none select-none"
-          />
+          <div className="sn-milo relative w-56 md:w-80 lg:w-full max-w-[380px] mx-auto lg:mx-0 pointer-events-none select-none">
+            <video
+              src={`${import.meta.env.BASE_URL}video/milo-faq-loop.mp4`}
+              autoPlay
+              muted
+              playsInline
+              loop
+              preload="metadata"
+              aria-hidden="true"
+              onTimeUpdate={(e) => {
+                const t = e.currentTarget.currentTime;
+                setPointHl(t > 1.2 && t < 6.2);
+              }}
+            />
+          </div>
 
         {/* Clean stacked FAQ items */}
         <div className="space-y-0">
@@ -91,12 +98,12 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
                   <div className="flex items-center gap-5 md:gap-8">
                     <span
                       className="text-[11px] font-black tracking-widest transition-colors duration-300"
-                      style={{ color: isOpen ? faq.color : 'rgba(255,255,255,0.2)' }}
+                      style={{ color: isOpen || (index === 0 && pointHl) ? faq.color : 'rgba(255,255,255,0.2)' }}
                     >
                       0{index + 1}
                     </span>
                     <span className={`text-base md:text-xl font-black uppercase tracking-tight transition-colors duration-300 leading-tight ${
-                      isOpen ? 'text-white' : 'text-gray-500 group-hover:text-white'
+                      isOpen || (index === 0 && pointHl) ? 'text-white' : 'text-gray-500 group-hover:text-white'
                     }`}>
                       {faq.question}
                     </span>

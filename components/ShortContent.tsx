@@ -391,6 +391,51 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
 };
 
 // ─── Main Component ─────────────────────────────────────────────────────
+
+/**
+ * Milo als tuinier bovenop de T van "PLANT". Speelt één keer af wanneer de
+ * sectie in beeld komt; reset pas wanneer je wegscrollt en weer terugkomt.
+ * Screen-blend via .sn-milo: zwart is transparant, dus hij dekt de titel
+ * nooit af en "staat" op de letter.
+ */
+const MiloPlant: React.FC = () => {
+  const hostRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const playedRef = useRef(false);
+
+  useEffect(() => {
+    const host = hostRef.current;
+    const video = videoRef.current;
+    if (!host || !video) return;
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        if (!playedRef.current) {
+          playedRef.current = true;
+          video.currentTime = 0;
+          video.play().catch(() => {});
+        }
+      } else {
+        // Weggescrold: klaarzetten voor een verse afspeelbeurt
+        playedRef.current = false;
+        video.pause();
+        video.currentTime = 0;
+      }
+    }, { threshold: 0.4 });
+    io.observe(host);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={hostRef}
+      aria-hidden="true"
+      className="sn-milo absolute bottom-[calc(100%-0.35em)] right-[-0.15em] w-16 md:w-36 lg:w-44 pointer-events-none select-none z-10"
+    >
+      <video ref={videoRef} src={`${import.meta.env.BASE_URL}video/milo-plant-loop.mp4`} muted playsInline preload="metadata" />
+    </div>
+  );
+};
+
 const ShortContent: React.FC = () => {
   const [statsVisible, setStatsVisible] = useState(false);
   const statsRef = useRef<HTMLDivElement>(null);
@@ -425,15 +470,18 @@ const ShortContent: React.FC = () => {
   return (
     <section className="py-10 md:py-28 bg-transparent overflow-hidden relative border-t border-white/5">
       {/* Background watermark — desktop only */}
-      <div className="hidden md:block absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.08] select-none overflow-hidden">
+      <div className="hidden md:block absolute top-0 left-0 w-full text-center pointer-events-none opacity-[0.12] select-none overflow-hidden">
         <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">MOTION</h2>
       </div>
 
-      {/* Header */}
+      {/* Header — Milo plant zijn plantje bovenop de T van PLANT */}
       <div className="container mx-auto px-6 relative z-10 text-center mb-4 md:mb-14">
-        <h2 className="text-2xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-none mb-3 md:mb-4">
-          CONTENT DIE ZICHZELF PLANT
-        </h2>
+        <div className="relative inline-block">
+          <MiloPlant />
+          <h2 className="text-2xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-none mb-3 md:mb-4">
+            CONTENT DIE ZICHZELF PLANT
+          </h2>
+        </div>
         <p className="text-gray-500 text-xs md:text-base font-medium max-w-lg mx-auto">
           Elke maand automatisch ingepland. AI analyseert je ad-resultaten en vertaalt dat direct naar geoptimaliseerde content. Geen gokwerk, alleen groei.
         </p>
