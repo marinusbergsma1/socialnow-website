@@ -40,6 +40,7 @@ const Team = lazyRetry(() => import('./components/Team'));
 const FAQ = lazyRetry(() => import('./components/FAQ'));
 const Footer = lazyRetry(() => import('./components/Footer'));
 const WhatsAppPopup = lazyRetry(() => import('./components/WhatsAppPopup'));
+const MiloHelpLauncher = lazyRetry(() => import('./components/MiloHelpLauncher'));
 const PixelCursor = lazyRetry(() => import('./components/PixelCursor'));
 
 // v2.0 — New sections
@@ -338,6 +339,7 @@ const App: React.FC = () => {
         {isSubPage && <Footer onOpenBooking={() => setIsBookingOpen(true)} />}
 
         {!loading && <WhatsAppPopup />}
+        {!loading && <MiloHelpLauncher />}
 
         {!loading && <PixelCursor />}
       </Suspense>

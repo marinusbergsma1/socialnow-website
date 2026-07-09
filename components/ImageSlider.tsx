@@ -187,13 +187,13 @@ const ImageSlider: React.FC = () => {
       {isVisible && <MarqueeRow images={imagesRow1} speed={isMobile ? 0.35 : 0.5} cardHeight={cardHeight} gap={gap} onCardClick={handleCardClick} />}
       {isVisible && <MarqueeRow images={imagesRow2} speed={isMobile ? 0.25 : 0.4} reverse cardHeight={cardHeight} gap={gap} onCardClick={handleCardClick} />}
 
-      {/* Milo op zijn rode motor: het klein VLAKJE zelf rijdt van links naar
-          rechts over het scherm (translateX) → echte rij-illusie. Transparante
-          webm (zwart weggekeyd) + mp4-fallback via .sn-milo. */}
-      <div className="relative w-full h-36 md:h-52 mt-4 md:mt-6 overflow-hidden">
+      {/* Milo op zijn rode motor: het klein VLAKJE zelf rijdt in één shot volledig
+          van links buiten beeld naar rechts buiten beeld. Laag geplaatst, net boven
+          de volgende tekst. Transparante webm (zwart weggekeyd) + mp4-fallback. */}
+      <div className="relative w-full h-24 md:h-32 mt-1 md:mt-2 overflow-hidden">
         <div
-          className="sn-milo absolute left-0 top-0 w-56 md:w-80 aspect-video"
-          style={{ animation: 'milo-ride-across 9s linear infinite' }}
+          className="sn-milo absolute left-0 bottom-0 w-48 md:w-64 aspect-video"
+          style={{ animation: 'milo-ride-across 8s linear infinite' }}
         >
         <video
           autoPlay
