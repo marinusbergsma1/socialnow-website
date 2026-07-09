@@ -229,8 +229,8 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
               onAnimationIteration={() => { const v = motorVideoRef.current; if (v) v.currentTime = 0; }}
             >
               <video ref={motorVideoRef} autoPlay muted playsInline loop preload="auto" aria-hidden="true" className="w-full h-full object-contain">
-                <source src={`${import.meta.env.BASE_URL}video/milo-motor-loop.webm`} type="video/webm" />
-                <source src={`${import.meta.env.BASE_URL}video/milo-motor-loop.mp4`} type="video/mp4" />
+                <source src={`${import.meta.env.BASE_URL}video/milo-motor-loop.webm?v=2`} type="video/webm" />
+                <source src={`${import.meta.env.BASE_URL}video/milo-motor-loop.mp4?v=2`} type="video/mp4" />
               </video>
             </div>
           </div>
