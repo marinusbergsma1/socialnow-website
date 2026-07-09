@@ -109,7 +109,7 @@ const WhatsAppPopup: React.FC = () => {
           <div className="flex items-center gap-3 whitespace-nowrap animate-[fadeIn_0.3s_ease-out]">
             <Smartphone size={24} className="shrink-0 text-white" />
             <span className="text-xs font-bold text-left leading-tight text-white">
-              Let op: Boekingen voor Q1 2026<br/>stromen momenteel snel vol!
+              Let op: Boekingen voor Q4 2026<br/>stromen momenteel snel vol!
             </span>
           </div>
         ) : (
