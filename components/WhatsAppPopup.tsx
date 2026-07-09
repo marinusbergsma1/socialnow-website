@@ -8,6 +8,10 @@ const WhatsAppPopup: React.FC = () => {
   const [showPromo, setShowPromo] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Huidige kwartaal — updatet automatisch mee per kwartaal waar we in zitten
+  const now = new Date();
+  const currentQuarter = `Q${Math.floor(now.getMonth() / 3) + 1} ${now.getFullYear()}`;
+
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
@@ -107,9 +111,9 @@ const WhatsAppPopup: React.FC = () => {
       >
         {showPromo ? (
           <div className="flex items-center gap-3 whitespace-nowrap animate-[fadeIn_0.3s_ease-out]">
-            <Smartphone size={24} className="shrink-0 text-white" />
-            <span className="text-xs font-bold text-left leading-tight text-white">
-              Let op: Boekingen voor Q4 2026<br/>stromen momenteel snel vol!
+            <Smartphone size={24} className="shrink-0 text-[#0a3d1c]" />
+            <span className="text-xs font-bold text-left leading-tight text-[#0a3d1c]">
+              Let op: Boekingen voor {currentQuarter}<br/>stromen momenteel snel vol!
             </span>
           </div>
         ) : (

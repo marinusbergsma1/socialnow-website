@@ -79,13 +79,10 @@ const MiloHelpLauncher: React.FC = () => {
         className={`relative shrink-0 rounded-full w-16 h-16 md:w-[4.5rem] md:h-[4.5rem]
           transition-transform duration-300 hover:scale-110 active:scale-95 ${ringOn ? 'milo-ring' : ''}`}
       >
-        <span className="absolute inset-0 rounded-full bg-[#25D366]/10 blur-md" aria-hidden="true" />
-
-        {/* idle/knipper-loop — altijd onderop (volledige kop) */}
+        {/* idle/knipper-loop — altijd onderop (echte alpha, geen screen-blend → normale kleur) */}
         <video
           autoPlay muted loop playsInline preload="auto" aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_4px_14px_rgba(37,211,102,0.28)]"
-          style={{ mixBlendMode: 'screen' }}
+          className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
         >
           <source src={`${import.meta.env.BASE_URL}video/milo-blink.webm`} type="video/webm" />
           <source src={`${import.meta.env.BASE_URL}video/milo-blink.mp4`} type="video/mp4" />
@@ -97,7 +94,7 @@ const MiloHelpLauncher: React.FC = () => {
           muted playsInline preload="auto" aria-hidden="true"
           onEnded={onWaveEnded}
           className="absolute inset-0 w-full h-full object-contain transition-opacity duration-200"
-          style={{ mixBlendMode: 'screen', opacity: waving ? 1 : 0 }}
+          style={{ opacity: waving ? 1 : 0 }}
         >
           <source src={`${import.meta.env.BASE_URL}video/milo-wave.webm`} type="video/webm" />
           <source src={`${import.meta.env.BASE_URL}video/milo-wave.mp4`} type="video/mp4" />

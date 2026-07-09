@@ -214,12 +214,26 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
   const founder = team.find(m => m.name === "Marinus Bergsma");
   const otherMembers = team.filter(m => m.name !== "Marinus Bergsma" && m.type === 'member');
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const motorVideoRef = useRef<HTMLVideoElement>(null);
 
   return (
     <section id="team" className="py-12 md:py-48 bg-transparent text-white relative overflow-x-clip">
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-12 md:mb-24 scroll-reveal">
+        <div className="text-center mb-12 md:mb-24 scroll-reveal relative">
+          {/* Milo op zijn motor rijdt OVER de tekst (echte alpha, in 5s van links naar rechts) */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[clamp(2.5rem,8vw,7rem)] overflow-hidden z-20">
+            <div
+              className="sn-milo absolute left-0 top-1/2 -translate-y-1/2 w-28 md:w-44 aspect-video will-change-transform"
+              style={{ animation: 'milo-ride-across 5s linear infinite' }}
+              onAnimationIteration={() => { const v = motorVideoRef.current; if (v) v.currentTime = 0; }}
+            >
+              <video ref={motorVideoRef} autoPlay muted playsInline loop preload="auto" aria-hidden="true" className="w-full h-full object-contain">
+                <source src={`${import.meta.env.BASE_URL}video/milo-motor-loop.webm`} type="video/webm" />
+                <source src={`${import.meta.env.BASE_URL}video/milo-motor-loop.mp4`} type="video/mp4" />
+              </video>
+            </div>
+          </div>
           {/* Vloeiende clamp-maat: kop blijft altijd op één regel binnen het scherm, wordt nooit afgekapt */}
           <h2 className="text-[clamp(1.5rem,7vw,6rem)] font-black uppercase mb-6 flex justify-center items-center tracking-tighter leading-none">
             <span className="inline-flex items-center whitespace-nowrap">
