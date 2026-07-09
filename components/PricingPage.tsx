@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Check, Sparkles, MessageCircle, Globe, Instagram, Camera, Palette } from 'lucide-react';
 import { useSEO } from '../hooks/useSEO';
 import Button from './Button';
+import GrowthChart from './GrowthChart';
 
 interface PricingTier {
   name: string;
@@ -415,6 +416,9 @@ const PricingPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
           ))}
         </div>
       </div>
+
+      {/* Groei-grafiek — animerende line-chart in SocialNow-stijl */}
+      <GrowthChart />
 
       {/* Bundle CTA */}
       <div className="container mx-auto px-6 max-w-4xl mb-20 scroll-reveal">
