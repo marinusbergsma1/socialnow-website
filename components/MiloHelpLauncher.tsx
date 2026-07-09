@@ -23,10 +23,12 @@ const MiloHelpLauncher: React.FC = () => {
   const [dotCount, setDotCount] = useState(0);
   const [waving, setWaving] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
+  const [ringOn, setRingOn] = useState(true);   // glow-ring alleen de eerste 5s
 
   useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = [];
     timers.push(setTimeout(() => setEntered(true), 500));
+    timers.push(setTimeout(() => setRingOn(false), 5000)); // daarna alleen knipperen
     const base = 500;
     timers.push(setTimeout(() => setDotCount(1), base + D1));
     timers.push(setTimeout(() => setDotCount(2), base + D2));
@@ -55,9 +57,9 @@ const MiloHelpLauncher: React.FC = () => {
     >
       <style>{`
         @keyframes milo-glow-pulse {
-          0%   { box-shadow: 0 0 0 0 rgba(99,102,241,0.5); }
-          70%  { box-shadow: 0 0 0 13px rgba(99,102,241,0); }
-          100% { box-shadow: 0 0 0 0 rgba(99,102,241,0); }
+          0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.45); }
+          70%  { box-shadow: 0 0 0 13px rgba(37,211,102,0); }
+          100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
         }
         @keyframes milo-dot-in { 0% { opacity:0; transform:scale(0.3); } 100% { opacity:1; transform:scale(1); } }
         @keyframes milo-text-in {
@@ -74,15 +76,15 @@ const MiloHelpLauncher: React.FC = () => {
       <button
         onClick={openHelp}
         aria-label="Persoonlijke hulp — Milo"
-        className="relative shrink-0 rounded-full milo-ring w-16 h-16 md:w-[4.5rem] md:h-[4.5rem]
-          transition-transform duration-300 hover:scale-110 active:scale-95"
+        className={`relative shrink-0 rounded-full w-16 h-16 md:w-[4.5rem] md:h-[4.5rem]
+          transition-transform duration-300 hover:scale-110 active:scale-95 ${ringOn ? 'milo-ring' : ''}`}
       >
-        <span className="absolute inset-0 rounded-full bg-indigo-500/20 blur-md" aria-hidden="true" />
+        <span className="absolute inset-0 rounded-full bg-[#25D366]/10 blur-md" aria-hidden="true" />
 
         {/* idle/knipper-loop — altijd onderop (volledige kop) */}
         <video
           autoPlay muted loop playsInline preload="auto" aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_4px_14px_rgba(79,70,229,0.45)]"
+          className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_4px_14px_rgba(37,211,102,0.28)]"
           style={{ mixBlendMode: 'screen' }}
         >
           <source src={`${import.meta.env.BASE_URL}video/milo-blink.webm`} type="video/webm" />

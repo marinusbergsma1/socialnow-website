@@ -187,12 +187,17 @@ const ImageSlider: React.FC = () => {
       {isVisible && <MarqueeRow images={imagesRow1} speed={isMobile ? 0.35 : 0.5} cardHeight={cardHeight} gap={gap} onCardClick={handleCardClick} />}
       {isVisible && <MarqueeRow images={imagesRow2} speed={isMobile ? 0.25 : 0.4} reverse cardHeight={cardHeight} gap={gap} onCardClick={handleCardClick} />}
 
+      {/* Merk-statement recht boven de motorrijder */}
+      <div className="w-full text-center mt-8 md:mt-12">
+        <h3 className="text-xl md:text-4xl font-black uppercase tracking-tight text-white">Wij zijn SocialNow</h3>
+      </div>
+
       {/* Milo op zijn rode motor: het klein VLAKJE zelf rijdt in één shot volledig
           van links buiten beeld naar rechts buiten beeld. Laag geplaatst, net boven
           de volgende tekst. Transparante webm (zwart weggekeyd) + mp4-fallback. */}
       <div className="relative w-full h-24 md:h-32 mt-1 md:mt-2 overflow-hidden">
         <div
-          className="sn-milo absolute left-0 bottom-0 w-48 md:w-64 aspect-video"
+          className="sn-milo absolute left-0 bottom-0 w-48 md:w-64 aspect-video will-change-transform"
           style={{ animation: 'milo-ride-across 8s linear infinite' }}
         >
         <video
@@ -200,7 +205,7 @@ const ImageSlider: React.FC = () => {
           muted
           playsInline
           loop
-          preload="metadata"
+          preload="auto"
           aria-hidden="true"
           className="w-full h-full object-contain"
         >
