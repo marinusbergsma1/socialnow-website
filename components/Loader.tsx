@@ -5,7 +5,7 @@ interface LoaderProps {
   onComplete: () => void;
 }
 
-const VIDEO_SRC = `${import.meta.env.BASE_URL}video/header-intro.mp4?v=2`;
+const VIDEO_SRC = `${import.meta.env.BASE_URL}video/header-intro.mp4?v=3`;
 
 const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
   const [isExiting, setIsExiting] = useState(false);
