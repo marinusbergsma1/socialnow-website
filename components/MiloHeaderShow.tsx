@@ -36,9 +36,9 @@ export const useMiloShow = () => {
 
 // Woord-beats gekoppeld aan de video-fases (RUN9), verdeeld over de h1-regels
 const LINES: { words: { text: string; t: number; accent: string }[]; green?: boolean }[] = [
-  { words: [{ text: 'JE WEBSITE,', t: 0.95, accent: '#FFFFFF' }, { text: 'CRM,', t: 1.85, accent: '#F7E644' }] },
-  { words: [{ text: 'CONTENT', t: 2.85, accent: '#00A3E0' }, { text: '& ADS', t: 3.85, accent: '#F62961' }] },
-  { words: [{ text: 'IN ÉÉN AI CHAT.', t: 4.85, accent: '#25D366' }], green: true },
+  { words: [{ text: 'JE WEBSITE,', t: 1.7, accent: '#FFFFFF' }, { text: 'CRM,', t: 2.9, accent: '#F7E644' }] },
+  { words: [{ text: 'CONTENT', t: 3.7, accent: '#00A3E0' }, { text: '& ADS', t: 4.5, accent: '#F62961' }] },
+  { words: [{ text: 'IN ÉÉN AI CHAT.', t: 5.0, accent: '#25D366' }], green: true },
 ];
 const ALL_TIMES = LINES.flatMap((l) => l.words.map((w) => w.t)).sort((a, b) => a - b);
 
@@ -56,6 +56,8 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
   const [leaving, setLeaving] = useState(false);
   const [miloGone, setMiloGone] = useState(false);
   const [videoTime, setVideoTime] = useState(0);
+  // Slaap-loop blijft in beeld tot de master-video ÉCHT frames rendert (naadloze wissel op frame 1)
+  const [videoStarted, setVideoStarted] = useState(false);
   const [headlineRect, setHeadlineRect] = useState<{ top: number; left: number; width: number } | null>(null);
   const [badgeTop, setBadgeTop] = useState<number | null>(null);
 
@@ -100,6 +102,7 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
     let raf = 0;
     const tick = () => {
       setVideoTime(v.currentTime);
+      if (v.currentTime > 0.04) setVideoStarted(true); // eerste échte frame is er → wissel
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -173,7 +176,7 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
         <video
           autoPlay muted loop playsInline preload="auto" aria-hidden="true"
           poster={`${import.meta.env.BASE_URL}images/milo-header-poster.webp`}
-          className={`w-full h-auto max-h-[46svh] object-contain object-bottom transition-opacity duration-300 ${phase === 'playing' ? 'opacity-0' : 'opacity-100'}`}
+          className={`w-full h-auto max-h-[46svh] object-contain object-bottom ${videoStarted ? 'opacity-0' : 'opacity-100'}`}
         >
           <source src={`${import.meta.env.BASE_URL}video/milo-sleep-loop.webm?v=1`} type="video/webm" />
           <source src={`${import.meta.env.BASE_URL}video/milo-sleep-loop.mp4?v=1`} type="video/mp4" />
@@ -184,11 +187,11 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
           preload="auto"
           onEnded={handleEnded}
           onError={handleEnded}
-          onTimeUpdate={(e) => setVideoTime((e.target as HTMLVideoElement).currentTime)}
-          className={`absolute inset-x-4 bottom-0 w-[calc(100%-2rem)] h-full max-h-[46svh] object-contain object-bottom transition-opacity duration-300 ${phase === 'playing' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          onTimeUpdate={(e) => { const v = e.target as HTMLVideoElement; setVideoTime(v.currentTime); if (v.currentTime > 0.04) setVideoStarted(true); }}
+          className={`absolute inset-x-4 bottom-0 w-[calc(100%-2rem)] h-full max-h-[46svh] object-contain object-bottom ${videoStarted ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         >
-          <source src={`${import.meta.env.BASE_URL}video/milo-header-6s.webm?v=1`} type="video/webm" />
-          <source src={`${import.meta.env.BASE_URL}video/milo-header-6s.mp4?v=1`} type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}video/milo-header-6s.webm?v=2`} type="video/webm" />
+          <source src={`${import.meta.env.BASE_URL}video/milo-header-6s.mp4?v=2`} type="video/mp4" />
         </video>
       </div>
     </div>
