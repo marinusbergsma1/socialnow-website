@@ -1,61 +1,41 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
+import { ShieldCheck } from 'lucide-react';
 
 /**
- * TrustSection — geïnspireerd op Revolut's "Jouw geld, altijd veilig":
- * rustige centrale kop + trust-copy, daaronder een center-focus carrousel
- * met drie kaarten. Middelste kaart vol, zijkaarten geschaald en gedimd.
- * Auto-rotatie elke 5s, pijlen + klik op zijkaart om te wisselen.
+ * TrustSection — Revolut-stijl: rustige centrale kop + trust-copy,
+ * daaronder drie statische afgeronde tiles naast elkaar (middelste iets
+ * hoger), elk met een titel bovenin en een visual die onderin uitloopt.
  */
 
-interface TrustCard {
+interface Tile {
   img: string;
-  alt: string;
-  caption: string;
+  title: string;
+  offset?: boolean;
 }
 
-const cards: TrustCard[] = [
+const tiles: Tile[] = [
   {
     img: 'images/milo-trust-dev.webp',
-    alt: 'Veilig gebouwd met moderne code',
-    caption: 'Veilig gebouwd: moderne code, SSL en dagelijkse back-ups',
+    title: 'Veilig gebouwd: moderne code, SSL en dagelijkse back-ups',
   },
   {
     img: 'images/milo-trust-hub.webp',
-    alt: 'Alles in één systeem, data in eigen beheer',
-    caption: 'Alles in één systeem — jouw data blijft jouw eigendom',
+    title: 'Alles in één systeem — jouw data blijft jouw eigendom',
+    offset: true,
   },
   {
     img: 'images/milo-trust-crm.webp',
-    alt: 'Persoonlijke service en meetbare resultaten',
-    caption: 'Persoonlijke service met meetbare, transparante resultaten',
+    title: 'Persoonlijke service met meetbare, transparante resultaten',
   },
 ];
 
-const AUTO_MS = 5000;
-
 const TrustSection: React.FC = () => {
-  const [active, setActive] = useState(1);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const next = useCallback(() => setActive((a) => (a + 1) % cards.length), []);
-
-  useEffect(() => {
-    timerRef.current = setInterval(next, AUTO_MS);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [next]);
-
-  const goTo = (i: number) => {
-    setActive(i);
-    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = setInterval(next, AUTO_MS); }
-  };
-
   return (
     <section id="vertrouwen" className="py-16 md:py-24 relative overflow-hidden">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
 
         {/* Kop + trust-copy */}
-        <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-10 md:mb-16">
           <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
             <ShieldCheck size={13} className="text-[#25D366]" />
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">
@@ -72,63 +52,30 @@ const TrustSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Center-focus carrousel */}
-        <div className="relative max-w-4xl mx-auto">
-          <div className="relative h-[420px] md:h-[520px] flex items-center justify-center">
-            {cards.map((card, i) => {
-              const offset = ((i - active) + cards.length + 1) % cards.length - 1; // -1 | 0 | 1
-              const isCenter = offset === 0;
-              return (
-                <button
-                  key={card.img}
-                  onClick={() => !isCenter && goTo(i)}
-                  aria-label={card.alt}
-                  className="absolute top-1/2 left-1/2 rounded-3xl overflow-hidden border transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0.35,1)] cursor-pointer"
-                  style={{
-                    width: 'min(72vw, 340px)',
-                    aspectRatio: '0.78',
-                    transform: `translate(-50%, -50%) translateX(${offset * 62}%) scale(${isCenter ? 1 : 0.82})`,
-                    zIndex: isCenter ? 20 : 10,
-                    opacity: isCenter ? 1 : 0.35,
-                    borderColor: isCenter ? 'rgba(37,211,102,0.25)' : 'rgba(255,255,255,0.08)',
-                    background: 'linear-gradient(180deg, #101010 0%, #060606 100%)',
-                    boxShadow: isCenter ? '0 30px 80px rgba(0,0,0,0.7), 0 0 60px rgba(37,211,102,0.07)' : 'none',
-                    pointerEvents: isCenter ? 'none' : 'auto',
-                  }}
-                >
-                  <img
-                    src={`${import.meta.env.BASE_URL}${card.img}`}
-                    alt={card.alt}
-                    loading="lazy"
-                    decoding="async"
-                    className="absolute inset-x-0 top-0 w-full h-[78%] object-cover object-top"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black via-black/85 to-transparent pointer-events-none" />
-                  <p className="absolute inset-x-0 bottom-0 p-5 md:p-6 text-left text-white font-black uppercase tracking-tight leading-snug text-sm md:text-base">
-                    {card.caption}
-                  </p>
-                </button>
-              );
-            })}
-          </div>
+        {/* Revolut-stijl tiles */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto md:items-start">
+          {tiles.map((tile) => (
+            <div
+              key={tile.img}
+              className={`relative rounded-[28px] overflow-hidden border border-white/[0.07] bg-gradient-to-b from-[#111] to-[#050505] aspect-[0.72] group transition-all duration-500 hover:border-[#25D366]/25 ${tile.offset ? 'md:-mt-8' : 'md:mt-8'}`}
+            >
+              {/* Titel bovenin, Revolut-stijl */}
+              <h3 className="relative z-10 p-6 md:p-7 text-white font-bold tracking-tight leading-snug text-lg md:text-xl">
+                {tile.title}
+              </h3>
 
-          {/* Pijlen */}
-          <div className="flex items-center justify-center gap-3 mt-6">
-            <button onClick={() => goTo((active - 1 + cards.length) % cards.length)} aria-label="Vorige"
-              className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:border-[#25D366]/50 transition-all">
-              <ChevronLeft size={16} />
-            </button>
-            <div className="flex gap-1.5">
-              {cards.map((_, i) => (
-                <button key={i} onClick={() => goTo(i)} aria-label={`Kaart ${i + 1}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${i === active ? 'w-6 bg-[#25D366]' : 'w-1.5 bg-white/20 hover:bg-white/40'}`} />
-              ))}
+              {/* Visual onderin */}
+              <img
+                src={`${import.meta.env.BASE_URL}${tile.img}`}
+                alt={tile.title}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-x-0 bottom-0 w-full h-[68%] object-cover object-bottom transition-transform duration-700 group-hover:scale-[1.04]"
+              />
+              {/* Zachte overloop tussen titel en visual */}
+              <div className="absolute inset-x-0 top-[26%] h-[18%] bg-gradient-to-b from-[#0c0c0c] to-transparent pointer-events-none z-[5]" />
             </div>
-            <button onClick={() => goTo((active + 1) % cards.length)} aria-label="Volgende"
-              className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:border-[#25D366]/50 transition-all">
-              <ChevronRight size={16} />
-            </button>
-          </div>
+          ))}
         </div>
 
       </div>

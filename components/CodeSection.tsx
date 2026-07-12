@@ -57,7 +57,7 @@ const CodeSection: React.FC = () => {
             </div>
 
             <h2 className="font-black uppercase tracking-tighter text-white leading-none text-4xl md:text-6xl mb-5">
-              WIJ <span className="text-[#25D366]">CODEREN</span> HET GEWOON.
+              WIJ <span className="text-[#25D366]">CODEREN</span> HET.
             </h2>
 
             <p className="text-neutral-400 max-w-xl mb-8">
