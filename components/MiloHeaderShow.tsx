@@ -119,12 +119,14 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
 
       {/* Milo — poster (slaap) of de master-video, onderin het beeld */}
       <div className="relative w-full max-w-[1100px] px-4 flex-shrink min-h-0">
-        <img
-          src={`${import.meta.env.BASE_URL}images/milo-header-poster.webp`}
-          alt="Milo, de SocialNow AI-assistent, slaapt"
+        <video
+          autoPlay muted loop playsInline preload="auto" aria-hidden="true"
+          poster={`${import.meta.env.BASE_URL}images/milo-header-poster.webp`}
           className={`w-full h-auto max-h-[46svh] object-contain object-bottom transition-opacity duration-300 ${phase === 'playing' ? 'opacity-0' : 'opacity-100'}`}
-          decoding="async"
-        />
+        >
+          <source src={`${import.meta.env.BASE_URL}video/milo-sleep-loop.webm?v=1`} type="video/webm" />
+          <source src={`${import.meta.env.BASE_URL}video/milo-sleep-loop.mp4?v=1`} type="video/mp4" />
+        </video>
         <video
           ref={videoRef}
           playsInline
