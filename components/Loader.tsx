@@ -92,7 +92,7 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
         preload="auto"
         onEnded={handleVideoEnd}
         onError={handleVideoError}
-        className="w-full object-contain pointer-events-none md:absolute md:inset-0 md:h-full md:object-cover"
+        className="pointer-events-none w-auto h-auto max-w-[92vw] max-h-[80svh]"
       />
 
       {/* Skip hint */}
