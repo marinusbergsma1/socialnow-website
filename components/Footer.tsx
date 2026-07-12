@@ -280,11 +280,10 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6">
             <a href="#" className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
               <img
-                src={`${import.meta.env.BASE_URL}beeldmerk-v6.webp`}
+                src={`${import.meta.env.BASE_URL}images/Social-Now-Logo-Breed-Wit.webp`}
                 alt="SocialNow"
-                className="w-8 h-8 object-contain"
+                className="h-8 w-auto object-contain"
               />
-              <span className="font-black text-white tracking-tight text-lg">SocialNow</span>
             </a>
             <span className="text-white/15 text-[9px] font-bold uppercase tracking-[0.2em]">
               &copy; {new Date().getFullYear()} SocialNow. All Rights Reserved
