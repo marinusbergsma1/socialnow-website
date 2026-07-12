@@ -76,7 +76,7 @@ const HomePage: React.FC<{
 }> = ({ loading, onOpenBooking }) => {
   useSEO({
     title: 'SocialNow | AI-Powered Web & Project Development Amsterdam',
-    description: 'Je website, CRM, content en advertenties — allemaal samen in 1 overzichtelijke AI chat. Custom AI Solutions uit Amsterdam. Gratis proof of concept: website demo én rebranding.',
+    description: 'Je website, CRM, content en advertenties, allemaal samen in 1 overzichtelijke AI chat. Custom AI Solutions uit Amsterdam. Gratis proof of concept: website demo én rebranding.',
     path: '/',
   });
 

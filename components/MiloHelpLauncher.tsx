@@ -75,7 +75,7 @@ const MiloHelpLauncher: React.FC = () => {
 
       <button
         onClick={openHelp}
-        aria-label="Persoonlijke hulp — Milo"
+        aria-label="Persoonlijke hulp van Milo"
         className={`relative shrink-0 rounded-full w-16 h-16 md:w-[4.5rem] md:h-[4.5rem]
           transition-transform duration-300 hover:scale-110 active:scale-95 ${ringOn ? 'milo-ring' : ''}`}
       >

@@ -36,9 +36,9 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {[
-              { name: 'One-Pager', price: '€1.500 eenmalig', text: 'Voor de snelle start — professionele one-page website, AI-gebouwd en SEO-klaar, live binnen 2 weken.' },
-              { name: 'Full Stack', price: '€2.500 eenmalig', text: 'Voor groeiende bedrijven — volwaardig platform met custom design, CMS, koppelingen en 90+ performance.' },
-              { name: 'Alles-in-1 AI Pakket', price: '€3.000', text: 'Voor wie alles geregeld wil — software, website, CRM, content en ads als één systeem, aangestuurd via één AI chat.' },
+              { name: 'One-Pager', price: '€1.500 eenmalig', text: 'Voor de snelle start: professionele one-page website, AI-gebouwd en SEO-klaar, live binnen 2 weken.' },
+              { name: 'Full Stack', price: '€2.500 eenmalig', text: 'Voor groeiende bedrijven: volwaardig platform met custom design, CMS, koppelingen en 90+ performance.' },
+              { name: 'Alles-in-1 AI Pakket', price: '€3.000', text: 'Voor wie alles geregeld wil: software, website, CRM, content en ads als één systeem, aangestuurd via één AI chat.' },
             ].map((plan) => (
               <button
                 key={plan.name}
@@ -264,7 +264,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             <p>
               Wij werken als gecertificeerd partner met de advertentieplatformen van Google en Meta.
               Alle websites en software worden geleverd met SSL-versleuteling, dagelijkse back-ups en
-              hosting binnen de EU. Persoonsgegevens verwerken wij conform de AVG — zie onze{' '}
+              hosting binnen de EU. Persoonsgegevens verwerken wij conform de AVG. Zie onze{' '}
               <a href="/privacy" onClick={(e) => handleNavClick(e, '/privacy')} className="text-white/40 hover:text-white/70 underline underline-offset-2 transition-colors">privacyverklaring</a>.
             </p>
             <p>

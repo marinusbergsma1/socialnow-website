@@ -232,7 +232,7 @@ const ProjectPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking })
   const project = slug ? getProjectBySlug(slug) : undefined;
 
   useSEO({
-    title: project ? `${project.title} — ${project.category}` : 'Project niet gevonden',
+    title: project ? `${project.title} | ${project.category}` : 'Project niet gevonden',
     description: project?.description || 'Dit project bestaat niet of is verplaatst.',
     path: slug ? `/project/${slug}` : '',
   });

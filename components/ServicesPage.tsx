@@ -67,8 +67,8 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
   const navigate = useNavigate();
 
   useSEO({
-    title: 'Diensten & Prijzen — Software Development, Content Automation & AI Systemen',
-    description: 'Maatwerk software, webapps, website, CRM, content en advertenties — allemaal samen in 1 overzichtelijke AI chat. Custom AI Solutions & software development. Start met een gratis proof of concept.',
+    title: 'Diensten & Prijzen | Software Development, Content Automation & AI Systemen',
+    description: 'Maatwerk software, webapps, website, CRM, content en advertenties, allemaal samen in 1 overzichtelijke AI chat. Custom AI Solutions & software development. Start met een gratis proof of concept.',
     path: '/diensten',
   });
 

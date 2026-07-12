@@ -44,7 +44,7 @@ const Clients: React.FC = () => {
           <div key={index} className="flex items-center justify-center h-20 md:h-32 min-w-[140px] md:min-w-[240px] relative group cursor-pointer">
              <img
                src={logo.src}
-               alt={`${logo.name} — klant van SocialNow`}
+               alt={`${logo.name}, klant van SocialNow`}
                className="h-full w-auto max-w-[120px] md:max-w-[200px] object-contain transition-all duration-500 opacity-80 hover:opacity-100 hover:scale-110 grayscale brightness-[2]"
                loading="lazy"
                decoding="async"

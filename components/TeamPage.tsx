@@ -152,7 +152,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
   useSEO({
     title: 'Team',
     description:
-      'Het team achter de AI: acht specialisten in Amsterdam plus één AI-systeem dat het zware werk doet. Geen managementlagen, geen ruis — direct contact met de makers.',
+      'Het team achter de AI: acht specialisten in Amsterdam plus één AI-systeem dat het zware werk doet. Geen managementlagen, geen ruis, direct contact met de makers.',
     path: '/team',
   });
 

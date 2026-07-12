@@ -12,12 +12,12 @@ const pillars = [
   {
     icon: Blocks,
     title: 'Maatwerk software',
-    text: 'Webapps, portalen en tools die exact doen wat jouw bedrijf nodig heeft — geen standaard template.',
+    text: 'Webapps, portalen en tools die exact doen wat jouw bedrijf nodig heeft. Geen standaard template.',
   },
   {
     icon: Workflow,
     title: 'Koppelingen & automatisering',
-    text: 'CRM, betalingen, planning, AI — wij verbinden je systemen tot één geautomatiseerde workflow.',
+    text: 'CRM, betalingen, planning, AI: wij verbinden je systemen tot één geautomatiseerde workflow.',
   },
   {
     icon: Rocket,

@@ -20,7 +20,7 @@ const tiles: Tile[] = [
   },
   {
     img: 'images/milo-trust-hub.webp',
-    title: 'Alles in één systeem — jouw data blijft jouw eigendom',
+    title: 'Alles in één systeem. Jouw data blijft jouw eigendom',
     offset: true,
   },
   {
@@ -47,7 +47,7 @@ const TrustSection: React.FC = () => {
           </h2>
           <p className="text-neutral-400">
             Gecertificeerd Google- en Meta-partner. Jouw website, data en campagnes staan
-            op eigen infrastructuur, AVG-proof en dagelijks geback-upt — met één vast
+            op eigen infrastructuur, AVG-proof en dagelijks geback-upt, met één vast
             aanspreekpunt dat altijd weet hoe jouw systeem in elkaar zit.
           </p>
         </div>
