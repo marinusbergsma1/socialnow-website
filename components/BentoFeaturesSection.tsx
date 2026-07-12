@@ -216,8 +216,8 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
           </h2>
           <p className="text-neutral-400 mt-4 max-w-2xl mx-auto">
             Marketing zonder techniek is half werk. Daarom coderen wij alles zelf: maatwerk software,
-            webapps, je website, CRM, content en ads. Eén team voor strategie, creatie én code,
-            samen in 1 overzichtelijke AI chat.
+            webapps, je website, CRM, content en ads. Eén kernteam voor strategie, creatie én code,
+            versterkt door een vast netwerk van developers en gespecialiseerde bureaus. Alles samen in 1 overzichtelijke AI chat.
           </p>
         </div>
 

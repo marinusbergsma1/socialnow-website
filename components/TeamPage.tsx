@@ -152,7 +152,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
   useSEO({
     title: 'Team',
     description:
-      'Het team achter de AI: acht specialisten in Amsterdam plus één AI-systeem dat het zware werk doet. Geen managementlagen, geen ruis, direct contact met de makers.',
+      'Het team achter de AI: acht specialisten in Amsterdam plus één AI-systeem dat het zware werk doet, versterkt door een vast netwerk van developers en gespecialiseerde bureaus. Geen managementlagen, geen ruis, direct contact met de makers.',
     path: '/team',
   });
 
@@ -188,9 +188,10 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
           </h1>
           <p className="text-gray-400 font-bold text-lg md:text-2xl max-w-2xl leading-tight mb-8">
             Acht specialisten in Amsterdam. Eén AI-systeem dat het zware werk doet. Geen managementlagen, geen ruis.
+            Daaromheen een vast netwerk van developers, studio's en gespecialiseerde bureaus die per project aanhaken. Zo blijven we compact, maar schalen we naar elke opdracht.
           </p>
           <div className="flex flex-wrap items-center gap-2 md:gap-3">
-            {['500+ PROJECTEN', 'SINDS 2021', '8 SPECIALISTEN + 1 AI'].map((stat) => (
+            {['500+ PROJECTEN', 'SINDS 2021', '8 SPECIALISTEN + 1 AI', 'FLEXIBEL PARTNERNETWERK'].map((stat) => (
               <span
                 key={stat}
                 className="sn-warp-tile rounded-full px-4 py-2 md:px-5 md:py-2.5 font-mono text-[9px] md:text-[10px] tracking-widest text-white/80 uppercase"
