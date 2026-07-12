@@ -33,6 +33,7 @@ const SocialMediaSlider = lazyRetry(() => import('./components/SocialMediaSlider
 const ProjectShowcase = lazyRetry(() => import('./components/ProjectShowcase'));
 const ShortContent = lazyRetry(() => import('./components/ShortContent'));
 const ServicesMarquee = lazyRetry(() => import('./components/ServicesMarquee'));
+const CodeSection = lazyRetry(() => import('./components/CodeSection'));
 const ProcessSection = lazyRetry(() => import('./components/ProcessSection'));
 const Reviews = lazyRetry(() => import('./components/Reviews'));
 const ImageSlider = lazyRetry(() => import('./components/ImageSlider'));
@@ -111,6 +112,10 @@ const HomePage: React.FC<{
 
         <div className="scroll-reveal">
           <ServicesMarquee />
+        </div>
+
+        <div className="scroll-reveal">
+          <CodeSection />
         </div>
 
         {/* v2.1: Glasheldere prijzen op de homepage */}

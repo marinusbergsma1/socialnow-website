@@ -17,10 +17,10 @@ interface Category {
 
 const categories: Category[] = [
   {
-    title: 'Websites & Development',
+    title: 'Software & Development',
     icon: Code2,
     color: '#25D366',
-    services: ['AI Website Development', 'Website & UI/UX Design', 'Full-Stack Development', 'Core Web Vitals', 'Digital Experience'],
+    services: ['Maatwerk Software', 'Webapps & Platformen', 'AI Website Development', 'Full-Stack Development', 'API-koppelingen & Integraties', 'UI/UX Design', 'Core Web Vitals'],
   },
   {
     title: 'SEO',
@@ -111,7 +111,7 @@ const ServicesMarquee: React.FC = () => {
             ÉÉN VOORSTEL. <span className="text-[#25D366]">ALLES ERIN.</span>
           </h2>
           <p className="text-neutral-400 mt-4 max-w-2xl mx-auto">
-            Website, CRM, content en advertenties werken als één systeem, aangestuurd via één AI chat. Dit zit er allemaal in.
+            Software, website, CRM, content en advertenties werken als één systeem, aangestuurd via één AI chat. Van maatwerk-code tot campagne — dit zit er allemaal in.
           </p>
         </div>
 

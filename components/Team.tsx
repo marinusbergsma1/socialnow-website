@@ -221,10 +221,12 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12 md:mb-24 scroll-reveal relative">
-          {/* Milo op zijn motor rijdt OVER de tekst (echte alpha, in 5s van links naar rechts) */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[clamp(2.5rem,8vw,7rem)] overflow-hidden z-20">
+          {/* Milo op zijn motor rijdt bovenop de kop: strook boven de h2, motor bottom-aligned
+              zodat de wielen op de kapitalen staan. NB: de ride-keyframes zetten `transform`,
+              dus geen translate-utilities op het bewegende element zelf (die worden overschreven) */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[clamp(3.5rem,12vw,12rem)] -translate-y-[78%] overflow-hidden z-20">
             <div
-              className="sn-milo absolute left-0 top-1/2 -translate-y-1/2 w-28 md:w-44 aspect-video will-change-transform"
+              className="sn-milo absolute left-0 bottom-0 w-[clamp(5.5rem,20vw,20rem)] aspect-video will-change-transform"
               style={{ animation: 'milo-ride-across 5s linear infinite' }}
               onAnimationIteration={() => { const v = motorVideoRef.current; if (v) v.currentTime = 0; }}
             >

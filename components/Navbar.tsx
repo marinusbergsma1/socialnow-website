@@ -135,15 +135,15 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
           <a href="#home" onClick={(e) => { e.preventDefault(); if (!isHomePage) { navigate('/'); } else { window.scrollTo({top: 0, behavior: 'smooth'}); } }} className={`relative z-10 flex items-center transition-all duration-500`}>
             {/* Mobile: beeldmerk only */}
             <img
-              src={`${import.meta.env.BASE_URL}beeldmerk-v6.webp`}
+              src={`${import.meta.env.BASE_URL}beeldmerk-2026.webp`}
               alt="SocialNow"
               width={40}
               height={40}
-              className={`md:hidden transition-all duration-500 ${scrolled ? 'w-8 h-8' : 'w-10 h-10'}`}
+              className={`md:hidden transition-all duration-500 object-contain ${scrolled ? 'w-8 h-8' : 'w-10 h-10'}`}
             />
             {/* Desktop: full logo with text */}
             <img
-              src={`${import.meta.env.BASE_URL}images/Logo-Social-Now-Lengte.webp`}
+              src={`${import.meta.env.BASE_URL}images/SocialNow-Logo-2026.webp`}
               alt="SocialNow"
               width={200}
               height={50}

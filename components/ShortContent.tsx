@@ -393,49 +393,90 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
 // ─── Main Component ─────────────────────────────────────────────────────
 
 /**
- * Milo als tuinier bovenop de T van "PLANT". Speelt één keer af wanneer de
- * sectie in beeld komt; reset pas wanneer je wegscrollt en weer terugkomt.
- * Screen-blend via .sn-milo: zwart is transparant, dus hij dekt de titel
- * nooit af en "staat" op de letter.
+ * Zelf-verbeterende kop: "CONTENT DIE ZICHZELF {PLANT → ANALYSEERT → TEST →
+ * VERBETERT → OPSCHAALT}". Per stap speelt de bijbehorende Milo-video (echt
+ * alpha-kanaal) één keer af boven het woord; pas als die klaar is (+ korte
+ * hold op het eindframe) wisselt het woord met een pop en start de volgende.
+ * Screen-blend + alpha via .sn-milo: zwart is transparant, dus hij dekt de
+ * titel nooit af en "staat" op de letters.
+ * NB: .sn-milo > video zet display:block — inactieve video's verbergen we
+ * daarom met opacity + absolute, niet met `hidden`.
  */
-const MiloPlant: React.FC = () => {
+// scale: visuele correctie per video — de plant-video heeft Milo klein in frame,
+// de nieuwe video's vullen het frame veel meer; zonder correctie oogt bv. TEST enorm
+const MILO_STEPS = [
+  { word: 'PLANT', video: 'milo-plant-loop', scale: 1 },
+  { word: 'ANALYSEERT', video: 'milo-inspect-loop', scale: 0.8 },
+  { word: 'TEST', video: 'milo-test-loop', scale: 0.7 },
+  { word: 'VERBETERT', video: 'milo-bouw-loop', scale: 0.8 },
+  { word: 'OPSCHAALT', video: 'milo-raket-loop', scale: 0.9 },
+] as const;
+
+const MILO_HOLD_MS = 1200; // rust op het eindframe voordat het woord wisselt
+
+const SelfImprovingHeadline: React.FC = () => {
   const hostRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const playedRef = useRef(false);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const holdTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [step, setStep] = useState(0);
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const host = hostRef.current;
-    const video = videoRef.current;
-    if (!host || !video) return;
-    const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        if (!playedRef.current) {
-          playedRef.current = true;
-          video.currentTime = 0;
-          video.play().catch(() => {});
-        }
-      } else {
-        // Weggescrold: klaarzetten voor een verse afspeelbeurt
-        playedRef.current = false;
-        video.pause();
-        video.currentTime = 0;
-      }
-    }, { threshold: 0.4 });
+    if (!host) return;
+    const io = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.4 });
     io.observe(host);
     return () => io.disconnect();
   }, []);
 
+  useEffect(() => {
+    const video = videoRefs.current[step];
+    if (!video) return;
+    if (!inView) { video.pause(); return; }
+    video.currentTime = 0;
+    video.play().catch(() => {});
+    const onEnded = () => {
+      holdTimer.current = setTimeout(() => setStep(s => (s + 1) % MILO_STEPS.length), MILO_HOLD_MS);
+    };
+    video.addEventListener('ended', onEnded);
+    return () => {
+      video.removeEventListener('ended', onEnded);
+      if (holdTimer.current) clearTimeout(holdTimer.current);
+      video.pause();
+    };
+  }, [step, inView]);
+
   return (
-    <div
-      ref={hostRef}
-      aria-hidden="true"
-      className="sn-milo absolute bottom-[calc(100%-0.7em)] right-[-1em] w-40 md:w-80 lg:w-[26rem] pointer-events-none select-none z-10"
-    >
-      {/* webm met echt alpha-kanaal (zwart weggekeyd) — mp4 als fallback */}
-      <video ref={videoRef} muted playsInline preload="metadata">
-        <source src={`${import.meta.env.BASE_URL}video/milo-plant-loop.webm`} type="video/webm" />
-        <source src={`${import.meta.env.BASE_URL}video/milo-plant-loop.mp4`} type="video/mp4" />
-      </video>
+    <div ref={hostRef} className="relative inline-block">
+      <div
+        aria-hidden="true"
+        className="sn-milo absolute bottom-[calc(100%-0.7em)] right-[-1em] w-40 md:w-80 lg:w-[26rem] pointer-events-none select-none z-10"
+      >
+        {/* webm met echt alpha-kanaal (zwart weggekeyd) — mp4 als fallback */}
+        {MILO_STEPS.map((s, i) => (
+          <video
+            key={s.video}
+            ref={(el) => { videoRefs.current[i] = el; }}
+            muted
+            playsInline
+            preload={i === step || i === (step + 1) % MILO_STEPS.length ? 'auto' : 'metadata'}
+            className={i === step ? 'relative opacity-100' : 'absolute inset-0 opacity-0'}
+            style={{ transform: `scale(${s.scale})`, transformOrigin: 'bottom center' }}
+          >
+            <source src={`${import.meta.env.BASE_URL}video/${s.video}.webm`} type="video/webm" />
+            <source src={`${import.meta.env.BASE_URL}video/${s.video}.mp4`} type="video/mp4" />
+          </video>
+        ))}
+      </div>
+      <h2 className="text-2xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-none mb-3 md:mb-4">
+        CONTENT DIE ZICHZELF{' '}
+        <span
+          key={MILO_STEPS[step].word}
+          className="inline-block animate-[sn-word-pop_0.45s_cubic-bezier(0.22,1,0.36,1)_both]"
+        >
+          {MILO_STEPS[step].word}
+        </span>
+      </h2>
     </div>
   );
 };
@@ -481,14 +522,9 @@ const ShortContent: React.FC = () => {
         <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">MOTION</h2>
       </div>
 
-      {/* Header — Milo plant zijn plantje bovenop de T van PLANT */}
+      {/* Header — Milo doorloopt de cyclus: plant → analyseert → test → verbetert → opschaalt */}
       <div className="container mx-auto px-6 relative z-10 text-center mb-4 md:mb-14">
-        <div className="relative inline-block">
-          <MiloPlant />
-          <h2 className="text-2xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-none mb-3 md:mb-4">
-            CONTENT DIE ZICHZELF PLANT
-          </h2>
-        </div>
+        <SelfImprovingHeadline />
         <p className="text-gray-500 text-xs md:text-base font-medium max-w-lg mx-auto">
           Elke maand automatisch ingepland. AI analyseert je ad-resultaten en vertaalt dat direct naar geoptimaliseerde content. Geen gokwerk, alleen groei.
         </p>

@@ -112,8 +112,11 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-[#050505] border-2 border-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,0,0,0.8)] transition-transform duration-300 ${isDragging ? 'scale-110 border-[#F7E644]' : 'scale-100 hover:scale-105'}`}>
             <MoveHorizontal size={24} className={`transition-colors duration-300 ${isDragging ? 'text-[#F7E644]' : 'text-white'}`} />
             
-            {/* Pulsing ring when idle — hidden on mobile to save GPU */}
-            <div className="hidden md:block absolute inset-0 rounded-full border-2 border-white opacity-50 animate-ping"></div>
+            {/* Pulsing ring als sleep-hint — juist op touch cruciaal (geen cursor).
+                Verdwijnt zodra je sleept en respecteert prefers-reduced-motion. */}
+            {!isDragging && (
+              <div className="block motion-reduce:hidden absolute inset-0 rounded-full border-2 border-white opacity-50 animate-ping"></div>
+            )}
          </div>
       </div>
       
