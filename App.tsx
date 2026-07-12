@@ -34,6 +34,7 @@ const ProjectShowcase = lazyRetry(() => import('./components/ProjectShowcase'));
 const ShortContent = lazyRetry(() => import('./components/ShortContent'));
 const ServicesMarquee = lazyRetry(() => import('./components/ServicesMarquee'));
 const CodeSection = lazyRetry(() => import('./components/CodeSection'));
+const TrustSection = lazyRetry(() => import('./components/TrustSection'));
 const ProcessSection = lazyRetry(() => import('./components/ProcessSection'));
 const Reviews = lazyRetry(() => import('./components/Reviews'));
 const ImageSlider = lazyRetry(() => import('./components/ImageSlider'));
@@ -129,6 +130,10 @@ const HomePage: React.FC<{
 
         <div className="scroll-reveal">
           <Reviews onOpenBooking={onOpenBooking} />
+        </div>
+
+        <div className="scroll-reveal">
+          <TrustSection />
         </div>
 
         <div className="scroll-reveal">

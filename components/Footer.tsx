@@ -29,6 +29,34 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
       {/* ─── MAIN FOOTER ─── */}
       <div className="container mx-auto px-6 max-w-7xl">
 
+        {/* ─── KIES JE PLAN — Revolut-stijl plan-kaarten ─── */}
+        <div className="pt-16 md:pt-24">
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/25 mb-6">
+            Kies je plan
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {[
+              { name: 'One-Pager', price: '€1.500 eenmalig', text: 'Voor de snelle start — professionele one-page website, AI-gebouwd en SEO-klaar, live binnen 2 weken.' },
+              { name: 'Full Stack', price: '€2.500 eenmalig', text: 'Voor groeiende bedrijven — volwaardig platform met custom design, CMS, koppelingen en 90+ performance.' },
+              { name: 'Alles-in-1 AI Pakket', price: '€3.000', text: 'Voor wie alles geregeld wil — software, website, CRM, content en ads als één systeem, aangestuurd via één AI chat.' },
+            ].map((plan) => (
+              <button
+                key={plan.name}
+                onClick={(e) => handleNavClick(e as unknown as React.MouseEvent, '/prijzen')}
+                className="group text-left p-6 md:p-7 rounded-2xl border border-white/[0.07] bg-white/[0.02] hover:bg-white/[0.05] hover:border-[#25D366]/30 transition-all duration-300"
+              >
+                <h3 className="text-white font-black uppercase tracking-tight text-base mb-1">{plan.name}</h3>
+                <p className="text-[#25D366] text-xs font-black uppercase tracking-widest mb-3">{plan.price}</p>
+                <p className="text-white/35 text-sm leading-relaxed mb-4">{plan.text}</p>
+                <span className="inline-flex items-center gap-2 text-white/40 group-hover:text-white text-[10px] font-black uppercase tracking-widest transition-colors">
+                  Kom meer te weten
+                  <ArrowUpRight size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Large brand statement */}
         <div className="pt-20 md:pt-32 pb-16 md:pb-24 border-b border-white/[0.06]">
           <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-20">
@@ -219,6 +247,31 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </svg>
               <span className="text-white text-[10px] md:text-xs font-bold tracking-wide">Google Developers</span>
             </div>
+          </div>
+        </div>
+
+        {/* ─── JURIDISCH & BEDRIJFSINFORMATIE — Revolut-stijl ─── */}
+        <div className="border-t border-white/[0.06] py-10 md:py-12">
+          <div className="max-w-4xl text-white/25 text-[11px] leading-relaxed space-y-3">
+            <p>© {new Date().getFullYear()} SocialNow</p>
+            <p>
+              SocialNow is een software- en marketingbureau gevestigd aan de Amstelstraat 43G,
+              1017 DA Amsterdam, Nederland, en staat ingeschreven bij de Kamer van Koophandel
+              onder nummer 90877179. Voor vragen over onze diensten kun je contact opnemen via{' '}
+              <a href="mailto:info@socialnow.nl" className="text-white/40 hover:text-white/70 underline underline-offset-2 transition-colors">info@socialnow.nl</a>{' '}
+              of via de chat op deze website.
+            </p>
+            <p>
+              Wij werken als gecertificeerd partner met de advertentieplatformen van Google en Meta.
+              Alle websites en software worden geleverd met SSL-versleuteling, dagelijkse back-ups en
+              hosting binnen de EU. Persoonsgegevens verwerken wij conform de AVG — zie onze{' '}
+              <a href="/privacy" onClick={(e) => handleNavClick(e, '/privacy')} className="text-white/40 hover:text-white/70 underline underline-offset-2 transition-colors">privacyverklaring</a>.
+            </p>
+            <p>
+              Genoemde prijzen zijn exclusief btw. Op al onze offertes en overeenkomsten zijn onze{' '}
+              <a href="https://storage.googleapis.com/video-slider/Algemene%20Voorwaarden%20SocialNow.pdf" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white/70 underline underline-offset-2 transition-colors">algemene voorwaarden</a>{' '}
+              van toepassing.
+            </p>
           </div>
         </div>
 
