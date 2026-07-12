@@ -280,7 +280,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6">
             <a href="#" className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
               <img
-                src={`${import.meta.env.BASE_URL}beeldmerk-2026.webp`}
+                src={`${import.meta.env.BASE_URL}beeldmerk-v6.webp`}
                 alt="SocialNow"
                 className="w-8 h-8 object-contain"
               />
