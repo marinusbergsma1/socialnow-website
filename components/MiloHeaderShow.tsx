@@ -28,6 +28,7 @@ export const useMiloShow = () => {
   const finish = useCallback(() => {
     try { sessionStorage.setItem(KEY, 'done'); } catch { /* noop */ }
     setPhase('done');
+    window.dispatchEvent(new Event('milo-show-done'));
   }, []);
   return { phase, setPhase, finish };
 };

@@ -27,20 +27,46 @@ const MiloHelpLauncher: React.FC = () => {
 
   useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = [];
-    timers.push(setTimeout(() => setEntered(true), 500));
-    timers.push(setTimeout(() => setRingOn(false), 5000)); // daarna alleen knipperen
-    const base = 500;
-    timers.push(setTimeout(() => setDotCount(1), base + D1));
-    timers.push(setTimeout(() => setDotCount(2), base + D2));
-    timers.push(setTimeout(() => setDotCount(3), base + D3));
-    timers.push(setTimeout(() => setDotCount(0), base + DOTS_END));
-    timers.push(setTimeout(() => {
-      setWaving(true);
-      setShowHelp(true);
-      const w = waveRef.current;
-      if (w) { w.currentTime = 0; w.play().catch(() => {}); }
-    }, base + WAVE_AT));
-    return () => timers.forEach(clearTimeout);
+
+    // Choreografie start pas als de Milo header-show klaar is (of al eerder afgerond deze sessie)
+    const startChoreo = () => {
+      timers.push(setTimeout(() => setEntered(true), 500));
+      timers.push(setTimeout(() => setRingOn(false), 5000)); // daarna alleen knipperen
+      const base = 500;
+      timers.push(setTimeout(() => setDotCount(1), base + D1));
+      timers.push(setTimeout(() => setDotCount(2), base + D2));
+      timers.push(setTimeout(() => setDotCount(3), base + D3));
+      timers.push(setTimeout(() => setDotCount(0), base + DOTS_END));
+      timers.push(setTimeout(() => {
+        setWaving(true);
+        setShowHelp(true);
+        const w = waveRef.current;
+        if (w) { w.currentTime = 0; w.play().catch(() => {}); }
+      }, base + WAVE_AT));
+    };
+
+    // Alleen op de homepage wachten op de header-show; subpagina's hebben geen show
+    const isDone = () => {
+      try {
+        return window.location.pathname !== '/' || sessionStorage.getItem('milo-show') === 'done';
+      } catch { return true; }
+    };
+
+    if (isDone()) {
+      startChoreo();
+      return () => timers.forEach(clearTimeout);
+    }
+    // Header-show loopt nog: poll tot hij klaar is en start dan pas
+    const poll = setInterval(() => {
+      if (isDone()) {
+        clearInterval(poll);
+        startChoreo();
+      }
+    }, 400);
+    return () => {
+      clearInterval(poll);
+      timers.forEach(clearTimeout);
+    };
   }, []);
 
   const onWaveEnded = useCallback(() => {
