@@ -105,7 +105,7 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
   return (
     <div
       ref={rootRef}
-      className={`absolute inset-0 z-[60] bg-black flex flex-col items-center justify-center transition-opacity duration-700 ${leaving ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+      className={`absolute inset-x-0 top-0 h-[100svh] z-[60] bg-black flex flex-col items-center justify-center transition-opacity duration-700 ${leaving ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
       onTransitionEnd={() => { /* overlay is weg zodra opacity-transitie klaar is */ }}
     >
       {/* LIVE-badge — op exact dezelfde plek als de hero-badge */}
@@ -159,8 +159,8 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
         <GenerateButton onClick={onStart} />
       </div>
 
-      {/* Milo — slaap-loop of de master-video, onderin; verdwijnt vóór de hero-cascade */}
-      <div className={`relative w-full max-w-[1100px] px-4 flex-shrink min-h-0 transition-opacity duration-400 ${miloGone ? 'opacity-0' : 'opacity-100'}`}>
+      {/* Milo — slaap-loop of de master-video, vast onderin het beeld verankerd */}
+      <div className={`absolute inset-x-0 bottom-0 mx-auto w-full max-w-[1100px] px-4 transition-opacity duration-400 ${miloGone ? 'opacity-0' : 'opacity-100'}`}>
         <video
           autoPlay muted loop playsInline preload="auto" aria-hidden="true"
           poster={`${import.meta.env.BASE_URL}images/milo-header-poster.webp`}
