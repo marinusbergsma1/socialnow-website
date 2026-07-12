@@ -15,17 +15,17 @@ interface Tile {
 
 const tiles: Tile[] = [
   {
-    img: 'images/milo-trust-dev.webp',
-    title: 'Veilig gebouwd: moderne code, SSL en dagelijkse back-ups',
+    img: 'images/trust-service.webp',
+    title: 'We zijn er om je te helpen, elke dag',
   },
   {
-    img: 'images/milo-trust-hub.webp',
-    title: 'Alles in één systeem. Jouw data blijft jouw eigendom',
+    img: 'images/trust-secure.webp',
+    title: 'Veilig gebouwd: moderne code, SSL en dagelijkse back-ups',
     offset: true,
   },
   {
-    img: 'images/milo-trust-crm.webp',
-    title: 'Persoonlijke service met meetbare, transparante resultaten',
+    img: 'images/trust-growth.webp',
+    title: 'Meetbare groei, transparant gerapporteerd',
   },
 ];
 
@@ -57,23 +57,22 @@ const TrustSection: React.FC = () => {
           {tiles.map((tile) => (
             <div
               key={tile.img}
-              className={`relative rounded-[28px] overflow-hidden border border-white/[0.07] bg-gradient-to-b from-[#111] to-[#050505] aspect-[0.72] group transition-all duration-500 hover:border-[#25D366]/25 ${tile.offset ? 'md:-mt-8' : 'md:mt-8'}`}
+              className={`relative rounded-[28px] overflow-hidden border border-white/[0.06] bg-[#0a0a0a] aspect-[0.72] group transition-all duration-500 hover:border-white/[0.14] ${tile.offset ? 'md:-mt-8' : 'md:mt-8'}`}
             >
-              {/* Titel bovenin, Revolut-stijl */}
-              <h3 className="relative z-10 p-6 md:p-7 text-white font-bold tracking-tight leading-snug text-lg md:text-xl">
-                {tile.title}
-              </h3>
-
-              {/* Visual onderin */}
+              {/* Visual vult de hele tile, Revolut-stijl */}
               <img
                 src={`${import.meta.env.BASE_URL}${tile.img}`}
                 alt={tile.title}
                 loading="lazy"
                 decoding="async"
-                className="absolute inset-x-0 bottom-0 w-full h-[68%] object-cover object-bottom transition-transform duration-700 group-hover:scale-[1.04]"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />
-              {/* Zachte overloop tussen titel en visual */}
-              <div className="absolute inset-x-0 top-[26%] h-[18%] bg-gradient-to-b from-[#0c0c0c] to-transparent pointer-events-none z-[5]" />
+              {/* Leesbaarheids-gradient bovenin */}
+              <div className="absolute inset-x-0 top-0 h-[42%] bg-gradient-to-b from-black/75 via-black/35 to-transparent pointer-events-none" />
+              {/* Titel eroverheen, Revolut-stijl */}
+              <h3 className="relative z-10 p-6 md:p-7 text-white font-bold tracking-tight leading-snug text-lg md:text-xl max-w-[22ch]">
+                {tile.title}
+              </h3>
             </div>
           ))}
         </div>

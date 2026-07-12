@@ -251,8 +251,8 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
         </div>
 
         {/* ─── JURIDISCH & BEDRIJFSINFORMATIE — Revolut-stijl ─── */}
-        <div className="border-t border-white/[0.06] py-10 md:py-12">
-          <div className="max-w-4xl text-white/25 text-[11px] leading-relaxed space-y-3">
+        <div className="border-t border-white/[0.06] py-12 md:py-16">
+          <div className="max-w-3xl mx-auto text-center text-white/40 text-[13px] md:text-sm leading-relaxed space-y-4">
             <p>© {new Date().getFullYear()} SocialNow</p>
             <p>
               SocialNow is een software- en marketingbureau gevestigd aan de Amstelstraat 43G,
@@ -287,7 +287,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               <span className="font-black text-white tracking-tight text-lg">SocialNow</span>
             </a>
             <span className="text-white/15 text-[9px] font-bold uppercase tracking-[0.2em]">
-              &copy; {new Date().getFullYear()} SocialNow &mdash; All Rights Reserved
+              &copy; {new Date().getFullYear()} SocialNow. All Rights Reserved
             </span>
           </div>
           <div className="flex items-center gap-4 md:gap-6">
