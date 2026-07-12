@@ -57,8 +57,9 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
   const [miloGone, setMiloGone] = useState(false);
   const [videoTime, setVideoTime] = useState(0);
   const [headlineRect, setHeadlineRect] = useState<{ top: number; left: number; width: number } | null>(null);
+  const [badgeTop, setBadgeTop] = useState<number | null>(null);
 
-  // Meet de positie van de echte hero-h1 (ligt onder de overlay, met layout)
+  // Meet de posities van de echte hero-h1 en LIVE-badge (liggen onder de overlay, met layout)
   const measure = useCallback(() => {
     const root = rootRef.current;
     const target = document.getElementById('hero-headline');
@@ -66,6 +67,8 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
     const rr = root.getBoundingClientRect();
     const tr = target.getBoundingClientRect();
     setHeadlineRect({ top: tr.top - rr.top, left: tr.left - rr.left, width: tr.width });
+    const badge = document.getElementById('hero-live-badge');
+    if (badge) setBadgeTop(badge.getBoundingClientRect().top - rr.top);
   }, []);
 
   useLayoutEffect(() => {
@@ -105,8 +108,8 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
       className={`absolute inset-0 z-[60] bg-black flex flex-col items-center justify-center transition-opacity duration-700 ${leaving ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
       onTransitionEnd={() => { /* overlay is weg zodra opacity-transitie klaar is */ }}
     >
-      {/* LIVE-badge — blijft zichtbaar zoals in de voorbeelden */}
-      <div className="absolute top-24 md:top-28 left-1/2 -translate-x-1/2">
+      {/* LIVE-badge — op exact dezelfde plek als de hero-badge */}
+      <div className="absolute left-1/2 -translate-x-1/2" style={{ top: badgeTop ?? 96 }}>
         <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#0e0e12] border border-white/10">
           <div className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute h-full w-full rounded-full bg-[#25D366] opacity-75" aria-hidden="true"></span>

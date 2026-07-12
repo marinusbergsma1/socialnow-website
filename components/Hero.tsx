@@ -162,9 +162,9 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
       <section className="flex-grow flex flex-col items-center justify-center pt-24 pb-12 relative z-10">
         <div className="container mx-auto px-6 text-center flex flex-col items-center justify-center">
 
-          <div className={`transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`}>
+          <div className={playedRef.current ? '' : `transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`}>
              {/* Live-badge (opaque zodat de achtergrond-orb er niet overheen valt) */}
-             <div className="inline-flex mb-8 md:mb-10">
+             <div id="hero-live-badge" className="inline-flex mb-8 md:mb-10">
                <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#0e0e12] border border-white/10">
                  <div className="relative flex h-2.5 w-2.5">
                    <span className="animate-ping absolute h-full w-full rounded-full bg-[#25D366] opacity-75" aria-hidden="true"></span>
