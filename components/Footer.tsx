@@ -236,8 +236,8 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             Gecertificeerd & Erkend
           </p>
           <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-30 hover:opacity-50 transition-opacity duration-500">
-            <img src={`${import.meta.env.BASE_URL}google-logo.svg`} alt="Google Partner" className="h-6 md:h-7 brightness-0 invert" loading="lazy" decoding="async" width="60" height="20" />
-            <img src={`${import.meta.env.BASE_URL}meta-logo.svg`} alt="Meta Business Partner" className="h-5 md:h-6 brightness-0 invert" loading="lazy" decoding="async" width="90" height="20" />
+            <img src={`${import.meta.env.BASE_URL}google-logo.svg`} alt="Google Partner" className="h-6 md:h-7 w-auto brightness-0 invert" loading="lazy" decoding="async" />
+            <img src={`${import.meta.env.BASE_URL}meta-logo.svg`} alt="Meta Business Partner" className="h-5 md:h-6 w-auto brightness-0 invert" loading="lazy" decoding="async" />
             <div className="flex items-center gap-2">
               <svg viewBox="0 0 24 24" className="h-5 md:h-6 w-5 md:w-6" fill="white">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
