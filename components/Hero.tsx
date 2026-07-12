@@ -95,6 +95,9 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
   // Milo header-show: slapende Milo + Genereer-knop vóór de hero-content
   const { phase, setPhase, finish } = useMiloShow();
   const showDone = phase === 'done';
+  // Speelde de show in deze page-load? Dan staat de headline al (uit de show) en slaat de h1 zijn fade over
+  const playedRef = useRef(false);
+  if (phase === 'playing') playedRef.current = true;
 
   // Small delay so fade-in is visible even when loader is skipped (return visits)
   const [animReady, setAnimReady] = useState(false);
@@ -172,7 +175,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
              </div>
           </div>
 
-          <div className={`w-full max-w-[1400px] transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.1s' }}>
+          <div id="hero-headline" className={`w-full max-w-[1400px] ${playedRef.current ? '' : `transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`}`} style={playedRef.current ? undefined : { animationDelay: '0.1s' }}>
               <h1 className="sn-vhs font-black uppercase tracking-tighter text-white leading-[0.9] text-center">
                 <div className="block text-[2rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.5rem]">
                   JE WEBSITE, CRM,
