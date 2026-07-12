@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
 import { Star } from 'lucide-react';
+import MiloHeaderShow, { useMiloShow } from './MiloHeaderShow';
 
 interface HeroProps {
   startAnimation: boolean;
@@ -91,13 +92,17 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
   const [showCycle, setShowCycle] = useState(false);
   const [showCycleQuote, setShowCycleQuote] = useState(false);
   const [activeReviewIndex, setActiveReviewIndex] = useState(0);
+  // Milo header-show: slapende Milo + Genereer-knop vóór de hero-content
+  const { phase, setPhase, finish } = useMiloShow();
+  const showDone = phase === 'done';
+
   // Small delay so fade-in is visible even when loader is skipped (return visits)
   const [animReady, setAnimReady] = useState(false);
   useEffect(() => {
-    if (!startAnimation) return;
+    if (!startAnimation || !showDone) return;
     const t = setTimeout(() => setAnimReady(true), 50);
     return () => clearTimeout(t);
-  }, [startAnimation]);
+  }, [startAnimation, showDone]);
 
   useEffect(() => {
     if (!startAnimation) return;
@@ -145,6 +150,10 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
 
   return (
     <div className="relative min-h-[100svh] flex flex-col justify-center select-none overflow-hidden bg-transparent">
+      {/* Milo header-show overlay — 1× per sessie */}
+      {startAnimation && (
+        <MiloHeaderShow phase={phase} onStart={() => setPhase('playing')} onFinish={finish} />
+      )}
       {/* Background Decor — desktop only */}
 
       <section className="flex-grow flex flex-col items-center justify-center pt-24 pb-12 relative z-10">
