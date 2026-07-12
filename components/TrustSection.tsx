@@ -16,7 +16,7 @@ interface Tile {
 const tiles: Tile[] = [
   {
     img: 'images/trust-service.webp',
-    title: 'We zijn er om je te helpen, elke dag',
+    title: 'Korte lijntjes: direct contact via WhatsApp',
   },
   {
     img: 'images/trust-secure.webp',

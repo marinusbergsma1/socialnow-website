@@ -203,22 +203,35 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
       `}</style>
 
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        {/* Header — samengevoegd met de "WIJ CODEREN HET."-sectie: code-first pitch */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-            <span className="text-[10px] font-mono text-[#25D366]">&lt;/&gt;</span>
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">
-              Software & Development
-            </span>
+        {/* Header — samengevoegd met de "WIJ CODEREN HET."-sectie: code-first pitch + codeer-Milo */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-center mb-6">
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+              <span className="text-[10px] font-mono text-[#25D366]">&lt;/&gt;</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">
+                Software & Development
+              </span>
+            </div>
+            <h2 className="font-black uppercase tracking-tighter text-white leading-none text-4xl md:text-6xl">
+              WAT WIJ BOUWEN, <span className="text-[#25D366]">CODEREN WE ZELF.</span>
+            </h2>
+            <p className="text-neutral-400 mt-4 max-w-2xl mx-auto lg:mx-0">
+              Marketing zonder techniek is half werk. Daarom coderen wij alles zelf: maatwerk software,
+              webapps, je website, CRM, content en ads. Eén kernteam voor strategie, creatie én code,
+              versterkt door een vast netwerk van developers en gespecialiseerde bureaus. Alles samen in 1 overzichtelijke AI chat.
+            </p>
           </div>
-          <h2 className="font-black uppercase tracking-tighter text-white leading-none text-4xl md:text-6xl">
-            WAT WIJ BOUWEN, <span className="text-[#25D366]">CODEREN WE ZELF.</span>
-          </h2>
-          <p className="text-neutral-400 mt-4 max-w-2xl mx-auto">
-            Marketing zonder techniek is half werk. Daarom coderen wij alles zelf: maatwerk software,
-            webapps, je website, CRM, content en ads. Eén kernteam voor strategie, creatie én code,
-            versterkt door een vast netwerk van developers en gespecialiseerde bureaus. Alles samen in 1 overzichtelijke AI chat.
-          </p>
+          {/* Codeer-Milo loop — zwart op zwart, smelt in de pagina */}
+          <div className="relative w-[240px] md:w-[300px] lg:w-[340px] aspect-square mx-auto">
+            <div className="absolute inset-0 rounded-full bg-[#25D366]/[0.06] blur-3xl pointer-events-none" />
+            <video
+              autoPlay muted loop playsInline preload="metadata" aria-hidden="true"
+              className="relative w-full h-full object-contain"
+            >
+              <source src={`${import.meta.env.BASE_URL}video/milo-coder.webm?v=1`} type="video/webm" />
+              <source src={`${import.meta.env.BASE_URL}video/milo-coder.mp4?v=1`} type="video/mp4" />
+            </video>
+          </div>
         </div>
 
         {/* ===== Bento-grid (exacte port) ===== */}
