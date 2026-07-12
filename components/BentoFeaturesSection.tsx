@@ -203,13 +203,21 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
       `}</style>
 
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        {/* Header */}
+        {/* Header — samengevoegd met de "WIJ CODEREN HET."-sectie: code-first pitch */}
         <div className="text-center mb-6">
+          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+            <span className="text-[10px] font-mono text-[#25D366]">&lt;/&gt;</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">
+              Software & Development
+            </span>
+          </div>
           <h2 className="font-black uppercase tracking-tighter text-white leading-none text-4xl md:text-6xl">
-            WAT WIJ <span className="text-[#25D366]">BOUWEN</span>
+            WAT WIJ BOUWEN? <span className="text-[#25D366]">WIJ CODEREN HET.</span>
           </h2>
-          <p className="text-neutral-400 mt-3 max-w-2xl mx-auto">
-            Je website, je CRM, je content en je advertenties: allemaal samen in 1 overzichtelijke AI chat.
+          <p className="text-neutral-400 mt-4 max-w-2xl mx-auto">
+            Marketing zonder techniek is half werk. Daarom coderen wij alles zelf: maatwerk software,
+            webapps, je website, CRM, content en ads. Eén team voor strategie, creatie én code,
+            samen in 1 overzichtelijke AI chat.
           </p>
         </div>
 
