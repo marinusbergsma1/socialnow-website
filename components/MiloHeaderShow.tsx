@@ -96,6 +96,14 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
     if (!v) return;
     v.currentTime = 0;
     v.play().catch(() => handleEnded());
+    // rAF in plaats van timeupdate (~4Hz): frame-precieze, soepele woord-reveals
+    let raf = 0;
+    const tick = () => {
+      setVideoTime(v.currentTime);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [phase, handleEnded]);
 
   if (phase === 'done' && !leaving) return null;
@@ -135,11 +143,12 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
                   return (
                     <React.Fragment key={w.text}>
                       <span
-                        className="inline-block transition-all duration-300"
+                        className="inline-block will-change-transform"
                         style={{
                           color,
                           opacity: shown ? 1 : 0,
-                          transform: shown ? 'translateY(0) scale(1)' : 'translateY(14px) scale(0.96)',
+                          transform: shown ? 'translateY(0)' : 'translateY(0.35em)',
+                          transition: 'opacity 0.45s cubic-bezier(0.22,1,0.36,1), transform 0.45s cubic-bezier(0.22,1,0.36,1), color 0.4s ease',
                         }}
                       >
                         {w.text}
