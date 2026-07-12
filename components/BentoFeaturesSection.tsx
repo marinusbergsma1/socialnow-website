@@ -212,7 +212,7 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
             </span>
           </div>
           <h2 className="font-black uppercase tracking-tighter text-white leading-none text-4xl md:text-6xl">
-            WAT WIJ BOUWEN? <span className="text-[#25D366]">WIJ CODEREN HET.</span>
+            WAT WIJ BOUWEN, <span className="text-[#25D366]">CODEREN WE ZELF.</span>
           </h2>
           <p className="text-neutral-400 mt-4 max-w-2xl mx-auto">
             Marketing zonder techniek is half werk. Daarom coderen wij alles zelf: maatwerk software,
