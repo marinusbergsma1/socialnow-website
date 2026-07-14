@@ -6,6 +6,7 @@ import Hero from './components/Hero';
 import Clients from './components/Clients';
 import ErrorBoundary from './components/ErrorBoundary';
 import Loader from './components/Loader';
+import SectionDivider from './components/SectionDivider';
 import NotFound from './components/NotFound';
 import { useSEO } from './hooks/useSEO';
 
@@ -127,6 +128,8 @@ const HomePage: React.FC<{
         <div className="scroll-reveal">
           <Reviews onOpenBooking={onOpenBooking} />
         </div>
+
+        <SectionDivider />
 
         <div className="scroll-reveal">
           <TrustSection />
