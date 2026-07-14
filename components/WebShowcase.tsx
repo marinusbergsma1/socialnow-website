@@ -406,7 +406,7 @@ const WebShowcase: React.FC = () => {
                     <button key={project.id} onClick={() => goToIndex(idx)} aria-label={`Ga naar ${project.title}`}
                       className={`relative rounded-sm md:rounded-md overflow-hidden transition-all duration-300 flex-shrink-0 ${idx === activeIndex ? 'ring-1 ring-[#00A3E0]/60 shadow-[0_0_10px_rgba(0,163,224,0.2)] scale-110 opacity-100' : 'opacity-30 hover:opacity-60'}`}
                       style={{ width: idx === activeIndex ? '36px' : '30px', height: idx === activeIndex ? '22px' : '19px' }}>
-                      <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                      <img src={project.image} alt={project.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>

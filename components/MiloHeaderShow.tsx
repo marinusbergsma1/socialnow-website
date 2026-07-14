@@ -34,11 +34,14 @@ export const useMiloShow = () => {
   return { phase, setPhase, finish };
 };
 
-// Woord-beats gekoppeld aan de video-fases (RUN9), verdeeld over de h1-regels
+// Woord-beats gekoppeld aan de fases van HEADER FINALDEF (8s → getrimd 7.3s):
+//   ~1.8s CRM/laptop-stap · ~3.4s content/schilder-stap · ~4.6s ads/megafoon-stap
+//   ~5.6s hub-finale (groene circuit-chat = "in één AI chat").
+// Elk gekleurd woord licht op precies wanneer zijn stap in beeld is.
 const LINES: { words: { text: string; t: number; accent: string }[]; green?: boolean }[] = [
-  { words: [{ text: 'JE WEBSITE,', t: 1.7, accent: '#FFFFFF' }, { text: 'CRM,', t: 2.9, accent: '#F7E644' }] },
-  { words: [{ text: 'CONTENT', t: 3.7, accent: '#00A3E0' }, { text: '& ADS', t: 4.5, accent: '#F62961' }] },
-  { words: [{ text: 'IN ÉÉN AI CHAT.', t: 5.0, accent: '#25D366' }], green: true },
+  { words: [{ text: 'JE WEBSITE,', t: 1.8, accent: '#FFFFFF' }, { text: 'CRM,', t: 2.4, accent: '#F7E644' }] },
+  { words: [{ text: 'CONTENT', t: 3.4, accent: '#00A3E0' }, { text: '& ADS', t: 4.6, accent: '#F62961' }] },
+  { words: [{ text: 'IN ÉÉN AI CHAT.', t: 5.6, accent: '#25D366' }], green: true },
 ];
 const ALL_TIMES = LINES.flatMap((l) => l.words.map((w) => w.t)).sort((a, b) => a - b);
 
@@ -176,8 +179,8 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
           onTimeUpdate={(e) => { const v = e.target as HTMLVideoElement; setVideoTime(v.currentTime); if (v.currentTime > 0.04) setVideoStarted(true); }}
           className={`absolute inset-x-4 bottom-0 w-[calc(100%-2rem)] h-full max-h-[46svh] object-contain object-bottom ${videoStarted ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         >
-          <source src={`${import.meta.env.BASE_URL}video/milo-header-6s.webm?v=2`} type="video/webm" />
-          <source src={`${import.meta.env.BASE_URL}video/milo-header-6s.mp4?v=2`} type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}video/milo-header-6s.webm?v=3`} type="video/webm" />
+          <source src={`${import.meta.env.BASE_URL}video/milo-header-6s.mp4?v=3`} type="video/mp4" />
         </video>
       </div>
     </div>

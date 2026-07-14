@@ -282,6 +282,8 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               <img
                 src={`${import.meta.env.BASE_URL}images/Social-Now-Logo-Breed-Wit.webp`}
                 alt="SocialNow"
+                loading="lazy"
+                decoding="async"
                 className="h-8 w-auto object-contain"
               />
             </a>

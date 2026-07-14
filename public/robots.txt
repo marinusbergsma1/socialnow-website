@@ -6,3 +6,7 @@ Sitemap: https://socialnow.nl/sitemap.xml
 # Disallow admin/internal paths
 Disallow: /api/
 Disallow: /_
+
+# NB: /vastiq-preview/ (off-brand klant-demo) NIET hier disallowen — die pagina
+# heeft een noindex-meta, en een robots-block zou verhinderen dat Google die
+# noindex ziet, waardoor de pagina in de index zou kunnen blijven hangen.

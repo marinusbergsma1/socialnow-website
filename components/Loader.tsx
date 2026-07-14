@@ -5,7 +5,7 @@ interface LoaderProps {
   onComplete: () => void;
 }
 
-const VIDEO_SRC = `${import.meta.env.BASE_URL}video/header-intro.mp4?v=7`;
+const VIDEO_SRC = `${import.meta.env.BASE_URL}video/header-intro.mp4?v=8`;
 
 const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
   const [isExiting, setIsExiting] = useState(false);
@@ -39,10 +39,11 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
       }
     }
 
-    // Safety net: if onEnded never fires (e.g. stalled playback), exit after 6s
+    // Safety net: if onEnded never fires (e.g. stalled playback), exit after
+    // the video's ~5.25s runtime plus a small buffer.
     const safetyTimer = setTimeout(() => {
       triggerExit(400);
-    }, 6000);
+    }, 5800);
 
     return () => {
       isMounted.current = false;

@@ -104,7 +104,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ isOpen, onClose }) => {
 
              <div className="mb-10 text-center md:text-left">
                  <h2 className="text-3xl md:text-5xl font-black uppercase text-white flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-4 md:gap-6 leading-none whitespace-nowrap tracking-tighter">
-                    LET'S GET <img src={`${import.meta.env.BASE_URL}images/Logo-Social-Now-Lengte.webp`} alt="SocialNow" className="h-10 md:h-14 object-contain inline-block" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                    LET'S GET <img src={`${import.meta.env.BASE_URL}images/Logo-Social-Now-Lengte.webp`} alt="SocialNow" loading="lazy" decoding="async" className="h-10 md:h-14 object-contain inline-block" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                  </h2>
              </div>
 
