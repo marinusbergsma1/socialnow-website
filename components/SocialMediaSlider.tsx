@@ -1,7 +1,14 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { Instagram } from 'lucide-react';
 
-const BEHOLD_FEED_URL = 'https://feeds.behold.so/7ZP2aZ0PgVpUEDi8BpHY';
+const BEHOLD_FEED_URL = 'https://feeds.behold.so/5Ku5iKM7N7Gpi9MgAN9X';
+
+type BeholdSizes = {
+  small?: { width: number; height: number; mediaUrl: string };
+  medium?: { width: number; height: number; mediaUrl: string };
+  large?: { width: number; height: number; mediaUrl: string };
+  full?: { width: number; height: number; mediaUrl?: string };
+};
 
 type BeholdPost = {
   id: string;
@@ -12,6 +19,18 @@ type BeholdPost = {
   thumbnailUrl?: string;
   isReel?: boolean;
   prunedCaption?: string;
+  sizes?: BeholdSizes;
+  /** Fallback-verhouding (b/h) voor lokale posts zonder sizes. */
+  ratio?: number;
+};
+
+// Native verhouding van een post (b/h) — posts worden NOOIT bijgesneden:
+// 9:16 blijft 9:16, 1:1 blijft 1:1, 4:5 blijft 4:5.
+const postRatio = (p: BeholdPost): number => {
+  const f = p.sizes?.full;
+  if (f && f.width > 0 && f.height > 0) return f.width / f.height;
+  if (p.ratio) return p.ratio;
+  return p.mediaType === 'VIDEO' || p.isReel ? 9 / 16 : 1;
 };
 
 type BeholdFeed = {
@@ -22,22 +41,23 @@ type BeholdFeed = {
 // ─── Fallback: eigen werk als de Behold-feed faalt (bv. source gepauzeerd).
 // De sectie mag nooit onzichtbaar zijn; deze posts linken naar Instagram. ───
 const IG = 'https://www.instagram.com/socialnow.nl/';
-const FALLBACK_POSTS: BeholdPost[] = [
-  'AZ-25-K-Volgers-Post.webp',
-  'C4-FEED-30-korting.webp',
-  'UNIVERSAL-OPENHEIMER-FRAMES.webp',
-  'header-Bouadu-v2-1.webp',
-  '1400-Mark-Johnson-LUV-YOU-STILL-1.webp',
-  'Light-Art-Collection.webp',
-  'Soulful-Special-Event-Header-1.webp',
-  'THH-VALENTINE-SALE-STORY-2024-1200x1200-1200x1200-1.webp',
-].map((file, i) => ({
+const FALLBACK_POSTS: BeholdPost[] = ([
+  ['AZ-25-K-Volgers-Post.webp', 1327 / 1670],
+  ['C4-FEED-30-korting.webp', 1],
+  ['UNIVERSAL-OPENHEIMER-FRAMES.webp', 1323 / 2407],
+  ['header-Bouadu-v2-1.webp', 1920 / 1169],
+  ['1400-Mark-Johnson-LUV-YOU-STILL-1.webp', 1],
+  ['Light-Art-Collection.webp', 1920 / 1170],
+  ['Soulful-Special-Event-Header-1.webp', 1920 / 1004],
+  ['THH-VALENTINE-SALE-STORY-2024-1200x1200-1200x1200-1.webp', 1],
+] as [string, number][]).map(([file, ratio], i) => ({
   id: `fallback-${i}`,
   timestamp: '',
   permalink: IG,
   mediaType: 'IMAGE' as const,
   mediaUrl: `${import.meta.env.BASE_URL}images/${file}`,
   prunedCaption: 'Werk van SocialNow',
+  ratio,
 }));
 
 // ─── Lazy media: only loads when near viewport ──────────────────────────
@@ -59,7 +79,8 @@ const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean }> = ({ post, is
   }, [isMobile, shouldLoad]);
 
   const isVideo = post.mediaType === 'VIDEO';
-  const src = isVideo ? post.mediaUrl : post.mediaUrl;
+  // Voor afbeeldingen: Behold's 'large' rendition (lichter dan full)
+  const src = isVideo ? post.mediaUrl : (post.sizes?.large?.mediaUrl || post.mediaUrl);
   const poster = post.thumbnailUrl;
 
   return (
@@ -123,18 +144,23 @@ const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[] }> = ({ posts }) => {
   const isMobile = isMobileRef.current;
   const screenWidth = screenWidthRef.current;
 
-  const cardWidth = isMobile
+  // Vaste hoogte; de breedte volgt per post uit zijn NATIVE verhouding —
+  // een reel (9:16) is dus smaller dan een carousel (4:5) of een 1:1 post.
+  const baseWidth = isMobile
     ? Math.round(screenWidth * 0.56)
     : Math.min(480, Math.max(380, Math.round(screenWidth * 0.27)));
-  const cardHeight = Math.round(cardWidth * (16 / 9));
+  const cardHeight = Math.round(baseWidth * (16 / 9));
   const gap = isMobile ? 14 : 32;
-  const totalItemWidth = cardWidth + gap;
 
   // Duplicate posts so the loop feels endless even with a small feed
   const repeatCount = posts.length < 6 ? 4 : 2;
   const allPosts = useMemo(() => Array.from({ length: repeatCount }, () => posts).flat(), [posts, repeatCount]);
   const setLength = posts.length;
-  const totalSetWidth = totalItemWidth * setLength;
+  const cardWidths = useMemo(
+    () => posts.map((p) => Math.round(cardHeight * postRatio(p))),
+    [posts, cardHeight]
+  );
+  const totalSetWidth = cardWidths.reduce((a, w) => a + w + gap, 0);
 
   const autoSpeed = isMobile ? 0.5 : 0.6;
   const totalSetWidthRef = useRef(totalSetWidth);
@@ -238,7 +264,7 @@ const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[] }> = ({ posts }) => {
               key={`${post.id}-${i}`}
               className="flex-shrink-0 relative"
               style={{
-                width: `${cardWidth}px`,
+                width: `${cardWidths[i % setLength]}px`,
                 transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
                 transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 zIndex: isHovered ? 10 : 1,

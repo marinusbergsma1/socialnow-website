@@ -16,7 +16,7 @@ const reviewsData = [
     image: `${import.meta.env.BASE_URL}images/Niels-Groen.webp`,
     stars: 5,
     status: "CORE_CLIENT",
-    meta: { CPU: "96%", SYNC: "100%" },
+    meta: { AUTOMATION: "100%", KANALEN: "ALL-IN-1" },
     text: "Sinds we met SocialNow werken is alles geautomatiseerd, van content tot ads. Eén partij voor branding, website en social media. Een samenwerking die ik nooit zal opgeven!"
   },
   {
@@ -27,7 +27,7 @@ const reviewsData = [
     image: `${import.meta.env.BASE_URL}images/66ed2e6a48aae627d6698e31-Albert-Deltour.webp`,
     stars: 5,
     status: "CORE_CLIENT",
-    meta: { CPU: "92%", SYNC: "100%" },
+    meta: { SAMENWERKING: "5+ JAAR", SCOPE: "INTERNATIONAAL" },
     text: "From ambitious and talented intern to a reliable partner is how I would describe Marinus. We have been working together for quite a few years, and he still designs and creates our international presentations with his team."
   },
   {
@@ -38,7 +38,7 @@ const reviewsData = [
     image: `${import.meta.env.BASE_URL}images/Hussein.webp`,
     stars: 5,
     status: "VERIFIED_PARTNER",
-    meta: { CPU: "88%", SYNC: "98%" },
+    meta: { ROL: "VASTE DESIGNER", VIA: "AANBEVELING" },
     text: "Erg tevreden met de ervaring en kennis van het team van socialnow. Via via zijn wij in contact gekomen en sindsdien is socialnow die designer van Divine Machines."
   }
 ];
