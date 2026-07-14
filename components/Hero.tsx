@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Star, Handshake, ArrowRight } from 'lucide-react';
+import { Star, Handshake } from 'lucide-react';
+import Button from './Button';
 import MiloHeaderShow, { useMiloShow } from './MiloHeaderShow';
 import GenerateButton from './GenerateButton';
 
@@ -155,14 +156,9 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
           </p>
 
           <div className={`flex justify-center transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.7s' }}>
-            <GenerateButton
-              text="Claim je gratis proof of concept"
-              morphText="Claim je gratis proof of concept"
-              filled
-              icon={<ArrowRight strokeWidth={2.5} />}
-              onClick={onOpenBooking}
-              className="text-xs md:text-base tracking-wide md:drop-shadow-[0_20px_60px_rgba(37,211,102,0.3)]"
-            />
+            <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="!px-5 md:!px-7 text-sm md:text-lg">
+              CLAIM JE GRATIS PROOF OF CONCEPT
+            </Button>
           </div>
 
           <div className={`flex flex-col items-center gap-6 mt-10 md:mt-12 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.9s' }}>
