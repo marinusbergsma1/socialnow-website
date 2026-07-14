@@ -19,6 +19,27 @@ type BeholdFeed = {
   posts: BeholdPost[];
 };
 
+// ─── Fallback: eigen werk als de Behold-feed faalt (bv. source gepauzeerd).
+// De sectie mag nooit onzichtbaar zijn; deze posts linken naar Instagram. ───
+const IG = 'https://www.instagram.com/socialnow.nl/';
+const FALLBACK_POSTS: BeholdPost[] = [
+  'AZ-25-K-Volgers-Post.webp',
+  'C4-FEED-30-korting.webp',
+  'UNIVERSAL-OPENHEIMER-FRAMES.webp',
+  'header-Bouadu-v2-1.webp',
+  '1400-Mark-Johnson-LUV-YOU-STILL-1.webp',
+  'Light-Art-Collection.webp',
+  'Soulful-Special-Event-Header-1.webp',
+  'THH-VALENTINE-SALE-STORY-2024-1200x1200-1200x1200-1.webp',
+].map((file, i) => ({
+  id: `fallback-${i}`,
+  timestamp: '',
+  permalink: IG,
+  mediaType: 'IMAGE' as const,
+  mediaUrl: `${import.meta.env.BASE_URL}images/${file}`,
+  prunedCaption: 'Werk van SocialNow',
+}));
+
 // ─── Lazy media: only loads when near viewport ──────────────────────────
 const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean }> = ({ post, isMobile }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -316,8 +337,9 @@ const SocialMediaSlider: React.FC = () => {
     return () => { cancelled = true; };
   }, []);
 
-  // If feed fails, hide the section entirely rather than show a broken UI
-  if (error) return null;
+  // Feed stuk (bv. Behold-source gepauzeerd)? Toon eigen werk i.p.v. niets —
+  // de sectie mag nooit stilletjes van de site verdwijnen.
+  const effectivePosts = error ? FALLBACK_POSTS : posts;
 
   return (
     <section className="py-10 md:py-28 bg-transparent overflow-hidden relative border-t border-white/5">
@@ -349,7 +371,7 @@ const SocialMediaSlider: React.FC = () => {
       <div className="relative">
         <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
-        {posts === null ? <SliderSkeleton /> : <InfiniteSocialSlider posts={posts} />}
+        {effectivePosts === null ? <SliderSkeleton /> : <InfiniteSocialSlider posts={effectivePosts} />}
       </div>
 
       <div className="container mx-auto px-6 mt-8 md:mt-14 text-center z-10 relative">
