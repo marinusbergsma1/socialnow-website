@@ -164,7 +164,7 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
       <div className={`absolute inset-x-0 bottom-0 mx-auto w-full max-w-[1100px] px-4 transition-opacity duration-400 ${miloGone ? 'opacity-0' : 'opacity-100'}`}>
         <video
           autoPlay muted loop playsInline preload="auto" aria-hidden="true"
-          poster={`${import.meta.env.BASE_URL}images/milo-header-poster.webp`}
+          poster={`${import.meta.env.BASE_URL}images/milo-header-poster.webp?v=2`}
           className={`w-full h-auto max-h-[46svh] object-contain object-bottom ${videoStarted ? 'opacity-0' : 'opacity-100'}`}
         >
           <source src={`${import.meta.env.BASE_URL}video/milo-sleep-loop.webm?v=1`} type="video/webm" />
