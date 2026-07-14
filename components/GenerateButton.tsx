@@ -16,6 +16,8 @@ interface GenerateButtonProps {
   morphText?: string;
   /** Optioneel eigen icoon (bv. een lucide-icon); vervangt de default sparkle. */
   icon?: React.ReactNode;
+  /** Solid groene vulling (combi van generate-glans + fill zoals de andere knoppen). */
+  filled?: boolean;
 }
 
 // Splitst een string in letter-spans; spaties worden een smalle spacer (animeren niet).
@@ -32,10 +34,11 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
   text = 'Generate',
   morphText = 'Generating',
   icon,
+  filled = false,
 }) => {
   const sizer = text.length >= morphText.length ? text : morphText;
   return (
-    <div className={`sn-generate-btn ${className}`}>
+    <div className={`sn-generate-btn ${filled ? 'is-filled' : ''} ${className}`}>
       <style>{`
         .sn-generate-btn .btn-wrapper {
           position: relative;
@@ -334,6 +337,35 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
           filter: drop-shadow(0 0 3px hsl(var(--highlight-color-hue), 100%, 70%))
             drop-shadow(0 -4px 6px #0009);
           animation: none;
+        }
+
+        /* ── Gevulde variant: solid SocialNow-groen + behoud van de generate-glans ── */
+        .sn-generate-btn.is-filled .btn {
+          --button-color: #1fbf59; /* solid groen; witte inset-highlights tillen 'm naar #25D366-look */
+          color: #fff;
+          border-color: #6bf5a3;
+        }
+        .sn-generate-btn.is-filled .btn-letter {
+          color: rgba(255, 255, 255, 0.92);
+        }
+        @keyframes sn-letter-anim-filled {
+          50% { text-shadow: 0 0 4px #fff; color: #fff; }
+        }
+        .sn-generate-btn.is-filled .btn-letter {
+          animation-name: sn-letter-anim-filled;
+        }
+        .sn-generate-btn.is-filled .btn-svg { fill: #fff; }
+        .sn-generate-btn.is-filled .btn-icon { color: #fff; }
+        .sn-generate-btn.is-filled .btn:hover {
+          border-color: #eafff3;
+        }
+        .sn-generate-btn.is-filled .btn:hover .btn-icon {
+          color: #fff;
+          filter: drop-shadow(0 0 4px #eafff3) drop-shadow(0 -4px 6px #0006);
+        }
+        .sn-generate-btn.is-filled .btn:active {
+          background-color: #17a94d;
+          border-color: #eafff3;
         }
       `}</style>
 

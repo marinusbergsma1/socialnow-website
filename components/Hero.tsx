@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import Button from './Button';
-import { Star, Handshake } from 'lucide-react';
+import { Star, Handshake, ArrowRight } from 'lucide-react';
 import MiloHeaderShow, { useMiloShow } from './MiloHeaderShow';
 import GenerateButton from './GenerateButton';
 
@@ -155,15 +154,16 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
             Start met een <span className="text-white font-black">gratis proof of concept</span>: een complete <span className="text-white font-black">website demo</span> én <span className="text-white font-black">rebranding</span>. Je ziet het werken vóórdat je iets betaalt.
           </p>
 
-          <div className={`flex flex-col sm:flex-row items-center gap-4 md:gap-6 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.7s' }}>
-            <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="relative !px-5 md:!px-7 text-sm md:text-lg md:shadow-[0_20px_60px_rgba(37,211,102,0.3)]">
-              CLAIM JE GRATIS PROOF OF CONCEPT
-            </Button>
+          <div className={`flex justify-center transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.7s' }}>
+            <GenerateButton
+              text="Claim je gratis proof of concept"
+              morphText="Claim je gratis proof of concept"
+              filled
+              icon={<ArrowRight strokeWidth={2.5} />}
+              onClick={onOpenBooking}
+              className="text-xs md:text-base tracking-wide md:drop-shadow-[0_20px_60px_rgba(37,211,102,0.3)]"
+            />
           </div>
-
-          <p className={`text-white/30 text-xs font-bold uppercase tracking-widest mt-4 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.8s' }}>
-            <button onClick={onOpenBooking} className="hover:text-[#25D366] transition-colors cursor-pointer">Plan een gratis call →</button>
-          </p>
 
           <div className={`flex flex-col items-center gap-6 mt-10 md:mt-12 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.9s' }}>
             {/* Geen scale-utilities op deze wrapper: ook scale-100 is een blijvende
