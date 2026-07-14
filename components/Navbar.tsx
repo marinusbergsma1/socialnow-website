@@ -170,7 +170,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
                 </a>
               ))}
             </div>
-            <Button variant="green" icon onClick={onOpenBooking} className="scale-90 origin-right !h-[48px]" triggerOnHover>Kennismaken</Button>
+            <Button variant="green" premium icon onClick={onOpenBooking} className="scale-90 origin-right !h-[48px]" triggerOnHover>Kennismaken</Button>
           </div>
 
           <button className="relative z-10 lg:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? 'Menu sluiten' : 'Menu openen'}>
@@ -194,7 +194,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
             ))}
           </div>
           <div className={`mt-8 lg:mt-16 transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`} style={{ transitionDelay: isOpen ? `${navLinks.length * 60 + 200}ms` : '0ms' }}>
-            <Button variant="green" icon onClick={() => { setIsOpen(false); onOpenBooking(); }} triggerOnHover className="w-full !h-[50px] !text-sm">Kennismaken</Button>
+            <Button variant="green" premium icon onClick={() => { setIsOpen(false); onOpenBooking(); }} triggerOnHover className="w-full !h-[50px] !text-sm">Kennismaken</Button>
           </div>
       </div>
     </>

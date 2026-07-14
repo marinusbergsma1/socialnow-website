@@ -10,6 +10,7 @@ interface ButtonProps {
   icon?: boolean;
   IconComponent?: LucideIcon; // Custom icon component
   triggerOnHover?: boolean;
+  premium?: boolean; // 3D-randen + glans + neon (combi generate-stijl × groene fill-knop)
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -19,7 +20,8 @@ const Button: React.FC<ButtonProps> = ({
   className = '',
   icon = false,
   IconComponent = ArrowRight, // Default to ArrowRight
-  triggerOnHover = false
+  triggerOnHover = false,
+  premium = false
 }) => {
   const isGreen = variant === 'green';
   const isPink = variant === 'pink';
@@ -52,7 +54,9 @@ const Button: React.FC<ButtonProps> = ({
 
   let variantClasses = "";
   if (isGreen) {
-    variantClasses = "bg-transparent backdrop-blur-md border-[#25D366] text-white hover:shadow-[0_0_25px_rgba(37,211,102,0.5)] neon-glow-green";
+    variantClasses = premium
+      ? "bg-transparent backdrop-blur-md border-[#25D366] text-white sn-btn3d"
+      : "bg-transparent backdrop-blur-md border-[#25D366] text-white hover:shadow-[0_0_25px_rgba(37,211,102,0.5)] neon-glow-green";
   } else if (isPink) {
     variantClasses = "bg-transparent backdrop-blur-md border-[#F62961] text-white hover:shadow-[0_0_25px_rgba(246,41,97,0.5)]";
   } else if (isGlass) {
@@ -79,7 +83,10 @@ const Button: React.FC<ButtonProps> = ({
       {isPink && <div className="absolute inset-0 bg-[#F62961] translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
       {variant === 'outline' && <div className="absolute inset-0 bg-white translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
       {isGlass && <div className="absolute inset-0 bg-white/20 translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
-      
+
+      {/* Premium glans-laag: 3D-highlight boven de fill, onder de tekst */}
+      {premium && <div className="sn-btn3d-sheen" aria-hidden="true"></div>}
+
       {/* Content wrapper */}
       <div className={`relative z-10 flex items-center justify-between w-full h-full font-black uppercase tracking-widest text-[10px] md:text-xs ${icon ? 'pl-4 md:pl-6 pr-1.5' : 'px-6 md:px-8'}`}>
         <span className="transition-colors duration-300 flex-grow text-center">
