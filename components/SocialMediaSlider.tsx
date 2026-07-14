@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { Instagram, X, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
 const BEHOLD_FEED_URL = 'https://feeds.behold.so/5Ku5iKM7N7Gpi9MgAN9X';
@@ -372,7 +373,10 @@ const MediaLightbox: React.FC<{
   const mediaSrc = isVideo ? post.mediaUrl : (post.sizes?.large?.mediaUrl || post.mediaUrl);
   const caption = post.caption || post.prunedCaption || '';
 
-  return (
+  // Portal naar body: ontsnapt aan voorouders met transform/filter/will-change
+  // die anders het containing block voor position:fixed worden (lightbox zou
+  // dan niet viewport-gecentreerd zijn maar ergens in de pagina staan).
+  return createPortal((
     <div
       className="fixed inset-0 z-[120] flex items-center justify-center bg-black/85 backdrop-blur-md p-3 md:p-8 animate-[sn-lb-fade_0.2s_ease-out]"
       onClick={onClose}
@@ -442,7 +446,7 @@ const MediaLightbox: React.FC<{
         </div>
       )}
     </div>
-  );
+  ), document.body);
 };
 
 const SocialMediaSlider: React.FC = () => {
