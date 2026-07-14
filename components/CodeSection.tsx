@@ -83,7 +83,7 @@ const CodeSection: React.FC = () => {
 
           {/* Codeer-Milo loop — zwarte video op zwarte pagina, geen kader nodig */}
           <div className="relative flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[480px] aspect-square">
+            <div className="sn-milo relative w-full max-w-[480px] aspect-square">
               <div className="absolute inset-0 rounded-full bg-[#25D366]/[0.06] blur-3xl pointer-events-none" />
               {inView && (
                 <video

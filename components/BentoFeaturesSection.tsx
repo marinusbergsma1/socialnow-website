@@ -221,8 +221,8 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
               versterkt door een vast netwerk van developers en gespecialiseerde bureaus. Alles samen in 1 overzichtelijke AI chat.
             </p>
           </div>
-          {/* Codeer-Milo loop — zwart op zwart, smelt in de pagina */}
-          <div className="relative w-[240px] md:w-[300px] lg:w-[340px] aspect-square mx-auto">
+          {/* Codeer-Milo loop — sn-milo: zwart wordt transparant (screen-blend), geen zwart blok */}
+          <div className="sn-milo relative w-[280px] md:w-[320px] lg:w-[360px] aspect-square mx-auto">
             <div className="absolute inset-0 rounded-full bg-[#25D366]/[0.06] blur-3xl pointer-events-none" />
             <video
               autoPlay muted loop playsInline preload="metadata" aria-hidden="true"
