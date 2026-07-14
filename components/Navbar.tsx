@@ -133,21 +133,13 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
           <div className="sn-navbar-glass absolute inset-0 z-0 pointer-events-none hidden md:block" />
         )}
           <a href="#home" onClick={(e) => { e.preventDefault(); if (!isHomePage) { navigate('/'); } else { window.scrollTo({top: 0, behavior: 'smooth'}); } }} className={`relative z-10 flex items-center transition-all duration-500`}>
-            {/* Mobile: beeldmerk only */}
-            <img
-              src={`${import.meta.env.BASE_URL}beeldmerk-2026.webp`}
-              alt="SocialNow"
-              width={40}
-              height={40}
-              className={`md:hidden transition-all duration-500 object-contain ${scrolled ? 'w-8 h-8' : 'w-10 h-10'}`}
-            />
-            {/* Desktop: full logo with text */}
+            {/* Volledig SocialNow-logo op alle schermen (ook mobiel) */}
             <img
               src={`${import.meta.env.BASE_URL}images/SocialNow-Logo-2026.webp`}
               alt="SocialNow"
               width={200}
               height={50}
-              className={`hidden md:block transition-all duration-500 ${scrolled ? 'h-8' : 'h-10'} w-auto`}
+              className={`transition-all duration-500 w-auto ${scrolled ? 'h-7 md:h-8' : 'h-8 md:h-10'}`}
             />
           </a>
 
