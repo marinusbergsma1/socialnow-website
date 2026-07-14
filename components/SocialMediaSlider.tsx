@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
-import { Instagram } from 'lucide-react';
+import { Instagram, X, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
 const BEHOLD_FEED_URL = 'https://feeds.behold.so/5Ku5iKM7N7Gpi9MgAN9X';
 
@@ -18,6 +18,7 @@ type BeholdPost = {
   mediaUrl: string;
   thumbnailUrl?: string;
   isReel?: boolean;
+  caption?: string;
   prunedCaption?: string;
   sizes?: BeholdSizes;
   /** Fallback-verhouding (b/h) voor lokale posts zonder sizes. */
@@ -35,8 +36,11 @@ const postRatio = (p: BeholdPost): number => {
 
 type BeholdFeed = {
   username: string;
+  profilePictureUrl?: string;
   posts: BeholdPost[];
 };
+
+type FeedMeta = { username: string; avatar?: string };
 
 // ─── Fallback: eigen werk als de Behold-feed faalt (bv. source gepauzeerd).
 // De sectie mag nooit onzichtbaar zijn; deze posts linken naar Instagram. ───
@@ -111,7 +115,7 @@ const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean }> = ({ post, is
 };
 
 // ─── Infinite Loop Slider ───────────────────────────────────────────────
-const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[] }> = ({ posts }) => {
+const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[]; onOpen: (index: number) => void }> = ({ posts, onOpen }) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>(0);
   const positionRef = useRef(0);
@@ -230,10 +234,10 @@ const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[] }> = ({ posts }) => {
     isDragging.current = false;
   }, []);
 
-  const handleTap = useCallback((post: BeholdPost) => {
-    if (dragDistRef.current > 20) return;
-    window.open(post.permalink, '_blank', 'noopener,noreferrer');
-  }, []);
+  const handleTap = useCallback((originalIndex: number) => {
+    if (dragDistRef.current > 20) return; // was een sleep, geen tik
+    onOpen(originalIndex);
+  }, [onOpen]);
 
   const handleMouseEnter = (idx: number) => {
     if (window.innerWidth < 768) return;
@@ -271,7 +275,7 @@ const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[] }> = ({ posts }) => {
               }}
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={handleMouseLeave}
-              onClick={() => handleTap(post)}
+              onClick={() => handleTap(i % setLength)}
             >
               <div
                 className="w-full bg-black relative"
@@ -340,9 +344,112 @@ const SliderSkeleton: React.FC = () => {
 };
 
 // ─── Main exported component ────────────────────────────────────────────
+// ─── Popup-gallery (lightbox) — Behold-stijl: media links in native ratio,
+// caption rechts, pijlen + dots + "Bekijk op Instagram". ───────────────────
+const MediaLightbox: React.FC<{
+  posts: BeholdPost[];
+  index: number;
+  feed: FeedMeta;
+  onClose: () => void;
+  onNav: (dir: 1 | -1) => void;
+}> = ({ posts, index, feed, onClose, onNav }) => {
+  const post = posts[index];
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      else if (e.key === 'ArrowRight') onNav(1);
+      else if (e.key === 'ArrowLeft') onNav(-1);
+    };
+    window.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = prevOverflow; };
+  }, [onClose, onNav]);
+
+  if (!post) return null;
+  const isVideo = post.mediaType === 'VIDEO';
+  const mediaSrc = isVideo ? post.mediaUrl : (post.sizes?.large?.mediaUrl || post.mediaUrl);
+  const caption = post.caption || post.prunedCaption || '';
+
+  return (
+    <div
+      className="fixed inset-0 z-[120] flex items-center justify-center bg-black/85 backdrop-blur-md p-3 md:p-8 animate-[sn-lb-fade_0.2s_ease-out]"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+    >
+      <style>{`@keyframes sn-lb-fade { from { opacity: 0 } to { opacity: 1 } } @keyframes sn-lb-pop { from { opacity:0; transform: scale(0.97) } to { opacity:1; transform: scale(1) } }`}</style>
+
+      {/* Sluiten */}
+      <button onClick={onClose} aria-label="Sluiten" className="fixed top-4 right-4 z-[130] p-2.5 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+        <X size={26} />
+      </button>
+
+      {/* Vorige / volgende */}
+      {posts.length > 1 && (
+        <>
+          <button onClick={(e) => { e.stopPropagation(); onNav(-1); }} aria-label="Vorige" className="fixed left-2 md:left-6 top-1/2 -translate-y-1/2 z-[130] p-2 md:p-3 rounded-full bg-white/5 hover:bg-white/15 text-white/80 hover:text-white transition-colors">
+            <ChevronLeft size={28} />
+          </button>
+          <button onClick={(e) => { e.stopPropagation(); onNav(1); }} aria-label="Volgende" className="fixed right-2 md:right-6 top-1/2 -translate-y-1/2 z-[130] p-2 md:p-3 rounded-full bg-white/5 hover:bg-white/15 text-white/80 hover:text-white transition-colors">
+            <ChevronRight size={28} />
+          </button>
+        </>
+      )}
+
+      <div
+        className="relative flex flex-col md:flex-row w-full max-w-4xl max-h-full rounded-2xl overflow-hidden bg-[#0b0b0b] border border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.7)] animate-[sn-lb-pop_0.25s_cubic-bezier(0.16,1,0.3,1)]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Media — native verhouding, nooit gecropt */}
+        <div className="relative bg-black flex items-center justify-center md:w-[58%] max-h-[45vh] md:max-h-[85vh]">
+          {isVideo ? (
+            <video key={post.id} src={mediaSrc} poster={post.thumbnailUrl} autoPlay loop playsInline controls className="max-w-full max-h-[45vh] md:max-h-[85vh] w-auto h-auto object-contain" />
+          ) : (
+            <img key={post.id} src={mediaSrc} alt={caption.slice(0, 80) || 'Instagram post'} className="max-w-full max-h-[45vh] md:max-h-[85vh] w-auto h-auto object-contain" />
+          )}
+        </div>
+
+        {/* Caption-paneel */}
+        <div className="flex flex-col md:w-[42%] min-h-0 bg-[#0b0b0b]">
+          <div className="flex items-center gap-3 px-5 py-4 border-b border-white/[0.07]">
+            {feed.avatar
+              ? <img src={feed.avatar} alt="" className="w-10 h-10 rounded-full object-cover ring-2 ring-[#25D366]/40" />
+              : <span className="w-10 h-10 rounded-full bg-[#25D366]/20 flex items-center justify-center"><Instagram size={18} className="text-[#25D366]" /></span>}
+            <span className="text-white font-bold text-sm">@{feed.username}</span>
+          </div>
+          <div className="flex-1 overflow-y-auto px-5 py-4 text-white/80 text-[13px] leading-relaxed whitespace-pre-line min-h-[80px] max-h-[30vh] md:max-h-none">
+            {caption || 'Bekijk deze post op Instagram.'}
+          </div>
+          <a
+            href={post.permalink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 px-5 py-4 border-t border-white/[0.07] text-[#25D366] font-bold uppercase tracking-wider text-xs hover:bg-[#25D366] hover:text-black transition-colors"
+          >
+            <Instagram size={16} /> Bekijk op Instagram <ExternalLink size={14} />
+          </a>
+        </div>
+      </div>
+
+      {/* Dots */}
+      {posts.length > 1 && (
+        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-[130] flex gap-2">
+          {posts.map((_, i) => (
+            <span key={i} className={`block h-1.5 rounded-full transition-all ${i === index ? 'w-6 bg-[#25D366]' : 'w-1.5 bg-white/30'}`} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const SocialMediaSlider: React.FC = () => {
   const [posts, setPosts] = useState<BeholdPost[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [feed, setFeed] = useState<FeedMeta>({ username: 'socialnow.nl' });
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -356,6 +463,7 @@ const SocialMediaSlider: React.FC = () => {
         // Sort newest first (Behold returns newest first by default, but be defensive)
         const sorted = [...data.posts].sort((a, b) => b.timestamp.localeCompare(a.timestamp));
         setPosts(sorted);
+        setFeed({ username: data.username || 'socialnow.nl', avatar: data.profilePictureUrl });
       })
       .catch(err => {
         if (!cancelled) setError(err.message);
@@ -390,14 +498,14 @@ const SocialMediaSlider: React.FC = () => {
           >
             Volg @socialnow.nl
           </a>
-          {' '}en zie ons nieuwste werk, achter-de-schermen en AI-experimenten. Tik op een post om 'm op Instagram te bekijken.
+          {' '}en zie ons nieuwste werk, achter-de-schermen en AI-experimenten. Tik op een post om 'm groot te bekijken.
         </p>
       </div>
 
       <div className="relative">
         <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
-        {effectivePosts === null ? <SliderSkeleton /> : <InfiniteSocialSlider posts={effectivePosts} />}
+        {effectivePosts === null ? <SliderSkeleton /> : <InfiniteSocialSlider posts={effectivePosts} onOpen={setLightboxIndex} />}
       </div>
 
       <div className="container mx-auto px-6 mt-8 md:mt-14 text-center z-10 relative">
@@ -411,6 +519,21 @@ const SocialMediaSlider: React.FC = () => {
           <span className="text-white text-[11px] md:text-xs font-bold uppercase tracking-[0.25em]">Bekijk volledig profiel</span>
         </a>
       </div>
+
+      {/* Popup-gallery */}
+      {lightboxIndex !== null && effectivePosts && (
+        <MediaLightbox
+          posts={effectivePosts}
+          index={lightboxIndex}
+          feed={feed}
+          onClose={() => setLightboxIndex(null)}
+          onNav={(dir) => setLightboxIndex((cur) => {
+            if (cur === null) return cur;
+            const n = effectivePosts.length;
+            return (cur + dir + n) % n;
+          })}
+        />
+      )}
     </section>
   );
 };
