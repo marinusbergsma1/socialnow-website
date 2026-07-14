@@ -84,7 +84,7 @@ const results = [
   {
     client: "VDZ-BRIGADE",
     status: "ACTIVE_PARTNERSHIP",
-    context: "Van nul online aanwezigheid naar 6 leads per dag. Branding vanaf 0, AI-content en analytics. Investering 10x terugverdiend.",
+    context: "Van nul online aanwezigheid naar 10+ leads per dag. Branding vanaf 0, AI-content en analytics. Investering 10x terugverdiend.",
     metric1: "Eerste 3 opdrachten: €10K tot €30K",
     metric2: "In slechts 2 maanden",
     stat: 10,

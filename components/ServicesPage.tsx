@@ -100,7 +100,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
       </div>
 
       {/* ─── HET PROBLEEM ─── */}
-      <div className="container mx-auto px-6 max-w-6xl mb-20 md:mb-32">
+      <div className="container mx-auto px-6 max-w-4xl mb-20 md:mb-32">
         <div className="text-center mb-10 md:mb-14">
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-[0.85]">
             Stop met jongleren<br />tussen <span className="text-[#F62961]">6 partijen</span>
@@ -135,7 +135,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
       </div>
 
       {/* ─── WAT JE KRIJGT ─── */}
-      <div className="container mx-auto px-6 max-w-6xl mb-20 md:mb-32">
+      <div className="container mx-auto px-6 max-w-5xl mb-20 md:mb-32">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-4">
             Wat je <span className="text-[#25D366]">krijgt</span>
@@ -265,7 +265,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
       </div>
 
       {/* ─── RESULTAAT ─── */}
-      <div className="container mx-auto px-6 max-w-4xl mb-20 md:mb-32">
+      <div className="container mx-auto px-6 max-w-2xl mb-20 md:mb-32">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-4">
             Bewezen <span className="text-[#F7E644]">resultaat</span>
@@ -277,17 +277,17 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#00A3E0]">CASE STUDY: VDZ-BRIGADE</span>
           </div>
           <h3 className="text-2xl md:text-4xl font-black text-white tracking-tighter mb-3">
-            0 → 6 leads<span className="text-[#00A3E0]">/dag</span>
+            10+ leads<span className="text-[#00A3E0]">/dag</span>
           </h3>
           <p className="text-gray-500 text-sm font-medium leading-relaxed mb-4">
-            Van nul online aanwezigheid naar 6 gekwalificeerde leads per dag, in slechts 2 maanden. Branding vanaf 0 opgebouwd, AI-content ingezet, analytics continu gemonitord.
+            Van nul online aanwezigheid naar 10+ gekwalificeerde leads per dag, in slechts 2 maanden. Branding vanaf 0 opgebouwd, AI-content ingezet, analytics continu gemonitord.
           </p>
           <p className="text-gray-400 text-xs font-bold leading-relaxed mb-6">
             De eerste 3 opdrachten: tussen <span className="text-white">€10.000 en €30.000</span>. Totale investering? <span className="text-[#25D366] font-black">10x terugverdiend.</span>
           </p>
           <div className="grid grid-cols-3 gap-3">
             {[
-              { label: 'Leads/dag', value: '6' },
+              { label: 'Leads/dag', value: '10+' },
               { label: 'Doorlooptijd', value: '2 mnd' },
               { label: 'ROI', value: '10x' },
             ].map((stat) => (

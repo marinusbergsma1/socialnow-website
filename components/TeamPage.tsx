@@ -22,7 +22,7 @@ const founder = {
   quote:
     '"Ik startte SocialNow met één overtuiging: de beste merken worden gebouwd door mensen die technologie omarmen, niet vrezen."',
   sub:
-    'Van Amsterdam Light Festival en AZ Alkmaar tot een eigen studio. Marinus richtte SocialNow op in 2021 en bewaakt elk concept persoonlijk, zonder accountmanager ertussen.',
+    'Van campagnes voor Amsterdam Light Festival en AZ Alkmaar tot een eigen AI-studio. Marinus richtte SocialNow op in 2021 en bewaakt elk project persoonlijk. Voor de uitvoering schakelt hij per opdracht de scherpste specialisten en zzp\'ers uit zijn netwerk in — precies de juiste vakmensen, precies wanneer jouw project erom vraagt. Geen accountmanager, geen ruis: je werkt direct met de maker.',
 };
 
 interface CrewMember {
@@ -124,7 +124,7 @@ const pillars = [
     icon: UserCheck,
     color: '#F62961',
     title: 'Alleen specialisten',
-    copy: 'Geen junioren die op jouw project leren. Acht mensen, acht vakgebieden, nul overhead.',
+    copy: 'Geen junioren die op jouw project leren. Ervaren zzp-specialisten uit ons netwerk, elk in hun eigen vakgebied — precies ingezet waar jouw project ze nodig heeft, nul overhead.',
   },
 ];
 
@@ -152,7 +152,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
   useSEO({
     title: 'Team',
     description:
-      'Het team achter de AI: acht specialisten in Amsterdam plus één AI-systeem dat het zware werk doet, versterkt door een vast netwerk van developers en gespecialiseerde bureaus. Geen managementlagen, geen ruis, direct contact met de makers.',
+      'Een compacte kern in Amsterdam plus een flexibel netwerk van zzp-specialisten — developers, motion, ads en design — per project ingezet en versterkt door één AI-systeem. Geen managementlagen, geen vaste overhead, direct contact met de makers.',
     path: '/team',
   });
 
@@ -167,7 +167,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
   return (
     <div className="min-h-screen text-white pt-28 md:pt-36 pb-20 relative">
       {/* Back button */}
-      <div className="relative z-10 container mx-auto px-6 max-w-6xl mb-8">
+      <div className="relative z-10 container mx-auto px-6 max-w-4xl mb-8">
         <button
           onClick={() => navigate('/')}
           className="inline-flex items-center gap-2 text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors"
@@ -177,21 +177,22 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
         </button>
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-6xl pb-12 px-6">
+      <div className="relative z-10 container mx-auto max-w-4xl pb-12 px-6">
         {/* 1. HERO — VHS-titel + stats + countdown */}
         <div className="mb-14 md:mb-20 animate-fade-in-up">
           <span className="font-mono text-[10px] tracking-[0.4em] text-[#25D366] uppercase block mb-6">
             /// CREW_DOSSIER · AMSTERDAM
           </span>
           <h1 className="sn-vhs text-5xl md:text-8xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-6">
-            HET TEAM<br />ACHTER <span className="text-[#25D366]">DE AI</span>
+            EEN NETWERK<br />VAN <span className="text-[#25D366]">SPECIALISTEN</span>
           </h1>
           <p className="text-gray-400 font-bold text-lg md:text-2xl max-w-2xl leading-tight mb-8">
-            Acht specialisten in Amsterdam. Eén AI-systeem dat het zware werk doet. Geen managementlagen, geen ruis.
-            Daaromheen een vast netwerk van developers, studio's en gespecialiseerde bureaus die per project aanhaken. Zo blijven we compact, maar schalen we naar elke opdracht.
+            Een compacte kern in Amsterdam plus een flexibel netwerk van specialisten en zzp'ers. Per project schakelen we
+            precies de juiste vakmensen in — developers, motion, ads, design — versterkt door één AI-systeem dat het zware werk doet.
+            Geen managementlagen, geen vaste overhead: je betaalt voor talent, niet voor een kantoor vol mensen.
           </p>
           <div className="flex flex-wrap items-center gap-2 md:gap-3">
-            {['500+ PROJECTEN', 'SINDS 2021', '8 SPECIALISTEN + 1 AI', 'FLEXIBEL PARTNERNETWERK'].map((stat) => (
+            {['500+ PROJECTEN', 'SINDS 2021', 'NETWERK VAN ZZP-SPECIALISTEN', 'PER PROJECT GESCHAALD'].map((stat) => (
               <span
                 key={stat}
                 className="sn-warp-tile rounded-full px-4 py-2 md:px-5 md:py-2.5 font-mono text-[9px] md:text-[10px] tracking-widest text-white/80 uppercase"
@@ -268,13 +269,18 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
 
         {/* 4. CREW INDEX — interactief dossier: lijst links, live preview rechts */}
         <div className="mb-16 md:mb-24">
-          <div className="flex items-end justify-between mb-8 md:mb-12">
-            <h2 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none">
-              DE <span className="text-[#00A3E0]">CREW</span>
-            </h2>
-            <span className="font-mono text-[10px] tracking-widest text-white/30 uppercase hidden md:block">
-              INDEX 02 → 08
-            </span>
+          <div className="mb-8 md:mb-12">
+            <div className="flex items-end justify-between">
+              <h2 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none">
+                DE <span className="text-[#00A3E0]">SPECIALISTEN</span>
+              </h2>
+              <span className="font-mono text-[10px] tracking-widest text-white/30 uppercase hidden md:block">
+                INDEX 02 → 08
+              </span>
+            </div>
+            <p className="text-gray-400 font-medium text-sm md:text-base mt-4 max-w-2xl leading-relaxed">
+              De vakmensen uit ons netwerk waarmee we het vaakst werken. Elk een eigen specialisme, elk zelfstandig ondernemer of vaste partner — per opdracht ingezet, nooit als overhead.
+            </p>
           </div>
 
           {/* Desktop: index + preview */}
@@ -425,10 +431,10 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
               /// WAAROM_KLEIN_WERKT
             </span>
             <h2 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-[0.9]">
-              8 MENSEN <span className="text-[#25D366]">+ 1 AI-SYSTEEM</span>
+              KERN <span className="text-[#25D366]">+ NETWERK + AI</span>
             </h2>
             <p className="text-gray-400 font-bold text-base md:text-xl mt-5 leading-tight">
-              Daarom leveren wij meer dan een bureau van veertig man.
+              Een klein vast team, een groot netwerk van zzp-specialisten en één AI-systeem. Daarom leveren wij meer dan een bureau van veertig man — zonder de overhead van veertig man.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
