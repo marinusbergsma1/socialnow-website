@@ -100,7 +100,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
       </div>
 
       {/* ─── HET PROBLEEM ─── */}
-      <div className="container mx-auto px-6 max-w-4xl mb-20 md:mb-32">
+      <div className="max-w-4xl mx-auto px-6 mb-20 md:mb-32">
         <div className="text-center mb-10 md:mb-14">
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-[0.85]">
             Stop met jongleren<br />tussen <span className="text-[#F62961]">6 partijen</span>
@@ -135,7 +135,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
       </div>
 
       {/* ─── WAT JE KRIJGT ─── */}
-      <div className="container mx-auto px-6 max-w-5xl mb-20 md:mb-32">
+      <div className="max-w-5xl mx-auto px-6 mb-20 md:mb-32">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-4">
             Wat je <span className="text-[#25D366]">krijgt</span>
@@ -265,7 +265,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
       </div>
 
       {/* ─── RESULTAAT ─── */}
-      <div className="container mx-auto px-6 max-w-2xl mb-20 md:mb-32">
+      <div className="max-w-2xl mx-auto px-6 mb-20 md:mb-32">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-[0.85] mb-4">
             Bewezen <span className="text-[#F7E644]">resultaat</span>

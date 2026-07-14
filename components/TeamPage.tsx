@@ -167,7 +167,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
   return (
     <div className="min-h-screen text-white pt-28 md:pt-36 pb-20 relative">
       {/* Back button */}
-      <div className="relative z-10 container mx-auto px-6 max-w-4xl mb-8">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 mb-8">
         <button
           onClick={() => navigate('/')}
           className="inline-flex items-center gap-2 text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors"
@@ -177,7 +177,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
         </button>
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-4xl pb-12 px-6">
+      <div className="relative z-10 max-w-4xl mx-auto pb-12 px-6">
         {/* 1. HERO — VHS-titel + stats + countdown */}
         <div className="mb-14 md:mb-20 animate-fade-in-up">
           <span className="font-mono text-[10px] tracking-[0.4em] text-[#25D366] uppercase block mb-6">
