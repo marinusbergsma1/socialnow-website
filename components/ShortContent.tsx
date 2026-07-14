@@ -450,7 +450,7 @@ const SelfImprovingHeadline: React.FC = () => {
     <div ref={hostRef} className="relative inline-block">
       <div
         aria-hidden="true"
-        className="sn-milo absolute bottom-[calc(100%-0.7em)] right-[-1em] w-40 md:w-80 lg:w-[26rem] pointer-events-none select-none z-10"
+        className="sn-milo absolute bottom-[calc(100%-0.7em)] right-[-0.5em] w-52 md:w-80 lg:w-[26rem] pointer-events-none select-none z-10"
       >
         {/* webm met echt alpha-kanaal (zwart weggekeyd) — mp4 als fallback */}
         {MILO_STEPS.map((s, i) => (
