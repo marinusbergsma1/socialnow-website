@@ -471,11 +471,10 @@ h3:not(.sn-vhs-off)::after,
   mix-blend-mode: screen;
   display: block;
   width: 100%;
-  /* VHS-scanlines als mask op de beeldpixels zelf: zichtbaar op Milo, maar
-     nooit een overlay-blok over watermarks/achtergrond (het oude ::after met
-     multiply verdonkerde het hele videovlak tot een zichtbaar zwart blok) */
-  -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 1px, rgba(0, 0, 0, 0.72) 1px 3px);
-  mask-image: repeating-linear-gradient(to bottom, #000 0 1px, rgba(0, 0, 0, 0.72) 1px 3px);
+  /* GEEN mask/filter hier: een CSS-mask forceert op mobiel een geïsoleerde
+     compositing-laag, waardoor mix-blend-mode:screen tegen zwart blendt i.p.v.
+     de pagina → het zwarte videovlak kwam terug. Zonder mask blend Milo overal
+     (pc én mobiel) schoon in de zwarte pagina. */
 }
 
 /* Frosted glass (de aangeleverde .glass-card) + gloeiende outline die rondloopt */

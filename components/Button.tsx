@@ -66,11 +66,12 @@ const Button: React.FC<ButtonProps> = ({
   } else if (isGlass) {
     variantClasses = "bg-white/5 backdrop-blur-md border-white/10 text-white hover:border-white/30";
   } else if (variant === 'primary') {
-    variantClasses = "bg-white text-black border-white";
+    // Knop-tekst altijd wit → donkere basis i.p.v. wit-op-wit
+    variantClasses = "bg-[#141414] text-white border-white/20 hover:border-white/40";
   } else if (variant === 'outline') {
-    variantClasses = "bg-transparent border-white text-white hover:border-white hover:text-black";
+    variantClasses = "bg-transparent border-white text-white hover:border-white";
   } else if (variant === 'ghost') {
-    variantClasses = "bg-transparent border-transparent text-white hover:text-[#00A3E0]";
+    variantClasses = "bg-transparent border-transparent text-white";
   }
 
   return (
@@ -85,7 +86,7 @@ const Button: React.FC<ButtonProps> = ({
       {/* Background Fill Layer */}
       {isGreen && <div className="absolute inset-0 bg-[#25D366] translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
       {isPink && <div className="absolute inset-0 bg-[#F62961] translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
-      {variant === 'outline' && <div className="absolute inset-0 bg-white translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
+      {variant === 'outline' && <div className="absolute inset-0 bg-white/10 translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
       {isGlass && <div className="absolute inset-0 bg-white/20 translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
 
       {/* Glans-laag: 3D-highlight boven de fill, onder de tekst (altijd) */}

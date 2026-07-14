@@ -1,33 +1,13 @@
 import React from 'react';
 import { ShieldCheck } from 'lucide-react';
+import { ChatTile, SecureTile, GrowthTile } from './TrustTilesLive';
 
 /**
- * TrustSection — Revolut-stijl: rustige centrale kop + trust-copy,
- * daaronder drie statische afgeronde tiles naast elkaar (middelste iets
- * hoger), elk met een titel bovenin en een visual die onderin uitloopt.
+ * TrustSection — Revolut-stijl: rustige centrale kop + trust-copy, daaronder
+ * drie afgeronde tiles (middelste iets hoger). De visuals zijn nu code-
+ * geanimeerd (Remotion-stijl, live CSS/SVG) i.p.v. statische afbeeldingen —
+ * ze herstarten bij wegscrollen.
  */
-
-interface Tile {
-  img: string;
-  title: string;
-  offset?: boolean;
-}
-
-const tiles: Tile[] = [
-  {
-    img: 'images/trust-service.webp',
-    title: 'Korte lijntjes: direct contact via WhatsApp',
-  },
-  {
-    img: 'images/trust-secure.webp',
-    title: 'Veilig gebouwd: moderne code, SSL en dagelijkse back-ups',
-    offset: true,
-  },
-  {
-    img: 'images/trust-growth.webp',
-    title: 'Meetbare groei, transparant gerapporteerd',
-  },
-];
 
 const TrustSection: React.FC = () => {
   return (
@@ -52,29 +32,11 @@ const TrustSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Revolut-stijl tiles */}
+        {/* Code-geanimeerde tiles (Remotion-stijl) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto md:items-start">
-          {tiles.map((tile) => (
-            <div
-              key={tile.img}
-              className={`relative rounded-[28px] overflow-hidden border border-white/[0.06] bg-[#0a0a0a] aspect-[0.72] group transition-all duration-500 hover:border-white/[0.14] ${tile.offset ? 'md:-mt-8' : 'md:mt-8'}`}
-            >
-              {/* Visual vult de hele tile, Revolut-stijl */}
-              <img
-                src={`${import.meta.env.BASE_URL}${tile.img}`}
-                alt={tile.title}
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-              />
-              {/* Leesbaarheids-gradient bovenin */}
-              <div className="absolute inset-x-0 top-0 h-[42%] bg-gradient-to-b from-black/75 via-black/35 to-transparent pointer-events-none" />
-              {/* Titel eroverheen, Revolut-stijl */}
-              <h3 className="relative z-10 p-6 md:p-7 text-white font-bold tracking-tight leading-snug text-lg md:text-xl max-w-[22ch]">
-                {tile.title}
-              </h3>
-            </div>
-          ))}
+          <div className="md:mt-8"><ChatTile /></div>
+          <div className="md:-mt-8"><SecureTile /></div>
+          <div className="md:mt-8"><GrowthTile /></div>
         </div>
 
       </div>

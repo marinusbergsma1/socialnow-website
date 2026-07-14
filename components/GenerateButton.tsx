@@ -135,7 +135,7 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
         .sn-generate-btn .btn-letter {
           position: relative;
           display: inline-block;
-          color: #fff5;
+          color: #fff;
           animation: sn-letter-anim 2s ease-in-out infinite;
           transition:
             color var(--transition),
@@ -353,7 +353,7 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
           filter: drop-shadow(0 0 16px rgba(37, 211, 102, 0.55)) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.5));
         }
         .sn-generate-btn.is-filled .btn-letter {
-          color: rgba(255, 255, 255, 0.92);
+          color: #fff;
         }
         @keyframes sn-letter-anim-filled {
           50% { text-shadow: 0 0 4px #fff; color: #fff; }
