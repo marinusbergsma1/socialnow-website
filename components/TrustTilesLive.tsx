@@ -76,7 +76,7 @@ export const ChatTile: React.FC = () => {
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-2/3 h-10 rounded-full bg-[#25D366]/30 blur-2xl" style={{ animation: 'sn-tt-glow 3.2s ease-in-out infinite' }} />
       </div>
       <div className="absolute inset-x-0 top-0 h-[42%] bg-gradient-to-b from-black/75 via-black/35 to-transparent pointer-events-none" />
-      <h3 className={TITLE_CLASS}>Korte lijntjes: direct contact via WhatsApp</h3>
+      <h3 className={TITLE_CLASS}>Direct contact via WhatsApp</h3>
     </div>
   );
 };
@@ -126,7 +126,7 @@ export const SecureTile: React.FC = () => {
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-3/5 h-14 rounded-[100%] bg-white/25 blur-3xl" style={{ animation: 'sn-tt-pool 4.5s ease-in-out infinite' }} />
       </div>
       <div className="absolute inset-x-0 top-0 h-[42%] bg-gradient-to-b from-black/75 via-black/35 to-transparent pointer-events-none" />
-      <h3 className={TITLE_CLASS}>Veilig gebouwd: moderne code, SSL en dagelijkse back-ups</h3>
+      <h3 className={TITLE_CLASS}>Veilig gebouwd &amp; geback-upt</h3>
     </div>
   );
 };
@@ -182,7 +182,7 @@ export const GrowthTile: React.FC = () => {
         </div>
       </div>
       <div className="absolute inset-x-0 top-0 h-[42%] bg-gradient-to-b from-black/75 via-black/35 to-transparent pointer-events-none" />
-      <h3 className={TITLE_CLASS}>Meetbare groei, transparant gerapporteerd</h3>
+      <h3 className={TITLE_CLASS}>Meetbare groei</h3>
     </div>
   );
 };
