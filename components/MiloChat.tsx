@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Send, X } from 'lucide-react';
+import { Send, X, Info } from 'lucide-react';
+
+const MAX_CHARS = 500;
 
 /**
  * MiloChat — persoonlijke AI-assistent, getraind op SocialNow-data.
@@ -119,7 +121,7 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
   const [input, setInput] = useState('');
   const [typing, setTyping] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 300);
@@ -224,25 +226,49 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
         ))}
       </div>
 
-      {/* Invoer */}
+      {/* Invoer — rijke glowende composer */}
       <form
         onSubmit={(e) => { e.preventDefault(); ask(input); }}
-        className="flex items-center gap-2 px-4 py-3 border-t border-white/[0.07]"
+        className="px-4 pb-3 pt-2 border-t border-white/[0.07]"
       >
-        <input
-          ref={inputRef}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Stel je vraag aan Milo…"
-          className="flex-1 bg-white/[0.05] border border-white/10 rounded-full px-4 py-2.5 text-[13px] text-white placeholder-white/30 outline-none focus:border-[#25D366]/50 transition-colors"
-        />
-        <button
-          type="submit"
-          aria-label="Versturen"
-          className="w-10 h-10 shrink-0 rounded-full bg-[#25D366] text-black flex items-center justify-center hover:shadow-[0_0_16px_rgba(37,211,102,0.5)] active:scale-95 transition-all"
-        >
-          <Send size={16} />
-        </button>
+        <div className="relative rounded-2xl bg-white/[0.04] border border-white/10 focus-within:border-[#25D366]/50 focus-within:shadow-[0_0_20px_rgba(37,211,102,0.15)] transition-all overflow-hidden">
+          <textarea
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value.slice(0, MAX_CHARS))}
+            onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ask(input); } }}
+            rows={2}
+            maxLength={MAX_CHARS}
+            placeholder="Stel je vraag aan Milo — diensten, prijzen, de gratis demo…"
+            className="w-full resize-none bg-transparent px-4 pt-3 pb-2 text-[13px] leading-relaxed text-white placeholder-white/30 outline-none"
+            style={{ scrollbarWidth: 'none' }}
+          />
+          <div className="flex items-center justify-between px-3 pb-2.5">
+            <span className="text-[10px] font-medium text-white/30 tabular-nums">
+              {input.length}<span className="text-white/20">/{MAX_CHARS}</span>
+            </span>
+            <button
+              type="submit"
+              aria-label="Versturen"
+              disabled={!input.trim()}
+              className="group relative w-9 h-9 shrink-0 rounded-xl bg-gradient-to-br from-[#25D366] to-[#17a94d] text-black flex items-center justify-center transition-all duration-300 enabled:hover:scale-110 enabled:hover:shadow-[0_0_18px_rgba(37,211,102,0.6)] enabled:active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <Send size={15} className="transition-transform duration-300 group-enabled:group-hover:-translate-y-0.5 group-enabled:group-hover:translate-x-0.5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Footer — hint + status */}
+        <div className="flex items-center justify-between mt-2 text-[10px] text-white/30 gap-4">
+          <span className="flex items-center gap-1.5">
+            <Info size={11} />
+            <kbd className="px-1.5 py-0.5 bg-white/[0.06] border border-white/10 rounded text-white/50 font-mono">Shift + Enter</kbd> voor nieuwe regel
+          </span>
+          <span className="flex items-center gap-1.5 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
+            Milo is online
+          </span>
+        </div>
       </form>
     </div>
   );
