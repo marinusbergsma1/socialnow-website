@@ -5,7 +5,10 @@ interface LoaderProps {
   onComplete: () => void;
 }
 
-const VIDEO_SRC = `${import.meta.env.BASE_URL}video/header-intro.mp4?v=8`;
+// Mobiel krijgt zijn eigen logo-animatie; keuze op mount (viewport-breedte)
+const VIDEO_SRC = (typeof window !== 'undefined' && window.innerWidth < 768)
+  ? `${import.meta.env.BASE_URL}video/header-intro-mobile.mp4?v=9`
+  : `${import.meta.env.BASE_URL}video/header-intro.mp4?v=9`;
 
 const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
   const [isExiting, setIsExiting] = useState(false);
@@ -40,10 +43,10 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     }
 
     // Safety net: if onEnded never fires (e.g. stalled playback), exit after
-    // the video's ~5.25s runtime plus a small buffer.
+    // the video's ~4.5s runtime plus a small buffer.
     const safetyTimer = setTimeout(() => {
       triggerExit(400);
-    }, 5800);
+    }, 5100);
 
     return () => {
       isMounted.current = false;

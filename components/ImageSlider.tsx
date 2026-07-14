@@ -73,10 +73,26 @@ const MarqueeRow: React.FC<{ images: SliderImage[]; speed: number; reverse?: boo
   const reverseRef = useRef(reverse);
 
   useEffect(() => {
-    if (!trackRef.current) return;
-    singleSetWidthRef.current = trackRef.current.scrollWidth / numSets;
-    posRef.current = singleSetWidthRef.current;
-  }, [images.length]);
+    const track = trackRef.current;
+    if (!track) return;
+    // Hermeten zodra afbeeldingen (lazy, w-auto) binnenkomen: een eenmalige meting
+    // bij mount ziet 0px-brede imgs → verkeerde wrap-afstand → afgebroken/lege rij.
+    const measure = () => {
+      const w = track.scrollWidth / numSets;
+      if (w > 0 && Math.abs(w - singleSetWidthRef.current) > 1) {
+        singleSetWidthRef.current = w;
+        posRef.current = w; // opnieuw uitlijnen op de middelste set
+      }
+    };
+    measure();
+    // 'load' bubbelt niet — capture-fase vangt elke img-load binnen de track
+    track.addEventListener('load', measure, true);
+    window.addEventListener('resize', measure, { passive: true });
+    return () => {
+      track.removeEventListener('load', measure, true);
+      window.removeEventListener('resize', measure);
+    };
+  }, [images.length, numSets]);
 
   const animate = useCallback(() => {
     const singleSetWidth = singleSetWidthRef.current;

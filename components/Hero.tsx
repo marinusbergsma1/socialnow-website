@@ -146,7 +146,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
               morphText="Let's meet"
               icon={<Handshake strokeWidth={2.25} />}
               onClick={onOpenBooking}
-              className="text-lg md:text-2xl"
+              className="text-sm md:text-2xl"
             />
           </div>
 
