@@ -246,7 +246,7 @@ const App: React.FC = () => {
 
       {!isSubPage && loading && <Loader onComplete={() => { sessionStorage.setItem('sn_loaded', '1'); setLoading(false); }} />}
 
-      <div className={`transition-opacity duration-700 ease-out ${loading ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`transition-opacity duration-300 ease-out ${loading ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <Navbar onOpenBooking={() => setIsBookingOpen(true)} onOpenContact={() => setIsContactOpen(true)} />
       </div>
 

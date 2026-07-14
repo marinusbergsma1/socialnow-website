@@ -10,9 +10,27 @@ import React from 'react';
 interface GenerateButtonProps {
   onClick?: () => void;
   className?: string;
+  /** Rusttekst op de knop (default "Generate"). */
+  text?: string;
+  /** Morph-tekst bij focus/klik (default "Generating"). */
+  morphText?: string;
 }
 
-const GenerateButton: React.FC<GenerateButtonProps> = ({ onClick, className = '' }) => {
+// Splitst een string in letter-spans; spaties worden een smalle spacer (animeren niet).
+const renderLetters = (s: string) =>
+  s.split('').map((ch, i) =>
+    ch === ' '
+      ? <span key={i} aria-hidden className="btn-space">&nbsp;</span>
+      : <span key={i} className="btn-letter">{ch}</span>
+  );
+
+const GenerateButton: React.FC<GenerateButtonProps> = ({
+  onClick,
+  className = '',
+  text = 'Generate',
+  morphText = 'Generating',
+}) => {
+  const sizer = text.length >= morphText.length ? text : morphText;
   return (
     <div className={`sn-generate-btn ${className}`}>
       <style>{`
@@ -147,12 +165,21 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({ onClick, className = ''
           position: relative;
           display: flex;
           align-items: center;
-          min-width: 6.4em;
+        }
+        .sn-generate-btn .txt-sizer {
+          visibility: hidden;
+          white-space: nowrap;
+          pointer-events: none;
+        }
+        .sn-generate-btn .btn-space {
+          display: inline-block;
+          width: 0.28em;
         }
         .sn-generate-btn .txt-1,
         .sn-generate-btn .txt-2 {
           position: absolute;
-          word-spacing: -1em;
+          left: 0;
+          white-space: nowrap;
         }
         .sn-generate-btn .txt-1 {
           animation: sn-appear-anim 1s ease-in-out forwards;
@@ -291,27 +318,9 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({ onClick, className = ''
             <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
           </svg>
           <div className="txt-wrapper">
-            <div className="txt-1">
-              <span className="btn-letter">G</span>
-              <span className="btn-letter">e</span>
-              <span className="btn-letter">n</span>
-              <span className="btn-letter">e</span>
-              <span className="btn-letter">r</span>
-              <span className="btn-letter">e</span>
-              <span className="btn-letter">e</span>
-              <span className="btn-letter">r</span>
-            </div>
-            <div className="txt-2">
-              <span className="btn-letter">G</span>
-              <span className="btn-letter">e</span>
-              <span className="btn-letter">n</span>
-              <span className="btn-letter">e</span>
-              <span className="btn-letter">r</span>
-              <span className="btn-letter">e</span>
-              <span className="btn-letter">r</span>
-              <span className="btn-letter">e</span>
-              <span className="btn-letter">n</span>
-            </div>
+            <span className="txt-sizer" aria-hidden="true">{sizer}</span>
+            <div className="txt-1">{renderLetters(text)}</div>
+            <div className="txt-2">{renderLetters(morphText)}</div>
           </div>
         </button>
       </div>

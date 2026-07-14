@@ -15,7 +15,7 @@ export default {
         'fade-in-up': 'fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'fade-in-right': 'fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'fade-in': 'fadeIn 0.8s ease-out forwards',
-        'page-fade-in': 'pageFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'page-fade-in': 'pageFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'move-background': 'moveBackground 8s ease-in-out infinite',
         'counter-up': 'counterUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'pulse-glow-cyan': 'pulseGlowCyan 3s ease-in-out infinite',

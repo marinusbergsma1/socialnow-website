@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
 import { Star } from 'lucide-react';
 import MiloHeaderShow, { useMiloShow } from './MiloHeaderShow';
+import GenerateButton from './GenerateButton';
 
 interface HeroProps {
   startAnimation: boolean;
@@ -36,55 +37,6 @@ const words = [
   { text: "ANALYTICS", color: "text-[#00A3E0]", duration: 2000 },
   { text: "GROWTH", color: "text-[#25D366]", duration: 2000 }
 ];
-
-// Binary decode effect: shows 0s and 1s that resolve into the real text
-const BinaryReveal: React.FC<{ text: string }> = ({ text }) => {
-  const [chars, setChars] = useState<string[]>(text.split('').map(c => c === ' ' ? ' ' : Math.random() > 0.5 ? '1' : '0'));
-  const [resolved, setResolved] = useState(false);
-
-  useEffect(() => {
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    text.split('').forEach((char, i) => {
-      if (char === ' ') return;
-      // Each character resolves after a staggered delay
-      const delay = 800 + i * 120 + Math.random() * 200;
-      // Intermediate flicker
-      const flicker1 = setTimeout(() => {
-        setChars(prev => { const next = [...prev]; next[i] = Math.random() > 0.5 ? '1' : '0'; return next; });
-      }, delay * 0.4);
-      const flicker2 = setTimeout(() => {
-        setChars(prev => { const next = [...prev]; next[i] = Math.random() > 0.5 ? '1' : '0'; return next; });
-      }, delay * 0.7);
-      const resolve = setTimeout(() => {
-        setChars(prev => { const next = [...prev]; next[i] = char; return next; });
-      }, delay);
-      timers.push(flicker1, flicker2, resolve);
-    });
-    // Mark fully resolved
-    const final = setTimeout(() => setResolved(true), 800 + text.length * 120 + 300);
-    timers.push(final);
-    return () => timers.forEach(clearTimeout);
-  }, [text]);
-
-  return (
-    <span className="inline-flex">
-      {chars.map((c, i) => {
-        const isReal = c === text[i];
-        return (
-          <span
-            key={i}
-            className={`inline-block transition-all duration-300 ${
-              c === ' ' ? 'w-[0.3em]' : ''
-            } ${isReal ? 'text-[#25D366]' : 'text-[#25D366]/40 font-mono'}`}
-            style={!isReal ? { textShadow: '0 0 8px rgba(37,211,102,0.6)' } : {}}
-          >
-            {c}
-          </span>
-        );
-      })}
-    </span>
-  );
-};
 
 const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
   const [wordIndex, setWordIndex] = useState(0);
@@ -189,11 +141,8 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
               </h1>
           </div>
 
-          <div className={`transition-all duration-700 mt-6 md:mt-14 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.3s' }}>
-            <p className="text-sm md:text-lg font-black uppercase tracking-[0.15em] text-white/80">
-              CUSTOM{' '}
-              <BinaryReveal text="AI SOLUTIONS" />
-            </p>
+          <div className={`flex justify-center transition-all duration-700 mt-6 md:mt-14 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.3s' }}>
+            <GenerateButton text="Let's meet" morphText="Let's meet" onClick={onOpenBooking} />
           </div>
 
           <p className={`max-w-2xl mx-auto text-gray-400 text-sm md:text-xl mb-6 md:mb-8 font-medium leading-relaxed px-6 mt-6 md:mt-8 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.5s' }}>
