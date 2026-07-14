@@ -1,21 +1,15 @@
 import React from 'react';
 
 /**
- * SectionDivider — decoratieve sectie-scheiding: twee schuine trapezia aan de
- * uiteinden met een opening in het midden (aangeleverde SVG-vorm), in de
- * SocialNow-groene merkkleur met subtiele glow. Volle breedte, dun.
+ * SectionDivider — subtiel, dun groen scheidingslijntje. Een enkele fijne lijn
+ * die aan de randen wegvaagt, met een klein oplichtend accent in het midden.
+ * Ingetogen: bedoeld om af en toe secties rustig te scheiden.
  */
 const SectionDivider: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <div className={`w-full max-w-6xl mx-auto px-6 py-10 md:py-16 ${className}`} aria-hidden="true">
-    <svg
-      viewBox="0 0 1035.78 22.73"
-      preserveAspectRatio="none"
-      className="w-full h-[10px] md:h-[14px] block"
-      style={{ filter: 'drop-shadow(0 0 10px rgba(37,211,102,0.55))' }}
-    >
-      <polygon fill="#25D366" points="782.1 0 774.31 22.73 1035.78 22.73 1035.78 0 782.1 0" />
-      <polygon fill="#25D366" points="0 0 0 22.73 236.37 22.73 228.55 0 0 0" />
-    </svg>
+  <div className={`w-full flex items-center justify-center py-10 md:py-14 ${className}`} aria-hidden="true">
+    <span className="h-px w-full max-w-[220px] bg-gradient-to-r from-transparent via-[#25D366]/40 to-transparent" />
+    <span className="mx-3 w-1.5 h-1.5 rounded-full bg-[#25D366] shadow-[0_0_8px_rgba(37,211,102,0.7)] shrink-0" />
+    <span className="h-px w-full max-w-[220px] bg-gradient-to-r from-transparent via-[#25D366]/40 to-transparent" />
   </div>
 );
 
