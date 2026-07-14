@@ -63,16 +63,18 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
           background-color: var(--button-color);
 
           box-shadow:
-            inset 0px 1px 1px rgba(255, 255, 255, 0.2),
-            inset 0px 2px 2px rgba(255, 255, 255, 0.15),
-            inset 0px 4px 4px rgba(255, 255, 255, 0.1),
-            inset 0px 8px 8px rgba(255, 255, 255, 0.05),
-            inset 0px 16px 16px rgba(255, 255, 255, 0.05),
+            inset 0px 1px 1px rgba(255, 255, 255, 0.30),
+            inset 0px 2px 2px rgba(255, 255, 255, 0.22),
+            inset 0px 4px 4px rgba(255, 255, 255, 0.15),
+            inset 0px 8px 8px rgba(255, 255, 255, 0.08),
+            inset 0px 16px 16px rgba(255, 255, 255, 0.07),
+            inset 0px -2px 3px rgba(0, 0, 0, 0.45),
+            inset 0px -8px 14px rgba(0, 0, 0, 0.25),
             0px -1px 1px rgba(0, 0, 0, 0.02),
             0px -2px 2px rgba(0, 0, 0, 0.03),
             0px -4px 4px rgba(0, 0, 0, 0.05),
-            0px -8px 8px rgba(0, 0, 0, 0.06),
-            0px -16px 16px rgba(0, 0, 0, 0.08);
+            0px 3px 6px rgba(0, 0, 0, 0.5),
+            0px 12px 26px rgba(0, 0, 0, 0.45);
 
           border: solid 1px #fff2;
           border-radius: var(--border-radius);
@@ -344,6 +346,11 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
           --button-color: #1fbf59; /* solid groen; witte inset-highlights tillen 'm naar #25D366-look */
           color: #fff;
           border-color: #6bf5a3;
+          /* Extra 3D + neon voor de gevulde CTA (drop-shadow stapelt op de box-shadow) */
+          filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.35)) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
+        }
+        .sn-generate-btn.is-filled .btn:hover {
+          filter: drop-shadow(0 0 16px rgba(37, 211, 102, 0.55)) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.5));
         }
         .sn-generate-btn.is-filled .btn-letter {
           color: rgba(255, 255, 255, 0.92);

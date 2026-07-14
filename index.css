@@ -320,21 +320,30 @@ body {
    Alle box-shadow op het element zelf (niet op een child) zodat overflow-hidden 'm
    niet clipt. .sn-btn3d-sheen is een aparte glans-laag boven de fill, onder de tekst. ═══ */
 .sn-btn3d {
+  --glow: 37, 211, 102; /* default SocialNow-groen; per variant overschreven */
   box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.30),   /* lichte bovenrand (3D) */
-    inset 0 -2px 5px rgba(0, 0, 0, 0.35),          /* diepte onderin (3D) */
-    0 2px 6px rgba(0, 0, 0, 0.45),                 /* slagschaduw */
-    0 0 6px rgba(37, 211, 102, 0.35),              /* neon binnen */
-    0 0 22px rgba(37, 211, 102, 0.22);             /* neon buiten */
+    inset 0 2px 1px rgba(255, 255, 255, 0.42),    /* scherpe lichtrand boven */
+    inset 0 5px 10px rgba(255, 255, 255, 0.14),   /* zachte glans-diepte */
+    inset 0 12px 20px rgba(255, 255, 255, 0.06),  /* verre glans (bolling) */
+    inset 0 -2px 2px rgba(0, 0, 0, 0.55),          /* scherpe schaduwrand onder */
+    inset 0 -9px 16px rgba(0, 0, 0, 0.32),         /* diepte onderin */
+    0 2px 4px rgba(0, 0, 0, 0.55),                 /* korte slagschaduw */
+    0 9px 20px rgba(0, 0, 0, 0.45),                /* lange slagschaduw (zweeft) */
+    0 0 8px rgba(var(--glow), 0.38),               /* neon binnen */
+    0 0 26px rgba(var(--glow), 0.22);              /* neon buiten */
   transition: box-shadow 0.35s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 .sn-btn3d:hover {
   box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -2px 6px rgba(0, 0, 0, 0.35),
-    0 5px 14px rgba(0, 0, 0, 0.5),
-    0 0 10px rgba(37, 211, 102, 0.55),
-    0 0 38px rgba(37, 211, 102, 0.45);
+    inset 0 2px 1px rgba(255, 255, 255, 0.55),
+    inset 0 5px 12px rgba(255, 255, 255, 0.18),
+    inset 0 14px 22px rgba(255, 255, 255, 0.08),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.55),
+    inset 0 -9px 18px rgba(0, 0, 0, 0.30),
+    0 4px 8px rgba(0, 0, 0, 0.55),
+    0 14px 30px rgba(0, 0, 0, 0.5),
+    0 0 12px rgba(var(--glow), 0.6),
+    0 0 44px rgba(var(--glow), 0.45);
 }
 .sn-btn3d-sheen {
   position: absolute;

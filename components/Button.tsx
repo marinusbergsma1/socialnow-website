@@ -50,17 +50,21 @@ const Button: React.FC<ButtonProps> = ({
   }, []);
 
   // STRENG: Vaste hoogte aangepast voor mobiel (h-[46px]) vs desktop (h-[54px])
-  const baseClasses = "relative overflow-hidden rounded-full group cursor-pointer transition-all duration-300 border-2 active:scale-95 h-[46px] md:h-[54px] !py-0 min-w-[160px] md:min-w-[200px] flex items-center justify-center";
+  // sn-btn3d = site-brede 3D-look (lichtrand, diepte, slagschaduw, neon-glow)
+  const baseClasses = "relative overflow-hidden rounded-full group cursor-pointer transition-all duration-300 border-2 active:scale-95 h-[46px] md:h-[54px] !py-0 min-w-[160px] md:min-w-[200px] flex items-center justify-center sn-btn3d";
+
+  // Glow-kleur per variant (voedt --glow in .sn-btn3d)
+  const glowRGB = isGreen ? '37, 211, 102'
+    : isPink ? '246, 41, 97'
+    : '255, 255, 255';
 
   let variantClasses = "";
   if (isGreen) {
-    variantClasses = premium
-      ? "bg-transparent backdrop-blur-md border-[#25D366] text-white sn-btn3d"
-      : "bg-transparent backdrop-blur-md border-[#25D366] text-white hover:shadow-[0_0_25px_rgba(37,211,102,0.5)] neon-glow-green";
+    variantClasses = "bg-transparent backdrop-blur-md border-[#25D366] text-white";
   } else if (isPink) {
-    variantClasses = "bg-transparent backdrop-blur-md border-[#F62961] text-white hover:shadow-[0_0_25px_rgba(246,41,97,0.5)]";
+    variantClasses = "bg-transparent backdrop-blur-md border-[#F62961] text-white";
   } else if (isGlass) {
-    variantClasses = "bg-white/5 backdrop-blur-md border-white/10 text-white hover:border-white/30 hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]";
+    variantClasses = "bg-white/5 backdrop-blur-md border-white/10 text-white hover:border-white/30";
   } else if (variant === 'primary') {
     variantClasses = "bg-white text-black border-white";
   } else if (variant === 'outline') {
@@ -76,7 +80,7 @@ const Button: React.FC<ButtonProps> = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={`${baseClasses} ${variantClasses} ${className}`}
-      style={{ transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease' }}
+      style={{ transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease', ['--glow' as string]: glowRGB }}
     >
       {/* Background Fill Layer */}
       {isGreen && <div className="absolute inset-0 bg-[#25D366] translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
@@ -84,8 +88,8 @@ const Button: React.FC<ButtonProps> = ({
       {variant === 'outline' && <div className="absolute inset-0 bg-white translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
       {isGlass && <div className="absolute inset-0 bg-white/20 translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
 
-      {/* Premium glans-laag: 3D-highlight boven de fill, onder de tekst */}
-      {premium && <div className="sn-btn3d-sheen" aria-hidden="true"></div>}
+      {/* Glans-laag: 3D-highlight boven de fill, onder de tekst (altijd) */}
+      <div className="sn-btn3d-sheen" aria-hidden="true"></div>
 
       {/* Content wrapper */}
       <div className={`relative z-10 flex items-center justify-between w-full h-full font-black uppercase tracking-widest text-[10px] md:text-xs ${icon ? 'pl-4 md:pl-6 pr-1.5' : 'px-6 md:px-8'}`}>

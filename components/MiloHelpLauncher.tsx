@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import MiloChat from './MiloChat';
 
 /**
  * Milo help-launcher — links onderin (spiegelt de WhatsApp-knop rechts).
@@ -17,7 +17,7 @@ const D1 = 900, D2 = 1350, D3 = 1800, DOTS_END = 2500; // ms na entrance
 const WAVE_AT = 2500;                                   // ms — zwaai + tekst
 
 const MiloHelpLauncher: React.FC = () => {
-  const navigate = useNavigate();
+  const [chatOpen, setChatOpen] = useState(false);
   const waveRef = useRef<HTMLVideoElement>(null);
   const [entered, setEntered] = useState(false);
   const [dotCount, setDotCount] = useState(0);
@@ -74,12 +74,15 @@ const MiloHelpLauncher: React.FC = () => {
     setShowHelp(false);
   }, []);
 
-  const openHelp = () => navigate('/contact');
+  // Opent de Milo AI-chat (voorheen: navigatie naar /contact — die route bestaat niet)
+  const openHelp = () => setChatOpen(true);
 
   return (
+    <>
+    <MiloChat open={chatOpen} onClose={() => setChatOpen(false)} />
     <div
       className="fixed bottom-6 left-6 z-[90] flex items-end gap-2.5 transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
-      style={{ transform: entered ? 'translateY(0)' : 'translateY(160px)', opacity: entered ? 1 : 0 }}
+      style={{ transform: entered ? 'translateY(0)' : 'translateY(160px)', opacity: entered && !chatOpen ? 1 : 0, pointerEvents: chatOpen ? 'none' : 'auto' }}
     >
       <style>{`
         @keyframes milo-glow-pulse {
@@ -150,6 +153,7 @@ const MiloHelpLauncher: React.FC = () => {
         )}
       </button>
     </div>
+    </>
   );
 };
 
