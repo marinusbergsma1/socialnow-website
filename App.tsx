@@ -34,6 +34,7 @@ const ProjectShowcase = lazyRetry(() => import('./components/ProjectShowcase'));
 const ShortContent = lazyRetry(() => import('./components/ShortContent'));
 const ServicesMarquee = lazyRetry(() => import('./components/ServicesMarquee'));
 const TrustSection = lazyRetry(() => import('./components/TrustSection'));
+const TrustDemoPage = lazyRetry(() => import('./components/TrustDemoPage'));
 const ProcessSection = lazyRetry(() => import('./components/ProcessSection'));
 const Reviews = lazyRetry(() => import('./components/Reviews'));
 const ImageSlider = lazyRetry(() => import('./components/ImageSlider'));
@@ -331,6 +332,16 @@ const App: React.FC = () => {
               <ErrorBoundary>
                 <Suspense fallback={<PageLoader />}>
                   <PrivacyPage />
+                </Suspense>
+              </ErrorBoundary>
+            }
+          />
+          <Route
+            path="/trust-demo"
+            element={
+              <ErrorBoundary>
+                <Suspense fallback={<PageLoader />}>
+                  <TrustDemoPage />
                 </Suspense>
               </ErrorBoundary>
             }
