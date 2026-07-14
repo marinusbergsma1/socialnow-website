@@ -125,7 +125,7 @@ const MiloHeaderShow: React.FC<MiloHeaderShowProps> = ({ phase, onStart, onFinis
           className={`absolute transition-opacity duration-300 ${phase === 'playing' ? 'opacity-100' : 'opacity-0'}`}
           style={{ top: headlineRect.top, left: headlineRect.left, width: headlineRect.width }}
         >
-          <h1 className="sn-vhs font-black uppercase tracking-tighter text-white leading-[0.9] text-center" aria-hidden="true">
+          <h1 className="sn-vhs font-black uppercase tracking-tighter text-white leading-[1.08] text-center" aria-hidden="true">
             {LINES.map((line) => (
               <div key={line.words[0].text} className={`${LINE_CLASS} ${line.green ? 'text-[#25D366]' : ''}`}>
                 {line.words.map((w, wi) => {

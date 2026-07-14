@@ -14,6 +14,8 @@ interface GenerateButtonProps {
   text?: string;
   /** Morph-tekst bij focus/klik (default "Generating"). */
   morphText?: string;
+  /** Optioneel eigen icoon (bv. een lucide-icon); vervangt de default sparkle. */
+  icon?: React.ReactNode;
 }
 
 // Splitst een string in letter-spans; spaties worden een smalle spacer (animeren niet).
@@ -29,6 +31,7 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
   className = '',
   text = 'Generate',
   morphText = 'Generating',
+  icon,
 }) => {
   const sizer = text.length >= morphText.length ? text : morphText;
   return (
@@ -144,8 +147,8 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
 
         .sn-generate-btn .btn-svg {
           flex-grow: 1;
-          height: 24px;
-          margin-right: 0.5rem;
+          height: 1.5em;
+          margin-right: 0.5em;
           fill: #e8e8e8;
           animation: sn-flicker 2s linear infinite;
           animation-delay: 0.5s;
@@ -154,6 +157,28 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
             fill var(--transition),
             filter var(--transition),
             opacity var(--transition);
+        }
+        /* Eigen (lucide) icoon-slot — stroke-gebaseerd i.p.v. fill, zelfde glow/flicker */
+        .sn-generate-btn .btn-icon {
+          display: inline-flex;
+          align-items: center;
+          margin-right: 0.5em;
+          color: #e8e8e8;
+          animation: sn-flicker 2s linear infinite;
+          animation-delay: 0.5s;
+          filter: drop-shadow(0 0 2px #fff9);
+          transition: color var(--transition), filter var(--transition), opacity var(--transition);
+        }
+        .sn-generate-btn .btn-icon svg {
+          width: 1.35em;
+          height: 1.35em;
+          stroke: currentColor;
+        }
+        .sn-generate-btn .btn:hover .btn-icon {
+          color: #fff;
+          filter: drop-shadow(0 0 3px hsl(var(--highlight-color-hue), 100%, 70%))
+            drop-shadow(0 -4px 6px #0009);
+          animation: none;
         }
         @keyframes sn-flicker {
           50% {
@@ -314,9 +339,13 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
 
       <div className="btn-wrapper">
         <button className="btn" type="button" onClick={onClick}>
-          <svg className="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
-          </svg>
+          {icon ? (
+            <span className="btn-icon" aria-hidden="true">{icon}</span>
+          ) : (
+            <svg className="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+            </svg>
+          )}
           <div className="txt-wrapper">
             <span className="txt-sizer" aria-hidden="true">{sizer}</span>
             <div className="txt-1">{renderLetters(text)}</div>

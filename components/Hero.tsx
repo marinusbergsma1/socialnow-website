@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
-import { Star } from 'lucide-react';
+import { Star, Handshake } from 'lucide-react';
 import MiloHeaderShow, { useMiloShow } from './MiloHeaderShow';
 import GenerateButton from './GenerateButton';
 
@@ -128,7 +128,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
           </div>
 
           <div id="hero-headline" className={`w-full max-w-[1400px] ${playedRef.current ? '' : `transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`}`} style={playedRef.current ? undefined : { animationDelay: '0.1s' }}>
-              <h1 className="sn-vhs font-black uppercase tracking-tighter text-white leading-[0.9] text-center">
+              <h1 className="sn-vhs font-black uppercase tracking-tighter text-white leading-[1.08] text-center">
                 <div className="block text-[2rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.5rem]">
                   JE WEBSITE, CRM,
                 </div>
@@ -141,8 +141,14 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
               </h1>
           </div>
 
-          <div className={`flex justify-center transition-all duration-700 mt-6 md:mt-14 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.3s' }}>
-            <GenerateButton text="Let's meet" morphText="Let's meet" onClick={onOpenBooking} />
+          <div className={`flex justify-center transition-all duration-700 mt-8 md:mt-12 mb-2 md:mb-4 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.3s' }}>
+            <GenerateButton
+              text="Let's meet"
+              morphText="Let's meet"
+              icon={<Handshake strokeWidth={2.25} />}
+              onClick={onOpenBooking}
+              className="text-lg md:text-2xl"
+            />
           </div>
 
           <p className={`max-w-2xl mx-auto text-gray-400 text-sm md:text-xl mb-6 md:mb-8 font-medium leading-relaxed px-6 mt-6 md:mt-8 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.5s' }}>
