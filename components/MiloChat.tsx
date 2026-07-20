@@ -4,6 +4,11 @@ import { Send, X, Info } from 'lucide-react';
 
 const MAX_CHARS = 500;
 
+// Endpoint van de Gemini-proxy (Cloudflare Worker, zie /worker). Leeg = Milo
+// draait puur op de ingebouwde kennisbank. Vul in na deploy van de Worker,
+// bijv. via build-var VITE_MILO_API_URL of hier hardcoded.
+const MILO_API_URL = (import.meta.env.VITE_MILO_API_URL as string | undefined) || '';
+
 /**
  * MiloChat — persoonlijke AI-assistent, getraind op SocialNow-data.
  *
@@ -18,6 +23,9 @@ type Msg = { role: 'milo' | 'user'; text: string; links?: { label: string; href:
 
 const WHATSAPP = 'https://wa.me/31637404577?text=Hoi%20SocialNow!';
 const MAIL = 'mailto:info@socialnow.nl';
+
+// Vaste contact-chip onder elk Gemini-antwoord: Milo blijft op contact sturen.
+const CONTACT_LINKS = [{ label: 'App Marinus', href: WHATSAPP }];
 
 // ─── Kennisbank: SocialNow-data ─────────────────────────────────────────
 type KBEntry = { keywords: string[]; answer: string; links?: { label: string; href: string }[] };
@@ -122,6 +130,8 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
   const [typing, setTyping] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const msgsRef = useRef<Msg[]>(msgs);
+  useEffect(() => { msgsRef.current = msgs; }, [msgs]);
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 300);
@@ -131,17 +141,44 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: 'smooth' });
   }, [msgs, typing]);
 
+  // Vraag Gemini (via de Worker) om een antwoord; geef null terug bij geen URL/fout.
+  const askGemini = async (q: string): Promise<Msg | null> => {
+    if (!MILO_API_URL) return null;
+    // Historie zonder de generieke begroeting, + de nieuwe vraag
+    const history = [...msgsRef.current.filter((m) => m !== GREETING), { role: 'user' as const, text: q }]
+      .map((m) => ({ role: m.role, text: m.text }));
+    try {
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 12000);
+      const res = await fetch(MILO_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history }),
+        signal: ctrl.signal,
+      });
+      clearTimeout(t);
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (!data?.text) return null;
+      return { role: 'milo', text: data.text, links: CONTACT_LINKS };
+    } catch {
+      return null; // val netjes terug op de kennisbank
+    }
+  };
+
   const ask = useCallback((raw: string) => {
     const q = raw.trim();
     if (!q) return;
-    setMsgs(prev => [...prev, { role: 'user', text: q }]);
+    setMsgs((prev) => [...prev, { role: 'user', text: q }]);
     setInput('');
     setTyping(true);
-    // Kort "denk"-moment voor een natuurlijk gevoel
-    setTimeout(() => {
-      setTyping(false);
-      setMsgs(prev => [...prev, getAnswer(q)]);
-    }, 700 + Math.random() * 500);
+    const started = Date.now();
+    askGemini(q).then((remote) => {
+      const reply = remote || getAnswer(q); // Gemini, anders offline kennisbank
+      // Minimaal ~600ms "denken" voor een natuurlijk gevoel
+      const wait = Math.max(0, 600 - (Date.now() - started));
+      setTimeout(() => { setTyping(false); setMsgs((prev) => [...prev, reply]); }, wait);
+    });
   }, []);
 
   if (!open) return null;
