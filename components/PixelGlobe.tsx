@@ -88,29 +88,32 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
     const entranceDuration = 2.5; // seconds
     let startTime: number | null = null;
 
-    const resize = (entries: ResizeObserverEntry[]) => {
-      window.requestAnimationFrame(() => {
-        if (!entries.length) return;
-
-        for (let entry of entries) {
-          const { width: newWidth, height: newHeight } = entry.contentRect;
-          width = Math.floor(newWidth);
-          height = Math.floor(newHeight);
-
-          if (!canvas || !ctx) return;
-
-          const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
-          canvas.width = width * dpr;
-          canvas.height = height * dpr;
-          canvas.style.width = `${width}px`;
-          canvas.style.height = `${height}px`;
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        }
-      });
+    // Maat SYNCHROON toepassen — geen rAF hier: in een achtergrond-tab staat
+    // rAF stil, waardoor de maat nooit gezet werd en het canvas op de default
+    // 300×150 bleef hangen (mini-globe / glitchy beeld bij foreground).
+    const applySize = (newWidth: number, newHeight: number) => {
+      width = Math.floor(newWidth);
+      height = Math.floor(newHeight);
+      if (!canvas || !ctx || width <= 0 || height <= 0) return;
+      const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
-    const observer = new ResizeObserver(resize);
-    if (containerRef.current) observer.observe(containerRef.current);
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        applySize(entry.contentRect.width, entry.contentRect.height);
+      }
+    });
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+      // Directe initiële meting — niet wachten op de eerste RO-callback
+      const rect = containerRef.current.getBoundingClientRect();
+      applySize(rect.width, rect.height);
+    }
 
     // Scroll-reactive rotation
     let scrollRotY = 0;
