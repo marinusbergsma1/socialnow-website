@@ -167,8 +167,32 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
     }
 
     let time = 0;
+    let lastTs: number | null = null;
     const sortedPoints = [...points];
     let sortFrame = 0;
+
+    // ── Glow-sprites: het pixel-blokje mét glow één keer per kleur/maat
+    // voorrenderen. shadowBlur per particle (2000×/frame) was de grote
+    // jank-bron; drawImage van een cache-sprite is een orde sneller. ──
+    const spriteCache = new Map<string, HTMLCanvasElement>();
+    const GLOW_PAD = 12;
+    const getSprite = (color: string, size: number): HTMLCanvasElement => {
+      const key = `${color}_${size}`;
+      let s = spriteCache.get(key);
+      if (!s) {
+        s = document.createElement('canvas');
+        s.width = s.height = size + GLOW_PAD * 2;
+        const sctx = s.getContext('2d')!;
+        if (glowEnabled && !isMobile) {
+          sctx.shadowColor = color;
+          sctx.shadowBlur = 9;
+        }
+        sctx.fillStyle = color;
+        sctx.fillRect(GLOW_PAD, GLOW_PAD, size, size);
+        spriteCache.set(key, s);
+      }
+      return s;
+    };
 
     const render = (timestamp: number) => {
       if (startTime === null) startTime = timestamp;
@@ -181,7 +205,12 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
         entranceProgress = 1 - Math.pow(1 - entranceProgress, 3);
       }
 
-      time += 0.009;
+      // Delta-time i.p.v. per-frame increment: rotatiesnelheid is nu
+      // onafhankelijk van de framerate, dus een trage frame geeft geen schok
+      // en 120Hz-schermen draaien niet dubbel zo snel.
+      const dt = lastTs === null ? 1 / 60 : Math.min(0.05, (timestamp - lastTs) / 1000);
+      lastTs = timestamp;
+      time += dt * 0.54; // 0.009/frame @ 60fps ≡ 0.54/s
       ctx.clearRect(0, 0, width, height);
 
       rotX += (targetRotX - rotX) * 0.05;
@@ -217,11 +246,6 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
           const bz = b.x * Math.sin(effectiveRotY) + b.z * Math.cos(effectiveRotY);
           return bz - az;
         });
-      }
-
-      // Set glow if enabled (disabled on mobile for performance)
-      if (glowEnabled && !isMobile) {
-        ctx.shadowBlur = 9;
       }
 
       // Pre-compute trig values outside the loop
@@ -287,23 +311,14 @@ export const PixelGlobe: React.FC<PixelGlobeProps> = ({
             ? Math.max(3, Math.round((5.5 * perspectiveScale) / 2) * 2)
             : Math.max(2, Math.round((3 * perspectiveScale) / 2) * 2);
 
-          ctx.fillStyle = p.color;
           ctx.globalAlpha = pointAlpha;
-
-          if (glowEnabled && !isMobile) {
-            ctx.shadowColor = p.color;
-          }
-
-          ctx.fillRect(Math.round(px - size/2), Math.round(py - size/2), size, size);
+          const sprite = getSprite(p.color, size);
+          ctx.drawImage(sprite, Math.round(px - size / 2) - GLOW_PAD, Math.round(py - size / 2) - GLOW_PAD);
         }
       }
 
       // Reset
       ctx.globalAlpha = 1;
-      if (glowEnabled) {
-        ctx.shadowBlur = 0;
-        ctx.shadowColor = 'transparent';
-      }
       animationFrameId.current = requestAnimationFrame(renderWithTimestamp);
     };
 

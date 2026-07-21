@@ -47,6 +47,10 @@
     <!-- Resource hints — preconnect for critical origins, dns-prefetch as fallback -->
 <link rel="preconnect" href="https://storage.googleapis.com" crossorigin />
     <link rel="dns-prefetch" href="https://storage.googleapis.com" />
+    <!-- Preload intro-video: start de download parallel aan de JS-bundle,
+         zodat de logo-animatie direct kan spelen (desktop/mobiel apart) -->
+    <link rel="preload" as="video" href="/video/header-intro.mp4?v=9" type="video/mp4" media="(min-width: 768px)" />
+    <link rel="preload" as="video" href="/video/header-intro-mobile.mp4?v=9" type="video/mp4" media="(max-width: 767px)" />
     <!-- Preload critical fonts (only 400 + 700 for initial render) -->
     <link rel="preload" href="/fonts/inter-latin-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter-latin-700.woff2" as="font" type="font/woff2" crossorigin />

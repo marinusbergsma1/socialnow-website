@@ -17,6 +17,15 @@ interface GridBackgroundProps {
 const GridBackground: React.FC<GridBackgroundProps> = ({ hide = false, startAnimation = false }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [globeVisible, setGlobeVisible] = useState(false);
+  // Globe pas starten als de Milo header-show klaar is: tijdens de intro-video
+  // vecht het canvas anders om de main thread → haperende video én globe.
+  // Op subpagina's (geen show) direct starten.
+  const [showDone, setShowDone] = useState(() => {
+    try {
+      if (window.location.pathname !== '/') return true;
+      return sessionStorage.getItem('milo-show') === 'done';
+    } catch { return true; }
+  });
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -26,11 +35,18 @@ const GridBackground: React.FC<GridBackgroundProps> = ({ hide = false, startAnim
   }, []);
 
   useEffect(() => {
-    if (startAnimation && !isMobile) {
+    if (showDone) return;
+    const onDone = () => setShowDone(true);
+    window.addEventListener('milo-show-done', onDone);
+    return () => window.removeEventListener('milo-show-done', onDone);
+  }, [showDone]);
+
+  useEffect(() => {
+    if (startAnimation && showDone && !isMobile) {
       const timer = setTimeout(() => setGlobeVisible(true), 300);
       return () => clearTimeout(timer);
     }
-  }, [startAnimation, isMobile]);
+  }, [startAnimation, showDone, isMobile]);
 
   return (
     <div
@@ -38,7 +54,7 @@ const GridBackground: React.FC<GridBackgroundProps> = ({ hide = false, startAnim
       style={{ overflow: 'clip' }}
     >
       {/* Globe alleen in de hero (bovenste 100vh); desktop-only */}
-      {!isMobile && startAnimation && (
+      {!isMobile && startAnimation && showDone && (
         <div
           className={`absolute left-0 top-0 w-full h-screen transition-opacity duration-[2500ms] ease-out ${globeVisible ? 'opacity-60' : 'opacity-0'}`}
         >
