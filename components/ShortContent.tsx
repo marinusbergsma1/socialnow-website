@@ -140,12 +140,10 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
   const isMobile = isMobileRef.current;
   const screenWidth = screenWidthRef.current;
 
-  // Desktop: responsive card width showing ~3.5 cards in viewport
-  const cardWidth = isMobile
-    ? Math.round(screenWidth * 0.56)
-    : Math.min(480, Math.max(380, Math.round(screenWidth * 0.27)));
-  const cardHeight = Math.round(cardWidth * (16 / 9));
-  const gap = isMobile ? 14 : 32;
+  // Hero-3-marquee stijl: compacte kaarten (geen schermvullende tegels meer)
+  const cardHeight = isMobile ? 230 : 320;
+  const cardWidth = Math.round(cardHeight * (9 / 16));
+  const gap = isMobile ? 12 : 20;
   const totalItemWidth = cardWidth + gap;
   const setLength = videos.length;
   const totalSetWidth = totalItemWidth * setLength;
@@ -342,7 +340,8 @@ const InfiniteVideoSlider: React.FC<{ videos: { src: string }[] }> = ({ videos }
               className="flex-shrink-0 relative"
               style={{
                 width: `${cardWidth}px`,
-                transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
+                // Hero-3-stijl: kaarten afwisselend licht gekanteld
+                transform: `${isHovered ? 'translateY(-8px)' : 'translateY(0)'} rotate(${i % 2 === 0 ? -2 : 3}deg)`,
                 transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 zIndex: isHovered || isUnmuted ? 10 : 1,
               }}

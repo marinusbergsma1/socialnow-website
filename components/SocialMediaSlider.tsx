@@ -149,13 +149,11 @@ const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[]; onOpen: (index: numb
   const isMobile = isMobileRef.current;
   const screenWidth = screenWidthRef.current;
 
-  // Vaste hoogte; de breedte volgt per post uit zijn NATIVE verhouding —
-  // een reel (9:16) is dus smaller dan een carousel (4:5) of een 1:1 post.
-  const baseWidth = isMobile
-    ? Math.round(screenWidth * 0.56)
-    : Math.min(480, Math.max(380, Math.round(screenWidth * 0.27)));
-  const cardHeight = Math.round(baseWidth * (16 / 9));
-  const gap = isMobile ? 14 : 32;
+  // Hero-3-marquee stijl: compacte kaarten. Vaste hoogte; de breedte volgt per
+  // post uit zijn NATIVE verhouding — een reel (9:16) blijft smaller dan een
+  // carousel (4:5) of een 1:1 post, nooit gecropt.
+  const cardHeight = isMobile ? 230 : 320;
+  const gap = isMobile ? 12 : 20;
 
   // Duplicate posts so the loop feels endless even with a small feed
   const repeatCount = posts.length < 6 ? 4 : 2;
@@ -270,7 +268,8 @@ const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[]; onOpen: (index: numb
               className="flex-shrink-0 relative"
               style={{
                 width: `${cardWidths[i % setLength]}px`,
-                transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
+                // Hero-3-stijl: kaarten afwisselend licht gekanteld
+                transform: `${isHovered ? 'translateY(-8px)' : 'translateY(0)'} rotate(${i % 2 === 0 ? -2 : 3}deg)`,
                 transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 zIndex: isHovered ? 10 : 1,
               }}
