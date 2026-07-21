@@ -521,16 +521,23 @@ const ShortContent: React.FC = () => {
         <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">MOTION</h2>
       </div>
 
-      {/* Header — Milo doorloopt de cyclus: plant → analyseert → test → verbetert → opschaalt */}
-      <div className="container mx-auto px-6 relative z-10 text-center mb-4 md:mb-14">
+      {/* Header — Milo doorloopt de cyclus: plant → analyseert → test → verbetert → opschaalt.
+          Hero-3-compositie: content zweeft boven de marquee. */}
+      <div className="container mx-auto px-6 relative z-30 text-center pointer-events-none">
         <SelfImprovingHeadline />
         <p className="text-gray-500 text-xs md:text-base font-medium max-w-lg mx-auto">
           Elke maand automatisch ingepland. AI analyseert je ad-resultaten en vertaalt dat direct naar geoptimaliseerde content. Geen gokwerk, alleen groei.
         </p>
       </div>
 
-      {/* Infinite Loop Video Slider */}
-      <div className="relative">
+      {/* Infinite Loop Video Slider — schuift onder de content door met fade bovenaan */}
+      <div
+        className="relative z-10 -mt-6 md:-mt-12"
+        style={{
+          maskImage: 'linear-gradient(to bottom, transparent, black 24%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 24%)',
+        }}
+      >
         {/* Edge fades */}
         <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />

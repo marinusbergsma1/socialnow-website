@@ -484,15 +484,17 @@ const SocialMediaSlider: React.FC = () => {
         <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white whitespace-nowrap leading-none">SOCIAL</h2>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 text-center mb-4 md:mb-14">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] mb-4 md:mb-6">
+      {/* Hero-3-compositie: content zweeft óver de marquee; kaarten komen er
+          half achter vandaan met een fade bovenaan. */}
+      <div className="container mx-auto px-6 relative z-30 text-center pointer-events-none">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm mb-4 md:mb-6 pointer-events-auto">
           <Instagram size={14} className="text-[#25D366]" />
           <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/60">@socialnow.nl</span>
         </div>
         <h2 className="text-2xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-none mb-3 md:mb-4">
           DAGELIJKS <span className="text-[#25D366]">NIEUW WERK</span>
         </h2>
-        <p className="text-gray-500 text-xs md:text-base font-medium max-w-lg mx-auto">
+        <p className="text-gray-500 text-xs md:text-base font-medium max-w-lg mx-auto pointer-events-auto">
           <a
             href="https://www.instagram.com/socialnow.nl/"
             target="_blank"
@@ -503,24 +505,29 @@ const SocialMediaSlider: React.FC = () => {
           </a>
           {' '}en zie ons nieuwste werk, achter-de-schermen en AI-experimenten. Tik op een post om 'm groot te bekijken.
         </p>
-      </div>
-
-      <div className="relative">
-        <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
-        {effectivePosts === null ? <SliderSkeleton /> : <InfiniteSocialSlider posts={effectivePosts} onOpen={setLightboxIndex} />}
-      </div>
-
-      <div className="container mx-auto px-6 mt-8 md:mt-14 text-center z-10 relative">
         <a
           href="https://www.instagram.com/socialnow.nl/"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/20 transition-all"
+          className="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 mt-6 md:mt-8 rounded-full bg-[#25D366] text-black sn-btn3d hover:scale-105 transition-transform"
         >
-          <Instagram size={16} className="text-[#25D366]" />
-          <span className="text-white text-[11px] md:text-xs font-bold uppercase tracking-[0.25em]">Bekijk volledig profiel</span>
+          <Instagram size={16} />
+          <span className="text-[11px] md:text-xs font-black uppercase tracking-[0.25em]">Bekijk volledig profiel</span>
         </a>
+      </div>
+
+      {/* Marquee schuift onder de content door (negatieve top-marge) met een
+          zachte fade aan de bovenkant, zoals de hero-3-referentie. */}
+      <div
+        className="relative z-10 -mt-8 md:-mt-16"
+        style={{
+          maskImage: 'linear-gradient(to bottom, transparent, black 26%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 26%)',
+        }}
+      >
+        <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
+        {effectivePosts === null ? <SliderSkeleton /> : <InfiniteSocialSlider posts={effectivePosts} onOpen={setLightboxIndex} />}
       </div>
 
       {/* Popup-gallery */}
