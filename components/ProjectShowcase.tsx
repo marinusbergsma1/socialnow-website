@@ -95,7 +95,7 @@ const LazyVideo: React.FC<{
         style={{ backdropFilter: isMobileUnmuted ? 'none' : 'blur(8px)' }}
       >
         {isMobileUnmuted
-          ? <Volume2 size={14} className="text-black" />
+          ? <Volume2 size={14} className="text-white" />
           : <VolumeX size={14} className="text-white/70" />
         }
       </div>
@@ -150,7 +150,7 @@ const LazyGalleryVideo: React.FC<{ src: string }> = ({ src }) => {
         isUnmuted ? 'bg-[#25D366] scale-110' : 'bg-black/60 scale-90'
       }`}>
         {isUnmuted
-          ? <Volume2 size={10} className="text-black" />
+          ? <Volume2 size={10} className="text-white" />
           : <VolumeX size={10} className="text-white/70" />
         }
       </div>

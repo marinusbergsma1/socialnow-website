@@ -411,7 +411,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
               OPEN_SLOT
             </span>
             <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_0_20px_rgba(37,211,102,0.4)] group-hover:scale-110 transition-transform">
-              <Plus size={16} className="text-black" strokeWidth={3} />
+              <Plus size={16} className="text-white" strokeWidth={3} />
             </div>
             <div className="text-left">
               <h3 className="text-sm md:text-xl font-black uppercase text-white leading-none group-hover:text-[#25D366] transition-colors">

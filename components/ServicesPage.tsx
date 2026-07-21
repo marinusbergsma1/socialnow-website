@@ -178,7 +178,7 @@ const ServicesPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
         </div>
         <div className="max-w-2xl mx-auto">
           <div className="sn-warp-tile rounded-2xl md:rounded-3xl p-8 md:p-12 relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-[#25D366] text-black text-[9px] font-black uppercase tracking-widest px-4 py-2 rounded-bl-2xl">
+            <div className="absolute top-0 right-0 bg-[#25D366] text-white text-[9px] font-black uppercase tracking-widest px-4 py-2 rounded-bl-2xl">
               Meest gekozen
             </div>
             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#25D366] mb-4">Content Automation Pakket</p>

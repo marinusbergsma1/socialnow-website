@@ -241,7 +241,7 @@ const App: React.FC = () => {
 
   return (
     <ErrorBoundary>
-    <div className="relative bg-black text-white min-h-screen font-sans selection:bg-[#25D366] selection:text-black grain-overlay">
+    <div className="relative bg-black text-white min-h-screen font-sans selection:bg-[#25D366] selection:text-white grain-overlay">
       <a href="#main-content" className="skip-to-content">Ga naar inhoud</a>
 
       <Suspense fallback={null}>

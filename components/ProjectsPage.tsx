@@ -120,7 +120,7 @@ const ProjectsPage: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }
                       className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-transparent transition-all duration-500"
                       style={{ backgroundColor: undefined }}
                     >
-                      <ArrowUpRight size={14} className="text-white/40 group-hover:text-black transition-colors" style={{ }} />
+                      <ArrowUpRight size={14} className="text-white/40 group-hover:text-[#25D366] transition-colors" style={{ }} />
                     </div>
                   </div>
                 </div>

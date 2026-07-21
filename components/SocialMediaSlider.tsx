@@ -429,7 +429,7 @@ const MediaLightbox: React.FC<{
             href={post.permalink}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-5 py-4 border-t border-white/[0.07] text-[#25D366] font-bold uppercase tracking-wider text-xs hover:bg-[#25D366] hover:text-black transition-colors"
+            className="flex items-center justify-center gap-2 px-5 py-4 border-t border-white/[0.07] text-[#25D366] font-bold uppercase tracking-wider text-xs hover:bg-[#25D366] hover:text-white transition-colors"
           >
             <Instagram size={16} /> Bekijk op Instagram <ExternalLink size={14} />
           </a>
@@ -509,7 +509,7 @@ const SocialMediaSlider: React.FC = () => {
           href="https://www.instagram.com/socialnow.nl/"
           target="_blank"
           rel="noopener noreferrer"
-          className="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 mt-6 md:mt-8 rounded-full bg-[#25D366] text-black sn-btn3d hover:scale-105 transition-transform"
+          className="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 mt-6 md:mt-8 rounded-full bg-[#25D366] text-white sn-btn3d hover:scale-105 transition-transform"
         >
           <Instagram size={16} />
           <span className="text-[11px] md:text-xs font-black uppercase tracking-[0.25em]">Bekijk volledig profiel</span>

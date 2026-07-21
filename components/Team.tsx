@@ -287,7 +287,7 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
                 <TeamMemberCard key={member.id} member={member} index={index} />
             ))}
             <div className="sn-warp-tile group relative h-[240px] md:h-[400px] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden !border-2 !border-dashed !border-[#25D366]/30 hover:!border-[#25D366] transition-all duration-500 flex flex-col items-center justify-center text-center cursor-pointer" onClick={onOpenBooking}>
-               <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-[#25D366] flex items-center justify-center mb-4 shadow-[0_0_20px_rgba(37,211,102,0.4)] group-hover:scale-110 transition-transform"><Plus size={16} className="text-black" strokeWidth={3} /></div>
+               <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-[#25D366] flex items-center justify-center mb-4 shadow-[0_0_20px_rgba(37,211,102,0.4)] group-hover:scale-110 transition-transform"><Plus size={16} className="text-white" strokeWidth={3} /></div>
                <h4 className="text-sm md:text-xl font-black uppercase text-white mb-1 leading-none group-hover:text-[#25D366] transition-colors">GROW WITH US</h4>
                <p className="text-gray-400 font-bold text-[8px] md:text-[10px] max-w-[80%] leading-relaxed">Amsterdam's snelstgroeiende creative studio zoekt talent.</p>
             </div>

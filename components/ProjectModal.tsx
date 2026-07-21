@@ -47,7 +47,7 @@ const TappableVideo: React.FC<{ src: string; className?: string }> = ({ src, cla
         style={{ backdropFilter: isUnmuted ? 'none' : 'blur(8px)' }}
       >
         {isUnmuted
-          ? <Volume2 size={14} className="text-black" />
+          ? <Volume2 size={14} className="text-white" />
           : <VolumeX size={14} className="text-white/70" />
         }
       </div>

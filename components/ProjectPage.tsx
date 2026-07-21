@@ -50,7 +50,7 @@ const GalleryVideo: React.FC<{ src: string }> = ({ src }) => {
         style={{ backdropFilter: isUnmuted ? 'none' : 'blur(8px)' }}
       >
         {isUnmuted
-          ? <Volume2 size={14} className="text-black" />
+          ? <Volume2 size={14} className="text-white" />
           : <VolumeX size={14} className="text-white/70" />
         }
       </div>
@@ -96,7 +96,7 @@ const HeroVideo: React.FC<{ src: string }> = ({ src }) => {
         style={{ backdropFilter: isUnmuted ? 'none' : 'blur(8px)' }}
       >
         {isUnmuted
-          ? <Volume2 size={16} className="text-black" />
+          ? <Volume2 size={16} className="text-white" />
           : <VolumeX size={16} className="text-white/70" />
         }
       </div>

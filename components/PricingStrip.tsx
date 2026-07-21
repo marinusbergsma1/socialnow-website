@@ -72,7 +72,7 @@ const PricingStrip: React.FC<PricingStripProps> = ({ onOpenBooking }) => (
             style={{ '--sn-glow': `${tier.color}66` } as React.CSSProperties}
           >
             {tier.highlight && (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#25D366] text-black text-[10px] font-black uppercase tracking-widest whitespace-nowrap">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#25D366] text-white text-[10px] font-black uppercase tracking-widest whitespace-nowrap">
                 Meest gekozen
               </div>
             )}

@@ -213,7 +213,7 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
           <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed ${
               m.role === 'user'
-                ? 'bg-[#25D366] text-black font-semibold rounded-br-md'
+                ? 'bg-[#25D366] text-white font-semibold rounded-br-md'
                 : 'bg-white/[0.06] text-white/90 rounded-bl-md border border-white/[0.06]'
             }`}>
               {m.text}
@@ -229,7 +229,7 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
                         // Interne routes via de SPA-router (geen page reload)
                         if (l.href.startsWith('/')) { e.preventDefault(); onClose(); navigate(l.href); }
                       }}
-                      className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#25D366] border border-[#25D366]/40 rounded-full px-3 py-1.5 hover:bg-[#25D366] hover:text-black transition-colors"
+                      className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#25D366] border border-[#25D366]/40 rounded-full px-3 py-1.5 hover:bg-[#25D366] hover:text-white transition-colors"
                     >
                       {l.label}
                     </a>
@@ -288,7 +288,7 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
               type="submit"
               aria-label="Versturen"
               disabled={!input.trim()}
-              className="group relative w-9 h-9 shrink-0 rounded-xl bg-gradient-to-br from-[#25D366] to-[#17a94d] text-black flex items-center justify-center transition-all duration-300 enabled:hover:scale-110 enabled:hover:shadow-[0_0_18px_rgba(37,211,102,0.6)] enabled:active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="group relative w-9 h-9 shrink-0 rounded-xl bg-gradient-to-br from-[#25D366] to-[#17a94d] text-white flex items-center justify-center transition-all duration-300 enabled:hover:scale-110 enabled:hover:shadow-[0_0_18px_rgba(37,211,102,0.6)] enabled:active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <Send size={15} className="transition-transform duration-300 group-enabled:group-hover:-translate-y-0.5 group-enabled:group-hover:translate-x-0.5" />
             </button>

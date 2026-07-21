@@ -116,7 +116,8 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
                     style={{ backgroundColor: isOpen ? faq.color : 'transparent', border: isOpen ? 'none' : '1px solid rgba(255,255,255,0.1)' }}
                   >
                     {isOpen
-                      ? <Minus size={16} className="text-black" />
+                      /* Nooit zwarte tekst op groene vlakken — zwart alleen op geel */
+                      ? <Minus size={16} className={faq.color === '#F7E644' ? 'text-black' : 'text-white'} />
                       : <Plus size={16} className="text-white/40 group-hover:text-white transition-colors" />
                     }
                   </div>
