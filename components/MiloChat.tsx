@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Send, X, Info } from 'lucide-react';
+import { ArrowUp, X } from 'lucide-react';
 
 const MAX_CHARS = 500;
 
@@ -128,6 +128,9 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
   const [msgs, setMsgs] = useState<Msg[]>([GREETING]);
   const [input, setInput] = useState('');
   const [typing, setTyping] = useState(false);
+  // Streaming (Claude/GPT-gevoel): het antwoord verschijnt woord voor woord
+  const [streaming, setStreaming] = useState<Msg | null>(null);
+  const [streamLen, setStreamLen] = useState(0);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const msgsRef = useRef<Msg[]>(msgs);
@@ -139,7 +142,32 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
 
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: 'smooth' });
-  }, [msgs, typing]);
+  }, [msgs, typing, streamLen]);
+
+  // Stream het antwoord in (~2-3 tekens per tick), daarna definitief toevoegen
+  useEffect(() => {
+    if (!streaming) return;
+    const iv = setInterval(() => {
+      setStreamLen((l) => {
+        if (l >= streaming.text.length) {
+          clearInterval(iv);
+          setMsgs((prev) => [...prev, streaming]);
+          setStreaming(null);
+          return 0;
+        }
+        return l + 2 + Math.floor(Math.random() * 2);
+      });
+    }, 16);
+    return () => clearInterval(iv);
+  }, [streaming]);
+
+  // Auto-groeiende invoer (zoals Claude): hoogte volgt de inhoud, tot 140px
+  useEffect(() => {
+    const el = inputRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${Math.min(el.scrollHeight, 140)}px`;
+  }, [input]);
 
   // Vraag Gemini (via de Worker) om een antwoord; geef null terug bij geen URL/fout.
   const askGemini = async (q: string): Promise<Msg | null> => {
@@ -175,17 +203,53 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
     const started = Date.now();
     askGemini(q).then((remote) => {
       const reply = remote || getAnswer(q); // Gemini, anders offline kennisbank
-      // Minimaal ~600ms "denken" voor een natuurlijk gevoel
-      const wait = Math.max(0, 600 - (Date.now() - started));
-      setTimeout(() => { setTyping(false); setMsgs((prev) => [...prev, reply]); }, wait);
+      // Minimaal ~500ms "denken", daarna streamt het antwoord in
+      const wait = Math.max(0, 500 - (Date.now() - started));
+      setTimeout(() => { setTyping(false); setStreamLen(0); setStreaming(reply); }, wait);
     });
   }, []);
 
   if (!open) return null;
 
+  // Milo-bericht in Claude-stijl: avatar links, kale tekst (geen bubbel)
+  const MiloMessage = ({ m, partial }: { m: Msg; partial?: number }) => (
+    <div className="flex items-start gap-3">
+      <div className="w-7 h-7 shrink-0 mt-0.5">
+        <video autoPlay muted loop playsInline aria-hidden="true" className="w-full h-full object-contain">
+          <source src={`${import.meta.env.BASE_URL}video/milo-blink.webm?v=2`} type="video/webm" />
+          <source src={`${import.meta.env.BASE_URL}video/milo-blink.mp4?v=2`} type="video/mp4" />
+        </video>
+      </div>
+      <div className="flex-1 min-w-0 text-[14px] leading-relaxed text-white/90 whitespace-pre-line pt-0.5">
+        {partial !== undefined ? m.text.slice(0, partial) : m.text}
+        {partial !== undefined && partial < m.text.length && (
+          <span className="inline-block w-[7px] h-[15px] bg-[#25D366] align-text-bottom ml-0.5 animate-pulse rounded-[1px]" />
+        )}
+        {partial === undefined && m.links && (
+          <div className="flex flex-wrap gap-2 mt-3">
+            {m.links.map((l) => (
+              <a
+                key={l.href + l.label}
+                href={l.href}
+                target={l.href.startsWith('http') ? '_blank' : undefined}
+                rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                onClick={(e) => {
+                  if (l.href.startsWith('/')) { e.preventDefault(); onClose(); navigate(l.href); }
+                }}
+                className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#25D366] border border-[#25D366]/40 rounded-full px-3 py-1.5 hover:bg-[#25D366] hover:text-white transition-colors"
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <div
-      className="fixed z-[95] bottom-4 inset-x-4 sm:inset-x-auto sm:left-6 sm:bottom-6 sm:w-[360px] rounded-3xl border border-white/10 bg-[#0b0b0b]/95 backdrop-blur-xl shadow-[0_24px_80px_rgba(0,0,0,0.7),0_0_30px_rgba(37,211,102,0.12)] flex flex-col overflow-hidden"
+      className="fixed z-[95] inset-0 sm:inset-auto sm:left-6 sm:bottom-6 sm:w-[440px] sm:h-[min(660px,calc(100vh-3rem))] rounded-none sm:rounded-3xl border-0 sm:border border-white/10 bg-[#0b0b0b]/98 sm:bg-[#0b0b0b]/95 backdrop-blur-xl shadow-[0_24px_80px_rgba(0,0,0,0.7),0_0_30px_rgba(37,211,102,0.12)] flex flex-col overflow-hidden"
       role="dialog"
       aria-label="Milo AI-assistent"
     >
@@ -207,105 +271,82 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
         </button>
       </div>
 
-      {/* Berichten */}
-      <div ref={listRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3 max-h-[46vh] sm:max-h-[380px]">
+      {/* Berichten — Claude-stijl: assistent kaal met avatar, gebruiker in bubbel */}
+      <div ref={listRef} className="flex-1 overflow-y-auto px-4 sm:px-5 py-5 space-y-5">
         {msgs.map((m, i) => (
-          <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed ${
-              m.role === 'user'
-                ? 'bg-[#25D366] text-white font-semibold rounded-br-md'
-                : 'bg-white/[0.06] text-white/90 rounded-bl-md border border-white/[0.06]'
-            }`}>
-              {m.text}
-              {m.links && (
-                <div className="flex flex-wrap gap-2 mt-2.5">
-                  {m.links.map((l) => (
-                    <a
-                      key={l.href + l.label}
-                      href={l.href}
-                      target={l.href.startsWith('http') ? '_blank' : undefined}
-                      rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      onClick={(e) => {
-                        // Interne routes via de SPA-router (geen page reload)
-                        if (l.href.startsWith('/')) { e.preventDefault(); onClose(); navigate(l.href); }
-                      }}
-                      className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#25D366] border border-[#25D366]/40 rounded-full px-3 py-1.5 hover:bg-[#25D366] hover:text-white transition-colors"
-                    >
-                      {l.label}
-                    </a>
-                  ))}
-                </div>
-              )}
+          m.role === 'user' ? (
+            <div key={i} className="flex justify-end">
+              <div className="max-w-[82%] rounded-2xl rounded-br-md bg-[#25D366] text-white font-medium px-4 py-2.5 text-[14px] leading-relaxed whitespace-pre-line">
+                {m.text}
+              </div>
             </div>
-          </div>
+          ) : (
+            <MiloMessage key={i} m={m} />
+          )
         ))}
+
+        {/* Streamend antwoord */}
+        {streaming && <MiloMessage m={streaming} partial={streamLen} />}
+
+        {/* Denk-indicator */}
         {typing && (
-          <div className="flex justify-start">
-            <div className="bg-white/[0.06] border border-white/[0.06] rounded-2xl rounded-bl-md px-4 py-3 flex gap-1.5">
+          <div className="flex items-start gap-3">
+            <div className="w-7 h-7 shrink-0" />
+            <div className="flex gap-1.5 pt-2">
               {[0, 1, 2].map((i) => (
-                <span key={i} className="w-1.5 h-1.5 rounded-full bg-white/50 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
+                <span key={i} className="w-1.5 h-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
               ))}
             </div>
           </div>
         )}
+
+        {/* Suggesties — alleen bij de start, zoals Claude/GPT */}
+        {msgs.length === 1 && !typing && !streaming && (
+          <div className="flex flex-col items-start gap-2 pt-1 pl-10">
+            {QUICK.map((q) => (
+              <button
+                key={q}
+                onClick={() => ask(q)}
+                className="text-left text-[12px] font-medium text-white/60 border border-white/10 rounded-xl px-3.5 py-2 hover:text-white hover:border-[#25D366]/50 hover:bg-[#25D366]/[0.06] transition-colors"
+              >
+                {q}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Snelle vragen */}
-      <div className="px-4 pb-2 flex flex-wrap gap-1.5">
-        {QUICK.map((q) => (
-          <button
-            key={q}
-            onClick={() => ask(q)}
-            className="text-[10px] font-bold uppercase tracking-wider text-white/50 border border-white/10 rounded-full px-2.5 py-1.5 hover:text-[#25D366] hover:border-[#25D366]/40 transition-colors"
-          >
-            {q}
-          </button>
-        ))}
-      </div>
-
-      {/* Invoer — rijke glowende composer */}
+      {/* Invoer — Claude-stijl composer: auto-groeiend, ronde pijl-knop */}
       <form
         onSubmit={(e) => { e.preventDefault(); ask(input); }}
-        className="px-4 pb-3 pt-2 border-t border-white/[0.07]"
+        className="px-4 sm:px-5 pb-3 pt-2"
       >
-        <div className="relative rounded-2xl bg-white/[0.04] border border-white/10 focus-within:border-[#25D366]/50 focus-within:shadow-[0_0_20px_rgba(37,211,102,0.15)] transition-all overflow-hidden">
+        <div className="flex items-end gap-2 rounded-2xl bg-white/[0.05] border border-white/10 focus-within:border-[#25D366]/50 focus-within:shadow-[0_0_20px_rgba(37,211,102,0.12)] transition-all px-4 py-2.5">
           <textarea
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value.slice(0, MAX_CHARS))}
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ask(input); } }}
-            rows={2}
+            rows={1}
             maxLength={MAX_CHARS}
-            placeholder="Stel je vraag aan Milo — diensten, prijzen, de gratis demo…"
-            className="w-full resize-none bg-transparent px-4 pt-3 pb-2 text-[13px] leading-relaxed text-white placeholder-white/30 outline-none"
+            placeholder="Vraag het aan Milo…"
+            className="flex-1 resize-none bg-transparent py-1 text-[14px] leading-relaxed text-white placeholder-white/30 outline-none"
             style={{ scrollbarWidth: 'none' }}
           />
-          <div className="flex items-center justify-between px-3 pb-2.5">
-            <span className="text-[10px] font-medium text-white/30 tabular-nums">
-              {input.length}<span className="text-white/20">/{MAX_CHARS}</span>
-            </span>
-            <button
-              type="submit"
-              aria-label="Versturen"
-              disabled={!input.trim()}
-              className="group relative w-9 h-9 shrink-0 rounded-xl bg-gradient-to-br from-[#25D366] to-[#17a94d] text-white flex items-center justify-center transition-all duration-300 enabled:hover:scale-110 enabled:hover:shadow-[0_0_18px_rgba(37,211,102,0.6)] enabled:active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              <Send size={15} className="transition-transform duration-300 group-enabled:group-hover:-translate-y-0.5 group-enabled:group-hover:translate-x-0.5" />
-            </button>
-          </div>
+          <button
+            type="submit"
+            aria-label="Versturen"
+            disabled={!input.trim() || typing || !!streaming}
+            className="w-8 h-8 shrink-0 rounded-full bg-[#25D366] text-white flex items-center justify-center transition-all duration-200 enabled:hover:scale-110 enabled:hover:shadow-[0_0_16px_rgba(37,211,102,0.55)] enabled:active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed mb-0.5"
+          >
+            <ArrowUp size={16} strokeWidth={2.5} />
+          </button>
         </div>
 
-        {/* Footer — hint + status */}
-        <div className="flex items-center justify-between mt-2 text-[10px] text-white/30 gap-4">
-          <span className="flex items-center gap-1.5">
-            <Info size={11} />
-            <kbd className="px-1.5 py-0.5 bg-white/[0.06] border border-white/10 rounded text-white/50 font-mono">Shift + Enter</kbd> voor nieuwe regel
-          </span>
-          <span className="flex items-center gap-1.5 shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
-            Milo is online
-          </span>
-        </div>
+        {/* Disclaimer — zoals Claude/GPT */}
+        <p className="text-center text-[10px] text-white/25 mt-2">
+          Milo kan fouten maken. Neem voor zekerheid <a href="https://wa.me/31637404577" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#25D366] transition-colors">direct contact</a> op.
+        </p>
       </form>
     </div>
   );
