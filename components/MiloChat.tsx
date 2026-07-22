@@ -118,6 +118,43 @@ const getAnswer = (q: string): Msg => {
   return { role: 'milo', text: best.answer, links: best.links };
 };
 
+// ─── Milo-bericht (Claude-stijl) — op module-niveau + memo, zodat typen in de
+// composer NIET alle berichten (en avatars) remount: dat veroorzaakte lag. ───
+const MILO_AVATAR = `${import.meta.env.BASE_URL}images/milo-avatar.webp?v=1`;
+
+const MiloMessage = React.memo(({ m, partial, onLink }: {
+  m: Msg;
+  partial?: number;
+  onLink: (e: React.MouseEvent, href: string) => void;
+}) => (
+  <div className="flex items-start gap-3">
+    <img src={MILO_AVATAR} alt="" width={28} height={28} className="w-7 h-7 shrink-0 mt-0.5 object-contain select-none" draggable={false} />
+    <div className="flex-1 min-w-0 text-[14px] leading-relaxed text-white/90 whitespace-pre-line pt-0.5">
+      {partial !== undefined ? m.text.slice(0, partial) : m.text}
+      {partial !== undefined && partial < m.text.length && (
+        <span className="inline-block w-[7px] h-[15px] bg-[#25D366] align-text-bottom ml-0.5 animate-pulse rounded-[1px]" />
+      )}
+      {partial === undefined && m.links && (
+        <div className="flex flex-wrap gap-2 mt-3">
+          {m.links.map((l) => (
+            <a
+              key={l.href + l.label}
+              href={l.href}
+              target={l.href.startsWith('http') ? '_blank' : undefined}
+              rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              onClick={(e) => onLink(e, l.href)}
+              className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#25D366] border border-[#25D366]/40 rounded-full px-3 py-1.5 hover:bg-[#25D366] hover:text-white transition-colors"
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+));
+MiloMessage.displayName = 'MiloMessage';
+
 interface MiloChatProps {
   open: boolean;
   onClose: () => void;
@@ -209,43 +246,12 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
     });
   }, []);
 
-  if (!open) return null;
+  // Stabiele link-handler zodat MiloMessage (memo) niet her-rendert bij typen
+  const handleLink = useCallback((e: React.MouseEvent, href: string) => {
+    if (href.startsWith('/')) { e.preventDefault(); onClose(); navigate(href); }
+  }, [onClose, navigate]);
 
-  // Milo-bericht in Claude-stijl: avatar links, kale tekst (geen bubbel)
-  const MiloMessage = ({ m, partial }: { m: Msg; partial?: number }) => (
-    <div className="flex items-start gap-3">
-      <div className="w-7 h-7 shrink-0 mt-0.5">
-        <video autoPlay muted loop playsInline aria-hidden="true" className="w-full h-full object-contain">
-          <source src={`${import.meta.env.BASE_URL}video/milo-blink.webm?v=2`} type="video/webm" />
-          <source src={`${import.meta.env.BASE_URL}video/milo-blink.mp4?v=2`} type="video/mp4" />
-        </video>
-      </div>
-      <div className="flex-1 min-w-0 text-[14px] leading-relaxed text-white/90 whitespace-pre-line pt-0.5">
-        {partial !== undefined ? m.text.slice(0, partial) : m.text}
-        {partial !== undefined && partial < m.text.length && (
-          <span className="inline-block w-[7px] h-[15px] bg-[#25D366] align-text-bottom ml-0.5 animate-pulse rounded-[1px]" />
-        )}
-        {partial === undefined && m.links && (
-          <div className="flex flex-wrap gap-2 mt-3">
-            {m.links.map((l) => (
-              <a
-                key={l.href + l.label}
-                href={l.href}
-                target={l.href.startsWith('http') ? '_blank' : undefined}
-                rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                onClick={(e) => {
-                  if (l.href.startsWith('/')) { e.preventDefault(); onClose(); navigate(l.href); }
-                }}
-                className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#25D366] border border-[#25D366]/40 rounded-full px-3 py-1.5 hover:bg-[#25D366] hover:text-white transition-colors"
-              >
-                {l.label}
-              </a>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
+  if (!open) return null;
 
   return (
     <div
@@ -281,12 +287,12 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
               </div>
             </div>
           ) : (
-            <MiloMessage key={i} m={m} />
+            <MiloMessage key={i} m={m} onLink={handleLink} />
           )
         ))}
 
         {/* Streamend antwoord */}
-        {streaming && <MiloMessage m={streaming} partial={streamLen} />}
+        {streaming && <MiloMessage m={streaming} partial={streamLen} onLink={handleLink} />}
 
         {/* Denk-indicator */}
         {typing && (
