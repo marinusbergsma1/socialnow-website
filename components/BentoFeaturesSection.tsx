@@ -242,7 +242,7 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
             <p className="text-sm font-normal text-neutral-400 max-w-sm">
               Elke dag content op al je kanalen, volledig uit handen: Reels, TikTok, LinkedIn en meer.
             </p>
-            <div className="h-[20rem] rounded-xl z-40 bg-[rgba(40,40,40,0.30)] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_0%,transparent_100%)]">
+            <div className="h-[20rem] rounded-xl z-40">
               <div className="p-8 overflow-hidden h-full">
                 <div className="flex flex-col gap-4 items-center justify-center h-full relative">
                   <div className="flex gap-4 items-center justify-center flex-shrink-0">
@@ -280,7 +280,7 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
 
           {/* Tile 2 — Analytics voor alles */}
           <div className="sn-warp-tile p-8 rounded-xl group">
-            <div className="h-[20rem] rounded-xl z-40 max-w-[16rem] mx-auto bg-[rgba(40,40,40,0.30)] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_0%,transparent_100%)]">
+            <div className="h-[20rem] rounded-xl z-40 max-w-[16rem] mx-auto">
               <div className="p-8 overflow-hidden h-full">
                 <div className="flex flex-col gap-4 items-center justify-center h-full relative">
                   <div className="absolute left-10 top-10 rounded-full px-4 py-2 bg-[rgba(40,40,40,0.6)] border border-white/10 shadow-[0px_0px_8px_0px_rgba(248,248,248,0.25)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)_inset]">
@@ -365,7 +365,7 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
 
           {/* Tile 3 — AI in de kern */}
           <div className="sn-warp-tile p-8 rounded-xl group">
-            <div className="h-[20rem] rounded-xl z-40 bg-[rgba(40,40,40,0.30)] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_0%,transparent_100%)]">
+            <div className="h-[20rem] rounded-xl z-40">
               <div className="p-8 overflow-hidden h-full relative flex items-center justify-center">
                 <div className="flex flex-row flex-shrink-0 justify-center items-center gap-2">
                   <div className="rounded-full flex items-center justify-center bg-[rgba(248,248,248,0.01)] shadow-[0px_0px_8px_0px_rgba(248,248,248,0.25)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)] h-8 w-8 sn-f1">
@@ -442,7 +442,7 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
 
           {/* Tile 5 — Ken je publiek */}
           <div className="sn-warp-tile p-8 rounded-xl group">
-            <div className="h-[20rem] rounded-xl z-40 bg-[rgba(40,40,40,0.30)] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_0%,transparent_100%)]">
+            <div className="h-[20rem] rounded-xl z-40">
               <div className="p-8 overflow-hidden h-full relative flex items-start justify-center">
                 <div className="sn-bento-flip-a flex absolute inset-0 flex-col group-hover:-translate-y-80 transition duration-200 items-center justify-center">
                   <div className="h-20 w-20 rounded-lg flex items-center justify-center bg-[rgba(248,248,248,0.01)] shadow-[0px_0px_8px_0px_rgba(248,248,248,0.25)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)]">
