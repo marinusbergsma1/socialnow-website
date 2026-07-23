@@ -411,7 +411,8 @@ const MILO_STEPS = [
   { word: 'OPSCHAALT', video: 'milo-raket-loop', scale: 0.9 },
 ] as const;
 
-const MILO_HOLD_MS = 1200; // rust op het eindframe voordat het woord wisselt
+const MILO_HOLD_MS = 600;  // rust op het eindframe voordat het woord wisselt
+const MILO_SPEED = 1.5;    // afspeelsnelheid: stappen ~50% sneller
 
 const SelfImprovingHeadline: React.FC = () => {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -433,6 +434,7 @@ const SelfImprovingHeadline: React.FC = () => {
     if (!video) return;
     if (!inView) { video.pause(); return; }
     video.currentTime = 0;
+    video.playbackRate = MILO_SPEED;
     video.play().catch(() => {});
     const onEnded = () => {
       holdTimer.current = setTimeout(() => setStep(s => (s + 1) % MILO_STEPS.length), MILO_HOLD_MS);
@@ -449,7 +451,7 @@ const SelfImprovingHeadline: React.FC = () => {
     <div ref={hostRef} className="relative inline-block">
       <div
         aria-hidden="true"
-        className="sn-milo absolute bottom-[calc(100%-0.7em)] right-[-0.5em] w-52 md:w-80 lg:w-[26rem] pointer-events-none select-none z-10"
+        className="sn-milo absolute bottom-[calc(100%-0.7em)] right-0 md:right-[-0.5em] w-[min(13rem,44vw)] md:w-80 lg:w-[26rem] pointer-events-none select-none z-10"
       >
         {/* webm met echt alpha-kanaal (zwart weggekeyd) — mp4 als fallback */}
         {MILO_STEPS.map((s, i) => (
@@ -458,7 +460,7 @@ const SelfImprovingHeadline: React.FC = () => {
             ref={(el) => { videoRefs.current[i] = el; }}
             muted
             playsInline
-            preload={i === step || i === (step + 1) % MILO_STEPS.length ? 'auto' : 'metadata'}
+            preload={i === step || i === (step + 1) % MILO_STEPS.length ? 'auto' : 'none'}
             className={i === step ? 'relative opacity-100' : 'absolute inset-0 opacity-0'}
             style={{ transform: `scale(${s.scale})`, transformOrigin: 'bottom center' }}
           >
