@@ -77,6 +77,29 @@ for (const [route, meta] of Object.entries(routeMeta)) {
   const bcScript = `<script type="application/ld+json">${JSON.stringify(breadcrumb)}</script>`;
   out = out.replace('</body>', `    ${bcScript}\n  </body>`);
 
+  // /team: Person-graph (E-E-A-T voor Google AI-search — echte expertise tonen)
+  if (route === 'team') {
+    const person = (name, jobTitle) => ({ '@type': 'Person', name, jobTitle, worksFor: { '@id': `${BASE}/#organization` } });
+    const teamGraph = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        { ...person('Marinus Bergsma', 'Founder & Creative Art Director'), url: `${BASE}/team`, knowsAbout: ['AI Marketing', 'Branding', 'Creative Direction'] },
+        person('Jos Hollenberg', 'Marketeer / SEO Engineer'),
+        person('Sergio Jovovic', 'Creative Marketing Designer'),
+        person('Carmel Boon', 'Video & Motion Editor'),
+        person('Emma Peperkamp', 'Social Media Strategist'),
+        person('Nick van Keulen', 'Google Ads Expert'),
+        person('Sid van Kalken', 'Webdeveloper'),
+        person('Michel Pluister', 'Software Engineer'),
+        person('Steef Komen', 'Finance Expert'),
+        person('Sam', 'Videograaf'),
+        person('Emme', 'Fotograaf'),
+      ],
+    };
+    const teamScript = `<script type="application/ld+json">${JSON.stringify(teamGraph)}</script>`;
+    out = out.replace('</body>', `    ${teamScript}\n  </body>`);
+  }
+
   mkdirSync(`dist/${route}`, { recursive: true });
   writeFileSync(`dist/${route}/index.html`, out);
 }
