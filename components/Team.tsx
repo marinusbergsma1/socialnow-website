@@ -81,13 +81,6 @@ const team: TeamItem[] = [
     role: "Finance Expert",
     image: `${import.meta.env.BASE_URL}images/Steef-Komen.webp`
   },
-  {
-    id: 10,
-    type: 'member',
-    name: "Sam van der Sluis",
-    role: "Videograaf",
-    image: `${import.meta.env.BASE_URL}images/Sam-van-der-Sluis.webp`
-  }
 ];
 
 // Jubileum-teller: SocialNow bestaat op 1 november 2026 vijf jaar (opgericht november 2021)

@@ -111,15 +111,6 @@ const crew: CrewMember[] = [
     color: '#F7E644',
     image: `${BASE}images/Steef-Komen.webp`,
   },
-  {
-    id: 10,
-    name: 'Sam van der Sluis',
-    role: 'Videograaf',
-    tag: 'VIDEO_OPS',
-    line: 'Schiet beeld dat scrollduimen stilzet.',
-    color: '#00A3E0',
-    image: `${BASE}images/Sam-van-der-Sluis.webp`,
-  },
 ];
 
 const pillars = [
@@ -293,7 +284,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                 DE <span className="text-[#00A3E0]">SPECIALISTEN</span>
               </h2>
               <span className="font-mono text-[10px] tracking-widest text-white/30 uppercase hidden md:block">
-                INDEX 02 → 10
+                INDEX 02 → 09
               </span>
             </div>
             <p className="text-gray-400 font-medium text-sm md:text-base mt-4 max-w-2xl leading-relaxed">
@@ -365,7 +356,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                   {activeMember.tag}
                 </span>
                 <span className="absolute top-6 right-6 font-mono text-[11px] text-white/30">
-                  {String(active + 2).padStart(2, "0")} / 10
+                  {String(active + 2).padStart(2, "0")} / 09
                 </span>
                 <div className="absolute bottom-8 left-8 right-8">
                   <h3 className="text-3xl md:text-4xl font-black uppercase text-white tracking-tighter leading-none mb-2">

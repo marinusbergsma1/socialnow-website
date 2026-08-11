@@ -92,7 +92,6 @@ for (const [route, meta] of Object.entries(routeMeta)) {
         person('Sid van Kalken', 'Webdeveloper'),
         person('Michel Pluister', 'Software Engineer'),
         person('Steef Komen', 'Finance Expert'),
-        person('Sam van der Sluis', 'Videograaf'),
       ],
     };
     const teamScript = `<script type="application/ld+json">${JSON.stringify(teamGraph)}</script>`;
