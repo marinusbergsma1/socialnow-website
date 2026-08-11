@@ -109,7 +109,7 @@ const crew: CrewMember[] = [
     tag: 'FINANCE_OPS',
     line: 'Rekent elk plan financieel scherp door, van ROI tot vastgoeddata.',
     color: '#F7E644',
-    image: `${BASE}images/team-steef.svg`,
+    image: `${BASE}images/Steef-Komen.webp`,
   },
   {
     id: 10,
