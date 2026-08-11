@@ -45,12 +45,12 @@ const team: TeamItem[] = [
     role: "Video & Motion Editor", 
     image: `${import.meta.env.BASE_URL}images/Carmel-Boon-V2.webp` 
   },
-  { 
-    id: 5, 
+  {
+    id: 5,
     type: 'member',
-    name: "Emma Peperkamp", 
-    role: "Social Media Strategist", 
-    image: `${import.meta.env.BASE_URL}images/Emma-Peperkamp-V2.webp` 
+    name: "Emma Peperkamp",
+    role: "Fotograaf",
+    image: `${import.meta.env.BASE_URL}images/Emma-Peperkamp-V2.webp`
   },
   {
     id: 6,
@@ -73,6 +73,20 @@ const team: TeamItem[] = [
     name: "Michel Pluister",
     role: "Software Engineer",
     image: `${import.meta.env.BASE_URL}images/Michel-Pluister.webp`
+  },
+  {
+    id: 9,
+    type: 'member',
+    name: "Steef Komen",
+    role: "Finance Expert",
+    image: `${import.meta.env.BASE_URL}images/Steef-Komen.webp`
+  },
+  {
+    id: 10,
+    type: 'member',
+    name: "Sam van der Sluis",
+    role: "Videograaf",
+    image: `${import.meta.env.BASE_URL}images/Sam-van-der-Sluis.webp`
   }
 ];
 
