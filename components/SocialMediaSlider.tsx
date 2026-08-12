@@ -84,32 +84,28 @@ const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean }> = ({ post, is
   }, [isMobile, shouldLoad]);
 
   const isVideo = post.mediaType === 'VIDEO';
-  // Voor afbeeldingen: Behold's 'large' rendition (lichter dan full)
-  const src = isVideo ? post.mediaUrl : (post.sizes?.large?.mediaUrl || post.mediaUrl);
-  const poster = post.thumbnailUrl;
+  // In de slider ALTIJD een afbeelding (stabiele behold.pictures-rendition):
+  // Instagram-video-URL's verlopen/falen geregeld → lege zwarte kaarten.
+  // De video zelf speelt pas in de lightbox. Play-badge markeert reels.
+  const src = post.sizes?.large?.mediaUrl || post.thumbnailUrl || post.mediaUrl;
+  const fallback = post.thumbnailUrl && post.thumbnailUrl !== src ? post.thumbnailUrl : undefined;
 
   return (
-    <div ref={containerRef} className="w-full h-full bg-zinc-900">
-      {shouldLoad && isVideo && (
-        <video
-          src={src}
-          poster={poster}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="none"
-          className="w-full h-full object-cover pointer-events-none"
-        />
-      )}
-      {shouldLoad && !isVideo && (
+    <div ref={containerRef} className="w-full h-full bg-zinc-900 relative">
+      {shouldLoad && (
         <img
           src={src}
           alt={post.prunedCaption?.slice(0, 80) || 'Instagram post'}
           loading="lazy"
           decoding="async"
+          onError={(e) => { if (fallback && e.currentTarget.src !== fallback) e.currentTarget.src = fallback; }}
           className="w-full h-full object-cover pointer-events-none"
         />
+      )}
+      {shouldLoad && isVideo && (
+        <span className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/55 backdrop-blur-sm flex items-center justify-center pointer-events-none">
+          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-white ml-0.5" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+        </span>
       )}
     </div>
   );
