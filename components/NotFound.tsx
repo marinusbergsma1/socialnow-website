@@ -1,4 +1,5 @@
 import React from 'react';
+import MiloSources from './MiloSources';
 import { Link, useNavigate } from 'react-router-dom';
 import { Home, MessageCircle } from 'lucide-react';
 import { useSEO } from '../hooks/useSEO';
@@ -73,24 +74,21 @@ const NotFound: React.FC = () => {
             className="sn-404-echo absolute inset-0 w-full h-full object-contain pointer-events-none"
             style={{ filter: 'sepia(1) saturate(8) hue-rotate(170deg) brightness(0.9)' }}
           >
-            <source src={`${import.meta.env.BASE_URL}video/milo-blink.webm?v=2`} type="video/webm" />
-            <source src={`${import.meta.env.BASE_URL}video/milo-blink.mp4?v=2`} type="video/mp4" />
+            <MiloSources name="milo-blink" v="2" />
           </video>
           <video
             autoPlay muted loop playsInline preload="auto"
             className="sn-404-echo absolute inset-0 w-full h-full object-contain pointer-events-none"
             style={{ filter: 'sepia(1) saturate(8) hue-rotate(-40deg) brightness(0.9)', animationDelay: '0.05s' }}
           >
-            <source src={`${import.meta.env.BASE_URL}video/milo-blink.webm?v=2`} type="video/webm" />
-            <source src={`${import.meta.env.BASE_URL}video/milo-blink.mp4?v=2`} type="video/mp4" />
+            <MiloSources name="milo-blink" v="2" />
           </video>
           {/* Hoofd-Milo, jittert en valt af en toe uit */}
           <video
             autoPlay muted loop playsInline preload="auto"
             className="sn-404-milo relative w-full h-full object-contain pointer-events-none"
           >
-            <source src={`${import.meta.env.BASE_URL}video/milo-blink.webm?v=2`} type="video/webm" />
-            <source src={`${import.meta.env.BASE_URL}video/milo-blink.mp4?v=2`} type="video/mp4" />
+            <MiloSources name="milo-blink" v="2" />
           </video>
           {/* Scanlijn die over Milo loopt */}
           <div

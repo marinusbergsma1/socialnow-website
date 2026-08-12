@@ -1,4 +1,5 @@
 import React from 'react';
+import MiloSources from './MiloSources';
 import GenerateButton from './GenerateButton';
 
 /**
@@ -228,8 +229,7 @@ const BentoFeaturesSection: React.FC<{ onOpenBooking?: () => void }> = ({ onOpen
               autoPlay muted loop playsInline preload="metadata" aria-hidden="true"
               className="relative w-full h-full object-contain"
             >
-              <source src={`${import.meta.env.BASE_URL}video/milo-coder.webm?v=1`} type="video/webm" />
-              <source src={`${import.meta.env.BASE_URL}video/milo-coder.mp4?v=1`} type="video/mp4" />
+              <MiloSources name="milo-coder" v="1" />
             </video>
           </div>
         </div>

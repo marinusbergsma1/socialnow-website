@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import MiloSources from './MiloSources';
 import { Plus, Minus, MessageCircle } from 'lucide-react';
 
 const faqs = [
@@ -82,8 +83,7 @@ const FAQ: React.FC<FAQProps> = ({ onOpenContact }) => {
                 setPointHl(t > 1.2 && t < 6.2);
               }}
             >
-              <source src={`${import.meta.env.BASE_URL}video/milo-faq-loop.webm`} type="video/webm" />
-              <source src={`${import.meta.env.BASE_URL}video/milo-faq-loop.mp4`} type="video/mp4" />
+              <MiloSources name="milo-faq-loop" />
             </video>
           </div>
 

@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, memo, useCallback, useMemo } from 'react';
+import MiloSources from './MiloSources';
 import { Activity, Database, Heart } from 'lucide-react';
 
 // Global audio context: only one video can be unmuted at a time across the entire page
@@ -464,8 +465,7 @@ const SelfImprovingHeadline: React.FC = () => {
             className={i === step ? 'relative opacity-100' : 'absolute inset-0 opacity-0'}
             style={{ transform: `scale(${s.scale})`, transformOrigin: 'bottom center' }}
           >
-            <source src={`${import.meta.env.BASE_URL}video/${s.video}.webm`} type="video/webm" />
-            <source src={`${import.meta.env.BASE_URL}video/${s.video}.mp4`} type="video/mp4" />
+            <MiloSources name={s.video} />
           </video>
         ))}
       </div>

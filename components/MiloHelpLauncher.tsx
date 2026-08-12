@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import MiloSources from './MiloSources';
 import MiloChat from './MiloChat';
 
 /**
@@ -113,8 +114,7 @@ const MiloHelpLauncher: React.FC = () => {
           autoPlay muted loop playsInline preload="auto" aria-hidden="true"
           className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
         >
-          <source src={`${import.meta.env.BASE_URL}video/milo-blink.webm?v=2`} type="video/webm" />
-          <source src={`${import.meta.env.BASE_URL}video/milo-blink.mp4?v=2`} type="video/mp4" />
+          <MiloSources name="milo-blink" v="2" />
         </video>
 
         {/* begroeting-zwaai — bovenop, alleen tijdens het zwaaien */}
@@ -125,8 +125,7 @@ const MiloHelpLauncher: React.FC = () => {
           className="absolute inset-0 w-full h-full object-contain transition-opacity duration-200"
           style={{ opacity: waving ? 1 : 0 }}
         >
-          <source src={`${import.meta.env.BASE_URL}video/milo-wave.webm?v=2`} type="video/webm" />
-          <source src={`${import.meta.env.BASE_URL}video/milo-wave.mp4?v=2`} type="video/mp4" />
+          <MiloSources name="milo-wave" v="2" />
         </video>
 
         {/* 3 losse stippen — verschijnen één voor één (1 · 2 · 3), rechtsboven */}

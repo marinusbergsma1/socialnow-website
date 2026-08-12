@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import MiloSources from './MiloSources';
 import { Code2, Blocks, Workflow, Rocket } from 'lucide-react';
 
 /**
@@ -91,8 +92,7 @@ const CodeSection: React.FC = () => {
                   autoPlay muted loop playsInline preload="metadata" aria-hidden="true"
                   className="relative w-full h-full object-contain"
                 >
-                  <source src={`${import.meta.env.BASE_URL}video/milo-coder.webm?v=1`} type="video/webm" />
-                  <source src={`${import.meta.env.BASE_URL}video/milo-coder.mp4?v=1`} type="video/mp4" />
+                  <MiloSources name="milo-coder" v="1" />
                 </video>
               )}
             </div>

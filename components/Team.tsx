@@ -1,5 +1,6 @@
 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
+import MiloSources from './MiloSources';
 import { TeamMember } from '../types';
 import { Plus, Shield, PieChart, Activity, Cpu, Terminal } from 'lucide-react';
 import Button from './Button';
@@ -246,8 +247,7 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
               onAnimationIteration={() => { const v = motorVideoRef.current; if (v) v.currentTime = 0; }}
             >
               <video ref={motorVideoRef} autoPlay muted playsInline loop preload="auto" aria-hidden="true" className="w-full h-full object-contain">
-                <source src={`${import.meta.env.BASE_URL}video/milo-motor-loop.webm?v=2`} type="video/webm" />
-                <source src={`${import.meta.env.BASE_URL}video/milo-motor-loop.mp4?v=2`} type="video/mp4" />
+                <MiloSources name="milo-motor-loop" v="2" />
               </video>
             </div>
           </div>

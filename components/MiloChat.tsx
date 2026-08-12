@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import MiloSources from './MiloSources';
 import { useNavigate } from 'react-router-dom';
 import { ArrowUp, X } from 'lucide-react';
 
@@ -263,8 +264,7 @@ const MiloChat: React.FC<MiloChatProps> = ({ open, onClose }) => {
       <div className="flex items-center gap-3 px-4 py-3 border-b border-white/[0.07] bg-white/[0.03]">
         <div className="relative w-11 h-11 shrink-0">
           <video autoPlay muted loop playsInline aria-hidden="true" className="w-full h-full object-contain">
-            <source src={`${import.meta.env.BASE_URL}video/milo-blink.webm?v=2`} type="video/webm" />
-            <source src={`${import.meta.env.BASE_URL}video/milo-blink.mp4?v=2`} type="video/mp4" />
+            <MiloSources name="milo-blink" v="2" />
           </video>
           <span className="absolute bottom-0.5 right-0.5 w-2.5 h-2.5 rounded-full bg-[#25D366] border-2 border-[#0b0b0b]" />
         </div>
