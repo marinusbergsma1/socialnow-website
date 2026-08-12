@@ -97,8 +97,20 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://socialnow.nl/project/socialnow-website</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://socialnow.nl/project/vastiq-website</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://socialnow.nl/project/primefone-website</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://socialnow.nl/project/ilgordo-website</loc>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

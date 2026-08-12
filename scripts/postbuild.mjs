@@ -112,5 +112,73 @@ for (const [route, meta] of Object.entries(routeMeta)) {
   writeFileSync(`dist/${route}/index.html`, out);
 }
 
+// --- Project case-study pagina's (/project/:slug) -----------------------
+// Deze routes stonden al in sitemap.xml maar kregen nooit een eigen
+// dist/project/<slug>/index.html. GitHub Pages gaf dus een echte 404 zodra
+// iemand (of Google, of een AI-crawler) zo'n project-URL rechtstreeks
+// opende, en de pagina's deelden bij client-side navigatie de homepage-meta.
+// Fix hieronder, in dezelfde stijl als routeMeta hierboven: meta wordt
+// afgeleid uit data/projects.ts (regex-parse, geen TS-compile nodig in dit
+// losse postbuild-script). Groeit automatisch mee met nieuwe projecten.
+// Blijft het patroon slug/title/client/description als quoted strings in
+// data/projects.ts staan, dan werkt dit vanzelf; wijkt dat ooit af, faalt
+// de regex stil (0 project-pagina's) — check dan de console-telling onder.
+const projectsSrc = readFileSync('data/projects.ts', 'utf8');
+const projectMeta = {};
+for (const block of projectsSrc.split(/\n {2}\{/).slice(1)) {
+  const slug = block.match(/slug:\s*"([^"]+)"/)?.[1];
+  const title = block.match(/title:\s*"([^"]+)"/)?.[1];
+  const client = block.match(/client:\s*"([^"]+)"/)?.[1];
+  const description = block.match(/description:\s*"([^"]+)"/)?.[1];
+  if (slug && !projectMeta[slug] && title && description) {
+    projectMeta[slug] = { title, client, description };
+  }
+}
+
+for (const [slug, p] of Object.entries(projectMeta)) {
+  const url = `${BASE}/project/${slug}`;
+  const pageTitle = esc(`${p.title}${p.client && p.client !== p.title ? ' — ' + p.client : ''} | SocialNow Cases`);
+  const desc = esc(p.description);
+
+  let out = html
+    .replace(/<title>[^<]*<\/title>/, `<title>${pageTitle}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*(")/, `$1${desc}$2`)
+    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${pageTitle}$2`)
+    .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${desc}$2`)
+    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${pageTitle}$2`)
+    .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${desc}$2`);
+
+  // BreadcrumbList + CreativeWork (GEO/SEO): geeft Google en AI-antwoordmachines
+  // de sitehiërarchie én een citeerbaar feitenblok per case.
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE },
+      { '@type': 'ListItem', position: 2, name: 'Projecten', item: `${BASE}/projecten` },
+      { '@type': 'ListItem', position: 3, name: p.title, item: url },
+    ],
+  };
+  const creativeWork = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: p.title,
+    ...(p.client ? { about: p.client } : {}),
+    description: p.description,
+    url,
+    creator: { '@id': `${BASE}/#organization` },
+  };
+  out = out.replace(
+    '</body>',
+    `    <script type="application/ld+json">${JSON.stringify(breadcrumb)}</script>\n` +
+    `    <script type="application/ld+json">${JSON.stringify(creativeWork)}</script>\n  </body>`
+  );
+
+  mkdirSync(`dist/project/${slug}`, { recursive: true });
+  writeFileSync(`dist/project/${slug}/index.html`, out);
+}
+
 copyFileSync('dist/index.html', 'dist/404.html');
-console.log(`[postbuild] ${Object.keys(routeMeta).length} route-pagina's (unieke SEO-meta) + SPA 404-fallback geschreven`);
+console.log(`[postbuild] ${Object.keys(routeMeta).length} route-pagina's + ${Object.keys(projectMeta).length} project-pagina's (unieke SEO-meta) + SPA 404-fallback geschreven`);
