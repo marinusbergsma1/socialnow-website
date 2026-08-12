@@ -8,6 +8,7 @@ import ProgressiveImage from './ProgressiveImage';
 interface TeamItem extends Partial<TeamMember> {
   type?: 'member' | 'hiring';
   specialRole?: boolean;
+  partnership?: string;
   imgCustomClass?: string;
 }
 
@@ -79,6 +80,7 @@ const team: TeamItem[] = [
     type: 'member',
     name: "Steef Komen",
     role: "Partner · Slimme OS-systemen",
+    partnership: "SocialNow × Komen Consultancy",
     image: `${import.meta.env.BASE_URL}images/Steef-Komen.webp`
   },
 ];
@@ -211,6 +213,9 @@ const TeamMemberCard: React.FC<{ member: TeamItem; index: number }> = ({ member,
         <div className="flex items-center gap-2">
           <div className="w-2 md:w-4 h-[1px] bg-[#00A3E0]"></div>
           <p className="text-[7px] md:text-[10px] font-bold uppercase tracking-widest text-gray-400 group-hover:text-[#00A3E0] transition-colors line-clamp-1">{member.role}</p>
+          {member.partnership && (
+            <p className="text-[7px] md:text-[9px] font-bold uppercase tracking-widest text-[#00A3E0]/80 mt-1 line-clamp-1">{member.partnership}</p>
+          )}
         </div>
       </div>
     </div>
@@ -296,7 +301,7 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
         {partners.length > 0 && (
           <div className="max-w-6xl mx-auto px-1 md:px-0 mb-10 md:mb-16">
             <p className="font-mono text-[10px] tracking-[0.4em] text-[#00A3E0] uppercase mb-4 md:mb-6 text-center md:text-left">
-              /// MAIN_FOCUS · OS-SYSTEMEN — ONZE PARTNERS
+              /// SOCIALNOW × KOMEN CONSULTANCY — SLIMME OS-SYSTEMEN
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
               {partners.map((member, index) => (
