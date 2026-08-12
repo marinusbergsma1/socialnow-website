@@ -96,11 +96,25 @@ const crew: CrewMember[] = [
 ];
 
 // OS-partners — de main focus: slimme OS-systemen. Samen bovenaan, los van de crew.
-const osPartners = [
+interface OsPartner {
+  name: string;
+  role: string;
+  company: string;
+  tag: string;
+  color: string;
+  image: string;
+  sub: string;
+  logo?: string;
+  credentials?: string;
+}
+
+const osPartners: OsPartner[] = [
   {
     name: 'Steef Komen',
     role: 'Partner · Slimme OS-systemen',
     company: 'Komen Consultancy',
+    logo: `${BASE}images/komen-consultancy-logo.webp`,
+    credentials: 'Accountancy · HvA & VU Amsterdam · 5 jaar Ernst & Young',
     tag: 'PARTNER_OS',
     color: '#00A3E0',
     image: `${BASE}images/Steef-Komen.webp`,
@@ -296,8 +310,20 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                     {p.name}
                   </h3>
                   <p className="font-bold tracking-widest text-[10px] uppercase mb-1.5" style={{ color: p.color }}>{p.role}</p>
-                  <p className="text-white/40 font-bold tracking-widest text-[10px] uppercase mb-5">SocialNow × {p.company}</p>
+                  {p.logo ? (
+                    <div className="flex items-center gap-2.5 mb-4">
+                      <span className="text-white/40 font-bold tracking-widest text-[10px] uppercase">SocialNow ×</span>
+                      <img src={p.logo} alt={p.company} className="h-5 w-auto opacity-80" loading="lazy" decoding="async" />
+                    </div>
+                  ) : (
+                    <p className="text-white/40 font-bold tracking-widest text-[10px] uppercase mb-4">SocialNow × {p.company}</p>
+                  )}
                   <p className="text-gray-500 text-sm leading-relaxed">{p.sub}</p>
+                  {p.credentials && (
+                    <p className="text-white/30 font-bold tracking-widest text-[9px] uppercase mt-4 pt-4 border-t border-white/[0.07]">
+                      {p.credentials}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
