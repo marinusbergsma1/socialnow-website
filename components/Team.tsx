@@ -217,9 +217,12 @@ const TeamMemberCard: React.FC<{ member: TeamItem; index: number }> = ({ member,
   );
 };
 
+const PARTNER_NAMES = ['Steef Komen', 'Jos Hollenberg'];
+
 const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
   const founder = team.find(m => m.name === "Marinus Bergsma");
-  const otherMembers = team.filter(m => m.name !== "Marinus Bergsma" && m.type === 'member');
+  const partners = PARTNER_NAMES.map(n => team.find(m => m.name === n)).filter(Boolean) as TeamItem[];
+  const otherMembers = team.filter(m => m.name !== "Marinus Bergsma" && !PARTNER_NAMES.includes(m.name || '') && m.type === 'member');
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const motorVideoRef = useRef<HTMLVideoElement>(null);
 
@@ -280,13 +283,27 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
                             "Ik startte SocialNow met één overtuiging: de beste merken worden gebouwd door mensen die technologie omarmen, niet vrezen."
                         </p>
                         <p className="text-gray-600 text-xs md:text-sm leading-relaxed mb-6 md:mb-12 font-medium max-w-lg">
-                            Van Amsterdam Light Festival en AZ Alkmaar tot het opbouwen van een eigen creatief bureau. Marinus richtte SocialNow op in 2021 met de missie om concept, creatie en realisatie samen te brengen. Vandaag leidt hij een team van 7 specialisten vanuit Amsterdam.
+                            Marinus bouwde campagnes voor Amsterdam Light Festival, AZ en Universal voordat hij in 2021 SocialNow startte. Vandaag ontwerpt hij OS-systemen: complete AI-machines waarin website, CRM, content en advertenties als één geheel draaien. Elk concept gaat persoonlijk door zijn handen — je werkt direct met de maker.
                         </p>
 
                         <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="w-full md:w-auto">Kennismaken</Button>
                     </div>
                 </div>
             </div>
+        )}
+
+        {/* OS-partners — direct onder de founder, apart van de rest */}
+        {partners.length > 0 && (
+          <div className="max-w-6xl mx-auto px-1 md:px-0 mb-10 md:mb-16">
+            <p className="font-mono text-[10px] tracking-[0.4em] text-[#00A3E0] uppercase mb-4 md:mb-6 text-center md:text-left">
+              /// MAIN_FOCUS · OS-SYSTEMEN — ONZE PARTNERS
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
+              {partners.map((member, index) => (
+                <TeamMemberCard key={member.id} member={member} index={index} />
+              ))}
+            </div>
+          </div>
         )}
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto px-1 md:px-0">
