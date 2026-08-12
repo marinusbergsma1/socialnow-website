@@ -28,7 +28,7 @@ const team: TeamItem[] = [
     id: 2, 
     type: 'member',
     name: "Jos Hollenberg", 
-    role: "Marketeer / SEO Engineer", 
+    role: "Partner · OS-systemen & Groei", 
     image: `${import.meta.env.BASE_URL}images/Jos-Hollenberg-1.webp` 
   },
   { 
@@ -78,7 +78,7 @@ const team: TeamItem[] = [
     id: 9,
     type: 'member',
     name: "Steef Komen",
-    role: "Partner · Slimme AI-systemen",
+    role: "Partner · Slimme OS-systemen",
     image: `${import.meta.env.BASE_URL}images/Steef-Komen.webp`
   },
 ];

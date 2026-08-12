@@ -22,7 +22,7 @@ const founder = {
   quote:
     '"Ik startte SocialNow met één overtuiging: de beste merken worden gebouwd door mensen die technologie omarmen, niet vrezen."',
   sub:
-    'Van campagnes voor Amsterdam Light Festival en AZ Alkmaar tot een eigen AI-studio. Marinus richtte SocialNow op in 2021 en bewaakt elk project persoonlijk. Voor de uitvoering schakelt hij per opdracht de scherpste specialisten en zzp\'ers uit zijn netwerk in — precies de juiste vakmensen, precies wanneer jouw project erom vraagt. Geen accountmanager, geen ruis: je werkt direct met de maker.',
+    'Marinus bouwde campagnes voor Amsterdam Light Festival, AZ en Universal voordat hij in 2021 SocialNow startte. Vandaag ontwerpt hij OS-systemen: complete AI-machines waarin website, CRM, content en advertenties als één geheel draaien. Elk concept gaat persoonlijk door zijn handen, met per project de scherpste specialisten uit zijn netwerk eromheen. Geen accountmanager, geen ruis: je werkt direct met de maker.',
 };
 
 interface CrewMember {
@@ -37,15 +37,6 @@ interface CrewMember {
 }
 
 const crew: CrewMember[] = [
-  {
-    id: 2,
-    name: 'Jos Hollenberg',
-    role: 'Marketeer / SEO Engineer',
-    tag: 'SEO_ENGINE',
-    line: 'Zorgt dat je gevonden wordt vóór je concurrent.',
-    color: '#25D366',
-    image: `${BASE}images/Jos-Hollenberg-1.webp`,
-  },
   {
     id: 3,
     name: 'Sergio Jovovic',
@@ -104,17 +95,29 @@ const crew: CrewMember[] = [
   },
 ];
 
-// Partner — eigen status naast founder en crew
-const partner = {
-  name: 'Steef Komen',
-  role: 'Partner · Slimme AI-systemen',
-  company: 'Komen Consultancy',
-  tag: 'PARTNER_OS',
-  color: '#00A3E0',
-  image: `${BASE}images/Steef-Komen.webp`,
-  sub:
-    'Met Komen Consultancy slaat SocialNow de handen ineen voor slimme AI-systemen: data-gedreven producten die van ruwe data een verkoopmachine maken, van vastgoed-intelligence tot financiële tooling. Komen Consultancy brengt het financiële en strategische fundament, SocialNow de AI, het design en de uitvoering.',
-};
+// OS-partners — de main focus: slimme OS-systemen. Samen bovenaan, los van de crew.
+const osPartners = [
+  {
+    name: 'Steef Komen',
+    role: 'Partner · Slimme OS-systemen',
+    company: 'Komen Consultancy',
+    tag: 'PARTNER_OS',
+    color: '#00A3E0',
+    image: `${BASE}images/Steef-Komen.webp`,
+    sub:
+      'Met Komen Consultancy slaat SocialNow de handen ineen: Steef brengt het financiële en strategische fundament onder onze OS-systemen, van vastgoed-intelligence tot financiële tooling.',
+  },
+  {
+    name: 'Jos Hollenberg',
+    role: 'Partner · OS-systemen & Groei',
+    company: 'SEO & Marketing',
+    tag: 'GROWTH_OS',
+    color: '#25D366',
+    image: `${BASE}images/Jos-Hollenberg-1.webp`,
+    sub:
+      'Jos zorgt dat elk OS-systeem gevonden wordt en groeit: SEO, marketing en data-gedreven optimalisatie zitten vanaf dag één in het systeem gebakken.',
+  },
+];
 
 const pillars = [
   {
@@ -253,36 +256,51 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
           </div>
         </div>
 
-        {/* 2b. PARTNER — Steef Komen, gespiegelde kaart (foto rechts) */}
+        {/* 2b. OS-PARTNERS — main focus: slimme OS-systemen. Steef & Jos samen bovenaan. */}
         <div className="mb-16 md:mb-24 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
-          <div className="sn-warp-tile rounded-[2rem] md:rounded-[3rem] overflow-hidden" style={{ '--sn-glow': `${partner.color}55` } as React.CSSProperties}>
-            <div className="flex flex-col md:flex-row-reverse items-stretch">
-              <div className="relative w-full md:w-[38%] h-[320px] md:h-auto md:min-h-[420px] shrink-0 group">
-                <ProgressiveImage
-                  src={partner.image}
-                  alt={partner.name}
-                  className="w-full h-full absolute inset-0 transition-transform duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent opacity-80"></div>
-                <span
-                  className="absolute top-5 left-5 font-mono text-[10px] tracking-widest px-3 py-1.5 rounded-md bg-black/70 border"
-                  style={{ borderColor: `${partner.color}55`, color: partner.color }}
-                >
-                  {partner.tag}
-                </span>
+          <div className="mb-8 md:mb-10">
+            <span className="font-mono text-[10px] tracking-[0.4em] text-[#00A3E0] uppercase block mb-5">
+              /// MAIN_FOCUS · OS-SYSTEMEN
+            </span>
+            <h2 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-[0.9]">
+              SAMEN BOUWEN WE <span className="text-[#25D366]">OS-SYSTEMEN</span>
+            </h2>
+            <p className="text-gray-400 font-bold text-base md:text-xl mt-5 leading-tight max-w-2xl">
+              Complete AI-machines waarin website, CRM, content en advertenties als één geheel draaien. Dit is waar SocialNow op stuurt — met twee vaste partners aan boord.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            {osPartners.map((p, i) => (
+              <div
+                key={p.name}
+                className="sn-warp-tile rounded-[2rem] overflow-hidden"
+                style={{ '--sn-glow': `${p.color}55` } as React.CSSProperties}
+              >
+                <div className="relative h-[300px] md:h-[340px] group">
+                  <ProgressiveImage
+                    src={p.image}
+                    alt={p.name}
+                    className="w-full h-full absolute inset-0 transition-transform duration-1000 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent opacity-80"></div>
+                  <span
+                    className="absolute top-5 left-5 font-mono text-[10px] tracking-widest px-3 py-1.5 rounded-md bg-black/70 border"
+                    style={{ borderColor: `${p.color}55`, color: p.color }}
+                  >
+                    {p.tag}
+                  </span>
+                  <span className="absolute top-5 right-5 font-mono text-[11px] text-white/30">0{i + 2} / PARTNER</span>
+                </div>
+                <div className="p-7 md:p-9">
+                  <h3 className="text-2xl md:text-3xl font-black uppercase text-white tracking-tighter leading-none mb-2">
+                    {p.name}
+                  </h3>
+                  <p className="font-bold tracking-widest text-[10px] uppercase mb-1.5" style={{ color: p.color }}>{p.role}</p>
+                  <p className="text-white/40 font-bold tracking-widest text-[10px] uppercase mb-5">SocialNow × {p.company}</p>
+                  <p className="text-gray-500 text-sm leading-relaxed">{p.sub}</p>
+                </div>
               </div>
-              <div className="flex-1 flex flex-col justify-center p-8 md:p-14">
-                <span className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-4 block">02 / PARTNER</span>
-                <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-none mb-3">
-                  {partner.name}
-                </h2>
-                <p className="font-bold tracking-widest text-[10px] uppercase mb-2" style={{ color: partner.color }}>{partner.role}</p>
-                <p className="text-white/40 font-bold tracking-widest text-[10px] uppercase mb-8">SocialNow × {partner.company}</p>
-                <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-lg">
-                  {partner.sub}
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -320,7 +338,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                 DE <span className="text-[#00A3E0]">SPECIALISTEN</span>
               </h2>
               <span className="font-mono text-[10px] tracking-widest text-white/30 uppercase hidden md:block">
-                INDEX 03 → 09
+                INDEX 04 → 09
               </span>
             </div>
             <p className="text-gray-400 font-medium text-sm md:text-base mt-4 max-w-2xl leading-relaxed">
@@ -348,7 +366,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                       style={{ background: isActive ? member.color : 'rgba(255,255,255,0.08)' }}
                     ></span>
                     <span className="font-mono text-[11px] text-white/25 w-7 shrink-0">
-                      {String(index + 3).padStart(2, '0')}
+                      {String(index + 4).padStart(2, '0')}
                     </span>
                     <span className="flex-1 min-w-0">
                       <span
@@ -392,7 +410,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                   {activeMember.tag}
                 </span>
                 <span className="absolute top-6 right-6 font-mono text-[11px] text-white/30">
-                  {String(active + 3).padStart(2, "0")} / 09
+                  {String(active + 4).padStart(2, "0")} / 09
                 </span>
                 <div className="absolute bottom-8 left-8 right-8">
                   <h3 className="text-3xl md:text-4xl font-black uppercase text-white tracking-tighter leading-none mb-2">
@@ -433,7 +451,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                   {member.tag}
                 </span>
                 <span className="absolute top-3 right-3 z-10 font-mono text-[9px] text-white/25">
-                  {String(index + 3).padStart(2, '0')}
+                  {String(index + 4).padStart(2, '0')}
                 </span>
                 <div className="absolute bottom-4 left-4 right-4 z-10">
                   <h3 className="text-sm font-black uppercase text-white tracking-tight leading-none mb-1.5">
