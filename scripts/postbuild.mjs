@@ -91,7 +91,17 @@ for (const [route, meta] of Object.entries(routeMeta)) {
         person('Nick van Keulen', 'Google Ads Expert'),
         person('Sid van Kalken', 'Webdeveloper'),
         person('Michel Pluister', 'Software Engineer'),
-        person('Steef Komen', 'Partner — Slimme AI-systemen'),
+        {
+          '@type': 'Organization',
+          '@id': `${BASE}/#komen-consultancy`,
+          name: 'Komen Consultancy',
+          description: 'Partner van SocialNow voor slimme AI-systemen: financieel en strategisch fundament onder data-gedreven AI-producten.',
+        },
+        {
+          ...person('Steef Komen', 'Partner — Slimme AI-systemen'),
+          worksFor: { '@id': `${BASE}/#komen-consultancy` },
+          affiliation: { '@id': `${BASE}/#organization` },
+        },
       ],
     };
     const teamScript = `<script type="application/ld+json">${JSON.stringify(teamGraph)}</script>`;

@@ -108,11 +108,12 @@ const crew: CrewMember[] = [
 const partner = {
   name: 'Steef Komen',
   role: 'Partner · Slimme AI-systemen',
+  company: 'Komen Consultancy',
   tag: 'PARTNER_OS',
   color: '#00A3E0',
   image: `${BASE}images/Steef-Komen.webp`,
   sub:
-    'Steef en SocialNow bouwen samen aan slimme AI-systemen: data-gedreven producten die van ruwe data een verkoopmachine maken, van vastgoed-intelligence tot financiële tooling. Steef brengt het financiële en strategische fundament, SocialNow de AI, het design en de uitvoering.',
+    'Met Komen Consultancy slaat SocialNow de handen ineen voor slimme AI-systemen: data-gedreven producten die van ruwe data een verkoopmachine maken, van vastgoed-intelligence tot financiële tooling. Komen Consultancy brengt het financiële en strategische fundament, SocialNow de AI, het design en de uitvoering.',
 };
 
 const pillars = [
@@ -275,7 +276,8 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                 <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-none mb-3">
                   {partner.name}
                 </h2>
-                <p className="font-bold tracking-widest text-[10px] uppercase mb-8" style={{ color: partner.color }}>{partner.role}</p>
+                <p className="font-bold tracking-widest text-[10px] uppercase mb-2" style={{ color: partner.color }}>{partner.role}</p>
+                <p className="text-white/40 font-bold tracking-widest text-[10px] uppercase mb-8">SocialNow × {partner.company}</p>
                 <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-lg">
                   {partner.sub}
                 </p>
