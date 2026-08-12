@@ -78,7 +78,7 @@ const team: TeamItem[] = [
     id: 9,
     type: 'member',
     name: "Steef Komen",
-    role: "Finance Expert",
+    role: "Partner · Slimme AI-systemen",
     image: `${import.meta.env.BASE_URL}images/Steef-Komen.webp`
   },
 ];

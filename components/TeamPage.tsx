@@ -102,16 +102,18 @@ const crew: CrewMember[] = [
     color: '#00A3E0',
     image: `${BASE}images/Michel-Pluister.webp`,
   },
-  {
-    id: 9,
-    name: 'Steef Komen',
-    role: 'Finance Expert',
-    tag: 'FINANCE_OPS',
-    line: 'Rekent elk plan financieel scherp door, van ROI tot vastgoeddata.',
-    color: '#F7E644',
-    image: `${BASE}images/Steef-Komen.webp`,
-  },
 ];
+
+// Partner — eigen status naast founder en crew
+const partner = {
+  name: 'Steef Komen',
+  role: 'Partner · Slimme AI-systemen',
+  tag: 'PARTNER_OS',
+  color: '#00A3E0',
+  image: `${BASE}images/Steef-Komen.webp`,
+  sub:
+    'Steef en SocialNow bouwen samen aan slimme AI-systemen: data-gedreven producten die van ruwe data een verkoopmachine maken, van vastgoed-intelligence tot financiële tooling. Steef brengt het financiële en strategische fundament, SocialNow de AI, het design en de uitvoering.',
+};
 
 const pillars = [
   {
@@ -250,6 +252,38 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
           </div>
         </div>
 
+        {/* 2b. PARTNER — Steef Komen, gespiegelde kaart (foto rechts) */}
+        <div className="mb-16 md:mb-24 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
+          <div className="sn-warp-tile rounded-[2rem] md:rounded-[3rem] overflow-hidden" style={{ '--sn-glow': `${partner.color}55` } as React.CSSProperties}>
+            <div className="flex flex-col md:flex-row-reverse items-stretch">
+              <div className="relative w-full md:w-[38%] h-[320px] md:h-auto md:min-h-[420px] shrink-0 group">
+                <ProgressiveImage
+                  src={partner.image}
+                  alt={partner.name}
+                  className="w-full h-full absolute inset-0 transition-transform duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent opacity-80"></div>
+                <span
+                  className="absolute top-5 left-5 font-mono text-[10px] tracking-widest px-3 py-1.5 rounded-md bg-black/70 border"
+                  style={{ borderColor: `${partner.color}55`, color: partner.color }}
+                >
+                  {partner.tag}
+                </span>
+              </div>
+              <div className="flex-1 flex flex-col justify-center p-8 md:p-14">
+                <span className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-4 block">02 / PARTNER</span>
+                <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter leading-none mb-3">
+                  {partner.name}
+                </h2>
+                <p className="font-bold tracking-widest text-[10px] uppercase mb-8" style={{ color: partner.color }}>{partner.role}</p>
+                <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-lg">
+                  {partner.sub}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* 3. WAARDEN-TICKER — geen glas hierbinnen (transform-wrapper) */}
         <div className="relative overflow-hidden mb-16 md:mb-24 py-4 border-y border-white/10">
           <div
@@ -284,7 +318,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                 DE <span className="text-[#00A3E0]">SPECIALISTEN</span>
               </h2>
               <span className="font-mono text-[10px] tracking-widest text-white/30 uppercase hidden md:block">
-                INDEX 02 → 09
+                INDEX 03 → 09
               </span>
             </div>
             <p className="text-gray-400 font-medium text-sm md:text-base mt-4 max-w-2xl leading-relaxed">
@@ -312,7 +346,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                       style={{ background: isActive ? member.color : 'rgba(255,255,255,0.08)' }}
                     ></span>
                     <span className="font-mono text-[11px] text-white/25 w-7 shrink-0">
-                      {String(index + 2).padStart(2, '0')}
+                      {String(index + 3).padStart(2, '0')}
                     </span>
                     <span className="flex-1 min-w-0">
                       <span
@@ -356,7 +390,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                   {activeMember.tag}
                 </span>
                 <span className="absolute top-6 right-6 font-mono text-[11px] text-white/30">
-                  {String(active + 2).padStart(2, "0")} / 09
+                  {String(active + 3).padStart(2, "0")} / 09
                 </span>
                 <div className="absolute bottom-8 left-8 right-8">
                   <h3 className="text-3xl md:text-4xl font-black uppercase text-white tracking-tighter leading-none mb-2">
@@ -397,7 +431,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                   {member.tag}
                 </span>
                 <span className="absolute top-3 right-3 z-10 font-mono text-[9px] text-white/25">
-                  {String(index + 2).padStart(2, '0')}
+                  {String(index + 3).padStart(2, '0')}
                 </span>
                 <div className="absolute bottom-4 left-4 right-4 z-10">
                   <h3 className="text-sm font-black uppercase text-white tracking-tight leading-none mb-1.5">
