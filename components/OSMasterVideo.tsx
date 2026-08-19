@@ -8,8 +8,8 @@ import { Play, Volume2, VolumeX } from 'lucide-react';
  */
 
 const BASE = import.meta.env.BASE_URL;
-const SRC = `${BASE}video/os/os-master-en.mp4?v=3`;
-const POSTER = `${BASE}video/os/os-master-en.webp?v=3`;
+const SRC = `${BASE}video/os/os-master-en.mp4?v=4`;
+const POSTER = `${BASE}video/os/os-master-en.webp?v=4`;
 
 const OSMasterVideo: React.FC = () => {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -62,14 +62,14 @@ const OSMasterVideo: React.FC = () => {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[#25D366]" />
             <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/60">
-              Het hele systeem in ruim een minuut
+              Het hele systeem in één minuut
             </span>
           </div>
           <h2 className="text-2xl md:text-5xl lg:text-6xl font-black uppercase text-white tracking-tighter leading-none mb-3">
             ÉÉN CHAT VOOR <span className="text-[#25D366]">JE HELE BEDRIJF</span>
           </h2>
           <p className="text-gray-500 text-xs md:text-base font-medium max-w-xl mx-auto">
-            Je website, CRM, content en advertenties in één gesprek. Engels gesproken.
+            Je website, CRM, content en advertenties in één gesprek. Engels gesproken, met ondertitelbare uitleg van elke stap.
           </p>
         </div>
 
