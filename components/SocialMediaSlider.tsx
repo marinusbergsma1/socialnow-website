@@ -26,14 +26,11 @@ type BeholdPost = {
   ratio?: number;
 };
 
-// Native verhouding van een post (b/h) — posts worden NOOIT bijgesneden:
-// 9:16 blijft 9:16, 1:1 blijft 1:1, 4:5 blijft 4:5.
-const postRatio = (p: BeholdPost): number => {
-  const f = p.sizes?.full;
-  if (f && f.width > 0 && f.height > 0) return f.width / f.height;
-  if (p.ratio) return p.ratio;
-  return p.mediaType === 'VIDEO' || p.isReel ? 9 / 16 : 1;
-};
+// Alle feed-posts krijgen dezelfde staande verhouding (4:5). Dat geeft een
+// rustige, gelijkmatige rij; wisselende verhoudingen maakten de slider onrustig.
+// Eigen fallback-beelden houden hun eigen verhouding, die zijn geen feed-post.
+const FEED_RATIO = 4 / 5;
+const postRatio = (p: BeholdPost): number => p.ratio ?? FEED_RATIO;
 
 type BeholdFeed = {
   username: string;
@@ -98,6 +95,7 @@ const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean; onBroken: (id: 
       .filter((u, i, arr) => arr.indexOf(u) === i);
   }, [post]);
   const [srcIndex, setSrcIndex] = useState(0);
+  const [loaded, setLoaded] = useState(false);
   const src = sources[srcIndex];
 
   const handleError = useCallback(() => {
@@ -106,6 +104,15 @@ const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean; onBroken: (id: 
   }, [srcIndex, sources.length, onBroken, post.id]);
 
   useEffect(() => { if (sources.length === 0) onBroken(post.id); }, [sources.length, onBroken, post.id]);
+
+  // Vangnet: een bron die blijft hangen geeft nooit een error-event, en dan
+  // zou er alsnog een lege kaart blijven staan. Laadt hij niet binnen zes
+  // seconden, dan behandelen we hem als mislukt.
+  useEffect(() => {
+    if (!shouldLoad || !src || loaded) return;
+    const t = setTimeout(handleError, 6000);
+    return () => clearTimeout(t);
+  }, [shouldLoad, src, loaded, handleError]);
 
   return (
     <div ref={containerRef} className="w-full h-full bg-zinc-900 relative">
@@ -116,6 +123,7 @@ const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean; onBroken: (id: 
           alt={post.prunedCaption?.slice(0, 80) || 'Instagram post'}
           loading="lazy"
           decoding="async"
+          onLoad={() => setLoaded(true)}
           onError={handleError}
           className="w-full h-full object-cover pointer-events-none"
         />
@@ -488,7 +496,12 @@ const SocialMediaSlider: React.FC = () => {
       .then(data => {
         if (cancelled) return;
         // Sort newest first (Behold returns newest first by default, but be defensive)
-        const sorted = [...data.posts].sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+        // Video's en reels blijven uit de slider. Hun Instagram-URL's zijn kort
+        // geldig: zodra de signature verloopt geven zowel de behold-renditions
+        // (502) als thumbnail en video (403) niets meer, en blijft er een lege
+        // kaart staan. Alleen afbeeldingen en carrousels dus.
+        const bruikbaar = data.posts.filter((p) => p.mediaType !== 'VIDEO' && !p.isReel);
+        const sorted = [...bruikbaar].sort((a, b) => b.timestamp.localeCompare(a.timestamp));
         setPosts(sorted);
         setFeed({ username: data.username || 'socialnow.nl', avatar: data.profilePictureUrl });
       })
