@@ -66,7 +66,7 @@ const FALLBACK_POSTS: BeholdPost[] = ([
 }));
 
 // ─── Lazy media: only loads when near viewport ──────────────────────────
-const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean }> = ({ post, isMobile }) => {
+const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean; onBroken: (id: string) => void }> = ({ post, isMobile, onBroken }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
 
@@ -87,18 +87,36 @@ const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean }> = ({ post, is
   // In de slider ALTIJD een afbeelding (stabiele behold.pictures-rendition):
   // Instagram-video-URL's verlopen/falen geregeld → lege zwarte kaarten.
   // De video zelf speelt pas in de lightbox. Play-badge markeert reels.
-  const src = post.sizes?.large?.mediaUrl || post.thumbnailUrl || post.mediaUrl;
-  const fallback = post.thumbnailUrl && post.thumbnailUrl !== src ? post.thumbnailUrl : undefined;
+  // Alle bronnen op volgorde: valt er een weg, dan schuift hij door naar de
+  // volgende. Zijn ze allemaal op (verlopen IG-signature: 403, of behold
+  // rendition 502), dan meldt hij de post kapot en verdwijnt de kaart uit de
+  // slider. Zo blijft er nooit een zwarte kaart met alt-tekst staan.
+  const sources = useMemo(() => {
+    const s = post.sizes;
+    return [s?.large?.mediaUrl, s?.medium?.mediaUrl, s?.small?.mediaUrl, post.thumbnailUrl, post.mediaUrl]
+      .filter((u): u is string => Boolean(u))
+      .filter((u, i, arr) => arr.indexOf(u) === i);
+  }, [post]);
+  const [srcIndex, setSrcIndex] = useState(0);
+  const src = sources[srcIndex];
+
+  const handleError = useCallback(() => {
+    if (srcIndex + 1 >= sources.length) { onBroken(post.id); return; }
+    setSrcIndex(srcIndex + 1);
+  }, [srcIndex, sources.length, onBroken, post.id]);
+
+  useEffect(() => { if (sources.length === 0) onBroken(post.id); }, [sources.length, onBroken, post.id]);
 
   return (
     <div ref={containerRef} className="w-full h-full bg-zinc-900 relative">
-      {shouldLoad && (
+      {shouldLoad && src && (
         <img
+          key={src}
           src={src}
           alt={post.prunedCaption?.slice(0, 80) || 'Instagram post'}
           loading="lazy"
           decoding="async"
-          onError={(e) => { if (fallback && e.currentTarget.src !== fallback) e.currentTarget.src = fallback; }}
+          onError={handleError}
           className="w-full h-full object-cover pointer-events-none"
         />
       )}
@@ -112,7 +130,7 @@ const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean }> = ({ post, is
 };
 
 // ─── Infinite Loop Slider ───────────────────────────────────────────────
-const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[]; onOpen: (index: number) => void }> = ({ posts, onOpen }) => {
+const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[]; onOpen: (index: number) => void; onBroken: (id: string) => void }> = ({ posts, onOpen, onBroken }) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>(0);
   const positionRef = useRef(0);
@@ -288,7 +306,7 @@ const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[]; onOpen: (index: numb
                   transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
                 }}
               >
-                <LazyMedia post={post} isMobile={isMobile} />
+                <LazyMedia post={post} isMobile={isMobile} onBroken={onBroken} />
                 <div
                   className="absolute bottom-0 left-0 right-0 pointer-events-none"
                   style={{
@@ -350,6 +368,9 @@ const MediaLightbox: React.FC<{
   onNav: (dir: 1 | -1) => void;
 }> = ({ posts, index, feed, onClose, onNav }) => {
   const post = posts[index];
+  // Reel-URL's van Instagram verlopen: speelt de video niet, dan tonen we de
+  // afbeelding plus de link naar Instagram in plaats van een zwart vlak.
+  const [videoFailedId, setVideoFailedId] = useState<string | null>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -364,8 +385,10 @@ const MediaLightbox: React.FC<{
   }, [onClose, onNav]);
 
   if (!post) return null;
-  const isVideo = post.mediaType === 'VIDEO';
-  const mediaSrc = isVideo ? post.mediaUrl : (post.sizes?.large?.mediaUrl || post.mediaUrl);
+  const videoFailed = videoFailedId === post.id;
+  const isVideo = post.mediaType === 'VIDEO' && !videoFailed;
+  const imageSrc = post.sizes?.large?.mediaUrl || post.thumbnailUrl || post.mediaUrl;
+  const mediaSrc = isVideo ? post.mediaUrl : imageSrc;
   const caption = post.caption || post.prunedCaption || '';
 
   // Portal naar body: ontsnapt aan voorouders met transform/filter/will-change
@@ -404,7 +427,7 @@ const MediaLightbox: React.FC<{
         {/* Media — native verhouding, nooit gecropt */}
         <div className="relative bg-black flex items-center justify-center md:w-[58%] max-h-[45vh] md:max-h-[85vh]">
           {isVideo ? (
-            <video key={post.id} src={mediaSrc} poster={post.thumbnailUrl} autoPlay loop playsInline controls className="max-w-full max-h-[45vh] md:max-h-[85vh] w-auto h-auto object-contain" />
+            <video key={post.id} src={mediaSrc} poster={post.thumbnailUrl} autoPlay loop playsInline controls onError={() => setVideoFailedId(post.id)} className="max-w-full max-h-[45vh] md:max-h-[85vh] w-auto h-auto object-contain" />
           ) : (
             <img key={post.id} src={mediaSrc} alt={caption.slice(0, 80) || 'Instagram post'} className="max-w-full max-h-[45vh] md:max-h-[85vh] w-auto h-auto object-contain" />
           )}
@@ -449,6 +472,11 @@ const SocialMediaSlider: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [feed, setFeed] = useState<FeedMeta>({ username: 'socialnow.nl' });
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [brokenIds, setBrokenIds] = useState<Set<string>>(() => new Set());
+
+  const markBroken = useCallback((id: string) => {
+    setBrokenIds((cur) => (cur.has(id) ? cur : new Set(cur).add(id)));
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -473,6 +501,14 @@ const SocialMediaSlider: React.FC = () => {
   // Feed stuk (bv. Behold-source gepauzeerd)? Toon eigen werk i.p.v. niets —
   // de sectie mag nooit stilletjes van de site verdwijnen.
   const effectivePosts = error ? FALLBACK_POSTS : posts;
+
+  // Posts waarvan geen enkele afbeelding meer laadt (verlopen Instagram-links)
+  // verdwijnen uit de slider én uit de popup, zodat er geen lege kaart blijft.
+  const visiblePosts = useMemo(() => {
+    if (!effectivePosts) return null;
+    const ok = effectivePosts.filter((p) => !brokenIds.has(p.id));
+    return ok.length > 0 ? ok : FALLBACK_POSTS;
+  }, [effectivePosts, brokenIds]);
 
   return (
     <section className="py-10 md:py-28 bg-transparent overflow-hidden relative border-t border-white/5">
@@ -523,19 +559,19 @@ const SocialMediaSlider: React.FC = () => {
       >
         <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
-        {effectivePosts === null ? <SliderSkeleton /> : <InfiniteSocialSlider posts={effectivePosts} onOpen={setLightboxIndex} />}
+        {visiblePosts === null ? <SliderSkeleton /> : <InfiniteSocialSlider posts={visiblePosts} onOpen={setLightboxIndex} onBroken={markBroken} />}
       </div>
 
       {/* Popup-gallery */}
-      {lightboxIndex !== null && effectivePosts && (
+      {lightboxIndex !== null && visiblePosts && (
         <MediaLightbox
-          posts={effectivePosts}
-          index={lightboxIndex}
+          posts={visiblePosts}
+          index={Math.min(lightboxIndex, visiblePosts.length - 1)}
           feed={feed}
           onClose={() => setLightboxIndex(null)}
           onNav={(dir) => setLightboxIndex((cur) => {
             if (cur === null) return cur;
-            const n = effectivePosts.length;
+            const n = visiblePosts.length;
             return (cur + dir + n) % n;
           })}
         />
