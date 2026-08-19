@@ -135,8 +135,8 @@ const Card: React.FC<{
       >
         <video
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=1`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=1`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=2`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=2`}
           preload="none"
           playsInline
           loop
@@ -232,8 +232,8 @@ const Lightbox: React.FC<{ index: number; onClose: () => void; onNav: (d: 1 | -1
         <video
           key={pillar.key}
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=1`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=1`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=2`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=2`}
           playsInline
           loop
           controls
@@ -290,7 +290,7 @@ const OSPillars: React.FC = () => {
         </div>
 
         <p className="text-center text-white/25 text-[11px] font-medium mt-6">
-          Voorbeeldweergave van het systeem.
+          Voorbeeldweergave van het systeem, met verzonnen gegevens.
         </p>
       </div>
 

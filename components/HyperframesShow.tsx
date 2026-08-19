@@ -200,7 +200,7 @@ const HyperframesShow: React.FC<Props> = ({ phase, onStart, onFinish }) => {
                 }}
               >
                 <img
-                  src={`${BASE}video/os/${f.file}.webp?v=1`}
+                  src={`${BASE}video/os/${f.file}.webp?v=2`}
                   alt=""
                   loading="eager"
                   decoding="async"
