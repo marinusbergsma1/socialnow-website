@@ -135,8 +135,8 @@ const Card: React.FC<{
       >
         <video
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=3`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=3`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=4`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=4`}
           preload="none"
           playsInline
           loop
@@ -149,7 +149,7 @@ const Card: React.FC<{
           className="absolute inset-0 transition-opacity duration-500 pointer-events-none"
           style={{
             opacity: isActive ? 0 : 1,
-            background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.12) 38%, rgba(0,0,0,0.30) 100%)',
+            background: 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.06) 45%, rgba(0,0,0,0.18) 100%)',
           }}
         />
 
@@ -231,8 +231,8 @@ const Lightbox: React.FC<{ index: number; onClose: () => void; onNav: (d: 1 | -1
         <video
           key={pillar.key}
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=3`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=3`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=4`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=4`}
           playsInline
           loop
           controls
