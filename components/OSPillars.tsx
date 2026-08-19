@@ -83,6 +83,9 @@ const Card: React.FC<{
 }> = ({ pillar, index, activeKey, onActivate, onOpen }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isActive = activeKey === pillar.key;
+  // De poster blijft liggen tot de video echt loopt. Zo staat er nooit een zwart
+  // vlak, ook niet tijdens het laden of vlak na het weghalen van de muis.
+  const [speelt, setSpeelt] = useState(false);
   // Houdt bij of deze kaart NU nog aan de beurt is. play() is asynchroon: zonder
   // deze check start een afgebroken poging de video alsnog, en dan lopen er twee
   // tegelijk.
@@ -103,6 +106,7 @@ const Card: React.FC<{
         });
       }
     } else {
+      setSpeelt(false);
       v.pause();
       v.currentTime = 0;
       v.muted = true;
@@ -135,20 +139,32 @@ const Card: React.FC<{
       >
         <video
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=4`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=4`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=5`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=5`}
           preload="none"
           playsInline
           loop
           muted
+          onPlaying={() => setSpeelt(true)}
+          onPause={() => setSpeelt(false)}
           className="absolute inset-0 w-full h-full object-cover"
+        />
+
+        {/* Stilstaand beeld: ligt eroverheen zolang de video niet loopt */}
+        <img
+          src={`${BASE}video/os/${pillar.file}.webp?v=5`}
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 pointer-events-none"
+          style={{ opacity: speelt ? 0 : 1 }}
         />
 
         {/* Rustige donkere sluier zolang de kaart stil staat */}
         <div
           className="absolute inset-0 transition-opacity duration-500 pointer-events-none"
           style={{
-            opacity: isActive ? 0 : 1,
+            opacity: speelt ? 0 : 1,
             background: 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.06) 45%, rgba(0,0,0,0.18) 100%)',
           }}
         />
@@ -156,7 +172,7 @@ const Card: React.FC<{
         {/* Afspeelteken, verdwijnt zodra hij loopt */}
         <div
           className="absolute inset-0 flex items-center justify-center transition-all duration-300 pointer-events-none"
-          style={{ opacity: isActive ? 0 : 1 }}
+          style={{ opacity: speelt ? 0 : 1 }}
         >
           <span className="w-14 h-14 rounded-full bg-black/55 backdrop-blur-sm flex items-center justify-center border border-white/15">
             <Play size={20} className="text-white ml-0.5" fill="white" />
@@ -231,8 +247,8 @@ const Lightbox: React.FC<{ index: number; onClose: () => void; onNav: (d: 1 | -1
         <video
           key={pillar.key}
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=4`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=4`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=5`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=5`}
           playsInline
           loop
           controls
