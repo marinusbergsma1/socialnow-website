@@ -49,6 +49,8 @@ const PixelCursor = lazyRetry(() => import('./components/PixelCursor'));
 // v2.0 — New sections
 // v2.1 — Bento features grid ("WAT WIJ BOUWEN") vervangt de oude AIMetricsSection ("BEWEZEN IMPACT")
 const BentoFeaturesSection = lazyRetry(() => import('./components/BentoFeaturesSection'));
+// De vier onderdelen van het OS als losse videos, direct onder de hero
+const OSPillars = lazyRetry(() => import('./components/OSPillars'));
 const PricingStrip = lazyRetry(() => import('./components/PricingStrip'));
 
 // Lazy-load popup/modal components — only loaded when opened
@@ -86,6 +88,12 @@ const HomePage: React.FC<{
       <div id="home">
         <Hero startAnimation={!loading} onOpenBooking={onOpenBooking} />
       </div>
+
+      <Suspense fallback={null}>
+        <div className="scroll-reveal">
+          <OSPillars />
+        </div>
+      </Suspense>
 
       <div className="scroll-reveal">
         <Clients />
