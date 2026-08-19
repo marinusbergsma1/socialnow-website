@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Star, Handshake } from 'lucide-react';
 import Button from './Button';
-import HyperframesShow, { useHyperframesShow } from './HyperframesShow';
 import GenerateButton from './GenerateButton';
 
 interface HeroProps {
@@ -44,12 +43,15 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
   const [showCycle, setShowCycle] = useState(false);
   const [showCycleQuote, setShowCycleQuote] = useState(false);
   const [activeReviewIndex, setActiveReviewIndex] = useState(0);
-  // Header-show: de vier schermen van het OS + Genereer-knop vóór de hero-content
-  const { phase, setPhase, finish } = useHyperframesShow();
-  const showDone = phase === 'done';
-  // Speelde de show in deze page-load? Dan staat de headline al (uit de show) en slaat de h1 zijn fade over
+  // Geen introoverlay meer: de grote uitlegvideo onder de hero doet dat werk.
+  // De achtergrond-globe wacht op dit signaal, dus dat geven we meteen.
+  const showDone = true;
+  useEffect(() => {
+    try { sessionStorage.setItem('milo-show', 'done'); } catch { /* noop */ }
+    window.dispatchEvent(new Event('milo-show-done'));
+  }, []);
+  // Geen show meer, dus de h1 doet gewoon zijn eigen fade
   const playedRef = useRef(false);
-  if (phase === 'playing') playedRef.current = true;
 
   // Small delay so fade-in is visible even when loader is skipped (return visits)
   const [animReady, setAnimReady] = useState(false);
@@ -105,10 +107,6 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
 
   return (
     <div className="relative min-h-[100svh] flex flex-col justify-center select-none overflow-hidden bg-transparent">
-      {/* Hyperframes header-show overlay — 1× per sessie */}
-      {startAnimation && (
-        <HyperframesShow phase={phase} onStart={() => setPhase('playing')} onFinish={finish} />
-      )}
       {/* Background Decor — desktop only */}
 
       <section className="flex-grow flex flex-col items-center justify-center pt-24 pb-12 relative z-10">

@@ -51,6 +51,8 @@ const PixelCursor = lazyRetry(() => import('./components/PixelCursor'));
 const BentoFeaturesSection = lazyRetry(() => import('./components/BentoFeaturesSection'));
 // De vier onderdelen van het OS als losse videos, direct onder de hero
 const OSPillars = lazyRetry(() => import('./components/OSPillars'));
+// De grote uitlegvideo, direct onder de hero
+const OSMasterVideo = lazyRetry(() => import('./components/OSMasterVideo'));
 const PricingStrip = lazyRetry(() => import('./components/PricingStrip'));
 
 // Lazy-load popup/modal components — only loaded when opened
@@ -90,6 +92,9 @@ const HomePage: React.FC<{
       </div>
 
       <Suspense fallback={null}>
+        <div className="scroll-reveal">
+          <OSMasterVideo />
+        </div>
         <div className="scroll-reveal">
           <OSPillars />
         </div>
