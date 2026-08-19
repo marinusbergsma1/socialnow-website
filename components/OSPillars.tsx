@@ -111,7 +111,7 @@ const Card: React.FC<{
 
   return (
     <div
-      className="group relative flex-shrink-0 snap-center w-[70vw] sm:w-[44vw] md:w-auto md:flex-1 cursor-pointer"
+      className="group relative flex-shrink-0 snap-center w-[78vw] sm:w-[46vw] md:w-auto md:flex-1 cursor-pointer"
       onMouseEnter={() => onActivate(pillar.key)}
       onMouseLeave={() => onActivate(null)}
       onClick={() => { markGesture(); onOpen(index); }}
@@ -123,9 +123,9 @@ const Card: React.FC<{
       onBlur={() => onActivate(null)}
     >
       <div
-        className="relative w-full overflow-hidden rounded-[1.5rem] bg-[#0b0b0b] border transition-all duration-500"
+        className="relative w-full overflow-hidden rounded-[1.5rem] bg-black border transition-all duration-500"
         style={{
-          aspectRatio: '9 / 16',
+          aspectRatio: '4 / 5',
           borderColor: isActive ? `${pillar.accent}55` : 'rgba(255,255,255,0.07)',
           boxShadow: isActive
             ? `0 24px 70px rgba(0,0,0,0.55), 0 0 46px ${pillar.accent}22`
@@ -135,14 +135,13 @@ const Card: React.FC<{
       >
         <video
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=2`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=2`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=3`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=3`}
           preload="none"
           playsInline
           loop
           muted
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: 'center 34%' }}
         />
 
         {/* Rustige donkere sluier zolang de kaart stil staat */}
@@ -232,8 +231,8 @@ const Lightbox: React.FC<{ index: number; onClose: () => void; onNav: (d: 1 | -1
         <video
           key={pillar.key}
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=2`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=2`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=3`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=3`}
           playsInline
           loop
           controls
