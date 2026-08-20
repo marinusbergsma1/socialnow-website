@@ -139,8 +139,8 @@ const Card: React.FC<{
       >
         <video
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=7`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=7`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=8`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=8`}
           preload="none"
           playsInline
           loop
@@ -152,7 +152,7 @@ const Card: React.FC<{
 
         {/* Stilstaand beeld: ligt eroverheen zolang de video niet loopt */}
         <img
-          src={`${BASE}video/os/${pillar.file}.webp?v=7`}
+          src={`${BASE}video/os/${pillar.file}.webp?v=8`}
           alt=""
           aria-hidden="true"
           draggable={false}
@@ -247,8 +247,8 @@ const Lightbox: React.FC<{ index: number; onClose: () => void; onNav: (d: 1 | -1
         <video
           key={pillar.key}
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=7`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=7`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=8`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=8`}
           playsInline
           loop
           controls
@@ -288,13 +288,13 @@ const OSPillars: React.FC = () => {
         <div className="text-center mb-8 md:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[#25D366]" />
-            <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/60">Het systeem, in vier delen</span>
+            <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/60">Je agents aan het werk</span>
           </div>
           <h2 className="text-2xl md:text-5xl lg:text-6xl font-black uppercase text-white tracking-tighter leading-none mb-3">
-            ZIE HET <span className="text-[#25D366]">ZELF WERKEN</span>
+            VIER AGENTS, <span className="text-[#25D366]">ÉÉN CHAT</span>
           </h2>
           <p className="text-gray-500 text-xs md:text-base font-medium max-w-xl mx-auto">
-            Beweeg over een onderdeel om het te zien draaien. Klik om hem groot te bekijken, met geluid.
+            Vier agents die voor je werken. Beweeg over een onderdeel om te zien hoe zo'n voorstel tot stand komt.
           </p>
         </div>
 
