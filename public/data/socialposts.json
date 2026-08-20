@@ -1,0 +1,65 @@
+{
+  "_leesmij": [
+    "Dit is de collectie die op de startpagina draait bij Dagelijks Nieuw Werk.",
+    "Jij bepaalt wat er staat en in welke volgorde. Zet het beeld in public/images/social/",
+    "en voeg hier een regel toe. De site haalt dit bestand bij elk bezoek opnieuw op,",
+    "dus een nieuwe volgorde staat er meteen op.",
+    "",
+    "beeld    het bestand in public/images/social/",
+    "breed    de breedte van het beeld in punten",
+    "hoog     de hoogte van het beeld in punten",
+    "titel    korte omschrijving, wordt voorgelezen door schermlezers",
+    "link     optioneel, waar de post naartoe gaat. Leeg = naar het profiel"
+  ],
+  "profiel": "https://www.instagram.com/socialnow.nl/",
+  "posts": [
+    {
+      "beeld": "AZ-25-K-Volgers-Post.webp",
+      "breed": 1327,
+      "hoog": 1670,
+      "titel": "AZ Alkmaar, 25.000 volgers"
+    },
+    {
+      "beeld": "C4-FEED-30-korting.webp",
+      "breed": 1479,
+      "hoog": 1479,
+      "titel": "C4 feed, 30 procent korting"
+    },
+    {
+      "beeld": "UNIVERSAL-OPENHEIMER-FRAMES.webp",
+      "breed": 1323,
+      "hoog": 2407,
+      "titel": "Universal, Oppenheimer frames"
+    },
+    {
+      "beeld": "header-Bouadu-v2-1.webp",
+      "breed": 1920,
+      "hoog": 1169,
+      "titel": "Bouadu header"
+    },
+    {
+      "beeld": "1400-Mark-Johnson-LUV-YOU-STILL-1.webp",
+      "breed": 1488,
+      "hoog": 1488,
+      "titel": "Mark Johnson, Luv You Still"
+    },
+    {
+      "beeld": "Light-Art-Collection.webp",
+      "breed": 1920,
+      "hoog": 1170,
+      "titel": "Light Art Collection"
+    },
+    {
+      "beeld": "Soulful-Special-Event-Header-1.webp",
+      "breed": 1920,
+      "hoog": 1004,
+      "titel": "Soulful special event"
+    },
+    {
+      "beeld": "THH-VALENTINE-SALE-STORY-2024-1200x1200-1200x1200-1.webp",
+      "breed": 1480,
+      "hoog": 1480,
+      "titel": "THH Valentine sale"
+    }
+  ]
+}

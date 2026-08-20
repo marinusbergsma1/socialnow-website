@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom';
 import Button from './Button';
 import { Instagram, X, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
-const BEHOLD_FEED_URL = 'https://feeds.behold.so/5Ku5iKM7N7Gpi9MgAN9X';
 
 type BeholdSizes = {
   small?: { width: number; height: number; mediaUrl: string };
@@ -40,6 +39,12 @@ type BeholdFeed = {
 };
 
 type FeedMeta = { username: string; avatar?: string };
+
+/** Het lijstje dat jij zelf bijhoudt in public/data/socialposts.json. */
+type Collectie = {
+  profiel?: string;
+  posts: { beeld: string; breed?: number; hoog?: number; titel?: string; link?: string }[];
+};
 
 // ─── Fallback: eigen werk als de Behold-feed faalt (bv. source gepauzeerd).
 // De sectie mag nooit onzichtbaar zijn; deze posts linken naar Instagram. ───
@@ -494,42 +499,35 @@ const SocialMediaSlider: React.FC = () => {
     setBrokenIds((cur) => (cur.has(id) ? cur : new Set(cur).add(id)));
   }, []);
 
+  // De collectie komt uit public/data/socialposts.json. Dat is een lijstje dat
+  // jij zelf bijhoudt: beeld erin, regel erbij, klaar. Alles staat op onze eigen
+  // server, dus er kan geen kaart leeg blijven doordat een Instagram-link
+  // verlopen is. Lukt het bestand niet, dan draait de ingebouwde reeks.
   useEffect(() => {
-    let cancelled = false;
-    fetch(BEHOLD_FEED_URL, { cache: 'no-cache' })
-      .then(r => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.json() as Promise<BeholdFeed>;
+    let gestopt = false;
+    fetch(`${import.meta.env.BASE_URL}data/socialposts.json`, { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((j: Collectie) => {
+        if (gestopt || !j || !Array.isArray(j.posts) || j.posts.length === 0) throw new Error('leeg');
+        setPosts(j.posts.map((post, i) => ({
+          id: `eigen-${i}-${post.beeld}`,
+          timestamp: '',
+          permalink: post.link || j.profiel || IG,
+          mediaType: 'IMAGE' as const,
+          mediaUrl: `${import.meta.env.BASE_URL}images/social/${post.beeld}`,
+          prunedCaption: post.titel || 'Werk van SocialNow',
+          ratio: post.breed && post.hoog ? post.breed / post.hoog : 1,
+        })));
       })
-      .then(data => {
-        if (cancelled) return;
-        // Reels en video's horen er gewoon bij, anders lijkt de feed maanden
-        // oud zodra er een tijdje vooral reels gepost is. Ze mogen mee zolang
-        // Behold er een eigen, blijvende versie van heeft: een Instagram-URL
-        // verloopt na een paar dagen, een behold-rendition niet. Valt er toch
-        // eentje weg, dan haalt onBroken die kaart alsnog uit de rij.
-        const blijvendBeeld = (p: BeholdPost) =>
-          Boolean(p.sizes?.large?.mediaUrl || p.sizes?.medium?.mediaUrl || p.sizes?.small?.mediaUrl);
-        const bruikbaar = data.posts.filter((p) => {
-          const beweegt = p.mediaType === 'VIDEO' || p.isReel;
-          return !beweegt || blijvendBeeld(p);
-        });
-        const sorted = [...bruikbaar].sort((a, b) => b.timestamp.localeCompare(a.timestamp));
-        setPosts(sorted);
-        setFeed({ username: data.username || 'socialnow.nl', avatar: data.profilePictureUrl });
-      })
-      .catch(err => {
-        if (!cancelled) setError(err.message);
-      });
-    return () => { cancelled = true; };
+      .catch(() => { if (!gestopt) setError('eigen collectie niet gevonden'); });
+    return () => { gestopt = true; };
   }, []);
 
-  // Feed stuk (bv. Behold-source gepauzeerd)? Toon eigen werk i.p.v. niets —
-  // de sectie mag nooit stilletjes van de site verdwijnen.
+  // Valt de collectie weg, dan staat de ingebouwde reeks er nog.
   const effectivePosts = error ? FALLBACK_POSTS : posts;
 
-  // Posts waarvan geen enkele afbeelding meer laadt (verlopen Instagram-links)
-  // verdwijnen uit de slider én uit de popup, zodat er geen lege kaart blijft.
+  // Laadt een beeld toch niet, dan verdwijnt die kaart. Zo blijft er nooit een
+  // leeg zwart vlak in de rij staan.
   const visiblePosts = useMemo(() => {
     if (!effectivePosts) return null;
     const ok = effectivePosts.filter((p) => !brokenIds.has(p.id));
