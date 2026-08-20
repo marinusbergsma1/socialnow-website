@@ -51,6 +51,7 @@ const PixelCursor = lazyRetry(() => import('./components/PixelCursor'));
 // v2.1 — Bento features grid ("WAT WIJ BOUWEN") vervangt de oude AIMetricsSection ("BEWEZEN IMPACT")
 const BentoFeaturesSection = lazyRetry(() => import('./components/BentoFeaturesSection'));
 // De vier onderdelen van het OS als losse videos, direct onder de hero
+const AanbodUitleg = lazyRetry(() => import('./components/AanbodUitleg'));
 const OSPillars = lazyRetry(() => import('./components/OSPillars'));
 const BlijeKlanten = lazyRetry(() => import('./components/BlijeKlanten'));
 // De uitlegvideo als eerste scherm, met scrollstop tot je hem uitkijkt of wegklikt
@@ -96,6 +97,9 @@ const HomePage: React.FC<{
       </div>
 
       <Suspense fallback={null}>
+        {/* Vlak onder de kop: twee uitklappers met de uitleg */}
+        <AanbodUitleg />
+
         <div className="scroll-reveal">
           <OSPillars />
         </div>
