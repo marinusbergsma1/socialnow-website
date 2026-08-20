@@ -67,6 +67,8 @@ const ServicesPage = lazyRetry(() => import('./components/ServicesPage'));
 const ProjectPage = lazyRetry(() => import('./components/ProjectPage'));
 const PrivacyPage = lazyRetry(() => import('./components/PrivacyPage'));
 const PricingPage = lazyRetry(() => import('./components/PricingPage'));
+const BlogPage = lazyRetry(() => import('./components/BlogPage'));
+const BlogPostPage = lazyRetry(() => import('./components/BlogPostPage'));
 
 // Minimal fallback while lazy components load
 const PageLoader = () => (
@@ -349,6 +351,26 @@ const App: React.FC = () => {
               <ErrorBoundary>
                 <Suspense fallback={<PageLoader />}>
                   <PrivacyPage />
+                </Suspense>
+              </ErrorBoundary>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <ErrorBoundary>
+                <Suspense fallback={<PageLoader />}>
+                  <BlogPage onOpenBooking={() => setIsBookingOpen(true)} />
+                </Suspense>
+              </ErrorBoundary>
+            }
+          />
+          <Route
+            path="/blog/:slug"
+            element={
+              <ErrorBoundary>
+                <Suspense fallback={<PageLoader />}>
+                  <BlogPostPage onOpenBooking={() => setIsBookingOpen(true)} />
                 </Suspense>
               </ErrorBoundary>
             }

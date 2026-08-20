@@ -32,6 +32,10 @@ const routeMeta = {
     title: 'Team — Wij zijn SocialNow | SocialNow',
     description: 'Maak kennis met het team achter SocialNow, het AI-native creative agency uit Amsterdam. Founder Marinus Bergsma en het team dat merken laat groeien.',
   },
+  blog: {
+    title: 'Blog — AI Websites, SEO en GEO | SocialNow',
+    description: 'Inzichten van SocialNow over AI websites, content automation, SEO en GEO. Praktische uitleg, geschreven vanuit de praktijk.',
+  },
 };
 
 // Zichtbare kruimel-labels per route (voor de BreadcrumbList). Vul aan waar nodig.
@@ -41,6 +45,7 @@ const crumbLabels = {
   prijzen: 'Prijzen',
   privacy: 'Privacybeleid',
   team: 'Team',
+  blog: 'Blog',
 };
 
 function esc(s) {
@@ -180,5 +185,131 @@ for (const [slug, p] of Object.entries(projectMeta)) {
   writeFileSync(`dist/project/${slug}/index.html`, out);
 }
 
+// --- Blog-artikelen (/blog/:slug) ----------------------------------------
+// Bron is data/posts.json, echte JSON dus geen regex-parse nodig zoals bij
+// projects.ts hierboven. Elk artikel krijgt een eigen index.html met unieke
+// SEO-meta, BreadcrumbList, BlogPosting (met articleBody) en, als het
+// artikel faqs heeft, een FAQPage. Groeit vanzelf mee zodra de dagelijkse
+// schrijftaak een nieuw artikel toevoegt aan posts.json; niets hieronder
+// hoeft daarvoor aangepast te worden.
+let posts = [];
+try {
+  posts = JSON.parse(readFileSync('data/posts.json', 'utf8'));
+} catch (err) {
+  console.warn('[postbuild] data/posts.json niet gevonden of ongeldig, blog-paginas overgeslagen:', err.message);
+}
+
+for (const post of posts) {
+  const url = `${BASE}/blog/${post.slug}`;
+  const title = esc(`${post.title} | SocialNow Blog`);
+  const desc = esc(post.excerpt);
+
+  let out = html
+    .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*(")/, `$1${desc}$2`)
+    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${title}$2`)
+    .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${desc}$2`)
+    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${title}$2`)
+    .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${desc}$2`);
+
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${BASE}/blog` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: url },
+    ],
+  };
+  const blogPosting = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    articleBody: post.body.replace(/^#+\s*/gm, '').replace(/^[-*>]\s*/gm, ''),
+    datePublished: post.date,
+    dateModified: post.date,
+    image: `${BASE}/${post.coverImage}`,
+    url,
+    author: { '@id': `${BASE}/#organization` },
+    publisher: { '@id': `${BASE}/#organization` },
+    mainEntityOfPage: url,
+  };
+  let scripts =
+    `    <script type="application/ld+json">${JSON.stringify(breadcrumb)}</script>\n` +
+    `    <script type="application/ld+json">${JSON.stringify(blogPosting)}</script>\n`;
+
+  if (post.faqs && post.faqs.length > 0) {
+    const faqPage = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: post.faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    };
+    scripts += `    <script type="application/ld+json">${JSON.stringify(faqPage)}</script>\n`;
+  }
+  out = out.replace('</body>', `${scripts}  </body>`);
+
+  mkdirSync(`dist/blog/${post.slug}`, { recursive: true });
+  writeFileSync(`dist/blog/${post.slug}/index.html`, out);
+}
+
 copyFileSync('dist/index.html', 'dist/404.html');
-console.log(`[postbuild] ${Object.keys(routeMeta).length} route-pagina's + ${Object.keys(projectMeta).length} project-pagina's (unieke SEO-meta) + SPA 404-fallback geschreven`);
+
+// --- sitemap.xml volledig herbouwen ---------------------------------------
+// Was handmatig onderhouden in public/sitemap.xml (nog aanwezig als
+// pre-build placeholder, maar wordt hieronder overschreven). Nu afgeleid
+// van dezelfde bronnen als hierboven (routeMeta, projectMeta, posts) zodat
+// een nieuwe route, project of blogartikel nooit meer vergeten kan worden,
+// ook niet door de dagelijkse geplande taak.
+const routeSitemapMeta = {
+  diensten: { changefreq: 'monthly', priority: '0.9' },
+  projecten: { changefreq: 'weekly', priority: '0.9' },
+  prijzen: { changefreq: 'monthly', priority: '0.8' },
+  team: { changefreq: 'monthly', priority: '0.7' },
+  privacy: { changefreq: 'yearly', priority: '0.3' },
+  blog: { changefreq: 'daily', priority: '0.8' },
+};
+
+function buildDate() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+const sitemapUrls = [
+  { loc: `${BASE}/`, changefreq: 'weekly', priority: '1.0' },
+  ...Object.keys(routeMeta).map((route) => ({
+    loc: `${BASE}/${route}`,
+    ...(routeSitemapMeta[route] || { changefreq: 'monthly', priority: '0.7' }),
+  })),
+  ...Object.keys(projectMeta).map((slug) => ({
+    loc: `${BASE}/project/${slug}`,
+    changefreq: 'monthly',
+    priority: '0.7',
+  })),
+  ...posts.map((post) => ({
+    loc: `${BASE}/blog/${post.slug}`,
+    changefreq: 'monthly',
+    priority: '0.6',
+    lastmod: post.date,
+  })),
+];
+
+const sitemapXml =
+  '<?xml version="1.0" encoding="UTF-8"?>\n' +
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+  sitemapUrls
+    .map(
+      (u) =>
+        `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${u.lastmod || buildDate()}</lastmod>\n    <changefreq>${u.changefreq}</changefreq>\n    <priority>${u.priority}</priority>\n  </url>`
+    )
+    .join('\n') +
+  '\n</urlset>\n';
+
+writeFileSync('dist/sitemap.xml', sitemapXml);
+
+console.log(`[postbuild] ${Object.keys(routeMeta).length} route-pagina's + ${Object.keys(projectMeta).length} project-pagina's + ${posts.length} blog-pagina's (unieke SEO-meta) + SPA 404-fallback + sitemap.xml (${sitemapUrls.length} urls) geschreven`);

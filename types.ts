@@ -27,6 +27,23 @@ export interface Project {
   noEmbed?: boolean;
 }
 
+export interface BlogFAQ {
+  question: string;
+  answer: string;
+}
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  coverImage: string;
+  readTime?: string;
+  tags?: string[];
+  body: string;
+  faqs?: BlogFAQ[];
+}
+
 export interface TeamMember {
   id: number;
   name: string;
