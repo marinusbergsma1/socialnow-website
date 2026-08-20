@@ -9,8 +9,8 @@ import { Volume2, VolumeX, X } from 'lucide-react';
  */
 
 const BASE = import.meta.env.BASE_URL;
-const SRC = `${BASE}video/os/os-master-en.mp4?v=11`;
-const POSTER = `${BASE}video/os/os-master-en.webp?v=11`;
+const SRC = `${BASE}video/os/os-master-en.mp4?v=12`;
+const POSTER = `${BASE}video/os/os-master-en.webp?v=12`;
 const SLEUTEL = 'sn-os-intro';
 
 const OSIntro: React.FC = () => {
@@ -32,6 +32,25 @@ const OSIntro: React.FC = () => {
       // op een telefoon start hij ook, maar dan zonder het grote kader
       void kleinScherm;
     }
+  }, []);
+
+  // Ergens anders op de pagina kan hij opnieuw geopend worden
+  useEffect(() => {
+    const opnieuw = () => {
+      setWeg(false);
+      setStil(true);
+      setDeel(0);
+      setOpen(true);
+      window.setTimeout(() => {
+        const v = videoRef.current;
+        if (!v) return;
+        v.currentTime = 0;
+        v.muted = true;
+        v.play().catch(() => { /* geeft niet */ });
+      }, 40);
+    };
+    window.addEventListener('sn-intro-open', opnieuw);
+    return () => window.removeEventListener('sn-intro-open', opnieuw);
   }, []);
 
   // Zolang hij open staat: geen scroll, geen sprong in de pagina
@@ -66,6 +85,7 @@ const OSIntro: React.FC = () => {
 
   const sluiten = useCallback(() => {
     try { sessionStorage.setItem(SLEUTEL, 'ja'); } catch { /* privémodus */ }
+    window.dispatchEvent(new Event('sn-intro-done'));
     setWeg(true);
     const v = videoRef.current;
     if (v) v.pause();
@@ -96,14 +116,28 @@ const OSIntro: React.FC = () => {
         style={{ background: 'radial-gradient(ellipse at 50% 40%, rgba(37,211,102,0.10), transparent 62%)' }}
       />
 
-      <button
-        onClick={sluiten}
-        className="absolute top-5 right-5 md:top-7 md:right-8 z-10 inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/15 bg-white/[0.06] text-white/70 hover:text-white hover:bg-white/[0.12] transition-colors text-[11px] font-black uppercase tracking-[0.24em]"
-        aria-label="Overslaan en naar de site"
-      >
-        Overslaan
-        <X size={15} />
-      </button>
+      <div className="absolute top-5 right-5 md:top-7 md:right-8 z-10 flex items-center gap-2">
+        <button
+          onClick={stil ? geluidAan : () => { const v = videoRef.current; if (!v) return; v.muted = true; setStil(true); }}
+          className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors ${
+            stil
+              ? 'border-[#25D366]/60 bg-[#25D366]/15 text-[#25D366] hover:bg-[#25D366]/25'
+              : 'border-white/15 bg-white/[0.06] text-white/70 hover:text-white hover:bg-white/[0.12]'
+          }`}
+          aria-label={stil ? 'Geluid aan' : 'Geluid uit'}
+          title={stil ? 'Geluid aan' : 'Geluid uit'}
+        >
+          {stil ? <VolumeX size={16} /> : <Volume2 size={16} />}
+        </button>
+        <button
+          onClick={sluiten}
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/15 bg-white/[0.06] text-white/70 hover:text-white hover:bg-white/[0.12] transition-colors text-[11px] font-black uppercase tracking-[0.24em]"
+          aria-label="Overslaan en naar de site"
+        >
+          Overslaan
+          <X size={15} />
+        </button>
+      </div>
 
       <div className="relative w-full max-w-[1180px]">
         <div className="text-center mb-4 md:mb-6">
@@ -132,32 +166,6 @@ const OSIntro: React.FC = () => {
             onClick={stil ? geluidAan : undefined}
             className={`absolute inset-0 w-full h-full object-cover ${stil ? 'cursor-pointer' : ''}`}
           />
-
-          {stil && (
-            <button
-              onClick={geluidAan}
-              className="absolute inset-0 flex flex-col items-center justify-center gap-4 group"
-              style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.30))' }}
-              aria-label="Geluid aan"
-            >
-              <span className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_16px_44px_rgba(37,211,102,0.4)] transition-transform duration-300 group-hover:scale-110">
-                <Volume2 size={26} className="text-white" />
-              </span>
-              <span className="text-white text-[11px] md:text-xs font-black uppercase tracking-[0.28em]">
-                Zet het geluid aan
-              </span>
-            </button>
-          )}
-
-          {!stil && (
-            <button
-              onClick={() => { const v = videoRef.current; if (!v) return; v.muted = true; setStil(true); }}
-              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/55 backdrop-blur-sm border border-white/15 flex items-center justify-center text-white hover:bg-black/75 transition-colors"
-              aria-label="Geluid uit"
-            >
-              <VolumeX size={16} />
-            </button>
-          )}
 
           {/* voortgang */}
           <div className="absolute left-0 right-0 bottom-0 h-[3px] bg-white/10">

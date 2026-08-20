@@ -51,8 +51,6 @@ const PixelCursor = lazyRetry(() => import('./components/PixelCursor'));
 const BentoFeaturesSection = lazyRetry(() => import('./components/BentoFeaturesSection'));
 // De vier onderdelen van het OS als losse videos, direct onder de hero
 const OSPillars = lazyRetry(() => import('./components/OSPillars'));
-// De grote uitlegvideo, direct onder de hero
-const OSMasterVideo = lazyRetry(() => import('./components/OSMasterVideo'));
 // De uitlegvideo als eerste scherm, met scrollstop tot je hem uitkijkt of wegklikt
 const OSIntro = lazyRetry(() => import('./components/OSIntro'));
 const PricingStrip = lazyRetry(() => import('./components/PricingStrip'));
@@ -98,9 +96,6 @@ const HomePage: React.FC<{
       </div>
 
       <Suspense fallback={null}>
-        <div className="scroll-reveal">
-          <OSMasterVideo />
-        </div>
         <div className="scroll-reveal">
           <OSPillars />
         </div>

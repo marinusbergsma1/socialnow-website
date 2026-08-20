@@ -26,6 +26,26 @@ export const webShowcaseProjects: Project[] = [
     ]
   },
   {
+    id: 14,
+    slug: "kwh-garant-website",
+    title: "kWh Garant",
+    category: "AI Web Development",
+    client: "kWh Garant",
+    year: "2026",
+    services: ["AI Website Development", "Conversion Optimization", "Full-Stack Development", "Content Systeem"],
+    description: "Thuisbatterijen met slimme aansturing, uit Veenendaal. Website die vooraf doorrekent wat een systeem oplevert, met eigen monteurs, live inzicht in de app en een compleet contentsysteem eronder.",
+    image: `${import.meta.env.BASE_URL}screenshots/kwhgarant-hero.webp`,
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/kwhgarant-full.webp`,
+    align: 'left',
+    url: "https://kwhgarant.nl",
+    gallery: [],
+    metrics: [
+      { label: "Opbrengst vooraf", value: "Per maand", color: "#25D366" },
+      { label: "Beoordeling", value: "4,4 via Solvari", color: "#00A3E0" },
+      { label: "Geinstalleerd", value: "Binnen 6 weken", color: "#F7E644" }
+    ]
+  },
+  {
     id: 13,
     slug: "primefone-website",
     title: "PrimeFone",

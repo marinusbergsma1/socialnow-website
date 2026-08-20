@@ -17,6 +17,7 @@ type Pillar = {
   line: string;
   accent: string;
   file: string;
+  open: number;
 };
 
 const PILLARS: Pillar[] = [
@@ -27,6 +28,7 @@ const PILLARS: Pillar[] = [
     line: 'Teksten en pagina’s aanpassen vanuit de chat, direct live.',
     accent: '#25D366',
     file: 'os-website',
+    open: 2,
   },
   {
     key: 'crm',
@@ -35,6 +37,7 @@ const PILLARS: Pillar[] = [
     line: 'Elke aanvraag komt binnen, niets blijft liggen.',
     accent: '#F7E644',
     file: 'os-crm',
+    open: 3,
   },
   {
     key: 'content',
@@ -43,6 +46,7 @@ const PILLARS: Pillar[] = [
     line: 'Van idee naar geplande post, in dezelfde chat.',
     accent: '#00A3E0',
     file: 'os-content',
+    open: 2,
   },
   {
     key: 'ads',
@@ -51,6 +55,7 @@ const PILLARS: Pillar[] = [
     line: 'Campagnes bijsturen op wat de cijfers laten zien.',
     accent: '#F62961',
     file: 'os-advertenties',
+    open: 1,
   },
 ];
 
@@ -139,8 +144,8 @@ const Card: React.FC<{
       >
         <video
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=11`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=11`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=12`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=12`}
           preload="none"
           playsInline
           loop
@@ -152,7 +157,7 @@ const Card: React.FC<{
 
         {/* Stilstaand beeld: ligt eroverheen zolang de video niet loopt */}
         <img
-          src={`${BASE}video/os/${pillar.file}.webp?v=11`}
+          src={`${BASE}video/os/${pillar.file}.webp?v=12`}
           alt=""
           aria-hidden="true"
           draggable={false}
@@ -247,8 +252,8 @@ const Lightbox: React.FC<{ index: number; onClose: () => void; onNav: (d: 1 | -1
         <video
           key={pillar.key}
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=11`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=11`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=12`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=12`}
           playsInline
           loop
           controls
@@ -296,6 +301,58 @@ const OSPillars: React.FC = () => {
           <p className="text-gray-500 text-xs md:text-base font-medium max-w-xl mx-auto">
             Vier agents die voor je werken. Beweeg over een onderdeel en je hoort en ziet hoe zo'n voorstel tot stand komt.
           </p>
+          <button
+            onClick={() => window.dispatchEvent(new Event('sn-intro-open'))}
+            className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/12 bg-white/[0.04] text-white/60 hover:text-white hover:bg-white/[0.10] transition-colors text-[10px] md:text-[11px] font-black uppercase tracking-[0.24em]"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#25D366]" />
+            Bekijk de uitleg opnieuw
+          </button>
+        </div>
+
+        {/* De vier agents boven de onderdelen: de agent van de kaart waar je overheen
+            beweegt licht op, precies zoals in het systeem zelf. */}
+        <div className="flex gap-2 md:gap-3 mb-5 md:mb-7 overflow-x-auto md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0">
+          {PILLARS.map((p) => {
+            const aan = activeKey === p.key;
+            return (
+              <div
+                key={`agent-${p.key}`}
+                onMouseEnter={() => setActiveKey(p.key)}
+                onMouseLeave={() => setActiveKey(null)}
+                className="flex-1 min-w-[150px] md:min-w-0 rounded-xl border px-3 py-2.5 md:px-4 md:py-3 transition-all duration-300"
+                style={{
+                  borderColor: aan ? `${p.accent}` : 'rgba(255,255,255,0.10)',
+                  background: aan ? `${p.accent}18` : 'rgba(255,255,255,0.03)',
+                }}
+              >
+                <div className="flex items-center gap-2.5">
+                  <span
+                    className="w-2 h-2 rounded-full flex-shrink-0 transition-colors duration-300"
+                    style={{ background: aan ? p.accent : 'rgba(255,255,255,0.28)' }}
+                  />
+                  <span
+                    className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.18em] truncate transition-colors duration-300"
+                    style={{ color: aan ? p.accent : 'rgba(255,255,255,0.4)' }}
+                  >
+                    {p.label}
+                  </span>
+                  <span
+                    className="ml-auto text-[11px] md:text-xs font-black transition-colors duration-300"
+                    style={{ color: aan ? p.accent : 'rgba(255,255,255,0.42)' }}
+                  >
+                    {p.open}
+                  </span>
+                </div>
+                <span
+                  className="block mt-1 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300"
+                  style={{ color: aan ? p.accent : 'rgba(255,255,255,0.26)' }}
+                >
+                  {aan ? 'Aan het werk' : `${p.open} open`}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
         <div className="flex gap-3 md:gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">

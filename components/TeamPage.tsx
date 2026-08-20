@@ -111,7 +111,7 @@ interface OsPartner {
 const osPartners: OsPartner[] = [
   {
     name: 'Steef Komen',
-    role: 'Partner · Slimme OS-systemen',
+    role: 'Partner · Slimme OS-systemen · Accountant',
     company: 'Komen Consultancy',
     logo: `${BASE}images/komen-consultancy-logo.webp`,
     credentials: 'Accountancy · HvA & VU Amsterdam · 5 jaar Ernst & Young',

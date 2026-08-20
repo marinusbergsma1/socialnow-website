@@ -2,10 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   X, Layers, Brain, Target, Activity, Workflow, Palette, TrendingUp, Code, Zap, Shield, SearchCode, PieChart, Fingerprint, Send, Rocket, Terminal, BarChart3, CircleDollarSign
 } from 'lucide-react';
-import {
-  AreaChart, Area, ResponsiveContainer,
-  Radar, RadarChart, PolarGrid, PolarAngleAxis
-} from 'recharts';
 import ScrollTypewriter from './ScrollTypewriter';
 import Button from './Button';
 import { PixelGlobe } from './PixelGlobe';
@@ -15,15 +11,6 @@ interface BentoGridSectionProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
-const performanceData = [
-  { name: 'W1', value: 400 },
-  { name: 'W2', value: 300 },
-  { name: 'W3', value: 600 },
-  { name: 'W4', value: 800 },
-  { name: 'W5', value: 1100 },
-  { name: 'W6', value: 1600 },
-];
 
 const strategyRadarData = [
   { subject: 'Strategie', A: 120, fullMark: 150 },
@@ -74,6 +61,60 @@ const services = [
   }
 ];
 
+// Lichte, afhankelijkheidsvrije vervanger voor de recharts RadarChart
+// (recharts woog ~90kB gzipped voor deze ene grafiek). Zelfde data,
+// zelfde look, gewoon pure SVG in plaats van een hele chart-bibliotheek.
+const MiniRadarChart: React.FC<{ data: typeof strategyRadarData; color: string }> = ({ data, color }) => {
+  const size = 200;
+  const center = size / 2;
+  const outerRadius = 80;
+  const angleStep = (Math.PI * 2) / data.length;
+  const pointFor = (fraction: number, i: number) => {
+    const angle = i * angleStep - Math.PI / 2;
+    const r = fraction * outerRadius;
+    return [center + r * Math.cos(angle), center + r * Math.sin(angle)];
+  };
+  const dataPoints = data.map((d, i) => pointFor(d.A / d.fullMark, i));
+  const dataPath = dataPoints.map(p => p.join(',')).join(' ');
+
+  return (
+    <div className="h-48 w-full mt-6 flex justify-center">
+      <svg viewBox={`0 0 ${size} ${size}`} className="w-full h-full max-w-[220px]">
+        {[0.33, 0.66, 1].map((f, gi) => (
+          <polygon
+            key={gi}
+            points={data.map((_, i) => pointFor(f, i).join(',')).join(' ')}
+            fill="none"
+            stroke="#333"
+          />
+        ))}
+        {data.map((_, i) => {
+          const [x, y] = pointFor(1, i);
+          return <line key={i} x1={center} y1={center} x2={x} y2={y} stroke="#333" />;
+        })}
+        <polygon points={dataPath} fill={color} fillOpacity={0.6} stroke={color} strokeWidth={2} />
+        {data.map((d, i) => {
+          const [x, y] = pointFor(1.18, i);
+          return (
+            <text
+              key={d.subject}
+              x={x}
+              y={y}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fill="#888"
+              fontSize={10}
+              fontWeight="bold"
+            >
+              {d.subject}
+            </text>
+          );
+        })}
+      </svg>
+    </div>
+  );
+};
+
 const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) => {
   const [wordIndex, setWordIndex] = useState(0);
   const [showWord, setShowWord] = useState(false);
@@ -111,45 +152,19 @@ const BentoGridSection: React.FC<BentoGridSectionProps> = ({ isOpen, onClose }) 
   const renderChart = (type: string, color: string) => {
     switch (type) {
       case 'radar':
-        return (
-          <div className="h-48 w-full mt-6 flex justify-center">
-            <ResponsiveContainer width="100%" height="100%">
-              <RadarChart cx="50%" cy="50%" outerRadius="80%" data={strategyRadarData}>
-                <PolarGrid stroke="#333" />
-                <PolarAngleAxis dataKey="subject" tick={{ fill: '#888', fontSize: 10, fontWeight: 'bold' }} />
-                <Radar name="Strategy" dataKey="A" stroke={color} fill={color} fillOpacity={0.6} />
-              </RadarChart>
-            </ResponsiveContainer>
-          </div>
-        );
+        return <MiniRadarChart data={strategyRadarData} color={color} />;
       case 'pulse':
         return (
           <div className="h-48 w-full mt-6 flex items-center justify-center gap-3">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-              <div 
-                key={i} 
-                className="w-2 rounded-full bg-white/5 relative overflow-hidden" 
+              <div
+                key={i}
+                className="w-2 rounded-full bg-white/5 relative overflow-hidden"
                 style={{ height: '80%', animation: `pulse-bar 1.2s ease-in-out infinite ${i * 0.1}s` }}
               >
                 <div className="absolute bottom-0 left-0 w-full rounded-full transition-all duration-300" style={{ backgroundColor: color, height: '50%' }}></div>
               </div>
             ))}
-          </div>
-        );
-      case 'area':
-        return (
-          <div className="h-48 w-full mt-6">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={performanceData}>
-                <defs>
-                  <linearGradient id={`colorValue-${color}`} x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor={color} stopOpacity={0.5}/>
-                    <stop offset="95%" stopColor={color} stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <Area type="monotone" dataKey="value" stroke={color} strokeWidth={4} fillOpacity={1} fill={`url(#colorValue-${color})`} />
-              </AreaChart>
-            </ResponsiveContainer>
           </div>
         );
       default:

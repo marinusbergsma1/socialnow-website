@@ -135,8 +135,8 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
           <a href="#home" onClick={(e) => { e.preventDefault(); if (!isHomePage) { navigate('/'); } else { window.scrollTo({top: 0, behavior: 'smooth'}); } }} className={`relative z-10 flex items-center transition-all duration-500`}>
             {/* Volledig SocialNow-logo op alle schermen (ook mobiel) */}
             <img
-              src={`${import.meta.env.BASE_URL}images/SocialNow-Logo-2026.webp`}
-              alt="SocialNow"
+              src={`${import.meta.env.BASE_URL}images/SocialNow-OS-Logo.webp`}
+              alt="SocialNow OS"
               width={200}
               height={50}
               className={`transition-all duration-500 w-auto ${scrolled ? 'h-7 md:h-8' : 'h-8 md:h-10'}`}

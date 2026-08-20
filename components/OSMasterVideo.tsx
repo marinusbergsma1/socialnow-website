@@ -8,8 +8,8 @@ import { Play, Volume2, VolumeX } from 'lucide-react';
  */
 
 const BASE = import.meta.env.BASE_URL;
-const SRC = `${BASE}video/os/os-master-en.mp4?v=11`;
-const POSTER = `${BASE}video/os/os-master-en.webp?v=11`;
+const SRC = `${BASE}video/os/os-master-en.mp4?v=12`;
+const POSTER = `${BASE}video/os/os-master-en.webp?v=12`;
 
 const OSMasterVideo: React.FC = () => {
   const wrapRef = useRef<HTMLDivElement>(null);

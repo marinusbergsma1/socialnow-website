@@ -43,12 +43,27 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
   const [showCycle, setShowCycle] = useState(false);
   const [showCycleQuote, setShowCycleQuote] = useState(false);
   const [activeReviewIndex, setActiveReviewIndex] = useState(0);
-  // Geen introoverlay meer: de grote uitlegvideo onder de hero doet dat werk.
-  // De achtergrond-globe wacht op dit signaal, dus dat geven we meteen.
-  const showDone = true;
+  // De achtergrond-globe komt pas op gang als de uitlegvideo klaar is of weggeklikt,
+  // zodat je die beweging niet mist terwijl het introscherm er nog overheen ligt.
+  const [showDone, setShowDone] = useState(false);
   useEffect(() => {
-    try { sessionStorage.setItem('milo-show', 'done'); } catch { /* noop */ }
-    window.dispatchEvent(new Event('milo-show-done'));
+    const meld = () => {
+      try { sessionStorage.setItem('milo-show', 'done'); } catch { /* noop */ }
+      window.dispatchEvent(new Event('milo-show-done'));
+      setShowDone(true);
+    };
+    let introKomt = false;
+    try {
+      const gezien = sessionStorage.getItem('sn-os-intro') === 'ja';
+      const anker = window.location.hash && window.location.hash.length > 1;
+      const minderBeweging = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      introKomt = !gezien && !anker && !minderBeweging;
+    } catch { /* privémodus: dan gewoon meteen */ }
+    if (!introKomt) { meld(); return; }
+    window.addEventListener('sn-intro-done', meld, { once: true });
+    // veiligheidsklep als het introscherm om wat voor reden niet verschijnt
+    const klok = window.setTimeout(meld, 90000);
+    return () => { window.removeEventListener('sn-intro-done', meld); window.clearTimeout(klok); };
   }, []);
   // Geen show meer, dus de h1 doet gewoon zijn eigen fade
   const playedRef = useRef(false);

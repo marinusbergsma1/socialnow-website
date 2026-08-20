@@ -80,7 +80,7 @@ const team: TeamItem[] = [
     id: 9,
     type: 'member',
     name: "Steef Komen",
-    role: "Partner · Slimme OS-systemen",
+    role: "Partner · Slimme OS-systemen · Accountant",
     partnership: "SocialNow × Komen Consultancy",
     image: `${import.meta.env.BASE_URL}images/Steef-Komen.webp`
   },

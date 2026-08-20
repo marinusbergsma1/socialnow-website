@@ -230,6 +230,22 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           </div>
         </div>
 
+        {/* ─── SAMENWERKING ─── */}
+        <div className="border-t border-white/[0.06] py-10 md:py-14">
+          <p className="text-center text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em] text-white/15 mb-6 md:mb-8">
+            Samen met
+          </p>
+          <div className="flex justify-center">
+            <img
+              src={`${import.meta.env.BASE_URL}images/SocialNow-OS-Komen-Consultancy.webp`}
+              alt="SocialNow OS in samenwerking met Komen Consultancy"
+              className="h-20 md:h-28 w-auto opacity-80 hover:opacity-100 transition-opacity duration-500"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+
         {/* ─── GECERTIFICEERD & ERKEND ─── */}
         <div className="border-t border-white/[0.06] py-10 md:py-14">
           <p className="text-center text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em] text-white/15 mb-6 md:mb-8">
