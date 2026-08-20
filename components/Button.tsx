@@ -6,6 +6,9 @@ interface ButtonProps {
   children: React.ReactNode;
   variant?: 'primary' | 'outline' | 'ghost' | 'green' | 'pink' | 'glass';
   onClick?: () => void;
+  href?: string; // Als gezet: render als <a> in plaats van <button>, zelfde 3D-look
+  target?: string;
+  rel?: string;
   className?: string;
   icon?: boolean;
   IconComponent?: LucideIcon; // Custom icon component
@@ -17,6 +20,9 @@ const Button: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',
   onClick,
+  href,
+  target,
+  rel,
   className = '',
   icon = false,
   IconComponent = ArrowRight, // Default to ArrowRight
@@ -26,11 +32,11 @@ const Button: React.FC<ButtonProps> = ({
   const isGreen = variant === 'green';
   const isPink = variant === 'pink';
   const isGlass = variant === 'glass';
-  const btnRef = useRef<HTMLButtonElement>(null);
+  const btnRef = useRef<any>(null);
   const rafRef = useRef<number>(0);
 
   // Magnetic hover effect — button subtly pulls toward cursor
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<any>) => {
     const el = btnRef.current;
     if (!el) return;
     cancelAnimationFrame(rafRef.current);
@@ -74,15 +80,16 @@ const Button: React.FC<ButtonProps> = ({
     variantClasses = "bg-transparent border-transparent text-white";
   }
 
-  return (
-    <button
-      ref={btnRef}
-      onClick={onClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={`${baseClasses} ${variantClasses} ${className}`}
-      style={{ transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease', ['--glow' as string]: glowRGB }}
-    >
+  const sharedProps = {
+    ref: btnRef,
+    onMouseMove: handleMouseMove,
+    onMouseLeave: handleMouseLeave,
+    className: `${baseClasses} ${variantClasses} ${className}`,
+    style: { transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease', ['--glow' as string]: glowRGB },
+  };
+
+  const content = (
+    <>
       {/* Background Fill Layer */}
       {isGreen && <div className="absolute inset-0 bg-[#25D366] translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
       {isPink && <div className="absolute inset-0 bg-[#F62961] translate-x-[-101%] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0 z-0"></div>}
@@ -104,6 +111,20 @@ const Button: React.FC<ButtonProps> = ({
           </div>
         )}
       </div>
+    </>
+  );
+
+  if (href) {
+    return (
+      <a href={href} target={target} rel={rel} onClick={onClick} {...sharedProps}>
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <button onClick={onClick} {...sharedProps}>
+      {content}
     </button>
   );
 };
