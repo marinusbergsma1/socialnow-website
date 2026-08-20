@@ -20,8 +20,6 @@ export default defineConfig({
         manualChunks: {
           'vendor': ['react', 'react-dom', 'react-router-dom'],
           'ui': ['lucide-react'],
-          // Recharts is ~180KB gzipped — isolate so it only loads on pages that need it
-          'charts': ['recharts'],
         }
       }
     },

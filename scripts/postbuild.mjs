@@ -98,7 +98,7 @@ for (const [route, meta] of Object.entries(routeMeta)) {
           description: 'Partner van SocialNow voor slimme AI-systemen: financieel en strategisch fundament onder data-gedreven AI-producten.',
         },
         {
-          ...person('Steef Komen', 'Partner — Slimme OS-systemen'),
+          ...person('Steef Komen', 'Partner · Slimme OS-systemen · Accountant'),
           worksFor: { '@id': `${BASE}/#komen-consultancy` },
           affiliation: { '@id': `${BASE}/#organization` },
         },
