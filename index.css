@@ -573,6 +573,7 @@ html.sn-warp .sn-navbar-glass {
    springt er in stappen doorheen, dus het beweegt zonder losse videobestanden.
    --------------------------------------------------------------------------- */
 .sn-agent {
+  display: inline-block;   /* een <span> is anders inline en dan doet breedte niets */
   background-repeat: no-repeat;
   background-position: 0 0;
   image-rendering: auto;

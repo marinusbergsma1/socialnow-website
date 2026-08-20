@@ -72,12 +72,29 @@ const PILLARS: Pillar[] = [
 ];
 
 // De sprite is één webp met 30 standjes in 6 kolommen en 5 rijen.
-const agentStijl = (key: string, maat: number): React.CSSProperties => ({
-  backgroundImage: `url(${BASE}images/agents/milo-${key}-sprite.webp)`,
+const agentStijl = (key: string, maat: number, laden: boolean): React.CSSProperties => ({
+  backgroundImage: laden ? `url(${BASE}images/agents/milo-${key}-sprite.webp)` : undefined,
   backgroundSize: `${maat * 6}px ${maat * 5}px`,
   width: maat,
   height: maat,
 });
+
+/** Laat weten of een blok bijna in beeld staat. Alles wat geld kost (de sprites
+ *  ophalen, de animatie laten lopen) wachten we daarop. */
+const useInBeeld = <T extends HTMLElement>(marge = '300px') => {
+  const ref = useRef<T>(null);
+  const [inBeeld, setInBeeld] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === 'undefined') { setInBeeld(true); return; }
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) { setInBeeld(true); io.disconnect(); }
+    }, { rootMargin: marge });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [marge]);
+  return { ref, inBeeld };
+};
 
 // Browsers laten geluid pas toe nadat de bezoeker iets heeft aangeraakt.
 // Vanaf dat moment mag hover ook mét geluid spelen.
@@ -103,9 +120,10 @@ const useGestureListener = () => {
 const AgentBalk: React.FC<{
   pillar: Pillar;
   aan: boolean;
+  inBeeld: boolean;
   onActivate: (key: string | null) => void;
   onOpen: () => void;
-}> = ({ pillar, aan, onActivate, onOpen }) => (
+}> = ({ pillar, aan, inBeeld, onActivate, onOpen }) => (
   <button
     type="button"
     onMouseEnter={() => onActivate(pillar.key)}
@@ -152,9 +170,9 @@ const AgentBalk: React.FC<{
       {/* rechts: de agent van dit onderdeel */}
       <span className="ml-auto flex items-center gap-2 flex-shrink-0">
         <span
-          className={`sn-agent rounded-full ${aan ? 'sn-agent-speelt' : ''}`}
+          className={`sn-agent rounded-full ${aan && inBeeld ? 'sn-agent-speelt' : ''}`}
           style={{
-            ...agentStijl(pillar.key, 34),
+            ...agentStijl(pillar.key, 34, inBeeld),
             backgroundColor: aan ? `${pillar.accent}26` : 'rgba(255,255,255,0.05)',
             boxShadow: aan ? `inset 0 0 0 1px ${pillar.accent}66` : 'inset 0 0 0 1px rgba(255,255,255,0.08)',
           }}
@@ -184,9 +202,10 @@ const Card: React.FC<{
   pillar: Pillar;
   index: number;
   activeKey: string | null;
+  inBeeld: boolean;
   onActivate: (key: string | null) => void;
   onOpen: (index: number) => void;
-}> = ({ pillar, index, activeKey, onActivate, onOpen }) => {
+}> = ({ pillar, index, activeKey, inBeeld, onActivate, onOpen }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isActive = activeKey === pillar.key;
   // De rustlaag blijft liggen tot de video echt loopt. Zo staat er nooit een
@@ -247,7 +266,7 @@ const Card: React.FC<{
           ref={videoRef}
           src={`${BASE}video/os/${pillar.file}.mp4?v=13`}
           poster={`${BASE}video/os/${pillar.file}.webp?v=13`}
-          preload="metadata"
+          preload="none"
           playsInline
           loop
           muted
@@ -296,14 +315,22 @@ const Card: React.FC<{
             className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center transition-opacity duration-300"
             style={{ opacity: isActive ? 0 : 1 }}
           >
-            <span
-              className={`sn-agent ${isActive ? '' : 'sn-agent-speelt'}`}
-              style={{
-                ...agentStijl(pillar.key, 132),
-                filter: `drop-shadow(0 16px 34px rgba(0,0,0,0.6)) drop-shadow(0 0 26px ${pillar.accent}33)`,
-              }}
-              aria-hidden="true"
-            />
+            <span className="relative inline-block" style={{ width: 128, height: 128 }}>
+              {/* gloed als los vlak: een filter op het bewegende plaatje kost
+                  elke stap een nieuwe tekenbeurt, dit niet */}
+              <span
+                className="absolute rounded-full pointer-events-none"
+                style={{
+                  inset: -14,
+                  background: `radial-gradient(circle at 50% 58%, ${pillar.accent}2e 0%, transparent 68%)`,
+                }}
+              />
+              <span
+                className={`sn-agent relative ${isActive || !inBeeld ? '' : 'sn-agent-speelt'}`}
+                style={agentStijl(pillar.key, 128, inBeeld)}
+                aria-hidden="true"
+              />
+            </span>
             <span
               className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em]"
               style={{
@@ -422,11 +449,12 @@ const OSPillars: React.FC = () => {
   useGestureListener();
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const [open, setOpen] = useState<number | null>(null);
+  const { ref: sectieRef, inBeeld } = useInBeeld<HTMLElement>();
 
   const handleOpen = useCallback((i: number) => setOpen(i), []);
 
   return (
-    <section className="relative py-14 md:py-24 border-t border-white/5 overflow-hidden">
+    <section ref={sectieRef} className="relative py-14 md:py-24 border-t border-white/5 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-8 md:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm mb-4">
@@ -457,6 +485,7 @@ const OSPillars: React.FC = () => {
               key={`agent-${p.key}`}
               pillar={p}
               aan={activeKey === p.key}
+              inBeeld={inBeeld}
               onActivate={setActiveKey}
               onOpen={() => handleOpen(i)}
             />
@@ -465,7 +494,7 @@ const OSPillars: React.FC = () => {
 
         <div className="flex gap-3 md:gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
           {PILLARS.map((p, i) => (
-            <Card key={p.key} pillar={p} index={i} activeKey={activeKey} onActivate={setActiveKey} onOpen={handleOpen} />
+            <Card key={p.key} pillar={p} index={i} activeKey={activeKey} inBeeld={inBeeld} onActivate={setActiveKey} onOpen={handleOpen} />
           ))}
         </div>
 

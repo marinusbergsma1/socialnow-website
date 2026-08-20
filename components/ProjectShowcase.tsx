@@ -79,13 +79,15 @@ const LazyVideo: React.FC<{
           <div className="w-8 h-8 border-2 border-white/10 border-t-[#00A3E0] rounded-full animate-spin"></div>
         </div>
       )}
+      {/* Pas een bron als het blok echt in beeld komt: anders haalt de browser
+          het hele bestand al op terwijl je nog bovenaan de pagina staat. */}
       <video
         ref={videoRef}
-        src={src}
+        src={isVisible || hasLoadedOnce ? src : undefined}
         loop
         muted
         playsInline
-        preload={window.innerWidth < 768 ? "none" : "metadata"}
+        preload="none"
         className="w-full h-full object-contain"
       />
       {/* Mobile sound indicator */}
@@ -105,7 +107,7 @@ const LazyVideo: React.FC<{
 
 // Lazy gallery video for case study cards — with tap-to-unmute
 const LazyGalleryVideo: React.FC<{ src: string }> = ({ src }) => {
-  const { containerRef, videoRef, hasLoadedOnce } = useVideoIntersection(src, {
+  const { containerRef, videoRef, hasLoadedOnce, isVisible } = useVideoIntersection(src, {
     rootMargin: '200px',
     threshold: 0.1,
     autoPlay: true,
@@ -138,11 +140,11 @@ const LazyGalleryVideo: React.FC<{ src: string }> = ({ src }) => {
       )}
       <video
         ref={videoRef}
-        src={src}
+        src={isVisible || hasLoadedOnce ? src : undefined}
         loop
         muted
         playsInline
-        preload={window.innerWidth < 768 ? "none" : "metadata"}
+        preload="none"
         className="w-full h-full object-cover"
       />
       {/* Sound indicator */}

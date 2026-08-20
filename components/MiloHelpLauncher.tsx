@@ -23,6 +23,9 @@ const MiloHelpLauncher: React.FC = () => {
   const [entered, setEntered] = useState(false);
   const [dotCount, setDotCount] = useState(0);
   const [waving, setWaving] = useState(false);
+  // De zwaai duurt maar even en komt pas na de choreografie. Zijn bestand halen
+  // we daarom niet bij het openen van de pagina op, maar vlak ervoor.
+  const [zwaaiKlaar, setZwaaiKlaar] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const [ringOn, setRingOn] = useState(true);   // glow-ring alleen de eerste 5s
 
@@ -38,6 +41,7 @@ const MiloHelpLauncher: React.FC = () => {
       timers.push(setTimeout(() => setDotCount(2), base + D2));
       timers.push(setTimeout(() => setDotCount(3), base + D3));
       timers.push(setTimeout(() => setDotCount(0), base + DOTS_END));
+      timers.push(setTimeout(() => setZwaaiKlaar(true), base + Math.max(0, WAVE_AT - 3000)));
       timers.push(setTimeout(() => {
         setWaving(true);
         setShowHelp(true);
@@ -120,12 +124,12 @@ const MiloHelpLauncher: React.FC = () => {
         {/* begroeting-zwaai — bovenop, alleen tijdens het zwaaien */}
         <video
           ref={waveRef}
-          muted playsInline preload="auto" aria-hidden="true"
+          muted playsInline preload="none" aria-hidden="true"
           onEnded={onWaveEnded}
           className="absolute inset-0 w-full h-full object-contain transition-opacity duration-200"
           style={{ opacity: waving ? 1 : 0 }}
         >
-          <MiloSources name="milo-wave" v="2" />
+          <MiloSources name="milo-wave" v="2" wacht={!zwaaiKlaar} />
         </video>
 
         {/* 3 losse stippen — verschijnen één voor één (1 · 2 · 3), rechtsboven */}

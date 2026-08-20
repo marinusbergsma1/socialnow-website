@@ -11,10 +11,30 @@ const WebShowcase: React.FC = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  // Een ingesloten site is een hele site: pas ophalen als het blok in beeld
+  // komt, en alleen de site die je op dat moment bekijkt (plus wat je al
+  // bekeken hebt, zodat terugbladeren meteen gaat).
+  const [sectieInBeeld, setSectieInBeeld] = useState(false);
+  const [bezocht, setBezocht] = useState<number[]>([]);
   const sectionRef = useRef<HTMLDivElement>(null);
   const thumbTrackRef = useRef<HTMLDivElement>(null);
 
   const activeProject = webShowcaseProjects[activeIndex];
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') { setSectieInBeeld(true); return; }
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) { setSectieInBeeld(true); io.disconnect(); }
+    }, { rootMargin: '250px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!sectieInBeeld) return;
+    setBezocht((lijst) => (lijst.includes(activeIndex) ? lijst : [...lijst, activeIndex]));
+  }, [sectieInBeeld, activeIndex]);
 
   // Clip-path reveal with green scanlines
   const [revealProgress, setRevealProgress] = useState(0);
@@ -192,6 +212,7 @@ const WebShowcase: React.FC = () => {
           title={project.title}
           className={`w-full h-full border-0 transition-opacity duration-500 ${iframeLoaded[idx] ? 'opacity-100' : 'opacity-0'}`}
           style={{ colorScheme: 'normal' }}
+          loading="lazy"
           onLoad={() => handleIframeLoad(idx)}
           sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
         />
@@ -367,12 +388,10 @@ const WebShowcase: React.FC = () => {
                 {/* Main center iframe */}
                 <div className="relative flex-1 min-w-0">
                   <div data-sn-work className="rounded-2xl overflow-hidden relative" style={{ aspectRatio: '16 / 9', ...glassStyle }}>
-                    {/* Only render active + adjacent iframes to avoid loading all 5 simultaneously */}
+                    {/* Alleen wat je nu bekijkt en wat je al bekeken hebt */}
                     {webShowcaseProjects.map((project, idx) => {
-                      const isNearActive = idx === activeIndex ||
-                        idx === (activeIndex + 1) % webShowcaseProjects.length ||
-                        idx === (activeIndex - 1 + webShowcaseProjects.length) % webShowcaseProjects.length;
-                      if (!isNearActive) return null;
+                      if (!sectieInBeeld) return null;
+                      if (idx !== activeIndex && !bezocht.includes(idx)) return null;
                       return renderDesktopIframe(project, idx);
                     })}
                     <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/30 to-transparent pointer-events-none z-30 rounded-b-2xl" />
