@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { Instagram, X, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
-import Button from './Button';
 
 const BEHOLD_FEED_URL = 'https://feeds.behold.so/5Ku5iKM7N7Gpi9MgAN9X';
 
@@ -81,7 +80,7 @@ const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean; onBroken: (id: 
     return () => obs.disconnect();
   }, [isMobile, shouldLoad]);
 
-  const isVideo = post.mediaType === 'VIDEO';
+  const isVideo = post.mediaType === 'VIDEO' || Boolean(post.isReel);
   // In de slider ALTIJD een afbeelding (stabiele behold.pictures-rendition):
   // Instagram-video-URL's verlopen/falen geregeld → lege zwarte kaarten.
   // De video zelf speelt pas in de lightbox. Play-badge markeert reels.
@@ -91,7 +90,12 @@ const LazyMedia: React.FC<{ post: BeholdPost; isMobile: boolean; onBroken: (id: 
   // slider. Zo blijft er nooit een zwarte kaart met alt-tekst staan.
   const sources = useMemo(() => {
     const s = post.sizes;
-    return [s?.large?.mediaUrl, s?.medium?.mediaUrl, s?.small?.mediaUrl, post.thumbnailUrl, post.mediaUrl]
+    const beweegt = post.mediaType === 'VIDEO' || post.isReel;
+    // Bij een reel is mediaUrl de video zelf, die hoort niet in een <img>.
+    const rij = beweegt
+      ? [s?.large?.mediaUrl, s?.medium?.mediaUrl, s?.small?.mediaUrl, post.thumbnailUrl]
+      : [s?.large?.mediaUrl, s?.medium?.mediaUrl, s?.small?.mediaUrl, post.thumbnailUrl, post.mediaUrl];
+    return rij
       .filter((u): u is string => Boolean(u))
       .filter((u, i, arr) => arr.indexOf(u) === i);
   }, [post]);
@@ -175,7 +179,7 @@ const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[]; onOpen: (index: numb
   // Hero-3-marquee stijl: compacte kaarten. Vaste hoogte; de breedte volgt per
   // post uit zijn NATIVE verhouding — een reel (9:16) blijft smaller dan een
   // carousel (4:5) of een 1:1 post, nooit gecropt.
-  const cardHeight = isMobile ? 230 : 320;
+  const cardHeight = isMobile ? 290 : 430;
   const gap = isMobile ? 12 : 20;
 
   // Duplicate posts so the loop feels endless even with a small feed
@@ -344,8 +348,10 @@ const InfiniteSocialSlider: React.FC<{ posts: BeholdPost[]; onOpen: (index: numb
 // ─── Skeleton placeholder while feed loads ──────────────────────────────
 const SliderSkeleton: React.FC = () => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const cardWidth = isMobile ? Math.round(window.innerWidth * 0.56) : 420;
-  const cardHeight = Math.round(cardWidth * (16 / 9));
+  // Zelfde maat als de echte kaarten hieronder, anders springt de pagina
+  // zodra de posts binnen zijn.
+  const cardHeight = isMobile ? 290 : 430;
+  const cardWidth = Math.round(cardHeight * 0.8);
   return (
     <div className="relative w-full select-none" style={{ overflow: 'clip', padding: `${isMobile ? 16 : 40}px 0` }}>
       <div className="flex" style={{ gap: isMobile ? 14 : 32 }}>
@@ -489,19 +495,24 @@ const SocialMediaSlider: React.FC = () => {
 
   useEffect(() => {
     let cancelled = false;
-    fetch(BEHOLD_FEED_URL)
+    fetch(BEHOLD_FEED_URL, { cache: 'no-cache' })
       .then(r => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json() as Promise<BeholdFeed>;
       })
       .then(data => {
         if (cancelled) return;
-        // Sort newest first (Behold returns newest first by default, but be defensive)
-        // Video's en reels blijven uit de slider. Hun Instagram-URL's zijn kort
-        // geldig: zodra de signature verloopt geven zowel de behold-renditions
-        // (502) als thumbnail en video (403) niets meer, en blijft er een lege
-        // kaart staan. Alleen afbeeldingen en carrousels dus.
-        const bruikbaar = data.posts.filter((p) => p.mediaType !== 'VIDEO' && !p.isReel);
+        // Reels en video's horen er gewoon bij, anders lijkt de feed maanden
+        // oud zodra er een tijdje vooral reels gepost is. Ze mogen mee zolang
+        // Behold er een eigen, blijvende versie van heeft: een Instagram-URL
+        // verloopt na een paar dagen, een behold-rendition niet. Valt er toch
+        // eentje weg, dan haalt onBroken die kaart alsnog uit de rij.
+        const blijvendBeeld = (p: BeholdPost) =>
+          Boolean(p.sizes?.large?.mediaUrl || p.sizes?.medium?.mediaUrl || p.sizes?.small?.mediaUrl);
+        const bruikbaar = data.posts.filter((p) => {
+          const beweegt = p.mediaType === 'VIDEO' || p.isReel;
+          return !beweegt || blijvendBeeld(p);
+        });
         const sorted = [...bruikbaar].sort((a, b) => b.timestamp.localeCompare(a.timestamp));
         setPosts(sorted);
         setFeed({ username: data.username || 'socialnow.nl', avatar: data.profilePictureUrl });
@@ -532,7 +543,7 @@ const SocialMediaSlider: React.FC = () => {
 
       {/* Hero-3-compositie: content zweeft óver de marquee; kaarten komen er
           half achter vandaan met een fade bovenaan. */}
-      <div className="container mx-auto px-6 relative z-30 text-center pointer-events-none">
+      <div className="container mx-auto px-6 relative z-30 text-center pointer-events-none pb-10 md:pb-16">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm mb-4 md:mb-6 pointer-events-auto">
           <Instagram size={14} className="text-[#25D366]" />
           <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/60">@socialnow.nl</span>
@@ -551,30 +562,22 @@ const SocialMediaSlider: React.FC = () => {
           </a>
           {' '}en zie ons nieuwste werk, achter-de-schermen en AI-experimenten. Tik op een post om 'm groot te bekijken.
         </p>
-        <div className="pointer-events-auto inline-block mt-6 md:mt-8">
-          <Button
-            variant="green"
-            premium
-            icon
-            IconComponent={Instagram}
-            href="https://www.instagram.com/socialnow.nl/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Bekijk volledig profiel
-          </Button>
-        </div>
+        <a
+          href="https://www.instagram.com/socialnow.nl/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 mt-6 md:mt-8 rounded-full bg-[#25D366] text-white sn-btn3d hover:scale-105 transition-transform"
+        >
+          <Instagram size={16} />
+          <span className="text-[11px] md:text-xs font-black uppercase tracking-[0.25em]">Bekijk volledig profiel</span>
+        </a>
       </div>
 
       {/* Marquee schuift onder de content door (negatieve top-marge) met een
           zachte fade aan de bovenkant, zoals de hero-3-referentie. */}
-      <div
-        className="relative z-10 -mt-8 md:-mt-16"
-        style={{
-          maskImage: 'linear-gradient(to bottom, transparent, black 26%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 26%)',
-        }}
-      >
+      {/* De rij schuift niet meer onder de tekst door: de knop staat er los
+          boven en de posts blijven in hun geheel te zien. */}
+      <div className="relative z-10 -mt-6 md:-mt-10">
         <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
         {visiblePosts === null ? <SliderSkeleton /> : <InfiniteSocialSlider posts={visiblePosts} onOpen={setLightboxIndex} onBroken={markBroken} />}
