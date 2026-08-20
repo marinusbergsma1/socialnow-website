@@ -4,8 +4,10 @@ import { X, Volume2, VolumeX, Play } from 'lucide-react';
 
 /**
  * OSPillars — de vier onderdelen van het SocialNow OS, elk als eigen video.
- * Hover speelt de video af (met geluid zodra de browser dat toestaat), klik
- * opent hem groot met geluid en bediening. Er speelt er nooit meer dan één.
+ * In rust staat de agent van dat onderdeel te werken over een zachte, wazige
+ * versie van het beeld. Zodra je erover beweegt gaat de waas eraf en speelt de
+ * video scherp af, met geluid zodra de browser dat toestaat. Klik opent hem
+ * groot. Er speelt er nooit meer dan één.
  */
 
 const BASE = import.meta.env.BASE_URL;
@@ -13,6 +15,8 @@ const BASE = import.meta.env.BASE_URL;
 type Pillar = {
   key: string;
   label: string;
+  kort: string;
+  agent: string;
   title: string;
   line: string;
   accent: string;
@@ -23,7 +27,9 @@ type Pillar = {
 const PILLARS: Pillar[] = [
   {
     key: 'website',
+    kort: 'Website',
     label: 'Website',
+    agent: 'Website agent',
     title: 'Je website',
     line: 'Teksten en pagina’s aanpassen vanuit de chat, direct live.',
     accent: '#25D366',
@@ -32,7 +38,9 @@ const PILLARS: Pillar[] = [
   },
   {
     key: 'crm',
+    kort: 'CRM',
     label: 'CRM',
+    agent: 'CRM agent',
     title: 'Je CRM',
     line: 'Elke aanvraag komt binnen, niets blijft liggen.',
     accent: '#F7E644',
@@ -41,7 +49,9 @@ const PILLARS: Pillar[] = [
   },
   {
     key: 'content',
+    kort: 'Content',
     label: 'Content',
+    agent: 'Content agent',
     title: 'Je content',
     line: 'Van idee naar geplande post, in dezelfde chat.',
     accent: '#00A3E0',
@@ -50,7 +60,9 @@ const PILLARS: Pillar[] = [
   },
   {
     key: 'ads',
+    kort: 'Ads',
     label: 'Advertenties',
+    agent: 'Advertentie agent',
     title: 'Je advertenties',
     line: 'Campagnes bijsturen op wat de cijfers laten zien.',
     accent: '#F62961',
@@ -58,6 +70,14 @@ const PILLARS: Pillar[] = [
     open: 1,
   },
 ];
+
+// De sprite is één webp met 30 standjes in 6 kolommen en 5 rijen.
+const agentStijl = (key: string, maat: number): React.CSSProperties => ({
+  backgroundImage: `url(${BASE}images/agents/milo-${key}-sprite.webp)`,
+  backgroundSize: `${maat * 6}px ${maat * 5}px`,
+  width: maat,
+  height: maat,
+});
 
 // Browsers laten geluid pas toe nadat de bezoeker iets heeft aangeraakt.
 // Vanaf dat moment mag hover ook mét geluid spelen.
@@ -79,6 +99,87 @@ const useGestureListener = () => {
   }, []);
 };
 
+/** Het balkje boven een onderdeel: kleur en naam links, de agent rechts. */
+const AgentBalk: React.FC<{
+  pillar: Pillar;
+  aan: boolean;
+  onActivate: (key: string | null) => void;
+  onOpen: () => void;
+}> = ({ pillar, aan, onActivate, onOpen }) => (
+  <button
+    type="button"
+    onMouseEnter={() => onActivate(pillar.key)}
+    onMouseLeave={() => onActivate(null)}
+    onFocus={() => onActivate(pillar.key)}
+    onBlur={() => onActivate(null)}
+    onClick={() => { markGesture(); onOpen(); }}
+    aria-label={`${pillar.agent}, ${pillar.open} open`}
+    className="group relative flex items-stretch gap-0 overflow-hidden rounded-xl border text-left transition-all duration-300"
+    style={{
+      borderColor: aan ? pillar.accent : `${pillar.accent}33`,
+      background: aan
+        ? `linear-gradient(90deg, ${pillar.accent}22 0%, ${pillar.accent}0d 55%, rgba(255,255,255,0.02) 100%)`
+        : `linear-gradient(90deg, ${pillar.accent}12 0%, rgba(255,255,255,0.02) 60%)`,
+      boxShadow: aan ? `0 0 26px ${pillar.accent}22` : 'none',
+    }}
+  >
+    {/* het kleurbalkje */}
+    <span
+      className="w-[5px] flex-shrink-0 transition-all duration-300"
+      style={{ background: pillar.accent, opacity: aan ? 1 : 0.75 }}
+    />
+
+    <span className="flex flex-1 items-center gap-2 min-w-0 pl-3 pr-2.5 py-2">
+      {/* korte naam van het onderdeel */}
+      <span className="min-w-0 leading-tight">
+        <span
+          className="block text-[10px] md:text-[11px] font-black uppercase tracking-[0.16em] md:tracking-[0.2em] truncate transition-colors duration-300"
+          style={{ color: aan ? pillar.accent : `${pillar.accent}cc` }}
+        >
+          <span className="sm:hidden">{pillar.kort}</span>
+          <span className="hidden sm:inline">{pillar.label}</span>
+        </span>
+        {/* op een telefoon staat de stand onder de naam, daar past geen tweede kolom */}
+        <span
+          className="sm:hidden mt-0.5 flex items-center gap-1 text-[8px] font-bold uppercase tracking-[0.16em] transition-colors duration-300"
+          style={{ color: aan ? pillar.accent : 'rgba(255,255,255,0.32)' }}
+        >
+          <span className="w-1 h-1 rounded-full" style={{ background: aan ? pillar.accent : 'rgba(255,255,255,0.3)' }} />
+          {aan ? 'Aan het werk' : `${pillar.open} open`}
+        </span>
+      </span>
+
+      {/* rechts: de agent van dit onderdeel */}
+      <span className="ml-auto flex items-center gap-2 flex-shrink-0">
+        <span
+          className={`sn-agent rounded-full ${aan ? 'sn-agent-speelt' : ''}`}
+          style={{
+            ...agentStijl(pillar.key, 34),
+            backgroundColor: aan ? `${pillar.accent}26` : 'rgba(255,255,255,0.05)',
+            boxShadow: aan ? `inset 0 0 0 1px ${pillar.accent}66` : 'inset 0 0 0 1px rgba(255,255,255,0.08)',
+          }}
+          aria-hidden="true"
+        />
+        <span className="leading-tight hidden sm:block">
+          <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.1em] text-white/75 whitespace-nowrap">
+            {pillar.agent}
+          </span>
+          <span
+            className="flex items-center gap-1 text-[8px] md:text-[9px] font-bold uppercase tracking-[0.16em] whitespace-nowrap transition-colors duration-300"
+            style={{ color: aan ? pillar.accent : 'rgba(255,255,255,0.32)' }}
+          >
+            <span
+              className="w-1 h-1 rounded-full"
+              style={{ background: aan ? pillar.accent : 'rgba(255,255,255,0.3)' }}
+            />
+            {aan ? 'Aan het werk' : `${pillar.open} open`}
+          </span>
+        </span>
+      </span>
+    </span>
+  </button>
+);
+
 const Card: React.FC<{
   pillar: Pillar;
   index: number;
@@ -88,8 +189,8 @@ const Card: React.FC<{
 }> = ({ pillar, index, activeKey, onActivate, onOpen }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isActive = activeKey === pillar.key;
-  // De poster blijft liggen tot de video echt loopt. Zo staat er nooit een zwart
-  // vlak, ook niet tijdens het laden of vlak na het weghalen van de muis.
+  // De rustlaag blijft liggen tot de video echt loopt. Zo staat er nooit een
+  // zwart vlak, ook niet tijdens het laden of vlak na het weghalen van de muis.
   const [speelt, setSpeelt] = useState(false);
   // Houdt bij of deze kaart NU nog aan de beurt is. play() is asynchroon: zonder
   // deze check start een afgebroken poging de video alsnog, en dan lopen er twee
@@ -144,9 +245,9 @@ const Card: React.FC<{
       >
         <video
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=12`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=12`}
-          preload="none"
+          src={`${BASE}video/os/${pillar.file}.mp4?v=13`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=13`}
+          preload="metadata"
           playsInline
           loop
           muted
@@ -155,36 +256,73 @@ const Card: React.FC<{
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        {/* Stilstaand beeld: ligt eroverheen zolang de video niet loopt */}
-        <img
-          src={`${BASE}video/os/${pillar.file}.webp?v=12`}
-          alt=""
-          aria-hidden="true"
-          draggable={false}
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 pointer-events-none"
-          style={{ opacity: speelt ? 0 : 1 }}
-        />
-
-        {/* Rustige donkere sluier zolang de kaart stil staat */}
+        {/* Rustlaag: het beeld zacht in de waas, met de agent er bovenop aan het
+            werk. Zodra de video loopt fade de hele laag weg en is hij scherp. */}
         <div
           className="absolute inset-0 transition-opacity duration-500 pointer-events-none"
-          style={{
-            opacity: speelt ? 0 : 1,
-            background: 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.06) 45%, rgba(0,0,0,0.18) 100%)',
-          }}
-        />
-
-        {/* Afspeelteken, verdwijnt zodra hij loopt */}
-        <div
-          className="absolute inset-0 flex items-center justify-center transition-all duration-300 pointer-events-none"
           style={{ opacity: speelt ? 0 : 1 }}
         >
-          <span className="w-14 h-14 rounded-full bg-black/55 backdrop-blur-sm flex items-center justify-center border border-white/15">
-            <Play size={20} className="text-white ml-0.5" fill="white" />
-          </span>
+          {/* scherp stilstaand beeld, ligt eronder */}
+          <img
+            src={`${BASE}video/os/${pillar.file}.webp?v=13`}
+            alt=""
+            aria-hidden="true"
+            draggable={false}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          {/* zelfde beeld in de waas: verdwijnt meteen bij aanraken, dus het voelt
+              direct, ook al moet de video nog even laden */}
+          <img
+            src={`${BASE}video/os/${pillar.file}.webp?v=13`}
+            alt=""
+            aria-hidden="true"
+            draggable={false}
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+            style={{
+              filter: 'blur(7px) saturate(1.02) brightness(0.92)',
+              transform: 'scale(1.09)',
+              opacity: isActive ? 0 : 1,
+            }}
+          />
+          <div
+            className="absolute inset-0 transition-opacity duration-500"
+            style={{
+              opacity: isActive ? 0 : 1,
+              background: `radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.42) 46%, rgba(0,0,0,0.30) 100%), radial-gradient(ellipse at 50% 45%, ${pillar.accent}26 0%, transparent 62%)`,
+            }}
+          />
+
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center transition-opacity duration-300"
+            style={{ opacity: isActive ? 0 : 1 }}
+          >
+            <span
+              className={`sn-agent ${isActive ? '' : 'sn-agent-speelt'}`}
+              style={{
+                ...agentStijl(pillar.key, 132),
+                filter: `drop-shadow(0 16px 34px rgba(0,0,0,0.6)) drop-shadow(0 0 26px ${pillar.accent}33)`,
+              }}
+              aria-hidden="true"
+            />
+            <span
+              className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em]"
+              style={{
+                borderColor: `${pillar.accent}66`,
+                background: `${pillar.accent}1a`,
+                color: '#ffffff',
+              }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: pillar.accent }} />
+              {pillar.agent}
+            </span>
+            <span className="mt-2.5 inline-flex items-center gap-1.5 text-white/45 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em]">
+              <Play size={10} fill="currentColor" />
+              Bekijk hoe hij werkt
+            </span>
+          </div>
         </div>
 
-        {/* Geluidshint bij hover */}
+        {/* Geluidshint zodra de video loopt */}
         <div
           className="absolute top-4 right-4 transition-opacity duration-300 pointer-events-none"
           style={{ opacity: isActive ? 1 : 0 }}
@@ -252,8 +390,8 @@ const Lightbox: React.FC<{ index: number; onClose: () => void; onNav: (d: 1 | -1
         <video
           key={pillar.key}
           ref={videoRef}
-          src={`${BASE}video/os/${pillar.file}.mp4?v=12`}
-          poster={`${BASE}video/os/${pillar.file}.webp?v=12`}
+          src={`${BASE}video/os/${pillar.file}.mp4?v=13`}
+          poster={`${BASE}video/os/${pillar.file}.webp?v=13`}
           playsInline
           loop
           controls
@@ -310,49 +448,19 @@ const OSPillars: React.FC = () => {
           </button>
         </div>
 
-        {/* De vier agents boven de onderdelen: de agent van de kaart waar je overheen
-            beweegt licht op, precies zoals in het systeem zelf. */}
-        <div className="flex gap-2 md:gap-3 mb-5 md:mb-7 overflow-x-auto md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0">
-          {PILLARS.map((p) => {
-            const aan = activeKey === p.key;
-            return (
-              <div
-                key={`agent-${p.key}`}
-                onMouseEnter={() => setActiveKey(p.key)}
-                onMouseLeave={() => setActiveKey(null)}
-                className="flex-1 min-w-[150px] md:min-w-0 rounded-xl border px-3 py-2.5 md:px-4 md:py-3 transition-all duration-300"
-                style={{
-                  borderColor: aan ? `${p.accent}` : 'rgba(255,255,255,0.10)',
-                  background: aan ? `${p.accent}18` : 'rgba(255,255,255,0.03)',
-                }}
-              >
-                <div className="flex items-center gap-2.5">
-                  <span
-                    className="w-2 h-2 rounded-full flex-shrink-0 transition-colors duration-300"
-                    style={{ background: aan ? p.accent : 'rgba(255,255,255,0.28)' }}
-                  />
-                  <span
-                    className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.18em] truncate transition-colors duration-300"
-                    style={{ color: aan ? p.accent : 'rgba(255,255,255,0.4)' }}
-                  >
-                    {p.label}
-                  </span>
-                  <span
-                    className="ml-auto text-[11px] md:text-xs font-black transition-colors duration-300"
-                    style={{ color: aan ? p.accent : 'rgba(255,255,255,0.42)' }}
-                  >
-                    {p.open}
-                  </span>
-                </div>
-                <span
-                  className="block mt-1 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300"
-                  style={{ color: aan ? p.accent : 'rgba(255,255,255,0.26)' }}
-                >
-                  {aan ? 'Aan het werk' : `${p.open} open`}
-                </span>
-              </div>
-            );
-          })}
+        {/* De vier agents boven de onderdelen: elk onderdeel zijn eigen kleur links
+            en zijn eigen agent rechts. De agent van de kaart waar je overheen
+            beweegt gaat aan het werk, precies zoals in het systeem zelf. */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-4 md:mb-6">
+          {PILLARS.map((p, i) => (
+            <AgentBalk
+              key={`agent-${p.key}`}
+              pillar={p}
+              aan={activeKey === p.key}
+              onActivate={setActiveKey}
+              onOpen={() => handleOpen(i)}
+            />
+          ))}
         </div>
 
         <div className="flex gap-3 md:gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
