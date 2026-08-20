@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
+import Button from './Button';
 import { Instagram, X, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
 const BEHOLD_FEED_URL = 'https://feeds.behold.so/5Ku5iKM7N7Gpi9MgAN9X';
@@ -562,15 +563,19 @@ const SocialMediaSlider: React.FC = () => {
           </a>
           {' '}en zie ons nieuwste werk, achter-de-schermen en AI-experimenten. Tik op een post om 'm groot te bekijken.
         </p>
-        <a
-          href="https://www.instagram.com/socialnow.nl/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 mt-6 md:mt-8 rounded-full bg-[#25D366] text-white sn-btn3d hover:scale-105 transition-transform"
-        >
-          <Instagram size={16} />
-          <span className="text-[11px] md:text-xs font-black uppercase tracking-[0.25em]">Bekijk volledig profiel</span>
-        </a>
+        <div className="pointer-events-auto inline-block mt-6 md:mt-8">
+          <Button
+            variant="green"
+            premium
+            icon
+            IconComponent={Instagram}
+            href="https://www.instagram.com/socialnow.nl/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Bekijk volledig profiel
+          </Button>
+        </div>
       </div>
 
       {/* Marquee schuift onder de content door (negatieve top-marge) met een

@@ -54,6 +54,8 @@ const BentoFeaturesSection = lazyRetry(() => import('./components/BentoFeaturesS
 const AanbodUitleg = lazyRetry(() => import('./components/AanbodUitleg'));
 const OSPillars = lazyRetry(() => import('./components/OSPillars'));
 const BlijeKlanten = lazyRetry(() => import('./components/BlijeKlanten'));
+const BlogPage = lazyRetry(() => import('./components/BlogPage'));
+const BlogPostPage = lazyRetry(() => import('./components/BlogPostPage'));
 // De uitlegvideo als eerste scherm, met scrollstop tot je hem uitkijkt of wegklikt
 
 const PricingStrip = lazyRetry(() => import('./components/PricingStrip'));
@@ -356,6 +358,26 @@ const App: React.FC = () => {
               <ErrorBoundary>
                 <Suspense fallback={<PageLoader />}>
                   <PrivacyPage />
+                </Suspense>
+              </ErrorBoundary>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <ErrorBoundary>
+                <Suspense fallback={<PageLoader />}>
+                  <BlogPage onOpenBooking={() => setIsBookingOpen(true)} />
+                </Suspense>
+              </ErrorBoundary>
+            }
+          />
+          <Route
+            path="/blog/:slug"
+            element={
+              <ErrorBoundary>
+                <Suspense fallback={<PageLoader />}>
+                  <BlogPostPage onOpenBooking={() => setIsBookingOpen(true)} />
                 </Suspense>
               </ErrorBoundary>
             }
