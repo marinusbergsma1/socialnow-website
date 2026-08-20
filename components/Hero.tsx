@@ -11,9 +11,9 @@ interface HeroProps {
 
 const reviewsData = [
   {
-    name: "Niels Groen",
-    handle: "RAVEG",
-    image: `${import.meta.env.BASE_URL}images/Niels-Groen.webp`
+    name: "Ellen Sluijs",
+    handle: "KWH GARANT",
+    image: `${import.meta.env.BASE_URL}images/Ellen-Sluijs.webp`
   },
   {
     name: "Albert Deltour",

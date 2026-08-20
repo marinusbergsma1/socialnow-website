@@ -10,14 +10,16 @@ interface ReviewsProps {
 const reviewsData = [
   {
     id: "REV_01",
-    name: "Niels Groen",
-    handle: "RAVEG",
-    role: "RAVEG",
-    image: `${import.meta.env.BASE_URL}images/Niels-Groen.webp`,
+    name: "Ellen Sluijs",
+    handle: "KWH GARANT",
+    role: "kWh Garant",
+    image: `${import.meta.env.BASE_URL}images/Ellen-Sluijs.webp`,
     stars: 5,
     status: "CORE_CLIENT",
-    meta: { AUTOMATION: "100%", KANALEN: "ALL-IN-1" },
-    text: "Sinds we met SocialNow werken is alles geautomatiseerd, van content tot ads. Eén partij voor branding, website en social media. Een samenwerking die ik nooit zal opgeven!"
+    meta: { BEOORDELING: "4,4 VIA SOLVARI", GEINSTALLEERD: "BINNEN 6 WEKEN" },
+    // Nog geen quote van Ellen zelf. Zolang die er niet is toont de kaart
+    // alleen de cijfers, want onder haar naam komt niets wat zij niet zei.
+    text: ""
   },
   {
     id: "REV_02",
@@ -135,9 +137,15 @@ const ReviewCard: React.FC<{ review: typeof reviewsData[0]; index: number; isAct
           <span className="text-[9px] font-mono text-white/50 tracking-widest uppercase">{review.status}</span>
       </div>
 
-      <p className="text-gray-300 leading-relaxed text-sm font-bold flex-grow italic mb-10" style={{ transform: 'translateZ(15px)' }}>
-        "{review.text}"
-      </p>
+      {review.text ? (
+        <p className="text-gray-300 leading-relaxed text-sm font-bold flex-grow italic mb-10" style={{ transform: 'translateZ(15px)' }}>
+          "{review.text}"
+        </p>
+      ) : (
+        <p className="text-white/45 leading-relaxed text-sm font-medium flex-grow mb-10" style={{ transform: 'translateZ(15px)' }}>
+          Website, conversie en het contentsysteem eronder. Wat het oplevert staat hieronder.
+        </p>
+      )}
 
       <div className="grid grid-cols-2 gap-2 mt-auto" style={{ transform: 'translateZ(5px)' }}>
           {Object.entries(review.meta).map(([k, v]) => (
