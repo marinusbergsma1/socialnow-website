@@ -1,4 +1,5 @@
 
+import OSIntro from './components/OSIntro';
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -52,7 +53,7 @@ const BentoFeaturesSection = lazyRetry(() => import('./components/BentoFeaturesS
 // De vier onderdelen van het OS als losse videos, direct onder de hero
 const OSPillars = lazyRetry(() => import('./components/OSPillars'));
 // De uitlegvideo als eerste scherm, met scrollstop tot je hem uitkijkt of wegklikt
-const OSIntro = lazyRetry(() => import('./components/OSIntro'));
+
 const PricingStrip = lazyRetry(() => import('./components/PricingStrip'));
 
 // Lazy-load popup/modal components — only loaded when opened
@@ -67,8 +68,6 @@ const ServicesPage = lazyRetry(() => import('./components/ServicesPage'));
 const ProjectPage = lazyRetry(() => import('./components/ProjectPage'));
 const PrivacyPage = lazyRetry(() => import('./components/PrivacyPage'));
 const PricingPage = lazyRetry(() => import('./components/PricingPage'));
-const BlogPage = lazyRetry(() => import('./components/BlogPage'));
-const BlogPostPage = lazyRetry(() => import('./components/BlogPostPage'));
 
 // Minimal fallback while lazy components load
 const PageLoader = () => (
@@ -89,9 +88,7 @@ const HomePage: React.FC<{
 
   return (
     <main className={`transition-opacity duration-1000 ease-out ${loading ? 'opacity-0' : 'opacity-100'}`}>
-      <Suspense fallback={null}>
-        <OSIntro />
-      </Suspense>
+      <OSIntro />
 
       <div id="home">
         <Hero startAnimation={!loading} onOpenBooking={onOpenBooking} />
@@ -351,26 +348,6 @@ const App: React.FC = () => {
               <ErrorBoundary>
                 <Suspense fallback={<PageLoader />}>
                   <PrivacyPage />
-                </Suspense>
-              </ErrorBoundary>
-            }
-          />
-          <Route
-            path="/blog"
-            element={
-              <ErrorBoundary>
-                <Suspense fallback={<PageLoader />}>
-                  <BlogPage onOpenBooking={() => setIsBookingOpen(true)} />
-                </Suspense>
-              </ErrorBoundary>
-            }
-          />
-          <Route
-            path="/blog/:slug"
-            element={
-              <ErrorBoundary>
-                <Suspense fallback={<PageLoader />}>
-                  <BlogPostPage onOpenBooking={() => setIsBookingOpen(true)} />
                 </Suspense>
               </ErrorBoundary>
             }

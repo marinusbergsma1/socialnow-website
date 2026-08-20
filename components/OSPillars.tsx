@@ -22,6 +22,7 @@ type Pillar = {
   accent: string;
   file: string;
   open: number;
+  maat: number;      // hoe groot de agent op de kaart staat, zodat Milo overal even groot oogt
 };
 
 const PILLARS: Pillar[] = [
@@ -34,6 +35,7 @@ const PILLARS: Pillar[] = [
     line: 'Teksten en pagina’s aanpassen vanuit de chat, direct live.',
     accent: '#25D366',
     file: 'os-website',
+    maat: 127,
     open: 2,
   },
   {
@@ -45,6 +47,7 @@ const PILLARS: Pillar[] = [
     line: 'Elke aanvraag komt binnen, niets blijft liggen.',
     accent: '#F7E644',
     file: 'os-crm',
+    maat: 136,
     open: 3,
   },
   {
@@ -56,6 +59,7 @@ const PILLARS: Pillar[] = [
     line: 'Van idee naar geplande post, in dezelfde chat.',
     accent: '#00A3E0',
     file: 'os-content',
+    maat: 205,
     open: 2,
   },
   {
@@ -67,14 +71,16 @@ const PILLARS: Pillar[] = [
     line: 'Campagnes bijsturen op wat de cijfers laten zien.',
     accent: '#F62961',
     file: 'os-advertenties',
+    maat: 132,
     open: 1,
   },
 ];
 
-// De sprite is één webp met 30 standjes in 6 kolommen en 5 rijen.
+// De sprite is één webp met 24 standjes in 6 kolommen en 4 rijen, gehaald uit
+// de headervideo van die agent.
 const agentStijl = (key: string, maat: number, laden: boolean): React.CSSProperties => ({
   backgroundImage: laden ? `url(${BASE}images/agents/milo-${key}-sprite.webp)` : undefined,
-  backgroundSize: `${maat * 6}px ${maat * 5}px`,
+  backgroundSize: `${maat * 6}px ${maat * 4}px`,
   width: maat,
   height: maat,
 });
@@ -170,14 +176,23 @@ const AgentBalk: React.FC<{
       {/* rechts: de agent van dit onderdeel */}
       <span className="ml-auto flex items-center gap-2 flex-shrink-0">
         <span
-          className={`sn-agent rounded-full ${aan && inBeeld ? 'sn-agent-speelt' : ''}`}
+          className="relative w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-300 flex-shrink-0"
           style={{
-            ...agentStijl(pillar.key, 34, inBeeld),
             backgroundColor: aan ? `${pillar.accent}26` : 'rgba(255,255,255,0.05)',
             boxShadow: aan ? `inset 0 0 0 1px ${pillar.accent}66` : 'inset 0 0 0 1px rgba(255,255,255,0.08)',
           }}
-          aria-hidden="true"
-        />
+        >
+          <img
+            src={`${BASE}images/agents/milo-${pillar.key}.webp`}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            width={34}
+            height={34}
+            className="w-[34px] h-[34px] object-contain"
+          />
+        </span>
         <span className="leading-tight hidden sm:block">
           <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.1em] text-white/75 whitespace-nowrap">
             {pillar.agent}
@@ -315,21 +330,25 @@ const Card: React.FC<{
             className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center transition-opacity duration-300"
             style={{ opacity: isActive ? 0 : 1 }}
           >
-            <span className="relative inline-block" style={{ width: 128, height: 128 }}>
+            {/* Vaste hoogte, agents staan op dezelfde lijn. Zo lopen de labels
+                eronder gelijk, ook al heeft de een meer ruimte nodig dan de ander. */}
+            <span className="flex items-end justify-center" style={{ height: 212 }}>
+            <span className="relative inline-block" style={{ width: pillar.maat, height: pillar.maat }}>
               {/* gloed als los vlak: een filter op het bewegende plaatje kost
                   elke stap een nieuwe tekenbeurt, dit niet */}
               <span
                 className="absolute rounded-full pointer-events-none"
                 style={{
-                  inset: -14,
+                  inset: -Math.round(pillar.maat * 0.11),
                   background: `radial-gradient(circle at 50% 58%, ${pillar.accent}2e 0%, transparent 68%)`,
                 }}
               />
               <span
                 className={`sn-agent relative ${isActive || !inBeeld ? '' : 'sn-agent-speelt'}`}
-                style={agentStijl(pillar.key, 128, inBeeld)}
+                style={agentStijl(pillar.key, pillar.maat, inBeeld)}
                 aria-hidden="true"
               />
+            </span>
             </span>
             <span
               className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em]"

@@ -49,6 +49,10 @@
     <link rel="dns-prefetch" href="https://storage.googleapis.com" />
     <!-- Preload intro-video: start de download parallel aan de JS-bundle,
          zodat de logo-animatie direct kan spelen (desktop/mobiel apart) -->
+    <!-- De uitlegvideo is het eerste wat je ziet. Het stilstaande beeld staat er
+         daardoor meteen, en de video begint te komen zonder op de bundel te wachten. -->
+    <link rel="preload" href="/video/os/os-master-en.webp?v=14" as="image" type="image/webp" fetchpriority="high" />
+    <link rel="preload" href="/video/os/os-master-en.mp4?v=14" as="video" type="video/mp4" fetchpriority="high" />
     <link rel="preload" as="video" href="/video/header-intro.mp4?v=9" type="video/mp4" media="(min-width: 768px)" />
     <link rel="preload" as="video" href="/video/header-intro-mobile.mp4?v=9" type="video/mp4" media="(max-width: 767px)" />
     <!-- Preload critical fonts (only 400 + 700 for initial render) -->
