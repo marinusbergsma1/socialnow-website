@@ -19,6 +19,9 @@ type Uitleg = {
   bestand: string;
   staand?: boolean;      // de klantcase is een staande video
   data: string;          // wat er in beeld echt is en wat voorbeeld
+  logo?: string;         // het merk waar dit blok over gaat
+  logoHoogte?: number;
+  merk: string;          // valt terug op de naam als er geen logobestand is
 };
 
 const UITLEG: Uitleg[] = [
@@ -27,6 +30,9 @@ const UITLEG: Uitleg[] = [
     kop: 'Voor Odoo gebruikers',
     onder: 'Hoe het OS op je Odoo aansluit, in tweeëneenhalve minuut',
     bestand: 'os-odoo',
+    merk: 'Odoo',
+    logo: `${BASE}images/klantlogos/odoo.svg`,
+    logoHoogte: 22,
     data: 'Voorbeeldweergave van het systeem, met verzonnen gegevens.',
   },
   {
@@ -34,6 +40,9 @@ const UITLEG: Uitleg[] = [
     kop: 'Klantverhaal: kWh Garant',
     onder: 'Hetzelfde verhaal, maar dan hoe het bij een echte klant loopt',
     bestand: 'os-kwh-case',
+    merk: 'kWh Garant',
+    logo: `${BASE}images/klantlogos/kwh-garant.svg`,
+    logoHoogte: 24,
     staand: true,
     data: 'Advertentieresultaten zijn echt. Overige gegevens zijn voorbeeld, ter bescherming van de klant.',
   },
@@ -103,7 +112,7 @@ const Speler: React.FC<{ u: Uitleg }> = ({ u }) => {
   const knop = 'w-9 h-9 rounded-full border border-white/15 bg-white/[0.06] text-white/70 hover:text-white hover:bg-white/[0.12] flex items-center justify-center transition-colors';
 
   return (
-    <div className={`relative mx-auto w-full ${u.staand ? 'max-w-[320px] md:max-w-[360px]' : 'max-w-3xl'}`}>
+    <div className={`relative mx-auto w-full ${u.staand ? 'max-w-[280px]' : 'max-w-full'}`}>
       <div
         className="relative overflow-hidden rounded-2xl bg-black border border-white/10 shadow-[0_24px_70px_rgba(0,0,0,0.6)]"
         style={{ aspectRatio: u.staand ? '9 / 16' : '16 / 9' }}
@@ -174,18 +183,36 @@ const Speler: React.FC<{ u: Uitleg }> = ({ u }) => {
 
 const Blok: React.FC<{ u: Uitleg }> = ({ u }) => {
   const [open, setOpen] = useState(false);
+  // Is er geen logobestand, dan valt hij terug op de merknaam als woordmerk.
+  const [geenLogo, setGeenLogo] = useState(false);
   return (
     <div className="rounded-2xl border border-white/[0.09] bg-white/[0.02] overflow-hidden transition-colors duration-300 hover:border-white/[0.16]">
       <button
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="w-full flex items-center gap-3 px-4 md:px-6 py-4 md:py-5 text-left"
+        className="w-full flex items-center gap-3 px-4 md:px-5 py-4 md:py-5 text-left"
       >
         <span className="min-w-0 flex-1">
-          <span className="block text-white font-black uppercase tracking-tight text-sm md:text-lg leading-none">
+          {/* het merk waar dit blok over gaat */}
+          <span className="flex items-center h-6 mb-2.5">
+            {u.logo && !geenLogo ? (
+              <img
+                src={u.logo}
+                alt={u.merk}
+                loading="lazy"
+                decoding="async"
+                style={{ height: u.logoHoogte ?? 22 }}
+                className="w-auto max-w-[60%] object-contain opacity-90"
+                onError={() => setGeenLogo(true)}
+              />
+            ) : (
+              <span className="text-white/70 font-black uppercase tracking-[0.24em] text-[11px]">{u.merk}</span>
+            )}
+          </span>
+          <span className="block text-white font-black uppercase tracking-tight text-sm md:text-base leading-none">
             {u.kop}
           </span>
-          <span className="block text-white/40 text-[11px] md:text-[13px] font-medium mt-1.5">{u.onder}</span>
+          <span className="block text-white/40 text-[11px] md:text-xs font-medium mt-1.5">{u.onder}</span>
         </span>
         <span
           className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
@@ -214,7 +241,7 @@ const Blok: React.FC<{ u: Uitleg }> = ({ u }) => {
 const AanbodUitleg: React.FC = () => (
   <section className="relative pt-2 pb-10 md:pt-4 md:pb-16">
     <div className="container mx-auto px-6">
-      <div className="max-w-3xl mx-auto space-y-3">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 items-start">
         {UITLEG.map((u) => (
           <Blok key={u.id} u={u} />
         ))}
