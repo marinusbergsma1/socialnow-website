@@ -53,6 +53,8 @@ const BentoFeaturesSection = lazyRetry(() => import('./components/BentoFeaturesS
 const OSPillars = lazyRetry(() => import('./components/OSPillars'));
 // De grote uitlegvideo, direct onder de hero
 const OSMasterVideo = lazyRetry(() => import('./components/OSMasterVideo'));
+// De uitlegvideo als eerste scherm, met scrollstop tot je hem uitkijkt of wegklikt
+const OSIntro = lazyRetry(() => import('./components/OSIntro'));
 const PricingStrip = lazyRetry(() => import('./components/PricingStrip'));
 
 // Lazy-load popup/modal components — only loaded when opened
@@ -87,6 +89,10 @@ const HomePage: React.FC<{
 
   return (
     <main className={`transition-opacity duration-1000 ease-out ${loading ? 'opacity-0' : 'opacity-100'}`}>
+      <Suspense fallback={null}>
+        <OSIntro />
+      </Suspense>
+
       <div id="home">
         <Hero startAnimation={!loading} onOpenBooking={onOpenBooking} />
       </div>
