@@ -8,9 +8,16 @@ import { ChevronDown, Pause, Play, RotateCcw, Volume2, VolumeX } from 'lucide-re
  * kWh Garant zien hoe zo'n traject loopt. Ze staan dicht, zodat de pagina rustig
  * blijft, en schuiven open als je erop klikt. De video wordt pas opgehaald als
  * hij opengaat, dus dicht kost het niets.
+ *
+ * De blokken zijn wit met een dunne groene verlooprand. Op een donkere pagina
+ * springen ze daardoor naar voren zonder dat ze gaan schreeuwen.
  */
 
 const BASE = import.meta.env.BASE_URL;
+
+// De rand van de twee blokken. Dun, groen, met een verloop erin.
+const RAND =
+  'linear-gradient(135deg, #25D366 0%, rgba(37,211,102,0.32) 36%, rgba(37,211,102,0.18) 62%, #25D366 100%)';
 
 type Uitleg = {
   id: string;
@@ -22,6 +29,7 @@ type Uitleg = {
   logo?: string;         // het merk waar dit blok over gaat
   logoHoogte?: number;
   merk: string;          // valt terug op de naam als er geen logobestand is
+  merkKleur?: string;    // kleur van dat woordmerk, zolang het logo er nog niet is
 };
 
 const UITLEG: Uitleg[] = [
@@ -31,6 +39,7 @@ const UITLEG: Uitleg[] = [
     onder: 'Hoe het OS op je Odoo aansluit, in tweeëneenhalve minuut',
     bestand: 'os-odoo',
     merk: 'Odoo',
+    merkKleur: '#714B67',
     logo: `${BASE}images/klantlogos/odoo.svg`,
     logoHoogte: 22,
     data: 'Voorbeeldweergave van het systeem, met verzonnen gegevens.',
@@ -114,7 +123,7 @@ const Speler: React.FC<{ u: Uitleg }> = ({ u }) => {
   return (
     <div className={`relative mx-auto w-full ${u.staand ? 'max-w-[280px]' : 'max-w-full'}`}>
       <div
-        className="relative overflow-hidden rounded-2xl bg-black border border-white/10 shadow-[0_24px_70px_rgba(0,0,0,0.6)]"
+        className="relative overflow-hidden rounded-2xl bg-black border border-black/10 shadow-[0_10px_30px_rgba(0,0,0,0.18)]"
         style={{ aspectRatio: u.staand ? '9 / 16' : '16 / 9' }}
       >
         <video
@@ -176,7 +185,7 @@ const Speler: React.FC<{ u: Uitleg }> = ({ u }) => {
         </div>
       </div>
 
-      <p className="text-center text-white/25 text-[11px] font-medium mt-3">{u.data}</p>
+      <p className="text-center text-black/35 text-[11px] font-medium mt-3">{u.data}</p>
     </div>
   );
 };
@@ -186,51 +195,63 @@ const Blok: React.FC<{ u: Uitleg }> = ({ u }) => {
   // Is er geen logobestand, dan valt hij terug op de merknaam als woordmerk.
   const [geenLogo, setGeenLogo] = useState(false);
   return (
-    <div className="rounded-2xl border border-white/[0.09] bg-white/[0.02] overflow-hidden transition-colors duration-300 hover:border-white/[0.16]">
-      <button
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        className="w-full flex items-center gap-3 px-4 md:px-5 py-4 md:py-5 text-left"
-      >
-        <span className="min-w-0 flex-1">
-          {/* het merk waar dit blok over gaat */}
-          <span className="flex items-center h-6 mb-2.5">
-            {u.logo && !geenLogo ? (
-              <img
-                src={u.logo}
-                alt={u.merk}
-                loading="lazy"
-                decoding="async"
-                style={{ height: u.logoHoogte ?? 22 }}
-                className="w-auto max-w-[60%] object-contain opacity-90"
-                onError={() => setGeenLogo(true)}
-              />
-            ) : (
-              <span className="text-white/70 font-black uppercase tracking-[0.24em] text-[11px]">{u.merk}</span>
-            )}
-          </span>
-          <span className="block text-white font-black uppercase tracking-tight text-sm md:text-base leading-none">
-            {u.kop}
-          </span>
-          <span className="block text-white/40 text-[11px] md:text-xs font-medium mt-1.5">{u.onder}</span>
-        </span>
-        <span
-          className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-            open ? 'bg-[#25D366] text-white rotate-180' : 'bg-white/[0.06] border border-white/12 text-white/70'
-          }`}
+    <div
+      className="rounded-2xl p-[1.5px] transition-shadow duration-300 shadow-[0_16px_44px_rgba(0,0,0,0.45)] hover:shadow-[0_22px_62px_rgba(37,211,102,0.3)]"
+      style={{ backgroundImage: RAND }}
+    >
+      <div className="rounded-[15px] bg-white overflow-hidden">
+        <button
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          className="w-full flex items-center gap-3 px-4 md:px-5 py-4 md:py-5 text-left"
         >
-          <ChevronDown size={18} />
-        </span>
-      </button>
+          <span className="min-w-0 flex-1">
+            {/* het merk waar dit blok over gaat */}
+            <span className="flex items-center h-6 mb-2.5">
+              {u.logo && !geenLogo ? (
+                <img
+                  src={u.logo}
+                  alt={u.merk}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ height: u.logoHoogte ?? 22 }}
+                  className="w-auto max-w-[60%] object-contain"
+                  onError={() => setGeenLogo(true)}
+                />
+              ) : (
+                <span
+                  className="font-black uppercase tracking-[0.24em] text-[11px]"
+                  style={{ color: u.merkKleur ?? '#0B1220' }}
+                >
+                  {u.merk}
+                </span>
+              )}
+            </span>
+            <span className="block text-[#0B1220] font-black uppercase tracking-tight text-sm md:text-base leading-none">
+              {u.kop}
+            </span>
+            <span className="block text-black/45 text-[11px] md:text-xs font-medium mt-1.5">{u.onder}</span>
+          </span>
+          <span
+            className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+              open
+                ? 'bg-[#25D366] text-white rotate-180 shadow-[0_6px_18px_rgba(37,211,102,0.4)]'
+                : 'bg-black/[0.04] border border-black/10 text-black/45'
+            }`}
+          >
+            <ChevronDown size={18} />
+          </span>
+        </button>
 
-      {/* Pas hier hangt de video in de pagina, dus dicht kost hij niets */}
-      <div
-        className="grid transition-[grid-template-rows] duration-500 ease-out"
-        style={{ gridTemplateRows: open ? '1fr' : '0fr' }}
-      >
-        <div className="overflow-hidden">
-          <div className="px-4 md:px-6 pb-5 md:pb-6 pt-1">
-            {open && <Speler u={u} />}
+        {/* Pas hier hangt de video in de pagina, dus dicht kost hij niets */}
+        <div
+          className="grid transition-[grid-template-rows] duration-500 ease-out"
+          style={{ gridTemplateRows: open ? '1fr' : '0fr' }}
+        >
+          <div className="overflow-hidden">
+            <div className="px-4 md:px-6 pb-5 md:pb-6 pt-1">
+              {open && <Speler u={u} />}
+            </div>
           </div>
         </div>
       </div>
