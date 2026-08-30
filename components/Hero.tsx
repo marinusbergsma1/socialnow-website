@@ -37,6 +37,8 @@ const words = [
   { text: "GROWTH", color: "text-[#25D366]", duration: 2000 }
 ];
 
+const OS_AANMELDEN = 'https://os.socialnow.nl/aanmelden/';
+
 const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
   const [wordIndex, setWordIndex] = useState(0);
   const wordIndexRef = useRef(0);
@@ -169,8 +171,8 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
           </p>
 
           <div className={`flex justify-center transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.7s' }}>
-            <Button variant="green" icon onClick={onOpenBooking} triggerOnHover className="!px-5 md:!px-7 text-sm md:text-lg">
-              CLAIM JE GRATIS PROOF OF CONCEPT
+            <Button variant="green" icon onClick={() => window.location.assign(OS_AANMELDEN)} triggerOnHover className="!px-5 md:!px-7 text-sm md:text-lg">
+              CLAIM JOUW OS
             </Button>
           </div>
 
