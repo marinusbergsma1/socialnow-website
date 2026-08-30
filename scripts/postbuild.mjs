@@ -89,13 +89,12 @@ for (const [route, meta] of Object.entries(routeMeta)) {
       '@context': 'https://schema.org',
       '@graph': [
         { ...person('Marinus Bergsma', 'Founder & Creative Art Director'), url: `${BASE}/team`, knowsAbout: ['AI Marketing', 'Branding', 'Creative Direction'] },
-        person('Jos Hollenberg', 'Partner — OS-systemen & Groei'),
-        person('Sergio Jovovic', 'Creative Marketing Designer'),
+        person('Jos Hollenberg', 'Marketeer'),
+        person('Sergio Jovovic', 'Meta Marketeer'),
         person('Carmel Boon', 'Video & Motion Editor'),
         person('Emma Peperkamp', 'Fotograaf'),
         person('Nick van Keulen', 'Google Ads Expert'),
         person('Sid van Kalken', 'Webdeveloper'),
-        person('Michel Pluister', 'Software Engineer'),
         {
           '@type': 'Organization',
           '@id': `${BASE}/#komen-consultancy`,
@@ -103,7 +102,7 @@ for (const [route, meta] of Object.entries(routeMeta)) {
           description: 'Partner van SocialNow voor slimme AI-systemen: financieel en strategisch fundament onder data-gedreven AI-producten.',
         },
         {
-          ...person('Steef Komen', 'Partner · Slimme OS-systemen · Accountant'),
+          ...person('Steef Komen', 'Partner · Accountancy & Data'),
           worksFor: { '@id': `${BASE}/#komen-consultancy` },
           affiliation: { '@id': `${BASE}/#organization` },
         },

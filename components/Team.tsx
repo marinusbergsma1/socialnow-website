@@ -30,14 +30,14 @@ const team: TeamItem[] = [
     id: 2, 
     type: 'member',
     name: "Jos Hollenberg", 
-    role: "Partner · OS-systemen & Groei", 
+    role: "Marketeer", 
     image: `${import.meta.env.BASE_URL}images/Jos-Hollenberg-1.webp` 
   },
   { 
     id: 3, 
     type: 'member',
     name: "Sergio Jovovic", 
-    role: "Creative Marketing Designer", 
+    role: "Meta Marketeer", 
     image: `${import.meta.env.BASE_URL}images/Sergio-Jovovic.webp` 
   },
   { 
@@ -70,17 +70,10 @@ const team: TeamItem[] = [
     imgCustomClass: "[&>img]:!object-[50%_10%] [&>img]:!scale-[1.3] group-hover:[&>img]:!scale-[1.35]"
   },
   {
-    id: 8,
-    type: 'member',
-    name: "Michel Pluister",
-    role: "Software Engineer",
-    image: `${import.meta.env.BASE_URL}images/Michel-Pluister.webp`
-  },
-  {
     id: 9,
     type: 'member',
     name: "Steef Komen",
-    role: "Partner · Slimme OS-systemen · Accountant",
+    role: "Partner · Accountancy & Data",
     partnership: "SocialNow × Komen Consultancy",
     image: `${import.meta.env.BASE_URL}images/Steef-Komen.webp`
   },

@@ -40,7 +40,7 @@ const crew: CrewMember[] = [
   {
     id: 3,
     name: 'Sergio Jovovic',
-    role: 'Creative Marketing Designer',
+    role: 'Meta Marketeer',
     tag: 'DESIGN_LAB',
     line: 'Maakt merken die je niet kunt negeren.',
     color: '#F62961',
@@ -84,15 +84,6 @@ const crew: CrewMember[] = [
     imgCustomClass:
       '[&>img]:!object-[50%_10%] [&>img]:!scale-[1.3] group-hover:[&>img]:!scale-[1.35]',
   },
-  {
-    id: 8,
-    name: 'Michel Pluister',
-    role: 'Software Engineer',
-    tag: 'CODE_CORE',
-    line: 'Koppelt je CRM, chat en data aan elkaar.',
-    color: '#00A3E0',
-    image: `${BASE}images/Michel-Pluister.webp`,
-  },
 ];
 
 // OS-partners — de main focus: slimme OS-systemen. Samen bovenaan, los van de crew.
@@ -111,7 +102,7 @@ interface OsPartner {
 const osPartners: OsPartner[] = [
   {
     name: 'Steef Komen',
-    role: 'Partner · Slimme OS-systemen · Accountant',
+    role: 'Partner · Accountancy & Data',
     company: 'Komen Consultancy',
     logo: `${BASE}images/komen-consultancy-logo.webp`,
     credentials: 'Accountancy · HvA & VU Amsterdam · 5 jaar Ernst & Young',
@@ -123,8 +114,8 @@ const osPartners: OsPartner[] = [
   },
   {
     name: 'Jos Hollenberg',
-    role: 'Partner · OS-systemen & Groei',
-    company: 'SEO & Marketing',
+    role: 'Marketeer',
+    company: 'Marketing & Groei',
     tag: 'GROWTH_OS',
     color: '#25D366',
     image: `${BASE}images/Jos-Hollenberg-1.webp`,
