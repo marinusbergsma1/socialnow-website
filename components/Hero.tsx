@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Star } from 'lucide-react';
-import Button from './Button';
+import { ArrowRight, Star } from 'lucide-react';
 import GenerateButton from './GenerateButton';
 
 interface HeroProps {
@@ -156,18 +155,14 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
               </h1>
           </div>
 
-          <div className={`flex justify-center transition-all duration-700 mt-8 md:mt-12 mb-2 md:mb-4 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.3s' }}>
+          <div className={`sn-claim-os-hero flex justify-center transition-all duration-700 mt-8 md:mt-12 mb-2 md:mb-4 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.3s' }}>
             <GenerateButton
-              text="START MET MILO"
-              morphText="START MET MILO"
-              icon={(
-                <video className="milo-os-avatar" autoPlay loop muted playsInline poster="/images/milo-avatar.webp">
-                  <source src="/video/milo-blink.webm" type="video/webm" />
-                  <source src="/video/milo-blink.mp4" type="video/mp4" />
-                </video>
-              )}
+              text="CLAIM JOUW OS"
+              morphText="CLAIM JOUW OS"
+              icon={<ArrowRight aria-hidden="true" />}
+              filled
               onClick={() => window.location.assign(OS_AANMELDEN)}
-              className="text-sm md:text-xl"
+              className="text-base md:text-2xl"
             />
           </div>
 
@@ -175,13 +170,7 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
             Start met een <span className="text-white font-black">gratis proof of concept</span>: een complete <span className="text-white font-black">website demo</span> én <span className="text-white font-black">rebranding</span>. Je ziet het werken vóórdat je iets betaalt.
           </p>
 
-          <div className={`flex justify-center transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.7s' }}>
-            <Button variant="green" icon onClick={() => window.location.assign(OS_AANMELDEN)} triggerOnHover className="!px-5 md:!px-7 text-sm md:text-lg">
-              CLAIM JOUW OS
-            </Button>
-          </div>
-
-          <div className={`flex flex-col items-center gap-6 mt-10 md:mt-12 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.9s' }}>
+          <div className={`flex flex-col items-center gap-6 mt-4 md:mt-6 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.7s' }}>
             {/* Geen scale-utilities op deze wrapper: ook scale-100 is een blijvende
                 transform en zou de pills hun backdrop (globe) afnemen */}
             <div onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' })} className="flex flex-col items-center gap-6 cursor-pointer group pb-4">

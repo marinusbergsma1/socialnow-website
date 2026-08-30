@@ -199,7 +199,7 @@ const Reviews: React.FC<ReviewsProps> = ({ onOpenBooking }) => {
         </div>
 
         <div className="flex justify-center mt-6 md:mt-12">
-            <Button variant="green" icon onClick={onOpenBooking} triggerOnHover>WORD DE VOLGENDE</Button>
+            <Button variant="green" premium icon href="https://os.socialnow.nl/aanmelden/" triggerOnHover>CLAIM JOUW OS</Button>
         </div>
       </div>
     </section>
