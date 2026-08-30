@@ -179,6 +179,17 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
           height: 1.35em;
           stroke: currentColor;
         }
+        .sn-generate-btn .btn-icon .milo-os-avatar {
+          display: block;
+          width: 2.35em;
+          height: 2.35em;
+          margin: -0.42em 0 -0.42em -0.32em;
+          border-radius: 50%;
+          object-fit: cover;
+          background: #020604;
+          border: 1px solid rgba(37, 211, 102, 0.5);
+          box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.08), 0 0 16px rgba(37, 211, 102, 0.34);
+        }
         .sn-generate-btn .btn:hover .btn-icon {
           color: #fff;
           filter: drop-shadow(0 0 3px hsl(var(--highlight-color-hue), 100%, 70%))

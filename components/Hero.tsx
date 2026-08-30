@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Star, Handshake } from 'lucide-react';
+import { Star } from 'lucide-react';
 import Button from './Button';
 import GenerateButton from './GenerateButton';
 
@@ -158,11 +158,16 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
 
           <div className={`flex justify-center transition-all duration-700 mt-8 md:mt-12 mb-2 md:mb-4 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.3s' }}>
             <GenerateButton
-              text="Let's meet"
-              morphText="Let's meet"
-              icon={<Handshake strokeWidth={2.25} />}
-              onClick={onOpenBooking}
-              className="text-sm md:text-2xl"
+              text="START MET MILO"
+              morphText="START MET MILO"
+              icon={(
+                <video className="milo-os-avatar" autoPlay loop muted playsInline poster="/images/milo-avatar.webp">
+                  <source src="/video/milo-blink.webm" type="video/webm" />
+                  <source src="/video/milo-blink.mp4" type="video/mp4" />
+                </video>
+              )}
+              onClick={() => window.location.assign(OS_AANMELDEN)}
+              className="text-sm md:text-xl"
             />
           </div>
 
