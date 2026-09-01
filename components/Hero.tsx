@@ -36,7 +36,7 @@ const words = [
   { text: "GROWTH", color: "text-[#25D366]", duration: 2000 }
 ];
 
-const OS_AANMELDEN = 'https://os.socialnow.nl/aanmelden/';
+const OS_AANMELDEN = 'https://app.socialnow.nl/login/?bron=site';
 
 const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
   const [wordIndex, setWordIndex] = useState(0);

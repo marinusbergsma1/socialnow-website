@@ -134,7 +134,7 @@ const PricingStrip: React.FC<PricingStripProps> = ({ onOpenBooking }) => (
       {/* Proof of concept CTA — prominent */}
       <div className="text-center mt-10 md:mt-12">
         <p className="text-white/50 text-sm font-bold uppercase tracking-widest mb-4">Eerst zien voordat je iets betaalt?</p>
-        <Button variant="green" premium icon href="https://os.socialnow.nl/aanmelden/" className="!text-sm md:!text-base !px-6 md:!px-8">
+        <Button variant="green" premium icon href="https://app.socialnow.nl/login/?bron=site" className="!text-sm md:!text-base !px-6 md:!px-8">
           CLAIM JOUW OS
         </Button>
       </div>
