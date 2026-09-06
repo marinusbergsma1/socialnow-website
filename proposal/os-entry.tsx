@@ -28,6 +28,14 @@ export function parseOsStand(value: unknown): OsStand | null {
   return null;
 }
 
+export function installationLabel(ua: string, platform: string, touchPoints: number): string {
+  if (/iPad|iPhone|iPod/.test(ua) || (platform === "MacIntel" && touchPoints > 1)) return "Installeer op iPhone of iPad";
+  if (/Macintosh|Mac OS X/.test(ua)) return "Installeer op Mac";
+  if (/Windows/.test(ua)) return "Installeer op Windows";
+  if (/Android/.test(ua)) return "Installeer op Android";
+  return "Installeer het OS";
+}
+
 export function installationHint(
   ua: string,
   platform: string,
@@ -71,6 +79,10 @@ export default function OsEntry({showProof = true}:{showProof?:boolean}) {
   const [installOpen, setInstallOpen] = useState(false);
   const [hint, setHint] = useState("");
   const helpId = useId();
+  const [installLabel, setInstallLabel] = useState("Installeer het OS");
+  useEffect(() => {
+    setInstallLabel(installationLabel(navigator.userAgent, navigator.platform, navigator.maxTouchPoints));
+  }, []);
 
   useEffect(() => {
     if (!showProof) return;
@@ -132,7 +144,7 @@ export default function OsEntry({showProof = true}:{showProof?:boolean}) {
         >
           <span className="sn-btn3d-sheen" />
           <Download size={16} aria-hidden="true" />
-          <span>Installeer het OS</span>
+          <span>{installLabel}</span>
         </button>
       </div>
       <p className="os-product-note">In je browser of als app. Hetzelfde OS.</p>

@@ -22,7 +22,7 @@ try {
   const { default: Page } = await server.ssrLoadModule(
     "/proposal/WebsiteProposal.tsx",
   );
-  const { parseOsStand, installationHint, OsProof, CLAIM_URL, INSTALL_URL } =
+  const { parseOsStand, installationHint, installationLabel, OsProof, CLAIM_URL, INSTALL_URL } =
     await server.ssrLoadModule("/proposal/os-entry.tsx");
   const { projects, agents, people } = await server.ssrLoadModule(
     "/proposal/content.ts",
@@ -256,6 +256,10 @@ try {
   assert.equal(CLAIM_URL, "https://app.socialnow.nl/login/?bron=site");
   assert.equal(INSTALL_URL, "https://app.socialnow.nl/?bron=installatie");
 
+  assert.equal(installationLabel("Macintosh Safari", "MacIntel", 0), "Installeer op Mac");
+  assert.equal(installationLabel("Macintosh Safari", "MacIntel", 5), "Installeer op iPhone of iPad", "iPad desktop mode does not receive Mac installation label");
+  assert.equal(installationLabel("Windows NT", "Win32", 0), "Installeer op Windows");
+  assert.equal(installationLabel("Android", "Linux", 3), "Installeer op Android");
   const demo = parseOsStand({ ok: true, demo: true, customOs: 26, demos: 240 });
   const live = parseOsStand({ ok: true, live: true, total: 0 });
   assert.equal(demo.mode, "demo");
