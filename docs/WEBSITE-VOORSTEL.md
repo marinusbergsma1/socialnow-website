@@ -195,3 +195,9 @@ Browserbeleid blokkeert nog de visuele browsercontrole. Er is geen browser, alte
 ### Aanvullende vereenvoudiging
 
 De extra zin bij de demoteller is verwijderd in beide talen; teller en demo-aanduiding blijven behouden. Het websitegedeelte bevat geen screenshots of afbeeldingsfallback meer, ook niet in de keuzerij. Toegestane websites laden live; websites die embedding blokkeren openen via een directe link. VASTIQ.AI blijft eerste. De drie films staan nu gelijkwaardig in één compacte rij; mobiel horizontaal veegbaar.
+
+### Live websites: bestemming en scrollbediening
+
+VASTIQ.AI gebruikt nu centraal https://vastiq.ai/; de oude subdomeinlink en lokale previewUrl zijn verwijderd. De site zelf antwoordt met X-Frame-Options:SAMEORIGIN; de externe beheerder moet insluiten door SocialNow toestaan voordat deze site in de viewer kan worden geactiveerd. Instructie: bestaande frame-ancestors aanpassen naar 'self' https://socialnow.nl https://www.socialnow.nl en de conflicterende X-Frame-Options weghalen, overige CSP behouden.
+
+Live embeds krijgen bij muis-hover maximaal 2,5 seconden pointerbediening, waarna scrollen teruggaat naar de hoofdpagina. De knop kan opnieuw activeren of eerder stoppen. Op touch alleen expliciet activeren. Timers worden opgeruimd bij wisselen, buiten beeld en unmount; iframe-keyboardfocus keert bij afloop terug naar de bedienknop. Interactieve browsercontrole blijft geblokkeerd; implementatie en build zijn technisch gecontroleerd.

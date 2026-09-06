@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -21,11 +21,29 @@ const EMBED = new Set([
 export default function LiveWebsites() {
   const [index, setIndex] = useState(0);
   const [mobile, setMobile] = useState(false);
+  const [interactive, setInteractive] = useState(false);
+  const interactionTimer = useRef<number | undefined>(undefined);
+  const frame = useRef<HTMLIFrameElement>(null);
+  const control = useRef<HTMLButtonElement>(null);
+  const stopInteraction = () => {
+    window.clearTimeout(interactionTimer.current);
+    setInteractive(false);
+    if (document.activeElement === frame.current) control.current?.focus({preventScroll:true});
+  };
+  const startInteraction = () => {
+    window.clearTimeout(interactionTimer.current);
+    setInteractive(true);
+    interactionTimer.current = window.setTimeout(stopInteraction, 2500);
+  };
   const { ref, visible } = useInView<HTMLElement>();
   const [near, setNear] = useState(false);
   useEffect(() => {
     if (visible) setNear(true);
   }, [visible]);
+  useEffect(() => {
+    stopInteraction();
+    return () => window.clearTimeout(interactionTimer.current);
+  }, [index, visible]);
   const project = webShowcaseProjects[index];
   const live = EMBED.has(project.slug);
   const choose = (next: number) => {
@@ -91,9 +109,15 @@ export default function LiveWebsites() {
           </span>
           <span>{new URL(project.url!).hostname}</span>
         </div>
-        <div className="h-live-screen" key={`${project.slug}-${live}`}>
+        <div className="h-live-screen" key={`${project.slug}-${live}`}
+          onPointerEnter={event => { if (live && event.pointerType === "mouse") startInteraction(); }}
+          onPointerLeave={stopInteraction}
+        >
           {live && near ? (
             <iframe
+              ref={frame}
+              tabIndex={interactive ? 0 : -1}
+              style={{pointerEvents: interactive ? "auto" : "none"}}
               title={`Live website van ${project.title}`}
               src={project.url}
               loading="lazy"
@@ -128,6 +152,10 @@ export default function LiveWebsites() {
             <ChevronRight size={19} />
           </button>
         </div>
+        {live && <button ref={control} type="button" className="h-text-link" aria-pressed={interactive}
+          onClick={interactive ? stopInteraction : startInteraction}>
+          {interactive ? "Verder op deze pagina" : "Website bedienen"}
+        </button>}
         <TextLink to={`/project/${project.slug}`}>Bekijk de case</TextLink>
       </div>
       <div
