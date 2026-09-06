@@ -14,7 +14,7 @@ export const customerReviews = [
   {
     name: "VDZ Brigade",
     company: "Website en huisstijl",
-    image: "/images/klantlogos/vdz-brigade.svg",
+    image: "/images/klantlogos/vdz-beeldmerk.svg",
     logo: true,
     text: "Zeer tevreden over dit bedrijf. Wat deze mannen neerzetten in zo’n korte tijd ongelofelijk. Wij gaan zomaar niet weg. Echt een aanrader. Inmiddels al zakenrelaties doorgestuurd. Ga zo door!!",
   },
@@ -43,9 +43,9 @@ export default function CustomerReviews() {
         label="Klantreacties"
         title={
           <>
-            De mensen achter
+            Wat onze klanten
             <br />
-            <span>ons werk.</span>
+            <span>zeggen.</span>
           </>
         }
       >
