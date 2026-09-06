@@ -24,7 +24,7 @@ export function Action({
   href?: string;
   secondary?: boolean;
 }) {
-  const className = `sn-btn3d h-button${secondary ? " h-button-secondary" : ""}`;
+  const className = `sn-btn3d h-button${secondary ? " h-button-secondary" : ""}${href === CLAIM_URL ? " h-try-button" : ""}`;
   const body = (
     <>
       <span className="sn-btn3d-sheen" />
@@ -201,14 +201,14 @@ export function ConversionBridge() {
     <div className="h-conversion">
       <div>
         <p className="h-eyebrow">Eerst proberen. Daarna op maat.</p>
-        <h3>Ervaar de proof of concept.</h3>
+        <h3>Ontdek hoe het werkt.</h3>
         <p>
           Ontdek hoe de vier Milo’s en één overzichtelijke omgeving samenkomen.
           Vanuit jouw ervaring bespreken we daarna wat je bedrijf nodig heeft.
         </p>
       </div>
       <div className="h-poc-actions">
-        <Action href={CLAIM_URL}>Probeer de POC</Action>
+        <Action href={CLAIM_URL}>Probeer het OS</Action>
         <TextLink to="/contact?onderwerp=Custom%20OS">
           Al geprobeerd? Bespreek jouw Custom OS
         </TextLink>
@@ -314,7 +314,7 @@ export function Closing() {
           />
         ))}
       </div>
-      <p className="h-eyebrow">Jouw eerste stap / Proof of concept</p>
+      <p className="h-eyebrow">Jouw eerste stap / Zelf ervaren</p>
       <h2>
         Ervaar het gemak.
         <br />
@@ -329,7 +329,7 @@ export function Closing() {
         <OsEntry />
       </div>
       <TextLink to="/contact?onderwerp=Custom%20OS">
-        POC geprobeerd? Bespreek jouw Custom OS
+        Het OS geprobeerd? Bespreek jouw Custom OS
       </TextLink>
     </section>
   );

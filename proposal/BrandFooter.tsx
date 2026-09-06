@@ -55,7 +55,7 @@ export default function BrandFooter() {
             </h2>
             <p>
               Creatie, technologie en mensen. Verbonden rond jouw bedrijf, met
-              de POC als eerste kennismaking en een Custom OS als volgende stap.
+              zelf proberen als eerste stap en een Custom OS als volgende stap.
             </p>
           </div>
           <div>
@@ -75,7 +75,7 @@ export default function BrandFooter() {
               <MessageCircle size={17} />
               WhatsApp
             </a>
-            <Action href={CLAIM_URL}>Probeer de POC</Action>
+            <Action href={CLAIM_URL}>Probeer het OS</Action>
             <Link to="/contact?onderwerp=Custom%20OS">
               Daarna: jouw Custom OS <ArrowUpRight size={17} />
             </Link>
@@ -92,7 +92,7 @@ export default function BrandFooter() {
           </div>
           <div>
             <p className="h-eyebrow">Het OS</p>
-            <Link to="/het-os">Ontdek de POC</Link>
+            <Link to="/het-os">Ontdek hoe het werkt</Link>
             <Link to="/het-os#website">Milo Website</Link>
             <Link to="/het-os#crm">Milo CRM</Link>
             <Link to="/het-os#content">Milo Studio</Link>
@@ -145,7 +145,6 @@ export default function BrandFooter() {
           </div>
         </div>
         <div className="h-footer-partner">
-          <p className="h-eyebrow">Samen met</p>
           <img
             src="/images/SocialNow-OS-Komen-Consultancy.webp"
             alt="SocialNow OS in samenwerking met Komen Consultancy"

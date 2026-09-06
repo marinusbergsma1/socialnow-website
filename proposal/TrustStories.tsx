@@ -24,7 +24,7 @@ export default function TrustStories() {
         </h2>
         <p>
           Persoonlijk contact, overzicht in je gegevens en heldere afspraken
-          over de volgende stap. Van de eerste POC tot jouw Custom OS.
+          over de volgende stap. Van het eerste gebruik tot jouw Custom OS.
         </p>
         <MotionControl />
       </div>

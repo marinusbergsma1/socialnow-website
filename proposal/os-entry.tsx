@@ -138,17 +138,10 @@ export default function OsEntry() {
 
   return (
     <div className="os-entry">
-      {loaded ? (
-        <OsProof stand={stand} />
-      ) : (
-        <div className="os-proof">
-          <p className="os-demo-note">OS-teller laden…</p>
-        </div>
-      )}
       <div className="os-actions">
         <a className="os-claim sn-btn3d h-button" href={CLAIM_URL}>
           <span className="sn-btn3d-sheen" />
-          <span>Probeer de POC</span>
+          <span>Probeer het OS</span>
           <span className="h-button-icon">
             <ArrowRight size={16} aria-hidden="true" />
           </span>
@@ -162,9 +155,17 @@ export default function OsEntry() {
         >
           <span className="sn-btn3d-sheen" />
           <Download size={16} aria-hidden="true" />
-          <span>Installeer OS</span>
+          <span>Installeer het OS</span>
         </button>
       </div>
+      <p className="os-product-note">In je browser of als app. Hetzelfde OS.</p>
+      {loaded ? (
+        <OsProof stand={stand} />
+      ) : (
+        <div className="os-proof">
+          <p className="os-demo-note">OS-teller laden…</p>
+        </div>
+      )}
       <div className="install-help" id={helpId} hidden={!installOpen}>
         <p>{hint}</p>
         <a href={INSTALL_URL}>

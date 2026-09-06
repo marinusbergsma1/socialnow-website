@@ -167,7 +167,7 @@ export const services = [
 ];
 export const prices = [
   {
-    name: "01 / Proof of concept",
+    name: "01 / Probeer het OS",
     price: "Ervaar het OS.",
     period: "Je eerste stap",
     description:
@@ -178,7 +178,7 @@ export const prices = [
       "Begin met je eigen Odoo en Meta",
     ],
     color: "#25D366",
-    action: "Probeer de POC",
+    action: "Probeer het OS",
     href: "https://app.socialnow.nl/login/?bron=site",
     featured: true,
   },
@@ -187,7 +187,7 @@ export const prices = [
     price: "Op maat.",
     period: "Een persoonlijk voorstel",
     description:
-      "Van de mogelijkheden in de POC naar een OS rond jouw bedrijf.",
+      "Van je eerste ervaring met het OS naar een OS rond jouw bedrijf.",
     items: [
       "We brengen je werkwijze in kaart",
       "Afgesproken functies en koppelingen",
@@ -217,17 +217,17 @@ export const faqs = [
   {
     question: "Waar begin ik?",
     answer:
-      "Begin met de proof of concept: probeer het systeem en maak kennis met de vier Milo’s. Zo ervaar je het overzicht voordat we samen je Custom OS gaan inrichten. Op de Odoo-beurs laten we je hiermee kennismaken.",
+      "Probeer eerst het systeem en maak kennis met de vier Milo’s. Zo ervaar je het overzicht voordat we samen je Custom OS gaan inrichten. Op de Odoo-beurs laten we je hiermee kennismaken.",
   },
   {
     question: "Wat is een Custom OS?",
     answer:
-      "Een bedrijfsomgeving die we inrichten rond de manier waarop jij en je team werken. De POC is het vertrekpunt. Samen bepalen we welke processen, koppelingen en onderdelen je bedrijf nodig heeft.",
+      "Een bedrijfsomgeving die we inrichten rond de manier waarop jij en je team werken. Je eerste ervaring is het vertrekpunt. Samen bepalen we welke processen, koppelingen en onderdelen je bedrijf nodig heeft.",
   },
   {
     question: "Wat kan ik nu zelf proberen?",
     answer:
-      "Claim je OS en doorloop Bedrijf, Odoo en Meta. Met geschikte accounts en toegangsrechten kun je gegevens uit je eigen Odoo en Meta verbinden. Welke informatie je ziet, hangt af van je koppelingen. De POC is in ontwikkeling.",
+      "Claim je OS en doorloop Bedrijf, Odoo en Meta. Met geschikte accounts en toegangsrechten kun je gegevens uit je eigen Odoo en Meta verbinden. Welke informatie je ziet, hangt af van je koppelingen. De testomgeving is in ontwikkeling.",
   },
   {
     question: "Wat doen de Milo’s?",
@@ -237,7 +237,7 @@ export const faqs = [
   {
     question: "Worden mijn advertenties automatisch beheerd?",
     answer:
-      "Dat is geen standaardfunctie die we voor de POC beloven. De Meta-koppeling geeft inzicht in je gegevens. Publiceren, budgetten wijzigen en campagnes beheren vragen een aparte, geteste inrichting.",
+      "Dit is geen standaardfunctie van de testomgeving. De Meta-koppeling geeft inzicht in je gegevens. Publiceren, budgetten wijzigen en campagnes beheren vragen een aparte, geteste inrichting.",
   },
   {
     question: "Kan ik ook alleen een website of campagne laten maken?",

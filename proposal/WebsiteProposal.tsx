@@ -31,7 +31,7 @@ import { allPosts } from "../data/posts";
 import PrivacyPage from "../components/PrivacyPage";
 
 const nav = [
-  ["/het-os", "De POC"],
+  ["/het-os", "Het OS"],
   ["/projecten", "Ons werk"],
   ["/diensten", "Diensten"],
   ["/prijzen", "Aanbod"],
@@ -64,11 +64,11 @@ function ProposalShell() {
       project?.title ||
       post?.title ||
       nav.find(([path]) => path === location.pathname)?.[1] ||
-      "Probeer de proof of concept";
+      "Probeer SocialNow OS";
     const description =
       project?.description ||
       post?.excerpt ||
-      "Probeer de proof of concept van SocialNow OS. Vier Milo’s, één overzichtelijke omgeving. Ervaar eerst het gemak; daarna bouwen we samen jouw Custom OS.";
+      "Probeer SocialNow OS en ontdek hoe het werkt. Vier Milo’s, één overzichtelijke omgeving. Ervaar eerst het gemak; daarna bouwen we samen jouw Custom OS.";
     document.title = `${title} | SocialNow`;
     for (const [selector, content] of [
       ['meta[name="description"]', description],
@@ -134,7 +134,7 @@ function ProposalShell() {
             ))}
           </nav>
           <a className="h-header-claim" href={CLAIM_URL}>
-            Probeer de POC
+            Probeer het OS
             <ArrowUpRight size={15} />
           </a>
           <button

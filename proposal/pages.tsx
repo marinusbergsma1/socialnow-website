@@ -10,6 +10,7 @@ import {
   Phone,
 } from "lucide-react";
 import { HeroTitle } from "./styles";
+import CustomerReviews from "./CustomerReviews";
 import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
 import TrustStories from "./TrustStories";
@@ -76,14 +77,14 @@ export function Home() {
         </div>
         <div className="h-wrap h-hero-content">
           <p className="h-eyebrow">
-            <i /> Proof of concept / SocialNow OS
+            <i /> SocialNow OS / Ontdek hoe het werkt
           </p>
           <HeroTitle />
           <HeroMilos />
           <p className="h-hero-description">
-            Probeer de proof of concept. Vier Milo’s voor je website, klanten,
-            content en advertenties. Ervaar zelf hoe één omgeving je werk
-            eenvoudiger maakt.
+            Probeer SocialNow OS. Vier Milo’s voor je website, klanten, content
+            en advertenties. Ervaar zelf hoe één omgeving je werk eenvoudiger
+            maakt.
           </p>
           <p className="h-hero-human">
             Ontworpen voor gemak, overzicht en sneller werken.
@@ -96,7 +97,7 @@ export function Home() {
             aria-label="Van proberen naar jouw Custom OS"
           >
             <li>
-              <span>01</span> Open de POC
+              <span>01</span> Open het OS
             </li>
             <li>
               <span>02</span> Ervaar het gemak
@@ -121,7 +122,7 @@ export function Home() {
         </span>
         <p>Probeer het systeem. Ervaar het gemak. Ontdek jouw mogelijkheden.</p>
         <a className="h-text-link" href={CLAIM_URL}>
-          Probeer de POC <ArrowUpRight size={17} />
+          Probeer het OS <ArrowUpRight size={17} />
         </a>
       </div>
       <section className="h-section h-wrap" id="het-os">
@@ -140,8 +141,8 @@ export function Home() {
         </Heading>
         <AgentCards />
         <p className="h-footnote">
-          De POC is het vertrekpunt. Welke functies en koppelingen beschikbaar
-          zijn, stemmen we af op jouw situatie.
+          Je eerste ervaring is het vertrekpunt. Welke functies en koppelingen
+          beschikbaar zijn, stemmen we af op jouw situatie.
         </p>
         <div className="h-video-pair">
           <VideoBlock
@@ -160,30 +161,7 @@ export function Home() {
       <ClientLogos />
       <FeaturedWork />
       <LiveWebsites />
-      <section className="h-section h-wrap" id="ervaring">
-        <figure className="h-review">
-          <img
-            src="/images/Ellen-Sluijs.webp"
-            alt="Ellen Sluijs"
-            width="64"
-            height="64"
-            loading="lazy"
-          />
-          <div>
-            <blockquote>
-              “Wij zijn heel erg blij met Marinus. Denkt goed mee en levert op
-              tijd. Topper!”
-            </blockquote>
-            <figcaption>
-              Ellen Sluijs · kWh Garant{" "}
-              <a href={REVIEWS_URL} target="_blank" rel="noopener noreferrer">
-                Klantreactie op Google
-                <ArrowUpRight size={13} />
-              </a>
-            </figcaption>
-          </div>
-        </figure>
-      </section>
+      <CustomerReviews />
       <section className="h-section h-wrap">
         <Heading
           label="Ook dit is SocialNow"
@@ -281,7 +259,7 @@ export function OsPage() {
   return (
     <>
       <PageHeading
-        label="Probeer SocialNow OS / Proof of concept"
+        label="Probeer SocialNow OS / Ontdek hoe het werkt"
         title={
           <>
             Eerst zelf ervaren.
@@ -289,7 +267,7 @@ export function OsPage() {
             <span>Dan samen verder.</span>
           </>
         }
-        text="De proof of concept is je eerste kennismaking met het systeem. Ontdek de vier Milo’s en ervaar het overzicht. Daarna bespreken we hoe jouw Custom OS daarbij kan aansluiten."
+        text="Maak kennis met het systeem door het zelf te proberen. Ontdek de vier Milo’s en ervaar het overzicht. Daarna bespreken we hoe jouw Custom OS daarbij kan aansluiten."
       />
       <div className="h-wrap">
         <OsEntry />
@@ -312,13 +290,13 @@ export function OsPage() {
         <ol className="h-steps">
           <li>
             <span>01</span>
-            <h3>Start de proof of concept.</h3>
+            <h3>Probeer het OS.</h3>
             <p>
               Maak je bedrijfsomgeving aan en doorloop de stappen Bedrijf, Odoo
               en Meta.
             </p>
             <a className="h-text-link" href={CLAIM_URL}>
-              Probeer de POC
+              Probeer het OS
               <ArrowUpRight size={16} />
             </a>
           </li>
@@ -378,7 +356,10 @@ export function OsPage() {
                 <ul>
                   <li>Website en ontwikkeling in je eigen merkstijl</li>
                   <li>Koppelingen volgens de afgesproken scope</li>
-                  <li>In de POC: contactmodule voor persoonlijke inrichting</li>
+                  <li>
+                    In de testomgeving: contactmodule voor persoonlijke
+                    inrichting
+                  </li>
                 </ul>
               )}
               <TextLink
@@ -398,7 +379,7 @@ export function OsPage() {
               <VideoBlock
                 file={agent.video}
                 title={`De productrichting voor ${agent.title.toLowerCase().replace(".", "")}`}
-                note="Conceptvideo: deze laat de productrichting zien. Getoonde automatisering is geen garantie voor beschikbare POC-functies."
+                note="Conceptvideo: deze laat de productrichting zien. Getoonde automatisering is geen garantie voor beschikbare functies in de testomgeving."
               />
             </div>
           </article>
@@ -597,7 +578,7 @@ export function ServicesPage() {
               <span>Of verder bouwen.</span>
             </>
           }
-          text="Verken de POC en bespreek jouw Custom OS. Voor een losse opdracht maken we een gericht voorstel met een duidelijke scope."
+          text="Probeer het OS en bespreek jouw Custom OS. Voor een losse opdracht maken we een gericht voorstel met een duidelijke scope."
         />
         <Action to="/prijzen">Bekijk de prijzen</Action>
       </section>
@@ -617,7 +598,7 @@ export function PricesPage() {
             <span>Dan jouw OS op maat.</span>
           </>
         }
-        text="De POC laat je ontdekken wat het OS kan betekenen. In een persoonlijk gesprek bepalen we welke inrichting, koppelingen en begeleiding jouw bedrijf nodig heeft."
+        text="Ervaar zelf wat het OS voor je bedrijf kan betekenen. In een persoonlijk gesprek bepalen we welke inrichting, koppelingen en begeleiding jouw bedrijf nodig heeft."
       />
       <section className="h-wrap">
         <div className="h-price-grid">

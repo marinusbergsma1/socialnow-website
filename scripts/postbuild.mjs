@@ -12,11 +12,11 @@ const BASE = 'https://socialnow.nl';
 
 // Per-route metadata. Homepage (index.html) blijft ongewijzigd.
 const routeMeta = {
-  'het-os': {title: 'Het OS — Vier Milo’s, één geheel | SocialNow', description: 'Ontdek Website, CRM, Studio en Advertenties in SocialNow OS. Verken de POC en bespreek je eigen inrichting.'},
+  'het-os': {title: 'Het OS — Vier Milo’s, één geheel | SocialNow', description: 'Ontdek Website, CRM, Studio en Advertenties in SocialNow OS. Probeer het OS en bespreek je eigen inrichting.'},
   contact: {title: 'Contact — Bespreek jouw Custom OS | SocialNow', description: 'Maak kennis met Marinus en het team. Vertel ons hoe je bedrijf werkt en bespreek jouw Custom OS.'},
   diensten: {title: 'Diensten — Van merk tot techniek | SocialNow', description: 'Websites, branding, content, marketing en development. Het team achter jouw merk en Custom OS.'},
   projecten: {title: 'Uitgelicht werk & cases | SocialNow', description: 'Bekijk websites, video’s en campagnes van SocialNow. Werk voor onder meer RAVEG, Universal, Sony en AZ.'},
-  prijzen: {title: 'Aanbod — POC & Custom OS | SocialNow', description: 'Verken de POC. Voor jouw Custom OS maken we een persoonlijk voorstel met een duidelijke scope, kosten en begeleiding.'},
+  prijzen: {title: 'Aanbod — Probeer het OS & Custom OS | SocialNow', description: 'Probeer het OS. Voor jouw Custom OS maken we een persoonlijk voorstel met een duidelijke scope, kosten en begeleiding.'},
   privacy: {title: 'Privacybeleid | SocialNow', description: 'Lees hoe SocialNow omgaat met persoonsgegevens en welke rechten je hebt.'},
   team: {title: 'Team — De mensen achter het OS | SocialNow', description: 'Maak kennis met Marinus Bergsma en de creatieve en technische specialisten achter SocialNow.'},
   blog: {title: 'Blog — Vanuit de praktijk | SocialNow', description: 'Inzichten over websites, AI, content en vindbaarheid vanuit het werk van SocialNow.'},

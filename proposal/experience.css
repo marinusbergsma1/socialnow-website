@@ -1770,3 +1770,143 @@ html {
     flex-shrink: 1;
   }
 }
+
+/* Eén product, met proberen als zichtbare primaire actie. */
+.sn-site .os-claim,
+.sn-site .h-try-button,
+.sn-site .h-header-claim {
+  background: linear-gradient(180deg, #43e77f 0%, #25d366 70%, #20bf5b 100%);
+  color: #042711;
+  border: 1px solid #55ea8b;
+  font-weight: 700;
+  box-shadow:
+    inset 0 1px 0 #ffffff80,
+    0 5px 20px #25d36626;
+}
+.sn-site .os-claim:hover,
+.sn-site .h-try-button:hover,
+.sn-site .h-header-claim:hover {
+  background: #4ce888;
+  color: #042711;
+  border-color: #85f8af;
+}
+.sn-site .os-claim .h-button-icon,
+.sn-site .h-try-button .h-button-icon {
+  background: #073e1a;
+  color: #fff;
+  border-color: transparent;
+}
+.sn-site .h-header-claim svg {
+  color: #042711;
+}
+.sn-site .os-actions {
+  gap: 10px;
+}
+.sn-site .os-claim {
+  min-height: 54px;
+  padding: 12px 18px 12px 23px;
+  font-size: 15px;
+}
+.sn-site .os-install {
+  min-height: 54px;
+  font-size: 13px;
+  border-color: #3b4b40;
+  box-shadow: none;
+}
+.sn-site .os-product-note {
+  margin: 12px 0 14px;
+  font-size: 12px;
+  color: #a3b3a8;
+}
+.sn-site .os-proof {
+  margin-top: 14px;
+  margin-bottom: 0;
+}
+.sn-site .os-claim:focus-visible,
+.sn-site .h-try-button:focus-visible,
+.sn-site .h-header-claim:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}
+.sn-site .h-review-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.sn-site .h-review-cards figure {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 30px;
+  background: #0a0a0a;
+  border: 1px solid #252525;
+  border-radius: 22px;
+}
+.sn-site .h-review-cards figure > svg {
+  color: #25d366;
+  margin-bottom: 20px;
+}
+.sn-site .h-review-cards blockquote {
+  margin: 0 0 26px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #ddd;
+}
+.sn-site .h-review-cards figcaption {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: auto;
+}
+.sn-site .h-review-cards figcaption img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.sn-site .h-review-cards figcaption .h-review-logo {
+  border-radius: 12px;
+  object-fit: contain;
+  padding: 6px;
+  background: #161616;
+}
+.sn-site .h-review-cards figcaption strong {
+  display: block;
+  font-size: 14px;
+  color: #fff;
+}
+.sn-site .h-review-cards figcaption span span {
+  display: block;
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+@media (max-width: 600px) {
+  .sn-site .os-claim {
+    font-size: 13px;
+    gap: 8px;
+    padding: 10px 12px 10px 16px;
+    min-height: 50px;
+  }
+  .sn-site .os-install {
+    font-size: 11px;
+    gap: 7px;
+    padding: 10px 12px;
+    min-height: 50px;
+  }
+  .sn-site .os-actions {
+    gap: 8px;
+  }
+  .sn-site .os-product-note {
+    font-size: 11px;
+  }
+  .sn-site .h-review-cards {
+    grid-template-columns: 1fr;
+  }
+  .sn-site .h-review-cards figure {
+    padding: 24px;
+  }
+  .sn-site .h-review-cards blockquote {
+    font-size: 16px;
+  }
+}

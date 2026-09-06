@@ -148,10 +148,41 @@ try {
   assert.equal(projects.length, 14, "all 14 original projects retained");
   assert.equal(people.length, 8, "full team retained");
   assert.equal(agents.length, 4, "four dashboard Milos");
+  const { customerReviews } = await server.ssrLoadModule(
+    "/proposal/CustomerReviews.tsx",
+  );
+  const originalReviews = readFileSync("components/BlijeKlanten.tsx", "utf8");
+  assert.equal(customerReviews.length, 4, "four existing customer reviews");
+  for (const review of customerReviews) {
+    assert(
+      originalReviews.includes(review.text),
+      `original quote retained: ${review.name}`,
+    );
+    assert(
+      rendered.get("/").includes(review.name),
+      `review visible: ${review.name}`,
+    );
+  }
+  assert(!rendered.get("/").includes(">Samen met<"), "Samen met label removed");
+  assert(
+    rendered.get("/").includes("SocialNow-OS-Komen-Consultancy.webp"),
+    "partner logo retained",
+  );
+  assert(
+    rendered.get("/").includes("In je browser of als app. Hetzelfde OS."),
+    "one product, two ways to use it",
+  );
+  assert(
+    !/\bPOC\b|proof of concept/i.test(
+      rendered.get("/").replace(/<[^>]*>/g, " "),
+    ),
+    "no unexplained POC jargon on homepage",
+  );
+
   const { prices } = await server.ssrLoadModule("/proposal/content.ts");
   assert(prices[0].featured && !prices[1].featured, "POC is the primary offer");
   assert(
-    rendered.get("/").includes("Probeer de POC"),
+    rendered.get("/").includes("Probeer het OS"),
     "trying POC is primary CTA",
   );
   assert(
@@ -265,7 +296,7 @@ try {
       "old pricing removed from production metadata",
     );
     assert(
-      home.includes("Probeer de proof of concept"),
+      home.includes("Probeer SocialNow OS"),
       "Signature homepage metadata",
     );
     assert(

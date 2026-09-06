@@ -1,3 +1,9 @@
+## Duidelijke instap, reviews en footer — 6 september 2026
+
+Publieke tekst zonder “POC”: “Probeer het OS” en “Ontdek hoe het werkt”. Proberen en installeren zijn twee ingangen naar hetzelfde product. De probeerknoppen in header en inhoud krijgen een heldere groene vulling; installatie blijft ernaast. Tekst: “In je browser of als app. Hetzelfde OS.” Teller/bewijs staat onder deze acties.
+
+De losse review is vervangen door vier bestaande reacties uit components/BlijeKlanten.tsx, met de aanwezige namen/foto’s of het merklogo en een link naar het Google-profiel. Geen nieuwe reviews, totaalscore of datum toegevoegd. Alleen het label “Samen met” is op verzoek verwijderd; de logoafbeelding blijft behouden. Het archief van vóór Signature blijft bewaard.
+
 ## Beursrichting: POC eerst — 6 september 2026
 
 Laatste aanscherping door Marinus: op de Odoo-beurs bieden we het proberen van de proof of concept aan. Gemak, overzicht en sneller werken zijn de richting. De website legt daarom de eerste nadruk op zelf ervaren, vóór het Custom OS-gesprek.
