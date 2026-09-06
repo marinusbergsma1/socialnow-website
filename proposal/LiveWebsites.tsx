@@ -26,8 +26,7 @@ export default function LiveWebsites() {
   useEffect(() => {
     if (visible) setNear(true);
   }, [visible]);
-  const selected = webShowcaseProjects[index];
-  const project = selected.slug === "vastiq-website" ? { ...selected, title: "VASTIQ.AI", url: "https://vastiq.ai/" } : selected;
+  const project = webShowcaseProjects[index];
   const live = EMBED.has(project.slug);
   const choose = (next: number) => {
     setIndex((next + webShowcaseProjects.length) % webShowcaseProjects.length);
@@ -143,7 +142,7 @@ export default function LiveWebsites() {
             aria-pressed={index === itemIndex}
             onClick={() => choose(itemIndex)}
           >
-            <span>{item.slug === "vastiq-website" ? "VASTIQ.AI" : item.title}</span>
+            <span>{item.title}</span>
           </button>
         ))}
       </div>

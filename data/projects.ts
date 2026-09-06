@@ -5,7 +5,7 @@ export const webShowcaseProjects: Project[] = [
   {
     id: 10,
     slug: "vastiq-website",
-    title: "VASTIQ",
+    title: "VASTIQ.AI",
     category: "AI Platform Development",
     client: "VASTIQ",
     year: "2026",
@@ -13,11 +13,7 @@ export const webShowcaseProjects: Project[] = [
     description: "Real-estate intelligence platform voor de Nederlandse markt: woningwaarderingen op echte data, 12-maands prognoses en onderhandelingsinzicht. Platform én merkidentiteit uit één hand.",
     image: `${import.meta.env.BASE_URL}images/cases/vastiq-hero.webp`,
     align: 'left',
-    // Tijdelijk: vastiq.ai weigert momenteel verbindingen, daarom de socialnow.nl mirror
-    url: "https://vastiq.socialnow.nl/",
-    // Same-origin spiegel van de site (public/vastiq-preview) — echte werkende
-    // embed; vastiq.socialnow.nl zelf blokkeert iframes met X-Frame-Options
-    previewUrl: "/vastiq-preview/index.html",
+    url: "https://vastiq.ai/",
     gallery: [],
     metrics: [
       { label: "Waarderingen", value: "Live data", color: "#25D366" },

@@ -28,6 +28,7 @@ try {
     "/proposal/content.ts",
   );
   const { allPosts } = await server.ssrLoadModule("/data/posts.ts");
+  assert.equal(projects.find(p=>p.slug === "vastiq-website").url,"https://vastiq.ai/", "VASTIQ canonical live destination");
   const routes = [
     "/",
     "/het-os",
