@@ -201,3 +201,9 @@ De extra zin bij de demoteller is verwijderd in beide talen; teller en demo-aand
 VASTIQ.AI gebruikt nu centraal https://vastiq.ai/; de oude subdomeinlink en lokale previewUrl zijn verwijderd. De site zelf antwoordt met X-Frame-Options:SAMEORIGIN; de externe beheerder moet insluiten door SocialNow toestaan voordat deze site in de viewer kan worden geactiveerd. Instructie: bestaande frame-ancestors aanpassen naar 'self' https://socialnow.nl https://www.socialnow.nl en de conflicterende X-Frame-Options weghalen, overige CSP behouden.
 
 Live embeds krijgen bij muis-hover maximaal 2,5 seconden pointerbediening, waarna scrollen teruggaat naar de hoofdpagina. De knop kan opnieuw activeren of eerder stoppen. Op touch alleen expliciet activeren. Timers worden opgeruimd bij wisselen, buiten beeld en unmount; iframe-keyboardfocus keert bij afloop terug naar de bedienknop. Interactieve browsercontrole blijft geblokkeerd; implementatie en build zijn technisch gecontroleerd.
+
+### Goedgekeurde Milo-set geïntegreerd
+
+Ads gebruikt overal `public/proposal/milo/ads-magenta.webp`, exact de gedeelde GPT Image2-export van job 53e6625a-bbc8-4866-9de7-9210294f98aa. SHA256 b874bfecb4a1cf961d050233e308dc28a2edf818e23cabc1ce3ca4407a73c460. Bron: /Users/marinusbergsma/.codex/generated_images/milo-approved-2026-09-06/milo-profile-ads-image2.webp; visueel gecontroleerd naast ODOO MILO'S.png. Geen kleurfilter of programmatische recolor.
+
+Rolaccenten Website #25D366, CRM #1965C2, Studio #F5940D, Advertenties #EC1670. Kaartaccenten volgen dezelfde rolkleuren. Hero, modulekaarten, OS-pagina en afsluiting delen het juiste Ads-portret. Ads gebruikt bewust de goedgekeurde still totdat een magenta animatie is goedgekeurd; oude groene profielvideo’s blijven gearchiveerd in de bron maar worden niet geladen door MiloMotion. De drie andere goedgekeurde animaties blijven behouden.

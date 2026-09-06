@@ -10,6 +10,7 @@ import {
   Phone,
 } from "lucide-react";
 import { HeroTitle } from "./styles";
+import { miloPoster } from "./motion";
 import ShowcaseFilms from "./ShowcaseFilms";
 import { useLanguage } from "./i18n/context";
 import CustomerReviews from "./CustomerReviews";
@@ -373,7 +374,7 @@ export function OsPage() {
             </div>
             <div className="h-os-video">
               <img
-                src={`/proposal/milo/${agent.id}.webp`}
+                src={miloPoster(agent.id)}
                 alt={agent.name}
                 width="168"
                 height="168"

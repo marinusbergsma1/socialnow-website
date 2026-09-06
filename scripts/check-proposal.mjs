@@ -45,6 +45,10 @@ try {
   const {LanguageProvider, missingTranslations}=await server.ssrLoadModule("/proposal/i18n/context.ts");
   const liveWebsiteSource=readFileSync("proposal/LiveWebsites.tsx","utf8");
   assert(!liveWebsiteSource.includes("<img") && !liveWebsiteSource.includes("fullPageScreenshot"), "website showcase contains no screenshots or image fallbacks");
+  const {MiloMotion}=await server.ssrLoadModule("/proposal/motion.tsx");
+  const adsMarkup=renderToStaticMarkup(React.createElement(MiloMotion,{role:"ads",name:"Milo Ads"}));
+  assert(adsMarkup.includes("ads-magenta.webp") && !adsMarkup.includes("<video"), "approved Ads portrait cannot be replaced by old green video");
+  assert.equal(agents.find(a=>a.id==="ads").color,"#EC1670", "Ads uses magenta accent");
   const rendered = new Map();
   const images = new Set();
   const referencedAnchors = [];
@@ -196,7 +200,7 @@ try {
   );
   for (const agent of agents) {
     assert(
-      rendered.get("/").includes(`/proposal/milo/${agent.id}.webp`),
+      rendered.get("/").includes(`/proposal/milo/${agent.id === "ads" ? "ads-magenta" : agent.id}.webp`),
       `dashboard Milo in homepage: ${agent.id}`,
     );
     for (const extension of ["webp", "webm", "mp4"])

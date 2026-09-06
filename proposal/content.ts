@@ -69,7 +69,7 @@ export const agents = [
     id: "ads",
     title: "Advertenties",
     promise: "Inzicht in je campagnes.",
-    color: "#94A3B8",
+    color: "#EC1670",
     name: "Milo Ads",
     label: "Inzicht vanuit Meta",
     text: "Breng uitgaven, klikken en leads samen. Bepaal met ons de volgende stap voor je campagnes.",

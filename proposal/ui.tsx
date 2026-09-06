@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { agents, faqs, logos, people } from "./content";
 import OsEntry, { CLAIM_URL } from "./os-entry";
-import { MiloMotion } from "./motion";
+import { MiloMotion, miloPoster } from "./motion";
 import type { Project } from "../types";
 
 export function Action({
@@ -299,7 +299,7 @@ export function Closing() {
         {agents.map((agent) => (
           <img
             key={agent.id}
-            src={`/proposal/milo/${agent.id}.webp`}
+            src={miloPoster(agent.id)}
             alt={agent.name}
             width="84"
             height="84"

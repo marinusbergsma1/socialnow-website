@@ -1918,8 +1918,7 @@ html {
 .sn-site .brand-globe-stage { pointer-events: auto; }
 .sn-site h1, .sn-site h2, .sn-site h3 { font-weight: 700; }
 .sn-site .h-eyebrow > i { background: #25d366; }
-.sn-site .h-agent-card:nth-child(2) { border-top-color: #1965c277; }
-.sn-site .h-agent-card:nth-child(3) { border-top-color: #f5940d77; }
+.sn-site .h-agent-card { border-top-color: color-mix(in srgb, var(--accent) 47%, transparent); }
 .sn-site .h-featured-motion .h-featured-open:empty { display: none; }
 .sn-site .h-trust-stories { padding-top: 45px; padding-bottom: 45px; }
 .sn-site .h-trust-card { min-height: 0; height: auto; padding: 24px; border-radius: 18px; transform: none; }
