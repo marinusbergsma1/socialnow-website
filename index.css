@@ -97,7 +97,7 @@ html, body {
   overflow-x: clip;
   margin: 0;
   padding: 0;
-  background: linear-gradient(160deg, #0a1628, #000);
+  background: #000;
   font-family: 'Inter', sans-serif;
   color: #fff;
   /* Safe area for notch / dynamic island on iOS */
@@ -327,18 +327,18 @@ body {
   text-decoration: none; white-space: nowrap; cursor: pointer;
   transition: background .1s ease, border-color .1s ease, transform .1s ease;
 }
-.sn-os-claim { background: linear-gradient(135deg,#0a1628,#000); color: #fff; border-color: #25d366 !important; }
+.sn-os-claim { background: #000; color: #fff; border-color: #25d366 !important; }
 .sn-os-claim:hover { border-color: #7bf3aa !important; box-shadow: 0 0 0 2px #25d36622; }
 .sn-os-claim svg, .sn-nav-claim span { color: #72e6a9; }
-.sn-os-install { background: linear-gradient(135deg,#0a1628,#000); color: #fff; border-color: #34435a !important; }
+.sn-os-install { background: #000; color: #fff; border-color: #404040 !important; }
 .sn-os-install:hover, .sn-os-install[aria-expanded="true"] { border-color: #82b99b !important; }
 .sn-os-actions a:active, .sn-os-actions button:active { transform: translateY(1px); }
 .sn-os-actions :focus-visible, .sn-install-help a:focus-visible { outline: 2px solid #9cf3bc; outline-offset: 4px; }
-.sn-os-connect { margin: 14px 0 0; color: #b9c6d2; font-size: 13px; line-height: 1.5; }
+.sn-os-connect { margin: 14px 0 0; color: #c4c4c4; font-size: 13px; line-height: 1.5; }
 .sn-os-connect strong { color: #fff; font-weight: 700; }
-.sn-install-help { margin: 14px auto 0; padding: 13px 16px; max-width: 440px; text-align: left; border: 1px solid #334257; border-radius: 12px; background: linear-gradient(135deg,#0a1628,#000); }
+.sn-install-help { margin: 14px auto 0; padding: 13px 16px; max-width: 440px; text-align: left; border: 1px solid #404040; border-radius: 12px; background: #000; }
 .sn-install-help[hidden] { display: none; }
-.sn-install-help p { margin: 0 0 8px; color: #d6e1eb; font-size: 13px; line-height: 1.5; }
+.sn-install-help p { margin: 0 0 8px; color: #dedede; font-size: 13px; line-height: 1.5; }
 .sn-install-help a { display: inline-flex; align-items: center; gap: 8px; color: #85e8a7; font-size: 13px; font-weight: 700; }
 @media(max-width:380px) { .sn-os-actions { gap: 8px; } .sn-os-actions a, .sn-os-actions button { padding: 0 12px; font-size: 13px; gap: 7px; } }
 
@@ -638,9 +638,9 @@ html.sn-warp .sn-navbar-glass {
   .sn-agent-speelt { animation: none; }
 }
 
-/* 6 september 2026: hetzelfde donkerblauwe verloop voor de zwarte websitevlakken. */
-.bg-black { background-image: linear-gradient(135deg, #0a1628, #000); }
+/* De publieke website heeft een zwarte basis, zonder het blauwe app-verloop. */
+.bg-black { background-image: none; }
 
 /* De openbare teller staat alleen vóór het claimen, boven de compacte knoppen. */
-.sn-os-proof{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px 12px;margin:0 0 14px;color:#c2cddb;font-size:12px;line-height:1.4}
-.sn-os-proof b{color:#fff}.sn-os-proof-stars{color:#f4b84b;letter-spacing:2px}.sn-os-proof-label{color:#93a7bd;font-size:10px}
+.sn-os-proof{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px 12px;margin:0 0 14px;color:#ccc;font-size:12px;line-height:1.4}
+.sn-os-proof b{color:#fff}.sn-os-proof-stars{color:#f4b84b;letter-spacing:2px}.sn-os-proof-label{color:#aaa;font-size:10px}
