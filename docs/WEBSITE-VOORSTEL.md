@@ -123,3 +123,32 @@ Laatste richting van Marinus: een verbeterde, volwassen versie van zijn eigen vo
 Browserweergave en interactieve bediening zijn **niet visueel gecontroleerd**: de eerder vastgestelde browserbeleidsblokkade is niet omzeild. De HTTP- en Node-controles bewijzen technische levering en bronstructuur, geen visuele browserkwaliteit.
 
 De productiehomepage en bron-/OS-worktrees blijven behouden. Alleen de expliciet geautoriseerde tijdelijke preview wordt bijgewerkt. Regie ontvangt volgens de laatste afspraak alleen echte OS-afhankelijkheden; deze vormgevingswijzigingen blijven in dit websitespoor.
+
+
+## Versie 4 — drie stijlen, één website en OS-richting
+
+Marinus vroeg daarna expliciet de logo-intro, live websites, geanimeerde uitlegkaarten, originele video- en beeldsliders, Milo-animaties en uitgebreidere footer terug. Vervolgens vroeg hij **drie stijlopties** om te kiezen, met als blijvend uitgangspunt: website en proof of concept moeten één betrouwbaar, snel, visueel sterk en klantvriendelijk geheel vormen.
+
+Vergelijkingspagina: `/voorstel/stijlen/`. Volledige varianten via `?stijl=signature`, `?stijl=studio` en `?stijl=focus`. De zichtbare keuzebalk schakelt de stijl op elke pagina; de keuze blijft tijdens interne navigatie bewaard. De query kan de opgeslagen keuze overrulen. Een stijlwijziging wist het contactformulier niet.
+
+- **Signature — verfijnd & vertrouwd:** behoudt de goedgekeurde compositie, de vier Milo’s en verfijnde 3D-details. Aanbevolen vertrekpunt voor continuïteit met SocialNow.
+- **Studio — ruim & uitgesproken:** centrale hero, grotere typografie, meer ruimte en grotere beelden/video’s. Hetzelfde aanbod en dezelfde functionaliteit.
+- **Focus — compact & productgericht:** compactere secties, Milo’s als overzichtelijke werkmodules, preciezere kaders en korte actieroutes. Hetzelfde merk en dezelfde bronnen.
+
+De vergelijking toont per richting zowel een website-miniatuur als een OS-miniatuur. Die OS-beelden zijn uitdrukkelijk stijldemonstraties; **de live POC en OS-broncode zijn niet gewijzigd**. Na de stijlkeuze moet dezelfde vormtaal consequent worden doorgevoerd in website en POC. Eenheid betekent gedeelde kleuren, typografie, Milo-rollen, kaarten, knoppen, feedback en bediening; niet slechts een gelijk logo.
+
+### Teruggebrachte ervaring
+
+- Exacte oorspronkelijke desktop-/mobiele `header-intro`-logoanimatie. Eenmaal per sessie bij de eerste homepage, direct overslaan/Escape, automatische afsluiting bij einde/fout/blokkade, maximale wachttijd 6 seconden. Opnieuw afspelen via de footer. Geen automatisch verplichte lange OS-uitlegvideo.
+- Vier dashboard-Milo’s bewegen automatisch in de hero en rolkaarten zodra zichtbaar. Kleine bestaande WebM/MP4-bestanden, stilstaand beeld bij minder-beweging/afspeelfout, pauze buiten beeld en bij verborgen tabblad. Centrale animatiepauze bedient ook de globe, sliders en uitlegkaarten.
+- Negen websitevoorbeelden in een browserframe, met thumbnails, vorige/volgende, desktop-/mobiele breedte en de volledige case. kWh Garant, Il Gordo, VDZ Brigade en Divine Machines ondersteunen directe frames volgens de gecontroleerde publieke headers. Voor websites met framebeperkingen wordt het bestaande ontwerpbeeld met de externe link gebruikt. Er is geen framebeperking omzeild. Live frames laden pas nabij het zichtbare blok.
+- Alle 14 oorspronkelijke short-contentvideo’s zijn terug in een bewegende, bedienbare rij. Klik opent een speler met eigen geluidsbediening. Alle 14 bron-URL’s gaven HTTP 200 bij HEAD-controle.
+- De oorspronkelijke negen portfolio-afbeeldingen in twee rustig tegengesteld bewegende rijen. Native horizontale bediening, slepen/vegen, pijlen, beeldvergroting, pauze bij hover/focus en minder-beweging. Geen diagonale portfoliostrook.
+- Drie geanimeerde uitlegkaarten hernemen het chat-, dashboard- en ringmotief. Teksten gaan over contact, inzicht en de persoonlijke vervolgstap. Het ongefundeerde voorbeeldgetal +312% is niet als echt resultaat herplaatst.
+- Uitgebreide footer met actieroutes, groot merkverhaal, navigatie, contact/socials, het originele SocialNow OS/Komen Consultancy-beeldmerk, technologielogo’s, bedrijfsgegevens, privacy en de bestaande voorwaardenlink. Geen nieuwe certificerings-, hosting- of backupgarantie toegevoegd.
+
+### Verificatie en grenzen
+
+TypeScript, productiebuild en Node-renders voor 25 routes plus alle drie homepagevarianten. Controle op unieke IDs/ARIA, 71 bestaande lokale afbeeldingen, behoud van complete mediacollecties, werkende interne routes, stijlkeuze via URL en de herkenbare footer. Afzonderlijk HTTP-controle van previewroutes, bundels en teruggebrachte mediabestanden na publicatie.
+
+Browserbeleid blokkeert nog de visuele browsercontrole. Er is geen browser, alternatieve renderdienst of omweg gebruikt. Snelheid is ondersteund door uitgesteld laden en pauzeren buiten beeld; geen onbewezen Core Web Vitals-score of gemeten snelheidsvoordeel per stijl geclaimd. De gedeelde contactroute blijft een eerlijk gelabeld e-mailconcept; er is geen nieuwe contactbackend aangesloten.

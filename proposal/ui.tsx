@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { agents, faqs, logos, people } from "./content";
 import OsEntry from "./os-entry";
+import { MiloMotion, MotionControl } from "./motion";
 import type { Project } from "../types";
 
 export function Action({
@@ -58,11 +59,13 @@ export function TextLink({
   );
 }
 export function Heading({
+  id,
   label,
   title,
   text,
   children,
 }: {
+  id?: string;
   label: string;
   title: React.ReactNode;
   text?: string;
@@ -72,7 +75,7 @@ export function Heading({
     <div className="h-section-heading">
       <div>
         <p className="h-eyebrow">{label}</p>
-        <h2>{title}</h2>
+        <h2 id={id}>{title}</h2>
         {text && <p className="h-intro">{text}</p>}
       </div>
       {children}
@@ -138,43 +141,13 @@ export function VideoBlock({
   );
 }
 export function MiloPortrait({ role, name }: { role: string; name: string }) {
-  const [active, setActive] = useState(false);
-  const start = () => {
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-      setActive(true);
-  };
   return (
     <Link
       to={`/het-os#${role}`}
       className="h-agent-visual"
       aria-label={`Ontdek ${name}`}
-      onMouseEnter={start}
-      onMouseLeave={() => setActive(false)}
-      onFocus={start}
-      onBlur={() => setActive(false)}
     >
-      <img
-        src={`/proposal/milo/${role}.webp`}
-        alt={name}
-        width="512"
-        height="512"
-        loading="lazy"
-      />
-      {active && (
-        <video
-          className="h-milo-motion"
-          autoPlay
-          muted
-          playsInline
-          loop
-          preload="none"
-          aria-hidden="true"
-          poster={`/proposal/milo/${role}.webp`}
-        >
-          <source src={`/proposal/milo/${role}.webm`} type="video/webm" />
-          <source src={`/proposal/milo/${role}.mp4`} type="video/mp4" />
-        </video>
-      )}
+      <MiloMotion role={role} name={name} />
     </Link>
   );
 }
@@ -190,16 +163,14 @@ export function HeroMilos() {
           key={agent.id}
           style={{ "--accent": agent.color } as React.CSSProperties}
         >
-          <img
-            src={`/proposal/milo/${agent.id}.webp`}
-            alt={agent.name}
-            width="512"
-            height="512"
-          />
+          <MiloMotion role={agent.id} name={agent.name} />
           <strong>{agent.title}</strong>
           <span>{agent.promise}</span>
         </Link>
       ))}
+      <div className="h-hero-motion">
+        <MotionControl />
+      </div>
     </div>
   );
 }

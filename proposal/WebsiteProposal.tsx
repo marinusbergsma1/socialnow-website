@@ -16,6 +16,10 @@ import {
   ServicesPage,
   TeamPage,
 } from "./pages";
+import LogoIntro from "./LogoIntro";
+import BrandFooter from "./BrandFooter";
+import { MotionProvider } from "./motion";
+import { StyleOverview, StylePicker, StyleProvider, useStyle } from "./styles";
 import PrivacyPage from "../components/PrivacyPage";
 
 const nav = [
@@ -28,6 +32,16 @@ const nav = [
   ["/contact", "Contact"],
 ];
 export default function WebsiteProposal() {
+  return (
+    <StyleProvider>
+      <MotionProvider>
+        <ProposalShell />
+      </MotionProvider>
+    </StyleProvider>
+  );
+}
+function ProposalShell() {
+  const { style } = useStyle();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
@@ -63,12 +77,13 @@ export default function WebsiteProposal() {
     return () => window.removeEventListener("keydown", close);
   }, [menuOpen]);
   return (
-    <div className="sn-site">
+    <div className="sn-site" data-style={style}>
+      <LogoIntro />
       <a className="h-skip" href="#inhoud">
         Ga naar inhoud
       </a>
       <aside className="h-preview">
-        <span>Websitevoorstel · versie 3 · volledige site</span>
+        <StylePicker />
         <a href="/">
           Huidige website
           <ArrowUpRight size={12} />
@@ -133,6 +148,7 @@ export default function WebsiteProposal() {
       <main id="inhoud" ref={main} tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/stijlen" element={<StyleOverview />} />
           <Route path="/het-os" element={<OsPage />} />
           <Route path="/projecten" element={<ProjectsPage />} />
           <Route path="/project/:slug" element={<ProjectPage />} />
@@ -143,7 +159,14 @@ export default function WebsiteProposal() {
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route
             path="/contact"
-            element={<ContactPage key={location.search} />}
+            element={
+              <ContactPage
+                key={
+                  new URLSearchParams(location.search).get("onderwerp") ||
+                  "Custom OS"
+                }
+              />
+            }
           />
           <Route
             path="/privacy"
@@ -156,60 +179,7 @@ export default function WebsiteProposal() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      <footer className="h-footer h-wrap">
-        <div className="h-footer-top">
-          <div>
-            <Link className="h-brand" to="/">
-              <img
-                src="/images/SocialNow-Logo-2026.webp"
-                alt="SocialNow"
-                width="200"
-                height="38"
-                loading="lazy"
-              />
-            </Link>
-            <p>
-              Creatie. Technologie. Mensen.
-              <br />
-              Samen in één SocialNow.
-            </p>
-          </div>
-          <div>
-            <p className="h-eyebrow">Ontdek SocialNow</p>
-            <nav aria-label="Footernavigatie">
-              {nav.map(([path, title]) => (
-                <Link key={path} to={path}>
-                  {title}
-                </Link>
-              ))}
-            </nav>
-          </div>
-          <div>
-            <p className="h-eyebrow">Laten we iets maken</p>
-            <a href="mailto:info@socialnow.nl">info@socialnow.nl</a>
-            <p>
-              Amstelstraat 43G
-              <br />
-              1017 DA Amsterdam
-            </p>
-            <Action to="/contact" secondary>
-              Maak kennis
-            </Action>
-          </div>
-        </div>
-        <div className="h-footer-bottom">
-          <span>© {new Date().getFullYear()} SocialNow</span>
-          <Link to="/privacy">Privacybeleid</Link>
-          <a
-            href="https://www.instagram.com/socialnow.nl/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Instagram
-            <ArrowUpRight size={13} />
-          </a>
-        </div>
-      </footer>
+      <BrandFooter />
       <MiloGuide />
     </div>
   );

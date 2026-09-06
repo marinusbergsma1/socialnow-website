@@ -262,7 +262,7 @@ copyFileSync('dist/index.html', 'dist/404.html');
 
 // Tijdelijk, expliciet aangevraagd websitevoorstel. Eigen ingang, noindex,
 // geen vermelding in de sitemap en geen vervanging van de homepage.
-const previewRoutes = ['', 'het-os', 'projecten', 'diensten', 'prijzen', 'team', 'blog', 'contact', 'privacy',
+const previewRoutes = ['', 'stijlen', 'het-os', 'projecten', 'diensten', 'prijzen', 'team', 'blog', 'contact', 'privacy',
   ...Object.keys(projectMeta).map(slug => `project/${slug}`),
   ...posts.map(post => `blog/${post.slug}`),
 ];

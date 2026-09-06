@@ -9,6 +9,10 @@ import {
   MessageCircle,
   Phone,
 } from "lucide-react";
+import { HeroTitle } from "./styles";
+import LiveWebsites from "./LiveWebsites";
+import TrustStories from "./TrustStories";
+import { VideoSlider, ImageSliders } from "./MediaSliders";
 import BrandGlobe from "./BrandGlobe";
 import OsEntry, { CLAIM_URL, REVIEWS_URL } from "./os-entry";
 import { agents, people, prices, projects, services } from "./content";
@@ -83,13 +87,7 @@ export function Home() {
           <p className="h-eyebrow">
             <i /> SocialNow / Custom OS
           </p>
-          <h1>
-            Eén OS voor
-            <br />
-            je bedrijf.
-            <br />
-            <span>Echt van jou.</span>
-          </h1>
+          <HeroTitle />
           <HeroMilos />
           <p className="h-hero-description">
             Vier Milo’s voor je website, klanten, content en advertenties.
@@ -154,6 +152,7 @@ export function Home() {
         <ConversionBridge />
       </section>
       <ClientLogos />
+      <LiveWebsites />
       <section className="h-section h-wrap" id="ervaring">
         <Heading
           label="Sinds 2021 / Van idee naar uitvoering"
@@ -226,9 +225,12 @@ export function Home() {
           ))}
         </div>
       </section>
+      <VideoSlider />
+      <TrustStories />
       <section className="h-section h-wrap">
         <Founder />
       </section>
+      <ImageSliders />
       <section className="h-section h-wrap">
         <Heading
           label="Gemaakt door ons team"

@@ -29,6 +29,7 @@ try {
   const { allPosts } = await server.ssrLoadModule("/data/posts.ts");
   const routes = [
     "/",
+    "/stijlen",
     "/het-os",
     "/projecten",
     "/diensten",
@@ -90,6 +91,55 @@ try {
       rendered.get(route).includes(`id="${id}"`),
       `cross-page anchor ${route}#${id}`,
     );
+  const { styleOptions } = await server.ssrLoadModule("/proposal/styles.tsx");
+  assert.equal(styleOptions.length, 3, "three concrete style directions");
+  for (const style of styleOptions) {
+    const html = renderToStaticMarkup(
+      React.createElement(
+        MemoryRouter,
+        {
+          basename: "/voorstel",
+          initialEntries: [`/voorstel/?stijl=${style.id}`],
+        },
+        React.createElement(Page),
+      ),
+    );
+    assert(
+      html.includes(`data-style="${style.id}"`),
+      `style URL selects correct direction: ${style.id}`,
+    );
+    assert.equal(
+      (html.match(/<h1\b/g) || []).length,
+      1,
+      `one h1 in style ${style.id}`,
+    );
+    assert(
+      html.includes("Videoportfolio") &&
+        html.includes("Portfolio bovenste rij") &&
+        html.includes("Live website"),
+      `original media sections retained: ${style.id}`,
+    );
+    assert(
+      html.includes("SocialNow-OS-Komen-Consultancy.webp"),
+      `full brand footer: ${style.id}`,
+    );
+    assert(!html.includes("+312%"), `no invented growth result: ${style.id}`);
+  }
+  const { portfolioVideos, portfolioImages } = await server.ssrLoadModule(
+    "/proposal/MediaSliders.tsx",
+  );
+  assert.equal(
+    portfolioVideos.length,
+    14,
+    "complete original video collection",
+  );
+  assert.equal(
+    portfolioImages.length,
+    9,
+    "complete original image-slider collection",
+  );
+  for (const file of ["header-intro.mp4", "header-intro-mobile.mp4"])
+    assert(existsSync(`public/video/${file}`));
   assert.equal(projects.length, 14, "all 14 original projects retained");
   assert.equal(people.length, 8, "full team retained");
   assert.equal(agents.length, 4, "four dashboard Milos");
