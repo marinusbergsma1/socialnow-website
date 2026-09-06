@@ -1956,3 +1956,8 @@ html {
 .sn-site .h-ring-visual { width: 110px; }
 .sn-site .h-ring-visual strong { font-size: 18px; }
 .sn-site .h-ring-visual span { font-size: 8px; }
+@media (max-width: 480px) {
+  .sn-site .h-nav { gap: 8px; }
+  .sn-site .h-brand img { width: clamp(96px, 28vw, 125px); }
+  .sn-site .h-header-claim { white-space: nowrap; }
+}
