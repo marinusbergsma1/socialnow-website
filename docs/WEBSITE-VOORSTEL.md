@@ -178,3 +178,16 @@ De vergelijking toont per richting zowel een website-miniatuur als een OS-miniat
 TypeScript, productiebuild en Node-renders voor 25 routes plus alle drie homepagevarianten. Controle op unieke IDs/ARIA, 71 bestaande lokale afbeeldingen, behoud van complete mediacollecties, werkende interne routes, stijlkeuze via URL en de herkenbare footer. Afzonderlijk HTTP-controle van previewroutes, bundels en teruggebrachte mediabestanden na publicatie.
 
 Browserbeleid blokkeert nog de visuele browsercontrole. Er is geen browser, alternatieve renderdienst of omweg gebruikt. Snelheid is ondersteund door uitgesteld laden en pauzeren buiten beeld; geen onbewezen Core Web Vitals-score of gemeten snelheidsvoordeel per stijl geclaimd. De gedeelde contactroute blijft een eerlijk gelabeld e-mailconcept; er is geen nieuwe contactbackend aangesloten.
+
+## Signature · internationaal en visueel · 6 september 2026
+
+- Engels standaard; volledige Nederlandse variant onder `/nl`, vaste EN/NL-switch, canonicals en hreflang. 48 publieke taalroutes; preview blijft noindex. Bronteksten centraal vertaald via `proposal/i18n`; echte klantcitaten bewust onvertaald.
+- Positionering: “Human creativity. Powered by AI technology.” Koppen iets steviger, groen/blauw/geel als kleine details. Proberen blijft de groene primaire actie; installatie opent hetzelfde OS.
+- Drie grote filmvlakken: bestaande SocialNow OS-conceptfilm, Next Gen Webdesign en BetCity motion. De oude derde showcase bleek een voor/na-slider; over die interpretatie is een optionele vraag gesteld. De nieuwe selectie gebruikt drie bestaande echte films.
+- Video’s zonder play-overlays, hoveraudio met stille fallback wanneer de browser geluid weigert. Buiten beeld en bij globale pauze stoppen ze. Fullscreen houdt native bediening.
+- De vier originele Milo’s hebben VP9-alpha en HEVC-alpha bestanden. Native AVFoundation-decodering bevestigt transparante pixels en een transparante hoek in elk HEVC-bestand. Originele bestanden behouden.
+- Globe reageert weer via pointerevents van de hero. Lokale pauzeknoppen weg; centrale bediening in footer en voorkeur voor minder beweging blijven intact.
+- VASTIQ.AI staat als eerste website. Dit domein blokkeert embedding; de originele websiteafbeelding blijft daarom de preview met externe link.
+- De drie vertrouwenskaarten zijn compact gemaakt; partnerlogo blijft, alleen “Samen met” is verwijderd. Vier echte reviews behouden.
+- Bestaand blogartikel bijgewerkt zodat oude gratis-/snelheids-/autonomieclaims de actuele try-first/Custom OS-uitleg niet tegenspreken.
+- Validatie: TypeScript, productiebuild, Node-render van alle routes in EN/NL, interne doelen, media, taalmetadata en sitemap. Geen visuele browsercheck: beheerbeleid blokkeert toegang; dit is niet omzeild. Hoveraudio/globe en responsive uiterlijk vragen daardoor nog visuele controle in een toegestane browser.

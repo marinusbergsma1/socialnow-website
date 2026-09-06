@@ -1910,3 +1910,49 @@ html {
     font-size: 16px;
   }
 }
+
+/* Rustige, sterke merkdetails. Transparante videolagen zonder zwarte poster eronder. */
+.sn-site .h-milo-animated { mix-blend-mode: normal; border-radius: 0; background: transparent; }
+.sn-site .h-milo-animated > img { mix-blend-mode: screen; }
+.sn-site .h-milo-animated[data-playing="true"] > img { opacity: 0; }
+.sn-site .brand-globe-stage { pointer-events: auto; }
+.sn-site h1, .sn-site h2, .sn-site h3 { font-weight: 700; }
+.sn-site .h-eyebrow > i { background: #25d366; }
+.sn-site .h-agent-card:nth-child(2) { border-top-color: #1965c277; }
+.sn-site .h-agent-card:nth-child(3) { border-top-color: #f5940d77; }
+.sn-site .h-featured-motion .h-featured-open:empty { display: none; }
+.sn-site .h-trust-stories { padding-top: 45px; padding-bottom: 45px; }
+.sn-site .h-trust-card { min-height: 0; height: auto; padding: 24px; border-radius: 18px; transform: none; }
+.sn-site .h-trust-card h3 { font-size: 23px; }
+.sn-site .h-trust-card > div { height: 130px; max-height: 130px; margin-top: 20px; overflow: hidden; }
+.sn-site .h-trust-card:nth-child(2) { transform: none; }
+.sn-site .h-trust-grid { gap: 18px; align-items: stretch; }
+
+.sn-site .h-language-switch { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.sn-site .h-language-switch a { color: #999; padding: 8px 3px; }
+.sn-site .h-language-switch a[aria-current="true"] { color: #fff; border-bottom: 2px solid #25d366; }
+.sn-site .h-language-switch > span { color: #454545; }
+.sn-site .h-showcase-films { padding-top: 70px; padding-bottom: 20px; }
+.sn-site .h-film-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 18px; margin-bottom: 24px; }
+.sn-site .h-film-heading .h-eyebrow { width: 100%; color: #25d366; }
+.sn-site .h-film-heading h2 { font-size: clamp(34px,4vw,58px); }
+.sn-site .h-film-heading > span, .sn-site .h-film-note { font-size: 11px; color: #999; }
+.sn-site .h-film-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.sn-site .h-film-grid > button { position: relative; aspect-ratio: 16/9; overflow: hidden; padding: 0; border: 1px solid #303030; border-top: 2px solid var(--film-color); border-radius: 20px; background: #080808; cursor: pointer; text-align: left; }
+.sn-site .h-film-grid > .h-film-lead { grid-column: 1/-1; }
+.sn-site .h-film-caption { position: absolute; bottom: 0; inset-inline: 0; padding: 50px 25px 20px; background: linear-gradient(transparent,#000b); display: flex; justify-content: space-between; align-items: end; gap: 15px; pointer-events: none; }
+.sn-site .h-film-caption strong { color: #fff; font-size: 19px; }
+.sn-site .h-film-caption > span { color: #ddd; font-size: 10px; }
+.sn-site .h-film-note { margin-top: 16px; }
+@media(max-width:700px) { .sn-site .h-nav { gap: 10px; } .sn-site .h-language-switch { gap: 4px; font-size: 10px; } .sn-site .h-film-grid { grid-template-columns: 1fr; gap: 14px; } .sn-site .h-film-caption { padding: 32px 14px 14px; } .sn-site .h-film-caption strong { font-size: 16px; } .sn-site .h-film-caption > span { display: none; } }
+
+/* Compact, useful reassurance beneath the work. */
+.sn-site .h-trust-card { aspect-ratio: auto; min-height: 270px; }
+.sn-site .h-trust-card:nth-child(2) { margin-top: 0; }
+.sn-site .h-trust-card > div { position: relative; inset: auto; width: 150px; height: 110px; max-height: 110px; margin: 16px auto 24px; }
+.sn-site .h-trust-card > a { position: static; margin-top: 20px; }
+.sn-site .h-dashboard-visual { padding: 12px; }
+.sn-site .h-dashboard-visual svg { height: 60px; margin-top: 5px; }
+.sn-site .h-ring-visual { width: 110px; }
+.sn-site .h-ring-visual strong { font-size: 18px; }
+.sn-site .h-ring-visual span { font-size: 8px; }

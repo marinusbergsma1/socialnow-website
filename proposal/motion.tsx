@@ -77,6 +77,7 @@ export function AmbientVideo({
   label,
   className = "",
   suspended = false,
+  hoverSound = false,
 }: {
   src?: string;
   sources?: { src: string; type: string }[];
@@ -84,6 +85,7 @@ export function AmbientVideo({
   label: string;
   className?: string;
   suspended?: boolean;
+  hoverSound?: boolean;
 }) {
   const { enabled } = useMotion();
   const { ref, visible } = useInView<HTMLSpanElement>();
@@ -106,7 +108,7 @@ export function AmbientVideo({
             if (!shouldPlay.current) element.pause();
           })
           .catch(() => {});
-      } else element.pause();
+      } else { element.muted = true; element.pause(); }
     };
     sync();
     document.addEventListener("visibilitychange", sync);
@@ -121,6 +123,13 @@ export function AmbientVideo({
       ref={ref}
       className={`h-ambient-video ${className}`}
       role="img"
+      data-playing={playing}
+      onPointerEnter={(event) => {
+        if (!hoverSound || event.pointerType !== "mouse" || !video.current || !enabled || suspended) return;
+        video.current.muted = false;
+        void video.current.play().catch(() => { if (video.current) { video.current.muted = true; void video.current.play().catch(() => {}); } });
+      }}
+      onPointerLeave={() => { if (video.current) video.current.muted = true; }}
       aria-label={label}
     >
       {poster && (
@@ -128,7 +137,6 @@ export function AmbientVideo({
       )}
       {!poster && (
         <span className="h-video-placeholder" aria-hidden="true">
-          <Play size={25} />
           <span>{label}</span>
         </span>
       )}
@@ -157,13 +165,16 @@ export function AmbientVideo({
   );
 }
 export function MiloMotion({ role, name }: { role: string; name: string }) {
+  const [safari, setSafari] = useState<boolean | null>(null);
+  useEffect(() => { setSafari(/^((?!chrome|crios|fxios|edg|android).)*safari/i.test(navigator.userAgent)); }, []);
   return (
     <AmbientVideo
       poster={`/proposal/milo/${role}.webp`}
-      sources={[
-        { src: `/proposal/milo/${role}.webm`, type: "video/webm" },
-        { src: `/proposal/milo/${role}.mp4`, type: "video/mp4" },
-      ]}
+      key={safari === null ? "poster" : String(safari)}
+      sources={safari === null ? [] : safari
+        ? [{ src: `/proposal/milo/${role}-alpha.mov`, type: 'video/mp4; codecs="hvc1"' }]
+        : [{ src: `/proposal/milo/${role}-alpha.webm`, type: "video/webm" }]}
+
       label={name}
       className="h-milo-animated"
     />

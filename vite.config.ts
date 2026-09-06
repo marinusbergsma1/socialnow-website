@@ -9,7 +9,7 @@ export default defineConfig({
     host: "0.0.0.0",
   },
   plugins: [
-    react(),
+    react({ jsxImportSource: "@socialnow/i18n" }),
     {
       name: "socialnow-preview-routes",
       configureServer(server) {
@@ -29,6 +29,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "."),
+      "@socialnow/i18n": path.resolve(__dirname,"proposal/i18n"),
     },
   },
   build: {

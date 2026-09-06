@@ -4,13 +4,12 @@ import {
   ArrowRight,
   ArrowUpRight,
   ChevronDown,
-  Play,
   X,
   MessageCircle,
 } from "lucide-react";
 import { agents, faqs, logos, people } from "./content";
 import OsEntry, { CLAIM_URL } from "./os-entry";
-import { MiloMotion, MotionControl } from "./motion";
+import { MiloMotion } from "./motion";
 import type { Project } from "../types";
 
 export function Action({
@@ -115,9 +114,6 @@ export function VideoBlock({
       onToggle={(event) => setOpen(event.currentTarget.open)}
     >
       <summary>
-        <span className="h-play">
-          <Play size={17} aria-hidden="true" />
-        </span>
         <span>
           <strong>{title}</strong>
           <small>Bekijk de video</small>
@@ -168,9 +164,6 @@ export function HeroMilos() {
           <span>{agent.promise}</span>
         </Link>
       ))}
-      <div className="h-hero-motion">
-        <MotionControl />
-      </div>
     </div>
   );
 }

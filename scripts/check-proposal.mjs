@@ -7,6 +7,7 @@ import { existsSync, readFileSync } from "node:fs";
 
 const server = await createServer({
   configFile: false,
+  resolve: { alias: { "@socialnow/i18n": `${process.cwd()}/proposal/i18n` } },
   ssr: {
     noExternal: ["react-router-dom", "react-router"],
     resolve: { conditions: ["module-sync", "node", "development"] },
@@ -40,6 +41,7 @@ try {
     ...projects.map((project) => `/project/${project.slug}`),
     ...allPosts.map((post) => `/blog/${post.slug}`),
   ];
+  const {LanguageProvider, missingTranslations}=await server.ssrLoadModule("/proposal/i18n/context.ts");
   const rendered = new Map();
   const images = new Set();
   const referencedAnchors = [];
@@ -49,7 +51,7 @@ try {
       React.createElement(
         MemoryRouter,
         { basename: "/voorstel", initialEntries: [`/voorstel${route}`] },
-        React.createElement(Page),
+        React.createElement(Page, {language:"nl"}),
       ),
     );
     rendered.set(route, html);
@@ -97,7 +99,7 @@ try {
         React.createElement(
           MemoryRouter,
           { basename: base, initialEntries: [url] },
-          React.createElement(Page),
+          React.createElement(Page, {language:"nl"}),
         ),
       );
       assert(
@@ -249,20 +251,20 @@ try {
   ])
     assert.equal(parseOsStand(data), null);
   const demoMarkup = renderToStaticMarkup(
-    React.createElement(OsProof, { stand: demo }),
+    React.createElement(LanguageProvider, {language:"nl"}, React.createElement(OsProof, { stand: demo })),
   );
   assert(
     demoMarkup.includes("Demostand") && demoMarkup.includes("geen klantgroei"),
   );
   const liveMarkup = renderToStaticMarkup(
-    React.createElement(OsProof, { stand: live }),
+    React.createElement(LanguageProvider, {language:"nl"}, React.createElement(OsProof, { stand: live })),
   );
   assert(
     liveMarkup.includes("OS-werkruimten aangemaakt") &&
       !liveMarkup.includes("Demostand"),
   );
   const absentMarkup = renderToStaticMarkup(
-    React.createElement(OsProof, { stand: null }),
+    React.createElement(LanguageProvider, {language:"nl"}, React.createElement(OsProof, { stand: null })),
   );
   assert(
     absentMarkup.includes("tijdelijk niet beschikbaar") &&
@@ -296,12 +298,12 @@ try {
       "old pricing removed from production metadata",
     );
     assert(
-      home.includes("Probeer SocialNow OS"),
+      home.includes("Try SocialNow OS"),
       "Signature homepage metadata",
     );
     assert(
       readFileSync("dist/prijzen/index.html", "utf8").includes(
-        "persoonlijk voorstel",
+        "personal proposal",
       ),
       "new offer metadata",
     );
@@ -344,6 +346,19 @@ try {
       );
     }
   }
+  for (const route of routes) {
+    const en = renderToStaticMarkup(React.createElement(MemoryRouter, {initialEntries:[route]}, React.createElement(Page, {language:"en"})));
+    assert.equal((en.match(/<h1\b/g)||[]).length,1,`English h1 ${route}`);
+    assert(en.includes(`href="/nl${route}"`),`NL switch ${route}`);
+    for(const lang of ["en","nl"]){
+      const file=`dist${lang==="nl"?"/nl":""}${route==="/"?"":route}/index.html`;
+      const html=readFileSync(file,"utf8");
+      assert(html.includes(`lang="${lang}"`),`document language ${file}`);
+      assert(html.includes('hreflang="en"')&&html.includes('hreflang="nl"'),`alternates ${file}`);
+    }
+    if(route==="/")assert(en.includes("Try the OS")&&en.includes("Human creativity."));
+  }
+  assert.deepEqual([...missingTranslations], [], "all rendered English text has a translation or explicit original name");
   console.log(
     `Geslaagd: Node-render, ${routes.length} routes, ${idCount} IDs en ARIA-doelen, ${images.size} bestaande afbeeldingen, instaplinks, demo/live/foutstanden, installatiehints en Signature op hoofd- en previewroutes. Geen browser gebruikt.`,
   );

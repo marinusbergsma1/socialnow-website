@@ -10,6 +10,8 @@ import {
   Phone,
 } from "lucide-react";
 import { HeroTitle } from "./styles";
+import ShowcaseFilms from "./ShowcaseFilms";
+import { useLanguage } from "./i18n/context";
 import CustomerReviews from "./CustomerReviews";
 import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
@@ -125,6 +127,7 @@ export function Home() {
           Probeer het OS <ArrowUpRight size={17} />
         </a>
       </div>
+      <ShowcaseFilms />
       <section className="h-section h-wrap" id="het-os">
         <Heading
           label="De vier Milo’s / De belofte van SocialNow"
@@ -201,9 +204,9 @@ export function Home() {
           label="Gemaakt door ons team"
           title={
             <>
-              Nog steeds creatief.
+              Human creativity.
               <br />
-              <span>Altijd SocialNow.</span>
+              <span>Powered by AI technology.</span>
             </>
           }
           text="Campagnes, social content en merkwerk uit onze eigen collectie."
@@ -737,6 +740,7 @@ export function TeamPage() {
   );
 }
 export function BlogPage() {
+  const {language}=useLanguage();
   return (
     <>
       <PageHeading
@@ -762,7 +766,7 @@ export function BlogPage() {
                 loading="lazy"
               />
               <p className="h-eyebrow">
-                {new Date(post.date).toLocaleDateString("nl-NL", {
+                {new Date(post.date).toLocaleDateString(language === "nl" ? "nl-NL" : "en-GB", {
                   day: "numeric",
                   month: "long",
                   year: "numeric",
@@ -814,6 +818,7 @@ function ArticleBody({ body }: { body: string }) {
   );
 }
 export function BlogPostPage() {
+  const {language}=useLanguage();
   const { slug } = useParams();
   const post = allPosts.find((item) => item.slug === slug);
   if (!post) return <NotFound />;
@@ -822,7 +827,7 @@ export function BlogPostPage() {
       <header className="h-page-heading h-wrap">
         <TextLink to="/blog">Alle artikelen</TextLink>
         <p className="h-eyebrow">
-          {new Date(post.date).toLocaleDateString("nl-NL", {
+          {new Date(post.date).toLocaleDateString(language === "nl" ? "nl-NL" : "en-GB", {
             day: "numeric",
             month: "long",
             year: "numeric",
@@ -860,14 +865,15 @@ export function BlogPostPage() {
   );
 }
 export function ContactPage() {
+  const {t}=useLanguage();
   const [params] = useSearchParams();
   const [prepared, setPrepared] = useState(false);
   const [draft, setDraft] = useState("");
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const subject = `Kennismaken: ${data.get("subject") || "SocialNow"}`;
-    const body = `Naam: ${data.get("name")}\nE-mail: ${data.get("email")}\nBedrijf: ${data.get("company")}\n\n${data.get("message")}`;
+    const subject = `${t("Kennismaken")}: ${data.get("subject") || "SocialNow"}`;
+    const body = `${t("Naam")}: ${data.get("name")}\n${t("E-mail")}: ${data.get("email")}\n${t("Bedrijf")}: ${data.get("company")}\n\n${data.get("message")}`;
     const href = `mailto:info@socialnow.nl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setDraft(href);
     setPrepared(true);
@@ -970,7 +976,7 @@ export function ContactPage() {
             Onderwerp
             <input
               name="subject"
-              defaultValue={params.get("onderwerp") || "Custom OS"}
+              defaultValue={t(params.get("onderwerp") || "Custom OS")}
               placeholder="Bijvoorbeeld: Custom OS of een nieuwe website"
               maxLength={150}
             />

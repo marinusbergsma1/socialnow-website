@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useMotion } from "./motion";
-import { Pause, Play } from "lucide-react";
 
 // Dezelfde drie bollen, kleuren en Fibonacci-punten als de bestaande
 // PixelGlobe. Deze rustige uitvoering hoort alleen bij het websitevoorstel.
@@ -33,7 +32,6 @@ export default function BrandGlobe() {
   const stageRef = useRef<HTMLDivElement>(null);
   const pose = useRef({ time: 0, tiltX: 0, tiltY: 0 });
   const [ready, setReady] = useState(false);
-  const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -54,9 +52,7 @@ export default function BrandGlobe() {
     const motionPreference = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
-    const finePointer = window.matchMedia(
-      "(hover: hover) and (pointer: fine)",
-    ).matches;
+    const interaction = (stage.closest(".h-hero") || stage) as HTMLElement;
     const mobile = window.innerWidth <= 600;
     const points = createGlobePoints(mobile ? 0.55 : 1);
     const frameInterval = 1000 / (mobile ? 24 : 30);
@@ -74,7 +70,6 @@ export default function BrandGlobe() {
     let announced = false;
 
     const canAnimate = () =>
-      !paused &&
       enabled &&
       !motionPreference.matches &&
       visible &&
@@ -158,10 +153,10 @@ export default function BrandGlobe() {
     };
 
     const move = (event: PointerEvent) => {
-      if (!finePointer || !canAnimate()) return;
-      const bounds = stage.getBoundingClientRect();
-      pointerX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 0.25;
-      pointerY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 0.16;
+      if (!canAnimate()) return;
+      const bounds = interaction.getBoundingClientRect();
+      pointerX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 1.5;
+      pointerY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 0.9;
     };
     const leave = () => {
       pointerX = 0;
@@ -178,8 +173,8 @@ export default function BrandGlobe() {
     observer.observe(stage);
     visibility.observe(stage);
     document.addEventListener("visibilitychange", syncAnimation);
-    stage.addEventListener("pointermove", move, { passive: true });
-    stage.addEventListener("pointerleave", leave);
+    interaction.addEventListener("pointermove", move, { passive: true });
+    interaction.addEventListener("pointerleave", leave);
     resize();
     syncAnimation();
 
@@ -190,10 +185,10 @@ export default function BrandGlobe() {
       observer.disconnect();
       visibility.disconnect();
       document.removeEventListener("visibilitychange", syncAnimation);
-      stage.removeEventListener("pointermove", move);
-      stage.removeEventListener("pointerleave", leave);
+      interaction.removeEventListener("pointermove", move);
+      interaction.removeEventListener("pointerleave", leave);
     };
-  }, [paused, reducedMotion, enabled]);
+  }, [reducedMotion, enabled]);
 
   return (
     <div className="brand-globe" data-ready={ready}>
@@ -207,21 +202,7 @@ export default function BrandGlobe() {
         />
         <canvas ref={canvasRef} className="brand-globe-canvas" />
       </div>
-      {ready && !reducedMotion && enabled && (
-        <button
-          className="globe-motion"
-          type="button"
-          onClick={() => setPaused((value) => !value)}
-          aria-label={paused ? "Globe laten bewegen" : "Globe pauzeren"}
-        >
-          {paused ? (
-            <Play size={12} aria-hidden="true" />
-          ) : (
-            <Pause size={12} aria-hidden="true" />
-          )}
-          <span>{paused ? "Afspelen" : "Pauze"}</span>
-        </button>
-      )}
+
     </div>
   );
 }

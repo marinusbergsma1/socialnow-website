@@ -58,7 +58,7 @@ export default function CustomerReviews() {
           Bekijk de reviews op Google <ArrowUpRight size={17} />
         </a>
       </Heading>
-      <div className="h-review-cards">
+      <div className="h-review-cards" translate="no">
         {customerReviews.map((review) => (
           <figure key={review.name}>
             <Quote size={24} aria-hidden="true" />

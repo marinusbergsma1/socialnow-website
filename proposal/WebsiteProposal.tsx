@@ -28,6 +28,8 @@ import BrandFooter from "./BrandFooter";
 import { MotionProvider } from "./motion";
 import { projects } from "./content";
 import { allPosts } from "../data/posts";
+import LanguageSwitch from "./LanguageSwitch";
+import { LanguageProvider, type Language, useLanguage } from "./i18n/context";
 import PrivacyPage from "../components/PrivacyPage";
 
 const nav = [
@@ -39,14 +41,15 @@ const nav = [
   ["/blog", "Blog"],
   ["/contact", "Contact"],
 ];
-export default function WebsiteProposal() {
+export default function WebsiteProposal({language="en"}:{language?:Language}) {
   return (
-    <MotionProvider>
+    <LanguageProvider language={language}><MotionProvider>
       <ProposalShell />
-    </MotionProvider>
+    </MotionProvider></LanguageProvider>
   );
 }
 function ProposalShell() {
+  const {language,t}=useLanguage();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
@@ -69,19 +72,20 @@ function ProposalShell() {
       project?.description ||
       post?.excerpt ||
       "Probeer SocialNow OS en ontdek hoe het werkt. Vier Milo’s, één overzichtelijke omgeving. Ervaar eerst het gemak; daarna bouwen we samen jouw Custom OS.";
-    document.title = `${title} | SocialNow`;
+    document.title = `${t(title)} | SocialNow`;
     for (const [selector, content] of [
-      ['meta[name="description"]', description],
+      ['meta[name="description"]', t(description)],
       ['meta[property="og:title"]', document.title],
-      ['meta[property="og:description"]', description],
-      ['meta[property="og:url"]', `https://socialnow.nl${location.pathname}`],
+      ['meta[property="og:description"]', t(description)],
+      ['meta[property="og:url"]', `https://socialnow.nl${language === "nl" ? "/nl" : ""}${location.pathname}`],
       ['meta[name="twitter:title"]', document.title],
-      ['meta[name="twitter:description"]', description],
+      ['meta[name="twitter:description"]', t(description)],
     ])
       document.querySelector(selector)?.setAttribute("content", content);
     document
       .querySelector('link[rel="canonical"]')
-      ?.setAttribute("href", `https://socialnow.nl${location.pathname}`);
+      ?.setAttribute("href", `https://socialnow.nl${language === "nl" ? "/nl" : ""}${location.pathname}`);
+    for (const lang of ["en", "nl", "x-default"]) document.querySelector(`link[hreflang="${lang}"]`)?.setAttribute("href", `https://socialnow.nl${lang === "nl" ? "/nl" : ""}${location.pathname}`);
     const id = window.requestAnimationFrame(() => {
       if (location.hash)
         document
@@ -94,7 +98,7 @@ function ProposalShell() {
       mounted.current = true;
     });
     return () => window.cancelAnimationFrame(id);
-  }, [location.pathname, location.hash]);
+  }, [location.pathname, location.hash, language]);
   useEffect(() => {
     if (!menuOpen) return;
     const close = (event: KeyboardEvent) => {
@@ -133,6 +137,7 @@ function ProposalShell() {
               </NavLink>
             ))}
           </nav>
+          <LanguageSwitch />
           <a className="h-header-claim" href={CLAIM_URL}>
             Probeer het OS
             <ArrowUpRight size={15} />

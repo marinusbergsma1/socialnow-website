@@ -12,22 +12,7 @@ export default function TrustStories() {
       data-visible={visible}
       aria-labelledby="trust-title"
     >
-      <div className="h-trust-heading">
-        <p className="h-trust-badge">
-          <ShieldCheck size={15} />
-          Software met mensen erachter
-        </p>
-        <h2 id="trust-title">
-          Jouw bedrijf.
-          <br />
-          <span>Met aandacht gebouwd.</span>
-        </h2>
-        <p>
-          Persoonlijk contact, overzicht in je gegevens en heldere afspraken
-          over de volgende stap. Van het eerste gebruik tot jouw Custom OS.
-        </p>
-        <MotionControl />
-      </div>
+      <h2 id="trust-title" className="sr-only">Persoonlijke begeleiding bij jouw OS</h2>
       <div className="h-trust-grid">
         <article className="h-trust-card">
           <h3>

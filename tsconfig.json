@@ -22,9 +22,13 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@socialnow/i18n/*": [
+        "./proposal/i18n/*"
       ]
     },
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "jsxImportSource": "@socialnow/i18n"
   }
 }

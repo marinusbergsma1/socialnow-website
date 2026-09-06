@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Expand, Play } from "lucide-react";
+import { Expand } from "lucide-react";
 import { projects } from "./content";
 import { AmbientVideo, MotionControl } from "./motion";
 import { MediaDialog, type MediaItem } from "./MediaSliders";
@@ -57,7 +57,7 @@ export default function FeaturedWork() {
         }
         text="Bewegend beeld. Sterke merken. Oog voor ieder detail. Ontdek het werk achter onze ervaring."
       >
-        <MotionControl />
+
       </Heading>
       <div className="h-featured-cases">
         {selections.map((selection, index) => {
@@ -121,6 +121,7 @@ export default function FeaturedWork() {
                           poster={project.image}
                           label={item.title}
                           suspended={!!selected}
+                          hoverSound
                         />
                       ) : (
                         <img
@@ -134,7 +135,7 @@ export default function FeaturedWork() {
                       <span className="h-featured-caption">
                         <span>{selection.captions[tile]}</span>
                         <span className="h-featured-open">
-                          {motion ? <Play size={18} /> : <Expand size={16} />}
+                          {!motion && <Expand size={16} />}
                         </span>
                       </span>
                     </button>

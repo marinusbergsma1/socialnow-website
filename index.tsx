@@ -12,10 +12,11 @@ if (!rootElement) {
 }
 
 const root = ReactDOM.createRoot(rootElement);
+const dutch = /^\/nl(?:\/|$)/.test(window.location.pathname);
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <App />
+    <BrowserRouter basename={dutch ? "/nl" : "/"}>
+      <App language={dutch ? "nl" : "en"} />
     </BrowserRouter>
   </React.StrictMode>,
 );

@@ -19,7 +19,7 @@ const EMBED = new Set([
   "divine-machines-website",
 ]);
 export default function LiveWebsites() {
-  const [index, setIndex] = useState(1);
+  const [index, setIndex] = useState(0);
   const [mobile, setMobile] = useState(false);
   const [interactive, setInteractive] = useState(true);
   const { ref, visible } = useInView<HTMLElement>();
@@ -27,7 +27,8 @@ export default function LiveWebsites() {
   useEffect(() => {
     if (visible) setNear(true);
   }, [visible]);
-  const project = webShowcaseProjects[index];
+  const selected = webShowcaseProjects[index];
+  const project = selected.slug === "vastiq-website" ? { ...selected, title: "VASTIQ.AI", url: "https://vastiq.ai/" } : selected;
   const live = interactive && EMBED.has(project.slug);
   const choose = (next: number) => {
     setIndex((next + webShowcaseProjects.length) % webShowcaseProjects.length);

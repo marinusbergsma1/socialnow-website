@@ -1,6 +1,6 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight, Play, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { AmbientVideo, MotionControl, useInView, useMotion } from "./motion";
 import { Heading } from "./ui";
 
@@ -338,6 +338,7 @@ function MediaRail({
                     src={media.src}
                     label={media.title}
                     suspended={!!item}
+                    hoverSound
                   />
                 ) : (
                   <img
@@ -351,7 +352,6 @@ function MediaRail({
                 )}
                 <span className="h-media-caption">
                   {media.title}
-                  {media.kind === "video" && <Play size={15} />}
                 </span>
               </button>
             ))}
@@ -398,7 +398,7 @@ export function VideoSlider() {
           }
           text="Van short-form content tot campagnevideo. Bekijk de producties uit ons eigen portfolio."
         >
-          <MotionControl />
+
         </Heading>
       </div>
       <MediaRail items={portfolioVideos} label="Videoportfolio" />
@@ -420,7 +420,7 @@ export function ImageSliders() {
           }
           text="Artworks, campagnes en merkervaringen. De collectie van SocialNow, van digitaal tot op de werkvloer."
         >
-          <MotionControl />
+
         </Heading>
       </div>
       <MediaRail
