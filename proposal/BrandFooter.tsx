@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { prices, services } from "./content";
 import { MotionControl } from "./motion";
+import TeamTrust from "./TeamTrust";
 import { Action } from "./ui";
 import { CLAIM_URL } from "./os-entry";
 const TERMS =
@@ -44,12 +45,19 @@ export default function BrandFooter() {
             })}
           </div>
         </div>
+        <div className="h-footer-partner">
+          <img
+            src="/images/SocialNow-OS-Komen-Consultancy.webp"
+            alt="SocialNow OS in samenwerking met Komen Consultancy"
+            width="640"
+            height="180"
+            loading="lazy"
+          />
+        </div>
         <div className="h-footer-statement">
           <div>
             <h2>
               Eén OS.
-              <br />
-              Vier Milo’s.
               <br />
               <span>Ons team.</span>
             </h2>
@@ -57,6 +65,7 @@ export default function BrandFooter() {
               Creatie, technologie en mensen. Verbonden rond jouw bedrijf, met
               zelf proberen als eerste stap en een Custom OS als volgende stap.
             </p>
+            <TeamTrust />
           </div>
           <div>
             <a href="mailto:info@socialnow.nl">
@@ -93,10 +102,10 @@ export default function BrandFooter() {
           <div>
             <p className="h-eyebrow">Het OS</p>
             <Link to="/het-os">Ontdek hoe het werkt</Link>
-            <Link to="/het-os#website">Milo Website</Link>
-            <Link to="/het-os#crm">Milo CRM</Link>
-            <Link to="/het-os#content">Milo Studio</Link>
-            <Link to="/het-os#ads">Milo Advertenties</Link>
+            <Link to="/het-os#website">Website</Link>
+            <Link to="/het-os#crm">CRM</Link>
+            <Link to="/het-os#content">Studio</Link>
+            <Link to="/het-os#ads">Advertenties</Link>
             <Link to="/prijzen">Aanbod & inrichting</Link>
           </div>
           <div>
@@ -143,15 +152,6 @@ export default function BrandFooter() {
               </a>
             </div>
           </div>
-        </div>
-        <div className="h-footer-partner">
-          <img
-            src="/images/SocialNow-OS-Komen-Consultancy.webp"
-            alt="SocialNow OS in samenwerking met Komen Consultancy"
-            width="640"
-            height="180"
-            loading="lazy"
-          />
         </div>
         <div className="h-footer-platforms">
           <p className="h-eyebrow">Technologie & platforms</p>

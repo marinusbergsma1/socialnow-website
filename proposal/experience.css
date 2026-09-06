@@ -2080,3 +2080,23 @@ html {
   .sn-site .h-featured-copy .h-button { min-height: 44px; }
   .sn-site .h-featured-cases .h-featured-media { width: 100%; max-width: 360px; justify-self: center; }
 }
+
+/* Human trust close to the decision, using the actual team and customer. */
+.sn-site .h-team-trust { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; color: #ddd; margin-top: 22px; max-width: 100%; }
+.sn-site .h-team-portraits { display: flex; flex-shrink: 0; padding-left: 7px; }
+.sn-site .h-team-portraits img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #080808; margin-left: -7px; }
+.sn-site .h-team-trust > span:last-child { display: grid; gap: 4px; text-align: left; }
+.sn-site .h-team-trust strong { font-size: 12px; font-weight: 500; }
+.sn-site .h-team-trust > span:last-child > span { display: flex; align-items: center; gap: 7px; color: #aaa; font-size: 11px; }
+.sn-site .h-footer-partner { padding: 28px 0 36px; border-top: 0; }
+.sn-site .h-footer-partner img { width: min(100%, 400px); height: auto; }
+.sn-site .h-hero-review { display: flex; align-items: center; gap: 10px; max-width: 47%; margin-top: 18px; padding: 12px 0; border-top: 1px solid #292929; color: #d6d6d6; }
+.sn-site .h-hero-review > img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.sn-site .h-hero-review > span { min-width: 0; }
+.sn-site .h-hero-review q { display: block; font-size: 12px; line-height: 1.45; }
+.sn-site .h-hero-review > span > span { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #aaa; margin-top: 5px; }
+@media (max-width: 700px) {
+  .sn-site .h-hero-review { max-width: 100%; }
+  .sn-site .h-team-trust { gap: 10px; }
+  .sn-site .h-team-portraits img { width: 30px; height: 30px; }
+}

@@ -40,7 +40,7 @@ export const agents = [
     title: "Website",
     promise: "Een sterke digitale basis.",
     color: "#25D366",
-    name: "Milo Website",
+    name: "Website",
     label: "Persoonlijk ingericht",
     text: "Een website die bij je merk past. Met de techniek en koppelingen die jouw bedrijf nodig heeft.",
     video: "os-website",
@@ -50,7 +50,7 @@ export const agents = [
     title: "CRM",
     promise: "Aandacht voor je klanten.",
     color: "#1965C2",
-    name: "Milo CRM",
+    name: "CRM",
     label: "Verbonden met Odoo",
     text: "Klanten, leads en verkoop bij elkaar. Begin met inzicht vanuit je eigen Odoo-omgeving.",
     video: "os-crm",
@@ -60,7 +60,7 @@ export const agents = [
     title: "Studio",
     promise: "Content in jouw merkstijl.",
     color: "#F5940D",
-    name: "Milo Content",
+    name: "Content",
     label: "Inzicht vanuit Meta",
     text: "Zie wat je berichten doen. Bouw samen met ons aan een herkenbare lijn in je content.",
     video: "os-content",
@@ -70,7 +70,7 @@ export const agents = [
     title: "Advertenties",
     promise: "Inzicht in je campagnes.",
     color: "#EC1670",
-    name: "Milo Ads",
+    name: "Advertenties",
     label: "Inzicht vanuit Meta",
     text: "Breng uitgaven, klikken en leads samen. Bepaal met ons de volgende stap voor je campagnes.",
     video: "os-advertenties",
@@ -173,7 +173,7 @@ export const prices = [
     description:
       "Probeer het systeem en ervaar zelf het gemak en overzicht. Daarna bekijken we wat bij jouw bedrijf past.",
     items: [
-      "Maak kennis met de vier Milo’s",
+      "Ontdek de vier onderdelen van het OS",
       "Verken de OS-omgeving",
       "Begin met je eigen Odoo en Meta",
     ],
@@ -217,7 +217,7 @@ export const faqs = [
   {
     question: "Waar begin ik?",
     answer:
-      "Probeer eerst het systeem en maak kennis met de vier Milo’s. Zo ervaar je het overzicht voordat we samen je Custom OS gaan inrichten. Op de Odoo-beurs laten we je hiermee kennismaken.",
+      "Probeer eerst het systeem. Ervaar het overzicht voordat we samen je Custom OS inrichten. Op de Odoo-beurs laten we je zien hoe het werkt.",
   },
   {
     question: "Wat is een Custom OS?",
@@ -230,9 +230,9 @@ export const faqs = [
       "Claim je OS en doorloop Bedrijf, Odoo en Meta. Met geschikte accounts en toegangsrechten kun je gegevens uit je eigen Odoo en Meta verbinden. Welke informatie je ziet, hangt af van je koppelingen. De testomgeving is in ontwikkeling.",
   },
   {
-    question: "Wat doen de Milo’s?",
+    question: "Welke onderdelen brengt het OS samen?",
     answer:
-      "De Milo’s geven de verschillende onderdelen van het OS een herkenbaar gezicht: website, klanten, content en advertenties. De video’s laten de productrichting zien. We spreken samen af welke functies voor jouw bedrijf beschikbaar zijn en welke persoonlijke inrichting vragen.",
+      "Het OS brengt je website, CRM, content en advertenties samen. We spreken samen af welke functies voor jouw bedrijf beschikbaar zijn en welke persoonlijke inrichting vragen.",
   },
   {
     question: "Worden mijn advertenties automatisch beheerd?",

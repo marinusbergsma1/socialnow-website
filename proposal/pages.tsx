@@ -14,7 +14,7 @@ import { miloPoster } from "./motion";
 import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
 import { useLanguage } from "./i18n/context";
-import CustomerReviews from "./CustomerReviews";
+import CustomerReviews, { HeroReview } from "./CustomerReviews";
 import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
 import TrustStories from "./TrustStories";
@@ -88,6 +88,7 @@ export function Home() {
             Je website, CRM, content en advertenties. In één chat.
           </p>
           <OsEntry />
+          <HeroReview />
           <HeroMilos />
           <ol
             className="h-poc-path"
@@ -120,7 +121,7 @@ export function Home() {
       <ShowcaseFilms />
       <section className="h-section h-wrap" id="het-os">
         <Heading
-          label="De vier Milo’s / De belofte van SocialNow"
+          label="Vier onderdelen / Eén verbonden bedrijf"
           title={
             <>
               Vier gezichten.
@@ -260,7 +261,7 @@ export function OsPage() {
             <span>Dan samen verder.</span>
           </>
         }
-        text="Maak kennis met het systeem door het zelf te proberen. Ontdek de vier Milo’s en ervaar het overzicht. Daarna bespreken we hoe jouw Custom OS daarbij kan aansluiten."
+        text="Probeer het systeem en ervaar het overzicht. Daarna bespreken we hoe we het op jouw bedrijf afstemmen."
       />
       <div className="h-wrap">
         <OsEntry />
@@ -805,7 +806,7 @@ export function ContactPage() {
             <span>voor jou betekenen?</span>
           </>
         }
-        text="Vertel ons hoe je bedrijf werkt. Samen bepalen we waar de vier Milo’s, je systemen en ons team waarde kunnen toevoegen."
+        text="Vertel ons hoe je bedrijf werkt. Samen bepalen we hoe het OS en ons team je kunnen helpen."
       />
       <section className="h-wrap h-contact-layout">
         <div>

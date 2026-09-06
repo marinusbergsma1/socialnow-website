@@ -8,6 +8,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { agents, faqs, logos, people } from "./content";
+import TeamTrust from "./TeamTrust";
 import OsEntry, { CLAIM_URL } from "./os-entry";
 import { MiloMotion, miloPoster } from "./motion";
 import type { Project } from "../types";
@@ -151,7 +152,7 @@ export function HeroMilos() {
   return (
     <div
       className="h-hero-milos"
-      aria-label="De vier Milo-specialisten uit SocialNow OS"
+      aria-label="Website, CRM, content en advertenties in SocialNow OS"
     >
       {agents.map((agent) => (
         <Link
@@ -196,7 +197,7 @@ export function ConversionBridge() {
         <p className="h-eyebrow">Eerst proberen. Daarna op maat.</p>
         <h3>Ontdek hoe het werkt.</h3>
         <p>
-          Ontdek hoe de vier Milo’s en één overzichtelijke omgeving samenkomen.
+          Je website, CRM, content en advertenties in één omgeving.
           Vanuit jouw ervaring bespreken we daarna wat je bedrijf nodig heeft.
         </p>
       </div>
@@ -318,6 +319,7 @@ export function Closing() {
         <br />
         Daarna bepalen we samen hoe we verder bouwen.
       </p>
+      <TeamTrust />
       <div className="h-closing-try">
         <OsEntry />
       </div>
@@ -351,7 +353,7 @@ export function MiloGuide() {
         className="h-milo-launcher"
         type="button"
         onClick={() => setOpen(true)}
-        aria-label="Open Milo, je wegwijzer op deze website"
+        aria-label="Open de SocialNow-hulp"
       >
         <img src="/proposal/milo/website.webp" alt="" width="70" height="70" />
         <span>
@@ -369,18 +371,18 @@ export function MiloGuide() {
         <div className="h-milo-top">
           <img
             src="/proposal/milo/website.webp"
-            alt="Milo"
+            alt="SocialNow"
             width="64"
             height="64"
           />
           <div>
-            <h2 id="milo-title">Hoi, ik ben Milo.</h2>
+            <h2 id="milo-title">Waar kunnen we je mee helpen?</h2>
             <p>Je wegwijzer bij SocialNow.</p>
           </div>
           <button
             type="button"
             onClick={() => setOpen(false)}
-            aria-label="Milo sluiten"
+            aria-label="Hulp sluiten"
           >
             <X size={20} />
           </button>

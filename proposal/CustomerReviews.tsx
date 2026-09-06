@@ -85,3 +85,11 @@ export default function CustomerReviews() {
     </section>
   );
 }
+
+export function HeroReview() {
+  const review = customerReviews[0];
+  return <a className="h-hero-review" href={REVIEWS_URL} target="_blank" rel="noopener noreferrer">
+    <img src={review.image} alt="" width="34" height="34" loading="lazy" />
+    <span><q lang="nl" translate="no">{review.text}</q><span translate="no">{review.name} · {review.company} · Google <ArrowUpRight size={12} aria-hidden="true" /></span></span>
+  </a>;
+}

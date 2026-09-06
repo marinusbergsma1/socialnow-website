@@ -71,7 +71,7 @@ function ProposalShell() {
     const description =
       project?.description ||
       post?.excerpt ||
-      "Probeer SocialNow OS en ontdek hoe het werkt. Vier Milo’s, één overzichtelijke omgeving. Ervaar eerst het gemak; daarna bouwen we samen jouw Custom OS.";
+      "Probeer SocialNow OS. Je website, CRM, content en advertenties in één chat. Ervaar het gemak; daarna bouwen we samen jouw Custom OS.";
     document.title = `${t(title)} | SocialNow`;
     for (const [selector, content] of [
       ['meta[name="description"]', t(description)],
