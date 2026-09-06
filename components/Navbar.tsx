@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import Button from './Button';
 import { GlassFilter } from './ui/liquid-glass';
 
 interface NavLink {
@@ -172,7 +171,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
               ))}
             </div>
             <a href="https://app.socialnow.nl/login/" className="relative group text-[11px] font-black uppercase text-gray-400 hover:text-white transition-all tracking-[0.2em] z-10 mr-6">Inloggen</a>
-            <Button variant="green" premium icon href="https://app.socialnow.nl/login/?bron=site" className="scale-90 origin-right !h-[48px]" triggerOnHover>Claim jouw OS</Button>
+            <a className="sn-nav-claim sn-os-claim" href="https://app.socialnow.nl/login/?bron=site">Claim jouw OS <span aria-hidden="true">→</span></a>
           </div>
 
           <button className="relative z-10 lg:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? 'Menu sluiten' : 'Menu openen'}>
@@ -196,7 +195,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenContact }) => {
             ))}
           </div>
           <div className={`mt-8 lg:mt-16 transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`} style={{ transitionDelay: isOpen ? `${navLinks.length * 60 + 200}ms` : '0ms' }}>
-            <Button variant="green" premium icon href="https://app.socialnow.nl/login/?bron=site" onClick={() => setIsOpen(false)} triggerOnHover className="w-full !h-[50px] !text-sm">Claim jouw OS</Button>
+            <a className="sn-nav-claim sn-os-claim w-full" href="https://app.socialnow.nl/login/?bron=site" onClick={() => setIsOpen(false)}>Claim jouw OS <span aria-hidden="true">→</span></a>
             <a href="https://app.socialnow.nl/login/" className="block mt-6 text-center text-[11px] font-black uppercase text-gray-400 hover:text-white tracking-[0.2em]">Inloggen</a>
           </div>
       </div>

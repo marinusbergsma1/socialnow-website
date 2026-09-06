@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, Star } from 'lucide-react';
-import GenerateButton from './GenerateButton';
+import { ArrowRight, Download, Star } from 'lucide-react';
 
 interface HeroProps {
   startAnimation: boolean;
@@ -37,8 +36,43 @@ const words = [
 ];
 
 const OS_AANMELDEN = 'https://app.socialnow.nl/login/?bron=site';
+type OsStand = { demo: true; customOs: number; demos: number } | { live: true; total: number };
 
 const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
+  const [osStand, setOsStand] = useState<OsStand | null>(null);
+  useEffect(() => {
+    const controller = new AbortController();
+    let bezig = false;
+    const laad = async () => {
+      if (document.hidden || bezig) return;
+      bezig = true;
+      try {
+        const r = await fetch('https://app.socialnow.nl/api/os-aantal', { signal: controller.signal, credentials: 'omit' });
+        const d = r.ok ? await r.json() : null;
+        const geldig = (n: unknown) => typeof n === 'number' && Number.isSafeInteger(n) && n >= 0;
+        if (d?.ok && d.live && geldig(d.total)) setOsStand({ live: true, total: d.total });
+        else if (d?.ok && d.demo && geldig(d.customOs) && geldig(d.demos)) setOsStand({ demo: true, customOs: d.customOs, demos: d.demos });
+        else setOsStand(null);
+      } catch { if (!controller.signal.aborted) setOsStand(null); }
+      finally { bezig = false; }
+    };
+    laad();
+    const timer = window.setInterval(laad, 30000);
+    document.addEventListener('visibilitychange', laad);
+    return () => { controller.abort(); clearInterval(timer); document.removeEventListener('visibilitychange', laad); };
+  }, []);
+  const [installOpen, setInstallOpen] = useState(false);
+  const [installHint, setInstallHint] = useState('Open het OS. Kies daarna in je browser ‘App installeren’.');
+  const toggleInstall = () => {
+    const ua = navigator.userAgent;
+    const ios = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    setInstallHint(ios
+      ? 'Open het OS in Safari. Tik op Deel en kies ‘Zet op beginscherm’.'
+      : /Safari/.test(ua) && !/Chrome|Chromium|Edg/.test(ua)
+        ? 'Open het OS in Safari. Kies Archief en daarna ‘Voeg toe aan Dock’.'
+        : 'Open het OS. Kies daarna in je browser ‘App installeren’.');
+    setInstallOpen(open => !open);
+  };
   const [wordIndex, setWordIndex] = useState(0);
   const wordIndexRef = useRef(0);
   const [showCycle, setShowCycle] = useState(false);
@@ -155,15 +189,24 @@ const Hero: React.FC<HeroProps> = ({ startAnimation, onOpenBooking }) => {
               </h1>
           </div>
 
-          <div className={`sn-claim-os-hero flex justify-center transition-all duration-700 mt-8 md:mt-12 mb-2 md:mb-4 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.3s' }}>
-            <GenerateButton
-              text="CLAIM JOUW OS"
-              morphText="CLAIM JOUW OS"
-              icon={<ArrowRight aria-hidden="true" />}
-              filled
-              onClick={() => window.location.assign(OS_AANMELDEN)}
-              className="text-base md:text-2xl"
-            />
+          <div className="sn-claim-os-hero mt-8 md:mt-10 mb-2 md:mb-4">
+            {osStand && <div className="sn-os-proof">
+              <span className="sn-os-proof-stars" aria-hidden="true">★★★★★</span>
+              {'demo' in osStand
+                ? <><span className="sn-os-proof-label">Demostand</span><span><b>{osStand.customOs.toLocaleString('nl-NL')}</b> Custom OS</span><span><b>{osStand.demos.toLocaleString('nl-NL')}</b> OS in demo</span></>
+                : <span><b>{osStand.total.toLocaleString('nl-NL')}</b> OS aangemaakt</span>}
+            </div>}
+            <div className="sn-os-actions">
+              <a className="sn-os-claim" href={OS_AANMELDEN}>Claim jouw OS <ArrowRight size={18} aria-hidden="true" /></a>
+              <button className="sn-os-install" type="button" onClick={toggleInstall} aria-expanded={installOpen} aria-controls="sn-install-help">
+                <Download size={17} aria-hidden="true" /> Installeer OS
+              </button>
+            </div>
+            <p className="sn-os-connect">Verbind je <strong>Odoo</strong> en <strong>Meta</strong>. Je bedrijf in één overzicht.</p>
+            <div id="sn-install-help" className="sn-install-help" hidden={!installOpen}>
+              <p>{installHint}</p>
+              <a href="https://app.socialnow.nl/?bron=installatie">Open SocialNow OS <ArrowRight size={15} aria-hidden="true" /></a>
+            </div>
           </div>
 
           <p className={`max-w-2xl mx-auto text-gray-400 text-sm md:text-xl mb-6 md:mb-8 font-medium leading-relaxed px-6 mt-6 md:mt-8 transition-all duration-700 ${animReady ? 'animate-fade-in-up opacity-100' : 'opacity-0 translate-y-6'}`} style={{ animationDelay: '0.5s' }}>
