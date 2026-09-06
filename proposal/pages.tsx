@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { HeroTitle } from "./styles";
 import { miloPoster } from "./motion";
+import CharacterAccent from "./CharacterAccent";
 import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
 import { useLanguage } from "./i18n/context";
@@ -156,7 +157,8 @@ export function Home() {
       <FeaturedWork />
       <LiveWebsites />
       <CustomerReviews />
-      <section className="h-section h-wrap">
+      <section className="h-section h-wrap h-services-with-character">
+        <CharacterAccent kind="coder" />
         <Heading
           label="Ook dit is SocialNow"
           title={
@@ -186,7 +188,8 @@ export function Home() {
       </section>
       <VideoSlider />
       <TrustStories />
-      <section className="h-section h-wrap">
+      <section className="h-section h-wrap h-team-with-character">
+        <CharacterAccent kind="motor" />
         <Founder />
       </section>
       <ImageSliders />

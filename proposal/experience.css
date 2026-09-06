@@ -2100,3 +2100,20 @@ html {
   .sn-site .h-team-trust { gap: 10px; }
   .sn-site .h-team-portraits img { width: 30px; height: 30px; }
 }
+
+/* Original coder and motor scenes return as small, contextual brand moments. */
+.sn-site .h-character-accent { pointer-events: none; background: transparent; }
+.sn-site .h-character-accent .h-ambient-video { width: 100%; height: 100%; }
+.sn-site .h-character-accent .h-ambient-video > img,
+.sn-site .h-character-accent .h-ambient-video > video { object-fit: contain; }
+.sn-site .h-character-accent .h-ambient-video[data-playing="true"] > img { opacity: 0; }
+.sn-site .h-services-with-character { position: relative; }
+.sn-site .h-character-coder { position: absolute; right: 0; top: 32px; width: 220px; aspect-ratio: 1; }
+.sn-site .h-services-with-character > .h-section-heading { padding-right: 240px; min-height: 200px; }
+.sn-site .h-team-with-character { position: relative; padding-top: 32px; }
+.sn-site .h-character-motor { width: min(100%, 300px); height: 130px; margin: 0 0 18px auto; }
+@media (max-width: 700px) {
+  .sn-site .h-character-coder { position: relative; top: auto; width: 140px; margin: 0 0 12px auto; }
+  .sn-site .h-services-with-character > .h-section-heading { padding-right: 0; min-height: 0; }
+  .sn-site .h-character-motor { width: 220px; height: 110px; margin-bottom: 12px; }
+}
