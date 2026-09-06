@@ -1,6 +1,5 @@
 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
-import MiloSources from './MiloSources';
 import { TeamMember } from '../types';
 import { Plus, Shield, PieChart, Activity, Cpu, Terminal } from 'lucide-react';
 import Button from './Button';
@@ -223,27 +222,12 @@ const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
   const partners = PARTNER_NAMES.map(n => team.find(m => m.name === n)).filter(Boolean) as TeamItem[];
   const otherMembers = team.filter(m => m.name !== "Marinus Bergsma" && !PARTNER_NAMES.includes(m.name || '') && m.type === 'member');
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const motorVideoRef = useRef<HTMLVideoElement>(null);
 
   return (
     <section id="team" className="py-12 md:py-48 bg-transparent text-white relative overflow-x-clip">
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12 md:mb-24 scroll-reveal relative">
-          {/* Milo op zijn motor rijdt bovenop de kop: strook boven de h2, motor bottom-aligned
-              zodat de wielen op de kapitalen staan. NB: de ride-keyframes zetten `transform`,
-              dus geen translate-utilities op het bewegende element zelf (die worden overschreven) */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[clamp(3.5rem,12vw,12rem)] -translate-y-[78%] overflow-hidden z-20">
-            <div
-              className="sn-milo absolute left-0 bottom-0 w-[clamp(5.5rem,20vw,20rem)] aspect-video will-change-transform"
-              style={{ animation: 'milo-ride-across 5s linear infinite' }}
-              onAnimationIteration={() => { const v = motorVideoRef.current; if (v) v.currentTime = 0; }}
-            >
-              <video ref={motorVideoRef} autoPlay muted playsInline loop preload="auto" aria-hidden="true" className="w-full h-full object-contain">
-                <MiloSources name="milo-motor-loop" v="2" />
-              </video>
-            </div>
-          </div>
           {/* Vloeiende clamp-maat: kop blijft altijd op één regel binnen het scherm, wordt nooit afgekapt */}
           <h2 className="text-[clamp(1.5rem,7vw,6rem)] font-black uppercase mb-6 flex justify-center items-center tracking-tighter leading-none">
             <span className="inline-flex items-center whitespace-nowrap">

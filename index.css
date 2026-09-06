@@ -223,13 +223,6 @@ body {
 }
 
 /* ═══ VHS-ruis over de hele site (subtiele analoge statische korrel) ═══ */
-/* Milo's motor-vlakje rijdt van links naar rechts over het scherm: het VLAK
-   beweegt (translateX), niet alleen de motor in het beeld → echte rij-illusie */
-@keyframes milo-ride-across {
-  /* volledig links buiten beeld starten → volledig rechts buiten beeld eindigen (1 shot) */
-  from { transform: translateX(-100%); }
-  to   { transform: translateX(100vw); }
-}
 
 /* Woord-wissel in de zelf-verbeterende kop (ShortContent): snelle pop-in */
 @keyframes sn-word-pop {
