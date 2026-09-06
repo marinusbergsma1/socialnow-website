@@ -294,40 +294,18 @@ export function Questions() {
   );
 }
 export function Closing() {
-  return (
-    <section className="h-closing h-wrap">
-      <div className="h-closing-milos">
-        {agents.map((agent) => (
-          <img
-            key={agent.id}
-            src={miloPoster(agent.id)}
-            alt={agent.name}
-            width="84"
-            height="84"
-            loading="lazy"
-          />
-        ))}
-      </div>
-      <p className="h-eyebrow">Jouw eerste stap / Zelf ervaren</p>
-      <h2>
-        Ervaar het gemak.
-        <br />
-        <span>Probeer het zelf.</span>
-      </h2>
-      <p>
-        Ontdek wat één systeem voor jouw bedrijf kan betekenen.
-        <br />
-        Daarna bepalen we samen hoe we verder bouwen.
-      </p>
-      <TeamTrust />
-      <div className="h-closing-try">
-        <OsEntry />
-      </div>
-      <TextLink to="/contact?onderwerp=Custom%20OS">
-        Het OS geprobeerd? Bespreek jouw Custom OS
-      </TextLink>
-    </section>
-  );
+  return <section className="h-final-close" aria-labelledby="final-close-title">
+    <img className="h-final-logo" src="/images/SocialNow-OS-Komen-Consultancy.webp" alt="SocialNow OS in samenwerking met Komen Consultancy" width="640" height="180" loading="lazy" />
+    <div className="h-final-characters">
+      {agents.map(agent=><MiloMotion key={agent.id} role={agent.id} name={agent.name} />)}
+    </div>
+    <h2 id="final-close-title">Ervaar het gemak.<br /><span>Probeer het zelf.</span></h2>
+    <p>Je website, CRM, content en advertenties. In één chat.</p>
+    <OsEntry showProof={false} />
+    <TeamTrust />
+    <TextLink to="/contact?onderwerp=Custom%20OS">Samen verder met jouw Custom OS</TextLink>
+    <div className="h-final-contact"><a href="mailto:info@socialnow.nl">info@socialnow.nl</a><a href="https://wa.me/31637404577" target="_blank" rel="noopener noreferrer">WhatsApp <MessageCircle size={14} aria-hidden="true" /></a></div>
+  </section>;
 }
 export function MiloGuide() {
   const [open, setOpen] = useState(false);

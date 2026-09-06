@@ -52,26 +52,7 @@ export function installationHint(
 export function OsProof({ stand }: { stand: OsStand | null }) {
   return (
     <div className="os-proof">
-      {stand ? (
-        <>
-          <p className="os-count">
-            {stand.mode === "demo" ? (
-              <>
-                <strong>Demostand</strong>
-                <span>{stand.customOs.toLocaleString("nl-NL")} Custom OS</span>
-                <span>{stand.demos.toLocaleString("nl-NL")} OS in demo</span>
-              </>
-            ) : (
-              <span>
-                <strong>{stand.total.toLocaleString("nl-NL")}</strong>{" "}
-                OS-werkruimten aangemaakt
-              </span>
-            )}
-          </p>
-        </>
-      ) : (
-        <p className="os-demo-note">OS-teller tijdelijk niet beschikbaar.</p>
-      )}
+      {stand?.mode === "live" && <p className="os-count"><span><strong>{stand.total.toLocaleString("nl-NL")}</strong>{" "}OS-werkruimten aangemaakt</span></p>}
       <a
         className="os-reviews"
         href={REVIEWS_URL}
@@ -85,14 +66,14 @@ export function OsProof({ stand }: { stand: OsStand | null }) {
   );
 }
 
-export default function OsEntry() {
+export default function OsEntry({showProof = true}:{showProof?:boolean}) {
   const [stand, setStand] = useState<OsStand | null>(null);
-  const [loaded, setLoaded] = useState(false);
   const [installOpen, setInstallOpen] = useState(false);
   const [hint, setHint] = useState("");
   const helpId = useId();
 
   useEffect(() => {
+    if (!showProof) return;
     const controller = new AbortController();
     let busy = false;
     const load = async () => {
@@ -109,7 +90,6 @@ export default function OsEntry() {
         if (!controller.signal.aborted) setStand(null);
       } finally {
         busy = false;
-        if (!controller.signal.aborted) setLoaded(true);
       }
     };
     void load();
@@ -120,7 +100,7 @@ export default function OsEntry() {
       window.clearInterval(timer);
       document.removeEventListener("visibilitychange", load);
     };
-  }, []);
+  }, [showProof]);
 
   const toggle = () => {
     setHint(
@@ -156,13 +136,7 @@ export default function OsEntry() {
         </button>
       </div>
       <p className="os-product-note">In je browser of als app. Hetzelfde OS.</p>
-      {loaded ? (
-        <OsProof stand={stand} />
-      ) : (
-        <div className="os-proof">
-          <p className="os-demo-note">OS-teller laden…</p>
-        </div>
-      )}
+      {showProof && <OsProof stand={stand} />}
       <div className="install-help" id={helpId} hidden={!installOpen}>
         <p>{hint}</p>
         <a href={INSTALL_URL}>

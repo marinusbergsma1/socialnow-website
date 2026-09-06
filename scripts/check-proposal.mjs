@@ -181,6 +181,10 @@ try {
       `review visible: ${review.name}`,
     );
   }
+  for (const [route,html] of rendered) {
+    assert.equal((html.match(/class="h-final-close"/g)||[]).length,1, `one unified closing: ${route}`);
+    assert(!html.includes('class="h-footer-plans"'), `no duplicate offer cards: ${route}`);
+  }
   assert(!rendered.get("/").includes(">Samen met<"), "Samen met label removed");
   assert(
     rendered.get("/").includes("SocialNow-OS-Komen-Consultancy.webp"),
@@ -270,7 +274,7 @@ try {
     React.createElement(LanguageProvider, {language:"nl"}, React.createElement(OsProof, { stand: demo })),
   );
   assert(
-    demoMarkup.includes("Demostand") && !demoMarkup.includes("geen klantgroei"),
+    !demoMarkup.includes("Demostand") && !demoMarkup.includes("26") && !demoMarkup.includes("240"),
   );
   const liveMarkup = renderToStaticMarkup(
     React.createElement(LanguageProvider, {language:"nl"}, React.createElement(OsProof, { stand: live })),
@@ -283,7 +287,7 @@ try {
     React.createElement(LanguageProvider, {language:"nl"}, React.createElement(OsProof, { stand: null })),
   );
   assert(
-    absentMarkup.includes("tijdelijk niet beschikbaar") &&
+    !absentMarkup.includes("tijdelijk niet beschikbaar") &&
       !absentMarkup.includes("OS-werkruimten aangemaakt"),
   );
   assert(

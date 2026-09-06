@@ -15,7 +15,8 @@ import CharacterAccent from "./CharacterAccent";
 import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
 import { useLanguage } from "./i18n/context";
-import CustomerReviews, { HeroReview } from "./CustomerReviews";
+import TeamTrust from "./TeamTrust";
+import CustomerReviews from "./CustomerReviews";
 import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
 import TrustStories from "./TrustStories";
@@ -29,7 +30,6 @@ import {
   Action,
   AgentCards,
   ClientLogos,
-  Closing,
   ConversionBridge,
   HeroMilos,
   Heading,
@@ -89,7 +89,7 @@ export function Home() {
             Je website, CRM, content en advertenties. In één chat.
           </p>
           <OsEntry />
-          <HeroReview />
+          <TeamTrust />
           <HeroMilos />
           <ol
             className="h-poc-path"
@@ -248,7 +248,6 @@ export function Home() {
         />
         <Questions />
       </section>
-      <Closing />
     </>
   );
 }
@@ -386,7 +385,6 @@ export function OsPage() {
         <Heading label="Jouw vragen" title="Wat wil je weten?" />
         <Questions />
       </section>
-      <Closing />
     </>
   );
 }
@@ -436,7 +434,6 @@ export function ProjectsPage() {
           ))}
         </div>
       </section>
-      <Closing />
     </>
   );
 }
@@ -504,7 +501,6 @@ export function ServicesPage() {
         />
         <Action to="/prijzen">Bekijk de prijzen</Action>
       </section>
-      <Closing />
     </>
   );
 }
@@ -654,7 +650,6 @@ export function TeamPage() {
           data.
         </p>
       </section>
-      <Closing />
     </>
   );
 }
@@ -703,7 +698,6 @@ export function BlogPage() {
           </article>
         ))}
       </section>
-      <Closing />
     </>
   );
 }
@@ -779,7 +773,6 @@ export function BlogPostPage() {
           )}
         </div>
       </article>
-      <Closing />
     </>
   );
 }

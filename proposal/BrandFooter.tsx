@@ -7,89 +7,16 @@ import {
   MessageCircle,
   RotateCcw,
 } from "lucide-react";
-import { prices, services } from "./content";
+import { services } from "./content";
 import { MotionControl } from "./motion";
-import TeamTrust from "./TeamTrust";
-import { Action } from "./ui";
-import { CLAIM_URL } from "./os-entry";
+import { Closing } from "./ui";
 const TERMS =
   "https://storage.googleapis.com/video-slider/Algemene%20Voorwaarden%20SocialNow.pdf";
 export default function BrandFooter() {
   return (
     <footer className="h-brand-footer">
       <div className="h-wrap">
-        <div className="h-footer-plans">
-          <p className="h-eyebrow">Jouw volgende stap</p>
-          <div>
-            {prices.map((plan) => {
-              const body = (
-                <>
-                  <h3>{plan.name}</h3>
-                  <span>{plan.period}</span>
-                  <p>{plan.description}</p>
-                  <b>
-                    {plan.action}
-                    <ArrowUpRight size={14} />
-                  </b>
-                </>
-              );
-              return plan.href ? (
-                <a key={plan.name} href={plan.href}>
-                  {body}
-                </a>
-              ) : (
-                <Link key={plan.name} to={plan.to!}>
-                  {body}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-        <div className="h-footer-partner">
-          <img
-            src="/images/SocialNow-OS-Komen-Consultancy.webp"
-            alt="SocialNow OS in samenwerking met Komen Consultancy"
-            width="640"
-            height="180"
-            loading="lazy"
-          />
-        </div>
-        <div className="h-footer-statement">
-          <div>
-            <h2>
-              Eén OS.
-              <br />
-              <span>Ons team.</span>
-            </h2>
-            <p>
-              Creatie, technologie en mensen. Verbonden rond jouw bedrijf, met
-              zelf proberen als eerste stap en een Custom OS als volgende stap.
-            </p>
-            <TeamTrust />
-          </div>
-          <div>
-            <a href="mailto:info@socialnow.nl">
-              info@socialnow.nl
-              <ArrowUpRight size={17} />
-            </a>
-            <a href="tel:+31637404577">
-              +31 6 37 40 45 77
-              <ArrowUpRight size={17} />
-            </a>
-            <a
-              href="https://wa.me/31637404577"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MessageCircle size={17} />
-              WhatsApp
-            </a>
-            <Action href={CLAIM_URL}>Probeer het OS</Action>
-            <Link to="/contact?onderwerp=Custom%20OS">
-              Daarna: jouw Custom OS <ArrowUpRight size={17} />
-            </Link>
-          </div>
-        </div>
+        <Closing />
         <div className="h-footer-links">
           <div>
             <p className="h-eyebrow">Expertise</p>
@@ -153,69 +80,11 @@ export default function BrandFooter() {
             </div>
           </div>
         </div>
-        <div className="h-footer-platforms">
-          <p className="h-eyebrow">Technologie & platforms</p>
-          <div>
-            <img
-              src="/google-logo.svg"
-              alt="Google"
-              width="110"
-              height="36"
-              loading="lazy"
-            />
-            <img
-              src="/meta-logo.svg"
-              alt="Meta"
-              width="110"
-              height="36"
-              loading="lazy"
-            />
-            <span>
-              <img
-                src="/google-logo.svg"
-                alt="Google"
-                width="70"
-                height="28"
-                loading="lazy"
-              />
-              Developers
-            </span>
-          </div>
-        </div>
         <div className="h-footer-company">
-          <p>© {new Date().getFullYear()} SocialNow</p>
-          <p>
-            SocialNow is een software- en marketingbureau gevestigd aan de
-            Amstelstraat 43G, 1017 DA Amsterdam, Nederland, en staat
-            ingeschreven bij de Kamer van Koophandel onder nummer 90877179. Voor
-            vragen over onze diensten kun je contact opnemen via{" "}
-            <a href="mailto:info@socialnow.nl">info@socialnow.nl</a>.
-          </p>
-          <p>
-            De inrichting, koppelingen en begeleiding van jouw Custom OS leggen
-            we vast in een persoonlijk voorstel. Informatie over de verwerking
-            van persoonsgegevens vind je in onze{" "}
-            <Link to="/privacy">privacyverklaring</Link>.
-          </p>
-          <p>
-            Genoemde prijzen zijn exclusief btw. Op onze offertes en
-            overeenkomsten zijn onze{" "}
-            <a href={TERMS} target="_blank" rel="noopener noreferrer">
-              algemene voorwaarden
-            </a>{" "}
-            van toepassing.
-          </p>
+          <p>SocialNow · Software, creatie en marketing. Amsterdam · KVK 90877179.</p>
+          <p>Genoemde prijzen zijn exclusief btw. Onze <a href={TERMS} target="_blank" rel="noopener noreferrer">algemene voorwaarden</a> en <Link to="/privacy">privacyverklaring</Link> zijn hier te vinden.</p>
         </div>
         <div className="h-footer-end">
-          <Link to="/" className="h-brand">
-            <img
-              src="/images/SocialNow-Logo-2026.webp"
-              alt="SocialNow"
-              width="200"
-              height="38"
-              loading="lazy"
-            />
-          </Link>
           <span>
             © {new Date().getFullYear()} SocialNow. All rights reserved.
           </span>
