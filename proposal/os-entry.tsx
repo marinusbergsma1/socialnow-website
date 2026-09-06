@@ -68,9 +68,6 @@ export function OsProof({ stand }: { stand: OsStand | null }) {
               </span>
             )}
           </p>
-          {stand.mode === "demo" && (
-            <p className="os-demo-note">Democijfers, geen klantgroei.</p>
-          )}
         </>
       ) : (
         <p className="os-demo-note">OS-teller tijdelijk niet beschikbaar.</p>

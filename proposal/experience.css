@@ -1961,3 +1961,23 @@ html {
   .sn-site .h-brand img { width: clamp(96px, 28vw, 125px); }
   .sn-site .h-header-claim { white-space: nowrap; }
 }
+
+.sn-site .h-live-direct { min-height: 320px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 32px; text-align: center; background: #050505; }
+.sn-site .h-live-direct > strong { font-size: clamp(28px, 4vw, 54px); }
+.sn-site .h-live-direct > span { color: #999; font-size: 12px; }
+.sn-site .h-site-thumbnails button { aspect-ratio: auto; min-height: 52px; padding: 16px; }
+.sn-site .h-site-thumbnails button > span { position: static; padding: 0; background: none; }
+
+/* Films support the OS introduction without taking over the page. */
+.sn-site .h-showcase-films { padding-top: 36px; padding-bottom: 0; }
+.sn-site .h-film-heading { margin-bottom: 16px; }
+.sn-site .h-film-heading h2 { font-size: clamp(24px, 2.3vw, 32px); }
+.sn-site .h-film-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.sn-site .h-film-grid > button { border-radius: 14px; }
+.sn-site .h-film-caption { padding: 30px 16px 14px; }
+.sn-site .h-film-caption strong { font-size: 15px; }
+.sn-site .h-film-caption > span { display: none; }
+@media (max-width: 700px) {
+  .sn-site .h-film-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+  .sn-site .h-film-grid > button { flex: 0 0 82%; scroll-snap-align: start; }
+}

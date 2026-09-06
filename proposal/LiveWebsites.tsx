@@ -11,7 +11,7 @@ import { Heading, TextLink } from "./ui";
 import { useInView } from "./motion";
 
 // Deze directe websites staan embedding toe. Sites met frame-beperkingen
-// behouden hun eigen ontwerpbeeld en een gewone link naar de website.
+// openen via een directe link, zonder vervangende afbeeldingen.
 const EMBED = new Set([
   "kwh-garant-website",
   "ilgordo-website",
@@ -21,7 +21,6 @@ const EMBED = new Set([
 export default function LiveWebsites() {
   const [index, setIndex] = useState(0);
   const [mobile, setMobile] = useState(false);
-  const [interactive, setInteractive] = useState(true);
   const { ref, visible } = useInView<HTMLElement>();
   const [near, setNear] = useState(false);
   useEffect(() => {
@@ -29,10 +28,9 @@ export default function LiveWebsites() {
   }, [visible]);
   const selected = webShowcaseProjects[index];
   const project = selected.slug === "vastiq-website" ? { ...selected, title: "VASTIQ.AI", url: "https://vastiq.ai/" } : selected;
-  const live = interactive && EMBED.has(project.slug);
+  const live = EMBED.has(project.slug);
   const choose = (next: number) => {
     setIndex((next + webShowcaseProjects.length) % webShowcaseProjects.length);
-    setInteractive(true);
   };
   return (
     <section
@@ -58,7 +56,7 @@ export default function LiveWebsites() {
         <div className="h-live-title" aria-live="polite">
           <strong>{project.title}</strong>
           <span>
-            {live ? "Live website" : "Websiteontwerp"} · {index + 1} /{" "}
+            Live website · {index + 1} /{" "}
             {webShowcaseProjects.length}
           </span>
         </div>
@@ -80,7 +78,7 @@ export default function LiveWebsites() {
             <Smartphone size={16} />
           </button>
           <a href={project.url} target="_blank" rel="noopener noreferrer">
-            Open website
+            Open live website
             <ExternalLink size={13} />
           </a>
         </div>
@@ -104,13 +102,13 @@ export default function LiveWebsites() {
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
             />
           ) : (
-            <img
-              src={project.fullPageScreenshot || project.image}
-              alt={`Websiteontwerp voor ${project.title}`}
-              width="1440"
-              height="900"
-              loading="lazy"
-            />
+            <div className="h-live-direct">
+              <strong>{project.title}</strong>
+              <a className="sn-btn3d h-button" href={project.url} target="_blank" rel="noopener noreferrer">
+                Open live website <ExternalLink size={18} />
+              </a>
+              <span>{live ? "De live website wordt geladen zodra dit onderdeel in beeld komt." : "Deze website opent in een nieuw tabblad."}</span>
+            </div>
           )}
         </div>
       </div>
@@ -131,15 +129,6 @@ export default function LiveWebsites() {
             <ChevronRight size={19} />
           </button>
         </div>
-        {EMBED.has(project.slug) && (
-          <button
-            className="h-text-link"
-            type="button"
-            onClick={() => setInteractive((value) => !value)}
-          >
-            {live ? "Toon het ontwerpbeeld" : "Bekijk de live website"}
-          </button>
-        )}
         <TextLink to={`/project/${project.slug}`}>Bekijk de case</TextLink>
       </div>
       <div
@@ -154,14 +143,7 @@ export default function LiveWebsites() {
             aria-pressed={index === itemIndex}
             onClick={() => choose(itemIndex)}
           >
-            <img
-              src={item.image}
-              alt=""
-              width="240"
-              height="150"
-              loading="lazy"
-            />
-            <span>{item.title}</span>
+            <span>{item.slug === "vastiq-website" ? "VASTIQ.AI" : item.title}</span>
           </button>
         ))}
       </div>

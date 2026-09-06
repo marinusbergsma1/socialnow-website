@@ -42,6 +42,8 @@ try {
     ...allPosts.map((post) => `/blog/${post.slug}`),
   ];
   const {LanguageProvider, missingTranslations}=await server.ssrLoadModule("/proposal/i18n/context.ts");
+  const liveWebsiteSource=readFileSync("proposal/LiveWebsites.tsx","utf8");
+  assert(!liveWebsiteSource.includes("<img") && !liveWebsiteSource.includes("fullPageScreenshot"), "website showcase contains no screenshots or image fallbacks");
   const rendered = new Map();
   const images = new Set();
   const referencedAnchors = [];
@@ -254,7 +256,7 @@ try {
     React.createElement(LanguageProvider, {language:"nl"}, React.createElement(OsProof, { stand: demo })),
   );
   assert(
-    demoMarkup.includes("Demostand") && demoMarkup.includes("geen klantgroei"),
+    demoMarkup.includes("Demostand") && !demoMarkup.includes("geen klantgroei"),
   );
   const liveMarkup = renderToStaticMarkup(
     React.createElement(LanguageProvider, {language:"nl"}, React.createElement(OsProof, { stand: live })),

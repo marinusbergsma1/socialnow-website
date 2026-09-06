@@ -821,7 +821,6 @@
   "Open het OS in Safari. Tik op Deel en kies ‘Zet op beginscherm’.": "Open the OS in Safari. Tap Share and choose “Add to Home Screen”.",
   "Open het OS in Safari. Kies Archief en ‘Voeg toe aan Dock’, als je Safari-versie dat ondersteunt.": "Open the OS in Safari. Choose File and “Add to Dock” if your Safari version supports it.",
   "Open het OS. Kies ‘App installeren’ in het browsermenu als die optie beschikbaar is. Je kunt het OS ook gewoon in je browser gebruiken.": "Open the OS. Choose “Install app” in your browser menu if available. You can also use the OS directly in your browser.",
-  "Democijfers, geen klantgroei.": "Demo figures, not customer growth.",
   "Demostand": "Demo figures",
   "OS in demo": "OS in demo",
   "OS-werkruimten aangemaakt": "OS workspaces created",
@@ -834,5 +833,9 @@
   "Geen e-mailapp ingesteld? Mail naar info@socialnow.nl of stuur een WhatsApp.": "No email app set up? Email info@socialnow.nl or send us a WhatsApp message.",
   "Naam": "Name",
   "Bedrijf": "Company",
-  "Kennismaken": "Let’s meet"
+  "Kennismaken": "Let’s meet",
+  "Open live website": "Open live website",
+  "De live website wordt geladen zodra dit onderdeel in beeld komt.": "The live website loads when this section comes into view.",
+  "Deze website opent in een nieuw tabblad.": "This website opens in a new tab.",
+  "Live website ·": "Live website ·"
 }

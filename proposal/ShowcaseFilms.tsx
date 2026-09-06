@@ -9,8 +9,8 @@ export const showcaseFilms = [
 export default function ShowcaseFilms(){
  const [selected,setSelected]=useState<MediaItem|null>(null);
  return <section className="h-wrap h-showcase-films" aria-labelledby="showcase-films-title">
-  <div className="h-film-heading"><p className="h-eyebrow">The system. The craft.</p><h2 id="showcase-films-title">See it in motion.</h2><span>Geluid bij hover · Klik voor volledig beeld</span></div>
-  <div className="h-film-grid">{showcaseFilms.map((film,index)=><button key={film.src} className={index===0 ? "h-film-lead" : ""} type="button" onClick={()=>setSelected({...film,kind:"video"})} style={{"--film-color":film.color} as React.CSSProperties} aria-label={`Bekijk ${film.title}`}>
+  <div className="h-film-heading"><h2 id="showcase-films-title">See it in motion.</h2><span>Geluid bij hover · Klik voor volledig beeld</span></div>
+  <div className="h-film-grid">{showcaseFilms.map((film)=><button key={film.src} type="button" onClick={()=>setSelected({...film,kind:"video"})} style={{"--film-color":film.color} as React.CSSProperties} aria-label={`Bekijk ${film.title}`}>
    <AmbientVideo src={film.src} poster={film.poster} label={film.title} hoverSound suspended={!!selected} />
    <span className="h-film-caption"><strong>{film.title}</strong><span>{film.caption}</span></span>
   </button>)}</div>

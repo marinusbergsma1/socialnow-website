@@ -191,3 +191,7 @@ Browserbeleid blokkeert nog de visuele browsercontrole. Er is geen browser, alte
 - De drie vertrouwenskaarten zijn compact gemaakt; partnerlogo blijft, alleen “Samen met” is verwijderd. Vier echte reviews behouden.
 - Bestaand blogartikel bijgewerkt zodat oude gratis-/snelheids-/autonomieclaims de actuele try-first/Custom OS-uitleg niet tegenspreken.
 - Validatie: TypeScript, productiebuild, Node-render van alle routes in EN/NL, interne doelen, media, taalmetadata en sitemap. Geen visuele browsercheck: beheerbeleid blokkeert toegang; dit is niet omzeild. Hoveraudio/globe en responsive uiterlijk vragen daardoor nog visuele controle in een toegestane browser.
+
+### Aanvullende vereenvoudiging
+
+De extra zin bij de demoteller is verwijderd in beide talen; teller en demo-aanduiding blijven behouden. Het websitegedeelte bevat geen screenshots of afbeeldingsfallback meer, ook niet in de keuzerij. Toegestane websites laden live; websites die embedding blokkeren openen via een directe link. VASTIQ.AI blijft eerste. De drie films staan nu gelijkwaardig in één compacte rij; mobiel horizontaal veegbaar.
