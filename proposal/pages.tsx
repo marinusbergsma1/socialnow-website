@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { HeroTitle } from "./styles";
 import { miloPoster } from "./motion";
+import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
 import { useLanguage } from "./i18n/context";
 import CustomerReviews from "./CustomerReviews";
@@ -105,11 +106,6 @@ export function Home() {
           <Link to="/#het-os" className="h-hero-down">
             Ontdek SocialNow OS <ArrowDown size={16} />
           </Link>
-        </div>
-        <div className="h-hero-signature" aria-hidden="true">
-          CREATIVE MINDS.
-          <br />
-          CONNECTED BUSINESS.
         </div>
       </section>
       <div className="h-fair h-wrap">
@@ -445,84 +441,9 @@ export function ProjectPage() {
   const project = projects.find((item) => item.slug === slug);
   if (!project) return <NotFound />;
   const next = projects[(projects.indexOf(project) + 1) % projects.length];
-  return (
-    <>
-      <header className="h-page-heading h-wrap">
-        <TextLink to="/projecten">Alle projecten</TextLink>
-        <p className="h-eyebrow">
-          {project.client} / {project.year}
-        </p>
-        <h1>{project.title}</h1>
-        <p className="h-intro">{project.description}</p>
-        <div className="h-tags">
-          {project.services?.map((service) => (
-            <span key={service}>{service}</span>
-          ))}
-        </div>
-        {project.url && (
-          <a
-            className="h-text-link"
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Bezoek de website
-            <ArrowUpRight size={17} />
-            <span className="sr-only">(opent een nieuw tabblad)</span>
-          </a>
-        )}
-      </header>
-      <section className="h-wrap h-case-detail" aria-label="Projectbeelden">
-        <img
-          className="h-case-cover"
-          src={project.image}
-          alt={`${project.title} — overzicht`}
-          width="1440"
-          height="900"
-        />
-        {project.fullPageScreenshot && (
-          <details className="h-case-full">
-            <summary>
-              Bekijk het volledige websiteontwerp
-              <ArrowDown size={17} />
-            </summary>
-            <img
-              src={project.fullPageScreenshot}
-              alt={`Volledig websiteontwerp voor ${project.title}`}
-              loading="lazy"
-            />
-          </details>
-        )}
-        <div className="h-case-gallery">
-          {project.gallery?.map((src, index) =>
-            /\.mp4(?:\?|$)/i.test(src) ? (
-              <video
-                key={src}
-                controls
-                playsInline
-                preload="none"
-                src={src}
-                aria-label={`${project.title} — video ${index + 1}`}
-              />
-            ) : (
-              <img
-                key={src}
-                src={src}
-                alt={`${project.title} — uitwerking ${index + 1}`}
-                loading="lazy"
-              />
-            ),
-          )}
-        </div>
-        <div className="h-case-next">
-          <p>Volgend project</p>
-          <TextLink to={`/project/${next.slug}`}>{next.title}</TextLink>
-        </div>
-      </section>
-      <Closing />
-    </>
-  );
+  return <ProjectCase key={project.slug} project={project} next={next} />;
 }
+
 export function ServicesPage() {
   return (
     <>

@@ -45,9 +45,14 @@ try {
   const {LanguageProvider, missingTranslations}=await server.ssrLoadModule("/proposal/i18n/context.ts");
   const liveWebsiteSource=readFileSync("proposal/LiveWebsites.tsx","utf8");
   assert(!liveWebsiteSource.includes("<img") && !liveWebsiteSource.includes("fullPageScreenshot"), "website showcase contains no screenshots or image fallbacks");
-  const {MiloMotion}=await server.ssrLoadModule("/proposal/motion.tsx");
+  const {MiloMotion,miloVideoSources}=await server.ssrLoadModule("/proposal/motion.tsx");
   const adsMarkup=renderToStaticMarkup(React.createElement(MiloMotion,{role:"ads",name:"Milo Ads"}));
-  assert(adsMarkup.includes("ads-magenta.webp") && !adsMarkup.includes("<video"), "approved Ads portrait cannot be replaced by old green video");
+  assert(adsMarkup.includes("ads-magenta.webp") && !adsMarkup.includes("<video"), "approved magenta Ads poster renders before lazy video");
+  for (const safari of [true,false]) {
+    const [{src}]=miloVideoSources("ads",safari);
+    assert(src.includes("ads-magenta-alpha"), "Ads animation uses the approved magenta character");
+    assert(existsSync(`public${src}`), "Ads animation exists for both browser formats");
+  }
   assert.equal(agents.find(a=>a.id==="ads").color,"#EC1670", "Ads uses magenta accent");
   const rendered = new Map();
   const images = new Set();
@@ -94,6 +99,10 @@ try {
       if (url.hash) referencedAnchors.push([target, url.hash.slice(1)]);
     }
   }
+  const ravegCase = rendered.get("/project/raveg-branding");
+  assert.equal((ravegCase.match(/class="h-project-media is-video"/g)||[]).length, 3, "RAVEG case exposes all three films");
+  assert(ravegCase.indexOf("RAVEG-Hyperpower.webp") < ravegCase.indexOf("h-project-media-grid"), "RAVEG cover precedes films");
+  assert(!rendered.get("/").includes("h-hero-signature"), "decorative signature cannot overlap Advertising label");
   for (const [route, id] of referencedAnchors)
     assert(
       rendered.get(route).includes(`id="${id}"`),

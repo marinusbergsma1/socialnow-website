@@ -211,3 +211,13 @@ Rolaccenten Website #25D366, CRM #1965C2, Studio #F5940D, Advertenties #EC1670. 
 ### Kortere opening en snellere instap
 
 Hero ingekort naar “Your website, CRM, content and ads. In one chat.” / “Je website, CRM, content en advertenties. In één chat.” Extra tussenalinea en derde kopregel verwijderd, bovenruimte en kopgrootte verminderd. De knoppen staan direct onder de kernzin. Op mobiel komen de vier Milo’s na de instapknoppen, op desktop blijven ze rechts prominent.
+
+
+### 6 september — cases, magenta Ads en mobiele leesbaarheid
+
+- RAVEG heeft de oorspronkelijke Hyperpower-header boven drie films terug. Uitgelichte cases wisselen op desktop van tekst/media-zijde.
+- Projectroutes krijgen een compactere detailpagina met context, vergrootbare beelden/video’s en contactactie. Websitecases verwijzen naar de echte website. Bestaande projectprestaties worden niet als nieuwe resultaatclaims toegevoegd.
+- Overlappende decoratieve tekst achter Advertising verwijderd. Op mobiel staan vier Milo’s in een leesbaar 2×2-raster; detailmedia staan onder elkaar en passen binnen de schermbreedte.
+- Ads: goedgekeurd magenta bronpersonage geanimeerd met Google `veo-3.1-lite-generate-preview`, één generatie van 4 seconden op 720p. Vervolgens gecentreerd naar 512×512 en vooruit/achteruit verwerkt tot rustige lus van 8 seconden, zonder audio. Transparante VP9 WebM en HEVC MOV; oorspronkelijke goedgekeurde poster blijft fallback. Native AVFoundation bevestigt transparante pixels en hoek-alpha 0 in MOV. WebM met expliciete libvpx-decoder gecontroleerd. Geen API-sleutel opgenomen.
+- Technische controle: TypeScript, build, Node-render van 24 routes in beide talen, bestaande media en linkdoelen. Geen visuele/interactive browserclaim: browsertoegang blijft beleidsmatig geblokkeerd.
+- Gedeelde ontwerpafspraken: `docs/SIGNATURE-UI-UX-RICHTLIJNEN.md`, op verzoek doorgegeven aan Regie en OS-stappen.

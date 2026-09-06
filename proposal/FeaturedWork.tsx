@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Expand } from "lucide-react";
 import { projects } from "./content";
-import { AmbientVideo, MotionControl } from "./motion";
+import { AmbientVideo } from "./motion";
 import { MediaDialog, type MediaItem } from "./MediaSliders";
 import { Action, Heading } from "./ui";
 
@@ -100,6 +100,11 @@ export default function FeaturedWork() {
                 </Action>
               </div>
               <div className="h-featured-media">
+                {motion && <button type="button" className="h-featured-tile h-featured-cover"
+                  onClick={() => setSelected({src:project.image,title:"RAVEG · Hyperpower packaging",kind:"image",slug:project.slug})}
+                  aria-label="RAVEG · Hyperpower packaging">
+                  <img src={project.image} alt="RAVEG · Hyperpower packaging" width="1920" height="1091" loading="lazy" />
+                </button>}
                 {sources.map((src, tile) => {
                   const item: MediaItem = {
                     src,

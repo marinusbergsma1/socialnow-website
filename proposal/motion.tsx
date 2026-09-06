@@ -167,21 +167,18 @@ export function AmbientVideo({
 export function miloPoster(role: string) {
   return `/proposal/milo/${role === "ads" ? "ads-magenta" : role}.webp`;
 }
+export function miloVideoSources(role: string, safari: boolean) {
+  const base = `/proposal/milo/${role === "ads" ? "ads-magenta" : role}-alpha`;
+  return safari ? [{src: `${base}.mov`, type: 'video/mp4; codecs="hvc1"'}] : [{src: `${base}.webm`, type: "video/webm"}];
+}
 export function MiloMotion({ role, name }: { role: string; name: string }) {
   const [safari, setSafari] = useState<boolean | null>(null);
   useEffect(() => { setSafari(/^((?!chrome|crios|fxios|edg|android).)*safari/i.test(navigator.userAgent)); }, []);
-  if (role === "ads") return (
-    <span className="h-milo-animated h-milo-approved-still">
-      <img src={miloPoster(role)} alt={name} width="512" height="512" loading="lazy" />
-    </span>
-  );
   return (
     <AmbientVideo
       poster={miloPoster(role)}
       key={safari === null ? "poster" : String(safari)}
-      sources={safari === null ? [] : safari
-        ? [{ src: `/proposal/milo/${role}-alpha.mov`, type: 'video/mp4; codecs="hvc1"' }]
-        : [{ src: `/proposal/milo/${role}-alpha.webm`, type: "video/webm" }]}
+      sources={safari === null ? [] : miloVideoSources(role, safari)}
 
       label={name}
       className="h-milo-animated"
