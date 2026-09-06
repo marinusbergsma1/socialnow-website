@@ -56,3 +56,32 @@ De teller gebruikt uitsluitend de openbare API `https://app.socialnow.nl/api/os-
 De bestaande browserbeleidsblokkade is niet omzeild. Er is geen visuele browsercontrole van desktop, mobiel, menu, tabs of installatiehulp uitgevoerd. Bron-/build- en HTTP-/assetcontroles worden afzonderlijk van visuele controle gerapporteerd.
 
 Marinus beoordeelt eerst deze tijdelijke preview. De volledige homepage wordt pas daarna naar deze productstructuur omgezet. Het bestaande bronrepo en de OS-worktrees zijn niet bewerkt. Afstemming loopt via REGIE · POC Odoo-beurs en STAP 1/6 · Onboarding.
+
+## Gepubliceerde preview
+
+**Bereikbaar en technisch gecontroleerd:** https://socialnow.nl/voorstel/
+
+- Websitecommit: `42b559832bfa407cbc2332f41e423aabc2d0c42a`.
+- GitHub Pages-run: https://github.com/marinusbergsma1/socialnow-website/actions/runs/34027249767 — geslaagd.
+- Preview HTTP 200; de vijf JS-/CSS-bundles, negen beelden en drie fonts geven HTTP 200 en zijn byte-identiek aan de lokale build.
+- Apex-homepage HTTP 200; www verwijst naar apex en eindigt op HTTP 200. Beide leveren de bestaande homepage, zonder preview-noindex.
+- Openbare teller tijdens controle: `{ "ok": true, "customOs": 26, "demos": 240, "demo": true }`, CORS `*`.
+- Productiebuild, afzonderlijke voorstelbuild, TypeScript en Node-bron-/rendercontroles geslaagd.
+- Visuele browsercontrole blijft ontbreken wegens de bekende beleidsblokkade; technische levering is geen claim dat layout en bediening visueel zijn beproefd.
+
+## Referentie: de volledige pro-video
+
+Bron: `/Volumes/WORK/02-SOCIALNOW/04_OS-VIDEO/03_OPLEVERING/2026-08-26_STORY-EN/ODOO-EXPERIENCE-demo-EN-3min10.mp4`.
+
+Lokaal gecontroleerd met ffprobe: **190,161 seconden**, 1080 × 1920, H.264 met AAC-audio. De versie op de huidige website is een andere, kortere film. Voor deze analyse zijn tien beeldsteekproeven als contact sheet bekeken, plus `SCRIPT.md`, `BRIEF.md` en relevante compositietekst. Er is geen volledige audiovisuele afspeelcontrole gedaan. Contact sheet: `review.local/pro-video-contact-sheet.jpg` (lokaal, niet gepubliceerd).
+
+De bruikbare verhaallijn voor de website is **inzicht → voorstel → preview → akkoord → uitvoering/status**. In de film worden niet alleen schermen getoond: het systeem stelt werk voor en vraagt om een besluit. De broncompositie noemt ook expliciet het SocialNow-team en marketeers die na akkoord plannen. Dit ondersteunt een menselijke propositie; het is geen bewijs dat iedere getoonde automatisering nu in de POC werkt.
+
+Voor een volgende versie past één korte, zelf te starten animatie in de OS-uitleg:
+
+1. Een ondernemer ziet welke informatie uit zijn eigen systemen beschikbaar is.
+2. Een voorstel verschijnt met een begrijpelijke preview.
+3. De ondernemer beoordeelt en geeft akkoord.
+4. Het afgesproken werk krijgt een duidelijke status, met zichtbaar wie het uitvoert.
+
+Gebruik daarbij de werkelijke functies die de OS-stappen op dat moment hebben bewezen. Nog niet beschikbare handelingen krijgen een expliciet voorbeeld-/toekomstlabel. Geen klantcijfers in de animatie en geen automatische herhaling, achtergrondfilm of scrollblokkade. Een statische uitleg blijft beschikbaar bij minder-beweging. Er is nu geen nieuwe video gemaakt of geplaatst: de openbare eerste preview heeft voorrang en is zelfstandig te beoordelen.
