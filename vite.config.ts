@@ -1,36 +1,53 @@
-import path from 'path';
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import path from "path";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  base: '/',
+  base: "/",
   server: {
     port: 3000,
-    host: '0.0.0.0',
+    host: "0.0.0.0",
   },
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: "socialnow-preview-routes",
+      configureServer(server) {
+        server.middlewares.use((req, _res, next) => {
+          if (
+            req.url &&
+            /^\/voorstel(?:\/|\?|$)/.test(req.url) &&
+            !req.url.split("?")[0].includes(".")
+          ) {
+            req.url = "/voorstel.html";
+          }
+          next();
+        });
+      },
+    },
+  ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, '.'),
-    }
+      "@": path.resolve(__dirname, "."),
+    },
   },
   build: {
     rollupOptions: {
-      input: { index: 'index.html', voorstel: 'voorstel.html' },
+      input: { index: "index.html", voorstel: "voorstel.html" },
       output: {
         manualChunks: {
-          'vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui': ['lucide-react'],
-        }
-      }
+          vendor: ["react", "react-dom", "react-router-dom"],
+          ui: ["lucide-react"],
+        },
+      },
     },
     sourcemap: false,
-    target: 'es2020',
-    minify: 'esbuild',
+    target: "es2020",
+    minify: "esbuild",
     cssMinify: true,
     // Warn on large chunks
     chunkSizeWarningLimit: 200,
     // Asset inlining: inline small assets (< 8KB) as base64 to reduce HTTP requests
     assetsInlineLimit: 8192,
-  }
+  },
 });

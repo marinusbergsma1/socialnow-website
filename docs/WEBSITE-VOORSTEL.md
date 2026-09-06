@@ -99,3 +99,27 @@ Voor een volgende versie past één korte, zelf te starten animatie in de OS-uit
 4. Het afgesproken werk krijgt een duidelijke status, met zichtbaar wie het uitvoert.
 
 Gebruik daarbij de werkelijke functies die de OS-stappen op dat moment hebben bewezen. Nog niet beschikbare handelingen krijgen een expliciet voorbeeld-/toekomstlabel. Geen klantcijfers in de animatie en geen automatische herhaling, achtergrondfilm of scrollblokkade. Een statische uitleg blijft beschikbaar bij minder-beweging. Er is nu geen nieuwe video gemaakt of geplaatst: de openbare eerste preview heeft voorrang en is zelfstandig te beoordelen.
+
+
+## Versie 3 — volledige website vanuit de vier Milo’s
+
+Laatste richting van Marinus: een verbeterde, volwassen versie van zijn eigen volledige website. De vier Milo’s uit het dashboard zijn essentieel voor de branding en de belofte. De POC laat de waarde ervaren; persoonlijk contact voor een Custom OS is de conversie.
+
+### Wat nu in het voorstel zit
+
+- 24 rechtstreeks bereikbare previewpagina’s: homepage, OS, portfolio, 14 projecten, diensten, aanbod/prijzen, team, blog, artikel, contact en het bestaande privacybeleid. Interne navigatie blijft onder `/voorstel`.
+- De vier **werkelijke dashboard-Milo’s** in de hero, de uitleg en de slotuitnodiging. Rollen: Website, CRM, Studio en Advertenties. De 512px-portretten en kleine WebM/MP4-animaties zijn bytegetrouw gekopieerd uit `/Volumes/OS/08-APP/assets/milo`. Er is niets in het OS gewijzigd. De oudere website-Milo’s zijn niet als vervanging gebruikt.
+- De drie merkglobes staan rustig in de hero-achtergrond. Het ingekaderde nep-productblok is vervallen. Zwart, TT Norms, het echte logo en de bestaande 3D-knopglans blijven de basis. Minder-beweging wordt gerespecteerd; Milo-video’s worden alleen bij hover/focus geladen.
+- Alle 14 bestaande cases, acht teamleden, zes dienstgroepen, vijf klantlogo’s, de eigen social-collectie en uitlegvideo’s keren terug. Er zijn geen nieuwe rendementscijfers of klantbeoordelingen toegevoegd. De oude ongedocumenteerde metric-tegels worden in de preview niet getoond.
+- Conversieroute: **POC ervaren → persoonlijk gesprek → Custom OS-inrichting → eventuele doorlopende uitvoering met het team**. Na de OS-uitleg, op het aanbod en onderaan de site staat een duidelijke Custom OS-contactknop.
+- Aanbod: POC verkennen, Custom OS met persoonlijk voorstel, verder met het team. De oude € 1.500/€ 2.500/€ 3.000-bureaupakketten vormen niet meer de hoofdpropositie. Nieuwe bedragen zijn niet als vast tarief verzonnen; de Custom OS-prijs volgt uit inrichting, koppelingen en begeleiding. Losse creatieve en technische diensten blijven bereikbaar.
+- De contactpagina heeft echte e-mail-, telefoon- en WhatsApp-links en een formulier dat een ingevuld e-mailconcept opent. Het onderwerp volgt de gekozen dienst of Custom OS. De tekst zegt expliciet dat de bezoeker het concept nog zelf moet versturen. **Er is geen nieuwe contactbackend of boekingsagenda aangesloten.** De bestaande worker bevat een Milo-chattemplate, maar de repository heeft geen geconfigureerde endpoint of kalender; die zijn niet als werkend gepresenteerd.
+- Milo op de website is een herkenbare wegwijzer door echte FAQ-antwoorden, met een link naar het team. De module doet geen valse AI-/uitvoeringsbelofte.
+
+### Controle
+
+`npx tsc --noEmit`, productiebuild en `node scripts/check-proposal.mjs`. De Node-controle rendert 24 routes plus een onbekende route, controleert 61 bestaande beelden, unieke IDs/ARIA, links tussen pagina’s en ankers, behoud van alle projecten/teamleden, de vier Milo-assetsets, originele video/posterbestanden, claim/installatielinks en de demo/live/foutafhandeling van de teller. Alle previewroutes blijven noindex en buiten de sitemap.
+
+Browserweergave en interactieve bediening zijn **niet visueel gecontroleerd**: de eerder vastgestelde browserbeleidsblokkade is niet omzeild. De HTTP- en Node-controles bewijzen technische levering en bronstructuur, geen visuele browserkwaliteit.
+
+De productiehomepage en bron-/OS-worktrees blijven behouden. Alleen de expliciet geautoriseerde tijdelijke preview wordt bijgewerkt. Regie ontvangt volgens de laatste afspraak alleen echte OS-afhankelijkheden; deze vormgevingswijzigingen blijven in dit websitespoor.

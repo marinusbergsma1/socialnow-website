@@ -262,8 +262,15 @@ copyFileSync('dist/index.html', 'dist/404.html');
 
 // Tijdelijk, expliciet aangevraagd websitevoorstel. Eigen ingang, noindex,
 // geen vermelding in de sitemap en geen vervanging van de homepage.
-mkdirSync('dist/voorstel', { recursive: true });
-copyFileSync('dist/voorstel.html', 'dist/voorstel/index.html');
+const previewRoutes = ['', 'het-os', 'projecten', 'diensten', 'prijzen', 'team', 'blog', 'contact', 'privacy',
+  ...Object.keys(projectMeta).map(slug => `project/${slug}`),
+  ...posts.map(post => `blog/${post.slug}`),
+];
+for (const route of previewRoutes) {
+  mkdirSync(`dist/voorstel/${route}`, { recursive: true });
+  copyFileSync('dist/voorstel.html', `dist/voorstel/${route}/index.html`);
+}
+console.log(`[postbuild] ${previewRoutes.length} volledige previewroutes geschreven (noindex)`);
 
 // --- sitemap.xml volledig herbouwen ---------------------------------------
 // Was handmatig onderhouden in public/sitemap.xml (nog aanwezig als
