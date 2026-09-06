@@ -2056,3 +2056,27 @@ html {
   .sn-site .h-project-media.is-video { max-height: 70svh; }
   .sn-site .h-project-title-row > *, .sn-site .h-project-facts dd { min-width: 0; overflow-wrap: anywhere; }
 }
+
+/* Four compact project cards: two columns on desktop. */
+.sn-site .h-featured-cases { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.sn-site .h-featured-cases .h-featured-case { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 20px; padding: 24px; border-radius: 24px; align-items: center; }
+.sn-site .h-featured-cases .h-featured-case > .h-featured-media { order: 0; padding: 8px; gap: 6px; border-radius: 16px; }
+.sn-site .h-featured-number { display: none; }
+.sn-site .h-featured-copy { min-width: 0; }
+.sn-site .h-featured-copy h3 { font-size: clamp(24px, 2.2vw, 34px); line-height: 1.08; margin: 14px 0; }
+.sn-site .h-featured-copy > p:not(.h-eyebrow) { font-size: 13px; line-height: 1.55; }
+.sn-site .h-featured-copy ul { margin: 16px 0 20px; gap: 5px; }
+.sn-site .h-featured-copy li { padding: 5px 7px; font-size: 9px; }
+.sn-site .h-featured-copy .h-button { padding: 10px 12px; font-size: 10px; gap: 8px; }
+.sn-site .h-featured-caption { padding: 18px 6px 6px; font-size: 9px; }
+.sn-site .h-featured-open { width: 22px; height: 22px; }
+.sn-site .h-featured-media-note { font-size: 9px; }
+@media (max-width: 1000px) {
+  .sn-site .h-featured-cases { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .sn-site .h-featured-cases .h-featured-case { grid-template-columns: minmax(0, 1fr); padding: 20px; gap: 20px; }
+  .sn-site .h-featured-copy h3 { font-size: 28px; }
+  .sn-site .h-featured-copy .h-button { min-height: 44px; }
+  .sn-site .h-featured-cases .h-featured-media { width: 100%; max-width: 360px; justify-self: center; }
+}

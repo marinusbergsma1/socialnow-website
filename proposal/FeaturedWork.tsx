@@ -35,6 +35,13 @@ const selections = [
       "Boadu / Bedankt",
     ],
   },
+  {
+    slug: "print-bind-interieur",
+    color: "#25D366",
+    title: "Een merk.\nOok in de ruimte.",
+    description: "Voor Print & Bind vertaalden we de merkidentiteit naar het interieur, met banners, stickers en bewegwijzering.",
+    captions: ["Print & Bind", "Banners", "Meeting room", "Interieur"],
+  },
 ];
 
 export default function FeaturedWork() {
