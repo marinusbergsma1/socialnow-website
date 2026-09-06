@@ -1722,3 +1722,51 @@ html {
     scroll-padding-top: 85px;
   }
 }
+
+/* Beursinstap: proberen is de eerste stap; maatwerk volgt uit die ervaring. */
+.sn-site .h-poc-path {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  padding: 0;
+  margin: 24px 0 0;
+  font-size: 11px;
+  color: #a0a0a0;
+}
+.sn-site .h-poc-path li {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.sn-site .h-poc-path span {
+  color: #25d366;
+  font-size: 10px;
+}
+.sn-site .h-poc-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  flex-shrink: 0;
+}
+.sn-site .h-poc-actions .h-text-link {
+  font-size: 12px;
+}
+.sn-site .h-closing-try {
+  border: 0;
+  padding-top: 0;
+  margin: 26px 0;
+}
+.sn-site .h-footer-plans > div > a:first-child {
+  border-color: #25d36666;
+}
+@media (max-width: 600px) {
+  .sn-site .h-poc-path {
+    gap: 10px 14px;
+    font-size: 10px;
+  }
+  .sn-site .h-poc-actions {
+    flex-shrink: 1;
+  }
+}

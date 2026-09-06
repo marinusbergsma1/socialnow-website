@@ -7,7 +7,7 @@ export function HeroTitle() {
       <br />
       je bedrijf.
       <br />
-      <span>Echt van jou.</span>
+      <span>Probeer het zelf.</span>
     </h1>
   );
 }

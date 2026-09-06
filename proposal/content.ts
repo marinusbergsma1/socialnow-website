@@ -167,21 +167,23 @@ export const services = [
 ];
 export const prices = [
   {
-    name: "Ontdek de POC",
+    name: "01 / Proof of concept",
     price: "Ervaar het OS.",
     period: "Je eerste stap",
-    description: "Ontdek wat één omgeving voor jouw bedrijf kan betekenen.",
+    description:
+      "Probeer het systeem en ervaar zelf het gemak en overzicht. Daarna bekijken we wat bij jouw bedrijf past.",
     items: [
       "Maak kennis met de vier Milo’s",
       "Verken de OS-omgeving",
       "Begin met je eigen Odoo en Meta",
     ],
     color: "#25D366",
-    action: "Claim jouw OS",
+    action: "Probeer de POC",
     href: "https://app.socialnow.nl/login/?bron=site",
+    featured: true,
   },
   {
-    name: "Jouw Custom OS",
+    name: "02 / Jouw Custom OS",
     price: "Op maat.",
     period: "Een persoonlijk voorstel",
     description:
@@ -194,10 +196,9 @@ export const prices = [
     color: "#00A3E0",
     action: "Bespreek jouw Custom OS",
     to: "/contact?onderwerp=Custom%20OS",
-    featured: true,
   },
   {
-    name: "Verder met ons team",
+    name: "03 / Verder met ons team",
     price: "Samen verder.",
     period: "Aanvullende samenwerking op maat",
     description:
@@ -213,6 +214,11 @@ export const prices = [
   },
 ];
 export const faqs = [
+  {
+    question: "Waar begin ik?",
+    answer:
+      "Begin met de proof of concept: probeer het systeem en maak kennis met de vier Milo’s. Zo ervaar je het overzicht voordat we samen je Custom OS gaan inrichten. Op de Odoo-beurs laten we je hiermee kennismaken.",
+  },
   {
     question: "Wat is een Custom OS?",
     answer:

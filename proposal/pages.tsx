@@ -76,20 +76,35 @@ export function Home() {
         </div>
         <div className="h-wrap h-hero-content">
           <p className="h-eyebrow">
-            <i /> SocialNow / Custom OS
+            <i /> Proof of concept / SocialNow OS
           </p>
           <HeroTitle />
           <HeroMilos />
           <p className="h-hero-description">
-            Vier Milo’s voor je website, klanten, content en advertenties.
-            Ontdek in de POC wat één OS voor jouw bedrijf kan betekenen.
+            Probeer de proof of concept. Vier Milo’s voor je website, klanten,
+            content en advertenties. Ervaar zelf hoe één omgeving je werk
+            eenvoudiger maakt.
           </p>
           <p className="h-hero-human">
-            Gebouwd vanuit ons klantwerk sinds 2021.
+            Ontworpen voor gemak, overzicht en sneller werken.
             <br />
-            Van een eerste ervaring naar jouw eigen Custom OS.
+            Eerst zelf ervaren. Daarna samen op maat.
           </p>
           <OsEntry />
+          <ol
+            className="h-poc-path"
+            aria-label="Van proberen naar jouw Custom OS"
+          >
+            <li>
+              <span>01</span> Open de POC
+            </li>
+            <li>
+              <span>02</span> Ervaar het gemak
+            </li>
+            <li>
+              <span>03</span> Samen op maat
+            </li>
+          </ol>
           <Link to="/#het-os" className="h-hero-down">
             Ontdek SocialNow OS <ArrowDown size={16} />
           </Link>
@@ -104,10 +119,10 @@ export function Home() {
         <span>
           <i /> 24–26 september · Odoo-beurs
         </span>
-        <p>Ontdek de POC. Bespreek jouw Custom OS.</p>
-        <TextLink to="/contact?onderwerp=Odoo-beurs">
-          Maak kennis met ons
-        </TextLink>
+        <p>Probeer het systeem. Ervaar het gemak. Ontdek jouw mogelijkheden.</p>
+        <a className="h-text-link" href={CLAIM_URL}>
+          Probeer de POC <ArrowUpRight size={17} />
+        </a>
       </div>
       <section className="h-section h-wrap" id="het-os">
         <Heading
@@ -266,15 +281,15 @@ export function OsPage() {
   return (
     <>
       <PageHeading
-        label="SocialNow OS"
+        label="Probeer SocialNow OS / Proof of concept"
         title={
           <>
-            Je bedrijf, verbonden.
+            Eerst zelf ervaren.
             <br />
-            <span>Op jouw manier.</span>
+            <span>Dan samen verder.</span>
           </>
         }
-        text="Begin met de informatie die je al hebt. Richt daarna samen met ons een omgeving in rond je klanten, werk en ambities."
+        text="De proof of concept is je eerste kennismaking met het systeem. Ontdek de vier Milo’s en ervaar het overzicht. Daarna bespreken we hoe jouw Custom OS daarbij kan aansluiten."
       />
       <div className="h-wrap">
         <OsEntry />
@@ -297,13 +312,13 @@ export function OsPage() {
         <ol className="h-steps">
           <li>
             <span>01</span>
-            <h3>Claim je OS.</h3>
+            <h3>Start de proof of concept.</h3>
             <p>
               Maak je bedrijfsomgeving aan en doorloop de stappen Bedrijf, Odoo
               en Meta.
             </p>
             <a className="h-text-link" href={CLAIM_URL}>
-              Claim jouw OS
+              Probeer de POC
               <ArrowUpRight size={16} />
             </a>
           </li>

@@ -148,6 +148,16 @@ try {
   assert.equal(projects.length, 14, "all 14 original projects retained");
   assert.equal(people.length, 8, "full team retained");
   assert.equal(agents.length, 4, "four dashboard Milos");
+  const { prices } = await server.ssrLoadModule("/proposal/content.ts");
+  assert(prices[0].featured && !prices[1].featured, "POC is the primary offer");
+  assert(
+    rendered.get("/").includes("Probeer de POC"),
+    "trying POC is primary CTA",
+  );
+  assert(
+    rendered.get("/").includes("h-poc-path"),
+    "try, experience, then custom journey",
+  );
   for (const agent of agents) {
     assert(
       rendered.get("/").includes(`/proposal/milo/${agent.id}.webp`),
@@ -255,7 +265,7 @@ try {
       "old pricing removed from production metadata",
     );
     assert(
-      home.includes("Eén OS voor je bedrijf"),
+      home.includes("Probeer de proof of concept"),
       "Signature homepage metadata",
     );
     assert(

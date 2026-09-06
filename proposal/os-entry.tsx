@@ -148,7 +148,7 @@ export default function OsEntry() {
       <div className="os-actions">
         <a className="os-claim sn-btn3d h-button" href={CLAIM_URL}>
           <span className="sn-btn3d-sheen" />
-          <span>Claim jouw OS</span>
+          <span>Probeer de POC</span>
           <span className="h-button-icon">
             <ArrowRight size={16} aria-hidden="true" />
           </span>

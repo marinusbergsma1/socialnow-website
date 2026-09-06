@@ -10,6 +10,7 @@ import {
 import { prices, services } from "./content";
 import { MotionControl } from "./motion";
 import { Action } from "./ui";
+import { CLAIM_URL } from "./os-entry";
 const TERMS =
   "https://storage.googleapis.com/video-slider/Algemene%20Voorwaarden%20SocialNow.pdf";
 export default function BrandFooter() {
@@ -19,17 +20,28 @@ export default function BrandFooter() {
         <div className="h-footer-plans">
           <p className="h-eyebrow">Jouw volgende stap</p>
           <div>
-            {prices.map((plan) => (
-              <Link key={plan.name} to={plan.to || "/het-os"}>
-                <h3>{plan.name}</h3>
-                <span>{plan.period}</span>
-                <p>{plan.description}</p>
-                <b>
-                  Ontdek de mogelijkheden
-                  <ArrowUpRight size={14} />
-                </b>
-              </Link>
-            ))}
+            {prices.map((plan) => {
+              const body = (
+                <>
+                  <h3>{plan.name}</h3>
+                  <span>{plan.period}</span>
+                  <p>{plan.description}</p>
+                  <b>
+                    {plan.action}
+                    <ArrowUpRight size={14} />
+                  </b>
+                </>
+              );
+              return plan.href ? (
+                <a key={plan.name} href={plan.href}>
+                  {body}
+                </a>
+              ) : (
+                <Link key={plan.name} to={plan.to!}>
+                  {body}
+                </Link>
+              );
+            })}
           </div>
         </div>
         <div className="h-footer-statement">
@@ -63,9 +75,10 @@ export default function BrandFooter() {
               <MessageCircle size={17} />
               WhatsApp
             </a>
-            <Action to="/contact?onderwerp=Custom%20OS">
-              Bespreek jouw Custom OS
-            </Action>
+            <Action href={CLAIM_URL}>Probeer de POC</Action>
+            <Link to="/contact?onderwerp=Custom%20OS">
+              Daarna: jouw Custom OS <ArrowUpRight size={17} />
+            </Link>
           </div>
         </div>
         <div className="h-footer-links">

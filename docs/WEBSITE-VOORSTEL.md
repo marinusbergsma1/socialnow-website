@@ -1,3 +1,9 @@
+## Beursrichting: POC eerst — 6 september 2026
+
+Laatste aanscherping door Marinus: op de Odoo-beurs bieden we het proberen van de proof of concept aan. Gemak, overzicht en sneller werken zijn de richting. De website legt daarom de eerste nadruk op zelf ervaren, vóór het Custom OS-gesprek.
+
+Header en primaire knoppen: “Probeer de POC”, met dezelfde bestaande directe app-login. Hero: “Eén OS voor je bedrijf. Probeer het zelf.” Vier Milo’s direct eronder, plus de stappen Open de POC → Ervaar het gemak → Samen op maat. POC is nu de uitgelichte aanbodkaart. Afsluiting en footer sturen primair naar proberen; Custom OS blijft de vervolgstap. Geen nieuwe claims over gemeten snelheid, gratis dienstverlening of werkende automatisering toegevoegd.
+
 ## Definitieve keuze: Signature als hoofdwebsite — 6 september 2026
 
 Marinus heeft expliciet gevraagd de huidige website te archiveren en Signature live te zetten. Studio, Focus en de stijlkeuze zijn verwijderd. De vier dashboard-Milo’s blijven bovenaan. De bestaande OS-worktrees en het live POC zijn niet gewijzigd.

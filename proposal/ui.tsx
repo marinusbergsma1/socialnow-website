@@ -9,7 +9,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { agents, faqs, logos, people } from "./content";
-import OsEntry from "./os-entry";
+import OsEntry, { CLAIM_URL } from "./os-entry";
 import { MiloMotion, MotionControl } from "./motion";
 import type { Project } from "../types";
 
@@ -200,18 +200,19 @@ export function ConversionBridge() {
   return (
     <div className="h-conversion">
       <div>
-        <p className="h-eyebrow">
-          Ervaar het in de POC. Maak het daarna van jou.
-        </p>
-        <h3>Wat kan een Custom OS voor jouw bedrijf doen?</h3>
+        <p className="h-eyebrow">Eerst proberen. Daarna op maat.</p>
+        <h3>Ervaar de proof of concept.</h3>
         <p>
-          Laat ons zien hoe je werkt. Dan bepalen we samen hoe de vier Milo’s,
-          je systemen en ons team daarop aansluiten.
+          Ontdek hoe de vier Milo’s en één overzichtelijke omgeving samenkomen.
+          Vanuit jouw ervaring bespreken we daarna wat je bedrijf nodig heeft.
         </p>
       </div>
-      <Action to="/contact?onderwerp=Custom%20OS">
-        Bespreek jouw Custom OS
-      </Action>
+      <div className="h-poc-actions">
+        <Action href={CLAIM_URL}>Probeer de POC</Action>
+        <TextLink to="/contact?onderwerp=Custom%20OS">
+          Al geprobeerd? Bespreek jouw Custom OS
+        </TextLink>
+      </div>
     </div>
   );
 }
@@ -313,24 +314,23 @@ export function Closing() {
           />
         ))}
       </div>
-      <p className="h-eyebrow">Je hebt de mogelijkheden gezien.</p>
+      <p className="h-eyebrow">Jouw eerste stap / Proof of concept</p>
       <h2>
-        Nu jouw bedrijf.
+        Ervaar het gemak.
         <br />
-        <span>Jouw Custom OS.</span>
+        <span>Probeer het zelf.</span>
       </h2>
       <p>
-        Vertel ons hoe je werkt en wat je wilt bereiken.
+        Ontdek wat één systeem voor jouw bedrijf kan betekenen.
         <br />
-        Samen maken we de vertaalslag naar jouw inrichting.
+        Daarna bepalen we samen hoe we verder bouwen.
       </p>
-      <Action to="/contact?onderwerp=Custom%20OS">
-        Bespreek jouw Custom OS
-      </Action>
       <div className="h-closing-try">
-        <p>Eerst zelf de waarde ervaren?</p>
         <OsEntry />
       </div>
+      <TextLink to="/contact?onderwerp=Custom%20OS">
+        POC geprobeerd? Bespreek jouw Custom OS
+      </TextLink>
     </section>
   );
 }
