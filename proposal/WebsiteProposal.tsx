@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, ChevronDown, Layers3, Menu, MessageCircle, X } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, Check, ChevronDown, Menu, MessageCircle, X } from 'lucide-react';
 import OsEntry, { CLAIM_URL, REVIEWS_URL } from './os-entry';
+import BrandGlobe from './BrandGlobe';
 
 const SITE = 'https://socialnow.nl';
 const CONTACT = 'mailto:info@socialnow.nl?subject=Kennismaken%20over%20Custom%20OS';
@@ -77,11 +78,11 @@ function ProductOverview() {
 
   return (
     <div className="product-overview">
-      <div className="product-topline"><span>SocialNow <b>/ OS</b></span><span>Zo is je OS opgebouwd</span></div>
+      <div className="product-topline"><span className="product-brand"><img src="/beeldmerk-2026.webp" alt="" width="27" height="27" />SocialNow <b>/ OS</b></span><span>Zo is je OS opgebouwd</span></div>
       <div className="product-layout">
         <div className="product-tabs" role="tablist" aria-label="Onderdelen van je OS" aria-orientation="vertical">
           {productParts.map((item, index) => (
-            <button key={item.id} type="button" role="tab" id={`product-tab-${item.id}`} aria-selected={selected === index}
+            <button key={item.id} data-part={item.id} type="button" role="tab" id={`product-tab-${item.id}`} aria-selected={selected === index}
               aria-controls={`product-panel-${item.id}`} tabIndex={selected === index ? 0 : -1}
               onClick={() => setSelected(index)} onKeyDown={event => keyboard(event, index)}>
               <span className="product-number">0{index + 1}</span>
@@ -110,7 +111,7 @@ export default function WebsiteProposal() {
   return (
     <div className="website-proposal" id="boven">
       <a className="skip-link" href="#inhoud">Ga naar inhoud</a>
-      <aside className="proposal-notice"><span>Websitevoorstel · 6 september 2026</span><a href="/">Vergelijk met de huidige site <ArrowUpRight size={13} aria-hidden="true" /></a></aside>
+      <aside className="proposal-notice"><span>Websitevoorstel · versie 2 · SocialNow-karakter</span><a href="/">Vergelijk met de huidige site <ArrowUpRight size={13} aria-hidden="true" /></a></aside>
       <header className="site-header">
         <div className="wrap header-inner">
           <a className="brand" href="#boven" aria-label="SocialNow, naar boven"><img src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="200" height="32" /></a>
@@ -132,7 +133,8 @@ export default function WebsiteProposal() {
           </div>
           <div className="hero-story">
             <div className="hero-os-card">
-              <div className="hero-card-heading"><Layers3 size={20} aria-hidden="true" /><span>Jouw bedrijf, verbonden.</span><span className="small-marker" /></div>
+              <div className="hero-card-heading"><span className="brand-pixels" aria-hidden="true"><i /><i /><i /></span><span>Jouw bedrijf, verbonden.</span><span className="small-marker" /></div>
+              <BrandGlobe />
               <div className="hero-system"><span className="system-name">Jouw OS</span><span>Inzicht in je bedrijf.<br />Ingericht op jouw manier.</span></div>
               <div className="system-connections" aria-hidden="true"><span /><span /><span /></div>
               <div className="system-sources"><a href="#het-os"><strong>Odoo</strong><small>Klanten & verkoop</small></a><a href="#het-os"><strong>Meta</strong><small>Content & ads</small></a><a href="#custom-os"><strong>Jouw werk</strong><small>Custom ingericht</small></a></div>
@@ -178,7 +180,7 @@ export default function WebsiteProposal() {
 
         <section className="section wrap faq-section" aria-labelledby="faq-title"><div><p className="eyebrow">Goed om te weten</p><h2 id="faq-title">Heldere antwoorden.<br /><span>Voor je begint.</span></h2><a className="quiet-link" href={CONTACT}>Stel ons je vraag <ArrowUpRight size={16} aria-hidden="true" /></a></div><div className="faq-list">{faqs.map(faq => <details key={faq.question}><summary>{faq.question}<ChevronDown size={17} aria-hidden="true" /></summary><p>{faq.answer}</p></details>)}</div></section>
 
-        <section className="closing wrap" aria-labelledby="closing-title"><p className="eyebrow">Jouw volgende stap</p><h2 id="closing-title">Begin met je OS.<br /><span>Maak het samen van jou.</span></h2><p>Claim je bedrijfsomgeving en verken de POC.<br />Wij helpen je verder met de persoonlijke inrichting.</p><OsEntry /><a className="quiet-link" href={CONTACT}>Liever eerst kennismaken <ArrowUpRight size={15} aria-hidden="true" /></a></section>
+        <section className="closing wrap" aria-labelledby="closing-title"><img className="closing-mark" src="/beeldmerk-2026.webp" alt="" width="66" height="66" loading="lazy" /><p className="eyebrow">Jouw volgende stap</p><h2 id="closing-title">Begin met je OS.<br /><span>Maak het samen van jou.</span></h2><p>Claim je bedrijfsomgeving en verken de POC.<br />Wij helpen je verder met de persoonlijke inrichting.</p><OsEntry /><a className="quiet-link" href={CONTACT}>Liever eerst kennismaken <ArrowUpRight size={15} aria-hidden="true" /></a></section>
       </main>
 
       <footer className="site-footer wrap"><div className="footer-top"><a className="brand" href="#boven"><img src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="200" height="32" loading="lazy" /></a><p>Custom OS.<br />Gebouwd vanuit de praktijk.</p><a href="mailto:info@socialnow.nl">info@socialnow.nl <ArrowUpRight size={16} aria-hidden="true" /></a></div><div className="footer-bottom"><p>© {new Date().getFullYear()} SocialNow · Amsterdam · KVK 90877179</p><nav aria-label="Footernavigatie"><a href={`${SITE}/projecten`}>Projecten</a><a href={`${SITE}/diensten`}>Diensten</a><a href={`${SITE}/privacy`}>Privacy</a><a href="https://storage.googleapis.com/video-slider/Algemene%20Voorwaarden%20SocialNow.pdf" target="_blank" rel="noopener noreferrer">Voorwaarden<span className="sr-only"> (PDF, opent een nieuw tabblad)</span></a></nav></div></footer>

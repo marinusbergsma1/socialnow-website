@@ -8,6 +8,20 @@
 
 Het product staat vooraan. Het echte werk sinds 2021 verklaart waar de ervaring vandaan komt. Mensen, een duidelijke inrichting en toetsbare functionaliteit dragen de betrouwbaarheid. Zwart is de paginabasis; neutrale panelen, TT Norms en kleine groene actieaccenten bepalen de vormgeving.
 
+### Versie 2 — het eigen SocialNow-karakter terug
+
+Na de eerste preview vroeg Marinus expliciet om de mooie 3D-globes en herkenbare branding terug te brengen, minimaal binnen deze rustige stijl. De nieuwe iteratie voegt daarom toe:
+
+- De herkenbare cyaan/roze/gele globecompositie bij ‘Jouw OS’, op basis van dezelfde bolverhoudingen, kleuren en puntenverdeling als de bestaande PixelGlobe.
+- Langzame rotatie per bol en een lichte reactie op de aanwijzer binnen de globe. De merkcompositie blijft bij elkaar; geen verspreidende deeltjes of brede achtergrondanimatie.
+- Een pauzeknop die de huidige positie bewaart. Minder-beweging toont een stil beeld. Buiten beeld en in een verborgen tab stopt de animatie; op mobiel gebruikt hij minder punten en een lagere beeldfrequentie.
+- Het bestaande 3D-beeldmerk als fallback, klein bij de producttitel en als rustige herhaling bij de slotsectie.
+- Neutrale glans en subtiele binnenranden op knoppen en productpanelen. Kleine merkaccenten verbinden Odoo, Meta en persoonlijke inrichting visueel met de globe.
+
+Deze wijziging zit uitsluitend in het voorstel. De bestaande PixelGlobe, homepage, OS-bestanden en productclaims zijn niet aangepast. De zwarte paginabasis blijft behouden. De eerste preview is terug te halen op commit `42b5598`; de actuele tijdelijke URL blijft `/voorstel/`.
+
+Controle van versie 2: productiebuild, TypeScript, bronreview en de bestaande Node-render-/route-/tellercontrole. Het nieuwe beeldmerk bestaat lokaal; de Node-controle omvat nu tien verschillende afbeeldingen. Dit is nog steeds geen visuele of interactieve browsercontrole.
+
 | Onderdeel | Huidige homepage | Voorstel |
 | --- | --- | --- |
 | Opening | Video-intro, AI-chatbelofte en bewegende elementen | Direct leesbare OS-belofte, compacte instap en rustige uitleg van de samenhang |
