@@ -189,7 +189,6 @@ export function Home() {
       <VideoSlider />
       <TrustStories />
       <section className="h-section h-wrap h-team-with-character">
-        <CharacterAccent kind="motor" />
         <Founder />
       </section>
       <ImageSliders />
