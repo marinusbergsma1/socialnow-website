@@ -260,6 +260,11 @@ for (const post of posts) {
 
 copyFileSync('dist/index.html', 'dist/404.html');
 
+// Tijdelijk, expliciet aangevraagd websitevoorstel. Eigen ingang, noindex,
+// geen vermelding in de sitemap en geen vervanging van de homepage.
+mkdirSync('dist/voorstel', { recursive: true });
+copyFileSync('dist/voorstel.html', 'dist/voorstel/index.html');
+
 // --- sitemap.xml volledig herbouwen ---------------------------------------
 // Was handmatig onderhouden in public/sitemap.xml (nog aanwezig als
 // pre-build placeholder, maar wordt hieronder overschreven). Nu afgeleid

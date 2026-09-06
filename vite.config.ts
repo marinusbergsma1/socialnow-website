@@ -16,6 +16,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+      input: { index: 'index.html', voorstel: 'voorstel.html' },
       output: {
         manualChunks: {
           'vendor': ['react', 'react-dom', 'react-router-dom'],

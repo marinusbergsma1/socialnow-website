@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/postbuild.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:voorstel": "vite --host 127.0.0.1 --port 3001 --strictPort",
+    "build:voorstel": "vite build --config vite.proposal.config.ts"
   },
   "dependencies": {
     "lucide-react": "^0.562.0",
