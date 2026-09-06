@@ -1,5 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { CLAIM_URL } from "./os-entry";
 import { Action, MiloGuide } from "./ui";
@@ -19,7 +26,8 @@ import {
 import LogoIntro from "./LogoIntro";
 import BrandFooter from "./BrandFooter";
 import { MotionProvider } from "./motion";
-import { StyleOverview, StylePicker, StyleProvider, useStyle } from "./styles";
+import { projects } from "./content";
+import { allPosts } from "../data/posts";
 import PrivacyPage from "../components/PrivacyPage";
 
 const nav = [
@@ -33,15 +41,12 @@ const nav = [
 ];
 export default function WebsiteProposal() {
   return (
-    <StyleProvider>
-      <MotionProvider>
-        <ProposalShell />
-      </MotionProvider>
-    </StyleProvider>
+    <MotionProvider>
+      <ProposalShell />
+    </MotionProvider>
   );
 }
 function ProposalShell() {
-  const { style } = useStyle();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
@@ -49,9 +54,34 @@ function ProposalShell() {
   const mounted = useRef(false);
   useEffect(() => {
     setMenuOpen(false);
+    const project = projects.find(
+      (item) => location.pathname === `/project/${item.slug}`,
+    );
+    const post = allPosts.find(
+      (item) => location.pathname === `/blog/${item.slug}`,
+    );
     const title =
-      nav.find(([path]) => path === location.pathname)?.[1] || "SocialNow";
-    document.title = `${title} — SocialNow websitevoorstel`;
+      project?.title ||
+      post?.title ||
+      nav.find(([path]) => path === location.pathname)?.[1] ||
+      "Eén OS voor je bedrijf";
+    const description =
+      project?.description ||
+      post?.excerpt ||
+      "SocialNow brengt website, CRM, content en advertenties samen. Ontdek de vier Milo’s in de POC en bespreek jouw eigen Custom OS met ons team.";
+    document.title = `${title} | SocialNow`;
+    for (const [selector, content] of [
+      ['meta[name="description"]', description],
+      ['meta[property="og:title"]', document.title],
+      ['meta[property="og:description"]', description],
+      ['meta[property="og:url"]', `https://socialnow.nl${location.pathname}`],
+      ['meta[name="twitter:title"]', document.title],
+      ['meta[name="twitter:description"]', description],
+    ])
+      document.querySelector(selector)?.setAttribute("content", content);
+    document
+      .querySelector('link[rel="canonical"]')
+      ?.setAttribute("href", `https://socialnow.nl${location.pathname}`);
     const id = window.requestAnimationFrame(() => {
       if (location.hash)
         document
@@ -77,18 +107,11 @@ function ProposalShell() {
     return () => window.removeEventListener("keydown", close);
   }, [menuOpen]);
   return (
-    <div className="sn-site" data-style={style}>
+    <div className="sn-site" data-style="signature">
       <LogoIntro />
       <a className="h-skip" href="#inhoud">
         Ga naar inhoud
       </a>
-      <aside className="h-preview">
-        <StylePicker />
-        <a href="/">
-          Huidige website
-          <ArrowUpRight size={12} />
-        </a>
-      </aside>
       <header className="h-header">
         <div className="h-wrap h-nav">
           <Link
@@ -148,7 +171,7 @@ function ProposalShell() {
       <main id="inhoud" ref={main} tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/stijlen" element={<StyleOverview />} />
+          <Route path="/stijlen" element={<Navigate to="/" replace />} />
           <Route path="/het-os" element={<OsPage />} />
           <Route path="/projecten" element={<ProjectsPage />} />
           <Route path="/project/:slug" element={<ProjectPage />} />

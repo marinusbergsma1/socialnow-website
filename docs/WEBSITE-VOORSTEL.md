@@ -1,3 +1,17 @@
+## Definitieve keuze: Signature als hoofdwebsite — 6 september 2026
+
+Marinus heeft expliciet gevraagd de huidige website te archiveren en Signature live te zetten. Studio, Focus en de stijlkeuze zijn verwijderd. De vier dashboard-Milo’s blijven bovenaan. De bestaande OS-worktrees en het live POC zijn niet gewijzigd.
+
+Het uitgelichte werk bestaat nu uit drie grote caseblokken: RAVEG met drie in-beeld afspelende motionvideo’s, Universal/Sony met een groot campagnebeeld en drie tiles, en AZ met dezelfde beeldrijke opbouw. Media opent groot met bediening; previews pauzeren buiten beeld, bij minder-beweging en met de gedeelde pauzeknop. De volledige video- en beeldsliders blijven aanwezig.
+
+Signature gebruikt de bestaande hoofdroutes, aangevuld met /het-os en /contact. Oude /voorstel-links tonen dezelfde gekozen stijl; /voorstel/stijlen verwijst naar de Signature-homepage. Metadata en sitemap sluiten aan op POC → persoonlijk Custom OS-voorstel; oude vaste pakketprijzen en automatische garanties zijn uit de homepage-metadata verwijderd. De oprichtersmissie staat als gewone tekst, zonder verzonnen persoonlijke quote.
+
+Back-up: `/Volumes/WORK/02-SOCIALNOW/01_WEBSITE/_ARCHIEF/2026-09-06-voor-signature/`. Inclusief broncode op f479763, exact Pages-artifact van run 34031048680, SHA256-controlesommen en herstelhandleiding. De gearchiveerde homepage is byte voor byte vergeleken met productie vóór publicatie. Externe video’s blijven externe verwijzingen.
+
+Verificatie: TypeScript, productiebuild, Node-render van hoofd- en previewroutes, routes/ankers/ARIA, bestaande media, instaplinks, Signature bij oude stijlparameters, nieuwe metadata en sitemap. Browsercontrole blijft beleidsmatig geblokkeerd; geen visuele, interactieve of gemeten performanceclaim. Contact opent een e-mailconcept en biedt WhatsApp/telefoon; er is geen nieuwe aanvraagdatabase of backend geclaimd.
+
+---
+
 # SocialNow — websitevoorstel voor beoordeling
 
 6 september 2026. Eigen werkspoor in `/Volumes/WORK/socialnow-website-saas`, branch `website-saas`. De bestaande homepage blijft op `https://socialnow.nl/`. Het tijdelijke voorstel wordt gepubliceerd op `https://socialnow.nl/voorstel/`, met `noindex, nofollow` en buiten de sitemap.

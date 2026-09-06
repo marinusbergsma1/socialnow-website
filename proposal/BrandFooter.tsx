@@ -92,7 +92,7 @@ export default function BrandFooter() {
             <Link to="/projecten">Ons werk</Link>
             <Link to="/blog">Blog</Link>
             <Link to="/contact">Contact</Link>
-            <Link to="/stijlen">Vergelijk de drie stijlen</Link>
+            <Link to="/#uitgelicht-werk">Uitgelicht werk</Link>
           </div>
           <div>
             <p className="h-eyebrow">Amsterdam</p>

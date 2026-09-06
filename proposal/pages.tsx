@@ -10,6 +10,7 @@ import {
   Phone,
 } from "lucide-react";
 import { HeroTitle } from "./styles";
+import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
 import TrustStories from "./TrustStories";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
@@ -56,27 +57,17 @@ function Founder() {
           <br />
           <span>voor mensen werken.</span>
         </h2>
-        <blockquote>
-          “Ik wil dat je als ondernemer je bedrijf kunt aansturen zonder eerst
-          software te moeten leren. Daarom bouwen we Custom OS-systemen die
-          eenvoudig werken, bij jouw bedrijf passen en mensen achter zich
-          hebben.”
-        </blockquote>
-        <small className="h-concept">
-          Concepttekst voor Marinus, ter beoordeling.
-        </small>
+        <p className="h-founder-mission">
+          Ons doel: je bedrijf kunnen aansturen zonder eerst software te moeten
+          leren. Daarom bouwen we Custom OS-systemen die eenvoudig werken, bij
+          jouw bedrijf passen en mensen achter zich hebben.
+        </p>
         <TextLink to="/team">De mensen achter het OS</TextLink>
       </div>
     </figure>
   );
 }
 export function Home() {
-  const featured = [
-    "kwh-garant-website",
-    "az-alkmaar-socials",
-    "raveg-branding",
-    "divine-machines-website",
-  ].map((slug) => projects.find((p) => p.slug === slug)!);
   return (
     <>
       <section className="h-hero" id="home">
@@ -152,28 +143,9 @@ export function Home() {
         <ConversionBridge />
       </section>
       <ClientLogos />
+      <FeaturedWork />
       <LiveWebsites />
       <section className="h-section h-wrap" id="ervaring">
-        <Heading
-          label="Sinds 2021 / Van idee naar uitvoering"
-          title={
-            <>
-              Het begon bij
-              <br />
-              <span>echt klantwerk.</span>
-            </>
-          }
-          text="Merken bouwen. Websites ontwikkelen. Content en campagnes maken. Die praktijkervaring zit in alles wat we vandaag ontwerpen."
-        >
-          <Action to="/projecten" secondary>
-            Bekijk ons werk
-          </Action>
-        </Heading>
-        <div className="h-project-grid">
-          {featured.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
         <figure className="h-review">
           <img
             src="/images/Ellen-Sluijs.webp"
@@ -1053,7 +1025,7 @@ export function NotFound() {
       <PageHeading
         label="Pagina niet gevonden"
         title="Even terug naar het begin."
-        text="Deze pagina bestaat niet in het voorstel. Je vindt de rest van SocialNow via het menu."
+        text="Deze pagina bestaat niet. Je vindt de rest van SocialNow via het menu."
       />
       <div className="h-wrap h-not-found">
         <Action to="/">Naar de homepage</Action>

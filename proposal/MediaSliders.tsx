@@ -100,7 +100,7 @@ export const portfolioVideos: MediaItem[] = [
   kind: "video",
 }));
 
-function MediaDialog({
+export function MediaDialog({
   item,
   close,
 }: {

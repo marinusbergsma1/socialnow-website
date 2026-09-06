@@ -29,7 +29,6 @@ try {
   const { allPosts } = await server.ssrLoadModule("/data/posts.ts");
   const routes = [
     "/",
-    "/stijlen",
     "/het-os",
     "/projecten",
     "/diensten",
@@ -91,39 +90,45 @@ try {
       rendered.get(route).includes(`id="${id}"`),
       `cross-page anchor ${route}#${id}`,
     );
-  const { styleOptions } = await server.ssrLoadModule("/proposal/styles.tsx");
-  assert.equal(styleOptions.length, 3, "three concrete style directions");
-  for (const style of styleOptions) {
-    const html = renderToStaticMarkup(
-      React.createElement(
-        MemoryRouter,
-        {
-          basename: "/voorstel",
-          initialEntries: [`/voorstel/?stijl=${style.id}`],
-        },
-        React.createElement(Page),
-      ),
-    );
-    assert(
-      html.includes(`data-style="${style.id}"`),
-      `style URL selects correct direction: ${style.id}`,
-    );
-    assert.equal(
-      (html.match(/<h1\b/g) || []).length,
-      1,
-      `one h1 in style ${style.id}`,
-    );
-    assert(
-      html.includes("Videoportfolio") &&
-        html.includes("Portfolio bovenste rij") &&
-        html.includes("Live website"),
-      `original media sections retained: ${style.id}`,
-    );
-    assert(
-      html.includes("SocialNow-OS-Komen-Consultancy.webp"),
-      `full brand footer: ${style.id}`,
-    );
-    assert(!html.includes("+312%"), `no invented growth result: ${style.id}`);
+  for (const base of ["/voorstel", "/"]) {
+    for (const route of routes) {
+      const url = `${base === "/" ? "" : base}${route}?stijl=studio`;
+      const html = renderToStaticMarkup(
+        React.createElement(
+          MemoryRouter,
+          { basename: base, initialEntries: [url] },
+          React.createElement(Page),
+        ),
+      );
+      assert(
+        html.includes('data-style="signature"'),
+        `Signature always selected: ${url}`,
+      );
+      assert(!html.includes("Kies een stijl"), `style picker removed: ${url}`);
+      assert.equal((html.match(/<h1\b/g) || []).length, 1, `one h1: ${url}`);
+      if (route === "/") {
+        assert(
+          html.includes('id="uitgelicht-werk"'),
+          "featured work prominently available",
+        );
+        assert(
+          html.includes("h-featured-motion"),
+          "moving featured video collection",
+        );
+        assert(
+          html.includes("Universal Studios, Sony"),
+          "original film campaign collage",
+        );
+        assert(
+          html.indexOf("h-hero-milos") < html.indexOf('id="uitgelicht-werk"'),
+          "four hero Milos remain first",
+        );
+        assert(
+          !html.includes("Concepttekst voor Marinus"),
+          "no unapproved founder quote on production",
+        );
+      }
+    }
   }
   const { portfolioVideos, portfolioImages } = await server.ssrLoadModule(
     "/proposal/MediaSliders.tsx",
@@ -245,6 +250,28 @@ try {
     const home = readFileSync("dist/index.html", "utf8");
     assert(preview.includes("noindex, nofollow"));
     assert(!home.includes("noindex, nofollow"));
+    assert(
+      !home.includes("€3.000"),
+      "old pricing removed from production metadata",
+    );
+    assert(
+      home.includes("Eén OS voor je bedrijf"),
+      "Signature homepage metadata",
+    );
+    assert(
+      readFileSync("dist/prijzen/index.html", "utf8").includes(
+        "persoonlijk voorstel",
+      ),
+      "new offer metadata",
+    );
+    assert(
+      readFileSync("dist/sitemap.xml", "utf8").includes("/het-os"),
+      "OS route indexed",
+    );
+    assert(
+      readFileSync("dist/sitemap.xml", "utf8").includes("/contact"),
+      "contact route indexed",
+    );
     assert(!readFileSync("dist/sitemap.xml", "utf8").includes("/voorstel"));
     for (const [, asset] of preview.matchAll(
       /(?:src|href)="(\/assets\/[^"]+)"/g,
@@ -260,6 +287,8 @@ try {
       );
     }
     for (const route of [
+      "het-os",
+      "contact",
       "diensten",
       "projecten",
       "prijzen",
@@ -275,7 +304,7 @@ try {
     }
   }
   console.log(
-    `Geslaagd: Node-render, ${routes.length} routes, ${idCount} IDs en ARIA-doelen, ${images.size} bestaande afbeeldingen, instaplinks, demo/live/foutstanden, installatiehints en preview-isolatie. Geen browser gebruikt.`,
+    `Geslaagd: Node-render, ${routes.length} routes, ${idCount} IDs en ARIA-doelen, ${images.size} bestaande afbeeldingen, instaplinks, demo/live/foutstanden, installatiehints en Signature op hoofd- en previewroutes. Geen browser gebruikt.`,
   );
 } finally {
   await server.close();

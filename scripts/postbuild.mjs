@@ -12,34 +12,20 @@ const BASE = 'https://socialnow.nl';
 
 // Per-route metadata. Homepage (index.html) blijft ongewijzigd.
 const routeMeta = {
-  diensten: {
-    title: 'Diensten — AI Website, CRM, Content & Ads | SocialNow',
-    description: 'Ontdek de diensten van SocialNow: een AI-website die verkoopt, automatische content, CRM met opvolging en data-gestuurde advertenties. Alles onder één dak, aangestuurd via één AI-chat.',
-  },
-  projecten: {
-    title: 'Projecten & Cases — 500+ opgeleverd | SocialNow',
-    description: 'Bekijk het werk van SocialNow: 500+ projecten, gemiddeld 4.9/5. Van AI-websites en branded content tot complete verkoopsystemen voor merken door heel Nederland.',
-  },
-  prijzen: {
-    title: 'Prijzen & Pakketten — vanaf €3.000/maand | SocialNow',
-    description: 'Transparante prijzen van SocialNow. Start met een gratis proof of concept; het Alles-in-1 AI-pakket met content, CRM, ads en analytics start vanaf €3.000 per maand.',
-  },
-  privacy: {
-    title: 'Privacybeleid | SocialNow',
-    description: 'Lees hoe SocialNow omgaat met je gegevens. Transparant privacybeleid over verwerking, opslag en jouw rechten.',
-  },
-  team: {
-    title: 'Team — Wij zijn SocialNow | SocialNow',
-    description: 'Maak kennis met het team achter SocialNow, het AI-native creative agency uit Amsterdam. Founder Marinus Bergsma en het team dat merken laat groeien.',
-  },
-  blog: {
-    title: 'Blog — AI Websites, SEO en GEO | SocialNow',
-    description: 'Inzichten van SocialNow over AI websites, content automation, SEO en GEO. Praktische uitleg, geschreven vanuit de praktijk.',
-  },
+  'het-os': {title: 'Het OS — Vier Milo’s, één geheel | SocialNow', description: 'Ontdek Website, CRM, Studio en Advertenties in SocialNow OS. Verken de POC en bespreek je eigen inrichting.'},
+  contact: {title: 'Contact — Bespreek jouw Custom OS | SocialNow', description: 'Maak kennis met Marinus en het team. Vertel ons hoe je bedrijf werkt en bespreek jouw Custom OS.'},
+  diensten: {title: 'Diensten — Van merk tot techniek | SocialNow', description: 'Websites, branding, content, marketing en development. Het team achter jouw merk en Custom OS.'},
+  projecten: {title: 'Uitgelicht werk & cases | SocialNow', description: 'Bekijk websites, video’s en campagnes van SocialNow. Werk voor onder meer RAVEG, Universal, Sony en AZ.'},
+  prijzen: {title: 'Aanbod — POC & Custom OS | SocialNow', description: 'Verken de POC. Voor jouw Custom OS maken we een persoonlijk voorstel met een duidelijke scope, kosten en begeleiding.'},
+  privacy: {title: 'Privacybeleid | SocialNow', description: 'Lees hoe SocialNow omgaat met persoonsgegevens en welke rechten je hebt.'},
+  team: {title: 'Team — De mensen achter het OS | SocialNow', description: 'Maak kennis met Marinus Bergsma en de creatieve en technische specialisten achter SocialNow.'},
+  blog: {title: 'Blog — Vanuit de praktijk | SocialNow', description: 'Inzichten over websites, AI, content en vindbaarheid vanuit het werk van SocialNow.'},
 };
 
 // Zichtbare kruimel-labels per route (voor de BreadcrumbList). Vul aan waar nodig.
 const crumbLabels = {
+  'het-os': 'Het OS',
+  contact: 'Contact',
   diensten: 'Diensten',
   projecten: 'Projecten',
   prijzen: 'Prijzen',
@@ -61,13 +47,13 @@ for (const [route, meta] of Object.entries(routeMeta)) {
 
   let out = html
     .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
-    .replace(/(<meta name="description" content=")[^"]*(")/, `$1${desc}$2`)
-    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
-    .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${title}$2`)
-    .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${desc}$2`)
-    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
-    .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${title}$2`)
-    .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${desc}$2`);
+    .replace(/(<meta\s+name="description"\s+content=")[^"]*(")/, `$1${desc}$2`)
+    .replace(/(<link\s+rel="canonical"\s+href=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta\s+property="og:title"\s+content=")[^"]*(")/, `$1${title}$2`)
+    .replace(/(<meta\s+property="og:description"\s+content=")[^"]*(")/, `$1${desc}$2`)
+    .replace(/(<meta\s+property="og:url"\s+content=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/, `$1${title}$2`)
+    .replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/, `$1${desc}$2`);
 
   // BreadcrumbList (GEO/SEO): Home > <route> — helpt Google breadcrumb-rich-results
   // en geeft AI-antwoordmachines de sitehiërarchie. Vóór </body> ingevoegd.
@@ -146,13 +132,13 @@ for (const [slug, p] of Object.entries(projectMeta)) {
 
   let out = html
     .replace(/<title>[^<]*<\/title>/, `<title>${pageTitle}</title>`)
-    .replace(/(<meta name="description" content=")[^"]*(")/, `$1${desc}$2`)
-    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
-    .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${pageTitle}$2`)
-    .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${desc}$2`)
-    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
-    .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${pageTitle}$2`)
-    .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${desc}$2`);
+    .replace(/(<meta\s+name="description"\s+content=")[^"]*(")/, `$1${desc}$2`)
+    .replace(/(<link\s+rel="canonical"\s+href=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta\s+property="og:title"\s+content=")[^"]*(")/, `$1${pageTitle}$2`)
+    .replace(/(<meta\s+property="og:description"\s+content=")[^"]*(")/, `$1${desc}$2`)
+    .replace(/(<meta\s+property="og:url"\s+content=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/, `$1${pageTitle}$2`)
+    .replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/, `$1${desc}$2`);
 
   // BreadcrumbList + CreativeWork (GEO/SEO): geeft Google en AI-antwoordmachines
   // de sitehiërarchie én een citeerbaar feitenblok per case.
@@ -205,13 +191,13 @@ for (const post of posts) {
 
   let out = html
     .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
-    .replace(/(<meta name="description" content=")[^"]*(")/, `$1${desc}$2`)
-    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
-    .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${title}$2`)
-    .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${desc}$2`)
-    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
-    .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${title}$2`)
-    .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${desc}$2`);
+    .replace(/(<meta\s+name="description"\s+content=")[^"]*(")/, `$1${desc}$2`)
+    .replace(/(<link\s+rel="canonical"\s+href=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta\s+property="og:title"\s+content=")[^"]*(")/, `$1${title}$2`)
+    .replace(/(<meta\s+property="og:description"\s+content=")[^"]*(")/, `$1${desc}$2`)
+    .replace(/(<meta\s+property="og:url"\s+content=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/, `$1${title}$2`)
+    .replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/, `$1${desc}$2`);
 
   const breadcrumb = {
     '@context': 'https://schema.org',
@@ -260,8 +246,8 @@ for (const post of posts) {
 
 copyFileSync('dist/index.html', 'dist/404.html');
 
-// Tijdelijk, expliciet aangevraagd websitevoorstel. Eigen ingang, noindex,
-// geen vermelding in de sitemap en geen vervanging van de homepage.
+// Oude previewlinks blijven bereikbaar met dezelfde gekozen Signature-stijl.
+// De preview blijft noindex; de hoofdwebsite is nu Signature.
 const previewRoutes = ['', 'stijlen', 'het-os', 'projecten', 'diensten', 'prijzen', 'team', 'blog', 'contact', 'privacy',
   ...Object.keys(projectMeta).map(slug => `project/${slug}`),
   ...posts.map(post => `blog/${post.slug}`),
