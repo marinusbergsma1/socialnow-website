@@ -207,3 +207,7 @@ Live embeds krijgen bij muis-hover maximaal 2,5 seconden pointerbediening, waarn
 Ads gebruikt overal `public/proposal/milo/ads-magenta.webp`, exact de gedeelde GPT Image2-export van job 53e6625a-bbc8-4866-9de7-9210294f98aa. SHA256 b874bfecb4a1cf961d050233e308dc28a2edf818e23cabc1ce3ca4407a73c460. Bron: /Users/marinusbergsma/.codex/generated_images/milo-approved-2026-09-06/milo-profile-ads-image2.webp; visueel gecontroleerd naast ODOO MILO'S.png. Geen kleurfilter of programmatische recolor.
 
 Rolaccenten Website #25D366, CRM #1965C2, Studio #F5940D, Advertenties #EC1670. Kaartaccenten volgen dezelfde rolkleuren. Hero, modulekaarten, OS-pagina en afsluiting delen het juiste Ads-portret. Ads gebruikt bewust de goedgekeurde still totdat een magenta animatie is goedgekeurd; oude groene profielvideo’s blijven gearchiveerd in de bron maar worden niet geladen door MiloMotion. De drie andere goedgekeurde animaties blijven behouden.
+
+### Kortere opening en snellere instap
+
+Hero ingekort naar “Your website, CRM, content and ads. In one chat.” / “Je website, CRM, content en advertenties. In één chat.” Extra tussenalinea en derde kopregel verwijderd, bovenruimte en kopgrootte verminderd. De knoppen staan direct onder de kernzin. Op mobiel komen de vier Milo’s na de instapknoppen, op desktop blijven ze rechts prominent.

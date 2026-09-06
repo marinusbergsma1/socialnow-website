@@ -6,8 +6,6 @@ export function HeroTitle() {
       Eén OS voor
       <br />
       je bedrijf.
-      <br />
-      <span>Probeer het zelf.</span>
     </h1>
   );
 }

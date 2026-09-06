@@ -83,18 +83,11 @@ export function Home() {
             <i /> SocialNow OS / Ontdek hoe het werkt
           </p>
           <HeroTitle />
-          <HeroMilos />
           <p className="h-hero-description">
-            Probeer SocialNow OS. Vier Milo’s voor je website, klanten, content
-            en advertenties. Ervaar zelf hoe één omgeving je werk eenvoudiger
-            maakt.
-          </p>
-          <p className="h-hero-human">
-            Ontworpen voor gemak, overzicht en sneller werken.
-            <br />
-            Eerst zelf ervaren. Daarna samen op maat.
+            Je website, CRM, content en advertenties. In één chat.
           </p>
           <OsEntry />
+          <HeroMilos />
           <ol
             className="h-poc-path"
             aria-label="Van proberen naar jouw Custom OS"
