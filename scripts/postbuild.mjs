@@ -12,7 +12,7 @@ const BASE = 'https://socialnow.nl';
 
 // Per-route metadata. Homepage (index.html) blijft ongewijzigd.
 const routeMeta = {
-  'het-os': {title: 'Het OS — Vier Milo’s, één geheel | SocialNow', description: 'Ontdek Website, CRM, Studio en Advertenties in SocialNow OS. Probeer het OS en bespreek je eigen inrichting.'},
+  'het-os': {title: 'Het OS — Je bedrijf in één chat | SocialNow', description: 'Ontdek Website, CRM, Studio en Advertenties in SocialNow OS. Probeer het OS en bespreek je eigen inrichting.'},
   contact: {title: 'Contact — Bespreek jouw Custom OS | SocialNow', description: 'Maak kennis met Marinus en het team. Vertel ons hoe je bedrijf werkt en bespreek jouw Custom OS.'},
   diensten: {title: 'Diensten — Van merk tot techniek | SocialNow', description: 'Websites, branding, content, marketing en development. Het team achter jouw merk en Custom OS.'},
   projecten: {title: 'Uitgelicht werk & cases | SocialNow', description: 'Bekijk websites, video’s en campagnes van SocialNow. Werk voor onder meer RAVEG, Universal, Sony en AZ.'},
