@@ -12,7 +12,7 @@ export default function LogoIntro() {
     video.current?.pause();
     setOpen(false);
     try {
-      sessionStorage.setItem("sn-preview-logo-v4", "seen");
+      sessionStorage.setItem("sn-preview-logo-v5", "seen");
     } catch {
       /* Private mode */
     }
@@ -21,7 +21,7 @@ export default function LogoIntro() {
     setMobile(window.matchMedia("(max-width: 767px)").matches);
     let seen = false;
     try {
-      seen = sessionStorage.getItem("sn-preview-logo-v4") === "seen";
+      seen = sessionStorage.getItem("sn-preview-logo-v5") === "seen";
     } catch {
       /* Private mode */
     }
@@ -63,7 +63,7 @@ export default function LogoIntro() {
       {open && (
         <video
           ref={video}
-          src={`/video/header-intro${mobile ? "-mobile" : ""}.mp4?v=9`}
+          src={`/video/header-intro${mobile ? "-mobile" : ""}.mp4?v=10`}
           muted
           playsInline
           preload="auto"
