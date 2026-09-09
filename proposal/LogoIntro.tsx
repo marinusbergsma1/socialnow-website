@@ -63,7 +63,7 @@ export default function LogoIntro() {
       {open && (
         <video
           ref={video}
-          src={`/video/header-intro${mobile ? "-mobile" : ""}.mp4?v=10`}
+          src={`/video/header-intro${mobile ? "-mobile" : ""}.mp4?v=11`}
           muted
           playsInline
           preload="auto"
