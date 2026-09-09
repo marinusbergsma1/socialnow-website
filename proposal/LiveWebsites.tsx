@@ -10,14 +10,20 @@ import { webShowcaseProjects } from "../data/projects";
 import { Heading, TextLink } from "./ui";
 import { useInView } from "./motion";
 
-// Deze directe websites staan embedding toe. Sites met frame-beperkingen
-// openen via een directe link, zonder vervangende afbeeldingen.
+// Deze directe websites staan embedding toe (geen X-Frame-Options / frame-ancestors).
+// Sites met frame-beperkingen tonen hun same-origin spiegel (previewUrl) of anders
+// een directe link, zonder vervangende afbeeldingen.
 const EMBED = new Set([
   "kwh-garant-website",
   "ilgordo-website",
   "vdz-brigade-website",
   "divine-machines-website",
+  "vintage-watches-website",
+  "newblack-website",
 ]);
+// Websites die online staan, of waarvan we een eigen kopie (previewUrl) in het frame
+// kunnen tonen. Offline sites zonder kopie blijven alleen als case bestaan.
+const sites = webShowcaseProjects.filter((project) => !project.offline || project.previewUrl);
 export default function LiveWebsites() {
   const [index, setIndex] = useState(0);
   const [mobile, setMobile] = useState(false);
@@ -44,10 +50,11 @@ export default function LiveWebsites() {
     stopInteraction();
     return () => window.clearTimeout(interactionTimer.current);
   }, [index, visible]);
-  const project = webShowcaseProjects[index];
-  const live = EMBED.has(project.slug);
+  const project = sites[index];
+  const frameSrc = project.previewUrl || (EMBED.has(project.slug) ? project.url : undefined);
+  const live = !!frameSrc;
   const choose = (next: number) => {
-    setIndex((next + webShowcaseProjects.length) % webShowcaseProjects.length);
+    setIndex((next + sites.length) % sites.length);
   };
   return (
     <section
@@ -74,7 +81,7 @@ export default function LiveWebsites() {
           <strong>{project.title}</strong>
           <span>
             Live website · {index + 1} /{" "}
-            {webShowcaseProjects.length}
+            {sites.length}
           </span>
         </div>
         <div className="h-live-tools">
@@ -94,10 +101,12 @@ export default function LiveWebsites() {
           >
             <Smartphone size={16} />
           </button>
-          <a href={project.url} target="_blank" rel="noopener noreferrer">
-            Open live website
-            <ExternalLink size={13} />
-          </a>
+          {!project.offline && (
+            <a href={project.url} target="_blank" rel="noopener noreferrer">
+              Open live website
+              <ExternalLink size={13} />
+            </a>
+          )}
         </div>
       </div>
       <div className={`h-live-device${mobile ? " is-mobile" : ""}`}>
@@ -119,7 +128,7 @@ export default function LiveWebsites() {
               tabIndex={interactive ? 0 : -1}
               style={{pointerEvents: interactive ? "auto" : "none"}}
               title={`Live website van ${project.title}`}
-              src={project.url}
+              src={frameSrc}
               loading="lazy"
               referrerPolicy="strict-origin-when-cross-origin"
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
@@ -127,9 +136,11 @@ export default function LiveWebsites() {
           ) : (
             <div className="h-live-direct">
               <strong>{project.title}</strong>
-              <a className="sn-btn3d h-button" href={project.url} target="_blank" rel="noopener noreferrer">
-                Open live website <ExternalLink size={18} />
-              </a>
+              {!project.offline && (
+                <a className="sn-btn3d h-button" href={project.url} target="_blank" rel="noopener noreferrer">
+                  Open live website <ExternalLink size={18} />
+                </a>
+              )}
               <span>{live ? "De live website wordt geladen zodra dit onderdeel in beeld komt." : "Deze website opent in een nieuw tabblad."}</span>
             </div>
           )}
@@ -163,7 +174,7 @@ export default function LiveWebsites() {
         role="group"
         aria-label="Kies een website"
       >
-        {webShowcaseProjects.map((item, itemIndex) => (
+        {sites.map((item, itemIndex) => (
           <button
             key={item.slug}
             type="button"

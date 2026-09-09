@@ -25,6 +25,8 @@ export interface Project {
   metrics?: ProjectMetric[];
   /** Site blokkeert iframes (X-Frame-Options); toon het beeld i.p.v. live embed */
   noEmbed?: boolean;
+  /** Live website is (tijdelijk) offline: geen live link of embed, wel de case met screenshot */
+  offline?: boolean;
 }
 
 export interface BlogFAQ {

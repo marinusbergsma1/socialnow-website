@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primefone — Gecertificeerde Refurbished Smartphones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0A1628;
+  --blue:#1565C0;
+  --orange:#FF6B35;
+  --white:#FFFFFF;
+  --green:#059669;
+  --grey-50:#f8fafc;
+  --grey-100:#f1f5f9;
+  --grey-200:#e2e8f0;
+  --grey-400:#94a3b8;
+  --grey-600:#475569;
+  --grey-700:#334155;
+  --grey-900:#0f172a;
+  --radius-sm:8px;
+  --radius-md:12px;
+  --radius-lg:16px;
+  --radius-xl:24px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:0 4px 16px rgba(0,0,0,.10),0 2px 4px rgba(0,0,0,.06);
+  --shadow-lg:0 10px 40px rgba(0,0,0,.12),0 4px 12px rgba(0,0,0,.08);
+  --shadow-xl:0 20px 60px rgba(0,0,0,.15);
+  --transition:all .22s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--navy);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;font-family:inherit}
+
+/* ── UTILITIES ─────────────────────────────────────── */
+.container{max-width:1440px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem;gap:1rem;flex-wrap:wrap}
+.section-header-left h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:var(--navy);margin-top:.35rem}
+.see-all{font-size:.85rem;font-weight:600;color:var(--blue);white-space:nowrap;display:flex;align-items:center;gap:.25rem;padding-bottom:.25rem;border-bottom:1.5px solid transparent;transition:var(--transition)}
+.see-all:hover{border-color:var(--blue)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:var(--radius-sm);font-size:.9rem;font-weight:700;transition:var(--transition);white-space:nowrap}
+.btn-primary{background:var(--orange);color:#fff}
+.btn-primary:hover{background:#e55a25;transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,107,53,.35)}
+.btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5)}
+.btn-ghost:hover{background:rgba(255,255,255,.12);border-color:#fff}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:#142035;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--navy);border:2px solid var(--grey-200)}
+.btn-outline:hover{border-color:var(--navy)}
+.badge{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .65rem;border-radius:100px;font-size:.7rem;font-weight:700;letter-spacing:.04em}
+.badge-orange{background:#fff3ee;color:var(--orange)}
+.badge-green{background:#d1fae5;color:#065f46}
+.badge-blue{background:#dbeafe;color:#1e40af}
+.badge-red{background:#fee2e2;color:#991b1b}
+
+/* ── ANNOUNCEMENT BAR ─────────────────────────────── */
+.announcement-bar{background:var(--navy);color:#fff;text-align:center;padding:.55rem 1rem;font-size:.78rem;font-weight:500;letter-spacing:.03em;position:relative;z-index:100}
+.announcement-bar span{opacity:.8;margin:0 .6rem}
+
+/* ── HEADER ───────────────────────────────────────── */
+.header{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid var(--grey-200);box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.header-main{display:flex;align-items:center;gap:1.5rem;padding:.85rem clamp(1rem,4vw,2.5rem);max-width:1440px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:.3rem;font-size:1.45rem;font-weight:800;color:var(--navy);letter-spacing:-.02em;flex-shrink:0}
+.logo-dot{width:8px;height:8px;background:var(--blue);border-radius:50%;margin-bottom:2px}
+.header-nav{display:flex;align-items:center;gap:.25rem;flex:1;justify-content:center}
+.header-nav a{font-size:.88rem;font-weight:600;color:var(--grey-700);padding:.5rem .85rem;border-radius:var(--radius-sm);transition:var(--transition)}
+.header-nav a:hover{color:var(--navy);background:var(--grey-100)}
+.header-actions{display:flex;align-items:center;gap:.35rem;flex-shrink:0}
+.icon-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);background:transparent;color:var(--navy);transition:var(--transition);position:relative;cursor:pointer}
+.icon-btn:hover{background:var(--grey-100)}
+.icon-btn svg{width:20px;height:20px}
+.cart-badge{position:absolute;top:4px;right:4px;background:var(--orange);color:#fff;font-size:.6rem;font-weight:800;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.category-bar{background:var(--grey-50);border-top:1px solid var(--grey-200)}
+.category-bar-inner{max-width:1440px;margin:0 auto;padding:.6rem clamp(1rem,4vw,2.5rem);display:flex;align-items:center;gap:.25rem;overflow-x:auto;scrollbar-width:none}
+.category-bar-inner::-webkit-scrollbar{display:none}
+.cat-link{font-size:.8rem;font-weight:600;color:var(--grey-600);white-space:nowrap;padding:.3rem .75rem;border-radius:100px;transition:var(--transition)}
+.cat-link:hover,.cat-link.active{color:var(--blue);background:#dbeafe}
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero{position:relative;min-height:70vh;display:flex;align-items:center;overflow:hidden;background:var(--navy)}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
+.hero-slide.active{opacity:1}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center right;background-repeat:no-repeat}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(10,22,40,.92) 0%,rgba(10,22,40,.7) 50%,rgba(10,22,40,.25) 100%)}
+.hero-content{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem);width:100%;display:flex;align-items:center;min-height:70vh}
+.hero-text{max-width:600px;padding:4rem 0}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(21,101,192,.25);border:1px solid rgba(21,101,192,.4);color:#93c5fd;padding:.4rem 1rem;border-radius:100px;font-size:.7rem;font-weight:700;letter-spacing:.1em;margin-bottom:1.25rem}
+.hero-title{font-size:clamp(2rem,4.5vw,3.5rem);font-weight:800;color:#fff;line-height:1.12;letter-spacing:-.02em;margin-bottom:1rem}
+.hero-title em{font-style:normal;color:var(--orange)}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,.72);max-width:460px;margin-bottom:1.75rem;line-height:1.65}
+.hero-ctas{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.hero-meta{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.hero-chip{display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:#fff;padding:.4rem .85rem;border-radius:100px;font-size:.78rem;font-weight:600}
+.hero-chip-icon{font-size:.9rem}
+.hero-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:10;width:44px;height:44px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;transition:var(--transition)}
+.hero-nav:hover{background:rgba(255,255,255,.22)}
+.hero-prev{left:1.5rem}
+.hero-next{right:1.5rem}
+.hero-dots{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem;z-index:10}
+.hero-dot{width:8px;height:8px;border-radius:100px;background:rgba(255,255,255,.35);cursor:pointer;transition:var(--transition)}
+.hero-dot.active{width:24px;background:#fff}
+
+/* ── TICKER ───────────────────────────────────────── */
+.ticker{background:#fff;border-top:1px solid var(--grey-200);border-bottom:1px solid var(--grey-200);padding:.7rem 0;overflow:hidden}
+.ticker-track{display:flex;animation:ticker-scroll 30s linear infinite;width:max-content}
+.ticker-item{display:flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:600;color:var(--grey-700);white-space:nowrap;padding:0 2.5rem}
+.ticker-item::after{content:'•';margin-left:2.5rem;color:var(--grey-400)}
+.ticker-icon{font-size:1rem}
+@keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-track:hover{animation-play-state:paused}
+
+/* ── CATEGORY GRID ────────────────────────────────── */
+.categories{padding:5rem 0}
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
+.cat-card{border-radius:var(--radius-lg);overflow:hidden;position:relative;cursor:pointer;transition:var(--transition);border:1px solid transparent}
+.cat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--grey-200)}
+.cat-card-inner{padding:1.5rem 1.25rem 1.25rem;display:flex;flex-direction:column;min-height:200px;position:relative}
+.cat-img-wrap{height:100px;margin:-1.5rem -1.25rem 1rem;overflow:hidden}
+.cat-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.cat-card:hover .cat-img-wrap img{transform:scale(1.05)}
+.cat-card-badge{position:absolute;top:.75rem;right:.75rem}
+.cat-name{font-size:.92rem;font-weight:800;color:var(--navy);margin-bottom:.2rem}
+.cat-sub{font-size:.75rem;color:var(--grey-600);margin-bottom:.5rem}
+.cat-price{font-size:.78rem;font-weight:700;color:var(--blue)}
+
+/* ── USP PROMO BANNER ─────────────────────────────── */
+.promo-banner{padding:0 0 5rem}
+.promo-inner{border-radius:var(--radius-xl);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;min-height:320px;box-shadow:var(--shadow-xl)}
+.promo-img{position:relative;overflow:hidden}
+.promo-img img{width:100%;height:100%;object-fit:cover}
+.promo-content{background:var(--navy);padding:3.5rem;display:flex;flex-direction:column;justify-content:center;gap:1rem}
+.promo-content .eyebrow{color:#60a5fa}
+.promo-title{font-size:clamp(1.4rem,2.5vw,2rem);font-weight:800;color:#fff;line-height:1.2}
+.promo-sub{font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.6}
+
+/* ── PRODUCT CARDS ────────────────────────────────── */
+.products{padding:5rem 0;background:var(--grey-50)}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.product-card{background:#fff;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--grey-200);transition:var(--transition);cursor:pointer}
+.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+.product-img{position:relative;height:220px;background:var(--grey-100);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.product-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.product-card:hover .product-img img{transform:scale(1.04)}
+.product-discount{position:absolute;top:12px;left:12px;background:var(--orange);color:#fff;font-size:.7rem;font-weight:800;padding:.25rem .6rem;border-radius:100px}
+.product-popular{position:absolute;top:12px;left:12px;background:var(--blue);color:#fff;font-size:.7rem;font-weight:800;padding:.25rem .6rem;border-radius:100px}
+.product-brand{font-size:.65rem;font-weight:700;letter-spacing:.08em;color:var(--blue);text-transform:uppercase;margin-bottom:.3rem}
+.product-body{padding:1.1rem}
+.product-title{font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.2rem;line-height:1.35}
+.product-condition{font-size:.75rem;color:var(--grey-600);margin-bottom:.5rem}
+.product-stars{display:flex;align-items:center;gap:.25rem;font-size:.75rem;color:var(--grey-600);margin-bottom:.65rem}
+.product-stars span{color:#f59e0b;font-size:.8rem}
+.product-price-row{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.6rem}
+.product-price{font-size:1.15rem;font-weight:800;color:var(--navy)}
+.product-original{font-size:.82rem;color:var(--grey-400);text-decoration:line-through}
+.product-stock{display:flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:600;color:var(--green)}
+.product-stock-dot{width:7px;height:7px;background:var(--green);border-radius:50%}
+.product-add{width:100%;padding:.65rem;background:var(--navy);color:#fff;font-size:.82rem;font-weight:700;border-radius:var(--radius-sm);margin-top:.75rem;transition:var(--transition)}
+.product-add:hover{background:var(--blue)}
+
+/* ── SUB-CATEGORY GRID ────────────────────────────── */
+.subcategories{padding:5rem 0}
+.subcats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.subcats-small{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.subcat-card-large{border-radius:var(--radius-xl);overflow:hidden;position:relative;height:280px;cursor:pointer;transition:var(--transition)}
+.subcat-card-large:hover{transform:translateY(-3px);box-shadow:var(--shadow-xl)}
+.subcat-card-large img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.subcat-card-large:hover img{transform:scale(1.04)}
+.subcat-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(10,22,40,.05) 0%,rgba(10,22,40,.75) 100%)}
+.subcat-content{position:absolute;bottom:0;left:0;right:0;padding:1.75rem}
+.subcat-title{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.3rem}
+.subcat-desc{font-size:.8rem;color:rgba(255,255,255,.75);margin-bottom:1rem}
+.subcat-btns{display:flex;gap:.65rem;flex-wrap:wrap}
+.subcat-card-small{border-radius:var(--radius-lg);overflow:hidden;position:relative;height:200px;cursor:pointer;transition:var(--transition)}
+.subcat-card-small:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.subcat-card-small-bg{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.subcat-card-small:hover .subcat-card-small-bg{transform:scale(1.05)}
+.sc-sm-1{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%)}
+.sc-sm-2{background:linear-gradient(135deg,#11998e 0%,#38ef7d 100%)}
+.sc-sm-3{background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%)}
+.subcat-small-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.65) 100%)}
+.subcat-small-content{position:absolute;bottom:0;left:0;right:0;padding:1.25rem}
+.subcat-small-title{font-size:.95rem;font-weight:800;color:#fff;margin-bottom:.2rem}
+.subcat-small-desc{font-size:.72rem;color:rgba(255,255,255,.75);margin-bottom:.75rem}
+.btn-sm{padding:.45rem .9rem;font-size:.78rem}
+
+/* ── WHY PRIMEFONE ────────────────────────────────── */
+.why{padding:5rem 0;background:var(--grey-50)}
+.why-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
+.why-card{background:#fff;border-radius:var(--radius-lg);padding:1.5rem 1.25rem;border:1px solid var(--grey-200);transition:var(--transition)}
+.why-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+.why-icon{width:48px;height:48px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem}
+.why-title{font-size:.88rem;font-weight:800;color:var(--navy);margin-bottom:.4rem;line-height:1.3}
+.why-desc{font-size:.76rem;color:var(--grey-600);line-height:1.5}
+
+/* ── STATS ────────────────────────────────────────── */
+.stats{padding:5rem 0;background:var(--navy)}
+.stats-title{text-align:center;color:#fff;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:.5rem}
+.stats-sub{text-align:center;color:rgba(255,255,255,.6);margin-bottom:3.5rem;font-size:.95rem}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.stat-item{text-align:center;padding:2rem 1rem;background:rgba(255,255,255,.06);border-radius:var(--radius-lg);border:1px solid rgba(255,255,255,.08)}
+.stat-eyebrow{font-size:.65rem;font-weight:700;letter-spacing:.12em;color:#60a5fa;text-transform:uppercase;margin-bottom:.5rem}
+.stat-value{font-size:clamp(2rem,3.5vw,3rem);font-weight:800;color:#fff;line-height:1;margin-bottom:.5rem}
+.stat-label{font-size:.8rem;color:rgba(255,255,255,.6)}
+
+/* ── REVIEWS ──────────────────────────────────────── */
+.reviews{padding:5rem 0}
+.reviews-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:3rem;gap:2rem;flex-wrap:wrap}
+.reviews-header-left h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:var(--navy);margin-top:.35rem}
+.reviews-header-left p{color:var(--grey-600);margin-top:.5rem;font-size:.9rem}
+.reviews-score{text-align:right;flex-shrink:0}
+.reviews-score-number{font-size:3rem;font-weight:800;color:var(--navy);line-height:1}
+.reviews-score-label{font-size:.65rem;font-weight:800;letter-spacing:.1em;color:var(--grey-600);text-transform:uppercase;margin-top:.15rem}
+.reviews-count{font-size:.75rem;color:var(--grey-600);margin-top:.3rem}
+.reviews-verified{font-size:.72rem;color:var(--green);font-weight:600;margin-top:.2rem}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.review-card{background:#fff;border:1px solid var(--grey-200);border-radius:var(--radius-lg);padding:1.5rem;transition:var(--transition)}
+.review-card:hover{box-shadow:var(--shadow-md);border-color:transparent}
+.review-stars{color:#f59e0b;font-size:1rem;margin-bottom:.85rem;letter-spacing:.05em}
+.review-text{font-size:.87rem;color:var(--grey-700);line-height:1.65;margin-bottom:1.1rem;font-style:italic}
+.review-footer{display:flex;align-items:center;gap:.75rem}
+.review-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:#fff;flex-shrink:0}
+.av-blue{background:#1565C0}
+.av-green{background:#059669}
+.av-purple{background:#7c3aed}
+.review-name{font-size:.85rem;font-weight:700;color:var(--navy)}
+.review-product{font-size:.73rem;color:var(--grey-600)}
+.review-date{font-size:.7rem;color:var(--grey-400)}
+.review-badge-verified{display:inline-flex;align-items:center;gap:.25rem;background:#d1fae5;color:#065f46;font-size:.65rem;font-weight:700;padding:.15rem .5rem;border-radius:100px;margin-top:.2rem}
+
+/* ── SUSTAINABILITY ───────────────────────────────── */
+.sustainability{padding:6rem 0;background:linear-gradient(135deg,#065f46 0%,#047857 40%,#0A1628 100%);text-align:center}
+.sustain-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#6ee7b7;padding:.4rem 1.1rem;border-radius:100px;font-size:.72rem;font-weight:700;letter-spacing:.08em;margin-bottom:1.25rem}
+.sustain-title{font-size:clamp(1.6rem,3.5vw,2.6rem);font-weight:800;color:#fff;max-width:700px;margin:0 auto 1rem;line-height:1.2}
+.sustain-title em{font-style:normal;color:#6ee7b7}
+.sustain-sub{font-size:.95rem;color:rgba(255,255,255,.7);max-width:500px;margin:0 auto 2rem}
+.btn-green{background:#059669;color:#fff;border:none}
+.btn-green:hover{background:#047857;transform:translateY(-1px);box-shadow:0 6px 20px rgba(5,150,105,.35)}
+
+/* ── BRANDS MARQUEE ───────────────────────────────── */
+.brands{padding:3.5rem 0;border-top:1px solid var(--grey-200);border-bottom:1px solid var(--grey-200)}
+.brands-title{text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--grey-400);text-transform:uppercase;margin-bottom:1.75rem}
+.brands-track-wrap{overflow:hidden}
+.brands-track{display:flex;animation:ticker-scroll 20s linear infinite;width:max-content;gap:0}
+.brand-logo{padding:0 2.5rem;font-size:1.05rem;font-weight:800;color:var(--grey-400);letter-spacing:-.01em;white-space:nowrap;transition:color .2s}
+.brand-logo:hover{color:var(--navy)}
+
+/* ── BLOG ─────────────────────────────────────────── */
+.blog{padding:5rem 0}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.blog-card{border-radius:var(--radius-lg);overflow:hidden;background:#fff;border:1px solid var(--grey-200);cursor:pointer;transition:var(--transition)}
+.blog-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+.blog-img{height:200px;position:relative;overflow:hidden}
+.blog-img-1{background:linear-gradient(135deg,#1565C0 0%,#1e40af 100%)}
+.blog-img-2{background:linear-gradient(135deg,#475569 0%,#334155 100%)}
+.blog-img-3{background:linear-gradient(135deg,#7c3aed 0%,#5b21b6 100%)}
+.blog-img-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:.3}
+.blog-body{padding:1.25rem}
+.blog-cat{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .6rem;border-radius:100px;display:inline-flex;margin-bottom:.65rem}
+.blog-cat-android{background:#dbeafe;color:#1e40af}
+.blog-cat-mac{background:#f1f5f9;color:#475569}
+.blog-cat-tablet{background:#ede9fe;color:#5b21b6}
+.blog-title{font-size:.95rem;font-weight:800;color:var(--navy);margin-bottom:.5rem;line-height:1.35}
+.blog-excerpt{font-size:.8rem;color:var(--grey-600);line-height:1.6;margin-bottom:.85rem}
+.blog-link{font-size:.8rem;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:.3rem}
+.blog-link:hover{gap:.5rem}
+
+/* ── SECONDARY BANNERS ────────────────────────────── */
+.secondary-banners{padding:5rem 0;background:var(--grey-50)}
+.banners-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.banner-card{border-radius:var(--radius-xl);padding:2.5rem;min-height:220px;display:flex;flex-direction:column;justify-content:center;gap:.75rem;position:relative;overflow:hidden}
+.banner-blue{background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%)}
+.banner-green{background:linear-gradient(135deg,#d1fae5 0%,#a7f3d0 100%)}
+.banner-badge{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .7rem;border-radius:100px;display:inline-flex;width:fit-content}
+.banner-badge-blue{background:rgba(21,101,192,.15);color:#1565C0}
+.banner-badge-green{background:rgba(5,150,105,.15);color:#059669}
+.banner-title{font-size:1.35rem;font-weight:800;color:var(--navy);line-height:1.2}
+.banner-text{font-size:.875rem;color:var(--grey-700);line-height:1.6}
+.banner-link{font-size:.85rem;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:.35rem}
+.banner-link:hover{gap:.55rem}
+.banner-deco{position:absolute;right:-20px;bottom:-20px;font-size:8rem;opacity:.07;pointer-events:none}
+
+/* ── TRUST BAR ────────────────────────────────────── */
+.trust-bar{padding:3.5rem 0;background:var(--grey-100);border-top:1px solid var(--grey-200)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.trust-item{display:flex;align-items:flex-start;gap:1rem}
+.trust-icon{font-size:1.6rem;flex-shrink:0}
+.trust-title{font-size:.88rem;font-weight:800;color:var(--navy);margin-bottom:.2rem}
+.trust-desc{font-size:.77rem;color:var(--grey-600);line-height:1.5}
+
+/* ── FAQ ──────────────────────────────────────────── */
+.faq{padding:5rem 0}
+.faq-inner{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start}
+.faq-image{position:relative;border-radius:var(--radius-xl);overflow:hidden;min-height:480px;background:linear-gradient(135deg,#1565C0 0%,#0A1628 60%,#1e3a5f 100%);display:flex;align-items:center;justify-content:center}
+.faq-image-icon{font-size:8rem;opacity:.12;position:absolute}
+.faq-image-badge{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);color:#fff;padding:.85rem 1.5rem;border-radius:var(--radius-md);text-align:center;white-space:nowrap}
+.faq-image-badge-title{font-size:.75rem;font-weight:800;letter-spacing:.05em}
+.faq-image-badge-sub{font-size:.68rem;color:rgba(255,255,255,.7);margin-top:.2rem}
+.faq-content .eyebrow{margin-bottom:.4rem}
+.faq-content h2{font-size:clamp(1.4rem,2.5vw,2rem);font-weight:800;color:var(--navy);margin-bottom:2rem}
+.faq-list{display:flex;flex-direction:column;gap:.5rem}
+.faq-item{border:1px solid var(--grey-200);border-radius:var(--radius-md);overflow:hidden}
+.faq-question{width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.25rem;font-size:.9rem;font-weight:700;color:var(--navy);background:#fff;cursor:pointer;text-align:left;transition:var(--transition)}
+.faq-question:hover{background:var(--grey-50)}
+.faq-item.open .faq-question{background:var(--navy);color:#fff}
+.faq-chevron{font-size:.85rem;transition:transform .25s;flex-shrink:0}
+.faq-item.open .faq-chevron{transform:rotate(180deg)}
+.faq-answer{display:none;padding:1.1rem 1.25rem;font-size:.855rem;color:var(--grey-700);line-height:1.7;background:#fafafa;border-top:1px solid var(--grey-200)}
+.faq-item.open .faq-answer{display:block}
+
+/* ── NEWSLETTER ───────────────────────────────────── */
+.newsletter{padding:5rem 0;background:linear-gradient(135deg,#f0f7ff 0%,#ffffff 100%)}
+.newsletter-inner{max-width:600px;margin:0 auto;text-align:center}
+.newsletter-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:var(--navy);margin-bottom:.5rem}
+.newsletter-sub{font-size:.92rem;color:var(--grey-600);margin-bottom:2rem}
+.newsletter-form{display:flex;gap:.65rem;max-width:460px;margin:0 auto 1.5rem}
+.newsletter-input{flex:1;padding:.75rem 1.1rem;border:2px solid var(--grey-200);border-radius:var(--radius-sm);font-size:.9rem;font-family:inherit;outline:none;transition:var(--transition)}
+.newsletter-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(21,101,192,.1)}
+.newsletter-perks{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:.75rem}
+.newsletter-perk{font-size:.8rem;font-weight:600;color:var(--grey-700);display:flex;align-items:center;gap:.35rem}
+.newsletter-perk::before{content:'✓';color:var(--green);font-weight:800}
+.newsletter-note{font-size:.75rem;color:var(--grey-400)}
+
+/* ── FOOTER ───────────────────────────────────────── */
+.footer{background:var(--navy);color:#fff;padding:4rem 0 0}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:3rem;margin-bottom:3rem}
+.footer-logo{display:flex;align-items:center;gap:.3rem;font-size:1.35rem;font-weight:800;margin-bottom:.85rem}
+.footer-tagline{font-size:.83rem;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:1.25rem;max-width:260px}
+.footer-socials{display:flex;gap:.5rem}
+.social-btn{width:36px;height:36px;background:rgba(255,255,255,.08);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:var(--transition);color:rgba(255,255,255,.7)}
+.social-btn:hover{background:rgba(255,255,255,.15);color:#fff}
+.footer-col-title{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1.1rem}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-links a{font-size:.85rem;color:rgba(255,255,255,.65);transition:var(--transition)}
+.footer-links a:hover{color:#fff}
+.footer-contact-item{display:flex;align-items:flex-start;gap:.65rem;font-size:.83rem;color:rgba(255,255,255,.65);margin-bottom:.75rem;line-height:1.5}
+.footer-contact-icon{font-size:.95rem;flex-shrink:0;margin-top:.1rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:1.5rem 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:.78rem;color:rgba(255,255,255,.4)}
+.footer-payments{display:flex;align-items:center;gap:.6rem}
+.payment-badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:.3rem .6rem;font-size:.65rem;font-weight:800;color:rgba(255,255,255,.7);letter-spacing:.03em}
+
+/* ── FLOATING CHAT ────────────────────────────────── */
+.chat-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:1000;display:flex;align-items:center;gap:.6rem;background:var(--orange);color:#fff;padding:.8rem 1.35rem;border-radius:100px;font-size:.875rem;font-weight:700;box-shadow:0 6px 24px rgba(255,107,53,.45);cursor:pointer;transition:var(--transition)}
+.chat-btn:hover{background:#e55a25;transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,107,53,.5)}
+
+/* ── RESPONSIVE ───────────────────────────────────── */
+@media(max-width:1280px){
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .why-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:1024px){
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
+  .promo-inner{grid-template-columns:1fr}
+  .promo-img{height:260px}
+  .faq-inner{grid-template-columns:1fr;gap:2rem}
+  .faq-image{min-height:260px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .header-nav{display:none}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .subcats-grid{grid-template-columns:1fr}
+  .subcats-small{grid-template-columns:1fr 1fr}
+  .reviews-grid{grid-template-columns:1fr}
+  .blog-grid{grid-template-columns:1fr}
+  .banners-grid{grid-template-columns:1fr}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr}
+  .newsletter-form{flex-direction:column}
+  .hero-nav{display:none}
+}
+@media(max-width:640px){
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .product-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .subcats-small{grid-template-columns:1fr}
+  .trust-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ① ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+  🚚 Gratis verzending<span>•</span>30 dagen retour<span>•</span>12 mnd garantie<span>•</span>55-punten check
+</div>
+
+<!-- ② HEADER -->
+<header class="header">
+  <div class="header-main">
+    <a href="#" class="logo">
+      Primefone<span class="logo-dot"></span>
+    </a>
+    <nav class="header-nav">
+      <a href="#">Smartphones</a>
+      <a href="#">Accessoires</a>
+      <a href="#">Deals</a>
+      <a href="#">Over ons</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Zoeken">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Winkelwagen" style="position:relative">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge">3</span>
+      </button>
+    </div>
+  </div>
+  <div class="category-bar">
+    <div class="category-bar-inner">
+      <a href="#" class="cat-link active">Refurbished iPhones</a>
+      <a href="#" class="cat-link">Samsung</a>
+      <a href="#" class="cat-link">MacBooks</a>
+      <a href="#" class="cat-link">iPads</a>
+      <a href="#" class="cat-link">Accessoires</a>
+      <a href="#" class="cat-link">Deals</a>
+    </div>
+  </div>
+</header>
+
+<!-- ③ HERO SLIDESHOW -->
+<section class="hero">
+  <div class="hero-slide active">
+    <div class="hero-bg" style="background-image:url('https://cdn.shopify.com/s/files/1/0777/2009/3010/files/hero-slide-1-floating-devices.png')"></div>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-slide">
+    <div class="hero-bg" style="background-image:url('https://cdn.shopify.com/s/files/1/0777/2009/3010/files/hero-slide-2-blue-laptop.png')"></div>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-slide">
+    <div class="hero-bg" style="background-image:url('https://cdn.shopify.com/s/files/1/0777/2009/3010/files/hero-slide-3-glass-desk.png')"></div>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">✦ GECERTIFICEERD REFURBISHED</div>
+      <h1 class="hero-title">Bespaar groot met<br><em>Gecertificeerde Devices.</em></h1>
+      <p class="hero-sub">Topkwaliteit smartphones, tablets en laptops. Volledig getest, gegarandeerd en tot 40% goedkoper dan nieuw.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn btn-primary" style="font-size:1rem;padding:.9rem 2rem">Ontdek nu →</a>
+        <a href="#" class="btn btn-ghost" style="font-size:.9rem">Refurbished iPhones</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-chip"><span class="hero-chip-icon">⭐</span>8,7 WebwinkelKeur</div>
+        <div class="hero-chip"><span class="hero-chip-icon">👥</span>16.000+ klanten</div>
+        <div class="hero-chip"><span class="hero-chip-icon">🛡️</span>12 mnd garantie</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="hero-nav hero-prev" onclick="slideChange(-1)" aria-label="Vorige">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <button class="hero-nav hero-next" onclick="slideChange(1)" aria-label="Volgende">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+  <div class="hero-dots">
+    <div class="hero-dot active" onclick="goToSlide(0)"></div>
+    <div class="hero-dot" onclick="goToSlide(1)"></div>
+    <div class="hero-dot" onclick="goToSlide(2)"></div>
+  </div>
+</section>
+
+<!-- ④ TICKER BANNER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-icon">🚚</span>Gratis verzending</div>
+    <div class="ticker-item"><span class="ticker-icon">↩️</span>30 dagen retour</div>
+    <div class="ticker-item"><span class="ticker-icon">🛡️</span>12 mnd garantie</div>
+    <div class="ticker-item"><span class="ticker-icon">⭐</span>8,7 WebwinkelKeur</div>
+    <div class="ticker-item"><span class="ticker-icon">✅</span>55-punten check</div>
+    <div class="ticker-item"><span class="ticker-icon">⚡</span>Vóór 13:30 vandaag verstuurd</div>
+    <div class="ticker-item"><span class="ticker-icon">🚚</span>Gratis verzending</div>
+    <div class="ticker-item"><span class="ticker-icon">↩️</span>30 dagen retour</div>
+    <div class="ticker-item"><span class="ticker-icon">🛡️</span>12 mnd garantie</div>
+    <div class="ticker-item"><span class="ticker-icon">⭐</span>8,7 WebwinkelKeur</div>
+    <div class="ticker-item"><span class="ticker-icon">✅</span>55-punten check</div>
+    <div class="ticker-item"><span class="ticker-icon">⚡</span>Vóór 13:30 vandaag verstuurd</div>
+  </div>
+</div>
+
+<!-- ⑤ CATEGORY GRID -->
+<section class="categories">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header-left">
+        <div class="eyebrow">ONTDEK ONS ASSORTIMENT</div>
+        <h2>Shop per categorie</h2>
+      </div>
+      <a href="#" class="see-all">Alles bekijken →</a>
+    </div>
+    <div class="cat-grid">
+      <!-- iPhones -->
+      <div class="cat-card" style="background:#dbeafe">
+        <div class="cat-card-inner">
+          <div class="cat-img-wrap">
+            <img src="https://cdn.shopify.com/s/files/1/0777/2009/3010/files/category-iphones.png" alt="iPhones" loading="lazy">
+          </div>
+          <span class="badge badge-blue cat-card-badge">Bestseller</span>
+          <div class="cat-name">iPhones</div>
+          <div class="cat-sub">Refurbished Apple</div>
+          <div class="cat-price">Vanaf €199</div>
+        </div>
+      </div>
+      <!-- Houders -->
+      <div class="cat-card" style="background:#f0fdf4">
+        <div class="cat-card-inner">
+          <div class="cat-img-wrap">
+            <img src="https://cdn.shopify.com/s/files/1/0777/2009/3010/files/category-houders.png" alt="Houders" loading="lazy">
+          </div>
+          <div class="cat-name">Houders</div>
+          <div class="cat-sub">MagSafe & auto</div>
+          <div class="cat-price">Vanaf €14</div>
+        </div>
+      </div>
+      <!-- Hoesjes -->
+      <div class="cat-card" style="background:#fdf4e7">
+        <div class="cat-card-inner">
+          <div class="cat-img-wrap">
+            <img src="https://cdn.shopify.com/s/files/1/0777/2009/3010/files/category-hoesjes.png" alt="Hoesjes" loading="lazy">
+          </div>
+          <div class="cat-name">Hoesjes</div>
+          <div class="cat-sub">Stijlvol & beschermend</div>
+          <div class="cat-price">Vanaf €9</div>
+        </div>
+      </div>
+      <!-- Accessoires -->
+      <div class="cat-card" style="background:#f1f5f9">
+        <div class="cat-card-inner">
+          <div class="cat-img-wrap">
+            <img src="https://cdn.shopify.com/s/files/1/0777/2009/3010/files/category-accessoires.png" alt="Accessoires" loading="lazy">
+          </div>
+          <div class="cat-name">Accessoires</div>
+          <div class="cat-sub">Kabels & opladers</div>
+          <div class="cat-price">Vanaf €7</div>
+        </div>
+      </div>
+      <!-- Screenprotectors -->
+      <div class="cat-card" style="background:#ede9fe">
+        <div class="cat-card-inner">
+          <div class="cat-img-wrap">
+            <img src="https://cdn.shopify.com/s/files/1/0777/2009/3010/files/category-screenprotectors.png" alt="Screenprotectors" loading="lazy">
+          </div>
+          <div class="cat-name">Screenprotectors</div>
+          <div class="cat-sub">Gehard glas</div>
+          <div class="cat-price">Vanaf €11</div>
+        </div>
+      </div>
+      <!-- Deals -->
+      <div class="cat-card" style="background:#fee2e2">
+        <div class="cat-card-inner">
+          <div class="cat-img-wrap">
+            <img src="https://cdn.shopify.com/s/files/1/0777/2009/3010/files/category-deals.png" alt="Deals" loading="lazy">
+          </div>
+          <span class="badge badge-red cat-card-badge">🔥 Hot</span>
+          <div class="cat-name">Deals</div>
+          <div class="cat-sub">Tijdelijke aanbiedingen</div>
+          <div class="cat-price">Tot -40%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ USP PROMO BANNER -->
+<section class="promo-banner">
+  <div class="container">
+    <div class="promo-inner">
+      <div class="promo-img">
+        <img src="https://cdn.shopify.com/s/files/1/0777/2009/3010/files/promo-burga.png" alt="Burga hoesjes" loading="lazy" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="promo-content">
+        <div class="eyebrow">EXCLUSIEVE AANBIEDING</div>
+        <h2 class="promo-title">10% korting op alle Burga hoesjes</h2>
+        <p class="promo-sub">Bescherm je toestel in stijl met de iconische designs van Burga. Gebruik code BURGA10 bij checkout.</p>
+        <div>
+          <a href="#" class="btn btn-primary">Shop Burga →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ FEATURED PRODUCTS -->
+<section class="products">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header-left">
+        <div class="eyebrow">MEEST VERKOCHT</div>
+        <h2>Bestsellers</h2>
+      </div>
+      <a href="#" class="see-all">Alles bekijken →</a>
+    </div>
+    <div class="product-grid">
+      <!-- Card 1 -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://cdn.shopify.com/s/files/1/0777/2009/3010/files/category-iphones.png" alt="iPhone 14 Pro Max" loading="lazy">
+          <div class="product-discount">-€250</div>
+        </div>
+        <div class="product-body">
+          <div class="product-brand">Primefone</div>
+          <div class="product-title">iPhone 14 Pro Max 256GB Spacegrijs</div>
+          <div class="product-condition">Zo goed als nieuw · 12 mnd garantie</div>
+          <div class="product-stars"><span>★★★★★</span> 4.8 (124 reviews)</div>
+          <div class="product-price-row">
+            <span class="product-price">€849</span>
+            <span class="product-original">€1.099</span>
+          </div>
+          <div class="product-stock"><span class="product-stock-dot"></span>Op voorraad</div>
+          <button class="product-add">In winkelwagen</button>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://cdn.shopify.com/s/files/1/0777/2009/3010/files/category-iphones.png" alt="iPhone 13" loading="lazy">
+          <div class="product-discount">-€180</div>
+        </div>
+        <div class="product-body">
+          <div class="product-brand">Primefone</div>
+          <div class="product-title">iPhone 13 128GB Blauw</div>
+          <div class="product-condition">Goed · 12 mnd garantie</div>
+          <div class="product-stars"><span>★★★★★</span> 4.7 (89 reviews)</div>
+          <div class="product-price-row">
+            <span class="product-price">€419</span>
+            <span class="product-original">€599</span>
+          </div>
+          <div class="product-stock"><span class="product-stock-dot"></span>Op voorraad</div>
+          <button class="product-add">In winkelwagen</button>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://cdn.shopify.com/s/files/1/0777/2009/3010/files/category-iphones.png" alt="iPhone 15 Pro" loading="lazy">
+          <div class="product-discount">-€250</div>
+        </div>
+        <div class="product-body">
+          <div class="product-brand">Primefone</div>
+          <div class="product-title">iPhone 15 Pro 128GB Titanium</div>
+          <div class="product-condition">Zo goed als nieuw · 12 mnd garantie</div>
+          <div class="product-stars"><span>★★★★★</span> 4.9 (61 reviews)</div>
+          <div class="product-price-row">
+            <span class="product-price">€749</span>
+            <span class="product-original">€999</span>
+          </div>
+          <div class="product-stock"><span class="product-stock-dot"></span>Op voorraad</div>
+          <button class="product-add">In winkelwagen</button>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="product-card">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a237e,#283593)">
+          <div class="product-popular">Populair</div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.25">📱</div>
+        </div>
+        <div class="product-body">
+          <div class="product-brand">Primefone</div>
+          <div class="product-title">Samsung Galaxy S23 256GB</div>
+          <div class="product-condition">Goed · 12 mnd garantie</div>
+          <div class="product-stars"><span>★★★★★</span> 4.6 (47 reviews)</div>
+          <div class="product-price-row">
+            <span class="product-price">€549</span>
+            <span class="product-original">€799</span>
+          </div>
+          <div class="product-stock"><span class="product-stock-dot"></span>Op voorraad</div>
+          <button class="product-add">In winkelwagen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ SUB-CATEGORY GRID -->
+<section class="subcategories">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header-left">
+        <div class="eyebrow">ALLES VOOR JOUW TOESTEL</div>
+        <h2>Accessoires &amp; Bescherming</h2>
+      </div>
+    </div>
+    <div class="subcats-grid">
+      <div class="subcat-card-large">
+        <img src="https://cdn.shopify.com/s/files/1/0777/2009/3010/files/sub-cables.png" alt="Kabels" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease">
+        <div class="subcat-overlay"></div>
+        <div class="subcat-content">
+          <div class="subcat-title">Kabels &amp; Opladers</div>
+          <div class="subcat-desc">MagSafe, USB-C, Lightning en meer voor al je apparaten</div>
+          <div class="subcat-btns">
+            <a href="#" class="btn btn-primary btn-sm">Shop nu</a>
+            <a href="#" class="btn btn-ghost btn-sm">Alles bekijken</a>
+          </div>
+        </div>
+      </div>
+      <div class="subcat-card-large">
+        <img src="https://cdn.shopify.com/s/files/1/0777/2009/3010/files/sub-screenprotectors.png" alt="Schermbeschermers" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease">
+        <div class="subcat-overlay"></div>
+        <div class="subcat-content">
+          <div class="subcat-title">Schermbeschermers</div>
+          <div class="subcat-desc">Gehard glas en film protectors voor maximale bescherming</div>
+          <div class="subcat-btns">
+            <a href="#" class="btn btn-primary btn-sm">Shop nu</a>
+            <a href="#" class="btn btn-ghost btn-sm">Alles bekijken</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="subcats-small">
+      <div class="subcat-card-small sc-sm-1">
+        <div class="subcat-small-overlay"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.25">🛡️</div>
+        <div class="subcat-small-content">
+          <div class="subcat-small-title">Hoesjes</div>
+          <div class="subcat-small-desc">Honderden designs voor elke smaak</div>
+          <a href="#" class="btn btn-primary btn-sm">Bekijk →</a>
+        </div>
+      </div>
+      <div class="subcat-card-small sc-sm-2">
+        <div class="subcat-small-overlay"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.25">🔋</div>
+        <div class="subcat-small-content">
+          <div class="subcat-small-title">Powerbanks &amp; MagSafe</div>
+          <div class="subcat-small-desc">Altijd opgeladen, overal</div>
+          <a href="#" class="btn btn-primary btn-sm">Bekijk →</a>
+        </div>
+      </div>
+      <div class="subcat-card-small sc-sm-3">
+        <div class="subcat-small-overlay"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.25">🎧</div>
+        <div class="subcat-small-content">
+          <div class="subcat-small-title">Audio &amp; EarPods</div>
+          <div class="subcat-small-desc">Draadloos en bekabeld geluid</div>
+          <a href="#" class="btn btn-primary btn-sm">Bekijk →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑨ WHY PRIMEFONE -->
+<section class="why">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header-left">
+        <div class="eyebrow">WAAROM PRIMEFONE?</div>
+        <h2>Kwaliteit die je kunt vertrouwen</h2>
+      </div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon" style="background:#dbeafe">✅</div>
+        <div class="why-title">55-punten kwaliteitscontrole</div>
+        <div class="why-desc">Elk toestel wordt grondig getest op 55 punten voordat het ons magazijn verlaat.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" style="background:#d1fae5">🛡️</div>
+        <div class="why-title">12 maanden garantie</div>
+        <div class="why-desc">Elk product wordt geleverd met 12 maanden garantie voor volledige gemoedsrust.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" style="background:#fef3c7">🚚</div>
+        <div class="why-title">Vandaag besteld, morgen in huis</div>
+        <div class="why-desc">Bestel vóór 13:30 uur en ontvang je pakket de volgende werkdag al aan de deur.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" style="background:#ede9fe">🔄</div>
+        <div class="why-title">30 dagen retourrecht</div>
+        <div class="why-desc">Niet tevreden? Stuur het product binnen 30 dagen gratis retour zonder gedoe.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" style="background:#fee2e2">⭐</div>
+        <div class="why-title">8,7 WebwinkelKeur</div>
+        <div class="why-desc">Meer dan 16.000 klanten beoordeelden ons met een gemiddelde van 8,7 uit 10.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" style="background:#e0f2fe">🎧</div>
+        <div class="why-title">7 dagen per week support</div>
+        <div class="why-desc">Ons klantenserviceteam staat elke dag voor je klaar via chat, mail of telefoon.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑩ STATS COUNTER -->
+<section class="stats">
+  <div class="container">
+    <h2 class="stats-title">Primefone in cijfers</h2>
+    <p class="stats-sub">Vertrouwd door duizenden klanten in Nederland en België</p>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-eyebrow">MET</div>
+        <div class="stat-value" data-target="99">0%</div>
+        <div class="stat-label">Positieve Reviews</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-eyebrow">MEER DAN</div>
+        <div class="stat-value" data-target="16">0K+</div>
+        <div class="stat-label">Tevreden Klanten</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-eyebrow">AL</div>
+        <div class="stat-value" data-target="142">0K</div>
+        <div class="stat-label">Verkochte Producten</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-eyebrow">GEMIDDELD</div>
+        <div class="stat-value">8.7/10</div>
+        <div class="stat-label">WebwinkelKeur Score</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑪ REVIEWS -->
+<section class="reviews">
+  <div class="container">
+    <div class="reviews-header">
+      <div class="reviews-header-left">
+        <div class="eyebrow">KLANTBEOORDELINGEN</div>
+        <h2>Wat onze klanten zeggen</h2>
+        <p>Lees de ervaringen van onze tevreden klanten</p>
+      </div>
+      <div class="reviews-score">
+        <div class="reviews-score-number">8,7</div>
+        <div class="reviews-score-label">WebwinkelKeur</div>
+        <div class="reviews-count">16.000+ reviews</div>
+        <div class="reviews-verified">✓ Geverifieerd</div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Geweldige ervaring! De iPhone 14 Pro ziet er zo goed als nieuw uit. Snel geleverd en perfect verpakt. Zou zeker weer bestellen bij Primefone."</p>
+        <div class="review-footer">
+          <div class="review-avatar av-blue">FA</div>
+          <div>
+            <div class="review-name">Fatima A.</div>
+            <div class="review-product">iPhone 14 Pro</div>
+            <div class="review-date">2 dagen geleden</div>
+            <div class="review-badge-verified">✓ Geverifieerd</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Top service en uitstekende kwaliteit. De Samsung Galaxy S23 werkt perfect en ziet er flitsend uit. Primefone houdt echt wat ze beloven!"</p>
+        <div class="review-footer">
+          <div class="review-avatar av-green">TV</div>
+          <div>
+            <div class="review-name">Thomas V.</div>
+            <div class="review-product">Samsung Galaxy S23</div>
+            <div class="review-date">1 week geleden</div>
+            <div class="review-badge-verified">✓ Geverifieerd</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Heel tevreden! De iPhone 13 is in perfecte staat aangekomen. De 55-punten check geeft écht vertrouwen. Aanrader voor iedereen die wil besparen."</p>
+        <div class="review-footer">
+          <div class="review-avatar av-purple">MB</div>
+          <div>
+            <div class="review-name">Marieke B.</div>
+            <div class="review-product">iPhone 13</div>
+            <div class="review-date">2 weken geleden</div>
+            <div class="review-badge-verified">✓ Geverifieerd</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑫ SUSTAINABILITY BANNER -->
+<section class="sustainability">
+  <div class="container" style="text-align:center">
+    <div class="sustain-badge">♻️ DUURZAAMHEID</div>
+    <h2 class="sustain-title">Primefone heeft meer dan <em>1.000.000 pond</em> elektronisch afval van de stortplaatsen gered.</h2>
+    <p class="sustain-sub">Door te kiezen voor refurbished draag jij bij aan een duurzamere wereld. Samen maken we het verschil.</p>
+    <a href="#" class="btn btn-green" style="font-size:.95rem;padding:.85rem 2rem">Meer over duurzaamheid →</a>
+  </div>
+</section>
+
+<!-- ⑬ BRANDS MARQUEE -->
+<section class="brands">
+  <div class="container">
+    <div class="brands-title">Merken die wij voeren</div>
+  </div>
+  <div class="brands-track-wrap">
+    <div class="brands-track">
+      <span class="brand-logo">Burga</span>
+      <span class="brand-logo">Decoded</span>
+      <span class="brand-logo">Nudient</span>
+      <span class="brand-logo">Otterbox</span>
+      <span class="brand-logo">PanzerGlass</span>
+      <span class="brand-logo">Speck</span>
+      <span class="brand-logo">SoSkild</span>
+      <span class="brand-logo">UNIQ</span>
+      <span class="brand-logo">Belkin</span>
+      <span class="brand-logo">mophie</span>
+      <span class="brand-logo">Burga</span>
+      <span class="brand-logo">Decoded</span>
+      <span class="brand-logo">Nudient</span>
+      <span class="brand-logo">Otterbox</span>
+      <span class="brand-logo">PanzerGlass</span>
+      <span class="brand-logo">Speck</span>
+      <span class="brand-logo">SoSkild</span>
+      <span class="brand-logo">UNIQ</span>
+      <span class="brand-logo">Belkin</span>
+      <span class="brand-logo">mophie</span>
+    </div>
+  </div>
+</section>
+
+<!-- ⑭ BLOG / ARTICLES -->
+<section class="blog">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header-left">
+        <div class="eyebrow">KENNIS &amp; INSPIRATIE</div>
+        <h2>Laatste Artikelen</h2>
+      </div>
+      <a href="#" class="see-all">Alle artikelen →</a>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-img blog-img-1">
+          <div class="blog-img-icon">📱</div>
+        </div>
+        <div class="blog-body">
+          <span class="blog-cat blog-cat-android">Android</span>
+          <div class="blog-title">Android vs iOS: Welke is beter voor jou in 2024?</div>
+          <div class="blog-excerpt">We vergelijken de twee grootste platforms op gebruiksgemak, privacy, ecosysteem en prijs. Lees welk OS het beste bij jou past.</div>
+          <a href="#" class="blog-link">Lees meer →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img blog-img-2">
+          <div class="blog-img-icon">💻</div>
+        </div>
+        <div class="blog-body">
+          <span class="blog-cat blog-cat-mac">MacBook</span>
+          <div class="blog-title">Refurbished MacBook kopen: waar moet je op letten?</div>
+          <div class="blog-excerpt">Een refurbished MacBook kan tot 40% goedkoper zijn dan nieuw. Dit zijn de belangrijkste punten om op te checken voordat je koopt.</div>
+          <a href="#" class="blog-link">Lees meer →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img blog-img-3">
+          <div class="blog-img-icon">📲</div>
+        </div>
+        <div class="blog-body">
+          <span class="blog-cat blog-cat-tablet">Tablets</span>
+          <div class="blog-title">De beste refurbished iPad modellen van dit moment</div>
+          <div class="blog-excerpt">Van de instapmodel iPad tot de Pro — we zetten de beste refurbished iPads op een rij inclusief prijzen en aanbevelingen per gebruik.</div>
+          <a href="#" class="blog-link">Lees meer →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑮ SECONDARY BANNERS -->
+<section class="secondary-banners">
+  <div class="container">
+    <div class="banners-grid">
+      <div class="banner-card banner-blue">
+        <span class="banner-badge banner-badge-blue">NIEUW GELANCEERD</span>
+        <div class="banner-title">Verkoop je oude telefoon</div>
+        <div class="banner-text">Tot €500 voor jouw gebruikte smartphone. Eenvoudig, snel en eerlijk — wij regelen de rest.</div>
+        <a href="#" class="banner-link">Meer informatie →</a>
+        <div class="banner-deco">📱</div>
+      </div>
+      <div class="banner-card banner-green">
+        <span class="banner-badge banner-badge-green">DUURZAAM</span>
+        <div class="banner-title">Kies voor refurbished</div>
+        <div class="banner-text">Bespaar tot 40% én draag bij aan een duurzamere wereld. Goed voor je portemonnee én het milieu.</div>
+        <a href="#" class="banner-link">Ontdek refurbished →</a>
+        <div class="banner-deco">♻️</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑯ BOTTOM TRUST BAR -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon">🏷️</div>
+        <div>
+          <div class="trust-title">Grote Besparingen, Grote Selectie</div>
+          <div class="trust-desc">Honderden gecertificeerde refurbished toestellen tot 40% goedkoper dan nieuw.</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🛡️</div>
+        <div>
+          <div class="trust-title">Vertrouwen bij elke aankoop</div>
+          <div class="trust-desc">55-punten kwaliteitscheck en 12 maanden garantie op elk product.</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🎧</div>
+        <div>
+          <div class="trust-title">Vertrouwde Klant Service</div>
+          <div class="trust-desc">7 dagen per week bereikbaar voor al je vragen en ondersteuning.</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🔄</div>
+        <div>
+          <div class="trust-title">Hou ervan of Retourneer het</div>
+          <div class="trust-desc">Niet tevreden? 30 dagen gratis retour, geen vragen gesteld.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑰ FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="faq-inner">
+      <div class="faq-image">
+        <div class="faq-image-icon">📱</div>
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(21,101,192,.4) 0%,rgba(10,22,40,.2) 100%)"></div>
+        <div style="position:absolute;top:2rem;left:2rem;right:2rem;display:flex;flex-direction:column;gap:.5rem">
+          <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.1rem;display:flex;align-items:center;gap:.75rem">
+            <span style="font-size:1.3rem">✅</span>
+            <div>
+              <div style="font-size:.78rem;font-weight:700;color:#fff">55-punten check voltooid</div>
+              <div style="font-size:.68rem;color:rgba(255,255,255,.6)">Alle tests geslaagd</div>
+            </div>
+            <span style="margin-left:auto;font-size:.7rem;font-weight:800;color:#6ee7b7">100%</span>
+          </div>
+          <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.1rem;display:flex;align-items:center;gap:.75rem">
+            <span style="font-size:1.3rem">🔋</span>
+            <div>
+              <div style="font-size:.78rem;font-weight:700;color:#fff">Batterijgezondheid</div>
+              <div style="font-size:.68rem;color:rgba(255,255,255,.6)">Minimaal 80%</div>
+            </div>
+            <span style="margin-left:auto;font-size:.7rem;font-weight:800;color:#6ee7b7">87%</span>
+          </div>
+        </div>
+        <div class="faq-image-badge">
+          <div class="faq-image-badge-title">✅ Gecertificeerd refurbished</div>
+          <div class="faq-image-badge-sub">55-punten kwaliteitscontrole</div>
+        </div>
+      </div>
+      <div class="faq-content">
+        <div class="eyebrow">VEELGESTELDE VRAGEN</div>
+        <h2>Alles wat je wilt weten</h2>
+        <div class="faq-list">
+          <div class="faq-item open">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Is PrimeFone betrouwbaar?
+              <span class="faq-chevron">▾</span>
+            </button>
+            <div class="faq-answer">Absoluut! Primefone is een gecertificeerde refurbished retailer met meer dan 16.000 tevreden klanten. We hebben een 8,7 beoordeling op WebwinkelKeur en bieden op elk product 12 maanden garantie en 30 dagen retourrecht. Elk toestel ondergaat onze strenge 55-punten kwaliteitscontrole voordat het wordt verzonden.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Hoe lang duurt het om mijn bestelling te ontvangen?
+              <span class="faq-chevron">▾</span>
+            </button>
+            <div class="faq-answer">Bestellingen geplaatst vóór 13:30 uur op werkdagen worden dezelfde dag verzonden en zijn de volgende werkdag bij je thuis. We werken samen met PostNL voor snelle en betrouwbare levering in heel Nederland en België.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Wat is een refurbished telefoon?
+              <span class="faq-chevron">▾</span>
+            </button>
+            <div class="faq-answer">Een refurbished telefoon is een tweedehands toestel dat grondig is gecontroleerd, gerepareerd en gereset naar fabrieksinstellingen. Bij Primefone voeren we een 55-punten kwaliteitscheck uit op elk toestel. We werken met graderingen zoals "Zo goed als nieuw", "Goed" en "Redelijk" om de staat van elk toestel duidelijk te communiceren.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Garantie- en retourbeleid voor smartphones
+              <span class="faq-chevron">▾</span>
+            </button>
+            <div class="faq-answer">Elk product dat wij verkopen heeft 12 maanden garantie. Mocht er binnen deze periode een defect optreden, regelen wij gratis reparatie of vervanging. Daarnaast heb je 30 dagen bedenktijd — als je niet tevreden bent, stuur je het product gratis terug en krijg je volledig je geld terug.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Wat te verwachten bij het kopen van een refurbished telefoon?
+              <span class="faq-chevron">▾</span>
+            </button>
+            <div class="faq-answer">Je ontvangt een volledig functioneel toestel dat is schoongemaakt, getest en gereset. Afhankelijk van de gradatie kunnen er kleine cosmetische sporen van gebruik zichtbaar zijn. Alle toestellen zijn ontgrendeld voor alle netwerken en worden geleverd met een oplaadkabel. De originele verpakking is niet altijd aanwezig, maar het toestel zelf is in uitstekende staat.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑱ NEWSLETTER -->
+<section class="newsletter">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="eyebrow" style="margin-bottom:.5rem">BLIJF OP DE HOOGTE</div>
+      <h2 class="newsletter-title">Mis nooit een aanbieding</h2>
+      <p class="newsletter-sub">Exclusieve deals, nieuwe arrivals en tips direct in je inbox.</p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="jouw@emailadres.nl" aria-label="E-mailadres">
+        <button class="btn btn-primary">Aanmelden</button>
+      </div>
+      <div class="newsletter-perks">
+        <span class="newsletter-perk">Exclusieve deals</span>
+        <span class="newsletter-perk">Vroege toegang tot sales</span>
+        <span class="newsletter-perk">Tips &amp; tutorials</span>
+      </div>
+      <div class="newsletter-note">Geen spam. Uitschrijven kan altijd.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑲ FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Col 1: Logo + tagline + socials -->
+      <div>
+        <div class="footer-logo">Primefone<span style="width:7px;height:7px;background:var(--blue);border-radius:50%;display:inline-block;margin-left:2px;margin-bottom:2px"></span></div>
+        <p class="footer-tagline">Gecertificeerde refurbished smartphones, tablets en accessoires. Topkwaliteit voor de beste prijs.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="Instagram">📸</a>
+          <a href="#" class="social-btn" aria-label="Facebook">📘</a>
+          <a href="#" class="social-btn" aria-label="TikTok">🎵</a>
+          <a href="#" class="social-btn" aria-label="YouTube">▶️</a>
+        </div>
+      </div>
+      <!-- Col 2: Producten -->
+      <div>
+        <div class="footer-col-title">Producten</div>
+        <ul class="footer-links">
+          <li><a href="#">Refurbished iPhones</a></li>
+          <li><a href="#">Samsung Smartphones</a></li>
+          <li><a href="#">MacBooks</a></li>
+          <li><a href="#">iPads</a></li>
+          <li><a href="#">Hoesjes</a></li>
+          <li><a href="#">Screenprotectors</a></li>
+          <li><a href="#">Accessoires</a></li>
+          <li><a href="#">Deals &amp; Aanbiedingen</a></li>
+        </ul>
+      </div>
+      <!-- Col 3: Service -->
+      <div>
+        <div class="footer-col-title">Service</div>
+        <ul class="footer-links">
+          <li><a href="#">Veelgestelde vragen</a></li>
+          <li><a href="#">Garantiebeleid</a></li>
+          <li><a href="#">Retourneren</a></li>
+          <li><a href="#">Verzending</a></li>
+          <li><a href="#">Mijn bestelling</a></li>
+          <li><a href="#">Over ons</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <!-- Col 4: Contact -->
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">📍</span>
+          <span>Primefone B.V.<br>Amsterdam, Nederland</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">✉️</span>
+          <a href="mailto:info@primefone.nl" style="color:rgba(255,255,255,.65)">info@primefone.nl</a>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">📞</span>
+          <span>+31 (0)20 123 4567</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">⏰</span>
+          <span>Ma–Za: 9:00–18:00<br>Zo: 10:00–16:00</span>
+        </div>
+        <div style="margin-top:1rem;padding:.75rem 1rem;background:rgba(255,255,255,.06);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,.08)">
+          <div style="font-size:.7rem;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.35rem">WebwinkelKeur</div>
+          <div style="font-size:1.4rem;font-weight:800;color:#fff">8,7 <span style="font-size:.75rem;color:rgba(255,255,255,.5);font-weight:500">/ 10</span></div>
+          <div style="font-size:.72rem;color:#fbbf24;margin-top:.15rem">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 Primefone B.V. — Alle rechten voorbehouden · <a href="#" style="color:rgba(255,255,255,.4)">Privacybeleid</a> · <a href="#" style="color:rgba(255,255,255,.4)">Algemene voorwaarden</a></div>
+      <div class="footer-payments">
+        <span style="font-size:.7rem;color:rgba(255,255,255,.35);margin-right:.25rem">Betaal veilig met:</span>
+        <span class="payment-badge">iDEAL</span>
+        <span class="payment-badge">Bancontact</span>
+        <span class="payment-badge">VISA</span>
+        <span class="payment-badge">Mastercard</span>
+        <span class="payment-badge">Klarna</span>
+        <span class="payment-badge">PayPal</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ⑳ FLOATING CHAT BUTTON -->
+<button class="chat-btn" aria-label="Open chat">
+  💬 Heb je een vraag?
+</button>
+
+<script>
+// ── HERO SLIDESHOW ──────────────────────────────────
+let currentSlide = 0;
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('.hero-dot');
+
+function goToSlide(index) {
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide = (index + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+}
+
+function slideChange(dir) {
+  goToSlide(currentSlide + dir);
+}
+
+setInterval(() => slideChange(1), 5000);
+
+// ── FAQ ACCORDION ───────────────────────────────────
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ── STATS COUNTER ANIMATION ─────────────────────────
+const statValues = document.querySelectorAll('.stat-value[data-target]');
+
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.textContent.replace(/\d+/, '');
+  let current = 0;
+  const step = Math.ceil(target / 60);
+  const timer = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = current + suffix;
+    if (current >= target) clearInterval(timer);
+  }, 25);
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+statValues.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

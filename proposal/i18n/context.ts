@@ -1,8 +1,13 @@
 import React, { createContext, useContext, useEffect } from "react";
 import english from "./en.json";
 export type Language = "en" | "nl";
-export const LanguageContext = createContext<Language>("en");
-export const NoTranslation = createContext(false);
+// Eén gedeelde context-instantie, ook als deze module twee keer geladen wordt.
+// In dev prebundelt Vite de JSX-runtime (jsxImportSource) apart, met een eigen
+// kopie van dit bestand; zonder deze singleton zag LocalizedElement dan altijd
+// de standaardtaal "en" en bleef /nl/ Engels op localhost.
+const shared = globalThis as unknown as { __snLanguageContext?: React.Context<Language>; __snNoTranslation?: React.Context<boolean> };
+export const LanguageContext = (shared.__snLanguageContext ??= createContext<Language>("en"));
+export const NoTranslation = (shared.__snNoTranslation ??= createContext(false));
 export const missingTranslations = new Set<string>();
 const dictionary = english as Record<string, string>;
 export function translate(text: string, language: Language): string {

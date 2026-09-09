@@ -14,6 +14,8 @@ export const webShowcaseProjects: Project[] = [
     image: `${import.meta.env.BASE_URL}images/cases/vastiq-hero.webp`,
     align: 'left',
     url: "https://vastiq.ai/",
+    // vastiq.ai stuurt X-Frame-Options SAMEORIGIN; de live carrousel toont de same-origin spiegel
+    previewUrl: `${import.meta.env.BASE_URL}vastiq-preview/index.html`,
     gallery: [],
     metrics: [
       { label: "Waarderingen", value: "Live data", color: "#25D366" },
@@ -53,7 +55,12 @@ export const webShowcaseProjects: Project[] = [
     image: `${import.meta.env.BASE_URL}screenshots/primefone-hero.webp`,
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/primefone-full.webp`,
     align: 'right',
-    url: "https://primefone-mvbas2fw.manus.space/",
+    url: "https://primefone.nl/",
+    // primefone.nl (Shopify) staat op "Store unavailable" en de manus.space-preview geeft 404
+    // (gecontroleerd 9 sep 2026). De carrousel toont daarom onze eigen same-origin kopie
+    // van de homepage; de externe link blijft verborgen zolang offline aan staat.
+    offline: true,
+    previewUrl: `${import.meta.env.BASE_URL}primefone-preview/index.html`,
     gallery: [],
     metrics: [
       { label: "Laadtijd", value: "<1.3s", color: "#25D366" },
@@ -134,8 +141,9 @@ export const webShowcaseProjects: Project[] = [
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/raveg-bounce-full.webp`,
     align: 'left',
     url: "https://raveg-hairstyling.com/",
-    // raveg-hairstyling.com stuurt X-Frame-Options DENY + frame-ancestors none
+    // raveg-hairstyling.com stuurt X-Frame-Options DENY en geeft HTTP 402 (winkel offline, gecontroleerd 9 sep 2026)
     noEmbed: true,
+    offline: true,
     gallery: [],
     metrics: [
       { label: "Conversie Boost", value: "+180%", color: "#25D366" },

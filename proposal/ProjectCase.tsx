@@ -24,7 +24,7 @@ const stories: Record<string, {title:string; text:string}[]> = {
 export default function ProjectCase({project,next}:{project:Project;next:Project}) {
   const [selected,setSelected]=useState<MediaItem|null>(null);
   const {t}=useLanguage();
-  const isWebsite=!!project.url;
+  const isWebsite=!!project.url && !project.offline;
   const captions=project.slug==="raveg-branding" ? ["Dyadium","Hyperpower / 01","Hyperpower / 02"] : [];
   const gallery=project.gallery || [];
   return <>
