@@ -1,48 +1,55 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { X } from "lucide-react";
 
+const SLEUTEL = "sn-preview-logo-v5";
+const VIDEO_VERSIE = 11;
+
+function gezien(): boolean {
+  try {
+    return sessionStorage.getItem(SLEUTEL) === "seen";
+  } catch {
+    return false; /* Private mode */
+  }
+}
+
+/* 9 september 2026 (Marinus): geen frame van de site vóór de intro en zo min mogelijk zwart ervoor.
+   De beslissing valt daarom bij de eerste render (niet in een effect na het tekenen), het dialoog
+   opent in een layout-effect vóór de eerste tekenbeurt, en de video staat vanaf de eerste render
+   in de DOM zodat hij meteen begint te laden; index.html laadt hem bovendien al vooraf. */
 export default function LogoIntro() {
   const location = useLocation();
-  const [open, setOpen] = useState(false);
-  const [mobile, setMobile] = useState(false);
+  const [mobile] = useState(() => window.matchMedia("(max-width: 767px)").matches);
+  const [open, setOpen] = useState(
+    () =>
+      !gezien() &&
+      location.pathname === "/" &&
+      !location.hash &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   const dialog = useRef<HTMLDialogElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const close = useCallback(() => {
     video.current?.pause();
     setOpen(false);
     try {
-      sessionStorage.setItem("sn-preview-logo-v5", "seen");
+      sessionStorage.setItem(SLEUTEL, "seen");
     } catch {
       /* Private mode */
     }
-  }, [location.pathname, location.hash]);
+  }, []);
   useEffect(() => {
-    setMobile(window.matchMedia("(max-width: 767px)").matches);
-    let seen = false;
-    try {
-      seen = sessionStorage.getItem("sn-preview-logo-v5") === "seen";
-    } catch {
-      /* Private mode */
-    }
-    if (
-      !seen &&
-      location.pathname === "/" &&
-      !location.hash &&
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    )
-      setOpen(true);
     const replay = () => setOpen(true);
     window.addEventListener("sn-preview-logo-replay", replay);
     return () => window.removeEventListener("sn-preview-logo-replay", replay);
   }, []);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!open) {
       dialog.current?.close();
       return;
     }
     const oldOverflow = document.body.style.overflow;
-    dialog.current?.showModal();
+    if (!dialog.current?.open) dialog.current?.showModal();
     document.body.style.overflow = "hidden";
     const timer = window.setTimeout(close, 6000);
     void video.current?.play().catch(close);
@@ -63,9 +70,10 @@ export default function LogoIntro() {
       {open && (
         <video
           ref={video}
-          src={`/video/header-intro${mobile ? "-mobile" : ""}.mp4?v=11`}
+          src={`/video/header-intro${mobile ? "-mobile" : ""}.mp4?v=${VIDEO_VERSIE}`}
           muted
           playsInline
+          autoPlay
           preload="auto"
           onEnded={close}
           onError={close}
