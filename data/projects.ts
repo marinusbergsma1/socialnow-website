@@ -55,12 +55,9 @@ export const webShowcaseProjects: Project[] = [
     image: `${import.meta.env.BASE_URL}screenshots/primefone-hero.webp`,
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/primefone-full.webp`,
     align: 'right',
-    url: "https://primefone.nl/",
-    // primefone.nl (Shopify) staat op "Store unavailable" en de manus.space-preview geeft 404
-    // (gecontroleerd 9 sep 2026). De carrousel toont daarom onze eigen same-origin kopie
-    // van de homepage; de externe link blijft verborgen zolang offline aan staat.
-    offline: true,
-    previewUrl: `${import.meta.env.BASE_URL}primefone-preview/index.html`,
+    // Winkel primefone.nl staat op "Store unavailable"; onze homepage draait live op Vercel
+    // (project "primefone", gecontroleerd 9 sep 2026) en staat iframes toe.
+    url: "https://primefone.vercel.app/",
     gallery: [],
     metrics: [
       { label: "Laadtijd", value: "<1.3s", color: "#25D366" },

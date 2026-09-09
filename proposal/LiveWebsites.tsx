@@ -20,6 +20,7 @@ const EMBED = new Set([
   "divine-machines-website",
   "vintage-watches-website",
   "newblack-website",
+  "primefone-website",
 ]);
 // Websites die online staan, of waarvan we een eigen kopie (previewUrl) in het frame
 // kunnen tonen. Offline sites zonder kopie blijven alleen als case bestaan.
