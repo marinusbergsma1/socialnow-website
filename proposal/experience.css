@@ -1776,7 +1776,7 @@ html {
 .sn-site .h-try-button,
 .sn-site .h-header-claim {
   background: linear-gradient(180deg, #43e77f 0%, #25d366 70%, #20bf5b 100%);
-  color: #042711;
+  color: #fff;
   border: 1px solid #55ea8b;
   font-weight: 700;
   box-shadow:
@@ -1787,7 +1787,7 @@ html {
 .sn-site .h-try-button:hover,
 .sn-site .h-header-claim:hover {
   background: #4ce888;
-  color: #042711;
+  color: #fff;
   border-color: #85f8af;
 }
 .sn-site .os-claim .h-button-icon,
@@ -1797,7 +1797,7 @@ html {
   border-color: transparent;
 }
 .sn-site .h-header-claim svg {
-  color: #042711;
+  color: #fff;
 }
 .sn-site .os-actions {
   gap: 10px;
@@ -2146,3 +2146,22 @@ html {
 }
 
 .sn-site .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* 9 september 2026, Marinus: op mobiel geen sleep-, tik- en vergroothints bij de sliders en het uitgelichte werk. */
+@media (max-width: 700px) {
+  .sn-site .h-rail-controls > span { display: none; }
+  .sn-site .h-featured-media-note { display: none; }
+  .sn-site .h-featured-open { display: none; }
+  .sn-site .h-featured-tile:not(.h-featured-collage .h-featured-tile:first-child) > .h-featured-caption { display: none; }
+}
+
+/* 9 september 2026, Marinus: team iets groter. */
+.sn-site .h-team-trust { gap: 16px; }
+.sn-site .h-team-portraits img { width: 44px; height: 44px; margin-left: -9px; }
+.sn-site .h-team-portraits { padding-left: 9px; }
+.sn-site .h-team-trust strong { font-size: 14px; }
+.sn-site .h-team-trust > span:last-child > span { font-size: 12px; }
+@media (max-width: 700px) {
+  .sn-site .h-team-trust { gap: 12px; }
+  .sn-site .h-team-portraits img { width: 38px; height: 38px; }
+}
