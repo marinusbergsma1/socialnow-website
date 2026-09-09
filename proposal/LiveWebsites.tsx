@@ -30,7 +30,7 @@ const frameSrcOf = (project: Project) =>
   project.previewUrl || (EMBED.has(project.slug) ? project.url : undefined);
 // Alle frames worden vooraf geladen zodra het onderdeel in de buurt komt: eerst de
 // actieve site, daarna een voor een de rest. Wisselen is dan direct, zonder herladen.
-const PRELOAD_TIMEOUT = 6000;
+const PRELOAD_TIMEOUT = 2500;
 export default function LiveWebsites() {
   const [index, setIndex] = useState(0);
   const [mobile, setMobile] = useState(false);
