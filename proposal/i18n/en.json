@@ -836,6 +836,7 @@
   "Kennismaken": "Let’s meet",
   "Open live website": "Open live website",
   "De live website wordt geladen zodra dit onderdeel in beeld komt.": "The live website loads when this section comes into view.",
+  "De live website wordt geladen.": "The live website is loading.",
   "Deze website opent in een nieuw tabblad.": "This website opens in a new tab.",
   "Live website ·": "Live website ·",
   "VASTIQ.AI — werk van SocialNow": "VASTIQ.AI — work by SocialNow",
@@ -925,5 +926,7 @@
   "Installeer op Mac": "Install on Mac",
   "Installeer op Windows": "Install on Windows",
   "Installeer op Android": "Install on Android",
-  "Installeer op iPhone of iPad": "Install on iPhone or iPad"
+  "Installeer op iPhone of iPad": "Install on iPhone or iPad",
+  "Sam van der Sluis": "Sam van der Sluis",
+  "Videograaf": "Videographer"
 }

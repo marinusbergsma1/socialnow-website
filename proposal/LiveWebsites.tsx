@@ -7,6 +7,7 @@ import {
   Smartphone,
 } from "lucide-react";
 import { webShowcaseProjects } from "../data/projects";
+import type { Project } from "../types";
 import { Heading, TextLink } from "./ui";
 import { useInView } from "./motion";
 
@@ -25,6 +26,11 @@ const EMBED = new Set([
 // Websites die online staan, of waarvan we een eigen kopie (previewUrl) in het frame
 // kunnen tonen. Offline sites zonder kopie blijven alleen als case bestaan.
 const sites = webShowcaseProjects.filter((project) => !project.offline || project.previewUrl);
+const frameSrcOf = (project: Project) =>
+  project.previewUrl || (EMBED.has(project.slug) ? project.url : undefined);
+// Alle frames worden vooraf geladen zodra het onderdeel in de buurt komt: eerst de
+// actieve site, daarna een voor een de rest. Wisselen is dan direct, zonder herladen.
+const PRELOAD_TIMEOUT = 6000;
 export default function LiveWebsites() {
   const [index, setIndex] = useState(0);
   const [mobile, setMobile] = useState(false);
@@ -42,7 +48,8 @@ export default function LiveWebsites() {
     setInteractive(true);
     interactionTimer.current = window.setTimeout(stopInteraction, 2500);
   };
-  const { ref, visible } = useInView<HTMLElement>();
+  // Ruime marge: het laden begint ruim voordat de bezoeker bij dit onderdeel is.
+  const { ref, visible } = useInView<HTMLElement>("1500px 0px");
   const [near, setNear] = useState(false);
   useEffect(() => {
     if (visible) setNear(true);
@@ -52,11 +59,30 @@ export default function LiveWebsites() {
     return () => window.clearTimeout(interactionTimer.current);
   }, [index, visible]);
   const project = sites[index];
-  const frameSrc = project.previewUrl || (EMBED.has(project.slug) ? project.url : undefined);
+  const frameSrc = frameSrcOf(project);
   const live = !!frameSrc;
   const choose = (next: number) => {
     setIndex((next + sites.length) % sites.length);
   };
+  // Welke frames in de DOM staan (in laadvolgorde) en welke klaar zijn.
+  const [mounted, setMounted] = useState<string[]>([]);
+  const [loaded, setLoaded] = useState<string[]>([]);
+  const mountNext = () =>
+    setMounted((current) => {
+      const next = sites.find((site) => frameSrcOf(site) && !current.includes(site.slug));
+      return next ? [...current, next.slug] : current;
+    });
+  useEffect(() => {
+    if (!near || !live) return;
+    setMounted((current) => (current.includes(project.slug) ? current : [...current, project.slug]));
+  }, [near, live, project.slug]);
+  useEffect(() => {
+    if (!near) return;
+    // Vangnet: laadt een site traag of nooit, dan gaat de volgende toch van start.
+    const timer = window.setTimeout(mountNext, PRELOAD_TIMEOUT);
+    return () => window.clearTimeout(timer);
+  }, [near, mounted.length]);
+  const activeLoaded = loaded.includes(project.slug);
   return (
     <section
       className="h-section h-wrap h-live-websites"
@@ -119,22 +145,34 @@ export default function LiveWebsites() {
           </span>
           <span>{new URL(project.url!).hostname}</span>
         </div>
-        <div className="h-live-screen" key={`${project.slug}-${live}`}
+        <div className="h-live-screen"
           onPointerEnter={event => { if (live && event.pointerType === "mouse") startInteraction(); }}
           onPointerLeave={stopInteraction}
         >
-          {live && near ? (
-            <iframe
-              ref={frame}
-              tabIndex={interactive ? 0 : -1}
-              style={{pointerEvents: interactive ? "auto" : "none"}}
-              title={`Live website van ${project.title}`}
-              src={frameSrc}
-              loading="lazy"
-              referrerPolicy="strict-origin-when-cross-origin"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-            />
-          ) : (
+          {near && sites.map((site) => {
+            const src = frameSrcOf(site);
+            if (!src || !mounted.includes(site.slug)) return null;
+            const active = site.slug === project.slug;
+            const show = active && loaded.includes(site.slug);
+            return (
+              <iframe
+                key={site.slug}
+                ref={active ? frame : undefined}
+                hidden={!show}
+                tabIndex={show && interactive ? 0 : -1}
+                style={{pointerEvents: show && interactive ? "auto" : "none"}}
+                title={`Live website van ${site.title}`}
+                src={src}
+                referrerPolicy="strict-origin-when-cross-origin"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                onLoad={() => {
+                  setLoaded((current) => (current.includes(site.slug) ? current : [...current, site.slug]));
+                  mountNext();
+                }}
+              />
+            );
+          })}
+          {(!live || !activeLoaded) && (
             <div className="h-live-direct">
               <strong>{project.title}</strong>
               {!project.offline && (
@@ -142,7 +180,7 @@ export default function LiveWebsites() {
                   Open live website <ExternalLink size={18} />
                 </a>
               )}
-              <span>{live ? "De live website wordt geladen zodra dit onderdeel in beeld komt." : "Deze website opent in een nieuw tabblad."}</span>
+              <span>{live ? "De live website wordt geladen." : "Deze website opent in een nieuw tabblad."}</span>
             </div>
           )}
         </div>

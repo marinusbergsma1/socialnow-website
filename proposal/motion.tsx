@@ -55,7 +55,7 @@ export function MotionControl() {
     </button>
   );
 }
-export function useInView<T extends HTMLElement>() {
+export function useInView<T extends HTMLElement>(rootMargin = "0px") {
   const ref = useRef<T>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -63,11 +63,11 @@ export function useInView<T extends HTMLElement>() {
     if (!element) return;
     const observer = new IntersectionObserver(
       ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.05 },
+      { threshold: 0.05, rootMargin },
     );
     observer.observe(element);
     return () => observer.disconnect();
-  }, []);
+  }, [rootMargin]);
   return { ref, visible };
 }
 export function AmbientVideo({
