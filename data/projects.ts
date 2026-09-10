@@ -44,28 +44,6 @@ export const webShowcaseProjects: Project[] = [
     ]
   },
   {
-    id: 13,
-    slug: "primefone-website",
-    title: "PrimeFone",
-    category: "AI Web Development",
-    client: "PrimeFone",
-    year: "2026",
-    services: ["AI Website Development", "E-Commerce", "Conversion Optimization", "Full-Stack Development"],
-    description: "Premium e-commerce voor refurbished iPhones en Samsung-toestellen. 55-punten kwaliteitscontrole, snelle checkout, conversie-gedreven design.",
-    image: `${import.meta.env.BASE_URL}screenshots/primefone-hero.webp`,
-    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/primefone-full.webp`,
-    align: 'right',
-    // Nog niet afgerond: niet in de websitecarrousel, wel als case zonder externe link.
-    url: "https://primefone.nl/",
-    offline: true,
-    gallery: [],
-    metrics: [
-      { label: "Laadtijd", value: "<1.3s", color: "#25D366" },
-      { label: "Conversie Boost", value: "+150%", color: "#00A3E0" },
-      { label: "Doorlooptijd", value: "2 weken", color: "#F7E644" }
-    ]
-  },
-  {
     id: 12,
     slug: "ilgordo-website",
     title: "Il Gordo",
@@ -123,29 +101,6 @@ export const webShowcaseProjects: Project[] = [
       { label: "Sessieduur", value: "+210%", color: "#F7E644" },
       { label: "Pagina's/Sessie", value: "4.2x", color: "#25D366" },
       { label: "Premium Look", value: "100%", color: "#F62961" }
-    ]
-  },
-  {
-    id: 7,
-    slug: "raveg-bounce-my-curls",
-    title: "RAVEG Hairstyling",
-    category: "AI Web Development",
-    client: "RAVEG",
-    year: "2026",
-    services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "E-Commerce"],
-    description: "De website van RAVEG hairstyling, met de Bounce My Curls productlijn. Modern, strak en conversion-gericht.",
-    image: `${import.meta.env.BASE_URL}screenshots/raveg-bounce-hero.webp`,
-    // Volledige paginaopname van raveghairstyling.com (9 sep 2026); de carrousel toont deze
-    // scrollbaar in het frame omdat Shopify iframes blokkeert (X-Frame-Options DENY).
-    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/raveg-live-full.webp`,
-    align: 'left',
-    url: "https://raveghairstyling.com/",
-    noEmbed: true,
-    gallery: [],
-    metrics: [
-      { label: "Conversie Boost", value: "+180%", color: "#25D366" },
-      { label: "Bounce Rate", value: "-35%", color: "#00A3E0" },
-      { label: "Doorlooptijd", value: "2 weken", color: "#F7E644" }
     ]
   },
   {
