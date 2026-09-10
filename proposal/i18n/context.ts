@@ -15,7 +15,7 @@ export function translate(text: string, language: Language): string {
   const key = text.replace(/\s+/g, " ").trim();
   const found = dictionary[key];
   if (found !== undefined) return text.replace(text.trim(), found);
-  for (const [prefix, replacement] of [["Live website van ", "Live website by "], ["Websiteontwerp voor ", "Website design for "]]) {
+  for (const [prefix, replacement] of [["Live website van ", "Live website by "], ["Websiteontwerp voor ", "Website design for "], ["Volledige paginaopname van de website van ", "Full-page capture of the website of "]]) {
     if (key.startsWith(prefix)) return replacement + key.slice(prefix.length);
   }
   if (/[A-Za-zÀ-ž]/.test(key)) missingTranslations.add(key);

@@ -13,9 +13,9 @@ export const webShowcaseProjects: Project[] = [
     description: "Real-estate intelligence platform voor de Nederlandse markt: woningwaarderingen op echte data, 12-maands prognoses en onderhandelingsinzicht. Platform én merkidentiteit uit één hand.",
     image: `${import.meta.env.BASE_URL}images/cases/vastiq-hero.webp`,
     align: 'left',
+    // VASTIQ heeft socialnow.nl toegang gegeven via frame-ancestors, dus de echte site
+    // draait in de carrousel. Geen kopie meer op socialnow.nl: dat was dubbele content.
     url: "https://vastiq.ai/",
-    // vastiq.ai stuurt X-Frame-Options SAMEORIGIN; de live carrousel toont de same-origin spiegel
-    previewUrl: `${import.meta.env.BASE_URL}vastiq-preview/index.html`,
     gallery: [],
     metrics: [
       { label: "Waarderingen", value: "Live data", color: "#25D366" },
@@ -55,9 +55,9 @@ export const webShowcaseProjects: Project[] = [
     image: `${import.meta.env.BASE_URL}screenshots/primefone-hero.webp`,
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/primefone-full.webp`,
     align: 'right',
-    // Winkel primefone.nl staat op "Store unavailable"; onze homepage draait live op Vercel
-    // (project "primefone", gecontroleerd 9 sep 2026) en staat iframes toe.
-    url: "https://primefone.vercel.app/",
+    // Nog niet afgerond: niet in de websitecarrousel, wel als case zonder externe link.
+    url: "https://primefone.nl/",
+    offline: true,
     gallery: [],
     metrics: [
       { label: "Laadtijd", value: "<1.3s", color: "#25D366" },
@@ -135,12 +135,12 @@ export const webShowcaseProjects: Project[] = [
     services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "E-Commerce"],
     description: "De website van RAVEG hairstyling, met de Bounce My Curls productlijn. Modern, strak en conversion-gericht.",
     image: `${import.meta.env.BASE_URL}screenshots/raveg-bounce-hero.webp`,
-    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/raveg-bounce-full.webp`,
+    // Volledige paginaopname van raveghairstyling.com (9 sep 2026); de carrousel toont deze
+    // scrollbaar in het frame omdat Shopify iframes blokkeert (X-Frame-Options DENY).
+    fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/raveg-live-full.webp`,
     align: 'left',
-    url: "https://raveg-hairstyling.com/",
-    // raveg-hairstyling.com stuurt X-Frame-Options DENY en geeft HTTP 402 (winkel offline, gecontroleerd 9 sep 2026)
+    url: "https://raveghairstyling.com/",
     noEmbed: true,
-    offline: true,
     gallery: [],
     metrics: [
       { label: "Conversie Boost", value: "+180%", color: "#25D366" },
