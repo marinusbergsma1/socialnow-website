@@ -18,6 +18,11 @@ export const people = [
     image: "Carmel-Boon-V2.webp",
   },
   {
+    name: "Sam van der Sluis",
+    role: "Videograaf",
+    image: "Sam-van-der-Sluis.webp",
+  },
+  {
     name: "Emma Peperkamp",
     role: "Fotograaf",
     image: "Emma-Peperkamp-V2.webp",
@@ -260,5 +265,8 @@ export const logos = [
   ["CHIN-CHIN-CLUB-LOGO.webp", "Chin Chin Club"],
   ["MOJO-LOGO.webp", "MOJO"],
   ["SUPPERCLUB-LOGO.webp", "Supperclub"],
-  ["UNDER-ARMOUR-LOGO-1.webp", "Under Armour"],
+  // 10 september 2026: het bestand UNDER-ARMOUR-LOGO-1.webp bevat het beeldmerk van Universal,
+  // niet van Under Armour. Het werk voor Universal staat in data/projects.ts (banners voor
+  // filmreleases van Universal en Sony); daarom hoort hier de naam Universal bij dit beeld.
+  ["UNDER-ARMOUR-LOGO-1.webp", "Universal"],
 ];
