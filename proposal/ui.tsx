@@ -12,6 +12,7 @@ import TeamTrust from "./TeamTrust";
 import OsEntry, { CLAIM_URL } from "./os-entry";
 import { MiloMotion, miloPoster } from "./motion";
 import type { Project } from "../types";
+import { useLanguage } from "./i18n/context";
 
 export function Action({
   children,
@@ -308,23 +309,80 @@ export function Closing() {
     <div className="h-final-contact"><a href="mailto:info@socialnow.nl">info@socialnow.nl</a><a href="https://wa.me/31637404577" target="_blank" rel="noopener noreferrer">WhatsApp <MessageCircle size={14} aria-hidden="true" /></a></div>
   </section>;
 }
+// Woorden die in elke vraag voorkomen en dus niets onderscheiden.
+const STOPWOORDEN = new Set([
+  "aan", "als", "bij", "dat", "de", "een", "en", "het", "hoe", "ik", "iets",
+  "is", "je", "kan", "kun", "mijn", "met", "moet", "van", "voor", "waar",
+  "wat", "welke", "wil", "zelf",
+  "a", "about", "an", "and", "any", "are", "can", "do", "does", "for", "how",
+  "i", "is", "it", "me", "my", "of", "the", "to", "what", "when", "where",
+  "which", "you", "your",
+]);
+
+// Wat een bezoeker typt en wat er in de antwoorden staat, is zelden hetzelfde
+// woord. Links het getypte woord, rechts waar het ook op mag aanslaan.
+const SYNONIEMEN: Record<string, string[]> = {
+  pricing: ["kosten", "cost"],
+  price: ["kosten", "cost"],
+  prices: ["kosten", "cost"],
+  cost: ["kosten"],
+  costs: ["kosten"],
+  budget: ["kosten", "cost"],
+  prijs: ["kosten", "cost"],
+  prijzen: ["kosten", "cost"],
+  tarief: ["kosten", "cost"],
+  kosten: ["cost"],
+  euro: ["kosten", "cost"],
+  begin: ["start"],
+  beginnen: ["start"],
+  start: ["begin"],
+  starten: ["begin"],
+  ads: ["advertenties", "advertising"],
+  advertising: ["advertenties"],
+  advertenties: ["advertising", "ads"],
+  install: ["installeer", "installeren"],
+  installeren: ["install", "installeer"],
+  site: ["website"],
+  webshop: ["website"],
+};
+
+// De losse, betekenisvolle woorden uit een zin, plus hun synoniemen.
+function zoekwoorden(zin: string): string[][] {
+  return zin
+    .toLocaleLowerCase("nl")
+    .split(/[^\p{L}\p{N}]+/u)
+    .filter((woord) => woord.length > 1 && !STOPWOORDEN.has(woord))
+    .map((woord) => [woord, ...(SYNONIEMEN[woord] ?? [])]);
+}
+
 export function MiloGuide() {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const dialog = useRef<HTMLDialogElement>(null);
   const input = useRef<HTMLInputElement>(null);
+  const { t } = useLanguage();
   useEffect(() => {
     if (open) {
       dialog.current?.showModal();
       input.current?.focus();
     } else dialog.current?.close();
   }, [open]);
-  const matches = search.trim()
-    ? faqs.filter((faq) =>
-        `${faq.question} ${faq.answer}`
-          .toLocaleLowerCase("nl")
-          .includes(search.trim().toLocaleLowerCase("nl")),
-      )
+  // De bezoeker typt de taal die hij op het scherm ziet. Zoek daarom in het
+  // vertaalde antwoord én in het Nederlandse origineel: op de Engelse site
+  // vond "pricing" anders niets, terwijl de plaatshouder het wél voorstelt.
+  const woorden = zoekwoorden(search);
+  const matches = woorden.length
+    ? faqs
+        .map((faq) => {
+          const tekst = `${faq.question} ${faq.answer} ${t(faq.question)} ${t(faq.answer)}`.toLocaleLowerCase("nl");
+          const raak = woorden.filter((varianten) =>
+            varianten.some((woord) => tekst.includes(woord)),
+          ).length;
+          return { faq, raak };
+        })
+        .filter((kandidaat) => kandidaat.raak > 0)
+        .sort((a, b) => b.raak - a.raak)
+        .map((kandidaat) => kandidaat.faq)
     : faqs.slice(0, 3);
   return (
     <>
