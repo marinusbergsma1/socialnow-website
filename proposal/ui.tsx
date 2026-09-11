@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
+  ArrowUp,
   ArrowUpRight,
   ChevronDown,
   X,
@@ -355,35 +356,120 @@ function zoekwoorden(zin: string): string[][] {
     .map((woord) => [woord, ...(SYNONIEMEN[woord] ?? [])]);
 }
 
+
+// De Worker die met Gemini praat. Deze URL is niet geheim; de Google-sleutel
+// staat uitsluitend als secret in de Worker zelf en komt nooit in de browser.
+// Zie worker/README.md.
+const MILO_API = "https://milo-chat.socialnow-marinus.workers.dev";
+const WHATSAPP = "https://wa.me/31637404577";
+const MAIL = "mailto:info@socialnow.nl";
+
+type Bericht = {
+  van: "milo" | "bezoeker";
+  tekst: string;
+  links?: { label: string; href: string }[];
+};
+
+// Antwoord uit de eigen vragenlijst. Dit is het vangnet: werkt de Worker niet,
+// dan blijft Milo alsnog antwoorden in plaats van er stil bij te staan.
+function uitVragenlijst(vraag: string, t: (tekst: string) => string): Bericht | null {
+  const woorden = zoekwoorden(vraag);
+  if (!woorden.length) return null;
+  let beste: (typeof faqs)[number] | null = null;
+  let besteScore = 0;
+  for (const faq of faqs) {
+    const tekst =
+      `${faq.question} ${faq.answer} ${t(faq.question)} ${t(faq.answer)}`.toLocaleLowerCase("nl");
+    const raak = woorden.filter((varianten) =>
+      varianten.some((woord) => tekst.includes(woord)),
+    ).length;
+    if (raak > besteScore) {
+      besteScore = raak;
+      beste = faq;
+    }
+  }
+  if (!beste) return null;
+  return { van: "milo", tekst: t(beste.answer), links: [{ label: t("App Marinus"), href: WHATSAPP }] };
+}
+
 export function MiloGuide() {
   const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState("");
+  const [vraag, setVraag] = useState("");
+  const [denkt, setDenkt] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const input = useRef<HTMLInputElement>(null);
-  const { t } = useLanguage();
+  const lijst = useRef<HTMLDivElement>(null);
+  const { language, t } = useLanguage();
+
+  const groet = t(
+    "Hoi, ik ben Milo. Vraag me alles over het OS, onze diensten of hoe we samen verder gaan.",
+  );
+  const [berichten, setBerichten] = useState<Bericht[]>([]);
+  // Het gesprek begint leeg en krijgt de groet in de taal van de bezoeker.
+  // Wisselt hij van taal, dan wisselt een nog ongestart gesprek mee.
+  const gesprek = berichten.length ? berichten : [{ van: "milo" as const, tekst: groet }];
+
   useEffect(() => {
     if (open) {
       dialog.current?.showModal();
       input.current?.focus();
     } else dialog.current?.close();
   }, [open]);
-  // De bezoeker typt de taal die hij op het scherm ziet. Zoek daarom in het
-  // vertaalde antwoord én in het Nederlandse origineel: op de Engelse site
-  // vond "pricing" anders niets, terwijl de plaatshouder het wél voorstelt.
-  const woorden = zoekwoorden(search);
-  const matches = woorden.length
-    ? faqs
-        .map((faq) => {
-          const tekst = `${faq.question} ${faq.answer} ${t(faq.question)} ${t(faq.answer)}`.toLocaleLowerCase("nl");
-          const raak = woorden.filter((varianten) =>
-            varianten.some((woord) => tekst.includes(woord)),
-          ).length;
-          return { faq, raak };
-        })
-        .filter((kandidaat) => kandidaat.raak > 0)
-        .sort((a, b) => b.raak - a.raak)
-        .map((kandidaat) => kandidaat.faq)
-    : faqs.slice(0, 3);
+
+  useEffect(() => {
+    lijst.current?.scrollTo({ top: lijst.current.scrollHeight, behavior: "smooth" });
+  }, [berichten, denkt]);
+
+  const stel = useCallback(
+    async (ruw: string) => {
+      const q = ruw.trim();
+      if (!q || denkt) return;
+      const heen: Bericht[] = [...gesprek, { van: "bezoeker", tekst: q }];
+      setBerichten(heen);
+      setVraag("");
+      setDenkt(true);
+      let antwoord: Bericht | null = null;
+      try {
+        const stop = new AbortController();
+        const klok = setTimeout(() => stop.abort(), 15000);
+        const res = await fetch(MILO_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            language,
+            messages: heen.map((b) => ({ role: b.van === "bezoeker" ? "user" : "milo", text: b.tekst })),
+          }),
+          signal: stop.signal,
+        });
+        clearTimeout(klok);
+        const data = await res.json().catch(() => null);
+        if (res.ok && data?.text) {
+          antwoord = {
+            van: "milo",
+            tekst: String(data.text),
+            links: [{ label: t("App Marinus"), href: WHATSAPP }],
+          };
+        }
+      } catch {
+        antwoord = null; // val netjes terug op de eigen vragenlijst
+      }
+      const definitief: Bericht = antwoord ||
+        uitVragenlijst(q, t) || {
+          van: "milo",
+          tekst: t("Daar heb ik nog geen antwoord op. Stel je vraag aan ons team."),
+          links: [
+            { label: t("App Marinus"), href: WHATSAPP },
+            { label: "info@socialnow.nl", href: MAIL },
+          ],
+        };
+      setDenkt(false);
+      setBerichten([...heen, definitief]);
+    },
+    [gesprek, denkt, language, t],
+  );
+
+  const suggesties = faqs.slice(0, 3).map((faq) => faq.question);
+
   return (
     <>
       <button
@@ -399,67 +485,96 @@ export function MiloGuide() {
         </span>
       </button>
       <dialog
-        className="h-milo-dialog"
+        className="h-milo-dialog h-milo-gesprek"
         ref={dialog}
         onCancel={() => setOpen(false)}
         onClose={() => setOpen(false)}
         aria-labelledby="milo-title"
       >
         <div className="h-milo-top">
-          <img
-            src="/proposal/milo/website.webp"
-            alt="SocialNow"
-            width="64"
-            height="64"
-          />
+          <img src="/proposal/milo/website.webp" alt="SocialNow" width="64" height="64" />
           <div>
             <h2 id="milo-title">Waar kunnen we je mee helpen?</h2>
             <p>Je wegwijzer bij SocialNow.</p>
           </div>
-          <button
-            type="button"
-            onClick={() => setOpen(false)}
-            aria-label="Hulp sluiten"
-          >
+          <button type="button" onClick={() => setOpen(false)} aria-label="Hulp sluiten">
             <X size={20} />
           </button>
         </div>
-        <p>
-          Zoek in de antwoorden over het OS en onze diensten. Liever een mens
-          spreken? Ons team helpt je verder.
-        </p>
-        <label htmlFor="milo-search">Waar wil je meer over weten?</label>
-        <input
-          ref={input}
-          id="milo-search"
-          type="search"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-          placeholder="Bijvoorbeeld: website, Odoo of kosten"
-        />
-        <div className="h-milo-results" aria-live="polite">
-          {matches.length ? (
-            matches.map((faq) => (
-              <details key={faq.question}>
-                <summary>
-                  {faq.question}
-                  <ChevronDown size={16} />
-                </summary>
-                <p>{faq.answer}</p>
-              </details>
-            ))
-          ) : (
-            <p>Daar heb ik nog geen antwoord op. Stel je vraag aan ons team.</p>
+
+        <div className="h-milo-gesprekslijst" ref={lijst} aria-live="polite" translate="no">
+          {gesprek.map((bericht, i) => (
+            <div
+              key={i}
+              className={bericht.van === "bezoeker" ? "h-milo-bericht is-bezoeker" : "h-milo-bericht"}
+            >
+              <p>{bericht.tekst}</p>
+              {bericht.links && (
+                <div className="h-milo-links">
+                  {bericht.links.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target={link.href.startsWith("http") ? "_blank" : undefined}
+                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+          {denkt && (
+            <div className="h-milo-bericht h-milo-denkt">
+              <i />
+              <i />
+              <i />
+            </div>
           )}
         </div>
-        <Link
-          className="h-text-link"
-          to="/contact"
-          onClick={() => setOpen(false)}
+
+        {berichten.length === 0 && !denkt && (
+          <div className="h-milo-suggesties" translate="no">
+            {suggesties.map((suggestie) => (
+              <button key={suggestie} type="button" onClick={() => stel(t(suggestie))}>
+                {t(suggestie)}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <form
+          className="h-milo-composer"
+          onSubmit={(event) => {
+            event.preventDefault();
+            stel(vraag);
+          }}
         >
-          Praat met het team
-          <ArrowRight size={16} />
-        </Link>
+          <label className="sr-only" htmlFor="milo-search">
+            Stel je vraag aan Milo
+          </label>
+          <input
+            ref={input}
+            id="milo-search"
+            type="text"
+            autoComplete="off"
+            maxLength={500}
+            value={vraag}
+            onChange={(event) => setVraag(event.target.value)}
+            placeholder="Bijvoorbeeld: wat kost een Custom OS?"
+          />
+          <button type="submit" disabled={!vraag.trim() || denkt} aria-label="Versturen">
+            <ArrowUp size={18} />
+          </button>
+        </form>
+
+        <p className="h-milo-voetnoot">
+          Milo kan fouten maken.{" "}
+          <Link to="/contact" onClick={() => setOpen(false)}>
+            Praat met het team
+          </Link>
+        </p>
       </dialog>
     </>
   );

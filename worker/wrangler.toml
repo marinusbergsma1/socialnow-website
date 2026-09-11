@@ -3,7 +3,10 @@ main = "milo-worker.js"
 compatibility_date = "2024-11-01"
 
 # Na deploy krijg je een URL zoals: https://milo-chat.<jouw-subdomein>.workers.dev
-# Zet die URL in components/MiloChat.tsx (MILO_API_URL) of als VITE_MILO_API_URL.
+# Die URL is niet geheim en staat in proposal/ui.tsx. De Gemini-sleutel staat
+# uitsluitend hier, als secret:
 #
-# Secret toevoegen (key blijft serverside, nooit in de browser):
-#   wrangler secret put GEMINI_API_KEY
+#   npx wrangler secret put GEMINI_API_KEY
+#
+# Optioneel een ander model afdwingen:
+#   npx wrangler secret put GEMINI_MODEL

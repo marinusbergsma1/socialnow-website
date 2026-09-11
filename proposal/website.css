@@ -1710,29 +1710,178 @@ video {
 .h-milo-dialog input {
   font-size: 13px;
 }
-.h-milo-results {
-  margin-top: 20px;
-  margin-bottom: 25px;
-}
-.h-milo-results details {
-  border-bottom: 1px solid #333;
-}
-.h-milo-results summary {
+.h-milo-gesprek {
   display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: center;
-  list-style: none;
+  flex-direction: column;
+  height: min(620px, 85dvh);
+  overflow: hidden;
+}
+.h-milo-gesprekslijst {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+  margin-top: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+.h-milo-bericht {
+  margin-bottom: 18px;
+}
+.h-milo-bericht p {
   font-size: 14px;
-  padding: 14px 0;
-}
-.h-milo-results details p {
-  font-size: 13px;
-  padding-bottom: 16px;
   line-height: 1.75;
+  white-space: pre-line;
+  color: #e8e8e8;
 }
-.h-milo-results > p {
-  font-size: 13px;
+.h-milo-bericht.is-bezoeker {
+  display: flex;
+  justify-content: flex-end;
+}
+.h-milo-bericht.is-bezoeker p {
+  max-width: 85%;
+  background: #25d366;
+  color: #08120c;
+  font-weight: 500;
+  border-radius: 15px 15px 4px 15px;
+  padding: 10px 14px;
+}
+.h-milo-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.h-milo-links a {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #25d366;
+  border: 1px solid #25d36666;
+  border-radius: 999px;
+  padding: 7px 13px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.h-milo-links a:hover {
+  background: #25d366;
+  color: #08120c;
+}
+.h-milo-denkt {
+  display: flex;
+  gap: 6px;
+  padding: 6px 0 2px;
+}
+.h-milo-denkt i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #666;
+  animation: h-milo-stip 1.1s ease-in-out infinite;
+}
+.h-milo-denkt i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.h-milo-denkt i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes h-milo-stip {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .h-milo-denkt i {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+.h-milo-suggesties {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding-bottom: 14px;
+}
+.h-milo-suggesties button {
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #b9b9bd;
+  background: none;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 9px 13px;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+.h-milo-suggesties button:hover {
+  color: #fff;
+  border-color: #25d36688;
+}
+.h-milo-composer {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-top: 1px solid #262626;
+  padding-top: 14px;
+}
+.h-milo-composer label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.h-milo-dialog .h-milo-composer input {
+  margin-top: 0;
+  flex: 1;
+  min-width: 0;
+}
+.h-milo-composer button {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: #25d366;
+  color: #08120c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
+}
+.h-milo-composer button:hover:enabled {
+  transform: scale(1.08);
+}
+.h-milo-composer button:disabled {
+  opacity: 0.3;
+}
+.h-milo-dialog > p.h-milo-voetnoot {
+  font-size: 11px;
+  text-align: center;
+  color: #6d6d72;
+  margin-top: 10px;
+}
+.h-milo-voetnoot a {
+  color: #8d8d92;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.h-milo-voetnoot a:hover {
+  color: #25d366;
 }
 @media (min-width: 1600px) {
   .brand-globe {

@@ -321,9 +321,6 @@
   "Hoi, ik ben Milo.": "Hi, I’m Milo.",
   "Je wegwijzer bij SocialNow.": "Your guide to SocialNow.",
   "Milo sluiten": "Close Milo",
-  "Zoek in de antwoorden over het OS en onze diensten. Liever een mens spreken? Ons team helpt je verder.": "Search answers about the OS and our services. Prefer talking to a person? Our team is here to help.",
-  "Waar wil je meer over weten?": "What would you like to know?",
-  "Bijvoorbeeld: website, Odoo of kosten": "For example: website, Odoo or pricing",
   "Praat met het team": "Talk to the team",
   "Daar heb ik nog geen antwoord op. Stel je vraag aan ons team.": "I don’t have an answer for that yet. Ask our team your question.",
   "Probeer SocialNow OS / Ontdek hoe het werkt": "Try SocialNow OS / See how it works",
@@ -929,5 +926,11 @@
   "Installeer op Android": "Install on Android",
   "Installeer op iPhone of iPad": "Install on iPhone or iPad",
   "Sam van der Sluis": "Sam van der Sluis",
-  "Videograaf": "Videographer"
+  "Videograaf": "Videographer",
+  "Hoi, ik ben Milo. Vraag me alles over het OS, onze diensten of hoe we samen verder gaan.": "Hi, I’m Milo. Ask me anything about the OS, our services, or how we move forward together.",
+  "Stel je vraag aan Milo": "Ask Milo your question",
+  "Bijvoorbeeld: wat kost een Custom OS?": "For example: what does a Custom OS cost?",
+  "Versturen": "Send",
+  "App Marinus": "Message Marinus",
+  "Milo kan fouten maken.": "Milo can make mistakes."
 }

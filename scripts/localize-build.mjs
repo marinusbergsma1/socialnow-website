@@ -5,6 +5,13 @@ const BASE='https://socialnow.nl';
 const sitemap=readFileSync('dist/sitemap.xml','utf8');
 const paths=[...sitemap.matchAll(/<loc>https:\/\/socialnow.nl([^<]*)<\/loc>/g)].map(m=>m[1]||'/');
 const missing=new Set();
+const unescape=value=>value.replaceAll('&amp;','&').replaceAll('&quot;','"');
+const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;');
+// Case- en blogtitels zijn merknamen plus een achtervoegsel dat al Engels is.
+// Die hoeven niet vertaald te worden; ze als "ontbrekend" melden verbergt de
+// regels die wel echt een vertaling missen.
+const geenVertalingNodig=text=>/ \| SocialNow (Cases|Blog)$/.test(text);
+const meld=text=>{if(!geenVertalingNodig(text))missing.add(text);};
 function localize(value){
  if(typeof value==='string') {
   if(value.startsWith('http')) return value;
@@ -29,11 +36,11 @@ for(const route of paths){
    .replace(/(<meta\s+property="og:locale"\s+content=")[^"]+/,`$1${language==='nl'?'nl_NL':'en_GB'}`);
   output=output.replace('</head>',`<link rel="alternate" hreflang="en" href="${BASE}${route}" /><link rel="alternate" hreflang="nl" href="${BASE}/nl${route}" /><link rel="alternate" hreflang="x-default" href="${BASE}${route}" /></head>`);
   if(language==='en'){
-   output=output.replace(/<title>([^<]+)<\/title>/,(_,v)=>`<title>${localize(v)}</title>`)
+   output=output.replace(/<title>([^<]+)<\/title>/,(_,v)=>`<title>${escape(localize(unescape(v)))}</title>`)
     .replace(/(<meta\s+(?:name|property)="(?:description|og:title|og:description|twitter:title|twitter:description)"\s+content=")([^"]+)(")/g,(_,a,v,z)=>{
-      const text=v.replaceAll('&amp;','&').replaceAll('&quot;','"');const translated=localize(text);
-      if(translated===text)missing.add(text);
-      return a+translated.replaceAll('&','&amp;').replaceAll('"','&quot;')+z;
+      const text=unescape(v);const translated=localize(text);
+      if(translated===text)meld(text);
+      return a+escape(translated)+z;
     })
     .replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/g,(_,a,v,z)=>a+JSON.stringify(localize(JSON.parse(v)))+z)
     .replace(/<noscript[\s\S]*?<\/noscript\s*>/, '<noscript>SocialNow — One OS for your business. Discuss your Custom OS at info@socialnow.nl or call +31 6 3740 4577.</noscript>');
