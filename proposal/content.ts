@@ -260,11 +260,18 @@ export const faqs = [
       "Je kunt het OS in je browser gebruiken. Bij Installeer OS staat korte uitleg voor je apparaat. De mogelijkheid om het als app toe te voegen hangt af van je browser en versie.",
   },
 ];
-export const logos = [
+/* Het derde getal is de optische maat, 11 september 2026 (Marinus: "MOJO is hier nog wat te
+   groot in vergelijking met de rest").
+   Alle logo's kregen hetzelfde vak met object-fit: contain, en dan bepaalt de witruimte in het
+   bestand hoe groot iets oogt. Een beeldmerk in een cirkel houdt lucht over en krimpt; een
+   breed woordmerk als MOJO vult het vak tot de rand en domineert daardoor de hele rij. Een
+   mens ziet geen gelijke vakken, hij ziet gelijk gewicht. Dit getal schaalt het vak, zodat ze
+   naast elkaar even zwaar staan. 1 is de volle maat; leeg is ook 1. */
+export const logos: [string, string, number?][] = [
   ["AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp", "Amsterdam Light Festival"],
-  ["CHIN-CHIN-CLUB-LOGO.webp", "Chin Chin Club"],
-  ["MOJO-LOGO.webp", "MOJO"],
-  ["SUPPERCLUB-LOGO.webp", "Supperclub"],
+  ["CHIN-CHIN-CLUB-LOGO.webp", "Chin Chin Club", 0.9],
+  ["MOJO-LOGO.webp", "MOJO", 0.62],
+  ["SUPPERCLUB-LOGO.webp", "Supperclub", 0.95],
   // 10 september 2026: het bestand UNDER-ARMOUR-LOGO-1.webp bevat het beeldmerk van Universal,
   // niet van Under Armour. Het werk voor Universal staat in data/projects.ts (banners voor
   // filmreleases van Universal en Sony); daarom hoort hier de naam Universal bij dit beeld.

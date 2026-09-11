@@ -153,7 +153,6 @@ export function Home() {
         </div>
         <ConversionBridge />
       </section>
-      <ClientLogos />
       <FeaturedWork />
       <LiveWebsites />
       <CustomerReviews />
@@ -247,6 +246,10 @@ export function Home() {
         />
         <Questions />
       </section>
+      {/* 11 september 2026 (Marinus): "is zo iets niet beter onderaan de pagina?" De logorij
+          stond midden in het verhaal, tussen de video's en het eigen werk, en brak daar de opbouw.
+          Onderaan is het wat het is: het bewijs waar je mee wegloopt, vlak boven de voet. */}
+      <ClientLogos />
     </>
   );
 }

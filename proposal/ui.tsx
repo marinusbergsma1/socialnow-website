@@ -264,7 +264,7 @@ export function ClientLogos() {
     <div className="h-clients h-wrap">
       <p className="h-eyebrow">Werk gemaakt voor onder meer</p>
       <div>
-        {logos.map(([src, name]) => (
+        {logos.map(([src, name, maat]) => (
           <img
             key={src}
             src={`/images/${src}`}
@@ -272,6 +272,7 @@ export function ClientLogos() {
             width="220"
             height="100"
             loading="lazy"
+            style={maat ? ({ "--logo-maat": String(maat) } as React.CSSProperties) : undefined}
           />
         ))}
       </div>
