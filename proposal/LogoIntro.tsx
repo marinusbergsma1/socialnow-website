@@ -17,12 +17,12 @@ function gezien(): boolean {
    De beslissing valt daarom bij de eerste render (niet in een effect na het tekenen), het dialoog
    opent in een layout-effect vóór de eerste tekenbeurt, en de video staat vanaf de eerste render
    in de DOM zodat hij meteen begint te laden; index.html laadt hem bovendien al vooraf. */
-export default function LogoIntro() {
+export default function LogoIntro({ onComplete }: { onComplete?: () => void }) {
   const location = useLocation();
   const [mobile] = useState(() => window.matchMedia("(max-width: 767px)").matches);
   const [open, setOpen] = useState(
     () =>
-      !gezien() &&
+      (!gezien() || new URLSearchParams(location.search).get("qr") === "os") &&
       location.pathname === "/" &&
       !location.hash &&
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
@@ -32,12 +32,13 @@ export default function LogoIntro() {
   const close = useCallback(() => {
     video.current?.pause();
     setOpen(false);
+    onComplete?.();
     try {
       sessionStorage.setItem(SLEUTEL, "seen");
     } catch {
       /* Private mode */
     }
-  }, []);
+  }, [onComplete]);
   useEffect(() => {
     const replay = () => setOpen(true);
     window.addEventListener("sn-preview-logo-replay", replay);

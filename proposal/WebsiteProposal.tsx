@@ -24,6 +24,7 @@ import {
   TeamPage,
 } from "./pages";
 import LogoIntro from "./LogoIntro";
+import QrOsWelcome from "./QrOsWelcome";
 import BrandFooter from "./BrandFooter";
 import { MotionProvider } from "./motion";
 import { projects } from "./content";
@@ -52,6 +53,7 @@ function ProposalShell() {
   const {language,t}=useLanguage();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLElement>(null);
   const mounted = useRef(false);
@@ -112,7 +114,8 @@ function ProposalShell() {
   }, [menuOpen]);
   return (
     <div className="sn-site" data-style="signature">
-      <LogoIntro />
+      <LogoIntro onComplete={() => setIntroDone(true)} />
+      <QrOsWelcome ready={introDone} />
       <a className="h-skip" href="#inhoud">
         Ga naar inhoud
       </a>
