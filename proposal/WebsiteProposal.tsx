@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { CLAIM_URL } from "./os-entry";
-import { Action, MiloGuide } from "./ui";
+import { Action } from "./ui";
 import {
   BlogPage,
   BlogPostPage,
@@ -211,7 +211,6 @@ function ProposalShell() {
         </Routes>
       </main>
       <BrandFooter />
-      <MiloGuide />
     </div>
   );
 }

@@ -8,7 +8,6 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { services } from "./content";
-import { MotionControl } from "./motion";
 import { Closing } from "./ui";
 const TERMS =
   "https://storage.googleapis.com/video-slider/Algemene%20Voorwaarden%20SocialNow.pdf";
@@ -94,18 +93,7 @@ export default function BrandFooter() {
           <Link to="/privacy">Privacy</Link>
           <span>KVK 90877179 · Sinds 2021</span>
         </div>
-        <div className="h-footer-motion">
-          <button
-            type="button"
-            onClick={() =>
-              window.dispatchEvent(new Event("sn-preview-logo-replay"))
-            }
-          >
-            <RotateCcw size={13} />
-            Logo-animatie opnieuw
-          </button>
-          <MotionControl />
-        </div>
+
       </div>
     </footer>
   );
