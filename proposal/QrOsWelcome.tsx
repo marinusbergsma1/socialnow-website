@@ -1,5 +1,5 @@
 import React, { useEffect, useId, useRef, useState } from "react";
-import { ArrowRight, Check, LockKeyhole, Sparkles, X } from "lucide-react";
+import { ArrowRight, Check, LockKeyhole, X } from "lucide-react";
 
 const QR_KEY = "sn-qr-os-welcome-v1";
 const LOGIN_URL = "https://app.socialnow.nl/login/?bron=beurs-qr";
@@ -45,8 +45,7 @@ export default function QrOsWelcome({ ready }: { ready: boolean }) {
       <div className="qr-os-card">
         <button className="qr-os-close" type="button" onClick={close} aria-label="Close welcome"><X size={18} /></button>
         {step === "welcome" ? <>
-          <div className="qr-os-orbits" aria-hidden="true"><i /><i /><i /></div>
-          <div className="qr-os-kicker"><Sparkles size={14} /> SOCIALNOW OS</div>
+          <img className="qr-os-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="136" />
           <h1 id="qr-os-title">Welcome to SocialNow.</h1>
           <p className="qr-os-lead">Are you here to explore the OS?</p>
           <div className="qr-os-actions">
@@ -54,7 +53,8 @@ export default function QrOsWelcome({ ready }: { ready: boolean }) {
             <a className="qr-os-secondary" href="/">No, visit the website</a>
           </div>
         </> : <>
-          <div className="qr-os-kicker"><Sparkles size={14} /> YOUR PERSONAL OS</div>
+          <img className="qr-os-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="136" />
+          <p className="qr-os-eyebrow">YOUR PERSONAL OS</p>
           <h1 id="qr-os-title">Nice to meet you.</h1>
           <p className="qr-os-lead">We will prepare your starting point. Sign in securely to continue.</p>
           <ul className="qr-os-list"><li><Check size={15} /> Your Odoo data, ready when you connect it</li><li><Check size={15} /> A brand and Studio made for your business</li><li><Check size={15} /> Your team, work and next steps in one place</li></ul>
