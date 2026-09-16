@@ -74,9 +74,12 @@ export default function ConsentPopup() {
   return (
     <div className="sn-consent" role="dialog" aria-modal="true" aria-labelledby="sn-consent-kop" translate="no">
       <div className="sn-consent-card">
-        <img className="sn-consent-logo" src="/beeldmerk-2026.webp" alt="" width="68" height="48" />
-        <p className="sn-consent-eyebrow">SocialNow</p>
-        <p id="sn-consent-kop" className="sn-consent-kop">{s.kop}</p>
+        {/* 16 september 2026 (Marinus): zoals de inlog van het OS, met het woordlogo in een eigen band. */}
+        <div className="sn-consent-merk">
+          <img className="sn-consent-logo" src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="1556" height="240" />
+        </div>
+        <div className="sn-consent-inhoud">
+        <h2 id="sn-consent-kop" className="sn-consent-kop">{s.kop}</h2>
         <p className="sn-consent-vraag">{s.vraag}</p>
         <label className="sn-consent-land">
           <span>{s.land}</span>
@@ -91,6 +94,7 @@ export default function ConsentPopup() {
         <p className="sn-consent-tekst">
           {s.voor}<Link to="/voorwaarden">{s.voorwaarden}</Link>{s.en}<Link to="/privacy">{s.privacy}</Link>{s.na}
         </p>
+        </div>
       </div>
     </div>
   );
