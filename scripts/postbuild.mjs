@@ -18,6 +18,7 @@ const routeMeta = {
   projecten: {title: 'Uitgelicht werk & cases | SocialNow', description: 'Bekijk websites, video’s en campagnes van SocialNow. Werk voor onder meer RAVEG, Universal, Sony en AZ.'},
   prijzen: {title: 'Aanbod — Probeer het OS & Custom OS | SocialNow', description: 'Probeer het OS. Voor jouw Custom OS maken we een persoonlijk voorstel met een duidelijke scope, kosten en begeleiding.'},
   privacy: {title: 'Privacybeleid | SocialNow', description: 'Lees hoe SocialNow omgaat met persoonsgegevens en welke rechten je hebt.'},
+  voorwaarden: {title: 'Algemene voorwaarden | SocialNow', description: 'De algemene voorwaarden van SocialNow, inclusief het gebruik van SocialNow OS.'},
   team: {title: 'Team — De mensen achter het OS | SocialNow', description: 'Maak kennis met Marinus Bergsma en de creatieve en technische specialisten achter SocialNow.'},
   blog: {title: 'Blog — Vanuit de praktijk | SocialNow', description: 'Inzichten over websites, AI, content en vindbaarheid vanuit het werk van SocialNow.'},
 };
@@ -30,6 +31,7 @@ const crumbLabels = {
   projecten: 'Projecten',
   prijzen: 'Prijzen',
   privacy: 'Privacybeleid',
+  voorwaarden: 'Algemene voorwaarden',
   team: 'Team',
   blog: 'Blog',
 };
@@ -248,7 +250,7 @@ copyFileSync('dist/index.html', 'dist/404.html');
 
 // Oude previewlinks blijven bereikbaar met dezelfde gekozen Signature-stijl.
 // De preview blijft noindex; de hoofdwebsite is nu Signature.
-const previewRoutes = ['', 'stijlen', 'het-os', 'projecten', 'diensten', 'prijzen', 'team', 'blog', 'contact', 'privacy',
+const previewRoutes = ['', 'stijlen', 'het-os', 'projecten', 'diensten', 'prijzen', 'team', 'blog', 'contact', 'privacy', 'voorwaarden',
   ...Object.keys(projectMeta).map(slug => `project/${slug}`),
   ...posts.map(post => `blog/${post.slug}`),
 ];
@@ -270,6 +272,7 @@ const routeSitemapMeta = {
   prijzen: { changefreq: 'monthly', priority: '0.8' },
   team: { changefreq: 'monthly', priority: '0.7' },
   privacy: { changefreq: 'yearly', priority: '0.3' },
+  voorwaarden: { changefreq: 'yearly', priority: '0.3' },
   blog: { changefreq: 'daily', priority: '0.8' },
 };
 

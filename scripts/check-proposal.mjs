@@ -39,6 +39,7 @@ try {
     "/blog",
     "/contact",
     "/privacy",
+    "/voorwaarden",
     ...projects.map((project) => `/project/${project.slug}`),
     ...allPosts.map((post) => `/blog/${post.slug}`),
   ];
@@ -360,6 +361,7 @@ try {
       "projecten",
       "prijzen",
       "privacy",
+      "voorwaarden",
       "team",
       "blog",
       "project/kwh-garant-website",
