@@ -956,6 +956,11 @@
   gap: 17px;
   margin-top: 25px;
 }
+/* 16 september 2026 (Marinus): de drie icoontjes in de merkkleuren, roze, blauw en geel. */
+.sn-site .h-footer-socials a { color: #f62961; transition: filter .16s ease, transform .16s ease; }
+.sn-site .h-footer-socials a:nth-child(2) { color: #00a3e0; }
+.sn-site .h-footer-socials a:nth-child(3) { color: #f7e644; }
+.sn-site .h-footer-socials a:hover { filter: brightness(1.15) drop-shadow(0 0 8px currentColor); transform: translateY(-1px); }
 .h-footer-partner,
 .h-footer-platforms {
   text-align: center;
@@ -1777,7 +1782,7 @@ html {
 /* 16 september 2026 (Marinus): minder fel, meer verloop, zodat wit leesbaar blijft (4,6 op 1 op de
    lichtste plek). Hetzelfde groen als de knop in de welkomstpopup. */
 .sn-site .h-header-claim {
-  background: linear-gradient(180deg, #0d853e 0%, #0a6f33 55%, #064f23 100%);
+  background: linear-gradient(180deg, #0e883f 0%, #0c7c3a 55%, #08632c 100%);
   color: #fff;
   border: 1px solid #25d36659;
   font-weight: 700;
@@ -1793,7 +1798,7 @@ html {
   border-color: #85f8af;
 }
 .sn-site .h-header-claim:hover {
-  background: linear-gradient(180deg, #0d853e 0%, #0a6f33 55%, #064f23 100%);
+  background: linear-gradient(180deg, #0e883f 0%, #0c7c3a 55%, #08632c 100%);
   filter: brightness(1.08);
   color: #fff;
   border-color: #25d36699;
@@ -2202,7 +2207,7 @@ html {
 .sn-consent .sn-consent-land select{width:100%;height:48px;border:1px solid #ffffff24;border-radius:12px;padding:0 14px;background:#12233a;color:#fff;font-weight:600;font-size:16px;line-height:1;font-family:inherit;letter-spacing:0;text-transform:none;cursor:pointer}
 .sn-consent .sn-consent-land select:focus{outline:2px solid #5decb3;outline-offset:1px;border-color:transparent}
 .sn-consent .sn-consent-knoppen{display:grid;gap:10px;margin:0 0 20px}
-.sn-consent .sn-consent-knop{display:flex;align-items:center;justify-content:center;width:100%;height:48px;padding:0 22px;border:0;border-radius:999px;background:linear-gradient(180deg,#0d853e 0%,#0a6f33 55%,#064f23 100%);color:#fff;font-weight:700;font-size:15px;line-height:1;font-family:inherit;letter-spacing:.01em;white-space:nowrap;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff3d,0 0 0 1px #25d36673,0 6px 22px #25d36638;transition:filter .16s ease,transform .16s ease}
+.sn-consent .sn-consent-knop{display:flex;align-items:center;justify-content:center;width:100%;height:48px;padding:0 22px;border:0;border-radius:999px;background:linear-gradient(180deg,#0e883f 0%,#0c7c3a 55%,#08632c 100%);color:#fff;font-weight:700;font-size:15px;line-height:1;font-family:inherit;letter-spacing:.01em;white-space:nowrap;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff3d,0 0 0 1px #25d36673,0 6px 22px #25d36638;transition:filter .16s ease,transform .16s ease}
 .sn-consent .sn-consent-knop:hover{filter:brightness(1.08)}
 .sn-consent .sn-consent-knop:active{transform:translateY(1px)}
 .sn-consent .sn-consent-knop:focus-visible{outline:2px solid #5decb3;outline-offset:2px}
