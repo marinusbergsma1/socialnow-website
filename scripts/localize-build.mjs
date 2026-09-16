@@ -1,6 +1,12 @@
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
-const dictionary=JSON.parse(readFileSync('proposal/i18n/en.json','utf8'));
-const t=value=>dictionary[value.replace(/\s+/g,' ').trim()] ?? value;
+// 16 september 2026: zes talen. Nederlands is de bron (sleutels), de andere vijf zijn woordenboeken.
+// Elke route wordt zes keer geschreven: / (Engels), /nl, /de, /fr, /it, /es, met canonical,
+// og:locale en hreflang voor alle zes.
+const LANGUAGES=['en','nl','de','fr','it','es'];
+const LOCALES={en:'en_GB',nl:'nl_NL',de:'de_DE',fr:'fr_FR',it:'it_IT',es:'es_ES'};
+const prefix=l=>l==='en'?'':`/${l}`;
+const dictionaries=Object.fromEntries(LANGUAGES.filter(l=>l!=='nl').map(l=>[l,JSON.parse(readFileSync(`proposal/i18n/${l}.json`,'utf8'))]));
+const t=(value,language)=>{const key=value.replace(/\s+/g,' ').trim();return dictionaries[language][key] ?? dictionaries.en[key] ?? value;};
 const BASE='https://socialnow.nl';
 const sitemap=readFileSync('dist/sitemap.xml','utf8');
 const paths=[...sitemap.matchAll(/<loc>https:\/\/socialnow.nl([^<]*)<\/loc>/g)].map(m=>m[1]||'/');
@@ -12,43 +18,44 @@ const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;');
 // regels die wel echt een vertaling missen.
 const geenVertalingNodig=text=>/ \| SocialNow (Cases|Blog)$/.test(text);
 const meld=text=>{if(!geenVertalingNodig(text))missing.add(text);};
-function localize(value){
+function localize(value,language){
  if(typeof value==='string') {
   if(value.startsWith('http')) return value;
-  const found=t(value);
+  const found=t(value,language);
   if(found!==value)return found;
-  if(value.includes(' | '))return value.split(' | ').map(localize).join(' | ');
-  if(value.includes('\n'))return value.split('\n').map(localize).join('\n');
+  if(value.includes(' | '))return value.split(' | ').map(v=>localize(v,language)).join(' | ');
+  if(value.includes('\n'))return value.split('\n').map(v=>localize(v,language)).join('\n');
   return value;
  }
- if(Array.isArray(value))return value.map(localize);
- if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,localize(v)]));
+ if(Array.isArray(value))return value.map(v=>localize(v,language));
+ if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,localize(v,language)]));
  return value;
 }
+const alternates=route=>LANGUAGES.map(l=>`<link rel="alternate" hreflang="${l}" href="${BASE}${prefix(l)}${route}" />`).join('')+`<link rel="alternate" hreflang="x-default" href="${BASE}${route}" />`;
 for(const route of paths){
  const file=`dist${route==='/'?'':route}/index.html`;
  const source=readFileSync(file,'utf8');
- for(const language of ['en','nl']){
-  const url=`${BASE}${language==='nl'?'/nl':''}${route}`;
+ for(const language of LANGUAGES){
+  const url=`${BASE}${prefix(language)}${route}`;
   let output=source.replace(/<html lang="[^"]+"/,`<html lang="${language}"`)
    .replace(/(<link\s+rel="canonical"\s+href=")[^"]+/,`$1${url}`)
    .replace(/(<meta\s+property="og:url"\s+content=")[^"]+/,`$1${url}`)
-   .replace(/(<meta\s+property="og:locale"\s+content=")[^"]+/,`$1${language==='nl'?'nl_NL':'en_GB'}`);
-  output=output.replace('</head>',`<link rel="alternate" hreflang="en" href="${BASE}${route}" /><link rel="alternate" hreflang="nl" href="${BASE}/nl${route}" /><link rel="alternate" hreflang="x-default" href="${BASE}${route}" /></head>`);
-  if(language==='en'){
-   output=output.replace(/<title>([^<]+)<\/title>/,(_,v)=>`<title>${escape(localize(unescape(v)))}</title>`)
+   .replace(/(<meta\s+property="og:locale"\s+content=")[^"]+/,`$1${LOCALES[language]}`);
+  output=output.replace('</head>',`${alternates(route)}</head>`);
+  if(language!=='nl'){
+   output=output.replace(/<title>([^<]+)<\/title>/,(_,v)=>`<title>${escape(localize(unescape(v),language))}</title>`)
     .replace(/(<meta\s+(?:name|property)="(?:description|og:title|og:description|twitter:title|twitter:description)"\s+content=")([^"]+)(")/g,(_,a,v,z)=>{
-      const text=unescape(v);const translated=localize(text);
-      if(translated===text)meld(text);
+      const text=unescape(v);const translated=localize(text,language);
+      if(translated===text&&language==='en')meld(text);
       return a+escape(translated)+z;
     })
-    .replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/g,(_,a,v,z)=>a+JSON.stringify(localize(JSON.parse(v)))+z)
+    .replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/g,(_,a,v,z)=>a+JSON.stringify(localize(JSON.parse(v),language))+z)
     .replace(/<noscript[\s\S]*?<\/noscript\s*>/, '<noscript>SocialNow — One OS for your business. Discuss your Custom OS at info@socialnow.nl or call +31 6 3740 4577.</noscript>');
   }
-  const folder=`dist${language==='nl'?'/nl':''}${route==='/'?'':route}`;
+  const folder=`dist${prefix(language)}${route==='/'?'':route}`;
   mkdirSync(folder,{recursive:true});writeFileSync(`${folder}/index.html`,output);
  }
 }
 writeFileSync('dist/404.html',readFileSync('dist/index.html'));
-writeFileSync('dist/sitemap.xml',sitemap.replace('</urlset>',paths.map(route=>`<url><loc>${BASE}/nl${route}</loc></url>`).join('\n')+'\n</urlset>'));
-console.log(`[languages] ${paths.length*2} EN/NL routes with canonical and hreflang. Unmapped metadata:`,[...missing]);
+writeFileSync('dist/sitemap.xml',sitemap.replace('</urlset>',LANGUAGES.filter(l=>l!=='en').flatMap(l=>paths.map(route=>`<url><loc>${BASE}${prefix(l)}${route}</loc></url>`)).join('\n')+'\n</urlset>'));
+console.log(`[languages] ${paths.length*LANGUAGES.length} routes in ${LANGUAGES.length} languages with canonical and hreflang. Unmapped metadata:`,[...missing]);

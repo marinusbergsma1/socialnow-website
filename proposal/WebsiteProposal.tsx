@@ -30,7 +30,7 @@ import { MotionProvider } from "./motion";
 import { projects } from "./content";
 import { allPosts } from "../data/posts";
 import LanguageSwitch from "./LanguageSwitch";
-import { LanguageProvider, type Language, useLanguage } from "./i18n/context";
+import { LanguageProvider, LANGUAGES, languagePrefix, type Language, useLanguage } from "./i18n/context";
 import PrivacyPage from "../components/PrivacyPage";
 import TermsPage from "../components/TermsPage";
 import ConsentPopup from "./ConsentPopup";
@@ -81,15 +81,15 @@ function ProposalShell() {
       ['meta[name="description"]', t(description)],
       ['meta[property="og:title"]', document.title],
       ['meta[property="og:description"]', t(description)],
-      ['meta[property="og:url"]', `https://socialnow.nl${language === "nl" ? "/nl" : ""}${location.pathname}`],
+      ['meta[property="og:url"]', `https://socialnow.nl${languagePrefix(language)}${location.pathname}`],
       ['meta[name="twitter:title"]', document.title],
       ['meta[name="twitter:description"]', t(description)],
     ])
       document.querySelector(selector)?.setAttribute("content", content);
     document
       .querySelector('link[rel="canonical"]')
-      ?.setAttribute("href", `https://socialnow.nl${language === "nl" ? "/nl" : ""}${location.pathname}`);
-    for (const lang of ["en", "nl", "x-default"]) document.querySelector(`link[hreflang="${lang}"]`)?.setAttribute("href", `https://socialnow.nl${lang === "nl" ? "/nl" : ""}${location.pathname}`);
+      ?.setAttribute("href", `https://socialnow.nl${languagePrefix(language)}${location.pathname}`);
+    for (const lang of [...LANGUAGES, "x-default"]) document.querySelector(`link[hreflang="${lang}"]`)?.setAttribute("href", `https://socialnow.nl${lang === "x-default" ? "" : languagePrefix(lang as Language)}${location.pathname}`);
     const id = window.requestAnimationFrame(() => {
       if (location.hash)
         document

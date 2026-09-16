@@ -6,13 +6,17 @@
 // aangevuld met artikel 17 over SocialNow OS: het account, de gegevens die daarbij horen en het
 // interne gebruik daarvan om het product te verbeteren.
 
-export type Language = "en" | "nl";
+export type Language = "en" | "nl" | "de" | "fr" | "it" | "es";
 export type Section = { title: string; paragraphs: string[]; bullets?: string[][] };
 export type LegalDoc = { title: string; intro: string; updated: string; sections: Section[] };
 
 export const LEGAL_VERSION = "2026-09-16";
 
-export const terms: Record<Language, LegalDoc> = {
+import { privacyNl, privacyEn } from "./legal-privacy";
+import * as vertaald from "./legal-vertaald";
+
+export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: LegalDoc } = {
+  ...vertaald.terms,
   nl: {
     title: "Algemene voorwaarden",
     intro: "Deze voorwaarden gelden voor elke offerte, overeenkomst en elk gebruik van SocialNow OS. Bij aanmelding voor het OS ga je hiermee akkoord.",
@@ -87,39 +91,8 @@ export const terms: Record<Language, LegalDoc> = {
   },
 };
 
-export const privacy: Record<Language, LegalDoc> = {
-  nl: {
-    title: "Privacybeleid",
-    intro: "Hoe SocialNow omgaat met persoonsgegevens op socialnow.nl en in SocialNow OS, volgens de AVG.",
-    updated: "Laatst bijgewerkt: 16 september 2026",
-    sections: [
-      { title: "1. Wie zijn wij", paragraphs: ["SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, KVK 90877179, is verantwoordelijk voor de verwerking. Vragen over privacy: info@socialnow.nl."] },
-      { title: "2. Welke gegevens wij verwerken", paragraphs: ["Op de website alleen wat je zelf achterlaat:", "In SocialNow OS daarnaast:"], bullets: [["Naam, e-mailadres en telefoonnummer bij contact via formulier, e-mail of WhatsApp", "Bedrijfsnaam en projectinformatie bij een aanvraag"], ["Je account: naam, e-mailadres en profielfoto zoals je die deelt bij het inloggen", "Je werkruimte: bedrijfsnaam, sector, branding en de gegevens die je zelf invult", "Teamleden: e-mailadres en rol van wie je uitnodigt", "Gegevens uit bronnen die je zelf koppelt, zoals Odoo, Meta en Google, alleen voor je eigen werkruimte", "Hoe het OS wordt gebruikt: welke onderdelen, wat er gevraagd wordt en hoe de tools presteren"]] },
-      { title: "3. Waarvoor wij ze gebruiken", paragraphs: ["Om je vraag of aanvraag te beantwoorden, om het OS voor jou te laten werken, om te factureren, en om onze producten en diensten te verbeteren. Wij verkopen je gegevens nooit en delen ze nooit met derden voor marketing."] },
-      { title: "4. Intern gebruik om het product te verbeteren", paragraphs: ["Door een account aan te maken in SocialNow OS ga je ermee akkoord dat het team van SocialNow de gegevens van je account en werkruimte intern mag inzien en analyseren. Dat doen we om fouten op te sporen, te bepalen wat we bouwen en de SocialNow-modellen beter af te stemmen. De toegang is beperkt tot het team van SocialNow, onder geheimhouding. Je gegevens worden nooit gedeeld met andere klanten en nooit gebruikt voor advertenties van derden. Verwijder je je account, dan stopt dit."] },
-      { title: "5. Wie ons helpt", paragraphs: ["Deze partijen verwerken gegevens in onze opdracht, onder een verwerkersovereenkomst:"], bullets: [["Google Firebase: inloggen met Google, e-mailcode of inloglink", "Vercel: hosting van het OS en opslag van je werkruimte", "Hostinger: het versturen van e-mail, zoals inlogcodes en uitnodigingen", "GitHub: hosting van socialnow.nl"]] },
-      { title: "6. Bewaartermijn", paragraphs: ["Contactgegevens bewaren wij maximaal twee jaar na het laatste contact. Accountgegevens bewaren wij zolang je account bestaat. Na verwijdering houden wij alleen wat de wet vereist, zoals facturen (zeven jaar)."] },
-      { title: "7. Cookies", paragraphs: ["Socialnow.nl plaatst geen trackingcookies en gebruikt geen analytics. Wij onthouden alleen in je browser dat je de melding over deze voorwaarden hebt gezien. SocialNow OS gebruikt één functionele cookie, __session, die bijhoudt dat je bent ingelogd."] },
-      { title: "8. Jouw rechten", paragraphs: ["Je hebt recht op inzage, correctie, verwijdering, beperking van de verwerking en overdracht van je gegevens, en je kunt een klacht indienen bij de Autoriteit Persoonsgegevens. In het OS zie je onder Account wat wij over je hebben en verwijder je je account zelf. Voor al het andere: info@socialnow.nl."] },
-      { title: "9. Beveiliging", paragraphs: ["Wij nemen passende technische en organisatorische maatregelen. Sleutels van gekoppelde bronnen worden versleuteld bewaard en nooit getoond; verbindingen lopen via https."] },
-      { title: "10. Wijzigingen", paragraphs: ["Wij kunnen dit beleid wijzigen. De actuele versie staat altijd op socialnow.nl/privacy; bij een belangrijke wijziging vragen we in het OS opnieuw om akkoord."] },
-    ],
-  },
-  en: {
-    title: "Privacy Policy",
-    intro: "How SocialNow handles personal data on socialnow.nl and in SocialNow OS, under the GDPR. The Dutch version is the binding one.",
-    updated: "Last updated: 16 September 2026",
-    sections: [
-      { title: "1. Who we are", paragraphs: ["SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands, Chamber of Commerce 90877179, is the controller. Privacy questions: info@socialnow.nl."] },
-      { title: "2. What we process", paragraphs: ["On the website only what you leave yourself:", "In SocialNow OS in addition:"], bullets: [["Name, e-mail address and phone number when you contact us by form, e-mail or WhatsApp", "Company name and project information with a request"], ["Your account: name, e-mail address and profile picture as you share them when signing in", "Your workspace: company name, industry, branding and the details you fill in yourself", "Team members: e-mail address and role of the people you invite", "Data from sources you connect yourself, such as Odoo, Meta and Google, only for your own workspace", "How the OS is used: which parts, what is asked, and how the tools perform"]] },
-      { title: "3. What we use it for", paragraphs: ["To answer your question or request, to make the OS work for you, to invoice, and to improve our products and services. We never sell your data and never share it with third parties for marketing."] },
-      { title: "4. Internal use to improve the product", paragraphs: ["By creating an account in SocialNow OS you agree that the SocialNow team may view and analyse the data of your account and workspace internally. We do this to find errors, decide what to build and tune the SocialNow models. Access is limited to the SocialNow team, under confidentiality. Your data is never shared with other customers and never used for third-party advertising. Delete your account and this stops."] },
-      { title: "5. Who helps us", paragraphs: ["These parties process data on our behalf, under a data processing agreement:"], bullets: [["Google Firebase: signing in with Google, an e-mail code or a sign-in link", "Vercel: hosting of the OS and storage of your workspace", "Hostinger: sending e-mail, such as sign-in codes and invitations", "GitHub: hosting of socialnow.nl"]] },
-      { title: "6. Retention", paragraphs: ["We keep contact details for at most two years after the last contact. We keep account data as long as your account exists. After deletion we keep only what the law requires, such as invoices (seven years)."] },
-      { title: "7. Cookies", paragraphs: ["Socialnow.nl sets no tracking cookies and uses no analytics. We only remember in your browser that you have seen the notice about these terms. SocialNow OS uses one functional cookie, __session, which keeps note that you are signed in."] },
-      { title: "8. Your rights", paragraphs: ["You have the right to access, correct, delete, restrict and transfer your data, and you can file a complaint with the Dutch Data Protection Authority. In the OS you see under Account what we hold about you and you delete your account yourself. For everything else: info@socialnow.nl."] },
-      { title: "9. Security", paragraphs: ["We take appropriate technical and organisational measures. Keys of connected sources are stored encrypted and never shown; connections run over https."] },
-      { title: "10. Changes", paragraphs: ["We may change this policy. The current version is always at socialnow.nl/privacy; for an important change we ask for your agreement again in the OS."] },
-    ],
-  },
+export const privacy: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: LegalDoc } = {
+  nl: privacyNl,
+  en: privacyEn,
+  ...vertaald.privacy,
 };

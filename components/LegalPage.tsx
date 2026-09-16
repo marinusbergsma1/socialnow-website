@@ -4,13 +4,14 @@ import { ChevronLeft } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import { useLanguage } from "../proposal/i18n/context";
 import type { LegalDoc } from "./legal";
+import type { Language } from "../proposal/i18n/context";
 
 // 16 september 2026: één opmaak voor de voorwaarden en het privacybeleid. De tekst komt uit
 // components/legal.ts in de taal van de bezoeker; translate="no" houdt de vertaallaag erbuiten.
-export default function LegalPage({ doc, path }: { doc: Record<"en" | "nl", LegalDoc>; path: string }) {
+export default function LegalPage({ doc, path }: { doc: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: LegalDoc }; path: string }) {
   const navigate = useNavigate();
   const { language } = useLanguage();
-  const d = doc[language] || doc.nl;
+  const d = doc[language] || doc.en;
   useSEO({ title: d.title, description: d.intro, path });
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
@@ -18,7 +19,7 @@ export default function LegalPage({ doc, path }: { doc: Record<"en" | "nl", Lega
       <div className="container mx-auto px-6 max-w-3xl">
         <button onClick={() => navigate("/")} className="inline-flex items-center gap-2 text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors mb-8">
           <ChevronLeft size={14} />
-          {language === "nl" ? "Terug" : "Back"}
+          {({ nl: "Terug", en: "Back", de: "Zurück", fr: "Retour", it: "Indietro", es: "Volver" } as Record<string, string>)[language] || "Back"}
         </button>
         <div className="scroll-reveal">
           <h1 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter mb-4">{d.title}</h1>
