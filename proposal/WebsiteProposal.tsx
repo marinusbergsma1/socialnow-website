@@ -32,6 +32,8 @@ import { allPosts } from "../data/posts";
 import LanguageSwitch from "./LanguageSwitch";
 import { LanguageProvider, type Language, useLanguage } from "./i18n/context";
 import PrivacyPage from "../components/PrivacyPage";
+import TermsPage from "../components/TermsPage";
+import ConsentPopup from "./ConsentPopup";
 
 const nav = [
   ["/het-os", "Het OS"],
@@ -207,10 +209,19 @@ function ProposalShell() {
               </div>
             }
           />
+          <Route
+            path="/voorwaarden"
+            element={
+              <div className="h-privacy">
+                <TermsPage />
+              </div>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <BrandFooter />
+      <ConsentPopup />
     </div>
   );
 }

@@ -9,8 +9,6 @@ import {
 } from "lucide-react";
 import { services } from "./content";
 import { Closing } from "./ui";
-const TERMS =
-  "https://storage.googleapis.com/video-slider/Algemene%20Voorwaarden%20SocialNow.pdf";
 export default function BrandFooter() {
   return (
     <footer className="h-brand-footer">
@@ -81,15 +79,13 @@ export default function BrandFooter() {
         </div>
         <div className="h-footer-company">
           <p>SocialNow · Software, creatie en marketing. Amsterdam · KVK 90877179.</p>
-          <p>Genoemde prijzen zijn exclusief btw. Onze <a href={TERMS} target="_blank" rel="noopener noreferrer">algemene voorwaarden</a> en <Link to="/privacy">privacyverklaring</Link> zijn hier te vinden.</p>
+          <p>Genoemde prijzen zijn exclusief btw. Onze <Link to="/voorwaarden">algemene voorwaarden</Link> en <Link to="/privacy">privacyverklaring</Link> zijn hier te vinden.</p>
         </div>
         <div className="h-footer-end">
           <span>
             © {new Date().getFullYear()} SocialNow. All rights reserved.
           </span>
-          <a href={TERMS} target="_blank" rel="noopener noreferrer">
-            Algemene voorwaarden
-          </a>
+          <Link to="/voorwaarden">Algemene voorwaarden</Link>
           <Link to="/privacy">Privacy</Link>
           <span>KVK 90877179 · Sinds 2021</span>
         </div>
