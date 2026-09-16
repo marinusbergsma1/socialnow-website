@@ -74,7 +74,7 @@ export default function ConsentPopup() {
   return (
     <div className="sn-consent" role="dialog" aria-modal="true" aria-labelledby="sn-consent-kop" translate="no">
       <div className="sn-consent-card">
-        <img className="sn-consent-logo" src="/beeldmerk-2026.webp" alt="" width="48" height="48" />
+        <img className="sn-consent-logo" src="/beeldmerk-2026.webp" alt="" width="68" height="48" />
         <p className="sn-consent-eyebrow">SocialNow</p>
         <p id="sn-consent-kop" className="sn-consent-kop">{s.kop}</p>
         <p className="sn-consent-vraag">{s.vraag}</p>
