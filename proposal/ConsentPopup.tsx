@@ -12,7 +12,9 @@ import { LEGAL_VERSION } from "../components/legal";
 //
 // TEKSTEN: alles wat een bezoeker leest staat hieronder per taal; pas het hier aan.
 const SLEUTEL = "sn-akkoord";
-const DEMO_URL = "https://app.socialnow.nl/start/";
+// 16 september 2026 (Marinus): wie op de demo klikt, komt in het OS terecht. Via de inlog, die na
+// het inloggen naar het OS zelf gaat (/), en niet via /start/.
+const DEMO_URL = "https://app.socialnow.nl/login/";
 
 export const LANDEN: { code: string; naam: string; vlag: string; taal: Language }[] = [
   { code: "NL", naam: "Nederland", vlag: "🇳🇱", taal: "nl" },
@@ -70,7 +72,7 @@ export default function ConsentPopup() {
     if (l.taal !== language) { const rest = location.pathname.replace(/^\/(nl|de|fr|it|es)(?=\/|$)/, ""); window.location.assign(`${languagePrefix(l.taal)}${rest || "/"}${location.search}`); }
   };
   const akkoord = () => { try { localStorage.setItem(SLEUTEL, LEGAL_VERSION); } catch {} zetCookies(gekozen.code, gekozen.taal); setOpen(false); };
-  const demo = () => { akkoord(); location.href = `${DEMO_URL}?taal=${gekozen.taal}&land=${gekozen.code}`; };
+  const demo = () => { akkoord(); location.href = `${DEMO_URL}?bron=demo&taal=${gekozen.taal}&land=${gekozen.code}`; };
   return (
     <div className="sn-consent" role="dialog" aria-modal="true" aria-labelledby="sn-consent-kop" translate="no">
       <div className="sn-consent-card">
