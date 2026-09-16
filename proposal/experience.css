@@ -1774,21 +1774,29 @@ html {
 /* Eén product, met proberen als zichtbare primaire actie. */
 .sn-site .os-claim,
 .sn-site .h-try-button,
+/* 16 september 2026 (Marinus): minder fel, meer verloop, zodat wit leesbaar blijft (4,6 op 1 op de
+   lichtste plek). Hetzelfde groen als de knop in de welkomstpopup. */
 .sn-site .h-header-claim {
-  background: linear-gradient(180deg, #43e77f 0%, #25d366 70%, #20bf5b 100%);
+  background: linear-gradient(180deg, #0d853e 0%, #0a6f33 55%, #064f23 100%);
   color: #fff;
-  border: 1px solid #55ea8b;
+  border: 1px solid #25d36659;
   font-weight: 700;
   box-shadow:
-    inset 0 1px 0 #ffffff80,
-    0 5px 20px #25d36626;
+    inset 0 1px 0 #ffffff3d,
+    0 0 0 1px #25d36633,
+    0 6px 22px #25d36633;
 }
 .sn-site .os-claim:hover,
-.sn-site .h-try-button:hover,
-.sn-site .h-header-claim:hover {
+.sn-site .h-try-button:hover {
   background: #4ce888;
   color: #fff;
   border-color: #85f8af;
+}
+.sn-site .h-header-claim:hover {
+  background: linear-gradient(180deg, #0d853e 0%, #0a6f33 55%, #064f23 100%);
+  filter: brightness(1.08);
+  color: #fff;
+  border-color: #25d36699;
 }
 .sn-site .os-claim .h-button-icon,
 .sn-site .h-try-button .h-button-icon {
@@ -1928,14 +1936,14 @@ html {
 .sn-site .h-trust-grid { gap: 18px; align-items: stretch; }
 
 .sn-site .h-language-switch { position: relative; flex-shrink: 0; }
-.sn-site .h-language-current { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 0 10px 0 8px; border: 1px solid #ffffff22; border-radius: 999px; background: #ffffff0a; color: #e7eef6; font: 700 11px/1 inherit; letter-spacing: .06em; cursor: pointer; }
+.sn-site .h-language-current { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 9px 0 6px; border: 1px solid #ffffff22; border-radius: 999px; background: #ffffff0a; color: #e7eef6; font-weight:700;font-size:11px;line-height:1;font-family:inherit; letter-spacing: .06em; cursor: pointer; }
 .sn-site .h-language-current:hover, .sn-site .h-language-switch.is-open .h-language-current { border-color: #4ee6a5; color: #fff; }
 .sn-site .h-language-current svg:last-child { opacity: .7; transition: transform .2s; }
 .sn-site .h-language-switch.is-open .h-language-current svg:last-child { transform: rotate(180deg); }
 .sn-site .h-flag { border-radius: 50%; flex: none; box-shadow: 0 0 0 1px #ffffff2a; }
 .sn-site .h-language-menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: 130; min-width: 190px; margin: 0; padding: 6px; list-style: none; border: 1px solid #ffffff20; border-radius: 14px; background: linear-gradient(145deg,#0c1d32 0%,#06101e 70%); box-shadow: 0 22px 60px #000b; animation: qr-os-rise .25s cubic-bezier(.18,.88,.25,1) both; }
 .sn-site .h-language-menu[hidden] { display: none; }
-.sn-site .h-language-menu a { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 9px; color: #dbe5ef; font: 600 13px/1 inherit; text-decoration: none; }
+.sn-site .h-language-menu a { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 9px; color: #dbe5ef; font-weight:600;font-size:13px;line-height:1;font-family:inherit; text-decoration: none; }
 .sn-site .h-language-menu a small { margin-left: auto; color: #8193a8; font-size: 10px; letter-spacing: .08em; }
 .sn-site .h-language-menu a:hover { background: #ffffff10; color: #fff; }
 .sn-site .h-language-menu a[aria-current="true"] { color: #7ff2be; }
@@ -2178,24 +2186,23 @@ html {
 }
 
 /* Fair QR entry: the existing SocialNow OS identity, not a second visual system. */
-.qr-os-dialog{width:min(500px,calc(100vw - 32px));margin:auto;padding:0;border:0;background:transparent;overflow:visible;color:#f8fbff}.qr-os-dialog::backdrop{background:#020914ef;backdrop-filter:blur(12px)}.qr-os-card{position:relative;overflow:hidden;border:1px solid #ffffff20;border-radius:22px;padding:34px 38px 32px;background:linear-gradient(145deg,#0c1d32 0%,#06101e 58%,#040b15 100%);box-shadow:0 32px 100px #000b;animation:qr-os-rise .52s cubic-bezier(.18,.88,.25,1) both}.qr-os-card:before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 0%,#44e9a40b 48%,transparent 75%);pointer-events:none}.qr-os-close{position:absolute;z-index:1;right:18px;top:18px;width:36px;height:36px;display:grid;place-items:center;border:1px solid #ffffff26;border-radius:50%;background:#071424;color:#fff;cursor:pointer}.qr-os-close:hover{border-color:#4ee6a5;color:#67efb2}.qr-os-logo{position:relative;display:block;width:min(226px,72%);height:auto;margin:0 0 27px}.qr-os-eyebrow{position:relative;margin:-13px 0 17px;color:#67eeb0;font-size:10px;font-weight:800;letter-spacing:.18em}.qr-os-card h1{position:relative;margin:0 0 11px;font-size:clamp(36px,7vw,51px);line-height:.95;letter-spacing:-.06em;color:#fff}.qr-os-lead{position:relative;max-width:30ch;margin:0 0 27px;color:#b5c1d0;font-size:16px;line-height:1.45}.qr-os-actions{display:grid;gap:9px;max-width:320px}.qr-os-primary,.qr-os-secondary{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:11px;font:800 13px/1 inherit;text-decoration:none;cursor:pointer}.qr-os-primary{border:0;background:linear-gradient(105deg,#2bda91,#00ad78);color:#031511;box-shadow:0 10px 24px #10d18d2e}.qr-os-primary:hover{transform:translateY(-1px);filter:brightness(1.06)}.qr-os-secondary{border:1px solid #ffffff20;background:#ffffff08;color:#e7eef6}.qr-os-list{display:grid;gap:9px;margin:0 0 23px;padding:0;list-style:none;color:#dbe5ef;font-size:13px}.qr-os-list li{display:flex;align-items:flex-start;gap:9px}.qr-os-list svg{color:#61e7a9;flex:0 0 auto;margin-top:1px}.qr-os-form{position:relative;display:grid;gap:11px}.qr-os-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.qr-os-form label{display:grid;gap:5px;color:#dce7f2;font-size:11px;font-weight:750}.qr-os-form input:not([type=checkbox]){width:100%;min-height:42px;border:1px solid #ffffff22;border-radius:9px;padding:0 11px;background:#030b16;color:#fff;font:inherit}.qr-os-form input:focus{outline:2px solid #5decb3;border-color:transparent}.qr-os-consent{grid-template-columns:17px 1fr;align-items:start;margin:4px 0 2px;color:#9fb1c5!important;font-weight:500!important;line-height:1.4}.qr-os-consent input{accent-color:#39db97;margin:2px 0 0}.qr-os-consent a{color:#7ff2be}.qr-os-try{width:100%;margin-top:3px}.qr-os-secure{display:flex;justify-content:center;align-items:center;gap:6px;margin:1px 0 0;color:#8193a8;font-size:10px}@keyframes qr-os-rise{from{opacity:0;transform:translateY(15px) scale(.985)}to{opacity:1;transform:none}}@media (max-width:480px){.qr-os-card{padding:29px 23px 25px;border-radius:19px}.qr-os-grid{grid-template-columns:1fr}.qr-os-card h1{font-size:39px}.qr-os-lead{font-size:15px}.qr-os-logo{width:205px;margin-bottom:24px}}
+.qr-os-dialog{width:min(500px,calc(100vw - 32px));margin:auto;padding:0;border:0;background:transparent;overflow:visible;color:#f8fbff}.qr-os-dialog::backdrop{background:#020914ef;backdrop-filter:blur(12px)}.qr-os-card{position:relative;overflow:hidden;border:1px solid #ffffff20;border-radius:22px;padding:34px 38px 32px;background:linear-gradient(145deg,#0c1d32 0%,#06101e 58%,#040b15 100%);box-shadow:0 32px 100px #000b;animation:qr-os-rise .52s cubic-bezier(.18,.88,.25,1) both}.qr-os-card:before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 0%,#44e9a40b 48%,transparent 75%);pointer-events:none}.qr-os-close{position:absolute;z-index:1;right:18px;top:18px;width:36px;height:36px;display:grid;place-items:center;border:1px solid #ffffff26;border-radius:50%;background:#071424;color:#fff;cursor:pointer}.qr-os-close:hover{border-color:#4ee6a5;color:#67efb2}.qr-os-logo{position:relative;display:block;width:min(226px,72%);height:auto;margin:0 0 27px}.qr-os-eyebrow{position:relative;margin:-13px 0 17px;color:#67eeb0;font-size:10px;font-weight:800;letter-spacing:.18em}.qr-os-card h1{position:relative;margin:0 0 11px;font-size:clamp(36px,7vw,51px);line-height:.95;letter-spacing:-.06em;color:#fff}.qr-os-lead{position:relative;max-width:30ch;margin:0 0 27px;color:#b5c1d0;font-size:16px;line-height:1.45}.qr-os-actions{display:grid;gap:9px;max-width:320px}.qr-os-primary,.qr-os-secondary{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:11px;font-weight:800;font-size:13px;line-height:1;font-family:inherit;text-decoration:none;cursor:pointer}.qr-os-primary{border:0;background:linear-gradient(105deg,#2bda91,#00ad78);color:#031511;box-shadow:0 10px 24px #10d18d2e}.qr-os-primary:hover{transform:translateY(-1px);filter:brightness(1.06)}.qr-os-secondary{border:1px solid #ffffff20;background:#ffffff08;color:#e7eef6}.qr-os-list{display:grid;gap:9px;margin:0 0 23px;padding:0;list-style:none;color:#dbe5ef;font-size:13px}.qr-os-list li{display:flex;align-items:flex-start;gap:9px}.qr-os-list svg{color:#61e7a9;flex:0 0 auto;margin-top:1px}.qr-os-form{position:relative;display:grid;gap:11px}.qr-os-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.qr-os-form label{display:grid;gap:5px;color:#dce7f2;font-size:11px;font-weight:750}.qr-os-form input:not([type=checkbox]){width:100%;min-height:42px;border:1px solid #ffffff22;border-radius:9px;padding:0 11px;background:#030b16;color:#fff;font:inherit}.qr-os-form input:focus{outline:2px solid #5decb3;border-color:transparent}.qr-os-consent{grid-template-columns:17px 1fr;align-items:start;margin:4px 0 2px;color:#9fb1c5!important;font-weight:500!important;line-height:1.4}.qr-os-consent input{accent-color:#39db97;margin:2px 0 0}.qr-os-consent a{color:#7ff2be}.qr-os-try{width:100%;margin-top:3px}.qr-os-secure{display:flex;justify-content:center;align-items:center;gap:6px;margin:1px 0 0;color:#8193a8;font-size:10px}@keyframes qr-os-rise{from{opacity:0;transform:translateY(15px) scale(.985)}to{opacity:1;transform:none}}@media (max-width:480px){.qr-os-card{padding:29px 23px 25px;border-radius:19px}.qr-os-grid{grid-template-columns:1fr}.qr-os-card h1{font-size:39px}.qr-os-lead{font-size:15px}.qr-os-logo{width:205px;margin-bottom:24px}}
 /* 16 september 2026: de landingspopup (proposal/ConsentPopup.tsx), in de vorm van de inlog van het
    OS: een donkerblauwe kaart met het woordlogo in een eigen band, daaronder kop, vraag, land en twee
    knoppen. Alle regels hangen onder .sn-consent, zodat ".sn-site p" (website.css) de kop niet grijs
    maakt en de marges niet op nul zet. Wit op het groen, nooit donkere tekst. */
 .sn-consent{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px;background:#020914e6;backdrop-filter:blur(10px)}
 .sn-consent .sn-consent-card{position:relative;overflow:hidden;width:min(420px,100%);text-align:center;border:1px solid #ffffff1f;border-radius:18px;padding:0;background:linear-gradient(145deg,#0c1d32 0%,#06101e 58%,#040b15 100%);box-shadow:0 2px 6px #00000059,0 30px 80px #00000080;color:#f8fbff;animation:qr-os-rise .52s cubic-bezier(.18,.88,.25,1) both}
-.sn-consent .sn-consent-card:before{content:"";position:absolute;left:24px;top:0;width:44px;height:2px;background:#25d366;pointer-events:none}
 .sn-consent .sn-consent-merk{display:flex;align-items:center;justify-content:center;height:72px;padding:0 24px;border-bottom:1px solid #ffffff14;background:linear-gradient(100deg,#040b15,#0c1d32 50%,#040b15)}
 .sn-consent .sn-consent-logo{display:block;width:auto;height:30px;max-width:100%;object-fit:contain;margin:0}
 .sn-consent .sn-consent-inhoud{padding:26px 28px 22px}
 .sn-consent .sn-consent-kop{margin:0 0 10px;font-size:28px;line-height:1.1;letter-spacing:-.03em;font-weight:800;color:#fff}
 .sn-consent .sn-consent-vraag{margin:0 auto 22px;max-width:32ch;color:#b5c1d0;font-size:14px;line-height:1.5}
 .sn-consent .sn-consent-land{display:grid;gap:7px;margin:0 0 18px;text-align:left;color:#9fb1c5;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-.sn-consent .sn-consent-land select{width:100%;height:46px;border:1px solid #ffffff24;border-radius:12px;padding:0 14px;background:#12233a;color:#fff;font:600 14px/1 inherit;letter-spacing:0;text-transform:none;cursor:pointer}
+.sn-consent .sn-consent-land select{width:100%;height:48px;border:1px solid #ffffff24;border-radius:12px;padding:0 14px;background:#12233a;color:#fff;font-weight:600;font-size:16px;line-height:1;font-family:inherit;letter-spacing:0;text-transform:none;cursor:pointer}
 .sn-consent .sn-consent-land select:focus{outline:2px solid #5decb3;outline-offset:1px;border-color:transparent}
 .sn-consent .sn-consent-knoppen{display:grid;gap:10px;margin:0 0 20px}
-.sn-consent .sn-consent-knop{display:flex;align-items:center;justify-content:center;width:100%;height:48px;padding:0 22px;border:0;border-radius:999px;background:linear-gradient(180deg,#0c8039,#096b30);color:#fff;font:700 15px/1 inherit;letter-spacing:.01em;white-space:nowrap;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff3d,0 0 0 1px #25d36673,0 6px 22px #25d36638;transition:filter .16s ease,transform .16s ease}
+.sn-consent .sn-consent-knop{display:flex;align-items:center;justify-content:center;width:100%;height:48px;padding:0 22px;border:0;border-radius:999px;background:linear-gradient(180deg,#0d853e 0%,#0a6f33 55%,#064f23 100%);color:#fff;font-weight:700;font-size:15px;line-height:1;font-family:inherit;letter-spacing:.01em;white-space:nowrap;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff3d,0 0 0 1px #25d36673,0 6px 22px #25d36638;transition:filter .16s ease,transform .16s ease}
 .sn-consent .sn-consent-knop:hover{filter:brightness(1.08)}
 .sn-consent .sn-consent-knop:active{transform:translateY(1px)}
 .sn-consent .sn-consent-knop:focus-visible{outline:2px solid #5decb3;outline-offset:2px}
