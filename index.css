@@ -320,10 +320,10 @@ body {
   text-decoration: none; white-space: nowrap; cursor: pointer;
   transition: background .1s ease, border-color .1s ease, transform .1s ease;
 }
-.sn-os-claim { background: #000; color: #fff; border-color: #25d366 !important; }
+.sn-os-claim { background: var(--sn-navy); color: #fff; border-color: #25d366 !important; }
 .sn-os-claim:hover { border-color: #7bf3aa !important; box-shadow: 0 0 0 2px #25d36622; }
 .sn-os-claim svg, .sn-nav-claim span { color: #72e6a9; }
-.sn-os-install { background: #000; color: #fff; border-color: #404040 !important; }
+.sn-os-install { background: var(--sn-navy); color: #fff; border-color: #ffffff2a !important; }
 .sn-os-install:hover, .sn-os-install[aria-expanded="true"] { border-color: #82b99b !important; }
 .sn-os-actions a:active, .sn-os-actions button:active { transform: translateY(1px); }
 .sn-os-actions :focus-visible, .sn-install-help a:focus-visible { outline: 2px solid #9cf3bc; outline-offset: 4px; }
