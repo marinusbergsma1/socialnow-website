@@ -10,7 +10,7 @@ export type Language = "en" | "nl" | "de" | "fr" | "it" | "es";
 export type Section = { title: string; paragraphs: string[]; bullets?: string[][] };
 export type LegalDoc = { title: string; intro: string; updated: string; sections: Section[] };
 
-export const LEGAL_VERSION = "2026-09-16";
+export const LEGAL_VERSION = "2026-09-17";
 
 import { privacyNl, privacyEn } from "./legal-privacy";
 import * as vertaald from "./legal-vertaald";

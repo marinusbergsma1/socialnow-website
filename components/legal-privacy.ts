@@ -5,11 +5,11 @@ import type { LegalDoc } from "./legal";
 export const privacyNl: LegalDoc = {
   title: "Privacybeleid",
   intro: "Hoe SocialNow omgaat met persoonsgegevens op socialnow.nl en in SocialNow OS, volgens de Algemene verordening gegevensbescherming (AVG). Dit beleid geldt voor bezoekers van de website, voor iedereen met een account in het OS en voor de klanten, contacten en teamleden van die accounts.",
-  updated: "Laatst bijgewerkt: 16 september 2026",
+  updated: "Laatst bijgewerkt: 17 september 2026",
   sections: [
     { title: "1. Wie is verantwoordelijk", paragraphs: ["SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, KVK 90877179, is de verwerkingsverantwoordelijke voor de gegevens van bezoekers en accounthouders. Voor de gegevens die een accounthouder zelf in zijn werkruimte zet (zijn eigen klanten, contacten, orders en teamleden) is de accounthouder verantwoordelijke en is SocialNow verwerker; daarvoor geldt artikel 12.", "Vragen, verzoeken en klachten over privacy: info@socialnow.nl. Wij reageren binnen een maand."] },
     { title: "2. Welke gegevens wij verwerken", paragraphs: ["Op de website verwerken wij alleen wat je zelf achterlaat:", "In SocialNow OS verwerken wij daarnaast:", "Gegevens uit bronnen die je zelf koppelt, uitsluitend voor je eigen werkruimte:"], bullets: [
-      ["Naam, e-mailadres en telefoonnummer bij contact via het formulier, e-mail of WhatsApp", "Bedrijfsnaam en projectinformatie bij een aanvraag of offerte", "De inhoud van je bericht"],
+      ["Naam, e-mailadres en telefoonnummer bij contact via het formulier, e-mail of WhatsApp", "Naam, e-mailadres, land en (als je dat invult) telefoonnummer als je via de welkomstmelding naar de demo gaat, zodat wij later contact met je kunnen opnemen over SocialNow", "Bedrijfsnaam en projectinformatie bij een aanvraag of offerte", "De inhoud van je bericht"],
       ["Je account: naam, e-mailadres, profielfoto en de manier waarop je inlogt (Google, e-mailcode, inloglink of wachtwoord); je wachtwoord zelf zien wij nooit", "Je werkruimte: bedrijfsnaam, sector, website, branding (logo, kleuren, lettertypen, tone of voice) en alle gegevens die je zelf invult", "Teamleden: e-mailadres, naam en rol van de mensen die je uitnodigt", "Wat je in het OS maakt: uitingen, teksten, beelden, documenten, campagnes en de chatgesprekken met Milo", "Betalingen: het aangekochte tegoed en de betaalstatus; kaartgegevens gaan rechtstreeks naar Stripe en bereiken ons nooit", "Gebruiksgegevens: welke onderdelen je gebruikt, wat je aan het OS vraagt, foutmeldingen en hoe de tools presteren voor je werkruimte", "Technische gegevens: IP-adres, browser en tijdstip, alleen voor beveiliging, rate-limiting en foutopsporing", "Je taalkeuze en je akkoord op de voorwaarden (versie en tijdstip)"],
       ["Odoo: klanten, contacten, leads, orders, facturen en producten, zoals je Odoo-omgeving ze levert", "Meta (Facebook en Instagram): pagina- en advertentiegegevens, statistieken en de berichten die je via het OS plaatst", "Google (Ads, Analytics, Business Profile): campagnestatistieken en accountgegevens", "De sleutels en tokens die je daarvoor invoert worden versleuteld bewaard en nooit meer getoond"],
     ] },
@@ -37,6 +37,7 @@ export const privacyNl: LegalDoc = {
     { title: "5. Wie ons helpt (verwerkers)", paragraphs: ["Deze partijen verwerken gegevens in onze opdracht, onder een verwerkersovereenkomst of de standaardvoorwaarden van de leverancier die aan de AVG voldoen:"], bullets: [[
       "Google Firebase (Google Ireland Ltd): inloggen met Google, e-mailcode of inloglink; accountgegevens",
       "Vercel Inc.: hosting van het OS en de API, en opslag van je werkruimte (Vercel Blob, regio EU waar mogelijk)",
+      "PostHog Inc.: meten van gebruik in het OS, alleen met jouw toestemming (dataregio EU)",
       "Hostinger: het versturen van e-mail vanaf info@socialnow.nl, zoals inlogcodes, uitnodigingen en meldingen",
       "Stripe Payments Europe Ltd: betalingen voor tegoed; Stripe is voor kaartgegevens zelfstandig verantwoordelijke",
       "GitHub Inc.: hosting van socialnow.nl (GitHub Pages)",
@@ -50,6 +51,7 @@ export const privacyNl: LegalDoc = {
     { title: "7. Doorgifte buiten de EU", paragraphs: ["Een aantal leveranciers is gevestigd in de Verenigde Staten of verwerkt daar gegevens (Vercel, GitHub, Stripe, Google, OpenAI). Doorgifte gebeurt op basis van het EU-VS Data Privacy Framework waar de leverancier daarbij is aangesloten, en anders op basis van de standaardcontractbepalingen van de Europese Commissie met aanvullende maatregelen. Wij kiezen waar mogelijk voor opslag en verwerking in de EU."] },
     { title: "8. Bewaartermijnen", paragraphs: ["Wij bewaren gegevens niet langer dan nodig:"], bullets: [[
       "Contactgegevens van een aanvraag zonder opdracht: maximaal twee jaar na het laatste contact",
+      "Gegevens uit de demo-aanmelding: maximaal twee jaar, of korter als je vraagt ze te wissen",
       "Account- en werkruimtegegevens: zolang je account bestaat; na verwijdering binnen dertig dagen gewist uit de actieve systemen en binnen negentig dagen uit back-ups",
       "Gegevens uit gekoppelde bronnen: alleen zolang de koppeling bestaat; ontkoppelen wist de gekopieerde gegevens en de sleutel",
       "Chatgesprekken met Milo en gemaakte uitingen: zolang je account bestaat, tenzij je ze zelf eerder verwijdert",
@@ -57,9 +59,11 @@ export const privacyNl: LegalDoc = {
       "Technische logs (IP-adres, foutmeldingen): maximaal dertig dagen",
       "Je akkoord op de voorwaarden: zolang je account bestaat, plus de wettelijke verjaringstermijn",
     ]] },
-    { title: "9. Cookies en lokale opslag", paragraphs: ["Socialnow.nl plaatst geen trackingcookies en gebruikt geen analytics. Wij onthouden in je browser (localStorage) alleen dat je de melding over de voorwaarden hebt gezien en welke taal je koos.", "SocialNow OS gebruikt uitsluitend functionele cookies en opslag:"], bullets: [undefined as unknown as string[], [
+    { title: "9. Cookies en lokale opslag", paragraphs: ["Socialnow.nl plaatst geen trackingcookies en gebruikt geen analytics. Wij onthouden in je browser (localStorage) alleen dat je de melding over de voorwaarden hebt gezien, en in cookies op socialnow.nl welke taal en welk land je koos en of je toestemming gaf voor meten in het OS.", "SocialNow OS gebruikt functionele cookies en opslag, en meet alleen gebruik als jij daar toestemming voor geeft:"], bullets: [undefined as unknown as string[], [
       "__session: houdt bij dat je bent ingelogd (55 minuten, of 30 dagen als je 'ingelogd blijven' aanvinkt)",
-      "sn-taal: je taalkeuze (een jaar)",
+      "sn-taal en sn-land: je taal- en landkeuze (een jaar)",
+      "sn-meten: of je toestemming gaf voor meten (een jaar); je wijzigt dit onder Account",
+      "Alleen met jouw toestemming: PostHog (EU) meet welke onderdelen je gebruikt en maakt schermopnames waarin ingevulde velden zijn afgeschermd, gekoppeld aan je e-mailadres, om het OS te verbeteren. Zonder toestemming laadt PostHog niet",
       "Firebase-opslag in je browser voor het inloggen en het onthouden van je inloglink-adres",
       "Lokale opslag voor voorkeuren zoals je gekozen thema, en voor concepten die nog niet zijn opgeslagen",
     ]] },
@@ -97,11 +101,11 @@ export const privacyNl: LegalDoc = {
 export const privacyEn: LegalDoc = {
   title: "Privacy Policy",
   intro: "How SocialNow handles personal data on socialnow.nl and in SocialNow OS, under the General Data Protection Regulation (GDPR). This policy applies to website visitors, to everyone with an account in the OS, and to the customers, contacts and team members of those accounts. The Dutch version is the binding one.",
-  updated: "Last updated: 16 September 2026",
+  updated: "Last updated: 17 September 2026",
   sections: [
     { title: "1. Who is responsible", paragraphs: ["SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands, Chamber of Commerce 90877179, is the controller for the data of visitors and account holders. For the data an account holder puts into their own workspace (their own customers, contacts, orders and team members) the account holder is the controller and SocialNow is the processor; section 12 applies to that.", "Questions, requests and complaints about privacy: info@socialnow.nl. We respond within one month."] },
     { title: "2. What we process", paragraphs: ["On the website we only process what you leave yourself:", "In SocialNow OS we additionally process:", "Data from sources you connect yourself, only for your own workspace:"], bullets: [
-      ["Name, e-mail address and phone number when you contact us through the form, e-mail or WhatsApp", "Company name and project information with a request or quote", "The content of your message"],
+      ["Name, e-mail address and phone number when you contact us through the form, e-mail or WhatsApp", "Name, e-mail address, country and (if you fill it in) phone number when you go to the demo through the welcome notice, so we can contact you about SocialNow later", "Company name and project information with a request or quote", "The content of your message"],
       ["Your account: name, e-mail address, profile picture and how you sign in (Google, e-mail code, sign-in link or password); we never see your password itself", "Your workspace: company name, industry, website, branding (logo, colours, fonts, tone of voice) and everything you fill in yourself", "Team members: e-mail address, name and role of the people you invite", "What you create in the OS: pieces, texts, images, documents, campaigns and the chat conversations with Milo", "Payments: the credit bought and the payment status; card details go straight to Stripe and never reach us", "Usage data: which parts you use, what you ask the OS, error messages and how the tools perform for your workspace", "Technical data: IP address, browser and time, only for security, rate limiting and troubleshooting", "Your language choice and your agreement to the terms (version and time)"],
       ["Odoo: customers, contacts, leads, orders, invoices and products, as your Odoo environment supplies them", "Meta (Facebook and Instagram): page and ad data, statistics and the posts you publish through the OS", "Google (Ads, Analytics, Business Profile): campaign statistics and account data", "The keys and tokens you enter for this are stored encrypted and never shown again"],
     ] },
@@ -128,6 +132,7 @@ export const privacyEn: LegalDoc = {
     { title: "5. Who helps us (processors)", paragraphs: ["These parties process data on our behalf, under a data processing agreement or the provider's standard GDPR terms:"], bullets: [[
       "Google Firebase (Google Ireland Ltd): signing in with Google, e-mail code or sign-in link; account data",
       "Vercel Inc.: hosting of the OS and the API, and storage of your workspace (Vercel Blob, EU region where possible)",
+      "PostHog Inc.: usage measurement in the OS, only with your consent (EU data region)",
       "Hostinger: sending e-mail from info@socialnow.nl, such as sign-in codes, invitations and notifications",
       "Stripe Payments Europe Ltd: payments for credit; for card details Stripe is an independent controller",
       "GitHub Inc.: hosting of socialnow.nl (GitHub Pages)",
@@ -141,6 +146,7 @@ export const privacyEn: LegalDoc = {
     { title: "7. Transfers outside the EU", paragraphs: ["Some providers are based in the United States or process data there (Vercel, GitHub, Stripe, Google, OpenAI). Transfers rely on the EU-US Data Privacy Framework where the provider is certified, and otherwise on the European Commission's standard contractual clauses with additional measures. Where possible we choose storage and processing in the EU."] },
     { title: "8. Retention", paragraphs: ["We keep data no longer than needed:"], bullets: [[
       "Contact details of a request without an order: at most two years after the last contact",
+      "Data from the demo sign-up: at most two years, or shorter if you ask us to erase it",
       "Account and workspace data: as long as your account exists; after deletion erased from active systems within thirty days and from backups within ninety days",
       "Data from connected sources: only while the connection exists; disconnecting erases the copied data and the key",
       "Chat conversations with Milo and created pieces: as long as your account exists, unless you delete them earlier",
@@ -148,9 +154,11 @@ export const privacyEn: LegalDoc = {
       "Technical logs (IP address, error messages): at most thirty days",
       "Your agreement to the terms: as long as your account exists, plus the statutory limitation period",
     ]] },
-    { title: "9. Cookies and local storage", paragraphs: ["Socialnow.nl sets no tracking cookies and uses no analytics. In your browser (localStorage) we only remember that you have seen the notice about the terms and which language you chose.", "SocialNow OS uses functional cookies and storage only:"], bullets: [undefined as unknown as string[], [
+    { title: "9. Cookies and local storage", paragraphs: ["Socialnow.nl sets no tracking cookies and uses no analytics. In your browser (localStorage) we only remember that you have seen the notice about the terms, and in cookies on socialnow.nl which language and country you chose and whether you allowed measurement in the OS.", "SocialNow OS uses functional cookies and storage, and measures usage only if you allow it:"], bullets: [undefined as unknown as string[], [
       "__session: keeps note that you are signed in (55 minutes, or 30 days if you tick 'keep me signed in')",
-      "sn-taal: your language choice (one year)",
+      "sn-taal and sn-land: your language and country choice (one year)",
+      "sn-meten: whether you allowed measurement (one year); you change this under Account",
+      "Only with your consent: PostHog (EU) measures which parts you use and records sessions with filled-in fields masked, linked to your e-mail address, to improve the OS. Without consent PostHog does not load",
       "Firebase storage in your browser for signing in and remembering your sign-in link address",
       "Local storage for preferences such as your chosen theme, and for drafts not yet saved",
     ]] },

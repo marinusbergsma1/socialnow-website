@@ -2196,7 +2196,7 @@ html {
    OS: een donkerblauwe kaart met het woordlogo in een eigen band, daaronder kop, vraag, land en twee
    knoppen. Alle regels hangen onder .sn-consent, zodat ".sn-site p" (website.css) de kop niet grijs
    maakt en de marges niet op nul zet. Wit op het groen, nooit donkere tekst. */
-.sn-consent{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px;background:#020914e6;backdrop-filter:blur(10px)}
+.sn-consent{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:16px;background:#020914e6;backdrop-filter:blur(10px)}
 .sn-consent .sn-consent-card{position:relative;overflow:hidden;width:min(420px,100%);text-align:center;border:1px solid #ffffff1f;border-radius:18px;padding:0;background:linear-gradient(145deg,#0c1d32 0%,#06101e 58%,#040b15 100%);box-shadow:0 2px 6px #00000059,0 30px 80px #00000080;color:#f8fbff;animation:qr-os-rise .52s cubic-bezier(.18,.88,.25,1) both}
 .sn-consent .sn-consent-merk{display:flex;align-items:center;justify-content:center;height:72px;padding:0 24px;border-bottom:1px solid #ffffff14;background:linear-gradient(100deg,#040b15,#0c1d32 50%,#040b15)}
 .sn-consent .sn-consent-logo{display:block;width:auto;height:30px;max-width:100%;object-fit:contain;margin:0}
@@ -2206,6 +2206,15 @@ html {
 .sn-consent .sn-consent-land{display:grid;gap:7px;margin:0 0 18px;text-align:left;color:#9fb1c5;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
 .sn-consent .sn-consent-land select{width:100%;height:48px;border:1px solid #ffffff24;border-radius:12px;padding:0 14px;background:#12233a;color:#fff;font-weight:600;font-size:16px;line-height:1;font-family:inherit;letter-spacing:0;text-transform:none;cursor:pointer}
 .sn-consent .sn-consent-land select:focus{outline:2px solid #5decb3;outline-offset:1px;border-color:transparent}
+.sn-consent .sn-consent-land input{width:100%;height:48px;border:1px solid #ffffff24;border-radius:12px;padding:0 14px;background:#12233a;color:#fff;font-weight:600;font-size:16px;line-height:1;font-family:inherit;letter-spacing:0;text-transform:none}
+.sn-consent .sn-consent-land input:focus{outline:2px solid #5decb3;outline-offset:1px;border-color:transparent}
+.sn-consent .sn-consent-land em{font-style:normal;font-weight:500;letter-spacing:.04em;text-transform:none;color:#7f93a8}
+.sn-consent .sn-consent-form .sn-consent-land{margin:0 0 12px}
+.sn-consent .sn-consent-vink{display:flex;gap:10px;align-items:flex-start;margin:4px 0 16px;text-align:left;color:#b5c1d0;font-size:12px;line-height:1.5;cursor:pointer}
+.sn-consent .sn-consent-vink input{flex:none;width:18px;height:18px;margin:1px 0 0;accent-color:#0c7c3a;cursor:pointer}
+.sn-consent .sn-consent-card{max-height:calc(100svh - 32px);overflow-y:auto}
+.sn-consent .sn-consent-fout{margin:0 0 12px;color:#ff9b9b;font-size:13px;text-align:left}
+.sn-consent .sn-consent-knop:disabled{opacity:.7;cursor:wait}
 .sn-consent .sn-consent-knoppen{display:grid;gap:10px;margin:0 0 20px}
 .sn-consent .sn-consent-knop{display:flex;align-items:center;justify-content:center;width:100%;height:48px;padding:0 22px;border:0;border-radius:999px;background:linear-gradient(180deg,#0e883f 0%,#0c7c3a 55%,#08632c 100%);color:#fff;font-weight:700;font-size:15px;line-height:1;font-family:inherit;letter-spacing:.01em;white-space:nowrap;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff3d,0 0 0 1px #25d36673,0 6px 22px #25d36638;transition:filter .16s ease,transform .16s ease}
 .sn-consent .sn-consent-knop:hover{filter:brightness(1.08)}

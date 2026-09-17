@@ -31,13 +31,27 @@ export const LANDEN: { code: string; naam: string; vlag: string; taal: Language 
   { code: "XX", naam: "Other", vlag: "🌍", taal: "en" },
 ];
 
-const TEKST: Record<Language, { kop: string; vraag: string; land: string; demo: string; site: string; voor: string; voorwaarden: string; en: string; privacy: string; na: string }> = {
-  nl: { kop: "Welkom bij SocialNow.", vraag: "Kom je voor de demo, of wil je eerst de website bekijken?", land: "Je land", demo: "Naar de demo", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies, geen analytics." },
-  en: { kop: "Welcome to SocialNow.", vraag: "Are you here for the demo, or do you want to explore the website first?", land: "Your country", demo: "Go to the demo", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies, no analytics." },
-  de: { kop: "Willkommen bei SocialNow.", vraag: "Kommen Sie für die Demo, oder möchten Sie zuerst die Website ansehen?", land: "Ihr Land", demo: "Zur Demo", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies, keine Analytics." },
-  fr: { kop: "Bienvenue chez SocialNow.", vraag: "Vous venez pour la démo, ou vous voulez d’abord découvrir le site ?", land: "Votre pays", demo: "Voir la démo", site: "Découvrir le site", voor: "En essayant l’OS ou en découvrant le site, vous acceptez nos ", voorwaarden: "conditions générales", en: " et notre ", privacy: "politique de confidentialité", na: ". Pas de cookies de suivi, pas d’analytics." },
-  it: { kop: "Benvenuto in SocialNow.", vraag: "Sei qui per la demo, o vuoi prima esplorare il sito?", land: "Il tuo paese", demo: "Vai alla demo", site: "Esplora il sito", voor: "Provando l’OS o esplorando il sito, accetti i nostri ", voorwaarden: "termini di servizio", en: " e la nostra ", privacy: "informativa sulla privacy", na: ". Nessun cookie di tracciamento, nessuna analitica." },
-  es: { kop: "Bienvenido a SocialNow.", vraag: "¿Vienes por la demo, o quieres ver primero la web?", land: "Tu país", demo: "Ir a la demo", site: "Ver la web", voor: "Al probar el OS o ver la web, aceptas nuestros ", voorwaarden: "términos de servicio", en: " y nuestra ", privacy: "política de privacidad", na: ". Sin cookies de seguimiento, sin analítica." },
+type Tekst = { kop: string; vraag: string; land: string; demo: string; site: string; voor: string; voorwaarden: string; en: string; privacy: string; na: string };
+// 17 september 2026 (Marinus): wie naar de demo gaat, laat eerst naam, e-mail en (optioneel)
+// telefoon achter. Dat komt binnen op os.socialnow.nl/aanmeldingen. Het vinkje voor meten staat
+// standaard uit; alleen met een vinkje start PostHog in het OS (cookie sn-meten).
+type Gegevens = { kop: string; uitleg: string; naam: string; email: string; tel: string; optioneel: string; meten: string; verder: string; terug: string; foutNaam: string; foutEmail: string; bezig: string };
+const GEGEVENS: Record<Language, Gegevens> = {
+  nl: { kop: "Bijna in de demo.", uitleg: "Laat je gegevens achter, dan kunnen we je later helpen.", naam: "Naam", email: "E-mail", tel: "Telefoon", optioneel: "optioneel", meten: "Ja, jullie mogen meten hoe ik het OS gebruik (schermopnames met afgeschermde velden), om het te verbeteren.", verder: "Naar de demo", terug: "Terug", foutNaam: "Vul je naam in.", foutEmail: "Dat e-mailadres klopt nog niet.", bezig: "Even geduld…" },
+  en: { kop: "Almost in the demo.", uitleg: "Leave your details so we can help you later.", naam: "Name", email: "E-mail", tel: "Phone", optioneel: "optional", meten: "Yes, you may measure how I use the OS (session recordings with masked fields) to improve it.", verder: "Go to the demo", terug: "Back", foutNaam: "Please enter your name.", foutEmail: "That e-mail address doesn't look right yet.", bezig: "One moment…" },
+  de: { kop: "Fast in der Demo.", uitleg: "Hinterlassen Sie Ihre Daten, dann können wir Ihnen später helfen.", naam: "Name", email: "E-Mail", tel: "Telefon", optioneel: "optional", meten: "Ja, Sie dürfen messen, wie ich das OS nutze (Sitzungsaufnahmen mit verdeckten Feldern), um es zu verbessern.", verder: "Zur Demo", terug: "Zurück", foutNaam: "Bitte geben Sie Ihren Namen ein.", foutEmail: "Diese E-Mail-Adresse stimmt noch nicht.", bezig: "Einen Moment…" },
+  fr: { kop: "Presque dans la démo.", uitleg: "Laissez vos coordonnées pour que nous puissions vous aider plus tard.", naam: "Nom", email: "E-mail", tel: "Téléphone", optioneel: "facultatif", meten: "Oui, vous pouvez mesurer mon utilisation de l’OS (enregistrements de session avec champs masqués) pour l’améliorer.", verder: "Voir la démo", terug: "Retour", foutNaam: "Indiquez votre nom.", foutEmail: "Cette adresse e-mail n’est pas encore correcte.", bezig: "Un instant…" },
+  it: { kop: "Quasi nella demo.", uitleg: "Lascia i tuoi dati, così potremo aiutarti in seguito.", naam: "Nome", email: "E-mail", tel: "Telefono", optioneel: "facoltativo", meten: "Sì, potete misurare come uso l’OS (registrazioni di sessione con campi oscurati) per migliorarlo.", verder: "Vai alla demo", terug: "Indietro", foutNaam: "Inserisci il tuo nome.", foutEmail: "Questo indirizzo e-mail non è ancora corretto.", bezig: "Un attimo…" },
+  es: { kop: "Casi en la demo.", uitleg: "Déjanos tus datos para que podamos ayudarte más adelante.", naam: "Nombre", email: "E-mail", tel: "Teléfono", optioneel: "opcional", meten: "Sí, podéis medir cómo uso el OS (grabaciones de sesión con campos ocultos) para mejorarlo.", verder: "Ir a la demo", terug: "Atrás", foutNaam: "Escribe tu nombre.", foutEmail: "Ese e-mail todavía no es correcto.", bezig: "Un momento…" },
+};
+const AANMELD_URL = "https://os.socialnow.nl/api/aanmelden";
+const TEKST: Record<Language, Tekst> = {
+  nl: { kop: "Welkom bij SocialNow.", vraag: "Kom je voor de demo, of wil je eerst de website bekijken?", land: "Je land", demo: "Naar de demo", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies op de website; in het OS meten we alleen met jouw toestemming." },
+  en: { kop: "Welcome to SocialNow.", vraag: "Are you here for the demo, or do you want to explore the website first?", land: "Your country", demo: "Go to the demo", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies on the website; in the OS we only measure with your consent." },
+  de: { kop: "Willkommen bei SocialNow.", vraag: "Kommen Sie für die Demo, oder möchten Sie zuerst die Website ansehen?", land: "Ihr Land", demo: "Zur Demo", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies auf der Website; im OS messen wir nur mit Ihrer Zustimmung." },
+  fr: { kop: "Bienvenue chez SocialNow.", vraag: "Vous venez pour la démo, ou vous voulez d’abord découvrir le site ?", land: "Votre pays", demo: "Voir la démo", site: "Découvrir le site", voor: "En essayant l’OS ou en découvrant le site, vous acceptez nos ", voorwaarden: "conditions générales", en: " et notre ", privacy: "politique de confidentialité", na: ". Pas de cookies de suivi sur le site ; dans l’OS, nous ne mesurons qu’avec votre accord." },
+  it: { kop: "Benvenuto in SocialNow.", vraag: "Sei qui per la demo, o vuoi prima esplorare il sito?", land: "Il tuo paese", demo: "Vai alla demo", site: "Esplora il sito", voor: "Provando l’OS o esplorando il sito, accetti i nostri ", voorwaarden: "termini di servizio", en: " e la nostra ", privacy: "informativa sulla privacy", na: ". Nessun cookie di tracciamento sul sito; nell’OS misuriamo solo con il tuo consenso." },
+  es: { kop: "Bienvenido a SocialNow.", vraag: "¿Vienes por la demo, o quieres ver primero la web?", land: "Tu país", demo: "Ir a la demo", site: "Ver la web", voor: "Al probar el OS o ver la web, aceptas nuestros ", voorwaarden: "términos de servicio", en: " y nuestra ", privacy: "política de privacidad", na: ". Sin cookies de seguimiento en la web; en el OS solo medimos con tu consentimiento." },
 };
 
 function bewaard(): boolean { try { return localStorage.getItem(SLEUTEL) === LEGAL_VERSION; } catch { return false; } }
@@ -56,11 +70,27 @@ function zetCookies(land: string, taal: Language) {
   } catch {}
 }
 
+function zetMeten(ja: boolean) {
+  try {
+    const domein = location.hostname.endsWith("socialnow.nl") ? "; Domain=.socialnow.nl" : "";
+    const veilig = location.protocol === "https:" ? "; Secure" : "";
+    document.cookie = `sn-meten=${ja ? "ja" : "nee"}; Path=/; Max-Age=31536000; SameSite=Lax${domein}${veilig}`;
+  } catch {}
+}
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 export default function ConsentPopup() {
   const { language } = useLanguage();
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [land, setLand] = useState("NL");
+  const [stap, setStap] = useState<"keuze" | "gegevens">("keuze");
+  const [naam, setNaam] = useState("");
+  const [email, setEmail] = useState("");
+  const [tel, setTel] = useState("");
+  const [meten, setMeten] = useState(false);
+  const [fout, setFout] = useState("");
+  const [bezig, setBezig] = useState(false);
   useEffect(() => { setOpen(!bewaard()); setLand(landUitBrowser()); }, []);
   const leest = location.pathname === "/voorwaarden" || location.pathname === "/privacy";
   if (!open || leest) return null;
@@ -72,7 +102,26 @@ export default function ConsentPopup() {
     if (l.taal !== language) { const rest = location.pathname.replace(/^\/(nl|de|fr|it|es)(?=\/|$)/, ""); window.location.assign(`${languagePrefix(l.taal)}${rest || "/"}${location.search}`); }
   };
   const akkoord = () => { try { localStorage.setItem(SLEUTEL, LEGAL_VERSION); } catch {} zetCookies(gekozen.code, gekozen.taal); setOpen(false); };
-  const demo = () => { akkoord(); location.href = `${DEMO_URL}?bron=demo&taal=${gekozen.taal}&land=${gekozen.code}`; };
+  const g = GEGEVENS[language] || GEGEVENS.en;
+  const naarDemo = () => { akkoord(); zetMeten(meten); window.location.href = `${DEMO_URL}?bron=demo&taal=${gekozen.taal}&land=${gekozen.code}`; };
+  // Versturen mag de demo nooit tegenhouden: alleen een fout in de eigen invoer houdt iemand hier.
+  const verstuur = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (bezig) return;
+    const n = naam.trim(), m = email.trim();
+    if (!n) { setFout(g.foutNaam); return; }
+    if (!EMAIL.test(m)) { setFout(g.foutEmail); return; }
+    setFout(""); setBezig(true);
+    try {
+      const r = await fetch(AANMELD_URL, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ bron: "demo", naam: n, email: m, mobiel: tel.trim(), land: gekozen.code, taal: gekozen.taal, meten, voorwaarden: LEGAL_VERSION }),
+        signal: AbortSignal.timeout(6000),
+      });
+      if (r.status === 400) { const j = await r.json().catch(() => null); setFout(String(j?.error || g.foutEmail)); setBezig(false); return; }
+    } catch {}
+    naarDemo();
+  };
   return (
     <div className="sn-consent" role="dialog" aria-modal="true" aria-labelledby="sn-consent-kop" translate="no">
       <div className="sn-consent-card">
@@ -81,6 +130,33 @@ export default function ConsentPopup() {
           <img className="sn-consent-logo" src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="1556" height="240" />
         </div>
         <div className="sn-consent-inhoud">
+        {stap === "gegevens" ? (
+        <form className="sn-consent-form" onSubmit={verstuur} noValidate>
+          <h2 id="sn-consent-kop" className="sn-consent-kop">{g.kop}</h2>
+          <p className="sn-consent-vraag">{g.uitleg}</p>
+          <label className="sn-consent-land">
+            <span>{g.naam}</span>
+            <input type="text" autoComplete="name" required maxLength={80} value={naam} onChange={e => setNaam(e.target.value)} autoFocus />
+          </label>
+          <label className="sn-consent-land">
+            <span>{g.email}</span>
+            <input type="email" autoComplete="email" inputMode="email" required maxLength={254} value={email} onChange={e => setEmail(e.target.value)} />
+          </label>
+          <label className="sn-consent-land">
+            <span>{g.tel} <em>({g.optioneel})</em></span>
+            <input type="tel" autoComplete="tel" inputMode="tel" maxLength={30} value={tel} onChange={e => setTel(e.target.value)} />
+          </label>
+          <label className="sn-consent-vink">
+            <input type="checkbox" checked={meten} onChange={e => setMeten(e.target.checked)} />
+            <span>{g.meten}</span>
+          </label>
+          {fout ? <p className="sn-consent-fout" role="alert">{fout}</p> : null}
+          <div className="sn-consent-knoppen">
+            <button type="submit" className="sn-consent-knop" disabled={bezig}>{bezig ? g.bezig : g.verder}</button>
+            <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={() => { setFout(""); setStap("keuze"); }}>{g.terug}</button>
+          </div>
+        </form>
+        ) : (<>
         <h2 id="sn-consent-kop" className="sn-consent-kop">{s.kop}</h2>
         <p className="sn-consent-vraag">{s.vraag}</p>
         <label className="sn-consent-land">
@@ -90,12 +166,13 @@ export default function ConsentPopup() {
           </select>
         </label>
         <div className="sn-consent-knoppen">
-          <button type="button" className="sn-consent-knop" onClick={demo}>{s.demo}</button>
+          <button type="button" className="sn-consent-knop" onClick={() => setStap("gegevens")}>{s.demo}</button>
           <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={akkoord}>{s.site}</button>
         </div>
         <p className="sn-consent-tekst">
           {s.voor}<Link to="/voorwaarden">{s.voorwaarden}</Link>{s.en}<Link to="/privacy">{s.privacy}</Link>{s.na}
         </p>
+        </>)}
         </div>
       </div>
     </div>
