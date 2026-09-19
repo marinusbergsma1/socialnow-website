@@ -10,6 +10,13 @@ import { mkdirSync, copyFileSync, readFileSync, writeFileSync } from 'fs';
 
 const BASE = 'https://socialnow.nl';
 
+// 19 september 2026: GitHub Pages draait standaard Jekyll, en Jekyll laat elke map die met een
+// punt of een liggend streepje begint uit de publicatie weg. Daardoor gaf /.well-known/security.txt
+// een 404 terwijl het bestand gewoon in dist stond. RFC 9116 wijst juist die plek aan als de
+// vaste plek voor een meldroute, dus een kopie op /security.txt is niet genoeg. Een leeg
+// .nojekyll-bestand zet Jekyll uit; dan gaat de map wel mee.
+writeFileSync('dist/.nojekyll', '');
+
 // Per-route metadata. Homepage (index.html) blijft ongewijzigd.
 const routeMeta = {
   'het-os': {title: 'Het OS — Je bedrijf in één chat | SocialNow', description: 'Ontdek Website, CRM, Studio en Advertenties in SocialNow OS. Probeer het OS en bespreek je eigen inrichting.'},
