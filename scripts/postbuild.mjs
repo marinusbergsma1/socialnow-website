@@ -10,12 +10,11 @@ import { mkdirSync, copyFileSync, readFileSync, writeFileSync } from 'fs';
 
 const BASE = 'https://socialnow.nl';
 
-// 19 september 2026: GitHub Pages draait standaard Jekyll, en Jekyll laat elke map die met een
-// punt of een liggend streepje begint uit de publicatie weg. Daardoor gaf /.well-known/security.txt
-// een 404 terwijl het bestand gewoon in dist stond. RFC 9116 wijst juist die plek aan als de
-// vaste plek voor een meldroute, dus een kopie op /security.txt is niet genoeg. Een leeg
-// .nojekyll-bestand zet Jekyll uit; dan gaat de map wel mee.
-writeFileSync('dist/.nojekyll', '');
+// 19 september 2026: GitHub Pages serveert geen enkel pad dat met een punt begint. Nagemeten na
+// twee publicaties: zowel /.well-known/security.txt als /.nojekyll geven een 404 terwijl beide
+// bestanden in de publicatie zitten. Een .nojekyll erbij zetten verandert daar niets aan, dus die
+// regel is er weer uit; wat overblijft is public/security.txt op de wortel, de plek die RFC 9116
+// als terugval toestaat. De vaste plek werkt pas als deze site achter een CDN komt te staan.
 
 // Per-route metadata. Homepage (index.html) blijft ongewijzigd.
 const routeMeta = {

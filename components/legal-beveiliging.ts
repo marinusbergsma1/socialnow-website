@@ -74,7 +74,7 @@ export const beveiliging: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; 
       {
         title: "Een kwetsbaarheid melden",
         paragraphs: [
-          "Vind je iets, meld het dan op security@socialnow.nl. Beschrijf wat je vond, waar, en hoe je het kunt laten zien. Een schermafbeelding of een kort stappenplan helpt.",
+          "Vind je iets, meld het dan op security@socialnow.nl, of lees eerst https://socialnow.nl/security.txt. Beschrijf wat je vond, waar, en hoe je het kunt laten zien. Een schermafbeelding of een kort stappenplan helpt.",
           "Wat je van ons mag verwachten: binnen drie werkdagen een reactie van een mens, een inschatting van de ernst binnen tien werkdagen, en bericht wanneer het verholpen is. Meld je verantwoord en misbruik je niet wat je gevonden hebt, dan doen wij geen aangifte en stellen wij je niet aansprakelijk. Wil je genoemd worden bij de oplossing, dan doen wij dat graag.",
           "Wat wij van jou vragen: geen gegevens van anderen inzien, kopiëren, wijzigen of verwijderen; geen dienst platleggen; geen social engineering, phishing of fysieke toegang; geen geautomatiseerd scannen dat het systeem belast; en het lek niet delen voordat het verholpen is. Kom je onbedoeld bij gegevens van anderen, stop dan en meld dat erbij.",
           "Wij betalen geen beloning. Wat wij wel doen is snel antwoorden en snel oplossen.",
@@ -155,7 +155,7 @@ export const beveiliging: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; 
       {
         title: "Reporting a vulnerability",
         paragraphs: [
-          "If you find something, report it to security@socialnow.nl. Describe what you found, where, and how it can be demonstrated. A screenshot or a short set of steps helps.",
+          "If you find something, report it to security@socialnow.nl, or read https://socialnow.nl/security.txt first. Describe what you found, where, and how it can be demonstrated. A screenshot or a short set of steps helps.",
           "What you may expect from us: a reply from a person within three working days, an assessment of severity within ten working days, and word when it is fixed. If you report responsibly and do not abuse what you found, we will not report you to the police and will not hold you liable. If you want to be credited in the fix, we are happy to.",
           "What we ask of you: do not view, copy, alter or delete other people's data; do not take a service down; no social engineering, phishing or physical access; no automated scanning that loads the system; and do not share the flaw before it is fixed. If you unintentionally reach other people's data, stop and say so in your report.",
           "We do not pay a bounty. What we do is answer fast and fix fast.",

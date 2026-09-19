@@ -1,10 +1,19 @@
 # Waar je een kwetsbaarheid in SocialNow meldt.
 # Opgesteld volgens RFC 9116. Het volledige beleid, inclusief wat je van ons mag verwachten en
 # wat wij van jou vragen, staat op https://socialnow.nl/beveiliging
+#
+# LET OP DE PLEK VAN DIT BESTAND
+# RFC 9116 wijst /.well-known/security.txt aan als de vaste plek. Deze site draait op GitHub
+# Pages, en dat serveert geen enkel pad dat met een punt begint: op 19 september 2026 nagemeten,
+# zowel /.well-known/security.txt als /.nojekyll geven een 404 terwijl beide bestanden in de
+# publicatie zitten. Een .nojekyll erbij zetten helpt daar niet tegen. Daarom staat dit bestand
+# op de wortel, de plek die RFC 9116 als terugval toestaat, en wijst Canonical daarnaar.
+# Komt de site ooit achter een CDN te staan, dan is een doorverwijzing van /.well-known/security.txt
+# naar dit bestand het enige dat nog nodig is.
 
 Contact: mailto:security@socialnow.nl
 Contact: https://socialnow.nl/beveiliging
 Expires: 2027-09-19T00:00:00.000Z
 Preferred-Languages: nl, en
-Canonical: https://socialnow.nl/.well-known/security.txt
+Canonical: https://socialnow.nl/security.txt
 Policy: https://socialnow.nl/beveiliging

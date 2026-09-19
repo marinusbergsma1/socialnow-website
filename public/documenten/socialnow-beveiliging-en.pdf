@@ -88,13 +88,13 @@ BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (2 / 3) Tj ET 0 0 0 rg
 endstream
 endobj
 3 0 obj
-<< /Length 2797 >>
+<< /Length 2846 >>
 stream
 0.04 0.48 0.22 rg
 BT /F2 10.6 Tf 1 0 0 1 56.69 775.53 Tm (Reporting a vulnerability) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 760.88 Tm (If you find something, report it to security@socialnow.nl. Describe what you found, where, and how it can be) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 746.48 Tm (demonstrated. A screenshot or a short set of steps helps.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 760.88 Tm (If you find something, report it to security@socialnow.nl, or read https://socialnow.nl/security.txt first. Describe) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 746.48 Tm (what you found, where, and how it can be demonstrated. A screenshot or a short set of steps helps.) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 728.68 Tm (What you may expect from us: a reply from a person within three working days, an assessment of severity within) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 714.28 Tm (ten working days, and word when it is fixed. If you report responsibly and do not abuse what you found, we will) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 699.88 Tm (not report you to the police and will not hold you liable. If you want to be credited in the fix, we are happy to.) Tj ET
@@ -150,16 +150,16 @@ xref
 0000000015 00000 n 
 0000001173 00000 n 
 0000006504 00000 n 
-0000009353 00000 n 
-0000009450 00000 n 
-0000009552 00000 n 
-0000009694 00000 n 
-0000009836 00000 n 
-0000009978 00000 n 
-0000010047 00000 n 
-0000010141 00000 n 
+0000009402 00000 n 
+0000009499 00000 n 
+0000009601 00000 n 
+0000009743 00000 n 
+0000009885 00000 n 
+0000010027 00000 n 
+0000010096 00000 n 
+0000010190 00000 n 
 trailer
 << /Size 12 /Root 11 0 R /Info 10 0 R >>
 startxref
-10191
+10240
 %%EOF
