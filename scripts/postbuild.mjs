@@ -21,6 +21,14 @@ const routeMeta = {
   voorwaarden: {title: 'Algemene voorwaarden | SocialNow', description: 'De algemene voorwaarden van SocialNow, inclusief het gebruik van SocialNow OS.'},
   team: {title: 'Team — De mensen achter het OS | SocialNow', description: 'Maak kennis met Marinus Bergsma en de creatieve en technische specialisten achter SocialNow.'},
   blog: {title: 'Blog — Vanuit de praktijk | SocialNow', description: 'Inzichten over websites, AI, content en vindbaarheid vanuit het werk van SocialNow.'},
+  // 19 september 2026: de juridische laag. Elk document krijgt een eigen route met eigen
+  // metadata, want een inkoper zoekt op "verwerkersovereenkomst" en niet op "privacybeleid".
+  juridisch: {title: 'Juridisch en compliance | SocialNow', description: 'Alle documenten op één plek: voorwaarden, privacy, verwerkersovereenkomst, beveiliging, cookies, AI en aanvaardbaar gebruik. Ook als pdf.'},
+  verwerkersovereenkomst: {title: 'Verwerkersovereenkomst | SocialNow', description: 'De verwerkersovereenkomst van SocialNow volgens artikel 28 AVG, met de subverwerkers en de beveiligingsmaatregelen als bijlage.'},
+  beveiliging: {title: 'Beveiliging en responsible disclosure | SocialNow', description: 'Hoe SocialNow gegevens beschermt, wat er gebeurt bij een datalek, en hoe je een kwetsbaarheid meldt.'},
+  cookies: {title: 'Cookieverklaring | SocialNow', description: 'Welke cookies en opslag SocialNow gebruikt, hoe lang, en waar je ze uitzet. Per cookie beschreven.'},
+  ai: {title: 'AI-verklaring | SocialNow', description: 'Welke AI-modellen SocialNow OS gebruikt, wat er met je invoer gebeurt, en hoe AI-inhoud kenbaar wordt gemaakt.'},
+  gebruik: {title: 'Aanvaardbaar gebruik | SocialNow', description: 'Wat wel en niet mag met SocialNow OS, onze hosting en onze e-mail.'},
 };
 
 // Zichtbare kruimel-labels per route (voor de BreadcrumbList). Vul aan waar nodig.
@@ -34,6 +42,12 @@ const crumbLabels = {
   voorwaarden: 'Algemene voorwaarden',
   team: 'Team',
   blog: 'Blog',
+  juridisch: 'Juridisch en compliance',
+  verwerkersovereenkomst: 'Verwerkersovereenkomst',
+  beveiliging: 'Beveiliging',
+  cookies: 'Cookieverklaring',
+  ai: 'AI-verklaring',
+  gebruik: 'Aanvaardbaar gebruik',
 };
 
 function esc(s) {

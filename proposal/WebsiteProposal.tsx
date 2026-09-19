@@ -33,6 +33,13 @@ import LanguageSwitch from "./LanguageSwitch";
 import { LanguageProvider, LANGUAGES, languagePrefix, type Language, useLanguage } from "./i18n/context";
 import PrivacyPage from "../components/PrivacyPage";
 import TermsPage from "../components/TermsPage";
+// 19 september 2026: de juridische laag is van twee naar zeven documenten gegaan. DocumentPage
+// dient ze alle zeven; JuridischPage is de hub waar ze bij elkaar staan.
+import DocumentPage from "../components/DocumentPage";
+import JuridischPage from "../components/JuridischPage";
+// Staat uit tot er een script op de site komt dat toestemming nodig heeft; de afweging staat
+// in het bestand zelf.
+import Cookiebot from "./Cookiebot";
 import ConsentPopup from "./ConsentPopup";
 
 const nav = [
@@ -217,11 +224,16 @@ function ProposalShell() {
               </div>
             }
           />
+          <Route path="/juridisch" element={<div className="h-privacy"><JuridischPage /></div>} />
+          {["verwerkersovereenkomst", "beveiliging", "cookies", "ai", "gebruik"].map((slug) => (
+            <Route key={slug} path={`/${slug}`} element={<div className="h-privacy"><DocumentPage slug={slug} /></div>} />
+          ))}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <BrandFooter />
       <ConsentPopup />
+      <Cookiebot />
     </div>
   );
 }

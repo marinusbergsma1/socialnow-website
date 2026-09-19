@@ -1,0 +1,165 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Length 1106 >>
+stream
+0.04 0.48 0.22 rg
+BT /F2 10 Tf 1 0 0 1 56.69 705.83 Tm (SOCIALNOW) Tj ET
+0 0 0 rg
+BT /F2 27 Tf 1 0 0 1 56.69 660.47 Tm (Security) Tj ET
+0.35 0.35 0.35 rg
+BT /F1 11 Tf 1 0 0 1 56.69 607.56 Tm (How we protect your data, what we do when something goes wrong, and how to report a) Tj ET
+0 0 0 rg
+0.35 0.35 0.35 rg
+BT /F1 11 Tf 1 0 0 1 56.69 591.06 Tm (vulnerability. This document is meant to be read in advance: by you, by your IT person, or by) Tj ET
+0 0 0 rg
+0.35 0.35 0.35 rg
+BT /F1 11 Tf 1 0 0 1 56.69 574.56 Tm (someone who found something. The Dutch version is the binding one.) Tj ET
+0 0 0 rg
+0.85 0.85 0.85 RG 0.6 w 56.69291338582678 130.39 m 538.58 130.39 l S 0 0 0 RG
+BT /F2 8.6 Tf 1 0 0 1 56.69 124.39 Tm (Last updated: 19 September 2026) Tj ET
+0.35 0.35 0.35 rg
+BT /F1 8.4 Tf 1 0 0 1 56.69 109.99 Tm (The Dutch text is the binding version. The current version is always at socialnow.nl/beveiliging) Tj ET
+0 0 0 rg
+0.35 0.35 0.35 rg
+BT /F1 8.4 Tf 1 0 0 1 56.69 95.89 Tm (SocialNow \267 Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands \267 CoC 90877179 \267 privacy@socialnow.nl) Tj ET
+0 0 0 rg
+endstream
+endobj
+2 0 obj
+<< /Length 5279 >>
+stream
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 775.53 Tm (The principles) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 760.88 Tm (Keep as little as possible. What is not there cannot leak. We do not ask for data we do not need and keep nothing) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 746.48 Tm (longer than the purpose we hold it for.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 728.68 Tm (A workspace is a boundary. Every request is checked against workspace and role; there is no screen where) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 714.28 Tm (another client's data could appear by accident.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 696.48 Tm (A key you give us is yours. Keys for Odoo, Meta, Google or your social channels are stored encrypted, never) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 682.08 Tm (shown back, never written to a log line and never sent to an AI model.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 664.28 Tm (Administrator access is temporary and leaves a trail. There is no permanent administrator session in a client) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 649.88 Tm (environment.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 628.08 Tm (Access) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 613.43 Tm (Signing in to an account runs through an identity provider with two-step verification. Administrator access at) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 599.03 Tm (SocialNow runs through a passkey, with a time-based code as fallback on a new device.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 581.23 Tm (When an administrator opens a client environment, it happens with a token valid for two minutes that opens that) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 566.83 Tm (one system only and that is judged by that system itself. The token never appears in a log; its issuance does, with) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 552.43 Tm (who, which system and when.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 534.63 Tm (Rights are granted per workspace. When someone leaves, their access is withdrawn; in the OS you do that) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 520.23 Tm (yourself under Team.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 498.43 Tm (Encryption) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 483.78 Tm (All traffic runs over TLS. Anyone arriving over http is redirected to https.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 465.98 Tm (Data is stored encrypted at our providers.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 448.18 Tm (Secrets live only in the hosting provider's environment. They are not in the source code and not in a configuration) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 433.78 Tm (file that travels in version control.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 411.98 Tm (The software itself) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 397.33 Tm (All code is under version control. Every deployment traces back to a commit and can be rolled back.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 379.53 Tm (An automated test suite of more than two thousand tests runs before every deployment. A failing suite means no) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 365.13 Tm (deployment.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 347.33 Tm (A strict Content Security Policy determines which scripts, styles and connections a page may use. A script of) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 332.93 Tm (unknown origin does not run, even if it found its way in.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 315.13 Tm (Dependencies are checked for known vulnerabilities. A vulnerability of high severity or above blocks deployment) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 300.73 Tm (until it is resolved.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 278.93 Tm (Monitoring) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 264.28 Tm (Consequential actions - granting access, opening a system, changing a key - are recorded in an audit trail.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 246.48 Tm (Errors and warnings are collected centrally. Personal data is not written into them.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 228.68 Tm (The reachability and login protection of every client system is checked automatically and continuously. If a) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 214.28 Tm (system serves its home page without a login, that appears as an alarm on the administration screen.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 192.48 Tm (If something does go wrong) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 177.83 Tm (We notify the client concerned of a personal data breach within 24 hours of discovery, with what happened, what) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 163.43 Tm (it likely affects, what we have done and where to reach us. That is shorter than the 72 hours the GDPR gives you,) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 149.03 Tm (so you can make your own assessment with time to spare.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 131.23 Tm (We keep a register of breaches, including those that did not have to be notified.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 113.43 Tm (We do not notify the supervisory authority on your behalf unless you ask us in writing. You are the controller; that) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 99.03 Tm (notification is your decision.) Tj ET
+0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Security \267 SocialNow \267 socialnow.nl/beveiliging) Tj ET
+BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (2 / 3) Tj ET 0 0 0 rg
+endstream
+endobj
+3 0 obj
+<< /Length 2797 >>
+stream
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 775.53 Tm (Reporting a vulnerability) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 760.88 Tm (If you find something, report it to security@socialnow.nl. Describe what you found, where, and how it can be) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 746.48 Tm (demonstrated. A screenshot or a short set of steps helps.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 728.68 Tm (What you may expect from us: a reply from a person within three working days, an assessment of severity within) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 714.28 Tm (ten working days, and word when it is fixed. If you report responsibly and do not abuse what you found, we will) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 699.88 Tm (not report you to the police and will not hold you liable. If you want to be credited in the fix, we are happy to.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 682.08 Tm (What we ask of you: do not view, copy, alter or delete other people's data; do not take a service down; no social) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 667.68 Tm (engineering, phishing or physical access; no automated scanning that loads the system; and do not share the) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 653.28 Tm (flaw before it is fixed. If you unintentionally reach other people's data, stop and say so in your report.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 635.48 Tm (We do not pay a bounty. What we do is answer fast and fix fast.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 613.68 Tm (What we do not do) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 599.03 Tm (We hold no ISO 27001 or SOC 2 certification. SocialNow is a small company; such a certification says more) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 584.63 Tm (about the budget for auditors right now than about the security itself. What we do do is written above, and Annex) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 570.23 Tm (B of the data processing agreement sets it out as a list you can walk through.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 552.43 Tm (We do not make session recordings of users. It is technically possible and we deliberately switched it off.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 534.63 Tm (We have no back door into a client system. Access always runs through the short-lived token that the client) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 520.23 Tm (system judges itself.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 498.43 Tm (Contact) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 483.78 Tm (Vulnerabilities: security@socialnow.nl. Privacy and data: privacy@socialnow.nl. Everything else:) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 469.38 Tm (hello@socialnow.nl.) Tj ET
+0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Security \267 SocialNow \267 socialnow.nl/beveiliging) Tj ET
+BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (3 / 3) Tj ET 0 0 0 rg
+endstream
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 1 0 R >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 2 0 R >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 3 0 R >>
+endobj
+9 0 obj
+<< /Type /Pages /Kids [6 0 R 7 0 R 8 0 R] /Count 3 >>
+endobj
+10 0 obj
+<< /Title (Security - SocialNow) /Author (SocialNow) /Producer (SocialNow) >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 9 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000015 00000 n 
+0000001173 00000 n 
+0000006504 00000 n 
+0000009353 00000 n 
+0000009450 00000 n 
+0000009552 00000 n 
+0000009694 00000 n 
+0000009836 00000 n 
+0000009978 00000 n 
+0000010047 00000 n 
+0000010141 00000 n 
+trailer
+<< /Size 12 /Root 11 0 R /Info 10 0 R >>
+startxref
+10191
+%%EOF

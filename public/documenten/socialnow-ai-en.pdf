@@ -1,0 +1,157 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Length 1115 >>
+stream
+0.04 0.48 0.22 rg
+BT /F2 10 Tf 1 0 0 1 56.69 705.83 Tm (SOCIALNOW) Tj ET
+0 0 0 rg
+BT /F2 27 Tf 1 0 0 1 56.69 660.47 Tm (AI statement) Tj ET
+0.35 0.35 0.35 rg
+BT /F1 11 Tf 1 0 0 1 56.69 607.56 Tm (SocialNow OS creates text, images and film with AI models. This statement says where that) Tj ET
+0 0 0 rg
+0.35 0.35 0.35 rg
+BT /F1 11 Tf 1 0 0 1 56.69 591.06 Tm (happens, which models we use, what does and does not happen to your input, and who is) Tj ET
+0 0 0 rg
+0.35 0.35 0.35 rg
+BT /F1 11 Tf 1 0 0 1 56.69 574.56 Tm (responsible for what finally gets published. The Dutch version is the binding one.) Tj ET
+0 0 0 rg
+0.85 0.85 0.85 RG 0.6 w 56.69291338582678 130.39 m 538.58 130.39 l S 0 0 0 RG
+BT /F2 8.6 Tf 1 0 0 1 56.69 124.39 Tm (Last updated: 19 September 2026) Tj ET
+0.35 0.35 0.35 rg
+BT /F1 8.4 Tf 1 0 0 1 56.69 109.99 Tm (The Dutch text is the binding version. The current version is always at socialnow.nl/ai) Tj ET
+0 0 0 rg
+0.35 0.35 0.35 rg
+BT /F1 8.4 Tf 1 0 0 1 56.69 95.89 Tm (SocialNow \267 Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands \267 CoC 90877179 \267 privacy@socialnow.nl) Tj ET
+0 0 0 rg
+endstream
+endobj
+2 0 obj
+<< /Length 5454 >>
+stream
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 775.53 Tm (Where AI sits in the OS) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 760.88 Tm (Milo is the assistant in the OS. It reads what is in your workspace and answers questions, proposes tasks and) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 746.48 Tm (prepares actions.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 728.68 Tm (The Studio creates posts: copy, image and film, based on your brand passport and the brief you give.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 710.88 Tm (The brand scan reads a website and derives colours, typefaces and tone from it.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 693.08 Tm (The CRM and the calendar use AI for summaries, draft messages and suggestions for the best moment to post.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 671.28 Tm (Which models, and where they run) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 656.63 Tm (We use models from Google \(Gemini\), OpenAI, Anthropic and Higgsfield. Which model performs a task can differ) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 642.23 Tm (per feature and per moment; we choose on quality, speed and cost.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 624.43 Tm (The current list of providers, with where they process and on what basis data leaves the EEA, is in Annex C of) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 610.03 Tm (the data processing agreement.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 592.23 Tm (We do not build models and we do not train models. We use existing models and give them context from your) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 577.83 Tm (workspace.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 556.03 Tm (What happens to your input) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 541.38 Tm (What you enter, or what comes from your connected sources, goes to a model only to carry out your instruction,) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 526.98 Tm (and only the part needed for it.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 509.18 Tm (With every model provider it is contractually excluded that your input is used to train their models. We do not use) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 494.78 Tm (your data to train or fine-tune a model either.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 476.98 Tm (We do use a knowledge layer: texts and examples with which we ground a model so the answer fits SocialNow.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 462.58 Tm (That layer contains no customer data.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 444.78 Tm (Keys you enter for Odoo, Meta, Google or your social channels never go to a model.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 422.98 Tm (Disclosure of AI content) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 408.33 Tm (Article 50 of the AI Act \(Regulation \(EU\) 2024/1689\) requires those who create synthetic content to disclose it.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 393.93 Tm (We implement that as follows.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 376.13 Tm (In the OS it is always visible that a post was created by a model: the Studio shows it while creating, and a post) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 361.73 Tm (carries that origin with it in your media.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 343.93 Tm (Images and film created with a model carry the provenance data the provider attaches, including C2PA data) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 329.53 Tm (where the model supplies it. We do not strip it.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 311.73 Tm (If you publish a post on a channel with its own AI label, such as Meta or TikTok, setting that label is up to you. We) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 297.33 Tm (cannot enforce it for you, and we do not quietly switch it off.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 275.53 Tm (What AI in the OS does not do) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 260.88 Tm (Nothing is published on your behalf without you or a team member with write rights clicking on it. A model) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 246.48 Tm (proposes; a person decides.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 228.68 Tm (No decision is taken about a person that produces legal effects or similarly significantly affects them. There is no) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 214.28 Tm (automated decision-making within the meaning of Article 22 GDPR.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 196.48 Tm (There is no scoring, ranking or profiling on characteristics of people beyond what you record in your own CRM.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 178.68 Tm (One client's data is never used to produce an answer for another client. A workspace is a boundary, for the) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 164.28 Tm (model too.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 142.48 Tm (What a model can get wrong) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 127.83 Tm (Models sometimes invent something that looks right. They mix up names and numbers, they fill an empty space,) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 113.43 Tm (and they are just as confident when they are wrong.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 95.63 Tm (So: check every text and every figure before you publish, certainly for prices, claims, names and commitments.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 81.23 Tm (The OS does not put an amount or a promise into a post that it did not take from your source, but a model asked) Tj ET
+0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (AI statement \267 SocialNow \267 socialnow.nl/ai) Tj ET
+BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (2 / 3) Tj ET 0 0 0 rg
+endstream
+endobj
+3 0 obj
+<< /Length 1841 >>
+stream
+BT /F1 9.6 Tf 1 0 0 1 56.69 779.53 Tm (for a text may still add a sentence.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 761.73 Tm (Responsibility for what finally goes out under your name lies with you. That is also stated in the terms of service.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 739.93 Tm (Copyright and image rights) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 725.28 Tm (Images created with a model on your brief may be used as agreed in the terms of service. The legal position of AI) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 710.88 Tm (imagery is in motion; we give no guarantee that copyright subsists in such imagery, and therefore none that you) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 696.48 Tm (can stop others from making something similar.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 678.68 Tm (If you supply your own images, for example photos of your team or products, you declare that you are allowed to) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 664.28 Tm (use them and that the people shown have consented. We use your images only for your own posts.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 646.48 Tm (Do not ask a model to reproduce the work or the face of an existing person or brand. That is an infringement,) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 632.08 Tm (even when a model simply does it.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 610.28 Tm (Questions and objection) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 595.63 Tm (If you want to know which model produced a particular post, or you want a certain kind of processing to stop:) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 581.23 Tm (privacy@socialnow.nl. We can switch features off per workspace.) Tj ET
+0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (AI statement \267 SocialNow \267 socialnow.nl/ai) Tj ET
+BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (3 / 3) Tj ET 0 0 0 rg
+endstream
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 1 0 R >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 2 0 R >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 3 0 R >>
+endobj
+9 0 obj
+<< /Type /Pages /Kids [6 0 R 7 0 R 8 0 R] /Count 3 >>
+endobj
+10 0 obj
+<< /Title (AI statement - SocialNow) /Author (SocialNow) /Producer (SocialNow) >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 9 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000015 00000 n 
+0000001182 00000 n 
+0000006688 00000 n 
+0000008581 00000 n 
+0000008678 00000 n 
+0000008780 00000 n 
+0000008922 00000 n 
+0000009064 00000 n 
+0000009206 00000 n 
+0000009275 00000 n 
+0000009373 00000 n 
+trailer
+<< /Size 12 /Root 11 0 R /Info 10 0 R >>
+startxref
+9423
+%%EOF

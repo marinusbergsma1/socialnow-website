@@ -8,7 +8,7 @@ import { LEGAL_VERSION } from "../components/legal";
 // privacybeleid. Onthouden in de browser per versie van de tekst; een nieuwe versie vraagt opnieuw.
 // Het land bepaalt de taal van de site én reist mee naar het OS (cookies sn-taal en sn-land op
 // .socialnow.nl), zodat het aanmeldformulier, de welkomstboodschap en Milo in de juiste taal staan.
-// Niet op de voorwaarden- en privacypagina zelf: daar leest iemand eerst.
+// Niet op een juridische pagina zelf: daar leest iemand eerst.
 //
 // TEKSTEN: alles wat een bezoeker leest staat hieronder per taal; pas het hier aan.
 const SLEUTEL = "sn-akkoord";
@@ -92,7 +92,17 @@ export default function ConsentPopup() {
   const [fout, setFout] = useState("");
   const [bezig, setBezig] = useState(false);
   useEffect(() => { setOpen(!bewaard()); setLand(landUitBrowser()); }, []);
-  const leest = location.pathname === "/voorwaarden" || location.pathname === "/privacy";
+  // 19 september 2026: de juridische laag is van twee naar zeven documenten gegaan. Op al die
+  // pagina's blijft de pop-up weg. Niet alleen om te lezen: artikel 12 AVG vraagt dat een
+  // privacyverklaring makkelijk toegankelijk is, en een scherm dat eerst om akkoord vraagt
+  // voordat je de verklaring mag lezen waar je akkoord op zou geven, is dat niet.
+  const JURIDISCH = ["/voorwaarden", "/privacy", "/juridisch", "/verwerkersovereenkomst", "/beveiliging", "/cookies", "/ai", "/gebruik"];
+  // De slotslash hoort er hier af. De bouwstap maakt van elke route een map met een index.html,
+  // dus een bezoeker landt op /privacy/ en niet op /privacy. De oude controle vergeleek op de
+  // vorm zonder slash en sloeg dus nooit aan: de pop-up stond ook over het privacybeleid heen.
+  // Dat is precies het scherm waar hij niet hoort, want het akkoord verwijst ernaar.
+  const pad = (location.pathname.replace(/^\/(nl|de|fr|it|es)(?=\/|$)/, "").replace(/\/+$/, "")) || "/";
+  const leest = JURIDISCH.includes(pad);
   if (!open || leest) return null;
   const gekozen = LANDEN.find(l => l.code === land) || LANDEN[0];
   const s = TEKST[language] || TEKST.en;

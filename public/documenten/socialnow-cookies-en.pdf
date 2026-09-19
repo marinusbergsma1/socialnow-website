@@ -1,0 +1,161 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Length 1065 >>
+stream
+0.04 0.48 0.22 rg
+BT /F2 10 Tf 1 0 0 1 56.69 705.83 Tm (SOCIALNOW) Tj ET
+0 0 0 rg
+BT /F2 27 Tf 1 0 0 1 56.69 660.47 Tm (Cookie statement) Tj ET
+0.35 0.35 0.35 rg
+BT /F1 11 Tf 1 0 0 1 56.69 607.56 Tm (What we store in your browser, why, for how long, and where you switch it off. Socialnow.nl sets) Tj ET
+0 0 0 rg
+0.35 0.35 0.35 rg
+BT /F1 11 Tf 1 0 0 1 56.69 591.06 Tm (no tracking cookies and uses no ad networks. In SocialNow OS we measure only if you allow it) Tj ET
+0 0 0 rg
+0.35 0.35 0.35 rg
+BT /F1 11 Tf 1 0 0 1 56.69 574.56 Tm (yourself.) Tj ET
+0 0 0 rg
+0.85 0.85 0.85 RG 0.6 w 56.69291338582678 130.39 m 538.58 130.39 l S 0 0 0 RG
+BT /F2 8.6 Tf 1 0 0 1 56.69 124.39 Tm (Last updated: 19 September 2026) Tj ET
+0.35 0.35 0.35 rg
+BT /F1 8.4 Tf 1 0 0 1 56.69 109.99 Tm (The Dutch text is the binding version. The current version is always at socialnow.nl/cookies) Tj ET
+0 0 0 rg
+0.35 0.35 0.35 rg
+BT /F1 8.4 Tf 1 0 0 1 56.69 95.89 Tm (SocialNow \267 Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands \267 CoC 90877179 \267 privacy@socialnow.nl) Tj ET
+0 0 0 rg
+endstream
+endobj
+2 0 obj
+<< /Length 6052 >>
+stream
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 775.53 Tm (In short) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 760.88 Tm (Socialnow.nl only holds what is needed to make the site work and to remember what you chose. Under Article) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 746.48 Tm (11.7a\(3\) of the Dutch Telecommunications Act no consent is required for that, because without it the site does) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 732.08 Tm (not work or forgets your choice on every click.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 714.28 Tm (In SocialNow OS there is one further thing that does require consent: measuring use with PostHog. It is off by) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 699.88 Tm (default. If you do not consent, PostHog is not loaded; no script from that party is on the page and nothing is sent) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 685.48 Tm (to it.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 667.68 Tm (We do not make session recordings. They were disabled on the PostHog side and they stay that way.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 645.88 Tm (What is a cookie, and what else counts) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 631.23 Tm (A cookie is a small text file a website places in your browser and can read again on a later visit. The same rules) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 616.83 Tm (cover localStorage and sessionStorage: different techniques, the same question, namely whether something is) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 602.43 Tm (placed on or read from your device.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 584.63 Tm (That is why they are listed together below, with the technique named.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 562.83 Tm (On socialnow.nl) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 548.18 Tm (Necessary, no consent required:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 530.38 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 530.38 Tm (sn-akkoord \(localStorage, stays until you clear your browser storage\): remembers that you have seen the) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 515.98 Tm (welcome screen with the terms, per version of that text. A new version asks again.) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 500.38 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 500.38 Tm (sn-taal \(cookie on .socialnow.nl, one year\): the language you chose, so the site and the OS are in the same) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 485.98 Tm (language.) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 470.38 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 470.38 Tm (sn-land \(cookie on .socialnow.nl, one year\): the country you chose, from which we derive the language and) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 455.98 Tm (the right contact details.) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 440.38 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 440.38 Tm (sn-meten \(cookie on .socialnow.nl, one year\): your choice about measurement, yes or no. This cookie is itself) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 425.98 Tm (necessary, because without it we do not know that you said no.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 408.18 Tm (There is no Google Analytics, no Meta pixel, no LinkedIn Insight Tag and no advertising cookie on socialnow.nl.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 393.78 Tm (Should that ever change, a consent request appears here first and this statement is updated before anything) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 379.38 Tm (loads.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 357.58 Tm (In SocialNow OS) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 342.93 Tm (Necessary, no consent required:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 325.13 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 325.13 Tm (the session cookie of your sign-in: keeps you signed in. Without it you cannot use the OS.) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 309.53 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 309.53 Tm (preferences in localStorage: which tab you had open, which column you chose, a draft you have not sent.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 295.13 Tm (These stay in your browser and never reach us.) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 279.53 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 279.53 Tm (the service worker and its cache: keeps the OS fast and lets it work on a patchy connection.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 261.73 Tm (Only with your consent:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 243.93 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 243.93 Tm (PostHog \(EU data centre Frankfurt, cookies ph_*, up to one year\): which parts of the OS are used, which) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 229.53 Tm (buttons are clicked and which pages are visited, linked to your e-mail address and your workspace, in order to) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 215.13 Tm (improve the OS. Without consent PostHog is not loaded.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 197.33 Tm (You change your choice at any time: in the OS under Account, or through the question at the bottom of the) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 182.93 Tm (screen. Set it to no and sending stops immediately, and whatever PostHog placed in your browser is removed.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 161.13 Tm (Third-party cookies we do not set ourselves) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 146.48 Tm (If you connect your own channels in the OS - Meta, Google, your social accounts - that runs through those) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 132.08 Tm (parties' own sign-in screens. On such a screen their cookies and their statement apply. We have no influence) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 117.68 Tm (there and set nothing of our own.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 99.88 Tm (If a website we build for you does carry a pixel or an analytics script, you are the controller for it and that website) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 85.48 Tm (needs its own cookie statement and its own consent request. We help you set that up; the choice to place such a) Tj ET
+0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Cookie statement \267 SocialNow \267 socialnow.nl/cookies) Tj ET
+BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (2 / 3) Tj ET 0 0 0 rg
+endstream
+endobj
+3 0 obj
+<< /Length 1358 >>
+stream
+BT /F1 9.6 Tf 1 0 0 1 56.69 779.53 Tm (script is yours.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 757.73 Tm (Switching off in your browser) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 743.08 Tm (Besides our own control, you can always block or delete cookies in your browser. In Chrome, Safari, Firefox and) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 728.68 Tm (Edge this sits under settings, privacy. If you block everything, signing in to the OS no longer works, because it) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 714.28 Tm (relies on the session cookie.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 696.48 Tm (We treat a Do Not Track or Global Privacy Control signal from your browser as a no to the question about) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 682.08 Tm (measurement.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 660.28 Tm (Questions) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 645.63 Tm (If something in this list is wrong, or you see something in your browser that by our own account should not be) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 631.23 Tm (there: privacy@socialnow.nl. We want to know, because a cookie statement that is wrong is worse than none.) Tj ET
+0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Cookie statement \267 SocialNow \267 socialnow.nl/cookies) Tj ET
+BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (3 / 3) Tj ET 0 0 0 rg
+endstream
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 1 0 R >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 2 0 R >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 3 0 R >>
+endobj
+9 0 obj
+<< /Type /Pages /Kids [6 0 R 7 0 R 8 0 R] /Count 3 >>
+endobj
+10 0 obj
+<< /Title (Cookie statement - SocialNow) /Author (SocialNow) /Producer (SocialNow) >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 9 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000015 00000 n 
+0000001132 00000 n 
+0000007236 00000 n 
+0000008646 00000 n 
+0000008743 00000 n 
+0000008845 00000 n 
+0000008987 00000 n 
+0000009129 00000 n 
+0000009271 00000 n 
+0000009340 00000 n 
+0000009442 00000 n 
+trailer
+<< /Size 12 /Root 11 0 R /Info 10 0 R >>
+startxref
+9492
+%%EOF

@@ -23,3 +23,7 @@ dist-proposal
 *.njsproj
 *.sln
 *.sw?
+
+# exFAT op de WORK-schijf maakt bij elk bestand een ._schaduwbestand. Die horen nergens.
+._*
+**/._*

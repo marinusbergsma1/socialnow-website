@@ -96,3 +96,16 @@ export const privacy: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
   en: privacyEn,
   ...vertaald.privacy,
 };
+
+// 19 september 2026: de juridische laag is uit één artikel in het privacybeleid uitgegroeid tot
+// zes documenten. Ze staan hier bij elkaar zodat de hubpagina, de voettekst en het pdf-script
+// dezelfde lijst lezen en er nooit een document tussenuit valt.
+//
+// Het pad is tegelijk de bestandsnaam van de pdf in public/documenten.
+export type LegalDocument = {
+  slug: string;
+  path: string;
+  doc: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: LegalDoc };
+  /** Eén regel die zegt wanneer je dit document nodig hebt, per taal. */
+  waarvoor: Partial<Record<Language, string>> & { nl: string; en: string };
+};

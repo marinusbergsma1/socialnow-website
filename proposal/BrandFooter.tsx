@@ -79,7 +79,10 @@ export default function BrandFooter() {
         </div>
         <div className="h-footer-company">
           <p>SocialNow · Software, creatie en marketing. Amsterdam · KVK 90877179.</p>
-          <p>Genoemde prijzen zijn exclusief btw. Onze <Link to="/voorwaarden">algemene voorwaarden</Link> en <Link to="/privacy">privacyverklaring</Link> zijn hier te vinden.</p>
+          {/* 19 september 2026: er zijn zeven juridische documenten in plaats van twee. Ze staan
+              bij elkaar op /juridisch; twee losse links in de voettekst suggereerden dat er
+              niet meer was, en juist de verwerkersovereenkomst is degene waar klanten om vragen. */}
+          <p>Genoemde prijzen zijn exclusief btw. Onze <Link to="/voorwaarden">algemene voorwaarden</Link>, <Link to="/privacy">privacyverklaring</Link> en <Link to="/verwerkersovereenkomst">verwerkersovereenkomst</Link> staan met alle andere documenten op <Link to="/juridisch">juridisch en compliance</Link>.</p>
         </div>
         <div className="h-footer-end">
           <span>
@@ -87,6 +90,8 @@ export default function BrandFooter() {
           </span>
           <Link to="/voorwaarden">Algemene voorwaarden</Link>
           <Link to="/privacy">Privacy</Link>
+          <Link to="/cookies">Cookies</Link>
+          <Link to="/juridisch">Juridisch</Link>
           <span>KVK 90877179 · Sinds 2021</span>
         </div>
 
