@@ -149,7 +149,7 @@ BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (3 / 6) Tj ET 0 0 0 rg
 endstream
 endobj
 4 0 obj
-<< /Length 6083 >>
+<< /Length 6038 >>
 stream
 BT /F1 9.6 Tf 1 0 0 1 56.69 779.53 Tm (cycle, at the latest after ninety days. While a record is still in a backup it is no longer used and no longer shown.) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 761.73 Tm (What the law requires us to keep, we keep. In practice that is the invoice administration, seven years under Dutch) Tj ET
@@ -170,167 +170,169 @@ BT /F1 9.6 Tf 1 0 0 1 56.69 571.08 Tm (evidence.) Tj ET
 0.04 0.48 0.22 rg
 BT /F2 10.6 Tf 1 0 0 1 56.69 549.28 Tm (10. Transfers outside the EEA) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 534.63 Tm (We prefer to store and process your data within the European Economic Area. For most sub-processors in Annex) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 520.23 Tm (C we have explicitly chosen a European region.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 502.43 Tm (Where a transfer to a third country is unavoidable - which is the case for a number of US providers of models) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 488.03 Tm (and infrastructure - we do so only on the basis of a valid mechanism under Chapter V GDPR: an adequacy) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 473.63 Tm (decision of the European Commission, or the standard contractual clauses \(Implementing Decision \(EU\)) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 459.23 Tm (2021/914\), supplemented by an assessment of the circumstances in that country and by additional measures) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 444.83 Tm (where needed, such as encryption in transit and at rest and keeping what is sent as small as possible.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 427.03 Tm (Annex C states, per sub-processor, where the data sits and which mechanism applies. If that changes, we) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 412.63 Tm (update the annex in line with clause 5.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 534.63 Tm (We prefer to store and process your data within the European Economic Area. Regions differ by service.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 520.23 Tm (PostHog uses the EU region; the current Vercel app functions run in the United States. Our service is therefore) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 505.83 Tm (not EU-only.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 488.03 Tm (Where a transfer to a third country is unavoidable - which is the case for a number of US providers of models) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 473.63 Tm (and infrastructure - we do so only on the basis of a valid mechanism under Chapter V GDPR: an adequacy) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 459.23 Tm (decision of the European Commission, or the standard contractual clauses \(Implementing Decision \(EU\)) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 444.83 Tm (2021/914\), supplemented by an assessment of the circumstances in that country and by additional measures) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 430.43 Tm (where needed, such as encryption in transit and at rest and keeping what is sent as small as possible.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 412.63 Tm (Annex C states, per sub-processor, where the data sits and which mechanism applies. If that changes, we) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 398.23 Tm (update the annex in line with clause 5.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 390.83 Tm (11. Liability) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 376.43 Tm (11. Liability) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 376.18 Tm (The liability regime of the terms of service applies here too, with one exception: that limitation does not apply to) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 361.78 Tm (fines and claims arising directly from our intent or wilful recklessness, and not where the law prohibits a limitation.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 343.98 Tm (Article 82 GDPR continues to apply in full between us and data subjects. How we bear liability between ourselves) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 329.58 Tm (is determined in proportion to each party's share in the damage.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 361.78 Tm (The liability regime of the terms of service applies here too, with one exception: that limitation does not apply to) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 347.38 Tm (fines and claims arising directly from our intent or wilful recklessness, and not where the law prohibits a limitation.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 329.58 Tm (Article 82 GDPR continues to apply in full between us and data subjects. How we bear liability between ourselves) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 315.18 Tm (is determined in proportion to each party's share in the damage.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 307.78 Tm (12. Final provisions) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 293.38 Tm (12. Final provisions) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 293.13 Tm (Dutch law applies to this agreement. Disputes are submitted to the competent court in the district of our place of) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 278.73 Tm (business.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 260.93 Tm (If we amend this agreement we announce it at least thirty days in advance by e-mail and publish the new version) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 246.53 Tm (on socialnow.nl/verwerkersovereenkomst. If the change is to your detriment and you do not accept it, you may) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 232.13 Tm (terminate within those thirty days against refund of the prepaid portion.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 214.33 Tm (Questions about this agreement, a data breach or a data subject request: privacy@socialnow.nl.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 278.73 Tm (Dutch law applies to this agreement. Disputes are submitted to the competent court in the district of our place of) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 264.33 Tm (business.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 246.53 Tm (If we amend this agreement we announce it at least thirty days in advance by e-mail and publish the new version) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 232.13 Tm (on socialnow.nl/verwerkersovereenkomst. If the change is to your detriment and you do not accept it, you may) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 217.73 Tm (terminate within those thirty days against refund of the prepaid portion.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 199.93 Tm (Questions about this agreement, a data breach or a data subject request: privacy@socialnow.nl.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 192.53 Tm (Annex A: data and data subjects) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 178.13 Tm (Annex A: data and data subjects) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 177.88 Tm (Categories of data subjects whose data we process on your behalf:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 160.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 160.08 Tm (your team members and the users of your workspace) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 144.48 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 144.48 Tm (your customers, leads and contacts, as held in your Odoo or in the CRM) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 128.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 128.88 Tm (people who respond to your posts, ads or forms) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 113.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 113.28 Tm (visitors to the websites we build or manage for you, insofar as you collect data there) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 95.48 Tm (Types of personal data:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 77.68 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 77.68 Tm (name, role, company, e-mail address, telephone number and address) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 163.48 Tm (Categories of data subjects whose data we process on your behalf:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 145.68 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 145.68 Tm (your team members and the users of your workspace) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 130.08 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 130.08 Tm (your customers, leads and contacts, as held in your Odoo or in the CRM) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 114.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 114.48 Tm (people who respond to your posts, ads or forms) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 98.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 98.88 Tm (visitors to the websites we build or manage for you, insofar as you collect data there) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 81.08 Tm (Types of personal data:) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Data Processing Agreement \267 SocialNow \267 socialnow.nl/verwerkersovereenkomst) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (4 / 6) Tj ET 0 0 0 rg
 endstream
 endobj
 5 0 obj
-<< /Length 6442 >>
+<< /Length 6604 >>
 stream
 BT /F2 9.6 Tf 1 0 0 1 61.69 779.53 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 779.53 Tm (correspondence: messages, replies, e-mails and call notes you put into the OS or receive there) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 779.53 Tm (name, role, company, e-mail address, telephone number and address) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 763.93 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 763.93 Tm (commercial data: quotes, orders, invoices, amounts and statuses from your Odoo) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 763.93 Tm (correspondence: messages, replies, e-mails and call notes you put into the OS or receive there) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 748.33 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 748.33 Tm (account data: login name, role, language, timestamps of use) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 748.33 Tm (commercial data: quotes, orders, invoices, amounts and statuses from your Odoo) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 732.73 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 732.73 Tm (technical data: IP address, device and browser, insofar as recorded with an action) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 732.73 Tm (account data: login name, role, language, timestamps of use) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 717.13 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 717.13 Tm (images and text you supply or have created in which people may be recognisable) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 699.33 Tm (Special categories of personal data within the meaning of Article 9 GDPR and criminal conviction data within the) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 684.93 Tm (meaning of Article 10 do not belong in SocialNow OS. If you put them in anyway, you do so at your own) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 670.53 Tm (responsibility and outside the intent of this agreement; we take no additional measures for such data because we) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 656.13 Tm (do not expect it to be there.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 717.13 Tm (technical data: IP address, device and browser, insofar as recorded with an action) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 701.53 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 701.53 Tm (images and text you supply or have created in which people may be recognisable) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 683.73 Tm (Special categories of personal data within the meaning of Article 9 GDPR and criminal conviction data within the) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 669.33 Tm (meaning of Article 10 do not belong in SocialNow OS. If you put them in anyway, you do so at your own) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 654.93 Tm (responsibility and outside the intent of this agreement; we take no additional measures for such data because we) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 640.53 Tm (do not expect it to be there.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 634.33 Tm (Annex B: security measures) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 618.73 Tm (Annex B: security measures) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 619.68 Tm (Access and identity:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 601.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 601.88 Tm (signing in to your account runs through an identity provider with two-step verification; SocialNow administrator) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 587.48 Tm (access runs through a passkey and a time-based code) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 571.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 571.88 Tm (administrator access to a client environment runs through a token valid for two minutes that opens that one) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 557.48 Tm (system only; the token itself is never logged, its issuance is) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 541.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 541.88 Tm (rights are granted per workspace and withdrawn on departure) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 524.08 Tm (Encryption and keys:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 506.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 506.28 Tm (all traffic runs over TLS; HTTP traffic is redirected to HTTPS) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 604.08 Tm (Access and identity:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 586.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 586.28 Tm (signing in to your account runs through an identity provider with two-step verification; SocialNow administrator) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 571.88 Tm (access runs through a passkey and a time-based code) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 556.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 556.28 Tm (administrator access to a client environment runs through a token valid for two minutes that opens that one) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 541.88 Tm (system only; the token itself is never logged, its issuance is) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 526.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 526.28 Tm (rights are granted per workspace and withdrawn on departure) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 508.48 Tm (Encryption and keys:) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 490.68 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 490.68 Tm (data is stored encrypted at our providers) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 490.68 Tm (all traffic runs over TLS; HTTP traffic is redirected to HTTPS) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 475.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 475.08 Tm (keys you enter for Odoo, Meta, Google or your social channels are stored encrypted, never shown back and) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 460.68 Tm (never written to log lines) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 445.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 445.08 Tm (secrets live only in the hosting provider's environment, not in source code) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 427.28 Tm (Separation and shielding:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 409.48 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 409.48 Tm (every client has its own workspace; each request is checked against workspace and role) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 475.08 Tm (data is stored encrypted at our providers) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 459.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 459.48 Tm (keys you enter for Odoo, Meta, Google or your social channels are stored encrypted, never shown back and) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 445.08 Tm (never written to log lines) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 429.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 429.48 Tm (secrets live only in the hosting provider's environment, not in source code) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 411.68 Tm (Separation and shielding:) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 393.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 393.88 Tm (clients with their own system run in their own environment with their own secrets, separate from the others) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 393.88 Tm (every client has its own workspace; each request is checked against workspace and role) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 378.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 378.28 Tm (the administration environment is not publicly reachable and is set to noindex) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 378.28 Tm (clients with their own system run in their own environment with their own secrets, separate from the others) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 362.68 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 362.68 Tm (a strict Content Security Policy limits which scripts, styles and connections a page may use) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 344.88 Tm (Logging and detection:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 327.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 327.08 Tm (consequential actions - granting access, opening a system, changing a key - are recorded in an audit trail) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 312.68 Tm (with who, what and when) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 297.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 297.08 Tm (errors and warnings are collected centrally; personal data is not written into them) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 362.68 Tm (the administration environment is not publicly reachable and is set to noindex) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 347.08 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 347.08 Tm (a strict Content Security Policy limits which scripts, styles and connections a page may use) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 329.28 Tm (Logging and detection:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 311.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 311.48 Tm (consequential actions - granting access, opening a system, changing a key - are recorded in an audit trail) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 297.08 Tm (with who, what and when) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 281.48 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 281.48 Tm (the reachability and login protection of every client system is checked automatically and continuously) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 263.68 Tm (Continuity:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 245.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 245.88 Tm (storage and recovery follow the capabilities of each provider; frequency, retention and restorability are) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 231.48 Tm (documented per data source) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 215.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 215.88 Tm (code is under version control; every deployment traces back to a commit and can be rolled back) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 281.48 Tm (errors and warnings are collected centrally; personal data is not written into them) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 265.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 265.88 Tm (the reachability and login protection of every client system is checked automatically and continuously) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 248.08 Tm (Continuity:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 230.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 230.28 Tm (storage and recovery follow the capabilities of each provider; frequency, retention and restorability are) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 215.88 Tm (documented per data source) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 200.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 200.28 Tm (an automated test suite runs before deployment; a failing suite means no deployment) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 182.48 Tm (Organisation:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 164.68 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 164.68 Tm (the group with access is small and known, all under confidentiality) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 200.28 Tm (code is under version control; every deployment traces back to a commit and can be rolled back) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 184.68 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 184.68 Tm (an automated test suite runs before deployment; a failing suite means no deployment) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 166.88 Tm (Organisation:) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 149.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 149.08 Tm (new providers are assessed on where they store data and on what terms) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 149.08 Tm (the group with access is small and known, all under confidentiality) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 133.48 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 133.48 Tm (there is a fixed route for reporting vulnerabilities: security@socialnow.nl) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 115.68 Tm (This list describes what is in place on 19 September 2026. We replace a measure only with one that is at least as) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 101.28 Tm (protective.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 133.48 Tm (new providers are assessed on where they store data and on what terms) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 117.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 117.88 Tm (there is a fixed route for reporting vulnerabilities: security@socialnow.nl) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 100.08 Tm (This list describes what is in place on 19 September 2026. We replace a measure only with one that is at least as) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 85.68 Tm (protective.) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Data Processing Agreement \267 SocialNow \267 socialnow.nl/verwerkersovereenkomst) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (5 / 6) Tj ET 0 0 0 rg
 endstream
 endobj
 6 0 obj
-<< /Length 3362 >>
+<< /Length 3429 >>
 stream
 0.04 0.48 0.22 rg
 BT /F2 10.6 Tf 1 0 0 1 56.69 775.53 Tm (Annex C: sub-processors) Tj ET
 0 0 0 rg
 BT /F1 9.6 Tf 1 0 0 1 56.69 760.88 Tm (Infrastructure and storage:) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 743.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 743.08 Tm (Vercel Inc. \(United States, execution in the EU region\): hosting of the OS and the websites) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 727.48 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 727.48 Tm (Google Ireland Limited / Google LLC: Firebase for storage of workspaces and accounts) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 711.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 711.88 Tm (Hostinger International Ltd \(Lithuania\): hosting of websites, domains and e-mail) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 694.08 Tm (Identity and communication:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 676.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 676.28 Tm (Google Ireland Limited: signing in with a Google account) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 660.68 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 660.68 Tm (Hostinger International Ltd: sending e-mail from the OS, including sign-in codes) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 642.88 Tm (Measurement:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 625.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 625.08 Tm (PostHog Inc., EU data centre in Frankfurt: measuring use of the OS, only after the user's consent, without) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 610.68 Tm (session recordings) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 592.88 Tm (Models for text and image, only for what you have created:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 575.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 575.08 Tm (Google Ireland Limited / Google LLC: Gemini for text and image) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 559.48 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 559.48 Tm (OpenAI Ireland Ltd: models for text and image) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 543.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 543.88 Tm (Anthropic PBC \(United States\): models for text) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 528.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 528.28 Tm (Higgsfield: image and film) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 512.68 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 512.68 Tm (With all of these parties it is contractually excluded that your input is used to train their models.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 494.88 Tm (Publishing to social channels:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 477.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 477.08 Tm (Zernio: connecting to and publishing on your own social channels, with the key you attach yourself) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 459.28 Tm (We have a data processing agreement or equivalent terms with each of these parties. For parties outside the) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 444.88 Tm (EEA, transfers rest on the European Commission's standard contractual clauses and, where applicable, the) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 430.48 Tm (EU-US Data Privacy Framework.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 412.68 Tm (This list is valid on 19 September 2026. Changes are announced thirty days in advance in line with clause 5.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 743.08 Tm (Vercel Inc. \(United States; region varies by service, app functions currently US\): hosting of the OS and the) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 728.68 Tm (API) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 713.08 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 713.08 Tm (Google Ireland Limited / Google LLC: Firebase for storage of workspaces and accounts) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 697.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 697.48 Tm (Hostinger International Ltd \(Lithuania\): hosting of websites, domains and e-mail) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 679.68 Tm (Identity and communication:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 661.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 661.88 Tm (Google Ireland Limited: signing in with a Google account) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 646.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 646.28 Tm (Hostinger International Ltd: sending e-mail from the OS, including sign-in codes) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 628.48 Tm (Measurement:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 610.68 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 610.68 Tm (PostHog Inc., EU data centre in Frankfurt: measuring use of the OS, only after the user's consent, without) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 596.28 Tm (session recordings) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 578.48 Tm (Models for text and image, only for what you have created:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 560.68 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 560.68 Tm (Google Ireland Limited / Google LLC: Gemini for text and image) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 545.08 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 545.08 Tm (OpenAI Ireland Ltd: models for text and image) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 529.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 529.48 Tm (Anthropic PBC \(United States\): models for text) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 513.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 513.88 Tm (Higgsfield: image and film) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 498.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 498.28 Tm (With all of these parties it is contractually excluded that your input is used to train their models.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 480.48 Tm (Publishing to social channels:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 462.68 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 462.68 Tm (Zernio: connecting to and publishing on your own social channels, with the key you attach yourself) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 444.88 Tm (We have a data processing agreement or equivalent terms with each of these parties. For parties outside the) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 430.48 Tm (EEA, transfers rest on the European Commission's standard contractual clauses and, where applicable, the) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 416.08 Tm (EU-US Data Privacy Framework.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 398.28 Tm (This list is valid on 19 September 2026. Changes are announced thirty days in advance in line with clause 5.) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Data Processing Agreement \267 SocialNow \267 socialnow.nl/verwerkersovereenkomst) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (6 / 6) Tj ET 0 0 0 rg
 endstream
@@ -375,21 +377,21 @@ xref
 0000001324 00000 n 
 0000007084 00000 n 
 0000013275 00000 n 
-0000019410 00000 n 
-0000025904 00000 n 
-0000029318 00000 n 
-0000029415 00000 n 
-0000029517 00000 n 
-0000029660 00000 n 
-0000029804 00000 n 
-0000029948 00000 n 
-0000030092 00000 n 
-0000030236 00000 n 
-0000030380 00000 n 
-0000030473 00000 n 
-0000030584 00000 n 
+0000019365 00000 n 
+0000026021 00000 n 
+0000029502 00000 n 
+0000029599 00000 n 
+0000029701 00000 n 
+0000029844 00000 n 
+0000029988 00000 n 
+0000030132 00000 n 
+0000030276 00000 n 
+0000030420 00000 n 
+0000030564 00000 n 
+0000030657 00000 n 
+0000030768 00000 n 
 trailer
 << /Size 18 /Root 17 0 R /Info 16 0 R >>
 startxref
-30635
+30819
 %%EOF
