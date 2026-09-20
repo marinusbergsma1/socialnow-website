@@ -1,7 +1,7 @@
 %PDF-1.4
 %‚„œ”
 1 0 obj
-<< /Length 1260 >>
+<< /Length 1257 >>
 stream
 0.04 0.48 0.22 rg
 BT /F2 10 Tf 1 0 0 1 56.69 705.83 Tm (SOCIALNOW) Tj ET
@@ -25,7 +25,7 @@ BT /F2 8.6 Tf 1 0 0 1 56.69 124.39 Tm (Last updated: 19 September 2026) Tj ET
 BT /F1 8.4 Tf 1 0 0 1 56.69 109.99 Tm (The Dutch text is the binding version. The current version is always at socialnow.nl/verwerkersovereenkomst) Tj ET
 0 0 0 rg
 0.35 0.35 0.35 rg
-BT /F1 8.4 Tf 1 0 0 1 56.69 95.89 Tm (SocialNow \267 Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands \267 CoC 90877179 \267 privacy@socialnow.nl) Tj ET
+BT /F1 8.4 Tf 1 0 0 1 56.69 95.89 Tm (SocialNow \267 Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands \267 CoC 90877179 \267 info@socialnow.nl) Tj ET
 0 0 0 rg
 endstream
 endobj
@@ -215,7 +215,7 @@ BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (4 / 6) Tj ET 0 0 0 rg
 endstream
 endobj
 5 0 obj
-<< /Length 6330 >>
+<< /Length 6442 >>
 stream
 BT /F2 9.6 Tf 1 0 0 1 61.69 779.53 Tm (\267) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 70.69 779.53 Tm (correspondence: messages, replies, e-mails and call notes you put into the OS or receive there) Tj ET
@@ -272,20 +272,21 @@ BT /F2 9.6 Tf 1 0 0 1 61.69 281.48 Tm (\267) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 70.69 281.48 Tm (the reachability and login protection of every client system is checked automatically and continuously) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 263.68 Tm (Continuity:) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 245.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 245.88 Tm (data sits with providers with daily backups and restore capability) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 230.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 230.28 Tm (code is under version control; every deployment traces back to a commit and can be rolled back) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 214.68 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 214.68 Tm (an automated test suite runs before deployment; a failing suite means no deployment) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 196.88 Tm (Organisation:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 179.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 179.08 Tm (the group with access is small and known, all under confidentiality) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 163.48 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 163.48 Tm (new providers are assessed on where they store data and on what terms) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 147.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 147.88 Tm (there is a fixed route for reporting vulnerabilities: security@socialnow.nl) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 130.08 Tm (This list describes what is in place on 19 September 2026. We replace a measure only with one that is at least as) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 115.68 Tm (protective.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 245.88 Tm (storage and recovery follow the capabilities of each provider; frequency, retention and restorability are) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 231.48 Tm (documented per data source) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 215.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 215.88 Tm (code is under version control; every deployment traces back to a commit and can be rolled back) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 200.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 200.28 Tm (an automated test suite runs before deployment; a failing suite means no deployment) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 182.48 Tm (Organisation:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 164.68 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 164.68 Tm (the group with access is small and known, all under confidentiality) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 149.08 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 149.08 Tm (new providers are assessed on where they store data and on what terms) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 133.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 133.48 Tm (there is a fixed route for reporting vulnerabilities: security@socialnow.nl) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 115.68 Tm (This list describes what is in place on 19 September 2026. We replace a measure only with one that is at least as) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 101.28 Tm (protective.) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Data Processing Agreement \267 SocialNow \267 socialnow.nl/verwerkersovereenkomst) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (5 / 6) Tj ET 0 0 0 rg
 endstream
@@ -371,24 +372,24 @@ xref
 0 18
 0000000000 65535 f 
 0000000015 00000 n 
-0000001327 00000 n 
-0000007087 00000 n 
-0000013278 00000 n 
-0000019413 00000 n 
-0000025795 00000 n 
-0000029209 00000 n 
-0000029306 00000 n 
-0000029408 00000 n 
-0000029551 00000 n 
-0000029695 00000 n 
-0000029839 00000 n 
-0000029983 00000 n 
-0000030127 00000 n 
-0000030271 00000 n 
-0000030364 00000 n 
-0000030475 00000 n 
+0000001324 00000 n 
+0000007084 00000 n 
+0000013275 00000 n 
+0000019410 00000 n 
+0000025904 00000 n 
+0000029318 00000 n 
+0000029415 00000 n 
+0000029517 00000 n 
+0000029660 00000 n 
+0000029804 00000 n 
+0000029948 00000 n 
+0000030092 00000 n 
+0000030236 00000 n 
+0000030380 00000 n 
+0000030473 00000 n 
+0000030584 00000 n 
 trailer
 << /Size 18 /Root 17 0 R /Info 16 0 R >>
 startxref
-30526
+30635
 %%EOF

@@ -207,7 +207,7 @@ export const dpa: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Lega
             "de bereikbaarheid en de inlogbeveiliging van elk klantsysteem worden doorlopend automatisch gecontroleerd",
           ],
           [
-            "gegevens staan bij leveranciers met dagelijkse back-ups en herstelmogelijkheid",
+            "opslag en herstel verlopen volgens de mogelijkheden van de gebruikte leverancier; frequentie, bewaartermijn en herstelbaarheid worden per gegevensbron vastgelegd",
             "de code staat in versiebeheer; elke publicatie is herleidbaar tot een commit en kan worden teruggedraaid",
             "voor publicatie draait een geautomatiseerde testsuite; een rode suite betekent niet publiceren",
           ],
@@ -436,7 +436,7 @@ export const dpa: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Lega
             "the reachability and login protection of every client system is checked automatically and continuously",
           ],
           [
-            "data sits with providers with daily backups and restore capability",
+            "storage and recovery follow the capabilities of each provider; frequency, retention and restorability are documented per data source",
             "code is under version control; every deployment traces back to a commit and can be rolled back",
             "an automated test suite runs before deployment; a failing suite means no deployment",
           ],

@@ -1,7 +1,7 @@
 %PDF-1.4
 %‚„œ”
 1 0 obj
-<< /Length 1248 >>
+<< /Length 1245 >>
 stream
 0.04 0.48 0.22 rg
 BT /F2 10 Tf 1 0 0 1 56.69 705.83 Tm (SOCIALNOW) Tj ET
@@ -20,17 +20,17 @@ BT /F1 11 Tf 1 0 0 1 56.69 574.56 Tm (account in the OS, and to the customers, c
 BT /F1 11 Tf 1 0 0 1 56.69 558.06 Tm (Dutch version is the binding one.) Tj ET
 0 0 0 rg
 0.85 0.85 0.85 RG 0.6 w 56.69291338582678 130.39 m 538.58 130.39 l S 0 0 0 RG
-BT /F2 8.6 Tf 1 0 0 1 56.69 124.39 Tm (Last updated: 17 September 2026) Tj ET
+BT /F2 8.6 Tf 1 0 0 1 56.69 124.39 Tm (Last updated: 20 September 2026) Tj ET
 0.35 0.35 0.35 rg
 BT /F1 8.4 Tf 1 0 0 1 56.69 109.99 Tm (The Dutch text is the binding version. The current version is always at socialnow.nl/privacy) Tj ET
 0 0 0 rg
 0.35 0.35 0.35 rg
-BT /F1 8.4 Tf 1 0 0 1 56.69 95.89 Tm (SocialNow \267 Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands \267 CoC 90877179 \267 privacy@socialnow.nl) Tj ET
+BT /F1 8.4 Tf 1 0 0 1 56.69 95.89 Tm (SocialNow \267 Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands \267 CoC 90877179 \267 info@socialnow.nl) Tj ET
 0 0 0 rg
 endstream
 endobj
 2 0 obj
-<< /Length 6945 >>
+<< /Length 6909 >>
 stream
 0.04 0.48 0.22 rg
 BT /F2 10.6 Tf 1 0 0 1 56.69 775.53 Tm (1. Who is responsible) Tj ET
@@ -97,278 +97,266 @@ BT /F1 9.6 Tf 1 0 0 1 70.69 199.78 Tm (Invoicing and processing payments: perfor
 BT /F2 9.6 Tf 1 0 0 1 61.69 184.18 Tm (\267) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 70.69 184.18 Tm (Security, preventing abuse and fixing errors: legitimate interest) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 168.58 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 168.58 Tm (Improving our products and services by analysing usage internally \(section 4\): legitimate interest and the) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 154.18 Tm (agreement you give when creating an account) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 168.58 Tm (Optional usage measurement and separate masked session recordings for product improvement \(section 4\):) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 154.18 Tm (consent) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 138.58 Tm (\267) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 70.69 138.58 Tm (Informing you about changes to the OS, the terms or this policy: performance of the contract) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 122.98 Tm (\267) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 70.69 122.98 Tm (Marketing to existing customers about similar services: legitimate interest, always with an opt-out) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 101.18 Tm (4. Internal use to improve the product) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 101.18 Tm (4. Usage measurement, recordings and support) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 86.53 Tm (By creating an account in SocialNow OS you agree that the SocialNow team may view and analyse the data of) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 72.13 Tm (your account and workspace internally. This is a core part of how we build the OS: we look at what people ask,) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 86.53 Tm (Creating an account does not give us blanket permission to use your business content for our own product) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 72.13 Tm (development. Necessary security and support rely on the agreement and our legitimate interest. Administrative) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Privacy Policy \267 SocialNow \267 socialnow.nl/privacy) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (2 / 6) Tj ET 0 0 0 rg
 endstream
 endobj
 3 0 obj
-<< /Length 6126 >>
+<< /Length 6158 >>
 stream
-BT /F1 9.6 Tf 1 0 0 1 56.69 779.53 Tm (where they get stuck and what the tools deliver, and use that to improve the product for everyone.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 761.73 Tm (What we do with it:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 743.93 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 743.93 Tm (Finding and fixing errors) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 728.33 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 728.33 Tm (Deciding which features we build and which we improve) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 712.73 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 712.73 Tm (Tuning the SocialNow models and prompts to what customers actually need, for example by looking at which) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 698.33 Tm (pieces are used and which are discarded) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 682.73 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 682.73 Tm (Producing industry insights in aggregated form that cannot be traced to a person or company) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 664.93 Tm (What we never do:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 647.13 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 647.13 Tm (Selling or renting your data) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 631.53 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 631.53 Tm (Sharing your data with other customers or showing it in someone else's workspace) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 615.93 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 615.93 Tm (Using your data for third-party advertising or for profiling outside the OS) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 600.33 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 600.33 Tm (Using your customer data from Odoo, Meta or Google for SocialNow's own marketing) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 584.73 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 584.73 Tm (Using your data to train third-party models; processing by AI providers happens only to fulfil your request) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 570.33 Tm (\(section 6\)) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 552.53 Tm (Who has access: only SocialNow employees and regular partners who need it for their work, under a duty of) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 538.13 Tm (confidentiality. Access is logged.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 520.33 Tm (Stopping it yourself: delete your account under Account in the OS. That ends the internal use of your data; what) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 505.93 Tm (has already been processed in aggregated, non-identifiable form stays that way.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 779.53 Tm (access is limited to authorised people and is logged.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 761.73 Tm (Optional usage measurement with PostHog in the EU starts only after consent. We collect a pseudonymous) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 747.33 Tm (identifier, a workspace identifier, screen routes and predefined events. Email addresses, free-text searches,) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 732.93 Tm (prompts, customer names and documents are excluded from this measurement. Pseudonymous data remains) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 718.53 Tm (personal data.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 700.73 Tm (Masked session recordings require a separate choice, off by default. Text, inputs and media are masked.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 686.33 Tm (Account, CRM, payment and administration screens are excluded; chat content is blocked. No audio, camera or) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 671.93 Tm (full-device screen is recorded. New recordings are retained for 30 days. Ordinary usage events remain available) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 657.53 Tm (for up to one year on our current PostHog plan, allowing seasonal comparisons.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 639.73 Tm (You can withdraw either choice under Account without losing functionality. This stops new measurements and) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 625.33 Tm (recordings. Withdrawal does not automatically erase existing data; request erasure at info@socialnow.nl. We do) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 610.93 Tm (not sell this data, use it for third-party advertising or share it with other customers.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 593.13 Tm (Using business content for an additional purpose of our own requires a separate assessment and legal basis.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 578.73 Tm (Acceptance of the terms does not replace this.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 484.13 Tm (5. Who helps us \(processors\)) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 556.93 Tm (5. Who helps us \(processors\)) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 469.48 Tm (These parties process data on our behalf, under a data processing agreement or the provider's standard GDPR) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 455.08 Tm (terms:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 437.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 437.28 Tm (Google Firebase \(Google Ireland Ltd\): signing in with Google, e-mail code or sign-in link; account data) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 421.68 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 421.68 Tm (Vercel Inc.: hosting of the OS and the API, and storage of your workspace \(Vercel Blob, EU region where) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 407.28 Tm (possible\)) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 391.68 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 391.68 Tm (PostHog Inc.: usage measurement in the OS, only with your consent \(EU data region\)) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 376.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 376.08 Tm (Hostinger: sending e-mail from info@socialnow.nl, such as sign-in codes, invitations and notifications) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 360.48 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 360.48 Tm (Stripe Payments Europe Ltd: payments for credit; for card details Stripe is an independent controller) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 344.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 344.88 Tm (GitHub Inc.: hosting of socialnow.nl \(GitHub Pages\)) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 329.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 329.28 Tm (AI providers \(section 6\) for creating texts and images at your request) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 542.28 Tm (These parties process data on our behalf, under a data processing agreement or the provider's standard GDPR) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 527.88 Tm (terms:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 510.08 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 510.08 Tm (Google Firebase \(Google Ireland Ltd\): signing in with Google, e-mail code or sign-in link; account data) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 494.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 494.48 Tm (Vercel Inc.: hosting of the OS and the API, and storage of your workspace \(Vercel Blob, EU region where) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 480.08 Tm (possible\)) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 464.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 464.48 Tm (PostHog Inc.: optional usage measurement and separately permitted masked session recordings \(EU data) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 450.08 Tm (region\)) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 434.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 434.48 Tm (Hostinger: sending e-mail from info@socialnow.nl, such as sign-in codes, invitations and notifications) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 418.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 418.88 Tm (Stripe Payments Europe Ltd: payments for credit; for card details Stripe is an independent controller) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 403.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 403.28 Tm (GitHub Inc.: hosting of socialnow.nl \(GitHub Pages\)) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 387.68 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 387.68 Tm (AI providers \(section 6\) for creating texts and images at your request) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 307.48 Tm (6. Artificial intelligence) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 365.88 Tm (6. Artificial intelligence) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 292.83 Tm (The OS creates texts, images and analyses with language and image models. For that we send the data needed) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 278.43 Tm (for your request \(your story, your branding, the relevant figures\) to a model provider. We currently use Google) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 264.03 Tm (\(Gemini, via Google Cloud Vertex AI or the Gemini API\) and, depending on the chosen render option, Higgsfield) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 249.63 Tm (or OpenAI for images.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 231.83 Tm (These providers process the data only to produce the response. We choose contracts and settings under which) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 217.43 Tm (your input is not used to train their models. Model output can contain errors; check what you publish.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 199.63 Tm (Milo, the assistant in the OS, only sees the data of your own workspace and what you share in the conversation) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 185.23 Tm (yourself.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 351.23 Tm (The OS creates texts, images and analyses with language and image models. For that we send the data needed) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 336.83 Tm (for your request \(your story, your branding, the relevant figures\) to a model provider. We currently use Google) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 322.43 Tm (\(Gemini, via Google Cloud Vertex AI or the Gemini API\) and, depending on the chosen render option, Higgsfield) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 308.03 Tm (or OpenAI for images.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 290.23 Tm (These providers process the data only to produce the response. We choose contracts and settings under which) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 275.83 Tm (your input is not used to train their models. Model output can contain errors; check what you publish.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 258.03 Tm (Milo, the assistant in the OS, only sees the data of your own workspace and what you share in the conversation) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 243.63 Tm (yourself.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 163.43 Tm (7. Transfers outside the EU) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 221.83 Tm (7. Transfers outside the EU) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 148.78 Tm (Some providers are based in the United States or process data there \(Vercel, GitHub, Stripe, Google, OpenAI\).) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 134.38 Tm (Transfers rely on the EU-US Data Privacy Framework where the provider is certified, and otherwise on the) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 119.98 Tm (European Commission's standard contractual clauses with additional measures. Where possible we choose) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 105.58 Tm (storage and processing in the EU.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 207.18 Tm (Some providers are based in the United States or process data there \(Vercel, GitHub, Stripe, Google, OpenAI\).) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 192.78 Tm (Transfers rely on the EU-US Data Privacy Framework where the provider is certified, and otherwise on the) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 178.38 Tm (European Commission's standard contractual clauses with additional measures. Where possible we choose) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 163.98 Tm (storage and processing in the EU.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 142.18 Tm (8. Retention) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 127.53 Tm (We keep data no longer than needed:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 109.73 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 109.73 Tm (Contact details of a request without an order: at most two years after the last contact) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 94.13 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 94.13 Tm (Data from the demo sign-up: at most two years, or shorter if you ask us to erase it) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Privacy Policy \267 SocialNow \267 socialnow.nl/privacy) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (3 / 6) Tj ET 0 0 0 rg
 endstream
 endobj
 4 0 obj
-<< /Length 6689 >>
+<< /Length 6706 >>
 stream
+BT /F2 9.6 Tf 1 0 0 1 61.69 779.53 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 779.53 Tm (Account and workspace data: as long as your account exists; after deletion erased from active systems within) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 765.13 Tm (thirty days and from backups within ninety days) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 749.53 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 749.53 Tm (Data from connected sources: only while the connection exists; disconnecting erases the copied data and the) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 735.13 Tm (key) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 719.53 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 719.53 Tm (Chat conversations with Milo and created pieces: as long as your account exists, unless you delete them) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 705.13 Tm (earlier) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 689.53 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 689.53 Tm (Invoices and payment data: seven years \(tax retention duty\)) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 673.93 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 673.93 Tm (Technical logs \(IP address, error messages\): at most thirty days) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 658.33 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 658.33 Tm (Your agreement to the terms: as long as your account exists, plus the statutory limitation period) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 775.53 Tm (8. Retention) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 636.53 Tm (9. Cookies and local storage) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 760.88 Tm (We keep data no longer than needed:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 743.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 743.08 Tm (Contact details of a request without an order: at most two years after the last contact) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 727.48 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 727.48 Tm (Data from the demo sign-up: at most two years, or shorter if you ask us to erase it) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 711.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 711.88 Tm (Account and workspace data: as long as your account exists; after deletion erased from active systems within) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 697.48 Tm (thirty days and from backups within ninety days) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 681.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 681.88 Tm (Data from connected sources: only while the connection exists; disconnecting erases the copied data and the) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 667.48 Tm (key) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 651.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 651.88 Tm (Chat conversations with Milo and created pieces: as long as your account exists, unless you delete them) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 637.48 Tm (earlier) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 621.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 621.88 Tm (Invoices and payment data: seven years \(tax retention duty\)) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 606.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 606.28 Tm (Technical logs \(IP address, error messages\): at most thirty days) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 590.68 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 590.68 Tm (Your agreement to the terms: as long as your account exists, plus the statutory limitation period) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 621.88 Tm (Socialnow.nl sets no tracking cookies and uses no analytics. In your browser \(localStorage\) we only remember) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 607.48 Tm (that you have seen the notice about the terms, and in cookies on socialnow.nl which language and country you) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 593.08 Tm (chose and whether you allowed measurement in the OS.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 575.28 Tm (SocialNow OS uses functional cookies and storage, and measures usage only if you allow it:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 557.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 557.48 Tm (__session: keeps note that you are signed in \(55 minutes, or 30 days if you tick 'keep me signed in'\)) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 541.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 541.88 Tm (sn-taal and sn-land: your language and country choice \(one year\)) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 526.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 526.28 Tm (sn-meten and sn-replay-v1: separate choices for measurement and recording \(180 days in the app\); change) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 511.88 Tm (them under Account) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 496.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 496.28 Tm (Only with your consent: PostHog \(EU\) measures which parts you use, linked to a pseudonym and workspace) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 481.88 Tm (identifier, to improve the OS. Without consent PostHog does not load) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 466.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 466.28 Tm (Firebase storage in your browser for signing in and remembering your sign-in link address) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 450.68 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 450.68 Tm (Local storage for preferences such as your chosen theme, and for drafts not yet saved) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 568.88 Tm (9. Cookies and local storage) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 428.88 Tm (10. Security) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 554.23 Tm (Socialnow.nl sets no tracking cookies and uses no analytics. In your browser \(localStorage\) we only remember) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 539.83 Tm (that you have seen the notice about the terms, and in cookies on socialnow.nl which language and country you) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 525.43 Tm (chose and whether you allowed measurement in the OS.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 507.63 Tm (SocialNow OS uses functional cookies and storage, and measures usage only if you allow it:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 489.83 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 489.83 Tm (__session: keeps note that you are signed in \(55 minutes, or 30 days if you tick 'keep me signed in'\)) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 474.23 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 474.23 Tm (sn-taal and sn-land: your language and country choice \(one year\)) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 458.63 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 458.63 Tm (sn-meten: whether you allowed measurement \(one year\); you change this under Account) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 443.03 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 443.03 Tm (Only with your consent: PostHog \(EU\) measures which parts you use, linked to your e-mail address, to) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 428.63 Tm (improve the OS. Without consent PostHog does not load) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 413.03 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 413.03 Tm (Firebase storage in your browser for signing in and remembering your sign-in link address) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 397.43 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 397.43 Tm (Local storage for preferences such as your chosen theme, and for drafts not yet saved) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 414.23 Tm (We take appropriate technical and organisational measures:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 396.43 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 396.43 Tm (All connections run over https; the API only accepts requests from the app itself) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 380.83 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 380.83 Tm (Keys and tokens of connected sources are stored encrypted and never shown again; only the server can use) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 366.43 Tm (them) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 350.83 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 350.83 Tm (Passwords are managed by Google Firebase and are not readable by us; sign-in codes work once and expire) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 336.43 Tm (after fifteen minutes) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 320.83 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 320.83 Tm (Every workspace is strictly separated; the code that accesses storage can only reach its own workspace) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 305.23 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 305.23 Tm (Rate limiting on sign-in and API requests, and logging of admin actions) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 289.63 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 289.63 Tm (Access by the SocialNow team is limited to what is needed and is logged) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 274.03 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 274.03 Tm (In the event of a data breach that poses a risk we notify the Dutch Data Protection Authority within 72 hours) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 259.63 Tm (and inform those affected) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 375.63 Tm (10. Security) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 237.83 Tm (11. Your rights) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 360.98 Tm (We take appropriate technical and organisational measures:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 343.18 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 343.18 Tm (All connections run over https; the API only accepts requests from the app itself) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 327.58 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 327.58 Tm (Keys and tokens of connected sources are stored encrypted and never shown again; only the server can use) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 313.18 Tm (them) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 297.58 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 297.58 Tm (Passwords are managed by Google Firebase and are not readable by us; sign-in codes work once and expire) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 283.18 Tm (after fifteen minutes) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 267.58 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 267.58 Tm (Every workspace is strictly separated; the code that accesses storage can only reach its own workspace) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 251.98 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 251.98 Tm (Rate limiting on sign-in and API requests, and logging of admin actions) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 236.38 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 236.38 Tm (Access by the SocialNow team is limited to what is needed and is logged) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 220.78 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 220.78 Tm (In the event of a data breach that poses a risk we notify the Dutch Data Protection Authority within 72 hours) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 206.38 Tm (and inform those affected) Tj ET
-0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 184.58 Tm (11. Your rights) Tj ET
-0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 169.93 Tm (Under the GDPR you have the right to:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 152.13 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 152.13 Tm (Access to your data and a copy of it) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 136.53 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 136.53 Tm (Correction of inaccurate data) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 120.93 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 120.93 Tm (Erasure \('right to be forgotten'\)) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 105.33 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 105.33 Tm (Restriction of processing) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 89.73 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 89.73 Tm (Transfer of your data in a common file format \(data portability\)) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 74.13 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 74.13 Tm (Objection to processing based on legitimate interest, including the internal use in section 4 and marketing) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 223.18 Tm (Under the GDPR you have the right to:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 205.38 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 205.38 Tm (Access to your data and a copy of it) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 189.78 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 189.78 Tm (Correction of inaccurate data) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 174.18 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 174.18 Tm (Erasure \('right to be forgotten'\)) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 158.58 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 158.58 Tm (Restriction of processing) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 142.98 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 142.98 Tm (Transfer of your data in a common file format \(data portability\)) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 127.38 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 127.38 Tm (Objection to processing based on legitimate interest, including necessary security and marketing) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 111.78 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 111.78 Tm (Withdrawal of consent given, without affecting what was processed before) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 93.98 Tm (In the OS you see under Account which data we hold about you, you can change your name and language,) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 79.58 Tm (disconnect your sources and delete your account with its workspaces. For everything else e-mail) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Privacy Policy \267 SocialNow \267 socialnow.nl/privacy) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (4 / 6) Tj ET 0 0 0 rg
 endstream
 endobj
 5 0 obj
-<< /Length 6645 >>
+<< /Length 6669 >>
 stream
-BT /F2 9.6 Tf 1 0 0 1 61.69 779.53 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 779.53 Tm (Withdrawal of consent given, without affecting what was processed before) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 761.73 Tm (In the OS you see under Account which data we hold about you, you can change your name and language,) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 747.33 Tm (disconnect your sources and delete your account with its workspaces. For everything else e-mail) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 732.93 Tm (info@socialnow.nl; we may ask you to confirm your identity. You can also lodge a complaint with the Dutch Data) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 718.53 Tm (Protection Authority \(autoriteitpersoonsgegevens.nl\).) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 779.53 Tm (info@socialnow.nl; we may ask you to confirm your identity. You can also lodge a complaint with the Dutch Data) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 765.13 Tm (Protection Authority \(autoriteitpersoonsgegevens.nl\).) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 696.73 Tm (12. When you are the controller: your customers in the OS) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 743.33 Tm (12. When you are the controller: your customers in the OS) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 682.08 Tm (If you put data of your own customers, leads or team members into the OS, or connect your Odoo, Meta or) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 667.68 Tm (Google, you are the controller for that data and SocialNow processes it on your behalf. Until 19 September 2026) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 653.28 Tm (this section held a summary that called itself a data processing agreement. Five bullet points are not an) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 638.88 Tm (agreement within the meaning of Article 28\(3\) GDPR, which requires a fixed list of subjects that was not in it.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 624.48 Tm (There is now a full data processing agreement at socialnow.nl/verwerkersovereenkomst, covering the instruction) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 610.08 Tm (binding, the sub-processors, the security measures, transfers, audit and what happens to your data at the end.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 595.68 Tm (That agreement applies, and this is what it comes down to:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 577.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 577.88 Tm (We process this data only to make the OS work for you and according to your instructions through the OS,) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 563.48 Tm (plus the internal use in section 4 to which you agreed when creating your account) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 547.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 547.88 Tm (We only engage the processors in sections 5 and 6 and inform you on this page about changes; you can) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 533.48 Tm (object by ending your account) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 517.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 517.88 Tm (We take the measures in section 10, help you with data subject requests and with a data protection impact) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 503.48 Tm (assessment, and report a data breach affecting your data without undue delay) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 487.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 487.88 Tm (When your account ends we erase the data as in section 8, unless the law requires us to keep it) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 472.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 472.28 Tm (You make sure you have a legal basis to give us this data and inform your own customers where needed) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 728.68 Tm (If you put data of your own customers, leads or team members into the OS, or connect your Odoo, Meta or) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 714.28 Tm (Google, you are the controller for that data and SocialNow processes it on your behalf. Until 19 September 2026) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 699.88 Tm (this section held a summary that called itself a data processing agreement. Five bullet points are not an) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 685.48 Tm (agreement within the meaning of Article 28\(3\) GDPR, which requires a fixed list of subjects that was not in it.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 671.08 Tm (There is now a full data processing agreement at socialnow.nl/verwerkersovereenkomst, covering the instruction) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 656.68 Tm (binding, the sub-processors, the security measures, transfers, audit and what happens to your data at the end.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 642.28 Tm (That agreement applies, and this is what it comes down to:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 624.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 624.48 Tm (We process this data only to make the OS work for you and according to your instructions through the OS) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 608.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 608.88 Tm (We only engage the processors in sections 5 and 6 and inform you on this page about changes; you can) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 594.48 Tm (object by ending your account) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 578.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 578.88 Tm (We take the measures in section 10, help you with data subject requests and with a data protection impact) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 564.48 Tm (assessment, and report a data breach affecting your data without undue delay) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 548.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 548.88 Tm (When your account ends we erase the data as in section 8, unless the law requires us to keep it) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 533.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 533.28 Tm (You make sure you have a legal basis to give us this data and inform your own customers where needed) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 450.48 Tm (13. Children) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 511.48 Tm (13. Children) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 435.83 Tm (SocialNow OS is meant for businesses. We do not target people under 16 and do not knowingly process their) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 421.43 Tm (data. If we notice we did, we erase it.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 496.83 Tm (SocialNow OS is meant for businesses. We do not target people under 16 and do not knowingly process their) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 482.43 Tm (data. If we notice we did, we erase it.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 399.63 Tm (14. Automated decision-making) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 460.63 Tm (14. Automated decision-making) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 384.98 Tm (The OS makes suggestions and drafts, but takes no decisions with legal or similarly significant effects for you) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 370.58 Tm (without human involvement. Publishing, sending and paying only happen on your explicit action.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 445.98 Tm (The OS makes suggestions and drafts, but takes no decisions with legal or similarly significant effects for you) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 431.58 Tm (without human involvement. Publishing, sending and paying only happen on your explicit action.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 348.78 Tm (15. Changes) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 409.78 Tm (15. Changes) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 334.13 Tm (We may change this policy, for example for a new feature or provider. The current version is always at) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 319.73 Tm (socialnow.nl/privacy with the date at the top. For a change that affects your rights we ask for your agreement) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 305.33 Tm (again in the OS and inform account holders by e-mail.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 395.13 Tm (We may change this policy, for example for a new feature or provider. The current version is always at) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 380.73 Tm (socialnow.nl/privacy with the date at the top. For a change that affects your rights we ask for your agreement) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 366.33 Tm (again in the OS and inform account holders by e-mail.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 283.53 Tm (16. Outside the EU: the United Kingdom, Switzerland and the United States) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 344.53 Tm (16. Outside the EU: the United Kingdom, Switzerland and the United States) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 268.88 Tm (SocialNow is established in the Netherlands and works with clients and visitors from more countries. Where) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 254.48 Tm (another regime applies, the following applies alongside the rest of this policy.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 236.68 Tm (United Kingdom: if you are established in the UK, the UK GDPR and the Data Protection Act 2018 apply. Your) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 222.28 Tm (rights are the same as above. A complaint goes to the Information Commissioner's Office \(ico.org.uk\). Transfers) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 207.88 Tm (from the UK to us rest on the UK adequacy regulations for the EEA; if data subsequently leaves the EEA, the UK) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 193.48 Tm (International Data Transfer Addendum to the standard contractual clauses applies.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 175.68 Tm (Switzerland: if you are established in Switzerland, the Federal Act on Data Protection applies. Your rights are) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 161.28 Tm (equivalent; your complaint goes to the Federal Data Protection and Information Commissioner \(edoeb.admin.ch\).) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 143.48 Tm (United States, California: if you are a California resident, the CCPA as amended by the CPRA gives you a) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 129.08 Tm (number of rights which we expressly confirm below.) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 111.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 111.28 Tm (We do not sell personal information and do not share it for cross-context behavioural advertising. We never) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 96.88 Tm (have and do not intend to; that is also why there is no 'Do Not Sell or Share' control on our site, because there) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 82.48 Tm (is nothing to switch off) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 329.88 Tm (SocialNow is established in the Netherlands and works with clients and visitors from more countries. Where) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 315.48 Tm (another regime applies, the following applies alongside the rest of this policy.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 297.68 Tm (United Kingdom: if you are established in the UK, the UK GDPR and the Data Protection Act 2018 apply. Your) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 283.28 Tm (rights are the same as above. A complaint goes to the Information Commissioner's Office \(ico.org.uk\). Transfers) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 268.88 Tm (from the UK to us rest on the UK adequacy regulations for the EEA; if data subsequently leaves the EEA, the UK) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 254.48 Tm (International Data Transfer Addendum to the standard contractual clauses applies.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 236.68 Tm (Switzerland: if you are established in Switzerland, the Federal Act on Data Protection applies. Your rights are) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 222.28 Tm (equivalent; your complaint goes to the Federal Data Protection and Information Commissioner \(edoeb.admin.ch\).) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 204.48 Tm (United States, California: if you are a California resident, the CCPA as amended by the CPRA gives you a) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 190.08 Tm (number of rights which we expressly confirm below.) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 172.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 172.28 Tm (We do not sell personal information and do not share it for cross-context behavioural advertising. We never) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 157.88 Tm (have and do not intend to; that is also why there is no 'Do Not Sell or Share' control on our site, because there) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 143.48 Tm (is nothing to switch off) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 127.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 127.88 Tm (Right to know which categories of personal information we collect, from where, for what and with whom we) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 113.48 Tm (share it: that is in sections 2, 3 and 5) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 97.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 97.88 Tm (Right to a copy of the specific information we hold about you) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 82.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 82.28 Tm (Right to deletion, and right to correction of inaccurate information) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Privacy Policy \267 SocialNow \267 socialnow.nl/privacy) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (5 / 6) Tj ET 0 0 0 rg
 endstream
 endobj
 6 0 obj
-<< /Length 2649 >>
+<< /Length 2029 >>
 stream
 BT /F2 9.6 Tf 1 0 0 1 61.69 779.53 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 779.53 Tm (Right to know which categories of personal information we collect, from where, for what and with whom we) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 765.13 Tm (share it: that is in sections 2, 3 and 5) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 779.53 Tm (Right to limit the use of sensitive personal information: we collect no sensitive categories within the meaning) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 765.13 Tm (of the CPRA) Tj ET
 BT /F2 9.6 Tf 1 0 0 1 61.69 749.53 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 749.53 Tm (Right to a copy of the specific information we hold about you) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 733.93 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 733.93 Tm (Right to deletion, and right to correction of inaccurate information) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 718.33 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 718.33 Tm (Right to limit the use of sensitive personal information: we collect no sensitive categories within the meaning) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 703.93 Tm (of the CPRA) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 688.33 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 688.33 Tm (Right not to be discriminated against for using any of these rights: we do not offer a different price or a lesser) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 673.93 Tm (service to anyone who makes a request) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 658.33 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 658.33 Tm (An authorised agent may make a request on your behalf; we will ask for proof of that authorisation) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 642.73 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 642.73 Tm (Requests: privacy@socialnow.nl. We acknowledge within ten working days and respond within 45 days, with) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 628.33 Tm (a 45-day extension where needed) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 749.53 Tm (Right not to be discriminated against for using any of these rights: we do not offer a different price or a lesser) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 735.13 Tm (service to anyone who makes a request) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 719.53 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 719.53 Tm (An authorised agent may make a request on your behalf; we will ask for proof of that authorisation) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 703.93 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 703.93 Tm (Requests: info@socialnow.nl. We acknowledge within ten working days and respond within 45 days, with a) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 689.53 Tm (45-day extension where needed) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 606.53 Tm (17. Making a complaint) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 667.73 Tm (17. Making a complaint) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 591.88 Tm (If you have a complaint about how we handle your data, e-mail privacy@socialnow.nl first. We reply within ten) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 577.48 Tm (working days, with a person, not a form.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 559.68 Tm (If we cannot resolve it together, you can always go to a supervisory authority. In the Netherlands that is the Dutch) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 545.28 Tm (Data Protection Authority \(autoriteitpersoonsgegevens.nl\). If you live in another EU Member State you may also) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 530.88 Tm (go to the authority of your own country; it is equally competent. Outside the EU: see section 16.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 653.08 Tm (If you have a complaint about how we handle your data, e-mail info@socialnow.nl first. We reply within ten) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 638.68 Tm (working days, with a person, not a form.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 620.88 Tm (If we cannot resolve it together, you can always go to a supervisory authority. In the Netherlands that is the Dutch) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 606.48 Tm (Data Protection Authority \(autoriteitpersoonsgegevens.nl\). If you live in another EU Member State you may also) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 592.08 Tm (go to the authority of your own country; it is equally competent. Outside the EU: see section 16.) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Privacy Policy \267 SocialNow \267 socialnow.nl/privacy) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (6 / 6) Tj ET 0 0 0 rg
 endstream
@@ -410,24 +398,24 @@ xref
 0 18
 0000000000 65535 f 
 0000000015 00000 n 
-0000001315 00000 n 
-0000008312 00000 n 
-0000014490 00000 n 
-0000021231 00000 n 
-0000027928 00000 n 
-0000030629 00000 n 
-0000030726 00000 n 
-0000030828 00000 n 
-0000030971 00000 n 
-0000031115 00000 n 
-0000031259 00000 n 
-0000031403 00000 n 
-0000031547 00000 n 
-0000031691 00000 n 
-0000031784 00000 n 
-0000031884 00000 n 
+0000001312 00000 n 
+0000008273 00000 n 
+0000014483 00000 n 
+0000021241 00000 n 
+0000027962 00000 n 
+0000030043 00000 n 
+0000030140 00000 n 
+0000030242 00000 n 
+0000030385 00000 n 
+0000030529 00000 n 
+0000030673 00000 n 
+0000030817 00000 n 
+0000030961 00000 n 
+0000031105 00000 n 
+0000031198 00000 n 
+0000031298 00000 n 
 trailer
 << /Size 18 /Root 17 0 R /Info 16 0 R >>
 startxref
-31935
+31349
 %%EOF

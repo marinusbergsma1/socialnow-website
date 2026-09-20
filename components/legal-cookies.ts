@@ -1,4 +1,4 @@
-// De cookieverklaring en de AI-verklaring — 19 september 2026.
+// De cookieverklaring en de AI-verklaring — 20 september 2026.
 //
 // WAAROM EEN APARTE COOKIEVERKLARING
 //
@@ -23,14 +23,14 @@ export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
     title: "Cookieverklaring",
     intro:
       "Wat wij in je browser bewaren, waarom, hoe lang, en waar je het weer uitzet. Socialnow.nl plaatst geen trackingcookies en gebruikt geen advertentienetwerken. In SocialNow OS meten wij alleen als jij daar zelf toestemming voor geeft.",
-    updated: "Laatst bijgewerkt: 19 september 2026",
+    updated: "Laatst bijgewerkt: 20 september 2026",
     sections: [
       {
         title: "Kort",
         paragraphs: [
           "Op socialnow.nl staan alleen dingen die nodig zijn om de site te laten werken en om te onthouden wat jij koos. Daar is volgens artikel 11.7a lid 3 Telecommunicatiewet geen toestemming voor nodig, want zonder die dingen werkt de site niet of vergeet hij jouw keuze bij elke klik.",
-          "In SocialNow OS staat daarnaast één ding dat wél toestemming vraagt: het meten van gebruik met PostHog. Dat staat standaard uit. Geef je geen toestemming, dan wordt PostHog niet geladen; er staat dan geen script van die partij op de pagina en er gaat niets naartoe.",
-          "Wij maken geen schermopnames. Die stonden aan de kant van PostHog uit en dat blijft zo.",
+          "In SocialNow OS staat daarnaast vrijwillige gebruiksmeting met PostHog die toestemming vraagt. Dat staat standaard uit. Geef je geen toestemming, dan wordt PostHog niet geladen; er staat dan geen script van die partij op de pagina en er gaat niets naartoe.",
+          "Gemaskeerde schermopnames staan voor jou standaard uit en vragen afzonderlijke toestemming. Tekst, invoervelden en media worden afgeschermd; account-, CRM-, betaal- en beheerschermen zijn uitgesloten. Nieuwe opnames blijven 30 dagen bewaard. Er wordt geen geluid of camera opgenomen.",
         ],
       },
       {
@@ -51,7 +51,7 @@ export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
             "sn-akkoord (localStorage, blijft tot je je browseropslag leegmaakt): onthoudt dat je het welkomstscherm met de voorwaarden hebt gezien, per versie van die tekst. Een nieuwe versie vraagt opnieuw.",
             "sn-taal (cookie op .socialnow.nl, één jaar): de taal die je koos, zodat de site en het OS in dezelfde taal staan.",
             "sn-land (cookie op .socialnow.nl, één jaar): het land dat je koos, waarmee wij de taal en de juiste contactgegevens bepalen.",
-            "sn-meten (cookie op .socialnow.nl, één jaar): jouw keuze over meten, ja of nee. Deze cookie is zelf noodzakelijk, want zonder hem weten wij niet dat je nee hebt gezegd.",
+            "sn-meten (cookie op .socialnow.nl, 180 dagen vanuit de app; een jaar vanuit de website) en sn-replay-v1 (180 dagen vanuit de app): afzonderlijke keuzes over meten en opnemen, ja of nee. Deze cookie is zelf noodzakelijk, want zonder hem weten wij niet dat je nee hebt gezegd.",
           ],
           [],
         ],
@@ -61,7 +61,7 @@ export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
         paragraphs: [
           "Noodzakelijk, geen toestemming nodig:",
           "Alleen met jouw toestemming:",
-          "Je verandert je keuze op elk moment: in het OS onder Account, of via de vraag onderin het scherm. Zet je hem op nee, dan stopt het versturen direct en wordt weggehaald wat PostHog in je browser had gezet.",
+          "Je verandert je keuze op elk moment: in het OS onder Account, of via de vraag onderin het scherm. Zet je hem op nee, dan stopt het versturen direct eerdere gegevens bij PostHog worden daarmee niet automatisch gewist; daarvoor kun je ons benaderen.",
         ],
         bullets: [
           [
@@ -70,7 +70,7 @@ export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
             "de service worker en zijn cache: houdt het OS snel en laat het werken bij een haperende verbinding.",
           ],
           [
-            "PostHog (EU-datacentrum Frankfurt, cookies ph_*, maximaal één jaar): welke onderdelen van het OS gebruikt worden, welke knoppen geklikt worden en welke pagina's bezocht worden, gekoppeld aan je e-mailadres en je werkruimte, om het OS te verbeteren. Zonder toestemming wordt PostHog niet geladen.",
+            "PostHog (EU-datacentrum Frankfurt): vooraf bepaalde gebruiksgebeurtenissen en schermroutes, gekoppeld aan een pseudoniem en werkruimtekenmerk. De nieuwe appconfiguratie bewaart de analyticsidentiteit alleen in het geheugen. Oudere versies konden ph_*-cookies bewaren. Zonder toestemming wordt PostHog niet geladen. Met afzonderlijke toestemming zijn gemaskeerde schermopnames mogelijk; zie het privacybeleid.",
           ],
           [],
         ],
@@ -101,14 +101,14 @@ export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
     title: "Cookie statement",
     intro:
       "What we store in your browser, why, for how long, and where you switch it off. Socialnow.nl sets no tracking cookies and uses no ad networks. In SocialNow OS we measure only if you allow it yourself.",
-    updated: "Last updated: 19 September 2026",
+    updated: "Last updated: 20 September 2026",
     sections: [
       {
         title: "In short",
         paragraphs: [
           "Socialnow.nl only holds what is needed to make the site work and to remember what you chose. Under Article 11.7a(3) of the Dutch Telecommunications Act no consent is required for that, because without it the site does not work or forgets your choice on every click.",
-          "In SocialNow OS there is one further thing that does require consent: measuring use with PostHog. It is off by default. If you do not consent, PostHog is not loaded; no script from that party is on the page and nothing is sent to it.",
-          "We do not make session recordings. They were disabled on the PostHog side and they stay that way.",
+          "In SocialNow OS optional usage measurement with PostHog requires consent. It is off by default. If you do not consent, PostHog is not loaded; no script from that party is on the page and nothing is sent to it.",
+          "Masked session recordings are off for you by default and require separate consent. Text, inputs and media are masked; account, CRM, payment and administration screens are excluded. New recordings are retained for 30 days. No audio or camera is recorded.",
         ],
       },
       {
@@ -129,7 +129,7 @@ export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
             "sn-akkoord (localStorage, stays until you clear your browser storage): remembers that you have seen the welcome screen with the terms, per version of that text. A new version asks again.",
             "sn-taal (cookie on .socialnow.nl, one year): the language you chose, so the site and the OS are in the same language.",
             "sn-land (cookie on .socialnow.nl, one year): the country you chose, from which we derive the language and the right contact details.",
-            "sn-meten (cookie on .socialnow.nl, one year): your choice about measurement, yes or no. This cookie is itself necessary, because without it we do not know that you said no.",
+            "sn-meten (cookie on .socialnow.nl, 180 days from the app; one year from the website) and sn-replay-v1 (180 days from the app): separate choices about measurement and recording, yes or no. This cookie is itself necessary, because without it we do not know that you said no.",
           ],
           [],
         ],
@@ -139,7 +139,7 @@ export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
         paragraphs: [
           "Necessary, no consent required:",
           "Only with your consent:",
-          "You change your choice at any time: in the OS under Account, or through the question at the bottom of the screen. Set it to no and sending stops immediately, and whatever PostHog placed in your browser is removed.",
+          "You change your choice at any time: in the OS under Account, or through the question at the bottom of the screen. Set it to no and sending stops immediately, existing data at PostHog is not automatically erased; contact us for an erasure request.",
         ],
         bullets: [
           [
@@ -148,7 +148,7 @@ export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
             "the service worker and its cache: keeps the OS fast and lets it work on a patchy connection.",
           ],
           [
-            "PostHog (EU data centre Frankfurt, cookies ph_*, up to one year): which parts of the OS are used, which buttons are clicked and which pages are visited, linked to your e-mail address and your workspace, in order to improve the OS. Without consent PostHog is not loaded.",
+            "PostHog (EU data centre Frankfurt): predefined usage events and screen routes linked to a pseudonym and workspace identifier. The new app configuration keeps the analytics identity in memory. Older versions could store ph_* cookies. Without consent PostHog is not loaded. Masked session recordings require separate consent; see the privacy policy.",
           ],
           [],
         ],
@@ -182,7 +182,7 @@ export const ai: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Legal
     title: "AI-verklaring",
     intro:
       "SocialNow OS maakt teksten, beelden en films met AI-modellen. Deze verklaring zegt waar dat gebeurt, welke modellen wij gebruiken, wat er met jouw invoer wel en niet gebeurt, en wie verantwoordelijk is voor wat er uiteindelijk gepubliceerd wordt.",
-    updated: "Laatst bijgewerkt: 19 september 2026",
+    updated: "Laatst bijgewerkt: 20 september 2026",
     sections: [
       {
         title: "Waar AI in het OS zit",
@@ -256,7 +256,7 @@ export const ai: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Legal
     title: "AI statement",
     intro:
       "SocialNow OS creates text, images and film with AI models. This statement says where that happens, which models we use, what does and does not happen to your input, and who is responsible for what finally gets published. The Dutch version is the binding one.",
-    updated: "Last updated: 19 September 2026",
+    updated: "Last updated: 20 September 2026",
     sections: [
       {
         title: "Where AI sits in the OS",

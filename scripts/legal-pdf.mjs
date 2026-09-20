@@ -57,8 +57,8 @@ function laadDocumenten() {
 }
 
 const VOET = {
-  nl: "SocialNow · Amstelstraat 43G, 1017 DA Amsterdam · KVK 90877179 · privacy@socialnow.nl",
-  en: "SocialNow · Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands · CoC 90877179 · privacy@socialnow.nl",
+  nl: "SocialNow · Amstelstraat 43G, 1017 DA Amsterdam · KVK 90877179 · info@socialnow.nl",
+  en: "SocialNow · Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands · CoC 90877179 · info@socialnow.nl",
 };
 const BINDEND = {
   nl: "De Nederlandse tekst is de bindende versie. De actuele versie staat altijd op socialnow.nl",

@@ -1,7 +1,7 @@
 %PDF-1.4
 %‚„œ”
 1 0 obj
-<< /Length 962 >>
+<< /Length 959 >>
 stream
 0.04 0.48 0.22 rg
 BT /F2 10 Tf 1 0 0 1 56.69 705.83 Tm (SOCIALNOW) Tj ET
@@ -14,12 +14,12 @@ BT /F1 11 Tf 1 0 0 1 56.69 607.56 Tm (These terms apply to every quote, agreemen
 BT /F1 11 Tf 1 0 0 1 56.69 591.06 Tm (account in the OS you agree to them. The Dutch version is the binding one.) Tj ET
 0 0 0 rg
 0.85 0.85 0.85 RG 0.6 w 56.69291338582678 130.39 m 538.58 130.39 l S 0 0 0 RG
-BT /F2 8.6 Tf 1 0 0 1 56.69 124.39 Tm (Last updated: 16 September 2026) Tj ET
+BT /F2 8.6 Tf 1 0 0 1 56.69 124.39 Tm (Last updated: 20 September 2026) Tj ET
 0.35 0.35 0.35 rg
 BT /F1 8.4 Tf 1 0 0 1 56.69 109.99 Tm (The Dutch text is the binding version. The current version is always at socialnow.nl/voorwaarden) Tj ET
 0 0 0 rg
 0.35 0.35 0.35 rg
-BT /F1 8.4 Tf 1 0 0 1 56.69 95.89 Tm (SocialNow \267 Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands \267 CoC 90877179 \267 privacy@socialnow.nl) Tj ET
+BT /F1 8.4 Tf 1 0 0 1 56.69 95.89 Tm (SocialNow \267 Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands \267 CoC 90877179 \267 info@socialnow.nl) Tj ET
 0 0 0 rg
 endstream
 endobj
@@ -90,7 +90,7 @@ BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (2 / 4) Tj ET 0 0 0 rg
 endstream
 endobj
 3 0 obj
-<< /Length 6309 >>
+<< /Length 6315 >>
 stream
 0.04 0.48 0.22 rg
 BT /F2 10.6 Tf 1 0 0 1 56.69 775.53 Tm (9. Cancellation) Tj ET
@@ -154,22 +154,22 @@ BT /F2 10.6 Tf 1 0 0 1 56.69 138.33 Tm (17. SocialNow OS: account, data and impr
 BT /F1 9.6 Tf 1 0 0 1 56.69 123.68 Tm (SocialNow OS is the online environment at app.socialnow.nl in which the client manages its website, customers,) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 109.28 Tm (content and advertising. Whoever creates an account agrees to these terms and to the privacy policy at) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 94.88 Tm (socialnow.nl/privacy.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 77.08 Tm (The client agrees that SocialNow may view and analyse the data belonging to its account and workspace) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 77.08 Tm (Necessary support and security give authorised staff limited, logged access. Optional usage measurement and) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Terms of Service \267 SocialNow \267 socialnow.nl/voorwaarden) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (3 / 4) Tj ET 0 0 0 rg
 endstream
 endobj
 4 0 obj
-<< /Length 4713 >>
+<< /Length 4691 >>
 stream
-BT /F1 9.6 Tf 1 0 0 1 56.69 779.53 Tm (internally. This is done only by the SocialNow team, under confidentiality, and for one purpose: improving) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 765.13 Tm (SocialNow's products and services. That means finding and fixing errors, deciding what to build, and tuning the) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 750.73 Tm (SocialNow models to what customers need.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 779.53 Tm (separate masked session recordings require consent, which can be withdrawn under Account. Creating an) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 765.13 Tm (account does not grant blanket permission to use business content for our own product development. See) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 750.73 Tm (socialnow.nl/privacy.) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 732.93 Tm (SocialNow never sells this data, never shares it with other customers and never uses it for third-party advertising.) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 718.53 Tm (Data from connected sources such as Odoo, Meta and Google is read only for the client's own workspace; the) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 704.13 Tm (keys the client enters are stored encrypted and never shown.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 686.33 Tm (The client remains the owner of its data and can delete its account at any time under Account in the OS. That) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 671.93 Tm (ends the internal use; afterwards SocialNow keeps only what the law requires, such as invoices.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 686.33 Tm (The client remains the owner of its data and can delete its account at any time under Account in the OS. Access) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 671.93 Tm (is closed and erasure is handled under the privacy policy; statutory retention duties continue to apply.) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 654.13 Tm (The OS is provided as is and is continuously developed. SocialNow gives no guarantee of uninterrupted) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 639.73 Tm (availability and may change or end features. The client does not use the OS for illegal purposes, spam or abuse) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 625.33 Tm (of connected platforms and complies with the terms of those platforms.) Tj ET
@@ -235,20 +235,20 @@ xref
 0 14
 0000000000 65535 f 
 0000000015 00000 n 
-0000001028 00000 n 
-0000007244 00000 n 
-0000013605 00000 n 
-0000018370 00000 n 
-0000018467 00000 n 
-0000018569 00000 n 
-0000018712 00000 n 
-0000018855 00000 n 
-0000018998 00000 n 
-0000019142 00000 n 
-0000019219 00000 n 
-0000019321 00000 n 
+0000001025 00000 n 
+0000007241 00000 n 
+0000013608 00000 n 
+0000018351 00000 n 
+0000018448 00000 n 
+0000018550 00000 n 
+0000018693 00000 n 
+0000018836 00000 n 
+0000018979 00000 n 
+0000019123 00000 n 
+0000019200 00000 n 
+0000019302 00000 n 
 trailer
 << /Size 14 /Root 13 0 R /Info 12 0 R >>
 startxref
-19372
+19353
 %%EOF
