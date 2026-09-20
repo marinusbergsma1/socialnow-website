@@ -127,7 +127,7 @@ export const dpa: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Lega
       {
         title: "10. Doorgifte buiten de EER",
         paragraphs: [
-          "Wij bewaren en verwerken jouw gegevens bij voorkeur binnen de Europese Economische Ruimte. Bij de meeste subverwerkers in bijlage C hebben wij expliciet voor een Europese regio gekozen.",
+          "Wij bewaren en verwerken jouw gegevens bij voorkeur binnen de Europese Economische Ruimte. De regio verschilt per dienst. PostHog gebruikt de EU-regio; de huidige Vercel-appfuncties draaien in de Verenigde Staten. Onze dienstverlening is daarom niet uitsluitend Europees.",
           "Is doorgifte naar een derde land onvermijdelijk — dat speelt bij een aantal Amerikaanse leveranciers van modellen en infrastructuur — dan doen wij dat alleen op basis van een geldig mechanisme uit hoofdstuk V AVG: een adequaatheidsbesluit van de Europese Commissie, of de standaardcontractbepalingen (uitvoeringsbesluit (EU) 2021/914), aangevuld met een beoordeling van de omstandigheden in dat land en met aanvullende maatregelen waar die nodig zijn, zoals versleuteling onderweg en in rust en het zo klein mogelijk houden van wat er heen gaat.",
           "Per subverwerker staat in bijlage C waar de gegevens staan en welk mechanisme geldt. Wijzigt dat, dan werken wij die bijlage bij volgens artikel 5.",
         ],
@@ -232,7 +232,7 @@ export const dpa: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Lega
         ],
         bullets: [
           [
-            "Vercel Inc. (Verenigde Staten, uitvoering in de EU-regio): hosting van het OS en de websites",
+            "Vercel Inc. (Verenigde Staten; regio afhankelijk van de dienst, appfuncties momenteel VS): hosting van het OS en de API",
             "Google Ireland Limited / Google LLC: Firebase voor de opslag van werkruimten en accounts",
             "Hostinger International Ltd (Litouwen): hosting van websites, domeinen en e-mail",
           ],
@@ -356,7 +356,7 @@ export const dpa: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Lega
       {
         title: "10. Transfers outside the EEA",
         paragraphs: [
-          "We prefer to store and process your data within the European Economic Area. For most sub-processors in Annex C we have explicitly chosen a European region.",
+          "We prefer to store and process your data within the European Economic Area. Regions differ by service. PostHog uses the EU region; the current Vercel app functions run in the United States. Our service is therefore not EU-only.",
           "Where a transfer to a third country is unavoidable — which is the case for a number of US providers of models and infrastructure — we do so only on the basis of a valid mechanism under Chapter V GDPR: an adequacy decision of the European Commission, or the standard contractual clauses (Implementing Decision (EU) 2021/914), supplemented by an assessment of the circumstances in that country and by additional measures where needed, such as encryption in transit and at rest and keeping what is sent as small as possible.",
           "Annex C states, per sub-processor, where the data sits and which mechanism applies. If that changes, we update the annex in line with clause 5.",
         ],
@@ -461,7 +461,7 @@ export const dpa: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Lega
         ],
         bullets: [
           [
-            "Vercel Inc. (United States, execution in the EU region): hosting of the OS and the websites",
+            "Vercel Inc. (United States; region varies by service, app functions currently US): hosting of the OS and the API",
             "Google Ireland Limited / Google LLC: Firebase for storage of workspaces and accounts",
             "Hostinger International Ltd (Lithuania): hosting of websites, domains and e-mail",
           ],
