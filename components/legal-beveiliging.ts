@@ -33,7 +33,7 @@ export const beveiliging: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; 
       {
         title: "Toegang",
         paragraphs: [
-          "Inloggen op een account gaat via een identiteitsdienst met tweestapsverificatie. Beheerderstoegang bij SocialNow gaat via een passkey, met een tijdgebonden code als terugval bij een nieuw apparaat.",
+          "Accountlogin loopt via Google Firebase. Of tweestapsverificatie wordt afgedwongen hangt af van de gebruikte inlogroute en het accountbeleid. Het centrale beheerportaal ondersteunt passkeys en een tijdcode. Dit is geen garantie dat elke rechtstreekse app-login een tweede factor vraagt.",
           "Wil een beheerder een klantomgeving openen, dan gebeurt dat met een briefje dat twee minuten geldig is, dat alleen dat ene systeem opent en dat door dat systeem zelf wordt beoordeeld. Het briefje zelf komt nergens in een logboek; de uitgifte wel, met wie, welk systeem en wanneer.",
           "Rechten worden per werkruimte toegekend. Vertrekt iemand, dan wordt zijn toegang ingetrokken; in het OS doe je dat zelf onder Team.",
         ],
@@ -114,7 +114,7 @@ export const beveiliging: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; 
       {
         title: "Access",
         paragraphs: [
-          "Signing in to an account runs through an identity provider with two-step verification. Administrator access at SocialNow runs through a passkey, with a time-based code as fallback on a new device.",
+          "Account sign-in uses Google Firebase. Enforcement of two-step verification depends on the sign-in route and account policy. The central administration portal supports passkeys and a time-based code. This does not guarantee a second factor for every direct app sign-in.",
           "When an administrator opens a client environment, it happens with a token valid for two minutes that opens that one system only and that is judged by that system itself. The token never appears in a log; its issuance does, with who, which system and when.",
           "Rights are granted per workspace. When someone leaves, their access is withdrawn; in the OS you do that yourself under Team.",
         ],

@@ -1,4 +1,4 @@
-// 16 september 2026: de algemene voorwaarden en het privacybeleid als tekst, in twee talen.
+// 20 september 2026: de algemene voorwaarden en het privacybeleid als tekst, in twee talen.
 // Eén bron voor de website (socialnow.nl/voorwaarden en /privacy) en de verwijzing vanuit
 // het OS (app.socialnow.nl). De Nederlandse tekst is de bindende versie.
 //
@@ -10,7 +10,7 @@ export type Language = "en" | "nl" | "de" | "fr" | "it" | "es";
 export type Section = { title: string; paragraphs: string[]; bullets?: string[][] };
 export type LegalDoc = { title: string; intro: string; updated: string; sections: Section[] };
 
-export const LEGAL_VERSION = "2026-09-17";
+export const LEGAL_VERSION = "2026-09-20";
 
 import { privacyNl, privacyEn } from "./legal-privacy";
 import * as vertaald from "./legal-vertaald";
@@ -20,7 +20,7 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
   nl: {
     title: "Algemene voorwaarden",
     intro: "Deze voorwaarden gelden voor elke offerte, overeenkomst en elk gebruik van SocialNow OS. Bij aanmelding voor het OS ga je hiermee akkoord.",
-    updated: "Laatst bijgewerkt: 16 september 2026",
+    updated: "Laatst bijgewerkt: 20 september 2026",
     sections: [
       { title: "1. Definities", paragraphs: ["Opdrachtnemer: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, KVK 90877179. Opdrachtgever: de tegenpartij van opdrachtnemer, waaronder iedereen die een account aanmaakt in SocialNow OS. Overeenkomst: de overeenkomst tot dienstverlening, inclusief het gebruik van SocialNow OS."] },
       { title: "2. Algemeen", paragraphs: ["Deze voorwaarden gelden voor iedere offerte en overeenkomst tussen opdrachtnemer en een opdrachtgever. Afwijken kan alleen als partijen dat uitdrukkelijk schriftelijk vastleggen. Is een bepaling nietig of wordt die vernietigd, dan blijven de overige bepalingen van kracht en overleggen partijen over een vervangende bepaling die de strekking van de oorspronkelijke zo dicht mogelijk benadert."] },
@@ -42,9 +42,9 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
         title: "17. SocialNow OS: account, gegevens en verbetering",
         paragraphs: [
           "SocialNow OS is de online omgeving op app.socialnow.nl waarin opdrachtgever zijn website, klanten, content en advertenties beheert. Wie een account aanmaakt gaat akkoord met deze voorwaarden en met het privacybeleid op socialnow.nl/privacy.",
-          "Opdrachtgever gaat ermee akkoord dat SocialNow de gegevens die bij zijn account en werkruimte horen intern mag inzien en analyseren. Dit gebeurt uitsluitend door het team van SocialNow, onder geheimhouding, en met één doel: de producten en diensten van SocialNow verbeteren. Denk aan het opsporen en verhelpen van fouten, het bepalen van wat er gebouwd wordt en het beter afstemmen van de SocialNow-modellen op wat klanten nodig hebben.",
+          "Noodzakelijke ondersteuning en beveiliging geven bevoegde medewerkers beperkte, gelogde toegang. Vrijwillige gebruiksmeting en afzonderlijke gemaskeerde schermopnames vragen toestemming die onder Account kan worden ingetrokken. Een account aanmaken geeft geen algemene toestemming om bedrijfsinhoud voor eigen productontwikkeling te gebruiken. Zie socialnow.nl/privacy.",
           "SocialNow verkoopt deze gegevens nooit, deelt ze nooit met andere klanten en gebruikt ze nooit voor advertenties van derden. Gegevens van gekoppelde bronnen zoals Odoo, Meta en Google worden alleen gelezen voor de eigen werkruimte van opdrachtgever; de sleutels die opdrachtgever invoert worden versleuteld bewaard en niet getoond.",
-          "Opdrachtgever blijft eigenaar van zijn gegevens en kan zijn account op elk moment verwijderen onder Account in het OS. Daarmee stopt het interne gebruik; SocialNow bewaart daarna alleen wat de wet vereist, zoals facturen.",
+          "Opdrachtgever blijft eigenaar van zijn gegevens en kan zijn account op elk moment verwijderen onder Account in het OS. Toegang wordt gesloten en verwijdering wordt afgehandeld volgens het privacybeleid; wettelijke bewaarplichten blijven gelden.",
           "Het OS wordt geleverd zoals het is en wordt voortdurend doorontwikkeld. SocialNow geeft geen garantie op ononderbroken beschikbaarheid en mag functies wijzigen of beëindigen. Opdrachtgever gebruikt het OS niet voor illegale doeleinden, spam of misbruik van gekoppelde platformen en houdt zich aan de voorwaarden van die platformen.",
         ],
       },
@@ -56,7 +56,7 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
   en: {
     title: "Terms of Service",
     intro: "These terms apply to every quote, agreement and every use of SocialNow OS. By creating an account in the OS you agree to them. The Dutch version is the binding one.",
-    updated: "Last updated: 16 September 2026",
+    updated: "Last updated: 20 September 2026",
     sections: [
       { title: "1. Definitions", paragraphs: ["Contractor: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands, Chamber of Commerce 90877179. Client: the counterparty of the contractor, including anyone who creates an account in SocialNow OS. Agreement: the agreement for services, including the use of SocialNow OS."] },
       { title: "2. General", paragraphs: ["These terms apply to every quote and agreement between the contractor and a client. Deviations are only valid when both parties record them explicitly in writing. If a provision is void or annulled, the other provisions remain in force and the parties agree on a replacement that stays as close as possible to the original intent."] },
@@ -78,9 +78,9 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
         title: "17. SocialNow OS: account, data and improvement",
         paragraphs: [
           "SocialNow OS is the online environment at app.socialnow.nl in which the client manages its website, customers, content and advertising. Whoever creates an account agrees to these terms and to the privacy policy at socialnow.nl/privacy.",
-          "The client agrees that SocialNow may view and analyse the data belonging to its account and workspace internally. This is done only by the SocialNow team, under confidentiality, and for one purpose: improving SocialNow's products and services. That means finding and fixing errors, deciding what to build, and tuning the SocialNow models to what customers need.",
+          "Necessary support and security give authorised staff limited, logged access. Optional usage measurement and separate masked session recordings require consent, which can be withdrawn under Account. Creating an account does not grant blanket permission to use business content for our own product development. See socialnow.nl/privacy.",
           "SocialNow never sells this data, never shares it with other customers and never uses it for third-party advertising. Data from connected sources such as Odoo, Meta and Google is read only for the client's own workspace; the keys the client enters are stored encrypted and never shown.",
-          "The client remains the owner of its data and can delete its account at any time under Account in the OS. That ends the internal use; afterwards SocialNow keeps only what the law requires, such as invoices.",
+          "The client remains the owner of its data and can delete its account at any time under Account in the OS. Access is closed and erasure is handled under the privacy policy; statutory retention duties continue to apply.",
           "The OS is provided as is and is continuously developed. SocialNow gives no guarantee of uninterrupted availability and may change or end features. The client does not use the OS for illegal purposes, spam or abuse of connected platforms and complies with the terms of those platforms.",
         ],
       },

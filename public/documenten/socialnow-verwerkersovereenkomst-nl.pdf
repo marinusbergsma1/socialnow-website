@@ -1,7 +1,7 @@
 %PDF-1.4
 %‚„œ”
 1 0 obj
-<< /Length 1152 >>
+<< /Length 1149 >>
 stream
 0.04 0.48 0.22 rg
 BT /F2 10 Tf 1 0 0 1 56.69 705.83 Tm (SOCIALNOW) Tj ET
@@ -22,7 +22,7 @@ BT /F2 8.6 Tf 1 0 0 1 56.69 124.39 Tm (Laatst bijgewerkt: 19 september 2026) Tj 
 BT /F1 8.4 Tf 1 0 0 1 56.69 109.99 Tm (De Nederlandse tekst is de bindende versie. De actuele versie staat altijd op socialnow.nl/verwerkersovereenkomst) Tj ET
 0 0 0 rg
 0.35 0.35 0.35 rg
-BT /F1 8.4 Tf 1 0 0 1 56.69 95.89 Tm (SocialNow \267 Amstelstraat 43G, 1017 DA Amsterdam \267 KVK 90877179 \267 privacy@socialnow.nl) Tj ET
+BT /F1 8.4 Tf 1 0 0 1 56.69 95.89 Tm (SocialNow \267 Amstelstraat 43G, 1017 DA Amsterdam \267 KVK 90877179 \267 info@socialnow.nl) Tj ET
 0 0 0 rg
 endstream
 endobj
@@ -288,60 +288,61 @@ BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (5 / 6) Tj ET 0 0 0 rg
 endstream
 endobj
 6 0 obj
-<< /Length 4818 >>
+<< /Length 4947 >>
 stream
 BT /F2 9.6 Tf 1 0 0 1 61.69 779.53 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 779.53 Tm (gegevens staan bij leveranciers met dagelijkse back-ups en herstelmogelijkheid) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 763.93 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 763.93 Tm (de code staat in versiebeheer; elke publicatie is herleidbaar tot een commit en kan worden teruggedraaid) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 748.33 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 748.33 Tm (voor publicatie draait een geautomatiseerde testsuite; een rode suite betekent niet publiceren) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 730.53 Tm (Organisatie:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 712.73 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 712.73 Tm (wie toegang heeft is een korte, bekende kring, allemaal onder geheimhouding) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 697.13 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 697.13 Tm (nieuwe leveranciers worden beoordeeld op waar zij gegevens opslaan en op welke voorwaarden) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 681.53 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 681.53 Tm (er is een vaste route voor het melden van kwetsbaarheden: security@socialnow.nl) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 663.73 Tm (Deze lijst beschrijft wat er op 19 september 2026 staat. Wij vervangen een maatregel alleen door een maatregel) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 649.33 Tm (die minstens zo beschermend is.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 779.53 Tm (opslag en herstel verlopen volgens de mogelijkheden van de gebruikte leverancier; frequentie, bewaartermijn) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 765.13 Tm (en herstelbaarheid worden per gegevensbron vastgelegd) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 749.53 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 749.53 Tm (de code staat in versiebeheer; elke publicatie is herleidbaar tot een commit en kan worden teruggedraaid) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 733.93 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 733.93 Tm (voor publicatie draait een geautomatiseerde testsuite; een rode suite betekent niet publiceren) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 716.13 Tm (Organisatie:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 698.33 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 698.33 Tm (wie toegang heeft is een korte, bekende kring, allemaal onder geheimhouding) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 682.73 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 682.73 Tm (nieuwe leveranciers worden beoordeeld op waar zij gegevens opslaan en op welke voorwaarden) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 667.13 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 667.13 Tm (er is een vaste route voor het melden van kwetsbaarheden: security@socialnow.nl) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 649.33 Tm (Deze lijst beschrijft wat er op 19 september 2026 staat. Wij vervangen een maatregel alleen door een maatregel) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 634.93 Tm (die minstens zo beschermend is.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 627.53 Tm (Bijlage C: subverwerkers) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 613.13 Tm (Bijlage C: subverwerkers) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 612.88 Tm (Infrastructuur en opslag:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 595.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 595.08 Tm (Vercel Inc. \(Verenigde Staten, uitvoering in de EU-regio\): hosting van het OS en de websites) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 579.48 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 579.48 Tm (Google Ireland Limited / Google LLC: Firebase voor de opslag van werkruimten en accounts) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 563.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 563.88 Tm (Hostinger International Ltd \(Litouwen\): hosting van websites, domeinen en e-mail) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 546.08 Tm (Identiteit en communicatie:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 528.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 528.28 Tm (Google Ireland Limited: inloggen met een Google-account) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 512.68 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 512.68 Tm (Hostinger International Ltd: verzending van e-mail vanuit het OS, waaronder inlogcodes) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 494.88 Tm (Meten:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 477.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 477.08 Tm (PostHog Inc., EU-datacentrum in Frankfurt: meten van gebruik van het OS, alleen na toestemming van de) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 462.68 Tm (gebruiker, zonder schermopnames) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 444.88 Tm (Modellen voor tekst en beeld, alleen voor wat jij laat maken:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 427.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 427.08 Tm (Google Ireland Limited / Google LLC: Gemini voor tekst en beeld) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 411.48 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 411.48 Tm (OpenAI Ireland Ltd: modellen voor tekst en beeld) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 395.88 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 395.88 Tm (Anthropic PBC \(Verenigde Staten\): modellen voor tekst) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 380.28 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 380.28 Tm (Higgsfield: beeld en film) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 364.68 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 364.68 Tm (Bij al deze partijen is contractueel uitgesloten dat jouw invoer wordt gebruikt om hun modellen te trainen.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 346.88 Tm (Publiceren op sociale kanalen:) Tj ET
-BT /F2 9.6 Tf 1 0 0 1 61.69 329.08 Tm (\267) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 70.69 329.08 Tm (Zernio: het koppelen aan en publiceren op jouw eigen socialkanalen, met de sleutel die jij zelf aansluit) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 311.28 Tm (Wij hebben met elk van deze partijen een verwerkersovereenkomst of gelijkwaardige voorwaarden. Bij partijen) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 296.88 Tm (buiten de EER berust de doorgifte op de standaardcontractbepalingen van de Europese Commissie, en waar van) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 282.48 Tm (toepassing op het EU-VS Data Privacy Framework.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 264.68 Tm (Deze lijst geldt op 19 september 2026. Wijzigingen worden dertig dagen vooraf aangekondigd volgens artikel 5.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 598.48 Tm (Infrastructuur en opslag:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 580.68 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 580.68 Tm (Vercel Inc. \(Verenigde Staten, uitvoering in de EU-regio\): hosting van het OS en de websites) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 565.08 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 565.08 Tm (Google Ireland Limited / Google LLC: Firebase voor de opslag van werkruimten en accounts) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 549.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 549.48 Tm (Hostinger International Ltd \(Litouwen\): hosting van websites, domeinen en e-mail) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 531.68 Tm (Identiteit en communicatie:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 513.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 513.88 Tm (Google Ireland Limited: inloggen met een Google-account) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 498.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 498.28 Tm (Hostinger International Ltd: verzending van e-mail vanuit het OS, waaronder inlogcodes) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 480.48 Tm (Meten:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 462.68 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 462.68 Tm (PostHog Inc., EU-datacentrum in Frankfurt: meten van gebruik van het OS, alleen na toestemming van de) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 448.28 Tm (gebruiker, zonder schermopnames) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 430.48 Tm (Modellen voor tekst en beeld, alleen voor wat jij laat maken:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 412.68 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 412.68 Tm (Google Ireland Limited / Google LLC: Gemini voor tekst en beeld) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 397.08 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 397.08 Tm (OpenAI Ireland Ltd: modellen voor tekst en beeld) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 381.48 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 381.48 Tm (Anthropic PBC \(Verenigde Staten\): modellen voor tekst) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 365.88 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 365.88 Tm (Higgsfield: beeld en film) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 350.28 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 350.28 Tm (Bij al deze partijen is contractueel uitgesloten dat jouw invoer wordt gebruikt om hun modellen te trainen.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 332.48 Tm (Publiceren op sociale kanalen:) Tj ET
+BT /F2 9.6 Tf 1 0 0 1 61.69 314.68 Tm (\267) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 70.69 314.68 Tm (Zernio: het koppelen aan en publiceren op jouw eigen socialkanalen, met de sleutel die jij zelf aansluit) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 296.88 Tm (Wij hebben met elk van deze partijen een verwerkersovereenkomst of gelijkwaardige voorwaarden. Bij partijen) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 282.48 Tm (buiten de EER berust de doorgifte op de standaardcontractbepalingen van de Europese Commissie, en waar van) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 268.08 Tm (toepassing op het EU-VS Data Privacy Framework.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 250.28 Tm (Deze lijst geldt op 19 september 2026. Wijzigingen worden dertig dagen vooraf aangekondigd volgens artikel 5.) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Verwerkersovereenkomst \267 SocialNow \267 socialnow.nl/verwerkersovereenkomst) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (6 / 6) Tj ET 0 0 0 rg
 endstream
@@ -383,24 +384,24 @@ xref
 0 18
 0000000000 65535 f 
 0000000015 00000 n 
-0000001219 00000 n 
-0000007369 00000 n 
-0000013522 00000 n 
-0000019709 00000 n 
-0000026369 00000 n 
-0000031239 00000 n 
-0000031336 00000 n 
-0000031438 00000 n 
-0000031581 00000 n 
-0000031725 00000 n 
-0000031869 00000 n 
-0000032013 00000 n 
-0000032157 00000 n 
-0000032301 00000 n 
-0000032394 00000 n 
-0000032502 00000 n 
+0000001216 00000 n 
+0000007366 00000 n 
+0000013519 00000 n 
+0000019706 00000 n 
+0000026366 00000 n 
+0000031365 00000 n 
+0000031462 00000 n 
+0000031564 00000 n 
+0000031707 00000 n 
+0000031851 00000 n 
+0000031995 00000 n 
+0000032139 00000 n 
+0000032283 00000 n 
+0000032427 00000 n 
+0000032520 00000 n 
+0000032628 00000 n 
 trailer
 << /Size 18 /Root 17 0 R /Info 16 0 R >>
 startxref
-32553
+32679
 %%EOF
