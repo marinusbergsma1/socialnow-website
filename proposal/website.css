@@ -332,9 +332,40 @@ video {
   overflow: hidden;
   color: #fff;
 }
+/* Groene fill die bij hover van links naar rechts inschuift (zoals de oude Button) */
+.h-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: #25d366;
+  transform: translateX(-101%);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  pointer-events: none;
+}
+.h-button:hover::before,
+.h-button:focus-visible::before {
+  transform: translateX(0);
+}
+.h-button-secondary::before {
+  background: #ffffff1f;
+}
 .h-button > span:not(.sn-btn3d-sheen) {
   position: relative;
   z-index: 6;
+}
+.h-button-icon {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.h-button:not(.h-button-secondary):hover .h-button-icon,
+.h-button:not(.h-button-secondary):focus-visible .h-button-icon {
+  background: #fff;
+  border-color: #fff;
+  color: #25d366;
+}
+@media (prefers-reduced-motion: reduce) {
+  .h-button::before { transition: none; }
 }
 .h-button-icon {
   border: 1px solid #ffffff24;
@@ -743,8 +774,8 @@ video {
   margin-top: 12px;
 }
 .h-clients {
-  padding-top: 75px;
-  padding-bottom: 5px;
+  padding-top: 48px;
+  padding-bottom: 36px;
   text-align: center;
 }
 .h-clients > div {

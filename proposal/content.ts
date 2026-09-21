@@ -270,7 +270,7 @@ export const faqs = [
 export const logos: [string, string, number?][] = [
   ["AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp", "Amsterdam Light Festival"],
   ["CHIN-CHIN-CLUB-LOGO.webp", "Chin Chin Club", 0.9],
-  ["MOJO-LOGO.webp", "MOJO", 0.62],
+  ["MOJO-LOGO.webp", "MOJO", 0.88],
   ["SUPPERCLUB-LOGO.webp", "Supperclub", 0.95],
   // 10 september 2026: het bestand UNDER-ARMOUR-LOGO-1.webp bevat het beeldmerk van Universal,
   // niet van Under Armour. Het werk voor Universal staat in data/projects.ts (banners voor

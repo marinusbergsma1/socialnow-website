@@ -110,6 +110,8 @@ export function Home() {
           </Link>
         </div>
       </section>
+      {/* 21 september 2026 (Marinus): logobalk direct onder de header geplaatst */}
+      <ClientLogos />
       <div className="h-fair h-wrap">
         <span>
           <i /> 24–26 september · Odoo-beurs
@@ -246,10 +248,7 @@ export function Home() {
         />
         <Questions />
       </section>
-      {/* 11 september 2026 (Marinus): "is zo iets niet beter onderaan de pagina?" De logorij
-          stond midden in het verhaal, tussen de video's en het eigen werk, en brak daar de opbouw.
-          Onderaan is het wat het is: het bewijs waar je mee wegloopt, vlak boven de voet. */}
-      <ClientLogos />
+
     </>
   );
 }
