@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Expand } from "lucide-react";
 import { projects } from "./content";
 import { AmbientVideo } from "./motion";
 import { MediaDialog, type MediaItem } from "./MediaSliders";
 import { Action, Heading } from "./ui";
 
+// 22 september 2026 (Marinus): de namen en het vergrootteken staan niet meer over de beelden heen;
+// het werk spreekt voor zich. De namen blijven in de captions staan, want ze vullen nog het
+// aria-label en de titel in het vergrootvenster.
 const selections = [
   {
     slug: "raveg-branding",
@@ -144,12 +146,6 @@ export default function FeaturedWork() {
                           height={tile ? 600 : 560}
                         />
                       )}
-                      <span className="h-featured-caption">
-                        <span>{selection.captions[tile]}</span>
-                        <span className="h-featured-open">
-                          {!motion && <Expand size={16} />}
-                        </span>
-                      </span>
                     </button>
                   );
                 })}

@@ -43,14 +43,14 @@ type Tekst = { kop: string; vraag: string; land: string; demo: string; site: str
 // het OS. Regels en looptijd staan in docs/WINACTIE-2026-09.md van de app; hier alleen de belofte.
 // Na de sluitingsdatum verdwijnt de strook vanzelf.
 const ACTIE_TOT = "2026-09-30";
-type Actie = { kop: string; regel: string };
+type Actie = { badge: string; kop: string; regel: string };
 const ACTIE: Record<Language, Actie> = {
-  nl: { kop: "Maak één post. Win een custom OS van €10.000.", regel: "Maak een post in SocialNow OS Studio en zet hem online op je eigen kanalen, met @socialnow.nl erbij getagd. Dat kan tot en met 30 september 2026." },
-  en: { kop: "Make one post. Win a custom OS worth €10.000.", regel: "Create a post in SocialNow OS Studio and publish it on your own channels, tagging @socialnow.nl. You have until 30 September 2026." },
-  de: { kop: "Machen Sie einen Post. Gewinnen Sie ein Custom OS im Wert von 10.000 €.", regel: "Erstellen Sie einen Post im SocialNow OS Studio und veröffentlichen Sie ihn auf Ihren eigenen Kanälen, mit @socialnow.nl markiert. Bis zum 30. September 2026." },
-  fr: { kop: "Publiez un post. Gagnez un OS sur mesure d’une valeur de 10 000 €.", regel: "Créez un post dans SocialNow OS Studio et publiez-le sur vos propres canaux, en taguant @socialnow.nl. Jusqu’au 30 septembre 2026." },
-  it: { kop: "Crea un post. Vinci un OS su misura del valore di 10.000 €.", regel: "Crea un post in SocialNow OS Studio e pubblicalo sui tuoi canali, taggando @socialnow.nl. C’è tempo fino al 30 settembre 2026." },
-  es: { kop: "Haz una publicación. Gana un OS a medida valorado en 10.000 €.", regel: "Crea una publicación en SocialNow OS Studio y publícala en tus propios canales, etiquetando a @socialnow.nl. Tienes hasta el 30 de septiembre de 2026." },
+  nl: { badge: "WINACTIE", kop: "Maak één post. Win een custom OS van €10.000.", regel: "Maak een post in SocialNow OS Studio en zet hem online op je eigen kanalen, met @socialnow.nl erbij getagd. Dat kan tot en met 30 september 2026." },
+  en: { badge: "GIVEAWAY", kop: "Make one post. Win a custom OS worth €10.000.", regel: "Create a post in SocialNow OS Studio and publish it on your own channels, tagging @socialnow.nl. You have until 30 September 2026." },
+  de: { badge: "GEWINNSPIEL", kop: "Machen Sie einen Post. Gewinnen Sie ein Custom OS im Wert von 10.000 €.", regel: "Erstellen Sie einen Post im SocialNow OS Studio und veröffentlichen Sie ihn auf Ihren eigenen Kanälen, mit @socialnow.nl markiert. Bis zum 30. September 2026." },
+  fr: { badge: "JEU CONCOURS", kop: "Publiez un post. Gagnez un OS sur mesure d’une valeur de 10 000 €.", regel: "Créez un post dans SocialNow OS Studio et publiez-le sur vos propres canaux, en taguant @socialnow.nl. Jusqu’au 30 septembre 2026." },
+  it: { badge: "CONCORSO", kop: "Crea un post. Vinci un OS su misura del valore di 10.000 €.", regel: "Crea un post in SocialNow OS Studio e pubblicalo sui tuoi canali, taggando @socialnow.nl. C’è tempo fino al 30 settembre 2026." },
+  es: { badge: "SORTEO", kop: "Haz una publicación. Gana un OS a medida valorado en 10.000 €.", regel: "Crea una publicación en SocialNow OS Studio y publícala en tus propios canales, etiquetando a @socialnow.nl. Tienes hasta el 30 de septiembre de 2026." },
 };
 function actieLoopt(): boolean { return Date.now() <= Date.parse(`${ACTIE_TOT}T23:59:59+02:00`); }
 
@@ -97,6 +97,18 @@ function zetMeten(ja: boolean) {
   } catch {}
 }
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+// 22 september 2026 (Marinus): de knoppen krijgen de werking van de knop "Try the OS" op
+// socialnow.nl: een glans over het groen, bij hover een lichtere vulling die van links naar rechts
+// inschuift, en een rondje met een pijl dat dan omkeert naar wit met groen. Geen tweede knopvorm
+// erbij, dezelfde vorm als de rest van de site.
+function Pijl() {
+  return (
+    <span className="sn-consent-pijl" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h13" /><path d="m12 5 7 7-7 7" /></svg>
+    </span>
+  );
+}
 
 export default function ConsentPopup() {
   const { language } = useLanguage();
@@ -160,8 +172,10 @@ export default function ConsentPopup() {
         </div>
         {actieLoopt() ? (
           <div className="sn-consent-actie">
+            <span className="sn-consent-actie-glans" aria-hidden="true" />
+            <span className="sn-consent-actie-badge">{a.badge}</span>
             <strong>{a.kop}</strong>
-            <span>{a.regel}</span>
+            <span className="sn-consent-actie-regel">{a.regel}</span>
           </div>
         ) : null}
         <div className="sn-consent-inhoud">
@@ -183,8 +197,8 @@ export default function ConsentPopup() {
           </label>
           {fout ? <p className="sn-consent-fout" role="alert">{fout}</p> : null}
           <div className="sn-consent-knoppen">
-            <button type="submit" className="sn-consent-knop" disabled={bezig}>{bezig ? g.bezig : g.verder}</button>
-            <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={() => { setFout(""); setStap("keuze"); }}>{g.terug}</button>
+            <button type="submit" className="sn-consent-knop" disabled={bezig}><span className="sn-consent-glans" aria-hidden="true" /><span>{bezig ? g.bezig : g.verder}</span><Pijl /></button>
+            <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span></button>
           </div>
         </form>
         ) : (<>
@@ -197,8 +211,8 @@ export default function ConsentPopup() {
           </select>
         </label>
         <div className="sn-consent-knoppen">
-          <button type="button" className="sn-consent-knop" onClick={() => setStap("gegevens")}>{s.demo}</button>
-          <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={akkoord}>{s.site}</button>
+          <button type="button" className="sn-consent-knop" onClick={() => setStap("gegevens")}><span className="sn-consent-glans" aria-hidden="true" /><span>{s.demo}</span><Pijl /></button>
+          <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={akkoord}><span>{s.site}</span></button>
         </div>
         <p className="sn-consent-tekst">
           {s.voor}<Link to="/voorwaarden">{s.voorwaarden}</Link>{s.en}<Link to="/privacy">{s.privacy}</Link>{s.na}
