@@ -84,7 +84,6 @@ export const beveiliging: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; 
         title: "Wat wij niet doen",
         paragraphs: [
           "Wij hebben geen ISO 27001- of SOC 2-certificering. SocialNow is een klein bedrijf; zo'n certificering zegt op dit moment meer over het budget voor auditors dan over de beveiliging zelf. Wat wij wel doen is hierboven te lezen, en in bijlage B van de verwerkersovereenkomst staat het als lijst waar je langs kunt lopen.",
-          "Wij maken alleen gemaskeerde schermopnames als jij daar afzonderlijk voor kiest; die keuze staat standaard uit. Tekst, invoervelden en media zijn afgeschermd, alleen bevoegde medewerkers bekijken een opname om knelpunten te vinden, elke inzage wordt gelogd en nieuwe opnames worden na 30 dagen gewist. Zie artikel 4 van het privacybeleid.",
           "Wij hebben geen achterdeur in een klantsysteem. Toegang loopt altijd via het kortlevende briefje dat het klantsysteem zelf beoordeelt.",
         ],
       },
@@ -165,7 +164,6 @@ export const beveiliging: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; 
         title: "What we do not do",
         paragraphs: [
           "We hold no ISO 27001 or SOC 2 certification. SocialNow is a small company; such a certification says more about the budget for auditors right now than about the security itself. What we do do is written above, and Annex B of the data processing agreement sets it out as a list you can walk through.",
-          "We only make masked session recordings if you separately opt in; that choice is off by default. Text, input fields and media are masked, only authorised staff view a recording to find friction, every viewing is logged and new recordings are deleted after 30 days. See article 4 of the privacy policy.",
           "We have no back door into a client system. Access always runs through the short-lived token that the client system judges itself.",
         ],
       },
