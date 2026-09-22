@@ -1781,11 +1781,12 @@ html {
 .sn-site .h-try-button,
 /* 16 september 2026 (Marinus): minder fel, meer verloop, zodat wit leesbaar blijft (4,6 op 1 op de
    lichtste plek). Hetzelfde groen als de knop in de welkomstpopup.
-   22 september 2026 (Marinus): een tint lichter. De bovenkant blijft op #12873f staan, want daar
-   houdt wit precies 4,6 op 1; de onderkant loopt minder ver weg in het donker, zodat de hele knop
-   lichter oogt. Wie dit nog lichter wil maken, meet eerst het contrast van de witte tekst. */
+   22 september 2026 (Marinus): lichter, hetzelfde groen als de knop in de welkomstpopup. Wit haalt
+   hier 3,2 op 1 in plaats van 4,6; de zachte donkere tekstschaduw houdt de letters scherp. Nog
+   lichter kan niet zonder de tekst te verliezen. */
 .sn-site .h-header-claim {
-  background: linear-gradient(180deg, #12873f 0%, #0f7d3a 55%, #0c7031 100%);
+  background: linear-gradient(180deg, #22a95e 0%, #1a9450 55%, #15803f 100%);
+  text-shadow: 0 1px 2px #00351a8c;
   color: #fff;
   border: 1px solid #25d36659;
   font-weight: 700;
@@ -1801,7 +1802,7 @@ html {
   border-color: #85f8af;
 }
 .sn-site .h-header-claim:hover {
-  background: linear-gradient(180deg, #12873f 0%, #0f7d3a 55%, #0c7031 100%);
+  background: linear-gradient(180deg, #22a95e 0%, #1a9450 55%, #15803f 100%);
   filter: brightness(1.08);
   color: #fff;
   border-color: #25d36699;
@@ -2230,23 +2231,25 @@ html {
 .sn-consent .sn-consent-fout{margin:0 0 12px;color:#ff9b9b;font-size:13px;text-align:left}
 .sn-consent .sn-consent-knop:disabled{opacity:.7;cursor:wait}
 .sn-consent .sn-consent-knoppen{display:grid;gap:10px;margin:0 0 20px}
-/* 22 september 2026 (Marinus): dezelfde werking als de knop "Try the OS" op socialnow.nl. Rust:
-   een groen verloop met een lichtrand en een glans erover. Hover: een lichtere vulling schuift van
-   links naar rechts in en het pijlrondje keert om naar wit met groen. Het groen is een tint lichter
-   dan eerst, maar niet lichter dan #12873f bovenin: wit houdt daar 4,6 op 1. */
-.sn-consent .sn-consent-knop{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:50px;padding:0 18px 0 22px;border:1px solid #25d36659;border-radius:999px;background:linear-gradient(180deg,#12873f 0%,#0f7d3a 55%,#0c7031 100%);color:#fff;font-weight:700;font-size:15px;line-height:1;font-family:inherit;letter-spacing:.01em;white-space:nowrap;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff47,inset 0 -3px 7px #00000059,0 3px 6px #00000073,0 0 18px #25d36630;transition:box-shadow .35s ease,transform .3s cubic-bezier(.16,1,.3,1)}
+/* 22 september 2026 (Marinus): dezelfde knop als "Discover the story" op socialnow.nl. Pil met
+   groene rand en glow, kleine hoofdletters, en rechts een rondje met een pijl schuin omhoog. Deze
+   is groen gevuld en lichter dan eerst, op verzoek. Wit op dit groen haalt 3,2 op 1; de zachte
+   donkere tekstschaduw houdt de letters scherp. Wie het nog lichter maakt, verliest de tekst. */
+.sn-consent .sn-consent-knop{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:17px;width:100%;min-height:50px;padding:10px 12px 10px 22px;border:1px solid #6ef0a5;border-radius:999px;background:linear-gradient(180deg,#22a95e 0%,#1a9450 55%,#15803f 100%);color:#fff;font-weight:700;font-size:12px;line-height:1.2;font-family:inherit;letter-spacing:.035em;text-transform:uppercase;text-shadow:0 1px 2px #00351a8c;white-space:nowrap;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff4d,0 0 0 1px #25d36633,0 0 18px #25d36640,0 4px 14px #00000059;transition:box-shadow .35s ease,transform .3s cubic-bezier(.16,1,.3,1)}
 .sn-consent .sn-consent-knop > span{position:relative;z-index:3}
-.sn-consent .sn-consent-knop:before{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit;background:#25d366;transform:translateX(-101%);transition:transform .5s cubic-bezier(.23,1,.32,1);pointer-events:none}
+.sn-consent .sn-consent-knop:before{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit;background:#4ce888;transform:translateX(-101%);transition:transform .5s cubic-bezier(.23,1,.32,1);pointer-events:none}
 .sn-consent .sn-consent-knop:hover:before,.sn-consent .sn-consent-knop:focus-visible:before{transform:translateX(0)}
-.sn-consent .sn-consent-glans{position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,#ffffff33,#ffffff08 45%,#ffffff00 62%)}
-.sn-consent .sn-consent-pijl{position:relative;z-index:3;display:grid;place-items:center;width:28px;height:28px;flex:none;border-radius:50%;background:#073e1a;color:#fff;transition:background-color .3s ease,color .3s ease}
+.sn-consent .sn-consent-glans{position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,#ffffff2e,#ffffff08 45%,#ffffff00 62%)}
+.sn-consent .sn-consent-pijl{position:relative;z-index:3;display:grid;place-items:center;width:28px;height:28px;flex:none;border-radius:50%;background:#0a4f27;color:#fff;transition:background-color .3s ease,color .3s ease}
 .sn-consent .sn-consent-knop:hover .sn-consent-pijl,.sn-consent .sn-consent-knop:focus-visible .sn-consent-pijl{background:#fff;color:#0c7c3a}
-.sn-consent .sn-consent-knop:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 #ffffff5c,inset 0 -3px 7px #0000004d,0 6px 14px #00000073,0 0 26px #25d3664d}
+.sn-consent .sn-consent-knop:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 #ffffff66,0 0 0 1px #4ce88866,0 0 28px #4ce8884d,0 8px 20px #00000066}
 .sn-consent .sn-consent-knop:active{transform:translateY(0)}
 .sn-consent .sn-consent-knop:focus-visible{outline:2px solid #5decb3;outline-offset:2px}
-.sn-consent .sn-consent-knop-stil{background:transparent;border:1px solid #ffffff29;color:#fff;box-shadow:none;padding:0 22px}
-.sn-consent .sn-consent-knop-stil:before{background:#ffffff1a}
-.sn-consent .sn-consent-knop-stil:hover{border-color:#ffffff47;box-shadow:none;transform:translateY(-2px)}
+.sn-consent .sn-consent-knop-stil{border-color:#ffffff33;background:linear-gradient(180deg,#151c17,#050706);text-shadow:none;box-shadow:inset 0 1px 0 #ffffff1f,0 4px 14px #00000059}
+.sn-consent .sn-consent-knop-stil:before{background:#ffffff1f}
+.sn-consent .sn-consent-knop-stil .sn-consent-pijl{background:#ffffff14}
+.sn-consent .sn-consent-knop-stil:hover .sn-consent-pijl{background:#fff;color:#0c7c3a}
+.sn-consent .sn-consent-knop-stil:hover{border-color:#ffffff5c;box-shadow:inset 0 1px 0 #ffffff2e,0 8px 20px #00000066}
 .sn-consent .sn-consent-tekst{margin:0;padding:16px 0 0;border-top:1px solid #ffffff14;color:#8fa1b5;font-size:12px;line-height:1.55}
 .sn-consent .sn-consent-tekst a{color:#fff;font-weight:600;text-decoration:underline;text-decoration-color:#ffffff4d;text-underline-offset:3px;white-space:nowrap}
 .sn-consent .sn-consent-tekst a:hover{text-decoration-color:#25d366}

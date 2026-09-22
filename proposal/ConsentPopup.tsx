@@ -98,14 +98,14 @@ function zetMeten(ja: boolean) {
 }
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-// 22 september 2026 (Marinus): de knoppen krijgen de werking van de knop "Try the OS" op
-// socialnow.nl: een glans over het groen, bij hover een lichtere vulling die van links naar rechts
-// inschuift, en een rondje met een pijl dat dan omkeert naar wit met groen. Geen tweede knopvorm
-// erbij, dezelfde vorm als de rest van de site.
+// 22 september 2026 (Marinus): de knoppen zijn dezelfde knop als "Discover the story" op
+// socialnow.nl: een pil met een groene rand en een rondje met een pijl schuin omhoog. Alleen is
+// deze groen gevuld in plaats van donker. Bij hover schuift een lichtere vulling van links naar
+// rechts in en keert het rondje om naar wit met groen.
 function Pijl() {
   return (
     <span className="sn-consent-pijl" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h13" /><path d="m12 5 7 7-7 7" /></svg>
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7" /><path d="M7 7h10v10" /></svg>
     </span>
   );
 }
@@ -198,7 +198,7 @@ export default function ConsentPopup() {
           {fout ? <p className="sn-consent-fout" role="alert">{fout}</p> : null}
           <div className="sn-consent-knoppen">
             <button type="submit" className="sn-consent-knop" disabled={bezig}><span className="sn-consent-glans" aria-hidden="true" /><span>{bezig ? g.bezig : g.verder}</span><Pijl /></button>
-            <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span></button>
+            <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span><Pijl /></button>
           </div>
         </form>
         ) : (<>
@@ -212,7 +212,7 @@ export default function ConsentPopup() {
         </label>
         <div className="sn-consent-knoppen">
           <button type="button" className="sn-consent-knop" onClick={() => setStap("gegevens")}><span className="sn-consent-glans" aria-hidden="true" /><span>{s.demo}</span><Pijl /></button>
-          <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={akkoord}><span>{s.site}</span></button>
+          <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={akkoord}><span>{s.site}</span><Pijl /></button>
         </div>
         <p className="sn-consent-tekst">
           {s.voor}<Link to="/voorwaarden">{s.voorwaarden}</Link>{s.en}<Link to="/privacy">{s.privacy}</Link>{s.na}
