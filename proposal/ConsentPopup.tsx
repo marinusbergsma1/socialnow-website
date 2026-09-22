@@ -31,7 +31,7 @@ export const LANDEN: { code: string; naam: string; vlag: string; taal: Language 
   { code: "XX", naam: "Other", vlag: "🌍", taal: "en" },
 ];
 
-type Tekst = { kop: string; vraag: string; land: string; demo: string; site: string; voor: string; voorwaarden: string; en: string; privacy: string; na: string };
+type Tekst = { kop: string; land: string; demo: string; site: string; voor: string; voorwaarden: string; en: string; privacy: string; na: string };
 // 17 september 2026 (Marinus): wie naar de demo gaat, laat eerst naam, e-mail en (optioneel)
 // telefoon achter. Dat komt binnen op os.socialnow.nl/aanmeldingen.
 // 22 september 2026 (Marinus): het losse vinkje voor meten is weg. Het meten staat in de algemene
@@ -65,12 +65,12 @@ const GEGEVENS: Record<Language, Gegevens> = {
 };
 const AANMELD_URL = "https://os.socialnow.nl/api/aanmelden";
 const TEKST: Record<Language, Tekst> = {
-  nl: { kop: "Welkom bij SocialNow.", vraag: "Kom je voor de demo, of wil je eerst de website bekijken?", land: "Je land", demo: "Naar de demo", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies op de website; in het OS meten we alleen met jouw toestemming." },
-  en: { kop: "Welcome to SocialNow.", vraag: "Are you here for the demo, or do you want to explore the website first?", land: "Your country", demo: "Go to the demo", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies on the website; in the OS we only measure with your consent." },
-  de: { kop: "Willkommen bei SocialNow.", vraag: "Kommen Sie für die Demo, oder möchten Sie zuerst die Website ansehen?", land: "Ihr Land", demo: "Zur Demo", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies auf der Website; im OS messen wir nur mit Ihrer Zustimmung." },
-  fr: { kop: "Bienvenue chez SocialNow.", vraag: "Vous venez pour la démo, ou vous voulez d’abord découvrir le site ?", land: "Votre pays", demo: "Voir la démo", site: "Découvrir le site", voor: "En essayant l’OS ou en découvrant le site, vous acceptez nos ", voorwaarden: "conditions générales", en: " et notre ", privacy: "politique de confidentialité", na: ". Pas de cookies de suivi sur le site ; dans l’OS, nous ne mesurons qu’avec votre accord." },
-  it: { kop: "Benvenuto in SocialNow.", vraag: "Sei qui per la demo, o vuoi prima esplorare il sito?", land: "Il tuo paese", demo: "Vai alla demo", site: "Esplora il sito", voor: "Provando l’OS o esplorando il sito, accetti i nostri ", voorwaarden: "termini di servizio", en: " e la nostra ", privacy: "informativa sulla privacy", na: ". Nessun cookie di tracciamento sul sito; nell’OS misuriamo solo con il tuo consenso." },
-  es: { kop: "Bienvenido a SocialNow.", vraag: "¿Vienes por la demo, o quieres ver primero la web?", land: "Tu país", demo: "Ir a la demo", site: "Ver la web", voor: "Al probar el OS o ver la web, aceptas nuestros ", voorwaarden: "términos de servicio", en: " y nuestra ", privacy: "política de privacidad", na: ". Sin cookies de seguimiento en la web; en el OS solo medimos con tu consentimiento." },
+  nl: { kop: "Welkom bij SocialNow.", land: "Je land", demo: "Naar de demo", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies op de website; in het OS meten we alleen met jouw toestemming." },
+  en: { kop: "Welcome to SocialNow.", land: "Your country", demo: "Go to the demo", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies on the website; in the OS we only measure with your consent." },
+  de: { kop: "Willkommen bei SocialNow.", land: "Ihr Land", demo: "Zur Demo", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies auf der Website; im OS messen wir nur mit Ihrer Zustimmung." },
+  fr: { kop: "Bienvenue chez SocialNow.", land: "Votre pays", demo: "Voir la démo", site: "Découvrir le site", voor: "En essayant l’OS ou en découvrant le site, vous acceptez nos ", voorwaarden: "conditions générales", en: " et notre ", privacy: "politique de confidentialité", na: ". Pas de cookies de suivi sur le site ; dans l’OS, nous ne mesurons qu’avec votre accord." },
+  it: { kop: "Benvenuto in SocialNow.", land: "Il tuo paese", demo: "Vai alla demo", site: "Esplora il sito", voor: "Provando l’OS o esplorando il sito, accetti i nostri ", voorwaarden: "termini di servizio", en: " e la nostra ", privacy: "informativa sulla privacy", na: ". Nessun cookie di tracciamento sul sito; nell’OS misuriamo solo con il tuo consenso." },
+  es: { kop: "Bienvenido a SocialNow.", land: "Tu país", demo: "Ir a la demo", site: "Ver la web", voor: "Al probar el OS o ver la web, aceptas nuestros ", voorwaarden: "términos de servicio", en: " y nuestra ", privacy: "política de privacidad", na: ". Sin cookies de seguimiento en la web; en el OS solo medimos con tu consentimiento." },
 };
 
 function bewaard(): boolean { try { return localStorage.getItem(SLEUTEL) === LEGAL_VERSION; } catch { return false; } }
@@ -204,7 +204,6 @@ export default function ConsentPopup() {
         </form>
         ) : (<>
         <h2 id="sn-consent-kop" className="sn-consent-kop">{s.kop}</h2>
-        <p className="sn-consent-vraag">{s.vraag}</p>
         <label className="sn-consent-land">
           <span>{s.land}</span>
           <select value={land} onChange={e => kiesLand(e.target.value)} aria-label={s.land}>
