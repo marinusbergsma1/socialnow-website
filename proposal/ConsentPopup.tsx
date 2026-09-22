@@ -101,7 +101,8 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 // 22 september 2026 (Marinus): de knoppen zijn dezelfde knop als "Discover the story" op
 // socialnow.nl: een pil met een groene rand en een rondje met een pijl schuin omhoog. Alleen is
 // deze groen gevuld in plaats van donker. Bij hover schuift een lichtere vulling van links naar
-// rechts in en keert het rondje om naar wit met groen.
+// rechts in en keert het rondje om naar wit met groen. De donkere knop ernaast blijft stil: geen
+// gloed en geen pijl, zodat er maar een knop om aandacht vraagt.
 function Pijl() {
   return (
     <span className="sn-consent-pijl" aria-hidden="true">
@@ -198,7 +199,7 @@ export default function ConsentPopup() {
           {fout ? <p className="sn-consent-fout" role="alert">{fout}</p> : null}
           <div className="sn-consent-knoppen">
             <button type="submit" className="sn-consent-knop" disabled={bezig}><span className="sn-consent-glans" aria-hidden="true" /><span>{bezig ? g.bezig : g.verder}</span><Pijl /></button>
-            <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span><Pijl /></button>
+            <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span></button>
           </div>
         </form>
         ) : (<>
@@ -212,7 +213,7 @@ export default function ConsentPopup() {
         </label>
         <div className="sn-consent-knoppen">
           <button type="button" className="sn-consent-knop" onClick={() => setStap("gegevens")}><span className="sn-consent-glans" aria-hidden="true" /><span>{s.demo}</span><Pijl /></button>
-          <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={akkoord}><span>{s.site}</span><Pijl /></button>
+          <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={akkoord}><span>{s.site}</span></button>
         </div>
         <p className="sn-consent-tekst">
           {s.voor}<Link to="/voorwaarden">{s.voorwaarden}</Link>{s.en}<Link to="/privacy">{s.privacy}</Link>{s.na}
