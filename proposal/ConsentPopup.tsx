@@ -33,8 +33,27 @@ export const LANDEN: { code: string; naam: string; vlag: string; taal: Language 
 
 type Tekst = { kop: string; vraag: string; land: string; demo: string; site: string; voor: string; voorwaarden: string; en: string; privacy: string; na: string };
 // 17 september 2026 (Marinus): wie naar de demo gaat, laat eerst naam, e-mail en (optioneel)
-// telefoon achter. Dat komt binnen op os.socialnow.nl/aanmeldingen. Het vinkje voor meten staat
-// standaard uit; alleen met een vinkje start PostHog in het OS (cookie sn-meten).
+// telefoon achter. Dat komt binnen op os.socialnow.nl/aanmeldingen.
+// 22 september 2026 (Marinus): het losse vinkje voor meten is weg. Het meten staat in de algemene
+// voorwaarden, en daar gaat iemand in de stap hiervoor al mee akkoord; een tweede vraag op hetzelfde
+// scherm kost alleen aandacht. De cookie sn-meten wordt daarom op "ja" gezet bij het doorgaan. De
+// tekst g.meten blijft staan voor het geval het vinkje terugkomt.
+// 22 september 2026 (Marinus): wie hier binnenkomt, komt meestal binnen op de film over het
+// persoonlijke OS en de winactie. Dat hoort dus in de onboarding te staan, en niet pas ergens in
+// het OS. Regels en looptijd staan in docs/WINACTIE-2026-09.md van de app; hier alleen de belofte.
+// Na de sluitingsdatum verdwijnt de strook vanzelf.
+const ACTIE_TOT = "2026-09-30";
+type Actie = { kop: string; regel: string };
+const ACTIE: Record<Language, Actie> = {
+  nl: { kop: "Maak \u00e9\u00e9n post. Win een custom OS van \u20ac10.000.", regel: "Maak v\u00f3\u00f3r 30 september 2026 een post in SocialNow OS Studio. Dat is de hele deelname." },
+  en: { kop: "Make one post. Win a custom OS worth \u20ac10.000.", regel: "Create a post in SocialNow OS Studio before 30 September 2026. That is the whole entry." },
+  de: { kop: "Machen Sie einen Post. Gewinnen Sie ein Custom OS im Wert von 10.000\u00a0\u20ac.", regel: "Erstellen Sie vor dem 30. September 2026 einen Post im SocialNow OS Studio. Mehr ist nicht n\u00f6tig." },
+  fr: { kop: "Publiez un post. Gagnez un OS sur mesure d\u2019une valeur de 10\u202f000\u00a0\u20ac.", regel: "Cr\u00e9ez un post dans SocialNow OS Studio avant le 30 septembre 2026. C\u2019est toute la participation." },
+  it: { kop: "Crea un post. Vinci un OS su misura del valore di 10.000\u00a0\u20ac.", regel: "Crea un post in SocialNow OS Studio entro il 30 settembre 2026. \u00c8 tutta qui la partecipazione." },
+  es: { kop: "Haz una publicaci\u00f3n. Gana un OS a medida valorado en 10.000\u00a0\u20ac.", regel: "Crea una publicaci\u00f3n en SocialNow OS Studio antes del 30 de septiembre de 2026. Eso es toda la participaci\u00f3n." },
+};
+function actieLoopt(): boolean { return Date.now() <= Date.parse(`${ACTIE_TOT}T23:59:59+02:00`); }
+
 type Gegevens = { kop: string; uitleg: string; naam: string; email: string; tel: string; optioneel: string; meten: string; verder: string; terug: string; foutNaam: string; foutEmail: string; bezig: string };
 const GEGEVENS: Record<Language, Gegevens> = {
   nl: { kop: "Bijna in de demo.", uitleg: "Laat je gegevens achter, dan kunnen we je later helpen.", naam: "Naam", email: "E-mail", tel: "Telefoon", optioneel: "optioneel", meten: "Ja, jullie mogen meten hoe ik het OS gebruik, om het beter te maken.", verder: "Naar de demo", terug: "Terug", foutNaam: "Vul je naam in.", foutEmail: "Dat e-mailadres klopt nog niet.", bezig: "Even geduld…" },
@@ -88,7 +107,6 @@ export default function ConsentPopup() {
   const [naam, setNaam] = useState("");
   const [email, setEmail] = useState("");
   const [tel, setTel] = useState("");
-  const [meten, setMeten] = useState(false);
   const [fout, setFout] = useState("");
   const [bezig, setBezig] = useState(false);
   useEffect(() => { setOpen(!bewaard()); setLand(landUitBrowser()); }, []);
@@ -106,6 +124,7 @@ export default function ConsentPopup() {
   if (!open || leest) return null;
   const gekozen = LANDEN.find(l => l.code === land) || LANDEN[0];
   const s = TEKST[language] || TEKST.en;
+  const a = ACTIE[language] || ACTIE.en;
   const kiesLand = (code: string) => {
     const l = LANDEN.find(x => x.code === code) || LANDEN[0]; setLand(l.code); zetCookies(l.code, l.taal);
     // De taal van de site hangt aan de route; een volledige herlading zet alles (kop, menu, popup) in de nieuwe taal.
@@ -113,7 +132,7 @@ export default function ConsentPopup() {
   };
   const akkoord = () => { try { localStorage.setItem(SLEUTEL, LEGAL_VERSION); } catch {} zetCookies(gekozen.code, gekozen.taal); setOpen(false); };
   const g = GEGEVENS[language] || GEGEVENS.en;
-  const naarDemo = () => { akkoord(); zetMeten(meten); window.location.href = `${DEMO_URL}?bron=demo&taal=${gekozen.taal}&land=${gekozen.code}`; };
+  const naarDemo = () => { akkoord(); zetMeten(true); window.location.href = `${DEMO_URL}?bron=demo&taal=${gekozen.taal}&land=${gekozen.code}`; };
   // Versturen mag de demo nooit tegenhouden: alleen een fout in de eigen invoer houdt iemand hier.
   const verstuur = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -125,7 +144,7 @@ export default function ConsentPopup() {
     try {
       const r = await fetch(AANMELD_URL, {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bron: "demo", naam: n, email: m, mobiel: tel.trim(), land: gekozen.code, taal: gekozen.taal, meten, voorwaarden: LEGAL_VERSION }),
+        body: JSON.stringify({ bron: "demo", naam: n, email: m, mobiel: tel.trim(), land: gekozen.code, taal: gekozen.taal, meten: true, voorwaarden: LEGAL_VERSION }),
         signal: AbortSignal.timeout(6000),
       });
       if (r.status === 400) { const j = await r.json().catch(() => null); setFout(String(j?.error || g.foutEmail)); setBezig(false); return; }
@@ -139,6 +158,12 @@ export default function ConsentPopup() {
         <div className="sn-consent-merk">
           <img className="sn-consent-logo" src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="1556" height="240" />
         </div>
+        {actieLoopt() ? (
+          <div className="sn-consent-actie">
+            <strong>{a.kop}</strong>
+            <span>{a.regel}</span>
+          </div>
+        ) : null}
         <div className="sn-consent-inhoud">
         {stap === "gegevens" ? (
         <form className="sn-consent-form" onSubmit={verstuur} noValidate>
@@ -155,10 +180,6 @@ export default function ConsentPopup() {
           <label className="sn-consent-land">
             <span>{g.tel} <em>({g.optioneel})</em></span>
             <input type="tel" autoComplete="tel" inputMode="tel" maxLength={30} value={tel} onChange={e => setTel(e.target.value)} />
-          </label>
-          <label className="sn-consent-vink">
-            <input type="checkbox" checked={meten} onChange={e => setMeten(e.target.checked)} />
-            <span>{g.meten}</span>
           </label>
           {fout ? <p className="sn-consent-fout" role="alert">{fout}</p> : null}
           <div className="sn-consent-knoppen">

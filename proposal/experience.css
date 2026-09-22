@@ -2200,6 +2200,13 @@ html {
 .sn-consent .sn-consent-card{position:relative;overflow:hidden;width:min(420px,100%);text-align:center;border:1px solid #ffffff1f;border-radius:18px;padding:0;background:linear-gradient(145deg,#0c1d32 0%,#06101e 58%,#040b15 100%);box-shadow:0 2px 6px #00000059,0 30px 80px #00000080;color:#f8fbff;animation:qr-os-rise .52s cubic-bezier(.18,.88,.25,1) both}
 .sn-consent .sn-consent-merk{display:flex;align-items:center;justify-content:center;height:72px;padding:0 24px;border-bottom:1px solid #ffffff14;background:linear-gradient(100deg,#040b15,#0c1d32 50%,#040b15)}
 .sn-consent .sn-consent-logo{display:block;width:auto;height:30px;max-width:100%;object-fit:contain;margin:0}
+/* 22 september 2026: de winactie hoort in de onboarding, want daarvoor komen de meeste bezoekers
+   binnen. Eén strook onder het woordlogo: de belofte vet, de deelname eronder. Wit op donker, geen
+   tweede kleurenwereld. */
+.sn-consent .sn-consent-actie{display:grid;gap:5px;padding:14px 28px;text-align:left;border-bottom:1px solid #ffffff14;background:linear-gradient(100deg,#062417,#0b3a25 55%,#062417)}
+.sn-consent .sn-consent-actie strong{color:#fff;font-size:14px;font-weight:800;line-height:1.25;letter-spacing:-.01em}
+.sn-consent .sn-consent-actie span{color:#9fd9bd;font-size:12px;line-height:1.45}
+@media (max-width:480px){.sn-consent .sn-consent-actie{padding:12px 20px}.sn-consent .sn-consent-actie strong{font-size:13px}}
 .sn-consent .sn-consent-inhoud{padding:26px 28px 22px}
 .sn-consent .sn-consent-kop{margin:0 0 10px;font-size:28px;line-height:1.1;letter-spacing:-.03em;font-weight:800;color:#fff}
 .sn-consent .sn-consent-vraag{margin:0 auto 22px;max-width:32ch;color:#b5c1d0;font-size:14px;line-height:1.5}
