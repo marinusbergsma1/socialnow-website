@@ -45,12 +45,12 @@ type Tekst = { kop: string; vraag: string; land: string; demo: string; site: str
 const ACTIE_TOT = "2026-09-30";
 type Actie = { kop: string; regel: string };
 const ACTIE: Record<Language, Actie> = {
-  nl: { kop: "Maak \u00e9\u00e9n post. Win een custom OS van \u20ac10.000.", regel: "Maak v\u00f3\u00f3r 30 september 2026 een post in SocialNow OS Studio. Dat is de hele deelname." },
-  en: { kop: "Make one post. Win a custom OS worth \u20ac10.000.", regel: "Create a post in SocialNow OS Studio before 30 September 2026. That is the whole entry." },
-  de: { kop: "Machen Sie einen Post. Gewinnen Sie ein Custom OS im Wert von 10.000\u00a0\u20ac.", regel: "Erstellen Sie vor dem 30. September 2026 einen Post im SocialNow OS Studio. Mehr ist nicht n\u00f6tig." },
-  fr: { kop: "Publiez un post. Gagnez un OS sur mesure d\u2019une valeur de 10\u202f000\u00a0\u20ac.", regel: "Cr\u00e9ez un post dans SocialNow OS Studio avant le 30 septembre 2026. C\u2019est toute la participation." },
-  it: { kop: "Crea un post. Vinci un OS su misura del valore di 10.000\u00a0\u20ac.", regel: "Crea un post in SocialNow OS Studio entro il 30 settembre 2026. \u00c8 tutta qui la partecipazione." },
-  es: { kop: "Haz una publicaci\u00f3n. Gana un OS a medida valorado en 10.000\u00a0\u20ac.", regel: "Crea una publicaci\u00f3n en SocialNow OS Studio antes del 30 de septiembre de 2026. Eso es toda la participaci\u00f3n." },
+  nl: { kop: "Maak één post. Win een custom OS van €10.000.", regel: "Maak een post in SocialNow OS Studio en zet hem online op je eigen kanalen, met @socialnow.nl erbij getagd. Dat kan tot en met 30 september 2026." },
+  en: { kop: "Make one post. Win a custom OS worth €10.000.", regel: "Create a post in SocialNow OS Studio and publish it on your own channels, tagging @socialnow.nl. You have until 30 September 2026." },
+  de: { kop: "Machen Sie einen Post. Gewinnen Sie ein Custom OS im Wert von 10.000 €.", regel: "Erstellen Sie einen Post im SocialNow OS Studio und veröffentlichen Sie ihn auf Ihren eigenen Kanälen, mit @socialnow.nl markiert. Bis zum 30. September 2026." },
+  fr: { kop: "Publiez un post. Gagnez un OS sur mesure d’une valeur de 10 000 €.", regel: "Créez un post dans SocialNow OS Studio et publiez-le sur vos propres canaux, en taguant @socialnow.nl. Jusqu’au 30 septembre 2026." },
+  it: { kop: "Crea un post. Vinci un OS su misura del valore di 10.000 €.", regel: "Crea un post in SocialNow OS Studio e pubblicalo sui tuoi canali, taggando @socialnow.nl. C’è tempo fino al 30 settembre 2026." },
+  es: { kop: "Haz una publicación. Gana un OS a medida valorado en 10.000 €.", regel: "Crea una publicación en SocialNow OS Studio y publícala en tus propios canales, etiquetando a @socialnow.nl. Tienes hasta el 30 de septiembre de 2026." },
 };
 function actieLoopt(): boolean { return Date.now() <= Date.parse(`${ACTIE_TOT}T23:59:59+02:00`); }
 
