@@ -268,6 +268,8 @@ export const faqs = [
    mens ziet geen gelijke vakken, hij ziet gelijk gewicht. Dit getal schaalt het vak, zodat ze
    naast elkaar even zwaar staan. 1 is de volle maat; leeg is ook 1. */
 export const logos: [string, string, number?][] = [
+  // 23 september 2026 (Marinus): "AZ wil ik daar graag ook bij". Eenkleurig, zoals de rest.
+  ["AZ-LOGO.webp", "AZ", 0.62],
   ["AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp", "Amsterdam Light Festival"],
   ["CHIN-CHIN-CLUB-LOGO.webp", "Chin Chin Club", 0.9],
   ["MOJO-LOGO.webp", "MOJO", 0.88],
