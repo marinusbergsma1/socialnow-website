@@ -4,6 +4,7 @@ import { ChevronLeft, Download } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import { useLanguage, languagePrefix } from "../proposal/i18n/context";
 import { DOCUMENTEN } from "./legal-index";
+import Keurmerken from "../proposal/Keurmerken";
 
 // De juridische hub — 19 september 2026.
 //
@@ -58,7 +59,8 @@ export default function JuridischPage() {
         </button>
         <div className="scroll-reveal">
           <h1 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter mb-4">{t.titel}</h1>
-          <p className="text-gray-300 text-base mb-12 max-w-2xl">{t.intro}</p>
+          <p className="text-gray-300 text-base mb-8 max-w-2xl">{t.intro}</p>
+          <Keurmerken className="h-keurmerken--links mb-12" />
         </div>
 
         <div className="space-y-4 scroll-reveal">

@@ -1006,6 +1006,36 @@
   padding: 55px 0;
   text-align: center;
 }
+.h-keurmerken {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 0 auto 32px;
+}
+.h-keurmerken--links {
+  justify-content: flex-start;
+}
+.h-keurmerken a {
+  display: block;
+  border-radius: 50%;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.h-keurmerken a:hover,
+.h-keurmerken a:focus-visible {
+  transform: translateY(-3px);
+}
+.h-keurmerken img {
+  display: block;
+  width: 120px;
+  height: 120px;
+}
+@media (max-width: 640px) {
+  .h-keurmerken img {
+    width: 96px;
+    height: 96px;
+  }
+}
 .h-footer-company p {
   font-size: 13px;
   line-height: 1.8;

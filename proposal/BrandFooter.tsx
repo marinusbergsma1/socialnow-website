@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { services } from "./content";
 import { Closing } from "./ui";
+import Keurmerken from "./Keurmerken";
 export default function BrandFooter() {
   return (
     <footer className="h-brand-footer">
@@ -78,6 +79,7 @@ export default function BrandFooter() {
           </div>
         </div>
         <div className="h-footer-company">
+          <Keurmerken />
           <p>SocialNow · Software, creatie en marketing. Amsterdam · KVK 90877179.</p>
           {/* 19 september 2026: er zijn zeven juridische documenten in plaats van twee. Ze staan
               bij elkaar op /juridisch; twee losse links in de voettekst suggereerden dat er
