@@ -97,9 +97,9 @@ for (const [route, meta] of Object.entries(routeMeta)) {
       '@context': 'https://schema.org',
       '@graph': [
         { ...person('Marinus Bergsma', 'Founder & Creative Art Director'), url: `${BASE}/team`, knowsAbout: ['AI Marketing', 'Branding', 'Creative Direction'] },
-        person('Jos Hollenberg', 'Marketeer'),
+        person('Jos Hollenberg', 'Meta Ads'),
         person('Sergio Jovovic', 'Meta Marketeer'),
-        person('Carmel Boon', 'Video & Motion Editor'),
+        person('Carmel Boon', 'Video'),
         person('Emma Peperkamp', 'Fotograaf'),
         person('Nick van Keulen', 'Google Ads Expert'),
         person('Sid van Kalken', 'Webdeveloper'),

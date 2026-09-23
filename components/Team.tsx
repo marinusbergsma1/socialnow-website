@@ -29,7 +29,7 @@ const team: TeamItem[] = [
     id: 2, 
     type: 'member',
     name: "Jos Hollenberg", 
-    role: "Marketeer", 
+    role: "Meta Ads", 
     image: `${import.meta.env.BASE_URL}images/Jos-Hollenberg-1.webp` 
   },
   { 
@@ -43,7 +43,7 @@ const team: TeamItem[] = [
     id: 4, 
     type: 'member',
     name: "Carmel Boon", 
-    role: "Video & Motion Editor", 
+    role: "Video", 
     image: `${import.meta.env.BASE_URL}images/Carmel-Boon-V2.webp` 
   },
   {

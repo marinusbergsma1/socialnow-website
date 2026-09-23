@@ -49,7 +49,7 @@ const crew: CrewMember[] = [
   {
     id: 4,
     name: 'Carmel Boon',
-    role: 'Video & Motion Editor',
+    role: 'Video',
     tag: 'MOTION_LAB',
     line: 'Knipt aandacht uit elke seconde beeld.',
     color: '#F7E644',
@@ -114,7 +114,7 @@ const osPartners: OsPartner[] = [
   },
   {
     name: 'Jos Hollenberg',
-    role: 'Marketeer',
+    role: 'Meta Ads',
     company: 'Marketing & Groei',
     tag: 'GROWTH_OS',
     color: '#25D366',

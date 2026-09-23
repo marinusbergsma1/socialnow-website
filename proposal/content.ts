@@ -6,7 +6,7 @@ export const people = [
     role: "Founder & Creative Art Director",
     image: "Marinus-Bergsma-V2.webp",
   },
-  { name: "Jos Hollenberg", role: "Marketeer", image: "Jos-Hollenberg-1.webp" },
+  { name: "Jos Hollenberg", role: "Meta Ads", image: "Jos-Hollenberg-1.webp" },
   {
     name: "Sergio Jovovic",
     role: "Meta Marketeer",
@@ -14,7 +14,7 @@ export const people = [
   },
   {
     name: "Carmel Boon",
-    role: "Video & Motion Editor",
+    role: "Video",
     image: "Carmel-Boon-V2.webp",
   },
   {
