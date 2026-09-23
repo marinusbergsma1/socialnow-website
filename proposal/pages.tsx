@@ -16,6 +16,7 @@ import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
 import { useLanguage } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
+import { AuditTeaser } from "./AuditPage";
 import CustomerReviews from "./CustomerReviews";
 import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
@@ -650,6 +651,7 @@ export function TeamPage() {
           Steef Komen werkt vanuit Komen Consultancy mee aan accountancy en
           data.
         </p>
+        <AuditTeaser />
       </section>
     </>
   );

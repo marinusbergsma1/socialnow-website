@@ -23,6 +23,7 @@ import {
   ServicesPage,
   TeamPage,
 } from "./pages";
+import { AuditPage } from "./AuditPage";
 import LogoIntro from "./LogoIntro";
 import QrOsWelcome from "./QrOsWelcome";
 import BrandFooter from "./BrandFooter";
@@ -195,6 +196,7 @@ function ProposalShell() {
           <Route path="/diensten" element={<ServicesPage />} />
           <Route path="/prijzen" element={<PricesPage />} />
           <Route path="/team" element={<TeamPage />} />
+          <Route path="/audit" element={<AuditPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route

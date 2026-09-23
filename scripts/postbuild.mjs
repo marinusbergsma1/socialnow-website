@@ -25,6 +25,7 @@ const routeMeta = {
   prijzen: {title: 'Aanbod — Probeer het OS & Custom OS | SocialNow', description: 'Probeer het OS. Voor jouw Custom OS maken we een persoonlijk voorstel met een duidelijke scope, kosten en begeleiding.'},
   privacy: {title: 'Privacybeleid | SocialNow', description: 'Lees hoe SocialNow omgaat met persoonsgegevens en welke rechten je hebt.'},
   voorwaarden: {title: 'Algemene voorwaarden | SocialNow', description: 'De algemene voorwaarden van SocialNow, inclusief het gebruik van SocialNow OS.'},
+  audit: {title: 'Gratis Google Ads audit | SocialNow', description: 'Nick van Keulen loopt je Google Ads handmatig door: tracking, structuur, biedstrategie en productfeed. Met actieplan en videocall. Gratis.'},
   team: {title: 'Team — De mensen achter het OS | SocialNow', description: 'Maak kennis met Marinus Bergsma en de creatieve en technische specialisten achter SocialNow.'},
   blog: {title: 'Blog — Vanuit de praktijk | SocialNow', description: 'Inzichten over websites, AI, content en vindbaarheid vanuit het werk van SocialNow.'},
   // 19 september 2026: de juridische laag. Elk document krijgt een eigen route met eigen
@@ -47,6 +48,7 @@ const crumbLabels = {
   privacy: 'Privacybeleid',
   voorwaarden: 'Algemene voorwaarden',
   team: 'Team',
+  audit: 'Gratis Google Ads audit',
   blog: 'Blog',
   juridisch: 'Juridisch en compliance',
   verwerkersovereenkomst: 'Verwerkersovereenkomst',

@@ -1010,8 +1010,8 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 18px;
-  margin: 0 auto 32px;
+  gap: 14px;
+  margin: 0 auto 22px;
 }
 .h-keurmerken--links {
   justify-content: flex-start;
@@ -1027,13 +1027,13 @@
 }
 .h-keurmerken img {
   display: block;
-  width: 120px;
-  height: 120px;
+  width: 84px;
+  height: 84px;
 }
 @media (max-width: 640px) {
   .h-keurmerken img {
-    width: 96px;
-    height: 96px;
+    width: 68px;
+    height: 68px;
   }
 }
 .h-footer-company p {
@@ -2193,7 +2193,7 @@ html {
 .sn-site .h-final-contact a { display: inline-flex; align-items: center; gap: 6px; }
 .sn-site .h-brand-footer .h-footer-links { padding-block: 28px; }
 .sn-site .h-brand-footer .h-footer-company { padding-block: 20px; }
-.sn-site .h-brand-footer .h-footer-company p { font-size: 11px; line-height: 1.6; margin: 4px 0; }
+.sn-site .h-brand-footer .h-footer-company p { font-size: 11px; line-height: 1.6; margin: 4px auto; }
 .sn-site .h-hero-content > .h-team-trust { max-width: 48%; pointer-events: auto; }
 @media (max-width: 700px) {
   .sn-site .h-final-close { padding: 32px 0 28px; }
