@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import "./consent-duo.css";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage, languagePrefix, type Language } from "./i18n/context";
 import { LEGAL_VERSION } from "../components/legal";
@@ -31,7 +32,7 @@ export const LANDEN: { code: string; naam: string; vlag: string; taal: Language 
   { code: "XX", naam: "Other", vlag: "🌍", taal: "en" },
 ];
 
-type Tekst = { kop: string; land: string; demo: string; site: string; voor: string; voorwaarden: string; en: string; privacy: string; na: string };
+type Tekst = { kop: string; land: string; demo: string; site: string; voor: string; voorwaarden: string; en: string; privacy: string; na: string; intro: string; stap1: string; stap2: string; volgende: string; phNaam: string; phEmail: string };
 // 17 september 2026 (Marinus): wie naar de demo gaat, laat eerst naam, e-mail en (optioneel)
 // telefoon achter. Dat komt binnen op os.socialnow.nl/aanmeldingen.
 // 22 september 2026 (Marinus): het losse vinkje voor meten is weg. Het meten staat in de algemene
@@ -43,16 +44,18 @@ type Tekst = { kop: string; land: string; demo: string; site: string; voor: stri
 // het OS. Regels en looptijd staan in docs/WINACTIE-2026-09.md van de app; hier alleen de belofte.
 // Na de sluitingsdatum verdwijnt de strook vanzelf.
 const ACTIE_TOT = "2026-09-30";
-type Actie = { badge: string; kop: string; regel: string };
+// 23 september 2026 (Marinus): de winactie groen en positief, met het bedrag groot en vet zoals
+// op de flyer. Taggen: SocialNow.nl en Komen Consultancy, zoals op de beurs.
+type Actie = { badge: string; kop: string; win: string; bedrag: string; regel: string };
 const ACTIE: Record<Language, Actie> = {
-  nl: { badge: "WINACTIE", kop: "Maak één post. Win een custom OS van €10.000.", regel: "Maak een post in SocialNow OS Studio en zet hem online op je eigen kanalen, met @socialnow.nl erbij getagd. Dat kan tot en met 30 september 2026." },
-  en: { badge: "GIVEAWAY", kop: "Make one post. Win a custom OS worth €10.000.", regel: "Create a post in SocialNow OS Studio and publish it on your own channels, tagging @socialnow.nl. You have until 30 September 2026." },
-  de: { badge: "GEWINNSPIEL", kop: "Machen Sie einen Post. Gewinnen Sie ein Custom OS im Wert von 10.000 €.", regel: "Erstellen Sie einen Post im SocialNow OS Studio und veröffentlichen Sie ihn auf Ihren eigenen Kanälen, mit @socialnow.nl markiert. Bis zum 30. September 2026." },
-  fr: { badge: "JEU CONCOURS", kop: "Publiez un post. Gagnez un OS sur mesure d’une valeur de 10 000 €.", regel: "Créez un post dans SocialNow OS Studio et publiez-le sur vos propres canaux, en taguant @socialnow.nl. Jusqu’au 30 septembre 2026." },
-  it: { badge: "CONCORSO", kop: "Crea un post. Vinci un OS su misura del valore di 10.000 €.", regel: "Crea un post in SocialNow OS Studio e pubblicalo sui tuoi canali, taggando @socialnow.nl. C’è tempo fino al 30 settembre 2026." },
-  es: { badge: "SORTEO", kop: "Haz una publicación. Gana un OS a medida valorado en 10.000 €.", regel: "Crea una publicación en SocialNow OS Studio y publícala en tus propios canales, etiquetando a @socialnow.nl. Tienes hasta el 30 de septiembre de 2026." },
+  nl: { badge: "WINACTIE", kop: "Maak één post.", win: "Win een custom OS ter waarde van", bedrag: "€10.000", regel: "Maak een post in je OS en tag SocialNow.nl en Komen Consultancy. Meedoen kan tot en met 30 september." },
+  en: { badge: "GIVEAWAY", kop: "Make one post.", win: "Win a custom OS worth", bedrag: "€10.000", regel: "Create a post in your OS and tag SocialNow.nl and Komen Consultancy. You can join until 30 September." },
+  de: { badge: "GEWINNSPIEL", kop: "Machen Sie einen Post.", win: "Gewinnen Sie ein Custom OS im Wert von", bedrag: "10.000 €", regel: "Erstellen Sie einen Post in Ihrem OS und markieren Sie SocialNow.nl und Komen Consultancy. Teilnahme bis zum 30. September." },
+  fr: { badge: "JEU CONCOURS", kop: "Publiez un post.", win: "Gagnez un OS sur mesure d\u2019une valeur de", bedrag: "10 000 €", regel: "Créez un post dans votre OS et identifiez SocialNow.nl et Komen Consultancy. Jusqu\u2019au 30 septembre." },
+  it: { badge: "CONCORSO", kop: "Crea un post.", win: "Vinci un OS su misura del valore di", bedrag: "10.000 €", regel: "Crea un post nel tuo OS e tagga SocialNow.nl e Komen Consultancy. C\u2019è tempo fino al 30 settembre." },
+  es: { badge: "SORTEO", kop: "Haz una publicación.", win: "Gana un OS a medida valorado en", bedrag: "10.000 €", regel: "Crea una publicación en tu OS y etiqueta a SocialNow.nl y Komen Consultancy. Tienes hasta el 30 de septiembre." },
 };
-function actieLoopt(): boolean { return Date.now() <= Date.parse(`${ACTIE_TOT}T23:59:59+02:00`); }
+export function actieLoopt(): boolean { return Date.now() <= Date.parse(`${ACTIE_TOT}T23:59:59+02:00`); }
 
 type Gegevens = { kop: string; uitleg: string; naam: string; email: string; tel: string; optioneel: string; meten: string; verder: string; terug: string; foutNaam: string; foutEmail: string; bezig: string };
 const GEGEVENS: Record<Language, Gegevens> = {
@@ -65,12 +68,12 @@ const GEGEVENS: Record<Language, Gegevens> = {
 };
 const AANMELD_URL = "https://os.socialnow.nl/api/aanmelden";
 const TEKST: Record<Language, Tekst> = {
-  nl: { kop: "Welkom bij SocialNow.", land: "Je land", demo: "Probeer het OS", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies op de website; in het OS meten we alleen met jouw toestemming." },
-  en: { kop: "Welcome to SocialNow.", land: "Your country", demo: "Try the OS", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies on the website; in the OS we only measure with your consent." },
-  de: { kop: "Willkommen bei SocialNow.", land: "Ihr Land", demo: "OS testen", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies auf der Website; im OS messen wir nur mit Ihrer Zustimmung." },
-  fr: { kop: "Bienvenue chez SocialNow.", land: "Votre pays", demo: "Essayer l\u2019OS", site: "Découvrir le site", voor: "En essayant l’OS ou en découvrant le site, vous acceptez nos ", voorwaarden: "conditions générales", en: " et notre ", privacy: "politique de confidentialité", na: ". Pas de cookies de suivi sur le site ; dans l’OS, nous ne mesurons qu’avec votre accord." },
-  it: { kop: "Benvenuto in SocialNow.", land: "Il tuo paese", demo: "Provi l\u2019OS", site: "Esplora il sito", voor: "Provando l’OS o esplorando il sito, accetti i nostri ", voorwaarden: "termini di servizio", en: " e la nostra ", privacy: "informativa sulla privacy", na: ". Nessun cookie di tracciamento sul sito; nell’OS misuriamo solo con il tuo consenso." },
-  es: { kop: "Bienvenido a SocialNow.", land: "Tu país", demo: "Pruebe el OS", site: "Ver la web", voor: "Al probar el OS o ver la web, aceptas nuestros ", voorwaarden: "términos de servicio", en: " y nuestra ", privacy: "política de privacidad", na: ". Sin cookies de seguimiento en la web; en el OS solo medimos con tu consentimiento." },
+  nl: { kop: "Welkom bij SocialNow.", land: "Je land", demo: "Probeer het OS", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies op de website; in het OS meten we alleen met jouw toestemming.", intro: "Je eigen OS, gratis te proberen. Twee stappen en je bent binnen.", stap1: "Waar zit je?", stap2: "Je gegevens", volgende: "Volgende", phNaam: "Je naam", phEmail: "jij@bedrijf.nl" },
+  en: { kop: "Welcome to SocialNow.", land: "Your country", demo: "Try the OS", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies on the website; in the OS we only measure with your consent.", intro: "Your own OS, free to try. Two steps and you are in.", stap1: "Where are you based?", stap2: "Your details", volgende: "Next", phNaam: "Your name", phEmail: "you@company.com" },
+  de: { kop: "Willkommen bei SocialNow.", land: "Ihr Land", demo: "OS testen", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies auf der Website; im OS messen wir nur mit Ihrer Zustimmung.", intro: "Ihr eigenes OS, kostenlos zum Testen. Zwei Schritte und Sie sind drin.", stap1: "Wo sind Sie ansässig?", stap2: "Ihre Daten", volgende: "Weiter", phNaam: "Ihr Name", phEmail: "sie@firma.de" },
+  fr: { kop: "Bienvenue chez SocialNow.", land: "Votre pays", demo: "Essayer l\u2019OS", site: "Découvrir le site", voor: "En essayant l’OS ou en découvrant le site, vous acceptez nos ", voorwaarden: "conditions générales", en: " et notre ", privacy: "politique de confidentialité", na: ". Pas de cookies de suivi sur le site ; dans l’OS, nous ne mesurons qu’avec votre accord.", intro: "Votre propre OS, à essayer gratuitement. Deux étapes et vous y êtes.", stap1: "Où êtes-vous basé ?", stap2: "Vos coordonnées", volgende: "Suivant", phNaam: "Votre nom", phEmail: "vous@entreprise.fr" },
+  it: { kop: "Benvenuto in SocialNow.", land: "Il tuo paese", demo: "Provi l\u2019OS", site: "Esplora il sito", voor: "Provando l’OS o esplorando il sito, accetti i nostri ", voorwaarden: "termini di servizio", en: " e la nostra ", privacy: "informativa sulla privacy", na: ". Nessun cookie di tracciamento sul sito; nell’OS misuriamo solo con il tuo consenso.", intro: "Il tuo OS, da provare gratis. Due passi e sei dentro.", stap1: "Dove hai sede?", stap2: "I tuoi dati", volgende: "Avanti", phNaam: "Il tuo nome", phEmail: "tu@azienda.it" },
+  es: { kop: "Bienvenido a SocialNow.", land: "Tu país", demo: "Pruebe el OS", site: "Ver la web", voor: "Al probar el OS o ver la web, aceptas nuestros ", voorwaarden: "términos de servicio", en: " y nuestra ", privacy: "política de privacidad", na: ". Sin cookies de seguimiento en la web; en el OS solo medimos con tu consentimiento.", intro: "Tu propio OS, gratis para probar. Dos pasos y estás dentro.", stap1: "¿Dónde está tu empresa?", stap2: "Tus datos", volgende: "Siguiente", phNaam: "Tu nombre", phEmail: "tu@empresa.es" },
 };
 
 function bewaard(): boolean { try { return localStorage.getItem(SLEUTEL) === LEGAL_VERSION; } catch { return false; } }
@@ -122,6 +125,8 @@ export default function ConsentPopup() {
   const [tel, setTel] = useState("");
   const [fout, setFout] = useState("");
   const [bezig, setBezig] = useState(false);
+  const naamVeld = useRef<HTMLInputElement>(null);
+  useEffect(() => { if (stap === "gegevens") naamVeld.current?.focus({ preventScroll: true }); }, [stap]);
   useEffect(() => { setOpen(!bewaard()); setLand(landUitBrowser()); }, []);
   // 19 september 2026: de juridische laag is van twee naar zeven documenten gegaan. Op al die
   // pagina's blijft de pop-up weg. Niet alleen om te lezen: artikel 12 AVG vraagt dat een
@@ -164,33 +169,53 @@ export default function ConsentPopup() {
     } catch {}
     naarDemo();
   };
+  // 23 september 2026 (Marinus): de twee stappen naast elkaar. Links waar je zit en de winactie,
+  // rechts je gegevens en de knop naar het OS. Op de telefoon zijn het twee korte stappen met
+  // streepjes bovenaan; "Volgende" schuift naar stap 2. Op desktop staan ze allebei open.
+  const [welkomVoor, welkomNa] = s.kop.includes("SocialNow") ? [s.kop.split("SocialNow")[0].trim(), "SocialNow" + s.kop.split("SocialNow")[1]] : [s.kop, ""];
+  const juridisch = (
+    <p className="sn-consent-tekst">
+      {s.voor}<Link to="/voorwaarden">{s.voorwaarden}</Link>{s.en}<Link to="/privacy">{s.privacy}</Link>{s.na}
+    </p>
+  );
   return (
     <div className="sn-consent" role="dialog" aria-modal="true" aria-labelledby="sn-consent-kop" translate="no">
-      <div className="sn-consent-card">
-        {/* 16 september 2026 (Marinus): zoals de inlog van het OS, met het woordlogo in een eigen band. */}
-        <div className="sn-consent-merk">
+      <div className="sn-consent-card sn-consent-duo" data-stap={stap}>
+        <div className="sn-consent-strepen" aria-hidden="true"><i className="is-aan" /><i className={stap === "gegevens" ? "is-aan" : undefined} /></div>
+        <section className="sn-consent-een">
           <img className="sn-consent-logo" src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="1556" height="240" />
-        </div>
-        {actieLoopt() ? (
-          <div className="sn-consent-actie">
-            <span className="sn-consent-actie-glans" aria-hidden="true" />
-            <span className="sn-consent-actie-badge">{a.badge}</span>
-            <strong>{a.kop}</strong>
-            <span className="sn-consent-actie-regel">{a.regel}</span>
+          <h2 id="sn-consent-kop" className="sn-consent-kop">{welkomVoor}{welkomNa ? <><br /><span>{welkomNa}</span></> : null}</h2>
+          <p className="sn-consent-intro">{s.intro}</p>
+          <p className="sn-consent-stap"><i>1</i>{s.stap1}</p>
+          <label className="sn-consent-land">
+            <span>{s.land}</span>
+            <select value={land} onChange={e => kiesLand(e.target.value)} aria-label={s.land}>
+              {LANDEN.map(l => <option key={l.code} value={l.code}>{l.vlag} {l.naam}</option>)}
+            </select>
+          </label>
+          {actieLoopt() ? (
+            <div className="sn-consent-actie">
+              <span className="sn-consent-actie-badge">{a.badge}</span>
+              <strong>{a.kop}</strong>
+              <span className="sn-consent-actie-win">{a.win} <b className="sn-consent-bedrag">{a.bedrag}</b></span>
+              <span className="sn-consent-actie-regel">{a.regel}</span>
+            </div>
+          ) : null}
+          <div className="sn-consent-knoppen sn-consent-alleen-mobiel">
+            <button type="button" className="sn-consent-knop" onClick={() => setStap("gegevens")}><span className="sn-consent-glans" aria-hidden="true" /><span>{s.volgende}</span><Pijl /></button>
+            <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={akkoord}><span>{s.site}</span></button>
           </div>
-        ) : null}
-        <div className="sn-consent-inhoud">
-        {stap === "gegevens" ? (
-        <form className="sn-consent-form" onSubmit={verstuur} noValidate>
-          <h2 id="sn-consent-kop" className="sn-consent-kop">{g.kop}</h2>
-          <p className="sn-consent-vraag">{g.uitleg}</p>
+          <div className="sn-consent-alleen-mobiel">{juridisch}</div>
+        </section>
+        <form className="sn-consent-twee" onSubmit={verstuur} noValidate>
+          <p className="sn-consent-stap"><i>2</i>{s.stap2}</p>
           <label className="sn-consent-land">
             <span>{g.naam}</span>
-            <input type="text" autoComplete="name" required maxLength={80} value={naam} onChange={e => setNaam(e.target.value)} autoFocus />
+            <input ref={naamVeld} type="text" autoComplete="name" required maxLength={80} placeholder={s.phNaam} value={naam} onChange={e => setNaam(e.target.value)} />
           </label>
           <label className="sn-consent-land">
             <span>{g.email}</span>
-            <input type="email" autoComplete="email" inputMode="email" required maxLength={254} value={email} onChange={e => setEmail(e.target.value)} />
+            <input type="email" autoComplete="email" inputMode="email" required maxLength={254} placeholder={s.phEmail} value={email} onChange={e => setEmail(e.target.value)} />
           </label>
           <label className="sn-consent-land">
             <span>{g.tel} <em>({g.optioneel})</em></span>
@@ -198,27 +223,12 @@ export default function ConsentPopup() {
           </label>
           {fout ? <p className="sn-consent-fout" role="alert">{fout}</p> : null}
           <div className="sn-consent-knoppen">
-            <button type="submit" className="sn-consent-knop" disabled={bezig}><span className="sn-consent-glans" aria-hidden="true" /><span>{bezig ? g.bezig : g.verder}</span><Pijl /></button>
-            <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span></button>
+            <button type="submit" className="sn-consent-knop" disabled={bezig}><span className="sn-consent-glans" aria-hidden="true" /><span>{bezig ? g.bezig : s.demo}</span><Pijl /></button>
+            <button type="button" className="sn-consent-knop sn-consent-knop-stil sn-consent-alleen-desktop" onClick={akkoord}><span>{s.site}</span></button>
+            <button type="button" className="sn-consent-knop sn-consent-knop-stil sn-consent-alleen-mobiel" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span></button>
           </div>
+          {juridisch}
         </form>
-        ) : (<>
-        <h2 id="sn-consent-kop" className="sn-consent-kop">{s.kop}</h2>
-        <label className="sn-consent-land">
-          <span>{s.land}</span>
-          <select value={land} onChange={e => kiesLand(e.target.value)} aria-label={s.land}>
-            {LANDEN.map(l => <option key={l.code} value={l.code}>{l.vlag} {l.naam}</option>)}
-          </select>
-        </label>
-        <div className="sn-consent-knoppen">
-          <button type="button" className="sn-consent-knop" onClick={() => setStap("gegevens")}><span className="sn-consent-glans" aria-hidden="true" /><span>{s.demo}</span><Pijl /></button>
-          <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={akkoord}><span>{s.site}</span></button>
-        </div>
-        <p className="sn-consent-tekst">
-          {s.voor}<Link to="/voorwaarden">{s.voorwaarden}</Link>{s.en}<Link to="/privacy">{s.privacy}</Link>{s.na}
-        </p>
-        </>)}
-        </div>
       </div>
     </div>
   );

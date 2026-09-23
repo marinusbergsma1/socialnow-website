@@ -1,0 +1,190 @@
+/* Welkomstpopup met twee stappen naast elkaar (23 september 2026, Marinus koos stijl 1 "Split").
+   Links waar je zit en de winactie, rechts je gegevens. De winactie is groen en positief, het
+   bedrag groot en vet zoals op de flyer. Op de telefoon: twee korte stappen met streepjes.
+   Deze regels staan onder .sn-consent-duo, zodat ze de oude enkele kaart overschrijven. */
+.sn-consent .sn-consent-card.sn-consent-duo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  width: min(980px, 100%);
+  text-align: left;
+  border-radius: 24px;
+  border-color: #1d3350;
+  background: linear-gradient(160deg, #0c1624 0%, #070b11 70%);
+  box-shadow: 0 30px 80px #000c, inset 0 1px #ffffff14;
+}
+.sn-consent-duo *,
+.sn-consent-duo *::before,
+.sn-consent-duo *::after { box-sizing: border-box; }
+.sn-consent-duo .sn-consent-strepen { display: none; }
+.sn-consent-duo .sn-consent-een,
+.sn-consent-duo .sn-consent-twee { padding: 36px; min-width: 0; }
+.sn-consent-duo .sn-consent-een { border-right: 1px solid #ffffff14; }
+.sn-consent-duo .sn-consent-twee { background: #05080c; }
+.sn-consent-duo .sn-consent-logo { display: block; height: 26px; width: auto; max-width: 100%; margin: 0; }
+.sn-consent .sn-consent-duo .sn-consent-kop {
+  margin: 28px 0 0;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  color: #fff;
+}
+.sn-consent .sn-consent-duo .sn-consent-kop span { color: #87878a; }
+.sn-consent .sn-consent-duo .sn-consent-intro {
+  margin: 12px 0 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #b9c0c7;
+}
+.sn-consent .sn-consent-duo .sn-consent-stap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0 0;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #98a2ad;
+}
+.sn-consent .sn-consent-duo .sn-consent-twee > .sn-consent-stap { margin-top: 0; }
+.sn-consent .sn-consent-duo .sn-consent-stap i {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #25d366;
+  color: #25d366;
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.sn-consent .sn-consent-duo .sn-consent-land { margin: 14px 0 0; color: #98a2ad; font-weight: 500; letter-spacing: 0.16em; }
+.sn-consent .sn-consent-duo .sn-consent-land select,
+.sn-consent .sn-consent-duo .sn-consent-land input {
+  background: #ffffff06;
+  border-color: #ffffff22;
+  font-weight: 500;
+  font-size: 15px;
+}
+.sn-consent .sn-consent-duo .sn-consent-land select { background: #0e1a2a; }
+.sn-consent .sn-consent-duo .sn-consent-land input::placeholder { color: #6d7680; }
+
+/* Winactie: groen, vet, het bedrag in een groen verloop */
+.sn-consent .sn-consent-duo .sn-consent-actie {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+  margin-top: 22px;
+  padding: 16px 18px 18px;
+  border: 1px solid #25d36659;
+  border-bottom: 1px solid #25d36659;
+  border-radius: 16px;
+  text-align: left;
+  background:
+    radial-gradient(420px 180px at 0% 0%, #25d36633, transparent 70%),
+    linear-gradient(135deg, #07301c 0%, #0a1a14 60%, #07100d 100%);
+  box-shadow: inset 0 1px #ffffff14, 0 0 30px #25d3661a;
+}
+.sn-consent .sn-consent-duo .sn-consent-actie-badge {
+  height: 22px;
+  margin-bottom: 6px;
+  padding: 0 10px;
+  background: #25d36629;
+  box-shadow: inset 0 0 0 1px #4ce88880;
+  color: #8ff3b8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+.sn-consent .sn-consent-duo .sn-consent-actie strong {
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.sn-consent .sn-consent-duo .sn-consent-actie-win {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #e9fff1;
+}
+.sn-consent .sn-consent-duo .sn-consent-bedrag {
+  display: block;
+  margin-top: 2px;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  color: #25d366;
+  background: linear-gradient(100deg, #b8ffd4 0%, #4ce888 35%, #25d366 60%, #13a14c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 14px #25d36640);
+}
+.sn-consent .sn-consent-duo .sn-consent-actie-regel {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #a9dcc2;
+}
+
+.sn-consent .sn-consent-duo .sn-consent-knoppen { margin: 22px 0 0; }
+.sn-consent .sn-consent-duo .sn-consent-knop { font-size: 13px; text-transform: none; letter-spacing: 0; min-height: 52px; }
+.sn-consent .sn-consent-duo .sn-consent-knop-stil { font-weight: 500; }
+.sn-consent .sn-consent-duo .sn-consent-fout { margin: 12px 0 0; }
+.sn-consent .sn-consent-duo .sn-consent-tekst { margin-top: 18px; text-align: left; }
+.sn-consent .sn-consent-duo .sn-consent-alleen-mobiel { display: none !important; }
+
+/* Telefoon: twee korte stappen, streepjes bovenaan */
+@media (max-width: 819px) {
+  .sn-consent { align-items: flex-end; padding: 10px; }
+  .sn-consent .sn-consent-card.sn-consent-duo {
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 22px;
+    max-height: calc(100svh - 20px);
+  }
+  .sn-consent-duo .sn-consent-strepen {
+    display: flex;
+    gap: 6px;
+    padding: 14px 22px 0;
+  }
+  .sn-consent-duo .sn-consent-strepen i {
+    flex: 1;
+    height: 3px;
+    border-radius: 3px;
+    background: #ffffff1f;
+    transition: background 0.4s ease;
+  }
+  .sn-consent-duo .sn-consent-strepen i.is-aan { background: #25d366; }
+  .sn-consent-duo .sn-consent-een,
+  .sn-consent-duo .sn-consent-twee { padding: 20px 22px 22px; border-right: 0; background: none; }
+  .sn-consent-duo[data-stap="keuze"] .sn-consent-twee,
+  .sn-consent-duo[data-stap="gegevens"] .sn-consent-een { display: none; }
+  .sn-consent-duo[data-stap="keuze"] .sn-consent-een,
+  .sn-consent-duo[data-stap="gegevens"] .sn-consent-twee { animation: sn-duo-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .sn-consent .sn-consent-duo .sn-consent-alleen-mobiel { display: block !important; }
+  .sn-consent .sn-consent-duo .sn-consent-knoppen.sn-consent-alleen-mobiel { display: grid !important; }
+  .sn-consent .sn-consent-duo .sn-consent-alleen-desktop { display: none !important; }
+  .sn-consent .sn-consent-duo .sn-consent-kop { margin-top: 20px; font-size: 32px; }
+  .sn-consent .sn-consent-duo .sn-consent-intro { font-size: 14px; }
+  .sn-consent .sn-consent-duo .sn-consent-stap { margin-top: 18px; }
+  .sn-consent .sn-consent-duo .sn-consent-actie { margin-top: 16px; padding: 14px 16px 15px; }
+  .sn-consent .sn-consent-duo .sn-consent-actie strong { font-size: 17px; }
+  .sn-consent .sn-consent-duo .sn-consent-actie-win { font-size: 14px; }
+  .sn-consent .sn-consent-duo .sn-consent-bedrag { font-size: 38px; }
+  .sn-consent .sn-consent-duo .sn-consent-knoppen { margin-top: 18px; }
+  .sn-consent .sn-consent-duo .sn-consent-tekst { margin-top: 14px; padding-top: 12px; font-size: 11.5px; }
+}
+@keyframes sn-duo-in {
+  from { opacity: 0; transform: translateX(14px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sn-consent-duo .sn-consent-een,
+  .sn-consent-duo .sn-consent-twee { animation: none !important; }
+}

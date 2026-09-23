@@ -24,7 +24,8 @@ import TrustStories from "./TrustStories";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import BrandGlobe from "./BrandGlobe";
 import OsEntry, { CLAIM_URL, REVIEWS_URL } from "./os-entry";
-import { agents, people, prices, projects, services } from "./content";
+import { agents, people, projects, services } from "./content";
+import Pricing from "./Pricing";
 import { allPosts } from "../data/posts";
 import socialPosts from "../public/data/socialposts.json";
 import {
@@ -509,53 +510,7 @@ export function ServicesPage() {
 export function PricesPage() {
   return (
     <>
-      <PageHeading
-        label="Aanbod & prijzen"
-        title={
-          <>
-            Eerst de waarde ervaren.
-            <br />
-            <span>Dan jouw OS op maat.</span>
-          </>
-        }
-        text="Ervaar zelf wat het OS voor je bedrijf kan betekenen. In een persoonlijk gesprek bepalen we welke inrichting, koppelingen en begeleiding jouw bedrijf nodig heeft."
-      />
-      <section className="h-wrap">
-        <div className="h-price-grid">
-          {prices.map((price) => (
-            <article
-              className={`h-price${price.featured ? " h-price-featured" : ""}`}
-              key={price.name}
-              style={{ "--accent": price.color } as React.CSSProperties}
-            >
-              <p className="h-eyebrow">{price.name}</p>
-              <h2>{price.price}</h2>
-              <span>{price.period}</span>
-              <p>{price.description}</p>
-              <ul>
-                {price.items.map((item) => (
-                  <li key={item}>
-                    <Check size={16} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Action
-                to={price.to}
-                href={price.href}
-                secondary={!price.featured}
-              >
-                {price.action}
-              </Action>
-            </article>
-          ))}
-        </div>
-        <p className="h-footnote">
-          De prijs voor je Custom OS volgt uit de afgesproken inrichting. Je
-          ontvangt vooraf een voorstel met eenmalige kosten, eventuele
-          doorlopende kosten en wat daarvoor wordt geleverd.
-        </p>
-      </section>
+      <Pricing />
       <section className="h-section h-wrap">
         <Heading
           label="Wat bepaalt je investering?"

@@ -1,0 +1,489 @@
+/* Prijzen (23 september 2026): gratis groot, pakketten strak en klein. Accenten als rand, letter
+   of stip, nooit als vlak onder witte tekst. */
+.sn-site .prijs {
+  --prijs-groen: #25d366;
+  --prijs-blauw: #00a3e0;
+  --prijs-geel: #f7e644;
+  --prijs-roze: #f62961;
+  --prijs-rand: #ffffff1c;
+  --prijs-kaart: linear-gradient(160deg, #0c1624 0%, #070b11 70%);
+  padding-top: 72px;
+}
+.sn-site .prijs *,
+.sn-site .prijs *::before,
+.sn-site .prijs *::after { box-sizing: border-box; }
+.sn-site .prijs-groen-tekst { color: var(--prijs-groen); }
+
+/* Gratis */
+.sn-site .prijs-gratis {
+  border: 1px solid #25d36652;
+  border-radius: 24px;
+  padding: clamp(24px, 3.6vw, 48px);
+  background:
+    radial-gradient(760px 320px at 12% 0%, #25d3661f, transparent 62%),
+    var(--prijs-kaart);
+  box-shadow: inset 0 1px #ffffff1a;
+}
+.sn-site .prijs-gratis-boven {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+.sn-site .prijs-gratis h1 {
+  font-size: clamp(48px, 6.4vw, 92px);
+  line-height: 0.98;
+  margin-top: 18px;
+}
+.sn-site .prijs-gratis h1 em,
+.sn-site .prijs-echt em {
+  font-style: normal;
+  color: var(--prijs-groen);
+}
+.sn-site .prijs-gratis-tekst { padding-top: 4px; }
+.sn-site .prijs-echt {
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #fff;
+}
+.sn-site .prijs-echt em { white-space: nowrap; }
+.sn-site .prijs-lead {
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #c9ced4;
+  max-width: 520px;
+}
+.sn-site .prijs-knoppen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+.sn-site .prijs-klein {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #8f98a1;
+}
+.sn-site .prijs-cadeaus {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 36px;
+}
+.sn-site .prijs-cadeau {
+  border: 1px solid var(--prijs-rand);
+  border-radius: 16px;
+  padding: 18px 20px 20px;
+  background: #ffffff05;
+}
+.sn-site .prijs-nul {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--prijs-groen);
+}
+.sn-site .prijs-nul span {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8f98a1;
+}
+.sn-site .prijs-cadeau h3 {
+  font-size: 18px;
+  margin-top: 14px;
+}
+.sn-site .prijs-cadeau p:last-child {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #b9c0c7;
+}
+
+/* Winactie: groen en positief, het bedrag groot in een groen verloop zoals op de flyer */
+.sn-site .prijs-actie {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 12px;
+  border: 1px solid #25d36659;
+  border-radius: 16px;
+  padding: 16px 20px;
+  background:
+    radial-gradient(520px 160px at 0% 0%, #25d36630, transparent 70%),
+    linear-gradient(120deg, #07301c 0%, #0a1a14 55%, #07100d 100%);
+  box-shadow: inset 0 1px #ffffff14, 0 0 30px #25d36614;
+}
+.sn-site .prijs-actie-label {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8ff3b8;
+  background: #25d36629;
+  box-shadow: inset 0 0 0 1px #4ce88880;
+  border-radius: 999px;
+  padding: 5px 10px;
+}
+.sn-site .prijs-actie p {
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #a9dcc2;
+}
+.sn-site .prijs-actie strong {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.sn-site .prijs-bedrag-groot {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  color: #25d366;
+  background: linear-gradient(100deg, #b8ffd4 0%, #4ce888 35%, #25d366 60%, #13a14c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 14px #25d36640);
+}
+
+/* In je gratis OS */
+.sn-site .prijs-inhoud {
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--prijs-rand);
+}
+.sn-site .prijs-inhoud-kop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 20px;
+}
+.sn-site .prijs-inhoud h2 {
+  font-size: clamp(22px, 2.2vw, 28px);
+  letter-spacing: -0.03em;
+}
+.sn-site .prijs-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--prijs-groen);
+}
+.sn-site .prijs-link:hover { text-decoration: underline; }
+.sn-site .prijs-os {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+.sn-site .prijs-os li {
+  border: 1px solid var(--prijs-rand);
+  border-radius: 14px;
+  padding: 14px 16px 16px;
+  background: #ffffff04;
+}
+.sn-site .prijs-os i {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--kleur);
+  box-shadow: 0 0 10px var(--kleur);
+  margin-bottom: 11px;
+}
+.sn-site .prijs-os b {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+}
+.sn-site .prijs-os span {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #99a2ab;
+}
+
+/* Pakketten */
+.sn-site .prijs-pakketten { margin-top: 88px; }
+.sn-site .prijs-pakketten-kop {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+.sn-site .prijs-pakketten-kop h2 {
+  margin-top: 18px;
+  font-size: clamp(32px, 3.4vw, 48px);
+}
+.sn-site .prijs-pakketten-kop > p {
+  padding-top: 30px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #99a2ab;
+  max-width: 480px;
+}
+.sn-site .prijs-pakketten-kop strong {
+  color: #e7eaee;
+  font-weight: 500;
+}
+.sn-site .prijs-raster {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 32px;
+}
+.sn-site .prijs-raster-los {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.sn-site .prijs-kaart {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #1d3350;
+  border-radius: 18px;
+  padding: 20px 20px 18px;
+  background: var(--prijs-kaart);
+  box-shadow: inset 0 1px #ffffff14;
+}
+.sn-site .prijs-kaart.is-top { border-color: #25d36680; }
+.sn-site .prijs-vlag {
+  position: absolute;
+  top: -10px;
+  right: 16px;
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #0b7a37;
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+.sn-site .prijs-kaart h3 {
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+.sn-site .prijs-bedrag {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-top: 10px;
+  white-space: nowrap;
+}
+.sn-site .prijs-bedrag strong {
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+.sn-site .prijs-bedrag span {
+  font-size: 12px;
+  color: #8f98a1;
+}
+.sn-site .prijs-belofte {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #8f98a1;
+}
+.sn-site .prijs-punten {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--prijs-rand);
+  flex: 1;
+}
+.sn-site .prijs-punten li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #d3d8de;
+}
+.sn-site .prijs-punten li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1.5px solid var(--kleur);
+}
+.sn-site .prijs-punten li::after {
+  content: "";
+  position: absolute;
+  left: 4.4px;
+  top: 5.6px;
+  width: 3.4px;
+  height: 6.2px;
+  border: solid var(--kleur);
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+.sn-site .prijs-punten li.is-sterk { color: #fff; font-weight: 500; }
+.sn-site .prijs-punten li.is-erfenis { color: #8f98a1; }
+.sn-site .prijs-voet {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+.sn-site .prijs-voet > .h-button { width: 100%; }
+
+/* Team: rondjes die uitklappen */
+.sn-site .prijs-team {
+  border-top: 1px solid var(--prijs-rand);
+  padding-top: 12px;
+}
+.sn-site .prijs-team summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 3px 8px 3px 3px;
+  margin: 0 -8px 0 -3px;
+  transition: background 0.3s;
+}
+.sn-site .prijs-team summary::-webkit-details-marker { display: none; }
+.sn-site .prijs-team summary:hover { background: #ffffff0a; }
+.sn-site .prijs-team summary:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.sn-site .prijs-rondjes {
+  display: flex;
+  flex-shrink: 0;
+  padding-right: 8px;
+}
+.sn-site .prijs-rondjes img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #0a0f17;
+  margin-right: -8px;
+  background: #111;
+}
+.sn-site .prijs-rondjes img.is-nieuw { box-shadow: 0 0 0 1.5px var(--kleur); }
+.sn-site .prijs-namen {
+  flex: 1;
+  min-width: 0;
+  font-size: 12.5px;
+  color: #8f98a1;
+}
+.sn-site .prijs-pijl {
+  flex-shrink: 0;
+  color: #8f98a1;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sn-site .prijs-team[open] .prijs-pijl { transform: rotate(180deg); }
+.sn-site .prijs-leden {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  animation: prijs-uit 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes prijs-uit {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+.sn-site .prijs-leden li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sn-site .prijs-leden img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.sn-site .prijs-leden b {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #fff;
+}
+.sn-site .prijs-leden small {
+  display: block;
+  font-size: 12px;
+  color: #8f98a1;
+}
+
+/* Brede kaarten: kop links, punten rechts */
+.sn-site .prijs-kaart.is-breed {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 24px;
+}
+.sn-site .prijs-kaart.is-breed .prijs-punten {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+.sn-site .prijs-kaart.is-breed .prijs-voet { grid-column: 1 / -1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sn-site .prijs-leden { animation: none; }
+  .sn-site .prijs-pijl { transition: none; }
+}
+
+@media (max-width: 1100px) {
+  .sn-site .prijs-raster { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sn-site .prijs-os { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .sn-site .prijs { padding-top: 40px; }
+  .sn-site .prijs-gratis-boven,
+  .sn-site .prijs-pakketten-kop { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .sn-site .prijs-pakketten-kop > p { padding-top: 0; }
+  .sn-site .prijs-cadeaus { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .prijs-raster-los { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .prijs-actie { align-items: flex-start; flex-direction: column; gap: 10px; }
+}
+@media (max-width: 640px) {
+  .sn-site .prijs-raster { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .prijs-kaart.is-breed { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .prijs-kaart.is-breed .prijs-punten { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--prijs-rand); }
+  .sn-site .prijs-knoppen > * { width: 100%; max-width: 100%; white-space: normal; text-align: center; }
+  /* Op de telefoon swipe je door wat er in het OS zit. */
+  .sn-site .prijs-os {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 74%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-inline: -4px;
+    padding: 0 4px 4px;
+  }
+  .sn-site .prijs-os::-webkit-scrollbar { display: none; }
+  .sn-site .prijs-os li { scroll-snap-align: start; }
+}
