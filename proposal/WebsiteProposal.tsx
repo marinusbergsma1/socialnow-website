@@ -41,7 +41,7 @@ import JuridischPage from "../components/JuridischPage";
 // Staat uit tot er een script op de site komt dat toestemming nodig heeft; de afweging staat
 // in het bestand zelf.
 import Cookiebot from "./Cookiebot";
-import ConsentPopup from "./ConsentPopup";
+import ConsentPopup, { openGratisWebsite } from "./ConsentPopup";
 
 const nav = [
   ["/het-os", "Het OS"],
@@ -151,8 +151,8 @@ function ProposalShell() {
             ))}
           </nav>
           <LanguageSwitch />
-          <a className="h-header-claim" href={CLAIM_URL}>
-            Probeer het OS
+          <a className="h-header-claim" href="#gratis-website" onClick={openGratisWebsite}>
+            Gratis website
             <ArrowUpRight size={15} />
           </a>
           <button

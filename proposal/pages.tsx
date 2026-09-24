@@ -24,6 +24,7 @@ import TrustStories from "./TrustStories";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import BrandGlobe from "./BrandGlobe";
 import OsEntry, { CLAIM_URL, REVIEWS_URL } from "./os-entry";
+import { openGratisWebsite } from "./ConsentPopup";
 import { agents, people, projects, services } from "./content";
 import Pricing from "./Pricing";
 import { allPosts } from "../data/posts";
@@ -84,27 +85,36 @@ export function Home() {
         </div>
         <div className="h-wrap h-hero-content">
           <p className="h-eyebrow">
-            <i /> SocialNow OS / Ontdek hoe het werkt
+            <i /> Gratis website-upgrade / Odoo Experience, stand C21
           </p>
           <HeroTitle />
           <p className="h-hero-description">
-            Je website, CRM, content en advertenties. In één chat.
+            Laat je gegevens achter. Wij bellen je en je ziet je nieuwe website dezelfde dag live op de beurs.
           </p>
-          <OsEntry />
+          {/* 24 september 2026 (Marinus): de gratis website is de hoofdroute, het OS een klein regeltje eronder. */}
+          <div className="os-entry">
+            <div className="os-actions">
+              <a className="os-claim sn-btn3d h-button" href="#gratis-website" onClick={openGratisWebsite}>
+                <span className="sn-btn3d-sheen" />
+                <span>Claim je gratis website</span>
+                <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
+              </a>
+            </div>
+            <p className="os-product-note"><a href={CLAIM_URL}>Of probeer het OS gratis</a></p>
+          </div>
           <TeamTrust />
-          <HeroMilos />
           <ol
             className="h-poc-path"
-            aria-label="Van proberen naar jouw Custom OS"
+            aria-label="Zo werkt de gratis website-upgrade"
           >
             <li>
-              <span>01</span> Open het OS
+              <span>01</span> Vul je gegevens in
             </li>
             <li>
-              <span>02</span> Ervaar het gemak
+              <span>02</span> Wij bellen je
             </li>
             <li>
-              <span>03</span> Samen op maat
+              <span>03</span> Live op de beurs
             </li>
           </ol>
           <Link to="/#het-os" className="h-hero-down">
@@ -118,9 +128,9 @@ export function Home() {
         <span>
           <i /> 24–26 september · Odoo-beurs
         </span>
-        <p>Probeer het systeem. Ervaar het gemak. Ontdek jouw mogelijkheden.</p>
-        <a className="h-text-link" href={CLAIM_URL}>
-          Probeer het OS <ArrowUpRight size={17} />
+        <p>Gratis website-upgrade. Vandaag aangevraagd, vandaag live op stand C21.</p>
+        <a className="h-text-link" href="#gratis-website" onClick={openGratisWebsite}>
+          Claim je gratis website <ArrowUpRight size={17} />
         </a>
       </div>
       <ShowcaseFilms />
