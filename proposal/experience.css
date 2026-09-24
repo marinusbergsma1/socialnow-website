@@ -2309,3 +2309,15 @@ html {
 @keyframes h-win-c-storing { 0% { transform: translateX(-3px); } 50% { transform: translateX(2px); } 100% { transform: none; } }
 @media (max-width: 700px) { .sn-site .h-win-c { max-width: 100%; margin-top: 18px; font-size: clamp(20px, 5.8vw, 25px); line-height: 1.1; } }
 @media (prefers-reduced-motion: reduce) { .sn-site .h-win-c > a, .sn-site .h-taalwissel > span, .sn-site .h-language-current .h-flag, .sn-site .h-language-current > span { animation: none !important; transition: none !important; } }
+
+/* 24 september 2026 (Marinus): door de hogere kop vielen de klantlogo's onder de vouw. Op pc de
+   scrollhint weg (de logobalk is nu de volgende stap) en de ruimte tussen hero en logo's strakker. */
+@media (min-width: 701px) {
+  .sn-site .h-hero { padding-top: 32px; padding-bottom: 6px; min-height: 0; }
+  .sn-site .h-hero-content { min-height: 0; }
+  .sn-site .h-hero-down { display: none; }
+  .sn-site .h-win-c { margin-top: 18px; font-size: clamp(22px, 2.15vw, 31px); }
+  .sn-site .h-hero-description { margin-top: 18px !important; }
+  .sn-site .h-clients { padding-top: 14px; }
+  .sn-site .h-clients > div { padding-top: 16px; }
+}
