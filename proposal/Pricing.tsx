@@ -260,7 +260,7 @@ export default function Pricing() {
             <span className="prijs-actie-label">Winactie</span>
             <p>
               <strong>Win een custom OS ter waarde van <b className="prijs-bedrag-groot">€10.000</b></strong>
-              <span>Maak een post in je gratis OS, tag SocialNow.nl en Komen Consultancy, en je doet mee. Dat kan tot en met 30 september.</span>
+              <span>Maak een post in je gratis OS, plaats hem op LinkedIn en tag SocialNow.nl en Komen Consultancy, dan doe je mee. Dat kan tot en met 30 september.</span>
             </p>
           </div>
         )}
