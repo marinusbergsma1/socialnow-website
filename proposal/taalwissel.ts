@@ -4,6 +4,8 @@ import { LANGUAGES, type Language } from "./i18n/context";
 // 24 september 2026 (Marinus): de kop op de homepage wisselt elke 5 seconden van taal, en het
 // vlaggetje in de balk wisselt mee. De echte taal van de pagina blijft staan; dit is alleen beeld.
 // Opent iemand het taalmenu, dan stopt het wisselen voor de rest van het bezoek.
+// Volgorde (Marinus): Engels, een andere taal, terug naar Engels, de volgende taal, enzovoort.
+const VOLGORDE: Language[] = LANGUAGES.filter((t) => t !== "en").flatMap((t) => ["en", t] as Language[]);
 let toon: Language | null = null;
 let gestopt = false;
 const luisteraars = new Set<() => void>();
@@ -23,11 +25,12 @@ export function useTaalwissel(taal: Language, ms = 5000): Language {
   const getoond = useToonTaal();
   useEffect(() => {
     if (gestopt || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let i = LANGUAGES.indexOf(taal);
+    let i = 0;
+    zet(VOLGORDE[0]);
     const id = window.setInterval(() => {
       if (gestopt || document.hidden) return;
-      i = (i + 1) % LANGUAGES.length;
-      zet(LANGUAGES[i]);
+      i = (i + 1) % VOLGORDE.length;
+      zet(VOLGORDE[i]);
     }, ms);
     return () => { window.clearInterval(id); zet(null); };
   }, [taal, ms]);
