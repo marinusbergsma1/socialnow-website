@@ -1,39 +1,54 @@
-/* 24 september 2026 (Marinus): de gratis website-onboarding. Eén kolom, grote velden, groen = verder. */
-.gw { max-width: 760px; padding-top: 130px; padding-bottom: 110px; }
-.gw h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1; letter-spacing: -.03em; margin: 18px 0 18px; }
-.sn-site .gw h1 span { color: #7ee08f !important; -webkit-text-fill-color: #7ee08f; background: none; }
-.gw-intro { color: #b8b8bd; font-size: 17px; line-height: 1.6; max-width: 620px; }
-.gw-strepen { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 0; margin: 34px 0 18px; }
-.gw-strepen li { border-top: 3px solid #26272c; padding-top: 10px; font-size: 12px; color: #77777d; }
-.gw-strepen li span { color: inherit; margin-right: 4px; }
-.gw-strepen li.is-aan { border-color: #3fbf5c; color: #e9e9ec; }
-.gw-kaart { background: #0d0f14; border: 1px solid #22242b; border-radius: 22px; padding: 30px; display: grid; gap: 24px; }
-.gw-kaart h2 { font-size: 24px; margin: 0; }
-.gw-vraag { display: grid; gap: 6px; }
-.gw-vraag label { font-weight: 700; font-size: 16px; color: #fff; }
-.gw-vraag small { color: #8c8c93; font-size: 13px; line-height: 1.5; }
-.gw-vraag input, .gw-vraag textarea { margin-top: 4px; width: 100%; background: #07080c; border: 1px solid #2a2c33; border-radius: 12px; padding: 13px 14px; color: #f5f5f5; font: inherit; font-size: 15px; resize: vertical; }
-.gw-vraag input:focus, .gw-vraag textarea:focus { outline: none; border-color: #3fbf5c; box-shadow: 0 0 0 3px rgba(63,191,92,.18); }
-.gw-keuzes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
-.gw-keuzes button { background: #07080c; border: 1px solid #2a2c33; color: #d6d6da; border-radius: 999px; padding: 10px 16px; font: inherit; font-size: 14px; cursor: pointer; }
-.gw-keuzes button.is-aan { background: #2f9e4a; border-color: #3fbf5c; color: #fff; }
-.gw-knoppen { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.gw-terug { background: none; border: 0; color: #9a9aa0; font: inherit; cursor: pointer; }
-.gw-verder { display: inline-flex; align-items: center; gap: 10px; background: #2f9e4a; color: #fff; border: 1px solid #3fbf5c; border-radius: 999px; padding: 14px 24px; font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; }
+/* 24 september 2026 (Marinus): de gratis website-onboarding in de stijl van de vaste klant-onboarding
+   (skill klant-onboarding, zoals Komen Consultancy): één lange pagina, genummerde secties, Space Mono
+   labels, sticky voortgangsbalk cyaan naar magenta. "Gratis" en de verstuurknop groen met witte tekst. */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap");
+.gw { --gw-card:#12151E; --gw-veld:#0C0F16; --gw-ink:#EDF1F6; --gw-muted:#8B94A6; --gw-cyan:#15AEE6; --gw-magenta:#EC1178; --gw-groen:#2f9e4a; --gw-lijn:rgba(255,255,255,.10); --gw-zacht:rgba(255,255,255,.06);
+  position: relative; background:
+    radial-gradient(720px 420px at 84% -6%, rgba(21,174,230,.14), transparent 60%),
+    radial-gradient(620px 460px at 6% 22%, rgba(236,17,120,.09), transparent 60%); }
+.gw-sheet { max-width: 840px; margin: 0 auto; padding: 140px 40px 130px; color: var(--gw-ink); font-size: 15px; line-height: 1.65; }
+.gw-eyebrow { font-family: "Space Mono", monospace; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--gw-cyan); margin: 0 0 22px; display: flex; align-items: center; gap: 14px; }
+.gw-eyebrow::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--gw-lijn), transparent); }
+.sn-site .gw h1 { font-family: "Outfit", sans-serif; font-weight: 800; font-size: clamp(38px, 6.4vw, 60px); line-height: 1.03; letter-spacing: -.02em; margin: 0 0 26px; max-width: none; }
+.sn-site .gw h1 .gw-accent { color: #4fd36b !important; -webkit-text-fill-color: #4fd36b; background: none; }
+.gw-lead { font-size: 17.5px; color: var(--gw-muted); max-width: 648px; margin: 0; }
+.gw-lead b { color: var(--gw-ink); font-weight: 600; }
+.gw-progress { position: sticky; top: 64px; z-index: 5; margin-top: 56px; padding: 16px 0 14px; background: linear-gradient(180deg, #06080D 0, rgba(6,8,13,.92) 62%, transparent 100%); }
+.gw-bar { height: 4px; border-radius: 4px; background: rgba(255,255,255,.08); overflow: hidden; }
+.gw-fill { height: 100%; background: linear-gradient(90deg, #0C86C9, var(--gw-cyan), var(--gw-magenta)); transition: width .45s cubic-bezier(.2,.7,.3,1); }
+.gw-meta { display: flex; justify-content: space-between; margin-top: 8px; font-family: "Space Mono", monospace; font-size: 11.5px; letter-spacing: .04em; color: var(--gw-muted); }
+.gw-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--gw-cyan); margin-right: 7px; vertical-align: 1px; }
+.gw-sec { margin-top: 64px; }
+.gw-sec-head { display: flex; align-items: baseline; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--gw-zacht); margin-bottom: 6px; }
+.gw-num { font-family: "Space Mono", monospace; font-size: 13px; font-weight: 700; color: var(--gw-cyan); letter-spacing: .06em; }
+.sn-site .gw h2 { font-family: "Outfit", sans-serif; font-weight: 700; font-size: clamp(23px, 3.4vw, 31px); letter-spacing: -.01em; line-height: 1.1; margin: 0; }
+.gw-card { background: var(--gw-card); border: 1px solid var(--gw-zacht); border-radius: 14px; padding: 8px 30px 30px; margin-top: 22px; }
+.gw-fld { display: block; margin: 22px 0 0; }
+.gw-rij { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+@media (max-width: 680px) { .gw-rij { grid-template-columns: 1fr; } }
+.gw-l { display: block; font-weight: 600; font-size: 15.5px; color: var(--gw-ink); }
+.gw-h { display: block; color: var(--gw-muted); font-size: 13.5px; margin-top: 6px; line-height: 1.5; }
+.gw input, .gw textarea { width: 100%; border: 1px solid var(--gw-zacht); background: var(--gw-veld); border-radius: 9px; font: inherit; font-size: 15px; color: var(--gw-ink); padding: 14px 16px; margin-top: 14px; resize: vertical; transition: border-color .18s, box-shadow .18s; }
+.gw textarea { min-height: 86px; line-height: 1.6; }
+.gw input:focus, .gw textarea:focus { outline: none; border-color: var(--gw-cyan); box-shadow: 0 0 0 3px rgba(21,174,230,.18); }
+.gw-keuzes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.gw-keuzes button { background: var(--gw-veld); border: 1px solid var(--gw-lijn); color: #d6dbe4; border-radius: 9px; padding: 11px 16px; font: inherit; font-size: 14px; cursor: pointer; transition: border-color .18s, background .18s; }
+.gw-keuzes button:hover { border-color: rgba(21,174,230,.5); }
+.gw-keuzes button.is-aan { background: rgba(21,174,230,.14); border-color: var(--gw-cyan); color: #fff; }
+.gw-juridisch { font-size: 12.5px; color: var(--gw-muted); margin: 22px 0 0; }
+.gw-juridisch a { color: var(--gw-ink); text-decoration: underline; text-underline-offset: 3px; }
+.gw-fout { color: #ff8a8a; margin: 14px 0 0; }
+.gw-verder { margin-top: 22px; display: inline-flex; align-items: center; gap: 10px; background: var(--gw-groen); color: #fff; border: 1px solid #3fbf5c; border-radius: 999px; padding: 15px 26px; font: inherit; font-weight: 700; font-size: 15.5px; cursor: pointer; box-shadow: 0 10px 30px rgba(47,158,74,.25); }
 .gw-verder:hover { background: #37b255; }
 .gw-verder:disabled { opacity: .6; cursor: wait; }
-.gw-fout { color: #ff8a8a; margin: 0; }
-.gw-juridisch { font-size: 12px; color: #8c8c93; margin: 0; }
-.gw-juridisch a { color: #cfcfd3; text-decoration: underline; }
-/* Het OS als tweede route: zichtbaar, maar niet groen, zodat de website de hoofdknop blijft. */
-.gw-os { margin-top: 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; border-radius: 18px; border: 1px solid #2d6cdf; background: linear-gradient(135deg, #0c1a33, #0a0f1c); color: #fff; font-weight: 700; font-size: 17px; text-decoration: none; }
-.gw-os small { display: block; font-weight: 500; font-size: 12px; color: #8fb4ff; margin-bottom: 3px; letter-spacing: .02em; }
-.gw-os:hover { border-color: #5b8ff0; }
-.gw-klaar { text-align: left; }
-.gw-vink { display: inline-grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; background: #2f9e4a; color: #fff; }
-@media (max-width: 640px) {
-  .gw { padding-top: 100px; }
-  .gw-kaart { padding: 20px; border-radius: 18px; }
-  .gw-strepen li { font-size: 0; }
-  .gw-strepen li span { font-size: 12px; }
+/* Het OS als tweede route: opvallend, blauw, zodat de website de groene hoofdknop blijft. */
+.gw-os { margin-top: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 26px; border-radius: 14px; border: 1px solid rgba(21,174,230,.55); background: linear-gradient(135deg, rgba(21,174,230,.14), rgba(236,17,120,.06)); color: #fff; font-family: "Outfit", sans-serif; font-weight: 700; font-size: 19px; text-decoration: none; }
+.gw-os small { display: block; font-family: "Space Mono", monospace; font-weight: 400; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gw-cyan); margin-bottom: 4px; }
+.gw-os:hover { border-color: var(--gw-cyan); }
+.gw-vink { display: inline-grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; background: var(--gw-groen); color: #fff; margin-bottom: 24px; }
+.gw-klaar .gw-sheet p { font-size: 17.5px; color: var(--gw-muted); }
+@media (max-width: 680px) {
+  .gw-sheet { padding: 110px 18px 100px; }
+  .gw-card { padding: 4px 18px 22px; }
+  .gw-progress { top: 56px; }
 }
