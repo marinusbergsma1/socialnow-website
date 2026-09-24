@@ -43,18 +43,20 @@ type Tekst = { kop: string; land: string; demo: string; site: string; voor: stri
 // persoonlijke OS en de winactie. Dat hoort dus in de onboarding te staan, en niet pas ergens in
 // het OS. Regels en looptijd staan in docs/WINACTIE-2026-09.md van de app; hier alleen de belofte.
 // Na de sluitingsdatum verdwijnt de strook vanzelf.
-const ACTIE_TOT = "2026-09-30";
+const ACTIE_TOT = "2026-09-26";
+// 24 september 2026 (Marinus): de actie sluit zaterdag 26 september 23:59 (Amsterdam), de winnaar
+// maken we zondag 27 september bekend. Dat moet overal staan, dus ook in de regel hieronder.
 // 23 september 2026 (Marinus): de winactie groen en positief, met het bedrag groot en vet zoals
 // op de flyer. Taggen: SocialNow.nl en Komen Consultancy, zoals op de beurs. 24 september 2026 (Marinus): de post
 // gaat op LinkedIn ("plaatsen op Linkedin en SocialNow taggen en Komen Consultancy taggen"); regels versie 1.2 in de app.
 type Actie = { badge: string; kop: string; win: string; bedrag: string; regel: string };
 const ACTIE: Record<Language, Actie> = {
-  nl: { badge: "WINACTIE", kop: "Maak één post.", win: "Win een custom OS ter waarde van", bedrag: "€10.000", regel: "Maak een post in je OS, plaats hem op LinkedIn en tag SocialNow.nl en Komen Consultancy. Meedoen kan tot en met 30 september." },
-  en: { badge: "GIVEAWAY", kop: "Make one post.", win: "Win a custom OS worth", bedrag: "€10.000", regel: "Create a post in your OS, post it on LinkedIn and tag SocialNow.nl and Komen Consultancy. You can join until 30 September." },
-  de: { badge: "GEWINNSPIEL", kop: "Machen Sie einen Post.", win: "Gewinnen Sie ein Custom OS im Wert von", bedrag: "10.000 €", regel: "Erstellen Sie einen Post in Ihrem OS, veröffentlichen Sie ihn auf LinkedIn und markieren Sie SocialNow.nl und Komen Consultancy. Teilnahme bis zum 30. September." },
-  fr: { badge: "JEU CONCOURS", kop: "Publiez un post.", win: "Gagnez un OS sur mesure d\u2019une valeur de", bedrag: "10 000 €", regel: "Créez un post dans votre OS, publiez-le sur LinkedIn et identifiez SocialNow.nl et Komen Consultancy. Jusqu\u2019au 30 septembre." },
-  it: { badge: "CONCORSO", kop: "Crea un post.", win: "Vinci un OS su misura del valore di", bedrag: "10.000 €", regel: "Crea un post nel tuo OS, pubblicalo su LinkedIn e tagga SocialNow.nl e Komen Consultancy. C\u2019è tempo fino al 30 settembre." },
-  es: { badge: "SORTEO", kop: "Haz una publicación.", win: "Gana un OS a medida valorado en", bedrag: "10.000 €", regel: "Crea una publicación en tu OS, publícala en LinkedIn y etiqueta a SocialNow.nl y Komen Consultancy. Tienes hasta el 30 de septiembre." },
+  nl: { badge: "WINACTIE", kop: "Maak één post.", win: "Win een custom OS ter waarde van", bedrag: "€10.000", regel: "Maak een post in je OS, plaats hem op LinkedIn en tag SocialNow.nl en Komen Consultancy. Meedoen kan tot en met zaterdag 26 september. De winnaar maken we zondag 27 september bekend." },
+  en: { badge: "GIVEAWAY", kop: "Make one post.", win: "Win a custom OS worth", bedrag: "€10.000", regel: "Create a post in your OS, post it on LinkedIn and tag SocialNow.nl and Komen Consultancy. You can join until Saturday 26 September. We announce the winner on Sunday 27 September." },
+  de: { badge: "GEWINNSPIEL", kop: "Machen Sie einen Post.", win: "Gewinnen Sie ein Custom OS im Wert von", bedrag: "10.000 €", regel: "Erstellen Sie einen Post in Ihrem OS, veröffentlichen Sie ihn auf LinkedIn und markieren Sie SocialNow.nl und Komen Consultancy. Teilnahme bis Samstag, 26. September. Den Gewinner geben wir am Sonntag, 27. September bekannt." },
+  fr: { badge: "JEU CONCOURS", kop: "Publiez un post.", win: "Gagnez un OS sur mesure d\u2019une valeur de", bedrag: "10 000 €", regel: "Créez un post dans votre OS, publiez-le sur LinkedIn et identifiez SocialNow.nl et Komen Consultancy. Jusqu\u2019au samedi 26 septembre. Le gagnant sera annoncé le dimanche 27 septembre." },
+  it: { badge: "CONCORSO", kop: "Crea un post.", win: "Vinci un OS su misura del valore di", bedrag: "10.000 €", regel: "Crea un post nel tuo OS, pubblicalo su LinkedIn e tagga SocialNow.nl e Komen Consultancy. C\u2019è tempo fino a sabato 26 settembre. Il vincitore sarà annunciato domenica 27 settembre." },
+  es: { badge: "SORTEO", kop: "Haz una publicación.", win: "Gana un OS a medida valorado en", bedrag: "10.000 €", regel: "Crea una publicación en tu OS, publícala en LinkedIn y etiqueta a SocialNow.nl y Komen Consultancy. Tienes hasta el sábado 26 de septiembre. Anunciamos al ganador el domingo 27 de septiembre." },
 };
 export function actieLoopt(): boolean { return Date.now() <= Date.parse(`${ACTIE_TOT}T23:59:59+02:00`); }
 
