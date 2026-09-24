@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { LANGUAGES, LANGUAGE_NAMES, languagePrefix, useLanguage, type Language } from "./i18n/context";
+import { stopTaalwissel, useToonTaal } from "./taalwissel";
 
 // 16 september 2026 (Marinus, voor de beurs): één strak vlaggetje met een uitklapmenu, zes talen.
 // De vlaggen zijn kleine SVG's, geen emoji, zodat ze op elk systeem hetzelfde ogen.
@@ -22,6 +23,9 @@ export default function LanguageSwitch() {
   const [open, setOpen] = useState(false);
   const wrap = useRef<HTMLDivElement>(null);
   const tail = location.pathname + location.search + location.hash;
+  // Het vlaggetje wisselt mee met de kop op de homepage; bij openen van het menu stopt dat.
+  const getoond = useToonTaal();
+  const vlag = !open && getoond ? getoond : language;
   useEffect(() => {
     if (!open) return;
     const close = (e: MouseEvent) => { if (wrap.current && !wrap.current.contains(e.target as Node)) setOpen(false); };
@@ -31,9 +35,9 @@ export default function LanguageSwitch() {
   }, [open]);
   return (
     <div className={`h-language-switch${open ? " is-open" : ""}`} ref={wrap} translate="no">
-      <button type="button" className="h-language-current" aria-haspopup="listbox" aria-expanded={open} aria-label={`Language: ${LANGUAGE_NAMES[language]}`} onClick={() => setOpen((v) => !v)}>
-        <Flag code={language} />
-        <span>{language.toUpperCase()}</span>
+      <button type="button" className="h-language-current" aria-haspopup="listbox" aria-expanded={open} aria-label={`Language: ${LANGUAGE_NAMES[language]}`} onClick={() => { stopTaalwissel(); setOpen((v) => !v); }}>
+        <Flag key={`vlag-${vlag}`} code={vlag} />
+        <span key={`code-${vlag}`}>{vlag.toUpperCase()}</span>
         <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1 3.5l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </button>
       <ul className="h-language-menu" role="listbox" aria-label="Language" hidden={!open}>
