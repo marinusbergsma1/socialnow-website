@@ -24,6 +24,7 @@ import {
   TeamPage,
 } from "./pages";
 import { AuditPage } from "./AuditPage";
+import GratisWebsite from "./GratisWebsite";
 import LogoIntro from "./LogoIntro";
 import QrOsWelcome from "./QrOsWelcome";
 import BrandFooter from "./BrandFooter";
@@ -41,7 +42,7 @@ import JuridischPage from "../components/JuridischPage";
 // Staat uit tot er een script op de site komt dat toestemming nodig heeft; de afweging staat
 // in het bestand zelf.
 import Cookiebot from "./Cookiebot";
-import ConsentPopup, { openGratisWebsite } from "./ConsentPopup";
+import ConsentPopup from "./ConsentPopup";
 
 const nav = [
   ["/het-os", "Het OS"],
@@ -79,7 +80,7 @@ function ProposalShell() {
       project?.title ||
       post?.title ||
       nav.find(([path]) => path === location.pathname)?.[1] ||
-      "Probeer SocialNow OS";
+      (location.pathname.startsWith("/gratis-website") ? "Gratis website-upgrade" : "Probeer SocialNow OS");
     const description =
       project?.description ||
       post?.excerpt ||
@@ -151,10 +152,10 @@ function ProposalShell() {
             ))}
           </nav>
           <LanguageSwitch />
-          <a className="h-header-claim" href="#gratis-website" onClick={openGratisWebsite}>
+          <Link className="h-header-claim" to="/gratis-website">
             Gratis website
             <ArrowUpRight size={15} />
-          </a>
+          </Link>
           <button
             className="h-menu-toggle"
             type="button"
@@ -197,6 +198,7 @@ function ProposalShell() {
           <Route path="/prijzen" element={<PricesPage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/audit" element={<AuditPage />} />
+          <Route path="/gratis-website" element={<GratisWebsite />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route

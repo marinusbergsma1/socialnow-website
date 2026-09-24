@@ -3130,3 +3130,7 @@ video {
     right: 255px;
   }
 }
+
+/* 24 september 2026 (Marinus): het OS en/en naast de gratis website, blauw omrand zodat hij opvalt. */
+.sn-site .h-os-tweede { border: 1px solid #3b7bf0 !important; background: linear-gradient(135deg, #0f2144, #0a1020) !important; color: #fff !important; }
+.sn-site .h-os-tweede:hover { border-color: #6a9cff !important; }

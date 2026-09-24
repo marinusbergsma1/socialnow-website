@@ -61,37 +61,34 @@ const ACTIE: Record<Language, Actie> = {
   it: { badge: "GRATIS", kop: "Upgrade gratuito del sito.", win: "Ti chiamiamo e presentiamo il tuo nuovo sito", bedrag: "dal vivo in fiera.", regel: "Da vedere e usare lo stesso giorno. Odoo Experience, stand C21." },
   es: { badge: "GRATIS", kop: "Mejora gratuita de tu web.", win: "Te llamamos y presentamos tu nueva web", bedrag: "en directo en la feria.", regel: "Para verla y usarla el mismo día. Odoo Experience, stand C21." },
 };
-// 24 september 2026 (Marinus): elke "gratis website"-knop op de site opent deze popup opnieuw.
-export const OPEN_WEBSITE = "sn-gratis-website";
-export function openGratisWebsite(e?: { preventDefault(): void }) { e?.preventDefault(); window.dispatchEvent(new Event(OPEN_WEBSITE)); }
-// Bedank-tekst na het versturen; het OS staat er klein onder, niet meer als hoofdroute.
-const KLAAR: Record<Language, { kop: string; tekst: string; os: string; sluit: string; foutTel: string }> = {
-  nl: { kop: "Top, we bellen je.", tekst: "We nemen vandaag contact op en presenteren je nieuwe website live op de beurs, stand C21.", os: "Of probeer alvast het OS", sluit: "Website bekijken", foutTel: "Vul je telefoonnummer in, dan bellen we je." },
-  en: { kop: "Great, we will call you.", tekst: "We will contact you today and present your new website live at the fair, booth C21.", os: "Or try the OS right away", sluit: "Explore the website", foutTel: "Please enter your phone number so we can call you." },
-  de: { kop: "Super, wir rufen Sie an.", tekst: "Wir melden uns heute und präsentieren Ihre neue Website live auf der Messe, Stand C21.", os: "Oder testen Sie gleich das OS", sluit: "Website ansehen", foutTel: "Bitte geben Sie Ihre Telefonnummer ein, damit wir Sie anrufen können." },
-  fr: { kop: "Parfait, nous vous appelons.", tekst: "Nous vous contactons aujourd\u2019hui et présentons votre nouveau site en direct au salon, stand C21.", os: "Ou essayez d\u00e9j\u00e0 l\u2019OS", sluit: "Découvrir le site", foutTel: "Indiquez votre numéro pour que nous puissions vous appeler." },
-  it: { kop: "Perfetto, ti chiamiamo.", tekst: "Ti contattiamo oggi e presentiamo il tuo nuovo sito dal vivo in fiera, stand C21.", os: "Oppure prova subito l\u2019OS", sluit: "Esplora il sito", foutTel: "Inserisci il tuo numero, così possiamo chiamarti." },
-  es: { kop: "Genial, te llamamos.", tekst: "Te contactamos hoy y presentamos tu nueva web en directo en la feria, stand C21.", os: "O prueba ya el OS", sluit: "Ver la web", foutTel: "Escribe tu teléfono para que podamos llamarte." },
+// De website-knop links en de kop boven het OS-formulier rechts: de site en het OS en/en.
+const KLAAR: Record<Language, { website: string; osKop: string }> = {
+  nl: { website: "Claim je gratis website", osKop: "Of probeer ons gratis persoonlijke OS" },
+  en: { website: "Claim your free website", osKop: "Or try our free personal OS system" },
+  de: { website: "Kostenlose Website sichern", osKop: "Oder testen Sie unser kostenloses persönliches OS" },
+  fr: { website: "Obtenir mon site gratuit", osKop: "Ou essayez notre OS personnel gratuit" },
+  it: { website: "Richiedi il sito gratis", osKop: "Oppure prova il nostro OS personale gratuito" },
+  es: { website: "Consigue tu web gratis", osKop: "O prueba nuestro OS personal gratis" },
 };
 export function actieLoopt(): boolean { return Date.now() <= Date.parse(`${ACTIE_TOT}T23:59:59+02:00`); }
 
 type Gegevens = { kop: string; uitleg: string; naam: string; email: string; tel: string; optioneel: string; meten: string; verder: string; terug: string; foutNaam: string; foutEmail: string; bezig: string };
 const GEGEVENS: Record<Language, Gegevens> = {
-  nl: { kop: "Bijna binnen.", uitleg: "Laat je gegevens achter, dan kunnen we je later helpen.", naam: "Naam", email: "E-mail", tel: "Telefoon", optioneel: "optioneel", meten: "Ja, jullie mogen meten hoe ik het OS gebruik, om het beter te maken.", verder: "Claim je gratis website", terug: "Terug", foutNaam: "Vul je naam in.", foutEmail: "Dat e-mailadres klopt nog niet.", bezig: "Even geduld…" },
-  en: { kop: "Almost there.", uitleg: "Leave your details so we can help you later.", naam: "Name", email: "E-mail", tel: "Phone", optioneel: "optional", meten: "Yes, you may measure how I use the OS, to make it better.", verder: "Claim your free website", terug: "Back", foutNaam: "Please enter your name.", foutEmail: "That e-mail address doesn't look right yet.", bezig: "One moment…" },
-  de: { kop: "Fast geschafft.", uitleg: "Hinterlassen Sie Ihre Daten, dann können wir Ihnen später helfen.", naam: "Name", email: "E-Mail", tel: "Telefon", optioneel: "optional", meten: "Ja, Sie dürfen messen, wie ich das OS nutze, um es besser zu machen.", verder: "Kostenlose Website sichern", terug: "Zurück", foutNaam: "Bitte geben Sie Ihren Namen ein.", foutEmail: "Diese E-Mail-Adresse stimmt noch nicht.", bezig: "Einen Moment…" },
+  nl: { kop: "Bijna binnen.", uitleg: "Laat je gegevens achter, dan kunnen we je later helpen.", naam: "Naam", email: "E-mail", tel: "Telefoon", optioneel: "optioneel", meten: "Ja, jullie mogen meten hoe ik het OS gebruik, om het beter te maken.", verder: "Probeer het OS gratis", terug: "Terug", foutNaam: "Vul je naam in.", foutEmail: "Dat e-mailadres klopt nog niet.", bezig: "Even geduld…" },
+  en: { kop: "Almost there.", uitleg: "Leave your details so we can help you later.", naam: "Name", email: "E-mail", tel: "Phone", optioneel: "optional", meten: "Yes, you may measure how I use the OS, to make it better.", verder: "Try the free personal OS", terug: "Back", foutNaam: "Please enter your name.", foutEmail: "That e-mail address doesn't look right yet.", bezig: "One moment…" },
+  de: { kop: "Fast geschafft.", uitleg: "Hinterlassen Sie Ihre Daten, dann können wir Ihnen später helfen.", naam: "Name", email: "E-Mail", tel: "Telefon", optioneel: "optional", meten: "Ja, Sie dürfen messen, wie ich das OS nutze, um es besser zu machen.", verder: "OS kostenlos testen", terug: "Zurück", foutNaam: "Bitte geben Sie Ihren Namen ein.", foutEmail: "Diese E-Mail-Adresse stimmt noch nicht.", bezig: "Einen Moment…" },
   fr: { kop: "Vous y \u00eates presque.", uitleg: "Laissez vos coordonnées pour que nous puissions vous aider plus tard.", naam: "Nom", email: "E-mail", tel: "Téléphone", optioneel: "facultatif", meten: "Oui, vous pouvez mesurer mon utilisation de l’OS pour l’améliorer.", verder: "Essayer l\u2019OS", terug: "Retour", foutNaam: "Indiquez votre nom.", foutEmail: "Cette adresse e-mail n’est pas encore correcte.", bezig: "Un instant…" },
   it: { kop: "Ci siamo quasi.", uitleg: "Lascia i tuoi dati, così potremo aiutarti in seguito.", naam: "Nome", email: "E-mail", tel: "Telefono", optioneel: "facoltativo", meten: "Sì, potete misurare come uso l’OS, per migliorarlo.", verder: "Provi l\u2019OS", terug: "Indietro", foutNaam: "Inserisci il tuo nome.", foutEmail: "Questo indirizzo e-mail non è ancora corretto.", bezig: "Un attimo…" },
-  es: { kop: "Ya casi est\u00e1s.", uitleg: "Déjanos tus datos para que podamos ayudarte más adelante.", naam: "Nombre", email: "E-mail", tel: "Teléfono", optioneel: "opcional", meten: "Sí, podéis medir cómo uso el OS para mejorarlo.", verder: "Consigue tu web gratis", terug: "Atrás", foutNaam: "Escribe tu nombre.", foutEmail: "Ese e-mail todavía no es correcto.", bezig: "Un momento…" },
+  es: { kop: "Ya casi est\u00e1s.", uitleg: "Déjanos tus datos para que podamos ayudarte más adelante.", naam: "Nombre", email: "E-mail", tel: "Teléfono", optioneel: "opcional", meten: "Sí, podéis medir cómo uso el OS para mejorarlo.", verder: "Prueba el OS gratis", terug: "Atrás", foutNaam: "Escribe tu nombre.", foutEmail: "Ese e-mail todavía no es correcto.", bezig: "Un momento…" },
 };
 const AANMELD_URL = "https://os.socialnow.nl/api/aanmelden";
 const TEKST: Record<Language, Tekst> = {
-  nl: { kop: "Welkom bij SocialNow.", land: "Je land", demo: "Claim je gratis website", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies op de website; in het OS meten we alleen met jouw toestemming.", intro: "Een betere website, gratis. Laat je gegevens achter, wij bellen je.", stap1: "Waar zit je?", stap2: "Je gegevens", volgende: "Volgende", phNaam: "Je naam", phEmail: "jij@bedrijf.nl" },
-  en: { kop: "Welcome to SocialNow.", land: "Your country", demo: "Claim your free website", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies on the website; in the OS we only measure with your consent.", intro: "A better website, for free. Leave your details and we will call you.", stap1: "Where are you based?", stap2: "Your details", volgende: "Next", phNaam: "Your name", phEmail: "you@company.com" },
-  de: { kop: "Willkommen bei SocialNow.", land: "Ihr Land", demo: "Kostenlose Website sichern", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies auf der Website; im OS messen wir nur mit Ihrer Zustimmung.", intro: "Eine bessere Website, kostenlos. Hinterlassen Sie Ihre Daten, wir rufen Sie an.", stap1: "Wo sind Sie ansässig?", stap2: "Ihre Daten", volgende: "Weiter", phNaam: "Ihr Name", phEmail: "sie@firma.de" },
+  nl: { kop: "Welkom bij SocialNow.", land: "Je land", demo: "Probeer het OS gratis", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies op de website; in het OS meten we alleen met jouw toestemming.", intro: "Een betere website, gratis. Laat je gegevens achter, wij bellen je.", stap1: "Waar zit je?", stap2: "Je gegevens", volgende: "Volgende", phNaam: "Je naam", phEmail: "jij@bedrijf.nl" },
+  en: { kop: "Welcome to SocialNow.", land: "Your country", demo: "Try the free personal OS", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies on the website; in the OS we only measure with your consent.", intro: "A better website, for free. Leave your details and we will call you.", stap1: "Where are you based?", stap2: "Your details", volgende: "Next", phNaam: "Your name", phEmail: "you@company.com" },
+  de: { kop: "Willkommen bei SocialNow.", land: "Ihr Land", demo: "OS kostenlos testen", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies auf der Website; im OS messen wir nur mit Ihrer Zustimmung.", intro: "Eine bessere Website, kostenlos. Hinterlassen Sie Ihre Daten, wir rufen Sie an.", stap1: "Wo sind Sie ansässig?", stap2: "Ihre Daten", volgende: "Weiter", phNaam: "Ihr Name", phEmail: "sie@firma.de" },
   fr: { kop: "Bienvenue chez SocialNow.", land: "Votre pays", demo: "Essayer l\u2019OS", site: "Découvrir le site", voor: "En essayant l’OS ou en découvrant le site, vous acceptez nos ", voorwaarden: "conditions générales", en: " et notre ", privacy: "politique de confidentialité", na: ". Pas de cookies de suivi sur le site ; dans l’OS, nous ne mesurons qu’avec votre accord.", intro: "Votre propre OS, à essayer gratuitement. Deux étapes et vous y êtes.", stap1: "Où êtes-vous basé ?", stap2: "Vos coordonnées", volgende: "Suivant", phNaam: "Votre nom", phEmail: "vous@entreprise.fr" },
   it: { kop: "Benvenuto in SocialNow.", land: "Il tuo paese", demo: "Provi l\u2019OS", site: "Esplora il sito", voor: "Provando l’OS o esplorando il sito, accetti i nostri ", voorwaarden: "termini di servizio", en: " e la nostra ", privacy: "informativa sulla privacy", na: ". Nessun cookie di tracciamento sul sito; nell’OS misuriamo solo con il tuo consenso.", intro: "Il tuo OS, da provare gratis. Due passi e sei dentro.", stap1: "Dove hai sede?", stap2: "I tuoi dati", volgende: "Avanti", phNaam: "Il tuo nome", phEmail: "tu@azienda.it" },
-  es: { kop: "Bienvenido a SocialNow.", land: "Tu país", demo: "Consigue tu web gratis", site: "Ver la web", voor: "Al probar el OS o ver la web, aceptas nuestros ", voorwaarden: "términos de servicio", en: " y nuestra ", privacy: "política de privacidad", na: ". Sin cookies de seguimiento en la web; en el OS solo medimos con tu consentimiento.", intro: "Una web mejor, gratis. Déjanos tus datos y te llamamos.", stap1: "¿Dónde está tu empresa?", stap2: "Tus datos", volgende: "Siguiente", phNaam: "Tu nombre", phEmail: "tu@empresa.es" },
+  es: { kop: "Bienvenido a SocialNow.", land: "Tu país", demo: "Prueba el OS gratis", site: "Ver la web", voor: "Al probar el OS o ver la web, aceptas nuestros ", voorwaarden: "términos de servicio", en: " y nuestra ", privacy: "política de privacidad", na: ". Sin cookies de seguimiento en la web; en el OS solo medimos con tu consentimiento.", intro: "Una web mejor, gratis. Déjanos tus datos y te llamamos.", stap1: "¿Dónde está tu empresa?", stap2: "Tus datos", volgende: "Siguiente", phNaam: "Tu nombre", phEmail: "tu@empresa.es" },
 };
 
 function bewaard(): boolean { try { return localStorage.getItem(SLEUTEL) === LEGAL_VERSION; } catch { return false; } }
@@ -137,7 +134,7 @@ export default function ConsentPopup() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [land, setLand] = useState("NL");
-  const [stap, setStap] = useState<"keuze" | "gegevens" | "klaar">("keuze");
+  const [stap, setStap] = useState<"keuze" | "gegevens">("keuze");
   const [naam, setNaam] = useState("");
   const [email, setEmail] = useState("");
   const [tel, setTel] = useState("");
@@ -146,7 +143,6 @@ export default function ConsentPopup() {
   const naamVeld = useRef<HTMLInputElement>(null);
   useEffect(() => { if (stap === "gegevens") naamVeld.current?.focus({ preventScroll: true }); }, [stap]);
   useEffect(() => { setOpen(!bewaard()); setLand(landUitBrowser()); }, []);
-  useEffect(() => { const o = () => { setStap("keuze"); setOpen(true); }; window.addEventListener(OPEN_WEBSITE, o); return () => window.removeEventListener(OPEN_WEBSITE, o); }, []);
   // 19 september 2026: de juridische laag is van twee naar zeven documenten gegaan. Op al die
   // pagina's blijft de pop-up weg. Niet alleen om te lezen: artikel 12 AVG vraagt dat een
   // privacyverklaring makkelijk toegankelijk is, en een scherm dat eerst om akkoord vraagt
@@ -170,6 +166,7 @@ export default function ConsentPopup() {
   };
   const akkoord = () => { try { localStorage.setItem(SLEUTEL, LEGAL_VERSION); } catch {} zetCookies(gekozen.code, gekozen.taal); setOpen(false); };
   const g = GEGEVENS[language] || GEGEVENS.en;
+  const naarWebsite = () => { akkoord(); window.location.href = `${languagePrefix(gekozen.taal)}/gratis-website/`; };
   const naarDemo = () => { akkoord(); zetMeten(true); window.location.href = `${DEMO_URL}?bron=demo&taal=${gekozen.taal}&land=${gekozen.code}`; };
   // Versturen mag de demo nooit tegenhouden: alleen een fout in de eigen invoer houdt iemand hier.
   const verstuur = async (e: React.FormEvent) => {
@@ -178,17 +175,16 @@ export default function ConsentPopup() {
     const n = naam.trim(), m = email.trim();
     if (!n) { setFout(g.foutNaam); return; }
     if (!EMAIL.test(m)) { setFout(g.foutEmail); return; }
-    if (tel.replace(/\D/g, "").length < 8) { setFout(k.foutTel); return; }
     setFout(""); setBezig(true);
     try {
       const r = await fetch(AANMELD_URL, {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bron: "demo", wens: "gratis-website", naam: n, email: m, mobiel: tel.trim(), land: gekozen.code, taal: gekozen.taal, meten: true, voorwaarden: LEGAL_VERSION }),
+        body: JSON.stringify({ bron: "demo", naam: n, email: m, mobiel: tel.trim(), land: gekozen.code, taal: gekozen.taal, meten: true, voorwaarden: LEGAL_VERSION }),
         signal: AbortSignal.timeout(6000),
       });
       if (r.status === 400) { const j = await r.json().catch(() => null); setFout(String(j?.error || g.foutEmail)); setBezig(false); return; }
     } catch {}
-    akkoord(); zetMeten(true); setOpen(true); setStap("klaar"); setBezig(false);
+    naarDemo();
   };
   // 23 september 2026 (Marinus): de twee stappen naast elkaar. Links waar je zit en de winactie,
   // rechts je gegevens en de knop naar het OS. Op de telefoon zijn het twee korte stappen met
@@ -198,19 +194,6 @@ export default function ConsentPopup() {
     <p className="sn-consent-tekst">
       {s.voor}<Link to="/voorwaarden">{s.voorwaarden}</Link>{s.en}<Link to="/privacy">{s.privacy}</Link>{s.na}
     </p>
-  );
-  if (stap === "klaar") return (
-    <div className="sn-consent" role="dialog" aria-modal="true" aria-labelledby="sn-consent-kop" translate="no">
-      <div className="sn-consent-card sn-consent-klaar">
-        <img className="sn-consent-logo" src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="1556" height="240" />
-        <h2 id="sn-consent-kop" className="sn-consent-kop">{k.kop}</h2>
-        <p className="sn-consent-intro">{k.tekst}</p>
-        <div className="sn-consent-knoppen">
-          <button type="button" className="sn-consent-knop" onClick={() => setOpen(false)}><span className="sn-consent-glans" aria-hidden="true" /><span>{k.sluit}</span><Pijl /></button>
-        </div>
-        <a className="sn-consent-os-regel" href={`${DEMO_URL}?bron=website-upgrade&taal=${gekozen.taal}&land=${gekozen.code}`}>{k.os} →</a>
-      </div>
-    </div>
   );
   return (
     <div className="sn-consent" role="dialog" aria-modal="true" aria-labelledby="sn-consent-kop" translate="no">
@@ -235,6 +218,7 @@ export default function ConsentPopup() {
               <span className="sn-consent-actie-regel">{a.regel}</span>
             </div>
           ) : null}
+          <button type="button" className="sn-consent-knop sn-consent-knop-website" onClick={naarWebsite}><span className="sn-consent-glans" aria-hidden="true" /><span>{k.website}</span><Pijl /></button>
           <div className="sn-consent-knoppen sn-consent-alleen-mobiel">
             <button type="button" className="sn-consent-knop" onClick={() => setStap("gegevens")}><span className="sn-consent-glans" aria-hidden="true" /><span>{s.volgende}</span><Pijl /></button>
             <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={akkoord}><span>{s.site}</span></button>
@@ -242,6 +226,7 @@ export default function ConsentPopup() {
           <div className="sn-consent-alleen-mobiel">{juridisch}</div>
         </section>
         <form className="sn-consent-twee" onSubmit={verstuur} noValidate>
+          <p className="sn-consent-os-kop">{k.osKop}</p>
           <p className="sn-consent-stap"><i>2</i>{s.stap2}</p>
           <label className="sn-consent-land">
             <span>{g.naam}</span>
@@ -252,8 +237,8 @@ export default function ConsentPopup() {
             <input type="email" autoComplete="email" inputMode="email" required maxLength={254} placeholder={s.phEmail} value={email} onChange={e => setEmail(e.target.value)} />
           </label>
           <label className="sn-consent-land">
-            <span>{g.tel}</span>
-            <input type="tel" autoComplete="tel" inputMode="tel" required maxLength={30} value={tel} onChange={e => setTel(e.target.value)} />
+            <span>{g.tel} <em>({g.optioneel})</em></span>
+            <input type="tel" autoComplete="tel" inputMode="tel" maxLength={30} value={tel} onChange={e => setTel(e.target.value)} />
           </label>
           {fout ? <p className="sn-consent-fout" role="alert">{fout}</p> : null}
           <div className="sn-consent-knoppen">
@@ -261,7 +246,6 @@ export default function ConsentPopup() {
             <button type="button" className="sn-consent-knop sn-consent-knop-stil sn-consent-alleen-desktop" onClick={akkoord}><span>{s.site}</span></button>
             <button type="button" className="sn-consent-knop sn-consent-knop-stil sn-consent-alleen-mobiel" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span></button>
           </div>
-          <button type="button" className="sn-consent-os-regel" onClick={naarDemo}>{k.os} →</button>
           {juridisch}
         </form>
       </div>

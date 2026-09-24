@@ -1,6 +1,7 @@
 import React from "react";
 import { LANGUAGES, translate, useLanguage } from "./i18n/context";
-import { actieLoopt, openGratisWebsite } from "./ConsentPopup";
+import { Link } from "react-router-dom";
+import { actieLoopt } from "./ConsentPopup";
 import { useTaalwissel } from "./taalwissel";
 
 // 24 september 2026 (Marinus): "One System for" in plaats van "One OS for", daaronder de winactie
@@ -34,7 +35,7 @@ export function HeroTitle() {
       </h1>
       {actieLoopt() && (
         <p className="h-win-c" translate="no">
-          <a className="h-taalwissel" href="#gratis-website" onClick={openGratisWebsite}>
+          <Link className="h-taalwissel" to="/gratis-website">
             {LANGUAGES.map((code) => {
               const [voor, na] = translate(WIN, code).split("{bedrag}");
               return (
@@ -43,7 +44,7 @@ export function HeroTitle() {
                 </span>
               );
             })}
-          </a>
+          </Link>
         </p>
       )}
     </>

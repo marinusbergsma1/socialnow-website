@@ -1,0 +1,39 @@
+/* 24 september 2026 (Marinus): de gratis website-onboarding. Eén kolom, grote velden, groen = verder. */
+.gw { max-width: 760px; padding-top: 130px; padding-bottom: 110px; }
+.gw h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1; letter-spacing: -.03em; margin: 18px 0 18px; }
+.sn-site .gw h1 span { color: #7ee08f !important; -webkit-text-fill-color: #7ee08f; background: none; }
+.gw-intro { color: #b8b8bd; font-size: 17px; line-height: 1.6; max-width: 620px; }
+.gw-strepen { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 0; margin: 34px 0 18px; }
+.gw-strepen li { border-top: 3px solid #26272c; padding-top: 10px; font-size: 12px; color: #77777d; }
+.gw-strepen li span { color: inherit; margin-right: 4px; }
+.gw-strepen li.is-aan { border-color: #3fbf5c; color: #e9e9ec; }
+.gw-kaart { background: #0d0f14; border: 1px solid #22242b; border-radius: 22px; padding: 30px; display: grid; gap: 24px; }
+.gw-kaart h2 { font-size: 24px; margin: 0; }
+.gw-vraag { display: grid; gap: 6px; }
+.gw-vraag label { font-weight: 700; font-size: 16px; color: #fff; }
+.gw-vraag small { color: #8c8c93; font-size: 13px; line-height: 1.5; }
+.gw-vraag input, .gw-vraag textarea { margin-top: 4px; width: 100%; background: #07080c; border: 1px solid #2a2c33; border-radius: 12px; padding: 13px 14px; color: #f5f5f5; font: inherit; font-size: 15px; resize: vertical; }
+.gw-vraag input:focus, .gw-vraag textarea:focus { outline: none; border-color: #3fbf5c; box-shadow: 0 0 0 3px rgba(63,191,92,.18); }
+.gw-keuzes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.gw-keuzes button { background: #07080c; border: 1px solid #2a2c33; color: #d6d6da; border-radius: 999px; padding: 10px 16px; font: inherit; font-size: 14px; cursor: pointer; }
+.gw-keuzes button.is-aan { background: #2f9e4a; border-color: #3fbf5c; color: #fff; }
+.gw-knoppen { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.gw-terug { background: none; border: 0; color: #9a9aa0; font: inherit; cursor: pointer; }
+.gw-verder { display: inline-flex; align-items: center; gap: 10px; background: #2f9e4a; color: #fff; border: 1px solid #3fbf5c; border-radius: 999px; padding: 14px 24px; font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; }
+.gw-verder:hover { background: #37b255; }
+.gw-verder:disabled { opacity: .6; cursor: wait; }
+.gw-fout { color: #ff8a8a; margin: 0; }
+.gw-juridisch { font-size: 12px; color: #8c8c93; margin: 0; }
+.gw-juridisch a { color: #cfcfd3; text-decoration: underline; }
+/* Het OS als tweede route: zichtbaar, maar niet groen, zodat de website de hoofdknop blijft. */
+.gw-os { margin-top: 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; border-radius: 18px; border: 1px solid #2d6cdf; background: linear-gradient(135deg, #0c1a33, #0a0f1c); color: #fff; font-weight: 700; font-size: 17px; text-decoration: none; }
+.gw-os small { display: block; font-weight: 500; font-size: 12px; color: #8fb4ff; margin-bottom: 3px; letter-spacing: .02em; }
+.gw-os:hover { border-color: #5b8ff0; }
+.gw-klaar { text-align: left; }
+.gw-vink { display: inline-grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; background: #2f9e4a; color: #fff; }
+@media (max-width: 640px) {
+  .gw { padding-top: 100px; }
+  .gw-kaart { padding: 20px; border-radius: 18px; }
+  .gw-strepen li { font-size: 0; }
+  .gw-strepen li span { font-size: 12px; }
+}

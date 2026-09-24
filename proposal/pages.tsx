@@ -24,7 +24,6 @@ import TrustStories from "./TrustStories";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import BrandGlobe from "./BrandGlobe";
 import OsEntry, { CLAIM_URL, REVIEWS_URL } from "./os-entry";
-import { openGratisWebsite } from "./ConsentPopup";
 import { agents, people, projects, services } from "./content";
 import Pricing from "./Pricing";
 import { allPosts } from "../data/posts";
@@ -94,13 +93,17 @@ export function Home() {
           {/* 24 september 2026 (Marinus): de gratis website is de hoofdroute, het OS een klein regeltje eronder. */}
           <div className="os-entry">
             <div className="os-actions">
-              <a className="os-claim sn-btn3d h-button" href="#gratis-website" onClick={openGratisWebsite}>
+              <Link className="os-claim sn-btn3d h-button" to="/gratis-website">
                 <span className="sn-btn3d-sheen" />
                 <span>Claim je gratis website</span>
                 <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
+              </Link>
+              <a className="os-install sn-btn3d h-button h-button-secondary h-os-tweede" href={CLAIM_URL}>
+                <span className="sn-btn3d-sheen" />
+                <span>Probeer ons gratis persoonlijke OS</span>
+                <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
               </a>
             </div>
-            <p className="os-product-note"><a href={CLAIM_URL}>Of probeer het OS gratis</a></p>
           </div>
           <TeamTrust />
           <ol
@@ -129,8 +132,11 @@ export function Home() {
           <i /> 24–26 september · Odoo-beurs
         </span>
         <p>Gratis website-upgrade. Vandaag aangevraagd, vandaag live op stand C21.</p>
-        <a className="h-text-link" href="#gratis-website" onClick={openGratisWebsite}>
+        <Link className="h-text-link" to="/gratis-website">
           Claim je gratis website <ArrowUpRight size={17} />
+        </Link>
+        <a className="h-text-link" href={CLAIM_URL}>
+          Probeer ons gratis persoonlijke OS <ArrowUpRight size={17} />
         </a>
       </div>
       <ShowcaseFilms />
