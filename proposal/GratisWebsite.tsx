@@ -21,6 +21,7 @@ const STAPPEN: Stap[] = [
   { titel: "Jij en je bedrijf", vragen: [
     { key: "bedrijf", vraag: "Hoe heet je bedrijf?", hint: "Zoals je hem zelf schrijft.", type: "text" },
     { key: "website", vraag: "Wat is je huidige website?", hint: "Plak de link. Leeg laten als je nog geen site hebt.", type: "text" },
+    { key: "nietgoed", vraag: "Wat vind je nu niet goed aan je huidige site?", hint: "Alles mag: verouderd, traag, niet vindbaar, levert geen aanvragen op, past niet meer bij je." },
     { key: "voorbeeld", vraag: "Welke website vind je mega mooi?", hint: "Plak de link. Mag uit elke branche komen; hier gaan we op letten.", type: "text" },
     { key: "wat", vraag: "Wat doe je, in één of twee zinnen?", hint: "Bijvoorbeeld: wij installeren zonnepanelen voor bedrijven in de regio Utrecht." },
     { key: "anders", vraag: "Wat maakt jou anders dan de rest?", hint: "Waarom kiezen klanten voor jou en niet voor de buurman?" },
