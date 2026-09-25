@@ -19,6 +19,26 @@ const WIN = "Nieuwe websites en rebranding, volledig op maat. Alleen vandaag en 
 
 // 25 september 2026 (Marinus): alleen de getoonde taal neemt ruimte in. Het blok volgt de hoogte van
 // die taal met een zachte overgang, zodat er geen lege regel boven of onder de kop blijft staan.
+// 25 september 2026 (Marinus): het Google Ads-beeldmerk staat in de kop, direct voor "Google Ads".
+function metAdsLogo(tekst: string) {
+  const i = tekst.indexOf("Google Ads");
+  if (i < 0) return tekst;
+  return (
+    <>
+      {tekst.slice(0, i)}
+      <span className="h-kop-ads-groep">
+        <svg className="h-kop-ads" viewBox="0 0 48 48" aria-hidden="true">
+          <rect x="10" y="4" width="12" height="40" rx="6" fill="#FBBC04" transform="rotate(30 16 24)" />
+          <rect x="26" y="4" width="12" height="40" rx="6" fill="#4285F4" transform="rotate(-30 32 24)" />
+          <circle cx="7.5" cy="39.5" r="6.5" fill="#34A853" />
+        </svg>
+        Google
+      </span>
+      {tekst.slice(i + 6)}
+    </>
+  );
+}
+
 function useHoogteVolgt<T extends HTMLElement>(getoond: string) {
   const ref = React.useRef<T>(null);
   React.useLayoutEffect(() => {
@@ -52,7 +72,7 @@ export function HeroTitle() {
       <h1 ref={kopRef} className="h-taalwissel h-hoogte" translate="no">
         {LANGUAGES.map((code) => (
           <span key={code} {...stand(code)}>
-            {translate(KOP_1, code)}{" "}
+            {metAdsLogo(translate(KOP_1, code))}{" "}
             <span className="h-kop-gratis">{translate(KOP_2, code)}</span>
           </span>
         ))}

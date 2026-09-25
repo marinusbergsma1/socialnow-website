@@ -2478,3 +2478,10 @@ html {
 .sn-site .h-hero .os-actions .h-button { min-height: 68px; padding: 0 12px 0 32px; font-size: clamp(17px, 1.15vw, 20px); gap: 18px; }
 .sn-site .h-hero .os-actions .h-button .h-button-icon { width: 44px; height: 44px; }
 @media (max-width: 700px) { .sn-site .h-hero .os-actions .h-button { min-height: 60px; font-size: 17px; } }
+
+/* 25 september 2026 (Marinus): meer lucht tussen de regels, zodat het groene vlak niet tegen de regel
+   erboven zit. Het Google Ads-beeldmerk staat voor "Google" in de kop. */
+.sn-site .h-hero h1.h-taalwissel { line-height: 1.12; }
+.sn-site .h-hero h1 .h-kop-gratis { line-height: 1; padding: .02em .2em .08em; margin: .1em 0 0 .06em; }
+.sn-site .h-kop-ads-groep { white-space: nowrap; }
+.sn-site .h-kop-ads { display: inline-block; width: .82em; height: .82em; margin: 0 .14em 0 .02em; vertical-align: -.06em; }
