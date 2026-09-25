@@ -23,7 +23,7 @@ import LiveWebsites from "./LiveWebsites";
 import TrustStories from "./TrustStories";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import BrandGlobe from "./BrandGlobe";
-import { usePlekken } from "./plekken";
+import { useTellers } from "./tellers";
 import OsEntry, { CLAIM_URL, REVIEWS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
 import Pricing from "./Pricing";
@@ -78,6 +78,32 @@ function Founder() {
 }
 // 25 september 2026 (Marinus): beursversie van de OS-explainer rechts in de hero. Speelt stil in een lus,
 // met één knop voor het geluid; de ondertiteling zit in de film zelf.
+const GOOGLE_ADS = (
+  <svg className="h-pakket-ads" viewBox="0 0 48 48" aria-hidden="true">
+    <rect x="10" y="4" width="12" height="40" rx="6" fill="#FBBC04" transform="rotate(30 16 24)" />
+    <rect x="26" y="4" width="12" height="40" rx="6" fill="#4285F4" transform="rotate(-30 32 24)" />
+    <circle cx="9" cy="39" r="6" fill="#34A853" />
+  </svg>
+);
+const PAKKET: [React.ReactNode, string, string][] = [
+  [null, "Branding", "€1.500"],
+  [null, "Website", "€3.500"],
+  [GOOGLE_ADS, "Google Ads audit", "€750"],
+  [null, "SocialNow OS", "€99/m"],
+];
+function HeroPakket() {
+  return (
+    <Link className="h-pakket" to="/gratis-website" aria-label="Claim je gratis pakket">
+      {PAKKET.map(([icoon, naam, prijs]) => (
+        <span className="h-pakket-tegel" key={naam}>
+          <b>{icoon}{naam}</b>
+          <span className="h-pakket-prijs"><s>{prijs}</s><em>€0</em></span>
+        </span>
+      ))}
+    </Link>
+  );
+}
+
 function HeroFilm() {
   const [geluid, setGeluid] = useState(false);
   const ref = React.useRef<HTMLVideoElement>(null);
@@ -88,13 +114,13 @@ function HeroFilm() {
     if (!geluid) { film.currentTime = 0; void film.play().catch(() => {}); }
     setGeluid(!geluid);
   };
-  const plekken = usePlekken();
+  const { websites, os } = useTellers();
   return (
     <div className="h-hero-film">
-      <p className="h-plekken" aria-live="polite">
-        <strong key={plekken}>{plekken}</strong>
-        <span>gratis websites over</span>
-      </p>
+      <div className="h-tellers">
+        <p><strong key={websites}><i />{websites}</strong><span>websites gemaakt op de beurs</span></p>
+        <p><strong key={os}><i />{os}</strong><span>gratis OS-gebruikers</span></p>
+      </div>
       <video
         ref={ref}
         src="/video/os/os-explainer-beurs-en.mp4"
@@ -121,6 +147,7 @@ export function Home() {
           <BrandGlobe />
         </div>
         <div className="h-wrap h-hero-content">
+          <div className="h-hero-tekst">
           <p className="h-eyebrow">
             <i /> Gratis website + rebranding &amp; OS / Odoo Experience, stand C21
           </p>
@@ -133,7 +160,7 @@ export function Home() {
             <div className="os-actions">
               <Link className="os-claim sn-btn3d h-button" to="/gratis-website">
                 <span className="sn-btn3d-sheen" />
-                <span>Claim je gratis website</span>
+                <span>Claim je gratis pakket</span>
                 <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
               </Link>
               <a className="os-install sn-btn3d h-button h-button-secondary h-os-tweede" href={CLAIM_URL}>
@@ -143,30 +170,18 @@ export function Home() {
               </a>
             </div>
           </div>
-          <TeamTrust />
+          </div>
           {/* 25 september 2026 (Marinus): de explainerfilm staat op de plek van de vier Milo's (beurspresentatie). */}
           <HeroFilm />
-          <ol
-            className="h-poc-path"
-            aria-label="Zo werkt de gratis website-upgrade"
-          >
-            <li>
-              <span>01</span> Vul je gegevens in
-            </li>
-            <li>
-              <span>02</span> Wij bellen je
-            </li>
-            <li>
-              <span>03</span> Live op de beurs
-            </li>
-          </ol>
-          <Link to="/#het-os" className="h-hero-down">
-            Ontdek SocialNow OS <ArrowDown size={16} />
-          </Link>
+          {/* 25 september 2026 (Marinus): alles in één scherm. Naast het team loopt de logobalk, daaronder
+              de vier onderdelen van het gratis pakket. De drie stappen zijn weg voor het overzicht. */}
+          <div className="h-hero-rij">
+            <TeamTrust />
+            <ClientLogos kort />
+          </div>
+          <HeroPakket />
         </div>
       </section>
-      {/* 21 september 2026 (Marinus): logobalk direct onder de header geplaatst */}
-      <ClientLogos />
       <div className="h-fair h-wrap">
         <span>
           <i /> 24–26 september · Odoo-beurs

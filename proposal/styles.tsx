@@ -8,8 +8,9 @@ import { actieLoopt } from "./ConsentPopup";
 // de pagina niet verspringt als de taal elke 5 seconden wisselt. Schermlezers horen alleen de paginataal.
 // 24 september 2026 (Marinus): tweede beursdag, de kop gaat over de gratis website.
 // 25 september 2026 (Marinus): optie B, één zin met GRATIS als groen blok (h-kop-gratis).
-const KOP_1 = "Je nieuwe website, beheer en branding";
-const KOP_2 = "gratis!";
+// 25 september 2026 (Marinus): het pakket is branding, website, Google Ads audit en OS, rustiger gezet.
+const KOP_1 = "Branding, website, Google Ads audit en OS";
+const KOP_2 = "gratis.";
 // 24 september 2026 (Marinus): de groene regel gaat vanaf de tweede beursdag over de gratis website.
 // 25 september 2026 (Marinus): maximaal 10 nieuwe websites en rebrandings, volledig op maat, vandaag en morgen.
 // 25 september 2026 (Marinus): het aantal plekken staat nu groot linksboven de film (plekken.ts).

@@ -261,7 +261,7 @@ export function TeamGrid({ short = false }: { short?: boolean }) {
     </div>
   );
 }
-export function ClientLogos() {
+export function ClientLogos({ kort = false }: { kort?: boolean }) {
   // 25 september 2026 (Marinus): de merken lopen schermvullend als strook door. De rij staat er zes
   // keer in, zodat de lus ook op een breed scherm naadloos is; alleen de eerste rij is voor schermlezers.
   const rij = (i: number) =>
@@ -279,8 +279,8 @@ export function ClientLogos() {
       />
     ));
   return (
-    <div className="h-clients h-wrap">
-      <p className="h-eyebrow">Werk gemaakt voor onder meer</p>
+    <div className={kort ? "h-clients h-clients-kort" : "h-clients h-wrap"}>
+      {kort ? null : <p className="h-eyebrow">Werk gemaakt voor onder meer</p>}
       <div className="h-clients-strook">
         <div className="h-clients-lus">
           {[0, 1, 2, 3, 4, 5].map((i) => rij(i))}

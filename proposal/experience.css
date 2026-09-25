@@ -2417,3 +2417,43 @@ html {
 .sn-site .h-plekken strong { font-size: clamp(42px, 3.5vw, 64px); }
 .sn-site .h-plekken span { font-size: clamp(15px, 1.15vw, 21px); }
 .sn-site .h-clients > .h-clients-strook { -webkit-mask-image: none; mask-image: none; }
+
+/* 25 september 2026 (Marinus): gratis pakket in één 1920x1080-scherm. Links de tekst, rechts de film met
+   twee optellende tellers, daaronder team naast de logobalk (zwart verloop links en rechts) en de vier
+   onderdelen van het pakket. Rustiger: GRATIS als groene tekst in plaats van het schuine blok. */
+.sn-site .h-hero h1 .h-kop-gratis { display: inline; padding: 0; background: none; box-shadow: none; transform: none; color: #25d366; text-transform: none; }
+.sn-site .h-tellers { display: flex; gap: clamp(28px, 3vw, 56px); margin: 0 0 14px; }
+.sn-site .h-tellers p { margin: 0; display: grid; gap: 4px; line-height: 1; }
+.sn-site .h-tellers strong { display: flex; align-items: center; gap: 10px; font-size: clamp(28px, 2.2vw, 40px); font-weight: 700; letter-spacing: -.03em; font-variant-numeric: tabular-nums; color: #f5f5f5; animation: h-teller-tik .6s ease; }
+.sn-site .h-tellers strong i { width: 8px; height: 8px; border-radius: 50%; background: #25d366; animation: h-teller-puls 2s infinite; }
+.sn-site .h-tellers span { font-size: 14px; color: #9aa4ad; }
+@keyframes h-teller-tik { from { color: #25d366; } to { color: #f5f5f5; } }
+@keyframes h-teller-puls { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,.55); } 70%, 100% { box-shadow: 0 0 0 8px rgba(37,211,102,0); } }
+.sn-site .h-hero-rij { display: flex; flex-direction: column; gap: 18px; margin-top: 28px; }
+.sn-site .h-hero-rij > .h-team-trust { margin: 0 !important; max-width: none !important; flex: none; }
+.sn-site .h-clients.h-clients-kort { padding: 0 !important; min-width: 0; flex: 1; position: relative; }
+.sn-site .h-clients-kort > .h-clients-strook { padding: 0 !important; position: relative; }
+.sn-site .h-clients-kort > .h-clients-strook::before, .sn-site .h-clients-kort > .h-clients-strook::after { content: ""; position: absolute; top: 0; bottom: 0; width: 110px; z-index: 1; pointer-events: none; }
+.sn-site .h-clients-kort > .h-clients-strook::before { left: 0; background: linear-gradient(90deg, #000 10%, transparent); }
+.sn-site .h-clients-kort > .h-clients-strook::after { right: 0; background: linear-gradient(270deg, #000 10%, transparent); }
+.sn-site .h-clients-kort .h-clients-lus { gap: 64px; padding-right: 64px; animation-duration: 60s; }
+.sn-site .h-clients.h-clients-kort .h-clients-lus img { height: calc(54px * var(--logo-maat, 1)); max-width: 150px; }
+.sn-site .h-pakket { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 24px; text-decoration: none; color: inherit; pointer-events: auto; }
+.sn-site .h-pakket-tegel { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px; border-radius: 14px; border: 1px solid #ffffff1a; background: #0b0e12; transition: border-color .2s; }
+.sn-site .h-pakket:hover .h-pakket-tegel { border-color: #25d36655; }
+.sn-site .h-pakket-tegel b { display: flex; align-items: center; gap: 10px; font-size: clamp(16px, 1.1vw, 19px); font-weight: 700; color: #f5f5f5; }
+.sn-site .h-pakket-ads { width: 20px; height: 20px; flex: none; }
+.sn-site .h-pakket-prijs { display: flex; align-items: baseline; gap: 8px; white-space: nowrap; }
+.sn-site .h-pakket-prijs s { color: #8a949e; font-size: 14px; }
+.sn-site .h-pakket-prijs em { font-style: normal; color: #25d366; font-weight: 800; font-size: 22px; }
+@media (min-width: 1100px) {
+  .sn-site .h-hero { min-height: calc(100vh - 92px); min-height: calc(100svh - 92px); padding: 24px 0 28px; }
+  .sn-site .h-hero > .h-hero-content { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(40px, 4vw, 80px); align-content: center; }
+  .sn-site .h-hero-tekst { grid-column: 1; grid-row: 1; align-self: center; }
+  .sn-site .h-hero-tekst h1.h-taalwissel, .sn-site .h-hero-tekst .h-win-c, .sn-site .h-hero-tekst .h-hero-description { max-width: none; }
+  .sn-site .h-hero-film { position: relative; top: auto; right: auto; transform: none; width: auto; grid-column: 2; grid-row: 1; align-self: center; }
+  .sn-site .h-hero-rij { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 40px; }
+  .sn-site .h-pakket { grid-column: 1 / -1; }
+}
+@media (max-width: 800px) { .sn-site .h-pakket { grid-template-columns: 1fr 1fr; } .sn-site .h-pakket-tegel { flex-direction: column; align-items: flex-start; } }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-tellers strong, .sn-site .h-tellers strong i { animation: none; } }
