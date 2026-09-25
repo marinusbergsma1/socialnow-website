@@ -106,6 +106,8 @@ export function Home() {
             </div>
           </div>
           <TeamTrust />
+          {/* 25 september 2026 (Marinus): de vier Milo's rechts in de hero zijn terug. */}
+          <HeroMilos />
           <ol
             className="h-poc-path"
             aria-label="Zo werkt de gratis website-upgrade"

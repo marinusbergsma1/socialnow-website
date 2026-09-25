@@ -8,11 +8,13 @@ import { useTaalwissel } from "./taalwissel";
 // groen in de VHS-stijl van de kop (versie C). Alle zes talen staan gestapeld op dezelfde plek, zodat
 // de pagina niet verspringt als de taal elke 5 seconden wisselt. Schermlezers horen alleen de paginataal.
 // 24 september 2026 (Marinus): tweede beursdag, de kop gaat over de gratis website.
-const KOP_1 = "Je nieuwe website.";
-const KOP_2 = "Gratis.";
+// 25 september 2026 (Marinus): optie B, één zin met GRATIS als groen blok (h-kop-gratis).
+const KOP_1 = "Je nieuwe website, beheer en branding";
+const KOP_2 = "gratis!";
 // 24 september 2026 (Marinus): de groene regel gaat vanaf de tweede beursdag over de gratis website.
-const WIN = "{bedrag} Wij bellen je en presenteren hem live op de beurs.";
-const BEDRAG = "Dezelfde dag.";
+// 25 september 2026 (Marinus): maximaal 10 nieuwe websites en rebrandings, volledig op maat, vandaag en morgen.
+const WIN = "{bedrag} Nieuwe websites en rebranding, volledig op maat. Alleen vandaag en morgen.";
+const BEDRAG = "Maximaal 10.";
 
 export function HeroTitle() {
   const { language } = useLanguage();
@@ -27,9 +29,8 @@ export function HeroTitle() {
       <h1 className="h-taalwissel" translate="no">
         {LANGUAGES.map((code) => (
           <span key={code} {...stand(code)}>
-            {translate(KOP_1, code)}
-            <br />
-            {translate(KOP_2, code)}
+            {translate(KOP_1, code)}{" "}
+            <span className="h-kop-gratis">{translate(KOP_2, code)}</span>
           </span>
         ))}
       </h1>
