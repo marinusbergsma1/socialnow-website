@@ -2518,3 +2518,14 @@ html {
 .sn-site .h-hero .h-hero-tekst h1.h-taalwissel { margin-bottom: clamp(24px, 3vh, 40px); }
 .sn-site .h-hero .h-hero-description { margin: 0 0 clamp(28px, 3.5vh, 48px); font-size: clamp(16px, 1.1vw, 20px); }
 @media (min-width: 1100px) { .sn-site .h-hero > .h-hero-content { align-self: stretch; align-content: space-between; } .sn-site .h-hero-tekst { align-self: start; } }
+
+/* 25 september 2026 (Marinus): het team loopt door tot de film; de logo's staan eronder in de rechterkolom.
+   Marinus en Steef het grootst, daarna Sergio, Elian en Nick. */
+.sn-site .h-team-portraits { align-items: center; }
+.sn-site .h-team-portraits img.is-groot { width: 58px; height: 58px; position: relative; z-index: 1; }
+@media (min-width: 1100px) {
+  .sn-site .h-hero-rij { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(40px, 4vw, 80px); align-items: center; }
+  .sn-site .h-hero-rij > .h-team-trust { width: 100%; }
+  .sn-site .h-hero-rij > .h-team-trust strong { font-size: 17px; }
+  .sn-site .h-hero-rij > .h-team-trust > span:last-child > span { font-size: 14px; }
+}
