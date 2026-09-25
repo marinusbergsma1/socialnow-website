@@ -2499,3 +2499,13 @@ html {
 .sn-site .h-tellers p + p { border-left: 1px solid rgba(255,255,255,.1); }
 .sn-site .h-tellers strong i { width: 10px; height: 10px; box-shadow: 0 0 12px #25d366; }
 @media (max-width: 640px) { .sn-site .h-stand-odoo { border-left: 0; padding-left: 0; } .sn-site .h-tellers p { padding: 12px 16px; } }
+
+/* 25 september 2026 (Marinus): FREE! precies in het midden van het groene vlak en op één lijn met
+   "and OS for": de regel wordt afgesneden op kapitaalhoogte en basislijn, het vlak krijgt boven en
+   onder evenveel ruimte, en de basislijn blijft gelijk aan de tekst ervoor. */
+.sn-site .h-hero h1 .h-kop-gratis { text-box: trim-both cap alphabetic; line-height: 1; padding: .16em .2em; margin: 0 0 0 .06em; vertical-align: baseline; }
+@supports not (text-box: trim-both cap alphabetic) {
+  .sn-site .h-hero h1 .h-kop-gratis { line-height: .74; padding: .17em .2em .15em; }
+}
+/* Odoo: het hele logo in beeld en PRODUCT op het midden van de o's. */
+.sn-site .h-stand > span.h-stand-odoo { align-items: center; line-height: 1; }
