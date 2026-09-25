@@ -75,6 +75,38 @@ function Founder() {
     </figure>
   );
 }
+// 25 september 2026 (Marinus): beursversie van de OS-explainer rechts in de hero. Speelt stil in een lus,
+// met één knop voor het geluid; de ondertiteling zit in de film zelf.
+function HeroFilm() {
+  const [geluid, setGeluid] = useState(false);
+  const ref = React.useRef<HTMLVideoElement>(null);
+  const wissel = () => {
+    const film = ref.current;
+    if (!film) return;
+    film.muted = geluid;
+    if (!geluid) { film.currentTime = 0; void film.play().catch(() => {}); }
+    setGeluid(!geluid);
+  };
+  return (
+    <div className="h-hero-film">
+      <video
+        ref={ref}
+        src="/video/os/os-explainer-beurs-en.mp4"
+        poster="/video/os/os-explainer-beurs-en.jpg"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-label="SocialNow OS explainer"
+      />
+      <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={geluid}>
+        {geluid ? "Geluid uit" : "Geluid aan"}
+      </button>
+    </div>
+  );
+}
+
 export function Home() {
   return (
     <>
@@ -106,8 +138,8 @@ export function Home() {
             </div>
           </div>
           <TeamTrust />
-          {/* 25 september 2026 (Marinus): de vier Milo's rechts in de hero zijn terug. */}
-          <HeroMilos />
+          {/* 25 september 2026 (Marinus): de explainerfilm staat op de plek van de vier Milo's (beurspresentatie). */}
+          <HeroFilm />
           <ol
             className="h-poc-path"
             aria-label="Zo werkt de gratis website-upgrade"
