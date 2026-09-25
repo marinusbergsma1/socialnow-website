@@ -2413,3 +2413,7 @@ html {
 .sn-site .h-plekken { gap: 12px; margin-bottom: 14px; }
 .sn-site .h-plekken strong { font-size: clamp(48px, 4.2vw, 78px); }
 .sn-site .h-plekken span { font-size: clamp(16px, 1.35vw, 24px); }
+/* 25 september 2026 (Marinus): teller nog iets kleiner, logobalk zonder vervaagde randen. */
+.sn-site .h-plekken strong { font-size: clamp(42px, 3.5vw, 64px); }
+.sn-site .h-plekken span { font-size: clamp(15px, 1.15vw, 21px); }
+.sn-site .h-clients > .h-clients-strook { -webkit-mask-image: none; mask-image: none; }
