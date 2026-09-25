@@ -54,13 +54,14 @@ const ACTIE_TOT = "2026-09-26";
 // dezelfde dag live op de beurs. De winactie (custom OS) blijft in de regels van de app bestaan.
 type Actie = { badge: string; kop: string; win: string; bedrag: string; regel: string };
 const ACTIE: Record<Language, Actie> = {
-  nl: { badge: "GRATIS", kop: "Gratis website-upgrade.", win: "Wij bellen je en presenteren je nieuwe site", bedrag: "live op de beurs.", regel: "Dezelfde dag inzien en gebruiken. Odoo Experience, stand C21." },
-  en: { badge: "FREE", kop: "Free website upgrade.", win: "We call you and present your new website", bedrag: "live at the fair.", regel: "See it and use it the same day. Odoo Experience, booth C21." },
-  de: { badge: "KOSTENLOS", kop: "Kostenloses Website-Upgrade.", win: "Wir rufen Sie an und präsentieren Ihre neue Website", bedrag: "live auf der Messe.", regel: "Noch am selben Tag ansehen und nutzen. Odoo Experience, Stand C21." },
-  fr: { badge: "GRATUIT", kop: "Votre site web, renouvelé gratuitement.", win: "Nous vous appelons et présentons votre nouveau site", bedrag: "en direct au salon.", regel: "À voir et à utiliser le jour même. Odoo Experience, stand C21." },
-  it: { badge: "GRATIS", kop: "Upgrade gratuito del sito.", win: "Ti chiamiamo e presentiamo il tuo nuovo sito", bedrag: "dal vivo in fiera.", regel: "Da vedere e usare lo stesso giorno. Odoo Experience, stand C21." },
-  es: { badge: "GRATIS", kop: "Mejora gratuita de tu web.", win: "Te llamamos y presentamos tu nueva web", bedrag: "en directo en la feria.", regel: "Para verla y usarla el mismo día. Odoo Experience, stand C21." },
+  nl: { badge: "GRATIS", kop: "Branding, website, Google Ads audit en OS.", win: "Wij bellen je en presenteren je nieuwe site", bedrag: "live op de beurs.", regel: "Dezelfde dag inzien en gebruiken. Odoo Experience, stand C21." },
+  en: { badge: "FREE", kop: "Branding, website, Google Ads audit and OS.", win: "We call you and present your new website", bedrag: "live at the fair.", regel: "See it and use it the same day. Odoo Experience, booth C21." },
+  de: { badge: "KOSTENLOS", kop: "Branding, Website, Google Ads Audit und OS.", win: "Wir rufen Sie an und präsentieren Ihre neue Website", bedrag: "live auf der Messe.", regel: "Noch am selben Tag ansehen und nutzen. Odoo Experience, Stand C21." },
+  fr: { badge: "GRATUIT", kop: "Branding, site web, audit Google Ads et OS.", win: "Nous vous appelons et présentons votre nouveau site", bedrag: "en direct au salon.", regel: "À voir et à utiliser le jour même. Odoo Experience, stand C21." },
+  it: { badge: "GRATIS", kop: "Branding, sito, audit Google Ads e OS.", win: "Ti chiamiamo e presentiamo il tuo nuovo sito", bedrag: "dal vivo in fiera.", regel: "Da vedere e usare lo stesso giorno. Odoo Experience, stand C21." },
+  es: { badge: "GRATIS", kop: "Branding, web, auditoría de Google Ads y OS.", win: "Te llamamos y presentamos tu nueva web", bedrag: "en directo en la feria.", regel: "Para verla y usarla el mismo día. Odoo Experience, stand C21." },
 };
+// 25 september 2026 (Marinus): de kop noemt het hele gratis pakket, net als de hero.
 // De website-knop links en de kop boven het OS-formulier rechts: de site en het OS en/en.
 const KLAAR: Record<Language, { website: string; osKop: string }> = {
   nl: { website: "Claim je gratis website", osKop: "Of probeer ons gratis persoonlijke OS" },

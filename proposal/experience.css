@@ -2485,3 +2485,17 @@ html {
 .sn-site .h-hero h1 .h-kop-gratis { line-height: 1; padding: .02em .2em .08em; margin: .1em 0 0 .06em; }
 .sn-site .h-kop-ads-groep { white-space: nowrap; }
 .sn-site .h-kop-ads { display: inline-block; width: .82em; height: .82em; margin: 0 .14em 0 .02em; vertical-align: -.06em; }
+
+/* 25 september 2026 (Marinus): C21 Welcome! groot met het Odoo-logo en PRODUCT ernaast, de uitleg bij
+   FREE! onder de kop, en de twee tellers in één blok (optie A) met de groene live-stip. */
+.sn-site .h-stand { gap: 18px; flex-wrap: wrap; }
+.sn-site .h-stand-nr { font-size: clamp(30px, 2.6vw, 44px); border-width: 2.5px; border-radius: 14px; padding: 6px 16px; }
+.sn-site .h-stand b { font-size: clamp(30px, 2.6vw, 44px); font-weight: 800; letter-spacing: -.01em; }
+.sn-site .h-stand > span.h-stand-odoo { display: inline-flex; align-items: center; gap: 12px; padding-left: 18px; border-left: 1.5px solid rgba(255,255,255,.14); font-size: clamp(18px, 1.5vw, 26px); font-weight: 800; letter-spacing: .14em; color: #c9a9c2; }
+.sn-site .h-stand-odoo svg { height: clamp(30px, 2.6vw, 44px); width: auto; }
+.sn-site .h-hero .h-hero-description b { color: #fff; }
+.sn-site .h-tellers { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: #0b0f0c; border: 1px solid rgba(255,255,255,.1); border-radius: 20px; }
+.sn-site .h-tellers p { display: grid; gap: 6px; padding: 16px 22px; }
+.sn-site .h-tellers p + p { border-left: 1px solid rgba(255,255,255,.1); }
+.sn-site .h-tellers strong i { width: 10px; height: 10px; box-shadow: 0 0 12px #25d366; }
+@media (max-width: 640px) { .sn-site .h-stand-odoo { border-left: 0; padding-left: 0; } .sn-site .h-tellers p { padding: 12px 16px; } }

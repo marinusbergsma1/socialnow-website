@@ -27,10 +27,10 @@ function metAdsLogo(tekst: string) {
     <>
       {tekst.slice(0, i)}
       <span className="h-kop-ads-groep">
-        <svg className="h-kop-ads" viewBox="0 0 48 48" aria-hidden="true">
-          <rect x="10" y="4" width="12" height="40" rx="6" fill="#FBBC04" transform="rotate(30 16 24)" />
-          <rect x="26" y="4" width="12" height="40" rx="6" fill="#4285F4" transform="rotate(-30 32 24)" />
-          <circle cx="7.5" cy="39.5" r="6.5" fill="#34A853" />
+        <svg className="h-kop-ads" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#FBBC04" d="M7.514 4.844 1.565 15.148A4.5 4.5 0 0 1 4 14.43c2.56-.008 4.625 2.158 4.494 4.715l3.217-5.572-3.61-6.25a3.96 3.96 0 0 1-.587-2.479z" />
+          <path fill="#4285F4" d="M23.464 16.929 15.463 3.072A4 4 0 0 0 8.534 7.072l8.001 13.857a4 4 0 0 0 6.929-4z" />
+          <circle cx="4" cy="18.93" r="4" fill="#34A853" />
         </svg>
         Google
       </span>

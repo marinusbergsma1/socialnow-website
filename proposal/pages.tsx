@@ -79,10 +79,10 @@ function Founder() {
 // 25 september 2026 (Marinus): beursversie van de OS-explainer rechts in de hero. Speelt stil in een lus,
 // met één knop voor het geluid; de ondertiteling zit in de film zelf.
 const GOOGLE_ADS = (
-  <svg className="h-pakket-ads" viewBox="0 0 48 48" aria-hidden="true">
-    <rect x="10" y="4" width="12" height="40" rx="6" fill="#FBBC04" transform="rotate(30 16 24)" />
-    <rect x="26" y="4" width="12" height="40" rx="6" fill="#4285F4" transform="rotate(-30 32 24)" />
-    <circle cx="9" cy="39" r="6" fill="#34A853" />
+  <svg className="h-pakket-ads" viewBox="0 0 24 24" aria-hidden="true">
+    <path fill="#FBBC04" d="M7.514 4.844 1.565 15.148A4.5 4.5 0 0 1 4 14.43c2.56-.008 4.625 2.158 4.494 4.715l3.217-5.572-3.61-6.25a3.96 3.96 0 0 1-.587-2.479z" />
+    <path fill="#4285F4" d="M23.464 16.929 15.463 3.072A4 4 0 0 0 8.534 7.072l8.001 13.857a4 4 0 0 0 6.929-4z" />
+    <circle cx="4" cy="18.93" r="4" fill="#34A853" />
   </svg>
 );
 const PAKKET: [React.ReactNode, string, string][] = [
@@ -152,10 +152,19 @@ export function Home() {
           <p className="h-stand">
             <span className="h-stand-nr">C21</span>
             <b>Welkom!</b>
+            {/* 25 september 2026 (Marinus): "C21 WELCOME! groot, met het echte Odoo-logo en daarnaast PRODUCT". */}
+            <span className="h-stand-odoo" translate="no">
+              <svg viewBox="160 150 620 200" role="img" aria-label="Odoo">
+                <path fill="#8f8f8f" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
+                <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
+              </svg>
+              PRODUCT
+            </span>
           </p>
           <HeroTitle />
+          {/* 25 september 2026 (Marinus): "FREE! is niet goed uitgelegd". */}
           <p className="h-hero-description">
-            Laat je gegevens achter. Wij bellen je en je ziet je nieuwe website dezelfde dag live op de beurs.
+            <b>Waarom gratis?</b> Alleen op de beurs, op stand C21: laat vandaag of morgen je gegevens achter en wij maken je branding en website, doen je Google Ads audit en openen je OS. Zonder kosten en zonder abonnement, alles blijft van jou.
           </p>
           {/* 24 september 2026 (Marinus): de gratis website is de hoofdroute, het OS een klein regeltje eronder. */}
           <div className="os-entry">
