@@ -2543,3 +2543,14 @@ html {
   .sn-site .h-hero-rij > .h-team-trust strong { font-size: clamp(18px, 1.4vw, 24px); }
   .sn-site .h-hero-rij > .h-team-trust > span:last-child > span { font-size: 16px; }
 }
+
+/* 25 september 2026 (Marinus): logo's groter en de strook een stukje verder naar links. */
+@media (min-width: 1100px) {
+  .sn-site .h-hero-rij > .h-clients-kort { margin-left: -40px; }
+  .sn-site .h-hero-rij > .h-team-trust { position: relative; z-index: 2; }
+  .sn-site .h-clients-kort > .h-clients-strook::before { width: 60px; }
+}
+.sn-site .h-clients.h-clients-kort .h-clients-lus img { height: calc(74px * var(--logo-maat, 1)); max-width: 200px; }
+/* 25 september 2026 (Marinus): tekst naast de cijfers. */
+.sn-site .h-tellers p { display: flex; align-items: center; gap: 14px; }
+.sn-site .h-tellers p > span { max-width: 12em; line-height: 1.25; }
