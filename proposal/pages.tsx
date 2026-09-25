@@ -164,7 +164,7 @@ export function Home() {
           <HeroTitle />
           {/* 25 september 2026 (Marinus): "FREE! is niet goed uitgelegd". */}
           <p className="h-hero-description">
-            <b>Waarom gratis?</b> Alleen op de beurs, op stand C21: laat vandaag of morgen je gegevens achter en wij maken je branding en website, doen je Google Ads audit en openen je OS. Zonder kosten en zonder abonnement, alles blijft van jou.
+            <b>Waarom gratis?</b> Alleen vandaag en morgen, op stand C21. Geen kosten, geen abonnement.
           </p>
           {/* 24 september 2026 (Marinus): de gratis website is de hoofdroute, het OS een klein regeltje eronder. */}
           <div className="os-entry">

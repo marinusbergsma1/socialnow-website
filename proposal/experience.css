@@ -2509,3 +2509,12 @@ html {
 }
 /* Odoo: het hele logo in beeld en PRODUCT op het midden van de o's. */
 .sn-site .h-stand > span.h-stand-odoo { align-items: center; line-height: 1; }
+
+/* 25 september 2026 (Marinus): logo's meer lucht, het welkomstlabel hoger, minder tekst en meer ruimte
+   tussen label, kop, uitleg en knoppen. De regel over nieuwe websites valt weg: de kop zegt het al. */
+.sn-site .h-clients-kort .h-clients-lus { gap: 112px; padding-right: 112px; }
+.sn-site .h-hero .h-win-c { display: none; }
+.sn-site .h-hero .h-stand { margin: 0 0 clamp(28px, 3vh, 44px); }
+.sn-site .h-hero .h-hero-tekst h1.h-taalwissel { margin-bottom: clamp(24px, 3vh, 40px); }
+.sn-site .h-hero .h-hero-description { margin: 0 0 clamp(28px, 3.5vh, 48px); font-size: clamp(16px, 1.1vw, 20px); }
+@media (min-width: 1100px) { .sn-site .h-hero > .h-hero-content { align-self: stretch; align-content: space-between; } .sn-site .h-hero-tekst { align-self: start; } }
