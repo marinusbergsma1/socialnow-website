@@ -2,7 +2,6 @@ import React from "react";
 import { LANGUAGES, translate, useLanguage } from "./i18n/context";
 import { Link } from "react-router-dom";
 import { actieLoopt } from "./ConsentPopup";
-import { useTaalwissel } from "./taalwissel";
 
 // 24 september 2026 (Marinus): "One System for" in plaats van "One OS for", daaronder de winactie
 // groen in de VHS-stijl van de kop (versie C). Alle zes talen staan gestapeld op dezelfde plek, zodat
@@ -38,7 +37,8 @@ function useHoogteVolgt<T extends HTMLElement>(getoond: string) {
 
 export function HeroTitle() {
   const { language } = useLanguage();
-  const getoond = useTaalwissel(language);
+  // 25 september 2026 (Marinus): de taalwissel staat uit; de kop blijft in de taal van de pagina.
+  const getoond = language;
   const kopRef = useHoogteVolgt<HTMLHeadingElement>(getoond);
   const winRef = useHoogteVolgt<HTMLAnchorElement>(getoond);
   const stand = (code: string) => ({
