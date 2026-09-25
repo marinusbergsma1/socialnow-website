@@ -123,8 +123,8 @@ function HeroFilm() {
       </div>
       <video
         ref={ref}
-        src="/video/os/os-explainer-beurs-en.mp4"
-        poster="/video/os/os-explainer-beurs-en.jpg"
+        src="/video/os/os-booth-en.mp4"
+        poster="/video/os/os-booth-en.jpg"
         autoPlay
         muted
         loop
