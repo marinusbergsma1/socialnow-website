@@ -12,9 +12,9 @@ const KOP_1 = "Je nieuwe website, beheer en branding";
 const KOP_2 = "gratis!";
 // 24 september 2026 (Marinus): de groene regel gaat vanaf de tweede beursdag over de gratis website.
 // 25 september 2026 (Marinus): maximaal 10 nieuwe websites en rebrandings, volledig op maat, vandaag en morgen.
-const WIN = "{bedrag} Nieuwe websites en rebranding, volledig op maat. Alleen vandaag en morgen.";
+// 25 september 2026 (Marinus): het aantal plekken staat nu groot linksboven de film (plekken.ts).
+const WIN = "Nieuwe websites en rebranding, volledig op maat. Alleen vandaag en morgen.";
 // 25 september 2026 (Marinus): "of 10 people left", schaarste als plekken in plaats van een maximum.
-const BEDRAG = "Nog 10 plekken.";
 
 // 25 september 2026 (Marinus): alleen de getoonde taal neemt ruimte in. Het blok volgt de hoogte van
 // die taal met een zachte overgang, zodat er geen lege regel boven of onder de kop blijft staan.
@@ -60,10 +60,9 @@ export function HeroTitle() {
         <p className="h-win-c" translate="no">
           <Link ref={winRef} className="h-taalwissel h-hoogte" to="/gratis-website">
             {LANGUAGES.map((code) => {
-              const [voor, na] = translate(WIN, code).split("{bedrag}");
               return (
                 <span key={code} {...stand(code)}>
-                  {voor}<span className="h-win-bedrag">{translate(BEDRAG, code)}</span>{na}
+                  {translate(WIN, code)}
                 </span>
               );
             })}

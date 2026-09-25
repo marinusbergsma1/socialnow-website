@@ -23,6 +23,7 @@ import LiveWebsites from "./LiveWebsites";
 import TrustStories from "./TrustStories";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import BrandGlobe from "./BrandGlobe";
+import { usePlekken } from "./plekken";
 import OsEntry, { CLAIM_URL, REVIEWS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
 import Pricing from "./Pricing";
@@ -87,8 +88,13 @@ function HeroFilm() {
     if (!geluid) { film.currentTime = 0; void film.play().catch(() => {}); }
     setGeluid(!geluid);
   };
+  const plekken = usePlekken();
   return (
     <div className="h-hero-film">
+      <p className="h-plekken" aria-live="polite">
+        <strong key={plekken}>{plekken}</strong>
+        <span>gratis websites over</span>
+      </p>
       <video
         ref={ref}
         src="/video/os/os-explainer-beurs-en.mp4"
