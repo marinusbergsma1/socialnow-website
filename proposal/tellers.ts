@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // 25 september 2026 (Marinus): boven de film twee tellers die optellen. Websites gemaakt op de beurs:
-// elke 10 minuten één erbij. Gratis OS-gebruikers: gemiddeld één per 10 seconden, en af en toe een
+// elke 10 minuten één erbij. Gratis OS-gebruikers: gemiddeld één per 7 seconden, en af en toe een
 // paar snel achter elkaar, zodat het natuurlijk oogt.
 export function useTellers() {
   const [websites, setWebsites] = useState(6);
@@ -22,7 +22,7 @@ export function useTellers() {
           }
         }
         plan();
-      }, 5000 + Math.random() * 10000);
+      }, 3500 + Math.random() * 7000);
     };
     plan();
     return () => { window.clearInterval(klok); window.clearTimeout(volgende); extra.forEach((x) => window.clearTimeout(x)); };

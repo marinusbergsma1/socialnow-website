@@ -10,7 +10,7 @@ import { actieLoopt } from "./ConsentPopup";
 // 25 september 2026 (Marinus): optie B, één zin met GRATIS als groen blok (h-kop-gratis).
 // 25 september 2026 (Marinus): het pakket is branding, website, Google Ads audit en OS, rustiger gezet.
 const KOP_1 = "Branding, website, Google Ads audit en OS";
-const KOP_2 = "gratis.";
+const KOP_2 = "GRATIS!";
 // 24 september 2026 (Marinus): de groene regel gaat vanaf de tweede beursdag over de gratis website.
 // 25 september 2026 (Marinus): maximaal 10 nieuwe websites en rebrandings, volledig op maat, vandaag en morgen.
 // 25 september 2026 (Marinus): het aantal plekken staat nu groot linksboven de film (plekken.ts).
