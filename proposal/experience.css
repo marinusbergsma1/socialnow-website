@@ -2363,3 +2363,14 @@ html {
 @media (max-width: 1099px) {
   .sn-site .h-hero-film { margin-top: 28px; }
 }
+
+/* 25 september 2026 (Marinus): stijl A. Alleen de getoonde taal staat in de flow (h-hoogte, hoogte via
+   styles.tsx), de andere talen liggen eroverheen. Vast ritme: 18 px boven de kop, dan 22, 14 en 28 px. */
+.sn-site .h-taalwissel.h-hoogte { display: block; position: relative; transition: height .5s cubic-bezier(.16,1,.3,1); }
+.sn-site .h-taalwissel.h-hoogte > span { position: absolute; left: 0; right: 0; top: 0; }
+.sn-site .h-taalwissel.h-hoogte > span.is-aan { position: relative; }
+.sn-site .h-hero h1.h-taalwissel { margin-top: 18px; }
+.sn-site .h-win-c { margin-top: 22px; }
+.sn-site .h-hero-description { margin-top: 14px !important; }
+.sn-site .h-hero .os-entry { margin-top: 28px; }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-taalwissel.h-hoogte { transition: none; } }

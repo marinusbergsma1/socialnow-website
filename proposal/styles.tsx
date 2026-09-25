@@ -17,9 +17,30 @@ const WIN = "{bedrag} Nieuwe websites en rebranding, volledig op maat. Alleen va
 // 25 september 2026 (Marinus): "of 10 people left", schaarste als plekken in plaats van een maximum.
 const BEDRAG = "Nog 10 plekken.";
 
+// 25 september 2026 (Marinus): alleen de getoonde taal neemt ruimte in. Het blok volgt de hoogte van
+// die taal met een zachte overgang, zodat er geen lege regel boven of onder de kop blijft staan.
+function useHoogteVolgt<T extends HTMLElement>(getoond: string) {
+  const ref = React.useRef<T>(null);
+  React.useLayoutEffect(() => {
+    const blok = ref.current;
+    if (!blok) return;
+    const zet = () => {
+      const aan = blok.querySelector<HTMLElement>(":scope > .is-aan");
+      if (aan) blok.style.height = `${aan.offsetHeight}px`;
+    };
+    zet();
+    window.addEventListener("resize", zet);
+    void document.fonts?.ready.then(zet);
+    return () => window.removeEventListener("resize", zet);
+  }, [getoond]);
+  return ref;
+}
+
 export function HeroTitle() {
   const { language } = useLanguage();
   const getoond = useTaalwissel(language);
+  const kopRef = useHoogteVolgt<HTMLHeadingElement>(getoond);
+  const winRef = useHoogteVolgt<HTMLAnchorElement>(getoond);
   const stand = (code: string) => ({
     lang: code,
     className: code === getoond ? "is-aan" : undefined,
@@ -27,7 +48,7 @@ export function HeroTitle() {
   });
   return (
     <>
-      <h1 className="h-taalwissel" translate="no">
+      <h1 ref={kopRef} className="h-taalwissel h-hoogte" translate="no">
         {LANGUAGES.map((code) => (
           <span key={code} {...stand(code)}>
             {translate(KOP_1, code)}{" "}
@@ -37,7 +58,7 @@ export function HeroTitle() {
       </h1>
       {actieLoopt() && (
         <p className="h-win-c" translate="no">
-          <Link className="h-taalwissel" to="/gratis-website">
+          <Link ref={winRef} className="h-taalwissel h-hoogte" to="/gratis-website">
             {LANGUAGES.map((code) => {
               const [voor, na] = translate(WIN, code).split("{bedrag}");
               return (

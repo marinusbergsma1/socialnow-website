@@ -116,7 +116,7 @@ export function Home() {
         </div>
         <div className="h-wrap h-hero-content">
           <p className="h-eyebrow">
-            <i /> Gratis website-upgrade / Odoo Experience, stand C21
+            <i /> Gratis website + rebranding &amp; OS / Odoo Experience, stand C21
           </p>
           <HeroTitle />
           <p className="h-hero-description">
