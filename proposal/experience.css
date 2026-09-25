@@ -2554,3 +2554,7 @@ html {
 /* 25 september 2026 (Marinus): tekst naast de cijfers. */
 .sn-site .h-tellers p { display: flex; align-items: center; gap: 14px; }
 .sn-site .h-tellers p > span { max-width: 12em; line-height: 1.25; }
+/* 25 september 2026 (Marinus): door overflow: hidden (voor de glans) telt de onderrand van het vlak als
+   basislijn, waardoor het vlak te hoog stond. Zo valt het midden van het vlak op het midden van de
+   hoofdletters van "and OS for" (gemeten: hoofdletterhoogte 0,715em, vlakhoogte 1,02em). */
+.sn-site .h-hero h1 .h-kop-gratis { vertical-align: -.153em; }
