@@ -262,21 +262,30 @@ export function TeamGrid({ short = false }: { short?: boolean }) {
   );
 }
 export function ClientLogos() {
+  // 25 september 2026 (Marinus): de merken lopen als strook door. De rij staat er twee keer in,
+  // zodat de lus naadloos is; de tweede rij is voor schermlezers verborgen.
+  const rij = (kopie: boolean) =>
+    logos.map(([src, name, maat]) => (
+      <img
+        key={`${kopie ? "b" : "a"}-${src}`}
+        src={`/images/${src}`}
+        alt={kopie ? "" : name}
+        aria-hidden={kopie || undefined}
+        width="220"
+        height="100"
+        loading="lazy"
+        className={src.startsWith("AZ-") ? "h-logo-eigen" : undefined}
+        style={maat ? ({ "--logo-maat": String(maat) } as React.CSSProperties) : undefined}
+      />
+    ));
   return (
     <div className="h-clients h-wrap">
       <p className="h-eyebrow">Werk gemaakt voor onder meer</p>
-      <div>
-        {logos.map(([src, name, maat]) => (
-          <img
-            key={src}
-            src={`/images/${src}`}
-            alt={name}
-            width="220"
-            height="100"
-            loading="lazy"
-            style={maat ? ({ "--logo-maat": String(maat) } as React.CSSProperties) : undefined}
-          />
-        ))}
+      <div className="h-clients-strook">
+        <div className="h-clients-lus">
+          {rij(false)}
+          {rij(true)}
+        </div>
       </div>
     </div>
   );

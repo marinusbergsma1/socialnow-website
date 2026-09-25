@@ -271,7 +271,9 @@ export const logos: [string, string, number?][] = [
   // 23 september 2026 (Marinus): "AZ wil ik daar graag ook bij". Eenkleurig, zoals de rest.
   // 24 september 2026 (Marinus): "AZ mag nog ietsje kleiner en zoals op de flyer", "er moet een wit vlak onder":
   // het logo zwart op een witte pil, en een fractie kleiner.
-  ["AZ-LOGO.webp", "AZ", 0.52],
+  // 25 september 2026 (Marinus): "AZ is nog iets te groot en ook verkeerd". Nu het logo van de flyer
+  // (schuine witte onderkant) in eigen kleur, zonder de grijsfilter van de balk (h-logo-eigen).
+  ["AZ-LOGO-FLYER.webp", "AZ", 0.46],
   ["AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp", "Amsterdam Light Festival"],
   ["CHIN-CHIN-CLUB-LOGO.webp", "Chin Chin Club", 0.9],
   ["MOJO-LOGO.webp", "MOJO", 0.88],
