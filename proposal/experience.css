@@ -2564,3 +2564,5 @@ html {
 .sn-site .h-hero h1 .h-kop-gratis { overflow: visible; vertical-align: baseline; }
 .sn-site .h-hero h1 .h-kop-gratis::after { transform: none; border-radius: inherit; background: linear-gradient(100deg, transparent 40%, rgba(255,255,255,.35) 50%, transparent 60%) no-repeat; background-size: 300% 100%; background-position: 150% 0; animation: h-glans-bg 4.5s ease-in-out infinite; }
 @keyframes h-glans-bg { 0% { background-position: 150% 0; } 50%, 100% { background-position: -50% 0; } }
+/* 25 september 2026 (Marinus): iets meer ruimte tussen de regels van de kop. */
+.sn-site .h-hero .h-hero-tekst h1.h-taalwissel, .sn-site .h-hero .h-hero-tekst h1.h-taalwissel > span { line-height: 1.24; }
