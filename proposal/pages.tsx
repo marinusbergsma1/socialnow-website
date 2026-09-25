@@ -148,10 +148,10 @@ export function Home() {
         </div>
         <div className="h-wrap h-hero-content">
           <div className="h-hero-tekst">
-          {/* 25 september 2026 (Marinus): standnummer als label, "Welcome here!". */}
+          {/* 25 september 2026 (Marinus): standnummer als label, "Welkom!". */}
           <p className="h-stand">
             <span className="h-stand-nr">C21</span>
-            <span><b>Gratis website</b>Welkom hier!</span>
+            <b>Welkom!</b>
           </p>
           <HeroTitle />
           <p className="h-hero-description">
