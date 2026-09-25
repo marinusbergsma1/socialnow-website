@@ -2337,7 +2337,7 @@ html {
 
 /* 25 september 2026 (Marinus): "dit vlak is te aanwezig en schreeuwerig, hoeft ook niet allemaal
    groen". De regel onder de kop is nu een rustige zin: gewone letters, lichtgrijs, geen gloed, geen
-   RGB-verschuiving en geen scanlijnen. Alleen het aantal ("Maximaal 10.") blijft groen. */
+   RGB-verschuiving en geen scanlijnen. Alleen het aantal ("Nog 10 plekken.") blijft groen. */
 .sn-site .h-win-c { max-width: min(560px, 52%); margin-top: 20px; font-size: clamp(17px, 1.35vw, 21px); font-weight: 500; line-height: 1.4; letter-spacing: 0; text-transform: none; }
 .sn-site .h-win-c > a { color: #c9d1d9; text-shadow: none; animation: none; text-decoration: none; }
 .sn-site .h-win-c > a:hover { animation: none; color: #fff; text-decoration: underline; text-decoration-color: rgba(37,211,102,.6); text-underline-offset: 4px; }

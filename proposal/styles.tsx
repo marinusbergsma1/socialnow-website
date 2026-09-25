@@ -14,7 +14,8 @@ const KOP_2 = "gratis!";
 // 24 september 2026 (Marinus): de groene regel gaat vanaf de tweede beursdag over de gratis website.
 // 25 september 2026 (Marinus): maximaal 10 nieuwe websites en rebrandings, volledig op maat, vandaag en morgen.
 const WIN = "{bedrag} Nieuwe websites en rebranding, volledig op maat. Alleen vandaag en morgen.";
-const BEDRAG = "Maximaal 10.";
+// 25 september 2026 (Marinus): "of 10 people left", schaarste als plekken in plaats van een maximum.
+const BEDRAG = "Nog 10 plekken.";
 
 export function HeroTitle() {
   const { language } = useLanguage();
