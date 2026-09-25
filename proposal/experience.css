@@ -2403,3 +2403,13 @@ html {
   .sn-site .h-plekken { position: absolute; left: 0; bottom: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .sn-site .h-plekken strong { animation: none; } }
+
+/* 25 september 2026 (Marinus): "logobalk moet gewoon schermvullend zijn". De strook loopt van rand tot rand. */
+.sn-site .h-clients.h-wrap { width: 100%; max-width: none; }
+.sn-site .h-clients > .h-clients-strook { -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+.sn-site .h-clients-lus { animation-duration: 114s; }
+@media (max-width: 700px) { .sn-site .h-clients-lus { animation-duration: 84s; } }
+/* 25 september 2026 (Marinus): "teller is ietsje te groot". */
+.sn-site .h-plekken { gap: 12px; margin-bottom: 14px; }
+.sn-site .h-plekken strong { font-size: clamp(48px, 4.2vw, 78px); }
+.sn-site .h-plekken span { font-size: clamp(16px, 1.35vw, 24px); }
