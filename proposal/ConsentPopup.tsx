@@ -104,6 +104,10 @@ function zetCookies(land: string, taal: Language) {
   } catch {}
 }
 
+function minderBeweging() {
+  try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch { return false; }
+}
+
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 // 22 september 2026 (Marinus): de knoppen zijn dezelfde knop als "Discover the story" op
@@ -189,11 +193,20 @@ export default function ConsentPopup() {
             </select>
           </label>
           {actieLoopt() ? (
-            <div className="sn-consent-actie">
-              <span className="sn-consent-actie-badge">{a.badge}</span>
-              <strong>{a.kop}</strong>
-              <span className="sn-consent-actie-win">{a.win} <b className="sn-consent-bedrag">{a.bedrag}</b></span>
-              <span className="sn-consent-actie-regel">{a.regel}</span>
+            // 26 september 2026 (Marinus): in het groene vlak draait nu de film van het systeem in
+            // plaats van de actietekst. Dezelfde film als bovenaan de homepage, zonder geluid en in
+            // een lus. Wie minder beweging wil, ziet alleen het stilstaande beeld.
+            <div className="sn-consent-actie sn-consent-actie-film">
+              <video
+                src="/video/os/os-booth-en.mp4"
+                poster="/video/os/os-booth-en.jpg"
+                autoPlay={!minderBeweging()}
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label={a.win}
+              />
             </div>
           ) : null}
           <button type="button" className="sn-consent-knop sn-consent-knop-website" onClick={naarWebsite}><span className="sn-consent-glans" aria-hidden="true" /><span>{k.website}</span><Pijl /></button>
