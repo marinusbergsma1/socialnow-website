@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useLanguage, languagePrefix, type Language } from "./i18n/context";
 import { LEGAL_VERSION } from "../components/legal";
 import { aanvraagWhatsApp } from "./aanvragen";
+import { people } from "./content";
 
 // 16 september 2026 (Marinus): de landingspopup. Eén keer bij binnenkomst: kom je voor de demo of
 // wil je de website bekijken, kies je land, en met die keuze ga je akkoord met de voorwaarden en het
@@ -106,6 +107,51 @@ function zetCookies(land: string, taal: Language) {
 
 function minderBeweging() {
   try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch { return false; }
+}
+
+// 26 september 2026 (Marinus): rechts onder de knop een groene kaart met Marinus en Steef, en
+// daaronder het team als balk die rustig voorbijschuift. De twee foto's staan los van elkaar met
+// elk een eigen naam, zodat duidelijk is wie wie is.
+const PERSOONLIJK: Record<Language, { badge: string; kop: string; regel: string }> = {
+  nl: { badge: "PERSOONLIJK", kop: "Marinus en Steef", regel: "Jouw WhatsApp komt direct bij ons binnen. Geen callcenter, geen bot." },
+  en: { badge: "PERSONAL", kop: "Marinus and Steef", regel: "Your WhatsApp comes straight to us. No call centre, no bot." },
+  de: { badge: "PERSÖNLICH", kop: "Marinus und Steef", regel: "Deine WhatsApp landet direkt bei uns. Kein Callcenter, kein Bot." },
+  fr: { badge: "PERSONNEL", kop: "Marinus et Steef", regel: "Votre WhatsApp nous arrive directement. Pas de centre d'appels, pas de bot." },
+  it: { badge: "PERSONALE", kop: "Marinus e Steef", regel: "Il tuo WhatsApp arriva direttamente a noi. Niente call center, niente bot." },
+  es: { badge: "PERSONAL", kop: "Marinus y Steef", regel: "Tu WhatsApp nos llega directamente. Sin call center, sin bot." },
+};
+const DUO = [
+  { naam: "Marinus", rol: "Founder", foto: "Marinus-Bergsma-V2.webp" },
+  { naam: "Steef", rol: "Partner", foto: "Steef-Komen.webp" },
+];
+const TEAM = ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen", "Elian Coellar", "Sid van Kalken", "Carmel Boon", "Sam van der Sluis", "Emma Peperkamp"]
+  .map(naam => people.find(p => p.name === naam)).filter((p): p is NonNullable<typeof p> => Boolean(p));
+
+function Team({ language }: { language: Language }) {
+  const t = PERSOONLIJK[language] || PERSOONLIJK.en;
+  const rij = TEAM.map(p => (
+    <li key={p.name}><img src={`/images/${p.image}`} alt="" width="38" height="38" loading="lazy" /><span><strong>{p.name}</strong><small>{p.role}</small></span></li>
+  ));
+  return (
+    <div className="sn-consent-team">
+      <div className="sn-consent-team-kaart">
+        <div className="sn-consent-team-duo">
+          {DUO.map(d => (
+            <figure key={d.naam}>
+              <img src={`/images/${d.foto}`} alt={d.naam} width="240" height="240" loading="lazy" />
+              <figcaption><strong>{d.naam}</strong><span>{d.rol}</span></figcaption>
+            </figure>
+          ))}
+        </div>
+        <div className="sn-consent-team-tekst">
+          <span className="sn-consent-actie-badge">{t.badge}</span>
+          <strong>{t.kop}</strong>
+          <span>{t.regel}</span>
+        </div>
+      </div>
+      <div className="sn-consent-team-balk" aria-hidden="true"><ul>{rij}{rij}</ul></div>
+    </div>
+  );
 }
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -235,6 +281,7 @@ export default function ConsentPopup() {
             <button type="submit" className="sn-consent-knop"><span className="sn-consent-glans" aria-hidden="true" /><span>{({nl:"Vraag je gratis OS-demo aan via WhatsApp",en:"Request your free OS demo via WhatsApp",de:"Kostenlose OS-Demo per WhatsApp anfragen",fr:"Demander une démo gratuite via WhatsApp",it:"Richiedi una demo gratuita su WhatsApp",es:"Solicita una demo gratis por WhatsApp"} as Record<Language,string>)[language]}</span><Pijl /></button>
             <button type="button" className="sn-consent-knop sn-consent-knop-stil sn-consent-alleen-mobiel" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span></button>
           </div>
+          <Team language={language} />
           {juridisch}
         </form>
       </div>
