@@ -2602,3 +2602,5 @@ html {
   .sn-site .h-team-portraits img.is-groot { width: 64px; height: 64px; }
   .sn-site .h-hero-rij > .h-team-trust strong { font-size: 19px; }
 }
+
+.sn-site .h-team-portraits img.is-sergio { transform: scale(1.38); object-position: 50% 35%; }

@@ -247,6 +247,7 @@ export function TeamGrid({ short = false }: { short?: boolean }) {
           <div className="h-portrait">
             <img
               src={`/images/${person.image}`}
+              className={person.name === "Sergio Jovovic" ? "is-sergio" : undefined}
               alt={person.name}
               width="500"
               height="570"
