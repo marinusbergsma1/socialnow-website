@@ -2719,3 +2719,12 @@ html {
   .sn-site .h-hero-tekst { align-self: center; justify-self: start; }
   .sn-site .h-hero-films { align-self: center; }
 }
+
+/* 26 september 2026 (Marinus): installeren als webapp naast de login, zoals eerst met het Apple-logo. */
+.sn-site .h-hero-tekst .os-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.sn-site .h-hero-tekst .h-login-knop { flex: 1.35 1 280px; width: auto; }
+.sn-site .h-install-knop { flex: 1 1 200px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 64px; padding: 0 22px; border-radius: 14px; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.04); color: #fff; font: inherit; font-size: clamp(16px, 1.1vw, 18px); font-weight: 700; cursor: pointer; transition: border-color .2s, background .2s; }
+.sn-site .h-install-knop:hover, .sn-site .h-install-knop:focus-visible { border-color: #25d366; background: rgba(37,211,102,.08); outline: none; }
+.sn-site .h-install-knop .os-install-apple { width: 18px; height: 18px; margin-top: -3px; }
+.sn-site .h-install-hulp { flex: 1 1 100%; margin: 0; }
+.sn-site .h-install-knop .os-install-windows { width: 17px; height: 17px; }

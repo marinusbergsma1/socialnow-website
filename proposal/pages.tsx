@@ -23,7 +23,7 @@ import LiveWebsites from "./LiveWebsites";
 import TrustStories from "./TrustStories";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import BrandGlobe from "./BrandGlobe";
-import OsEntry, { CLAIM_URL, REVIEWS_URL } from "./os-entry";
+import OsEntry, { CLAIM_URL, InstallKnop, REVIEWS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
 import Pricing from "./Pricing";
 import { allPosts } from "../data/posts";
@@ -171,6 +171,7 @@ export function Home() {
                 {translate("Log in op je gratis OS", getoond)}
                 <ArrowUpRight size={20} aria-hidden="true" />
               </a>
+              <InstallKnop />
             </div>
           </div>
           </div>

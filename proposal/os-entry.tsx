@@ -67,6 +67,45 @@ function AppleLogo() {
   );
 }
 
+// 26 september 2026 (Marinus): "downloaden als webapp, zoals eerst met Apple-logo". De knop naast de login in
+// de hero; tekst per apparaat, Apple-logo op Mac, en bij klikken de stappen voor dit apparaat.
+export function InstallKnop() {
+  const { t } = useLanguage();
+  const [open, setOpen] = useState(false);
+  const [hint, setHint] = useState("");
+  const [label, setLabel] = useState("Installeer het OS");
+  const helpId = useId();
+  useEffect(() => {
+    setLabel(installationLabel(navigator.userAgent, navigator.platform, navigator.maxTouchPoints));
+  }, []);
+  const toggle = () => {
+    setHint(installationHint(navigator.userAgent, navigator.platform, navigator.maxTouchPoints));
+    setOpen((v) => !v);
+  };
+  return (
+    <>
+      <button type="button" className="h-install-knop" onClick={toggle} aria-expanded={open} aria-controls={helpId}>
+        {/Mac|iPhone/.test(label) ? <AppleLogo /> : /Windows/.test(label) ? <WindowsLogo /> : <Download size={18} aria-hidden="true" />}
+        <span>{t(label)}</span>
+      </button>
+      <div className="install-help h-install-hulp" id={helpId} hidden={!open}>
+        <p>{t(hint)}</p>
+        <a href={INSTALL_URL}>
+          {t("Open SocialNow OS")} <ArrowRight size={15} aria-hidden="true" />
+        </a>
+      </div>
+    </>
+  );
+}
+
+function WindowsLogo() {
+  return (
+    <svg className="os-install-windows" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M1 3.5 10 2.3v8.7H1zm10-1.3L23 .5V11H11zM1 12h9v8.7L1 19.5zm10 0h12v11.5l-12-1.7z" />
+    </svg>
+  );
+}
+
 export function OsProof({ stand }: { stand: OsStand | null }) {
   return (
     <div className="os-proof">
