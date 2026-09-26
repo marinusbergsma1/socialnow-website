@@ -78,7 +78,7 @@ function Founder() {
 // 26 september 2026 (Marinus): "een thank you video" en "ik mis de explainer video van het os". Rechts de
 // OS-explainer, met de staande bedankfilm uit Brussel ervoor. Beide spelen stil in een lus met een eigen
 // geluidsknop; zet je het geluid van de ene aan, dan gaat de andere op stil.
-function Film({ src, poster, label, klasse, geluid, zetGeluid }: { src: string; poster: string; label: string; klasse: string; geluid: boolean; zetGeluid: (aan: boolean) => void }) {
+function Film({ src, poster, label, titel, klasse, geluid, zetGeluid }: { src: string; poster: string; label: string; titel: string; klasse: string; geluid: boolean; zetGeluid: (aan: boolean) => void }) {
   const ref = React.useRef<HTMLVideoElement>(null);
   React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid]);
   const wissel = () => {
@@ -88,10 +88,14 @@ function Film({ src, poster, label, klasse, geluid, zetGeluid }: { src: string; 
   };
   return (
     <div className={klasse}>
+      {/* 26 september 2026 (Marinus): "video's iets groter met titels erboven". */}
+      <p className="h-film-titel">{titel}</p>
+      <div className="h-film-vak">
       <video ref={ref} src={src} poster={poster} autoPlay muted loop playsInline preload="auto" aria-label={label} />
       <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={geluid}>
         {geluid ? "Geluid uit" : "Geluid aan"}
       </button>
+      </div>
     </div>
   );
 }
@@ -105,6 +109,7 @@ function HeroFilm() {
         src="/video/os/os-booth-en.mp4"
         poster="/video/os/os-booth-en.jpg"
         label="SocialNow OS explainer"
+        titel="Zo werkt SocialNow OS"
         geluid={geluid === "os"}
         zetGeluid={(aan) => setGeluid(aan ? "os" : "")}
       />
@@ -113,6 +118,7 @@ function HeroFilm() {
         src="/video/bedankt/bedankt-brussel.mp4"
         poster="/video/bedankt/bedankt-brussel.jpg"
         label="Bedankt vanuit Brussel, van het SocialNow-team"
+        titel="Bedankt uit Brussel"
         geluid={geluid === "bedankt"}
         zetGeluid={(aan) => setGeluid(aan ? "bedankt" : "")}
       />
