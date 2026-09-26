@@ -15,6 +15,9 @@ const VRAGEN: Vraag[] = [
   { key: "wat", vraag: "Wat doet je bedrijf, in één zin?", hint: "Bijvoorbeeld: wij installeren zonnepanelen voor bedrijven in de regio Utrecht." },
   { key: "nietgoed", vraag: "Wat zou je graag anders willen aan je website?", hint: "Vertel wat je mist of wat beter bij jouw bedrijf mag passen." },
 ];
+// De velden van "Jij" in de volgorde waarin ze op het scherm staan; elk krijgt een segment in de voortgangsbalk.
+const JIJ: (keyof Gegevens)[] = ["voornaam", "achternaam", "email", "mobiel", "bedrijf"];
+const TOTAAL = JIJ.length + VRAGEN.length;
 function laad(): { a: Record<string, string>; g: Gegevens } {
   try { const j = JSON.parse(localStorage.getItem(OPSLAG) || "null"); if (j?.a && j?.g && "voornaam" in j.g) return j; } catch {}
   return { a: {}, g: LEEG };
@@ -26,11 +29,40 @@ export default function GratisWebsite() {
   const [g, setG] = useState<Gegevens>(LEEG);
   const [geladen, setGeladen] = useState(false);
   const [fout, setFout] = useState("");
+  // Telt geslaagde bewaarmomenten. Nul zolang er niets echt in de browser staat, zodat "Automatisch bewaard"
+  // nooit iets belooft dat niet gebeurd is (privévenster, geblokkeerde opslag).
+  const [bewaard, setBewaard] = useState(0);
+  // Hoogte van de plakkende header; de balk plakt er net onder in plaats van erachter te verdwijnen.
+  const [kop, setKop] = useState(0);
   useEffect(() => { const x = laad(); setA(x.a); setG(x.g); setGeladen(true); }, []);
-  useEffect(() => { if (geladen) try { localStorage.setItem(OPSLAG, JSON.stringify({ a, g })); } catch {} }, [a, g, geladen]);
+  useEffect(() => {
+    if (!geladen) return;
+    try { localStorage.setItem(OPSLAG, JSON.stringify({ a, g })); setBewaard((n) => n + 1); } catch { setBewaard(0); }
+  }, [a, g, geladen]);
+  useEffect(() => {
+    const header = document.querySelector<HTMLElement>(".h-header");
+    if (!header) return;
+    const meet = () => setKop(Math.round(header.getBoundingClientRect().height + (parseFloat(getComputedStyle(header).top) || 0)));
+    meet();
+    const ro = new ResizeObserver(meet);
+    ro.observe(header);
+    return () => ro.disconnect();
+  }, []);
   const zet = (k: string, v: string) => setA((x) => ({ ...x, [k]: v }));
-  const gevuld = VRAGEN.filter((v) => (a[v.key] || "").trim()).length + Object.values(g).filter((x) => x.trim()).length;
-  const procent = Math.round((gevuld / (VRAGEN.length + 5)) * 100);
+  const segmenten = [...JIJ.map((k) => !!g[k].trim()), ...VRAGEN.map((v) => !!(a[v.key] || "").trim())];
+  const gevuld = segmenten.filter(Boolean).length;
+  const volgende = segmenten.indexOf(false);
+  const naam = !!(g.voornaam.trim() && g.achternaam.trim());
+  const bedrijf = !!g.bedrijf.trim();
+  const verzendklaar = naam && bedrijf;
+  // Zegt alleen wat echt nog ontbreekt om te kunnen versturen; zonder invoer een uitnodiging in plaats van "0%".
+  const status = gevuld === TOTAAL ? "Alles ingevuld. Verstuur je aanvraag via WhatsApp."
+    : verzendklaar ? "Klaar om te versturen. Elk extra antwoord maakt je website beter."
+    : !gevuld ? "Een paar korte vragen, ongeveer twee minuten."
+    : naam ? "Nog je bedrijfsnaam, dan kun je versturen."
+    : bedrijf ? "Nog je voor- en achternaam, dan kun je versturen."
+    : "Vul je naam en bedrijf in, dan kun je versturen.";
+  const segment = (aan: boolean, i: number) => <i key={i} className={aan ? "is-aan" : i === volgende ? "is-volgende" : undefined} />;
   const verstuur = (e: React.FormEvent) => {
     e.preventDefault();
     if (!g.voornaam.trim() || !g.achternaam.trim()) { setFout(t("Vul je voor- en achternaam in.")); return; }
@@ -54,7 +86,15 @@ export default function GratisWebsite() {
     <a className="gw-contactpil" href={`${WHATSAPP}?text=${encodeURIComponent(t("Hoi Marinus, ik heb een vraag over de websites die jullie live maken op de Odoo-beurs."))}`} target="_blank" rel="noopener noreferrer">
       <img className="gw-contact-avatar" src="/images/marinus-profiel-blauw.webp" alt="" width="48" height="48" /><span className="gw-contact-tekst"><strong>Marinus Bergsma</strong><small>Vragen? Neem persoonlijk contact op</small></span><MessageCircle size={19} aria-hidden="true" />
     </a>
-    <div className="gw-progress" aria-label={t("Voortgang")}><div className="gw-bar"><div className="gw-fill" style={{ width: `${procent}%` }} /></div><div className="gw-meta"><span><i className="gw-dot" />Automatisch bewaard</span><span>{procent}%</span></div></div>
+    <div className={`gw-voortgang${verzendklaar ? " is-klaar" : ""}${gevuld === TOTAAL ? " is-compleet" : ""}`} style={{ "--gw-kop": `${kop}px` } as React.CSSProperties}>
+      <span className="gw-vg-tel">{gevuld === TOTAAL ? <Check size={16} strokeWidth={3} aria-hidden="true" /> : null}<b>{gevuld}</b>/{TOTAAL}</span>
+      <span className="gw-vg-tekst" aria-live="polite">{status}</span>
+      {bewaard > 0 && gevuld > 0 ? <span className="gw-vg-bewaard"><i className="gw-dot" key={bewaard} />Automatisch bewaard</span> : null}
+      <div className="gw-vg-balk" role="progressbar" aria-label="Voortgang" aria-valuemin={0} aria-valuemax={TOTAAL} aria-valuenow={gevuld} aria-valuetext={`${gevuld} / ${TOTAAL}`}>
+        <span className="gw-vg-groep" style={{ flex: JIJ.length }}>{segmenten.slice(0, JIJ.length).map(segment)}</span>
+        <span className="gw-vg-groep" style={{ flex: VRAGEN.length }}>{segmenten.slice(JIJ.length).map((aan, i) => segment(aan, i + JIJ.length))}</span>
+      </div>
+    </div>
     <form onSubmit={verstuur} noValidate>
       <section className="gw-sec"><div className="gw-sec-head"><span className="gw-num">01</span><h2>Jij</h2></div><div className="gw-card">
         <div className="gw-rij"><label className="gw-fld" htmlFor="gw-voornaam"><span className="gw-l">Voornaam *</span><input id="gw-voornaam" autoComplete="given-name" maxLength={40} required value={g.voornaam} onChange={(e) => setG({ ...g, voornaam: e.target.value })} /></label><label className="gw-fld" htmlFor="gw-achternaam"><span className="gw-l">Achternaam *</span><input id="gw-achternaam" autoComplete="family-name" maxLength={40} required value={g.achternaam} onChange={(e) => setG({ ...g, achternaam: e.target.value })} /></label></div>

@@ -30,11 +30,30 @@
 .gw-contact-tekst strong { font-size: 14px; }
 .gw-contact-tekst small { margin-top: 3px; font-size: 12px; color: var(--gw-muted); }
 .gw-contactpil > svg { margin-left: 8px; color: #25d366; flex: none; }
-.gw-progress { position: sticky; top: 64px; z-index: 5; margin-top: 32px; padding: 16px 0 14px; background: linear-gradient(180deg, #06101e 0, rgba(6,16,30,.92) 62%, transparent 100%); }
-.gw-bar { height: 4px; border-radius: 4px; background: rgba(255,255,255,.08); overflow: hidden; }
-.gw-fill { height: 100%; background: linear-gradient(90deg, #1a9d4c, var(--gw-groen)); box-shadow: 0 0 14px rgba(37,211,102,.55); transition: width .45s cubic-bezier(.2,.7,.3,1); }
-.gw-meta { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; letter-spacing: .04em; color: var(--gw-muted); }
-.gw-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--gw-groen); margin-right: 7px; vertical-align: 1px; }
+/* 26 september 2026 (Marinus: "Ik vind deze balk niet sterk."). De oude voortgang plakte op 64px en verdween
+   daardoor achter de header van 140px, precies terwijl je invult; en bij binnenkomst stond er alleen "0%".
+   Nu een eigen glazen balk die onder de gemeten header blijft staan (--gw-kop), per antwoord een segment
+   laat oplichten, het volgende open veld aanwijst en zegt wat er nog nodig is om te versturen. */
+.gw-voortgang { position: sticky; top: calc(var(--gw-kop, 140px) + 12px); z-index: 5; margin-top: 32px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "tel tekst bewaard" "balk balk balk"; align-items: center; column-gap: 16px; padding: 14px 20px 16px; border: 1px solid var(--gw-lijn); border-radius: 18px; background: rgba(6,16,30,.86); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2); box-shadow: 0 20px 44px -24px rgba(0,0,0,.85); transition: border-color .4s, box-shadow .4s; }
+.gw-voortgang.is-klaar { border-color: rgba(37,211,102,.4); }
+.gw-voortgang.is-compleet { border-color: var(--gw-groen); box-shadow: 0 0 0 1px rgba(37,211,102,.3), 0 20px 48px -22px rgba(37,211,102,.5); }
+.gw-vg-tel { grid-area: tel; display: inline-flex; align-items: baseline; font-size: 14px; font-weight: 700; color: var(--gw-muted); font-variant-numeric: tabular-nums; }
+.gw-vg-tel b { font-size: 24px; line-height: 1; font-weight: 800; color: #fff; margin-right: 2px; }
+.gw-vg-tel svg { align-self: center; margin-right: 6px; }
+.gw-voortgang.is-klaar .gw-vg-tel b, .gw-vg-tel svg { color: var(--gw-groen); }
+.gw-vg-tekst { grid-area: tekst; font-size: 14.5px; font-weight: 600; line-height: 1.35; color: #fff; }
+.gw-vg-bewaard { grid-area: bewaard; display: inline-flex; align-items: center; font-size: 12px; letter-spacing: .02em; color: var(--gw-muted); white-space: nowrap; }
+.gw-vg-bewaard .gw-dot { animation: gw-bewaar .9s ease-out; }
+.gw-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--gw-groen); margin-right: 8px; }
+@keyframes gw-bewaar { from { box-shadow: 0 0 0 0 rgba(37,211,102,.75); } to { box-shadow: 0 0 0 8px rgba(37,211,102,0); } }
+.gw-vg-balk { grid-area: balk; display: flex; gap: 14px; margin-top: 12px; }
+.gw-vg-groep { display: flex; gap: 5px; min-width: 0; }
+.gw-vg-groep i { flex: 1; height: 7px; border-radius: 7px; background: rgba(255,255,255,.1); transition: background .35s, box-shadow .35s; }
+.gw-vg-groep i.is-aan { background: linear-gradient(90deg, #1a9d4c, var(--gw-groen)); box-shadow: 0 0 12px rgba(37,211,102,.55); animation: gw-seg .55s cubic-bezier(.2,.7,.3,1); }
+.gw-vg-groep i.is-volgende { background: rgba(37,211,102,.2); animation: gw-volgende 1.8s ease-in-out infinite; }
+@keyframes gw-seg { 0% { filter: brightness(1.9); transform: scaleY(1); } 35% { transform: scaleY(1.9); } 100% { filter: none; transform: none; } }
+@keyframes gw-volgende { 50% { background: rgba(37,211,102,.42); } }
+.gw input, .gw textarea { scroll-margin-top: 120px; }
 .gw-sec { margin-top: 56px; }
 .gw-sec-head { display: flex; align-items: baseline; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gw-zacht); margin-bottom: 6px; }
 .gw-num { font-size: 13px; font-weight: 700; color: var(--gw-groen); letter-spacing: .06em; }
@@ -133,9 +152,15 @@
 @media (max-width: 680px) {
   .gw-sheet { padding: 110px 18px 100px; }
   .gw-card { padding: 4px 18px 22px; }
-  .gw-progress { top: 56px; }
+  .gw-voortgang { top: calc(var(--gw-kop, 120px) + 8px); grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "tel tekst" "balk balk"; column-gap: 14px; padding: 12px 14px 14px; border-radius: 16px; }
+  .gw-vg-tel b { font-size: 21px; }
+  .gw-vg-tekst { font-size: 13.5px; }
+  .gw-vg-bewaard { display: none; }
+  .gw-vg-balk { gap: 10px; margin-top: 10px; }
+  .gw-vg-groep { gap: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .gw-kaart, .gw-bekijker { animation: none; }
   .gw-fasen li.is-nu .gw-fase-stip { animation: none; }
+  .gw-vg-groep i.is-aan, .gw-vg-groep i.is-volgende, .gw-vg-bewaard .gw-dot { animation: none; }
 }
