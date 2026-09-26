@@ -15,8 +15,6 @@ import CharacterAccent from "./CharacterAccent";
 import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
-import { useTaalwissel } from "./taalwissel";
-import HeroBalk from "./HeroBalk";
 import TeamTrust from "./TeamTrust";
 import { AuditTeaser } from "./AuditPage";
 import CustomerReviews from "./CustomerReviews";
@@ -25,7 +23,6 @@ import LiveWebsites from "./LiveWebsites";
 import TrustStories from "./TrustStories";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import BrandGlobe from "./BrandGlobe";
-import { useTellers } from "./tellers";
 import OsEntry, { CLAIM_URL, REVIEWS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
 import Pricing from "./Pricing";
@@ -78,40 +75,72 @@ function Founder() {
     </figure>
   );
 }
-// 25 september 2026 (Marinus): beursversie van de OS-explainer rechts in de hero. Speelt stil in een lus,
-// met één knop voor het geluid; de ondertiteling zit in de film zelf.
-function HeroFilm() {
-  const [geluid, setGeluid] = useState(false);
+// 26 september 2026 (Marinus): "een thank you video" en "ik mis de explainer video van het os". Rechts de
+// OS-explainer, met de staande bedankfilm uit Brussel ervoor. Beide spelen stil in een lus met een eigen
+// geluidsknop; zet je het geluid van de ene aan, dan gaat de andere op stil.
+function Film({ src, poster, label, klasse, geluid, zetGeluid }: { src: string; poster: string; label: string; klasse: string; geluid: boolean; zetGeluid: (aan: boolean) => void }) {
   const ref = React.useRef<HTMLVideoElement>(null);
+  React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid]);
   const wissel = () => {
     const film = ref.current;
-    if (!film) return;
-    film.muted = geluid;
-    if (!geluid) { film.currentTime = 0; void film.play().catch(() => {}); }
-    setGeluid(!geluid);
+    if (film && !geluid) { film.currentTime = 0; void film.play().catch(() => {}); }
+    zetGeluid(!geluid);
   };
-  const { websites, os } = useTellers();
   return (
-    <div className="h-hero-film">
-      <div className="h-tellers">
-        <p><strong key={websites}><i />{websites}</strong><span>websites gemaakt op de beurs</span></p>
-        <p><strong key={os}><i />{os}</strong><span>gratis OS-gebruikers</span></p>
-      </div>
-      <video
-        ref={ref}
-        src="/video/os/os-booth-en.mp4"
-        poster="/video/os/os-booth-en.jpg"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-label="SocialNow OS explainer"
-      />
+    <div className={klasse}>
+      <video ref={ref} src={src} poster={poster} autoPlay muted loop playsInline preload="auto" aria-label={label} />
       <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={geluid}>
         {geluid ? "Geluid uit" : "Geluid aan"}
       </button>
     </div>
+  );
+}
+
+function HeroFilm() {
+  const [geluid, setGeluid] = useState<"" | "os" | "bedankt">("");
+  return (
+    <div className="h-hero-film h-hero-films">
+      <Film
+        klasse="h-film-os"
+        src="/video/os/os-booth-en.mp4"
+        poster="/video/os/os-booth-en.jpg"
+        label="SocialNow OS explainer"
+        geluid={geluid === "os"}
+        zetGeluid={(aan) => setGeluid(aan ? "os" : "")}
+      />
+      <Film
+        klasse="h-film-bedankt"
+        src="/video/bedankt/bedankt-brussel.mp4"
+        poster="/video/bedankt/bedankt-brussel.jpg"
+        label="Bedankt vanuit Brussel, van het SocialNow-team"
+        geluid={geluid === "bedankt"}
+        zetGeluid={(aan) => setGeluid(aan ? "bedankt" : "")}
+      />
+    </div>
+  );
+}
+
+// 26 september 2026 (Marinus): de logo-animatie van de website en het OS bovenaan de hero. Speelt één keer
+// en blijft staan op het complete logo.
+function HeroLogo() {
+  const ref = React.useRef<HTMLVideoElement>(null);
+  const stop = () => {
+    const film = ref.current;
+    if (film && film.currentTime >= 3.4) film.pause();
+  };
+  return (
+    <video
+      ref={ref}
+      className="h-hero-logo"
+      src="/video/bedankt/logo-animatie.mp4"
+      autoPlay
+      muted
+      playsInline
+      preload="auto"
+      onTimeUpdate={stop}
+      onEnded={stop}
+      aria-label="SocialNow OS"
+    />
   );
 }
 
@@ -126,7 +155,8 @@ function useTaalfase(getoond: string) {
 
 export function Home() {
   const { language, t } = useLanguage();
-  const getoond = useTaalwissel(language);
+  // 26 september 2026 (Marinus): "ik wil niet dat de taal meer wijzigt". De hero toont de paginataal.
+  const getoond = language;
   const taalfase = useTaalfase(getoond);
   return (
     <>
@@ -137,60 +167,45 @@ export function Home() {
         </div>
         <div className="h-wrap h-hero-content">
           <div className="h-hero-tekst">
-          {/* 25 september 2026 (Marinus): standnummer als label, "Welkom!". */}
-          <p className="h-stand">
-            <span className="h-stand-nr">C21</span>
-            <b>Welkom!</b>
-            {/* 25 september 2026 (Marinus): "C21 WELCOME! groot, met het echte Odoo-logo en daarnaast PRODUCT". */}
-            <span className="h-stand-odoo" translate="no">
-              <svg viewBox="140 146 640 250" role="img" aria-label="Odoo">
-                <path fill="#8f8f8f" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
-                <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
-              </svg>
-              PRODUCT
-            </span>
-          </p>
+          {/* 26 september 2026 (Marinus): "op mijn header mag alle reclame weg". Geen stand, geen actie, geen
+              tellers meer; een persoonlijk bedankje en één duidelijke login voor het gratis OS. */}
+          <HeroLogo />
           <HeroTitle />
-          {/* 25 september 2026 (Marinus): "FREE! is niet goed uitgelegd". */}
-          <p className="h-hero-description">
-            <b>Waarom gratis?</b> Alleen vandaag en morgen, op stand C21. Geen kosten, geen abonnement.
-          </p>
-          {/* 24 september 2026 (Marinus): de gratis website is de hoofdroute, het OS een klein regeltje eronder. */}
-          <div className="os-entry">
-            <div className="os-actions">
-              {/* 26 september 2026 (Marinus): pakket en demo gaan al automatisch via de websitescan, hier alleen inloggen. */}
-              <a className="os-claim os-login-groot sn-btn3d h-button" href="https://app.socialnow.nl/login/">
-                <span className="sn-btn3d-sheen" />
-                <span>{translate("LOG IN OP JOUW GRATIS MANAGEMENT SYSTEEM", getoond)}</span>
-                <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
-              </a>
+          {/* 26 september 2026 (Marinus): versie A, "de brief". Het bedankje als briefje met foto en naam. */}
+          <div className="h-brief">
+            <p className="h-hero-description">
+              Door de vele aanmeldingen voor onze actie reageren we volgende week persoonlijk op iedereen. De winnaar
+              maken we bekend op LinkedIn en Instagram.
+            </p>
+            <div className="h-brief-onder">
+              <img src="/images/Marinus-Bergsma-V2.webp" alt="" width="56" height="56" />
+              <p><strong>Marinus Bergsma</strong><span>en het SocialNow-team</span></p>
             </div>
           </div>
+          <div className="os-entry">
+            <div className="os-actions">
+              <a className="h-login-knop" href="https://app.socialnow.nl/login/">
+                {translate("Log in op je gratis OS", getoond)}
+                <ArrowUpRight size={20} aria-hidden="true" />
+              </a>
+            </div>
+            <p className="h-login-uitleg">Nog geen account? Met dezelfde knop start je gratis, in één minuut.</p>
+            <p className="h-volg">
+              <a href="https://www.linkedin.com/company/socialnow-nl/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href="https://www.instagram.com/socialnow.nl/" target="_blank" rel="noreferrer">Instagram</a>
+            </p>
           </div>
-          {/* 25 september 2026 (Marinus): de explainerfilm staat op de plek van de vier Milo's (beurspresentatie). */}
+          </div>
           <HeroFilm />
-          {/* 25 september 2026 (Marinus): alles in één scherm. Naast het team loopt de logobalk, daaronder
-              de vier onderdelen van het gratis pakket. De drie stappen zijn weg voor het overzicht. */}
+          {/* 26 september 2026 (Marinus): "de 4 Milo's terugzien", als strook onder kop en films. */}
+          <HeroMilos />
           <div className="h-hero-rij">
             <TeamTrust />
             <ClientLogos kort />
           </div>
-          <HeroBalk paginaTaal={language} />
         </div>
       </section>
       </LanguageContext.Provider>
-      <div className="h-fair h-wrap">
-        <span>
-          <i /> 24–26 september · Odoo-beurs
-        </span>
-        <p>{t("Gratis website aanvragen. Stuur ons je gegevens via WhatsApp.")}</p>
-        <Link className="h-text-link" to="/gratis-website">
-          Claim je gratis website <ArrowUpRight size={17} />
-        </Link>
-        <a className="h-text-link" href={CLAIM_URL}>
-          {t("Vraag gratis OS-demo aan")} <ArrowUpRight size={17} />
-        </a>
-      </div>
       <ShowcaseFilms />
       <section className="h-section h-wrap" id="het-os">
         <Heading

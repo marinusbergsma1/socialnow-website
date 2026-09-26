@@ -155,10 +155,11 @@ function ProposalShell() {
             ))}
           </nav>
           <LanguageSwitch />
-          <Link className="h-header-claim" to="/gratis-website">
-            Gratis website
+          {/* 26 september 2026 (Marinus): geen reclame in de header, rechtsboven de login voor het gratis OS. */}
+          <a className="h-header-claim" href="https://app.socialnow.nl/login/">
+            Inloggen gratis OS
             <ArrowUpRight size={15} />
-          </Link>
+          </a>
           <button
             className="h-menu-toggle"
             type="button"

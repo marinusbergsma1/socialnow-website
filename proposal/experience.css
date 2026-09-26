@@ -2634,3 +2634,57 @@ html {
     height: 44px;
   }
 }
+
+/* 26 september 2026 (Marinus): persoonlijke hero zonder reclame. Bovenaan de logo-animatie (zwart valt weg
+   via screen), daaronder het bedankje, een groet, één grote login en rechts de staande bedankfilm. */
+.sn-site .h-hero-logo { display: block; width: clamp(240px, 24vw, 420px); aspect-ratio: 840 / 200; margin: 0 0 4px -1.5%; mix-blend-mode: screen; pointer-events: none; }
+.sn-site .h-hero .h-hero-description { font-size: clamp(16px, 1.15vw, 20px); line-height: 1.5; color: #c9d0d6; max-width: 640px; }
+.sn-site .h-hero-groet { margin: 12px 0 0; font-size: clamp(15px, 1vw, 18px); font-weight: 700; color: #fff; }
+.sn-site .h-hero-groet::before { content: ""; display: inline-block; width: 28px; height: 2px; margin: 0 12px 0 0; vertical-align: middle; background: #25d366; }
+.sn-site .h-login-uitleg { margin: 14px 0 0; font-size: 15px; color: #9aa4ad; }
+.sn-site .h-volg { display: flex; gap: 18px; margin: 10px 0 0; }
+.sn-site .h-volg a { font-size: 15px; font-weight: 600; color: #fff; text-decoration: underline; text-decoration-color: rgba(37,211,102,.6); text-underline-offset: 4px; }
+.sn-site .h-volg a:hover { color: #25d366; }
+/* 26 september 2026 (Marinus): versie A. De explainer rechtsboven, de grote staande bedankfilm ervoor
+   linksonder; beide met scanlines. De vakken staan absoluut in een vak met vaste verhouding. */
+.sn-site .h-hero-films { position: relative; aspect-ratio: 100 / 78; }
+.sn-site .h-hero-films > div { position: absolute; }
+.sn-site .h-hero-films video { display: block; width: 100%; border-radius: 18px; border: 1px solid #ffffff1f; background: #050608; object-fit: cover; }
+.sn-site .h-film-os { right: 0; top: 4%; width: 80%; }
+.sn-site .h-film-os video { aspect-ratio: 16 / 9; box-shadow: 0 30px 90px rgba(0,0,0,.6); }
+.sn-site .h-film-bedankt { left: 0; bottom: 0; width: 43%; z-index: 2; }
+.sn-site .h-film-bedankt video { aspect-ratio: 9 / 16; border-radius: 22px; border: 2px solid rgba(255,255,255,.24); box-shadow: 0 30px 80px rgba(0,0,0,.8), 0 0 50px rgba(37,211,102,.12); }
+.sn-site .h-hero-films > div::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,.22) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; }
+.sn-site .h-film-os::after { border-radius: 18px !important; }
+.sn-site .h-film-bedankt::after { border-radius: 22px !important; }
+.sn-site .h-hero-films .h-hero-film-geluid { z-index: 3; }
+.sn-site .h-film-bedankt .h-hero-film-geluid { right: 12px; bottom: 12px; }
+@media (min-width: 1100px) { .sn-site .h-hero-films { width: 100%; } }
+@media (max-width: 1099px) { .sn-site .h-hero-films { margin-top: 28px; aspect-ratio: 100 / 88; } .sn-site .h-film-bedankt { width: 46%; } }
+
+/* De brief: het bedankje met foto en naam in één vlak. */
+.sn-site .h-brief { margin-top: 26px; padding: 22px 26px; max-width: 640px; border-radius: 20px; background: #0b0f12; border: 1px solid rgba(255,255,255,.1); }
+.sn-site .h-hero .h-brief .h-hero-description { margin: 0 !important; max-width: none; font-size: clamp(16px, 1.15vw, 19px); line-height: 1.6; color: #d3d9df; }
+.sn-site .h-brief-onder { display: flex; align-items: center; gap: 14px; margin-top: 18px; }
+.sn-site .h-brief-onder img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid #25d366; }
+.sn-site .h-brief-onder p { margin: 0; display: grid; gap: 2px; }
+.sn-site .h-brief-onder strong { font-size: 16px; color: #fff; }
+.sn-site .h-brief-onder span { font-size: 14px; color: #9aa4ad; }
+
+/* Kop in VHS-stijl: lichte RGB-verschuiving en scanlines, "Brussel." in groen. */
+.sn-site .h-hero h1.h-taalwissel { position: relative; text-shadow: 1.5px 0 rgba(255,0,60,.35), -1.5px 0 rgba(0,229,255,.35); }
+.sn-site .h-hero h1.h-taalwissel::after { content: ""; position: absolute; inset: -4px 0; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,.32) 0 1px, transparent 1px 3px); }
+.sn-site .h-hero h1 .h-kop-groen { color: #25d366; text-shadow: 1.5px 0 rgba(255,0,60,.35), -1.5px 0 rgba(0,229,255,.35), 0 0 30px rgba(37,211,102,.45); }
+
+/* De vier Milo's als strook onder kop en films. */
+.sn-site .h-hero .h-hero-milos { position: static; width: auto; grid-column: 1 / -1; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 34px; }
+.sn-site .h-hero .h-hero-milos .h-milo-animated, .sn-site .h-hero .h-hero-milos img { width: 130px; height: 130px; }
+@media (max-width: 700px) { .sn-site .h-hero .h-hero-milos { grid-template-columns: repeat(2, minmax(0, 1fr)); } .sn-site .h-hero .h-hero-milos .h-milo-animated, .sn-site .h-hero .h-hero-milos img { width: 110px; height: 110px; } }
+
+/* Rustige loginknop: normale breedte, gewone letters, witte tekst op donkergroen. */
+.sn-site .h-login-knop { display: inline-flex; align-items: center; gap: 14px; min-height: 60px; padding: 0 26px 0 28px; border-radius: 14px; background: #1f9d4c; color: #fff; font-size: clamp(17px, 1.2vw, 19px); font-weight: 700; letter-spacing: 0; text-decoration: none; box-shadow: 0 10px 30px rgba(37,211,102,.22); transition: background .2s ease, transform .2s ease, box-shadow .2s ease; }
+.sn-site .h-login-knop:hover, .sn-site .h-login-knop:focus-visible { background: #178a41; transform: translateY(-1px); box-shadow: 0 14px 36px rgba(37,211,102,.3); outline: none; }
+.sn-site .h-login-knop svg { transition: transform .2s ease; }
+.sn-site .h-login-knop:hover svg { transform: translate(2px, -2px); }
+.sn-site .h-hero[data-taalfase="a"] :is(.h-hero-groet, .h-login-uitleg) { animation: h-taal-a .6s cubic-bezier(.16,1,.3,1) backwards; }
+.sn-site .h-hero[data-taalfase="b"] :is(.h-hero-groet, .h-login-uitleg) { animation: h-taal-b .6s cubic-bezier(.16,1,.3,1) backwards; }
