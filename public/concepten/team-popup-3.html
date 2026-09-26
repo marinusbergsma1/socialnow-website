@@ -1,0 +1,115 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Concept 3: Kaart met bewegende rij</title><style>
+@font-face{font-family:Inter;src:url(/fonts/inter-latin-400.woff2) format("woff2");font-weight:400}
+@font-face{font-family:Inter;src:url(/fonts/inter-latin-500.woff2) format("woff2");font-weight:500}
+@font-face{font-family:Inter;src:url(/fonts/inter-latin-700.woff2) format("woff2");font-weight:700}
+@font-face{font-family:Inter;src:url(/fonts/inter-latin-900.woff2) format("woff2");font-weight:800 900}
+:root{--groen:#25d366;--tekst:#fff;--zacht:#b9c0c7;--rand:#1f2a36}
+*{box-sizing:border-box}
+body{margin:0;background:#05080c radial-gradient(900px 500px at 20% 0%,#0c2a1c55,transparent 70%);color:#fff;font-family:"TT Norms",Inter,system-ui,sans-serif;min-height:100vh;padding:24px 16px 60px}
+.nav{max-width:1180px;margin:0 auto 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.nav b{margin-right:8px;font-size:13px;color:#98a2ad;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.nav a{padding:8px 14px;border-radius:999px;border:1px solid var(--rand);color:#cfd6dc;text-decoration:none;font-size:14px}
+.nav a.aan{border-color:var(--groen);color:#fff;background:#25d3661f}
+.uitleg{max-width:1180px;margin:0 auto 18px;color:var(--zacht);font-size:15px;line-height:1.5}
+.uitleg strong{color:#fff}
+.kaart{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border:1px solid var(--rand);border-radius:28px;overflow:hidden;background:linear-gradient(180deg,#0b1520,#070b10)}
+.een,.twee{padding:44px 44px 40px}
+.twee{border-left:1px solid var(--rand);background:#07090c}
+.logo{height:40px;width:auto}
+h1{font-size:54px;line-height:1.02;letter-spacing:-.04em;margin:26px 0 0;font-weight:700}
+h1 span{color:#9aa3ab}
+.intro{color:var(--zacht);font-size:16px;margin:14px 0 0}
+.stap{display:flex;align-items:center;gap:10px;margin:24px 0 0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#98a2ad}
+.stap i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--groen);color:var(--groen);font-style:normal;letter-spacing:0}
+label{display:block;margin-top:16px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#98a2ad}
+.veld{margin-top:8px;height:50px;border:1px solid var(--rand);border-radius:14px;background:#0e141b;display:flex;align-items:center;padding:0 16px;font-size:15px;color:#6d7680;letter-spacing:0;text-transform:none}
+.veld.vol{color:#fff;background:#0e1a2a}
+.film{margin-top:22px;border:1px solid #25d36659;border-radius:16px;overflow:hidden;aspect-ratio:16/9;box-shadow:0 0 30px #25d3661a}
+.film img{width:100%;height:100%;object-fit:cover;display:block}
+.knop{margin-top:20px;height:54px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:14px;font-weight:700;font-size:15px;background:linear-gradient(180deg,#2bbd62,#1a8f47);border:1px solid #4ce888;box-shadow:0 0 24px #25d36640}
+.knop i{width:34px;height:34px;border-radius:50%;background:#0b3a20;display:grid;place-items:center;font-style:normal}
+.os-kop{margin:0 0 20px;font-size:18px;font-weight:700}
+.twee .stap{margin-top:0}
+.juridisch{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--rand);color:var(--zacht);font-size:13px;line-height:1.6}
+.juridisch b{color:#fff;text-decoration:underline}
+.blok-kop{margin:28px 0 12px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#98a2ad}
+.blok-kop.klein{margin-top:18px}
+/* 1 */
+.p1-duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.p1-kaart{position:relative;margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/5;border:1px solid var(--rand)}
+.p1-kaart img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.p1-kaart figcaption{position:absolute;inset:auto 0 0;padding:40px 14px 12px;background:linear-gradient(transparent,#000000d9);display:grid;gap:2px}
+.p1-kaart strong{font-size:16px}.p1-kaart span{font-size:12px;color:#c9d1d8}
+.p1-team{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(8,1fr);gap:8px}
+.p1-team li{display:grid;justify-items:center;gap:6px;font-size:11px;color:var(--zacht)}
+.p1-team img{width:100%;aspect-ratio:1;border-radius:50%;object-fit:cover;border:1px solid #2a3642}
+/* 2 */
+.p2{margin-top:26px}
+.p2-breed{position:relative;margin:0;border-radius:20px;overflow:hidden;aspect-ratio:16/10;border:1px solid #25d36659;box-shadow:0 0 40px #25d36626;background:#0b1510}
+.p2-breed img{position:absolute;top:0;height:100%;width:55%;object-fit:cover;object-position:50% 25%}
+.p2-breed .l{left:0;clip-path:polygon(0 0,100% 0,82% 100%,0 100%)}
+.p2-breed .r{right:0;clip-path:polygon(18% 0,100% 0,100% 100%,0 100%)}
+.p2-breed figcaption{position:absolute;inset:auto 0 0;padding:50px 18px 16px;background:linear-gradient(transparent,#000000e6);display:grid;gap:3px}
+.p2-breed strong{font-size:20px}.p2-breed figcaption span:last-child{font-size:13px;color:#c9d1d8}
+.stip{width:8px;height:8px;border-radius:50%;background:var(--groen);box-shadow:0 0 10px var(--groen)}
+.p2-team{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.p2-team li{display:flex;align-items:center;gap:8px;padding:6px;border:1px solid var(--rand);border-radius:12px;background:#0b1016}
+.p2-team img{width:34px;height:34px;border-radius:9px;object-fit:cover;flex:none}
+.p2-team span{display:grid;min-width:0}.p2-team strong{font-size:12px}.p2-team small{font-size:10px;color:#8f99a3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 3 */
+.p3{margin-top:26px}
+.p3-kaart{display:grid;grid-template-columns:1.1fr 1fr;border:1px solid #25d36659;border-radius:20px;overflow:hidden;background:radial-gradient(420px 200px at 0 0,#25d36633,transparent 70%),linear-gradient(135deg,#07301c,#0a1a14 60%,#07100d)}
+.p3-fotos{display:grid;grid-template-columns:1fr 1fr;height:240px}
+.p3-fotos img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.p3-tekst{padding:20px;display:grid;align-content:center;gap:8px}
+.p3-tekst strong{font-size:22px;letter-spacing:-.02em}.p3-tekst span:last-child{font-size:14px;color:#c6ecd6;line-height:1.5}
+.badge{justify-self:start;padding:4px 10px;border-radius:999px;background:#25d36629;box-shadow:inset 0 0 0 1px #4ce88880;color:#8ff3b8;font-size:10px;font-weight:800;letter-spacing:.18em}
+.p3-rij{margin-top:14px;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.p3-rij ul{list-style:none;margin:0;padding:0;display:flex;gap:10px;width:max-content;animation:rol 40s linear infinite}
+.p3-rij li{display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border:1px solid var(--rand);border-radius:999px;background:#0b1016}
+.p3-rij img{width:38px;height:38px;border-radius:50%;object-fit:cover}
+.p3-rij span{display:grid}.p3-rij strong{font-size:13px}.p3-rij small{font-size:11px;color:#8f99a3}
+@keyframes rol{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.p3-rij ul{animation:none}}
+/* 4 */
+.p4{margin-top:30px;padding:22px;border:1px solid var(--rand);border-radius:20px;background:#0a0e13}
+.p4-duo{display:flex;gap:18px}
+.p4-duo figure{margin:0;display:grid;justify-items:center;gap:10px;flex:1;text-align:center}
+.p4-duo img{width:150px;height:150px;border-radius:50%;object-fit:cover;object-position:50% 20%;border:2px solid var(--groen);box-shadow:0 0 0 6px #25d36614,0 0 30px #25d36633}
+.p4-duo figcaption{display:grid;gap:2px}.p4-duo strong{font-size:17px}.p4-duo span{font-size:12px;color:var(--zacht)}
+.p4-zin{margin:18px 0 0;text-align:center;font-size:16px;line-height:1.5;color:#e9fff1}
+.p4-team{margin-top:18px;padding-top:16px;border-top:1px solid var(--rand);display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap}
+.p4-stapel{display:flex}
+.p4-stapel img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #0a0e13;margin-left:-10px}
+.p4-stapel img:first-child{margin-left:0}
+.p4-team span{font-size:13px;color:var(--zacht)}.p4-team strong{color:#fff}
+@media (max-width:860px){
+ .kaart{grid-template-columns:1fr}.twee{border-left:0;border-top:1px solid var(--rand)}
+ .een,.twee{padding:28px 20px}h1{font-size:40px}
+ .p1-team{grid-template-columns:repeat(4,1fr)}.p2-team{grid-template-columns:repeat(2,1fr)}
+ .p3-kaart{grid-template-columns:1fr}.p4-duo img{width:110px;height:110px}
+}
+</style></head><body>
+<nav class="nav"><b>Concept pop-up team</b><a href="/concepten/team-popup-1.html">1. Duo naast elkaar</a><a href="/concepten/team-popup-2.html">2. Een breed beeld</a><a href="/concepten/team-popup-3.html" class="aan">3. Kaart met bewegende rij</a><a href="/concepten/team-popup-4.html">4. Rustig met gezichten</a></nav>
+<p class="uitleg"><strong>Concept 3. Kaart met bewegende rij.</strong> Een groene kaart met Marinus en Steef en de belofte dat je hen persoonlijk spreekt. Daaronder schuift het team rustig voorbij.</p>
+<div class="kaart">
+<section class="een">
+<img class="logo" src="/images/SocialNow-Logo-2026.webp" alt="SocialNow">
+<h1>Welcome to<br><span>SocialNow.</span></h1>
+<p class="intro">Request a free website or OS demo through WhatsApp.</p>
+<p class="stap"><i>1</i>Where are you based?</p>
+<label>Your country<div class="veld vol">🇬🇧 United Kingdom</div></label>
+<div class="film"><img src="/video/os/os-booth-en.jpg" alt="SocialNow OS film"></div>
+<div class="knop">Claim your free website <i>↗</i></div>
+</section>
+<section class="twee">
+<p class="os-kop">Or try our free personal OS system</p>
+<p class="stap"><i>2</i>Your details</p>
+<label>First name<div class="veld">Your name</div></label>
+<label>Last name<div class="veld"></div></label>
+<label>E-mail<div class="veld">you@company.com</div></label>
+<div class="knop">Request your free OS demo via WhatsApp <i>↗</i></div>
+<p class="juridisch">By trying the OS or exploring the website, you agree to our <b>terms of service</b> and <b>privacy policy</b>. No tracking cookies on the website; in the OS we only measure with your consent.</p>
+<div class="p3"><div class="p3-kaart"><div class="p3-fotos"><img src="/images/Marinus-Bergsma-V2.webp" alt="Marinus Bergsma"><img src="/images/Steef-Komen.webp" alt="Steef Komen"></div><div class="p3-tekst"><span class="badge">PERSOONLIJK</span><strong>Marinus en Steef</strong><span>Jouw WhatsApp komt direct bij ons binnen. Geen callcenter, geen bot.</span></div></div><div class="p3-rij" aria-label="Het team"><ul><li><img src="/images/Jos-Hollenberg-1.webp" alt=""><span><strong>Jos Hollenberg</strong><small>Meta Ads</small></span></li><li><img src="/images/Sergio-Jovovic.webp" alt=""><span><strong>Sergio Jovovic</strong><small>Meta Marketeer</small></span></li><li><img src="/images/Nick-VK.webp" alt=""><span><strong>Nick van Keulen</strong><small>Google Ads</small></span></li><li><img src="/images/Elian-Coellar.webp" alt=""><span><strong>Elian Coellar</strong><small>Partnerships</small></span></li><li><img src="/images/Sid-van-Kalken.webp" alt=""><span><strong>Sid van Kalken</strong><small>Webdeveloper</small></span></li><li><img src="/images/Carmel-Boon-V2.webp" alt=""><span><strong>Carmel Boon</strong><small>Video</small></span></li><li><img src="/images/Sam-van-der-Sluis.webp" alt=""><span><strong>Sam van der Sluis</strong><small>Videograaf</small></span></li><li><img src="/images/Emma-Peperkamp-V2.webp" alt=""><span><strong>Emma Peperkamp</strong><small>Fotograaf</small></span></li><li><img src="/images/Jos-Hollenberg-1.webp" alt=""><span><strong>Jos Hollenberg</strong><small>Meta Ads</small></span></li><li><img src="/images/Sergio-Jovovic.webp" alt=""><span><strong>Sergio Jovovic</strong><small>Meta Marketeer</small></span></li><li><img src="/images/Nick-VK.webp" alt=""><span><strong>Nick van Keulen</strong><small>Google Ads</small></span></li><li><img src="/images/Elian-Coellar.webp" alt=""><span><strong>Elian Coellar</strong><small>Partnerships</small></span></li><li><img src="/images/Sid-van-Kalken.webp" alt=""><span><strong>Sid van Kalken</strong><small>Webdeveloper</small></span></li><li><img src="/images/Carmel-Boon-V2.webp" alt=""><span><strong>Carmel Boon</strong><small>Video</small></span></li><li><img src="/images/Sam-van-der-Sluis.webp" alt=""><span><strong>Sam van der Sluis</strong><small>Videograaf</small></span></li><li><img src="/images/Emma-Peperkamp-V2.webp" alt=""><span><strong>Emma Peperkamp</strong><small>Fotograaf</small></span></li></ul></div></div>
+</section>
+</div></body></html>
