@@ -129,7 +129,7 @@ function ProposalShell() {
   return (
     <div className="sn-site" data-style="signature">
       <LogoIntro onComplete={() => setIntroDone(true)} />
-      <QrOsWelcome ready={introDone} />
+      
       <a className="h-skip" href="#inhoud">
         Ga naar inhoud
       </a>
