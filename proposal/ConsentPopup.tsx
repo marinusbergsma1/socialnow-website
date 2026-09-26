@@ -3,7 +3,7 @@ import "./consent-duo.css";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage, languagePrefix, type Language } from "./i18n/context";
 import { LEGAL_VERSION } from "../components/legal";
-import { aanvraagWhatsApp } from "./aanvragen";
+import { bewaarOsGegevens } from "./aanvragen";
 import { people } from "./content";
 
 // 16 september 2026 (Marinus): de landingspopup. Eén keer bij binnenkomst: kom je voor de demo of
@@ -15,7 +15,7 @@ import { people } from "./content";
 //
 // TEKSTEN: alles wat een bezoeker leest staat hieronder per taal; pas het hier aan.
 const SLEUTEL = "sn-akkoord";
-// De aanvraag gaat naar WhatsApp. De bezoeker verzendt het concept daar zelf.
+// De aanvraag gaat per e-mail of WhatsApp, naar keuze van de bezoeker.
 
 export const LANDEN: { code: string; naam: string; vlag: string; taal: Language }[] = [
   { code: "NL", naam: "Nederland", vlag: "🇳🇱", taal: "nl" },
@@ -48,13 +48,13 @@ const ACTIE_TOT = "2026-09-26";
 // op de flyer. Taggen: SocialNow.nl en Komen Consultancy, zoals op de beurs. 24 september 2026 (Marinus): de post
 // gaat op LinkedIn ("plaatsen op Linkedin en SocialNow taggen en Komen Consultancy taggen"); regels versie 1.2 in de app.
 // 24 september 2026 (Marinus): voor de tweede beursdag gaat de popup over de gratis website-upgrade,
-// niet meer over het OS. De aanvraag opent nu rechtstreeks als concept in WhatsApp.
+// niet meer over het OS.
 type Actie = { badge: string; kop: string; win: string; bedrag: string; regel: string };
 const ACTIE: Record<Language, Actie> = {
-  nl: { badge: "GRATIS", kop: "Branding, website, Google Ads audit en OS.", win: "Vraag je gratis website aan via WhatsApp", bedrag: "met een persoonlijk bericht.", regel: "Je kunt je bericht voor het versturen aanpassen." },
-  en: { badge: "FREE", kop: "Branding, website, Google Ads audit and OS.", win: "Request your free website via WhatsApp", bedrag: "with a personal message.", regel: "You can edit your message before sending." },
-  de: { badge: "KOSTENLOS", kop: "Branding, Website, Google Ads Audit und OS.", win: "Fragen Sie Ihre kostenlose Website per WhatsApp an", bedrag: "mit einer persönlichen Nachricht.", regel: "Sie können Ihre Nachricht vor dem Senden bearbeiten." },
-  fr: { badge: "GRATUIT", kop: "Branding, site web, audit Google Ads et OS.", win: "Demandez votre site gratuit via WhatsApp", bedrag: "avec un message personnel.", regel: "Vous pouvez modifier votre message avant de l’envoyer." },
+  nl: { badge: "GRATIS", kop: "Branding, website, Google Ads audit en OS.", win: "Vraag je gratis website aan", bedrag: "met een persoonlijk bericht.", regel: "Je kunt je bericht voor het versturen aanpassen." },
+  en: { badge: "FREE", kop: "Branding, website, Google Ads audit and OS.", win: "Request your free website", bedrag: "with a personal message.", regel: "You can edit your message before sending." },
+  de: { badge: "KOSTENLOS", kop: "Branding, Website, Google Ads Audit und OS.", win: "Fragen Sie Ihre kostenlose Website an", bedrag: "mit einer persönlichen Nachricht.", regel: "Sie können Ihre Nachricht vor dem Senden bearbeiten." },
+  fr: { badge: "GRATUIT", kop: "Branding, site web, audit Google Ads et OS.", win: "Demandez votre site gratuit", bedrag: "avec un message personnel.", regel: "Vous pouvez modifier votre message avant de l’envoyer." },
 };
 // 25 september 2026 (Marinus): de kop noemt het hele gratis pakket, net als de hero.
 // De website-knop links en de kop boven het OS-formulier rechts: de site en het OS en/en.
@@ -74,10 +74,10 @@ const GEGEVENS: Record<Language, Gegevens> = {
   fr: { email: "E-mail", terug: "Retour", foutNaam: "Indiquez votre prénom et votre nom.", foutEmail: "Cette adresse e-mail n’est pas encore correcte." },
 };
 const TEKST: Record<Language, Tekst> = {
-  nl: { kop: "Welkom bij SocialNow.", land: "Je land", demo: "Probeer het OS gratis", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies op de website; in het OS meten we alleen met jouw toestemming.", intro: "Vraag een gratis website of OS-demo aan via WhatsApp.", stap1: "Waar zit je?", stap2: "Je gegevens", volgende: "Volgende", phNaam: "Je naam", phEmail: "jij@bedrijf.nl" },
-  en: { kop: "Welcome to SocialNow.", land: "Your country", demo: "Try the free personal OS", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies on the website; in the OS we only measure with your consent.", intro: "Request a free website or OS demo through WhatsApp.", stap1: "Where are you based?", stap2: "Your details", volgende: "Next", phNaam: "Your name", phEmail: "you@company.com" },
-  de: { kop: "Willkommen bei SocialNow.", land: "Ihr Land", demo: "OS kostenlos testen", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies auf der Website; im OS messen wir nur mit Ihrer Zustimmung.", intro: "Fragen Sie eine kostenlose Website oder OS-Demo per WhatsApp an.", stap1: "Wo sind Sie ansässig?", stap2: "Ihre Daten", volgende: "Weiter", phNaam: "Ihr Name", phEmail: "sie@firma.de" },
-  fr: { kop: "Bienvenue chez SocialNow.", land: "Votre pays", demo: "Essayer l\u2019OS", site: "Découvrir le site", voor: "En essayant l’OS ou en découvrant le site, vous acceptez nos ", voorwaarden: "conditions générales", en: " et notre ", privacy: "politique de confidentialité", na: ". Pas de cookies de suivi sur le site ; dans l’OS, nous ne mesurons qu’avec votre accord.", intro: "Demandez un site ou une démo OS gratuite via WhatsApp.", stap1: "Où êtes-vous basé ?", stap2: "Vos coordonnées", volgende: "Suivant", phNaam: "Votre nom", phEmail: "vous@entreprise.fr" },
+  nl: { kop: "Welkom bij SocialNow.", land: "Je land", demo: "Probeer het OS gratis", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies op de website; in het OS meten we alleen met jouw toestemming.", intro: "Vraag een gratis website of OS-demo aan.", stap1: "Waar zit je?", stap2: "Je gegevens", volgende: "Volgende", phNaam: "Je naam", phEmail: "jij@bedrijf.nl" },
+  en: { kop: "Welcome to SocialNow.", land: "Your country", demo: "Try the free personal OS", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies on the website; in the OS we only measure with your consent.", intro: "Request a free website or OS demo.", stap1: "Where are you based?", stap2: "Your details", volgende: "Next", phNaam: "Your name", phEmail: "you@company.com" },
+  de: { kop: "Willkommen bei SocialNow.", land: "Ihr Land", demo: "OS kostenlos testen", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies auf der Website; im OS messen wir nur mit Ihrer Zustimmung.", intro: "Fragen Sie eine kostenlose Website oder OS-Demo an.", stap1: "Wo sind Sie ansässig?", stap2: "Ihre Daten", volgende: "Weiter", phNaam: "Ihr Name", phEmail: "sie@firma.de" },
+  fr: { kop: "Bienvenue chez SocialNow.", land: "Votre pays", demo: "Essayer l\u2019OS", site: "Découvrir le site", voor: "En essayant l’OS ou en découvrant le site, vous acceptez nos ", voorwaarden: "conditions générales", en: " et notre ", privacy: "politique de confidentialité", na: ". Pas de cookies de suivi sur le site ; dans l’OS, nous ne mesurons qu’avec votre accord.", intro: "Demandez un site ou une démo OS gratuite.", stap1: "Où êtes-vous basé ?", stap2: "Vos coordonnées", volgende: "Suivant", phNaam: "Votre nom", phEmail: "vous@entreprise.fr" },
 };
 
 function bewaard(): boolean { try { return localStorage.getItem(SLEUTEL) === LEGAL_VERSION; } catch { return false; } }
@@ -103,10 +103,10 @@ function minderBeweging() {
 // daaronder het team als balk die rustig voorbijschuift. De twee foto's staan los van elkaar met
 // elk een eigen naam, zodat duidelijk is wie wie is.
 const PERSOONLIJK: Record<Language, { badge: string; kop: string; regel: string }> = {
-  nl: { badge: "PERSOONLIJK", kop: "Marinus en Steef", regel: "Jouw WhatsApp komt direct bij ons binnen. Geen callcenter, geen bot." },
-  en: { badge: "PERSONAL", kop: "Marinus and Steef", regel: "Your WhatsApp comes straight to us. No call centre, no bot." },
-  de: { badge: "PERSÖNLICH", kop: "Marinus und Steef", regel: "Deine WhatsApp landet direkt bei uns. Kein Callcenter, kein Bot." },
-  fr: { badge: "PERSONNEL", kop: "Marinus et Steef", regel: "Votre WhatsApp nous arrive directement. Pas de centre d'appels, pas de bot." },
+  nl: { badge: "PERSOONLIJK", kop: "Marinus en Steef", regel: "Jouw aanvraag komt direct bij ons binnen. Geen callcenter, geen bot." },
+  en: { badge: "PERSONAL", kop: "Marinus and Steef", regel: "Your request comes straight to us. No call centre, no bot." },
+  de: { badge: "PERSÖNLICH", kop: "Marinus und Steef", regel: "Deine Anfrage landet direkt bei uns. Kein Callcenter, kein Bot." },
+  fr: { badge: "PERSONNEL", kop: "Marinus et Steef", regel: "Votre demande nous arrive directement. Pas de centre d'appels, pas de bot." },
 };
 const DUO = [
   { naam: "Marinus", rol: "Founder", foto: "Marinus-Bergsma-V2.webp" },
@@ -194,7 +194,9 @@ export default function ConsentPopup() {
   const akkoord = () => { try { localStorage.setItem(SLEUTEL, LEGAL_VERSION); } catch {} zetCookies(gekozen.code, gekozen.taal); setOpen(false); };
   const g = GEGEVENS[language] || GEGEVENS.en;
   const naarWebsite = () => { akkoord(); window.location.href = `${languagePrefix(gekozen.taal)}/gratis-website/`; };
-  const naarDemo = () => { akkoord(); window.location.href = aanvraagWhatsApp("os", gekozen.taal, { voornaam, achternaam, email }); };
+  // 26 september 2026 (Marinus): geen WhatsApp als verplichte stap. De bezoeker gaat naar de OS-demopagina met
+  // de animatie van het systeem; daar staan de gegevens al ingevuld en kiest de bezoeker zelf e-mail of WhatsApp.
+  const naarDemo = () => { akkoord(); bewaarOsGegevens({ voornaam, achternaam, email }); window.location.href = `${languagePrefix(gekozen.taal)}/gratis-os-demo/`; };
   const verstuur = (e: React.FormEvent) => {
     e.preventDefault();
     if (!voornaam.trim() || !achternaam.trim()) { setFout(g.foutNaam); return; }
@@ -266,7 +268,7 @@ export default function ConsentPopup() {
           </label>
           {fout ? <p className="sn-consent-fout" role="alert">{fout}</p> : null}
           <div className="sn-consent-knoppen">
-            <button type="submit" className="sn-consent-knop"><span className="sn-consent-glans" aria-hidden="true" /><span>{({nl:"Vraag je gratis OS-demo aan via WhatsApp",en:"Request your free OS demo via WhatsApp",de:"Kostenlose OS-Demo per WhatsApp anfragen",fr:"Demander une démo gratuite via WhatsApp"} as Record<Language,string>)[language]}</span><Pijl /></button>
+            <button type="submit" className="sn-consent-knop"><span className="sn-consent-glans" aria-hidden="true" /><span>{({nl:"Vraag je gratis OS-demo aan",en:"Request your free OS demo",de:"Kostenlose OS-Demo anfragen",fr:"Demander une démo gratuite"} as Record<Language,string>)[language]}</span><Pijl /></button>
             <button type="button" className="sn-consent-knop sn-consent-knop-stil sn-consent-alleen-mobiel" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span></button>
           </div>
           <Team language={language} />

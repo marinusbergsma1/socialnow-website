@@ -183,7 +183,7 @@ export function Home() {
         <span>
           <i /> 24–26 september · Odoo-beurs
         </span>
-        <p>{t("Gratis website aanvragen. Stuur ons je gegevens via WhatsApp.")}</p>
+        <p>{t("Gratis website aanvragen. Stuur ons je gegevens per e-mail of WhatsApp.")}</p>
         <Link className="h-text-link" to="/gratis-website">
           Claim je gratis website <ArrowUpRight size={17} />
         </Link>
@@ -360,7 +360,7 @@ export function OsPage() {
             <span>01</span>
             <h3>{t("Vraag een OS-demo aan.")}</h3>
             <p>
-              {t("Stuur ons je naam en e-mailadres via WhatsApp. We bespreken daarna de demo.")}
+              {t("Stuur ons je naam en e-mailadres per e-mail of WhatsApp. We bespreken daarna de demo.")}
             </p>
             <a className="h-text-link" href={CLAIM_URL}>
               {t("Vraag gratis OS-demo aan")}
