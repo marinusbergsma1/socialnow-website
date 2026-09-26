@@ -3139,3 +3139,5 @@ video {
 
 /* 26 september 2026: loginkop na de beurs */
 .h-login-kop { font-size: clamp(2.6rem, 6vw, 5.2rem); line-height: 1; letter-spacing: -0.03em; margin: 0 0 1.2rem; }
+.h-login-kop { font-size: clamp(3.2rem, 8vw, 7.5rem); text-transform: uppercase; }
+.h-login-kop span { color: #3ddc84; }

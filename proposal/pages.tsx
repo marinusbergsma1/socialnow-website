@@ -136,7 +136,7 @@ export function Home() {
           <div className="h-hero-tekst">
           {/* 26 september 2026 (Marinus): de beurs is over. Alle reclame uit de header; alleen een
               duidelijke login voor het gratis OS en een bedankvideo. */}
-          <h1 className="h-login-kop">{t("Log in op je gratis OS")}</h1>
+          <h1 className="h-login-kop" translate="no">THANK YOU <span>ODOO!</span></h1>
           <p className="h-hero-description">{t("Bedankt voor je bezoek. Je gratis SocialNow OS staat klaar: log in met het e-mailadres waarmee je je hebt aangemeld.")}</p>
           <div className="os-entry">
             <div className="os-actions">
@@ -149,6 +149,10 @@ export function Home() {
           </div>
           </div>
           <HeroFilm />
+          <div className="h-hero-rij">
+            <TeamTrust />
+            <ClientLogos kort />
+          </div>
         </div>
       </section>
       </LanguageContext.Provider>
