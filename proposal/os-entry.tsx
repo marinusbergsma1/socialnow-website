@@ -2,7 +2,7 @@ import React, { useEffect, useId, useState } from "react";
 import { ArrowRight, Download, Star } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 
-const taalPad = typeof window === "undefined" ? "" : (window.location.pathname.match(/^\/(nl|de|fr|it|es)(?=\/|$)/)?.[0] || "");
+const taalPad = typeof window === "undefined" ? "" : (window.location.pathname.match(/^\/(nl|de|fr)(?=\/|$)/)?.[0] || "");
 export const CLAIM_URL = `${taalPad}/gratis-os-demo/`;
 export const INSTALL_URL = "https://app.socialnow.nl/?bron=installatie";
 export const REVIEWS_URL = "https://maps.google.com/?cid=1427063718057754123";

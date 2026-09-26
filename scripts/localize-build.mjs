@@ -1,9 +1,9 @@
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
-// 16 september 2026: zes talen. Nederlands is de bron (sleutels), de andere vijf zijn woordenboeken.
-// Elke route wordt zes keer geschreven: / (Engels), /nl, /de, /fr, /it, /es, met canonical,
-// og:locale en hreflang voor alle zes.
-const LANGUAGES=['en','nl','de','fr','it','es'];
-const LOCALES={en:'en_GB',nl:'nl_NL',de:'de_DE',fr:'fr_FR',it:'it_IT',es:'es_ES'};
+// 16 september 2026: zes talen, sinds 26 september 2026 nog vier. Nederlands is de bron (sleutels),
+// de andere drie zijn woordenboeken. Elke route wordt vier keer geschreven: / (Engels), /nl, /de en
+// /fr, met canonical, og:locale en hreflang voor alle vier.
+const LANGUAGES=['en','nl','de','fr'];
+const LOCALES={en:'en_GB',nl:'nl_NL',de:'de_DE',fr:'fr_FR'};
 const prefix=l=>l==='en'?'':`/${l}`;
 const dictionaries=Object.fromEntries(LANGUAGES.filter(l=>l!=='nl').map(l=>[l,JSON.parse(readFileSync(`proposal/i18n/${l}.json`,'utf8'))]));
 const t=(value,language)=>{const key=value.replace(/\s+/g,' ').trim();return dictionaries[language][key] ?? dictionaries.en[key] ?? value;};
@@ -55,6 +55,13 @@ for(const route of paths){
   const folder=`dist${prefix(language)}${route==='/'?'':route}`;
   mkdirSync(folder,{recursive:true});writeFileSync(`${folder}/index.html`,output);
  }
+}
+// Italiaans en Spaans zijn eraf. Oude links naar /it en /es gaan door naar dezelfde pagina in het Engels.
+for(const oud of ['it','es'])for(const route of paths){
+ const doel=`${BASE}${route}`;
+ const folder=`dist/${oud}${route==='/'?'':route}`;
+ mkdirSync(folder,{recursive:true});
+ writeFileSync(`${folder}/index.html`,`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="canonical" href="${doel}"><meta http-equiv="refresh" content="0; url=${route}"><script>location.replace(${JSON.stringify(route)}+location.search+location.hash)</script></head><body><a href="${route}">SocialNow</a></body></html>`);
 }
 writeFileSync('dist/404.html',readFileSync('dist/index.html'));
 writeFileSync('dist/sitemap.xml',sitemap.replace('</urlset>',LANGUAGES.filter(l=>l!=='en').flatMap(l=>paths.map(route=>`<url><loc>${BASE}${prefix(l)}${route}</loc></url>`)).join('\n')+'\n</urlset>'));

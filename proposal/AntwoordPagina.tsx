@@ -5,7 +5,7 @@ import "./antwoord-pagina.css";
 
 type Soort = "website" | "os";
 type Bewaard = { bron: string; teksten: Partial<Record<Language, string>>; bijgewerkt: Partial<Record<Language, string>> };
-const TALEN: Language[] = ["nl", "en", "de", "fr", "it", "es"];
+const TALEN: Language[] = ["nl", "en", "de", "fr"];
 const OPSLAG = "sn-antwoord-aanvragen-v2";
 const OUDE_OPSLAG = "sn-antwoord-aanvragen-v1";
 const OUDE_STANDAARD = "Hoi! Bedankt voor je aanvraag bij SocialNow. Ik heb je bericht ontvangen en bekijk wat ik voor je kan doen. Ik stuur je snel de volgende stap. Heb je nog een website of een voorbeeld dat je mooi vindt? Stuur de link gerust door. Groet, Marinus";
@@ -17,16 +17,12 @@ const STANDAARD: Record<Soort, Record<Language, string>> = {
     en: "Hi! Thanks for your website request. I've received your details and answers. Do you have any extra photos, your logo or other images we could use? Feel free to send them here. I'll review everything and let you know the next step. Best, Marinus",
     de: "Hallo! Vielen Dank für Ihre Website-Anfrage. Ich habe Ihre Angaben und Antworten erhalten. Haben Sie noch weitere Fotos, Ihr Logo oder anderes Bildmaterial, das wir verwenden dürfen? Schicken Sie es mir gern hier. Ich sehe mir alles an und melde mich mit dem nächsten Schritt. Viele Grüße, Marinus",
     fr: "Bonjour ! Merci pour votre demande de site web. J’ai bien reçu vos coordonnées et vos réponses. Avez-vous d’autres photos, votre logo ou des visuels que nous pouvons utiliser ? Envoyez-les-moi ici. Je vais tout examiner et vous indiquer la prochaine étape. À bientôt, Marinus",
-    it: "Ciao! Grazie per la richiesta del sito. Ho ricevuto i tuoi dati e le tue risposte. Hai altre foto, il tuo logo o immagini che possiamo usare? Mandamele pure qui. Esaminerò tutto e ti farò sapere il prossimo passo. A presto, Marinus",
-    es: "¡Hola! Gracias por solicitar tu web. He recibido tus datos y respuestas. ¿Tienes más fotos, tu logotipo u otras imágenes que podamos usar? Envíamelas por aquí. Revisaré todo y te diré cuál es el siguiente paso. Un saludo, Marinus",
   },
   os: {
     nl: "Hoi! Bedankt voor je OS-demoaanvraag. Je kunt het OS direct openen via de link hieronder. Meld je aan met het e-mailadres uit je aanvraag. Als je hulp nodig hebt, stuur me gerust een bericht. Groet, Marinus",
     en: "Hi! Thanks for requesting an OS demo. You can open the OS through the link below. Sign in with the email address from your request. If you need help, feel free to message me. Best, Marinus",
     de: "Hallo! Vielen Dank für Ihre Anfrage zur OS-Demo. Über den Link unten können Sie das OS öffnen. Melden Sie sich mit der E-Mail-Adresse aus Ihrer Anfrage an. Wenn Sie Hilfe benötigen, schreiben Sie mir gern. Viele Grüße, Marinus",
     fr: "Bonjour ! Merci pour votre demande de démo de l’OS. Vous pouvez ouvrir l’OS avec le lien ci-dessous. Connectez-vous avec l’adresse e-mail indiquée dans votre demande. Si vous avez besoin d’aide, écrivez-moi. À bientôt, Marinus",
-    it: "Ciao! Grazie per aver richiesto una demo dell’OS. Puoi aprire l’OS dal link qui sotto. Accedi con l’indirizzo e-mail della tua richiesta. Se hai bisogno di aiuto, scrivimi pure. A presto, Marinus",
-    es: "¡Hola! Gracias por solicitar una demo del OS. Puedes abrir el OS con el enlace de abajo. Accede con el correo electrónico de tu solicitud. Si necesitas ayuda, escríbeme. Un saludo, Marinus",
   },
 };
 
