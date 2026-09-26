@@ -23,7 +23,9 @@ export const VERSIES: { nr: Versie; naam: string }[] = [
 export function useVersie(): Versie {
   const [params] = useSearchParams();
   const nr = Number(params.get("versie"));
-  return nr === 2 || nr === 3 || nr === 4 ? nr : 1;
+  // 26 september 2026 (Marinus): "zet de laatste live". Versie 4 is de standaard; 1 tot en met 3 blijven
+  // bereikbaar via ?versie=, zonder versieknop op de pagina.
+  return nr === 1 || nr === 2 || nr === 3 ? nr : 4;
 }
 
 function useWissel(aantal: number, ms: number) {
@@ -105,7 +107,7 @@ export function VersieKiezer({ versie }: { versie: Versie }) {
 
 // De layout rond het formulier. `kop` is de titel met intro, `children` het formulier.
 export default function OnboardingBeeld({ versie, soort, kop, children }: { versie: Versie; soort: Soort; kop: React.ReactNode; children: React.ReactNode }) {
-  const kiezer = <VersieKiezer versie={versie} />;
+  const kiezer = null;
   if (versie === 2) return <div className="gw ob ob-v2">
     <div className="ob-bollen" aria-hidden="true"><BrandGlobe /></div>
     <div className="gw-sheet">{kop}<div className="ob-glas">{children}</div></div>{kiezer}
