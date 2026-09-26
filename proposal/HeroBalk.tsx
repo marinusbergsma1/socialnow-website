@@ -39,22 +39,6 @@ const ZINNEN: Record<Language, string[]> = {
     "Des automatisations *sécurisées*",
     "Parce que gérer une entreprise *ne devrait pas être compliqué*",
   ],
-  it: [
-    "Creatività umana, *potenziata dall’AI*",
-    "*5 anni di esperienza* nel collegare Odoo a contenuti e annunci",
-    "Automazioni con *un vero team pronto ad aiutarti*",
-    "Crea i tuoi annunci e *mantieni il controllo*",
-    "Automazioni *rese sicure*",
-    "Perché gestire un’azienda *non dovrebbe essere complicato*",
-  ],
-  es: [
-    "Creatividad humana *impulsada por la IA*",
-    "*5 años de experiencia* uniendo Odoo con tu contenido y tus anuncios",
-    "Automatizaciones con *un equipo real listo para ayudarte*",
-    "Crea tus propios anuncios y *mantén el control*",
-    "Automatizaciones *con total seguridad*",
-    "Porque gestionar un negocio *no debería ser complicado*",
-  ],
 };
 
 const SLAG = 5000;
