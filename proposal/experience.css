@@ -2647,20 +2647,24 @@ html {
 .sn-site .h-volg a:hover { color: #25d366; }
 /* 26 september 2026 (Marinus): versie A. De explainer rechtsboven, de grote staande bedankfilm ervoor
    linksonder; beide met scanlines. De vakken staan absoluut in een vak met vaste verhouding. */
-.sn-site .h-hero-films { position: relative; aspect-ratio: 100 / 78; }
-.sn-site .h-hero-films > div { position: absolute; }
+/* 26 september 2026 (Marinus): "video's niet zo achter elkaar". Bedankfilm en explainer naast elkaar. */
+.sn-site .h-hero-films { position: relative; display: flex; align-items: center; gap: 4%; }
+.sn-site .h-hero-films > div { position: relative; }
 .sn-site .h-hero-films video { display: block; width: 100%; border-radius: 18px; border: 1px solid #ffffff1f; background: #050608; object-fit: cover; }
-.sn-site .h-film-os { right: 0; top: 4%; width: 80%; }
-.sn-site .h-film-os video { aspect-ratio: 16 / 9; box-shadow: 0 30px 90px rgba(0,0,0,.6); }
-.sn-site .h-film-bedankt { left: 0; bottom: 0; width: 43%; z-index: 2; }
+.sn-site .h-film-bedankt { flex: 0 0 36%; order: -1; }
 .sn-site .h-film-bedankt video { aspect-ratio: 9 / 16; border-radius: 22px; border: 2px solid rgba(255,255,255,.24); box-shadow: 0 30px 80px rgba(0,0,0,.8), 0 0 50px rgba(37,211,102,.12); }
-.sn-site .h-hero-films > div::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,.22) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; }
-.sn-site .h-film-os::after { border-radius: 18px !important; }
-.sn-site .h-film-bedankt::after { border-radius: 22px !important; }
+.sn-site .h-film-os { flex: 1 1 auto; min-width: 0; }
+.sn-site .h-film-os video { aspect-ratio: 16 / 9; box-shadow: 0 30px 90px rgba(0,0,0,.6); }
+.sn-site .h-hero-films > div::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,.22) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; }
+.sn-site .h-film-os::after { border-radius: 18px; }
+.sn-site .h-film-bedankt::after { border-radius: 22px; }
 .sn-site .h-hero-films .h-hero-film-geluid { z-index: 3; }
 .sn-site .h-film-bedankt .h-hero-film-geluid { right: 12px; bottom: 12px; }
 @media (min-width: 1100px) { .sn-site .h-hero-films { width: 100%; } }
-@media (max-width: 1099px) { .sn-site .h-hero-films { margin-top: 28px; aspect-ratio: 100 / 88; } .sn-site .h-film-bedankt { width: 46%; } }
+@media (max-width: 1099px) { .sn-site .h-hero-films { margin-top: 28px; } }
+@media (max-width: 640px) { .sn-site .h-hero-films { flex-direction: column; gap: 18px; } .sn-site .h-film-bedankt { flex: none; width: min(100%, 340px); } .sn-site .h-film-os { width: 100%; } }
+/* Team bovenaan de tekstkolom, op de plek van het logo. */
+.sn-site .h-hero-tekst > .h-team-trust { margin: 0 0 6px !important; max-width: none !important; }
 
 /* De brief: het bedankje met foto en naam in één vlak. */
 .sn-site .h-brief { margin-top: 26px; padding: 22px 26px; max-width: 640px; border-radius: 20px; background: #0b0f12; border: 1px solid rgba(255,255,255,.1); }

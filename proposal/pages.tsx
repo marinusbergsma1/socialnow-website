@@ -120,30 +120,6 @@ function HeroFilm() {
   );
 }
 
-// 26 september 2026 (Marinus): de logo-animatie van de website en het OS bovenaan de hero. Speelt één keer
-// en blijft staan op het complete logo.
-function HeroLogo() {
-  const ref = React.useRef<HTMLVideoElement>(null);
-  const stop = () => {
-    const film = ref.current;
-    if (film && film.currentTime >= 3.4) film.pause();
-  };
-  return (
-    <video
-      ref={ref}
-      className="h-hero-logo"
-      src="/video/bedankt/logo-animatie.mp4"
-      autoPlay
-      muted
-      playsInline
-      preload="auto"
-      onTimeUpdate={stop}
-      onEnded={stop}
-      aria-label="SocialNow OS"
-    />
-  );
-}
-
 // 26 september 2026 (Marinus): "die andere taal en terug naar Engels om de 5 seconden, maar dan in het
 // gehele headervlak". De hele hero krijgt de getoonde taal; de echte taal van de pagina blijft staan.
 // Bij elke wissel faden de teksten zacht opnieuw in (h-taalfase a/b, zodat de animatie opnieuw start).
@@ -169,7 +145,8 @@ export function Home() {
           <div className="h-hero-tekst">
           {/* 26 september 2026 (Marinus): "op mijn header mag alle reclame weg". Geen stand, geen actie, geen
               tellers meer; een persoonlijk bedankje en één duidelijke login voor het gratis OS. */}
-          <HeroLogo />
+          {/* 26 september 2026 (Marinus): "SocialNow OS logo hoeft er niet bij, team er wel bij". */}
+          <TeamTrust />
           <HeroTitle />
           {/* 26 september 2026 (Marinus): versie A, "de brief". Het bedankje als briefje met foto en naam. */}
           <div className="h-brief">
@@ -200,7 +177,6 @@ export function Home() {
           {/* 26 september 2026 (Marinus): "de 4 Milo's terugzien", als strook onder kop en films. */}
           <HeroMilos />
           <div className="h-hero-rij">
-            <TeamTrust />
             <ClientLogos kort />
           </div>
         </div>
