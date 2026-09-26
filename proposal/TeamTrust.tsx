@@ -8,13 +8,13 @@ const VANDAAG = [
   { naam: "Steef", foto: "Steef-Komen.webp", groot: true },
   { naam: "Sergio", foto: "Sergio-Jovovic.webp" },
   { naam: "Marinus", foto: "Marinus-Bergsma-V2.webp", groot: true },
-  { naam: "Elian", foto: "Elian-Coellar.webp" },
+  { naam: "Elian", foto: "Elian-Coellar-2026-09-26.webp" },
 ];
 
 export default function TeamTrust() {
   return <Link to="/team" className="h-team-trust">
     <span className="h-team-portraits" aria-hidden="true">
-      {VANDAAG.map(p => <img key={p.naam} className={p.groot ? "is-groot" : undefined} src={`/images/${p.foto}`} alt="" width="56" height="56" loading="lazy" style={p.positie ? { objectPosition: p.positie } : undefined} />)}
+      {VANDAAG.map(p => <img key={p.naam} className={[p.groot && "is-groot", p.naam === "Sergio" && "is-sergio"].filter(Boolean).join(" ")} src={`/images/${p.foto}`} alt="" width="56" height="56" loading="lazy" />)}
     </span>
     <span>
       <em className="h-team-vandaag"><i aria-hidden="true" />Vandaag klaar om te helpen</em>

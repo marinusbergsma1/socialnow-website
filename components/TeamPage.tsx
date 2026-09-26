@@ -45,6 +45,7 @@ const crew: CrewMember[] = [
     line: 'Maakt merken die je niet kunt negeren.',
     color: '#F62961',
     image: `${BASE}images/Sergio-Jovovic.webp`,
+    imgCustomClass: '[&>img]:!scale-[1.3] group-hover:[&>img]:!scale-[1.38]',
   },
   {
     id: 4,

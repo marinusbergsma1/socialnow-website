@@ -30,7 +30,7 @@ export const people = [
   },
   { name: "Nick van Keulen", role: "Google Ads Expert", image: "Nick-VK.webp" },
   // 25 september 2026 (Marinus): nieuw teamlid.
-  { name: "Elian Coellar", role: "Head of Private Partnerships", image: "Elian-Coellar.webp" },
+  { name: "Elian Coellar", role: "Head of Private Partnerships", image: "Elian-Coellar-2026-09-26.webp" },
   {
     name: "Sid van Kalken",
     role: "Webdeveloper",

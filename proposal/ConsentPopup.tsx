@@ -118,7 +118,7 @@ const TEAM = ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen", "Elian Coel
 function Team({ language }: { language: Language }) {
   const t = PERSOONLIJK[language] || PERSOONLIJK.en;
   const rij = TEAM.map(p => (
-    <li key={p.name}><img src={`/images/${p.image}`} alt="" width="38" height="38" loading="lazy" /><span><strong>{p.name}</strong><small>{p.role}</small></span></li>
+    <li key={p.name}><img className={p.name === "Sergio Jovovic" ? "is-sergio" : undefined} src={`/images/${p.image}`} alt="" width="38" height="38" loading="lazy" /><span><strong>{p.name}</strong><small>{p.role}</small></span></li>
   ));
   return (
     <div className="sn-consent-team">
