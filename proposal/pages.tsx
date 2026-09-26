@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -78,6 +78,7 @@ function Founder() {
     </figure>
   );
 }
+// 26 september 2026 (Marinus): bedankvideo na de beurs (public/video/bedankt.mp4, valt terug op de explainer zolang die er niet is).
 // 25 september 2026 (Marinus): beursversie van de OS-explainer rechts in de hero. Speelt stil in een lus,
 // met één knop voor het geluid; de ondertiteling zit in de film zelf.
 function HeroFilm() {
@@ -90,23 +91,19 @@ function HeroFilm() {
     if (!geluid) { film.currentTime = 0; void film.play().catch(() => {}); }
     setGeluid(!geluid);
   };
-  const { websites, os } = useTellers();
   return (
     <div className="h-hero-film">
-      <div className="h-tellers">
-        <p><strong key={websites}><i />{websites}</strong><span>websites gemaakt op de beurs</span></p>
-        <p><strong key={os}><i />{os}</strong><span>gratis OS-gebruikers</span></p>
-      </div>
       <video
         ref={ref}
-        src="/video/os/os-booth-en.mp4"
+        src="/video/bedankt.mp4"
+        onError={(e) => { const f = e.currentTarget; if (!f.src.endsWith("os-booth-en.mp4")) f.src = "/video/os/os-booth-en.mp4"; }}
         poster="/video/os/os-booth-en.jpg"
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        aria-label="SocialNow OS explainer"
+        aria-label="Bedankt van het SocialNow team"
       />
       <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={geluid}>
         {geluid ? "Geluid uit" : "Geluid aan"}
@@ -137,60 +134,31 @@ export function Home() {
         </div>
         <div className="h-wrap h-hero-content">
           <div className="h-hero-tekst">
-          {/* 25 september 2026 (Marinus): standnummer als label, "Welkom!". */}
-          <p className="h-stand">
-            <span className="h-stand-nr">C21</span>
-            <b>Welkom!</b>
-            {/* 25 september 2026 (Marinus): "C21 WELCOME! groot, met het echte Odoo-logo en daarnaast PRODUCT". */}
-            <span className="h-stand-odoo" translate="no">
-              <svg viewBox="140 146 640 250" role="img" aria-label="Odoo">
-                <path fill="#8f8f8f" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
-                <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
-              </svg>
-              PRODUCT
-            </span>
-          </p>
-          <HeroTitle />
-          {/* 25 september 2026 (Marinus): "FREE! is niet goed uitgelegd". */}
-          <p className="h-hero-description">
-            <b>Waarom gratis?</b> Alleen vandaag en morgen, op stand C21. Geen kosten, geen abonnement.
-          </p>
-          {/* 24 september 2026 (Marinus): de gratis website is de hoofdroute, het OS een klein regeltje eronder. */}
+          {/* 26 september 2026 (Marinus): de beurs is over. Alle reclame uit de header; alleen een
+              duidelijke login voor het gratis OS en een bedankvideo. */}
+          <h1 className="h-login-kop sn-vhs-off" translate="no"><span className="k1">THANK YOU</span> <svg className="k2" viewBox="140 146 640 250" role="img" aria-label="Odoo">
+              <path fill="#fff" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
+              <path fill="#a0628f" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
+            </svg>
+          </h1>
+          <p className="h-hero-description"><b>{t("Drie dagen, honderden gesprekken, één geweldige beurs.")}</b> {t("Dank je wel voor je bezoek aan onze stand. Je gratis SocialNow OS staat voor je klaar, log in en ga meteen aan de slag.")}</p>
           <div className="os-entry">
             <div className="os-actions">
-              {/* 26 september 2026 (Marinus): pakket en demo gaan al automatisch via de websitescan, hier alleen inloggen. */}
-              <a className="os-claim os-login-groot sn-btn3d h-button" href="https://app.socialnow.nl/login/">
-                <span className="sn-btn3d-sheen" />
-                <span>{translate("LOG IN OP JOUW GRATIS MANAGEMENT SYSTEEM", getoond)}</span>
-                <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
+              <a className="h-login-knop" href="https://app.socialnow.nl/login/">
+                {t("Log in op je gratis OS")}
+                <ArrowUpRight size={20} aria-hidden="true" />
               </a>
             </div>
           </div>
           </div>
-          {/* 25 september 2026 (Marinus): de explainerfilm staat op de plek van de vier Milo's (beurspresentatie). */}
           <HeroFilm />
-          {/* 25 september 2026 (Marinus): alles in één scherm. Naast het team loopt de logobalk, daaronder
-              de vier onderdelen van het gratis pakket. De drie stappen zijn weg voor het overzicht. */}
           <div className="h-hero-rij">
             <TeamTrust />
             <ClientLogos kort />
           </div>
-          <HeroBalk paginaTaal={language} />
         </div>
       </section>
       </LanguageContext.Provider>
-      <div className="h-fair h-wrap">
-        <span>
-          <i /> 24–26 september · Odoo-beurs
-        </span>
-        <p>{t("Gratis website aanvragen. Stuur ons je gegevens via WhatsApp.")}</p>
-        <Link className="h-text-link" to="/gratis-website">
-          Claim je gratis website <ArrowUpRight size={17} />
-        </Link>
-        <a className="h-text-link" href={CLAIM_URL}>
-          {t("Vraag gratis OS-demo aan")} <ArrowUpRight size={17} />
-        </a>
-      </div>
       <ShowcaseFilms />
       <section className="h-section h-wrap" id="het-os">
         <Heading

@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
-// 26 september 2026 (Marinus): wie er vandaag klaarstaat, met daaronder klein de link naar het hele team.
+// 26 september 2026 (Marinus): na de beurs gewoon het team, niet meer live.
+// Eerder: wie er vandaag klaarstaat, met daaronder klein de link naar het hele team.
 // De foto's staan hier los van de teamlijst. Steef en Marinus blijven het grootst.
 const VANDAAG = [
   { naam: "Steef", foto: "Steef-Komen.webp", groot: true },
@@ -17,7 +18,7 @@ export default function TeamTrust() {
       {VANDAAG.map(p => <img key={p.naam} className={[p.groot && "is-groot", p.naam === "Sergio" && "is-sergio"].filter(Boolean).join(" ")} src={`/images/${p.foto}`} alt="" width="56" height="56" loading="lazy" />)}
     </span>
     <span>
-      <em className="h-team-vandaag"><i aria-hidden="true" />Vandaag klaar om te helpen</em>
+      <em className="h-team-vandaag">Het team achter SocialNow</em>
       <strong>Steef, Sergio, Marinus en Elian</strong>
       <span>Bekijk het hele team <ArrowUpRight size={13} aria-hidden="true" /></span>
     </span>
