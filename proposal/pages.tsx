@@ -172,11 +172,6 @@ export function Home() {
                 <ArrowUpRight size={20} aria-hidden="true" />
               </a>
             </div>
-            <p className="h-login-uitleg">Nog geen account? Met dezelfde knop start je gratis, in één minuut.</p>
-            <p className="h-volg">
-              <a href="https://www.linkedin.com/company/socialnow-nl/" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a href="https://www.instagram.com/socialnow.nl/" target="_blank" rel="noreferrer">Instagram</a>
-            </p>
           </div>
           </div>
           <HeroFilm />
