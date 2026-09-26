@@ -69,13 +69,13 @@ const KLAAR: Record<Language, { website: string; osKop: string }> = {
   it: { website: "Richiedi il sito gratis", osKop: "Oppure prova il nostro OS personale gratuito" },
   es: { website: "Consigue tu web gratis", osKop: "O prueba nuestro OS personal gratis" },
 };
-const MARINUS_KAART: Record<Language, { label: string; text: string }> = {
-  nl: { label: "Jouw persoonlijke contact", text: "Marinus helpt je persoonlijk verder na je aanvraag." },
-  en: { label: "Your personal contact", text: "Marinus will personally help you after your request." },
-  de: { label: "Ihr persönlicher Kontakt", text: "Marinus hilft Ihnen nach Ihrer Anfrage persönlich weiter." },
-  fr: { label: "Votre contact personnel", text: "Marinus vous aidera personnellement après votre demande." },
-  it: { label: "Il tuo contatto personale", text: "Marinus ti aiuterà personalmente dopo la richiesta." },
-  es: { label: "Tu contacto personal", text: "Marinus te ayudará personalmente después de tu solicitud." },
+const MARINUS_KAART: Record<Language, { label: string; text: string; team: string }> = {
+  nl: { label: "Jouw persoonlijke contact", text: "Marinus helpt je persoonlijk verder na je aanvraag.", team: "Met een team achter je" },
+  en: { label: "Your personal contact", text: "Marinus will personally help you after your request.", team: "A team ready to help" },
+  de: { label: "Ihr persönlicher Kontakt", text: "Marinus hilft Ihnen nach Ihrer Anfrage persönlich weiter.", team: "Ein Team an Ihrer Seite" },
+  fr: { label: "Votre contact personnel", text: "Marinus vous aidera personnellement après votre demande.", team: "Une équipe à vos côtés" },
+  it: { label: "Il tuo contatto personale", text: "Marinus ti aiuterà personalmente dopo la richiesta.", team: "Un team al tuo fianco" },
+  es: { label: "Tu contacto personal", text: "Marinus te ayudará personalmente después de tu solicitud.", team: "Un equipo a tu lado" },
 };
 export function actieLoopt(): boolean { return Date.now() <= Date.parse(`${ACTIE_TOT}T23:59:59+02:00`); }
 
@@ -238,6 +238,17 @@ export default function ConsentPopup() {
               <p>{MARINUS_KAART[language].text}</p>
             </div>
           </aside>
+          <div className="sn-consent-team" aria-label={MARINUS_KAART[language].team}>
+            <span className="sn-consent-team-fotos" aria-hidden="true">
+              {[
+                ["Steef Komen", "Steef-Komen.webp"],
+                ["Sergio Jovovic", "Sergio-Jovovic.webp"],
+                ["Elian Coellar", "Elian-Coellar.webp"],
+                ["Nick van Keulen", "Nick-VK.webp"],
+              ].map(([naam, foto]) => <img key={naam} src={`/images/${foto}`} alt="" width="32" height="32" loading="lazy" />)}
+            </span>
+            <span>{MARINUS_KAART[language].team}</span>
+          </div>
           {juridisch}
         </form>
       </div>
