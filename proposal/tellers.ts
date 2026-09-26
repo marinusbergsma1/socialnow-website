@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
 
-// 25 september 2026 (Marinus): boven de film twee tellers die optellen. "Bij een nieuwe update moet het
-// aantal niet veranderen": de stand hangt daarom niet meer af van het moment dat de pagina laadt, maar
-// van een vast startmoment. Iedereen ziet hetzelfde getal en na een herlaadbeurt of nieuwe versie telt
-// het gewoon door. Websites: één per 45 minuten. Gratis OS-gebruikers: gemiddeld één per 40 seconden,
-// met een vaste, per stap wisselende tussentijd zodat het natuurlijk oogt.
-const START = Date.parse("2026-09-25T15:40:00Z");
-const WEBSITES_START = 6;
-const OS_START = 277;
+// Stand vanaf 26 september 2026, 08:21 in Nederland. Het vaste startmoment houdt de
+// tellers gelijk voor alle bezoekers en laat ze na een herlaadbeurt doorlopen.
+const START = Date.parse("2026-09-26T06:21:00Z");
+const WEBSITES_START = 10;
+const OS_START = 400;
 
 function osNa(ms: number) {
-  // Elke stap duurt 20 tot 60 seconden; de duur volgt uit het stapnummer, dus is overal gelijk.
+  // Elke stap duurt 60 tot 120 seconden; de duur volgt uit het stapnummer.
   let n = 0;
   let t = 0;
   while (true) {
-    const stap = 20000 + (((n * 2654435761) >>> 0) % 40000);
+    const stap = 60000 + (((n * 2654435761) >>> 0) % 60000);
     if (t + stap > ms) return n;
     t += stap;
     n++;
@@ -23,7 +20,7 @@ function osNa(ms: number) {
 
 function stand() {
   const ms = Math.max(0, Date.now() - START);
-  return { websites: WEBSITES_START + Math.floor(ms / (45 * 60 * 1000)), os: OS_START + osNa(ms) };
+  return { websites: WEBSITES_START + Math.floor(ms / (2 * 60 * 60 * 1000)), os: OS_START + osNa(ms) };
 }
 
 export function useTellers() {
