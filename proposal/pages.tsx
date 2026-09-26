@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
   ArrowDown,
@@ -16,6 +16,7 @@ import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import { useTaalwissel } from "./taalwissel";
+import HeroBalk from "./HeroBalk";
 import TeamTrust from "./TeamTrust";
 import { AuditTeaser } from "./AuditPage";
 import CustomerReviews from "./CustomerReviews";
@@ -79,70 +80,6 @@ function Founder() {
 }
 // 25 september 2026 (Marinus): beursversie van de OS-explainer rechts in de hero. Speelt stil in een lus,
 // met één knop voor het geluid; de ondertiteling zit in de film zelf.
-const GOOGLE_ADS = (
-  <svg className="h-pakket-ads" viewBox="0 0 24 24" aria-hidden="true">
-    <path fill="#FBBC04" d="M7.514 4.844 1.565 15.148A4.5 4.5 0 0 1 4 14.43c2.56-.008 4.625 2.158 4.494 4.715l3.217-5.572-3.61-6.25a3.96 3.96 0 0 1-.587-2.479z" />
-    <path fill="#4285F4" d="M23.464 16.929 15.463 3.072A4 4 0 0 0 8.534 7.072l8.001 13.857a4 4 0 0 0 6.929-4z" />
-    <circle cx="4" cy="18.93" r="4" fill="#34A853" />
-  </svg>
-);
-const PAKKET: [React.ReactNode, string, string][] = [
-  [null, "Branding", "€1.500"],
-  [null, "Website", "€3.500"],
-  [GOOGLE_ADS, "Google Ads audit", "€750"],
-  [null, "SocialNow OS", "€99/m"],
-];
-function HeroPakket() {
-  return (
-    <Link className="h-pakket" to="/gratis-website" aria-label="Claim je gratis pakket">
-      {PAKKET.map(([icoon, naam, prijs]) => (
-        <span className="h-pakket-tegel" key={naam}>
-          <b>{icoon}{naam}</b>
-          <span className="h-pakket-prijs"><s>{prijs}</s><em>€0</em></span>
-        </span>
-      ))}
-    </Link>
-  );
-}
-
-
-const BANNER_MESSAGES = [
-  { first: "HUMAN CREATIVITY", accent: "POWERED BY AI TECHNOLOGY", icon: "✦" },
-  { first: "BECAUSE MANAGING A BUSINESS", accent: "SHOULDN’T BE COMPLICATED" },
-  { first: "5 YEARS OF EXPERIENCE!", accent: "BUILT WITH REAL PEOPLE" },
-  { first: "COMBINING ODOO WITH YOUR", accent: "CONTENT AND ADVERTISEMENTS" },
-  { first: "CREATE YOUR OWN ADS", accent: "STAY IN CONTROL" },
-  { first: "AUTOMATIONS WITH A", accent: "REAL TEAM READY TO HELP" },
-  { first: "AUTOMATIONS MADE", accent: "SECURE", icon: "🔒" },
-];
-const BANNER_NL: Record<string, string> = {
- "HUMAN CREATIVITY": "MENSELIJKE CREATIVITEIT", "POWERED BY AI TECHNOLOGY": "VERSTERKT DOOR AI-TECHNOLOGIE",
- "BECAUSE MANAGING A BUSINESS": "WANT EEN BEDRIJF RUNNEN", "SHOULDN’T BE COMPLICATED": "HOEFT NIET INGEWIKKELD TE ZIJN",
- "5 YEARS OF EXPERIENCE!": "5 JAAR ERVARING!", "BUILT WITH REAL PEOPLE": "GEMAAKT MET ECHTE MENSEN",
- "COMBINING ODOO WITH YOUR": "ODOO GECOMBINEERD MET JE", "CONTENT AND ADVERTISEMENTS": "CONTENT EN ADVERTENTIES",
- "CREATE YOUR OWN ADS": "MAAK JE EIGEN ADVERTENTIES", "STAY IN CONTROL": "HOU DE REGIE",
- "AUTOMATIONS WITH A": "AUTOMATISERINGEN MET EEN", "REAL TEAM READY TO HELP": "ECHT TEAM DAT KLAARSTAAT",
- "AUTOMATIONS MADE": "AUTOMATISERINGEN DIE", "SECURE": "VEILIG ZIJN",
-};
-function bannerText(text: string, language: import("./i18n/context").Language) {
- return language === "nl" ? BANNER_NL[text] || text : translate(text, language);
-}
-function AnimatedBanner({ displayLanguage }: { displayLanguage: import("./i18n/context").Language }) {
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(() => { if (!document.hidden) setIndex((i) => (i + 1) % BANNER_MESSAGES.length); }, 5000);
-    return () => window.clearInterval(id);
-  }, []);
-  const message = BANNER_MESSAGES[index];
-  const words = [...bannerText(message.first, displayLanguage).split(" ").map((word) => ({ word, accent: false })), ...bannerText(message.accent, displayLanguage).split(" ").map((word) => ({ word, accent: true }))];
-  return <div className="h-animated-banner" role="status" aria-live="off" aria-label={`${bannerText(message.first, displayLanguage)} ${bannerText(message.accent, displayLanguage)}`}>
-    <div className="h-animated-banner-line" key={`${index}-${displayLanguage}`} aria-hidden="true">
-      {message.icon && <span className="h-animated-banner-icon">{message.icon}</span>}
-      {words.map(({ word, accent }, i) => <span className={`h-animated-banner-word${accent ? " is-accent" : ""}`} style={{ animationDelay: `${i * 55}ms` }} key={`${i}-${word}`}><span>{word}</span></span>)}
-    </div>
-  </div>;
-}
 function HeroFilm() {
   const [geluid, setGeluid] = useState(false);
   const ref = React.useRef<HTMLVideoElement>(null);
@@ -178,12 +115,23 @@ function HeroFilm() {
   );
 }
 
+// 26 september 2026 (Marinus): "die andere taal en terug naar Engels om de 5 seconden, maar dan in het
+// gehele headervlak". De hele hero krijgt de getoonde taal; de echte taal van de pagina blijft staan.
+// Bij elke wissel faden de teksten zacht opnieuw in (h-taalfase a/b, zodat de animatie opnieuw start).
+function useTaalfase(getoond: string) {
+  const fase = React.useRef({ taal: getoond, n: 0 });
+  if (fase.current.taal !== getoond) fase.current = { taal: getoond, n: fase.current.n + 1 };
+  return fase.current.n === 0 ? undefined : fase.current.n % 2 ? "a" : "b";
+}
+
 export function Home() {
   const { language, t } = useLanguage();
-  const displayLanguage = useTaalwissel(language);
+  const getoond = useTaalwissel(language);
+  const taalfase = useTaalfase(getoond);
   return (
     <>
-      <LanguageContext.Provider value={displayLanguage}><section className="h-hero" id="home">
+      <LanguageContext.Provider value={getoond}>
+      <section className="h-hero" id="home" data-taalfase={taalfase}>
         <div className="h-hero-background">
           <BrandGlobe />
         </div>
@@ -217,7 +165,7 @@ export function Home() {
               </Link>
               <a className="os-install sn-btn3d h-button h-button-secondary h-os-tweede" href={CLAIM_URL}>
                 <span className="sn-btn3d-sheen" />
-                <span>{translate("Vraag gratis OS-demo aan", displayLanguage)}</span>
+                <span>{translate("Vraag gratis OS-demo aan", getoond)}</span>
                 <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
               </a>
             </div>
@@ -231,10 +179,10 @@ export function Home() {
             <TeamTrust />
             <ClientLogos kort />
           </div>
-          <HeroPakket />
-          <AnimatedBanner displayLanguage={displayLanguage} />
+          <HeroBalk paginaTaal={language} />
         </div>
-      </section></LanguageContext.Provider>
+      </section>
+      </LanguageContext.Provider>
       <div className="h-fair h-wrap">
         <span>
           <i /> 24–26 september · Odoo-beurs
