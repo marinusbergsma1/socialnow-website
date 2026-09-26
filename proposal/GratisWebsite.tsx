@@ -32,18 +32,17 @@ export default function GratisWebsite() {
   const procent = Math.round((gevuld / (VRAGEN.length + 5)) * 100);
   const verstuur = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!g.voornaam.trim()) { setFout(t("Vul je naam in.")); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(g.email.trim())) { setFout(t("Dat e-mailadres klopt nog niet.")); return; }
-    if (g.mobiel.replace(/\D/g, "").length < 8) { setFout(t("Vul je telefoonnummer in, dan bellen we je.")); return; }
-    if (!g.bedrijf.trim() && !(a.website || "").trim()) { setFout(t("Vul je bedrijfsnaam of je website in.")); return; }
+    if (!g.voornaam.trim() || !g.achternaam.trim()) { setFout("Vul je voor- en achternaam in."); return; }
+    if (!g.bedrijf.trim()) { setFout("Vul je bedrijfsnaam in."); return; }
+    if (g.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(g.email.trim())) { setFout(t("Dat e-mailadres klopt nog niet.")); return; }
     setFout("");
     const velden: [string, string][] = [
-      ["Voornaam", g.voornaam], ["Achternaam", g.achternaam], ["Bedrijfsnaam", g.bedrijf],
+      ["Naam", `${g.voornaam.trim()} ${g.achternaam.trim()}`], ["Bedrijf", g.bedrijf],
       ["E-mailadres", g.email], ["Telefoonnummer", g.mobiel],
       ...VRAGEN.map((v): [string, string] => [v.vraag, a[v.key] || ""]),
     ];
     const bericht = [
-      "Hoi Marinus, ik wil graag mijn persoonlijke website samen met jou maken op de beurs.", "",
+      "Hoi Marinus, wij willen graag een website laten maken, live op de Odoo-beurs.", "",
       ...velden.filter(([, waarde]) => waarde.trim()).map(([vraag, waarde]) => `${vraag}: ${waarde.trim()}`),
     ].join("\n");
     window.location.href = `${WHATSAPP}?text=${encodeURIComponent(bericht)}`;
@@ -57,18 +56,18 @@ export default function GratisWebsite() {
   );
   return <div className="gw"><div className="gw-sheet">
     <p className="gw-eyebrow"><i className="gw-stipjes"><b /><b /><b /></i>Gratis website / Odoo Experience, stand C21</p>
-    <h1>Jouw website. <span className="gw-accent">Persoonlijk gemaakt op de beurs.</span></h1>
-    <p className="gw-lead">Vertel me over je bedrijf en wat je mooi vindt. Ik lees je antwoorden zelf en maak je nieuwe website samen met jou, live op de beurs.</p>
-    <ul className="gw-beloftes"><li><Check size={15} /> In jouw stijl, voor jouw bedrijf</li><li><Check size={15} /> Direct contact met Marinus</li><li><Check size={15} /> Samen live aan de slag op stand C21</li></ul>
-    <a className="gw-contactpil" href={`${WHATSAPP}?text=${encodeURIComponent("Hoi Marinus, ik heb een vraag over de persoonlijke website op de beurs.")}`} target="_blank" rel="noopener noreferrer">
-      <img className="gw-contact-avatar" src="/images/Marinus-Bergsma-V2.webp" alt="" width="48" height="48" /><span className="gw-contact-tekst"><strong>Marinus Bergsma</strong><small>Vragen? Neem persoonlijk contact op</small></span><MessageCircle size={19} aria-hidden="true" />
+    <h1>Wij maken jouw website <span className="gw-accent">live op de Odoo-beurs.</span></h1>
+    <p className="gw-lead">Vertel ons over je bedrijf en wat je mooi vindt. Wij lezen je antwoorden zelf en maken een website die echt bij je past, samen met jou op stand C21.</p>
+    <ul className="gw-beloftes"><li><Check size={15} /> Persoonlijk gemaakt voor jouw bedrijf</li><li><Check size={15} /> Direct contact met Marinus</li><li><Check size={15} /> Live gebouwd op de Odoo-beurs</li></ul>
+    <a className="gw-contactpil" href={`${WHATSAPP}?text=${encodeURIComponent("Hoi Marinus, ik heb een vraag over de websites die jullie live maken op de Odoo-beurs.")}`} target="_blank" rel="noopener noreferrer">
+      <img className="gw-contact-avatar" src="/images/marinus-profiel-blauw.webp" alt="" width="48" height="48" /><span className="gw-contact-tekst"><strong>Marinus Bergsma</strong><small>Vragen? Neem persoonlijk contact op</small></span><MessageCircle size={19} aria-hidden="true" />
     </a>
     <div className="gw-progress" aria-label={t("Voortgang")}><div className="gw-bar"><div className="gw-fill" style={{ width: `${procent}%` }} /></div><div className="gw-meta"><span><i className="gw-dot" />Automatisch bewaard</span><span>{procent}%</span></div></div>
     <form onSubmit={verstuur} noValidate>
       <section className="gw-sec"><div className="gw-sec-head"><span className="gw-num">01</span><h2>Jij</h2></div><div className="gw-card">
-        <div className="gw-rij"><label className="gw-fld" htmlFor="gw-voornaam"><span className="gw-l">Voornaam</span><input id="gw-voornaam" autoComplete="given-name" maxLength={40} value={g.voornaam} onChange={(e) => setG({ ...g, voornaam: e.target.value })} /></label><label className="gw-fld" htmlFor="gw-achternaam"><span className="gw-l">Achternaam</span><input id="gw-achternaam" autoComplete="family-name" maxLength={40} value={g.achternaam} onChange={(e) => setG({ ...g, achternaam: e.target.value })} /></label></div>
+        <div className="gw-rij"><label className="gw-fld" htmlFor="gw-voornaam"><span className="gw-l">Voornaam *</span><input id="gw-voornaam" autoComplete="given-name" maxLength={40} required value={g.voornaam} onChange={(e) => setG({ ...g, voornaam: e.target.value })} /></label><label className="gw-fld" htmlFor="gw-achternaam"><span className="gw-l">Achternaam *</span><input id="gw-achternaam" autoComplete="family-name" maxLength={40} required value={g.achternaam} onChange={(e) => setG({ ...g, achternaam: e.target.value })} /></label></div>
         <div className="gw-rij"><label className="gw-fld" htmlFor="gw-email"><span className="gw-l">E-mailadres</span><input id="gw-email" type="email" autoComplete="email" inputMode="email" maxLength={254} value={g.email} onChange={(e) => setG({ ...g, email: e.target.value })} /></label><label className="gw-fld" htmlFor="gw-mobiel"><span className="gw-l">Telefoonnummer</span><input id="gw-mobiel" type="tel" autoComplete="tel" inputMode="tel" maxLength={30} value={g.mobiel} onChange={(e) => setG({ ...g, mobiel: e.target.value })} /></label></div>
-        <label className="gw-fld" htmlFor="gw-bedrijf"><span className="gw-l">Bedrijfsnaam</span><input id="gw-bedrijf" autoComplete="organization" maxLength={120} value={g.bedrijf} onChange={(e) => setG({ ...g, bedrijf: e.target.value })} /></label>
+        <label className="gw-fld" htmlFor="gw-bedrijf"><span className="gw-l">Bedrijfsnaam *</span><input id="gw-bedrijf" autoComplete="organization" maxLength={120} required value={g.bedrijf} onChange={(e) => setG({ ...g, bedrijf: e.target.value })} /></label>
       </div></section>
       <section className="gw-sec"><div className="gw-sec-head"><span className="gw-num">02</span><h2>Jouw website</h2></div><div className="gw-card"><div className="gw-rij">{VRAGEN.slice(0, 2).map(veld)}</div>{VRAGEN.slice(2).map(veld)}</div>
         <p className="gw-juridisch">Je aanvraag opent WhatsApp met al je ingevulde antwoorden. Verstuur het bericht daar zelf naar Marinus. Lees ons <a href="/privacy/">privacybeleid</a>.</p>
