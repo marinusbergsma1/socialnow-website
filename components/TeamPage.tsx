@@ -18,7 +18,7 @@ const founder = {
   role: 'Founder & Creative Art Director',
   tag: 'FOUNDER_OS',
   color: '#F7E644',
-  image: `${BASE}images/Marinus-Bergsma-V2.webp`,
+  image: `${BASE}images/marinus-profiel-blauw.webp`,
   quote:
     '"Ik startte SocialNow met één overtuiging: de beste merken worden gebouwd door mensen die technologie omarmen, niet vrezen."',
   sub:

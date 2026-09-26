@@ -23,7 +23,7 @@ const team: TeamItem[] = [
     name: "Marinus Bergsma", 
     role: "Founder & Creative Art Director", 
     specialRole: true,
-    image: `${import.meta.env.BASE_URL}images/Marinus-Bergsma-V2.webp` 
+    image: `${import.meta.env.BASE_URL}images/marinus-profiel-blauw.webp` 
   },
   { 
     id: 2, 

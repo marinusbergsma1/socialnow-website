@@ -2734,3 +2734,13 @@ html {
 .sn-site .h-hero-odoo svg { height: clamp(34px, 2.8vw, 46px); width: auto; }
 /* 26 september 2026 (Marinus): "geen scanlines op de video". */
 .sn-site .h-film-vak::after { content: none; }
+
+/* 26 september 2026 (Marinus): "team mag ook nog iets groter". */
+.sn-site .h-hero-tekst > .h-team-trust { gap: 20px; }
+.sn-site .h-hero-tekst .h-team-portraits img { width: 62px; height: 62px; margin-left: -12px; border-width: 3px; }
+.sn-site .h-hero-tekst .h-team-portraits img:first-child { margin-left: 0; }
+.sn-site .h-hero-tekst .h-team-portraits img.is-groot { width: 80px; height: 80px; }
+.sn-site .h-hero-tekst .h-team-trust strong { font-size: clamp(18px, 1.35vw, 22px); font-weight: 600; }
+.sn-site .h-hero-tekst .h-team-trust > span:last-child > span { font-size: 16px; }
+@media (max-width: 640px) { .sn-site .h-hero-tekst .h-team-portraits img { width: 48px; height: 48px; } .sn-site .h-hero-tekst .h-team-portraits img.is-groot { width: 60px; height: 60px; } }
+.sn-site .h-hero-tekst .h-team-trust strong { white-space: nowrap; }

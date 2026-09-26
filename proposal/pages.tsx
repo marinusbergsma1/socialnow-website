@@ -48,7 +48,7 @@ function Founder() {
     <figure className="h-founder">
       <div className="h-founder-image">
         <img
-          src="/images/Marinus-Bergsma-V2.webp"
+          src="/images/marinus-profiel-blauw.webp"
           alt="Marinus Bergsma, oprichter van SocialNow"
           width="640"
           height="680"
@@ -168,7 +168,7 @@ export function Home() {
               maken we bekend op LinkedIn en Instagram.
             </p>
             <div className="h-brief-onder">
-              <img src="/images/Marinus-Bergsma-V2.webp" alt="" width="56" height="56" />
+              <img src="/images/marinus-profiel-blauw.webp" alt="" width="56" height="56" />
               <p><strong>Marinus Bergsma</strong><span>en het SocialNow-team</span></p>
             </div>
           </div>

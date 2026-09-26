@@ -109,7 +109,7 @@ const PERSOONLIJK: Record<Language, { badge: string; kop: string; regel: string 
   fr: { badge: "PERSONNEL", kop: "Marinus et Steef", regel: "Votre WhatsApp nous arrive directement. Pas de centre d'appels, pas de bot." },
 };
 const DUO = [
-  { naam: "Marinus", rol: "Founder", foto: "Marinus-Bergsma-V2.webp" },
+  { naam: "Marinus", rol: "Founder", foto: "marinus-profiel-blauw.webp" },
   { naam: "Steef", rol: "Partner", foto: "Steef-Komen.webp" },
 ];
 const TEAM = ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen", "Elian Coellar", "Sid van Kalken", "Carmel Boon", "Sam van der Sluis", "Emma Peperkamp"]

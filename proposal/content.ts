@@ -5,7 +5,7 @@ export const people = [
   {
     name: "Marinus Bergsma",
     role: "Founder & Creative Art Director",
-    image: "Marinus-Bergsma-V2.webp",
+    image: "marinus-profiel-blauw.webp",
   },
   { name: "Jos Hollenberg", role: "Meta Ads", image: "Jos-Hollenberg-1.webp" },
   {
