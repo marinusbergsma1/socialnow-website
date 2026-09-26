@@ -25,6 +25,8 @@ import {
 } from "./pages";
 import { AuditPage } from "./AuditPage";
 import GratisWebsite from "./GratisWebsite";
+import GratisOsDemo from "./GratisOsDemo";
+import AntwoordPagina from "./AntwoordPagina";
 import LogoIntro from "./LogoIntro";
 import QrOsWelcome from "./QrOsWelcome";
 import BrandFooter from "./BrandFooter";
@@ -80,7 +82,7 @@ function ProposalShell() {
       project?.title ||
       post?.title ||
       nav.find(([path]) => path === location.pathname)?.[1] ||
-      (location.pathname.startsWith("/gratis-website") ? "Gratis website-upgrade" : "Probeer SocialNow OS");
+      (location.pathname.startsWith("/antwoord-aanvragen") ? "Antwoord op aanvragen" : location.pathname.startsWith("/gratis-website") ? "Gratis website aanvragen" : location.pathname.startsWith("/gratis-os-demo") ? "Gratis OS-demo" : "Probeer SocialNow OS");
     const description =
       project?.description ||
       post?.excerpt ||
@@ -123,6 +125,7 @@ function ProposalShell() {
     window.addEventListener("keydown", close);
     return () => window.removeEventListener("keydown", close);
   }, [menuOpen]);
+  if (location.pathname.replace(/\/+$/, "") === "/antwoord-aanvragen") return <div className="sn-site" data-style="signature"><main id="inhoud"><AntwoordPagina /></main></div>;
   return (
     <div className="sn-site" data-style="signature">
       <LogoIntro onComplete={() => setIntroDone(true)} />
@@ -199,6 +202,8 @@ function ProposalShell() {
           <Route path="/team" element={<TeamPage />} />
           <Route path="/audit" element={<AuditPage />} />
           <Route path="/gratis-website" element={<GratisWebsite />} />
+          <Route path="/gratis-os-demo" element={<GratisOsDemo />} />
+          <Route path="/antwoord-aanvragen" element={<AntwoordPagina />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route

@@ -25,7 +25,9 @@ const routeMeta = {
   prijzen: {title: 'Aanbod — Probeer het OS & Custom OS | SocialNow', description: 'Probeer het OS. Voor jouw Custom OS maken we een persoonlijk voorstel met een duidelijke scope, kosten en begeleiding.'},
   privacy: {title: 'Privacybeleid | SocialNow', description: 'Lees hoe SocialNow omgaat met persoonsgegevens en welke rechten je hebt.'},
   voorwaarden: {title: 'Algemene voorwaarden | SocialNow', description: 'De algemene voorwaarden van SocialNow, inclusief het gebruik van SocialNow OS.'},
-  'gratis-website': {title: 'Gratis website-upgrade | SocialNow', description: 'Vul de korte onboarding in, wij bellen je en je ziet je nieuwe website dezelfde dag. Gratis.'},
+  'gratis-website': {title: 'Gratis website aanvragen | SocialNow', description: 'Vraag je gratis website aan via WhatsApp. Je gegevens staan alvast in het bericht.'},
+  'gratis-os-demo': {title: 'Gratis OS-demo | SocialNow', description: 'Vraag een gratis demo van SocialNow OS aan via WhatsApp met je naam en e-mailadres.'},
+  'antwoord-aanvragen': {title: 'Antwoord op aanvragen | SocialNow', description: 'Persoonlijke antwoordpagina voor aanvragen via WhatsApp.'},
   audit: {title: 'Gratis Google Ads audit | SocialNow', description: 'Nick van Keulen loopt je Google Ads handmatig door: tracking, structuur, biedstrategie en productfeed. Met actieplan en videocall. Gratis.'},
   team: {title: 'Team — De mensen achter het OS | SocialNow', description: 'Maak kennis met Marinus Bergsma en de creatieve en technische specialisten achter SocialNow.'},
   blog: {title: 'Blog — Vanuit de praktijk | SocialNow', description: 'Inzichten over websites, AI, content en vindbaarheid vanuit het werk van SocialNow.'},
@@ -50,6 +52,8 @@ const crumbLabels = {
   voorwaarden: 'Algemene voorwaarden',
   team: 'Team',
   'gratis-website': 'Gratis website-upgrade',
+  'gratis-os-demo': 'Gratis OS-demo',
+  'antwoord-aanvragen': 'Antwoord op aanvragen',
   audit: 'Gratis Google Ads audit',
   blog: 'Blog',
   juridisch: 'Juridisch en compliance',
@@ -80,6 +84,8 @@ for (const [route, meta] of Object.entries(routeMeta)) {
     .replace(/(<meta\s+property="og:url"\s+content=")[^"]*(")/, `$1${url}$2`)
     .replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/, `$1${title}$2`)
     .replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/, `$1${desc}$2`);
+
+  if (route === 'antwoord-aanvragen') out = out.replace('</head>', '  <meta name="robots" content="noindex, nofollow" />\n</head>');
 
   // BreadcrumbList (GEO/SEO): Home > <route> — helpt Google breadcrumb-rich-results
   // en geeft AI-antwoordmachines de sitehiërarchie. Vóór </body> ingevoegd.
@@ -306,7 +312,7 @@ function buildDate() {
 
 const sitemapUrls = [
   { loc: `${BASE}/`, changefreq: 'weekly', priority: '1.0' },
-  ...Object.keys(routeMeta).map((route) => ({
+  ...Object.keys(routeMeta).filter((route) => route !== 'antwoord-aanvragen').map((route) => ({
     loc: `${BASE}/${route}`,
     ...(routeSitemapMeta[route] || { changefreq: 'monthly', priority: '0.7' }),
   })),

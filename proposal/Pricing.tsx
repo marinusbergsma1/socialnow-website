@@ -2,12 +2,14 @@ import React from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Action } from "./ui";
 import { actieLoopt } from "./ConsentPopup";
+import { CLAIM_URL } from "./os-entry";
+import { useLanguage } from "./i18n/context";
 import "./pricing.css";
 
 // 23 september 2026 (Marinus): gratis starten is het grote verhaal, de prijzen staan klein en
 // helder eronder. Elk maandpakket heeft een custom OS; vanaf drie maanden hoort de complete
 // website erbij. Het team per pakket is een rij rondjes die uitklapt.
-const PROBEER_URL = "https://app.socialnow.nl/login/?bron=prijzen";
+const PROBEER_URL = CLAIM_URL;
 
 type Lid = { naam: string; rol: string; foto: string };
 const TEAM: Record<string, Lid> = {
@@ -209,6 +211,7 @@ function Kaart({ pakket, breed = false }: { pakket: Pakket; breed?: boolean }) {
 }
 
 export default function Pricing() {
+  const { t } = useLanguage();
   const actie = actieLoopt();
   return (
     <div className="prijs h-wrap">
@@ -226,16 +229,16 @@ export default function Pricing() {
             <p className="prijs-echt">
               Helemaal gratis. <em>Echt waar.</em>
             </p>
-            <p className="prijs-lead">Waar anderen duizenden euro’s voor vragen, betaal jij €0. Wij bouwen je demowebsite en rebranding, en je eigen OS draait vandaag al op je eigen data. Daarna beslis jij.</p>
+            <p className="prijs-lead">{t("Waar anderen duizenden euro’s voor vragen, betaal jij €0. Vraag de gratis demowebsite en OS-demo aan; daarna bespreken we samen de volgende stap.")}</p>
             <div className="prijs-knoppen">
               <a className="os-claim sn-btn3d h-button" href={PROBEER_URL}>
                 <span className="sn-btn3d-sheen" />
-                <span>Probeer het OS</span>
+                <span>{t("Vraag gratis OS-demo aan")}</span>
                 <span className="h-button-icon">
                   <ArrowRight size={16} aria-hidden="true" />
                 </span>
               </a>
-              <Action to={`/contact?onderwerp=${encodeURIComponent("Gratis demowebsite")}`} secondary>
+              <Action to="/gratis-website" secondary>
                 Gratis demowebsite aanvragen
               </Action>
             </div>
@@ -269,7 +272,7 @@ export default function Pricing() {
           <div className="prijs-inhoud-kop">
             <h2>Dit zit al in je gratis OS</h2>
             <a className="prijs-link" href={PROBEER_URL}>
-              <span translate="no">app.socialnow.nl</span>
+              <span>{t("Vraag gratis OS-demo aan")}</span>
               <ArrowRight size={15} aria-hidden="true" />
             </a>
           </div>

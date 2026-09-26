@@ -140,6 +140,7 @@ function HeroFilm() {
 }
 
 export function Home() {
+  const { t } = useLanguage();
   return (
     <>
       <section className="h-hero" id="home">
@@ -176,7 +177,7 @@ export function Home() {
               </Link>
               <a className="os-install sn-btn3d h-button h-button-secondary h-os-tweede" href={CLAIM_URL}>
                 <span className="sn-btn3d-sheen" />
-                <span>Probeer ons gratis persoonlijke OS</span>
+                <span>{t("Vraag gratis OS-demo aan")}</span>
                 <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
               </a>
             </div>
@@ -197,12 +198,12 @@ export function Home() {
         <span>
           <i /> 24–26 september · Odoo-beurs
         </span>
-        <p>Gratis website-upgrade. Vandaag aangevraagd, vandaag live op stand C21.</p>
+        <p>{t("Gratis website aanvragen. Stuur ons je gegevens via WhatsApp.")}</p>
         <Link className="h-text-link" to="/gratis-website">
           Claim je gratis website <ArrowUpRight size={17} />
         </Link>
         <a className="h-text-link" href={CLAIM_URL}>
-          Probeer ons gratis persoonlijke OS <ArrowUpRight size={17} />
+          {t("Vraag gratis OS-demo aan")} <ArrowUpRight size={17} />
         </a>
       </div>
       <ShowcaseFilms />
@@ -337,6 +338,7 @@ export function Home() {
   );
 }
 export function OsPage() {
+  const { t } = useLanguage();
   return (
     <>
       <PageHeading
@@ -371,13 +373,12 @@ export function OsPage() {
         <ol className="h-steps">
           <li>
             <span>01</span>
-            <h3>Probeer het OS.</h3>
+            <h3>{t("Vraag een OS-demo aan.")}</h3>
             <p>
-              Maak je bedrijfsomgeving aan en doorloop de stappen Bedrijf, Odoo
-              en Meta.
+              {t("Stuur ons je naam en e-mailadres via WhatsApp. We bespreken daarna de demo.")}
             </p>
             <a className="h-text-link" href={CLAIM_URL}>
-              Probeer het OS
+              {t("Vraag gratis OS-demo aan")}
               <ArrowUpRight size={16} />
             </a>
           </li>
