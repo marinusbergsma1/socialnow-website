@@ -10,7 +10,7 @@ type Gegevens = { voornaam: string; achternaam: string; bedrijf: string; email: 
 type Vraag = { key: string; vraag: string; hint: string; type?: "text" };
 const LEEG: Gegevens = { voornaam: "", achternaam: "", bedrijf: "", email: "", mobiel: "" };
 const VRAGEN: Vraag[] = [
-  { key: "website", vraag: "Huidige website", hint: "Plak de link. Leeg laten als je nog geen site hebt.", type: "text" },
+  { key: "website", vraag: "Huidige website (optioneel)", hint: "Plak de link. Leeg laten als je nog geen site hebt.", type: "text" },
   { key: "voorbeeld", vraag: "Een website die je mega mooi vindt", hint: "Plak de link. Mag uit elke branche komen.", type: "text" },
   { key: "wat", vraag: "Wat doet je bedrijf, in één zin?", hint: "Bijvoorbeeld: wij installeren zonnepanelen voor bedrijven in de regio Utrecht." },
   { key: "nietgoed", vraag: "Wat zou je graag anders willen aan je website?", hint: "Vertel wat je mist of wat beter bij jouw bedrijf mag passen." },
