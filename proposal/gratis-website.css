@@ -23,7 +23,14 @@
 .gw-beloftes { list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-wrap: wrap; gap: 10px 22px; }
 .gw-beloftes li { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; font-size: 14.5px; color: #fff; }
 .gw-beloftes svg { color: var(--gw-groen); }
-.gw-progress { position: sticky; top: 64px; z-index: 5; margin-top: 44px; padding: 16px 0 14px; background: linear-gradient(180deg, #06101e 0, rgba(6,16,30,.92) 62%, transparent 100%); }
+.gw-contactpil { display: inline-flex; align-items: center; gap: 13px; margin-top: 28px; padding: 8px 16px 8px 8px; border: 1px solid rgba(37,211,102,.42); border-radius: 999px; background: rgba(37,211,102,.09); color: #fff; text-decoration: none; transition: background .2s, border-color .2s, transform .2s; }
+.gw-contactpil:hover, .gw-contactpil:focus-visible { background: rgba(37,211,102,.18); border-color: #25d366; transform: translateY(-2px); }
+.gw-contact-avatar { width: 48px; height: 48px; flex: none; border-radius: 50%; object-fit: cover; object-position: center 30%; }
+.gw-contact-tekst { display: grid; line-height: 1.25; }
+.gw-contact-tekst strong { font-size: 14px; }
+.gw-contact-tekst small { margin-top: 3px; font-size: 12px; color: var(--gw-muted); }
+.gw-contactpil > svg { margin-left: 8px; color: #25d366; flex: none; }
+.gw-progress { position: sticky; top: 64px; z-index: 5; margin-top: 32px; padding: 16px 0 14px; background: linear-gradient(180deg, #06101e 0, rgba(6,16,30,.92) 62%, transparent 100%); }
 .gw-bar { height: 4px; border-radius: 4px; background: rgba(255,255,255,.08); overflow: hidden; }
 .gw-fill { height: 100%; background: linear-gradient(90deg, #1a9d4c, var(--gw-groen)); box-shadow: 0 0 14px rgba(37,211,102,.55); transition: width .45s cubic-bezier(.2,.7,.3,1); }
 .gw-meta { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; letter-spacing: .04em; color: var(--gw-muted); }
