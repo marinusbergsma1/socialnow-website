@@ -2440,8 +2440,8 @@ html {
 /* 26 september 2026 (Marinus): de balk onder de hero toont zinnen die woord voor woord omhoog komen, het
    deel tussen sterretjes veegt daarna groen. Eindstand is gewoon groene tekst (text-fill), zodat er nooit
    een witte letter achterblijft als de veeg klaar is. */
-.sn-site .h-balk { position: relative; display: flex; align-items: center; justify-content: center; min-height: 70px; margin-top: 24px; padding: 14px 22px; border-radius: 14px; border: 1px solid #ffffff1a; background: #0b0e12; overflow: hidden; }
-.sn-site .h-balk-zin { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: .36em; margin: 0; font-size: clamp(16px, 1.1vw, 20px); font-weight: 800; line-height: 1.2; letter-spacing: .06em; text-transform: uppercase; color: #f5f5f5; text-align: center; }
+.sn-site .h-balk { position: relative; display: flex; align-items: center; justify-content: center; min-height: 100px; margin-top: 24px; padding: 20px 28px; border-radius: 16px; border: 1px solid #ffffff1a; background: #0b0e12; overflow: hidden; }
+.sn-site .h-balk-zin { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: .36em; margin: 0; font-size: clamp(19px, 1.5vw, 27px); font-weight: 800; line-height: 1.2; letter-spacing: .06em; text-transform: uppercase; color: #f5f5f5; text-align: center; }
 .sn-site .h-balk-w { display: inline-flex; overflow: hidden; padding: .12em 0; }
 .sn-site .h-balk-w > span { display: inline-flex; align-items: center; animation: h-balk-op .8s cubic-bezier(.16,1,.3,1) var(--d) both; }
 .sn-site .h-balk-w.is-groen > span { background: linear-gradient(90deg, #25d366 0 50%, #f5f5f5 50% 100%) 0 0 / 200% 100% no-repeat; -webkit-background-clip: text; background-clip: text; color: #25d366; -webkit-text-fill-color: #25d366; animation: h-balk-op .8s cubic-bezier(.16,1,.3,1) var(--d) both, h-balk-groen .7s cubic-bezier(.65,0,.35,1) var(--s) backwards; }
@@ -2467,7 +2467,7 @@ html {
   .sn-site .h-hero-rij { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 40px; }
   .sn-site .h-balk { grid-column: 1 / -1; }
 }
-@media (max-width: 800px) { .sn-site .h-balk { min-height: 64px; padding: 14px 16px; } .sn-site .h-balk-zin { font-size: 14px; letter-spacing: .05em; } }
+@media (max-width: 800px) { .sn-site .h-balk { min-height: 108px; padding: 16px 16px; } .sn-site .h-balk-zin { font-size: 17px; letter-spacing: .05em; } }
 @media (prefers-reduced-motion: reduce) { .sn-site .h-tellers strong, .sn-site .h-tellers strong i { animation: none; } }
 
 /* 25 september 2026 (Marinus): ontwerp C. GRATIS weer in het groene vlak, recht, met gloed en af en toe
@@ -2580,3 +2580,10 @@ html {
 /* 25 september 2026 (Marinus): iets meer ruimte tussen de regels van de kop. */
 .sn-site .h-hero .h-hero-tekst h1.h-taalwissel, .sn-site .h-hero .h-hero-tekst h1.h-taalwissel > span { line-height: 1.24; }
 
+/* 26 september 2026 (Marinus): regel boven de namen, met een groene stip dat het team vandaag klaarstaat */
+.sn-site .h-team-vandaag { display: flex; align-items: center; gap: 7px; font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #76e7a2; }
+.sn-site .h-team-vandaag i { width: 6px; height: 6px; border-radius: 50%; background: #25d366; box-shadow: 0 0 10px #25d3669c; animation: h-team-stip 2.4s ease-in-out infinite; }
+@keyframes h-team-stip { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-team-vandaag i { animation: none; } }
+@media (min-width: 1100px) { .sn-site .h-hero-rij .h-team-vandaag { font-size: 11px; } }
+@media (max-width: 800px) { .sn-site .h-team-vandaag { letter-spacing: .08em; } }
