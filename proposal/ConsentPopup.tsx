@@ -3,6 +3,7 @@ import "./consent-duo.css";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage, languagePrefix, type Language } from "./i18n/context";
 import { LEGAL_VERSION } from "../components/legal";
+import { aanvraagWhatsApp } from "./aanvragen";
 
 // 16 september 2026 (Marinus): de landingspopup. Eén keer bij binnenkomst: kom je voor de demo of
 // wil je de website bekijken, kies je land, en met die keuze ga je akkoord met de voorwaarden en het
@@ -13,9 +14,7 @@ import { LEGAL_VERSION } from "../components/legal";
 //
 // TEKSTEN: alles wat een bezoeker leest staat hieronder per taal; pas het hier aan.
 const SLEUTEL = "sn-akkoord";
-// 16 september 2026 (Marinus): wie op de demo klikt, komt in het OS terecht. Via de inlog, die na
-// het inloggen naar het OS zelf gaat (/), en niet via /start/.
-const DEMO_URL = "https://app.socialnow.nl/login/";
+// De aanvraag gaat naar WhatsApp. De bezoeker verzendt het concept daar zelf.
 
 export const LANDEN: { code: string; naam: string; vlag: string; taal: Language }[] = [
   { code: "NL", naam: "Nederland", vlag: "🇳🇱", taal: "nl" },
@@ -50,16 +49,15 @@ const ACTIE_TOT = "2026-09-26";
 // op de flyer. Taggen: SocialNow.nl en Komen Consultancy, zoals op de beurs. 24 september 2026 (Marinus): de post
 // gaat op LinkedIn ("plaatsen op Linkedin en SocialNow taggen en Komen Consultancy taggen"); regels versie 1.2 in de app.
 // 24 september 2026 (Marinus): voor de tweede beursdag gaat de popup over de gratis website-upgrade,
-// niet meer over het OS. Wie zijn gegevens achterlaat, wordt gebeld en ziet zijn nieuwe site nog
-// dezelfde dag live op de beurs. De winactie (custom OS) blijft in de regels van de app bestaan.
+// niet meer over het OS. De aanvraag opent nu rechtstreeks als concept in WhatsApp.
 type Actie = { badge: string; kop: string; win: string; bedrag: string; regel: string };
 const ACTIE: Record<Language, Actie> = {
-  nl: { badge: "GRATIS", kop: "Branding, website, Google Ads audit en OS.", win: "Wij bellen je en presenteren je nieuwe site", bedrag: "live op de beurs.", regel: "Dezelfde dag inzien en gebruiken. Odoo Experience, stand C21." },
-  en: { badge: "FREE", kop: "Branding, website, Google Ads audit and OS.", win: "We call you and present your new website", bedrag: "live at the fair.", regel: "See it and use it the same day. Odoo Experience, booth C21." },
-  de: { badge: "KOSTENLOS", kop: "Branding, Website, Google Ads Audit und OS.", win: "Wir rufen Sie an und präsentieren Ihre neue Website", bedrag: "live auf der Messe.", regel: "Noch am selben Tag ansehen und nutzen. Odoo Experience, Stand C21." },
-  fr: { badge: "GRATUIT", kop: "Branding, site web, audit Google Ads et OS.", win: "Nous vous appelons et présentons votre nouveau site", bedrag: "en direct au salon.", regel: "À voir et à utiliser le jour même. Odoo Experience, stand C21." },
-  it: { badge: "GRATIS", kop: "Branding, sito, audit Google Ads e OS.", win: "Ti chiamiamo e presentiamo il tuo nuovo sito", bedrag: "dal vivo in fiera.", regel: "Da vedere e usare lo stesso giorno. Odoo Experience, stand C21." },
-  es: { badge: "GRATIS", kop: "Branding, web, auditoría de Google Ads y OS.", win: "Te llamamos y presentamos tu nueva web", bedrag: "en directo en la feria.", regel: "Para verla y usarla el mismo día. Odoo Experience, stand C21." },
+  nl: { badge: "GRATIS", kop: "Branding, website, Google Ads audit en OS.", win: "Vraag je gratis website aan via WhatsApp", bedrag: "met een persoonlijk bericht.", regel: "Je kunt je bericht voor het versturen aanpassen." },
+  en: { badge: "FREE", kop: "Branding, website, Google Ads audit and OS.", win: "Request your free website via WhatsApp", bedrag: "with a personal message.", regel: "You can edit your message before sending." },
+  de: { badge: "KOSTENLOS", kop: "Branding, Website, Google Ads Audit und OS.", win: "Fragen Sie Ihre kostenlose Website per WhatsApp an", bedrag: "mit einer persönlichen Nachricht.", regel: "Sie können Ihre Nachricht vor dem Senden bearbeiten." },
+  fr: { badge: "GRATUIT", kop: "Branding, site web, audit Google Ads et OS.", win: "Demandez votre site gratuit via WhatsApp", bedrag: "avec un message personnel.", regel: "Vous pouvez modifier votre message avant de l’envoyer." },
+  it: { badge: "GRATIS", kop: "Branding, sito, audit Google Ads e OS.", win: "Richiedi il tuo sito gratis su WhatsApp", bedrag: "con un messaggio personale.", regel: "Puoi modificare il messaggio prima di inviarlo." },
+  es: { badge: "GRATIS", kop: "Branding, web, auditoría de Google Ads y OS.", win: "Solicita tu web gratis por WhatsApp", bedrag: "con un mensaje personal.", regel: "Puedes editar el mensaje antes de enviarlo." },
 };
 // 25 september 2026 (Marinus): de kop noemt het hele gratis pakket, net als de hero.
 // De website-knop links en de kop boven het OS-formulier rechts: de site en het OS en/en.
@@ -73,30 +71,28 @@ const KLAAR: Record<Language, { website: string; osKop: string }> = {
 };
 export function actieLoopt(): boolean { return Date.now() <= Date.parse(`${ACTIE_TOT}T23:59:59+02:00`); }
 
-type Gegevens = { kop: string; uitleg: string; naam: string; email: string; tel: string; optioneel: string; meten: string; verder: string; terug: string; foutNaam: string; foutEmail: string; bezig: string };
+type Gegevens = { email: string; terug: string; foutNaam: string; foutEmail: string };
 const GEGEVENS: Record<Language, Gegevens> = {
-  nl: { kop: "Bijna binnen.", uitleg: "Laat je gegevens achter, dan kunnen we je later helpen.", naam: "Naam", email: "E-mail", tel: "Telefoon", optioneel: "optioneel", meten: "Ja, jullie mogen meten hoe ik het OS gebruik, om het beter te maken.", verder: "Probeer het OS gratis", terug: "Terug", foutNaam: "Vul je naam in.", foutEmail: "Dat e-mailadres klopt nog niet.", bezig: "Even geduld…" },
-  en: { kop: "Almost there.", uitleg: "Leave your details so we can help you later.", naam: "Name", email: "E-mail", tel: "Phone", optioneel: "optional", meten: "Yes, you may measure how I use the OS, to make it better.", verder: "Try the free personal OS", terug: "Back", foutNaam: "Please enter your name.", foutEmail: "That e-mail address doesn't look right yet.", bezig: "One moment…" },
-  de: { kop: "Fast geschafft.", uitleg: "Hinterlassen Sie Ihre Daten, dann können wir Ihnen später helfen.", naam: "Name", email: "E-Mail", tel: "Telefon", optioneel: "optional", meten: "Ja, Sie dürfen messen, wie ich das OS nutze, um es besser zu machen.", verder: "OS kostenlos testen", terug: "Zurück", foutNaam: "Bitte geben Sie Ihren Namen ein.", foutEmail: "Diese E-Mail-Adresse stimmt noch nicht.", bezig: "Einen Moment…" },
-  fr: { kop: "Vous y \u00eates presque.", uitleg: "Laissez vos coordonnées pour que nous puissions vous aider plus tard.", naam: "Nom", email: "E-mail", tel: "Téléphone", optioneel: "facultatif", meten: "Oui, vous pouvez mesurer mon utilisation de l’OS pour l’améliorer.", verder: "Essayer l\u2019OS", terug: "Retour", foutNaam: "Indiquez votre nom.", foutEmail: "Cette adresse e-mail n’est pas encore correcte.", bezig: "Un instant…" },
-  it: { kop: "Ci siamo quasi.", uitleg: "Lascia i tuoi dati, così potremo aiutarti in seguito.", naam: "Nome", email: "E-mail", tel: "Telefono", optioneel: "facoltativo", meten: "Sì, potete misurare come uso l’OS, per migliorarlo.", verder: "Provi l\u2019OS", terug: "Indietro", foutNaam: "Inserisci il tuo nome.", foutEmail: "Questo indirizzo e-mail non è ancora corretto.", bezig: "Un attimo…" },
-  es: { kop: "Ya casi est\u00e1s.", uitleg: "Déjanos tus datos para que podamos ayudarte más adelante.", naam: "Nombre", email: "E-mail", tel: "Teléfono", optioneel: "opcional", meten: "Sí, podéis medir cómo uso el OS para mejorarlo.", verder: "Prueba el OS gratis", terug: "Atrás", foutNaam: "Escribe tu nombre.", foutEmail: "Ese e-mail todavía no es correcto.", bezig: "Un momento…" },
+  nl: { email: "E-mail", terug: "Terug", foutNaam: "Vul je voornaam en achternaam in.", foutEmail: "Dat e-mailadres klopt nog niet." },
+  en: { email: "E-mail", terug: "Back", foutNaam: "Enter your first and last name.", foutEmail: "That e-mail address doesn't look right yet." },
+  de: { email: "E-Mail", terug: "Zurück", foutNaam: "Bitte geben Sie Vor- und Nachnamen ein.", foutEmail: "Diese E-Mail-Adresse stimmt noch nicht." },
+  fr: { email: "E-mail", terug: "Retour", foutNaam: "Indiquez votre prénom et votre nom.", foutEmail: "Cette adresse e-mail n’est pas encore correcte." },
+  it: { email: "E-mail", terug: "Indietro", foutNaam: "Inserisci nome e cognome.", foutEmail: "Questo indirizzo e-mail non è ancora corretto." },
+  es: { email: "E-mail", terug: "Atrás", foutNaam: "Escribe tu nombre y apellido.", foutEmail: "Ese e-mail todavía no es correcto." },
 };
-const AANMELD_URL = "https://os.socialnow.nl/api/aanmelden";
 const TEKST: Record<Language, Tekst> = {
-  nl: { kop: "Welkom bij SocialNow.", land: "Je land", demo: "Probeer het OS gratis", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies op de website; in het OS meten we alleen met jouw toestemming.", intro: "Een betere website, gratis. Laat je gegevens achter, wij bellen je.", stap1: "Waar zit je?", stap2: "Je gegevens", volgende: "Volgende", phNaam: "Je naam", phEmail: "jij@bedrijf.nl" },
-  en: { kop: "Welcome to SocialNow.", land: "Your country", demo: "Try the free personal OS", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies on the website; in the OS we only measure with your consent.", intro: "A better website, for free. Leave your details and we will call you.", stap1: "Where are you based?", stap2: "Your details", volgende: "Next", phNaam: "Your name", phEmail: "you@company.com" },
-  de: { kop: "Willkommen bei SocialNow.", land: "Ihr Land", demo: "OS kostenlos testen", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies auf der Website; im OS messen wir nur mit Ihrer Zustimmung.", intro: "Eine bessere Website, kostenlos. Hinterlassen Sie Ihre Daten, wir rufen Sie an.", stap1: "Wo sind Sie ansässig?", stap2: "Ihre Daten", volgende: "Weiter", phNaam: "Ihr Name", phEmail: "sie@firma.de" },
-  fr: { kop: "Bienvenue chez SocialNow.", land: "Votre pays", demo: "Essayer l\u2019OS", site: "Découvrir le site", voor: "En essayant l’OS ou en découvrant le site, vous acceptez nos ", voorwaarden: "conditions générales", en: " et notre ", privacy: "politique de confidentialité", na: ". Pas de cookies de suivi sur le site ; dans l’OS, nous ne mesurons qu’avec votre accord.", intro: "Votre propre OS, à essayer gratuitement. Deux étapes et vous y êtes.", stap1: "Où êtes-vous basé ?", stap2: "Vos coordonnées", volgende: "Suivant", phNaam: "Votre nom", phEmail: "vous@entreprise.fr" },
-  it: { kop: "Benvenuto in SocialNow.", land: "Il tuo paese", demo: "Provi l\u2019OS", site: "Esplora il sito", voor: "Provando l’OS o esplorando il sito, accetti i nostri ", voorwaarden: "termini di servizio", en: " e la nostra ", privacy: "informativa sulla privacy", na: ". Nessun cookie di tracciamento sul sito; nell’OS misuriamo solo con il tuo consenso.", intro: "Il tuo OS, da provare gratis. Due passi e sei dentro.", stap1: "Dove hai sede?", stap2: "I tuoi dati", volgende: "Avanti", phNaam: "Il tuo nome", phEmail: "tu@azienda.it" },
-  es: { kop: "Bienvenido a SocialNow.", land: "Tu país", demo: "Prueba el OS gratis", site: "Ver la web", voor: "Al probar el OS o ver la web, aceptas nuestros ", voorwaarden: "términos de servicio", en: " y nuestra ", privacy: "política de privacidad", na: ". Sin cookies de seguimiento en la web; en el OS solo medimos con tu consentimiento.", intro: "Una web mejor, gratis. Déjanos tus datos y te llamamos.", stap1: "¿Dónde está tu empresa?", stap2: "Tus datos", volgende: "Siguiente", phNaam: "Tu nombre", phEmail: "tu@empresa.es" },
+  nl: { kop: "Welkom bij SocialNow.", land: "Je land", demo: "Probeer het OS gratis", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies op de website; in het OS meten we alleen met jouw toestemming.", intro: "Vraag een gratis website of OS-demo aan via WhatsApp.", stap1: "Waar zit je?", stap2: "Je gegevens", volgende: "Volgende", phNaam: "Je naam", phEmail: "jij@bedrijf.nl" },
+  en: { kop: "Welcome to SocialNow.", land: "Your country", demo: "Try the free personal OS", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies on the website; in the OS we only measure with your consent.", intro: "Request a free website or OS demo through WhatsApp.", stap1: "Where are you based?", stap2: "Your details", volgende: "Next", phNaam: "Your name", phEmail: "you@company.com" },
+  de: { kop: "Willkommen bei SocialNow.", land: "Ihr Land", demo: "OS kostenlos testen", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies auf der Website; im OS messen wir nur mit Ihrer Zustimmung.", intro: "Fragen Sie eine kostenlose Website oder OS-Demo per WhatsApp an.", stap1: "Wo sind Sie ansässig?", stap2: "Ihre Daten", volgende: "Weiter", phNaam: "Ihr Name", phEmail: "sie@firma.de" },
+  fr: { kop: "Bienvenue chez SocialNow.", land: "Votre pays", demo: "Essayer l\u2019OS", site: "Découvrir le site", voor: "En essayant l’OS ou en découvrant le site, vous acceptez nos ", voorwaarden: "conditions générales", en: " et notre ", privacy: "politique de confidentialité", na: ". Pas de cookies de suivi sur le site ; dans l’OS, nous ne mesurons qu’avec votre accord.", intro: "Demandez un site ou une démo OS gratuite via WhatsApp.", stap1: "Où êtes-vous basé ?", stap2: "Vos coordonnées", volgende: "Suivant", phNaam: "Votre nom", phEmail: "vous@entreprise.fr" },
+  it: { kop: "Benvenuto in SocialNow.", land: "Il tuo paese", demo: "Provi l\u2019OS", site: "Esplora il sito", voor: "Provando l’OS o esplorando il sito, accetti i nostri ", voorwaarden: "termini di servizio", en: " e la nostra ", privacy: "informativa sulla privacy", na: ". Nessun cookie di tracciamento sul sito; nell’OS misuriamo solo con il tuo consenso.", intro: "Richiedi un sito o una demo OS gratuita via WhatsApp.", stap1: "Dove hai sede?", stap2: "I tuoi dati", volgende: "Avanti", phNaam: "Il tuo nome", phEmail: "tu@azienda.it" },
+  es: { kop: "Bienvenido a SocialNow.", land: "Tu país", demo: "Prueba el OS gratis", site: "Ver la web", voor: "Al probar el OS o ver la web, aceptas nuestros ", voorwaarden: "términos de servicio", en: " y nuestra ", privacy: "política de privacidad", na: ". Sin cookies de seguimiento en la web; en el OS solo medimos con tu consentimiento.", intro: "Solicita una web o una demo OS gratis por WhatsApp.", stap1: "¿Dónde está tu empresa?", stap2: "Tus datos", volgende: "Siguiente", phNaam: "Tu nombre", phEmail: "tu@empresa.es" },
 };
 
 function bewaard(): boolean { try { return localStorage.getItem(SLEUTEL) === LEGAL_VERSION; } catch { return false; } }
 function landUitBrowser(): string {
   try { const m = document.cookie.match(/(?:^|;\s*)sn-land=([A-Z]{2})/); if (m && LANDEN.some(l => l.code === m[1])) return m[1]; } catch {}
-  const regio = (navigator.language || "").split("-")[1]?.toUpperCase() || "";
-  return LANDEN.some(l => l.code === regio) ? regio : "NL";
+  return "GB";
 }
 // Cookies voor het hele domein, zodat app.socialnow.nl dezelfde taal en hetzelfde land ziet.
 function zetCookies(land: string, taal: Language) {
@@ -108,13 +104,6 @@ function zetCookies(land: string, taal: Language) {
   } catch {}
 }
 
-function zetMeten(ja: boolean) {
-  try {
-    const domein = location.hostname.endsWith("socialnow.nl") ? "; Domain=.socialnow.nl" : "";
-    const veilig = location.protocol === "https:" ? "; Secure" : "";
-    document.cookie = `sn-meten=${ja ? "ja" : "nee"}; Path=/; Max-Age=31536000; SameSite=Lax${domein}${veilig}`;
-  } catch {}
-}
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 // 22 september 2026 (Marinus): de knoppen zijn dezelfde knop als "Discover the story" op
@@ -134,13 +123,12 @@ export default function ConsentPopup() {
   const { language } = useLanguage();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [land, setLand] = useState("NL");
+  const [land, setLand] = useState("GB");
   const [stap, setStap] = useState<"keuze" | "gegevens">("keuze");
-  const [naam, setNaam] = useState("");
+  const [voornaam, setVoornaam] = useState("");
+  const [achternaam, setAchternaam] = useState("");
   const [email, setEmail] = useState("");
-  const [tel, setTel] = useState("");
   const [fout, setFout] = useState("");
-  const [bezig, setBezig] = useState(false);
   const naamVeld = useRef<HTMLInputElement>(null);
   useEffect(() => { if (stap === "gegevens") naamVeld.current?.focus({ preventScroll: true }); }, [stap]);
   useEffect(() => { setOpen(!bewaard()); setLand(landUitBrowser()); }, []);
@@ -155,37 +143,25 @@ export default function ConsentPopup() {
   // Dat is precies het scherm waar hij niet hoort, want het akkoord verwijst ernaar.
   const k = KLAAR[language] || KLAAR.en;
   const pad = (location.pathname.replace(/^\/(nl|de|fr|it|es)(?=\/|$)/, "").replace(/\/+$/, "")) || "/";
-  const leest = JURIDISCH.includes(pad);
+  const leest = JURIDISCH.includes(pad) || pad === "/antwoord-aanvragen";
   if (!open || leest) return null;
-  const gekozen = LANDEN.find(l => l.code === land) || LANDEN[0];
+  const gekozen = LANDEN.find(l => l.code === land) || LANDEN.find(l => l.code === "GB")!;
   const s = TEKST[language] || TEKST.en;
   const a = ACTIE[language] || ACTIE.en;
   const kiesLand = (code: string) => {
-    const l = LANDEN.find(x => x.code === code) || LANDEN[0]; setLand(l.code); zetCookies(l.code, l.taal);
+    const l = LANDEN.find(x => x.code === code) || LANDEN.find(x => x.code === "GB")!; setLand(l.code); zetCookies(l.code, l.taal);
     // De taal van de site hangt aan de route; een volledige herlading zet alles (kop, menu, popup) in de nieuwe taal.
     if (l.taal !== language) { const rest = location.pathname.replace(/^\/(nl|de|fr|it|es)(?=\/|$)/, ""); window.location.assign(`${languagePrefix(l.taal)}${rest || "/"}${location.search}`); }
   };
   const akkoord = () => { try { localStorage.setItem(SLEUTEL, LEGAL_VERSION); } catch {} zetCookies(gekozen.code, gekozen.taal); setOpen(false); };
   const g = GEGEVENS[language] || GEGEVENS.en;
   const naarWebsite = () => { akkoord(); window.location.href = `${languagePrefix(gekozen.taal)}/gratis-website/`; };
-  const naarDemo = () => { akkoord(); zetMeten(true); window.location.href = `${DEMO_URL}?bron=demo&taal=${gekozen.taal}&land=${gekozen.code}`; };
-  // Versturen mag de demo nooit tegenhouden: alleen een fout in de eigen invoer houdt iemand hier.
-  const verstuur = async (e: React.FormEvent) => {
+  const naarDemo = () => { akkoord(); window.location.href = aanvraagWhatsApp("os", gekozen.taal, { voornaam, achternaam, email }); };
+  const verstuur = (e: React.FormEvent) => {
     e.preventDefault();
-    if (bezig) return;
-    const n = naam.trim(), m = email.trim();
-    if (!n) { setFout(g.foutNaam); return; }
-    if (!EMAIL.test(m)) { setFout(g.foutEmail); return; }
-    setFout(""); setBezig(true);
-    try {
-      const r = await fetch(AANMELD_URL, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bron: "demo", naam: n, email: m, mobiel: tel.trim(), land: gekozen.code, taal: gekozen.taal, meten: true, voorwaarden: LEGAL_VERSION }),
-        signal: AbortSignal.timeout(6000),
-      });
-      if (r.status === 400) { const j = await r.json().catch(() => null); setFout(String(j?.error || g.foutEmail)); setBezig(false); return; }
-    } catch {}
-    naarDemo();
+    if (!voornaam.trim() || !achternaam.trim()) { setFout(g.foutNaam); return; }
+    if (!EMAIL.test(email.trim())) { setFout(g.foutEmail); return; }
+    setFout(""); naarDemo();
   };
   // 23 september 2026 (Marinus): de twee stappen naast elkaar. Links waar je zit en de winactie,
   // rechts je gegevens en de knop naar het OS. Op de telefoon zijn het twee korte stappen met
@@ -230,20 +206,20 @@ export default function ConsentPopup() {
           <p className="sn-consent-os-kop">{k.osKop}</p>
           <p className="sn-consent-stap"><i>2</i>{s.stap2}</p>
           <label className="sn-consent-land">
-            <span>{g.naam}</span>
-            <input ref={naamVeld} type="text" autoComplete="name" required maxLength={80} placeholder={s.phNaam} value={naam} onChange={e => setNaam(e.target.value)} />
+            <span>{({nl:"Voornaam",en:"First name",de:"Vorname",fr:"Prénom",it:"Nome",es:"Nombre"} as Record<Language,string>)[language]}</span>
+            <input ref={naamVeld} type="text" autoComplete="given-name" required maxLength={80} placeholder={s.phNaam} value={voornaam} onChange={e => setVoornaam(e.target.value)} />
+          </label>
+          <label className="sn-consent-land">
+            <span>{({nl:"Achternaam",en:"Last name",de:"Nachname",fr:"Nom",it:"Cognome",es:"Apellido"} as Record<Language,string>)[language]}</span>
+            <input type="text" autoComplete="family-name" required maxLength={80} value={achternaam} onChange={e => setAchternaam(e.target.value)} />
           </label>
           <label className="sn-consent-land">
             <span>{g.email}</span>
             <input type="email" autoComplete="email" inputMode="email" required maxLength={254} placeholder={s.phEmail} value={email} onChange={e => setEmail(e.target.value)} />
           </label>
-          <label className="sn-consent-land">
-            <span>{g.tel} <em>({g.optioneel})</em></span>
-            <input type="tel" autoComplete="tel" inputMode="tel" maxLength={30} value={tel} onChange={e => setTel(e.target.value)} />
-          </label>
           {fout ? <p className="sn-consent-fout" role="alert">{fout}</p> : null}
           <div className="sn-consent-knoppen">
-            <button type="submit" className="sn-consent-knop" disabled={bezig}><span className="sn-consent-glans" aria-hidden="true" /><span>{bezig ? g.bezig : s.demo}</span><Pijl /></button>
+            <button type="submit" className="sn-consent-knop"><span className="sn-consent-glans" aria-hidden="true" /><span>{({nl:"Vraag je gratis OS-demo aan via WhatsApp",en:"Request your free OS demo via WhatsApp",de:"Kostenlose OS-Demo per WhatsApp anfragen",fr:"Demander une démo gratuite via WhatsApp",it:"Richiedi una demo gratuita su WhatsApp",es:"Solicita una demo gratis por WhatsApp"} as Record<Language,string>)[language]}</span><Pijl /></button>
             <button type="button" className="sn-consent-knop sn-consent-knop-stil sn-consent-alleen-mobiel" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span></button>
           </div>
           {juridisch}

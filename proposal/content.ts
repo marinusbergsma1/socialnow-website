@@ -1,4 +1,5 @@
 import { allProjects, webShowcaseProjects } from "../data/projects";
+import { CLAIM_URL } from "./os-entry";
 export const projects = [...webShowcaseProjects, ...allProjects];
 export const people = [
   {
@@ -185,8 +186,8 @@ export const prices = [
       "Begin met je eigen Odoo en Meta",
     ],
     color: "#25D366",
-    action: "Probeer het OS",
-    href: "https://app.socialnow.nl/login/?bron=site",
+    action: "Vraag gratis OS-demo aan",
+    href: CLAIM_URL,
     featured: true,
   },
   {

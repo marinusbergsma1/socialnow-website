@@ -58,7 +58,6 @@ function useHoogteVolgt<T extends HTMLElement>(getoond: string) {
 
 export function HeroTitle() {
   const { language } = useLanguage();
-  // 25 september 2026 (Marinus): de taalwissel staat uit; de kop blijft in de taal van de pagina.
   const getoond = language;
   const kopRef = useHoogteVolgt<HTMLHeadingElement>(getoond);
   const winRef = useHoogteVolgt<HTMLAnchorElement>(getoond);

@@ -1,7 +1,9 @@
 import React, { useEffect, useId, useState } from "react";
 import { ArrowRight, Download, Star } from "lucide-react";
+import { useLanguage } from "./i18n/context";
 
-export const CLAIM_URL = "https://app.socialnow.nl/login/?bron=site";
+const taalPad = typeof window === "undefined" ? "" : (window.location.pathname.match(/^\/(nl|de|fr|it|es)(?=\/|$)/)?.[0] || "");
+export const CLAIM_URL = `${taalPad}/gratis-os-demo/`;
 export const INSTALL_URL = "https://app.socialnow.nl/?bron=installatie";
 export const REVIEWS_URL = "https://maps.google.com/?cid=1427063718057754123";
 export type OsStand =
@@ -83,6 +85,7 @@ export function OsProof({ stand }: { stand: OsStand | null }) {
 }
 
 export default function OsEntry({showProof = true}:{showProof?:boolean}) {
+  const { t } = useLanguage();
   const [stand, setStand] = useState<OsStand | null>(null);
   const [installOpen, setInstallOpen] = useState(false);
   const [hint, setHint] = useState("");
@@ -138,7 +141,7 @@ export default function OsEntry({showProof = true}:{showProof?:boolean}) {
       <div className="os-actions">
         <a className="os-claim sn-btn3d h-button" href={CLAIM_URL}>
           <span className="sn-btn3d-sheen" />
-          <span>Probeer het OS</span>
+          <span>{t("Vraag gratis OS-demo aan")}</span>
           <span className="h-button-icon">
             <ArrowRight size={16} aria-hidden="true" />
           </span>

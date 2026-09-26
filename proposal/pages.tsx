@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
   ArrowDown,
@@ -14,7 +14,8 @@ import { miloPoster } from "./motion";
 import CharacterAccent from "./CharacterAccent";
 import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
-import { useLanguage } from "./i18n/context";
+import { LanguageContext, translate, useLanguage } from "./i18n/context";
+import { useTaalwissel } from "./taalwissel";
 import TeamTrust from "./TeamTrust";
 import { AuditTeaser } from "./AuditPage";
 import CustomerReviews from "./CustomerReviews";
@@ -104,6 +105,44 @@ function HeroPakket() {
   );
 }
 
+
+const BANNER_MESSAGES = [
+  { first: "HUMAN CREATIVITY", accent: "POWERED BY AI TECHNOLOGY", icon: "✦" },
+  { first: "BECAUSE MANAGING A BUSINESS", accent: "SHOULDN’T BE COMPLICATED" },
+  { first: "5 YEARS OF EXPERIENCE!", accent: "BUILT WITH REAL PEOPLE" },
+  { first: "COMBINING ODOO WITH YOUR", accent: "CONTENT AND ADVERTISEMENTS" },
+  { first: "CREATE YOUR OWN ADS", accent: "STAY IN CONTROL" },
+  { first: "AUTOMATIONS WITH A", accent: "REAL TEAM READY TO HELP" },
+  { first: "AUTOMATIONS MADE", accent: "SECURE", icon: "🔒" },
+];
+const BANNER_NL: Record<string, string> = {
+ "HUMAN CREATIVITY": "MENSELIJKE CREATIVITEIT", "POWERED BY AI TECHNOLOGY": "VERSTERKT DOOR AI-TECHNOLOGIE",
+ "BECAUSE MANAGING A BUSINESS": "WANT EEN BEDRIJF RUNNEN", "SHOULDN’T BE COMPLICATED": "HOEFT NIET INGEWIKKELD TE ZIJN",
+ "5 YEARS OF EXPERIENCE!": "5 JAAR ERVARING!", "BUILT WITH REAL PEOPLE": "GEMAAKT MET ECHTE MENSEN",
+ "COMBINING ODOO WITH YOUR": "ODOO GECOMBINEERD MET JE", "CONTENT AND ADVERTISEMENTS": "CONTENT EN ADVERTENTIES",
+ "CREATE YOUR OWN ADS": "MAAK JE EIGEN ADVERTENTIES", "STAY IN CONTROL": "HOU DE REGIE",
+ "AUTOMATIONS WITH A": "AUTOMATISERINGEN MET EEN", "REAL TEAM READY TO HELP": "ECHT TEAM DAT KLAARSTAAT",
+ "AUTOMATIONS MADE": "AUTOMATISERINGEN DIE", "SECURE": "VEILIG ZIJN",
+};
+function bannerText(text: string, language: import("./i18n/context").Language) {
+ return language === "nl" ? BANNER_NL[text] || text : translate(text, language);
+}
+function AnimatedBanner({ displayLanguage }: { displayLanguage: import("./i18n/context").Language }) {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => { if (!document.hidden) setIndex((i) => (i + 1) % BANNER_MESSAGES.length); }, 5000);
+    return () => window.clearInterval(id);
+  }, []);
+  const message = BANNER_MESSAGES[index];
+  const words = [...bannerText(message.first, displayLanguage).split(" ").map((word) => ({ word, accent: false })), ...bannerText(message.accent, displayLanguage).split(" ").map((word) => ({ word, accent: true }))];
+  return <div className="h-animated-banner" role="status" aria-live="off" aria-label={`${bannerText(message.first, displayLanguage)} ${bannerText(message.accent, displayLanguage)}`}>
+    <div className="h-animated-banner-line" key={`${index}-${displayLanguage}`} aria-hidden="true">
+      {message.icon && <span className="h-animated-banner-icon">{message.icon}</span>}
+      {words.map(({ word, accent }, i) => <span className={`h-animated-banner-word${accent ? " is-accent" : ""}`} style={{ animationDelay: `${i * 55}ms` }} key={`${i}-${word}`}><span>{word}</span></span>)}
+    </div>
+  </div>;
+}
 function HeroFilm() {
   const [geluid, setGeluid] = useState(false);
   const ref = React.useRef<HTMLVideoElement>(null);
@@ -140,9 +179,11 @@ function HeroFilm() {
 }
 
 export function Home() {
+  const { language, t } = useLanguage();
+  const displayLanguage = useTaalwissel(language);
   return (
     <>
-      <section className="h-hero" id="home">
+      <LanguageContext.Provider value={displayLanguage}><section className="h-hero" id="home">
         <div className="h-hero-background">
           <BrandGlobe />
         </div>
@@ -176,7 +217,7 @@ export function Home() {
               </Link>
               <a className="os-install sn-btn3d h-button h-button-secondary h-os-tweede" href={CLAIM_URL}>
                 <span className="sn-btn3d-sheen" />
-                <span>Probeer ons gratis persoonlijke OS</span>
+                <span>{translate("Vraag gratis OS-demo aan", displayLanguage)}</span>
                 <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
               </a>
             </div>
@@ -191,18 +232,19 @@ export function Home() {
             <ClientLogos kort />
           </div>
           <HeroPakket />
+          <AnimatedBanner displayLanguage={displayLanguage} />
         </div>
-      </section>
+      </section></LanguageContext.Provider>
       <div className="h-fair h-wrap">
         <span>
           <i /> 24–26 september · Odoo-beurs
         </span>
-        <p>Gratis website-upgrade. Vandaag aangevraagd, vandaag live op stand C21.</p>
+        <p>{t("Gratis website aanvragen. Stuur ons je gegevens via WhatsApp.")}</p>
         <Link className="h-text-link" to="/gratis-website">
           Claim je gratis website <ArrowUpRight size={17} />
         </Link>
         <a className="h-text-link" href={CLAIM_URL}>
-          Probeer ons gratis persoonlijke OS <ArrowUpRight size={17} />
+          {t("Vraag gratis OS-demo aan")} <ArrowUpRight size={17} />
         </a>
       </div>
       <ShowcaseFilms />
@@ -337,6 +379,7 @@ export function Home() {
   );
 }
 export function OsPage() {
+  const { t } = useLanguage();
   return (
     <>
       <PageHeading
@@ -371,13 +414,12 @@ export function OsPage() {
         <ol className="h-steps">
           <li>
             <span>01</span>
-            <h3>Probeer het OS.</h3>
+            <h3>{t("Vraag een OS-demo aan.")}</h3>
             <p>
-              Maak je bedrijfsomgeving aan en doorloop de stappen Bedrijf, Odoo
-              en Meta.
+              {t("Stuur ons je naam en e-mailadres via WhatsApp. We bespreken daarna de demo.")}
             </p>
             <a className="h-text-link" href={CLAIM_URL}>
-              Probeer het OS
+              {t("Vraag gratis OS-demo aan")}
               <ArrowUpRight size={16} />
             </a>
           </li>

@@ -193,6 +193,7 @@ export function AgentCards() {
   );
 }
 export function ConversionBridge() {
+  const { t } = useLanguage();
   return (
     <div className="h-conversion">
       <div>
@@ -204,7 +205,7 @@ export function ConversionBridge() {
         </p>
       </div>
       <div className="h-poc-actions">
-        <Action href={CLAIM_URL}>Probeer het OS</Action>
+        <Action href={CLAIM_URL}>{t("Vraag gratis OS-demo aan")}</Action>
         <TextLink to="/contact?onderwerp=Custom%20OS">
           Al geprobeerd? Bespreek jouw Custom OS
         </TextLink>
