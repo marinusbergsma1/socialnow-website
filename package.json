@@ -10,7 +10,8 @@
     "dev:voorstel": "vite --host 127.0.0.1 --port 3001 --strictPort",
     "build:voorstel": "vite build --config vite.proposal.config.ts",
     "legal:pdf": "node scripts/legal-pdf.mjs",
-    "legal:check": "node scripts/legal-pdf.mjs --check"
+    "legal:check": "node scripts/legal-pdf.mjs --check",
+    "check:mensproef": "node scripts/check-mensproef.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.562.0",

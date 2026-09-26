@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { Action, Heading, PageHeading } from "./ui";
 import { useLanguage } from "./i18n/context";
+import { useMensproef } from "./useMensproef";
 import "./audit.css";
 
 // Gratis Google Ads audit door Nick (23 september 2026, Marinus). Een klein blok onder het team
@@ -32,6 +33,9 @@ export function AuditPage() {
   const [params] = useSearchParams();
   const [status, setStatus] = useState<"open" | "bezig" | "klaar">("open");
   const [fout, setFout] = useState("");
+  // 26 september 2026: de mensproef (proposal/mensproef.ts). Rekent vanaf het openen van de pagina, zodat
+  // het antwoord klaar is als iemand op versturen drukt; zonder dat antwoord weigert os.socialnow.nl.
+  const mensproef = useMensproef("audit");
 
   const verstuur = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -50,10 +54,13 @@ export function AuditPage() {
     if (!data.budget) return setFout(t("Kies je advertentiebudget."));
     setStatus("bezig");
     try {
-      const r = await fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+      const bewijs = await mensproef.voorVersturen();
+      const r = await fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...data, ...bewijs }) });
       const j = await r.json().catch(() => ({ ok: false }));
       if (j?.ok) { setStatus("klaar"); return; }
       setStatus("open");
+      if (j?.reden === "mensproef") return setFout(t("De controle lukte niet. Laad de pagina opnieuw en probeer het nog eens."));
+      if (j?.reden === "wegwerp") return setFout(t("Gebruik een vast mailadres. Een tijdelijk postvak kunnen we niet bereiken."));
       setFout(language === "nl" && j?.error ? j.error : t("Het versturen lukte niet. Probeer het zo nog eens, of mail info@socialnow.nl."));
     } catch {
       setStatus("open");
@@ -213,6 +220,8 @@ export function AuditPage() {
             </label>
             {/* Honeypot: een mens ziet dit veld nooit. */}
             <input name="bedrijfsnaam2" tabIndex={-1} autoComplete="off" aria-hidden="true" className="h-audit-honing" />
+            {/* Het vinkje van Cloudflare Turnstile, alleen als dat aan staat en Cloudflare twijfelt. */}
+            <div ref={mensproef.vak} className="h-audit-turnstile" />
             {fout && <p className="h-audit-fout" role="alert">{fout}</p>}
             <button className="sn-btn3d h-button" type="submit" disabled={status === "bezig"}>
               <span className="sn-btn3d-sheen" />

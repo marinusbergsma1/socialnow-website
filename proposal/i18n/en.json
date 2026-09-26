@@ -996,6 +996,8 @@
   "Vul je website in.": "Please fill in your website.",
   "Kies je advertentiebudget.": "Please choose your ad budget.",
   "Het versturen lukte niet. Probeer het zo nog eens, of mail info@socialnow.nl.": "Sending failed. Please try again, or email info@socialnow.nl.",
+  "De controle lukte niet. Laad de pagina opnieuw en probeer het nog eens.": "The check did not work. Reload the page and try again.",
+  "Gebruik een vast mailadres. Een tijdelijk postvak kunnen we niet bereiken.": "Please use a permanent email address. We cannot reach a temporary inbox.",
   "Versturen…": "Sending…",
   "We gebruiken je gegevens alleen voor deze audit. Lees ons": "We only use your details for this audit. Read our",
   "privacybeleid": "privacy policy",
