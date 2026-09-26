@@ -252,18 +252,24 @@ export default function GratisWebsite() {
       ...VRAGEN.map((v) => ({ vraag: v.vraag, antwoord: (a[v.key] || "").trim() })).filter((x) => x.antwoord),
       { vraag: "Drie website-concepten", antwoord: link },
     ];
-    try {
-      const r = await fetch(AANMELD_URL, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bron: "website", naam, email: g.email.trim(), mobiel: g.mobiel.trim(), bedrijf: g.bedrijf.trim(), website: a.website || "", taal: language, antwoorden, concepten: link, voorwaarden: LEGAL_VERSION }),
-        signal: AbortSignal.timeout(12000),
-      });
-      const j = await r.json().catch(() => null);
-      if (!r.ok || !j?.ok) { setFout(t(String(j?.error || "Het versturen lukte niet. Probeer het zo nog eens."))); setBezig(false); return; }
-    } catch { setFout(t("Het versturen lukte niet. Probeer het zo nog eens.")); setBezig(false); return; }
+    // 26 september 2026: de aanmelding (lead, leadmail, welkomstmail) en de concepten lopen tegelijk.
+    // os.socialnow.nl antwoordt pas als de mails de deur uit zijn; koud opgestart duurde dat live 15 s,
+    // en met de oude grens van 12 s zag de bezoeker "versturen lukte niet" terwijl alles binnenkwam.
+    // Alleen een echte weigering (400) brengt je terug naar het formulier.
+    const aanmelding = fetch(AANMELD_URL, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ bron: "website", naam, email: g.email.trim(), mobiel: g.mobiel.trim(), bedrijf: g.bedrijf.trim(), website: a.website || "", taal: language, antwoorden, concepten: link, voorwaarden: LEGAL_VERSION }),
+      signal: AbortSignal.timeout(45000),
+    }).then(async (r) => ({ status: r.status, j: await r.json().catch(() => null) })).catch(() => ({ status: 0, j: null }));
     try { localStorage.removeItem(OPSLAG); localStorage.setItem(CONCEPT_OPSLAG, JSON.stringify({ id, site: domein(a.website || "") })); } catch {}
     setBezig(false); setLaadKlaar(false); setFase("laden");
-    const uit = await maak(id);
+    const concepten = maak(id);
+    const aan = await aanmelding;
+    if (aan.status === 400) {
+      try { localStorage.setItem(OPSLAG, JSON.stringify({ a, g })); localStorage.removeItem(CONCEPT_OPSLAG); } catch {}
+      setFout(t(String(aan.j?.error || "Het versturen lukte niet. Probeer het zo nog eens."))); setFase("formulier"); return;
+    }
+    const uit = await concepten;
     if (!uit) { setUitslag({ id, bedrijf: g.bedrijf, concepten: [], overzicht: link, keuze: null }); setFase("later"); return; }
     setLaadKlaar(true);
     await wacht(750);
