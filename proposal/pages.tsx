@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -125,10 +125,13 @@ export function Home() {
   const { language, t } = useLanguage();
   const getoond = useTaalwissel(language);
   const taalfase = useTaalfase(getoond);
+  // 26 september 2026 (Marinus): vier grafische variaties van de bedankheader, kiezen met ?v=1 t/m 4.
+  const zoek = new URLSearchParams(useLocation().search).get("v");
+  const variant = ["1", "2", "3", "4"].includes(zoek || "") ? zoek! : "1";
   return (
     <>
       <LanguageContext.Provider value={getoond}>
-      <section className="h-hero" id="home" data-taalfase={taalfase}>
+      <section className="h-hero" id="home" data-taalfase={taalfase} data-variant={variant}>
         <div className="h-hero-background">
           <BrandGlobe />
         </div>
@@ -136,7 +139,7 @@ export function Home() {
           <div className="h-hero-tekst">
           {/* 26 september 2026 (Marinus): de beurs is over. Alle reclame uit de header; alleen een
               duidelijke login voor het gratis OS en een bedankvideo. */}
-          <h1 className="h-login-kop" translate="no">THANK YOU <span>ODOO!</span></h1>
+          <h1 className="h-login-kop sn-vhs-off" translate="no"><span className="k1">THANK YOU</span> <span className="k2">ODOO!</span></h1>
           <p className="h-hero-description">{t("Bedankt voor je bezoek. Je gratis SocialNow OS staat klaar: log in met het e-mailadres waarmee je je hebt aangemeld.")}</p>
           <div className="os-entry">
             <div className="os-actions">
@@ -153,6 +156,11 @@ export function Home() {
             <TeamTrust />
             <ClientLogos kort />
           </div>
+          {zoek && (
+            <nav className="h-variant-kies" aria-label="Variaties">
+              {["1", "2", "3", "4"].map((v) => <Link key={v} to={`?v=${v}`} aria-current={v === variant ? "true" : undefined}>{v}</Link>)}
+            </nav>
+          )}
         </div>
       </section>
       </LanguageContext.Provider>
