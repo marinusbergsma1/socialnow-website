@@ -64,6 +64,13 @@
   height: 1px;
   opacity: 0;
 }
+/* 26 september 2026: het vak voor Cloudflare Turnstile. Leeg zolang Turnstile uit staat of niet twijfelt. */
+.h-audit-turnstile:empty {
+  display: none;
+}
+.h-audit-turnstile {
+  margin-top: 16px;
+}
 .h-audit-fout {
   border-left: 2px solid #f62961;
   background: #1f0c12;
