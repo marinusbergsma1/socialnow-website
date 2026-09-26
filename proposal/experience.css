@@ -2720,11 +2720,17 @@ html {
   .sn-site .h-hero-films { align-self: center; }
 }
 
-/* 26 september 2026 (Marinus): installeren als webapp naast de login, zoals eerst met het Apple-logo. */
-.sn-site .h-hero-tekst .os-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.sn-site .h-hero-tekst .h-login-knop { flex: 1.35 1 280px; width: auto; }
-.sn-site .h-install-knop { flex: 1 1 200px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 64px; padding: 0 22px; border-radius: 14px; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.04); color: #fff; font: inherit; font-size: clamp(16px, 1.1vw, 18px); font-weight: 700; cursor: pointer; transition: border-color .2s, background .2s; }
-.sn-site .h-install-knop:hover, .sn-site .h-install-knop:focus-visible { border-color: #25d366; background: rgba(37,211,102,.08); outline: none; }
-.sn-site .h-install-knop .os-install-apple { width: 18px; height: 18px; margin-top: -3px; }
+/* 26 september 2026 (Marinus): login en installeren als ronde knoppen in de stijl van Try the OS, op
+   hun eigen breedte naast elkaar. Onder de kop het Odoo-logo. */
+.sn-site .h-hero-tekst .os-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.sn-site .h-hero-tekst .os-actions .h-button { flex: 0 0 auto; width: auto; min-height: 58px; border-radius: 999px; font-size: 17px; }
+.sn-site .h-hero-tekst .os-actions .h-login-rond { padding: 0 8px 0 26px; gap: 16px; }
+.sn-site .h-hero-tekst .os-actions .h-login-rond .h-button-icon { width: 42px; height: 42px; }
+.sn-site .h-hero-tekst .os-actions .h-install-knop { padding: 0 24px; gap: 9px; }
+.sn-site .h-install-knop .os-install-apple { width: 17px; height: 17px; margin-top: -3px; }
+.sn-site .h-install-knop .os-install-windows { width: 15px; height: 15px; }
 .sn-site .h-install-hulp { flex: 1 1 100%; margin: 0; }
-.sn-site .h-install-knop .os-install-windows { width: 17px; height: 17px; }
+.sn-site .h-hero-odoo { margin: -8px 0 0 !important; line-height: 0; }
+.sn-site .h-hero-odoo svg { height: clamp(34px, 2.8vw, 46px); width: auto; }
+/* 26 september 2026 (Marinus): "geen scanlines op de video". */
+.sn-site .h-film-vak::after { content: none; }

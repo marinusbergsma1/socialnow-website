@@ -84,8 +84,9 @@ export function InstallKnop() {
   };
   return (
     <>
-      <button type="button" className="h-install-knop" onClick={toggle} aria-expanded={open} aria-controls={helpId}>
-        {/Mac|iPhone/.test(label) ? <AppleLogo /> : /Windows/.test(label) ? <WindowsLogo /> : <Download size={18} aria-hidden="true" />}
+      <button type="button" className="os-install sn-btn3d h-button h-button-secondary h-install-knop" onClick={toggle} aria-expanded={open} aria-controls={helpId}>
+        <span className="sn-btn3d-sheen" />
+        {/Mac|iPhone/.test(label) ? <AppleLogo /> : /Windows/.test(label) ? <WindowsLogo /> : <Download size={16} aria-hidden="true" />}
         <span>{t(label)}</span>
       </button>
       <div className="install-help h-install-hulp" id={helpId} hidden={!open}>
