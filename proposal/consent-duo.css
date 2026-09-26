@@ -217,7 +217,7 @@
 .sn-consent-klaar { max-width: 520px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .sn-consent-klaar .sn-consent-logo { width: 150px; height: auto; }
 .sn-consent-knop-website { width: 100%; margin-top: 14px; }
-.sn-consent-os-kop { margin: 0 0 26px; font-size: 18px; font-weight: 700; color: #fff; letter-spacing: -.01em; }
+.sn-site .sn-consent .sn-consent-duo .sn-consent-os-kop { margin: 0 0 26px; font-size: 18px; font-weight: 700; color: #fff; letter-spacing: -.01em; }
 
 .sn-consent .sn-consent-duo .sn-consent-marinus {
   display: flex;
@@ -253,7 +253,7 @@
 .sn-consent .sn-consent-duo .sn-consent-marinus strong { display: block; margin-top: 4px; color: #fff; font-size: 16px; line-height: 1.2; }
 .sn-consent .sn-consent-duo .sn-consent-marinus p { margin: 4px 0 0; color: #aeb9c5; font-size: 12px; line-height: 1.4; }
 @media (max-width: 819px) {
-  .sn-consent-os-kop { margin-bottom: 20px; }
+  .sn-site .sn-consent .sn-consent-duo .sn-consent-os-kop { margin-bottom: 20px; }
   .sn-consent .sn-consent-duo .sn-consent-marinus { margin-top: 16px; padding: 11px; gap: 11px; }
   .sn-consent .sn-consent-duo .sn-consent-marinus img { width: 56px; height: 56px; }
 }
