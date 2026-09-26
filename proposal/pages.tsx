@@ -10,7 +10,7 @@ import {
   Phone,
 } from "lucide-react";
 import { HeroTitle } from "./styles";
-import { miloPoster } from "./motion";
+import { MiloMotion, miloPoster } from "./motion";
 import CharacterAccent from "./CharacterAccent";
 import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
@@ -78,7 +78,7 @@ function Founder() {
 // 26 september 2026 (Marinus): "een thank you video" en "ik mis de explainer video van het os". Rechts de
 // OS-explainer, met de staande bedankfilm uit Brussel ervoor. Beide spelen stil in een lus met een eigen
 // geluidsknop; zet je het geluid van de ene aan, dan gaat de andere op stil.
-function Film({ src, poster, label, titel, klasse, geluid, zetGeluid }: { src: string; poster: string; label: string; titel: string; klasse: string; geluid: boolean; zetGeluid: (aan: boolean) => void }) {
+function Film({ src, poster, label, titel, klasse, geluid, zetGeluid, boven }: { src: string; poster: string; label: string; titel: string; klasse: string; geluid: boolean; zetGeluid: (aan: boolean) => void; boven?: React.ReactNode }) {
   const ref = React.useRef<HTMLVideoElement>(null);
   React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid]);
   const wissel = () => {
@@ -89,6 +89,7 @@ function Film({ src, poster, label, titel, klasse, geluid, zetGeluid }: { src: s
   return (
     <div className={klasse}>
       {/* 26 september 2026 (Marinus): "video's iets groter met titels erboven". */}
+      {boven}
       <p className="h-film-titel">{titel}</p>
       <div className="h-film-vak">
       <video ref={ref} src={src} poster={poster} autoPlay muted loop playsInline preload="auto" aria-label={label} />
@@ -110,6 +111,12 @@ function HeroFilm() {
         poster="/video/os/os-booth-en.jpg"
         label="SocialNow OS explainer"
         titel="Zo werkt SocialNow OS"
+        boven={
+          // 26 september 2026 (Marinus): "Milo's klein boven How SocialNow OS works".
+          <div className="h-film-milos" aria-hidden="true">
+            {agents.slice(0, 4).map((agent) => <MiloMotion key={agent.id} role={agent.id} name={agent.name} />)}
+          </div>
+        }
         geluid={geluid === "os"}
         zetGeluid={(aan) => setGeluid(aan ? "os" : "")}
       />
@@ -185,8 +192,6 @@ export function Home() {
           </div>
           </div>
           <HeroFilm />
-          {/* 26 september 2026 (Marinus): "de 4 Milo's terugzien", als strook onder kop en films. */}
-          <HeroMilos />
           <div className="h-hero-rij">
             <ClientLogos kort />
           </div>

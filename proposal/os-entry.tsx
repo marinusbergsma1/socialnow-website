@@ -67,28 +67,55 @@ function AppleLogo() {
   );
 }
 
-// 26 september 2026 (Marinus): "downloaden als webapp, zoals eerst met Apple-logo". De knop naast de login in
-// de hero; tekst per apparaat, Apple-logo op Mac, en bij klikken de stappen voor dit apparaat.
+// 26 september 2026 (Marinus): "downloaden als webapp, zoals eerst met Apple-logo" en "zet gewoon wat andere
+// iconen erop". Grote knop voor dit apparaat, daarnaast kleine ronde knoppen voor de andere platformen.
+const HINT_IPHONE = "Open het OS in Safari. Tik op Deel en kies ‘Zet op beginscherm’.";
+const HINT_MAC = "Open het OS in Safari. Kies Archief en ‘Voeg toe aan Dock’, als je Safari-versie dat ondersteunt.";
+const HINT_ALGEMEEN = "Open het OS. Kies ‘App installeren’ in het browsermenu als die optie beschikbaar is. Je kunt het OS ook gewoon in je browser gebruiken.";
+
+function AndroidLogo() {
+  return (
+    <svg className="os-install-android" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.87 3.23a11.4 11.4 0 0 0-9.82 0L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z" />
+    </svg>
+  );
+}
+
 export function InstallKnop() {
   const { t } = useLanguage();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<string | null>(null);
   const [hint, setHint] = useState("");
   const [label, setLabel] = useState("Installeer het OS");
   const helpId = useId();
   useEffect(() => {
     setLabel(installationLabel(navigator.userAgent, navigator.platform, navigator.maxTouchPoints));
   }, []);
-  const toggle = () => {
-    setHint(installationHint(navigator.userAgent, navigator.platform, navigator.maxTouchPoints));
-    setOpen((v) => !v);
+  const kies = (sleutel: string, tekst: string) => {
+    if (open === sleutel) { setOpen(null); return; }
+    setHint(tekst);
+    setOpen(sleutel);
   };
+  const eigen = () => kies("eigen", installationHint(navigator.userAgent, navigator.platform, navigator.maxTouchPoints));
+  const andere = [
+    { sleutel: "Installeer op Mac", icoon: <AppleLogo />, hint: HINT_MAC },
+    { sleutel: "Installeer op iPhone of iPad", icoon: <svg className="os-install-telefoon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="6.5" y="2" width="11" height="20" rx="2.6" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M10.5 18.5h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>, hint: HINT_IPHONE },
+    { sleutel: "Installeer op Windows", icoon: <WindowsLogo />, hint: HINT_ALGEMEEN },
+    { sleutel: "Installeer op Android", icoon: <AndroidLogo />, hint: HINT_ALGEMEEN },
+  ].filter((p) => p.sleutel !== label);
   return (
     <>
-      <button type="button" className="os-install sn-btn3d h-button h-button-secondary h-install-knop" onClick={toggle} aria-expanded={open} aria-controls={helpId}>
+      <button type="button" className="os-install sn-btn3d h-button h-button-secondary h-install-knop" onClick={eigen} aria-expanded={open === "eigen"} aria-controls={helpId}>
         <span className="sn-btn3d-sheen" />
-        {/Mac|iPhone/.test(label) ? <AppleLogo /> : /Windows/.test(label) ? <WindowsLogo /> : <Download size={16} aria-hidden="true" />}
+        {/Mac|iPhone/.test(label) ? <AppleLogo /> : /Windows/.test(label) ? <WindowsLogo /> : /Android/.test(label) ? <AndroidLogo /> : <Download size={16} aria-hidden="true" />}
         <span>{t(label)}</span>
       </button>
+      <span className="h-install-andere">
+        {andere.map((p) => (
+          <button key={p.sleutel} type="button" className="h-install-icoon" onClick={() => kies(p.sleutel, p.hint)} aria-expanded={open === p.sleutel} aria-controls={helpId} aria-label={t(p.sleutel)} title={t(p.sleutel)}>
+            {p.icoon}
+          </button>
+        ))}
+      </span>
       <div className="install-help h-install-hulp" id={helpId} hidden={!open}>
         <p>{t(hint)}</p>
         <a href={INSTALL_URL}>

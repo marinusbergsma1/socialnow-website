@@ -2744,3 +2744,13 @@ html {
 .sn-site .h-hero-tekst .h-team-trust > span:last-child > span { font-size: 16px; }
 @media (max-width: 640px) { .sn-site .h-hero-tekst .h-team-portraits img { width: 48px; height: 48px; } .sn-site .h-hero-tekst .h-team-portraits img.is-groot { width: 60px; height: 60px; } }
 .sn-site .h-hero-tekst .h-team-trust strong { white-space: nowrap; }
+
+/* 26 september 2026 (Marinus): kleine ronde knoppen voor de andere platformen, Milo's klein boven de explainer. */
+.sn-site .h-install-andere { display: inline-flex; gap: 8px; }
+.sn-site .h-install-icoon { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.04); color: #fff; cursor: pointer; transition: border-color .2s, background .2s, transform .2s; }
+.sn-site .h-install-icoon:hover, .sn-site .h-install-icoon:focus-visible, .sn-site .h-install-icoon[aria-expanded="true"] { border-color: #25d366; background: rgba(37,211,102,.1); outline: none; transform: translateY(-1px); }
+.sn-site .h-install-icoon svg { width: 18px; height: 18px; }
+.sn-site .h-film-milos { display: flex; gap: 6px; margin: 0 0 6px; }
+.sn-site .h-film-milos .h-milo-animated, .sn-site .h-film-milos .h-milo-animated img, .sn-site .h-film-milos .h-milo-animated video { width: 58px !important; height: 58px !important; }
+.sn-site .h-film-milos .h-milo-animated { position: relative; flex: none; }
+.sn-site .h-film-milos .h-motion-control { display: none !important; }
