@@ -28,3 +28,22 @@ export function aanvraagBericht(soort: AanvraagSoort, taal: Language, gegevens: 
 export function aanvraagWhatsApp(soort: AanvraagSoort, taal: Language, gegevens: AanvraagGegevens = {}): string {
   return `https://wa.me/${WHATSAPP_NUMMER}?text=${encodeURIComponent(aanvraagBericht(soort, taal, gegevens))}`;
 }
+
+// 26 september 2026 (Marinus): WhatsApp is niet verplicht. Dezelfde aanvraag kan ook per e-mail.
+export const AANVRAAG_MAIL = "info@socialnow.nl";
+export type Kanaal = "mail" | "whatsapp";
+export function aanvraagMail(soort: AanvraagSoort, taal: Language, gegevens: AanvraagGegevens = {}): string {
+  const w = woorden[taal];
+  return `mailto:${AANVRAAG_MAIL}?subject=${encodeURIComponent(w[soort])}&body=${encodeURIComponent(aanvraagBericht(soort, taal, gegevens))}`;
+}
+export function aanvraagLink(kanaal: Kanaal, soort: AanvraagSoort, taal: Language, gegevens: AanvraagGegevens = {}): string {
+  return kanaal === "whatsapp" ? aanvraagWhatsApp(soort, taal, gegevens) : aanvraagMail(soort, taal, gegevens);
+}
+
+// De welkomstpopup geeft naam en e-mail door aan de OS-demopagina, zodat die daar al ingevuld staan.
+const OS_OPSLAG = "sn-os-demo-gegevens";
+export type OsGegevens = { voornaam: string; achternaam: string; email: string };
+export function bewaarOsGegevens(g: OsGegevens) { try { sessionStorage.setItem(OS_OPSLAG, JSON.stringify(g)); } catch {} }
+export function leesOsGegevens(): OsGegevens | null {
+  try { const j = JSON.parse(sessionStorage.getItem(OS_OPSLAG) || "null"); return j && typeof j.email === "string" ? { voornaam: String(j.voornaam || ""), achternaam: String(j.achternaam || ""), email: j.email } : null; } catch { return null; }
+}

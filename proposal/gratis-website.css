@@ -139,3 +139,83 @@
   .gw-kaart, .gw-bekijker { animation: none; }
   .gw-fasen li.is-nu .gw-fase-stip { animation: none; }
 }
+
+/* ── Vier versies (26 september 2026, Marinus) ───────────────────────────────────────────────────
+   De beelden van de homepage rond het formulier: 1 de OS-film uit de hero, 2 de drie bollen van het
+   beeldmerk, 3 de vier Milo's, 4 de vier onderdeelfilms van het OS. */
+.ob { overflow: hidden; }
+.ob-duo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(32px, 4vw, 72px); align-items: start; }
+.ob-rechts { position: sticky; top: 110px; animation: ob-op 1s cubic-bezier(.16,1,.3,1) .15s both; }
+@keyframes ob-op { from { opacity: 0; transform: translateY(28px) scale(.98); } to { opacity: 1; transform: none; } }
+@media (max-width: 1023px) {
+  .ob-duo { grid-template-columns: 1fr; }
+  .ob-rechts { position: relative; top: auto; order: -1; }
+}
+
+/* Versie 1: film */
+.ob-film { position: relative; }
+.ob-film video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 22px; border: 1px solid var(--gw-lijn); background: #050608; box-shadow: 0 30px 90px rgba(0,0,0,.6), 0 0 80px rgba(37,211,102,.12); }
+.ob-film::before { content: ""; position: absolute; inset: -40px -30px; z-index: -1; background: radial-gradient(closest-side, rgba(37,211,102,.18), transparent 70%); filter: blur(10px); animation: ob-adem 6s ease-in-out infinite; }
+@keyframes ob-adem { 50% { opacity: .45; transform: scale(.94); } }
+.ob-film .h-tellers { margin-bottom: 16px; }
+
+/* Versie 2: bollen */
+.ob-v2 .ob-bollen { position: absolute; inset: 0 0 auto 0; height: 900px; pointer-events: none; }
+.ob-v2 .ob-bollen .brand-globe { width: min(1000px, 110vw); height: 860px; left: 50%; right: auto; top: -80px; transform: translateX(-10%); }
+.ob-v2 .ob-bollen .brand-globe-stage { opacity: .8; mask-image: radial-gradient(closest-side, #000 55%, transparent); -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent); }
+.ob-v2 .gw-sheet { position: relative; z-index: 1; }
+.ob-glas { margin-top: 40px; padding: 8px 28px 34px; border-radius: 28px; background: rgba(6,16,30,.55); border: 1px solid var(--gw-lijn); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 40px 120px -40px rgba(0,0,0,.8); }
+.ob-glas .gw-progress { background: none; position: relative; top: auto; }
+.ob-glas .gw-card { background: rgba(255,255,255,.03); }
+@media (max-width: 680px) { .ob-glas { padding: 4px 14px 24px; } .ob-v2 .ob-bollen .brand-globe { transform: translateX(-35%); opacity: .7; } }
+
+/* Versie 3: vier gezichten */
+.ob-v3-sheet { max-width: 980px; }
+.ob-gezichten { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 44px 0 8px; }
+.ob-gezichten button { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; padding: 14px 10px 18px; border-radius: 22px; border: 1px solid var(--gw-lijn); background: rgba(255,255,255,.035); color: #fff; font: inherit; cursor: pointer; opacity: .55; transform: translateY(6px) scale(.97); transition: opacity .6s, transform .6s cubic-bezier(.16,1,.3,1), border-color .6s, box-shadow .6s, background .6s; }
+.ob-gezichten button.is-aan { opacity: 1; transform: translateY(-6px) scale(1.03); border-color: color-mix(in srgb, var(--accent) 70%, transparent); background: color-mix(in srgb, var(--accent) 12%, rgba(6,16,30,.6)); box-shadow: 0 24px 60px -24px var(--accent); }
+.ob-gezichten .h-milo-animated { width: min(150px, 100%); height: auto; aspect-ratio: 1; }
+.ob-gezichten strong { font-size: 16px; margin-top: 4px; }
+.ob-gezichten span:not(.h-ambient-video):not(.h-video-placeholder) { font-size: 12.5px; color: var(--gw-muted); line-height: 1.35; }
+.ob-gezichten-lijn { position: absolute; left: 12%; right: 12%; top: 50%; height: 2px; z-index: 0; background: linear-gradient(90deg, #25D366, #1965C2, #F5940D, #EC1670); opacity: .35; filter: blur(.5px); background-size: 200% 100%; animation: ob-stroom 5s linear infinite; }
+@keyframes ob-stroom { to { background-position: -200% 0; } }
+@media (max-width: 720px) {
+  .ob-gezichten { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ob-gezichten-lijn { display: none; }
+}
+
+/* Versie 4: onderdelen */
+.ob-scherm { border-radius: 20px; overflow: hidden; border: 1px solid var(--gw-lijn); background: #050608; box-shadow: 0 40px 100px -30px rgba(0,0,0,.85), 0 0 80px rgba(0,163,224,.12); }
+.ob-scherm-balk { display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 14px; background: rgba(255,255,255,.06); border-bottom: 1px solid var(--gw-lijn); }
+.ob-scherm-balk i { width: 9px; height: 9px; border-radius: 50%; background: var(--gw-geel); }
+.ob-scherm-balk i:nth-child(2) { background: var(--gw-blauw); }
+.ob-scherm-balk i:nth-child(3) { background: var(--gw-roze); }
+.ob-scherm-balk span { margin-left: 10px; font-size: 12px; color: var(--gw-muted); letter-spacing: .03em; }
+.ob-scherm-vlak { position: relative; aspect-ratio: 16 / 9; }
+.ob-scherm-vlak video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.04); transition: opacity .9s ease, transform 1.2s cubic-bezier(.16,1,.3,1); }
+.ob-scherm-vlak video.is-aan { opacity: 1; transform: none; }
+.ob-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+.ob-tabs button { display: grid; gap: 8px; padding: 12px 12px 10px; border-radius: 14px; border: 1px solid var(--gw-lijn); background: rgba(255,255,255,.03); color: var(--gw-muted); font: inherit; font-weight: 700; font-size: 13px; text-align: left; cursor: pointer; transition: color .3s, border-color .3s, background .3s; }
+.ob-tabs button.is-aan { color: #fff; border-color: color-mix(in srgb, var(--accent) 65%, transparent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.ob-tabs i { display: block; height: 3px; border-radius: 3px; background: rgba(255,255,255,.08); overflow: hidden; }
+.ob-tabs button.is-aan i b { display: block; height: 100%; background: var(--accent); animation: ob-tijd 6s linear both; }
+@keyframes ob-tijd { from { width: 0; } to { width: 100%; } }
+@media (max-width: 520px) { .ob-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Verzenden: e-mail en WhatsApp zijn gelijkwaardig, geen van beide verplicht. */
+.ob-verzend { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.ob-tweede { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; padding: 0 18px; min-height: 54px; border-radius: 999px; border: 1px solid var(--gw-lijn); background: rgba(255,255,255,.04); color: #fff; font: inherit; font-weight: 700; font-size: 14px; cursor: pointer; transition: border-color .2s, background .2s; }
+.ob-tweede:hover, .ob-tweede:focus-visible { border-color: var(--gw-groen); background: rgba(37,211,102,.1); outline: none; }
+.ob-tweede svg { color: var(--gw-groen); }
+
+/* Versiekiezer */
+.ob-kiezer { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 50; display: flex; align-items: center; gap: 4px; padding: 5px 5px 5px 14px; border-radius: 999px; background: rgba(4,11,21,.82); border: 1px solid var(--gw-lijn); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 16px 40px -12px rgba(0,0,0,.7); }
+.ob-kiezer > span { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--gw-muted); margin-right: 6px; }
+.ob-kiezer button { width: 36px; height: 36px; border-radius: 50%; border: 0; background: transparent; color: #fff; font: inherit; font-weight: 700; font-size: 14px; cursor: pointer; transition: background .2s; }
+.ob-kiezer button:hover { background: rgba(255,255,255,.08); }
+.ob-kiezer button.is-aan { background: var(--gw-groen); color: #04110a; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ob-rechts, .ob-film::before, .ob-gezichten-lijn, .ob-tabs button.is-aan i b { animation: none; }
+  .ob-gezichten button, .ob-scherm-vlak video { transition: none; }
+}
