@@ -5,10 +5,7 @@ import { LANGUAGES, type Language } from "./i18n/context";
 // vlaggetje in de balk wisselt mee. De echte taal van de pagina blijft staan; dit is alleen beeld.
 // Opent iemand het taalmenu, dan stopt het wisselen voor de rest van het bezoek.
 // Volgorde (Marinus): Engels, een andere taal, terug naar Engels, de volgende taal, enzovoort.
-// 26 september 2026 (Marinus): alleen Nederlands, Engels, Duits en Frans in de wissel. Italiaans en
-// Spaans blijven gewoon te kiezen in het taalmenu.
-const WISSEL: Language[] = ["nl", "de", "fr"];
-const VOLGORDE: Language[] = LANGUAGES.filter((t) => WISSEL.includes(t)).flatMap((t) => ["en", t] as Language[]);
+const VOLGORDE: Language[] = LANGUAGES.filter((t) => t !== "en").flatMap((t) => ["en", t] as Language[]);
 let toon: Language | null = null;
 let gestopt = false;
 const luisteraars = new Set<() => void>();
