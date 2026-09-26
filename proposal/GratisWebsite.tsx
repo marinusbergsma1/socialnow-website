@@ -18,6 +18,17 @@ const VRAGEN: Vraag[] = [
 // De velden van "Jij" in de volgorde waarin ze op het scherm staan; elk krijgt een segment in de voortgangsbalk.
 const JIJ: (keyof Gegevens)[] = ["voornaam", "achternaam", "email", "mobiel", "bedrijf"];
 const TOTAAL = JIJ.length + VRAGEN.length;
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+// Wat er nog ontbreekt om te kunnen versturen, per stand van naam, e-mailadres en bedrijf (1 = in orde).
+const NOG: Record<string, string> = {
+  "000": "Vul je naam, e-mailadres en bedrijf in, dan kun je versturen.",
+  "001": "Nog je naam en e-mailadres, dan kun je versturen.",
+  "010": "Nog je naam en bedrijfsnaam, dan kun je versturen.",
+  "100": "Nog je e-mailadres en bedrijfsnaam, dan kun je versturen.",
+  "011": "Nog je voor- en achternaam, dan kun je versturen.",
+  "101": "Nog je e-mailadres, dan kun je versturen.",
+  "110": "Nog je bedrijfsnaam, dan kun je versturen.",
+};
 function laad(): { a: Record<string, string>; g: Gegevens } {
   try { const j = JSON.parse(localStorage.getItem(OPSLAG) || "null"); if (j?.a && j?.g && "voornaam" in j.g) return j; } catch {}
   return { a: {}, g: LEEG };
@@ -53,21 +64,23 @@ export default function GratisWebsite() {
   const gevuld = segmenten.filter(Boolean).length;
   const volgende = segmenten.indexOf(false);
   const naam = !!(g.voornaam.trim() && g.achternaam.trim());
+  const email = EMAIL.test(g.email.trim());
   const bedrijf = !!g.bedrijf.trim();
-  const verzendklaar = naam && bedrijf;
-  // Zegt alleen wat echt nog ontbreekt om te kunnen versturen; zonder invoer een uitnodiging in plaats van "0%".
-  const status = gevuld === TOTAAL ? "Alles ingevuld. Verstuur je aanvraag via WhatsApp."
+  const verzendklaar = naam && email && bedrijf;
+  const compleet = verzendklaar && gevuld === TOTAAL;
+  // Zegt alleen wat echt nog ontbreekt om te kunnen versturen (dezelfde eisen als verstuur hieronder);
+  // zonder invoer een uitnodiging in plaats van "0%".
+  const status = compleet ? "Alles ingevuld. Verstuur je aanvraag via WhatsApp."
     : verzendklaar ? "Klaar om te versturen. Elk extra antwoord maakt je website beter."
     : !gevuld ? "Een paar korte vragen, ongeveer twee minuten."
-    : naam ? "Nog je bedrijfsnaam, dan kun je versturen."
-    : bedrijf ? "Nog je voor- en achternaam, dan kun je versturen."
-    : "Vul je naam en bedrijf in, dan kun je versturen.";
+    : naam && bedrijf && g.email.trim() ? "Controleer je e-mailadres, dan kun je versturen."
+    : NOG[`${+naam}${+email}${+bedrijf}`];
   const segment = (aan: boolean, i: number) => <i key={i} className={aan ? "is-aan" : i === volgende ? "is-volgende" : undefined} />;
   const verstuur = (e: React.FormEvent) => {
     e.preventDefault();
     if (!g.voornaam.trim() || !g.achternaam.trim()) { setFout(t("Vul je voor- en achternaam in.")); return; }
     if (!g.bedrijf.trim()) { setFout(t("Vul je bedrijfsnaam in.")); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(g.email.trim())) { setFout(t("Dat e-mailadres klopt nog niet.")); return; }
+    if (!EMAIL.test(g.email.trim())) { setFout(t("Dat e-mailadres klopt nog niet.")); return; }
     setFout("");
     window.location.href = aanvraagWhatsApp("website", language, { ...g, website: a.website, voorbeeld: a.voorbeeld, wat: a.wat, nietgoed: a.nietgoed });
   };
@@ -86,8 +99,8 @@ export default function GratisWebsite() {
     <a className="gw-contactpil" href={`${WHATSAPP}?text=${encodeURIComponent(t("Hoi Marinus, ik heb een vraag over de websites die jullie live maken op de Odoo-beurs."))}`} target="_blank" rel="noopener noreferrer">
       <img className="gw-contact-avatar" src="/images/marinus-profiel-blauw.webp" alt="" width="48" height="48" /><span className="gw-contact-tekst"><strong>Marinus Bergsma</strong><small>Vragen? Neem persoonlijk contact op</small></span><MessageCircle size={19} aria-hidden="true" />
     </a>
-    <div className={`gw-voortgang${verzendklaar ? " is-klaar" : ""}${gevuld === TOTAAL ? " is-compleet" : ""}`} style={{ "--gw-kop": `${kop}px` } as React.CSSProperties}>
-      <span className="gw-vg-tel">{gevuld === TOTAAL ? <Check size={16} strokeWidth={3} aria-hidden="true" /> : null}<b>{gevuld}</b>/{TOTAAL}</span>
+    <div className={`gw-voortgang${verzendklaar ? " is-klaar" : ""}${compleet ? " is-compleet" : ""}`} style={{ "--gw-kop": `${kop}px` } as React.CSSProperties}>
+      <span className="gw-vg-tel">{compleet ? <Check size={16} strokeWidth={3} aria-hidden="true" /> : null}<b>{gevuld}</b>/{TOTAAL}</span>
       <span className="gw-vg-tekst" aria-live="polite">{status}</span>
       {bewaard > 0 && gevuld > 0 ? <span className="gw-vg-bewaard"><i className="gw-dot" key={bewaard} />Automatisch bewaard</span> : null}
       <div className="gw-vg-balk" role="progressbar" aria-label="Voortgang" aria-valuemin={0} aria-valuemax={TOTAAL} aria-valuenow={gevuld} aria-valuetext={`${gevuld} / ${TOTAAL}`}>
