@@ -69,6 +69,14 @@ const KLAAR: Record<Language, { website: string; osKop: string }> = {
   it: { website: "Richiedi il sito gratis", osKop: "Oppure prova il nostro OS personale gratuito" },
   es: { website: "Consigue tu web gratis", osKop: "O prueba nuestro OS personal gratis" },
 };
+const MARINUS_KAART: Record<Language, { label: string; text: string }> = {
+  nl: { label: "Jouw persoonlijke contact", text: "Marinus helpt je persoonlijk verder na je aanvraag." },
+  en: { label: "Your personal contact", text: "Marinus will personally help you after your request." },
+  de: { label: "Ihr persönlicher Kontakt", text: "Marinus hilft Ihnen nach Ihrer Anfrage persönlich weiter." },
+  fr: { label: "Votre contact personnel", text: "Marinus vous aidera personnellement après votre demande." },
+  it: { label: "Il tuo contatto personale", text: "Marinus ti aiuterà personalmente dopo la richiesta." },
+  es: { label: "Tu contacto personal", text: "Marinus te ayudará personalmente después de tu solicitud." },
+};
 export function actieLoopt(): boolean { return Date.now() <= Date.parse(`${ACTIE_TOT}T23:59:59+02:00`); }
 
 type Gegevens = { email: string; terug: string; foutNaam: string; foutEmail: string };
@@ -222,6 +230,14 @@ export default function ConsentPopup() {
             <button type="submit" className="sn-consent-knop"><span className="sn-consent-glans" aria-hidden="true" /><span>{({nl:"Vraag je gratis OS-demo aan via WhatsApp",en:"Request your free OS demo via WhatsApp",de:"Kostenlose OS-Demo per WhatsApp anfragen",fr:"Demander une démo gratuite via WhatsApp",it:"Richiedi una demo gratuita su WhatsApp",es:"Solicita una demo gratis por WhatsApp"} as Record<Language,string>)[language]}</span><Pijl /></button>
             <button type="button" className="sn-consent-knop sn-consent-knop-stil sn-consent-alleen-mobiel" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span></button>
           </div>
+          <aside className="sn-consent-marinus" aria-label="Marinus Bergsma">
+            <img src="/images/marinus-profiel-blauw.webp" alt="" width="72" height="72" loading="lazy" />
+            <div className="sn-consent-marinus-copy">
+              <span className="sn-consent-marinus-label"><i aria-hidden="true" />{MARINUS_KAART[language].label}</span>
+              <strong>Marinus Bergsma</strong>
+              <p>{MARINUS_KAART[language].text}</p>
+            </div>
+          </aside>
           {juridisch}
         </form>
       </div>
