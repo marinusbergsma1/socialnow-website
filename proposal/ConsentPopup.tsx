@@ -199,6 +199,7 @@ export default function ConsentPopup() {
   return (
     <div className="sn-consent" role="dialog" aria-modal="true" aria-labelledby="sn-consent-kop" translate="no">
       <div className="sn-consent-card sn-consent-duo" data-stap={stap}>
+        <button type="button" className="sn-consent-sluiten" onClick={akkoord} aria-label={language === "nl" ? "Sluiten" : "Close"}>×</button>
         <div className="sn-consent-strepen" aria-hidden="true"><i className="is-aan" /><i className={stap === "gegevens" ? "is-aan" : undefined} /></div>
         <section className="sn-consent-een">
           <img className="sn-consent-logo" src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="1556" height="240" />
@@ -222,7 +223,6 @@ export default function ConsentPopup() {
           <button type="button" className="sn-consent-knop sn-consent-knop-website" onClick={naarWebsite}><span className="sn-consent-glans" aria-hidden="true" /><span>{k.website}</span><Pijl /></button>
           <div className="sn-consent-knoppen sn-consent-alleen-mobiel">
             <button type="button" className="sn-consent-knop" onClick={() => setStap("gegevens")}><span className="sn-consent-glans" aria-hidden="true" /><span>{s.volgende}</span><Pijl /></button>
-            <button type="button" className="sn-consent-knop sn-consent-knop-stil" onClick={akkoord}><span>{s.site}</span></button>
           </div>
           <div className="sn-consent-alleen-mobiel">{juridisch}</div>
         </section>
@@ -244,7 +244,6 @@ export default function ConsentPopup() {
           {fout ? <p className="sn-consent-fout" role="alert">{fout}</p> : null}
           <div className="sn-consent-knoppen">
             <button type="submit" className="sn-consent-knop" disabled={bezig}><span className="sn-consent-glans" aria-hidden="true" /><span>{bezig ? g.bezig : s.demo}</span><Pijl /></button>
-            <button type="button" className="sn-consent-knop sn-consent-knop-stil sn-consent-alleen-desktop" onClick={akkoord}><span>{s.site}</span></button>
             <button type="button" className="sn-consent-knop sn-consent-knop-stil sn-consent-alleen-mobiel" onClick={() => { setFout(""); setStap("keuze"); }}><span>{g.terug}</span></button>
           </div>
           {juridisch}

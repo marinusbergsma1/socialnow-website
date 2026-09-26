@@ -15,6 +15,27 @@
 .sn-consent-duo *,
 .sn-consent-duo *::before,
 .sn-consent-duo *::after { box-sizing: border-box; }
+.sn-consent .sn-consent-duo .sn-consent-sluiten {
+  position: absolute;
+  z-index: 5;
+  top: 8px;
+  left: 12px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #98a2ad;
+  font: inherit;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.sn-consent .sn-consent-duo .sn-consent-sluiten:hover,
+.sn-consent .sn-consent-duo .sn-consent-sluiten:focus-visible { color: #fff; background: #ffffff1a; }
 .sn-consent-duo .sn-consent-strepen { display: none; }
 .sn-consent-duo .sn-consent-een,
 .sn-consent-duo .sn-consent-twee { padding: 36px; min-width: 0; }
@@ -163,6 +184,7 @@
   .sn-consent-duo .sn-consent-strepen i.is-aan { background: #25d366; }
   .sn-consent-duo .sn-consent-een,
   .sn-consent-duo .sn-consent-twee { padding: 20px 22px 22px; border-right: 0; background: none; }
+  .sn-consent-duo .sn-consent-logo { margin-top: 16px; }
   .sn-consent-duo[data-stap="keuze"] .sn-consent-twee,
   .sn-consent-duo[data-stap="gegevens"] .sn-consent-een { display: none; }
   .sn-consent-duo[data-stap="keuze"] .sn-consent-een,
