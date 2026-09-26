@@ -125,13 +125,10 @@ export function Home() {
   const { language, t } = useLanguage();
   const getoond = useTaalwissel(language);
   const taalfase = useTaalfase(getoond);
-  // 26 september 2026 (Marinus): vier grafische variaties van de bedankheader, kiezen met ?v=1 t/m 4.
-  const zoek = new URLSearchParams(useLocation().search).get("v");
-  const variant = ["1", "2", "3", "4"].includes(zoek || "") ? zoek! : "1";
   return (
     <>
       <LanguageContext.Provider value={getoond}>
-      <section className="h-hero" id="home" data-taalfase={taalfase} data-variant={variant}>
+      <section className="h-hero" id="home" data-taalfase={taalfase}>
         <div className="h-hero-background">
           <BrandGlobe />
         </div>
@@ -139,14 +136,17 @@ export function Home() {
           <div className="h-hero-tekst">
           {/* 26 september 2026 (Marinus): de beurs is over. Alle reclame uit de header; alleen een
               duidelijke login voor het gratis OS en een bedankvideo. */}
-          <h1 className="h-login-kop sn-vhs-off" translate="no"><span className="k1">THANK YOU</span> <span className="k2">ODOO!</span></h1>
-          <p className="h-hero-description">{t("Bedankt voor je bezoek. Je gratis SocialNow OS staat klaar: log in met het e-mailadres waarmee je je hebt aangemeld.")}</p>
+          <h1 className="h-login-kop sn-vhs-off" translate="no"><span className="k1">THANK YOU</span> <svg className="k2" viewBox="140 146 640 250" role="img" aria-label="Odoo">
+              <path fill="#fff" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
+              <path fill="#a0628f" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
+            </svg>
+          </h1>
+          <p className="h-hero-description"><b>{t("Drie dagen, honderden gesprekken, één geweldige beurs.")}</b> {t("Dank je wel voor je bezoek aan onze stand. Je gratis SocialNow OS staat voor je klaar, log in en ga meteen aan de slag.")}</p>
           <div className="os-entry">
             <div className="os-actions">
-              <a className="os-claim os-login-groot sn-btn3d h-button" href="https://app.socialnow.nl/login/">
-                <span className="sn-btn3d-sheen" />
-                <span>{t("INLOGGEN OP JE GRATIS OS")}</span>
-                <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
+              <a className="h-login-knop" href="https://app.socialnow.nl/login/">
+                {t("Log in op je gratis OS")}
+                <ArrowUpRight size={20} aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -156,11 +156,6 @@ export function Home() {
             <TeamTrust />
             <ClientLogos kort />
           </div>
-          {zoek && (
-            <nav className="h-variant-kies" aria-label="Variaties">
-              {["1", "2", "3", "4"].map((v) => <Link key={v} to={`?v=${v}`} aria-current={v === variant ? "true" : undefined}>{v}</Link>)}
-            </nav>
-          )}
         </div>
       </section>
       </LanguageContext.Provider>
