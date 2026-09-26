@@ -53,6 +53,41 @@ const nav = [
   ["/blog", "Blog"],
   ["/contact", "Contact"],
 ];
+const beursBerichten = [
+  "Vandaag bij C21: branding, website, Google Ads-audit en SocialNow OS gratis.",
+  "Ontmoet het team bij stand C21 op Odoo Experience.",
+  "Maak kennis met jouw OS. Eén chat voor je bedrijf.",
+];
+const vasteBerichten = [
+  "Je website, klanten, content en advertenties in één OS.",
+  "Maak kennis met SocialNow OS. Probeer het zelf.",
+  "Technologie met mensen erachter. Ontmoet ons team.",
+];
+const beursEinde = Date.parse("2026-09-26T23:59:59+02:00");
+
+function MessageBar() {
+  const { t } = useLanguage();
+  const [index, setIndex] = useState(0);
+  const [beurs, setBeurs] = useState(() => Date.now() <= beursEinde);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => {
+      setBeurs(Date.now() <= beursEinde);
+      setIndex((current) => (current + 1) % 3);
+    }, 4500);
+    return () => window.clearInterval(timer);
+  }, []);
+  const berichten = beurs ? beursBerichten : vasteBerichten;
+  return (
+    <div className="h-message-bar">
+      <Link className="h-message-bar-inner" to={beurs ? "/gratis-website" : "/het-os"}>
+        <span className="h-message-bar-label">{beurs ? "C21 LIVE" : "SOCIALNOW"}</span>
+        <span className="h-message-bar-text" key={`${beurs}-${index}`}>{t(berichten[index])}</span>
+        <ArrowUpRight size={16} aria-hidden="true" />
+      </Link>
+    </div>
+  );
+}
 export default function WebsiteProposal({language="en"}:{language?:Language}) {
   return (
     <LanguageProvider language={language}><MotionProvider>
@@ -186,6 +221,7 @@ function ProposalShell() {
             </NavLink>
           ))}
         </nav>
+        <MessageBar />
       </header>
       <main id="inhoud" ref={main} tabIndex={-1}>
         <Routes>

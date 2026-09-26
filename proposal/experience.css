@@ -1737,8 +1737,51 @@ html {
 .sn-site .h-header {
   top: 0;
 }
+.sn-site .h-message-bar {
+  border-top: 1px solid #ffffff1c;
+  background: linear-gradient(90deg, #061b11, #0b2317 52%, #061b11);
+}
+.sn-site .h-message-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  min-height: 47px;
+  padding: 8px 24px;
+  color: #f7fff9;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+.sn-site .h-message-bar-label {
+  flex: none;
+  color: #4be589;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+.sn-site .h-message-bar-text {
+  animation: h-message-enter .35s ease-out both;
+}
+.sn-site .h-message-bar-inner > svg {
+  flex: none;
+  color: #4be589;
+}
+.sn-site .h-message-bar-inner:hover .h-message-bar-text { text-decoration: underline; }
+@keyframes h-message-enter {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 600px) {
+  .sn-site .h-message-bar-inner { min-height: 58px; gap: 10px; padding: 8px 14px; font-size: 12px; line-height: 1.25; }
+  .sn-site .h-message-bar-label { font-size: 9px; letter-spacing: .06em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sn-site .h-message-bar-text { animation: none; }
+}
 html {
-  scroll-padding-top: 104px;
+  scroll-padding-top: 151px;
 }
 .sn-site .h-featured-copy h3 {
   font-size: clamp(32px, 3.1vw, 52px);
@@ -1754,7 +1797,7 @@ html {
 }
 @media (max-width: 600px) {
   html {
-    scroll-padding-top: 85px;
+    scroll-padding-top: 143px;
   }
 }
 
