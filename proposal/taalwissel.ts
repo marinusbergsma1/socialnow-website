@@ -1,11 +1,12 @@
 import { useEffect, useSyncExternalStore } from "react";
-import { LANGUAGES, type Language } from "./i18n/context";
+import type { Language } from "./i18n/context";
 
 // 24 september 2026 (Marinus): de kop op de homepage wisselt elke 5 seconden van taal, en het
 // vlaggetje in de balk wisselt mee. De echte taal van de pagina blijft staan; dit is alleen beeld.
 // Opent iemand het taalmenu, dan stopt het wisselen voor de rest van het bezoek.
-// Volgorde (Marinus): Engels, een andere taal, terug naar Engels, de volgende taal, enzovoort.
-const VOLGORDE: Language[] = LANGUAGES.filter((t) => t !== "en").flatMap((t) => ["en", t] as Language[]);
+// 26 september 2026 (Marinus): alleen nog Nederlands, Frans en Engels, met Engels steeds na de
+// andere taal: Nederlands, Engels, Frans, Engels, enzovoort. Op elke pagina begint het bij Nederlands.
+const VOLGORDE: Language[] = ["nl", "en", "fr", "en"];
 let toon: Language | null = null;
 let gestopt = false;
 const luisteraars = new Set<() => void>();
