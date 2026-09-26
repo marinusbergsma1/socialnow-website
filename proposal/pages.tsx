@@ -159,9 +159,9 @@ export function Home() {
           <div className="os-entry">
             <div className="os-actions">
               {/* 26 september 2026 (Marinus): pakket en demo gaan al automatisch via de websitescan, hier alleen inloggen. */}
-              <a className="os-claim sn-btn3d h-button" href="https://app.socialnow.nl/login/">
+              <a className="os-claim os-login-groot sn-btn3d h-button" href="https://app.socialnow.nl/login/">
                 <span className="sn-btn3d-sheen" />
-                <span>{translate("Log in op je gratis management en operation systeem", getoond)}</span>
+                <span>{translate("LOG IN OP JOUW GRATIS MANAGEMENT SYSTEEM", getoond)}</span>
                 <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
               </a>
             </div>

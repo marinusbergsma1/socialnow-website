@@ -2604,3 +2604,33 @@ html {
 }
 
 .sn-site .h-team-portraits img.is-sergio { transform: scale(1.38); object-position: 50% 35%; }
+
+/* 26 september 2026 (Marinus): de inlogknop moet heel groot zijn. */
+.sn-site .os-actions .os-login-groot {
+  width: 100%;
+  max-width: 760px;
+  min-height: 96px;
+  padding: 22px 26px 22px 36px;
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  justify-content: space-between;
+  text-align: left;
+  line-height: 1.15;
+}
+.sn-site .os-actions .os-login-groot .h-button-icon {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .sn-site .os-actions .os-login-groot {
+    min-height: 78px;
+    padding: 16px 14px 16px 22px;
+    font-size: 18px;
+  }
+  .sn-site .os-actions .os-login-groot .h-button-icon {
+    width: 44px;
+    height: 44px;
+  }
+}
