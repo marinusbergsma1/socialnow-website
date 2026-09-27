@@ -38,6 +38,15 @@ interface CrewMember {
 
 const crew: CrewMember[] = [
   {
+    id: 2,
+    name: 'Jos Hollenberg',
+    role: 'Meta Ads',
+    tag: 'GROWTH_OS',
+    line: 'Zorgt dat het werk gevonden wordt en groeit.',
+    color: '#25D366',
+    image: `${BASE}images/Jos-Hollenberg-1.webp`,
+  },
+  {
     id: 3,
     name: 'Sergio Jovovic',
     role: 'Meta Marketeer',
@@ -102,6 +111,16 @@ interface OsPartner {
 
 const osPartners: OsPartner[] = [
   {
+    name: 'Michelle Yang',
+    role: 'Supply chain specialist',
+    company: 'Komen Consultancy',
+    logo: `${BASE}images/komen-consultancy-logo.webp`,
+    tag: 'SUPPLY_CHAIN',
+    color: '#25D366',
+    image: `${BASE}images/Michelle-Yang.webp`,
+    sub: 'Michelle brengt expertise in supply chain en operationele processen mee vanuit Komen Consultancy.',
+  },
+  {
     name: 'Steef Komen',
     role: 'Partner · Accountancy & Data',
     company: 'Komen Consultancy',
@@ -112,16 +131,6 @@ const osPartners: OsPartner[] = [
     image: `${BASE}images/Steef-Komen.webp`,
     sub:
       'Met Komen Consultancy slaat SocialNow de handen ineen: Steef brengt het financiële en strategische fundament onder onze OS-systemen, van vastgoed-intelligence tot financiële tooling.',
-  },
-  {
-    name: 'Jos Hollenberg',
-    role: 'Meta Ads',
-    company: 'Marketing & Groei',
-    tag: 'GROWTH_OS',
-    color: '#25D366',
-    image: `${BASE}images/Jos-Hollenberg-1.webp`,
-    sub:
-      'Jos zorgt dat elk OS-systeem gevonden wordt en groeit: SEO, marketing en data-gedreven optimalisatie zitten vanaf dag één in het systeem gebakken.',
   },
 ];
 
@@ -262,7 +271,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
           </div>
         </div>
 
-        {/* 2b. OS-PARTNERS — main focus: slimme OS-systemen. Steef & Jos samen bovenaan. */}
+        {/* 2b. Michelle en Steef samen direct onder Marinus. */}
         <div className="mb-16 md:mb-24 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
           <div className="mb-8 md:mb-10">
             <span className="font-mono text-[10px] tracking-[0.4em] text-[#00A3E0] uppercase block mb-5">

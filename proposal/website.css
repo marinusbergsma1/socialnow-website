@@ -964,6 +964,15 @@ video {
   grid-template-columns: repeat(4, 1fr);
   gap: 35px 22px;
 }
+.h-team-partners .h-people-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 900px;
+}
+@media (max-width: 640px) {
+  .h-team-partners .h-people-grid {
+    grid-template-columns: 1fr;
+  }
+}
 .h-portrait {
   border-radius: 17px;
   overflow: hidden;

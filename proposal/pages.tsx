@@ -649,6 +649,15 @@ export function PricesPage() {
   );
 }
 export function TeamPage() {
+  const partners = ["Michelle Yang", "Steef Komen"]
+    .map(name => people.find(person => person.name === name))
+    .filter((person): person is NonNullable<typeof person> => Boolean(person));
+  const specialists = people.filter(person =>
+    person.name !== "Marinus Bergsma" &&
+    person.name !== "Michelle Yang" &&
+    person.name !== "Steef Komen"
+  );
+
   return (
     <>
       <PageHeading
@@ -665,9 +674,26 @@ export function TeamPage() {
       <section className="h-wrap">
         <Founder />
       </section>
+      <section className="h-section h-wrap h-team-partners">
+        <Heading
+          label="SocialNow × Komen Consultancy"
+          title={
+            <>
+              Michelle en Steef.
+              <br />
+              <span>Samen sterk in het OS.</span>
+            </>
+          }
+        />
+        <TeamGrid members={partners} />
+        <p className="h-footnote">
+          Michelle Yang brengt expertise in supply chain en operationele processen mee.
+          Steef Komen werkt mee aan accountancy en data.
+        </p>
+      </section>
       <section className="h-section h-wrap">
         <Heading
-          label="Wie je tegenkomt"
+          label="De overige specialisten"
           title={
             <>
               Ieder een eigen vak.
@@ -676,11 +702,7 @@ export function TeamPage() {
             </>
           }
         />
-        <TeamGrid />
-        <p className="h-footnote">
-          Steef Komen werkt vanuit Komen Consultancy mee aan accountancy en
-          data.
-        </p>
+        <TeamGrid members={specialists} />
         <AuditTeaser />
       </section>
     </>

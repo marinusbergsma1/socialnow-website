@@ -124,6 +124,11 @@ for (const [route, meta] of Object.entries(routeMeta)) {
           worksFor: { '@id': `${BASE}/#komen-consultancy` },
           affiliation: { '@id': `${BASE}/#organization` },
         },
+        {
+          ...person('Michelle Yang', 'Supply chain specialist'),
+          worksFor: { '@id': `${BASE}/#komen-consultancy` },
+          affiliation: { '@id': `${BASE}/#organization` },
+        },
       ],
     };
     const teamScript = `<script type="application/ld+json">${JSON.stringify(teamGraph)}</script>`;

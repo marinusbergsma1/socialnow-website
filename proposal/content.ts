@@ -41,6 +41,11 @@ export const people = [
     role: "Partner · Accountancy & Data",
     image: "Steef-Komen.webp",
   },
+  {
+    name: "Michelle Yang",
+    role: "Supply chain specialist",
+    image: "Michelle-Yang.webp",
+  },
 ];
 export const agents = [
   {

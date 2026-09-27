@@ -77,6 +77,14 @@ const team: TeamItem[] = [
     partnership: "SocialNow × Komen Consultancy",
     image: `${import.meta.env.BASE_URL}images/Steef-Komen.webp`
   },
+  {
+    id: 10,
+    type: 'member',
+    name: "Michelle Yang",
+    role: "Supply chain specialist",
+    partnership: "SocialNow × Komen Consultancy",
+    image: `${import.meta.env.BASE_URL}images/Michelle-Yang.webp`
+  },
 ];
 
 // Jubileum-teller: SocialNow bestaat op 1 november 2026 vijf jaar (opgericht november 2021)
@@ -216,7 +224,7 @@ const TeamMemberCard: React.FC<{ member: TeamItem; index: number }> = ({ member,
   );
 };
 
-const PARTNER_NAMES = ['Steef Komen', 'Jos Hollenberg'];
+const PARTNER_NAMES = ['Michelle Yang', 'Steef Komen'];
 
 const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
   const founder = team.find(m => m.name === "Marinus Bergsma");
