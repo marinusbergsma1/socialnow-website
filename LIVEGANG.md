@@ -23,3 +23,11 @@ Een orkestratielaag neemt `livegang` over naar `main`. Een push naar `main` publ
 | Teamstrook, prijzen en team (sessie 5c900cd2) | teamstrook, /prijzen (OS op maat vanaf €10.000, pakketten +€2.000), /team (bedankje partners, Head of-functies, system experts) | live in main 3e18ff4; wacht op namen en logo's van de partnerbedrijven |
 | Website header: persoonlijk verhaal en Odoo product | Verhaal.tsx onder de hero, Download-knop | live in main 7393c2e |
 | Veiligheidsbelofte hoofdchat, websitesubchat "Zet veiligheidsvideo en belofte prominent op socialnow.nl" | proposal/Veiligheid.tsx plus eigen CSS, pagina /veiligheid, public/video/veiligheid/, public/documenten/socialnow-sleutelbelofte-{nl,en}.pdf; featuretak `feat/veiligheid` vanaf `livegang`. Blok komt na de live sites en vóór "Four faces" (plaatsing door de homepage-regie) | bezig |
+
+## Orkestratie
+
+| Wat | Stand |
+|---|---|
+| Live op socialnow.nl | main 7393c2e, deploy geslaagd 27 sep 23:22 |
+| Klaar voor main melden | zet je regel op "klaar voor main" met de commit en stuur de orkestratiechat een bericht |
+| Open tak buiten livegang | `claude/gratis-balk-sterker` (9f15698, 3c8dcad, voortgangsbalk gratis website): eigenaar onbekend, wacht op akkoord Marinus |
