@@ -44,7 +44,6 @@ import JuridischPage from "../components/JuridischPage";
 // Staat uit tot er een script op de site komt dat toestemming nodig heeft; de afweging staat
 // in het bestand zelf.
 import Cookiebot from "./Cookiebot";
-import ConsentPopup from "./ConsentPopup";
 
 const nav = [
   ["/het-os", "Het OS"],
@@ -242,7 +241,7 @@ function ProposalShell() {
         </Routes>
       </main>
       <BrandFooter />
-      <ConsentPopup />
+      {/* 27 september 2026: de onboarding-popup (ConsentPopup) is op verzoek van Marinus van de site gehaald. */}
       <Cookiebot />
     </div>
   );
