@@ -2769,3 +2769,20 @@ html {
   .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust > span:last-child { min-width: 0; }
   .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust > span:last-child > span { font-size: 14px; }
 }
+
+/* 28 september 2026 (Marinus): het bedankje aan onze partners, groot en duidelijk. */
+.sn-site .h-bedankt { position: relative; margin-top: clamp(48px, 7vw, 110px); padding: clamp(32px, 6vw, 88px); border: 1px solid #1f5a3a; border-radius: 28px; background: radial-gradient(110% 90% at 0% 0%, rgba(37, 211, 102, .18), transparent 60%), radial-gradient(90% 80% at 100% 100%, rgba(0, 163, 224, .14), transparent 60%), #07110c; }
+.sn-site .h-bedankt h2 { margin-top: 18px; font-size: clamp(40px, 6vw, 92px); line-height: 1; letter-spacing: -.02em; }
+.sn-site .h-bedankt h2 span { color: #25d366; }
+.sn-site .h-bedankt-tekst { margin-top: 26px; max-width: 760px; font-size: clamp(17px, 1.4vw, 22px); line-height: 1.55; color: #c3ccd4; }
+.sn-site .h-bedankt-rij { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: clamp(28px, 4vw, 48px); }
+.sn-site .h-bedankt-kaart { display: grid; gap: 8px; align-content: start; padding: 24px; border: 1px solid #1d3a2c; border-radius: 18px; background: rgba(6, 18, 12, .75); }
+.sn-site .h-bedankt-kaart b { font-size: clamp(19px, 1.5vw, 24px); color: #fff; font-weight: 700; }
+.sn-site .h-bedankt-kaart span { font-size: 15px; line-height: 1.5; color: #9aa6ae; }
+@media (max-width: 900px) { .sn-site .h-bedankt { border-radius: 22px; } .sn-site .h-bedankt-rij { grid-template-columns: minmax(0, 1fr); } }
+
+/* 28 september 2026 (Marinus): elk teamlid is system expert en helpt je persoonlijk vanuit je Custom OS. */
+.sn-site .h-system-experts { max-width: 760px; margin: 18px 0 28px; font-size: clamp(16px, 1.25vw, 20px); line-height: 1.55; color: #c3ccd4; }
+.sn-site .h-system-experts b { color: #25d366; font-weight: 700; }
+.sn-site .h-system-expert { display: inline-flex; align-items: center; gap: 6px; width: fit-content; margin-top: 6px; padding: 3px 9px; border: 1px solid #1f5a3a; border-radius: 999px; font-style: normal; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #76e7a2; }
+.sn-site .h-system-expert::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #25d366; }

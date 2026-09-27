@@ -1,49 +1,51 @@
 import { allProjects, webShowcaseProjects } from "../data/projects";
 import { CLAIM_URL } from "./os-entry";
 export const projects = [...webShowcaseProjects, ...allProjects];
+// 28 september 2026 (Marinus): zakelijkere functies, zoals "Head of".
 export const people = [
   {
     name: "Marinus Bergsma",
-    role: "Founder & Creative Art Director",
+    role: "Founder & CEO",
     image: "marinus-profiel-blauw.webp",
   },
-  { name: "Jos Hollenberg", role: "Meta Ads", image: "Jos-Hollenberg-1.webp" },
+  { name: "Jos Hollenberg", role: "Head of Meta Ads", image: "Jos-Hollenberg-1.webp" },
   {
     name: "Sergio Jovovic",
-    role: "Meta Marketeer",
+    // 28 september 2026 (Marinus): Sergio staat ook bij Meta Ads.
+    role: "Meta Ads Specialist",
     image: "Sergio-Jovovic.webp",
   },
   {
     name: "Carmel Boon",
-    role: "Video",
+    role: "Head of Video Production",
     image: "Carmel-Boon-V2.webp",
   },
   {
     name: "Sam van der Sluis",
-    role: "Videograaf",
+    role: "Lead Videographer",
     image: "Sam-van-der-Sluis.webp",
   },
   {
     name: "Emma Peperkamp",
-    role: "Fotograaf",
+    role: "Lead Photographer",
     image: "Emma-Peperkamp-V2.webp",
   },
-  { name: "Nick van Keulen", role: "Google Ads Expert", image: "Nick-VK.webp" },
+  { name: "Nick van Keulen", role: "Head of Google Ads & Search", image: "Nick-VK.webp" },
   // 25 september 2026 (Marinus): nieuw teamlid.
   { name: "Elian Coellar", role: "Head of Private Partnerships", image: "Elian-Coellar-2026-09-26.webp" },
   {
     name: "Sid van Kalken",
-    role: "Webdeveloper",
+    role: "Head of Web Development",
     image: "Sid-van-Kalken.webp",
   },
   {
     name: "Steef Komen",
-    role: "Partner · Accountancy & Data",
+    role: "Partner · Head of Finance & Data",
     image: "Steef-Komen.webp",
   },
   {
     name: "Michelle Yang",
-    role: "Supply chain specialist",
+    role: "Head of Supply Chain & Operations",
     image: "Michelle-Yang-HD.webp",
   },
 ];
@@ -197,8 +199,8 @@ export const prices = [
   },
   {
     name: "02 / Jouw Custom OS",
-    price: "Op maat.",
-    period: "Een persoonlijk voorstel",
+    price: "Vanaf €10.000",
+    period: "Een OS gebouwd rond je bedrijf",
     description:
       "Van je eerste ervaring met het OS naar een OS rond jouw bedrijf.",
     items: [

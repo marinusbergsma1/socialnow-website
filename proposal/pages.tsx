@@ -55,7 +55,7 @@ function Founder() {
           loading="lazy"
         />
         <figcaption>
-          Marinus Bergsma<span>Founder & Creative Art Director</span>
+          Marinus Bergsma<span>Founder & CEO</span>
         </figcaption>
       </div>
       <div>
@@ -674,6 +674,33 @@ export function TeamPage() {
       <section className="h-wrap">
         <Founder />
       </section>
+      {/* 28 september 2026 (Marinus): een groot en duidelijk bedankje aan alle bedrijven waarmee we samen
+          de developers- en datakant van het OS hebben doorgevoerd. */}
+      <section className="h-section h-wrap h-bedankt" aria-labelledby="h-bedankt-titel">
+        <p className="h-eyebrow">Dank je wel</p>
+        <h2 id="h-bedankt-titel">
+          Gebouwd met sterke partners.
+          <br />
+          <span>Bedankt.</span>
+        </h2>
+        <p className="h-bedankt-tekst">
+          Het OS bouwen we niet alleen. Samen met bedrijven met ervaren developers en dataspecialisten hebben we de techniek, de koppelingen en de data goed doorgevoerd. Aan al die bedrijven en mensen: dank je wel.
+        </p>
+        <div className="h-bedankt-rij">
+          <div className="h-bedankt-kaart">
+            <b translate="no">Komen Consultancy</b>
+            <span>Accountancy en data, met Steef Komen en Michelle Yang</span>
+          </div>
+          <div className="h-bedankt-kaart">
+            <b>Onze developers</b>
+            <span>Die de koppelingen met Odoo, Meta, Google en de website bouwden en testten</span>
+          </div>
+          <div className="h-bedankt-kaart">
+            <b>Onze dataspecialisten</b>
+            <span>Die zorgden dat je eigen data veilig en kloppend in het OS terechtkomt</span>
+          </div>
+        </div>
+      </section>
       <section className="h-section h-wrap h-team-partners">
         <Heading
           label="SocialNow × Komen Consultancy"
@@ -693,15 +720,19 @@ export function TeamPage() {
       </section>
       <section className="h-section h-wrap">
         <Heading
-          label="De overige specialisten"
+          label="Onze system experts"
           title={
             <>
               Ieder een eigen vak.
               <br />
-              <span>Samen SocialNow.</span>
+              <span>Persoonlijk voor je klaar.</span>
             </>
           }
         />
+        {/* 28 september 2026 (Marinus): het team zijn system experts die je persoonlijk helpen vanuit je Custom OS. */}
+        <p className="h-system-experts">
+          Iedereen in ons team is ook <b>system expert</b>. Ze kennen het OS van binnen en buiten en staan klaar om je persoonlijk te helpen, direct vanuit je eigen Custom OS.
+        </p>
         <TeamGrid members={specialists} />
         <AuditTeaser />
       </section>
@@ -870,7 +901,7 @@ export function ContactPage() {
             />
             <div>
               <h2>Begin bij Marinus.</h2>
-              <p>Founder & Creative Art Director</p>
+              <p>Founder & CEO</p>
             </div>
           </div>
           <div className="h-contact-methods">
