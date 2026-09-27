@@ -21,7 +21,10 @@ Een orkestratielaag neemt `livegang` over naar `main`. Een push naar `main` publ
 | Chat | Onderdeel | Stand |
 |---|---|---|
 | Teamstrook, prijzen en team (sessie 5c900cd2) | teamstrook, /prijzen (OS op maat vanaf €10.000, pakketten +€2.000), /team (bedankje partners, Head of-functies, system experts) | live in main 3e18ff4; wacht op namen en logo's van de partnerbedrijven |
-| Website header: persoonlijk verhaal en Odoo product | Verhaal.tsx onder de hero, Download-knop | live in main 7393c2e |
+| Website header: persoonlijk verhaal en Odoo product (regie homepage-upgrade, sessie 5c0f2f30) | homepage met storytelling: verhaal met tijdlijn onder de hero, partner-CTA met Michelle, scrollfix live sites, volgorde van de secties; bestanden `proposal/pages.tsx` (Home), `proposal/Verhaal.tsx`, `proposal/Deuren.tsx`, `proposal/LiveWebsites.tsx`, `proposal/experience.css`; featuretak `feat/verhaal-homepage` vanaf `livegang`. Werkorder: `~/Downloads/website-verhaal-2026-09-28/WERKORDER.md` | bezig (Download-knop en eerste verhaal live in 7393c2e) |
+| Verhaalfilm (hulpchat van de homepage-regie, chip) | HyperFrames-film van het verhaal, EN en NL; alleen `public/video/verhaal/*`; tak `claude/verhaalfilm` | wacht op start |
+| Cases Il Gordo en VASTIQ (hulpchat van de homepage-regie, chip) | nieuwe case-kaarten; `proposal/FeaturedWork.tsx`, `data/projects.ts`, `public/images/cases/*`, `proposal/cases.css`; tak `claude/cases-ilgordo` | wacht op start |
+| Site-audit op het verhaal (hulpchat van de homepage-regie, chip) | pagina's buiten de homepage in lijn met het verhaal, functie Michelle; tak `claude/site-visie`; stemt /team af met de teamchat | wacht op start |
 | Veiligheidsbelofte hoofdchat, websitesubchat "Zet veiligheidsvideo en belofte prominent op socialnow.nl" | proposal/Veiligheid.tsx plus eigen CSS, pagina /veiligheid, public/video/veiligheid/, public/documenten/socialnow-sleutelbelofte-{nl,en}.pdf; featuretak `feat/veiligheid` vanaf `livegang`. Blok komt na de live sites en vóór "Four faces" (plaatsing door de homepage-regie) | bezig |
 
 ## Orkestratie
