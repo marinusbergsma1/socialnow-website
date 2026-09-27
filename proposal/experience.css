@@ -2807,56 +2807,129 @@ html {
   .sn-site .h-hero-tekst .os-actions .h-install-knop { padding: 0 16px 0 14px; }
 }
 
-/* 28 september 2026 (Marinus): het persoonlijke verhaal en waarom het OS gratis kan, direct onder de header,
-   met Odoo als product en Salesforce als koppeling in aanbouw. */
-.sn-site .h-verhaal { padding-top: clamp(64px, 8vw, 120px); }
-.sn-site .h-verhaal > .h-eyebrow { display: flex; align-items: center; margin: 0 0 20px; color: #c3ccd4; }
-.sn-site .h-verhaal > h2 { max-width: 900px; }
-.sn-site .h-verhaal > h2 > span { color: #25d366; }
-.sn-site .h-verhaal-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 20px; margin-top: clamp(32px, 4vw, 52px); }
-.sn-site .h-verhaal-brief { display: flex; flex-direction: column; justify-content: space-between; gap: 26px; padding: clamp(24px, 2.6vw, 38px); border-radius: 24px; background: #0b0f12; border: 1px solid rgba(255,255,255,.1); }
-.sn-site .h-verhaal-brief blockquote { margin: 0; display: grid; gap: 16px; }
-.sn-site .h-verhaal-brief blockquote p { margin: 0; font-size: clamp(17px, 1.3vw, 21px); line-height: 1.6; color: #d3d9df; }
-.sn-site .h-verhaal-brief blockquote p:last-child { color: #fff; font-weight: 500; }
-.sn-site .h-verhaal-brief figcaption { display: flex; align-items: center; gap: 14px; }
-.sn-site .h-verhaal-brief figcaption img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid #25d366; flex: none; }
-.sn-site .h-verhaal-brief figcaption > span { display: grid; gap: 2px; }
-.sn-site .h-verhaal-brief figcaption strong { font-size: 16px; color: #fff; }
-.sn-site .h-verhaal-brief figcaption span span { font-size: 14px; color: #9aa4ad; }
-.sn-site .h-verhaal-gratis { padding: clamp(24px, 2.6vw, 38px); border-radius: 24px; border: 1px solid #1f5a3a; background: radial-gradient(120% 90% at 0% 0%, rgba(37, 211, 102, .14), transparent 60%), #07110c; }
-.sn-site .h-verhaal-gratis h3 { font-size: clamp(22px, 1.9vw, 30px); color: #fff; }
-.sn-site .h-verhaal-gratis ol { list-style: none; margin: 18px 0 0; padding: 0; }
-.sn-site .h-verhaal-gratis li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 18px 0; border-top: 1px solid rgba(255,255,255,.08); }
-.sn-site .h-verhaal-gratis li:last-child { padding-bottom: 0; }
-.sn-site .h-verhaal-nr { font-size: 14px; font-weight: 700; letter-spacing: .06em; color: #25d366; padding-top: 3px; }
-.sn-site .h-verhaal-gratis li > span:last-child { display: grid; gap: 6px; }
-.sn-site .h-verhaal-gratis li b { font-size: clamp(17px, 1.25vw, 20px); color: #fff; font-weight: 700; }
-.sn-site .h-verhaal-gratis li b + span { font-size: 15.5px; line-height: 1.55; color: #aeb8c1; }
-.sn-site .h-verhaal-koppelingen { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 20px; }
-.sn-site .h-verhaal-koppeling { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 14px 18px; padding: clamp(22px, 2.4vw, 32px); border-radius: 24px; border: 1px solid rgba(255,255,255,.1); }
-.sn-site .h-verhaal-koppeling.is-odoo { background: radial-gradient(110% 120% at 0% 0%, rgba(113, 75, 103, .28), transparent 62%), #0b0a0d; }
-.sn-site .h-verhaal-koppeling.is-salesforce { background: radial-gradient(110% 120% at 0% 0%, rgba(0, 161, 224, .2), transparent 62%), #080d12; border-color: rgba(0, 161, 224, .28); }
-.sn-site .h-verhaal-product { display: flex; align-items: center; gap: 14px; margin: 0; line-height: 1; }
-.sn-site .h-verhaal-product svg { height: clamp(34px, 2.6vw, 44px); width: auto; flex: none; }
-.sn-site .is-odoo .h-verhaal-product > span { font-size: clamp(14px, 1.05vw, 17px); font-weight: 700; letter-spacing: .2em; color: #fff; padding-top: 4px; }
-.sn-site .is-salesforce .h-verhaal-product > span { font-size: clamp(22px, 1.8vw, 30px); font-weight: 700; letter-spacing: -.02em; color: #fff; }
-.sn-site .h-verhaal-status { display: inline-flex; align-items: center; gap: 8px; margin: 0; padding: 7px 13px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
-.sn-site .h-verhaal-status i { width: 7px; height: 7px; border-radius: 50%; flex: none; }
-.sn-site .h-verhaal-status.is-live { border: 1px solid #1f5a3a; color: #76e7a2; }
-.sn-site .h-verhaal-status.is-live i { background: #25d366; box-shadow: 0 0 10px #25d366; }
-.sn-site .h-verhaal-status.is-bouw { border: 1px solid rgba(0, 163, 224, .45); color: #7fd3f5; }
-.sn-site .h-verhaal-status.is-bouw i { background: #00a3e0; box-shadow: 0 0 10px #00a3e0; animation: h-verhaal-puls 1.6s ease-in-out infinite; }
-.sn-site .h-verhaal-uitleg { grid-column: 1 / -1; margin: 0; font-size: 15.5px; line-height: 1.55; color: #aeb8c1; }
-.sn-site .h-verhaal-koppeling .h-text-link { grid-column: 1 / -1; justify-self: start; color: #7fd3f5; }
-.sn-site .h-verhaal-koppeling .h-text-link:hover { color: #fff; }
-@keyframes h-verhaal-puls { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.8); } }
-@media (prefers-reduced-motion: reduce) { .sn-site .h-verhaal-status.is-bouw i { animation: none; } }
-@media (max-width: 560px) {
-  .sn-site .h-verhaal-koppeling { grid-template-columns: minmax(0, 1fr); }
-  .sn-site .h-verhaal-status { justify-self: start; }
+/* 28 september 2026 (Marinus): "mijn verhaal hier gelijk verteld, met kleine tekst over mijn waarom en onze achtergrond".
+   Links staat het waarom vast in beeld, rechts schuift de tijdlijn per hoofdstuk in beeld. */
+.sn-site .h-verhaal { padding-top: clamp(72px, 9vw, 140px); }
+.sn-site .h-verhaal-kop > .h-eyebrow { display: flex; align-items: center; margin: 0 0 20px; color: #c3ccd4; }
+.sn-site .h-verhaal-kop > h2 { max-width: 980px; }
+.sn-site .h-verhaal-kop > h2 > span { color: #25d366; }
+.sn-site .h-verhaal-grid { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(28px, 5vw, 88px); margin-top: clamp(36px, 5vw, 64px); align-items: start; }
+.sn-site .h-verhaal-waarom { position: sticky; top: 112px; display: grid; gap: 14px; }
+.sn-site .h-verhaal-portret { position: relative; margin: 0 0 8px; aspect-ratio: 5 / 4; border-radius: 26px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); background: var(--sn-navy); }
+.sn-site .h-verhaal-portret img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
+.sn-site .h-verhaal-portret::after { content: ""; position: absolute; inset: 55% 0 0; background: linear-gradient(to top, rgba(0,0,0,.75), transparent); pointer-events: none; }
+.sn-site .h-verhaal-jaren { position: absolute; z-index: 1; left: 18px; bottom: 16px; display: flex; align-items: baseline; gap: 8px; color: #fff; font-size: 14px; font-weight: 500; }
+.sn-site .h-verhaal-jaren b { font-size: 44px; line-height: 1; font-weight: 700; color: #25d366; letter-spacing: -.04em; }
+.sn-site .h-verhaal-label { margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #25d366; }
+.sn-site .h-verhaal-waarom-tekst { margin: 0; font-size: clamp(18px, 1.45vw, 22px); line-height: 1.5; color: #fff; font-weight: 500; }
+.sn-site .h-hoofdstuk-motto span { color: #25d366; }
+.sn-site .h-verhaal-naam { margin: 6px 0 0; display: grid; gap: 2px; }
+.sn-site .h-verhaal-naam strong { font-size: 16px; color: #fff; }
+.sn-site .h-verhaal-naam span { font-size: 14px; color: #9aa4ad; }
+
+.sn-site .h-verhaal-tijdlijn { position: relative; list-style: none; margin: 0; padding: 0 0 0 38px; display: grid; gap: clamp(36px, 5vw, 64px); }
+.sn-site .h-verhaal-tijdlijn::before { content: ""; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; border-radius: 2px; background: linear-gradient(to bottom, #25d366, #00a3e0 35%, #f7e644 62%, #f62961); opacity: .35; }
+.sn-site .h-hoofdstuk { position: relative; display: grid; gap: 10px; }
+.sn-site .h-hoofdstuk-punt { position: absolute; left: -38px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: #000; border: 2px solid var(--hoofdstuk-kleur); transition: background .5s ease, box-shadow .5s ease; }
+.sn-site .h-hoofdstuk.is-in-beeld .h-hoofdstuk-punt { background: var(--hoofdstuk-kleur); box-shadow: 0 0 16px var(--hoofdstuk-kleur); }
+.sn-site .h-hoofdstuk-wanneer { margin: 0; display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--hoofdstuk-kleur); }
+.sn-site .h-hoofdstuk-wanneer span { color: #6d757c; letter-spacing: .06em; }
+.sn-site .h-hoofdstuk h3 { font-size: clamp(24px, 2.3vw, 36px); line-height: 1.12; letter-spacing: -.03em; color: #fff; }
+.sn-site .h-hoofdstuk-tekst { margin: 0; max-width: 620px; font-size: clamp(15.5px, 1.1vw, 17px); line-height: 1.62; color: #aeb8c1; }
+.sn-site .h-hoofdstuk-beeld { margin-top: 8px; }
+.sn-site .h-verhaal-tijdlijn.is-klaar .h-hoofdstuk > :not(.h-hoofdstuk-punt) { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+.sn-site .h-verhaal-tijdlijn.is-klaar .h-hoofdstuk.is-in-beeld > :not(.h-hoofdstuk-punt) { opacity: 1; transform: none; }
+.sn-site .h-verhaal-tijdlijn.is-klaar .h-hoofdstuk.is-in-beeld > h3 { transition-delay: .06s; }
+.sn-site .h-verhaal-tijdlijn.is-klaar .h-hoofdstuk.is-in-beeld > .h-hoofdstuk-tekst { transition-delay: .12s; }
+.sn-site .h-verhaal-tijdlijn.is-klaar .h-hoofdstuk.is-in-beeld > .h-hoofdstuk-beeld { transition-delay: .2s; }
+@media (prefers-reduced-motion: reduce) {
+  .sn-site .h-verhaal-tijdlijn.is-klaar .h-hoofdstuk > :not(.h-hoofdstuk-punt) { opacity: 1; transform: none; transition: none; }
 }
+.sn-site .h-hoofdstuk-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 22px 28px; }
+.sn-site .h-hoofdstuk-logos img { height: 52px; width: auto; max-width: 180px; object-fit: contain; filter: grayscale(1) brightness(1.7); opacity: .85; }
+.sn-site .h-hoofdstuk-logos img.is-eigen { filter: none; opacity: 1; height: 38px; }
+.sn-site .h-hoofdstuk-logos b { font-size: 17px; font-weight: 700; letter-spacing: .02em; color: #c9ced3; font-style: italic; }
+.sn-site .h-hoofdstuk-team { display: flex; flex-wrap: wrap; gap: 6px 0; }
+.sn-site .h-hoofdstuk-team img { width: 46px; height: 46px; margin-left: -10px; border-radius: 50%; object-fit: cover; border: 2px solid #000; background: #111; }
+.sn-site .h-hoofdstuk-team img:first-child { margin-left: 0; border-color: #f7e644; }
+.sn-site .h-hoofdstuk-motto { margin: 0; display: grid; padding: 18px 22px; border-radius: 18px; border: 1px solid rgba(246, 41, 97, .35); background: radial-gradient(120% 120% at 0% 0%, rgba(246, 41, 97, .16), transparent 60%), #0c070a; font-size: clamp(20px, 1.8vw, 28px); line-height: 1.15; font-weight: 700; letter-spacing: -.025em; color: #fff; width: fit-content; }
+.sn-site .h-hoofdstuk-odoo { display: inline-flex; align-items: center; gap: 14px; padding: 14px 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,.1); background: #0b0a0d; }
+.sn-site .h-hoofdstuk-odoo svg { height: 34px; width: auto; }
+.sn-site .h-hoofdstuk-odoo span { font-size: 14px; font-weight: 700; letter-spacing: .2em; color: #fff; padding-top: 3px; }
+.sn-site .h-hoofdstuk-partner { display: flex; align-items: center; gap: 18px; }
+.sn-site .h-hoofdstuk-steef { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid #f7e644; }
+.sn-site .h-hoofdstuk-komen { height: 40px; width: auto; max-width: 220px; object-fit: contain; }
+.sn-site .h-hoofdstuk-foto { display: block; width: min(100%, 420px); aspect-ratio: 4 / 5; object-fit: cover; object-position: center 40%; border-radius: 22px; border: 1px solid rgba(255,255,255,.1); }
 @media (max-width: 900px) {
-  .sn-site .h-verhaal-grid, .sn-site .h-verhaal-koppelingen { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .sn-site .h-verhaal-koppelingen { margin-top: 14px; }
-  .sn-site .h-verhaal-brief, .sn-site .h-verhaal-gratis, .sn-site .h-verhaal-koppeling { border-radius: 20px; }
+  .sn-site .h-verhaal-grid { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .h-verhaal-waarom { position: static; grid-template-columns: 96px minmax(0, 1fr); grid-template-areas: "foto label" "foto naam" "tekst tekst"; column-gap: 18px; row-gap: 6px; align-items: center; }
+  .sn-site .h-verhaal-portret { grid-area: foto; margin: 0; aspect-ratio: 1; border-radius: 50%; border-width: 2px; border-color: #25d366; }
+  .sn-site .h-verhaal-portret::after, .sn-site .h-verhaal-jaren { display: none; }
+  .sn-site .h-verhaal-label { grid-area: label; align-self: end; }
+  .sn-site .h-verhaal-naam { grid-area: naam; align-self: start; margin: 0; }
+  .sn-site .h-verhaal-waarom-tekst { grid-area: tekst; margin-top: 12px; }
+  .sn-site .h-verhaal-tijdlijn { padding-left: 30px; }
+  .sn-site .h-hoofdstuk-punt { left: -30px; }
 }
+
+/* 28 september 2026 (Marinus): twee deuren na het verhaal. Odoo-gebruikers proberen het gratis, implementatiepartners
+   praten met Michelle, met de partners die hen voorgingen. */
+.sn-site .h-deuren { padding-top: clamp(72px, 9vw, 130px); }
+.sn-site .h-deuren > .h-eyebrow { display: flex; align-items: center; margin: 0 0 20px; color: #c3ccd4; }
+.sn-site .h-deuren > h2 > span { color: #25d366; }
+.sn-site .h-deuren-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: clamp(32px, 4vw, 52px); }
+.sn-site .h-deur { display: flex; flex-direction: column; gap: 16px; padding: clamp(26px, 3vw, 44px); border-radius: 28px; border: 1px solid rgba(255,255,255,.1); }
+.sn-site .h-deur.is-gebruiker { border-color: #1f5a3a; background: radial-gradient(120% 90% at 0% 0%, rgba(37, 211, 102, .16), transparent 60%), #07110c; }
+.sn-site .h-deur.is-partner { border-color: rgba(0, 163, 224, .3); background: radial-gradient(120% 90% at 100% 0%, rgba(0, 163, 224, .16), transparent 60%), #060d13; }
+.sn-site .h-deur-label { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #76e7a2; }
+.sn-site .h-deur.is-partner .h-deur-label { color: #7fd3f5; }
+.sn-site .h-deur h3 { font-size: clamp(28px, 2.6vw, 42px); line-height: 1.05; letter-spacing: -.035em; color: #fff; }
+.sn-site .h-deur-tekst { margin: 0; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.6; color: #c3ccd4; }
+.sn-site .h-deur-waarom { margin: 0; padding: 14px 16px; border-radius: 14px; background: rgba(37, 211, 102, .07); border: 1px solid rgba(37, 211, 102, .18); font-size: 15px; line-height: 1.55; color: #c3ccd4; }
+.sn-site .h-deur-waarom b { color: #76e7a2; }
+.sn-site .h-deur-koppelingen { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 10px; }
+.sn-site .h-deur-koppelingen li { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,.08); background: rgba(0,0,0,.35); }
+.sn-site .h-deur-merk { display: inline-flex; align-items: center; gap: 12px; }
+.sn-site .h-deur-merk svg { height: 26px; width: auto; flex: none; }
+.sn-site .is-live .h-deur-merk span { font-size: 12px; font-weight: 700; letter-spacing: .2em; color: #fff; padding-top: 2px; }
+.sn-site .is-bouw .h-deur-merk span { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: -.01em; }
+.sn-site .h-deur-koppelingen b { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.sn-site .h-deur-koppelingen b i { width: 7px; height: 7px; border-radius: 50%; }
+.sn-site .h-deur-koppelingen .is-live b { border: 1px solid #1f5a3a; color: #76e7a2; }
+.sn-site .h-deur-koppelingen .is-live b i { background: #25d366; box-shadow: 0 0 10px #25d366; }
+.sn-site .h-deur-koppelingen .is-bouw b { border: 1px solid rgba(0, 163, 224, .45); color: #7fd3f5; }
+.sn-site .h-deur-koppelingen .is-bouw b i { background: #00a3e0; box-shadow: 0 0 10px #00a3e0; animation: h-deur-puls 1.6s ease-in-out infinite; }
+@keyframes h-deur-puls { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.8); } }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-deur-koppelingen .is-bouw b i { animation: none; } }
+.sn-site .h-deur .h-deur-knop { align-self: flex-start; margin-top: auto; min-height: 58px; border-radius: 999px; padding: 0 8px 0 26px; gap: 14px; font-size: 17px; font-weight: 700; text-transform: none; letter-spacing: 0; }
+.sn-site .h-deur.is-partner .h-deur-knop { padding: 0 26px 0 22px; gap: 10px; margin-top: 0; }
+.sn-site .h-deur-knop .h-button-icon { width: 42px; height: 42px; }
+.sn-site .h-deur-persoon { display: flex; align-items: center; gap: 14px; }
+.sn-site .h-deur-persoon img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid #00a3e0; flex: none; }
+.sn-site .h-deur-persoon p { margin: 0; display: grid; gap: 2px; }
+.sn-site .h-deur-persoon strong { font-size: 17px; color: #fff; }
+.sn-site .h-deur-persoon span { font-size: 14px; color: #9fb1c5; }
+.sn-site .h-deur-acties { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; }
+.sn-site .h-deur-mail { gap: 8px; color: #7fd3f5; font-size: 15px; }
+.sn-site .h-deur-mail:hover { color: #fff; }
+.sn-site .h-deur-logos { margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.08); }
+.sn-site .h-deur-logos p { margin: 0 0 14px; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #8193a8; }
+.sn-site .h-deur-logos ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; }
+.sn-site .h-deur-logos img { display: block; height: 26px; width: auto; max-width: 150px; object-fit: contain; filter: brightness(0) invert(1); opacity: .78; }
+.sn-site .h-deur-logos li:nth-child(4) img { height: 34px; }
+@media (max-width: 900px) {
+  .sn-site .h-deuren-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .sn-site .h-deur { border-radius: 22px; }
+}
+@media (max-width: 420px) {
+  .sn-site .h-deur-koppelingen li { flex-wrap: wrap; }
+  .sn-site .h-deur .h-deur-knop { align-self: stretch; justify-content: space-between; }
+}
+
+/* 28 september 2026 (Marinus): live sites houden het scrollen van de pagina niet meer vast. Pas na een klik scrolt de site zelf. */
+.sn-site .h-live-screen { position: relative; overflow: hidden; }
+.sn-site .h-live-screen.is-actief { overflow: auto; }
+.sn-site .h-live-activeer { position: absolute; inset: 0; z-index: 2; display: flex; align-items: flex-end; justify-content: center; padding: 0 0 22px; border: 0; background: transparent; cursor: pointer; }
+.sn-site .h-live-activeer span { padding: 11px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); background: rgba(6, 10, 16, .82); backdrop-filter: blur(10px); color: #fff; font-size: 14px; font-weight: 600; opacity: 0; transform: translateY(6px); transition: opacity .25s ease, transform .25s ease; }
+.sn-site .h-live-activeer:hover span, .sn-site .h-live-activeer:focus-visible span { opacity: 1; transform: none; }
+@media (hover: none) { .sn-site .h-live-activeer span { opacity: 1; transform: none; } }

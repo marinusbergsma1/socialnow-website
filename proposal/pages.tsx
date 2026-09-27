@@ -17,6 +17,7 @@ import ShowcaseFilms from "./ShowcaseFilms";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
 import Verhaal from "./Verhaal";
+import Deuren from "./Deuren";
 import { AuditTeaser } from "./AuditPage";
 import CustomerReviews from "./CustomerReviews";
 import FeaturedWork from "./FeaturedWork";
@@ -199,9 +200,14 @@ export function Home() {
         </div>
       </section>
       </LanguageContext.Provider>
-      {/* 28 september 2026 (Marinus): het persoonlijke verhaal en waarom het OS gratis kan, direct onder de header. */}
+      {/* 28 september 2026 (Marinus): "de homepage moet een upgrade gaan krijgen met storytelling". De volgorde vertelt
+          het verhaal: wie we zijn, wat je kunt doen, het bewijs, het vertrouwen, en dan pas het product in detail. */}
       <Verhaal />
-      <ShowcaseFilms />
+      <Deuren />
+      <FeaturedWork />
+      <CustomerReviews />
+      <LiveWebsites />
+      {/* Hier komt het veiligheidsblok met video en belofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
       <section className="h-section h-wrap" id="het-os">
         <Heading
           label="Vier onderdelen / Eén verbonden bedrijf"
@@ -233,11 +239,9 @@ export function Home() {
             note="Een bestaande uitlegvideo rond kWh Garant. De getoonde productomgeving bevat ook voorbeeldgegevens."
           />
         </div>
-        <ConversionBridge />
       </section>
-      <FeaturedWork />
-      <LiveWebsites />
-      <CustomerReviews />
+      {/* 28 september 2026 (Marinus): "dit onderdeel is niet meer zo belangrijk nu". See it in motion staat lager. */}
+      <ShowcaseFilms />
       <section className="h-section h-wrap h-services-with-character">
         <CharacterAccent kind="coder" />
         <Heading
@@ -269,9 +273,6 @@ export function Home() {
       </section>
       <VideoSlider />
       <TrustStories />
-      <section className="h-section h-wrap h-team-with-character">
-        <Founder />
-      </section>
       <ImageSliders />
       <section className="h-section h-wrap">
         <Heading
