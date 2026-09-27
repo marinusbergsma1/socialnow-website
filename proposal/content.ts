@@ -33,19 +33,21 @@ export const people = [
   { name: "Nick van Keulen", role: "Head of Google Ads & Search", image: "Nick-VK.webp" },
   // 25 september 2026 (Marinus): nieuw teamlid.
   { name: "Elian Coellar", role: "Head of Private Partnerships", image: "Elian-Coellar-2026-09-26.webp" },
+  // 28 september 2026 (Marinus): Sid, Steef en Michelle krijgen betalingen met AI erbij.
+  // Sid komt van zijn eigen bedrijf Attesso (linkedin.com/company/attesso).
   {
     name: "Sid van Kalken",
-    role: "Head of Web Development",
+    role: "Head of Web Development & AI Payments · Attesso",
     image: "Sid-van-Kalken.webp",
   },
   {
     name: "Steef Komen",
-    role: "Partner · Head of Finance & Data",
+    role: "Partner · Head of Finance, Data & AI Payments",
     image: "Steef-Komen.webp",
   },
   {
     name: "Michelle Yang",
-    role: "Head of Supply Chain & Operations",
+    role: "Head of Supply Chain, Operations & AI Payments",
     image: "Michelle-Yang-HD.webp",
   },
 ];
