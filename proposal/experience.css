@@ -2754,3 +2754,18 @@ html {
 .sn-site .h-film-milos .h-milo-animated, .sn-site .h-film-milos .h-milo-animated img, .sn-site .h-film-milos .h-milo-animated video { width: 58px !important; height: 58px !important; }
 .sn-site .h-film-milos .h-milo-animated { position: relative; flex: none; }
 .sn-site .h-film-milos .h-motion-control { display: none !important; }
+
+/* 28 september 2026 (Marinus): het hele team in de strook, iedereen even groot, en de tekst kleiner. */
+.sn-site .h-team-trust { flex-wrap: wrap; row-gap: 10px; }
+.sn-site .h-team-trust .h-team-portraits img { width: 34px; height: 34px; margin-left: -9px; border-width: 2px; }
+.sn-site .h-team-trust .h-team-portraits img:first-child { margin-left: 0; }
+.sn-site .h-team-trust strong { font-size: 15px; white-space: normal; }
+.sn-site .h-team-trust > span:last-child > span { font-size: 13px; }
+@media (min-width: 1100px) {
+  .sn-site .h-hero-rij > .h-team-trust, .sn-site .h-hero-tekst > .h-team-trust { gap: 18px; flex-wrap: nowrap; }
+  .sn-site :is(.h-hero-rij, .h-hero-tekst) .h-team-portraits img { width: 48px; height: 48px; margin-left: -13px; border-width: 3px; }
+  .sn-site :is(.h-hero-rij, .h-hero-tekst) .h-team-portraits img:first-child { margin-left: 0; }
+  .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust strong { font-size: clamp(15px, 1vw, 17px); white-space: normal; }
+  .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust > span:last-child { min-width: 0; }
+  .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust > span:last-child > span { font-size: 14px; }
+}
