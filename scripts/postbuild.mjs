@@ -30,6 +30,7 @@ const routeMeta = {
   'antwoord-aanvragen': {title: 'Antwoord op aanvragen | SocialNow', description: 'Persoonlijke antwoordpagina voor aanvragen via WhatsApp.'},
   audit: {title: 'Gratis Google Ads audit | SocialNow', description: 'Nick van Keulen loopt je Google Ads handmatig door: tracking, structuur, biedstrategie en productfeed. Met actieplan en videocall. Gratis.'},
   team: {title: 'Team — De mensen achter het OS | SocialNow', description: 'Maak kennis met Marinus Bergsma en de creatieve en technische specialisten achter SocialNow.'},
+  vacatures: {title: 'Vacatures — Werk aan het OS | SocialNow', description: 'SocialNow zoekt een AI-expert betalingen, een Senior AI Engineer en een Odoo-consultant. Amsterdam, hybride, met salaris erbij.'},
   blog: {title: 'Blog — Vanuit de praktijk | SocialNow', description: 'Inzichten over websites, AI, content en vindbaarheid vanuit het werk van SocialNow.'},
   // 19 september 2026: de juridische laag. Elk document krijgt een eigen route met eigen
   // metadata, want een inkoper zoekt op "verwerkersovereenkomst" en niet op "privacybeleid".
@@ -51,6 +52,7 @@ const crumbLabels = {
   privacy: 'Privacybeleid',
   voorwaarden: 'Algemene voorwaarden',
   team: 'Team',
+  vacatures: 'Vacatures',
   'gratis-website': 'Gratis website-upgrade',
   'gratis-os-demo': 'Gratis OS-demo',
   'antwoord-aanvragen': 'Antwoord op aanvragen',

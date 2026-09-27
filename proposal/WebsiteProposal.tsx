@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { VacaturesPage } from "./Vacatures";
 import {
   Link,
   NavLink,
@@ -81,7 +82,7 @@ function ProposalShell() {
       project?.title ||
       post?.title ||
       nav.find(([path]) => path === location.pathname)?.[1] ||
-      (location.pathname.startsWith("/antwoord-aanvragen") ? "Antwoord op aanvragen" : location.pathname.startsWith("/gratis-website") ? "Gratis website aanvragen" : location.pathname.startsWith("/gratis-os-demo") ? "Gratis OS-demo" : "Probeer SocialNow OS");
+      (location.pathname === "/vacatures" ? "Vacatures" : location.pathname.startsWith("/antwoord-aanvragen") ? "Antwoord op aanvragen" : location.pathname.startsWith("/gratis-website") ? "Gratis website aanvragen" : location.pathname.startsWith("/gratis-os-demo") ? "Gratis OS-demo" : "Probeer SocialNow OS");
     const description =
       project?.description ||
       post?.excerpt ||
@@ -200,6 +201,7 @@ function ProposalShell() {
           <Route path="/diensten" element={<ServicesPage />} />
           <Route path="/prijzen" element={<PricesPage />} />
           <Route path="/team" element={<TeamPage />} />
+          <Route path="/vacatures" element={<VacaturesPage />} />
           <Route path="/audit" element={<AuditPage />} />
           <Route path="/gratis-website" element={<GratisWebsite />} />
           <Route path="/gratis-os-demo" element={<GratisOsDemo />} />

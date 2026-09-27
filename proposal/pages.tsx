@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { VacaturesBento } from "./Vacatures";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
   ArrowDown,
@@ -272,6 +273,8 @@ export function Home() {
       <section className="h-section h-wrap h-team-with-character">
         <Founder />
       </section>
+      {/* 28 september 2026 (Marinus): serieuze functies via Indeed, ook zichtbaar op de homepage. */}
+      <VacaturesBento />
       <ImageSliders />
       <section className="h-section h-wrap">
         <Heading
