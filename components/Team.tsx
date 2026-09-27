@@ -83,7 +83,7 @@ const team: TeamItem[] = [
     name: "Michelle Yang",
     role: "Supply chain specialist",
     partnership: "SocialNow × Komen Consultancy",
-    image: `${import.meta.env.BASE_URL}images/Michelle-Yang.webp`
+    image: `${import.meta.env.BASE_URL}images/Michelle-Yang-HD.webp`
   },
 ];
 

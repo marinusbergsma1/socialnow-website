@@ -44,7 +44,7 @@ export const people = [
   {
     name: "Michelle Yang",
     role: "Supply chain specialist",
-    image: "Michelle-Yang.webp",
+    image: "Michelle-Yang-HD.webp",
   },
 ];
 export const agents = [
