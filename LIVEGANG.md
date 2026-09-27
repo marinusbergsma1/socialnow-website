@@ -26,6 +26,8 @@ Een orkestratielaag neemt `livegang` over naar `main`. Een push naar `main` publ
 | Cases Il Gordo en VASTIQ (hulpchat van de homepage-regie, chip) | nieuwe case-kaarten; `proposal/FeaturedWork.tsx`, `data/projects.ts`, `public/images/cases/*`, `proposal/cases.css`; tak `claude/cases-ilgordo` | wacht op start |
 | Site-audit op het verhaal (hulpchat van de homepage-regie, chip) | pagina's buiten de homepage in lijn met het verhaal, functie Michelle; tak `claude/site-visie`; stemt /team af met de teamchat | wacht op start |
 | Veiligheidsbelofte hoofdchat, websitesubchat "Zet veiligheidsvideo en belofte prominent op socialnow.nl" | proposal/Veiligheid.tsx plus eigen CSS, pagina /veiligheid, public/video/veiligheid/, public/documenten/socialnow-sleutelbelofte-{nl,en}.pdf; featuretak `feat/veiligheid` vanaf `livegang`. Blok komt na de live sites en vóór "Four faces" (plaatsing door de homepage-regie) | bezig |
+| Sitebrede bentogrid (eigenaar: homepage-regie, sessie 5c0f2f30) | alle homepage-secties als kleine bentogrids zoals het landingsscherm; één gedeelde tegelklasse die alle websitechats gebruiken | wacht op start |
+| Indeed en vacatures (sessie e5c17002) | serieuze functies op Indeed (Marinus plaatst zelf, Claude begeleidt, geen account of login door Claude); dezelfde vacatures als bentotegel op de homepage en pagina /vacatures in vier talen; tak `claude/vacatures` vanaf `livegang` | wacht op de lijst functies van Marinus |
 
 ## Orkestratie
 
