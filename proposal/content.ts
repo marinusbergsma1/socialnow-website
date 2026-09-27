@@ -34,9 +34,10 @@ export const people = [
   // 25 september 2026 (Marinus): nieuw teamlid.
   { name: "Elian Coellar", role: "Head of Private Partnerships", image: "Elian-Coellar-2026-09-26.webp" },
   // 28 september 2026 (Marinus): Sid, Steef en Michelle krijgen betalingen met AI erbij.
+  // Sid komt van zijn eigen bedrijf Attesso (linkedin.com/company/attesso).
   {
     name: "Sid van Kalken",
-    role: "Head of Web Development · AI Payments",
+    role: "Head of Web Development & AI Payments · Attesso",
     image: "Sid-van-Kalken.webp",
   },
   {

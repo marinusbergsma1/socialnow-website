@@ -20,7 +20,7 @@ const TEAM: Record<string, Lid> = {
   sergio: { naam: "Sergio Jovovic", rol: "Meta Ads Specialist", foto: "sergio" },
   nick: { naam: "Nick van Keulen", rol: "Head of Google Ads & Search", foto: "nick" },
   steef: { naam: "Steef Komen", rol: "Partner · Head of Finance, Data & AI Payments", foto: "steef" },
-  sid: { naam: "Sid van Kalken", rol: "Head of Web Development · AI Payments", foto: "sid" },
+  sid: { naam: "Sid van Kalken", rol: "Head of Web Development & AI Payments · Attesso", foto: "sid" },
 };
 
 type Pakket = {
