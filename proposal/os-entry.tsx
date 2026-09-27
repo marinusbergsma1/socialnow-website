@@ -81,40 +81,40 @@ function AndroidLogo() {
   );
 }
 
+// 28 september 2026 (Marinus): "Install on Mac" leest niet als downloaden. Eén knop Download met het icoon links,
+// daarnaast kleine rondjes voor alle vier de systemen. De knop geeft de uitleg voor dit apparaat, een rondje voor dat systeem.
 export function InstallKnop() {
   const { t } = useLanguage();
   const [open, setOpen] = useState<string | null>(null);
   const [hint, setHint] = useState("");
-  const [label, setLabel] = useState("Installeer het OS");
   const helpId = useId();
-  useEffect(() => {
-    setLabel(installationLabel(navigator.userAgent, navigator.platform, navigator.maxTouchPoints));
-  }, []);
   const kies = (sleutel: string, tekst: string) => {
     if (open === sleutel) { setOpen(null); return; }
     setHint(tekst);
     setOpen(sleutel);
   };
   const eigen = () => kies("eigen", installationHint(navigator.userAgent, navigator.platform, navigator.maxTouchPoints));
-  const andere = [
-    { sleutel: "Installeer op Mac", icoon: <AppleLogo />, hint: HINT_MAC },
-    { sleutel: "Installeer op iPhone of iPad", icoon: <svg className="os-install-telefoon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="6.5" y="2" width="11" height="20" rx="2.6" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M10.5 18.5h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>, hint: HINT_IPHONE },
-    { sleutel: "Installeer op Windows", icoon: <WindowsLogo />, hint: HINT_ALGEMEEN },
-    { sleutel: "Installeer op Android", icoon: <AndroidLogo />, hint: HINT_ALGEMEEN },
-  ].filter((p) => p.sleutel !== label);
+  const systemen = [
+    { sleutel: "Download voor Mac", icoon: <AppleLogo />, hint: HINT_MAC },
+    { sleutel: "Download voor iPhone en iPad", icoon: <svg className="os-install-telefoon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="6.5" y="2" width="11" height="20" rx="2.6" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M10.5 18.5h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>, hint: HINT_IPHONE },
+    { sleutel: "Download voor Windows", icoon: <WindowsLogo />, hint: HINT_ALGEMEEN },
+    { sleutel: "Download voor Android", icoon: <AndroidLogo />, hint: HINT_ALGEMEEN },
+  ];
   return (
     <>
-      <button type="button" className="os-install sn-btn3d h-button h-button-secondary h-install-knop" onClick={eigen} aria-expanded={open === "eigen"} aria-controls={helpId}>
-        <span className="sn-btn3d-sheen" />
-        {/Mac|iPhone/.test(label) ? <AppleLogo /> : /Windows/.test(label) ? <WindowsLogo /> : /Android/.test(label) ? <AndroidLogo /> : <Download size={16} aria-hidden="true" />}
-        <span>{t(label)}</span>
-      </button>
-      <span className="h-install-andere">
-        {andere.map((p) => (
-          <button key={p.sleutel} type="button" className="h-install-icoon" onClick={() => kies(p.sleutel, p.hint)} aria-expanded={open === p.sleutel} aria-controls={helpId} aria-label={t(p.sleutel)} title={t(p.sleutel)}>
-            {p.icoon}
-          </button>
-        ))}
+      <span className="h-download">
+        <button type="button" className="os-install sn-btn3d h-button h-button-secondary h-install-knop" onClick={eigen} aria-expanded={open === "eigen"} aria-controls={helpId}>
+          <span className="sn-btn3d-sheen" />
+          <Download size={19} aria-hidden="true" className="h-download-icoon" />
+          <span>Download</span>
+        </button>
+        <span className="h-install-andere">
+          {systemen.map((p) => (
+            <button key={p.sleutel} type="button" className="h-install-icoon" onClick={() => kies(p.sleutel, p.hint)} aria-expanded={open === p.sleutel} aria-controls={helpId} aria-label={p.sleutel} title={p.sleutel}>
+              {p.icoon}
+            </button>
+          ))}
+        </span>
       </span>
       <div className="install-help h-install-hulp" id={helpId} hidden={!open}>
         <p>{t(hint)}</p>

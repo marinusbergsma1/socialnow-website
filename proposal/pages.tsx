@@ -16,6 +16,7 @@ import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
+import Verhaal from "./Verhaal";
 import { AuditTeaser } from "./AuditPage";
 import CustomerReviews from "./CustomerReviews";
 import FeaturedWork from "./FeaturedWork";
@@ -198,6 +199,8 @@ export function Home() {
         </div>
       </section>
       </LanguageContext.Provider>
+      {/* 28 september 2026 (Marinus): het persoonlijke verhaal en waarom het OS gratis kan, direct onder de header. */}
+      <Verhaal />
       <ShowcaseFilms />
       <section className="h-section h-wrap" id="het-os">
         <Heading
