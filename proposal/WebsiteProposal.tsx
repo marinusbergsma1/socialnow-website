@@ -25,6 +25,7 @@ import {
 } from "./pages";
 import { AuditPage } from "./AuditPage";
 import { VacaturesPage } from "./VacaturesPage";
+import { InvesteerdersPage } from "./InvesteerdersPage";
 import GratisWebsite from "./GratisWebsite";
 import GratisOsDemo from "./GratisOsDemo";
 import AntwoordPagina from "./AntwoordPagina";
@@ -71,6 +72,7 @@ const paginaTitels: Record<string, string> = {
   "/ai": "AI-verklaring",
   "/gebruik": "Aanvaardbaar gebruik",
   "/veiligheid": "Veiligheid en sleutelbelofte",
+  "/investeerders": "Investeerders",
 };
 export default function WebsiteProposal({language="en"}:{language?:Language}) {
   return (
@@ -224,6 +226,9 @@ function ProposalShell() {
           <Route path="/team" element={<TeamPage />} />
           <Route path="/audit" element={<AuditPage />} />
           <Route path="/vacatures" element={<VacaturesPage />} />
+          {/* 28 september 2026 (Marinus): investeerders doen een aanvraag naar invest@. /investors is een alias. */}
+          <Route path="/investeerders" element={<InvesteerdersPage />} />
+          <Route path="/investors" element={<Navigate to="/investeerders" replace />} />
           <Route path="/gratis-website" element={<GratisWebsite />} />
           <Route path="/gratis-os-demo" element={<GratisOsDemo />} />
           <Route path="/antwoord-aanvragen" element={<AntwoordPagina />} />

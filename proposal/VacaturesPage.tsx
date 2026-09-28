@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { PageHeading } from "./ui";
 import { people } from "./content";
-import { vacatures, vacatureMail, VACATURE_MAIL, FINANCE_MAIL, financeMail, type Vacature } from "./vacatures";
+import { vacatures, vacatureMail, VACATURE_MAIL, type Vacature } from "./vacatures";
 import { useLanguage } from "./i18n/context";
 import "./mens-en-ai.css";
 
@@ -79,10 +80,10 @@ export function VacaturesPage() {
             <div>
               <p className="h-vac-contact-naam"><strong>Investeerders gezocht</strong><span>{steef.name} · {steef.role}</span></p>
               <p>We zoeken investeerders die mee willen bouwen aan SocialNow OS. Steef bespreekt het graag persoonlijk met je.</p>
-              <a className="h-text-link" href={financeMail(t("Investeren in SocialNow"))}>
-                {FINANCE_MAIL}
+              <Link className="h-text-link" to="/investeerders">
+                Doe een aanvraag
                 <ArrowUpRight size={17} aria-hidden="true" />
-              </a>
+              </Link>
             </div>
           </aside>
         )}

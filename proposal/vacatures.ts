@@ -11,8 +11,11 @@ export const vacatureMail = (titel: string) =>
   `mailto:${VACATURE_MAIL}?subject=${encodeURIComponent(`Sollicitatie: ${titel}`)}`;
 
 // 28 september 2026 (Marinus): investeerders nemen contact op met Steef via finance@ (alias op info@ bij Hostinger).
-export const FINANCE_MAIL = "finance@socialnow.nl";
-export const financeMail = (onderwerp: string) => `mailto:${FINANCE_MAIL}?subject=${encodeURIComponent(onderwerp)}`;
+// Later die nacht (Marinus): "Investeerders moeten gewoon een aanvraag kunnen doen, naar invest@socialnow.nl". De aanvraag
+// staat op /investeerders; invest@ is ook een alias op info@. finance@ blijft bestaan als alias.
+export const INVEST_MAIL = "invest@socialnow.nl";
+export const FINANCE_MAIL = INVEST_MAIL;
+export const financeMail = (onderwerp: string) => `mailto:${INVEST_MAIL}?subject=${encodeURIComponent(onderwerp)}`;
 
 export type Vacature = {
   slug: string;

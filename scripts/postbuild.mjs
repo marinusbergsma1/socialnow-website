@@ -41,6 +41,7 @@ const routeMeta = {
   cookies: {title: 'Cookieverklaring | SocialNow', description: 'Welke cookies en opslag SocialNow gebruikt, hoe lang, en waar je ze uitzet. Per cookie beschreven.'},
   ai: {title: 'AI-verklaring | SocialNow', description: 'Welke AI-modellen SocialNow OS gebruikt, wat er met je invoer gebeurt, en hoe AI-inhoud kenbaar wordt gemaakt.'},
   // 28 september 2026: veiligheidsvideo en sleutelbelofte.
+  investeerders: {title: 'Investeerders: groei mee met SocialNow OS | SocialNow', description: 'Wil je investeren in SocialNow OS? Doe een aanvraag, dan neemt Steef Komen persoonlijk contact met je op via invest@socialnow.nl.'},
   veiligheid: {title: 'Veiligheid en sleutelbelofte | SocialNow', description: 'Jouw sleutels zijn veilig. Zwart op wit. Wat SocialNow belooft over je API-sleutels, de veiligheidsfilm, en de sleutelbelofte als pdf.'},
   gebruik: {title: 'Aanvaardbaar gebruik | SocialNow', description: 'Wat wel en niet mag met SocialNow OS, onze hosting en onze e-mail.'},
 };
@@ -68,6 +69,7 @@ const crumbLabels = {
   ai: 'AI-verklaring',
   gebruik: 'Aanvaardbaar gebruik',
   veiligheid: 'Veiligheid en sleutelbelofte',
+  investeerders: 'Investeerders',
 };
 
 function esc(s) {

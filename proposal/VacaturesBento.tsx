@@ -45,17 +45,18 @@ function Inhoud({ vacature, groot }: { vacature: Vacature; groot?: boolean }) {
   );
 }
 
+// Investeerders doen hun aanvraag op /investeerders (naar invest@socialnow.nl, Marinus 28 september 2026).
 function InvestKnop() {
-  const { t } = useLanguage();
   return (
-    <a className="os-claim sn-btn3d h-button" href={financeMail(t("Investeren in SocialNow"))}>
+    <Link className="os-claim sn-btn3d h-button" to="/investeerders">
       <span className="sn-btn3d-sheen" />
-      <span>Mail Steef</span>
-    </a>
+      <span>Doe een aanvraag</span>
+    </Link>
   );
 }
 
 export default function VacaturesBento() {
+  const { t } = useLanguage();
   const eerste = vacatures.find((v) => v.slug === GROOT) ?? vacatures[0];
   return (
     <Bento
@@ -87,10 +88,10 @@ export default function VacaturesBento() {
         <p className="sn-tegel-tekst">We zoeken investeerders die mee willen bouwen aan SocialNow OS. Steef Komen bespreekt het graag persoonlijk met je.</p>
         <div className="sn-tegel-onder">
           <InvestKnop />
-          <Link className="h-text-link" to="/vacatures#investeerders">
-            Lees meer
+          <a className="h-text-link" href={financeMail(t("Investeren in SocialNow"))}>
+            invest@socialnow.nl
             <ArrowUpRight size={17} aria-hidden="true" />
-          </Link>
+          </a>
         </div>
       </Tegel>
       <Tegel kop="Alle vacatures" breed={12}>

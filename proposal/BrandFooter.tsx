@@ -38,6 +38,7 @@ export default function BrandFooter() {
             <p className="h-eyebrow">SocialNow</p>
             <Link to="/team">Ons team</Link>
             <Link to="/vacatures">Vacatures</Link>
+            <Link to="/investeerders">Investeerders</Link>
             <Link to="/projecten">Ons werk</Link>
             <Link to="/blog">Blog</Link>
             <Link to="/contact">Contact</Link>
