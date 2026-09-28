@@ -7,11 +7,13 @@ import { Bento, Tegel } from "./Bento";
 import "./vacatures-bento.css";
 
 // 28 september 2026 (Marinus, via de Indeed-chat): vacatures als bentotegels op de homepage, in de gedeelde
-// tegeltaal uit Bento.tsx. Eén grote tegel (AI-expert betalingen), twee kleinere en een brede balk naar /vacatures.
+// tegeltaal uit Bento.tsx. Eén grote tegel (partner verbindende laag), twee kleinere en een brede balk naar /vacatures.
 
+// De partner voor de verbindende laag is de grote tegel. AI-expert betalingen is weg: die functie vervult Sid.
+const GROOT = "partner-verbindende-laag";
 const KLEIN = [
-  { slug: "partner-verbindende-laag", kop: "Partner gezocht" },
   { slug: "senior-ai-engineer", kop: "Het OS slimmer maken" },
+  { slug: "customer-success-manager", kop: "Altijd voor klanten klaar" },
 ];
 
 function mailLink(titel: string) {
@@ -48,7 +50,7 @@ function Inhoud({ vacature, groot }: { vacature: Vacature; groot?: boolean }) {
 }
 
 export default function VacaturesBento() {
-  const [eerste] = vacatures;
+  const eerste = vacatures.find((v) => v.slug === GROOT) ?? vacatures[0];
   return (
     <Bento
       id="vacatures"
@@ -63,7 +65,7 @@ export default function VacaturesBento() {
         </>
       }
     >
-      <Tegel kop="Uitgelicht" breed={8} hoog={2} soort="groen">
+      <Tegel kop="Partner gezocht" breed={8} hoog={2} soort="groen">
         <Inhoud vacature={eerste} groot />
       </Tegel>
       {KLEIN.map(({ slug, kop }) => {
