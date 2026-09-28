@@ -117,7 +117,7 @@ for (const [route, meta] of Object.entries(routeMeta)) {
         // 28 september 2026: dezelfde functies als proposal/content.ts.
         { ...person('Marinus Bergsma', 'Founder & CEO'), url: `${BASE}/team`, knowsAbout: ['AI Marketing', 'Branding', 'Graphic Design', 'Motion Design', 'Odoo'] },
         person('Jos Hollenberg', 'Head of Meta Ads'),
-        person('Sergio Jovovic', 'Meta Ads Specialist'),
+        person('Sergio Jovovic', 'Meta Ads en automations specialist'),
         person('Carmel Boon', 'Head of Video Production'),
         person('Sam van der Sluis', 'Lead Videographer'),
         person('Emma Peperkamp', 'Lead Photographer'),

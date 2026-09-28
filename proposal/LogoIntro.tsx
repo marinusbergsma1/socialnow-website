@@ -3,7 +3,8 @@ import { useLocation } from "react-router-dom";
 import { X } from "lucide-react";
 
 const SLEUTEL = "sn-preview-logo-v5";
-const VIDEO_VERSIE = 11;
+const VIDEO_VERSIE = 12;
+const VIDEO_DUUR_MS = 18000;
 
 function gezien(): boolean {
   try {
@@ -52,7 +53,7 @@ export default function LogoIntro({ onComplete }: { onComplete?: () => void }) {
     const oldOverflow = document.body.style.overflow;
     if (!dialog.current?.open) dialog.current?.showModal();
     document.body.style.overflow = "hidden";
-    const timer = window.setTimeout(close, 6000);
+    const timer = window.setTimeout(close, VIDEO_DUUR_MS);
     void video.current?.play().catch(close);
     return () => {
       clearTimeout(timer);

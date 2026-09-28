@@ -2001,6 +2001,9 @@ html {
 .sn-site .h-film-caption strong { color: #fff; font-size: 19px; }
 .sn-site .h-film-caption > span { color: #ddd; font-size: 10px; }
 .sn-site .h-film-note { margin-top: 16px; }
+.sn-site .h-film-security-note { margin: 10px 0 0; text-align: center; }
+.sn-site .h-film-security-note a { color: #a9a9ad; font-size: 12px; text-decoration: underline; text-underline-offset: 4px; }
+.sn-site .h-film-security-note a:hover { color: #fff; }
 @media(max-width:700px) { .sn-site .h-nav { gap: 10px; } .sn-site .h-language-switch { gap: 4px; font-size: 10px; } .sn-site .h-film-grid { grid-template-columns: 1fr; gap: 14px; } .sn-site .h-film-caption { padding: 32px 14px 14px; } .sn-site .h-film-caption strong { font-size: 16px; } .sn-site .h-film-caption > span { display: none; } }
 
 /* Compact, useful reassurance beneath the work. */

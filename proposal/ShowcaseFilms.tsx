@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { AmbientVideo } from "./motion";
 import { MediaDialog, type MediaItem } from "./MediaSliders";
 import { Bento, Tegel } from "./Bento";
@@ -19,6 +20,9 @@ export default function ShowcaseFilms(){
     <span className="sn-tegel-badge">{film.caption}</span>
    </Tegel>)}
   </Bento>
+  <p className="h-film-security-note">
+   <Link to="/veiligheid">Veiligheid en databescherming</Link>
+  </p>
   <MediaDialog item={selected} close={()=>setSelected(null)}/>
  </>;
 }

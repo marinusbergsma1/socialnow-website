@@ -12,7 +12,7 @@ export const people = [
   {
     name: "Sergio Jovovic",
     // 28 september 2026 (Marinus): Sergio staat ook bij Meta Ads.
-    role: "Meta Ads Specialist",
+    role: "Meta Ads en automations specialist",
     image: "Sergio-Jovovic.webp",
   },
   {

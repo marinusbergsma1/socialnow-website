@@ -49,7 +49,7 @@ const crew: CrewMember[] = [
   {
     id: 3,
     name: 'Sergio Jovovic',
-    role: 'Meta Marketeer',
+    role: 'Meta Ads en automations specialist',
     tag: 'DESIGN_LAB',
     line: 'Maakt merken die je niet kunt negeren.',
     color: '#F62961',
