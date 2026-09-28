@@ -23,3 +23,12 @@
    door naar de volgende regel, net als in de hero. */
 .sn-site :is(.h-page-heading + .h-wrap, .h-final-close) .os-actions { flex-wrap: wrap; row-gap: 12px; }
 .sn-site :is(.h-page-heading + .h-wrap, .h-final-close) .os-actions .os-claim { flex: 0 0 auto; }
+
+/* Oprichterstekst op /team: van grafisch vormgever tot oprichter (VERHAAL.md). */
+.sn-site .h-founder-bio { max-width: 640px; margin: 18px 0 0; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.6; color: #c3ccd4; }
+.sn-site .h-founder blockquote { margin: 24px 0 0; padding-left: 18px; border-left: 2px solid #25d366; }
+.sn-site .h-founder-motto { margin: 18px 0 0; font-size: clamp(17px, 1.3vw, 20px); font-weight: 700; color: #fff; }
+.sn-site .h-founder-motto span { color: #25d366; }
+.sn-site .h-founder-feiten { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; }
+.sn-site .h-founder-feiten li { display: grid; gap: 2px; padding: 10px 16px; border: 1px solid #1f5a3a; border-radius: 14px; font-size: 13px; color: #9aa6ae; }
+.sn-site .h-founder-feiten b { font-size: 15px; color: #fff; }

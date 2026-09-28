@@ -64,19 +64,31 @@ function Founder() {
           Marinus Bergsma<span>Founder & CEO</span>
         </figcaption>
       </div>
+      {/* 28 september 2026 (Marinus, VERHAAL.md): van grafisch vormgever tot oprichter, en waarom hij doet wat hij doet. */}
       <div>
-        <p className="h-eyebrow">De ambitie achter SocialNow</p>
+        <p className="h-eyebrow">De oprichter</p>
         <h2>
-          Software moet
+          Van grafisch vormgever
           <br />
-          <span>voor mensen werken.</span>
+          <span>tot oprichter.</span>
         </h2>
-        <p className="h-founder-mission">
-          Ons doel: je bedrijf kunnen aansturen zonder eerst software te moeten
-          leren. Daarom bouwen we Custom OS-systemen die eenvoudig werken, bij
-          jouw bedrijf passen en mensen achter zich hebben.
+        <p className="h-founder-bio">
+          Marinus Bergsma studeerde in 2019 af als grafisch vormgever. Hij werkte voor mooie merken als Amsterdam Light Festival, Day & Nite, AZ en Supperclub. Na succes met freelance opdrachten begon hij in november 2021 SocialNow en bouwde hij een team van specialisten.
         </p>
-        <TextLink to="/team">De mensen achter het OS</TextLink>
+        <p className="h-founder-bio">
+          Toen het eerste AI-model beelden kon maken, gooide hij zijn ondernemingsplan om en verdiepte hij zich in AI en development. Branding en advertenties gingen draaien op zelflerende systemen. Daarna volgde één OS waarin je alle data van je bedrijf koppelt, met Odoo als laatste sleutel. Met Steef Komen maakte hij het schaalbaar.
+        </p>
+        <blockquote>
+          "Ik wil ondernemers helemaal ontzorgen met de nieuwste technologie, zonder dat het persoonlijke verdwijnt."
+        </blockquote>
+        <p className="h-founder-motto" translate="no">
+          Human creativity. <span>Powered by AI technology.</span>
+        </p>
+        <ul className="h-founder-feiten">
+          <li><b>2019</b>Afgestudeerd</li>
+          <li><b>Nov 2021</b>SocialNow</li>
+          <li><b>Nov 2026</b>Vijf jaar</li>
+        </ul>
       </div>
     </figure>
   );
@@ -678,7 +690,7 @@ export function TeamPage() {
             <span>Betrokken specialisten.</span>
           </>
         }
-        text="SocialNow ontstond in 2021 vanuit ons werk voor klanten. Vandaag brengen we creatie, marketing en techniek samen in merken, websites en Custom OS-systemen."
+        text="SocialNow begon in november 2021. Sindsdien groeiden we uit tot een team van specialisten in creatie, marketing, data en techniek. Samen bouwen we één OS dat je bedrijf ontzorgt, en het persoonlijke contact blijft."
       />
       <section className="h-wrap">
         <Founder />
@@ -693,12 +705,12 @@ export function TeamPage() {
           <span>Bedankt.</span>
         </h2>
         <p className="h-bedankt-tekst">
-          Het OS bouwen we niet alleen. Samen met bedrijven met ervaren developers en dataspecialisten hebben we de techniek, de koppelingen en de data goed doorgevoerd. Aan al die bedrijven en mensen: dank je wel.
+          Het OS bouwen we niet alleen. Samen met bedrijven met ervaren developers en dataspecialisten hebben we de techniek, de koppelingen en de data goed doorgevoerd. En Odoo-implementatiepartners brengen het OS nu naar hun klanten. Aan al die bedrijven en mensen: dank je wel.
         </p>
         <div className="h-bedankt-rij">
           <div className="h-bedankt-kaart">
             <b translate="no">Komen Consultancy</b>
-            <span>Accountancy en data, met Steef Komen en Michelle Yang</span>
+            <span>Accountancy, Odoo en data, met Steef Komen en Michelle Yang. Samen maken we het OS schaalbaar.</span>
           </div>
           <div className="h-bedankt-kaart">
             <b>Onze developers</b>
@@ -717,14 +729,13 @@ export function TeamPage() {
             <>
               Michelle en Steef.
               <br />
-              <span>Samen sterk in het OS.</span>
+              <span>Samen maken we het schaalbaar.</span>
             </>
           }
         />
         <TeamGrid members={partners} />
         <p className="h-footnote">
-          Michelle Yang brengt expertise in supply chain en operationele processen mee.
-          Steef Komen werkt mee aan accountancy en data.
+          Steef Komen is accountant, Odoo-expert en datascientist. Met hem maakten we het OS schaalbaar, en samen bouwen we VASTIQ, een dataplatform voor vastgoed. Michelle Yang werkt vanuit Komen Consultancy mee aan supply chain, operations en betalingen met AI.
         </p>
       </section>
       <section className="h-section h-wrap">
@@ -740,7 +751,7 @@ export function TeamPage() {
         />
         {/* 28 september 2026 (Marinus): het team zijn system experts die je persoonlijk helpen vanuit je Custom OS. */}
         <p className="h-system-experts">
-          Iedereen in ons team is ook <b>system expert</b>. Ze kennen het OS van binnen en buiten en staan klaar om je persoonlijk te helpen, direct vanuit je eigen Custom OS.
+          Iedereen in ons team is ook <b>system expert</b>. Ze kennen het OS van binnen en buiten en staan klaar om je persoonlijk te helpen, direct vanuit je OS.
         </p>
         <TeamGrid members={specialists} />
         <AuditTeaser />
