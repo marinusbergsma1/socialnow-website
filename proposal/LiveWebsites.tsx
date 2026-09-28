@@ -94,16 +94,14 @@ export default function LiveWebsites() {
   const bedienbaar = live ? activeLoaded : !!project.fullPageScreenshot;
   return (
     <section
-      className="sn-bento h-wrap h-live-websites"
+      className="sn-bento h-wrap h-live-websites h-live-compact"
       ref={ref}
       aria-labelledby="live-websites-title"
     >
       <div className="sn-bento-kop">
         <p className="h-eyebrow"><i />Webdesign & full-stack development</p>
         <h2 id="live-websites-title">
-          Gemaakt om
-          <br />
-          <span>te gebruiken.</span>
+          Gemaakt om <span>te gebruiken.</span>
         </h2>
       </div>
       <div className={`sn-bento-rooster${klaar ? " is-klaar" : ""}`}>
@@ -206,7 +204,9 @@ export default function LiveWebsites() {
       </Tegel>
       <Tegel kop={project.title} breed={4} className="h-live-info">
         <p className="sn-tegel-label">{project.category}</p>
-        <p className="sn-tegel-tekst">{project.description}</p>
+        <details key={project.slug} className="h-work-details h-live-details">
+          <summary>Over deze website</summary>
+          <p className="sn-tegel-tekst">{project.description}</p>
         {project.metrics && (
           <dl className="h-live-cijfers">
             {project.metrics.slice(0, 3).map((metric) => (
@@ -217,6 +217,7 @@ export default function LiveWebsites() {
             ))}
           </dl>
         )}
+        </details>
         <div className="h-live-bottom">
         <div className="h-rail-arrows">
           <button

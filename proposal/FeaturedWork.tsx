@@ -1,21 +1,16 @@
 import React, { useState } from "react";
-import { Check } from "lucide-react";
+
 import { projects } from "./content";
 import { customerReviews } from "./CustomerReviews";
 import { AmbientVideo } from "./motion";
 import { MediaDialog, type MediaItem } from "./MediaSliders";
-import { Action } from "./ui";
+import { TextLink } from "./ui";
 import { Bento, Tegel } from "./Bento";
-import { useLanguage } from "./i18n/context";
+
 import "./cases.css";
 
-const CASES = `${import.meta.env.BASE_URL}images/cases/`;
 
-// Een case-kaart. `motion` speelt de galerij als video's af (RAVEG); de andere kaarten tonen
-// één groot beeld en drie kleine. `tiles` vervangt het projectbeeld en de galerij: voor de
-// websites zijn dat echte schermafdrukken van de live site (desktop 16:9, mobiel 2:3).
-// `wide` beslaat de hele rij. `measured`, `integration` en `review` zijn het bewijs op de
-// kaart; alles daarin is gemeten of letterlijk overgenomen, zie de bron erbij.
+// De toelichting en onderbouwde resultaten blijven beschikbaar in het uitklapbare overzicht.
 type Selection = {
   kop: string;
   slug: string;
@@ -148,102 +143,72 @@ const selections: Selection[] = [
   },
 ];
 
-// Een klantreactie komt letterlijk uit CustomerReviews; bij een lange reactie tonen we de
-// eerste twee zinnen, zonder iets te veranderen.
-function reviewFor(name?: string) {
-  const review = customerReviews.find((item) => item.name === name);
-  if (!review) return null;
-  const sentences = review.text.match(/[^.!?]+[.!?]+/g) || [review.text];
-  return { ...review, text: sentences.slice(0, 2).join("").trim() };
-}
-
 export default function FeaturedWork() {
   const [selected, setSelected] = useState<MediaItem | null>(null);
-  const { t } = useLanguage();
-  // 28 september 2026 (Marinus): elke sectie als kleine bentogrid. Per case een beeldtegel (8) en een
-  // teksttegel (4) die om en om van kant wisselen; bewijs (cijfers, koppeling, klantreactie) krijgt een
-  // eigen kleine tegel. De grid vult zelf op (dense), dus de volgorde van `selections` is vrij.
-  const tegels: React.ReactNode[] = [];
-  selections.forEach((selection, index) => {
-    const project = projects.find((item) => item.slug === selection.slug)!;
-    const website = !!selection.tiles;
-    const label = selection.label || project.category;
-    const beeld = website ? `${CASES}${selection.tiles![0]}.webp` : project.image;
-    const telefoon = website ? `${CASES}${selection.tiles![1]}.webp` : "";
-    const film = selection.motion ? project.gallery![0] : "";
-    const titel = `${website ? project.title : project.category} · ${website ? t(selection.captions[0]) : selection.captions[0]}`;
-    const review = reviewFor(selection.review);
-    const stijl = { "--case-accent": selection.color } as React.CSSProperties;
-    const beeldTegel = (
-      <Tegel key={`${project.slug}-beeld`} kop={selection.kop} breed={8} soort="foto" className="h-case-beeld">
-        <button type="button" className="h-case-beeldknop" style={stijl}
-          onClick={() => setSelected({ src: film || beeld, title: titel, kind: film ? "video" : "image", slug: project.slug })}
-          aria-label={`${t(film ? "Speel video af" : "Vergroot beeld")}: ${titel}`}>
-          {film ? (
-            <AmbientVideo src={film} poster={project.image} label={titel} suspended={!!selected} hoverSound />
-          ) : (
-            <img src={beeld} alt={titel} loading="lazy" width="1200" height="675" />
-          )}
-          {telefoon && <img className="h-case-telefoon" src={telefoon} alt="" loading="lazy" width="600" height="900" />}
-        </button>
-      </Tegel>
-    );
-    const tekstTegel = (
-      <Tegel key={`${project.slug}-tekst`} kop={label} breed={4} className="h-case-tekst">
-        <p className="sn-tegel-titel">{selection.title.split("\n").map((line) => <span key={line}>{line}</span>)}</p>
-        <p className="sn-tegel-tekst">{selection.description}</p>
-        <ul className="h-case-pillen" aria-label="Werkzaamheden">
-          {project.services!.slice(0, 4).map((service) => <li key={service}>{service}</li>)}
-        </ul>
-        {review && !selection.integration && (
-          <figure className="h-case-kortcitaat">
-            <blockquote lang="nl" translate="no">“{review.text}”</blockquote>
-            <figcaption translate="no">{review.name}</figcaption>
-          </figure>
-        )}
-        <div className="sn-tegel-onder">
-          <Action to={`/project/${project.slug}`}>Ontdek het verhaal</Action>
-        </div>
-      </Tegel>
-    );
-    // Vaste rijen van 12, zodat beeld en tekst van één case bij elkaar blijven:
-    // Il Gordo beeld 8 + tekst 4, dan cijfers 4 + kWh beeld 8, dan kWh tekst, koppeling en reactie (4+4+4).
-    // Daarna wisselt beeld (8) en tekst (4) per case van kant. Een reactie bij een andere case staat in de teksttegel.
-    const eigen = selection.integration;
-    if (selection.measured) {
-      tegels.push(beeldTegel, tekstTegel,
-        <Tegel key={`${project.slug}-cijfers`} kop="Gemeten" breed={4} soort="geel" className="h-case-cijfers">
-          <dl>{selection.measured.cells.map((cell) => <div key={cell.label}><dd translate="no">{cell.value}</dd><dt>{cell.label}</dt></div>)}</dl>
-          <p className="h-case-bron">{selection.measured.source}</p>
-        </Tegel>);
-      return;
-    }
-    if (eigen) {
-      tegels.push(beeldTegel, tekstTegel,
-        <Tegel key={`${project.slug}-os`} kop="Gekoppeld aan het OS" breed={8} soort="groen" className="h-case-os">
-          <ul>{selection.integration!.map((line) => <li key={line}><Check size={15} aria-hidden="true" /><span>{line}</span></li>)}</ul>
-        </Tegel>);
-      return;
-    }
-    const links = tegels.length % 2 === 0 ? index % 2 === 0 : index % 2 === 1;
-    tegels.push(...(links ? [tekstTegel, beeldTegel] : [beeldTegel, tekstTegel]));
-  });
+  const raveg = projects.find((item) => item.slug === "raveg-branding")!;
   const albert = customerReviews.find((item) => item.name === "Albert Deltour")!;
-  tegels.push(
-    <Tegel key="albert-deltour-review" kop="Klantreactie" breed={12} className="h-case-review">
-      <blockquote lang="en" translate="no">“{albert.text}”</blockquote>
-      <div className="h-case-wie">
-        <img src={albert.image} alt="" width="40" height="40" loading="lazy" />
-        <span><strong translate="no">{albert.name}</strong><a href={albert.website} target="_blank" rel="noopener noreferrer" translate="no">{albert.company}</a></span>
-      </div>
-    </Tegel>
-  );
+  const media: MediaItem[] = [
+    ...raveg.gallery!.slice(0, 3).map((src, index) => ({
+      src, title: `RAVEG · ${["Dyadium", "Hyperpower / 01", "Hyperpower / 02"][index]}`,
+      kind: "video" as const, slug: raveg.slug,
+    })),
+    { src: raveg.image, title: "RAVEG · Hyperpower packaging", kind: "image", slug: raveg.slug },
+  ];
   return (
     <>
-      <Bento id="uitgelicht-werk" className="h-featured-work h-cases" label="Uitgelicht werk / Gemaakt door SocialNow"
-        titel={<>Werk dat je<br /><span>bijblijft.</span></>} swipe>
-        {tegels}
+      <Bento id="uitgelicht-werk" className="h-featured-work h-cases h-work-compact"
+        label="Uitgelicht werk / Gemaakt door SocialNow"
+        titel={<>Werk dat je <span>bijblijft.</span></>} swipe>
+        {media.map((item) => (
+          <Tegel key={item.src} kop={item.title} breed={3} soort="foto" className="h-work-preview">
+            <button type="button" className="h-case-beeldknop"
+              aria-label={item.title} onClick={() => setSelected(item)}>
+              {item.kind === "video"
+                ? <AmbientVideo src={item.src} poster={raveg.image} label={item.title} suspended={!!selected} hoverSound />
+                : <img src={item.src} alt={item.title} loading="lazy" width="600" height="600" />}
+            </button>
+          </Tegel>
+        ))}
       </Bento>
+      <div className="h-wrap h-work-extra">
+        <details className="h-work-details">
+          <summary>Meer over dit werk</summary>
+          <div className="h-work-stories">
+            {selections.map((selection) => {
+              const project = projects.find((item) => item.slug === selection.slug)!;
+              return (
+                <article key={project.slug} className="h-work-story">
+                  <h3>{selection.label || selection.kop}</h3>
+                  <p>{selection.description}</p>
+                  {!selection.tiles && !selection.motion && (
+                    <div className="h-work-gallery">
+                      {[project.image, ...project.gallery!].map((src, index) => (
+                        <button key={src} type="button" aria-label={selection.captions[index]}
+                          onClick={() => setSelected({src, title: selection.captions[index], kind: "image", slug: project.slug})}>
+                          <img src={src} alt={selection.captions[index]} loading="lazy" width="200" height="150" />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  {selection.measured && <p className="h-work-evidence">
+                    {selection.measured.cells.map((cell) => `${cell.label}: ${cell.value}`).join(" · ")}
+                    <small>{selection.measured.source}</small>
+                  </p>}
+                  {selection.integration && <ul>{selection.integration.map((line) => <li key={line}>{line}</li>)}</ul>}
+                  <TextLink to={`/project/${project.slug}`}>Ontdek het verhaal</TextLink>
+                </article>
+              );
+            })}
+            <figure className="h-case-review h-work-story">
+              <blockquote lang="en" translate="no">“{albert.text}”</blockquote>
+              <figcaption className="h-case-wie">
+                <img src={albert.image} alt="" width="40" height="40" loading="lazy" />
+                <span><strong translate="no">{albert.name}</strong><a href={albert.website} target="_blank" rel="noopener noreferrer" translate="no">{albert.company}</a></span>
+              </figcaption>
+            </figure>
+          </div>
+        </details>
+      </div>
       <MediaDialog item={selected} close={() => setSelected(null)} />
     </>
   );
