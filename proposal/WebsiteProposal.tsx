@@ -44,7 +44,6 @@ import JuridischPage from "../components/JuridischPage";
 // Staat uit tot er een script op de site komt dat toestemming nodig heeft; de afweging staat
 // in het bestand zelf.
 import Cookiebot from "./Cookiebot";
-import ConsentPopup from "./ConsentPopup";
 
 const nav = [
   ["/het-os", "Het OS"],
@@ -129,7 +128,7 @@ function ProposalShell() {
   return (
     <div className="sn-site" data-style="signature">
       <LogoIntro onComplete={() => setIntroDone(true)} />
-      
+      <QrOsWelcome ready={introDone} />
       <a className="h-skip" href="#inhoud">
         Ga naar inhoud
       </a>
@@ -155,10 +154,11 @@ function ProposalShell() {
             ))}
           </nav>
           <LanguageSwitch />
-          <Link className="h-header-claim" to="/gratis-website">
-            Gratis website
+          {/* 26 september 2026 (Marinus): geen reclame in de header, rechtsboven de login voor het gratis OS. */}
+          <a className="h-header-claim" href="https://app.socialnow.nl/login/">
+            Inloggen gratis OS
             <ArrowUpRight size={15} />
-          </Link>
+          </a>
           <button
             className="h-menu-toggle"
             type="button"
@@ -241,7 +241,7 @@ function ProposalShell() {
         </Routes>
       </main>
       <BrandFooter />
-      <ConsentPopup />
+      {/* 27 september 2026: de onboarding-popup (ConsentPopup) is op verzoek van Marinus van de site gehaald. */}
       <Cookiebot />
     </div>
   );

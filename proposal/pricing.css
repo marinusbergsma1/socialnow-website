@@ -487,3 +487,36 @@
   .sn-site .prijs-os::-webkit-scrollbar { display: none; }
   .sn-site .prijs-os li { scroll-snap-align: start; }
 }
+
+/* 28 september 2026 (Marinus): het OS op maat is het eerste en grootste blok, vanaf €10.000.
+   Daaronder de extra lagen bovenop de gratis versie. */
+.sn-site .prijs-maatwerk {
+  position: relative;
+  margin-top: 96px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  padding: clamp(28px, 5vw, 72px);
+  border: 1px solid #1d4a73;
+  border-radius: 28px;
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgba(0, 163, 224, .22), transparent 60%),
+    radial-gradient(90% 80% at 100% 100%, rgba(37, 211, 102, .14), transparent 60%),
+    #07111d;
+  overflow: hidden;
+}
+.sn-site .prijs-maatwerk-kop h2 { margin-top: 18px; font-size: clamp(38px, 5vw, 76px); line-height: 1.02; letter-spacing: -.02em; }
+.sn-site .prijs-maatwerk-kop h2 em { font-style: normal; color: #5cc8ff; }
+.sn-site .prijs-maatwerk-bedrag { display: flex; align-items: baseline; gap: 14px; margin: 28px 0 18px; }
+.sn-site .prijs-maatwerk-bedrag span { font-size: clamp(16px, 1.4vw, 22px); color: #99a2ab; }
+.sn-site .prijs-maatwerk-bedrag strong { font-size: clamp(56px, 8vw, 120px); line-height: .9; font-weight: 800; letter-spacing: -.03em; color: #fff; }
+.sn-site .prijs-maatwerk-lead { font-size: clamp(16px, 1.2vw, 19px); line-height: 1.6; color: #b9c2cc; max-width: 520px; margin-bottom: 26px; }
+.sn-site .prijs-maatwerk-punten { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; align-content: center; }
+.sn-site .prijs-maatwerk-punten li { display: grid; gap: 6px; padding: 20px 22px; border: 1px solid #1d3350; border-radius: 18px; background: rgba(8, 20, 34, .7); }
+.sn-site .prijs-maatwerk-punten b { font-size: clamp(17px, 1.3vw, 21px); color: #fff; font-weight: 600; }
+.sn-site .prijs-maatwerk-punten span { font-size: 15px; line-height: 1.5; color: #99a2ab; }
+.sn-site .prijs-maatwerk-team { grid-column: 1 / -1; }
+.sn-site .prijs-raster-los { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 900px) {
+  .sn-site .prijs-maatwerk { grid-template-columns: minmax(0, 1fr); margin-top: 64px; border-radius: 22px; }
+}

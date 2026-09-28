@@ -1,26 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import { people } from "./content";
 
-// 26 september 2026 (Marinus): na de beurs gewoon het team, niet meer live.
-// Eerder: wie er vandaag klaarstaat, met daaronder klein de link naar het hele team.
-// De foto's staan hier los van de teamlijst. Steef en Marinus blijven het grootst.
-const VANDAAG = [
-  { naam: "Steef", foto: "Steef-Komen.webp", groot: true },
-  { naam: "Sergio", foto: "Sergio-Jovovic.webp" },
-  { naam: "Marinus", foto: "Marinus-Bergsma-V2.webp", groot: true },
-  { naam: "Elian", foto: "Elian-Coellar-2026-09-26.webp" },
-];
-
+// 28 september 2026 (Marinus): meer mensen uit het team laten zien, de tekst mag kleiner. Het hele team, even groot.
 export default function TeamTrust() {
   return <Link to="/team" className="h-team-trust">
     <span className="h-team-portraits" aria-hidden="true">
-      {VANDAAG.map(p => <img key={p.naam} className={[p.groot && "is-groot", p.naam === "Sergio" && "is-sergio"].filter(Boolean).join(" ")} src={`/images/${p.foto}`} alt="" width="56" height="56" loading="lazy" />)}
+      {["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken"]
+        .map(naam => people.find(person => person.name === naam))
+        .filter((person): person is NonNullable<typeof person> => Boolean(person))
+        .map(person => <img key={person.name} src={`/images/${person.image}`} alt="" width="56" height="56" loading="lazy" />)}
     </span>
-    <span>
-      <em className="h-team-vandaag">Het team achter SocialNow</em>
-      <strong>Steef, Sergio, Marinus en Elian</strong>
-      <span>Bekijk het hele team <ArrowUpRight size={13} aria-hidden="true" /></span>
-    </span>
+    <span><strong>Technologie met mensen erachter.</strong><span>Maak kennis met ons team <ArrowUpRight size={13} aria-hidden="true" /></span></span>
   </Link>;
 }

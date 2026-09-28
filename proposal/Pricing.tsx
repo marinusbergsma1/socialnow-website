@@ -9,15 +9,18 @@ import "./pricing.css";
 // 23 september 2026 (Marinus): gratis starten is het grote verhaal, de prijzen staan klein en
 // helder eronder. Elk maandpakket heeft een custom OS; vanaf drie maanden hoort de complete
 // website erbij. Het team per pakket is een rij rondjes die uitklapt.
+// 28 september 2026 (Marinus): elk pakket €2.000 duurder. Het OS op maat (vanaf €10.000) is het eerste
+// en grootste blok; alle andere pakketten zijn een extra laag bovenop de gratis versie. Sergio bij Meta Ads.
 const PROBEER_URL = CLAIM_URL;
 
 type Lid = { naam: string; rol: string; foto: string };
 const TEAM: Record<string, Lid> = {
-  marinus: { naam: "Marinus Bergsma", rol: "Founder & Creative Director", foto: "marinus" },
-  jos: { naam: "Jos Hollenberg", rol: "Meta Ads", foto: "jos" },
-  nick: { naam: "Nick van Keulen", rol: "Google Ads Expert", foto: "nick" },
-  steef: { naam: "Steef Komen", rol: "Partner · Accountancy & Data", foto: "steef" },
-  sid: { naam: "Sid van Kalken", rol: "Webdeveloper", foto: "sid" },
+  marinus: { naam: "Marinus Bergsma", rol: "Founder & CEO", foto: "marinus" },
+  jos: { naam: "Jos Hollenberg", rol: "Head of Meta Ads", foto: "jos" },
+  sergio: { naam: "Sergio Jovovic", rol: "Meta Ads Specialist", foto: "sergio" },
+  nick: { naam: "Nick van Keulen", rol: "Head of Google Ads & Search", foto: "nick" },
+  steef: { naam: "Steef Komen", rol: "Partner · Head of Finance, Data & AI Payments", foto: "steef" },
+  sid: { naam: "Sid van Kalken", rol: "Head of Web Development & AI Payments · Attesso", foto: "sid" },
 };
 
 type Pakket = {
@@ -37,11 +40,11 @@ type Pakket = {
 const MAAND: Pakket[] = [
   {
     naam: "Content",
-    prijs: "€2.000",
+    prijs: "€4.000",
     per: "per maand",
     belofte: "Altijd aanwezig, altijd in je merk.",
     punten: [
-      { tekst: "Custom OS met Studio en Milo", sterk: true },
+      { tekst: "Bovenop je gratis OS met Studio en Milo", sterk: true },
       { tekst: "Content gemaakt in je eigen merk" },
       { tekst: "Voor je gepland en geplaatst" },
     ],
@@ -52,7 +55,7 @@ const MAAND: Pakket[] = [
   },
   {
     naam: "Content + Meta",
-    prijs: "€3.000",
+    prijs: "€5.000",
     per: "per maand",
     belofte: "Bereik de juiste mensen op Instagram en Facebook.",
     punten: [
@@ -60,15 +63,15 @@ const MAAND: Pakket[] = [
       { tekst: "Meta Ads opgezet en beheerd", sterk: true },
       { tekst: "Leads direct in je CRM" },
     ],
-    team: ["marinus", "jos"],
-    nieuw: "jos",
+    team: ["marinus", "jos", "sergio"],
+    nieuw: "sergio",
     kleur: "var(--prijs-roze)",
     actie: "Kies Meta",
     onderwerp: "Pakket Content + Meta",
   },
   {
     naam: "Meta + Google",
-    prijs: "€3.500",
+    prijs: "€5.500",
     per: "per maand",
     belofte: "Gevonden worden op het moment dat ze zoeken.",
     punten: [
@@ -76,7 +79,7 @@ const MAAND: Pakket[] = [
       { tekst: "Google Ads opgezet en beheerd", sterk: true },
       { tekst: "Eén rapport voor elk kanaal" },
     ],
-    team: ["marinus", "jos", "nick"],
+    team: ["marinus", "jos", "sergio", "nick"],
     nieuw: "nick",
     kleur: "var(--prijs-blauw)",
     actie: "Kies Meta + Google",
@@ -84,7 +87,7 @@ const MAAND: Pakket[] = [
   },
   {
     naam: "Compleet",
-    prijs: "€4.000",
+    prijs: "€6.000",
     per: "per maand",
     belofte: "Marketing en financiën, volledig geregeld.",
     punten: [
@@ -92,7 +95,7 @@ const MAAND: Pakket[] = [
       { tekst: "Boekhouding en accounting", sterk: true },
       { tekst: "Complete Odoo-inrichting" },
     ],
-    team: ["marinus", "jos", "nick", "steef"],
+    team: ["marinus", "jos", "sergio", "nick", "steef"],
     nieuw: "steef",
     kleur: "var(--prijs-groen)",
     actie: "Kies Compleet",
@@ -104,7 +107,7 @@ const MAAND: Pakket[] = [
 const LOS: Pakket[] = [
   {
     naam: "Website",
-    prijs: "vanaf €1.500",
+    prijs: "vanaf €3.500",
     per: "eenmalig",
     belofte: "Een complete website die klanten oplevert.",
     punten: [
@@ -118,22 +121,17 @@ const LOS: Pakket[] = [
     actie: "Begin met een website",
     onderwerp: "Website",
   },
-  {
-    naam: "Custom OS",
-    prijs: "Op aanvraag",
-    per: "samen afgestemd",
-    belofte: "Een systeem gebouwd rond één bedrijf.",
-    punten: [
-      { tekst: "Je eigen OS op je eigen Odoo", sterk: true },
-      { tekst: "Dashboard, CRM, Studio en website" },
-      { tekst: "Milo-agents op je eigen data" },
-    ],
-    team: ["marinus", "steef"],
-    kleur: "var(--prijs-roze)",
-    actie: "Laten we praten",
-    onderwerp: "Custom OS",
-  },
 ];
+
+const MAATWERK = {
+  punten: [
+    { titel: "Je eigen OS op je eigen Odoo", tekst: "Gebouwd rond hoe jouw bedrijf echt werkt, niet andersom." },
+    { titel: "Dashboard, CRM, Studio en website", tekst: "Elk onderdeel ingericht op je eigen processen en koppelingen." },
+    { titel: "Milo-agents op je eigen data", tekst: "AI die je verkoop, klanten en cijfers kent en meedenkt." },
+    { titel: "Developers en dataspecialisten", tekst: "Ons team en onze partners bouwen, koppelen en begeleiden." },
+  ],
+  team: ["marinus", "steef", "sid"],
+};
 
 const GRATIS = [
   { titel: "Een complete demowebsite", tekst: "Geen schets. Een volledige website in je merk, klaar om live te gaan." },
@@ -288,14 +286,44 @@ export default function Pricing() {
         </div>
       </section>
 
+      <section className="prijs-maatwerk" aria-labelledby="prijs-maatwerk-titel">
+        <div className="prijs-maatwerk-kop">
+          <p className="h-eyebrow">Operating System op maat</p>
+          <h2 id="prijs-maatwerk-titel">
+            Jouw eigen OS,
+            <br />
+            <em>gebouwd rond je bedrijf.</em>
+          </h2>
+          <p className="prijs-maatwerk-bedrag">
+            <span>vanaf</span>
+            <strong>€10.000</strong>
+          </p>
+          <p className="prijs-maatwerk-lead">Het gratis OS laat zien wat kan. Het OS op maat maakt het van jou: je eigen data, je eigen processen en je eigen agents, in één systeem.</p>
+          <div className="prijs-knoppen">
+            <Action to={`/contact?onderwerp=${encodeURIComponent("OS op maat")}`}>Plan je OS op maat</Action>
+          </div>
+        </div>
+        <ul className="prijs-maatwerk-punten">
+          {MAATWERK.punten.map((punt) => (
+            <li key={punt.titel}>
+              <b>{punt.titel}</b>
+              <span>{punt.tekst}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="prijs-maatwerk-team">
+          <Team ids={MAATWERK.team} />
+        </div>
+      </section>
+
       <section className="prijs-pakketten" aria-labelledby="prijs-pakketten-titel">
         <div className="prijs-pakketten-kop">
           <div>
-            <p className="h-eyebrow">Maandpakketten</p>
-            <h2 id="prijs-pakketten-titel">Groei met je team</h2>
+            <p className="h-eyebrow">Extra lagen · maandpakketten</p>
+            <h2 id="prijs-pakketten-titel">Bovenop je gratis OS</h2>
           </div>
           <p>
-            Elk maandpakket heeft je eigen custom OS. <strong>Drie maanden of langer? Dan hoort je complete website erbij.</strong>
+            Elk pakket is een extra laag bovenop de gratis versie. <strong>Drie maanden of langer? Dan hoort je complete website erbij.</strong>
           </p>
         </div>
         <div className="prijs-raster">

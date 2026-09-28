@@ -44,19 +44,16 @@ export default function LiveWebsites() {
   const [index, setIndex] = useState(0);
   const [mobile, setMobile] = useState(false);
   const [interactive, setInteractive] = useState(false);
-  const interactionTimer = useRef<number | undefined>(undefined);
   const frame = useRef<HTMLIFrameElement>(null);
   const control = useRef<HTMLButtonElement>(null);
   const stopInteraction = () => {
-    window.clearTimeout(interactionTimer.current);
     setInteractive(false);
     if (document.activeElement === frame.current) control.current?.focus({preventScroll:true});
   };
-  const startInteraction = () => {
-    window.clearTimeout(interactionTimer.current);
-    setInteractive(true);
-    interactionTimer.current = window.setTimeout(stopInteraction, 2500);
-  };
+  // 28 september 2026 (Marinus): "ik wil niet dat die stoppen met scrollen als je met je muis erop bent, maar het scrollen
+  // door de live sites moet wel mogelijk blijven". Met de muis erboven scrolt de pagina gewoon door. Wie door een site wil
+  // scrollen klikt eerst; weg met de muis, Escape of de knop eronder geeft de pagina terug.
+  const startInteraction = () => setInteractive(true);
   // Ruime marge: het laden begint ruim voordat de bezoeker bij dit onderdeel is.
   const { ref, visible } = useInView<HTMLElement>("1500px 0px");
   const [near, setNear] = useState(false);
@@ -65,7 +62,6 @@ export default function LiveWebsites() {
   }, [visible]);
   useEffect(() => {
     stopInteraction();
-    return () => window.clearTimeout(interactionTimer.current);
   }, [index, visible]);
   const project = sites[index];
   const frameSrc = frameSrcOf(project);
@@ -92,6 +88,7 @@ export default function LiveWebsites() {
     return () => window.clearTimeout(timer);
   }, [near, mounted.length]);
   const activeLoaded = loaded.includes(project.slug);
+  const bedienbaar = live ? activeLoaded : !!project.fullPageScreenshot;
   return (
     <section
       className="h-section h-wrap h-live-websites"
@@ -154,10 +151,15 @@ export default function LiveWebsites() {
           </span>
           <span>{new URL(project.url!).hostname}</span>
         </div>
-        <div className="h-live-screen"
-          onPointerEnter={event => { if (live && event.pointerType === "mouse") startInteraction(); }}
-          onPointerLeave={stopInteraction}
+        <div className={`h-live-screen${interactive ? " is-actief" : ""}`}
+          onPointerLeave={event => { if (event.pointerType === "mouse") stopInteraction(); }}
+          onKeyDown={event => { if (event.key === "Escape") stopInteraction(); }}
         >
+          {bedienbaar && !interactive && (
+            <button type="button" className="h-live-activeer" onClick={startInteraction}>
+              <span>Klik om door deze website te scrollen</span>
+            </button>
+          )}
           {near && sites.map((site) => {
             const src = frameSrcOf(site);
             if (!src || !mounted.includes(site.slug)) return null;
@@ -219,7 +221,7 @@ export default function LiveWebsites() {
             <ChevronRight size={19} />
           </button>
         </div>
-        {live && <button ref={control} type="button" className="h-text-link" aria-pressed={interactive}
+        {bedienbaar && <button ref={control} type="button" className="h-text-link" aria-pressed={interactive}
           onClick={interactive ? stopInteraction : startInteraction}>
           {interactive ? "Verder op deze pagina" : "Website bedienen"}
         </button>}

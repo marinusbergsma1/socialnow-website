@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -10,23 +10,21 @@ import {
   Phone,
 } from "lucide-react";
 import { HeroTitle } from "./styles";
-import { miloPoster } from "./motion";
+import { MiloMotion, miloPoster } from "./motion";
 import CharacterAccent from "./CharacterAccent";
 import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
-import { useTaalwissel } from "./taalwissel";
-import HeroBalk from "./HeroBalk";
 import TeamTrust from "./TeamTrust";
+import Verhaal from "./Verhaal";
+import Deuren from "./Deuren";
 import { AuditTeaser } from "./AuditPage";
-import CustomerReviews from "./CustomerReviews";
 import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
 import TrustStories from "./TrustStories";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import BrandGlobe from "./BrandGlobe";
-import { useTellers } from "./tellers";
-import OsEntry, { CLAIM_URL, REVIEWS_URL } from "./os-entry";
+import OsEntry, { CLAIM_URL, InstallKnop, REVIEWS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
 import Pricing from "./Pricing";
 import { allPosts } from "../data/posts";
@@ -51,14 +49,14 @@ function Founder() {
     <figure className="h-founder">
       <div className="h-founder-image">
         <img
-          src="/images/Marinus-Bergsma-V2.webp"
+          src="/images/marinus-profiel-blauw.webp"
           alt="Marinus Bergsma, oprichter van SocialNow"
           width="640"
           height="680"
           loading="lazy"
         />
         <figcaption>
-          Marinus Bergsma<span>Founder & Creative Art Director</span>
+          Marinus Bergsma<span>Founder & CEO</span>
         </figcaption>
       </div>
       <div>
@@ -78,36 +76,60 @@ function Founder() {
     </figure>
   );
 }
-// 26 september 2026 (Marinus): bedankvideo na de beurs (public/video/bedankt.mp4, valt terug op de explainer zolang die er niet is).
-// 25 september 2026 (Marinus): beursversie van de OS-explainer rechts in de hero. Speelt stil in een lus,
-// met één knop voor het geluid; de ondertiteling zit in de film zelf.
-function HeroFilm() {
-  const [geluid, setGeluid] = useState(false);
+// 26 september 2026 (Marinus): "een thank you video" en "ik mis de explainer video van het os". Rechts de
+// OS-explainer, met de staande bedankfilm uit Brussel ervoor. Beide spelen stil in een lus met een eigen
+// geluidsknop; zet je het geluid van de ene aan, dan gaat de andere op stil.
+function Film({ src, poster, label, titel, klasse, geluid, zetGeluid, boven }: { src: string; poster: string; label: string; titel: string; klasse: string; geluid: boolean; zetGeluid: (aan: boolean) => void; boven?: React.ReactNode }) {
   const ref = React.useRef<HTMLVideoElement>(null);
+  React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid]);
   const wissel = () => {
     const film = ref.current;
-    if (!film) return;
-    film.muted = geluid;
-    if (!geluid) { film.currentTime = 0; void film.play().catch(() => {}); }
-    setGeluid(!geluid);
+    if (film && !geluid) { film.currentTime = 0; void film.play().catch(() => {}); }
+    zetGeluid(!geluid);
   };
   return (
-    <div className="h-hero-film">
-      <video
-        ref={ref}
-        src="/video/bedankt.mp4"
-        onError={(e) => { const f = e.currentTarget; if (!f.src.endsWith("os-booth-en.mp4")) f.src = "/video/os/os-booth-en.mp4"; }}
-        poster="/video/os/os-booth-en.jpg"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-label="Bedankt van het SocialNow team"
-      />
+    <div className={klasse}>
+      {/* 26 september 2026 (Marinus): "video's iets groter met titels erboven". */}
+      {boven}
+      <p className="h-film-titel">{titel}</p>
+      <div className="h-film-vak">
+      <video ref={ref} src={src} poster={poster} autoPlay muted loop playsInline preload="auto" aria-label={label} />
       <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={geluid}>
         {geluid ? "Geluid uit" : "Geluid aan"}
       </button>
+      </div>
+    </div>
+  );
+}
+
+function HeroFilm() {
+  const [geluid, setGeluid] = useState<"" | "os" | "bedankt">("");
+  return (
+    <div className="h-hero-film h-hero-films">
+      <Film
+        klasse="h-film-os"
+        src="/video/os/os-booth-en.mp4"
+        poster="/video/os/os-booth-en.jpg"
+        label="SocialNow OS explainer"
+        titel="Zo werkt SocialNow OS"
+        boven={
+          // 26 september 2026 (Marinus): "Milo's klein boven How SocialNow OS works".
+          <div className="h-film-milos" aria-hidden="true">
+            {agents.slice(0, 4).map((agent) => <MiloMotion key={agent.id} role={agent.id} name={agent.name} />)}
+          </div>
+        }
+        geluid={geluid === "os"}
+        zetGeluid={(aan) => setGeluid(aan ? "os" : "")}
+      />
+      <Film
+        klasse="h-film-bedankt"
+        src="/video/bedankt/bedankt-brussel.mp4"
+        poster="/video/bedankt/bedankt-brussel.jpg"
+        label="Bedankt vanuit Brussel, van het SocialNow-team"
+        titel="Bedankt uit Brussel"
+        geluid={geluid === "bedankt"}
+        zetGeluid={(aan) => setGeluid(aan ? "bedankt" : "")}
+      />
     </div>
   );
 }
@@ -123,7 +145,8 @@ function useTaalfase(getoond: string) {
 
 export function Home() {
   const { language, t } = useLanguage();
-  const getoond = useTaalwissel(language);
+  // 26 september 2026 (Marinus): "ik wil niet dat de taal meer wijzigt". De hero toont de paginataal.
+  const getoond = language;
   const taalfase = useTaalfase(getoond);
   return (
     <>
@@ -134,32 +157,56 @@ export function Home() {
         </div>
         <div className="h-wrap h-hero-content">
           <div className="h-hero-tekst">
-          {/* 26 september 2026 (Marinus): de beurs is over. Alle reclame uit de header; alleen een
-              duidelijke login voor het gratis OS en een bedankvideo. */}
-          <h1 className="h-login-kop sn-vhs-off" translate="no"><span className="k1">THANK YOU</span> <svg className="k2" viewBox="140 146 640 250" role="img" aria-label="Odoo">
-              <path fill="#fff" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
-              <path fill="#a0628f" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
+          {/* 26 september 2026 (Marinus): "op mijn header mag alle reclame weg". Geen stand, geen actie, geen
+              tellers meer; een persoonlijk bedankje en één duidelijke login voor het gratis OS. */}
+          {/* 26 september 2026 (Marinus): "SocialNow OS logo hoeft er niet bij, team er wel bij". */}
+          <TeamTrust />
+          <HeroTitle />
+          {/* 26 september 2026 (Marinus): "onder de titel het Odoo-logo". */}
+          <p className="h-hero-odoo" translate="no">
+            <svg viewBox="140 146 640 250" role="img" aria-label="Odoo">
+              <path fill="#8f8f8f" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
+              <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
             </svg>
-          </h1>
-          <p className="h-hero-description"><b>{t("Drie dagen, honderden gesprekken, één geweldige beurs.")}</b> {t("Dank je wel voor je bezoek aan onze stand. Je gratis SocialNow OS staat voor je klaar, log in en ga meteen aan de slag.")}</p>
+          </p>
+          {/* 26 september 2026 (Marinus): versie A, "de brief". Het bedankje als briefje met foto en naam. */}
+          <div className="h-brief">
+            <p className="h-hero-description">
+              Door de vele aanmeldingen voor onze actie reageren we volgende week persoonlijk op iedereen. De winnaar
+              maken we bekend op LinkedIn en Instagram.
+            </p>
+            <div className="h-brief-onder">
+              <img src="/images/marinus-profiel-blauw.webp" alt="" width="56" height="56" />
+              <p><strong>Marinus Bergsma</strong><span>en het SocialNow-team</span></p>
+            </div>
+          </div>
           <div className="os-entry">
             <div className="os-actions">
-              <a className="h-login-knop" href="https://app.socialnow.nl/login/">
-                {t("Log in op je gratis OS")}
-                <ArrowUpRight size={20} aria-hidden="true" />
+              {/* 26 september 2026 (Marinus): "groene vulling zoals eerst Try the OS, meer rond en niet zo lang". */}
+              <a className="os-claim sn-btn3d h-button h-login-rond" href="https://app.socialnow.nl/login/">
+                <span className="sn-btn3d-sheen" />
+                <span>{translate("Log in op je gratis OS", getoond)}</span>
+                <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
               </a>
+              <InstallKnop />
             </div>
           </div>
           </div>
           <HeroFilm />
           <div className="h-hero-rij">
-            <TeamTrust />
             <ClientLogos kort />
           </div>
         </div>
       </section>
       </LanguageContext.Provider>
-      <ShowcaseFilms />
+      {/* 28 september 2026 (Marinus): "de homepage moet een upgrade gaan krijgen met storytelling". De volgorde vertelt
+          het verhaal: wie we zijn, wat je kunt doen, het bewijs, het vertrouwen, en dan pas het product in detail. */}
+      <Verhaal />
+      <Deuren />
+      <FeaturedWork />
+      {/* 28 september 2026 (Marinus): "What our clients say" mag weg van de homepage. */}
+      <LiveWebsites />
+      {/* Hier komt het veiligheidsblok met video en belofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
       <section className="h-section h-wrap" id="het-os">
         <Heading
           label="Vier onderdelen / Eén verbonden bedrijf"
@@ -191,11 +238,9 @@ export function Home() {
             note="Een bestaande uitlegvideo rond kWh Garant. De getoonde productomgeving bevat ook voorbeeldgegevens."
           />
         </div>
-        <ConversionBridge />
       </section>
-      <FeaturedWork />
-      <LiveWebsites />
-      <CustomerReviews />
+      {/* 28 september 2026 (Marinus): "dit onderdeel is niet meer zo belangrijk nu". See it in motion staat lager. */}
+      <ShowcaseFilms />
       <section className="h-section h-wrap h-services-with-character">
         <CharacterAccent kind="coder" />
         <Heading
@@ -227,9 +272,6 @@ export function Home() {
       </section>
       <VideoSlider />
       <TrustStories />
-      <section className="h-section h-wrap h-team-with-character">
-        <Founder />
-      </section>
       <ImageSliders />
       <section className="h-section h-wrap">
         <Heading
@@ -610,6 +652,15 @@ export function PricesPage() {
   );
 }
 export function TeamPage() {
+  const partners = ["Michelle Yang", "Steef Komen"]
+    .map(name => people.find(person => person.name === name))
+    .filter((person): person is NonNullable<typeof person> => Boolean(person));
+  const specialists = people.filter(person =>
+    person.name !== "Marinus Bergsma" &&
+    person.name !== "Michelle Yang" &&
+    person.name !== "Steef Komen"
+  );
+
   return (
     <>
       <PageHeading
@@ -626,22 +677,66 @@ export function TeamPage() {
       <section className="h-wrap">
         <Founder />
       </section>
+      {/* 28 september 2026 (Marinus): een groot en duidelijk bedankje aan alle bedrijven waarmee we samen
+          de developers- en datakant van het OS hebben doorgevoerd. */}
+      <section className="h-section h-wrap h-bedankt" aria-labelledby="h-bedankt-titel">
+        <p className="h-eyebrow">Dank je wel</p>
+        <h2 id="h-bedankt-titel">
+          Gebouwd met sterke partners.
+          <br />
+          <span>Bedankt.</span>
+        </h2>
+        <p className="h-bedankt-tekst">
+          Het OS bouwen we niet alleen. Samen met bedrijven met ervaren developers en dataspecialisten hebben we de techniek, de koppelingen en de data goed doorgevoerd. Aan al die bedrijven en mensen: dank je wel.
+        </p>
+        <div className="h-bedankt-rij">
+          <div className="h-bedankt-kaart">
+            <b translate="no">Komen Consultancy</b>
+            <span>Accountancy en data, met Steef Komen en Michelle Yang</span>
+          </div>
+          <div className="h-bedankt-kaart">
+            <b>Onze developers</b>
+            <span>Die de koppelingen met Odoo, Meta, Google en de website bouwden en testten</span>
+          </div>
+          <div className="h-bedankt-kaart">
+            <b>Onze dataspecialisten</b>
+            <span>Die zorgden dat je eigen data veilig en kloppend in het OS terechtkomt</span>
+          </div>
+        </div>
+      </section>
+      <section className="h-section h-wrap h-team-partners">
+        <Heading
+          label="SocialNow × Komen Consultancy"
+          title={
+            <>
+              Michelle en Steef.
+              <br />
+              <span>Samen sterk in het OS.</span>
+            </>
+          }
+        />
+        <TeamGrid members={partners} />
+        <p className="h-footnote">
+          Michelle Yang brengt expertise in supply chain en operationele processen mee.
+          Steef Komen werkt mee aan accountancy en data.
+        </p>
+      </section>
       <section className="h-section h-wrap">
         <Heading
-          label="Wie je tegenkomt"
+          label="Onze system experts"
           title={
             <>
               Ieder een eigen vak.
               <br />
-              <span>Samen SocialNow.</span>
+              <span>Persoonlijk voor je klaar.</span>
             </>
           }
         />
-        <TeamGrid />
-        <p className="h-footnote">
-          Steef Komen werkt vanuit Komen Consultancy mee aan accountancy en
-          data.
+        {/* 28 september 2026 (Marinus): het team zijn system experts die je persoonlijk helpen vanuit je Custom OS. */}
+        <p className="h-system-experts">
+          Iedereen in ons team is ook <b>system expert</b>. Ze kennen het OS van binnen en buiten en staan klaar om je persoonlijk te helpen, direct vanuit je eigen Custom OS.
         </p>
+        <TeamGrid members={specialists} />
         <AuditTeaser />
       </section>
     </>
@@ -809,7 +904,7 @@ export function ContactPage() {
             />
             <div>
               <h2>Begin bij Marinus.</h2>
-              <p>Founder & Creative Art Director</p>
+              <p>Founder & CEO</p>
             </div>
           </div>
           <div className="h-contact-methods">

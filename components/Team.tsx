@@ -23,7 +23,7 @@ const team: TeamItem[] = [
     name: "Marinus Bergsma", 
     role: "Founder & Creative Art Director", 
     specialRole: true,
-    image: `${import.meta.env.BASE_URL}images/Marinus-Bergsma-V2.webp` 
+    image: `${import.meta.env.BASE_URL}images/marinus-profiel-blauw.webp` 
   },
   { 
     id: 2, 
@@ -76,6 +76,14 @@ const team: TeamItem[] = [
     role: "Partner · Accountancy & Data",
     partnership: "SocialNow × Komen Consultancy",
     image: `${import.meta.env.BASE_URL}images/Steef-Komen.webp`
+  },
+  {
+    id: 10,
+    type: 'member',
+    name: "Michelle Yang",
+    role: "Supply chain specialist",
+    partnership: "SocialNow × Komen Consultancy",
+    image: `${import.meta.env.BASE_URL}images/Michelle-Yang-HD.webp`
   },
 ];
 
@@ -216,7 +224,7 @@ const TeamMemberCard: React.FC<{ member: TeamItem; index: number }> = ({ member,
   );
 };
 
-const PARTNER_NAMES = ['Steef Komen', 'Jos Hollenberg'];
+const PARTNER_NAMES = ['Michelle Yang', 'Steef Komen'];
 
 const Team: React.FC<TeamProps> = ({ onOpenBooking }) => {
   const founder = team.find(m => m.name === "Marinus Bergsma");
