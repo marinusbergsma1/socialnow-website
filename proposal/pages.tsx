@@ -20,6 +20,7 @@ import Verhaal from "./Verhaal";
 import Deuren from "./Deuren";
 import MensEnAI from "./MensEnAI";
 import VacaturesBento from "./VacaturesBento";
+import VeiligheidBlok from "./Veiligheid";
 import { AuditTeaser } from "./AuditPage";
 import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
@@ -211,7 +212,8 @@ export function Home() {
       {/* 28 september 2026 (Marinus): AI wordt verkeerd begrepen; mensen zijn de verbindende laag. Met vacature. */}
       <MensEnAI />
       <VacaturesBento />
-      {/* Hier komt het veiligheidsblok met video en belofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
+      {/* Veiligheidsblok met video en sleutelbelofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
+      <VeiligheidBlok />
       <section className="h-section h-wrap" id="het-os">
         <Heading
           label="Vier onderdelen / Eén verbonden bedrijf"
