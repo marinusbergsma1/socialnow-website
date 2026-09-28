@@ -27,5 +27,14 @@ export const STAPPEN: { kop: string; tekst: string }[] = [
 
 export type Taal = "nl" | "en";
 export const pdfPad = (taal: Taal) => `/documenten/socialnow-sleutelbelofte-${taal}.pdf`;
-export const videoPad = (taal: Taal, soort: "tv" | "45") => `/video/veiligheid/62-beveiliging-${taal}-${soort}.mp4`;
-export const posterPad = (taal: Taal, soort: "tv" | "45") => `/video/veiligheid/62-beveiliging-${taal}-${soort}-poster.webp`;
+// 28 september 2026 (Marinus): "robotfilm helemaal weg", de vijf vertrouwen-films van 27 september zijn goed, één per onderdeel.
+// Bron: 04_OS-VIDEO/video-project/renders/68 tot en met 72-vertrouwen-*-def.mp4 (1920x1080, met stem).
+export const FILMS: { slug: string; kop: string }[] = [
+  { slug: "versleuteling", kop: "Versleuteld opgeslagen" },
+  { slug: "toegang", kop: "Afgeschermd per werkruimte" },
+  { slug: "goedkeuring", kop: "Eerst goedkeuren, dan uitvoeren" },
+  { slug: "infrastructuur", kop: "Overal versleuteld verkeer" },
+  { slug: "koppelingen", kop: "Jouw accounts, jouw sleutels" },
+];
+export const filmPad = (slug: string, taal: Taal) => `/video/veiligheid/vertrouwen-${slug}-${taal}.mp4`;
+export const filmPosterPad = (slug: string, taal: Taal) => `/video/veiligheid/vertrouwen-${slug}-${taal}-poster.webp`;

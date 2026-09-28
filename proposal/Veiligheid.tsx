@@ -1,91 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Check, Download, Play, ShieldCheck, X } from "lucide-react";
+import { ArrowUpRight, Check, Download, ShieldCheck } from "lucide-react";
 import { useLanguage } from "./i18n/context";
-import { Bento, Tegel } from "./Bento";
-import { BELOFTES, STAPPEN, pdfPad, posterPad, videoPad, type Taal } from "./veiligheid-beloftes";
+import { Bento, BentoFilm, Tegel } from "./Bento";
+import { BELOFTES, FILMS, STAPPEN, filmPad, filmPosterPad, pdfPad, type Taal } from "./veiligheid-beloftes";
 import "./veiligheid.css";
 
 // Veiligheid, 28 september 2026 (Marinus): de veiligheidsvideo en de sleutelbelofte krijgen een
 // prominente plek, zodat bezoekers hun API-sleutels durven te koppelen.
 // VeiligheidBlok staat op de homepage na de live sites en vóór "Four faces"; die plaatsing doet de
 // homepage-regie in Home(). Sinds 28 september in de gedeelde bentotegels. VeiligheidPagina is /veiligheid (Engels zonder voorvoegsel, /nl/veiligheid).
-// Stille tv-versie speelt gedempt in een lus; een klik opent de 4:5-versie met de stem van Archie.
+// Sinds 28 september de vijf vertrouwen-films, één per onderdeel, in plaats van de robotfilm; de Sound on-pil zet de stem aan.
 // Nederlands krijgt de Nederlandse film en pdf, alle andere talen de Engelse.
 
 function useTaal(): Taal {
   const { language } = useLanguage();
   return language === "nl" ? "nl" : "en";
-}
-
-function StilleFilm({ taal, groot = false }: { taal: Taal; groot?: boolean }) {
-  const [open, setOpen] = useState(false);
-  const knop = useRef<HTMLButtonElement>(null);
-  const stil = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    // Bij "minder beweging" geen autoplay: de poster blijft staan, de klik werkt gewoon.
-    // Speelt alleen zolang de film in beeld is; zo laadt hij niet mee als niemand kijkt.
-    const film = stil.current;
-    if (!film || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    film.muted = true;
-    const kijker = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) film.play().catch(() => {});
-      else film.pause();
-    }, { threshold: 0.25 });
-    kijker.observe(film);
-    return () => kijker.disconnect();
-  }, [taal]);
-  return (
-    <>
-      <button
-        ref={knop}
-        type="button"
-        className={`vh-film${groot ? " vh-film--groot" : ""}`}
-        onClick={() => setOpen(true)}
-        aria-label="Bekijk de veiligheidsfilm met geluid"
-      >
-        <video
-          ref={stil}
-          key={taal}
-          src={videoPad(taal, "tv")}
-          poster={posterPad(taal, "tv")}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-          tabIndex={-1}
-        />
-        <span className="vh-film-knop">
-          <Play size={18} aria-hidden="true" />
-          <span>Kijk met geluid</span>
-        </span>
-      </button>
-      {open && <FilmMetStem taal={taal} onClose={() => { setOpen(false); knop.current?.focus(); }} />}
-    </>
-  );
-}
-
-function FilmMetStem({ taal, onClose }: { taal: Taal; onClose: () => void }) {
-  const sluit = useRef<HTMLButtonElement>(null);
-  useEffect(() => {
-    sluit.current?.focus();
-    const toets = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", toets);
-    const oud = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { window.removeEventListener("keydown", toets); document.body.style.overflow = oud; };
-  }, [onClose]);
-  return (
-    <div className="vh-venster" role="dialog" aria-modal="true" aria-label="Veiligheidsfilm met geluid" onClick={onClose}>
-      <div className="vh-venster-film" onClick={(e) => e.stopPropagation()}>
-        <video src={videoPad(taal, "45")} poster={posterPad(taal, "45")} controls autoPlay playsInline preload="auto" />
-        <button ref={sluit} type="button" className="vh-sluit" onClick={onClose} aria-label="Sluiten">
-          <X size={20} aria-hidden="true" />
-        </button>
-      </div>
-    </div>
-  );
 }
 
 function PdfKnop({ taal, label }: { taal: Taal; label?: string }) {
@@ -113,45 +43,21 @@ function Beloftes() {
   );
 }
 
-// 28 september 2026: het homepageblok in de gedeelde tegeltaal (proposal/Bento.tsx). De tv-versie is stil, dus de
-// pil opent de 4:5-film met stem in een venster in plaats van het geluid aan te zetten.
-function FilmTegel({ taal }: { taal: Taal }) {
-  const [open, setOpen] = useState(false);
-  const knop = useRef<HTMLButtonElement>(null);
-  const film = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const element = film.current;
-    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    element.muted = true;
-    const kijker = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) element.play().catch(() => {});
-      else element.pause();
-    }, { threshold: 0.25 });
-    kijker.observe(element);
-    return () => kijker.disconnect();
-  }, [taal]);
+// Eén vertrouwen-film per onderdeel, stil in een lus met de Sound on-pil van het landingsscherm.
+function FilmTegel({ slug, taal, breed }: { slug: string; taal: Taal; breed: 3 | 4 | 8 | 12 }) {
+  const film = FILMS.find((f) => f.slug === slug)!;
   return (
-    <>
-      <video ref={film} key={taal} className="sn-tegel-film" src={videoPad(taal, "tv")} poster={posterPad(taal, "tv")} muted loop playsInline preload="metadata" aria-label="Veiligheidsfilm" />
-      <button ref={knop} type="button" className="h-hero-film-geluid" onClick={() => setOpen(true)}>Kijk met geluid</button>
-      {open && <FilmMetStem taal={taal} onClose={() => { setOpen(false); knop.current?.focus(); }} />}
-    </>
+    <Tegel kop={film.kop} breed={breed} soort="film">
+      <BentoFilm key={taal} src={filmPad(slug, taal)} poster={filmPosterPad(slug, taal)} label={film.kop} />
+    </Tegel>
   );
 }
-
-const GROEPEN: { kop: string; beloftes: number[] }[] = [
-  { kop: "Versleuteld en onzichtbaar", beloftes: [0, 1] },
-  { kop: "Alleen wat jij aanzet", beloftes: [2, 3, 4] },
-  { kop: "Jij houdt de regie", beloftes: [5, 6] },
-];
 
 export default function VeiligheidBlok() {
   const taal = useTaal();
   return (
     <Bento id="veiligheid" label="Sleutelbelofte" titel={<>Jouw sleutels zijn veilig.<br /><span>Zwart op wit.</span></>} className="vh-bento">
-      <Tegel kop="Zo beschermen we je sleutels" breed={8} soort="film">
-        <FilmTegel taal={taal} />
-      </Tegel>
+      <FilmTegel slug="versleuteling" taal={taal} breed={8} />
       <Tegel kop="Het officiële document" breed={4} soort="groen">
         <p className="sn-tegel-label">PDF, Nederlands en Engels</p>
         <p className="sn-tegel-titel">Zeven beloftes over je API-sleutels.</p>
@@ -163,18 +69,7 @@ export default function VeiligheidBlok() {
           </Link>
         </div>
       </Tegel>
-      {GROEPEN.map((g) => (
-        <Tegel key={g.kop} kop={g.kop} breed={4}>
-          <ul className="vh-beloftes vh-beloftes--tegel">
-            {g.beloftes.map((i) => (
-              <li key={i}>
-                <span className="vh-vink"><Check size={15} aria-hidden="true" /></span>
-                <span><strong>{BELOFTES[i].kop}</strong></span>
-              </li>
-            ))}
-          </ul>
-        </Tegel>
-      ))}
+      {FILMS.slice(1).map((f) => <FilmTegel key={f.slug} slug={f.slug} taal={taal} breed={3} />)}
     </Bento>
   );
 }
@@ -191,9 +86,13 @@ export function VeiligheidPagina() {
           <PdfKnop taal={taal} />
         </div>
       </section>
-      <section className="h-wrap">
-        <StilleFilm taal={taal} groot />
-      </section>
+      <Bento className="vh-bento vh-films">
+        <FilmTegel slug="versleuteling" taal={taal} breed={8} />
+        <FilmTegel slug="toegang" taal={taal} breed={4} />
+        <FilmTegel slug="goedkeuring" taal={taal} breed={4} />
+        <FilmTegel slug="infrastructuur" taal={taal} breed={4} />
+        <FilmTegel slug="koppelingen" taal={taal} breed={4} />
+      </Bento>
       <section className="h-wrap vh-sectie" aria-labelledby="vh-beloftes-kop">
         <h2 id="vh-beloftes-kop">Onze belofte</h2>
         <Beloftes />
