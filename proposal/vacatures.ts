@@ -10,6 +10,10 @@ export const VACATURE_MAIL = "offer@socialnow.nl";
 export const vacatureMail = (titel: string) =>
   `mailto:${VACATURE_MAIL}?subject=${encodeURIComponent(`Sollicitatie: ${titel}`)}`;
 
+// 28 september 2026 (Marinus): investeerders nemen contact op met Steef via finance@ (alias op info@ bij Hostinger).
+export const FINANCE_MAIL = "finance@socialnow.nl";
+export const financeMail = (onderwerp: string) => `mailto:${FINANCE_MAIL}?subject=${encodeURIComponent(onderwerp)}`;
+
 export type Vacature = {
   slug: string;
   titel: string;

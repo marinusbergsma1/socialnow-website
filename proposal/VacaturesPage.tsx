@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import { PageHeading } from "./ui";
 import { people } from "./content";
-import { vacatures, vacatureMail, VACATURE_MAIL, type Vacature } from "./vacatures";
+import { vacatures, vacatureMail, VACATURE_MAIL, FINANCE_MAIL, financeMail, type Vacature } from "./vacatures";
 import { useLanguage } from "./i18n/context";
 import "./mens-en-ai.css";
 
@@ -68,6 +68,19 @@ export function VacaturesPage() {
               <p>Steef beheert onze vacatures en leest elke sollicitatie zelf. Vragen over een functie? Mail hem gerust.</p>
               <a className="h-text-link" href={`mailto:${VACATURE_MAIL}`}>
                 {VACATURE_MAIL}
+                <ArrowUpRight size={17} aria-hidden="true" />
+              </a>
+            </div>
+          </aside>
+        )}
+        {steef && (
+          <aside className="h-vac-contact h-vac-invest" id="investeerders">
+            <img src={`/images/${steef.image}`} alt="" width="72" height="72" loading="lazy" />
+            <div>
+              <p className="h-vac-contact-naam"><strong>Investeerders gezocht</strong><span>{steef.name} · {steef.role}</span></p>
+              <p>We zoeken investeerders die mee willen bouwen aan SocialNow OS. Steef bespreekt het graag persoonlijk met je.</p>
+              <a className="h-text-link" href={financeMail(t("Investeren in SocialNow"))}>
+                {FINANCE_MAIL}
                 <ArrowUpRight size={17} aria-hidden="true" />
               </a>
             </div>

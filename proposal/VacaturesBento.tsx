@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { vacatures, vacatureMail, type Vacature } from "./vacatures";
+import { vacatures, vacatureMail, financeMail, type Vacature } from "./vacatures";
 import { useLanguage } from "./i18n/context";
 import { Bento, Tegel } from "./Bento";
 import "./vacatures-bento.css";
@@ -45,6 +45,16 @@ function Inhoud({ vacature, groot }: { vacature: Vacature; groot?: boolean }) {
   );
 }
 
+function InvestKnop() {
+  const { t } = useLanguage();
+  return (
+    <a className="os-claim sn-btn3d h-button" href={financeMail(t("Investeren in SocialNow"))}>
+      <span className="sn-btn3d-sheen" />
+      <span>Mail Steef</span>
+    </a>
+  );
+}
+
 export default function VacaturesBento() {
   const eerste = vacatures.find((v) => v.slug === GROOT) ?? vacatures[0];
   return (
@@ -72,6 +82,17 @@ export default function VacaturesBento() {
           </Tegel>
         ) : null;
       })}
+      <Tegel kop="Investeerders gezocht" breed={12}>
+        <p className="sn-tegel-titel h-vb-titel">Investeer mee in het OS.</p>
+        <p className="sn-tegel-tekst">We zoeken investeerders die mee willen bouwen aan SocialNow OS. Steef Komen bespreekt het graag persoonlijk met je.</p>
+        <div className="sn-tegel-onder">
+          <InvestKnop />
+          <Link className="h-text-link" to="/vacatures#investeerders">
+            Lees meer
+            <ArrowUpRight size={17} aria-hidden="true" />
+          </Link>
+        </div>
+      </Tegel>
       <Tegel kop="Alle vacatures" breed={12}>
         <Link className="h-vb-balk" to="/vacatures">
           <strong>Word de verbindende laag achter duizenden bedrijven.</strong>
