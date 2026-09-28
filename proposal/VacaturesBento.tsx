@@ -17,7 +17,7 @@ const KLEIN = [
 ];
 
 function mailLink(titel: string) {
-  return `mailto:info@socialnow.nl?subject=${encodeURIComponent(`Sollicitatie: ${titel}`)}`;
+  return `mailto:steef@socialnow.nl?subject=${encodeURIComponent(`Sollicitatie: ${titel}`)}`;
 }
 
 function Inhoud({ vacature, groot }: { vacature: Vacature; groot?: boolean }) {

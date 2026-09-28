@@ -6,10 +6,10 @@ import { useLanguage } from "./i18n/context";
 import "./mens-en-ai.css";
 
 // 28 september 2026 (Marinus): de vacatures voor de verbindende laag en het team dat we nu nodig hebben.
-// Solliciteren gaat per mail naar info@; de functie staat al in het onderwerp.
+// Solliciteren gaat per mail naar Steef (steef@); de functie staat al in het onderwerp.
 
 function mailLink(titel: string) {
-  return `mailto:info@socialnow.nl?subject=${encodeURIComponent(`Sollicitatie: ${titel}`)}`;
+  return `mailto:steef@socialnow.nl?subject=${encodeURIComponent(`Sollicitatie: ${titel}`)}`;
 }
 
 function soortNaarSchema(soort: string) {
