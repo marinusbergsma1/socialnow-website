@@ -4,6 +4,8 @@ import { languagePrefix, useLanguage } from "./i18n/context";
 import { aanvraagWhatsApp, heeftWhatsApp, whatsappLink } from "./aanvragen";
 import "./gratis-website.css";
 
+// 28 september 2026: de beurs is voorbij. De gratis demowebsite blijft (zie /prijzen), zonder stand C21 en live bouwen.
+
 const OPSLAG = "sn-gratis-website-v1";
 type Gegevens = { voornaam: string; achternaam: string; bedrijf: string; email: string; mobiel: string };
 type Vraag = { key: string; vraag: string; hint: string; type?: "text" };
@@ -46,10 +48,10 @@ export default function GratisWebsite() {
     </label>
   );
   return <div className="gw"><div className="gw-sheet">
-    <p className="gw-eyebrow"><i className="gw-stipjes"><b /><b /><b /></i>Gratis website / Odoo Experience, stand C21</p>
-    <h1>Wij maken jouw website <span className="gw-accent">live op de Odoo-beurs.</span></h1>
-    <p className="gw-lead">Vertel ons over je bedrijf en wat je mooi vindt. Wij lezen je antwoorden zelf en maken een website die echt bij je past, samen met jou op stand C21.</p>
-    <ul className="gw-beloftes"><li><Check size={15} /> Persoonlijk gemaakt voor jouw bedrijf</li><li><Check size={15} /> Direct contact met Steef</li><li><Check size={15} /> Live gebouwd op de Odoo-beurs</li></ul>
+    <p className="gw-eyebrow"><i className="gw-stipjes"><b /><b /><b /></i>Gratis demowebsite</p>
+    <h1>Wij maken jouw website, <span className="gw-accent">persoonlijk en gratis.</span></h1>
+    <p className="gw-lead">Vertel ons over je bedrijf en wat je mooi vindt. Wij lezen je antwoorden zelf en maken een website die echt bij je past.</p>
+    <ul className="gw-beloftes"><li><Check size={15} /> Persoonlijk gemaakt voor jouw bedrijf</li><li><Check size={15} /> Direct contact met Steef</li><li><Check size={15} /> Gratis en zonder verplichting</li></ul>
     <a className="gw-contactpil" href={whatsappLink(t("Hoi Steef, ik heb een vraag over de websites die jullie live maken op de Odoo-beurs."))} target="_blank" rel="noopener noreferrer">
       <img className="gw-contact-avatar" src="/images/Steef-Komen.webp" alt="" width="48" height="48" /><span className="gw-contact-tekst"><strong translate="no">Steef Komen</strong><small>Vragen? Neem persoonlijk contact op</small></span><MessageCircle size={19} aria-hidden="true" />
     </a>

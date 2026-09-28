@@ -35,6 +35,8 @@ const contactPersoon = people.find((p) => p.name === "Steef Komen") ?? people[0]
 import Pricing from "./Pricing";
 import { allPosts } from "../data/posts";
 import socialPosts from "../public/data/socialposts.json";
+import { GRATIS_OS_URL } from "./os-entry";
+import PartnerMichelle from "./PartnerMichelle";
 import {
   Action,
   AgentCards,
@@ -66,19 +68,31 @@ function Founder() {
           Marinus Bergsma<span>Founder & CEO</span>
         </figcaption>
       </div>
+      {/* 28 september 2026 (Marinus, VERHAAL.md): van grafisch vormgever tot oprichter, en waarom hij doet wat hij doet. */}
       <div>
-        <p className="h-eyebrow">De ambitie achter SocialNow</p>
+        <p className="h-eyebrow">De oprichter</p>
         <h2>
-          Software moet
+          Van grafisch vormgever
           <br />
-          <span>voor mensen werken.</span>
+          <span>tot oprichter.</span>
         </h2>
-        <p className="h-founder-mission">
-          Ons doel: je bedrijf kunnen aansturen zonder eerst software te moeten
-          leren. Daarom bouwen we Custom OS-systemen die eenvoudig werken, bij
-          jouw bedrijf passen en mensen achter zich hebben.
+        <p className="h-founder-bio">
+          Marinus Bergsma studeerde in 2019 af als grafisch vormgever. Hij werkte voor mooie merken als Amsterdam Light Festival, Day & Nite, AZ en Supperclub. Na succes met freelance opdrachten begon hij in november 2021 SocialNow en bouwde hij een team van specialisten.
         </p>
-        <TextLink to="/team">De mensen achter het OS</TextLink>
+        <p className="h-founder-bio">
+          Toen het eerste AI-model beelden kon maken, gooide hij zijn ondernemingsplan om en verdiepte hij zich in AI en development. Branding en advertenties gingen draaien op zelflerende systemen. Daarna volgde één OS waarin je alle data van je bedrijf koppelt, met Odoo als laatste sleutel. Met Steef Komen maakte hij het schaalbaar.
+        </p>
+        <blockquote>
+          "Ik wil ondernemers helemaal ontzorgen met de nieuwste technologie, zonder dat het persoonlijke verdwijnt."
+        </blockquote>
+        <p className="h-founder-motto" translate="no">
+          Human creativity. <span>Powered by AI technology.</span>
+        </p>
+        <ul className="h-founder-feiten">
+          <li><b>2019</b>Afgestudeerd</li>
+          <li><b>Nov 2021</b>SocialNow</li>
+          <li><b>Nov 2026</b>Vijf jaar</li>
+        </ul>
       </div>
     </figure>
   );
@@ -299,19 +313,19 @@ export function Home() {
   );
 }
 export function OsPage() {
-  const { t } = useLanguage();
+  // 28 september 2026 (Marinus, het verhaal): alle data in één OS, Odoo als laatste sleutel, gratis te gebruiken.
   return (
     <>
       <PageHeading
-        label="Probeer SocialNow OS / Ontdek hoe het werkt"
+        label="SocialNow OS / Gratis te gebruiken"
         title={
           <>
-            Eerst zelf ervaren.
+            Alle data van je bedrijf.
             <br />
-            <span>Dan samen verder.</span>
+            <span>Eén OS.</span>
           </>
         }
-        text="Probeer het systeem en ervaar het overzicht. Daarna bespreken we hoe we het op jouw bedrijf afstemmen."
+        text="Koppel je website, social media en Odoo, en zie klanten, verkoop en marketing op één plek. Odoo is de laatste sleutel: totale ontzorging en volledig inzicht. Probeer het OS gratis; wil je het helemaal rond je bedrijf, dan bouwen we je OS op maat."
       />
       <div className="h-wrap">
         <OsEntry />
@@ -334,32 +348,32 @@ export function OsPage() {
         <ol className="h-steps">
           <li>
             <span>01</span>
-            <h3>{t("Vraag een OS-demo aan.")}</h3>
+            <h3>Log in op je gratis OS.</h3>
             <p>
-              {t("Stuur ons je naam en e-mailadres via WhatsApp. We bespreken daarna de demo.")}
+              Met je Google-account of je e-mailadres. Gratis, zonder creditcard.
             </p>
-            <a className="h-text-link" href={CLAIM_URL}>
-              {t("Vraag gratis OS-demo aan")}
+            <a className="h-text-link" href={GRATIS_OS_URL}>
+              Probeer het OS gratis
               <ArrowUpRight size={16} />
             </a>
           </li>
           <li>
             <span>02</span>
-            <h3>Verbind je gegevens.</h3>
+            <h3>Koppel je data.</h3>
             <p>
-              Met een geschikte Odoo-omgeving en de juiste Meta-rechten begin je
-              met inzicht in klanten, verkoop en marketing.
+              Je website, je social media en je Odoo. Met de juiste rechten zie
+              je klanten, verkoop en marketing op één plek.
             </p>
           </li>
           <li>
             <span>03</span>
             <h3>Maak het van jou.</h3>
             <p>
-              We bepalen samen welke schermen, processen en koppelingen je nodig
-              hebt. Met duidelijke afspraken over uitvoering en kosten.
+              Wil je het OS rond je eigen processen? We bouwen je OS op maat,
+              vanaf €10.000, met duidelijke afspraken over uitvoering en kosten.
             </p>
-            <TextLink to="/contact?onderwerp=Custom%20OS">
-              Bespreek jouw inrichting
+            <TextLink to="/contact?onderwerp=OS%20op%20maat">
+              Bespreek je OS op maat
             </TextLink>
           </li>
         </ol>
@@ -399,10 +413,7 @@ export function OsPage() {
                 <ul>
                   <li>Website en ontwikkeling in je eigen merkstijl</li>
                   <li>Koppelingen volgens de afgesproken scope</li>
-                  <li>
-                    In de testomgeving: contactmodule voor persoonlijke
-                    inrichting
-                  </li>
+                  <li>Persoonlijk contact met ons team, vanuit je OS</li>
                 </ul>
               )}
               <TextLink
@@ -421,8 +432,8 @@ export function OsPage() {
               />
               <VideoBlock
                 file={agent.video}
-                title={`De productrichting voor ${agent.title.toLowerCase().replace(".", "")}`}
-                note="Conceptvideo: deze laat de productrichting zien. Getoonde automatisering is geen garantie voor beschikbare functies in de testomgeving."
+                title={`${agent.title} in beeld`}
+                note="Conceptvideo over de richting van dit onderdeel. Welke automatisering je gebruikt, spreken we samen af."
               />
             </div>
           </article>
@@ -453,7 +464,7 @@ export function ProjectsPage() {
             <span>vorm hebben gekregen.</span>
           </>
         }
-        text="Van websites en platforms tot merkidentiteiten, campagnes en content. Ontdek het werk achter SocialNow."
+        text="Van campagnes voor merken als AZ, Universal en Sony tot AI-websites en dataplatforms als VASTIQ. Ontdek het werk achter SocialNow."
       />
       <section className="h-wrap h-projects-list">
         <div className="h-filters" role="group" aria-label="Filter projecten">
@@ -504,7 +515,7 @@ export function ServicesPage() {
             <span>Volledig gemaakt.</span>
           </>
         }
-        text="Ontwerp, techniek en marketing horen bij elkaar. We helpen met één gerichte opdracht of als betrokken team naast je bedrijf."
+        text="Hier begon SocialNow: ontwerp, beeld en campagnes. Vandaag werken we ook met AI en development, en het blijft persoonlijk. Voor één gerichte opdracht of als team naast je bedrijf."
       />
       <section className="h-wrap h-services">
         {services.map((service, index) => (
@@ -544,7 +555,7 @@ export function ServicesPage() {
               <span>Of verder bouwen.</span>
             </>
           }
-          text="Probeer het OS en bespreek jouw Custom OS. Voor een losse opdracht maken we een gericht voorstel met een duidelijke scope."
+          text="Probeer het OS gratis en bespreek je OS op maat. Voor een losse opdracht maken we een gericht voorstel met een duidelijke scope."
         />
         <Action to="/prijzen">Bekijk de prijzen</Action>
       </section>
@@ -571,7 +582,7 @@ export function PricesPage() {
             <span>01 / Bedrijf</span>
             <h3>Hoe werk je?</h3>
             <p>
-              Je team, processen en prioriteiten bepalen waar een Custom OS het
+              Je team, processen en prioriteiten bepalen waar je OS op maat het
               verschil moet maken.
             </p>
           </li>
@@ -604,7 +615,7 @@ export function PricesPage() {
               <span>Een sterker merk.</span>
             </>
           }
-          text="Onze creatieve en technische diensten blijven beschikbaar. We maken een voorstel voor je project of nemen ze mee in de samenwerking rond je Custom OS."
+          text="Onze creatieve en technische diensten blijven beschikbaar. We maken een voorstel voor je project of nemen ze mee in de samenwerking rond je OS op maat."
         />
         <Action to="/diensten" secondary>
           Bekijk onze diensten
@@ -638,7 +649,7 @@ export function TeamPage() {
             <span>Betrokken specialisten.</span>
           </>
         }
-        text="SocialNow ontstond in 2021 vanuit ons werk voor klanten. Vandaag brengen we creatie, marketing en techniek samen in merken, websites en Custom OS-systemen."
+        text="SocialNow begon in november 2021. Sindsdien groeiden we uit tot een team van specialisten in creatie, marketing, data en techniek. Samen bouwen we één OS dat je bedrijf ontzorgt, en het persoonlijke contact blijft."
       />
       <section className="h-wrap">
         <Founder />
@@ -653,12 +664,12 @@ export function TeamPage() {
           <span>Bedankt.</span>
         </h2>
         <p className="h-bedankt-tekst">
-          Het OS bouwen we niet alleen. Samen met bedrijven met ervaren developers en dataspecialisten hebben we de techniek, de koppelingen en de data goed doorgevoerd. Aan al die bedrijven en mensen: dank je wel.
+          Het OS bouwen we niet alleen. Samen met bedrijven met ervaren developers en dataspecialisten hebben we de techniek, de koppelingen en de data goed doorgevoerd. En Odoo-implementatiepartners brengen het OS nu naar hun klanten. Aan al die bedrijven en mensen: dank je wel.
         </p>
         <div className="h-bedankt-rij">
           <div className="h-bedankt-kaart">
             <b translate="no">Komen Consultancy</b>
-            <span>Accountancy en data, met Steef Komen en Michelle Yang</span>
+            <span>Accountancy, Odoo en data, met Steef Komen en Michelle Yang. Samen maken we het OS schaalbaar.</span>
           </div>
           <div className="h-bedankt-kaart">
             <b>Onze developers</b>
@@ -677,14 +688,13 @@ export function TeamPage() {
             <>
               Michelle en Steef.
               <br />
-              <span>Samen sterk in het OS.</span>
+              <span>Samen maken we het schaalbaar.</span>
             </>
           }
         />
         <TeamGrid members={partners} />
         <p className="h-footnote">
-          Michelle Yang brengt expertise in supply chain en operationele processen mee.
-          Steef Komen werkt mee aan accountancy en data.
+          Steef Komen is accountant, Odoo-expert en datascientist. Met hem maakten we het OS schaalbaar, en samen bouwen we VASTIQ, een dataplatform voor vastgoed. Michelle Yang werkt vanuit Komen Consultancy mee aan supply chain, operations en betalingen met AI.
         </p>
       </section>
       <section className="h-section h-wrap">
@@ -700,7 +710,7 @@ export function TeamPage() {
         />
         {/* 28 september 2026 (Marinus): het team zijn system experts die je persoonlijk helpen vanuit je Custom OS. */}
         <p className="h-system-experts">
-          Iedereen in ons team is ook <b>system expert</b>. Ze kennen het OS van binnen en buiten en staan klaar om je persoonlijk te helpen, direct vanuit je eigen Custom OS.
+          Iedereen in ons team is ook <b>system expert</b>. Ze kennen het OS van binnen en buiten en staan klaar om je persoonlijk te helpen, direct vanuit je OS.
         </p>
         <TeamGrid members={specialists} />
         <AuditTeaser />
@@ -849,7 +859,7 @@ export function ContactPage() {
   return (
     <>
       <PageHeading
-        label="Jouw Custom OS begint met een gesprek"
+        label="Het persoonlijke contact blijft"
         title={
           <>
             Wat kan het OS
@@ -857,7 +867,7 @@ export function ContactPage() {
             <span>voor jou betekenen?</span>
           </>
         }
-        text="Vertel ons hoe je bedrijf werkt. Samen bepalen we hoe het OS en ons team je kunnen helpen."
+        text="Vertel ons hoe je bedrijf werkt. Samen bepalen we wat je gratis OS, een OS op maat of ons team voor je kunnen doen."
       />
       <section className="h-wrap h-contact-layout">
         <div>
@@ -935,7 +945,7 @@ export function ContactPage() {
             <input
               name="subject"
               defaultValue={t(params.get("onderwerp") || "Custom OS")}
-              placeholder="Bijvoorbeeld: Custom OS of een nieuwe website"
+              placeholder="Bijvoorbeeld: OS op maat of een nieuwe website"
               maxLength={150}
             />
           </label>
@@ -968,6 +978,7 @@ export function ContactPage() {
           )}
         </form>
       </section>
+      <PartnerMichelle />
       <section className="h-section h-wrap">
         <VideoBlock
           file="os-master-en"

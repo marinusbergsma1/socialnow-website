@@ -56,6 +56,22 @@ const nav = [
   ["/blog", "Blog"],
   ["/contact", "Contact"],
 ];
+// Pagina's buiten het menu houden hun eigen titel, ook als je ze rechtstreeks opent.
+const paginaTitels: Record<string, string> = {
+  "/audit": "Gratis Google Ads audit",
+  "/gratis-website": "Gratis website aanvragen",
+  "/gratis-os-demo": "Gratis OS-demo",
+  "/antwoord-aanvragen": "Antwoord op aanvragen",
+  "/juridisch": "Juridisch en compliance",
+  "/privacy": "Privacybeleid",
+  "/voorwaarden": "Algemene voorwaarden",
+  "/verwerkersovereenkomst": "Verwerkersovereenkomst",
+  "/beveiliging": "Beveiliging",
+  "/cookies": "Cookieverklaring",
+  "/ai": "AI-verklaring",
+  "/gebruik": "Aanvaardbaar gebruik",
+  "/veiligheid": "Veiligheid en sleutelbelofte",
+};
 export default function WebsiteProposal({language="en"}:{language?:Language}) {
   return (
     <LanguageProvider language={language}><MotionProvider>
@@ -79,15 +95,19 @@ function ProposalShell() {
     const post = allPosts.find(
       (item) => location.pathname === `/blog/${item.slug}`,
     );
+    // 28 september 2026: GitHub Pages opent een route ook met een slash erachter (/team/); zonder deze regel
+    // viel de titel dan terug op "Probeer SocialNow OS" in plaats van de naam van de pagina.
+    const pad = location.pathname.replace(/\/+$/, "") || "/";
     const title =
       project?.title ||
       post?.title ||
-      nav.find(([path]) => path === location.pathname)?.[1] ||
-      (location.pathname.startsWith("/antwoord-aanvragen") ? "Antwoord op aanvragen" : location.pathname.startsWith("/gratis-website") ? "Gratis website aanvragen" : location.pathname.startsWith("/gratis-os-demo") ? "Gratis OS-demo" : location.pathname.startsWith("/veiligheid") ? "Veiligheid en sleutelbelofte" : "Probeer SocialNow OS");
+      nav.find(([path]) => path === pad)?.[1] ||
+      paginaTitels[pad] ||
+      "Probeer SocialNow OS";
     const description =
       project?.description ||
       post?.excerpt ||
-      "Probeer SocialNow OS. Je website, CRM, content en advertenties in één chat. Ervaar het gemak; daarna bouwen we samen jouw Custom OS.";
+      "Alle data van je bedrijf in één OS. Koppel je website, social media en Odoo. Gratis te gebruiken; een OS op maat bouwen we vanaf €10.000.";
     document.title = `${t(title)} | SocialNow`;
     for (const [selector, content] of [
       ['meta[name="description"]', t(description)],
