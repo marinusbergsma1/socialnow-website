@@ -52,7 +52,7 @@ export function VacaturesPage() {
         label="Werken bij SocialNow"
         title={
           <>
-            Duizenden bedrijven.
+            Klaar voor duizenden bedrijven.
             <br />
             <span>Elk met een mens erachter.</span>
           </>

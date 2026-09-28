@@ -57,7 +57,7 @@ export default function VacaturesBento() {
         <>
           Wij zoeken mensen.
           <br />
-          <span>Voor duizenden bedrijven.</span>
+          <span>Klaar voor duizenden bedrijven.</span>
         </>
       }
     >
