@@ -82,7 +82,7 @@ export default function Deuren() {
         <span className="h-deur-merk" translate="no"><SalesforceLogo /><span>Salesforce</span></span>
         <b><i aria-hidden="true" />Nu in aanbouw</b>
       </Tegel>
-      <Tegel kop="Zij gingen je voor" breed={4} className="h-deur-logos">
+      <Tegel kop="Zij melden zich al aan." breed={4} className="h-deur-logos">
         <ul translate="no">
           {PARTNERS.map((partner) => (
             <li key={partner.naam}>
