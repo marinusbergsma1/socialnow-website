@@ -2,7 +2,8 @@ import React, { useEffect, useId, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { AmbientVideo, MotionControl, useInView, useMotion } from "./motion";
-import { Heading } from "./ui";
+import { Bento, BentoFilm, Tegel } from "./Bento";
+import "./media-bento.css";
 
 export type MediaItem = {
   src: string;
@@ -383,55 +384,58 @@ function MediaRail({
     </div>
   );
 }
-export function VideoSlider() {
+// 28 september 2026 (Marinus): content en portfolio als bentotegels zoals het landingsscherm. Een uitgelichte film of
+// foto groot, een korte tegel ernaast, en de volledige strook als tegel over de breedte. Klik op een tegel opent de MediaDialog.
+function Vergroot({ item, open }: { item: MediaItem; open: (item: MediaItem) => void }) {
   return (
-    <section className="h-section h-motion-showcase">
-      <div className="h-wrap">
-        <Heading
-          label="Content & motion"
-          title={
-            <>
-              Ideeën in beweging.
-              <br />
-              <span>Merken die je bijblijven.</span>
-            </>
-          }
-          text="Van short-form content tot campagnevideo. Bekijk de producties uit ons eigen portfolio."
-        >
-
-        </Heading>
-      </div>
-      <MediaRail items={portfolioVideos} label="Videoportfolio" />
-    </section>
+    <button type="button" className="mb-vergroot" onClick={() => open(item)} aria-label={`Bekijk ${item.title}`}>
+      <span>{item.title}</span>
+    </button>
+  );
+}
+export function VideoSlider() {
+  const [item, setItem] = useState<MediaItem | null>(null);
+  const uitgelicht = portfolioVideos[4];
+  const staand = portfolioVideos[6];
+  return (
+    <>
+    <Bento id="content-motion" className="mb-bento" label="Content & motion" titel={<>Ideeën in beweging.<br /><span>Merken die je bijblijven.</span></>}>
+      <Tegel kop="Uitgelicht" breed={8} soort="film" className="mb-film">
+        <BentoFilm src={uitgelicht.src} label={uitgelicht.title} />
+        <Vergroot item={uitgelicht} open={setItem} />
+      </Tegel>
+      <Tegel kop="Short-form" breed={4} soort="film" className="mb-film mb-staand">
+        <BentoFilm src={staand.src} label={staand.title} />
+        <Vergroot item={staand} open={setItem} />
+      </Tegel>
+      <Tegel kop="Alle producties" breed={12} className="mb-strook">
+        <MediaRail items={portfolioVideos} label="Videoportfolio" />
+      </Tegel>
+    </Bento>
+    <MediaDialog item={item} close={() => setItem(null)} />
+    </>
   );
 }
 export function ImageSliders() {
+  const [item, setItem] = useState<MediaItem | null>(null);
+  const [groot, rechts, onder] = [portfolioImages[3], portfolioImages[4], portfolioImages[1]];
+  const foto = (media: MediaItem, breed: 5 | 7, hoog: 1 | 2, kop: string) => (
+    <Tegel kop={kop} breed={breed} hoog={hoog} soort="foto" className="mb-foto">
+      <img src={media.src} alt={media.title} loading="lazy" draggable={false} />
+      <Vergroot item={media} open={setItem} />
+    </Tegel>
+  );
   return (
-    <section className="h-section h-image-showcase">
-      <div className="h-wrap">
-        <Heading
-          label="Portfolio / Creatie in de praktijk"
-          title={
-            <>
-              Recent werk.
-              <br />
-              <span>Een eigen gezicht.</span>
-            </>
-          }
-          text="Artworks, campagnes en merkervaringen. De collectie van SocialNow, van digitaal tot op de werkvloer."
-        >
-
-        </Heading>
-      </div>
-      <MediaRail
-        items={portfolioImages.slice(0, 5)}
-        label="Portfolio bovenste rij"
-      />
-      <MediaRail
-        items={portfolioImages.slice(5)}
-        reverse
-        label="Portfolio onderste rij"
-      />
-    </section>
+    <>
+    <Bento id="portfolio" className="mb-bento" label="Portfolio" titel={<>Recent werk.<br /><span>Een eigen gezicht.</span></>}>
+      {foto(groot, 7, 2, "Artwork")}
+      {foto(rechts, 5, 1, "Interieur")}
+      {foto(onder, 5, 1, "Campagne")}
+      <Tegel kop="Meer werk" breed={12} className="mb-strook">
+        <MediaRail items={portfolioImages} label="Portfolio" />
+      </Tegel>
+    </Bento>
+    <MediaDialog item={item} close={() => setItem(null)} />
+    </>
   );
 }
