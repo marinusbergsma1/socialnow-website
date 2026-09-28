@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowUpRight, Mail, MessageCircle } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 import { OdooLogo } from "./Verhaal";
+import { Bento, Tegel } from "./Bento";
 
 // 28 september 2026 (Marinus): "Bent u een Odoo-gebruiker en wilt u het ook proberen, dan kan dat hier. En bent u een
 // implementatiepartner die het gesprek aan wil gaan over wat die voor uw klanten kan betekenen, net als deze bedrijven die u
@@ -33,66 +34,60 @@ export default function Deuren() {
   const bericht = t("Hoi Michelle, ik ben Odoo-implementatiepartner en wil graag bespreken wat SocialNow OS voor onze klanten kan betekenen.");
   const onderwerp = t("Odoo-implementatiepartner, t.a.v. Michelle Yang");
   return (
-    <section className="h-deuren h-wrap" id="probeer" aria-labelledby="deuren-titel">
-      <p className="h-eyebrow"><i />Voor Odoo-gebruikers en partners</p>
-      <h2 id="deuren-titel">
-        Probeer het zelf.
-        <br />
-        <span>Of breng het naar je klanten.</span>
-      </h2>
-      <div className="h-deuren-grid">
-        <article className="h-deur is-gebruiker">
-          <p className="h-deur-label">Gebruik je Odoo?</p>
-          <h3>Probeer het OS gratis.</h3>
-          <p className="h-deur-tekst">Koppel je Odoo en zie je verkoop, klanten, merk en social op één scherm. Altijd gratis te gebruiken, met ons team erachter.</p>
-          <p className="h-deur-waarom"><b>Waarom gratis?</b> Partners helpen ons het OS schaalbaar te houden. Wij verdienen aan het OS op maat, vanaf €10.000, en aan pakketten van ons team.</p>
-          <ul className="h-deur-koppelingen">
-            <li className="is-live">
-              <span className="h-deur-merk" translate="no"><OdooLogo /><span>PRODUCT</span></span>
-              <b><i aria-hidden="true" />Live</b>
-            </li>
-            <li className="is-bouw">
-              <span className="h-deur-merk" translate="no"><SalesforceLogo /><span>Salesforce</span></span>
-              <b><i aria-hidden="true" />Nu in aanbouw</b>
-            </li>
-          </ul>
+    <Bento
+      id="probeer"
+      className="h-deuren"
+      label="Voor Odoo-gebruikers en partners"
+      titel={<>Probeer het zelf.<br /><span>Of breng het naar je klanten.</span></>}
+    >
+      <Tegel kop="Gebruik je Odoo?" breed={6} soort="groen" className="h-deur">
+        <h3 className="sn-tegel-titel">Probeer het OS gratis.</h3>
+        <p className="sn-tegel-tekst">Koppel je Odoo en zie je verkoop, klanten, merk en social op één scherm. Altijd gratis te gebruiken, met ons team erachter.</p>
+        <p className="h-deur-waarom"><b>Waarom gratis?</b> Partners helpen ons het OS schaalbaar te houden. Wij verdienen aan het OS op maat, vanaf €10.000, en aan pakketten van ons team.</p>
+        <div className="sn-tegel-onder">
           <a className="os-claim sn-btn3d h-button h-deur-knop" href="https://app.socialnow.nl/login/">
             <span className="sn-btn3d-sheen" />
             <span>Log in op je gratis OS</span>
             <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
           </a>
-        </article>
-        <article className="h-deur is-partner">
-          <p className="h-deur-label">Ben je Odoo-implementatiepartner?</p>
-          <h3>Praat met Michelle.</h3>
-          <p className="h-deur-tekst">Bespreek wat het OS voor jouw klanten kan betekenen, net als de partners die je voorgingen.</p>
-          <div className="h-deur-persoon">
-            <img src="/images/Michelle-Yang-HD.webp" alt="" width="64" height="64" loading="lazy" />
-            <p><strong translate="no">Michelle Yang</strong><span translate="no">Head of Implementation Partnerships</span></p>
-          </div>
-          <div className="h-deur-acties">
-            <a className="sn-btn3d h-button h-deur-knop" href={WHATSAPP + encodeURIComponent(bericht)} target="_blank" rel="noopener noreferrer">
-              <span className="sn-btn3d-sheen" />
-              <MessageCircle size={17} aria-hidden="true" />
-              <span>Stuur een WhatsApp</span>
-            </a>
-            <a className="h-text-link h-deur-mail" href={MAIL + encodeURIComponent(onderwerp)}>
-              <Mail size={16} aria-hidden="true" />
-              Mail Michelle
-            </a>
-          </div>
-          <div className="h-deur-logos">
-            <p>Zij gingen je voor</p>
-            <ul translate="no">
-              {PARTNERS.map((partner) => (
-                <li key={partner.naam}>
-                  <img src={partner.logo} alt={partner.naam} width={partner.breed} height={partner.hoog} loading="lazy" />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </article>
-      </div>
-    </section>
+        </div>
+      </Tegel>
+      <Tegel kop="Ben je Odoo-implementatiepartner?" breed={6} soort="blauw" className="h-deur">
+        <h3 className="sn-tegel-titel">Praat met Michelle.</h3>
+        <p className="sn-tegel-tekst">Bespreek wat het OS voor jouw klanten kan betekenen, net als de partners die je voorgingen.</p>
+        <div className="h-deur-persoon">
+          <img src="/images/Michelle-Yang-HD.webp" alt="" width="64" height="64" loading="lazy" />
+          <p><strong translate="no">Michelle Yang</strong><span translate="no">Head of Implementation Partnerships</span></p>
+        </div>
+        <div className="sn-tegel-onder">
+          <a className="sn-btn3d h-button h-deur-knop is-partner" href={WHATSAPP + encodeURIComponent(bericht)} target="_blank" rel="noopener noreferrer">
+            <span className="sn-btn3d-sheen" />
+            <MessageCircle size={17} aria-hidden="true" />
+            <span>Stuur een WhatsApp</span>
+          </a>
+          <a className="h-text-link h-deur-mail" href={MAIL + encodeURIComponent(onderwerp)}>
+            <Mail size={16} aria-hidden="true" />
+            Mail Michelle
+          </a>
+        </div>
+      </Tegel>
+      <Tegel kop="Odoo" breed={4} className="h-deur-status is-live">
+        <span className="h-deur-merk" translate="no"><OdooLogo /><span>PRODUCT</span></span>
+        <b><i aria-hidden="true" />Live</b>
+      </Tegel>
+      <Tegel kop="Salesforce" breed={4} className="h-deur-status is-bouw">
+        <span className="h-deur-merk" translate="no"><SalesforceLogo /><span>Salesforce</span></span>
+        <b><i aria-hidden="true" />Nu in aanbouw</b>
+      </Tegel>
+      <Tegel kop="Zij gingen je voor" breed={4} className="h-deur-logos">
+        <ul translate="no">
+          {PARTNERS.map((partner) => (
+            <li key={partner.naam}>
+              <img src={partner.logo} alt={partner.naam} width={partner.breed} height={partner.hoog} loading="lazy" />
+            </li>
+          ))}
+        </ul>
+      </Tegel>
+    </Bento>
   );
 }

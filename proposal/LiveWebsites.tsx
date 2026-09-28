@@ -8,7 +8,8 @@ import {
 } from "lucide-react";
 import { webShowcaseProjects } from "../data/projects";
 import type { Project } from "../types";
-import { Heading, TextLink } from "./ui";
+import { TextLink } from "./ui";
+import { Tegel } from "./Bento";
 import { useInView } from "./motion";
 
 // Deze directe websites staan embedding toe (geen X-Frame-Options / frame-ancestors).
@@ -44,6 +45,8 @@ export default function LiveWebsites() {
   const [index, setIndex] = useState(0);
   const [mobile, setMobile] = useState(false);
   const [interactive, setInteractive] = useState(false);
+  const [klaar, setKlaar] = useState(false);
+  useEffect(() => setKlaar(true), []);
   const frame = useRef<HTMLIFrameElement>(null);
   const control = useRef<HTMLButtonElement>(null);
   const stopInteraction = () => {
@@ -91,24 +94,20 @@ export default function LiveWebsites() {
   const bedienbaar = live ? activeLoaded : !!project.fullPageScreenshot;
   return (
     <section
-      className="h-section h-wrap h-live-websites"
+      className="sn-bento h-wrap h-live-websites"
       ref={ref}
       aria-labelledby="live-websites-title"
     >
-      <Heading
-        id="live-websites-title"
-        label="Webdesign & full-stack development"
-        title={
-          <>
-            Gemaakt om
-            <br />
-            <span>te gebruiken.</span>
-          </>
-        }
-        text="Bekijk onze websites van dichtbij. Blader door het werk, scroll door een website en ontdek hoe ontwerp en techniek samenkomen."
-      >
-        <TextLink to="/projecten">Alle projecten</TextLink>
-      </Heading>
+      <div className="sn-bento-kop">
+        <p className="h-eyebrow"><i />Webdesign & full-stack development</p>
+        <h2 id="live-websites-title">
+          Gemaakt om
+          <br />
+          <span>te gebruiken.</span>
+        </h2>
+      </div>
+      <div className={`sn-bento-rooster${klaar ? " is-klaar" : ""}`}>
+      <Tegel kop="Live website" breed={8} className="h-live-tegel">
       <div className="h-live-toolbar">
         <div className="h-live-title" aria-live="polite">
           <strong>{project.title}</strong>
@@ -204,7 +203,21 @@ export default function LiveWebsites() {
           )}
         </div>
       </div>
-      <div className="h-live-bottom">
+      </Tegel>
+      <Tegel kop={project.title} breed={4} className="h-live-info">
+        <p className="sn-tegel-label">{project.category}</p>
+        <p className="sn-tegel-tekst">{project.description}</p>
+        {project.metrics && (
+          <dl className="h-live-cijfers">
+            {project.metrics.slice(0, 3).map((metric) => (
+              <div key={metric.label}>
+                <dt>{metric.label}</dt>
+                <dd style={{ color: metric.color }}>{metric.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        <div className="h-live-bottom">
         <div className="h-rail-arrows">
           <button
             type="button"
@@ -242,6 +255,8 @@ export default function LiveWebsites() {
             <span>{item.title}</span>
           </button>
         ))}
+      </div>
+      </Tegel>
       </div>
     </section>
   );
