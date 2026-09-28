@@ -82,7 +82,6 @@ const selections: Selection[] = [
       "Teksten en aanbod beheren ze vanuit hetzelfde OS.",
       "4,4 uit 9 reviews op Solvari, zichtbaar bovenaan de site.",
     ],
-    review: "Ellen Sluijs",
   },
   {
     slug: "vastiq-website",
@@ -105,7 +104,6 @@ const selections: Selection[] = [
       "Website en huisstijl voor De Verduurzaming Brigade: isolatie, warmtepompen, thuisbatterijen en kozijnen, met gratis advies direct bereikbaar.",
     captions: ["Desktop", "Mobiel / home", "Mobiel / werkwijze", "Mobiel / specialismen"],
     tiles: ["vdz-brigade-desktop", "vdz-brigade-mobiel-1", "vdz-brigade-mobiel-2", "vdz-brigade-mobiel-3"],
-    review: "VDZ Brigade",
   },
   {
     slug: "raveg-branding",
@@ -211,7 +209,7 @@ export default function FeaturedWork() {
     // Vaste rijen van 12, zodat beeld en tekst van één case bij elkaar blijven:
     // Il Gordo beeld 8 + tekst 4, dan cijfers 4 + kWh beeld 8, dan kWh tekst, koppeling en reactie (4+4+4).
     // Daarna wisselt beeld (8) en tekst (4) per case van kant. Een reactie bij een andere case staat in de teksttegel.
-    const eigen = selection.integration && review;
+    const eigen = selection.integration;
     if (selection.measured) {
       tegels.push(beeldTegel, tekstTegel,
         <Tegel key={`${project.slug}-cijfers`} kop="Gemeten" breed={4} soort="geel" className="h-case-cijfers">
@@ -222,21 +220,24 @@ export default function FeaturedWork() {
     }
     if (eigen) {
       tegels.push(beeldTegel, tekstTegel,
-        <Tegel key={`${project.slug}-os`} kop="Gekoppeld aan het OS" breed={4} soort="groen" className="h-case-os">
+        <Tegel key={`${project.slug}-os`} kop="Gekoppeld aan het OS" breed={8} soort="groen" className="h-case-os">
           <ul>{selection.integration!.map((line) => <li key={line}><Check size={15} aria-hidden="true" /><span>{line}</span></li>)}</ul>
-        </Tegel>,
-        <Tegel key={`${project.slug}-review`} kop="Klantreactie" breed={4} className="h-case-review">
-          <blockquote lang="nl" translate="no">“{review!.text}”</blockquote>
-          <div className="h-case-wie">
-            <img src={review!.image} alt="" className={review!.logo ? "is-logo" : ""} width="40" height="40" loading="lazy" />
-            <span><strong translate="no">{review!.name}</strong><span>{review!.company}</span></span>
-          </div>
         </Tegel>);
       return;
     }
     const links = tegels.length % 2 === 0 ? index % 2 === 0 : index % 2 === 1;
     tegels.push(...(links ? [tekstTegel, beeldTegel] : [beeldTegel, tekstTegel]));
   });
+  const albert = customerReviews.find((item) => item.name === "Albert Deltour")!;
+  tegels.push(
+    <Tegel key="albert-deltour-review" kop="Klantreactie" breed={12} className="h-case-review">
+      <blockquote lang="en" translate="no">“{albert.text}”</blockquote>
+      <div className="h-case-wie">
+        <img src={albert.image} alt="" width="40" height="40" loading="lazy" />
+        <span><strong translate="no">{albert.name}</strong><a href={albert.website} target="_blank" rel="noopener noreferrer" translate="no">{albert.company}</a></span>
+      </div>
+    </Tegel>
+  );
   return (
     <>
       <Bento id="uitgelicht-werk" className="h-featured-work h-cases" label="Uitgelicht werk / Gemaakt door SocialNow"

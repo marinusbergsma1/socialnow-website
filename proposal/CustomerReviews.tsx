@@ -6,27 +6,10 @@ import { ArrowUpRight, Quote } from "lucide-react";
 // Bestaande letterlijke klantreacties uit components/BlijeKlanten.tsx.
 export const customerReviews = [
   {
-    name: "Ellen Sluijs",
-    company: "kWh Garant",
-    image: "/images/Ellen-Sluijs.webp",
-    text: "Wij zijn heel erg blij met Marinus. Denkt goed mee en levert op tijd. Topper!",
-  },
-  {
-    name: "VDZ Brigade",
-    company: "Website en huisstijl",
-    image: "/images/klantlogos/vdz-beeldmerk.svg",
-    logo: true,
-    text: "Zeer tevreden over dit bedrijf. Wat deze mannen neerzetten in zo’n korte tijd ongelofelijk. Wij gaan zomaar niet weg. Echt een aanrader. Inmiddels al zakenrelaties doorgestuurd. Ga zo door!!",
-  },
-  {
-    name: "Hussein Awqati",
-    company: "Divine Machines",
-    image: "/images/Hussein.webp",
-    text: "Erg tevreden met de ervaring en kennis van de team van socialnow. Via via zijn wij in contact gekomen en sindsdien is socialnow de designer van Divine Machines. Ga zo door!",
-  },
-  {
     name: "Albert Deltour",
     company: "Light Art Collection",
+    website: "https://lightart-collection.com/",
+    logo: false,
     image: "/images/66ed2e6a48aae627d6698e31-Albert-Deltour.webp",
     text: "From ambitious and talented intern to a reliable partner is how I would describe Marinus.",
   },
@@ -76,7 +59,7 @@ export default function CustomerReviews() {
               />
               <span>
                 <strong>{review.name}</strong>
-                <span>{review.company}</span>
+                <a href={review.website} target="_blank" rel="noopener noreferrer">{review.company}</a>
               </span>
             </figcaption>
           </figure>
@@ -88,8 +71,8 @@ export default function CustomerReviews() {
 
 export function HeroReview() {
   const review = customerReviews[0];
-  return <a className="h-hero-review" href={REVIEWS_URL} target="_blank" rel="noopener noreferrer">
+  return <a className="h-hero-review" href={review.website} target="_blank" rel="noopener noreferrer">
     <img src={review.image} alt="" width="34" height="34" loading="lazy" />
-    <span><q lang="nl" translate="no">{review.text}</q><span translate="no">{review.name} · {review.company} · Google <ArrowUpRight size={12} aria-hidden="true" /></span></span>
+    <span><q lang="en" translate="no">{review.text}</q><span translate="no">{review.name} · {review.company} <ArrowUpRight size={12} aria-hidden="true" /></span></span>
   </a>;
 }
