@@ -29,7 +29,7 @@ const EMBED = new Set([
 // scrollbaar in het frame. Offline sites zonder kopie blijven alleen als case bestaan.
 const sites = webShowcaseProjects.filter((project) => !project.offline || project.previewUrl);
 // Sites die alleen vanaf socialnow.nl in een frame mogen. Elders (localhost, preview)
-// tonen we de directe link in plaats van een frame dat de browser toch blokkeert.
+// tonen we een bestaande websiteafbeelding in plaats van een geblokkeerd frame.
 const SOCIALNOW_ONLY = new Set(["vastiq-website"]);
 const onSocialNow =
   typeof location === "undefined" || /(^|\.)socialnow\.nl$/.test(location.hostname);
@@ -70,6 +70,10 @@ export default function LiveWebsites() {
   const project = sites[index];
   const frameSrc = frameSrcOf(project);
   const live = !!frameSrc;
+  const previewImage = project.fullPageScreenshot ||
+    (SOCIALNOW_ONLY.has(project.slug) && !onSocialNow
+      ? (mobile ? project.gallery?.[0] : `${import.meta.env.BASE_URL}images/cases/vastiq-desktop.webp`)
+      : undefined);
   const choose = (next: number) => {
     setIndex((next + sites.length) % sites.length);
   };
@@ -181,15 +185,18 @@ export default function LiveWebsites() {
               />
             );
           })}
-          {!live && project.fullPageScreenshot && (
+          {!live && previewImage && (
             <img
-              src={project.fullPageScreenshot}
-              alt={`Volledige paginaopname van de website van ${project.title}`}
+              src={previewImage}
+              style={!project.fullPageScreenshot ? { height: "100%", objectFit: "contain" } : undefined}
+              alt={project.fullPageScreenshot
+                ? `Volledige paginaopname van de website van ${project.title}`
+                : `Websiteontwerp voor ${project.title}`}
               loading="lazy"
               decoding="async"
             />
           )}
-          {((!live && !project.fullPageScreenshot) || (live && !activeLoaded)) && (
+          {((!live && !previewImage) || (live && !activeLoaded)) && (
             <div className="h-live-direct">
               <strong>{project.title}</strong>
               {!project.offline && (
