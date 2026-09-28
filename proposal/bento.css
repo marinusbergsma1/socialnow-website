@@ -1,0 +1,67 @@
+/* 28 september 2026 (Marinus): de gedeelde tegeltaal voor elke homepage-sectie onder de hero, met het landingsscherm
+   als maatstaf. Klassen: sn-bento (sectie), sn-bento-kop, sn-bento-rooster (12 kolommen), sn-tegel met --breed en --hoog,
+   sn-tegel-kop (groene stip), sn-tegel-vlak (donkere tegel), sn-tegel-titel, sn-tegel-tekst, sn-tegel-label.
+   Knoppen in een tegel: dezelfde pillen als de hero (os-claim sn-btn3d h-button voor groen, sn-btn3d h-button
+   h-button-secondary voor donker). Films: BentoFilm met de Sound on-pil van het landingsscherm. */
+
+.sn-site .sn-bento { padding-top: clamp(72px, 9vw, 136px); }
+.sn-site .sn-bento-kop { max-width: 980px; margin: 0 0 clamp(28px, 3.6vw, 48px); }
+.sn-site .sn-bento-kop > .h-eyebrow { display: flex; align-items: center; margin: 0 0 18px; color: #c3ccd4; }
+.sn-site .sn-bento-kop > h2 > span { color: #25d366; }
+
+.sn-site .sn-bento-rooster { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-flow: row dense; gap: clamp(26px, 2.6vw, 40px) clamp(16px, 1.7vw, 28px); align-items: stretch; }
+.sn-site .sn-tegel { grid-column: span var(--breed, 6); grid-row: span var(--hoog, 1); display: flex; flex-direction: column; min-width: 0; }
+.sn-site .sn-tegel-kop { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: clamp(15px, 1.05vw, 18px); font-weight: 700; line-height: 1.25; color: #fff; letter-spacing: -.01em; }
+.sn-site .sn-tegel-kop::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #25d366; box-shadow: 0 0 10px #25d366; flex: none; }
+.sn-site .sn-tegel-vlak { position: relative; flex: 1; display: flex; flex-direction: column; gap: 14px; min-height: 0; padding: clamp(20px, 2.1vw, 32px); border-radius: 22px; background: #0b0f12; border: 1px solid rgba(255,255,255,.1); overflow: hidden; transition: border-color .3s ease, transform .5s cubic-bezier(.16,1,.3,1); }
+.sn-site .sn-tegel-vlak:hover { border-color: rgba(255,255,255,.2); }
+.sn-site .sn-tegel.is-film .sn-tegel-vlak, .sn-site .sn-tegel.is-foto .sn-tegel-vlak { padding: 0; background: #050607; }
+.sn-site .sn-tegel.is-film .sn-tegel-vlak { aspect-ratio: 16 / 9; }
+.sn-site .sn-tegel.is-film.is-hoog .sn-tegel-vlak, .sn-site .sn-tegel.is-foto .sn-tegel-vlak { aspect-ratio: auto; }
+.sn-site .sn-tegel-film, .sn-site .sn-tegel.is-foto .sn-tegel-vlak > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.sn-site .sn-tegel.is-foto .sn-tegel-vlak { min-height: 280px; }
+.sn-site .sn-tegel.is-groen .sn-tegel-vlak { border-color: #1f5a3a; background: radial-gradient(120% 90% at 0% 0%, rgba(37, 211, 102, .16), transparent 60%), #07110c; }
+.sn-site .sn-tegel.is-blauw .sn-tegel-vlak { border-color: rgba(0, 163, 224, .3); background: radial-gradient(120% 90% at 100% 0%, rgba(0, 163, 224, .16), transparent 60%), #060d13; }
+.sn-site .sn-tegel.is-roze .sn-tegel-vlak { border-color: rgba(246, 41, 97, .32); background: radial-gradient(120% 110% at 0% 0%, rgba(246, 41, 97, .16), transparent 60%), #0c070a; }
+.sn-site .sn-tegel.is-geel .sn-tegel-vlak { border-color: rgba(247, 230, 68, .26); background: radial-gradient(120% 110% at 100% 0%, rgba(247, 230, 68, .12), transparent 60%), #0d0c06; }
+
+.sn-site .sn-tegel-label { margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #76e7a2; }
+.sn-site .sn-tegel.is-blauw .sn-tegel-label { color: #7fd3f5; }
+.sn-site .sn-tegel.is-roze .sn-tegel-label { color: #ff8fb0; }
+.sn-site .sn-tegel.is-geel .sn-tegel-label { color: #f7e644; }
+.sn-site .sn-tegel-titel { margin: 0; font-size: clamp(22px, 2vw, 32px); line-height: 1.1; letter-spacing: -.03em; color: #fff; font-weight: 700; }
+.sn-site .sn-tegel-tekst { margin: 0; font-size: clamp(15px, 1.05vw, 16.5px); line-height: 1.58; color: #aeb8c1; }
+.sn-site .sn-tegel-onder { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.sn-site .sn-tegel .h-button { min-height: 52px; border-radius: 999px; font-size: 16px; font-weight: 700; letter-spacing: 0; text-transform: none; }
+.sn-site .sn-tegel .h-hero-film-geluid { z-index: 3; }
+
+/* Beweging: tegels schuiven van onderen in beeld, zoals op het landingsscherm; zonder JavaScript staat alles gewoon zichtbaar. */
+.sn-site .sn-bento-rooster.is-klaar > .sn-tegel { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+.sn-site .sn-bento-rooster.is-klaar > .sn-tegel.is-in-beeld { opacity: 1; transform: none; }
+.sn-site .sn-bento-rooster > .sn-tegel:nth-child(3n+2) { transition-delay: .08s; }
+.sn-site .sn-bento-rooster > .sn-tegel:nth-child(3n) { transition-delay: .16s; }
+@media (prefers-reduced-motion: reduce) {
+  .sn-site .sn-bento-rooster.is-klaar > .sn-tegel { opacity: 1; transform: none; transition: none; }
+}
+
+.sn-site .sn-bento-streepjes { display: none; }
+
+/* Tablet: kleine tegels per twee naast elkaar, de rest over de volle breedte. */
+@media (max-width: 1099px) {
+  .sn-site .sn-tegel { grid-column: span 12; grid-row: auto; }
+  .sn-site .sn-tegel.is-klein, .sn-site .sn-tegel.is-half { grid-column: span 6; }
+}
+
+/* Telefoon: tegels stapelen, of met swipe een zijwaartse strook met de buren half in beeld en streepjes eronder. */
+@media (max-width: 760px) {
+  .sn-site .sn-bento-rooster { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  .sn-site .sn-tegel, .sn-site .sn-tegel.is-klein, .sn-site .sn-tegel.is-half { grid-column: auto; }
+  .sn-site .sn-tegel-vlak { border-radius: 20px; }
+  .sn-site .sn-bento-rooster.is-swipe { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -20px; padding: 0 20px 4px; scroll-padding-inline: 20px; }
+  .sn-site .sn-bento-rooster.is-swipe::-webkit-scrollbar { display: none; }
+  .sn-site .sn-bento-rooster.is-swipe > .sn-tegel { flex: 0 0 84%; scroll-snap-align: start; }
+  .sn-site .sn-bento-rooster.is-swipe.is-klaar > .sn-tegel { opacity: 1; transform: none; }
+  .sn-site .sn-bento-streepjes { display: flex; justify-content: center; gap: 6px; margin-top: 16px; }
+  .sn-site .sn-bento-streepjes button { width: 18px; height: 4px; padding: 0; border: 0; border-radius: 4px; background: rgba(255,255,255,.22); cursor: pointer; transition: width .25s ease, background .25s ease; }
+  .sn-site .sn-bento-streepjes button[aria-current="true"] { width: 30px; background: #25d366; }
+}
