@@ -2911,3 +2911,26 @@ html {
   .sn-site .h-live-tegel { grid-column: span 12; }
   .sn-site .h-live-info { grid-column: span 12; }
 }
+
+/* 28 september 2026 (Marinus): het OS, See it in motion, diensten, social en vragen als bentotegels. */
+.sn-site .sn-tegel-badge { position: absolute; z-index: 2; left: 14px; top: 14px; padding: 6px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); background: rgba(0,0,0,.55); backdrop-filter: blur(8px); color: #e6ebef; font-size: 11.5px; font-weight: 600; letter-spacing: .01em; pointer-events: none; }
+.sn-site .h-os-agent .sn-tegel-vlak { gap: 12px; }
+.sn-site .h-os-agent .sn-tegel-vlak > :first-child { width: 112px; height: 112px; margin: -6px 0 0 -8px; }
+.sn-site .h-os-agent .sn-tegel-vlak > :first-child :is(img, video) { width: 100%; height: 100%; object-fit: contain; }
+.sn-site .h-os-belofte { font-size: clamp(18px, 1.35vw, 21px); line-height: 1.2; letter-spacing: -.015em; }
+.sn-site .h-showcase-films .h-film-knop { position: absolute; inset: 0; display: block; padding: 0; border: 0; background: #000; cursor: pointer; }
+.sn-site .h-showcase-films .h-film-knop > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sn-site .h-showcase-films .h-film-knop :is(video, img) { width: 100%; height: 100%; object-fit: cover; }
+.sn-site .h-dienst-tegel .sn-tegel-vlak { gap: 14px; }
+.sn-site .h-dienst-streep { display: block; width: 36px; height: 4px; border-radius: 4px; }
+.sn-site .h-dienst-items { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.sn-site .h-dienst-items li { padding: 7px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); font-size: 13px; color: #d3d9df; }
+.sn-site .h-social-tegel .sn-tegel-vlak { aspect-ratio: 4 / 5; min-height: 0; }
+.sn-site .h-social-tegel .sn-tegel-kop { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; padding-left: 18px; position: relative; }
+.sn-site .h-social-tegel .sn-tegel-kop::before { position: absolute; left: 0; top: .45em; }
+.sn-site .h-social-volg .sn-tegel-vlak { justify-content: flex-end; }
+.sn-site .h-faq-tegel .h-questions { margin: 0; max-width: none; }
+.sn-site .h-faq-contact .sn-tegel-titel { font-size: clamp(22px, 1.9vw, 28px); }
+@media (max-width: 760px) {
+  .sn-site .h-os-agent .sn-tegel-vlak > :first-child { width: 96px; height: 96px; }
+}

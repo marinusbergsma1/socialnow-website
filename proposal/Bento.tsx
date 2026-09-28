@@ -113,10 +113,23 @@ export function Tegel({ kop, breed = 6, hoog = 1, soort = "vlak", className, chi
   );
 }
 
-// Een film in een tegel speelt stil in een lus, met dezelfde Sound on-pil als op het landingsscherm.
+// Een film in een tegel speelt stil in een lus, met dezelfde Sound on-pil als op het landingsscherm. De film laadt pas als
+// hij bijna in beeld is en pauzeert buiten beeld, zodat de homepage met veel films licht blijft.
 export function BentoFilm({ src, poster, label, geluid = true }: { src: string; poster?: string; label: string; geluid?: boolean }) {
   const ref = React.useRef<HTMLVideoElement>(null);
   const [aan, setAan] = React.useState(false);
+  const [laden, setLaden] = React.useState(false);
+  React.useEffect(() => {
+    const film = ref.current;
+    if (!film) return;
+    if (typeof IntersectionObserver === "undefined") { setLaden(true); return; }
+    const kijker = new IntersectionObserver(([ingang]) => {
+      if (ingang.isIntersecting) { setLaden(true); void film.play().catch(() => {}); }
+      else film.pause();
+    }, { rootMargin: "240px 0px" });
+    kijker.observe(film);
+    return () => kijker.disconnect();
+  }, []);
   const wissel = () => {
     const film = ref.current;
     if (!film) return;
@@ -126,7 +139,7 @@ export function BentoFilm({ src, poster, label, geluid = true }: { src: string; 
   };
   return (
     <>
-      <video ref={ref} className="sn-tegel-film" src={src} poster={poster} autoPlay muted loop playsInline preload="metadata" aria-label={label} />
+      <video ref={ref} className="sn-tegel-film" src={laden ? src : undefined} poster={poster} autoPlay muted loop playsInline preload="none" aria-label={label} />
       {geluid && (
         <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={aan}>
           {aan ? "Geluid uit" : "Geluid aan"}

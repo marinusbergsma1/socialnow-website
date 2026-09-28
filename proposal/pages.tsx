@@ -17,6 +17,7 @@ import ShowcaseFilms from "./ShowcaseFilms";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
 import Verhaal from "./Verhaal";
+import { Bento, BentoFilm, Tegel } from "./Bento";
 import Deuren from "./Deuren";
 import MensEnAI from "./MensEnAI";
 import VacaturesBento from "./VacaturesBento";
@@ -39,6 +40,7 @@ import {
   ConversionBridge,
   HeroMilos,
   Heading,
+  MiloPortrait,
   PageHeading,
   ProjectCard,
   Questions,
@@ -214,127 +216,79 @@ export function Home() {
       <VacaturesBento />
       {/* Veiligheidsblok met video en sleutelbelofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
       <VeiligheidBlok />
-      <section className="h-section h-wrap" id="het-os">
-        <Heading
-          label="Vier onderdelen / Eén verbonden bedrijf"
-          title={
-            <>
-              Vier gezichten.
-              <br />
-              <span>Eén geheel.</span>
-            </>
-          }
-          text="Website, CRM, Studio en Advertenties. Dezelfde vier specialisten als in het dashboard, met één doel: meer samenhang in het werk van je bedrijf."
-        >
-          <TextLink to="/het-os">Zo werkt het OS</TextLink>
-        </Heading>
-        <AgentCards />
-        <p className="h-footnote">
-          Je eerste ervaring is het vertrekpunt. Welke functies en koppelingen
-          beschikbaar zijn, stemmen we af op jouw situatie.
-        </p>
-        <div className="h-video-pair">
-          <VideoBlock
-            file="os-odoo"
-            title="Bekijk de gedachte achter het OS"
-            note="Productuitleg met voorbeeldgegevens. Bespreek met ons wat voor jouw inrichting beschikbaar is."
-          />
-          <VideoBlock
-            file="os-kwh-case"
-            title="Van klantwerk naar een verbonden bedrijf"
-            note="Een bestaande uitlegvideo rond kWh Garant. De getoonde productomgeving bevat ook voorbeeldgegevens."
-          />
-        </div>
-      </section>
+      {/* 28 september 2026 (Marinus): "alle onderdelen als kleine bentogrids, net zoals de homepage wanneer je daarop landt". */}
+      <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} swipe>
+        {agents.map((agent) => (
+          <Tegel key={agent.id} kop={agent.title} breed={3} className="h-os-agent">
+            <MiloPortrait role={agent.id} name={agent.name} />
+            <strong className="h-os-belofte" style={{ color: agent.color }}>{agent.promise}</strong>
+            <p className="sn-tegel-tekst">{agent.text}</p>
+            <div className="sn-tegel-onder"><TextLink to={`/het-os#${agent.id}`}>Ontdek dit onderdeel</TextLink></div>
+          </Tegel>
+        ))}
+        <Tegel kop="Bekijk de gedachte achter het OS" breed={6} soort="film">
+          <BentoFilm src="/video/os/os-odoo.mp4" poster="/video/os/os-odoo.webp" label="Bekijk de gedachte achter het OS" />
+          <span className="sn-tegel-badge">Voorbeeldgegevens</span>
+        </Tegel>
+        <Tegel kop="Van klantwerk naar een verbonden bedrijf" breed={6} soort="film">
+          <BentoFilm src="/video/os/os-kwh-case.mp4" poster="/video/os/os-kwh-case.webp" label="Van klantwerk naar een verbonden bedrijf" />
+          <span className="sn-tegel-badge">Voorbeeldgegevens</span>
+        </Tegel>
+      </Bento>
       {/* 28 september 2026 (Marinus): "dit onderdeel is niet meer zo belangrijk nu". See it in motion staat lager. */}
       <ShowcaseFilms />
-      <section className="h-section h-wrap h-services-with-character">
-        <CharacterAccent kind="coder" />
-        <Heading
-          label="Ook dit is SocialNow"
-          title={
-            <>
-              Van merk tot techniek.
-              <br />
-              <span>Alles sluit op elkaar aan.</span>
-            </>
-          }
-          text="Een sterk OS begint bij begrijpen hoe een bedrijf werkt. Onze specialisten brengen ontwerp, content, marketing en development samen."
-        >
-          <TextLink to="/diensten">Alle diensten</TextLink>
-        </Heading>
-        <div className="h-service-summary">
-          {services.map((service, index) => (
-            <Link
-              to={`/diensten#${service.id}`}
-              key={service.id}
-              style={{ "--accent": service.color } as React.CSSProperties}
-            >
-              <small>0{index + 1}</small>
-              <h3>{service.title}</h3>
-              <ArrowUpRight size={22} />
-            </Link>
-          ))}
-        </div>
-      </section>
+      <Bento id="diensten" label="Ook dit is SocialNow" titel={<>Van merk tot techniek.<br /><span>Alles sluit op elkaar aan.</span></>} swipe>
+        {services.map((service) => (
+          <Tegel key={service.id} kop={service.title} breed={4} className="h-dienst-tegel">
+            <span className="h-dienst-streep" style={{ background: service.color }} aria-hidden="true" />
+            <p className="sn-tegel-tekst">{service.intro}</p>
+            <ul className="h-dienst-items">
+              {service.items.slice(0, 3).map((item) => <li key={item}>{item}</li>)}
+            </ul>
+            <div className="sn-tegel-onder"><TextLink to={`/diensten#${service.id}`}>Bekijk deze dienst</TextLink></div>
+          </Tegel>
+        ))}
+      </Bento>
       <VideoSlider />
       <TrustStories />
       <ImageSliders />
-      <section className="h-section h-wrap">
-        <Heading
-          label="Gemaakt door ons team"
-          title={
-            <>
-              Human creativity.
-              <br />
-              <span>Powered by AI technology.</span>
-            </>
-          }
-          text="Campagnes, social content en merkwerk uit onze eigen collectie."
-        >
-          <a
-            className="h-text-link"
-            href={socialPosts.profiel}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Volg ons op Instagram
-            <ArrowUpRight size={17} />
-          </a>
-        </Heading>
-        <div
-          className="h-social-gallery"
-          tabIndex={0}
-          role="region"
-          aria-label="Contentcollectie; horizontaal te scrollen"
-        >
-          {socialPosts.posts.map((post) => (
-            <figure key={post.beeld}>
-              <img
-                src={`/images/social/${post.beeld}`}
-                alt={post.titel}
-                width={post.breed}
-                height={post.hoog}
-                loading="lazy"
-              />
-              <figcaption>{post.titel}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
-      <section className="h-section h-wrap h-faq-layout">
-        <Heading
-          label="Goed om te weten"
-          title={
-            <>
-              Eerst helderheid.
-              <br />
-              <span>Dan aan de slag.</span>
-            </>
-          }
-        />
-        <Questions />
-      </section>
+      <Bento id="social" label="Gemaakt door ons team" titel={<>Human creativity.<br /><span>Powered by AI technology.</span></>} swipe>
+        {socialPosts.posts.map((post) => (
+          <Tegel key={post.beeld} kop={post.titel} breed={3} soort="foto" className="h-social-tegel">
+            <img src={`/images/social/${post.beeld}`} alt={post.titel} width={post.breed} height={post.hoog} loading="lazy" />
+          </Tegel>
+        ))}
+        <Tegel kop="Instagram" breed={3} soort="groen" className="h-social-volg">
+          <p className="sn-tegel-tekst">Campagnes, social content en merkwerk uit onze eigen collectie.</p>
+          <div className="sn-tegel-onder">
+            <a className="sn-btn3d h-button h-button-secondary" href={socialPosts.profiel} target="_blank" rel="noopener noreferrer">
+              <span className="sn-btn3d-sheen" />
+              <span>Volg ons op Instagram</span>
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+          </div>
+        </Tegel>
+      </Bento>
+      <Bento id="vragen" label="Goed om te weten" titel={<>Eerst helderheid.<br /><span>Dan aan de slag.</span></>}>
+        <Tegel kop="Veelgestelde vragen" breed={8} className="h-faq-tegel">
+          <Questions />
+        </Tegel>
+        <Tegel kop="Nog een vraag?" breed={4} soort="groen" className="h-faq-contact">
+          <p className="sn-tegel-titel">Stuur ons gewoon een bericht.</p>
+          <p className="sn-tegel-tekst">Je krijgt antwoord van een mens uit ons team.</p>
+          <div className="sn-tegel-onder">
+            <a className="os-claim sn-btn3d h-button" href="https://wa.me/31637404577" target="_blank" rel="noopener noreferrer">
+              <span className="sn-btn3d-sheen" />
+              <MessageCircle size={17} aria-hidden="true" />
+              <span>Stuur een WhatsApp</span>
+            </a>
+            <a className="h-text-link" href="mailto:info@socialnow.nl">
+              <Mail size={16} aria-hidden="true" />
+              info@socialnow.nl
+            </a>
+          </div>
+        </Tegel>
+      </Bento>
 
     </>
   );

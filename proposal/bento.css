@@ -61,7 +61,9 @@
   .sn-site .sn-bento-rooster.is-swipe::-webkit-scrollbar { display: none; }
   .sn-site .sn-bento-rooster.is-swipe > .sn-tegel { flex: 0 0 84%; scroll-snap-align: start; }
   .sn-site .sn-bento-rooster.is-swipe.is-klaar > .sn-tegel { opacity: 1; transform: none; }
-  .sn-site .sn-bento-streepjes { display: flex; justify-content: center; gap: 6px; margin-top: 16px; }
-  .sn-site .sn-bento-streepjes button { width: 18px; height: 4px; padding: 0; border: 0; border-radius: 4px; background: rgba(255,255,255,.22); cursor: pointer; transition: width .25s ease, background .25s ease; }
-  .sn-site .sn-bento-streepjes button[aria-current="true"] { width: 30px; background: #25d366; }
+  .sn-site .sn-bento-streepjes { display: flex; justify-content: center; gap: 2px; margin-top: 8px; }
+  .sn-site .sn-bento-streepjes button { position: relative; flex: 0 0 auto; width: 30px; height: 36px; min-width: 0; min-height: 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; cursor: pointer; transition: width .25s ease; }
+  .sn-site .sn-bento-streepjes button::before { content: ""; position: absolute; left: 5px; right: 5px; top: 16px; height: 4px; border-radius: 4px; background: rgba(255,255,255,.24); transition: background .25s ease; }
+  .sn-site .sn-bento-streepjes button[aria-current="true"] { width: 44px; }
+  .sn-site .sn-bento-streepjes button[aria-current="true"]::before { background: #25d366; }
 }
