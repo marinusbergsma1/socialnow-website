@@ -15,6 +15,7 @@ Een orkestratielaag neemt `livegang` over naar `main`. Een push naar `main` publ
 | Nieuwe teksten ook in `proposal/i18n/en.json`, `de.json`, `fr.json` | de site draait in meerdere talen |
 | Publiceren naar `main` doet alleen de orkestratielaag | gecontroleerde livegang |
 | Werk je eigen regel in de tabel hieronder bij | de orkestratie ziet wie waaraan werkt |
+| Homepage-secties zijn bentogrids: gebruik `proposal/Bento.tsx` (`Bento`, `Tegel`, `BentoFilm`) en `proposal/bento.css`. Kort kopje met groene stip boven elke tegel, weinig tekst per tegel, tegels in wisselende maten (breed 3, 4, 6, 8 of 12), pillen van de hero. Geen eigen sectiekoppen of volle-breedte-tekstblokken meer. Uitleg bovenin `proposal/Bento.tsx` | één tegeltaal zoals het landingsscherm (Marinus, 28 sep: "net zoals de homepage wanneer je daarop landt") |
 
 ## Wie werkt waaraan
 
@@ -26,7 +27,7 @@ Een orkestratielaag neemt `livegang` over naar `main`. Een push naar `main` publ
 | Cases Il Gordo en VASTIQ (hulpchat van de homepage-regie, chip) | nieuwe case-kaarten; `proposal/FeaturedWork.tsx`, `data/projects.ts`, `public/images/cases/*`, `proposal/cases.css`; tak `claude/cases-ilgordo` | wacht op start |
 | Site-audit op het verhaal (hulpchat van de homepage-regie, chip) | pagina's buiten de homepage in lijn met het verhaal, functie Michelle; tak `claude/site-visie`; stemt /team af met de teamchat | wacht op start |
 | Veiligheidsbelofte hoofdchat, websitesubchat "Zet veiligheidsvideo en belofte prominent op socialnow.nl" | proposal/Veiligheid.tsx plus eigen CSS, pagina /veiligheid, public/video/veiligheid/, public/documenten/socialnow-sleutelbelofte-{nl,en}.pdf; featuretak `feat/veiligheid` vanaf `livegang`. Blok komt na de live sites en vóór "Four faces" (plaatsing door de homepage-regie) | bezig |
-| Sitebrede bentogrid (eigenaar: homepage-regie, sessie 5c0f2f30) | alle homepage-secties als kleine bentogrids zoals het landingsscherm; één gedeelde tegelklasse die alle websitechats gebruiken | wacht op start |
+| Sitebrede bentogrid (eigenaar: homepage-regie, sessie 5c0f2f30) | alle homepage-secties als kleine bentogrids zoals het landingsscherm; één gedeelde tegelklasse die alle websitechats gebruiken | bezig: gedeelde tegeltaal staat op livegang (`proposal/Bento.tsx`, `proposal/bento.css`); de homepage-regie zet verhaal, deuren, live sites, OS en See it in motion om op `feat/verhaal-homepage`. Cases, Veiligheid en Mens en AI/Vacatures zetten hun eigen blok om met dezelfde klassen |
 | Indeed en vacatures (sessie e5c17002) | Indeed-begeleiding Marinus (hij plaatst zelf, geen account of login door Claude) | referentietak `claude/vacatures` (niet naar main); functie AI-expert betalingen en bentotegel overgedragen aan `feat/ai-mens` |
 | Mens en AI plus vacatures (sessie 9c8d11dd) | homepagesectie `proposal/MensEnAI.tsx` en daaronder `proposal/VacaturesBento.tsx` (Wij zoeken: AI-expert betalingen groot, partner verbindende laag en Senior AI Engineer klein, balk Alle vacatures), direct na ShowcaseFilms; pagina `/vacatures` met elf functies uit `proposal/vacatures.ts` plus JobPosting voor Google, footerlink, `docs/vacatures-indeed.md`; eigen CSS `mens-en-ai.css` en `vacatures-bento.css`; vertalingen en/de/fr; tak `feat/ai-mens` | klaar voor main: 8751ee1 (op livegang 2bd6602). Plek in Home mag de homepage-regie verschuiven |
 
