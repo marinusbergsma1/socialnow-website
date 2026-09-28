@@ -1,7 +1,7 @@
 // 28 september 2026 (Marinus): een échte vacature voor de partij die de verbindende laag brengt, plus de functies
 // die we nu nodig hebben nu duizenden bedrijven het OS gaan gebruiken. Eén bron voor /vacatures en voor de
-// Indeed-teksten (scripts/vacatures-indeed.mjs). AI-expert betalingen staat bovenaan op verzoek van Marinus; die
-// functie, Senior AI Engineer en de salarisgegevens komen uit de Indeed-chat (tak claude/vacatures, b359a38).
+// Indeed-teksten (scripts/vacatures-indeed.mjs). Senior AI Engineer en de salarisgegevens komen uit de Indeed-chat
+// (tak claude/vacatures, b359a38). AI-expert betalingen is weg: die functie vervult Sid (Marinus, 28 sep 2026).
 // Salaris alleen waar een voorstel is; de andere functies noemen het (nog) niet.
 
 export type Vacature = {
@@ -21,33 +21,6 @@ export type Vacature = {
 };
 
 export const vacatures: Vacature[] = [
-  {
-    slug: "ai-expert-betalingen",
-    titel: "AI-expert betalingen",
-    soort: "Loondienst",
-    uren: "32 tot 40 uur",
-    plek: "Amsterdam, hybride",
-    salaris: "€5.500 tot €7.500 bruto per maand",
-    salarisMin: 5500,
-    salarisMax: 7500,
-    uitgelicht: true,
-    samen: "Je werkt direct met Marinus Bergsma en met Steef Komen, Head of Finance & Data.",
-    kort: "Je bouwt de betaallaag van SocialNow OS: van offerte en factuur tot betaling en afletteren in Odoo, met AI die het werk doet.",
-    wat: [
-      "Je koppelt betaalproviders zoals Mollie, Stripe en Adyen aan het OS: iDEAL, kaart, SEPA-incasso en terugkerende betalingen.",
-      "Je laat AI facturen opstellen, betalingen herkennen en automatisch afletteren in Odoo.",
-      "Je bouwt signalering op betaalrisico: late betalers, afwijkende bedragen en mogelijke fraude.",
-      "Je zorgt dat alles klopt met PSD2, de AVG en de eisen van betaalproviders.",
-      "Je vertaalt wat een klant wil in een betaalstroom die in één tik werkt.",
-    ],
-    wie: [
-      "Minimaal vijf jaar ervaring met betalingen, fintech of financiële systemen.",
-      "Je hebt zelf gebouwd met een betaal-API en weet hoe webhooks, terugboekingen en afletteren werken.",
-      "Je werkt dagelijks met AI-modellen en weet waar ze wel en niet te vertrouwen zijn.",
-      "Kennis van Odoo Boekhouding of een ander ERP is een sterk pluspunt.",
-      "Je spreekt Nederlands of Engels op hoog niveau.",
-    ],
-  },
   {
     slug: "partner-verbindende-laag",
     titel: "Partner: de verbindende laag",

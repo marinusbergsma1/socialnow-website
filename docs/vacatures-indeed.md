@@ -2,51 +2,7 @@
 
 Gegenereerd uit proposal/vacatures.ts. Per functie: titel, soort, uren en de volledige tekst om in Indeed te plakken.
 
-Bedrijf: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam. Solliciteren: info@socialnow.nl of socialnow.nl/vacatures.
-
----
-
-## AI-expert betalingen
-
-- Dienstverband: Loondienst
-- Uren: 32 tot 40 uur
-- Locatie: Amsterdam, hybride
-- Salaris: €5.500 tot €7.500 bruto per maand
-- Link: https://socialnow.nl/vacatures#ai-expert-betalingen
-
-### Tekst
-
-Je bouwt de betaallaag van SocialNow OS: van offerte en factuur tot betaling en afletteren in Odoo, met AI die het werk doet.
-
-Je werkt direct met Marinus Bergsma en met Steef Komen, Head of Finance & Data.
-
-**Over SocialNow**
-
-SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en advertenties in één systeem, met AI die het werk doet. Wat ons anders maakt is de laag erbovenop: mensen die je kent en die altijd voor je klaarstaan. Wij geloven dat elke vorm van intelligentie goed is, en dat mensen het verschil maken. We bewijzen altijd eerst gratis wat we kunnen.
-
-**Wat je doet**
-
-- Je koppelt betaalproviders zoals Mollie, Stripe en Adyen aan het OS: iDEAL, kaart, SEPA-incasso en terugkerende betalingen.
-- Je laat AI facturen opstellen, betalingen herkennen en automatisch afletteren in Odoo.
-- Je bouwt signalering op betaalrisico: late betalers, afwijkende bedragen en mogelijke fraude.
-- Je zorgt dat alles klopt met PSD2, de AVG en de eisen van betaalproviders.
-- Je vertaalt wat een klant wil in een betaalstroom die in één tik werkt.
-
-**Wie je bent**
-
-- Minimaal vijf jaar ervaring met betalingen, fintech of financiële systemen.
-- Je hebt zelf gebouwd met een betaal-API en weet hoe webhooks, terugboekingen en afletteren werken.
-- Je werkt dagelijks met AI-modellen en weet waar ze wel en niet te vertrouwen zijn.
-- Kennis van Odoo Boekhouding of een ander ERP is een sterk pluspunt.
-- Je spreekt Nederlands of Engels op hoog niveau.
-
-**Wat wij bieden**
-
-- Een team dat elkaar kent en elkaar helpt
-- Werken met het nieuwste op het gebied van AI
-- Groeien met een bedrijf dat duizenden ondernemers gaat helpen
-
-Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: AI-expert betalingen".
+Bedrijf: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam. Solliciteren: steef@socialnow.nl of socialnow.nl/vacatures.
 
 ---
 
@@ -85,7 +41,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Partner: de verbindende laag".
+Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Partner: de verbindende laag".
 
 ---
 
@@ -127,7 +83,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Senior AI Engineer".
+Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Senior AI Engineer".
 
 ---
 
@@ -165,7 +121,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Customer Success Manager".
+Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Customer Success Manager".
 
 ---
 
@@ -203,7 +159,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Onboarding Specialist".
+Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Onboarding Specialist".
 
 ---
 
@@ -243,7 +199,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Odoo Consultant".
+Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Odoo Consultant".
 
 ---
 
@@ -281,7 +237,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Account Manager".
+Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Account Manager".
 
 ---
 
@@ -319,7 +275,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Supportmedewerker".
+Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Supportmedewerker".
 
 ---
 
@@ -357,7 +313,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Content Creator".
+Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Content Creator".
 
 ---
 
@@ -395,7 +351,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Performance Marketeer".
+Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Performance Marketeer".
 
 ---
 
@@ -433,5 +389,5 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Full-stack Developer".
+Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Full-stack Developer".
 
