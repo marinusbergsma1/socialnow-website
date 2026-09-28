@@ -18,6 +18,9 @@ import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
 import Verhaal from "./Verhaal";
 import Deuren from "./Deuren";
+import MensEnAI from "./MensEnAI";
+import VacaturesBento from "./VacaturesBento";
+import VeiligheidBlok from "./Veiligheid";
 import { AuditTeaser } from "./AuditPage";
 import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
@@ -206,7 +209,11 @@ export function Home() {
       <FeaturedWork />
       {/* 28 september 2026 (Marinus): "What our clients say" mag weg van de homepage. */}
       <LiveWebsites />
-      {/* Hier komt het veiligheidsblok met video en belofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
+      {/* 28 september 2026 (Marinus): vertrouwen via de beveiligingsvideo met de belofte als document. */}
+      <VeiligheidBlok />
+      {/* 28 september 2026 (Marinus): AI wordt verkeerd begrepen; mensen zijn de verbindende laag. Met vacature. */}
+      <MensEnAI />
+      <VacaturesBento />
       <section className="h-section h-wrap" id="het-os">
         <Heading
           label="Vier onderdelen / Eén verbonden bedrijf"

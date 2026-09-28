@@ -24,6 +24,7 @@ import {
   TeamPage,
 } from "./pages";
 import { AuditPage } from "./AuditPage";
+import { VacaturesPage } from "./VacaturesPage";
 import GratisWebsite from "./GratisWebsite";
 import GratisOsDemo from "./GratisOsDemo";
 import AntwoordPagina from "./AntwoordPagina";
@@ -202,6 +203,7 @@ function ProposalShell() {
           <Route path="/prijzen" element={<PricesPage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/audit" element={<AuditPage />} />
+          <Route path="/vacatures" element={<VacaturesPage />} />
           <Route path="/gratis-website" element={<GratisWebsite />} />
           <Route path="/gratis-os-demo" element={<GratisOsDemo />} />
           <Route path="/antwoord-aanvragen" element={<AntwoordPagina />} />

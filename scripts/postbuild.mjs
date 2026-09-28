@@ -29,6 +29,7 @@ const routeMeta = {
   'gratis-os-demo': {title: 'Gratis OS-demo | SocialNow', description: 'Vraag een gratis demo van SocialNow OS aan via WhatsApp met je naam en e-mailadres.'},
   'antwoord-aanvragen': {title: 'Antwoord op aanvragen | SocialNow', description: 'Persoonlijke antwoordpagina voor aanvragen via WhatsApp.'},
   audit: {title: 'Gratis Google Ads audit | SocialNow', description: 'Nick van Keulen loopt je Google Ads handmatig door: tracking, structuur, biedstrategie en productfeed. Met actieplan en videocall. Gratis.'},
+  vacatures: {title: 'Vacatures — Word de verbindende laag | SocialNow', description: 'AI doet het werk, mensen maken het verschil. Bekijk de vacatures bij SocialNow: partner, customer success, onboarding, Odoo, sales, support, content, ads en development.'},
   team: {title: 'Team — De mensen achter het OS | SocialNow', description: 'Maak kennis met Marinus Bergsma en de creatieve en technische specialisten achter SocialNow.'},
   blog: {title: 'Blog — Vanuit de praktijk | SocialNow', description: 'Inzichten over websites, AI, content en vindbaarheid vanuit het werk van SocialNow.'},
   // 19 september 2026: de juridische laag. Elk document krijgt een eigen route met eigen
@@ -53,6 +54,7 @@ const crumbLabels = {
   privacy: 'Privacybeleid',
   voorwaarden: 'Algemene voorwaarden',
   team: 'Team',
+  vacatures: 'Vacatures',
   'gratis-website': 'Gratis website-upgrade',
   'gratis-os-demo': 'Gratis OS-demo',
   'antwoord-aanvragen': 'Antwoord op aanvragen',
