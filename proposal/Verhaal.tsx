@@ -10,7 +10,10 @@ import { useLanguage } from "./i18n/context";
 // acht tegels die op de telefoon zijwaarts swipen. Brontekst en bronnen: ~/Downloads/website-verhaal-2026-09-28/VERHAAL.md.
 
 // De verhaalfilm uit HyperFrames. Zolang die er nog niet is, staat het waarom groot op zijn plek.
-const VERHAALFILM: { en: string; nl: string; poster: { en: string; nl: string } } | null = null;
+const VERHAALFILM: { en: string; nl: string; poster: { en: string; nl: string } } | null = {
+  en: "/video/verhaal/verhaal-en.mp4", nl: "/video/verhaal/verhaal-nl.mp4",
+  poster: { en: "/video/verhaal/verhaal-en.jpg", nl: "/video/verhaal/verhaal-nl.jpg" },
+};
 
 export function OdooLogo({ className }: { className?: string }) {
   return (
@@ -36,9 +39,21 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     ),
   },
   {
-    wanneer: "2019 tot 2021",
-    titel: "Werken voor mooie merken.",
-    tekst: "Media en design voor Day & Nite, merkvernieuwing en social advertising voor AZ, motion design voor Supperclub.",
+    // 28 september 2026 (Marinus): zijn loopbaan begon als media manager bij Day & Nite, met hun logo als beeld.
+    wanneer: "2019 tot 2020",
+    titel: "Media manager bij Day & Nite.",
+    tekst: "Mijn loopbaan begon bij evenementenbureau Day & Nite: social content, campagnes en drukwerk.",
+    breed: 3,
+    beeld: (
+      <span className="h-hoofdstuk-logos" translate="no">
+        <img className="is-daynite" src="/images/DAY-NITE-LOGO.svg" alt="Day & Nite" loading="lazy" />
+      </span>
+    ),
+  },
+  {
+    wanneer: "2020",
+    titel: "Corona stopte de evenementen.",
+    tekst: "Toen begon ik voor mezelf, met opdrachten voor onder meer AZ en Supperclub.",
     breed: 3,
     beeld: (
       <span className="h-hoofdstuk-logos" translate="no">
@@ -50,15 +65,8 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
   {
     wanneer: "November 2021",
     titel: "SocialNow.",
-    tekst: "Na succes als freelancer begon ik mijn eigen bedrijf, met een team van specialisten om me heen.",
+    tekst: "Na succes als ondernemer begon ik mijn eigen bedrijf, met een team van specialisten om me heen.",
     breed: 3,
-    beeld: (
-      <span className="h-hoofdstuk-team" translate="no">
-        {people.map((persoon) => (
-          <img key={persoon.name} src={`/images/${persoon.image}`} alt={persoon.name} title={persoon.name} loading="lazy" />
-        ))}
-      </span>
-    ),
   },
   {
     wanneer: "De omslag",
@@ -66,30 +74,11 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     tekst: "Ik verdiepte me in AI en development. Het persoonlijke bleef de kern.",
     breed: 3,
     soort: "roze",
-    beeld: (
-      <p className="h-hoofdstuk-motto" translate="no">
-        Human creativity.
-        <span>Powered by AI technology.</span>
-      </p>
-    ),
-  },
-  {
-    wanneer: "Het afgelopen jaar",
-    titel: "Van niets naar winstgevend en geautomatiseerd.",
-    tekst: "We schaalden bedrijven vanaf nul op, met branding en advertenties op zelflerende systemen.",
-    breed: 3,
-    beeld: (
-      <ul className="h-hoofdstuk-pillen">
-        <li>Branding</li>
-        <li>Advertenties</li>
-        <li>Zelflerende systemen</li>
-      </ul>
-    ),
   },
   {
     wanneer: "Het OS",
     titel: "Alle data van je bedrijf in één systeem.",
-    tekst: "Website en social media gekoppeld, met Odoo als laatste sleutel. Totale ontzorging, volledig inzicht.",
+    tekst: "Na branding en advertenties op zelflerende systemen kwam het OS, met Odoo als laatste sleutel.",
     breed: 3,
     beeld: (
       <span className="h-hoofdstuk-odoo" translate="no">
@@ -103,21 +92,12 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     titel: "Met Steef Komen maakten we het schaalbaar.",
     tekst: "Mijn accountant, Odoo-expert en datascientist. Samen bouwen we ook VASTIQ, een dataplatform voor vastgoed.",
     breed: 3,
-    beeld: (
-      <span className="h-hoofdstuk-partner" translate="no">
-        <img className="h-hoofdstuk-steef" src="/images/Steef-Komen.webp" alt="Steef Komen" loading="lazy" />
-        <img className="h-hoofdstuk-komen" src="/images/komen-consultancy-logo.webp" alt="Komen Consultancy" loading="lazy" />
-      </span>
-    ),
   },
   {
     wanneer: "Nu",
     titel: "Van Brussel naar Odoo-partners wereldwijd.",
     tekst: "Het systeem van de Odoo-beurs brengen partners nu naar hun klanten. Het team en ik zijn ontzettend dankbaar.",
     breed: 3,
-    beeld: (
-      <img className="h-hoofdstuk-foto" src="/images/verhaal/team-atomium.webp" alt="Het SocialNow-team bij het Atomium in Brussel" width="900" height="1200" loading="lazy" />
-    ),
   },
 ];
 
@@ -152,7 +132,7 @@ export default function Verhaal() {
         </Tegel>
         {film ? (
           <Tegel kop="Mijn verhaal in één minuut" breed={8} soort="film">
-            <BentoFilm src={language === "nl" ? film.nl : film.en} poster={language === "nl" ? film.poster.nl : film.poster.en} label="Het verhaal van Marinus Bergsma" />
+            <BentoFilm src={language === "nl" ? film.nl : film.en} poster={language === "nl" ? film.poster.nl : film.poster.en} label="Het verhaal van Marinus Bergsma" geluid={false} />
           </Tegel>
         ) : (
           <Tegel kop="Mijn waarom" breed={8}>

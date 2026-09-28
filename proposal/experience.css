@@ -2940,7 +2940,11 @@ html {
 .sn-site .h-verhaal-hoofdstukken .sn-tegel-vlak { padding: 18px; gap: 8px; }
 .sn-site .h-verhaal-hoofdstukken .sn-tegel-titel { font-size: clamp(16px, 1.25vw, 19px); }
 .sn-site .h-verhaal-hoofdstukken .sn-tegel-tekst { font-size: 13.5px; line-height: 1.45; }
-.sn-site .h-verhaal-hoofdstukken .h-hoofdstuk-beeld { display: none; }
+.sn-site .h-verhaal-hoofdstukken .h-hoofdstuk-beeld { padding-top: 4px; }
+.sn-site .h-verhaal-hoofdstukken .h-hoofdstuk-logos img { height: 34px; max-width: 120px; }
+.sn-site .h-verhaal-hoofdstukken .h-hoofdstuk-logos img.is-eigen { height: 26px; }
+.sn-site .h-verhaal-hoofdstukken .h-hoofdstuk-logos img.is-daynite { height: 18px; filter: brightness(0) invert(1); opacity: .9; }
+.sn-site .h-verhaal-hoofdstukken .h-hoofdstuk-odoo svg { height: 22px; }
 .sn-site .h-verhaal-hoofdstukken .sn-bento-rooster { row-gap: 18px; }
 @media (max-width: 1099px) { .sn-site .h-verhaal-hoofdstukken .sn-tegel { grid-column: span 6; } }
 @media (max-width: 760px) {
@@ -2949,3 +2953,8 @@ html {
   .sn-site .h-verhaal-hoofdstukken .sn-tegel-tekst { display: none; }
   .sn-site .h-verhaal-hoofdstukken .sn-tegel-kop { font-size: 13px; }
 }
+
+/* 28 september 2026 (Marinus): regel onder het Odoo-logo in de hero. */
+.sn-site .h-hero-tekst > .h-hero-odoo-regel { margin: -12px 0 0 !important; display: grid; gap: 6px; }
+.sn-site .h-hero-odoo-regel b { font-size: clamp(12px, .95vw, 14px); font-weight: 700; letter-spacing: .16em; color: #fff; }
+.sn-site .h-hero-odoo-regel small { font-size: 11px; font-weight: 700; letter-spacing: .16em; color: #7fd3f5; }

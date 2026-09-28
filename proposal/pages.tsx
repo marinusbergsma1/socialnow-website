@@ -190,6 +190,11 @@ export function Home() {
               <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
             </svg>
           </p>
+          {/* 28 september 2026 (Marinus): "ODOO PRODUCT · IMPLEMENTATION POSSIBLE", daaronder klein de volgende stap. */}
+          <p className="h-hero-odoo-regel" translate="no">
+            <b>ODOO PRODUCT · IMPLEMENTATION POSSIBLE</b>
+            <small>NEXT STEP SALESFORCE</small>
+          </p>
           {/* 26 september 2026 (Marinus): versie A, "de brief". Het bedankje als briefje met foto en naam. */}
           <div className="h-brief">
             <p className="h-hero-description">
