@@ -52,7 +52,7 @@ export function InvesteerdersPage() {
             <span>SocialNow OS.</span>
           </>
         }
-        text="Duizenden bedrijven gaan het OS gebruiken. Wil je daarin investeren? Laat je gegevens achter, dan neemt Steef persoonlijk contact met je op."
+        text="We bouwen het OS voor duizenden bedrijven. Wil je daarin investeren? Laat je gegevens achter, dan neemt Steef persoonlijk contact met je op."
       />
       <section className="h-wrap h-contact-layout">
         <div>
