@@ -32,6 +32,8 @@ import { agents, people, projects, services } from "./content";
 import Pricing from "./Pricing";
 import { allPosts } from "../data/posts";
 import socialPosts from "../public/data/socialposts.json";
+import { GRATIS_OS_URL } from "./os-entry";
+import PartnerMichelle from "./PartnerMichelle";
 import {
   Action,
   AgentCards,
@@ -340,19 +342,19 @@ export function Home() {
   );
 }
 export function OsPage() {
-  const { t } = useLanguage();
+  // 28 september 2026 (Marinus, het verhaal): alle data in één OS, Odoo als laatste sleutel, gratis te gebruiken.
   return (
     <>
       <PageHeading
-        label="Probeer SocialNow OS / Ontdek hoe het werkt"
+        label="SocialNow OS / Gratis te gebruiken"
         title={
           <>
-            Eerst zelf ervaren.
+            Alle data van je bedrijf.
             <br />
-            <span>Dan samen verder.</span>
+            <span>Eén OS.</span>
           </>
         }
-        text="Probeer het systeem en ervaar het overzicht. Daarna bespreken we hoe we het op jouw bedrijf afstemmen."
+        text="Koppel je website, social media en Odoo, en zie klanten, verkoop en marketing op één plek. Odoo is de laatste sleutel: totale ontzorging en volledig inzicht. Probeer het OS gratis; wil je het helemaal rond je bedrijf, dan bouwen we je OS op maat."
       />
       <div className="h-wrap">
         <OsEntry />
@@ -375,32 +377,32 @@ export function OsPage() {
         <ol className="h-steps">
           <li>
             <span>01</span>
-            <h3>{t("Vraag een OS-demo aan.")}</h3>
+            <h3>Log in op je gratis OS.</h3>
             <p>
-              {t("Stuur ons je naam en e-mailadres via WhatsApp. We bespreken daarna de demo.")}
+              Met je Google-account of je e-mailadres. Gratis, zonder creditcard.
             </p>
-            <a className="h-text-link" href={CLAIM_URL}>
-              {t("Vraag gratis OS-demo aan")}
+            <a className="h-text-link" href={GRATIS_OS_URL}>
+              Probeer het OS gratis
               <ArrowUpRight size={16} />
             </a>
           </li>
           <li>
             <span>02</span>
-            <h3>Verbind je gegevens.</h3>
+            <h3>Koppel je data.</h3>
             <p>
-              Met een geschikte Odoo-omgeving en de juiste Meta-rechten begin je
-              met inzicht in klanten, verkoop en marketing.
+              Je website, je social media en je Odoo. Met de juiste rechten zie
+              je klanten, verkoop en marketing op één plek.
             </p>
           </li>
           <li>
             <span>03</span>
             <h3>Maak het van jou.</h3>
             <p>
-              We bepalen samen welke schermen, processen en koppelingen je nodig
-              hebt. Met duidelijke afspraken over uitvoering en kosten.
+              Wil je het OS rond je eigen processen? We bouwen je OS op maat,
+              vanaf €10.000, met duidelijke afspraken over uitvoering en kosten.
             </p>
-            <TextLink to="/contact?onderwerp=Custom%20OS">
-              Bespreek jouw inrichting
+            <TextLink to="/contact?onderwerp=OS%20op%20maat">
+              Bespreek je OS op maat
             </TextLink>
           </li>
         </ol>
@@ -440,10 +442,7 @@ export function OsPage() {
                 <ul>
                   <li>Website en ontwikkeling in je eigen merkstijl</li>
                   <li>Koppelingen volgens de afgesproken scope</li>
-                  <li>
-                    In de testomgeving: contactmodule voor persoonlijke
-                    inrichting
-                  </li>
+                  <li>Persoonlijk contact met ons team, vanuit je OS</li>
                 </ul>
               )}
               <TextLink
@@ -462,8 +461,8 @@ export function OsPage() {
               />
               <VideoBlock
                 file={agent.video}
-                title={`De productrichting voor ${agent.title.toLowerCase().replace(".", "")}`}
-                note="Conceptvideo: deze laat de productrichting zien. Getoonde automatisering is geen garantie voor beschikbare functies in de testomgeving."
+                title={`${agent.title} in beeld`}
+                note="Conceptvideo over de richting van dit onderdeel. Welke automatisering je gebruikt, spreken we samen af."
               />
             </div>
           </article>
@@ -494,7 +493,7 @@ export function ProjectsPage() {
             <span>vorm hebben gekregen.</span>
           </>
         }
-        text="Van websites en platforms tot merkidentiteiten, campagnes en content. Ontdek het werk achter SocialNow."
+        text="Van campagnes voor merken als AZ, Universal en Sony tot AI-websites en dataplatforms als VASTIQ. Ontdek het werk achter SocialNow."
       />
       <section className="h-wrap h-projects-list">
         <div className="h-filters" role="group" aria-label="Filter projecten">
@@ -545,7 +544,7 @@ export function ServicesPage() {
             <span>Volledig gemaakt.</span>
           </>
         }
-        text="Ontwerp, techniek en marketing horen bij elkaar. We helpen met één gerichte opdracht of als betrokken team naast je bedrijf."
+        text="Hier begon SocialNow: ontwerp, beeld en campagnes. Vandaag werken we ook met AI en development, en het blijft persoonlijk. Voor één gerichte opdracht of als team naast je bedrijf."
       />
       <section className="h-wrap h-services">
         {services.map((service, index) => (
@@ -585,7 +584,7 @@ export function ServicesPage() {
               <span>Of verder bouwen.</span>
             </>
           }
-          text="Probeer het OS en bespreek jouw Custom OS. Voor een losse opdracht maken we een gericht voorstel met een duidelijke scope."
+          text="Probeer het OS gratis en bespreek je OS op maat. Voor een losse opdracht maken we een gericht voorstel met een duidelijke scope."
         />
         <Action to="/prijzen">Bekijk de prijzen</Action>
       </section>
@@ -612,7 +611,7 @@ export function PricesPage() {
             <span>01 / Bedrijf</span>
             <h3>Hoe werk je?</h3>
             <p>
-              Je team, processen en prioriteiten bepalen waar een Custom OS het
+              Je team, processen en prioriteiten bepalen waar je OS op maat het
               verschil moet maken.
             </p>
           </li>
@@ -645,7 +644,7 @@ export function PricesPage() {
               <span>Een sterker merk.</span>
             </>
           }
-          text="Onze creatieve en technische diensten blijven beschikbaar. We maken een voorstel voor je project of nemen ze mee in de samenwerking rond je Custom OS."
+          text="Onze creatieve en technische diensten blijven beschikbaar. We maken een voorstel voor je project of nemen ze mee in de samenwerking rond je OS op maat."
         />
         <Action to="/diensten" secondary>
           Bekijk onze diensten
@@ -890,7 +889,7 @@ export function ContactPage() {
   return (
     <>
       <PageHeading
-        label="Jouw Custom OS begint met een gesprek"
+        label="Het persoonlijke contact blijft"
         title={
           <>
             Wat kan het OS
@@ -898,7 +897,7 @@ export function ContactPage() {
             <span>voor jou betekenen?</span>
           </>
         }
-        text="Vertel ons hoe je bedrijf werkt. Samen bepalen we hoe het OS en ons team je kunnen helpen."
+        text="Vertel ons hoe je bedrijf werkt. Samen bepalen we wat je gratis OS, een OS op maat of ons team voor je kunnen doen."
       />
       <section className="h-wrap h-contact-layout">
         <div>
@@ -985,7 +984,7 @@ export function ContactPage() {
             <input
               name="subject"
               defaultValue={t(params.get("onderwerp") || "Custom OS")}
-              placeholder="Bijvoorbeeld: Custom OS of een nieuwe website"
+              placeholder="Bijvoorbeeld: OS op maat of een nieuwe website"
               maxLength={150}
             />
           </label>
@@ -1019,6 +1018,7 @@ export function ContactPage() {
           )}
         </form>
       </section>
+      <PartnerMichelle />
       <section className="h-section h-wrap">
         <VideoBlock
           file="os-master-en"

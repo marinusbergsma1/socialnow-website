@@ -4,6 +4,8 @@ import { useLanguage } from "./i18n/context";
 
 const taalPad = typeof window === "undefined" ? "" : (window.location.pathname.match(/^\/(nl|de|fr)(?=\/|$)/)?.[0] || "");
 export const CLAIM_URL = `${taalPad}/gratis-os-demo/`;
+// 28 september 2026 (Marinus, het verhaal): "Gebruik je Odoo? Probeer het OS gratis." gaat rechtstreeks naar de login.
+export const GRATIS_OS_URL = "https://app.socialnow.nl/login/";
 export const INSTALL_URL = "https://app.socialnow.nl/?bron=installatie";
 export const REVIEWS_URL = "https://maps.google.com/?cid=1427063718057754123";
 export type OsStand =
@@ -151,16 +153,10 @@ export function OsProof({ stand }: { stand: OsStand | null }) {
   );
 }
 
+// 28 september 2026 (Marinus, het verhaal): overal dezelfde twee acties als in de hero. "Probeer het OS gratis"
+// opent de login van het gratis OS, Download geeft per systeem de uitleg om het als app te zetten.
 export default function OsEntry({showProof = true}:{showProof?:boolean}) {
-  const { t } = useLanguage();
   const [stand, setStand] = useState<OsStand | null>(null);
-  const [installOpen, setInstallOpen] = useState(false);
-  const [hint, setHint] = useState("");
-  const helpId = useId();
-  const [installLabel, setInstallLabel] = useState("Installeer het OS");
-  useEffect(() => {
-    setInstallLabel(installationLabel(navigator.userAgent, navigator.platform, navigator.maxTouchPoints));
-  }, []);
 
   useEffect(() => {
     if (!showProof) return;
@@ -192,48 +188,20 @@ export default function OsEntry({showProof = true}:{showProof?:boolean}) {
     };
   }, [showProof]);
 
-  const toggle = () => {
-    setHint(
-      installationHint(
-        navigator.userAgent,
-        navigator.platform,
-        navigator.maxTouchPoints,
-      ),
-    );
-    setInstallOpen((value) => !value);
-  };
-
   return (
     <div className="os-entry">
       <div className="os-actions">
-        <a className="os-claim sn-btn3d h-button" href={CLAIM_URL}>
+        <a className="os-claim sn-btn3d h-button" href={GRATIS_OS_URL}>
           <span className="sn-btn3d-sheen" />
-          <span>{t("Vraag gratis OS-demo aan")}</span>
+          <span>Probeer het OS gratis</span>
           <span className="h-button-icon">
             <ArrowRight size={16} aria-hidden="true" />
           </span>
         </a>
-        <button
-          type="button"
-          className="os-install sn-btn3d h-button h-button-secondary"
-          onClick={toggle}
-          aria-expanded={installOpen}
-          aria-controls={helpId}
-        >
-          <span className="sn-btn3d-sheen" />
-          <Download size={16} aria-hidden="true" />
-          <span>{installLabel}</span>
-          {installLabel === "Installeer op Mac" && <AppleLogo />}
-        </button>
+        <InstallKnop />
       </div>
       <p className="os-product-note">In je browser of als app. Hetzelfde OS.</p>
       {showProof && <OsProof stand={stand} />}
-      <div className="install-help" id={helpId} hidden={!installOpen}>
-        <p>{hint}</p>
-        <a href={INSTALL_URL}>
-          Open SocialNow OS <ArrowRight size={15} aria-hidden="true" />
-        </a>
-      </div>
     </div>
   );
 }

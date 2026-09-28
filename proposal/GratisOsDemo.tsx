@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { languagePrefix, useLanguage } from "./i18n/context";
 import { aanvraagWhatsApp } from "./aanvragen";
+import { GRATIS_OS_URL } from "./os-entry";
 import "./gratis-website.css";
 
 export default function GratisOsDemo() {
@@ -31,6 +32,8 @@ export default function GratisOsDemo() {
     <p className="gw-juridisch">{t("Je opent WhatsApp met een ingevuld conceptbericht. De aanvraag is pas verzonden nadat je daar op verzenden drukt. Bekijk ons")} <a href={`${languagePrefix(language)}/privacy/`}>{t("privacybeleid")}</a>.</p>
     {fout && <p className="gw-fout" role="alert">{fout}</p>}
     <button type="submit" className="sn-btn3d h-button gw-verder"><span className="sn-btn3d-sheen" /><span>{t("Vraag je OS-demo aan via WhatsApp")}</span><span className="h-button-icon"><ArrowUpRight size={16} /></span></button>
+    {/* 28 september 2026 (Marinus, het verhaal): het OS is gratis te gebruiken; wie niet wil wachten logt meteen in. */}
+    <p className="gw-juridisch">{t("Liever meteen zelf beginnen?")} <a href={GRATIS_OS_URL}>{t("Log in op je gratis OS")}</a>.</p>
     </section></form>
   </div></div>;
 }

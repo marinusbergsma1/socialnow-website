@@ -4,6 +4,8 @@ import { languagePrefix, useLanguage } from "./i18n/context";
 import { aanvraagWhatsApp, WHATSAPP_NUMMER } from "./aanvragen";
 import "./gratis-website.css";
 
+// 28 september 2026: de beurs is voorbij. De gratis demowebsite blijft (zie /prijzen), zonder stand C21 en live bouwen.
+
 const OPSLAG = "sn-gratis-website-v1";
 const WHATSAPP = `https://wa.me/${WHATSAPP_NUMMER}`;
 type Gegevens = { voornaam: string; achternaam: string; bedrijf: string; email: string; mobiel: string };
@@ -47,11 +49,11 @@ export default function GratisWebsite() {
     </label>
   );
   return <div className="gw"><div className="gw-sheet">
-    <p className="gw-eyebrow"><i className="gw-stipjes"><b /><b /><b /></i>Gratis website / Odoo Experience, stand C21</p>
-    <h1>Wij maken jouw website <span className="gw-accent">live op de Odoo-beurs.</span></h1>
-    <p className="gw-lead">Vertel ons over je bedrijf en wat je mooi vindt. Wij lezen je antwoorden zelf en maken een website die echt bij je past, samen met jou op stand C21.</p>
-    <ul className="gw-beloftes"><li><Check size={15} /> Persoonlijk gemaakt voor jouw bedrijf</li><li><Check size={15} /> Direct contact met Marinus</li><li><Check size={15} /> Live gebouwd op de Odoo-beurs</li></ul>
-    <a className="gw-contactpil" href={`${WHATSAPP}?text=${encodeURIComponent(t("Hoi Marinus, ik heb een vraag over de websites die jullie live maken op de Odoo-beurs."))}`} target="_blank" rel="noopener noreferrer">
+    <p className="gw-eyebrow"><i className="gw-stipjes"><b /><b /><b /></i>Gratis demowebsite</p>
+    <h1>Wij maken jouw website, <span className="gw-accent">persoonlijk en gratis.</span></h1>
+    <p className="gw-lead">Vertel ons over je bedrijf en wat je mooi vindt. Wij lezen je antwoorden zelf en maken een website die echt bij je past.</p>
+    <ul className="gw-beloftes"><li><Check size={15} /> Persoonlijk gemaakt voor jouw bedrijf</li><li><Check size={15} /> Direct contact met Marinus</li><li><Check size={15} /> Gratis en zonder verplichting</li></ul>
+    <a className="gw-contactpil" href={`${WHATSAPP}?text=${encodeURIComponent(t("Hoi Marinus, ik heb een vraag over de gratis website."))}`} target="_blank" rel="noopener noreferrer">
       <img className="gw-contact-avatar" src="/images/marinus-profiel-blauw.webp" alt="" width="48" height="48" /><span className="gw-contact-tekst"><strong>Marinus Bergsma</strong><small>Vragen? Neem persoonlijk contact op</small></span><MessageCircle size={19} aria-hidden="true" />
     </a>
     <div className="gw-progress" aria-label={t("Voortgang")}><div className="gw-bar"><div className="gw-fill" style={{ width: `${procent}%` }} /></div><div className="gw-meta"><span><i className="gw-dot" />Automatisch bewaard</span><span>{procent}%</span></div></div>

@@ -18,11 +18,12 @@ const BASE = 'https://socialnow.nl';
 
 // Per-route metadata. Homepage (index.html) blijft ongewijzigd.
 const routeMeta = {
-  'het-os': {title: 'Het OS — Je bedrijf in één chat | SocialNow', description: 'Ontdek Website, CRM, Studio en Advertenties in SocialNow OS. Probeer het OS en bespreek je eigen inrichting.'},
-  contact: {title: 'Contact — Bespreek jouw Custom OS | SocialNow', description: 'Maak kennis met Marinus en het team. Vertel ons hoe je bedrijf werkt en bespreek jouw Custom OS.'},
-  diensten: {title: 'Diensten — Van merk tot techniek | SocialNow', description: 'Websites, branding, content, marketing en development. Het team achter jouw merk en Custom OS.'},
-  projecten: {title: 'Uitgelicht werk & cases | SocialNow', description: 'Bekijk websites, video’s en campagnes van SocialNow. Werk voor onder meer RAVEG, Universal, Sony en AZ.'},
-  prijzen: {title: 'Aanbod — Probeer het OS & Custom OS | SocialNow', description: 'Probeer het OS. Voor jouw Custom OS maken we een persoonlijk voorstel met een duidelijke scope, kosten en begeleiding.'},
+  // 28 september 2026: titels en omschrijvingen volgen het verhaal (gratis OS, OS op maat vanaf €10.000, Odoo als laatste sleutel).
+  'het-os': {title: 'Het OS: alle data van je bedrijf in één OS | SocialNow', description: 'Koppel je website, social media en Odoo in één OS. Gratis te gebruiken, met een OS op maat vanaf €10.000 en persoonlijk contact met ons team.'},
+  contact: {title: 'Contact: persoonlijk contact met het team | SocialNow', description: 'Bespreek je gratis OS, je OS op maat of een losse opdracht met Marinus en het team. Ben je Odoo-implementatiepartner? Praat met Michelle Yang.'},
+  diensten: {title: 'Diensten: van merk tot techniek | SocialNow', description: 'Websites, branding, content, advertenties en development. Human creativity, powered by AI technology.'},
+  projecten: {title: 'Uitgelicht werk en cases | SocialNow', description: 'Bekijk websites, video’s en campagnes van SocialNow. Werk voor onder meer RAVEG, Universal, Sony en AZ.'},
+  prijzen: {title: 'Aanbod: gratis OS en OS op maat vanaf €10.000 | SocialNow', description: 'Het OS is gratis te gebruiken. Een OS op maat bouwen we vanaf €10.000, met pakketten van ons team als extra laag.'},
   privacy: {title: 'Privacybeleid | SocialNow', description: 'Lees hoe SocialNow omgaat met persoonsgegevens en welke rechten je hebt.'},
   voorwaarden: {title: 'Algemene voorwaarden | SocialNow', description: 'De algemene voorwaarden van SocialNow, inclusief het gebruik van SocialNow OS.'},
   'gratis-website': {title: 'Gratis website aanvragen | SocialNow', description: 'Vraag je gratis website aan via WhatsApp. Je gegevens staan alvast in het bericht.'},
@@ -30,8 +31,8 @@ const routeMeta = {
   'antwoord-aanvragen': {title: 'Antwoord op aanvragen | SocialNow', description: 'Persoonlijke antwoordpagina voor aanvragen via WhatsApp.'},
   audit: {title: 'Gratis Google Ads audit | SocialNow', description: 'Nick van Keulen loopt je Google Ads handmatig door: tracking, structuur, biedstrategie en productfeed. Met actieplan en videocall. Gratis.'},
   vacatures: {title: 'Vacatures — Word de verbindende laag | SocialNow', description: 'AI doet het werk, mensen maken het verschil. Bekijk de vacatures bij SocialNow: partner, customer success, onboarding, Odoo, sales, support, content, ads en development.'},
-  team: {title: 'Team — De mensen achter het OS | SocialNow', description: 'Maak kennis met Marinus Bergsma en de creatieve en technische specialisten achter SocialNow.'},
-  blog: {title: 'Blog — Vanuit de praktijk | SocialNow', description: 'Inzichten over websites, AI, content en vindbaarheid vanuit het werk van SocialNow.'},
+  team: {title: 'Team: de mensen achter het OS | SocialNow', description: 'Maak kennis met oprichter Marinus Bergsma, partner Steef Komen en de specialisten achter SocialNow.'},
+  blog: {title: 'Blog: vanuit de praktijk | SocialNow', description: 'Inzichten over websites, AI, content en vindbaarheid vanuit het werk van SocialNow.'},
   // 19 september 2026: de juridische laag. Elk document krijgt een eigen route met eigen
   // metadata, want een inkoper zoekt op "verwerkersovereenkomst" en niet op "privacybeleid".
   juridisch: {title: 'Juridisch en compliance | SocialNow', description: 'Alle documenten op één plek: voorwaarden, privacy, verwerkersovereenkomst, beveiliging, cookies, AI en aanvaardbaar gebruik. Ook als pdf.'},
@@ -111,13 +112,16 @@ for (const [route, meta] of Object.entries(routeMeta)) {
     const teamGraph = {
       '@context': 'https://schema.org',
       '@graph': [
-        { ...person('Marinus Bergsma', 'Founder & Creative Art Director'), url: `${BASE}/team`, knowsAbout: ['AI Marketing', 'Branding', 'Creative Direction'] },
-        person('Jos Hollenberg', 'Meta Ads'),
-        person('Sergio Jovovic', 'Meta Marketeer'),
-        person('Carmel Boon', 'Video'),
-        person('Emma Peperkamp', 'Fotograaf'),
-        person('Nick van Keulen', 'Google Ads Expert'),
-        person('Sid van Kalken', 'Webdeveloper'),
+        // 28 september 2026: dezelfde functies als proposal/content.ts.
+        { ...person('Marinus Bergsma', 'Founder & CEO'), url: `${BASE}/team`, knowsAbout: ['AI Marketing', 'Branding', 'Graphic Design', 'Motion Design', 'Odoo'] },
+        person('Jos Hollenberg', 'Head of Meta Ads'),
+        person('Sergio Jovovic', 'Meta Ads Specialist'),
+        person('Carmel Boon', 'Head of Video Production'),
+        person('Sam van der Sluis', 'Lead Videographer'),
+        person('Emma Peperkamp', 'Lead Photographer'),
+        person('Nick van Keulen', 'Head of Google Ads & Search'),
+        person('Elian Coellar', 'Head of Private Partnerships'),
+        person('Sid van Kalken', 'Head of Web Development & AI Payments'),
         {
           '@type': 'Organization',
           '@id': `${BASE}/#komen-consultancy`,
@@ -125,12 +129,12 @@ for (const [route, meta] of Object.entries(routeMeta)) {
           description: 'Partner van SocialNow voor slimme AI-systemen: financieel en strategisch fundament onder data-gedreven AI-producten.',
         },
         {
-          ...person('Steef Komen', 'Partner · Accountancy & Data'),
+          ...person('Steef Komen', 'Partner · Head of Finance, Data & AI Payments'),
           worksFor: { '@id': `${BASE}/#komen-consultancy` },
           affiliation: { '@id': `${BASE}/#organization` },
         },
         {
-          ...person('Michelle Yang', 'Supply chain specialist'),
+          ...person('Michelle Yang', 'Head of Supply Chain, Operations & AI Payments'),
           worksFor: { '@id': `${BASE}/#komen-consultancy` },
           affiliation: { '@id': `${BASE}/#organization` },
         },
@@ -186,7 +190,7 @@ for (const block of projectsSrc.split(/\n {2}\{/).slice(1)) {
 
 for (const [slug, p] of Object.entries(projectMeta)) {
   const url = `${BASE}/project/${slug}`;
-  const pageTitle = esc(`${p.title}${p.client && p.client !== p.title ? ' — ' + p.client : ''} | SocialNow Cases`);
+  const pageTitle = esc(`${p.title}${p.client && p.client !== p.title ? ' · ' + p.client : ''} | SocialNow Cases`);
   const desc = esc(p.description);
 
   let out = html

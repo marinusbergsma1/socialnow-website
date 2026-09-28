@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { agents, faqs, logos, people } from "./content";
 import TeamTrust from "./TeamTrust";
-import OsEntry, { CLAIM_URL } from "./os-entry";
+import OsEntry, { CLAIM_URL, GRATIS_OS_URL } from "./os-entry";
 import { MiloMotion, miloPoster } from "./motion";
 import type { Project } from "../types";
 import { useLanguage } from "./i18n/context";
@@ -26,7 +26,7 @@ export function Action({
   href?: string;
   secondary?: boolean;
 }) {
-  const className = `sn-btn3d h-button${secondary ? " h-button-secondary" : ""}${href === CLAIM_URL ? " h-try-button" : ""}`;
+  const className = `sn-btn3d h-button${secondary ? " h-button-secondary" : ""}${href === CLAIM_URL || href === GRATIS_OS_URL ? " h-try-button" : ""}`;
   const body = (
     <>
       <span className="sn-btn3d-sheen" />
@@ -192,22 +192,22 @@ export function AgentCards() {
     </div>
   );
 }
+// 28 september 2026 (Marinus, het verhaal): eerst het gratis OS, daarna het OS op maat vanaf €10.000.
 export function ConversionBridge() {
-  const { t } = useLanguage();
   return (
     <div className="h-conversion">
       <div>
-        <p className="h-eyebrow">Eerst proberen. Daarna op maat.</p>
-        <h3>Ontdek hoe het werkt.</h3>
+        <p className="h-eyebrow">Eerst gratis. Daarna op maat.</p>
+        <h3>Begin met je gratis OS.</h3>
         <p>
-          Je website, CRM, content en advertenties in één omgeving.
-          Vanuit jouw ervaring bespreken we daarna wat je bedrijf nodig heeft.
+          Koppel je website, social media en Odoo in één OS. Wil je het rond
+          je eigen processen? Dan bouwen we je OS op maat, vanaf €10.000.
         </p>
       </div>
       <div className="h-poc-actions">
-        <Action href={CLAIM_URL}>{t("Vraag gratis OS-demo aan")}</Action>
-        <TextLink to="/contact?onderwerp=Custom%20OS">
-          Al geprobeerd? Bespreek jouw Custom OS
+        <Action href={GRATIS_OS_URL}>Probeer het OS gratis</Action>
+        <TextLink to="/contact?onderwerp=OS%20op%20maat">
+          Al geprobeerd? Bespreek je OS op maat
         </TextLink>
       </div>
     </div>
@@ -313,11 +313,13 @@ export function Closing() {
     <div className="h-final-characters">
       {agents.map(agent=><MiloMotion key={agent.id} role={agent.id} name={agent.name} />)}
     </div>
-    <h2 id="final-close-title">Ervaar het gemak.<br /><span>Probeer het zelf.</span></h2>
-    <p>Je website, CRM, content en advertenties. In één chat.</p>
+    {/* 28 september 2026 (Marinus, het verhaal): alle data in één OS, gratis te proberen, en het persoonlijke contact blijft. */}
+    <h2 id="final-close-title">Alle data van je bedrijf.<br /><span>Eén OS.</span></h2>
+    <p>Je website, social media en Odoo op één plek. Gratis te gebruiken, met mensen erachter.</p>
     <OsEntry showProof={false} />
     <TeamTrust />
-    <TextLink to="/contact?onderwerp=Custom%20OS">Samen verder met jouw Custom OS</TextLink>
+    <TextLink to="/contact?onderwerp=OS%20op%20maat">Bespreek je OS op maat</TextLink>
+    <TextLink to="/contact#partners">Odoo-implementatiepartner? Praat met Michelle</TextLink>
     <div className="h-final-contact"><a href="mailto:info@socialnow.nl">info@socialnow.nl</a><a href="https://wa.me/31637404577" target="_blank" rel="noopener noreferrer">WhatsApp <MessageCircle size={14} aria-hidden="true" /></a></div>
   </section>;
 }

@@ -1,8 +1,7 @@
 import React from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Action } from "./ui";
-import { actieLoopt } from "./ConsentPopup";
-import { CLAIM_URL } from "./os-entry";
+import { GRATIS_OS_URL } from "./os-entry";
 import { useLanguage } from "./i18n/context";
 import "./pricing.css";
 
@@ -11,7 +10,8 @@ import "./pricing.css";
 // website erbij. Het team per pakket is een rij rondjes die uitklapt.
 // 28 september 2026 (Marinus): elk pakket €2.000 duurder. Het OS op maat (vanaf €10.000) is het eerste
 // en grootste blok; alle andere pakketten zijn een extra laag bovenop de gratis versie. Sergio bij Meta Ads.
-const PROBEER_URL = CLAIM_URL;
+// 28 september 2026 (Marinus, het verhaal): "Probeer het OS gratis" gaat rechtstreeks naar de login van het gratis OS.
+const PROBEER_URL = GRATIS_OS_URL;
 
 type Lid = { naam: string; rol: string; foto: string };
 const TEAM: Record<string, Lid> = {
@@ -136,7 +136,7 @@ const MAATWERK = {
 const GRATIS = [
   { titel: "Een complete demowebsite", tekst: "Geen schets. Een volledige website in je merk, klaar om live te gaan." },
   { titel: "Een basic rebranding", tekst: "Kleuren, logo en stijl, strak neergezet." },
-  { titel: "Je OS als proof of concept", tekst: "Verkoop, merk, social en website op één scherm, met je eigen data." },
+  { titel: "Je eigen OS", tekst: "Verkoop, merk, social en website op één scherm, met je eigen data." },
 ];
 
 const IN_OS = [
@@ -210,7 +210,6 @@ function Kaart({ pakket, breed = false }: { pakket: Pakket; breed?: boolean }) {
 
 export default function Pricing() {
   const { t } = useLanguage();
-  const actie = actieLoopt();
   return (
     <div className="prijs h-wrap">
       <section className="prijs-gratis" aria-labelledby="prijs-gratis-titel">
@@ -227,11 +226,11 @@ export default function Pricing() {
             <p className="prijs-echt">
               Helemaal gratis. <em>Echt waar.</em>
             </p>
-            <p className="prijs-lead">{t("Waar anderen duizenden euro’s voor vragen, betaal jij €0. Vraag de gratis demowebsite en OS-demo aan; daarna bespreken we samen de volgende stap.")}</p>
+            <p className="prijs-lead">{t("Waar anderen duizenden euro’s voor vragen, betaal jij €0. Log in op je gratis OS of vraag een gratis demowebsite aan; daarna bespreken we samen de volgende stap.")}</p>
             <div className="prijs-knoppen">
               <a className="os-claim sn-btn3d h-button" href={PROBEER_URL}>
                 <span className="sn-btn3d-sheen" />
-                <span>{t("Vraag gratis OS-demo aan")}</span>
+                <span>Probeer het OS gratis</span>
                 <span className="h-button-icon">
                   <ArrowRight size={16} aria-hidden="true" />
                 </span>
@@ -256,21 +255,11 @@ export default function Pricing() {
           ))}
         </div>
 
-        {actie && (
-          <div className="prijs-actie">
-            <span className="prijs-actie-label">Winactie</span>
-            <p>
-              <strong>Win een custom OS ter waarde van <b className="prijs-bedrag-groot">€10.000</b></strong>
-              <span>Maak een post in je gratis OS, plaats hem op LinkedIn en tag SocialNow.nl en Komen Consultancy, dan doe je mee. Dat kan tot en met zaterdag 26 september. De winnaar maken we zondag 27 september bekend.</span>
-            </p>
-          </div>
-        )}
-
         <div className="prijs-inhoud">
           <div className="prijs-inhoud-kop">
             <h2>Dit zit al in je gratis OS</h2>
             <a className="prijs-link" href={PROBEER_URL}>
-              <span>{t("Vraag gratis OS-demo aan")}</span>
+              <span>Probeer het OS gratis</span>
               <ArrowRight size={15} aria-hidden="true" />
             </a>
           </div>
@@ -299,6 +288,7 @@ export default function Pricing() {
             <strong>€10.000</strong>
           </p>
           <p className="prijs-maatwerk-lead">Het gratis OS laat zien wat kan. Het OS op maat maakt het van jou: je eigen data, je eigen processen en je eigen agents, in één systeem.</p>
+          <p className="prijs-waarom"><b>Waarom het OS gratis kan.</b> We verdienen aan het OS op maat en aan de pakketten van ons team. Partners als Komen Consultancy helpen het OS schaalbaar te maken, en Odoo-implementatiepartners brengen het naar hun klanten.</p>
           <div className="prijs-knoppen">
             <Action to={`/contact?onderwerp=${encodeURIComponent("OS op maat")}`}>Plan je OS op maat</Action>
           </div>

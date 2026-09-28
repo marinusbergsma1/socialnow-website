@@ -151,7 +151,7 @@ export function AuditPage() {
             <img src="/images/Nick-VK.webp" alt="Nick van Keulen" width="180" height="180" />
             <div>
               <h2>Nick doet je audit.</h2>
-              <p>Google Ads Expert bij SocialNow</p>
+              <p>Head of Google Ads & Search bij SocialNow</p>
             </div>
           </div>
           <p className="h-audit-quote">
