@@ -300,3 +300,9 @@
     transition: none;
   }
 }
+
+/* Bentoversie van het homepageblok: de tegels komen uit bento.css, dit zijn alleen de details. */
+.sn-site .vh-bento { font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0, "dlig" 0; }
+.sn-site .vh-bento .vh-beloftes--tegel { margin: 0; gap: 14px; }
+.sn-site .vh-bento .vh-beloftes--tegel strong { font-size: 15.5px; }
+.sn-site .vh-bento .sn-tegel-onder .vh-knop { width: 100%; justify-content: center; white-space: nowrap; }

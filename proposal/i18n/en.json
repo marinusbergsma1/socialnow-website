@@ -1591,5 +1591,15 @@
   "Sleutels worden uit logbestanden gefilterd en gaan nooit mee in een vraag aan een AI-model.": "Keys are filtered out of log files and never go into a request to an AI model.",
   "Trek de sleutel in bij Odoo, Meta, Google of LinkedIn en de koppeling stopt. Je socials-sleutel haal je zelf weg in het OS.": "Revoke the key at Odoo, Meta, Google or LinkedIn and the connection stops. You remove your social channels key yourself in the OS.",
   "Gaat er iets mis met jouw gegevens, dan melden we dat binnen 24 uur bij jou.": "If something goes wrong with your data, we report it to you within 24 hours.",
-  "Trek de sleutel in bij de bron, of vraag het ons via privacy@socialnow.nl. Jij houdt de regie.": "Revoke the key at the source, or ask us via privacy@socialnow.nl. You stay in control."
+  "Trek de sleutel in bij de bron, of vraag het ons via privacy@socialnow.nl. Jij houdt de regie.": "Revoke the key at the source, or ask us via privacy@socialnow.nl. You stay in control.",
+  "Versleuteld en onzichtbaar": "Encrypted and invisible",
+  "Alleen wat jij aanzet": "Only what you switch on",
+  "Jij houdt de regie": "You stay in control",
+  "Zo beschermen we je sleutels": "This is how we protect your keys",
+  "PDF, Nederlands en Engels": "PDF, Dutch and English",
+  "Zeven beloftes over je API-sleutels.": "Seven promises about your API keys.",
+  "Download de sleutelbelofte": "Download the key promise",
+  "Veiligheidsfilm": "Security film",
+  "Jouw sleutels zijn veilig.": "Your keys are safe.",
+  "Zwart op wit.": "In black and white."
 }
