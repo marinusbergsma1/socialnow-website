@@ -4,7 +4,8 @@ import { projects } from "./content";
 import { customerReviews } from "./CustomerReviews";
 import { AmbientVideo } from "./motion";
 import { MediaDialog, type MediaItem } from "./MediaSliders";
-import { Action, Heading } from "./ui";
+import { Action } from "./ui";
+import { Bento, Tegel } from "./Bento";
 import { useLanguage } from "./i18n/context";
 import "./cases.css";
 
@@ -16,6 +17,7 @@ const CASES = `${import.meta.env.BASE_URL}images/cases/`;
 // `wide` beslaat de hele rij. `measured`, `integration` en `review` zijn het bewijs op de
 // kaart; alles daarin is gemeten of letterlijk overgenomen, zie de bron erbij.
 type Selection = {
+  kop: string;
   slug: string;
   color: string;
   label?: string;
@@ -42,6 +44,7 @@ const selections: Selection[] = [
     // Lighthouse 12.8 desktop, mediaan van drie runs op 28 september 2026. Mobiel was dezelfde
     // dag: prestaties 65, toegankelijkheid 91, best practices 96, SEO 100.
     slug: "ilgordo-website",
+    kop: "Il Gordo · live site",
     color: "#F7E644",
     label: "Il Gordo · Amsterdam",
     title: "Gebouwd met AI.\nGemeten, niet beloofd.",
@@ -65,6 +68,7 @@ const selections: Selection[] = [
     // kwh-system.socialnow.nl/api/lead en de CMS-loader haalt teksten en aanbod uit
     // kwh-system.socialnow.nl/api/cms.
     slug: "kwh-garant-website",
+    kop: "kWh Garant · live site",
     color: "#25D366",
     label: "kWh Garant · Veenendaal",
     title: "Website en OS.\nEén systeem.",
@@ -82,6 +86,7 @@ const selections: Selection[] = [
   },
   {
     slug: "vastiq-website",
+    kop: "VASTIQ · live platform",
     color: "#00A3E0",
     label: "VASTIQ · vastiq.ai",
     title: "Een dataplatform\nvoor vastgoed.",
@@ -92,6 +97,7 @@ const selections: Selection[] = [
   },
   {
     slug: "vdz-brigade-website",
+    kop: "VDZ Brigade · live site",
     color: "#F62961",
     label: "VDZ Brigade",
     title: "Verduurzamen.\nHelder uitgelegd.",
@@ -103,6 +109,7 @@ const selections: Selection[] = [
   },
   {
     slug: "raveg-branding",
+    kop: "RAVEG · motion",
     color: "#F5940D",
     title: "Een merk.\nVol beweging.",
     description:
@@ -112,6 +119,7 @@ const selections: Selection[] = [
   },
   {
     slug: "universal-sony-banners",
+    kop: "Universal en Sony",
     color: "#00A3E0",
     title: "Groot beeld.\nTot in de details.",
     description:
@@ -120,6 +128,7 @@ const selections: Selection[] = [
   },
   {
     slug: "az-alkmaar-socials",
+    kop: "AZ · social artworks",
     color: "#F62961",
     title: "De energie\nvan AZ.",
     description:
@@ -133,6 +142,7 @@ const selections: Selection[] = [
   },
   {
     slug: "print-bind-interieur",
+    kop: "Print & Bind · interieur",
     color: "#25D366",
     title: "Een merk.\nOok in de ruimte.",
     description: "Voor Print & Bind vertaalden we de merkidentiteit naar het interieur, met banners, stickers en bewegwijzering.",
@@ -152,179 +162,88 @@ function reviewFor(name?: string) {
 export default function FeaturedWork() {
   const [selected, setSelected] = useState<MediaItem | null>(null);
   const { t } = useLanguage();
+  // 28 september 2026 (Marinus): elke sectie als kleine bentogrid. Per case een beeldtegel (8) en een
+  // teksttegel (4) die om en om van kant wisselen; bewijs (cijfers, koppeling, klantreactie) krijgt een
+  // eigen kleine tegel. De grid vult zelf op (dense), dus de volgorde van `selections` is vrij.
+  const tegels: React.ReactNode[] = [];
+  selections.forEach((selection, index) => {
+    const project = projects.find((item) => item.slug === selection.slug)!;
+    const website = !!selection.tiles;
+    const label = selection.label || project.category;
+    const beeld = website ? `${CASES}${selection.tiles![0]}.webp` : project.image;
+    const telefoon = website ? `${CASES}${selection.tiles![1]}.webp` : "";
+    const film = selection.motion ? project.gallery![0] : "";
+    const titel = `${website ? project.title : project.category} · ${website ? t(selection.captions[0]) : selection.captions[0]}`;
+    const review = reviewFor(selection.review);
+    const stijl = { "--case-accent": selection.color } as React.CSSProperties;
+    const beeldTegel = (
+      <Tegel key={`${project.slug}-beeld`} kop={selection.kop} breed={8} soort="foto" className="h-case-beeld">
+        <button type="button" className="h-case-beeldknop" style={stijl}
+          onClick={() => setSelected({ src: film || beeld, title: titel, kind: film ? "video" : "image", slug: project.slug })}
+          aria-label={`${t(film ? "Speel video af" : "Vergroot beeld")}: ${titel}`}>
+          {film ? (
+            <AmbientVideo src={film} poster={project.image} label={titel} suspended={!!selected} hoverSound />
+          ) : (
+            <img src={beeld} alt={titel} loading="lazy" width="1200" height="675" />
+          )}
+          {telefoon && <img className="h-case-telefoon" src={telefoon} alt="" loading="lazy" width="600" height="900" />}
+        </button>
+      </Tegel>
+    );
+    const tekstTegel = (
+      <Tegel key={`${project.slug}-tekst`} kop={label} breed={4} className="h-case-tekst">
+        <p className="sn-tegel-titel">{selection.title.split("\n").map((line) => <span key={line}>{line}</span>)}</p>
+        <p className="sn-tegel-tekst">{selection.description}</p>
+        <ul className="h-case-pillen" aria-label="Werkzaamheden">
+          {project.services!.slice(0, 4).map((service) => <li key={service}>{service}</li>)}
+        </ul>
+        {review && !selection.integration && (
+          <figure className="h-case-kortcitaat">
+            <blockquote lang="nl" translate="no">“{review.text}”</blockquote>
+            <figcaption translate="no">{review.name}</figcaption>
+          </figure>
+        )}
+        <div className="sn-tegel-onder">
+          <Action to={`/project/${project.slug}`}>Ontdek het verhaal</Action>
+        </div>
+      </Tegel>
+    );
+    // Vaste rijen van 12, zodat beeld en tekst van één case bij elkaar blijven:
+    // Il Gordo beeld 8 + tekst 4, dan cijfers 4 + kWh beeld 8, dan kWh tekst, koppeling en reactie (4+4+4).
+    // Daarna wisselt beeld (8) en tekst (4) per case van kant. Een reactie bij een andere case staat in de teksttegel.
+    const eigen = selection.integration && review;
+    if (selection.measured) {
+      tegels.push(beeldTegel, tekstTegel,
+        <Tegel key={`${project.slug}-cijfers`} kop="Gemeten" breed={4} soort="geel" className="h-case-cijfers">
+          <dl>{selection.measured.cells.map((cell) => <div key={cell.label}><dd translate="no">{cell.value}</dd><dt>{cell.label}</dt></div>)}</dl>
+          <p className="h-case-bron">{selection.measured.source}</p>
+        </Tegel>);
+      return;
+    }
+    if (eigen) {
+      tegels.push(beeldTegel, tekstTegel,
+        <Tegel key={`${project.slug}-os`} kop="Gekoppeld aan het OS" breed={4} soort="groen" className="h-case-os">
+          <ul>{selection.integration!.map((line) => <li key={line}><Check size={15} aria-hidden="true" /><span>{line}</span></li>)}</ul>
+        </Tegel>,
+        <Tegel key={`${project.slug}-review`} kop="Klantreactie" breed={4} className="h-case-review">
+          <blockquote lang="nl" translate="no">“{review!.text}”</blockquote>
+          <div className="h-case-wie">
+            <img src={review!.image} alt="" className={review!.logo ? "is-logo" : ""} width="40" height="40" loading="lazy" />
+            <span><strong translate="no">{review!.name}</strong><span>{review!.company}</span></span>
+          </div>
+        </Tegel>);
+      return;
+    }
+    const links = tegels.length % 2 === 0 ? index % 2 === 0 : index % 2 === 1;
+    tegels.push(...(links ? [tekstTegel, beeldTegel] : [beeldTegel, tekstTegel]));
+  });
   return (
-    <section
-      className="h-section h-wrap h-featured-work"
-      id="uitgelicht-werk"
-      aria-labelledby="featured-work-title"
-    >
-      <Heading
-        id="featured-work-title"
-        label="Uitgelicht werk / Gemaakt door SocialNow"
-        title={
-          <>
-            Werk dat je
-            <br />
-            <span>bijblijft.</span>
-          </>
-        }
-        text="Websites en platforms. Bewegend beeld. Sterke merken. Ontdek het werk achter onze ervaring."
-      >
-
-      </Heading>
-      <div className="h-featured-cases">
-        {selections.map((selection, index) => {
-          const project = projects.find(
-            (item) => item.slug === selection.slug,
-          )!;
-          const motion = !!selection.motion;
-          const website = !!selection.tiles;
-          const label = selection.label || project.category;
-          const sources = selection.tiles
-            ? selection.tiles.map((name) => `${CASES}${name}.webp`)
-            : motion
-              ? project.gallery!
-              : [project.image, ...project.gallery!];
-          const review = reviewFor(selection.review);
-          return (
-            <article
-              key={project.slug}
-              className={`h-featured-case ${motion ? "h-featured-motion" : "h-featured-collage"}${selection.wide ? " is-wide" : ""}${website ? " is-website" : ""}`}
-              style={
-                { "--case-accent": selection.color } as React.CSSProperties
-              }
-            >
-              <div className="h-featured-copy">
-                <span className="h-featured-number">
-                  0{index + 1} / SELECTED WORK
-                </span>
-                <p className="h-eyebrow">
-                  <i />
-                  {label}
-                </p>
-                <h3>
-                  {selection.title.split("\n").map((line) => (
-                    <span key={line}>{line}</span>
-                  ))}
-                </h3>
-                <p>{selection.description}</p>
-                {selection.measured && (
-                  <div className="h-case-measured">
-                    <dl>
-                      {selection.measured.cells.map((cell) => (
-                        <div key={cell.label}>
-                          <dt>{cell.label}</dt>
-                          <dd translate="no">{cell.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                    <p>{selection.measured.source}</p>
-                  </div>
-                )}
-                {selection.integration && (
-                  <ul className="h-case-integration" aria-label="Gekoppeld aan het OS">
-                    {selection.integration.map((line) => (
-                      <li key={line}>
-                        <Check size={15} aria-hidden="true" />
-                        <span>{line}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {review && (
-                  <figure className="h-case-review">
-                    <blockquote lang="nl" translate="no">
-                      “{review.text}”
-                    </blockquote>
-                    <figcaption>
-                      <img
-                        src={review.image}
-                        alt=""
-                        className={review.logo ? "is-logo" : ""}
-                        width="32"
-                        height="32"
-                        loading="lazy"
-                      />
-                      <span>
-                        <strong translate="no">{review.name}</strong>
-                        <span>{review.company}</span>
-                      </span>
-                    </figcaption>
-                  </figure>
-                )}
-                <ul aria-label="Werkzaamheden">
-                  {project.services!.slice(0, 4).map((service) => (
-                    <li key={service}>{service}</li>
-                  ))}
-                </ul>
-                <Action to={`/project/${project.slug}`}>
-                  Ontdek het verhaal
-                </Action>
-              </div>
-              <div className="h-featured-media">
-                {motion && <button type="button" className="h-featured-tile h-featured-cover"
-                  onClick={() => setSelected({src:project.image,title:"RAVEG · Hyperpower packaging",kind:"image",slug:project.slug})}
-                  aria-label="RAVEG · Hyperpower packaging">
-                  <img src={project.image} alt="RAVEG · Hyperpower packaging" width="1920" height="1091" loading="lazy" />
-                </button>}
-                {sources.map((src, tile) => {
-                  const item: MediaItem = {
-                    src,
-                    // De websitetitels vertalen hier al: een samengestelde zin staat niet als
-                    // geheel in het woordenboek.
-                    title: website
-                      ? `${project.title} · ${t(selection.captions[tile])}`
-                      : `${project.category} · ${selection.captions[tile]}`,
-                    kind: motion ? "video" : "image",
-                    slug: project.slug,
-                  };
-                  return (
-                    <button
-                      type="button"
-                      key={src}
-                      className="h-featured-tile"
-                      onClick={() => setSelected(item)}
-                      aria-label={website ? `${t("Vergroot beeld")}: ${item.title}` : `${motion ? "Speel video af" : "Vergroot beeld"}: ${item.title}`}
-                    >
-                      {motion ? (
-                        <AmbientVideo
-                          src={src}
-                          poster={project.image}
-                          label={item.title}
-                          suspended={!!selected}
-                          hoverSound
-                        />
-                      ) : (
-                        <img
-                          src={src}
-                          alt={item.title}
-                          loading="lazy"
-                          width={tile ? (website ? 600 : 400) : website ? 1200 : 1000}
-                          height={tile ? (website ? 900 : 600) : website ? 675 : 560}
-                        />
-                      )}
-                    </button>
-                  );
-                })}
-                <span className="h-featured-media-note">
-                  {motion
-                    ? "Motion design · Tik voor de volledige video"
-                    : website
-                      ? "Live website · Desktop en mobiel"
-                      : "Campaign design · Bekijk de details"}
-                </span>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-      <div className="h-featured-end">
-        <p>Van dit oog voor detail naar jouw eigen OS.</p>
-        <Action to="/projecten" secondary>
-          Bekijk al ons werk
-        </Action>
-      </div>
+    <>
+      <Bento id="uitgelicht-werk" className="h-featured-work h-cases" label="Uitgelicht werk / Gemaakt door SocialNow"
+        titel={<>Werk dat je<br /><span>bijblijft.</span></>} swipe>
+        {tegels}
+      </Bento>
       <MediaDialog item={selected} close={() => setSelected(null)} />
-    </section>
+    </>
   );
 }
