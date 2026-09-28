@@ -2883,35 +2883,6 @@ html {
   .sn-site .h-deur .h-deur-knop { align-self: stretch; }
 }
 
-/* 28 september 2026 (Marinus): live sites houden het scrollen van de pagina niet meer vast. Pas na een klik scrolt de site zelf. */
-.sn-site .h-live-screen { position: relative; overflow: hidden; }
-.sn-site .h-live-screen.is-actief { overflow: auto; }
-.sn-site .h-live-activeer { position: absolute; inset: 0; z-index: 2; display: flex; align-items: flex-end; justify-content: center; padding: 0 0 22px; border: 0; background: transparent; cursor: pointer; }
-.sn-site .h-live-activeer span { padding: 11px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); background: rgba(6, 10, 16, .82); backdrop-filter: blur(10px); color: #fff; font-size: 14px; font-weight: 600; opacity: 0; transform: translateY(6px); transition: opacity .25s ease, transform .25s ease; }
-.sn-site .h-live-activeer:hover span, .sn-site .h-live-activeer:focus-visible span { opacity: 1; transform: none; }
-@media (hover: none) { .sn-site .h-live-activeer span { opacity: 1; transform: none; } }
-
-/* 28 september 2026 (Marinus): de live sites als bentotegels. Links de echte website, rechts naam, uitleg, cijfers en de keuze. */
-.sn-site .h-live-tegel .sn-tegel-vlak { padding: 12px; gap: 10px; }
-.sn-site .h-live-tegel .h-live-toolbar { margin: 0; padding: 2px 4px 0; border: 0; background: none; box-shadow: none; justify-content: flex-end; }
-.sn-site .h-live-tegel .h-live-title { display: none; }
-.sn-site .h-live-tegel .h-live-device { box-shadow: none; border-radius: 14px; }
-.sn-site .h-live-info .sn-tegel-vlak { gap: 16px; }
-.sn-site .h-live-info .sn-tegel-tekst { display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
-.sn-site .h-live-cijfers { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.sn-site .h-live-cijfers div { padding: 12px 10px; border-radius: 14px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.02); min-width: 0; }
-.sn-site .h-live-cijfers dt { font-size: 10.5px; line-height: 1.3; color: #8b949c; letter-spacing: .05em; text-transform: uppercase; }
-.sn-site .h-live-cijfers dd { margin: 6px 0 0; font-size: 14.5px; line-height: 1.25; font-weight: 700; overflow-wrap: anywhere; }
-.sn-site .h-live-info .h-live-bottom { margin-top: auto; padding: 0; gap: 10px 16px; flex-wrap: wrap; }
-.sn-site .h-live-info .h-live-bottom > .h-text-link { font-size: 13px; }
-.sn-site .h-live-info .h-site-thumbnails { flex-wrap: wrap; gap: 8px; overflow: visible; padding: 0; }
-.sn-site .h-live-info .h-site-thumbnails button { flex: 0 0 auto; min-height: 0; padding: 8px 14px; border-radius: 999px; }
-.sn-site .h-live-info .h-site-thumbnails button > span { font-size: 12.5px; padding: 0; color: #d3d9df; }
-@media (max-width: 1099px) {
-  .sn-site .h-live-tegel { grid-column: span 12; }
-  .sn-site .h-live-info { grid-column: span 12; }
-}
-
 /* 28 september 2026 (Marinus): het OS, See it in motion, diensten, social en vragen als bentotegels. */
 .sn-site .sn-tegel-badge { position: absolute; z-index: 2; left: 14px; top: 14px; padding: 6px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); background: rgba(0,0,0,.55); backdrop-filter: blur(8px); color: #e6ebef; font-size: 11.5px; font-weight: 600; letter-spacing: .01em; pointer-events: none; }
 .sn-site .h-os-agent .sn-tegel-vlak { gap: 12px; }

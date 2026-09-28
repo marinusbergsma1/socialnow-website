@@ -8,8 +8,7 @@ import {
 } from "lucide-react";
 import { webShowcaseProjects } from "../data/projects";
 import type { Project } from "../types";
-import { TextLink } from "./ui";
-import { Tegel } from "./Bento";
+import { Heading, TextLink } from "./ui";
 import { useInView } from "./motion";
 
 // Deze directe websites staan embedding toe (geen X-Frame-Options / frame-ancestors).
@@ -45,18 +44,19 @@ export default function LiveWebsites() {
   const [index, setIndex] = useState(0);
   const [mobile, setMobile] = useState(false);
   const [interactive, setInteractive] = useState(false);
-  const [klaar, setKlaar] = useState(false);
-  useEffect(() => setKlaar(true), []);
+  const interactionTimer = useRef<number | undefined>(undefined);
   const frame = useRef<HTMLIFrameElement>(null);
   const control = useRef<HTMLButtonElement>(null);
   const stopInteraction = () => {
+    window.clearTimeout(interactionTimer.current);
     setInteractive(false);
     if (document.activeElement === frame.current) control.current?.focus({preventScroll:true});
   };
-  // 28 september 2026 (Marinus): "ik wil niet dat die stoppen met scrollen als je met je muis erop bent, maar het scrollen
-  // door de live sites moet wel mogelijk blijven". Met de muis erboven scrolt de pagina gewoon door. Wie door een site wil
-  // scrollen klikt eerst; weg met de muis, Escape of de knop eronder geeft de pagina terug.
-  const startInteraction = () => setInteractive(true);
+  const startInteraction = () => {
+    window.clearTimeout(interactionTimer.current);
+    setInteractive(true);
+    interactionTimer.current = window.setTimeout(stopInteraction, 2500);
+  };
   // Ruime marge: het laden begint ruim voordat de bezoeker bij dit onderdeel is.
   const { ref, visible } = useInView<HTMLElement>("1500px 0px");
   const [near, setNear] = useState(false);
@@ -65,6 +65,7 @@ export default function LiveWebsites() {
   }, [visible]);
   useEffect(() => {
     stopInteraction();
+    return () => window.clearTimeout(interactionTimer.current);
   }, [index, visible]);
   const project = sites[index];
   const frameSrc = frameSrcOf(project);
@@ -91,21 +92,26 @@ export default function LiveWebsites() {
     return () => window.clearTimeout(timer);
   }, [near, mounted.length]);
   const activeLoaded = loaded.includes(project.slug);
-  const bedienbaar = live ? activeLoaded : !!project.fullPageScreenshot;
   return (
     <section
-      className="sn-bento h-wrap h-live-websites h-live-compact"
+      className="h-section h-wrap h-live-websites"
       ref={ref}
       aria-labelledby="live-websites-title"
     >
-      <div className="sn-bento-kop">
-        <p className="h-eyebrow"><i />Webdesign & full-stack development</p>
-        <h2 id="live-websites-title">
-          Gemaakt om <span>te gebruiken.</span>
-        </h2>
-      </div>
-      <div className={`sn-bento-rooster${klaar ? " is-klaar" : ""}`}>
-      <Tegel kop="Live website" breed={8} className="h-live-tegel">
+      <Heading
+        id="live-websites-title"
+        label="Webdesign & full-stack development"
+        title={
+          <>
+            Gemaakt om
+            <br />
+            <span>te gebruiken.</span>
+          </>
+        }
+        text="Bekijk onze websites van dichtbij. Blader door het werk, scroll door een website en ontdek hoe ontwerp en techniek samenkomen."
+      >
+        <TextLink to="/projecten">Alle projecten</TextLink>
+      </Heading>
       <div className="h-live-toolbar">
         <div className="h-live-title" aria-live="polite">
           <strong>{project.title}</strong>
@@ -148,15 +154,10 @@ export default function LiveWebsites() {
           </span>
           <span>{new URL(project.url!).hostname}</span>
         </div>
-        <div className={`h-live-screen${interactive ? " is-actief" : ""}`}
-          onPointerLeave={event => { if (event.pointerType === "mouse") stopInteraction(); }}
-          onKeyDown={event => { if (event.key === "Escape") stopInteraction(); }}
+        <div className="h-live-screen"
+          onPointerEnter={event => { if (live && event.pointerType === "mouse") startInteraction(); }}
+          onPointerLeave={stopInteraction}
         >
-          {bedienbaar && !interactive && (
-            <button type="button" className="h-live-activeer" onClick={startInteraction}>
-              <span>Klik om door deze website te scrollen</span>
-            </button>
-          )}
           {near && sites.map((site) => {
             const src = frameSrcOf(site);
             if (!src || !mounted.includes(site.slug)) return null;
@@ -201,24 +202,7 @@ export default function LiveWebsites() {
           )}
         </div>
       </div>
-      </Tegel>
-      <Tegel kop={project.title} breed={4} className="h-live-info">
-        <p className="sn-tegel-label">{project.category}</p>
-        <details key={project.slug} className="h-work-details h-live-details">
-          <summary>Over deze website</summary>
-          <p className="sn-tegel-tekst">{project.description}</p>
-        {project.metrics && (
-          <dl className="h-live-cijfers">
-            {project.metrics.slice(0, 3).map((metric) => (
-              <div key={metric.label}>
-                <dt>{metric.label}</dt>
-                <dd style={{ color: metric.color }}>{metric.value}</dd>
-              </div>
-            ))}
-          </dl>
-        )}
-        </details>
-        <div className="h-live-bottom">
+      <div className="h-live-bottom">
         <div className="h-rail-arrows">
           <button
             type="button"
@@ -235,7 +219,7 @@ export default function LiveWebsites() {
             <ChevronRight size={19} />
           </button>
         </div>
-        {bedienbaar && <button ref={control} type="button" className="h-text-link" aria-pressed={interactive}
+        {live && <button ref={control} type="button" className="h-text-link" aria-pressed={interactive}
           onClick={interactive ? stopInteraction : startInteraction}>
           {interactive ? "Verder op deze pagina" : "Website bedienen"}
         </button>}
@@ -256,8 +240,6 @@ export default function LiveWebsites() {
             <span>{item.title}</span>
           </button>
         ))}
-      </div>
-      </Tegel>
       </div>
     </section>
   );
