@@ -1,0 +1,32 @@
+/* 28 september 2026: content, portfolio en begeleiding in de gedeelde bentotegels (Bento.tsx). Alleen aanvullingen. */
+.sn-site .mb-bento .mb-film .sn-tegel-vlak { aspect-ratio: auto; min-height: clamp(320px, 34vw, 520px); }
+.sn-site .mb-vergroot { position: absolute; inset: 0; z-index: 2; display: flex; align-items: flex-end; padding: 14px; border: 0; background: none; cursor: zoom-in; text-align: left; }
+.sn-site .mb-vergroot > span { padding: 8px 14px; border-radius: 999px; border: 1px solid #ffffff33; background: rgba(0,0,0,.6); backdrop-filter: blur(8px); color: #fff; font-size: 13px; font-weight: 600; max-width: calc(100% - 130px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sn-site .mb-vergroot:focus-visible { outline: 2px solid #25d366; outline-offset: -4px; border-radius: 22px; }
+.sn-site .mb-bento .mb-film .h-hero-film-geluid { z-index: 3; }
+.sn-site .mb-foto .sn-tegel-vlak > img { transition: transform .8s cubic-bezier(.16,1,.3,1); }
+.sn-site .mb-foto:hover .sn-tegel-vlak > img { transform: scale(1.03); }
+.sn-site .mb-foto.is-hoog .sn-tegel-vlak { min-height: clamp(420px, 44vw, 640px); }
+.sn-site .mb-foto .mb-vergroot > span { max-width: 100%; }
+
+/* De strook in een tegel: kleinere kaarten, pijlen als pillen onder de strook. */
+.sn-site .mb-strook .sn-tegel-vlak { padding: 18px 0 6px; }
+.sn-site .mb-strook .h-media-card { flex-basis: 300px; width: 300px; height: 190px; border-radius: 16px; border-color: rgba(255,255,255,.1); }
+.sn-site .mb-strook .h-media-rail.is-video .h-media-card { flex-basis: 170px; width: 170px; height: 300px; }
+.sn-site .mb-strook .h-media-group { gap: 14px; padding-right: 14px; }
+.sn-site .mb-strook .h-rail-controls { padding-inline: 18px; }
+.sn-site .mb-strook .h-rail-controls > span { font-size: 12px; }
+.sn-site .mb-strook .h-rail-arrows > button { width: 40px; height: 40px; border-radius: 999px; }
+
+/* Begeleiding: de bestaande beeldjes in een donkere tegel. */
+.sn-site .mb-trust .mb-beeld { position: relative; min-height: 220px; flex: 1; }
+.sn-site .mb-trust .mb-beeld > * { position: absolute; inset: 0; margin: auto; }
+
+@media (max-width: 760px) {
+  .sn-site .mb-bento .mb-film .sn-tegel-vlak { min-height: 0; aspect-ratio: 4 / 5; }
+  .sn-site .mb-bento .mb-film:not(.mb-staand) .sn-tegel-vlak { aspect-ratio: 16 / 10; }
+  .sn-site .mb-foto .sn-tegel-vlak, .sn-site .mb-foto.is-hoog .sn-tegel-vlak { min-height: 0; aspect-ratio: 4 / 3; }
+  .sn-site .mb-strook .h-media-card { flex-basis: 240px; width: 240px; height: 160px; }
+  .sn-site .mb-strook .h-media-rail.is-video .h-media-card { flex-basis: 150px; width: 150px; height: 266px; }
+  .sn-site .mb-strook .h-rail-controls > span { display: none; }
+}
