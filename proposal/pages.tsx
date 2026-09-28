@@ -19,7 +19,6 @@ import TeamTrust from "./TeamTrust";
 import Verhaal from "./Verhaal";
 import Deuren from "./Deuren";
 import { AuditTeaser } from "./AuditPage";
-import CustomerReviews from "./CustomerReviews";
 import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
 import TrustStories from "./TrustStories";
@@ -205,7 +204,7 @@ export function Home() {
       <Verhaal />
       <Deuren />
       <FeaturedWork />
-      <CustomerReviews />
+      {/* 28 september 2026 (Marinus): "What our clients say" mag weg van de homepage. */}
       <LiveWebsites />
       {/* Hier komt het veiligheidsblok met video en belofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
       <section className="h-section h-wrap" id="het-os">
