@@ -44,7 +44,6 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
       <span className="h-hoofdstuk-logos" translate="no">
         <img className="is-eigen" src="/images/AZ-LOGO-FLYER.webp" alt="AZ" loading="lazy" />
         <img src="/images/SUPPERCLUB-LOGO.webp" alt="Supperclub" loading="lazy" />
-        <b>Day & Nite</b>
       </span>
     ),
   },

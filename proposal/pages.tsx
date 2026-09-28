@@ -209,11 +209,11 @@ export function Home() {
       <FeaturedWork />
       {/* 28 september 2026 (Marinus): "What our clients say" mag weg van de homepage. */}
       <LiveWebsites />
-      {/* 28 september 2026 (Marinus): vertrouwen via de beveiligingsvideo met de belofte als document. */}
-      <VeiligheidBlok />
       {/* 28 september 2026 (Marinus): AI wordt verkeerd begrepen; mensen zijn de verbindende laag. Met vacature. */}
       <MensEnAI />
       <VacaturesBento />
+      {/* Veiligheidsblok met video en sleutelbelofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
+      <VeiligheidBlok />
       <section className="h-section h-wrap" id="het-os">
         <Heading
           label="Vier onderdelen / Eén verbonden bedrijf"

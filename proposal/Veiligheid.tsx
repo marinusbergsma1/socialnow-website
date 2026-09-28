@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Check, Download, Play, ShieldCheck, X } from "lucide-react";
 import { useLanguage } from "./i18n/context";
+import { Bento, Tegel } from "./Bento";
 import { BELOFTES, STAPPEN, pdfPad, posterPad, videoPad, type Taal } from "./veiligheid-beloftes";
 import "./veiligheid.css";
 
 // Veiligheid, 28 september 2026 (Marinus): de veiligheidsvideo en de sleutelbelofte krijgen een
 // prominente plek, zodat bezoekers hun API-sleutels durven te koppelen.
 // VeiligheidBlok staat op de homepage na de live sites en vóór "Four faces"; die plaatsing doet de
-// homepage-regie in Home(). VeiligheidPagina is /veiligheid (Engels zonder voorvoegsel, /nl/veiligheid).
+// homepage-regie in Home(). Sinds 28 september in de gedeelde bentotegels. VeiligheidPagina is /veiligheid (Engels zonder voorvoegsel, /nl/veiligheid).
 // Stille tv-versie speelt gedempt in een lus; een klik opent de 4:5-versie met de stem van Archie.
 // Nederlands krijgt de Nederlandse film en pdf, alle andere talen de Engelse.
 
@@ -96,7 +97,7 @@ function PdfKnop({ taal, label }: { taal: Taal; label?: string }) {
   );
 }
 
-function Beloftes({ kort = false }: { kort?: boolean }) {
+function Beloftes() {
   return (
     <ul className="vh-beloftes">
       {BELOFTES.map((b) => (
@@ -104,7 +105,7 @@ function Beloftes({ kort = false }: { kort?: boolean }) {
           <span className="vh-vink"><Check size={15} aria-hidden="true" /></span>
           <span>
             <strong>{b.kop}</strong>
-            {!kort && <span>{b.tekst}</span>}
+            <span>{b.tekst}</span>
           </span>
         </li>
       ))}
@@ -112,27 +113,69 @@ function Beloftes({ kort = false }: { kort?: boolean }) {
   );
 }
 
+// 28 september 2026: het homepageblok in de gedeelde tegeltaal (proposal/Bento.tsx). De tv-versie is stil, dus de
+// pil opent de 4:5-film met stem in een venster in plaats van het geluid aan te zetten.
+function FilmTegel({ taal }: { taal: Taal }) {
+  const [open, setOpen] = useState(false);
+  const knop = useRef<HTMLButtonElement>(null);
+  const film = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const element = film.current;
+    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    element.muted = true;
+    const kijker = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) element.play().catch(() => {});
+      else element.pause();
+    }, { threshold: 0.25 });
+    kijker.observe(element);
+    return () => kijker.disconnect();
+  }, [taal]);
+  return (
+    <>
+      <video ref={film} key={taal} className="sn-tegel-film" src={videoPad(taal, "tv")} poster={posterPad(taal, "tv")} muted loop playsInline preload="metadata" aria-label="Veiligheidsfilm" />
+      <button ref={knop} type="button" className="h-hero-film-geluid" onClick={() => setOpen(true)}>Kijk met geluid</button>
+      {open && <FilmMetStem taal={taal} onClose={() => { setOpen(false); knop.current?.focus(); }} />}
+    </>
+  );
+}
+
+const GROEPEN: { kop: string; beloftes: number[] }[] = [
+  { kop: "Versleuteld en onzichtbaar", beloftes: [0, 1] },
+  { kop: "Alleen wat jij aanzet", beloftes: [2, 3, 4] },
+  { kop: "Jij houdt de regie", beloftes: [5, 6] },
+];
+
 export default function VeiligheidBlok() {
   const taal = useTaal();
   return (
-    <section className="vh-blok" id="veiligheid" aria-labelledby="vh-blok-kop">
-      <div className="h-wrap vh-blok-binnen">
-        <StilleFilm taal={taal} />
-        <div className="vh-tekst">
-          <p className="vh-kicker"><ShieldCheck size={16} aria-hidden="true" /><span>Sleutelbelofte</span></p>
-          <h2 id="vh-blok-kop">Jouw sleutels zijn veilig. Zwart op wit.</h2>
-          <p className="vh-intro">Koppel Odoo, Meta, Google, LinkedIn en je socials aan het OS. Dit beloven we, in een officieel document.</p>
-          <Beloftes kort />
-          <div className="vh-acties">
-            <PdfKnop taal={taal} />
-            <Link className="vh-link" to="/veiligheid">
-              <span>Alles over veiligheid</span>
-              <ArrowUpRight size={16} aria-hidden="true" />
-            </Link>
-          </div>
+    <Bento id="veiligheid" label="Sleutelbelofte" titel={<>Jouw sleutels zijn veilig.<br /><span>Zwart op wit.</span></>} className="vh-bento">
+      <Tegel kop="Zo beschermen we je sleutels" breed={8} soort="film">
+        <FilmTegel taal={taal} />
+      </Tegel>
+      <Tegel kop="Het officiële document" breed={4} soort="groen">
+        <p className="sn-tegel-label">PDF, Nederlands en Engels</p>
+        <p className="sn-tegel-titel">Zeven beloftes over je API-sleutels.</p>
+        <div className="sn-tegel-onder">
+          <PdfKnop taal={taal} label="Download de sleutelbelofte" />
+          <Link className="vh-link" to="/veiligheid">
+            <span>Alles over veiligheid</span>
+            <ArrowUpRight size={16} aria-hidden="true" />
+          </Link>
         </div>
-      </div>
-    </section>
+      </Tegel>
+      {GROEPEN.map((g) => (
+        <Tegel key={g.kop} kop={g.kop} breed={4}>
+          <ul className="vh-beloftes vh-beloftes--tegel">
+            {g.beloftes.map((i) => (
+              <li key={i}>
+                <span className="vh-vink"><Check size={15} aria-hidden="true" /></span>
+                <span><strong>{BELOFTES[i].kop}</strong></span>
+              </li>
+            ))}
+          </ul>
+        </Tegel>
+      ))}
+    </Bento>
   );
 }
 
