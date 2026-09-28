@@ -21,14 +21,14 @@ export function OdooLogo({ className }: { className?: string }) {
   );
 }
 
-type Hoofdstuk = { wanneer: string; titel: string; tekst: string; breed: 4 | 6; soort?: "vlak" | "roze"; beeld?: React.ReactNode };
+type Hoofdstuk = { wanneer: string; titel: string; tekst: string; breed: 3 | 4 | 6; soort?: "vlak" | "roze"; beeld?: React.ReactNode };
 
 const HOOFDSTUKKEN: Hoofdstuk[] = [
   {
     wanneer: "2019",
     titel: "Afgestudeerd als grafisch vormgever.",
     tekst: "Stage en eerste contract bij Amsterdam Light Festival.",
-    breed: 4,
+    breed: 3,
     beeld: (
       <span className="h-hoofdstuk-logos" translate="no">
         <img src="/images/AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp" alt="Amsterdam Light Festival" loading="lazy" />
@@ -39,7 +39,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     wanneer: "2019 tot 2021",
     titel: "Werken voor mooie merken.",
     tekst: "Media en design voor Day & Nite, merkvernieuwing en social advertising voor AZ, motion design voor Supperclub.",
-    breed: 4,
+    breed: 3,
     beeld: (
       <span className="h-hoofdstuk-logos" translate="no">
         <img className="is-eigen" src="/images/AZ-LOGO-FLYER.webp" alt="AZ" loading="lazy" />
@@ -51,7 +51,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     wanneer: "November 2021",
     titel: "SocialNow.",
     tekst: "Na succes als freelancer begon ik mijn eigen bedrijf, met een team van specialisten om me heen.",
-    breed: 4,
+    breed: 3,
     beeld: (
       <span className="h-hoofdstuk-team" translate="no">
         {people.map((persoon) => (
@@ -64,7 +64,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     wanneer: "De omslag",
     titel: "Toen AI beelden kon maken, gooide ik mijn plan om.",
     tekst: "Ik verdiepte me in AI en development. Het persoonlijke bleef de kern.",
-    breed: 6,
+    breed: 3,
     soort: "roze",
     beeld: (
       <p className="h-hoofdstuk-motto" translate="no">
@@ -77,7 +77,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     wanneer: "Het afgelopen jaar",
     titel: "Van niets naar winstgevend en geautomatiseerd.",
     tekst: "We schaalden bedrijven vanaf nul op, met branding en advertenties op zelflerende systemen.",
-    breed: 6,
+    breed: 3,
     beeld: (
       <ul className="h-hoofdstuk-pillen">
         <li>Branding</li>
@@ -90,7 +90,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     wanneer: "Het OS",
     titel: "Alle data van je bedrijf in één systeem.",
     tekst: "Website en social media gekoppeld, met Odoo als laatste sleutel. Totale ontzorging, volledig inzicht.",
-    breed: 4,
+    breed: 3,
     beeld: (
       <span className="h-hoofdstuk-odoo" translate="no">
         <OdooLogo />
@@ -102,7 +102,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     wanneer: "De partner",
     titel: "Met Steef Komen maakten we het schaalbaar.",
     tekst: "Mijn accountant, Odoo-expert en datascientist. Samen bouwen we ook VASTIQ, een dataplatform voor vastgoed.",
-    breed: 4,
+    breed: 3,
     beeld: (
       <span className="h-hoofdstuk-partner" translate="no">
         <img className="h-hoofdstuk-steef" src="/images/Steef-Komen.webp" alt="Steef Komen" loading="lazy" />
@@ -114,7 +114,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     wanneer: "Nu",
     titel: "Van Brussel naar Odoo-partners wereldwijd.",
     tekst: "Het systeem van de Odoo-beurs brengen partners nu naar hun klanten. Het team en ik zijn ontzettend dankbaar.",
-    breed: 4,
+    breed: 3,
     beeld: (
       <img className="h-hoofdstuk-foto" src="/images/verhaal/team-atomium.webp" alt="Het SocialNow-team bij het Atomium in Brussel" width="900" height="1200" loading="lazy" />
     ),
@@ -165,7 +165,7 @@ export default function Verhaal() {
           </Tegel>
         )}
       </Bento>
-      <Bento className="h-verhaal-hoofdstukken" swipe>
+      <Bento className="h-verhaal-hoofdstukken">
         {HOOFDSTUKKEN.map((hoofdstuk) => (
           <Tegel key={hoofdstuk.titel} kop={hoofdstuk.wanneer} breed={hoofdstuk.breed} soort={hoofdstuk.soort ?? "vlak"} className="h-hoofdstuk">
             <h3 className="sn-tegel-titel">{hoofdstuk.titel}</h3>

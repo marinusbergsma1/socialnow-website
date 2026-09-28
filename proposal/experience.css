@@ -2934,3 +2934,18 @@ html {
 @media (max-width: 760px) {
   .sn-site .h-os-agent .sn-tegel-vlak > :first-child { width: 96px; height: 96px; }
 }
+
+/* 28 september 2026 (Marinus): "Bentogrids zei ik, niet zo'n vervelende slide." Compact: acht kleine tegels, vier per rij,
+   op de telefoon twee naast elkaar, alles in één oogopslag. */
+.sn-site .h-verhaal-hoofdstukken .sn-tegel-vlak { padding: 18px; gap: 8px; }
+.sn-site .h-verhaal-hoofdstukken .sn-tegel-titel { font-size: clamp(16px, 1.25vw, 19px); }
+.sn-site .h-verhaal-hoofdstukken .sn-tegel-tekst { font-size: 13.5px; line-height: 1.45; }
+.sn-site .h-verhaal-hoofdstukken .h-hoofdstuk-beeld { display: none; }
+.sn-site .h-verhaal-hoofdstukken .sn-bento-rooster { row-gap: 18px; }
+@media (max-width: 1099px) { .sn-site .h-verhaal-hoofdstukken .sn-tegel { grid-column: span 6; } }
+@media (max-width: 760px) {
+  .sn-site .h-verhaal-hoofdstukken .sn-bento-rooster { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 10px; }
+  .sn-site .h-verhaal-hoofdstukken .sn-tegel { grid-column: auto; }
+  .sn-site .h-verhaal-hoofdstukken .sn-tegel-tekst { display: none; }
+  .sn-site .h-verhaal-hoofdstukken .sn-tegel-kop { font-size: 13px; }
+}
