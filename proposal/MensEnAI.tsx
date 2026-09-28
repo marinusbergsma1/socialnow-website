@@ -7,7 +7,8 @@ import "./mens-en-ai.css";
 // dat elke vorm van intelligentie goed is. Het verschil: een verbindende laag van mensen die altijd voor je
 // klaarstaan. Iedereen kan nu gratis een bedrijf opzetten; onze pakketten en het OS op maat met onze experts
 // maken het verschil. Altijd eerst gratis bewijzen, echt menselijk contact, plus een vacature voor een partij
-// die die verbindende factor mee komt brengen nu duizenden bedrijven het OS gaan gebruiken.
+// die die verbindende factor mee komt brengen nu duizenden bedrijven het OS gaan gebruiken. De vacatures zelf
+// staan direct hieronder als bentotegels (VacaturesBento).
 
 const LAGEN = [
   {
@@ -117,28 +118,6 @@ export default function MensEnAI() {
         </div>
       </div>
 
-      <div className="h-mens-vacature">
-        <div>
-          <p className="h-mens-vacature-label"><i aria-hidden="true" />Vacature</p>
-          <h3>Word de verbindende factor.</h3>
-          <p>
-            Duizenden bedrijven gaan het OS gebruiken. Achter elk van die bedrijven hoort een mens die meedenkt en
-            klaarstaat. Daarvoor bouwen we een enorm team.
-          </p>
-          <p>
-            We zoeken een partij, een bureau of een groep mensen, die die verbindende laag samen met ons brengt:
-            persoonlijk contact, begeleiding en echte aandacht voor ondernemers.
-          </p>
-        </div>
-        <div className="h-mens-vacature-actie">
-          <ul>
-            <li>Je houdt van mensen en van ondernemers</li>
-            <li>Je ziet AI als hulp, niet als bedreiging</li>
-            <li>Je wilt meegroeien met duizenden bedrijven</li>
-          </ul>
-          <TextLink to="/vacatures">Bekijk alle vacatures</TextLink>
-        </div>
-      </div>
     </section>
   );
 }

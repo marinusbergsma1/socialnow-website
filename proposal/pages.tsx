@@ -18,6 +18,7 @@ import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
 import Verhaal from "./Verhaal";
 import MensEnAI from "./MensEnAI";
+import VacaturesBento from "./VacaturesBento";
 import { AuditTeaser } from "./AuditPage";
 import CustomerReviews from "./CustomerReviews";
 import FeaturedWork from "./FeaturedWork";
@@ -205,6 +206,7 @@ export function Home() {
       <ShowcaseFilms />
       {/* 28 september 2026 (Marinus): AI wordt verkeerd begrepen; mensen zijn de verbindende laag. Met vacature. */}
       <MensEnAI />
+      <VacaturesBento />
       <section className="h-section h-wrap" id="het-os">
         <Heading
           label="Vier onderdelen / Eén verbonden bedrijf"

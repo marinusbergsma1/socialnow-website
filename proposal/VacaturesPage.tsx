@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import { PageHeading } from "./ui";
-import { vacatures } from "./vacatures";
+import { vacatures, type Vacature } from "./vacatures";
 import { useLanguage } from "./i18n/context";
 import "./mens-en-ai.css";
 
@@ -12,6 +12,36 @@ function mailLink(titel: string) {
   return `mailto:info@socialnow.nl?subject=${encodeURIComponent(`Sollicitatie: ${titel}`)}`;
 }
 
+function soortNaarSchema(soort: string) {
+  const s = soort.toLowerCase();
+  const uit: string[] = [];
+  if (s.includes("loondienst")) uit.push("FULL_TIME");
+  if (s.includes("parttime")) uit.push("PART_TIME");
+  if (s.includes("freelance")) uit.push("CONTRACTOR");
+  return uit.length ? uit : ["OTHER"];
+}
+
+// Google for Jobs leest deze gegevens; Indeed gebruikt dezelfde teksten uit vacatures.ts.
+function JobPostings() {
+  const data = vacatures.map((v: Vacature) => ({
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: v.titel,
+    description: [v.kort, v.samen, ...v.wat, ...v.wie].filter(Boolean).map((regel) => `<p>${regel}</p>`).join(""),
+    datePosted: "2026-09-28",
+    validThrough: "2026-12-31",
+    employmentType: soortNaarSchema(v.soort),
+    hiringOrganization: { "@type": "Organization", name: "SocialNow", sameAs: "https://socialnow.nl", logo: "https://socialnow.nl/favicon.png" },
+    jobLocation: { "@type": "Place", address: { "@type": "PostalAddress", streetAddress: "Amstelstraat 43G", addressLocality: "Amsterdam", postalCode: "1017 DA", addressCountry: "NL" } },
+    ...(v.salarisMin && v.salarisMax
+      ? { baseSalary: { "@type": "MonetaryAmount", currency: "EUR", value: { "@type": "QuantitativeValue", minValue: v.salarisMin, maxValue: v.salarisMax, unitText: "MONTH" } } }
+      : {}),
+    directApply: true,
+    url: `https://socialnow.nl/vacatures#${v.slug}`,
+  }));
+  return <script type="application/ld+json" translate="no" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+}
+
 export function VacaturesPage() {
   const { t } = useLanguage();
   const [open, setOpen] = React.useState<string | null>(() =>
@@ -19,6 +49,7 @@ export function VacaturesPage() {
   );
   return (
     <>
+      <JobPostings />
       <PageHeading
         label="Werken bij SocialNow"
         title={
@@ -51,10 +82,14 @@ export function VacaturesPage() {
                   <span className="h-vac-meta">
                     <span>{v.soort}</span>
                     <span>{v.uren}</span>
+                    {v.salaris && <span className="h-vac-salaris">{v.salaris}</span>}
                   </span>
                   <span className="h-vac-plus" aria-hidden="true" />
                 </button>
                 <div className="h-vac-inhoud" id={`${v.slug}-inhoud`} hidden={!isOpen}>
+                  {(v.samen || v.plek) && (
+                    <p className="h-vac-samen">{[v.plek, v.samen].filter(Boolean).map((r) => t(r!)).join(". ")}</p>
+                  )}
                   <div>
                     <h3>Wat je doet</h3>
                     <ul>{v.wat.map((r) => <li key={r}>{r}</li>)}</ul>

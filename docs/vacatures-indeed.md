@@ -6,11 +6,55 @@ Bedrijf: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam. Solliciteren: info@soci
 
 ---
 
+## AI-expert betalingen
+
+- Dienstverband: Loondienst
+- Uren: 32 tot 40 uur
+- Locatie: Amsterdam, hybride
+- Salaris: €5.500 tot €7.500 bruto per maand
+- Link: https://socialnow.nl/vacatures#ai-expert-betalingen
+
+### Tekst
+
+Je bouwt de betaallaag van SocialNow OS: van offerte en factuur tot betaling en afletteren in Odoo, met AI die het werk doet.
+
+Je werkt direct met Marinus Bergsma en met Steef Komen, Head of Finance & Data.
+
+**Over SocialNow**
+
+SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en advertenties in één systeem, met AI die het werk doet. Wat ons anders maakt is de laag erbovenop: mensen die je kent en die altijd voor je klaarstaan. Wij geloven dat elke vorm van intelligentie goed is, en dat mensen het verschil maken. We bewijzen altijd eerst gratis wat we kunnen.
+
+**Wat je doet**
+
+- Je koppelt betaalproviders zoals Mollie, Stripe en Adyen aan het OS: iDEAL, kaart, SEPA-incasso en terugkerende betalingen.
+- Je laat AI facturen opstellen, betalingen herkennen en automatisch afletteren in Odoo.
+- Je bouwt signalering op betaalrisico: late betalers, afwijkende bedragen en mogelijke fraude.
+- Je zorgt dat alles klopt met PSD2, de AVG en de eisen van betaalproviders.
+- Je vertaalt wat een klant wil in een betaalstroom die in één tik werkt.
+
+**Wie je bent**
+
+- Minimaal vijf jaar ervaring met betalingen, fintech of financiële systemen.
+- Je hebt zelf gebouwd met een betaal-API en weet hoe webhooks, terugboekingen en afletteren werken.
+- Je werkt dagelijks met AI-modellen en weet waar ze wel en niet te vertrouwen zijn.
+- Kennis van Odoo Boekhouding of een ander ERP is een sterk pluspunt.
+- Je spreekt Nederlands of Engels op hoog niveau.
+
+**Wat wij bieden**
+
+- Een team dat elkaar kent en elkaar helpt
+- Werken met het nieuwste op het gebied van AI
+- Groeien met een bedrijf dat duizenden ondernemers gaat helpen
+
+Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: AI-expert betalingen".
+
+---
+
 ## Partner: de verbindende laag
 
 - Dienstverband: Bureau of team
 - Uren: Samenwerking
-- Locatie: Amsterdam, deels op afstand
+- Locatie: Amsterdam, hybride
 - Salaris: nog invullen
 - Link: https://socialnow.nl/vacatures#partner-verbindende-laag
 
@@ -45,11 +89,53 @@ Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Partn
 
 ---
 
+## Senior AI Engineer
+
+- Dienstverband: Loondienst
+- Uren: 32 tot 40 uur
+- Locatie: Amsterdam, hybride
+- Salaris: €5.000 tot €7.000 bruto per maand
+- Link: https://socialnow.nl/vacatures#senior-ai-engineer
+
+### Tekst
+
+Je maakt Milo slimmer: de AI-agents in SocialNow OS die offertes maken, content schrijven en data uit Odoo lezen.
+
+Je werkt direct met Marinus Bergsma en met Sid van Kalken, Head of Web Development.
+
+**Over SocialNow**
+
+SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en advertenties in één systeem, met AI die het werk doet. Wat ons anders maakt is de laag erbovenop: mensen die je kent en die altijd voor je klaarstaan. Wij geloven dat elke vorm van intelligentie goed is, en dat mensen het verschil maken. We bewijzen altijd eerst gratis wat we kunnen.
+
+**Wat je doet**
+
+- Je bouwt en verbetert agents die met tools werken: Odoo, e-mail, agenda en social kanalen.
+- Je meet de kwaliteit van antwoorden met vaste testsets voordat iets live gaat.
+- Je houdt kosten en snelheid per model in de gaten en kiest het juiste model per taak.
+- Je zorgt dat klantgegevens in de eigen werkruimte blijven.
+
+**Wie je bent**
+
+- Minimaal vijf jaar ervaring als software-engineer, waarvan twee met taalmodellen in productie.
+- Sterk in TypeScript en Node.js.
+- Ervaring met tool-use, retrieval en evaluatie van AI-uitvoer.
+- Je levert werk op dat je zelf hebt getest.
+
+**Wat wij bieden**
+
+- Een team dat elkaar kent en elkaar helpt
+- Werken met het nieuwste op het gebied van AI
+- Groeien met een bedrijf dat duizenden ondernemers gaat helpen
+
+Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Senior AI Engineer".
+
+---
+
 ## Customer Success Manager
 
 - Dienstverband: Loondienst
 - Uren: 32 tot 40 uur
-- Locatie: Amsterdam, deels op afstand
+- Locatie: Amsterdam, hybride
 - Salaris: nog invullen
 - Link: https://socialnow.nl/vacatures#customer-success-manager
 
@@ -87,7 +173,7 @@ Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Custo
 
 - Dienstverband: Loondienst
 - Uren: 24 tot 40 uur
-- Locatie: Amsterdam, deels op afstand
+- Locatie: Amsterdam, hybride
 - Salaris: nog invullen
 - Link: https://socialnow.nl/vacatures#onboarding-specialist
 
@@ -125,13 +211,15 @@ Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Onboa
 
 - Dienstverband: Loondienst of freelance
 - Uren: 32 tot 40 uur
-- Locatie: Amsterdam, deels op afstand
-- Salaris: nog invullen
+- Locatie: Amsterdam, hybride en bij klanten
+- Salaris: €4.000 tot €5.500 bruto per maand
 - Link: https://socialnow.nl/vacatures#odoo-consultant
 
 ### Tekst
 
 Je richt Odoo in voor onze klanten en verbindt het met het SocialNow OS.
+
+Je werkt met Michelle Yang, Head of Supply Chain & Operations, en met Steef Komen.
 
 **Over SocialNow**
 
@@ -163,7 +251,7 @@ Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Odoo 
 
 - Dienstverband: Loondienst
 - Uren: 32 tot 40 uur
-- Locatie: Amsterdam, deels op afstand
+- Locatie: Amsterdam, hybride
 - Salaris: nog invullen
 - Link: https://socialnow.nl/vacatures#account-manager
 
@@ -201,7 +289,7 @@ Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Accou
 
 - Dienstverband: Loondienst of parttime
 - Uren: 16 tot 40 uur
-- Locatie: Amsterdam, deels op afstand
+- Locatie: Amsterdam, hybride
 - Salaris: nog invullen
 - Link: https://socialnow.nl/vacatures#support-medewerker
 
@@ -239,7 +327,7 @@ Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Suppo
 
 - Dienstverband: Loondienst of freelance
 - Uren: 24 tot 40 uur
-- Locatie: Amsterdam, deels op afstand
+- Locatie: Amsterdam, hybride
 - Salaris: nog invullen
 - Link: https://socialnow.nl/vacatures#content-creator
 
@@ -277,7 +365,7 @@ Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Conte
 
 - Dienstverband: Loondienst
 - Uren: 32 tot 40 uur
-- Locatie: Amsterdam, deels op afstand
+- Locatie: Amsterdam, hybride
 - Salaris: nog invullen
 - Link: https://socialnow.nl/vacatures#performance-marketeer
 
@@ -315,7 +403,7 @@ Solliciteren: mail naar info@socialnow.nl met als onderwerp "Sollicitatie: Perfo
 
 - Dienstverband: Loondienst of freelance
 - Uren: 32 tot 40 uur
-- Locatie: Amsterdam, deels op afstand
+- Locatie: Amsterdam, hybride
 - Salaris: nog invullen
 - Link: https://socialnow.nl/vacatures#full-stack-developer
 
