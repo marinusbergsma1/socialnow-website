@@ -17,7 +17,7 @@ import ShowcaseFilms from "./ShowcaseFilms";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
 import Verhaal from "./Verhaal";
-import { Bento, BentoFilm, Tegel } from "./Bento";
+import { Bento, Tegel } from "./Bento";
 import Deuren from "./Deuren";
 import MensEnAI from "./MensEnAI";
 import VacaturesBento from "./VacaturesBento";
@@ -229,14 +229,6 @@ export function Home() {
           het verhaal: wie we zijn, wat je kunt doen, het bewijs, het vertrouwen, en dan pas het product in detail. */}
       <Verhaal />
       <Deuren />
-      <FeaturedWork />
-      {/* 28 september 2026 (Marinus): "What our clients say" mag weg van de homepage. */}
-      <LiveWebsites />
-      {/* 28 september 2026 (Marinus): AI wordt verkeerd begrepen; mensen zijn de verbindende laag. Met vacature. */}
-      <MensEnAI />
-      <VacaturesBento />
-      {/* Veiligheidsblok met video en sleutelbelofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
-      <VeiligheidBlok />
       {/* 28 september 2026 (Marinus): "alle onderdelen als kleine bentogrids, net zoals de homepage wanneer je daarop landt". */}
       <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} swipe>
         {agents.map((agent) => (
@@ -247,17 +239,12 @@ export function Home() {
             <div className="sn-tegel-onder"><TextLink to={`/het-os#${agent.id}`}>Ontdek dit onderdeel</TextLink></div>
           </Tegel>
         ))}
-        <Tegel kop="Bekijk de gedachte achter het OS" breed={6} soort="film">
-          <BentoFilm src="/video/os/os-odoo.mp4" poster="/video/os/os-odoo.webp" label="Bekijk de gedachte achter het OS" />
-          <span className="sn-tegel-badge">Voorbeeldgegevens</span>
-        </Tegel>
-        <Tegel kop="Van klantwerk naar een verbonden bedrijf" breed={6} soort="film">
-          <BentoFilm src="/video/os/os-kwh-case.mp4" poster="/video/os/os-kwh-case.webp" label="Van klantwerk naar een verbonden bedrijf" />
-          <span className="sn-tegel-badge">Voorbeeldgegevens</span>
-        </Tegel>
       </Bento>
-      {/* 28 september 2026 (Marinus): "dit onderdeel is niet meer zo belangrijk nu". See it in motion staat lager. */}
-      <ShowcaseFilms />
+      {/* 28 september 2026 (Marinus): AI wordt verkeerd begrepen; mensen zijn de verbindende laag. Met vacature. */}
+      <MensEnAI />
+      <VacaturesBento />
+      {/* Veiligheidsblok met video en sleutelbelofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
+      <VeiligheidBlok />
       <Bento id="diensten" label="Ook dit is SocialNow" titel={<>Van merk tot techniek.<br /><span>Alles sluit op elkaar aan.</span></>} swipe>
         {services.map((service) => (
           <Tegel key={service.id} kop={service.title} breed={4} className="h-dienst-tegel">
@@ -270,26 +257,7 @@ export function Home() {
           </Tegel>
         ))}
       </Bento>
-      <VideoSlider />
       <TrustStories />
-      <ImageSliders />
-      <Bento id="social" label="Gemaakt door ons team" titel={<>Human creativity.<br /><span>Powered by AI technology.</span></>} swipe>
-        {socialPosts.posts.map((post) => (
-          <Tegel key={post.beeld} kop={post.titel} breed={3} soort="foto" className="h-social-tegel">
-            <img src={`/images/social/${post.beeld}`} alt={post.titel} width={post.breed} height={post.hoog} loading="lazy" />
-          </Tegel>
-        ))}
-        <Tegel kop="Instagram" breed={3} soort="groen" className="h-social-volg">
-          <p className="sn-tegel-tekst">Campagnes, social content en merkwerk uit onze eigen collectie.</p>
-          <div className="sn-tegel-onder">
-            <a className="sn-btn3d h-button h-button-secondary" href={socialPosts.profiel} target="_blank" rel="noopener noreferrer">
-              <span className="sn-btn3d-sheen" />
-              <span>Volg ons op Instagram</span>
-              <ArrowUpRight size={16} aria-hidden="true" />
-            </a>
-          </div>
-        </Tegel>
-      </Bento>
       <Bento id="vragen" label="Goed om te weten" titel={<>Eerst helderheid.<br /><span>Dan aan de slag.</span></>}>
         <Tegel kop="Veelgestelde vragen" breed={8} className="h-faq-tegel">
           <Questions />
@@ -471,6 +439,28 @@ export function ProjectsPage() {
         }
         text="Van campagnes voor merken als AZ, Universal en Sony tot AI-websites en dataplatforms als VASTIQ. Ontdek het werk achter SocialNow."
       />
+      <FeaturedWork />
+      <LiveWebsites />
+      <VideoSlider />
+      <ImageSliders />
+      <ShowcaseFilms />
+      <Bento id="social" label="Gemaakt door ons team" titel={<>Human creativity.<br /><span>Powered by AI technology.</span></>} swipe>
+        {socialPosts.posts.map((post) => (
+          <Tegel key={post.beeld} kop={post.titel} breed={3} soort="foto" className="h-social-tegel">
+            <img src={`/images/social/${post.beeld}`} alt={post.titel} width={post.breed} height={post.hoog} loading="lazy" />
+          </Tegel>
+        ))}
+        <Tegel kop="Instagram" breed={3} soort="groen" className="h-social-volg">
+          <p className="sn-tegel-tekst">Campagnes, social content en merkwerk uit onze eigen collectie.</p>
+          <div className="sn-tegel-onder">
+            <a className="sn-btn3d h-button h-button-secondary" href={socialPosts.profiel} target="_blank" rel="noopener noreferrer">
+              <span className="sn-btn3d-sheen" />
+              <span>Volg ons op Instagram</span>
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+          </div>
+        </Tegel>
+      </Bento>
       <section className="h-wrap h-projects-list">
         <div className="h-filters" role="group" aria-label="Filter projecten">
           {[

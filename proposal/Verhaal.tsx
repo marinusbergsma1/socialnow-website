@@ -1,5 +1,6 @@
 import React from "react";
 import { people } from "./content";
+import { TextLink } from "./ui";
 import { Bento, BentoFilm, Tegel } from "./Bento";
 import { useLanguage } from "./i18n/context";
 
@@ -142,6 +143,7 @@ export default function Verhaal() {
         {film && (
           <Tegel kop="Mijn waarom" breed={12}>
             <Waarom />
+            <div className="sn-tegel-onder"><TextLink to="/projecten">Bekijk het werk achter mijn verhaal</TextLink></div>
           </Tegel>
         )}
       </Bento>

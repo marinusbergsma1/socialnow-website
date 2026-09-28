@@ -1,6 +1,7 @@
 import path from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { startVastiqPreview } from "./scripts/vastiq-preview.mjs";
 
 export default defineConfig({
   base: "/",
@@ -9,6 +10,16 @@ export default defineConfig({
     host: "0.0.0.0",
   },
   plugins: [
+    {
+      name: "local-vastiq-preview",
+      apply: "serve",
+      transformIndexHtml(html) {
+        return html.replace("frame-src 'self' https:", "frame-src 'self' https: http://127.0.0.1:4330");
+      },
+      async configureServer() {
+        await startVastiqPreview();
+      },
+    },
     react({ jsxImportSource: "@socialnow/i18n" }),
     {
       name: "socialnow-preview-routes",

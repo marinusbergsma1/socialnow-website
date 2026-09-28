@@ -29,12 +29,14 @@ const EMBED = new Set([
 // scrollbaar in het frame. Offline sites zonder kopie blijven alleen als case bestaan.
 const sites = webShowcaseProjects.filter((project) => !project.offline || project.previewUrl);
 // Sites die alleen vanaf socialnow.nl in een frame mogen. Elders (localhost, preview)
-// tonen we een bestaande websiteafbeelding in plaats van een geblokkeerd frame.
+// gebruikt de lokale ontwikkelserver een aparte loopback-preview; productie blijft direct live.
 const SOCIALNOW_ONLY = new Set(["vastiq-website"]);
 const onSocialNow =
   typeof location === "undefined" || /(^|\.)socialnow\.nl$/.test(location.hostname);
 const frameSrcOf = (project: Project) => {
-  if (SOCIALNOW_ONLY.has(project.slug) && !onSocialNow) return undefined;
+  if (SOCIALNOW_ONLY.has(project.slug) && !onSocialNow) {
+    return import.meta.env.DEV ? "http://127.0.0.1:4330/" : undefined;
+  }
   return project.previewUrl || (EMBED.has(project.slug) ? project.url : undefined);
 };
 // Alle frames worden vooraf geladen zodra het onderdeel in de buurt komt: eerst de
@@ -70,10 +72,6 @@ export default function LiveWebsites() {
   const project = sites[index];
   const frameSrc = frameSrcOf(project);
   const live = !!frameSrc;
-  const previewImage = project.fullPageScreenshot ||
-    (SOCIALNOW_ONLY.has(project.slug) && !onSocialNow
-      ? (mobile ? project.gallery?.[0] : `${import.meta.env.BASE_URL}images/cases/vastiq-desktop.webp`)
-      : undefined);
   const choose = (next: number) => {
     setIndex((next + sites.length) % sites.length);
   };
@@ -185,23 +183,20 @@ export default function LiveWebsites() {
               />
             );
           })}
-          {!live && previewImage && (
+          {!live && project.fullPageScreenshot && (
             <img
-              src={previewImage}
-              style={!project.fullPageScreenshot ? { height: "100%", objectFit: "contain" } : undefined}
-              alt={project.fullPageScreenshot
-                ? `Volledige paginaopname van de website van ${project.title}`
-                : `Websiteontwerp voor ${project.title}`}
+              src={project.fullPageScreenshot}
+              alt={`Volledige paginaopname van de website van ${project.title}`}
               loading="lazy"
               decoding="async"
             />
           )}
-          {((!live && !previewImage) || (live && !activeLoaded)) && (
+          {((!live && !project.fullPageScreenshot) || (live && !activeLoaded)) && (
             <div className="h-live-direct">
               <strong>{project.title}</strong>
               {!project.offline && (
                 <a className="sn-btn3d h-button" href={project.url} target="_blank" rel="noopener noreferrer">
-                  Open live website <ExternalLink size={18} />
+                  <span>Open live website</span><span><ExternalLink size={18} /></span>
                 </a>
               )}
               <span>{live ? "De live website wordt geladen." : "Deze website opent in een nieuw tabblad."}</span>
