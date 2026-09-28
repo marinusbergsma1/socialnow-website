@@ -4,6 +4,12 @@
 // (tak claude/vacatures, b359a38). AI-expert betalingen is weg: die functie vervult Sid (Marinus, 28 sep 2026).
 // Salaris alleen waar een voorstel is; de andere functies noemen het (nog) niet.
 
+// 28 september 2026 (Marinus): alle vacatures lopen via de eigen site; Steef Komen beheert vacatures en sollicitaties.
+// offer@ is een alias op info@ bij Hostinger.
+export const VACATURE_MAIL = "offer@socialnow.nl";
+export const vacatureMail = (titel: string) =>
+  `mailto:${VACATURE_MAIL}?subject=${encodeURIComponent(`Sollicitatie: ${titel}`)}`;
+
 export type Vacature = {
   slug: string;
   titel: string;

@@ -2,7 +2,7 @@
 
 Gegenereerd uit proposal/vacatures.ts. Per functie: titel, soort, uren en de volledige tekst om in Indeed te plakken.
 
-Bedrijf: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam. Solliciteren: steef@socialnow.nl of socialnow.nl/vacatures.
+Bedrijf: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam. Solliciteren: offer@socialnow.nl of socialnow.nl/vacatures. Contactpersoon: Steef Komen.
 
 ---
 
@@ -41,7 +41,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Partner: de verbindende laag".
+Solliciteren: mail naar offer@socialnow.nl met als onderwerp "Sollicitatie: Partner: de verbindende laag".
 
 ---
 
@@ -83,7 +83,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Senior AI Engineer".
+Solliciteren: mail naar offer@socialnow.nl met als onderwerp "Sollicitatie: Senior AI Engineer".
 
 ---
 
@@ -121,7 +121,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Customer Success Manager".
+Solliciteren: mail naar offer@socialnow.nl met als onderwerp "Sollicitatie: Customer Success Manager".
 
 ---
 
@@ -159,7 +159,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Onboarding Specialist".
+Solliciteren: mail naar offer@socialnow.nl met als onderwerp "Sollicitatie: Onboarding Specialist".
 
 ---
 
@@ -199,7 +199,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Odoo Consultant".
+Solliciteren: mail naar offer@socialnow.nl met als onderwerp "Sollicitatie: Odoo Consultant".
 
 ---
 
@@ -237,7 +237,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Account Manager".
+Solliciteren: mail naar offer@socialnow.nl met als onderwerp "Sollicitatie: Account Manager".
 
 ---
 
@@ -275,7 +275,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Supportmedewerker".
+Solliciteren: mail naar offer@socialnow.nl met als onderwerp "Sollicitatie: Supportmedewerker".
 
 ---
 
@@ -313,7 +313,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Content Creator".
+Solliciteren: mail naar offer@socialnow.nl met als onderwerp "Sollicitatie: Content Creator".
 
 ---
 
@@ -351,7 +351,7 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Performance Marketeer".
+Solliciteren: mail naar offer@socialnow.nl met als onderwerp "Sollicitatie: Performance Marketeer".
 
 ---
 
@@ -389,5 +389,5 @@ SocialNow bouwt een gratis OS voor ondernemers: website, CRM, content en adverte
 - Werken met het nieuwste op het gebied van AI
 - Groeien met een bedrijf dat duizenden ondernemers gaat helpen
 
-Solliciteren: mail naar steef@socialnow.nl met als onderwerp "Sollicitatie: Full-stack Developer".
+Solliciteren: mail naar offer@socialnow.nl met als onderwerp "Sollicitatie: Full-stack Developer".
 
