@@ -10,16 +10,22 @@ export const webShowcaseProjects: Project[] = [
     client: "VASTIQ",
     year: "2026",
     services: ["AI Platform Development", "Brand Identity", "Full-Stack Development", "Data Intelligence"],
-    description: "Real-estate intelligence platform voor de Nederlandse markt: woningwaarderingen op echte data, 12-maands prognoses en onderhandelingsinzicht. Platform én merkidentiteit uit één hand.",
+    // 28 september 2026: tekst gelijk aan vastiq.ai (gemeten die dag). De eerdere "12-maands
+    // prognoses" staan niet op de site en zijn eruit.
+    description: "Real-estate intelligence voor de Nederlandse markt: een marktconforme waarde-indicatie op actuele aanbodsdata, woningkenmerken en buurtcontext, voor kopers, eigenaren en professionals. Een dataplatform met Komen Consultancy; SocialNow bouwde platform en merk.",
     image: `${import.meta.env.BASE_URL}images/cases/vastiq-hero.webp`,
     align: 'left',
     // VASTIQ heeft socialnow.nl toegang gegeven via frame-ancestors, dus de echte site
     // draait in de carrousel. Geen kopie meer op socialnow.nl: dat was dubbele content.
     url: "https://vastiq.ai/",
-    gallery: [],
+    gallery: [
+      `${import.meta.env.BASE_URL}images/cases/vastiq-mobiel-1.webp`,
+      `${import.meta.env.BASE_URL}images/cases/vastiq-mobiel-2.webp`,
+      `${import.meta.env.BASE_URL}images/cases/vastiq-mobiel-3.webp`
+    ],
     metrics: [
-      { label: "Waarderingen", value: "Live data", color: "#25D366" },
-      { label: "Prognoses", value: "12 mnd", color: "#00A3E0" },
+      { label: "Waarde-indicatie", value: "Actueel aanbod", color: "#25D366" },
+      { label: "Van adres naar besluit", value: "4 stappen", color: "#00A3E0" },
       { label: "Platform + merk", value: "1 systeem", color: "#F7E644" }
     ]
   },
@@ -36,7 +42,11 @@ export const webShowcaseProjects: Project[] = [
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/kwhgarant-full.webp`,
     align: 'left',
     url: "https://kwhgarant.nl",
-    gallery: [],
+    gallery: [
+      `${import.meta.env.BASE_URL}images/cases/kwhgarant-mobiel-1.webp`,
+      `${import.meta.env.BASE_URL}images/cases/kwhgarant-mobiel-2.webp`,
+      `${import.meta.env.BASE_URL}images/cases/kwhgarant-mobiel-3.webp`
+    ],
     metrics: [
       { label: "Opbrengst vooraf", value: "Per maand", color: "#25D366" },
       { label: "Beoordeling", value: "4,4 via Solvari", color: "#00A3E0" },
@@ -51,16 +61,23 @@ export const webShowcaseProjects: Project[] = [
     client: "Il Gordo Amsterdam",
     year: "2026",
     services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "Brand Storytelling"],
-    description: "Comfort food restaurant in hartje Amsterdam. Strakke, hongerige website met sterke food-fotografie en directe reservering.",
+    // 28 september 2026: reserveren kan niet op de site; bestellen wel (WhatsApp, Uber Eats, bellen).
+    description: "Italiaans streetfood aan de Amstelstraat in Amsterdam. Een website met de hele kaart en prijzen, bestellen via WhatsApp met een kant-en-klaar bericht, Uber Eats en een live Instagram-feed.",
     image: `${import.meta.env.BASE_URL}screenshots/ilgordo-hero.webp`,
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/ilgordo-full.webp`,
     align: 'left',
     url: "https://ilgordo.nl",
-    gallery: [],
+    gallery: [
+      `${import.meta.env.BASE_URL}images/cases/ilgordo-mobiel-1.webp`,
+      `${import.meta.env.BASE_URL}images/cases/ilgordo-mobiel-2.webp`,
+      `${import.meta.env.BASE_URL}images/cases/ilgordo-mobiel-3.webp`
+    ],
+    // Gemeten 28 september 2026, Lighthouse 12.8 desktop, mediaan van drie runs. De oude waarden
+    // ("<1.2s", "98+" mobiel) klopten niet: mobiel prestaties is 65.
     metrics: [
-      { label: "Laadtijd", value: "<1.2s", color: "#25D366" },
-      { label: "Mobiele Score", value: "98+", color: "#00A3E0" },
-      { label: "Doorlooptijd", value: "2 weken", color: "#F7E644" }
+      { label: "SEO", value: "100", color: "#25D366" },
+      { label: "Best practices", value: "100", color: "#00A3E0" },
+      { label: "Prestaties desktop", value: "93", color: "#F7E644" }
     ]
   },
   {
@@ -71,16 +88,21 @@ export const webShowcaseProjects: Project[] = [
     client: "VDZ Brigade",
     year: "2026",
     services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "Responsive Design"],
-    description: "Een complete website met AI-gestuurde technologie. Modern platform met responsief design en snelle laadtijden.",
+    description: "Website en huisstijl voor De Verduurzaming Brigade: isolatie, warmtepompen, thuisbatterijen en kozijnen, met een werkwijze in vier stappen en gratis advies direct bereikbaar.",
     image: `${import.meta.env.BASE_URL}screenshots/vdz-brigade-hero.webp`,
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/vdz-brigade-full.webp`,
     align: 'right',
     url: "https://vdz-brigade.nl",
-    gallery: [],
+    gallery: [
+      `${import.meta.env.BASE_URL}images/cases/vdz-brigade-mobiel-1.webp`,
+      `${import.meta.env.BASE_URL}images/cases/vdz-brigade-mobiel-2.webp`,
+      `${import.meta.env.BASE_URL}images/cases/vdz-brigade-mobiel-3.webp`
+    ],
+    // Gemeten 28 september 2026, Lighthouse 12.8 desktop, mediaan van drie runs.
     metrics: [
-      { label: "Laadtijd", value: "<1.5s", color: "#25D366" },
-      { label: "Mobiele Score", value: "95+", color: "#00A3E0" },
-      { label: "Doorlooptijd", value: "3 weken", color: "#F7E644" }
+      { label: "Prestaties desktop", value: "92", color: "#25D366" },
+      { label: "Best practices", value: "96", color: "#00A3E0" },
+      { label: "SEO", value: "92", color: "#F7E644" }
     ]
   },
   {
