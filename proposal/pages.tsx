@@ -28,7 +28,7 @@ import LiveWebsites from "./LiveWebsites";
 import TrustStories from "./TrustStories";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import BrandGlobe from "./BrandGlobe";
-import OsEntry, { CLAIM_URL, InstallKnop, REVIEWS_URL } from "./os-entry";
+import OsEntry, { CLAIM_URL, OsDock, REVIEWS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
 // Al het contact loopt eerst via Steef (Marinus, 28 september 2026).
 const contactPersoon = people.find((p) => p.name === "Steef Komen") ?? people[0];
@@ -207,15 +207,7 @@ export function Home() {
             </div>
           </div>
           <div className="os-entry">
-            <div className="os-actions">
-              {/* 26 september 2026 (Marinus): "groene vulling zoals eerst Try the OS, meer rond en niet zo lang". */}
-              <a className="os-claim sn-btn3d h-button h-login-rond" href="https://app.socialnow.nl/login/">
-                <span className="sn-btn3d-sheen" />
-                <span>{translate("Log in op je gratis OS", getoond)}</span>
-                <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
-              </a>
-              <InstallKnop />
-            </div>
+            <OsDock />
           </div>
           </div>
           <HeroFilm />

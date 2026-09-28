@@ -1,4 +1,5 @@
 import React from "react";
+import { HeroReview } from "./CustomerReviews";
 import { people } from "./content";
 import { TextLink } from "./ui";
 import { Bento, BentoFilm, Tegel } from "./Bento";
@@ -35,7 +36,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     breed: 3,
     beeld: (
       <span className="h-hoofdstuk-logos" translate="no">
-        <img src="/images/AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp" alt="Amsterdam Light Festival" loading="lazy" />
+        <img className="is-horizon" src="/images/HORIZON-COLLEGE-LOGO.jpg" alt="Horizon College" loading="lazy" />
       </span>
     ),
   },
@@ -143,6 +144,7 @@ export default function Verhaal() {
         {film && (
           <Tegel kop="Mijn waarom" breed={12}>
             <Waarom />
+            <HeroReview />
             <div className="sn-tegel-onder"><TextLink to="/projecten">Bekijk het werk achter mijn verhaal</TextLink></div>
           </Tegel>
         )}
