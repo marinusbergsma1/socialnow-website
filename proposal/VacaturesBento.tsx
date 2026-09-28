@@ -3,64 +3,85 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { vacatures, type Vacature } from "./vacatures";
 import { useLanguage } from "./i18n/context";
+import { Bento, Tegel } from "./Bento";
 import "./vacatures-bento.css";
 
-// 28 september 2026 (Marinus, via de Indeed-chat): vacatures als bentotegels op de homepage, in de taal van het
-// landingsscherm. Eén grote tegel (AI-expert betalingen), twee kleinere en een brede balk naar /vacatures.
-// Ontwerp uit claude/vacatures (b359a38), omgezet naar vacatures.ts. Zodra de homepage-regie een gedeelde
-// tegelklasse heeft, gaat .h-vb-tegel daarop over.
+// 28 september 2026 (Marinus, via de Indeed-chat): vacatures als bentotegels op de homepage, in de gedeelde
+// tegeltaal uit Bento.tsx. Eén grote tegel (partner verbindende laag), twee kleinere en een brede balk naar /vacatures.
 
-const KLEIN = ["partner-verbindende-laag", "senior-ai-engineer"];
+// De partner voor de verbindende laag is de grote tegel. AI-expert betalingen is weg: die functie vervult Sid.
+const GROOT = "partner-verbindende-laag";
+const KLEIN = [
+  { slug: "senior-ai-engineer", kop: "Het OS slimmer maken" },
+  { slug: "customer-success-manager", kop: "Altijd voor klanten klaar" },
+];
 
 function mailLink(titel: string) {
-  return `mailto:info@socialnow.nl?subject=${encodeURIComponent(`Sollicitatie: ${titel}`)}`;
+  return `mailto:steef@socialnow.nl?subject=${encodeURIComponent(`Sollicitatie: ${titel}`)}`;
 }
 
-function Tegel({ vacature, groot }: { vacature: Vacature; groot?: boolean }) {
+function Inhoud({ vacature, groot }: { vacature: Vacature; groot?: boolean }) {
   const { t } = useLanguage();
-  const feiten = [vacature.uren, vacature.salaris].filter(Boolean) as string[];
+  const feiten = [vacature.plek, vacature.uren, vacature.salaris].filter(Boolean) as string[];
   return (
-    <article className={groot ? "h-vb-tegel h-vb-groot" : "h-vb-tegel"}>
-      <p className="h-vb-plek">{vacature.plek ?? vacature.soort}</p>
-      <h3>{vacature.titel}</h3>
-      <p className="h-vb-kort">{vacature.kort}</p>
+    <>
+      <p className={groot ? "sn-tegel-titel h-vb-groot-titel" : "sn-tegel-titel h-vb-titel"}>{vacature.titel}</p>
+      <p className="sn-tegel-tekst">{vacature.kort}</p>
       <ul className="h-vb-feiten">
-        {feiten.map((f) => <li key={f}>{f}</li>)}
+        {(groot ? feiten : feiten.slice(1)).map((f) => <li key={f}>{f}</li>)}
       </ul>
       {groot && (
-        <>
-          <ul className="h-vb-lijst">
-            {vacature.wat.slice(0, 3).map((regel) => <li key={regel}>{regel}</li>)}
-          </ul>
-          {vacature.samen && <p className="h-vb-samen">{vacature.samen}</p>}
-        </>
+        <ul className="h-vb-lijst">
+          {vacature.wat.slice(0, 3).map((regel) => <li key={regel}>{regel}</li>)}
+        </ul>
       )}
-      <div className="h-vb-acties">
-        <Link className="h-vb-lees" to={`/vacatures#${vacature.slug}`}>Lees meer</Link>
-        <a className="h-vb-knop" href={mailLink(t(vacature.titel))}>
-          Solliciteer direct
-          <ArrowUpRight size={15} aria-hidden="true" />
+      <div className="sn-tegel-onder">
+        <a className="os-claim sn-btn3d h-button" href={mailLink(t(vacature.titel))}>
+          <span className="sn-btn3d-sheen" />
+          <span>Solliciteer direct</span>
         </a>
+        <Link className="h-text-link" to={`/vacatures#${vacature.slug}`}>
+          Lees meer
+          <ArrowUpRight size={17} aria-hidden="true" />
+        </Link>
       </div>
-    </article>
+    </>
   );
 }
 
 export default function VacaturesBento() {
-  const [eerste] = vacatures;
-  const klein = KLEIN.map((slug) => vacatures.find((v) => v.slug === slug)).filter(Boolean) as Vacature[];
+  const eerste = vacatures.find((v) => v.slug === GROOT) ?? vacatures[0];
   return (
-    <section className="h-wrap h-vb" id="vacatures" aria-labelledby="vb-kop">
-      <p className="h-vb-kop" id="vb-kop">Wij zoeken</p>
-      <div className="h-vb-bento">
-        <Tegel vacature={eerste} groot />
-        {klein.map((v) => <Tegel key={v.slug} vacature={v} />)}
-        <Link className="h-vb-tegel h-vb-open" to="/vacatures">
-          <span>Alle vacatures</span>
+    <Bento
+      id="vacatures"
+      label="Werken bij SocialNow"
+      className="h-vb"
+      swipe
+      titel={
+        <>
+          Wij zoeken mensen.
+          <br />
+          <span>Voor duizenden bedrijven.</span>
+        </>
+      }
+    >
+      <Tegel kop="Partner gezocht" breed={8} hoog={2} soort="groen">
+        <Inhoud vacature={eerste} groot />
+      </Tegel>
+      {KLEIN.map(({ slug, kop }) => {
+        const v = vacatures.find((x) => x.slug === slug);
+        return v ? (
+          <Tegel key={slug} kop={kop} breed={4}>
+            <Inhoud vacature={v} />
+          </Tegel>
+        ) : null;
+      })}
+      <Tegel kop="Alle vacatures" breed={12}>
+        <Link className="h-vb-balk" to="/vacatures">
           <strong>Word de verbindende laag achter duizenden bedrijven.</strong>
           <ArrowUpRight size={22} aria-hidden="true" />
         </Link>
-      </div>
-    </section>
+      </Tegel>
+    </Bento>
   );
 }
