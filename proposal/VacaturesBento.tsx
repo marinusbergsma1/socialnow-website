@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { vacatures, type Vacature } from "./vacatures";
+import { vacatures, vacatureMail, type Vacature } from "./vacatures";
 import { useLanguage } from "./i18n/context";
 import { Bento, Tegel } from "./Bento";
 import "./vacatures-bento.css";
@@ -15,10 +15,6 @@ const KLEIN = [
   { slug: "senior-ai-engineer", kop: "Het OS slimmer maken" },
   { slug: "customer-success-manager", kop: "Altijd voor klanten klaar" },
 ];
-
-function mailLink(titel: string) {
-  return `mailto:steef@socialnow.nl?subject=${encodeURIComponent(`Sollicitatie: ${titel}`)}`;
-}
 
 function Inhoud({ vacature, groot }: { vacature: Vacature; groot?: boolean }) {
   const { t } = useLanguage();
@@ -36,7 +32,7 @@ function Inhoud({ vacature, groot }: { vacature: Vacature; groot?: boolean }) {
         </ul>
       )}
       <div className="sn-tegel-onder">
-        <a className="os-claim sn-btn3d h-button" href={mailLink(t(vacature.titel))}>
+        <a className="os-claim sn-btn3d h-button" href={vacatureMail(t(vacature.titel))}>
           <span className="sn-btn3d-sheen" />
           <span>Solliciteer direct</span>
         </a>

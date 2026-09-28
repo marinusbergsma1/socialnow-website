@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
+import { CONTACT_MAIL, heeftWhatsApp, mailLink, whatsappLink } from "./aanvragen";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -7,7 +8,6 @@ import {
   Mail,
   MapPin,
   MessageCircle,
-  Phone,
 } from "lucide-react";
 import { HeroTitle } from "./styles";
 import { MiloMotion, miloPoster } from "./motion";
@@ -30,6 +30,8 @@ import { VideoSlider, ImageSliders } from "./MediaSliders";
 import BrandGlobe from "./BrandGlobe";
 import OsEntry, { CLAIM_URL, InstallKnop, REVIEWS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
+// Al het contact loopt eerst via Steef (Marinus, 28 september 2026).
+const contactPersoon = people.find((p) => p.name === "Steef Komen") ?? people[0];
 import Pricing from "./Pricing";
 import { allPosts } from "../data/posts";
 import socialPosts from "../public/data/socialposts.json";
@@ -277,14 +279,17 @@ export function Home() {
           <p className="sn-tegel-titel">Stuur ons gewoon een bericht.</p>
           <p className="sn-tegel-tekst">Je krijgt antwoord van een mens uit ons team.</p>
           <div className="sn-tegel-onder">
-            <a className="os-claim sn-btn3d h-button" href="https://wa.me/31637404577" target="_blank" rel="noopener noreferrer">
+            {heeftWhatsApp && (
+              <a className="os-claim sn-btn3d h-button" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+                <span className="sn-btn3d-sheen" />
+                <MessageCircle size={17} aria-hidden="true" />
+                <span>Stuur een WhatsApp</span>
+              </a>
+            )}
+            <a className="os-claim sn-btn3d h-button" href={mailLink()}>
               <span className="sn-btn3d-sheen" />
-              <MessageCircle size={17} aria-hidden="true" />
-              <span>Stuur een WhatsApp</span>
-            </a>
-            <a className="h-text-link" href="mailto:info@socialnow.nl">
-              <Mail size={16} aria-hidden="true" />
-              info@socialnow.nl
+              <Mail size={17} aria-hidden="true" />
+              <span translate="no">{CONTACT_MAIL}</span>
             </a>
           </div>
         </Tegel>
@@ -836,7 +841,7 @@ export function ContactPage() {
     const data = new FormData(event.currentTarget);
     const subject = `${t("Kennismaken")}: ${data.get("subject") || "SocialNow"}`;
     const body = `${t("Naam")}: ${data.get("name")}\n${t("E-mail")}: ${data.get("email")}\n${t("Bedrijf")}: ${data.get("company")}\n\n${data.get("message")}`;
-    const href = `mailto:info@socialnow.nl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const href = `mailto:${CONTACT_MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setDraft(href);
     setPrepared(true);
     window.location.href = href;
@@ -858,42 +863,33 @@ export function ContactPage() {
         <div>
           <div className="h-contact-person">
             <img
-              src={`/images/${people[0].image}`}
-              alt={people[0].name}
+              src={`/images/${contactPersoon.image}`}
+              alt={contactPersoon.name}
               width="180"
               height="180"
             />
             <div>
-              <h2>Begin bij Marinus.</h2>
-              <p>Founder & CEO</p>
+              <h2>Begin bij Steef.</h2>
+              <p translate="no">{contactPersoon.role}</p>
             </div>
           </div>
           <div className="h-contact-methods">
-            <a href="mailto:info@socialnow.nl">
+            <a href={mailLink()}>
               <Mail size={21} />
               <span>
-                <small>E-mail</small>info@socialnow.nl
+                <small>E-mail</small>{CONTACT_MAIL}
               </span>
               <ArrowUpRight size={19} />
             </a>
-            <a
-              href="https://wa.me/31637404577"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MessageCircle size={21} />
-              <span>
-                <small>WhatsApp</small>Stuur ons een bericht
-              </span>
-              <ArrowUpRight size={19} />
-            </a>
-            <a href="tel:+31637404577">
-              <Phone size={21} />
-              <span>
-                <small>Telefoon</small>+31 6 3740 4577
-              </span>
-              <ArrowUpRight size={19} />
-            </a>
+            {heeftWhatsApp && (
+              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+                <MessageCircle size={21} />
+                <span>
+                  <small>WhatsApp</small>Stuur ons een bericht
+                </span>
+                <ArrowUpRight size={19} />
+              </a>
+            )}
             <div>
               <MapPin size={21} />
               <span>
@@ -966,8 +962,7 @@ export function ContactPage() {
               </p>
               <a href={draft}>Open het concept opnieuw</a>
               <p>
-                Geen e-mailapp ingesteld? Mail naar info@socialnow.nl of stuur
-                een WhatsApp.
+                Geen e-mailapp ingesteld? Mail naar steef@socialnow.nl.
               </p>
             </div>
           )}

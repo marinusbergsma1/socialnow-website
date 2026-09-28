@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { heeftWhatsApp, whatsappLink } from "./aanvragen";
 import {
   ArrowUpRight,
   Instagram,
@@ -69,14 +70,16 @@ export default function BrandFooter() {
               >
                 <Linkedin size={18} />
               </a>
-              <a
-                href="https://wa.me/31637404577"
-                aria-label="Contact via WhatsApp"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle size={18} />
-              </a>
+              {heeftWhatsApp && (
+                <a
+                  href={whatsappLink()}
+                  aria-label="Contact via WhatsApp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MessageCircle size={18} />
+                </a>
+              )}
             </div>
           </div>
         </div>

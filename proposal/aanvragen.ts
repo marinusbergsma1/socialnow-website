@@ -1,6 +1,15 @@
 import type { Language } from "./i18n/context";
 
-export const WHATSAPP_NUMMER = "31637404577";
+// 28 september 2026 (Marinus): "Haal mijn whatsapp van de website af en laat al het contact eerst via Steef gaan."
+// Vul hier Steefs WhatsApp-nummer in (landcode zonder +, bijvoorbeeld 316...). Tot dan loopt alles per e-mail naar Steef.
+export const WHATSAPP_NUMMER = "";
+export const CONTACT_MAIL = "steef@socialnow.nl";
+export const heeftWhatsApp = WHATSAPP_NUMMER !== "";
+export const whatsappLink = (tekst = "") =>
+  heeftWhatsApp
+    ? `https://wa.me/${WHATSAPP_NUMMER}${tekst ? `?text=${encodeURIComponent(tekst)}` : ""}`
+    : `mailto:${CONTACT_MAIL}${tekst ? `?body=${encodeURIComponent(tekst)}` : ""}`;
+export const mailLink = (onderwerp = "") => `mailto:${CONTACT_MAIL}${onderwerp ? `?subject=${encodeURIComponent(onderwerp)}` : ""}`;
 export type AanvraagSoort = "website" | "os";
 
 const woorden: Record<Language, { website: string; os: string; first: string; last: string; email: string; phone: string; company: string; site: string; example: string; what: string; issue: string }> = {
@@ -24,5 +33,7 @@ export function aanvraagBericht(soort: AanvraagSoort, taal: Language, gegevens: 
 }
 
 export function aanvraagWhatsApp(soort: AanvraagSoort, taal: Language, gegevens: AanvraagGegevens = {}): string {
-  return `https://wa.me/${WHATSAPP_NUMMER}?text=${encodeURIComponent(aanvraagBericht(soort, taal, gegevens))}`;
+  const bericht = aanvraagBericht(soort, taal, gegevens);
+  if (heeftWhatsApp) return `https://wa.me/${WHATSAPP_NUMMER}?text=${encodeURIComponent(bericht)}`;
+  return `mailto:${CONTACT_MAIL}?subject=${encodeURIComponent(woorden[taal][soort])}&body=${encodeURIComponent(bericht)}`;
 }

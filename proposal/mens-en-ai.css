@@ -67,3 +67,10 @@
 }
 .sn-site .h-vac-meta .h-vac-salaris { color: #76e7a2; font-weight: 600; }
 .sn-site .h-vac-samen { grid-column: 1 / -1; margin: 0; font-size: 15px; line-height: 1.55; color: #9aa4ad; }
+.sn-site .h-vac-contact { display: flex; gap: 18px; align-items: flex-start; margin: 0 0 24px; padding: clamp(20px, 2.2vw, 28px); border-radius: 22px; border: 1px solid #1f5a3a; background: radial-gradient(90% 160% at 0% 0%, rgba(37,211,102,.12), transparent 60%), #07110c; }
+.sn-site .h-vac-contact img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid #25d366; flex: none; }
+.sn-site .h-vac-contact p { margin: 0 0 10px; font-size: 15.5px; line-height: 1.55; color: #c3ccd4; }
+.sn-site .h-vac-contact-naam { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.sn-site .h-vac-contact-naam strong { font-size: 18px; color: #fff; }
+.sn-site .h-vac-contact-naam span { font-size: 14px; color: #9aa4ad; }
+@media (max-width: 560px) { .sn-site .h-vac-contact { flex-direction: column; } }

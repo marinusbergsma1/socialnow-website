@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowUpRight, Mail, MessageCircle } from "lucide-react";
+import { CONTACT_MAIL, heeftWhatsApp, whatsappLink } from "./aanvragen";
 import { useLanguage } from "./i18n/context";
 import { OdooLogo } from "./Verhaal";
 import { Bento, Tegel } from "./Bento";
@@ -8,7 +9,8 @@ import { Bento, Tegel } from "./Bento";
 // implementatiepartner die het gesprek aan wil gaan over wat die voor uw klanten kan betekenen, net als deze bedrijven die u
 // voorgingen (logo's die ook in de winnervideo komen te staan), neem dan contact op met Michelle Yang."
 // Twee deuren direct na het verhaal. De logo's zijn de vijf finalisten van de winactie (bron: oxp26-eindvideo/montage/assets/logos/BRON.md).
-// michelle@socialnow.nl bestaat nog niet (het mailpakket heeft één plek, info@); tot die er is gaat de mail naar info@ t.a.v. Michelle.
+// 28 september 2026 (Marinus): "laat al het contact eerst via Steef gaan". De mail gaat naar het contactadres uit aanvragen.ts,
+// met Michelle in het onderwerp; de WhatsApp-knop verschijnt pas als Steefs nummer daar staat.
 
 const PARTNERS = [
   { naam: "KoderXpert Technologies", logo: "/images/partners/koderxpert.webp", breed: 242, hoog: 70 },
@@ -18,8 +20,7 @@ const PARTNERS = [
   { naam: "Eusol", logo: "/images/partners/eusol.png", breed: 338, hoog: 98 },
 ];
 
-const WHATSAPP = "https://wa.me/31637404577?text=";
-const MAIL = "mailto:info@socialnow.nl?subject=";
+const MAIL = `mailto:${CONTACT_MAIL}?subject=`;
 
 function SalesforceLogo() {
   return (
@@ -60,11 +61,13 @@ export default function Deuren() {
           <p><strong translate="no">Michelle Yang</strong><span translate="no">Head of Implementation Partnerships</span></p>
         </div>
         <div className="sn-tegel-onder">
-          <a className="sn-btn3d h-button h-deur-knop is-partner" href={WHATSAPP + encodeURIComponent(bericht)} target="_blank" rel="noopener noreferrer">
-            <span className="sn-btn3d-sheen" />
-            <MessageCircle size={17} aria-hidden="true" />
-            <span>Stuur een WhatsApp</span>
-          </a>
+          {heeftWhatsApp && (
+            <a className="sn-btn3d h-button h-deur-knop is-partner" href={whatsappLink(bericht)} target="_blank" rel="noopener noreferrer">
+              <span className="sn-btn3d-sheen" />
+              <MessageCircle size={17} aria-hidden="true" />
+              <span>Stuur een WhatsApp</span>
+            </a>
+          )}
           <a className="h-text-link h-deur-mail" href={MAIL + encodeURIComponent(onderwerp)}>
             <Mail size={16} aria-hidden="true" />
             Mail Michelle

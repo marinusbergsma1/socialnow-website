@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { CONTACT_MAIL, heeftWhatsApp, mailLink, whatsappLink } from "./aanvragen";
 import {
   ArrowRight,
   ArrowUp,
@@ -318,7 +319,7 @@ export function Closing() {
     <OsEntry showProof={false} />
     <TeamTrust />
     <TextLink to="/contact?onderwerp=Custom%20OS">Samen verder met jouw Custom OS</TextLink>
-    <div className="h-final-contact"><a href="mailto:info@socialnow.nl">info@socialnow.nl</a><a href="https://wa.me/31637404577" target="_blank" rel="noopener noreferrer">WhatsApp <MessageCircle size={14} aria-hidden="true" /></a></div>
+    <div className="h-final-contact"><a href={mailLink()}>{CONTACT_MAIL}</a>{heeftWhatsApp && <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">WhatsApp <MessageCircle size={14} aria-hidden="true" /></a>}</div>
   </section>;
 }
 // Woorden die in elke vraag voorkomen en dus niets onderscheiden.
@@ -372,8 +373,8 @@ function zoekwoorden(zin: string): string[][] {
 // staat uitsluitend als secret in de Worker zelf en komt nooit in de browser.
 // Zie worker/README.md.
 const MILO_API = "https://milo-chat.socialnow-marinus.workers.dev";
-const WHATSAPP = "https://wa.me/31637404577";
-const MAIL = "mailto:info@socialnow.nl";
+const WHATSAPP = whatsappLink();
+const MAIL = mailLink();
 
 type Bericht = {
   van: "milo" | "bezoeker";
@@ -400,7 +401,7 @@ function uitVragenlijst(vraag: string, t: (tekst: string) => string): Bericht | 
     }
   }
   if (!beste) return null;
-  return { van: "milo", tekst: t(beste.answer), links: [{ label: t("App Marinus"), href: WHATSAPP }] };
+  return { van: "milo", tekst: t(beste.answer), links: [{ label: t(heeftWhatsApp ? "App Steef" : "Mail Steef"), href: WHATSAPP }] };
 }
 
 export function MiloGuide() {
@@ -458,7 +459,7 @@ export function MiloGuide() {
           antwoord = {
             van: "milo",
             tekst: String(data.text),
-            links: [{ label: t("App Marinus"), href: WHATSAPP }],
+            links: [{ label: t(heeftWhatsApp ? "App Steef" : "Mail Steef"), href: WHATSAPP }],
           };
         }
       } catch {
@@ -469,8 +470,8 @@ export function MiloGuide() {
           van: "milo",
           tekst: t("Daar heb ik nog geen antwoord op. Stel je vraag aan ons team."),
           links: [
-            { label: t("App Marinus"), href: WHATSAPP },
-            { label: "info@socialnow.nl", href: MAIL },
+            { label: t(heeftWhatsApp ? "App Steef" : "Mail Steef"), href: WHATSAPP },
+            { label: CONTACT_MAIL, href: MAIL },
           ],
         };
       setDenkt(false);
