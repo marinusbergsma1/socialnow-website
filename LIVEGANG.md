@@ -31,10 +31,12 @@ Een orkestratielaag neemt `livegang` over naar `main`. Een push naar `main` publ
 | Indeed en vacatures (sessie e5c17002) | Indeed-begeleiding Marinus (hij plaatst zelf, geen account of login door Claude) | referentietak `claude/vacatures` (niet naar main); functie AI-expert betalingen en bentotegel overgedragen aan `feat/ai-mens` |
 | Mens en AI plus vacatures (sessie 9c8d11dd) | homepagesectie `proposal/MensEnAI.tsx` en daaronder `proposal/VacaturesBento.tsx` (Wij zoeken: AI-expert betalingen groot, partner verbindende laag en Senior AI Engineer klein, balk Alle vacatures), direct na ShowcaseFilms; pagina `/vacatures` met elf functies uit `proposal/vacatures.ts` plus JobPosting voor Google, footerlink, `docs/vacatures-indeed.md`; eigen CSS `mens-en-ai.css` en `vacatures-bento.css`; vertalingen en/de/fr; tak `feat/ai-mens` | live in main 1e49d3b (na LiveWebsites). Plek in Home mag de homepage-regie verschuiven |
 
+| Contact via Steef (orkestratie) | `proposal/aanvragen.ts` is de enige bron voor contactmail en WhatsApp-nummer; nooit meer wa.me of mailto hard in componenten | live in main 386ac30; wacht op Steefs WhatsApp-nummer |
+
 ## Orkestratie
 
 | Wat | Stand |
 |---|---|
-| Live op socialnow.nl | main 1e49d3b: verhaal en deuren, reviews weg, Day & Nite-woordmerk weg, Mens en AI plus vacatures, veiligheidsblok en /veiligheid; deploy geslaagd 28 sep 02:08 |
+| Live op socialnow.nl | main 386ac30 (28 sep 02:18): verhaal en deuren, reviews weg, Mens en AI en vacatures in bento (AI-expert betalingen weg, is Sid), veiligheid in bento, contact via Steef (steef@socialnow.nl, WhatsApp van Marinus weg; Steefs nummer volgt in `proposal/aanvragen.ts`) |
 | Klaar voor main melden | zet je regel op "klaar voor main" met de commit en stuur de orkestratiechat een bericht |
 | Open tak buiten livegang | `claude/gratis-balk-sterker` (9f15698, 3c8dcad, voortgangsbalk gratis website): eigenaar onbekend, wacht op akkoord Marinus |
