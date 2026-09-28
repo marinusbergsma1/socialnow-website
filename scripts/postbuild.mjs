@@ -38,6 +38,8 @@ const routeMeta = {
   beveiliging: {title: 'Beveiliging en responsible disclosure | SocialNow', description: 'Hoe SocialNow gegevens beschermt, wat er gebeurt bij een datalek, en hoe je een kwetsbaarheid meldt.'},
   cookies: {title: 'Cookieverklaring | SocialNow', description: 'Welke cookies en opslag SocialNow gebruikt, hoe lang, en waar je ze uitzet. Per cookie beschreven.'},
   ai: {title: 'AI-verklaring | SocialNow', description: 'Welke AI-modellen SocialNow OS gebruikt, wat er met je invoer gebeurt, en hoe AI-inhoud kenbaar wordt gemaakt.'},
+  // 28 september 2026: veiligheidsvideo en sleutelbelofte.
+  veiligheid: {title: 'Veiligheid en sleutelbelofte | SocialNow', description: 'Jouw sleutels zijn veilig. Zwart op wit. Wat SocialNow belooft over je API-sleutels, de veiligheidsfilm, en de sleutelbelofte als pdf.'},
   gebruik: {title: 'Aanvaardbaar gebruik | SocialNow', description: 'Wat wel en niet mag met SocialNow OS, onze hosting en onze e-mail.'},
 };
 
@@ -62,6 +64,7 @@ const crumbLabels = {
   cookies: 'Cookieverklaring',
   ai: 'AI-verklaring',
   gebruik: 'Aanvaardbaar gebruik',
+  veiligheid: 'Veiligheid en sleutelbelofte',
 };
 
 function esc(s) {
@@ -133,6 +136,23 @@ for (const [route, meta] of Object.entries(routeMeta)) {
     };
     const teamScript = `<script type="application/ld+json">${JSON.stringify(teamGraph)}</script>`;
     out = out.replace('</body>', `    ${teamScript}\n  </body>`);
+  }
+
+  // /veiligheid: de beloftes en de pdf-links staan ook in de html, zodat de pagina zonder
+  // JavaScript iets toont. Bron is proposal/veiligheid-beloftes.ts (regex, geen TS-compile).
+  // data-vertaal zorgt dat scripts/localize-build.mjs de zinnen vertaalt in plaats van vervangt.
+  if (route === 'veiligheid') {
+    const bron = readFileSync('proposal/veiligheid-beloftes.ts', 'utf8');
+    const lijst = (naam) => [...(bron.split(`export const ${naam}:`)[1] || '').split('];')[0].matchAll(/kop: "([^"]+)", tekst: "([^"]+)"/g)].map((m) => `<li><strong>${esc(m[1])}</strong> <span>${esc(m[2])}</span></li>`).join('');
+    const noscript = `<noscript data-vertaal><div style="max-width:760px;margin:40px auto;padding:0 16px;color:#f5f5f5;font-family:Arial,sans-serif;line-height:1.5">`
+      + `<h1>Jouw sleutels zijn veilig. Zwart op wit.</h1><ul>${lijst('BELOFTES')}</ul>`
+      + `<h2>Zo koppel je veilig</h2><ol>${lijst('STAPPEN')}</ol>`
+      + `<p><a href="/documenten/socialnow-sleutelbelofte-nl.pdf" style="color:#25d366">Sleutelbelofte, Nederlands (PDF)</a></p>`
+      + `<p><a href="/documenten/socialnow-sleutelbelofte-en.pdf" style="color:#25d366">Sleutelbelofte, Engels (PDF)</a></p>`
+      + `<p><a href="/video/veiligheid/62-beveiliging-nl-45.mp4" style="color:#25d366">Bekijk de veiligheidsfilm</a></p>`
+      + `<p><a href="/beveiliging" style="color:#25d366">Beveiliging en responsible disclosure</a></p>`
+      + `<p><a href="/verwerkersovereenkomst" style="color:#25d366">Verwerkersovereenkomst</a></p></div></noscript>`;
+    out = out.replace(/<noscript[\s\S]*?<\/noscript\s*>/, noscript);
   }
 
   mkdirSync(`dist/${route}`, { recursive: true });

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ShieldCheck } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 
 // Keurmerken — 23 september 2026, voor de beurs van 24 september.
@@ -20,6 +21,7 @@ export default function Keurmerken({ className = "" }: { className?: string }) {
   const { language } = useLanguage();
   const taal = language === "nl" ? "nl" : "en";
   return (
+    <>
     <div className={`h-keurmerken ${className}`} translate="no">
       {BADGES.map((b) => (
         <Link key={b.id} to={b.pad} title={b[taal]}>
@@ -27,5 +29,11 @@ export default function Keurmerken({ className = "" }: { className?: string }) {
         </Link>
       ))}
     </div>
+    {/* 28 september 2026: kleine vermelding van de sleutelbelofte bij de keurmerken, buiten translate="no" zodat hij vertaald wordt. */}
+    <Link className="vh-keurmerk-link" to="/veiligheid">
+      <ShieldCheck size={15} aria-hidden="true" />
+      <span>Sleutelbelofte en veiligheidsfilm</span>
+    </Link>
+    </>
   );
 }

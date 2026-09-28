@@ -50,7 +50,8 @@ for(const route of paths){
       return a+escape(translated)+z;
     })
     .replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/g,(_,a,v,z)=>a+JSON.stringify(localize(JSON.parse(v),language))+z)
-    .replace(/<noscript[\s\S]*?<\/noscript\s*>/, '<noscript>SocialNow — One OS for your business. Discuss your Custom OS at info@socialnow.nl or call +31 6 3740 4577.</noscript>');
+    .replace(/(<noscript data-vertaal>)([\s\S]*?)(<\/noscript>)/,(_,a,v,z)=>a+v.replaceAll('-nl-45.mp4','-en-45.mp4').replace(/>([^<]+)</g,(m,tekst)=>tekst.trim()?'>'+escape(t(unescape(tekst.trim()),language))+'<':m)+z)
+    .replace(/<noscript(?! data-vertaal)[\s\S]*?<\/noscript\s*>/, '<noscript>SocialNow — One OS for your business. Discuss your Custom OS at info@socialnow.nl or call +31 6 3740 4577.</noscript>');
   }
   const folder=`dist${prefix(language)}${route==='/'?'':route}`;
   mkdirSync(folder,{recursive:true});writeFileSync(`${folder}/index.html`,output);
