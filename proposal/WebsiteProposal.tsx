@@ -28,6 +28,7 @@ import { VacaturesPage } from "./VacaturesPage";
 import GratisWebsite from "./GratisWebsite";
 import GratisOsDemo from "./GratisOsDemo";
 import AntwoordPagina from "./AntwoordPagina";
+import { VeiligheidPagina } from "./Veiligheid";
 import LogoIntro from "./LogoIntro";
 import QrOsWelcome from "./QrOsWelcome";
 import BrandFooter from "./BrandFooter";
@@ -82,7 +83,7 @@ function ProposalShell() {
       project?.title ||
       post?.title ||
       nav.find(([path]) => path === location.pathname)?.[1] ||
-      (location.pathname.startsWith("/antwoord-aanvragen") ? "Antwoord op aanvragen" : location.pathname.startsWith("/gratis-website") ? "Gratis website aanvragen" : location.pathname.startsWith("/gratis-os-demo") ? "Gratis OS-demo" : "Probeer SocialNow OS");
+      (location.pathname.startsWith("/antwoord-aanvragen") ? "Antwoord op aanvragen" : location.pathname.startsWith("/gratis-website") ? "Gratis website aanvragen" : location.pathname.startsWith("/gratis-os-demo") ? "Gratis OS-demo" : location.pathname.startsWith("/veiligheid") ? "Veiligheid en sleutelbelofte" : "Probeer SocialNow OS");
     const description =
       project?.description ||
       post?.excerpt ||
@@ -206,6 +207,9 @@ function ProposalShell() {
           <Route path="/gratis-website" element={<GratisWebsite />} />
           <Route path="/gratis-os-demo" element={<GratisOsDemo />} />
           <Route path="/antwoord-aanvragen" element={<AntwoordPagina />} />
+          {/* 28 september 2026: veiligheidsvideo en sleutelbelofte. /security is een alias. */}
+          <Route path="/veiligheid" element={<VeiligheidPagina />} />
+          <Route path="/security" element={<Navigate to="/veiligheid" replace />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route

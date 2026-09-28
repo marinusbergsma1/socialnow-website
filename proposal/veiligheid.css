@@ -1,0 +1,302 @@
+/* Veiligheid, 28 september 2026. Eigen bestand, zodat experience.css van de homepage-regie blijft. */
+.sn-site .vh-blok,
+.sn-site .vh-pagina {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0, "dlig" 0;
+}
+.sn-site .vh-blok {
+  padding: clamp(56px, 8vw, 110px) 0;
+}
+.sn-site .vh-blok-binnen {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+  padding: clamp(18px, 2.4vw, 32px);
+  border: 1px solid var(--sn-navy-rand);
+  border-radius: 28px;
+  background: var(--sn-navy);
+}
+.sn-site .vh-film {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+}
+/* De knop staat onder de film, zodat hij nooit over de ondertitels valt. */
+.sn-site .vh-film video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid #ffffff1f;
+  border-radius: 20px;
+  background: #000;
+}
+.sn-site .vh-film--groot {
+  margin-top: 8px;
+}
+.sn-site .vh-film--groot video {
+  border-radius: 24px;
+}
+.sn-site .vh-film-knop {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #ffffff12;
+  border: 1px solid #ffffff33;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.sn-site .vh-film:hover .vh-film-knop,
+.sn-site .vh-film:focus-visible .vh-film-knop {
+  background: #25d366;
+  border-color: #25d366;
+  color: #fff;
+}
+.sn-site .vh-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #25d366;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.sn-site .vh-tekst h2,
+.sn-site .vh-kop h1 {
+  margin: 14px 0 12px;
+  color: #fff;
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.sn-site .vh-kop h1 {
+  font-size: clamp(38px, 6vw, 84px);
+  max-width: 14ch;
+}
+.sn-site .vh-intro {
+  max-width: 58ch;
+  font-size: clamp(16px, 1.3vw, 18px);
+}
+.sn-site .vh-beloftes {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.sn-site .vh-beloftes li {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+.sn-site .vh-beloftes strong {
+  display: block;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.3;
+}
+.sn-site .vh-beloftes li > span:last-child > span {
+  display: block;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+.sn-site .vh-vink {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #25d36626;
+  color: #25d366;
+}
+.sn-site .vh-acties {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 22px;
+  margin-top: 26px;
+}
+/* Groene knop, altijd witte tekst. */
+.sn-site .vh-knop {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: #25d366;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 10px 30px #25d36633;
+  transition: transform 0.2s, background 0.2s;
+}
+.sn-site .vh-knop:hover,
+.sn-site .vh-knop:focus-visible {
+  background: #1fb457;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.sn-site .vh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  font-weight: 700;
+  border-bottom: 1px solid #ffffff40;
+  padding-bottom: 2px;
+}
+.sn-site .vh-link:hover,
+.sn-site .vh-link:focus-visible {
+  border-color: #25d366;
+}
+.sn-site .vh-pagina {
+  padding: clamp(40px, 6vw, 90px) 0 clamp(60px, 8vw, 120px);
+}
+.sn-site .vh-kop {
+  padding-bottom: clamp(28px, 4vw, 48px);
+}
+.sn-site .vh-sectie {
+  margin-top: clamp(48px, 7vw, 96px);
+}
+.sn-site .vh-sectie h2 {
+  color: #fff;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.05;
+  margin: 0 0 8px;
+}
+.sn-site .vh-pagina .vh-beloftes {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+}
+.sn-site .vh-pagina .vh-beloftes li {
+  padding: 20px;
+  border: 1px solid var(--sn-navy-rand);
+  border-radius: 20px;
+  background: var(--sn-navy);
+}
+.sn-site .vh-stappen {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+.sn-site .vh-stappen li {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 22px;
+  border: 1px solid var(--sn-navy-rand);
+  border-radius: 20px;
+  background: var(--sn-navy);
+}
+.sn-site .vh-stappen strong {
+  color: #fff;
+  font-size: 17px;
+  line-height: 1.25;
+}
+.sn-site .vh-stappen li > span:last-child {
+  color: var(--muted);
+  font-size: 14.5px;
+}
+.sn-site .vh-nummer {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  font-weight: 700;
+}
+.sn-site .vh-documenten > p {
+  max-width: 60ch;
+}
+.vh-venster {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: #000000e6;
+}
+.vh-venster-film {
+  position: relative;
+  width: min(92vw, calc((100dvh - 120px) * 0.8));
+  margin-top: 52px;
+  aspect-ratio: 4 / 5;
+}
+.vh-venster-film video {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  background: #000;
+}
+.vh-sluit {
+  position: absolute;
+  top: -52px;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #ffffff40;
+  border-radius: 50%;
+  background: #000000b3;
+  color: #fff;
+}
+/* Kleine vermelding onder de keurmerken in de footer. */
+.sn-site .vh-keurmerk-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #25d366;
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-ligatures: none;
+}
+@media (max-width: 860px) {
+  .sn-site .vh-blok-binnen {
+    grid-template-columns: 1fr;
+    border-radius: 22px;
+  }
+}
+@media (max-width: 640px) {
+  .sn-site .vh-knop {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 14px;
+    font-size: 14.5px;
+    white-space: nowrap;
+  }
+  .sn-site .vh-pagina .vh-beloftes {
+    grid-template-columns: 1fr;
+  }
+  .sn-site .vh-film-knop {
+    padding: 8px 13px;
+    font-size: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sn-site .vh-knop,
+  .sn-site .vh-film-knop {
+    transition: none;
+  }
+}
