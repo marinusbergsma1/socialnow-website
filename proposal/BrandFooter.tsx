@@ -39,6 +39,7 @@ export default function BrandFooter() {
             <Link to="/projecten">Ons werk</Link>
             <Link to="/blog">Blog</Link>
             <Link to="/contact">Contact</Link>
+            <Link to="/veiligheid">Veiligheid en sleutelbelofte</Link>
             <Link to="/#uitgelicht-werk">Uitgelicht werk</Link>
           </div>
           <div>
@@ -94,6 +95,7 @@ export default function BrandFooter() {
           <Link to="/privacy">Privacy</Link>
           <Link to="/cookies">Cookies</Link>
           <Link to="/juridisch">Juridisch</Link>
+          <Link to="/veiligheid">Veiligheid</Link>
           <span>KVK 90877179 · Sinds 2021</span>
         </div>
 
