@@ -1,4 +1,5 @@
 import React from "react";
+import CharacterAccent from "./CharacterAccent";
 import { HeroReview } from "./CustomerReviews";
 import { people } from "./content";
 import { TextLink } from "./ui";
@@ -76,6 +77,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     tekst: "Ik verdiepte me in AI en development. Het persoonlijke bleef de kern.",
     breed: 3,
     soort: "roze",
+    beeld: <CharacterAccent kind="coder" />,
   },
   {
     wanneer: "Het OS",
