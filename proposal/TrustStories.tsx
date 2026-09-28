@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowUpRight, Check, ShieldCheck } from "lucide-react";
+import { whatsappLink } from "./aanvragen";
 import { Link } from "react-router-dom";
 import { useInView, MotionControl } from "./motion";
 
@@ -42,7 +43,7 @@ export default function TrustStories() {
             </div>
           </div>
           <a
-            href="https://wa.me/31637404577"
+            href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
           >

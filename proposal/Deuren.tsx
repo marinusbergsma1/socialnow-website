@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowUpRight, Mail, MessageCircle } from "lucide-react";
+import { CONTACT_MAIL, heeftWhatsApp, whatsappLink } from "./aanvragen";
 import { useLanguage } from "./i18n/context";
 import { OdooLogo } from "./Verhaal";
 
@@ -17,8 +18,7 @@ const PARTNERS = [
   { naam: "Eusol", logo: "/images/partners/eusol.png", breed: 338, hoog: 98 },
 ];
 
-const WHATSAPP = "https://wa.me/31637404577?text=";
-const MAIL = "mailto:info@socialnow.nl?subject=";
+const MAIL = `mailto:${CONTACT_MAIL}?subject=`;
 
 function SalesforceLogo() {
   return (
@@ -71,11 +71,13 @@ export default function Deuren() {
             <p><strong translate="no">Michelle Yang</strong><span translate="no">Head of Implementation Partnerships</span></p>
           </div>
           <div className="h-deur-acties">
-            <a className="sn-btn3d h-button h-deur-knop" href={WHATSAPP + encodeURIComponent(bericht)} target="_blank" rel="noopener noreferrer">
-              <span className="sn-btn3d-sheen" />
-              <MessageCircle size={17} aria-hidden="true" />
-              <span>Stuur een WhatsApp</span>
-            </a>
+            {heeftWhatsApp && (
+              <a className="sn-btn3d h-button h-deur-knop" href={whatsappLink(bericht)} target="_blank" rel="noopener noreferrer">
+                <span className="sn-btn3d-sheen" />
+                <MessageCircle size={17} aria-hidden="true" />
+                <span>Stuur een WhatsApp</span>
+              </a>
+            )}
             <a className="h-text-link h-deur-mail" href={MAIL + encodeURIComponent(onderwerp)}>
               <Mail size={16} aria-hidden="true" />
               Mail Michelle

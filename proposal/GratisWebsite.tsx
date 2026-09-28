@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ArrowUpRight, Check, MessageCircle } from "lucide-react";
 import { languagePrefix, useLanguage } from "./i18n/context";
-import { aanvraagWhatsApp, WHATSAPP_NUMMER } from "./aanvragen";
+import { aanvraagWhatsApp, heeftWhatsApp, whatsappLink } from "./aanvragen";
 import "./gratis-website.css";
 
 const OPSLAG = "sn-gratis-website-v1";
-const WHATSAPP = `https://wa.me/${WHATSAPP_NUMMER}`;
 type Gegevens = { voornaam: string; achternaam: string; bedrijf: string; email: string; mobiel: string };
 type Vraag = { key: string; vraag: string; hint: string; type?: "text" };
 const LEEG: Gegevens = { voornaam: "", achternaam: "", bedrijf: "", email: "", mobiel: "" };
@@ -50,9 +49,9 @@ export default function GratisWebsite() {
     <p className="gw-eyebrow"><i className="gw-stipjes"><b /><b /><b /></i>Gratis website / Odoo Experience, stand C21</p>
     <h1>Wij maken jouw website <span className="gw-accent">live op de Odoo-beurs.</span></h1>
     <p className="gw-lead">Vertel ons over je bedrijf en wat je mooi vindt. Wij lezen je antwoorden zelf en maken een website die echt bij je past, samen met jou op stand C21.</p>
-    <ul className="gw-beloftes"><li><Check size={15} /> Persoonlijk gemaakt voor jouw bedrijf</li><li><Check size={15} /> Direct contact met Marinus</li><li><Check size={15} /> Live gebouwd op de Odoo-beurs</li></ul>
-    <a className="gw-contactpil" href={`${WHATSAPP}?text=${encodeURIComponent(t("Hoi Marinus, ik heb een vraag over de websites die jullie live maken op de Odoo-beurs."))}`} target="_blank" rel="noopener noreferrer">
-      <img className="gw-contact-avatar" src="/images/marinus-profiel-blauw.webp" alt="" width="48" height="48" /><span className="gw-contact-tekst"><strong>Marinus Bergsma</strong><small>Vragen? Neem persoonlijk contact op</small></span><MessageCircle size={19} aria-hidden="true" />
+    <ul className="gw-beloftes"><li><Check size={15} /> Persoonlijk gemaakt voor jouw bedrijf</li><li><Check size={15} /> Direct contact met Steef</li><li><Check size={15} /> Live gebouwd op de Odoo-beurs</li></ul>
+    <a className="gw-contactpil" href={whatsappLink(t("Hoi Steef, ik heb een vraag over de websites die jullie live maken op de Odoo-beurs."))} target="_blank" rel="noopener noreferrer">
+      <img className="gw-contact-avatar" src="/images/Steef-Komen.webp" alt="" width="48" height="48" /><span className="gw-contact-tekst"><strong translate="no">Steef Komen</strong><small>Vragen? Neem persoonlijk contact op</small></span><MessageCircle size={19} aria-hidden="true" />
     </a>
     <div className="gw-progress" aria-label={t("Voortgang")}><div className="gw-bar"><div className="gw-fill" style={{ width: `${procent}%` }} /></div><div className="gw-meta"><span><i className="gw-dot" />Automatisch bewaard</span><span>{procent}%</span></div></div>
     <form onSubmit={verstuur} noValidate>
@@ -62,9 +61,9 @@ export default function GratisWebsite() {
         <label className="gw-fld" htmlFor="gw-bedrijf"><span className="gw-l">Bedrijfsnaam *</span><input id="gw-bedrijf" autoComplete="organization" maxLength={120} required value={g.bedrijf} onChange={(e) => setG({ ...g, bedrijf: e.target.value })} /></label>
       </div></section>
       <section className="gw-sec"><div className="gw-sec-head"><span className="gw-num">02</span><h2>Jouw website</h2></div><div className="gw-card"><div className="gw-rij">{VRAGEN.slice(0, 2).map(veld)}</div>{VRAGEN.slice(2).map(veld)}</div>
-        <p className="gw-juridisch">Je aanvraag opent WhatsApp met al je ingevulde antwoorden. Verstuur het bericht daar zelf naar Marinus. Lees ons <a href={`${languagePrefix(language)}/privacy/`}>privacybeleid</a>.</p>
+        <p className="gw-juridisch">{heeftWhatsApp ? "Je aanvraag opent WhatsApp met al je ingevulde antwoorden. Verstuur het bericht daar zelf naar Steef." : "Je aanvraag opent je e-mailapp met al je ingevulde antwoorden. Verstuur de mail daar zelf naar Steef."} Lees ons <a href={`${languagePrefix(language)}/privacy/`}>privacybeleid</a>.</p>
         {fout ? <p className="gw-fout" role="alert">{fout}</p> : null}
-        <button type="submit" className="sn-btn3d h-button gw-verder"><span className="sn-btn3d-sheen" /><span>Stuur mijn aanvraag via WhatsApp</span><span className="h-button-icon"><ArrowUpRight size={16} /></span></button>
+        <button type="submit" className="sn-btn3d h-button gw-verder"><span className="sn-btn3d-sheen" /><span>{heeftWhatsApp ? "Stuur mijn aanvraag via WhatsApp" : "Stuur mijn aanvraag per e-mail"}</span><span className="h-button-icon"><ArrowUpRight size={16} /></span></button>
       </section>
     </form>
   </div></div>;
