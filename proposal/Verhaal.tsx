@@ -68,7 +68,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
   {
     wanneer: "November 2021",
     titel: "SocialNow.",
-    tekst: "Na succes als ondernemer begon ik mijn eigen bedrijf, met een team van specialisten om me heen.",
+    tekst: "In november 2026 bestaat SocialNow vijf jaar. Wat begon met mijn eigen bedrijf, groeide uit tot een team van specialisten.",
     breed: 3,
   },
   {
