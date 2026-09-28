@@ -1826,5 +1826,10 @@
   "Print & Bind · interieur": "Print & Bind · interior",
   "Gemeten": "Measured",
   "Klantreactie": "Client review",
-  "Speel video af": "Play video"
+  "Speel video af": "Play video",
+  "Versleuteld opgeslagen": "Encrypted at rest",
+  "Afgeschermd per werkruimte": "Isolated per workspace",
+  "Eerst goedkeuren, dan uitvoeren": "Approve first, then execute",
+  "Overal versleuteld verkeer": "Encrypted traffic everywhere",
+  "Jouw accounts, jouw sleutels": "Your accounts, your keys"
 }

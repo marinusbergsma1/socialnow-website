@@ -155,7 +155,7 @@ for (const [route, meta] of Object.entries(routeMeta)) {
       + `<h2>Zo koppel je veilig</h2><ol>${lijst('STAPPEN')}</ol>`
       + `<p><a href="/documenten/socialnow-sleutelbelofte-nl.pdf" style="color:#25d366">Sleutelbelofte, Nederlands (PDF)</a></p>`
       + `<p><a href="/documenten/socialnow-sleutelbelofte-en.pdf" style="color:#25d366">Sleutelbelofte, Engels (PDF)</a></p>`
-      + `<p><a href="/video/veiligheid/62-beveiliging-nl-45.mp4" style="color:#25d366">Bekijk de veiligheidsfilm</a></p>`
+      + `<p><a href="/video/veiligheid/vertrouwen-versleuteling-nl.mp4" style="color:#25d366">Bekijk de veiligheidsfilm</a></p>`
       + `<p><a href="/beveiliging" style="color:#25d366">Beveiliging en responsible disclosure</a></p>`
       + `<p><a href="/verwerkersovereenkomst" style="color:#25d366">Verwerkersovereenkomst</a></p></div></noscript>`;
     out = out.replace(/<noscript[\s\S]*?<\/noscript\s*>/, noscript);
