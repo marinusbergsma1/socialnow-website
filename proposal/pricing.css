@@ -254,6 +254,10 @@
   gap: 12px;
   margin-top: 32px;
 }
+/* 29 september 2026: wat elk maandpakket meekrijgt, als rij pillen boven de kaarten. */
+.sn-site .prijs-inbegrepen { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.sn-site .prijs-inbegrepen li { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--prijs-rand); border-radius: 999px; font-size: 14px; color: #e7eaee; }
+.sn-site .prijs-inbegrepen li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--prijs-groen); }
 .sn-site .prijs-raster-los {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -507,9 +511,8 @@
 }
 .sn-site .prijs-maatwerk-kop h2 { margin-top: 18px; font-size: clamp(38px, 5vw, 76px); line-height: 1.02; letter-spacing: -.02em; }
 .sn-site .prijs-maatwerk-kop h2 em { font-style: normal; color: #5cc8ff; }
-.sn-site .prijs-maatwerk-bedrag { display: flex; align-items: baseline; gap: 14px; margin: 28px 0 18px; }
-.sn-site .prijs-maatwerk-bedrag span { font-size: clamp(16px, 1.4vw, 22px); color: #99a2ab; }
-.sn-site .prijs-maatwerk-bedrag strong { font-size: clamp(56px, 8vw, 120px); line-height: .9; font-weight: 800; letter-spacing: -.03em; color: #fff; }
+/* 29 september 2026: het bedrag van het OS op maat is een rustige, zakelijke regel, geen reuzencijfer. */
+.sn-site .prijs-maatwerk-bedrag { margin: 24px 0 18px; font-size: 15px; font-weight: 500; letter-spacing: .01em; color: #b9c2cc; }
 .sn-site .prijs-maatwerk-lead { font-size: clamp(16px, 1.2vw, 19px); line-height: 1.6; color: #b9c2cc; max-width: 520px; margin-bottom: 26px; }
 .sn-site .prijs-maatwerk-punten { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; align-content: center; }
 .sn-site .prijs-maatwerk-punten li { display: grid; gap: 6px; padding: 20px 22px; border: 1px solid #1d3350; border-radius: 18px; background: rgba(8, 20, 34, .7); }

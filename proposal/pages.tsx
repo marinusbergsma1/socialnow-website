@@ -195,7 +195,11 @@ export function Home() {
           {/* 28 september 2026 (Marinus): "ODOO PRODUCT · IMPLEMENTATION POSSIBLE", daaronder klein de volgende stap. */}
           <p className="h-hero-odoo-regel" translate="no">
             <b>ODOO PRODUCT · IMPLEMENTATION POSSIBLE</b>
-            <small>NEXT STEP SALESFORCE</small>
+            {/* 29 september 2026 (Marinus): "bij Salesforce stukje wel écht even hun logo ook." */}
+            <small>
+              NEXT STEP
+              <img className="h-hero-salesforce" src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" />
+            </small>
           </p>
           {/* 26 september 2026 (Marinus): versie A, "de brief". Het bedankje als briefje met foto en naam. */}
           <div className="h-brief">

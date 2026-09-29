@@ -19,11 +19,13 @@ const BASE = 'https://socialnow.nl';
 // Per-route metadata. Homepage (index.html) blijft ongewijzigd.
 const routeMeta = {
   // 28 september 2026: titels en omschrijvingen volgen het verhaal (gratis OS, OS op maat vanaf €10.000, Odoo als laatste sleutel).
-  'het-os': {title: 'Het OS: alle data van je bedrijf in één OS | SocialNow', description: 'Koppel je website, social media en Odoo in één OS. Gratis te gebruiken, met een OS op maat vanaf €10.000 en persoonlijk contact met ons team.'},
+  // 29 september 2026: positionering "De AI-gestuurde persoonlijke werkplek, met échte professionals en menselijk contact";
+  // OS op maat zakelijk 'vanaf, prijs op aanvraag'; maandpakketten minimaal drie maanden.
+  'het-os': {title: 'Het OS: de AI-gestuurde persoonlijke werkplek | SocialNow', description: 'De AI-gestuurde persoonlijke werkplek, met échte professionals en menselijk contact. Koppel je website, social media en Odoo in één OS. Gratis te gebruiken, met een OS op maat vanaf €10.000 en persoonlijk contact met ons team.'},
   contact: {title: 'Contact: persoonlijk contact met het team | SocialNow', description: 'Bespreek je gratis OS, je OS op maat of een losse opdracht met Marinus en het team. Ben je Odoo-implementatiepartner? Praat met Michelle Yang.'},
   diensten: {title: 'Diensten: van merk tot techniek | SocialNow', description: 'Websites, branding, content, advertenties en development. Human creativity, powered by AI technology.'},
   projecten: {title: 'Uitgelicht werk en cases | SocialNow', description: 'Bekijk websites, video’s en campagnes van SocialNow. Werk voor onder meer RAVEG, Universal, Sony en AZ.'},
-  prijzen: {title: 'Aanbod: gratis OS en OS op maat vanaf €10.000 | SocialNow', description: 'Het OS is gratis te gebruiken. Een OS op maat bouwen we vanaf €10.000, met pakketten van ons team als extra laag.'},
+  prijzen: {title: 'Aanbod: gratis OS, OS op maat en maandpakketten | SocialNow', description: 'Het OS is gratis te gebruiken. Een OS op maat vanaf €10.000, prijs op aanvraag. Maandpakketten voor minimaal drie maanden, met custom OS, rebranding, website en een persoonlijke uitlegcall.'},
   privacy: {title: 'Privacybeleid | SocialNow', description: 'Lees hoe SocialNow omgaat met persoonsgegevens en welke rechten je hebt.'},
   voorwaarden: {title: 'Algemene voorwaarden | SocialNow', description: 'De algemene voorwaarden van SocialNow, inclusief het gebruik van SocialNow OS.'},
   'gratis-website': {title: 'Gratis website aanvragen | SocialNow', description: 'Vraag je gratis website aan via WhatsApp. Je gegevens staan alvast in het bericht.'},

@@ -2765,11 +2765,13 @@ html {
 .sn-site .h-team-trust strong { font-size: 15px; white-space: normal; }
 .sn-site .h-team-trust > span:last-child > span { font-size: 13px; }
 @media (min-width: 1100px) {
-  .sn-site .h-hero-rij > .h-team-trust, .sn-site .h-hero-tekst > .h-team-trust { gap: 18px; flex-wrap: nowrap; }
+  .sn-site .h-hero-rij > .h-team-trust, .sn-site .h-hero-tekst > .h-team-trust { gap: 18px; flex-wrap: wrap; row-gap: 12px; }
   .sn-site :is(.h-hero-rij, .h-hero-tekst) .h-team-portraits img { width: 48px; height: 48px; margin-left: -13px; border-width: 3px; }
   .sn-site :is(.h-hero-rij, .h-hero-tekst) .h-team-portraits img:first-child { margin-left: 0; }
   .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust strong { font-size: clamp(15px, 1vw, 17px); white-space: normal; }
-  .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust > span:last-child { min-width: 0; }
+  /* 29 september 2026 (Marinus: "dit lijkt niet helemaal goed te gaan"): met elf portretten op één rij kneep nowrap de
+     tekst tot een smal kolommetje. Past de tekst niet op minstens 190px naast de portretten, dan gaat hij eronder. */
+  .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust > span:last-child { flex: 1 1 190px; min-width: 190px; }
   .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust > span:last-child > span { font-size: 14px; }
 }
 
@@ -2868,6 +2870,7 @@ html {
 .sn-site .h-deur-status .sn-tegel-vlak { flex-direction: row; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
 .sn-site .h-deur-merk { display: inline-flex; align-items: center; gap: 12px; }
 .sn-site .h-deur-merk svg { height: 30px; width: auto; flex: none; }
+.sn-site .h-deur-merk .h-deur-salesforce { height: 46px; width: auto; flex: none; display: block; }
 .sn-site .is-live .h-deur-merk span { font-size: 12px; font-weight: 700; letter-spacing: .2em; color: #fff; padding-top: 2px; }
 .sn-site .is-bouw .h-deur-merk span { font-size: 19px; font-weight: 700; color: #fff; letter-spacing: -.01em; }
 .sn-site .h-deur-status b { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
@@ -2932,6 +2935,8 @@ html {
 .sn-site .h-hero-tekst > .h-hero-odoo-regel { margin: -12px 0 0 !important; display: grid; gap: 6px; }
 .sn-site .h-hero-odoo-regel b { font-size: clamp(12px, .95vw, 14px); font-weight: 700; letter-spacing: .16em; color: #fff; }
 .sn-site .h-hero-odoo-regel small { font-size: 11px; font-weight: 700; letter-spacing: .16em; color: #7fd3f5; }
+.sn-site .h-hero-odoo-regel small { display: inline-flex; align-items: center; gap: 10px; }
+.sn-site .h-hero-odoo-regel .h-hero-salesforce { height: 26px; width: auto; flex: none; }
 
 /* Chosen outline variant: flat green login bar, white platform logos, no glow. */
 .sn-site .h-os-dock { width: 100%; max-width: 600px; border: 1px solid #23874a; border-radius: 24px; overflow: hidden; background: #070908; box-shadow: none; text-align: left; }

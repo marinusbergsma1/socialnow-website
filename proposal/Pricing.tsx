@@ -11,6 +11,11 @@ import "./pricing.css";
 // 28 september 2026 (Marinus): elk pakket €2.000 duurder. Het OS op maat (vanaf €10.000) is het eerste
 // en grootste blok; alle andere pakketten zijn een extra laag bovenop de gratis versie. Sergio bij Meta Ads.
 // 28 september 2026 (Marinus, het verhaal): "Probeer het OS gratis" gaat rechtstreeks naar de login van het gratis OS.
+// 29 september 2026 (Marinus): "10.000 gewoon niet zo schreeuwerig maar juist zakelijk vanaf maken. En daarna die
+// goedkopere pakketten met de prijs per maand voor minimaal 3 maanden incl. zo'n custom os en complete rebranding en
+// website met persoonlijke call voor systeem uitleg." Het bedrag van het OS op maat is één rustige regel; elk
+// maandpakket loopt minimaal drie maanden en bevat custom OS, complete rebranding, website en een uitlegcall. Het losse
+// websiteblok vervalt, want de website zit nu in elk pakket.
 const PROBEER_URL = GRATIS_OS_URL;
 
 type Lid = { naam: string; rol: string; foto: string };
@@ -104,23 +109,12 @@ const MAAND: Pakket[] = [
   },
 ];
 
-const LOS: Pakket[] = [
-  {
-    naam: "Website",
-    prijs: "vanaf €3.500",
-    per: "eenmalig",
-    belofte: "Een complete website die klanten oplevert.",
-    punten: [
-      { tekst: "Complete website in je eigen merk", sterk: true },
-      { tekst: "De data live in je OS" },
-      { tekst: "SEO en snelheid goed ingericht" },
-    ],
-    team: ["marinus", "sid"],
-    nieuw: "sid",
-    kleur: "var(--prijs-groen)",
-    actie: "Begin met een website",
-    onderwerp: "Website",
-  },
+// Wat elk maandpakket meekrijgt (minimaal drie maanden). Het losse websitepakket is hierin opgegaan.
+const INBEGREPEN = [
+  "Custom OS",
+  "Complete rebranding",
+  "Je website",
+  "Persoonlijke call met uitleg van je systeem",
 ];
 
 const MAATWERK = {
@@ -283,10 +277,7 @@ export default function Pricing() {
             <br />
             <em>gebouwd rond je bedrijf.</em>
           </h2>
-          <p className="prijs-maatwerk-bedrag">
-            <span>vanaf</span>
-            <strong>€10.000</strong>
-          </p>
+          <p className="prijs-maatwerk-bedrag">Vanaf €10.000 · prijs op aanvraag</p>
           <p className="prijs-maatwerk-lead">Het gratis OS laat zien wat kan. Het OS op maat maakt het van jou: je eigen data, je eigen processen en je eigen agents, in één systeem.</p>
           <p className="prijs-waarom"><b>Waarom het OS gratis kan.</b> We verdienen aan het OS op maat en aan de pakketten van ons team. Partners als Komen Consultancy helpen het OS schaalbaar te maken, en Odoo-implementatiepartners brengen het naar hun klanten.</p>
           <div className="prijs-knoppen">
@@ -309,21 +300,21 @@ export default function Pricing() {
       <section className="prijs-pakketten" aria-labelledby="prijs-pakketten-titel">
         <div className="prijs-pakketten-kop">
           <div>
-            <p className="h-eyebrow">Extra lagen · maandpakketten</p>
+            <p className="h-eyebrow">Maandpakketten · minimaal 3 maanden</p>
             <h2 id="prijs-pakketten-titel">Bovenop je gratis OS</h2>
           </div>
           <p>
-            Elk pakket is een extra laag bovenop de gratis versie. <strong>Drie maanden of langer? Dan hoort je complete website erbij.</strong>
+            Elk pakket is een extra laag bovenop de gratis versie en loopt minimaal drie maanden. <strong>In elk pakket inbegrepen:</strong>
           </p>
         </div>
+        <ul className="prijs-inbegrepen">
+          {INBEGREPEN.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
         <div className="prijs-raster">
           {MAAND.map((pakket) => (
             <Kaart key={pakket.naam} pakket={pakket} />
-          ))}
-        </div>
-        <div className="prijs-raster-los">
-          {LOS.map((pakket) => (
-            <Kaart key={pakket.naam} pakket={pakket} breed />
           ))}
         </div>
       </section>
