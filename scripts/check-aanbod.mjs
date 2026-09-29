@@ -91,6 +91,25 @@ try {
     eis(!/<strong>€\d\.\d{3}<\/strong>/.test(pagina), `${taal} /prijzen: een maandprijs staat nog in Nederlandse notatie`);
   }
 
+  // Wat de bezoeker in en/de/fr ziet, niet alleen of de sleutel in de json staat: een sleutel die net anders
+  // gespeld is dan de JSX-zin bleef eerder groen terwijl de pagina Nederlands toonde. De verwachte tekst komt
+  // uit het woordenboek zelf, zodat de proef geen tweede kopie van de vertalingen bijhoudt.
+  const escape = (t) => t.replaceAll("&", "&amp;").replaceAll("'", "&#x27;").replaceAll('"', "&quot;");
+  const nieuweZinnen = [
+    "Vanaf €10.000 · prijs op aanvraag", "Maandpakketten · minimaal 3 maanden",
+    "Elk pakket is een extra laag bovenop de gratis versie en loopt minimaal drie maanden.",
+    "In elk pakket inbegrepen:", "Complete rebranding", "Persoonlijke call met uitleg van je systeem",
+  ];
+  for (const taal of ["en", "de", "fr"]) {
+    const woorden = JSON.parse(lees(`proposal/i18n/${taal}.json`) || "{}");
+    const pagina = render("/prijzen", taal);
+    for (const zin of nieuweZinnen) {
+      const vertaald = woorden[zin];
+      eis(Boolean(vertaald) && pagina.includes(escape(vertaald)), `${taal} /prijzen: '${zin}' niet vertaald op de pagina`);
+      if (vertaald && vertaald !== zin) eis(!pagina.includes(escape(zin)), `${taal} /prijzen: Nederlands '${zin}' staat er nog`);
+    }
+  }
+
   // Salesforce-logo: echt logo, in de hero en in de tegel
   const logo = "/images/partners/salesforce.svg";
   eis((home.match(new RegExp(`src="${logo}"`, "g")) || []).length >= 2, "home: echt Salesforce-logo niet in hero én tegel");
@@ -120,13 +139,6 @@ const llms = lees("public/llms.txt");
 eis(llms.includes("AI-gestuurde persoonlijke werkplek"), "llms.txt: positionering ontbreekt");
 eis(!llms.includes("vanaf €3.000 per maand"), "llms.txt: oude prijs €3.000 per maand staat er nog");
 eis(llms.includes("minimaal 3 maanden"), "llms.txt: maandpakketten zonder minimale looptijd");
-
-// Vertalingen
-for (const taal of ["en", "de", "fr"]) {
-  const woorden = JSON.parse(lees(`proposal/i18n/${taal}.json`) || "{}");
-  for (const sleutel of ["Vanaf €10.000 · prijs op aanvraag", "Maandpakketten · minimaal 3 maanden", "In elk pakket inbegrepen:", "Je website", "Persoonlijke call met uitleg van je systeem"])
-    eis(Boolean(woorden[sleutel]), `${taal}.json: vertaling ontbreekt voor '${sleutel}'`);
-}
 
 // Meta per taal. 30 september 2026: de nieuwe title en description van /, /het-os en /prijzen hadden geen
 // vertaling. scripts/localize-build.mjs valt dan terug op het Nederlands en meldt dat alleen in de buildlog;
