@@ -112,6 +112,36 @@ for (const taal of ["en", "de", "fr"]) {
     eis(Boolean(woorden[sleutel]), `${taal}.json: vertaling ontbreekt voor '${sleutel}'`);
 }
 
+// Meta per taal. 30 september 2026: de nieuwe title en description van /, /het-os en /prijzen hadden geen
+// vertaling. scripts/localize-build.mjs valt dan terug op het Nederlands en meldt dat alleen in de buildlog;
+// de Engelse site (socialnow.nl zonder prefix) en /de en /fr kregen Nederlandse deelkaartjes. Deze eis leest
+// de teksten uit de bronnen zelf en vertaalt ze zoals localize-build dat doet (hele zin, anders per ' | ').
+// Alleen deze drie routes: andere routes zijn van andere chats en horen hier niet rood te worden.
+const woordenboek = Object.fromEntries(["en", "de", "fr"].map((t) => [t, JSON.parse(lees(`proposal/i18n/${t}.json`) || "{}")]));
+const vertaal = (tekst, taal) => {
+  const sleutel = tekst.replace(/\s+/g, " ").trim();
+  const gevonden = woordenboek[taal][sleutel] ?? woordenboek.en[sleutel];
+  if (gevonden) return gevonden;
+  if (tekst.includes(" | ")) return tekst.split(" | ").map((deel) => vertaal(deel, taal)).join(" | ");
+  return tekst;
+};
+const postbuild = lees("scripts/postbuild.mjs");
+const metaTeksten = [
+  ...[...lees("index.html").matchAll(/<meta\s+(?:name|property)="(?:description|og:description|twitter:description)"\s+content="([^"]+)"/g)].map((m) => m[1]),
+  ...["'het-os'", "prijzen"].flatMap((route) => {
+    const m = postbuild.match(new RegExp(`^\\s*${route}: \\{title: '([^']+)', description: '([^']+)'\\}`, "m"));
+    eis(Boolean(m), `postbuild.mjs: routeMeta ${route} niet gevonden`);
+    return m ? [m[1], m[2]] : [];
+  }),
+];
+eis(metaTeksten.length === 7, `meta: 3 index-omschrijvingen en 4 routeteksten verwacht, ${metaTeksten.length} gevonden`);
+for (const taal of ["en", "de", "fr"])
+  for (const tekst of new Set(metaTeksten)) {
+    const uit = vertaal(tekst, taal);
+    const nl = uit.split(" | ").filter((deel) => deel !== "SocialNow" && tekst.split(" | ").includes(deel));
+    eis(nl.length === 0, `${taal}: meta blijft Nederlands: '${nl[0]?.slice(0, 60)}…'`);
+  }
+
 if (fouten.length) {
   process.stderr.write(`ROOD: ${fouten.length} eis(en) niet gehaald\n  - ${fouten.join("\n  - ")}\n`);
   process.exit(1);
