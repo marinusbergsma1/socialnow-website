@@ -141,6 +141,9 @@ const llms = lees("public/llms.txt");
 eis(llms.includes("AI-gestuurde persoonlijke werkplek"), "llms.txt: positionering ontbreekt");
 eis(!llms.includes("vanaf €3.000 per maand"), "llms.txt: oude prijs €3.000 per maand staat er nog");
 eis(llms.includes("minimaal 3 maanden"), "llms.txt: maandpakketten zonder minimale looptijd");
+// 30 september 2026: llms.txt beloofde AI-crawlers nog een "gratis proof of concept" en een "discovery call"; die
+// bestaan niet meer (gratis OS, demowebsite en basic rebranding; een gesprek via /contact).
+eis(!/proof of concept|discovery call/i.test(llms), "llms.txt: oud aanbod (proof of concept, discovery call)");
 
 // Meta per taal. 30 september 2026: de nieuwe title en description van /, /het-os en /prijzen hadden geen
 // vertaling. scripts/localize-build.mjs valt dan terug op het Nederlands en meldt dat alleen in de buildlog;

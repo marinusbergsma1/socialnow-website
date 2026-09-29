@@ -1,6 +1,6 @@
 # SocialNow
 
-> SocialNow OS is de AI-gestuurde persoonlijke werkplek, met échte professionals en menselijk contact. SocialNow is een AI-native creative agency uit Amsterdam dat website, CRM, content en advertenties samenbrengt in één overzichtelijke AI-chat, bovenop Odoo. Bedrijven starten met een gratis proof of concept — een complete website-demo én rebranding — en zien het systeem werken vóór ze iets betalen.
+> SocialNow OS is de AI-gestuurde persoonlijke werkplek, met échte professionals en menselijk contact. SocialNow is een AI-native creative agency uit Amsterdam dat website, CRM, content en advertenties samenbrengt in één overzichtelijke AI-chat, bovenop Odoo. Bedrijven starten gratis met het OS, een complete demowebsite en een basic rebranding, en zien het systeem werken vóór ze iets betalen.
 
 ## Wat SocialNow doet
 
@@ -25,7 +25,7 @@
 
 ## Belangrijkste pagina's
 
-- [Home](https://socialnow.nl/): overzicht van het AI-systeem en de gratis proof of concept.
+- [Home](https://socialnow.nl/): van nul naar een draaiend bedrijf in één uur, met het gratis OS.
 - [Diensten](https://socialnow.nl/diensten): website, CRM, content en ads in detail.
 - [Prijzen](https://socialnow.nl/prijzen): pakketten en tarieven.
 - [Privacy](https://socialnow.nl/privacy): privacybeleid.
@@ -34,4 +34,4 @@
 
 - Website: https://socialnow.nl
 - Locatie: Amsterdam, Nederland
-- Boek een gratis discovery call via de website.
+- Plan een persoonlijk gesprek via https://socialnow.nl/contact.
