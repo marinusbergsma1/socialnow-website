@@ -148,7 +148,9 @@ eis(llms.includes("minimaal 3 maanden"), "llms.txt: maandpakketten zonder minima
 const woordenboek = Object.fromEntries(["en", "de", "fr"].map((t) => [t, JSON.parse(lees(`proposal/i18n/${t}.json`) || "{}")]));
 const vertaal = (tekst, taal) => {
   const sleutel = tekst.replace(/\s+/g, " ").trim();
-  const gevonden = woordenboek[taal][sleutel] ?? woordenboek.en[sleutel];
+  // Alleen het eigen woordenboek: localize-build valt voor de en fr terug op het Engels, en een Engelse
+  // omschrijving op /de of /fr is net zo fout als een Nederlandse.
+  const gevonden = woordenboek[taal][sleutel];
   if (gevonden) return gevonden;
   if (tekst.includes(" | ")) return tekst.split(" | ").map((deel) => vertaal(deel, taal)).join(" | ");
   return tekst;
@@ -167,7 +169,7 @@ for (const taal of ["en", "de", "fr"])
   for (const tekst of new Set(metaTeksten)) {
     const uit = vertaal(tekst, taal);
     const nl = uit.split(" | ").filter((deel) => deel !== "SocialNow" && tekst.split(" | ").includes(deel));
-    eis(nl.length === 0, `${taal}: meta blijft Nederlands: '${nl[0]?.slice(0, 60)}…'`);
+    eis(nl.length === 0, `${taal}: meta niet vertaald in ${taal}.json: '${nl[0]?.slice(0, 60)}…'`);
   }
 
 if (fouten.length) {
