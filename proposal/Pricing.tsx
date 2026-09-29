@@ -217,9 +217,8 @@ export default function Pricing() {
             </h1>
           </div>
           <div className="prijs-gratis-tekst">
-            <p className="prijs-echt">
-              Helemaal gratis. <em>Echt waar.</em>
-            </p>
+            {/* 29 september 2026 (Marinus): "Echt waar" vond hij stom; het blijft bij de feitelijke zin. */}
+            <p className="prijs-echt">Helemaal gratis.</p>
             <p className="prijs-lead">{t("Waar anderen duizenden euro’s voor vragen, betaal jij €0. Log in op je gratis OS of vraag een gratis demowebsite aan; daarna bespreken we samen de volgende stap.")}</p>
             <div className="prijs-knoppen">
               <a className="os-claim sn-btn3d h-button" href={PROBEER_URL}>

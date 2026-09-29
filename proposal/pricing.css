@@ -523,3 +523,13 @@
 @media (max-width: 900px) {
   .sn-site .prijs-maatwerk { grid-template-columns: minmax(0, 1fr); margin-top: 64px; border-radius: 22px; }
 }
+
+/* 29 september 2026 (Marinus): "ik mis het mooie contrast van het zwarte". De aanbodpagina krijgt het diepzwart
+   van de homepage: de grote blokken zonder blauwgrijs vlak, de kaarten zoals de homepagetegels (#0b0f12 met een
+   dunne witte rand). Groen blijft een accent in rand, letter en stip. */
+.sn-site .prijs { --prijs-kaart: #0b0f12; }
+.sn-site .prijs-gratis { background: radial-gradient(760px 320px at 12% 0%, #25d36614, transparent 62%), #000; box-shadow: none; }
+.sn-site .prijs-cadeau, .sn-site .prijs-os li { background: #0b0f12; border-color: rgba(255, 255, 255, .1); }
+.sn-site .prijs-kaart { border-color: rgba(255, 255, 255, .1); }
+.sn-site .prijs-maatwerk { background: radial-gradient(90% 80% at 0% 0%, rgba(37, 211, 102, .07), transparent 60%), #000; border-color: rgba(255, 255, 255, .12); }
+.sn-site .prijs-maatwerk-punten li { background: #0b0f12; border-color: rgba(255, 255, 255, .1); }
