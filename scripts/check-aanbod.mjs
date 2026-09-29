@@ -53,12 +53,12 @@ const server = await createServer({
 try {
   const { MemoryRouter } = await server.ssrLoadModule("react-router-dom");
   const { default: Page } = await server.ssrLoadModule("/proposal/WebsiteProposal.tsx");
-  const render = (route) =>
+  const render = (route, language = "nl") =>
     renderToStaticMarkup(
       React.createElement(
         MemoryRouter,
         { basename: "/voorstel", initialEntries: [`/voorstel${route}`] },
-        React.createElement(Page, { language: "nl" }),
+        React.createElement(Page, { language }),
       ),
     );
   const prijzen = render("/prijzen");
@@ -74,6 +74,22 @@ try {
     eis(prijzen.includes(bedrag), `/prijzen: maandprijs ${bedrag} ontbreekt`);
   eis(!prijzen.includes("vanaf €3.500"), "/prijzen: los websiteblok 'vanaf €3.500' staat er nog");
   eis(!prijzen.includes("Echt waar"), "/prijzen: 'Echt waar' staat er nog");
+
+  // Bedragen in de notatie van de taal. 30 september 2026: de maandprijzen stonden in en/de/fr als "€4.000"
+  // onder "From €10,000"; in het Engels leest €4.000 als vier euro. De vertaling loopt via het woordenboek
+  // (hele tekstknoop "€4.000" is de sleutel). Frans met hetzelfde spatieteken als "10 000 €" in fr.json.
+  const frSpatie = (JSON.parse(lees("proposal/i18n/fr.json") || "{}")["Vanaf €10.000 · prijs op aanvraag"] || "").match(/10(.)000/)?.[1] ?? " ";
+  const notatie = {
+    en: (d) => `€${d},000`, de: (d) => `${d}.000 €`, fr: (d) => `${d}${frSpatie}000 €`,
+  };
+  for (const [taal, maak] of Object.entries(notatie)) {
+    const pagina = render("/prijzen", taal);
+    for (const [bedrag, duizend] of [["€4.000", "4"], ["€5.000", "5"], ["€5.500", "5"], ["€6.000", "6"]]) {
+      const verwacht = bedrag === "€5.500" ? maak("5").replace(/000/, "500") : maak(duizend);
+      eis(pagina.includes(`<strong>${verwacht}</strong>`), `${taal} /prijzen: maandprijs ${bedrag} niet als '${verwacht}'`);
+    }
+    eis(!/<strong>€\d\.\d{3}<\/strong>/.test(pagina), `${taal} /prijzen: een maandprijs staat nog in Nederlandse notatie`);
+  }
 
   // Salesforce-logo: echt logo, in de hero en in de tegel
   const logo = "/images/partners/salesforce.svg";
