@@ -89,6 +89,8 @@ try {
       eis(pagina.includes(`<strong>${verwacht}</strong>`), `${taal} /prijzen: maandprijs ${bedrag} niet als '${verwacht}'`);
     }
     eis(!/<strong>€\d\.\d{3}<\/strong>/.test(pagina), `${taal} /prijzen: een maandprijs staat nog in Nederlandse notatie`);
+    // Duits en Frans zetten het euroteken achter het getal, ook bij €0 op de drie gratis-tegels.
+    if (taal !== "en") eis(!/€\s?\d/.test(pagina.replace(/<[^>]+>/g, " ")), `${taal} /prijzen: bedrag met € ervoor`);
   }
 
   // Wat de bezoeker in en/de/fr ziet, niet alleen of de sleutel in de json staat: een sleutel die net anders
