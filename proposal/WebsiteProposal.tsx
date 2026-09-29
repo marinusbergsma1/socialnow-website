@@ -105,11 +105,11 @@ function ProposalShell() {
       post?.title ||
       nav.find(([path]) => path === pad)?.[1] ||
       paginaTitels[pad] ||
-      "Probeer SocialNow OS";
+      "Van nul naar een draaiend bedrijf in één uur";
     const description =
       project?.description ||
       post?.excerpt ||
-      "Alle data van je bedrijf in één OS. Koppel je website, social media en Odoo. Gratis te gebruiken; een OS op maat bouwen we vanaf €10.000.";
+      "Van nul naar een draaiend bedrijf in één uur. Beantwoord tien vragen en je boekhouding, merk, website en socials staan klaar in één OS. Gratis te gebruiken; een OS op maat bouwen we vanaf €10.000.";
     document.title = `${t(title)} | SocialNow`;
     for (const [selector, content] of [
       ['meta[name="description"]', t(description)],

@@ -19,6 +19,8 @@ import TeamTrust from "./TeamTrust";
 import Verhaal from "./Verhaal";
 import { Bento, Tegel } from "./Bento";
 import Deuren from "./Deuren";
+import Bereikt from "./Bereikt";
+import NulNaarBedrijf from "./NulNaarBedrijf";
 import MensEnAI from "./MensEnAI";
 import VacaturesBento from "./VacaturesBento";
 import VeiligheidBlok from "./Veiligheid";
@@ -197,9 +199,10 @@ export function Home() {
           </p>
           {/* 26 september 2026 (Marinus): versie A, "de brief". Het bedankje als briefje met foto en naam. */}
           <div className="h-brief">
+            {/* 29 september 2026 (Marinus): de winactie is voorbij; de brief vertelt nu de belofte in gewone woorden. */}
             <p className="h-hero-description">
-              Door de vele aanmeldingen voor onze actie reageren we volgende week persoonlijk op iedereen. De winnaar
-              maken we bekend op LinkedIn en Instagram.
+              Beantwoord tien vragen en je OS zet je boekhouding, merk, website en socials klaar. Zelf, met ons team of
+              met je eigen AI.
             </p>
             <div className="h-brief-onder">
               <img src="/images/marinus-profiel-blauw.webp" alt="" width="56" height="56" />
@@ -219,6 +222,10 @@ export function Home() {
       </LanguageContext.Provider>
       {/* 28 september 2026 (Marinus): "de homepage moet een upgrade gaan krijgen met storytelling". De volgorde vertelt
           het verhaal: wie we zijn, wat je kunt doen, het bewijs, het vertrouwen, en dan pas het product in detail. */}
+      {/* 29 september 2026 (Marinus): "zet vooral wat ze hebben bereikt met mooie animaties aanwezig op mijn homepage".
+          Eerst wat er bereikt is, dan hoe jij in een uur je bedrijf neerzet, dan het verhaal. */}
+      <Bereikt />
+      <NulNaarBedrijf />
       <Verhaal />
       <Deuren />
       {/* 28 september 2026 (Marinus): "alle onderdelen als kleine bentogrids, net zoals de homepage wanneer je daarop landt". */}

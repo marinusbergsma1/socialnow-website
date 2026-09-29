@@ -234,7 +234,17 @@ export const faqs = [
   {
     question: "Waar begin ik?",
     answer:
-      "Probeer eerst het systeem. Ervaar het overzicht voordat we samen je Custom OS inrichten. Op de Odoo-beurs laten we je zien hoe het werkt.",
+      "Log in op je gratis OS en kies: een nieuw bedrijf beginnen of je bestaande bedrijf koppelen. Wil je het helemaal rond je bedrijf, dan richten we je OS samen op maat in.",
+  },
+  {
+    question: "Kan mijn eigen AI bij jullie data of code?",
+    answer:
+      "Nee. Claude, Codex of een andere AI koppel je met een eigen sleutel die alleen voor jouw werkruimte geldt en die je altijd kunt intrekken. Je AI kan vragen stellen en voorstellen maken, maar ziet nooit onze code of de gegevens van anderen. Niets verandert zonder jouw akkoord in het OS.",
+  },
+  {
+    question: "Wat kost de boekhouding?",
+    answer:
+      "Odoo biedt één app gratis aan, zoals Facturatie. Die koppel je aan je OS. Wil je meer Odoo-apps, dan betaal je die rechtstreeks aan Odoo.",
   },
   {
     question: "Wat is een Custom OS?",
