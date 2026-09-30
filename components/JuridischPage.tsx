@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronLeft, Download } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
-import { useLanguage, languagePrefix } from "../proposal/i18n/context";
+import { useLanguage } from "../proposal/i18n/context";
 import { DOCUMENTEN } from "./legal-index";
 import Keurmerken from "../proposal/Keurmerken";
 
@@ -46,7 +46,6 @@ export default function JuridischPage() {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = TEKST[language === "nl" ? "nl" : "en"];
-  const prefix = languagePrefix(language);
   useSEO({ title: t.titel, description: t.intro, path: "/juridisch" });
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -76,7 +75,8 @@ export default function JuridischPage() {
                     <p className="text-white/25 text-[11px] font-bold uppercase tracking-widest mt-3">{doc.updated}</p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
-                    <Link to={`${prefix}${d.path}`} className="px-4 py-2 rounded-full border border-white/20 text-xs font-bold uppercase tracking-widest text-white hover:border-white/50 transition-colors">
+                    {/* Zonder taalprefix: de router voegt /nl, /de of /fr zelf toe (zie LegalPage). */}
+                    <Link to={d.path} className="px-4 py-2 rounded-full border border-white/20 text-xs font-bold uppercase tracking-widest text-white hover:border-white/50 transition-colors">
                       {t.lezen}
                     </Link>
                     {/* De pdf is een gewoon bestand in public/, dus geen router-link maar een echte href. */}

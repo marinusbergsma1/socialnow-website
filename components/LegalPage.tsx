@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronLeft, Download } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
-import { useLanguage, languagePrefix } from "../proposal/i18n/context";
+import { useLanguage } from "../proposal/i18n/context";
 import type { LegalDoc } from "./legal";
 import type { Language } from "../proposal/i18n/context";
 
@@ -37,7 +37,9 @@ export default function LegalPage({ doc, path, slug }: { doc: Partial<Record<Lan
                 <Download size={12} />PDF
               </a>
             )}
-            <Link to={`${languagePrefix(language)}/juridisch`} className="text-[11px] font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors">
+            {/* 30 september 2026: geen languagePrefix ervoor. De router heeft al een taalbasis (index.tsx),
+                dus met prefix werd het /nl/nl/juridisch: een 404 op elke juridische pagina in nl, de en fr. */}
+            <Link to="/juridisch" className="text-[11px] font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors">
               {({ nl: "Alle documenten", en: "All documents", de: "Alle Dokumente", fr: "Tous les documents", it: "Tutti i documenti", es: "Todos los documentos" } as Record<string, string>)[language] || "All documents"}
             </Link>
           </div>
