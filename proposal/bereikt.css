@@ -197,3 +197,16 @@
 .sn-site .h-lac-schuif:focus-visible + * , .sn-site .h-lac-beeld:has(.h-lac-schuif:focus-visible) { outline: 2px solid #25d366; outline-offset: 2px; }
 .sn-site .h-lac-kaart figcaption { font-size: 13px; font-weight: 600; color: #c8d2da; }
 @media (max-width: 760px) { .sn-site .h-lac-beeld { height: 200px; } }
+/* 30 september 2026 (Marinus): "Afbeeldingen vallen hier weg". Op de pc paste de strook maar tweeënhalf beeld; het derde werd
+   afgesneden en vier en vijf vielen buiten beeld. Vanaf 900 px alle vijf zichtbaar: drie boven, twee breder eronder, even hoog.
+   Op de telefoon blijft het een swipestrook. */
+@media (min-width: 900px) {
+  .sn-site .h-lac-venster { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; overflow: visible; scroll-snap-type: none; padding-bottom: 0; }
+  .sn-site .h-lac-kaart { grid-column: span 2; min-width: 0; }
+  .sn-site .h-lac-kaart:nth-child(n + 4) { grid-column: span 3; }
+  .sn-site .h-lac-beeld { width: 100%; height: clamp(200px, 17vw, 300px); aspect-ratio: auto; }
+}
+@media (max-width: 899px) {
+  .sn-site .h-lac-kaart { width: 82%; }
+  .sn-site .h-lac-beeld { width: 100%; height: auto; aspect-ratio: 4 / 3; }
+}

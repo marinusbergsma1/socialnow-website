@@ -201,8 +201,10 @@ function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (
   );
 }
 
-function HeroFilm() {
-  const [geluid, setGeluid] = useState<"" | "os" | "veilig">("");
+// 30 september 2026 (Marinus): "wel veel", "iets zakelijker en meer rust". Rechts alleen de OS-film; de
+// veiligheidsfilms staan onder de vouw (HeroVeilig). Home houdt bij welke film geluid heeft, één tegelijk.
+type HeroGeluid = "" | "os" | "veilig";
+function HeroFilm({ geluid, setGeluid }: { geluid: HeroGeluid; setGeluid: (g: HeroGeluid) => void }) {
   return (
     <div className="h-hero-film h-hero-films is-os-veilig">
       <Film
@@ -223,6 +225,13 @@ function HeroFilm() {
         geluid={geluid === "os"}
         zetGeluid={(aan) => setGeluid(aan ? "os" : "")}
       />
+    </div>
+  );
+}
+
+function HeroVeilig({ geluid, setGeluid }: { geluid: HeroGeluid; setGeluid: (g: HeroGeluid) => void }) {
+  return (
+    <div className="h-hero-veilig">
       <VeiligheidSpeler geluid={geluid === "veilig"} zetGeluid={(aan) => setGeluid(aan ? "veilig" : "")} />
     </div>
   );
@@ -261,6 +270,7 @@ export function Home() {
   // 26 september 2026 (Marinus): "ik wil niet dat de taal meer wijzigt". De hero toont de paginataal.
   const getoond = language;
   const taalfase = useTaalfase(getoond);
+  const [heroGeluid, setHeroGeluid] = useState<HeroGeluid>("");
   return (
     <>
       <LanguageContext.Provider value={getoond}>
@@ -291,7 +301,6 @@ export function Home() {
                   <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
                 </svg></span>
               <b>INTEGRATED IN ODOO&rsquo;S ERP SYSTEM</b>
-              <i aria-hidden="true" />
               {/* 30 september 2026 (Marinus): "hier nog iets van watch the aftermovie". */}
               <a className="h-aftermovie" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener">&#9654; Watch the aftermovie</a>
             </p>
@@ -317,12 +326,13 @@ export function Home() {
             </a>
           </div>
           </div>
-          <HeroFilm />
+          <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid} />
           <div className="h-hero-rij">
             {/* 30 september 2026 (Marinus): "hieronder die trusted by, dan zie je al die bekende logo's". */}
             <p className="h-trusted" translate="no">Trusted by</p>
             <ClientLogos kort />
           </div>
+          <HeroVeilig geluid={heroGeluid} setGeluid={setHeroGeluid} />
           <div className="h-story-vol">
             <HeroStory />
           </div>

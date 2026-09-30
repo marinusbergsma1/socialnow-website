@@ -78,3 +78,19 @@
 .sn-site .h-trusted { margin: 0 0 6px; color: #a7b3ad; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
 .sn-site .h-hero .h-hero-rij { grid-column: 1 / -1; margin-top: clamp(28px, 3vw, 44px); padding-top: clamp(18px, 2vw, 26px); border-top: 1px solid #ffffff14; }
 @media (min-width: 1100px) { .sn-site .h-hero .h-hero-rij { display: block; } }
+/* 30 september 2026 (Marinus): "wel veel", "iets zakelijker en meer rust", "logo ook graag links met het team uitgelijnd".
+   Logo: de video heeft 15,24% lege rand links (gemeten op frame 3,3 s), die schuift hij terug zodat het logo op de lijn van
+   team en kop staat. Kop zonder groene gloed. Bewijsregels in één rustige kleur, aftermovie als tekstlink. Veiligheid onder
+   de vouw over de volle breedte. */
+.sn-site .h-hero .h-hero-tekst > .h-hero-logo { --logo-b: clamp(240px, 24vw, 420px); width: var(--logo-b); margin: calc(var(--logo-b) * -.05) 0 calc(var(--logo-b) * -.04) calc(var(--logo-b) * -.1524); }
+.sn-site .h-hero .h-hero-tekst > h1.h-taalwissel .h-kop-groen { text-shadow: 1.5px 0 rgba(255,0,60,.35), -1.5px 0 rgba(0,229,255,.35); }
+.sn-site .h-hero .h-integratie { gap: 14px; padding-top: clamp(16px, 1.6vw, 22px); border-top: 1px solid #ffffff14; }
+.sn-site .h-hero .h-integratie-rij { gap: 8px 14px; color: #c9d2cd; font-size: 12px; letter-spacing: .14em; }
+.sn-site .h-hero .h-integratie-rij > :is(.h-integratie-sf, .h-attesso) { color: #a7b3ad; }
+.sn-site .h-hero .h-integratie-odoo svg { width: clamp(72px, 6vw, 88px); }
+.sn-site .h-hero .h-integratie-sf img { width: 38px; }
+.sn-site .h-hero .h-aftermovie { flex-basis: 100%; padding: 0; border: 0; border-radius: 0; color: #25d366; font-size: 12px; letter-spacing: .12em; }
+.sn-site .h-hero .h-aftermovie:hover { background: none; color: #fff; }
+.sn-site .h-hero .h-hero-veilig { grid-column: 1 / -1; width: 100%; max-width: 1180px; margin: clamp(28px, 3vw, 44px) 0 0; }
+@media (min-width: 900px) { .sn-site .h-hero .h-hero-veilig .h-film-veilig { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); column-gap: 24px; } }
+.sn-site .h-hero .h-hero-tekst > .h-team-trust .h-team-portraits { padding-left: 0; }
