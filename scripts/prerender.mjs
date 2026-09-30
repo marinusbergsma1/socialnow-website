@@ -4,7 +4,8 @@
 // 1. de echte inhoud van de app in #root zetten (index.tsx hydrateert die in de browser);
 // 2. de CSS die deze pagina gebruikt inline in de head zetten en de volledige stylesheet zonder
 //    blokkeren laten laden (Beasties);
-// 3. het logo in de header, de achtergrond van de hero en de letter van de kop (TT Norms Bold) vooraf laden.
+// 3. het logo in de header, de achtergrond van de hero, op brede schermen de poster van de film in de hero
+//    en de letter van de kop (TT Norms Bold) vooraf laden.
 //
 // De 404-pagina en de oude /it- en /es-doorverwijzingen blijven leeg: daar weet de server niet welke
 // route de bezoeker opent. Proef: scripts/proef-prerender.mjs.
@@ -41,7 +42,15 @@ await build({
   },
 });
 
-const { render } = await import(pathToFileURL(path.join(uit, "prerender-entry.mjs")).href);
+const { render, prepare, LANGUAGES } = await import(pathToFileURL(path.join(uit, "prerender-entry.mjs")).href);
+// De taal van een pad volgt uit dezelfde lijst als de app (proposal/i18n/context.ts), zodat er bij een
+// nieuwe taal niets aan deze stap hoeft te veranderen.
+const TAALPAD = new RegExp(`^/(${LANGUAGES.filter((taal) => taal !== "en").join("|")})(?=/|$)`);
+
+// De film in de hero staat pas vanaf de twee kolommen van hero-c.css in de eerste schermhoogte; daar is
+// zijn poster de Largest Contentful Paint. Op smallere schermen valt hij onder de vouw en laadt hij gewoon.
+const heroCss = readFileSync("proposal/hero-c.css", "utf8");
+const TWEE_KOLOMMEN = Number(heroCss.match(/@media \(min-width: (\d+)px\)\s*\{\s*\.sn-site \.h-hero > \.h-hero-content/)?.[1] || 1100);
 
 // React 19 zet voor elke afbeelding zonder loading="lazy" een eigen preload vooraan in de HTML, ook voor
 // het logo in de gesloten QR-dialoog. Op een trage lijn duwen die veertien verzoeken de letter en het
@@ -85,12 +94,13 @@ const paden = [...new Set([...sitemap.matchAll(/<loc>https:\/\/socialnow\.nl([^<
 let aantal = 0;
 const fouten = [];
 for (const pad of paden) {
-  const taal = pad.match(/^\/(nl|de|fr)(?=\/|$)/)?.[1] || "en";
+  const taal = pad.match(TAALPAD)?.[1] || "en";
   const bestand = `dist${pad === "/" ? "" : pad.replace(/\/$/, "")}/index.html`;
   const html = readFileSync(bestand, "utf8");
   if (!html.includes(LEEG)) { fouten.push(`${bestand}: geen lege root`); continue; }
   let inhoud;
   try {
+    await prepare(taal);
     inhoud = render(pad, taal).replace(REACT_BEELDPRELOADS, "");
   } catch (fout) {
     fouten.push(`${pad}: ${fout?.message || fout}`);
@@ -100,7 +110,9 @@ for (const pad of paden) {
   // het grootste beeld in de eerste schermhoogte en dus de Largest Contentful Paint).
   const logo = inhoud.match(/<a class="h-brand"[^>]*><img[^>]*>/)?.[0].replace(/^<a[^>]*>/, "");
   const achtergrond = inhoud.match(/<img class="brand-globe-fallback"[^>]*>/)?.[0];
-  const vooraf = LETTER + beeldVooraf(logo) + beeldVooraf(achtergrond);
+  const poster = inhoud.match(/<section class="h-hero"[\s\S]*?<\/section>/)?.[0].match(/<video[^>]*\sposter="([^"]+)"/)?.[1];
+  const vooraf = LETTER + beeldVooraf(logo) + beeldVooraf(achtergrond)
+    + (poster ? `\n    <link rel="preload" href="${poster}" as="image" media="(min-width: ${TWEE_KOLOMMEN}px)" fetchpriority="high" />` : "");
   const metInhoud = html
     .replace(/<meta charset="UTF-8" \/>/, `$&\n    ${vooraf}`)
     .replace(LEEG, `<div id="root" data-prerender="${taal}">${inhoud}</div>`);
