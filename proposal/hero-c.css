@@ -102,4 +102,5 @@
    grijsfilter en de 80% dekking, en groter in de balk onder de OS-film. */
 .sn-site .h-clients .h-clients-lus img { filter: none; opacity: 1; }
 .sn-site .h-hero .h-hero-merken .h-clients.h-clients-kort .h-clients-lus { gap: clamp(48px, 4.5vw, 84px); padding-right: clamp(48px, 4.5vw, 84px); }
-.sn-site .h-hero .h-hero-merken .h-clients.h-clients-kort .h-clients-lus img { height: calc(clamp(56px, 5.6vw, 84px) * var(--logo-maat, 1)); max-width: 240px; }
+/* 30 september 2026 (Marinus): "Super, maar ze zijn iets te groot." Basis van 81 naar 66 px op 1440 (ongeveer 18% kleiner). */
+.sn-site .h-hero .h-hero-merken .h-clients.h-clients-kort .h-clients-lus img { height: calc(clamp(46px, 4.6vw, 68px) * var(--logo-maat, 1)); max-width: 200px; }

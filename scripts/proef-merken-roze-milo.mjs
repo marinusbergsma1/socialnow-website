@@ -16,6 +16,7 @@ const eisen = [
   ["melding sluit vanzelf na 5 s, pauzeert bij hover", /h-koekje-tijd" aria-hidden="true" onAnimationEnd=\{sluit\}/.test(koekje) && koekjeCss.includes("animation: h-koekje-tijd 5s linear") && /\.h-koekje:hover \.h-koekje-tijd[^{]*\{ animation-play-state: paused/.test(koekjeCss)],
   ["outro: kaart en Milo gaan met een eigen animatie weg", koekjeCss.includes("@keyframes h-koekje-weg") && koekjeCss.includes("@keyframes h-koekje-milo-weg")],
   ["merken bijgesneden en groter, vol wit", ["AMSTERDAM-LIGHT-FESTIVAL-LOGO", "CHIN-CHIN-CLUB-LOGO", "MOJO-LOGO", "SUPPERCLUB-LOGO", "UNDER-ARMOUR-LOGO-1"].every((n) => content.includes(`"merken/${n}.webp"`) && existsSync(`public/images/merken/${n}.webp`)) && css.includes(".sn-site .h-clients .h-clients-lus img { filter: none; opacity: 1; }")],
+  ["merken iets kleiner (basis 4.6vw, max 68px)", css.includes("height: calc(clamp(46px, 4.6vw, 68px) * var(--logo-maat, 1)); max-width: 200px;")],
   ["geen oude vertalingen meer", talen.every((s) => !s.includes("Milo heeft ze allemaal opgegeten."))],
 ];
 let fout = 0;
