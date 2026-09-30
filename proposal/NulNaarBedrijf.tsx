@@ -69,12 +69,12 @@ function Koppelingen() {
   );
 }
 
-// De terminal typt de koppeling zoals het OS die per soort AI-assistent laat zien (api/_mcp-core.js, clientSetup).
-// 30 september 2026: geen modelnamen in sitecopy, dus de tabs heten naar de plek waar je AI draait.
+// De terminal toont wat je in je AI-assistent invult: de connector-URL van het OS (api/mcp.js). De echte commando's per
+// assistent staan in het OS (api/_mcp-core.js, clientSetup); die noemen modelnamen en horen daarom niet in sitetekst.
 const AI_SCRIPTS = [
-  { naam: "Terminal", commando: "mcp add socialnow https://app.socialnow.nl/api/mcp" },
+  { naam: "Terminal", commando: "connector-url https://app.socialnow.nl/api/mcp" },
   { naam: "Editor", commando: '"socialnow": { "url": "https://app.socialnow.nl/api/mcp" }' },
-  { naam: "App", commando: "connector: https://app.socialnow.nl/api/mcp" },
+  { naam: "App", commando: "connector-url https://app.socialnow.nl/api/mcp" },
 ];
 
 function AiTerminal() {
@@ -111,7 +111,7 @@ function AiTerminal() {
         </span>
       </div>
       <p className="h-terminal-regels">
-        <span className="is-prompt">$ </span>
+        <span className="is-prompt">› </span>
         <span translate="no">{commando.slice(0, getypt)}</span>
         {fase === 0 && <span className="h-terminal-cursor" />}
         {fase >= 1 && <>{"\n"}<span className="is-ok">{t("✓ Verbonden met jouw OS, alleen jouw werkruimte")}</span></>}

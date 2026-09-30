@@ -158,7 +158,7 @@ function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (
   const [nummer, setNummer] = useState(0);
   const ref = React.useRef<HTMLVideoElement>(null);
   const film = VEILIGHEIDSFILMS[nummer];
-  React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid, nummer]);
+  React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid, nummer, taal]);
   // Een nieuw nummer geeft een nieuw videovak (key), dat met autoPlay zelf start.
   const kies = (index: number) => setNummer(index);
   const wissel = () => {
