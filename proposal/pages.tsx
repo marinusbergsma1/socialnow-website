@@ -20,6 +20,7 @@ import Verhaal from "./Verhaal";
 import { Bento, Tegel } from "./Bento";
 import Deuren from "./Deuren";
 import Bereikt from "./Bereikt";
+import { Statement } from "./Statement";
 import NulNaarBedrijf from "./NulNaarBedrijf";
 import MensEnAI from "./MensEnAI";
 import VacaturesBento from "./VacaturesBento";
@@ -220,6 +221,7 @@ export function Home() {
         </div>
       </section>
       </LanguageContext.Provider>
+      <Statement />
       {/* 28 september 2026 (Marinus): "de homepage moet een upgrade gaan krijgen met storytelling". De volgorde vertelt
           het verhaal: wie we zijn, wat je kunt doen, het bewijs, het vertrouwen, en dan pas het product in detail. */}
       {/* 29 september 2026 (Marinus): "zet vooral wat ze hebben bereikt met mooie animaties aanwezig op mijn homepage".

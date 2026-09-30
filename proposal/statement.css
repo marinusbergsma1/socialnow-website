@@ -1,0 +1,19 @@
+/* Statement onder de hero (30 september 2026). Eén brede tegel, grote kapitalen, groene conclusie, kleine regel eronder.
+   Ligaturen uit, letters nooit aan elkaar. */
+.sn-site .sn-statement .sn-tegel-vlak { display: grid; gap: clamp(14px, 1.6vw, 22px); font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0, "dlig" 0; }
+.sn-site .sn-statement-woorden { display: flex; flex-wrap: wrap; gap: .1em .42em; margin: 0; color: #fff; font-size: clamp(30px, 5.2vw, 76px); font-weight: 800; line-height: 1.02; letter-spacing: -.01em; text-transform: uppercase; }
+.sn-site .sn-statement-woorden > span:not(:last-child)::after { content: " ·"; color: #25d366; }
+.sn-site .sn-statement-woorden > span:nth-last-child(2)::after { content: ""; }
+.sn-site .sn-statement-systemen { color: #25d366; }
+.sn-site .sn-statement-daarom { margin: 0; color: #fff; font-size: clamp(22px, 2.6vw, 38px); font-weight: 700; line-height: 1.15; }
+.sn-site .sn-statement-klein { margin: 0; color: #99b1a1; font-size: clamp(12px, 1vw, 14px); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.sn-site .sn-statement-founder .sn-tegel-vlak { gap: clamp(18px, 2vw, 26px); }
+.sn-site .sn-founder-rij { display: flex; align-items: center; gap: clamp(16px, 2vw, 28px); }
+.sn-site .sn-founder-rij img { width: clamp(72px, 7vw, 104px); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #25d366; }
+.sn-site .sn-founder-kop { margin: 0 0 10px; color: #fff; font-size: clamp(24px, 3.4vw, 48px); font-weight: 800; line-height: 1.05; text-transform: uppercase; }
+.sn-site .sn-founder-tekst { margin: 0 0 12px; color: #e8f5ec; font-size: clamp(16px, 1.4vw, 20px); line-height: 1.4; }
+.sn-site .sn-founder-naam { margin: 0; color: #c3ccd4; font-size: 13px; }
+.sn-site .sn-founder-naam strong { color: #fff; margin-right: 6px; }
+.sn-site .sn-founder-knop { justify-self: start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #189447; color: #fff; font-weight: 700; text-decoration: none; }
+.sn-site .sn-founder-knop:hover { background: #1ba452; color: #fff; }
+@media (max-width: 640px) { .sn-site .sn-founder-rij { align-items: flex-start; } .sn-site .sn-founder-knop { justify-self: stretch; justify-content: center; } }
