@@ -1,0 +1,21 @@
+/* Statement onder de hero (30 september 2026). Eén brede tegel, grote kapitalen, groene conclusie, kleine regel eronder.
+   Ligaturen uit, letters nooit aan elkaar. */
+.sn-site .sn-statement .sn-tegel-vlak { display: grid; gap: clamp(14px, 1.6vw, 22px); font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0, "dlig" 0; }
+/* Ronde 2 (30 september 2026, optie A): één zin in plaats van zes kapitalen met stippen. */
+.sn-site .sn-statement-zin { margin: clamp(8px, 1.4vw, 20px) 0 0; max-width: 20ch; color: #fff; font-size: clamp(30px, 4.6vw, 64px); font-weight: 700; line-height: 1.08; letter-spacing: -.02em; text-wrap: balance; }
+.sn-site .sn-statement-zin span { color: rgba(255, 255, 255, .62); font-weight: 500; }
+.sn-site .sn-statement-zin em { color: #25d366; font-style: normal; }
+.sn-site .sn-statement-voet { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 40px; margin-top: clamp(12px, 2vw, 28px); padding-top: clamp(18px, 2.2vw, 28px); border-top: 1px solid rgba(255, 255, 255, .1); }
+.sn-site .sn-statement-daarom { margin: 0; color: #fff; font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; line-height: 1.2; letter-spacing: -.01em; }
+.sn-site .sn-statement-klein { margin: 0; color: rgba(255, 255, 255, .62); font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.sn-site .sn-statement-founder .sn-tegel-vlak { gap: clamp(18px, 2vw, 26px); }
+.sn-site .sn-founder-rij { display: flex; align-items: center; gap: clamp(16px, 2vw, 28px); }
+.sn-site .sn-founder-rij img { width: clamp(72px, 7vw, 104px); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #25d366; }
+.sn-site .sn-founder-kop { margin: 0 0 10px; color: #fff; font-size: clamp(24px, 3.4vw, 48px); font-weight: 800; line-height: 1.05; text-transform: uppercase; }
+.sn-site .sn-founder-tekst { margin: 0 0 12px; color: #e8f5ec; font-size: clamp(16px, 1.4vw, 20px); line-height: 1.4; }
+.sn-site .sn-founder-naam { margin: 0; color: #c3ccd4; font-size: 13px; }
+.sn-site .sn-founder-naam strong { color: #fff; margin-right: 6px; }
+.sn-site .sn-founder-knop { justify-self: start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #189447; color: #fff; font-weight: 700; text-decoration: none; }
+.sn-site .sn-founder-knop:hover { background: #1ba452; color: #fff; }
+@media (max-width: 640px) { .sn-site .sn-founder-rij { align-items: flex-start; } .sn-site .sn-founder-knop { justify-self: stretch; justify-content: center; } }
+.sn-site .sn-statement { padding-top: clamp(32px, 4vw, 56px); }

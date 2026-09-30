@@ -2001,6 +2001,9 @@ html {
 .sn-site .h-film-caption strong { color: #fff; font-size: 19px; }
 .sn-site .h-film-caption > span { color: #ddd; font-size: 10px; }
 .sn-site .h-film-note { margin-top: 16px; }
+.sn-site .h-film-security-note { margin: 10px 0 0; text-align: center; }
+.sn-site .h-film-security-note a { color: #a9a9ad; font-size: 12px; text-decoration: underline; text-underline-offset: 4px; }
+.sn-site .h-film-security-note a:hover { color: #fff; }
 @media(max-width:700px) { .sn-site .h-nav { gap: 10px; } .sn-site .h-language-switch { gap: 4px; font-size: 10px; } .sn-site .h-film-grid { grid-template-columns: 1fr; gap: 14px; } .sn-site .h-film-caption { padding: 32px 14px 14px; } .sn-site .h-film-caption strong { font-size: 16px; } .sn-site .h-film-caption > span { display: none; } }
 
 /* Compact, useful reassurance beneath the work. */
@@ -2762,11 +2765,13 @@ html {
 .sn-site .h-team-trust strong { font-size: 15px; white-space: normal; }
 .sn-site .h-team-trust > span:last-child > span { font-size: 13px; }
 @media (min-width: 1100px) {
-  .sn-site .h-hero-rij > .h-team-trust, .sn-site .h-hero-tekst > .h-team-trust { gap: 18px; flex-wrap: nowrap; }
+  .sn-site .h-hero-rij > .h-team-trust, .sn-site .h-hero-tekst > .h-team-trust { gap: 18px; flex-wrap: wrap; row-gap: 12px; }
   .sn-site :is(.h-hero-rij, .h-hero-tekst) .h-team-portraits img { width: 48px; height: 48px; margin-left: -13px; border-width: 3px; }
   .sn-site :is(.h-hero-rij, .h-hero-tekst) .h-team-portraits img:first-child { margin-left: 0; }
   .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust strong { font-size: clamp(15px, 1vw, 17px); white-space: normal; }
-  .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust > span:last-child { min-width: 0; }
+  /* 29 september 2026 (Marinus: "dit lijkt niet helemaal goed te gaan"): met elf portretten op één rij kneep nowrap de
+     tekst tot een smal kolommetje. Past de tekst niet op minstens 190px naast de portretten, dan gaat hij eronder. */
+  .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust > span:last-child { flex: 1 1 190px; min-width: 190px; }
   .sn-site :is(.h-hero-rij, .h-hero-tekst) > .h-team-trust > span:last-child > span { font-size: 14px; }
 }
 
@@ -2865,6 +2870,7 @@ html {
 .sn-site .h-deur-status .sn-tegel-vlak { flex-direction: row; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
 .sn-site .h-deur-merk { display: inline-flex; align-items: center; gap: 12px; }
 .sn-site .h-deur-merk svg { height: 30px; width: auto; flex: none; }
+.sn-site .h-deur-merk .h-deur-salesforce { height: 46px; width: auto; flex: none; display: block; }
 .sn-site .is-live .h-deur-merk span { font-size: 12px; font-weight: 700; letter-spacing: .2em; color: #fff; padding-top: 2px; }
 .sn-site .is-bouw .h-deur-merk span { font-size: 19px; font-weight: 700; color: #fff; letter-spacing: -.01em; }
 .sn-site .h-deur-status b { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
@@ -2881,35 +2887,6 @@ html {
 @media (max-width: 760px) {
   .sn-site .h-verhaal-portret .sn-tegel-vlak { min-height: 360px; }
   .sn-site .h-deur .h-deur-knop { align-self: stretch; }
-}
-
-/* 28 september 2026 (Marinus): live sites houden het scrollen van de pagina niet meer vast. Pas na een klik scrolt de site zelf. */
-.sn-site .h-live-screen { position: relative; overflow: hidden; }
-.sn-site .h-live-screen.is-actief { overflow: auto; }
-.sn-site .h-live-activeer { position: absolute; inset: 0; z-index: 2; display: flex; align-items: flex-end; justify-content: center; padding: 0 0 22px; border: 0; background: transparent; cursor: pointer; }
-.sn-site .h-live-activeer span { padding: 11px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); background: rgba(6, 10, 16, .82); backdrop-filter: blur(10px); color: #fff; font-size: 14px; font-weight: 600; opacity: 0; transform: translateY(6px); transition: opacity .25s ease, transform .25s ease; }
-.sn-site .h-live-activeer:hover span, .sn-site .h-live-activeer:focus-visible span { opacity: 1; transform: none; }
-@media (hover: none) { .sn-site .h-live-activeer span { opacity: 1; transform: none; } }
-
-/* 28 september 2026 (Marinus): de live sites als bentotegels. Links de echte website, rechts naam, uitleg, cijfers en de keuze. */
-.sn-site .h-live-tegel .sn-tegel-vlak { padding: 12px; gap: 10px; }
-.sn-site .h-live-tegel .h-live-toolbar { margin: 0; padding: 2px 4px 0; border: 0; background: none; box-shadow: none; justify-content: flex-end; }
-.sn-site .h-live-tegel .h-live-title { display: none; }
-.sn-site .h-live-tegel .h-live-device { box-shadow: none; border-radius: 14px; }
-.sn-site .h-live-info .sn-tegel-vlak { gap: 16px; }
-.sn-site .h-live-info .sn-tegel-tekst { display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
-.sn-site .h-live-cijfers { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.sn-site .h-live-cijfers div { padding: 12px 10px; border-radius: 14px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.02); min-width: 0; }
-.sn-site .h-live-cijfers dt { font-size: 10.5px; line-height: 1.3; color: #8b949c; letter-spacing: .05em; text-transform: uppercase; }
-.sn-site .h-live-cijfers dd { margin: 6px 0 0; font-size: 14.5px; line-height: 1.25; font-weight: 700; overflow-wrap: anywhere; }
-.sn-site .h-live-info .h-live-bottom { margin-top: auto; padding: 0; gap: 10px 16px; flex-wrap: wrap; }
-.sn-site .h-live-info .h-live-bottom > .h-text-link { font-size: 13px; }
-.sn-site .h-live-info .h-site-thumbnails { flex-wrap: wrap; gap: 8px; overflow: visible; padding: 0; }
-.sn-site .h-live-info .h-site-thumbnails button { flex: 0 0 auto; min-height: 0; padding: 8px 14px; border-radius: 999px; }
-.sn-site .h-live-info .h-site-thumbnails button > span { font-size: 12.5px; padding: 0; color: #d3d9df; }
-@media (max-width: 1099px) {
-  .sn-site .h-live-tegel { grid-column: span 12; }
-  .sn-site .h-live-info { grid-column: span 12; }
 }
 
 /* 28 september 2026 (Marinus): het OS, See it in motion, diensten, social en vragen als bentotegels. */
@@ -2958,3 +2935,52 @@ html {
 .sn-site .h-hero-tekst > .h-hero-odoo-regel { margin: -12px 0 0 !important; display: grid; gap: 6px; }
 .sn-site .h-hero-odoo-regel b { font-size: clamp(12px, .95vw, 14px); font-weight: 700; letter-spacing: .16em; color: #fff; }
 .sn-site .h-hero-odoo-regel small { font-size: 11px; font-weight: 700; letter-spacing: .16em; color: #7fd3f5; }
+.sn-site .h-hero-odoo-regel small { display: inline-flex; align-items: center; gap: 10px; }
+.sn-site .h-hero-odoo-regel .h-hero-salesforce { height: 26px; width: auto; flex: none; }
+
+/* Chosen outline variant: flat green login bar, white platform logos, no glow. */
+.sn-site .h-os-dock { width: 100%; max-width: 600px; border: 1px solid #23874a; border-radius: 24px; overflow: hidden; background: #070908; box-shadow: none; text-align: left; }
+.sn-site .h-dock-login { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 26px; color: #fff; background: #189447; border-bottom: 1px solid #23874a; font-size: clamp(22px,2.1vw,30px); font-weight: 700; line-height: 1.2; }
+.sn-site .h-dock-login:hover { background: #1ba452; color: #fff; }
+.sn-site .h-dock-arrow { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid #ffffff66; border-radius: 50%; flex-shrink: 0; }
+.sn-site .h-dock-bottom { display: block; padding: 18px; }
+.sn-site .h-dock-label { display: block; margin-bottom: 12px; color: #99b1a1; font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; }
+.sn-site .h-dock-platforms { display: grid; grid-template-columns: repeat(4,1fr); }
+.sn-site .h-dock-platform { display: flex; justify-content: center; align-items: center; gap: 8px; min-height: 40px; padding: 6px; border: 0; border-right: 1px solid #34473b; background: transparent; color: #fff; font: inherit; font-size: 14px; cursor: pointer; }
+.sn-site .h-dock-platform:last-child { border-right: 0; }
+.sn-site .h-dock-platform svg { width: 19px; height: 19px; flex-shrink: 0; color: #fff; }
+.sn-site .h-dock-platform:hover, .sn-site .h-dock-platform[aria-expanded="true"] { background: #292f2b; color: #fff; border-radius: 6px; }
+.sn-site .h-os-dock :focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+.sn-site .h-os-dock .h-install-hulp { margin: 0; padding: 0 22px 22px; width: 100%; }
+.sn-site .h-verhaal .h-hero-review { max-width: 680px; }
+.sn-site .h-verhaal-hoofdstukken .h-hoofdstuk-logos img.is-horizon { height: 54px; max-width: 150px; filter: none; opacity: 1; background: #fff; border-radius: 3px; padding: 4px; }
+@media(max-width: 480px) {
+ .sn-site .h-dock-login { padding: 22px 18px; font-size: 23px; }
+ .sn-site .h-dock-bottom { padding: 15px 10px; }
+ .sn-site .h-dock-label { margin-left: 8px; }
+ .sn-site .h-dock-platform { flex-direction: column; font-size: 12px; gap: 6px; }
+}
+
+/* Developer Milo werkt achter de laptop in het hoofdstuk De omslag. */
+.sn-site .h-hoofdstuk-beeld .h-character-coder { position: relative; inset: auto; width: 150px; max-width: 100%; margin: 0 auto; aspect-ratio: 1; }
+@media (max-width: 639px) { .sn-site .h-hoofdstuk-beeld .h-character-coder { width: 120px; } }
+
+/* 30 september 2026 (Marinus): de OS-film hoger en groot bovenaan rechts, daaronder de vijf veiligheidsfilms met
+   genummerde knoppen. De Brusselfilm staat niet meer in de hero. */
+.sn-site .h-hero-films.is-os-veilig { flex-direction: column; align-items: stretch; gap: clamp(18px, 2vw, 28px); }
+@media (min-width: 1100px) { .sn-site .h-hero-films.is-os-veilig { align-self: start; margin-top: clamp(0px, 2vw, 24px); } }
+.sn-site .h-hero-films.is-os-veilig > .h-film-os { flex: none; width: 100%; }
+.sn-site .h-film-veilig { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); column-gap: 16px; align-items: start; }
+.sn-site .h-film-veilig > .h-film-titel { grid-column: 1 / -1; }
+.sn-site .h-film-veilig video { aspect-ratio: 16 / 9; }
+.sn-site .h-veilig-nummers { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; align-content: start; }
+.sn-site .h-veilig-nummers button { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 0; padding: 7px 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.03); color: #aeb8c1; font: inherit; font-size: 13px; font-weight: 600; text-align: left; cursor: pointer; transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.sn-site .h-veilig-nummers b { display: grid; place-items: center; width: 22px; height: 22px; flex: none; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); font-size: 11px; font-weight: 800; color: #fff; }
+.sn-site .h-veilig-nummers button:hover, .sn-site .h-veilig-nummers button:focus-visible { border-color: rgba(37,211,102,.5); color: #fff; outline: none; }
+.sn-site .h-veilig-nummers button[aria-current="true"] { border-color: #25d366; background: rgba(37,211,102,.1); color: #fff; }
+.sn-site .h-veilig-nummers button[aria-current="true"] b { background: #25d366; border-color: #25d366; color: #04130a; }
+@media (max-width: 640px) {
+  .sn-site .h-film-veilig { grid-template-columns: minmax(0, 1fr); row-gap: 12px; }
+  .sn-site .h-veilig-nummers { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .sn-site .h-veilig-nummers button { flex-direction: column; gap: 4px; padding: 8px 4px; text-align: center; font-size: 10.5px; line-height: 1.2; }
+}

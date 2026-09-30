@@ -36,7 +36,7 @@ const team: TeamItem[] = [
     id: 3, 
     type: 'member',
     name: "Sergio Jovovic", 
-    role: "Meta Marketeer", 
+    role: "Meta Ads en automations specialist", 
     image: `${import.meta.env.BASE_URL}images/Sergio-Jovovic.webp`,
     imgCustomClass: "[&>img]:!scale-[1.3] group-hover:[&>img]:!scale-[1.38]"
   },

@@ -1,5 +1,5 @@
 import React, { useEffect, useId, useState } from "react";
-import { ArrowRight, Download, Star } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Download, Star } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 
 const taalPad = typeof window === "undefined" ? "" : (window.location.pathname.match(/^\/(nl|de|fr)(?=\/|$)/)?.[0] || "");
@@ -85,7 +85,7 @@ function AndroidLogo() {
 
 // 28 september 2026 (Marinus): "Install on Mac" leest niet als downloaden. Eén knop Download met het icoon links,
 // daarnaast kleine rondjes voor alle vier de systemen. De knop geeft de uitleg voor dit apparaat, een rondje voor dat systeem.
-export function InstallKnop() {
+export function InstallKnop({ dock = false }: { dock?: boolean }) {
   const { t } = useLanguage();
   const [open, setOpen] = useState<string | null>(null);
   const [hint, setHint] = useState("");
@@ -104,16 +104,17 @@ export function InstallKnop() {
   ];
   return (
     <>
-      <span className="h-download">
-        <button type="button" className="os-install sn-btn3d h-button h-button-secondary h-install-knop" onClick={eigen} aria-expanded={open === "eigen"} aria-controls={helpId}>
+      <span className={dock ? "h-dock-bottom" : "h-download"}>
+        {dock && <span className="h-dock-label">{t("Download voor")}</span>}
+        {!dock && <button type="button" className="os-install sn-btn3d h-button h-button-secondary h-install-knop" onClick={eigen} aria-expanded={open === "eigen"} aria-controls={helpId}>
           <span className="sn-btn3d-sheen" />
           <Download size={19} aria-hidden="true" className="h-download-icoon" />
           <span>Download</span>
-        </button>
-        <span className="h-install-andere">
+        </button>}
+        <span className={dock ? "h-dock-platforms" : "h-install-andere"}>
           {systemen.map((p) => (
-            <button key={p.sleutel} type="button" className="h-install-icoon" onClick={() => kies(p.sleutel, p.hint)} aria-expanded={open === p.sleutel} aria-controls={helpId} aria-label={p.sleutel} title={p.sleutel}>
-              {p.icoon}
+            <button key={p.sleutel} type="button" className={dock ? "h-dock-platform" : "h-install-icoon"} onClick={() => kies(p.sleutel, p.hint)} aria-expanded={open === p.sleutel} aria-controls={helpId} aria-label={p.sleutel} title={p.sleutel}>
+              {p.icoon}{dock && <span translate="no">{p.sleutel.replace("Download voor ", "").replace(" en iPad", "")}</span>}
             </button>
           ))}
         </span>
@@ -134,6 +135,17 @@ function WindowsLogo() {
       <path fill="currentColor" d="M1 3.5 10 2.3v8.7H1zm10-1.3L23 .5V11H11zM1 12h9v8.7L1 19.5zm10 0h12v11.5l-12-1.7z" />
     </svg>
   );
+}
+
+export function OsDock() {
+  const { t } = useLanguage();
+  return <div className="h-os-dock">
+    <a className="h-dock-login" href={GRATIS_OS_URL}>
+      <span>{t("Log in op je gratis OS")}</span>
+      <span className="h-dock-arrow"><ArrowUpRight size={24} aria-hidden="true" /></span>
+    </a>
+    <InstallKnop dock />
+  </div>;
 }
 
 export function OsProof({ stand }: { stand: OsStand | null }) {
@@ -190,16 +202,7 @@ export default function OsEntry({showProof = true}:{showProof?:boolean}) {
 
   return (
     <div className="os-entry">
-      <div className="os-actions">
-        <a className="os-claim sn-btn3d h-button" href={GRATIS_OS_URL}>
-          <span className="sn-btn3d-sheen" />
-          <span>Probeer het OS gratis</span>
-          <span className="h-button-icon">
-            <ArrowRight size={16} aria-hidden="true" />
-          </span>
-        </a>
-        <InstallKnop />
-      </div>
+      <OsDock />
       <p className="os-product-note">In je browser of als app. Hetzelfde OS.</p>
       {showProof && <OsProof stand={stand} />}
     </div>

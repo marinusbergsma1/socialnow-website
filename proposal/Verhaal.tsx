@@ -1,5 +1,9 @@
 import React from "react";
+import CharacterAccent from "./CharacterAccent";
+import { HeroReview } from "./CustomerReviews";
+import LightArtStrook from "./LightArtStrook";
 import { people } from "./content";
+import { TextLink } from "./ui";
 import { Bento, BentoFilm, Tegel } from "./Bento";
 import { useLanguage } from "./i18n/context";
 
@@ -34,7 +38,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     breed: 3,
     beeld: (
       <span className="h-hoofdstuk-logos" translate="no">
-        <img src="/images/AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp" alt="Amsterdam Light Festival" loading="lazy" />
+        <img className="is-horizon" src="/images/HORIZON-COLLEGE-LOGO.jpg" alt="Horizon College" loading="lazy" />
       </span>
     ),
   },
@@ -65,7 +69,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
   {
     wanneer: "November 2021",
     titel: "SocialNow.",
-    tekst: "Na succes als ondernemer begon ik mijn eigen bedrijf, met een team van specialisten om me heen.",
+    tekst: "In november 2026 bestaat SocialNow vijf jaar. Wat begon met mijn eigen bedrijf, groeide uit tot een team van specialisten.",
     breed: 3,
   },
   {
@@ -74,6 +78,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     tekst: "Ik verdiepte me in AI en development. Het persoonlijke bleef de kern.",
     breed: 3,
     soort: "roze",
+    beeld: <CharacterAccent kind="coder" />,
   },
   {
     wanneer: "Het OS",
@@ -142,6 +147,9 @@ export default function Verhaal() {
         {film && (
           <Tegel kop="Mijn waarom" breed={12}>
             <Waarom />
+            <HeroReview />
+            <LightArtStrook />
+            <div className="sn-tegel-onder"><TextLink to="/projecten">Bekijk het werk achter mijn verhaal</TextLink></div>
           </Tegel>
         )}
       </Bento>

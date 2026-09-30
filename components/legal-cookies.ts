@@ -49,6 +49,7 @@ export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
         bullets: [
           [
             "sn-akkoord (localStorage, blijft tot je je browseropslag leegmaakt): onthoudt dat je het welkomstscherm met de voorwaarden hebt gezien, per versie van die tekst. Een nieuwe versie vraagt opnieuw.",
+            "sn-koekje (localStorage, blijft tot je je browseropslag leegmaakt): onthoudt dat je de melding met Milo over cookies hebt gesloten, zodat hij niet op elke pagina terugkomt.",
             "sn-taal (cookie op .socialnow.nl, één jaar): de taal die je koos, zodat de site en het OS in dezelfde taal staan.",
             "sn-land (cookie op .socialnow.nl, één jaar): het land dat je koos, waarmee wij de taal en de juiste contactgegevens bepalen.",
             "sn-meten (cookie op .socialnow.nl, 180 dagen vanuit de app; een jaar vanuit de website) en sn-replay-v1 (180 dagen vanuit de app): afzonderlijke keuzes over meten en opnemen, ja of nee. Deze cookie is zelf noodzakelijk, want zonder hem weten wij niet dat je nee hebt gezegd.",
@@ -127,6 +128,7 @@ export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
         bullets: [
           [
             "sn-akkoord (localStorage, stays until you clear your browser storage): remembers that you have seen the welcome screen with the terms, per version of that text. A new version asks again.",
+            "sn-koekje (localStorage, kept until you clear your browser storage): remembers that you closed the note with Milo about cookies, so it does not come back on every page.",
             "sn-taal (cookie on .socialnow.nl, one year): the language you chose, so the site and the OS are in the same language.",
             "sn-land (cookie on .socialnow.nl, one year): the country you chose, from which we derive the language and the right contact details.",
             "sn-meten (cookie on .socialnow.nl, 180 days from the app; one year from the website) and sn-replay-v1 (180 days from the app): separate choices about measurement and recording, yes or no. This cookie is itself necessary, because without it we do not know that you said no.",

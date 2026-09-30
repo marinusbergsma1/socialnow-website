@@ -1,6 +1,6 @@
 # SocialNow
 
-> SocialNow is een AI-native creative agency uit Amsterdam dat website, CRM, content en advertenties samenbrengt in één overzichtelijke AI-chat. Bedrijven starten met een gratis proof of concept — een complete website-demo én rebranding — en zien het systeem werken vóór ze iets betalen.
+> SocialNow OS is de AI-gestuurde persoonlijke werkplek, met échte professionals en menselijk contact. SocialNow is een AI-native creative agency uit Amsterdam dat website, CRM, content en advertenties samenbrengt in één overzichtelijke AI-chat, bovenop Odoo. Bedrijven starten gratis met het OS, een complete demowebsite en een basic rebranding, en zien het systeem werken vóór ze iets betalen.
 
 ## Wat SocialNow doet
 
@@ -12,8 +12,9 @@
 
 ## Aanbod en prijzen
 
-- **Gratis proof of concept**: complete website-demo + rebranding, gratis en vrijblijvend. Oplevering binnen 1 week na de discovery call.
-- **Alles-in-1 AI pakket / Content Automation**: vanaf €3.000 per maand, inclusief branded content, planning, ads-optimalisatie en analytics.
+- **Gratis OS**: altijd gratis te gebruiken, met een gratis demowebsite en basic rebranding.
+- **OS op maat**: je eigen OS op je eigen Odoo, vanaf €10.000, prijs op aanvraag.
+- **Maandpakketten** (minimaal 3 maanden): Content €4.000, Content + Meta €5.000, Meta + Google €5.500, Compleet €6.000 per maand. Elk pakket inclusief custom OS, complete rebranding, website en een persoonlijke call waarin we het systeem uitleggen.
 - Heb je al een website? Dan volgt een gratis demo-upgrade van je bestaande site.
 
 ## Resultaten
@@ -24,7 +25,7 @@
 
 ## Belangrijkste pagina's
 
-- [Home](https://socialnow.nl/): overzicht van het AI-systeem en de gratis proof of concept.
+- [Home](https://socialnow.nl/): van nul naar een draaiend bedrijf in één uur, met het gratis OS.
 - [Diensten](https://socialnow.nl/diensten): website, CRM, content en ads in detail.
 - [Prijzen](https://socialnow.nl/prijzen): pakketten en tarieven.
 - [Privacy](https://socialnow.nl/privacy): privacybeleid.
@@ -33,4 +34,4 @@
 
 - Website: https://socialnow.nl
 - Locatie: Amsterdam, Nederland
-- Boek een gratis discovery call via de website.
+- Plan een persoonlijk gesprek via https://socialnow.nl/contact.

@@ -12,7 +12,7 @@ export const people = [
   {
     name: "Sergio Jovovic",
     // 28 september 2026 (Marinus): Sergio staat ook bij Meta Ads.
-    role: "Meta Ads Specialist",
+    role: "Meta Ads en automations specialist",
     image: "Sergio-Jovovic.webp",
   },
   {
@@ -50,6 +50,8 @@ export const people = [
     role: "Head of Supply Chain, Operations & AI Payments",
     image: "Michelle-Yang-HD.webp",
   },
+  // 30 september 2026 (Marinus): nieuw teamlid.
+  { name: "Tristan Slobbe", role: "Data & AI Engineer", image: "Tristan-Slobbe.webp" },
 ];
 export const agents = [
   {
@@ -234,7 +236,17 @@ export const faqs = [
   {
     question: "Waar begin ik?",
     answer:
-      "Probeer eerst het systeem. Ervaar het overzicht voordat we samen je Custom OS inrichten. Op de Odoo-beurs laten we je zien hoe het werkt.",
+      "Log in op je gratis OS en kies: een nieuw bedrijf beginnen of je bestaande bedrijf koppelen. Wil je het helemaal rond je bedrijf, dan richten we je OS samen op maat in.",
+  },
+  {
+    question: "Kan mijn eigen AI bij jullie data of code?",
+    answer:
+      "Nee. Je eigen AI-assistent koppel je met een eigen sleutel die alleen voor jouw werkruimte geldt en die je altijd kunt intrekken. Je AI kan vragen stellen en voorstellen maken, maar ziet nooit onze code of de gegevens van anderen. Niets verandert zonder jouw akkoord in het OS.",
+  },
+  {
+    question: "Wat kost de boekhouding?",
+    answer:
+      "Odoo biedt één app gratis aan, zoals Facturatie. Die koppel je aan je OS. Wil je meer Odoo-apps, dan betaal je die rechtstreeks aan Odoo.",
   },
   {
     question: "Wat is een Custom OS?",

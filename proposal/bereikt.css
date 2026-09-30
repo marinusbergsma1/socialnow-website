@@ -1,0 +1,199 @@
+/* 29 september 2026 (Marinus): "wat ze hebben bereikt met mooie animaties". Blok Bereikt (proposal/Bereikt.tsx) en
+   blok Nul naar bedrijf (proposal/NulNaarBedrijf.tsx). Alle beweging start pas als de tegel in beeld is (.is-in-beeld
+   uit Bento.tsx) en staat stil bij prefers-reduced-motion of gepauzeerde animaties. */
+
+/* Beurs: honderden stippen en de trekking */
+.sn-site .h-beurs-boven { display: flex; gap: clamp(18px, 2vw, 32px); align-items: center; justify-content: space-between; }
+.sn-site .h-beurs-groot { margin: 0 0 6px; font-size: clamp(34px, 4.2vw, 64px); line-height: .98; letter-spacing: -.045em; font-weight: 800; color: #25d366; }
+.sn-site .h-aanmeld-stippen { flex: 0 0 auto; display: grid; grid-template-columns: repeat(18, 7px); gap: 5px; }
+.sn-site .h-aanmeld-stippen i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.1); }
+.sn-site .is-in-beeld .h-aanmeld-stippen i { animation: h-stip-aan .5s var(--d) cubic-bezier(.16,1,.3,1) forwards; }
+@keyframes h-stip-aan { 0% { background: rgba(255,255,255,.1); transform: scale(.6); } 60% { background: #7dffb0; transform: scale(1.35); box-shadow: 0 0 8px #25d366; } 100% { background: #25d366; transform: none; box-shadow: none; } }
+
+.sn-site .h-trekking { margin-top: auto; padding-top: 22px; display: grid; gap: 16px; }
+.sn-site .h-trekking-rij { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.sn-site .h-trekking-rij li { position: relative; border-radius: 16px; transition: transform .25s cubic-bezier(.16,1,.3,1); }
+.sn-site .h-trekking-logo { display: grid; place-items: center; height: 74px; padding: 12px; border-radius: 16px; background: #f4f6f5; border: 2px solid transparent; transition: border-color .2s ease, box-shadow .2s ease, opacity .4s ease, filter .4s ease; }
+.sn-site .h-trekking-logo img { max-width: 100%; max-height: 44px; width: auto; height: auto; object-fit: contain; }
+.sn-site .h-trekking-rij li.is-aan { transform: translateY(-4px); }
+.sn-site .h-trekking-rij li.is-aan .h-trekking-logo { border-color: #25d366; box-shadow: 0 0 0 4px rgba(37,211,102,.22), 0 12px 30px rgba(37,211,102,.25); }
+.sn-site .h-trekking.is-klaar li:not(.is-winnaar) .h-trekking-logo { opacity: .45; filter: grayscale(1); }
+.sn-site .h-trekking-rij li.is-winnaar { transform: translateY(-6px) scale(1.04); }
+.sn-site .h-trekking-rij li.is-winnaar::after { content: ""; position: absolute; inset: -8px; border-radius: 22px; border: 2px solid #25d366; animation: h-winnaar-golf 1.6s ease-out 2; pointer-events: none; }
+@keyframes h-winnaar-golf { from { opacity: .9; transform: scale(.94); } to { opacity: 0; transform: scale(1.12); } }
+.sn-site .h-trekking-uitslag { display: flex; align-items: center; gap: 12px; margin: 0; min-height: 48px; font-size: 16px; color: #d7e2dc; }
+.sn-site .h-trekking-uitslag b { color: #fff; }
+.sn-site .h-trekking-uitslag small { display: block; font-size: 13px; color: #9bb3a6; }
+.sn-site .h-trekking-beker { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: rgba(37,211,102,.14); color: #25d366; flex: none; }
+.sn-site .h-trekking.is-klaar .h-trekking-beker { background: #25d366; color: #04130a; }
+.sn-site .h-trekking-bezig::after { content: "…"; display: inline-block; width: 1.2em; animation: h-puntjes 1s steps(4) infinite; overflow: hidden; vertical-align: bottom; }
+@keyframes h-puntjes { from { width: 0; } to { width: 1.2em; } }
+
+/* Uitgenodigd: een vink die zichzelf tekent */
+.sn-site .h-vink-groot { width: 56px; height: 56px; }
+.sn-site .h-vink-groot circle, .sn-site .h-vink-groot path { fill: none; stroke: #25d366; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.sn-site .is-in-beeld .h-vink-groot circle { animation: h-teken .9s .2s cubic-bezier(.65,0,.35,1) forwards; }
+.sn-site .is-in-beeld .h-vink-groot path { animation: h-teken .5s 1s cubic-bezier(.65,0,.35,1) forwards; }
+@keyframes h-teken { to { stroke-dashoffset: 0; } }
+
+/* kWh Garant: Odoo en Meta stromen het OS in */
+.sn-site .h-stroom { position: relative; height: 150px; }
+.sn-site .h-stroom svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sn-site .h-stroom-lijn { fill: none; stroke: rgba(255,255,255,.14); stroke-width: 2; }
+.sn-site .h-stroom-puls { fill: none; stroke: #25d366; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 14 86; stroke-dashoffset: 100; opacity: 0; }
+.sn-site .is-in-beeld .h-stroom-puls { opacity: 1; animation: h-stroom 2.2s linear infinite; }
+.sn-site .is-in-beeld .h-stroom-puls.is-tweede { animation-delay: 1.1s; }
+@keyframes h-stroom { to { stroke-dashoffset: 0; } }
+.sn-site .h-stroom-bron, .sn-site .h-stroom-os { position: absolute; display: grid; place-items: center; border-radius: 14px; font-weight: 800; }
+.sn-site .h-stroom-bron { left: 0; width: 64px; height: 40px; background: #f4f6f5; color: #0866ff; font-size: 15px; transform: translateY(-50%); }
+.sn-site .h-stroom-bron svg { position: static; width: 46px; height: auto; }
+.sn-site .h-stroom-bron.is-odoo { top: 25%; }
+.sn-site .h-stroom-bron.is-meta { top: 75%; }
+.sn-site .h-stroom-os { right: 4%; top: 50%; width: 76px; height: 76px; transform: translateY(-50%); background: #25d366; color: #04130a; font-size: 22px; letter-spacing: -.02em; box-shadow: 0 0 0 0 rgba(37,211,102,.5); }
+.sn-site .is-in-beeld .h-stroom-os { animation: h-os-klop 2.2s 1.2s ease-out infinite; }
+@keyframes h-os-klop { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); } 100% { box-shadow: 0 0 0 18px rgba(37,211,102,0); } }
+.sn-site .h-stroom-melding { position: absolute; right: 0; bottom: -4px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: #10251a; border: 1px solid #1f5a3a; color: #bff5d3; font-size: 12px; font-weight: 700; opacity: 0; transform: translateY(8px); }
+.sn-site .is-in-beeld .h-stroom-melding { animation: h-melding 4.4s 1.6s ease infinite; }
+@keyframes h-melding { 0%, 100% { opacity: 0; transform: translateY(8px); } 12%, 70% { opacity: 1; transform: none; } 85% { opacity: 0; transform: translateY(-6px); } }
+
+/* VDZ Brigade: browser met live-status, het beeld scrolt langzaam */
+.sn-site .h-browser { border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.12); background: #111; }
+.sn-site .h-browser-balk { display: flex; align-items: center; gap: 6px; padding: 8px 10px; background: #171b1e; }
+.sn-site .h-browser-balk > i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.22); }
+.sn-site .h-browser-balk em { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #25d366; }
+.sn-site .h-browser-balk em b { width: 7px; height: 7px; border-radius: 50%; background: #25d366; animation: h-live 1.6s ease-in-out infinite; }
+@keyframes h-live { 50% { opacity: .25; } }
+.sn-site .h-browser-beeld { display: block; height: 150px; overflow: hidden; }
+.sn-site .h-browser-beeld img { width: 100%; height: auto; display: block; }
+.sn-site .is-in-beeld .h-browser-beeld img { animation: h-scroll 12s ease-in-out infinite alternate; }
+@keyframes h-scroll { from { transform: translateY(0); } to { transform: translateY(calc(-100% + 150px)); } }
+
+/* Il Gordo: drie Lighthouse-ringen die vollopen */
+.sn-site .h-scores { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.sn-site .h-score { position: relative; margin: 0; display: grid; justify-items: center; gap: 8px; }
+.sn-site .h-score svg { width: 100%; max-width: 92px; transform: rotate(-90deg); }
+.sn-site .h-score-baan { fill: none; stroke: rgba(255,255,255,.1); stroke-width: 6; }
+.sn-site .h-score-voortgang { fill: none; stroke: #25d366; stroke-width: 6; stroke-linecap: round; stroke-dasharray: 100; }
+.sn-site .h-score b { position: absolute; top: 0; left: 0; right: 0; aspect-ratio: 1; max-width: 92px; margin-inline: auto; display: grid; place-items: center; font-size: clamp(20px, 1.8vw, 26px); color: #fff; font-variant-numeric: tabular-nums; }
+.sn-site .h-score figcaption { font-size: 12px; font-weight: 700; color: #9aa6b0; text-align: center; }
+
+/* VASTIQ: foto met langzame zoom en onderschrift */
+.sn-site .h-bereikt-vastiq .sn-tegel-vlak { min-height: 320px; }
+.sn-site .h-bereikt-vastiq .sn-tegel-vlak > img { transform: scale(1.02); transition: transform 8s ease-out; }
+.sn-site .h-bereikt-vastiq.is-in-beeld .sn-tegel-vlak > img { transform: scale(1.12); }
+.sn-site .h-foto-onderschrift { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; display: grid; gap: 4px; padding: 60px clamp(20px, 2vw, 28px) clamp(20px, 2vw, 26px); background: linear-gradient(transparent, rgba(0,0,0,.86)); }
+.sn-site .h-foto-onderschrift b { font-size: clamp(20px, 1.8vw, 26px); color: #fff; letter-spacing: -.02em; }
+.sn-site .h-foto-onderschrift span { color: #c5ced6; font-size: 15px; }
+
+/* ——— Nul naar bedrijf ——— */
+.sn-site .h-pil-status { align-self: flex-start; display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #bff5d3; background: rgba(37,211,102,.12); border: 1px solid rgba(37,211,102,.3); }
+.sn-site .h-pil-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #25d366; }
+.sn-site .h-pil-status.is-binnenkort { color: #ffe9a8; background: rgba(247,230,68,.1); border-color: rgba(247,230,68,.3); }
+.sn-site .h-pil-status.is-binnenkort::before { background: #f7e644; }
+
+/* Tien vragen die afvinken, met een klok die naar het uur loopt */
+.sn-site .h-vragen { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(16px, 2vw, 32px); align-items: center; }
+.sn-site .h-vragen ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; counter-reset: vraag; }
+.sn-site .h-vragen li { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: #6f7a83; transition: color .35s ease; }
+.sn-site .h-vragen li::before { counter-increment: vraag; content: counter(vraag); display: grid; place-items: center; width: 24px; height: 24px; flex: none; border-radius: 50%; border: 1px solid rgba(255,255,255,.18); font-size: 11px; font-weight: 800; color: #9aa6b0; transition: background .35s ease, border-color .35s ease, color .35s ease; }
+.sn-site .h-vragen li.is-klaar { color: #e8efe9; }
+.sn-site .h-vragen li.is-klaar::before { content: "✓"; background: #25d366; border-color: #25d366; color: #04130a; }
+.sn-site .h-klok { position: relative; width: clamp(110px, 11vw, 150px); aspect-ratio: 1; }
+.sn-site .h-klok svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.sn-site .h-klok-baan { fill: none; stroke: rgba(255,255,255,.1); stroke-width: 7; }
+.sn-site .h-klok-voortgang { fill: none; stroke: #25d366; stroke-width: 7; stroke-linecap: round; stroke-dasharray: 100; transition: stroke-dashoffset .5s ease; }
+.sn-site .h-klok div { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+.sn-site .h-klok b { font-size: clamp(26px, 2.4vw, 36px); line-height: 1; color: #fff; font-variant-numeric: tabular-nums; }
+.sn-site .h-klok small { margin-top: 4px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #9aa6b0; }
+
+/* Alles gekoppeld: drie koppelingen die naar het OS lopen */
+.sn-site .h-koppel { position: relative; height: 190px; }
+.sn-site .h-koppel svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sn-site .h-koppel-lijn { fill: none; stroke: #25d366; stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: .8; }
+.sn-site .is-in-beeld .h-koppel-lijn { animation: h-teken .9s cubic-bezier(.65,0,.35,1) forwards; }
+.sn-site .is-in-beeld .h-koppel-lijn:nth-of-type(2) { animation-delay: .35s; }
+.sn-site .is-in-beeld .h-koppel-lijn:nth-of-type(3) { animation-delay: .7s; }
+.sn-site .h-koppel-knoop { position: absolute; transform: translate(-50%, -50%); display: grid; place-items: center; padding: 9px 13px; border-radius: 14px; background: #f4f6f5; color: #0b0f12; font-size: 13px; font-weight: 800; white-space: nowrap; opacity: 0; transition: opacity .5s ease, transform .5s cubic-bezier(.16,1,.3,1); }
+.sn-site .h-koppel-knoop svg { position: static; width: 52px; height: auto; }
+.sn-site .is-in-beeld .h-koppel-knoop { opacity: 1; }
+.sn-site .h-koppel-knoop.is-os { left: 50%; top: 78%; width: 70px; height: 70px; padding: 0; border-radius: 50%; background: #25d366; color: #04130a; font-size: 20px; opacity: 1; }
+.sn-site .is-in-beeld .h-koppel-knoop.is-os { animation: h-os-klop 2.4s 1.2s ease-out infinite; }
+.sn-site .h-koppel-knoop.is-a { left: 16%; top: 18%; transition-delay: .1s; }
+.sn-site .h-koppel-knoop.is-b { left: 50%; top: 14%; transition-delay: .45s; }
+.sn-site .h-koppel-knoop.is-c { left: 84%; top: 18%; transition-delay: .8s; }
+
+/* Je eigen AI: een terminal die typt */
+.sn-site .h-terminal { border-radius: 16px; background: #050708; border: 1px solid rgba(255,255,255,.12); overflow: hidden; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.sn-site .h-terminal-balk { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #12161a; border-bottom: 1px solid rgba(255,255,255,.07); }
+.sn-site .h-terminal-balk > i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.2); }
+.sn-site .h-terminal-tabs { margin-left: auto; display: flex; gap: 4px; }
+.sn-site .h-terminal-tabs span { padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; color: #7c8791; transition: background .3s ease, color .3s ease; }
+.sn-site .h-terminal-tabs span.is-aan { background: rgba(37,211,102,.16); color: #bff5d3; }
+.sn-site .h-terminal-regels { margin: 0; padding: 14px 16px 16px; min-height: 148px; font-size: 13px; line-height: 1.7; color: #d8e0e6; white-space: pre-wrap; word-break: break-all; }
+.sn-site .h-terminal-regels .is-prompt { color: #7c8791; }
+.sn-site .h-terminal-regels .is-ok { color: #25d366; }
+.sn-site .h-terminal-regels .is-vraag { color: #fff; }
+.sn-site .h-terminal-cursor { display: inline-block; width: 8px; height: 1.05em; margin-left: 2px; vertical-align: text-bottom; background: #25d366; animation: h-live 1s steps(1) infinite; }
+.sn-site .h-slot-regels { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.sn-site .h-slot-regels li { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; line-height: 1.45; color: #c8d2da; }
+.sn-site .h-slot-regels svg { flex: none; margin-top: 2px; color: #25d366; }
+
+/* Marketingchat: berichten en een budgetmeter */
+.sn-site .h-mchat { display: grid; gap: 10px; }
+.sn-site .h-mchat-bericht { max-width: 86%; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.45; opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s cubic-bezier(.16,1,.3,1); }
+.sn-site .h-mchat-bericht.is-jij { justify-self: end; background: #ececec; color: #0b0f12; border-bottom-right-radius: 5px; }
+.sn-site .h-mchat-bericht.is-os { justify-self: start; background: #1a1015; border: 1px solid rgba(246,41,97,.3); color: #ffe1ea; border-bottom-left-radius: 5px; }
+.sn-site .h-mchat-bericht.is-zichtbaar { opacity: 1; transform: none; }
+.sn-site .h-budget { display: grid; gap: 8px; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); }
+.sn-site .h-budget-kop { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; color: #c8d2da; }
+.sn-site .h-budget-kop b { color: #fff; font-variant-numeric: tabular-nums; }
+.sn-site .h-budget-balk { height: 8px; border-radius: 8px; background: rgba(255,255,255,.1); overflow: hidden; }
+.sn-site .h-budget-balk span { display: block; height: 100%; width: 0; border-radius: 8px; background: linear-gradient(90deg, #f62961, #ff8fb0); transition: width 1.4s cubic-bezier(.16,1,.3,1); }
+.sn-site .h-budget-slot { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #ff8fb0; }
+
+/* Telefoon */
+@media (max-width: 760px) {
+  .sn-site .h-beurs-boven { flex-direction: column; align-items: flex-start; }
+  .sn-site .h-aanmeld-stippen { grid-template-columns: repeat(18, 5px); gap: 4px; }
+  .sn-site .h-aanmeld-stippen i { width: 5px; height: 5px; }
+  .sn-site .h-trekking-rij { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .sn-site .h-trekking-logo { height: 52px; padding: 7px; border-radius: 12px; }
+  .sn-site .h-trekking-logo img { max-height: 30px; }
+  .sn-site .h-vragen { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .h-vragen ol { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .h-klok { justify-self: start; }
+  .sn-site .h-terminal-tabs span:not(.is-aan) { display: none; }
+}
+
+/* Minder beweging of gepauzeerd: alles in de eindstand */
+@media (prefers-reduced-motion: reduce) {
+  .sn-site .h-bereikt *, .sn-site .h-nul * { animation: none !important; transition: none !important; }
+  .sn-site .h-aanmeld-stippen i { background: #25d366; }
+  .sn-site .h-vink-groot circle, .sn-site .h-vink-groot path, .sn-site .h-koppel-lijn { stroke-dashoffset: 0; }
+  .sn-site .h-stroom-puls, .sn-site .h-stroom-melding { opacity: 1; transform: none; }
+  .sn-site .h-koppel-knoop, .sn-site .h-mchat-bericht { opacity: 1; transform: translate(-50%, -50%); }
+  .sn-site .h-mchat-bericht { transform: none; }
+}
+[data-motion="paused"] .sn-site .h-bereikt *, [data-motion="paused"] .sn-site .h-nul * { animation-play-state: paused !important; }
+
+/* 30 september 2026 (Marinus): strook met de Artist Impressions voor Light Art Collection in Mijn waarom. Elke kaart is een
+   voor-en-na-schuif: het voor-beeld ligt onder, de impressie erboven, afgesneden op --grens. Een onzichtbare range-input
+   over het hele beeld maakt slepen, tikken en de pijltjestoetsen mogelijk. De strook zelf scrolt zijwaarts. */
+.sn-site .h-lac { display: grid; gap: 12px; min-width: 0; }
+.sn-site .h-lac-kop { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 0; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #76e7a2; }
+.sn-site .h-lac-kop span + span { color: #9aa6b0; }
+.sn-site .h-lac-kop span:last-child { color: #6f7a83; letter-spacing: .1em; }
+.sn-site .h-lac-venster { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: #2a3036 transparent; padding-bottom: 8px; overscroll-behavior-x: contain; }
+.sn-site .h-lac-kaart { flex: none; margin: 0; display: grid; gap: 8px; scroll-snap-align: start; }
+.sn-site .h-lac-beeld { position: relative; display: block; height: clamp(190px, 17vw, 260px); aspect-ratio: 16 / 10; overflow: hidden; border-radius: 14px; border: 1px solid rgba(255,255,255,.12); background: #050607; touch-action: pan-y; user-select: none; }
+.sn-site .h-lac-beeld img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.sn-site .h-lac-na { clip-path: inset(0 0 0 var(--grens, 50%)); }
+.sn-site .h-lac-greep { position: absolute; top: 0; bottom: 0; left: var(--grens, 50%); width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 12px rgba(0,0,0,.5); pointer-events: none; }
+.sn-site .h-lac-greep::after { content: "‹ ›"; position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 36px; height: 36px; transform: translate(-50%, -50%); border-radius: 50%; background: #fff; color: #0b0f12; font-size: 15px; font-weight: 800; font-style: normal; letter-spacing: 2px; box-shadow: 0 4px 16px rgba(0,0,0,.45); }
+.sn-site .h-lac-label { position: absolute; top: 10px; padding: 4px 9px; border-radius: 999px; background: rgba(0,0,0,.6); backdrop-filter: blur(6px); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; pointer-events: none; }
+.sn-site .h-lac-label.is-voor { left: 10px; }
+.sn-site .h-lac-label.is-na { right: 10px; background: rgba(37,211,102,.85); color: #04130a; }
+.sn-site .h-lac-schuif { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none; }
+.sn-site .h-lac-schuif:focus-visible + * , .sn-site .h-lac-beeld:has(.h-lac-schuif:focus-visible) { outline: 2px solid #25d366; outline-offset: 2px; }
+.sn-site .h-lac-kaart figcaption { font-size: 13px; font-weight: 600; color: #c8d2da; }
+@media (max-width: 760px) { .sn-site .h-lac-beeld { height: 200px; } }

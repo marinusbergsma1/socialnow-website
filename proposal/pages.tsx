@@ -17,8 +17,12 @@ import ShowcaseFilms from "./ShowcaseFilms";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
 import Verhaal from "./Verhaal";
-import { Bento, BentoFilm, Tegel } from "./Bento";
+import { Bento, Tegel } from "./Bento";
 import Deuren from "./Deuren";
+import { FILMS as VEILIGHEIDSFILMS, filmPad as veiligheidFilm, filmPosterPad as veiligheidPoster } from "./veiligheid-beloftes";
+import Bereikt from "./Bereikt";
+import { Statement } from "./Statement";
+import NulNaarBedrijf from "./NulNaarBedrijf";
 import MensEnAI from "./MensEnAI";
 import VacaturesBento from "./VacaturesBento";
 import VeiligheidBlok from "./Veiligheid";
@@ -28,7 +32,7 @@ import LiveWebsites from "./LiveWebsites";
 import TrustStories from "./TrustStories";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import BrandGlobe from "./BrandGlobe";
-import OsEntry, { CLAIM_URL, InstallKnop, REVIEWS_URL } from "./os-entry";
+import OsEntry, { CLAIM_URL, OsDock, REVIEWS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
 // Al het contact loopt eerst via Steef (Marinus, 28 september 2026).
 const contactPersoon = people.find((p) => p.name === "Steef Komen") ?? people[0];
@@ -123,10 +127,84 @@ function Film({ src, poster, label, titel, klasse, geluid, zetGeluid, boven }: {
   );
 }
 
-function HeroFilm() {
-  const [geluid, setGeluid] = useState<"" | "os" | "bedankt">("");
+// 30 september 2026 (Marinus): "bij landen gewoon logo animatie OS zoals eerst". De logo-animatie van 26 september
+// staat weer bovenaan de hero, speelt één keer en blijft staan op het complete logo.
+function HeroLogo() {
+  const ref = React.useRef<HTMLVideoElement>(null);
+  const stop = () => {
+    const film = ref.current;
+    if (film && film.currentTime >= 3.4) film.pause();
+  };
   return (
-    <div className="h-hero-film h-hero-films">
+    <video
+      ref={ref}
+      className="h-hero-logo"
+      src="/video/bedankt/logo-animatie.mp4"
+      autoPlay
+      muted
+      playsInline
+      preload="auto"
+      onTimeUpdate={stop}
+      onEnded={stop}
+      aria-label="SocialNow OS"
+    />
+  );
+}
+
+// 30 september 2026 (Marinus): de vijf veiligheids- en databeschermingsfilms in de hero, beginnend bij 1, met kleine
+// nummers en namen eronder zodat je ze allemaal in de header kunt bekijken. Na afloop speelt de volgende.
+function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (aan: boolean) => void }) {
+  const { language } = useLanguage();
+  const taal = language === "nl" ? "nl" : "en";
+  const [nummer, setNummer] = useState(0);
+  const ref = React.useRef<HTMLVideoElement>(null);
+  const film = VEILIGHEIDSFILMS[nummer];
+  React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid, nummer, taal]);
+  // Een nieuw nummer geeft een nieuw videovak (key), dat met autoPlay zelf start.
+  const kies = (index: number) => setNummer(index);
+  const wissel = () => {
+    const video = ref.current;
+    if (video && !geluid) { video.currentTime = 0; void video.play().catch(() => {}); }
+    zetGeluid(!geluid);
+  };
+  return (
+    <div className="h-film-veilig">
+      <p className="h-film-titel">Veiligheid en databescherming</p>
+      <div className="h-film-vak">
+        <video
+          ref={ref}
+          key={`${film.slug}-${taal}`}
+          src={veiligheidFilm(film.slug, taal)}
+          poster={veiligheidPoster(film.slug, taal)}
+          autoPlay
+          muted
+          playsInline
+          preload="metadata"
+          onEnded={() => kies((nummer + 1) % VEILIGHEIDSFILMS.length)}
+          aria-label={film.kop}
+        />
+        <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={geluid}>
+          {geluid ? "Geluid uit" : "Geluid aan"}
+        </button>
+      </div>
+      <ol className="h-veilig-nummers">
+        {VEILIGHEIDSFILMS.map((item, index) => (
+          <li key={item.slug}>
+            <button type="button" onClick={() => kies(index)} aria-current={index === nummer ? "true" : undefined}>
+              <b>{index + 1}</b>
+              <span>{item.kop}</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function HeroFilm() {
+  const [geluid, setGeluid] = useState<"" | "os" | "veilig">("");
+  return (
+    <div className="h-hero-film h-hero-films is-os-veilig">
       <Film
         klasse="h-film-os"
         src="/video/os/os-booth-en.mp4"
@@ -142,15 +220,7 @@ function HeroFilm() {
         geluid={geluid === "os"}
         zetGeluid={(aan) => setGeluid(aan ? "os" : "")}
       />
-      <Film
-        klasse="h-film-bedankt"
-        src="/video/bedankt/bedankt-brussel.mp4"
-        poster="/video/bedankt/bedankt-brussel.jpg"
-        label="Bedankt vanuit Brussel, van het SocialNow-team"
-        titel="Bedankt uit Brussel"
-        geluid={geluid === "bedankt"}
-        zetGeluid={(aan) => setGeluid(aan ? "bedankt" : "")}
-      />
+      <VeiligheidSpeler geluid={geluid === "veilig"} zetGeluid={(aan) => setGeluid(aan ? "veilig" : "")} />
     </div>
   );
 }
@@ -171,6 +241,9 @@ export function Home() {
   const taalfase = useTaalfase(getoond);
   return (
     <>
+      {/* 30 september 2026 (Marinus): "HET STAAT NOG STEEDS NIET LIVE" bij de hero; het statement staat daarom bovenaan,
+          het eerste wat je ziet, boven de hero. */}
+      <Statement />
       <LanguageContext.Provider value={getoond}>
       <section className="h-hero" id="home" data-taalfase={taalfase}>
         <div className="h-hero-background">
@@ -181,6 +254,7 @@ export function Home() {
           {/* 26 september 2026 (Marinus): "op mijn header mag alle reclame weg". Geen stand, geen actie, geen
               tellers meer; een persoonlijk bedankje en één duidelijke login voor het gratis OS. */}
           {/* 26 september 2026 (Marinus): "SocialNow OS logo hoeft er niet bij, team er wel bij". */}
+          <HeroLogo />
           <TeamTrust />
           <HeroTitle />
           {/* 26 september 2026 (Marinus): "onder de titel het Odoo-logo". */}
@@ -192,14 +266,20 @@ export function Home() {
           </p>
           {/* 28 september 2026 (Marinus): "ODOO PRODUCT · IMPLEMENTATION POSSIBLE", daaronder klein de volgende stap. */}
           <p className="h-hero-odoo-regel" translate="no">
-            <b>ODOO PRODUCT · IMPLEMENTATION POSSIBLE</b>
-            <small>NEXT STEP SALESFORCE</small>
+            {/* 30 september 2026 (Marinus): "Integrated in ODOO's ERP system." Odoo is het ERP; het OS draait erop. */}
+            <b>INTEGRATED IN ODOO’S ERP SYSTEM</b>
+            {/* 29 september 2026 (Marinus): "bij Salesforce stukje wel écht even hun logo ook." */}
+            <small>
+              NEXT STEP
+              <img className="h-hero-salesforce" src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" />
+            </small>
           </p>
           {/* 26 september 2026 (Marinus): versie A, "de brief". Het bedankje als briefje met foto en naam. */}
           <div className="h-brief">
+            {/* 29 september 2026 (Marinus): de winactie is voorbij; de brief vertelt nu de belofte in gewone woorden. */}
             <p className="h-hero-description">
-              Door de vele aanmeldingen voor onze actie reageren we volgende week persoonlijk op iedereen. De winnaar
-              maken we bekend op LinkedIn en Instagram.
+              Beantwoord tien vragen en je OS zet je boekhouding, merk, website en socials klaar. Zelf, met ons team of
+              met je eigen AI.
             </p>
             <div className="h-brief-onder">
               <img src="/images/marinus-profiel-blauw.webp" alt="" width="56" height="56" />
@@ -207,15 +287,7 @@ export function Home() {
             </div>
           </div>
           <div className="os-entry">
-            <div className="os-actions">
-              {/* 26 september 2026 (Marinus): "groene vulling zoals eerst Try the OS, meer rond en niet zo lang". */}
-              <a className="os-claim sn-btn3d h-button h-login-rond" href="https://app.socialnow.nl/login/">
-                <span className="sn-btn3d-sheen" />
-                <span>{translate("Log in op je gratis OS", getoond)}</span>
-                <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
-              </a>
-              <InstallKnop />
-            </div>
+            <OsDock />
           </div>
           </div>
           <HeroFilm />
@@ -227,16 +299,12 @@ export function Home() {
       </LanguageContext.Provider>
       {/* 28 september 2026 (Marinus): "de homepage moet een upgrade gaan krijgen met storytelling". De volgorde vertelt
           het verhaal: wie we zijn, wat je kunt doen, het bewijs, het vertrouwen, en dan pas het product in detail. */}
+      {/* 29 september 2026 (Marinus): "zet vooral wat ze hebben bereikt met mooie animaties aanwezig op mijn homepage".
+          Eerst wat er bereikt is, dan hoe jij in een uur je bedrijf neerzet, dan het verhaal. */}
+      <Bereikt />
+      <NulNaarBedrijf />
       <Verhaal />
       <Deuren />
-      <FeaturedWork />
-      {/* 28 september 2026 (Marinus): "What our clients say" mag weg van de homepage. */}
-      <LiveWebsites />
-      {/* 28 september 2026 (Marinus): AI wordt verkeerd begrepen; mensen zijn de verbindende laag. Met vacature. */}
-      <MensEnAI />
-      <VacaturesBento />
-      {/* Veiligheidsblok met video en sleutelbelofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
-      <VeiligheidBlok />
       {/* 28 september 2026 (Marinus): "alle onderdelen als kleine bentogrids, net zoals de homepage wanneer je daarop landt". */}
       <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} swipe>
         {agents.map((agent) => (
@@ -247,17 +315,12 @@ export function Home() {
             <div className="sn-tegel-onder"><TextLink to={`/het-os#${agent.id}`}>Ontdek dit onderdeel</TextLink></div>
           </Tegel>
         ))}
-        <Tegel kop="Bekijk de gedachte achter het OS" breed={6} soort="film">
-          <BentoFilm src="/video/os/os-odoo.mp4" poster="/video/os/os-odoo.webp" label="Bekijk de gedachte achter het OS" />
-          <span className="sn-tegel-badge">Voorbeeldgegevens</span>
-        </Tegel>
-        <Tegel kop="Van klantwerk naar een verbonden bedrijf" breed={6} soort="film">
-          <BentoFilm src="/video/os/os-kwh-case.mp4" poster="/video/os/os-kwh-case.webp" label="Van klantwerk naar een verbonden bedrijf" />
-          <span className="sn-tegel-badge">Voorbeeldgegevens</span>
-        </Tegel>
       </Bento>
-      {/* 28 september 2026 (Marinus): "dit onderdeel is niet meer zo belangrijk nu". See it in motion staat lager. */}
-      <ShowcaseFilms />
+      {/* 28 september 2026 (Marinus): AI wordt verkeerd begrepen; mensen zijn de verbindende laag. Met vacature. */}
+      <MensEnAI />
+      <VacaturesBento />
+      {/* Veiligheidsblok met video en sleutelbelofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
+      <VeiligheidBlok />
       <Bento id="diensten" label="Ook dit is SocialNow" titel={<>Van merk tot techniek.<br /><span>Alles sluit op elkaar aan.</span></>} swipe>
         {services.map((service) => (
           <Tegel key={service.id} kop={service.title} breed={4} className="h-dienst-tegel">
@@ -270,26 +333,7 @@ export function Home() {
           </Tegel>
         ))}
       </Bento>
-      <VideoSlider />
       <TrustStories />
-      <ImageSliders />
-      <Bento id="social" label="Gemaakt door ons team" titel={<>Human creativity.<br /><span>Powered by AI technology.</span></>} swipe>
-        {socialPosts.posts.map((post) => (
-          <Tegel key={post.beeld} kop={post.titel} breed={3} soort="foto" className="h-social-tegel">
-            <img src={`/images/social/${post.beeld}`} alt={post.titel} width={post.breed} height={post.hoog} loading="lazy" />
-          </Tegel>
-        ))}
-        <Tegel kop="Instagram" breed={3} soort="groen" className="h-social-volg">
-          <p className="sn-tegel-tekst">Campagnes, social content en merkwerk uit onze eigen collectie.</p>
-          <div className="sn-tegel-onder">
-            <a className="sn-btn3d h-button h-button-secondary" href={socialPosts.profiel} target="_blank" rel="noopener noreferrer">
-              <span className="sn-btn3d-sheen" />
-              <span>Volg ons op Instagram</span>
-              <ArrowUpRight size={16} aria-hidden="true" />
-            </a>
-          </div>
-        </Tegel>
-      </Bento>
       <Bento id="vragen" label="Goed om te weten" titel={<>Eerst helderheid.<br /><span>Dan aan de slag.</span></>}>
         <Tegel kop="Veelgestelde vragen" breed={8} className="h-faq-tegel">
           <Questions />
@@ -471,6 +515,28 @@ export function ProjectsPage() {
         }
         text="Van campagnes voor merken als AZ, Universal en Sony tot AI-websites en dataplatforms als VASTIQ. Ontdek het werk achter SocialNow."
       />
+      <FeaturedWork />
+      <LiveWebsites />
+      <VideoSlider />
+      <ImageSliders />
+      <ShowcaseFilms />
+      <Bento id="social" label="Gemaakt door ons team" titel={<>Human creativity.<br /><span>Powered by AI technology.</span></>} swipe>
+        {socialPosts.posts.map((post) => (
+          <Tegel key={post.beeld} kop={post.titel} breed={3} soort="foto" className="h-social-tegel">
+            <img src={`/images/social/${post.beeld}`} alt={post.titel} width={post.breed} height={post.hoog} loading="lazy" />
+          </Tegel>
+        ))}
+        <Tegel kop="Instagram" breed={3} soort="groen" className="h-social-volg">
+          <p className="sn-tegel-tekst">Campagnes, social content en merkwerk uit onze eigen collectie.</p>
+          <div className="sn-tegel-onder">
+            <a className="sn-btn3d h-button h-button-secondary" href={socialPosts.profiel} target="_blank" rel="noopener noreferrer">
+              <span className="sn-btn3d-sheen" />
+              <span>Volg ons op Instagram</span>
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+          </div>
+        </Tegel>
+      </Bento>
       <section className="h-wrap h-projects-list">
         <div className="h-filters" role="group" aria-label="Filter projecten">
           {[

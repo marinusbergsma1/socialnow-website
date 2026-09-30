@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { LANGUAGES, LANGUAGE_NAMES, languagePrefix, useLanguage, type Language } from "./i18n/context";
+import { rememberLanguage } from "./i18n/detect";
 import { stopTaalwissel, useToonTaal } from "./taalwissel";
 
 // 16 september 2026 (Marinus, voor de beurs): één strak vlaggetje met een uitklapmenu, zes talen.
@@ -41,7 +42,7 @@ export default function LanguageSwitch() {
       <ul className="h-language-menu" role="listbox" aria-label="Language" hidden={!open}>
         {LANGUAGES.map((code) => (
           <li key={code} role="option" aria-selected={code === language}>
-            <a href={`${languagePrefix(code)}${tail}`} lang={code} hrefLang={code} aria-current={code === language ? "true" : undefined} onClick={() => setOpen(false)}>
+            <a href={`${languagePrefix(code)}${tail}`} lang={code} hrefLang={code} aria-current={code === language ? "true" : undefined} onClick={() => { rememberLanguage(code); setOpen(false); }}>
               <Flag code={code} />
               <span>{LANGUAGE_NAMES[code]}</span>
               <small>{code.toUpperCase()}</small>

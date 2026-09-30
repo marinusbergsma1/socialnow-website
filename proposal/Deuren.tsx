@@ -22,12 +22,10 @@ const PARTNERS = [
 
 const MAIL = `mailto:${CONTACT_MAIL}?subject=`;
 
+// 29 september 2026 (Marinus): "bij Salesforce stukje wel écht even hun logo ook." Het officiële logo (wolk met
+// woordmerk, bron Wikimedia Commons, Salesforce.com_logo.svg) in plaats van alleen de kale wolk.
 function SalesforceLogo() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path fill="#00A1E0" d="M10.006 5.415a4.195 4.195 0 013.045-1.306c1.56 0 2.954.9 3.69 2.205.63-.3 1.35-.45 2.1-.45 2.85 0 5.159 2.34 5.159 5.22s-2.31 5.22-5.176 5.22c-.345 0-.69-.044-1.02-.104a3.75 3.75 0 01-3.3 1.95c-.6 0-1.155-.15-1.65-.375A4.314 4.314 0 018.88 20.4a4.302 4.302 0 01-4.05-2.82c-.27.062-.54.076-.825.076-2.204 0-4.005-1.8-4.005-4.05 0-1.5.811-2.805 2.01-3.51-.255-.57-.39-1.2-.39-1.846 0-2.58 2.1-4.65 4.65-4.65 1.53 0 2.85.705 3.72 1.8" />
-    </svg>
-  );
+  return <img className="h-deur-salesforce" src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" loading="lazy" />;
 }
 
 export default function Deuren() {
@@ -79,10 +77,10 @@ export default function Deuren() {
         <b><i aria-hidden="true" />Live</b>
       </Tegel>
       <Tegel kop="Salesforce" breed={4} className="h-deur-status is-bouw">
-        <span className="h-deur-merk" translate="no"><SalesforceLogo /><span>Salesforce</span></span>
+        <span className="h-deur-merk" translate="no"><SalesforceLogo /></span>
         <b><i aria-hidden="true" />Nu in aanbouw</b>
       </Tegel>
-      <Tegel kop="Zij gingen je voor" breed={4} className="h-deur-logos">
+      <Tegel kop="Zij melden zich al aan." breed={4} className="h-deur-logos">
         <ul translate="no">
           {PARTNERS.map((partner) => (
             <li key={partner.naam}>
