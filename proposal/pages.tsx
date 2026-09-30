@@ -292,7 +292,8 @@ export function Home() {
             {/* 30 september 2026 (Marinus), ronde 2 uit vier versies: de experts één keer, als dunne filosofische zin.
                 "Anyone can build automations. No one can build people who care! You pay for the people, not the tools.
                 That is SocialNow!" */}
-            <p className="h-statement-zin">Proven, branded, <strong>fully automated systems.</strong></p>
+            {/* 30 september 2026 (Marinus): "Proven, branded and fully automated!" en daarna "and toch weg". */}
+            <p className="h-statement-zin">Proven, branded, <strong>fully automated!</strong></p>
             {/* 30 september 2026 (Marinus): "Everyone can automate our software. No one can automate us! 🚀" */}
             {/* 30 september 2026 (Marinus): "No one can automate people who care! 🚀 Beter" */}
             <p className="h-statement-dun">Everyone can automate a business. <span className="h-statement-groen">NO ONE CAN AUTOMATE PEOPLE WHO CARE! 🚀</span></p>
