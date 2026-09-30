@@ -2964,3 +2964,23 @@ html {
 /* Developer Milo werkt achter de laptop in het hoofdstuk De omslag. */
 .sn-site .h-hoofdstuk-beeld .h-character-coder { position: relative; inset: auto; width: 150px; max-width: 100%; margin: 0 auto; aspect-ratio: 1; }
 @media (max-width: 639px) { .sn-site .h-hoofdstuk-beeld .h-character-coder { width: 120px; } }
+
+/* 30 september 2026 (Marinus): de OS-film hoger en groot bovenaan rechts, daaronder de vijf veiligheidsfilms met
+   genummerde knoppen. De Brusselfilm staat niet meer in de hero. */
+.sn-site .h-hero-films.is-os-veilig { flex-direction: column; align-items: stretch; gap: clamp(18px, 2vw, 28px); }
+@media (min-width: 1100px) { .sn-site .h-hero-films.is-os-veilig { align-self: start; margin-top: clamp(0px, 2vw, 24px); } }
+.sn-site .h-hero-films.is-os-veilig > .h-film-os { flex: none; width: 100%; }
+.sn-site .h-film-veilig { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); column-gap: 16px; align-items: start; }
+.sn-site .h-film-veilig > .h-film-titel { grid-column: 1 / -1; }
+.sn-site .h-film-veilig video { aspect-ratio: 16 / 9; }
+.sn-site .h-veilig-nummers { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; align-content: start; }
+.sn-site .h-veilig-nummers button { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 0; padding: 7px 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.03); color: #aeb8c1; font: inherit; font-size: 13px; font-weight: 600; text-align: left; cursor: pointer; transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.sn-site .h-veilig-nummers b { display: grid; place-items: center; width: 22px; height: 22px; flex: none; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); font-size: 11px; font-weight: 800; color: #fff; }
+.sn-site .h-veilig-nummers button:hover, .sn-site .h-veilig-nummers button:focus-visible { border-color: rgba(37,211,102,.5); color: #fff; outline: none; }
+.sn-site .h-veilig-nummers button[aria-current="true"] { border-color: #25d366; background: rgba(37,211,102,.1); color: #fff; }
+.sn-site .h-veilig-nummers button[aria-current="true"] b { background: #25d366; border-color: #25d366; color: #04130a; }
+@media (max-width: 640px) {
+  .sn-site .h-film-veilig { grid-template-columns: minmax(0, 1fr); row-gap: 12px; }
+  .sn-site .h-veilig-nummers { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .sn-site .h-veilig-nummers button { flex-direction: column; gap: 4px; padding: 8px 4px; text-align: center; font-size: 10.5px; line-height: 1.2; }
+}

@@ -69,11 +69,12 @@ function Koppelingen() {
   );
 }
 
-// De terminal typt dezelfde commando's die het OS straks per AI laat zien (api/_mcp-core.js, clientSetup).
+// De terminal typt de koppeling zoals het OS die per soort AI-assistent laat zien (api/_mcp-core.js, clientSetup).
+// 30 september 2026: geen modelnamen in sitecopy, dus de tabs heten naar de plek waar je AI draait.
 const AI_SCRIPTS = [
-  { naam: "Claude Code", commando: "claude mcp add --transport http socialnow https://app.socialnow.nl/api/mcp" },
-  { naam: "Codex", commando: "codex mcp add socialnow --url https://app.socialnow.nl/api/mcp" },
-  { naam: "Gemini", commando: "gemini mcp add --transport http socialnow https://app.socialnow.nl/api/mcp" },
+  { naam: "Terminal", commando: "mcp add socialnow https://app.socialnow.nl/api/mcp" },
+  { naam: "Editor", commando: '"socialnow": { "url": "https://app.socialnow.nl/api/mcp" }' },
+  { naam: "App", commando: "connector: https://app.socialnow.nl/api/mcp" },
 ];
 
 function AiTerminal() {
@@ -163,9 +164,10 @@ export default function NulNaarBedrijf() {
       </Tegel>
       <Tegel kop="Of laat je eigen AI het doen" breed={6} className="h-nul-ai">
         <Status live={BESCHIKBAAR.ai} />
+        <p className="sn-tegel-tekst">Altijd met de allerbeste AI-modellen, in een team van AI-developers.</p>
         <AiTerminal />
         <ul className="h-slot-regels">
-          <li><ShieldCheck size={16} aria-hidden="true" />Claude, Codex en andere AI’s koppelen via een beveiligde sleutel voor alleen jouw werkruimte.</li>
+          <li><ShieldCheck size={16} aria-hidden="true" />Je eigen AI-assistent koppel je met een beveiligde sleutel voor alleen jouw werkruimte.</li>
           <li><ShieldCheck size={16} aria-hidden="true" />Je AI ziet nooit onze code of de gegevens van anderen.</li>
           <li><ShieldCheck size={16} aria-hidden="true" />Niets verandert zonder jouw akkoord in het OS.</li>
         </ul>
