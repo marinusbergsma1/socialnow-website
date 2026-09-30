@@ -18,7 +18,7 @@ export function Statement() {
           <p className="sn-statement-zin">Proven<span>,</span> branded<span>,</span> end to end<span>,</span> highly profitable<span>,</span> personal <span>and</span> fully <em>automated systems.</em></p>
           <div className="sn-statement-voet">
             <p className="sn-statement-daarom">That&rsquo;s why we offer it for free.</p>
-            <p className="sn-statement-klein">If SaaS can&rsquo;t be free, it&rsquo;s not good enough!</p>
+            <p className="sn-statement-klein">If software can&rsquo;t be free, it&rsquo;s not good enough!</p>
           </div>
         </Tegel>
         {/* 30 september 2026 (Marinus): "als FOUNDER graag in aanmerking kom om een GRATIS DEMO END TO END TE GEVEN. DE

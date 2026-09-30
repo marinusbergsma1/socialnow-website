@@ -106,3 +106,14 @@
    logo's iets kleiner." Basis 56 px op 1440 (was 81, toen 66); Trusted by staat 22 px boven de logo's (was 6). */
 .sn-site .h-hero .h-hero-merken .h-clients.h-clients-kort .h-clients-lus img { height: calc(clamp(40px, 3.9vw, 58px) * var(--logo-maat, 1)); max-width: 180px; }
 .sn-site .h-hero .h-hero-merken > .h-trusted { margin: 0 0 clamp(16px, 1.6vw, 24px); }
+/* 30 september 2026: demobanner belangrijker, met Marinus en Sid (Attesso). */
+.sn-site .h-statement-verdien { display: block; margin-top: 6px; color: #25d366; }
+.sn-site .h-hero .h-knoppen .h-demo-knop.is-groot { flex: 1 1 100%; max-width: 720px; gap: 20px; padding: 24px 26px; border: 1.5px solid #25d366; border-radius: 26px; background: linear-gradient(135deg, #0f2a19, #070908 70%); box-shadow: 0 0 0 1px #25d36622, 0 18px 60px #25d36626; }
+.sn-site .h-hero .h-demo-knop.is-groot:hover { background: linear-gradient(135deg, #133620, #0a0f0c 70%); }
+.sn-site .h-demo-gezichten { display: flex; flex-shrink: 0; }
+.sn-site .h-hero .h-demo-knop.is-groot .h-demo-gezichten img { width: 72px; height: 72px; border: 3px solid #25d366; border-radius: 50%; object-fit: cover; background: #0b0d0d; }
+.sn-site .h-hero .h-demo-knop.is-groot .h-demo-gezichten img + img { margin-left: -18px; }
+.sn-site .h-hero .h-demo-knop.is-groot .h-demo-tekst { display: grid; gap: 6px; flex: 1 1 auto; min-width: 0; font-size: clamp(22px, 2vw, 30px); font-weight: 800; line-height: 1.15; }
+.sn-site .h-hero .h-demo-knop.is-groot .h-demo-tekst small { color: #c9d6cf; font-size: clamp(13px, 1vw, 15px); font-weight: 500; line-height: 1.4; }
+.sn-site .h-demo-pijl { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border: 1px solid #ffffff66; border-radius: 50%; font-size: 20px; }
+@media (max-width: 640px) { .sn-site .h-hero .h-demo-knop.is-groot .h-demo-gezichten img { width: 56px; height: 56px; } .sn-site .h-demo-pijl { display: none; } }

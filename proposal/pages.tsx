@@ -316,14 +316,25 @@ export function Home() {
           <div className="h-statement" translate="no">
             <p className="h-statement-zin">
               Proven, branded, end to end, highly profitable, personal, fully automated systems.{" "}
-              <strong>That&rsquo;s why we offer it for free.</strong>
+              <strong>That&rsquo;s why we offer it for free.</strong>{" "}
+              {/* 30 september 2026 (Marinus): "En dan de we get paid by our expertise, helping you!" */}
+              <strong className="h-statement-verdien">We get paid for our expertise: helping you!</strong>
             </p>
-            <p className="h-statement-klein">If SaaS can&rsquo;t be free, it&rsquo;s not good enough!</p>
+            {/* 30 september 2026 (Marinus): "If software ... niet SaaS". */}
+            <p className="h-statement-klein">If software can&rsquo;t be free, it&rsquo;s not good enough!</p>
           </div>
           <div className="h-knoppen">
-            <a className="h-demo-knop" href={mailLink("Free end to end demo with Marinus")} translate="no">
-              <img src="/images/marinus-profiel-blauw.webp" alt="" width="56" height="56" />
-              <span>Book a free live demo<small>With Marinus, founder. Live, anywhere in the world.</small></span>
+            {/* 30 september 2026 (Marinus): "Deze banner moet belangrijker worden en dan ook met Sid erbij van Attesso." */}
+            <a className="h-demo-knop is-groot" href={mailLink("Free end to end demo with Marinus and Sid")} translate="no">
+              <span className="h-demo-gezichten" aria-hidden="true">
+                <img src="/images/marinus-profiel-blauw.webp" alt="" width="72" height="72" />
+                <img src="/images/Sid-van-Kalken.webp" alt="" width="72" height="72" />
+              </span>
+              <span className="h-demo-tekst">
+                Book a free live demo
+                <small>With Marinus, founder SocialNow, and Sid, Attesso. Live, anywhere in the world.</small>
+              </span>
+              <span className="h-demo-pijl" aria-hidden="true">&#8599;</span>
             </a>
           </div>
           </div>
