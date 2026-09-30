@@ -53,3 +53,7 @@
 .sn-site .h-hero .h-knoppen .h-os-dock { max-width: 720px; }
 .sn-site .h-hero .h-knoppen .h-dock-login { padding: 32px 30px; font-size: clamp(26px, 2.5vw, 36px); }
 .sn-site .h-hero .h-knoppen .h-demo-knop { flex: 1 1 100%; max-width: 720px; }
+/* My story over de volle breedte onder de bewijsbalk, maximaal 1920 breed (de film is 1080p). */
+.sn-site .h-hero .h-story-vol { grid-column: 1 / -1; width: 100%; max-width: 1920px; margin: clamp(24px, 3vw, 40px) auto 0; }
+.sn-site .h-hero .h-story-vol .h-film-story { width: 100%; }
+.sn-site .h-hero .h-story-vol video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 18px; border: 1px solid #ffffff1f; background: #050608; object-fit: cover; }

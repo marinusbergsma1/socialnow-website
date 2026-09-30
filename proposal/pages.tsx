@@ -202,7 +202,7 @@ function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (
 }
 
 function HeroFilm() {
-  const [geluid, setGeluid] = useState<"" | "os" | "veilig" | "story">("");
+  const [geluid, setGeluid] = useState<"" | "os" | "veilig">("");
   return (
     <div className="h-hero-film h-hero-films is-os-veilig">
       <Film
@@ -221,17 +221,26 @@ function HeroFilm() {
         zetGeluid={(aan) => setGeluid(aan ? "os" : "")}
       />
       <VeiligheidSpeler geluid={geluid === "veilig"} zetGeluid={(aan) => setGeluid(aan ? "veilig" : "")} />
-      {/* 30 september 2026 (Marinus): "die video en daaronder veiligheidsvideo's en dan mijn story". */}
-      <Film
-        klasse="h-film-story"
-        src="/video/verhaal/verhaal-en.mp4"
-        poster="/video/verhaal/verhaal-en.jpg"
-        label="My story"
-        titel="My story"
-        geluid={geluid === "story"}
-        zetGeluid={(aan) => setGeluid(aan ? "story" : "")}
-      />
     </div>
+  );
+}
+
+// 30 september 2026 (Marinus): "Eerst nog ODOO en Salesforce balk dan een beeldvullende maar alsnog 1080 tijdlijn video".
+// De verhaalfilm (1920x1080) over de volle breedte onder de bewijsbalk, niet meer in de rechterkolom.
+function HeroStory() {
+  const { language } = useLanguage();
+  const taal = language === "nl" ? "nl" : "en";
+  const [geluid, setGeluid] = useState(false);
+  return (
+    <Film
+      klasse="h-film-story"
+      src={`/video/verhaal/verhaal-${taal}.mp4`}
+      poster={`/video/verhaal/verhaal-${taal}.jpg`}
+      label="My story"
+      titel="My story"
+      geluid={geluid}
+      zetGeluid={setGeluid}
+    />
   );
 }
 
@@ -297,6 +306,9 @@ export function Home() {
               <img src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" />
               <span><b>WORKING ON SALESFORCE</b><small>Next integration</small></span>
             </div>
+          </div>
+          <div className="h-story-vol">
+            <HeroStory />
           </div>
           <div className="h-hero-rij">
             <ClientLogos kort />
