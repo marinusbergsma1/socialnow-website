@@ -11,9 +11,11 @@ const IMPRESSIES = [
   { titel: "Eternal Sundown", voor: "/images/Eternal-Sundown-Afbeelding-Before-geconverteerd-van-png-1.webp", na: "/images/Eternal-Sundown-Afbeelding-After.webp", breed: 1920, hoog: 1200 },
   { titel: "Infinita", voor: "/images/light-art/infinita-voor.webp", na: "/images/Infinita-Light-Art-Collection.webp", breed: 1292, hoog: 1588 },
   { titel: "Butterfly Effect", voor: "/images/light-art/butterfly-effect-voor.webp", na: "/images/Butterfly-Effect-Light-Art-Collection.webp", breed: 1391, hoog: 1592 },
-  { titel: "Artwork aan het water", voor: "/images/light-art/pier-voor.webp", na: "/images/Light-Art-Collection-Artwork.webp", breed: 1920, hoog: 1200 },
-  { titel: "Light Art Collection", voor: "/images/light-art/light-art-collection-voor.webp", na: "/images/Light-Art-Collection.webp", breed: 1920, hoog: 1170 },
 ];
+// 30 september 2026 (Marinus): "3 niet 5". Alleen de drie Artist Impressions. De beelden waren 1920 px en samen 2,7 MB voor
+// kaarten van 400 px; op een trage lijn bleven de vakken leeg. Nu uit images/light-art/licht in 800 en 1400 px (q74).
+const licht = (pad: string) => `/images/light-art/licht/${pad.split("/").pop()!.replace(/\.webp$/, "")}`;
+const bronnen = (pad: string) => ({ src: `${licht(pad)}-800.webp`, srcSet: `${licht(pad)}-800.webp 800w, ${licht(pad)}-1400.webp 1400w`, sizes: "(min-width: 900px) 30vw, 82vw" });
 
 type Impressie = (typeof IMPRESSIES)[number];
 
@@ -45,8 +47,8 @@ function VoorNaSchuif({ impressie }: { impressie: Impressie }) {
   return (
     <figure ref={ref} className="h-lac-kaart">
       <span className="h-lac-beeld" style={{ "--grens": `${grens}%` } as React.CSSProperties}>
-        <img src={impressie.voor} alt={`${impressie.titel}, voor`} width={impressie.breed} height={impressie.hoog} loading="lazy" draggable={false} />
-        <img className="h-lac-na" src={impressie.na} alt={`${impressie.titel}, artist impression`} width={impressie.breed} height={impressie.hoog} loading="lazy" draggable={false} />
+        <img {...bronnen(impressie.voor)} alt={`${impressie.titel}, voor`} width={impressie.breed} height={impressie.hoog} loading="lazy" decoding="async" draggable={false} />
+        <img className="h-lac-na" {...bronnen(impressie.na)} alt={`${impressie.titel}, artist impression`} width={impressie.breed} height={impressie.hoog} loading="lazy" decoding="async" draggable={false} />
         <span className="h-lac-label is-voor" aria-hidden="true">Voor</span>
         <span className="h-lac-label is-na" aria-hidden="true">Na</span>
         <i className="h-lac-greep" aria-hidden="true" />
