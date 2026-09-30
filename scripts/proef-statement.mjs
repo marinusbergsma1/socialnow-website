@@ -14,12 +14,12 @@ const eisen = [
   // 30 september 2026 (Marinus): "Deze video mag weg", My story staat niet meer in de header.
   ["volgorde: OS-film, dan Trusted by", /<HeroFilm\b[\s\S]*Trusted by/.test(pages)],
   ["regel over software weg", !pages.includes(">If software can&rsquo;t be free")],
-  ["mensen-regel dun en daaronder de betaalzin", pages.includes('h-statement-dun">Everyone can automate a business. <span className=\"h-statement-groen\">NO ONE CAN AUTOMATE PEOPLE WHO CARE</span><span className=\"h-statement-punt\">.') && pages.includes("Software is a tool. We are SocialNow!")],
+  ["stijl R1: dun dan dik, groen dik", pages.includes('<b className="g">NO ONE CAN AUTOMATE PEOPLE WHO CARE</b><b>.</b>') && pages.includes('<span className="d">Software is a tool.</span> <b>We are SocialNow!</b>') && readFileSync("proposal/hero-c.css","utf8").includes("h-statement.is-r1")],
   ["geen dubbele expertzinnen meer", !pages.includes(">With a team of human experts") && !pages.includes("We get paid for our expertise")],
   // 30 september 2026 (Marinus): de demobanner werd een liggend sprekersblok met Marinus en Sid (Attesso).
   ["demo met Marinus en Sid van Attesso", pages.includes('className="h-sprekers"') && pages.includes("Sid van Kalken") && pages.includes("~/attesso")],
   ["zin over human control weg", !pages.includes("</strong> With all the human control")],
-  ["Join our team met link naar vacatures", pages.includes('Join our team at: <Link to="/vacatures">Jobs at SocialNow.nl</Link>')],
+  ["Join our team met link naar vacatures", pages.includes('<span className="d">Join our team at:</span> <Link to="/vacatures">')],
   ["team met join-uitnodiging rechts", pages.includes("<TeamJoin />") && readFileSync("proposal/TeamTrust.tsx","utf8").includes("Let&rsquo;s make a difference together and join SocialNow! 🚀")],
   ["meer ruimte in het statement", readFileSync("proposal/hero-c.css","utf8").includes("statement lucht")],
 ];

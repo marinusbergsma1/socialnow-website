@@ -169,9 +169,17 @@
 .sn-site .h-hero .h-statement { gap: clamp(16px, 1.6vw, 24px); margin-top: clamp(20px, 2.2vw, 32px); margin-bottom: clamp(12px, 1.4vw, 20px); }
 .sn-site .h-hero .h-statement > p { margin-block: 0; }
 /* Team met uitnodiging rechts naast het statement. */
-.sn-site .h-team-join { display: grid; gap: 14px; width: 100%; margin-top: clamp(22px, 2.6vw, 36px); padding-top: clamp(16px, 1.6vw, 22px); border-top: 1px solid #ffffff14; color: #fff; text-decoration: none; }
+.sn-site .h-team-join { display: grid; gap: clamp(22px, 2vw, 30px); width: 100%; margin-top: clamp(22px, 2.6vw, 36px); padding-top: clamp(16px, 1.6vw, 22px); border-top: 1px solid #ffffff14; color: #fff; text-decoration: none; }
 .sn-site .h-team-join-gezichten { display: flex; flex-wrap: wrap; }
 .sn-site .h-team-join-gezichten img { width: clamp(46px, 3.6vw, 64px); height: clamp(46px, 3.6vw, 64px); border-radius: 50%; border: 2px solid #000; object-fit: cover; margin-left: -10px; background: #0b0d0d; }
 .sn-site .h-team-join-gezichten img:first-child { margin-left: 0; }
 .sn-site .h-team-join strong { font-size: clamp(20px, 1.9vw, 28px); font-weight: 700; line-height: 1.2; }
 .sn-site .h-team-join:hover strong { color: #25d366; }
+/* 30 september 2026: statement in de stijl van R1. Eén maat, per regel dun (Light) en dan dik (Bold), groen deel dik. */
+.sn-site .h-hero .h-statement.is-r1 { display: grid; gap: clamp(14px, 1.3vw, 20px); margin-top: clamp(22px, 2.4vw, 34px); margin-bottom: clamp(14px, 1.6vw, 22px); max-width: 620px; }
+.sn-site .h-statement.is-r1 .h-sr { margin: 0; color: #fff; font-size: clamp(18px, 1.55vw, 23px); line-height: 1.4; }
+.sn-site .h-statement.is-r1 .d { font-weight: 300; color: #eef3f0; }
+.sn-site .h-statement.is-r1 b { font-weight: 700; color: #fff; }
+.sn-site .h-statement.is-r1 b.g { color: #25d366; }
+.sn-site .h-statement.is-r1 a { text-decoration: none; }
+.sn-site .h-statement.is-r1 a:hover b.g { text-decoration: underline; }

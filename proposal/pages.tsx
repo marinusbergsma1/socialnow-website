@@ -288,19 +288,13 @@ export function Home() {
           </div>
           {/* 30 september 2026 (Marinus): header optie C. Het statement als één zin onder de kop, klein de SaaS-regel, en
               twee knoppen: inloggen en een gratis live demo met de founder. Overal Engels (translate="no"). */}
-          <div className="h-statement" translate="no">
-            {/* 30 september 2026 (Marinus), ronde 2 uit vier versies: de experts één keer, als dunne filosofische zin.
-                "Anyone can build automations. No one can build people who care! You pay for the people, not the tools.
-                That is SocialNow!" */}
-            {/* 30 september 2026 (Marinus): "Proven, branded and fully automated!" en daarna "and toch weg". */}
-            <p className="h-statement-zin">Proven, branded, <strong>fully automated!</strong></p>
-            {/* 30 september 2026 (Marinus): "Everyone can automate our software. No one can automate us! 🚀" */}
-            {/* 30 september 2026 (Marinus): "No one can automate people who care! 🚀 Beter" */}
-            <p className="h-statement-dun">Everyone can automate a business. <span className="h-statement-groen">NO ONE CAN AUTOMATE PEOPLE WHO CARE</span><span className="h-statement-punt">.</span></p>
-            <p className="h-statement-zin h-statement-mensen">{/* 30 september 2026 (Marinus): "Software is a tool, we are socialnow!" */}<strong>Software is a tool. We are SocialNow!</strong></p>
-            {/* 30 september 2026 (Marinus): "Join our team at: en dan klein groen: Jobs at SocialNow.nl." */}
-            <p className="h-statement-jobs">Join our team at: <Link to="/vacatures">Jobs at SocialNow.nl</Link></p>
-            {/* 30 september 2026 (Marinus): de regel "If software can't be free, it's not good enough!" mag weg. */}
+          <div className="h-statement is-r1" translate="no">
+            {/* 30 september 2026 (Marinus): "Dit is helemaal niet in deze stijl, LOS DAT OP", met versie R1 als voorbeeld:
+                alle regels even groot, per regel eerst dun en dan dik, het groene deel dik, de punt wit. */}
+            <p className="h-sr"><span className="d">Proven, branded,</span> <b>fully automated!</b></p>
+            <p className="h-sr"><span className="d">Everyone can automate a business.</span> <b className="g">NO ONE CAN AUTOMATE PEOPLE WHO CARE</b><b>.</b></p>
+            <p className="h-sr"><span className="d">Software is a tool.</span> <b>We are SocialNow!</b></p>
+            <p className="h-sr"><span className="d">Join our team at:</span> <Link to="/vacatures"><b className="g">Jobs at SocialNow.nl</b></Link></p>
           </div>
           </div>
           <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid}>
