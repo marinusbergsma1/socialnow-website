@@ -3,53 +3,77 @@ import { useInBeeld } from "./Bento";
 import "./bereikt.css";
 
 // 30 september 2026 (Marinus): "Hier wil ik een werkbalk met alles wat ik voor Light Art Collection heb gedaan. De Artist
-// Impressions." Onder de reactie van Albert Deltour in Mijn waarom. Een doorlopende strook die stilstaat bij hover of focus;
-// Eternal Sundown veegt van het oorspronkelijke beeld naar de impressie. Beelden uit public/images (al eerder op de site).
+// Impressions." en daarna "Ik mis de before foto's met slider functie. Maak de before met image2.5 via Higgsfield."
+// Onder de reactie van Albert Deltour in Mijn waarom: een zijwaartse strook waarin elke impressie een voor-en-na-schuif is.
+// De voor-beelden in public/images/light-art zijn op 30 september gemaakt met GPT Image 2.5 op Higgsfield (de impressie
+// als referentie, alleen het kunstwerk weggehaald); Eternal Sundown had al een eigen voor-beeld.
 const IMPRESSIES = [
-  { src: "/images/Light-Art-Collection.webp", titel: "Light Art Collection", breed: 1920, hoog: 1170 },
-  { src: "/images/Infinita-Light-Art-Collection.webp", titel: "Infinita", breed: 1292, hoog: 1588 },
-  { src: "/images/Butterfly-Effect-Light-Art-Collection.webp", titel: "Butterfly Effect", breed: 1391, hoog: 1592 },
-  { src: "/images/Light-Art-Collection-Artwork.webp", titel: "Artwork aan het water", breed: 1920, hoog: 1200 },
+  { titel: "Eternal Sundown", voor: "/images/Eternal-Sundown-Afbeelding-Before-geconverteerd-van-png-1.webp", na: "/images/Eternal-Sundown-Afbeelding-After.webp", breed: 1920, hoog: 1200 },
+  { titel: "Infinita", voor: "/images/light-art/infinita-voor.webp", na: "/images/Infinita-Light-Art-Collection.webp", breed: 1292, hoog: 1588 },
+  { titel: "Butterfly Effect", voor: "/images/light-art/butterfly-effect-voor.webp", na: "/images/Butterfly-Effect-Light-Art-Collection.webp", breed: 1391, hoog: 1592 },
+  { titel: "Artwork aan het water", voor: "/images/light-art/pier-voor.webp", na: "/images/Light-Art-Collection-Artwork.webp", breed: 1920, hoog: 1200 },
+  { titel: "Light Art Collection", voor: "/images/light-art/light-art-collection-voor.webp", na: "/images/Light-Art-Collection.webp", breed: 1920, hoog: 1170 },
 ];
 
-function VoorNa({ kopie }: { kopie: boolean }) {
+type Impressie = (typeof IMPRESSIES)[number];
+
+// Eén voor-en-na-schuif. Slepen of de pijltjestoetsen verschuiven de grens; bij binnenkomst in beeld zwaait hij één keer
+// heen en weer zodat je ziet dat het kan, tenzij minder beweging is ingesteld of je al zelf hebt geschoven.
+function VoorNaSchuif({ impressie }: { impressie: Impressie }) {
+  const { ref, aan } = useInBeeld<HTMLElement>();
+  const [grens, setGrens] = React.useState(50);
+  const zelf = React.useRef(false);
+  React.useEffect(() => {
+    if (!aan || zelf.current) return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    const punten = [50, 88, 12, 50];
+    const duur = 2600;
+    const start = performance.now();
+    let frame = 0;
+    const stap = (nu: number) => {
+      if (zelf.current) return;
+      const t = Math.min(1, (nu - start) / duur) * (punten.length - 1);
+      const i = Math.min(punten.length - 2, Math.floor(t));
+      const f = t - i;
+      const zacht = f * f * (3 - 2 * f);
+      setGrens(punten[i] + (punten[i + 1] - punten[i]) * zacht);
+      if (t < punten.length - 1) frame = requestAnimationFrame(stap);
+    };
+    frame = requestAnimationFrame(stap);
+    return () => cancelAnimationFrame(frame);
+  }, [aan]);
   return (
-    <figure className="h-lac-kaart is-voor-na" aria-hidden={kopie || undefined}>
-      <span className="h-lac-beeld">
-        <img src="/images/Eternal-Sundown-Afbeelding-Before-geconverteerd-van-png-1.webp" alt={kopie ? "" : "Eternal Sundown, de plek zonder kunstwerk"} width="1920" height="1200" loading="lazy" />
-        <img className="h-lac-na" src="/images/Eternal-Sundown-Afbeelding-After.webp" alt={kopie ? "" : "Eternal Sundown, artist impression"} width="1920" height="1200" loading="lazy" />
-        <i className="h-lac-veeg" aria-hidden="true" />
+    <figure ref={ref} className="h-lac-kaart">
+      <span className="h-lac-beeld" style={{ "--grens": `${grens}%` } as React.CSSProperties}>
+        <img src={impressie.voor} alt={`${impressie.titel}, voor`} width={impressie.breed} height={impressie.hoog} loading="lazy" draggable={false} />
+        <img className="h-lac-na" src={impressie.na} alt={`${impressie.titel}, artist impression`} width={impressie.breed} height={impressie.hoog} loading="lazy" draggable={false} />
+        <span className="h-lac-label is-voor" aria-hidden="true">Voor</span>
+        <span className="h-lac-label is-na" aria-hidden="true">Na</span>
+        <i className="h-lac-greep" aria-hidden="true" />
+        <input
+          className="h-lac-schuif"
+          type="range"
+          min={0}
+          max={100}
+          step={1}
+          value={Math.round(grens)}
+          onChange={(event) => { zelf.current = true; setGrens(Number(event.target.value)); }}
+          aria-label={`Voor en na: ${impressie.titel}`}
+        />
       </span>
-      <figcaption>Eternal Sundown · voor en na</figcaption>
+      <figcaption>{impressie.titel}</figcaption>
     </figure>
   );
 }
 
 export default function LightArtStrook() {
-  const { ref, aan } = useInBeeld<HTMLDivElement>();
-  const kaarten = (kopie: boolean) => (
-    <>
-      {IMPRESSIES.map((beeld) => (
-        <figure key={`${beeld.titel}${kopie ? "-2" : ""}`} className="h-lac-kaart" aria-hidden={kopie || undefined}>
-          <span className="h-lac-beeld">
-            <img src={beeld.src} alt={kopie ? "" : `${beeld.titel}, artist impression`} width={beeld.breed} height={beeld.hoog} loading="lazy" />
-          </span>
-          <figcaption>{beeld.titel}</figcaption>
-        </figure>
-      ))}
-      <VoorNa kopie={kopie} />
-    </>
-  );
   return (
-    <div ref={ref} className={`h-lac${aan ? " is-in-beeld" : ""}`}>
+    <div className="h-lac">
       <p className="h-lac-kop">
-        <span>Artist Impressions</span> <span translate="no">Light Art Collection</span>
+        <span>Artist Impressions</span> <span translate="no">Light Art Collection</span> <span>Schuif voor en na</span>
       </p>
-      <div className="h-lac-venster" tabIndex={0} role="region" aria-label="Artist Impressions voor Light Art Collection">
-        <div className="h-lac-band">
-          {kaarten(false)}
-          <span className="h-lac-kopie" aria-hidden="true">{kaarten(true)}</span>
-        </div>
+      <div className="h-lac-venster" role="region" aria-label="Artist Impressions voor Light Art Collection">
+        {IMPRESSIES.map((impressie) => <VoorNaSchuif key={impressie.titel} impressie={impressie} />)}
       </div>
     </div>
   );

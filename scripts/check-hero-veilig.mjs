@@ -75,6 +75,12 @@ try {
   const waarom = nl.slice(nl.indexOf('id="verhaal"'));
   eis(waarom.includes("h-lac"), "Light Art Collection-strook staat in het verhaal");
   eis(["Infinita-Light-Art-Collection", "Butterfly-Effect-Light-Art-Collection", "Eternal-Sundown-Afbeelding-After", "Eternal-Sundown-Afbeelding-Before"].every((b) => waarom.includes(b)), "alle Artist Impressions, ook Eternal Sundown voor en na, staan in de strook");
+  // 4b. Elke impressie heeft een voor-beeld met schuif (Marinus: "Ik mis de before foto's met slider functie").
+  const schuiven = (waarom.match(/class="h-lac-schuif"/g) || []).length;
+  eis(schuiven >= 5, "elke Artist Impression heeft een voor-en-na-schuif");
+  for (const pad of [...waarom.matchAll(/src="(\/images\/light-art\/[^"]+)"/g)].map((m) => m[1]))
+    eis(existsSync(`public${pad}`), `voor-beeld bestaat: ${pad}`);
+  eis([...waarom.matchAll(/src="\/images\/light-art\//g)].length >= 4, "vier nieuwe voor-beelden staan in de strook");
   // 5. Geen modelnamen in de sitetekst (afspraak 29 september).
   for (const [taal, html] of [["nl", nl], ["en", en]]) {
     const tekst = html.replace(/<[^>]+>/g, " ");
