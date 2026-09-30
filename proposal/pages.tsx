@@ -276,6 +276,13 @@ export function Home() {
           <HeroLogo />
           <TeamTrust />
           <HeroTitle />
+          {/* 30 september 2026 (Marinus): "na de Let's get SocialNow ... die inlog daar en daaronder de rest van de merken
+              en logo's". De login staat direct onder de kop; Odoo, Salesforce, Attesso, statement en demo volgen. */}
+          <div className="h-knoppen">
+            <div className="os-entry">
+              <OsDock />
+            </div>
+          </div>
           {/* 30 september 2026 (Marinus): header 4C, overzichtelijker. Odoo, Salesforce en de betaalpartner op twee regels. */}
           <div className="h-integratie" translate="no">
             <p className="h-integratie-rij">
@@ -304,9 +311,6 @@ export function Home() {
             <p className="h-statement-klein">If SaaS can&rsquo;t be free, it&rsquo;s not good enough!</p>
           </div>
           <div className="h-knoppen">
-            <div className="os-entry">
-              <OsDock />
-            </div>
             <a className="h-demo-knop" href={mailLink("Free end to end demo with Marinus")} translate="no">
               <img src="/images/marinus-profiel-blauw.webp" alt="" width="56" height="56" />
               <span>Book a free live demo<small>With Marinus, founder. Live, anywhere in the world.</small></span>
