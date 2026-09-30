@@ -4,7 +4,7 @@ const pages = readFileSync("proposal/pages.tsx", "utf8");
 const styles = readFileSync("proposal/styles.tsx", "utf8");
 const content = readFileSync("proposal/content.ts", "utf8");
 const eisen = [
-  ["kop Let's get SocialNow! met SocialNow groen", styles.includes('"Let’s get"') && styles.includes('"SocialNow!"') && styles.includes('h-kop-groen">{KOP_2}')],
+  ["kop Let's get SocialNow! typt uit, wit, raket erachter", styles.includes('"Let’s get"') && styles.includes('"SocialNow!"') && styles.includes("h-kop-typen") && styles.includes("🚀") && !styles.includes('h-kop-groen">{KOP_2}') && readFileSync("proposal/hero-c.css","utf8").includes("@keyframes h-typ")],
   ["integratieregel Odoo en Salesforce", pages.includes("INTEGRATED IN ODOO&rsquo;S ERP SYSTEM") && pages.includes("NEXT STEP <img src=\"/images/partners/salesforce.svg\"")],
   ["aftermovie-link naast Odoo", pages.includes("Watch the aftermovie") && pages.includes("/video/odoo-experience/odoo-experience.mp4")],
   ["betaalpartner Attesso", pages.includes("~/attesso")],

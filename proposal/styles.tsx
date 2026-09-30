@@ -70,8 +70,14 @@ export function HeroTitle() {
       <h1 ref={kopRef} className="h-taalwissel h-hoogte" translate="no">
         {LANGUAGES.map((code) => (
           <span key={code} {...stand(code)}>
-            {translate(KOP_1, code)}{" "}
-            <span className="h-kop-groen">{KOP_2}</span>
+            {/* 30 september 2026 (Marinus): "Let's get SocialNow! graag uittypen, raketje erachter en helemaal wit".
+                Elke letter verschijnt na de vorige (alleen CSS, werkt ook in de prerender); daarna de raket. */}
+            <span className="h-kop-typen" aria-label={`${translate(KOP_1, code)} ${KOP_2}`}>
+              {Array.from(`${translate(KOP_1, code)} ${KOP_2}`).map((teken, i) => (
+                <span key={i} aria-hidden="true" style={{ "--i": i } as React.CSSProperties}>{teken}</span>
+              ))}
+              <span className="h-kop-raket" aria-hidden="true" style={{ "--i": Array.from(`${translate(KOP_1, code)} ${KOP_2}`).length } as React.CSSProperties}>{" "}🚀</span>
+            </span>
           </span>
         ))}
       </h1>
