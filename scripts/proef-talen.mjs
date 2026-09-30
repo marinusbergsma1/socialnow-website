@@ -27,7 +27,8 @@ for (const taal of talen.filter((t) => t !== "nl" && t !== "en")) {
 
 eis(/export function laadWoordenboek/.test(context), "context.ts laadt woordenboeken niet per taal");
 eis(/laadWoordenboek\([^)]*"kern"\)/.test(lees("index.tsx")), "index.tsx laadt de kern niet vóór de eerste weergave");
-eis(/\(nl\|de\|fr\|es\|it\|pt\|pl\|sv\|da\|tr\|ja\)/.test(lees("scripts/prerender.mjs")), "prerender.mjs kent de nieuwe talen niet (pagina slaat eerst in het Engels)");
+const prerender = lees("scripts/prerender.mjs");
+eis(/LANGUAGES\.filter/.test(prerender) || /\(nl\|de\|fr\|es\|it\|pt\|pl\|sv\|da\|tr\|ja\)/.test(prerender), "prerender.mjs kent de nieuwe talen niet (pagina slaat eerst in het Engels)");
 
 const build = lees("scripts/localize-build.mjs");
 const buildTalen = JSON.parse((build.match(/const LANGUAGES=(\[[^\]]*\])/)?.[1] || "[]").replace(/'/g, '"'));

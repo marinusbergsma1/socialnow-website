@@ -24,11 +24,16 @@ function writePreference(name: string, value: string) {
 export function rememberLanguage(language: Language) {
   writePreference('sn-taal', language);
 }
+function languageInPath(): boolean {
+  const code = location.pathname.match(/^\/([a-z]{2})(?:\/|$)/)?.[1];
+  return Boolean(code && code !== 'en' && isLanguage(code));
+}
 // 30 september 2026: de pagina komt voorgerenderd binnen. Alleen een bezoeker zonder taal in het pad,
 // zonder bewaarde keuze en zonder bekend land moet op het netwerk wachten; de rest weet index.tsx meteen.
 export function needsCountryLookup(): boolean {
-  if (/^\/(nl|de|fr|es|it|pt|pl|sv|da|tr|ja)(?:\/|$)/.test(location.pathname)) return false;
-  if (/(?:^|;\s*)sn-taal=(en|nl|de|fr|es|it|pt|pl|sv|da|tr|ja)(?:;|$)/.test(document.cookie)) return false;
+  if (languageInPath()) return false;
+  const saved = document.cookie.match(/(?:^|;\s*)sn-taal=([a-z]{2})(?:;|$)/)?.[1];
+  if (saved && isLanguage(saved)) return false;
   try { if (sessionStorage.getItem('sn-detected-country')) return false; } catch {}
   return true;
 }
