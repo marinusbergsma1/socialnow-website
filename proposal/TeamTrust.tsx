@@ -7,7 +7,7 @@ import { people } from "./content";
 export default function TeamTrust() {
   return <Link to="/team" className="h-team-trust">
     <span className="h-team-portraits" aria-hidden="true">
-      {["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken"]
+      {["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe"]
         .map(naam => people.find(person => person.name === naam))
         .filter((person): person is NonNullable<typeof person> => Boolean(person))
         .map(person => <img key={person.name} src={`/images/${person.image}`} alt="" width="56" height="56" loading="lazy" />)}

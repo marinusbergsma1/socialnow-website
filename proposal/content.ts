@@ -50,6 +50,8 @@ export const people = [
     role: "Head of Supply Chain, Operations & AI Payments",
     image: "Michelle-Yang-HD.webp",
   },
+  // 30 september 2026 (Marinus): nieuw teamlid.
+  { name: "Tristan Slobbe", role: "Data & AI Engineer", image: "Tristan-Slobbe.webp" },
 ];
 export const agents = [
   {
