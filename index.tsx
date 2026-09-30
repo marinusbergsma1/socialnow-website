@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./proposal/WebsiteProposal";
-import { isLanguage, type Language } from "./proposal/i18n/context";
+import { isLanguage, loadLanguage, type Language } from "./proposal/i18n/context";
 import "./proposal/website.css";
 import "./proposal/experience.css";
 import { detectVisitorLanguage } from "./proposal/i18n/detect";
@@ -18,6 +18,7 @@ async function start() {
   await detectVisitorLanguage();
   const match = window.location.pathname.match(/^\/([a-z]{2})(?:\/|$)/);
   const language: Language = match && isLanguage(match[1]) ? match[1] : "en";
+  await loadLanguage(language);
   root.render(
     <React.StrictMode>
       <BrowserRouter basename={language === "en" ? "/" : `/${language}`}>

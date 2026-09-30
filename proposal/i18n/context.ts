@@ -1,20 +1,12 @@
 import React, { createContext, useContext, useEffect } from "react";
 import english from "./en.json";
-import german from "./de.json";
-import french from "./fr.json";
-import spanish from "./es.json";
-import italian from "./it.json";
-import portuguese from "./pt.json";
-import polish from "./pl.json";
-import swedish from "./sv.json";
-import danish from "./da.json";
-import turkish from "./tr.json";
-import japanese from "./ja.json";
 // 16 september 2026 (Marinus, voor de beurs): zes talen. Sinds 26 september 2026 nog vier: Italiaans
 // en Spaans zijn eraf. Nederlands is de bron in de code, de andere drie zijn woordenboeken met de Nederlandse zin als sleutel. Ontbreekt een zin in een
 // woordenboek, dan valt hij terug op het Engels en daarna op het Nederlands.
 // 30 september 2026 (Marinus): "Ik wil de site in minimaal 10 talen", "als drop down". Twaalf talen in het
-// taalmenu; de acht nieuwe woordenboeken vult scripts/vertaal-talen.mjs.
+// taalmenu; de acht nieuwe woordenboeken vult scripts/vertaal-talen.mjs. Alleen Engels (de terugval) zit in de
+// bundel; het woordenboek van de bezoeker laadt index.tsx vóór de eerste weergave met loadLanguage. Zo haalt
+// niemand elf woordenboeken binnen om er één te lezen.
 export type Language = "en" | "nl" | "de" | "fr" | "es" | "it" | "pt" | "pl" | "sv" | "da" | "tr" | "ja";
 export const LANGUAGES: Language[] = ["en", "nl", "de", "fr", "es", "it", "pt", "pl", "sv", "da", "tr", "ja"];
 export const LANGUAGE_NAMES: Record<Language, string> = { en: "English", nl: "Nederlands", de: "Deutsch", fr: "Français", es: "Español", it: "Italiano", pt: "Português", pl: "Polski", sv: "Svenska", da: "Dansk", tr: "Türkçe", ja: "日本語" };
@@ -29,23 +21,21 @@ const shared = globalThis as unknown as { __snLanguageContext?: React.Context<La
 export const LanguageContext = (shared.__snLanguageContext ??= createContext<Language>("en"));
 export const NoTranslation = (shared.__snNoTranslation ??= createContext(false));
 export const missingTranslations = new Set<string>();
-const dictionaries: Record<Exclude<Language, "nl">, Record<string, string>> = {
-  en: english as Record<string, string>,
-  de: german as Record<string, string>,
-  fr: french as Record<string, string>,
-  es: spanish as Record<string, string>,
-  it: italian as Record<string, string>,
-  pt: portuguese as Record<string, string>,
-  pl: polish as Record<string, string>,
-  sv: swedish as Record<string, string>,
-  da: danish as Record<string, string>,
-  tr: turkish as Record<string, string>,
-  ja: japanese as Record<string, string>,
-};
+type Dictionary = Record<string, string>;
+// Gedeeld via globalThis om dezelfde reden als de context hierboven: in dev heeft de JSX-runtime een eigen
+// kopie van deze module, en die moet het geladen woordenboek ook zien.
+const sharedDictionaries = globalThis as unknown as { __snDictionaries?: Partial<Record<Exclude<Language, "nl">, Dictionary>> };
+const dictionaries = (sharedDictionaries.__snDictionaries ??= { en: english as Dictionary });
+const loaders = import.meta.glob<{ default: Dictionary }>(["./*.json", "!./en.json"]);
+export async function loadLanguage(language: Language): Promise<void> {
+  if (language === "nl" || dictionaries[language]) return;
+  const load = loaders[`./${language}.json`];
+  if (load) dictionaries[language] = (await load()).default;
+}
 export function translate(text: string, language: Language): string {
   if (language === "nl" || !text.trim()) return text;
   const key = text.replace(/\s+/g, " ").trim();
-  const found = dictionaries[language]?.[key] ?? (language === "en" ? undefined : dictionaries.en[key]);
+  const found = dictionaries[language]?.[key] ?? (language === "en" ? undefined : dictionaries.en![key]);
   if (found !== undefined) return text.replace(text.trim(), found);
   for (const [prefix, replacement] of [["Live website van ", "Live website by "], ["Websiteontwerp voor ", "Website design for "], ["Volledige paginaopname van de website van ", "Full-page capture of the website of "]]) {
     if (key.startsWith(prefix)) return replacement + key.slice(prefix.length);
