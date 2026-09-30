@@ -4,7 +4,10 @@ const TRACE_URL = 'https://milo-chat.socialnow-marinus.workers.dev/cdn-cgi/trace
 const COUNTRY_LANGUAGES: Record<string, Language[]> = {
   NL: ['nl'], SR: ['nl'], AW: ['nl'], CW: ['nl'],
   DE: ['de'], AT: ['de'], LI: ['de'], FR: ['fr'], MC: ['fr'],
-  BE: ['nl', 'fr', 'de'], CH: ['de', 'fr'], LU: ['fr', 'de'], CA: ['en', 'fr'],
+  BE: ['nl', 'fr', 'de'], CH: ['de', 'fr', 'it'], LU: ['fr', 'de'], CA: ['en', 'fr'],
+  ES: ['es'], MX: ['es'], AR: ['es'], CO: ['es'], CL: ['es'], PE: ['es'], IT: ['it'], SM: ['it'],
+  PT: ['pt'], BR: ['pt'], AO: ['pt'], MZ: ['pt'], PL: ['pl'], SE: ['sv'], AX: ['sv'], DK: ['da'], FO: ['da'], GL: ['da'],
+  TR: ['tr'], CY: ['tr', 'en'], JP: ['ja'],
 };
 export function languageForCountry(country: string, browserLanguages: readonly string[]): Language {
   const options = COUNTRY_LANGUAGES[country.toUpperCase()] || ['en'];
@@ -23,8 +26,8 @@ export function rememberLanguage(language: Language) {
 }
 export async function detectVisitorLanguage(): Promise<void> {
   // Explicit language links always win, including shared links to a specific language.
-  if (/^\/(nl|de|fr)(?:\/|$)/.test(location.pathname)) return;
-  const saved = document.cookie.match(/(?:^|;\s*)sn-taal=(en|nl|de|fr)(?:;|$)/)?.[1];
+  if (/^\/(nl|de|fr|es|it|pt|pl|sv|da|tr|ja)(?:\/|$)/.test(location.pathname)) return;
+  const saved = document.cookie.match(/(?:^|;\s*)sn-taal=(en|nl|de|fr|es|it|pt|pl|sv|da|tr|ja)(?:;|$)/)?.[1];
   let language: Language = saved && isLanguage(saved) ? saved : 'en';
   if (!saved) {
     const browserLanguages = navigator.languages || [navigator.language];

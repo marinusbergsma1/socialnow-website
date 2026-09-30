@@ -2,13 +2,23 @@ import React, { createContext, useContext, useEffect } from "react";
 import english from "./en.json";
 import german from "./de.json";
 import french from "./fr.json";
+import spanish from "./es.json";
+import italian from "./it.json";
+import portuguese from "./pt.json";
+import polish from "./pl.json";
+import swedish from "./sv.json";
+import danish from "./da.json";
+import turkish from "./tr.json";
+import japanese from "./ja.json";
 // 16 september 2026 (Marinus, voor de beurs): zes talen. Sinds 26 september 2026 nog vier: Italiaans
 // en Spaans zijn eraf. Nederlands is de bron in de code, de andere drie zijn woordenboeken met de Nederlandse zin als sleutel. Ontbreekt een zin in een
 // woordenboek, dan valt hij terug op het Engels en daarna op het Nederlands.
-export type Language = "en" | "nl" | "de" | "fr";
-export const LANGUAGES: Language[] = ["en", "nl", "de", "fr"];
-export const LANGUAGE_NAMES: Record<Language, string> = { en: "English", nl: "Nederlands", de: "Deutsch", fr: "Français" };
-export const LOCALES: Record<Language, string> = { en: "en_GB", nl: "nl_NL", de: "de_DE", fr: "fr_FR" };
+// 30 september 2026 (Marinus): "Ik wil de site in minimaal 10 talen", "als drop down". Twaalf talen in het
+// taalmenu; de acht nieuwe woordenboeken vult scripts/vertaal-talen.mjs.
+export type Language = "en" | "nl" | "de" | "fr" | "es" | "it" | "pt" | "pl" | "sv" | "da" | "tr" | "ja";
+export const LANGUAGES: Language[] = ["en", "nl", "de", "fr", "es", "it", "pt", "pl", "sv", "da", "tr", "ja"];
+export const LANGUAGE_NAMES: Record<Language, string> = { en: "English", nl: "Nederlands", de: "Deutsch", fr: "Français", es: "Español", it: "Italiano", pt: "Português", pl: "Polski", sv: "Svenska", da: "Dansk", tr: "Türkçe", ja: "日本語" };
+export const LOCALES: Record<Language, string> = { en: "en_GB", nl: "nl_NL", de: "de_DE", fr: "fr_FR", es: "es_ES", it: "it_IT", pt: "pt_PT", pl: "pl_PL", sv: "sv_SE", da: "da_DK", tr: "tr_TR", ja: "ja_JP" };
 export function isLanguage(value: string): value is Language { return (LANGUAGES as string[]).includes(value); }
 export function languagePrefix(language: Language): string { return language === "en" ? "" : `/${language}`; }
 // Eén gedeelde context-instantie, ook als deze module twee keer geladen wordt.
@@ -23,6 +33,14 @@ const dictionaries: Record<Exclude<Language, "nl">, Record<string, string>> = {
   en: english as Record<string, string>,
   de: german as Record<string, string>,
   fr: french as Record<string, string>,
+  es: spanish as Record<string, string>,
+  it: italian as Record<string, string>,
+  pt: portuguese as Record<string, string>,
+  pl: polish as Record<string, string>,
+  sv: swedish as Record<string, string>,
+  da: danish as Record<string, string>,
+  tr: turkish as Record<string, string>,
+  ja: japanese as Record<string, string>,
 };
 export function translate(text: string, language: Language): string {
   if (language === "nl" || !text.trim()) return text;

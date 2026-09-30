@@ -11,7 +11,8 @@ const OUDE_OPSLAG = "sn-antwoord-aanvragen-v1";
 const OUDE_STANDAARD = "Hoi! Bedankt voor je aanvraag bij SocialNow. Ik heb je bericht ontvangen en bekijk wat ik voor je kan doen. Ik stuur je snel de volgende stap. Heb je nog een website of een voorbeeld dat je mooi vindt? Stuur de link gerust door. Groet, Marinus";
 const OS_LIVE_LINK = "https://app.socialnow.nl/login/";
 
-const STANDAARD: Record<Soort, Record<Language, string>> = {
+// Interne pagina voor Marinus: antwoorden blijven in deze vier talen, ook nu de site er twaalf heeft.
+const STANDAARD: Record<Soort, Partial<Record<Language, string>>> = {
   website: {
     nl: "Hoi! Bedankt voor je websiteaanvraag. Ik heb je gegevens en antwoorden ontvangen. Heb je nog extra foto's, je logo of ander beeldmateriaal dat we mogen gebruiken? Stuur het hier gerust door. Ik bekijk alles en laat je weten wat de volgende stap is. Groet, Marinus",
     en: "Hi! Thanks for your website request. I've received your details and answers. Do you have any extra photos, your logo or other images we could use? Feel free to send them here. I'll review everything and let you know the next step. Best, Marinus",
