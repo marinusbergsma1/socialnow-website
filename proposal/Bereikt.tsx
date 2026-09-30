@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowUpRight, Check } from "lucide-react";
-import { Bento, Tegel, useInBeeld } from "./Bento";
+import { Bento, BentoFilm, Tegel, useInBeeld } from "./Bento";
 import { OdooLogo } from "./Verhaal";
 import { GRATIS_OS_URL } from "./os-entry";
 import { TextLink } from "./ui";
@@ -204,7 +204,10 @@ export default function Bereikt() {
         <p className="sn-tegel-tekst">Lighthouse op desktop, mediaan van drie metingen op 28 september 2026.</p>
       </Tegel>
       <Tegel kop="VASTIQ" breed={6} soort="foto" className="h-bereikt-vastiq">
-        <img src="/images/cases/vastiq-hero.webp" alt="VASTIQ, dataplatform voor vastgoed" loading="lazy" />
+        {/* 30 september 2026 (Marinus): "bij VASTIQ wil ik graag de animatievideo zien", de headerfilm van vastiq.ai opnieuw
+            gemaakt: begin- en eindbeeld met GPT Image 2.5, beweging met Cinema Studio Video 3.0 (Higgsfield). Bron en beelden in
+            01-KLANTEN/vastiq/04_CONTENT/VIDEO/vastiq-zoom-v2*. */}
+        <BentoFilm src="/video/vastiq/vastiq-zoom-v2.mp4" poster="/video/vastiq/vastiq-zoom-v2.jpg" label="VASTIQ: van de wolken boven Amsterdam naar één grachtenpand met zijn waarde" geluid={false} />
         <span className="h-foto-onderschrift">
           <b>Platform en merk uit één hand.</b>
           <span>Samen met Komen Consultancy gebouwd.</span>
