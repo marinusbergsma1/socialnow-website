@@ -43,6 +43,7 @@ const eisen = [
     return Boolean(img) && new RegExp(`<link rel="preload" href="${img}" as="image"[^>]*fetchpriority="high">`).test(kop(nl));
   })()],
   ["achtergrond van de hero (Largest Contentful Paint) wordt vooraf geladen", /<link rel="preload" href="\/beeldmerk-2026\.webp" as="image"[^>]*fetchpriority="high">/.test(kop(nl))],
+  ["op brede schermen wordt de poster van de film in de hero vooraf geladen", /<link rel="preload" href="[^"]+poster[^"]*" as="image" media="\(min-width: \d+px\)" fetchpriority="high">/.test(kop(nl))],
   ["de browser hydrateert de voorgerenderde HTML", index.includes("hydrateRoot(") && index.includes("dataset.prerender")],
 ];
 let fout = 0;
