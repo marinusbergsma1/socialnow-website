@@ -1,0 +1,76 @@
+/* Vraag het Milo (30 september 2026). Het vragenblok als gesprek, in de taal van de site: zwart, dunne randen, groen voor
+   wat klopt, bewegingen die vertellen wat er gebeurt. Geen ligaturen. */
+.sn-site .h-mv { display: flex; flex-direction: column; gap: 14px; min-width: 0; height: 100%; font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0; }
+.sn-site .h-mv-kop { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 14px; }
+.sn-site .h-mv-avatar { position: relative; display: grid; place-items: center; width: 52px; height: 52px; flex: none; border-radius: 50%; background: #0b0f12; border: 2px solid #25d36699; box-shadow: 0 0 0 4px #25d36614; }
+.sn-site .h-mv-avatar img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+.sn-site .h-mv-naam { display: grid; gap: 2px; }
+.sn-site .h-mv-naam b { color: #fff; font-size: 18px; }
+.sn-site .h-mv-online { display: inline-flex; align-items: center; gap: 6px; color: #9fdcb6; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.sn-site .h-mv-online i { width: 8px; height: 8px; border-radius: 50%; background: #25d366; box-shadow: 0 0 0 0 #25d36699; animation: h-mv-puls 2.2s ease-out infinite; }
+@keyframes h-mv-puls { 0% { box-shadow: 0 0 0 0 #25d36680; } 70% { box-shadow: 0 0 0 8px #25d36600; } 100% { box-shadow: 0 0 0 0 #25d36600; } }
+.sn-site .h-mv-vertrouwen { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 0 auto; padding: 0; list-style: none; }
+.sn-site .h-mv-vertrouwen li { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border: 1px solid #ffffff1f; border-radius: 999px; color: #c9d6cf; font-size: 12px; font-weight: 700; background: #ffffff05; }
+.sn-site .h-mv-vertrouwen li svg { color: #25d366; }
+.sn-site .h-mv-vertrouwen li::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 35%, #ffffff1a 50%, transparent 65%) no-repeat; background-size: 250% 100%; background-position: 150% 0; animation: h-mv-glans 6s ease-in-out infinite; }
+.sn-site .h-mv-vertrouwen li:nth-child(2)::after { animation-delay: .4s; }
+.sn-site .h-mv-vertrouwen li:nth-child(3)::after { animation-delay: .8s; }
+@keyframes h-mv-glans { 0%, 60% { background-position: 150% 0; } 100% { background-position: -50% 0; } }
+
+.sn-site .h-mv-lijst { display: flex; flex-direction: column; gap: 10px; min-height: 180px; max-height: 360px; overflow-y: auto; padding: 16px; border: 1px solid #ffffff14; border-radius: 20px; background: radial-gradient(120% 90% at 0% 0%, #25d3660d, transparent 60%), #070a09; scrollbar-width: thin; scrollbar-color: #2a3036 transparent; }
+.sn-site .h-mv-bericht { max-width: 86%; animation: h-mv-in .38s cubic-bezier(.16, 1, .3, 1) both; }
+.sn-site .h-mv-bericht p { margin: 0; padding: 12px 15px; border-radius: 18px; font-size: 15px; line-height: 1.5; white-space: pre-line; }
+.sn-site .h-mv-bericht.is-milo { align-self: flex-start; }
+.sn-site .h-mv-bericht.is-milo p { color: #e7eeea; background: #111816; border: 1px solid #ffffff14; border-top-left-radius: 6px; }
+.sn-site .h-mv-bericht.is-bezoeker { align-self: flex-end; }
+.sn-site .h-mv-bericht.is-bezoeker p { color: #fff; background: #1a8f45; border-top-right-radius: 6px; }
+@keyframes h-mv-in { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+.sn-site .h-mv-cursor { display: inline-block; width: 7px; height: 1em; margin-left: 2px; vertical-align: -2px; border-radius: 2px; background: #25d366; animation: h-mv-knipper .9s steps(2) infinite; }
+@keyframes h-mv-knipper { 50% { opacity: 0; } }
+.sn-site .h-mv-onder { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin: 7px 0 0 4px; animation: h-mv-in .3s ease both; }
+.sn-site .h-mv-bron { display: inline-flex; align-items: center; gap: 5px; color: #9fdcb6; font-size: 12px; font-weight: 700; }
+.sn-site .h-mv-onder a { color: #c9d6cf; font-size: 12px; font-weight: 700; text-decoration: underline; text-decoration-color: #25d36680; text-underline-offset: 3px; }
+.sn-site .h-mv-onder a:hover { color: #fff; }
+
+/* Wat er gebeurt terwijl Milo nadenkt: stappen die een voor een afgevinkt worden. */
+.sn-site .h-mv-denkt { padding: 12px 15px; border-radius: 18px; border-top-left-radius: 6px; background: #111816; border: 1px solid #ffffff14; }
+.sn-site .h-mv-stappen { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.sn-site .h-mv-stappen li { display: flex; align-items: center; gap: 9px; color: #6f7c76; font-size: 13px; font-weight: 600; transition: color .3s ease; }
+.sn-site .h-mv-stappen li.is-bezig { color: #e7eeea; }
+.sn-site .h-mv-stappen li.is-klaar { color: #9fdcb6; }
+.sn-site .h-mv-stip { display: grid; place-items: center; width: 18px; height: 18px; flex: none; border-radius: 50%; border: 1.5px solid #ffffff2e; color: #04130a; transition: background .3s ease, border-color .3s ease, transform .3s cubic-bezier(.34, 1.56, .64, 1); }
+.sn-site .h-mv-stappen li.is-bezig .h-mv-stip { border-color: #25d366; border-top-color: transparent; animation: h-mv-draai .8s linear infinite; }
+.sn-site .h-mv-stappen li.is-klaar .h-mv-stip { background: #25d366; border-color: #25d366; transform: scale(1.08); }
+@keyframes h-mv-draai { to { transform: rotate(360deg); } }
+
+.sn-site .h-mv-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.sn-site .h-mv-chips button { padding: 9px 14px; border: 1px solid #ffffff24; border-radius: 999px; background: #ffffff05; color: #dfe7e3; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: border-color .2s ease, background .2s ease, color .2s ease, transform .2s ease; }
+.sn-site .h-mv-chips button:hover:not(:disabled) { border-color: #25d366; background: #25d36614; color: #fff; transform: translateY(-1px); }
+.sn-site .h-mv-chips button:disabled { opacity: .45; cursor: default; }
+.sn-site .h-mv-chips button:focus-visible { outline: 2px solid #25d366; outline-offset: 2px; }
+
+.sn-site .h-mv-invoer { display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 18px; border: 1.5px solid #ffffff24; border-radius: 999px; background: #070a09; transition: border-color .2s ease, box-shadow .2s ease; }
+.sn-site .h-mv-invoer:focus-within { border-color: #25d366; box-shadow: 0 0 0 4px #25d3661f; }
+.sn-site .h-mv-invoer input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; color: #fff; font: inherit; font-size: 15px; }
+.sn-site .h-mv-invoer input::placeholder { color: #7d8a84; }
+.sn-site .h-mv-invoer button { display: grid; place-items: center; width: 42px; height: 42px; flex: none; border: 0; border-radius: 50%; background: #1a8f45; color: #fff; cursor: pointer; transition: background .2s ease, transform .2s ease; }
+.sn-site .h-mv-invoer button:hover:not(:disabled) { background: #1ba452; transform: translateY(-1px); }
+.sn-site .h-mv-invoer button:disabled { background: #1f2a24; color: #6f7c76; cursor: default; }
+.sn-site .h-mv-voet { margin: -4px 0 0 4px; color: #7d8a84; font-size: 12px; }
+
+/* Liever een mens: Steef als persoon, met foto, in de groene tegel ernaast. */
+.sn-site .h-mv-steef { position: relative; margin: 0 0 6px; aspect-ratio: 4 / 3; border-radius: 18px; overflow: hidden; border: 1.5px solid #25d36666; background: #0b0f12; }
+.sn-site .h-mv-steef img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }
+.sn-site .h-mv-steef figcaption { position: absolute; left: 0; right: 0; bottom: 0; display: grid; gap: 2px; padding: 34px 14px 12px; background: linear-gradient(transparent, #000000d9); color: #fff; }
+.sn-site .h-mv-steef figcaption b { font-size: 17px; }
+.sn-site .h-mv-steef figcaption span { color: #d8e2dc; font-size: 13px; }
+
+@media (max-width: 640px) {
+  .sn-site .h-mv-vertrouwen { margin-left: 0; }
+  .sn-site .h-mv-lijst { max-height: 320px; padding: 12px; }
+  .sn-site .h-mv-bericht { max-width: 92%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sn-site .h-mv-online i, .sn-site .h-mv-vertrouwen li::after, .sn-site .h-mv-bericht, .sn-site .h-mv-onder, .sn-site .h-mv-cursor, .sn-site .h-mv-stappen li.is-bezig .h-mv-stip { animation: none; }
+}
+.sn-site .h-mv-chips button.is-meer { border-style: dashed; color: #9fdcb6; }

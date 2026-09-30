@@ -382,10 +382,12 @@ const MILO_API = "https://milo-chat.socialnow-marinus.workers.dev";
 const WHATSAPP = whatsappLink();
 const MAIL = mailLink();
 
-type Bericht = {
+export type Bericht = {
   van: "milo" | "bezoeker";
   tekst: string;
   links?: { label: string; href: string }[];
+  // Waar het antwoord vandaan kwam: het model dat de Worker noemt, of de eigen vragenlijst.
+  bron?: string;
 };
 
 // Antwoord uit de eigen vragenlijst. Dit is het vangnet: werkt de Worker niet,
@@ -408,6 +410,37 @@ function uitVragenlijst(vraag: string, t: (tekst: string) => string): Bericht | 
   }
   if (!beste) return null;
   return { van: "milo", tekst: t(beste.answer), links: [{ label: t(heeftWhatsApp ? "App Steef" : "Mail Steef"), href: WHATSAPP }] };
+}
+
+// 30 september 2026: de vraag aan Milo als losse functie, zodat de zwevende chat en het vragenblok op de homepage
+// (MiloVragen) precies hetzelfde antwoorden. Eerst de Worker; werkt die niet, dan de eigen vragenlijst, dan het team.
+export async function vraagMilo(heen: Bericht[], language: string, t: (tekst: string) => string): Promise<Bericht> {
+  const team = { label: t(heeftWhatsApp ? "App Steef" : "Mail Steef"), href: WHATSAPP };
+  try {
+    const stop = new AbortController();
+    const klok = setTimeout(() => stop.abort(), 20000);
+    const res = await fetch(MILO_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        language,
+        messages: heen.map((b) => ({ role: b.van === "bezoeker" ? "user" : "milo", text: b.tekst })),
+      }),
+      signal: stop.signal,
+    });
+    clearTimeout(klok);
+    const data = await res.json().catch(() => null);
+    if (res.ok && data?.text) return { van: "milo", tekst: String(data.text), links: [team], bron: data.model ? String(data.model) : undefined };
+  } catch {
+    // val netjes terug op de eigen vragenlijst
+  }
+  const uitLijst = uitVragenlijst(heen[heen.length - 1]?.tekst || "", t);
+  if (uitLijst) return { ...uitLijst, bron: "vragenlijst" };
+  return {
+    van: "milo",
+    tekst: t("Daar heb ik nog geen antwoord op. Stel je vraag aan ons team."),
+    links: [team, { label: CONTACT_MAIL, href: MAIL }],
+  };
 }
 
 export function MiloGuide() {
@@ -446,40 +479,7 @@ export function MiloGuide() {
       setBerichten(heen);
       setVraag("");
       setDenkt(true);
-      let antwoord: Bericht | null = null;
-      try {
-        const stop = new AbortController();
-        const klok = setTimeout(() => stop.abort(), 15000);
-        const res = await fetch(MILO_API, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            language,
-            messages: heen.map((b) => ({ role: b.van === "bezoeker" ? "user" : "milo", text: b.tekst })),
-          }),
-          signal: stop.signal,
-        });
-        clearTimeout(klok);
-        const data = await res.json().catch(() => null);
-        if (res.ok && data?.text) {
-          antwoord = {
-            van: "milo",
-            tekst: String(data.text),
-            links: [{ label: t(heeftWhatsApp ? "App Steef" : "Mail Steef"), href: WHATSAPP }],
-          };
-        }
-      } catch {
-        antwoord = null; // val netjes terug op de eigen vragenlijst
-      }
-      const definitief: Bericht = antwoord ||
-        uitVragenlijst(q, t) || {
-          van: "milo",
-          tekst: t("Daar heb ik nog geen antwoord op. Stel je vraag aan ons team."),
-          links: [
-            { label: t(heeftWhatsApp ? "App Steef" : "Mail Steef"), href: WHATSAPP },
-            { label: CONTACT_MAIL, href: MAIL },
-          ],
-        };
+      const definitief = await vraagMilo(heen, language, t);
       setDenkt(false);
       setBerichten([...heen, definitief]);
     },

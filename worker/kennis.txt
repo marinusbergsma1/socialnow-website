@@ -1,0 +1,76 @@
+# SocialNow
+
+> SocialNow OS is de AI-gestuurde persoonlijke werkplek, met échte professionals en menselijk contact. SocialNow is een AI-native creative agency uit Amsterdam dat website, CRM, content en advertenties samenbrengt in één overzichtelijke AI-chat, bovenop Odoo. Bedrijven starten gratis met het OS, een complete demowebsite en een basic rebranding, en zien het systeem werken vóór ze iets betalen.
+
+## Wat SocialNow doet
+
+- **Website die verkoopt**: razendsnelle website met ingebouwde AI-chat die bezoekers overtuigt, vragen beantwoordt en afspraken inplant, dag en nacht.
+- **Content automation**: het AI-systeem leest dagelijks je advertentieresultaten, analyseert wat werkt en plant elke maand automatisch geoptimaliseerde content in.
+- **CRM & opvolging**: elke lead wordt automatisch opgevolgd, niets valt tussen wal en schip.
+- **Advertentie-optimalisatie**: ads worden gestuurd op data en continu bijgestuurd.
+- Alles onder één dak, één partij — geen losse freelancers of dure bureaus.
+
+## Aanbod en prijzen
+
+- **Gratis OS**: altijd gratis te gebruiken, met een gratis demowebsite en basic rebranding.
+- **OS op maat**: je eigen OS op je eigen Odoo, vanaf €10.000, prijs op aanvraag.
+- **Maandpakketten** (minimaal 3 maanden): Content €4.000, Content + Meta €5.000, Meta + Google €5.500, Compleet €6.000 per maand. Elk pakket inclusief custom OS, complete rebranding, website en een persoonlijke call waarin we het systeem uitleggen.
+- Heb je al een website? Dan volgt een gratis demo-upgrade van je bestaande site.
+
+## Resultaten
+
+- VDZ-Brigade: van nul naar veertien afspraken per week binnen 1 maand.
+- 500+ projecten opgeleverd, gemiddelde beoordeling 4.9/5.
+- Actief sinds 2021, gevestigd in Amsterdam (NL).
+
+## Belangrijkste pagina's
+
+- [Home](https://socialnow.nl/): van nul naar een draaiend bedrijf in één uur, met het gratis OS.
+- [Diensten](https://socialnow.nl/diensten): website, CRM, content en ads in detail.
+- [Prijzen](https://socialnow.nl/prijzen): pakketten en tarieven.
+- [Privacy](https://socialnow.nl/privacy): privacybeleid.
+
+## Contact
+
+- Website: https://socialnow.nl
+- Locatie: Amsterdam, Nederland
+- Plan een persoonlijk gesprek via https://socialnow.nl/contact.
+
+## Veelgestelde vragen
+
+V: Waar begin ik?
+A: Log in op je gratis OS en kies: een nieuw bedrijf beginnen of je bestaande bedrijf koppelen. Wil je het helemaal rond je bedrijf, dan richten we je OS samen op maat in.
+
+V: Kan mijn eigen AI bij jullie data of code?
+A: Nee. Je eigen AI-assistent koppel je met een eigen sleutel die alleen voor jouw werkruimte geldt en die je altijd kunt intrekken. Je AI kan vragen stellen en voorstellen maken, maar ziet nooit onze code of de gegevens van anderen. Niets verandert zonder jouw akkoord in het OS.
+
+V: Wat kost de boekhouding?
+A: Odoo biedt één app gratis aan, zoals Facturatie. Die koppel je aan je OS. Wil je meer Odoo-apps, dan betaal je die rechtstreeks aan Odoo.
+
+V: Wat is een Custom OS?
+A: Een bedrijfsomgeving die we inrichten rond de manier waarop jij en je team werken. Je eerste ervaring is het vertrekpunt. Samen bepalen we welke processen, koppelingen en onderdelen je bedrijf nodig heeft.
+
+V: Wat kan ik nu zelf proberen?
+A: Claim je OS en doorloop Bedrijf, Odoo en Meta. Met geschikte accounts en toegangsrechten kun je gegevens uit je eigen Odoo en Meta verbinden. Welke informatie je ziet, hangt af van je koppelingen. De testomgeving is in ontwikkeling.
+
+V: Welke onderdelen brengt het OS samen?
+A: Het OS brengt je website, CRM, content en advertenties samen. We spreken samen af welke functies voor jouw bedrijf beschikbaar zijn en welke persoonlijke inrichting vragen.
+
+V: Worden mijn advertenties automatisch beheerd?
+A: Dit is geen standaardfunctie van de testomgeving. De Meta-koppeling geeft inzicht in je gegevens. Publiceren, budgetten wijzigen en campagnes beheren vragen een aparte, geteste inrichting.
+
+V: Kan ik ook alleen een website of campagne laten maken?
+A: Ja. Je kunt bij ons terecht voor websites, development, branding, content, SEO en advertenties. Een Custom OS is een mogelijkheid; we kijken eerst naar wat je bedrijf nodig heeft.
+
+V: Wat kost een persoonlijk ingericht OS?
+A: Dat hangt af van de processen, koppelingen en begeleiding. Na een kennismaking krijg je een voorstel met de afgesproken scope en kosten. Inrichting, koppelingen en eventuele doorlopende begeleiding worden afzonderlijk omschreven in je voorstel.
+
+V: Moet ik het OS installeren?
+A: Je kunt het OS in je browser gebruiken. Bij Installeer OS staat korte uitleg voor je apparaat. De mogelijkheid om het als app toe te voegen hangt af van je browser en versie.
+
+## Team, partners en verhaal
+- Oprichter en CEO: Marinus Bergsma. Begon als grafisch vormgever (2019), werkte voor onder meer AZ en Supperclub, richtte SocialNow op in november 2021.
+- Met Steef Komen (partner, finance, data en Odoo) zette Marinus VASTIQ op, een waarderingsplatform voor vastgoed. Vanuit VASTIQ ontstond SocialNow OS.
+- Attesso (Sid van Kalken) is de betaalpartner: SocialNow en Attesso bouwen dit samen en geven samen live demo's, lezingen en workshops.
+- SocialNow OS draait op Odoo; Salesforce is de volgende stap.
+- Contact: steef@socialnow.nl of een gesprek plannen via https://socialnow.nl/contact. Een gratis live demo boek je met Marinus en Sid.

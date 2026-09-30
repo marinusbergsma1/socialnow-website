@@ -1,3 +1,4 @@
+import MiloVragen from "./MiloVragen";
 import React, { useState } from "react";
 import "./hero-c.css";
 import { Link, useParams, useSearchParams } from "react-router-dom";
@@ -390,10 +391,16 @@ export function Home() {
       </Bento>
       <TrustStories />
       <Bento id="vragen" label="Goed om te weten" titel={<>Eerst helderheid.<br /><span>Dan aan de slag.</span></>}>
-        <Tegel kop="Veelgestelde vragen" breed={8} className="h-faq-tegel">
-          <Questions />
+        {/* 30 september 2026 (Marinus): "Ik vind dit niet passen in de stijl", "desnoods dat het een AI-chat is". Het vragenblok
+            is een gesprek met Milo (MiloVragen); ernaast Steef als mens voor wie liever mailt of appt. */}
+        <Tegel kop="Vraag het Milo" breed={8} className="h-faq-tegel h-mv-tegel">
+          <MiloVragen />
         </Tegel>
-        <Tegel kop="Nog een vraag?" breed={4} soort="groen" className="h-faq-contact">
+        <Tegel kop="Liever een mens?" breed={4} soort="groen" className="h-faq-contact">
+          <figure className="h-mv-steef">
+            <img src="/images/Steef-Komen.webp" alt="Steef Komen" width="480" height="360" loading="lazy" decoding="async" />
+            <figcaption><b>Steef Komen</b><span>Partner, SocialNow</span></figcaption>
+          </figure>
           <p className="sn-tegel-titel">Stuur ons gewoon een bericht.</p>
           <p className="sn-tegel-tekst">Je krijgt antwoord van een mens uit ons team.</p>
           <div className="sn-tegel-onder">
