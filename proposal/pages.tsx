@@ -294,7 +294,6 @@ export function Home() {
             <p className="h-sr"><span className="d">Proven, branded,</span> <b>fully automated!</b></p>
             <p className="h-sr"><span className="d">Everyone can automate a business.</span> <b className="g">NO ONE CAN AUTOMATE PEOPLE WHO CARE</b><b>.</b></p>
             <p className="h-sr"><span className="d">Software is a tool.</span> <b>We are SocialNow!</b></p>
-            <p className="h-sr"><span className="d">Join our team at:</span> <Link to="/vacatures"><b className="g">Jobs at SocialNow.nl</b></Link></p>
           </div>
           </div>
           <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid}>

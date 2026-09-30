@@ -20,9 +20,9 @@ export default function TeamTrust() {
 // 30 september 2026 (Marinus): "Daarnaast nog een keer het team met Let's make a difference together and join SocialNow!"
 // Rechts naast het statement, onder Trusted by: het hele team groter, met de uitnodiging en een link naar de vacatures.
 export function TeamJoin() {
-  // 30 september 2026 (Marinus): midden in de ruimte, iets minder dik, kleine glans en groen van links naar rechts. De raket
-  // krijgt vuur en gaat bij hover een stukje omhoog; bij een klik schiet hij verder omhoog en daarna ga je naar de vacatures.
-  // Zonder hover komt hij terug.
+  // 30 september 2026 (Marinus): midden in de ruimte, iets minder dik, wit met alleen bij hover een lichte witte glow van
+  // links naar rechts. De raket gaat bij hover een klein stukje recht omhoog, zonder vuur; bij een klik schiet hij verder
+  // omhoog en daarna ga je naar de vacatures. Zonder hover komt hij terug.
   const navigate = useNavigate();
   const [lancering, setLancering] = React.useState(false);
   const klik = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -41,7 +41,7 @@ export function TeamJoin() {
     </span>
     <span className="h-team-join-zin">
       <span className="h-team-join-tekst">Let&rsquo;s make a difference together and join SocialNow!</span>
-      <span className="h-raket" aria-hidden="true"><span className="h-raket-vuur" />🚀</span>
+      <span className="h-raket" aria-hidden="true">🚀</span>
     </span>
   </Link>;
 }
