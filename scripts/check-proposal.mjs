@@ -5,6 +5,14 @@ import React from "react";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 
+// 30 september 2026 (Marinus): uitgezet. Deze controle faalt sinds 2c08bf2 (10 september) op de
+// eerste assert en crasht daarna bij het renderen van de hele site in Node (window bestaat niet in
+// LogoIntro.tsx); ongeveer twintig asserts gaan over inhoud die er niet meer is. Exit 2 in plaats van
+// 0 of 1, zodat niemand een uitkomst als groen of als echte sitefout leest. Gerichte proeven staan
+// per herstelling in scripts/proef-*.mjs. Weer aanzetten betekent herschrijven, niet deze regels weghalen.
+console.error("check-proposal.mjs staat uit sinds 30 september 2026: verouderd sinds 2c08bf2, geen uitkomst. Zie de uitleg bovenin dit bestand.");
+process.exit(2);
+
 const server = await createServer({
   configFile: false,
   resolve: { alias: { "@socialnow/i18n": `${process.cwd()}/proposal/i18n` } },
