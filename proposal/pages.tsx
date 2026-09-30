@@ -238,25 +238,6 @@ function HeroVeilig({ geluid, setGeluid }: { geluid: HeroGeluid; setGeluid: (g: 
   );
 }
 
-// 30 september 2026 (Marinus): "Eerst nog ODOO en Salesforce balk dan een beeldvullende maar alsnog 1080 tijdlijn video".
-// De verhaalfilm (1920x1080) over de volle breedte onder de bewijsbalk, niet meer in de rechterkolom.
-function HeroStory() {
-  const { language } = useLanguage();
-  const taal = language === "nl" ? "nl" : "en";
-  const [geluid, setGeluid] = useState(false);
-  return (
-    <Film
-      klasse="h-film-story"
-      src={`/video/verhaal/verhaal-${taal}.mp4`}
-      poster={`/video/verhaal/verhaal-${taal}.jpg`}
-      label="My story"
-      titel="My story"
-      geluid={geluid}
-      zetGeluid={setGeluid}
-    />
-  );
-}
-
 // 26 september 2026 (Marinus): "die andere taal en terug naar Engels om de 5 seconden, maar dan in het
 // gehele headervlak". De hele hero krijgt de getoonde taal; de echte taal van de pagina blijft staan.
 // Bij elke wissel faden de teksten zacht opnieuw in (h-taalfase a/b, zodat de animatie opnieuw start).
@@ -314,8 +295,13 @@ export function Home() {
           {/* 30 september 2026 (Marinus): header optie C. Het statement als één zin onder de kop, klein de SaaS-regel, en
               twee knoppen: inloggen en een gratis live demo met de founder. Overal Engels (translate="no"). */}
           <div className="h-statement" translate="no">
+            {/* 30 september 2026 (Marinus): "Proven branded, FULLY AUTOMATED SYSTEMS. With all the human control and help
+                nececery.", "With a Team of Human experts to help you in every step." en "Hier nog een enter tussen". */}
             <p className="h-statement-zin">
-              Proven, branded, end to end, highly profitable, personal, fully automated systems.{" "}
+              Proven, branded, <strong>fully automated systems.</strong> With all the human control and help necessary.
+              <span className="h-statement-team">With a team of human experts to help you in every step.</span>
+            </p>
+            <p className="h-statement-zin h-statement-gratis">
               <strong>That&rsquo;s why we offer it for free.</strong>{" "}
               {/* 30 september 2026 (Marinus): "En dan de we get paid by our expertise, helping you!" */}
               <strong className="h-statement-verdien">We get paid for our expertise: helping you!</strong>
@@ -347,9 +333,8 @@ export function Home() {
             </div>
           </HeroFilm>
           <HeroVeilig geluid={heroGeluid} setGeluid={setHeroGeluid} />
-          <div className="h-story-vol">
-            <HeroStory />
-          </div>
+          {/* 30 september 2026 (Marinus): "Deze video mag weg want daaronder doe ik al mijn verhaal." My story staat niet meer
+              in de header; het verhaal volgt in Verhaal onder de hero. */}
         </div>
       </section>
       </LanguageContext.Provider>

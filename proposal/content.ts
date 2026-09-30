@@ -301,7 +301,9 @@ export const logos: [string, string, number?][] = [
   // 30 september 2026 (Marinus): "gewoon hun kleur maar in ieder geval logo groter". De vierkante bestanden hadden tot 79%
   // lege rand (MOJO vulde 21% van de hoogte); images/merken/ bevat dezelfde logo's bijgesneden tot op 2% rand. De maat is
   // optisch: brede woordmerken lager, vierkante merken vol.
-  ["AZ-LOGO-FLYER.webp", "AZ", 0.62],
+  // 30 september 2026 (Marinus): "VERKEERDE AZ LOGO OOK MAG GEWOON DIE IN KLEUR ZIJN". Het officiële AZ-logo (rood, wit,
+  // zwart) als vector uit 90-ARCHIEF/uitzoeken-2026/Downloads/AZ_Alkmaar_FC-brandlogos.net.
+  ["merken/AZ-LOGO-KLEUR.svg", "AZ", 0.62],
   ["merken/AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp", "Amsterdam Light Festival", 0.95],
   // 30 september 2026 (Marinus): "Vol wit wil ik graag. Maar Light Art Collection erbij. DIVINE erbij kWh Garant erbij,
   // Primefone een goeie erbij." Bronnen: LAC LOGO WIT.eps (Illustrator, juli 2025), kwh-logo-wit.svg uit de OS-films,

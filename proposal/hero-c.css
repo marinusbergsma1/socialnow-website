@@ -121,3 +121,6 @@
    al halverwege de lus zodat hij loopt alsof hij er al was. */
 .sn-site .h-hero .h-hero-merken .h-clients-lus { animation-delay: -23s; }
 .sn-site .h-hero .h-hero-merken .h-clients-strook:hover .h-clients-lus { animation-play-state: running; }
+/* 30 september 2026 (Marinus): statement in drie delen, met een witregel voor "That's why we offer it for free." */
+.sn-site .h-statement-team { display: block; margin-top: 6px; }
+.sn-site .h-statement-gratis { margin-top: clamp(10px, 1.2vw, 16px); }

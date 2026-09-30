@@ -11,7 +11,8 @@ const eisen = [
   ["Milo-pillen met naam", pages.includes("h-milo-pil")],
   ["statement en demoknop blijven", pages.includes("That&rsquo;s why we offer it for free.") && pages.includes("Book a free live demo")],
   ["Trusted by boven de logobalk, alleen merken", pages.includes(">Trusted by<") && !content.includes('"partners/odoo.svg"')],
-  ["volgorde: films, Trusted by, My story", /<HeroFilm\b[\s\S]*Trusted by[\s\S]*<HeroStory \/>/.test(pages)],
+  // 30 september 2026 (Marinus): "Deze video mag weg", My story staat niet meer in de header.
+  ["volgorde: OS-film, dan Trusted by", /<HeroFilm\b[\s\S]*Trusted by/.test(pages)],
   ["software in plaats van SaaS", pages.includes("If software can&rsquo;t be free") && !pages.includes("If SaaS can")],
   ["expertise-regel", pages.includes("We get paid for our expertise: helping you!")],
   ["demobanner met Sid van Attesso", pages.includes("h-demo-knop is-groot") && pages.includes("/images/Sid-van-Kalken.webp") && pages.includes("Sid, Attesso")],

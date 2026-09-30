@@ -207,7 +207,9 @@ export default function Bereikt() {
         {/* 30 september 2026 (Marinus): "bij VASTIQ wil ik graag de animatievideo zien", de headerfilm van vastiq.ai opnieuw
             gemaakt: begin- en eindbeeld met GPT Image 2.5, beweging met Cinema Studio Video 3.0 (Higgsfield). Bron en beelden in
             01-KLANTEN/vastiq/04_CONTENT/VIDEO/vastiq-zoom-v2*. */}
-        <BentoFilm src="/video/vastiq/vastiq-zoom-v2.mp4" poster="/video/vastiq/vastiq-zoom-v2.jpg" label="VASTIQ: van de wolken boven Amsterdam naar één grachtenpand met zijn waarde" geluid={false} />
+        {/* 30 september 2026 (Marinus): "Verkeerde afbeelding", "Ik wilde die uitzoom video". Dezelfde film omgekeerd: van het
+            grachtenpand met zijn waarde naar de wolken boven Amsterdam. 1280 px, 2,0 MB (was 7,5 MB). */}
+        <BentoFilm src="/video/vastiq/vastiq-uitzoom.mp4" poster="/video/vastiq/vastiq-uitzoom.jpg" label="VASTIQ: van één grachtenpand met zijn waarde uitzoomen naar heel Amsterdam" geluid={false} />
         <span className="h-foto-onderschrift">
           <b>Platform en merk uit één hand.</b>
           <span>Samen met Komen Consultancy gebouwd.</span>

@@ -282,7 +282,7 @@ export function ClientLogos({ kort = false }: { kort?: boolean }) {
         // balk begon leeg en logo's verschenen los. In de korte balk laden alle tien bestanden meteen (samen ~70 KB).
         loading={kort ? "eager" : "lazy"}
         decoding="async"
-        className={src.startsWith("AZ-") || src.startsWith("partners/") ? "h-logo-eigen" : undefined}
+        className={src.startsWith("AZ-") || src.includes("AZ-LOGO") || src.startsWith("partners/") ? "h-logo-eigen" : undefined}
         style={maat ? ({ "--logo-maat": String(maat) } as React.CSSProperties) : undefined}
       />
     ));
