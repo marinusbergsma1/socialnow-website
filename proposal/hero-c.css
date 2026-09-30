@@ -91,7 +91,7 @@
 .sn-site .h-hero .h-integratie-sf img { width: 38px; }
 .sn-site .h-hero .h-aftermovie { flex-basis: 100%; padding: 0; border: 0; border-radius: 0; color: #25d366; font-size: 12px; letter-spacing: .12em; }
 .sn-site .h-hero .h-aftermovie:hover { background: none; color: #fff; }
-.sn-site .h-hero .h-hero-veilig { grid-column: 1 / -1; width: 100%; max-width: 1180px; margin: clamp(28px, 3vw, 44px) 0 0; }
+.sn-site .h-hero .h-hero-veilig { grid-column: 1 / -1; width: 100%; max-width: none; margin: clamp(28px, 3vw, 44px) 0 0; }
 @media (min-width: 900px) { .sn-site .h-hero .h-hero-veilig .h-film-veilig { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); column-gap: 24px; } }
 .sn-site .h-hero .h-hero-tekst > .h-team-trust .h-team-portraits { padding-left: 0; }
 /* 30 september 2026 (Marinus): "Deze zin in het roze" (PAYMENT PARTNER blijft roze, zie .h-attesso) en "Hieronder is nu ruimte
@@ -193,10 +193,13 @@
 @keyframes h-glans { 0%, 55% { background-position: 150% 0; } 100% { background-position: -100% 0; } }
 .sn-site .h-hero .h-team-join:hover strong { color: inherit; }
 .sn-site .h-raket { position: relative; display: inline-block; font-size: clamp(22px, 2vw, 30px); transition: transform .45s cubic-bezier(.2,.8,.3,1.2); }
-.sn-site .h-raket-vuur { position: absolute; left: -2px; bottom: -4px; width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle, #fff6c2 0%, #ffb02e 40%, #ff5a1f 70%, transparent 72%); filter: blur(1px); opacity: 0; transform: scale(.4); transition: opacity .25s, transform .25s; }
-.sn-site .h-team-join:hover .h-raket, .sn-site .h-team-join:focus-visible .h-raket { transform: translate(6px, -10px); }
-.sn-site .h-team-join:hover .h-raket-vuur, .sn-site .h-team-join:focus-visible .h-raket-vuur { opacity: 1; transform: scale(1); animation: h-vuur .18s ease-in-out infinite alternate; }
-@keyframes h-vuur { from { transform: scale(.85) translate(0, 0); } to { transform: scale(1.15) translate(-1px, 2px); } }
-.sn-site .h-team-join.is-lancering .h-raket { transform: translate(60px, -120px); opacity: 0; transition: transform .5s cubic-bezier(.5,0,.9,.4), opacity .5s .15s; }
-.sn-site .h-team-join.is-lancering .h-raket-vuur { opacity: 1; transform: scale(1.6); }
+.sn-site .h-team-join:hover .h-raket, .sn-site .h-team-join:focus-visible .h-raket { transform: translateY(-6px); }
+.sn-site .h-team-join.is-lancering .h-raket { transform: translateY(-90px); opacity: 0; transition: transform .5s cubic-bezier(.5,0,.9,.4), opacity .5s .15s; }
 @media (prefers-reduced-motion: reduce) { .sn-site .h-team-join-tekst::after { animation: none; display: none; } .sn-site .h-raket { transition: none; } }
+
+/* 30 september 2026 (Marinus): join-zin wit. "Alleen een lichte witte glow dus niet groen. Die komt alleen van links
+   naar rechts bij hover." Geen groen verloop en geen doorlopende glans meer; de glow schuift één keer over de zin. */
+.sn-site .h-team-join-tekst { background: none; color: #fff; }
+.sn-site .h-team-join-tekst::after { animation: none; opacity: 0; background: linear-gradient(100deg, transparent 38%, rgba(255,255,255,.9) 50%, transparent 62%) 0 0 / 250% 100% no-repeat; background-position: 150% 0; filter: drop-shadow(0 0 6px rgba(255,255,255,.45)); }
+.sn-site .h-team-join:hover .h-team-join-tekst::after, .sn-site .h-team-join:focus-visible .h-team-join-tekst::after { opacity: 1; animation: h-join-glow 1.1s ease-out forwards; }
+@keyframes h-join-glow { from { background-position: 150% 0; } to { background-position: -100% 0; } }

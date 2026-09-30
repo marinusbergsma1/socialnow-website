@@ -19,9 +19,16 @@ const eisen = [
   // 30 september 2026 (Marinus): de demobanner werd een liggend sprekersblok met Marinus en Sid (Attesso).
   ["demo met Marinus en Sid van Attesso", pages.includes('className="h-sprekers"') && pages.includes("Sid van Kalken") && pages.includes("~/attesso")],
   ["zin over human control weg", !pages.includes("</strong> With all the human control")],
-  ["Join our team met link naar vacatures", pages.includes('<span className="d">Join our team at:</span> <Link to="/vacatures">')],
-  ["team met join-uitnodiging rechts", pages.includes("<TeamJoin />") && readFileSync("proposal/TeamTrust.tsx","utf8").includes("Let&rsquo;s make a difference together and join SocialNow!") && readFileSync("proposal/TeamTrust.tsx","utf8").includes("h-raket-vuur")],
+  // 30 september 2026 (Marinus): "Deze weg op de site." De regel Join our team at: Jobs at SocialNow.nl gaat uit het statement.
+  ["regel Join our team weg", !pages.includes("Join our team at:") && !pages.includes("Jobs at SocialNow.nl")],
+  ["team met join-uitnodiging rechts", pages.includes("<TeamJoin />") && readFileSync("proposal/TeamTrust.tsx","utf8").includes("Let&rsquo;s make a difference together and join SocialNow!") && readFileSync("proposal/TeamTrust.tsx","utf8").includes("h-raket")],
   ["meer ruimte in het statement", readFileSync("proposal/hero-c.css","utf8").includes("statement lucht")],
+  // 30 september 2026 (Marinus): "Alleen een lichte witte glow dus niet groen. Die komt alleen van links naar rechts bij hover."
+  ["join-zin wit, glow alleen bij hover", (() => { const c = readFileSync("proposal/hero-c.css","utf8"); const blok = c.slice(c.indexOf("join-zin wit")); return blok.includes("join-zin wit") && !/h-team-join-tekst[^}]*#25d366/.test(blok) && blok.includes(".h-team-join:hover .h-team-join-tekst::after") && /h-team-join-tekst::after\s*\{[^}]*animation:\s*none/.test(blok); })()],
+  // 30 september 2026 (Marinus): "Hier geen vuurtje alleen gewoon omhoog en ietsje minder nog."
+  ["raket zonder vuur, recht en minder omhoog", !readFileSync("proposal/TeamTrust.tsx","utf8").includes("h-raket-vuur") && !readFileSync("proposal/hero-c.css","utf8").includes("h-raket-vuur") && readFileSync("proposal/hero-c.css","utf8").includes(".h-team-join:hover .h-raket, .sn-site .h-team-join:focus-visible .h-raket { transform: translateY(-6px); }")],
+  // 30 september 2026 (Marinus): "Hier is nu rechts iets teveel witruimte." Het veiligheidsblok vult de volle breedte.
+  ["veiligheidsblok zonder rechterwitruimte", !readFileSync("proposal/hero-c.css","utf8").includes(".h-hero-veilig { grid-column: 1 / -1; width: 100%; max-width: 1180px;")],
 ];
 let fout = 0;
 for (const [naam, ok] of eisen) { console.log(`${ok ? "groen" : "ROOD "} ${naam}`); if (!ok) fout++; }
