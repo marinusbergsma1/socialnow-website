@@ -2984,3 +2984,12 @@ html {
   .sn-site .h-veilig-nummers { grid-template-columns: repeat(5, minmax(0, 1fr)); }
   .sn-site .h-veilig-nummers button { flex-direction: column; gap: 4px; padding: 8px 4px; text-align: center; font-size: 10.5px; line-height: 1.2; }
 }
+
+/* 30 september 2026 (Marinus): "Kan het switchen van het ene naar het andere met een smooth animatie gaan?" Eén vlak achter
+   de vier downloadknoppen schuift naar de knop onder de muis of de focus (zie InstallKnop in os-entry.tsx). */
+.sn-site .h-dock-platforms { position: relative; }
+.sn-site .h-dock-platform { position: relative; z-index: 1; }
+.sn-site .h-dock-platform:hover, .sn-site .h-dock-platform[aria-expanded="true"] { background: transparent; }
+.sn-site .h-dock-schuif { position: absolute; top: 0; bottom: 0; left: 0; z-index: 0; width: var(--w, 0); transform: translateX(var(--x, 0)); border-radius: 8px; background: #292f2b; pointer-events: none; transition: transform .42s cubic-bezier(.22, 1, .36, 1), width .42s cubic-bezier(.22, 1, .36, 1), opacity .22s ease; }
+.sn-site .h-dock-schuif.is-direct { transition: opacity .22s ease; }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-dock-schuif { transition: opacity .15s linear; } }

@@ -102,6 +102,31 @@ export function InstallKnop({ dock = false }: { dock?: boolean }) {
     { sleutel: "Download voor Windows", icoon: <WindowsLogo />, hint: HINT_ALGEMEEN },
     { sleutel: "Download voor Android", icoon: <AndroidLogo />, hint: HINT_ALGEMEEN },
   ];
+  // 30 september 2026 (Marinus): "Kan het switchen van het ene naar het andere met een smooth animatie gaan?" Eén vlak
+  // schuift soepel naar de knop onder de muis of de toetsenbordfocus; zonder muis blijft het op het gekozen systeem staan.
+  // Komt het vlak uit het niets, dan verschijnt het ter plekke (is-direct) in plaats van vanaf links in te schuiven.
+  const rijRef = React.useRef<HTMLSpanElement>(null);
+  const [zweef, setZweef] = useState<number | null>(null);
+  const gekozen = systemen.findIndex((p) => p.sleutel === open);
+  const doel = zweef ?? (gekozen >= 0 ? gekozen : null);
+  const [maat, setMaat] = useState({ x: 0, w: 0 });
+  const [direct, setDirect] = useState(true);
+  const vorige = React.useRef<number | null>(null);
+  React.useLayoutEffect(() => {
+    if (!dock) return;
+    const meet = () => {
+      const knop = doel === null ? undefined : (rijRef.current?.children[doel] as HTMLElement | undefined);
+      if (knop) setMaat({ x: knop.offsetLeft, w: knop.offsetWidth });
+    };
+    meet();
+    const uitHetNiets = vorige.current === null;
+    vorige.current = doel;
+    setDirect(uitHetNiets);
+    let frame = 0;
+    if (uitHetNiets && doel !== null) frame = requestAnimationFrame(() => requestAnimationFrame(() => setDirect(false)));
+    window.addEventListener("resize", meet);
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("resize", meet); };
+  }, [doel, dock]);
   return (
     <>
       <span className={dock ? "h-dock-bottom" : "h-download"}>
@@ -111,12 +136,18 @@ export function InstallKnop({ dock = false }: { dock?: boolean }) {
           <Download size={19} aria-hidden="true" className="h-download-icoon" />
           <span>Download</span>
         </button>}
-        <span className={dock ? "h-dock-platforms" : "h-install-andere"}>
-          {systemen.map((p) => (
-            <button key={p.sleutel} type="button" className={dock ? "h-dock-platform" : "h-install-icoon"} onClick={() => kies(p.sleutel, p.hint)} aria-expanded={open === p.sleutel} aria-controls={helpId} aria-label={p.sleutel} title={p.sleutel}>
+        <span
+          ref={rijRef}
+          className={dock ? "h-dock-platforms" : "h-install-andere"}
+          onPointerLeave={dock ? () => setZweef(null) : undefined}
+          onBlur={dock ? (e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setZweef(null); } : undefined}
+        >
+          {systemen.map((p, i) => (
+            <button key={p.sleutel} type="button" className={dock ? "h-dock-platform" : "h-install-icoon"} onClick={() => kies(p.sleutel, p.hint)} onPointerEnter={dock ? () => setZweef(i) : undefined} onFocus={dock ? () => setZweef(i) : undefined} aria-expanded={open === p.sleutel} aria-controls={helpId} aria-label={p.sleutel} title={p.sleutel}>
               {p.icoon}{dock && <span translate="no">{p.sleutel.replace("Download voor ", "").replace(" en iPad", "")}</span>}
             </button>
           ))}
+          {dock && <span className={`h-dock-schuif${direct ? " is-direct" : ""}`} aria-hidden="true" style={{ "--x": `${maat.x}px`, "--w": `${maat.w}px`, opacity: doel === null ? 0 : 1 } as React.CSSProperties} />}
         </span>
       </span>
       <div className="install-help h-install-hulp" id={helpId} hidden={!open}>

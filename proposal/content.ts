@@ -303,9 +303,16 @@ export const logos: [string, string, number?][] = [
   // optisch: brede woordmerken lager, vierkante merken vol.
   ["AZ-LOGO-FLYER.webp", "AZ", 0.62],
   ["merken/AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp", "Amsterdam Light Festival", 0.95],
+  // 30 september 2026 (Marinus): "Vol wit wil ik graag. Maar Light Art Collection erbij. DIVINE erbij kWh Garant erbij,
+  // Primefone een goeie erbij." Bronnen: LAC LOGO WIT.eps (Illustrator, juli 2025), kwh-logo-wit.svg uit de OS-films,
+  // pf-logo-text-white.svg (woordmerk; het beeldmerk werd in vol wit een dicht vlak) uit het PrimeFone-thema en DIVINE logo.svg uit de merkmap; alle vier vol wit gemaakt.
+  ["merken/LIGHT-ART-COLLECTION-LOGO.webp", "Light Art Collection", 0.62],
   ["merken/CHIN-CHIN-CLUB-LOGO.webp", "Chin Chin Club"],
+  ["merken/KWH-GARANT-LOGO.svg", "kWh Garant", 0.5],
   ["merken/MOJO-LOGO.webp", "MOJO", 0.42],
+  ["merken/DIVINE-LOGO.svg", "DIVINE", 0.34],
   ["merken/SUPPERCLUB-LOGO.webp", "Supperclub", 0.95],
+  ["merken/PRIMEFONE-LOGO.svg", "PrimeFone", 0.5],
   // 10 september 2026: het bestand UNDER-ARMOUR-LOGO-1.webp bevat het beeldmerk van Universal,
   // niet van Under Armour. Het werk voor Universal staat in data/projects.ts (banners voor
   // filmreleases van Universal en Sony); daarom hoort hier de naam Universal bij dit beeld.
