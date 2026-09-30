@@ -30,7 +30,6 @@ import GratisWebsite from "./GratisWebsite";
 import GratisOsDemo from "./GratisOsDemo";
 import AntwoordPagina from "./AntwoordPagina";
 import { VeiligheidPagina } from "./Veiligheid";
-import LogoIntro from "./LogoIntro";
 import QrOsWelcome from "./QrOsWelcome";
 import BrandFooter from "./BrandFooter";
 import { MotionProvider } from "./motion";
@@ -87,7 +86,8 @@ function ProposalShell() {
   const {language,t}=useLanguage();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [introDone, setIntroDone] = useState(false);
+  // 30 september 2026 (Marinus): "video aan het begin weglaten", "met os logo animatie gewoon beginnen". Geen introvideo meer.
+  const introDone = true;
   const menuButton = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLElement>(null);
   const mounted = useRef(false);
@@ -163,7 +163,6 @@ function ProposalShell() {
   if (location.pathname.replace(/\/+$/, "") === "/antwoord-aanvragen") return <div className="sn-site" data-style="signature"><main id="inhoud"><AntwoordPagina /></main></div>;
   return (
     <div className="sn-site" data-style="signature">
-      <LogoIntro onComplete={() => setIntroDone(true)} />
       <QrOsWelcome ready={introDone} />
       <a className="h-skip" href="#inhoud">
         Ga naar inhoud
