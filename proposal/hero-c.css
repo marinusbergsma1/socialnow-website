@@ -86,7 +86,7 @@
 .sn-site .h-hero .h-hero-tekst > h1.h-taalwissel .h-kop-groen { text-shadow: 1.5px 0 rgba(255,0,60,.35), -1.5px 0 rgba(0,229,255,.35); }
 .sn-site .h-hero .h-integratie { gap: 14px; padding-top: clamp(16px, 1.6vw, 22px); border-top: 1px solid #ffffff14; }
 .sn-site .h-hero .h-integratie-rij { gap: 8px 14px; color: #c9d2cd; font-size: 12px; letter-spacing: .14em; }
-.sn-site .h-hero .h-integratie-rij > :is(.h-integratie-sf, .h-attesso) { color: #a7b3ad; }
+.sn-site .h-hero .h-integratie-rij > .h-integratie-sf { color: #a7b3ad; }
 .sn-site .h-hero .h-integratie-odoo svg { width: clamp(72px, 6vw, 88px); }
 .sn-site .h-hero .h-integratie-sf img { width: 38px; }
 .sn-site .h-hero .h-aftermovie { flex-basis: 100%; padding: 0; border: 0; border-radius: 0; color: #25d366; font-size: 12px; letter-spacing: .12em; }
@@ -94,3 +94,12 @@
 .sn-site .h-hero .h-hero-veilig { grid-column: 1 / -1; width: 100%; max-width: 1180px; margin: clamp(28px, 3vw, 44px) 0 0; }
 @media (min-width: 900px) { .sn-site .h-hero .h-hero-veilig .h-film-veilig { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); column-gap: 24px; } }
 .sn-site .h-hero .h-hero-tekst > .h-team-trust .h-team-portraits { padding-left: 0; }
+/* 30 september 2026 (Marinus): "Deze zin in het roze" (PAYMENT PARTNER blijft roze, zie .h-attesso) en "Hieronder is nu ruimte
+   voor de grote logobalk": Trusted by met de grote merkenstrook rechts onder de OS-film. */
+.sn-site .h-hero .h-hero-merken { width: 100%; min-width: 0; margin-top: clamp(22px, 2.6vw, 36px); padding-top: clamp(16px, 1.6vw, 22px); border-top: 1px solid #ffffff14; }
+.sn-site .h-hero .h-hero-merken > .h-clients-kort { flex: none; width: 100%; margin: 0; }
+/* 30 september 2026 (Marinus): "gewoon hun kleur maar in ieder geval logo groter". Merken vol wit (hun eigen kleur), zonder de
+   grijsfilter en de 80% dekking, en groter in de balk onder de OS-film. */
+.sn-site .h-clients .h-clients-lus img { filter: none; opacity: 1; }
+.sn-site .h-hero .h-hero-merken .h-clients.h-clients-kort .h-clients-lus { gap: clamp(48px, 4.5vw, 84px); padding-right: clamp(48px, 4.5vw, 84px); }
+.sn-site .h-hero .h-hero-merken .h-clients.h-clients-kort .h-clients-lus img { height: calc(clamp(56px, 5.6vw, 84px) * var(--logo-maat, 1)); max-width: 240px; }

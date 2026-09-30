@@ -204,7 +204,7 @@ function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (
 // 30 september 2026 (Marinus): "wel veel", "iets zakelijker en meer rust". Rechts alleen de OS-film; de
 // veiligheidsfilms staan onder de vouw (HeroVeilig). Home houdt bij welke film geluid heeft, één tegelijk.
 type HeroGeluid = "" | "os" | "veilig";
-function HeroFilm({ geluid, setGeluid }: { geluid: HeroGeluid; setGeluid: (g: HeroGeluid) => void }) {
+function HeroFilm({ geluid, setGeluid, children }: { geluid: HeroGeluid; setGeluid: (g: HeroGeluid) => void; children?: React.ReactNode }) {
   return (
     <div className="h-hero-film h-hero-films is-os-veilig">
       <Film
@@ -225,6 +225,7 @@ function HeroFilm({ geluid, setGeluid }: { geluid: HeroGeluid; setGeluid: (g: He
         geluid={geluid === "os"}
         zetGeluid={(aan) => setGeluid(aan ? "os" : "")}
       />
+      {children}
     </div>
   );
 }
@@ -326,12 +327,14 @@ export function Home() {
             </a>
           </div>
           </div>
-          <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid} />
-          <div className="h-hero-rij">
-            {/* 30 september 2026 (Marinus): "hieronder die trusted by, dan zie je al die bekende logo's". */}
-            <p className="h-trusted" translate="no">Trusted by</p>
-            <ClientLogos kort />
-          </div>
+          <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid}>
+            {/* 30 september 2026 (Marinus): "hieronder die trusted by, dan zie je al die bekende logo's" en daarna
+                "Hieronder is nu ruimte voor de grote logobalk": de merken staan rechts direct onder de OS-film. */}
+            <div className="h-hero-merken">
+              <p className="h-trusted" translate="no">Trusted by</p>
+              <ClientLogos kort />
+            </div>
+          </HeroFilm>
           <HeroVeilig geluid={heroGeluid} setGeluid={setHeroGeluid} />
           <div className="h-story-vol">
             <HeroStory />

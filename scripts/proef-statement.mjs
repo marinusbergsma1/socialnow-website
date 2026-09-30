@@ -11,7 +11,7 @@ const eisen = [
   ["Milo-pillen met naam", pages.includes("h-milo-pil")],
   ["statement en demoknop blijven", pages.includes("That&rsquo;s why we offer it for free.") && pages.includes("Book a free live demo")],
   ["Trusted by boven de logobalk, alleen merken", pages.includes(">Trusted by<") && !content.includes('"partners/odoo.svg"')],
-  ["volgorde: films, Trusted by, My story", /<HeroFilm\b[^>]*\/>[\s\S]*Trusted by[\s\S]*<HeroStory \/>/.test(pages)],
+  ["volgorde: films, Trusted by, My story", /<HeroFilm\b[\s\S]*Trusted by[\s\S]*<HeroStory \/>/.test(pages)],
 ];
 let fout = 0;
 for (const [naam, ok] of eisen) { console.log(`${ok ? "groen" : "ROOD "} ${naam}`); if (!ok) fout++; }

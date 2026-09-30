@@ -102,3 +102,26 @@
 @media (prefers-reduced-motion: reduce) {
   .sn-site .h-koekje, .sn-site .h-koekje.is-weg { animation: none; }
 }
+
+/* 30 september 2026 (Marinus): "laat ook met een mooie outro weggaan automatisch na 5 seconden". Een groene lijn onderaan loopt
+   in 5 s leeg en sluit dan de melding (onAnimationEnd); hij pauzeert bij hover en toetsenbordfocus. Outro: de kaart veert even
+   op en zakt vervaagd weg, Milo hupt omhoog en draait weg. */
+.sn-site .h-koekje-tijd { position: absolute; left: 22px; right: 22px; bottom: 0; height: 2px; border-radius: 2px; background: #25d366; opacity: .85; transform-origin: left center; animation: h-koekje-tijd 5s linear both; pointer-events: none; }
+@keyframes h-koekje-tijd { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+.sn-site .h-koekje:hover .h-koekje-tijd, .sn-site .h-koekje:focus-within .h-koekje-tijd, .sn-site .h-koekje.is-weg .h-koekje-tijd { animation-play-state: paused; }
+.sn-site .h-koekje.is-weg { animation: h-koekje-weg .72s cubic-bezier(.5, 0, .75, 0) both; }
+.sn-site .h-koekje.is-weg .h-koekje-milo { animation: h-koekje-milo-weg .72s cubic-bezier(.3, 0, .6, 1) both; }
+@keyframes h-koekje-weg {
+  0% { opacity: 1; transform: none; filter: none; }
+  28% { opacity: 1; transform: translateY(-6px) scale(1.01); }
+  100% { opacity: 0; transform: translateY(30px) scale(.94); filter: blur(3px); }
+}
+@keyframes h-koekje-milo-weg {
+  0% { transform: none; opacity: 1; }
+  35% { transform: translateY(-16px) rotate(-8deg) scale(1.06); opacity: 1; }
+  100% { transform: translateY(-6px) rotate(12deg) scale(.55); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sn-site .h-koekje.is-weg { animation: h-koekje-uit .2s linear both; }
+  .sn-site .h-koekje.is-weg .h-koekje-milo { animation: none; }
+}

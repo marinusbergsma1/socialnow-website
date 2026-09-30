@@ -298,13 +298,16 @@ export const logos: [string, string, number?][] = [
   // 25 september 2026 (Marinus): "AZ is nog iets te groot en ook verkeerd". Nu het logo van de flyer
   // (schuine witte onderkant) in eigen kleur, zonder de grijsfilter van de balk (h-logo-eigen).
   // 30 september 2026: Odoo en Salesforce staan in de integratieregel onder de kop; deze balk is "Trusted by", alleen merken.
-  ["AZ-LOGO-FLYER.webp", "AZ", 0.46],
-  ["AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp", "Amsterdam Light Festival"],
-  ["CHIN-CHIN-CLUB-LOGO.webp", "Chin Chin Club", 0.9],
-  ["MOJO-LOGO.webp", "MOJO", 0.88],
-  ["SUPPERCLUB-LOGO.webp", "Supperclub", 0.95],
+  // 30 september 2026 (Marinus): "gewoon hun kleur maar in ieder geval logo groter". De vierkante bestanden hadden tot 79%
+  // lege rand (MOJO vulde 21% van de hoogte); images/merken/ bevat dezelfde logo's bijgesneden tot op 2% rand. De maat is
+  // optisch: brede woordmerken lager, vierkante merken vol.
+  ["AZ-LOGO-FLYER.webp", "AZ", 0.62],
+  ["merken/AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp", "Amsterdam Light Festival", 0.95],
+  ["merken/CHIN-CHIN-CLUB-LOGO.webp", "Chin Chin Club"],
+  ["merken/MOJO-LOGO.webp", "MOJO", 0.42],
+  ["merken/SUPPERCLUB-LOGO.webp", "Supperclub", 0.95],
   // 10 september 2026: het bestand UNDER-ARMOUR-LOGO-1.webp bevat het beeldmerk van Universal,
   // niet van Under Armour. Het werk voor Universal staat in data/projects.ts (banners voor
   // filmreleases van Universal en Sony); daarom hoort hier de naam Universal bij dit beeld.
-  ["UNDER-ARMOUR-LOGO-1.webp", "Universal"],
+  ["merken/UNDER-ARMOUR-LOGO-1.webp", "Universal", 0.72],
 ];
