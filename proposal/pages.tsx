@@ -34,6 +34,7 @@ import "./media-bento.css";
 import "./pricing.css";
 import "./site-visie.css";
 const Deuren = later(() => import("./Deuren").then((m) => m.default));
+import VeiligheidMilo from "./VeiligheidMilo";
 import { FILMS as VEILIGHEIDSFILMS, filmPad as veiligheidFilm, filmPosterPad as veiligheidPoster } from "./veiligheid-beloftes";
 const Bereikt = later(() => import("./Bereikt").then((m) => m.default));
 const NulNaarBedrijf = later(() => import("./NulNaarBedrijf").then((m) => m.default));
@@ -159,6 +160,8 @@ function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (
           </li>
         ))}
       </ol>
+      {/* 30 september 2026 (Marinus): "Hier nog een geanimeerde veiligheidsmilo voor maken." Onder de stappen, volgt de film. */}
+      <VeiligheidMilo stap={nummer} />
     </div>
   );
 }
