@@ -4,7 +4,7 @@ const lees = (p) => (existsSync(p) ? readFileSync(p, "utf8") : "");
 const pages = lees("proposal/pages.tsx");
 const st = lees("proposal/Statement.tsx");
 const eisen = [
-  ["Home toont <Statement /> direct na de hero", /<\/LanguageContext\.Provider>\s*<Statement \/>/.test(pages)],
+  ["Home toont <Statement /> bovenaan, vóór de hero", /<Statement \/>\s*<LanguageContext\.Provider value=\{getoond\}>\s*<section className="h-hero"/.test(pages)],
   ["zes woorden van het statement", ["Proven", "Branded", "End to end", "Highly profitable", "Personal", "Fully automated"].every((w) => st.includes(`"${w}"`))],
   ["That's why we offer it for free.", st.includes("That&rsquo;s why we offer it for free.")],
   ["kleine regel over SaaS", st.includes("If SaaS can&rsquo;t be free, it&rsquo;s not good enough!")],

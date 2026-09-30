@@ -17,3 +17,4 @@
 .sn-site .sn-founder-knop { justify-self: start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #189447; color: #fff; font-weight: 700; text-decoration: none; }
 .sn-site .sn-founder-knop:hover { background: #1ba452; color: #fff; }
 @media (max-width: 640px) { .sn-site .sn-founder-rij { align-items: flex-start; } .sn-site .sn-founder-knop { justify-self: stretch; justify-content: center; } }
+.sn-site .sn-statement { padding-top: clamp(32px, 4vw, 56px); }

@@ -174,6 +174,9 @@ export function Home() {
   const taalfase = useTaalfase(getoond);
   return (
     <>
+      {/* 30 september 2026 (Marinus): "HET STAAT NOG STEEDS NIET LIVE" bij de hero; het statement staat daarom bovenaan,
+          het eerste wat je ziet, boven de hero. */}
+      <Statement />
       <LanguageContext.Provider value={getoond}>
       <section className="h-hero" id="home" data-taalfase={taalfase}>
         <div className="h-hero-background">
@@ -221,7 +224,6 @@ export function Home() {
         </div>
       </section>
       </LanguageContext.Provider>
-      <Statement />
       {/* 28 september 2026 (Marinus): "de homepage moet een upgrade gaan krijgen met storytelling". De volgorde vertelt
           het verhaal: wie we zijn, wat je kunt doen, het bewijs, het vertrouwen, en dan pas het product in detail. */}
       {/* 29 september 2026 (Marinus): "zet vooral wat ze hebben bereikt met mooie animaties aanwezig op mijn homepage".
