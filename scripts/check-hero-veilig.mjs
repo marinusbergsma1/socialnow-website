@@ -74,13 +74,14 @@ try {
   // 4. Strook met de Artist Impressions voor Light Art Collection in Mijn waarom.
   const waarom = nl.slice(nl.indexOf('id="verhaal"'));
   eis(waarom.includes("h-lac"), "Light Art Collection-strook staat in het verhaal");
-  eis(["Infinita-Light-Art-Collection", "Butterfly-Effect-Light-Art-Collection", "Eternal-Sundown-Afbeelding-After", "Eternal-Sundown-Afbeelding-Before"].every((b) => waarom.includes(b)), "alle Artist Impressions, ook Eternal Sundown voor en na, staan in de strook");
+  // Ronde 2 (30 september): "3 is genoeg", elk paar nieuw (zie scripts/proef-light-art-drie.mjs), geladen uit images/light-art/licht.
+  eis(["eternal-sundown", "infinita", "butterfly-effect"].every((b) => waarom.includes(`/images/light-art/licht/${b}-voor-800.webp`) && waarom.includes(`/images/light-art/licht/${b}-na-800.webp`)), "Eternal Sundown, Infinita en Butterfly Effect staan voor en na in de strook");
   // 4b. Elke impressie heeft een voor-beeld met schuif (Marinus: "Ik mis de before foto's met slider functie").
   const schuiven = (waarom.match(/class="h-lac-schuif"/g) || []).length;
-  eis(schuiven >= 5, "elke Artist Impression heeft een voor-en-na-schuif");
+  eis(schuiven === 3, "elke Artist Impression heeft een voor-en-na-schuif, drie in totaal");
   for (const pad of [...waarom.matchAll(/src="(\/images\/light-art\/[^"]+)"/g)].map((m) => m[1]))
-    eis(existsSync(`public${pad}`), `voor-beeld bestaat: ${pad}`);
-  eis([...waarom.matchAll(/src="\/images\/light-art\//g)].length >= 4, "vier nieuwe voor-beelden staan in de strook");
+    eis(existsSync(`public${pad}`), `beeld bestaat: ${pad}`);
+  eis([...waarom.matchAll(/src="\/images\/light-art\//g)].length === 6, "zes nieuwe beelden, drie voor en drie na, staan in de strook");
   // 4c. Odoo-regel (Marinus, 30 september): "Integrated in ODOO's ERP system."
   eis(hero.includes("INTEGRATED IN ODOO’S ERP SYSTEM") && !hero.includes("IMPLEMENTATION POSSIBLE"), "Odoo-regel luidt Integrated in Odoo’s ERP system");
   // 5. Geen modelnamen in de sitetekst (afspraak 29 september).
