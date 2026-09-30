@@ -41,7 +41,9 @@ await build({
   },
 });
 
-const { render } = await import(pathToFileURL(path.join(uit, "prerender-entry.mjs")).href);
+const { render, allesVooraf } = await import(pathToFileURL(path.join(uit, "prerender-entry.mjs")).href);
+// Secties onder de vouw en de andere pagina's laden in de browser later (proposal/later.tsx); hier eerst allemaal.
+await allesVooraf();
 
 // React 19 zet voor elke afbeelding zonder loading="lazy" een eigen preload vooraan in de HTML, ook voor
 // het logo in de gesloten QR-dialoog. Op een trage lijn duwen die veertien verzoeken de letter en het

@@ -53,6 +53,8 @@ const server = await createServer({
 try {
   const { MemoryRouter } = await server.ssrLoadModule("react-router-dom");
   const { default: Page } = await server.ssrLoadModule("/proposal/WebsiteProposal.tsx");
+  // 30 september 2026: secties en pagina's laden later (proposal/later.tsx); in Node eerst alles laden, dan renderen.
+  await (await server.ssrLoadModule("/proposal/later.tsx")).allesVooraf();
   const render = (route, language = "nl") =>
     renderToStaticMarkup(
       React.createElement(

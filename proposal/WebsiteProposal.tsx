@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import {
   Link,
   NavLink,
@@ -10,39 +10,44 @@ import {
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { CLAIM_URL } from "./os-entry";
 import { Action } from "./ui";
-import {
-  BlogPage,
-  BlogPostPage,
-  ContactPage,
-  Home,
-  NotFound,
-  OsPage,
-  PricesPage,
-  ProjectPage,
-  ProjectsPage,
-  ServicesPage,
-  TeamPage,
-} from "./pages";
-import { AuditPage } from "./AuditPage";
-import { VacaturesPage } from "./VacaturesPage";
-import { InvesteerdersPage } from "./InvesteerdersPage";
-import GratisWebsite from "./GratisWebsite";
-import GratisOsDemo from "./GratisOsDemo";
-import AntwoordPagina from "./AntwoordPagina";
-import { VeiligheidPagina } from "./Veiligheid";
-import QrOsWelcome from "./QrOsWelcome";
-import BrandFooter from "./BrandFooter";
+import { Home } from "./pages";
+// 30 september 2026 (Marinus: "WIL ECHT INSTANT LOADING"): elke pagina buiten de homepage is een eigen bestand dat pas
+// laadt als iemand die pagina opent (proposal/later.tsx). Het eerste script draagt alleen de header en de hero.
+import { OnderDeVouw, later } from "./later";
+const BlogPage = later(() => import("./paginas").then((m) => m.BlogPage));
+const BlogPostPage = later(() => import("./paginas").then((m) => m.BlogPostPage));
+const ContactPage = later(() => import("./paginas").then((m) => m.ContactPage));
+const NotFound = later(() => import("./paginas").then((m) => m.NotFound));
+const OsPage = later(() => import("./paginas").then((m) => m.OsPage));
+const PricesPage = later(() => import("./paginas").then((m) => m.PricesPage));
+const ProjectPage = later(() => import("./paginas").then((m) => m.ProjectPage));
+const ProjectsPage = later(() => import("./paginas").then((m) => m.ProjectsPage));
+const ServicesPage = later(() => import("./paginas").then((m) => m.ServicesPage));
+const TeamPage = later(() => import("./paginas").then((m) => m.TeamPage));
+const AuditPage = later(() => import("./AuditPage").then((m) => m.AuditPage));
+const VacaturesPage = later(() => import("./VacaturesPage").then((m) => m.VacaturesPage));
+const InvesteerdersPage = later(() => import("./InvesteerdersPage").then((m) => m.InvesteerdersPage));
+// Opmaak blijft statisch, op de plek van voorheen (zie pages.tsx).
+import "./gratis-website.css";
+import "./antwoord-pagina.css";
+const GratisWebsite = later(() => import("./GratisWebsite").then((m) => m.default));
+const GratisOsDemo = later(() => import("./GratisOsDemo").then((m) => m.default));
+const AntwoordPagina = later(() => import("./AntwoordPagina").then((m) => m.default));
+const VeiligheidPagina = later(() => import("./Veiligheid").then((m) => m.VeiligheidPagina));
+// De welkomstdialoog hoort alleen bij een bezoek via de QR-code (?qr=os); alleen dan laadt hij.
+const QrOsWelcome = later(() => import("./QrOsWelcome").then((m) => m.default));
+const BrandFooter = later(() => import("./BrandFooter").then((m) => m.default));
 import { MotionProvider } from "./motion";
 import { projects } from "./content";
 import { allPosts } from "../data/posts";
 import LanguageSwitch from "./LanguageSwitch";
 import { LanguageProvider, LANGUAGES, languagePrefix, type Language, useLanguage } from "./i18n/context";
-import PrivacyPage from "../components/PrivacyPage";
-import TermsPage from "../components/TermsPage";
+const PrivacyPage = later(() => import("../components/PrivacyPage").then((m) => m.default));
+const TermsPage = later(() => import("../components/TermsPage").then((m) => m.default));
 // 19 september 2026: de juridische laag is van twee naar zeven documenten gegaan. DocumentPage
 // dient ze alle zeven; JuridischPage is de hub waar ze bij elkaar staan.
-import DocumentPage from "../components/DocumentPage";
-import JuridischPage from "../components/JuridischPage";
+const DocumentPage = later(() => import("../components/DocumentPage").then((m) => m.default));
+const JuridischPage = later(() => import("../components/JuridischPage").then((m) => m.default));
 // Staat uit tot er een script op de site komt dat toestemming nodig heeft; de afweging staat
 // in het bestand zelf.
 import Cookiebot from "./Cookiebot";
@@ -88,11 +93,15 @@ function ProposalShell() {
   const [menuOpen, setMenuOpen] = useState(false);
   // 30 september 2026 (Marinus): "video aan het begin weglaten", "met os logo animatie gewoon beginnen". Geen introvideo meer.
   const introDone = true;
+  // Pas na het monteren, zodat de voorgerenderde HTML (zonder dialoog) en de eerste weergave gelijk blijven.
+  const [qrBezoek, zetQrBezoek] = useState(false);
+  useEffect(() => { if (new URLSearchParams(window.location.search).get("qr") === "os") zetQrBezoek(true); }, []);
   const menuButton = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLElement>(null);
   const mounted = useRef(false);
-  useEffect(() => {
-    setMenuOpen(false);
+  // 30 september 2026: een pagina die later laadt (proposal/later.tsx) zet via useSEO eerst haar eigen titel en canonical;
+  // zetMeta loopt daarna nog een keer (NaLaden hieronder), zodat de uitkomst per taal gelijk blijft aan voorheen.
+  const zetMeta = () => {
     const project = projects.find(
       (item) => location.pathname === `/project/${item.slug}`,
     );
@@ -136,6 +145,10 @@ function ProposalShell() {
       .querySelector('link[rel="canonical"]')
       ?.setAttribute("href", `https://socialnow.nl${languagePrefix(language)}${location.pathname}`);
     if (!vanBuild) for (const lang of [...LANGUAGES, "x-default"]) document.querySelector(`link[hreflang="${lang}"]`)?.setAttribute("href", `https://socialnow.nl${lang === "x-default" ? "" : languagePrefix(lang as Language)}${location.pathname}`);
+  };
+  useEffect(() => {
+    setMenuOpen(false);
+    zetMeta();
     const id = window.requestAnimationFrame(() => {
       if (location.hash)
         document
@@ -160,10 +173,10 @@ function ProposalShell() {
     window.addEventListener("keydown", close);
     return () => window.removeEventListener("keydown", close);
   }, [menuOpen]);
-  if (location.pathname.replace(/\/+$/, "") === "/antwoord-aanvragen") return <div className="sn-site" data-style="signature"><main id="inhoud"><AntwoordPagina /></main></div>;
+  if (location.pathname.replace(/\/+$/, "") === "/antwoord-aanvragen") return <div className="sn-site" data-style="signature"><main id="inhoud"><Suspense fallback={null}><AntwoordPagina /></Suspense></main></div>;
   return (
     <div className="sn-site" data-style="signature">
-      <QrOsWelcome ready={introDone} />
+      {qrBezoek && <Suspense fallback={null}><QrOsWelcome ready={introDone} /></Suspense>}
       <a className="h-skip" href="#inhoud">
         Ga naar inhoud
       </a>
@@ -228,6 +241,7 @@ function ProposalShell() {
         </nav>
       </header>
       <main id="inhoud" ref={main} tabIndex={-1}>
+        <Suspense fallback={<div aria-hidden="true" style={{ minHeight: "100vh" }} />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/stijlen" element={<Navigate to="/" replace />} />
@@ -283,11 +297,22 @@ function ProposalShell() {
           ))}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <NaLaden key={location.pathname} klaar={() => {
+          zetMeta();
+          if (location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ block: "start" });
+        }} />
+        </Suspense>
       </main>
-      <BrandFooter />
+      <OnderDeVouw ruimte={false}><BrandFooter /></OnderDeVouw>
       {/* 27 september 2026: de onboarding-popup (ConsentPopup) is op verzoek van Marinus van de site gehaald. */}
       <Cookiebot />
       <MiloKoekje />
     </div>
   );
+}
+
+// Loopt zodra de pagina van deze route echt op het scherm staat, ook als die later laadde.
+function NaLaden({ klaar }: { klaar: () => void }) {
+  useEffect(() => { klaar(); }, []);
+  return null;
 }

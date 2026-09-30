@@ -1,4 +1,6 @@
-/* 30 september 2026: TT Norms als woff2 (43 KB in plaats van 153 KB per gewicht, dezelfde letters); de otf blijft terugval. */
+/* 30 september 2026: TT Norms als woff2 zonder Cyrillisch, verder glyph voor glyph gelijk aan de OTF: breedtes, kerning
+   (ook de Apple-klassentabel) en morx (scripts/lettertypes-subset.py). Samen 106 KB in plaats van 169 KB; de otf blijft
+   terugval en de kopletter (Bold) laadt vooraf (scripts/prerender.mjs). */
 @font-face {
   font-family: TT Norms;
   src: url("./fonts/TTNorms-Regular.woff2") format("woff2"), url("./fonts/TTNorms-Regular.otf") format("opentype");

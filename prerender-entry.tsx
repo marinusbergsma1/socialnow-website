@@ -6,6 +6,9 @@ import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import App from "./proposal/WebsiteProposal";
 import type { Language } from "./proposal/i18n/context";
+// 30 september 2026: secties en pagina's laden in de browser later (proposal/later.tsx); scripts/prerender.mjs laadt ze
+// hier eerst allemaal, zodat elke pagina volledig in de HTML staat.
+export { allesVooraf } from "./proposal/later";
 
 export function render(url: string, language: Language): string {
   return renderToString(

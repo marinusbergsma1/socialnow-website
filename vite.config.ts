@@ -2,6 +2,7 @@ import path from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { startVastiqPreview } from "./scripts/vastiq-preview.mjs";
+import woordenboekSplit from "./scripts/woordenboek-split.mjs";
 
 export default defineConfig({
   base: "/",
@@ -20,6 +21,8 @@ export default defineConfig({
         await startVastiqPreview();
       },
     },
+    // 30 september 2026: alleen de kern van elk woordenboek gaat mee in het eerste script (zie het bestand zelf).
+    woordenboekSplit({ verslag: (v) => console.log(`[woordenboek] ${v.kern} van ${v.sleutels} zinnen in het eerste script, waarvan ${v.patroon.length} via een sjabloon; ${v.nergens} staan nergens letterlijk in de code`) }),
     react({ jsxImportSource: "@socialnow/i18n" }),
     {
       name: "socialnow-preview-routes",
