@@ -81,6 +81,8 @@ try {
   for (const pad of [...waarom.matchAll(/src="(\/images\/light-art\/[^"]+)"/g)].map((m) => m[1]))
     eis(existsSync(`public${pad}`), `voor-beeld bestaat: ${pad}`);
   eis([...waarom.matchAll(/src="\/images\/light-art\//g)].length >= 4, "vier nieuwe voor-beelden staan in de strook");
+  // 4c. Odoo-regel (Marinus, 30 september): "Integrated in ODOO's ERP system."
+  eis(hero.includes("INTEGRATED IN ODOO’S ERP SYSTEM") && !hero.includes("IMPLEMENTATION POSSIBLE"), "Odoo-regel luidt Integrated in Odoo’s ERP system");
   // 5. Geen modelnamen in de sitetekst (afspraak 29 september).
   for (const [taal, html] of [["nl", nl], ["en", en]]) {
     const tekst = html.replace(/<[^>]+>/g, " ");

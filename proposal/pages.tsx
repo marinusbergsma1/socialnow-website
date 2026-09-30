@@ -262,7 +262,8 @@ export function Home() {
           </p>
           {/* 28 september 2026 (Marinus): "ODOO PRODUCT · IMPLEMENTATION POSSIBLE", daaronder klein de volgende stap. */}
           <p className="h-hero-odoo-regel" translate="no">
-            <b>ODOO PRODUCT · IMPLEMENTATION POSSIBLE</b>
+            {/* 30 september 2026 (Marinus): "Integrated in ODOO's ERP system." Odoo is het ERP; het OS draait erop. */}
+            <b>INTEGRATED IN ODOO’S ERP SYSTEM</b>
             {/* 29 september 2026 (Marinus): "bij Salesforce stukje wel écht even hun logo ook." */}
             <small>
               NEXT STEP
