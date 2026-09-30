@@ -2,17 +2,16 @@
 import { readFileSync } from "node:fs";
 const pages = readFileSync("proposal/pages.tsx", "utf8");
 const styles = readFileSync("proposal/styles.tsx", "utf8");
+const content = readFileSync("proposal/content.ts", "utf8");
 const eisen = [
-  ["kop From 0 to SocialNow! met raket, niet groen", styles.includes('"From 0 to SocialNow!"') && styles.includes('"🚀"') && !styles.includes('h-kop-groen">{translate(KOP_2')],
-  ["statement als zin in de hero", pages.includes("fully automated systems.") && pages.includes("That&rsquo;s why we offer it for free.")],
-  ["SaaS-regel klein", pages.includes("If SaaS can&rsquo;t be free, it&rsquo;s not good enough!")],
-  ["geen los statementblok boven de hero", !pages.includes("<Statement />")],
-  ["demoknop met founder", pages.includes("Book a free live demo")],
-  ["bewijs Odoo met film", pages.includes("IT&rsquo;S PROVEN AT ODOO") && pages.includes("/video/odoo-experience/odoo-experience.mp4")],
-  ["Salesforce in de maak", pages.includes("WORKING ON SALESFORCE")],
-  ["rechts OS-film en veiligheid, My story vol onder de bewijsbalk", /h-film-os[\s\S]*VeiligheidSpeler[\s\S]*h-bewijs[\s\S]*<HeroStory \/>[\s\S]*<ClientLogos kort/.test(pages)],
-  ["logobalk met Odoo en Salesforce", readFileSync("proposal/content.ts","utf8").includes('"partners/odoo.svg", "Odoo"') && readFileSync("proposal/content.ts","utf8").includes('"partners/salesforce.svg", "Salesforce"')],
-  ["kop niet omlaag geduwd", readFileSync("proposal/hero-c.css","utf8").includes("h1.h-taalwissel { margin-top: 0; }")],
+  ["kop Let's get SocialNow! met SocialNow groen", styles.includes('"Let’s get"') && styles.includes('"SocialNow!"') && styles.includes('h-kop-groen">{KOP_2}')],
+  ["integratieregel Odoo en Salesforce", pages.includes("INTEGRATED IN ODOO&rsquo;S ERP SYSTEM") && pages.includes("NEXT STEP <img src=\"/images/partners/salesforce.svg\"")],
+  ["aftermovie-link naast Odoo", pages.includes("Watch the aftermovie") && pages.includes("/video/odoo-experience/odoo-experience.mp4")],
+  ["betaalpartner Attesso", pages.includes("~/attesso")],
+  ["Milo-pillen met naam", pages.includes("h-milo-pil")],
+  ["statement en demoknop blijven", pages.includes("That&rsquo;s why we offer it for free.") && pages.includes("Book a free live demo")],
+  ["Trusted by boven de logobalk, alleen merken", pages.includes(">Trusted by<") && !content.includes('"partners/odoo.svg"')],
+  ["volgorde: films, Trusted by, My story", /<HeroFilm \/>[\s\S]*Trusted by[\s\S]*<HeroStory \/>/.test(pages)],
 ];
 let fout = 0;
 for (const [naam, ok] of eisen) { console.log(`${ok ? "groen" : "ROOD "} ${naam}`); if (!ok) fout++; }

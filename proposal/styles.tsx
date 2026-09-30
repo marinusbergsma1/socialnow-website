@@ -10,8 +10,8 @@ import { Link } from "react-router-dom";
 // 25 september 2026 (Marinus): het pakket is branding, website, Google Ads audit en OS, rustiger gezet.
 // 26 september 2026 (Marinus): geen reclame meer in de kop, een persoonlijk bedankje na de Odoo-beurs.
 // 29 september 2026 (Marinus): de nieuwe belofte, van nul naar een draaiend bedrijf in één uur.
-const KOP_1 = "From 0 to SocialNow!";
-const KOP_2 = "🚀";
+const KOP_1 = "Let’s get";
+const KOP_2 = "SocialNow!";
 // 24 september 2026 (Marinus): de groene regel gaat vanaf de tweede beursdag over de gratis website.
 // 25 september 2026 (Marinus): maximaal 10 nieuwe websites en rebrandings, volledig op maat, vandaag en morgen.
 // 25 september 2026 (Marinus): het aantal plekken staat nu groot linksboven de film (plekken.ts).
@@ -71,7 +71,7 @@ export function HeroTitle() {
         {LANGUAGES.map((code) => (
           <span key={code} {...stand(code)}>
             {translate(KOP_1, code)}{" "}
-            <span className="h-kop-raket">{KOP_2}</span>
+            <span className="h-kop-groen">{KOP_2}</span>
           </span>
         ))}
       </h1>

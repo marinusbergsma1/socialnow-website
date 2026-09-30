@@ -213,8 +213,11 @@ function HeroFilm() {
         titel="Zo werkt SocialNow OS"
         boven={
           // 26 september 2026 (Marinus): "Milo's klein boven How SocialNow OS works".
-          <div className="h-film-milos" aria-hidden="true">
-            {agents.slice(0, 4).map((agent) => <MiloMotion key={agent.id} role={agent.id} name={agent.name} />)}
+          // 30 september 2026 (Marinus): header 4C, de vier Milo's als pillen met hun naam.
+          <div className="h-milo-pillen" translate="no">
+            {agents.slice(0, 4).map((agent) => (
+              <span key={agent.id} className="h-milo-pil"><MiloMotion role={agent.id} name={agent.name} /><b>{agent.name}</b></span>
+            ))}
           </div>
         }
         geluid={geluid === "os"}
@@ -273,6 +276,24 @@ export function Home() {
           <HeroLogo />
           <TeamTrust />
           <HeroTitle />
+          {/* 30 september 2026 (Marinus): header 4C, overzichtelijker. Odoo, Salesforce en de betaalpartner op twee regels. */}
+          <div className="h-integratie" translate="no">
+            <p className="h-integratie-rij">
+              <span className="h-integratie-odoo"><svg viewBox="140 146 640 250" role="img" aria-label="Odoo">
+                  <path fill="#8f8f8f" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
+                  <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
+                </svg></span>
+              <b>INTEGRATED IN ODOO&rsquo;S ERP SYSTEM</b>
+              <i aria-hidden="true" />
+              {/* 30 september 2026 (Marinus): "hier nog iets van watch the aftermovie". */}
+              <a className="h-aftermovie" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener">&#9654; Watch the aftermovie</a>
+            </p>
+            <p className="h-integratie-rij is-klein">
+              <span className="h-integratie-sf">NEXT STEP <img src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" /></span>
+              <i aria-hidden="true" />
+              <span className="h-attesso">PAYMENT PARTNER <code>~/attesso</code></span>
+            </p>
+          </div>
           {/* 30 september 2026 (Marinus): header optie C. Het statement als één zin onder de kop, klein de SaaS-regel, en
               twee knoppen: inloggen en een gratis live demo met de founder. Overal Engels (translate="no"). */}
           <div className="h-statement" translate="no">
@@ -293,25 +314,13 @@ export function Home() {
           </div>
           </div>
           <HeroFilm />
-          {/* 30 september 2026 (Marinus): "IT'S PROVED AT ODOO met link naar de video en bezig met Salesforce". */}
-          <div className="h-bewijs" translate="no">
-            <a className="h-bewijs-odoo" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener">
-              <svg viewBox="140 146 640 250" role="img" aria-label="Odoo">
-                <path fill="#8f8f8f" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
-                <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
-              </svg>
-              <span><b>IT&rsquo;S PROVEN AT ODOO</b><small>&#9654; Watch the Odoo Experience film</small></span>
-            </a>
-            <div className="h-bewijs-sf">
-              <img src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" />
-              <span><b>WORKING ON SALESFORCE</b><small>Next integration</small></span>
-            </div>
+          <div className="h-hero-rij">
+            {/* 30 september 2026 (Marinus): "hieronder die trusted by, dan zie je al die bekende logo's". */}
+            <p className="h-trusted" translate="no">Trusted by</p>
+            <ClientLogos kort />
           </div>
           <div className="h-story-vol">
             <HeroStory />
-          </div>
-          <div className="h-hero-rij">
-            <ClientLogos kort />
           </div>
         </div>
       </section>

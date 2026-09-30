@@ -57,3 +57,24 @@
 .sn-site .h-hero .h-story-vol { grid-column: 1 / -1; width: 100%; max-width: 1920px; margin: clamp(24px, 3vw, 40px) auto 0; }
 .sn-site .h-hero .h-story-vol .h-film-story { width: 100%; }
 .sn-site .h-hero .h-story-vol video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 18px; border: 1px solid #ffffff1f; background: #050608; object-fit: cover; }
+/* Header 4C overzichtelijk (30 september 2026). */
+.sn-site .h-integratie { display: grid; gap: 12px; margin-top: 4px; }
+.sn-site .h-integratie-rij { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 0; color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .16em; }
+.sn-site .h-integratie-rij > i { width: 1px; height: 20px; background: #ffffff33; }
+.sn-site .h-integratie-odoo svg { display: block; width: clamp(80px, 7vw, 104px); height: auto; }
+.sn-site .h-integratie-sf { display: inline-flex; align-items: center; gap: 10px; color: #7fd3f5; }
+.sn-site .h-integratie-sf img { width: 44px; height: auto; }
+.sn-site .h-aftermovie { color: #25d366; text-decoration: none; letter-spacing: .1em; border: 1px solid #25d36655; border-radius: 999px; padding: 7px 14px; }
+.sn-site .h-aftermovie:hover { background: #25d3661a; color: #25d366; }
+.sn-site .h-attesso { color: #d4a0b5; }
+.sn-site .h-attesso code { margin-left: 6px; font-family: ui-monospace, Menlo, monospace; font-size: 15px; font-weight: 500; letter-spacing: 0; color: #fff; }
+.sn-site .h-hero .h-hero-tekst > h1.h-taalwissel .h-kop-groen { color: #25d366; }
+.sn-site .h-milo-pillen { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 14px; order: -1; flex: 1 1 100%; }
+.sn-site .h-milo-pil { display: inline-flex; align-items: center; gap: 10px; padding: 4px 16px 4px 4px; border: 1px solid #ffffff24; border-radius: 999px; background: #0a0c0c; }
+.sn-site .h-milo-pil b { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #fff; }
+.sn-site .h-milo-pil .h-milo-animated, .sn-site .h-milo-pil .h-milo-animated img, .sn-site .h-milo-pil .h-milo-animated video { width: 38px !important; height: 38px !important; border-radius: 50%; }
+.sn-site .h-milo-pil .h-motion-control { display: none !important; }
+.sn-site .h-hero .h-film-os > .h-milo-pillen { order: -1; }
+.sn-site .h-trusted { margin: 0 0 6px; color: #a7b3ad; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.sn-site .h-hero .h-hero-rij { grid-column: 1 / -1; margin-top: clamp(28px, 3vw, 44px); padding-top: clamp(18px, 2vw, 26px); border-top: 1px solid #ffffff14; }
+@media (min-width: 1100px) { .sn-site .h-hero .h-hero-rij { display: block; } }

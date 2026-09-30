@@ -297,9 +297,7 @@ export const logos: [string, string, number?][] = [
   // het logo zwart op een witte pil, en een fractie kleiner.
   // 25 september 2026 (Marinus): "AZ is nog iets te groot en ook verkeerd". Nu het logo van de flyer
   // (schuine witte onderkant) in eigen kleur, zonder de grijsfilter van de balk (h-logo-eigen).
-  // 30 september 2026 (Marinus): "de logobalk mis ik odoo salesforce". Vooraan, in eigen kleur.
-  ["partners/odoo.svg", "Odoo", 0.62],
-  ["partners/salesforce.svg", "Salesforce", 0.8],
+  // 30 september 2026: Odoo en Salesforce staan in de integratieregel onder de kop; deze balk is "Trusted by", alleen merken.
   ["AZ-LOGO-FLYER.webp", "AZ", 0.46],
   ["AMSTERDAM-LIGHT-FESTIVAL-LOGO.webp", "Amsterdam Light Festival"],
   ["CHIN-CHIN-CLUB-LOGO.webp", "Chin Chin Club", 0.9],
