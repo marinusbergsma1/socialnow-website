@@ -89,7 +89,7 @@ De teller gebruikt uitsluitend de openbare API `https://app.socialnow.nl/api/os-
 - Zwart-herstel: commit `43511e4`; GitHub Pages-run `34026613759` geslaagd. Apex leverde `index-Bu3FPMG8.css` met zwarte basis en zonder `#0a1628`.
 - `npm run build`: productiehomepage, alle bestaande routes en afzonderlijke preview-ingang.
 - `npx tsc --noEmit`: TypeScriptcontrole.
-- `node scripts/check-proposal.mjs`: Node-render, IDs/ARIA-doelen, lokale beelden, instaproutes, tellerfouten, installatiehints en scheiding van homepage/sitemap. Dit is geen browsertest.
+- `node scripts/check-proposal.mjs` staat uit sinds 30 september 2026 (exit 2): verouderd sinds commit 2c08bf2 en niet meer te draaien op de huidige site. Gold destijds voor Node-render, IDs/ARIA-doelen, lokale beelden, instaproutes, tellerfouten, installatiehints en scheiding van homepage/sitemap. Gerichte proeven per herstelling staan in `scripts/proef-*.mjs`.
 - `npm run build:voorstel`: optionele aparte build in `dist-proposal`.
 - `npm run dev:voorstel`: lokale vergelijking via `/voorstel.html` en `/`.
 
@@ -144,7 +144,7 @@ Laatste richting van Marinus: een verbeterde, volwassen versie van zijn eigen vo
 
 ### Controle
 
-`npx tsc --noEmit`, productiebuild en `node scripts/check-proposal.mjs`. De Node-controle rendert 24 routes plus een onbekende route, controleert 61 bestaande beelden, unieke IDs/ARIA, links tussen pagina’s en ankers, behoud van alle projecten/teamleden, de vier Milo-assetsets, originele video/posterbestanden, claim/installatielinks en de demo/live/foutafhandeling van de teller. Alle previewroutes blijven noindex en buiten de sitemap.
+`npx tsc --noEmit`, productiebuild en destijds `node scripts/check-proposal.mjs` (staat uit sinds 30 september 2026, zie hierboven). Die Node-controle renderde toen 24 routes plus een onbekende route, controleerde 61 bestaande beelden, unieke IDs/ARIA, links tussen pagina’s en ankers, behoud van alle projecten/teamleden, de vier Milo-assetsets, originele video/posterbestanden, claim/installatielinks en de demo/live/foutafhandeling van de teller. Alle previewroutes blijven noindex en buiten de sitemap.
 
 Browserweergave en interactieve bediening zijn **niet visueel gecontroleerd**: de eerder vastgestelde browserbeleidsblokkade is niet omzeild. De HTTP- en Node-controles bewijzen technische levering en bronstructuur, geen visuele browserkwaliteit.
 
