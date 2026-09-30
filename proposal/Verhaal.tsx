@@ -1,6 +1,7 @@
 import React from "react";
 import CharacterAccent from "./CharacterAccent";
 import { HeroReview } from "./CustomerReviews";
+import LightArtStrook from "./LightArtStrook";
 import { people } from "./content";
 import { TextLink } from "./ui";
 import { Bento, BentoFilm, Tegel } from "./Bento";
@@ -147,6 +148,7 @@ export default function Verhaal() {
           <Tegel kop="Mijn waarom" breed={12}>
             <Waarom />
             <HeroReview />
+            <LightArtStrook />
             <div className="sn-tegel-onder"><TextLink to="/projecten">Bekijk het werk achter mijn verhaal</TextLink></div>
           </Tegel>
         )}

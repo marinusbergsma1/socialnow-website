@@ -47,6 +47,8 @@ import JuridischPage from "../components/JuridischPage";
 // Staat uit tot er een script op de site komt dat toestemming nodig heeft; de afweging staat
 // in het bestand zelf.
 import Cookiebot from "./Cookiebot";
+// 30 september 2026: geen toestemmingsvraag maar een eerlijke melding: er zijn geen trackingcookies.
+import MiloKoekje from "./MiloKoekje";
 
 const nav = [
   ["/het-os", "Het OS"],
@@ -110,8 +112,18 @@ function ProposalShell() {
       project?.description ||
       post?.excerpt ||
       "Van nul naar een draaiend bedrijf in één uur. Beantwoord tien vragen en je boekhouding, merk, website en socials staan klaar in één OS. Gratis te gebruiken; een OS op maat bouwen we vanaf €10.000.";
-    document.title = `${t(title)} | SocialNow`;
-    for (const [selector, content] of [
+    // 30 september 2026: postbuild.mjs en localize-build.mjs zetten per route en per taal al de eigen title,
+    // description en canonical in de html; alleen localize-build zet daarbij hreflang x-default. Daarna zette
+    // deze regel op elke route de algemene zin en het menulabel terug, en Google (dat JavaScript uitvoert) zag
+    // op 32 route-taalcombinaties de algemene zin. Wijst de canonical al naar deze pagina in deze taal, dan
+    // blijft de meta uit de build staan; anders (404-terugval, taal via cookie omgezet, route buiten de
+    // sitemap, navigeren binnen de app) zet de app hem zelf. Proef: scripts/check-meta-na-laden.py.
+    const hier = `https://socialnow.nl${languagePrefix(language)}${pad}`.replace(/\/+$/, "");
+    const vanBuild =
+      document.querySelector('link[hreflang="x-default"]') !== null &&
+      document.querySelector('link[rel="canonical"]')?.getAttribute("href")?.replace(/\/+$/, "") === hier;
+    if (!vanBuild) document.title = `${t(title)} | SocialNow`;
+    if (!vanBuild) for (const [selector, content] of [
       ['meta[name="description"]', t(description)],
       ['meta[property="og:title"]', document.title],
       ['meta[property="og:description"]', t(description)],
@@ -120,10 +132,10 @@ function ProposalShell() {
       ['meta[name="twitter:description"]', t(description)],
     ])
       document.querySelector(selector)?.setAttribute("content", content);
-    document
+    if (!vanBuild) document
       .querySelector('link[rel="canonical"]')
       ?.setAttribute("href", `https://socialnow.nl${languagePrefix(language)}${location.pathname}`);
-    for (const lang of [...LANGUAGES, "x-default"]) document.querySelector(`link[hreflang="${lang}"]`)?.setAttribute("href", `https://socialnow.nl${lang === "x-default" ? "" : languagePrefix(lang as Language)}${location.pathname}`);
+    if (!vanBuild) for (const lang of [...LANGUAGES, "x-default"]) document.querySelector(`link[hreflang="${lang}"]`)?.setAttribute("href", `https://socialnow.nl${lang === "x-default" ? "" : languagePrefix(lang as Language)}${location.pathname}`);
     const id = window.requestAnimationFrame(() => {
       if (location.hash)
         document
@@ -274,6 +286,7 @@ function ProposalShell() {
       <BrandFooter />
       {/* 27 september 2026: de onboarding-popup (ConsentPopup) is op verzoek van Marinus van de site gehaald. */}
       <Cookiebot />
+      <MiloKoekje />
     </div>
   );
 }

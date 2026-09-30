@@ -19,6 +19,7 @@ import TeamTrust from "./TeamTrust";
 import Verhaal from "./Verhaal";
 import { Bento, Tegel } from "./Bento";
 import Deuren from "./Deuren";
+import { FILMS as VEILIGHEIDSFILMS, filmPad as veiligheidFilm, filmPosterPad as veiligheidPoster } from "./veiligheid-beloftes";
 import Bereikt from "./Bereikt";
 import { Statement } from "./Statement";
 import NulNaarBedrijf from "./NulNaarBedrijf";
@@ -126,10 +127,84 @@ function Film({ src, poster, label, titel, klasse, geluid, zetGeluid, boven }: {
   );
 }
 
-function HeroFilm() {
-  const [geluid, setGeluid] = useState<"" | "os" | "bedankt">("");
+// 30 september 2026 (Marinus): "bij landen gewoon logo animatie OS zoals eerst". De logo-animatie van 26 september
+// staat weer bovenaan de hero, speelt één keer en blijft staan op het complete logo.
+function HeroLogo() {
+  const ref = React.useRef<HTMLVideoElement>(null);
+  const stop = () => {
+    const film = ref.current;
+    if (film && film.currentTime >= 3.4) film.pause();
+  };
   return (
-    <div className="h-hero-film h-hero-films">
+    <video
+      ref={ref}
+      className="h-hero-logo"
+      src="/video/bedankt/logo-animatie.mp4"
+      autoPlay
+      muted
+      playsInline
+      preload="auto"
+      onTimeUpdate={stop}
+      onEnded={stop}
+      aria-label="SocialNow OS"
+    />
+  );
+}
+
+// 30 september 2026 (Marinus): de vijf veiligheids- en databeschermingsfilms in de hero, beginnend bij 1, met kleine
+// nummers en namen eronder zodat je ze allemaal in de header kunt bekijken. Na afloop speelt de volgende.
+function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (aan: boolean) => void }) {
+  const { language } = useLanguage();
+  const taal = language === "nl" ? "nl" : "en";
+  const [nummer, setNummer] = useState(0);
+  const ref = React.useRef<HTMLVideoElement>(null);
+  const film = VEILIGHEIDSFILMS[nummer];
+  React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid, nummer, taal]);
+  // Een nieuw nummer geeft een nieuw videovak (key), dat met autoPlay zelf start.
+  const kies = (index: number) => setNummer(index);
+  const wissel = () => {
+    const video = ref.current;
+    if (video && !geluid) { video.currentTime = 0; void video.play().catch(() => {}); }
+    zetGeluid(!geluid);
+  };
+  return (
+    <div className="h-film-veilig">
+      <p className="h-film-titel">Veiligheid en databescherming</p>
+      <div className="h-film-vak">
+        <video
+          ref={ref}
+          key={`${film.slug}-${taal}`}
+          src={veiligheidFilm(film.slug, taal)}
+          poster={veiligheidPoster(film.slug, taal)}
+          autoPlay
+          muted
+          playsInline
+          preload="metadata"
+          onEnded={() => kies((nummer + 1) % VEILIGHEIDSFILMS.length)}
+          aria-label={film.kop}
+        />
+        <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={geluid}>
+          {geluid ? "Geluid uit" : "Geluid aan"}
+        </button>
+      </div>
+      <ol className="h-veilig-nummers">
+        {VEILIGHEIDSFILMS.map((item, index) => (
+          <li key={item.slug}>
+            <button type="button" onClick={() => kies(index)} aria-current={index === nummer ? "true" : undefined}>
+              <b>{index + 1}</b>
+              <span>{item.kop}</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function HeroFilm() {
+  const [geluid, setGeluid] = useState<"" | "os" | "veilig">("");
+  return (
+    <div className="h-hero-film h-hero-films is-os-veilig">
       <Film
         klasse="h-film-os"
         src="/video/os/os-booth-en.mp4"
@@ -145,15 +220,7 @@ function HeroFilm() {
         geluid={geluid === "os"}
         zetGeluid={(aan) => setGeluid(aan ? "os" : "")}
       />
-      <Film
-        klasse="h-film-bedankt"
-        src="/video/bedankt/bedankt-brussel.mp4"
-        poster="/video/bedankt/bedankt-brussel.jpg"
-        label="Bedankt vanuit Brussel, van het SocialNow-team"
-        titel="Bedankt uit Brussel"
-        geluid={geluid === "bedankt"}
-        zetGeluid={(aan) => setGeluid(aan ? "bedankt" : "")}
-      />
+      <VeiligheidSpeler geluid={geluid === "veilig"} zetGeluid={(aan) => setGeluid(aan ? "veilig" : "")} />
     </div>
   );
 }
@@ -187,6 +254,7 @@ export function Home() {
           {/* 26 september 2026 (Marinus): "op mijn header mag alle reclame weg". Geen stand, geen actie, geen
               tellers meer; een persoonlijk bedankje en één duidelijke login voor het gratis OS. */}
           {/* 26 september 2026 (Marinus): "SocialNow OS logo hoeft er niet bij, team er wel bij". */}
+          <HeroLogo />
           <TeamTrust />
           <HeroTitle />
           {/* 26 september 2026 (Marinus): "onder de titel het Odoo-logo". */}
@@ -198,8 +266,13 @@ export function Home() {
           </p>
           {/* 28 september 2026 (Marinus): "ODOO PRODUCT · IMPLEMENTATION POSSIBLE", daaronder klein de volgende stap. */}
           <p className="h-hero-odoo-regel" translate="no">
-            <b>ODOO PRODUCT · IMPLEMENTATION POSSIBLE</b>
-            <small>NEXT STEP SALESFORCE</small>
+            {/* 30 september 2026 (Marinus): "Integrated in ODOO's ERP system." Odoo is het ERP; het OS draait erop. */}
+            <b>INTEGRATED IN ODOO’S ERP SYSTEM</b>
+            {/* 29 september 2026 (Marinus): "bij Salesforce stukje wel écht even hun logo ook." */}
+            <small>
+              NEXT STEP
+              <img className="h-hero-salesforce" src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" />
+            </small>
           </p>
           {/* 26 september 2026 (Marinus): versie A, "de brief". Het bedankje als briefje met foto en naam. */}
           <div className="h-brief">
