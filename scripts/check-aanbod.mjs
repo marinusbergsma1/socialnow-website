@@ -141,6 +141,19 @@ const llms = lees("public/llms.txt");
 eis(llms.includes("AI-gestuurde persoonlijke werkplek"), "llms.txt: positionering ontbreekt");
 eis(!llms.includes("vanaf €3.000 per maand"), "llms.txt: oude prijs €3.000 per maand staat er nog");
 eis(llms.includes("minimaal 3 maanden"), "llms.txt: maandpakketten zonder minimale looptijd");
+// Elk maandpakket uit Pricing.tsx staat met zijn prijs onder "Aanbod en prijzen" in llms.txt. 30 september 2026:
+// llms.txt bleef bij 2 van de 3 prijswijzigingen achter (e238470, 3e18ff4), en deze proef keek alleen of de oude
+// zin weg was. De vaste bedragen hierboven blijven: die leggen de prijzen zelf vast, dit houdt llms.txt erbij.
+const maand = lees("proposal/Pricing.tsx").match(/const MAAND[\s\S]*?\n\];/)?.[0] ?? "";
+const pakketten = maand.split(/\n  \{\n/).slice(1).map((blok) => ({ naam: blok.match(/\bnaam: "([^"]+)"/)?.[1], prijs: blok.match(/\bprijs: "([^"]+)"/)?.[1] }));
+eis(pakketten.length > 0 && pakketten.every(({ naam, prijs }) => naam && prijs), "Pricing.tsx: naam en prijs van de maandpakketten niet uit te lezen");
+// Opmaak telt niet: "**Content**: €4.000" en een harde spatie zijn net zo goed.
+const kop = llms.search(/^## [^\n]*(aanbod|prijzen|tarieven)/im);
+eis(kop >= 0, "llms.txt: sectie over aanbod en prijzen ontbreekt");
+const aanbod = kop >= 0 ? llms.slice(kop, (llms.indexOf("\n## ", kop + 1) + 1 || llms.length + 1) - 1) : "";
+const aanbodPlat = aanbod.replace(/[*_:]/g, "").replace(/\s+/g, " ");
+for (const { naam, prijs } of pakketten)
+  eis(aanbodPlat.includes(`${naam} ${prijs}`), `llms.txt: '${naam} ${prijs}' uit Pricing.tsx ontbreekt onder aanbod en prijzen`);
 // 30 september 2026: llms.txt beloofde AI-crawlers nog een "gratis proof of concept" en een "discovery call"; die
 // bestaan niet meer (gratis OS, demowebsite en basic rebranding; een gesprek via /contact).
 eis(!/proof of concept|discovery call/i.test(llms), "llms.txt: oud aanbod (proof of concept, discovery call)");
