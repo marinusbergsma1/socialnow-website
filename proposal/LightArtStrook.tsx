@@ -5,12 +5,15 @@ import "./bereikt.css";
 // 30 september 2026 (Marinus): "Hier wil ik een werkbalk met alles wat ik voor Light Art Collection heb gedaan. De Artist
 // Impressions." en daarna "Ik mis de before foto's met slider functie. Maak de before met image2.5 via Higgsfield."
 // Onder de reactie van Albert Deltour in Mijn waarom: een zijwaartse strook waarin elke impressie een voor-en-na-schuif is.
-// De voor-beelden in public/images/light-art zijn op 30 september gemaakt met GPT Image 2.5 op Higgsfield (de impressie
-// als referentie, alleen het kunstwerk weggehaald); Eternal Sundown had al een eigen voor-beeld.
+// Ronde 2, 30 september: "de befores meer before en de afters realistischer after en 3 is genoeg" en "zorg dat de
+// kunstwerken zichtbaar zijn". Elk paar opnieuw gemaakt met GPT Image 2.5 op Higgsfield in 16:10, de maat van de kaart, zodat
+// niets wegvalt (de staande impressies van Infinita en Butterfly Effect verloren hun kunstwerk onderaan). Na: de impressie
+// als echte nachtfoto met het kunstwerk groot in beeld. Voor: dat na-beeld overdag, zonder kunstwerk, in exact dezelfde
+// kadrering, zodat de schuif precies over dezelfde plek gaat. Meesters van 1600 px in images/light-art.
 const IMPRESSIES = [
-  { titel: "Eternal Sundown", voor: "/images/Eternal-Sundown-Afbeelding-Before-geconverteerd-van-png-1.webp", na: "/images/Eternal-Sundown-Afbeelding-After.webp", breed: 1920, hoog: 1200 },
-  { titel: "Infinita", voor: "/images/light-art/infinita-voor.webp", na: "/images/Infinita-Light-Art-Collection.webp", breed: 1292, hoog: 1588 },
-  { titel: "Butterfly Effect", voor: "/images/light-art/butterfly-effect-voor.webp", na: "/images/Butterfly-Effect-Light-Art-Collection.webp", breed: 1391, hoog: 1592 },
+  { titel: "Eternal Sundown", voor: "/images/light-art/eternal-sundown-voor.webp", na: "/images/light-art/eternal-sundown-na.webp", breed: 1600, hoog: 1000 },
+  { titel: "Infinita", voor: "/images/light-art/infinita-voor.webp", na: "/images/light-art/infinita-na.webp", breed: 1600, hoog: 1000 },
+  { titel: "Butterfly Effect", voor: "/images/light-art/butterfly-effect-voor.webp", na: "/images/light-art/butterfly-effect-na.webp", breed: 1600, hoog: 1000 },
 ];
 // 30 september 2026 (Marinus): "3 niet 5". Alleen de drie Artist Impressions. De beelden waren 1920 px en samen 2,7 MB voor
 // kaarten van 400 px; op een trage lijn bleven de vakken leeg. Nu uit images/light-art/licht in 800 en 1400 px (q74).
