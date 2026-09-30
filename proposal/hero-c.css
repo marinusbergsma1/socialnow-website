@@ -183,3 +183,20 @@
 .sn-site .h-statement.is-r1 b.g { color: #25d366; }
 .sn-site .h-statement.is-r1 a { text-decoration: none; }
 .sn-site .h-statement.is-r1 a:hover b.g { text-decoration: underline; }
+/* 30 september 2026: team-uitnodiging in het midden, glans en groen verloop, raket met vuur. */
+.sn-site .h-hero .h-team-join { justify-items: center; text-align: center; margin-block: clamp(28px, 3vw, 48px) auto; padding-top: clamp(24px, 2.4vw, 36px); }
+.sn-site .h-team-join-gezichten { justify-content: center; }
+.sn-site .h-team-join-zin { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.sn-site .h-team-join-tekst { font-size: clamp(20px, 1.9vw, 28px); font-weight: 500; line-height: 1.25; background: linear-gradient(100deg, #fff 0%, #fff 30%, #25d366 85%, #25d366 100%) 0 0 / 100% 100%, #fff; -webkit-background-clip: text; background-clip: text; color: transparent; position: relative; }
+.sn-site .h-team-join-tekst::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 40%, rgba(255,255,255,.55) 50%, transparent 60%) 0 0 / 250% 100% no-repeat; -webkit-background-clip: text; background-clip: text; color: transparent; pointer-events: none; }
+.sn-site .h-team-join-tekst::after { content: "Let\2019 s make a difference together and join SocialNow!"; animation: h-glans 4.5s ease-in-out infinite; }
+@keyframes h-glans { 0%, 55% { background-position: 150% 0; } 100% { background-position: -100% 0; } }
+.sn-site .h-hero .h-team-join:hover strong { color: inherit; }
+.sn-site .h-raket { position: relative; display: inline-block; font-size: clamp(22px, 2vw, 30px); transition: transform .45s cubic-bezier(.2,.8,.3,1.2); }
+.sn-site .h-raket-vuur { position: absolute; left: -2px; bottom: -4px; width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle, #fff6c2 0%, #ffb02e 40%, #ff5a1f 70%, transparent 72%); filter: blur(1px); opacity: 0; transform: scale(.4); transition: opacity .25s, transform .25s; }
+.sn-site .h-team-join:hover .h-raket, .sn-site .h-team-join:focus-visible .h-raket { transform: translate(6px, -10px); }
+.sn-site .h-team-join:hover .h-raket-vuur, .sn-site .h-team-join:focus-visible .h-raket-vuur { opacity: 1; transform: scale(1); animation: h-vuur .18s ease-in-out infinite alternate; }
+@keyframes h-vuur { from { transform: scale(.85) translate(0, 0); } to { transform: scale(1.15) translate(-1px, 2px); } }
+.sn-site .h-team-join.is-lancering .h-raket { transform: translate(60px, -120px); opacity: 0; transition: transform .5s cubic-bezier(.5,0,.9,.4), opacity .5s .15s; }
+.sn-site .h-team-join.is-lancering .h-raket-vuur { opacity: 1; transform: scale(1.6); }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-team-join-tekst::after { animation: none; display: none; } .sn-site .h-raket { transition: none; } }
