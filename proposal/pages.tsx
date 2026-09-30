@@ -21,7 +21,7 @@ import { MiloMotion, miloPoster } from "./motion";
 import { klein, useDichtbij, useNaBeeld } from "./licht";
 import CharacterAccent from "./CharacterAccent";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
-import TeamTrust from "./TeamTrust";
+import TeamTrust, { TeamJoin } from "./TeamTrust";
 const Verhaal = later(() => import("./Verhaal").then((m) => m.default));
 import { Bento, Tegel } from "./Bento";
 import "./bereikt.css";
@@ -310,6 +310,7 @@ export function Home() {
               <p className="h-trusted" translate="no">Trusted by</p>
               <ClientLogos kort />
             </div>
+            <TeamJoin />
           </HeroFilm>
           <HeroSprekers />
           <HeroVeilig geluid={heroGeluid} setGeluid={setHeroGeluid} />

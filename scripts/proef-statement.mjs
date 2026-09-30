@@ -20,6 +20,8 @@ const eisen = [
   ["demo met Marinus en Sid van Attesso", pages.includes('className="h-sprekers"') && pages.includes("Sid van Kalken") && pages.includes("~/attesso")],
   ["zin over human control weg", !pages.includes("</strong> With all the human control")],
   ["Join our team met link naar vacatures", pages.includes('Join our team at: <Link to="/vacatures">Jobs at SocialNow.nl</Link>')],
+  ["team met join-uitnodiging rechts", pages.includes("<TeamJoin />") && readFileSync("proposal/TeamTrust.tsx","utf8").includes("Let&rsquo;s make a difference together and join SocialNow! 🚀")],
+  ["meer ruimte in het statement", readFileSync("proposal/hero-c.css","utf8").includes("statement lucht")],
 ];
 let fout = 0;
 for (const [naam, ok] of eisen) { console.log(`${ok ? "groen" : "ROOD "} ${naam}`); if (!ok) fout++; }

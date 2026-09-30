@@ -165,3 +165,13 @@
 .sn-site .h-statement-jobs a { color: #25d366; font-size: .85em; font-weight: 700; text-decoration: none; margin-left: 4px; }
 .sn-site .h-statement-jobs a:hover { text-decoration: underline; }
 .sn-site .h-statement-punt { color: #fff; }
+/* 30 september 2026: statement lucht, meer tussenruimte boven en onder elke regel. */
+.sn-site .h-hero .h-statement { gap: clamp(16px, 1.6vw, 24px); margin-top: clamp(20px, 2.2vw, 32px); margin-bottom: clamp(12px, 1.4vw, 20px); }
+.sn-site .h-hero .h-statement > p { margin-block: 0; }
+/* Team met uitnodiging rechts naast het statement. */
+.sn-site .h-team-join { display: grid; gap: 14px; width: 100%; margin-top: clamp(22px, 2.6vw, 36px); padding-top: clamp(16px, 1.6vw, 22px); border-top: 1px solid #ffffff14; color: #fff; text-decoration: none; }
+.sn-site .h-team-join-gezichten { display: flex; flex-wrap: wrap; }
+.sn-site .h-team-join-gezichten img { width: clamp(46px, 3.6vw, 64px); height: clamp(46px, 3.6vw, 64px); border-radius: 50%; border: 2px solid #000; object-fit: cover; margin-left: -10px; background: #0b0d0d; }
+.sn-site .h-team-join-gezichten img:first-child { margin-left: 0; }
+.sn-site .h-team-join strong { font-size: clamp(20px, 1.9vw, 28px); font-weight: 700; line-height: 1.2; }
+.sn-site .h-team-join:hover strong { color: #25d366; }
