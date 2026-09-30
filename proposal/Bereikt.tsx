@@ -194,7 +194,9 @@ export default function Bereikt() {
           <span className="h-browser-beeld"><img src="/images/cases/vdz-brigade-desktop.webp" alt="" loading="lazy" /></span>
         </div>
         <p className="sn-tegel-titel">Website, huisstijl en eigen OS.</p>
-        <p className="sn-tegel-tekst">“Wat deze mannen neerzetten in zo’n korte tijd ongelofelijk.”</p>
+        {/* 30 september 2026 (Marinus): de reactie van VDZ in alle talen in het Engels. Origineel (Google-review, Nederlands):
+            "Wat deze mannen neerzetten in zo’n korte tijd ongelofelijk." */}
+        <p className="sn-tegel-tekst" translate="no">“What these guys delivered in such a short time is unbelievable.”</p>
       </Tegel>
       <Tegel kop="Il Gordo" breed={4} className="h-bereikt-ilgordo">
         <IlGordoScores />
