@@ -117,3 +117,7 @@
 .sn-site .h-hero .h-demo-knop.is-groot .h-demo-tekst small { color: #c9d6cf; font-size: clamp(13px, 1vw, 15px); font-weight: 500; line-height: 1.4; }
 .sn-site .h-demo-pijl { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border: 1px solid #ffffff66; border-radius: 50%; font-size: 20px; }
 @media (max-width: 640px) { .sn-site .h-hero .h-demo-knop.is-groot .h-demo-gezichten img { width: 56px; height: 56px; } .sn-site .h-demo-pijl { display: none; } }
+/* 30 september 2026 (Marinus): "Balk altijd door laten gaan, niet zomaar beginnen". Niet stilzetten bij hover, en bij het laden
+   al halverwege de lus zodat hij loopt alsof hij er al was. */
+.sn-site .h-hero .h-hero-merken .h-clients-lus { animation-delay: -23s; }
+.sn-site .h-hero .h-hero-merken .h-clients-strook:hover .h-clients-lus { animation-play-state: running; }

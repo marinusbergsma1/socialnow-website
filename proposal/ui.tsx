@@ -277,7 +277,11 @@ export function ClientLogos({ kort = false }: { kort?: boolean }) {
         aria-hidden={i ? true : undefined}
         width="220"
         height="100"
-        loading="lazy"
+        // 30 september 2026 (Marinus): "Balk altijd door laten gaan, niet zomaar beginnen" en "Universal stond net uit".
+        // Lazy logo's in een strook met overflow hidden laadden pas als ze zichtbaar werden (0 van 60 na 5,6 s), dus de
+        // balk begon leeg en logo's verschenen los. In de korte balk laden alle tien bestanden meteen (samen ~70 KB).
+        loading={kort ? "eager" : "lazy"}
+        decoding="async"
         className={src.startsWith("AZ-") || src.startsWith("partners/") ? "h-logo-eigen" : undefined}
         style={maat ? ({ "--logo-maat": String(maat) } as React.CSSProperties) : undefined}
       />

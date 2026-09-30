@@ -19,6 +19,7 @@ const eisen = [
   ["merken iets kleiner (basis 3.9vw, max 58px)", css.includes("height: calc(clamp(40px, 3.9vw, 58px) * var(--logo-maat, 1)); max-width: 180px;")],
   ["meer ruimte tussen Trusted by en de logo's", css.includes(".h-hero-merken > .h-trusted { margin: 0 0 clamp(16px, 1.6vw, 24px); }")],
   ["LAC, kWh Garant, DIVINE en PrimeFone in de balk, vol wit", [["LIGHT-ART-COLLECTION-LOGO.webp", "Light Art Collection"], ["KWH-GARANT-LOGO.svg", "kWh Garant"], ["DIVINE-LOGO.svg", "DIVINE"], ["PRIMEFONE-LOGO.svg", "PrimeFone"]].every(([f, n]) => content.includes(`["merken/${f}", "${n}"`) && existsSync(`public/images/merken/${f}`)) && ["KWH-GARANT-LOGO.svg", "DIVINE-LOGO.svg", "PRIMEFONE-LOGO.svg"].every((f) => !/fill[:=]\s*"?#(?!fff\b)[0-9a-fA-F]{3,6}/.test(readFileSync(`public/images/merken/${f}`, "utf8")))],
+  ["logobalk laadt meteen en loopt altijd door", readFileSync("proposal/ui.tsx", "utf8").includes('loading={kort ? "eager" : "lazy"}') && css.includes(".h-hero-merken .h-clients-lus { animation-delay: -23s; }") && css.includes(".h-hero-merken .h-clients-strook:hover .h-clients-lus { animation-play-state: running; }")],
   ["geen oude vertalingen meer", talen.every((s) => !s.includes("Milo heeft ze allemaal opgegeten."))],
 ];
 let fout = 0;
