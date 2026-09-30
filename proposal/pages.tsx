@@ -201,6 +201,40 @@ function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (
   );
 }
 
+// Eén Milo tegelijk, elke 2,8 s de volgende rol; het woord krijgt de kleur van die Milo. De vier Milo's liggen op elkaar
+// en faden over, zodat hun animaties doorlopen. Stil bij reduced motion; de knoppen kiezen zelf een rol.
+function HeroMiloWissel() {
+  const { t } = useLanguage();
+  const rollen = agents.slice(0, 4);
+  const [actief, setActief] = useState(0);
+  const [vast, setVast] = useState(false);
+  React.useEffect(() => {
+    if (vast || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const klok = window.setInterval(() => setActief((n) => (n + 1) % rollen.length), 2800);
+    return () => window.clearInterval(klok);
+  }, [vast, rollen.length]);
+  const rol = rollen[actief];
+  return (
+    <div className="h-milo-wissel" style={{ "--accent": rol.color } as React.CSSProperties}>
+      <div className="h-milo-wissel-beeld" aria-hidden="true">
+        {rollen.map((agent, i) => (
+          <span key={agent.id} className={i === actief ? "is-aan" : undefined}><MiloMotion role={agent.id} name={agent.name} /></span>
+        ))}
+      </div>
+      <div className="h-milo-wissel-tekst">
+        <p>{t("Eén OS voor je")}</p>
+        <p className="h-milo-wissel-woord" aria-live="polite"><b key={rol.id}>{t(rol.name)}</b></p>
+        <div className="h-milo-wissel-knoppen">
+          {rollen.map((agent, i) => (
+            <button key={agent.id} type="button" aria-pressed={i === actief} style={{ "--accent": agent.color } as React.CSSProperties}
+              onClick={() => { setActief(i); setVast(true); }}>{t(agent.name)}</button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // 30 september 2026 (Marinus): "wel veel", "iets zakelijker en meer rust". Rechts alleen de OS-film; de
 // veiligheidsfilms staan onder de vouw (HeroVeilig). Home houdt bij welke film geluid heeft, één tegelijk.
 type HeroGeluid = "" | "os" | "veilig";
@@ -216,11 +250,9 @@ function HeroFilm({ geluid, setGeluid, children }: { geluid: HeroGeluid; setGelu
         boven={
           // 26 september 2026 (Marinus): "Milo's klein boven How SocialNow OS works".
           // 30 september 2026 (Marinus): header 4C, de vier Milo's als pillen met hun naam.
-          <div className="h-milo-pillen" translate="no">
-            {agents.slice(0, 4).map((agent) => (
-              <span key={agent.id} className="h-milo-pil"><MiloMotion role={agent.id} name={agent.name} /><b>{agent.name}</b></span>
-            ))}
-          </div>
+          // 30 september 2026 (Marinus): "nog steeds niet sterk", liever de wisselende Milo met website, CRM, content en
+          // advertenties. Eén grote Milo die met zijn woord meewisselt.
+          <HeroMiloWissel />
         }
         geluid={geluid === "os"}
         zetGeluid={(aan) => setGeluid(aan ? "os" : "")}
