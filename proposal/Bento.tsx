@@ -119,6 +119,18 @@ export function BentoFilm({ src, poster, label, geluid = true }: { src: string; 
   const ref = React.useRef<HTMLVideoElement>(null);
   const [aan, setAan] = React.useState(false);
   const [laden, setLaden] = React.useState(false);
+  // 30 september 2026 (Marinus): "WIL ECHT INSTANT LOADING". Ook de poster laadt pas als de film dichtbij komt (900 px).
+  const [posterAan, setPosterAan] = React.useState(false);
+  React.useEffect(() => {
+    const film = ref.current;
+    if (!film) return;
+    if (typeof IntersectionObserver === "undefined") { setPosterAan(true); return; }
+    const kijker = new IntersectionObserver(([ingang]) => {
+      if (ingang.isIntersecting) { setPosterAan(true); kijker.disconnect(); }
+    }, { rootMargin: "900px 0px" });
+    kijker.observe(film);
+    return () => kijker.disconnect();
+  }, []);
   React.useEffect(() => {
     const film = ref.current;
     if (!film) return;
@@ -139,7 +151,7 @@ export function BentoFilm({ src, poster, label, geluid = true }: { src: string; 
   };
   return (
     <>
-      <video ref={ref} className="sn-tegel-film" src={laden ? src : undefined} poster={poster} autoPlay muted loop playsInline preload="none" aria-label={label} />
+      <video ref={ref} className="sn-tegel-film" src={laden ? src : undefined} poster={posterAan ? poster : undefined} autoPlay muted loop playsInline preload="none" aria-label={label} />
       {geluid && (
         <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={aan}>
           {aan ? "Geluid uit" : "Geluid aan"}

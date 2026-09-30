@@ -5,6 +5,7 @@ import { useLanguage, languagePrefix, type Language } from "./i18n/context";
 import { LEGAL_VERSION } from "../components/legal";
 import { aanvraagWhatsApp } from "./aanvragen";
 import { people } from "./content";
+import { klein } from "./licht";
 
 // 16 september 2026 (Marinus): de landingspopup. Eén keer bij binnenkomst: kom je voor de demo of
 // wil je de website bekijken, kies je land, en met die keuze ga je akkoord met de voorwaarden en het
@@ -118,7 +119,7 @@ const TEAM = ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen", "Elian Coel
 function Team({ language }: { language: Language }) {
   const t = PERSOONLIJK[language] || PERSOONLIJK.en;
   const rij = TEAM.map(p => (
-    <li key={p.name}><img className={p.name === "Sergio Jovovic" ? "is-sergio" : undefined} src={`/images/${p.image}`} alt="" width="38" height="38" loading="lazy" /><span><strong>{p.name}</strong><small>{p.role}</small></span></li>
+    <li key={p.name}><img className={p.name === "Sergio Jovovic" ? "is-sergio" : undefined} {...klein(p.image, 38)} alt="" width="38" height="38" loading="lazy" /><span><strong>{p.name}</strong><small>{p.role}</small></span></li>
   ));
   return (
     <div className="sn-consent-team">
@@ -216,7 +217,7 @@ export default function ConsentPopup() {
         <button type="button" className="sn-consent-sluiten" onClick={akkoord} aria-label={language === "nl" ? "Sluiten" : "Close"}>×</button>
         <div className="sn-consent-strepen" aria-hidden="true"><i className="is-aan" /><i className={stap === "gegevens" ? "is-aan" : undefined} /></div>
         <section className="sn-consent-een">
-          <img className="sn-consent-logo" src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="1556" height="240" />
+          <img className="sn-consent-logo" src="/images/klein/SocialNow-Logo-2026-400.webp" srcSet="/images/klein/SocialNow-Logo-2026-400.webp 400w, /images/klein/SocialNow-Logo-2026-600.webp 600w" sizes="240px" alt="SocialNow" width="1556" height="240" />
           <h2 id="sn-consent-kop" className="sn-consent-kop">{welkomVoor}{welkomNa ? <><br /><span>{welkomNa}</span></> : null}</h2>
           <p className="sn-consent-intro">{s.intro}</p>
           <p className="sn-consent-stap"><i>1</i>{s.stap1}</p>
@@ -233,7 +234,7 @@ export default function ConsentPopup() {
             <div className="sn-consent-actie sn-consent-actie-film">
               <video
                 src="/video/os/os-booth-en.mp4"
-                poster="/video/os/os-booth-en.jpg"
+                poster="/video/os/os-booth-en-poster.webp"
                 autoPlay={!minderBeweging()}
                 muted
                 loop

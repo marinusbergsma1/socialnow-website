@@ -6,6 +6,7 @@ import { people } from "./content";
 import { TextLink } from "./ui";
 import { Bento, BentoFilm, Tegel } from "./Bento";
 import { useLanguage } from "./i18n/context";
+import { klein } from "./licht";
 
 // 28 september 2026 (Marinus): "wat belangrijk was bij de beurs van Odoo is dat ik merkte dat het persoonlijke
 // verhaal en waarom het OS gratis kan zijn". Later die nacht: "waar het om gaat is mijn verhaal hier gelijk verteld
@@ -16,7 +17,7 @@ import { useLanguage } from "./i18n/context";
 // De verhaalfilm uit HyperFrames. Zolang die er nog niet is, staat het waarom groot op zijn plek.
 const VERHAALFILM: { en: string; nl: string; poster: { en: string; nl: string } } | null = {
   en: "/video/verhaal/verhaal-en.mp4", nl: "/video/verhaal/verhaal-nl.mp4",
-  poster: { en: "/video/verhaal/verhaal-en.jpg", nl: "/video/verhaal/verhaal-nl.jpg" },
+  poster: { en: "/video/verhaal/verhaal-en-poster.webp", nl: "/video/verhaal/verhaal-nl-poster.webp" },
 };
 
 export function OdooLogo({ className }: { className?: string }) {
@@ -120,7 +121,7 @@ function Waarom({ groot }: { groot?: boolean }) {
         <p>Ik wil ondernemers helemaal ontzorgen met de nieuwste technologie, zonder dat het persoonlijke verdwijnt.</p>
       </blockquote>
       <figcaption>
-        <img src="/images/marinus-profiel-blauw.webp" alt="" width="56" height="56" loading="lazy" />
+        <img {...klein("marinus-profiel-blauw.webp", 56)} alt="" width="56" height="56" loading="lazy" />
         <span><strong>Marinus Bergsma</strong><span>Founder & CEO</span></span>
       </figcaption>
     </figure>

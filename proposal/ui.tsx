@@ -12,7 +12,7 @@ import {
 import { agents, faqs, logos, people } from "./content";
 import TeamTrust from "./TeamTrust";
 import OsEntry, { CLAIM_URL, GRATIS_OS_URL } from "./os-entry";
-import { MiloMotion, miloPoster } from "./motion";
+import { MiloMotion, miloPoster, type MiloMaat } from "./motion";
 import type { Project } from "../types";
 import { useLanguage } from "./i18n/context";
 
@@ -140,14 +140,14 @@ export function VideoBlock({
     </details>
   );
 }
-export function MiloPortrait({ role, name }: { role: string; name: string }) {
+export function MiloPortrait({ role, name, maat }: { role: string; name: string; maat?: MiloMaat }) {
   return (
     <Link
       to={`/het-os#${role}`}
       className="h-agent-visual"
       aria-label={`Ontdek ${name}`}
     >
-      <MiloMotion role={role} name={name} />
+      <MiloMotion role={role} name={name} maat={maat} />
     </Link>
   );
 }
@@ -316,7 +316,7 @@ export function Closing() {
   return <section className="h-final-close" aria-labelledby="final-close-title">
     <img className="h-final-logo" src="/images/SocialNow-OS-Komen-Consultancy.webp" alt="SocialNow OS in samenwerking met Komen Consultancy" width="640" height="180" loading="lazy" />
     <div className="h-final-characters">
-      {agents.map(agent=><MiloMotion key={agent.id} role={agent.id} name={agent.name} />)}
+      {agents.map(agent=><MiloMotion key={agent.id} role={agent.id} name={agent.name} maat={256} />)}
     </div>
     {/* 28 september 2026 (Marinus, het verhaal): alle data in één OS, gratis te proberen, en het persoonlijke contact blijft. */}
     <h2 id="final-close-title">Alle data van je bedrijf.<br /><span>Eén OS.</span></h2>

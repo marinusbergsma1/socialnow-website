@@ -3,6 +3,7 @@ import { TextLink } from "./ui";
 import { people } from "./content";
 import { Bento, Tegel } from "./Bento";
 import "./mens-en-ai.css";
+import { klein } from "./licht";
 
 // 28 september 2026 (Marinus): AI wordt vaak verkeerd begrepen en mensen zijn er bang voor, terwijl wij vinden
 // dat elke vorm van intelligentie goed is. Het verschil: een verbindende laag van mensen die altijd voor je
@@ -51,7 +52,7 @@ export default function MensEnAI() {
               {laag.soort === "is-mens" && (
                 <span className="h-mens-gezichten" aria-hidden="true">
                   {gezichten.map((p) => (
-                    <img key={p.name} src={`/images/${p.image}`} alt="" width="36" height="36" loading="lazy" />
+                    <img key={p.name} {...klein(p.image, 36)} alt="" width="36" height="36" loading="lazy" />
                   ))}
                 </span>
               )}

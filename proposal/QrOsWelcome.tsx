@@ -52,7 +52,7 @@ export default function QrOsWelcome({ ready }: { ready: boolean }) {
       <div className="qr-os-card">
         <button className="qr-os-close" type="button" onClick={close} aria-label={copy.close}><X size={18} /></button>
         {step === "welcome" ? <>
-          <img className="qr-os-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="136" />
+          <img className="qr-os-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="136" loading="lazy" />
           <h1 id="qr-os-title">{copy.welcome}</h1>
           <p className="qr-os-lead">{copy.explore}</p>
           <div className="qr-os-actions">
@@ -60,7 +60,7 @@ export default function QrOsWelcome({ ready }: { ready: boolean }) {
             <a className="qr-os-secondary" href="/">{copy.no}</a>
           </div>
         </> : <>
-          <img className="qr-os-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="136" />
+          <img className="qr-os-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="136" loading="lazy" />
           <p className="qr-os-eyebrow">{copy.eyebrow}</p>
           <h1 id="qr-os-title">{copy.nice}</h1>
           <p className="qr-os-lead">{copy.lead}</p>

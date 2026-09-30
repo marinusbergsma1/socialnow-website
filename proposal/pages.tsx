@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { HeroTitle } from "./styles";
 import { MiloMotion, miloPoster } from "./motion";
+import { klein, useDichtbij, useNaBeeld } from "./licht";
 import CharacterAccent from "./CharacterAccent";
 import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
@@ -108,6 +109,9 @@ function Founder() {
 function Film({ src, poster, label, titel, klasse, geluid, zetGeluid, boven }: { src: string; poster: string; label: string; titel: string; klasse: string; geluid: boolean; zetGeluid: (aan: boolean) => void; boven?: React.ReactNode }) {
   const ref = React.useRef<HTMLVideoElement>(null);
   React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid]);
+  // 30 september 2026 (Marinus): "WIL ECHT INSTANT LOADING". De film laadt en start pas als de poster (het eerste beeld) staat.
+  const klaar = useNaBeeld(poster);
+  React.useEffect(() => { if (klaar && ref.current) void ref.current.play().catch(() => {}); }, [klaar]);
   const wissel = () => {
     const film = ref.current;
     if (film && !geluid) { film.currentTime = 0; void film.play().catch(() => {}); }
@@ -119,7 +123,7 @@ function Film({ src, poster, label, titel, klasse, geluid, zetGeluid, boven }: {
       {boven}
       <p className="h-film-titel">{titel}</p>
       <div className="h-film-vak">
-      <video ref={ref} src={src} poster={poster} autoPlay muted loop playsInline preload="auto" aria-label={label} />
+      <video ref={ref} src={src} poster={poster} muted loop playsInline preload="none" aria-label={label} />
       <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={geluid}>
         {geluid ? "Geluid uit" : "Geluid aan"}
       </button>
@@ -161,7 +165,11 @@ function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (
   const ref = React.useRef<HTMLVideoElement>(null);
   const film = VEILIGHEIDSFILMS[nummer];
   React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid, nummer, taal]);
-  // Een nieuw nummer geeft een nieuw videovak (key), dat met autoPlay zelf start.
+  // 30 september 2026 (Marinus): "WIL ECHT INSTANT LOADING". Onder de vouw: poster en film laden pas als het blok dichtbij komt
+  // (preload="none" zonder autoPlay haalt niets op tot play()).
+  const { ref: vak, dichtbij } = useDichtbij<HTMLDivElement>();
+  React.useEffect(() => { if (dichtbij && ref.current) void ref.current.play().catch(() => {}); }, [dichtbij, nummer, taal]);
+  // Een nieuw nummer geeft een nieuw videovak (key), dat het effect hierboven start.
   const kies = (index: number) => setNummer(index);
   const wissel = () => {
     const video = ref.current;
@@ -171,16 +179,15 @@ function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (
   return (
     <div className="h-film-veilig">
       <p className="h-film-titel">Veiligheid en databescherming</p>
-      <div className="h-film-vak">
+      <div className="h-film-vak" ref={vak}>
         <video
           ref={ref}
           key={`${film.slug}-${taal}`}
           src={veiligheidFilm(film.slug, taal)}
-          poster={veiligheidPoster(film.slug, taal)}
-          autoPlay
+          poster={dichtbij ? veiligheidPoster(film.slug, taal) : undefined}
           muted
           playsInline
-          preload="metadata"
+          preload="none"
           onEnded={() => kies((nummer + 1) % VEILIGHEIDSFILMS.length)}
           aria-label={film.kop}
         />
@@ -205,13 +212,16 @@ function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (
 // 30 september 2026 (Marinus): "wel veel", "iets zakelijker en meer rust". Rechts alleen de OS-film; de
 // veiligheidsfilms staan onder de vouw (HeroVeilig). Home houdt bij welke film geluid heeft, één tegelijk.
 type HeroGeluid = "" | "os" | "veilig";
+// 30 september 2026: de poster is het eerste beeld van de hero; 1280 px WebP van 27 KB in plaats van een JPEG van 125 KB.
+const HERO_POSTER = "/video/os/os-booth-en-poster.webp";
 function HeroFilm({ geluid, setGeluid, children }: { geluid: HeroGeluid; setGeluid: (g: HeroGeluid) => void; children?: React.ReactNode }) {
+  const klaar = useNaBeeld(HERO_POSTER);
   return (
     <div className="h-hero-film h-hero-films is-os-veilig">
       <Film
         klasse="h-film-os"
         src="/video/os/os-booth-en.mp4"
-        poster="/video/os/os-booth-en.jpg"
+        poster={HERO_POSTER}
         label="SocialNow OS explainer"
         titel="Zo werkt SocialNow OS"
         boven={
@@ -219,7 +229,7 @@ function HeroFilm({ geluid, setGeluid, children }: { geluid: HeroGeluid; setGelu
           // 30 september 2026 (Marinus): header 4C, de vier Milo's als pillen met hun naam.
           <div className="h-milo-pillen" translate="no">
             {agents.slice(0, 4).map((agent) => (
-              <span key={agent.id} className="h-milo-pil"><MiloMotion role={agent.id} name={agent.name} /><b>{agent.name}</b></span>
+              <span key={agent.id} className="h-milo-pil"><MiloMotion role={agent.id} name={agent.name} maat={128} wacht={!klaar} /><b>{agent.name}</b></span>
             ))}
           </div>
         }
@@ -234,6 +244,8 @@ function HeroFilm({ geluid, setGeluid, children }: { geluid: HeroGeluid; setGelu
 // 30 september 2026 (Marinus): "DEZE MOET JUIST LIGGEND ZIJN, IK EEN BLOK EN SID EEN BLOK ALS SPREKERS PLUS DEZE FOTO VAN
 // HEM, met de achtergrondkleur van Attesso" en "Deze nog groot maken en Attesso een belangrijk onderdeel, dat we dit echt samen
 // doen, lezingen geven". Liggend blok over de hele breedte: links de uitnodiging, rechts twee sprekers. Sid in Attesso-roze.
+// Het vierkante portret vult een staande kaart: de getoonde maat is de hoogte van de kaart (ongeveer 30vw op de pc).
+const SPREKER_MAAT = "(max-width: 900px) 55vw, 30vw";
 function HeroSprekers() {
   return (
     <section className="h-sprekers" aria-labelledby="h-sprekers-kop" translate="no">
@@ -247,11 +259,11 @@ function HeroSprekers() {
         </div>
       </div>
       <figure className="h-spreker is-socialnow">
-        <img src="/images/marinus-profiel-blauw.webp" alt="Marinus Bergsma" width="520" height="520" loading="lazy" decoding="async" />
+        <img {...klein("marinus-profiel-blauw.webp", SPREKER_MAAT, [480, 800])} alt="Marinus Bergsma" width="520" height="520" loading="lazy" decoding="async" />
         <figcaption><b>Marinus Bergsma</b><span>Founder, SocialNow</span></figcaption>
       </figure>
       <figure className="h-spreker is-attesso">
-        <img src="/images/sid-attesso.webp" alt="Sid van Kalken" width="520" height="520" loading="lazy" decoding="async" />
+        <img {...klein("sid-attesso.webp", SPREKER_MAAT, [480, 800])} alt="Sid van Kalken" width="520" height="520" loading="lazy" decoding="async" />
         <figcaption><b>Sid van Kalken</b><span><code>~/attesso</code></span></figcaption>
       </figure>
     </section>
@@ -365,7 +377,7 @@ export function Home() {
       <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} swipe>
         {agents.map((agent) => (
           <Tegel key={agent.id} kop={agent.title} breed={3} className="h-os-agent">
-            <MiloPortrait role={agent.id} name={agent.name} />
+            <MiloPortrait role={agent.id} name={agent.name} maat={256} />
             <strong className="h-os-belofte" style={{ color: agent.color }}>{agent.promise}</strong>
             <p className="sn-tegel-tekst">{agent.text}</p>
             <div className="sn-tegel-onder"><TextLink to={`/het-os#${agent.id}`}>Ontdek dit onderdeel</TextLink></div>

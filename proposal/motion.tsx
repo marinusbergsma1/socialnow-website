@@ -78,6 +78,7 @@ export function AmbientVideo({
   className = "",
   suspended = false,
   hoverSound = false,
+  wacht = false,
 }: {
   src?: string;
   sources?: { src: string; type: string }[];
@@ -86,6 +87,8 @@ export function AmbientVideo({
   className?: string;
   suspended?: boolean;
   hoverSound?: boolean;
+  // 30 september 2026: zolang wacht aan staat, laadt de film nog niet (in de hero: tot de poster van de OS-film staat).
+  wacht?: boolean;
 }) {
   const { enabled } = useMotion();
   const { ref, visible } = useInView<HTMLSpanElement>();
@@ -94,13 +97,13 @@ export function AmbientVideo({
   const [loaded, setLoaded] = useState(false);
   const [playing, setPlaying] = useState(false);
   useEffect(() => {
-    if (visible) setLoaded(true);
-  }, [visible]);
+    if (visible && !wacht) setLoaded(true);
+  }, [visible, wacht]);
   useEffect(() => {
     const element = video.current;
     if (!element) return;
     const sync = () => {
-      shouldPlay.current = enabled && visible && !suspended && !document.hidden;
+      shouldPlay.current = enabled && visible && !suspended && !wacht && !document.hidden;
       if (shouldPlay.current) {
         void element
           .play()
@@ -117,7 +120,7 @@ export function AmbientVideo({
       element.pause();
       document.removeEventListener("visibilitychange", sync);
     };
-  }, [enabled, visible, loaded, suspended]);
+  }, [enabled, visible, loaded, suspended, wacht]);
   return (
     <span
       ref={ref}
@@ -164,21 +167,25 @@ export function AmbientVideo({
     </span>
   );
 }
-export function miloPoster(role: string) {
-  return `/proposal/milo/${role === "ads" ? "ads-magenta" : role}.webp`;
+// 30 september 2026 (Marinus): "WIL ECHT INSTANT LOADING". Milo in de maat waarin hij getoond wordt: 128 px voor de pillen
+// van 38 px, 256 px voor de tegels van 90 tot 140 px, zonder maat het origineel van 512 px (scripts/media-licht.py).
+export type MiloMaat = 128 | 256;
+export function miloPoster(role: string, maat?: MiloMaat) {
+  return `/proposal/milo/${role === "ads" ? "ads-magenta" : role}${maat ? `-${maat}` : ""}.webp`;
 }
-export function miloVideoSources(role: string, safari: boolean) {
-  const base = `/proposal/milo/${role === "ads" ? "ads-magenta" : role}-alpha`;
+export function miloVideoSources(role: string, safari: boolean, maat?: MiloMaat) {
+  const base = `/proposal/milo/${role === "ads" ? "ads-magenta" : role}-alpha${maat ? `-${maat}` : ""}`;
   return safari ? [{src: `${base}.mov`, type: 'video/mp4; codecs="hvc1"'}] : [{src: `${base}.webm`, type: "video/webm"}];
 }
-export function MiloMotion({ role, name }: { role: string; name: string }) {
+export function MiloMotion({ role, name, maat, wacht = false }: { role: string; name: string; maat?: MiloMaat; wacht?: boolean }) {
   const [safari, setSafari] = useState<boolean | null>(null);
   useEffect(() => { setSafari(/^((?!chrome|crios|fxios|edg|android).)*safari/i.test(navigator.userAgent)); }, []);
   return (
     <AmbientVideo
-      poster={miloPoster(role)}
+      poster={miloPoster(role, maat)}
       key={safari === null ? "poster" : String(safari)}
-      sources={safari === null ? [] : miloVideoSources(role, safari)}
+      sources={safari === null ? [] : miloVideoSources(role, safari, maat)}
+      wacht={wacht}
 
       label={name}
       className="h-milo-animated"

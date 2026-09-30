@@ -209,7 +209,7 @@ export default function Bereikt() {
             01-KLANTEN/vastiq/04_CONTENT/VIDEO/vastiq-zoom-v2*. */}
         {/* 30 september 2026 (Marinus): "Verkeerde afbeelding", "Ik wilde die uitzoom video". Dezelfde film omgekeerd: van het
             grachtenpand met zijn waarde naar de wolken boven Amsterdam. 1280 px, 2,0 MB (was 7,5 MB). */}
-        <BentoFilm src="/video/vastiq/vastiq-uitzoom.mp4" poster="/video/vastiq/vastiq-uitzoom.jpg" label="VASTIQ: van één grachtenpand met zijn waarde uitzoomen naar heel Amsterdam" geluid={false} />
+        <BentoFilm src="/video/vastiq/vastiq-uitzoom.mp4" poster="/video/vastiq/vastiq-uitzoom-poster.webp" label="VASTIQ: van één grachtenpand met zijn waarde uitzoomen naar heel Amsterdam" geluid={false} />
         <span className="h-foto-onderschrift">
           <b>Platform en merk uit één hand.</b>
           <span>Samen met Komen Consultancy gebouwd.</span>
