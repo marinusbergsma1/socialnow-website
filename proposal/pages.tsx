@@ -207,6 +207,13 @@ function HeroSprekers() {
         <p className="h-sprekers-label">SocialNow <span aria-hidden="true">&times;</span> <code>~/attesso</code></p>
         <h2 id="h-sprekers-kop">Book a free live demo</h2>
         <p>SocialNow and Attesso build this together. The OS runs your business, Attesso makes every payment safe and approved. Together we give live demos, talks and workshops, anywhere in the world.</p>
+        {/* 30 september 2026 (Marinus): "WE ARE BORN TO INSPIRE! ... BELIEVE IN HUMAN CREATIVITY POWERED BY AI TECHNOLOGY!", met genoeg enters. */}
+        <div className="h-sprekers-manifest">
+          <p className="is-kop">We are born to inspire!</p>
+          <p>Not by the limitations of <b>big tech</b>,<br />but by the possibilities.</p>
+          <p>Currently open to talk with everybody about telling our story,</p>
+          <p>because we believe in <strong>human connection powered by AI technology!</strong></p>
+        </div>
         <div className="h-sprekers-knoppen">
           <a className="h-sprekers-knop" href={mailLink("Free end to end demo with Marinus and Sid")}>Book a free live demo <span aria-hidden="true">&#8599;</span></a>
           <a className="h-sprekers-link" href={mailLink("Talk or workshop with Marinus and Sid")}>Book us for a talk</a>

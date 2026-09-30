@@ -133,6 +133,11 @@
 .sn-site .h-sprekers-label code, .sn-site .h-spreker code { font-family: ui-monospace, Menlo, monospace; letter-spacing: 0; text-transform: none; color: #fff; font-size: 14px; }
 .sn-site .h-hero .h-sprekers h2 { margin: 0; color: #fff; font-size: clamp(30px, 3.2vw, 48px); line-height: 1.05; letter-spacing: -.02em; }
 .sn-site .h-sprekers-tekst > p:not(.h-sprekers-label) { margin: 0; max-width: 46ch; color: #c9d6cf; font-size: clamp(15px, 1.15vw, 18px); line-height: 1.5; }
+.sn-site .h-sprekers-manifest { display: flex; flex-direction: column; gap: 14px; margin: 8px 0 4px; padding-left: 16px; border-left: 2px solid #25d366; max-width: 46ch; }
+.sn-site .h-sprekers-manifest p { margin: 0; color: #c9d6cf; font-size: clamp(15px, 1.1vw, 17px); line-height: 1.5; }
+.sn-site .h-sprekers-manifest p.is-kop { color: #fff; font-size: clamp(20px, 1.7vw, 26px); font-weight: 800; letter-spacing: .02em; text-transform: uppercase; line-height: 1.15; }
+.sn-site .h-sprekers-manifest b { color: #fff; }
+.sn-site .h-sprekers-manifest strong { color: #25d366; font-weight: 800; }
 .sn-site .h-sprekers-knoppen { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 6px; }
 .sn-site .h-sprekers-knop { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: #1a8f45; color: #fff; font-weight: 800; font-size: 17px; text-decoration: none; box-shadow: 0 0 28px #25d36640; }
 .sn-site .h-sprekers-knop:hover { background: #1ba452; color: #fff; }
