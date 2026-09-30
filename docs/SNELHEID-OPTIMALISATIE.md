@@ -9,6 +9,24 @@ direct nodig is**, en **niets dat het schilderen blokkeert**.
 
 ---
 
+## 0. Stand socialnow.nl sinds 30 september 2026 (proposal-app)
+
+De live site is de `proposal/`-app. Het eerste script draagt alleen de header en de hero (budget 120 KB gzip,
+proef `scripts/proef-bundel.mjs`). Regels voor wie eraan werkt:
+
+| Wat | Hoe |
+|---|---|
+| Nieuwe sectie onder de vouw op de homepage | `const Sectie = later(() => import("./Sectie").then((m) => m.default));` in `proposal/pages.tsx`, binnen `<OnderDeVouw>` |
+| Nieuwe pagina | eigen bestand, in `proposal/WebsiteProposal.tsx` via `later(...)`; pagina's uit `paginas.tsx` laden samen |
+| Opmaak van een later geladen onderdeel | de css-import blijft statisch, op dezelfde plek in de volgorde (zie de imports bovenin `pages.tsx`); de css is één bestand, er verspringt niets |
+| Teksten | gewoon in `proposal/i18n/*.json`; `scripts/woordenboek-split.mjs` zet zinnen van het eerste script in de kern en de rest per taal in een later bestand |
+| Renderen in Node (controles, prerender) | eerst `await (await server.ssrLoadModule("/proposal/later.tsx")).allesVooraf()`, dan `renderToStaticMarkup`; `OnderDeVouw` rendert in Node meteen |
+| Lettertypes | TT Norms als woff2 zonder Cyrillisch, glyphs, kerning en morx gelijk aan de OTF (`python3 scripts/lettertypes-subset.py`); Bold laadt vooraf via `index.html` |
+| Taal bij eerste bezoek | `index.html` start de landvraag al tijdens het laden van het script (`window.__snLand`, `proposal/i18n/detect.ts`) |
+| Na een publicatie | een ontbrekend later bestand herlaadt de pagina één keer; lukt het dan nog niet, dan blijft alleen dat blok leeg |
+
+---
+
 ## 1. JavaScript-bundel klein & gesplitst houden
 
 ### 1.1 Code-splitting per route en per zware library

@@ -44,11 +44,14 @@ export async function detectVisitorLanguage(): Promise<void> {
     let country: string | null = null;
     try { country = sessionStorage.getItem('sn-detected-country'); } catch {}
     if (!country) {
-      const controller = new AbortController();
+      // 30 september 2026: index.html start deze vraag al tijdens het laden van het script (window.__snLand).
+      // De grens blijft 1,2 seconde vanaf hier; alleen de wachttijd op het netwerk valt weg.
+      const vroeg = (window as Window & { __snLand?: { c: AbortController; p: Promise<string> } }).__snLand;
+      const controller = vroeg?.c ?? new AbortController();
       const timer = window.setTimeout(() => controller.abort(), 1200);
       try {
-        const response = await fetch(TRACE_URL, { signal: controller.signal, credentials: 'omit', referrerPolicy: 'no-referrer' });
-        if (response.ok) country = (await response.text()).match(/^loc=([A-Z]{2})$/m)?.[1] || null;
+        const tekst = vroeg ? await vroeg.p : await fetch(TRACE_URL, { signal: controller.signal, credentials: 'omit', referrerPolicy: 'no-referrer' }).then((response) => (response.ok ? response.text() : ''));
+        country = tekst.match(/^loc=([A-Z]{2})$/m)?.[1] || null;
       } catch { /* Browser language is the fallback when country lookup is unavailable. */ }
       finally { window.clearTimeout(timer); }
     }

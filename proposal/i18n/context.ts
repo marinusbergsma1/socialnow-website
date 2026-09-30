@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useEffect } from "react";
+// 30 september 2026: in de productiebuild bevat english alleen de kern (de zinnen van het eerste script) en starten
+// german en french leeg; de rest komt per taal via laadWoordenboek(). Zie scripts/woordenboek-split.mjs.
 import english from "./en.json";
 import german from "./de.json";
 import french from "./fr.json";
@@ -24,6 +26,30 @@ const dictionaries: Record<Exclude<Language, "nl">, Record<string, string>> = {
   de: german as Record<string, string>,
   fr: french as Record<string, string>,
 };
+// De Duitse en Franse kern laden vóór het eerste beeld (index.tsx), de rest van een woordenboek samen met de eerste
+// latere sectie of pagina (proposal/later.tsx). In dev en in Node-controles geven ./de.json?kern en ./de.json?rest
+// het hele woordenboek; samenvoegen verandert dan niets.
+type Deel = Partial<Record<Exclude<Language, "nl">, () => Promise<{ default: Record<string, string> }>>>;
+const delen: Record<"kern" | "rest", Deel> = {
+  kern: { de: () => import("./de.json?kern"), fr: () => import("./fr.json?kern") },
+  rest: { en: () => import("./en.json?rest"), de: () => import("./de.json?rest"), fr: () => import("./fr.json?rest") },
+};
+const geladen = new Map<string, Promise<void>>();
+const binnen = new Set<string>();
+let paginaTaal: Language = "en";
+export function laadWoordenboek(language: Language = paginaTaal, deel: "kern" | "rest" = "rest"): Promise<void> {
+  const laad = language === "nl" ? undefined : delen[deel][language];
+  if (!laad) return Promise.resolve();
+  let klaar = geladen.get(`${deel}-${language}`);
+  if (!klaar) {
+    klaar = laad().then((woorden) => { Object.assign(dictionaries[language as Exclude<Language, "nl">], woorden.default); binnen.add(`${deel}-${language}`); });
+    geladen.set(`${deel}-${language}`, klaar);
+  }
+  return klaar;
+}
+export function woordenboekBinnen(language: Language, deel: "kern" | "rest" = "rest"): boolean {
+  return language === "nl" || !delen[deel][language] || binnen.has(`${deel}-${language}`);
+}
 export function translate(text: string, language: Language): string {
   if (language === "nl" || !text.trim()) return text;
   const key = text.replace(/\s+/g, " ").trim();
@@ -37,6 +63,7 @@ export function translate(text: string, language: Language): string {
 }
 export function useLanguage() { const language=useContext(LanguageContext); return {language, t:(text:string)=>translate(text,language)}; }
 export function LanguageProvider({children, language="en"}:{children:React.ReactNode;language?:Language}) {
+ paginaTaal=language;
  useEffect(()=>{ document.documentElement.lang=language; },[language]);
  return React.createElement(LanguageContext.Provider,{value:language},children);
 }

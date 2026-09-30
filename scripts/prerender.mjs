@@ -42,7 +42,9 @@ await build({
   },
 });
 
-const { render, prepare, LANGUAGES } = await import(pathToFileURL(path.join(uit, "prerender-entry.mjs")).href);
+const { render, prepare, LANGUAGES, allesVooraf } = await import(pathToFileURL(path.join(uit, "prerender-entry.mjs")).href);
+// Secties onder de vouw en de andere pagina's laden in de browser later (proposal/later.tsx); hier eerst allemaal.
+await allesVooraf();
 // De taal van een pad volgt uit dezelfde lijst als de app (proposal/i18n/context.ts), zodat er bij een
 // nieuwe taal niets aan deze stap hoeft te veranderen.
 const TAALPAD = new RegExp(`^/(${LANGUAGES.filter((taal) => taal !== "en").join("|")})(?=/|$)`);

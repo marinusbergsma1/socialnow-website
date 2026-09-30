@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./proposal/WebsiteProposal";
-import { isLanguage, type Language } from "./proposal/i18n/context";
+import { isLanguage, laadWoordenboek, type Language } from "./proposal/i18n/context";
 import "./proposal/website.css";
 import "./proposal/experience.css";
 import { detectVisitorLanguage, needsCountryLookup } from "./proposal/i18n/detect";
@@ -31,20 +31,25 @@ function site(language: Language) {
 // hydrateert React die HTML en is er niets opnieuw te tekenen. Een bezoeker op een pad zonder taal en
 // zonder bewaarde keuze ziet meteen de Engelse pagina; zegt de landopzoeking daarna een andere taal,
 // dan wisselt de pagina alsnog, zoals vroeger. Zonder prerender (404) bouwt React de pagina zelf op.
+// 30 september 2026: een Duitse of Franse pagina haalt eerst de kern van haar woordenboek op, vóór het tekenen en vóór het
+// hydrateren (zie scripts/woordenboek-split.mjs); Engels en Nederlands gaan meteen door.
 async function start() {
   const prerendered = rootElement!.dataset.prerender;
   const lookup = needsCountryLookup();
   if (!lookup) await detectVisitorLanguage();
   const language = pageLanguage();
   if (prerendered === language) {
+    await laadWoordenboek(language, "kern");
     const root = ReactDOM.hydrateRoot(rootElement!, site(language));
     if (!lookup) return;
     await detectVisitorLanguage();
     const detected = pageLanguage();
+    await laadWoordenboek(detected, "kern");
     if (detected !== language) root.render(site(detected));
     return;
   }
   await detectVisitorLanguage();
+  await laadWoordenboek(pageLanguage(), "kern");
   ReactDOM.createRoot(rootElement!).render(site(pageLanguage()));
 }
 void start();
