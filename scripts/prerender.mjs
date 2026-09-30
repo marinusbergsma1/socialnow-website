@@ -87,7 +87,7 @@ const paden = [...new Set([...sitemap.matchAll(/<loc>https:\/\/socialnow\.nl([^<
 let aantal = 0;
 const fouten = [];
 for (const pad of paden) {
-  const taal = pad.match(/^\/(nl|de|fr)(?=\/|$)/)?.[1] || "en";
+  const taal = pad.match(/^\/(nl|de|fr|es|it|pt|pl|sv|da|tr|ja)(?=\/|$)/)?.[1] || "en";
   const bestand = `dist${pad === "/" ? "" : pad.replace(/\/$/, "")}/index.html`;
   const html = readFileSync(bestand, "utf8");
   if (!html.includes(LEEG)) { fouten.push(`${bestand}: geen lege root`); continue; }

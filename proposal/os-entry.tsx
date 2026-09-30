@@ -2,7 +2,7 @@ import React, { useEffect, useId, useState } from "react";
 import { ArrowRight, ArrowUpRight, Download, Star } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 
-const taalPad = typeof window === "undefined" ? "" : (window.location.pathname.match(/^\/(nl|de|fr)(?=\/|$)/)?.[0] || "");
+const taalPad = typeof window === "undefined" ? "" : (window.location.pathname.match(/^\/(nl|de|fr|es|it|pt|pl|sv|da|tr|ja)(?=\/|$)/)?.[0] || "");
 export const CLAIM_URL = `${taalPad}/gratis-os-demo/`;
 // 28 september 2026 (Marinus, het verhaal): "Gebruik je Odoo? Probeer het OS gratis." gaat rechtstreeks naar de login.
 export const GRATIS_OS_URL = "https://app.socialnow.nl/login/";

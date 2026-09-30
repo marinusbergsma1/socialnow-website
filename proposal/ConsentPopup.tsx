@@ -25,6 +25,14 @@ export const LANDEN: { code: string; naam: string; vlag: string; taal: Language 
   { code: "AT", naam: "Österreich", vlag: "🇦🇹", taal: "de" },
   { code: "CH", naam: "Schweiz", vlag: "🇨🇭", taal: "de" },
   { code: "FR", naam: "France", vlag: "🇫🇷", taal: "fr" },
+  { code: "ES", naam: "España", vlag: "🇪🇸", taal: "es" },
+  { code: "IT", naam: "Italia", vlag: "🇮🇹", taal: "it" },
+  { code: "PT", naam: "Portugal", vlag: "🇵🇹", taal: "pt" },
+  { code: "PL", naam: "Polska", vlag: "🇵🇱", taal: "pl" },
+  { code: "SE", naam: "Sverige", vlag: "🇸🇪", taal: "sv" },
+  { code: "DK", naam: "Danmark", vlag: "🇩🇰", taal: "da" },
+  { code: "TR", naam: "Türkiye", vlag: "🇹🇷", taal: "tr" },
+  { code: "JP", naam: "日本", vlag: "🇯🇵", taal: "ja" },
   { code: "GB", naam: "United Kingdom", vlag: "🇬🇧", taal: "en" },
   { code: "IE", naam: "Ireland", vlag: "🇮🇪", taal: "en" },
   { code: "US", naam: "United States", vlag: "🇺🇸", taal: "en" },
@@ -56,6 +64,14 @@ const ACTIE: Record<Language, Actie> = {
   en: { badge: "FREE", kop: "Branding, website, Google Ads audit and OS.", win: "Request your free website via WhatsApp", bedrag: "with a personal message.", regel: "You can edit your message before sending." },
   de: { badge: "KOSTENLOS", kop: "Branding, Website, Google Ads Audit und OS.", win: "Fragen Sie Ihre kostenlose Website per WhatsApp an", bedrag: "mit einer persönlichen Nachricht.", regel: "Sie können Ihre Nachricht vor dem Senden bearbeiten." },
   fr: { badge: "GRATUIT", kop: "Branding, site web, audit Google Ads et OS.", win: "Demandez votre site gratuit via WhatsApp", bedrag: "avec un message personnel.", regel: "Vous pouvez modifier votre message avant de l’envoyer." },
+  es: { badge: "GRATIS", kop: "Branding, web, auditoría de Google Ads y OS.", win: "Solicita tu web gratis por WhatsApp", bedrag: "con un mensaje personal.", regel: "Puedes editar tu mensaje antes de enviarlo." },
+  it: { badge: "GRATIS", kop: "Branding, sito web, audit Google Ads e OS.", win: "Richiedi il tuo sito gratuito su WhatsApp", bedrag: "con un messaggio personale.", regel: "Puoi modificare il messaggio prima di inviarlo." },
+  pt: { badge: "GRÁTIS", kop: "Branding, website, auditoria Google Ads e OS.", win: "Pede o teu website grátis por WhatsApp", bedrag: "com uma mensagem pessoal.", regel: "Podes editar a mensagem antes de a enviar." },
+  pl: { badge: "ZA DARMO", kop: "Branding, strona, audyt Google Ads i OS.", win: "Poproś o darmową stronę przez WhatsApp", bedrag: "z osobistą wiadomością.", regel: "Możesz edytować wiadomość przed wysłaniem." },
+  sv: { badge: "GRATIS", kop: "Varumärke, webbplats, Google Ads-granskning och OS.", win: "Be om din gratis webbplats via WhatsApp", bedrag: "med ett personligt meddelande.", regel: "Du kan redigera meddelandet innan du skickar det." },
+  da: { badge: "GRATIS", kop: "Branding, hjemmeside, Google Ads-gennemgang og OS.", win: "Bestil din gratis hjemmeside via WhatsApp", bedrag: "med en personlig besked.", regel: "Du kan redigere beskeden, før du sender den." },
+  tr: { badge: "ÜCRETSİZ", kop: "Marka, web sitesi, Google Ads denetimi ve OS.", win: "Ücretsiz web sitenizi WhatsApp ile isteyin", bedrag: "kişisel bir mesajla.", regel: "Mesajınızı göndermeden önce düzenleyebilirsiniz." },
+  ja: { badge: "無料", kop: "ブランディング、ウェブサイト、Google 広告診断、OS。", win: "無料ウェブサイトを WhatsApp で申し込む", bedrag: "メッセージを添えて。", regel: "送信前にメッセージを編集できます。" },
 };
 // 25 september 2026 (Marinus): de kop noemt het hele gratis pakket, net als de hero.
 // De website-knop links en de kop boven het OS-formulier rechts: de site en het OS en/en.
@@ -64,6 +80,14 @@ const KLAAR: Record<Language, { website: string; osKop: string }> = {
   en: { website: "Claim your free website", osKop: "Or try our free personal OS system" },
   de: { website: "Kostenlose Website sichern", osKop: "Oder testen Sie unser kostenloses persönliches OS" },
   fr: { website: "Obtenir mon site gratuit", osKop: "Ou essayez notre OS personnel gratuit" },
+  es: { website: "Consigue tu web gratis", osKop: "O prueba gratis nuestro OS personal" },
+  it: { website: "Ottieni il tuo sito gratuito", osKop: "Oppure prova gratis il nostro OS personale" },
+  pt: { website: "Garante o teu website grátis", osKop: "Ou experimenta grátis o nosso OS pessoal" },
+  pl: { website: "Odbierz darmową stronę", osKop: "Albo wypróbuj za darmo nasz osobisty OS" },
+  sv: { website: "Hämta din gratis webbplats", osKop: "Eller prova vårt personliga OS gratis" },
+  da: { website: "Få din gratis hjemmeside", osKop: "Eller prøv vores personlige OS gratis" },
+  tr: { website: "Ücretsiz web sitenizi alın", osKop: "Ya da kişisel OS'umuzu ücretsiz deneyin" },
+  ja: { website: "無料ウェブサイトを受け取る", osKop: "または、パーソナル OS を無料でお試しください" },
 };
 export function actieLoopt(): boolean { return Date.now() <= Date.parse(`${ACTIE_TOT}T23:59:59+02:00`); }
 
@@ -73,12 +97,28 @@ const GEGEVENS: Record<Language, Gegevens> = {
   en: { email: "E-mail", terug: "Back", foutNaam: "Enter your first and last name.", foutEmail: "That e-mail address doesn't look right yet." },
   de: { email: "E-Mail", terug: "Zurück", foutNaam: "Bitte geben Sie Vor- und Nachnamen ein.", foutEmail: "Diese E-Mail-Adresse stimmt noch nicht." },
   fr: { email: "E-mail", terug: "Retour", foutNaam: "Indiquez votre prénom et votre nom.", foutEmail: "Cette adresse e-mail n’est pas encore correcte." },
+  es: { email: "Correo electrónico", terug: "Atrás", foutNaam: "Escribe tu nombre y apellido.", foutEmail: "Ese correo electrónico aún no es correcto." },
+  it: { email: "E-mail", terug: "Indietro", foutNaam: "Inserisci nome e cognome.", foutEmail: "Questo indirizzo e-mail non sembra ancora corretto." },
+  pt: { email: "E-mail", terug: "Voltar", foutNaam: "Escreve o teu nome e apelido.", foutEmail: "Esse e-mail ainda não parece correto." },
+  pl: { email: "E-mail", terug: "Wstecz", foutNaam: "Wpisz imię i nazwisko.", foutEmail: "Ten adres e-mail nie wygląda jeszcze poprawnie." },
+  sv: { email: "E-post", terug: "Tillbaka", foutNaam: "Fyll i för- och efternamn.", foutEmail: "E-postadressen ser inte rätt ut än." },
+  da: { email: "E-mail", terug: "Tilbage", foutNaam: "Skriv dit for- og efternavn.", foutEmail: "E-mailadressen ser ikke rigtig ud endnu." },
+  tr: { email: "E-posta", terug: "Geri", foutNaam: "Adınızı ve soyadınızı girin.", foutEmail: "Bu e-posta adresi henüz doğru görünmüyor." },
+  ja: { email: "メールアドレス", terug: "戻る", foutNaam: "姓と名を入力してください。", foutEmail: "メールアドレスが正しくないようです。" },
 };
 const TEKST: Record<Language, Tekst> = {
   nl: { kop: "Welkom bij SocialNow.", land: "Je land", demo: "Probeer het OS gratis", site: "Website bekijken", voor: "Door het OS te proberen of de website te bekijken, ga je akkoord met onze ", voorwaarden: "algemene voorwaarden", en: " en ons ", privacy: "privacybeleid", na: ". Geen trackingcookies op de website; in het OS meten we alleen met jouw toestemming.", intro: "Vraag een gratis website of OS-demo aan via WhatsApp.", stap1: "Waar zit je?", stap2: "Je gegevens", volgende: "Volgende", phNaam: "Je naam", phEmail: "jij@bedrijf.nl" },
   en: { kop: "Welcome to SocialNow.", land: "Your country", demo: "Try the free personal OS", site: "Explore the website", voor: "By trying the OS or exploring the website, you agree to our ", voorwaarden: "terms of service", en: " and ", privacy: "privacy policy", na: ". No tracking cookies on the website; in the OS we only measure with your consent.", intro: "Request a free website or OS demo through WhatsApp.", stap1: "Where are you based?", stap2: "Your details", volgende: "Next", phNaam: "Your name", phEmail: "you@company.com" },
   de: { kop: "Willkommen bei SocialNow.", land: "Ihr Land", demo: "OS kostenlos testen", site: "Website ansehen", voor: "Wenn Sie das OS testen oder die Website ansehen, stimmen Sie unseren ", voorwaarden: "Nutzungsbedingungen", en: " und unserer ", privacy: "Datenschutzerklärung", na: " zu. Keine Tracking-Cookies auf der Website; im OS messen wir nur mit Ihrer Zustimmung.", intro: "Fragen Sie eine kostenlose Website oder OS-Demo per WhatsApp an.", stap1: "Wo sind Sie ansässig?", stap2: "Ihre Daten", volgende: "Weiter", phNaam: "Ihr Name", phEmail: "sie@firma.de" },
   fr: { kop: "Bienvenue chez SocialNow.", land: "Votre pays", demo: "Essayer l\u2019OS", site: "Découvrir le site", voor: "En essayant l’OS ou en découvrant le site, vous acceptez nos ", voorwaarden: "conditions générales", en: " et notre ", privacy: "politique de confidentialité", na: ". Pas de cookies de suivi sur le site ; dans l’OS, nous ne mesurons qu’avec votre accord.", intro: "Demandez un site ou une démo OS gratuite via WhatsApp.", stap1: "Où êtes-vous basé ?", stap2: "Vos coordonnées", volgende: "Suivant", phNaam: "Votre nom", phEmail: "vous@entreprise.fr" },
+  es: { kop: "Bienvenido a SocialNow.", land: "Tu país", demo: "Prueba gratis el OS personal", site: "Ver la web", voor: "Al probar el OS o ver la web, aceptas nuestras ", voorwaarden: "condiciones generales", en: " y nuestra ", privacy: "política de privacidad", na: ". Sin cookies de seguimiento en la web; en el OS solo medimos con tu permiso.", intro: "Solicita una web o una demo del OS gratis por WhatsApp.", stap1: "¿Dónde estás?", stap2: "Tus datos", volgende: "Siguiente", phNaam: "Tu nombre", phEmail: "tu@empresa.es" },
+  it: { kop: "Benvenuto in SocialNow.", land: "Il tuo paese", demo: "Prova gratis l’OS personale", site: "Esplora il sito", voor: "Provando l’OS o esplorando il sito, accetti i nostri ", voorwaarden: "termini di servizio", en: " e la nostra ", privacy: "informativa sulla privacy", na: ". Nessun cookie di tracciamento sul sito; nell’OS misuriamo solo con il tuo consenso.", intro: "Richiedi un sito o una demo dell’OS gratis su WhatsApp.", stap1: "Dove ti trovi?", stap2: "I tuoi dati", volgende: "Avanti", phNaam: "Il tuo nome", phEmail: "tu@azienda.it" },
+  pt: { kop: "Bem-vindo à SocialNow.", land: "O teu país", demo: "Experimenta grátis o OS pessoal", site: "Explorar o website", voor: "Ao experimentar o OS ou explorar o website, aceitas os nossos ", voorwaarden: "termos de serviço", en: " e a nossa ", privacy: "política de privacidade", na: ". Sem cookies de rastreio no website; no OS só medimos com o teu consentimento.", intro: "Pede um website ou uma demo do OS grátis por WhatsApp.", stap1: "Onde estás?", stap2: "Os teus dados", volgende: "Seguinte", phNaam: "O teu nome", phEmail: "tu@empresa.pt" },
+  pl: { kop: "Witaj w SocialNow.", land: "Twój kraj", demo: "Wypróbuj osobisty OS za darmo", site: "Zobacz stronę", voor: "Wypróbowując OS lub przeglądając stronę, akceptujesz nasz ", voorwaarden: "regulamin", en: " i ", privacy: "politykę prywatności", na: ". Bez ciasteczek śledzących na stronie; w OS mierzymy tylko za Twoją zgodą.", intro: "Poproś o darmową stronę lub demo OS przez WhatsApp.", stap1: "Gdzie jesteś?", stap2: "Twoje dane", volgende: "Dalej", phNaam: "Twoje imię", phEmail: "ty@firma.pl" },
+  sv: { kop: "Välkommen till SocialNow.", land: "Ditt land", demo: "Prova det personliga OS:et gratis", site: "Utforska webbplatsen", voor: "Genom att prova OS:et eller utforska webbplatsen godkänner du våra ", voorwaarden: "villkor", en: " och vår ", privacy: "integritetspolicy", na: ". Inga spårningscookies på webbplatsen; i OS:et mäter vi bara med ditt samtycke.", intro: "Be om en gratis webbplats eller OS-demo via WhatsApp.", stap1: "Var finns du?", stap2: "Dina uppgifter", volgende: "Nästa", phNaam: "Ditt namn", phEmail: "du@foretag.se" },
+  da: { kop: "Velkommen til SocialNow.", land: "Dit land", demo: "Prøv det personlige OS gratis", site: "Udforsk hjemmesiden", voor: "Ved at prøve OS'et eller udforske hjemmesiden accepterer du vores ", voorwaarden: "vilkår", en: " og vores ", privacy: "privatlivspolitik", na: ". Ingen sporingscookies på hjemmesiden; i OS'et måler vi kun med dit samtykke.", intro: "Bestil en gratis hjemmeside eller OS-demo via WhatsApp.", stap1: "Hvor holder du til?", stap2: "Dine oplysninger", volgende: "Næste", phNaam: "Dit navn", phEmail: "dig@firma.dk" },
+  tr: { kop: "SocialNow’a hoş geldiniz.", land: "Ülkeniz", demo: "Kişisel OS’u ücretsiz deneyin", site: "Web sitesini keşfedin", voor: "OS’u deneyerek veya web sitesini keşfederek ", voorwaarden: "hizmet şartlarımızı", en: " ve ", privacy: "gizlilik politikamızı", na: " kabul etmiş olursunuz. Web sitesinde izleme çerezi yok; OS’ta yalnızca izninizle ölçüm yaparız.", intro: "WhatsApp üzerinden ücretsiz web sitesi veya OS demosu isteyin.", stap1: "Neredesiniz?", stap2: "Bilgileriniz", volgende: "İleri", phNaam: "Adınız", phEmail: "siz@sirket.com.tr" },
+  ja: { kop: "SocialNow へようこそ。", land: "国・地域", demo: "パーソナル OS を無料で試す", site: "ウェブサイトを見る", voor: "OS を試す、またはウェブサイトを閲覧することで、", voorwaarden: "利用規約", en: "と", privacy: "プライバシーポリシー", na: "に同意したことになります。ウェブサイトではトラッキング Cookie を使用しません。OS では同意をいただいた場合のみ計測します。", intro: "無料のウェブサイトまたは OS デモを WhatsApp で申し込めます。", stap1: "どちらにお住まいですか？", stap2: "お客様情報", volgende: "次へ", phNaam: "お名前", phEmail: "you@company.jp" },
 };
 
 function bewaard(): boolean { try { return localStorage.getItem(SLEUTEL) === LEGAL_VERSION; } catch { return false; } }
@@ -108,6 +148,14 @@ const PERSOONLIJK: Record<Language, { badge: string; kop: string; regel: string 
   en: { badge: "PERSONAL", kop: "Marinus and Steef", regel: "Your WhatsApp comes straight to us. No call centre, no bot." },
   de: { badge: "PERSÖNLICH", kop: "Marinus und Steef", regel: "Deine WhatsApp landet direkt bei uns. Kein Callcenter, kein Bot." },
   fr: { badge: "PERSONNEL", kop: "Marinus et Steef", regel: "Votre WhatsApp nous arrive directement. Pas de centre d'appels, pas de bot." },
+  es: { badge: "PERSONAL", kop: "Marinus y Steef", regel: "Tu WhatsApp nos llega directamente. Sin call center, sin bot." },
+  it: { badge: "PERSONALE", kop: "Marinus e Steef", regel: "Il tuo WhatsApp arriva direttamente a noi. Nessun call center, nessun bot." },
+  pt: { badge: "PESSOAL", kop: "Marinus e Steef", regel: "O teu WhatsApp chega diretamente a nós. Sem call center, sem bot." },
+  pl: { badge: "OSOBIŚCIE", kop: "Marinus i Steef", regel: "Twój WhatsApp trafia prosto do nas. Bez call center, bez bota." },
+  sv: { badge: "PERSONLIGT", kop: "Marinus och Steef", regel: "Ditt WhatsApp kommer direkt till oss. Inget callcenter, ingen bot." },
+  da: { badge: "PERSONLIGT", kop: "Marinus og Steef", regel: "Din WhatsApp går direkte til os. Intet callcenter, ingen bot." },
+  tr: { badge: "KİŞİSEL", kop: "Marinus ve Steef", regel: "WhatsApp mesajınız doğrudan bize gelir. Çağrı merkezi yok, bot yok." },
+  ja: { badge: "パーソナル", kop: "Marinus と Steef", regel: "WhatsApp は私たちに直接届きます。コールセンターもボットもありません。" },
 };
 const DUO = [
   { naam: "Marinus", rol: "Founder", foto: "marinus-profiel-blauw.webp" },
@@ -181,7 +229,7 @@ export default function ConsentPopup() {
   // vorm zonder slash en sloeg dus nooit aan: de pop-up stond ook over het privacybeleid heen.
   // Dat is precies het scherm waar hij niet hoort, want het akkoord verwijst ernaar.
   const k = KLAAR[language] || KLAAR.en;
-  const pad = (location.pathname.replace(/^\/(nl|de|fr)(?=\/|$)/, "").replace(/\/+$/, "")) || "/";
+  const pad = (location.pathname.replace(/^\/(nl|de|fr|es|it|pt|pl|sv|da|tr|ja)(?=\/|$)/, "").replace(/\/+$/, "")) || "/";
   const leest = JURIDISCH.includes(pad) || pad === "/antwoord-aanvragen";
   if (!open || leest) return null;
   const gekozen = LANDEN.find(l => l.code === land) || LANDEN.find(l => l.code === "GB")!;
@@ -190,7 +238,7 @@ export default function ConsentPopup() {
   const kiesLand = (code: string) => {
     const l = LANDEN.find(x => x.code === code) || LANDEN.find(x => x.code === "GB")!; setLand(l.code); zetCookies(l.code, l.taal);
     // De taal van de site hangt aan de route; een volledige herlading zet alles (kop, menu, popup) in de nieuwe taal.
-    if (l.taal !== language) { const rest = location.pathname.replace(/^\/(nl|de|fr)(?=\/|$)/, ""); window.location.assign(`${languagePrefix(l.taal)}${rest || "/"}${location.search}`); }
+    if (l.taal !== language) { const rest = location.pathname.replace(/^\/(nl|de|fr|es|it|pt|pl|sv|da|tr|ja)(?=\/|$)/, ""); window.location.assign(`${languagePrefix(l.taal)}${rest || "/"}${location.search}`); }
   };
   const akkoord = () => { try { localStorage.setItem(SLEUTEL, LEGAL_VERSION); } catch {} zetCookies(gekozen.code, gekozen.taal); setOpen(false); };
   const g = GEGEVENS[language] || GEGEVENS.en;

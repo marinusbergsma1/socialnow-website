@@ -122,7 +122,6 @@
 .sn-site .h-hero .h-hero-merken .h-clients-lus { animation-delay: -23s; }
 .sn-site .h-hero .h-hero-merken .h-clients-strook:hover .h-clients-lus { animation-play-state: running; }
 /* 30 september 2026 (Marinus): statement in drie delen, met een witregel voor "That's why we offer it for free." */
-.sn-site .h-statement-team { display: block; margin-top: 6px; }
 .sn-site .h-statement-gratis { margin-top: clamp(10px, 1.2vw, 16px); }
 /* 30 september 2026 (Marinus): sprekersblok liggend over de hele breedte, Marinus in SocialNow-blauw, Sid in Attesso-roze
    (#d4a0b5, diep roze #8a3f5d, crème #f7eef2 uit de Attesso-huisstijl). */
@@ -142,6 +141,8 @@
 .sn-site .h-spreker img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .sn-site .h-spreker.is-socialnow { border-color: #25d36699; }
 .sn-site .h-spreker.is-attesso { border-color: #d4a0b5; background: linear-gradient(160deg, #f7eef2, #d4a0b5); }
+/* 30 september 2026 (Marinus): "Sid meer deze kant op laten kijken". Gespiegeld, zodat Sid naar Marinus kijkt. */
+.sn-site .h-spreker.is-attesso img { transform: scaleX(-1); }
 .sn-site .h-spreker figcaption { position: absolute; left: 0; right: 0; bottom: 0; display: grid; gap: 2px; padding: 40px 16px 14px; background: linear-gradient(transparent, #000000d9); color: #fff; }
 .sn-site .h-spreker figcaption b { font-size: clamp(16px, 1.3vw, 20px); }
 .sn-site .h-spreker figcaption span { color: #d8e2dc; font-size: 13px; }

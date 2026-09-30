@@ -46,7 +46,7 @@ for (const pagina of ["index.html", "nl/index.html", "de/index.html", "fr/index.
 // 3. In de browser: elke taal tekent de kop en een vertaalde navigatie met alleen het eerste script; alles wat later laadt
 //    wordt vastgehouden (niet geweigerd: een geweigerd bestand ziet de site als een oude versie en herlaadt één keer).
 //    Daarna, met alles open, verschijnen de secties onder de vouw in dezelfde taal.
-const woordenboeken = Object.fromEntries(["en", "de", "fr"].map((t) => [t, JSON.parse(readFileSync(`proposal/i18n/${t}.json`, "utf8"))]));
+const woordenboeken = Object.fromEntries(["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da", "tr", "ja"].map((t) => [t, JSON.parse(readFileSync(`proposal/i18n/${t}.json`, "utf8"))]));
 const vertaal = (tekst, taal) => (taal === "nl" ? tekst : woordenboeken[taal][tekst] ?? woordenboeken.en[tekst] ?? tekst);
 const pw = await import(process.env.PLAYWRIGHT_CORE || "/Users/marinusbergsma/SocialNow-OS/app-explainer/node_modules/playwright-core/index.mjs").catch(() => null);
 if (!pw) eis("playwright-core gevonden voor de browserproef", false, "zet PLAYWRIGHT_CORE");
@@ -65,7 +65,7 @@ else {
   const basis = `http://127.0.0.1:${server.address().port}`;
   const browser = await pw.chromium.launch({ headless: true });
   try {
-    for (const taal of ["en", "nl", "de", "fr"]) {
+    for (const taal of ["en", "nl", "de", "fr", "es", "it", "pt", "pl", "sv", "da", "tr", "ja"]) {
       const url = `${basis}${taal === "en" ? "/" : `/${taal}/`}`;
       const verwacht = vertaal("Het OS", taal);
       // a. alleen het eerste script (plus de Duitse of Franse kern)
