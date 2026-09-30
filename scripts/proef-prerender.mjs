@@ -23,7 +23,7 @@ const fr = lees("dist/fr/index.html");
 const sitemap = lees("dist/sitemap.xml");
 const paden = [...new Set([...sitemap.matchAll(/<loc>https:\/\/socialnow\.nl([^<]*)<\/loc>/g)].map((m) => m[1] || "/"))];
 const bestand = (pad) => `dist${pad === "/" ? "" : pad.replace(/\/$/, "")}/index.html`;
-const zonderInhoud = paden.filter((pad) => !/<div id="root" data-prerender="(en|nl|de|fr)">(<div[^>]*>){0,2}<div class="sn-site"/.test(lees(bestand(pad))));
+const zonderInhoud = paden.filter((pad) => !/<div id="root" data-prerender="(en|nl|de|fr|es|it|pt|pl|sv|da|tr|ja)">(<div[^>]*>){0,2}<div class="sn-site"/.test(lees(bestand(pad))));
 const index = lees("index.tsx");
 
 const eisen = [

@@ -13,7 +13,8 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
-const TALEN = ["en", "de", "fr"];
+// 30 september 2026: twaalf talen op de site; elk woordenboek behalve Nederlands (de bron) wordt gesplitst.
+const TALEN = ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da", "tr", "ja"];
 const KERN = "\0sn-woordenboek-kern-";
 const REST = "\0sn-woordenboek-rest-";
 const plek = (soort, taal) => `__SN_WOORDENBOEK_${soort}_${taal}__`;
@@ -62,7 +63,7 @@ export default function woordenboekSplit({ verslag } = {}) {
     resolveId(bron, importer) {
       // ./en.json is de kern van het Engels, ./xx.json?kern en ./xx.json?rest de delen van elke taal. Een gewone
       // ./de.json (bijvoorbeeld via import.meta.glob) blijft het hele woordenboek.
-      const m = bron.match(/^\.\/(en|de|fr)\.json(?:\?(kern|rest))?$/);
+      const m = bron.match(/^\.\/(en|de|fr|es|it|pt|pl|sv|da|tr|ja)\.json(?:\?(kern|rest))?$/);
       if (!m || !importer || path.dirname(importer.split("?")[0]) !== map) return null;
       if (m[2] === "rest") return REST + m[1];
       if (m[2] === "kern" || m[1] === "en") return KERN + m[1];
@@ -136,7 +137,7 @@ export default function woordenboekSplit({ verslag } = {}) {
     },
     renderChunk(code) {
       if (!code.includes("__SN_WOORDENBOEK_")) return null;
-      const nieuw = code.replace(/(["'`])(__SN_WOORDENBOEK_(?:KERN|REST)_(?:en|de|fr)__)\1/g, (_, _q, naam) => {
+      const nieuw = code.replace(/(["'`])(__SN_WOORDENBOEK_(?:KERN|REST)_(?:en|de|fr|es|it|pt|pl|sv|da|tr|ja)__)\1/g, (_, _q, naam) => {
         if (!inhoud[naam]) this.error(`woordenboek ${naam} ontbreekt`);
         return JSON.stringify(JSON.stringify(inhoud[naam]));
       });

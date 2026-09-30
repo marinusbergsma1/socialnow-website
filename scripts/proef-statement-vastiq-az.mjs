@@ -6,7 +6,8 @@ const pages = lees("proposal/pages.tsx"), content = lees("proposal/content.ts"),
 const vercel = JSON.parse(lees("vercel.json"));
 const kop = (bron) => vercel.headers.find((h) => h.source === bron)?.headers.find((k) => k.key === "Cache-Control")?.value || "";
 const eisen = [
-  ["statement: fully automated systems, human control, team van experts", pages.includes("Proven, branded, <strong>fully automated systems.</strong> With all the human control and help necessary.") && pages.includes("With a team of human experts to help you in every step.")],
+  // 30 september 2026 (Marinus): de teamregel "With a team of human experts..." mag weg; de groene zin zegt het al.
+  ["statement: fully automated systems, human control, zonder losse teamregel", pages.includes("Proven, branded, <strong>fully automated systems.</strong> With all the human control and help necessary.") && !pages.includes("With a team of human experts to help you in every step.")],
   ["witregel voor That's why we offer it for free", /<p className="h-statement-zin h-statement-gratis">\s*<strong>That&rsquo;s why we offer it for free\.<\/strong>/.test(pages) && lees("proposal/hero-c.css").includes(".h-statement-gratis { margin-top:")],
   ["My story-film niet meer in de header", !pages.includes("<HeroStory") && !pages.includes('className="h-story-vol"')],
   ["AZ in kleur in Trusted by en in het verhaal", content.includes('["merken/AZ-LOGO-KLEUR.svg", "AZ"') && verhaal.includes('src="/images/merken/AZ-LOGO-KLEUR.svg"') && existsSync("public/images/merken/AZ-LOGO-KLEUR.svg") && lees("public/images/merken/AZ-LOGO-KLEUR.svg").includes("#d31245")],
