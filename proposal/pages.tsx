@@ -292,7 +292,8 @@ export function Home() {
             {/* 30 september 2026 (Marinus): "Proven branded, FULLY AUTOMATED SYSTEMS. With all the human control and help
                 nececery.", "With a Team of Human experts to help you in every step." en "Hier nog een enter tussen". */}
             <p className="h-statement-zin">
-              Proven, branded, <strong>fully automated systems.</strong> With all the human control and help necessary.
+              {/* 30 september 2026 (Marinus): "With all the human control and help necessary. Deze zou ook nog weg gaan." */}
+              Proven, branded, <strong>fully automated systems.</strong>
               <span className="h-statement-team">With a team of human experts to help you in every step.</span>
             </p>
             <p className="h-statement-zin h-statement-gratis">

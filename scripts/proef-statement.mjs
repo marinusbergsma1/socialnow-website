@@ -17,6 +17,7 @@ const eisen = [
   ["expertise-regel", pages.includes("We get paid for our expertise: helping you!")],
   // 30 september 2026 (Marinus): de demobanner werd een liggend sprekersblok met Marinus en Sid (Attesso).
   ["demo met Marinus en Sid van Attesso", pages.includes('className="h-sprekers"') && pages.includes("Sid van Kalken") && pages.includes("~/attesso")],
+  ["zin over human control weg", !pages.includes("</strong> With all the human control")],
 ];
 let fout = 0;
 for (const [naam, ok] of eisen) { console.log(`${ok ? "groen" : "ROOD "} ${naam}`); if (!ok) fout++; }
