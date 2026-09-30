@@ -7,7 +7,8 @@ const eisen = [
   ["login direct onder de kop", /<HeroTitle \/>\s*(\{\/\*[\s\S]*?\*\/\}\s*)?<div className="h-knoppen">\s*<div className="os-entry">\s*<OsDock \/>/.test(home)],
   ["Odoo, Salesforce en Attesso onder de login", plek("<OsDock />") > -1 && plek("<OsDock />") < plek('className="h-integratie"')],
   ["statement onder de merken", plek('className="h-integratie"') < plek('className="h-statement"')],
-  ["demoknop blijft, onder het statement", plek('className="h-statement"') < plek("Book a free live demo")],
+  // 30 september 2026 (Marinus): de demo werd een liggend sprekersblok onder de header (HeroSprekers).
+  ["demo blijft, als sprekersblok na het statement", pages.indexOf('className="h-statement"') < pages.lastIndexOf("<HeroSprekers />") && pages.includes("Book a free live demo")],
   ["login staat er één keer", home.split("<OsDock />").length === 2],
 ];
 let fout = 0;

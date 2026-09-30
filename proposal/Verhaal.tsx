@@ -81,9 +81,22 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     beeld: <CharacterAccent kind="coder" />,
   },
   {
+    // 30 september 2026 (Marinus): "Dat VASTIQ project is ook iets wat in mijn verhaal moet: hoe we een
+    // vastgoedwaarderingsplatform hebben opgezet, ik en Steef samen, en toen vanaf daar het SocialNow OS."
+    wanneer: "VASTIQ",
+    titel: "Met Steef Komen zetten we VASTIQ op.",
+    tekst: "Een waarderingsplatform voor vastgoed, van data tot merk. Steef is mijn accountant, Odoo-expert en datascientist. Vanuit VASTIQ ontstond SocialNow OS.",
+    breed: 3,
+    beeld: (
+      <span className="h-hoofdstuk-vastiq">
+        <img src="/images/cases/vastiq-waarde-640.webp" alt="VASTIQ: waardebepaling van een grachtenpand" width="640" height="360" loading="lazy" decoding="async" />
+      </span>
+    ),
+  },
+  {
     wanneer: "Het OS",
     titel: "Alle data van je bedrijf in één systeem.",
-    tekst: "Na branding en advertenties op zelflerende systemen kwam het OS, met Odoo als laatste sleutel.",
+    tekst: "Wat we voor VASTIQ bouwden, werd SocialNow OS: branding, advertenties en Odoo als laatste sleutel.",
     breed: 3,
     beeld: (
       <span className="h-hoofdstuk-odoo" translate="no">
@@ -91,12 +104,6 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
         <span>PRODUCT</span>
       </span>
     ),
-  },
-  {
-    wanneer: "De partner",
-    titel: "Met Steef Komen maakten we het schaalbaar.",
-    tekst: "Mijn accountant, Odoo-expert en datascientist. Samen bouwen we ook VASTIQ, een dataplatform voor vastgoed.",
-    breed: 3,
   },
   {
     wanneer: "Nu",

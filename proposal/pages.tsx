@@ -230,6 +230,33 @@ function HeroFilm({ geluid, setGeluid, children }: { geluid: HeroGeluid; setGelu
   );
 }
 
+// 30 september 2026 (Marinus): "DEZE MOET JUIST LIGGEND ZIJN, IK EEN BLOK EN SID EEN BLOK ALS SPREKERS PLUS DEZE FOTO VAN
+// HEM, met de achtergrondkleur van Attesso" en "Deze nog groot maken en Attesso een belangrijk onderdeel, dat we dit echt samen
+// doen, lezingen geven". Liggend blok over de hele breedte: links de uitnodiging, rechts twee sprekers. Sid in Attesso-roze.
+function HeroSprekers() {
+  return (
+    <section className="h-sprekers" aria-labelledby="h-sprekers-kop" translate="no">
+      <div className="h-sprekers-tekst">
+        <p className="h-sprekers-label">SocialNow <span aria-hidden="true">&times;</span> <code>~/attesso</code></p>
+        <h2 id="h-sprekers-kop">Book a free live demo</h2>
+        <p>SocialNow and Attesso build this together. The OS runs your business, Attesso makes every payment safe and approved. Together we give live demos, talks and workshops, anywhere in the world.</p>
+        <div className="h-sprekers-knoppen">
+          <a className="h-sprekers-knop" href={mailLink("Free end to end demo with Marinus and Sid")}>Book a free live demo <span aria-hidden="true">&#8599;</span></a>
+          <a className="h-sprekers-link" href={mailLink("Talk or workshop with Marinus and Sid")}>Book us for a talk</a>
+        </div>
+      </div>
+      <figure className="h-spreker is-socialnow">
+        <img src="/images/marinus-profiel-blauw.webp" alt="Marinus Bergsma" width="520" height="520" loading="lazy" decoding="async" />
+        <figcaption><b>Marinus Bergsma</b><span>Founder, SocialNow</span></figcaption>
+      </figure>
+      <figure className="h-spreker is-attesso">
+        <img src="/images/sid-attesso.webp" alt="Sid van Kalken" width="520" height="520" loading="lazy" decoding="async" />
+        <figcaption><b>Sid van Kalken</b><span><code>~/attesso</code></span></figcaption>
+      </figure>
+    </section>
+  );
+}
+
 function HeroVeilig({ geluid, setGeluid }: { geluid: HeroGeluid; setGeluid: (g: HeroGeluid) => void }) {
   return (
     <div className="h-hero-veilig">
@@ -309,20 +336,6 @@ export function Home() {
             {/* 30 september 2026 (Marinus): "If software ... niet SaaS". */}
             <p className="h-statement-klein">If software can&rsquo;t be free, it&rsquo;s not good enough!</p>
           </div>
-          <div className="h-knoppen">
-            {/* 30 september 2026 (Marinus): "Deze banner moet belangrijker worden en dan ook met Sid erbij van Attesso." */}
-            <a className="h-demo-knop is-groot" href={mailLink("Free end to end demo with Marinus and Sid")} translate="no">
-              <span className="h-demo-gezichten" aria-hidden="true">
-                <img src="/images/marinus-profiel-blauw.webp" alt="" width="72" height="72" />
-                <img src="/images/Sid-van-Kalken.webp" alt="" width="72" height="72" />
-              </span>
-              <span className="h-demo-tekst">
-                Book a free live demo
-                <small>With Marinus, founder SocialNow, and Sid, Attesso. Live, anywhere in the world.</small>
-              </span>
-              <span className="h-demo-pijl" aria-hidden="true">&#8599;</span>
-            </a>
-          </div>
           </div>
           <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid}>
             {/* 30 september 2026 (Marinus): "hieronder die trusted by, dan zie je al die bekende logo's" en daarna
@@ -332,6 +345,7 @@ export function Home() {
               <ClientLogos kort />
             </div>
           </HeroFilm>
+          <HeroSprekers />
           <HeroVeilig geluid={heroGeluid} setGeluid={setHeroGeluid} />
           {/* 30 september 2026 (Marinus): "Deze video mag weg want daaronder doe ik al mijn verhaal." My story staat niet meer
               in de header; het verhaal volgt in Verhaal onder de hero. */}

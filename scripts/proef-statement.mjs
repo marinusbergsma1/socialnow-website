@@ -15,7 +15,8 @@ const eisen = [
   ["volgorde: OS-film, dan Trusted by", /<HeroFilm\b[\s\S]*Trusted by/.test(pages)],
   ["software in plaats van SaaS", pages.includes("If software can&rsquo;t be free") && !pages.includes("If SaaS can")],
   ["expertise-regel", pages.includes("We get paid for our expertise: helping you!")],
-  ["demobanner met Sid van Attesso", pages.includes("h-demo-knop is-groot") && pages.includes("/images/Sid-van-Kalken.webp") && pages.includes("Sid, Attesso")],
+  // 30 september 2026 (Marinus): de demobanner werd een liggend sprekersblok met Marinus en Sid (Attesso).
+  ["demo met Marinus en Sid van Attesso", pages.includes('className="h-sprekers"') && pages.includes("Sid van Kalken") && pages.includes("~/attesso")],
 ];
 let fout = 0;
 for (const [naam, ok] of eisen) { console.log(`${ok ? "groen" : "ROOD "} ${naam}`); if (!ok) fout++; }

@@ -124,3 +124,29 @@
 /* 30 september 2026 (Marinus): statement in drie delen, met een witregel voor "That's why we offer it for free." */
 .sn-site .h-statement-team { display: block; margin-top: 6px; }
 .sn-site .h-statement-gratis { margin-top: clamp(10px, 1.2vw, 16px); }
+/* 30 september 2026 (Marinus): sprekersblok liggend over de hele breedte, Marinus in SocialNow-blauw, Sid in Attesso-roze
+   (#d4a0b5, diep roze #8a3f5d, crème #f7eef2 uit de Attesso-huisstijl). */
+.sn-site .h-hero .h-sprekers { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .8fr) minmax(0, .8fr); gap: clamp(16px, 2vw, 28px); align-items: stretch; margin-top: clamp(28px, 3vw, 48px); padding: clamp(20px, 2.4vw, 36px); border: 1.5px solid #25d36699; border-radius: 30px; background: radial-gradient(120% 140% at 100% 0%, #d4a0b533, transparent 55%), linear-gradient(135deg, #0f2a19, #070908 60%); box-shadow: 0 0 60px #25d36614; font-variant-ligatures: none; }
+.sn-site .h-sprekers-tekst { display: flex; flex-direction: column; justify-content: center; gap: 14px; min-width: 0; }
+.sn-site .h-sprekers-label { margin: 0; color: #a7b3ad; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.sn-site .h-sprekers-label span { margin: 0 6px; color: #d4a0b5; }
+.sn-site .h-sprekers-label code, .sn-site .h-spreker code { font-family: ui-monospace, Menlo, monospace; letter-spacing: 0; text-transform: none; color: #fff; font-size: 14px; }
+.sn-site .h-hero .h-sprekers h2 { margin: 0; color: #fff; font-size: clamp(30px, 3.2vw, 48px); line-height: 1.05; letter-spacing: -.02em; }
+.sn-site .h-sprekers-tekst > p:not(.h-sprekers-label) { margin: 0; max-width: 46ch; color: #c9d6cf; font-size: clamp(15px, 1.15vw, 18px); line-height: 1.5; }
+.sn-site .h-sprekers-knoppen { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 6px; }
+.sn-site .h-sprekers-knop { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: #1a8f45; color: #fff; font-weight: 800; font-size: 17px; text-decoration: none; box-shadow: 0 0 28px #25d36640; }
+.sn-site .h-sprekers-knop:hover { background: #1ba452; color: #fff; }
+.sn-site .h-sprekers-link { color: #f0d9e3; font-weight: 700; font-size: 15px; text-decoration: underline; text-decoration-color: #d4a0b5; text-underline-offset: 4px; }
+.sn-site .h-sprekers-link:hover { color: #fff; }
+.sn-site .h-spreker { position: relative; margin: 0; min-width: 0; aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden; border: 2px solid #ffffff22; background: #0b0d0d; }
+.sn-site .h-spreker img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.sn-site .h-spreker.is-socialnow { border-color: #25d36699; }
+.sn-site .h-spreker.is-attesso { border-color: #d4a0b5; background: linear-gradient(160deg, #f7eef2, #d4a0b5); }
+.sn-site .h-spreker figcaption { position: absolute; left: 0; right: 0; bottom: 0; display: grid; gap: 2px; padding: 40px 16px 14px; background: linear-gradient(transparent, #000000d9); color: #fff; }
+.sn-site .h-spreker figcaption b { font-size: clamp(16px, 1.3vw, 20px); }
+.sn-site .h-spreker figcaption span { color: #d8e2dc; font-size: 13px; }
+.sn-site .h-spreker.is-attesso figcaption span code { color: #f7d6e4; }
+@media (max-width: 900px) {
+  .sn-site .h-hero .h-sprekers { grid-template-columns: 1fr 1fr; }
+  .sn-site .h-sprekers-tekst { grid-column: 1 / -1; }
+}
