@@ -297,6 +297,8 @@ export function Home() {
             {/* 30 september 2026 (Marinus): "No one can automate people who care! 🚀 Beter" */}
             <p className="h-statement-dun">Everyone can automate a business. <span className="h-statement-groen">NO ONE CAN AUTOMATE PEOPLE WHO CARE! 🚀</span></p>
             <p className="h-statement-zin h-statement-mensen">{/* 30 september 2026 (Marinus): "Software is a tool, we are socialnow!" */}<strong>Software is a tool. We are SocialNow!</strong></p>
+            {/* 30 september 2026 (Marinus): "Join our team at: en dan klein groen: Jobs at SocialNow.nl." */}
+            <p className="h-statement-jobs">Join our team at: <Link to="/vacatures">Jobs at SocialNow.nl</Link></p>
             {/* 30 september 2026 (Marinus): "If software ... niet SaaS". */}
             <p className="h-statement-klein">If software can&rsquo;t be free, it&rsquo;s not good enough!</p>
           </div>
