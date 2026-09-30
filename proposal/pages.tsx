@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./hero-c.css";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { CONTACT_MAIL, heeftWhatsApp, mailLink, whatsappLink } from "./aanvragen";
 import {
@@ -21,7 +22,6 @@ import { Bento, Tegel } from "./Bento";
 import Deuren from "./Deuren";
 import { FILMS as VEILIGHEIDSFILMS, filmPad as veiligheidFilm, filmPosterPad as veiligheidPoster } from "./veiligheid-beloftes";
 import Bereikt from "./Bereikt";
-import { Statement } from "./Statement";
 import NulNaarBedrijf from "./NulNaarBedrijf";
 import MensEnAI from "./MensEnAI";
 import VacaturesBento from "./VacaturesBento";
@@ -202,7 +202,7 @@ function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (
 }
 
 function HeroFilm() {
-  const [geluid, setGeluid] = useState<"" | "os" | "veilig">("");
+  const [geluid, setGeluid] = useState<"" | "os" | "veilig" | "story">("");
   return (
     <div className="h-hero-film h-hero-films is-os-veilig">
       <Film
@@ -221,6 +221,16 @@ function HeroFilm() {
         zetGeluid={(aan) => setGeluid(aan ? "os" : "")}
       />
       <VeiligheidSpeler geluid={geluid === "veilig"} zetGeluid={(aan) => setGeluid(aan ? "veilig" : "")} />
+      {/* 30 september 2026 (Marinus): "die video en daaronder veiligheidsvideo's en dan mijn story". */}
+      <Film
+        klasse="h-film-story"
+        src="/video/verhaal/verhaal-en.mp4"
+        poster="/video/verhaal/verhaal-en.jpg"
+        label="My story"
+        titel="My story"
+        geluid={geluid === "story"}
+        zetGeluid={(aan) => setGeluid(aan ? "story" : "")}
+      />
     </div>
   );
 }
@@ -241,9 +251,6 @@ export function Home() {
   const taalfase = useTaalfase(getoond);
   return (
     <>
-      {/* 30 september 2026 (Marinus): "HET STAAT NOG STEEDS NIET LIVE" bij de hero; het statement staat daarom bovenaan,
-          het eerste wat je ziet, boven de hero. */}
-      <Statement />
       <LanguageContext.Provider value={getoond}>
       <section className="h-hero" id="home" data-taalfase={taalfase}>
         <div className="h-hero-background">
@@ -257,40 +264,40 @@ export function Home() {
           <HeroLogo />
           <TeamTrust />
           <HeroTitle />
-          {/* 26 september 2026 (Marinus): "onder de titel het Odoo-logo". */}
-          <p className="h-hero-odoo" translate="no">
-            <svg viewBox="140 146 640 250" role="img" aria-label="Odoo">
-              <path fill="#8f8f8f" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
-              <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
-            </svg>
-          </p>
-          {/* 28 september 2026 (Marinus): "ODOO PRODUCT · IMPLEMENTATION POSSIBLE", daaronder klein de volgende stap. */}
-          <p className="h-hero-odoo-regel" translate="no">
-            {/* 30 september 2026 (Marinus): "Integrated in ODOO's ERP system." Odoo is het ERP; het OS draait erop. */}
-            <b>INTEGRATED IN ODOO’S ERP SYSTEM</b>
-            {/* 29 september 2026 (Marinus): "bij Salesforce stukje wel écht even hun logo ook." */}
-            <small>
-              NEXT STEP
-              <img className="h-hero-salesforce" src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" />
-            </small>
-          </p>
-          {/* 26 september 2026 (Marinus): versie A, "de brief". Het bedankje als briefje met foto en naam. */}
-          <div className="h-brief">
-            {/* 29 september 2026 (Marinus): de winactie is voorbij; de brief vertelt nu de belofte in gewone woorden. */}
-            <p className="h-hero-description">
-              Beantwoord tien vragen en je OS zet je boekhouding, merk, website en socials klaar. Zelf, met ons team of
-              met je eigen AI.
+          {/* 30 september 2026 (Marinus): header optie C. Het statement als één zin onder de kop, klein de SaaS-regel, en
+              twee knoppen: inloggen en een gratis live demo met de founder. Overal Engels (translate="no"). */}
+          <div className="h-statement" translate="no">
+            <p className="h-statement-zin">
+              Proven, branded, end to end, highly profitable, personal, fully automated systems.{" "}
+              <strong>That&rsquo;s why we offer it for free.</strong>
             </p>
-            <div className="h-brief-onder">
-              <img src="/images/marinus-profiel-blauw.webp" alt="" width="56" height="56" />
-              <p><strong>Marinus Bergsma</strong><span>en het SocialNow-team</span></p>
-            </div>
+            <p className="h-statement-klein">If SaaS can&rsquo;t be free, it&rsquo;s not good enough!</p>
           </div>
-          <div className="os-entry">
-            <OsDock />
+          <div className="h-knoppen">
+            <div className="os-entry">
+              <OsDock />
+            </div>
+            <a className="h-demo-knop" href={mailLink("Free end to end demo with Marinus")} translate="no">
+              <img src="/images/marinus-profiel-blauw.webp" alt="" width="56" height="56" />
+              <span>Book a free live demo<small>With Marinus, founder. Live, anywhere in the world.</small></span>
+            </a>
           </div>
           </div>
           <HeroFilm />
+          {/* 30 september 2026 (Marinus): "IT'S PROVED AT ODOO met link naar de video en bezig met Salesforce". */}
+          <div className="h-bewijs" translate="no">
+            <a className="h-bewijs-odoo" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener">
+              <svg viewBox="140 146 640 250" role="img" aria-label="Odoo">
+                <path fill="#8f8f8f" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
+                <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
+              </svg>
+              <span><b>IT&rsquo;S PROVEN AT ODOO</b><small>&#9654; Watch the Odoo Experience film</small></span>
+            </a>
+            <div className="h-bewijs-sf">
+              <img src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" />
+              <span><b>WORKING ON SALESFORCE</b><small>Next integration</small></span>
+            </div>
+          </div>
           <div className="h-hero-rij">
             <ClientLogos kort />
           </div>

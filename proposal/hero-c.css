@@ -1,0 +1,26 @@
+/* Header optie C (30 september 2026): statement als zin onder de kop, twee knoppen, bewijsstrook Odoo en Salesforce,
+   rechts OS-film, veiligheidsfilms en "My story". Ligaturen uit. */
+.sn-site .h-hero .h-kop-raket { color: inherit; }
+.sn-site .h-statement { display: grid; gap: 10px; margin-top: clamp(14px, 1.6vw, 22px); max-width: 620px; font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0; }
+.sn-site .h-statement-zin { margin: 0; color: #dfe7e3; font-size: clamp(17px, 1.45vw, 21px); line-height: 1.45; }
+.sn-site .h-statement-zin strong { color: #fff; }
+.sn-site .h-statement-klein { margin: 0; color: #a7b3ad; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.sn-site .h-knoppen { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+.sn-site .h-knoppen > .os-entry { flex: 1 1 320px; min-width: 0; }
+.sn-site .h-hero .h-knoppen .h-demo-knop { margin-top: 28px; }
+.sn-site .h-demo-knop { flex: 1 1 260px; min-width: 0; display: flex; gap: 14px; align-items: center; padding: 18px 22px; border: 1px solid #25d366; border-radius: 24px; color: #fff; text-decoration: none; background: #070908; }
+.sn-site .h-demo-knop:hover { background: #0c1410; color: #fff; }
+.sn-site .h-demo-knop img { width: 56px; height: 56px; border-radius: 50%; border: 2px solid #25d366; object-fit: cover; flex-shrink: 0; }
+.sn-site .h-demo-knop span { display: grid; gap: 4px; font-size: clamp(18px, 1.5vw, 22px); font-weight: 700; line-height: 1.2; }
+.sn-site .h-demo-knop small { color: #a7b3ad; font-size: 13px; font-weight: 500; }
+.sn-site .h-bewijs { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(24px, 3vw, 40px); padding-top: clamp(18px, 2vw, 26px); border-top: 1px solid #ffffff14; }
+.sn-site .h-bewijs > * { display: flex; gap: 14px; align-items: center; min-width: 0; padding: 12px 18px; border: 1px solid #ffffff1f; border-radius: 16px; color: #fff; text-decoration: none; }
+.sn-site .h-bewijs-odoo:hover { border-color: #714b67; }
+.sn-site .h-bewijs svg { width: 70px; height: auto; flex-shrink: 0; }
+.sn-site .h-bewijs img { width: 62px; height: auto; flex-shrink: 0; }
+.sn-site .h-bewijs b { display: block; font-size: 13px; letter-spacing: .16em; }
+.sn-site .h-bewijs small { display: block; margin-top: 3px; font-size: 14px; color: #25d366; }
+.sn-site .h-bewijs-sf small { color: #7fd3f5; }
+.sn-site .h-hero-films.is-os-veilig > .h-film-story { flex: none; width: 100%; min-width: 0; }
+.sn-site .h-film-story video { aspect-ratio: 16 / 9; }
+@media (max-width: 640px) { .sn-site .h-bewijs > * { flex: 1 1 100%; } }
