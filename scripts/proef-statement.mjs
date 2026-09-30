@@ -11,6 +11,8 @@ const eisen = [
   ["bewijs Odoo met film", pages.includes("IT&rsquo;S PROVEN AT ODOO") && pages.includes("/video/odoo-experience/odoo-experience.mp4")],
   ["Salesforce in de maak", pages.includes("WORKING ON SALESFORCE")],
   ["rechts OS-film, veiligheid, My story", /h-film-os[\s\S]*VeiligheidSpeler[\s\S]*h-film-story/.test(pages)],
+  ["logobalk met Odoo en Salesforce", readFileSync("proposal/content.ts","utf8").includes('"partners/odoo.svg", "Odoo"') && readFileSync("proposal/content.ts","utf8").includes('"partners/salesforce.svg", "Salesforce"')],
+  ["kop niet omlaag geduwd", readFileSync("proposal/hero-c.css","utf8").includes("h1.h-taalwissel { margin-top: 0; }")],
 ];
 let fout = 0;
 for (const [naam, ok] of eisen) { console.log(`${ok ? "groen" : "ROOD "} ${naam}`); if (!ok) fout++; }

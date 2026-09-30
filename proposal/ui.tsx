@@ -278,7 +278,7 @@ export function ClientLogos({ kort = false }: { kort?: boolean }) {
         width="220"
         height="100"
         loading="lazy"
-        className={src.startsWith("AZ-") ? "h-logo-eigen" : undefined}
+        className={src.startsWith("AZ-") || src.startsWith("partners/") ? "h-logo-eigen" : undefined}
         style={maat ? ({ "--logo-maat": String(maat) } as React.CSSProperties) : undefined}
       />
     ));

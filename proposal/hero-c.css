@@ -24,3 +24,32 @@
 .sn-site .h-hero-films.is-os-veilig > .h-film-story { flex: none; width: 100%; min-width: 0; }
 .sn-site .h-film-story video { aspect-ratio: 16 / 9; }
 @media (max-width: 640px) { .sn-site .h-bewijs > * { flex: 1 1 100%; } }
+/* 30 september 2026 (Marinus): "WTF IS DIT? Al die tussenruimte? DAARBOVEN". Met drie films rechts werd de hero zo hoog dat
+   de gecentreerde tekstkolom ver naar beneden zakte. Tekst en films starten allebei bovenaan, met kleinere tussenruimte. */
+@media (min-width: 1100px) {
+  .sn-site .h-hero > .h-hero-content { align-items: start; align-content: start; }
+  .sn-site .h-hero-tekst { align-self: start; }
+  .sn-site .h-hero-films, .sn-site .h-hero-films.is-os-veilig { align-self: start; margin-top: 0; }
+}
+.sn-site .h-hero-tekst { gap: 18px; }
+.sn-site .h-hero .h-knoppen .h-demo-knop { margin-top: 0; }
+.sn-site .h-hero .h-knoppen > .os-entry { margin: 0 !important; }
+/* Sterkere selectors: dit bestand laadt vóór experience.css. Oude regel duwde de kop met margin-top: auto omlaag. */
+@media (min-width: 1100px) {
+  .sn-site .h-hero > .h-hero-content.h-wrap { align-items: start; align-content: start; }
+  .sn-site .h-hero .h-hero-content > .h-hero-tekst { align-self: start; justify-content: flex-start; }
+  .sn-site .h-hero .h-hero-tekst > h1.h-taalwissel { margin-top: 0; }
+  .sn-site .h-hero .h-hero-content > .h-hero-films { align-self: start; margin-top: 0; }
+}
+.sn-site .h-hero .h-hero-tekst > h1.h-taalwissel { margin-bottom: 0; }
+/* 30 september 2026 (Marinus): "MILO'S NAAST ZO WERKT HET OS". Titel links, Milo's ernaast, film eronder. */
+.sn-site .h-hero .h-film-os { display: flex; flex-wrap: wrap; align-items: center; column-gap: 14px; }
+.sn-site .h-hero .h-film-os > .h-film-titel { order: 0; margin: 0 0 12px; }
+.sn-site .h-hero .h-film-os > .h-film-milos { order: 1; margin: 0 0 12px; }
+.sn-site .h-hero .h-film-os > :not(.h-film-titel):not(.h-film-milos) { order: 2; flex: 1 1 100%; min-width: 0; }
+.sn-site .h-hero .h-film-milos .h-milo-animated, .sn-site .h-hero .h-film-milos .h-milo-animated img, .sn-site .h-hero .h-film-milos .h-milo-animated video { width: 40px !important; height: 40px !important; }
+/* 30 september 2026 (Marinus): "login groter". */
+.sn-site .h-hero .h-knoppen > .os-entry { flex: 1 1 100%; }
+.sn-site .h-hero .h-knoppen .h-os-dock { max-width: 720px; }
+.sn-site .h-hero .h-knoppen .h-dock-login { padding: 32px 30px; font-size: clamp(26px, 2.5vw, 36px); }
+.sn-site .h-hero .h-knoppen .h-demo-knop { flex: 1 1 100%; max-width: 720px; }
