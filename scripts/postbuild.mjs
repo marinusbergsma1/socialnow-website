@@ -380,3 +380,5 @@ writeFileSync('dist/sitemap.xml', sitemapXml);
 console.log(`[postbuild] ${Object.keys(routeMeta).length} route-pagina's + ${Object.keys(projectMeta).length} project-pagina's + ${posts.length} blog-pagina's (unieke SEO-meta) + SPA 404-fallback + sitemap.xml (${sitemapUrls.length} urls) geschreven`);
 
 await import("./localize-build.mjs");
+// 30 september 2026: daarna krijgt elke route-HTML de echte inhoud van de app (zie prerender.mjs).
+await import("./prerender.mjs");

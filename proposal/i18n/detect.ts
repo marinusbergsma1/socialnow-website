@@ -21,6 +21,14 @@ function writePreference(name: string, value: string) {
 export function rememberLanguage(language: Language) {
   writePreference('sn-taal', language);
 }
+// 30 september 2026: de pagina komt voorgerenderd binnen. Alleen een bezoeker zonder taal in het pad,
+// zonder bewaarde keuze en zonder bekend land moet op het netwerk wachten; de rest weet index.tsx meteen.
+export function needsCountryLookup(): boolean {
+  if (/^\/(nl|de|fr)(?:\/|$)/.test(location.pathname)) return false;
+  if (/(?:^|;\s*)sn-taal=(en|nl|de|fr)(?:;|$)/.test(document.cookie)) return false;
+  try { if (sessionStorage.getItem('sn-detected-country')) return false; } catch {}
+  return true;
+}
 export async function detectVisitorLanguage(): Promise<void> {
   // Explicit language links always win, including shared links to a specific language.
   if (/^\/(nl|de|fr)(?:\/|$)/.test(location.pathname)) return;
