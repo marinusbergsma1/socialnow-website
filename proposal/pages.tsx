@@ -28,6 +28,7 @@ import NulNaarBedrijf from "./NulNaarBedrijf";
 import MensEnAI from "./MensEnAI";
 import VacaturesBento from "./VacaturesBento";
 import VeiligheidBlok from "./Veiligheid";
+import VeiligheidMilo from "./VeiligheidMilo";
 import { AuditTeaser } from "./AuditPage";
 import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
@@ -205,6 +206,8 @@ function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (
           </li>
         ))}
       </ol>
+      {/* 30 september 2026 (Marinus): "Hier nog een geanimeerde veiligheidsmilo voor maken." Onder de stappen, volgt de film. */}
+      <VeiligheidMilo stap={nummer} />
     </div>
   );
 }
