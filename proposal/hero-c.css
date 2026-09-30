@@ -164,3 +164,4 @@
 .sn-site .h-statement-jobs { margin: 2px 0 0; color: #dfe7e3; font-size: clamp(15px, 1.2vw, 17px); }
 .sn-site .h-statement-jobs a { color: #25d366; font-size: .85em; font-weight: 700; text-decoration: none; margin-left: 4px; }
 .sn-site .h-statement-jobs a:hover { text-decoration: underline; }
+.sn-site .h-statement-punt { color: #fff; }

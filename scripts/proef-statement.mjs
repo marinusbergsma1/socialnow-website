@@ -13,8 +13,8 @@ const eisen = [
   ["Trusted by boven de logobalk, alleen merken", pages.includes(">Trusted by<") && !content.includes('"partners/odoo.svg"')],
   // 30 september 2026 (Marinus): "Deze video mag weg", My story staat niet meer in de header.
   ["volgorde: OS-film, dan Trusted by", /<HeroFilm\b[\s\S]*Trusted by/.test(pages)],
-  ["software in plaats van SaaS", pages.includes("If software can&rsquo;t be free") && !pages.includes("If SaaS can")],
-  ["mensen-regel dun en daaronder de betaalzin", pages.includes('h-statement-dun">Everyone can automate a business. <span className=\"h-statement-groen\">NO ONE CAN AUTOMATE PEOPLE WHO CARE! 🚀') && pages.includes("Software is a tool. We are SocialNow!")],
+  ["regel over software weg", !pages.includes(">If software can&rsquo;t be free")],
+  ["mensen-regel dun en daaronder de betaalzin", pages.includes('h-statement-dun">Everyone can automate a business. <span className=\"h-statement-groen\">NO ONE CAN AUTOMATE PEOPLE WHO CARE</span><span className=\"h-statement-punt\">.') && pages.includes("Software is a tool. We are SocialNow!")],
   ["geen dubbele expertzinnen meer", !pages.includes(">With a team of human experts") && !pages.includes("We get paid for our expertise")],
   // 30 september 2026 (Marinus): de demobanner werd een liggend sprekersblok met Marinus en Sid (Attesso).
   ["demo met Marinus en Sid van Attesso", pages.includes('className="h-sprekers"') && pages.includes("Sid van Kalken") && pages.includes("~/attesso")],
