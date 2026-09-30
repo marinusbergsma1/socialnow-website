@@ -289,18 +289,12 @@ export function Home() {
           {/* 30 september 2026 (Marinus): header optie C. Het statement als één zin onder de kop, klein de SaaS-regel, en
               twee knoppen: inloggen en een gratis live demo met de founder. Overal Engels (translate="no"). */}
           <div className="h-statement" translate="no">
-            {/* 30 september 2026 (Marinus): "Proven branded, FULLY AUTOMATED SYSTEMS. With all the human control and help
-                nececery.", "With a Team of Human experts to help you in every step." en "Hier nog een enter tussen". */}
-            <p className="h-statement-zin">
-              {/* 30 september 2026 (Marinus): "With all the human control and help necessary. Deze zou ook nog weg gaan." */}
-              Proven, branded, <strong>fully automated systems.</strong>
-              <span className="h-statement-team">With a team of human experts to help you in every step.</span>
-            </p>
-            <p className="h-statement-zin h-statement-gratis">
-              <strong>That&rsquo;s why we offer it for free.</strong>{" "}
-              {/* 30 september 2026 (Marinus): "En dan de we get paid by our expertise, helping you!" */}
-              <strong className="h-statement-verdien">We get paid for our expertise: helping you!</strong>
-            </p>
+            {/* 30 september 2026 (Marinus), ronde 2 uit vier versies: de experts één keer, als dunne filosofische zin.
+                "Anyone can build automations. No one can build people who care! You pay for the people, not the tools.
+                That is SocialNow!" */}
+            <p className="h-statement-zin">Proven, branded, <strong>fully automated systems.</strong></p>
+            <p className="h-statement-dun">Anyone can build automations. No one can build people who care!</p>
+            <p className="h-statement-zin h-statement-mensen"><strong>You pay for the people, not the tools. That is SocialNow!</strong></p>
             {/* 30 september 2026 (Marinus): "If software ... niet SaaS". */}
             <p className="h-statement-klein">If software can&rsquo;t be free, it&rsquo;s not good enough!</p>
           </div>
