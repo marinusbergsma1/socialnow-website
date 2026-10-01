@@ -10,7 +10,8 @@ const content = readFileSync("proposal/content.ts", "utf8");
 const talen = ["en", "de", "fr"].map((t) => readFileSync(`proposal/i18n/${t}.json`, "utf8"));
 const film = pages.slice(pages.indexOf("<HeroFilm geluid"), pages.indexOf("</HeroFilm>"));
 const eisen = [
-  ["logobalk rechts direct onder de OS-film", pages.includes("</HeroFilm>") && film.includes("<ClientLogos kort />") && film.includes(">Trusted by<")],
+  // 1 oktober 2026 (Marinus): "laat deze balk Primefone, DIVEINE, KWH weg". De klantenbalk onder de OS-film is weg.
+  ["geen klantenbalk meer onder de OS-film", !pages.includes("<ClientLogos kort />") && !pages.includes(">Trusted by<")],
   ["PAYMENT PARTNER roze, niet grijs", !/\.h-integratie-rij > [^{]*\.h-attesso[^{]*\{ color: #a7b3ad/.test(css) && readFileSync("proposal/hero-c.css", "utf8").includes(".sn-site .h-attesso { color: #d4a0b5; }")],
   ["Milo-zin in het Engels in elke taal", /translate="no">Milo ate them all\. But we don&rsquo;t need them\. Our results speak for themselves!<\/p>/.test(koekje) && !koekje.includes("Milo heeft ze allemaal opgegeten.</p>")],
   ["melding sluit vanzelf na 5 s, pauzeert bij hover", /h-koekje-tijd" aria-hidden="true" onAnimationEnd=\{sluit\}/.test(koekje) && koekjeCss.includes("animation: h-koekje-tijd 5s linear") && /\.h-koekje:hover \.h-koekje-tijd[^{]*\{ animation-play-state: paused/.test(koekjeCss)],

@@ -72,7 +72,6 @@ const teZwaar = heroBeelden.filter((u) => kb(pub(u)) > 60);
 
 // Elke <video> in de site: onder de vouw preload="none". Uitzonderingen laden pas bij zicht of klik, of zijn de landing zelf.
 const uitzonderingen = [
-  ["pages.tsx", 'className="h-hero-logo"'], // logo-animatie bovenaan de hero: het eerste wat je ziet
   ["motion.tsx", "onLoadedData={() => setPlaying(true)}"], // AmbientVideo: pas in de pagina als hij in beeld is ({loaded && ...})
   ["ui.tsx", "controls"], // VideoBlock: pas na een klik op Bekijk de video
   ["MediaSliders.tsx", "controls"], // mediavenster na een klik
@@ -87,7 +86,7 @@ const films = readdirSync("proposal").filter((f) => f.endsWith(".tsx")).flatMap(
 const verkeerd = films.filter(({ f, tekst }) => !/preload="none"/.test(tekst) && !uitzonderingen.some(([bestand, teken]) => bestand === f && tekst.includes(teken)));
 const ambientPasBijZicht = /\{loaded && \(\s*<video/.test(motion);
 
-const film = pages.slice(pages.indexOf("function Film("), pages.indexOf("function HeroLogo"));
+const film = pages.slice(pages.indexOf("function Film("), pages.indexOf("function VeiligheidSpeler"));
 const veilig = pages.slice(pages.indexOf("function VeiligheidSpeler"), pages.indexOf("type HeroGeluid"));
 const zwareFilms = [["/video/os/os-booth-en.mp4", 2600], ...["en", "nl"].flatMap((t) => ["versleuteling", "toegang", "goedkeuring", "infrastructuur", "koppelingen"].map((s) => [`/video/veiligheid/vertrouwen-${s}-${t}.mp4`, 1300])), ["/video/verhaal/verhaal-en.mp4", 2600], ["/video/verhaal/verhaal-nl.mp4", 2600], ["/video/bedankt/logo-animatie.mp4", 150]];
 

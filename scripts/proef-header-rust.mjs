@@ -6,10 +6,12 @@ const heroFilm = pages.slice(pages.indexOf("function HeroFilm("), pages.indexOf(
 const osFilm = heroFilm.slice(0, heroFilm.indexOf("function HeroVeilig(") > 0 ? heroFilm.indexOf("function HeroVeilig(") : undefined);
 const home = pages.slice(pages.indexOf("export function Home()"));
 const eisen = [
-  ["logo op de lijn van team en kop (15,24% rand terug)", /\.h-hero-logo\s*\{[^}]*margin:[^}]*-\.1524\)/.test(css) && css.includes(".h-team-portraits { padding-left: 0; }")],
+  // 1 oktober 2026 (Marinus): "SocialNowOS mag gwn boven hier weg." De logo-animatie boven het team is weg.
+  ["geen logo-animatie boven het team, team op de lijn", !home.includes("<HeroLogo") && css.includes(".h-team-portraits { padding-left: 0; }")],
   ["kop zonder groene gloed", /h1\.h-taalwissel \.h-kop-groen \{ text-shadow: 1\.5px 0 rgba\(255,0,60,\.35\), -1\.5px 0 rgba\(0,229,255,\.35\); \}/.test(css)],
   ["rechts alleen de OS-film", !osFilm.includes("<VeiligheidSpeler")],
-  ["veiligheid onder Trusted by", /Trusted by[\s\S]*<HeroVeilig\b/.test(home)],
+  // 1 oktober 2026 (Marinus): Trusted by is weg ("laat deze balk Primefone, DIVEINE, KWH weg"); veiligheid blijft onder de OS-film.
+  ["veiligheid onder de OS-film", /<HeroFilm\b[\s\S]*<HeroVeilig\b/.test(home)],
   ["aftermovie als tekstlink zonder pil", /\.h-hero \.h-aftermovie \{[^}]*border: 0/.test(css)],
   ["geen losse streep na de Odoo-regel", !/INTEGRATED IN ODOO&rsquo;S ERP SYSTEM<\/b>\s*<i aria-hidden/.test(pages)],
 ];

@@ -10,9 +10,10 @@ const eisen = [
   ["betaalpartner Attesso", pages.includes("~/attesso")],
   ["Milo-pillen met naam", pages.includes("h-milo-pil")],
   ["demoknop blijft", pages.includes("Book a free live demo")],
-  ["Trusted by boven de logobalk, alleen merken", pages.includes(">Trusted by<") && !content.includes('"partners/odoo.svg"')],
+  // 1 oktober 2026 (Marinus): Trusted by met klantlogo's is weg; onder het statement staat "Talking to" met de Attesso-gesprekspartners.
+  ["geen Trusted by meer, TALKING TO onder Attesso", !pages.includes(">Trusted by<") && pages.includes(">TALKING TO<") && !content.includes('"partners/odoo.svg"')],
   // 30 september 2026 (Marinus): "Deze video mag weg", My story staat niet meer in de header.
-  ["volgorde: OS-film, dan Trusted by", /<HeroFilm\b[\s\S]*Trusted by/.test(pages)],
+  ["volgorde: Attesso met TALKING TO, dan OS-film, dan statement", /~\/attesso[\s\S]*TALKING TO[\s\S]*<HeroFilm\b[\s\S]*h-statement is-r1/.test(pages)],
   ["regel over software weg", !pages.includes(">If software can&rsquo;t be free")],
   ["stijl R1: dun dan dik, groen dik", pages.includes('<b className="g">NO ONE CAN AUTOMATE PEOPLE WHO CARE</b><b>.</b>') && pages.includes('<span className="d">Software is a tool.</span> <b>We are SocialNow!</b>') && readFileSync("proposal/hero-c.css","utf8").includes("h-statement.is-r1")],
   ["geen dubbele expertzinnen meer", !pages.includes(">With a team of human experts") && !pages.includes("We get paid for our expertise")],
