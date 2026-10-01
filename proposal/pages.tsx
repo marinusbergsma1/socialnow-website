@@ -292,6 +292,15 @@ export function Home() {
               <i aria-hidden="true" />
               <span className="h-attesso">PAYMENT PARTNER <code>~/attesso</code></span>
             </p>
+            {/* 1 oktober 2026 (Marinus): "Vanuit de video staan de logo's waar mijn partners van Attesso mee in gesprek gaan.
+                Die mogen ook op de site." en "Graag hier dan eronder." Dezelfde rij als in OUR STORY (partnership). */}
+            <ul className="h-attesso-logos" aria-label="Attesso in talks with">
+              <li><img src="/images/partners/betalen/visa.svg" alt="Visa" width="24" height="8" /></li>
+              <li><img src="/images/partners/betalen/mastercard.svg" alt="Mastercard" width="152" height="94" /></li>
+              <li><img src="/images/partners/betalen/airwallex.webp" alt="Airwallex" width="960" height="132" /></li>
+              <li><img src="/images/partners/betalen/adyen.svg" alt="Adyen" width="24" height="8" /></li>
+              <li><img src="/images/partners/betalen/rabobank.svg" alt="Rabobank" width="54" height="10" /></li>
+            </ul>
           </div>
           </div>
           <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid}>

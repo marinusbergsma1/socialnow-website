@@ -67,6 +67,13 @@
 .sn-site .h-aftermovie { color: #25d366; text-decoration: none; letter-spacing: .1em; border: 1px solid #25d36655; border-radius: 999px; padding: 7px 14px; }
 .sn-site .h-aftermovie:hover { background: #25d3661a; color: #25d366; }
 .sn-site .h-attesso { color: #d4a0b5; }
+/* 1 oktober 2026: logo's van de partijen waar Attesso mee in gesprek is, als witte chips zoals in de partnerfilm. */
+.sn-site .h-attesso-logos { display: flex; flex-wrap: wrap; gap: 8px; margin: -2px 0 0; padding: 0; list-style: none; }
+.sn-site .h-attesso-logos li { display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 12px; border-radius: 6px; background: #fff; }
+.sn-site .h-attesso-logos img { display: block; width: auto; height: 13px; }
+.sn-site .h-attesso-logos img[alt="Mastercard"] { height: 18px; }
+.sn-site .h-attesso-logos img[alt="Airwallex"] { height: 12px; }
+.sn-site .h-attesso-logos img[alt="Rabobank"] { height: 12px; }
 .sn-site .h-attesso code { margin-left: 6px; font-family: ui-monospace, Menlo, monospace; font-size: 15px; font-weight: 500; letter-spacing: 0; color: #fff; }
 .sn-site .h-hero .h-hero-tekst > h1.h-taalwissel .h-kop-groen { color: #25d366; }
 .sn-site .h-milo-pillen { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 14px; order: -1; flex: 1 1 100%; }
