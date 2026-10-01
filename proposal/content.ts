@@ -48,7 +48,7 @@ export const people = [
   {
     name: "Michelle Yang",
     role: "Head of Supply Chain, Operations & AI Payments",
-    image: "Michelle-Yang-HD.webp",
+    image: "Michelle-Yang-2026-10-01.webp",
   },
   // 30 september 2026 (Marinus): nieuw teamlid.
   { name: "Tristan Slobbe", role: "Data & AI Engineer", image: "Tristan-Slobbe.webp" },

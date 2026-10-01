@@ -230,3 +230,16 @@
 }
 @media (max-width: 520px) { .sn-site .h-hero .h-team-join.h-team-join-balk { flex-direction: column; align-items: flex-start; } }
 @media (prefers-reduced-motion: reduce) { .sn-site .h-team-muur img, .sn-site .h-team-muur figcaption { transition: none; } }
+/* 1 oktober 2026 (Marinus): "Die tekst moet mooi met die afbeeldingen uitgelijnd zijn." Statement en muur staan in één rij over
+   beide kolommen (subgrid, dus op dezelfde kolomlijnen als de hero). De eerste regel begint op de bovenkant van de portretten en
+   de laatste eindigt op de onderkant; de uitnodiging staat onder de portretten. Smaller dan 1100 px onder elkaar. */
+.sn-site .h-hero .h-team-rij { display: grid; row-gap: clamp(18px, 2vw, 28px); margin-top: clamp(28px, 3vw, 44px); }
+.sn-site .h-hero .h-team-rij > .h-statement.is-r1 { margin: 0; }
+@media (min-width: 1100px) {
+  .sn-site .h-hero .h-team-rij { grid-column: 1 / -1; grid-template-columns: subgrid; grid-template-areas: "zin muur" ". join"; row-gap: clamp(16px, 1.6vw, 22px); }
+  .sn-site .h-hero .h-team-rij > .h-statement.is-r1 { grid-area: zin; align-self: stretch; display: flex; flex-direction: column; justify-content: space-between; max-width: none; }
+  .sn-site .h-hero .h-team-rij > .h-statement.is-r1 .h-sr { font-size: clamp(20px, 1.8vw, 32px); text-box: trim-both cap alphabetic; }
+  .sn-site .h-hero .h-team-rij .h-team-sectie { display: contents; }
+  .sn-site .h-hero .h-team-rij .h-team-muur { grid-area: muur; }
+  .sn-site .h-hero .h-team-rij .h-team-join-balk { grid-area: join; }
+}
