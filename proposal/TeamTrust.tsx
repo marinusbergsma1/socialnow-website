@@ -32,16 +32,24 @@ export function TeamJoin() {
     const minder = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     window.setTimeout(() => navigate("/vacatures"), minder ? 0 : 520);
   };
-  return <Link to="/vacatures" onClick={klik} className={`h-team-join${lancering ? " is-lancering" : ""}`} translate="no">
-    <span className="h-team-join-gezichten" aria-hidden="true">
-      {["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe"]
-        .map(naam => people.find(person => person.name === naam))
-        .filter((person): person is NonNullable<typeof person> => Boolean(person))
-        .map(person => <img key={person.name} {...klein(person.image, 72)} alt="" width="72" height="72" loading="lazy" />)}
-    </span>
-    <span className="h-team-join-zin">
-      <span className="h-team-join-tekst">Let&rsquo;s make a difference together and join SocialNow!</span>
-      <span className="h-raket" aria-hidden="true">🚀</span>
-    </span>
-  </Link>;
+  // 1 oktober 2026 (Marinus): versie 3, de gezichtenmuur, "maar het team in kleur". Twaalf portretten met naam en rol bij
+  // hover, daaronder de uitnodiging als balk met Open positions.
+  const team = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe"]
+    .map(naam => people.find(person => person.name === naam))
+    .filter((person): person is NonNullable<typeof person> => Boolean(person));
+  return <div className="h-team-sectie" translate="no">
+    <Link to="/team" className="h-team-muur" aria-label="Meet the SocialNow team">
+      {team.map(person => <figure key={person.name}>
+        <img {...klein(person.image, "(max-width: 900px) 25vw, 160px", [160, 320])} alt="" width="160" height="160" loading="lazy" />
+        <figcaption>{person.name}<i>{person.role}</i></figcaption>
+      </figure>)}
+    </Link>
+    <Link to="/vacatures" onClick={klik} className={`h-team-join h-team-join-balk${lancering ? " is-lancering" : ""}`}>
+      <span className="h-team-join-zin">
+        <span className="h-team-join-tekst">Let&rsquo;s make a difference together and join SocialNow!</span>
+        <span className="h-raket" aria-hidden="true">🚀</span>
+      </span>
+      <span className="h-team-join-open">Open positions &rarr;</span>
+    </Link>
+  </div>;
 }

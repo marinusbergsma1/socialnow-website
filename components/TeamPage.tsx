@@ -90,7 +90,7 @@ const crew: CrewMember[] = [
     tag: 'WEB_STACK',
     line: 'Bouwt sites die laden voor je knippert.',
     color: '#F62961',
-    image: `${BASE}images/Sid-van-Kalken.webp`,
+    image: `${BASE}images/sid-attesso.webp`,
     imgCustomClass:
       '[&>img]:!object-[50%_10%] [&>img]:!scale-[1.3] group-hover:[&>img]:!scale-[1.35]',
   },
