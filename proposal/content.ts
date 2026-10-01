@@ -38,7 +38,7 @@ export const people = [
   {
     name: "Sid van Kalken",
     role: "Head of Web Development & AI Payments · Attesso",
-    image: "Sid-van-Kalken.webp",
+    image: "sid-attesso.webp",
   },
   {
     name: "Steef Komen",

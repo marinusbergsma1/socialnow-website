@@ -66,7 +66,7 @@ const team: TeamItem[] = [
     type: 'member',
     name: "Sid van Kalken",
     role: "Webdeveloper",
-    image: `${import.meta.env.BASE_URL}images/Sid-van-Kalken.webp`,
+    image: `${import.meta.env.BASE_URL}images/sid-attesso.webp`,
     imgCustomClass: "[&>img]:!object-[50%_10%] [&>img]:!scale-[1.3] group-hover:[&>img]:!scale-[1.35]"
   },
   {
