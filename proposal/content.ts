@@ -40,6 +40,12 @@ export const people = [
     role: "Head of Web Development & AI Payments · Attesso",
     image: "sid-attesso.webp",
   },
+  // 1 oktober 2026 (Marinus): Douwe Kramer, co-founder van Attesso, met Sid het Attesso-team naast Marinus en Steef.
+  {
+    name: "Douwe Kramer",
+    role: "Co-founder · Attesso",
+    image: "Douwe-Kramer-attesso.webp",
+  },
   {
     name: "Steef Komen",
     role: "Partner · Head of Finance, Data & AI Payments",
@@ -48,7 +54,7 @@ export const people = [
   {
     name: "Michelle Yang",
     role: "Head of Supply Chain, Operations & AI Payments",
-    image: "Michelle-Yang-2026-10-01.webp",
+    image: "Michelle-Yang-kantoor.webp",
   },
   // 30 september 2026 (Marinus): nieuw teamlid.
   { name: "Tristan Slobbe", role: "Data & AI Engineer", image: "Tristan-Slobbe.webp" },

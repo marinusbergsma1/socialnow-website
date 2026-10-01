@@ -55,7 +55,7 @@ export default function Deuren() {
         <h3 className="sn-tegel-titel">Praat met Michelle.</h3>
         <p className="sn-tegel-tekst">Bespreek wat het OS voor jouw klanten kan betekenen, net als de partners die je voorgingen.</p>
         <div className="h-deur-persoon">
-          <img src="/images/Michelle-Yang-2026-10-01.webp" alt="" width="64" height="64" loading="lazy" />
+          <img src="/images/Michelle-Yang-kantoor.webp" alt="" width="64" height="64" loading="lazy" />
           <p><strong translate="no">Michelle Yang</strong><span translate="no">Head of Implementation Partnerships</span></p>
         </div>
         <div className="sn-tegel-onder">

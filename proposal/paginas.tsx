@@ -429,14 +429,19 @@ export function PricesPage() {
   );
 }
 export function TeamPage() {
-  const partners = ["Michelle Yang", "Steef Komen"]
+  const vind = (namen: string[]) => namen
     .map(name => people.find(person => person.name === name))
     .filter((person): person is NonNullable<typeof person> => Boolean(person));
-  const specialists = people.filter(person =>
-    person.name !== "Marinus Bergsma" &&
-    person.name !== "Michelle Yang" &&
-    person.name !== "Steef Komen"
-  );
+  // 1 oktober 2026 (Marinus): "de eerste laag mij en Steef met daarnaast Attesso, Sid en Douwe" en "Het punt moet zijn dat
+  // Sid en ik spreken en de sterke teams ik en Steef samen met Sid en Douwe samen zijn."
+  const socialnow = vind(["Marinus Bergsma", "Steef Komen"]);
+  const attesso = vind(["Sid van Kalken", "Douwe Kramer"]);
+  const inTeams = [...socialnow, ...attesso].map(person => person.name);
+  // Michelle staat nu vooraan bij de system experts.
+  const specialists = [
+    ...vind(["Michelle Yang"]),
+    ...people.filter(person => !inTeams.includes(person.name) && person.name !== "Michelle Yang"),
+  ];
 
   return (
     <>
@@ -451,6 +456,31 @@ export function TeamPage() {
         }
         text="SocialNow begon in november 2021. Sindsdien groeiden we uit tot een team van specialisten in creatie, marketing, data en techniek. Samen bouwen we één OS dat je bedrijf ontzorgt, en het persoonlijke contact blijft."
       />
+      <section className="h-section h-wrap h-sterke-teams">
+        <Heading
+          label="SocialNow × Attesso"
+          title={
+            <>
+              Twee sterke teams.
+              <br />
+              <span>Samen bouwen we het.</span>
+            </>
+          }
+        />
+        <div className="h-teams-duo">
+          <div className="h-team-duo is-socialnow">
+            <p className="h-team-duo-label" translate="no">SocialNow</p>
+            <TeamGrid members={socialnow} expert={false} />
+          </div>
+          <div className="h-team-duo is-attesso">
+            <p className="h-team-duo-label" translate="no"><code>~/attesso</code></p>
+            <TeamGrid members={attesso} expert={false} />
+          </div>
+        </div>
+        <p className="h-footnote">
+          Marinus en Steef bouwen het OS en maken het schaalbaar. Sid en Douwe van Attesso zorgen dat elke betaling veilig en goedgekeurd is. Marinus en Sid spreken samen: live demo&apos;s, talks en workshops, overal ter wereld.
+        </p>
+      </section>
       <section className="h-wrap">
         <Founder />
       </section>
@@ -480,22 +510,6 @@ export function TeamPage() {
             <span>Die zorgden dat je eigen data veilig en kloppend in het OS terechtkomt</span>
           </div>
         </div>
-      </section>
-      <section className="h-section h-wrap h-team-partners">
-        <Heading
-          label="SocialNow × Komen Consultancy"
-          title={
-            <>
-              Michelle en Steef.
-              <br />
-              <span>Samen maken we het schaalbaar.</span>
-            </>
-          }
-        />
-        <TeamGrid members={partners} />
-        <p className="h-footnote">
-          Steef Komen is accountant, Odoo-expert en datascientist. Met hem maakten we het OS schaalbaar, en samen bouwen we VASTIQ, een dataplatform voor vastgoed. Michelle Yang werkt vanuit Komen Consultancy mee aan supply chain, operations en betalingen met AI.
-        </p>
       </section>
       <section className="h-section h-wrap">
         <Heading

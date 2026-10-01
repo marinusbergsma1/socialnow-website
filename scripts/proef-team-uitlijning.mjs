@@ -14,14 +14,15 @@ const pages = lees("proposal/pages.tsx"), css = lees("proposal/hero-c.css");
 const rij = pages.includes('className="h-team-rij"') ? pages.slice(pages.indexOf('className="h-team-rij"'), pages.indexOf("<HeroSprekers />")) : "";
 const film = pages.slice(pages.indexOf("<HeroFilm geluid"), pages.indexOf("</HeroFilm>"));
 const bronnen = ["proposal/content.ts", "components/Team.tsx", "components/TeamPage.tsx", "proposal/Deuren.tsx", "proposal/PartnerMichelle.tsx"];
-const MICHELLE = "Michelle-Yang-2026-10-01";
+// Sinds 1 oktober 2026 (later die dag) heeft Michelle de kantoorfoto: "Michelle iets groter en normale achtergrond".
+const MICHELLE = "Michelle-Yang-kantoor";
 
 const eisen = [
   ["statement en muur in één rij", rij.includes('className="h-statement is-r1"') && rij.includes("<TeamJoin />")],
   ["muur niet meer los onder de film", !film.includes("<TeamJoin />")],
   ["rij op de kolomlijnen van de hero (subgrid)", /\.h-team-rij \{[^}]*grid-template-columns: subgrid/.test(css)],
   ["statement rekt mee met de muur, regels op boven- en onderkant", /\.h-team-rij > \.h-statement\.is-r1 \{[^}]*justify-content: space-between/.test(css) && /text-box: trim-both cap alphabetic/.test(css)],
-  ["Michelle nergens meer met de strakke HD-foto", bronnen.every((p) => !lees(p).includes("Michelle-Yang-HD.webp"))],
+  ["Michelle nergens meer met de strakke HD-foto", bronnen.every((p) => !lees(p).includes("Michelle-Yang-HD.webp") && !lees(p).includes("Michelle-Yang-2026-10-01.webp"))],
   ["Michelle overal met de nieuwe foto", bronnen.every((p) => lees(p).includes(`${MICHELLE}.webp`))],
   ["nieuwe foto met kleine versies voor de muur", existsSync(`public/images/${MICHELLE}.webp`) && [96, 160, 320].every((m) => existsSync(`public/images/klein/${MICHELLE}-${m}.webp`))],
 ];

@@ -117,7 +117,7 @@ const osPartners: OsPartner[] = [
     logo: `${BASE}images/komen-consultancy-logo.webp`,
     tag: 'SUPPLY_CHAIN',
     color: '#25D366',
-    image: `${BASE}images/Michelle-Yang-2026-10-01.webp`,
+    image: `${BASE}images/Michelle-Yang-kantoor.webp`,
     sub: 'Michelle brengt expertise in supply chain en operationele processen mee vanuit Komen Consultancy.',
   },
   {
