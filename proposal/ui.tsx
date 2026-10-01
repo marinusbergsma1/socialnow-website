@@ -240,7 +240,7 @@ export function ProjectCard({ project }: { project: Project }) {
     </article>
   );
 }
-export function TeamGrid({ short = false, members = people }: { short?: boolean; members?: typeof people }) {
+export function TeamGrid({ short = false, members = people, expert = true }: { short?: boolean; members?: typeof people; expert?: boolean }) {
   return (
     <div className="h-people-grid">
       {(short ? members.slice(0, 4) : members).map((person) => (
@@ -258,7 +258,7 @@ export function TeamGrid({ short = false, members = people }: { short?: boolean;
           <figcaption>
             <strong>{person.name}</strong>
             <span>{person.role}</span>
-            <em className="h-system-expert">System Expert</em>
+            {expert ? <em className="h-system-expert">System Expert</em> : null}
           </figcaption>
         </figure>
       ))}
