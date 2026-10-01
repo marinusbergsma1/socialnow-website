@@ -293,15 +293,6 @@ export function Home() {
               <span className="h-attesso">PAYMENT PARTNER <code>~/attesso</code></span>
             </p>
           </div>
-          {/* 30 september 2026 (Marinus): header optie C. Het statement als één zin onder de kop, klein de SaaS-regel, en
-              twee knoppen: inloggen en een gratis live demo met de founder. Overal Engels (translate="no"). */}
-          <div className="h-statement is-r1" translate="no">
-            {/* 30 september 2026 (Marinus): "Dit is helemaal niet in deze stijl, LOS DAT OP", met versie R1 als voorbeeld:
-                alle regels even groot, per regel eerst dun en dan dik, het groene deel dik, de punt wit. */}
-            <p className="h-sr"><span className="d">Proven, branded,</span> <b>fully automated!</b></p>
-            <p className="h-sr"><span className="d">Everyone can automate a business.</span> <b className="g">NO ONE CAN AUTOMATE PEOPLE WHO CARE</b><b>.</b></p>
-            <p className="h-sr"><span className="d">Software is a tool.</span> <b>We are SocialNow!</b></p>
-          </div>
           </div>
           <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid}>
             {/* 30 september 2026 (Marinus): "hieronder die trusted by, dan zie je al die bekende logo's" en daarna
@@ -310,8 +301,22 @@ export function Home() {
               <p className="h-trusted" translate="no">Trusted by</p>
               <ClientLogos kort />
             </div>
-            <TeamJoin />
           </HeroFilm>
+          {/* 1 oktober 2026 (Marinus): "Die tekst moet mooi met die afbeeldingen uitgelijnd zijn." Statement en gezichtenmuur
+              staan in één rij over beide kolommen; de eerste regel begint op de bovenkant van de portretten en de laatste
+              eindigt op de onderkant. */}
+          <div className="h-team-rij">
+            {/* 30 september 2026 (Marinus): header optie C. Het statement als één zin onder de kop, klein de SaaS-regel, en
+                twee knoppen: inloggen en een gratis live demo met de founder. Overal Engels (translate="no"). */}
+            <div className="h-statement is-r1" translate="no">
+              {/* 30 september 2026 (Marinus): "Dit is helemaal niet in deze stijl, LOS DAT OP", met versie R1 als voorbeeld:
+                  alle regels even groot, per regel eerst dun en dan dik, het groene deel dik, de punt wit. */}
+              <p className="h-sr"><span className="d">Proven, branded,</span> <b>fully automated!</b></p>
+              <p className="h-sr"><span className="d">Everyone can automate a business.</span> <b className="g">NO ONE CAN AUTOMATE PEOPLE WHO CARE</b><b>.</b></p>
+              <p className="h-sr"><span className="d">Software is a tool.</span> <b>We are SocialNow!</b></p>
+            </div>
+            <TeamJoin />
+          </div>
           <HeroSprekers />
           <HeroVeilig geluid={heroGeluid} setGeluid={setHeroGeluid} />
           {/* 30 september 2026 (Marinus): "Deze video mag weg want daaronder doe ik al mijn verhaal." My story staat niet meer

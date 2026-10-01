@@ -17,7 +17,7 @@ export default function PartnerMichelle() {
   return (
     <section className="h-section h-wrap h-partner-michelle" id="partners" aria-labelledby="partner-michelle-titel">
       <div className="h-partner-kaart">
-        <img src="/images/Michelle-Yang-HD.webp" alt="Michelle Yang" width="120" height="120" loading="lazy" />
+        <img src="/images/Michelle-Yang-2026-10-01.webp" alt="Michelle Yang" width="120" height="120" loading="lazy" />
         <div>
           <p className="h-eyebrow">Ben je Odoo-implementatiepartner?</p>
           <h2 id="partner-michelle-titel">Praat met Michelle.</h2>
