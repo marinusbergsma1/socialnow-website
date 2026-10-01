@@ -47,7 +47,6 @@ import { agents, people, projects, services } from "./content";
 import {
   Action,
   AgentCards,
-  ClientLogos,
   ConversionBridge,
   HeroMilos,
   Heading,
@@ -86,32 +85,6 @@ function Film({ src, poster, label, titel, klasse, geluid, zetGeluid, boven }: {
   );
 }
 
-// 30 september 2026 (Marinus): "bij landen gewoon logo animatie OS zoals eerst". De logo-animatie van 26 september
-// staat weer bovenaan de hero, speelt één keer en blijft staan op het complete logo.
-function HeroLogo() {
-  const ref = React.useRef<HTMLVideoElement>(null);
-  const stop = () => {
-    const film = ref.current;
-    if (film && film.currentTime >= 3.4) film.pause();
-  };
-  return (
-    <video
-      ref={ref}
-      className="h-hero-logo"
-      src="/video/bedankt/logo-animatie.mp4"
-      autoPlay
-      muted
-      playsInline
-      preload="auto"
-      onTimeUpdate={stop}
-      onEnded={stop}
-      aria-label="SocialNow OS"
-    />
-  );
-}
-
-// 30 september 2026 (Marinus): de vijf veiligheids- en databeschermingsfilms in de hero, beginnend bij 1, met kleine
-// nummers en namen eronder zodat je ze allemaal in de header kunt bekijken. Na afloop speelt de volgende.
 function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (aan: boolean) => void }) {
   const { language } = useLanguage();
   const taal = language === "nl" ? "nl" : "en";
@@ -266,7 +239,8 @@ export function Home() {
           {/* 26 september 2026 (Marinus): "op mijn header mag alle reclame weg". Geen stand, geen actie, geen
               tellers meer; een persoonlijk bedankje en één duidelijke login voor het gratis OS. */}
           {/* 26 september 2026 (Marinus): "SocialNow OS logo hoeft er niet bij, team er wel bij". */}
-          <HeroLogo />
+          {/* 1 oktober 2026 (Marinus): "SocialNowOS mag gwn boven hier weg." Geen logo-animatie meer boven het team; het
+              SocialNow-logo staat al in de menubalk. */}
           <TeamTrust />
           <HeroTitle />
           {/* 30 september 2026 (Marinus): "na de Let's get SocialNow ... die inlog daar en daaronder de rest van de merken
@@ -293,24 +267,21 @@ export function Home() {
               <span className="h-attesso">PAYMENT PARTNER <code>~/attesso</code></span>
             </p>
             {/* 1 oktober 2026 (Marinus): "Vanuit de video staan de logo's waar mijn partners van Attesso mee in gesprek gaan.
-                Die mogen ook op de site." en "Graag hier dan eronder." Dezelfde rij als in OUR STORY (partnership). */}
-            <ul className="h-attesso-logos" aria-label="Attesso in talks with">
-              <li><img src="/images/partners/betalen/visa.svg" alt="Visa" width="24" height="8" /></li>
-              <li><img src="/images/partners/betalen/mastercard.svg" alt="Mastercard" width="152" height="94" /></li>
-              <li><img src="/images/partners/betalen/airwallex.webp" alt="Airwallex" width="960" height="132" /></li>
-              <li><img src="/images/partners/betalen/adyen.svg" alt="Adyen" width="24" height="8" /></li>
-              <li><img src="/images/partners/betalen/rabobank.svg" alt="Rabobank" width="54" height="10" /></li>
-            </ul>
-          </div>
-          </div>
-          <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid}>
-            {/* 30 september 2026 (Marinus): "hieronder die trusted by, dan zie je al die bekende logo's" en daarna
-                "Hieronder is nu ruimte voor de grote logobalk": de merken staan rechts direct onder de OS-film. */}
-            <div className="h-hero-merken">
-              <p className="h-trusted" translate="no">Trusted by</p>
-              <ClientLogos kort />
+                Die mogen ook op de site.", "laat deze balk Primefone, DIVEINE, KWH weg" en "Dan kunnen er meer logo's onder
+                Attesso met talking to." Dezelfde rij als in OUR STORY (partnership), direct onder de betaalpartner. */}
+            <div className="h-talking">
+              <span className="h-talking-label">TALKING TO</span>
+              <ul className="h-attesso-logos">
+                <li><img src="/images/partners/betalen/visa.svg" alt="Visa" width="24" height="8" /></li>
+                <li><img src="/images/partners/betalen/mastercard.svg" alt="Mastercard" width="152" height="94" /></li>
+                <li><img src="/images/partners/betalen/airwallex.webp" alt="Airwallex" width="960" height="132" /></li>
+                <li><img src="/images/partners/betalen/adyen.svg" alt="Adyen" width="24" height="8" /></li>
+                <li><img src="/images/partners/betalen/rabobank.svg" alt="Rabobank" width="54" height="10" /></li>
+              </ul>
             </div>
-          </HeroFilm>
+          </div>
+          </div>
+          <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid} />
           {/* 1 oktober 2026 (Marinus): "Die tekst moet mooi met die afbeeldingen uitgelijnd zijn." Statement en gezichtenmuur
               staan in één rij over beide kolommen; de eerste regel begint op de bovenkant van de portretten en de laatste
               eindigt op de onderkant. */}

@@ -68,7 +68,9 @@
 .sn-site .h-aftermovie:hover { background: #25d3661a; color: #25d366; }
 .sn-site .h-attesso { color: #d4a0b5; }
 /* 1 oktober 2026: logo's van de partijen waar Attesso mee in gesprek is, als witte chips zoals in de partnerfilm. */
-.sn-site .h-attesso-logos { display: flex; flex-wrap: wrap; gap: 8px; margin: -2px 0 0; padding: 0; list-style: none; }
+.sn-site .h-talking { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.sn-site .h-talking-label { color: #d4a0b5; font-size: 12px; font-weight: 700; letter-spacing: .14em; }
+.sn-site .h-attesso-logos { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .sn-site .h-attesso-logos li { display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 12px; border-radius: 6px; background: #fff; }
 .sn-site .h-attesso-logos img { display: block; width: auto; height: 13px; }
 .sn-site .h-attesso-logos img[alt="Mastercard"] { height: 18px; }

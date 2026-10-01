@@ -12,7 +12,9 @@ import { join } from "node:path";
 const lees = (p) => readFileSync(p, "utf8");
 const pages = lees("proposal/pages.tsx"), css = lees("proposal/hero-c.css");
 const rij = pages.includes('className="h-team-rij"') ? pages.slice(pages.indexOf('className="h-team-rij"'), pages.indexOf("<HeroSprekers />")) : "";
-const film = pages.slice(pages.indexOf("<HeroFilm geluid"), pages.indexOf("</HeroFilm>"));
+// Sinds 1 oktober 2026 kan HeroFilm zelfsluitend zijn (geen Trusted by meer erin).
+const filmStart = pages.indexOf("<HeroFilm geluid");
+const film = pages.slice(filmStart, pages.includes("</HeroFilm>") ? pages.indexOf("</HeroFilm>") : pages.indexOf("/>", filmStart));
 const bronnen = ["proposal/content.ts", "components/Team.tsx", "components/TeamPage.tsx", "proposal/Deuren.tsx", "proposal/PartnerMichelle.tsx"];
 // Sinds 1 oktober 2026 (later die dag) heeft Michelle de kantoorfoto: "Michelle iets groter en normale achtergrond".
 const MICHELLE = "Michelle-Yang-kantoor";
