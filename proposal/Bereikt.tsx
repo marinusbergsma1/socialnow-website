@@ -24,38 +24,6 @@ const FINALISTEN = [
 ];
 const WINNAAR = 0;
 
-// 3 oktober 2026 (Marinus): onder het Odoo-blok een roze balk "OUR PARTNERS: ~/attesso at:" met de partnerlogo's groot als
-// doorlopende slider. Dezelfde merken als in de hero (Next step Salesforce, Talking to), nu groot en goed zichtbaar.
-const PARTNERS = [
-  { naam: "Salesforce", logo: "/images/partners/salesforce.svg", breed: 273, hoog: 191 },
-  { naam: "Visa", logo: "/images/partners/betalen/visa.svg", breed: 24, hoog: 8 },
-  { naam: "Mastercard", logo: "/images/partners/betalen/mastercard.svg", breed: 152, hoog: 94 },
-  { naam: "Airwallex", logo: "/images/partners/betalen/airwallex.webp", breed: 960, hoog: 132 },
-  { naam: "Adyen", logo: "/images/partners/betalen/adyen.svg", breed: 24, hoog: 8 },
-  { naam: "Rabobank", logo: "/images/partners/betalen/rabobank.svg", breed: 54, hoog: 10 },
-];
-
-// Twee keer dezelfde rij achter elkaar; de lus schuift precies één rij op, dus de naad is niet te zien.
-function PartnerSlider() {
-  const rij = (kopie: boolean) => (
-    <ul className="h-partners-rij" aria-hidden={kopie || undefined}>
-      {PARTNERS.map((partner) => (
-        <li key={partner.naam} className="h-partners-logo">
-          <img src={partner.logo} alt={kopie ? "" : partner.naam} width={partner.breed} height={partner.hoog} loading="lazy" />
-        </li>
-      ))}
-    </ul>
-  );
-  return (
-    <div className="h-partners" translate="no">
-      <p className="h-partners-balk">OUR PARTNERS: <code>~/attesso</code> at:</p>
-      <div className="h-partners-strook">
-        <div className="h-partners-lus">{rij(false)}{rij(true)}</div>
-      </div>
-    </div>
-  );
-}
-
 function useMinderBeweging() {
   const [minder, setMinder] = React.useState(false);
   React.useEffect(() => {
@@ -214,9 +182,6 @@ export default function Bereikt() {
         </svg>
         <p className="sn-tegel-titel">Om te presenteren bij de Student Entrepreneurs Club.</p>
         <p className="sn-tegel-tekst">Na drie dagen op de beurs in Brussel. Dank je, Michelle.</p>
-      </Tegel>
-      <Tegel breed={12} className="h-bereikt-partners">
-        <PartnerSlider />
       </Tegel>
       <Tegel kop="kWh Garant" breed={4} className="h-bereikt-kwh">
         <KwhStroom />
