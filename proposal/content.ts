@@ -58,6 +58,11 @@ export const people = [
   },
   // 30 september 2026 (Marinus): nieuw teamlid.
   { name: "Tristan Slobbe", role: "Data & AI Engineer", image: "Tristan-Slobbe.webp" },
+  // 3 oktober 2026 (Marinus): nieuwe teamleden.
+  { name: "Antony Soosaipillaj", role: "Full-Stack AI Developer", image: "Antony-Soosaipillaj.webp" },
+  { name: "Aren", role: "Senior Sales", image: "Aren.webp" },
+  { name: "Youri van der Donk", role: "Senior Sales", image: "Youri-van-der-Donk.webp" },
+  { name: "Isaak Munster", role: "Business Coach", image: "Isaak-Munster.webp" },
 ];
 export const agents = [
   {
