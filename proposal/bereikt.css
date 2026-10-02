@@ -210,3 +210,26 @@
   .sn-site .h-lac-kaart { width: 82%; }
   .sn-site .h-lac-beeld { width: 100%; height: auto; aspect-ratio: 4 / 3; }
 }
+
+/* 3 oktober 2026 (Marinus): roze partnerbalk (Attesso-roze #F62961) onder het Odoo-blok, met de partnerlogo's groot als
+   doorlopende slider. Witte kaarten zodat elk logo in zijn eigen kleur staat. Stil bij prefers-reduced-motion. */
+.sn-site .h-bereikt-partners .sn-tegel-vlak { padding: 0; gap: 0; background: #0b0f12; }
+.sn-site .h-partners-balk { margin: 0; padding: clamp(14px, 1.4vw, 20px) clamp(20px, 2.1vw, 32px); background: #F62961; color: #fff; font-size: clamp(15px, 1.3vw, 20px); font-weight: 800; letter-spacing: .14em; }
+.sn-site .h-partners-balk code { font-family: ui-monospace, Menlo, monospace; font-weight: 600; letter-spacing: 0; font-size: 1.08em; }
+.sn-site .h-partners-strook { position: relative; overflow: hidden; padding: clamp(22px, 2.4vw, 36px) 0; }
+.sn-site .h-partners-strook::before, .sn-site .h-partners-strook::after { content: ""; position: absolute; top: 0; bottom: 0; width: clamp(40px, 6vw, 110px); z-index: 1; pointer-events: none; }
+.sn-site .h-partners-strook::before { left: 0; background: linear-gradient(90deg, #0b0f12, transparent); }
+.sn-site .h-partners-strook::after { right: 0; background: linear-gradient(270deg, #0b0f12, transparent); }
+.sn-site .h-partners-lus { display: flex; width: max-content; animation: h-partners-lus 32s linear infinite; }
+.sn-site .h-partners-strook:hover .h-partners-lus { animation-play-state: paused; }
+.sn-site .h-partners-rij { display: flex; gap: clamp(16px, 1.8vw, 28px); margin: 0; padding: 0 clamp(16px, 1.8vw, 28px) 0 0; list-style: none; }
+.sn-site .h-partners-logo { display: grid; place-items: center; width: clamp(200px, 19vw, 300px); height: clamp(110px, 10vw, 150px); padding: 22px 30px; border-radius: 18px; background: #fff; }
+.sn-site .h-partners-logo img { display: block; width: 100%; height: 100%; max-height: 64px; object-fit: contain; }
+.sn-site .h-partners-logo img[alt="Salesforce"] { max-height: 92px; }
+.sn-site .h-partners-logo img[alt="Mastercard"] { max-height: 80px; }
+@keyframes h-partners-lus { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .sn-site .h-partners-lus { animation: none; width: auto; }
+  .sn-site .h-partners-rij { flex-wrap: wrap; justify-content: center; padding: 0 16px; }
+  .sn-site .h-partners-rij[aria-hidden] { display: none; }
+}
