@@ -214,8 +214,12 @@
 /* 30 september 2026 (Marinus): join-zin wit. "Alleen een lichte witte glow dus niet groen. Die komt alleen van links
    naar rechts bij hover." Geen groen verloop en geen doorlopende glans meer; de glow schuift één keer over de zin. */
 .sn-site .h-team-join-tekst { background: none; color: #fff; }
-.sn-site .h-team-join-tekst::after { animation: none; opacity: 0; background: linear-gradient(100deg, transparent 38%, rgba(255,255,255,.9) 50%, transparent 62%) 0 0 / 250% 100% no-repeat; background-position: 150% 0; filter: drop-shadow(0 0 6px rgba(255,255,255,.45)); }
+.sn-site .h-team-join-tekst::after { animation: none; opacity: 0; background: linear-gradient(100deg, transparent 38%, rgba(255,255,255,.9) 50%, transparent 62%) 0 0 / 250% 100% no-repeat; background-position: 150% 0; }
 .sn-site .h-team-join:hover .h-team-join-tekst::after, .sn-site .h-team-join:focus-visible .h-team-join-tekst::after { opacity: 1; animation: h-join-glow 1.1s ease-out forwards; }
+/* 3 oktober 2026 (Marinus): de glow niet als blok of vlak achter de tekst, maar puur over de letters. De drop-shadow-filter op
+   de glans (background-clip: text) tekende in Chrome een rechthoek; die is weg. De gloed zit nu als text-shadow op de glyphs. */
+.sn-site .h-team-join-tekst { transition: text-shadow .5s ease; }
+.sn-site .h-team-join:hover .h-team-join-tekst, .sn-site .h-team-join:focus-visible .h-team-join-tekst { text-shadow: 0 0 6px rgba(255,255,255,.75), 0 0 16px rgba(255,255,255,.4); }
 @keyframes h-join-glow { from { background-position: 150% 0; } to { background-position: -100% 0; } }
 
 /* 1 oktober 2026 (Marinus): team als gezichtenmuur in kleur (versie 3), naam en rol bij hover, uitnodiging als balk. */
