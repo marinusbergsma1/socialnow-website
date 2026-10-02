@@ -22,7 +22,10 @@ export default function PartnerBalk() {
   );
   return (
     <div className="h-partners" translate="no">
-      <p className="h-partners-balk">OUR PARTNERS: <code>~/attesso</code> at:</p>
+      {/* 3 oktober 2026 (Marinus): "Kloppen deze wel?" Niet door Attesso bevestigd als partners, dus net als in de hero
+          TALKING TO. En: "ZET ER OOK GROOT BIJ IN GESPREK MET RENÉ VAN DER ZEL. XXL NUTRITION." */}
+      <p className="h-partners-balk">TALKING TO</p>
+      <p className="h-partners-groot">René van der Zel <span>· XXL Nutrition</span></p>
       <div className="h-partners-strook">
         <div className="h-partners-lus">{rij(false)}{rij(true)}</div>
       </div>
