@@ -4,14 +4,16 @@ import { ArrowUpRight } from "lucide-react";
 import { people } from "./content";
 import { klein } from "./licht";
 
+// Iedereen uit people, Marinus voorop; de rest in de volgorde van de muur.
+const voorop = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe"];
+const teamOpVolgorde = () => [...people].sort((a, b) => (voorop.indexOf(a.name) + 1 || 99) - (voorop.indexOf(b.name) + 1 || 99));
+
 // 28 september 2026 (Marinus): meer mensen uit het team laten zien, de tekst mag kleiner. Het hele team, even groot.
 export default function TeamTrust() {
   return <Link to="/team" className="h-team-trust">
     <span className="h-team-portraits" aria-hidden="true">
-      {["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe"]
-        .map(naam => people.find(person => person.name === naam))
-        .filter((person): person is NonNullable<typeof person> => Boolean(person))
-        .map(person => <img key={person.name} {...klein(person.image, 48)} alt="" width="56" height="56" loading="lazy" />)}
+      {/* 3 oktober 2026 (Marinus): "ZORG DAT IEDEREEN EROP STAAT". Het hele team uit people, in de volgorde van de muur. */}
+      {teamOpVolgorde().map(person => <img key={person.name} {...klein(person.image, 48)} alt="" width="56" height="56" loading="lazy" />)}
     </span>
     <span><strong>Technologie met mensen erachter.</strong><span>Maak kennis met ons team <ArrowUpRight size={13} aria-hidden="true" /></span></span>
   </Link>;
@@ -35,8 +37,7 @@ export function TeamJoin() {
   // 1 oktober 2026 (Marinus): versie 3, de gezichtenmuur, "maar het team in kleur". Twaalf portretten met naam en rol bij
   // hover, daaronder de uitnodiging als balk met Open positions.
   // 3 oktober 2026 (Marinus): "TEAM ER HELEMAAL OP". Iedereen uit people, Marinus voorop; de rest in de volgorde van de muur.
-  const voorop = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe"];
-  const team = [...people].sort((a, b) => (voorop.indexOf(a.name) + 1 || 99) - (voorop.indexOf(b.name) + 1 || 99));
+  const team = teamOpVolgorde();
   return <div className="h-team-sectie" translate="no">
     <Link to="/team" className="h-team-muur" aria-label="Meet the SocialNow team">
       {team.map(person => <figure key={person.name}>
