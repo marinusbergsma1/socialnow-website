@@ -7,6 +7,9 @@ export const people = [
     name: "Marinus Bergsma",
     role: "Founder & CEO",
     image: "marinus-profiel-blauw.webp",
+    // 3 oktober 2026 (Marinus): "het hele team trots met eigen bedrijfsnaam". Alleen bevestigde namen; de rest vraagt hij na.
+    // Carmel, Sam, Emma en Pepijn: SOCIALNOW_EXPERTS in het OS (2 oktober 2026, "Alle vier akkoord").
+    bedrijf: "SocialNow",
   },
   { name: "Jos Hollenberg", role: "Head of Meta Ads", image: "Jos-Hollenberg-1.webp" },
   {
@@ -19,16 +22,19 @@ export const people = [
     name: "Carmel Boon",
     role: "Head of Video Production",
     image: "Carmel-Boon-V2.webp",
+    bedrijf: "By Carmel",
   },
   {
     name: "Sam van der Sluis",
     role: "Lead Videographer",
     image: "Sam-van-der-Sluis.webp",
+    bedrijf: "Studio Sluis",
   },
   {
     name: "Emma Peperkamp",
     role: "Lead Photographer",
     image: "Emma-Peperkamp-V2.webp",
+    bedrijf: "Your Social Haus",
   },
   { name: "Nick van Keulen", role: "Head of Google Ads & Search", image: "Nick-VK.webp" },
   // 25 september 2026 (Marinus): nieuw teamlid.
@@ -39,17 +45,20 @@ export const people = [
     name: "Sid van Kalken",
     role: "Head of Web Development & AI Payments · Attesso",
     image: "sid-attesso.webp",
+    bedrijf: "Attesso",
   },
   // 1 oktober 2026 (Marinus): Douwe Kramer, co-founder van Attesso, met Sid het Attesso-team naast Marinus en Steef.
   {
     name: "Douwe Kramer",
     role: "Co-founder · Attesso",
     image: "Douwe-Kramer-attesso.webp",
+    bedrijf: "Attesso",
   },
   {
     name: "Steef Komen",
     role: "Partner · Head of Finance, Data & AI Payments",
     image: "Steef-Komen.webp",
+    bedrijf: "Komen Consultancy",
   },
   {
     name: "Michelle Yang",
@@ -63,6 +72,10 @@ export const people = [
   { name: "Aren", role: "Senior Sales", image: "Aren.webp" },
   { name: "Youri van der Donk", role: "Senior Sales", image: "Youri-van-der-Donk.webp" },
   { name: "Isaak Munster", role: "Business Coach", image: "Isaak-Munster.webp" },
+  // 3 oktober 2026 (Marinus): Pepijn en Armando erbij, met eigen bedrijf. Foto's uit ~/Movies/OS-VIDEO/85-our-story-final/
+  // assets/team-wide; Armando staat in collectie85.py als "Designer · Bruggn Design" (nog te bevestigen door Marinus).
+  { name: "Pepijn Bos", role: "Art Director", image: "Pepijn-Bos.webp", bedrijf: "Bos Design" },
+  { name: "Armando van Bruggen", role: "Designer", image: "Armando-van-Bruggen.webp", bedrijf: "Bruggn Design" },
 ];
 export const agents = [
   {

@@ -34,7 +34,9 @@ import "./cases.css";
 import "./media-bento.css";
 import "./pricing.css";
 import "./site-visie.css";
+import "./doel.css";
 const Deuren = later(() => import("./Deuren").then((m) => m.default));
+const Doel = later(() => import("./Doel").then((m) => m.default));
 import { FILMS as VEILIGHEIDSFILMS, filmPad as veiligheidFilm, filmPosterPad as veiligheidPoster } from "./veiligheid-beloftes";
 const Bereikt = later(() => import("./Bereikt").then((m) => m.default));
 const NulNaarBedrijf = later(() => import("./NulNaarBedrijf").then((m) => m.default));
@@ -314,6 +316,8 @@ export function Home() {
       <Bereikt />
       <NulNaarBedrijf />
       <Verhaal />
+      {/* 3 oktober 2026 (Marinus): doelmeter €1.000.000 met het team, direct na zijn verhaal. */}
+      <Doel />
       <Deuren />
       {/* 28 september 2026 (Marinus): "alle onderdelen als kleine bentogrids, net zoals de homepage wanneer je daarop landt". */}
       <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} swipe>
