@@ -63,6 +63,10 @@ export const people = [
   { name: "Aren", role: "Senior Sales", image: "Aren.webp" },
   { name: "Youri van der Donk", role: "Senior Sales", image: "Youri-van-der-Donk.webp" },
   { name: "Isaak Munster", role: "Business Coach", image: "Isaak-Munster.webp" },
+  // 3 oktober 2026 (Marinus): "Zet de rest er ook op". Pieter stond klaar op feat/team-pieter-20261001.
+  { name: "Pieter Bergsma", role: "Multi sales business owner", image: "Pieter-Bergsma.webp" },
+  { name: "Pepijn Bos", role: "Art Director · Bos Design", image: "Pepijn-Bos.webp" },
+  { name: "Armando van Bruggen", role: "Designer · Bruggn Design", image: "Armando-van-Bruggen.webp" },
 ];
 export const agents = [
   {
