@@ -29,7 +29,7 @@ export function OdooLogo({ className }: { className?: string }) {
   );
 }
 
-type Hoofdstuk = { wanneer: string; titel: string; tekst: string; breed: 3 | 4 | 6; soort?: "vlak" | "roze"; beeld?: React.ReactNode };
+type Hoofdstuk = { wanneer: string; titel: string; tekst: string; breed: 3 | 4 | 6; soort?: "vlak" | "roze" | "groen"; beeld?: React.ReactNode };
 
 const HOOFDSTUKKEN: Hoofdstuk[] = [
   {
@@ -78,7 +78,8 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     titel: "Toen AI beelden kon maken, gooide ik mijn plan om.",
     tekst: "Ik verdiepte me in AI en development. Het persoonlijke bleef de kern.",
     breed: 3,
-    soort: "roze",
+    // 3 oktober 2026 (Marinus): "DEZE GROEN VOOR DE POSITIEVE MESSAGE."
+    soort: "groen",
     beeld: <CharacterAccent kind="coder" />,
   },
   {

@@ -10,15 +10,14 @@ import "./bereikt.css";
 // niets wegvalt (de staande impressies van Infinita en Butterfly Effect verloren hun kunstwerk onderaan). Na: de impressie
 // als echte nachtfoto met het kunstwerk groot in beeld. Voor: dat na-beeld overdag, zonder kunstwerk, in exact dezelfde
 // kadrering, zodat de schuif precies over dezelfde plek gaat. Meesters van 1600 px in images/light-art.
+// 3 oktober 2026 (Marinus), bij Eternal Sundown: "1 IS GOED GENOEG VAN DEZE". Alleen dit paar blijft.
 const IMPRESSIES = [
   { titel: "Eternal Sundown", voor: "/images/light-art/eternal-sundown-voor.webp", na: "/images/light-art/eternal-sundown-na.webp", breed: 1600, hoog: 1000 },
-  { titel: "Infinita", voor: "/images/light-art/infinita-voor.webp", na: "/images/light-art/infinita-na.webp", breed: 1600, hoog: 1000 },
-  { titel: "Butterfly Effect", voor: "/images/light-art/butterfly-effect-voor.webp", na: "/images/light-art/butterfly-effect-na.webp", breed: 1600, hoog: 1000 },
 ];
 // 30 september 2026 (Marinus): "3 niet 5". Alleen de drie Artist Impressions. De beelden waren 1920 px en samen 2,7 MB voor
 // kaarten van 400 px; op een trage lijn bleven de vakken leeg. Nu uit images/light-art/licht in 800 en 1400 px (q74).
 const licht = (pad: string) => `/images/light-art/licht/${pad.split("/").pop()!.replace(/\.webp$/, "")}`;
-const bronnen = (pad: string) => ({ src: `${licht(pad)}-800.webp`, srcSet: `${licht(pad)}-800.webp 800w, ${licht(pad)}-1400.webp 1400w`, sizes: "(min-width: 900px) 30vw, 82vw" });
+const bronnen = (pad: string) => ({ src: `${licht(pad)}-800.webp`, srcSet: `${licht(pad)}-800.webp 800w, ${licht(pad)}-1400.webp 1400w`, sizes: "(min-width: 900px) 640px, 92vw" });
 
 type Impressie = (typeof IMPRESSIES)[number];
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { people } from "./content";
 import { klein } from "./licht";
@@ -23,15 +23,7 @@ export function TeamJoin() {
   // 30 september 2026 (Marinus): midden in de ruimte, iets minder dik, wit met alleen bij hover een lichte witte glow van
   // links naar rechts. De raket gaat bij hover een klein stukje recht omhoog, zonder vuur; bij een klik schiet hij verder
   // omhoog en daarna ga je naar de vacatures. Zonder hover komt hij terug.
-  const navigate = useNavigate();
-  const [lancering, setLancering] = React.useState(false);
-  const klik = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-    e.preventDefault();
-    setLancering(true);
-    const minder = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    window.setTimeout(() => navigate("/vacatures"), minder ? 0 : 520);
-  };
+  // 3 oktober 2026 (Marinus): "Geen glow, geen jump en gwn een groene balk." Gewone link naar de vacatures, geen lancering.
   // 1 oktober 2026 (Marinus): versie 3, de gezichtenmuur, "maar het team in kleur". Twaalf portretten met naam en rol bij
   // hover, daaronder de uitnodiging als balk met Open positions.
   // 3 oktober 2026 (Marinus): "TEAM ER HELEMAAL OP". Iedereen uit people, Marinus voorop; de rest in de volgorde van de muur.
@@ -45,10 +37,10 @@ export function TeamJoin() {
       </figure>)}
       <figure className="h-team-jij"><span>Jij?</span></figure>
     </Link>
-    <Link to="/vacatures" onClick={klik} className={`h-team-join h-team-join-balk${lancering ? " is-lancering" : ""}`}>
+    <Link to="/vacatures" className="h-team-join h-team-join-balk">
       <span className="h-team-join-zin">
-        <span className="h-team-join-tekst">Let&rsquo;s make a difference together and join SocialNow!</span>
-        <span className="h-raket" aria-hidden="true">🚀</span>
+        {/* 3 oktober 2026 (Marinus): "dat raketje etc liefst er gwn naast". "SocialNow!" en de raket breken nooit los. */}
+        <span className="h-team-join-tekst">Let&rsquo;s make a difference together and join <span className="h-team-join-slot">SocialNow!<span className="h-raket" aria-hidden="true">🚀</span></span></span>
       </span>
       <span className="h-team-join-open">Open positions &rarr;</span>
     </Link>
