@@ -291,3 +291,9 @@
 .sn-site .h-hero .h-team-rij .h-team-muur .h-team-jij { display: grid; place-items: center; background: #25d366; color: #0b0f12; font-size: clamp(18px, 1.6vw, 26px); font-weight: 800; }
 .sn-site .h-hero .h-team-rij .h-team-join.h-team-join-balk { border-color: #0b0f121f; background: #0b0f12; }
 .sn-site .h-hero .h-team-rij .h-team-join-balk:hover { border-color: #25d366; }
+
+/* 3 oktober 2026 (Marinus): "ZORG DAT IEDEREEN EROP STAAT". Het hele team staat in de strook; op een smal scherm
+   loopt die door op een tweede regel in plaats van rechts weg te vallen. */
+@media (max-width: 899px) {
+  .sn-site .h-team-portraits { flex-wrap: wrap; flex-shrink: 1; max-width: 100%; row-gap: 6px; }
+}
