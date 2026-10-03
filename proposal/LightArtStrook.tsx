@@ -74,8 +74,9 @@ function VoorNaSchuif({ impressie }: { impressie: Impressie }) {
 export default function LightArtStrook() {
   return (
     <div className="h-lac">
+      {/* 3 oktober 2026 (Marinus): "GRAAG ALLEEN DE EERSTE". Van de drie kopjes blijft alleen Artist Impressions. */}
       <p className="h-lac-kop">
-        <span>Artist Impressions</span> <span translate="no">Light Art Collection</span> <span>Schuif voor en na</span>
+        <span>Artist Impressions</span>
       </p>
       <div className="h-lac-venster" role="region" aria-label="Artist Impressions voor Light Art Collection">
         {IMPRESSIES.map((impressie) => <VoorNaSchuif key={impressie.titel} impressie={impressie} />)}
