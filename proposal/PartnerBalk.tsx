@@ -26,6 +26,10 @@ export default function PartnerBalk() {
           TALKING TO. En: "ZET ER OOK GROOT BIJ IN GESPREK MET RENÉ VAN DER ZEL. XXL NUTRITION." */}
       <p className="h-partners-balk">TALKING TO</p>
       <p className="h-partners-groot">René van der Zel <span>· XXL Nutrition</span></p>
+      {/* 3 oktober 2026 (Marinus): "Zet ook nog Sid van Kalken currently talking to René van der Zel - to present at
+          DAY1 event. A DREAM COME TRUE FOR YOUNG ENTREPENEURS LIKE US. TO INSPIRE!" */}
+      <p className="h-partners-day1"><b>Sid van Kalken</b> is currently talking to René van der Zel to present at the <b>DAY1</b> event.</p>
+      <p className="h-partners-droom">A DREAM COME TRUE FOR YOUNG ENTREPRENEURS LIKE US. TO INSPIRE!</p>
       <div className="h-partners-strook">
         <div className="h-partners-lus">{rij(false)}{rij(true)}</div>
       </div>

@@ -2833,6 +2833,12 @@ html {
 .sn-site .h-verhaal-getal b { font-size: clamp(56px, 5vw, 84px); line-height: .9; font-weight: 700; color: #25d366; letter-spacing: -.05em; }
 .sn-site .h-verhaal-getal span { font-size: clamp(15px, 1.1vw, 18px); line-height: 1.35; color: #d3d9df; font-weight: 500; }
 .sn-site .h-verhaal-hoofdstukken { padding-top: clamp(28px, 3.4vw, 44px); }
+/* 3 okt 2026: familietegel met staande Instagram-film ernaast. */
+.sn-site .h-verhaal-familie .sn-tegel-vlak { justify-content: center; }
+.sn-site .h-verhaal-familie .sn-tegel-titel { font-size: clamp(24px, 2.2vw, 36px); line-height: 1.15; letter-spacing: -.02em; }
+.sn-site .h-verhaal-familie .sn-tegel-tekst { font-size: clamp(16px, 1.2vw, 19px); line-height: 1.55; max-width: 46ch; }
+.sn-site .sn-tegel.is-film.h-verhaal-familie-film .sn-tegel-vlak { aspect-ratio: 4 / 5; }
+.sn-site .h-verhaal-familie-film .sn-tegel-film { object-position: center 62%; }
 .sn-site .h-hoofdstuk .sn-tegel-titel { font-size: clamp(20px, 1.6vw, 26px); }
 .sn-site .h-hoofdstuk-beeld { margin-top: auto; padding-top: 8px; }
 .sn-site .h-hoofdstuk-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 26px; }

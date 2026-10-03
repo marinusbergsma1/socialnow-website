@@ -152,6 +152,16 @@ export default function Verhaal() {
             <Waarom groot />
           </Tegel>
         )}
+        {/* 3 oktober 2026 (Marinus): "dat ik uit een creatieve familie van ondernemers kom. Mijn moeder lerares en
+            therapeut. Mijn vader kunstenaar" en "Mijn vader heeft mijn hele jeugd ochtend en avond gewerkt." Met de
+            Instagram-film "My biggest fan" ernaast. */}
+        <Tegel kop="Waar ik vandaan kom" breed={8} className="h-verhaal-familie">
+          <h3 className="sn-tegel-titel">Uit een creatieve familie van ondernemers.</h3>
+          <p className="sn-tegel-tekst">Mijn moeder is lerares en therapeut, mijn vader kunstenaar. Hij werkte mijn hele jeugd van 's ochtends tot 's avonds. Zo leerde ik als kind: je kunt worden wat je wilt, zolang je er maar keihard voor werkt.</p>
+        </Tegel>
+        <Tegel kop="My biggest fan" breed={4} soort="film" className="h-verhaal-familie-film">
+          <BentoFilm src="/video/familie/biggest-fan.mp4" poster="/video/familie/biggest-fan-poster.webp" label="My biggest fan" />
+        </Tegel>
         {film && (
           <Tegel kop="Mijn waarom" breed={12}>
             <Waarom />
