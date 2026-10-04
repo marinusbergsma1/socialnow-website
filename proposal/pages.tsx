@@ -289,12 +289,24 @@ export function Home() {
           <div className="h-team-rij">
             {/* 30 september 2026 (Marinus): header optie C. Het statement als één zin onder de kop, klein de SaaS-regel, en
                 twee knoppen: inloggen en een gratis live demo met de founder. Overal Engels (translate="no"). */}
+            {/* 4 oktober 2026 (Marinus): "links moet er even wat meer tekst", "En tie tekst die ik zet echt ook weer in een eigen
+                sectie'tje". Statement en het verhaal van Marinus staan samen links; het verhaal in een eigen vak. */}
+            <div className="h-team-links">
             <div className="h-statement is-r1" translate="no">
               {/* 30 september 2026 (Marinus): "Dit is helemaal niet in deze stijl, LOS DAT OP", met versie R1 als voorbeeld:
                   alle regels even groot, per regel eerst dun en dan dik, het groene deel dik, de punt wit. */}
               <p className="h-sr"><span className="d">Proven, branded,</span> <b>fully automated!</b></p>
               <p className="h-sr"><span className="d">Everyone can automate a business.</span> <b className="g">NO ONE CAN AUTOMATE PEOPLE WHO CARE</b><b>.</b></p>
               <p className="h-sr"><span className="d">Software is a tool.</span> <b>We are SocialNow!</b></p>
+            </div>
+            <div className="h-team-verhaal" translate="no">
+              <p className="h-team-verhaal-kop">Why I started</p>
+              <p>I grew up in a <strong>family of makers</strong>. My father is an artist who worked <strong>from early morning until late at night</strong>. My mother is a teacher and therapist.</p>
+              <p>What they taught me: <strong>you can become anything you want, as long as you work hard for it.</strong></p>
+              <p><strong>For over 5 years</strong>, we have connected the <strong>biggest brands</strong> with the right <strong>creatives and consultants</strong>. AI makes this <strong>scalable, worldwide</strong>.</p>
+              <p>Our goal: changing Big Tech and Big Corp, and creating a <strong>free, fair and social economy</strong>.</p>
+              <div className="h-team-verhaal-naam"><img {...klein("marinus-profiel-blauw.webp", 40)} alt="" width="40" height="40" loading="lazy" /><span><strong>Marinus Bergsma</strong><i>Founder &amp; CEO</i></span></div>
+            </div>
             </div>
             <TeamJoin />
           </div>

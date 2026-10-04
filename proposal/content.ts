@@ -46,14 +46,15 @@ export const people = [
     role: "Co-founder · Attesso",
     image: "Douwe-Kramer-attesso.webp",
   },
+  // 4 oktober 2026 (Marinus): "Ai payment hoort niet bij Steef en Michelle." Alleen Sid (Attesso) houdt AI Payments.
   {
     name: "Steef Komen",
-    role: "Partner · Head of Finance, Data & AI Payments",
+    role: "Partner · Head of Finance & Data",
     image: "Steef-Komen.webp",
   },
   {
     name: "Michelle Yang",
-    role: "Head of Supply Chain, Operations & AI Payments",
+    role: "Head of Supply Chain & Operations",
     image: "Michelle-Yang-kantoor.webp",
   },
   // 30 september 2026 (Marinus): nieuw teamlid.
