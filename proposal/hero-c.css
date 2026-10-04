@@ -288,7 +288,9 @@
 .sn-site .h-hero .h-team-rij .h-statement.is-r1 .d { color: #2b3330; }
 .sn-site .h-hero .h-team-rij .h-statement.is-r1 b.g { color: #12a150; }
 .sn-site .h-hero .h-team-rij .h-team-muur figure { border-color: #0b0f1214; background: #eef1ef; }
-.sn-site .h-hero .h-team-rij .h-team-muur .h-team-jij { display: grid; place-items: center; background: #25d366; color: #0b0f12; font-size: clamp(18px, 1.6vw, 26px); font-weight: 800; }
+/* 4 oktober 2026 (Marinus): de tegel "Jij?" wordt een zwart vlak met "Let's get" en het SocialNow-logo. */
+.sn-site .h-hero .h-team-rij .h-team-muur .h-team-jij { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 10px; background: #0b0f12; border-color: #0b0f12; color: #fff; font-size: clamp(13px, 1.1vw, 17px); font-weight: 700; }
+.sn-site .h-hero .h-team-rij .h-team-muur .h-team-jij img { position: static; width: 84%; height: auto; aspect-ratio: auto; object-fit: contain; border-radius: 0; }
 .sn-site .h-hero .h-team-rij .h-team-join.h-team-join-balk { border-color: #0b0f121f; background: #0b0f12; }
 .sn-site .h-hero .h-team-rij .h-team-join-balk:hover { border-color: #25d366; }
 
