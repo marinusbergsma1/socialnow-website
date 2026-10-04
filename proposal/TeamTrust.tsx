@@ -44,7 +44,9 @@ export function TeamJoin() {
         <img {...klein(person.image, "(max-width: 900px) 25vw, 160px", [160, 320])} alt="" width="160" height="160" loading="lazy" />
         <figcaption>{person.name}<i>{person.role}</i></figcaption>
       </figure>)}
-      <figure className="h-team-jij"><span>Jij?</span></figure>
+      {/* 4 oktober 2026 (Marinus): "niet een groen vlak maar een zwarte balk Let's get SocialNow Logo". Het logo staat
+          altijd op zwart. */}
+      <figure className="h-team-jij"><span>Let&rsquo;s get</span><img src="/images/klein/SocialNow-Logo-2026-400.webp" alt="SocialNow" width="200" height="38" loading="lazy" /></figure>
     </Link>
     <Link to="/vacatures" onClick={klik} className={`h-team-join h-team-join-balk${lancering ? " is-lancering" : ""}`}>
       <span className="h-team-join-zin">
