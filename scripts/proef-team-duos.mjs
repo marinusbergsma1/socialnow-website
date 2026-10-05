@@ -5,7 +5,8 @@
 // Rood op main f990846, groen op feat/team-duos-tekst-20261004.
 import { readFileSync, existsSync } from "node:fs";
 const team = readFileSync("proposal/TeamTrust.tsx", "utf8"), css = readFileSync("proposal/hero-c.css", "utf8");
-const balk = readFileSync("proposal/PartnerBalk.tsx", "utf8");
+// 5 oktober 2026: de witte Talking to-balk is weg (scripts/proef-talking-to-weg.mjs).
+const balk = existsSync("proposal/PartnerBalk.tsx") ? readFileSync("proposal/PartnerBalk.tsx", "utf8") : "";
 const pages = readFileSync("proposal/pages.tsx", "utf8"), content = readFileSync("proposal/content.ts", "utf8");
 const rol = naam => (content.match(new RegExp(`name: "${naam}",[\\s\\S]*?role: "([^"]+)"`)) || [])[1] || "";
 const bestaat = p => existsSync("public" + p);
@@ -22,8 +23,6 @@ const eisen = [
   ["verhaal van Marinus in een eigen vak", pages.includes('className="h-team-verhaal"') && pages.includes("Why I started") && pages.includes("family of makers") && pages.includes("free, fair and social economy")],
   ["AI Payments niet bij Steef en Michelle, wel bij Sid", !rol("Steef Komen").includes("AI Payments") && !rol("Michelle Yang").includes("AI Payments") && rol("Sid van Kalken").includes("AI Payments")],
   ["SocialNow-duo donkerblauw naar zwart, groen feller", /\.h-duo\.is-sn \{[^}]*#16233a[^}]*#0b0f12/.test(css) && /b\.g \{ color: #0cb457; \}/.test(css)],
-  ["Talking to: echt XXL Nutrition-logo op zwart bij René", balk.includes('src="/images/merken/xxl-nutrition.svg"') && bestaat("/images/merken/xxl-nutrition.svg") && !balk.includes("· XXL Nutrition</span>") && /\.h-partners-xxl \{[^}]*background: #0b0f12/.test(css)],
-  ["partnerlogo's kleiner (max 30 px hoog)", /\.h-partners-logo img \{[^}]*max-height: 30px/.test(css) && !/img\[alt="Salesforce"\] \{ max-height: 80px/.test(css)],
   ["LinkedIn bij Tristan en Douwe, bedrijfslogo's linken door", ["https://www.linkedin.com/in/tristan-slobben-105056159/", "https://www.linkedin.com/in/douwekramer/", "https://www.klm.com", "https://www.bearingpoint.com", "https://bytechat.io", "https://bytevision.io"].every(u => team.includes(`"${u}"`)) && team.includes('rel: "noopener noreferrer"')],
 ];
 let fout = 0;

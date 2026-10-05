@@ -22,7 +22,6 @@ import { klein, useDichtbij, useNaBeeld } from "./licht";
 import CharacterAccent from "./CharacterAccent";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import TeamTrust, { TeamJoin } from "./TeamTrust";
-import PartnerBalk from "./PartnerBalk";
 const Verhaal = later(() => import("./Verhaal").then((m) => m.default));
 import { Bento, Tegel } from "./Bento";
 import "./bereikt.css";
@@ -310,7 +309,7 @@ export function Home() {
             </div>
             <TeamJoin />
           </div>
-          <PartnerBalk />
+          {/* 5 oktober 2026 (Marinus): de witte Talking to-balk (René van der Zel, XXL Nutrition, logoslider) "mag weg". */}
           <HeroSprekers />
           <HeroVeilig geluid={heroGeluid} setGeluid={setHeroGeluid} />
           {/* 30 september 2026 (Marinus): "Deze video mag weg want daaronder doe ik al mijn verhaal." My story staat niet meer
