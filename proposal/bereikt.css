@@ -288,3 +288,13 @@
 .sn-site .h-deur-erp-rij a { height: 30px; padding: 0 10px; border-radius: 6px; background: #fff; opacity: 1; }
 .sn-site .h-deur-erp-rij a:hover { opacity: .9; }
 .sn-site .h-deur-erp-rij img { max-width: 84px; }
+/* ERP-markt integration: marktwaarde in mono. */
+.sn-site .h-deur-erp-waarde { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin: 0; }
+.sn-site .h-deur-erp-waarde b { font-family: var(--c-mono, ui-monospace, Menlo, monospace); font-size: clamp(24px, 2.2vw, 30px); font-weight: 500; letter-spacing: -.04em; color: #fff; }
+.sn-site .h-deur-erp-waarde span { font-family: var(--c-mono, ui-monospace, Menlo, monospace); font-size: 11px; color: #8b9691; }
+/* 5 oktober 2026 (Marinus): "Nu is de tekst op het vlak onder ODOO niet te lezen." De partnerlogo's waren wit gemaakt, waardoor
+   de kleine regels wegvielen. Nu in eigen kleur op witte chips, net als de ERP-logo's. */
+.sn-site .h-deur-logos ul { gap: 6px; }
+.sn-site .h-deur-logos li { display: inline-flex; align-items: center; height: 40px; padding: 0 12px; border-radius: 6px; background: #fff; }
+.sn-site .h-deur-logos img { filter: none; opacity: 1; height: 24px; max-width: 120px; }
+.sn-site .h-deur-logos li:nth-child(4) img { height: 28px; }

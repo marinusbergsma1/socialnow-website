@@ -194,7 +194,8 @@ export function OsDock({ held = false }: { held?: boolean }) {
   if (held) return <div className="h-os-dock is-held">
     <div className="h-dock-rij">
       {login}
-      <a className="h-dock-demo" href={LIVE_DEMO_URL}>{t("Plan een live demo")}</a>
+      {/* 5 oktober 2026 (Marinus): "Plan een demo misschien beter, Plan a talk within your company oid." en "Plan a talk." */}
+      <a className="h-dock-demo" href={LIVE_DEMO_URL} translate="no">Plan a talk</a>
     </div>
     <InstallKnop dock compact />
   </div>;

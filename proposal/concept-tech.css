@@ -41,7 +41,6 @@
 :root .sn-site .h-team-trust *,
 :root .sn-site .h-team-netwerk,
 :root .sn-site .h-team-verhaal-naam,
-:root .sn-site .h-bouwer-naam,
 :root .sn-site .h-bouwer-in,
 :root .sn-site .h-integraties-kop,
 :root .sn-site .h-integraties-belofte,
@@ -89,3 +88,40 @@
 :root .sn-site .h-dock-login, :root .sn-site .h-dock-demo { font-family: var(--v-mono) !important; font-size: 13px !important; font-weight: 500 !important; }
 /* Cijfers in tech-font, kleiner. */
 :root .sn-site .h-verhaal-jaren b { font-size: 28px !important; font-family: var(--v-mono) !important; letter-spacing: -0.02em; }
+
+/* 5 oktober 2026: footer-rij Gecertificeerd & erkend (Google Partner, Meta Business Partner, Google Developers). */
+:root .sn-site .h-footer-erkend { display: grid; justify-items: center; gap: 16px; margin: 0 auto 28px; }
+:root .sn-site .h-footer-erkend > span { font-family: var(--v-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #6f7a83; }
+:root .sn-site .h-footer-erkend > div { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px 40px; opacity: .55; transition: opacity .3s ease; }
+:root .sn-site .h-footer-erkend > div:hover { opacity: .85; }
+:root .sn-site .h-footer-erkend img { display: block; width: auto; height: 22px; filter: brightness(0) invert(1); }
+:root .sn-site .h-footer-erkend img[alt="Meta Business Partner"] { height: 18px; }
+:root .sn-site .h-footer-erkend b { display: inline-flex; align-items: center; gap: 8px; font-family: var(--v-mono); font-size: 12px; font-weight: 500; color: #fff; }
+:root .sn-site .h-footer-erkend svg { width: 20px; height: 20px; fill: #fff; }
+:root .sn-site .h-final-belofte { margin: 4px auto 0; font-family: var(--v-mono); font-size: 12.5px; letter-spacing: .04em; color: #25d366; }
+/* Vier gezichten: de mensen achter elk onderdeel. */
+:root .sn-site .h-os-mensen { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+:root .sn-site .h-os-mensen-fotos { display: flex; }
+:root .sn-site .h-os-mensen-fotos img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; border: 2px solid #0b0f12; margin-left: -8px; }
+:root .sn-site .h-os-mensen-fotos img:first-child { margin-left: 0; }
+:root .sn-site .h-os-mensen-namen { font-family: var(--v-mono); font-size: 11px; color: #8b9691; }
+/* AI-laag: de AI's die je al gebruikt, via één connector naar het OS. */
+:root .sn-site .h-mens-ai-koppel { grid-column: 2 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; }
+:root .sn-site .h-mens-ai-koppel > span { padding: 3px 8px; border: 1px solid #7cc4ff40; border-radius: 6px; font-family: var(--v-mono); font-size: 11px; color: #bfe0ff; }
+:root .sn-site .h-mens-ai-koppel i { width: 28px; height: 1px; background: repeating-linear-gradient(90deg, #7cc4ff 0 3px, transparent 3px 6px); }
+:root .sn-site .h-mens-ai-koppel b { padding: 3px 8px; border-radius: 6px; background: #1a8f45; font-family: var(--v-mono); font-size: 11px; font-weight: 500; color: #fff; }
+
+/* 5 oktober 2026 (Marinus): "UI/UX is nog steeds niet sterk." Bouwerskaarten (wit = mens): drie even grote kaarten naast
+   elkaar, naam in het merkfont, rol klein in mono, werk en bedrijven (track record) links onder een dunne lijn. */
+:root .sn-site .h-bouwers { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+:root .sn-site .h-bouwer { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-content: start; gap: 12px; padding: 14px; border-radius: 12px; }
+:root .sn-site .h-bouwer-foto { width: 40px; height: 40px; }
+:root .sn-site .h-bouwer-naam { white-space: normal; gap: 3px; }
+:root .sn-site .h-bouwer-naam strong { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+:root .sn-site .h-bouwer-naam i { font-family: var(--v-mono); font-size: 11px; color: #5b6560; }
+:root .sn-site .h-bouwer-nieuw { margin-left: 0; font-family: var(--v-mono); font-size: 10px; font-weight: 500; }
+:root .sn-site .h-bouwer-merken { grid-column: 1 / -1; margin-left: 0; padding-top: 12px; border-top: 1px solid #0b0f1214; gap: 14px; flex-wrap: wrap; }
+:root .sn-site .h-bouwer-merken::before { content: "Track record"; font-family: var(--v-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: #8b9691; }
+:root .sn-site .h-bouwer-merken img { max-height: 16px; }
+:root .sn-site .h-bouwer-merk { font-size: 12.5px; }
+@media (max-width: 900px) { :root .sn-site .h-bouwers { grid-template-columns: minmax(0, 1fr); } }

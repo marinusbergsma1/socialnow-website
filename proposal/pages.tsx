@@ -224,6 +224,14 @@ function useTaalfase(getoond: string) {
 
 // 5 oktober 2026 (Marinus): "Even goeie Linkbuilding opzetten ook naar Rabobank en ADYEN etc." Elk merk linkt naar de eigen
 // site, met rel="noopener" zonder noreferrer, zodat de partner socialnow.nl als verwijzer ziet.
+// 5 oktober 2026: wie uit het team achter elk onderdeel van het OS staat (zie ook FUNCTIES in TeamTrust.tsx).
+const OS_MENSEN: Record<string, string[]> = {
+  website: ["Sid van Kalken", "Antony Soosaipillaj"],
+  crm: ["Steef Komen", "Michelle Yang"],
+  content: ["Carmel Boon", "Sam van der Sluis", "Emma Peperkamp"],
+  ads: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"],
+};
+
 const TALKING_TO: [naam: string, url: string, logo: string, breed: number, hoog: number][] = [
   ["Visa", "https://www.visa.nl", "/images/partners/betalen/visa.svg", 24, 8],
   ["Mastercard", "https://www.mastercard.nl", "/images/partners/betalen/mastercard.svg", 152, 94],
@@ -368,6 +376,17 @@ export function Home() {
             <MiloPortrait role={agent.id} name={agent.name} maat={256} />
             <strong className="h-os-belofte" style={{ color: agent.color }}>{agent.promise}</strong>
             <p className="sn-tegel-tekst">{agent.text}</p>
+            {/* 5 oktober 2026 (Marinus): "Hier mis ik de menselijke factor terwijl juist die combi zo sterk is." Bij elk
+                onderdeel de mensen uit het team die het doen, met hun naam. */}
+            <div className="h-os-mensen" translate="no">
+              <span className="h-os-mensen-fotos" aria-hidden="true">
+                {(OS_MENSEN[agent.id] ?? []).map((naam) => {
+                  const persoon = people.find((p) => p.name === naam);
+                  return persoon ? <img key={naam} {...klein(persoon.image, 32)} alt="" width="32" height="32" loading="lazy" /> : null;
+                })}
+              </span>
+              <span className="h-os-mensen-namen">Met {(OS_MENSEN[agent.id] ?? []).map((naam) => naam.split(" ")[0]).join(", ")}</span>
+            </div>
             <div className="sn-tegel-onder"><TextLink to={`/het-os#${agent.id}`}>Ontdek dit onderdeel</TextLink></div>
           </Tegel>
         ))}

@@ -38,7 +38,13 @@ const eisen = [
   ["tellers: 356 creators +12 per dag, 1125 OS-gebruikers +215 per dag", /CREATORS_START = 356;[\s\S]*CREATORS_PER_DAG = 12;[\s\S]*OS_GEBRUIKERS_START = 1125;[\s\S]*OS_GEBRUIKERS_PER_DAG = 215;/.test(lees("proposal/tellers.ts"))],
   ["Odoo: volledig geïntegreerd en waarom Odoo (website via onze eigen websitebouwer)", deuren.includes("Volledig geïntegreerd") && deuren.includes("onze eigen websitebouwer")],
   ["wereldkaart zonder boog", !lees("proposal/WereldKaart.tsx").includes("sn-wereld-boog")],
-  ["ERP-markt zoals in de header", deuren.includes('kop="ERP-markt"') && deuren.includes("INTEGRATIES.map") && !deuren.includes('kop="Salesforce"')],
+  ["footer: Gecertificeerd & erkend met Google en Meta", lees("proposal/BrandFooter.tsx").includes("h-footer-erkend") && lees("proposal/BrandFooter.tsx").includes("Meta Business Partner")],
+  ["slotkop: One operation and management system", lees("proposal/ui.tsx").includes("Not to automate, but to connect.") && lees("proposal/ui.tsx").includes("Human connection, powered by AI technology.")],
+  ["hero-knop Plan a talk", lees("proposal/os-entry.tsx").includes(">Plan a talk</a>")],
+  ["Vier gezichten met mensen", lees("proposal/pages.tsx").includes("OS_MENSEN")],
+  ["AI-laag koppelt de AI die je al gebruikt", lees("proposal/MensEnAI.tsx").includes("h-mens-ai-koppel")],
+  ["begeleiding: chat met Steef, dashboard, stappen met Marinus", lees("proposal/TrustStories.tsx").includes("tr-chat") && lees("proposal/TrustStories.tsx").includes("tr-stappen")],
+  ["ERP-markt zoals in de header", deuren.includes('kop="ERP-markt integration"') && deuren.includes("INTEGRATIES.map") && !deuren.includes('kop="Salesforce"')],
 ];
 let fout = 0;
 for (const [naam, ok] of eisen) { console.log(`${ok ? "groen" : "ROOD "} ${naam}`); if (!ok) fout++; }

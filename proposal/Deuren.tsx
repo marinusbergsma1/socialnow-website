@@ -79,7 +79,11 @@ export default function Deuren() {
       </Tegel>
       {/* 5 oktober 2026 (Marinus): "ERP market gewoon net als bij de header". Niet alleen Salesforce: de vijf grote
           ERP- en CRM-systemen na Odoo, dezelfde rij als Currently building in de header, elk met een link. */}
-      <Tegel kop="ERP-markt" breed={4} className="h-deur-status is-bouw h-deur-erp">
+      {/* 5 oktober 2026 (Marinus): "Waarde van de totale ERP Markt. En ERP-MARKT INTEGRATION." Schattingen voor 2025 lopen
+          uiteen van 51 tot 93 miljard dollar (Wiseguy 51,2; IMARC 58,5; Grand View 77,1; Fortune Business Insights 92,6),
+          dus de site zegt "ruim 50 miljard dollar": dat klopt bij elke bron. */}
+      <Tegel kop="ERP-markt integration" breed={4} className="h-deur-status is-bouw h-deur-erp">
+        <p className="h-deur-erp-waarde"><b translate="no">$50+ mld</b><span>waarde van de wereldwijde ERP-markt (2025)</span></p>
         <ul className="h-deur-erp-rij" translate="no">
           {INTEGRATIES.map((systeem) => (
             <li key={systeem.naam}><a href={systeem.url} target="_blank" rel="noopener"><img src={systeem.src} alt={systeem.naam} style={{ height: Math.round(systeem.hoog * 0.8) }} loading="lazy" /></a></li>
