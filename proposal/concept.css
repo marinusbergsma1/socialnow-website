@@ -399,3 +399,95 @@ body::after {
   :root .sn-site .h-partners-rij { justify-content: center; gap: 14px 28px; row-gap: 14px; }
   :root .sn-site .h-partners-logo { width: 76px; height: 24px; }
 }
+
+/* ── Hero optie 2 (5 oktober 2026, Marinus koos hem) ─────────────────────────────
+   Rij 1: de groene login en daarnaast een omlijnde "Plan een live demo", allebei 48px.
+   Rij 2: het mono-label DOWNLOAD en vier vierkante iconknoppen, iconen wit ("icons white"). */
+:root .sn-site .h-os-dock.is-held { gap: 16px; }
+:root .sn-site .h-os-dock.is-held .h-dock-rij { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+:root .sn-site .h-os-dock.is-held .h-dock-login,
+:root .sn-site .h-os-dock.is-held .h-dock-demo {
+  min-height: 48px;
+  height: 48px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+}
+:root .sn-site .h-os-dock.is-held .h-dock-demo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  border: 1px solid #ffffff33;
+  background: transparent;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color .2s ease;
+}
+:root .sn-site .h-os-dock.is-held .h-dock-demo:hover { border-color: #ffffff66; color: #fff; }
+:root .sn-site .h-os-dock.is-held .h-dock-demo:focus-visible,
+:root .sn-site .h-os-dock.is-held .h-dock-login:focus-visible { outline: 2px solid #25d366; outline-offset: 2px; }
+
+:root .sn-site .h-os-dock.is-held .h-dock-bottom.is-compact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 0; }
+:root .sn-site .h-os-dock.is-held .is-compact .h-dock-label {
+  margin: 0 4px 0 0;
+  color: #8d9893;
+  font-family: var(--c-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+:root .sn-site .h-os-dock.is-held .is-compact .h-dock-platforms { display: flex; flex-wrap: nowrap; gap: 8px; }
+:root .sn-site .h-os-dock.is-held .h-dock-icoon {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  padding: 0;
+  border: 1px solid #25d36673;
+  border-radius: 10px;
+  background: #25d3661f;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease;
+}
+:root .sn-site .h-os-dock.is-held .h-dock-icoon:last-child { border-right: 1px solid #25d36673; }
+:root .sn-site .h-os-dock.is-held .h-dock-icoon svg { width: 18px; height: 18px; color: #fff; fill: currentColor; }
+:root .sn-site .h-os-dock.is-held .h-dock-icoon .os-install-telefoon { fill: none; }
+:root .sn-site .h-os-dock.is-held .h-dock-icoon:hover,
+:root .sn-site .h-os-dock.is-held .h-dock-icoon[aria-expanded="true"] { background: #1a8f45; border-color: #1a8f45; border-radius: 10px; }
+:root .sn-site .h-os-dock.is-held .h-dock-icoon:focus-visible { outline: 2px solid #25d366; outline-offset: 2px; }
+/* Klein label met de naam van het systeem, boven het icoon bij hover of toetsenbordfocus. */
+:root .sn-site .h-os-dock.is-held .h-dock-tip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  z-index: 5;
+  padding: 5px 8px;
+  border: 1px solid #ffffff1a;
+  border-radius: 6px;
+  background: #11171b;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  transition: opacity .15s ease, transform .15s ease;
+}
+:root .sn-site .h-os-dock.is-held .h-dock-icoon:hover .h-dock-tip,
+:root .sn-site .h-os-dock.is-held .h-dock-icoon:focus-visible .h-dock-tip { opacity: 1; transform: translate(-50%, 0); }
+@media (max-width: 700px) {
+  :root .sn-site .h-os-dock.is-held .h-dock-rij { flex-direction: column; align-items: stretch; }
+  :root .sn-site .h-os-dock.is-held .h-dock-demo { width: 100%; }
+  :root .sn-site .h-os-dock.is-held .h-dock-bottom.is-compact { display: flex; }
+  :root .sn-site .h-os-dock.is-held .is-compact .h-dock-platforms { display: flex; grid-template-columns: none; }
+  :root .sn-site .h-os-dock.is-held .h-dock-icoon { padding: 0; }
+}

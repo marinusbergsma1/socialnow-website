@@ -248,7 +248,7 @@ export function Home() {
               en logo's". De login staat direct onder de kop; Odoo, Salesforce, Attesso, statement en demo volgen. */}
           <div className="h-knoppen">
             <div className="os-entry">
-              <OsDock />
+              <OsDock held />
             </div>
           </div>
           {/* 30 september 2026 (Marinus): header 4C, overzichtelijker. Odoo, Salesforce en de betaalpartner op twee regels. */}
