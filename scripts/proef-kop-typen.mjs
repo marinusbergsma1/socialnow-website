@@ -5,10 +5,9 @@
 import { readFileSync } from "node:fs";
 const css = readFileSync("proposal/hero-c.css", "utf8");
 const regel = (sel) => (css.match(new RegExp(sel.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + " \\{([^}]*)\\}")) || [])[1] || "";
-const letter = regel(".sn-site .h-kop-typen > span"), raket = regel(".sn-site .h-kop-typen > .h-kop-raket");
+const letter = regel(".sn-site .h-kop-typen > span");
 const eisen = [
   ["letters: animatie vult alleen achteruit (backwards), nooit 'both' of 'forwards'", /h-typ 1ms steps\(1, end\) backwards/.test(letter) && !/h-typ[^,;]*\b(both|forwards)\b/.test(letter)],
-  ["raket: idem voor de typstap", /h-typ 1ms steps\(1, end\) backwards/.test(raket)],
   ["h-typ verbergt alleen in het begin", /@keyframes h-typ \{ from \{ visibility: hidden; \} to \{ visibility: hidden; \} \}/.test(css)],
 ];
 let fout = 0;

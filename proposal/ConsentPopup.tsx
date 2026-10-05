@@ -18,17 +18,17 @@ import { klein } from "./licht";
 const SLEUTEL = "sn-akkoord";
 // De aanvraag gaat naar WhatsApp. De bezoeker verzendt het concept daar zelf.
 
-export const LANDEN: { code: string; naam: string; vlag: string; taal: Language }[] = [
-  { code: "NL", naam: "Nederland", vlag: "🇳🇱", taal: "nl" },
-  { code: "BE", naam: "België", vlag: "🇧🇪", taal: "nl" },
-  { code: "DE", naam: "Deutschland", vlag: "🇩🇪", taal: "de" },
-  { code: "AT", naam: "Österreich", vlag: "🇦🇹", taal: "de" },
-  { code: "CH", naam: "Schweiz", vlag: "🇨🇭", taal: "de" },
-  { code: "FR", naam: "France", vlag: "🇫🇷", taal: "fr" },
-  { code: "GB", naam: "United Kingdom", vlag: "🇬🇧", taal: "en" },
-  { code: "IE", naam: "Ireland", vlag: "🇮🇪", taal: "en" },
-  { code: "US", naam: "United States", vlag: "🇺🇸", taal: "en" },
-  { code: "XX", naam: "Other", vlag: "🌍", taal: "en" },
+export const LANDEN: { code: string; naam: string; taal: Language }[] = [
+  { code: "NL", naam: "Nederland", taal: "nl" },
+  { code: "BE", naam: "België", taal: "nl" },
+  { code: "DE", naam: "Deutschland", taal: "de" },
+  { code: "AT", naam: "Österreich", taal: "de" },
+  { code: "CH", naam: "Schweiz", taal: "de" },
+  { code: "FR", naam: "France", taal: "fr" },
+  { code: "GB", naam: "United Kingdom", taal: "en" },
+  { code: "IE", naam: "Ireland", taal: "en" },
+  { code: "US", naam: "United States", taal: "en" },
+  { code: "XX", naam: "Other", taal: "en" },
 ];
 
 type Tekst = { kop: string; land: string; demo: string; site: string; voor: string; voorwaarden: string; en: string; privacy: string; na: string; intro: string; stap1: string; stap2: string; volgende: string; phNaam: string; phEmail: string };
@@ -224,7 +224,7 @@ export default function ConsentPopup() {
           <label className="sn-consent-land">
             <span>{s.land}</span>
             <select value={land} onChange={e => kiesLand(e.target.value)} aria-label={s.land}>
-              {LANDEN.map(l => <option key={l.code} value={l.code}>{l.vlag} {l.naam}</option>)}
+              {LANDEN.map(l => <option key={l.code} value={l.code}>{l.naam}</option>)}
             </select>
           </label>
           {actieLoopt() ? (
