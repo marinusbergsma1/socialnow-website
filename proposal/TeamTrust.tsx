@@ -38,6 +38,42 @@ const KORTE_ROL: Record<string, string> = {
   "Steven Goudsblom": "Wealth management",
 };
 
+// 5 oktober 2026 (Marinus): de muur per functie, optie D (filterpillen). "zowel ik als Attesso en management moet behalve
+// management er nog bij ook in het onderverdelen terugkomen": het hele team staat hier, ook wie bovenaan al groot staat.
+const FUNCTIES: { functie: string; mensen: string[] }[] = [
+  { functie: "AI & development", mensen: ["Marinus Bergsma", "Sid van Kalken", "Douwe Kramer", "Tristan Slobbe", "Antony Soosaipillaj"] },
+  { functie: "Finance & operations", mensen: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
+  { functie: "Ads & search", mensen: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"] },
+  { functie: "Video, photo & design", mensen: ["Carmel Boon", "Sam van der Sluis", "Emma Peperkamp", "Pepijn Bos", "Armando van Bruggen"] },
+  { functie: "Sales & partnerships", mensen: ["Elian Coellar", "Aren", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
+];
+
+function TeamPerFunctie() {
+  const [keuze, setKeuze] = React.useState("");
+  const alle = FUNCTIES.flatMap(groep => groep.mensen.map(naam => ({ naam, functie: groep.functie })));
+  const getoond = alle.filter(x => !keuze || x.functie === keuze);
+  const pil = (functie: string, label: string, aantal: number) =>
+    <button key={label} type="button" aria-pressed={keuze === functie} onClick={() => setKeuze(functie)}>{label}<small>{aantal}</small></button>;
+  return <div className="h-zelf">
+    <div className="h-zelf-kop"><b>Team by function</b><span>Independent entrepreneurs, each runs their own business</span></div>
+    <div className="h-functie-pillen" role="group" aria-label="Filter by function">
+      {pil("", "All", alle.length)}
+      {FUNCTIES.map(groep => pil(groep.functie, groep.functie, groep.mensen.length))}
+    </div>
+    <Link to="/team" className="h-functie-muur" aria-label="Meet the team">
+      {getoond.map(({ naam }) => {
+        const person = people.find(p => p.name === naam);
+        if (!person) return null;
+        return <div key={naam}>
+          <figure><img {...klein(person.image, "(max-width: 900px) 25vw, 120px", [96, 160])} alt="" width="120" height="120" loading="lazy" /></figure>
+          <span className="h-functie-naam">{person.name}<i>{KORTE_ROL[naam] ?? person.role}</i></span>
+        </div>;
+      })}
+    </Link>
+    <Link to="/vacatures" className="h-team-netwerk">Running your own business too? <b>Join the network &rarr;</b></Link>
+  </div>;
+}
+
 function DuoTegel({ naam }: { naam: string }) {
   const person = people.find(p => p.name === naam);
   if (!person) return null;
@@ -48,8 +84,6 @@ function DuoTegel({ naam }: { naam: string }) {
 }
 
 export function TeamJoin() {
-  const duo = [...SOCIALNOW_DUO, ...ATTESSO_DUO, ...BOARD];
-  const zelfstandig = teamOpVolgorde().filter(person => !duo.includes(person.name));
   return <div className="h-team-sectie" translate="no">
     <Link to="/team" className="h-team-kern" aria-label="Meet the SocialNow team">
       <div className="h-duo is-sn">
@@ -65,16 +99,7 @@ export function TeamJoin() {
       <div className="h-board-tekst"><b>Board</b><strong>Operations, data and wealth.</strong><span>Michelle, Tristan and Steven</span></div>
       {BOARD.map(naam => <DuoTegel key={naam} naam={naam} />)}
     </Link>
-    <div className="h-zelf">
-      <div className="h-zelf-kop"><b>Independent entrepreneurs</b><span>Each runs their own business</span></div>
-      <Link to="/team" className="h-team-muur" aria-label="Meet the independent entrepreneurs">
-        {zelfstandig.map(person => <figure key={person.name}>
-          <img {...klein(person.image, "(max-width: 900px) 25vw, 120px", [96, 160])} alt="" width="120" height="120" loading="lazy" />
-          <figcaption>{person.name}<i>{person.role}</i></figcaption>
-        </figure>)}
-      </Link>
-      <Link to="/vacatures" className="h-team-netwerk">Running your own business too? <b>Join the network &rarr;</b></Link>
-    </div>
+    <TeamPerFunctie />
     <Integraties />
   </div>;
 }

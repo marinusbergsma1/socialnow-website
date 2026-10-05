@@ -336,6 +336,20 @@
 .sn-site .h-hero .h-zelf .h-team-muur figure { border-radius: 10px; }
 .sn-site .h-team-netwerk { display: inline-flex; gap: 8px; margin-top: 14px; padding-bottom: 3px; border-bottom: 1px solid #0b0f1214; color: #0b0f12; font-size: 15px; font-weight: 500; text-decoration: none; }
 .sn-site .h-team-netwerk b { color: #0cb457; font-weight: 700; }
+/* 5 oktober 2026: team per functie met filterpillen (optie D). */
+.sn-site .h-functie-pillen { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.sn-site .h-functie-pillen button { padding: 6px 12px; border-radius: 99px; border: 1px solid #0b0f121f; background: #fff; color: #0b0f12; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.sn-site .h-functie-pillen button small { margin-left: 5px; font-size: 11px; opacity: .55; }
+.sn-site .h-functie-pillen button:hover { border-color: #0b0f12; }
+.sn-site .h-functie-pillen button[aria-pressed="true"] { background: #0b0f12; border-color: #0b0f12; color: #fff; }
+.sn-site .h-functie-pillen button:focus-visible { outline: 2px solid #0cb457; outline-offset: 2px; }
+.sn-site .h-functie-muur { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 12px 7px; color: #0b0f12; text-decoration: none; }
+.sn-site .h-functie-muur figure { margin: 0; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: #eef1ef; border: 1px solid #0b0f1214; }
+.sn-site .h-functie-muur img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2,.8,.3,1); }
+.sn-site .h-functie-muur > div:hover img { transform: scale(1.05); }
+.sn-site .h-functie-naam { display: grid; gap: 1px; margin-top: 6px; font-size: 12px; font-weight: 700; line-height: 1.2; }
+.sn-site .h-functie-naam i { font-style: normal; font-weight: 400; font-size: 11px; color: #4a5450; }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-functie-muur img, .sn-site .h-functie-pillen button { transition: none; } }
 .sn-site .h-team-netwerk:hover { border-color: #0cb457; }
 
 .sn-site .h-integraties { padding: clamp(16px, 1.6vw, 22px); border-radius: 22px; background: #f4f7f5; border: 1px solid #0b0f1214; color: #2b3330; }
@@ -366,5 +380,5 @@
 .sn-site .h-bouwer-merken img { display: block; width: auto; }
 .sn-site .h-bouwer-merk { display: inline-flex; align-items: center; gap: 5px; color: #1d2430; font-size: 13px; font-weight: 800; letter-spacing: -.02em; }
 .sn-site .h-bouwer-merk em { font-style: normal; color: #4a9ee8; }
-@media (max-width: 900px) { .sn-site .h-hero .h-zelf .h-team-muur { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .sn-site .h-hero .h-zelf .h-team-muur { grid-template-columns: repeat(4, minmax(0, 1fr)); } .sn-site .h-functie-muur { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .sn-site .h-team-kern, .sn-site .h-bouwers { grid-template-columns: 1fr; } .sn-site .h-board { grid-template-columns: 1fr 1fr; } .sn-site .h-board-tekst { padding: 12px; overflow: hidden; } .sn-site .h-board-tekst strong { font-size: 15px; } .sn-site .h-board-tekst span { font-size: 11px; } }
