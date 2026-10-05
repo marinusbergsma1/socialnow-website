@@ -43,6 +43,7 @@ const VacaturesBento = later(() => import("./VacaturesBento").then((m) => m.defa
 const VeiligheidBlok = later(() => import("./Veiligheid").then((m) => m.default));
 const TrustStories = later(() => import("./TrustStories").then((m) => m.default));
 import BrandGlobe from "./BrandGlobe";
+import WereldKaart from "./WereldKaart";
 import OsEntry, { CLAIM_URL, OsDock, REVIEWS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
 import {
@@ -326,6 +327,7 @@ export function Home() {
       <Bereikt />
       <NulNaarBedrijf />
       <Verhaal />
+      <WereldKaart />
       <Deuren />
       {/* 28 september 2026 (Marinus): "alle onderdelen als kleine bentogrids, net zoals de homepage wanneer je daarop landt". */}
       <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} swipe>
