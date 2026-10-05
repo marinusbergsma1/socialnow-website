@@ -202,6 +202,11 @@ export default function Bereikt() {
         <p className="sn-tegel-tekst" translate="no">“What these guys delivered in such a short time is unbelievable.”</p>
       </Tegel>
       <Tegel kop="Il Gordo" breed={4} className="h-bereikt-ilgordo">
+        {/* 5 oktober 2026 (Marinus): "Kan je voor Il gordo ook die video laten zien?" De headerfilm van ilgordo.nl
+            (01_WEBSITE/ilgordo-nl/site/header-video.mp4, 11 s, 1280 px, 0,6 MB) boven de scores, zonder geluid. */}
+        <div className="h-ilgordo-film">
+          <BentoFilm src="/video/ilgordo/ilgordo-header.mp4" poster="/video/ilgordo/ilgordo-header-poster.webp" label="Il Gordo: de headerfilm van ilgordo.nl" geluid={false} />
+        </div>
         <IlGordoScores />
         <p className="sn-tegel-titel">Snel, vindbaar, gebouwd door ons team.</p>
         <p className="sn-tegel-tekst">Lighthouse op desktop, mediaan van drie metingen op 28 september 2026.</p>
