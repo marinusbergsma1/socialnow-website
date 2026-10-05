@@ -2,11 +2,14 @@ import { allProjects, webShowcaseProjects } from "../data/projects";
 import { CLAIM_URL } from "./os-entry";
 export const projects = [...webShowcaseProjects, ...allProjects];
 // 28 september 2026 (Marinus): zakelijkere functies, zoals "Head of".
-export const people = [
+// 5 oktober 2026 (Marinus): "graag bij iedereen Linkedin doorlink". Alleen profielen die zeker van deze persoon zijn
+// (teamonderzoek 4 en 5 oktober); bij de rest volgt de link zodra de juiste URL bevestigd is.
+export const people: { name: string; role: string; image: string; linkedin?: string }[] = [
   {
     name: "Marinus Bergsma",
     role: "Founder & CEO",
     image: "marinus-profiel-blauw.webp",
+    linkedin: "https://www.linkedin.com/in/marinus-bergsma-20b81a144/",
   },
   { name: "Jos Hollenberg", role: "Head of Meta Ads", image: "Jos-Hollenberg-1.webp" },
   {
@@ -14,23 +17,26 @@ export const people = [
     // 28 september 2026 (Marinus): Sergio staat ook bij Meta Ads.
     role: "Meta Ads en automations specialist",
     image: "Sergio-Jovovic.webp",
+    linkedin: "https://www.linkedin.com/in/sergio-jovovic-203483220/",
   },
   {
     name: "Carmel Boon",
     role: "Head of Video Production",
     image: "Carmel-Boon-V2.webp",
+    linkedin: "https://www.linkedin.com/in/carmel-boon-984940136/",
   },
   {
     name: "Sam van der Sluis",
     role: "Lead Videographer",
     image: "Sam-van-der-Sluis.webp",
+    linkedin: "https://www.linkedin.com/in/sam-van-der-sluis-740781199/",
   },
   {
     name: "Emma Peperkamp",
     role: "Lead Photographer",
     image: "Emma-Peperkamp-V2.webp",
   },
-  { name: "Nick van Keulen", role: "Head of Google Ads & Search", image: "Nick-VK.webp" },
+  { name: "Nick van Keulen", role: "Head of Google Ads & Search", image: "Nick-VK.webp", linkedin: "https://www.linkedin.com/in/nick-van-keulen-nl/" },
   // 25 september 2026 (Marinus): nieuw teamlid.
   { name: "Elian Coellar", role: "Head of Private Partnerships", image: "Elian-Coellar-2026-09-26.webp" },
   // 28 september 2026 (Marinus): Sid, Steef en Michelle krijgen betalingen met AI erbij.
@@ -39,18 +45,21 @@ export const people = [
     name: "Sid van Kalken",
     role: "Head of Web Development & AI Payments · Attesso",
     image: "sid-attesso.webp",
+    linkedin: "https://www.linkedin.com/in/sid-van-kalken-65b486223/",
   },
   // 1 oktober 2026 (Marinus): Douwe Kramer, co-founder van Attesso, met Sid het Attesso-team naast Marinus en Steef.
   {
     name: "Douwe Kramer",
     role: "Co-founder · Attesso",
     image: "Douwe-Kramer-attesso.webp",
+    linkedin: "https://www.linkedin.com/in/douwekramer/",
   },
   // 4 oktober 2026 (Marinus): "Ai payment hoort niet bij Steef en Michelle." Alleen Sid (Attesso) houdt AI Payments.
   {
     name: "Steef Komen",
     role: "Partner · Head of Finance & Data",
     image: "Steef-Komen.webp",
+    linkedin: "https://www.linkedin.com/in/steef-komen-60632236/",
   },
   {
     name: "Michelle Yang",
@@ -58,7 +67,7 @@ export const people = [
     image: "Michelle-Yang-kantoor.webp",
   },
   // 30 september 2026 (Marinus): nieuw teamlid.
-  { name: "Tristan Slobbe", role: "Data & AI Engineer", image: "Tristan-Slobbe.webp" },
+  { name: "Tristan Slobbe", role: "Data & AI Engineer", image: "Tristan-Slobbe.webp", linkedin: "https://www.linkedin.com/in/tristan-slobben-105056159/" },
   // 3 oktober 2026 (Marinus): nieuwe teamleden.
   { name: "Antony Soosaipillaj", role: "Full-Stack AI Developer", image: "Antony-Soosaipillaj.webp" },
   { name: "Aren", role: "Senior Sales", image: "Aren.webp" },
@@ -70,7 +79,7 @@ export const people = [
   { name: "Armando van Bruggen", role: "Designer · Bruggn Design", image: "Armando-van-Bruggen.webp" },
   // 5 oktober 2026 (Marinus): "HIJ MOET OOK BIJ HET TEAM EN BIJ NEW PARTNER." Steven Goudsblom (Fincer B.V.) doet het
   // vermogensbeheer voor SocialNow en onze klanten.
-  { name: "Steven Goudsblom", role: "New partner · Wealth management · Fincer", image: "Steven-Goudsblom.webp" },
+  { name: "Steven Goudsblom", role: "New partner · Wealth management · Fincer", image: "Steven-Goudsblom.webp", linkedin: "https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" },
 ];
 export const agents = [
   {

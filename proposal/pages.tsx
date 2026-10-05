@@ -221,6 +221,16 @@ function useTaalfase(getoond: string) {
   return fase.current.n === 0 ? undefined : fase.current.n % 2 ? "a" : "b";
 }
 
+// 5 oktober 2026 (Marinus): "Even goeie Linkbuilding opzetten ook naar Rabobank en ADYEN etc." Elk merk linkt naar de eigen
+// site, met rel="noopener" zonder noreferrer, zodat de partner socialnow.nl als verwijzer ziet.
+const TALKING_TO: [naam: string, url: string, logo: string, breed: number, hoog: number][] = [
+  ["Visa", "https://www.visa.nl", "/images/partners/betalen/visa.svg", 24, 8],
+  ["Mastercard", "https://www.mastercard.nl", "/images/partners/betalen/mastercard.svg", 152, 94],
+  ["Airwallex", "https://www.airwallex.com", "/images/partners/betalen/airwallex.webp", 960, 132],
+  ["Adyen", "https://www.adyen.com", "/images/partners/betalen/adyen.svg", 24, 8],
+  ["Rabobank", "https://www.rabobank.nl", "/images/partners/betalen/rabobank.svg", 54, 10],
+];
+
 export function Home() {
   const { language, t } = useLanguage();
   // 26 september 2026 (Marinus): "ik wil niet dat de taal meer wijzigt". De hero toont de paginataal.
@@ -253,31 +263,45 @@ export function Home() {
           {/* 30 september 2026 (Marinus): header 4C, overzichtelijker. Odoo, Salesforce en de betaalpartner op twee regels. */}
           <div className="h-integratie" translate="no">
             <p className="h-integratie-rij">
-              <span className="h-integratie-odoo"><svg viewBox="140 146 640 250" role="img" aria-label="Odoo">
+              {/* 5 oktober 2026 (Marinus): "Even goeie Linkbuilding opzetten ook naar Rabobank en ADYEN etc." Elk merk in de hero linkt
+                  naar de eigen site. rel="noopener" zonder noreferrer, zodat de partner socialnow.nl als verwijzer ziet. */}
+              <a className="h-integratie-odoo" href="https://www.odoo.com" target="_blank" rel="noopener" aria-label="Odoo"><svg viewBox="140 146 640 250" role="img" aria-label="Odoo">
                   <path fill="#8f8f8f" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
                   <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
-                </svg></span>
+                </svg></a>
               <b>INTEGRATED IN ODOO&rsquo;S ERP SYSTEM</b>
               {/* 30 september 2026 (Marinus): "hier nog iets van watch the aftermovie". */}
               <a className="h-aftermovie" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener">&#9654; Watch the aftermovie</a>
             </p>
             <p className="h-integratie-rij is-klein">
-              <span className="h-integratie-sf">NEXT STEP <img src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" /></span>
+              <span className="h-integratie-sf">NEXT STEP <a href="https://www.salesforce.com" target="_blank" rel="noopener"><img src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" /></a></span>
               <i aria-hidden="true" />
-              <span className="h-attesso">PAYMENT PARTNER <code>~/attesso</code></span>
+              <span className="h-attesso">PAYMENT PARTNER <a href="https://attesso.com" target="_blank" rel="noopener"><code>~/attesso</code></a></span>
+              {/* 5 oktober 2026 (Marinus): "Hier moet ook nog het bedrijf van Steven bij." Fincer heeft geen eigen website, dus de
+                  naam linkt naar Steven op LinkedIn. Als tekst, net als ~/attesso: het Fincer-logo klopt volgens Marinus nog niet. */}
+              <i aria-hidden="true" />
+              <span className="h-fincer">WEALTH PARTNER <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener" aria-label="Fincer, Steven Goudsblom on LinkedIn"><code>Fincer</code></a></span>
             </p>
             {/* 1 oktober 2026 (Marinus): "Vanuit de video staan de logo's waar mijn partners van Attesso mee in gesprek gaan.
                 Die mogen ook op de site.", "laat deze balk Primefone, DIVEINE, KWH weg" en "Dan kunnen er meer logo's onder
                 Attesso met talking to." Dezelfde rij als in OUR STORY (partnership), direct onder de betaalpartner. */}
+            {/* 5 oktober 2026 (Marinus): "Graag ook bewegend en balk wit aangezien het een positieve menselijke balk is met dus
+                groene line erboven en eronder." Witte balk met een groene lijn boven en onder; de logo's lopen door. De rij staat
+                er twee keer in en de lus schuift precies één rij op, dus de naad is niet te zien. De kopie is voor schermlezers
+                en toetsenbord verborgen. */}
             <div className="h-talking">
               <span className="h-talking-label">TALKING TO</span>
-              <ul className="h-attesso-logos">
-                <li><img src="/images/partners/betalen/visa.svg" alt="Visa" width="24" height="8" /></li>
-                <li><img src="/images/partners/betalen/mastercard.svg" alt="Mastercard" width="152" height="94" /></li>
-                <li><img src="/images/partners/betalen/airwallex.webp" alt="Airwallex" width="960" height="132" /></li>
-                <li><img src="/images/partners/betalen/adyen.svg" alt="Adyen" width="24" height="8" /></li>
-                <li><img src="/images/partners/betalen/rabobank.svg" alt="Rabobank" width="54" height="10" /></li>
-              </ul>
+              <div className="h-talking-strook">
+                <div className="h-talking-lus">
+                  {[false, true].map(kopie => (
+                    <ul key={String(kopie)} className="h-attesso-logos" aria-hidden={kopie || undefined}>
+                      {TALKING_TO.map(([naam, url, logo, breed, hoog]) => (
+                        <li key={naam}><a href={url} target="_blank" rel="noopener" tabIndex={kopie ? -1 : undefined}><img src={logo} alt={kopie ? "" : naam} width={breed} height={hoog} /></a></li>
+                      ))}
+                    </ul>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
           </div>

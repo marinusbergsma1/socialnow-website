@@ -38,6 +38,16 @@ const KORTE_ROL: Record<string, string> = {
   "Steven Goudsblom": "Wealth management",
 };
 
+// 5 oktober 2026 (Marinus): "graag bij iedereen Linkedin doorlink". Een foto met een bevestigd LinkedIn-profiel linkt
+// daarheen (een link over de hele tegel, met "in" bij de naam); zonder profiel linkt de tegel naar /team.
+type Persoon = (typeof people)[number];
+function NaarPersoon({ person }: { person: Persoon }) {
+  return person.linkedin
+    ? <a className="h-persoon-link" href={person.linkedin} target="_blank" rel="noopener" aria-label={`${person.name} on LinkedIn`} />
+    : <Link className="h-persoon-link" to="/team" aria-label={`${person.name}, meet the team`} />;
+}
+const LinkedInTeken = ({ person }: { person: Persoon }) => person.linkedin ? <span className="h-bouwer-in" aria-hidden="true">in</span> : null;
+
 // 5 oktober 2026 (Marinus): de muur per functie, optie D (filterpillen). "zowel ik als Attesso en management moet behalve
 // management er nog bij ook in het onderverdelen terugkomen": het hele team staat hier, ook wie bovenaan al groot staat.
 const FUNCTIES: { functie: string; mensen: string[] }[] = [
@@ -63,16 +73,17 @@ function TeamPerFunctie() {
       {pil("", "All", alle.length)}
       {FUNCTIES.map(groep => pil(groep.functie, groep.functie, groep.mensen.length))}
     </div>
-    <Link to="/team" className="h-functie-muur" aria-label="Meet the team">
+    <div className="h-functie-muur">
       {getoond.map(({ naam }) => {
         const person = people.find(p => p.name === naam);
         if (!person) return null;
         return <div key={naam}>
           <figure><img {...klein(person.image, "(max-width: 900px) 25vw, 120px", [96, 160])} alt="" width="120" height="120" loading="lazy" /></figure>
-          <span className="h-functie-naam">{person.name}<i>{KORTE_ROL[naam] ?? person.role}</i></span>
+          <span className="h-functie-naam"><span>{person.name} <LinkedInTeken person={person} /></span><i>{KORTE_ROL[naam] ?? person.role}</i></span>
+          <NaarPersoon person={person} />
         </div>;
       })}
-    </Link>
+    </div>
     <Link to="/vacatures" className="h-team-netwerk">Running your own business too? <b>Join the network &rarr;</b></Link>
   </div>;
 }
@@ -82,13 +93,14 @@ function DuoTegel({ naam }: { naam: string }) {
   if (!person) return null;
   return <figure>
     <img {...klein(person.image, "(max-width: 900px) 40vw, 200px", [160, 320])} alt="" width="200" height="200" loading="lazy" />
-    <figcaption>{person.name}<i>{KORTE_ROL[naam] ?? person.role}</i></figcaption>
+    <figcaption>{person.name} <LinkedInTeken person={person} /><i>{KORTE_ROL[naam] ?? person.role}</i></figcaption>
+    <NaarPersoon person={person} />
   </figure>;
 }
 
 export function TeamJoin() {
   return <div className="h-team-sectie" translate="no">
-    <Link to="/team" className="h-team-kern" aria-label="Meet the SocialNow team">
+    <div className="h-team-kern">
       <div className="h-duo is-sn">
         <div className="h-duo-kop"><span className="h-duo-merk"><img src="/images/klein/SocialNow-Logo-2026-400.webp" alt="SocialNow" width="200" height="38" loading="lazy" /></span><span>Advertisement &amp; Consultancy</span></div>
         <div className="h-duo-rij">{SOCIALNOW_DUO.map(naam => <DuoTegel key={naam} naam={naam} />)}</div>
@@ -97,11 +109,11 @@ export function TeamJoin() {
         <div className="h-duo-kop"><span className="h-duo-merk"><b>~/a</b> Attesso</span><span>AI Payments</span></div>
         <div className="h-duo-rij">{ATTESSO_DUO.map(naam => <DuoTegel key={naam} naam={naam} />)}</div>
       </div>
-    </Link>
-    <Link to="/team" className="h-board" aria-label="Meet the board">
+    </div>
+    <div className="h-board">
       <div className="h-board-tekst"><b>Board</b><strong>Operations, data and wealth.</strong><span>Michelle, Tristan and Steven</span></div>
       {BOARD.map(naam => <DuoTegel key={naam} naam={naam} />)}
-    </Link>
+    </div>
     <TeamPerFunctie />
     <Integraties />
   </div>;

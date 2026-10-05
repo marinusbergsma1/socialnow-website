@@ -256,7 +256,8 @@ export function TeamGrid({ short = false, members = people, expert = true }: { s
             />
           </div>
           <figcaption>
-            <strong>{person.name}</strong>
+            {/* 5 oktober 2026 (Marinus): "graag bij iedereen Linkedin doorlink". */}
+            <strong>{person.linkedin ? <a className="h-persoon-linkedin" href={person.linkedin} target="_blank" rel="noopener" aria-label={`${person.name} on LinkedIn`}>{person.name} <span className="h-bouwer-in" aria-hidden="true">in</span></a> : person.name}</strong>
             <span>{person.role}</span>
             {/* 5 oktober 2026 (Marinus): Steven (Fincer) is partner vermogensbeheer, geen system expert. */}
             {expert ? <em className="h-system-expert">{person.role.startsWith("New partner") ? "New partner" : "System Expert"}</em> : null}
