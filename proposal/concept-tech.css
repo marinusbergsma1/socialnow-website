@@ -1,0 +1,91 @@
+/* ═══ Concept tech (5 oktober 2026) ═══
+   Marinus: "Ik wil graag iets meer tech en minder schreeuwerig" en "je zou die andere stijl presenteren". Versie 2 (Tech
+   zakelijk) uit landing-zakelijk-voorbeelden-2026-10-05, vast in de site. Laadt na concept.css. */
+
+:root {
+  --v-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --c-sectie: 80px;
+}
+@media (max-width: 700px) { :root { --c-sectie: 56px; } }
+
+/* ── Koppen: klein en strak ───────────────────────────────────────────────── */
+:root .sn-site h1, :root .sn-site .h-kop-typen { font-size: clamp(28px, 3vw, 36px) !important; letter-spacing: -0.035em; }
+:root .sn-site h2 { font-size: clamp(22px, 2vw, 26px) !important; }
+:root .sn-site .sn-bento-kop > h2, :root .sn-site .h-section-heading h2 { font-size: clamp(24px, 2.2vw, 28px) !important; }
+:root .sn-site h3 { font-size: 17px !important; }
+:root .sn-site .sn-tegel-titel { font-size: clamp(16px, 1.25vw, 19px) !important; }
+:root .sn-site .h-beurs-groot,
+:root .sn-site .h-mens-belofte-kop,
+:root .sn-site .h-mens-belofte-kop span,
+:root .sn-site .h-vb-groot-titel { font-size: clamp(20px, 1.7vw, 24px) !important; }
+:root .sn-site .h-statement, :root .sn-site .h-statement * { font-size: 18px !important; }
+:root .sn-site p { font-size: min(1em, 16px); }
+
+/* ── Tech-font breed doorgevoerd ──────────────────────────────────────────── */
+:root .h-desktop-nav a,
+:root .h-header-claim,
+:root .h-language-current,
+:root .sn-site .h-button,
+:root .sn-site .h-sprekers-knop,
+:root .sn-site .h-sprekers-link,
+:root .sn-site .h-eyebrow,
+:root .sn-site .sn-tegel-label,
+:root .sn-site .sn-tegel-kop,
+:root .sn-site .h-dock-label,
+:root .sn-site .h-dock-tip,
+:root .sn-site .h-dock-platform,
+:root .sn-site .h-film-titel,
+:root .sn-site .h-hero-film-geluid,
+:root .sn-site .h-milo-pil,
+:root .sn-site .h-team-trust,
+:root .sn-site .h-team-trust *,
+:root .sn-site .h-team-netwerk,
+:root .sn-site .h-team-verhaal-naam,
+:root .sn-site .h-bouwer-naam,
+:root .sn-site .h-bouwer-in,
+:root .sn-site .h-integraties-kop,
+:root .sn-site .h-integraties-belofte,
+:root .sn-site .h-zelf-kop,
+:root .sn-site figcaption,
+:root .sn-site figcaption *,
+:root .sn-site small,
+:root .sn-site time,
+:root .sn-site .h-stroom-os,
+:root .sn-site .h-koppel-knoop {
+  font-family: var(--v-mono) !important;
+  letter-spacing: 0.01em;
+}
+:root .h-desktop-nav a { font-size: 12px !important; font-weight: 500 !important; text-transform: uppercase; letter-spacing: 0.06em !important; }
+:root .sn-site .h-eyebrow, :root .sn-site .sn-tegel-label { font-size: 10.5px !important; letter-spacing: 0.1em !important; }
+:root .sn-site .sn-tegel-kop { font-size: 11px !important; font-weight: 500 !important; text-transform: uppercase; letter-spacing: 0.08em; }
+:root .sn-site .h-button { font-size: 13px !important; font-weight: 500 !important; letter-spacing: 0.01em !important; }
+:root .sn-site .h-team-trust strong, :root .sn-site .h-team-trust b { font-size: 13px !important; font-weight: 500 !important; }
+
+/* ── Logo's en details ~35% kleiner ───────────────────────────────────────── */
+:root .h-brand img { height: 18px !important; width: auto !important; }
+:root .sn-site .h-team-portraits img { width: 30px !important; height: 30px !important; }
+:root .sn-site .h-integratie-sf img { height: 12px !important; width: auto !important; }
+:root .sn-site .h-integratie-odoo, :root .sn-site .h-integratie-odoo * { font-size: 10px !important; }
+:root .sn-site .h-partners-logo img { height: 16px !important; width: auto !important; }
+:root .sn-site .h-integraties-rij img { transform: scale(.68); }
+:root .sn-site .h-trekking-logo img { height: 22px !important; width: auto !important; }
+:root .sn-site .h-duo-merk img { height: 10px !important; width: auto !important; }
+:root .sn-site .h-team-muur img { width: 52px !important; height: 52px !important; }
+:root .sn-site .h-milo-pil img { width: 26px !important; height: 26px !important; }
+:root .sn-site .h-final-logo { width: 200px !important; height: auto !important; }
+:root .sn-site .h-keurmerken img { width: 54px !important; height: 54px !important; }
+:root .sn-site .h-character-accent img { width: 96px !important; height: 96px !important; }
+:root .sn-site .h-deur-salesforce { height: 32px !important; width: auto !important; }
+
+/* ── Knoppen en kaarten: compacter, hairline ───────────────────────────────── */
+:root .sn-site .h-button { min-height: 40px !important; border-radius: 8px !important; }
+:root .h-header-claim { min-height: 34px !important; font-size: 12px !important; border-radius: 8px !important; }
+:root .sn-site .sn-tegel-vlak { border-radius: 10px !important; }
+
+/* Teamrij: tekst blijft onder de portretjes, ook nu die kleiner zijn. */
+:root .sn-site .h-team-trust { flex-direction: column; align-items: flex-start; gap: 10px; }
+:root .sn-site .h-team-trust > span:not(.h-team-portraits) { flex: none; width: auto; }
+/* Herobknoppen ook in tech-font. */
+:root .sn-site .h-dock-login, :root .sn-site .h-dock-demo { font-family: var(--v-mono) !important; font-size: 13px !important; font-weight: 500 !important; }
+/* Cijfers in tech-font, kleiner. */
+:root .sn-site .h-verhaal-jaren b { font-size: 28px !important; font-family: var(--v-mono) !important; letter-spacing: -0.02em; }

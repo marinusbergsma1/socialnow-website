@@ -78,8 +78,9 @@ export default function LightArtStrook() {
       <p className="h-lac-kop">
         <span>Artist Impressions</span>
       </p>
-      <div className="h-lac-venster" role="region" aria-label="Artist Impressions voor Light Art Collection">
-        {IMPRESSIES.map((impressie) => <VoorNaSchuif key={impressie.titel} impressie={impressie} />)}
+      <div className="h-lac-venster is-een" role="region" aria-label="Artist Impressions voor Light Art Collection">
+        {/* 5 oktober 2026 (Marinus): "Dit moest er 1 worden." Alleen Eternal Sundown, over de hele breedte. */}
+        <VoorNaSchuif impressie={IMPRESSIES[0]} />
       </div>
     </div>
   );

@@ -46,25 +46,31 @@ function TienVragen() {
         </svg>
         <div>
           <b>{minuten}</b>
-          <small>van 60 min</small>
+          <small>/ 60 min</small>
         </div>
       </div>
     </div>
   );
 }
 
+// 5 oktober 2026 (Marinus): "Dit is ook nog lelijk" en "iets meer tech en minder schreeuwerig". Geen grote groene OS-bol
+// meer: drie regels als een verbindingslijst, met een puls die over elke draad naar het OS loopt.
 function Koppelingen() {
+  const regels = [
+    { bron: <OdooLogo />, taak: "Boekhouding" },
+    { bron: "Studio", taak: "Content" },
+    { bron: "Zernio", taak: "Posts" },
+  ];
   return (
-    <div className="h-koppel" aria-hidden="true">
-      <svg viewBox="0 0 300 190" preserveAspectRatio="none">
-        <path className="h-koppel-lijn" pathLength="1" d="M48 34 C60 110 110 148 150 148" />
-        <path className="h-koppel-lijn" pathLength="1" d="M150 27 L150 148" />
-        <path className="h-koppel-lijn" pathLength="1" d="M252 34 C240 110 190 148 150 148" />
-      </svg>
-      <span className="h-koppel-knoop is-a"><OdooLogo /></span>
-      <span className="h-koppel-knoop is-b">Studio</span>
-      <span className="h-koppel-knoop is-c" translate="no">Zernio</span>
-      <span className="h-koppel-knoop is-os">OS</span>
+    <div className="h-koppel-lijst" aria-hidden="true">
+      {regels.map((regel, index) => (
+        <div key={regel.taak} className="h-koppel-regel" style={{ "--i": index } as React.CSSProperties}>
+          <span className="h-koppel-bron" translate="no">{regel.bron}</span>
+          <span className="h-koppel-draad"><i /></span>
+          <span className="h-koppel-taak">{regel.taak}</span>
+          <span className="h-koppel-os" translate="no">OS</span>
+        </div>
+      ))}
     </div>
   );
 }

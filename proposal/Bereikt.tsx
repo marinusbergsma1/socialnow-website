@@ -1,7 +1,6 @@
 import React from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Bento, BentoFilm, Tegel, useInBeeld } from "./Bento";
-import { OdooLogo } from "./Verhaal";
 import { GRATIS_OS_URL } from "./os-entry";
 import { TextLink } from "./ui";
 import "./bereikt.css";
@@ -139,20 +138,26 @@ function IlGordoScores() {
   );
 }
 
-// Odoo en Meta stromen het OS van kWh Garant in; een offerteaanvraag komt binnen.
-function KwhStroom() {
+// 5 oktober 2026 (Marinus): "Deze vind ik nog heel lelijk", "Ik wil graag iets meer tech en minder schreeuwerig" en de
+// resultaten: "Ik verdiende 100.000 euro's voor VDZ met complete animatie vanuit 0 online zichtbaarheid en foto's, alleen
+// een door to door team. Zelfde voor kWh 100 leads in 1 week." Een resultaattegel: één cijfer in mono, een rustige lijn
+// die oploopt (tekent zich bij binnenkomst) en wat we bouwden als kleine labels. Vervangt de stroom en de browser.
+function lijnPad(punten: number[], vlak: boolean) {
+  const stap = 200 / (punten.length - 1);
+  const xy = punten.map((p, i) => `${(i * stap).toFixed(1)} ${(46 - p * 42).toFixed(1)}`);
+  const lijn = `M${xy.join(" L")}`;
+  return vlak ? `${lijn} L200 48 L0 48 Z` : lijn;
+}
+function Resultaat({ waarde, eenheid, punten, labels }: { waarde: string; eenheid: string; punten: number[]; labels: string[] }) {
+  const { ref, aan } = useInBeeld<HTMLDivElement>();
   return (
-    <div className="h-stroom" aria-hidden="true">
-      <svg viewBox="0 0 320 150">
-        <path className="h-stroom-lijn" d="M58 38 C140 38 150 75 232 75" />
-        <path className="h-stroom-lijn" d="M58 112 C140 112 150 75 232 75" />
-        <path className="h-stroom-puls" d="M58 38 C140 38 150 75 232 75" pathLength="100" />
-        <path className="h-stroom-puls is-tweede" d="M58 112 C140 112 150 75 232 75" pathLength="100" />
+    <div ref={ref} className={`h-resultaat${aan ? " is-aan" : ""}`}>
+      <p className="h-resultaat-cijfer"><b translate="no">{waarde}</b><span>{eenheid}</span></p>
+      <svg className="h-resultaat-lijn" viewBox="0 0 200 48" preserveAspectRatio="none" aria-hidden="true">
+        <path className="is-vlak" d={lijnPad(punten, true)} />
+        <path className="is-lijn" d={lijnPad(punten, false)} pathLength="1" />
       </svg>
-      <span className="h-stroom-bron is-odoo"><OdooLogo /></span>
-      <span className="h-stroom-bron is-meta">Meta</span>
-      <span className="h-stroom-os">OS</span>
-      <span className="h-stroom-melding"><Check size={13} />Nieuwe offerteaanvraag</span>
+      <ul className="h-resultaat-labels" translate="no">{labels.map((label) => <li key={label}>{label}</li>)}</ul>
     </div>
   );
 }
@@ -184,16 +189,14 @@ export default function Bereikt() {
         <p className="sn-tegel-tekst">Na drie dagen op de beurs in Brussel. Dank je, Michelle.</p>
       </Tegel>
       <Tegel kop="kWh Garant" breed={4} className="h-bereikt-kwh">
-        <KwhStroom />
+        <Resultaat waarde="100" eenheid="leads in één week" punten={[0.02, 0.06, 0.12, 0.2, 0.34, 0.5, 0.66, 0.82, 1]} labels={["Meta ads", "Odoo CRM", "Eigen OS"]} />
         <p className="sn-tegel-titel">Eigen OS live.</p>
-        <p className="sn-tegel-tekst">Odoo en Meta gekoppeld. Offerteaanvragen komen direct in hun OS binnen.</p>
+        <p className="sn-tegel-tekst">Meta en Odoo gekoppeld. Elke offerteaanvraag komt direct in hun OS binnen.</p>
       </Tegel>
       <Tegel kop="VDZ Brigade" breed={4} className="h-bereikt-vdz">
-        <div className="h-browser" aria-hidden="true">
-          <span className="h-browser-balk"><i /><i /><i /><em><b />live</em></span>
-          <span className="h-browser-beeld"><img src="/images/cases/vdz-brigade-desktop.webp" alt="" loading="lazy" /></span>
-        </div>
-        <p className="sn-tegel-titel">Website, huisstijl en eigen OS.</p>
+        <Resultaat waarde="€ 100.000" eenheid="omzet voor VDZ" punten={[0, 0.01, 0.03, 0.08, 0.16, 0.3, 0.48, 0.7, 1]} labels={["Website", "Huisstijl", "Animatie", "Fotografie", "Eigen OS"]} />
+        <p className="sn-tegel-titel">Van nul online zichtbaarheid naar een merk dat verkoopt.</p>
+        <p className="sn-tegel-tekst">Daarvoor had VDZ alleen een deur-aan-deurteam.</p>
         {/* 30 september 2026 (Marinus): de reactie van VDZ in alle talen in het Engels. Origineel (Google-review, Nederlands):
             "Wat deze mannen neerzetten in zo’n korte tijd ongelofelijk." */}
         <p className="sn-tegel-tekst" translate="no">“What these guys delivered in such a short time is unbelievable.”</p>

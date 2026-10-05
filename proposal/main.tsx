@@ -6,6 +6,7 @@ import "../index.css";
 import "./website.css";
 import "./experience.css";
 import "./concept.css";
+import "./concept-tech.css";
 
 // De oude directe dev-ingang blijft bruikbaar; alle echte previewroutes
 // leven onder /voorstel en kunnen ook rechtstreeks worden geopend.

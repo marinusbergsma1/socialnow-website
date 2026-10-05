@@ -122,12 +122,12 @@ export function TeamJoin() {
 // 4 oktober 2026 (Marinus): "de volgende grote tools als AFAS etc top 5 Salesforce", met de echte logo's, "currently build",
 // Odoo live "because of their proven free accounting and website layer", en "We believe that AGI is about Universal ERP
 // connections". Gebouwd door Tristan (KLM, BearingPoint) en Douwe (ByteChat, ByteVision).
-const INTEGRATIES = [
-  { naam: "Salesforce", src: "/images/partners/salesforce.svg", hoog: 26 },
-  { naam: "AFAS", src: "/images/partners/integraties/afas.png", hoog: 16 },
-  { naam: "Exact", src: "/images/partners/integraties/exact.svg", hoog: 18 },
-  { naam: "HubSpot", src: "/images/partners/integraties/hubspot.svg", hoog: 20 },
-  { naam: "Microsoft Dynamics 365", src: "/images/partners/integraties/dynamics-365.svg", hoog: 22 },
+export const INTEGRATIES = [
+  { naam: "Salesforce", src: "/images/partners/salesforce.svg", hoog: 26, url: "https://www.salesforce.com" },
+  { naam: "AFAS", src: "/images/partners/integraties/afas.png", hoog: 16, url: "https://www.afas.nl" },
+  { naam: "Exact", src: "/images/partners/integraties/exact.svg", hoog: 18, url: "https://www.exact.com" },
+  { naam: "HubSpot", src: "/images/partners/integraties/hubspot.svg", hoog: 20, url: "https://www.hubspot.com" },
+  { naam: "Microsoft Dynamics 365", src: "/images/partners/integraties/dynamics-365.svg", hoog: 22, url: "https://dynamics.microsoft.com" },
 ];
 
 // 4 oktober 2026 (Marinus): "Zorg dat er Linkedin Links staan bij zowel Tris als Douwe en dat ze beide via de bedrijven ook
@@ -150,7 +150,7 @@ function Integraties() {
     <div className="h-integraties-kop"><b>Currently building</b><span>The big five, after Odoo</span></div>
     <ul className="h-integraties-rij">
       <li className="is-live"><img src="/images/partners/odoo.svg" alt="Odoo" height="20" loading="lazy" /><small>Live</small></li>
-      {INTEGRATIES.map(i => <li key={i.naam}><img src={i.src} alt={i.naam} style={{ height: i.hoog }} loading="lazy" /></li>)}
+      {INTEGRATIES.map(i => <li key={i.naam}><a href={i.url} target="_blank" rel="noopener"><img src={i.src} alt={i.naam} style={{ height: i.hoog }} loading="lazy" /></a></li>)}
     </ul>
     <p><strong>Odoo is live</strong>, because of their <strong>proven free accounting and website layer</strong>.</p>
     <p><strong>We believe AGI is about universal ERP connections.</strong> So as a business owner you have a choice. <strong>You are not guessing, you are choosing.</strong></p>
