@@ -256,35 +256,6 @@
   .sn-site .h-hero .h-team-rij .h-team-muur { grid-area: muur; }
   .sn-site .h-hero .h-team-rij .h-team-join-balk { grid-area: join; }
 }
-/* 3 oktober 2026 (Marinus): "Mag dit in een witte balk? Dan valt het meer op." Witte partnerbalk over de volle breedte, direct
-   onder het team. De logo's staan in hun eigen kleur op wit en schuiven door; stil bij prefers-reduced-motion. */
-.sn-site .h-partners { overflow: hidden; border-radius: 24px; background: #fff; color: #0b0f12; }
-.sn-site .h-hero .h-partners { grid-column: 1 / -1; margin-top: clamp(28px, 3vw, 44px); }
-.sn-site .h-partners-balk { margin: 0; padding: clamp(16px, 1.5vw, 22px) clamp(20px, 2.1vw, 32px) 0; color: #0b0f12; font-size: clamp(13px, 1.05vw, 16px); font-weight: 800; letter-spacing: .16em; }
-.sn-site .h-partners-groot { margin: 6px 0 0; padding: 0 clamp(20px, 2.1vw, 32px); color: #0b0f12; font-size: clamp(26px, 3.2vw, 50px); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
-.sn-site .h-partners-groot span { color: #F62961; }
-.sn-site .h-partners-groot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
-.sn-site .h-partners-xxl { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 10px; background: #0b0f12; }
-.sn-site .h-partners-xxl img { display: block; width: auto; height: clamp(30px, 3vw, 46px); }
-.sn-site .h-partners-balk code { color: #F62961; font-family: ui-monospace, Menlo, monospace; font-weight: 700; letter-spacing: 0; font-size: 1.08em; }
-.sn-site .h-partners-strook { position: relative; overflow: hidden; padding: clamp(14px, 1.6vw, 24px) 0 clamp(20px, 2.2vw, 32px); }
-.sn-site .h-partners-strook::before, .sn-site .h-partners-strook::after { content: ""; position: absolute; top: 0; bottom: 0; width: clamp(40px, 6vw, 110px); z-index: 1; pointer-events: none; }
-.sn-site .h-partners-strook::before { left: 0; background: linear-gradient(90deg, #fff, transparent); }
-.sn-site .h-partners-strook::after { right: 0; background: linear-gradient(270deg, #fff, transparent); }
-.sn-site .h-partners-lus { display: flex; width: max-content; animation: h-partners-lus 32s linear infinite; }
-.sn-site .h-partners-strook:hover .h-partners-lus { animation-play-state: paused; }
-.sn-site .h-partners-rij { display: flex; gap: clamp(36px, 4.5vw, 80px); margin: 0; padding: 0 clamp(36px, 4.5vw, 80px) 0 0; list-style: none; }
-/* 4 oktober 2026 (Marinus): "Verder logo's veel te groot." Rustiger formaat in de strook. */
-.sn-site .h-partners-logo { display: grid; place-items: center; width: clamp(96px, 9vw, 140px); height: clamp(36px, 3.4vw, 48px); }
-.sn-site .h-partners-logo img { display: block; width: 100%; height: 100%; max-height: 30px; object-fit: contain; }
-.sn-site .h-partners-logo img[alt="Salesforce"] { max-height: 40px; }
-.sn-site .h-partners-logo img[alt="Mastercard"] { max-height: 26px; }
-@keyframes h-partners-lus { to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) {
-  .sn-site .h-partners-lus { animation: none; width: auto; }
-  .sn-site .h-partners-rij { flex-wrap: wrap; justify-content: center; row-gap: 20px; padding: 0 16px; }
-  .sn-site .h-partners-rij[aria-hidden] { display: none; }
-}
 /* 3 oktober 2026 (Marinus): "ONS VLAK MET MENSEN WIT EN TEAM ER HELEMAAL OP". Het hele teamvlak (statement, muur en
    uitnodiging) is een witte kaart; de muur toont alle zeventien mensen plus een tegel "Jij?" in 6 x 3. */
 .sn-site .h-hero .h-team-rij { padding: clamp(20px, 2.4vw, 36px); border-radius: 28px; background: #fff; color: #0b0f12; }
