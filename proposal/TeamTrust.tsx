@@ -41,11 +41,14 @@ const KORTE_ROL: Record<string, string> = {
 // 5 oktober 2026 (Marinus): de muur per functie, optie D (filterpillen). "zowel ik als Attesso en management moet behalve
 // management er nog bij ook in het onderverdelen terugkomen": het hele team staat hier, ook wie bovenaan al groot staat.
 const FUNCTIES: { functie: string; mensen: string[] }[] = [
-  { functie: "AI & development", mensen: ["Marinus Bergsma", "Sid van Kalken", "Douwe Kramer", "Tristan Slobbe", "Antony Soosaipillaj"] },
+  // 5 oktober 2026 (Marinus): "Ai development is meer Tristan an Douwe. Antony Soosaipillaj is voor Webdevelopment."
+  // Marinus staat bij Sales & partnerships; Sid (Web Development & AI Payments) bij Web development.
+  { functie: "AI development", mensen: ["Tristan Slobbe", "Douwe Kramer"] },
+  { functie: "Web development", mensen: ["Sid van Kalken", "Antony Soosaipillaj"] },
   { functie: "Finance & operations", mensen: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
   { functie: "Ads & search", mensen: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"] },
   { functie: "Video, photo & design", mensen: ["Carmel Boon", "Sam van der Sluis", "Emma Peperkamp", "Pepijn Bos", "Armando van Bruggen"] },
-  { functie: "Sales & partnerships", mensen: ["Elian Coellar", "Aren", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
+  { functie: "Sales & partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Aren", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
 ];
 
 function TeamPerFunctie() {
