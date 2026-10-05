@@ -15,7 +15,7 @@ const eisen = [
   // 30 september 2026 (Marinus): "Deze video mag weg", My story staat niet meer in de header.
   ["volgorde: Attesso met TALKING TO, dan OS-film, dan statement", /~\/attesso[\s\S]*TALKING TO[\s\S]*<HeroFilm\b[\s\S]*h-statement is-r1/.test(pages)],
   ["regel over software weg", !pages.includes(">If software can&rsquo;t be free")],
-  ["stijl R1: dun dan dik, groen dik", pages.includes('<b className="g">NO ONE CAN AUTOMATE PEOPLE WHO CARE</b><b>.</b>') && pages.includes('<span className="d">Software is a tool.</span> <b>We are SocialNow!</b>') && readFileSync("proposal/hero-c.css","utf8").includes("h-statement.is-r1")],
+  ["stijl R1: dun dan dik, groen dik", pages.includes('<b className="g">No one can automate people who care</b><b>.</b>') && pages.includes('<span className="d">Software is a tool.</span> <b>We are SocialNow!</b>') && readFileSync("proposal/hero-c.css","utf8").includes("h-statement.is-r1")],
   ["geen dubbele expertzinnen meer", !pages.includes(">With a team of human experts") && !pages.includes("We get paid for our expertise")],
   // 30 september 2026 (Marinus): de demobanner werd een liggend sprekersblok met Marinus en Sid (Attesso).
   ["demo met Marinus en Sid van Attesso", pages.includes('className="h-sprekers"') && pages.includes("Sid van Kalken") && pages.includes("~/attesso")],

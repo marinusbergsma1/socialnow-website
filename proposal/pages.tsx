@@ -296,7 +296,7 @@ export function Home() {
               {/* 30 september 2026 (Marinus): "Dit is helemaal niet in deze stijl, LOS DAT OP", met versie R1 als voorbeeld:
                   alle regels even groot, per regel eerst dun en dan dik, het groene deel dik, de punt wit. */}
               <p className="h-sr"><span className="d">Proven, branded,</span> <b>fully automated!</b></p>
-              <p className="h-sr"><span className="d">Everyone can automate a business.</span> <b className="g">NO ONE CAN AUTOMATE PEOPLE WHO CARE</b><b>.</b></p>
+              <p className="h-sr"><span className="d">Everyone can automate a business.</span> <b className="g">No one can automate people who care</b><b>.</b></p>
               <p className="h-sr"><span className="d">Software is a tool.</span> <b>We are SocialNow!</b></p>
             </div>
             <div className="h-team-verhaal" translate="no">

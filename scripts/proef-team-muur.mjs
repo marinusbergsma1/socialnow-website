@@ -13,7 +13,7 @@ const eisen = [
   ["muur met twaalf portretten, naam en rol", join.includes('className="h-team-muur"') && join.includes("<figcaption>") && join.includes("person.role")],
   ["portretten in kleur, geen grijsfilter", /\.h-team-muur img \{[^}]*object-fit: cover/.test(css) && !/\.h-team-muur img \{[^}]*grayscale/.test(css)],
   ["join-regel als balk met Open positions", join.includes("h-team-join-balk") && join.includes("Open positions")],
-  ["statement blijft links ongewijzigd", lees("proposal/pages.tsx").includes("NO ONE CAN AUTOMATE PEOPLE WHO CARE")],
+  ["statement blijft links ongewijzigd", lees("proposal/pages.tsx").includes("No one can automate people who care")],
 ];
 let fout = 0;
 for (const [naam, ok] of eisen) { console.log(`${ok ? "groen" : "ROOD "} ${naam}`); if (!ok) fout++; }
