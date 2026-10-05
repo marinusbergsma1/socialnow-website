@@ -94,6 +94,8 @@ function schrijf(doc, taal, slug) {
       pdf.alinea(p);
       const punten = sectie.bullets && sectie.bullets[i];
       if (punten && punten.length) pdf.opsomming(punten);
+      // Een tabel (bewaartermijnen) als opsomming "gegeven: termijn"; de schrijver kent geen tabellen.
+      if (sectie.table && sectie.table.afterParagraph === i) pdf.opsomming(sectie.table.rows.map((r) => r.join(": ")));
     });
   }
   pdf.voetregels(doc.title + " · SocialNow · socialnow.nl/" + slug);

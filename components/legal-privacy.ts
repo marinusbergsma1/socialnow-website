@@ -5,7 +5,7 @@ import type { LegalDoc } from "./legal";
 export const privacyNl: LegalDoc = {
   title: "Privacybeleid",
   intro: "Hoe SocialNow omgaat met persoonsgegevens op socialnow.nl en in SocialNow OS, volgens de Algemene verordening gegevensbescherming (AVG). Dit beleid geldt voor bezoekers van de website, voor iedereen met een account in het OS en voor de klanten, contacten en teamleden van die accounts.",
-  updated: "Laatst bijgewerkt: 20 september 2026",
+  updated: "Laatst bijgewerkt: 5 oktober 2026",
   sections: [
     { title: "1. Wie is verantwoordelijk", paragraphs: ["SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, KVK 90877179, is de verwerkingsverantwoordelijke voor de gegevens van bezoekers en accounthouders. Voor de gegevens die een accounthouder zelf in zijn werkruimte zet (zijn eigen klanten, contacten, orders en teamleden) is de accounthouder verantwoordelijke en is SocialNow verwerker; daarvoor geldt artikel 12.", "Vragen, verzoeken en klachten over privacy: info@socialnow.nl. Wij reageren binnen een maand."] },
     { title: "2. Welke gegevens wij verwerken", paragraphs: ["Op de website verwerken wij alleen wat je zelf achterlaat:", "In SocialNow OS verwerken wij daarnaast:", "Gegevens uit bronnen die je zelf koppelt, uitsluitend voor je eigen werkruimte:"], bullets: [
@@ -25,7 +25,8 @@ export const privacyNl: LegalDoc = {
     {"title": "4. Gebruiksmeting, opnames en ondersteuning", "paragraphs": ["Een account aanmaken geeft ons geen algemene toestemming om je bedrijfsinhoud voor eigen productontwikkeling te gebruiken. Noodzakelijke beveiliging en ondersteuning baseren wij op de overeenkomst en ons gerechtvaardigd belang. Beheertoegang is beperkt tot bevoegde personen en wordt gelogd.", "Vrijwillige gebruiksmeting met PostHog in de EU start pas na jouw toestemming. We verzamelen een pseudoniem, een werkruimtekenmerk, schermroutes en vooraf bepaalde gebeurtenissen. E-mailadressen, vrije zoektermen, prompts, klantnamen en documenten horen niet in deze meting. Gepseudonimiseerde gegevens blijven persoonsgegevens.", "Gemaskeerde schermopnames hebben een afzonderlijke, standaard uitgeschakelde keuze. Tekst, invoervelden en media worden afgeschermd. Account-, CRM-, betaal- en beheerschermen worden niet opgenomen; chatinhoud wordt afgeschermd. Er wordt geen geluid, camera of volledig apparaatbeeld opgenomen. Nieuwe opnames worden 30 dagen bewaard. Gewone gebruiksgebeurtenissen blijven op ons huidige PostHog-plan maximaal één jaar beschikbaar, zodat wij ook seizoensverschillen kunnen vergelijken.", "Beide keuzes kun je onder Account intrekken zonder functies te verliezen. Daarmee stoppen nieuwe metingen en opnames. Intrekken verwijdert bestaande gegevens niet automatisch; daarvoor kun je een verzoek indienen via info@socialnow.nl. We verkopen deze gegevens niet, gebruiken ze niet voor advertenties van derden en delen ze niet met andere klanten.", "Gebruik van bedrijfsinhoud voor een aanvullend eigen doel vraagt een afzonderlijke beoordeling en grondslag. Het akkoord op de voorwaarden vervangt die niet."]},
     { title: "5. Wie ons helpt (verwerkers)", paragraphs: ["Deze partijen verwerken gegevens in onze opdracht, onder een verwerkersovereenkomst of de standaardvoorwaarden van de leverancier die aan de AVG voldoen:"], bullets: [[
       "Google Firebase (Google Ireland Ltd): inloggen met Google, e-mailcode of inloglink; accountgegevens",
-      "Vercel Inc.: hosting van het OS en de API, en opslag van je werkruimte (Vercel Blob, regio EU waar mogelijk)",
+      "Vercel Inc.: hosting van het OS en de API, en opslag van bestanden zoals foto's, renders en documenten (Vercel Blob, Frankfurt)",
+      "Neon (Neon Inc.): database in Frankfurt (Duitsland) voor gegevens over werkruimten, leden, opdrachten, verbruik en het auditlogboek",
       "PostHog Inc.: vrijwillige gebruiksmeting en afzonderlijk toegestane gemaskeerde schermopnames (dataregio EU)",
       "Hostinger: het versturen van e-mail vanaf info@socialnow.nl, zoals inlogcodes, uitnodigingen en meldingen",
       "Stripe Payments Europe Ltd: betalingen voor tegoed; Stripe is voor kaartgegevens zelfstandig verantwoordelijke",
@@ -37,13 +38,15 @@ export const privacyNl: LegalDoc = {
       "Deze leveranciers verwerken de gegevens alleen om het antwoord te maken. Wij kiezen contract- en instellingen waarbij jouw invoer niet wordt gebruikt om hun modellen te trainen. Antwoorden van een model kunnen fouten bevatten; controleer wat je publiceert.",
       "Milo, de assistent in het OS, ziet alleen de gegevens van je eigen werkruimte en de gegevens die je zelf in het gesprek deelt.",
     ] },
-    { title: "7. Doorgifte buiten de EU", paragraphs: ["Een aantal leveranciers is gevestigd in de Verenigde Staten of verwerkt daar gegevens (Vercel, GitHub, Stripe, Google, OpenAI). Doorgifte gebeurt op basis van het EU-VS Data Privacy Framework waar de leverancier daarbij is aangesloten, en anders op basis van de standaardcontractbepalingen van de Europese Commissie met aanvullende maatregelen. Wij kiezen waar mogelijk voor opslag en verwerking in de EU."] },
+    { title: "7. Doorgifte buiten de EU", paragraphs: ["Een aantal leveranciers is gevestigd in de Verenigde Staten of verwerkt daar gegevens (Vercel, Neon, GitHub, Stripe, Google, OpenAI). Doorgifte gebeurt op basis van het EU-VS Data Privacy Framework waar de leverancier daarbij is aangesloten, en anders op basis van de standaardcontractbepalingen van de Europese Commissie met aanvullende maatregelen. Wij kiezen waar mogelijk voor opslag en verwerking in de EU."] },
     { title: "8. Bewaartermijnen", paragraphs: ["Wij bewaren gegevens niet langer dan nodig:"], bullets: [[
       "Contactgegevens van een aanvraag zonder opdracht: maximaal twee jaar na het laatste contact",
       "Gegevens uit de demo-aanmelding: maximaal twee jaar, of korter als je vraagt ze te wissen",
       "Account- en werkruimtegegevens: zolang je account bestaat; na verwijdering binnen dertig dagen gewist uit de actieve systemen en binnen negentig dagen uit back-ups",
       "Gegevens uit gekoppelde bronnen: alleen zolang de koppeling bestaat; ontkoppelen wist de gekopieerde gegevens en de sleutel",
       "Chatgesprekken met Milo en gemaakte uitingen: zolang je account bestaat, tenzij je ze zelf eerder verwijdert",
+      "Afgeronde opdrachten van de assistent: dertig dagen zichtbaar, daarna gearchiveerd",
+      "Auditlogboek: twaalf maanden",
       "Facturen en betaalgegevens: zeven jaar (fiscale bewaarplicht)",
       "Technische logs (IP-adres, foutmeldingen): maximaal dertig dagen",
       "Je akkoord op de voorwaarden: zolang je account bestaat, plus de wettelijke verjaringstermijn",
@@ -101,7 +104,7 @@ export const privacyNl: LegalDoc = {
 export const privacyEn: LegalDoc = {
   title: "Privacy Policy",
   intro: "How SocialNow handles personal data on socialnow.nl and in SocialNow OS, under the General Data Protection Regulation (GDPR). This policy applies to website visitors, to everyone with an account in the OS, and to the customers, contacts and team members of those accounts. The Dutch version is the binding one.",
-  updated: "Last updated: 20 September 2026",
+  updated: "Last updated: 5 October 2026",
   sections: [
     { title: "1. Who is responsible", paragraphs: ["SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands, Chamber of Commerce 90877179, is the controller for the data of visitors and account holders. For the data an account holder puts into their own workspace (their own customers, contacts, orders and team members) the account holder is the controller and SocialNow is the processor; section 12 applies to that.", "Questions, requests and complaints about privacy: info@socialnow.nl. We respond within one month."] },
     { title: "2. What we process", paragraphs: ["On the website we only process what you leave yourself:", "In SocialNow OS we additionally process:", "Data from sources you connect yourself, only for your own workspace:"], bullets: [
@@ -121,7 +124,8 @@ export const privacyEn: LegalDoc = {
     {"title": "4. Usage measurement, recordings and support", "paragraphs": ["Creating an account does not give us blanket permission to use your business content for our own product development. Necessary security and support rely on the agreement and our legitimate interest. Administrative access is limited to authorised people and is logged.", "Optional usage measurement with PostHog in the EU starts only after consent. We collect a pseudonymous identifier, a workspace identifier, screen routes and predefined events. Email addresses, free-text searches, prompts, customer names and documents are excluded from this measurement. Pseudonymous data remains personal data.", "Masked session recordings require a separate choice, off by default. Text, inputs and media are masked. Account, CRM, payment and administration screens are excluded; chat content is blocked. No audio, camera or full-device screen is recorded. New recordings are retained for 30 days. Ordinary usage events remain available for up to one year on our current PostHog plan, allowing seasonal comparisons.", "You can withdraw either choice under Account without losing functionality. This stops new measurements and recordings. Withdrawal does not automatically erase existing data; request erasure at info@socialnow.nl. We do not sell this data, use it for third-party advertising or share it with other customers.", "Using business content for an additional purpose of our own requires a separate assessment and legal basis. Acceptance of the terms does not replace this."]},
     { title: "5. Who helps us (processors)", paragraphs: ["These parties process data on our behalf, under a data processing agreement or the provider's standard GDPR terms:"], bullets: [[
       "Google Firebase (Google Ireland Ltd): signing in with Google, e-mail code or sign-in link; account data",
-      "Vercel Inc.: hosting of the OS and the API, and storage of your workspace (Vercel Blob, EU region where possible)",
+      "Vercel Inc.: hosting of the OS and the API, and storage of files such as photos, renders and documents (Vercel Blob, Frankfurt)",
+      "Neon (Neon Inc.): database in Frankfurt (Germany) for data about workspaces, members, assistant tasks, usage and the audit log",
       "PostHog Inc.: optional usage measurement and separately permitted masked session recordings (EU data region)",
       "Hostinger: sending e-mail from info@socialnow.nl, such as sign-in codes, invitations and notifications",
       "Stripe Payments Europe Ltd: payments for credit; for card details Stripe is an independent controller",
@@ -133,13 +137,15 @@ export const privacyEn: LegalDoc = {
       "These providers process the data only to produce the response. We choose contracts and settings under which your input is not used to train their models. Model output can contain errors; check what you publish.",
       "Milo, the assistant in the OS, only sees the data of your own workspace and what you share in the conversation yourself.",
     ] },
-    { title: "7. Transfers outside the EU", paragraphs: ["Some providers are based in the United States or process data there (Vercel, GitHub, Stripe, Google, OpenAI). Transfers rely on the EU-US Data Privacy Framework where the provider is certified, and otherwise on the European Commission's standard contractual clauses with additional measures. Where possible we choose storage and processing in the EU."] },
+    { title: "7. Transfers outside the EU", paragraphs: ["Some providers are based in the United States or process data there (Vercel, Neon, GitHub, Stripe, Google, OpenAI). Transfers rely on the EU-US Data Privacy Framework where the provider is certified, and otherwise on the European Commission's standard contractual clauses with additional measures. Where possible we choose storage and processing in the EU."] },
     { title: "8. Retention", paragraphs: ["We keep data no longer than needed:"], bullets: [[
       "Contact details of a request without an order: at most two years after the last contact",
       "Data from the demo sign-up: at most two years, or shorter if you ask us to erase it",
       "Account and workspace data: as long as your account exists; after deletion erased from active systems within thirty days and from backups within ninety days",
       "Data from connected sources: only while the connection exists; disconnecting erases the copied data and the key",
       "Chat conversations with Milo and created pieces: as long as your account exists, unless you delete them earlier",
+      "Completed assistant tasks: visible for thirty days, then archived",
+      "Audit log: twelve months",
       "Invoices and payment data: seven years (tax retention duty)",
       "Technical logs (IP address, error messages): at most thirty days",
       "Your agreement to the terms: as long as your account exists, plus the statutory limitation period",
