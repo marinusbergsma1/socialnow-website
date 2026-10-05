@@ -21,7 +21,7 @@ import { MiloMotion, miloPoster } from "./motion";
 import { klein, useDichtbij, useNaBeeld } from "./licht";
 import CharacterAccent from "./CharacterAccent";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
-import TeamTrust, { TeamJoin } from "./TeamTrust";
+import TeamTrust, { INTEGRATIES, TeamJoin } from "./TeamTrust";
 const Verhaal = later(() => import("./Verhaal").then((m) => m.default));
 import { Bento, Tegel } from "./Bento";
 import "./bereikt.css";
@@ -275,13 +275,22 @@ export function Home() {
               <a className="h-aftermovie" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener">&#9654; Watch the aftermovie</a>
             </p>
             <p className="h-integratie-rij is-klein">
-              <span className="h-integratie-sf">NEXT STEP <a href="https://www.salesforce.com" target="_blank" rel="noopener"><img src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" /></a></span>
-              <i aria-hidden="true" />
               <span className="h-attesso">PAYMENT PARTNER <a href="https://attesso.com" target="_blank" rel="noopener"><code>~/attesso</code></a></span>
               {/* 5 oktober 2026 (Marinus): "Hier moet ook nog het bedrijf van Steven bij." Fincer heeft geen eigen website, dus de
                   naam linkt naar Steven op LinkedIn. Als tekst, net als ~/attesso: het Fincer-logo klopt volgens Marinus nog niet. */}
               <i aria-hidden="true" />
               <span className="h-fincer">WEALTH PARTNER <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener" aria-label="Fincer, Steven Goudsblom on LinkedIn"><code>Fincer</code></a></span>
+            </p>
+            {/* 5 oktober 2026 (Marinus): "Next step en dan alle ERP's en Next talks wil ik graag en dan die logobalk." NEXT STEP
+                toont de vijf ERP- en CRM-systemen uit Currently building (niet alleen Salesforce), als kleine witte chips met
+                een link; daaronder heet de witte logobalk NEXT TALKS. */}
+            <p className="h-integratie-rij is-klein h-next-step">
+              <span className="h-next-label">NEXT STEP</span>
+              <span className="h-next-erps">
+                {INTEGRATIES.map((systeem) => (
+                  <a key={systeem.naam} href={systeem.url} target="_blank" rel="noopener"><img src={systeem.src} alt={systeem.naam} style={{ height: Math.round(systeem.hoog * 0.75) }} /></a>
+                ))}
+              </span>
             </p>
             {/* 1 oktober 2026 (Marinus): "Vanuit de video staan de logo's waar mijn partners van Attesso mee in gesprek gaan.
                 Die mogen ook op de site.", "laat deze balk Primefone, DIVEINE, KWH weg" en "Dan kunnen er meer logo's onder
@@ -291,7 +300,7 @@ export function Home() {
                 er twee keer in en de lus schuift precies één rij op, dus de naad is niet te zien. De kopie is voor schermlezers
                 en toetsenbord verborgen. */}
             <div className="h-talking">
-              <span className="h-talking-label">TALKING TO</span>
+              <span className="h-talking-label">NEXT TALKS</span>
               <div className="h-talking-strook">
                 <div className="h-talking-lus">
                   {[false, true].map(kopie => (

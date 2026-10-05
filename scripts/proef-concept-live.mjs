@@ -23,6 +23,9 @@ const eisen = [
   ["Alles gekoppeld zonder grote OS-bol", nul.includes("h-koppel-lijst") && !nul.includes('h-koppel-knoop is-os')],
   ["Il Gordo toont de headerfilm", bereikt.includes("/video/ilgordo/ilgordo-header.mp4") && existsSync("public/video/ilgordo/ilgordo-header.mp4")],
   ["één Artist Impression", lac.includes("<VoorNaSchuif impressie={IMPRESSIES[0]} />") && !lac.includes("IMPRESSIES.map")],
+  // "Next step en dan alle ERP's en Next talks wil ik graag en dan die logobalk."
+  ["hero: NEXT STEP met alle vijf ERP's", /NEXT STEP<\/span>[\s\S]{0,200}INTEGRATIES\.map/.test(lees("proposal/pages.tsx"))],
+  ["hero: logobalk heet NEXT TALKS", lees("proposal/pages.tsx").includes('<span className="h-talking-label">NEXT TALKS</span>')],
   ["ERP-markt zoals in de header", deuren.includes('kop="ERP-markt"') && deuren.includes("INTEGRATIES.map") && !deuren.includes('kop="Salesforce"')],
 ];
 let fout = 0;

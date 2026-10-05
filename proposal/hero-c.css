@@ -419,3 +419,10 @@
 /* De lus is breder dan het scherm; zonder deze regel rekt het raster mee en valt de tekst op mobiel buiten beeld. */
 .sn-site .h-integratie { grid-template-columns: minmax(0, 1fr); }
 .sn-site .h-talking { min-width: 0; }
+/* 5 oktober 2026: NEXT STEP met de vijf ERP's als kleine witte chips. */
+.sn-site .h-next-step { flex-wrap: nowrap; }
+.sn-site .h-next-label { flex-shrink: 0; color: #a7b3ad; }
+.sn-site .h-next-erps { display: flex; flex-wrap: wrap; gap: 6px; }
+.sn-site .h-next-erps a { display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border-radius: 5px; background: #fff; transition: transform .2s ease; }
+.sn-site .h-next-erps a:hover { transform: translateY(-1px); }
+.sn-site .h-next-erps img { display: block; width: auto; max-width: 74px; }
