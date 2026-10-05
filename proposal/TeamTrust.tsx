@@ -25,11 +25,17 @@ export default function TeamTrust() {
 // zijn weg ("Die zwarte balk en dat groene blok vind ik ook niet nice"); de uitnodiging is een tekstlink.
 const SOCIALNOW_DUO = ["Marinus Bergsma", "Steef Komen"];
 const ATTESSO_DUO = ["Sid van Kalken", "Douwe Kramer"];
+// 5 oktober 2026 (Marinus): "Michelle, Tristan en Steven wil ik graag groot hebben als bestuursonderdeel." Optie D uit de
+// voorbeelden (drie foto's en een tekstkaart in vier gelijke vakken), "graag groen dus".
+const BOARD = ["Michelle Yang", "Tristan Slobbe", "Steven Goudsblom"];
 const KORTE_ROL: Record<string, string> = {
   "Marinus Bergsma": "Founder & CEO",
   "Steef Komen": "Partner · Finance & Data",
   "Sid van Kalken": "Web Development & AI Payments",
   "Douwe Kramer": "Co-founder",
+  "Michelle Yang": "Supply Chain & Operations",
+  "Tristan Slobbe": "Data & AI",
+  "Steven Goudsblom": "Wealth management",
 };
 
 function DuoTegel({ naam }: { naam: string }) {
@@ -42,7 +48,7 @@ function DuoTegel({ naam }: { naam: string }) {
 }
 
 export function TeamJoin() {
-  const duo = [...SOCIALNOW_DUO, ...ATTESSO_DUO];
+  const duo = [...SOCIALNOW_DUO, ...ATTESSO_DUO, ...BOARD];
   const zelfstandig = teamOpVolgorde().filter(person => !duo.includes(person.name));
   return <div className="h-team-sectie" translate="no">
     <Link to="/team" className="h-team-kern" aria-label="Meet the SocialNow team">
@@ -54,6 +60,10 @@ export function TeamJoin() {
         <div className="h-duo-kop"><span className="h-duo-merk"><b>~/a</b> Attesso</span><span>AI Payments</span></div>
         <div className="h-duo-rij">{ATTESSO_DUO.map(naam => <DuoTegel key={naam} naam={naam} />)}</div>
       </div>
+    </Link>
+    <Link to="/team" className="h-board" aria-label="Meet the board">
+      <div className="h-board-tekst"><b>Board</b><strong>Operations, data and wealth.</strong><span>Michelle, Tristan and Steven</span></div>
+      {BOARD.map(naam => <DuoTegel key={naam} naam={naam} />)}
     </Link>
     <div className="h-zelf">
       <div className="h-zelf-kop"><b>Independent entrepreneurs</b><span>Each runs their own business</span></div>
