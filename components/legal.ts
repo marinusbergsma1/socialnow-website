@@ -7,13 +7,15 @@
 // interne gebruik daarvan om het product te verbeteren.
 
 export type Language = "en" | "nl" | "de" | "fr" | "it" | "es";
-export type Section = { title: string; paragraphs: string[]; bullets?: string[][] };
+// table: een kleine tabel na alinea afterParagraph (5 oktober 2026, bewaartermijnen in het privacybeleid).
+export type Section = { title: string; paragraphs: string[]; bullets?: string[][]; table?: { afterParagraph: number; head: string[]; rows: string[][] } };
 export type LegalDoc = { title: string; intro: string; updated: string; sections: Section[] };
 
 export const LEGAL_VERSION = "2026-09-20";
 
 import { privacyNl, privacyEn } from "./legal-privacy";
 import * as vertaald from "./legal-vertaald";
+import { privacyKort } from "./legal-privacy-kort";
 
 export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: LegalDoc } = {
   ...vertaald.terms,
@@ -44,7 +46,7 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
           "SocialNow OS is de online omgeving op app.socialnow.nl waarin opdrachtgever zijn website, klanten, content en advertenties beheert. Wie een account aanmaakt gaat akkoord met deze voorwaarden en met het privacybeleid op socialnow.nl/privacy.",
           "Noodzakelijke ondersteuning en beveiliging geven bevoegde medewerkers beperkte, gelogde toegang. Vrijwillige gebruiksmeting en afzonderlijke gemaskeerde schermopnames vragen toestemming die onder Account kan worden ingetrokken. Een account aanmaken geeft geen algemene toestemming om bedrijfsinhoud voor eigen productontwikkeling te gebruiken. Zie socialnow.nl/privacy.",
           "SocialNow verkoopt deze gegevens nooit, deelt ze nooit met andere klanten en gebruikt ze nooit voor advertenties van derden. Gegevens van gekoppelde bronnen zoals Odoo, Meta en Google worden alleen gelezen voor de eigen werkruimte van opdrachtgever; de sleutels die opdrachtgever invoert worden versleuteld bewaard en niet getoond.",
-          "Opdrachtgever blijft eigenaar van zijn gegevens en kan zijn account op elk moment verwijderen onder Account in het OS. Toegang wordt gesloten en verwijdering wordt afgehandeld volgens het privacybeleid; wettelijke bewaarplichten blijven gelden.",
+          "Opdrachtgever blijft eigenaar van zijn gegevens en kan zijn account op elk moment verwijderen onder Account in het OS. Toegang wordt gesloten en verwijdering wordt afgehandeld volgens het privacybeleid; wettelijke bewaarplichten blijven gelden. Waar de gegevens staan (Vercel Blob en Neon in Frankfurt) en hoe lang ze bewaard worden, staat bovenaan socialnow.nl/privacy.",
           "Het OS wordt geleverd zoals het is en wordt voortdurend doorontwikkeld. SocialNow geeft geen garantie op ononderbroken beschikbaarheid en mag functies wijzigen of beëindigen. Opdrachtgever gebruikt het OS niet voor illegale doeleinden, spam of misbruik van gekoppelde platformen en houdt zich aan de voorwaarden van die platformen.",
         ],
       },
@@ -80,7 +82,7 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
           "SocialNow OS is the online environment at app.socialnow.nl in which the client manages its website, customers, content and advertising. Whoever creates an account agrees to these terms and to the privacy policy at socialnow.nl/privacy.",
           "Necessary support and security give authorised staff limited, logged access. Optional usage measurement and separate masked session recordings require consent, which can be withdrawn under Account. Creating an account does not grant blanket permission to use business content for our own product development. See socialnow.nl/privacy.",
           "SocialNow never sells this data, never shares it with other customers and never uses it for third-party advertising. Data from connected sources such as Odoo, Meta and Google is read only for the client's own workspace; the keys the client enters are stored encrypted and never shown.",
-          "The client remains the owner of its data and can delete its account at any time under Account in the OS. Access is closed and erasure is handled under the privacy policy; statutory retention duties continue to apply.",
+          "The client remains the owner of its data and can delete its account at any time under Account in the OS. Access is closed and erasure is handled under the privacy policy; statutory retention duties continue to apply. Where the data is stored (Vercel Blob and Neon in Frankfurt) and how long it is kept is set out at the top of socialnow.nl/privacy.",
           "The OS is provided as is and is continuously developed. SocialNow gives no guarantee of uninterrupted availability and may change or end features. The client does not use the OS for illegal purposes, spam or abuse of connected platforms and complies with the terms of those platforms.",
         ],
       },
@@ -91,10 +93,14 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
   },
 };
 
+// 5 oktober 2026: het korte blok over opslag, bewaartermijnen en meten staat bovenaan, in elke taal.
+// Zonder volledige vertaling toont de, fr, it of es het Engelse beleid, maar dit blok in de eigen taal.
+const KORT_TITEL: Record<"de" | "fr" | "it" | "es", string> = { de: "Datenschutzerklärung", fr: "Politique de confidentialité", it: "Informativa sulla privacy", es: "Política de privacidad" };
+const metKort = (doc: LegalDoc, taal: Language): LegalDoc => ({ ...doc, sections: [privacyKort[taal], ...doc.sections] });
 export const privacy: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: LegalDoc } = {
-  nl: privacyNl,
-  en: privacyEn,
-  ...vertaald.privacy,
+  nl: metKort(privacyNl, "nl"),
+  en: metKort(privacyEn, "en"),
+  ...Object.fromEntries((["de", "fr", "it", "es"] as const).map((t) => [t, metKort(vertaald.privacy[t] || { ...privacyEn, title: KORT_TITEL[t] }, t)])),
 };
 
 // 19 september 2026: de juridische laag is uit één artikel in het privacybeleid uitgegroeid tot

@@ -127,7 +127,7 @@ export const dpa: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Lega
       {
         title: "10. Doorgifte buiten de EER",
         paragraphs: [
-          "Wij bewaren en verwerken jouw gegevens bij voorkeur binnen de Europese Economische Ruimte. De regio verschilt per dienst. PostHog gebruikt de EU-regio; de huidige Vercel-appfuncties draaien in de Verenigde Staten. Onze dienstverlening is daarom niet uitsluitend Europees.",
+          "Wij bewaren en verwerken jouw gegevens bij voorkeur binnen de Europese Economische Ruimte. De regio verschilt per dienst. PostHog gebruikt de EU-regio; de Vercel-appfuncties, Vercel Blob en de Neon-database staan in Frankfurt. Een aantal leveranciers is Amerikaans, dus onze dienstverlening is niet uitsluitend Europees.",
           "Is doorgifte naar een derde land onvermijdelijk — dat speelt bij een aantal Amerikaanse leveranciers van modellen en infrastructuur — dan doen wij dat alleen op basis van een geldig mechanisme uit hoofdstuk V AVG: een adequaatheidsbesluit van de Europese Commissie, of de standaardcontractbepalingen (uitvoeringsbesluit (EU) 2021/914), aangevuld met een beoordeling van de omstandigheden in dat land en met aanvullende maatregelen waar die nodig zijn, zoals versleuteling onderweg en in rust en het zo klein mogelijk houden van wat er heen gaat.",
           "Per subverwerker staat in bijlage C waar de gegevens staan en welk mechanisme geldt. Wijzigt dat, dan werken wij die bijlage bij volgens artikel 5.",
         ],
@@ -228,11 +228,12 @@ export const dpa: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Lega
           "Modellen voor tekst en beeld, alleen voor wat jij laat maken:",
           "Publiceren op sociale kanalen:",
           "Wij hebben met elk van deze partijen een verwerkersovereenkomst of gelijkwaardige voorwaarden. Bij partijen buiten de EER berust de doorgifte op de standaardcontractbepalingen van de Europese Commissie, en waar van toepassing op het EU-VS Data Privacy Framework.",
-          "Deze lijst geldt op 19 september 2026. Wijzigingen worden dertig dagen vooraf aangekondigd volgens artikel 5.",
+          "Deze lijst geldt op 5 oktober 2026. Wijzigingen worden dertig dagen vooraf aangekondigd volgens artikel 5.",
         ],
         bullets: [
           [
-            "Vercel Inc. (Verenigde Staten; regio afhankelijk van de dienst, appfuncties momenteel VS): hosting van het OS en de API",
+            "Vercel Inc. (Verenigde Staten; appfuncties en Vercel Blob in Frankfurt): hosting van het OS en de API, opslag van bestanden",
+            "Neon Inc. (Verenigde Staten; database in Frankfurt, Duitsland): opslag van gegevens over werkruimten, leden, opdrachten, verbruik en het auditlogboek",
             "Google Ireland Limited / Google LLC: Firebase voor de opslag van werkruimten en accounts",
             "Hostinger International Ltd (Litouwen): hosting van websites, domeinen en e-mail",
           ],
@@ -356,7 +357,7 @@ export const dpa: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Lega
       {
         title: "10. Transfers outside the EEA",
         paragraphs: [
-          "We prefer to store and process your data within the European Economic Area. Regions differ by service. PostHog uses the EU region; the current Vercel app functions run in the United States. Our service is therefore not EU-only.",
+          "We prefer to store and process your data within the European Economic Area. Regions differ by service. PostHog uses the EU region; the Vercel app functions, Vercel Blob and the Neon database are in Frankfurt. Several providers are American, so our service is not EU-only.",
           "Where a transfer to a third country is unavoidable — which is the case for a number of US providers of models and infrastructure — we do so only on the basis of a valid mechanism under Chapter V GDPR: an adequacy decision of the European Commission, or the standard contractual clauses (Implementing Decision (EU) 2021/914), supplemented by an assessment of the circumstances in that country and by additional measures where needed, such as encryption in transit and at rest and keeping what is sent as small as possible.",
           "Annex C states, per sub-processor, where the data sits and which mechanism applies. If that changes, we update the annex in line with clause 5.",
         ],
@@ -457,11 +458,12 @@ export const dpa: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Lega
           "Models for text and image, only for what you have created:",
           "Publishing to social channels:",
           "We have a data processing agreement or equivalent terms with each of these parties. For parties outside the EEA, transfers rest on the European Commission's standard contractual clauses and, where applicable, the EU-US Data Privacy Framework.",
-          "This list is valid on 19 September 2026. Changes are announced thirty days in advance in line with clause 5.",
+          "This list is valid on 5 October 2026. Changes are announced thirty days in advance in line with clause 5.",
         ],
         bullets: [
           [
-            "Vercel Inc. (United States; region varies by service, app functions currently US): hosting of the OS and the API",
+            "Vercel Inc. (United States; app functions and Vercel Blob in Frankfurt): hosting of the OS and the API, file storage",
+            "Neon Inc. (United States; database in Frankfurt, Germany): storage of data about workspaces, members, assistant tasks, usage and the audit log",
             "Google Ireland Limited / Google LLC: Firebase for storage of workspaces and accounts",
             "Hostinger International Ltd (Lithuania): hosting of websites, domains and e-mail",
           ],

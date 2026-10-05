@@ -27,7 +27,7 @@ export default function LegalPage({ doc, path, slug }: { doc: Partial<Record<Lan
           {({ nl: "Terug", en: "Back", de: "Zurück", fr: "Retour", it: "Indietro", es: "Volver" } as Record<string, string>)[language] || "Back"}
         </button>
         <div className="scroll-reveal">
-          <h1 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter mb-4">{d.title}</h1>
+          <h1 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter mb-4 hyphens-auto break-words" lang={language}>{d.title}</h1>
           <p className="text-gray-300 text-base mb-3">{d.intro}</p>
           <div className="flex flex-wrap items-center gap-4 mb-12">
             <p className="text-white/30 text-xs font-bold uppercase tracking-widest">{d.updated}</p>
@@ -45,14 +45,23 @@ export default function LegalPage({ doc, path, slug }: { doc: Partial<Record<Lan
           </div>
         </div>
         <div className="prose prose-invert max-w-none space-y-8 text-gray-300 text-sm leading-relaxed scroll-reveal">
-          {d.sections.map((s) => (
-            <section key={s.title}>
+          {d.sections.map((s, n) => (
+            <section key={s.title} className={s.table && n === 0 ? "rounded-2xl border border-white/20 bg-white/[0.04] p-5 md:p-6" : undefined}>
               <h2 className="text-lg font-black uppercase text-white tracking-tight mb-3">{s.title}</h2>
               {s.paragraphs.map((p, i) => (
                 <React.Fragment key={i}>
                   <p className={i ? "mt-3" : ""}>{p}</p>
                   {s.bullets?.[i] && (
                     <ul className="pl-6 space-y-1 text-gray-400 mt-2" style={{ listStyle: "disc" }}>{s.bullets[i].map((b) => <li key={b} style={{ display: "list-item" }}>{b}</li>)}</ul>
+                  )}
+                  {/* 5 oktober 2026: bewaartermijnen als tabel, zodat ze in één oogopslag te lezen zijn. */}
+                  {s.table && s.table.afterParagraph === i && (
+                    <div className="mt-3 overflow-x-auto">
+                      <table className="w-full text-left border-collapse hyphens-auto" lang={language}>
+                        <thead><tr>{s.table.head.map((h) => <th key={h} className="py-2 pr-4 text-[11px] font-bold uppercase tracking-widest text-white/50 border-b border-white/15">{h}</th>)}</tr></thead>
+                        <tbody>{s.table.rows.map((r) => <tr key={r[0]}>{r.map((c, j) => <td key={j} className={"py-2 pr-4 align-top border-b border-white/10 " + (j ? "text-gray-300" : "text-white font-bold")}>{c}</td>)}</tr>)}</tbody>
+                      </table>
+                    </div>
                   )}
                 </React.Fragment>
               ))}
