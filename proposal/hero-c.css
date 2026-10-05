@@ -426,3 +426,23 @@
 .sn-site .h-next-erps a { display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border-radius: 5px; background: #fff; transition: transform .2s ease; }
 .sn-site .h-next-erps a:hover { transform: translateY(-1px); }
 .sn-site .h-next-erps img { display: block; width: auto; max-width: 74px; }
+
+/* 6 oktober 2026 (Marinus): teamhiërarchie onder All. Iedereen een vierkant; Partners en Board als grotere bovenste rij,
+   daarna Heads, Specialists en Sales & network in dezelfde zeven kolommen. Plus de groei van de afgelopen week. */
+.sn-site .h-lagen-muur { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 16px 10px; color: #0b0f12; }
+.sn-site .h-lagen-muur > div { position: relative; }
+.sn-site .h-lagen-muur figure { margin: 0; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: #eef1ef; border: 1px solid #0b0f1214; }
+.sn-site .h-lagen-muur img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2,.8,.3,1); }
+.sn-site .h-lagen-muur > div:hover img { transform: scale(1.05); }
+.sn-site .h-lagen-top { gap: 18px 12px; padding-bottom: 20px; margin-bottom: 18px; border-bottom: 1px solid #0b0f121a; }
+.sn-site .h-lagen-top figure { border-radius: 12px; }
+.sn-site .h-lagen-top .h-functie-naam { font-size: 14px; }
+.sn-site .h-lagen-top .h-functie-naam i { font-size: 12px; }
+.sn-site .h-laag { display: block; margin-top: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: #6f7773; }
+.sn-site .h-laag.is-partner { color: #1a8f45; }
+.sn-site .h-laag + .h-functie-naam { margin-top: 3px; }
+.sn-site .h-team-groei { margin-left: auto; align-self: center; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .04em; color: #4a5450; }
+.sn-site .h-team-groei b { color: #1a8f45; font-weight: 600; }
+@media (max-width: 900px) { .sn-site .h-lagen-muur { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .sn-site .h-lagen-muur { grid-template-columns: repeat(3, minmax(0, 1fr)); } .sn-site .h-team-groei { margin-left: 0; width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-lagen-muur img { transition: none; } }

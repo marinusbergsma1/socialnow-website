@@ -4,7 +4,7 @@ export const projects = [...webShowcaseProjects, ...allProjects];
 // 28 september 2026 (Marinus): zakelijkere functies, zoals "Head of".
 // 5 oktober 2026 (Marinus): "graag bij iedereen Linkedin doorlink". Alleen profielen die zeker van deze persoon zijn
 // (teamonderzoek 4 en 5 oktober); bij de rest volgt de link zodra de juiste URL bevestigd is.
-export const people: { name: string; role: string; image: string; linkedin?: string }[] = [
+export const people: { name: string; role: string; image: string; linkedin?: string; sinds?: string }[] = [
   {
     name: "Marinus Bergsma",
     role: "Founder & CEO",
@@ -53,6 +53,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
     role: "Co-founder · Attesso",
     image: "Douwe-Kramer-attesso.webp",
     linkedin: "https://www.linkedin.com/in/douwekramer/",
+    sinds: "2026-10-01",
   },
   // 4 oktober 2026 (Marinus): "Ai payment hoort niet bij Steef en Michelle." Alleen Sid (Attesso) houdt AI Payments.
   {
@@ -67,19 +68,19 @@ export const people: { name: string; role: string; image: string; linkedin?: str
     image: "Michelle-Yang-kantoor.webp",
   },
   // 30 september 2026 (Marinus): nieuw teamlid.
-  { name: "Tristan Slobbe", role: "Data & AI Engineer", image: "Tristan-Slobbe.webp", linkedin: "https://www.linkedin.com/in/tristan-slobben-105056159/" },
+  { name: "Tristan Slobbe", role: "Data & AI Engineer", image: "Tristan-Slobbe.webp", linkedin: "https://www.linkedin.com/in/tristan-slobben-105056159/", sinds: "2026-09-30" },
   // 3 oktober 2026 (Marinus): nieuwe teamleden.
-  { name: "Antony Soosaipillaj", role: "Full-Stack AI Developer", image: "Antony-Soosaipillaj.webp" },
-  { name: "Aren", role: "Senior Sales", image: "Aren.webp" },
-  { name: "Youri van der Donk", role: "Senior Sales", image: "Youri-van-der-Donk.webp" },
-  { name: "Isaak Munster", role: "Business Coach", image: "Isaak-Munster.webp" },
+  { name: "Antony Soosaipillaj", role: "Full-Stack AI Developer", image: "Antony-Soosaipillaj.webp", sinds: "2026-10-03" },
+  { name: "Aren", role: "Senior Sales", image: "Aren.webp", sinds: "2026-10-03" },
+  { name: "Youri van der Donk", role: "Senior Sales", image: "Youri-van-der-Donk.webp", sinds: "2026-10-03" },
+  { name: "Isaak Munster", role: "Business Coach", image: "Isaak-Munster.webp", sinds: "2026-10-03" },
   // 3 oktober 2026 (Marinus): "Zet de rest er ook op". Pieter stond klaar op feat/team-pieter-20261001.
-  { name: "Pieter Bergsma", role: "Multi sales business owner", image: "Pieter-Bergsma.webp" },
-  { name: "Pepijn Bos", role: "Art Director · Bos Design", image: "Pepijn-Bos.webp" },
-  { name: "Armando van Bruggen", role: "Designer · Bruggn Design", image: "Armando-van-Bruggen.webp" },
+  { name: "Pieter Bergsma", role: "Multi sales business owner", image: "Pieter-Bergsma.webp", sinds: "2026-10-03" },
+  { name: "Pepijn Bos", role: "Art Director · Bos Design", image: "Pepijn-Bos.webp", sinds: "2026-10-03" },
+  { name: "Armando van Bruggen", role: "Designer · Bruggn Design", image: "Armando-van-Bruggen.webp", sinds: "2026-10-03" },
   // 5 oktober 2026 (Marinus): "HIJ MOET OOK BIJ HET TEAM EN BIJ NEW PARTNER." Steven Goudsblom (Fincer B.V.) doet het
   // vermogensbeheer voor SocialNow en onze klanten.
-  { name: "Steven Goudsblom", role: "New partner · Wealth management · Fincer", image: "Steven-Goudsblom.webp", linkedin: "https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" },
+  { name: "Steven Goudsblom", role: "New partner · Wealth management · Fincer", image: "Steven-Goudsblom.webp", linkedin: "https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/", sinds: "2026-10-05" },
 ];
 export const agents = [
   {

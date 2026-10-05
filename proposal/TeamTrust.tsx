@@ -61,10 +61,42 @@ const FUNCTIES: { functie: string; mensen: string[] }[] = [
   { functie: "Sales & partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Aren", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
 ];
 
+// 6 oktober 2026 (Marinus): "Hier ook nog even iets van hierarchie", bij optie H3 "liever vierkantjes omdat iedereen een
+// plek verdient". Onder All staat het team in lagen: Partners en Board groot bovenaan, daarna iedereen in even grote vierkanten.
+const LAGEN: [string, string[]][] = [
+  ["Partner", ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer"]],
+  ["Board", ["Michelle Yang", "Tristan Slobbe", "Steven Goudsblom"]],
+  ["Head", ["Jos Hollenberg", "Nick van Keulen", "Carmel Boon", "Elian Coellar"]],
+  ["Specialist", ["Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
+  ["Sales & network", ["Aren", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
+];
+
+function LaagTegel({ naam, laag }: { naam: string; laag: string }) {
+  const person = people.find(p => p.name === naam);
+  if (!person) return null;
+  return <div>
+    <figure><img {...klein(person.image, "(max-width: 900px) 25vw, 180px", [160, 320])} alt="" width="180" height="180" loading="lazy" /></figure>
+    <span className={`h-laag${laag === "Partner" ? " is-partner" : ""}`}>{laag}</span>
+    <span className="h-functie-naam"><span>{person.name} <LinkedInTeken person={person} /></span><i>{KORTE_ROL[naam] ?? person.role}</i></span>
+    <NaarPersoon person={person} />
+  </div>;
+}
+
+function TeamInLagen() {
+  const [top, rest] = [LAGEN.slice(0, 2), LAGEN.slice(2)];
+  const tegels = (lagen: typeof LAGEN) => lagen.flatMap(([laag, namen]) => namen.map(naam => <LaagTegel key={naam} naam={naam} laag={laag} />));
+  return <>
+    <div className="h-lagen-muur h-lagen-top">{tegels(top)}</div>
+    <div className="h-lagen-muur">{tegels(rest)}</div>
+  </>;
+}
+
 function TeamPerFunctie() {
   const [keuze, setKeuze] = React.useState("");
   const alle = FUNCTIES.flatMap(groep => groep.mensen.map(naam => ({ naam, functie: groep.functie })));
   const getoond = alle.filter(x => !keuze || x.functie === keuze);
+  // 6 oktober 2026 (Marinus): "Benoem ook de groei van het team in de afgelopen week". Telt wie de laatste 7 dagen bijkwam.
+  const nieuw = people.filter(p => p.sinds && Date.now() - Date.parse(p.sinds) < 7 * 864e5).length;
   const pil = (functie: string, label: string, aantal: number) =>
     <button key={label} type="button" aria-pressed={keuze === functie} onClick={() => setKeuze(functie)}>{label}<small>{aantal}</small></button>;
   return <div className="h-zelf">
@@ -72,8 +104,9 @@ function TeamPerFunctie() {
     <div className="h-functie-pillen" role="group" aria-label="Filter by function">
       {pil("", "All", alle.length)}
       {FUNCTIES.map(groep => pil(groep.functie, groep.functie, groep.mensen.length))}
+      {nieuw > 0 ? <span className="h-team-groei"><b>+{nieuw}</b> this week · {people.length} people</span> : null}
     </div>
-    <div className="h-functie-muur">
+    {!keuze ? <TeamInLagen /> : <div className="h-functie-muur">
       {getoond.map(({ naam }) => {
         const person = people.find(p => p.name === naam);
         if (!person) return null;
@@ -83,7 +116,7 @@ function TeamPerFunctie() {
           <NaarPersoon person={person} />
         </div>;
       })}
-    </div>
+    </div>}
     <Link to="/vacatures" className="h-team-netwerk">Running your own business too? <b>Join the network &rarr;</b></Link>
   </div>;
 }
