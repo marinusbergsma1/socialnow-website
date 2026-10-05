@@ -67,9 +67,15 @@ export default function Deuren() {
           </a>
         </div>
       </Tegel>
-      <Tegel kop="Odoo" breed={4} className="h-deur-status is-live">
-        <span className="h-deur-merk" translate="no"><OdooLogo /><span>PRODUCT</span></span>
-        <b><i aria-hidden="true" />Live</b>
+      {/* 5 oktober 2026 (Marinus): "bij ODOO dat het volledig geintegreerd is en waarom wij voor ODOO kozen. Mooi Belgisch
+          product. Eerlijke waardepropositie voor beginnende ondernemers met de gratis website en het gratis boekhoudpakket."
+          en "Maar onze websitebouwer." De gratis boekhouding is Odoo; de gratis website komt uit onze eigen websitebouwer. */}
+      <Tegel kop="Odoo" breed={4} className="h-deur-status is-live h-deur-odoo">
+        <div className="h-deur-odoo-kop">
+          <span className="h-deur-merk" translate="no"><OdooLogo /><span>PRODUCT</span></span>
+          <b><i aria-hidden="true" />Volledig geïntegreerd</b>
+        </div>
+        <p className="sn-tegel-tekst">Waarom Odoo: een mooi Belgisch product met een eerlijke prijs voor wie net begint. De boekhouding is gratis in Odoo, de website gratis met onze eigen websitebouwer.</p>
       </Tegel>
       {/* 5 oktober 2026 (Marinus): "ERP market gewoon net als bij de header". Niet alleen Salesforce: de vijf grote
           ERP- en CRM-systemen na Odoo, dezelfde rij als Currently building in de header, elk met een link. */}

@@ -53,7 +53,6 @@
 .sn-wereld-kaart { margin: 0; min-width: 0; }
 .sn-wereld-kaart svg { display: block; width: 100%; height: auto; max-width: 100%; overflow: visible; }
 .sn-wereld-land { fill: none; stroke: #ffffff2e; stroke-width: 0.62; stroke-linecap: round; }
-.sn-wereld-boog { fill: none; stroke: #25d366; stroke-width: 0.22; stroke-dasharray: 0.8 0.9; opacity: 0.75; }
 .sn-wereld-stip circle:last-child { fill: #25d366; }
 .sn-wereld-stip.is-thuis circle:last-child { fill: #5ee08f; }
 .sn-wereld-puls { fill: #25d366; opacity: 0; transform-box: fill-box; transform-origin: center; }
@@ -61,7 +60,6 @@
   .sn-wereld-puls { animation: sn-wereld-puls 2.6s ease-out infinite; }
   .sn-wereld-stip:nth-of-type(2) .sn-wereld-puls { animation-delay: 0.8s; }
   .sn-wereld-stip:nth-of-type(3) .sn-wereld-puls { animation-delay: 1.6s; }
-  .sn-wereld-boog { animation: sn-wereld-stroom 3s linear infinite; }
 }
 @keyframes sn-wereld-puls {
   0% { opacity: 0.55; transform: scale(0.6); }
@@ -72,3 +70,13 @@
   .sn-wereld { padding-block: 64px; }
   .sn-wereld-in { grid-template-columns: minmax(0, 1fr); }
 }
+/* 5 oktober 2026: live creators (groen) en OS-gebruikers (blauw) als stippen, met tellers. */
+.sn-wereld-tellers { display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); gap: 8px 32px; margin: 0; }
+.sn-wereld-tellers dt { display: inline-flex; align-items: center; gap: 8px; font: 500 11px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; color: #8d9893; }
+.sn-wereld-tellers dd { margin: 6px 0 0; font: 500 clamp(24px, 2.4vw, 32px)/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: -.03em; color: #fff; font-variant-numeric: tabular-nums; }
+.sn-wereld-tellers i { width: 7px; height: 7px; border-radius: 50%; }
+.sn-wereld-tellers i.is-creator { background: #25d366; }
+.sn-wereld-tellers i.is-os { background: #4f8cff; }
+.sn-wereld-gebruikers { fill: none; stroke-width: 0.34; stroke-linecap: round; }
+.sn-wereld-gebruikers.is-creator { stroke: #25d366; opacity: .95; }
+.sn-wereld-gebruikers.is-os { stroke: #4f8cff; opacity: .8; }

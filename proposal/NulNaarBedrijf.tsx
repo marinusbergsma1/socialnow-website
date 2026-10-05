@@ -182,6 +182,10 @@ export default function NulNaarBedrijf() {
         <Status live={BESCHIKBAAR.marketing} />
         <MarketingChat />
         <p className="sn-tegel-tekst">Een eigen marketingchat plant, maakt en post. Betaalde acties gaan alleen door binnen het budget dat jij vooraf goedkeurt, via onze betaalpartner.</p>
+        {/* 5 oktober 2026 (Marinus): "Graag Attesso ook laten zien dan hier." De betaalpartner bij naam, zoals in de hero. */}
+        <a className="h-nul-attesso" href="https://attesso.com" target="_blank" rel="noopener" translate="no">
+          <span>Payment partner</span><code>~/attesso</code>
+        </a>
       </Tegel>
     </Bento>
   );

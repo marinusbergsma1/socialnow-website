@@ -264,3 +264,27 @@
 .sn-site .h-ilgordo-film { position: relative; aspect-ratio: 16 / 9; margin-bottom: 16px; overflow: hidden; border-radius: 10px; border: 1px solid #ffffff14; }
 .sn-site .h-ilgordo-film video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .sn-site .h-bereikt-ilgordo .h-scores { margin-bottom: 14px; }
+/* 5 oktober 2026: VASTIQ-hoofdstuk met de oude inzoomfilm en een LinkedIn-link naar Steef. */
+.sn-site .h-hoofdstuk-vastiq { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 10px; }
+.sn-site .h-hoofdstuk-vastiq video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.sn-site .h-hoofdstuk-linkedin { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; color: #c9d1cc; font-family: var(--c-mono, ui-monospace, Menlo, monospace); font-size: 12px; text-decoration: none; }
+.sn-site .h-hoofdstuk-linkedin:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+/* Marketingtegel: Attesso als betaalpartner. */
+.sn-site .h-nul-attesso { display: inline-flex; align-items: center; gap: 10px; margin-top: 6px; padding: 7px 12px; border: 1px solid #f3c6e833; border-radius: 8px; background: #f3c6e80d; text-decoration: none; font-family: var(--c-mono, ui-monospace, Menlo, monospace); }
+.sn-site .h-nul-attesso span { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: #d4a0b5; }
+.sn-site .h-nul-attesso code { font-family: inherit; font-size: 14px; color: #fff; }
+.sn-site .h-nul-attesso:hover { border-color: #f3c6e866; }
+/* 5 oktober 2026: Odoo Experience met een stukje aftermovie in plaats van het stippenblok. */
+.sn-site .h-beurs-film { position: relative; flex: 0 0 auto; display: block; width: clamp(120px, 11vw, 160px); aspect-ratio: 9 / 16; overflow: hidden; border-radius: 12px; border: 1px solid #ffffff1f; }
+.sn-site .h-beurs-film video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.sn-site .h-beurs-film-label { position: absolute; left: 8px; bottom: 8px; z-index: 2; padding: 3px 7px; border-radius: 6px; background: #000000aa; color: #25d366; font-family: var(--c-mono, ui-monospace, Menlo, monospace); font-size: 10.5px; }
+.sn-site .h-beurs-groot { font-size: clamp(26px, 2.6vw, 36px) !important; font-weight: 600; }
+/* 5 oktober 2026: Odoo-tegel met uitleg waarom Odoo. */
+.sn-site .h-deur-odoo .sn-tegel-vlak { flex-direction: column; align-items: stretch; justify-content: space-between; gap: 14px; }
+.sn-site .h-deur-odoo-kop { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.sn-site .h-deur-odoo .sn-tegel-tekst { margin: 0; font-size: 14px; }
+/* HubSpot en Dynamics vielen weg op zwart: alle ERP-logo's op een witte chip, zoals NEXT STEP in de hero. */
+.sn-site .h-deur-erp-rij { gap: 6px; }
+.sn-site .h-deur-erp-rij a { height: 30px; padding: 0 10px; border-radius: 6px; background: #fff; opacity: 1; }
+.sn-site .h-deur-erp-rij a:hover { opacity: .9; }
+.sn-site .h-deur-erp-rij img { max-width: 84px; }

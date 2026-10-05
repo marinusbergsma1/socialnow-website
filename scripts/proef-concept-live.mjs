@@ -26,6 +26,18 @@ const eisen = [
   // "Next step en dan alle ERP's en Next talks wil ik graag en dan die logobalk."
   ["hero: NEXT STEP met alle vijf ERP's", /NEXT STEP<\/span>[\s\S]{0,200}INTEGRATIES\.map/.test(lees("proposal/pages.tsx"))],
   ["hero: logobalk heet NEXT TALKS", lees("proposal/pages.tsx").includes('<span className="h-talking-label">NEXT TALKS</span>')],
+  // Ronde 3: video's, Attesso, verhaal en wereldkaart.
+  ["VDZ toont hun animatie", bereikt.includes("/video/vdz/vdz-animatie.mp4") && existsSync("public/video/vdz/vdz-animatie.mp4")],
+  ["Hajenius toont het pand", bereikt.includes("/video/hajenius/hajenius-pand.mp4") && existsSync("public/video/hajenius/hajenius-pand.mp4")],
+  ["Odoo Experience: aftermovie in plaats van stippenblok", bereikt.includes("odoo-experience-kort.mp4") && !bereikt.includes("<Aanmeldingen />")],
+  ["marketingtegel toont Attesso", nul.includes('className="h-nul-attesso"')],
+  ["5 jaar SocialNow, niet Marinus", lees("proposal/Verhaal.tsx").includes("jaar SocialNow in november")],
+  ["De omslag niet meer roze", !/wanneer: "De omslag",[\s\S]{0,300}soort: "roze"/.test(lees("proposal/Verhaal.tsx"))],
+  ["VASTIQ-hoofdstuk: oude huisfilm en LinkedIn Steef", lees("proposal/Verhaal.tsx").includes("vastiq-inzoom.mp4") && lees("proposal/Verhaal.tsx").includes("steef-komen-60632236")],
+  ["wereldkaart: Let's keep the world, creators groen en OS-gebruikers blauw", lees("proposal/WereldKaart.tsx").includes("Let’s keep the world social. Now.") && lees("proposal/wereldkaart.css").includes(".sn-wereld-gebruikers.is-os { stroke: #4f8cff")],
+  ["tellers: 356 creators +12 per dag, 1125 OS-gebruikers +215 per dag", /CREATORS_START = 356;[\s\S]*CREATORS_PER_DAG = 12;[\s\S]*OS_GEBRUIKERS_START = 1125;[\s\S]*OS_GEBRUIKERS_PER_DAG = 215;/.test(lees("proposal/tellers.ts"))],
+  ["Odoo: volledig geïntegreerd en waarom Odoo (website via onze eigen websitebouwer)", deuren.includes("Volledig geïntegreerd") && deuren.includes("onze eigen websitebouwer")],
+  ["wereldkaart zonder boog", !lees("proposal/WereldKaart.tsx").includes("sn-wereld-boog")],
   ["ERP-markt zoals in de header", deuren.includes('kop="ERP-markt"') && deuren.includes("INTEGRATIES.map") && !deuren.includes('kop="Salesforce"')],
 ];
 let fout = 0;
