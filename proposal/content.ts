@@ -68,6 +68,9 @@ export const people = [
   { name: "Pieter Bergsma", role: "Multi sales business owner", image: "Pieter-Bergsma.webp" },
   { name: "Pepijn Bos", role: "Art Director · Bos Design", image: "Pepijn-Bos.webp" },
   { name: "Armando van Bruggen", role: "Designer · Bruggn Design", image: "Armando-van-Bruggen.webp" },
+  // 5 oktober 2026 (Marinus): "HIJ MOET OOK BIJ HET TEAM EN BIJ NEW PARTNER." Steven Goudsblom (Fincer B.V.) doet het
+  // vermogensbeheer voor SocialNow en onze klanten.
+  { name: "Steven Goudsblom", role: "New partner · Wealth management · Fincer", image: "Steven-Goudsblom.webp" },
 ];
 export const agents = [
   {

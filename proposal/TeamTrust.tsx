@@ -5,7 +5,7 @@ import { people } from "./content";
 import { klein } from "./licht";
 
 // Iedereen uit people, Marinus voorop; de rest in de volgorde van de muur.
-const voorop = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe"];
+const voorop = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe", "Steven Goudsblom"];
 const teamOpVolgorde = () => [...people].sort((a, b) => (voorop.indexOf(a.name) + 1 || 99) - (voorop.indexOf(b.name) + 1 || 99));
 
 // 28 september 2026 (Marinus): meer mensen uit het team laten zien, de tekst mag kleiner. Het hele team, even groot.
@@ -84,11 +84,10 @@ const INTEGRATIES = [
 // echt doorlinken naar die grote websites."
 const extern = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-function Bouwer({ naam, rol, linkedin, foto, nieuw, children }: { naam: string; rol: string; linkedin: string; foto?: string; nieuw?: boolean; children: React.ReactNode }) {
+function Bouwer({ naam, rol, linkedin, nieuw, children }: { naam: string; rol: string; linkedin: string; nieuw?: boolean; children: React.ReactNode }) {
   const person = people.find(p => p.name === naam);
-  const beeld = foto ?? person?.image;
   return <div className="h-bouwer">
-    {beeld && <img className="h-bouwer-foto" {...klein(beeld, 40)} alt="" width="40" height="40" loading="lazy" />}
+    {person && <img className="h-bouwer-foto" {...klein(person.image, 40)} alt="" width="40" height="40" loading="lazy" />}
     <a className="h-bouwer-naam" href={linkedin} {...extern} aria-label={`${person?.name ?? naam} on LinkedIn`}>
       <strong>{person?.name ?? naam} <span className="h-bouwer-in" aria-hidden="true">in</span>{nieuw && <span className="h-bouwer-nieuw">New partner</span>}</strong><i>{rol}</i>
     </a>
@@ -119,7 +118,7 @@ function Integraties() {
       {/* 5 oktober 2026 (Marinus): Steven Goudsblom (Fincer B.V.) komt erbij als partner voor vermogensbeheer, voor ons en
           onze klanten. Klein het ABN AMRO-logo en zijn werkervaring, net als bij Tristan en Douwe: "Dus ABN AMRO dan FINCER."
           Fincer heeft geen eigen website, dus dat logo linkt niet. */}
-      <Bouwer naam="Steven Goudsblom" rol="Founder · Wealth management" linkedin="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" foto="Steven-Goudsblom.webp" nieuw>
+      <Bouwer naam="Steven Goudsblom" rol="Founder · Wealth management" linkedin="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" nieuw>
         <a href="https://www.abnamro.nl" {...extern}><img src="/images/merken/abn-amro.svg" alt="ABN AMRO" style={{ height: 15 }} loading="lazy" /></a>
         <img src="/images/merken/fincer.png" alt="Fincer" style={{ height: 15 }} loading="lazy" />
       </Bouwer>

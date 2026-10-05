@@ -258,7 +258,8 @@ export function TeamGrid({ short = false, members = people, expert = true }: { s
           <figcaption>
             <strong>{person.name}</strong>
             <span>{person.role}</span>
-            {expert ? <em className="h-system-expert">System Expert</em> : null}
+            {/* 5 oktober 2026 (Marinus): Steven (Fincer) is partner vermogensbeheer, geen system expert. */}
+            {expert ? <em className="h-system-expert">{person.role.startsWith("New partner") ? "New partner" : "System Expert"}</em> : null}
           </figcaption>
         </figure>
       ))}
