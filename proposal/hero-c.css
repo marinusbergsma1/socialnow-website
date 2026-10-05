@@ -69,7 +69,7 @@
 .sn-site .h-attesso { color: #d4a0b5; }
 /* 1 oktober 2026: logo's van de partijen waar Attesso mee in gesprek is, als witte chips zoals in de partnerfilm. */
 .sn-site .h-talking { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
-.sn-site .h-talking-label { color: #d4a0b5; font-size: 12px; font-weight: 700; letter-spacing: .14em; }
+.sn-site .h-talking-label { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .14em; }
 .sn-site .h-attesso-logos { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .sn-site .h-attesso-logos li { display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 12px; border-radius: 6px; background: #fff; }
 .sn-site .h-attesso-logos img { display: block; width: auto; height: 13px; }
@@ -77,6 +77,16 @@
 .sn-site .h-attesso-logos img[alt="Airwallex"] { height: 12px; }
 .sn-site .h-attesso-logos img[alt="Rabobank"] { height: 12px; }
 .sn-site .h-attesso code { margin-left: 6px; font-family: ui-monospace, Menlo, monospace; font-size: 15px; font-weight: 500; letter-spacing: 0; color: #fff; }
+/* 5 oktober 2026: elk merk in de hero linkt naar de eigen site; de links houden de oude opmaak. */
+.sn-site .h-integratie a:not(.h-aftermovie) { color: inherit; text-decoration: none; }
+.sn-site .h-integratie-odoo, .sn-site .h-integratie-sf a, .sn-site .h-attesso-logos a { display: inline-flex; align-items: center; }
+.sn-site .h-attesso-logos li { transition: transform .2s ease; }
+.sn-site .h-attesso-logos li:hover { transform: translateY(-1px); }
+.sn-site .h-integratie a:not(.h-aftermovie):focus-visible { outline: 2px solid #25d366; outline-offset: 3px; border-radius: 4px; }
+.sn-site .h-attesso a:hover code, .sn-site .h-fincer a:hover code { text-decoration: underline; text-underline-offset: 3px; }
+/* Fincer (Steven Goudsblom), wealth partner: zelfde vorm als ~/attesso, neutraal grijs label. */
+.sn-site .h-fincer { color: #c9d1cc; }
+.sn-site .h-fincer code { margin-left: 6px; font-family: ui-monospace, Menlo, monospace; font-size: 15px; font-weight: 500; letter-spacing: 0; color: #fff; }
 .sn-site .h-hero .h-hero-tekst > h1.h-taalwissel .h-kop-groen { color: #25d366; }
 .sn-site .h-milo-pillen { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 14px; order: -1; flex: 1 1 100%; }
 .sn-site .h-milo-pil { display: inline-flex; align-items: center; gap: 10px; padding: 4px 16px 4px 4px; border: 1px solid #ffffff24; border-radius: 999px; background: #0a0c0c; }
@@ -256,35 +266,6 @@
   .sn-site .h-hero .h-team-rij .h-team-muur { grid-area: muur; }
   .sn-site .h-hero .h-team-rij .h-team-join-balk { grid-area: join; }
 }
-/* 3 oktober 2026 (Marinus): "Mag dit in een witte balk? Dan valt het meer op." Witte partnerbalk over de volle breedte, direct
-   onder het team. De logo's staan in hun eigen kleur op wit en schuiven door; stil bij prefers-reduced-motion. */
-.sn-site .h-partners { overflow: hidden; border-radius: 24px; background: #fff; color: #0b0f12; }
-.sn-site .h-hero .h-partners { grid-column: 1 / -1; margin-top: clamp(28px, 3vw, 44px); }
-.sn-site .h-partners-balk { margin: 0; padding: clamp(16px, 1.5vw, 22px) clamp(20px, 2.1vw, 32px) 0; color: #0b0f12; font-size: clamp(13px, 1.05vw, 16px); font-weight: 800; letter-spacing: .16em; }
-.sn-site .h-partners-groot { margin: 6px 0 0; padding: 0 clamp(20px, 2.1vw, 32px); color: #0b0f12; font-size: clamp(26px, 3.2vw, 50px); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
-.sn-site .h-partners-groot span { color: #F62961; }
-.sn-site .h-partners-groot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
-.sn-site .h-partners-xxl { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 10px; background: #0b0f12; }
-.sn-site .h-partners-xxl img { display: block; width: auto; height: clamp(30px, 3vw, 46px); }
-.sn-site .h-partners-balk code { color: #F62961; font-family: ui-monospace, Menlo, monospace; font-weight: 700; letter-spacing: 0; font-size: 1.08em; }
-.sn-site .h-partners-strook { position: relative; overflow: hidden; padding: clamp(14px, 1.6vw, 24px) 0 clamp(20px, 2.2vw, 32px); }
-.sn-site .h-partners-strook::before, .sn-site .h-partners-strook::after { content: ""; position: absolute; top: 0; bottom: 0; width: clamp(40px, 6vw, 110px); z-index: 1; pointer-events: none; }
-.sn-site .h-partners-strook::before { left: 0; background: linear-gradient(90deg, #fff, transparent); }
-.sn-site .h-partners-strook::after { right: 0; background: linear-gradient(270deg, #fff, transparent); }
-.sn-site .h-partners-lus { display: flex; width: max-content; animation: h-partners-lus 32s linear infinite; }
-.sn-site .h-partners-strook:hover .h-partners-lus { animation-play-state: paused; }
-.sn-site .h-partners-rij { display: flex; gap: clamp(36px, 4.5vw, 80px); margin: 0; padding: 0 clamp(36px, 4.5vw, 80px) 0 0; list-style: none; }
-/* 4 oktober 2026 (Marinus): "Verder logo's veel te groot." Rustiger formaat in de strook. */
-.sn-site .h-partners-logo { display: grid; place-items: center; width: clamp(96px, 9vw, 140px); height: clamp(36px, 3.4vw, 48px); }
-.sn-site .h-partners-logo img { display: block; width: 100%; height: 100%; max-height: 30px; object-fit: contain; }
-.sn-site .h-partners-logo img[alt="Salesforce"] { max-height: 40px; }
-.sn-site .h-partners-logo img[alt="Mastercard"] { max-height: 26px; }
-@keyframes h-partners-lus { to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) {
-  .sn-site .h-partners-lus { animation: none; width: auto; }
-  .sn-site .h-partners-rij { flex-wrap: wrap; justify-content: center; row-gap: 20px; padding: 0 16px; }
-  .sn-site .h-partners-rij[aria-hidden] { display: none; }
-}
 /* 3 oktober 2026 (Marinus): "ONS VLAK MET MENSEN WIT EN TEAM ER HELEMAAL OP". Het hele teamvlak (statement, muur en
    uitnodiging) is een witte kaart; de muur toont alle zeventien mensen plus een tegel "Jij?" in 6 x 3. */
 .sn-site .h-hero .h-team-rij { padding: clamp(20px, 2.4vw, 36px); border-radius: 28px; background: #fff; color: #0b0f12; }
@@ -345,6 +326,18 @@
 .sn-site .h-duo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .sn-site .h-duo figcaption { position: absolute; inset: auto 0 0; padding: 22px 9px 8px; background: linear-gradient(transparent, #000c); color: #fff; font-size: 12px; font-weight: 700; line-height: 1.2; }
 .sn-site .h-duo figcaption i { display: block; font-style: normal; font-weight: 400; font-size: 10.5px; opacity: .85; }
+/* 5 oktober 2026: Board (Michelle, Tristan, Steven) onder de duo's: een groene tekstkaart en drie foto's in vier gelijke vakken. */
+.sn-site .h-board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 14px; color: inherit; text-decoration: none; }
+.sn-site .h-board figure { position: relative; margin: 0; aspect-ratio: 1; border-radius: 16px; overflow: hidden; background: #eef1ef; border: 1px solid #0b0f1214; }
+.sn-site .h-board img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2,.8,.3,1); }
+.sn-site .h-board figure:hover img { transform: scale(1.04); }
+.sn-site .h-board figcaption { position: absolute; inset: auto 0 0; padding: 26px 12px 10px; background: linear-gradient(transparent, #000c); color: #fff; font-size: 13.5px; font-weight: 700; line-height: 1.2; }
+.sn-site .h-board figcaption i { display: block; font-style: normal; font-weight: 400; font-size: 11.5px; opacity: .85; }
+.sn-site .h-board-tekst { display: flex; flex-direction: column; justify-content: space-between; gap: 10px; aspect-ratio: 1; padding: 14px; border-radius: 16px; background: linear-gradient(160deg, #0cb457, #087a3c); color: #fff; }
+.sn-site .h-board-tekst b { font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #ffffffd9; }
+.sn-site .h-board-tekst strong { font-size: clamp(16px, 1.9vw, 24px); font-weight: 700; line-height: 1.12; letter-spacing: -.01em; }
+.sn-site .h-board-tekst span { font-size: 12px; color: #ffffffcc; }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-board img { transition: none; } }
 
 .sn-site .h-zelf-kop { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 2px 10px; }
 .sn-site .h-zelf-kop b { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
@@ -353,6 +346,20 @@
 .sn-site .h-hero .h-zelf .h-team-muur figure { border-radius: 10px; }
 .sn-site .h-team-netwerk { display: inline-flex; gap: 8px; margin-top: 14px; padding-bottom: 3px; border-bottom: 1px solid #0b0f1214; color: #0b0f12; font-size: 15px; font-weight: 500; text-decoration: none; }
 .sn-site .h-team-netwerk b { color: #0cb457; font-weight: 700; }
+/* 5 oktober 2026: team per functie met filterpillen (optie D). */
+.sn-site .h-functie-pillen { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.sn-site .h-functie-pillen button { padding: 6px 12px; border-radius: 99px; border: 1px solid #0b0f121f; background: #fff; color: #0b0f12; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.sn-site .h-functie-pillen button small { margin-left: 5px; font-size: 11px; opacity: .55; }
+.sn-site .h-functie-pillen button:hover { border-color: #0b0f12; }
+.sn-site .h-functie-pillen button[aria-pressed="true"] { background: #0b0f12; border-color: #0b0f12; color: #fff; }
+.sn-site .h-functie-pillen button:focus-visible { outline: 2px solid #0cb457; outline-offset: 2px; }
+.sn-site .h-functie-muur { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 12px 7px; color: #0b0f12; text-decoration: none; }
+.sn-site .h-functie-muur figure { margin: 0; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: #eef1ef; border: 1px solid #0b0f1214; }
+.sn-site .h-functie-muur img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2,.8,.3,1); }
+.sn-site .h-functie-muur > div:hover img { transform: scale(1.05); }
+.sn-site .h-functie-naam { display: grid; gap: 1px; margin-top: 6px; font-size: 12px; font-weight: 700; line-height: 1.2; }
+.sn-site .h-functie-naam i { font-style: normal; font-weight: 400; font-size: 11px; color: #4a5450; }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-functie-muur img, .sn-site .h-functie-pillen button { transition: none; } }
 .sn-site .h-team-netwerk:hover { border-color: #0cb457; }
 
 .sn-site .h-integraties { padding: clamp(16px, 1.6vw, 22px); border-radius: 22px; background: #f4f7f5; border: 1px solid #0b0f1214; color: #2b3330; }
@@ -376,11 +383,39 @@
 .sn-site .h-bouwer-in { display: inline-grid; place-items: center; width: 15px; height: 15px; margin-left: 3px; border-radius: 3px; background: #0a66c2; color: #fff; font-size: 10px; font-weight: 700; line-height: 1; vertical-align: 1px; }
 .sn-site .h-bouwer-merken a { display: inline-flex; align-items: center; text-decoration: none; transition: opacity .2s; }
 .sn-site .h-bouwer-merken a:hover { opacity: .7; }
+.sn-site .h-bouwer-nieuw { display: inline-block; margin-left: 6px; padding: 2px 7px; border-radius: 99px; background: #0cb4571a; color: #08823f; font-size: 11px; font-weight: 600; line-height: 1.3; vertical-align: 1px; }
 .sn-site .h-bouwer strong { color: #0b0f12; }
 .sn-site .h-bouwer i { font-style: normal; color: #4a5450; font-size: 12px; }
 .sn-site .h-bouwer-merken { display: flex; align-items: center; gap: 10px; margin-left: auto; }
 .sn-site .h-bouwer-merken img { display: block; width: auto; }
 .sn-site .h-bouwer-merk { display: inline-flex; align-items: center; gap: 5px; color: #1d2430; font-size: 13px; font-weight: 800; letter-spacing: -.02em; }
 .sn-site .h-bouwer-merk em { font-style: normal; color: #4a9ee8; }
-@media (max-width: 900px) { .sn-site .h-hero .h-zelf .h-team-muur { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (max-width: 640px) { .sn-site .h-team-kern, .sn-site .h-bouwers { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .sn-site .h-hero .h-zelf .h-team-muur { grid-template-columns: repeat(4, minmax(0, 1fr)); } .sn-site .h-functie-muur { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .sn-site .h-team-kern, .sn-site .h-bouwers { grid-template-columns: 1fr; } .sn-site .h-board { grid-template-columns: 1fr 1fr; } .sn-site .h-board-tekst { padding: 12px; overflow: hidden; } .sn-site .h-board-tekst strong { font-size: 15px; } .sn-site .h-board-tekst span { font-size: 11px; } }
+
+/* 5 oktober 2026 (Marinus): "graag bij iedereen Linkedin doorlink". Een link over de hele teamtegel (LinkedIn of /team). */
+.sn-site .h-functie-muur > div { position: relative; }
+.sn-site .h-persoon-link { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.sn-site .h-persoon-link:focus-visible { outline: 2px solid #0cb457; outline-offset: 2px; }
+.sn-site .h-duo figcaption .h-bouwer-in, .sn-site .h-board figcaption .h-bouwer-in { width: 13px; height: 13px; font-size: 9px; }
+.sn-site .h-functie-naam .h-bouwer-in { width: 12px; height: 12px; font-size: 8.5px; margin-left: 1px; }
+.h-people-grid .h-persoon-linkedin { color: inherit; text-decoration: none; }
+.h-people-grid .h-persoon-linkedin:hover { text-decoration: underline; text-underline-offset: 3px; }
+.h-people-grid .h-bouwer-in { display: inline-grid; place-items: center; width: 15px; height: 15px; margin-left: 3px; border-radius: 3px; background: #0a66c2; color: #fff; font-size: 10px; font-weight: 700; line-height: 1; vertical-align: 2px; }
+
+/* 5 oktober 2026 (Marinus): "Talking to wit maken", daarna "bewegend en balk wit aangezien het een positieve menselijke balk is
+   met dus groene line erboven en eronder". Witte balk, groene lijn boven en onder, logo's lopen door; stil bij hover en bij
+   prefers-reduced-motion. Het label staat donker op het wit. */
+.sn-site .h-talking { flex-wrap: nowrap; gap: 14px; padding: 10px 0 10px 14px; background: #fff; border-top: 2px solid #25d366; border-bottom: 2px solid #25d366; border-radius: 0; }
+.sn-site .h-talking .h-talking-label { flex-shrink: 0; color: #0b0f12; font-size: 11px; }
+.sn-site .h-talking-strook { flex: 1; min-width: 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 40px), transparent); }
+.sn-site .h-talking-lus { display: flex; width: max-content; animation: h-talking-loop 22s linear infinite; }
+.sn-site .h-talking-strook:hover .h-talking-lus, .sn-site .h-talking-strook:focus-within .h-talking-lus { animation-play-state: paused; }
+.sn-site .h-talking .h-attesso-logos { flex-wrap: nowrap; gap: 0; }
+.sn-site .h-talking .h-attesso-logos li { height: 26px; padding: 0 18px; border-radius: 0; background: none; }
+.sn-site .h-talking .h-attesso-logos li:hover { transform: none; opacity: .7; }
+@keyframes h-talking-loop { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-talking-lus { animation: none; } .sn-site .h-talking-strook { overflow-x: auto; } }
+/* De lus is breder dan het scherm; zonder deze regel rekt het raster mee en valt de tekst op mobiel buiten beeld. */
+.sn-site .h-integratie { grid-template-columns: minmax(0, 1fr); }
+.sn-site .h-talking { min-width: 0; }
