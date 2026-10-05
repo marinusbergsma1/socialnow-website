@@ -69,7 +69,7 @@
 .sn-site .h-attesso { color: #d4a0b5; }
 /* 1 oktober 2026: logo's van de partijen waar Attesso mee in gesprek is, als witte chips zoals in de partnerfilm. */
 .sn-site .h-talking { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
-.sn-site .h-talking-label { color: #d4a0b5; font-size: 12px; font-weight: 700; letter-spacing: .14em; }
+.sn-site .h-talking-label { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .14em; }
 .sn-site .h-attesso-logos { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .sn-site .h-attesso-logos li { display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 12px; border-radius: 6px; background: #fff; }
 .sn-site .h-attesso-logos img { display: block; width: auto; height: 13px; }
@@ -77,6 +77,16 @@
 .sn-site .h-attesso-logos img[alt="Airwallex"] { height: 12px; }
 .sn-site .h-attesso-logos img[alt="Rabobank"] { height: 12px; }
 .sn-site .h-attesso code { margin-left: 6px; font-family: ui-monospace, Menlo, monospace; font-size: 15px; font-weight: 500; letter-spacing: 0; color: #fff; }
+/* 5 oktober 2026: elk merk in de hero linkt naar de eigen site; de links houden de oude opmaak. */
+.sn-site .h-integratie a:not(.h-aftermovie) { color: inherit; text-decoration: none; }
+.sn-site .h-integratie-odoo, .sn-site .h-integratie-sf a, .sn-site .h-attesso-logos a { display: inline-flex; align-items: center; }
+.sn-site .h-attesso-logos li { transition: transform .2s ease; }
+.sn-site .h-attesso-logos li:hover { transform: translateY(-1px); }
+.sn-site .h-integratie a:not(.h-aftermovie):focus-visible { outline: 2px solid #25d366; outline-offset: 3px; border-radius: 4px; }
+.sn-site .h-attesso a:hover code, .sn-site .h-fincer a:hover code { text-decoration: underline; text-underline-offset: 3px; }
+/* Fincer (Steven Goudsblom), wealth partner: zelfde vorm als ~/attesso, neutraal grijs label. */
+.sn-site .h-fincer { color: #c9d1cc; }
+.sn-site .h-fincer code { margin-left: 6px; font-family: ui-monospace, Menlo, monospace; font-size: 15px; font-weight: 500; letter-spacing: 0; color: #fff; }
 .sn-site .h-hero .h-hero-tekst > h1.h-taalwissel .h-kop-groen { color: #25d366; }
 .sn-site .h-milo-pillen { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 14px; order: -1; flex: 1 1 100%; }
 .sn-site .h-milo-pil { display: inline-flex; align-items: center; gap: 10px; padding: 4px 16px 4px 4px; border: 1px solid #ffffff24; border-radius: 999px; background: #0a0c0c; }
@@ -382,3 +392,30 @@
 .sn-site .h-bouwer-merk em { font-style: normal; color: #4a9ee8; }
 @media (max-width: 900px) { .sn-site .h-hero .h-zelf .h-team-muur { grid-template-columns: repeat(4, minmax(0, 1fr)); } .sn-site .h-functie-muur { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .sn-site .h-team-kern, .sn-site .h-bouwers { grid-template-columns: 1fr; } .sn-site .h-board { grid-template-columns: 1fr 1fr; } .sn-site .h-board-tekst { padding: 12px; overflow: hidden; } .sn-site .h-board-tekst strong { font-size: 15px; } .sn-site .h-board-tekst span { font-size: 11px; } }
+
+/* 5 oktober 2026 (Marinus): "graag bij iedereen Linkedin doorlink". Een link over de hele teamtegel (LinkedIn of /team). */
+.sn-site .h-functie-muur > div { position: relative; }
+.sn-site .h-persoon-link { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.sn-site .h-persoon-link:focus-visible { outline: 2px solid #0cb457; outline-offset: 2px; }
+.sn-site .h-duo figcaption .h-bouwer-in, .sn-site .h-board figcaption .h-bouwer-in { width: 13px; height: 13px; font-size: 9px; }
+.sn-site .h-functie-naam .h-bouwer-in { width: 12px; height: 12px; font-size: 8.5px; margin-left: 1px; }
+.h-people-grid .h-persoon-linkedin { color: inherit; text-decoration: none; }
+.h-people-grid .h-persoon-linkedin:hover { text-decoration: underline; text-underline-offset: 3px; }
+.h-people-grid .h-bouwer-in { display: inline-grid; place-items: center; width: 15px; height: 15px; margin-left: 3px; border-radius: 3px; background: #0a66c2; color: #fff; font-size: 10px; font-weight: 700; line-height: 1; vertical-align: 2px; }
+
+/* 5 oktober 2026 (Marinus): "Talking to wit maken", daarna "bewegend en balk wit aangezien het een positieve menselijke balk is
+   met dus groene line erboven en eronder". Witte balk, groene lijn boven en onder, logo's lopen door; stil bij hover en bij
+   prefers-reduced-motion. Het label staat donker op het wit. */
+.sn-site .h-talking { flex-wrap: nowrap; gap: 14px; padding: 10px 0 10px 14px; background: #fff; border-top: 2px solid #25d366; border-bottom: 2px solid #25d366; border-radius: 0; }
+.sn-site .h-talking .h-talking-label { flex-shrink: 0; color: #0b0f12; font-size: 11px; }
+.sn-site .h-talking-strook { flex: 1; min-width: 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 40px), transparent); }
+.sn-site .h-talking-lus { display: flex; width: max-content; animation: h-talking-loop 22s linear infinite; }
+.sn-site .h-talking-strook:hover .h-talking-lus, .sn-site .h-talking-strook:focus-within .h-talking-lus { animation-play-state: paused; }
+.sn-site .h-talking .h-attesso-logos { flex-wrap: nowrap; gap: 0; }
+.sn-site .h-talking .h-attesso-logos li { height: 26px; padding: 0 18px; border-radius: 0; background: none; }
+.sn-site .h-talking .h-attesso-logos li:hover { transform: none; opacity: .7; }
+@keyframes h-talking-loop { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-talking-lus { animation: none; } .sn-site .h-talking-strook { overflow-x: auto; } }
+/* De lus is breder dan het scherm; zonder deze regel rekt het raster mee en valt de tekst op mobiel buiten beeld. */
+.sn-site .h-integratie { grid-template-columns: minmax(0, 1fr); }
+.sn-site .h-talking { min-width: 0; }
