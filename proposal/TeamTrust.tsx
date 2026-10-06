@@ -96,7 +96,11 @@ function TeamPerFunctie() {
   const alle = FUNCTIES.flatMap(groep => groep.mensen.map(naam => ({ naam, functie: groep.functie })));
   const getoond = alle.filter(x => !keuze || x.functie === keuze);
   // 6 oktober 2026 (Marinus): "Benoem ook de groei van het team in de afgelopen week". Telt wie de laatste 7 dagen bijkwam.
-  const nieuw = people.filter(p => p.sinds && Date.now() - Date.parse(p.sinds) < 7 * 864e5).length;
+  // Bereken de weekgrens na het monteren: de browser kan dagen na deze statische build openen.
+  const [nieuw, setNieuw] = React.useState(0);
+  React.useEffect(() => {
+    setNieuw(people.filter(p => p.sinds && Date.now() - Date.parse(p.sinds) < 7 * 864e5).length);
+  }, []);
   const pil = (functie: string, label: string, aantal: number) =>
     <button key={label} type="button" aria-pressed={keuze === functie} onClick={() => setKeuze(functie)}>{label}<small>{aantal}</small></button>;
   return <div className="h-zelf">

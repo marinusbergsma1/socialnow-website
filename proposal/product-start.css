@@ -1,0 +1,35 @@
+.sn-site .sn-product-route { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 20px 0 12px; font-size: 13px; font-weight: 600; letter-spacing: .05em; }
+.sn-site .sn-product-route a { color: #fff; padding: 8px 0; text-decoration: none; border-bottom: 1px solid var(--c-lijn-sterk, #ffffff2e); }
+.sn-site .sn-product-route a:hover { border-color: var(--c-accent, #25d366); }
+.sn-site .sn-product-route > span { color: var(--c-accent, #25d366); }
+.sn-site .sn-product-route > a { min-height: 44px; display: inline-flex; align-items: center; }
+.sn-site .sn-product-offer { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin: 16px 0; font-size: 15px; line-height: 1.5; }
+.sn-site .sn-product-offer p { display: grid; gap: 3px; margin: 0; }
+.sn-site .sn-product-offer strong { color: var(--c-accent, #25d366); font-weight: 600; }
+.sn-site .sn-product-offer p > span { color: #d3d8d5; }
+.sn-site .sn-product-offer > a { color: #fff; text-underline-offset: 5px; padding: 10px 0; }
+.sn-site .sn-product-offer > a { min-height: 44px; display: inline-flex; align-items: center; }
+.sn-site .sn-product-route a:focus-visible, .sn-site .sn-product-offer > a:focus-visible { outline: 2px solid var(--c-accent, #25d366); outline-offset: 5px; border-radius: 2px; }
+.sn-site .sn-product-step { scroll-margin-top: 110px; }
+.sn-site .prijs-opslag { margin: 28px 0; padding: 24px; background: var(--prijs-kaart, #0b0f12); border: 1px solid var(--c-lijn, #ffffff1a); border-radius: var(--c-radius-kaart, 14px); }
+.sn-site .prijs-opslag h2 { margin-bottom: 10px; }
+.sn-site .prijs-opslag p { color: #d3d8d5; margin-bottom: 18px; }
+@media (max-width: 400px) { .sn-site .sn-product-route { gap: 8px; font-size: 12px; } }
+
+:root .sn-site .h-product-milos { align-self: center; min-width: 0; }
+:root .sn-site .h-product-milos .h-hero-milos { position: static; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; gap: 16px; }
+:root .sn-site .h-product-milos .h-hero-milos > a { border: 1px solid var(--c-lijn, #ffffff1a); border-radius: var(--c-radius-kaart, 14px); padding: 16px; }
+:root .sn-site .h-product-milos .h-hero-milos a > span { display: block; }
+:root .sn-site #koppelingen .h-hero-film { width: 100%; max-width: 900px; margin-inline: auto; }
+@media (max-width: 700px) { :root .sn-site .h-product-milos { margin-top: 24px; } :root .sn-site .h-product-milos .h-hero-milos > a { padding: 12px; } }
+:root .sn-site .h-header-login-short { display: none; }
+@media (max-width: 700px) {
+  :root .sn-site .h-header-login-full { display: none; }
+  :root .sn-site .h-header-login-short { display: inline; }
+  :root .sn-site .h-header-claim { min-height: 44px; }
+  :root .sn-site .h-menu-toggle { flex-shrink: 0; width: 44px; height: 44px; }
+}
+@media (max-width: 360px) {
+  :root .sn-site .h-nav { gap: 5px; }
+  :root .sn-site .h-brand img { width: 80px; }
+}

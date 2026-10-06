@@ -20,6 +20,7 @@ import { VideoSlider, ImageSliders } from "./MediaSliders";
 import OsEntry, { GRATIS_OS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
 import Pricing from "./Pricing";
+import { ProductOffer, ProductRoute } from "./ProductStart";
 import { allPosts } from "../data/posts";
 import socialPosts from "../public/data/socialposts.json";
 import PartnerMichelle from "./PartnerMichelle";
@@ -95,66 +96,45 @@ export function OsPage() {
   return (
     <>
       <PageHeading
-        label="SocialNow OS / Gratis te gebruiken"
+        label="SocialNow OS / Begin met je website"
         title={
           <>
-            Alle data van je bedrijf.
+            Je website, content en Studio.
             <br />
             <span>Eén OS.</span>
           </>
         }
-        text="Koppel je website, social media en Odoo, en zie klanten, verkoop en marketing op één plek. Odoo is de laatste sleutel: totale ontzorging en volledig inzicht. Probeer het OS gratis; wil je het helemaal rond je bedrijf, dan bouwen we je OS op maat."
+        text="Begin met je website, verzamel je content en maak het in Studio. Koppel Odoo of je social media wanneer je die nodig hebt. Ons team helpt je met een persoonlijk systeem."
       />
       <div className="h-wrap">
+        <ProductRoute />
+        <ProductOffer />
         <OsEntry />
       </div>
+      <Bento label="Zo begin je">
+        <Tegel kop="01 · WEBSITE" breed={4} id="route-website" className="sn-product-step">
+          <h2 className="sn-tegel-titel">Begin met je website.</h2>
+          <p className="sn-tegel-tekst">Gebruik je website als basis voor je merk. Heb je nog geen website? Vraag een gratis demowebsite aan.</p>
+          <TextLink to="/gratis-website">Gratis demowebsite aanvragen</TextLink>
+        </Tegel>
+        <Tegel kop="02 · CONTENT" breed={4} id="route-content" className="sn-product-step">
+          <h2 className="sn-tegel-titel">Verzamel je content.</h2>
+          <p className="sn-tegel-tekst">Breng je teksten, beelden en ideeën bij elkaar. Zo heb je je materiaal bij de hand voor de volgende stap.</p>
+          <a className="h-text-link" href={GRATIS_OS_URL}>Probeer het OS gratis<ArrowUpRight size={16} aria-hidden="true" /></a>
+        </Tegel>
+        <Tegel kop="03 · STUDIO" breed={4} id="route-studio" className="sn-product-step">
+          <h2 className="sn-tegel-titel">Maak het in Studio.</h2>
+          <p className="sn-tegel-tekst">Werk je content uit in je eigen merkstijl. Bekijk het resultaat en download wat je wilt gebruiken.</p>
+          <a className="h-text-link" href={GRATIS_OS_URL}>Open je OS<ArrowUpRight size={16} aria-hidden="true" /></a>
+        </Tegel>
+        <Tegel kop="Optionele koppelingen" breed={12}>
+          <p className="sn-tegel-tekst">Odoo is een optionele koppeling voor klanten en verkoop. Je kunt beginnen met WEBSITE → CONTENT → STUDIO.</p>
+          <TextLink to="/contact?onderwerp=Koppelingen">Bespreek je koppelingen</TextLink>
+        </Tegel>
+      </Bento>
       <section className="h-section h-wrap">
         <AgentCards />
         <ConversionBridge />
-      </section>
-      <section className="h-section h-wrap">
-        <Heading
-          label="Zo begin je"
-          title={
-            <>
-              Van losse systemen
-              <br />
-              <span>naar samenhang.</span>
-            </>
-          }
-        />
-        <ol className="h-steps">
-          <li>
-            <span>01</span>
-            <h3>Log in op je gratis OS.</h3>
-            <p>
-              Met je Google-account of je e-mailadres. Gratis, zonder creditcard.
-            </p>
-            <a className="h-text-link" href={GRATIS_OS_URL}>
-              Probeer het OS gratis
-              <ArrowUpRight size={16} />
-            </a>
-          </li>
-          <li>
-            <span>02</span>
-            <h3>Koppel je data.</h3>
-            <p>
-              Je website, je social media en je Odoo. Met de juiste rechten zie
-              je klanten, verkoop en marketing op één plek.
-            </p>
-          </li>
-          <li>
-            <span>03</span>
-            <h3>Maak het van jou.</h3>
-            <p>
-              Wil je het OS rond je eigen processen? We bouwen je OS op maat,
-              vanaf €10.000, met duidelijke afspraken over uitvoering en kosten.
-            </p>
-            <TextLink to="/contact?onderwerp=OS%20op%20maat">
-              Bespreek je OS op maat
-            </TextLink>
-          </li>
-        </ol>
       </section>
       <section className="h-wrap h-os-details">
         {agents.map((agent) => (

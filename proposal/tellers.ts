@@ -68,9 +68,12 @@ function wereldStand() {
 }
 
 export function useWereldTellers() {
-  const [stand, setStand] = useState(wereldStand);
+  // De prerender en de eerste browserweergave moeten gelijk zijn. Een berekening met Date.now()
+  // in de initializer wijkt na de build af en breekt hydratatie. Werk pas na het monteren bij.
+  const [stand, setStand] = useState({ creators: CREATORS_START, osGebruikers: OS_GEBRUIKERS_START });
   useEffect(() => {
     if (typeof window === "undefined") return;
+    setStand(wereldStand());
     const klok = window.setInterval(() => {
       const nu = wereldStand();
       setStand((oud) => (oud.creators === nu.creators && oud.osGebruikers === nu.osGebruikers ? oud : nu));

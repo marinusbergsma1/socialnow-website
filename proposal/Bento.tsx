@@ -90,6 +90,7 @@ export function Bento({ id, label, titel, swipe = false, className, children }: 
 }
 
 type TegelProps = {
+  id?: string;
   kop?: React.ReactNode;
   breed?: 3 | 4 | 5 | 6 | 7 | 8 | 12;
   hoog?: 1 | 2;
@@ -98,11 +99,12 @@ type TegelProps = {
   children: React.ReactNode;
 };
 
-export function Tegel({ kop, breed = 6, hoog = 1, soort = "vlak", className, children }: TegelProps) {
+export function Tegel({ id, kop, breed = 6, hoog = 1, soort = "vlak", className, children }: TegelProps) {
   const { ref, aan } = useInBeeld<HTMLDivElement>();
   const maat = breed <= 4 ? " is-klein" : breed <= 6 ? " is-half" : "";
   return (
     <div
+      id={id}
       ref={ref}
       className={`sn-tegel is-${soort}${maat}${hoog === 2 ? " is-hoog" : ""}${aan ? " is-in-beeld" : ""}${className ? ` ${className}` : ""}`}
       style={{ "--breed": breed, "--hoog": hoog } as React.CSSProperties}

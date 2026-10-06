@@ -4,6 +4,7 @@ import { Action } from "./ui";
 import { GRATIS_OS_URL } from "./os-entry";
 import { useLanguage } from "./i18n/context";
 import "./pricing.css";
+import { ProductOffer, ProductRoute } from "./ProductStart";
 
 // 23 september 2026 (Marinus): gratis starten is het grote verhaal, de prijzen staan klein en
 // helder eronder. Elk maandpakket heeft een custom OS; vanaf drie maanden hoort de complete
@@ -98,7 +99,7 @@ const MAAND: Pakket[] = [
     punten: [
       { tekst: "Alles uit Meta + Google", erfenis: true },
       { tekst: "Boekhouding en accounting", sterk: true },
-      { tekst: "Complete Odoo-inrichting" },
+      { tekst: "Odoo-inrichting als je die nodig hebt" },
     ],
     team: ["marinus", "jos", "sergio", "nick", "steef"],
     nieuw: "steef",
@@ -119,7 +120,7 @@ const INBEGREPEN = [
 
 const MAATWERK = {
   punten: [
-    { titel: "Je eigen OS op je eigen Odoo", tekst: "Gebouwd rond hoe jouw bedrijf echt werkt, niet andersom." },
+    { titel: "Je eigen OS rond je bedrijf", tekst: "Gebouwd rond hoe jouw bedrijf echt werkt, niet andersom." },
     { titel: "Dashboard, CRM, Studio en website", tekst: "Elk onderdeel ingericht op je eigen processen en koppelingen." },
     { titel: "Milo-agents op je eigen data", tekst: "AI die je verkoop, klanten en cijfers kent en meedenkt." },
     { titel: "Developers en dataspecialisten", tekst: "Ons team en onze partners bouwen, koppelen en begeleiden." },
@@ -134,12 +135,12 @@ const GRATIS = [
 ];
 
 const IN_OS = [
-  { kleur: "var(--prijs-groen)", titel: "Dashboard", tekst: "Live verkoop, offertes en klanten uit je Odoo." },
+  { kleur: "var(--prijs-groen)", titel: "Dashboard", tekst: "Inzicht in je werk en de koppelingen die je kiest." },
   { kleur: "var(--prijs-blauw)", titel: "Branding", tekst: "Scant je site: kleuren, logo en beeld als één merkprofiel." },
   { kleur: "var(--prijs-geel)", titel: "Studio", tekst: "Posts en advertenties in je eigen merk. Download als jpg, mp4 of html." },
   { kleur: "var(--prijs-roze)", titel: "Social", tekst: "Koppel je kanalen, plan in de agenda en post." },
   { kleur: "var(--prijs-blauw)", titel: "CRM", tekst: "Leads, opvolging, offertes en facturen op één plek." },
-  { kleur: "var(--prijs-groen)", titel: "Website", tekst: "Pas je Odoo-site aan vanuit de chat, of krijg een gratis demosite." },
+  { kleur: "var(--prijs-groen)", titel: "Website", tekst: "Je website als basis voor je merk, of een gratis demowebsite." },
   { kleur: "var(--prijs-geel)", titel: "Milo", tekst: "Vier AI-agents die je eigen data lezen en de volgende stap voorstellen." },
   { kleur: "var(--prijs-roze)", titel: "Overal", tekst: "Browser en telefoon, zes talen, je data blijft van jou." },
 ];
@@ -209,7 +210,7 @@ export default function Pricing() {
       <section className="prijs-gratis" aria-labelledby="prijs-gratis-titel">
         <div className="prijs-gratis-boven">
           <div>
-            <p className="h-eyebrow prijs-groen-tekst">Hier begin je · 100% gratis</p>
+            <p className="h-eyebrow prijs-groen-tekst">Hier begin je · Gratis tot 10 GB</p>
             <h1 id="prijs-gratis-titel">
               We beginnen
               <br />
@@ -218,8 +219,10 @@ export default function Pricing() {
           </div>
           <div className="prijs-gratis-tekst">
             {/* 29 september 2026 (Marinus): "Echt waar" vond hij stom; het blijft bij de feitelijke zin. */}
-            <p className="prijs-echt">Helemaal gratis.</p>
-            <p className="prijs-lead">{t("Waar anderen duizenden euro’s voor vragen, betaal jij €0. Log in op je gratis OS of vraag een gratis demowebsite aan; daarna bespreken we samen de volgende stap.")}</p>
+            <p className="prijs-echt">GRATIS tot 10 GB opslag</p>
+            <p className="prijs-lead">{t("Begin met je website, content en Studio. Tot 10 GB opslag gebruik je het OS gratis. Daarna €20 per maand, of bespreek een persoonlijk systeem met ons team.")}</p>
+            <ProductRoute />
+            <ProductOffer />
             <div className="prijs-knoppen">
               <a className="os-claim sn-btn3d h-button" href={PROBEER_URL}>
                 <span className="sn-btn3d-sheen" />
@@ -236,6 +239,11 @@ export default function Pricing() {
           </div>
         </div>
 
+        <section className="prijs-opslag" aria-labelledby="prijs-opslag-titel">
+          <h2 id="prijs-opslag-titel">Daarna €20 per maand</h2>
+          <p>Voor wie verdergaat boven 10 GB opslag. Wil je begeleiding en inrichting rond je bedrijf? Bespreek een persoonlijk systeem met ons team.</p>
+          <Action to="/contact?onderwerp=Opslag%20boven%2010%20GB" secondary>Bespreek extra opslag</Action>
+        </section>
         <div className="prijs-cadeaus">
           {GRATIS.map((item) => (
             <div className="prijs-cadeau" key={item.titel}>
@@ -270,7 +278,7 @@ export default function Pricing() {
 
       <section className="prijs-maatwerk" aria-labelledby="prijs-maatwerk-titel">
         <div className="prijs-maatwerk-kop">
-          <p className="h-eyebrow">Operating System op maat</p>
+          <p className="h-eyebrow">Een persoonlijk systeem</p>
           <h2 id="prijs-maatwerk-titel">
             Jouw eigen OS,
             <br />
@@ -280,7 +288,7 @@ export default function Pricing() {
           <p className="prijs-maatwerk-lead">Het gratis OS laat zien wat kan. Het OS op maat maakt het van jou: je eigen data, je eigen processen en je eigen agents, in één systeem.</p>
           <p className="prijs-waarom"><b>Waarom het OS gratis kan.</b> We verdienen aan het OS op maat en aan de pakketten van ons team. Partners als Komen Consultancy helpen het OS schaalbaar te maken, en Odoo-implementatiepartners brengen het naar hun klanten.</p>
           <div className="prijs-knoppen">
-            <Action to={`/contact?onderwerp=${encodeURIComponent("OS op maat")}`}>Plan je OS op maat</Action>
+            <Action to={`/contact?onderwerp=${encodeURIComponent("OS op maat")}`}>Bespreek een persoonlijk systeem</Action>
           </div>
         </div>
         <ul className="prijs-maatwerk-punten">
