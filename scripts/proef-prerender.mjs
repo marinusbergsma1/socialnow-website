@@ -23,7 +23,7 @@ const fr = lees("dist/fr/index.html");
 const sitemap = lees("dist/sitemap.xml");
 const paden = [...new Set([...sitemap.matchAll(/<loc>https:\/\/socialnow\.nl([^<]*)<\/loc>/g)].map((m) => m[1] || "/"))];
 const bestand = (pad) => `dist${pad === "/" ? "" : pad.replace(/\/$/, "")}/index.html`;
-const zonderInhoud = paden.filter((pad) => !/<div id="root" data-prerender="(en|nl|de|fr)">(<div[^>]*>){0,2}<div class="sn-site"/.test(lees(bestand(pad))));
+const zonderInhoud = paden.filter((pad) => !/<div id="root" data-prerender="[a-z]{2}">(<div[^>]*>){0,2}<div class="sn-site"/.test(lees(bestand(pad))));
 const index = lees("index.tsx");
 
 const eisen = [
@@ -43,7 +43,7 @@ const eisen = [
     return Boolean(img) && new RegExp(`<link rel="preload" href="${img}" as="image"[^>]*fetchpriority="high">`).test(kop(nl));
   })()],
   ["achtergrond van de hero (Largest Contentful Paint) wordt vooraf geladen", /<link rel="preload" href="\/beeldmerk-2026\.webp" as="image"[^>]*fetchpriority="high">/.test(kop(nl))],
-  ["op brede schermen wordt de poster van de film in de hero vooraf geladen", /<link rel="preload" href="[^"]+poster[^"]*" as="image" media="\(min-width: \d+px\)" fetchpriority="high">/.test(kop(nl))],
+  ["de optionele Odoo-film onder de vouw krijgt geen hero-preload", !/<link rel="preload" href="[^"]*os-booth-en-poster[^\"]*" as="image"/.test(kop(nl))],
   ["de browser hydrateert de voorgerenderde HTML", index.includes("hydrateRoot(") && index.includes("dataset.prerender")],
 ];
 let fout = 0;

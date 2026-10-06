@@ -201,8 +201,7 @@ export function ConversionBridge() {
         <p className="h-eyebrow">Eerst gratis. Daarna op maat.</p>
         <h3>Begin met je gratis OS.</h3>
         <p>
-          Koppel je website, social media en Odoo in één OS. Wil je het rond
-          je eigen processen? Dan bouwen we je OS op maat, vanaf €10.000.
+          Begin met WEBSITE → CONTENT → STUDIO. GRATIS tot 10 GB opslag. Daarna €20 per maand, of een persoonlijk systeem. Odoo koppel je als je die nodig hebt.
         </p>
       </div>
       <div className="h-poc-actions">
@@ -325,7 +324,7 @@ export function Closing() {
     <h2 id="final-close-title" translate="no">One operation and management system.<br /><span>Not to automate, but to connect.</span></h2>
     {/* 5 oktober 2026 (Marinus): "Human connection powered by Ai technology vind ik nog wel een mooie toevoeging ook." */}
     <p className="h-final-belofte" translate="no">Human connection, powered by AI technology.</p>
-    <p>Je website, social media en Odoo op één plek. Gratis te gebruiken, met mensen erachter.</p>
+    <p>Je website, content en Studio op één plek. GRATIS tot 10 GB opslag. Daarna €20 per maand, met mensen erachter.</p>
     <OsEntry showProof={false} />
     <TeamTrust />
     <TextLink to="/contact?onderwerp=OS%20op%20maat">Bespreek je OS op maat</TextLink>

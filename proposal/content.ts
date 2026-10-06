@@ -100,7 +100,7 @@ export const agents = [
     color: "#1965C2",
     name: "CRM",
     label: "Verbonden met Odoo",
-    text: "Klanten, leads en verkoop bij elkaar. Begin met inzicht vanuit je eigen Odoo-omgeving.",
+    text: "Klanten, leads en verkoop bij elkaar. Koppel Odoo als je inzicht uit je eigen Odoo-omgeving wilt.",
     video: "os-crm",
   },
   {

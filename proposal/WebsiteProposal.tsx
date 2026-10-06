@@ -120,7 +120,7 @@ function ProposalShell() {
     const description =
       project?.description ||
       post?.excerpt ||
-      "Van nul naar een draaiend bedrijf in één uur. Beantwoord tien vragen en je boekhouding, merk, website en socials staan klaar in één OS. Gratis te gebruiken; een OS op maat bouwen we vanaf €10.000.";
+      "De AI-gestuurde persoonlijke werkplek, met échte professionals en menselijk contact. WEBSITE → CONTENT → STUDIO. GRATIS tot 10 GB opslag. Daarna €20 per maand, of een persoonlijk systeem. Odoo is een optionele koppeling.";
     // 30 september 2026: postbuild.mjs en localize-build.mjs zetten per route en per taal al de eigen title,
     // description en canonical in de html; alleen localize-build zet daarbij hreflang x-default. Daarna zette
     // deze regel op elke route de algemene zin en het menulabel terug, en Google (dat JavaScript uitvoert) zag
@@ -206,7 +206,8 @@ function ProposalShell() {
           <LanguageSwitch />
           {/* 26 september 2026 (Marinus): geen reclame in de header, rechtsboven de login voor het gratis OS. */}
           <a className="h-header-claim" href="https://app.socialnow.nl/login/">
-            Inloggen gratis OS
+            <span className="h-header-login-full">Inloggen gratis OS</span>
+            <span className="h-header-login-short">Inloggen</span>
             <ArrowUpRight size={15} />
           </a>
           <button

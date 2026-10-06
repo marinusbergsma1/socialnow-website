@@ -42,6 +42,7 @@ const VacaturesBento = later(() => import("./VacaturesBento").then((m) => m.defa
 const VeiligheidBlok = later(() => import("./Veiligheid").then((m) => m.default));
 const TrustStories = later(() => import("./TrustStories").then((m) => m.default));
 import BrandGlobe from "./BrandGlobe";
+import { ProductOffer, ProductRoute } from "./ProductStart";
 import WereldKaart from "./WereldKaart";
 import OsEntry, { CLAIM_URL, OsDock, REVIEWS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
@@ -62,22 +63,23 @@ import {
 
 function Film({ src, poster, label, titel, klasse, geluid, zetGeluid, boven }: { src: string; poster: string; label: string; titel: string; klasse: string; geluid: boolean; zetGeluid: (aan: boolean) => void; boven?: React.ReactNode }) {
   const ref = React.useRef<HTMLVideoElement>(null);
+  const { ref: vak, dichtbij } = useDichtbij<HTMLDivElement>();
   React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid]);
   // 30 september 2026 (Marinus): "WIL ECHT INSTANT LOADING". De film laadt en start pas als de poster (het eerste beeld) staat.
   const klaar = useNaBeeld(poster);
-  React.useEffect(() => { if (klaar && ref.current) void ref.current.play().catch(() => {}); }, [klaar]);
+  React.useEffect(() => { if (dichtbij && klaar && ref.current) void ref.current.play().catch(() => {}); }, [dichtbij, klaar]);
   const wissel = () => {
     const film = ref.current;
     if (film && !geluid) { film.currentTime = 0; void film.play().catch(() => {}); }
     zetGeluid(!geluid);
   };
   return (
-    <div className={klasse}>
+    <div className={klasse} ref={vak}>
       {/* 26 september 2026 (Marinus): "video's iets groter met titels erboven". */}
       {boven}
       <p className="h-film-titel">{titel}</p>
       <div className="h-film-vak">
-      <video ref={ref} src={src} poster={poster} muted loop playsInline preload="none" aria-label={label} />
+      <video ref={ref} src={dichtbij ? src : undefined} poster={poster} muted loop playsInline preload="none" aria-label={label} />
       <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={geluid}>
         {geluid ? "Geluid uit" : "Geluid aan"}
       </button>
@@ -262,6 +264,9 @@ export function Home() {
               SocialNow-logo staat al in de menubalk. */}
           <TeamTrust />
           <HeroTitle />
+          <ProductRoute />
+          <p className="sn-tegel-tekst">Je website als basis. Je content op één plek. Maak het in Studio.</p>
+          <ProductOffer />
           {/* 30 september 2026 (Marinus): "na de Let's get SocialNow ... die inlog daar en daaronder de rest van de merken
               en logo's". De login staat direct onder de kop; Odoo, Salesforce, Attesso, statement en demo volgen. */}
           <div className="h-knoppen">
@@ -269,61 +274,12 @@ export function Home() {
               <OsDock held />
             </div>
           </div>
-          {/* 30 september 2026 (Marinus): header 4C, overzichtelijker. Odoo, Salesforce en de betaalpartner op twee regels. */}
-          <div className="h-integratie" translate="no">
-            <p className="h-integratie-rij">
-              {/* 5 oktober 2026 (Marinus): "Even goeie Linkbuilding opzetten ook naar Rabobank en ADYEN etc." Elk merk in de hero linkt
-                  naar de eigen site. rel="noopener" zonder noreferrer, zodat de partner socialnow.nl als verwijzer ziet. */}
-              <a className="h-integratie-odoo" href="https://www.odoo.com" target="_blank" rel="noopener" aria-label="Odoo"><svg viewBox="140 146 640 250" role="img" aria-label="Odoo">
-                  <path fill="#8f8f8f" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
-                  <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
-                </svg></a>
-              <b>INTEGRATED IN ODOO&rsquo;S ERP SYSTEM</b>
-              {/* 30 september 2026 (Marinus): "hier nog iets van watch the aftermovie". */}
-              <a className="h-aftermovie" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener">&#9654; Watch the aftermovie</a>
-            </p>
-            <p className="h-integratie-rij is-klein">
-              <span className="h-attesso">PAYMENT PARTNER <a href="https://attesso.com" target="_blank" rel="noopener"><code>~/attesso</code></a></span>
-              {/* 5 oktober 2026 (Marinus): "Hier moet ook nog het bedrijf van Steven bij." Fincer heeft geen eigen website, dus de
-                  naam linkt naar Steven op LinkedIn. Als tekst, net als ~/attesso: het Fincer-logo klopt volgens Marinus nog niet. */}
-              <i aria-hidden="true" />
-              <span className="h-fincer">WEALTH PARTNER <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener" aria-label="Fincer, Steven Goudsblom on LinkedIn"><code>Fincer</code></a></span>
-            </p>
-            {/* 5 oktober 2026 (Marinus): "Next step en dan alle ERP's en Next talks wil ik graag en dan die logobalk." NEXT STEP
-                toont de vijf ERP- en CRM-systemen uit Currently building (niet alleen Salesforce), als kleine witte chips met
-                een link; daaronder heet de witte logobalk NEXT TALKS. */}
-            <p className="h-integratie-rij is-klein h-next-step">
-              <span className="h-next-label">NEXT STEP</span>
-              <span className="h-next-erps">
-                {INTEGRATIES.map((systeem) => (
-                  <a key={systeem.naam} href={systeem.url} target="_blank" rel="noopener"><img src={systeem.src} alt={systeem.naam} style={{ height: Math.round(systeem.hoog * 0.75) }} /></a>
-                ))}
-              </span>
-            </p>
-            {/* 1 oktober 2026 (Marinus): "Vanuit de video staan de logo's waar mijn partners van Attesso mee in gesprek gaan.
-                Die mogen ook op de site.", "laat deze balk Primefone, DIVEINE, KWH weg" en "Dan kunnen er meer logo's onder
-                Attesso met talking to." Dezelfde rij als in OUR STORY (partnership), direct onder de betaalpartner. */}
-            {/* 5 oktober 2026 (Marinus): "Graag ook bewegend en balk wit aangezien het een positieve menselijke balk is met dus
-                groene line erboven en eronder." Witte balk met een groene lijn boven en onder; de logo's lopen door. De rij staat
-                er twee keer in en de lus schuift precies één rij op, dus de naad is niet te zien. De kopie is voor schermlezers
-                en toetsenbord verborgen. */}
-            <div className="h-talking">
-              <span className="h-talking-label">NEXT TALKS</span>
-              <div className="h-talking-strook">
-                <div className="h-talking-lus">
-                  {[false, true].map(kopie => (
-                    <ul key={String(kopie)} className="h-attesso-logos" aria-hidden={kopie || undefined}>
-                      {TALKING_TO.map(([naam, url, logo, breed, hoog]) => (
-                        <li key={naam}><a href={url} target="_blank" rel="noopener" tabIndex={kopie ? -1 : undefined}><img src={logo} alt={kopie ? "" : naam} width={breed} height={hoog} /></a></li>
-                      ))}
-                    </ul>
-                  ))}
-                </div>
-              </div>
-            </div>
+
           </div>
+          <div className="h-product-milos">
+            <p className="h-film-titel">Je merk, je content en je team.</p>
+            <HeroMilos />
           </div>
-          <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid} />
           {/* 1 oktober 2026 (Marinus): "Die tekst moet mooi met die afbeeldingen uitgelijnd zijn." Statement en gezichtenmuur
               staan in één rij over beide kolommen; de eerste regel begint op de bovenkant van de portretten en de laatste
               eindigt op de onderkant. */}
@@ -368,9 +324,14 @@ export function Home() {
       <NulNaarBedrijf />
       <Verhaal />
       <WereldKaart />
-      <Deuren />
       {/* 28 september 2026 (Marinus): "alle onderdelen als kleine bentogrids, net zoals de homepage wanneer je daarop landt". */}
       <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} swipe>
+        <Tegel kop="Begin met je website" breed={12}>
+          <ProductRoute />
+          <p className="sn-tegel-tekst">Je website als basis. Je content op één plek. Maak het in Studio.</p>
+          <ProductOffer />
+          <TextLink to="/het-os">Zo werkt het OS</TextLink>
+        </Tegel>
         {agents.map((agent) => (
           <Tegel key={agent.id} kop={agent.title} breed={3} className="h-os-agent">
             <MiloPortrait role={agent.id} name={agent.name} maat={256} />
@@ -391,6 +352,68 @@ export function Home() {
           </Tegel>
         ))}
       </Bento>
+      <Bento id="koppelingen" label="Optionele koppelingen">
+        <Tegel kop="Verbind wat je nodig hebt" breed={12}>
+          <p className="sn-tegel-tekst">Odoo is een optionele koppeling voor klanten en verkoop. Je kunt beginnen met WEBSITE → CONTENT → STUDIO.</p>
+          {/* 30 september 2026 (Marinus): header 4C, overzichtelijker. Odoo, Salesforce en de betaalpartner op twee regels. */}
+          <div className="h-integratie" translate="no">
+            <p className="h-integratie-rij">
+              {/* 5 oktober 2026 (Marinus): "Even goeie Linkbuilding opzetten ook naar Rabobank en ADYEN etc." Elk merk in de hero linkt
+                  naar de eigen site. rel="noopener" zonder noreferrer, zodat de partner socialnow.nl als verwijzer ziet. */}
+              <a className="h-integratie-odoo" href="https://www.odoo.com" target="_blank" rel="noopener" aria-label="Odoo"><svg viewBox="140 146 640 250" role="img" aria-label="Odoo">
+                  <path fill="#8f8f8f" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
+                  <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
+                </svg></a>
+              <b>OPTIONAL ODOO INTEGRATION</b>
+              {/* 30 september 2026 (Marinus): "hier nog iets van watch the aftermovie". */}
+              <a className="h-aftermovie" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener">&#9654; Watch the aftermovie</a>
+            </p>
+            <p className="h-integratie-rij is-klein">
+              <span className="h-attesso">PAYMENT PARTNER <a href="https://attesso.com" target="_blank" rel="noopener"><code>~/attesso</code></a></span>
+              {/* 5 oktober 2026 (Marinus): "Hier moet ook nog het bedrijf van Steven bij." Fincer heeft geen eigen website, dus de
+                  naam linkt naar Steven op LinkedIn. Als tekst, net als ~/attesso: het Fincer-logo klopt volgens Marinus nog niet. */}
+              <i aria-hidden="true" />
+              <span className="h-fincer">WEALTH PARTNER <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener" aria-label="Fincer, Steven Goudsblom on LinkedIn"><code>Fincer</code></a></span>
+            </p>
+            {/* 5 oktober 2026 (Marinus): "Next step en dan alle ERP's en Next talks wil ik graag en dan die logobalk." NEXT STEP
+                toont de vijf ERP- en CRM-systemen uit Currently building (niet alleen Salesforce), als kleine witte chips met
+                een link; daaronder heet de witte logobalk NEXT TALKS. */}
+            <p className="h-integratie-rij is-klein h-next-step">
+              <span className="h-next-label">NEXT STEP</span>
+              <span className="h-next-erps">
+                {INTEGRATIES.map((systeem) => (
+                  <a key={systeem.naam} href={systeem.url} target="_blank" rel="noopener"><img src={systeem.src} alt={systeem.naam} style={{ height: Math.round(systeem.hoog * 0.75) }} /></a>
+                ))}
+              </span>
+            </p>
+            {/* 1 oktober 2026 (Marinus): "Vanuit de video staan de logo's waar mijn partners van Attesso mee in gesprek gaan.
+                Die mogen ook op de site.", "laat deze balk Primefone, DIVEINE, KWH weg" en "Dan kunnen er meer logo's onder
+                Attesso met talking to." Dezelfde rij als in OUR STORY (partnership), direct onder de betaalpartner. */}
+            {/* 5 oktober 2026 (Marinus): "Graag ook bewegend en balk wit aangezien het een positieve menselijke balk is met dus
+                groene line erboven en eronder." Witte balk met een groene lijn boven en onder; de logo's lopen door. De rij staat
+                er twee keer in en de lus schuift precies één rij op, dus de naad is niet te zien. De kopie is voor schermlezers
+                en toetsenbord verborgen. */}
+            <div className="h-talking">
+              <span className="h-talking-label">NEXT TALKS</span>
+              <div className="h-talking-strook">
+                <div className="h-talking-lus">
+                  {[false, true].map(kopie => (
+                    <ul key={String(kopie)} className="h-attesso-logos" aria-hidden={kopie || undefined}>
+                      {TALKING_TO.map(([naam, url, logo, breed, hoog]) => (
+                        <li key={naam}><a href={url} target="_blank" rel="noopener" tabIndex={kopie ? -1 : undefined}><img src={logo} alt={kopie ? "" : naam} width={breed} height={hoog} /></a></li>
+                      ))}
+                    </ul>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Tegel>
+        <Tegel kop="Het OS met Odoo" breed={12}>
+          <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid} />
+        </Tegel>
+      </Bento>
+      <Deuren />
       {/* 28 september 2026 (Marinus): AI wordt verkeerd begrepen; mensen zijn de verbindende laag. Met vacature. */}
       <MensEnAI />
       <VacaturesBento />
