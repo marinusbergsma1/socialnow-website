@@ -101,7 +101,7 @@ Ontwerp het OS compacter dan de website. De gebruiker moet zijn invoer, relevant
 - Een embedded website mag de paginascroll niet vasthouden: geef de bediening na maximaal circa 2,5 seconden vrij. Opnieuw bedienen kan expliciet. Op mobiel niet automatisch de swipe overnemen.
 - Video’s starten visueel zonder grote play-overlays. Geluid bij hover alleen wanneer de browser dat toestaat; bied voor touch/toetsenbord een expliciete bediening in de geopende speler. Geluid stopt bij verlaten/sluiten.
 - Het losse blok “See it in motion” blijft compact. De drie films ondersteunen de productuitleg en verdringen de instapactie niet.
-- Behoud meerdere echte klantreviews en het bestaande footerlogo met Komen Consultancy. Alleen het losse opschrift “Samen met” vervalt.
+- Behoud meerdere echte klantreviews. Gebruik in de footer uitsluitend het SocialNow OS-logo. Het Komen Consultancy-logo vervalt in alle visuele uitingen (Marinus, 7 oktober 2026).
 
 ## 7. Taal en vertrouwen
 
