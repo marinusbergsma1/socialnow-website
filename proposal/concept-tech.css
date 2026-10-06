@@ -130,3 +130,6 @@
 .sn-site .h-board-tekst { background: #e9f9ef; border: 1.5px solid #25d366; color: #0b3d22; }
 .sn-site .h-board-tekst b { color: #0a7a3d; }
 .sn-site .h-board-tekst span { color: #2f5d43; }
+
+/* Fincer is een eigen partnertegel: het woordmerk blijft leesbaar op blauw. */
+:root .sn-site .h-duo.is-fincer .h-duo-merk img { height: 22px !important; width: auto !important; }

@@ -308,9 +308,18 @@
 .sn-site .h-team-verhaal-naam i { font-style: normal; color: #4a5450; font-size: 13px; }
 
 .sn-site .h-hero .h-team-sectie { gap: 18px; color: #0b0f12; }
-.sn-site .h-team-kern { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; color: inherit; text-decoration: none; }
+.sn-site .h-team-kern { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; color: inherit; text-decoration: none; }
 .sn-site .h-duo { position: relative; display: grid; gap: 10px; padding: 10px; border-radius: 22px; border: 2px solid; }
-.sn-site .h-duo.is-sn { border-color: #0b0f12; background: linear-gradient(160deg, #16233a, #0b0f12 70%); }
+.sn-site .h-duo.is-sn { border-color: #0cb457; background: linear-gradient(160deg, #0cb457, #086c36 90%); }
+.sn-site .h-duo.is-fincer { border-color: #4289e8; background: linear-gradient(160deg, #2564bb, #102b58 90%); }
+.sn-site .h-duo.is-fincer .h-duo-kop { color: #fff; }
+.sn-site .h-duo.is-fincer .h-duo-merk { font-size: 18px; letter-spacing: -.02em; text-transform: none; }
+.sn-site .h-duo.is-fincer { grid-column: 1 / -1; }
+.sn-site .h-duo.is-fincer .h-duo-rij { grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); align-items: center; }
+.sn-site .h-fincer-toelichting { padding: 8px 16px; color: #fff; }
+.sn-site .h-fincer-toelichting strong { display: block; font-size: 19px; line-height: 1.2; }
+.sn-site .h-hero .h-fincer-toelichting p { margin: 10px 0 0; color: #fff; font-size: 14px; line-height: 1.4; }
+@media(max-width:640px) { .sn-site .h-duo.is-fincer .h-duo-rij { grid-template-columns: repeat(2, minmax(0, 1fr)); } .sn-site .h-fincer-toelichting { padding: 6px; } .sn-site .h-fincer-toelichting strong { font-size: 16px; } }
 .sn-site .h-duo.is-attesso { border-color: #d77fc8; background: linear-gradient(160deg, #fbe9f7, #ecd6f3); }
 .sn-site .h-duo-kop { display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 28px; padding: 0 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; line-height: 1.2; text-transform: uppercase; }
 .sn-site .h-duo-kop > span:last-child { min-width: 0; text-align: right; }
@@ -446,3 +455,5 @@
 @media (max-width: 900px) { .sn-site .h-lagen-muur { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .sn-site .h-lagen-muur { grid-template-columns: repeat(3, minmax(0, 1fr)); } .sn-site .h-team-groei { margin-left: 0; width: 100%; } }
 @media (prefers-reduced-motion: reduce) { .sn-site .h-lagen-muur img { transition: none; } }
+
+.sn-site .h-duo.is-fincer .h-duo-merk img { width: auto; height: 20px; }

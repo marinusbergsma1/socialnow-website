@@ -436,7 +436,8 @@ export function TeamPage() {
   // Sid en ik spreken en de sterke teams ik en Steef samen met Sid en Douwe samen zijn."
   const socialnow = vind(["Marinus Bergsma", "Steef Komen"]);
   const attesso = vind(["Sid van Kalken", "Douwe Kramer"]);
-  const inTeams = [...socialnow, ...attesso].map(person => person.name);
+  const fincer = vind(["Steven Goudsblom"]);
+  const inTeams = [...socialnow, ...attesso, ...fincer].map(person => person.name);
   // Michelle staat nu vooraan bij de system experts.
   const specialists = [
     ...vind(["Michelle Yang"]),
@@ -458,10 +459,10 @@ export function TeamPage() {
       />
       <section className="h-section h-wrap h-sterke-teams">
         <Heading
-          label="SocialNow × Attesso"
+          label="SocialNow × Attesso × Fincer"
           title={
             <>
-              Twee sterke teams.
+              Sterke partners.
               <br />
               <span>Samen bouwen we het.</span>
             </>
@@ -476,9 +477,13 @@ export function TeamPage() {
             <p className="h-team-duo-label" translate="no"><code>~/attesso</code></p>
             <TeamGrid members={attesso} expert={false} />
           </div>
+          <div className="h-team-duo is-fincer">
+            <p className="h-team-duo-label" translate="no">Fincer</p>
+            <TeamGrid members={fincer} expert={false} />
+          </div>
         </div>
         <p className="h-footnote">
-          Marinus en Steef bouwen het OS en maken het schaalbaar. Sid en Douwe van Attesso zorgen dat elke betaling veilig en goedgekeurd is. Marinus en Sid spreken samen: live demo&apos;s, talks en workshops, overal ter wereld.
+          Marinus en Steef bouwen het OS en maken het schaalbaar. Sid en Douwe van Attesso werken aan veilige agentic payments. Steven van Fincer is onze partner voor vermogensbeheer. Marinus en Sid spreken samen: live demo&apos;s, talks en workshops, overal ter wereld.
         </p>
       </section>
       <section className="h-wrap">
