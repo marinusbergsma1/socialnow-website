@@ -196,8 +196,8 @@ try {
   }
   assert(!rendered.get("/").includes(">Samen met<"), "Samen met label removed");
   assert(
-    rendered.get("/").includes("SocialNow-OS-Komen-Consultancy.webp"),
-    "partner logo retained",
+    rendered.get("/").includes("SocialNow-OS-Logo.webp"),
+    "SocialNow OS logo retained",
   );
   assert(
     rendered.get("/").includes("In je browser of als app. Hetzelfde OS."),

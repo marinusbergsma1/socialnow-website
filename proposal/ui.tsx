@@ -315,7 +315,7 @@ export function Questions() {
 }
 export function Closing() {
   return <section className="h-final-close" aria-labelledby="final-close-title">
-    <img className="h-final-logo" src="/images/SocialNow-OS-Komen-Consultancy.webp" alt="SocialNow OS in samenwerking met Komen Consultancy" width="640" height="180" loading="lazy" />
+    <img className="h-final-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="135" loading="lazy" />
     <div className="h-final-characters">
       {agents.map(agent=><MiloMotion key={agent.id} role={agent.id} name={agent.name} maat={256} />)}
     </div>
