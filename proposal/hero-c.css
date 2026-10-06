@@ -456,4 +456,4 @@
 @media (max-width: 520px) { .sn-site .h-lagen-muur { grid-template-columns: repeat(3, minmax(0, 1fr)); } .sn-site .h-team-groei { margin-left: 0; width: 100%; } }
 @media (prefers-reduced-motion: reduce) { .sn-site .h-lagen-muur img { transition: none; } }
 
-.sn-site .h-duo.is-fincer .h-duo-merk img { width: auto; height: 20px; filter: brightness(0) invert(1); }
+.sn-site .h-duo.is-fincer .h-duo-merk img { width: auto; height: 20px; }

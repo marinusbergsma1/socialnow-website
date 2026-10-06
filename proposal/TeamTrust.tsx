@@ -143,7 +143,7 @@ export function TeamJoin() {
         <div className="h-duo-rij">{ATTESSO_DUO.map(naam => <DuoTegel key={naam} naam={naam} />)}</div>
       </div>
       <div className="h-duo is-fincer">
-        <div className="h-duo-kop"><span className="h-duo-merk"><img src="/images/merken/fincer.png" alt="Fincer" width="130" height="40" loading="lazy" /></span><span>Wealth management</span></div>
+        <div className="h-duo-kop"><span className="h-duo-merk"><img src="/images/merken/fincer-wit.png" alt="Fincer" width="130" height="40" loading="lazy" /></span><span>Wealth management</span></div>
         <div className="h-duo-rij"><DuoTegel naam="Steven Goudsblom" /><div className="h-fincer-toelichting"><strong>Wealth management, with personal contact.</strong><p>Steven is our wealth partner, for SocialNow and our clients.</p></div></div>
       </div>
     </div>
