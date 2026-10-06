@@ -355,8 +355,8 @@ h1:not(.sn-vhs-off)::after, h2:not(.sn-vhs-off)::after, h3:not(.sn-vhs-off)::aft
 /* ── Foto's in witte vlakken altijd in kleur ─────────────────────────────────── */
 :root .sn-site .h-partners img, :root .sn-site .h-zelf img, :root .sn-site .h-duo img { filter: none; }
 
-/* ── Concept-label: vast linksonder, geen verschuiving van de layout ─────────── */
-body::after {
+/* ── Concept-label: vast linksonder, alleen op concept.socialnow.nl (klasse uit index.html) ── */
+html.is-concept body::after {
   content: "Concept · niet live";
   position: fixed;
   left: 12px;
@@ -372,8 +372,8 @@ body::after {
   pointer-events: none;
 }
 /* De Milo-knop linksonder schuift een stukje omhoog zodat het label hem niet raakt. */
-:root .h-milo-launcher { bottom: 48px; }
-@media (max-width: 700px) { :root .h-milo-launcher { bottom: 44px; } }
+html.is-concept .h-milo-launcher { bottom: 48px; }
+@media (max-width: 700px) { html.is-concept .h-milo-launcher { bottom: 44px; } }
 
 /* ── Minder beweging als de bezoeker dat vraagt ─────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

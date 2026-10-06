@@ -17,6 +17,7 @@
       content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; media-src 'self' https://storage.googleapis.com https://*.behold.pictures https://behold.pictures; connect-src 'self' https://app.socialnow.nl https://os.socialnow.nl https://feeds.behold.so https://*.workers.dev https://api.mymemory.translated.net; font-src 'self' data:; frame-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
     />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <script>/* 6 oktober 2026: concept-label alleen op concept.socialnow.nl (zie proposal/concept.css). */if(location.hostname.indexOf("concept.")===0)document.documentElement.classList.add("is-concept");</script>
     <script>
       // 30 september 2026: bij een eerste bezoek zonder taal in het pad vraagt de site het land op
       // (proposal/i18n/detect.ts). Die vraag start hier al, tijdens het laden van het script, in plaats van erna.

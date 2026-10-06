@@ -125,3 +125,8 @@
 :root .sn-site .h-bouwer-merken img { max-height: 16px; }
 :root .sn-site .h-bouwer-merk { font-size: 12.5px; }
 @media (max-width: 900px) { :root .sn-site .h-bouwers { grid-template-columns: minmax(0, 1fr); } }
+
+/* 6 oktober 2026 (Marinus): Board-tegel "lichtgroen met groene rand". */
+.sn-site .h-board-tekst { background: #e9f9ef; border: 1.5px solid #25d366; color: #0b3d22; }
+.sn-site .h-board-tekst b { color: #0a7a3d; }
+.sn-site .h-board-tekst span { color: #2f5d43; }
