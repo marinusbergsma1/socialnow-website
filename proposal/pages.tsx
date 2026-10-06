@@ -296,7 +296,7 @@ export function Home() {
               <span className="h-next-label">NEXT STEP</span>
               <span className="h-next-erps">
                 {INTEGRATIES.map((systeem) => (
-                  <a key={systeem.naam} href={systeem.url} target="_blank" rel="noopener"><img src={systeem.src} alt={systeem.naam} style={{ height: Math.round(systeem.hoog * 0.75) }} /></a>
+                  <a key={systeem.naam} href={systeem.url} target="_blank" rel="noopener"><img src={systeem.zwart ?? systeem.src} alt={systeem.naam} style={{ height: Math.round(systeem.hoog * 0.85) }} /></a>
                 ))}
               </span>
             </p>

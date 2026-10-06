@@ -155,12 +155,13 @@ export function TeamJoin() {
 // 4 oktober 2026 (Marinus): "de volgende grote tools als AFAS etc top 5 Salesforce", met de echte logo's, "currently build",
 // Odoo live "because of their proven free accounting and website layer", en "We believe that AGI is about Universal ERP
 // connections". Gebouwd door Tristan (KLM, BearingPoint) en Douwe (ByteChat, ByteVision).
-export const INTEGRATIES = [
+// 6 oktober 2026 (Marinus): "Graag hier geen wit achter". zwart = dezelfde logo's met de donkere delen wit, voor de zwarte hero.
+export const INTEGRATIES: { naam: string; src: string; zwart?: string; hoog: number; url: string }[] = [
   { naam: "Salesforce", src: "/images/partners/salesforce.svg", hoog: 26, url: "https://www.salesforce.com" },
-  { naam: "AFAS", src: "/images/partners/integraties/afas.png", hoog: 16, url: "https://www.afas.nl" },
+  { naam: "AFAS", src: "/images/partners/integraties/afas.png", zwart: "/images/partners/integraties/afas-op-zwart.png", hoog: 16, url: "https://www.afas.nl" },
   { naam: "Exact", src: "/images/partners/integraties/exact.svg", hoog: 18, url: "https://www.exact.com" },
-  { naam: "HubSpot", src: "/images/partners/integraties/hubspot.svg", hoog: 20, url: "https://www.hubspot.com" },
-  { naam: "Microsoft Dynamics 365", src: "/images/partners/integraties/dynamics-365.svg", hoog: 22, url: "https://dynamics.microsoft.com" },
+  { naam: "HubSpot", src: "/images/partners/integraties/hubspot.svg", zwart: "/images/partners/integraties/hubspot-op-zwart.svg", hoog: 20, url: "https://www.hubspot.com" },
+  { naam: "Microsoft Dynamics 365", src: "/images/partners/integraties/dynamics-365.svg", zwart: "/images/partners/integraties/dynamics-365-op-zwart.svg", hoog: 22, url: "https://dynamics.microsoft.com" },
 ];
 
 // 4 oktober 2026 (Marinus): "Zorg dat er Linkedin Links staan bij zowel Tris als Douwe en dat ze beide via de bedrijven ook
