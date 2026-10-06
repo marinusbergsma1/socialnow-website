@@ -163,7 +163,7 @@ export function HeroMilos() {
           key={agent.id}
           style={{ "--accent": agent.color } as React.CSSProperties}
         >
-          <MiloMotion role={agent.id} name={agent.name} />
+          <MiloMotion role={agent.id} name={agent.name} maat={256} />
           <strong>{agent.title}</strong>
           <span>{agent.promise}</span>
         </Link>

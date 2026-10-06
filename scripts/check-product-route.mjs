@@ -72,6 +72,21 @@ try {
       console.log(`GROEN ${language} ${width}: route, ankers, contactcontext, beelden en layout`);
     }
   }
+  // Een oudere build moet ook zonder hydratatiefout openen wanneer de tellers inmiddels doorgelopen zijn.
+  const later = await browser.newContext({ reducedMotion: "reduce" });
+  await later.route("**/*", route => new URL(route.request().url()).origin === new URL(base).origin ? route.continue() : route.abort());
+  await later.addInitScript(() => {
+    const now = Date.now.bind(Date);
+    Date.now = () => now() + 2 * 60 * 60 * 1000;
+  });
+  const page = await later.newPage();
+  const errors = [];
+  page.on("pageerror", error => errors.push(error.message));
+  await page.goto(`${base}/nl/`);
+  await page.waitForLoadState("networkidle");
+  assert.deepEqual(errors, [], "Een latere tellerstand veroorzaakt een hydratatiefout");
+  await later.close();
+  console.log("GROEN homepage met browserklok twee uur na de build");
 } finally {
   await browser.close();
 }
