@@ -24,7 +24,7 @@ export default function LegalPage({ doc, path, slug }: { doc: Partial<Record<Lan
       <div className="container mx-auto px-6 max-w-3xl">
         <button onClick={() => navigate("/")} className="inline-flex items-center gap-2 text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors mb-8">
           <ChevronLeft size={14} />
-          {({ nl: "Terug", en: "Back", de: "Zurück", fr: "Retour", it: "Indietro", es: "Volver" } as Record<string, string>)[language] || "Back"}
+          {({ nl: "Terug", en: "Back", de: "Zurück", fr: "Retour", it: "Indietro", es: "Volver", pt: "Voltar", pl: "Wstecz", sv: "Tillbaka", da: "Tilbage" } as Record<string, string>)[language] || "Back"}
         </button>
         <div className="scroll-reveal">
           <h1 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tighter mb-4">{d.title}</h1>
@@ -40,7 +40,7 @@ export default function LegalPage({ doc, path, slug }: { doc: Partial<Record<Lan
             {/* 30 september 2026: geen languagePrefix ervoor. De router heeft al een taalbasis (index.tsx),
                 dus met prefix werd het /nl/nl/juridisch: een 404 op elke juridische pagina in nl, de en fr. */}
             <Link to="/juridisch" className="text-[11px] font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors">
-              {({ nl: "Alle documenten", en: "All documents", de: "Alle Dokumente", fr: "Tous les documents", it: "Tutti i documenti", es: "Todos los documentos" } as Record<string, string>)[language] || "All documents"}
+              {({ nl: "Alle documenten", en: "All documents", de: "Alle Dokumente", fr: "Tous les documents", it: "Tutti i documenti", es: "Todos los documentos", pt: "Todos os documentos", pl: "Wszystkie dokumenty", sv: "Alla dokument", da: "Alle dokumenter" } as Record<string, string>)[language] || "All documents"}
             </Link>
           </div>
         </div>

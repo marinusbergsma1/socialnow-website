@@ -27,7 +27,7 @@ const merken = [
   ["Adyen", "https://www.adyen.com"], ["Rabobank", "https://www.rabobank.nl"],
 ];
 const eisen = [
-  ...merken.map(([naam, url]) => [`hero linkt ${naam} naar ${url}`, hero.includes(`href="${url}"`) || (pages.includes(`["${naam}", "${url}"`) && hero.includes("TALKING_TO.map") && hero.includes("href={url}"))]),
+  ...merken.map(([naam, url]) => [`hero linkt ${naam} naar ${url}`, hero.includes(`href="${url}"`) || (pages.includes(`["${naam}", "${url}"`) && hero.includes("TALKING_TO.map") && hero.includes("href={url}")) || (naam === "Salesforce" && hero.includes("INTEGRATIES.map") && team.includes('url: "https://www.salesforce.com"'))]),
   // Linkbuilding: de partner moet socialnow.nl als verwijzer zien, dus geen noreferrer en geen nofollow in de hero.
   ["hero-links zonder noreferrer of nofollow", !/noreferrer|nofollow/.test(hero) && hero.includes('rel="noopener"')],
   ["Fincer van Steven staat in de hero", /WEALTH PARTNER[\s\S]{0,120}Fincer/.test(hero) && hero.includes("linkedin.com/in/steven-goudsblom-bb3ab0197")],

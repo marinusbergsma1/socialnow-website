@@ -61,10 +61,42 @@ const FUNCTIES: { functie: string; mensen: string[] }[] = [
   { functie: "Sales & partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Aren", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
 ];
 
+// 6 oktober 2026 (Marinus): "Hier ook nog even iets van hierarchie", bij optie H3 "liever vierkantjes omdat iedereen een
+// plek verdient". Onder All staat het team in lagen: Partners en Board groot bovenaan, daarna iedereen in even grote vierkanten.
+const LAGEN: [string, string[]][] = [
+  ["Partner", ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer"]],
+  ["Board", ["Michelle Yang", "Tristan Slobbe", "Steven Goudsblom"]],
+  ["Head", ["Jos Hollenberg", "Nick van Keulen", "Carmel Boon", "Elian Coellar"]],
+  ["Specialist", ["Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
+  ["Sales & network", ["Aren", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
+];
+
+function LaagTegel({ naam, laag }: { naam: string; laag: string }) {
+  const person = people.find(p => p.name === naam);
+  if (!person) return null;
+  return <div>
+    <figure><img {...klein(person.image, "(max-width: 900px) 25vw, 180px", [160, 320])} alt="" width="180" height="180" loading="lazy" /></figure>
+    <span className={`h-laag${laag === "Partner" ? " is-partner" : ""}`}>{laag}</span>
+    <span className="h-functie-naam"><span>{person.name} <LinkedInTeken person={person} /></span><i>{KORTE_ROL[naam] ?? person.role}</i></span>
+    <NaarPersoon person={person} />
+  </div>;
+}
+
+function TeamInLagen() {
+  const [top, rest] = [LAGEN.slice(0, 2), LAGEN.slice(2)];
+  const tegels = (lagen: typeof LAGEN) => lagen.flatMap(([laag, namen]) => namen.map(naam => <LaagTegel key={naam} naam={naam} laag={laag} />));
+  return <>
+    <div className="h-lagen-muur h-lagen-top">{tegels(top)}</div>
+    <div className="h-lagen-muur">{tegels(rest)}</div>
+  </>;
+}
+
 function TeamPerFunctie() {
   const [keuze, setKeuze] = React.useState("");
   const alle = FUNCTIES.flatMap(groep => groep.mensen.map(naam => ({ naam, functie: groep.functie })));
   const getoond = alle.filter(x => !keuze || x.functie === keuze);
+  // 6 oktober 2026 (Marinus): "Benoem ook de groei van het team in de afgelopen week". Telt wie de laatste 7 dagen bijkwam.
+  const nieuw = people.filter(p => p.sinds && Date.now() - Date.parse(p.sinds) < 7 * 864e5).length;
   const pil = (functie: string, label: string, aantal: number) =>
     <button key={label} type="button" aria-pressed={keuze === functie} onClick={() => setKeuze(functie)}>{label}<small>{aantal}</small></button>;
   return <div className="h-zelf">
@@ -72,8 +104,9 @@ function TeamPerFunctie() {
     <div className="h-functie-pillen" role="group" aria-label="Filter by function">
       {pil("", "All", alle.length)}
       {FUNCTIES.map(groep => pil(groep.functie, groep.functie, groep.mensen.length))}
+      {nieuw > 0 ? <span className="h-team-groei"><b>+{nieuw}</b> this week · {people.length} people</span> : null}
     </div>
-    <div className="h-functie-muur">
+    {!keuze ? <TeamInLagen /> : <div className="h-functie-muur">
       {getoond.map(({ naam }) => {
         const person = people.find(p => p.name === naam);
         if (!person) return null;
@@ -83,7 +116,7 @@ function TeamPerFunctie() {
           <NaarPersoon person={person} />
         </div>;
       })}
-    </div>
+    </div>}
     <Link to="/vacatures" className="h-team-netwerk">Running your own business too? <b>Join the network &rarr;</b></Link>
   </div>;
 }
@@ -122,12 +155,12 @@ export function TeamJoin() {
 // 4 oktober 2026 (Marinus): "de volgende grote tools als AFAS etc top 5 Salesforce", met de echte logo's, "currently build",
 // Odoo live "because of their proven free accounting and website layer", en "We believe that AGI is about Universal ERP
 // connections". Gebouwd door Tristan (KLM, BearingPoint) en Douwe (ByteChat, ByteVision).
-const INTEGRATIES = [
-  { naam: "Salesforce", src: "/images/partners/salesforce.svg", hoog: 26 },
-  { naam: "AFAS", src: "/images/partners/integraties/afas.png", hoog: 16 },
-  { naam: "Exact", src: "/images/partners/integraties/exact.svg", hoog: 18 },
-  { naam: "HubSpot", src: "/images/partners/integraties/hubspot.svg", hoog: 20 },
-  { naam: "Microsoft Dynamics 365", src: "/images/partners/integraties/dynamics-365.svg", hoog: 22 },
+export const INTEGRATIES = [
+  { naam: "Salesforce", src: "/images/partners/salesforce.svg", hoog: 26, url: "https://www.salesforce.com" },
+  { naam: "AFAS", src: "/images/partners/integraties/afas.png", hoog: 16, url: "https://www.afas.nl" },
+  { naam: "Exact", src: "/images/partners/integraties/exact.svg", hoog: 18, url: "https://www.exact.com" },
+  { naam: "HubSpot", src: "/images/partners/integraties/hubspot.svg", hoog: 20, url: "https://www.hubspot.com" },
+  { naam: "Microsoft Dynamics 365", src: "/images/partners/integraties/dynamics-365.svg", hoog: 22, url: "https://dynamics.microsoft.com" },
 ];
 
 // 4 oktober 2026 (Marinus): "Zorg dat er Linkedin Links staan bij zowel Tris als Douwe en dat ze beide via de bedrijven ook
@@ -150,7 +183,7 @@ function Integraties() {
     <div className="h-integraties-kop"><b>Currently building</b><span>The big five, after Odoo</span></div>
     <ul className="h-integraties-rij">
       <li className="is-live"><img src="/images/partners/odoo.svg" alt="Odoo" height="20" loading="lazy" /><small>Live</small></li>
-      {INTEGRATIES.map(i => <li key={i.naam}><img src={i.src} alt={i.naam} style={{ height: i.hoog }} loading="lazy" /></li>)}
+      {INTEGRATIES.map(i => <li key={i.naam}><a href={i.url} target="_blank" rel="noopener"><img src={i.src} alt={i.naam} style={{ height: i.hoog }} loading="lazy" /></a></li>)}
     </ul>
     <p><strong>Odoo is live</strong>, because of their <strong>proven free accounting and website layer</strong>.</p>
     <p><strong>We believe AGI is about universal ERP connections.</strong> So as a business owner you have a choice. <strong>You are not guessing, you are choosing.</strong></p>

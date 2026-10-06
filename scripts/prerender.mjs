@@ -7,8 +7,7 @@
 // 3. het logo in de header, de achtergrond van de hero, op brede schermen de poster van de film in de hero
 //    en de letter van de kop (TT Norms Bold) vooraf laden.
 //
-// De 404-pagina en de oude /it- en /es-doorverwijzingen blijven leeg: daar weet de server niet welke
-// route de bezoeker opent. Proef: scripts/proef-prerender.mjs.
+// De 404-pagina blijft leeg: daar weet de server niet welke route de bezoeker opent. Proef: scripts/proef-prerender.mjs.
 import { readFileSync, readdirSync, writeFileSync, rmSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";

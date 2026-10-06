@@ -6,7 +6,9 @@
 // aangevuld met artikel 17 over SocialNow OS: het account, de gegevens die daarbij horen en het
 // interne gebruik daarvan om het product te verbeteren.
 
-export type Language = "en" | "nl" | "de" | "fr" | "it" | "es";
+// 5 oktober 2026: tien sitetalen. Voor pt, pl, sv en da is er (nog) geen vertaalde juridische tekst; de pagina's
+// vallen dan terug op het Engels (doc[language] || doc.en in LegalPage en JuridischPage).
+export type Language = "en" | "nl" | "de" | "fr" | "it" | "es" | "pt" | "pl" | "sv" | "da";
 export type Section = { title: string; paragraphs: string[]; bullets?: string[][] };
 export type LegalDoc = { title: string; intro: string; updated: string; sections: Section[] };
 

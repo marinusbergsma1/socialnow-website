@@ -1,0 +1,493 @@
+/* ═══ Concept zakelijk (5 oktober 2026) — concept.socialnow.nl ═══
+   Marinus: "zo dicht mogelijk bij mijn huidige site, maar qua stijl meer tech en zakelijk, kleinere logo's, een UI/UX-upgrade",
+   "zakelijker en strakker, maar niet te veel", "Milo en mijn branding niet kwijt", "wit = mens, altijd in kleur", "zwart = tech/AI".
+   Inhoud, routes, beelden, Milo en logo blijven gelijk; dit bestand verandert alleen de opmaak. Het laadt als laatste css.
+   Veel regels beginnen met :root zodat ze ook winnen van css die later met een lazy chunk binnenkomt. */
+
+:root {
+  --c-zwart: #0b0f12;
+  --c-lijn: #ffffff1a;
+  --c-lijn-sterk: #ffffff2e;
+  --c-groen: #1a8f45;
+  --c-groen-hover: #1ba452;
+  --c-accent: #25d366;
+  --c-grijs: #8b9691;
+  --c-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --c-knop-h: 46px;
+  --c-radius-knop: 10px;
+  --c-radius-kaart: 14px;
+  --c-sectie: 96px;
+  background: var(--c-zwart);
+}
+@media (max-width: 700px) { :root { --c-sectie: 64px; --c-knop-h: 44px; } }
+
+/* ── Eén bijna-zwart ─────────────────────────────────────────────────────────── */
+:root body { background: var(--c-zwart) !important; }
+:root .sn-site { background: var(--c-zwart); }
+:root .h-hero:after {
+  background:
+    linear-gradient(90deg, #0b0f12 0%, #0b0f12dd 26%, #0b0f1277 43%, transparent 64%),
+    linear-gradient(0deg, #0b0f12 0%, transparent 20%);
+}
+:root .sn-site .h-clients-kort > .h-clients-strook::before { background: linear-gradient(90deg, #0b0f12 10%, transparent); }
+:root .sn-site .h-clients-kort > .h-clients-strook::after { background: linear-gradient(270deg, #0b0f12 10%, transparent); }
+
+/* ── Koppen: geen VHS/glitch meer, een vaste typeschaal ──────────────────────── */
+h1:not(.sn-vhs-off), h2:not(.sn-vhs-off), h3:not(.sn-vhs-off), .sn-vhs { text-shadow: none; }
+h1:not(.sn-vhs-off)::after, h2:not(.sn-vhs-off)::after, h3:not(.sn-vhs-off)::after, .sn-vhs::after { background: none; }
+:root .sn-site h1, :root .sn-site h2, :root .sn-site h3 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; text-wrap: balance; }
+:root .sn-site h1 { font-size: clamp(34px, 4.2vw, 48px); }
+:root .sn-site h2 { font-size: clamp(26px, 2.6vw, 34px); }
+:root .sn-site h3 { font-size: clamp(19px, 1.6vw, 22px); letter-spacing: -0.02em; }
+:root .sn-site p { max-width: 65ch; }
+:root .sn-site .sn-bento-kop > h2, :root .sn-site .h-section-heading h2 { font-size: clamp(28px, 3vw, 38px); }
+:root .sn-site .sn-tegel-titel { font-size: clamp(19px, 1.6vw, 24px); font-weight: 600; letter-spacing: -0.02em; text-shadow: none; }
+:root .sn-site .sn-tegel-tekst { font-size: clamp(15px, 1vw, 16px); }
+
+/* Labels: klein, rustig, mono. Hoofdletters mogen, maar zacht. */
+:root .sn-site .h-eyebrow,
+:root .sn-site .sn-tegel-label,
+:root .sn-site .h-dock-label,
+:root .sn-site .h-milo-pil > b,
+:root .sn-site .h-team-verhaal-kop,
+:root .sn-site .h-zelf-kop > b,
+:root .sn-site .h-integraties-kop > b,
+:root .sn-site .h-duo-kop,
+:root .sn-site .h-sprekers-label,
+:root .sn-site .h-statement-klein,
+:root .sn-site .h-trusted,
+:root .sn-site .h-lac-kop,
+:root .sn-site .h-mens-laag-label {
+  font-family: var(--c-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+/* ── Sectieritme ──────────────────────────────────────────────────────────── */
+:root .h-section { padding-top: var(--c-sectie); }
+:root .sn-site .sn-bento { padding-top: var(--c-sectie); }
+:root .sn-site .sn-bento-kop { margin-bottom: clamp(24px, 2.6vw, 36px); }
+:root .sn-site .sn-bento-kop > .h-eyebrow { margin-bottom: 12px; color: var(--c-grijs); }
+
+/* ── Kaarten: hairline, kleinere radius, geen zware schaduw ──────────────────── */
+:root .sn-site .sn-tegel-vlak { border-radius: var(--c-radius-kaart); border-color: var(--c-lijn); box-shadow: none; }
+:root .sn-site .sn-tegel-vlak:hover { border-color: var(--c-lijn-sterk); }
+:root .sn-site .sn-tegel-kop { font-size: 14px; font-weight: 600; }
+:root .sn-site .sn-tegel-kop::before { width: 6px; height: 6px; box-shadow: none; }
+:root .sn-site .sn-bento-rooster { gap: clamp(20px, 2vw, 28px) clamp(14px, 1.4vw, 20px); }
+
+/* ── Knoppen: één familie, 46px, radius 10, geen gloed ───────────────────────── */
+:root .sn-site .sn-btn3d, :root .sn-btn3d, :root .sn-site .sn-btn3d:hover, :root .sn-btn3d:hover { box-shadow: none; transform: none; }
+:root .sn-site .sn-btn3d-sheen { display: none; }
+:root .sn-site .h-button {
+  min-height: var(--c-knop-h);
+  padding: 0 16px 0 18px;
+  gap: 10px;
+  border-radius: var(--c-radius-knop);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  text-shadow: none;
+  transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+:root .sn-site .h-button::before { display: none; }
+:root .sn-site .h-button-icon { width: 20px; height: 20px; border: 0; background: none; color: currentColor; }
+:root .sn-site .h-button:not(.h-button-secondary):hover .h-button-icon,
+:root .sn-site .h-button:not(.h-button-secondary):focus-visible .h-button-icon { background: none; color: currentColor; }
+:root .sn-site .sn-tegel .h-button { min-height: var(--c-knop-h); border-radius: var(--c-radius-knop); font-size: 15px; font-weight: 600; }
+:root .sn-site .sn-tegel .h-button .h-button-icon, :root .sn-site .h-deur-knop .h-button-icon { width: 20px; height: 20px; }
+/* Primair: effen merkgroen. */
+:root .sn-site .os-claim, :root .sn-site .h-try-button, :root .sn-site .h-header-claim {
+  background: var(--c-groen);
+  border: 1px solid var(--c-groen);
+  color: #fff;
+  text-shadow: none;
+  box-shadow: none;
+  filter: none;
+}
+:root .sn-site .os-claim:hover, :root .sn-site .h-try-button:hover, :root .sn-site .h-header-claim:hover {
+  background: var(--c-groen-hover);
+  border-color: var(--c-groen-hover);
+  color: #fff;
+  filter: none;
+}
+:root .sn-site .os-claim .h-button-icon, :root .sn-site .h-try-button .h-button-icon { background: none; color: #fff; }
+/* Secundair: rustig, hairline. */
+:root .sn-site .h-button-secondary { background: transparent; border: 1px solid var(--c-lijn-sterk); color: #fff; }
+:root .sn-site .h-button-secondary:hover { background: #ffffff0f; border-color: #ffffff55; }
+/* Focus: een zichtbare ring in plaats van gloed, overal. */
+:root .sn-site :focus-visible { outline: 2px solid var(--c-accent); outline-offset: 3px; }
+:root .sn-site .h-button:focus-visible, :root .sn-site .os-claim:focus-visible, :root .sn-site .h-header-claim:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* Overige gloed weg. */
+:root .sn-site .vh-knop { min-height: var(--c-knop-h); border-radius: var(--c-radius-knop); font-size: 15px; font-weight: 600; background: var(--c-groen); box-shadow: none; }
+:root .sn-site .vh-knop:hover, :root .sn-site .vh-knop:focus-visible { background: var(--c-groen-hover); }
+:root .sn-site .h-film-titel::before { box-shadow: none; }
+:root .sn-site .h-chat-message.is-response { box-shadow: none; }
+:root .sn-site .h-ring-visual > i { box-shadow: none; }
+:root .sn-site .h-plekken strong { text-shadow: none; }
+:root .sn-site .h-team-join:hover .h-team-join-tekst, :root .sn-site .h-team-join:focus-visible .h-team-join-tekst { text-shadow: none; }
+:root .sn-site .h-team-join .h-team-join-tekst::after { display: none; }
+
+/* ── Menubalk: compact, logo 24px, login als gewone knop ─────────────────────── */
+:root .sn-site .h-nav { min-height: 64px; gap: 24px; }
+:root .sn-site .h-brand img { width: auto; height: 24px; }
+:root .sn-site .h-header { background: rgba(11, 15, 18, .86); border-bottom-color: var(--c-lijn); }
+:root .sn-site .h-desktop-nav { gap: 22px; }
+:root .sn-site .h-desktop-nav a { font-size: 14px; color: #b3bbb7; }
+:root .sn-site .h-desktop-nav a:hover, :root .sn-site .h-desktop-nav a.active { color: #fff; }
+:root .sn-site .h-header-claim {
+  min-height: 38px;
+  padding: 0 14px;
+  gap: 8px;
+  border-radius: var(--c-radius-knop);
+  font-size: 14px;
+  font-weight: 600;
+}
+:root .sn-site .h-header-claim svg { color: #fff; }
+:root { scroll-padding-top: 80px; }
+
+/* ── 1. Hero-kop: 48px, 600, geen glitch, geen raket ─────────────────────────── */
+:root .sn-site .h-hero h1.h-taalwissel {
+  font-size: clamp(34px, 3.6vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  text-shadow: none;
+}
+:root .sn-site .h-hero h1.h-taalwissel::after { content: none; }
+:root .sn-site .h-hero h1 .h-kop-groen, :root .sn-site .h-hero .h-tekst-groen { text-shadow: none; }
+:root .sn-site .h-hero .h-kop-raket { display: none; }
+
+/* ── 2. Inloggen: een gewone primaire knop; downloads als rustige rij eronder ── */
+:root .sn-site .h-os-dock, :root .sn-site .h-hero .h-knoppen .h-os-dock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 600px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  overflow: visible;
+}
+:root .sn-site .h-dock-login, :root .sn-site .h-hero .h-knoppen .h-dock-login {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: var(--c-knop-h);
+  padding: 0 16px 0 20px;
+  border: 1px solid var(--c-groen);
+  border-radius: var(--c-radius-knop);
+  background: var(--c-groen);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: none;
+  transition: background-color .2s ease;
+}
+:root .sn-site .h-dock-login:hover { background: var(--c-groen-hover); border-color: var(--c-groen-hover); }
+:root .sn-site .h-os-dock .h-dock-login:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+:root .sn-site .h-dock-arrow { width: 18px; height: 18px; border: 0; }
+:root .sn-site .h-dock-arrow svg { width: 18px; height: 18px; }
+:root .sn-site .h-dock-bottom { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 0; }
+:root .sn-site .h-dock-label { margin: 0; color: var(--c-grijs); }
+:root .sn-site .h-dock-platforms { display: flex; flex-wrap: wrap; gap: 4px; }
+:root .sn-site .h-dock-platform {
+  min-height: 32px;
+  padding: 0 10px;
+  gap: 6px;
+  border: 1px solid var(--c-lijn);
+  border-radius: 8px;
+  color: #d5dcd8;
+  font-size: 13px;
+  flex-direction: row;
+}
+:root .sn-site .h-dock-platform:last-child { border-right: 1px solid var(--c-lijn); }
+:root .sn-site .h-dock-platform svg { width: 14px; height: 14px; }
+:root .sn-site .h-dock-platform:hover, :root .sn-site .h-dock-platform[aria-expanded="true"] { background: #ffffff0f; border-color: var(--c-lijn-sterk); border-radius: 8px; }
+:root .sn-site .h-os-dock .h-install-hulp { padding: 0; }
+:root .sn-site .h-os-dock :focus-visible { outline-offset: 2px; }
+
+/* ── 7. Hero-labels: klein, mono, grijs ──────────────────────────────────────── */
+:root .sn-site .h-hero .h-integratie { gap: 12px; padding-top: 18px; border-top-color: var(--c-lijn); }
+:root .sn-site .h-hero .h-integratie-rij,
+:root .sn-site .h-hero .h-integratie-rij b,
+:root .sn-site .h-hero .h-integratie-rij > .h-integratie-sf,
+:root .sn-site .h-attesso,
+:root .sn-site .h-talking-label {
+  font-family: var(--c-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--c-grijs);
+}
+:root .sn-site .h-hero .h-integratie-rij { gap: 8px 12px; }
+:root .sn-site .h-hero .h-integratie-odoo svg { width: 64px; }
+:root .sn-site .h-integratie-sf img { height: 18px; width: auto; }
+:root .sn-site .h-attesso code { font-size: 13px; color: #fff; }
+:root .sn-site .h-aftermovie { font-family: inherit; font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--c-accent); }
+
+/* ── 8. Betaallogo's: kleiner, in kleur, één ritme ───────────────────────────── */
+:root .sn-site .h-attesso-logos { gap: 6px; }
+:root .sn-site .h-attesso-logos li { height: 24px; padding: 0 9px; border-radius: 6px; background: #fff; }
+:root .sn-site .h-attesso-logos img { height: 11px; }
+:root .sn-site .h-attesso-logos img[alt="Mastercard"] { height: 14px; }
+:root .sn-site .h-attesso-logos img[alt="Airwallex"], :root .sn-site .h-attesso-logos img[alt="Rabobank"] { height: 10px; }
+
+/* ── 9. Partnerbalk: één compacte rij, René op labelmaat ─────────────────────── */
+:root .sn-site .h-partners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 20px;
+  padding: 0 0 0 24px;
+  border: 1px solid #0b0f1214;
+  border-radius: var(--c-radius-kaart);
+}
+:root .sn-site .h-partners-balk { padding: 0; font-family: var(--c-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; color: #5d6763; }
+:root .sn-site .h-partners-groot { margin: 0; padding: 0; gap: 8px; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: #0b0f12; }
+:root .sn-site .h-partners-xxl { padding: 3px 7px; border-radius: 6px; }
+:root .sn-site .h-partners-xxl img { height: 22px; }
+:root .sn-site .h-partners-strook { flex: 1 1 0; min-width: 0; padding: 18px 0; }
+:root .sn-site .h-partners-rij { gap: 44px; padding-right: 44px; align-items: center; }
+:root .sn-site .h-partners-logo { width: 88px; height: 26px; }
+:root .sn-site .h-partners-logo img { max-height: 18px; }
+:root .sn-site .h-partners-logo img[alt="Salesforce"] { max-height: 24px; }
+:root .sn-site .h-partners-logo img[alt="Mastercard"] { max-height: 18px; }
+@media (max-width: 900px) {
+  :root .sn-site .h-partners { padding: 16px 16px 0; row-gap: 6px; }
+  :root .sn-site .h-partners-strook { flex: 1 1 100%; padding: 12px 0 16px; }
+}
+
+/* ── Witte sectie (mens): rust, kleur, zinnen in gewone kapitalisatie ───────── */
+:root .sn-site .h-hero .h-team-rij { border-radius: 16px; }
+:root .sn-site .h-hero .h-team-rij .h-statement.is-r1 .h-sr { font-size: clamp(19px, 1.6vw, 26px); line-height: 1.35; letter-spacing: -0.01em; }
+:root .sn-site .h-statement.is-r1 b { font-weight: 600; }
+/* 3. "No one can automate people who care": donker, normale nadruk, een subtiel groen accent. */
+:root .sn-site .h-hero .h-team-rij .h-statement.is-r1 b.g {
+  color: #0b0f12;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: #25d36699;
+  text-decoration-thickness: 2px;
+  text-underline-offset: .18em;
+}
+:root .sn-site .h-team-rij img, :root .sn-site .h-team-rij video { filter: none; }
+
+/* ── 4 + 5. Demoblok: strak zwart paneel met hairline ────────────────────────── */
+:root .sn-site .h-hero .h-sprekers {
+  border: 1px solid var(--c-lijn);
+  border-radius: 16px;
+  background: var(--c-zwart);
+  box-shadow: none;
+}
+:root .sn-site .h-hero .h-sprekers h2 { font-size: clamp(26px, 2.4vw, 32px); font-weight: 600; letter-spacing: -0.03em; text-shadow: none; }
+:root .sn-site .h-sprekers-label span { color: var(--c-grijs); }
+:root .sn-site .h-sprekers-manifest { border-left: 1px solid var(--c-lijn-sterk); gap: 10px; }
+:root .sn-site .h-sprekers-manifest p.is-kop { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; text-transform: none; line-height: 1.3; }
+:root .sn-site .h-sprekers-manifest strong { font-weight: 600; }
+:root .sn-site .h-sprekers-knop {
+  min-height: var(--c-knop-h);
+  padding: 0 18px;
+  border-radius: var(--c-radius-knop);
+  background: var(--c-groen);
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: none;
+}
+:root .sn-site .h-sprekers-knop:hover { background: var(--c-groen-hover); }
+:root .sn-site .h-sprekers-link { font-size: 15px; font-weight: 600; }
+:root .sn-site .h-spreker { border-width: 1px; border-radius: var(--c-radius-kaart); }
+:root .sn-site .h-spreker.is-socialnow { border-color: var(--c-lijn-sterk); }
+
+/* ── Veiligheid in de hero: minder lege zwarte ruimte ────────────────────────── */
+:root .sn-site .h-hero .h-hero-veilig { margin-top: clamp(24px, 2.4vw, 36px); }
+:root .sn-site .h-hero { padding-bottom: clamp(24px, 3vw, 48px); }
+
+/* Filmvakken: zwarte video krijgt een rand en radius, zodat er geen harde zwarte rechthoek op het bijna-zwart ligt. */
+:root .sn-site .h-film-veilig .h-film-vak { overflow: hidden; border: 1px solid var(--c-lijn); border-radius: var(--c-radius-kaart); background: #000; }
+:root .sn-site .h-film-veilig video { display: block; width: 100%; }
+:root .sn-site .h-veilig-nummers button { border-radius: 10px; }
+:root .sn-site .h-bereikt.sn-bento { padding-top: clamp(56px, 6vw, 80px); }
+
+/* Kleine statuspillen en labels: minder spatiëring. */
+:root .sn-site .h-pil-status, :root .sn-site .h-lac-label, :root .sn-site .h-lac-kop > span, :root .sn-site .h-vac-badge,
+:root .sn-site .prijs-vlag, :root .sn-site .prijs-nul span, :root .sn-site .vh-kicker, :root .gw-eyebrow,
+:root .sn-site .h-team-verhaal-kop, :root .sn-site .h-browser-balk > em, :root .sn-site .h-integraties-rij small {
+  letter-spacing: 0.06em;
+}
+:root .gw-eyebrow, :root .sn-site .vh-kicker { font-family: var(--c-mono); font-size: 11px; font-weight: 500; }
+/* Stipjes zonder gloed. */
+:root .sn-site .h-team-vandaag i, :root .sn-site .h-deur-status.is-live b i, :root .sn-site .prijs-os i, :root .gw-stipjes b { box-shadow: none; }
+
+/* Afsluiter: Milo's en het OS-logo hebben een zwarte ondergrond; op het bijna-zwart mengen ze weer mee. */
+:root .sn-site .h-final-close, :root .sn-site .h-final-characters { background-color: var(--c-zwart); }
+:root .sn-site .h-final-logo { mix-blend-mode: lighten; }
+
+/* ── Grote getallen en statements onder de hero op de schaal ─────────────────── */
+:root .sn-site .h-beurs-groot { font-size: clamp(30px, 3.2vw, 42px); font-weight: 600; letter-spacing: -0.03em; }
+:root .sn-site .h-mens-belofte-kop { font-size: clamp(26px, 2.8vw, 36px); font-weight: 600; letter-spacing: -0.03em; }
+:root .sn-site .h-vb-groot-titel { font-size: clamp(22px, 2.2vw, 30px); }
+:root .sn-site .h-final-close h2 { font-size: clamp(28px, 3vw, 38px); }
+
+/* ── 10. Milo in de cookiemelding: kleiner, zelfde Milo ──────────────────────── */
+:root .sn-site .h-koekje {
+  padding: 16px 18px 14px 92px;
+  border-radius: var(--c-radius-kaart);
+  border-color: var(--c-lijn);
+  background: var(--c-zwart);
+  box-shadow: 0 16px 40px #00000099;
+}
+:root .sn-site .h-koekje-milo { left: 14px; top: -18px; width: 66px; height: 66px; box-shadow: 0 0 0 1px var(--c-lijn-sterk); }
+:root .sn-site .h-koekje .h-koekje-titel { font-size: 15px; font-weight: 600; }
+:root .sn-site .h-koekje .h-koekje-uitleg { font-size: 13px; }
+:root .sn-site .h-koekje-knop { height: 34px; border-radius: 8px; background: var(--c-groen); box-shadow: none; text-shadow: none; font-weight: 600; }
+:root .sn-site .h-koekje-knop:hover { background: var(--c-groen-hover); filter: none; transform: none; }
+@media (max-width: 640px) {
+  :root .sn-site .h-koekje { padding-left: 86px; }
+  :root .sn-site .h-koekje-milo { left: 12px; top: -16px; width: 62px; height: 62px; }
+}
+
+/* ── Foto's in witte vlakken altijd in kleur ─────────────────────────────────── */
+:root .sn-site .h-partners img, :root .sn-site .h-zelf img, :root .sn-site .h-duo img { filter: none; }
+
+/* ── Concept-label: vast linksonder, alleen op concept.socialnow.nl (klasse uit index.html) ── */
+html.is-concept body::after {
+  content: "Concept · niet live";
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 2147483000;
+  padding: 5px 10px;
+  border: 1px solid #ffffff2e;
+  border-radius: 999px;
+  background: #0b0f12;
+  color: #e6ebe8;
+  font: 500 12px/1.2 "TT Norms", Arial, sans-serif;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+}
+/* De Milo-knop linksonder schuift een stukje omhoog zodat het label hem niet raakt. */
+html.is-concept .h-milo-launcher { bottom: 48px; }
+@media (max-width: 700px) { html.is-concept .h-milo-launcher { bottom: 44px; } }
+
+/* ── Minder beweging als de bezoeker dat vraagt ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root .sn-site *, :root .sn-site *::before, :root .sn-site *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Telefoon: menubalk en downloads passend op 375px ────────────────────────── */
+@media (max-width: 700px) {
+  :root .sn-site .h-nav { min-height: 56px; gap: 10px; }
+  :root .sn-site .h-brand img { width: clamp(96px, 28vw, 120px); height: auto; }
+  :root .sn-site .h-header-claim { min-height: 34px; padding: 0 10px; font-size: 11px; gap: 6px; }
+  :root .sn-site .h-header-claim svg { display: none; }
+  :root .sn-site .h-os-dock, :root .sn-site .h-hero .h-knoppen .h-os-dock { align-items: stretch; }
+  :root .sn-site .h-dock-login, :root .sn-site .h-hero .h-knoppen .h-dock-login { justify-content: space-between; }
+  :root .sn-site .h-dock-bottom { display: grid; gap: 8px; }
+  :root .sn-site .h-dock-platforms { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+  :root .sn-site .h-dock-platform { justify-content: center; padding: 0 4px; font-size: 12px; gap: 4px; }
+  :root .sn-site .h-partners-rij { justify-content: center; gap: 14px 28px; row-gap: 14px; }
+  :root .sn-site .h-partners-logo { width: 76px; height: 24px; }
+}
+
+/* ── Hero optie 2 (5 oktober 2026, Marinus koos hem) ─────────────────────────────
+   Rij 1: de groene login en daarnaast een omlijnde "Plan een live demo", allebei 48px.
+   Rij 2: het mono-label DOWNLOAD en vier vierkante iconknoppen, iconen wit ("icons white"). */
+:root .sn-site .h-os-dock.is-held { gap: 16px; }
+:root .sn-site .h-os-dock.is-held .h-dock-rij { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+:root .sn-site .h-os-dock.is-held .h-dock-login,
+:root .sn-site .h-os-dock.is-held .h-dock-demo {
+  min-height: 48px;
+  height: 48px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+}
+:root .sn-site .h-os-dock.is-held .h-dock-demo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  border: 1px solid #ffffff33;
+  background: transparent;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color .2s ease;
+}
+:root .sn-site .h-os-dock.is-held .h-dock-demo:hover { border-color: #ffffff66; color: #fff; }
+:root .sn-site .h-os-dock.is-held .h-dock-demo:focus-visible,
+:root .sn-site .h-os-dock.is-held .h-dock-login:focus-visible { outline: 2px solid #25d366; outline-offset: 2px; }
+
+:root .sn-site .h-os-dock.is-held .h-dock-bottom.is-compact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 0; }
+:root .sn-site .h-os-dock.is-held .is-compact .h-dock-label {
+  margin: 0 4px 0 0;
+  color: #8d9893;
+  font-family: var(--c-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+:root .sn-site .h-os-dock.is-held .is-compact .h-dock-platforms { display: flex; flex-wrap: nowrap; gap: 8px; }
+:root .sn-site .h-os-dock.is-held .h-dock-icoon {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  padding: 0;
+  border: 1px solid #25d36673;
+  border-radius: 10px;
+  background: #25d3661f;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease;
+}
+:root .sn-site .h-os-dock.is-held .h-dock-icoon:last-child { border-right: 1px solid #25d36673; }
+:root .sn-site .h-os-dock.is-held .h-dock-icoon svg { width: 18px; height: 18px; color: #fff; fill: currentColor; }
+:root .sn-site .h-os-dock.is-held .h-dock-icoon .os-install-telefoon { fill: none; }
+:root .sn-site .h-os-dock.is-held .h-dock-icoon:hover,
+:root .sn-site .h-os-dock.is-held .h-dock-icoon[aria-expanded="true"] { background: #1a8f45; border-color: #1a8f45; border-radius: 10px; }
+:root .sn-site .h-os-dock.is-held .h-dock-icoon:focus-visible { outline: 2px solid #25d366; outline-offset: 2px; }
+/* Klein label met de naam van het systeem, boven het icoon bij hover of toetsenbordfocus. */
+:root .sn-site .h-os-dock.is-held .h-dock-tip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  z-index: 5;
+  padding: 5px 8px;
+  border: 1px solid #ffffff1a;
+  border-radius: 6px;
+  background: #11171b;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  transition: opacity .15s ease, transform .15s ease;
+}
+:root .sn-site .h-os-dock.is-held .h-dock-icoon:hover .h-dock-tip,
+:root .sn-site .h-os-dock.is-held .h-dock-icoon:focus-visible .h-dock-tip { opacity: 1; transform: translate(-50%, 0); }
+@media (max-width: 700px) {
+  :root .sn-site .h-os-dock.is-held .h-dock-rij { flex-direction: column; align-items: stretch; }
+  :root .sn-site .h-os-dock.is-held .h-dock-demo { width: 100%; }
+  :root .sn-site .h-os-dock.is-held .h-dock-bottom.is-compact { display: flex; }
+  :root .sn-site .h-os-dock.is-held .is-compact .h-dock-platforms { display: flex; grid-template-columns: none; }
+  :root .sn-site .h-os-dock.is-held .h-dock-icoon { padding: 0; }
+}

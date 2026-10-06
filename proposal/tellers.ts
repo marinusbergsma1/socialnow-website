@@ -35,3 +35,47 @@ export function useTellers() {
   }, []);
   return tellers;
 }
+
+// 5 oktober 2026 (Marinus): "aanmeldingen creators 356 en elke dag komen er ongeveer 12 bij en live os gebruikers 1125 met
+// elke dag er 215 bij." Stand op 5 oktober 2026, 00:00 in Nederland. Elke stap duurt tussen de halve en anderhalve
+// gemiddelde stap (volgt uit het stapnummer), zodat de tellers onregelmatig tikken maar per dag op het juiste aantal uitkomen.
+const WERELD_START = Date.parse("2026-10-04T22:00:00Z");
+const DAG = 24 * 60 * 60 * 1000;
+export const CREATORS_START = 356;
+export const CREATORS_PER_DAG = 12;
+export const OS_GEBRUIKERS_START = 1125;
+export const OS_GEBRUIKERS_PER_DAG = 215;
+
+function stappenNa(ms: number, perDag: number, zout: number) {
+  const gemiddeld = DAG / perDag;
+  const heleDagen = Math.floor(ms / DAG);
+  let n = heleDagen * perDag;
+  let t = heleDagen * DAG;
+  while (true) {
+    const stap = gemiddeld * (0.5 + (((n * 2654435761 + zout) >>> 0) % 1000) / 1000);
+    if (t + stap > ms) return Math.min(n, (heleDagen + 1) * perDag);
+    t += stap;
+    n++;
+  }
+}
+
+function wereldStand() {
+  const ms = Math.max(0, Date.now() - WERELD_START);
+  return {
+    creators: CREATORS_START + stappenNa(ms, CREATORS_PER_DAG, 7),
+    osGebruikers: OS_GEBRUIKERS_START + stappenNa(ms, OS_GEBRUIKERS_PER_DAG, 13),
+  };
+}
+
+export function useWereldTellers() {
+  const [stand, setStand] = useState(wereldStand);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const klok = window.setInterval(() => {
+      const nu = wereldStand();
+      setStand((oud) => (oud.creators === nu.creators && oud.osGebruikers === nu.osGebruikers ? oud : nu));
+    }, 1000);
+    return () => window.clearInterval(klok);
+  }, []);
+  return stand;
+}

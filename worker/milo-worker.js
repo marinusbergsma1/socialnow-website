@@ -67,7 +67,7 @@ export default {
     let taal;
     try {
       const { messages, language } = await request.json();
-      taal = { nl: "Nederlands", de: "Duits", fr: "Frans" }[language] || "Engels";
+      taal = { nl: "Nederlands", de: "Duits", fr: "Frans", es: "Spaans", it: "Italiaans", pt: "Portugees", pl: "Pools", sv: "Zweeds", da: "Deens" }[language] || "Engels";
       gesprek = (Array.isArray(messages) ? messages : [])
         .filter((m) => m && typeof m.text === "string" && m.text.trim())
         .slice(-MAX_BEURTEN)

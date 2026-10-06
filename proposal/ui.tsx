@@ -321,7 +321,10 @@ export function Closing() {
       {agents.map(agent=><MiloMotion key={agent.id} role={agent.id} name={agent.name} maat={256} />)}
     </div>
     {/* 28 september 2026 (Marinus, het verhaal): alle data in één OS, gratis te proberen, en het persoonlijke contact blijft. */}
-    <h2 id="final-close-title">Alle data van je bedrijf.<br /><span>Eén OS.</span></h2>
+    {/* 5 oktober 2026 (Marinus): "Eén operation and management system. Not to automate but to connect." */}
+    <h2 id="final-close-title" translate="no">One operation and management system.<br /><span>Not to automate, but to connect.</span></h2>
+    {/* 5 oktober 2026 (Marinus): "Human connection powered by Ai technology vind ik nog wel een mooie toevoeging ook." */}
+    <p className="h-final-belofte" translate="no">Human connection, powered by AI technology.</p>
     <p>Je website, social media en Odoo op één plek. Gratis te gebruiken, met mensen erachter.</p>
     <OsEntry showProof={false} />
     <TeamTrust />

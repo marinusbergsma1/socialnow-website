@@ -1,7 +1,6 @@
 import React from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Bento, BentoFilm, Tegel, useInBeeld } from "./Bento";
-import { OdooLogo } from "./Verhaal";
 import { GRATIS_OS_URL } from "./os-entry";
 import { TextLink } from "./ui";
 import "./bereikt.css";
@@ -102,18 +101,6 @@ function Trekking() {
   );
 }
 
-// Honderden stippen die oplichten: sfeer bij "honderden aanmeldingen", geen telling.
-function Aanmeldingen() {
-  const stippen = React.useMemo(() => Array.from({ length: 180 }, (_, i) => ((i * 37) % 180) / 180), []);
-  return (
-    <div className="h-aanmeld-stippen" aria-hidden="true">
-      {stippen.map((vertraging, i) => (
-        <i key={i} style={{ "--d": `${(vertraging * 2.4).toFixed(2)}s` } as React.CSSProperties} />
-      ))}
-    </div>
-  );
-}
-
 function ScoreRing({ label, doel, aan }: { label: string; doel: number; aan: boolean }) {
   const waarde = useTeller(doel, aan, 1800);
   return (
@@ -139,20 +126,26 @@ function IlGordoScores() {
   );
 }
 
-// Odoo en Meta stromen het OS van kWh Garant in; een offerteaanvraag komt binnen.
-function KwhStroom() {
+// 5 oktober 2026 (Marinus): "Deze vind ik nog heel lelijk", "Ik wil graag iets meer tech en minder schreeuwerig" en de
+// resultaten: "Ik verdiende 100.000 euro's voor VDZ met complete animatie vanuit 0 online zichtbaarheid en foto's, alleen
+// een door to door team. Zelfde voor kWh 100 leads in 1 week." Een resultaattegel: één cijfer in mono, een rustige lijn
+// die oploopt (tekent zich bij binnenkomst) en wat we bouwden als kleine labels. Vervangt de stroom en de browser.
+function lijnPad(punten: number[], vlak: boolean) {
+  const stap = 200 / (punten.length - 1);
+  const xy = punten.map((p, i) => `${(i * stap).toFixed(1)} ${(46 - p * 42).toFixed(1)}`);
+  const lijn = `M${xy.join(" L")}`;
+  return vlak ? `${lijn} L200 48 L0 48 Z` : lijn;
+}
+function Resultaat({ waarde, eenheid, punten, labels }: { waarde: string; eenheid: string; punten: number[]; labels: string[] }) {
+  const { ref, aan } = useInBeeld<HTMLDivElement>();
   return (
-    <div className="h-stroom" aria-hidden="true">
-      <svg viewBox="0 0 320 150">
-        <path className="h-stroom-lijn" d="M58 38 C140 38 150 75 232 75" />
-        <path className="h-stroom-lijn" d="M58 112 C140 112 150 75 232 75" />
-        <path className="h-stroom-puls" d="M58 38 C140 38 150 75 232 75" pathLength="100" />
-        <path className="h-stroom-puls is-tweede" d="M58 112 C140 112 150 75 232 75" pathLength="100" />
+    <div ref={ref} className={`h-resultaat${aan ? " is-aan" : ""}`}>
+      <p className="h-resultaat-cijfer"><b translate="no">{waarde}</b><span>{eenheid}</span></p>
+      <svg className="h-resultaat-lijn" viewBox="0 0 200 48" preserveAspectRatio="none" aria-hidden="true">
+        <path className="is-vlak" d={lijnPad(punten, true)} />
+        <path className="is-lijn" d={lijnPad(punten, false)} pathLength="1" />
       </svg>
-      <span className="h-stroom-bron is-odoo"><OdooLogo /></span>
-      <span className="h-stroom-bron is-meta">Meta</span>
-      <span className="h-stroom-os">OS</span>
-      <span className="h-stroom-melding"><Check size={13} />Nieuwe offerteaanvraag</span>
+      <ul className="h-resultaat-labels" translate="no">{labels.map((label) => <li key={label}>{label}</li>)}</ul>
     </div>
   );
 }
@@ -171,7 +164,12 @@ export default function Bereikt() {
             <p className="h-beurs-groot">Honderden aanmeldingen.</p>
             <p className="sn-tegel-titel">Vijf finalisten. Eén winnaar.</p>
           </div>
-          <Aanmeldingen />
+          {/* 5 oktober 2026 (Marinus): "Dat groene blok is een beetje nikszeggend." Geen stippen meer: twaalf seconden uit de
+              aftermovie van de beurs, zonder geluid; een klik opent de hele film. */}
+          <a className="h-beurs-film" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener" aria-label="Bekijk de aftermovie van Odoo Experience 2026">
+            <BentoFilm src="/video/odoo-experience/odoo-experience-kort.mp4" poster="/video/odoo-experience/odoo-experience-kort-poster.webp" label="Odoo Experience 2026 in Brussel" geluid={false} />
+            <span className="h-beurs-film-label">&#9654; Aftermovie</span>
+          </a>
         </div>
         <Trekking />
       </Tegel>
@@ -184,24 +182,41 @@ export default function Bereikt() {
         <p className="sn-tegel-tekst">Na drie dagen op de beurs in Brussel. Dank je, Michelle.</p>
       </Tegel>
       <Tegel kop="kWh Garant" breed={4} className="h-bereikt-kwh">
-        <KwhStroom />
+        <Resultaat waarde="100" eenheid="leads in één week" punten={[0.02, 0.06, 0.12, 0.2, 0.34, 0.5, 0.66, 0.82, 1]} labels={["Meta ads", "Odoo CRM", "Eigen OS"]} />
         <p className="sn-tegel-titel">Eigen OS live.</p>
-        <p className="sn-tegel-tekst">Odoo en Meta gekoppeld. Offerteaanvragen komen direct in hun OS binnen.</p>
+        <p className="sn-tegel-tekst">Meta en Odoo gekoppeld. Elke offerteaanvraag komt direct in hun OS binnen.</p>
       </Tegel>
       <Tegel kop="VDZ Brigade" breed={4} className="h-bereikt-vdz">
-        <div className="h-browser" aria-hidden="true">
-          <span className="h-browser-balk"><i /><i /><i /><em><b />live</em></span>
-          <span className="h-browser-beeld"><img src="/images/cases/vdz-brigade-desktop.webp" alt="" loading="lazy" /></span>
+        {/* 5 oktober 2026 (Marinus): "Graag ook nog bij VDZ hun animatie." De overzichtsanimatie (vier brigades onder één dak)
+            uit 01-KLANTEN/vdz-brigade/videos/vdz-brigades-overzicht-motion, v4, 1280 px zonder geluid. */}
+        <div className="h-ilgordo-film">
+          <BentoFilm src="/video/vdz/vdz-animatie.mp4" poster="/video/vdz/vdz-animatie-poster.webp" label="VDZ Brigade: vier specialisten onder één dak" geluid={false} />
         </div>
-        <p className="sn-tegel-titel">Website, huisstijl en eigen OS.</p>
+        <Resultaat waarde="€ 100.000" eenheid="omzet voor VDZ" punten={[0, 0.01, 0.03, 0.08, 0.16, 0.3, 0.48, 0.7, 1]} labels={["Website", "Huisstijl", "Animatie", "Fotografie", "Eigen OS"]} />
+        <p className="sn-tegel-titel">Van nul online zichtbaarheid naar een merk dat verkoopt.</p>
+        <p className="sn-tegel-tekst">Daarvoor had VDZ alleen een deur-aan-deurteam.</p>
         {/* 30 september 2026 (Marinus): de reactie van VDZ in alle talen in het Engels. Origineel (Google-review, Nederlands):
             "Wat deze mannen neerzetten in zo’n korte tijd ongelofelijk." */}
         <p className="sn-tegel-tekst" translate="no">“What these guys delivered in such a short time is unbelievable.”</p>
       </Tegel>
       <Tegel kop="Il Gordo" breed={4} className="h-bereikt-ilgordo">
+        {/* 5 oktober 2026 (Marinus): "Kan je voor Il gordo ook die video laten zien?" De headerfilm van ilgordo.nl
+            (01_WEBSITE/ilgordo-nl/site/header-video.mp4, 11 s, 1280 px, 0,6 MB) boven de scores, zonder geluid. */}
+        <div className="h-ilgordo-film">
+          <BentoFilm src="/video/ilgordo/ilgordo-header.mp4" poster="/video/ilgordo/ilgordo-header-poster.webp" label="Il Gordo: de headerfilm van ilgordo.nl" geluid={false} />
+        </div>
         <IlGordoScores />
         <p className="sn-tegel-titel">Snel, vindbaar, gebouwd door ons team.</p>
         <p className="sn-tegel-tekst">Lighthouse op desktop, mediaan van drie metingen op 28 september 2026.</p>
+      </Tegel>
+      {/* 5 oktober 2026 (Marinus): "en van Hajenius van het huis". Het pand aan het Rokin als wireframe dat oplicht, uit
+          01-KLANTEN/hajenius/02_WERK/SocialNow.Hajenius (gevel-wireframe-reveal-header), 1280 px zonder geluid. */}
+      <Tegel kop="Hajenius" breed={6} soort="foto" className="h-bereikt-hajenius">
+        <BentoFilm src="/video/hajenius/hajenius-pand.mp4" poster="/video/hajenius/hajenius-pand-poster.webp" label="Hajenius: het pand aan het Rokin als wireframe" geluid={false} />
+        <span className="h-foto-onderschrift">
+          <b>Een eigen OS voor een Amsterdams icoon.</b>
+          <span>Het pand aan het Rokin, opnieuw getekend.</span>
+        </span>
       </Tegel>
       <Tegel kop="VASTIQ" breed={6} soort="foto" className="h-bereikt-vastiq">
         {/* 30 september 2026 (Marinus): "bij VASTIQ wil ik graag de animatievideo zien", de headerfilm van vastiq.ai opnieuw
@@ -215,7 +230,7 @@ export default function Bereikt() {
           <span>Samen met Komen Consultancy gebouwd.</span>
         </span>
       </Tegel>
-      <Tegel kop="Jij bent de volgende" breed={6} soort="groen" className="h-bereikt-jij">
+      <Tegel kop="Jij bent de volgende" breed={12} soort="groen" className="h-bereikt-jij">
         <p className="sn-tegel-titel">Wat zij bereikten, begint voor jou met tien vragen.</p>
         <p className="sn-tegel-tekst">Start een nieuw bedrijf of koppel je bestaande. Gratis te gebruiken, met ons team erachter.</p>
         <div className="sn-tegel-onder">

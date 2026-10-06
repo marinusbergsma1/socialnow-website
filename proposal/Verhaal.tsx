@@ -29,7 +29,7 @@ export function OdooLogo({ className }: { className?: string }) {
   );
 }
 
-type Hoofdstuk = { wanneer: string; titel: string; tekst: string; breed: 3 | 4 | 6; soort?: "vlak" | "roze"; beeld?: React.ReactNode };
+type Hoofdstuk = { wanneer: string; titel: string; tekst: string; breed: 3 | 4 | 6; soort?: "vlak" | "roze"; beeld?: React.ReactNode; linkedin?: { naam: string; url: string } };
 
 const HOOFDSTUKKEN: Hoofdstuk[] = [
   {
@@ -78,7 +78,7 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     titel: "Toen AI beelden kon maken, gooide ik mijn plan om.",
     tekst: "Ik verdiepte me in AI en development. Het persoonlijke bleef de kern.",
     breed: 3,
-    soort: "roze",
+    // 5 oktober 2026 (Marinus): "Deze tile gwn zwart houden." Niet meer roze; het zwarte vlak van Milo valt dan weg.
     beeld: <CharacterAccent kind="coder" />,
   },
   {
@@ -88,9 +88,12 @@ const HOOFDSTUKKEN: Hoofdstuk[] = [
     titel: "Met Steef Komen zetten we VASTIQ op.",
     tekst: "Een waarderingsplatform voor vastgoed, van data tot merk. Steef is mijn accountant, Odoo-expert en datascientist. Vanuit VASTIQ ontstond SocialNow OS.",
     breed: 3,
+    // 5 oktober 2026 (Marinus): "Hier mag nog wel Linkedin naar Steef Komen bij plus de oude video met dat huis dan heb je
+    // ze alle 2." De oude inzoomfilm naar het grachtenpand (vastiq-zoom-v2, d61836d) hier; de uitzoomfilm staat bij Bereikt.
+    linkedin: { naam: "Steef Komen", url: "https://www.linkedin.com/in/steef-komen-60632236/" },
     beeld: (
       <span className="h-hoofdstuk-vastiq">
-        <img src="/images/cases/vastiq-waarde-640.webp" alt="VASTIQ: waardebepaling van een grachtenpand" width="640" height="360" loading="lazy" decoding="async" />
+        <BentoFilm src="/video/vastiq/vastiq-inzoom.mp4" poster="/video/vastiq/vastiq-inzoom-poster.webp" label="VASTIQ: inzoomen op een grachtenpand met zijn waarde" geluid={false} />
       </span>
     ),
   },
@@ -141,7 +144,8 @@ export default function Verhaal() {
       >
         <Tegel kop="Marinus Bergsma" breed={4} soort="foto" className="h-verhaal-portret">
           <img src="/images/marinus-profiel-blauw.webp" alt="Marinus Bergsma, oprichter van SocialNow" width="640" height="680" loading="lazy" />
-          <span className="h-verhaal-jaren"><b>5</b>jaar in november</span>
+          {/* 5 oktober 2026 (Marinus): "Ik ben verder ook geen 5 jaar in November maar SocialNow." */}
+          <span className="h-verhaal-jaren"><b>5</b>jaar SocialNow in november</span>
         </Tegel>
         {film ? (
           <Tegel kop="Mijn verhaal in één minuut" breed={8} soort="film">
@@ -166,6 +170,11 @@ export default function Verhaal() {
           <Tegel key={hoofdstuk.titel} kop={hoofdstuk.wanneer} breed={hoofdstuk.breed} soort={hoofdstuk.soort ?? "vlak"} className="h-hoofdstuk">
             <h3 className="sn-tegel-titel">{hoofdstuk.titel}</h3>
             <p className="sn-tegel-tekst">{hoofdstuk.tekst}</p>
+            {hoofdstuk.linkedin && (
+              <a className="h-hoofdstuk-linkedin" href={hoofdstuk.linkedin.url} target="_blank" rel="noopener" translate="no">
+                <span className="h-bouwer-in" aria-hidden="true">in</span>{hoofdstuk.linkedin.naam}
+              </a>
+            )}
             {hoofdstuk.beeld && <div className="h-hoofdstuk-beeld">{hoofdstuk.beeld}</div>}
           </Tegel>
         ))}

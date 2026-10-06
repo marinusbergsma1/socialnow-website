@@ -12,7 +12,7 @@ import { klein } from "./licht";
 // hieronder (VacaturesBento). Opgebouwd met de gedeelde tegeltaal uit Bento.tsx.
 
 const LAGEN = [
-  { soort: "is-ai", label: "AI", titel: "Doet het werk", tekst: "Website, content, advertenties en je CRM. Dag en nacht." },
+  { soort: "is-ai", label: "AI", titel: "Doet het werk", tekst: "Website, content, advertenties en je CRM. Dag en nacht. De AI die je al gebruikt, koppel je er gewoon aan." },
   { soort: "is-mens", label: "Mensen", titel: "De verbindende laag", tekst: "Ons team denkt mee en staat altijd voor je klaar." },
   { soort: "is-jij", label: "Jij", titel: "Houdt de regie", tekst: "Niets gaat live zonder jouw akkoord." },
 ];
@@ -49,6 +49,17 @@ export default function MensEnAI() {
                 <b>{laag.titel}</b>
                 <span>{laag.tekst}</span>
               </span>
+              {/* 5 oktober 2026 (Marinus): "Hier moet nog duidelijk die verbinding tussen ook alle AI's die ze al gebruiken."
+                  Zonder modelnamen (vaste regel voor sitecopy): de assistent, editor en app die je al hebt, via één connector. */}
+              {laag.soort === "is-ai" && (
+                <span className="h-mens-ai-koppel">
+                  <span>Jouw AI-assistent</span>
+                  <span>Jouw code-editor</span>
+                  <span>Jouw AI-app</span>
+                  <i aria-hidden="true" />
+                  <b translate="no">SocialNow OS · connector</b>
+                </span>
+              )}
               {laag.soort === "is-mens" && (
                 <span className="h-mens-gezichten" aria-hidden="true">
                   {gezichten.map((p) => (

@@ -13,7 +13,10 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
-const TALEN = ["en", "de", "fr"];
+// 5 oktober 2026: tien talen. Een woordenboek dat nog ontbreekt of (nog) geen geldige JSON is, telt als leeg;
+// zijn zinnen vallen dan terug op het Engels, net als in translate().
+const TALEN = ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"];
+const TAALPATROON = TALEN.join("|");
 const KERN = "\0sn-woordenboek-kern-";
 const REST = "\0sn-woordenboek-rest-";
 const plek = (soort, taal) => `__SN_WOORDENBOEK_${soort}_${taal}__`;
@@ -62,7 +65,7 @@ export default function woordenboekSplit({ verslag } = {}) {
     resolveId(bron, importer) {
       // ./en.json is de kern van het Engels, ./xx.json?kern en ./xx.json?rest de delen van elke taal. Een gewone
       // ./de.json (bijvoorbeeld via import.meta.glob) blijft het hele woordenboek.
-      const m = bron.match(/^\.\/(en|de|fr)\.json(?:\?(kern|rest))?$/);
+      const m = bron.match(new RegExp(`^\\./(${TAALPATROON})\\.json(?:\\?(kern|rest))?$`));
       if (!m || !importer || path.dirname(importer.split("?")[0]) !== map) return null;
       if (m[2] === "rest") return REST + m[1];
       if (m[2] === "kern" || m[1] === "en") return KERN + m[1];
@@ -85,7 +88,9 @@ export default function woordenboekSplit({ verslag } = {}) {
       const boeken = Object.fromEntries(TALEN.map((t) => {
         const bestand = path.join(map, `${t}.json`);
         this.addWatchFile(bestand);
-        return [t, JSON.parse(readFileSync(bestand, "utf8"))];
+        let boek = {};
+        try { boek = JSON.parse(readFileSync(bestand, "utf8")); } catch { this.warn(`woordenboek ${t}.json ontbreekt of is geen geldige JSON; terugval op het Engels`); }
+        return [t, boek];
       }));
       const ids = [...this.getModuleIds()];
       // Statische sluiting vanaf elk entrypunt: dit draait voordat er iets later laadt.
@@ -136,7 +141,7 @@ export default function woordenboekSplit({ verslag } = {}) {
     },
     renderChunk(code) {
       if (!code.includes("__SN_WOORDENBOEK_")) return null;
-      const nieuw = code.replace(/(["'`])(__SN_WOORDENBOEK_(?:KERN|REST)_(?:en|de|fr)__)\1/g, (_, _q, naam) => {
+      const nieuw = code.replace(new RegExp(`(["'\`])(__SN_WOORDENBOEK_(?:KERN|REST)_(?:${TAALPATROON})__)\\1`, "g"),(_, _q, naam) => {
         if (!inhoud[naam]) this.error(`woordenboek ${naam} ontbreekt`);
         return JSON.stringify(JSON.stringify(inhoud[naam]));
       });

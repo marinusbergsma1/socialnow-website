@@ -21,7 +21,7 @@ import { MiloMotion, miloPoster } from "./motion";
 import { klein, useDichtbij, useNaBeeld } from "./licht";
 import CharacterAccent from "./CharacterAccent";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
-import TeamTrust, { TeamJoin } from "./TeamTrust";
+import TeamTrust, { INTEGRATIES, TeamJoin } from "./TeamTrust";
 const Verhaal = later(() => import("./Verhaal").then((m) => m.default));
 import { Bento, Tegel } from "./Bento";
 import "./bereikt.css";
@@ -42,6 +42,7 @@ const VacaturesBento = later(() => import("./VacaturesBento").then((m) => m.defa
 const VeiligheidBlok = later(() => import("./Veiligheid").then((m) => m.default));
 const TrustStories = later(() => import("./TrustStories").then((m) => m.default));
 import BrandGlobe from "./BrandGlobe";
+import WereldKaart from "./WereldKaart";
 import OsEntry, { CLAIM_URL, OsDock, REVIEWS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
 import {
@@ -223,6 +224,14 @@ function useTaalfase(getoond: string) {
 
 // 5 oktober 2026 (Marinus): "Even goeie Linkbuilding opzetten ook naar Rabobank en ADYEN etc." Elk merk linkt naar de eigen
 // site, met rel="noopener" zonder noreferrer, zodat de partner socialnow.nl als verwijzer ziet.
+// 5 oktober 2026: wie uit het team achter elk onderdeel van het OS staat (zie ook FUNCTIES in TeamTrust.tsx).
+const OS_MENSEN: Record<string, string[]> = {
+  website: ["Sid van Kalken", "Antony Soosaipillaj"],
+  crm: ["Steef Komen", "Michelle Yang"],
+  content: ["Carmel Boon", "Sam van der Sluis", "Emma Peperkamp"],
+  ads: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"],
+};
+
 const TALKING_TO: [naam: string, url: string, logo: string, breed: number, hoog: number][] = [
   ["Visa", "https://www.visa.nl", "/images/partners/betalen/visa.svg", 24, 8],
   ["Mastercard", "https://www.mastercard.nl", "/images/partners/betalen/mastercard.svg", 152, 94],
@@ -257,7 +266,7 @@ export function Home() {
               en logo's". De login staat direct onder de kop; Odoo, Salesforce, Attesso, statement en demo volgen. */}
           <div className="h-knoppen">
             <div className="os-entry">
-              <OsDock />
+              <OsDock held />
             </div>
           </div>
           {/* 30 september 2026 (Marinus): header 4C, overzichtelijker. Odoo, Salesforce en de betaalpartner op twee regels. */}
@@ -274,13 +283,22 @@ export function Home() {
               <a className="h-aftermovie" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener">&#9654; Watch the aftermovie</a>
             </p>
             <p className="h-integratie-rij is-klein">
-              <span className="h-integratie-sf">NEXT STEP <a href="https://www.salesforce.com" target="_blank" rel="noopener"><img src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" /></a></span>
-              <i aria-hidden="true" />
               <span className="h-attesso">PAYMENT PARTNER <a href="https://attesso.com" target="_blank" rel="noopener"><code>~/attesso</code></a></span>
               {/* 5 oktober 2026 (Marinus): "Hier moet ook nog het bedrijf van Steven bij." Fincer heeft geen eigen website, dus de
                   naam linkt naar Steven op LinkedIn. Als tekst, net als ~/attesso: het Fincer-logo klopt volgens Marinus nog niet. */}
               <i aria-hidden="true" />
               <span className="h-fincer">WEALTH PARTNER <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener" aria-label="Fincer, Steven Goudsblom on LinkedIn"><code>Fincer</code></a></span>
+            </p>
+            {/* 5 oktober 2026 (Marinus): "Next step en dan alle ERP's en Next talks wil ik graag en dan die logobalk." NEXT STEP
+                toont de vijf ERP- en CRM-systemen uit Currently building (niet alleen Salesforce), als kleine witte chips met
+                een link; daaronder heet de witte logobalk NEXT TALKS. */}
+            <p className="h-integratie-rij is-klein h-next-step">
+              <span className="h-next-label">NEXT STEP</span>
+              <span className="h-next-erps">
+                {INTEGRATIES.map((systeem) => (
+                  <a key={systeem.naam} href={systeem.url} target="_blank" rel="noopener"><img src={systeem.src} alt={systeem.naam} style={{ height: Math.round(systeem.hoog * 0.75) }} /></a>
+                ))}
+              </span>
             </p>
             {/* 1 oktober 2026 (Marinus): "Vanuit de video staan de logo's waar mijn partners van Attesso mee in gesprek gaan.
                 Die mogen ook op de site.", "laat deze balk Primefone, DIVEINE, KWH weg" en "Dan kunnen er meer logo's onder
@@ -290,7 +308,7 @@ export function Home() {
                 er twee keer in en de lus schuift precies één rij op, dus de naad is niet te zien. De kopie is voor schermlezers
                 en toetsenbord verborgen. */}
             <div className="h-talking">
-              <span className="h-talking-label">TALKING TO</span>
+              <span className="h-talking-label">NEXT TALKS</span>
               <div className="h-talking-strook">
                 <div className="h-talking-lus">
                   {[false, true].map(kopie => (
@@ -319,7 +337,7 @@ export function Home() {
               {/* 30 september 2026 (Marinus): "Dit is helemaal niet in deze stijl, LOS DAT OP", met versie R1 als voorbeeld:
                   alle regels even groot, per regel eerst dun en dan dik, het groene deel dik, de punt wit. */}
               <p className="h-sr"><span className="d">Proven, branded,</span> <b>fully automated!</b></p>
-              <p className="h-sr"><span className="d">Everyone can automate a business.</span> <b className="g">NO ONE CAN AUTOMATE PEOPLE WHO CARE</b><b>.</b></p>
+              <p className="h-sr"><span className="d">Everyone can automate a business.</span> <b className="g">No one can automate people who care</b><b>.</b></p>
               <p className="h-sr"><span className="d">Software is a tool.</span> <b>We are SocialNow!</b></p>
             </div>
             <div className="h-team-verhaal" translate="no">
@@ -349,6 +367,7 @@ export function Home() {
       <Bereikt />
       <NulNaarBedrijf />
       <Verhaal />
+      <WereldKaart />
       <Deuren />
       {/* 28 september 2026 (Marinus): "alle onderdelen als kleine bentogrids, net zoals de homepage wanneer je daarop landt". */}
       <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} swipe>
@@ -357,6 +376,17 @@ export function Home() {
             <MiloPortrait role={agent.id} name={agent.name} maat={256} />
             <strong className="h-os-belofte" style={{ color: agent.color }}>{agent.promise}</strong>
             <p className="sn-tegel-tekst">{agent.text}</p>
+            {/* 5 oktober 2026 (Marinus): "Hier mis ik de menselijke factor terwijl juist die combi zo sterk is." Bij elk
+                onderdeel de mensen uit het team die het doen, met hun naam. */}
+            <div className="h-os-mensen" translate="no">
+              <span className="h-os-mensen-fotos" aria-hidden="true">
+                {(OS_MENSEN[agent.id] ?? []).map((naam) => {
+                  const persoon = people.find((p) => p.name === naam);
+                  return persoon ? <img key={naam} {...klein(persoon.image, 32)} alt="" width="32" height="32" loading="lazy" /> : null;
+                })}
+              </span>
+              <span className="h-os-mensen-namen">Met {(OS_MENSEN[agent.id] ?? []).map((naam) => naam.split(" ")[0]).join(", ")}</span>
+            </div>
             <div className="sn-tegel-onder"><TextLink to={`/het-os#${agent.id}`}>Ontdek dit onderdeel</TextLink></div>
           </Tegel>
         ))}

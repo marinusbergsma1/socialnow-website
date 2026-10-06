@@ -4,6 +4,7 @@ import { CONTACT_MAIL, heeftWhatsApp, whatsappLink } from "./aanvragen";
 import { useLanguage } from "./i18n/context";
 import { OdooLogo } from "./Verhaal";
 import { Bento, Tegel } from "./Bento";
+import { INTEGRATIES } from "./TeamTrust";
 
 // 28 september 2026 (Marinus): "Bent u een Odoo-gebruiker en wilt u het ook proberen, dan kan dat hier. En bent u een
 // implementatiepartner die het gesprek aan wil gaan over wat die voor uw klanten kan betekenen, net als deze bedrijven die u
@@ -21,12 +22,6 @@ const PARTNERS = [
 ];
 
 const MAIL = `mailto:${CONTACT_MAIL}?subject=`;
-
-// 29 september 2026 (Marinus): "bij Salesforce stukje wel écht even hun logo ook." Het officiële logo (wolk met
-// woordmerk, bron Wikimedia Commons, Salesforce.com_logo.svg) in plaats van alleen de kale wolk.
-function SalesforceLogo() {
-  return <img className="h-deur-salesforce" src="/images/partners/salesforce.svg" alt="Salesforce" width="273" height="191" loading="lazy" />;
-}
 
 export default function Deuren() {
   const { t } = useLanguage();
@@ -72,12 +67,28 @@ export default function Deuren() {
           </a>
         </div>
       </Tegel>
-      <Tegel kop="Odoo" breed={4} className="h-deur-status is-live">
-        <span className="h-deur-merk" translate="no"><OdooLogo /><span>PRODUCT</span></span>
-        <b><i aria-hidden="true" />Live</b>
+      {/* 5 oktober 2026 (Marinus): "bij ODOO dat het volledig geintegreerd is en waarom wij voor ODOO kozen. Mooi Belgisch
+          product. Eerlijke waardepropositie voor beginnende ondernemers met de gratis website en het gratis boekhoudpakket."
+          en "Maar onze websitebouwer." De gratis boekhouding is Odoo; de gratis website komt uit onze eigen websitebouwer. */}
+      <Tegel kop="Odoo" breed={4} className="h-deur-status is-live h-deur-odoo">
+        <div className="h-deur-odoo-kop">
+          <span className="h-deur-merk" translate="no"><OdooLogo /><span>PRODUCT</span></span>
+          <b><i aria-hidden="true" />Volledig geïntegreerd</b>
+        </div>
+        <p className="sn-tegel-tekst">Waarom Odoo: een mooi Belgisch product met een eerlijke prijs voor wie net begint. De boekhouding is gratis in Odoo, de website gratis met onze eigen websitebouwer.</p>
       </Tegel>
-      <Tegel kop="Salesforce" breed={4} className="h-deur-status is-bouw">
-        <span className="h-deur-merk" translate="no"><SalesforceLogo /></span>
+      {/* 5 oktober 2026 (Marinus): "ERP market gewoon net als bij de header". Niet alleen Salesforce: de vijf grote
+          ERP- en CRM-systemen na Odoo, dezelfde rij als Currently building in de header, elk met een link. */}
+      {/* 5 oktober 2026 (Marinus): "Waarde van de totale ERP Markt. En ERP-MARKT INTEGRATION." Schattingen voor 2025 lopen
+          uiteen van 51 tot 93 miljard dollar (Wiseguy 51,2; IMARC 58,5; Grand View 77,1; Fortune Business Insights 92,6),
+          dus de site zegt "ruim 50 miljard dollar": dat klopt bij elke bron. */}
+      <Tegel kop="ERP-markt integration" breed={4} className="h-deur-status is-bouw h-deur-erp">
+        <p className="h-deur-erp-waarde"><b translate="no">$50+ mld</b><span>waarde van de wereldwijde ERP-markt (2025)</span></p>
+        <ul className="h-deur-erp-rij" translate="no">
+          {INTEGRATIES.map((systeem) => (
+            <li key={systeem.naam}><a href={systeem.url} target="_blank" rel="noopener"><img src={systeem.src} alt={systeem.naam} style={{ height: Math.round(systeem.hoog * 0.8) }} loading="lazy" /></a></li>
+          ))}
+        </ul>
         <b><i aria-hidden="true" />Nu in aanbouw</b>
       </Tegel>
       <Tegel kop="Zij melden zich al aan." breed={4} className="h-deur-logos">

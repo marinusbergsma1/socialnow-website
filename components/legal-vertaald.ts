@@ -1,6 +1,6 @@
 // 16 september 2026: de vertaalde voorwaarden en het vertaalde privacybeleid (de, fr, it, es).
 // Elk bestand legal-<taal>.ts exporteert { terms, privacy } in de vorm van LegalDoc uit legal.ts.
-// Ontbreekt een taal, dan toont LegalPage het Engels.
+// Ontbreekt een taal (sinds 5 oktober 2026 ook pt, pl, sv en da), dan toont LegalPage het Engels.
 import type { LegalDoc } from "./legal";
 import * as de from "./legal-de";
 import * as fr from "./legal-fr";

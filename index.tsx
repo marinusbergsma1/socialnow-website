@@ -6,6 +6,9 @@ import App from "./proposal/WebsiteProposal";
 import { isLanguage, laadWoordenboek, type Language } from "./proposal/i18n/context";
 import "./proposal/website.css";
 import "./proposal/experience.css";
+// Concept zakelijk (5 oktober 2026): als laatste, zodat de overrides winnen.
+import "./proposal/concept.css";
+import "./proposal/concept-tech.css";
 import { detectVisitorLanguage, needsCountryLookup } from "./proposal/i18n/detect";
 
 const rootElement = document.getElementById("root");

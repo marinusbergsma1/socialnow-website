@@ -1987,6 +1987,10 @@ html {
 .sn-site .h-language-menu a:hover { background: #ffffff10; color: #fff; }
 .sn-site .h-language-menu a[aria-current="true"] { color: #7ff2be; }
 .sn-site .h-language-menu a[aria-current="true"] small { color: #7ff2be; }
+/* 5 oktober 2026: tien talen. Twee kolommen naast elkaar, zodat het menu niet onder de vouw doorloopt; op een
+   smal scherm één kolom met een eigen schuifbalk binnen de hoogte van het scherm. */
+.sn-site .h-language-menu:not([hidden]) { display: grid; grid-template-columns: repeat(2, minmax(150px, 1fr)); gap: 2px 4px; min-width: 320px; max-height: calc(100vh - 96px); max-height: calc(100dvh - 96px); overflow-y: auto; overscroll-behavior: contain; }
+@media (max-width: 560px) { .sn-site .h-language-menu:not([hidden]) { grid-template-columns: 1fr; min-width: 168px; } }
 @media (max-width: 900px) { .sn-site .h-language-current span { display: none; } .sn-site .h-language-current { padding: 0 8px; } }
 .sn-site .h-language-switch > span { color: #454545; }
 .sn-site .h-showcase-films { padding-top: 70px; padding-bottom: 20px; }

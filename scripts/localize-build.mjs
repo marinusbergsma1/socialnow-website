@@ -1,11 +1,13 @@
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
-// 16 september 2026: zes talen, sinds 26 september 2026 nog vier. Nederlands is de bron (sleutels),
-// de andere drie zijn woordenboeken. Elke route wordt vier keer geschreven: / (Engels), /nl, /de en
-// /fr, met canonical, og:locale en hreflang voor alle vier.
-const LANGUAGES=['en','nl','de','fr'];
-const LOCALES={en:'en_GB',nl:'nl_NL',de:'de_DE',fr:'fr_FR'};
+// 16 september 2026: zes talen, op 26 september 2026 nog vier, sinds 5 oktober 2026 tien. Nederlands is
+// de bron (sleutels), de andere negen zijn woordenboeken. Elke route wordt tien keer geschreven: / (Engels),
+// /nl, /de, /fr, /es, /it, /pt, /pl, /sv en /da, met canonical, og:locale en hreflang voor alle tien.
+// Een woordenboek dat nog ontbreekt of geen geldige JSON is, telt als leeg: die taal valt terug op het Engels.
+const LANGUAGES=['en','nl','de','fr','es','it','pt','pl','sv','da'];
+const LOCALES={en:'en_GB',nl:'nl_NL',de:'de_DE',fr:'fr_FR',es:'es_ES',it:'it_IT',pt:'pt_PT',pl:'pl_PL',sv:'sv_SE',da:'da_DK'};
 const prefix=l=>l==='en'?'':`/${l}`;
-const dictionaries=Object.fromEntries(LANGUAGES.filter(l=>l!=='nl').map(l=>[l,JSON.parse(readFileSync(`proposal/i18n/${l}.json`,'utf8'))]));
+const leesWoordenboek=l=>{try{return JSON.parse(readFileSync(`proposal/i18n/${l}.json`,'utf8'));}catch{console.warn(`[languages] proposal/i18n/${l}.json ontbreekt of is ongeldig; terugval op het Engels`);return {};}};
+const dictionaries=Object.fromEntries(LANGUAGES.filter(l=>l!=='nl').map(l=>[l,leesWoordenboek(l)]));
 const t=(value,language)=>{const key=value.replace(/\s+/g,' ').trim();return dictionaries[language][key] ?? dictionaries.en[key] ?? value;};
 const BASE='https://socialnow.nl';
 const sitemap=readFileSync('dist/sitemap.xml','utf8');
@@ -56,13 +58,6 @@ for(const route of paths){
   const folder=`dist${prefix(language)}${route==='/'?'':route}`;
   mkdirSync(folder,{recursive:true});writeFileSync(`${folder}/index.html`,output);
  }
-}
-// Italiaans en Spaans zijn eraf. Oude links naar /it en /es gaan door naar dezelfde pagina in het Engels.
-for(const oud of ['it','es'])for(const route of paths){
- const doel=`${BASE}${route}`;
- const folder=`dist/${oud}${route==='/'?'':route}`;
- mkdirSync(folder,{recursive:true});
- writeFileSync(`${folder}/index.html`,`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="canonical" href="${doel}"><meta http-equiv="refresh" content="0; url=${route}"><script>location.replace(${JSON.stringify(route)}+location.search+location.hash)</script></head><body><a href="${route}">SocialNow</a></body></html>`);
 }
 writeFileSync('dist/404.html',readFileSync('dist/index.html'));
 writeFileSync('dist/sitemap.xml',sitemap.replace('</urlset>',LANGUAGES.filter(l=>l!=='en').flatMap(l=>paths.map(route=>`<url><loc>${BASE}${prefix(l)}${route}</loc></url>`)).join('\n')+'\n</urlset>'));

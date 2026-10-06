@@ -1,8 +1,9 @@
 import React, { useEffect, useId, useState } from "react";
 import { ArrowRight, ArrowUpRight, Download, Star } from "lucide-react";
 import { useLanguage } from "./i18n/context";
+import { mailLink } from "./aanvragen";
 
-const taalPad = typeof window === "undefined" ? "" : (window.location.pathname.match(/^\/(nl|de|fr)(?=\/|$)/)?.[0] || "");
+const taalPad = typeof window === "undefined" ? "" : (window.location.pathname.match(/^\/(nl|de|fr|es|it|pt|pl|sv|da)(?=\/|$)/)?.[0] || "");
 export const CLAIM_URL = `${taalPad}/gratis-os-demo/`;
 // 28 september 2026 (Marinus, het verhaal): "Gebruik je Odoo? Probeer het OS gratis." gaat rechtstreeks naar de login.
 export const GRATIS_OS_URL = "https://app.socialnow.nl/login/";
@@ -85,7 +86,9 @@ function AndroidLogo() {
 
 // 28 september 2026 (Marinus): "Install on Mac" leest niet als downloaden. Eén knop Download met het icoon links,
 // daarnaast kleine rondjes voor alle vier de systemen. De knop geeft de uitleg voor dit apparaat, een rondje voor dat systeem.
-export function InstallKnop({ dock = false }: { dock?: boolean }) {
+// 5 oktober 2026 (Marinus, hero optie 2): compact = alleen iconen in een vierkant vak, met het label DOWNLOAD ervoor en de
+// naam van het systeem als klein label bij hover of focus. De knoppen doen hetzelfde als in de dock: uitleg plus de link.
+export function InstallKnop({ dock = false, compact = false }: { dock?: boolean; compact?: boolean }) {
   const { t } = useLanguage();
   const [open, setOpen] = useState<string | null>(null);
   const [hint, setHint] = useState("");
@@ -97,10 +100,10 @@ export function InstallKnop({ dock = false }: { dock?: boolean }) {
   };
   const eigen = () => kies("eigen", installationHint(navigator.userAgent, navigator.platform, navigator.maxTouchPoints));
   const systemen = [
-    { sleutel: "Download voor Mac", icoon: <AppleLogo />, hint: HINT_MAC },
-    { sleutel: "Download voor iPhone en iPad", icoon: <svg className="os-install-telefoon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="6.5" y="2" width="11" height="20" rx="2.6" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M10.5 18.5h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>, hint: HINT_IPHONE },
-    { sleutel: "Download voor Windows", icoon: <WindowsLogo />, hint: HINT_ALGEMEEN },
-    { sleutel: "Download voor Android", icoon: <AndroidLogo />, hint: HINT_ALGEMEEN },
+    { sleutel: "Download voor Mac", naam: "Mac", icoon: <AppleLogo />, hint: HINT_MAC },
+    { sleutel: "Download voor iPhone en iPad", naam: "iPhone", icoon: <svg className="os-install-telefoon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="6.5" y="2" width="11" height="20" rx="2.6" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M10.5 18.5h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>, hint: HINT_IPHONE },
+    { sleutel: "Download voor Windows", naam: "Windows", icoon: <WindowsLogo />, hint: HINT_ALGEMEEN },
+    { sleutel: "Download voor Android", naam: "Android", icoon: <AndroidLogo />, hint: HINT_ALGEMEEN },
   ];
   // 30 september 2026 (Marinus): "Kan het switchen van het ene naar het andere met een smooth animatie gaan?" Eén vlak
   // schuift soepel naar de knop onder de muis of de toetsenbordfocus; zonder muis blijft het op het gekozen systeem staan.
@@ -112,8 +115,9 @@ export function InstallKnop({ dock = false }: { dock?: boolean }) {
   const [maat, setMaat] = useState({ x: 0, w: 0 });
   const [direct, setDirect] = useState(true);
   const vorige = React.useRef<number | null>(null);
+  const schuift = dock && !compact;
   React.useLayoutEffect(() => {
-    if (!dock) return;
+    if (!schuift) return;
     const meet = () => {
       const knop = doel === null ? undefined : (rijRef.current?.children[doel] as HTMLElement | undefined);
       if (knop) setMaat({ x: knop.offsetLeft, w: knop.offsetWidth });
@@ -126,11 +130,13 @@ export function InstallKnop({ dock = false }: { dock?: boolean }) {
     if (uitHetNiets && doel !== null) frame = requestAnimationFrame(() => requestAnimationFrame(() => setDirect(false)));
     window.addEventListener("resize", meet);
     return () => { cancelAnimationFrame(frame); window.removeEventListener("resize", meet); };
-  }, [doel, dock]);
+  }, [doel, schuift]);
   return (
     <>
-      <span className={dock ? "h-dock-bottom" : "h-download"}>
-        {dock && <span className="h-dock-label">{t("Download voor")}</span>}
+      <span className={dock ? `h-dock-bottom${compact ? " is-compact" : ""}` : "h-download"}>
+        {dock && (compact
+          ? <span className="h-dock-label" translate="no">DOWNLOAD</span>
+          : <span className="h-dock-label">{t("Download voor")}</span>)}
         {!dock && <button type="button" className="os-install sn-btn3d h-button h-button-secondary h-install-knop" onClick={eigen} aria-expanded={open === "eigen"} aria-controls={helpId}>
           <span className="sn-btn3d-sheen" />
           <Download size={19} aria-hidden="true" className="h-download-icoon" />
@@ -139,15 +145,21 @@ export function InstallKnop({ dock = false }: { dock?: boolean }) {
         <span
           ref={rijRef}
           className={dock ? "h-dock-platforms" : "h-install-andere"}
-          onPointerLeave={dock ? () => setZweef(null) : undefined}
-          onBlur={dock ? (e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setZweef(null); } : undefined}
+          onPointerLeave={schuift ? () => setZweef(null) : undefined}
+          onBlur={schuift ? (e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setZweef(null); } : undefined}
         >
           {systemen.map((p, i) => (
+            compact ? (
+              <button key={p.sleutel} type="button" className="h-dock-platform h-dock-icoon" onClick={() => kies(p.sleutel, p.hint)} aria-expanded={open === p.sleutel} aria-controls={helpId} aria-label={p.sleutel}>
+                {p.icoon}<span className="h-dock-tip" translate="no" aria-hidden="true">{p.naam}</span>
+              </button>
+            ) : (
             <button key={p.sleutel} type="button" className={dock ? "h-dock-platform" : "h-install-icoon"} onClick={() => kies(p.sleutel, p.hint)} onPointerEnter={dock ? () => setZweef(i) : undefined} onFocus={dock ? () => setZweef(i) : undefined} aria-expanded={open === p.sleutel} aria-controls={helpId} aria-label={p.sleutel} title={p.sleutel}>
-              {p.icoon}{dock && <span translate="no">{p.sleutel.replace("Download voor ", "").replace(" en iPad", "")}</span>}
+              {p.icoon}{dock && <span translate="no">{p.naam}</span>}
             </button>
+            )
           ))}
-          {dock && <span className={`h-dock-schuif${direct ? " is-direct" : ""}`} aria-hidden="true" style={{ "--x": `${maat.x}px`, "--w": `${maat.w}px`, opacity: doel === null ? 0 : 1 } as React.CSSProperties} />}
+          {schuift && <span className={`h-dock-schuif${direct ? " is-direct" : ""}`} aria-hidden="true" style={{ "--x": `${maat.x}px`, "--w": `${maat.w}px`, opacity: doel === null ? 0 : 1 } as React.CSSProperties} />}
         </span>
       </span>
       <div className="install-help h-install-hulp" id={helpId} hidden={!open}>
@@ -168,13 +180,27 @@ function WindowsLogo() {
   );
 }
 
-export function OsDock() {
+// 5 oktober 2026 (Marinus koos hero optie 2): in de hero staat naast de login een omlijnde knop voor een live demo
+// (dezelfde mail als "Book a free live demo" bij de sprekers), en de downloads zijn vier vierkante iconen eronder.
+export const LIVE_DEMO_URL = mailLink("Free end to end demo with Marinus and Sid");
+export function OsDock({ held = false }: { held?: boolean }) {
   const { t } = useLanguage();
-  return <div className="h-os-dock">
+  const login = (
     <a className="h-dock-login" href={GRATIS_OS_URL}>
       <span>{t("Log in op je gratis OS")}</span>
       <span className="h-dock-arrow"><ArrowUpRight size={24} aria-hidden="true" /></span>
     </a>
+  );
+  if (held) return <div className="h-os-dock is-held">
+    <div className="h-dock-rij">
+      {login}
+      {/* 5 oktober 2026 (Marinus): "Plan een demo misschien beter, Plan a talk within your company oid." en "Plan a talk." */}
+      <a className="h-dock-demo" href={LIVE_DEMO_URL} translate="no">Plan a talk</a>
+    </div>
+    <InstallKnop dock compact />
+  </div>;
+  return <div className="h-os-dock">
+    {login}
     <InstallKnop dock />
   </div>;
 }
