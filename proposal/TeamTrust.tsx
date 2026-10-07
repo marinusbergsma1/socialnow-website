@@ -156,7 +156,6 @@ export function TeamJoin() {
       {BOARD.map(naam => <DuoTegel key={naam} naam={naam} />)}
     </div>
     <TeamPerFunctie />
-    <Integraties />
   </div>;
 }
 
@@ -186,7 +185,7 @@ function Bouwer({ naam, rol, linkedin, nieuw, children }: { naam: string; rol: s
   </div>;
 }
 
-function Integraties() {
+export function Integraties() {
   return <div className="h-integraties">
     <div className="h-integraties-kop"><b>Currently building</b><span>The big five, after Odoo</span></div>
     <ul className="h-integraties-rij">

@@ -380,9 +380,9 @@
 .sn-site .h-integraties-rij img { display: block; width: auto; height: 20px; }
 .sn-site .h-integraties-rij li.is-live { border-color: #25d366; }
 .sn-site .h-integraties-rij li.is-live small { color: #0cb457; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.sn-site .h-hero .h-integraties p { margin: 0 0 10px; color: #2b3330; font-size: 14.5px; font-weight: 500; line-height: 1.55; max-width: 62ch; }
-.sn-site .h-hero .h-integraties p strong { color: #0b0f12; font-weight: 700; }
-.sn-site .h-hero .h-integraties .h-integraties-belofte { margin: 0; color: #0b0f12; font-size: clamp(15px, 1.15vw, 17px); line-height: 1.4; }
+.sn-site .h-integraties p { margin: 0 0 10px; color: #2b3330; font-size: 14.5px; font-weight: 500; line-height: 1.55; max-width: 62ch; }
+.sn-site .h-integraties p strong { color: #0b0f12; font-weight: 700; }
+.sn-site .h-integraties .h-integraties-belofte { margin: 0; color: #0b0f12; font-size: clamp(15px, 1.15vw, 17px); line-height: 1.4; }
 .sn-site .h-integraties-belofte b { color: #0cb457; }
 .sn-site .h-bouwers { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
 .sn-site .h-bouwer { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 8px 12px 8px 8px; border-radius: 14px; background: #fff; border: 1px solid #0b0f1214; }
@@ -457,3 +457,6 @@
 @media (prefers-reduced-motion: reduce) { .sn-site .h-lagen-muur img { transition: none; } }
 
 .sn-site .h-duo.is-fincer .h-duo-merk img { width: auto; height: 20px; }
+
+/* Het ERP-blok volgt het persoonlijke verhaal, op dezelfde paginabreedte. */
+.sn-site .h-integraties-na-verhaal { padding-top: clamp(32px, 4vw, 56px); }

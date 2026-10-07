@@ -21,7 +21,7 @@ import { MiloMotion, miloPoster } from "./motion";
 import { klein, useDichtbij, useNaBeeld } from "./licht";
 import CharacterAccent from "./CharacterAccent";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
-import TeamTrust, { INTEGRATIES, TeamJoin } from "./TeamTrust";
+import TeamTrust, { INTEGRATIES, TeamJoin, Integraties } from "./TeamTrust";
 const Verhaal = later(() => import("./Verhaal").then((m) => m.default));
 import { Bento, Tegel } from "./Bento";
 import "./bereikt.css";
@@ -323,6 +323,9 @@ export function Home() {
       <Bereikt />
       <NulNaarBedrijf />
       <Verhaal />
+      <section className="h-wrap h-integraties-na-verhaal" aria-label="ERP-koppelingen en het team" translate="no">
+        <Integraties />
+      </section>
       <WereldKaart />
       {/* 28 september 2026 (Marinus): "alle onderdelen als kleine bentogrids, net zoals de homepage wanneer je daarop landt". */}
       <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} swipe>
