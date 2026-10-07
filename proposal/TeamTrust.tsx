@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { people } from "./content";
 import { klein } from "./licht";
 import LinkedInMark from "./LinkedInMark";
+import PartnerReferences from "./PartnerReferences";
 
 // Iedereen uit people, Marinus voorop; de rest in de volgorde van de muur.
 const voorop = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe", "Steven Goudsblom"];
@@ -79,6 +80,7 @@ function LaagTegel({ naam, laag }: { naam: string; laag: string }) {
     <figure><img {...klein(person.image, "(max-width: 900px) 25vw, 180px", [160, 320])} alt="" width="180" height="180" loading="lazy" /></figure>
     <span className={`h-laag${laag === "Partner" ? " is-partner" : ""}`}>{laag}</span>
     <span className="h-functie-naam"><span>{person.name} <LinkedInTeken person={person} /></span><i>{KORTE_ROL[naam] ?? person.role}</i></span>
+    <PartnerReferences personName={person.name} compact />
     <NaarPersoon person={person} />
   </div>;
 }
@@ -118,6 +120,7 @@ function TeamPerFunctie() {
         return <div key={naam}>
           <figure><img {...klein(person.image, "(max-width: 900px) 25vw, 120px", [96, 160])} alt="" width="120" height="120" loading="lazy" /></figure>
           <span className="h-functie-naam"><span>{person.name} <LinkedInTeken person={person} /></span><i>{KORTE_ROL[naam] ?? person.role}</i></span>
+          <PartnerReferences personName={person.name} compact />
           <NaarPersoon person={person} />
         </div>;
       })}
@@ -176,14 +179,14 @@ export const INTEGRATIES = [
 // echt doorlinken naar die grote websites."
 const extern = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-function Bouwer({ naam, rol, linkedin, nieuw, children }: { naam: string; rol: string; linkedin: string; nieuw?: boolean; children: React.ReactNode }) {
+function Bouwer({ naam, rol, linkedin, nieuw }: { naam: string; rol: string; linkedin: string; nieuw?: boolean }) {
   const person = people.find(p => p.name === naam);
   return <div className="h-bouwer">
     {person && <img className="h-bouwer-foto" {...klein(person.image, 40)} alt="" width="40" height="40" loading="lazy" />}
     <a className="h-bouwer-naam" href={linkedin} {...extern} aria-label={`${person?.name ?? naam} on LinkedIn`}>
       <strong>{person?.name ?? naam} <LinkedInMark />{nieuw && <span className="h-bouwer-nieuw">New partner</span>}</strong><i>{rol}</i>
     </a>
-    <span className="h-bouwer-merken">{children}</span>
+    <PartnerReferences personName={naam} />
   </div>;
 }
 
@@ -204,20 +207,9 @@ export function Integraties() {
 // De bedrijfsreferenties horen bij het team; ERP-koppelingen staan na het persoonlijke verhaal.
 export function Bedrijfsreferenties() {
   return <div className="h-bouwers" role="group" aria-label="Team track record">
-      <Bouwer naam="Tristan Slobbe" rol="Data & AI Engineer" linkedin="https://www.linkedin.com/in/tristan-slobben-105056159/">
-        <a href="https://www.klm.com" {...extern}><img src="/images/merken/klm.svg" alt="KLM" style={{ height: 14 }} loading="lazy" /></a>
-        <a href="https://www.bearingpoint.com" {...extern}><img src="/images/merken/bearingpoint.svg" alt="BearingPoint" style={{ height: 13 }} loading="lazy" /></a>
-      </Bouwer>
-      <Bouwer naam="Douwe Kramer" rol="Co-founder" linkedin="https://www.linkedin.com/in/douwekramer/">
-        <a className="h-bouwer-merk" href="https://bytechat.io" {...extern}><img src="/images/merken/bytechat.svg" alt="" style={{ height: 16 }} loading="lazy" /><span>Byte<em>Chat</em></span></a>
-        <a className="h-bouwer-merk" href="https://bytevision.io" {...extern}><img src="/images/merken/bytevision.png" alt="" style={{ height: 16 }} loading="lazy" />ByteVision</a>
-      </Bouwer>
-      {/* 5 oktober 2026 (Marinus): Steven Goudsblom (Fincer B.V.) komt erbij als partner voor vermogensbeheer, voor ons en
-          onze klanten. Klein het ABN AMRO-logo en zijn werkervaring, net als bij Tristan en Douwe: "Dus ABN AMRO dan FINCER."
-          Fincer verwijst naar het bevestigde profiel van Steven. */}
-      <Bouwer naam="Steven Goudsblom" rol="Founder · Wealth management" linkedin="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" nieuw>
-        <a href="https://www.abnamro.nl" {...extern}><img src="/images/merken/abn-amro.svg" alt="ABN AMRO" style={{ height: 15 }} loading="lazy" /></a>
-        <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" {...extern} aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer.png" alt="Fincer" style={{ height: 15 }} loading="lazy" /></a>
-      </Bouwer>
-    </div>;
+    <Bouwer naam="Marinus Bergsma" rol="Founder & CEO" linkedin="https://www.linkedin.com/in/marinus-bergsma-20b81a144/" />
+    <Bouwer naam="Tristan Slobbe" rol="Data & AI Engineer" linkedin="https://www.linkedin.com/in/tristan-slobben-105056159/" />
+    <Bouwer naam="Douwe Kramer" rol="Co-founder" linkedin="https://www.linkedin.com/in/douwekramer/" />
+    <Bouwer naam="Steven Goudsblom" rol="Founder · Wealth management" linkedin="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" nieuw />
+  </div>;
 }
