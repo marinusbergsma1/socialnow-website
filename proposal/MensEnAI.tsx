@@ -18,7 +18,7 @@ const LAGEN = [
 ];
 
 export default function MensEnAI() {
-  const gezichten = people.filter((p) => p.image).slice(0, 7);
+  const gezichten = people.filter((p) => p.image);
   return (
     <Bento
       id="mens-en-ai"
@@ -63,7 +63,7 @@ export default function MensEnAI() {
               {laag.soort === "is-mens" && (
                 <span className="h-mens-gezichten" aria-hidden="true">
                   {gezichten.map((p) => (
-                    <img key={p.name} {...klein(p.image, 36)} alt="" width="36" height="36" loading="lazy" />
+                    <img key={p.name} {...klein(p.image, 36)} title={p.name} alt="" width="36" height="36" loading="lazy" />
                   ))}
                 </span>
               )}

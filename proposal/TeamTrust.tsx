@@ -156,6 +156,7 @@ export function TeamJoin() {
       {BOARD.map(naam => <DuoTegel key={naam} naam={naam} />)}
     </div>
     <TeamPerFunctie />
+    <Bedrijfsreferenties />
   </div>;
 }
 
@@ -196,7 +197,12 @@ export function Integraties() {
     <p><strong>We believe AGI is about universal ERP connections.</strong> So as a business owner you have a choice. <strong>You are not guessing, you are choosing.</strong></p>
     <p>A free economy, where experts reach each other through one network. <strong>Like Fiverr, but for businesses</strong>, with their own or custom integrations.</p>
     <p className="h-integraties-belofte"><strong>One central platform.</strong> Your system, free or custom, <b>always stays yours.</b> Not only now, but forever.</p>
-    <div className="h-bouwers">
+  </div>;
+}
+
+// De bedrijfsreferenties horen bij het team; ERP-koppelingen staan na het persoonlijke verhaal.
+function Bedrijfsreferenties() {
+  return <div className="h-bouwers" role="group" aria-label="Team track record">
       <Bouwer naam="Tristan Slobbe" rol="Data & AI Engineer" linkedin="https://www.linkedin.com/in/tristan-slobben-105056159/">
         <a href="https://www.klm.com" {...extern}><img src="/images/merken/klm.svg" alt="KLM" style={{ height: 14 }} loading="lazy" /></a>
         <a href="https://www.bearingpoint.com" {...extern}><img src="/images/merken/bearingpoint.svg" alt="BearingPoint" style={{ height: 13 }} loading="lazy" /></a>
@@ -212,6 +218,5 @@ export function Integraties() {
         <a href="https://www.abnamro.nl" {...extern}><img src="/images/merken/abn-amro.svg" alt="ABN AMRO" style={{ height: 15 }} loading="lazy" /></a>
         <img src="/images/merken/fincer.png" alt="Fincer" style={{ height: 15 }} loading="lazy" />
       </Bouwer>
-    </div>
-  </div>;
+    </div>;
 }

@@ -450,7 +450,7 @@ export function TeamPage() {
         />
         <div className="h-teams-duo">
           <div className="h-team-duo is-socialnow">
-            <p className="h-team-duo-label" translate="no">SocialNow</p>
+            <p className="h-team-duo-label" translate="no"><img src="/images/klein/SocialNow-Logo-2026-400.webp" alt="SocialNow" width="200" height="31" loading="lazy" /></p>
             <TeamGrid members={socialnow} expert={false} />
           </div>
           <div className="h-team-duo is-attesso">
@@ -458,7 +458,7 @@ export function TeamPage() {
             <TeamGrid members={attesso} expert={false} />
           </div>
           <div className="h-team-duo is-fincer">
-            <p className="h-team-duo-label" translate="no">Fincer</p>
+            <p className="h-team-duo-label" translate="no"><img src="/images/merken/fincer.png" alt="Fincer" width="150" height="38" loading="lazy" /></p>
             <TeamGrid members={fincer} expert={false} />
           </div>
         </div>
