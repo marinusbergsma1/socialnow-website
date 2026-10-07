@@ -461,7 +461,7 @@ export function TeamPage() {
             <TeamGrid members={attesso} />
           </div>
           <div className="h-team-duo is-fincer">
-            <p className="h-team-duo-label" translate="no"><a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener noreferrer" aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer.png" alt="Fincer" width="150" height="38" loading="lazy" /></a></p>
+            <p className="h-team-duo-label" translate="no"><a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener noreferrer" aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer-wit.png" alt="Fincer" width="150" height="38" loading="lazy" /></a></p>
             <TeamGrid members={fincer} />
           </div>
         </div>
