@@ -16,8 +16,8 @@
 .sn-site .h-mens-lagen .is-jij .h-mens-laag-label { color: #f7e644; }
 .sn-site .h-mens-lagen .is-mens { border-color: #1f5a3a; background: radial-gradient(120% 140% at 0% 0%, rgba(37,211,102,.16), transparent 62%), #07110c; }
 .sn-site .h-mens-lagen .is-mens .h-mens-laag-label { color: #76e7a2; }
-.sn-site .h-mens-gezichten { grid-column: 2; display: flex; margin-top: 4px; }
-.sn-site .h-mens-gezichten img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #07110c; margin-left: -8px; background: #141414; }
+.sn-site .h-mens-gezichten { grid-column: 2; display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.sn-site .h-mens-gezichten img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #07110c; margin-left: 0; background: #141414; }
 .sn-site .h-mens-gezichten img:first-child { margin-left: 0; border-color: #25d366; }
 
 .sn-site .h-mens-belofte { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px 40px; align-items: end; }

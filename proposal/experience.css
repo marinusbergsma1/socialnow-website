@@ -3012,9 +3012,12 @@ html {
 .sn-site .h-sterke-teams .h-footnote { max-width: 760px; margin-top: clamp(22px, 2.4vw, 32px); }
 @media (max-width: 900px) { .sn-site .h-teams-duo { grid-template-columns: 1fr; } }
 
-/* 6 oktober 2026: Fincer als eigen blauwe tegel, SocialNow groen. */
+/* 7 oktober 2026: lichte partnerkaarten met de normale merken. */
 .sn-site .h-team-duo.is-socialnow,
-.sn-site .h-team-duo.is-fincer { padding: 18px; border: 2px solid #0cb457; border-radius: 22px; background: linear-gradient(160deg, #0cb457, #086c36); color: #fff; }
-.sn-site .h-team-duo.is-socialnow .h-team-duo-label,
-.sn-site .h-team-duo.is-fincer .h-team-duo-label { color: #fff; }
-.sn-site .h-team-duo.is-fincer { border-color: #4289e8; background: linear-gradient(160deg, #2564bb, #102b58); }
+.sn-site .h-team-duo.is-attesso,
+.sn-site .h-team-duo.is-fincer { padding: 22px; border: 1px solid #dfe5e2; border-radius: 22px; background: #f7f9f8; color: #0b0f12; }
+.sn-site .h-team-duo .h-team-duo-label { height: 36px; color: #0b0f12; }
+.sn-site .h-team-duo .h-team-duo-label img { display: block; width: auto; height: 28px; max-width: 100%; object-fit: contain; }
+.sn-site .h-team-duo.is-attesso .h-team-duo-label code { color: #342d31; font-size: 22px; }
+.sn-site .h-team-duo .h-people-grid figcaption span { color: #4a5450; }
+.sn-site .h-team-duo .h-portrait { border-color: #dfe5e2; }
