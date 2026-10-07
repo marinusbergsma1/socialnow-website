@@ -9,6 +9,8 @@ import "./proposal/experience.css";
 // Concept zakelijk (5 oktober 2026): als laatste, zodat de overrides winnen.
 import "./proposal/concept.css";
 import "./proposal/concept-tech.css";
+import "./proposal/partner-colors.css";
+import "./proposal/language-menu.css";
 import { detectVisitorLanguage, needsCountryLookup } from "./proposal/i18n/detect";
 
 const rootElement = document.getElementById("root");

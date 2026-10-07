@@ -22,7 +22,7 @@ const eisen = [
   // 5 oktober 2026 (Marinus): "Graag voor Antony deze foto." en "En voor Youri deze." (WhatsApp-foto's, vierkant bijgesneden)
   ["nieuwe foto Antony", hash("public/images/Antony-Soosaipillaj.webp") === "7b0990386a4143a6"],
   ["nieuwe foto Youri", hash("public/images/Youri-van-der-Donk.webp") === "bab0ebe5629e624a"],
-  ["op /team label New partner in plaats van System Expert", readFileSync("proposal/ui.tsx", "utf8").includes('person.role.startsWith("New partner") ? "New partner" : "System Expert"')],
+  ["op /team blijft de eigen rol zichtbaar, zonder System Expert-badge", readFileSync("proposal/ui.tsx", "utf8").includes('<span>{person.role}</span>') && !readFileSync("proposal/ui.tsx", "utf8").includes('"System Expert"')],
   ["bouwers twee bij twee", /\.h-bouwers \{[^}]*grid-template-columns: 1fr 1fr/.test(css)],
 ];
 let fout = 0;

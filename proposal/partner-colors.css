@@ -1,0 +1,230 @@
+/* Late partner overrides: import after the existing proposal styles. */
+.sn-site .h-duo,
+.sn-site .h-team-duo {
+  min-width: 0;
+  color: #17251d;
+}
+
+.sn-site .h-duo.is-sn,
+.sn-site .h-team-duo.is-socialnow {
+  background: #eef9f2;
+  border-color: #87cba3;
+}
+
+.sn-site .h-duo.is-attesso,
+.sn-site .h-team-duo.is-attesso {
+  background: #fcf0f7;
+  border-color: #dda5c3;
+}
+
+.sn-site .h-duo.is-fincer,
+.sn-site .h-team-duo.is-fincer {
+  background: #edf4fd;
+  border-color: #94b8e8;
+  color: #20364e;
+}
+
+.sn-site .h-duo.is-sn .h-duo-kop,
+.sn-site .h-duo.is-attesso .h-duo-kop,
+.sn-site .h-duo.is-fincer .h-duo-kop {
+  color: #17251d;
+  flex-wrap: wrap;
+}
+
+.sn-site .h-duo .h-duo-merk {
+  height: auto;
+  min-height: 26px;
+  max-width: 100%;
+}
+
+/* The light SocialNow wordmark needs a dark carrier on the mint card. */
+.sn-site .h-duo.is-sn .h-duo-merk,
+.sn-site .h-team-duo.is-socialnow .h-team-duo-label {
+  width: fit-content;
+  max-width: 100%;
+  padding: 6px 8px;
+  background: #10291d;
+  border-radius: 7px;
+}
+
+:root .sn-site .h-duo.is-sn .h-duo-merk img {
+  height: 16px !important; /* Override concept-tech's 10px logo rule. */
+  width: auto !important;
+  max-width: 100%;
+  object-fit: contain;
+  filter: none;
+}
+
+.sn-site .h-duo.is-attesso .h-duo-merk {
+  background: #f6dce9;
+  color: #432738;
+}
+
+/* Keep compatibility with the existing white home logo and the normal team logo. */
+:root .sn-site .h-duo.is-fincer .h-duo-merk img[src$="/fincer-wit.png"] {
+  filter: brightness(0);
+}
+
+.sn-site .h-duo.is-fincer .h-fincer-toelichting,
+.sn-site .h-duo.is-fincer .h-fincer-toelichting strong,
+.sn-site .h-hero .h-duo.is-fincer .h-fincer-toelichting p {
+  color: #20364e;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.sn-site .h-duo figcaption {
+  color: #fff;
+  overflow-wrap: anywhere;
+}
+
+.sn-site .h-duo figcaption i {
+  color: #fff;
+}
+
+.sn-site .h-team-duo .h-team-duo-label {
+  height: auto;
+  min-height: 36px;
+  color: #17251d;
+}
+
+.sn-site .h-team-duo.is-attesso .h-team-duo-label code {
+  color: #432738;
+}
+
+.sn-site .h-team-duo .h-portrait {
+  border-color: #0b0f121c;
+}
+
+/* Let names wrap inside every team grid, including long specialist names. */
+.sn-site .h-people-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.sn-site .h-people-grid > figure,
+.sn-site .h-people-grid figcaption,
+.sn-site .h-people-grid figcaption > strong,
+.sn-site .h-functie-naam {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.sn-site .h-team-partners .h-people-grid,
+.sn-site .h-team-duo .h-people-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Role styles belong to the direct caption child, never to the name or SVG. */
+.sn-site .h-people-grid figcaption > span {
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+  color: #aab8b1;
+  line-height: 1.5;
+}
+
+.sn-site .h-team-duo .h-people-grid figcaption > span {
+  color: #4a5450;
+}
+
+.sn-site .h-persoon-linkedin {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 3px 5px;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  color: inherit;
+}
+
+.sn-site .h-linkedin-mark {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  vertical-align: baseline;
+}
+
+.sn-site .h-duo-kop a,
+.sn-site .h-team-duo-label a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  max-width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.sn-site .h-duo-kop a:focus-visible,
+.sn-site .h-team-duo-label a:focus-visible {
+  outline: 2px solid #087d3c;
+  outline-offset: 4px;
+}
+
+.sn-site .h-sterke-teams > .h-bouwers {
+  margin-top: 28px;
+}
+
+.sn-site .h-partner-referenties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-top: 10px;
+}
+
+.sn-site .h-partner-referenties a {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  max-width: 100%;
+  color: #85d9a5;
+  font-size: 11px;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.sn-site .h-team-duo .h-partner-referenties a {
+  color: #176b38;
+}
+
+.sn-site .h-partner-referenties svg {
+  flex-shrink: 0;
+}
+
+.sn-site .h-bedankt-kaart b a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.sn-site .h-partners-tekst {
+  max-width: 70ch;
+  margin: 20px 0 clamp(28px, 3vw, 40px);
+  color: #c3ccd4;
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.65;
+}
+
+@media (max-width: 640px) {
+  .sn-site .h-people-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sn-site .h-team-partners .h-people-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sn-site .h-people-grid figcaption > span {
+    font-size: 10px;
+  }
+
+  .sn-site .h-duo .h-duo-kop > span:last-child {
+    text-align: left;
+  }
+}

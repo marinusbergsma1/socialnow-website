@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useLocation } from "react-router-dom";
 import { LANGUAGES, LANGUAGE_NAMES, languagePrefix, useLanguage, type Language } from "./i18n/context";
 import { rememberLanguage } from "./i18n/detect";
 import { stopTaalwissel, useToonTaal } from "./taalwissel";
+import "./language-menu.css";
 
 // 16 september 2026 (Marinus, voor de beurs): één strak vlaggetje met een uitklapmenu. Sinds 5 oktober 2026
-// tien talen; het menu staat dan in twee kolommen (experience.css), op een smal scherm in één kolom die scrolt.
+// tien talen; het menu blijft binnen de viewport, op een smal scherm in één kolom die scrolt.
 // De vlaggen zijn kleine SVG's, geen emoji, zodat ze op elk systeem hetzelfde ogen.
 export function Flag({ code, size = 18 }: { code: Language; size?: number }) {
   const common = { width: size, height: size, viewBox: "0 0 24 24", "aria-hidden": true as const, focusable: "false" as const, className: "h-flag" };
@@ -28,25 +30,83 @@ export default function LanguageSwitch() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const wrap = useRef<HTMLDivElement>(null);
+  const button = useRef<HTMLButtonElement>(null);
+  const menu = useRef<HTMLUListElement>(null);
+  const menuId = useId();
   const tail = location.pathname + location.search + location.hash;
   // Het vlaggetje wisselt mee met de kop op de homepage; bij openen van het menu stopt dat.
   const getoond = useToonTaal();
   const vlag = !open && getoond ? getoond : language;
+  useLayoutEffect(() => {
+    if (!open) return;
+    const position = () => {
+      const anchor = button.current;
+      const list = menu.current;
+      if (!anchor || !list) return;
+      const viewport = window.visualViewport;
+      const margin = 8;
+      const gap = 8;
+      const viewportLeft = viewport?.offsetLeft ?? 0;
+      const viewportTop = viewport?.offsetTop ?? 0;
+      const viewportWidth = viewport?.width ?? document.documentElement.clientWidth;
+      const viewportHeight = viewport?.height ?? window.innerHeight;
+      const leftEdge = viewportLeft + margin;
+      const topEdge = viewportTop + margin;
+      const rightEdge = viewportLeft + viewportWidth - margin;
+      const bottomEdge = viewportTop + viewportHeight - margin;
+      const rect = anchor.getBoundingClientRect();
+      const twoColumns = viewportWidth > 560;
+      const width = Math.min(twoColumns ? 360 : 218, Math.max(0, rightEdge - leftEdge));
+      // Measure all rows at their final width without resetting the user's scroll.
+      list.dataset.columns = twoColumns ? "2" : "1";
+      list.style.width = `${width}px`;
+      list.style.fontFamily = window.getComputedStyle(anchor).fontFamily;
+      const fullHeight = list.scrollHeight + list.offsetHeight - list.clientHeight;
+      const belowStart = Math.max(topEdge, Math.min(rect.bottom + gap, bottomEdge));
+      const aboveEnd = Math.max(topEdge, Math.min(rect.top - gap, bottomEdge));
+      const belowSpace = Math.max(0, bottomEdge - belowStart);
+      const aboveSpace = Math.max(0, aboveEnd - topEdge);
+      const below = fullHeight <= belowSpace || belowSpace >= aboveSpace;
+      const maxHeight = below ? belowSpace : aboveSpace;
+      const height = Math.min(fullHeight, maxHeight);
+      list.style.left = `${Math.max(leftEdge, Math.min(rect.right - width, rightEdge - width))}px`;
+      list.style.top = `${below ? belowStart : aboveEnd - height}px`;
+      list.style.maxHeight = `${maxHeight}px`;
+      list.dataset.positioned = "true";
+    };
+    position();
+    // A portal is outside the button's DOM tab order: move keyboard focus into it.
+    menu.current?.querySelector<HTMLAnchorElement>('a[aria-current="true"]')?.focus();
+    window.addEventListener("resize", position);
+    window.addEventListener("scroll", position, { capture: true, passive: true });
+    window.visualViewport?.addEventListener("resize", position);
+    window.visualViewport?.addEventListener("scroll", position, { passive: true });
+    return () => {
+      window.removeEventListener("resize", position);
+      window.removeEventListener("scroll", position, true);
+      window.visualViewport?.removeEventListener("resize", position);
+      window.visualViewport?.removeEventListener("scroll", position);
+    };
+  }, [open]);
   useEffect(() => {
     if (!open) return;
-    const close = (e: MouseEvent) => { if (wrap.current && !wrap.current.contains(e.target as Node)) setOpen(false); };
-    const key = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    document.addEventListener("mousedown", close); document.addEventListener("keydown", key);
-    return () => { document.removeEventListener("mousedown", close); document.removeEventListener("keydown", key); };
+    const close = (e: PointerEvent) => {
+      if (!wrap.current?.contains(e.target as Node) && !menu.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const key = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { setOpen(false); button.current?.focus(); }
+    };
+    document.addEventListener("pointerdown", close); document.addEventListener("keydown", key);
+    return () => { document.removeEventListener("pointerdown", close); document.removeEventListener("keydown", key); };
   }, [open]);
   return (
     <div className={`h-language-switch${open ? " is-open" : ""}`} ref={wrap} translate="no">
-      <button type="button" className="h-language-current" aria-haspopup="listbox" aria-expanded={open} aria-label={`Language: ${LANGUAGE_NAMES[language]}`} onClick={() => { stopTaalwissel(); setOpen((v) => !v); }}>
+      <button ref={button} type="button" className="h-language-current" aria-haspopup="listbox" aria-controls={open ? menuId : undefined} aria-expanded={open} aria-label={`Language: ${LANGUAGE_NAMES[language]}`} onClick={() => { stopTaalwissel(); setOpen((v) => !v); }}>
         <Flag key={`vlag-${vlag}`} code={vlag} />
         <span key={`code-${vlag}`}>{vlag.toUpperCase()}</span>
         <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1 3.5l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </button>
-      <ul className="h-language-menu" role="listbox" aria-label="Language" hidden={!open}>
+      {open ? createPortal(<ul ref={menu} id={menuId} className="h-language-menu h-language-menu-viewport" role="listbox" aria-label="Language" translate="no">
         {LANGUAGES.map((code) => (
           <li key={code} role="option" aria-selected={code === language}>
             <a href={`${languagePrefix(code)}${tail}`} lang={code} hrefLang={code} aria-current={code === language ? "true" : undefined} onClick={() => { rememberLanguage(code); setOpen(false); }}>
@@ -56,7 +116,7 @@ export default function LanguageSwitch() {
             </a>
           </li>
         ))}
-      </ul>
+      </ul>, document.body) : null}
     </div>
   );
 }

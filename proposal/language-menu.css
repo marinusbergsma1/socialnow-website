@@ -1,0 +1,93 @@
+/* The menu is portalled to body so header overflow/transforms cannot clip it.
+   The extra class also keeps these rules independent of experience.css order. */
+.h-language-menu.h-language-menu-viewport {
+  position: fixed;
+  right: auto;
+  bottom: auto;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px 4px;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: calc(100vw - 16px);
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #8193a8 #06101e;
+  list-style: none;
+  border: 1px solid #ffffff20;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #0c1d32 0%, #06101e 70%);
+  box-shadow: 0 22px 60px #000b;
+  animation: none;
+  visibility: hidden;
+}
+
+.h-language-menu.h-language-menu-viewport[data-positioned="true"] {
+  visibility: visible;
+}
+
+.h-language-menu.h-language-menu-viewport[data-columns="2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.h-language-menu.h-language-menu-viewport > li {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.h-language-menu.h-language-menu-viewport a {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 38px;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border-radius: 9px;
+  color: #dbe5ef;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+.h-language-menu.h-language-menu-viewport .h-flag {
+  display: block;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #ffffff2a;
+}
+
+.h-language-menu.h-language-menu-viewport a > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.h-language-menu.h-language-menu-viewport a > small {
+  flex: 0 0 auto;
+  margin-left: auto;
+  color: #8193a8;
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+.h-language-menu.h-language-menu-viewport a:hover,
+.h-language-menu.h-language-menu-viewport a:focus-visible {
+  background: #ffffff10;
+  color: #fff;
+}
+
+.h-language-menu.h-language-menu-viewport a:focus-visible {
+  outline: 2px solid #4ee6a5;
+  outline-offset: -2px;
+}
+
+.h-language-menu.h-language-menu-viewport a[aria-current="true"],
+.h-language-menu.h-language-menu-viewport a[aria-current="true"] > small {
+  color: #7ff2be;
+}

@@ -130,6 +130,7 @@ for (const [route, meta] of Object.entries(routeMeta)) {
           '@type': 'Organization',
           '@id': `${BASE}/#komen-consultancy`,
           name: 'Komen Consultancy',
+          url: 'https://www.komenconsultancy.com/',
           description: 'Partner van SocialNow voor slimme AI-systemen: financieel en strategisch fundament onder data-gedreven AI-producten.',
         },
         {

@@ -24,6 +24,8 @@ import { ProductOffer, ProductRoute } from "./ProductStart";
 import { allPosts } from "../data/posts";
 import socialPosts from "../public/data/socialposts.json";
 import PartnerMichelle from "./PartnerMichelle";
+import PartnerIntro from "./PartnerIntro";
+import { Bedrijfsreferenties } from "./TeamTrust";
 import {
   Action,
   AgentCards,
@@ -418,7 +420,7 @@ export function TeamPage() {
   const attesso = vind(["Sid van Kalken", "Douwe Kramer"]);
   const fincer = vind(["Steven Goudsblom"]);
   const inTeams = [...socialnow, ...attesso, ...fincer].map(person => person.name);
-  // Michelle staat nu vooraan bij de system experts.
+  // Michelle staat vooraan bij de zelfstandige partners.
   const specialists = [
     ...vind(["Michelle Yang"]),
     ...people.filter(person => !inTeams.includes(person.name) && person.name !== "Michelle Yang"),
@@ -430,9 +432,9 @@ export function TeamPage() {
         label="Het team"
         title={
           <>
-            Creatieve mensen.
+            Human Connection.
             <br />
-            <span>Betrokken specialisten.</span>
+            <span translate="no">Powered by AI Technology.</span>
           </>
         }
         text="SocialNow begon in november 2021. Sindsdien groeiden we uit tot een team van specialisten in creatie, marketing, data en techniek. Samen bouwen we één OS dat je bedrijf ontzorgt, en het persoonlijke contact blijft."
@@ -448,23 +450,25 @@ export function TeamPage() {
             </>
           }
         />
+        <PartnerIntro />
         <div className="h-teams-duo">
           <div className="h-team-duo is-socialnow">
-            <p className="h-team-duo-label" translate="no"><img src="/images/klein/SocialNow-Logo-2026-400.webp" alt="SocialNow" width="200" height="31" loading="lazy" /></p>
-            <TeamGrid members={socialnow} expert={false} />
+            <p className="h-team-duo-label" translate="no"><Link to="/" aria-label="SocialNow"><img src="/images/klein/SocialNow-Logo-2026-400.webp" alt="SocialNow" width="200" height="31" loading="lazy" /></Link></p>
+            <TeamGrid members={socialnow} />
           </div>
           <div className="h-team-duo is-attesso">
-            <p className="h-team-duo-label" translate="no"><code>~/attesso</code></p>
-            <TeamGrid members={attesso} expert={false} />
+            <p className="h-team-duo-label" translate="no"><a href="https://www.attesso.com/" target="_blank" rel="noopener noreferrer"><code>~/attesso</code></a></p>
+            <TeamGrid members={attesso} />
           </div>
           <div className="h-team-duo is-fincer">
-            <p className="h-team-duo-label" translate="no"><img src="/images/merken/fincer.png" alt="Fincer" width="150" height="38" loading="lazy" /></p>
-            <TeamGrid members={fincer} expert={false} />
+            <p className="h-team-duo-label" translate="no"><a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener noreferrer" aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer.png" alt="Fincer" width="150" height="38" loading="lazy" /></a></p>
+            <TeamGrid members={fincer} />
           </div>
         </div>
         <p className="h-footnote">
           Marinus en Steef bouwen het OS en maken het schaalbaar. Sid en Douwe van Attesso werken aan veilige agentic payments. Steven van Fincer is onze partner voor vermogensbeheer. Marinus en Sid spreken samen: live demo&apos;s, talks en workshops, overal ter wereld.
         </p>
+        <Bedrijfsreferenties />
       </section>
       <section className="h-wrap">
         <Founder />
@@ -483,7 +487,7 @@ export function TeamPage() {
         </p>
         <div className="h-bedankt-rij">
           <div className="h-bedankt-kaart">
-            <b translate="no">Komen Consultancy</b>
+            <b translate="no"><a href="https://www.komenconsultancy.com/" target="_blank" rel="noopener noreferrer">Komen Consultancy</a></b>
             <span>Accountancy, Odoo en data, met Steef Komen en Michelle Yang. Samen maken we het OS schaalbaar.</span>
           </div>
           <div className="h-bedankt-kaart">
@@ -498,7 +502,7 @@ export function TeamPage() {
       </section>
       <section className="h-section h-wrap">
         <Heading
-          label="Onze system experts"
+          label="Zelfstandige partners"
           title={
             <>
               Ieder een eigen vak.
@@ -507,9 +511,9 @@ export function TeamPage() {
             </>
           }
         />
-        {/* 28 september 2026 (Marinus): het team zijn system experts die je persoonlijk helpen vanuit je Custom OS. */}
-        <p className="h-system-experts">
-          Iedereen in ons team is ook <b>system expert</b>. Ze kennen het OS van binnen en buiten en staan klaar om je persoonlijk te helpen, direct vanuit je OS.
+        {/* Zelfstandige partners brengen hun eigen expertise mee; SocialNow verbindt en bewaakt de kwaliteit. */}
+        <p className="h-partners-tekst">
+          Iedere partner brengt eigen expertise mee: van creatie en marketing tot data en techniek. SocialNow verbindt die expertise met jouw vraag en bewaakt de kwaliteit.
         </p>
         <TeamGrid members={specialists} />
         <AuditTeaser />

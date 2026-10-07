@@ -77,11 +77,31 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   // 3 oktober 2026 (Marinus): "Zet de rest er ook op". Pieter stond klaar op feat/team-pieter-20261001.
   { name: "Pieter Bergsma", role: "Multi sales business owner", image: "Pieter-Bergsma.webp", sinds: "2026-10-03" },
   { name: "Pepijn Bos", role: "Art Director · Bos Design", image: "Pepijn-Bos.webp", sinds: "2026-10-03" },
-  { name: "Armando van Bruggen", role: "Designer · Bruggn Design", image: "Armando-van-Bruggen.webp", sinds: "2026-10-03" },
+  { name: "Armando van Bruggen", role: "Designer · Bruggn Design", image: "Armando-van-Bruggen.webp", linkedin: "https://www.linkedin.com/in/armando-van-bruggen-116ba820b/", sinds: "2026-10-03" },
   // 5 oktober 2026 (Marinus): "HIJ MOET OOK BIJ HET TEAM EN BIJ NEW PARTNER." Steven Goudsblom (Fincer B.V.) doet het
   // vermogensbeheer voor SocialNow en onze klanten.
   { name: "Steven Goudsblom", role: "New partner · Wealth management · Fincer", image: "Steven-Goudsblom.webp", linkedin: "https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/", sinds: "2026-10-05" },
 ];
+// Bedrijfsreferenties zijn echte, bevestigde websites of het profiel van de oprichter.
+export const partnerReferences: Record<string, { name: string; url: string }[]> = {
+  "Steef Komen": [{ name: "Komen Consultancy", url: "https://www.komenconsultancy.com/" }],
+  "Michelle Yang": [{ name: "Komen Consultancy", url: "https://www.komenconsultancy.com/" }],
+  "Sid van Kalken": [{ name: "Attesso", url: "https://www.attesso.com/" }],
+  "Douwe Kramer": [
+    { name: "Attesso", url: "https://www.attesso.com/" },
+    { name: "ByteChat", url: "https://bytechat.io/" },
+    { name: "ByteVision", url: "https://bytevision.io/" },
+  ],
+  "Tristan Slobbe": [
+    { name: "KLM", url: "https://www.klm.com/" },
+    { name: "BearingPoint", url: "https://www.bearingpoint.com/" },
+  ],
+  "Steven Goudsblom": [
+    { name: "Fincer", url: "https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" },
+    { name: "ABN AMRO", url: "https://www.abnamro.nl/" },
+  ],
+  "Armando van Bruggen": [{ name: "Bruggn Design", url: "https://www.bruggndesign.nl/" }],
+};
 export const agents = [
   {
     id: "website",

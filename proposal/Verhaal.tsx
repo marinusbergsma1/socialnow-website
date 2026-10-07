@@ -2,6 +2,7 @@ import React from "react";
 import CharacterAccent from "./CharacterAccent";
 import { HeroReview } from "./CustomerReviews";
 import LightArtStrook from "./LightArtStrook";
+import LinkedInMark from "./LinkedInMark";
 import { people } from "./content";
 import { TextLink } from "./ui";
 import { Bento, BentoFilm, Tegel } from "./Bento";
@@ -172,7 +173,7 @@ export default function Verhaal() {
             <p className="sn-tegel-tekst">{hoofdstuk.tekst}</p>
             {hoofdstuk.linkedin && (
               <a className="h-hoofdstuk-linkedin" href={hoofdstuk.linkedin.url} target="_blank" rel="noopener" translate="no">
-                <span className="h-bouwer-in" aria-hidden="true">in</span>{hoofdstuk.linkedin.naam}
+                <LinkedInMark />{hoofdstuk.linkedin.naam}
               </a>
             )}
             {hoofdstuk.beeld && <div className="h-hoofdstuk-beeld">{hoofdstuk.beeld}</div>}

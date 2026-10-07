@@ -22,6 +22,7 @@ import { klein, useDichtbij, useNaBeeld } from "./licht";
 import CharacterAccent from "./CharacterAccent";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import TeamTrust, { INTEGRATIES, TeamJoin, Integraties } from "./TeamTrust";
+import PartnerIntro from "./PartnerIntro";
 const Verhaal = later(() => import("./Verhaal").then((m) => m.default));
 import { Bento, Tegel } from "./Bento";
 import "./bereikt.css";
@@ -304,6 +305,7 @@ export function Home() {
               <p>Our goal: changing Big Tech and Big Corp, and creating a <strong>free, fair and social economy</strong>.</p>
               <div className="h-team-verhaal-naam"><img {...klein("marinus-profiel-blauw.webp", 40)} alt="" width="40" height="40" loading="lazy" /><span><strong>Marinus Bergsma</strong><i>Founder &amp; CEO</i></span></div>
             </div>
+            <PartnerIntro />
             </div>
             <TeamJoin />
           </div>

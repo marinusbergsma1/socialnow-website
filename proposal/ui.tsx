@@ -9,8 +9,9 @@ import {
   X,
   MessageCircle,
 } from "lucide-react";
-import { agents, faqs, logos, people } from "./content";
+import { agents, faqs, logos, people, partnerReferences } from "./content";
 import TeamTrust from "./TeamTrust";
+import LinkedInMark from "./LinkedInMark";
 import OsEntry, { CLAIM_URL, GRATIS_OS_URL } from "./os-entry";
 import { MiloMotion, miloPoster, type MiloMaat } from "./motion";
 import type { Project } from "../types";
@@ -239,7 +240,7 @@ export function ProjectCard({ project }: { project: Project }) {
     </article>
   );
 }
-export function TeamGrid({ short = false, members = people, expert = true }: { short?: boolean; members?: typeof people; expert?: boolean }) {
+export function TeamGrid({ short = false, members = people }: { short?: boolean; members?: typeof people }) {
   return (
     <div className="h-people-grid">
       {(short ? members.slice(0, 4) : members).map((person) => (
@@ -256,10 +257,29 @@ export function TeamGrid({ short = false, members = people, expert = true }: { s
           </div>
           <figcaption>
             {/* 5 oktober 2026 (Marinus): "graag bij iedereen Linkedin doorlink". */}
-            <strong>{person.linkedin ? <a className="h-persoon-linkedin" href={person.linkedin} target="_blank" rel="noopener" aria-label={`${person.name} on LinkedIn`}>{person.name} <span className="h-bouwer-in" aria-hidden="true">in</span></a> : person.name}</strong>
+            <strong>
+              {person.linkedin ? (
+                <a
+                  className="h-persoon-linkedin"
+                  href={person.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${person.name} on LinkedIn`}
+                >
+                  {person.name} <LinkedInMark />
+                </a>
+              ) : person.name}
+            </strong>
             <span>{person.role}</span>
-            {/* 5 oktober 2026 (Marinus): Steven (Fincer) is partner vermogensbeheer, geen system expert. */}
-            {expert ? <em className="h-system-expert">{person.role.startsWith("New partner") ? "New partner" : "System Expert"}</em> : null}
+            {partnerReferences[person.name] ? (
+              <div className="h-partner-referenties" translate="no">
+                {partnerReferences[person.name].map(reference => (
+                  <a key={reference.url} href={reference.url} target="_blank" rel="noopener noreferrer">
+                    {reference.name} <ArrowUpRight size={12} aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
+            ) : null}
           </figcaption>
         </figure>
       ))}

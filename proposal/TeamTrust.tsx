@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { people } from "./content";
 import { klein } from "./licht";
+import LinkedInMark from "./LinkedInMark";
 
 // Iedereen uit people, Marinus voorop; de rest in de volgorde van de muur.
 const voorop = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe", "Steven Goudsblom"];
@@ -46,7 +47,7 @@ function NaarPersoon({ person }: { person: Persoon }) {
     ? <a className="h-persoon-link" href={person.linkedin} target="_blank" rel="noopener" aria-label={`${person.name} on LinkedIn`} />
     : <Link className="h-persoon-link" to="/team" aria-label={`${person.name}, meet the team`} />;
 }
-const LinkedInTeken = ({ person }: { person: Persoon }) => person.linkedin ? <span className="h-bouwer-in" aria-hidden="true">in</span> : null;
+const LinkedInTeken = ({ person }: { person: Persoon }) => person.linkedin ? <LinkedInMark /> : null;
 
 // 5 oktober 2026 (Marinus): de muur per functie, optie D (filterpillen). "zowel ik als Attesso en management moet behalve
 // management er nog bij ook in het onderverdelen terugkomen": het hele team staat hier, ook wie bovenaan al groot staat.
@@ -139,15 +140,15 @@ export function TeamJoin() {
   return <div className="h-team-sectie" translate="no">
     <div className="h-team-kern">
       <div className="h-duo is-sn">
-        <div className="h-duo-kop"><span className="h-duo-merk"><img src="/images/klein/SocialNow-Logo-2026-400.webp" alt="SocialNow" width="200" height="38" loading="lazy" /></span><span>Advertisement &amp; Consultancy</span></div>
+        <div className="h-duo-kop"><span className="h-duo-merk"><Link to="/" aria-label="SocialNow"><img src="/images/klein/SocialNow-Logo-2026-400.webp" alt="SocialNow" width="200" height="38" loading="lazy" /></Link></span><span>Advertisement &amp; Consultancy</span></div>
         <div className="h-duo-rij">{SOCIALNOW_DUO.map(naam => <DuoTegel key={naam} naam={naam} />)}</div>
       </div>
       <div className="h-duo is-attesso">
-        <div className="h-duo-kop"><span className="h-duo-merk"><b>~/a</b> Attesso</span><span>AI Payments</span></div>
+        <div className="h-duo-kop"><span className="h-duo-merk"><a href="https://www.attesso.com/" target="_blank" rel="noopener noreferrer"><b>~/a</b> Attesso</a></span><span>AI Payments</span></div>
         <div className="h-duo-rij">{ATTESSO_DUO.map(naam => <DuoTegel key={naam} naam={naam} />)}</div>
       </div>
       <div className="h-duo is-fincer">
-        <div className="h-duo-kop"><span className="h-duo-merk"><img src="/images/merken/fincer-wit.png" alt="Fincer" width="130" height="40" loading="lazy" /></span><span>Wealth management</span></div>
+        <div className="h-duo-kop"><span className="h-duo-merk"><a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener noreferrer" aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer.png" alt="Fincer" width="130" height="40" loading="lazy" /></a></span><span>Wealth management</span></div>
         <div className="h-duo-rij"><DuoTegel naam="Steven Goudsblom" /><div className="h-fincer-toelichting"><strong>Wealth management, with personal contact.</strong><p>Steven is our wealth partner, for SocialNow and our clients.</p></div></div>
       </div>
     </div>
@@ -180,7 +181,7 @@ function Bouwer({ naam, rol, linkedin, nieuw, children }: { naam: string; rol: s
   return <div className="h-bouwer">
     {person && <img className="h-bouwer-foto" {...klein(person.image, 40)} alt="" width="40" height="40" loading="lazy" />}
     <a className="h-bouwer-naam" href={linkedin} {...extern} aria-label={`${person?.name ?? naam} on LinkedIn`}>
-      <strong>{person?.name ?? naam} <span className="h-bouwer-in" aria-hidden="true">in</span>{nieuw && <span className="h-bouwer-nieuw">New partner</span>}</strong><i>{rol}</i>
+      <strong>{person?.name ?? naam} <LinkedInMark />{nieuw && <span className="h-bouwer-nieuw">New partner</span>}</strong><i>{rol}</i>
     </a>
     <span className="h-bouwer-merken">{children}</span>
   </div>;
@@ -201,7 +202,7 @@ export function Integraties() {
 }
 
 // De bedrijfsreferenties horen bij het team; ERP-koppelingen staan na het persoonlijke verhaal.
-function Bedrijfsreferenties() {
+export function Bedrijfsreferenties() {
   return <div className="h-bouwers" role="group" aria-label="Team track record">
       <Bouwer naam="Tristan Slobbe" rol="Data & AI Engineer" linkedin="https://www.linkedin.com/in/tristan-slobben-105056159/">
         <a href="https://www.klm.com" {...extern}><img src="/images/merken/klm.svg" alt="KLM" style={{ height: 14 }} loading="lazy" /></a>
@@ -213,10 +214,10 @@ function Bedrijfsreferenties() {
       </Bouwer>
       {/* 5 oktober 2026 (Marinus): Steven Goudsblom (Fincer B.V.) komt erbij als partner voor vermogensbeheer, voor ons en
           onze klanten. Klein het ABN AMRO-logo en zijn werkervaring, net als bij Tristan en Douwe: "Dus ABN AMRO dan FINCER."
-          Fincer heeft geen eigen website, dus dat logo linkt niet. */}
+          Fincer verwijst naar het bevestigde profiel van Steven. */}
       <Bouwer naam="Steven Goudsblom" rol="Founder · Wealth management" linkedin="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" nieuw>
         <a href="https://www.abnamro.nl" {...extern}><img src="/images/merken/abn-amro.svg" alt="ABN AMRO" style={{ height: 15 }} loading="lazy" /></a>
-        <img src="/images/merken/fincer.png" alt="Fincer" style={{ height: 15 }} loading="lazy" />
+        <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" {...extern} aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer.png" alt="Fincer" style={{ height: 15 }} loading="lazy" /></a>
       </Bouwer>
     </div>;
 }
