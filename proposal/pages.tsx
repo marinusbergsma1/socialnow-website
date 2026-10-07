@@ -23,6 +23,8 @@ import CharacterAccent from "./CharacterAccent";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import TeamTrust, { INTEGRATIES, TeamJoin, Integraties } from "./TeamTrust";
 import PartnerIntro from "./PartnerIntro";
+import BrandConnection from "./BrandConnection";
+import VdzOutcome from "./VdzOutcome";
 const Verhaal = later(() => import("./Verhaal").then((m) => m.default));
 import { Bento, Tegel } from "./Bento";
 import "./bereikt.css";
@@ -266,7 +268,7 @@ export function Home() {
           <TeamTrust />
           <HeroTitle />
           <ProductRoute />
-          <p className="sn-tegel-tekst">Je website als basis. Je content op één plek. Maak het in Studio.</p>
+          <BrandConnection compact />
           <ProductOffer />
           {/* 30 september 2026 (Marinus): "na de Let's get SocialNow ... die inlog daar en daaronder de rest van de merken
               en logo's". De login staat direct onder de kop; Odoo, Salesforce, Attesso, statement en demo volgen. */}
@@ -306,6 +308,7 @@ export function Home() {
               <div className="h-team-verhaal-naam"><img {...klein("marinus-profiel-blauw.webp", 40)} alt="" width="40" height="40" loading="lazy" /><span><strong>Marinus Bergsma</strong><i>Founder &amp; CEO</i></span></div>
             </div>
             <PartnerIntro />
+            <VdzOutcome />
             </div>
             <TeamJoin />
           </div>

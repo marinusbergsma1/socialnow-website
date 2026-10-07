@@ -88,7 +88,7 @@ export const webShowcaseProjects: Project[] = [
     client: "VDZ Brigade",
     year: "2026",
     services: ["AI Website Development", "UX/UI Design", "Full-Stack Development", "Responsive Design"],
-    description: "Website en huisstijl voor De Verduurzaming Brigade: isolatie, warmtepompen, thuisbatterijen en kozijnen, met een werkwijze in vier stappen en gratis advies direct bereikbaar.",
+    description: "Website en huisstijl voor De Verduurzaming Brigade: isolatie, warmtepompen, thuisbatterijen en kozijnen, met een werkwijze in vier stappen en gratis advies direct bereikbaar. Vanuit nul online zichtbaarheid realiseerden we €100.000 omzet voor VDZ.",
     image: `${import.meta.env.BASE_URL}screenshots/vdz-brigade-hero.webp`,
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/vdz-brigade-full.webp`,
     align: 'right',

@@ -37,6 +37,9 @@ const VeiligheidPagina = later(() => import("./Veiligheid").then((m) => m.Veilig
 // De welkomstdialoog hoort alleen bij een bezoek via de QR-code (?qr=os); alleen dan laadt hij.
 const QrOsWelcome = later(() => import("./QrOsWelcome").then((m) => m.default));
 const BrandFooter = later(() => import("./BrandFooter").then((m) => m.default));
+const BrandFaq = later(() => import("./BrandFaq").then((m) => m.default));
+const ConnectionLinks = later(() => import("./ConnectionLinks").then((m) => m.default));
+import { brandMeta } from "../scripts/brand-meta.mjs";
 import { MotionProvider } from "./motion";
 import { projects } from "./content";
 import { allPosts } from "../data/posts";
@@ -111,6 +114,7 @@ function ProposalShell() {
     // 28 september 2026: GitHub Pages opent een route ook met een slash erachter (/team/); zonder deze regel
     // viel de titel dan terug op "Probeer SocialNow OS" in plaats van de naam van de pagina.
     const pad = location.pathname.replace(/\/+$/, "") || "/";
+    const branded = brandMeta(pad, language);
     const title =
       project?.title ||
       post?.title ||
@@ -145,6 +149,16 @@ function ProposalShell() {
       .querySelector('link[rel="canonical"]')
       ?.setAttribute("href", `https://socialnow.nl${languagePrefix(language)}${location.pathname}`);
     if (!vanBuild) for (const lang of [...LANGUAGES, "x-default"]) document.querySelector(`link[hreflang="${lang}"]`)?.setAttribute("href", `https://socialnow.nl${lang === "x-default" ? "" : languagePrefix(lang as Language)}${location.pathname}`);
+    if (branded) {
+      document.title = branded.title;
+      for (const [selector, content] of [
+        ['meta[name="description"]', branded.description],
+        ['meta[property="og:title"]', branded.title],
+        ['meta[property="og:description"]', branded.description],
+        ['meta[name="twitter:title"]', branded.title],
+        ['meta[name="twitter:description"]', branded.description],
+      ]) document.querySelector(selector)?.setAttribute("content", content);
+    }
   };
   useEffect(() => {
     setMenuOpen(false);
@@ -298,6 +312,8 @@ function ProposalShell() {
           ))}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        {["/", "/het-os", "/prijzen"].includes(location.pathname) && <BrandFaq />}
+        {["/", "/het-os", "/team", "/diensten", "/prijzen", "/contact", "/vacatures"].includes(location.pathname) && <ConnectionLinks />}
         <NaLaden key={location.pathname} klaar={() => {
           zetMeta();
           if (location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ block: "start" });

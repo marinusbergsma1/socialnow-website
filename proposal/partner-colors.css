@@ -31,7 +31,7 @@
   flex-wrap: wrap;
 }
 
-/* Every partner uses the same logo carrier, including Fincer. */
+/* Same dimensions; each partner retains its requested brand colour. */
 .sn-site .h-duo .h-duo-merk,
 .sn-site .h-team-duo .h-team-duo-label {
   display: inline-flex;
@@ -42,7 +42,7 @@
   height: 40px;
   max-width: 100%;
   padding: 8px 12px;
-  background: #10291d;
+  background: #000;
   border-radius: 7px;
   color: #fff;
 }
@@ -58,13 +58,29 @@
 
 .sn-site .h-duo.is-attesso .h-duo-merk {
   padding: 8px 12px;
-  background: #10291d;
-  color: #fff;
+  background: #f6dce9;
+  color: #432738;
+}
+
+.sn-site .h-team-duo.is-attesso .h-team-duo-label {
+  background: #f6dce9;
+  color: #432738;
 }
 
 .sn-site .h-team-duo.is-attesso .h-team-duo-label code {
-  color: #fff;
+  color: #432738;
   font-size: 18px;
+}
+
+.sn-site .h-duo.is-fincer .h-duo-merk,
+.sn-site .h-team-duo.is-fincer .h-team-duo-label {
+  background: #e2edfc;
+  color: #20364e;
+}
+
+.sn-site .h-duo.is-fincer .h-duo-merk img,
+.sn-site .h-team-duo.is-fincer .h-team-duo-label img {
+  mix-blend-mode: multiply;
 }
 
 .sn-site .h-duo.is-fincer .h-fincer-toelichting,

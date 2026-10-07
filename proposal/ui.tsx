@@ -9,7 +9,10 @@ import {
   X,
   MessageCircle,
 } from "lucide-react";
-import { agents, faqs, logos, people, partnerReferences } from "./content";
+import { agents, faqs, logos, people } from "./content";
+import PartnerReferences from "./PartnerReferences";
+import { getBrandFaq } from "./brand-faq";
+import type { Language } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
 import LinkedInMark from "./LinkedInMark";
 import OsEntry, { CLAIM_URL, GRATIS_OS_URL } from "./os-entry";
@@ -271,15 +274,7 @@ export function TeamGrid({ short = false, members = people }: { short?: boolean;
               ) : person.name}
             </strong>
             <span>{person.role}</span>
-            {partnerReferences[person.name] ? (
-              <div className="h-partner-referenties" translate="no">
-                {partnerReferences[person.name].map(reference => (
-                  <a key={reference.url} href={reference.url} target="_blank" rel="noopener noreferrer">
-                    {reference.name} <ArrowUpRight size={12} aria-hidden="true" />
-                  </a>
-                ))}
-              </div>
-            ) : null}
+            <PartnerReferences personName={person.name} />
           </figcaption>
         </figure>
       ))}
@@ -417,17 +412,19 @@ export type Bericht = {
 
 // Antwoord uit de eigen vragenlijst. Dit is het vangnet: werkt de Worker niet,
 // dan blijft Milo alsnog antwoorden in plaats van er stil bij te staan.
-function uitVragenlijst(vraag: string, t: (tekst: string) => string): Bericht | null {
+function uitVragenlijst(vraag: string, language: string, t: (tekst: string) => string): Bericht | null {
   const woorden = zoekwoorden(vraag);
   if (!woorden.length) return null;
   let beste: (typeof faqs)[number] | null = null;
   let besteScore = 0;
-  for (const faq of faqs) {
+  const currentFaqs = [...(getBrandFaq(language as Language) ?? getBrandFaq("en")).items, ...faqs];
+  for (const faq of currentFaqs) {
+    const question = `${faq.question} ${t(faq.question)}`.toLocaleLowerCase("nl");
     const tekst =
       `${faq.question} ${faq.answer} ${t(faq.question)} ${t(faq.answer)}`.toLocaleLowerCase("nl");
     const raak = woorden.filter((varianten) =>
       varianten.some((woord) => tekst.includes(woord)),
-    ).length;
+    ).length + 3 * woorden.filter(varianten => varianten.some(woord => question.includes(woord))).length;
     if (raak > besteScore) {
       besteScore = raak;
       beste = faq;
@@ -459,7 +456,7 @@ export async function vraagMilo(heen: Bericht[], language: string, t: (tekst: st
   } catch {
     // val netjes terug op de eigen vragenlijst
   }
-  const uitLijst = uitVragenlijst(heen[heen.length - 1]?.tekst || "", t);
+  const uitLijst = uitVragenlijst(heen[heen.length - 1]?.tekst || "", language, t);
   if (uitLijst) return { ...uitLijst, bron: "vragenlijst" };
   return {
     van: "milo",

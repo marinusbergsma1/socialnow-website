@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowUp, Check, Lock, ShieldCheck, Sparkles } from "lucide-react";
-import { faqs } from "./content";
+import { faqs as legacyFaqs } from "./content";
+import { getBrandFaq } from "./brand-faq";
 import { useLanguage } from "./i18n/context";
 import { type Bericht, vraagMilo } from "./ui";
 import "./milo-vragen.css";
@@ -62,6 +63,7 @@ function Denkt({ stappen, t }: { stappen: string[]; t: (tekst: string) => string
 
 export default function MiloVragen() {
   const { language, t } = useLanguage();
+  const faqs = [...getBrandFaq(language).items, ...legacyFaqs];
   const groet: Bericht = { van: "milo", tekst: t("Hoi, ik ben Milo. Vraag me alles over het OS, onze diensten of hoe we samen verder gaan.") };
   const [berichten, setBerichten] = useState<Bericht[]>([]);
   const [denkt, setDenkt] = useState<string[] | null>(null);

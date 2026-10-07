@@ -243,7 +243,7 @@ export const prices = [
     items: [
       "Ontdek de vier onderdelen van het OS",
       "Verken de OS-omgeving",
-      "Begin met je eigen Odoo en Meta",
+      "Koppel Odoo of Meta wanneer je die nodig hebt",
     ],
     color: "#25D366",
     action: "Vraag gratis OS-demo aan",
@@ -295,7 +295,7 @@ export const faqs = [
   {
     question: "Wat kost de boekhouding?",
     answer:
-      "Odoo biedt één app gratis aan, zoals Facturatie. Die koppel je aan je OS. Wil je meer Odoo-apps, dan betaal je die rechtstreeks aan Odoo.",
+      "Wil je Odoo gebruiken voor je boekhouding, dan kun je je eigen Odoo-omgeving koppelen. Eventuele Odoo-abonnementen betaal je rechtstreeks aan Odoo; de koppeling is optioneel.",
   },
   {
     question: "Wat is een Custom OS?",
@@ -305,7 +305,7 @@ export const faqs = [
   {
     question: "Wat kan ik nu zelf proberen?",
     answer:
-      "Claim je OS en doorloop Bedrijf, Odoo en Meta. Met geschikte accounts en toegangsrechten kun je gegevens uit je eigen Odoo en Meta verbinden. Welke informatie je ziet, hangt af van je koppelingen. De testomgeving is in ontwikkeling.",
+      "Start met WEBSITE → CONTENT → STUDIO. Koppel Odoo of Meta wanneer je die nodig hebt, met geschikte accounts en toegangsrechten. Welke informatie je ziet, hangt af van je koppelingen. De testomgeving is in ontwikkeling.",
   },
   {
     question: "Welke onderdelen brengt het OS samen?",

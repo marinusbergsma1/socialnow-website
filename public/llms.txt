@@ -1,43 +1,61 @@
 # SocialNow
 
-> SocialNow OS is de AI-gestuurde persoonlijke werkplek, met échte professionals en menselijk contact. SocialNow is een AI-native creative agency uit Amsterdam dat website, CRM, content en advertenties samenbrengt in één overzichtelijke AI-chat. De hoofdroute is WEBSITE → CONTENT → STUDIO; Odoo is een optionele koppeling. Bedrijven starten gratis met het OS, een complete demowebsite en een basic rebranding, en zien het systeem werken vóór ze iets betalen.
+> SocialNow verbindt klanten en zelfstandige partners die meerwaarde leveren. Samen maken zij klantvriendelijke producten en brengen zij website, CRM, content en advertenties samen in SocialNow OS: één gebruiksvriendelijk Operation & Management-systeem. Human Connection. Powered by AI Technology.
 
-## Partners
+SocialNow is de organisatie; SocialNow OS is het product. Persoonlijk contact en samenwerking staan centraal, met AI als ondersteunende technologie. Dit bestand is een experimentele aanvullende wegwijzer naar de publieke website. Het biedt geen garantie op zoekposities of vermeldingen door AI-systemen.
 
-Onze partners zijn zelfstandige specialisten die jouw bedrijf verder helpen. Wij brengen hun expertise samen in één gebruiksvriendelijk systeem. Dit kan ons gratis Operation & Management-systeem zijn, of een systeem op maat.
+## Partners en samenwerking
 
-Je begint gratis. Kies je voor maatwerk, dan organiseert en betaalt SocialNow B.V. de juiste partners. Je hebt één aanspreekpunt; wij bewaken de kwaliteit.
+Wij verbinden jouw bedrijf met zelfstandige partners die begrijpen wat jij en je klanten nodig hebben. Samen maken we klantvriendelijke producten en brengen we je website, CRM, content en advertenties samen in één gebruiksvriendelijk systeem. Je kunt gratis starten met ons Operation & Management-systeem of kiezen voor een systeem op maat.
 
-## Wat SocialNow doet
+Je begint gratis. Kies je voor maatwerk, dan organiseert en betaalt SocialNow B.V. de juiste partners. Je hebt één aanspreekpunt; wij bewaken de kwaliteit. Partners zijn zelfstandige ondernemers.
 
-- **Website die verkoopt**: razendsnelle website met ingebouwde AI-chat die bezoekers overtuigt, vragen beantwoordt en afspraken inplant, dag en nacht.
-- **Content automation**: het AI-systeem leest dagelijks je advertentieresultaten, analyseert wat werkt en plant elke maand automatisch geoptimaliseerde content in.
-- **CRM & opvolging**: elke lead wordt automatisch opgevolgd, niets valt tussen wal en schip.
-- **Advertentie-optimalisatie**: ads worden gestuurd op data en continu bijgestuurd.
-- Zelfstandige partners met eigen expertise, verbonden door SocialNow. Eén aanspreekpunt voor de klant, met kwaliteitsbewaking door SocialNow.
+## Product en aanbod
 
-## Aanbod en prijzen
+- SocialNow OS brengt website, CRM, content en advertenties samen. De startroute is WEBSITE → CONTENT → STUDIO.
+- GRATIS tot 10 GB opslag. Daarna €20 per maand. Genoemde prijzen zijn exclusief btw.
+- Een persoonlijk systeem op maat: vanaf €10.000, prijs op aanvraag. Inrichting, koppelingen en begeleiding worden in het voorstel afgesproken.
+- Odoo is een optionele koppeling voor klanten en verkoop. Odoo is geen vereiste om met SocialNow OS te beginnen.
+- Beschikbare gegevens hangen af van de gekozen koppelingen en toegangsrechten. Functies en persoonlijke inrichting worden samen afgesproken; de testomgeving is in ontwikkeling.
 
-- **Gratis OS**: GRATIS tot 10 GB opslag. Daarna €20 per maand, of Een persoonlijk systeem. Een gratis demowebsite en basic rebranding zijn ook beschikbaar.
-- **OS op maat**: een persoonlijk systeem rond je bedrijf, met optionele koppelingen, vanaf €10.000, prijs op aanvraag.
-- **Maandpakketten** (minimaal 3 maanden): Content €4.000, Content + Meta €5.000, Meta + Google €5.500, Compleet €6.000 per maand. Elk pakket inclusief custom OS, complete rebranding, website en een persoonlijke call waarin we het systeem uitleggen.
-- Heb je al een website? Dan volgt een gratis demo-upgrade van je bestaande site.
+## Aanvullende samenwerking
 
-## Resultaten
+De gepubliceerde maandpakketten lopen minimaal 3 maanden: Content €4.000 per maand, Content + Meta €5.000 per maand, Meta + Google €5.500 per maand en Compleet €6.000 per maand, exclusief btw. Ze zijn een extra laag bovenop het gratis OS. Scope en kosten worden vooraf afgesproken; de details staan op de [aanbodpagina](https://socialnow.nl/nl/prijzen).
 
-- VDZ-Brigade: van nul naar veertien afspraken per week binnen 1 maand.
-- 500+ projecten opgeleverd, gemiddelde beoordeling 4.9/5.
-- Actief sinds 2021, gevestigd in Amsterdam (NL).
+## Voorbeeld: VDZ Brigade
 
-## Belangrijkste pagina's
+Vanuit nul online zichtbaarheid realiseerde SocialNow €100.000 omzet voor VDZ met een website, huisstijl, animatie, fotografie en een eigen OS. Zie de [VDZ-case](https://socialnow.nl/nl/project/vdz-brigade-website). Dit is een specifiek klantresultaat; de gratis instap van het OS is een afzonderlijk aanbod.
 
-- [Home](https://socialnow.nl/): van nul naar een draaiend bedrijf in één uur, met het gratis OS.
-- [Diensten](https://socialnow.nl/diensten): website, CRM, content en ads in detail.
-- [Prijzen](https://socialnow.nl/prijzen): pakketten en tarieven.
-- [Privacy](https://socialnow.nl/privacy): privacybeleid.
+## Publieke bronnen
+
+Onderstaande links verwijzen naar bestaande Nederlandse pagina's. De Engelse versies gebruiken dezelfde paden zonder /nl; de Engelse homepage is https://socialnow.nl/.
+
+- [Home](https://socialnow.nl/nl/): menselijke verbinding, producten en samenwerking.
+- [SocialNow OS](https://socialnow.nl/nl/het-os): het product, onderdelen en optionele koppelingen.
+- [Diensten](https://socialnow.nl/nl/diensten): development, branding, content, SEO en advertenties.
+- [Prijzen](https://socialnow.nl/nl/prijzen): gratis instap, opslag en persoonlijk maatwerk.
+- [Team en partners](https://socialnow.nl/nl/team): mensen, expertise en bevestigde publieke referenties.
+- [Projecten](https://socialnow.nl/nl/projecten): gepubliceerd werk en cases.
+- [Contact](https://socialnow.nl/nl/contact): persoonlijk gesprek over het OS of een opdracht.
+- [Publieke feiten in JSON](https://socialnow.nl/socialnow-facts.json): korte Nederlandse en Engelse beschrijvingen, productrelatie, partnermodel en aanbod.
+
+## Veiligheid en juridische informatie
+
+- [Juridisch overzicht](https://socialnow.nl/nl/juridisch): de publieke documenten, ook als pdf.
+- [Algemene voorwaarden](https://socialnow.nl/nl/voorwaarden): dienstverlening en gebruik van SocialNow OS.
+- [Privacybeleid](https://socialnow.nl/nl/privacy): gegevensverwerking, rechten en contact.
+- [Verwerkersovereenkomst](https://socialnow.nl/nl/verwerkersovereenkomst): afspraken over persoonsgegevens en subverwerkers.
+- [Beveiliging](https://socialnow.nl/nl/beveiliging): beveiligingsmaatregelen, incidenten en responsible disclosure.
+- [Veiligheid en sleutelbelofte](https://socialnow.nl/nl/veiligheid): API-sleutels per werkruimte, eerst goedkeuren en intrekken bij de bron.
+- [Cookieverklaring](https://socialnow.nl/nl/cookies): cookies en lokale opslag.
+- [AI-verklaring](https://socialnow.nl/nl/ai): AI-modellen, invoer en verantwoordelijkheid voor publicatie.
+- [Aanvaardbaar gebruik](https://socialnow.nl/nl/gebruik): regels voor het OS, hosting en e-mail.
+- [Security contact](https://socialnow.nl/security.txt): publieke meldroute voor kwetsbaarheden.
 
 ## Contact
 
-- Website: https://socialnow.nl
-- Locatie: Amsterdam, Nederland
-- Plan een persoonlijk gesprek via https://socialnow.nl/contact.
+- Website: https://socialnow.nl/
+- Locatie: Amsterdam, Nederland.
+- Persoonlijk contact: https://socialnow.nl/nl/contact.
+- Privacyvragen: privacy@socialnow.nl.
+- Kwetsbaarheden melden: security@socialnow.nl.

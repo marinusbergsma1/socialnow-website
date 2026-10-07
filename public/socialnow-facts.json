@@ -1,0 +1,268 @@
+{
+  "formatVersion": "1.0",
+  "updatedOn": "2026-10-07",
+  "url": "https://socialnow.nl/socialnow-facts.json",
+  "languages": [
+    "nl",
+    "en"
+  ],
+  "organization": {
+    "id": "https://socialnow.nl/#organization",
+    "name": "SocialNow",
+    "customWorkOrganizer": "SocialNow B.V.",
+    "url": "https://socialnow.nl/",
+    "location": {
+      "city": "Amsterdam",
+      "countryCode": "NL"
+    },
+    "tagline": "Human Connection. Powered by AI Technology.",
+    "description": {
+      "nl": "SocialNow verbindt klanten en zelfstandige partners die meerwaarde leveren. Samen maken zij klantvriendelijke producten en brengen zij website, CRM, content en advertenties samen in één gebruiksvriendelijk Operation & Management-systeem, met persoonlijk contact en AI als ondersteunende technologie.",
+      "en": "SocialNow connects customers with independent partners who add value. Together they create customer-friendly products and bring websites, CRM, content and advertising together in one easy-to-use Operation & Management system, with personal contact and AI as supporting technology."
+    },
+    "sourcePageIds": [
+      "home",
+      "team",
+      "contact"
+    ]
+  },
+  "product": {
+    "id": "https://socialnow.nl/#software",
+    "name": "SocialNow OS",
+    "category": "Operation & Management system",
+    "providedBy": "https://socialnow.nl/#organization",
+    "description": {
+      "nl": "SocialNow OS brengt website, CRM, content en advertenties samen in één gebruiksvriendelijk systeem. Je begint met WEBSITE → CONTENT → STUDIO en kunt optionele koppelingen en een persoonlijke inrichting bespreken.",
+      "en": "SocialNow OS brings websites, CRM, content and advertising together in one easy-to-use system. Start with WEBSITE → CONTENT → STUDIO and discuss optional integrations and a setup tailored to your business."
+    },
+    "components": [
+      "website",
+      "CRM",
+      "content",
+      "advertising"
+    ],
+    "startRoute": [
+      "WEBSITE",
+      "CONTENT",
+      "STUDIO"
+    ],
+    "availability": {
+      "nl": "Beschikbare gegevens hangen af van koppelingen en toegangsrechten. Functies en persoonlijke inrichting worden samen afgesproken; de testomgeving is in ontwikkeling.",
+      "en": "Available data depends on integrations and access permissions. Features and tailored setup are agreed together; the test environment is in development."
+    },
+    "sourcePageIds": [
+      "os",
+      "pricing"
+    ]
+  },
+  "partnerModel": {
+    "partnerStatus": "independentEntrepreneurs",
+    "customWorkOrganizer": "SocialNow B.V.",
+    "partnerPaymentOrganizer": "SocialNow B.V.",
+    "customerContactOrganizer": "SocialNow",
+    "qualityCoordinator": "SocialNow",
+    "description": {
+      "nl": "Partners zijn zelfstandige ondernemers. Bij maatwerk organiseert en betaalt SocialNow B.V. de juiste partners. De klant heeft één aanspreekpunt; SocialNow bewaakt de kwaliteit en houdt persoonlijk contact.",
+      "en": "Partners are independent entrepreneurs. For custom work, SocialNow B.V. organizes and pays the appropriate partners. The customer has one point of contact; SocialNow oversees quality and maintains personal contact."
+    },
+    "sourcePageIds": [
+      "home",
+      "team"
+    ]
+  },
+  "pricing": {
+    "currency": "EUR",
+    "vatIncluded": false,
+    "freeEntry": {
+      "price": 0,
+      "storageLimit": {
+        "value": 10,
+        "unit": "GB"
+      },
+      "description": {
+        "nl": "GRATIS tot 10 GB opslag.",
+        "en": "FREE up to 10 GB of storage."
+      }
+    },
+    "aboveFreeStorageLimit": {
+      "price": 20,
+      "billingPeriod": "month",
+      "appliesWhenStorageExceeds": {
+        "value": 10,
+        "unit": "GB"
+      },
+      "description": {
+        "nl": "Daarna €20 per maand.",
+        "en": "After that, €20 per month."
+      }
+    },
+    "customSystem": {
+      "priceType": "onRequest",
+      "description": {
+        "nl": "Een persoonlijk systeem op maat: vanaf €10.000, prijs op aanvraag. Inrichting, koppelingen en begeleiding worden in het voorstel afgesproken.",
+        "en": "A system tailored to your business: from €10,000, price on request. Setup, integrations and support are agreed in the proposal."
+      },
+      "startingPrice": 10000
+    },
+    "sourcePageIds": [
+      "pricing",
+      "terms"
+    ]
+  },
+  "integrations": [
+    {
+      "name": "Odoo",
+      "optional": true,
+      "requiredToStart": false,
+      "description": {
+        "nl": "Optionele koppeling voor klanten en verkoop vanuit je eigen Odoo-omgeving, met geschikte accounts en toegangsrechten.",
+        "en": "An optional integration for customers and sales from your own Odoo environment, using suitable accounts and access permissions."
+      },
+      "sourcePageIds": [
+        "os",
+        "pricing"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "id": "home",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/",
+        "en": "https://socialnow.nl/"
+      }
+    },
+    {
+      "id": "os",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/het-os",
+        "en": "https://socialnow.nl/het-os"
+      }
+    },
+    {
+      "id": "services",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/diensten",
+        "en": "https://socialnow.nl/diensten"
+      }
+    },
+    {
+      "id": "pricing",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/prijzen",
+        "en": "https://socialnow.nl/prijzen"
+      }
+    },
+    {
+      "id": "team",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/team",
+        "en": "https://socialnow.nl/team"
+      }
+    },
+    {
+      "id": "projects",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/projecten",
+        "en": "https://socialnow.nl/projecten"
+      }
+    },
+    {
+      "id": "contact",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/contact",
+        "en": "https://socialnow.nl/contact"
+      }
+    },
+    {
+      "id": "legal",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/juridisch",
+        "en": "https://socialnow.nl/juridisch"
+      }
+    },
+    {
+      "id": "terms",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/voorwaarden",
+        "en": "https://socialnow.nl/voorwaarden"
+      }
+    },
+    {
+      "id": "privacy",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/privacy",
+        "en": "https://socialnow.nl/privacy"
+      }
+    },
+    {
+      "id": "dataProcessing",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/verwerkersovereenkomst",
+        "en": "https://socialnow.nl/verwerkersovereenkomst"
+      }
+    },
+    {
+      "id": "security",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/beveiliging",
+        "en": "https://socialnow.nl/beveiliging"
+      }
+    },
+    {
+      "id": "keyPromise",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/veiligheid",
+        "en": "https://socialnow.nl/veiligheid"
+      }
+    },
+    {
+      "id": "cookies",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/cookies",
+        "en": "https://socialnow.nl/cookies"
+      }
+    },
+    {
+      "id": "ai",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/ai",
+        "en": "https://socialnow.nl/ai"
+      }
+    },
+    {
+      "id": "acceptableUse",
+      "urls": {
+        "nl": "https://socialnow.nl/nl/gebruik",
+        "en": "https://socialnow.nl/gebruik"
+      }
+    }
+  ],
+  "publicContacts": {
+    "contactPageId": "contact",
+    "privacyEmail": "privacy@socialnow.nl",
+    "securityEmail": "security@socialnow.nl",
+    "securityContactUrl": "https://socialnow.nl/security.txt"
+  },
+  "supplementarySources": {
+    "llmsTxt": "https://socialnow.nl/llms.txt",
+    "description": {
+      "nl": "Experimentele aanvullende bron naast de publieke pagina's; geen garantie op zoekposities of AI-vermeldingen.",
+      "en": "An experimental supplementary source alongside the public pages; no guarantee of search rankings or AI mentions."
+    }
+  },
+  "cases": [
+    {
+      "name": "VDZ Brigade",
+      "url": "https://socialnow.nl/nl/project/vdz-brigade-website",
+      "result": {
+        "currency": "EUR",
+        "revenue": 100000
+      },
+      "description": {
+        "nl": "Vanuit nul online zichtbaarheid realiseerde SocialNow €100.000 omzet voor VDZ met een website, huisstijl, animatie, fotografie en een eigen OS.",
+        "en": "Starting from zero online visibility, SocialNow generated €100,000 in revenue for VDZ with a website, visual identity, animation, photography and its own OS."
+      }
+    }
+  ]
+}

@@ -342,10 +342,6 @@ const routeSitemapMeta = {
   blog: { changefreq: 'daily', priority: '0.8' },
 };
 
-function buildDate() {
-  return new Date().toISOString().slice(0, 10);
-}
-
 const sitemapUrls = [
   { loc: `${BASE}/`, changefreq: 'weekly', priority: '1.0' },
   ...Object.keys(routeMeta).filter((route) => route !== 'antwoord-aanvragen').map((route) => ({
@@ -371,7 +367,7 @@ const sitemapXml =
   sitemapUrls
     .map(
       (u) =>
-        `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${u.lastmod || buildDate()}</lastmod>\n    <changefreq>${u.changefreq}</changefreq>\n    <priority>${u.priority}</priority>\n  </url>`
+        `  <url>\n    <loc>${u.loc}</loc>\n    ${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}\n    <changefreq>${u.changefreq}</changefreq>\n    <priority>${u.priority}</priority>\n  </url>`
     )
     .join('\n') +
   '\n</urlset>\n';
@@ -383,3 +379,4 @@ console.log(`[postbuild] ${Object.keys(routeMeta).length} route-pagina's + ${Obj
 await import("./localize-build.mjs");
 // 30 september 2026: daarna krijgt elke route-HTML de echte inhoud van de app (zie prerender.mjs).
 await import("./prerender.mjs");
+await import("./apply-brand-seo.mjs");

@@ -53,12 +53,12 @@ export function VacaturesPage() {
         label="Werken bij SocialNow"
         title={
           <>
-            Klaar voor duizenden bedrijven.
+            Samen bouwen aan betere bedrijven.
             <br />
             <span>Elk met een mens erachter.</span>
           </>
         }
-        text="AI doet het werk, mensen maken het verschil. Nu duizenden bedrijven het OS gaan gebruiken, bouwen we het team dat altijd voor ze klaarstaat."
+        text="Persoonlijk contact maakt het verschil. We zoeken mensen die klanten en zelfstandige partners verbinden en samen klantvriendelijke producten maken, ondersteund door AI-technologie."
       />
       <section className="h-wrap h-vac">
         {steef && (
