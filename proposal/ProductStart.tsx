@@ -17,9 +17,15 @@ export function ProductRoute() {
 
 export function ProductOffer() {
   return (
+    <>
+    <div className="sn-product-brand" translate="no">
+      <strong>SocialNow<span>/OS</span></strong>
+      <span lang="en">a SocialNow product</span>
+    </div>
     <div className="sn-product-offer">
       <p><strong>GRATIS tot 10 GB opslag</strong><span>Daarna €20 per maand</span></p>
       <Link to="/contact?onderwerp=Een%20persoonlijk%20systeem">Een persoonlijk systeem</Link>
     </div>
+    </>
   );
 }
