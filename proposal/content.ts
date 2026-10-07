@@ -11,7 +11,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
     image: "marinus-profiel-blauw.webp",
     linkedin: "https://www.linkedin.com/in/marinus-bergsma-20b81a144/",
   },
-  { name: "Jos Hollenberg", role: "Head of Meta Ads", image: "Jos-Hollenberg-1.webp" },
+  { name: "Jos Hollenberg", role: "Head of Meta Ads", image: "Jos-Hollenberg-1.webp", linkedin: "https://www.linkedin.com/in/jos-hollenberg/" },
   {
     name: "Sergio Jovovic",
     // 28 september 2026 (Marinus): Sergio staat ook bij Meta Ads.
@@ -38,7 +38,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   },
   { name: "Nick van Keulen", role: "Head of Google Ads & Search", image: "Nick-VK.webp", linkedin: "https://www.linkedin.com/in/nick-van-keulen-nl/" },
   // 25 september 2026 (Marinus): nieuw teamlid.
-  { name: "Elian Coellar", role: "Head of Private Partnerships", image: "Elian-Coellar-2026-09-26.webp" },
+  { name: "Elian Coellar", role: "Head of Private Partnerships", image: "Elian-Coellar-2026-09-26.webp", linkedin: "https://www.linkedin.com/in/el%C3%ADan-coellar-orellana-94a82b116/" },
   // 28 september 2026 (Marinus): Sid, Steef en Michelle krijgen betalingen met AI erbij.
   // Sid komt van zijn eigen bedrijf Attesso (linkedin.com/company/attesso).
   {
@@ -73,7 +73,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   { name: "Antony Soosaipillaj", role: "Full-Stack AI Developer", image: "Antony-Soosaipillaj.webp", sinds: "2026-10-03" },
   { name: "Aren", role: "Senior Sales", image: "Aren.webp", sinds: "2026-10-03" },
   { name: "Youri van der Donk", role: "Senior Sales", image: "Youri-van-der-Donk.webp", sinds: "2026-10-03" },
-  { name: "Isaak Munster", role: "Business Coach", image: "Isaak-Munster.webp", sinds: "2026-10-03" },
+  { name: "Isaak Munster", role: "Business Coach", image: "Isaak-Munster.webp", linkedin: "https://www.linkedin.com/in/rechtdoorzee/", sinds: "2026-10-03" },
   // 3 oktober 2026 (Marinus): "Zet de rest er ook op". Pieter stond klaar op feat/team-pieter-20261001.
   { name: "Pieter Bergsma", role: "Multi sales business owner", image: "Pieter-Bergsma.webp", sinds: "2026-10-03" },
   { name: "Pepijn Bos", role: "Art Director · Bos Design", image: "Pepijn-Bos.webp", sinds: "2026-10-03" },
@@ -83,7 +83,26 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   { name: "Steven Goudsblom", role: "New partner · Wealth management · Fincer", image: "Steven-Goudsblom.webp", linkedin: "https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/", sinds: "2026-10-05" },
 ];
 // Bedrijfsreferenties zijn echte, bevestigde websites of het profiel van de oprichter.
-export const partnerReferences: Record<string, { name: string; url: string }[]> = {
+export type ReferenceKind = "company" | "experience" | "work" | "network";
+export type PartnerReference = { name: string; url: string; kind?: ReferenceKind; source?: string };
+export const partnerReferences: Record<string, PartnerReference[]> = {
+  "Marinus Bergsma": [
+    { name: "Amsterdam Light Festival", url: "https://amsterdamlightfestival.com/", kind: "experience", source: "https://www.linkedin.com/in/marinus-bergsma-20b81a144/" },
+    { name: "Day & Nite", url: "https://www.linkedin.com/in/marinus-bergsma-20b81a144/", kind: "experience", source: "https://www.linkedin.com/in/marinus-bergsma-20b81a144/" },
+    { name: "AZ", url: "https://www.az.nl/", kind: "work", source: "https://www.linkedin.com/in/marinus-bergsma-20b81a144/" },
+    { name: "Supperclub", url: "https://supper.nl/", kind: "work", source: "https://www.linkedin.com/in/marinus-bergsma-20b81a144/" },
+  ],
+  "Jos Hollenberg": [{ name: "Axipoint", url: "https://horeca.axipoint.com/overons/", kind: "experience", source: "https://horeca.axipoint.com/overons/" }],
+  "Sergio Jovovic": [{ name: "Socialytix", url: "https://www.socialytix.nl/", kind: "experience", source: "https://nl.linkedin.com/in/sergio-jovovic-203483220" }],
+  "Carmel Boon": [{ name: "By Carmel", url: "https://bycarmel.nl/", kind: "company", source: "https://nl.linkedin.com/in/carmel-boon-984940136" }],
+  "Sam van der Sluis": [{ name: "Studio Sluis", url: "https://www.linkedin.com/in/sam-van-der-sluis-740781199/", kind: "company", source: "https://nl.linkedin.com/in/sam-van-der-sluis-740781199" }],
+  "Nick van Keulen": [
+    { name: "Goodlife Marketing", url: "https://goodlifemarketing.nl/", kind: "company", source: "https://nl.linkedin.com/in/nick-van-keulen-nl" },
+    { name: "Stramark", url: "https://www.stramark.nl/blog/jouw-gids-voor-succesvol-adverteren-via-google-ads/", kind: "experience", source: "https://www.stramark.nl/blog/jouw-gids-voor-succesvol-adverteren-via-google-ads/" },
+  ],
+  "Elian Coellar": [{ name: "Oliver James", url: "https://www.oliverjames.com/", kind: "experience", source: "https://nl.linkedin.com/in/el%C3%ADan-coellar-orellana-94a82b116" }],
+  "Isaak Munster": [{ name: "Rechtdoorzee Coaching", url: "https://rechtdoorzeecoaching.com/", kind: "company", source: "https://rechtdoorzeecoaching.com/" }],
+  "Pepijn Bos": [{ name: "Pepijn Bos", url: "https://pepijnbos.nl/", kind: "company", source: "https://pepijnbos.nl/" }],
   "Steef Komen": [{ name: "Komen Consultancy", url: "https://www.komenconsultancy.com/" }],
   "Michelle Yang": [{ name: "Komen Consultancy", url: "https://www.komenconsultancy.com/" }],
   "Sid van Kalken": [{ name: "Attesso", url: "https://www.attesso.com/" }],

@@ -1,4 +1,6 @@
 .sn-site .h-partner-referenties.sn-reference-groups {
+  position: relative;
+  z-index: 2;
   display: grid;
   gap: 10px;
   min-width: 0;
@@ -10,6 +12,7 @@
   font-size: 10px;
   line-height: 1.4;
   font-weight: 500;
+  color: #738078;
 }
 .sn-site .sn-reference-list {
   display: flex;
@@ -25,6 +28,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 6px;
   min-width: 0;
   min-height: 40px;
   max-width: 100%;
@@ -54,3 +58,13 @@
   overflow-wrap: anywhere;
 }
 .sn-site .sn-reference-wordmark { font-family: ui-monospace, Menlo, monospace; }
+.sn-site .h-partner-referenties a.sn-reference-link.is-dark { background: #172923; border-color: #172923; color: #fff; }
+.sn-site .sn-reference-groups.is-compact { margin-top: 8px; gap: 7px; }
+.sn-site .sn-reference-groups.is-compact .sn-reference-label { font-size: 8px; margin-bottom: 3px; }
+.sn-site .sn-reference-groups.is-compact a.sn-reference-link { min-height: 30px; padding: 5px 6px; }
+.sn-site .sn-reference-groups.is-compact .sn-reference-link img { height: 15px; max-width: min(85px, 100%); transform: none; }
+.sn-site .sn-reference-groups.is-compact .sn-reference-fallback,
+.sn-site .sn-reference-groups.is-compact .sn-reference-wordmark { font-size: 9px; }
+/* Logo sizing takes precedence over the full-width portrait rules. */
+:root .sn-site .h-people-grid .sn-reference-link img { width: auto; height: 20px; object-fit: contain; }
+:root .sn-site .h-bouwer > .sn-reference-groups { grid-column: 1 / -1; padding-top: 12px; border-top: 1px solid #0b0f1214; }
