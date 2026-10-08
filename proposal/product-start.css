@@ -13,6 +13,9 @@
 .sn-site .sn-product-offer p > span { color: #d3d8d5; }
 .sn-site .sn-product-offer > a { color: #fff; text-underline-offset: 5px; padding: 10px 0; }
 .sn-site .sn-product-offer > a { min-height: 44px; display: inline-flex; align-items: center; }
+.sn-site .sn-product-offer > .sn-product-groepen { flex-basis: 100%; grid-template-columns: minmax(0, 62ch); font-size: 14px; }
+.sn-site .sn-product-offer > .sn-product-groepen > strong { display: inline-flex; align-items: center; gap: 8px; color: #fff; }
+.sn-site .sn-product-offer > .sn-product-groepen > strong::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent, #25d366); flex: none; }
 .sn-site .sn-product-route a:focus-visible, .sn-site .sn-product-offer > a:focus-visible { outline: 2px solid var(--c-accent, #25d366); outline-offset: 5px; border-radius: 2px; }
 .sn-site .sn-product-step { scroll-margin-top: 110px; }
 .sn-site .prijs-opslag { margin: 28px 0; padding: 24px; background: var(--prijs-kaart, #0b0f12); border: 1px solid var(--c-lijn, #ffffff1a); border-radius: var(--c-radius-kaart, 14px); }
