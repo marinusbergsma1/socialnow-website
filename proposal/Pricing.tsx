@@ -220,7 +220,7 @@ export default function Pricing() {
           <div className="prijs-gratis-tekst">
             {/* 29 september 2026 (Marinus): "Echt waar" vond hij stom; het blijft bij de feitelijke zin. */}
             <p className="prijs-echt">GRATIS tot 10 GB opslag</p>
-            <p className="prijs-lead">{t("Begin met je website, content en Studio. Tot 10 GB opslag gebruik je het OS gratis. Daarna €20 per maand, of bespreek een persoonlijk systeem met ons team.")}</p>
+            <p className="prijs-lead">{t("Begin gratis met je website, content en AI in Studio. Tot 10 GB opslag is het OS gratis, daarna €20 per maand. Voor creatieve samenwerking, advies of een systeem op maat maak je persoonlijk kennis met ons team.")}</p>
             <ProductRoute />
             <ProductOffer />
             <div className="prijs-knoppen">

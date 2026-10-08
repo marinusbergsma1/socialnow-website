@@ -38,3 +38,10 @@
   :root .sn-site .h-nav { gap: 5px; }
   :root .sn-site .h-brand img { width: 80px; }
 }
+
+/* Mensen direct bij de OS-instap, met dezelfde portretten als op de homepage. */
+.sn-site .sn-os-start > .h-team-trust { margin-top: 0; }
+.sn-site .sn-os-start-links { margin: 16px 0 28px; }
+.sn-site .h-os-mensen { text-decoration: none; padding: 8px 0; }
+.sn-site .h-os-mensen:focus-visible { outline: 2px solid var(--c-accent, #25d366); outline-offset: 4px; }
+.sn-site .sn-product-step .sn-tegel-tekst { max-width: 58ch; }
