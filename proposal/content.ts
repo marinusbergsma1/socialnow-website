@@ -31,6 +31,9 @@ export const people: { name: string; role: string; image: string; linkedin?: str
     image: "Sam-van-der-Sluis.webp",
     linkedin: "https://www.linkedin.com/in/sam-van-der-sluis-740781199/",
   },
+  // 8 oktober 2026 (Marinus): Jelle als videograaf en Femke als fotograaf.
+  { name: "Jelle Ursem", role: "Creative Videographer", image: "Jelle-Ursem.webp", linkedin: "https://www.linkedin.com/in/jelle-ursem-9807b61b1/", sinds: "2026-10-08" },
+  { name: "Femke Oostendorp", role: "Fotograaf · Femke’s Fotografie", image: "Femke-Oostendorp.webp", sinds: "2026-10-08" },
   {
     name: "Emma Peperkamp",
     role: "Lead Photographer",
@@ -85,6 +88,8 @@ export const people: { name: string; role: string; image: string; linkedin?: str
 ];
 // Bedrijfsreferenties zijn echte, bevestigde websites of het profiel van de oprichter.
 export const partnerReferences: Record<string, { name: string; url: string }[]> = {
+  "Jelle Ursem": [{ name: "JU Producties", url: "https://www.instagram.com/juproducties/" }],
+  "Femke Oostendorp": [{ name: "Femke’s Fotografie", url: "https://femkesfotografie.nl/" }],
   "Steef Komen": [{ name: "Komen Consultancy", url: "https://www.komenconsultancy.com/" }],
   "Michelle Yang": [{ name: "Komen Consultancy", url: "https://www.komenconsultancy.com/" }],
   "Sid van Kalken": [{ name: "Attesso", url: "https://www.attesso.com/" }],
