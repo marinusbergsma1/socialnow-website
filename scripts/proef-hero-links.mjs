@@ -15,7 +15,7 @@ const linkedin = {
   "Sam van der Sluis": "sam-van-der-sluis-740781199",
   "Nick van Keulen": "nick-van-keulen-nl",
   "Sid van Kalken": "sid-van-kalken-65b486223",
-  "Douwe Kramer": "douwekramer",
+  "Douwe Kramer": "douwe-kramer-attesso",
   "Steef Komen": "steef-komen-60632236",
   "Tristan Slobbe": "tristan-slobben-105056159",
   "Steven Goudsblom": "steven-goudsblom-bb3ab0197",

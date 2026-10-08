@@ -24,7 +24,7 @@ const personFacts = [
   ["Nick van Keulen", "nick-van-keulen", "https://www.linkedin.com/in/nick-van-keulen-nl/"],
   ["Elian Coellar", "elian-coellar"],
   ["Sid van Kalken", "sid-van-kalken", "https://www.linkedin.com/in/sid-van-kalken-65b486223/", "attesso", true],
-  ["Douwe Kramer", "douwe-kramer", "https://www.linkedin.com/in/douwekramer/", "attesso", true],
+  ["Douwe Kramer", "douwe-kramer", "https://www.linkedin.com/in/douwe-kramer-attesso/", "attesso", true],
   ["Steef Komen", "steef-komen", "https://www.linkedin.com/in/steef-komen-60632236/", "komen"],
   ["Michelle Yang", "michelle-yang", undefined, "komen"],
   ["Tristan Slobbe", "tristan-slobbe", "https://www.linkedin.com/in/tristan-slobben-105056159/"],

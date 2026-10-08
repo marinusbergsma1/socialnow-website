@@ -52,7 +52,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
     name: "Douwe Kramer",
     role: "Co-founder · Attesso",
     image: "Douwe-Kramer-attesso.webp",
-    linkedin: "https://www.linkedin.com/in/douwekramer/",
+    linkedin: "https://www.linkedin.com/in/douwe-kramer-attesso/",
     sinds: "2026-10-01",
   },
   // 4 oktober 2026 (Marinus): "Ai payment hoort niet bij Steef en Michelle." Alleen Sid (Attesso) houdt AI Payments.
