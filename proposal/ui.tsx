@@ -202,16 +202,16 @@ export function ConversionBridge() {
   return (
     <div className="h-conversion">
       <div>
-        <p className="h-eyebrow">Eerst gratis. Daarna op maat.</p>
+        <p className="h-eyebrow">Zelf starten. Samen verder.</p>
         <h3>Begin met je gratis OS.</h3>
         <p>
-          Begin met WEBSITE → CONTENT → STUDIO. GRATIS tot 10 GB opslag. Daarna €20 per maand, of een persoonlijk systeem. Odoo koppel je als je die nodig hebt.
+          Start gratis met je website, content en AI in Studio. Wil je samen verder? Vertel ons je plannen en ontmoet de mensen die je helpen bij creativiteit, strategie en een systeem op maat.
         </p>
       </div>
       <div className="h-poc-actions">
         <Action href={GRATIS_OS_URL}>Probeer het OS gratis</Action>
         <TextLink to="/contact?onderwerp=OS%20op%20maat">
-          Al geprobeerd? Bespreek je OS op maat
+          Bespreek je plannen met ons team
         </TextLink>
       </div>
     </div>
@@ -340,7 +340,7 @@ export function Closing() {
     <h2 id="final-close-title" translate="no">One operation and management system.<br /><span>Not to automate, but to connect.</span></h2>
     {/* 5 oktober 2026 (Marinus): "Human connection powered by Ai technology vind ik nog wel een mooie toevoeging ook." */}
     <p className="h-final-belofte" translate="no">Human connection, powered by AI technology.</p>
-    <p>Je website, content en Studio op één plek. GRATIS tot 10 GB opslag. Daarna €20 per maand, met mensen erachter.</p>
+    <p>Jouw ideeën, onze mensen en AI komen samen. Start gratis met je eigen OS of maak kennis met ons team. Samen bouwen we verder aan jouw bedrijf.</p>
     <OsEntry showProof={false} />
     <TeamTrust />
     <TextLink to="/contact?onderwerp=OS%20op%20maat">Bespreek je OS op maat</TextLink>

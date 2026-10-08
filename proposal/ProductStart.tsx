@@ -24,7 +24,7 @@ export function ProductOffer() {
     </div>
     <div className="sn-product-offer">
       <p><strong>GRATIS tot 10 GB opslag</strong><span>Daarna €20 per maand</span></p>
-      <Link to="/contact?onderwerp=Een%20persoonlijk%20systeem">Een persoonlijk systeem</Link>
+      <Link to="/contact?onderwerp=Een%20persoonlijk%20systeem">Bouw samen met ons team</Link>
     </div>
     </>
   );

@@ -17,7 +17,7 @@ export default function TeamTrust() {
       {/* 3 oktober 2026 (Marinus): "ZORG DAT IEDEREEN EROP STAAT". Het hele team uit people, in de volgorde van de muur. */}
       {teamOpVolgorde().map(person => <img key={person.name} {...klein(person.image, 48)} alt="" width="56" height="56" loading="lazy" />)}
     </span>
-    <span><strong>Technologie met mensen erachter.</strong><span>Maak kennis met ons team <ArrowUpRight size={13} aria-hidden="true" /></span></span>
+    <span><strong>Persoonlijk contact. Versterkt door AI.</strong><span>Maak kennis met ons team <ArrowUpRight size={13} aria-hidden="true" /></span></span>
   </Link>;
 }
 

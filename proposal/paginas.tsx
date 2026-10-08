@@ -20,6 +20,8 @@ import { VideoSlider, ImageSliders } from "./MediaSliders";
 import OsEntry, { GRATIS_OS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
 import Pricing from "./Pricing";
+import TeamTrust from "./TeamTrust";
+import OsPeople from "./OsPeople";
 import { ProductOffer, ProductRoute } from "./ProductStart";
 import { allPosts } from "../data/posts";
 import socialPosts from "../public/data/socialposts.json";
@@ -99,17 +101,19 @@ export function OsPage() {
   return (
     <>
       <PageHeading
-        label="SocialNow OS / Begin met je website"
+        label="SocialNow OS / Mensen en AI"
         title={
           <>
-            Je website, content en Studio.
+            Jouw ideeën. Onze mensen.
             <br />
-            <span>Eén OS.</span>
+            <span>Samen met AI.</span>
           </>
         }
-        text="Begin met je website, verzamel je content en maak het in Studio. Koppel Odoo of je social media wanneer je die nodig hebt. Ons team helpt je met een persoonlijk systeem."
+        text="Je wilt iets opbouwen met je bedrijf. Wij brengen je ideeën, de juiste mensen en AI samen. Werk aan je website en content in je eigen OS. Voor richting, creativiteit en maatwerk werk je persoonlijk samen met ons team."
       />
-      <div className="h-wrap">
+      <div className="h-wrap sn-os-start">
+        <TeamTrust />
+        <div className="sn-os-start-links"><TextLink to="/contact?onderwerp=Samen%20werken%20met%20mensen%20en%20AI">Vertel ons wat je wilt bereiken</TextLink></div>
         <ProductRoute />
         <ProductOffer />
         <OsEntry />
@@ -117,18 +121,24 @@ export function OsPage() {
       <Bento label="Zo begin je">
         <Tegel kop="01 · WEBSITE" breed={4} id="route-website" className="sn-product-step">
           <h2 className="sn-tegel-titel">Begin met je website.</h2>
-          <p className="sn-tegel-tekst">Gebruik je website als basis voor je merk. Heb je nog geen website? Vraag een gratis demowebsite aan.</p>
+          <p className="sn-tegel-tekst">Je website vertelt wie je bent. Begin met een gratis demowebsite en bespreek met ons team hoe jouw merk en verhaal tot hun recht komen.</p>
           <TextLink to="/gratis-website">Gratis demowebsite aanvragen</TextLink>
         </Tegel>
         <Tegel kop="02 · CONTENT" breed={4} id="route-content" className="sn-product-step">
           <h2 className="sn-tegel-titel">Verzamel je content.</h2>
-          <p className="sn-tegel-tekst">Breng je teksten, beelden en ideeën bij elkaar. Zo heb je je materiaal bij de hand voor de volgende stap.</p>
+          <p className="sn-tegel-tekst">Verzamel je teksten, beelden en ideeën in je OS. Onze makers helpen je bij de creatieve richting en content die bij jou past.</p>
           <a className="h-text-link" href={GRATIS_OS_URL}>Probeer het OS gratis<ArrowUpRight size={16} aria-hidden="true" /></a>
         </Tegel>
         <Tegel kop="03 · STUDIO" breed={4} id="route-studio" className="sn-product-step">
-          <h2 className="sn-tegel-titel">Maak het in Studio.</h2>
-          <p className="sn-tegel-tekst">Werk je content uit in je eigen merkstijl. Bekijk het resultaat en download wat je wilt gebruiken.</p>
+          <h2 className="sn-tegel-titel">Maak samen met AI.</h2>
+          <p className="sn-tegel-tekst">Gebruik AI in Studio om je ideeën uit te werken in je merkstijl. Jij kiest het resultaat. Wil je verder, dan werk je samen met onze creatieve specialisten.</p>
           <a className="h-text-link" href={GRATIS_OS_URL}>Open je OS<ArrowUpRight size={16} aria-hidden="true" /></a>
+        </Tegel>
+        <Tegel kop="Persoonlijk samenwerken" breed={12}>
+          <h2 className="sn-tegel-titel">Het begint met jouw verhaal.</h2>
+          <p className="sn-tegel-tekst">Vertel Steef wat je wilt bereiken. Samen kijken we welke makers, adviseurs en AI bij je vraag passen. Bij maatwerk heb je één aanspreekpunt dat de samenwerking en kwaliteit bewaakt.</p>
+          <TeamTrust />
+          <div className="sn-tegel-onder"><TextLink to="/contact?onderwerp=Samen%20werken%20met%20mensen%20en%20AI">Maak kennis met Steef</TextLink></div>
         </Tegel>
         <Tegel kop="Optionele koppelingen" breed={12}>
           <p className="sn-tegel-tekst">Odoo is een optionele koppeling voor klanten en verkoop. Je kunt beginnen met WEBSITE → CONTENT → STUDIO.</p>
@@ -152,6 +162,7 @@ export function OsPage() {
               </p>
               <h2>{agent.title}</h2>
               <p>{agent.text}</p>
+              <OsPeople role={agent.id} />
               {agent.id === "crm" ? (
                 <ul>
                   <li>CRM-leads en fasen</li>
