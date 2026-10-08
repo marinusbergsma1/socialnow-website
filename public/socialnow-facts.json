@@ -1,6 +1,6 @@
 {
   "formatVersion": "1.0",
-  "updatedOn": "2026-10-07",
+  "updatedOn": "2026-10-08",
   "url": "https://socialnow.nl/socialnow-facts.json",
   "languages": [
     "nl",
@@ -17,8 +17,8 @@
     },
     "tagline": "Human Connection. Powered by AI Technology.",
     "description": {
-      "nl": "SocialNow verbindt klanten en zelfstandige partners die meerwaarde leveren. Samen maken zij klantvriendelijke producten en brengen zij website, CRM, content en advertenties samen in één gebruiksvriendelijk Operation & Management-systeem, met persoonlijk contact en AI als ondersteunende technologie.",
-      "en": "SocialNow connects customers with independent partners who add value. Together they create customer-friendly products and bring websites, CRM, content and advertising together in one easy-to-use Operation & Management system, with personal contact and AI as supporting technology."
+      "nl": "SocialNow is een bedrijf en partnernetwerk voor branding, content, marketing en software. Connect verbindt klanten en zelfstandige ondernemers. SocialNow OS is een onderdeel van SocialNow.",
+      "en": "SocialNow is a company and partner network for branding, content, marketing and software. Connect brings customers and independent entrepreneurs together. SocialNow OS is part of SocialNow."
     },
     "sourcePageIds": [
       "home",
@@ -264,5 +264,13 @@
         "en": "Starting from zero online visibility, SocialNow generated €100,000 in revenue for VDZ with a website, visual identity, animation, photography and its own OS."
       }
     }
-  ]
+  ],
+  "connect": {
+    "name": "SocialNow Connect",
+    "providedBy": "https://socialnow.nl/#organization",
+    "description": {
+      "nl": "SocialNow Connect verbindt klanten met zelfstandige ondernemers voor branding, content, marketing en software.",
+      "en": "SocialNow Connect brings customers and independent entrepreneurs together for branding, content, marketing and software."
+    }
+  }
 }

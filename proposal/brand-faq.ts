@@ -17,7 +17,7 @@ const faq: Record<Language, BrandFaqContent> = {
   nl: {
     heading: "Veelgestelde vragen over SocialNow",
     items: [
-      { id: "connection", question: "Wat verbindt SocialNow?", answer: "SocialNow verbindt klanten en zelfstandige partners die meerwaarde leveren. Samen maken we klantvriendelijke producten en brengen we die samen in één gebruiksvriendelijk Operation & Management-systeem (OS)." },
+      { id: "connection", question: "Wat is SocialNow?", answer: "SocialNow is een bedrijf en partnernetwerk voor branding, content, marketing en software. Connect verbindt klanten en zelfstandige ondernemers. SocialNow OS is een onderdeel van SocialNow." },
       { id: "partners", question: "Wat is een SocialNow-partner?", answer: "Een partner is een zelfstandige ondernemer die expertise bijdraagt aan producten en opdrachten voor klanten. Partners werken vanuit hun eigen onderneming samen met SocialNow." },
       { id: "free-os", question: "Hoeveel kost het SocialNow OS?", answer: "Je gebruikt het SocialNow OS gratis tot 10 GB opslag. Daarna kost het €20 per maand. Maatwerk heeft een aparte prijs op aanvraag." },
       { id: "custom", question: "Hoe werkt maatwerk en wie betaalt de partners?", answer: "Bij maatwerk organiseert en betaalt SocialNow B.V. de juiste partners. Je krijgt een voorstel op maat en hebt één aanspreekpunt. SocialNow bewaakt de kwaliteit." },
@@ -28,7 +28,7 @@ const faq: Record<Language, BrandFaqContent> = {
   en: {
     heading: "Frequently asked questions about SocialNow",
     items: [
-      { id: "connection", question: "What does SocialNow connect?", answer: "SocialNow connects customers with independent partners who add value. Together, we create customer-friendly products and bring them together in one easy-to-use Operation & Management system (OS)." },
+      { id: "connection", question: "What is SocialNow?", answer: "SocialNow is a company and partner network for branding, content, marketing and software. Connect brings customers and independent entrepreneurs together. SocialNow OS is part of SocialNow." },
       { id: "partners", question: "What is a SocialNow partner?", answer: "A partner is an independent entrepreneur who contributes expertise to products and customer projects. Partners collaborate with SocialNow through their own businesses." },
       { id: "free-os", question: "How much does SocialNow OS cost?", answer: "SocialNow OS is free up to 10 GB of storage. After that, it costs €20 per month. Custom work is priced separately on request." },
       { id: "custom", question: "How does custom work operate, and who pays the partners?", answer: "For custom work, SocialNow B.V. coordinates and pays the appropriate partners. You receive a tailored proposal and have one point of contact. SocialNow oversees quality." },
@@ -39,7 +39,7 @@ const faq: Record<Language, BrandFaqContent> = {
   de: {
     heading: "Häufige Fragen zu SocialNow",
     items: [
-      { id: "connection", question: "Was verbindet SocialNow?", answer: "SocialNow verbindet Kunden mit selbstständigen Partnern, die Mehrwert schaffen. Gemeinsam entwickeln wir kundenfreundliche Produkte und führen sie in einem benutzerfreundlichen Operation & Management-System (OS) zusammen." },
+      { id: "connection", question: "Was ist SocialNow?", answer: "SocialNow ist ein Unternehmen und Partnernetzwerk für Branding, Content, Marketing und Software. Connect verbindet Kunden und selbstständige Unternehmer. SocialNow OS ist ein Teil von SocialNow." },
       { id: "partners", question: "Was ist ein SocialNow-Partner?", answer: "Ein Partner ist ein selbstständiger Unternehmer, der Fachwissen zu Produkten und Kundenprojekten beiträgt. Partner arbeiten über ihre eigenen Unternehmen mit SocialNow zusammen." },
       { id: "free-os", question: "Was kostet SocialNow OS?", answer: "SocialNow OS ist bis zu 10 GB Speicher kostenlos. Danach kostet es 20 € pro Monat. Individuelle Lösungen werden separat auf Anfrage angeboten." },
       { id: "custom", question: "Wie funktionieren individuelle Lösungen und wer bezahlt die Partner?", answer: "Bei individuellen Lösungen koordiniert und bezahlt SocialNow B.V. die passenden Partner. Du erhältst ein individuelles Angebot und hast einen Ansprechpartner. SocialNow überwacht die Qualität." },
@@ -50,7 +50,7 @@ const faq: Record<Language, BrandFaqContent> = {
   fr: {
     heading: "Questions fréquentes sur SocialNow",
     items: [
-      { id: "connection", question: "Que relie SocialNow ?", answer: "SocialNow met en relation les clients et des partenaires indépendants qui apportent de la valeur. Ensemble, nous créons des produits adaptés aux clients et les réunissons dans un système Operation & Management (OS) simple à utiliser." },
+      { id: "connection", question: "Qu’est-ce que SocialNow ?", answer: "SocialNow est une entreprise et un réseau de partenaires en branding, contenu, marketing et logiciels. Connect relie clients et entrepreneurs indépendants. SocialNow OS fait partie de SocialNow." },
       { id: "partners", question: "Qu’est-ce qu’un partenaire SocialNow ?", answer: "Un partenaire est un entrepreneur indépendant qui apporte son expertise aux produits et aux projets des clients. Les partenaires collaborent avec SocialNow par l’intermédiaire de leur propre entreprise." },
       { id: "free-os", question: "Combien coûte SocialNow OS ?", answer: "SocialNow OS est gratuit jusqu’à 10 Go de stockage. Au-delà, il coûte 20 € par mois. Les prestations sur mesure font l’objet d’un tarif distinct sur demande." },
       { id: "custom", question: "Comment fonctionne le sur-mesure et qui paie les partenaires ?", answer: "Pour les prestations sur mesure, SocialNow B.V. coordonne et rémunère les partenaires adaptés. Vous recevez une proposition personnalisée et disposez d’un interlocuteur unique. SocialNow veille à la qualité." },
@@ -61,7 +61,7 @@ const faq: Record<Language, BrandFaqContent> = {
   es: {
     heading: "Preguntas frecuentes sobre SocialNow",
     items: [
-      { id: "connection", question: "¿Qué conecta SocialNow?", answer: "SocialNow conecta a clientes con socios independientes que aportan valor. Juntos creamos productos pensados para los clientes y los reunimos en un sistema Operation & Management (OS) fácil de usar." },
+      { id: "connection", question: "¿Qué es SocialNow?", answer: "SocialNow es una empresa y una red de socios de branding, contenido, marketing y software. Connect une a clientes y emprendedores independientes. SocialNow OS forma parte de SocialNow." },
       { id: "partners", question: "¿Qué es un socio de SocialNow?", answer: "Un socio es un empresario independiente que aporta su experiencia a productos y proyectos para clientes. Los socios colaboran con SocialNow a través de sus propias empresas." },
       { id: "free-os", question: "¿Cuánto cuesta SocialNow OS?", answer: "SocialNow OS es gratuito hasta 10 GB de almacenamiento. A partir de ahí, cuesta 20 € al mes. Los trabajos a medida tienen un precio aparte disponible bajo consulta." },
       { id: "custom", question: "¿Cómo funcionan los trabajos a medida y quién paga a los socios?", answer: "Para los trabajos a medida, SocialNow B.V. coordina y paga a los socios adecuados. Recibes una propuesta personalizada y tienes un único punto de contacto. SocialNow supervisa la calidad." },
@@ -72,7 +72,7 @@ const faq: Record<Language, BrandFaqContent> = {
   it: {
     heading: "Domande frequenti su SocialNow",
     items: [
-      { id: "connection", question: "Che cosa collega SocialNow?", answer: "SocialNow mette in contatto i clienti con partner indipendenti che creano valore. Insieme realizziamo prodotti pensati per i clienti e li riuniamo in un sistema Operation & Management (OS) facile da usare." },
+      { id: "connection", question: "Che cos’è SocialNow?", answer: "SocialNow è un’azienda e una rete di partner per branding, contenuti, marketing e software. Connect unisce clienti e imprenditori indipendenti. SocialNow OS è parte di SocialNow." },
       { id: "partners", question: "Che cos’è un partner SocialNow?", answer: "Un partner è un imprenditore indipendente che contribuisce con le proprie competenze ai prodotti e ai progetti dei clienti. I partner collaborano con SocialNow attraverso le proprie imprese." },
       { id: "free-os", question: "Quanto costa SocialNow OS?", answer: "SocialNow OS è gratuito fino a 10 GB di spazio di archiviazione. Oltre questa soglia costa 20 € al mese. I lavori su misura hanno un prezzo separato, disponibile su richiesta." },
       { id: "custom", question: "Come funzionano i lavori su misura e chi paga i partner?", answer: "Per i lavori su misura, SocialNow B.V. coordina e paga i partner adatti. Ricevi una proposta personalizzata e hai un unico referente. SocialNow supervisiona la qualità." },
@@ -83,7 +83,7 @@ const faq: Record<Language, BrandFaqContent> = {
   pt: {
     heading: "Perguntas frequentes sobre a SocialNow",
     items: [
-      { id: "connection", question: "O que liga a SocialNow?", answer: "A SocialNow liga clientes a parceiros independentes que acrescentam valor. Juntos criamos produtos pensados para os clientes e reunimo-los num sistema Operation & Management (OS) fácil de utilizar." },
+      { id: "connection", question: "O que é a SocialNow?", answer: "A SocialNow é uma empresa e uma rede de parceiros de branding, conteúdos, marketing e software. Connect liga clientes e empresários independentes. SocialNow OS faz parte da SocialNow." },
       { id: "partners", question: "O que é um parceiro SocialNow?", answer: "Um parceiro é um empresário independente que contribui com a sua experiência para produtos e projetos de clientes. Os parceiros colaboram com a SocialNow através das suas próprias empresas." },
       { id: "free-os", question: "Quanto custa o SocialNow OS?", answer: "O SocialNow OS é gratuito até 10 GB de armazenamento. A partir daí, custa 20 € por mês. Os trabalhos à medida têm um preço separado, sob consulta." },
       { id: "custom", question: "Como funcionam os trabalhos à medida e quem paga aos parceiros?", answer: "Nos trabalhos à medida, a SocialNow B.V. coordena e paga aos parceiros adequados. Recebes uma proposta personalizada e tens um único ponto de contacto. A SocialNow acompanha a qualidade." },
@@ -94,7 +94,7 @@ const faq: Record<Language, BrandFaqContent> = {
   pl: {
     heading: "Najczęstsze pytania o SocialNow",
     items: [
-      { id: "connection", question: "Co łączy SocialNow?", answer: "SocialNow łączy klientów z niezależnymi partnerami, którzy wnoszą wartość. Wspólnie tworzymy produkty przyjazne klientom i łączymy je w jednym łatwym w użyciu systemie Operation & Management (OS)." },
+      { id: "connection", question: "Czym jest SocialNow?", answer: "SocialNow to firma i sieć partnerów zajmujących się brandingiem, treściami, marketingiem i oprogramowaniem. Connect łączy klientów i niezależnych przedsiębiorców. SocialNow OS jest częścią SocialNow." },
       { id: "partners", question: "Kim jest partner SocialNow?", answer: "Partner to niezależny przedsiębiorca, który wnosi swoją wiedzę do produktów i projektów dla klientów. Partnerzy współpracują z SocialNow w ramach własnych firm." },
       { id: "free-os", question: "Ile kosztuje SocialNow OS?", answer: "SocialNow OS jest bezpłatny do 10 GB przestrzeni dyskowej. Powyżej tego limitu kosztuje 20 € miesięcznie. Prace na zamówienie są wyceniane oddzielnie na zapytanie." },
       { id: "custom", question: "Jak przebiegają prace na zamówienie i kto płaci partnerom?", answer: "W przypadku prac na zamówienie SocialNow B.V. koordynuje odpowiednich partnerów i płaci im. Otrzymujesz indywidualną ofertę i masz jeden punkt kontaktu. SocialNow nadzoruje jakość." },
@@ -105,7 +105,7 @@ const faq: Record<Language, BrandFaqContent> = {
   sv: {
     heading: "Vanliga frågor om SocialNow",
     items: [
-      { id: "connection", question: "Vad kopplar SocialNow samman?", answer: "SocialNow kopplar samman kunder med självständiga partner som skapar värde. Tillsammans utvecklar vi kundvänliga produkter och samlar dem i ett lättanvänt Operation & Management-system (OS)." },
+      { id: "connection", question: "Vad är SocialNow?", answer: "SocialNow är ett företag och partnernätverk för varumärke, innehåll, marknadsföring och programvara. Connect förbinder kunder och självständiga företagare. SocialNow OS är en del av SocialNow." },
       { id: "partners", question: "Vad är en SocialNow-partner?", answer: "En partner är en självständig företagare som bidrar med expertis till produkter och kundprojekt. Partner samarbetar med SocialNow genom sina egna företag." },
       { id: "free-os", question: "Vad kostar SocialNow OS?", answer: "SocialNow OS är gratis upp till 10 GB lagring. Därefter kostar det 20 € per månad. Anpassade lösningar prissätts separat på förfrågan." },
       { id: "custom", question: "Hur fungerar anpassade lösningar och vem betalar partnerna?", answer: "För anpassade lösningar samordnar och betalar SocialNow B.V. de lämpliga partnerna. Du får ett personligt förslag och har en kontaktperson. SocialNow följer upp kvaliteten." },
@@ -116,7 +116,7 @@ const faq: Record<Language, BrandFaqContent> = {
   da: {
     heading: "Ofte stillede spørgsmål om SocialNow",
     items: [
-      { id: "connection", question: "Hvad forbinder SocialNow?", answer: "SocialNow forbinder kunder med selvstændige partnere, der skaber værdi. Sammen udvikler vi kundevenlige produkter og samler dem i ét brugervenligt Operation & Management-system (OS)." },
+      { id: "connection", question: "Hvad er SocialNow?", answer: "SocialNow er en virksomhed og et partnernetværk for branding, indhold, marketing og software. Connect forbinder kunder og selvstændige iværksættere. SocialNow OS er en del af SocialNow." },
       { id: "partners", question: "Hvad er en SocialNow-partner?", answer: "En partner er en selvstændig erhvervsdrivende, der bidrager med ekspertise til produkter og kundeprojekter. Partnere samarbejder med SocialNow gennem deres egne virksomheder." },
       { id: "free-os", question: "Hvad koster SocialNow OS?", answer: "SocialNow OS er gratis op til 10 GB lagerplads. Derefter koster det 20 € om måneden. Skræddersyede løsninger prissættes særskilt på forespørgsel." },
       { id: "custom", question: "Hvordan fungerer skræddersyede løsninger, og hvem betaler partnerne?", answer: "Ved skræddersyede løsninger koordinerer og betaler SocialNow B.V. de rette partnere. Du får et personligt tilbud og har én kontaktperson. SocialNow følger op på kvaliteten." },

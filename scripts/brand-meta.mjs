@@ -4,8 +4,8 @@
 const metadata = {
   en: {
     '/': [
-      'People, independent partners and your business OS | SocialNow',
-      'SocialNow connects customers and independent partners to build customer-friendly products in one business OS. Start free with up to 10 GB storage.',
+      'Branding, content, marketing and software | SocialNow',
+      'SocialNow is a company and partner network for branding, content, marketing and software. Connect brings customers and independent entrepreneurs together. SocialNow OS is part of SocialNow.',
     ],
     '/het-os': [
       'Operation & Management system | SocialNow',
@@ -34,8 +34,8 @@ const metadata = {
   },
   nl: {
     '/': [
-      'Mensen, zelfstandige partners en jouw bedrijfs-OS | SocialNow',
-      'SocialNow verbindt klanten en zelfstandige partners voor klantvriendelijke producten in één gebruiksvriendelijk bedrijfs-OS. Start gratis tot 10 GB opslag.',
+      'Branding, content, marketing en software | SocialNow',
+      'SocialNow is een bedrijf en partnernetwerk voor branding, content, marketing en software. Connect verbindt klanten en zelfstandige ondernemers. SocialNow OS is een onderdeel van SocialNow.',
     ],
     '/het-os': [
       'Operation & Management-systeem | SocialNow',
@@ -64,8 +64,8 @@ const metadata = {
   },
   de: {
     '/': [
-      'Menschen, selbstständige Partner und Ihr Firmen-OS | SocialNow',
-      'SocialNow verbindet Kunden und selbstständige Partner für kundenfreundliche Produkte in einem Firmen-OS. Kostenlos starten mit bis zu 10 GB Speicher.',
+      'Branding, Content, Marketing und Software | SocialNow',
+      'SocialNow ist ein Unternehmen und Partnernetzwerk für Branding, Content, Marketing und Software. Connect verbindet Kunden und selbstständige Unternehmer. SocialNow OS ist ein Teil von SocialNow.',
     ],
     '/het-os': [
       'Operation & Management-System | SocialNow',
@@ -94,8 +94,8 @@ const metadata = {
   },
   fr: {
     '/': [
-      'Des personnes, des partenaires et votre OS | SocialNow',
-      'SocialNow relie clients et partenaires indépendants pour créer des produits pensés pour les clients dans un OS. Gratuit jusqu’à 10 Go de stockage.',
+      'Branding, contenu, marketing et logiciels | SocialNow',
+      'SocialNow est une entreprise et un réseau de partenaires en branding, contenu, marketing et logiciels. Connect relie clients et entrepreneurs indépendants. SocialNow OS fait partie de SocialNow.',
     ],
     '/het-os': [
       'Système Operation & Management | SocialNow',
@@ -124,8 +124,8 @@ const metadata = {
   },
   es: {
     '/': [
-      'Personas, socios independientes y tu OS | SocialNow',
-      'SocialNow conecta clientes y socios independientes para crear productos pensados para el cliente en un OS empresarial. Gratis hasta 10 GB de almacenamiento.',
+      'Branding, contenido, marketing y software | SocialNow',
+      'SocialNow es una empresa y una red de socios de branding, contenido, marketing y software. Connect une a clientes y emprendedores independientes. SocialNow OS forma parte de SocialNow.',
     ],
     '/het-os': [
       'Sistema Operation & Management | SocialNow',
@@ -154,8 +154,8 @@ const metadata = {
   },
   it: {
     '/': [
-      'Persone, partner indipendenti e il tuo OS | SocialNow',
-      'SocialNow unisce clienti e partner indipendenti per creare prodotti pensati per i clienti in un OS aziendale. Gratuito fino a 10 GB di spazio.',
+      'Branding, contenuti, marketing e software | SocialNow',
+      'SocialNow è un’azienda e una rete di partner per branding, contenuti, marketing e software. Connect unisce clienti e imprenditori indipendenti. SocialNow OS è parte di SocialNow.',
     ],
     '/het-os': [
       'Sistema Operation & Management | SocialNow',
@@ -184,8 +184,8 @@ const metadata = {
   },
   pt: {
     '/': [
-      'Pessoas, parceiros independentes e o seu OS | SocialNow',
-      'A SocialNow liga clientes e parceiros independentes para criar produtos pensados para o cliente num OS empresarial. Gratuito até 10 GB de armazenamento.',
+      'Branding, conteúdos, marketing e software | SocialNow',
+      'A SocialNow é uma empresa e uma rede de parceiros de branding, conteúdos, marketing e software. Connect liga clientes e empresários independentes. SocialNow OS faz parte da SocialNow.',
     ],
     '/het-os': [
       'Sistema Operation & Management | SocialNow',
@@ -214,8 +214,8 @@ const metadata = {
   },
   pl: {
     '/': [
-      'Ludzie, niezależni partnerzy i OS dla firmy | SocialNow',
-      'SocialNow łączy klientów i niezależnych partnerów, tworząc przyjazne klientom produkty w jednym systemie dla firmy. Bezpłatnie do 10 GB pamięci.',
+      'Branding, treści, marketing i oprogramowanie | SocialNow',
+      'SocialNow to firma i sieć partnerów zajmujących się brandingiem, treściami, marketingiem i oprogramowaniem. Connect łączy klientów i niezależnych przedsiębiorców. SocialNow OS jest częścią SocialNow.',
     ],
     '/het-os': [
       'System Operation & Management | SocialNow',
@@ -244,8 +244,8 @@ const metadata = {
   },
   sv: {
     '/': [
-      'Människor, självständiga partner och ditt OS | SocialNow',
-      'SocialNow förenar kunder och självständiga partner för att skapa kundvänliga produkter i ett gemensamt företags-OS. Gratis upp till 10 GB lagring.',
+      'Varumärke, innehåll, marknadsföring och programvara | SocialNow',
+      'SocialNow är ett företag och partnernätverk för varumärke, innehåll, marknadsföring och programvara. Connect förbinder kunder och självständiga företagare. SocialNow OS är en del av SocialNow.',
     ],
     '/het-os': [
       'Operation & Management-system | SocialNow',
@@ -274,8 +274,8 @@ const metadata = {
   },
   da: {
     '/': [
-      'Mennesker, selvstændige partnere og dit OS | SocialNow',
-      'SocialNow forbinder kunder og selvstændige partnere for at skabe kundevenlige produkter i ét virksomheds-OS. Gratis op til 10 GB lagerplads.',
+      'Branding, indhold, marketing og software | SocialNow',
+      'SocialNow er en virksomhed og et partnernetværk for branding, indhold, marketing og software. Connect forbinder kunder og selvstændige iværksættere. SocialNow OS er en del af SocialNow.',
     ],
     '/het-os': [
       'Operation & Management-system | SocialNow',
