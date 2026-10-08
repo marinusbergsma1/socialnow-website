@@ -7,7 +7,7 @@ import LinkedInMark from "./LinkedInMark";
 import AdvisoryPartner from "./AdvisoryPartner";
 
 // Iedereen uit people, Marinus voorop; de rest in de volgorde van de muur.
-const voorop = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe", "Steven Goudsblom"];
+const voorop = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Jelle Ursem", "Femke Oostendorp", "Sid van Kalken", "Tristan Slobbe", "Steven Goudsblom"];
 const teamOpVolgorde = () => [...people].sort((a, b) => (voorop.indexOf(a.name) + 1 || 99) - (voorop.indexOf(b.name) + 1 || 99));
 
 // 28 september 2026 (Marinus): meer mensen uit het team laten zien, de tekst mag kleiner. Het hele team, even groot.
@@ -59,7 +59,7 @@ const FUNCTIES: { functie: string; mensen: string[] }[] = [
   { functie: "Web development", mensen: ["Sid van Kalken", "Antony Soosaipillaj"] },
   { functie: "Finance & operations", mensen: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
   { functie: "Ads & search", mensen: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"] },
-  { functie: "Video, photo & design", mensen: ["Carmel Boon", "Sam van der Sluis", "Emma Peperkamp", "Pepijn Bos", "Armando van Bruggen"] },
+  { functie: "Video, photo & design", mensen: ["Carmel Boon", "Sam van der Sluis", "Emma Peperkamp", "Jelle Ursem", "Femke Oostendorp", "Pepijn Bos", "Armando van Bruggen"] },
   { functie: "Sales & partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Aren", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
 ];
 
@@ -69,7 +69,7 @@ const LAGEN: [string, string[]][] = [
   ["Partner", ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer"]],
   ["Board", ["Michelle Yang", "Tristan Slobbe", "Steven Goudsblom"]],
   ["Head", ["Jos Hollenberg", "Nick van Keulen", "Carmel Boon", "Elian Coellar"]],
-  ["Specialist", ["Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
+  ["Specialist", ["Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Jelle Ursem", "Femke Oostendorp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
   ["Sales & network", ["Aren", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
 ];
 
