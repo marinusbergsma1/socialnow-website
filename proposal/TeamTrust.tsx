@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { people } from "./content";
 import { klein } from "./licht";
 import LinkedInMark from "./LinkedInMark";
+import AdvisoryPartner from "./AdvisoryPartner";
 
 // Iedereen uit people, Marinus voorop; de rest in de volgorde van de muur.
 const voorop = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe", "Steven Goudsblom"];
@@ -100,7 +101,7 @@ function TeamPerFunctie() {
   // Bereken de weekgrens na het monteren: de browser kan dagen na deze statische build openen.
   const [nieuw, setNieuw] = React.useState(0);
   React.useEffect(() => {
-    setNieuw(people.filter(p => p.sinds && Date.now() - Date.parse(p.sinds) < 7 * 864e5).length);
+    setNieuw(people.filter(p => FUNCTIES.some(groep => groep.mensen.includes(p.name)) && p.sinds && Date.now() - Date.parse(p.sinds) < 7 * 864e5).length);
   }, []);
   const pil = (functie: string, label: string, aantal: number) =>
     <button key={label} type="button" aria-pressed={keuze === functie} onClick={() => setKeuze(functie)}>{label}<small>{aantal}</small></button>;
@@ -109,7 +110,7 @@ function TeamPerFunctie() {
     <div className="h-functie-pillen" role="group" aria-label="Filter by function">
       {pil("", "All", alle.length)}
       {FUNCTIES.map(groep => pil(groep.functie, groep.functie, groep.mensen.length))}
-      {nieuw > 0 ? <span className="h-team-groei"><b>+{nieuw}</b> this week · {people.length} people</span> : null}
+      {nieuw > 0 ? <span className="h-team-groei"><b>+{nieuw}</b> this week · {alle.length} people</span> : null}
     </div>
     {!keuze ? <TeamInLagen /> : <div className="h-functie-muur">
       {getoond.map(({ naam }) => {
@@ -152,6 +153,7 @@ export function TeamJoin() {
         <div className="h-duo-rij"><DuoTegel naam="Steven Goudsblom" /><div className="h-fincer-toelichting"><strong>Wealth management, with personal contact.</strong><p>Steven is our wealth partner, for SocialNow and our clients.</p></div></div>
       </div>
     </div>
+    <AdvisoryPartner />
     <div className="h-board">
       <div className="h-board-tekst"><b>Board</b><strong>Operations, data and wealth.</strong><span>Michelle, Tristan and Steven</span></div>
       {BOARD.map(naam => <DuoTegel key={naam} naam={naam} />)}

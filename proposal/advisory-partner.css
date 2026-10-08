@@ -1,0 +1,14 @@
+.sn-site .sn-advisory { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 24px; margin: 18px 0; padding: 24px; border: 1px solid #e6bd91; border-radius: 18px; background: #fff0df; color: #39281c; grid-column: 1 / -1; }
+.sn-site .sn-advisory-photo { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 12px; }
+.sn-site .sn-advisory-copy { min-width: 0; }
+.sn-site .sn-advisory-copy > small { display: block; font-size: 11px; color: #936339; }
+.sn-site .sn-advisory h3 { color: inherit; font-size: 24px; line-height: 1.2; margin: 8px 0 12px; }
+.sn-site .sn-advisory h3 a { color: inherit; text-decoration: none; }
+.sn-site .sn-advisory h3 a:hover { text-decoration: underline; }
+.sn-site .sn-advisory h3 a:focus-visible { outline: 2px solid #9b632e; outline-offset: 4px; }
+.sn-site .sn-advisory-copy > strong { font-size: 16px; }
+.sn-site .sn-advisory-copy > p { margin: 8px 0 12px; color: #39281c; font-size: 14px; line-height: 1.5; }
+:root .sn-site .sn-advisory-logo { display: inline-block; max-width: 100%; margin-top: 8px; padding: 0; background: transparent; border: 0; }
+:root .sn-site .sn-advisory-logo img { display: block; width: 200px; max-width: 100%; height: auto; object-fit: contain; filter: none; transform: none; }
+.sn-site .sn-advisory-logo:focus-visible { outline: 2px solid #9b632e; outline-offset: 4px; }
+@media (max-width: 640px) { .sn-site .sn-advisory { grid-template-columns: 1fr; padding: 18px; gap: 16px; } .sn-site .sn-advisory-photo { width: 140px; } }

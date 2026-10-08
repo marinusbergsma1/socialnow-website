@@ -25,6 +25,7 @@ import { allPosts } from "../data/posts";
 import socialPosts from "../public/data/socialposts.json";
 import PartnerMichelle from "./PartnerMichelle";
 import PartnerIntro from "./PartnerIntro";
+import AdvisoryPartner from "./AdvisoryPartner";
 import { Bedrijfsreferenties } from "./TeamTrust";
 import {
   Action,
@@ -419,7 +420,7 @@ export function TeamPage() {
   const socialnow = vind(["Marinus Bergsma", "Steef Komen"]);
   const attesso = vind(["Sid van Kalken", "Douwe Kramer"]);
   const fincer = vind(["Steven Goudsblom"]);
-  const inTeams = [...socialnow, ...attesso, ...fincer].map(person => person.name);
+  const inTeams = [...socialnow, ...attesso, ...fincer, ...vind(["Albert Deltour"])].map(person => person.name);
   // Michelle staat vooraan bij de zelfstandige partners.
   const specialists = [
     ...vind(["Michelle Yang"]),
@@ -469,6 +470,9 @@ export function TeamPage() {
           Marinus en Steef bouwen het OS en maken het schaalbaar. Sid en Douwe van Attesso werken aan veilige agentic payments. Steven van Fincer is onze partner voor vermogensbeheer. Marinus en Sid spreken samen: live demo&apos;s, talks en workshops, overal ter wereld.
         </p>
         <Bedrijfsreferenties />
+      </section>
+      <section className="h-wrap" aria-label="Extern advies aan SocialNow">
+        <AdvisoryPartner />
       </section>
       <section className="h-wrap">
         <Founder />
