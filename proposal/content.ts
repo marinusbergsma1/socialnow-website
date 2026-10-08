@@ -81,6 +81,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   // 5 oktober 2026 (Marinus): "HIJ MOET OOK BIJ HET TEAM EN BIJ NEW PARTNER." Steven Goudsblom (Fincer B.V.) doet het
   // vermogensbeheer voor SocialNow en onze klanten.
   { name: "Steven Goudsblom", role: "New partner · Wealth management · Fincer", image: "Steven-Goudsblom.webp", linkedin: "https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/", sinds: "2026-10-05" },
+  { name: "Albert Deltour", role: "Extern adviseur en klankbord", image: "Albert-Deltour.webp", linkedin: "https://www.linkedin.com/in/albert-deltour-020a8438/", sinds: "2026-10-07" },
 ];
 // Bedrijfsreferenties zijn echte, bevestigde websites of het profiel van de oprichter.
 export const partnerReferences: Record<string, { name: string; url: string }[]> = {
