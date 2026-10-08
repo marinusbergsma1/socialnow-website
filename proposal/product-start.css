@@ -21,12 +21,15 @@
 .sn-site .prijs-opslag p { color: #d3d8d5; margin-bottom: 18px; }
 @media (max-width: 400px) { .sn-site .sn-product-route { gap: 8px; font-size: 12px; } }
 
-:root .sn-site .h-product-milos { align-self: center; min-width: 0; }
+:root .sn-site .h-product-milos { display: flex; flex-direction: column; gap: clamp(16px, 1.5vw, 24px); align-self: center; min-width: 0; }
+:root .sn-site .h-product-milos > .h-film-titel { margin: 0; }
 :root .sn-site .h-product-milos .h-hero-milos { position: static; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; gap: 16px; }
 :root .sn-site .h-product-milos .h-hero-milos > a { border: 1px solid var(--c-lijn, #ffffff1a); border-radius: var(--c-radius-kaart, 14px); padding: 16px; }
 :root .sn-site .h-product-milos .h-hero-milos a > span { display: block; }
 :root .sn-site #koppelingen .h-hero-film { width: 100%; max-width: 900px; margin-inline: auto; }
-@media (max-width: 700px) { :root .sn-site .h-product-milos { margin-top: 24px; } :root .sn-site .h-product-milos .h-hero-milos > a { padding: 12px; } }
+/* Onder de desktopkolommen krijgt het productblok eigen ruimte na de downloadrij. */
+@media (max-width: 1099px) { :root .sn-site .h-product-milos { margin-top: clamp(32px, 4vw, 44px); } }
+@media (max-width: 700px) { :root .sn-site .h-product-milos .h-hero-milos > a { padding: 12px; } }
 :root .sn-site .h-header-login-short { display: none; }
 @media (max-width: 700px) {
   :root .sn-site .h-header-login-full { display: none; }
