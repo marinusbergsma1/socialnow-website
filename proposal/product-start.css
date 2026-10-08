@@ -1,7 +1,6 @@
 .sn-site .sn-product-route { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 20px 0 12px; font-size: 13px; font-weight: 600; letter-spacing: .05em; }
-.sn-site .sn-product-brand { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin: 20px 0 8px; }
-.sn-site .sn-product-brand > strong { color: #fff; font-size: clamp(22px, 2.5vw, 30px); font-weight: 600; line-height: 1.2; }
-.sn-site .sn-product-brand > strong > span { color: var(--c-accent, #25d366); }
+.sn-site .sn-product-brand { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; margin: 20px 0 8px; }
+.sn-site .sn-product-brand > img { display: block; width: min(100%, 300px); height: auto; }
 .sn-site .sn-product-brand > span, .sn-site .sn-product-attribution { color: #d3d8d5; font-size: 14px; line-height: 1.5; }
 .sn-site .h-final-close > .sn-product-attribution { margin: 8px 0 24px; }
 .sn-site .sn-product-route a { color: #fff; padding: 8px 0; text-decoration: none; border-bottom: 1px solid var(--c-lijn-sterk, #ffffff2e); }

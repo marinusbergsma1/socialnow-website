@@ -19,7 +19,7 @@ export function ProductOffer() {
   return (
     <>
     <div className="sn-product-brand" translate="no">
-      <strong>SocialNow<span>/OS</span></strong>
+      <img src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="92" />
       <span lang="en">a SocialNow product</span>
     </div>
     <div className="sn-product-offer">
