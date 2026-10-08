@@ -23,7 +23,7 @@ const eisen = [
   ["verhaal van Marinus in een eigen vak", pages.includes('className="h-team-verhaal"') && pages.includes("Why I started") && pages.includes("family of makers") && pages.includes("free, fair and social economy")],
   ["AI Payments niet bij Steef en Michelle, wel bij Sid", !rol("Steef Komen").includes("AI Payments") && !rol("Michelle Yang").includes("AI Payments") && rol("Sid van Kalken").includes("AI Payments")],
   ["SocialNow-duo donkerblauw naar zwart, groen feller", /\.h-duo\.is-sn \{[^}]*#16233a[^}]*#0b0f12/.test(css) && /b\.g \{ color: #0cb457; \}/.test(css)],
-  ["LinkedIn bij Tristan en Douwe, bedrijfslogo's linken door", ["https://www.linkedin.com/in/tristan-slobben-105056159/", "https://www.linkedin.com/in/douwekramer/", "https://www.klm.com", "https://www.bearingpoint.com", "https://bytechat.io", "https://bytevision.io"].every(u => team.includes(`"${u}"`)) && team.includes('rel: "noopener noreferrer"')],
+  ["LinkedIn bij Tristan en Douwe, bedrijfslogo's linken door", ["https://www.linkedin.com/in/tristan-slobben-105056159/", "https://www.linkedin.com/in/douwe-kramer-attesso/", "https://www.klm.com", "https://www.bearingpoint.com", "https://bytechat.io", "https://bytevision.io"].every(u => team.includes(`"${u}"`)) && team.includes('rel: "noopener noreferrer"')],
 ];
 let fout = 0;
 for (const [naam, ok] of eisen) { console.log(`${ok ? "groen" : "ROOD "} ${naam}`); if (!ok) fout++; }

@@ -210,7 +210,7 @@ export function Bedrijfsreferenties() {
         <a href="https://www.klm.com" {...extern}><img src="/images/merken/klm.svg" alt="KLM" style={{ height: 14 }} loading="lazy" /></a>
         <a href="https://www.bearingpoint.com" {...extern}><img src="/images/merken/bearingpoint.svg" alt="BearingPoint" style={{ height: 13 }} loading="lazy" /></a>
       </Bouwer>
-      <Bouwer naam="Douwe Kramer" rol="Co-founder" linkedin="https://www.linkedin.com/in/douwekramer/">
+      <Bouwer naam="Douwe Kramer" rol="Co-founder" linkedin="https://www.linkedin.com/in/douwe-kramer-attesso/">
         <a className="h-bouwer-merk" href="https://bytechat.io" {...extern}><img src="/images/merken/bytechat.svg" alt="" style={{ height: 16 }} loading="lazy" /><span>Byte<em>Chat</em></span></a>
         <a className="h-bouwer-merk" href="https://bytevision.io" {...extern}><img src="/images/merken/bytevision.png" alt="" style={{ height: 16 }} loading="lazy" />ByteVision</a>
       </Bouwer>
