@@ -16,7 +16,7 @@ import { Bento, Tegel } from "./Bento";
 import { AuditTeaser } from "./AuditPage";
 import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
-import { VideoSlider, ImageSliders } from "./MediaSliders";
+import { ImageSliders } from "./MediaSliders";
 import OsEntry, { GRATIS_OS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
 import Pricing from "./Pricing";
@@ -24,7 +24,7 @@ import TeamTrust from "./TeamTrust";
 import OsPeople from "./OsPeople";
 import { ProductOffer, ProductRoute } from "./ProductStart";
 import { allPosts } from "../data/posts";
-import socialPosts from "../public/data/socialposts.json";
+import InstagramWork from "./InstagramWork";
 import PartnerMichelle from "./PartnerMichelle";
 import PartnerIntro from "./PartnerIntro";
 import AdvisoryPartner from "./AdvisoryPartner";
@@ -240,26 +240,9 @@ export function ProjectsPage() {
       />
       <FeaturedWork />
       <LiveWebsites />
-      <VideoSlider />
       <ImageSliders />
       <ShowcaseFilms />
-      <Bento id="social" label="Gemaakt door ons team" titel={<>Human creativity.<br /><span>Powered by AI technology.</span></>} swipe>
-        {socialPosts.posts.map((post) => (
-          <Tegel key={post.beeld} kop={post.titel} breed={3} soort="foto" className="h-social-tegel">
-            <img src={`/images/social/${post.beeld}`} alt={post.titel} width={post.breed} height={post.hoog} loading="lazy" />
-          </Tegel>
-        ))}
-        <Tegel kop="Instagram" breed={3} soort="groen" className="h-social-volg">
-          <p className="sn-tegel-tekst">Campagnes, social content en merkwerk uit onze eigen collectie.</p>
-          <div className="sn-tegel-onder">
-            <a className="sn-btn3d h-button h-button-secondary" href={socialPosts.profiel} target="_blank" rel="noopener noreferrer">
-              <span className="sn-btn3d-sheen" />
-              <span>Volg ons op Instagram</span>
-              <ArrowUpRight size={16} aria-hidden="true" />
-            </a>
-          </div>
-        </Tegel>
-      </Bento>
+      <InstagramWork />
       <section className="h-wrap h-projects-list">
         <div className="h-filters" role="group" aria-label="Filter projecten">
           {[

@@ -5,6 +5,7 @@ import {Action, TextLink} from "./ui";
 import {AmbientVideo} from "./motion";
 import {MediaDialog, type MediaItem} from "./MediaSliders";
 import {useLanguage} from "./i18n/context";
+import InstagramWork from "./InstagramWork";
 
 const stories: Record<string, {title:string; text:string}[]> = {
   "raveg-branding": [
@@ -49,7 +50,8 @@ export default function ProjectCase({project,next}:{project:Project;next:Project
         <h2>Van idee naar uitvoering.</h2>
         <div>{(stories[project.slug] || [{title:"Het project",text:project.description}]).map(part=><article key={part.title}><h3>{part.title}</h3><p>{part.text}</p></article>)}</div>
       </div>
-      {gallery.length>0 && <section className="h-project-selection" aria-labelledby="case-work-title"><div className="h-project-selection-heading"><h2 id="case-work-title">Het werk van dichtbij.</h2><p>Klik op een beeld of video om het volledig te bekijken.</p></div>
+      {isVdz && <InstagramWork project="vdz" />}
+      {!isVdz && gallery.length>0 && <section className="h-project-selection" aria-labelledby="case-work-title"><div className="h-project-selection-heading"><h2 id="case-work-title">Het werk van dichtbij.</h2><p>Klik op een beeld of video om het volledig te bekijken.</p></div>
         <div className="h-project-media-grid">{gallery.map((src,index)=>{
           const video=/\.(mp4|webm)(?:\?|$)/i.test(src);
           const title=captions[index] || `${t(video?"Video":"Beeld")} ${index+1}`;
