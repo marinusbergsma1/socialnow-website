@@ -25,6 +25,7 @@ export default function ProjectCase({project,next}:{project:Project;next:Project
   const [selected,setSelected]=useState<MediaItem|null>(null);
   const {t}=useLanguage();
   const isWebsite=!!project.url && !project.offline;
+  const isVdz=project.slug==="vdz-brigade-website" && isWebsite;
   const captions=project.slug==="raveg-branding" ? ["Dyadium","Hyperpower / 01","Hyperpower / 02"] : [];
   const gallery=project.gallery || [];
   return <>
@@ -36,7 +37,10 @@ export default function ProjectCase({project,next}:{project:Project;next:Project
       </div>
     </header>
     <section className="h-wrap h-project-body" aria-label="Projectuitwerking">
-      {isWebsite ? <div className="h-project-live"><span className="h-eyebrow">Live website</span><h2>{project.title}</h2><Action href={project.url!}>Bekijk de live website</Action><p>Bekijk het ontwerp en de interactie op de website zelf.</p></div> :
+      {isVdz ? <a className="h-project-cover h-project-animation" href={project.url!} aria-label={t("Bekijk de live website")}>
+          <AmbientVideo src="/video/vdz/vdz-house.mp4" poster="/video/vdz/vdz-house-poster.jpg" label={project.title} />
+          <span className="h-project-animation-link">Bekijk de live website <ArrowUpRight size={17} aria-hidden="true" /></span>
+        </a> : isWebsite ? <div className="h-project-live"><span className="h-eyebrow">Live website</span><h2>{project.title}</h2><Action href={project.url!}>Bekijk de live website</Action><p>Bekijk het ontwerp en de interactie op de website zelf.</p></div> :
         <button type="button" className="h-project-cover" onClick={()=>setSelected({src:project.image,title:project.title,kind:"image"})} aria-label="Vergroot het projectbeeld">
           <img src={project.image} alt={project.title} width="1920" height="1091" />
           <span><Expand size={17}/><span>Bekijk de details</span></span>
