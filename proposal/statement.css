@@ -2,11 +2,11 @@
    Ligaturen uit, letters nooit aan elkaar. */
 .sn-site .sn-statement .sn-tegel-vlak { display: grid; gap: clamp(14px, 1.6vw, 22px); font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0, "dlig" 0; }
 /* Ronde 2 (30 september 2026, optie A): één zin in plaats van zes kapitalen met stippen. */
-.sn-site .sn-statement-zin { margin: clamp(8px, 1.4vw, 20px) 0 0; max-width: 20ch; color: #fff; font-size: clamp(30px, 4.6vw, 64px); font-weight: 700; line-height: 1.08; letter-spacing: -.02em; text-wrap: balance; }
+.sn-site .sn-statement-zin { margin: clamp(8px, 1.4vw, 20px) 0 0; max-width: 20ch; color: #fff; font-size: clamp(30px, 4.6vw, 64px); font-weight: 700; line-height: 1.08; letter-spacing: 0; text-wrap: balance; }
 .sn-site .sn-statement-zin span { color: rgba(255, 255, 255, .62); font-weight: 500; }
 .sn-site .sn-statement-zin em { color: #25d366; font-style: normal; }
 .sn-site .sn-statement-voet { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 40px; margin-top: clamp(12px, 2vw, 28px); padding-top: clamp(18px, 2.2vw, 28px); border-top: 1px solid rgba(255, 255, 255, .1); }
-.sn-site .sn-statement-daarom { margin: 0; color: #fff; font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; line-height: 1.2; letter-spacing: -.01em; }
+.sn-site .sn-statement-daarom { margin: 0; color: #fff; font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; line-height: 1.2; letter-spacing: 0; }
 .sn-site .sn-statement-klein { margin: 0; color: rgba(255, 255, 255, .62); font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
 .sn-site .sn-statement-founder .sn-tegel-vlak { gap: clamp(18px, 2vw, 26px); }
 .sn-site .sn-founder-rij { display: flex; align-items: center; gap: clamp(16px, 2vw, 28px); }

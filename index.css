@@ -113,6 +113,12 @@ body {
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
+/* TT Norms heeft een smalle spatie (0,19 em); zonder extra woordafstand lopen woorden op mobiel in elkaar.
+   Per element gezet, zodat de afstand meeschaalt met de lettergrootte van koppen. */
+:where(*, *::before, *::after) {
+  word-spacing: .06em;
+}
+
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

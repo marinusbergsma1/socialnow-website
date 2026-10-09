@@ -10,6 +10,11 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
       },
+      // Nooit letters tegen elkaar (Marinus, 9 okt 2026): tracking-tight en -tighter zetten geen negatieve afstand.
+      letterSpacing: {
+        tighter: '0',
+        tight: '0',
+      },
       animation: {
         'scroll': 'scroll var(--scroll-duration, 40s) linear infinite',
         'fade-in-up': 'fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',

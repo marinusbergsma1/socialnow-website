@@ -47,7 +47,7 @@
   font-size: 44px;
   font-weight: 500;
   line-height: 1.02;
-  letter-spacing: -0.045em;
+  letter-spacing: 0;
   color: #fff;
 }
 .sn-consent .sn-consent-duo .sn-consent-kop span { color: #87878a; }
@@ -137,7 +137,7 @@
   font-size: 19px;
   font-weight: 800;
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: #fff;
 }
 .sn-consent .sn-consent-duo .sn-consent-actie-win {
@@ -152,7 +152,7 @@
   font-size: 44px;
   font-weight: 800;
   line-height: 1.02;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   white-space: nowrap;
   color: #25d366;
   background: linear-gradient(100deg, #b8ffd4 0%, #4ce888 35%, #25d366 60%, #13a14c 100%);
@@ -232,7 +232,7 @@
 .sn-consent-klaar { max-width: 520px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .sn-consent-klaar .sn-consent-logo { width: 150px; height: auto; }
 .sn-consent-knop-website { width: 100%; margin-top: 14px; }
-.sn-consent-os-kop { margin: 0 0 20px; font-size: 18px; font-weight: 700; color: #fff; letter-spacing: -.01em; }
+.sn-consent-os-kop { margin: 0 0 20px; font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 0; }
 .sn-site .sn-consent .sn-consent-duo .sn-consent-os-kop { margin: 0 0 26px; }
 @media (max-width: 819px) { .sn-site .sn-consent .sn-consent-duo .sn-consent-os-kop { margin-bottom: 20px; } }
 
@@ -260,7 +260,7 @@
 .sn-consent .sn-consent-duo .sn-consent-team-duo figcaption span { font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #8ff3b8; }
 .sn-consent .sn-consent-duo .sn-consent-team-tekst { display: grid; align-content: center; justify-items: start; gap: 10px; padding: 20px 22px; text-align: left; }
 .sn-consent .sn-consent-duo .sn-consent-team-tekst .sn-consent-actie-badge { display: inline-flex; align-items: center; border-radius: 999px; margin: 0; }
-.sn-consent .sn-consent-duo .sn-consent-team-tekst strong { font-size: 22px; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; color: #fff; }
+.sn-consent .sn-consent-duo .sn-consent-team-tekst strong { font-size: 22px; font-weight: 800; line-height: 1.15; letter-spacing: 0; color: #fff; }
 .sn-consent .sn-consent-duo .sn-consent-team-tekst > span:last-child { font-size: 14px; line-height: 1.5; color: #c6ecd6; }
 .sn-consent .sn-consent-duo .sn-consent-team-balk {
   margin-top: 12px; overflow: hidden;

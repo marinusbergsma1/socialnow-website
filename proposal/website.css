@@ -110,7 +110,7 @@ video {
 .sn-site h3 {
   font-family: inherit;
   font-weight: 500;
-  letter-spacing: -0.045em;
+  letter-spacing: 0;
   margin: 0;
   line-height: 1.06;
 }
@@ -122,7 +122,7 @@ video {
 }
 .sn-site h3 {
   font-size: 25px;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
 .sn-site h1 > span,
 .sn-site h2 > span {
@@ -436,7 +436,7 @@ video {
 .h-hero h1 {
   font-size: clamp(70px, 7.65vw, 112px);
   line-height: 0.98;
-  letter-spacing: -0.065em;
+  letter-spacing: 0;
   margin-top: 29px;
   max-width: 800px;
 }
@@ -865,7 +865,7 @@ video {
 .h-review blockquote {
   margin: 0;
   font-size: 22px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1.45;
 }
 .h-review figcaption {
@@ -959,7 +959,7 @@ video {
   line-height: 1.6;
   color: #c5c5c8;
   margin: 28px 0 20px;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
 }
 .h-concept {
   display: block;
@@ -1271,7 +1271,7 @@ video {
 }
 .h-case-next a {
   font-size: 22px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 .h-steps {
   display: grid;
@@ -2856,7 +2856,7 @@ video {
 .h-hero-milos strong {
   font-size: 19px;
   font-weight: 500;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   margin-top: 8px;
 }
 .h-hero-milos strong:before {

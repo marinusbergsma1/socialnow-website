@@ -3,7 +3,7 @@
 /* Partnerblok met Michelle op /contact. */
 .sn-site .h-partner-kaart { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: center; padding: clamp(24px, 4vw, 48px); border: 1px solid #1f5a3a; border-radius: 26px; background: radial-gradient(110% 90% at 0% 0%, rgba(37, 211, 102, .14), transparent 60%), #07110c; }
 .sn-site .h-partner-kaart > img { width: clamp(84px, 9vw, 120px); height: clamp(84px, 9vw, 120px); border-radius: 50%; object-fit: cover; object-position: 50% 20%; border: 2px solid #25d366; }
-.sn-site .h-partner-kaart h2 { margin: 10px 0 0; font-size: clamp(30px, 3.4vw, 48px); line-height: 1.05; letter-spacing: -.03em; }
+.sn-site .h-partner-kaart h2 { margin: 10px 0 0; font-size: clamp(30px, 3.4vw, 48px); line-height: 1.05; letter-spacing: 0; }
 .sn-site .h-partner-tekst { max-width: 620px; margin: 14px 0 0; font-size: clamp(16px, 1.2vw, 19px); line-height: 1.55; color: #c3ccd4; }
 .sn-site .h-partner-acties { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 22px; }
 .sn-site .h-partner-acties .h-button { gap: 10px; }
