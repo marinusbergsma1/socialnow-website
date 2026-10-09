@@ -57,7 +57,7 @@
 .sn-site .tr-dash-kop small { color: #4f8cff; font-size: inherit; }
 .sn-site .tr-dash-cijfers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0; }
 .sn-site .tr-dash-cijfers dt { font-family: var(--c-mono, ui-monospace, Menlo, monospace); font-size: 10px; color: #8b9691; }
-.sn-site .tr-dash-cijfers dd { margin: 4px 0 0; font-family: var(--c-mono, ui-monospace, Menlo, monospace); font-size: 20px; font-weight: 500; letter-spacing: -.03em; color: #fff; }
+.sn-site .tr-dash-cijfers dd { margin: 4px 0 0; font-family: var(--c-mono, ui-monospace, Menlo, monospace); font-size: 20px; font-weight: 500; letter-spacing: 0; color: #fff; }
 .sn-site .tr-dash svg { display: block; width: 100%; height: 70px; }
 .sn-site .tr-dash-vlak { fill: #4f8cff14; }
 .sn-site .tr-dash-lijn { fill: none; stroke: #4f8cff; stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s cubic-bezier(.3,.7,.2,1); }

@@ -14,7 +14,7 @@
   font-size: clamp(19px, 1.6vw, 22px);
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 :root .sn-site .h-partner-uitleg > p {

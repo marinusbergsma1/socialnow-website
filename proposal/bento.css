@@ -11,7 +11,7 @@
 
 .sn-site .sn-bento-rooster { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-flow: row dense; gap: clamp(26px, 2.6vw, 40px) clamp(16px, 1.7vw, 28px); align-items: stretch; }
 .sn-site .sn-tegel { grid-column: span var(--breed, 6); grid-row: span var(--hoog, 1); display: flex; flex-direction: column; min-width: 0; }
-.sn-site .sn-tegel-kop { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: clamp(15px, 1.05vw, 18px); font-weight: 700; line-height: 1.25; color: #fff; letter-spacing: -.01em; }
+.sn-site .sn-tegel-kop { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: clamp(15px, 1.05vw, 18px); font-weight: 700; line-height: 1.25; color: #fff; letter-spacing: 0; }
 .sn-site .sn-tegel-kop::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #25d366; box-shadow: 0 0 10px #25d366; flex: none; }
 .sn-site .sn-tegel-vlak { position: relative; flex: 1; display: flex; flex-direction: column; gap: 14px; min-height: 0; padding: clamp(20px, 2.1vw, 32px); border-radius: 22px; background: #0b0f12; border: 1px solid rgba(255,255,255,.1); overflow: hidden; transition: border-color .3s ease, transform .5s cubic-bezier(.16,1,.3,1); }
 .sn-site .sn-tegel-vlak:hover { border-color: rgba(255,255,255,.2); }
@@ -29,7 +29,7 @@
 .sn-site .sn-tegel.is-blauw .sn-tegel-label { color: #7fd3f5; }
 .sn-site .sn-tegel.is-roze .sn-tegel-label { color: #ff8fb0; }
 .sn-site .sn-tegel.is-geel .sn-tegel-label { color: #f7e644; }
-.sn-site .sn-tegel-titel { margin: 0; font-size: clamp(22px, 2vw, 32px); line-height: 1.1; letter-spacing: -.03em; color: #fff; font-weight: 700; }
+.sn-site .sn-tegel-titel { margin: 0; font-size: clamp(22px, 2vw, 32px); line-height: 1.1; letter-spacing: 0; color: #fff; font-weight: 700; }
 .sn-site .sn-tegel-tekst { margin: 0; font-size: clamp(15px, 1.05vw, 16.5px); line-height: 1.58; color: #aeb8c1; }
 .sn-site .sn-tegel-onder { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
 .sn-site .sn-tegel .h-button { min-height: 52px; border-radius: 999px; font-size: 16px; font-weight: 700; letter-spacing: 0; text-transform: none; }

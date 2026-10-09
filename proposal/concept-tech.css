@@ -9,7 +9,7 @@
 @media (max-width: 700px) { :root { --c-sectie: 56px; } }
 
 /* ── Koppen: klein en strak ───────────────────────────────────────────────── */
-:root .sn-site h1, :root .sn-site .h-kop-typen { font-size: clamp(28px, 3vw, 36px) !important; letter-spacing: -0.035em; }
+:root .sn-site h1, :root .sn-site .h-kop-typen { font-size: clamp(28px, 3vw, 36px) !important; letter-spacing: 0; }
 :root .sn-site h2 { font-size: clamp(22px, 2vw, 26px) !important; }
 :root .sn-site .sn-bento-kop > h2, :root .sn-site .h-section-heading h2 { font-size: clamp(24px, 2.2vw, 28px) !important; }
 :root .sn-site h3 { font-size: 17px !important; }
@@ -87,7 +87,7 @@
 /* Herobknoppen ook in tech-font. */
 :root .sn-site .h-dock-login, :root .sn-site .h-dock-demo { font-family: var(--v-mono) !important; font-size: 13px !important; font-weight: 500 !important; }
 /* Cijfers in tech-font, kleiner. */
-:root .sn-site .h-verhaal-jaren b { font-size: 28px !important; font-family: var(--v-mono) !important; letter-spacing: -0.02em; }
+:root .sn-site .h-verhaal-jaren b { font-size: 28px !important; font-family: var(--v-mono) !important; letter-spacing: 0; }
 
 /* 5 oktober 2026: footer-rij Gecertificeerd & erkend (Google Partner, Meta Business Partner, Google Developers). */
 :root .sn-site .h-footer-erkend { display: grid; justify-items: center; gap: 16px; margin: 0 auto 28px; }
@@ -117,7 +117,7 @@
 :root .sn-site .h-bouwer { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-content: start; gap: 12px; padding: 14px; border-radius: 12px; }
 :root .sn-site .h-bouwer-foto { width: 40px; height: 40px; }
 :root .sn-site .h-bouwer-naam { white-space: normal; gap: 3px; }
-:root .sn-site .h-bouwer-naam strong { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+:root .sn-site .h-bouwer-naam strong { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; font-size: 15px; font-weight: 600; letter-spacing: 0; }
 :root .sn-site .h-bouwer-naam i { font-family: var(--v-mono); font-size: 11px; color: #5b6560; }
 :root .sn-site .h-bouwer-nieuw { margin-left: 0; font-family: var(--v-mono); font-size: 10px; font-weight: 500; }
 :root .sn-site .h-bouwer-merken { grid-column: 1 / -1; margin-left: 0; padding-top: 12px; border-top: 1px solid #0b0f1214; gap: 14px; flex-wrap: wrap; }

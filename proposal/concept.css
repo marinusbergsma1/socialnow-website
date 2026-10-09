@@ -35,13 +35,13 @@
 /* ── Koppen: geen VHS/glitch meer, een vaste typeschaal ──────────────────────── */
 h1:not(.sn-vhs-off), h2:not(.sn-vhs-off), h3:not(.sn-vhs-off), .sn-vhs { text-shadow: none; }
 h1:not(.sn-vhs-off)::after, h2:not(.sn-vhs-off)::after, h3:not(.sn-vhs-off)::after, .sn-vhs::after { background: none; }
-:root .sn-site h1, :root .sn-site h2, :root .sn-site h3 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; text-wrap: balance; }
+:root .sn-site h1, :root .sn-site h2, :root .sn-site h3 { font-weight: 600; letter-spacing: 0; line-height: 1.1; text-wrap: balance; }
 :root .sn-site h1 { font-size: clamp(34px, 4.2vw, 48px); }
 :root .sn-site h2 { font-size: clamp(26px, 2.6vw, 34px); }
-:root .sn-site h3 { font-size: clamp(19px, 1.6vw, 22px); letter-spacing: -0.02em; }
+:root .sn-site h3 { font-size: clamp(19px, 1.6vw, 22px); letter-spacing: 0; }
 :root .sn-site p { max-width: 65ch; }
 :root .sn-site .sn-bento-kop > h2, :root .sn-site .h-section-heading h2 { font-size: clamp(28px, 3vw, 38px); }
-:root .sn-site .sn-tegel-titel { font-size: clamp(19px, 1.6vw, 24px); font-weight: 600; letter-spacing: -0.02em; text-shadow: none; }
+:root .sn-site .sn-tegel-titel { font-size: clamp(19px, 1.6vw, 24px); font-weight: 600; letter-spacing: 0; text-shadow: none; }
 :root .sn-site .sn-tegel-tekst { font-size: clamp(15px, 1vw, 16px); }
 
 /* Labels: klein, rustig, mono. Hoofdletters mogen, maar zacht. */
@@ -153,7 +153,7 @@ h1:not(.sn-vhs-off)::after, h2:not(.sn-vhs-off)::after, h3:not(.sn-vhs-off)::aft
 :root .sn-site .h-hero h1.h-taalwissel {
   font-size: clamp(34px, 3.6vw, 48px);
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   line-height: 1.08;
   text-shadow: none;
 }
@@ -249,7 +249,7 @@ h1:not(.sn-vhs-off)::after, h2:not(.sn-vhs-off)::after, h3:not(.sn-vhs-off)::aft
   border-radius: var(--c-radius-kaart);
 }
 :root .sn-site .h-partners-balk { padding: 0; font-family: var(--c-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; color: #5d6763; }
-:root .sn-site .h-partners-groot { margin: 0; padding: 0; gap: 8px; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: #0b0f12; }
+:root .sn-site .h-partners-groot { margin: 0; padding: 0; gap: 8px; font-size: 16px; font-weight: 600; letter-spacing: 0; color: #0b0f12; }
 :root .sn-site .h-partners-xxl { padding: 3px 7px; border-radius: 6px; }
 :root .sn-site .h-partners-xxl img { height: 22px; }
 :root .sn-site .h-partners-strook { flex: 1 1 0; min-width: 0; padding: 18px 0; }
@@ -265,7 +265,7 @@ h1:not(.sn-vhs-off)::after, h2:not(.sn-vhs-off)::after, h3:not(.sn-vhs-off)::aft
 
 /* ── Witte sectie (mens): rust, kleur, zinnen in gewone kapitalisatie ───────── */
 :root .sn-site .h-hero .h-team-rij { border-radius: 16px; }
-:root .sn-site .h-hero .h-team-rij .h-statement.is-r1 .h-sr { font-size: clamp(19px, 1.6vw, 26px); line-height: 1.35; letter-spacing: -0.01em; }
+:root .sn-site .h-hero .h-team-rij .h-statement.is-r1 .h-sr { font-size: clamp(19px, 1.6vw, 26px); line-height: 1.35; letter-spacing: 0; }
 :root .sn-site .h-statement.is-r1 b { font-weight: 600; }
 /* 3. "No one can automate people who care": donker, normale nadruk, een subtiel groen accent. */
 :root .sn-site .h-hero .h-team-rij .h-statement.is-r1 b.g {
@@ -285,10 +285,10 @@ h1:not(.sn-vhs-off)::after, h2:not(.sn-vhs-off)::after, h3:not(.sn-vhs-off)::aft
   background: var(--c-zwart);
   box-shadow: none;
 }
-:root .sn-site .h-hero .h-sprekers h2 { font-size: clamp(26px, 2.4vw, 32px); font-weight: 600; letter-spacing: -0.03em; text-shadow: none; }
+:root .sn-site .h-hero .h-sprekers h2 { font-size: clamp(26px, 2.4vw, 32px); font-weight: 600; letter-spacing: 0; text-shadow: none; }
 :root .sn-site .h-sprekers-label span { color: var(--c-grijs); }
 :root .sn-site .h-sprekers-manifest { border-left: 1px solid var(--c-lijn-sterk); gap: 10px; }
-:root .sn-site .h-sprekers-manifest p.is-kop { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; text-transform: none; line-height: 1.3; }
+:root .sn-site .h-sprekers-manifest p.is-kop { font-size: 18px; font-weight: 600; letter-spacing: 0; text-transform: none; line-height: 1.3; }
 :root .sn-site .h-sprekers-manifest strong { font-weight: 600; }
 :root .sn-site .h-sprekers-knop {
   min-height: var(--c-knop-h);
@@ -329,8 +329,8 @@ h1:not(.sn-vhs-off)::after, h2:not(.sn-vhs-off)::after, h3:not(.sn-vhs-off)::aft
 :root .sn-site .h-final-logo { mix-blend-mode: lighten; }
 
 /* ── Grote getallen en statements onder de hero op de schaal ─────────────────── */
-:root .sn-site .h-beurs-groot { font-size: clamp(30px, 3.2vw, 42px); font-weight: 600; letter-spacing: -0.03em; }
-:root .sn-site .h-mens-belofte-kop { font-size: clamp(26px, 2.8vw, 36px); font-weight: 600; letter-spacing: -0.03em; }
+:root .sn-site .h-beurs-groot { font-size: clamp(30px, 3.2vw, 42px); font-weight: 600; letter-spacing: 0; }
+:root .sn-site .h-mens-belofte-kop { font-size: clamp(26px, 2.8vw, 36px); font-weight: 600; letter-spacing: 0; }
 :root .sn-site .h-vb-groot-titel { font-size: clamp(22px, 2.2vw, 30px); }
 :root .sn-site .h-final-close h2 { font-size: clamp(28px, 3vw, 38px); }
 
