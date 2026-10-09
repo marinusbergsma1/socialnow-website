@@ -20,10 +20,9 @@ export function ProductOffer() {
     <>
     <div className="sn-product-brand" translate="no">
       <img src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="92" />
-      <span lang="en">a SocialNow product</span>
     </div>
     <div className="sn-product-offer">
-      <p><strong>GRATIS tot 10 GB opslag</strong><span>Daarna €20 per maand</span></p>
+      <p><strong>GRATIS tot 10 GB opslag</strong><span>Daarna €20 per maand</span><span className="sn-product-attribution" lang="en" translate="no">a SocialNow product</span></p>
       <Link to="/contact?onderwerp=Een%20persoonlijk%20systeem">Bouw samen met ons team</Link>
       {/* 8 oktober 2026 (Marinus): "Vermeld dan nog op de site dat wij nu groepen van 500 toelaten door grote vraag en
           kwaliteitswaarborging. Noem het Feedback-groepen." Staat overal waar het gratis aanbod staat. */}
