@@ -2082,6 +2082,10 @@ html {
 .sn-site .h-project-cover { display: block; width: 100%; position: relative; border: 1px solid #292929; border-radius: 22px; overflow: hidden; padding: 0; background: #080808; cursor: zoom-in; }
 .sn-site .h-project-cover > img { width: 100%; max-height: 680px; object-fit: contain; display: block; }
 .sn-site .h-project-cover > span { position: absolute; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 30px; background: #000c; font-size: 12px; }
+.sn-site .h-project-animation { aspect-ratio: 16 / 9; cursor: pointer; }
+.sn-site .h-project-animation > .h-ambient-video { position: absolute; inset: 0; display: block; padding: 0; border-radius: 0; background: transparent; }
+.sn-site .h-project-animation:focus-visible { outline: 2px solid #25d366; outline-offset: 5px; }
+.sn-site .h-project-animation:hover .h-project-animation-link { background: #176b38; }
 .sn-site .h-project-story { display: grid; grid-template-columns: .7fr 1.3fr; gap: 70px; padding: 60px 0; }
 .sn-site .h-project-story h2 { font-size: clamp(28px,3vw,40px); line-height: 1.15; }
 .sn-site .h-project-story article + article { margin-top: 24px; }

@@ -383,20 +383,24 @@ function MediaRail({
     </div>
   );
 }
-export function VideoSlider() {
+export function VideoSlider({ history = false }: { history?: boolean }) {
   return (
-    <section className="h-section h-motion-showcase">
+    <section className="h-section h-motion-showcase" id={history ? "creatief-verleden" : undefined}>
       <div className="h-wrap">
         <Heading
-          label="Content & motion"
+          label={history ? "Geschiedenis / Creatief werk" : "Content & motion"}
           title={
-            <>
+            history ? <>
+              Creatieve video’s.
+              <br />
+              <span>Het begin van SocialNow.</span>
+            </> : <>
               Ideeën in beweging.
               <br />
               <span>Merken die je bijblijven.</span>
             </>
           }
-          text="Van short-form content tot campagnevideo. Bekijk de producties uit ons eigen portfolio."
+          text={history ? "Creatieve video’s waren voor mij het leukste om te maken. Deze selectie laat zien waar SocialNow begon, voordat de focus verschoof naar systemen, mensen en AI." : "Van short-form content tot campagnevideo. Bekijk de producties uit ons eigen portfolio."}
         >
 
         </Heading>

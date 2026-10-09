@@ -8,6 +8,7 @@ import { TextLink } from "./ui";
 import { Bento, BentoFilm, Tegel } from "./Bento";
 import { useLanguage } from "./i18n/context";
 import { klein } from "./licht";
+import { VideoSlider } from "./MediaSliders";
 
 // 28 september 2026 (Marinus): "wat belangrijk was bij de beurs van Odoo is dat ik merkte dat het persoonlijke
 // verhaal en waarom het OS gratis kan zijn". Later die nacht: "waar het om gaat is mijn verhaal hier gelijk verteld
@@ -180,6 +181,7 @@ export default function Verhaal() {
           </Tegel>
         ))}
       </Bento>
+      <VideoSlider history />
     </>
   );
 }

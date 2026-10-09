@@ -1,0 +1,12 @@
+.sn-site .h-instagram-work .sn-tegel { padding: 0; }
+.sn-site .h-instagram-post { display: flex; flex-direction: column; height: 100%; color: inherit; }
+.sn-site .h-instagram-post > img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: contain; background: #111; }
+.sn-site .h-instagram-post-footer { display: flex; align-items: center; gap: 12px; padding: 16px; font-size: 12px; background: #101514; }
+.sn-site .h-instagram-post-footer > svg { flex: 0 0 auto; }
+.sn-site .h-instagram-post-footer > span { flex: 1; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.sn-site .h-instagram-post:focus-visible { outline: 2px solid #25d366; outline-offset: -3px; }
+.sn-site .h-instagram-profile { padding-block: 20px 40px; }
+.sn-site .h-instagram-profile > a { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: #ccc; }
+.sn-site .h-instagram-profile > a:hover { color: #25d366; }
+.sn-site .h-instagram-case .h-instagram-profile { padding-inline: 0; }
+.sn-site .h-instagram-case .h-instagram-work { padding-inline: 0; }
