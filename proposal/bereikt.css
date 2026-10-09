@@ -296,5 +296,7 @@
    de kleine regels wegvielen. Nu in eigen kleur op witte chips, net als de ERP-logo's. */
 .sn-site .h-deur-logos ul { gap: 6px; }
 .sn-site .h-deur-logos li { display: inline-flex; align-items: center; height: 40px; padding: 0 12px; border-radius: 6px; background: #fff; }
-.sn-site .h-deur-logos img { filter: none; opacity: 1; height: 24px; max-width: 120px; }
+/* 9 oktober 2026 (Marinus): "die andere met logo's". experience.css laadt later en maakte ze toch weer wit (witte chip, wit logo),
+   dus deze regel weegt nu zwaarder (li img). */
+.sn-site .h-deur-logos li img { filter: none; opacity: 1; height: 24px; max-width: 120px; }
 .sn-site .h-deur-logos li:nth-child(4) img { height: 28px; }

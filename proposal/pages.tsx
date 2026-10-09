@@ -387,15 +387,19 @@ export function Home() {
                 groene line erboven en eronder." Witte balk met een groene lijn boven en onder; de logo's lopen door. De rij staat
                 er twee keer in en de lus schuift precies één rij op, dus de naad is niet te zien. De kopie is voor schermlezers
                 en toetsenbord verborgen. */}
+            {/* 9 oktober 2026 (Marinus): "Graag deze niet laten doodlopen dus gwn door laten gaan." Vijf logo's waren op een breed
+                scherm smaller dan de balk, dus de rij liep leeg voor de lus rondging. Elke helft herhaalt de vijf nu vier keer, breder
+                dan de strook (proef: scripts/proef-logobalken.mjs). Alleen de eerste set is leesbaar voor schermlezers. */}
             <div className="h-talking">
               <span className="h-talking-label">NEXT TALKS</span>
               <div className="h-talking-strook">
                 <div className="h-talking-lus">
                   {[false, true].map(kopie => (
                     <ul key={String(kopie)} className="h-attesso-logos" aria-hidden={kopie || undefined}>
-                      {TALKING_TO.map(([naam, url, logo, breed, hoog]) => (
-                        <li key={naam}><a href={url} target="_blank" rel="noopener" tabIndex={kopie ? -1 : undefined}><img src={logo} alt={kopie ? "" : naam} width={breed} height={hoog} /></a></li>
-                      ))}
+                      {[0, 1, 2, 3].flatMap(set => TALKING_TO.map(([naam, url, logo, breed, hoog]) => {
+                        const verborgen = kopie || set > 0;
+                        return <li key={`${set}-${naam}`} aria-hidden={!kopie && set > 0 || undefined}><a href={url} target="_blank" rel="noopener" tabIndex={verborgen ? -1 : undefined}><img src={logo} alt={verborgen ? "" : naam} width={breed} height={hoog} /></a></li>;
+                      }))}
                     </ul>
                   ))}
                 </div>
