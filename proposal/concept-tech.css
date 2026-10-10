@@ -113,7 +113,8 @@
 
 /* 5 oktober 2026 (Marinus): "UI/UX is nog steeds niet sterk." Bouwerskaarten (wit = mens): drie even grote kaarten naast
    elkaar, naam in het merkfont, rol klein in mono, werk en bedrijven (track record) links onder een dunne lijn. */
-:root .sn-site .h-bouwers { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+:root .sn-site .h-bouwers { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+:root .sn-site .h-bouwer-cijfer { font-family: var(--v-mono); font-size: 11px; color: #5b6560; }
 :root .sn-site .h-bouwer { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-content: start; gap: 12px; padding: 14px; border-radius: 12px; }
 :root .sn-site .h-bouwer-foto { width: 40px; height: 40px; }
 :root .sn-site .h-bouwer-naam { white-space: normal; gap: 3px; }
