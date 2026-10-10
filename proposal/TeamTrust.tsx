@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { people } from "./content";
 import { klein } from "./licht";
 import LinkedInMark from "./LinkedInMark";
+import InstagramMark from "./InstagramMark";
 import AdvisoryPartner from "./AdvisoryPartner";
 
 // Iedereen uit people, Marinus voorop; de rest in de volgorde van de muur.
@@ -178,12 +179,13 @@ export const INTEGRATIES = [
 // echt doorlinken naar die grote websites."
 const extern = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-function Bouwer({ naam, rol, linkedin, nieuw, children }: { naam: string; rol: string; linkedin: string; nieuw?: boolean; children: React.ReactNode }) {
+// 10 oktober 2026: zonder bevestigd LinkedIn-profiel linkt de naam naar Instagram, met het Instagram-teken.
+function Bouwer({ naam, rol, linkedin, instagram, nieuw, children }: { naam: string; rol: string; linkedin?: string; instagram?: string; nieuw?: boolean; children: React.ReactNode }) {
   const person = people.find(p => p.name === naam);
   return <div className="h-bouwer">
     {person && <img className="h-bouwer-foto" {...klein(person.image, 40)} alt="" width="40" height="40" loading="lazy" />}
-    <a className="h-bouwer-naam" href={linkedin} {...extern} aria-label={`${person?.name ?? naam} on LinkedIn`}>
-      <strong>{person?.name ?? naam} <LinkedInMark />{nieuw && <span className="h-bouwer-nieuw">New partner</span>}</strong><i>{rol}</i>
+    <a className="h-bouwer-naam" href={linkedin ?? instagram} {...extern} aria-label={`${person?.name ?? naam} on ${linkedin ? "LinkedIn" : "Instagram"}`}>
+      <strong>{person?.name ?? naam} {linkedin ? <LinkedInMark /> : <InstagramMark />}{nieuw && <span className="h-bouwer-nieuw">New partner</span>}</strong><i>{rol}</i>
     </a>
     <span className="h-bouwer-merken">{children}</span>
   </div>;
@@ -220,6 +222,12 @@ export function Bedrijfsreferenties() {
       <Bouwer naam="Steven Goudsblom" rol="Founder · Wealth management" linkedin="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" nieuw>
         <a href="https://www.abnamro.nl" {...extern}><img src="/images/merken/abn-amro.svg" alt="ABN AMRO" style={{ height: 15 }} loading="lazy" /></a>
         <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" {...extern} aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer.png" alt="Fincer" style={{ height: 15 }} loading="lazy" /></a>
+      </Bouwer>
+      {/* 10 oktober 2026 (Marinus): Daniel Schotman van Creator Code, "Hoeft niet groot" en bij deze regel "Zo iets is wel
+          mooi". Logo naar thecreatorcode.nl, naam naar zijn Instagram, en het cijfer van zijn eigen site. */}
+      <Bouwer naam="Daniel Schotman" rol="Founder · Content & personal branding" instagram="https://www.instagram.com/danielschotman/" nieuw>
+        <a href="https://www.thecreatorcode.nl/" {...extern}><img src="/images/merken/creator-code.webp" alt="Creator Code" style={{ height: 17 }} loading="lazy" /></a>
+        <span className="h-bouwer-cijfer">10M+ views</span>
       </Bouwer>
     </div>;
 }
