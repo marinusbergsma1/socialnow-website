@@ -127,7 +127,7 @@
 .sn-site .h-terminal-balk { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #12161a; border-bottom: 1px solid rgba(255,255,255,.07); }
 .sn-site .h-terminal-balk > i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.2); }
 .sn-site .h-terminal-tabs { margin-left: auto; display: flex; gap: 4px; }
-.sn-site .h-terminal-tabs span { padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; color: #7c8791; transition: background .3s ease, color .3s ease; }
+.sn-site .h-terminal-tabs span { padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .04em; color: #7c8791; transition: background .3s ease, color .3s ease; }
 .sn-site .h-terminal-tabs span.is-aan { background: rgba(37,211,102,.16); color: #bff5d3; }
 .sn-site .h-terminal-regels { margin: 0; padding: 14px 16px 16px; min-height: 148px; font-size: 13px; line-height: 1.7; color: #d8e0e6; white-space: pre-wrap; word-break: break-all; }
 .sn-site .h-terminal-regels .is-prompt { color: #7c8791; }

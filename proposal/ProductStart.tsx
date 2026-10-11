@@ -24,6 +24,12 @@ export function ProductOffer() {
     <div className="sn-product-offer">
       <p><strong>GRATIS tot 10 GB opslag</strong><span>Daarna €20 per maand</span><span className="sn-product-attribution" lang="en" translate="no">a SocialNow product</span></p>
       <Link to="/contact?onderwerp=Een%20persoonlijk%20systeem">Bouw samen met ons team</Link>
+      {/* 11 oktober 2026 (Marinus): een duidelijke link naar de nieuwe website-onboarding op website.socialnow.nl.
+          Proef: scripts/proef-website-onboarding.mjs. */}
+      <a className="sn-product-website" href="https://website.socialnow.nl" target="_blank" rel="noopener noreferrer">
+        <span>Gratis website builder via Odoo of een gratis demo via SocialNow</span>
+        <b>Start je website-onboarding</b>
+      </a>
       {/* 8 oktober 2026 (Marinus): "Vermeld dan nog op de site dat wij nu groepen van 500 toelaten door grote vraag en
           kwaliteitswaarborging. Noem het Feedback-groepen." Staat overal waar het gratis aanbod staat. */}
       <p className="sn-product-groepen"><strong>Nu in Feedback-groepen van 500</strong><span>Door de grote vraag en om de kwaliteit te bewaken laten we per groep 500 mensen toe.</span></p>

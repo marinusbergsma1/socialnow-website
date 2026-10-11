@@ -1,5 +1,8 @@
 // Proef letterafstand (9 oktober 2026, Marinus: "Op mobiel zitten de letters aan elkaar bij www.socialnow.nl."
 // en "DAT WIL IK NOOIT."). Nergens negatieve letterafstand, en de spatie in TT Norms (0,19 em) wordt breder.
+// 11 oktober 2026 (Marinus, bij de partnertegels: "zitten letters nog met elkaar verbonden op mobiel"): vette mono
+// (namen in figcaption, knoppen) liep op 0,01 em letterafstand; de brede, vette glyphs raken elkaar dan op mobiel.
+// Vette tekst (>= 600) in een monospace-letter krijgt daarom minstens 0,04 em letterafstand. Rood op main b8e3b9d.
 // Leest de bouw in dist/, dus eerst npm run build. Rood op main 606558c, groen op fix/letterafstand-mobiel-20261009.
 // PLAYWRIGHT_CORE kan naar een aanwezige Playwright-module wijzen; BROWSER_CHANNEL=chrome gebruikt de lokale Chrome.
 import { createServer } from "node:http";
@@ -12,6 +15,7 @@ if (!existsSync("dist/nl/index.html")) {
 }
 
 const MIN_WOORDAFSTAND = 0.24; // em, spatie plus word-spacing
+const MIN_VETTE_MONO = 0.04; // em letterafstand voor vette tekst in een monospace-letter
 const ROUTES = ["/nl/", "/", "/nl/het-os/", "/nl/prijzen/", "/nl/team/"];
 const BREEDTES = [375, 1440];
 const eisen = [];
@@ -45,7 +49,7 @@ try {
       await page.goto(`${base}${route}`);
       await page.waitForLoadState("networkidle");
       await page.evaluate(() => document.fonts.ready);
-      const meting = await page.evaluate((min) => {
+      const meting = await page.evaluate(([min, minMono]) => {
         const canvas = document.createElement("canvas").getContext("2d");
         const krap = [];
         let geteld = 0;
@@ -62,12 +66,13 @@ try {
           canvas.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
           const spatie = canvas.measureText(" ").width;
           const woord = (spatie + ws + 2 * ls) / fs;
-          if (ls < -0.01 || (tekst.includes(" ") && /TT Norms/.test(cs.fontFamily) && woord < min)) {
-            krap.push(`${el.tagName.toLowerCase()}.${String(el.className).split(" ")[0]} "${tekst.slice(0, 24)}" ls=${ls.toFixed(2)}px woord=${woord.toFixed(3)}em`);
+          const vetteMono = /monospace/.test(cs.fontFamily) && Number(cs.fontWeight) >= 600 && ls / fs < minMono - 0.001;
+          if (ls < -0.01 || vetteMono || (tekst.includes(" ") && /TT Norms/.test(cs.fontFamily) && woord < min)) {
+            krap.push(`${el.tagName.toLowerCase()}.${String(el.className).split(" ")[0]} "${tekst.slice(0, 24)}" ls=${(ls / fs).toFixed(3)}em${vetteMono ? " vette mono" : ""} woord=${woord.toFixed(3)}em`);
           }
         }
         return { geteld, krap };
-      }, MIN_WOORDAFSTAND);
+      }, [MIN_WOORDAFSTAND, MIN_VETTE_MONO]);
       eisen.push([`${breedte} ${route}: ${meting.geteld} tekstblokken, ${meting.krap.length} te krap${meting.krap.length ? ` (${meting.krap.slice(0, 3).join("; ")})` : ""}`, meting.geteld > 20 && meting.krap.length === 0]);
     }
     await context.close();

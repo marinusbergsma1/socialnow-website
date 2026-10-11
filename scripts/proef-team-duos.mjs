@@ -11,7 +11,8 @@ const pages = readFileSync("proposal/pages.tsx", "utf8"), content = readFileSync
 const rol = naam => (content.match(new RegExp(`name: "${naam}",[\\s\\S]*?role: "([^"]+)"`)) || [])[1] || "";
 const bestaat = p => existsSync("public" + p);
 const eisen = [
-  ["SocialNow-duo met logo en Advertisement & Consultancy", team.includes('className="h-duo is-sn"') && team.includes("SocialNow-Logo-2026-400.webp") && team.includes("Advertisement &amp; Consultancy")],
+  // 11 oktober 2026: de kop volgt het story-document (SocialNow × Komen Consultancy Operation Systems), zie proef-partnertegels.
+  ["SocialNow-duo met logo SocialNow × Komen", team.includes('className="h-duo is-sn"') && team.includes("SocialNow-Logo-2026-400.webp") && team.includes("komen-operation-systems.webp")],
   ["Attesso-duo met ~/a en AI Payments", team.includes('className="h-duo is-attesso"') && team.includes("~/a") && team.includes("AI Payments")],
   ["duo's: Marinus en Steef, Sid en Douwe", /SOCIALNOW_DUO = \["Marinus Bergsma", "Steef Komen"\]/.test(team) && /ATTESSO_DUO = \["Sid van Kalken", "Douwe Kramer"\]/.test(team)],
   ["de rest als Independent entrepreneurs", team.includes("Independent entrepreneurs")],
