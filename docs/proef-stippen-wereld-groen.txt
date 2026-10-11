@@ -2,17 +2,17 @@
 ✓ 1440: geen pulsringen meer (0)
 ✓ 1440: kaart is een stippencanvas
 ✓ 1440: stap 8 px valt in het 32-raster
-✓ 1440: land getekend (26126 pixels aan)
+✓ 1440: land getekend (26082 pixels aan)
 ✓ 1440: elke pixel hoort bij een stip op het raster (0 ernaast)
-✓ 1440: hover op Amsterdam geeft een gele golf door de stippen (1646 → 1724 gele pixels)
+✓ 1440: hover op Amsterdam geeft een gele golf door de stippen (1470 → 3832 gele pixels)
 ✓ 1440: ook tijdens de golf alles op het raster (0 ernaast)
 ✓ 390: geen eigen SVG-land meer
 ✓ 390: geen pulsringen meer (0)
 ✓ 390: kaart is een stippencanvas
 ✓ 390: stap 8 px valt in het 32-raster
-✓ 390: land getekend (5988 pixels aan)
+✓ 390: land getekend (5978 pixels aan)
 ✓ 390: elke pixel hoort bij een stip op het raster (0 ernaast)
-✓ 390: hover op Amsterdam geeft een gele golf door de stippen (0 → 1520 gele pixels)
+✓ 390: hover op Amsterdam geeft een gele golf door de stippen (0 → 1560 gele pixels)
 ✓ 390: ook tijdens de golf alles op het raster (0 ernaast)
 ✓ 1440 (minder beweging): geen eigen SVG-land meer
 ✓ 1440 (minder beweging): geen pulsringen meer (0)
