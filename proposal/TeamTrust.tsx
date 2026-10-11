@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { people } from "./content";
 import { klein } from "./licht";
-import LinkedInMark from "./LinkedInMark";
+import LinkedInMark, { NaamMetLinkedIn } from "./LinkedInMark";
 import InstagramMark from "./InstagramMark";
 import AdvisoryPartner from "./AdvisoryPartner";
 
@@ -49,7 +49,8 @@ function NaarPersoon({ person }: { person: Persoon }) {
     ? <a className="h-persoon-link" href={person.linkedin} target="_blank" rel="noopener" aria-label={`${person.name} on LinkedIn`} />
     : <Link className="h-persoon-link" to="/team" aria-label={`${person.name}, meet the team`} />;
 }
-const LinkedInTeken = ({ person }: { person: Persoon }) => person.linkedin ? <LinkedInMark /> : null;
+// Naam met het LinkedIn-icoon vast aan het laatste woord, zodat het icoon nooit alleen op een regel staat.
+const NaamTeken = ({ person }: { person: Persoon }) => person.linkedin ? <NaamMetLinkedIn naam={person.name} /> : <>{person.name}</>;
 
 // 5 oktober 2026 (Marinus): de muur per functie, optie D (filterpillen). "zowel ik als Attesso en management moet behalve
 // management er nog bij ook in het onderverdelen terugkomen": het hele team staat hier, ook wie bovenaan al groot staat.
@@ -80,7 +81,7 @@ function LaagTegel({ naam, laag }: { naam: string; laag: string }) {
   return <div>
     <figure><img {...klein(person.image, "(max-width: 900px) 25vw, 180px", [160, 320])} alt="" width="180" height="180" loading="lazy" /></figure>
     <span className={`h-laag${laag === "Partner" ? " is-partner" : ""}`}>{laag}</span>
-    <span className="h-functie-naam"><span>{person.name} <LinkedInTeken person={person} /></span><i>{KORTE_ROL[naam] ?? person.role}</i></span>
+    <span className="h-functie-naam"><span><NaamTeken person={person} /></span><i>{KORTE_ROL[naam] ?? person.role}</i></span>
     <NaarPersoon person={person} />
   </div>;
 }
@@ -119,7 +120,7 @@ function TeamPerFunctie() {
         if (!person) return null;
         return <div key={naam}>
           <figure><img {...klein(person.image, "(max-width: 900px) 25vw, 120px", [96, 160])} alt="" width="120" height="120" loading="lazy" /></figure>
-          <span className="h-functie-naam"><span>{person.name} <LinkedInTeken person={person} /></span><i>{KORTE_ROL[naam] ?? person.role}</i></span>
+          <span className="h-functie-naam"><span><NaamTeken person={person} /></span><i>{KORTE_ROL[naam] ?? person.role}</i></span>
           <NaarPersoon person={person} />
         </div>;
       })}
@@ -133,7 +134,7 @@ function DuoTegel({ naam }: { naam: string }) {
   if (!person) return null;
   return <figure>
     <img {...klein(person.image, "(max-width: 900px) 40vw, 200px", [160, 320])} alt="" width="200" height="200" loading="lazy" />
-    <figcaption>{person.name} <LinkedInTeken person={person} /><i>{KORTE_ROL[naam] ?? person.role}</i></figcaption>
+    <figcaption><NaamTeken person={person} /><i>{KORTE_ROL[naam] ?? person.role}</i></figcaption>
     <NaarPersoon person={person} />
   </figure>;
 }
@@ -147,7 +148,7 @@ function PartnerPortret({ naam }: { naam: string }) {
   if (!person) return null;
   return <figure className={naam === "Marinus Bergsma" ? "is-hoodie" : undefined}>
     <img {...klein(person.image, "(max-width: 900px) 45vw, 220px", [160, 320, 480])} alt="" width="220" height="220" loading="lazy" />
-    <figcaption><b>{person.name} <LinkedInTeken person={person} /></b><i>{KORTE_ROL[naam] ?? person.role}</i></figcaption>
+    <figcaption><b><NaamTeken person={person} /></b><i>{KORTE_ROL[naam] ?? person.role}</i></figcaption>
     <NaarPersoon person={person} />
   </figure>;
 }

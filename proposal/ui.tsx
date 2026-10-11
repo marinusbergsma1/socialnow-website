@@ -14,7 +14,7 @@ import PartnerReferences from "./PartnerReferences";
 import { getBrandFaq } from "./brand-faq";
 import type { Language } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
-import LinkedInMark from "./LinkedInMark";
+import { NaamMetLinkedIn } from "./LinkedInMark";
 import OsEntry, { CLAIM_URL, GRATIS_OS_URL } from "./os-entry";
 import { MiloMotion, miloPoster, type MiloMaat } from "./motion";
 import type { Project } from "../types";
@@ -269,7 +269,7 @@ export function TeamGrid({ short = false, members = people }: { short?: boolean;
                   rel="noopener noreferrer"
                   aria-label={`${person.name} on LinkedIn`}
                 >
-                  {person.name} <LinkedInMark />
+                  <NaamMetLinkedIn naam={person.name} />
                 </a>
               ) : person.name}
             </strong>

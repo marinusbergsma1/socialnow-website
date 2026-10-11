@@ -264,3 +264,62 @@
     text-align: left;
   }
 }
+
+/* 11 oktober 2026, ronde 2 (Marinus, schermafdruk op mobiel 375 px): "naam en LinkedIn-icoon los op een eigen regel",
+   "naam en functie vallen over de gezichten", "Steven Goudsblom afgesneden, Wealth management krap ernaast".
+   - Laatste woord en icoon samen onbreekbaar (.h-naam-eind, NaamMetLinkedIn); namen breken nooit midden in een woord.
+   - Naam en functie onder de foto op de donkere kaart, niet meer over het gezicht.
+   - Fincer op mobiel onder elkaar: portret zo breed als de andere, tekst eronder.
+   Proef: scripts/proef-partnertegels.mjs (375 en 1440). */
+:root .sn-site .h-naam-eind, :root .sn-site figcaption .h-naam-eind { display: inline; margin: 0; color: inherit; font: inherit; line-height: inherit; white-space: nowrap; }
+.sn-site .h-naam-eind .h-linkedin-mark { vertical-align: -2px; }
+:root .sn-site .h-people-grid figcaption > strong,
+:root .sn-site .h-people-grid figcaption > strong *,
+:root .sn-site .h-functie-naam,
+:root .sn-site .h-functie-naam * { overflow-wrap: normal; word-break: normal; hyphens: none; }
+:root .sn-site .h-persoon-linkedin { display: inline; overflow-wrap: normal; }
+
+:root .sn-site .h-duo figure { display: flex; flex-direction: column; aspect-ratio: auto; overflow: hidden; }
+:root .sn-site .h-duo figure img { flex: none; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+:root .sn-site .h-duo figure.is-hoodie img { transform: none; object-position: 50% 20%; }
+:root .sn-site .h-duo figcaption { position: static; flex: 1; padding: 10px 10px 12px; background: none; }
+:root .sn-site .h-duo figcaption b { font-size: 14px; }
+
+@media (max-width: 640px) {
+  :root .sn-site .h-duo figcaption { padding: 9px 8px 10px; }
+  :root .sn-site .h-duo figcaption b { font-size: 13px; }
+  :root .sn-site .h-duo figcaption i { font-size: 12px; }
+  :root .sn-site .h-duo.is-fincer .h-duo-rij { grid-template-columns: minmax(0, 1fr); justify-items: start; gap: 14px; }
+  :root .sn-site .h-duo.is-fincer .h-duo-rij > figure { width: calc(50% - 5px); }
+  :root .sn-site .h-duo.is-fincer .h-fincer-toelichting { padding: 0 2px; }
+  :root .sn-site .h-duo.is-fincer .h-fincer-toelichting strong { font-size: 16px; }
+  :root .sn-site .h-hero .h-duo.is-fincer .h-fincer-toelichting p,
+  :root .sn-site .h-duo.is-fincer .h-fincer-toelichting p { font-size: 13px; }
+}
+
+/* Albert Deltour: donker goud, zoals de partnerkaarten (vaste regel 11 oktober 2026). Kaart #2a2015→#110d08, rand 2 px
+   #e6bd91, tekst wit, ELT Live-logo licht. */
+:root .sn-site .sn-advisory { border: 2px solid #e6bd91; background: linear-gradient(160deg, #2a2015, #110d08); color: #fff; }
+:root .sn-site .sn-advisory-copy > small { color: #e6bd91; }
+:root .sn-site .sn-advisory-copy > p,
+:root .sn-site .sn-advisory-copy > strong,
+:root .sn-site .sn-advisory h3,
+:root .sn-site .sn-advisory h3 a { color: #fff; }
+:root .sn-site .sn-advisory h3 a:focus-visible,
+:root .sn-site .sn-advisory-logo:focus-visible { outline-color: #e6bd91; }
+:root .sn-site .sn-advisory-logo img { filter: brightness(0) invert(1); }
+/* Op mobiel per persoon één rij: foto links, naam (op één regel) en functie rechts. Gezichten blijven vrij en de naam breekt
+   niet meer ("Marinus / Bergsma"). */
+@media (max-width: 640px) {
+  :root .sn-site .h-duo .h-duo-rij,
+  :root .sn-site .h-duo.is-fincer .h-duo-rij { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  :root .sn-site .h-duo figure,
+  :root .sn-site .h-duo.is-fincer .h-duo-rij > figure { flex-direction: row; align-items: center; width: 100%; }
+  :root .sn-site .h-duo figure img { width: 76px; border-radius: 12px 0 0 12px; }
+  :root .sn-site .h-duo figcaption { flex: 1; min-width: 0; padding: 8px 10px; }
+  :root .sn-site .h-duo figcaption b { font-size: 14px; }
+  :root .sn-site .h-duo figcaption i { font-size: 12.5px; }
+}
+/* Het laatste woord van de naam houdt de kleur van de naam (een algemene figcaption-span-regel maakte het grijs op /team). */
+:root .sn-site figcaption :is(b, strong, a) .h-naam-eind,
+:root .sn-site .sn-advisory h3 .h-naam-eind { color: inherit !important; opacity: 1; font-size: inherit !important; font-weight: inherit; }

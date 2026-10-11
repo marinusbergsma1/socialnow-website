@@ -6,6 +6,10 @@
 // Fincer (fincer-wit.png) #162137→#0c1320 rand #4776aa. Nooit een vlakje achter een logo, geen lichte tegels.
 // Namen en functies in de merkletter (niet in vette mono), woordafstand >= 0,24 em, geen woordbreuk midden in een naam.
 // Geldt voor de homepage (.h-duo) en /team (.h-team-duo), op 375 en 1440.
+// Ronde 2 (11 oktober 2026, schermafdruk van live op 375 px): naam en LinkedIn-icoon op dezelfde regel, geen afgesneden
+// tekst, naam en functie niet over een gezicht (bovenste 70 % van de foto), Fincer onder elkaar op mobiel, Albert Deltour
+// donker goud (#2a2015→#110d08, rand 2 px #e6bd91, tekst wit, ELT Live-logo licht), cookiemelding op mobiel compact met
+// Milo binnen de kaart.
 // Leest de bouw in dist/, dus eerst npm run build. PLAYWRIGHT_CORE en BROWSER_CHANNEL=chrome zoals de andere proeven.
 import { createServer } from "node:http";
 import { existsSync, readFileSync, statSync } from "node:fs";
@@ -112,10 +116,113 @@ try {
             if (fouten.length) krap.push(`"${tekst.slice(0, 18)}" ${fouten.join(" ")}`);
           }
           eis(`${k.naam}: namen en functies ruim in de merkletter${krap.length ? ` (${krap.slice(0, 3).join("; ")})` : ""}`, krap.length === 0);
+          // Ronde 2: LinkedIn-icoon op dezelfde regel als het laatste woord van de naam.
+          const losseIconen = [];
+          for (const svg of t.querySelectorAll("figcaption .h-linkedin-mark")) {
+            const naamEl = svg.closest("b, strong") || svg.parentElement;
+            const loper = document.createTreeWalker(naamEl, NodeFilter.SHOW_TEXT);
+            let laatst = null;
+            for (let n = loper.nextNode(); n; n = loper.nextNode()) {
+              if (!(svg.compareDocumentPosition(n) & Node.DOCUMENT_POSITION_PRECEDING)) break;
+              const i = n.textContent.search(/\S\s*$/);
+              if (i >= 0) laatst = [n, i];
+            }
+            if (!laatst) continue;
+            const bereik = document.createRange();
+            bereik.setStart(laatst[0], laatst[1]); bereik.setEnd(laatst[0], laatst[1] + 1);
+            const letter = bereik.getBoundingClientRect();
+            const icoon = svg.getBoundingClientRect();
+            const midden = icoon.top + icoon.height / 2;
+            if (midden < letter.top || midden > letter.bottom) losseIconen.push(naamEl.textContent.trim().slice(0, 20));
+          }
+          const andereKleur = [...t.querySelectorAll(".h-naam-eind")].filter((el) => getComputedStyle(el).color !== getComputedStyle(el.parentElement).color || getComputedStyle(el).fontSize !== getComputedStyle(el.parentElement).fontSize).map((el) => el.textContent.trim());
+          eis(`${k.naam}: hele naam in één kleur en maat${andereKleur.length ? ` (anders: ${andereKleur.join(", ")})` : ""}`, andereKleur.length === 0);
+          eis(`${k.naam}: naam en LinkedIn-icoon op dezelfde regel${losseIconen.length ? ` (los: ${losseIconen.join(", ")})` : ""}`, losseIconen.length === 0);
+          // Ronde 2: geen afgesneden tekst (binnen de kaart en binnen elke ouder die overloop verbergt).
+          const kaart = t.getBoundingClientRect();
+          const afgesneden = [];
+          for (const el of t.querySelectorAll("b, strong, i, p, span, a, figcaption")) {
+            const tekst = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent).join("").trim();
+            if (!tekst) continue;
+            const r = el.getBoundingClientRect();
+            if (!r.width) continue;
+            let uit = r.right > kaart.right + 1 || r.bottom > kaart.bottom + 1 || r.left < kaart.left - 1;
+            for (let o = el.parentElement; o && o !== t && !uit; o = o.parentElement) {
+              if (getComputedStyle(o).overflow === "visible") continue;
+              const or = o.getBoundingClientRect();
+              if (r.bottom > or.bottom + 1 || r.right > or.right + 1) uit = true;
+            }
+            if (el.scrollWidth > el.clientWidth + 1 && getComputedStyle(el).display !== "inline") uit = true;
+            if (uit) afgesneden.push(tekst.slice(0, 20));
+          }
+          eis(`${k.naam}: geen afgesneden tekst${afgesneden.length ? ` (${afgesneden.slice(0, 3).join("; ")})` : ""}`, afgesneden.length === 0);
+          // Ronde 2: naam en functie overlappen geen gezicht (bovenste 70 % van elke foto blijft vrij).
+          const overGezicht = [];
+          for (const fig of t.querySelectorAll("figure")) {
+            const img = fig.querySelector("img");
+            if (!img) continue;
+            const f = img.getBoundingClientRect();
+            const zoneOnder = f.top + f.height * 0.7;
+            for (const el of fig.querySelectorAll("figcaption b, figcaption strong, figcaption i, figcaption span")) {
+              const r = el.getBoundingClientRect();
+              if (!r.width || !r.height) continue;
+              const overlap = r.left < f.right && r.right > f.left && r.top < zoneOnder && r.bottom > f.top;
+              if (overlap) { overGezicht.push(el.textContent.trim().slice(0, 18)); break; }
+            }
+          }
+          eis(`${k.naam}: tekstvlak overlapt geen gezicht${overGezicht.length ? ` (${overGezicht.join(", ")})` : ""}`, overGezicht.length === 0);
+          // Ronde 2: op mobiel de naam op één regel in de homepagetegels ("Marinus / Bergsma" mag niet meer).
+          if (pag.route === "/nl/" && innerWidth <= 640) {
+            const gebroken = [...t.querySelectorAll("figcaption b")].filter((b) => b.getBoundingClientRect().height > parseFloat(getComputedStyle(b).fontSize) * 1.7).map((b) => b.textContent.trim());
+            eis(`${k.naam}: naam op één regel op mobiel${gebroken.length ? ` (gebroken: ${gebroken.join(", ")})` : ""}`, gebroken.length === 0);
+          }
+          // Ronde 2: Fincer op mobiel onder elkaar, toelichting onder het portret.
+          if (sleutel === "fincer" && innerWidth <= 640) {
+            const fig = t.querySelector("figure");
+            const uitleg = t.querySelector(".h-fincer-toelichting");
+            if (fig && uitleg) eis(`${k.naam}: op mobiel gestapeld (toelichting onder het portret)`, uitleg.getBoundingClientRect().top >= fig.getBoundingClientRect().bottom - 1);
+          }
+        }
+        // Ronde 2: Albert Deltour donker goud op de homepage.
+        const albert = pag.route === "/nl/" ? document.querySelector(".sn-advisory") : null;
+        if (pag.route === "/nl/") {
+          eis("Albert: kaart bestaat", albert);
+          if (albert) {
+            const c = getComputedStyle(albert);
+            eis(`Albert: donker goud #2a2015→#110d08 (nu ${c.backgroundImage.slice(0, 60)} / ${c.backgroundColor})`, c.backgroundImage.includes("rgb(42, 32, 21)") && c.backgroundImage.includes("rgb(17, 13, 8)"));
+            eis(`Albert: rand 2 px #e6bd91 (nu ${c.borderTopWidth} ${c.borderTopColor})`, c.borderTopWidth === "2px" && c.borderTopColor === "rgb(230, 189, 145)");
+            const wit = [...albert.querySelectorAll("h3, h3 a, .sn-advisory-copy > strong, .sn-advisory-copy > p")].filter((el) => getComputedStyle(el).color !== "rgb(255, 255, 255)");
+            eis(`Albert: tekst wit (${wit.map((el) => `${el.tagName.toLowerCase()} ${getComputedStyle(el).color}`).slice(0, 2).join(", ")})`, wit.length === 0);
+            const logo = albert.querySelector(".sn-advisory-logo img");
+            eis(`Albert: ELT Live-logo licht (filter ${logo ? getComputedStyle(logo).filter : "geen logo"})`, logo && /invert\(1\)/.test(getComputedStyle(logo).filter));
+          }
         }
         return uit;
       }, { pag, KAARTEN });
       for (const [naam, ok] of r) eisen.push([`${breedte} ${pag.route} ${naam}`, ok]);
+    }
+    await context.close();
+  }
+  // Ronde 2: cookiemelding op mobiel compact, Milo binnen de kaart (zonder minder-beweging, dan blijft hij 5 s staan).
+  {
+    const context = await browser.newContext({ viewport: { width: 375, height: 812 } });
+    await context.route("**/*", (route) => (new URL(route.request().url()).origin === base ? route.continue() : route.abort()));
+    const page = await context.newPage();
+    await page.goto(`${base}/nl/`);
+    const koekje = page.locator(".h-koekje");
+    await koekje.waitFor({ state: "visible", timeout: 8000 }).catch(() => {});
+    await page.waitForTimeout(700);
+    const m = await page.evaluate(() => {
+      const k = document.querySelector(".h-koekje");
+      const milo = document.querySelector(".h-koekje-milo");
+      if (!k || !milo) return null;
+      const kr = k.getBoundingClientRect(), mr = milo.getBoundingClientRect();
+      return { hoog: Math.round(kr.height), miloBinnen: mr.top >= kr.top - 1 && mr.left >= kr.left - 1 && mr.bottom <= kr.bottom + 1 };
+    });
+    eisen.push([`375 /nl/ cookiemelding zichtbaar`, !!m]);
+    if (m) {
+      eisen.push([`375 /nl/ cookiemelding compact, hoogstens 120 px (nu ${m.hoog})`, m.hoog <= 120]);
+      eisen.push([`375 /nl/ Milo binnen de cookiekaart, niet over de inhoud`, m.miloBinnen]);
     }
     await context.close();
   }
