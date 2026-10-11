@@ -1,0 +1,11 @@
+✗ 1440: geen eigen SVG-land meer
+✗ 1440: geen pulsringen meer (3)
+✗ 1440: kaart is een stippencanvas
+✗ 390: geen eigen SVG-land meer
+✗ 390: geen pulsringen meer (3)
+✗ 390: kaart is een stippencanvas
+✗ 1440 (minder beweging): geen eigen SVG-land meer
+✗ 1440 (minder beweging): geen pulsringen meer (3)
+✗ 1440 (minder beweging): kaart is een stippencanvas
+
+ROOD: 9 van 9 eisen niet gehaald.
