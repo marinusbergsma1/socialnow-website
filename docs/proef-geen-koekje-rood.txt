@@ -1,0 +1,17 @@
+ROOD  390 nl: geen cookiemelding na 3 s (1)
+groen 390 nl: cookieverklaring in de voettekst
+ROOD  390 en: geen cookiemelding na 3 s (1)
+groen 390 en: cookieverklaring in de voettekst
+ROOD  390 de: geen cookiemelding na 3 s (1)
+groen 390 de: cookieverklaring in de voettekst
+ROOD  390 fr: geen cookiemelding na 3 s (1)
+groen 390 fr: cookieverklaring in de voettekst
+ROOD  1440 nl: geen cookiemelding na 3 s (1)
+groen 1440 nl: cookieverklaring in de voettekst
+ROOD  1440 en: geen cookiemelding na 3 s (1)
+groen 1440 en: cookieverklaring in de voettekst
+ROOD  1440 de: geen cookiemelding na 3 s (1)
+groen 1440 de: cookieverklaring in de voettekst
+ROOD  1440 fr: geen cookiemelding na 3 s (1)
+groen 1440 fr: cookieverklaring in de voettekst
+8 van 16 rood

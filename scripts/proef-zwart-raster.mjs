@@ -4,6 +4,7 @@
 // - --c-zwart is #000 en .sn-site laat het raster door (doorzichtig);
 // - het lichtgevende stippenveld (canvas.sn-stipveld) staat vast, vult het scherm en vangt geen klikken;
 // - de stippenscènes in Bereikt (100 stippen) en Overzicht staan op de pagina met een canvas;
+// - geen grijze band: de hero en de klantenstrook hebben geen vaste #0b0f12-verdonkering meer;
 // - niets buiten beeld (geen horizontale scroll).
 // Leest de bouw in dist/, dus eerst npm run build. PLAYWRIGHT_CORE en BROWSER_CHANNEL=chrome zoals de andere proeven.
 import { createServer } from "node:http";
@@ -67,6 +68,13 @@ try {
           bereikt, overzicht, scroll: document.documentElement.scrollWidth - vw,
         };
       });
+      // Gauntlet: geen vaste #0b0f12-verdonkering over de hero of de klantenstrook (gaf een grijze band zonder stippen).
+      const band = await page.evaluate(() => {
+        const grijs = (el, pseudo) => (el ? /11, 15, 18|#0b0f12/i.test(getComputedStyle(el, pseudo).backgroundImage) : false);
+        const hero = document.querySelector(".h-hero");
+        const strook = document.querySelector(".h-clients-kort > .h-clients-strook");
+        return [grijs(hero, "::after") && "hero", grijs(strook, "::before") && "strook links", grijs(strook, "::after") && "strook rechts"].filter(Boolean);
+      });
       const n = `${breedte} ${taal}`;
       eisen.push([`${n}: body puur zwart (${m.bg})`, m.bg === "rgb(0, 0, 0)"]);
       eisen.push([`${n}: stippenraster 32 px als achtergrond (${m.maat})`, /radial-gradient/.test(m.beeld) && m.maat === "32px 32px"]);
@@ -76,6 +84,7 @@ try {
         Boolean(m.veld) && m.veld.pos === "fixed" && m.veld.pe === "none" && m.veld.b === m.veld.vw && m.veld.h === m.veld.vh]);
       eisen.push([`${n}: Bereikt in stippen (canvas)`, m.bereikt]);
       eisen.push([`${n}: Overzicht in stippen (canvas)`, m.overzicht]);
+      eisen.push([`${n}: geen grijze #0b0f12-band (hero, klantenstrook)${band.length ? ` (wel: ${band.join(", ")})` : ""}`, band.length === 0]);
       eisen.push([`${n}: niets buiten beeld (scroll ${m.scroll}px)`, m.scroll <= 0]);
     }
     await context.close();
