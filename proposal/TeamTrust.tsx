@@ -6,6 +6,7 @@ import { klein } from "./licht";
 import LinkedInMark, { NaamMetLinkedIn } from "./LinkedInMark";
 import InstagramMark from "./InstagramMark";
 import AdvisoryPartner from "./AdvisoryPartner";
+import { useLanguage } from "./i18n/context";
 
 // Iedereen uit people, Marinus voorop; de rest in de volgorde van de muur.
 const voorop = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe", "Steven Goudsblom"];
@@ -143,12 +144,22 @@ function DuoTegel({ naam }: { naam: string }) {
 // met elkaar verbonden op mobiel." Vaste regel: partnertegels altijd als de donkere kaarten van het story-document
 // (business.socialnow.nl/hossam.html, .team-duo in presentatie-jeroen-20261008/deploy/middleware.js). Geen vlak achter een
 // logo, namen in de merkletter in plaats van vette mono. Opmaak in partner-colors.css.
+// 11 oktober 2026 (Marinus: "bij iedereen een tekstje, net als in het businessplan"). Uit het businessplan en de
+// groepspresentatie van 11 oktober; Nederlandse bron, vertalingen in proposal/i18n.
+const PERSOON_TEKST: Record<string, string> = {
+  "Marinus Bergsma": "Maakt het merk en het OS.",
+  "Steef Komen": "Bedrijfsplan, accountancy en financiële structuur.",
+  "Sid van Kalken": "Bouwt websites en veilige betalingen met AI.",
+  "Douwe Kramer": "AI development en de koppelingen achter het OS.",
+  "Steven Goudsblom": "Vermogensbeheer voor SocialNow en ondernemers in het netwerk.",
+};
 function PartnerPortret({ naam }: { naam: string }) {
+  const { t } = useLanguage();
   const person = people.find(p => p.name === naam);
   if (!person) return null;
   return <figure className={naam === "Marinus Bergsma" ? "is-hoodie" : undefined}>
     <img {...klein(person.image, "(max-width: 900px) 45vw, 220px", [160, 320, 480])} alt="" width="220" height="220" loading="lazy" />
-    <figcaption><b><NaamTeken person={person} /></b><i>{KORTE_ROL[naam] ?? person.role}</i></figcaption>
+    <figcaption><b><NaamTeken person={person} /></b><i>{KORTE_ROL[naam] ?? person.role}</i>{PERSOON_TEKST[naam] ? <span className="h-persoon-tekst">{t(PERSOON_TEKST[naam])}</span> : null}</figcaption>
     <NaarPersoon person={person} />
   </figure>;
 }
@@ -163,20 +174,40 @@ export function PartnerKoppen({ soort }: { soort: "sn" | "attesso" | "fincer" })
   return <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener noreferrer" aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer-wit.png" alt="Fincer" width="600" height="144" loading="lazy" /></a>;
 }
 
+// 11 oktober 2026 (Marinus): "Kunnen er ook teksten bij? Kijk naar wat er eerder al was geschreven in de video." Zin en labels
+// uit de explainer (scherm "One operation and management system. Strong partners!"). De tegels staan op translate="no", dus
+// de zin gaat hier zelf door het woordenboek (Nederlandse bron, vertalingen in proposal/i18n); de labels blijven Engels.
+const PARTNER_TEKST = {
+  sn: { zin: "Mensen, creativiteit en technologie. Samen. Let's get SocialNow!", labels: ["Branding", "AI systems", "Consultancy"] },
+  attesso: { zin: "De eerste veilige agentic betaling, wereldwijd.", labels: ["#1 agentic payment on SaaSHub"] },
+  fincer: { zin: "Vermogensbeheer, met persoonlijk contact.", labels: ["Wealth partner", "SocialNow & clients"] },
+};
+function PartnerTekst({ soort }: { soort: keyof typeof PARTNER_TEKST }) {
+  const { t } = useLanguage();
+  const { zin, labels } = PARTNER_TEKST[soort];
+  return <div className="h-duo-tekst">
+    <strong>{t(zin)}</strong>
+    <span className="h-duo-tags">{labels.map((label, i) => <React.Fragment key={label}>{i ? " " : null}<span>{i ? "· " : null}{label}</span></React.Fragment>)}</span>
+  </div>;
+}
+
 export function TeamJoin() {
   return <div className="h-team-sectie" translate="no">
     <div className="h-team-kern">
       <div className="h-duo is-sn">
         <div className="h-duo-kop"><PartnerKoppen soort="sn" /></div>
         <div className="h-duo-rij">{SOCIALNOW_DUO.map(naam => <PartnerPortret key={naam} naam={naam} />)}</div>
+        <PartnerTekst soort="sn" />
       </div>
       <div className="h-duo is-attesso">
         <div className="h-duo-kop"><PartnerKoppen soort="attesso" /></div>
         <div className="h-duo-rij">{ATTESSO_DUO.map(naam => <PartnerPortret key={naam} naam={naam} />)}</div>
+        <PartnerTekst soort="attesso" />
       </div>
       <div className="h-duo is-fincer">
         <div className="h-duo-kop"><PartnerKoppen soort="fincer" /></div>
-        <div className="h-duo-rij"><PartnerPortret naam="Steven Goudsblom" /><div className="h-fincer-toelichting"><strong>Wealth management, with personal contact.</strong><p>Steven is our wealth partner, for SocialNow and our clients.</p></div></div>
+        <div className="h-duo-rij"><PartnerPortret naam="Steven Goudsblom" /></div>
+        <PartnerTekst soort="fincer" />
       </div>
     </div>
     <AdvisoryPartner />

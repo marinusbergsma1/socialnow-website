@@ -10,6 +10,12 @@
 // tekst, naam en functie niet over een gezicht (bovenste 70 % van de foto), Fincer onder elkaar op mobiel, Albert Deltour
 // donker goud (#2a2015→#110d08, rand 2 px #e6bd91, tekst wit, ELT Live-logo licht), cookiemelding op mobiel compact met
 // Milo binnen de kaart.
+// Ronde 3 (11 oktober 2026, Marinus: "Kunnen er ook teksten bij? Kijk naar wat er eerder al was geschreven in de video"):
+// onder de portretten de zin en de labels uit de explainer (scherm "One operation and management system. Strong partners!"),
+// de zin in alle 10 talen, de labels in mono (dun, letterafstand >= 0,04 em).
+// Ronde 4 (Marinus: "bij iedereen een tekstje, net als in het businessplan", "ook de normale tegels, niet alleen de pc",
+// "Cookieverklaring kan weg als ik geen cookies heb"): per persoon één regel onder de functie, op 375 en 1440, in 10 talen;
+// geen cookieverklaring-link meer in de melding (de verklaring blijft in de voettekst).
 // Leest de bouw in dist/, dus eerst npm run build. PLAYWRIGHT_CORE en BROWSER_CHANNEL=chrome zoals de andere proeven.
 import { createServer } from "node:http";
 import { existsSync, readFileSync, statSync } from "node:fs";
@@ -108,7 +114,8 @@ try {
             canvas.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
             const woord = (canvas.measureText(" ").width + ws + 2 * ls) / fs;
             const fouten = [];
-            if (/monospace/.test(cs.fontFamily)) fouten.push("mono");
+            const dunneMono = el.closest(".h-duo-tags") && parseFloat(cs.fontWeight) <= 400 && ls / fs >= 0.04;
+            if (/monospace/.test(cs.fontFamily) && !dunneMono) fouten.push("mono");
             if (ls < 0) fouten.push(`ls=${ls}`);
             if (tekst.includes(" ") && woord < 0.24) fouten.push(`woord=${woord.toFixed(3)}em`);
             if (cs.overflowWrap === "anywhere" || cs.wordBreak === "break-all") fouten.push(cs.overflowWrap);
@@ -183,6 +190,46 @@ try {
             if (fig && uitleg) eis(`${k.naam}: op mobiel gestapeld (toelichting onder het portret)`, uitleg.getBoundingClientRect().top >= fig.getBoundingClientRect().bottom - 1);
           }
         }
+        // Ronde 3: zin en labels uit de video in elke homepagetegel.
+        if (pag.route === "/nl/") {
+          const VERWACHT = {
+            sn: ["Mensen, creativiteit en technologie. Samen. Let's get SocialNow!", "BRANDING · AI SYSTEMS · CONSULTANCY"],
+            attesso: ["De eerste veilige agentic betaling, wereldwijd.", "#1 AGENTIC PAYMENT ON SAASHUB"],
+            fincer: ["Vermogensbeheer, met persoonlijk contact.", "WEALTH PARTNER · SOCIALNOW & CLIENTS"],
+          };
+          for (const [sleutel, [zin, labels]] of Object.entries(VERWACHT)) {
+            const t = houder.querySelector(`${pag.tegel}${pag.soort[sleutel]}`);
+            const z = t?.querySelector(".h-duo-tekst strong")?.textContent.trim();
+            const l = t?.querySelector(".h-duo-tags")?.textContent.replace(/\s+/g, " ").trim().toUpperCase();
+            eis(`${KAARTEN[sleutel].naam}: zin uit de video "${zin}" (nu ${z ?? "geen"})`, z === zin);
+            eis(`${KAARTEN[sleutel].naam}: labels ${labels} (nu ${l ?? "geen"})`, l === labels);
+            // Geen los puntje aan het eind van een regel: elk label (met zijn "· ") breekt niet.
+            const losPunt = [...(t?.querySelectorAll(".h-duo-tags > span") ?? [])].filter((el) => el.getBoundingClientRect().height > parseFloat(getComputedStyle(el).lineHeight) * 1.3).map((el) => el.textContent.trim());
+            eis(`${KAARTEN[sleutel].naam}: labels breken niet midden in een label${losPunt.length ? ` (${losPunt.join(", ")})` : ""}`, losPunt.length === 0);
+            const fig = t?.querySelector("figure:last-of-type");
+            const tekst = t?.querySelector(".h-duo-tekst");
+            // Fincer op breed scherm: zin naast het portret mag; verder altijd onder de portretten.
+            if (fig && tekst) {
+              const naast = sleutel === "fincer" && innerWidth > 640;
+              eis(`${KAARTEN[sleutel].naam}: tekst ${naast ? "naast" : "onder"} de portretten`, naast ? tekst.getBoundingClientRect().left >= fig.getBoundingClientRect().right - 1 : tekst.getBoundingClientRect().top >= fig.getBoundingClientRect().bottom - 1);
+            }
+          }
+        }
+        // Ronde 4: per persoon een tekstje onder de functie.
+        if (pag.route === "/nl/") {
+          const PERSOON = {
+            "Marinus Bergsma": "Maakt het merk en het OS.",
+            "Steef Komen": "Bedrijfsplan, accountancy en financiële structuur.",
+            "Sid van Kalken": "Bouwt websites en veilige betalingen met AI.",
+            "Douwe Kramer": "AI development en de koppelingen achter het OS.",
+            "Steven Goudsblom": "Vermogensbeheer voor SocialNow en ondernemers in het netwerk.",
+          };
+          for (const [naam, zin] of Object.entries(PERSOON)) {
+            const fig = [...houder.querySelectorAll("figure")].find((f) => f.querySelector("figcaption b")?.textContent.replace(/\s+/g, " ").trim().startsWith(naam));
+            const nu = fig?.querySelector(".h-persoon-tekst")?.textContent.trim();
+            eis(`${naam}: tekstje "${zin}" (nu ${nu ?? "geen"})`, nu === zin);
+          }
+        }
         // Ronde 2: Albert Deltour donker goud op de homepage.
         const albert = pag.route === "/nl/" ? document.querySelector(".sn-advisory") : null;
         if (pag.route === "/nl/") {
@@ -203,6 +250,35 @@ try {
     }
     await context.close();
   }
+  // Ronde 3: de zinnen in alle talen (Engels zoals in de video).
+  {
+    const TALEN = {
+      "/": ["People, creativity and technology. Together. Let's get SocialNow!", "First ever safe agentic payment, worldwide.", "Wealth management, with personal contact."],
+      "/de/": ["Menschen, Kreativität und Technologie. Gemeinsam. Let's get SocialNow!", "Die erste sichere agentische Zahlung, weltweit.", "Vermögensverwaltung mit persönlichem Kontakt."],
+    };
+    // Bezoeker uit Londen: anders kiest de landherkenning op deze Mac (Amsterdam) Nederlands op /.
+    const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: "reduce", locale: "en-GB", timezoneId: "Europe/London" });
+    await context.route("**/*", (route) => (new URL(route.request().url()).origin === base ? route.continue() : route.abort()));
+    const page = await context.newPage();
+    for (const [route, zinnen] of Object.entries(TALEN)) {
+      await page.goto(`${base}${route}`);
+      await page.waitForLoadState("networkidle");
+      await page.locator(".h-team-kern").first().scrollIntoViewIfNeeded();
+      await page.waitForTimeout(600);
+      const nu = await page.$$eval(".h-team-kern .h-duo-tekst strong", (els) => els.map((e) => e.textContent.trim()));
+      eisen.push([`1440 ${route} zinnen in de taal van de pagina (nu ${nu.join(" | ") || "geen"})`, JSON.stringify(nu) === JSON.stringify(zinnen)]);
+      const marinus = await page.$eval(".h-team-kern .h-persoon-tekst", (e) => e.textContent.trim()).catch(() => "geen");
+      const verwacht = route === "/" ? "Creates the brand and the OS." : "Gestaltet die Marke und das OS.";
+      eisen.push([`1440 ${route} tekstje Marinus in de taal van de pagina (nu ${marinus})`, marinus === verwacht]);
+    }
+    const ontbreekt = [];
+    for (const taal of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
+      const boek = JSON.parse(readFileSync(`proposal/i18n/${taal}.json`, "utf8"));
+      for (const nl of ["Mensen, creativiteit en technologie. Samen. Let's get SocialNow!", "De eerste veilige agentic betaling, wereldwijd.", "Vermogensbeheer, met persoonlijk contact.", "Maakt het merk en het OS.", "Bedrijfsplan, accountancy en financiële structuur.", "Bouwt websites en veilige betalingen met AI.", "AI development en de koppelingen achter het OS.", "Vermogensbeheer voor SocialNow en ondernemers in het netwerk."]) if (!boek[nl]) ontbreekt.push(`${taal}: ${nl.slice(0, 20)}`);
+    }
+    eisen.push([`zinnen in alle 10 talen${ontbreekt.length ? ` (ontbreekt: ${ontbreekt.slice(0, 3).join("; ")})` : ""}`, ontbreekt.length === 0]);
+    await context.close();
+  }
   // Ronde 2: cookiemelding op mobiel compact, Milo binnen de kaart (zonder minder-beweging, dan blijft hij 5 s staan).
   {
     const context = await browser.newContext({ viewport: { width: 375, height: 812 } });
@@ -217,12 +293,13 @@ try {
       const milo = document.querySelector(".h-koekje-milo");
       if (!k || !milo) return null;
       const kr = k.getBoundingClientRect(), mr = milo.getBoundingClientRect();
-      return { hoog: Math.round(kr.height), miloBinnen: mr.top >= kr.top - 1 && mr.left >= kr.left - 1 && mr.bottom <= kr.bottom + 1 };
+      return { links: k.querySelectorAll('a[href*="cookies"]').length, hoog: Math.round(kr.height), miloBinnen: mr.top >= kr.top - 1 && mr.left >= kr.left - 1 && mr.bottom <= kr.bottom + 1 };
     });
     eisen.push([`375 /nl/ cookiemelding zichtbaar`, !!m]);
     if (m) {
       eisen.push([`375 /nl/ cookiemelding compact, hoogstens 120 px (nu ${m.hoog})`, m.hoog <= 120]);
       eisen.push([`375 /nl/ Milo binnen de cookiekaart, niet over de inhoud`, m.miloBinnen]);
+      eisen.push([`375 /nl/ geen cookieverklaring-link in de melding (er zijn geen cookies om te kiezen)`, m.links === 0]);
     }
     await context.close();
   }
