@@ -26,7 +26,7 @@ https://claude.ai/artifact/MHYJoXUAzoYc8LVg8bQTpk (bron: `01_WEBSITE/socialnow-s
 
 ## Vaste regels (uit de film en Marinus)
 
-- Raster 32 px, stip r 1,6, stippen op 16 + 32k in documentcoördinaten. Fijner mag alleen als onderverdeling (16 of 8 px), zodat het grote raster erin blijft vallen.
+- Raster 32 px, stip r 1 (achtergrond, dekking 0,10; Marinus 11 okt: "stippen te groot, moet meer een achtergrond effect zijn"; was 1,6), stippen op 16 + 32k in documentcoördinaten. Fijner mag alleen als onderverdeling (16 of 8 px), zodat het grote raster erin blijft vallen.
 - Geen gloed, geen confetti-snippers (wel kleurburst uit stippen), geen planeten-/ringvormen als achtergrond in video's; op de site mogen de bollen (globe) wel veranderen.
 - Kleuren: geel #F5C518, blauw #1f6fd1, roze #EC1670, groen #25D366; Milo's: website #25D366, crm #1965C2, studio #F5940D, ads #EC1670.
 - Koppen wit, alleen de afsluitende punt groen. Nooit letters tegen elkaar (geen negatieve letterafstand).
@@ -54,7 +54,7 @@ alleen de eigen bestanden. Klaar = push + regel hieronder bijwerken + bericht aa
 | 9 | Overige pagina's | `stippen/paginas` | `paginas.tsx` e.a. pagina's, hun css | open |
 | 10 | Snelheid en toegankelijkheid | `stippen/snelheid` | `stippen.ts` prestaties, `scripts/proef-stippen*.mjs` | **live (PR #70)**; klaar 33a476e (+ merge basis): `proef-stippen.mjs` rood op basis (8), groen; `proef-bundel` 149,5 → 117,8 KB groen. Zie "Snelheid" hieronder |
 | G | Gauntletloop | geen eigen code | controleert alles, meldt fouten aan de juiste chat | open |
-| L | Livezet | `feat/stippen-site-20261011` → main | voegt takken samen, PR, main, publicatie | **Live 1 (11 okt, PR #70, main e49370f):** zwart + raster, hero zonder band, cookie-pop-up weg, snelheid (117,8 KB), Bereikt. Live gecontroleerd 390/1440 NL/EN/DE/FR. Wereld wacht op akkoord Marinus; overige chats: melden met tak + sha, vanaf main e49370f. Marinus: L zet na afronding zelf live |
+| L | Livezet | `feat/stippen-site-20261011` → main | voegt takken samen, PR, main, publicatie | **Live 1 (11 okt, PR #70, main e49370f):** zwart + raster, hero zonder band, cookie-pop-up weg, snelheid (117,8 KB), Bereikt. Live gecontroleerd 390/1440 NL/EN/DE/FR. Wereld wacht op akkoord Marinus; overige chats: melden met tak + sha, vanaf main e49370f. Marinus: L zet na afronding zelf live; **Live 2 (PR #71, main 5a3d80c):** stippen kleiner (r 1, dekking 0,10, golven r 1, globe 1 + 0,6) |
 
 ## Snelheid (chat 10, 11 okt)
 
