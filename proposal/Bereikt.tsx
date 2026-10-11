@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Bento, BentoFilm, Tegel, useInBeeld } from "./Bento";
 import { GRATIS_OS_URL } from "./os-entry";
+import { StipScene } from "./StipScene";
 import { TextLink } from "./ui";
 import "./bereikt.css";
 
@@ -130,23 +131,36 @@ function IlGordoScores() {
 // resultaten: "Ik verdiende 100.000 euro's voor VDZ met complete animatie vanuit 0 online zichtbaarheid en foto's, alleen
 // een door to door team. Zelfde voor kWh 100 leads in 1 week." Een resultaattegel: één cijfer in mono, een rustige lijn
 // die oploopt (tekent zich bij binnenkomst) en wat we bouwden als kleine labels. Vervangt de stroom en de browser.
-function lijnPad(punten: number[], vlak: boolean) {
-  const stap = 200 / (punten.length - 1);
-  const xy = punten.map((p, i) => `${(i * stap).toFixed(1)} ${(46 - p * 42).toFixed(1)}`);
-  const lijn = `M${xy.join(" L")}`;
-  return vlak ? `${lijn} L200 48 L0 48 Z` : lijn;
-}
-function Resultaat({ waarde, eenheid, punten, labels }: { waarde: string; eenheid: string; punten: number[]; labels: string[] }) {
-  const { ref, aan } = useInBeeld<HTMLDivElement>();
+// 11 oktober 2026 (Marinus: "animaties zoals D vet", stippen zoals in de explainer): de verzonnen oplopende lijn is weg. Het
+// echte cijfer staat nu in stippen: 1 stip = 1 lead of € 1.000. De stippen lichten rij voor rij op, de laatste geeft een
+// korte kleurburst (confetti via de stippen, geen snippers).
+function Resultaat({ waarde, eenheid, aantal, uitleg, labels }: { waarde: string; eenheid: string; aantal: number; uitleg: string; labels: string[] }) {
   return (
-    <div ref={ref} className={`h-resultaat${aan ? " is-aan" : ""}`}>
+    <div className="h-resultaat">
       <p className="h-resultaat-cijfer"><b translate="no">{waarde}</b><span>{eenheid}</span></p>
-      <svg className="h-resultaat-lijn" viewBox="0 0 200 48" preserveAspectRatio="none" aria-hidden="true">
-        <path className="is-vlak" d={lijnPad(punten, true)} />
-        <path className="is-lijn" d={lijnPad(punten, false)} pathLength="1" />
-      </svg>
+      <StipScene className="h-resultaat-stippen" stap={14} opnieuw speel={async (v) => {
+        const kol = Math.min(25, v.kol - 1), rij = Math.ceil(aantal / kol), j0 = Math.max(0, Math.floor((v.rij - rij) / 2));
+        const cellen: [number, number][] = [];
+        for (let n = 0; n < aantal; n++) cellen.push([n % kol, j0 + Math.floor(n / kol)]);
+        cellen.forEach(([i, j]) => v.zet(i, j, "wit", .22));  // eerst de plekken, zoals de 500 stoelen
+        await v.vul(cellen, "groen", { duur: 1.4 });
+        const [x, y] = v.pos(...cellen[cellen.length - 1]); await v.burst(x, y, { straal: 260, duur: .9 });
+      }} />
+      <p className="sn-stipscene-uitleg">{uitleg}</p>
       <ul className="h-resultaat-labels" translate="no">{labels.map((label) => <li key={label}>{label}</li>)}</ul>
     </div>
+  );
+}
+
+// Vinkje uit stippen: de rasterstippen lichten op langs een vinkje, daarna één groene golf.
+const VINK: [number, number][] = [[0, 3], [1, 4], [2, 5], [3, 4], [4, 3], [5, 2], [6, 1], [7, 0]];
+function VinkStippen() {
+  return (
+    <StipScene className="h-vink-stippen" stap={16} speel={async (v) => {
+      const i0 = 1, j0 = Math.max(0, Math.floor((v.rij - 6) / 2));
+      await v.vul(VINK.map(([i, j]) => [i0 + i, j0 + j] as [number, number]), "groen", { duur: .6 });
+      const [x, y] = v.pos(i0 + 2, j0 + 5); await v.golf(x, y, "groen", { straal: 520, duur: 1.4 });
+    }} />
   );
 }
 
@@ -174,15 +188,12 @@ export default function Bereikt() {
         <Trekking />
       </Tegel>
       <Tegel kop="Uitgenodigd" breed={4} className="h-bereikt-sec">
-        <svg className="h-vink-groot" viewBox="0 0 52 52" aria-hidden="true">
-          <circle cx="26" cy="26" r="24" pathLength="1" />
-          <path d="M15 27 L23 35 L38 18" pathLength="1" />
-        </svg>
+        <VinkStippen />
         <p className="sn-tegel-titel">Om te presenteren bij de Student Entrepreneurs Club.</p>
         <p className="sn-tegel-tekst">Na drie dagen op de beurs in Brussel. Dank je, Michelle.</p>
       </Tegel>
       <Tegel kop="kWh Garant" breed={4} className="h-bereikt-kwh">
-        <Resultaat waarde="100" eenheid="leads in één week" punten={[0.02, 0.06, 0.12, 0.2, 0.34, 0.5, 0.66, 0.82, 1]} labels={["Meta ads", "Odoo CRM", "Eigen OS"]} />
+        <Resultaat waarde="100" eenheid="leads in één week" aantal={100} uitleg="1 stip = 1 lead" labels={["Meta ads", "Odoo CRM", "Eigen OS"]} />
         <p className="sn-tegel-titel">Eigen OS live.</p>
         <p className="sn-tegel-tekst">Meta en Odoo gekoppeld. Elke offerteaanvraag komt direct in hun OS binnen.</p>
       </Tegel>
@@ -192,7 +203,7 @@ export default function Bereikt() {
         <div className="h-ilgordo-film">
           <BentoFilm src="/video/vdz/vdz-animatie.mp4" poster="/video/vdz/vdz-animatie-poster.webp" label="VDZ Brigade: vier specialisten onder één dak" geluid={false} />
         </div>
-        <Resultaat waarde="€ 100.000" eenheid="omzet voor VDZ" punten={[0, 0.01, 0.03, 0.08, 0.16, 0.3, 0.48, 0.7, 1]} labels={["Website", "Huisstijl", "Animatie", "Fotografie", "Eigen OS"]} />
+        <Resultaat waarde="€ 100.000" eenheid="omzet voor VDZ" aantal={100} uitleg="1 stip = € 1.000" labels={["Website", "Huisstijl", "Animatie", "Fotografie", "Eigen OS"]} />
         <p className="sn-tegel-titel">Van nul online zichtbaarheid naar een merk dat verkoopt.</p>
         <p className="sn-tegel-tekst">Daarvoor had VDZ alleen een deur-aan-deurteam.</p>
         {/* 30 september 2026 (Marinus): de reactie van VDZ in alle talen in het Engels. Origineel (Google-review, Nederlands):

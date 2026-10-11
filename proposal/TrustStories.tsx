@@ -1,3 +1,4 @@
+import { StipScene } from "./StipScene";
 import React from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -58,10 +59,14 @@ export default function TrustStories() {
               <div><dt>Offertes</dt><dd>38</dd></div>
               <div><dt>Gewonnen</dt><dd>+18%</dd></div>
             </dl>
-            <svg viewBox="0 0 240 70" preserveAspectRatio="none">
-              <path className="tr-dash-vlak" d="M0 62L24 55L48 58L72 46L96 49L120 36L144 31L168 22L192 17L216 12L240 4V70H0Z" />
-              <path className="tr-dash-lijn" pathLength="1" d="M0 62L24 55L48 58L72 46L96 49L120 36L144 31L168 22L192 17L216 12L240 4" />
-            </svg>
+            {/* 11 oktober 2026: de getekende lijn zei niets. Nu in stippen: 126 leads lichten blauw op, daarna worden er 38
+                groen (offertes), zoals de stippenscènes in de explainer. */}
+            <StipScene className="tr-dash-stippen" stap={12} speel={async (v) => {
+              const kol = Math.min(24, v.kol - 1), cel = (n: number): [number, number] => [n % kol, Math.floor(n / kol)];
+              Array.from({ length: 126 }, (_, n) => cel(n)).forEach(([i, j]) => v.zet(i, j, "wit", .22));
+              await v.vul(Array.from({ length: 126 }, (_, n) => cel(n)), "blauw", { duur: 1.2, a: .75 });
+              await v.vul(Array.from({ length: 38 }, (_, n) => cel(n)), "groen", { duur: .7 });
+            }} />
             <p className="tr-dash-bron" translate="no">odoo · meta · website</p>
           </div>
         </Beeld>

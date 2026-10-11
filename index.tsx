@@ -11,6 +11,8 @@ import "./proposal/concept.css";
 import "./proposal/concept-tech.css";
 import "./proposal/partner-colors.css";
 import "./proposal/language-menu.css";
+// 11 oktober 2026: stippenraster over de hele site, als laatste zodat het wint.
+import "./proposal/stippen.css";
 import { detectVisitorLanguage, needsCountryLookup } from "./proposal/i18n/detect";
 
 const rootElement = document.getElementById("root");
@@ -58,3 +60,7 @@ async function start() {
   ReactDOM.createRoot(rootElement!).render(site(pageLanguage()));
 }
 void start();
+// Het lichtgevende stippenveld (golven bij hover en klik) laadt pas als de browser even vrij is: niet in het eerste script.
+const stippenLater = () => import("./proposal/stippen").then((m) => m.siteVeld());
+if ("requestIdleCallback" in window) requestIdleCallback(() => void stippenLater(), { timeout: 2500 });
+else setTimeout(() => void stippenLater(), 1200);
