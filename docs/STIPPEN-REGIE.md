@@ -63,7 +63,7 @@ alleen de eigen bestanden. Klaar = push + regel hieronder bijwerken + bericht aa
 - Nieuwe effecten (chat 2): geef `ring: (t) => [x, y, binnen, buiten]` mee als het effect alleen in een ring oplicht (dan
   hoeft het vaste veld de rest niet te bekijken) en `eind: () => …` voor de eindstand bij minder beweging/pauze.
   `waarde(...) === -1` mag alleen van `t` afhangen.
-- `minderBeweging()` = prefers-reduced-motion óf `data-motion="paused"` (knop uit `motion.tsx`; die knop staat op 11 okt op
+- `minderBeweging()` = prefers-reduced-motion óf `data-motion-pauze` (knop uit `motion.tsx`; niet `data-motion="paused"`, dat staat er ook bij het laden; de knop staat op 11 okt op
   geen enkele pagina). Lopende effecten springen dan naar hun eindstand.
 - `stap` wordt afgerond op 8, 16 of 32 en het veld lijnt uit op het documentraster (16 + stap·k). Bereikt (chat 4) had 14 → 16,
   Vertrouwen (chat 6) 12 → 8: kies daar zelf 8 of 16 als dat anders oogt.

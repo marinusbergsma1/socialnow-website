@@ -15,15 +15,16 @@ const GOLFKLEUREN: Kleur[] = ["geel", "blauw", "roze", "groen"];
 type RGB = [number, number, number];
 const hex = (k: Kleur): RGB => { const h = (STIPKLEUR as Record<string, string>)[k] || k; return [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)) as RGB; };
 const sm = (x: number) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
-// Stil = prefers-reduced-motion of de knop "Animaties pauzeren" (proposal/motion.tsx zet data-motion="paused").
+// Stil = prefers-reduced-motion of de knop "Animaties pauzeren" (proposal/motion.tsx zet dan data-motion-pauze="ja";
+// niet data-motion="paused", want dat staat er ook even bij het laden, tot het eerste effect van de MotionProvider).
 // Dan staat alles meteen in de eindstand; een lopend effect springt naar zijn eind.
 let gepauzeerd = false, wacher: MutationObserver | null = null;
-const leesPauze = () => { gepauzeerd = !!document.querySelector('[data-motion="paused"]'); };
+const leesPauze = () => { gepauzeerd = !!document.querySelector("[data-motion-pauze]"); };
 export const minderBeweging = () => {
   if (typeof document !== "undefined" && !wacher) {
     leesPauze();
     wacher = new MutationObserver(() => { const was = gepauzeerd; leesPauze(); if (gepauzeerd && !was) velden.forEach((v) => v.naarEind()); });
-    wacher.observe(document.documentElement, { subtree: true, attributes: true, attributeFilter: ["data-motion"] });
+    wacher.observe(document.documentElement, { subtree: true, attributes: true, attributeFilter: ["data-motion-pauze"] });
   }
   return gepauzeerd || (typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches);
 };

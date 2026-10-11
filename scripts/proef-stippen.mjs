@@ -158,6 +158,14 @@ try {
     eis("veld: per beeld gemiddeld minder dan 35% van het scherm gewist (dirty rect)", opp.length > 0 && gem < .35, `${(gem * 100).toFixed(0)}% van het scherm per beeld`);
     const naast = veld.filter((o) => o.wat === "stip" && (Math.abs(((o.x - 16) % 32 + 32) % 32) > .6 && Math.abs(((o.x - 16) % 32 + 32) % 32 - 32) > .6 || Math.abs(((o.y - 16) % 32 + 32) % 32) > .6 && Math.abs(((o.y - 16) % 32 + 32) % 32 - 32) > .6));
     eis("raster: golfstippen van het veld op 16 + 32k", stippen > 0 && naast.length === 0, `${naast.length} van ${stippen} naast het raster${naast[0] ? ` (bijv. ${naast[0].x.toFixed(1)}, ${naast[0].y.toFixed(1)})` : ""}`);
+    // Beginstand van MotionProvider: data-motion="paused" tot zijn eerste effect (reduced staat standaard aan). Dat is
+    // geen pauze van de bezoeker; een golf in dat venster moet gewoon spelen.
+    await p.evaluate(() => document.querySelectorAll("[data-motion]").forEach((el) => el.setAttribute("data-motion", "paused")));
+    const tegel3 = p.locator(".sn-tegel:not(.is-film):not(.is-foto) > .sn-tegel-vlak").nth(3);
+    await tegel3.scrollIntoViewIfNeeded(); await wacht(1600); await leeg(p); await tegel3.hover(); await wacht(1000);
+    const begin = (await lees(p)).ops.filter((o) => o.s === "veld" && o.wat === "stip").length;
+    await p.evaluate(() => document.querySelectorAll("[data-motion]").forEach((el) => el.setAttribute("data-motion", "playing")));
+    eis("veld: beginstand data-motion=\"paused\" (voor het eerste effect) houdt de golf niet tegen", begin > 50, `${begin} golfstippen`);
     // Verborgen tab midden in een golf: niets tekenen, daarna verder
     const tegel2 = p.locator(".sn-tegel:not(.is-film):not(.is-foto) > .sn-tegel-vlak").nth(2);
     await tegel2.scrollIntoViewIfNeeded(); await wacht(1600); await tegel2.hover(); await wacht(250);
@@ -210,11 +218,11 @@ try {
     const { ctx, p } = await opPagina(); p_ctx.push(ctx);
     await helemaalLangs(p, 600, 150); await wacht(500);
     // MotionControl (proposal/motion.tsx) staat op 11 okt op geen enkele pagina. Is hij er, dan klikt de proef hem;
-    // anders zet de proef dezelfde stand die hij geeft: data-motion="paused" op de MotionProvider.
+    // anders zet de proef dezelfde stand die hij geeft: data-motion="paused" en data-motion-pauze="ja" op de MotionProvider.
     const knop = p.locator("button.h-motion-control").first();
     const heeft = await knop.count();
     if (heeft) { await knop.scrollIntoViewIfNeeded(); await knop.click(); }
-    else await p.evaluate(() => document.querySelectorAll("[data-motion]").forEach((el) => el.setAttribute("data-motion", "paused")));
+    else await p.evaluate(() => document.querySelectorAll("[data-motion]").forEach((el) => { el.setAttribute("data-motion", "paused"); el.setAttribute("data-motion-pauze", "ja"); }));
     const stand = await p.evaluate(() => document.querySelector("[data-motion]")?.getAttribute("data-motion"));
     await p.evaluate(() => scrollTo(0, 0)); await wacht(1500);
     await leeg(p);
