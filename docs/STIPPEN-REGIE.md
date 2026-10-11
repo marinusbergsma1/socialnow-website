@@ -46,7 +46,7 @@ alleen de eigen bestanden. Klaar = push + regel hieronder bijwerken + bericht aa
 | 1 | Planeten (globe) | `stippen/planeten` | `BrandGlobe.tsx`, globe-css | open |
 | 2 | Symmetrie-effecten | `stippen/symmetrie` | `stippen.ts` (nieuwe effecten), knop-hover | open |
 | 3 | Milo's uit stippen | `stippen/milos` | hero-kaarten, `Vier gezichten` (pages.tsx, ui.tsx MiloPortrait) | open |
-| 4 | Bereikt | `stippen/bereikt` | `Bereikt.tsx`, `bereikt.css` | open |
+| 4 | Bereikt | `stippen/bereikt` | `Bereikt.tsx`, `bereikt.css` | klaar en gauntlet groen (35c4b9d): beurs = aanmeldingen dunnen uit tot 5, winnaar groen + burst; Lighthouse-ringen van stippen; vinkje met ring; dode keyframes weg; proef `proef-stippen-bereikt.mjs` rood 11 → groen 14 |
 | 5 | Nul naar bedrijf | `stippen/nul` | `NulNaarBedrijf.tsx` | open |
 | 6 | Vertrouwen-tegels | `stippen/vertrouwen` | `TrustStories.tsx`, `media-bento.css`, `MiloVragen.tsx` | open |
 | 7 | Wereldkaart | `stippen/wereld` | `WereldKaart.tsx`, `wereldkaart.css` | open |
