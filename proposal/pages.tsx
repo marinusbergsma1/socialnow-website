@@ -47,6 +47,7 @@ const VeiligheidBlok = later(() => import("./Veiligheid").then((m) => m.default)
 const TrustStories = later(() => import("./TrustStories").then((m) => m.default));
 import BrandGlobe from "./BrandGlobe";
 import { ProductOffer, ProductRoute } from "./ProductStart";
+import FreeWebsite from "./FreeWebsite";
 import WereldKaart from "./WereldKaart";
 import OsEntry, { CLAIM_URL, OsDock, REVIEWS_URL } from "./os-entry";
 import { agents, people, projects, services } from "./content";
@@ -313,6 +314,8 @@ export function Home() {
               in de header; het verhaal volgt in Verhaal onder de hero. */}
         </div>
       </section>
+      {/* 11 oktober 2026 (Marinus): "FREE WEBSITE, groen vlak", direct onder de hero; anker #free-website. */}
+      <FreeWebsite />
       </LanguageContext.Provider>
       <OnderDeVouw>
       {/* 28 september 2026 (Marinus): "de homepage moet een upgrade gaan krijgen met storytelling". De volgorde vertelt

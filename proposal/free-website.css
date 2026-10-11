@@ -1,0 +1,54 @@
+/* 11 oktober 2026 (Marinus): FREE WEBSITE als groen vlak op de homepage, anker #free-website.
+   Zwarte tekst op SocialNow-groen #25D366 (contrast ruim boven 4,5:1). Kaarten wit (mens) en zwart (tech).
+   Nergens negatieve letterafstand; de afsluitende punt van koppen op groen is zwart. Proef: scripts/proef-free-website.mjs. */
+.sn-site .sn-free-website {
+  --fw-groen: #25d366;
+  --fw-zwart: #06080d;
+  margin: clamp(56px, 7vw, 112px) 0 0;
+  padding: clamp(44px, 6vw, 88px) 0;
+  background: var(--fw-groen);
+  color: var(--fw-zwart);
+  scroll-margin-top: 80px;
+  overflow-x: clip;
+}
+.sn-site .sn-fw-binnen { display: grid; gap: clamp(28px, 3.4vw, 48px); min-width: 0; }
+.sn-site .sn-free-website :is(h2, h3, p, li, a, span, b) { letter-spacing: 0; overflow-wrap: break-word; }
+.sn-site .sn-fw-kop { max-width: 920px; display: grid; gap: 14px; }
+.sn-site .sn-fw-label { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--fw-zwart); }
+/* De site houdt koppen klein (concept-tech.css, !important); dit vlak moet juist opvallen. */
+:root .sn-site .sn-free-website h2 { margin: 0; font-size: clamp(40px, 6vw, 84px) !important; font-weight: 800; line-height: 1; color: var(--fw-zwart); }
+:root .sn-site .sn-free-website :is(h2, h3) > span { color: inherit; }
+.sn-site .sn-fw-intro { margin: 0; max-width: 60ch; font-size: clamp(17px, 1.35vw, 21px); line-height: 1.5; color: var(--fw-zwart); }
+
+.sn-site .sn-fw-routes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); }
+.sn-site .sn-fw-route { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: clamp(22px, 2.4vw, 36px); border-radius: 22px; background: #fff; color: var(--fw-zwart); box-shadow: 0 1px 0 rgba(6, 8, 13, .12); }
+.sn-site .sn-fw-route.is-demo { background: var(--fw-zwart); color: #fff; }
+.sn-site .sn-fw-route-label { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #3d4450; }
+.sn-site .sn-fw-route.is-demo .sn-fw-route-label { color: #b9f5d0; }
+:root .sn-site .sn-fw-route h3 { margin: 0; font-size: clamp(22px, 2vw, 30px) !important; font-weight: 800; line-height: 1.12; color: inherit; }
+.sn-site .sn-fw-route.is-demo h3 { color: #fff; }
+.sn-site .sn-fw-route p { margin: 0; font-size: 16px; line-height: 1.55; color: inherit; }
+.sn-site .sn-fw-route ul { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.sn-site .sn-fw-route li { position: relative; padding-left: 22px; font-size: 15px; line-height: 1.5; color: inherit; }
+.sn-site .sn-fw-route li::before { content: ""; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: 50%; background: #128c4e; }
+.sn-site .sn-fw-route.is-demo li::before { background: var(--fw-groen); }
+.sn-site .sn-fw-links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: auto !important; padding-top: 8px; }
+.sn-site .sn-fw-links a { color: var(--fw-zwart); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.sn-site .sn-fw-links a::after { content: " ↗"; }
+
+.sn-site .sn-fw-onboarding { display: grid; gap: 20px; }
+:root .sn-site .sn-fw-onboarding h3 { margin: 0; font-size: clamp(22px, 2vw, 30px) !important; font-weight: 800; line-height: 1.12; color: var(--fw-zwart); }
+.sn-site .sn-fw-stappen { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 22px); }
+.sn-site .sn-fw-stappen li { display: flex; gap: 14px; align-items: flex-start; min-width: 0; padding: 18px 20px; border: 2px solid var(--fw-zwart); border-radius: 18px; font-size: 16px; line-height: 1.45; color: var(--fw-zwart); }
+.sn-site .sn-fw-stappen b { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--fw-zwart); color: #fff; font-size: 15px; font-weight: 800; }
+.sn-site .sn-fw-knop { justify-self: start; display: inline-flex; align-items: center; gap: 14px; max-width: 100%; padding: 20px 30px; border-radius: 999px; background: var(--fw-zwart); color: #fff; font-size: clamp(18px, 1.6vw, 22px); font-weight: 800; line-height: 1.2; text-decoration: none; box-shadow: 0 10px 30px rgba(6, 8, 13, .25); transition: transform .18s ease, box-shadow .18s ease; }
+.sn-site .sn-fw-knop:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(6, 8, 13, .32); }
+.sn-site .sn-fw-knop:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.sn-site .sn-fw-pijl { color: var(--fw-groen); font-size: 1.2em; }
+.sn-site .sn-fw-prijs { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.5; color: var(--fw-zwart); }
+
+@media (max-width: 860px) {
+  .sn-site .sn-fw-routes, .sn-site .sn-fw-stappen { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .sn-fw-knop { justify-self: stretch; justify-content: center; text-align: center; padding: 18px 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .sn-site .sn-fw-knop { transition: none; } }
