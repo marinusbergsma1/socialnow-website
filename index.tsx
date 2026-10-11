@@ -52,7 +52,9 @@ async function start() {
     await detectVisitorLanguage();
     const detected = pageLanguage();
     await laadWoordenboek(detected, "kern");
-    if (detected !== language) root.render(site(detected));
+    // 11 oktober 2026: als transition, zodat React eerst de voorgerenderde HTML hydrateert. Direct renderen gaf bij een
+    // Nederlandse browser op / React-fout #424 (update vóór de hydratie klaar was; daarna alles opnieuw getekend).
+    if (detected !== language) React.startTransition(() => root.render(site(detected)));
     return;
   }
   await detectVisitorLanguage();

@@ -252,6 +252,24 @@ try {
     eis("touch: tik op een tegel geeft een golf", veld > 30, `${veld} golfstippen`);
     eis("390 px: geen consolefouten", fouten.length === 0, fouten.slice(0, 4).join(" | "));
   }
+  // 7. Nederlandse browser op / (Engelse voorgerenderde html, landopzoeking zegt nl): de taalwissel mag de hydratie niet
+  //    breken (React-fout #424), en de pagina staat daarna in het Nederlands.
+  {
+    const fouten = [];
+    for (let n = 0; n < 4; n++) {
+      const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, locale: "nl-NL" }); p_ctx.push(ctx);
+      await ctx.route(BUITEN, (r) => r.abort());
+      await ctx.addInitScript((v) => { try { localStorage.setItem("sn-akkoord", v); } catch {} }, AKKOORD);
+      const p = await ctx.newPage();
+      p.on("pageerror", (e) => fouten.push(e.message.slice(0, 80)));
+      await p.goto(`${basis}/`, { waitUntil: "load" }); await wacht(2500);
+      if (n === 0) {
+        const nav = await p.locator('.h-desktop-nav a[href$="/het-os"]').first().textContent().catch(() => "");
+        eis("nl-browser op /: pagina wisselt naar Nederlands", nav === "Het OS", `navigatie "${nav}", ${new URL(p.url()).pathname}`);
+      }
+    }
+    eis("nl-browser op /: geen paginafouten bij de taalwissel (React #424)", fouten.length === 0, fouten.slice(0, 2).join(" | "));
+  }
 } finally {
   await Promise.all(p_ctx.map((c) => c.close().catch(() => {})));
   await browser.close();
