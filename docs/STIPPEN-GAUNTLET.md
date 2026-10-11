@@ -26,4 +26,6 @@ Vergelijking altijd tegen main 77bebda: alleen wat nieuw rood is telt als fout v
 | 11-10 | stippen/snelheid | 76af6ae | **groen**: proef-stippen rood 8 op basis → groen; proef-bundel helemaal groen (117,8 KB). Eenmalig React #424 op / 1440, 7× niet herhaald (vermoedelijk testserver). Raakt ook bestanden van 1, 3, 8, 9: als eerste samenvoegen. |
 | 11-10 | feat/stippen-site-20261011 | 15e7fd6 | groen op proef-geen-koekje (16), letterafstand, zwart-raster. **Rood (al sinds cdcbe51)**: `concept.css:27` `.h-hero:after` vast #0b0f12-verloop → grijze band links over de hele hero (rgb 11,15,18), raster onzichtbaar; ook `.h-clients-strook` randen (r. 32-33). Schermafdruk `01_WEBSITE/gauntlet-schermafdrukken/15e7fd6-hero-band-1440.png`. Gemeld aan L. |
 
+| 11-10 | feat/stippen-site-20261011 | 560d2e0 | **groen**: hero-band en klantenstrookranden weg (pixels 0,0,0), zwart-raster 72 met band-eis (rood 8 op 15e7fd6), geen-koekje 16. React #424 nog 2/24 op / (bestaand). |
+| 11-10 | stippen/snelheid | c034f7b | **groen**: #424 opgelost (taalwissel als transition na hydratie), 0/24 laadbeurten. Alle proeven groen. Alles gepushte gemeld aan L als groen. |
 Bestaand, geen stippenfout: beveiligingsvideo (VeiligheidSpeler) speelt door bij prefers-reduced-motion; foto's Steef/Douwe 480 gaven 404 op de basis (snelheid voegt ze toe).
