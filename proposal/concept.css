@@ -351,6 +351,18 @@ h1:not(.sn-vhs-off)::after, h2:not(.sn-vhs-off)::after, h3:not(.sn-vhs-off)::aft
   :root .sn-site .h-koekje { padding-left: 86px; }
   :root .sn-site .h-koekje-milo { left: 12px; top: -16px; width: 62px; height: 62px; }
 }
+/* 11 oktober 2026 (Marinus, schermafdruk 375 px): Milo met de cookiemelding viel over de onderkant van de partnertegels.
+   Op mobiel een lage strook: Milo klein binnen de kaart, uitleg en knoppen compact. De melding zelf blijft, geen tracking.
+   Proef: scripts/proef-partnertegels.mjs. */
+@media (max-width: 640px) {
+  :root .sn-site .h-koekje { left: 10px; right: 10px; bottom: 10px; padding: 10px 12px 10px 62px; border-radius: 14px; }
+  :root .sn-site .h-koekje-milo { left: 10px; top: 10px; width: 42px; height: 42px; }
+  :root .sn-site .h-koekje .h-koekje-titel { margin: 0; font-size: 14px; line-height: 1.25; }
+  :root .sn-site .h-koekje .h-koekje-uitleg { margin: 2px 0 0; font-size: 12px; line-height: 1.35; }
+  :root .sn-site .h-koekje-acties { margin-top: 8px; gap: 14px; }
+  :root .sn-site .h-koekje-knop { height: 30px; padding: 0 14px; font-size: 13px; }
+  :root .sn-site .h-koekje-link { font-size: 12px; }
+}
 
 /* ── Foto's in witte vlakken altijd in kleur ─────────────────────────────────── */
 :root .sn-site .h-partners img, :root .sn-site .h-zelf img, :root .sn-site .h-duo img { filter: none; }

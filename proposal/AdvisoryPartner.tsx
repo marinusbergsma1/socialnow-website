@@ -1,7 +1,7 @@
 import { people } from "./content";
 import { klein } from "./licht";
 import { useLanguage } from "./i18n/context";
-import LinkedInMark from "./LinkedInMark";
+import { NaamMetLinkedIn } from "./LinkedInMark";
 import "./advisory-partner.css";
 
 const copy: Record<string, { title: string; intro: string; experience: string }> = {
@@ -26,7 +26,7 @@ export default function AdvisoryPartner() {
     <img className="sn-advisory-photo" {...klein(albert.image, "(max-width: 640px) 40vw, 200px", [160, 320])} alt="Albert Deltour" width="200" height="200" loading="lazy" />
     <div className="sn-advisory-copy">
       <small translate="no">Strategy &amp; Guidance Advisor — from ELT Live</small>
-      <h3><a href={albert.linkedin} target="_blank" rel="noopener noreferrer">Albert Deltour <LinkedInMark /></a></h3>
+      <h3><a href={albert.linkedin} target="_blank" rel="noopener noreferrer"><NaamMetLinkedIn naam="Albert Deltour" /></a></h3>
       <strong>{text.title}</strong>
       <p>{text.experience}</p>
       <p>{text.intro}</p>

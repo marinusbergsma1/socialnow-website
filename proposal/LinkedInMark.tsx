@@ -18,3 +18,12 @@ export default function LinkedInMark() {
     </svg>
   );
 }
+
+// 11 oktober 2026 (Marinus, schermafdruk op mobiel): "Marinus / Bergsma [in]" en "Steef Komen / [in]", het icoon stond los
+// op een eigen regel. Het laatste woord en het icoon zitten nu samen in één onbreekbaar stuk; de naam breekt alleen tussen
+// hele woorden. Proef: scripts/proef-partnertegels.mjs.
+export function NaamMetLinkedIn({ naam }: { naam: string }) {
+  const woorden = naam.trim().split(/\s+/);
+  const laatste = woorden.pop();
+  return <>{woorden.length ? `${woorden.join(" ")} ` : ""}<span className="h-naam-eind">{laatste}{" "}<LinkedInMark /></span></>;
+}
