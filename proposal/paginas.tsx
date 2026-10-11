@@ -28,7 +28,7 @@ import InstagramWork from "./InstagramWork";
 import PartnerMichelle from "./PartnerMichelle";
 import PartnerIntro from "./PartnerIntro";
 import AdvisoryPartner from "./AdvisoryPartner";
-import { Bedrijfsreferenties } from "./TeamTrust";
+import { Bedrijfsreferenties, PartnerKoppen } from "./TeamTrust";
 import {
   Action,
   AgentCards,
@@ -448,15 +448,15 @@ export function TeamPage() {
         <PartnerIntro />
         <div className="h-teams-duo">
           <div className="h-team-duo is-socialnow">
-            <p className="h-team-duo-label" translate="no"><Link to="/" aria-label="SocialNow"><img src="/images/klein/SocialNow-Logo-2026-400.webp" alt="SocialNow" width="200" height="31" loading="lazy" /></Link></p>
+            <p className="h-team-duo-label" translate="no"><PartnerKoppen soort="sn" /></p>
             <TeamGrid members={socialnow} />
           </div>
           <div className="h-team-duo is-attesso">
-            <p className="h-team-duo-label" translate="no"><a href="https://www.attesso.com/" target="_blank" rel="noopener noreferrer"><code>~/attesso</code></a></p>
+            <p className="h-team-duo-label" translate="no"><PartnerKoppen soort="attesso" /></p>
             <TeamGrid members={attesso} />
           </div>
           <div className="h-team-duo is-fincer">
-            <p className="h-team-duo-label" translate="no"><a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener noreferrer" aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer.png" alt="Fincer" width="150" height="38" loading="lazy" /></a></p>
+            <p className="h-team-duo-label" translate="no"><PartnerKoppen soort="fincer" /></p>
             <TeamGrid members={fincer} />
           </div>
         </div>

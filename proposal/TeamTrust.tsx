@@ -138,20 +138,44 @@ function DuoTegel({ naam }: { naam: string }) {
   </figure>;
 }
 
+// 11 oktober 2026 (Marinus, bij een schermafdruk van deze tegels): "deze tiles moeten nog aangepast en zitten letters nog
+// met elkaar verbonden op mobiel." Vaste regel: partnertegels altijd als de donkere kaarten van het story-document
+// (business.socialnow.nl/hossam.html, .team-duo in presentatie-jeroen-20261008/deploy/middleware.js). Geen vlak achter een
+// logo, namen in de merkletter in plaats van vette mono. Opmaak in partner-colors.css.
+function PartnerPortret({ naam }: { naam: string }) {
+  const person = people.find(p => p.name === naam);
+  if (!person) return null;
+  return <figure className={naam === "Marinus Bergsma" ? "is-hoodie" : undefined}>
+    <img {...klein(person.image, "(max-width: 900px) 45vw, 220px", [160, 320, 480])} alt="" width="220" height="220" loading="lazy" />
+    <figcaption><b>{person.name} <LinkedInTeken person={person} /></b><i>{KORTE_ROL[naam] ?? person.role}</i></figcaption>
+    <NaarPersoon person={person} />
+  </figure>;
+}
+
+export function PartnerKoppen({ soort }: { soort: "sn" | "attesso" | "fincer" }) {
+  if (soort === "sn") return <span className="h-co-merken" aria-label="SocialNow × Komen Consultancy Operation Systems">
+    <Link to="/" aria-label="SocialNow"><img src="/images/klein/SocialNow-Logo-2026-400.webp" alt="SocialNow" width="200" height="31" loading="lazy" /></Link>
+    <span className="h-keer" aria-hidden="true">×</span>
+    <a href="https://www.komenconsultancy.com/" target="_blank" rel="noopener noreferrer"><img src="/images/merken/komen-operation-systems.webp" alt="Komen Consultancy Operation Systems" width="600" height="95" loading="lazy" /></a>
+  </span>;
+  if (soort === "attesso") return <a href="https://www.attesso.com/" target="_blank" rel="noopener noreferrer" aria-label="Attesso"><code>~/attesso</code></a>;
+  return <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener noreferrer" aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer-wit.png" alt="Fincer" width="600" height="144" loading="lazy" /></a>;
+}
+
 export function TeamJoin() {
   return <div className="h-team-sectie" translate="no">
     <div className="h-team-kern">
       <div className="h-duo is-sn">
-        <div className="h-duo-kop"><span className="h-duo-merk"><Link to="/" aria-label="SocialNow"><img src="/images/klein/SocialNow-Logo-2026-400.webp" alt="SocialNow" width="200" height="38" loading="lazy" /></Link></span><span>Advertisement &amp; Consultancy</span></div>
-        <div className="h-duo-rij">{SOCIALNOW_DUO.map(naam => <DuoTegel key={naam} naam={naam} />)}</div>
+        <div className="h-duo-kop"><PartnerKoppen soort="sn" /></div>
+        <div className="h-duo-rij">{SOCIALNOW_DUO.map(naam => <PartnerPortret key={naam} naam={naam} />)}</div>
       </div>
       <div className="h-duo is-attesso">
-        <div className="h-duo-kop"><span className="h-duo-merk"><a href="https://www.attesso.com/" target="_blank" rel="noopener noreferrer"><b>~/a</b> Attesso</a></span><span>AI Payments</span></div>
-        <div className="h-duo-rij">{ATTESSO_DUO.map(naam => <DuoTegel key={naam} naam={naam} />)}</div>
+        <div className="h-duo-kop"><PartnerKoppen soort="attesso" /></div>
+        <div className="h-duo-rij">{ATTESSO_DUO.map(naam => <PartnerPortret key={naam} naam={naam} />)}</div>
       </div>
       <div className="h-duo is-fincer">
-        <div className="h-duo-kop"><span className="h-duo-merk"><a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener noreferrer" aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer.png" alt="Fincer" width="130" height="40" loading="lazy" /></a></span><span>Wealth management</span></div>
-        <div className="h-duo-rij"><DuoTegel naam="Steven Goudsblom" /><div className="h-fincer-toelichting"><strong>Wealth management, with personal contact.</strong><p>Steven is our wealth partner, for SocialNow and our clients.</p></div></div>
+        <div className="h-duo-kop"><PartnerKoppen soort="fincer" /></div>
+        <div className="h-duo-rij"><PartnerPortret naam="Steven Goudsblom" /><div className="h-fincer-toelichting"><strong>Wealth management, with personal contact.</strong><p>Steven is our wealth partner, for SocialNow and our clients.</p></div></div>
       </div>
     </div>
     <AdvisoryPartner />

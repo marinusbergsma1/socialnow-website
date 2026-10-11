@@ -52,12 +52,13 @@
 :root .sn-site .h-stroom-os,
 :root .sn-site .h-koppel-knoop {
   font-family: var(--v-mono) !important;
-  letter-spacing: 0.01em;
+  /* 11 oktober 2026: 0,04 em in plaats van 0,01 em. Vette mono raakte op mobiel letter aan letter (proef-letterafstand). */
+  letter-spacing: 0.04em;
 }
 :root .h-desktop-nav a { font-size: 12px !important; font-weight: 500 !important; text-transform: uppercase; letter-spacing: 0.06em !important; }
 :root .sn-site .h-eyebrow, :root .sn-site .sn-tegel-label { font-size: 10.5px !important; letter-spacing: 0.1em !important; }
 :root .sn-site .sn-tegel-kop { font-size: 11px !important; font-weight: 500 !important; text-transform: uppercase; letter-spacing: 0.08em; }
-:root .sn-site .h-button { font-size: 13px !important; font-weight: 500 !important; letter-spacing: 0.01em !important; }
+:root .sn-site .h-button { font-size: 13px !important; font-weight: 500 !important; letter-spacing: 0.04em !important; }
 :root .sn-site .h-team-trust strong, :root .sn-site .h-team-trust b { font-size: 13px !important; font-weight: 500 !important; }
 
 /* ── Logo's en details ~35% kleiner ───────────────────────────────────────── */
@@ -87,7 +88,7 @@
 /* Herobknoppen ook in tech-font. */
 :root .sn-site .h-dock-login, :root .sn-site .h-dock-demo { font-family: var(--v-mono) !important; font-size: 13px !important; font-weight: 500 !important; }
 /* Cijfers in tech-font, kleiner. */
-:root .sn-site .h-verhaal-jaren b { font-size: 28px !important; font-family: var(--v-mono) !important; letter-spacing: 0; }
+:root .sn-site .h-verhaal-jaren b { font-size: 28px !important; font-family: var(--v-mono) !important; letter-spacing: 0.04em; }
 
 /* 5 oktober 2026: footer-rij Gecertificeerd & erkend (Google Partner, Meta Business Partner, Google Developers). */
 :root .sn-site .h-footer-erkend { display: grid; justify-items: center; gap: 16px; margin: 0 auto 28px; }
