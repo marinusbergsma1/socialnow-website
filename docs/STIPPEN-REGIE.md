@@ -52,6 +52,20 @@ alleen de eigen bestanden. Klaar = push + regel hieronder bijwerken + bericht aa
 | 7 | Wereldkaart | `stippen/wereld` | `WereldKaart.tsx`, `wereldkaart.css` | open |
 | 8 | Mensen uit stippen | `stippen/mensen` | team/partners (hero-c.css, TeamTrust, PartnerIntro, OsPeople) | open |
 | 9 | Overige pagina's | `stippen/paginas` | `paginas.tsx` e.a. pagina's, hun css | open |
-| 10 | Snelheid en toegankelijkheid | `stippen/snelheid` | `stippen.ts` prestaties, `scripts/proef-stippen*.mjs` | open |
+| 10 | Snelheid en toegankelijkheid | `stippen/snelheid` | `stippen.ts` prestaties, `scripts/proef-stippen*.mjs` | klaar 33a476e (+ merge basis): `proef-stippen.mjs` rood op basis (8), groen; `proef-bundel` 149,5 → 117,8 KB groen. Zie "Snelheid" hieronder |
 | G | Gauntletloop | geen eigen code | controleert alles, meldt fouten aan de juiste chat | open |
 | L | Livezet | `feat/stippen-site-20261011` → main | voegt takken samen, PR, main, publicatie | basistak 02d56eb klaar: proef `scripts/proef-zwart-raster.mjs` rood op main (56/64), groen op basistak (64); wacht op groen van G voor eerste livegang |
+
+## Snelheid (chat 10, 11 okt)
+
+- `stippen.ts` API ongewijzigd. Intern: vast veld wist en tekent alleen de ring van een golf of burst (dirty rect, ~4% van het
+  scherm per beeld), stippen per kleur in één pad; stil in een verborgen tab; scènes tekenen alleen in beeld.
+- Nieuwe effecten (chat 2): geef `ring: (t) => [x, y, binnen, buiten]` mee als het effect alleen in een ring oplicht (dan
+  hoeft het vaste veld de rest niet te bekijken) en `eind: () => …` voor de eindstand bij minder beweging/pauze.
+  `waarde(...) === -1` mag alleen van `t` afhangen.
+- `minderBeweging()` = prefers-reduced-motion óf `data-motion="paused"` (knop uit `motion.tsx`; die knop staat op 11 okt op
+  geen enkele pagina). Lopende effecten springen dan naar hun eindstand.
+- `stap` wordt afgerond op 8, 16 of 32 en het veld lijnt uit op het documentraster (16 + stap·k). Bereikt (chat 4) had 14 → 16,
+  Vertrouwen (chat 6) 12 → 8: kies daar zelf 8 of 16 als dat anders oogt.
+- Touch: geen hover-golven, wel een golf bij een tik op een tegel.
+- Eerste script onder 120 KB: nieuwe dingen in de hero die niet meteen in beeld zijn via `later()` + `<OnderDeVouw ruimte={false}>`.
