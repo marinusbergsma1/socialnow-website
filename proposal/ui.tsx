@@ -10,8 +10,10 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { agents, faqs, logos, people } from "./content";
-import PartnerReferences from "./PartnerReferences";
-import { getBrandFaq } from "./brand-faq";
+import { OnderDeVouw, later } from "./later";
+// 11 oktober 2026: de partnerreferenties (alleen op de teampagina's) laden na het eerste script.
+import "./partner-references.css";
+const PartnerReferences = later(() => import("./PartnerReferences").then((m) => m.default));
 import type { Language } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
 import { NaamMetLinkedIn } from "./LinkedInMark";
@@ -274,7 +276,7 @@ export function TeamGrid({ short = false, members = people }: { short?: boolean;
               ) : person.name}
             </strong>
             <span>{person.role}</span>
-            <PartnerReferences personName={person.name} />
+            <OnderDeVouw ruimte={false}><PartnerReferences personName={person.name} /></OnderDeVouw>
           </figcaption>
         </figure>
       ))}
@@ -412,7 +414,8 @@ export type Bericht = {
 
 // Antwoord uit de eigen vragenlijst. Dit is het vangnet: werkt de Worker niet,
 // dan blijft Milo alsnog antwoorden in plaats van er stil bij te staan.
-function uitVragenlijst(vraag: string, language: string, t: (tekst: string) => string): Bericht | null {
+// 11 oktober 2026: de merkvragen (brand-faq.ts) laden pas als Milo ze nodig heeft, niet in het eerste script.
+function uitVragenlijst(vraag: string, language: string, t: (tekst: string) => string, getBrandFaq: typeof import("./brand-faq").getBrandFaq): Bericht | null {
   const woorden = zoekwoorden(vraag);
   if (!woorden.length) return null;
   let beste: (typeof faqs)[number] | null = null;
@@ -456,7 +459,8 @@ export async function vraagMilo(heen: Bericht[], language: string, t: (tekst: st
   } catch {
     // val netjes terug op de eigen vragenlijst
   }
-  const uitLijst = uitVragenlijst(heen[heen.length - 1]?.tekst || "", language, t);
+  const { getBrandFaq } = await import("./brand-faq");
+  const uitLijst = uitVragenlijst(heen[heen.length - 1]?.tekst || "", language, t, getBrandFaq);
   if (uitLijst) return { ...uitLijst, bron: "vragenlijst" };
   return {
     van: "milo",

@@ -23,8 +23,9 @@ export function StipScene({ speel, opnieuw = false, licht = false, stap, raster 
     };
     const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); setTimeout(doe, 150); } }, { threshold: .45 });
     io.observe(el);
-    const hover = () => { if (opnieuw && performance.now() - laatst > 4000) doe(); };
-    el.addEventListener("pointerenter", hover);
+    // Zonder `opnieuw` blijft er na de scène niets aan het vlak hangen; het veld zelf tekent alleen in beeld.
+    const hover = () => { if (performance.now() - laatst > 4000) doe(); };
+    if (opnieuw) el.addEventListener("pointerenter", hover);
     return () => { io.disconnect(); el.removeEventListener("pointerenter", hover); v.stop(); };
   }, [licht, stap, opnieuw, raster]);
   return (

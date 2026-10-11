@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { projects } from "./content";
+import { projects } from "./projecten";
 import { AmbientVideo } from "./motion";
 import { MediaDialog, type MediaItem } from "./MediaSliders";
 import { Action, Heading } from "./ui";

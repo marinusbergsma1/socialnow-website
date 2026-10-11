@@ -32,9 +32,10 @@ try {
   );
   const { parseOsStand, installationHint, installationLabel, OsProof, CLAIM_URL, INSTALL_URL } =
     await server.ssrLoadModule("/proposal/os-entry.tsx");
-  const { projects, agents, people } = await server.ssrLoadModule(
+  const { agents, people } = await server.ssrLoadModule(
     "/proposal/content.ts",
   );
+  const { projects } = await server.ssrLoadModule("/proposal/projecten.ts");
   const { allPosts } = await server.ssrLoadModule("/data/posts.ts");
   assert.equal(projects.find(p=>p.slug === "vastiq-website").url,"https://vastiq.ai/", "VASTIQ canonical live destination");
   const routes = [
