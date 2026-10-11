@@ -3,6 +3,7 @@
 // Start je website-onboarding", in alle 10 talen. Plek: het gratis aanbod (ProductOffer) in de hero, onder "Bouw samen
 // met ons team" en boven de Feedback-groepen; ProductOffer staat ook in de bento "Begin met je website".
 // Leest de bouw in dist/, dus eerst npm run build. Rood op main b8e3b9d, groen op fix/partnertegels-mobiel-20261011.
+// 11 oktober 2026: de hero-link wijst naar #free-website (FreeWebsite.tsx), de knop daar naar website.socialnow.nl.
 import { existsSync, readFileSync } from "node:fs";
 
 if (!existsSync("dist/nl/index.html")) {
@@ -30,14 +31,17 @@ for (const taal of TALEN) {
   const knop = vertaal(taal, KNOP);
   if (taal !== "nl") eisen.push([`${taal}: uitleg en knop vertaald in het woordenboek`, Boolean(uitleg && knop) && uitleg !== UITLEG && knop !== KNOP && /odoo/i.test(uitleg) && /socialnow/i.test(uitleg)]);
   const html = (readFileSync(pad(taal), "utf8").split('<div id="root"')[1] || "");
-  // De link zelf: een <a> naar website.socialnow.nl met uitleg en knoptekst erin, in de hero (vóór de partnertegels).
-  const links = [...html.matchAll(/<a\b[^>]*href="https:\/\/website\.socialnow\.nl\/?"[^>]*>([\s\S]*?)<\/a>/g)];
+  // De link zelf. Sinds 11 oktober 2026 ("FREE WEBSITE, groen vlak") wijst de link in de hero naar de sectie
+  // #free-website op de homepage; daar staat de knop naar website.socialnow.nl (zie scripts/proef-free-website.mjs).
+  const links = [...html.matchAll(/<a\b[^>]*href="[^"]*#free-website"[^>]*>([\s\S]*?)<\/a>/g)];
   const goed = links.filter((m) => { const t = tekst(m[1]); return uitleg && knop && t.includes(uitleg) && t.includes(knop); });
-  eisen.push([`${taal}: homepage linkt met "${knop}" naar ${URL_ONBOARDING} (${links.length} links)`, goed.length >= 1]);
+  eisen.push([`${taal}: homepage linkt met "${knop}" naar #free-website (${links.length} links)`, goed.length >= 1]);
   const plek = goed.length ? html.indexOf(goed[0][0]) : -1;
   const tegels = html.indexOf("h-team-kern");
   eisen.push([`${taal}: de link staat in de hero, boven de partnertegels`, plek > -1 && tegels > -1 && plek < tegels]);
-  eisen.push([`${taal}: de link opent in een nieuw tabblad met noopener`, goed.length > 0 && /target="_blank"/.test(goed[0][0]) && /noopener/.test(goed[0][0])]);
+  const sectie = html.indexOf('id="free-website"');
+  const knopOnboarding = sectie > -1 ? html.slice(sectie).match(/<a\b[^>]*href="https:\/\/website\.socialnow\.nl\/?"[^>]*>/) : null;
+  eisen.push([`${taal}: in #free-website opent de knop ${URL_ONBOARDING} in een nieuw tabblad met noopener`, Boolean(knopOnboarding) && /target="_blank"/.test(knopOnboarding[0]) && /noopener/.test(knopOnboarding[0])]);
 }
 const nieuw = TALEN.flatMap((t) => [vertaal(t, UITLEG), vertaal(t, KNOP)]).filter(Boolean).join(" ");
 eisen.push(["geen modelnamen in de nieuwe teksten", !/claude|anthropic|openai|chatgpt|\bgpt\b|gemini/i.test(nieuw)]);
