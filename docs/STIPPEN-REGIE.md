@@ -46,15 +46,15 @@ alleen de eigen bestanden. Klaar = push + regel hieronder bijwerken + bericht aa
 | 1 | Planeten (globe) | `stippen/planeten` | `BrandGlobe.tsx`, globe-css | open |
 | 2 | Symmetrie-effecten | `stippen/symmetrie` | `stippen.ts` (nieuwe effecten), knop-hover | open |
 | 3 | Milo's uit stippen | `stippen/milos` | hero-kaarten, `Vier gezichten` (pages.tsx, ui.tsx MiloPortrait) | open |
-| 4 | Bereikt | `stippen/bereikt` | `Bereikt.tsx`, `bereikt.css` | klaar en gauntlet groen (35c4b9d): beurs = aanmeldingen dunnen uit tot 5, winnaar groen + burst; Lighthouse-ringen van stippen; vinkje met ring; dode keyframes weg; proef `proef-stippen-bereikt.mjs` rood 11 → groen 14 |
+| 4 | Bereikt | `stippen/bereikt` | `Bereikt.tsx`, `bereikt.css` | **live (PR #70)**; klaar en gauntlet groen (35c4b9d): beurs = aanmeldingen dunnen uit tot 5, winnaar groen + burst; Lighthouse-ringen van stippen; vinkje met ring; dode keyframes weg; proef `proef-stippen-bereikt.mjs` rood 11 → groen 14 |
 | 5 | Nul naar bedrijf | `stippen/nul` | `NulNaarBedrijf.tsx` | open |
 | 6 | Vertrouwen-tegels | `stippen/vertrouwen` | `TrustStories.tsx`, `media-bento.css`, `MiloVragen.tsx` | open |
 | 7 | Wereldkaart | `stippen/wereld` | `WereldKaart.tsx`, `wereldkaart.css` | open |
 | 8 | Mensen uit stippen | `stippen/mensen` | team/partners (hero-c.css, TeamTrust, PartnerIntro, OsPeople) | open |
 | 9 | Overige pagina's | `stippen/paginas` | `paginas.tsx` e.a. pagina's, hun css | open |
-| 10 | Snelheid en toegankelijkheid | `stippen/snelheid` | `stippen.ts` prestaties, `scripts/proef-stippen*.mjs` | klaar 33a476e (+ merge basis): `proef-stippen.mjs` rood op basis (8), groen; `proef-bundel` 149,5 → 117,8 KB groen. Zie "Snelheid" hieronder |
+| 10 | Snelheid en toegankelijkheid | `stippen/snelheid` | `stippen.ts` prestaties, `scripts/proef-stippen*.mjs` | **live (PR #70)**; klaar 33a476e (+ merge basis): `proef-stippen.mjs` rood op basis (8), groen; `proef-bundel` 149,5 → 117,8 KB groen. Zie "Snelheid" hieronder |
 | G | Gauntletloop | geen eigen code | controleert alles, meldt fouten aan de juiste chat | open |
-| L | Livezet | `feat/stippen-site-20261011` → main | voegt takken samen, PR, main, publicatie | basistak da987f8: proeven `proef-zwart-raster.mjs` (rood 56/64 op main, groen 64) en `proef-geen-koekje.mjs` (cookiemelding weg, rood 8/16, groen 16). Marinus 11 okt: "Coockie pop up weg en zelfstandig livezetten, na afronding": L zet na afronding zelf live, zonder te vragen |
+| L | Livezet | `feat/stippen-site-20261011` → main | voegt takken samen, PR, main, publicatie | **Live 1 (11 okt, PR #70, main e49370f):** zwart + raster, hero zonder band, cookie-pop-up weg, snelheid (117,8 KB), Bereikt. Live gecontroleerd 390/1440 NL/EN/DE/FR. Wereld wacht op akkoord Marinus; overige chats: melden met tak + sha, vanaf main e49370f. Marinus: L zet na afronding zelf live |
 
 ## Snelheid (chat 10, 11 okt)
 
