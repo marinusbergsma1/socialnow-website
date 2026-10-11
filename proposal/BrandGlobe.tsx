@@ -113,7 +113,7 @@ export default function BrandGlobe() {
         context.globalAlpha = 0.3 + cel.front * 0.7;
         context.fillStyle = cel.color;
         context.beginPath();
-        context.arc(gridX + i * GRID, gridY + j * GRID, 1.6 + cel.front * 0.7, 0, 7);
+        context.arc(gridX + i * GRID, gridY + j * GRID, 1 + cel.front * 0.6, 0, 7);
         context.fill();
       }
       context.globalAlpha = 1;
