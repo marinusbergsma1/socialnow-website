@@ -40,13 +40,18 @@ try {
       if (!c) return null;
       const ctx = c.getContext("2d"), d = ctx.getImageData(0, 0, c.width, c.height).data, schaal = c.width / c.getBoundingClientRect().width;
       // Raster van 16 px (desktop) of 8 px (telefoon): tel op beide en neem het raster waar de stippen op staan.
+      // Het veld lijnt uit op het documentraster (chat 10), dus de stippen staan niet altijd op stap/2: probeer elke verschuiving.
       const telOp = (px) => {
-        const stap = px * schaal; let licht = 0, groen = 0;
-        for (let y = stap / 2; y < c.height; y += stap) for (let x = stap / 2; x < c.width; x += stap) {
-          const n = (Math.round(y) * c.width + Math.round(x)) * 4; if (d[n + 3] < 40) continue;
-          licht++; if (d[n + 1] > 150 && d[n] < 120) groen++;
+        const stap = px * schaal; let best = { licht: 0, groen: 0 };
+        for (let oy = 0; oy < stap; oy++) for (let ox = 0; ox < stap; ox++) {
+          let licht = 0, groen = 0;
+          for (let y = oy; y < c.height; y += stap) for (let x = ox; x < c.width; x += stap) {
+            const n = (Math.round(y) * c.width + Math.round(x)) * 4; if (d[n + 3] < 40) continue;
+            licht++; if (d[n + 1] > 150 && d[n] < 120) groen++;
+          }
+          if (licht > best.licht) best = { licht, groen };
         }
-        return { licht, groen };
+        return best;
       };
       const a = telOp(16), b = telOp(8);
       const { licht, groen } = b.licht > a.licht ? b : a;
