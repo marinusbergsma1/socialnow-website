@@ -1,3 +1,4 @@
+import { StipScene } from "./StipScene";
 import React from "react";
 import { ShieldCheck } from "lucide-react";
 import { Bento, Tegel, useInBeeld } from "./Bento";
@@ -57,16 +58,22 @@ function TienVragen() {
 // meer: drie regels als een verbindingslijst, met een puls die over elke draad naar het OS loopt.
 function Koppelingen() {
   const regels = [
-    { bron: <OdooLogo />, taak: "Boekhouding" },
-    { bron: "Studio", taak: "Content" },
-    { bron: "Zernio", taak: "Posts" },
-  ];
+    { bron: <OdooLogo />, taak: "Boekhouding", kleur: "#E8457C" },
+    { bron: "Studio", taak: "Content", kleur: "#F5940D" },
+    { bron: "Zernio", taak: "Posts", kleur: "#FF5A36" },
+  ] as const;
   return (
     <div className="h-koppel-lijst" aria-hidden="true">
       {regels.map((regel, index) => (
         <div key={regel.taak} className="h-koppel-regel" style={{ "--i": index } as React.CSSProperties}>
           <span className="h-koppel-bron" translate="no">{regel.bron}</span>
-          <span className="h-koppel-draad"><i /></span>
+          {/* 11 oktober 2026: geen lopend streepje meer, maar een draad van stippen die van de bron naar het OS oplicht
+              in de kleur van de bron, één regel na de ander (stippen zoals in de explainer). */}
+          <StipScene className="h-koppel-draad" stap={8} raster opnieuw speel={async (v) => {
+            await new Promise((r) => setTimeout(r, index * 450));
+            const j = Math.floor(v.rij / 2);
+            await v.vul(Array.from({ length: v.kol }, (_, i) => [i, j] as [number, number]), regel.kleur, { duur: .8, a: .95 });
+          }} />
           <span className="h-koppel-taak">{regel.taak}</span>
           <span className="h-koppel-os" translate="no">OS</span>
         </div>

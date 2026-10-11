@@ -58,6 +58,10 @@ export default function BrandGlobe() {
     const frameInterval = 1000 / (mobile ? 24 : 30);
     let width = 0;
     let height = 0;
+    // Raster van de pagina: stippen op 16 + 32k in documentcoördinaten. gridX/gridY = eerste stip in het canvas.
+    const GRID = 32;
+    let gridX = 16;
+    let gridY = 16;
     let frame: number | null = null;
     let lastTimestamp = 0;
     let time = pose.current.time;
@@ -68,6 +72,7 @@ export default function BrandGlobe() {
     let tiltX = pose.current.tiltX;
     let tiltY = pose.current.tiltY;
     let announced = false;
+    const cellen = new Map<number, { front: number; color: string }>();
 
     const canAnimate = () =>
       enabled &&
@@ -86,30 +91,30 @@ export default function BrandGlobe() {
       const sinX = Math.sin(angleX);
       context.clearRect(0, 0, width, height);
 
-      // Rotatie per bol houdt de vertrouwde merkcompositie herkenbaar.
-      const projected = points
-        .map((point) => {
-          const x = point.x * cosY - point.z * sinY;
-          const z = point.x * sinY + point.z * cosY;
-          const y = point.y * cosX - z * sinX;
-          const depth = point.y * sinX + z * cosX;
-          return { x: x + point.sphere.x, y: y + point.sphere.y, depth, point };
-        })
-        .sort(
-          (a, b) => a.depth + a.point.sphere.z - (b.depth + b.point.sphere.z),
-        );
-
-      for (const dot of projected) {
-        const front = (dot.depth / dot.point.sphere.radius + 1) / 2;
-        const size = (mobile ? 1.35 : 1.5) + front * 1.1;
-        context.globalAlpha = 0.18 + front * 0.78;
-        context.fillStyle = dot.point.sphere.color;
-        context.fillRect(
-          width / 2 + dot.x * radius - size / 2,
-          height / 2 + dot.y * radius - size / 2,
-          size,
-          size,
-        );
+      // 11 oktober 2026 (Marinus: "De globes ook in het dotraster"): de bollen tekenen geen eigen puntjes meer, maar
+      // belichten de stippen van het sitebrede raster van 32 px (proposal/stippen.css). Elk punt valt in de dichtstbijzijnde
+      // rastercel; per cel telt het punt dat het meest vooraan ligt. Zo draait de bol door het raster heen. Geen sortering
+      // en geen nieuwe objecten per beeld: per cel wint gewoon het voorste punt.
+      cellen.clear();
+      for (const point of points) {
+        const x = point.x * cosY - point.z * sinY;
+        const z = point.x * sinY + point.z * cosY;
+        const y = point.y * cosX - z * sinX;
+        const depth = point.y * sinX + z * cosX;
+        const front = (depth / point.sphere.radius + 1) / 2;
+        const px = width / 2 + (x + point.sphere.x) * radius, py = height / 2 + (y + point.sphere.y) * radius;
+        const i = Math.round((px - gridX) / GRID), j = Math.round((py - gridY) / GRID);
+        const key = j * 4096 + i, oud = cellen.get(key);
+        if (!oud) cellen.set(key, { front, color: point.sphere.color });
+        else if (front > oud.front) { oud.front = front; oud.color = point.sphere.color; }
+      }
+      for (const [key, cel] of cellen) {
+        const i = key % 4096, j = (key - i) / 4096;
+        context.globalAlpha = 0.3 + cel.front * 0.7;
+        context.fillStyle = cel.color;
+        context.beginPath();
+        context.arc(gridX + i * GRID, gridY + j * GRID, 1.6 + cel.front * 0.7, 0, 7);
+        context.fill();
       }
       context.globalAlpha = 1;
       if (!disposed && !announced) {
@@ -145,6 +150,9 @@ export default function BrandGlobe() {
       const bounds = stage.getBoundingClientRect();
       width = Math.round(bounds.width);
       height = Math.round(bounds.height);
+      const docX = bounds.left + window.scrollX, docY = bounds.top + window.scrollY;
+      gridX = (((16 - docX) % GRID) + GRID) % GRID;
+      gridY = (((16 - docY) % GRID) + GRID) % GRID;
       const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 1.5);
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);

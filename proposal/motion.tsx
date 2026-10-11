@@ -32,7 +32,9 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
         toggle: () => setPaused((value) => !value),
       }}
     >
-      <div data-motion={paused || reduced ? "paused" : "playing"}>
+      {/* data-motion-pauze: alleen als de bezoeker zelf pauzeert. data-motion begint op "paused" tot het eerste effect
+          (reduced staat standaard aan); de stippen (proposal/stippen.ts) letten daarom op dit attribuut. */}
+      <div data-motion={paused || reduced ? "paused" : "playing"} data-motion-pauze={paused ? "ja" : undefined}>
         {children}
       </div>
     </MotionContext.Provider>

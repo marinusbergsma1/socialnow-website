@@ -1,0 +1,52 @@
+/* 11 oktober 2026 (Marinus): "Ik wil de gehele site met dots hebben" en "Verder site ook helemaal zwart graag."
+   Eén raster van 32 px over de hele pagina (stip r 1,6, zoals de film), op puur zwart. De rust-stippen zijn een
+   css-achtergrond op body (geen script nodig, gaat mee met de scroll); proposal/stippen.ts legt er een vast canvas
+   overheen dat alleen tekent wat oplicht (golven bij hover en klik, kleurburst). Donkere tegels zijn doorzichtig, zodat
+   het raster en de golven erdoorheen lopen. Witte vlakken (mens) blijven wit. Laatste css-bestand, zodat dit wint. */
+/* concept.css zet :root body op --c-zwart (#0b0f12) met !important; zelfde specificiteit, dit bestand komt later. */
+:root { --c-zwart: #000; }
+:root body {
+  background-color: #000 !important;
+  background-image: radial-gradient(circle at 16px 16px, rgba(255, 255, 255, .13) 1.6px, transparent 2.2px) !important;
+  background-size: 32px 32px !important;
+  background-position: 0 0 !important;
+}
+:root .sn-site { background: transparent !important; position: relative; z-index: 1; }
+.sn-stipveld { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; display: block; }
+
+/* Donkere vlakken doorzichtig: het raster loopt door, de rand blijft. De kleur van een tegel zit voortaan in de rand en in
+   de golf die hij geeft bij hover, niet meer in een gekleurde vulling. */
+.sn-site .sn-tegel-vlak,
+.sn-site .sn-tegel.is-groen .sn-tegel-vlak,
+.sn-site .sn-tegel.is-blauw .sn-tegel-vlak,
+.sn-site .sn-tegel.is-roze .sn-tegel-vlak,
+.sn-site .sn-tegel.is-geel .sn-tegel-vlak { background: transparent; }
+.sn-site .sn-tegel.is-film .sn-tegel-vlak, .sn-site .sn-tegel.is-foto .sn-tegel-vlak { background: #000; }
+.sn-site .sn-wereld { background: transparent; }
+
+/* Stippenscène in een tegel (proposal/StipScene.tsx) */
+.sn-site .sn-stipscene { position: relative; width: 100%; min-height: 64px; }
+.sn-site .sn-stipscene > canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.sn-site .sn-stipscene > :not(canvas) { position: relative; }
+:root .sn-site .sn-stipscene-uitleg, :root .sn-site .tr-dash p.sn-stipscene-uitleg { line-height: 1.4; margin: 6px 0 0; font-family: var(--c-mono, ui-monospace, Menlo, monospace); font-size: 11px; color: #8b9691; letter-spacing: .02em; }
+
+/* Resultaat in stippen: 1 stip = 1 lead of € 1.000 (Bereikt.tsx) */
+.sn-site .h-resultaat-stippen { height: 86px; }
+/* Uitgenodigd: vinkje uit stippen */
+.sn-site .h-vink-stippen { height: 96px; width: 100%; }
+/* Overzicht: balken uit stippen (TrustStories.tsx) */
+.sn-site .tr-dash-stippen { height: 70px; min-height: 0; }
+
+/* Glans over de vertrouwenschips zei niets (inventaris 11 okt): uit. */
+.sn-site .h-mv-vertrouwen li::after { animation: none; display: none; }
+/* Alles gekoppeld: draad van stippen (NulNaarBedrijf.tsx). De oude streepjeslijn en puls vervallen. */
+.sn-site .h-koppel-regel .h-koppel-draad.sn-stipscene { height: 16px; min-height: 0; background: none; overflow: visible; }
+
+/* Gauntlet 11 okt: de oude verdonkering over de hero (concept.css, vast #0b0f12, hero ±5000 px hoog) gaf op puur zwart een
+   grijze band zonder stippen over de linkerhelft. Het raster loopt nu ongestoord door; de globe staat zelf in het raster.
+   Zelfde voor de vervaagranden van de klantenstrook. */
+:root .h-hero:after, :root .sn-site .h-hero:after { background: none; }
+:root .sn-site .h-clients-kort > .h-clients-strook::before,
+:root .sn-site .h-clients-kort > .h-clients-strook::after { background: none; }
+/* Kopbalk ook puur zwart (was rgba 11,15,18 uit concept.css). */
+:root .sn-site .h-header { background: rgba(0, 0, 0, .86); }

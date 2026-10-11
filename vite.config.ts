@@ -57,6 +57,9 @@ export default defineConfig({
       },
     },
     sourcemap: false,
+    // 11 oktober 2026: geen modulepreload-polyfill in het eerste script; elke browser die de site ondersteunt kent
+    // <link rel="modulepreload"> (Safari sinds 17), oudere laden gewoon zonder voorladen.
+    modulePreload: { polyfill: false },
     target: "es2020",
     minify: "esbuild",
     cssMinify: true,

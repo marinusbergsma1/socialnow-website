@@ -11,6 +11,8 @@ import "./proposal/concept.css";
 import "./proposal/concept-tech.css";
 import "./proposal/partner-colors.css";
 import "./proposal/language-menu.css";
+// 11 oktober 2026: stippenraster over de hele site, als laatste zodat het wint.
+import "./proposal/stippen.css";
 import { detectVisitorLanguage, needsCountryLookup } from "./proposal/i18n/detect";
 
 const rootElement = document.getElementById("root");
@@ -50,7 +52,9 @@ async function start() {
     await detectVisitorLanguage();
     const detected = pageLanguage();
     await laadWoordenboek(detected, "kern");
-    if (detected !== language) root.render(site(detected));
+    // 11 oktober 2026: als transition, zodat React eerst de voorgerenderde HTML hydrateert. Direct renderen gaf bij een
+    // Nederlandse browser op / React-fout #424 (update vóór de hydratie klaar was; daarna alles opnieuw getekend).
+    if (detected !== language) React.startTransition(() => root.render(site(detected)));
     return;
   }
   await detectVisitorLanguage();
@@ -58,3 +62,7 @@ async function start() {
   ReactDOM.createRoot(rootElement!).render(site(pageLanguage()));
 }
 void start();
+// Het lichtgevende stippenveld (golven bij hover en klik) laadt pas als de browser even vrij is: niet in het eerste script.
+const stippenLater = () => import("./proposal/stippen").then((m) => m.siteVeld());
+if ("requestIdleCallback" in window) requestIdleCallback(() => void stippenLater(), { timeout: 2500 });
+else setTimeout(() => void stippenLater(), 1200);
