@@ -241,7 +241,9 @@ try {
             const wit = [...albert.querySelectorAll("h3, h3 a, .sn-advisory-copy > strong, .sn-advisory-copy > p")].filter((el) => getComputedStyle(el).color !== "rgb(255, 255, 255)");
             eis(`Albert: tekst wit (${wit.map((el) => `${el.tagName.toLowerCase()} ${getComputedStyle(el).color}`).slice(0, 2).join(", ")})`, wit.length === 0);
             const logo = albert.querySelector(".sn-advisory-logo img");
-            eis(`Albert: ELT Live-logo licht (filter ${logo ? getComputedStyle(logo).filter : "geen logo"})`, logo && /invert\(1\)/.test(getComputedStyle(logo).filter));
+            // 11 oktober 2026 (Marinus: "volgens mij klopt het ELT LIVE logo bij Albert niet"): invert maakte ook het oranje LIVE
+            // wit. Nu de lichte variant: ELT wit, LIVE oranje, zonder filter.
+            eis(`Albert: ELT Live-logo licht, ELT wit en LIVE oranje (${logo ? `${logo.getAttribute("src")} filter ${getComputedStyle(logo).filter}` : "geen logo"})`, logo && /elt-live-licht\.webp/.test(logo.getAttribute("src") || "") && getComputedStyle(logo).filter === "none");
           }
         }
         return uit;

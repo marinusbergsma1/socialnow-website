@@ -307,7 +307,8 @@
 :root .sn-site .sn-advisory h3 a { color: #fff; }
 :root .sn-site .sn-advisory h3 a:focus-visible,
 :root .sn-site .sn-advisory-logo:focus-visible { outline-color: #e6bd91; }
-:root .sn-site .sn-advisory-logo img { filter: brightness(0) invert(1); }
+/* Lichte variant van het logo (ELT wit, LIVE oranje); geen filter, want invert maakte ook het oranje wit. */
+:root .sn-site .sn-advisory-logo img { filter: none; }
 /* Op mobiel per persoon één rij: foto links, naam (op één regel) en functie rechts. Gezichten blijven vrij en de naam breekt
    niet meer ("Marinus / Bergsma"). */
 @media (max-width: 640px) {
