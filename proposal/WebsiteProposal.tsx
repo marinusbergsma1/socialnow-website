@@ -55,7 +55,6 @@ const JuridischPage = later(() => import("../components/JuridischPage").then((m)
 // in het bestand zelf.
 import Cookiebot from "./Cookiebot";
 // 30 september 2026: geen toestemmingsvraag maar een eerlijke melding: er zijn geen trackingcookies.
-import MiloKoekje from "./MiloKoekje";
 
 const nav = [
   ["/het-os", "Het OS"],
@@ -323,7 +322,7 @@ function ProposalShell() {
       <OnderDeVouw ruimte={false}><BrandFooter /></OnderDeVouw>
       {/* 27 september 2026: de onboarding-popup (ConsentPopup) is op verzoek van Marinus van de site gehaald. */}
       <Cookiebot />
-      <MiloKoekje />
+      {/* 11 oktober 2026 (Marinus): "Coockie pop up weg". Geen trackingcookies, dus geen melding nodig; de cookieverklaring staat in de voettekst. */}
     </div>
   );
 }

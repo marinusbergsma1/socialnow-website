@@ -41,3 +41,12 @@
 .sn-site .h-mv-vertrouwen li::after { animation: none; display: none; }
 /* Alles gekoppeld: draad van stippen (NulNaarBedrijf.tsx). De oude streepjeslijn en puls vervallen. */
 .sn-site .h-koppel-regel .h-koppel-draad.sn-stipscene { height: 16px; min-height: 0; background: none; overflow: visible; }
+
+/* Gauntlet 11 okt: de oude verdonkering over de hero (concept.css, vast #0b0f12, hero ±5000 px hoog) gaf op puur zwart een
+   grijze band zonder stippen over de linkerhelft. Het raster loopt nu ongestoord door; de globe staat zelf in het raster.
+   Zelfde voor de vervaagranden van de klantenstrook. */
+:root .h-hero:after, :root .sn-site .h-hero:after { background: none; }
+:root .sn-site .h-clients-kort > .h-clients-strook::before,
+:root .sn-site .h-clients-kort > .h-clients-strook::after { background: none; }
+/* Kopbalk ook puur zwart (was rgba 11,15,18 uit concept.css). */
+:root .sn-site .h-header { background: rgba(0, 0, 0, .86); }

@@ -54,4 +54,4 @@ alleen de eigen bestanden. Klaar = push + regel hieronder bijwerken + bericht aa
 | 9 | Overige pagina's | `stippen/paginas` | `paginas.tsx` e.a. pagina's, hun css | open |
 | 10 | Snelheid en toegankelijkheid | `stippen/snelheid` | `stippen.ts` prestaties, `scripts/proef-stippen*.mjs` | open |
 | G | Gauntletloop | geen eigen code | controleert alles, meldt fouten aan de juiste chat | open |
-| L | Livezet | `feat/stippen-site-20261011` → main | voegt takken samen, PR, main, publicatie | open |
+| L | Livezet | `feat/stippen-site-20261011` → main | voegt takken samen, PR, main, publicatie | basistak da987f8: proeven `proef-zwart-raster.mjs` (rood 56/64 op main, groen 64) en `proef-geen-koekje.mjs` (cookiemelding weg, rood 8/16, groen 16). Marinus 11 okt: "Coockie pop up weg en zelfstandig livezetten, na afronding": L zet na afronding zelf live, zonder te vragen |
