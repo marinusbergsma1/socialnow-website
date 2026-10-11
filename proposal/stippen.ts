@@ -308,7 +308,10 @@ export function siteVeld(): Veld | null {
   const c = document.createElement("canvas");
   c.className = "sn-stipveld"; c.setAttribute("aria-hidden", "true");
   document.body.prepend(c);
-  site = new Veld(c, { basis: null, vast: true });
+  // 11 oktober 2026 (Marinus): "De stippen zelf zijn te groot, moet meer een achtergrond effect zijn." Het vaste veld tekent
+  // dezelfde kleine stip als het raster in stippen.css (straal 1); oplichten maakt hem iets groter.
+  c.dataset.straal = "1";
+  site = new Veld(c, { basis: null, vast: true, r: 1 });
   const laatst = new WeakMap<Element, number>();
   const kleurVan = (v: string | undefined): Kleur => (v && v !== "" ? v : "groen") as Kleur;
   // Een bentotegel geeft bij hover een golf in zijn eigen kleur (rand groen, blauw, roze of geel; gewone tegel groen).
