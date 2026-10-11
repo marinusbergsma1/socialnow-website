@@ -323,3 +323,30 @@
 /* Het laatste woord van de naam houdt de kleur van de naam (een algemene figcaption-span-regel maakte het grijs op /team). */
 :root .sn-site figcaption :is(b, strong, a) .h-naam-eind,
 :root .sn-site .sn-advisory h3 .h-naam-eind { color: inherit !important; opacity: 1; font-size: inherit !important; font-weight: inherit; }
+
+/* Ronde 3, 11 oktober 2026 (Marinus: "Kunnen er ook teksten bij? Kijk naar wat er eerder al was geschreven in de video"):
+   onder de portretten de zin en de labels uit de explainer, zoals de tegels in "One operation and management system.
+   Strong partners!". Zin wit in de merkletter, labels in dunne mono met lucht (nooit letters tegen elkaar). */
+:root .sn-site .h-duo .h-duo-tekst { margin-top: 14px; padding: 0 2px; text-align: left; }
+:root .sn-site .h-duo .h-duo-tekst strong { display: block; color: #fff; font-family: "TT Norms", Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.3; letter-spacing: 0; overflow-wrap: normal; }
+:root .sn-site .h-duo .h-duo-tags { display: block; margin-top: 8px; font-family: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 400; line-height: 1.5; letter-spacing: 0.06em; text-transform: uppercase; overflow-wrap: normal; }
+:root .sn-site .h-duo .h-duo-tags span { font: inherit; letter-spacing: inherit; color: inherit; white-space: nowrap; }
+:root .sn-site .h-duo.is-sn .h-duo-tags { color: #5fd48f; }
+:root .sn-site .h-duo.is-attesso .h-duo-tags { color: #f3c6e8; }
+:root .sn-site .h-duo.is-fincer .h-duo-tags { color: #8fb8ec; }
+/* Fincer op breed scherm: portret links, zin en labels ernaast; op mobiel onder elkaar. */
+@media (min-width: 641px) {
+  :root .sn-site .h-duo.is-fincer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); column-gap: 24px; align-items: center; }
+  :root .sn-site .h-duo.is-fincer .h-duo-kop { grid-column: 1 / -1; }
+  :root .sn-site .h-duo.is-fincer .h-duo-rij { grid-template-columns: minmax(0, 1fr); }
+  :root .sn-site .h-duo.is-fincer .h-duo-tekst { margin-top: 0; }
+  :root .sn-site .h-duo.is-fincer .h-duo-tekst strong { font-size: 22px; }
+}
+@media (max-width: 640px) {
+  :root .sn-site .h-duo .h-duo-tekst strong { font-size: 16px; }
+  :root .sn-site .h-duo .h-duo-tags { font-size: 11px; }
+}
+
+/* Ronde 4: per persoon een tekstje onder de functie (businessplan, 11 oktober 2026). */
+:root .sn-site .h-duo figcaption .h-persoon-tekst { display: block; margin-top: 6px; color: #aeb7c4; font-family: "TT Norms", Arial, sans-serif; font-size: 12.5px; font-weight: 400; line-height: 1.4; letter-spacing: 0; overflow-wrap: normal; }
+@media (max-width: 640px) { :root .sn-site .h-duo figcaption .h-persoon-tekst { margin-top: 4px; font-size: 12px; } }

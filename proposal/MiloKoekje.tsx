@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./milo-koekje.css";
 
 // Cookiemelding met Milo die een koekje eet — 30 september 2026.
@@ -64,7 +63,8 @@ export default function MiloKoekje() {
       {!rustig && <i className="h-koekje-tijd" aria-hidden="true" onAnimationEnd={sluit} />}
       <div className="h-koekje-acties">
         <button type="button" className="h-koekje-knop" onClick={sluit}>Smakelijk</button>
-        <Link className="h-koekje-link" to="/cookies">Cookieverklaring</Link>
+        {/* 11 oktober 2026 (Marinus): "Cookieverklaring kan weg als ik geen cookies heb toch?" Er valt hier niets te kiezen;
+            de cookieverklaring blijft bereikbaar via de voettekst. */}
       </div>
     </aside>
   );
