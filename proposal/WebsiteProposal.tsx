@@ -39,10 +39,13 @@ const QrOsWelcome = later(() => import("./QrOsWelcome").then((m) => m.default));
 const BrandFooter = later(() => import("./BrandFooter").then((m) => m.default));
 const BrandFaq = later(() => import("./BrandFaq").then((m) => m.default));
 const ConnectionLinks = later(() => import("./ConnectionLinks").then((m) => m.default));
-import { brandMeta } from "../scripts/brand-meta.mjs";
+// 11 oktober 2026: de merk-SEO (scripts/brand-meta.mjs, 18 KB) laadt na het eerste script; de build zet dezelfde meta al
+// in de html, de app zet hem daarna nog eens zodra het bestand binnen is.
+// Projecten en blogposts alleen voor de titel op /project/… en /blog/…; die laden mee met brand-meta.
+let projects: typeof import("./projecten").projects = [];
+let allPosts: typeof import("../data/posts").allPosts = [];
+let brandMeta: typeof import("../scripts/brand-meta.mjs").brandMeta | null = null;
 import { MotionProvider } from "./motion";
-import { projects } from "./content";
-import { allPosts } from "../data/posts";
 import LanguageSwitch from "./LanguageSwitch";
 import { LanguageProvider, LANGUAGES, languagePrefix, type Language, useLanguage } from "./i18n/context";
 const PrivacyPage = later(() => import("../components/PrivacyPage").then((m) => m.default));
@@ -54,7 +57,6 @@ const JuridischPage = later(() => import("../components/JuridischPage").then((m)
 // Staat uit tot er een script op de site komt dat toestemming nodig heeft; de afweging staat
 // in het bestand zelf.
 import Cookiebot from "./Cookiebot";
-// 30 september 2026: geen toestemmingsvraag maar een eerlijke melding: er zijn geen trackingcookies.
 
 const nav = [
   ["/het-os", "Het OS"],
@@ -103,7 +105,15 @@ function ProposalShell() {
   const mounted = useRef(false);
   // 30 september 2026: een pagina die later laadt (proposal/later.tsx) zet via useSEO eerst haar eigen titel en canonical;
   // zetMeta loopt daarna nog een keer (NaLaden hieronder), zodat de uitkomst per taal gelijk blijft aan voorheen.
+  const laatsteMeta = useRef(() => {});
   const zetMeta = () => {
+    // Tot merk-SEO, projecten en blogposts binnen zijn, blijft de meta uit de html staan; daarna loopt dit opnieuw.
+    if (!brandMeta) {
+      void Promise.all([import("../scripts/brand-meta.mjs"), import("./projecten"), import("../data/posts")]).then(([m, p, b]) => {
+        brandMeta = m.brandMeta; projects = p.projects; allPosts = b.allPosts; laatsteMeta.current();
+      });
+      return;
+    }
     const project = projects.find(
       (item) => location.pathname === `/project/${item.slug}`,
     );
@@ -159,6 +169,7 @@ function ProposalShell() {
       ]) document.querySelector(selector)?.setAttribute("content", content);
     }
   };
+  laatsteMeta.current = zetMeta;
   useEffect(() => {
     setMenuOpen(false);
     zetMeta();

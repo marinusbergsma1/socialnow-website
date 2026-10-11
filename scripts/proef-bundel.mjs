@@ -5,10 +5,11 @@
 // Deel 3 opent de build in een headless browser; playwright-core komt uit PLAYWRIGHT_CORE of uit de explainer-map.
 import { existsSync, readFileSync, statSync } from "node:fs";
 import http from "node:http";
+import os from "node:os";
 import path from "node:path";
 import { gzipSync } from "node:zlib";
 
-const DIST = "dist";
+const DIST = process.env.DIST || "dist";
 const BUDGET = 120 * 1024;
 const eisen = [];
 const eis = (naam, ok, detail = "") => { eisen.push([naam, Boolean(ok), detail]); };
@@ -35,9 +36,12 @@ const css = cssBestand ? lees(cssBestand) : "";
 const vlakken = [...css.matchAll(/@font-face\{([^}]*font-family:"?TT Norms"?[^}]*)\}/g)].map((m) => m[1]);
 const bronnen = vlakken.map((v) => v.match(/url\(([^)]+)\)/)?.[1] ?? "");
 const lettergrootte = bronnen.reduce((som, b) => som + (existsSync(path.join(DIST, b)) ? statSync(path.join(DIST, b)).size : Infinity), 0);
-eis("TT Norms als woff2, geen otf", vlakken.length === 3 && bronnen.every((b) => b.endsWith(".woff2")), bronnen.join(" "));
-eis("drie gewichten samen onder 120 KB", lettergrootte < 120 * 1024, kb(lettergrootte));
-eis("font-display: swap op elk gewicht", vlakken.length === 3 && vlakken.every((v) => v.includes("font-display:swap")));
+// 11 oktober 2026: sinds 330674e is er een vierde gewicht (Light, voor het statement). Een browser haalt alleen de
+// gewichten op die de pagina gebruikt; de grens is daarom per bestand (40 KB) plus samen onder 150 KB.
+const grootte = (b) => (existsSync(path.join(DIST, b)) ? statSync(path.join(DIST, b)).size : Infinity);
+eis("TT Norms als woff2 (Light, Regular, Medium, Bold), woff2 eerst", vlakken.length === 4 && bronnen.every((b) => b.endsWith(".woff2")), bronnen.join(" "));
+eis("elk gewicht onder 40 KB, samen onder 150 KB", bronnen.every((b) => grootte(b) < 40 * 1024) && lettergrootte < 150 * 1024, `${bronnen.map((b) => kb(grootte(b))).join(", ")}; samen ${kb(lettergrootte)}`);
+eis("font-display: swap op elk gewicht", vlakken.length === 4 && vlakken.every((v) => v.includes("font-display:swap")));
 const bold = bronnen[vlakken.findIndex((v) => /font-weight:700/.test(v))];
 for (const pagina of ["index.html", "nl/index.html", "de/index.html", "fr/index.html", "prijzen/index.html"]) {
   const preload = lees(pagina).match(/<link rel="preload" href="([^"]+)" as="font" type="font\/woff2" crossorigin/)?.[1];
@@ -64,7 +68,9 @@ else {
   });
   await new Promise((klaar) => server.listen(0, "127.0.0.1", klaar));
   const basis = `http://127.0.0.1:${server.address().port}`;
-  const browser = await pw.chromium.launch({ headless: true });
+  // Chromium uit de Playwright-cache (1243); CHROMIUM=… voor een andere.
+  const chromium = process.env.CHROMIUM || path.join(os.homedir(), "Library/Caches/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-mac-arm64/chrome-headless-shell");
+  const browser = await pw.chromium.launch({ headless: true, executablePath: existsSync(chromium) ? chromium : undefined });
   try {
     for (const taal of ["en", "nl", "de", "fr"]) {
       const url = `${basis}${taal === "en" ? "/" : `/${taal}/`}`;

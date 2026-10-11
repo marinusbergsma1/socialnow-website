@@ -23,9 +23,10 @@ import CharacterAccent from "./CharacterAccent";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import OsPeople from "./OsPeople";
 import TeamTrust, { INTEGRATIES, TeamJoin, Integraties } from "./TeamTrust";
-import PartnerIntro from "./PartnerIntro";
+import "./partner-intro.css";
+const PartnerIntro = later(() => import("./PartnerIntro").then((m) => m.default));
 import BrandConnection from "./BrandConnection";
-import VdzOutcome from "./VdzOutcome";
+const VdzOutcome = later(() => import("./VdzOutcome").then((m) => m.default));
 const Verhaal = later(() => import("./Verhaal").then((m) => m.default));
 import { Bento, Tegel } from "./Bento";
 import "./bereikt.css";
@@ -38,19 +39,23 @@ import "./media-bento.css";
 import "./pricing.css";
 import "./site-visie.css";
 const Deuren = later(() => import("./Deuren").then((m) => m.default));
-import { FILMS as VEILIGHEIDSFILMS, filmPad as veiligheidFilm, filmPosterPad as veiligheidPoster } from "./veiligheid-beloftes";
+// 11 oktober 2026: de speler met de veiligheidsfilms staat onder in de hero en laadt na het eerste script.
+const VeiligheidSpeler = later(() => import("./VeiligheidSpeler").then((m) => m.default));
 const Bereikt = later(() => import("./Bereikt").then((m) => m.default));
 const NulNaarBedrijf = later(() => import("./NulNaarBedrijf").then((m) => m.default));
 const MensEnAI = later(() => import("./MensEnAI").then((m) => m.default));
 const VacaturesBento = later(() => import("./VacaturesBento").then((m) => m.default));
 const VeiligheidBlok = later(() => import("./Veiligheid").then((m) => m.default));
 const TrustStories = later(() => import("./TrustStories").then((m) => m.default));
-import BrandGlobe from "./BrandGlobe";
+// 11 oktober 2026: de globe is achtergrond en tekent pas na het eerste script (voorgerenderde html toont hem al).
+const BrandGlobe = later(() => import("./BrandGlobe").then((m) => m.default));
 import { ProductOffer, ProductRoute } from "./ProductStart";
-import FreeWebsite from "./FreeWebsite";
-import WereldKaart from "./WereldKaart";
+import "./free-website.css";
+const FreeWebsite = later(() => import("./FreeWebsite").then((m) => m.default));
+import "./wereldkaart.css";
+const WereldKaart = later(() => import("./WereldKaart").then((m) => m.default));
 import OsEntry, { CLAIM_URL, OsDock, REVIEWS_URL } from "./os-entry";
-import { agents, people, projects, services } from "./content";
+import { agents, people, services } from "./content";
 import {
   Action,
   AgentCards,
@@ -89,57 +94,6 @@ function Film({ src, poster, label, titel, klasse, geluid, zetGeluid, boven }: {
         {geluid ? "Geluid uit" : "Geluid aan"}
       </button>
       </div>
-    </div>
-  );
-}
-
-function VeiligheidSpeler({ geluid, zetGeluid }: { geluid: boolean; zetGeluid: (aan: boolean) => void }) {
-  const { language } = useLanguage();
-  const taal = language === "nl" ? "nl" : "en";
-  const [nummer, setNummer] = useState(0);
-  const ref = React.useRef<HTMLVideoElement>(null);
-  const film = VEILIGHEIDSFILMS[nummer];
-  React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid, nummer, taal]);
-  // 30 september 2026 (Marinus): "WIL ECHT INSTANT LOADING". Onder de vouw: poster en film laden pas als het blok dichtbij komt
-  // (preload="none" zonder autoPlay haalt niets op tot play()).
-  const { ref: vak, dichtbij } = useDichtbij<HTMLDivElement>();
-  React.useEffect(() => { if (dichtbij && ref.current) void ref.current.play().catch(() => {}); }, [dichtbij, nummer, taal]);
-  // Een nieuw nummer geeft een nieuw videovak (key), dat het effect hierboven start.
-  const kies = (index: number) => setNummer(index);
-  const wissel = () => {
-    const video = ref.current;
-    if (video && !geluid) { video.currentTime = 0; void video.play().catch(() => {}); }
-    zetGeluid(!geluid);
-  };
-  return (
-    <div className="h-film-veilig">
-      <p className="h-film-titel">Veiligheid en databescherming</p>
-      <div className="h-film-vak" ref={vak}>
-        <video
-          ref={ref}
-          key={`${film.slug}-${taal}`}
-          src={veiligheidFilm(film.slug, taal)}
-          poster={dichtbij ? veiligheidPoster(film.slug, taal) : undefined}
-          muted
-          playsInline
-          preload="none"
-          onEnded={() => kies((nummer + 1) % VEILIGHEIDSFILMS.length)}
-          aria-label={film.kop}
-        />
-        <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={geluid}>
-          {geluid ? "Geluid uit" : "Geluid aan"}
-        </button>
-      </div>
-      <ol className="h-veilig-nummers">
-        {VEILIGHEIDSFILMS.map((item, index) => (
-          <li key={item.slug}>
-            <button type="button" onClick={() => kies(index)} aria-current={index === nummer ? "true" : undefined}>
-              <b>{index + 1}</b>
-              <span>{item.kop}</span>
-            </button>
-          </li>
-        ))}
-      </ol>
     </div>
   );
 }
@@ -215,7 +169,7 @@ function HeroSprekers() {
 function HeroVeilig({ geluid, setGeluid }: { geluid: HeroGeluid; setGeluid: (g: HeroGeluid) => void }) {
   return (
     <div className="h-hero-veilig">
-      <VeiligheidSpeler geluid={geluid === "veilig"} zetGeluid={(aan) => setGeluid(aan ? "veilig" : "")} />
+      <OnderDeVouw ruimte={false}><VeiligheidSpeler geluid={geluid === "veilig"} zetGeluid={(aan) => setGeluid(aan ? "veilig" : "")} /></OnderDeVouw>
     </div>
   );
 }
@@ -251,7 +205,7 @@ export function Home() {
       <LanguageContext.Provider value={getoond}>
       <section className="h-hero" id="home" data-taalfase={taalfase}>
         <div className="h-hero-background">
-          <BrandGlobe />
+          <OnderDeVouw ruimte={false}><BrandGlobe /></OnderDeVouw>
         </div>
         <div className="h-wrap h-hero-content">
           <div className="h-hero-tekst">
@@ -302,8 +256,8 @@ export function Home() {
               <p>Our goal: changing Big Tech and Big Corp, and creating a <strong>free, fair and social economy</strong>.</p>
               <div className="h-team-verhaal-naam"><img {...klein("marinus-profiel-blauw.webp", 40)} alt="" width="40" height="40" loading="lazy" /><span><strong>Marinus Bergsma</strong><i>Founder &amp; CEO</i></span></div>
             </div>
-            <PartnerIntro />
-            <VdzOutcome />
+            {/* 11 oktober 2026: onder de vouw van de hero, niet in het eerste script (budget 120 KB gzip). */}
+            <OnderDeVouw ruimte={false}><PartnerIntro /><VdzOutcome /></OnderDeVouw>
             </div>
             <TeamJoin />
           </div>
@@ -315,7 +269,7 @@ export function Home() {
         </div>
       </section>
       {/* 11 oktober 2026 (Marinus): "FREE WEBSITE, groen vlak", direct onder de hero; anker #free-website. */}
-      <FreeWebsite />
+      <OnderDeVouw ruimte={false}><FreeWebsite /></OnderDeVouw>
       </LanguageContext.Provider>
       <OnderDeVouw>
       {/* 28 september 2026 (Marinus): "de homepage moet een upgrade gaan krijgen met storytelling". De volgorde vertelt

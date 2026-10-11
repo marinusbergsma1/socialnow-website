@@ -1,6 +1,5 @@
-import { allProjects, webShowcaseProjects } from "../data/projects";
 import { CLAIM_URL } from "./os-entry";
-export const projects = [...webShowcaseProjects, ...allProjects];
+// 11 oktober 2026: `projects` staat in ./projecten (niet in het eerste script).
 // 28 september 2026 (Marinus): zakelijkere functies, zoals "Head of".
 // 5 oktober 2026 (Marinus): "graag bij iedereen Linkedin doorlink". Alleen profielen die zeker van deze persoon zijn
 // (teamonderzoek 4 en 5 oktober); bij de rest volgt de link zodra de juiste URL bevestigd is.
