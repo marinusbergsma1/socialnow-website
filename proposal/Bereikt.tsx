@@ -3,6 +3,7 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { Bento, BentoFilm, Tegel, useInBeeld } from "./Bento";
 import { GRATIS_OS_URL } from "./os-entry";
 import { StipScene } from "./StipScene";
+import { minderBeweging } from "./stippen";
 import { TextLink } from "./ui";
 import "./bereikt.css";
 
@@ -13,7 +14,7 @@ import "./bereikt.css";
 //   oxp26-eindvideo/montage/assets/logos/BRON.md (dezelfde als in Deuren.tsx).
 // - Klanten: 02-SOCIALNOW/07_MARKETING/07-WAT-WE-BOUWEN.md (kWh Garant en VDZ Brigade met eigen OS, Il Gordo Lighthouse
 //   desktop, mediaan van drie metingen op 28 september 2026) en het verhaal (VASTIQ met Komen Consultancy).
-// Geen verzonnen aantallen: "honderden" blijft een woord, de stippen zijn sfeer en geen telling.
+// Geen verzonnen aantallen: "honderden" blijft een woord, de stippen zijn sfeer en geen telling. Lighthouse 100/100/93 is echt.
 
 const FINALISTEN = [
   { naam: "KoderXpert Technologies", logo: "/images/partners/koderxpert.webp", breed: 242, hoog: 70 },
@@ -57,59 +58,150 @@ export function useTeller(doel: number, aan: boolean, duur = 1600) {
   return waarde;
 }
 
-// De trekking uit de winnaarsfilm: de markering loopt langs de vijf finalisten, vertraagt en stopt bij de winnaar.
-function Trekking() {
-  const { ref, aan } = useInBeeld<HTMLDivElement>();
-  const minder = useMinderBeweging();
-  const [plek, setPlek] = React.useState(-1);
-  const [klaar, setKlaar] = React.useState(false);
+const wacht = (s: number) => new Promise((af) => setTimeout(af, s * 1000));
+// Vaste toeval (zelfde beeld bij elk bezoek): mulberry32.
+function toeval(zaad: number) {
+  return () => { zaad = (zaad + 0x6d2b79f5) | 0; let t = Math.imul(zaad ^ (zaad >>> 15), 1 | zaad); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+// Een ring van rasterstippen rond (ci, cj): de cirkel wordt op het raster gelegd, kloksgewijs vanaf boven, zonder dubbele.
+function ringCellen(ci: number, cj: number, straal: number): [number, number][] {
+  const uit: [number, number][] = [], gezien = new Set<string>();
+  for (let n = 0; n < 360; n++) {
+    const a = (n / 360) * Math.PI * 2, c: [number, number] = [Math.round(ci + Math.sin(a) * straal), Math.round(cj - Math.cos(a) * straal)];
+    if (!gezien.has(c.join())) { gezien.add(c.join()); uit.push(c); }
+  }
+  return uit;
+}
+
+// 11 oktober 2026 (Marinus: optie D "vet", "het echte verhaal"): de markering over de logo's en de puntjes zijn weg. Het verhaal
+// staat nu in stippen: het vlak vult zich met aanmeldingen (sfeer, geen telling: "honderden" blijft een woord), die dunnen in
+// drie rondes uit tot vijf stippen, één per finalist, in de volgorde van de logo's eronder. De trekking uit de winnaarsfilm loopt langs die
+// vijf, vertraagt en stopt bij de winnaar: die wordt groen met een kleurburst door de stippen.
+function useSmal() {
+  const [smal, setSmal] = React.useState(() => typeof window !== "undefined" && !!window.matchMedia?.("(max-width: 760px)").matches);
   React.useEffect(() => {
-    if (!aan) return;
-    if (minder) { setPlek(WINNAAR); setKlaar(true); return; }
-    const stappen = FINALISTEN.length * 2 + WINNAAR + 1;
-    const timers: number[] = [];
-    let tijd = 300;
-    for (let i = 0; i < stappen; i++) {
-      tijd += 90 + Math.pow(i / stappen, 3) * 520;
-      timers.push(window.setTimeout(() => setPlek(i % FINALISTEN.length), tijd));
-    }
-    timers.push(window.setTimeout(() => setKlaar(true), tijd + 420));
-    return () => timers.forEach((timer) => window.clearTimeout(timer));
-  }, [aan, minder]);
+    const m = window.matchMedia?.("(max-width: 760px)"); if (!m) return;
+    const zet = () => setSmal(m.matches); m.addEventListener("change", zet); return () => m.removeEventListener("change", zet);
+  }, []);
+  return smal;
+}
+// Op de telefoon het fijne raster (8 px, onderverdeling van 32), zodat er ook daar honderden stippen in het vlak passen.
+function BeursStippen({ klaar }: { klaar: (aan: boolean) => void }) {
+  const [fase, setFase] = React.useState(0), smal = useSmal();
+  const klaarRef = React.useRef(klaar); klaarRef.current = klaar;
   return (
-    <div ref={ref} className={`h-trekking${klaar ? " is-klaar" : ""}`}>
+    <div className="h-beurs-scene">
+      <StipScene className="h-beurs-stippen" stap={smal ? 8 : 16} opnieuw label="Honderden aanmeldingen dunnen uit tot vijf finalisten en één winnaar" speel={async (v) => {
+        const mid = Math.floor((v.rij - 1) / 2), sleutel = (i: number, j: number) => j * 4096 + i;
+        const vijf = FINALISTEN.map((_, k) => [Math.floor(v.kol * (k + .5) / FINALISTEN.length), mid] as [number, number]);
+        const vast = new Set(vijf.map(([i, j]) => sleutel(i, j))), r = toeval(26);
+        const rest: [number, number][] = [];
+        for (let j = 0; j < v.rij; j++) for (let i = 0; i < v.kol; i++) if (!vast.has(sleutel(i, j)) && r() < .62) rest.push([i, j]);
+        for (let n = rest.length - 1; n > 0; n--) { const m = Math.floor(r() * (n + 1)); [rest[n], rest[m]] = [rest[m], rest[n]]; }
+        const winnaar = vijf[WINNAAR];
+        setFase(0); klaarRef.current(false);
+        if (minderBeweging()) {
+          vijf.forEach(([i, j]) => v.zet(i, j, "wit", .35)); v.zet(winnaar[0], winnaar[1], "groen", 1);
+          setFase(2); klaarRef.current(true); return;
+        }
+        const alle = [...rest]; vijf.forEach((c, k) => alle.splice(Math.floor(r() * alle.length * (k + 1) / 6), 0, c));
+        await v.vul(alle, "wit", { a: .42, duur: 1.4 });
+        await wacht(.5);
+        // Uitdunnen: eerst het grootste deel, dan de meeste van wat over is, dan de laatste tientallen. Elke stip dimt kort en gaat uit.
+        const rondes = [rest.slice(0, Math.round(rest.length * .6)), rest.slice(Math.round(rest.length * .6), Math.round(rest.length * .92)), rest.slice(Math.round(rest.length * .92))];
+        for (const ronde of rondes) {
+          const stappen = 12; let vorige: [number, number][] = [];
+          for (let s = 0; s < stappen; s++) {
+            const deel = ronde.slice(Math.floor(s * ronde.length / stappen), Math.floor((s + 1) * ronde.length / stappen));
+            deel.forEach(([i, j]) => v.zet(i, j, "wit", .14)); vorige.forEach(([i, j]) => v.zet(i, j, "wit", 0)); vorige = deel;
+            await wacht(.05);
+          }
+          vorige.forEach(([i, j]) => v.zet(i, j, "wit", 0));
+          await wacht(.35);
+        }
+        setFase(1);
+        vijf.forEach(([i, j]) => v.zet(i, j, "wit", .9));
+        await wacht(.6);
+        // De trekking: twee rondjes langs de vijf, steeds trager, stop bij de winnaar.
+        const stappen = FINALISTEN.length * 2 + WINNAAR + 1;
+        let vorig = -1;
+        for (let s = 0; s < stappen; s++) {
+          const k = s % FINALISTEN.length;
+          if (vorig >= 0) v.zet(vijf[vorig][0], vijf[vorig][1], "wit", .9);
+          v.zet(vijf[k][0], vijf[k][1], "groen", 1); vorig = k;
+          await wacht((90 + Math.pow(s / stappen, 3) * 520) / 1000);
+        }
+        vijf.forEach(([i, j], k) => { if (k !== WINNAAR) v.zet(i, j, "wit", .3); });
+        setFase(2); klaarRef.current(true);
+        const [x, y] = v.pos(winnaar[0], winnaar[1]); await v.burst(x, y, { straal: 420, duur: 1.1 });
+      }} />
+      <p className="sn-stipscene-uitleg h-beurs-fase" aria-hidden="true">
+        <span className={fase === 0 ? "is-aan" : ""}>Aanmeldingen</span>
+        <span className={fase === 1 ? "is-aan" : ""}>Vijf finalisten</span>
+        <span className={fase === 2 ? "is-aan" : ""}>Eén winnaar</span>
+      </p>
+    </div>
+  );
+}
+
+// De vijf finalisten op een rij; na de trekking in de stippen staat de winnaar groen omrand en dimmen de anderen.
+function Finalisten({ klaar }: { klaar: boolean }) {
+  return (
+    <div className={`h-trekking${klaar ? " is-klaar" : ""}`}>
       <ul className="h-trekking-rij" aria-label="Vijf finalisten">
         {FINALISTEN.map((finalist, index) => (
-          <li key={finalist.naam} className={`${index === plek ? "is-aan" : ""}${klaar && index === WINNAAR ? " is-winnaar" : ""}`}>
+          <li key={finalist.naam} className={klaar && index === WINNAAR ? "is-winnaar" : ""}>
             <span className="h-trekking-logo">
               <img src={finalist.logo} alt={finalist.naam} width={finalist.breed} height={finalist.hoog} loading="lazy" />
             </span>
           </li>
         ))}
       </ul>
-      <p className="h-trekking-uitslag" aria-live="polite">
+      <p className="h-trekking-uitslag">
         <span className="h-trekking-beker" aria-hidden="true"><Check size={16} /></span>
-        {klaar ? (
-          <span>
-            Winnaar: <b translate="no">KoderXpert Technologies</b>
-            <small translate="no">Dhvanil Trivedi, Founder & CEO</small>
-          </span>
-        ) : (
-          <span className="h-trekking-bezig">De trekking loopt</span>
-        )}
+        <span>
+          Winnaar: <b translate="no">KoderXpert Technologies</b>
+          <small translate="no">Dhvanil Trivedi, Founder & CEO</small>
+        </span>
       </p>
     </div>
   );
 }
 
+function Beurs() {
+  const [klaar, setKlaar] = React.useState(false);
+  return (
+    <>
+      <div className="h-beurs-boven">
+        <div className="h-beurs-links">
+          <p className="h-beurs-groot">Honderden aanmeldingen.</p>
+          <p className="sn-tegel-titel">Vijf finalisten. Eén winnaar.</p>
+          <BeursStippen klaar={setKlaar} />
+        </div>
+        {/* 5 oktober 2026 (Marinus): "Dat groene blok is een beetje nikszeggend." Geen stippen meer: twaalf seconden uit de
+            aftermovie van de beurs, zonder geluid; een klik opent de hele film. 11 oktober: links ervan staan weer stippen, nu met
+            het echte verhaal (zie BeursStippen). */}
+        <a className="h-beurs-film" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener" aria-label="Bekijk de aftermovie van Odoo Experience 2026">
+          <BentoFilm src="/video/odoo-experience/odoo-experience-kort.mp4" poster="/video/odoo-experience/odoo-experience-kort-poster.webp" label="Odoo Experience 2026 in Brussel" geluid={false} />
+          <span className="h-beurs-film-label">&#9654; Aftermovie</span>
+        </a>
+      </div>
+      <Finalisten klaar={klaar} />
+    </>
+  );
+}
+
+// 11 oktober 2026: de Lighthouse-ringen als ringen van rasterstippen (8 px, een onderverdeling van het grote raster). De ring
+// heeft straal 4; het deel dat groen wordt is de echte score, afgerond (bij 93 blijven de laatste stippen grijs).
 function ScoreRing({ label, doel, aan }: { label: string; doel: number; aan: boolean }) {
   const waarde = useTeller(doel, aan, 1800);
   return (
     <figure className="h-score">
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <circle className="h-score-baan" cx="32" cy="32" r="27" />
-        <circle className="h-score-voortgang" cx="32" cy="32" r="27" pathLength="100" style={{ strokeDashoffset: 100 - waarde }} />
-      </svg>
+      <StipScene className="h-score-stippen" stap={8} speel={async (v) => {
+        const ring = ringCellen(Math.floor((v.kol - 1) / 2), Math.floor((v.rij - 1) / 2), 4);
+        ring.forEach(([i, j]) => v.zet(i, j, "wit", .16));
+        await v.vul(ring.slice(0, Math.round(ring.length * doel / 100)), "groen", { duur: 1.6 });
+      }} />
       <b>{waarde}</b>
       <figcaption>{label}</figcaption>
     </figure>
@@ -152,14 +244,18 @@ function Resultaat({ waarde, eenheid, aantal, uitleg, labels }: { waarde: string
   );
 }
 
-// Vinkje uit stippen: de rasterstippen lichten op langs een vinkje, daarna één groene golf.
-const VINK: [number, number][] = [[0, 3], [1, 4], [2, 5], [3, 4], [4, 3], [5, 2], [6, 1], [7, 0]];
+// Vinkje uit stippen (11 oktober 2026 mooier afgemaakt, zoals de oude vink die zichzelf tekende): op het fijne raster van 8 px
+// tekent eerst een ring van stippen zich kloksgewijs, dan het vinkje in groen, daarna kleurt de ring groen mee en gaat er
+// één groene golf door het vlak.
+const VINK: [number, number][] = [[-3, 0], [-2, 1], [-1, 2], [0, 1], [1, 0], [2, -1], [3, -2]];
 function VinkStippen() {
   return (
-    <StipScene className="h-vink-stippen" stap={16} speel={async (v) => {
-      const i0 = 1, j0 = Math.max(0, Math.floor((v.rij - 6) / 2));
-      await v.vul(VINK.map(([i, j]) => [i0 + i, j0 + j] as [number, number]), "groen", { duur: .6 });
-      const [x, y] = v.pos(i0 + 2, j0 + 5); await v.golf(x, y, "groen", { straal: 520, duur: 1.4 });
+    <StipScene className="h-vink-stippen" stap={8} opnieuw label="Uitgenodigd" speel={async (v) => {
+      const ci = 6, cj = Math.floor((v.rij - 1) / 2), ring = ringCellen(ci, cj, 5);
+      await v.vul(ring, "wit", { a: .45, duur: .7 });
+      await v.vul(VINK.map(([i, j]) => [ci + i, cj + j] as [number, number]), "groen", { a: 1, duur: .45 });
+      await v.vul(ring, "groen", { a: .8, duur: .5 });
+      const [x, y] = v.pos(ci, cj); await v.golf(x, y, "groen", { straal: 520, duur: 1.4 });
     }} />
   );
 }
@@ -173,19 +269,7 @@ export default function Bereikt() {
       titel={<>Van Brussel<br /><span>tot bedrijven die draaien.</span></>}
     >
       <Tegel kop="Odoo Experience 2026 · Brussel" breed={8} soort="groen" className="h-bereikt-beurs">
-        <div className="h-beurs-boven">
-          <div>
-            <p className="h-beurs-groot">Honderden aanmeldingen.</p>
-            <p className="sn-tegel-titel">Vijf finalisten. Eén winnaar.</p>
-          </div>
-          {/* 5 oktober 2026 (Marinus): "Dat groene blok is een beetje nikszeggend." Geen stippen meer: twaalf seconden uit de
-              aftermovie van de beurs, zonder geluid; een klik opent de hele film. */}
-          <a className="h-beurs-film" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener" aria-label="Bekijk de aftermovie van Odoo Experience 2026">
-            <BentoFilm src="/video/odoo-experience/odoo-experience-kort.mp4" poster="/video/odoo-experience/odoo-experience-kort-poster.webp" label="Odoo Experience 2026 in Brussel" geluid={false} />
-            <span className="h-beurs-film-label">&#9654; Aftermovie</span>
-          </a>
-        </div>
-        <Trekking />
+        <Beurs />
       </Tegel>
       <Tegel kop="Uitgenodigd" breed={4} className="h-bereikt-sec">
         <VinkStippen />
