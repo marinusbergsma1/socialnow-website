@@ -230,7 +230,7 @@ function Resultaat({ waarde, eenheid, aantal, uitleg, labels }: { waarde: string
   return (
     <div className="h-resultaat">
       <p className="h-resultaat-cijfer"><b translate="no">{waarde}</b><span>{eenheid}</span></p>
-      <StipScene className="h-resultaat-stippen" stap={14} opnieuw speel={async (v) => {
+      <StipScene className="h-resultaat-stippen" stap={16} opnieuw speel={async (v) => {
         const kol = Math.min(25, v.kol - 1), rij = Math.ceil(aantal / kol), j0 = Math.max(0, Math.floor((v.rij - rij) / 2));
         const cellen: [number, number][] = [];
         for (let n = 0; n < aantal; n++) cellen.push([n % kol, j0 + Math.floor(n / kol)]);

@@ -263,3 +263,5 @@
 .sn-site .h-trekking.is-klaar .h-trekking-uitslag > span:last-child { opacity: 1; }
 .sn-site .h-score-stippen.sn-stipscene { width: 72px; height: 72px; min-height: 0; }
 @media (max-width: 760px) { .sn-site .h-beurs-links { width: 100%; } .sn-site .h-beurs-stippen { height: 112px; } }
+/* 11 oktober 2026 (chat 10): de motor rondt stap af op 8, 16 of 32; de 100 stippen staan nu op 16 px en hebben 6 rijen nodig op de telefoon. */
+.sn-site .h-resultaat .h-resultaat-stippen { height: 96px; }

@@ -9,7 +9,7 @@ import { homedir } from "node:os";
 
 const css = readFileSync("proposal/bereikt.css", "utf8"), tsx = readFileSync("proposal/Bereikt.tsx", "utf8");
 const talen = ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"].map((t) => JSON.parse(readFileSync(`proposal/i18n/${t}.json`, "utf8")));
-const nieuw = ["Aanmeldingen", "Eén winnaar", "Honderden aanmeldingen dunnen uit tot vijf finalisten en één winnaar"];
+const nieuw = ["Aanmeldingen", "Eén winnaar", "Honderden aanmeldingen dunnen uit tot vijf finalisten en één winnaar", "Bekijk de aftermovie van Odoo Experience 2026"];
 const eisen = [
   ["geen ongebruikte keyframes meer (h-stip-aan, h-stroom, h-os-klop, h-melding, h-scroll)", !/@keyframes (h-stip-aan|h-stroom|h-os-klop|h-melding|h-scroll)\b/.test(css)],
   ["geen puntjesanimatie en geen gloed-ring om de winnaar", !css.includes("h-puntjes") && !css.includes("h-winnaar-golf") && !tsx.includes("h-trekking-bezig")],
