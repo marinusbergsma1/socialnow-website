@@ -23,10 +23,15 @@ export default function AdvisoryPartner() {
   const albert = people.find(person => person.name === "Albert Deltour");
   if (!albert) return null;
   return <article className="sn-advisory" aria-label={`Albert Deltour · ${text.title}`} translate="no">
-    <img className="sn-advisory-photo" {...klein(albert.image, "(max-width: 640px) 40vw, 200px", [160, 320])} alt="Albert Deltour" width="200" height="200" loading="lazy" />
+    <a className="sn-advisory-profile" href={albert.linkedin} target="_blank" rel="noopener noreferrer" aria-label="Albert Deltour on LinkedIn">
+      <img className="sn-advisory-photo" {...klein(albert.image, "(max-width: 640px) 40vw, 200px", [160, 320])} alt="Albert Deltour" width="200" height="200" loading="lazy" />
+      <div className="sn-advisory-caption">
+        <h3><NaamMetLinkedIn naam="Albert Deltour" /></h3>
+        <span>{text.title}</span>
+      </div>
+    </a>
     <div className="sn-advisory-copy">
       <small translate="no">Strategy &amp; Guidance Advisor — from ELT Live</small>
-      <h3><a href={albert.linkedin} target="_blank" rel="noopener noreferrer"><NaamMetLinkedIn naam="Albert Deltour" /></a></h3>
       <strong>{text.title}</strong>
       <p>{text.experience}</p>
       <p>{text.intro}</p>
