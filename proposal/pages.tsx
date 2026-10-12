@@ -207,7 +207,7 @@ export function Home() {
               </figure>
             </section>
             {/* 11 oktober 2026: onder de vouw van de hero, niet in het eerste script (budget 120 KB gzip). */}
-            <OnderDeVouw ruimte={false}><PartnerIntro /><VdzOutcome /></OnderDeVouw>
+            <OnderDeVouw ruimte={false}><div className="h-story-details"><PartnerIntro /><VdzOutcome /></div></OnderDeVouw>
             </div>
 
           </div>

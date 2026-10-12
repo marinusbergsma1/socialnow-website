@@ -545,3 +545,8 @@ html.is-concept .h-milo-launcher { bottom: 48px; }
 :root .sn-site .h-hero .h-tekst-groen { text-shadow: var(--sn-accent-glow); }
 :root .sn-site :is(.h-partner-uitleg, .h-board-tekst, .h-mens-ai-koppel b, .os-claim, .h-try-button, .h-header-claim, .vh-knop, .h-dock-login, .h-sprekers-knop, .h-koekje-knop) { box-shadow: var(--sn-card-glow); }
 :root .sn-site :is(.os-claim, .h-try-button, .h-header-claim, .vh-knop, .h-dock-login, .h-sprekers-knop, .h-koekje-knop):hover { box-shadow: 0 0 0 1px #25d36630, 0 5px 28px #25d36638; }
+
+/* De partneruitleg en het resultaat vormen samen de rechterkolom naast de storyfilm. */
+:root .sn-site .h-story-details { display: grid; align-content: start; gap: 24px; min-width: 0; }
+:root .sn-site .h-story-details > .h-partner-uitleg { align-self: start; }
+:root .sn-site .h-partner-aanmelden { display: inline-flex; align-items: center; gap: 14px; margin-top: 22px; padding: 12px 18px; text-decoration: none; }
