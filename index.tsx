@@ -13,6 +13,7 @@ import "./proposal/partner-colors.css";
 import "./proposal/language-menu.css";
 // 11 oktober 2026: stippenraster over de hele site, als laatste zodat het wint.
 import "./proposal/stippen.css";
+import "./proposal/knopgroen.css";
 import { detectVisitorLanguage, needsCountryLookup } from "./proposal/i18n/detect";
 
 const rootElement = document.getElementById("root");

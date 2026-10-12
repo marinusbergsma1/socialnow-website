@@ -1,0 +1,61 @@
+/* 12 oktober 2026 (Marinus, bij de knop "Log in to free OS"): "Graag deze kleur groen meer doortrekken." Gekozen: alle
+   knoppen en links in hetzelfde knopgroen #1A8F45 (--c-groen). Het felle merkgroen #25D366 blijft voor de punt achter
+   koppen en de stippen. Daarna: "En overal een hele lichte lightsweep in het groen", "Alsof ie shined": over elke knop met
+   een dekkende groene vulling glijdt af en toe een smalle, lichte glans. Met minder beweging staat die stil.
+   Laatste css-bestand (na stippen.css), zodat dit wint. Proef: scripts/proef-knopgroen.mjs. */
+:root { --c-knopgroen: #1a8f45; }
+
+/* Vulling */
+html:root .sn-site .sn-home-cta:not(.sn-home-secondary),
+html:root .sn-site .h-skip,
+html:root .h-skip { background-color: var(--c-knopgroen); border-color: var(--c-knopgroen); }
+
+html:root .sn-site .sn-home-cta:not(.sn-home-secondary):hover { background-color: var(--c-groen-hover, #1ba452); }
+
+/* Randen en tekst van groene links en omlijnde knoppen */
+html:root .sn-site .sn-btn3d.h-button { border-color: var(--c-knopgroen); }
+html:root .sn-site .sn-product-offer > a.sn-product-website { border-color: rgba(26, 143, 69, .6); }
+html:root .sn-site .sn-product-website:hover { border-color: var(--c-knopgroen); }
+html:root .sn-site .h-aftermovie,
+html:root .sn-site .h-hero .h-aftermovie { color: var(--c-knopgroen); border-color: rgba(26, 143, 69, .6); }
+html:root .sn-site .h-hero .h-aftermovie { border-color: transparent; }
+html:root .sn-site .prijs-link,
+html:root .sn-site .h-partner-uitleg a { color: var(--c-knopgroen); }
+html:root .sn-site .h-veilig-nummers button[aria-current="true"] { border-color: var(--c-knopgroen); background: rgba(26, 143, 69, .14); }
+
+/* Lichtsweep: een smalle witte glans in de vulling, elke 5 s één keer, verder rust. */
+@keyframes sn-knop-glans {
+  0% { background-position: 160% 0; }
+  26%, 100% { background-position: -60% 0; }
+}
+html:root .sn-site .sn-home-cta:not(.sn-home-secondary),
+html:root .sn-site .h-header-claim,
+html:root .sn-site .h-dock-login,
+html:root .sn-site .h-sprekers-knop,
+html:root .sn-site .vh-knop,
+html:root .sn-site .os-claim,
+html:root .sn-site .h-try-button,
+html:root .sn-site .h-skip,
+html:root .h-skip {
+  background-image: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, .22) 50%, transparent 62%);
+  background-size: 260% 100%;
+  background-repeat: no-repeat;
+  background-position: 160% 0;
+  animation: sn-knop-glans 5s cubic-bezier(.45, 0, .25, 1) 1.2s infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  html:root .sn-site .sn-home-cta,
+  html:root .sn-site .h-header-claim,
+  html:root .sn-site .h-dock-login,
+  html:root .sn-site .h-sprekers-knop,
+  html:root .sn-site .vh-knop,
+  html:root .sn-site .os-claim,
+  html:root .sn-site .h-try-button,
+  html:root .sn-site .h-skip,
+  html:root .h-skip { animation: none; background-image: none; }
+}
+
+/* Verbindingslinks op het witte vlak (connection-links.css had #176b38) */
+html:root .sn-site .sn-connections-list a { color: var(--c-knopgroen); }
+html:root .sn-site .sn-connections-list a:focus-visible { outline-color: var(--c-knopgroen); }
+html:root .sn-site .h-team-duo .h-partner-referenties a { color: var(--c-knopgroen); }

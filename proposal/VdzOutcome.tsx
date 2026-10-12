@@ -21,6 +21,6 @@ export default function VdzOutcome() {
     <p className="h-eyebrow">{label}</p>
     <h3>{title}</h3>
     <p>{text}</p>
-    <Link to="/project/vdz-brigade-website" style={{ color: "#176b38", textDecoration: "underline", textUnderlineOffset: 4 }}>{link} ↗</Link>
+    <Link to="/project/vdz-brigade-website" style={{ color: "#1a8f45", textDecoration: "underline", textUnderlineOffset: 4 }}>{link} ↗</Link>
   </section>;
 }
