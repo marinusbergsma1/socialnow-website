@@ -35,7 +35,7 @@ const ATTESSO_DUO = ["Sid van Kalken", "Douwe Kramer"];
 // Board: groene tekstkaart met de twee huidige bestuursleden.
 const BOARD = ["Michelle Yang", "Steven Goudsblom"];
 const KORTE_ROL: Record<string, string> = {
-  "Ruben": "B2B cold calling",
+  "Ruben Spyckerelle": "B2B cold calling",
   "Marinus Bergsma": "Founder & CEO",
   "Steef Komen": "Partner · Finance & Data",
   "Sid van Kalken": "Web Development & AI Payments",
@@ -63,9 +63,9 @@ const FUNCTIES: { functie: string; mensen: string[] }[] = [
   { functie: "Web development", mensen: ["Sid van Kalken", "Antony Soosaipillaj"] },
   { functie: "Finance & operations", mensen: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
   { functie: "Ads & search", mensen: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"] },
-  { functie: "Video, photo & design", mensen: ["Carmel Boon", "Sam van der Sluis", "Emma Peperkamp", "Pepijn Bos", "Armando van Bruggen"] },
+  { functie: "Video, photo & design", mensen: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Pepijn Bos", "Armando van Bruggen"] },
   { functie: "UGC & social media", mensen: ["Isa Zoer"] },
-  { functie: "Sales & partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Ruben", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
+  { functie: "Sales & partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Ruben Spyckerelle", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
 ];
 
 // 6 oktober 2026 (Marinus): "Hier ook nog even iets van hierarchie", bij optie H3 "liever vierkantjes omdat iedereen een
@@ -75,7 +75,7 @@ const LAGEN: [string, string[]][] = [
   ["Board", ["Michelle Yang", "Steven Goudsblom"]],
   ["Head", ["Jos Hollenberg", "Nick van Keulen", "Carmel Boon", "Elian Coellar"]],
   ["Specialist", ["Isa Zoer", "Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
-  ["Sales & network", ["Ruben", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
+  ["Sales & network", ["Ruben Spyckerelle", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
 ];
 
 function LaagTegel({ naam, laag }: { naam: string; laag: string }) {

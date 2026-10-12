@@ -1,0 +1,48 @@
+/* Gekozen optie 3: Per expertise, over de hele homepagebreedte, met witte achtergrond. */
+:root .sn-site .sn-home-team{box-sizing:border-box;grid-column:1/-1;width:100vw;max-width:none;margin:40px calc(50% - 50vw) 0;padding:40px 32px;background:#191919;color:#f4f4f1;border-radius:0;text-align:left}
+:root .sn-site .sn-home-team-intro{display:flex;justify-content:space-between;align-items:end;gap:28px;margin-bottom:24px}
+:root .sn-site .sn-home-team-intro>div>span{font-size:10px;letter-spacing:2px;color:#a6a6a0}
+:root .sn-site .sn-home-team h2{margin:8px 0 0;font-size:clamp(36px,4vw,64px);letter-spacing:-2.5px;line-height:1;font-weight:700;color:#f4f4f1}
+:root .sn-site .sn-home-team h2 em{font-style:normal;color:inherit}
+:root .sn-site .sn-home-team-intro p{margin:0;color:#bebeb8;font-size:15px;line-height:1.5}
+:root .sn-site .sn-home-team-count{font-size:23px;font-weight:700;text-align:right;flex:none}
+:root .sn-site .sn-home-team-count small{display:block;font-weight:400;font-size:12px;color:#a6a6a0}
+:root .sn-site .sn-home-team-filters{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}
+:root .sn-site .sn-home-team-filters button{font:inherit;font-size:12px;cursor:pointer;background:transparent;border:1px solid #ffffff30;color:inherit;border-radius:30px;padding:8px 13px}
+:root .sn-site .sn-home-team-filters button[aria-pressed=true]{background:#efefea;border-color:#efefea;color:#202020}
+:root .sn-site .sn-home-team-filters small{opacity:.65;margin-left:7px}
+:root .sn-site .sn-home-team-groups{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 24px;align-items:start}
+:root .sn-site .sn-home-team-group h3{margin:0 0 12px;font-size:20px;font-weight:400;letter-spacing:-.5px;line-height:1.3;display:flex;justify-content:space-between;gap:10px;padding-bottom:10px;border-bottom:1px solid #ffffff30;color:#f4f4f1}
+:root .sn-site .sn-home-team-group h3 small{font-size:11px;color:#bbbcb6}
+:root .sn-site .sn-home-team-members{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+:root .sn-site .sn-home-team-person{position:relative;min-width:0;height:210px;border-radius:3px;overflow:hidden;background:#292929}
+:root .sn-site .sn-home-team-person>img{width:100%;height:100%;object-fit:cover;object-position:center 25%;display:block;transition:transform .4s}
+:root .sn-site .sn-home-team-person>img.is-jelle{object-position:38% 20%}
+:root .sn-site .sn-home-team-person:hover>img{transform:scale(1.04)}
+:root .sn-site .sn-home-team-info{position:absolute;bottom:0;left:0;right:0;padding:45px 12px 12px;background:linear-gradient(transparent,rgba(0,0,0,.94));color:white}
+:root .sn-site .sn-home-team-info strong{font-size:16px;line-height:1.15;display:block;font-weight:700;overflow-wrap:anywhere}
+:root .sn-site .sn-home-team-info>span{display:block;font-size:11px;margin-top:5px;line-height:1.25;color:#e0e5e1}
+:root .sn-site .sn-home-team-person>a{position:absolute;inset:0;z-index:2}
+:root .sn-site .sn-home-team-info details{position:relative;z-index:3;font-size:11px;margin-top:8px}
+:root .sn-site .sn-home-team-info summary{cursor:pointer;text-decoration:underline;padding-block:4px}
+:root .sn-site .sn-home-team-info details p{margin:6px 0 0;font-size:11px;line-height:1.4;color:#f4f4f1}
+:root .sn-site .sn-home-team-person:has(details[open]){height:300px}
+:root .sn-site .sn-home-team footer{padding:24px 0 0;display:flex;justify-content:space-between;gap:20px;color:#bebeb8;font-size:12px}
+:root .sn-site .sn-home-team footer a{color:#f4f4f1;text-decoration:none}
+:root .sn-site .sn-home-team :is(a,button,summary):focus-visible{outline:2px solid #fff;outline-offset:3px}
+:root .sn-site .h-hero .h-team-rij{display:block;grid-column:1/-1}
+:root .sn-site .h-hero .h-team-rij>.h-team-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+@media(max-width:1100px){:root .sn-site .sn-home-team-groups{grid-template-columns:repeat(2,minmax(0,1fr))}:root .sn-site .sn-home-team-intro p{font-size:13px}}
+@media(max-width:650px){:root .sn-site .sn-home-team{padding:28px 14px}:root .sn-site .sn-home-team-intro{gap:10px}:root .sn-site .sn-home-team-intro p{display:none}:root .sn-site .sn-home-team h2{font-size:40px}:root .sn-site .sn-home-team-intro>div>span{font-size:8px;letter-spacing:1px}:root .sn-site .sn-home-team-count{font-size:17px}:root .sn-site .sn-home-team-count small{font-size:9px}:root .sn-site .sn-home-team-filters{gap:5px}:root .sn-site .sn-home-team-filters button{font-size:10px;padding:7px 9px}:root .sn-site .sn-home-team-groups{grid-template-columns:1fr}:root .sn-site .sn-home-team-person{height:240px}:root .sn-site .sn-home-team footer{flex-direction:column;gap:8px}:root .sn-site .h-hero .h-team-rij>.h-team-links{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){:root .sn-site .sn-home-team-person>img{transition:none}}
+/* Nieuwste expliciete keuze van Marinus: witte achtergrond houden. */
+:root .sn-site .sn-home-team{background:#fff;color:#202020}
+:root .sn-site .sn-home-team h2,:root .sn-site .sn-home-team-group h3{color:#202020}
+:root .sn-site .sn-home-team-intro>div>span,:root .sn-site .sn-home-team-count small{color:#686868}
+:root .sn-site .sn-home-team-intro p,:root .sn-site .sn-home-team footer{color:#595959}
+:root .sn-site .sn-home-team-filters button{border-color:#d4d4d4}
+:root .sn-site .sn-home-team-filters button[aria-pressed=true]{background:#202020;border-color:#202020;color:#fff}
+:root .sn-site .sn-home-team-group h3{border-bottom-color:#d4d4d4}
+:root .sn-site .sn-home-team-group h3 small{color:#686868}
+:root .sn-site .sn-home-team footer a{color:#202020}
+:root .sn-site .sn-home-team-filters button:focus-visible,:root .sn-site .sn-home-team footer a:focus-visible{outline-color:#202020}

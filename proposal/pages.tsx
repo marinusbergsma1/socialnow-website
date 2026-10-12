@@ -17,12 +17,13 @@ import {
   MessageCircle,
 } from "lucide-react";
 import HomeHeader, { HomeExplainer } from "./HomeHeader";
+import HomeTeam from "./HomeTeam";
 import { MiloMotion, miloPoster } from "./motion";
 import { klein, useDichtbij, useNaBeeld } from "./licht";
 import CharacterAccent from "./CharacterAccent";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import OsPeople from "./OsPeople";
-import { INTEGRATIES, TeamJoin, Integraties } from "./TeamTrust";
+import { INTEGRATIES, Integraties } from "./TeamTrust";
 import "./partner-intro.css";
 const PartnerIntro = later(() => import("./PartnerIntro").then((m) => m.default));
 const VdzOutcome = later(() => import("./VdzOutcome").then((m) => m.default));
@@ -208,8 +209,9 @@ export function Home() {
             {/* 11 oktober 2026: onder de vouw van de hero, niet in het eerste script (budget 120 KB gzip). */}
             <OnderDeVouw ruimte={false}><PartnerIntro /><VdzOutcome /></OnderDeVouw>
             </div>
-            <TeamJoin />
+
           </div>
+          <HomeTeam />
           {/* 5 oktober 2026 (Marinus): de witte Talking to-balk (René van der Zel, XXL Nutrition, logoslider) "mag weg". */}
           <HeroSprekers />
           <HeroVeilig geluid={heroGeluid} setGeluid={setHeroGeluid} />
