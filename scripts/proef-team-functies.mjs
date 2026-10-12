@@ -11,11 +11,11 @@ const blok = team.slice(team.indexOf("const FUNCTIES"), team.indexOf("];", team.
 const eisen = [
   ["zes functies", ["AI development", "Web development", "Finance & operations", "Ads & search", "Video, photo & design", "Sales & partnerships"].every(f => blok.includes(`"${f}"`)) && !blok.includes('"AI & development"')],
   // 5 oktober 2026 (Marinus): "Ai development is meer Tristan an Douwe. Antony Soosaipillaj is voor Webdevelopment." Marinus naar Sales & partnerships.
-  ["AI development is Tristan en Douwe", blok.includes('{ functie: "AI development", mensen: ["Tristan Slobbe", "Douwe Kramer"] }')],
+  ["AI development is Douwe", blok.includes('{ functie: "AI development", mensen: ["Douwe Kramer"] }')],
   ["Web development is Sid en Antony", blok.includes('{ functie: "Web development", mensen: ["Sid van Kalken", "Antony Soosaipillaj"] }')],
   ["Marinus bij Sales & partnerships", /functie: "Sales & partnerships", mensen: \["Marinus Bergsma"/.test(blok)],
   ["iedereen uit het team staat in precies één functie", namen.length > 15 && namen.every(n => blok.split(`"${n}"`).length === 2)],
-  ["Marinus, Steef, Attesso en het Board doen mee", ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer", "Michelle Yang", "Tristan Slobbe", "Steven Goudsblom"].every(n => blok.includes(`"${n}"`))],
+  ["Marinus, Steef, Attesso en het Board doen mee", ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer", "Michelle Yang", "Steven Goudsblom"].every(n => blok.includes(`"${n}"`))],
   ["filterpillen met All en aria-pressed", team.includes('className="h-functie-pillen"') && team.includes('pil("", "All", alle.length)') && team.includes("aria-pressed={")],
   ["naam en rol onder de foto", team.includes('className="h-functie-naam"')],
   ["duo's en Board blijven bovenaan", team.includes('className="h-team-kern"') && team.includes('className="h-board"')],

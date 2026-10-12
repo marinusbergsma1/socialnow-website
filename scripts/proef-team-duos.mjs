@@ -20,11 +20,11 @@ const eisen = [
   ["uitnodiging als tekstlink", team.includes("Join the network")],
   ["Currently building met zes echte logo's", team.includes("Currently building") && ["/images/partners/odoo.svg", "/images/partners/salesforce.svg", "/images/partners/integraties/afas.png", "/images/partners/integraties/exact.svg", "/images/partners/integraties/hubspot.svg", "/images/partners/integraties/dynamics-365.svg"].every(p => team.includes(p) && bestaat(p))],
   ["Odoo-uitleg en AGI-zin", team.includes("proven free accounting and website layer") && team.includes("universal ERP connections") && team.includes("always stays yours")],
-  ["Tristan met KLM en BearingPoint, Douwe met ByteChat en ByteVision", ["/images/merken/klm.svg", "/images/merken/bearingpoint.svg", "/images/merken/bytechat.svg", "/images/merken/bytevision.png"].every(p => team.includes(p) && bestaat(p))],
+  ["Douwe met ByteChat en ByteVision", ["/images/merken/bytechat.svg", "/images/merken/bytevision.png"].every(p => team.includes(p) && bestaat(p))],
   ["verhaal van Marinus in een eigen vak", pages.includes('className="h-team-verhaal"') && pages.includes("Why I started") && pages.includes("family of makers") && pages.includes("free, fair and social economy")],
   ["AI Payments niet bij Steef en Michelle, wel bij Sid", !rol("Steef Komen").includes("AI Payments") && !rol("Michelle Yang").includes("AI Payments") && rol("Sid van Kalken").includes("AI Payments")],
   ["SocialNow-duo donkerblauw naar zwart, groen feller", /\.h-duo\.is-sn \{[^}]*#16233a[^}]*#0b0f12/.test(css) && /b\.g \{ color: #0cb457; \}/.test(css)],
-  ["LinkedIn bij Tristan en Douwe, bedrijfslogo's linken door", ["https://www.linkedin.com/in/tristan-slobben-105056159/", "https://www.linkedin.com/in/douwe-kramer-attesso/", "https://www.klm.com", "https://www.bearingpoint.com", "https://bytechat.io", "https://bytevision.io"].every(u => team.includes(`"${u}"`)) && team.includes('rel: "noopener noreferrer"')],
+  ["LinkedIn bij Douwe, bedrijfslogo's linken door", ["https://www.linkedin.com/in/douwe-kramer-attesso/", "https://bytechat.io", "https://bytevision.io"].every(u => team.includes(`"${u}"`)) && team.includes('rel: "noopener noreferrer"')],
 ];
 let fout = 0;
 for (const [naam, ok] of eisen) { console.log(`${ok ? "groen" : "ROOD "} ${naam}`); if (!ok) fout++; }

@@ -12,7 +12,7 @@ const AdvisoryPartner = later(() => import("./AdvisoryPartner").then((m) => m.de
 import { useLanguage } from "./i18n/context";
 
 // Iedereen uit people, Marinus voorop; de rest in de volgorde van de muur.
-const voorop = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Tristan Slobbe", "Steven Goudsblom"];
+const voorop = ["Marinus Bergsma", "Michelle Yang", "Steef Komen", "Sergio Jovovic", "Elian Coellar", "Nick van Keulen", "Jos Hollenberg", "Carmel Boon", "Emma Peperkamp", "Sam van der Sluis", "Sid van Kalken", "Steven Goudsblom"];
 const teamOpVolgorde = () => [...people].sort((a, b) => (voorop.indexOf(a.name) + 1 || 99) - (voorop.indexOf(b.name) + 1 || 99));
 
 // 28 september 2026 (Marinus): meer mensen uit het team laten zien, de tekst mag kleiner. Het hele team, even groot.
@@ -32,16 +32,14 @@ export default function TeamTrust() {
 // zijn weg ("Die zwarte balk en dat groene blok vind ik ook niet nice"); de uitnodiging is een tekstlink.
 const SOCIALNOW_DUO = ["Marinus Bergsma", "Steef Komen"];
 const ATTESSO_DUO = ["Sid van Kalken", "Douwe Kramer"];
-// 5 oktober 2026 (Marinus): "Michelle, Tristan en Steven wil ik graag groot hebben als bestuursonderdeel." Optie D uit de
-// voorbeelden (drie foto's en een tekstkaart in vier gelijke vakken), "graag groen dus".
-const BOARD = ["Michelle Yang", "Tristan Slobbe", "Steven Goudsblom"];
+// Board: groene tekstkaart met de twee huidige bestuursleden.
+const BOARD = ["Michelle Yang", "Steven Goudsblom"];
 const KORTE_ROL: Record<string, string> = {
   "Marinus Bergsma": "Founder & CEO",
   "Steef Komen": "Partner · Finance & Data",
   "Sid van Kalken": "Web Development & AI Payments",
   "Douwe Kramer": "Co-founder",
   "Michelle Yang": "Supply Chain & Operations",
-  "Tristan Slobbe": "Data & AI",
   "Steven Goudsblom": "Wealth management",
 };
 
@@ -59,9 +57,8 @@ const NaamTeken = ({ person }: { person: Persoon }) => person.linkedin ? <NaamMe
 // 5 oktober 2026 (Marinus): de muur per functie, optie D (filterpillen). "zowel ik als Attesso en management moet behalve
 // management er nog bij ook in het onderverdelen terugkomen": het hele team staat hier, ook wie bovenaan al groot staat.
 const FUNCTIES: { functie: string; mensen: string[] }[] = [
-  // 5 oktober 2026 (Marinus): "Ai development is meer Tristan an Douwe. Antony Soosaipillaj is voor Webdevelopment."
   // Marinus staat bij Sales & partnerships; Sid (Web Development & AI Payments) bij Web development.
-  { functie: "AI development", mensen: ["Tristan Slobbe", "Douwe Kramer"] },
+  { functie: "AI development", mensen: ["Douwe Kramer"] },
   { functie: "Web development", mensen: ["Sid van Kalken", "Antony Soosaipillaj"] },
   { functie: "Finance & operations", mensen: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
   { functie: "Ads & search", mensen: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"] },
@@ -73,7 +70,7 @@ const FUNCTIES: { functie: string; mensen: string[] }[] = [
 // plek verdient". Onder All staat het team in lagen: Partners en Board groot bovenaan, daarna iedereen in even grote vierkanten.
 const LAGEN: [string, string[]][] = [
   ["Partner", ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer"]],
-  ["Board", ["Michelle Yang", "Tristan Slobbe", "Steven Goudsblom"]],
+  ["Board", ["Michelle Yang", "Steven Goudsblom"]],
   ["Head", ["Jos Hollenberg", "Nick van Keulen", "Carmel Boon", "Elian Coellar"]],
   ["Specialist", ["Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
   ["Sales & network", ["Aren", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
@@ -215,7 +212,7 @@ export function TeamJoin() {
     </div>
     <OnderDeVouw ruimte={false}><AdvisoryPartner /></OnderDeVouw>
     <div className="h-board">
-      <div className="h-board-tekst"><b>Board</b><strong>Operations, data and wealth.</strong><span>Michelle, Tristan and Steven</span></div>
+      <div className="h-board-tekst"><b>Board</b><strong>Operations and wealth.</strong><span>Michelle and Steven</span></div>
       {BOARD.map(naam => <DuoTegel key={naam} naam={naam} />)}
     </div>
     <TeamPerFunctie />
@@ -224,8 +221,7 @@ export function TeamJoin() {
 }
 
 // 4 oktober 2026 (Marinus): "de volgende grote tools als AFAS etc top 5 Salesforce", met de echte logo's, "currently build",
-// Odoo live "because of their proven free accounting and website layer", en "We believe that AGI is about Universal ERP
-// connections". Gebouwd door Tristan (KLM, BearingPoint) en Douwe (ByteChat, ByteVision).
+// Odoo live "because of their proven free accounting and website layer".
 export const INTEGRATIES = [
   { naam: "Salesforce", src: "/images/partners/salesforce.svg", hoog: 26, url: "https://www.salesforce.com" },
   { naam: "AFAS", src: "/images/partners/integraties/afas.png", hoog: 16, url: "https://www.afas.nl" },
@@ -234,8 +230,7 @@ export const INTEGRATIES = [
   { naam: "Microsoft Dynamics 365", src: "/images/partners/integraties/dynamics-365.svg", hoog: 22, url: "https://dynamics.microsoft.com" },
 ];
 
-// 4 oktober 2026 (Marinus): "Zorg dat er Linkedin Links staan bij zowel Tris als Douwe en dat ze beide via de bedrijven ook
-// echt doorlinken naar die grote websites."
+// Bedrijfslogo's linken naar de bevestigde bedrijfswebsites.
 const extern = { target: "_blank", rel: "noopener noreferrer" } as const;
 
 // 10 oktober 2026: zonder bevestigd LinkedIn-profiel linkt de naam naar Instagram, met het Instagram-teken.
@@ -267,16 +262,11 @@ export function Integraties() {
 // De bedrijfsreferenties horen bij het team; ERP-koppelingen staan na het persoonlijke verhaal.
 export function Bedrijfsreferenties() {
   return <div className="h-bouwers" role="group" aria-label="Team track record">
-      <Bouwer naam="Tristan Slobbe" rol="Data & AI Engineer" linkedin="https://www.linkedin.com/in/tristan-slobben-105056159/">
-        <a href="https://www.klm.com" {...extern}><img src="/images/merken/klm.svg" alt="KLM" style={{ height: 14 }} loading="lazy" /></a>
-        <a href="https://www.bearingpoint.com" {...extern}><img src="/images/merken/bearingpoint.svg" alt="BearingPoint" style={{ height: 13 }} loading="lazy" /></a>
-      </Bouwer>
       <Bouwer naam="Douwe Kramer" rol="Co-founder" linkedin="https://www.linkedin.com/in/douwe-kramer-attesso/">
         <a className="h-bouwer-merk" href="https://bytechat.io" {...extern}><img src="/images/merken/bytechat.svg" alt="" style={{ height: 16 }} loading="lazy" /><span>Byte<em>Chat</em></span></a>
         <a className="h-bouwer-merk" href="https://bytevision.io" {...extern}><img src="/images/merken/bytevision.png" alt="" style={{ height: 16 }} loading="lazy" />ByteVision</a>
       </Bouwer>
       {/* 5 oktober 2026 (Marinus): Steven Goudsblom (Fincer B.V.) komt erbij als partner voor vermogensbeheer, voor ons en
-          onze klanten. Klein het ABN AMRO-logo en zijn werkervaring, net als bij Tristan en Douwe: "Dus ABN AMRO dan FINCER."
           Fincer verwijst naar het bevestigde profiel van Steven. */}
       <Bouwer naam="Steven Goudsblom" rol="Founder · Wealth management" linkedin="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" nieuw>
         <a href="https://www.abnamro.nl" {...extern}><img src="/images/merken/abn-amro.svg" alt="ABN AMRO" style={{ height: 15 }} loading="lazy" /></a>

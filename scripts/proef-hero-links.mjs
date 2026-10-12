@@ -17,7 +17,6 @@ const linkedin = {
   "Sid van Kalken": "sid-van-kalken-65b486223",
   "Douwe Kramer": "douwe-kramer-attesso",
   "Steef Komen": "steef-komen-60632236",
-  "Tristan Slobbe": "tristan-slobben-105056159",
   "Steven Goudsblom": "steven-goudsblom-bb3ab0197",
 };
 const persoon = naam => { const i = content.indexOf(`name: "${naam}"`); return i < 0 ? "" : content.slice(i, content.indexOf("}", i)); };

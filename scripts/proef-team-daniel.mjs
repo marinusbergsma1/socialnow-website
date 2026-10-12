@@ -10,7 +10,7 @@ const laag = (naam) => (team.match(new RegExp(`\\["${naam}", \\[([^\\]]*)\\]\\]`
 const eisen = [
   ["Daniel in het team, met foto en sinds 10 oktober", /name: "Daniel Schotman", role: "Content & Personal Branding · Creator Code", image: "Daniel-Schotman\.webp", sinds: "2026-10-10"/.test(content)],
   ["foto en kleine varianten staan in public", ["Daniel-Schotman.webp", "klein/Daniel-Schotman-96.webp", "klein/Daniel-Schotman-160.webp", "klein/Daniel-Schotman-320.webp"].every(f => existsSync(`public/images/${f}`))],
-  ["Daniel is de vierde regel in het track record, na Steven", /naam="Tristan Slobbe"[\s\S]*naam="Douwe Kramer"[\s\S]*naam="Steven Goudsblom"[\s\S]*naam="Daniel Schotman"/.test(team)],
+  ["Daniel staat in het track record, na Steven", /naam="Douwe Kramer"[\s\S]*naam="Steven Goudsblom"[\s\S]*naam="Daniel Schotman"/.test(team)],
   ["rol Founder · Content & personal branding, met New partner", daniel.includes('rol="Founder · Content & personal branding"') && /naam="Daniel Schotman"[^>]*\bnieuw>/.test(team)],
   ["naam linkt naar zijn Instagram, met Instagram-teken", daniel.includes('instagram="https://www.instagram.com/danielschotman/"') && team.includes("<InstagramMark />") && existsSync("proposal/InstagramMark.tsx")],
   ["logo Creator Code linkt naar thecreatorcode.nl", daniel.includes('href="https://www.thecreatorcode.nl/"') && daniel.includes('src="/images/merken/creator-code.webp"') && existsSync("public/images/merken/creator-code.webp")],

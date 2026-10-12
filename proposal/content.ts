@@ -67,7 +67,6 @@ export const people: { name: string; role: string; image: string; linkedin?: str
     image: "Michelle-Yang-kantoor.webp",
   },
   // 30 september 2026 (Marinus): nieuw teamlid.
-  { name: "Tristan Slobbe", role: "Data & AI Engineer", image: "Tristan-Slobbe.webp", linkedin: "https://www.linkedin.com/in/tristan-slobben-105056159/", sinds: "2026-09-30" },
   // 3 oktober 2026 (Marinus): nieuwe teamleden.
   { name: "Antony Soosaipillaj", role: "Full-Stack AI Developer", image: "Antony-Soosaipillaj.webp", sinds: "2026-10-03" },
   { name: "Aren", role: "Senior Sales", image: "Aren.webp", sinds: "2026-10-03" },
@@ -94,10 +93,6 @@ export const partnerReferences: Record<string, { name: string; url: string }[]> 
     { name: "Attesso", url: "https://www.attesso.com/" },
     { name: "ByteChat", url: "https://bytechat.io/" },
     { name: "ByteVision", url: "https://bytevision.io/" },
-  ],
-  "Tristan Slobbe": [
-    { name: "KLM", url: "https://www.klm.com/" },
-    { name: "BearingPoint", url: "https://www.bearingpoint.com/" },
   ],
   "Steven Goudsblom": [
     { name: "Fincer", url: "https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" },

@@ -27,7 +27,6 @@ const personFacts = [
   ["Douwe Kramer", "douwe-kramer", "https://www.linkedin.com/in/douwe-kramer-attesso/", "attesso", true],
   ["Steef Komen", "steef-komen", "https://www.linkedin.com/in/steef-komen-60632236/", "komen"],
   ["Michelle Yang", "michelle-yang", undefined, "komen"],
-  ["Tristan Slobbe", "tristan-slobbe", "https://www.linkedin.com/in/tristan-slobben-105056159/"],
   ["Antony Soosaipillaj", "antony-soosaipillaj"],
   ["Aren", "aren"],
   ["Youri van der Donk", "youri-van-der-donk"],

@@ -9,11 +9,11 @@ const lagen = team.match(/const LAGEN[\s\S]*?\n\];/)?.[0] ?? "";
 const volgorde = [...lagen.matchAll(/"([^"]+)"/g)].map((m) => m[1]);
 const mensen = content.match(/export const people[\s\S]*?\n\];/)?.[0] ?? "";
 const namen = [...mensen.matchAll(/name: "([^"]+)"/g)].map((m) => m[1]);
-const nieuw = ["Tristan Slobbe", "Douwe Kramer", "Antony Soosaipillaj", "Aren", "Youri van der Donk", "Isaak Munster", "Pieter Bergsma", "Pepijn Bos", "Armando van Bruggen", "Steven Goudsblom"];
+const nieuw = ["Douwe Kramer", "Antony Soosaipillaj", "Aren", "Youri van der Donk", "Isaak Munster", "Pieter Bergsma", "Pepijn Bos", "Armando van Bruggen", "Steven Goudsblom"];
 const sinds = (naam) => content.match(new RegExp(`name: "${naam}"[^}]*sinds: "(2026-\\d\\d-\\d\\d)"`))?.[1];
 const eisen = [
   ["lagen Partner, Board, Head, Specialist, Sales & network", ["Partner", "Board", "Head", "Specialist", "Sales & network"].every((l) => lagen.includes(`"${l}"`))],
-  ["Marinus eerst, daarna Steef, Sid, Douwe en het Board", /"Partner", \["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer"\]/.test(lagen) && /"Board", \["Michelle Yang", "Tristan Slobbe", "Steven Goudsblom"\]/.test(lagen)],
+  ["Marinus eerst, daarna Steef, Sid, Douwe en het Board", /"Partner", \["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer"\]/.test(lagen) && /"Board", \["Michelle Yang", "Steven Goudsblom"\]/.test(lagen)],
   ["iedereen uit het team staat precies één keer in de lagen", namen.length > 0 && namen.every((n) => volgorde.filter((v) => v === n).length === 1)],
   ["All toont de lagen, een functie filtert nog steeds", /!keuze \? <TeamInLagen/.test(team) && team.includes("x.functie === keuze")],
   ["iedereen een vierkante tegel, bovenste rij groter", /\.h-lagen-muur \{[^}]*grid-template-columns: repeat\(7, minmax\(0, 1fr\)\)/.test(css) && /\.h-lagen-muur figure \{[^}]*aspect-ratio: 1/.test(css) && /\.h-lagen-top \{/.test(css)],

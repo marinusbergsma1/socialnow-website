@@ -335,8 +335,8 @@
 .sn-site .h-duo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .sn-site .h-duo figcaption { position: absolute; inset: auto 0 0; padding: 22px 9px 8px; background: linear-gradient(transparent, #000c); color: #fff; font-size: 12px; font-weight: 700; line-height: 1.2; }
 .sn-site .h-duo figcaption i { display: block; font-style: normal; font-weight: 400; font-size: 10.5px; opacity: .85; }
-/* 5 oktober 2026: Board (Michelle, Tristan, Steven) onder de duo's: een groene tekstkaart en drie foto's in vier gelijke vakken. */
-.sn-site .h-board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 14px; color: inherit; text-decoration: none; }
+/* 5 oktober 2026: Board (Michelle, Steven) onder de duo's: een groene tekstkaart en drie foto's in vier gelijke vakken. */
+.sn-site .h-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 14px; color: inherit; text-decoration: none; }
 .sn-site .h-board figure { position: relative; margin: 0; aspect-ratio: 1; border-radius: 16px; overflow: hidden; background: #eef1ef; border: 1px solid #0b0f1214; }
 .sn-site .h-board img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2,.8,.3,1); }
 .sn-site .h-board figure:hover img { transform: scale(1.04); }
