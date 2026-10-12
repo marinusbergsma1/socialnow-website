@@ -43,11 +43,11 @@ export function HomeExplainer() {
     </div>
     <div className="sn-home-player">
     <video ref={video} onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} controls playsInline preload="metadata" poster="/video/os/socialnow-os-explainer-poster.jpg" aria-label="SocialNow OS explainer (Engels)">
-      <source src="/video/os/socialnow-os-explainer.mp4" type="video/mp4" />
-      <a href="/video/os/socialnow-os-explainer.mp4">Bekijk de SocialNow OS explainer</a>
+      <source src="/video/os/socialnow-os-explainer.mp4?v=20261012-player2" type="video/mp4" />
+      <a href="/video/os/socialnow-os-explainer.mp4?v=20261012-player2">Bekijk de SocialNow OS explainer</a>
     </video>
     {!playing && <button className="sn-home-play" type="button" onClick={() => { setFailed(false); video.current?.play().catch(() => setFailed(true)); }}><Play size={20} aria-hidden="true" />Speel de explainer af</button>}
     </div>
-    {failed && <p role="status"><a href="/video/os/socialnow-os-explainer.mp4">Open de video om af te spelen ↗</a></p>}
+    <p className="sn-video-direct" role={failed ? "status" : undefined}><a href="/video/os/socialnow-os-explainer.mp4?v=20261012-player2" target="_blank" rel="noopener">{failed ? "Starten lukt niet? Open de video rechtstreeks ↗" : "Open de video in een aparte speler ↗"}</a></p>
   </section>;
 }

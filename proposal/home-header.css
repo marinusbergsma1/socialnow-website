@@ -72,3 +72,6 @@
 .sn-home-player { position: relative; }
 .sn-home-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 9px; white-space: nowrap; border: 1px solid #5a8269; border-radius: 8px; background: #0d271bed; color: #fff; padding: 14px 18px; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
 .sn-home-play:focus-visible { outline: 2px solid #25d366; outline-offset: 4px; }
+
+:root .sn-site .sn-video-direct { margin: -10px 0 0; font-size: 13px; color: #b3c2bc; }
+.sn-video-direct a { text-decoration: underline; text-underline-offset: 4px; }
