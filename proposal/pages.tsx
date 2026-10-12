@@ -174,7 +174,7 @@ export function Home() {
       <LanguageContext.Provider value={getoond}>
       <section className="h-hero" id="home" data-taalfase={taalfase}>
         <div className="h-hero-background">
-          <OnderDeVouw ruimte={false}><BrandGlobe /></OnderDeVouw>
+          <BrandGlobe />
         </div>
         <div className="h-wrap h-hero-content">
           <div className="h-hero-tekst">

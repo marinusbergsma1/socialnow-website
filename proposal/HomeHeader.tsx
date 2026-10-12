@@ -35,7 +35,7 @@ export function HomeExplainer() {
   return <section className="sn-home-explainer" id="os-explainer" aria-labelledby="sn-explainer-title">
     <div className="sn-home-explainer-intro">
       <img className="sn-home-explainer-logo" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="140" />
-      <h2 id="sn-explainer-title">Eén Operation &amp; Management-systeem.</h2>
+      <h2 id="sn-explainer-title">Je bedrijfsvoering.<br />Alles verbonden.</h2>
       <p>Ontdek hoe mensen, je bedrijfsvoering en AI samenkomen.</p>
     </div>
     <video controls playsInline preload="none" poster="/video/os/socialnow-os-explainer-poster.jpg" aria-label="SocialNow OS explainer (Engels)">

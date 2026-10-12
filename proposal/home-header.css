@@ -47,3 +47,24 @@
 }
 
 :root .sn-site .sn-home-explainer-logo { display: block; width: 260px; max-width: 100%; height: auto; margin: 0 0 20px; background: #000; }
+
+/* Gekozen optie 3: OS en video links, rustigere boodschap rechts. */
+:root .sn-site .h-hero > .h-hero-content { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: start; }
+:root .sn-site .h-hero .h-hero-content > .h-hero-tekst { grid-column: 2; grid-row: 1; align-self: start; }
+:root .sn-site .sn-home-explainer { grid-column: 1; grid-row: 1; }
+:root .sn-site .sn-home-pain { border: 0; padding-left: 0; margin-bottom: 26px; }
+:root .sn-site .sn-home-pain strong { font-size: 17px; font-weight: 700; line-height: 1.35; }
+:root .sn-site .sn-home-pain span { font-size: 12px; }
+:root .sn-site .h-hero .sn-home-title { font-size: clamp(36px, 3.2vw, 52px) !important; letter-spacing: 0; }
+:root .sn-site .sn-home-human { color: #12883f; font-size: clamp(24px, 2vw, 30px); }
+:root .sn-site .sn-home-offer strong { color: #12883f; }
+:root .sn-site .sn-home-copy .sn-home-offer > img { display: none; }
+:root .sn-site .sn-home-explainer h2 { font-size: clamp(28px, 2.5vw, 36px) !important; }
+@media (max-width: 1099px) {
+ :root .sn-site .h-hero > .h-hero-content { grid-template-columns: 1fr; }
+ :root .sn-site .h-hero .h-hero-content > .h-hero-tekst { grid-column: 1; grid-row: 1; }
+ :root .sn-site .sn-home-explainer { grid-column: 1; grid-row: 2; }
+}
+
+:root .sn-site .h-hero > .h-hero-content { padding-top: 36px; }
+:root .sn-site .h-hero-background .brand-globe-stage { opacity: .32; }
