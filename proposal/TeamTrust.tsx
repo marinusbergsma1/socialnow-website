@@ -35,6 +35,7 @@ const ATTESSO_DUO = ["Sid van Kalken", "Douwe Kramer"];
 // Board: groene tekstkaart met de twee huidige bestuursleden.
 const BOARD = ["Michelle Yang", "Steven Goudsblom"];
 const KORTE_ROL: Record<string, string> = {
+  "Ruben": "B2B cold calling",
   "Marinus Bergsma": "Founder & CEO",
   "Steef Komen": "Partner · Finance & Data",
   "Sid van Kalken": "Web Development & AI Payments",
