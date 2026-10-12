@@ -3,7 +3,7 @@ import { CLAIM_URL } from "./os-entry";
 // 28 september 2026 (Marinus): zakelijkere functies, zoals "Head of".
 // 5 oktober 2026 (Marinus): "graag bij iedereen Linkedin doorlink". Alleen profielen die zeker van deze persoon zijn
 // (teamonderzoek 4 en 5 oktober); bij de rest volgt de link zodra de juiste URL bevestigd is.
-export const people: { name: string; role: string; image: string; linkedin?: string; sinds?: string }[] = [
+export const people: { name: string; role: string; image: string; linkedin?: string; sinds?: string; description?: string; quote?: string }[] = [
   {
     name: "Marinus Bergsma",
     role: "Founder & CEO",
@@ -70,6 +70,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   // 30 september 2026 (Marinus): nieuw teamlid.
   // 3 oktober 2026 (Marinus): nieuwe teamleden.
   { name: "Antony Soosaipillaj", role: "Full-Stack AI Developer", image: "Antony-Soosaipillaj.webp", sinds: "2026-10-03" },
+  { name: "Ruben", role: "Outsourced B2B cold calling & appointment setting · Benelux & DACH", image: "Ruben.webp", description: "Gekwalificeerde afspraken in je agenda.", quote: "Ik bel, zodat jij het niet hoeft te doen.", sinds: "2026-10-12" },
   { name: "Aron", role: "Senior Sales", image: "Aren.webp", sinds: "2026-10-03" },
   { name: "Youri van der Donk", role: "Senior Sales", image: "Youri-van-der-Donk.webp", sinds: "2026-10-03" },
   { name: "Isaak Munster", role: "Business Coach", image: "Isaak-Munster.webp", sinds: "2026-10-03" },

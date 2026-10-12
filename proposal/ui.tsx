@@ -276,6 +276,8 @@ export function TeamGrid({ short = false, members = people }: { short?: boolean;
               ) : person.name}
             </strong>
             <span>{person.role}</span>
+            {person.description && <span>{person.description}</span>}
+            {person.quote && <span>“{person.quote}”</span>}
             <OnderDeVouw ruimte={false}><PartnerReferences personName={person.name} /></OnderDeVouw>
           </figcaption>
         </figure>
