@@ -356,7 +356,10 @@
 :root .sn-site :is(.h-duo, .h-team-duo).is-attesso :is(.h-duo-kop code, .h-team-duo-label code, .h-duo-tags, .sn-reference-wordmark, .sn-reference-wordmark b) { color: #7d3f75; }
 :root .sn-site .h-duo.is-fincer .h-duo-tags { color: #285e98; }
 :root .sn-site :is(.h-team-duo.is-attesso, .h-team-duo.is-fincer) .sn-reference-link img { filter: none; }
-:root .sn-site .h-team-duo.is-fincer .sn-reference-link img[src*="fincer.png"] { content: normal; }
+:root .sn-site .h-team-duo.is-fincer .sn-reference-link img[src*="fincer.png"] { content: normal; mix-blend-mode: multiply; }
+/* Blend the logo's white raster background into the light blue partner card. */
+:root .sn-site .h-duo.is-fincer .h-duo-kop img,
+:root .sn-site .h-team-duo.is-fincer .h-team-duo-label img { mix-blend-mode: multiply; }
 :root .sn-site .sn-advisory { background: linear-gradient(160deg, #fff6eb, #f6e8d7); border: 1px solid #e6c9a6; color: #39281c; }
 :root .sn-site .sn-advisory-copy > small { color: #82552e; }
 :root .sn-site .sn-advisory :is(h3, h3 a, .sn-advisory-copy > p, .sn-advisory-copy > strong) { color: #39281c; }
