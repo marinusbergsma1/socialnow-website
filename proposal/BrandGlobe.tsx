@@ -47,7 +47,7 @@ export default function BrandGlobe() {
     const stage = stageRef.current;
     if (!canvas || !stage) return;
     const context = canvas.getContext("2d", { alpha: true });
-    if (!context) return; // Het echte bestaande beeldmerk blijft zichtbaar.
+    if (!context) return; // Zonder canvas blijven alleen de rustige achtergrondstippen staan.
 
     const motionPreference = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -216,13 +216,6 @@ export default function BrandGlobe() {
   return (
     <div className="brand-globe" data-ready={ready}>
       <div ref={stageRef} className="brand-globe-stage" aria-hidden="true">
-        <img
-          className="brand-globe-fallback"
-          src="/beeldmerk-2026.webp"
-          alt=""
-          width="240"
-          height="240"
-        />
         <canvas ref={canvasRef} className="brand-globe-canvas" />
       </div>
 

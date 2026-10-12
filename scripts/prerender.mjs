@@ -107,12 +107,10 @@ for (const pad of paden) {
     fouten.push(`${pad}: ${fout?.message || fout}`);
     continue;
   }
-  // Het logo in de kop, en op de homepage de achtergrond van de hero (het beeldmerk achter de wereldbol,
-  // het grootste beeld in de eerste schermhoogte en dus de Largest Contentful Paint).
+  // Alleen het kleine navigatielogo en de videoposter vooraf laden; geen groot beeldmerk bij het openen.
   const logo = inhoud.match(/<a class="h-brand"[^>]*><img[^>]*>/)?.[0].replace(/^<a[^>]*>/, "");
-  const achtergrond = inhoud.match(/<img class="brand-globe-fallback"[^>]*>/)?.[0];
   const poster = inhoud.match(/<section class="h-hero"[\s\S]*?<\/section>/)?.[0].match(/<video[^>]*\sposter="([^"]+)"/)?.[1];
-  const vooraf = LETTER + beeldVooraf(logo) + beeldVooraf(achtergrond)
+  const vooraf = LETTER + beeldVooraf(logo)
     + (poster ? `\n    <link rel="preload" href="${poster}" as="image" media="(min-width: ${TWEE_KOLOMMEN}px)" fetchpriority="high" />` : "");
   const metInhoud = html
     .replace(/<meta charset="UTF-8" \/>/, `$&\n    ${vooraf}`)
