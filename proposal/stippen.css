@@ -1,7 +1,7 @@
 /* 11 oktober 2026 (Marinus): "Ik wil de gehele site met dots hebben" en "Verder site ook helemaal zwart graag."
    Eén raster van 32 px over de hele pagina (stip r 1,6, zoals de film), op puur zwart. De rust-stippen zijn een
-   css-achtergrond op body (geen script nodig, gaat mee met de scroll); proposal/stippen.ts legt er een vast canvas
-   overheen dat alleen tekent wat oplicht (golven bij hover en klik, kleurburst). Donkere tegels zijn doorzichtig, zodat
+   css-achtergrond op body als fallback vóór laden; proposal/stippen.ts tekent na initialisatie de basis en belichting
+   samen op één vast canvas (golven bij hover en klik, kleurburst). Donkere tegels zijn doorzichtig, zodat
    het raster en de golven erdoorheen lopen. Witte vlakken (mens) blijven wit. Laatste css-bestand, zodat dit wint. */
 /* concept.css zet :root body op --c-zwart (#0b0f12) met !important; zelfde specificiteit, dit bestand komt later. */
 :root { --c-zwart: #000; }
@@ -51,3 +51,6 @@
 :root .sn-site .h-clients-kort > .h-clients-strook::after { background: none; }
 /* Kopbalk ook puur zwart (was rgba 11,15,18 uit concept.css). */
 :root .sn-site .h-header { background: rgba(0, 0, 0, .86); }
+
+/* Basis en gekleurde stippen delen na canvasinitialisatie één raster. */
+:root.sn-stipveld-ready body { background-image: none !important; }

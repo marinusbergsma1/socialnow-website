@@ -80,7 +80,11 @@ export class Veld {
     }
   }
   stop() { this.ro?.disconnect(); this.io?.disconnect(); velden.delete(this); removeEventListener("scroll", this.opScroll); this.effecten = []; }
-  private opScroll = () => { if (this.effecten.length || this.lampjes.size) this.lus(); };
+  private opScroll = () => {
+    // Ook de rustige basis volgt documentcoördinaten bij scrollen.
+    if (this.basis) this.vuil = true;
+    if (this.basis || this.effecten.length || this.lampjes.size) this.lus();
+  };
   private slaapt() { return tabWeg || !this.inBeeld; }
   // De IntersectionObserver meldt pas na het beeld; tijdens snel scrollen kijkt het veld vóór het tekenen zelf.
   private buiten() {
@@ -128,7 +132,7 @@ export class Veld {
   // stippen binnen de ring van een golf of burst (dirty rect); stippen met dezelfde kleur en sterkte gaan in één pad.
   private teken(nu: number) {
     const { ctx, stap, r } = this;
-    if (!this.vast) this.lijn();
+    this.lijn();
     const oy = this.oy(), pad = r + 1.6;
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     const alles = !!this.basis || this.vuil;
@@ -299,8 +303,8 @@ export function tekstCellen(tekst: string, { i0 = 0, j0 = 0, rij = 7, gewicht = 
   return { cellen: uit, breed: w };
 }
 
-// Sitebreed veld: één vast canvas achter alle inhoud. De rust-stippen komen uit de css-achtergrond (html), dit canvas
-// tekent alleen wat oplicht. Golven starten vanaf elementen met data-stipgolf="kleur" (hover) en data-stipklik="kleur"
+// Sitebreed veld: één vast canvas tekent zowel de rust-stippen als de belichting. CSS is de fallback vóór initialisatie.
+// Beide lagen delen daardoor exact dezelfde rastercoördinaten. Golven starten vanaf elementen met data-stipgolf="kleur" (hover) en data-stipklik="kleur"
 // (klik, bijv. inloggen); data-stipburst geeft een kleurburst bij een klik.
 let site: Veld | null = null;
 export function siteVeld(): Veld | null {
@@ -311,7 +315,10 @@ export function siteVeld(): Veld | null {
   // 11 oktober 2026 (Marinus): "De stippen zelf zijn te groot, moet meer een achtergrond effect zijn." Het vaste veld tekent
   // dezelfde kleine stip als het raster in stippen.css (straal 1); oplichten maakt hem iets groter.
   c.dataset.straal = "1";
-  site = new Veld(c, { basis: null, vast: true, r: 1 });
+  // Basis en belichting gebruiken hetzelfde raster; CSS blijft fallback zonder canvas.
+  if (!c.getContext("2d")) { c.remove(); return null; }
+  site = new Veld(c, { basis: "rgba(255,255,255,.1)", vast: true, r: 1 });
+  if (site.W > 0 && site.H > 0) document.documentElement.classList.add("sn-stipveld-ready");
   // A short, soft trail illuminates the existing grid underneath the pointer.
   let laatsteMuis = -Infinity;
   document.addEventListener("pointermove", (e) => {
