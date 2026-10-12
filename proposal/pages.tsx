@@ -16,16 +16,15 @@ import {
   MapPin,
   MessageCircle,
 } from "lucide-react";
-import { HeroTitle } from "./styles";
+import HomeHeader, { HomeExplainer } from "./HomeHeader";
 import { MiloMotion, miloPoster } from "./motion";
 import { klein, useDichtbij, useNaBeeld } from "./licht";
 import CharacterAccent from "./CharacterAccent";
 import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import OsPeople from "./OsPeople";
-import TeamTrust, { INTEGRATIES, TeamJoin, Integraties } from "./TeamTrust";
+import { INTEGRATIES, TeamJoin, Integraties } from "./TeamTrust";
 import "./partner-intro.css";
 const PartnerIntro = later(() => import("./PartnerIntro").then((m) => m.default));
-import BrandConnection from "./BrandConnection";
 const VdzOutcome = later(() => import("./VdzOutcome").then((m) => m.default));
 const Verhaal = later(() => import("./Verhaal").then((m) => m.default));
 import { Bento, Tegel } from "./Bento";
@@ -101,35 +100,6 @@ function Film({ src, poster, label, titel, klasse, geluid, zetGeluid, boven }: {
 // 30 september 2026 (Marinus): "wel veel", "iets zakelijker en meer rust". Rechts alleen de OS-film; de
 // veiligheidsfilms staan onder de vouw (HeroVeilig). Home houdt bij welke film geluid heeft, één tegelijk.
 type HeroGeluid = "" | "os" | "veilig";
-// 30 september 2026: de poster is het eerste beeld van de hero; 1280 px WebP van 27 KB in plaats van een JPEG van 125 KB.
-const HERO_POSTER = "/video/os/os-booth-en-poster.webp";
-function HeroFilm({ geluid, setGeluid, children }: { geluid: HeroGeluid; setGeluid: (g: HeroGeluid) => void; children?: React.ReactNode }) {
-  const klaar = useNaBeeld(HERO_POSTER);
-  return (
-    <div className="h-hero-film h-hero-films is-os-veilig">
-      <Film
-        klasse="h-film-os"
-        src="/video/os/os-booth-en.mp4"
-        poster={HERO_POSTER}
-        label="SocialNow OS explainer"
-        titel="Zo werkt SocialNow OS"
-        boven={
-          // 26 september 2026 (Marinus): "Milo's klein boven How SocialNow OS works".
-          // 30 september 2026 (Marinus): header 4C, de vier Milo's als pillen met hun naam.
-          <div className="h-milo-pillen" translate="no">
-            {agents.slice(0, 4).map((agent) => (
-              <span key={agent.id} className="h-milo-pil"><MiloMotion role={agent.id} name={agent.name} maat={128} wacht={!klaar} /><b>{agent.name}</b></span>
-            ))}
-          </div>
-        }
-        geluid={geluid === "os"}
-        zetGeluid={(aan) => setGeluid(aan ? "os" : "")}
-      />
-      {children}
-    </div>
-  );
-}
-
 // 30 september 2026 (Marinus): "DEZE MOET JUIST LIGGEND ZIJN, IK EEN BLOK EN SID EEN BLOK ALS SPREKERS PLUS DEZE FOTO VAN
 // HEM, met de achtergrondkleur van Attesso" en "Deze nog groot maken en Attesso een belangrijk onderdeel, dat we dit echt samen
 // doen, lezingen geven". Liggend blok over de hele breedte: links de uitnodiging, rechts twee sprekers. Sid in Attesso-roze.
@@ -209,29 +179,13 @@ export function Home() {
         </div>
         <div className="h-wrap h-hero-content">
           <div className="h-hero-tekst">
-          {/* 26 september 2026 (Marinus): "op mijn header mag alle reclame weg". Geen stand, geen actie, geen
-              tellers meer; een persoonlijk bedankje en één duidelijke login voor het gratis OS. */}
-          {/* 26 september 2026 (Marinus): "SocialNow OS logo hoeft er niet bij, team er wel bij". */}
-          {/* 1 oktober 2026 (Marinus): "SocialNowOS mag gwn boven hier weg." Geen logo-animatie meer boven het team; het
-              SocialNow-logo staat al in de menubalk. */}
-          <TeamTrust />
-          <HeroTitle />
-          <ProductRoute />
-          <BrandConnection compact />
-          <ProductOffer />
-          {/* 30 september 2026 (Marinus): "na de Let's get SocialNow ... die inlog daar en daaronder de rest van de merken
-              en logo's". De login staat direct onder de kop; Odoo, Salesforce, Attesso, statement en demo volgen. */}
-          <div className="h-knoppen">
-            <div className="os-entry">
-              <OsDock held />
-            </div>
-          </div>
-
+            <HomeHeader />
           </div>
           <div className="h-product-milos">
-            <p className="h-film-titel">Je merk, je content en je team.</p>
+            <p className="h-film-titel">Je bedrijfsvoering. Alles verbonden.</p>
             <HeroMilos />
           </div>
+          <HomeExplainer />
           {/* 1 oktober 2026 (Marinus): "Die tekst moet mooi met die afbeeldingen uitgelijnd zijn." Statement en gezichtenmuur
               staan in één rij over beide kolommen; de eerste regel begint op de bovenkant van de portretten en de laatste
               eindigt op de onderkant. */}
@@ -363,9 +317,6 @@ export function Home() {
               </div>
             </div>
           </div>
-        </Tegel>
-        <Tegel kop="Het OS met Odoo" breed={12}>
-          <HeroFilm geluid={heroGeluid} setGeluid={setHeroGeluid} />
         </Tegel>
       </Bento>
       <Deuren />
