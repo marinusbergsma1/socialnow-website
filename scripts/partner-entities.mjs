@@ -21,6 +21,7 @@ const personFacts = [
   ["Carmel Boon", "carmel-boon", "https://www.linkedin.com/in/carmel-boon-984940136/"],
   ["Sam van der Sluis", "sam-van-der-sluis", "https://www.linkedin.com/in/sam-van-der-sluis-740781199/"],
   ["Emma Peperkamp", "emma-peperkamp"],
+  ["Isa Zoer", "isa-zoer"],
   ["Nick van Keulen", "nick-van-keulen", "https://www.linkedin.com/in/nick-van-keulen-nl/"],
   ["Elian Coellar", "elian-coellar"],
   ["Sid van Kalken", "sid-van-kalken", "https://www.linkedin.com/in/sid-van-kalken-65b486223/", "attesso", true],

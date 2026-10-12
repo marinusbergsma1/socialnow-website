@@ -35,6 +35,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
     role: "Lead Photographer",
     image: "Emma-Peperkamp-V2.webp",
   },
+  { name: "Isa Zoer", role: "UGC & Content Creation · Social Media", image: "Isa-Zoer.jpg", sinds: "2026-10-12" },
   { name: "Nick van Keulen", role: "Head of Google Ads & Search", image: "Nick-VK.webp", linkedin: "https://www.linkedin.com/in/nick-van-keulen-nl/" },
   // 25 september 2026 (Marinus): nieuw teamlid.
   { name: "Elian Coellar", role: "Head of Private Partnerships", image: "Elian-Coellar-2026-09-26.webp" },

@@ -123,6 +123,7 @@ for (const [route, meta] of Object.entries(routeMeta)) {
         person('Carmel Boon', 'Head of Video Production'),
         person('Sam van der Sluis', 'Lead Videographer'),
         person('Emma Peperkamp', 'Lead Photographer'),
+        person('Isa Zoer', 'UGC & Content Creation · Social Media'),
         person('Nick van Keulen', 'Head of Google Ads & Search'),
         person('Elian Coellar', 'Head of Private Partnerships'),
         person('Sid van Kalken', 'Head of Web Development & AI Payments'),
