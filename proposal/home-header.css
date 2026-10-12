@@ -1,5 +1,5 @@
 /* De gekozen preview op de homepage. Alle SocialNow-logo's staan direct op zwart. */
-:root .sn-site .h-hero > .h-hero-content { grid-template-columns: minmax(0, 1.4fr) minmax(0, .8fr); align-items: center; align-content: start; column-gap: clamp(32px, 4vw, 72px); }
+:root .sn-site .h-hero > .h-hero-content { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; align-content: start; column-gap: clamp(32px, 4vw, 72px); }
 :root .sn-site .h-hero .h-hero-content > .h-hero-tekst { max-width: none; align-self: center; }
 :root .sn-site .sn-home-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 0; width: 100%; }
 :root .sn-site .sn-home-copy .h-team-trust { margin: 0 0 28px; gap: 10px; max-width: 100%; }
@@ -22,25 +22,20 @@
 :root .sn-site .sn-home-cta { display: inline-flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 56px; padding: 14px 20px; background: #12883f; color: #fff; border: 1px solid #229a51; border-radius: 8px; font-size: 17px; font-weight: 700; text-decoration: none; }
 :root .sn-site .sn-home-cta:hover { background: #179c4b; }
 :root .sn-site .sn-home-secondary { background: #0b151f; border-color: #38516b; }
+:root .sn-site .sn-home-secondary > svg:first-child { width: 23px; height: 23px; flex: none; }
 :root .sn-site .sn-home-secondary:hover { background: #13253a; }
 :root .sn-site .sn-home-extras { display: flex; gap: 12px 22px; flex-wrap: wrap; margin-top: 22px; color: #a8c3b5; font-size: 14px; }
 :root .sn-site .sn-home-extras a { display: inline-flex; align-items: center; gap: 5px; text-decoration: none; }
 :root .sn-site .sn-home-extras a:hover { color: #5bd98d; }
 :root .sn-site .sn-home-extras svg { width: 17px; height: 17px; flex: none; }
-:root .sn-site .h-hero .h-product-milos { align-self: center; }
-:root .sn-site .h-hero .h-product-milos .h-hero-milos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-:root .sn-site .h-hero .h-product-milos .h-hero-milos > a { padding: 22px 12px; background: #0009; border-radius: 13px; }
-:root .sn-site .h-hero .h-product-milos .h-hero-milos > a > span:last-child { display: none; }
-:root .sn-site .h-hero .h-product-milos .h-hero-milos strong { font-size: 21px; }
-:root .sn-site .sn-home-explainer { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(240px, .65fr) minmax(0, 1.35fr); align-items: center; gap: 48px; padding: 40px 0; margin: 50px 0 10px; border-block: 1px solid #ffffff20; scroll-margin-top: 100px; }
+:root .sn-site .sn-home-explainer { grid-column: 2; grid-row: 1; display: flex; flex-direction: column; align-items: stretch; gap: 22px; padding: 0; margin: 0; border: 0; scroll-margin-top: 100px; min-width: 0; }
 :root .sn-site .sn-home-eyebrow { color: #5bd98d; font-size: 14px; font-weight: 700; margin: 0 0 12px; }
-:root .sn-site .sn-home-explainer h2 { color: #fff; font-size: clamp(28px, 2.5vw, 42px) !important; line-height: 1.1; margin: 0 0 16px; }
+:root .sn-site .sn-home-explainer h2 { color: #fff; font-size: clamp(25px, 2.2vw, 34px) !important; line-height: 1.1; margin: 0 0 16px; }
 :root .sn-site .sn-home-explainer-intro > p:last-child { color: #b3c2bc; font-size: 18px; line-height: 1.4; margin: 0; }
 :root .sn-site .sn-home-explainer video { width: 100%; height: auto; aspect-ratio: 16 / 9; display: block; background: #000; border: 1px solid #ffffff24; border-radius: 12px; }
 @media (max-width: 1099px) {
   :root .sn-site .h-hero > .h-hero-content { display: grid; grid-template-columns: 1fr; }
-  :root .sn-site .h-hero .h-product-milos { margin-top: 32px; }
-  :root .sn-site .sn-home-explainer { grid-template-columns: 1fr; gap: 22px; margin-top: 32px; }
+  :root .sn-site .sn-home-explainer { grid-column: 1; grid-row: auto; gap: 22px; margin-top: 32px; }
 }
 @media (max-width: 600px) {
   :root .sn-site .h-hero .sn-home-title { font-size: 42px !important; }

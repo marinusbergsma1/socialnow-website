@@ -59,7 +59,6 @@ import {
   Action,
   AgentCards,
   ConversionBridge,
-  HeroMilos,
   Heading,
   MiloPortrait,
   PageHeading,
@@ -180,10 +179,6 @@ export function Home() {
         <div className="h-wrap h-hero-content">
           <div className="h-hero-tekst">
             <HomeHeader />
-          </div>
-          <div className="h-product-milos">
-            <p className="h-film-titel">Je bedrijfsvoering. Alles verbonden.</p>
-            <HeroMilos />
           </div>
           <HomeExplainer />
           {/* 1 oktober 2026 (Marinus): "Die tekst moet mooi met die afbeeldingen uitgelijnd zijn." Statement en gezichtenmuur
