@@ -45,3 +45,5 @@
   :root .sn-site .sn-home-pain span { font-size: 12px; }
   :root .sn-site .sn-home-copy .h-team-trust { flex-direction: column; align-items: flex-start; }
 }
+
+:root .sn-site .sn-home-explainer-logo { display: block; width: 260px; max-width: 100%; height: auto; margin: 0 0 20px; background: #000; }

@@ -317,9 +317,9 @@ export function siteVeld(): Veld | null {
   document.addEventListener("pointermove", (e) => {
     if (e.pointerType !== "mouse" || minderBeweging() || !site) return;
     const nu = performance.now();
-    if (nu - laatsteMuis < 140) return;
+    if (nu - laatsteMuis < 45) return;
     laatsteMuis = nu;
-    site.golf(e.clientX + scrollX, e.clientY + scrollY, "blauw", { straal: 150, duur: .55, breed: 80, sterkte: .55 });
+    site.golf(e.clientX + scrollX, e.clientY + scrollY, "groen", { straal: 48, duur: .45, breed: 35, sterkte: .95 });
   }, { passive: true });
   const laatst = new WeakMap<Element, number>();
   const kleurVan = (v: string | undefined): Kleur => (v && v !== "" ? v : "groen") as Kleur;
@@ -341,7 +341,8 @@ export function siteVeld(): Veld | null {
   document.addEventListener("pointerup", (e) => { if ((e as PointerEvent).pointerType === "touch") tegelGolf(e.target); });
   // Klik op een groene knop (inloggen, starten): groene golf vanaf de knop. data-stipburst: kleurburst.
   document.addEventListener("click", (e) => {
-    const el = (e.target as Element)?.closest?.("[data-stipklik],[data-stipburst],a.os-claim,.h-button:not(.h-button-secondary)") as HTMLElement | null; if (!el || !site) return;
+    const el = (e.target as Element)?.closest?.("[data-stipklik],[data-stipburst],a.os-claim,.h-button:not(.h-button-secondary)") as HTMLElement | null; if (!site) return;
+    if (!el) { site.burst(e.clientX + scrollX, e.clientY + scrollY, { straal: 320, duur: .8 }); return; }
     const [x, y] = site.midden(el);
     if (el.dataset.stipburst !== undefined) site.burst(x, y); else site.golf(x, y, kleurVan(el.dataset.stipklik), { duur: 2 });
   });
