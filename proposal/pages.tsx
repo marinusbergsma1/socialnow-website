@@ -25,6 +25,7 @@ import { LanguageContext, translate, useLanguage } from "./i18n/context";
 import OsPeople from "./OsPeople";
 import { INTEGRATIES, Integraties } from "./TeamTrust";
 import "./partner-intro.css";
+import StoryPlayer from "./StoryPlayer";
 const PartnerIntro = later(() => import("./PartnerIntro").then((m) => m.default));
 const VdzOutcome = later(() => import("./VdzOutcome").then((m) => m.default));
 const Verhaal = later(() => import("./Verhaal").then((m) => m.default));
@@ -200,9 +201,7 @@ export function Home() {
                 <p className="h-story-signoff">Software is a tool. <strong>We are SocialNow!</strong></p>
               </header>
               <figure className="h-story-player">
-                <video controls playsInline preload="none" poster="/video/verhaal/story-presentatie-poster.jpg" aria-label="The story of Marinus Bergsma">
-                  <source src="/video/verhaal/story-presentatie.mp4" type="video/mp4" />
-                </video>
+                <StoryPlayer />
                 <figcaption><strong>Marinus Bergsma</strong><span>Founder &amp; CEO · Our story</span></figcaption>
               </figure>
             </section>

@@ -550,3 +550,13 @@ html.is-concept .h-milo-launcher { bottom: 48px; }
 :root .sn-site .h-story-details { display: grid; align-content: start; gap: 24px; min-width: 0; }
 :root .sn-site .h-story-details > .h-partner-uitleg { align-self: start; }
 :root .sn-site .h-partner-aanmelden { display: inline-flex; align-items: center; gap: 14px; margin-top: 22px; padding: 12px 18px; text-decoration: none; }
+
+/* Duidelijke startbediening, ook wanneer de ingebouwde videoknop niet reageert. */
+:root .sn-site .h-story-video-wrap { position: relative; }
+:root .sn-site .h-story-start { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 16px; border-radius: 12px; background: #00000012; }
+:root .sn-site .h-story-play { display: inline-flex; align-items: center; gap: 12px; padding: 14px 22px; border: 1px solid #25d36666; border-radius: 10px; background: #12883f; color: #fff; font: 600 16px 'TT Norms', sans-serif; cursor: pointer; box-shadow: var(--sn-card-glow); }
+:root .sn-site .h-story-play span { color: #fff; }
+:root .sn-site .h-story-play:disabled { cursor: wait; }
+:root .sn-site .h-story-play:focus-visible { outline: 3px solid #25d366; outline-offset: 4px; }
+:root .sn-site .h-story-start p { margin: 0; padding: 8px 12px; border-radius: 6px; background: #fff; color: #0b0f12; font-size: 14px; }
+:root .sn-site .h-story-start a { color: #12883f; text-decoration: underline; }
