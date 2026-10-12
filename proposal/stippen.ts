@@ -312,6 +312,15 @@ export function siteVeld(): Veld | null {
   // dezelfde kleine stip als het raster in stippen.css (straal 1); oplichten maakt hem iets groter.
   c.dataset.straal = "1";
   site = new Veld(c, { basis: null, vast: true, r: 1 });
+  // A short, soft trail illuminates the existing grid underneath the pointer.
+  let laatsteMuis = -Infinity;
+  document.addEventListener("pointermove", (e) => {
+    if (e.pointerType !== "mouse" || minderBeweging() || !site) return;
+    const nu = performance.now();
+    if (nu - laatsteMuis < 140) return;
+    laatsteMuis = nu;
+    site.golf(e.clientX + scrollX, e.clientY + scrollY, "blauw", { straal: 150, duur: .55, breed: 80, sterkte: .55 });
+  }, { passive: true });
   const laatst = new WeakMap<Element, number>();
   const kleurVan = (v: string | undefined): Kleur => (v && v !== "" ? v : "groen") as Kleur;
   // Een bentotegel geeft bij hover een golf in zijn eigen kleur (rand groen, blauw, roze of geel; gewone tegel groen).

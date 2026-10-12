@@ -54,7 +54,6 @@ export default function BrandGlobe() {
     );
     const interaction = (stage.closest(".h-hero") || stage) as HTMLElement;
     const mobile = window.innerWidth <= 600;
-    const points = createGlobePoints(mobile ? 0.55 : 1);
     const frameInterval = 1000 / (mobile ? 24 : 30);
     let width = 0;
     let height = 0;
@@ -83,7 +82,7 @@ export default function BrandGlobe() {
     const draw = () => {
       if (width <= 0 || height <= 0) return;
       const radius = Math.min(width * 0.34, height * 0.49);
-      const angleY = 0.3 + time * 0.085 + tiltX;
+      const angleY = 0.3 + time * 0.22 + tiltX;
       const angleX = -0.1 + tiltY;
       const cosY = Math.cos(angleY);
       const sinY = Math.sin(angleY);
@@ -91,26 +90,42 @@ export default function BrandGlobe() {
       const sinX = Math.sin(angleX);
       context.clearRect(0, 0, width, height);
 
-      // 11 oktober 2026 (Marinus: "De globes ook in het dotraster"): de bollen tekenen geen eigen puntjes meer, maar
-      // belichten de stippen van het sitebrede raster van 32 px (proposal/stippen.css). Elk punt valt in de dichtstbijzijnde
-      // rastercel; per cel telt het punt dat het meest vooraan ligt. Zo draait de bol door het raster heen. Geen sortering
-      // en geen nieuwe objecten per beeld: per cel wint gewoon het voorste punt.
+      // Sample the rotating surface at the existing page-grid dots. Meridians and
+      // latitude bands make rotation visible without moving or adding any dots.
       cellen.clear();
-      for (const point of points) {
-        const x = point.x * cosY - point.z * sinY;
-        const z = point.x * sinY + point.z * cosY;
-        const y = point.y * cosX - z * sinX;
-        const depth = point.y * sinX + z * cosX;
-        const front = (depth / point.sphere.radius + 1) / 2;
-        const px = width / 2 + (x + point.sphere.x) * radius, py = height / 2 + (y + point.sphere.y) * radius;
-        const i = Math.round((px - gridX) / GRID), j = Math.round((py - gridY) / GRID);
-        const key = j * 4096 + i, oud = cellen.get(key);
-        if (!oud) cellen.set(key, { front, color: point.sphere.color });
-        else if (front > oud.front) { oud.front = front; oud.color = point.sphere.color; }
+      for (const sphere of spheres) {
+        const R = sphere.radius * radius;
+        const cx = width / 2 + sphere.x * radius;
+        const cy = height / 2 + sphere.y * radius;
+        const i0 = Math.max(0, Math.ceil((cx - R - gridX) / GRID));
+        const i1 = Math.floor((cx + R - gridX) / GRID);
+        const j0 = Math.max(0, Math.ceil((cy - R - gridY) / GRID));
+        const j1 = Math.floor((cy + R - gridY) / GRID);
+        for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) {
+          const x = (gridX + i * GRID - cx) / R;
+          const y = (gridY + j * GRID - cy) / R;
+          const distance = x * x + y * y;
+          if (distance >= 1) continue;
+          const z = Math.sqrt(1 - distance);
+          // Inverse rotation maps a screen dot onto the spinning sphere.
+          const sy = y * cosX + z * sinX;
+          const sz = z * cosX - y * sinX;
+          const sx = x * cosY + sz * sinY;
+          const depth = sz * cosY - x * sinY;
+          const longitude = Math.atan2(sx, depth);
+          const latitude = Math.asin(Math.max(-1, Math.min(1, sy)));
+          const meridian = Math.exp(-Math.pow(Math.sin(longitude * 6) / .19, 2));
+          const parallel = Math.exp(-Math.pow(Math.sin(latitude * 5) / .2, 2));
+          const surface = .5 + .5 * Math.sin(longitude * 3 + Math.sin(latitude * 4));
+          const front = Math.min(1, (.3 + surface * .25 + Math.max(meridian, parallel) * .45) * (.55 + z * .45));
+          const key = j * 4096 + i;
+          const old = cellen.get(key);
+          if (!old || front > old.front) cellen.set(key, { front, color: sphere.color });
+        }
       }
       for (const [key, cel] of cellen) {
         const i = key % 4096, j = (key - i) / 4096;
-        context.globalAlpha = 0.3 + cel.front * 0.7;
+        context.globalAlpha = 0.4 + cel.front * 0.6;
         context.fillStyle = cel.color;
         context.beginPath();
         context.arc(gridX + i * GRID, gridY + j * GRID, 1 + cel.front * 0.6, 0, 7);
