@@ -75,3 +75,5 @@
 
 :root .sn-site .sn-video-direct { margin: -10px 0 0; font-size: 13px; color: #b3c2bc; }
 .sn-video-direct a { text-decoration: underline; text-underline-offset: 4px; }
+
+.sn-home-play { text-decoration: none; }

@@ -34,7 +34,6 @@ export default function HomeHeader() {
 export function HomeExplainer() {
   const video = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
-  const [failed, setFailed] = useState(false);
   return <section className="sn-home-explainer" id="os-explainer" aria-labelledby="sn-explainer-title">
     <div className="sn-home-explainer-intro">
       <img className="sn-home-explainer-logo" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="140" />
@@ -46,8 +45,8 @@ export function HomeExplainer() {
       <source src="/video/os/socialnow-os-explainer.mp4?v=20261012-player2" type="video/mp4" />
       <a href="/video/os/socialnow-os-explainer.mp4?v=20261012-player2">Bekijk de SocialNow OS explainer</a>
     </video>
-    {!playing && <button className="sn-home-play" type="button" onClick={() => { setFailed(false); video.current?.play().catch(() => setFailed(true)); }}><Play size={20} aria-hidden="true" />Speel de explainer af</button>}
+    {!playing && <a className="sn-home-play" href="/video/os/socialnow-os-explainer.mp4?v=20261012-player2" target="_blank" rel="noopener"><Play size={20} aria-hidden="true" />Bekijk de explainer ↗</a>}
     </div>
-    <p className="sn-video-direct" role={failed ? "status" : undefined}><a href="/video/os/socialnow-os-explainer.mp4?v=20261012-player2" target="_blank" rel="noopener">{failed ? "Starten lukt niet? Open de video rechtstreeks ↗" : "Open de video in een aparte speler ↗"}</a></p>
+    <p className="sn-video-direct" ><a href="/video/os/socialnow-os-explainer.mp4?v=20261012-player2" target="_blank" rel="noopener">Open de video in een aparte speler ↗</a></p>
   </section>;
 }
