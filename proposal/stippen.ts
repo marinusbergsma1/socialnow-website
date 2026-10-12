@@ -304,8 +304,8 @@ export function tekstCellen(tekst: string, { i0 = 0, j0 = 0, rij = 7, gewicht = 
 }
 
 // Sitebreed veld: één vast canvas tekent zowel de rust-stippen als de belichting. CSS is de fallback vóór initialisatie.
-// Beide lagen delen daardoor exact dezelfde rastercoördinaten. Golven starten vanaf elementen met data-stipgolf="kleur" (hover) en data-stipklik="kleur"
-// (klik, bijv. inloggen); data-stipburst geeft een kleurburst bij een klik.
+// Beide lagen delen daardoor exact dezelfde rastercoördinaten. Alleen de muisreactie en een groene golf bij een klik
+// belichten de achtergrond; een sectie binnengaan of erlangs scrollen start geen golf.
 let site: Veld | null = null;
 export function siteVeld(): Veld | null {
   if (site || typeof document === "undefined") return site;
@@ -328,24 +328,6 @@ export function siteVeld(): Veld | null {
     laatsteMuis = nu;
     site.golf(e.clientX + scrollX, e.clientY + scrollY, "groen", { straal: 64, duur: .16, breed: 40, sterkte: 1 });
   }, { passive: true });
-  const laatst = new WeakMap<Element, number>();
-  const kleurVan = (v: string | undefined): Kleur => (v && v !== "" ? v : "groen") as Kleur;
-  // Een bentotegel geeft bij hover een golf in zijn eigen kleur (rand groen, blauw, roze of geel; gewone tegel groen).
-  const tegelKleur = (el: Element): Kleur => {
-    const t = el.closest(".sn-tegel"); if (!t) return "groen";
-    for (const k of ["blauw", "roze", "geel"] as const) if (t.classList.contains(`is-${k}`)) return k;
-    return "groen";
-  };
-  // Muis: golf bij hover. Touch: geen hover-golven (pointerover van een vinger telt niet), wel een golf bij een tik
-  // (pointerup; scrollen geeft pointercancel en dus geen golf).
-  const tegelGolf = (doel: EventTarget | null) => {
-    const el = (doel as Element)?.closest?.("[data-stipgolf], .sn-tegel:not(.is-film):not(.is-foto) > .sn-tegel-vlak"); if (!el || !site) return;
-    const n = performance.now(); if (n - (laatst.get(el) || 0) < 300) return; laatst.set(el, n);
-    const ds = (el as HTMLElement).dataset.stipgolf;
-    const [x, y] = site.midden(el); site.golf(x, y, ds !== undefined ? kleurVan(ds) : tegelKleur(el), { straal: 900, duur: .55, sterkte: .9 });
-  };
-  document.addEventListener("pointerover", (e) => { if ((e as PointerEvent).pointerType !== "touch") tegelGolf(e.target); });
-  document.addEventListener("pointerup", (e) => { if ((e as PointerEvent).pointerType === "touch") tegelGolf(e.target); });
   // Elke klik geeft één groene golf vanaf de klikplek, ook op de lege achtergrond.
   // Keyboard clicks have no pointer coordinates, so start those at the focused control.
   document.addEventListener("click", (e) => {
