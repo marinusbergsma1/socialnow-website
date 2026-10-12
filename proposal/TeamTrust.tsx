@@ -140,10 +140,7 @@ function DuoTegel({ naam }: { naam: string }) {
   </figure>;
 }
 
-// 11 oktober 2026 (Marinus, bij een schermafdruk van deze tegels): "deze tiles moeten nog aangepast en zitten letters nog
-// met elkaar verbonden op mobiel." Vaste regel: partnertegels altijd als de donkere kaarten van het story-document
-// (business.socialnow.nl/hossam.html, .team-duo in presentatie-jeroen-20261008/deploy/middleware.js). Geen vlak achter een
-// logo, namen in de merkletter in plaats van vette mono. Opmaak in partner-colors.css.
+// Partnertegels: namen in de merkletter, kleuren in partner-colors.css.
 // 11 oktober 2026 (Marinus: "bij iedereen een tekstje, net als in het businessplan"). Uit het businessplan en de
 // groepspresentatie van 11 oktober; Nederlandse bron, vertalingen in proposal/i18n.
 const PERSOON_TEKST: Record<string, string> = {
@@ -171,7 +168,7 @@ export function PartnerKoppen({ soort }: { soort: "sn" | "attesso" | "fincer" })
     <a href="https://www.komenconsultancy.com/" target="_blank" rel="noopener noreferrer"><img src="/images/merken/komen-operation-systems.webp" alt="Komen Consultancy Operation Systems" width="600" height="95" loading="lazy" /></a>
   </span>;
   if (soort === "attesso") return <a href="https://www.attesso.com/" target="_blank" rel="noopener noreferrer" aria-label="Attesso"><code>~/attesso</code></a>;
-  return <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener noreferrer" aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer-wit.png" alt="Fincer" width="600" height="144" loading="lazy" /></a>;
+  return <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener noreferrer" aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer.png" alt="Fincer" width="600" height="144" loading="lazy" /></a>;
 }
 
 // 11 oktober 2026 (Marinus): "Kunnen er ook teksten bij? Kijk naar wat er eerder al was geschreven in de video." Zin en labels

@@ -1,15 +1,10 @@
-/* Late partner overrides: import after the existing proposal styles.
-   11 oktober 2026, vaste regel van Marinus: partnertegels altijd als de donkere kaarten van het story-document
-   (business.socialnow.nl/hossam.html, .team-duo in presentatie-jeroen-20261008/deploy/middleware.js). Donkere kaarten op
-   #06080d, hoek 20px; SocialNow × Komen #102219→#09140e rand #37915b, ~/attesso als mono-tekst #f3c6e8 #251a28→#100d14
-   rand #925789, Fincer (fincer-wit.png) #162137→#0c1320 rand #4776aa. Nooit een vlak achter een logo, geen lichte tegels.
-   Namen en functies in de merkletter: vette mono liep op mobiel tegen elkaar aan ("zitten letters nog met elkaar verbonden").
-   Homepage: .h-duo in .h-team-kern. /team: .h-team-duo in .h-teams-duo. Proef: scripts/proef-partnertegels.mjs. */
+/* Partnerkleuren voor homepage en /team. 12 oktober 2026: geen zwarte buitenrand;
+   Attesso roze, Fincer blauw en Albert warm licht, met donkere leesbare tekst. */
 :root .sn-site .h-team-kern,
 :root .sn-site .h-teams-duo {
-  padding: 14px;
-  border-radius: 20px;
-  background: #06080d;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
   gap: 14px;
 }
 
@@ -122,7 +117,7 @@
 :root .sn-site .h-team-duo .sn-reference-wordmark b { color: #f3c6e8; font-size: 13px; letter-spacing: 0.04em; overflow-wrap: normal; }
 
 @media (max-width: 640px) {
-  :root .sn-site .h-team-kern, :root .sn-site .h-teams-duo { padding: 10px; }
+  :root .sn-site .h-team-kern, :root .sn-site .h-teams-duo { padding: 0; }
   :root .sn-site .h-duo, :root .sn-site .h-team-duo { padding: 14px; }
   :root .sn-site .h-duo.is-fincer .h-duo-rij { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   :root .sn-site .h-duo.is-fincer .h-fincer-toelichting { padding: 0 4px; }
@@ -351,3 +346,19 @@
 /* Ronde 4: per persoon een tekstje onder de functie (businessplan, 11 oktober 2026). */
 :root .sn-site .h-duo figcaption .h-persoon-tekst { display: block; margin-top: 6px; color: #aeb7c4; font-family: "TT Norms", Arial, sans-serif; font-size: 12.5px; font-weight: 400; line-height: 1.4; letter-spacing: 0; overflow-wrap: normal; }
 @media (max-width: 640px) { :root .sn-site .h-duo figcaption .h-persoon-tekst { margin-top: 4px; font-size: 12px; } }
+
+/* Lichte partnerkaarten, met voldoende contrast op alle schermformaten. */
+:root .sn-site :is(.h-duo, .h-team-duo).is-attesso { background: linear-gradient(160deg, #fbeef8, #f0dff2); border-color: #d8b9d4; color: #342738; }
+:root .sn-site :is(.h-duo, .h-team-duo).is-fincer { background: linear-gradient(160deg, #eef5fc, #dfeafa); border-color: #b7cee8; color: #24364d; }
+:root .sn-site :is(.h-duo, .h-team-duo):is(.is-attesso, .is-fincer) :is(figure, .h-portrait) { background: #fff; border-color: #ffffff; }
+:root .sn-site :is(.h-duo, .h-team-duo):is(.is-attesso, .is-fincer) :is(figcaption, figcaption b, figcaption strong, figcaption a, .h-duo-tekst strong, .h-fincer-toelichting strong, .h-duo-kop, .h-team-duo-label) { color: #222b36; }
+:root .sn-site :is(.h-duo, .h-team-duo):is(.is-attesso, .is-fincer) :is(figcaption i, figcaption > span, .h-persoon-tekst, .h-fincer-toelichting, .h-fincer-toelichting p, .sn-reference-label) { color: #495565; }
+:root .sn-site :is(.h-duo, .h-team-duo).is-attesso :is(.h-duo-kop code, .h-team-duo-label code, .h-duo-tags, .sn-reference-wordmark, .sn-reference-wordmark b) { color: #7d3f75; }
+:root .sn-site .h-duo.is-fincer .h-duo-tags { color: #285e98; }
+:root .sn-site :is(.h-team-duo.is-attesso, .h-team-duo.is-fincer) .sn-reference-link img { filter: none; }
+:root .sn-site .h-team-duo.is-fincer .sn-reference-link img[src*="fincer.png"] { content: normal; }
+:root .sn-site .sn-advisory { background: linear-gradient(160deg, #fff6eb, #f6e8d7); border: 1px solid #e6c9a6; color: #39281c; }
+:root .sn-site .sn-advisory-copy > small { color: #82552e; }
+:root .sn-site .sn-advisory :is(h3, h3 a, .sn-advisory-copy > p, .sn-advisory-copy > strong) { color: #39281c; }
+
+:root .sn-site .h-hero .h-duo.is-fincer .h-fincer-toelichting p { color: #495565; }

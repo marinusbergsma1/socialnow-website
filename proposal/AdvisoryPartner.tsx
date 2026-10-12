@@ -31,7 +31,7 @@ export default function AdvisoryPartner() {
       <p>{text.experience}</p>
       <p>{text.intro}</p>
       <a className="sn-advisory-logo" href="https://www.eltlive.com/" target="_blank" rel="noopener noreferrer" aria-label="ELT Live">
-        <img src="/images/merken/elt-live-licht.webp" alt="ELT Live · Strategic Live Communication" width="1000" height="250" loading="lazy" decoding="async" />
+        <img src="/images/merken/elt-live.webp" alt="ELT Live · Strategic Live Communication" width="1000" height="250" loading="lazy" decoding="async" />
       </a>
     </div>
   </article>;
