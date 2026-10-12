@@ -191,21 +191,21 @@ export function Home() {
             {/* 4 oktober 2026 (Marinus): "links moet er even wat meer tekst", "En tie tekst die ik zet echt ook weer in een eigen
                 sectie'tje". Statement en het verhaal van Marinus staan samen links; het verhaal in een eigen vak. */}
             <div className="h-team-links">
-            <div className="h-statement is-r1" translate="no">
-              {/* 30 september 2026 (Marinus): "Dit is helemaal niet in deze stijl, LOS DAT OP", met versie R1 als voorbeeld:
-                  alle regels even groot, per regel eerst dun en dan dik, het groene deel dik, de punt wit. */}
-              <p className="h-sr"><span className="d">Proven, branded,</span> <b>fully automated!</b></p>
-              <p className="h-sr"><span className="d">Everyone can automate a business.</span> <b className="g">No one can automate people who care</b><b>.</b></p>
-              <p className="h-sr"><span className="d">Software is a tool.</span> <b>We are SocialNow!</b></p>
-            </div>
-            <div className="h-team-verhaal" translate="no">
-              <p className="h-team-verhaal-kop">Why I started</p>
-              <p>I grew up in a <strong>family of makers</strong>. My father is an artist who worked <strong>from early morning until late at night</strong>. My mother is a teacher and therapist.</p>
-              <p>What they taught me: <strong>you can become anything you want, as long as you work hard for it.</strong></p>
-              <p><strong>For over 5 years</strong>, we have connected the <strong>biggest brands</strong> with the right <strong>creatives and consultants</strong>. AI makes this <strong>scalable, worldwide</strong>.</p>
-              <p>Our goal: changing Big Tech and Big Corp, and creating a <strong>free, fair and social economy</strong>.</p>
-              <div className="h-team-verhaal-naam"><img {...klein("marinus-profiel-blauw.webp", 40)} alt="" width="40" height="40" loading="lazy" /><span><strong>Marinus Bergsma</strong><i>Founder &amp; CEO</i></span></div>
-            </div>
+            {/* 12 oktober 2026: het statement als titel, met de storyfilm direct eronder. */}
+            <section className="h-story-intro" aria-labelledby="h-story-title" translate="no">
+              <header className="h-story-heading">
+                <p className="h-story-kicker">Proven, branded, <strong>fully automated!</strong></p>
+                <p className="h-story-lead">Everyone can automate a business.</p>
+                <h2 id="h-story-title">No one can automate <span>people who care.</span></h2>
+                <p className="h-story-signoff">Software is a tool. <strong>We are SocialNow!</strong></p>
+              </header>
+              <figure className="h-story-player">
+                <video controls playsInline preload="none" poster="/video/verhaal/story-presentatie-poster.jpg" aria-label="The story of Marinus Bergsma">
+                  <source src="/video/verhaal/story-presentatie.mp4" type="video/mp4" />
+                </video>
+                <figcaption><strong>Marinus Bergsma</strong><span>Founder &amp; CEO · Our story</span></figcaption>
+              </figure>
+            </section>
             {/* 11 oktober 2026: onder de vouw van de hero, niet in het eerste script (budget 120 KB gzip). */}
             <OnderDeVouw ruimte={false}><PartnerIntro /><VdzOutcome /></OnderDeVouw>
             </div>
@@ -215,8 +215,6 @@ export function Home() {
           {/* 5 oktober 2026 (Marinus): de witte Talking to-balk (René van der Zel, XXL Nutrition, logoslider) "mag weg". */}
           <HeroSprekers />
           <HeroVeilig geluid={heroGeluid} setGeluid={setHeroGeluid} />
-          {/* 30 september 2026 (Marinus): "Deze video mag weg want daaronder doe ik al mijn verhaal." My story staat niet meer
-              in de header; het verhaal volgt in Verhaal onder de hero. */}
         </div>
       </section>
       {/* 11 oktober 2026 (Marinus): "FREE WEBSITE, groen vlak", direct onder de hero; anker #free-website. */}

@@ -14,7 +14,7 @@
 :root .sn-site .sn-home-human { font-size: clamp(26px, 2.5vw, 40px); font-weight: 700; line-height: 1.15; color: #5bd98d; margin: 0 0 21px; }
 :root .sn-site .sn-home-lead { font-size: clamp(19px, 1.35vw, 23px); line-height: 1.4; color: #e0e8e3; margin: 0; max-width: 620px; }
 :root .sn-site .sn-home-connect { font-size: 17px; line-height: 1.45; color: #b3c2bc; margin: 10px 0 0; max-width: 620px; }
-:root .sn-site .sn-home-offer { margin-top: 26px; background: #000; }
+:root .sn-site .sn-home-offer { margin-top: 26px; background: transparent; }
 :root .sn-site .sn-home-offer img { display: block; width: 285px; max-width: 100%; height: auto; }
 :root .sn-site .sn-home-offer p { display: grid; gap: 5px; margin: 13px 0 0; font-size: 18px; color: #b9c8c0; line-height: 1.35; }
 :root .sn-site .sn-home-offer strong { font-size: 21px; color: #5bd98d; }

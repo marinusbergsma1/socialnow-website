@@ -6,7 +6,6 @@ import LinkedInMark from "./LinkedInMark";
 import { people } from "./content";
 import { TextLink } from "./ui";
 import { Bento, BentoFilm, Tegel } from "./Bento";
-import { useLanguage } from "./i18n/context";
 import { klein } from "./licht";
 import { VideoSlider } from "./MediaSliders";
 
@@ -15,12 +14,6 @@ import { VideoSlider } from "./MediaSliders";
 // te hebben met HyperFrames en kleine tekst over mijn waarom en onze achtergrond", en daarna: "alle onderdelen als kleine
 // bentogrids, net zoals de homepage wanneer je daarop landt". Bovenaan portret, waarom en film; daaronder het verhaal in
 // acht tegels die op de telefoon zijwaarts swipen. Brontekst en bronnen: ~/Downloads/website-verhaal-2026-09-28/VERHAAL.md.
-
-// De verhaalfilm uit HyperFrames. Zolang die er nog niet is, staat het waarom groot op zijn plek.
-const VERHAALFILM: { en: string; nl: string; poster: { en: string; nl: string } } | null = {
-  en: "/video/verhaal/verhaal-en.mp4", nl: "/video/verhaal/verhaal-nl.mp4",
-  poster: { en: "/video/verhaal/verhaal-en-poster.webp", nl: "/video/verhaal/verhaal-nl-poster.webp" },
-};
 
 export function OdooLogo({ className }: { className?: string }) {
   return (
@@ -134,8 +127,6 @@ function Waarom({ groot }: { groot?: boolean }) {
 }
 
 export default function Verhaal() {
-  const { language } = useLanguage();
-  const film = VERHAALFILM;
   return (
     <>
       <Bento
@@ -149,23 +140,12 @@ export default function Verhaal() {
           {/* 5 oktober 2026 (Marinus): "Ik ben verder ook geen 5 jaar in November maar SocialNow." */}
           <span className="h-verhaal-jaren"><b>5</b>jaar SocialNow in november</span>
         </Tegel>
-        {film ? (
-          <Tegel kop="Mijn verhaal in één minuut" breed={8} soort="film">
-            <BentoFilm src={language === "nl" ? film.nl : film.en} poster={language === "nl" ? film.poster.nl : film.poster.en} label="Het verhaal van Marinus Bergsma" geluid={false} />
-          </Tegel>
-        ) : (
-          <Tegel kop="Mijn waarom" breed={8}>
-            <Waarom groot />
-          </Tegel>
-        )}
-        {film && (
-          <Tegel kop="Mijn waarom" breed={12}>
-            <Waarom />
-            <HeroReview />
-            <LightArtStrook />
-            <div className="sn-tegel-onder"><TextLink to="/projecten">Bekijk het werk achter mijn verhaal</TextLink></div>
-          </Tegel>
-        )}
+        <Tegel kop="Mijn waarom" breed={8}>
+          <Waarom />
+          <HeroReview />
+          <LightArtStrook />
+          <div className="sn-tegel-onder"><TextLink to="/projecten">Bekijk het werk achter mijn verhaal</TextLink></div>
+        </Tegel>
       </Bento>
       <Bento className="h-verhaal-hoofdstukken">
         {HOOFDSTUKKEN.map((hoofdstuk) => (

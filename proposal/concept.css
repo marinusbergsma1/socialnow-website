@@ -503,3 +503,45 @@ html.is-concept .h-milo-launcher { bottom: 48px; }
   :root .sn-site .h-os-dock.is-held .is-compact .h-dock-platforms { display: flex; grid-template-columns: none; }
   :root .sn-site .h-os-dock.is-held .h-dock-icoon { padding: 0; }
 }
+
+/* 12 oktober 2026: compacte titel en storyfilm op de plek van de losse tekstregels. */
+:root .sn-site .h-story-intro { min-width: 0; overflow: hidden; border-radius: 16px; background: #07140e; color: #fff; }
+:root .sn-site .h-story-heading { padding: clamp(22px, 2.8vw, 40px); }
+:root .sn-site .h-story-kicker { margin: 0 0 26px; color: #b7c8bd; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.4; }
+:root .sn-site .h-story-kicker strong { color: #fff; }
+:root .sn-site .h-story-lead { margin: 0 0 10px; color: #b7c8bd; font-size: clamp(17px, 1.45vw, 21px); line-height: 1.4; }
+:root .sn-site .h-story-heading h2 { margin: 0; color: #fff; font-size: clamp(32px, 3.3vw, 52px); font-weight: 700; line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }
+:root .sn-site .h-story-heading h2 span { color: #80eba4; }
+:root .sn-site .h-story-signoff { margin: 24px 0 0; padding-top: 18px; border-top: 1px solid #ffffff24; font-size: clamp(16px, 1.4vw, 20px); line-height: 1.5; color: #b7c8bd; }
+:root .sn-site .h-story-signoff strong { color: #fff; }
+:root .sn-site .h-story-player { margin: 0; background: #030906; }
+:root .sn-site .h-story-player video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
+:root .sn-site .h-story-player figcaption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 14px; padding: 16px 22px; font-size: 14px; line-height: 1.4; color: #b7c8bd; }
+:root .sn-site .h-story-player figcaption strong { color: #fff; }
+@media (max-width: 600px) {
+  :root .sn-site .h-story-heading { padding: 24px 20px; }
+  :root .sn-site .h-story-kicker { margin-bottom: 24px; }
+  :root .sn-site .h-story-player figcaption { padding: 14px 20px; }
+}
+
+/* Titel en storyvideo los op het witte teamvlak. */
+:root .sn-site .h-story-intro { overflow: visible; border-radius: 0; background: transparent; }
+:root .sn-site .h-story-heading { padding: 8px 0 4px; border-radius: 0; background: transparent; }
+:root .sn-site .h-story-heading :is(.h-story-kicker, .h-story-lead, .h-story-signoff) { color: #526158; }
+:root .sn-site .h-story-heading :is(h2, strong) { color: #0b0f12; }
+:root .sn-site .h-story-heading h2 span { color: #12883f; }
+:root .sn-site .h-story-signoff { border-top-color: #1a8f4526; }
+:root .sn-site .h-story-player { margin-top: 20px; background: transparent; color: #0b0f12; }
+:root .sn-site .h-story-player video { background: #fff; border-radius: 12px; }
+:root .sn-site .h-story-player figcaption { padding: 14px 0 0; color: #526158; font-family: 'TT Norms', sans-serif !important; letter-spacing: normal; }
+:root .sn-site .h-story-player figcaption strong { color: #0b0f12; }
+:root .sn-site .h-story-player figcaption strong,
+:root .sn-site .h-story-player figcaption span { font-family: 'TT Norms', sans-serif !important; letter-spacing: normal; }
+
+/* Een zachte groene gloed voor accenten en groene kaarten in het hele voorstel. */
+:root .sn-site { --sn-accent-glow: 0 0 10px #25d36638, 0 0 24px #25d3661c; --sn-card-glow: 0 0 0 1px #25d36618, 0 5px 24px #25d3661f; }
+:root .sn-site :is(.h-kop-groen, .h-tekst-groen, .sn-home-human, .sn-home-offer strong, .h-story-heading h2 span, .h-partner-uitleg h3, .h-final-belofte, .h-plekken strong, .h-koekje-titel span, .h-board-tekst b, .tr-chat-kop em, .tr-stappen em) { text-shadow: var(--sn-accent-glow); }
+:root .sn-site .h-hero h1 .h-kop-groen,
+:root .sn-site .h-hero .h-tekst-groen { text-shadow: var(--sn-accent-glow); }
+:root .sn-site :is(.h-partner-uitleg, .h-board-tekst, .h-mens-ai-koppel b, .os-claim, .h-try-button, .h-header-claim, .vh-knop, .h-dock-login, .h-sprekers-knop, .h-koekje-knop) { box-shadow: var(--sn-card-glow); }
+:root .sn-site :is(.os-claim, .h-try-button, .h-header-claim, .vh-knop, .h-dock-login, .h-sprekers-knop, .h-koekje-knop):hover { box-shadow: 0 0 0 1px #25d36630, 0 5px 28px #25d36638; }
