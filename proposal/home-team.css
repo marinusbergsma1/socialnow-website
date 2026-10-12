@@ -46,3 +46,9 @@
 :root .sn-site .sn-home-team-group h3 small{color:#686868}
 :root .sn-site .sn-home-team footer a{color:#202020}
 :root .sn-site .sn-home-team-filters button:focus-visible,:root .sn-site .sn-home-team footer a:focus-visible{outline-color:#202020}
+
+/* Teamkaarten schuiven bij scrollen van boven naar beneden op hun plek. */
+:root .sn-site .sn-home-team.is-reveal-ready .sn-home-team-person { opacity: 0; transform: translateY(-36px); transition: opacity .45s ease var(--team-delay, 0ms), transform .55s cubic-bezier(.16, 1, .3, 1) var(--team-delay, 0ms); }
+:root .sn-site .sn-home-team.is-reveal-ready .sn-home-team-person[data-team-visible="true"] { opacity: 1; transform: translateY(0); }
+:root [data-motion-pauze] .sn-home-team.is-reveal-ready .sn-home-team-person { opacity: 1; transform: none; transition: none; }
+@media (prefers-reduced-motion: reduce) { :root .sn-site .sn-home-team.is-reveal-ready .sn-home-team-person { opacity: 1; transform: none; transition: none; } }

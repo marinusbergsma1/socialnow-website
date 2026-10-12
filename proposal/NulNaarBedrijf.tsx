@@ -2,7 +2,6 @@ import { StipScene } from "./StipScene";
 import React from "react";
 import { ShieldCheck } from "lucide-react";
 import { Bento, Tegel, useInBeeld } from "./Bento";
-import { OdooLogo } from "./Verhaal";
 import { useTeller } from "./Bereikt";
 import { useLanguage } from "./i18n/context";
 
@@ -58,9 +57,9 @@ function TienVragen() {
 // meer: drie regels als een verbindingslijst, met een puls die over elke draad naar het OS loopt.
 function Koppelingen() {
   const regels = [
-    { bron: <OdooLogo />, taak: "Boekhouding", kleur: "#E8457C" },
-    { bron: "Studio", taak: "Content", kleur: "#F5940D" },
-    { bron: "Zernio", taak: "Posts", kleur: "#FF5A36" },
+    { bron: <img src="/images/partners/odoo.svg" alt="Odoo" width="72" height="28" loading="lazy" />, taak: "Boekhouding", kleur: "#E8457C" },
+    { bron: <img src="/images/partners/socialnow-studio.png" alt="SocialNow Studio" width="140" height="18" loading="lazy" />, taak: "Content", kleur: "#F5940D" },
+    { bron: <img src="/images/partners/zernio.svg" alt="Zernio" width="100" height="22" loading="lazy" />, taak: "Posts", kleur: "#FF5A36" },
   ] as const;
   return (
     <div className="h-koppel-lijst" aria-hidden="true">

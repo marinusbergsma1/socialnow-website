@@ -24,8 +24,23 @@ const findPeople = (names: string[]) => names.flatMap(name => {
 export default function HomeTeam() {
   const [filter, setFilter] = React.useState("");
   const id = React.useId();
+  const team = React.useRef<HTMLElement>(null);
+  React.useEffect(() => {
+    const el = team.current;
+    if (!el || !window.IntersectionObserver || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const cards = el.querySelectorAll<HTMLElement>(".sn-home-team-person");
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) if (entry.isIntersecting) {
+        (entry.target as HTMLElement).dataset.teamVisible = "true";
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: .08, rootMargin: "0px 0px -24px 0px" });
+    el.classList.add("is-reveal-ready");
+    cards.forEach(card => observer.observe(card));
+    return () => { observer.disconnect(); el.classList.remove("is-reveal-ready"); };
+  }, [filter]);
   const shown = groups.filter(group => !filter || group.name === filter);
-  return <section className="sn-home-team" id="team" aria-labelledby={id} translate="no">
+  return <section ref={team} className="sn-home-team" id="team" aria-labelledby={id} translate="no">
     <header className="sn-home-team-intro">
       <div><span>OUR PEOPLE · INDEPENDENT EXPERTS</span><h2 id={id}>Human connection.<br /><em>Per expertise.</em></h2></div>
       <p>De juiste mensen voor jouw bedrijf.<br />Creatie, marketing, sales, data en techniek.</p>
@@ -39,9 +54,9 @@ export default function HomeTeam() {
       {shown.map(group => <section className="sn-home-team-group" key={group.name} aria-label={group.name}>
         <h3>{group.name}<small>{findPeople(group.members).length}</small></h3>
         <div className="sn-home-team-members">
-          {findPeople(group.members).map(person => {
+          {findPeople(group.members).map((person, index) => {
             const url = person.linkedin || person.instagram;
-            return <article className="sn-home-team-person" key={person.name}>
+            return <article className="sn-home-team-person" key={person.name} style={{ "--team-delay": `${Math.min(index % 6, 4) * 60}ms` } as React.CSSProperties}>
               <img {...klein(person.image, "(max-width: 650px) 45vw, (max-width: 1100px) 22vw, 12vw", [160, 320, 480])} alt={person.name} width="320" height="400" loading="lazy" className={person.name === "Jelle Ursem" ? "is-jelle" : undefined} />
               <div className="sn-home-team-info">
                 <strong>{person.name}{person.linkedin ? <LinkedInMark /> : person.instagram ? <InstagramMark /> : null}</strong>
