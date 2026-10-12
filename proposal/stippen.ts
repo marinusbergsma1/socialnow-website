@@ -324,9 +324,9 @@ export function siteVeld(): Veld | null {
   document.addEventListener("pointermove", (e) => {
     if (e.pointerType !== "mouse" || minderBeweging() || !site) return;
     const nu = performance.now();
-    if (nu - laatsteMuis < 45) return;
+    if (nu - laatsteMuis < 16) return;
     laatsteMuis = nu;
-    site.golf(e.clientX + scrollX, e.clientY + scrollY, "groen", { straal: 48, duur: .45, breed: 35, sterkte: .95 });
+    site.golf(e.clientX + scrollX, e.clientY + scrollY, "groen", { straal: 64, duur: .16, breed: 40, sterkte: 1 });
   }, { passive: true });
   const laatst = new WeakMap<Element, number>();
   const kleurVan = (v: string | undefined): Kleur => (v && v !== "" ? v : "groen") as Kleur;
@@ -340,18 +340,21 @@ export function siteVeld(): Veld | null {
   // (pointerup; scrollen geeft pointercancel en dus geen golf).
   const tegelGolf = (doel: EventTarget | null) => {
     const el = (doel as Element)?.closest?.("[data-stipgolf], .sn-tegel:not(.is-film):not(.is-foto) > .sn-tegel-vlak"); if (!el || !site) return;
-    const n = performance.now(); if (n - (laatst.get(el) || 0) < 1400) return; laatst.set(el, n);
+    const n = performance.now(); if (n - (laatst.get(el) || 0) < 300) return; laatst.set(el, n);
     const ds = (el as HTMLElement).dataset.stipgolf;
-    const [x, y] = site.midden(el); site.golf(x, y, ds !== undefined ? kleurVan(ds) : tegelKleur(el), { straal: 900, duur: 1.8, sterkte: .8 });
+    const [x, y] = site.midden(el); site.golf(x, y, ds !== undefined ? kleurVan(ds) : tegelKleur(el), { straal: 900, duur: .55, sterkte: .9 });
   };
   document.addEventListener("pointerover", (e) => { if ((e as PointerEvent).pointerType !== "touch") tegelGolf(e.target); });
   document.addEventListener("pointerup", (e) => { if ((e as PointerEvent).pointerType === "touch") tegelGolf(e.target); });
-  // Klik op een groene knop (inloggen, starten): groene golf vanaf de knop. data-stipburst: kleurburst.
+  // Elke klik geeft één groene golf vanaf de klikplek, ook op de lege achtergrond.
+  // Keyboard clicks have no pointer coordinates, so start those at the focused control.
   document.addEventListener("click", (e) => {
-    const el = (e.target as Element)?.closest?.("[data-stipklik],[data-stipburst],a.os-claim,.h-button:not(.h-button-secondary)") as HTMLElement | null; if (!site) return;
-    if (!el) { site.burst(e.clientX + scrollX, e.clientY + scrollY, { straal: 320, duur: .8 }); return; }
-    const [x, y] = site.midden(el);
-    if (el.dataset.stipburst !== undefined) site.burst(x, y); else site.golf(x, y, kleurVan(el.dataset.stipklik), { duur: 2 });
+    if (!site) return;
+    const doel = e.target instanceof Element ? e.target : null;
+    const [x, y] = e.detail === 0 && doel
+      ? site.midden(doel)
+      : [e.clientX + scrollX, e.clientY + scrollY];
+    site.golf(x, y, "groen", { straal: Math.hypot(innerWidth, innerHeight), duur: .75, breed: 120, sterkte: 1 });
   });
   return site;
 }
