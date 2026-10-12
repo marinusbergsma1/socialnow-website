@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Play } from "lucide-react";
 import TeamTrust from "./TeamTrust";
+import ExplainerPlayer from "./ExplainerPlayer";
 import "./home-header.css";
 
-// 12 oktober 2026: gekozen header 1, met bedrijfsvoering en de menselijke verbinding centraal.
+// 12 oktober 2026: gekozen header 3, met bedrijfsvoering en de menselijke verbinding centraal.
 export default function HomeHeader() {
   return <div className="sn-home-copy">
     <TeamTrust />
@@ -32,21 +33,12 @@ export default function HomeHeader() {
 }
 
 export function HomeExplainer() {
-  const video = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
   return <section className="sn-home-explainer" id="os-explainer" aria-labelledby="sn-explainer-title">
     <div className="sn-home-explainer-intro">
       <img className="sn-home-explainer-logo" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="140" />
       <h2 id="sn-explainer-title">Je bedrijfsvoering.<br />Alles verbonden.</h2>
       <p>Ontdek hoe mensen, je bedrijfsvoering en AI samenkomen.</p>
     </div>
-    <div className="sn-home-player">
-    <video ref={video} onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} controls playsInline preload="metadata" poster="/video/os/socialnow-os-explainer-poster.jpg" aria-label="SocialNow OS explainer (Engels)">
-      <source src="/video/os/socialnow-os-explainer.mp4?v=20261012-player2" type="video/mp4" />
-      <a href="/video/os/socialnow-os-explainer.mp4?v=20261012-player2">Bekijk de SocialNow OS explainer</a>
-    </video>
-    {!playing && <a className="sn-home-play" href="/video/os/socialnow-os-explainer.mp4?v=20261012-player2" target="_blank" rel="noopener"><Play size={20} aria-hidden="true" />Bekijk de explainer ↗</a>}
-    </div>
-    <p className="sn-video-direct" ><a href="/video/os/socialnow-os-explainer.mp4?v=20261012-player2" target="_blank" rel="noopener">Open de video in een aparte speler ↗</a></p>
+    <ExplainerPlayer />
   </section>;
 }
