@@ -9,7 +9,7 @@ const lagen = team.match(/const LAGEN[\s\S]*?\n\];/)?.[0] ?? "";
 const volgorde = [...lagen.matchAll(/"([^"]+)"/g)].map((m) => m[1]);
 const mensen = content.match(/export const people[\s\S]*?\n\];/)?.[0] ?? "";
 const namen = [...mensen.matchAll(/name: "([^"]+)"/g)].map((m) => m[1]);
-const nieuw = ["Douwe Kramer", "Antony Soosaipillaj", "Aren", "Youri van der Donk", "Isaak Munster", "Pieter Bergsma", "Pepijn Bos", "Armando van Bruggen", "Steven Goudsblom"];
+const nieuw = ["Douwe Kramer", "Antony Soosaipillaj", "Aron", "Youri van der Donk", "Isaak Munster", "Pieter Bergsma", "Pepijn Bos", "Armando van Bruggen", "Steven Goudsblom"];
 const sinds = (naam) => content.match(new RegExp(`name: "${naam}"[^}]*sinds: "(2026-\\d\\d-\\d\\d)"`))?.[1];
 const eisen = [
   ["lagen Partner, Board, Head, Specialist, Sales & network", ["Partner", "Board", "Head", "Specialist", "Sales & network"].every((l) => lagen.includes(`"${l}"`))],

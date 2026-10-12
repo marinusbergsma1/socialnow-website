@@ -64,7 +64,7 @@ const FUNCTIES: { functie: string; mensen: string[] }[] = [
   { functie: "Ads & search", mensen: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"] },
   { functie: "Video, photo & design", mensen: ["Carmel Boon", "Sam van der Sluis", "Emma Peperkamp", "Pepijn Bos", "Armando van Bruggen"] },
   { functie: "UGC & social media", mensen: ["Isa Zoer"] },
-  { functie: "Sales & partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Aren", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
+  { functie: "Sales & partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
 ];
 
 // 6 oktober 2026 (Marinus): "Hier ook nog even iets van hierarchie", bij optie H3 "liever vierkantjes omdat iedereen een
@@ -74,7 +74,7 @@ const LAGEN: [string, string[]][] = [
   ["Board", ["Michelle Yang", "Steven Goudsblom"]],
   ["Head", ["Jos Hollenberg", "Nick van Keulen", "Carmel Boon", "Elian Coellar"]],
   ["Specialist", ["Isa Zoer", "Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
-  ["Sales & network", ["Aren", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
+  ["Sales & network", ["Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
 ];
 
 function LaagTegel({ naam, laag }: { naam: string; laag: string }) {

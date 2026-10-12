@@ -29,7 +29,7 @@ const personFacts = [
   ["Steef Komen", "steef-komen", "https://www.linkedin.com/in/steef-komen-60632236/", "komen"],
   ["Michelle Yang", "michelle-yang", undefined, "komen"],
   ["Antony Soosaipillaj", "antony-soosaipillaj"],
-  ["Aren", "aren"],
+  ["Aron", "aren"],
   ["Youri van der Donk", "youri-van-der-donk"],
   ["Isaak Munster", "isaak-munster"],
   ["Pieter Bergsma", "pieter-bergsma"],

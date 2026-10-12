@@ -70,7 +70,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   // 30 september 2026 (Marinus): nieuw teamlid.
   // 3 oktober 2026 (Marinus): nieuwe teamleden.
   { name: "Antony Soosaipillaj", role: "Full-Stack AI Developer", image: "Antony-Soosaipillaj.webp", sinds: "2026-10-03" },
-  { name: "Aren", role: "Senior Sales", image: "Aren.webp", sinds: "2026-10-03" },
+  { name: "Aron", role: "Senior Sales", image: "Aren.webp", sinds: "2026-10-03" },
   { name: "Youri van der Donk", role: "Senior Sales", image: "Youri-van-der-Donk.webp", sinds: "2026-10-03" },
   { name: "Isaak Munster", role: "Business Coach", image: "Isaak-Munster.webp", sinds: "2026-10-03" },
   // 3 oktober 2026 (Marinus): "Zet de rest er ook op". Pieter stond klaar op feat/team-pieter-20261001.
