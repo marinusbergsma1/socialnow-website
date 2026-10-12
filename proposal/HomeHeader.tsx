@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Play } from "lucide-react";
 import TeamTrust from "./TeamTrust";
@@ -32,15 +32,22 @@ export default function HomeHeader() {
 }
 
 export function HomeExplainer() {
+  const video = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [failed, setFailed] = useState(false);
   return <section className="sn-home-explainer" id="os-explainer" aria-labelledby="sn-explainer-title">
     <div className="sn-home-explainer-intro">
       <img className="sn-home-explainer-logo" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="140" />
       <h2 id="sn-explainer-title">Je bedrijfsvoering.<br />Alles verbonden.</h2>
       <p>Ontdek hoe mensen, je bedrijfsvoering en AI samenkomen.</p>
     </div>
-    <video controls playsInline preload="none" poster="/video/os/socialnow-os-explainer-poster.jpg" aria-label="SocialNow OS explainer (Engels)">
+    <div className="sn-home-player">
+    <video ref={video} onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} controls playsInline preload="metadata" poster="/video/os/socialnow-os-explainer-poster.jpg" aria-label="SocialNow OS explainer (Engels)">
       <source src="/video/os/socialnow-os-explainer.mp4" type="video/mp4" />
       <a href="/video/os/socialnow-os-explainer.mp4">Bekijk de SocialNow OS explainer</a>
     </video>
+    {!playing && <button className="sn-home-play" type="button" onClick={() => { setFailed(false); video.current?.play().catch(() => setFailed(true)); }}><Play size={20} aria-hidden="true" />Speel de explainer af</button>}
+    </div>
+    {failed && <p role="status"><a href="/video/os/socialnow-os-explainer.mp4">Open de video om af te spelen ↗</a></p>}
   </section>;
 }
