@@ -239,7 +239,7 @@ function Resultaat({ waarde, eenheid, aantal, uitleg, labels }: { waarde: string
         const [x, y] = v.pos(...cellen[cellen.length - 1]); await v.burst(x, y, { straal: 260, duur: .9 });
       }} />
       <p className="sn-stipscene-uitleg">{uitleg}</p>
-      <ul className="h-resultaat-labels" translate="no">{labels.map((label) => <li key={label}>{label}</li>)}</ul>
+      <ul className="h-resultaat-labels">{labels.map((label) => <li key={label}>{label}</li>)}</ul>
     </div>
   );
 }

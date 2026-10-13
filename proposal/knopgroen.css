@@ -8,9 +8,9 @@
 /* Vulling */
 html:root .sn-site .sn-home-cta:not(.sn-home-secondary),
 html:root .sn-site .h-skip,
-html:root .h-skip { background-color: var(--c-knopgroen); border-color: var(--c-knopgroen); }
+html:root .h-skip { background-color: var(--c-knopgroen); border-color: #15803d; }
 
-html:root .sn-site .sn-home-cta:not(.sn-home-secondary):hover { background-color: var(--c-groen-hover, #1ba452); }
+html:root .sn-site .sn-home-cta:not(.sn-home-secondary):hover { background-color: var(--c-knopgroen); }
 
 /* Randen en tekst van groene links en omlijnde knoppen */
 html:root .sn-site .sn-btn3d.h-button { border-color: var(--c-knopgroen); }
@@ -64,11 +64,13 @@ html:root .sn-site .sn-connections-list a { color: var(--c-knopgroen); }
 html:root .sn-site .sn-connections-list a:focus-visible { outline-color: var(--c-knopgroen); }
 html:root .sn-site .h-team-duo .h-partner-referenties a { color: var(--c-knopgroen); }
 
-/* Lichter groen met de vertrouwde opvulling van links naar rechts. */
+/* 13 oktober: lichtere opvulling in de eigen kleur, witte tekst en donkere rand. */
 html:root .sn-site .sn-home-human,
 html:root .sn-site .sn-home-offer strong{color:#5bd98d}
-html:root .sn-site .sn-home-cta{position:relative;isolation:isolate;overflow:hidden;transition:color .35s ease,border-color .35s ease}
-html:root .sn-site .sn-home-cta::before{content:"";position:absolute;inset:0;background:#25d366;z-index:-1;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.22,1,.36,1);pointer-events:none}
+html:root .sn-site .sn-home-cta{--sn-cta-fill:#25d366;--sn-cta-rim:#15803d;position:relative;isolation:isolate;overflow:hidden;color:#fff!important;border-color:var(--sn-cta-rim);transition:border-color .35s ease}
+html:root .sn-site .sn-home-secondary{--sn-cta-fill:#1f3e58;--sn-cta-rim:#14283a}
+html:root .sn-site .sn-home-cta::before{content:"";position:absolute;inset:0;background:var(--sn-cta-fill);z-index:-1;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.22,1,.36,1);pointer-events:none}
 html:root .sn-site .sn-home-cta:is(:hover,:focus-visible)::before{transform:scaleX(1)}
-html:root .sn-site .sn-home-cta:is(:hover,:focus-visible){color:#06140b;border-color:#25d366}
+html:root .sn-site .sn-home-cta:is(:hover,:focus-visible){color:#fff!important;border-color:var(--sn-cta-rim)}
+html:root .sn-site .sn-home-cta>svg{color:#fff}
 @media(prefers-reduced-motion:reduce){html:root .sn-site .sn-home-cta,html:root .sn-site .sn-home-cta::before{transition:none}}

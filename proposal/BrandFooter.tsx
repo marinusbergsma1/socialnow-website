@@ -90,7 +90,7 @@ export default function BrandFooter() {
               Developers en Meta etc vanuit onze creatives dat we dat gwn hebben." Dezelfde rij als in de oude footer
               (socialnow-website, components/Footer.tsx: Gecertificeerd & Erkend), rustig in wit. De keurmerken zelf staan nog op
               /juridisch. */}
-          <div className="h-footer-erkend" translate="no">
+          <div className="h-footer-erkend">
             <span>Gecertificeerd &amp; erkend</span>
             <div>
               <img src="/google-logo.svg" alt="Google Partner" loading="lazy" />

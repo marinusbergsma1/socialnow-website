@@ -36,7 +36,7 @@ function ReferenceMark({ name }: { name: string }) {
     return <img src={src} alt={name} width="110" height="24" loading="lazy" decoding="async" onError={() => setFailed(true)} />;
   }
   if (name === "Attesso") {
-    return <span className="sn-reference-wordmark"><b aria-hidden="true">~/a</b> Attesso</span>;
+    return <span className="sn-reference-wordmark">~/attesso</span>;
   }
   return <span className="sn-reference-fallback">{name}</span>;
 }

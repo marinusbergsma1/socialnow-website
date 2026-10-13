@@ -22,6 +22,7 @@ import { MiloPortrait, TextLink } from "./ui";
 import OsPeople from "./OsPeople";
 import { agents } from "./content";
 import HomeTeam from "./HomeTeam";
+import PixelInfrastructure from "./PixelInfrastructure";
 import { useLanguage } from "./i18n/context";
 import "./home-simple.css";
 const Bereikt = later(() => import("./Bereikt").then(m => m.default));
@@ -36,6 +37,7 @@ export function Home() {
         <div className="h-hero-tekst"><HomeHeader /></div>
         <HomeExplainer />
         <HomeTeam />
+        <PixelInfrastructure />
       </div>
     </section>
     <div className="h-wrap sn-demo-agreement">

@@ -7,6 +7,7 @@ import InstagramMark from "./InstagramMark";
 import "./home-team.css";
 
 const groups = [
+  { name: "Strategy & guidance", members: ["Albert Deltour"] },
   { name: "AI development", members: ["Douwe Kramer"] },
   { name: "Web development", members: ["Sid van Kalken", "Antony Soosaipillaj"] },
   { name: "Finance & operations", members: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },

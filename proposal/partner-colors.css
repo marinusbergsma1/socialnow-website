@@ -369,3 +369,31 @@
 :root .sn-site .sn-advisory :is(h3, h3 a, .sn-advisory-copy > p, .sn-advisory-copy > strong) { color: #39281c; }
 
 :root .sn-site .h-hero .h-duo.is-fincer .h-fincer-toelichting p { color: #495565; }
+
+/* 13 oktober: partnerkleur loopt door, geen losse witte persoonsvlakken. */
+:root .sn-site .h-team-duo .h-people-grid figure,
+:root .sn-site .h-team-duo .h-people-grid figcaption,
+:root .sn-site .h-team-duo .h-portrait{background:transparent!important;border-color:transparent!important}
+:root .sn-site .h-team-duo .h-people-grid figure{min-width:0;align-self:start}
+:root .sn-site .h-team-duo .h-portrait{border:0;border-radius:14px;overflow:hidden}
+:root .sn-site .h-team-duo .h-people-grid figcaption{padding:14px 0 0}
+:root .sn-site .h-team-duo .h-people-grid figcaption>span:first-of-type{min-height:2.8em}
+:root .sn-site .h-team-duo.is-socialnow .h-people-grid figcaption,
+:root .sn-site .h-team-duo.is-socialnow .h-people-grid figcaption :is(strong,strong a,.h-naam-eind){color:#fff}
+:root .sn-site .h-team-duo.is-socialnow .h-people-grid figcaption>span{color:#cfd6e2}
+:root .sn-site .h-team-duo .sn-reference-list{align-items:center;gap:12px 18px}
+:root .sn-site .h-team-duo .h-partner-referenties a.sn-reference-link{min-height:36px;padding:0;justify-content:flex-start;background:transparent;border:0}
+:root .sn-site .h-team-duo .sn-reference-link img{height:30px;width:auto;max-width:140px;object-fit:contain}
+:root .sn-site .h-team-duo .sn-reference-wordmark,
+:root .sn-site .h-team-duo .sn-reference-wordmark b{font-size:18px;line-height:30px}
+:root .sn-site .h-team-duo .sn-reference-label{margin-bottom:8px}
+
+@font-face{font-family:AttessoMono;src:url('/fonts/attesso-geist-mono.woff2') format('woff2');font-weight:100 900;font-display:swap}
+:root .sn-site .h-team-duo .sn-reference-wordmark,
+:root .sn-site .h-team-duo .h-team-duo-label code{font-family:AttessoMono,monospace!important;font-weight:400!important;letter-spacing:0}
+:root .sn-site .h-team-duo.is-fincer .sn-reference-link img[src*="fincer.png"]{height:34px;margin-left:-11.333px}
+
+:root .sn-site .h-bouwer{background:transparent;border-color:#ffffff26;color:#fff}
+:root .sn-site .h-bouwer :is(strong,.h-bouwer-merk){color:#fff}
+:root .sn-site .h-bouwer i{color:#bcc8d3}
+:root .sn-site .h-bouwer img[src*="fincer.png"]{content:url('/images/merken/fincer-wit.png')}

@@ -1,5 +1,7 @@
+import AdvisoryPartner from "./AdvisoryPartner";
 import Verhaal from "./Verhaal";
 import HomeTeam from "./HomeTeam";
+import PixelInfrastructure from "./PixelInfrastructure";
 import NulNaarBedrijf from "./NulNaarBedrijf";
 import MensEnAI from "./MensEnAI";
 import { Integraties } from "./TeamTrust";
@@ -474,6 +476,7 @@ export function TeamPage() {
         </p>
         <Bedrijfsreferenties />
       </section>
+      <section className="h-wrap" aria-label="Extern advies aan SocialNow"><AdvisoryPartner /></section>
       <section className="h-wrap">
         <Founder />
       </section>
@@ -520,6 +523,7 @@ export function TeamPage() {
           Iedere partner brengt eigen expertise mee: van creatie en marketing tot data en techniek. SocialNow verbindt die expertise met jouw vraag en bewaakt de kwaliteit.
         </p>
         <HomeTeam />
+        <PixelInfrastructure />
         <AuditTeaser />
       </section>
       <Verhaal />
