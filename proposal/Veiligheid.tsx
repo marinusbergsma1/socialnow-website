@@ -5,6 +5,7 @@ import { useLanguage } from "./i18n/context";
 import { Bento, BentoFilm, Tegel } from "./Bento";
 import { BELOFTES, FILMS, STAPPEN, filmPad, filmPosterPad, pdfPad, type Taal } from "./veiligheid-beloftes";
 import "./veiligheid.css";
+import { DATA_DOCUMENT } from "./PixelInfrastructure";
 
 // Veiligheid, 28 september 2026 (Marinus): de veiligheidsvideo en de sleutelbelofte krijgen een
 // prominente plek, zodat bezoekers hun API-sleutels durven te koppelen.
@@ -84,6 +85,7 @@ export function VeiligheidPagina() {
         <p className="vh-intro">Het OS werkt pas echt als je het koppelt aan je eigen systemen. Daarvoor geef je ons een sleutel. Hier lees je wat we daarmee doen, en vooral wat niet.</p>
         <div className="vh-acties">
           <PdfKnop taal={taal} />
+          <a className="vh-knop" href={DATA_DOCUMENT} download><Download size={17} aria-hidden="true" /><span>Uitgebreide documentatie (PDF · NL)</span></a>
         </div>
       </section>
       <Bento className="vh-bento vh-films">
@@ -110,7 +112,9 @@ export function VeiligheidPagina() {
         </ol>
       </section>
       <section className="h-wrap vh-sectie vh-documenten" aria-labelledby="vh-doc-kop">
-        <h2 id="vh-doc-kop">Het officiële document</h2>
+        <h2 id="vh-doc-kop">Uitgebreide documentatie</h2>
+        <p>Download het handboek over eigendom, privacy en beveiliging: toegang, versleuteling, AI, leveranciers, incidenten, export en praktische checklists.</p>
+        <div className="vh-acties"><a className="vh-knop" href={DATA_DOCUMENT} download><Download size={17} aria-hidden="true" /><span>Uitgebreide documentatie (PDF · NL)</span></a></div>
         <p>De sleutelbelofte als pdf, in het Nederlands en in het Engels. Lees verder in onze beveiligingsmaatregelen en de verwerkersovereenkomst.</p>
         <div className="vh-acties">
           <PdfKnop taal="nl" label="Sleutelbelofte, Nederlands (PDF)" />
