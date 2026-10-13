@@ -1,11 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import "./free-website.css";
+import { webShowcaseProjects } from "../data/projects";
 
 export const ONBOARDING_URL = "https://website.socialnow.nl";
-const examples = [
-  { name: "VDZ Brigade", url: "https://vdz-brigade.nl", image: "/screenshots/vdz-brigade-hero.webp", video: "/video/vdz/vdz-house.mp4", poster: "/video/vdz/vdz-house-poster.jpg", film: "Website-animatie" },
-  { name: "Il Gordo", url: "https://ilgordo.nl", image: "/screenshots/ilgordo-hero.webp", video: "/video/ilgordo/ilgordo-header.mp4", poster: "/video/ilgordo/ilgordo-header-poster.webp", film: "Websitefilm" },
-];
+const websiteFilms: Record<string, { video: string; poster: string; film: string }> = {
+  "vdz-brigade-website": { video: "/video/vdz/vdz-house.mp4", poster: "/video/vdz/vdz-house-poster.jpg", film: "Website-animatie" },
+  "ilgordo-website": { video: "/video/ilgordo/ilgordo-header.mp4", poster: "/video/ilgordo/ilgordo-header-poster.webp", film: "Websitefilm" },
+};
+// Dezelfde websites en volgorde als de eerdere balk, zonder kWh Garant.
+const examples = webShowcaseProjects
+  .filter(project => project.slug !== "kwh-garant-website" && project.url && (!project.offline || project.previewUrl))
+  .map(project => ({ name: project.title, url: project.url!, image: project.image, previewUrl: project.previewUrl, slug: project.slug, ...websiteFilms[project.slug] }));
+const frameSource = (project: typeof examples[number]) => project.previewUrl ||
+  (project.slug === "vastiq-website" && import.meta.env.DEV ? "http://127.0.0.1:4330/" : project.url);
 
 function WebsiteExamples() {
   const [index, setIndex] = useState(0);
@@ -26,13 +33,13 @@ function WebsiteExamples() {
     <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Ons werk · live websites</p><h3>Bekijk wat we maken.</h3></div><p>Eerder werk, ter inspiratie voor jouw demo.</p></div>
     <div className="sn-fw-previewbar">
       <strong translate="no">{project.name}</strong>
-      <div role="group" aria-label="Kies de weergave"><button type="button" aria-pressed={view === "website"} onClick={() => setView("website")}>Live website</button><button type="button" aria-pressed={view === "video"} onClick={() => setView("video")}>{project.film}</button></div>
+      <div role="group" aria-label="Kies de weergave"><button type="button" aria-pressed={view === "website"} onClick={() => setView("website")}>Live website</button>{project.video && <button type="button" aria-pressed={view === "video"} onClick={() => setView("video")}>{project.film}</button>}</div>
       <a href={project.url} target="_blank" rel="noopener noreferrer">Open website ↗</a>
     </div>
     <div className={`sn-fw-slider-window ${view === "video" ? "is-video" : ""}`}>
       {view === "website" ? <div className="sn-fw-live-track" style={{transform: `translateX(-${index * 100}%)`}}>
         {examples.map((item, i) => <div className="sn-fw-live-tile" key={item.url} aria-hidden={i !== index} inert={i !== index ? true : undefined}>
-          {near && <iframe src={item.url} title={item.name} loading="lazy" tabIndex={-1} referrerPolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" />}
+          {near && <iframe src={frameSource(item)} title={item.name} loading="lazy" tabIndex={-1} referrerPolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" />}
         </div>)}
       </div> : near && <video key={project.video} controls playsInline preload="metadata" poster={project.poster} aria-label={project.film}><source src={project.video} type="video/mp4" /></video>}
     </div>
