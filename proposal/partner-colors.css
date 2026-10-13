@@ -397,3 +397,6 @@
 :root .sn-site .h-bouwer :is(strong,.h-bouwer-merk){color:#fff}
 :root .sn-site .h-bouwer i{color:#bcc8d3}
 :root .sn-site .h-bouwer img[src*="fincer.png"]{content:url('/images/merken/fincer-wit.png')}
+:root .sn-site .sn-advisory-profile,
+:root .sn-site .sn-advisory-caption{background:transparent!important;border:0;box-shadow:none}
+:root .sn-site .sn-advisory-photo{border-radius:12px}
