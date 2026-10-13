@@ -61,7 +61,7 @@ const FUNCTIES: { functie: string; mensen: string[] }[] = [
   { functie: "Web development", mensen: ["Sid van Kalken", "Antony Soosaipillaj"] },
   { functie: "Finance & operations", mensen: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
   { functie: "Ads & search", mensen: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"] },
-  { functie: "Video, photo & design", mensen: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Pepijn Bos", "Armando van Bruggen"] },
+  { functie: "Video, photo & design", mensen: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Pepijn Bos", "Armando van Bruggen"] },
   { functie: "UGC & social media", mensen: ["Isa Zoer"] },
   { functie: "Sales & partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Ruben Spyckerelle", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
 ];
@@ -72,7 +72,7 @@ const LAGEN: [string, string[]][] = [
   ["Partner", ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer"]],
   ["Board", ["Michelle Yang", "Steven Goudsblom"]],
   ["Head", ["Jos Hollenberg", "Nick van Keulen", "Carmel Boon", "Elian Coellar"]],
-  ["Specialist", ["Isa Zoer", "Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
+  ["Specialist", ["Isa Zoer", "Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
   ["Sales & network", ["Ruben Spyckerelle", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
 ];
 
