@@ -16,7 +16,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { OnderDeVouw, later } from "./later";
 import HomeHeader, { HomeExplainer } from "./HomeHeader";
-import LiveWebsites from "./LiveWebsites";
+import FreeWebsite from "./FreeWebsite";
 import HomeTeam from "./HomeTeam";
 import CharacterAccent from "./CharacterAccent";
 import { useLanguage } from "./i18n/context";
@@ -38,7 +38,7 @@ export function Home() {
     <div className="h-wrap sn-demo-agreement">
       <p><strong>Tevreden? Dan mag je de demo houden.</strong><br />Anders spreken we een eerlijke prijs af en maken we je website samen perfect.</p>
     </div>
-    <LiveWebsites demo />
+    <FreeWebsite />
     <section className="h-section h-wrap sn-home-story" id="verhaal" aria-labelledby="sn-story-title">
       <div className="sn-home-story-card">
         <div><p className="h-eyebrow">Ons verhaal</p><h2 id="sn-story-title">Software is een tool.<br />Mensen maken het verschil.</h2><p>Van grafische vormgeving naar AI en development. De persoonlijke verbinding blijft de kern van SocialNow.</p><Link className="h-text-link" to="/team#verhaal">Ons verhaal ↗</Link></div>

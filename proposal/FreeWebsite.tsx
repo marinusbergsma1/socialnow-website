@@ -1,71 +1,81 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 import "./free-website.css";
 
-// 11 oktober 2026 (Marinus): "Ik wil de onboarding gewoon als onderdeel van de site: FREE WEBSITE, groen vlak. En dan
-// uitleg over beide, plus de onboarding, en dat we dan een mail krijgen."
-// Een groen vlak direct onder de hero, anker #free-website (de onboardinglink in het gratis aanbod wijst hierheen).
-// - Route 1: zelf bouwen in Odoo met One App Free. De kern komt uit het gecontroleerde stappenplan (Odoo 19, odoo.com/pricing)
-//   in 02-SOCIALNOW/01_WEBSITE/onboarding-algemeen-20261009/bouw/bewaard-odoo-stappenplan.html.
-// - Route 2: een gratis demo door onze experts.
-// - De onboarding zelf draait op https://website.socialnow.nl (PHP op Hostinger, mail naar info@socialnow.nl). Een iframe
-//   kan niet: die site stuurt X-Frame-Options SAMEORIGIN en de anti-spamsessie leunt op een PHP-sessiecookie, dat in een
-//   iframe een cookie van derden zou zijn. Daarom een grote knop die de onboarding in een nieuw tabblad opent.
-// Koppen op groen: de afsluitende punt is zwart, want een groene punt is op groen onzichtbaar.
-// Proef: scripts/proef-free-website.mjs.
 export const ONBOARDING_URL = "https://website.socialnow.nl";
+const examples = [
+  { name: "VDZ Brigade", url: "https://vdz-brigade.nl", image: "/screenshots/vdz-brigade-hero.webp", video: "/video/vdz/vdz-house.mp4", poster: "/video/vdz/vdz-house-poster.jpg", film: "Website-animatie" },
+  { name: "kWh Garant", url: "https://kwhgarant.nl", image: "/screenshots/kwhgarant-hero.webp", video: "/video/os/os-kwh-case.mp4", poster: "/screenshots/kwhgarant-hero.webp", film: "Website en OS · casevideo" },
+  { name: "Il Gordo", url: "https://ilgordo.nl", image: "/screenshots/ilgordo-hero.webp", video: "/video/ilgordo/ilgordo-header.mp4", poster: "/video/ilgordo/ilgordo-header-poster.webp", film: "Websitefilm" },
+];
+
+function WebsiteExamples() {
+  const [index, setIndex] = useState(0);
+  const [view, setView] = useState<"website" | "video">("website");
+  const [near, setNear] = useState(false);
+  const region = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!region.current) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setNear(true); observer.disconnect(); }
+    }, { rootMargin: "200px" });
+    observer.observe(region.current);
+    return () => observer.disconnect();
+  }, []);
+  const project = examples[index];
+  return <div className="sn-fw-examples" ref={region}>
+    <p className="sn-fw-example-hint">Klik door ons werk. Bekijk de website én de video erachter.</p>
+    <div className="sn-fw-projects" role="group" aria-label="Kies een project">
+      {examples.map((item, i) => <button type="button" key={item.name} aria-pressed={i === index} onClick={() => { setIndex(i); setView("website"); }}>
+        <img src={item.image} alt="" loading="lazy" width="240" height="135" /><strong translate="no">{item.name}</strong>
+      </button>)}
+    </div>
+    <div className="sn-fw-previewbar">
+      <div role="group" aria-label="Kies de weergave">
+        <button type="button" aria-pressed={view === "website"} onClick={() => setView("website")}>Live website</button>
+        {project.video && <button type="button" aria-pressed={view === "video"} onClick={() => setView("video")}>{project.film}</button>}
+      </div>
+      <a href={project.url} target="_blank" rel="noopener noreferrer">Open website ↗</a>
+    </div>
+    <div className={`sn-fw-preview ${view === "video" ? `is-video ${index === 1 ? "is-portrait" : ""}` : ""}`}>
+      {near && (view === "website" ? <iframe key={project.url} src={project.url} title={project.name} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" /> : <video key={project.video} controls playsInline preload="metadata" poster={project.poster} aria-label={project.film}><source src={project.video} type="video/mp4" /></video>)}
+    </div>
+    <p className="sn-fw-example-note">Eerder werk, ter inspiratie voor jouw demo.</p>
+    {view === "video" && index === 1 && <p className="sn-fw-example-note">Deze casevideo laat ook het OS zien. Dat staat los van het gratis Odoo-boekhoudplan.</p>}
+  </div>;
+}
 
 export default function FreeWebsite() {
-  return (
-    <section id="free-website" className="sn-free-website" aria-labelledby="free-website-titel">
-      <div className="h-wrap sn-fw-binnen">
-        <div className="sn-fw-kop">
-          <p className="sn-fw-label">Website-onboarding</p>
-          <h2 id="free-website-titel"><span>GRATIS WEBSITE</span><span className="sn-fw-punt" translate="no">.</span></h2>
-          <p className="sn-fw-intro">Twee gratis routes naar je nieuwe website. Bouw hem zelf in Odoo, of laat onze experts een demo voor je maken.</p>
-        </div>
-
-        <div className="sn-fw-routes">
-          <article className="sn-fw-route" aria-labelledby="free-website-route-odoo">
-            <p className="sn-fw-route-label">Route 1 · zelf bouwen</p>
-            <h3 id="free-website-route-odoo"><span>Zelf bouwen in Odoo, gratis</span><span className="sn-fw-punt" translate="no">.</span></h3>
-            <p>Met het abonnement One App Free bouw je je site gratis in de Website-app van Odoo: slepen, typen, publiceren.</p>
-            <ul>
-              <li>Eén app is gratis, met onbeperkt gebruikers. Je site staat eerst op een adres als jouwbedrijf.odoo.com.</li>
-              <li>Je eigen domein koppel je met een CNAME-record, of je registreert bij Odoo een domein dat het eerste jaar gratis is.</li>
-              <li>Let op: een tweede app, zoals boekhouding, is een betaald Odoo-abonnement.</li>
-              <li>De koppeling met het SocialNow/OS loopt via de externe API van Odoo. Die zit bij Odoo Online alleen in het Custom-abonnement.</li>
-            </ul>
-            <p className="sn-fw-links">
-              <a href="https://www.odoo.com/trial" target="_blank" rel="noopener noreferrer">Begin op odoo.com</a>
-              <a href="https://www.odoo.com/pricing" target="_blank" rel="noopener noreferrer">Abonnementen bij Odoo</a>
-            </p>
-          </article>
-
-          <article className="sn-fw-route is-demo" aria-labelledby="free-website-route-demo">
-            <p className="sn-fw-route-label">Route 2 · wij bouwen</p>
-            <h3 id="free-website-route-demo"><span>Gratis demo via SocialNow</span><span className="sn-fw-punt" translate="no">.</span></h3>
-            <p>Onze experts bouwen gratis een demo van je nieuwe website, op basis van jouw antwoorden, teksten en beelden. Een team van designers en AI-developers, met de beste AI-modellen.</p>
-            <ul>
-              <li>Demo op basis van jouw teksten en beeld</li>
-              <li>Persoonlijk besproken met een van onze experts</li>
-              <li>Pas daarna kies je of je verder wilt</li>
-            </ul>
-          </article>
-        </div>
-
-        <div className="sn-fw-onboarding">
-          <h3><span>Zo werkt de onboarding</span><span className="sn-fw-punt" translate="no">.</span></h3>
-          <ol className="sn-fw-stappen">
-            <li><b translate="no">1</b><span>Je vult de korte website-onboarding in, met je logo en beelden.</span></li>
-            <li><b translate="no">2</b><span>Wij krijgen meteen een mail met je antwoorden.</span></li>
-            <li><b translate="no">3</b><span>Wij nemen persoonlijk contact op en bouwen je demo.</span></li>
-          </ol>
-          <a className="sn-fw-knop" href={ONBOARDING_URL} target="_blank" rel="noopener noreferrer">
-            <span>Start je gratis website-onboarding</span><span className="sn-fw-pijl" aria-hidden="true" translate="no">→</span>
-          </a>
-          <p className="sn-fw-prijs">Gratis tot 10 GB opslag, daarna €20 per maand, of custom OS op aanvraag.</p>
-        </div>
+  return <section id="free-website" className="sn-free-website" aria-labelledby="free-website-titel">
+    <div className="h-wrap sn-fw-binnen">
+      <div className="sn-fw-kop">
+        <p className="sn-fw-label">Twee gratis starts voor je bedrijf</p>
+        <h2 id="free-website-titel">Boekhouding geregeld.<br /><span>Je nieuwe website in beeld.</span></h2>
+        <p className="sn-fw-intro">Start gratis met boekhouding in Odoo. Laat ons daarnaast een gratis demo van jouw nieuwe website maken.</p>
       </div>
-    </section>
-  );
+      <div className="sn-fw-offers">
+        <article className="sn-fw-accounting" aria-labelledby="free-accounting-title">
+          <p className="sn-fw-offer-label">Gratis boekhouding · Odoo</p>
+          <h3 id="free-accounting-title">Alleen boekhouding.<br />Daarom gratis.</h3>
+          <p>Facturen, uitgaven en overzicht. Kies de Boekhouding-app binnen Odoo’s One App Free-plan.</p>
+          <div className="sn-fw-price"><b translate="no">€0</b><span>/ maand</span></div>
+          <div className="sn-fw-ledger">
+            <p>Je administratie · alles op één plek</p>
+            <ul><li><span>Facturen</span><b aria-hidden="true">✓</b></li><li><span>Uitgaven</span><b aria-hidden="true">✓</b></li><li><span>Financieel overzicht</span><b aria-hidden="true">✓</b></li></ul>
+          </div>
+          <a className="sn-fw-button" href="https://www.odoo.com/app/accounting" target="_blank" rel="noopener noreferrer"><span>Start gratis met boekhouding</span><b aria-hidden="true">↗</b></a>
+          <p className="sn-fw-fine">Blijft gratis zolang je alleen de Boekhouding-app gebruikt binnen One App Free op Odoo Online. Extra apps of maatwerk kunnen betaald zijn. <a href="https://www.odoo.com/pricing" target="_blank" rel="noopener noreferrer">Bekijk de voorwaarden</a></p>
+        </article>
+        <article className="sn-fw-demo" aria-labelledby="free-website-route-demo">
+          <p className="sn-fw-offer-label">Gratis websitedemo · door ons team</p>
+          <h3 id="free-website-route-demo">Jouw verhaal.<br />Een eerste website van ons.</h3>
+          <p>Deel je wensen, teksten en beelden. Wij maken een gratis demo en bespreken die met je. Bekijk hieronder voorbeelden van ons werk.</p>
+          <WebsiteExamples />
+          <ol className="sn-fw-shortsteps"><li>Jij vertelt</li><li>Wij ontwerpen</li><li>Samen bespreken</li></ol>
+          <a className="sn-fw-button" href={ONBOARDING_URL} target="_blank" rel="noopener noreferrer"><span>Laat mijn gratis websitedemo maken</span><b aria-hidden="true">↗</b></a>
+          <p className="sn-fw-fine">De demo is gratis. Daarna beslis je of we verder bouwen.</p>
+        </article>
+      </div>
+      <p className="sn-fw-notice">Odoo verzorgt je gratis boekhouding. De websitedemo maken wij voor je. Je hoeft daarvoor geen extra Website-app aan je Odoo-account toe te voegen.</p>
+    </div>
+  </section>;
 }
