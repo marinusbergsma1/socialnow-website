@@ -400,3 +400,9 @@
 :root .sn-site .sn-advisory-profile,
 :root .sn-site .sn-advisory-caption{background:transparent!important;border:0;box-shadow:none}
 :root .sn-site .sn-advisory-photo{border-radius:12px}
+
+:root .sn-site .sn-reference-link:has(img[alt="SocialNow"]){background:#0b1522;padding:6px 8px;border-radius:4px}
+:root .sn-site .h-team-duo img[alt="Komen Consultancy"]{max-width:190px;height:38px}
+:root .sn-site .h-team-duo img:is([alt="MOJO"],[alt="Universal"]){filter:brightness(0) invert(1)}
+:root .sn-site .sn-founder-company-logo{width:72px;height:72px;background:#000;display:grid;place-items:center}
+:root .sn-site .sn-founder-company-logo img{width:72px;height:72px;object-fit:contain}

@@ -41,3 +41,12 @@
 :root .sn-site .sn-home-team.is-reveal-ready .sn-home-team-person[data-team-visible="true"] { opacity: 1; transform: translateY(0); }
 :root [data-motion-pauze] .sn-home-team.is-reveal-ready .sn-home-team-person { opacity: 1; transform: none; transition: none; }
 @media (prefers-reduced-motion: reduce) { :root .sn-site .sn-home-team.is-reveal-ready .sn-home-team-person { opacity: 1; transform: none; transition: none; } }
+
+/* Menselijke verbinding: wit vlak met rustige grijze stippen. */
+:root .sn-site .sn-home-team{background-color:#fff;background-image:radial-gradient(circle,#cdd1d5 1px,transparent 1px);background-size:32px 32px;color:#17202b}
+:root .sn-site .sn-home-team :is(h2,.sn-home-team-group h3,footer a){color:#17202b}
+:root .sn-site .sn-home-team :is(.sn-home-team-intro p,.sn-home-team-count small,.sn-home-team-intro>div>span,.sn-home-team-group h3 small,footer){color:#596474}
+:root .sn-site .sn-home-team-group h3{border-color:#d4d9de}
+:root .sn-site .sn-home-team-filters button{border-color:#cbd2da}
+:root .sn-site .sn-home-team-filters button[aria-pressed=true]{background:#17202b;border-color:#17202b;color:#fff}
+:root .sn-site .sn-home-team :is(a,button,summary):focus-visible{outline-color:#15803d}

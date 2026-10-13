@@ -7,7 +7,7 @@ export default function FounderProfile() {
           <figcaption className="sn-founder-experience">
             <div><strong translate="no">Marinus Bergsma</strong><span>Grafische vormgeving</span></div>
             <div className="sn-founder-tenure">
-              <div className="sn-founder-role"><span className="sn-founder-company-logo"><img src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="600" height="140" loading="lazy" /></span><span><b>5 jaar</b><span>SocialNow · in november</span></span></div>
+              <div className="sn-founder-role"><span className="sn-founder-company-logo"><img src="/icon-512.png" alt="SocialNow" width="512" height="512" loading="lazy" /></span><span><b>5 jaar</b><span>SocialNow · in november</span></span></div>
               <div className="sn-founder-role"><img className="sn-founder-personal-logo" src="/images/marinus-bergsma-vormgeving-logo.png" alt="Marinus Bergsma Grafische Vormgeving" width="512" height="512" loading="lazy" /><span><b>7 jaar</b><span>eigen bedrijf</span></span></div>
             </div>
           </figcaption>

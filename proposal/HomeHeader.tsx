@@ -1,16 +1,35 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Play } from "lucide-react";
 import TeamTrust from "./TeamTrust";
 import ExplainerPlayer from "./ExplainerPlayer";
 import "./home-header.css";
 
+function PainCounter({ target, money = false }: { target: number; money?: boolean }) {
+  const element = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    if (!element.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const format = (value: number) => money ? `€${value.toLocaleString("nl-NL")}+` : String(value);
+    const start = performance.now();
+    let frame = 0;
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / 1200, 1);
+      if (element.current) element.current.textContent = format(Math.round(target * (1 - (1 - progress) ** 3)));
+      if (progress < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [target, money]);
+  return <span ref={element} translate="no">{money ? `€${target.toLocaleString("nl-NL")}+` : target}</span>;
+}
+
 // 12 oktober 2026: gekozen header 3, met bedrijfsvoering en de menselijke verbinding centraal.
 export default function HomeHeader() {
   return <div className="sn-home-copy">
     <TeamTrust />
     <div className="sn-home-pain">
-      <strong>Vier bedrijven. Vier facturen. Elke maand opnieuw.</strong>
+      <div className="sn-pain-counters"><strong><PainCounter target={4} /><small>verschillende organisaties</small></strong><strong><PainCounter target={1000} money /><small>per maand</small></strong></div>
+      <strong>Weet jij waar welke kosten vandaan komen?</strong>
       <span>Marketingbureau · Webdesigner · Ads-bureau · Softwarelicenties</span>
     </div>
     <h1 className="sn-home-title">Wij doen het anders.</h1>

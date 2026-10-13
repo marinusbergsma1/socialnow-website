@@ -90,6 +90,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
 ];
 // Bedrijfsreferenties zijn echte, bevestigde websites of het profiel van de oprichter.
 export const partnerReferences: Record<string, { name: string; url: string }[]> = {
+  "Marinus Bergsma": [{ name: "SocialNow", url: "https://socialnow.nl/" }, { name: "MOJO", url: "https://www.mojo.nl/" }, { name: "Universal", url: "https://www.universalpictures.nl/" }],
   "Femke Oostendorp": [{ name: "Femke’s Fotografie", url: "https://femkesfotografie.nl/" }],
   "Steef Komen": [{ name: "Komen Consultancy", url: "https://www.komenconsultancy.com/" }],
   "Michelle Yang": [{ name: "Komen Consultancy", url: "https://www.komenconsultancy.com/" }],

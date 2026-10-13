@@ -66,7 +66,7 @@ html:root .sn-site .h-team-duo .h-partner-referenties a { color: var(--c-knopgro
 
 /* 13 oktober: lichtere opvulling in de eigen kleur, witte tekst en donkere rand. */
 html:root .sn-site .sn-home-human,
-html:root .sn-site .sn-home-offer strong{color:#5bd98d}
+html:root .sn-site .sn-home-offer strong{color:var(--c-knopgroen);text-shadow:none}
 html:root .sn-site .sn-home-cta{--sn-cta-fill:#25d366;--sn-cta-rim:#15803d;position:relative;isolation:isolate;overflow:hidden;color:#fff!important;border-color:var(--sn-cta-rim);transition:border-color .35s ease}
 html:root .sn-site .sn-home-secondary{--sn-cta-fill:#1f3e58;--sn-cta-rim:#14283a}
 html:root .sn-site .sn-home-cta::before{content:"";position:absolute;inset:0;background:var(--sn-cta-fill);z-index:-1;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.22,1,.36,1);pointer-events:none}

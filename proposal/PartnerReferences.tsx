@@ -6,13 +6,16 @@ import "./partner-references.css";
 // Existing assets already used by TeamTrust. No logo or company relationship is inferred.
 const logoAssets: Record<string, string> = {
   "Femke’s Fotografie": "/images/merken/femkes-fotografie.webp",
-  "Komen Consultancy": "/images/merken/komen-consultancy.webp",
+  "Komen Consultancy": "/images/merken/komen-operation-systems.webp",
   "Bruggn Design": "/images/merken/bruggn-design.png",
   ByteChat: "/images/merken/bytechat.svg",
   ByteVision: "/images/merken/bytevision.png",
   KLM: "/images/merken/klm.svg",
   BearingPoint: "/images/merken/bearingpoint.svg",
   "ABN AMRO": "/images/merken/abn-amro.svg",
+  SocialNow: "/images/SocialNow-Logo-2026.webp",
+  MOJO: "/images/merken/MOJO-LOGO.webp",
+  Universal: "/images/merken/UNDER-ARMOUR-LOGO-1.webp",
   Fincer: "/images/merken/fincer.png",
 };
 const experience = new Set(["KLM", "BearingPoint", "ABN AMRO"]);
