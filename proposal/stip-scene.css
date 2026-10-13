@@ -1,0 +1,9 @@
+/* Keep canvas backing-store dimensions out of document layout. */
+.sn-site .sn-stipscene{position:relative;width:100%;min-height:64px}
+.sn-site .sn-stipscene>canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sn-site .sn-stipscene>:not(canvas){position:relative}
+.sn-site .h-resultaat-stippen{height:86px}
+.sn-site .h-vink-stippen{height:96px}
+.sn-site .tr-dash-stippen{height:70px;min-height:0}
+.sn-site .h-koppel-regel .h-koppel-draad.sn-stipscene{height:16px;min-height:0}
+.sn-site .h-score-stippen.sn-stipscene{width:72px;height:72px;min-height:0}

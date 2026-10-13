@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import "./stip-scene.css";
 import { Veld, type VeldOpties } from "./stippen";
 
 // Een stippenvlak in een tegel, zoals de scènes in de explainer: een raster dat pas iets doet als de tegel in beeld komt.

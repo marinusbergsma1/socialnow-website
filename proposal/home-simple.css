@@ -30,3 +30,5 @@
 @media(max-width:760px){.sn-home-story-card{grid-template-columns:1fr;padding:24px;gap:12px}:root .sn-site .sn-home-story-card .h-character-coder{width:150px;margin:auto}}
 :root .sn-site .sn-home-story-card p{color:#41566a!important}
 :root .sn-site .sn-home-story-card .h-character-coder{border-radius:14px;overflow:hidden;background:#000}
+
+.sn-site .sn-home-milos .h-os-agent .sn-tegel-vlak > :first-child{width:160px;height:160px;margin:0 auto 12px}.sn-site .sn-home-milos .h-os-belofte{min-height:2.4em}.sn-site .sn-home-milos .sn-tegel-tekst{line-height:1.55}

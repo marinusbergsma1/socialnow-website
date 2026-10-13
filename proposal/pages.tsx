@@ -17,6 +17,10 @@ import { Link } from "react-router-dom";
 import { OnderDeVouw, later } from "./later";
 import HomeHeader, { HomeExplainer } from "./HomeHeader";
 import FreeWebsite from "./FreeWebsite";
+import { Bento, Tegel } from "./Bento";
+import { MiloPortrait, TextLink } from "./ui";
+import OsPeople from "./OsPeople";
+import { agents } from "./content";
 import HomeTeam from "./HomeTeam";
 import CharacterAccent from "./CharacterAccent";
 import { useLanguage } from "./i18n/context";
@@ -46,10 +50,14 @@ export function Home() {
       </div>
     </section>
     <OnderDeVouw ruimte={false}><Bereikt /></OnderDeVouw>
-    <section className="h-section h-wrap sn-home-operations" id="het-os" aria-labelledby="sn-operations-title">
-      <div className="sn-home-planet" aria-hidden="true"><BrandGlobe /></div>
-      <img className="sn-operations-logo" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="140" />
-      <div className="sn-home-operations-copy"><p className="h-eyebrow">Operation &amp; Management</p><h2 id="sn-operations-title">Je website, CRM, content en advertenties. Samen in één systeem.</h2><p>SocialNow OS verbindt je dagelijkse bedrijfsvoering. Onze experts denken persoonlijk met je mee.</p><Link className="h-text-link" to="/het-os">Ontdek het systeem ↗</Link></div>
-    </section>
+    <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} className="sn-home-milos" swipe>
+      {agents.map(agent => <Tegel key={agent.id} kop={agent.title} breed={3} className="h-os-agent">
+        <MiloPortrait role={agent.id} name={agent.name} maat={256} />
+        <strong className="h-os-belofte" style={{ color: agent.color }}>{agent.promise}</strong>
+        <p className="sn-tegel-tekst">{agent.text}</p>
+        <OsPeople role={agent.id} />
+        <div className="sn-tegel-onder"><TextLink to={`/het-os#${agent.id}`}>Ontdek dit onderdeel</TextLink></div>
+      </Tegel>)}
+    </Bento>
   </div>;
 }
