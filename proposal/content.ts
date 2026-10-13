@@ -82,7 +82,6 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   // 5 oktober 2026 (Marinus): "HIJ MOET OOK BIJ HET TEAM EN BIJ NEW PARTNER." Steven Goudsblom (Fincer B.V.) doet het
   // vermogensbeheer voor SocialNow en onze klanten.
   { name: "Steven Goudsblom", role: "New partner · Wealth management · Fincer", image: "Steven-Goudsblom.webp", linkedin: "https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/", sinds: "2026-10-05" },
-  { name: "Albert Deltour", role: "Extern adviseur en klankbord", image: "Albert-Deltour.webp", linkedin: "https://www.linkedin.com/in/albert-deltour-020a8438/", sinds: "2026-10-07" },
   // 10 oktober 2026 (Marinus): Daniel Schotman (Creator Code, content agency en personal branding) erbij, "Hoeft niet groot".
   // Nog geen LinkedIn bevestigd; in het track record linkt zijn naam naar instagram.com/danielschotman.
   { name: "Daniel Schotman", role: "Content & Personal Branding · Creator Code", image: "Daniel-Schotman.webp", sinds: "2026-10-10" },

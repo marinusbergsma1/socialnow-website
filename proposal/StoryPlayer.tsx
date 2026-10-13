@@ -7,6 +7,7 @@ export default function StoryPlayer() {
   const [started, setStarted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [paused, setPaused] = useState(true);
   const play = async () => {
     const player = video.current;
     if (!player) return;
@@ -23,12 +24,18 @@ export default function StoryPlayer() {
     }
   };
   return <div className="h-story-video-wrap">
-    <video ref={video} controls={started} playsInline preload="metadata"
+    <video id="story-film" ref={video} controls={started} playsInline preload="metadata"
       poster="/video/verhaal/story-presentatie-poster.jpg" aria-label="The story of Marinus Bergsma"
-      onPlaying={() => { setStarted(true); setLoading(false); setFailed(false); }}
+      onPlaying={() => { setStarted(true); setPaused(false); setLoading(false); setFailed(false); }}
+      onPause={() => setPaused(true)} onEnded={() => setPaused(true)}
       onError={() => { setFailed(true); setLoading(false); setStarted(false); }}>
       <source src="/video/verhaal/story-presentatie.mp4?v=connect-20261012" type="video/mp4" />
     </video>
+    {started && <button type="button" className="h-story-toggle h-story-play"
+      onClick={() => { if (video.current?.paused) void play(); else video.current?.pause(); }}
+      aria-controls="story-film" disabled={loading}>
+      <span aria-hidden="true">{paused ? "▶" : "Ⅱ"}</span><span>{t(paused ? "Afspelen" : "Pauzeren")}</span>
+    </button>}
     {!started && <div className="h-story-start">
       <button type="button" className="h-story-play" onClick={play} disabled={loading}>
         <span aria-hidden="true">▶</span><span>{t(loading ? "Video laden…" : failed ? "Probeer opnieuw" : "Bekijk mijn verhaal")}</span>

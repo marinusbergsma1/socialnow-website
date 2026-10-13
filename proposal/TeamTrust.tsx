@@ -5,10 +5,8 @@ import { people } from "./content";
 import { klein } from "./licht";
 import LinkedInMark, { NaamMetLinkedIn } from "./LinkedInMark";
 import InstagramMark from "./InstagramMark";
-import { OnderDeVouw, later } from "./later";
 // 11 oktober 2026: Albert's tegel (negen talen tekst) laadt na het eerste script; de opmaak blijft in het ene css-bestand.
 import "./advisory-partner.css";
-const AdvisoryPartner = later(() => import("./AdvisoryPartner").then((m) => m.default));
 import { useLanguage } from "./i18n/context";
 
 // Iedereen uit people, Marinus voorop; de rest in de volgorde van de muur.
@@ -209,7 +207,6 @@ export function TeamJoin() {
         <PartnerTekst soort="fincer" />
       </div>
     </div>
-    <OnderDeVouw ruimte={false}><AdvisoryPartner /></OnderDeVouw>
     <div className="h-board">
       <div className="h-board-tekst"><b>Board</b><strong>Operations and wealth.</strong><span>Michelle and Steven</span></div>
       {BOARD.map(naam => <DuoTegel key={naam} naam={naam} />)}

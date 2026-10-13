@@ -3,7 +3,6 @@ import { projects } from "./projecten";
 import { AmbientVideo } from "./motion";
 import { MediaDialog, type MediaItem } from "./MediaSliders";
 import { Action, Heading } from "./ui";
-import { customerReviews } from "./CustomerReviews";
 import "./cases.css";
 
 // 22 september 2026 (Marinus): de namen en het vergrootteken staan niet meer over de beelden heen;
@@ -50,7 +49,6 @@ const selections = [
 
 export default function FeaturedWork() {
   const [selected, setSelected] = useState<MediaItem | null>(null);
-  const albert = customerReviews.find((review) => review.name === "Albert Deltour")!;
   return (
     <section
       className="h-section h-wrap h-featured-work"
@@ -168,16 +166,6 @@ export default function FeaturedWork() {
           Bekijk al ons werk
         </Action>
       </div>
-      <details className="h-cases">
-        <summary>Klantreactie</summary>
-        <figure className="h-case-review">
-          <blockquote lang="en" translate="no">“{albert.text}”</blockquote>
-          <figcaption className="h-case-wie">
-            <img src={albert.image} alt="" width="40" height="40" loading="lazy" />
-            <span><strong translate="no">{albert.name}</strong><a href={albert.website} target="_blank" rel="noopener noreferrer" translate="no">{albert.company}</a></span>
-          </figcaption>
-        </figure>
-      </details>
       <MediaDialog item={selected} close={() => setSelected(null)} />
     </section>
   );
