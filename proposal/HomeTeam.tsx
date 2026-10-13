@@ -11,7 +11,7 @@ const groups = [
   { name: "Web development", members: ["Sid van Kalken", "Antony Soosaipillaj"] },
   { name: "Finance & operations", members: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
   { name: "Ads & search", members: ["Jos Hollenberg", "Nick van Keulen", "Sergio Jovovic"] },
-  { name: "Video, photo & design", members: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Pepijn Bos", "Armando van Bruggen"] },
+  { name: "Video, photo & design", members: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Pepijn Bos", "Armando van Bruggen"] },
   { name: "UGC & social media", members: ["Isa Zoer", "Daniel Schotman"] },
   { name: "Sales & partnerships", members: ["Marinus Bergsma", "Elian Coellar", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster", "Ruben Spyckerelle"] },
 ];
