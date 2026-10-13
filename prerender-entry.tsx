@@ -10,6 +10,8 @@ import * as i18n from "./proposal/i18n/context";
 // hier eerst allemaal, zodat elke pagina volledig in de HTML staat.
 export { allesVooraf } from "./proposal/later";
 
+export const missingTranslations = i18n.missingTranslations;
+
 export const LANGUAGES: readonly string[] = i18n.LANGUAGES;
 
 // Laden de woordenboeken per taal (loadLanguage), dan moet dat vóór het renderen gebeuren, anders

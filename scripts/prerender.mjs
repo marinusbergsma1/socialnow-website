@@ -41,7 +41,7 @@ await build({
   },
 });
 
-const { render, prepare, LANGUAGES, allesVooraf } = await import(pathToFileURL(path.join(uit, "prerender-entry.mjs")).href);
+const { render, prepare, LANGUAGES, allesVooraf, missingTranslations } = await import(pathToFileURL(path.join(uit, "prerender-entry.mjs")).href);
 // Secties onder de vouw en de andere pagina's laden in de browser later (proposal/later.tsx); hier eerst allemaal.
 await allesVooraf();
 // De taal van een pad volgt uit dezelfde lijst als de app (proposal/i18n/context.ts), zodat er bij een
@@ -119,6 +119,7 @@ for (const pad of paden) {
   aantal++;
 }
 rmSync(uit, { recursive: true, force: true });
+if (missingTranslations.size) fouten.push(`Engelse vertalingen ontbreken: ${[...missingTranslations].join(" | ")}`);
 if (fouten.length) {
   console.error("[prerender] mislukt:\n" + fouten.join("\n"));
   process.exit(1);

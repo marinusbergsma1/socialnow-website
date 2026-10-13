@@ -39,7 +39,7 @@ export default function HomeTeam() {
     return () => { observer.disconnect(); el.classList.remove("is-reveal-ready"); };
   }, [filter]);
   const shown = groups.filter(group => !filter || group.name === filter);
-  return <section ref={team} className="sn-home-team" id="team" aria-labelledby={id} translate="no">
+  return <section ref={team} className="sn-home-team" id="team" aria-labelledby={id}>
     <header className="sn-home-team-intro">
       <div><span>OUR PEOPLE · INDEPENDENT EXPERTS</span><h2 id={id}>Human connection.<br /><em>Per expertise.</em></h2></div>
       <p>De juiste mensen voor jouw bedrijf.<br />Creatie, marketing, sales, data en techniek.</p>
@@ -58,7 +58,7 @@ export default function HomeTeam() {
             return <article className="sn-home-team-person" key={person.name} style={{ "--team-delay": `${Math.min(index % 6, 4) * 60}ms` } as React.CSSProperties}>
               <img {...klein(person.image, "(max-width: 650px) 45vw, (max-width: 1100px) 22vw, 12vw", [160, 320, 480])} alt={person.name} width="320" height="400" loading="lazy" className={person.name === "Jelle Ursem" ? "is-jelle" : undefined} />
               <div className="sn-home-team-info">
-                <strong>{person.name}{person.linkedin ? <LinkedInMark /> : person.instagram ? <InstagramMark /> : null}</strong>
+                <strong><span translate="no">{person.name}</span>{person.linkedin ? <LinkedInMark /> : person.instagram ? <InstagramMark /> : null}</strong>
                 <span>{person.name === "Ruben Spyckerelle" ? "B2B Cold Calling & Appointment Setting" : person.role}</span>
                 {person.description ? <details><summary>Focus & aanpak ↗</summary><p>{person.description}<br />Benelux &amp; DACH<br />{person.quote}</p></details> : null}
               </div>
