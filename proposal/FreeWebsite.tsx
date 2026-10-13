@@ -4,7 +4,6 @@ import "./free-website.css";
 export const ONBOARDING_URL = "https://website.socialnow.nl";
 const examples = [
   { name: "VDZ Brigade", url: "https://vdz-brigade.nl", image: "/screenshots/vdz-brigade-hero.webp", video: "/video/vdz/vdz-house.mp4", poster: "/video/vdz/vdz-house-poster.jpg", film: "Website-animatie" },
-  { name: "kWh Garant", url: "https://kwhgarant.nl", image: "/screenshots/kwhgarant-hero.webp", video: "/video/os/os-kwh-case.mp4", poster: "/screenshots/kwhgarant-hero.webp", film: "Website en OS · casevideo" },
   { name: "Il Gordo", url: "https://ilgordo.nl", image: "/screenshots/ilgordo-hero.webp", video: "/video/ilgordo/ilgordo-header.mp4", poster: "/video/ilgordo/ilgordo-header-poster.webp", film: "Websitefilm" },
 ];
 
@@ -36,11 +35,10 @@ function WebsiteExamples() {
       </div>
       <a href={project.url} target="_blank" rel="noopener noreferrer">Open website ↗</a>
     </div>
-    <div className={`sn-fw-preview ${view === "video" ? `is-video ${index === 1 ? "is-portrait" : ""}` : ""}`}>
+    <div className={`sn-fw-preview ${view === "video" ? "is-video" : ""}`}>
       {near && (view === "website" ? <iframe key={project.url} src={project.url} title={project.name} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" /> : <video key={project.video} controls playsInline preload="metadata" poster={project.poster} aria-label={project.film}><source src={project.video} type="video/mp4" /></video>)}
     </div>
     <p className="sn-fw-example-note">Eerder werk, ter inspiratie voor jouw demo.</p>
-    {view === "video" && index === 1 && <p className="sn-fw-example-note">Deze casevideo laat ook het OS zien. Dat staat los van het gratis Odoo-boekhoudplan.</p>}
   </div>;
 }
 
