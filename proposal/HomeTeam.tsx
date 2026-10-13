@@ -85,10 +85,11 @@ export default function HomeTeam() {
             return <article className="sn-home-team-person" key={person.name} style={{ "--team-delay": `${Math.min(index % 6, 4) * 60}ms` } as React.CSSProperties}>
               <img {...klein(person.image, "(max-width: 650px) 45vw, (max-width: 1100px) 22vw, 12vw", [160, 320, 480])} alt={person.name} width="320" height="400" loading="lazy" className={person.name === "Jelle Ursem" ? "is-jelle" : undefined} />
               <div className="sn-home-team-info">
-                <strong><span translate="no">{person.name}</span>{person.linkedin ? <LinkedInMark /> : person.instagram ? <InstagramMark /> : null}</strong>
+                <strong><span translate="no">{person.name}</span></strong>
                 <span>{person.name === "Ruben Spyckerelle" ? "B2B Cold Calling & Appointment Setting" : person.role}</span>
                 {person.description ? <details><summary>Focus & aanpak ↗</summary><p>{person.description}<br />Benelux &amp; DACH<br />{person.quote}</p></details> : null}
               </div>
+              {url && <span className="sn-home-team-social" aria-hidden="true">{person.linkedin ? <LinkedInMark /> : <InstagramMark />}</span>}
               {url ? <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`${person.name} op ${person.linkedin ? "LinkedIn" : "Instagram"}`} /> : null}
             </article>;
           })}

@@ -62,3 +62,6 @@
 @keyframes sn-team-glow-expand{0%{transform:translate(-50%,-50%) scale(.02);opacity:0}15%{opacity:1}100%{transform:translate(-50%,-50%) scale(1.4);opacity:0}}
 :root [data-motion-pauze] .sn-team-glow-layer{display:none}
 @media(prefers-reduced-motion:reduce){.sn-team-glow-layer{display:none}}
+/* Sociale kanalen apart in de hoek: de volledige naam houdt alle ruimte. */
+:root .sn-site .sn-home-team-social{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:28px;height:28px;background:rgba(7,17,12,.8);border:1px solid #ffffff30;border-radius:5px;pointer-events:none}
+:root .sn-site .sn-home-team-social>.h-linkedin-mark{display:block;width:16px;height:16px;margin:0}
