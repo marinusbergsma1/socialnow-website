@@ -29,7 +29,7 @@ export default function StoryPlayer() {
       onPlaying={() => { setStarted(true); setPaused(false); setLoading(false); setFailed(false); }}
       onPause={() => setPaused(true)} onEnded={() => setPaused(true)}
       onError={() => { setFailed(true); setLoading(false); setStarted(false); }}>
-      <source src="/video/verhaal/story-presentatie.mp4?v=connect-20261012" type="video/mp4" />
+      <source src="/video/verhaal/story-presentatie.mp4?v=story-short-20261013" type="video/mp4" />
     </video>
     {started && <button type="button" className="h-story-toggle h-story-play"
       onClick={() => { if (video.current?.paused) void play(); else video.current?.pause(); }}
@@ -40,7 +40,7 @@ export default function StoryPlayer() {
       <button type="button" className="h-story-play" onClick={play} disabled={loading}>
         <span aria-hidden="true">▶</span><span>{t(loading ? "Video laden…" : failed ? "Probeer opnieuw" : "Bekijk mijn verhaal")}</span>
       </button>
-      {failed && <p role="alert">{t("De video kon niet starten.")} <a href="/video/verhaal/story-presentatie.mp4?v=connect-20261012" target="_blank" rel="noopener noreferrer">{t("Open de video")}</a></p>}
+      {failed && <p role="alert">{t("De video kon niet starten.")} <a href="/video/verhaal/story-presentatie.mp4?v=story-short-20261013" target="_blank" rel="noopener noreferrer">{t("Open de video")}</a></p>}
     </div>}
   </div>;
 }
