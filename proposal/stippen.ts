@@ -336,7 +336,7 @@ export function siteVeld(): Veld | null {
     const [x, y] = e.detail === 0 && doel
       ? site.midden(doel)
       : [e.clientX + scrollX, e.clientY + scrollY];
-    site.golf(x, y, "groen", { straal: Math.hypot(innerWidth, innerHeight), duur: .75, breed: 120, sterkte: 1 });
+    site.golf(x, y, "groen", { straal: Math.hypot(innerWidth, innerHeight), duur: 1.1, breed: 120, sterkte: 1 });
   });
   return site;
 }

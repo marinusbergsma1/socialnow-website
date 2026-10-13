@@ -3,7 +3,7 @@
    koppen en de stippen. Daarna: "En overal een hele lichte lightsweep in het groen", "Alsof ie shined": over elke knop met
    een dekkende groene vulling glijdt af en toe een smalle, lichte glans. Met minder beweging staat die stil.
    Laatste css-bestand (na stippen.css), zodat dit wint. Proef: scripts/proef-knopgroen.mjs. */
-:root { --c-knopgroen: #1a8f45; }
+:root { --c-knopgroen: #16a34a; --c-groen-hover: #25d366; }
 
 /* Vulling */
 html:root .sn-site .sn-home-cta:not(.sn-home-secondary),
@@ -63,3 +63,12 @@ html:root .h-skip {
 html:root .sn-site .sn-connections-list a { color: var(--c-knopgroen); }
 html:root .sn-site .sn-connections-list a:focus-visible { outline-color: var(--c-knopgroen); }
 html:root .sn-site .h-team-duo .h-partner-referenties a { color: var(--c-knopgroen); }
+
+/* Lichter groen met de vertrouwde opvulling van links naar rechts. */
+html:root .sn-site .sn-home-human,
+html:root .sn-site .sn-home-offer strong{color:#5bd98d}
+html:root .sn-site .sn-home-cta{position:relative;isolation:isolate;overflow:hidden;transition:color .35s ease,border-color .35s ease}
+html:root .sn-site .sn-home-cta::before{content:"";position:absolute;inset:0;background:#25d366;z-index:-1;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.22,1,.36,1);pointer-events:none}
+html:root .sn-site .sn-home-cta:is(:hover,:focus-visible)::before{transform:scaleX(1)}
+html:root .sn-site .sn-home-cta:is(:hover,:focus-visible){color:#06140b;border-color:#25d366}
+@media(prefers-reduced-motion:reduce){html:root .sn-site .sn-home-cta,html:root .sn-site .sn-home-cta::before{transition:none}}
