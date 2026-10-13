@@ -9,6 +9,8 @@ export type MediaItem = {
   title: string;
   kind: "image" | "video";
   slug?: string;
+  preview?: string;
+  poster?: string;
 };
 export const portfolioImages: MediaItem[] = [
   {
@@ -94,8 +96,10 @@ export const portfolioVideos: MediaItem[] = [
     "Friday Freshness",
   ],
   ["HD/MUSE%20MODE%20TEAM%20VIDEO.mp4", "Muse Mode · Team"],
-].map(([file, title]) => ({
-  src: `https://storage.googleapis.com/video-slider/${file}`,
+].map(([, title], index) => ({
+  src: `/video/portfolio/${String(index + 1).padStart(2, "0")}.mp4`,
+  preview: `/video/portfolio/${String(index + 1).padStart(2, "0")}-preview.mp4`,
+  poster: `/video/portfolio/${String(index + 1).padStart(2, "0")}.jpg`,
   title,
   kind: "video",
 }));
@@ -148,7 +152,8 @@ export function MediaDialog({
           controls
           autoPlay
           playsInline
-          preload="metadata"
+          preload="auto"
+          poster={item.poster}
           aria-label={item.title}
         />
       ) : (
@@ -335,7 +340,10 @@ function MediaRail({
               >
                 {media.kind === "video" ? (
                   <AmbientVideo
-                    src={media.src}
+                    src={media.preview || media.src}
+                    poster={media.poster}
+                    preloadMargin="1500px 900px"
+                    originalSrc={copy === 1 ? media.src : undefined}
                     label={media.title}
                     suspended={!!item}
                     hoverSound

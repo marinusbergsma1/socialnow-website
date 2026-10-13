@@ -1,3 +1,8 @@
+import Verhaal from "./Verhaal";
+import HomeTeam from "./HomeTeam";
+import NulNaarBedrijf from "./NulNaarBedrijf";
+import MensEnAI from "./MensEnAI";
+import { Integraties } from "./TeamTrust";
 import React, { useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { CONTACT_MAIL, heeftWhatsApp, mailLink, whatsappLink } from "./aanvragen";
@@ -16,7 +21,7 @@ import { Bento, Tegel } from "./Bento";
 import { AuditTeaser } from "./AuditPage";
 import FeaturedWork from "./FeaturedWork";
 import LiveWebsites from "./LiveWebsites";
-import { ImageSliders } from "./MediaSliders";
+import { ImageSliders, VideoSlider } from "./MediaSliders";
 import OsEntry, { GRATIS_OS_URL } from "./os-entry";
 import { agents, people, services } from "./content";
 import { projects } from "./projecten";
@@ -215,6 +220,9 @@ export function OsPage() {
         <Heading label="Jouw vragen" title="Wat wil je weten?" />
         <Questions />
       </section>
+      <NulNaarBedrijf />
+      <section className="h-section h-wrap"><Integraties /></section>
+      <MensEnAI />
     </>
   );
 }
@@ -241,6 +249,7 @@ export function ProjectsPage() {
       <FeaturedWork />
       <LiveWebsites />
       <ImageSliders />
+      <VideoSlider />
       <ShowcaseFilms />
       <InstagramWork />
       <section className="h-wrap h-projects-list">
@@ -510,9 +519,10 @@ export function TeamPage() {
         <p className="h-partners-tekst">
           Iedere partner brengt eigen expertise mee: van creatie en marketing tot data en techniek. SocialNow verbindt die expertise met jouw vraag en bewaakt de kwaliteit.
         </p>
-        <TeamGrid members={specialists} />
+        <HomeTeam />
         <AuditTeaser />
       </section>
+      <Verhaal />
     </>
   );
 }

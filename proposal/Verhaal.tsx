@@ -1,3 +1,4 @@
+import FounderProfile from "./FounderProfile";
 import React from "react";
 import CharacterAccent from "./CharacterAccent";
 import { HeroReview } from "./CustomerReviews";
@@ -7,7 +8,7 @@ import { people } from "./content";
 import { TextLink } from "./ui";
 import { Bento, BentoFilm, Tegel } from "./Bento";
 import { klein } from "./licht";
-import { VideoSlider } from "./MediaSliders";
+
 
 // 28 september 2026 (Marinus): "wat belangrijk was bij de beurs van Odoo is dat ik merkte dat het persoonlijke
 // verhaal en waarom het OS gratis kan zijn". Later die nacht: "waar het om gaat is mijn verhaal hier gelijk verteld
@@ -136,9 +137,7 @@ export default function Verhaal() {
         titel={<>Van grafisch vormgever<br /><span>tot jouw OS.</span></>}
       >
         <Tegel kop="Marinus Bergsma" breed={4} soort="foto" className="h-verhaal-portret">
-          <img src="/images/marinus-profiel-blauw.webp" alt="Marinus Bergsma, oprichter van SocialNow" width="640" height="680" loading="lazy" />
-          {/* 5 oktober 2026 (Marinus): "Ik ben verder ook geen 5 jaar in November maar SocialNow." */}
-          <span className="h-verhaal-jaren"><b>5</b>jaar SocialNow in november</span>
+          <FounderProfile />
         </Tegel>
         <Tegel kop="Mijn waarom" breed={8}>
           <Waarom />
@@ -161,7 +160,7 @@ export default function Verhaal() {
           </Tegel>
         ))}
       </Bento>
-      <VideoSlider history />
+
     </>
   );
 }

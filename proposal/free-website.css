@@ -4,7 +4,7 @@
   --fw-zwart: #06080d;
   margin: clamp(56px, 7vw, 112px) 0 0;
   padding: clamp(44px, 6vw, 88px) 0;
-  background: radial-gradient(circle at 16px 16px, #25d36640 1px, transparent 1.5px) 0 0 / 32px 32px;
+  background: transparent;
   color: #e4ece8;
   scroll-margin-top: 80px;
   overflow-x: clip;

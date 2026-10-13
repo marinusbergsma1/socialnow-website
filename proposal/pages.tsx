@@ -1,35 +1,6 @@
-// 30 september 2026: de JavaScript van secties en pagina's laadt later (proposal/later.tsx), hun opmaak niet. Die blijft
-// in het ene css-bestand op precies dezelfde plek in de volgorde als voorheen, zodat er niets anders valt.
 import "./milo-vragen.css";
-import React, { useState } from "react";
 import "./hero-c.css";
-// 30 september 2026: secties onder de vouw en onderdelen van andere pagina's laden later (proposal/later.tsx).
-import { OnderDeVouw, later } from "./later";
-const MiloVragen = later(() => import("./MiloVragen").then((m) => m.default));
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import { CONTACT_MAIL, heeftWhatsApp, mailLink, whatsappLink } from "./aanvragen";
-import {
-  ArrowDown,
-  ArrowUpRight,
-  Check,
-  Mail,
-  MapPin,
-  MessageCircle,
-} from "lucide-react";
-import HomeHeader, { HomeExplainer } from "./HomeHeader";
-import HomeTeam from "./HomeTeam";
-import { MiloMotion, miloPoster } from "./motion";
-import { klein, useDichtbij, useNaBeeld } from "./licht";
-import CharacterAccent from "./CharacterAccent";
-import { LanguageContext, translate, useLanguage } from "./i18n/context";
-import OsPeople from "./OsPeople";
-import { INTEGRATIES, Integraties } from "./TeamTrust";
 import "./partner-intro.css";
-import StoryPlayer from "./StoryPlayer";
-const PartnerIntro = later(() => import("./PartnerIntro").then((m) => m.default));
-const VdzOutcome = later(() => import("./VdzOutcome").then((m) => m.default));
-const Verhaal = later(() => import("./Verhaal").then((m) => m.default));
-import { Bento, Tegel } from "./Bento";
 import "./bereikt.css";
 import "./mens-en-ai.css";
 import "./vacatures-bento.css";
@@ -39,329 +10,39 @@ import "./cases.css";
 import "./media-bento.css";
 import "./pricing.css";
 import "./site-visie.css";
-const Deuren = later(() => import("./Deuren").then((m) => m.default));
-// 11 oktober 2026: de speler met de veiligheidsfilms staat onder in de hero en laadt na het eerste script.
-const VeiligheidSpeler = later(() => import("./VeiligheidSpeler").then((m) => m.default));
-const Bereikt = later(() => import("./Bereikt").then((m) => m.default));
-const NulNaarBedrijf = later(() => import("./NulNaarBedrijf").then((m) => m.default));
-const MensEnAI = later(() => import("./MensEnAI").then((m) => m.default));
-const VacaturesBento = later(() => import("./VacaturesBento").then((m) => m.default));
-const VeiligheidBlok = later(() => import("./Veiligheid").then((m) => m.default));
-const TrustStories = later(() => import("./TrustStories").then((m) => m.default));
-// 11 oktober 2026: de globe is achtergrond en tekent pas na het eerste script (voorgerenderde html toont hem al).
-const BrandGlobe = later(() => import("./BrandGlobe").then((m) => m.default));
-import { ProductOffer, ProductRoute } from "./ProductStart";
 import "./free-website.css";
-const FreeWebsite = later(() => import("./FreeWebsite").then((m) => m.default));
 import "./wereldkaart.css";
-const WereldKaart = later(() => import("./WereldKaart").then((m) => m.default));
-import OsEntry, { CLAIM_URL, OsDock, REVIEWS_URL } from "./os-entry";
-import { agents, people, services } from "./content";
-import {
-  Action,
-  AgentCards,
-  ConversionBridge,
-  Heading,
-  MiloPortrait,
-  PageHeading,
-  ProjectCard,
-  Questions,
-  TeamGrid,
-  TextLink,
-  VideoBlock,
-} from "./ui";
-
-function Film({ src, poster, label, titel, klasse, geluid, zetGeluid, boven }: { src: string; poster: string; label: string; titel: string; klasse: string; geluid: boolean; zetGeluid: (aan: boolean) => void; boven?: React.ReactNode }) {
-  const ref = React.useRef<HTMLVideoElement>(null);
-  const { ref: vak, dichtbij } = useDichtbij<HTMLDivElement>();
-  React.useEffect(() => { if (ref.current) ref.current.muted = !geluid; }, [geluid]);
-  // 30 september 2026 (Marinus): "WIL ECHT INSTANT LOADING". De film laadt en start pas als de poster (het eerste beeld) staat.
-  const klaar = useNaBeeld(poster);
-  React.useEffect(() => { if (dichtbij && klaar && ref.current) void ref.current.play().catch(() => {}); }, [dichtbij, klaar]);
-  const wissel = () => {
-    const film = ref.current;
-    if (film && !geluid) { film.currentTime = 0; void film.play().catch(() => {}); }
-    zetGeluid(!geluid);
-  };
-  return (
-    <div className={klasse} ref={vak}>
-      {/* 26 september 2026 (Marinus): "video's iets groter met titels erboven". */}
-      {boven}
-      <p className="h-film-titel">{titel}</p>
-      <div className="h-film-vak">
-      <video ref={ref} src={dichtbij ? src : undefined} poster={poster} muted loop playsInline preload="none" aria-label={label} />
-      <button type="button" className="h-hero-film-geluid" onClick={wissel} aria-pressed={geluid}>
-        {geluid ? "Geluid uit" : "Geluid aan"}
-      </button>
-      </div>
-    </div>
-  );
-}
-
-// 30 september 2026 (Marinus): "wel veel", "iets zakelijker en meer rust". Rechts alleen de OS-film; de
-// veiligheidsfilms staan onder de vouw (HeroVeilig). Home houdt bij welke film geluid heeft, één tegelijk.
-type HeroGeluid = "" | "os" | "veilig";
-// 30 september 2026 (Marinus): "DEZE MOET JUIST LIGGEND ZIJN, IK EEN BLOK EN SID EEN BLOK ALS SPREKERS PLUS DEZE FOTO VAN
-// HEM, met de achtergrondkleur van Attesso" en "Deze nog groot maken en Attesso een belangrijk onderdeel, dat we dit echt samen
-// doen, lezingen geven". Liggend blok over de hele breedte: links de uitnodiging, rechts twee sprekers. Sid in Attesso-roze.
-// Het vierkante portret vult een staande kaart: de getoonde maat is de hoogte van de kaart (ongeveer 30vw op de pc).
-const SPREKER_MAAT = "(max-width: 900px) 55vw, 30vw";
-function HeroSprekers() {
-  return (
-    <section className="h-sprekers" aria-labelledby="h-sprekers-kop" translate="no">
-      <div className="h-sprekers-tekst">
-        <p className="h-sprekers-label">SocialNow <span aria-hidden="true">&times;</span> <code>~/attesso</code></p>
-        <h2 id="h-sprekers-kop">Book a free live demo</h2>
-        <p>SocialNow and Attesso build this together. The OS runs your business, Attesso makes every payment safe and approved. Together we give live demos, talks and workshops, anywhere in the world.</p>
-        {/* 30 september 2026 (Marinus): "WE ARE BORN TO INSPIRE! ... BELIEVE IN HUMAN CREATIVITY POWERED BY AI TECHNOLOGY!", met genoeg enters. */}
-        <div className="h-sprekers-manifest">
-          <p className="is-kop">We are born to inspire!</p>
-          <p>Not by the limitations of <b>big tech</b>,<br />but by the possibilities.</p>
-          <p>Currently open to talk with everybody about telling our story,</p>
-          <p>because we believe in <strong>human connection powered by AI technology!</strong></p>
-        </div>
-        <div className="h-sprekers-knoppen">
-          <a className="h-sprekers-knop" href={mailLink("Free end to end demo with Marinus and Sid")}>Book a free live demo <span aria-hidden="true">&#8599;</span></a>
-          <a className="h-sprekers-link" href={mailLink("Talk or workshop with Marinus and Sid")}>Book us for a talk</a>
-        </div>
-      </div>
-      <figure className="h-spreker is-socialnow">
-        <img {...klein("marinus-profiel-blauw.webp", SPREKER_MAAT, [480, 800])} alt="Marinus Bergsma" width="520" height="520" loading="lazy" decoding="async" />
-        <figcaption><b>Marinus Bergsma</b><span>Founder, SocialNow</span></figcaption>
-      </figure>
-      <figure className="h-spreker is-attesso">
-        <img {...klein("sid-attesso.webp", SPREKER_MAAT, [480, 800])} alt="Sid van Kalken" width="520" height="520" loading="lazy" decoding="async" />
-        <figcaption><b>Sid van Kalken</b><span><code>~/attesso</code></span></figcaption>
-      </figure>
-    </section>
-  );
-}
-
-function HeroVeilig({ geluid, setGeluid }: { geluid: HeroGeluid; setGeluid: (g: HeroGeluid) => void }) {
-  return (
-    <div className="h-hero-veilig">
-      <OnderDeVouw ruimte={false}><VeiligheidSpeler geluid={geluid === "veilig"} zetGeluid={(aan) => setGeluid(aan ? "veilig" : "")} /></OnderDeVouw>
-    </div>
-  );
-}
-
-// 26 september 2026 (Marinus): "die andere taal en terug naar Engels om de 5 seconden, maar dan in het
-// gehele headervlak". De hele hero krijgt de getoonde taal; de echte taal van de pagina blijft staan.
-// Bij elke wissel faden de teksten zacht opnieuw in (h-taalfase a/b, zodat de animatie opnieuw start).
-function useTaalfase(getoond: string) {
-  const fase = React.useRef({ taal: getoond, n: 0 });
-  if (fase.current.taal !== getoond) fase.current = { taal: getoond, n: fase.current.n + 1 };
-  return fase.current.n === 0 ? undefined : fase.current.n % 2 ? "a" : "b";
-}
-
-// 5 oktober 2026 (Marinus): "Even goeie Linkbuilding opzetten ook naar Rabobank en ADYEN etc." Elk merk linkt naar de eigen
-// site, met rel="noopener" zonder noreferrer, zodat de partner socialnow.nl als verwijzer ziet.
-// 5 oktober 2026: wie uit het team achter elk onderdeel van het OS staat (zie ook FUNCTIES in TeamTrust.tsx).
-const TALKING_TO: [naam: string, url: string, logo: string, breed: number, hoog: number][] = [
-  ["Visa", "https://www.visa.nl", "/images/partners/betalen/visa.svg", 24, 8],
-  ["Mastercard", "https://www.mastercard.nl", "/images/partners/betalen/mastercard.svg", 152, 94],
-  ["Airwallex", "https://www.airwallex.com", "/images/partners/betalen/airwallex.webp", 960, 132],
-  ["Adyen", "https://www.adyen.com", "/images/partners/betalen/adyen.svg", 24, 8],
-  ["Rabobank", "https://www.rabobank.nl", "/images/partners/betalen/rabobank.svg", 54, 10],
-];
+import React from "react";
+import { Link } from "react-router-dom";
+import { OnderDeVouw, later } from "./later";
+import { HomeExplainer } from "./HomeHeader";
+import LiveWebsites from "./LiveWebsites";
+import FounderProfile from "./FounderProfile";
+import StoryPlayer from "./StoryPlayer";
+import { useLanguage } from "./i18n/context";
+import "./home-simple.css";
+const Bereikt = later(() => import("./Bereikt").then(m => m.default));
+const BrandGlobe = later(() => import("./BrandGlobe").then(m => m.default));
 
 export function Home() {
-  const { language, t } = useLanguage();
-  // 26 september 2026 (Marinus): "ik wil niet dat de taal meer wijzigt". De hero toont de paginataal.
-  const getoond = language;
-  const taalfase = useTaalfase(getoond);
-  const [heroGeluid, setHeroGeluid] = useState<HeroGeluid>("");
-  return (
-    <>
-      <LanguageContext.Provider value={getoond}>
-      <section className="h-hero" id="home" data-taalfase={taalfase}>
-        <div className="h-hero-background">
-          <BrandGlobe />
-        </div>
-        <div className="h-wrap h-hero-content">
-          <div className="h-hero-tekst">
-            <HomeHeader />
-          </div>
-          <HomeExplainer />
-          {/* 1 oktober 2026 (Marinus): "Die tekst moet mooi met die afbeeldingen uitgelijnd zijn." Statement en gezichtenmuur
-              staan in één rij over beide kolommen; de eerste regel begint op de bovenkant van de portretten en de laatste
-              eindigt op de onderkant. */}
-          <div className="h-team-rij">
-            {/* 30 september 2026 (Marinus): header optie C. Het statement als één zin onder de kop, klein de SaaS-regel, en
-                twee knoppen: inloggen en een gratis live demo met de founder. Overal Engels (translate="no"). */}
-            {/* 4 oktober 2026 (Marinus): "links moet er even wat meer tekst", "En tie tekst die ik zet echt ook weer in een eigen
-                sectie'tje". Statement en het verhaal van Marinus staan samen links; het verhaal in een eigen vak. */}
-            <div className="h-team-links">
-            {/* 12 oktober 2026: het statement als titel, met de storyfilm direct eronder. */}
-            <section className="h-story-intro" aria-labelledby="h-story-title" translate="no">
-              <header className="h-story-heading">
-                <p className="h-story-kicker">Proven, branded, <strong>fully automated!</strong></p>
-                <p className="h-story-lead">Everyone can automate a business.</p>
-                <h2 id="h-story-title">No one can automate <span>people who care.</span></h2>
-                <p className="h-story-signoff">Software is a tool. <strong>We are SocialNow!</strong></p>
-              </header>
-              <figure className="h-story-player">
-                <StoryPlayer />
-                <figcaption><strong>Marinus Bergsma</strong><span>Founder &amp; CEO · Our story</span></figcaption>
-              </figure>
-            </section>
-            {/* 11 oktober 2026: onder de vouw van de hero, niet in het eerste script (budget 120 KB gzip). */}
-            <OnderDeVouw ruimte={false}><div className="h-story-details"><PartnerIntro /><VdzOutcome /></div></OnderDeVouw>
-            </div>
-
-          </div>
-          <HomeTeam />
-          {/* 5 oktober 2026 (Marinus): de witte Talking to-balk (René van der Zel, XXL Nutrition, logoslider) "mag weg". */}
-          <HeroSprekers />
-          <HeroVeilig geluid={heroGeluid} setGeluid={setHeroGeluid} />
-        </div>
-      </section>
-      {/* 11 oktober 2026 (Marinus): "FREE WEBSITE, groen vlak", direct onder de hero; anker #free-website. */}
-      <OnderDeVouw ruimte={false}><FreeWebsite /></OnderDeVouw>
-      </LanguageContext.Provider>
-      <OnderDeVouw>
-      {/* 28 september 2026 (Marinus): "de homepage moet een upgrade gaan krijgen met storytelling". De volgorde vertelt
-          het verhaal: wie we zijn, wat je kunt doen, het bewijs, het vertrouwen, en dan pas het product in detail. */}
-      {/* 29 september 2026 (Marinus): "zet vooral wat ze hebben bereikt met mooie animaties aanwezig op mijn homepage".
-          Eerst wat er bereikt is, dan hoe jij in een uur je bedrijf neerzet, dan het verhaal. */}
-      <Bereikt />
-      <NulNaarBedrijf />
-      <Verhaal />
-      <section className="h-wrap h-integraties-na-verhaal" aria-label="ERP-koppelingen en het team" translate="no">
-        <Integraties />
-      </section>
-      <WereldKaart />
-      {/* 28 september 2026 (Marinus): "alle onderdelen als kleine bentogrids, net zoals de homepage wanneer je daarop landt". */}
-      <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} swipe>
-        <Tegel kop="Begin met je website" breed={12}>
-          <ProductRoute />
-          <p className="sn-tegel-tekst">Jij brengt de ideeën. AI helpt je maken. Onze mensen denken mee over je merk, content en de volgende stap.</p>
-          <ProductOffer />
-          <TextLink to="/het-os">Zo werkt het OS</TextLink>
-        </Tegel>
-        {agents.map((agent) => (
-          <Tegel key={agent.id} kop={agent.title} breed={3} className="h-os-agent">
-            <MiloPortrait role={agent.id} name={agent.name} maat={256} />
-            <strong className="h-os-belofte" style={{ color: agent.color }}>{agent.promise}</strong>
-            <p className="sn-tegel-tekst">{agent.text}</p>
-            {/* 5 oktober 2026 (Marinus): "Hier mis ik de menselijke factor terwijl juist die combi zo sterk is." Bij elk
-                onderdeel de mensen uit het team die het doen, met hun naam. */}
-            <OsPeople role={agent.id} />
-            <div className="sn-tegel-onder"><TextLink to={`/het-os#${agent.id}`}>Ontdek dit onderdeel</TextLink></div>
-          </Tegel>
-        ))}
-      </Bento>
-      <Bento id="koppelingen" label="Optionele koppelingen">
-        <Tegel kop="Verbind wat je nodig hebt" breed={12}>
-          <p className="sn-tegel-tekst">Odoo is een optionele koppeling voor klanten en verkoop. Je kunt beginnen met WEBSITE → CONTENT → STUDIO.</p>
-          {/* 30 september 2026 (Marinus): header 4C, overzichtelijker. Odoo, Salesforce en de betaalpartner op twee regels. */}
-          <div className="h-integratie" translate="no">
-            <p className="h-integratie-rij">
-              {/* 5 oktober 2026 (Marinus): "Even goeie Linkbuilding opzetten ook naar Rabobank en ADYEN etc." Elk merk in de hero linkt
-                  naar de eigen site. rel="noopener" zonder noreferrer, zodat de partner socialnow.nl als verwijzer ziet. */}
-              <a className="h-integratie-odoo" href="https://www.odoo.com" target="_blank" rel="noopener" aria-label="Odoo"><svg viewBox="140 146 640 250" role="img" aria-label="Odoo">
-                  <path fill="#8f8f8f" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z" />
-                  <path fill="#714b67" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z" />
-                </svg></a>
-              <b>OPTIONAL ODOO INTEGRATION</b>
-              {/* 30 september 2026 (Marinus): "hier nog iets van watch the aftermovie". */}
-              <a className="h-aftermovie" href="/video/odoo-experience/odoo-experience.mp4" target="_blank" rel="noopener">&#9654; Watch the aftermovie</a>
-            </p>
-            <p className="h-integratie-rij is-klein">
-              <span className="h-attesso">PAYMENT PARTNER <a href="https://attesso.com" target="_blank" rel="noopener"><code>~/attesso</code></a></span>
-              {/* 5 oktober 2026 (Marinus): "Hier moet ook nog het bedrijf van Steven bij." Fincer heeft geen eigen website, dus de
-                  naam linkt naar Steven op LinkedIn. Als tekst, net als ~/attesso: het Fincer-logo klopt volgens Marinus nog niet. */}
-              <i aria-hidden="true" />
-              <span className="h-fincer">WEALTH PARTNER <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" target="_blank" rel="noopener" aria-label="Fincer, Steven Goudsblom on LinkedIn"><code>Fincer</code></a></span>
-            </p>
-            {/* 5 oktober 2026 (Marinus): "Next step en dan alle ERP's en Next talks wil ik graag en dan die logobalk." NEXT STEP
-                toont de vijf ERP- en CRM-systemen uit Currently building (niet alleen Salesforce), als kleine witte chips met
-                een link; daaronder heet de witte logobalk NEXT TALKS. */}
-            <p className="h-integratie-rij is-klein h-next-step">
-              <span className="h-next-label">NEXT STEP</span>
-              <span className="h-next-erps">
-                {INTEGRATIES.map((systeem) => (
-                  <a key={systeem.naam} href={systeem.url} target="_blank" rel="noopener"><img src={systeem.src} alt={systeem.naam} style={{ height: Math.round(systeem.hoog * 0.75) }} /></a>
-                ))}
-              </span>
-            </p>
-            {/* 1 oktober 2026 (Marinus): "Vanuit de video staan de logo's waar mijn partners van Attesso mee in gesprek gaan.
-                Die mogen ook op de site.", "laat deze balk Primefone, DIVEINE, KWH weg" en "Dan kunnen er meer logo's onder
-                Attesso met talking to." Dezelfde rij als in OUR STORY (partnership), direct onder de betaalpartner. */}
-            {/* 5 oktober 2026 (Marinus): "Graag ook bewegend en balk wit aangezien het een positieve menselijke balk is met dus
-                groene line erboven en eronder." Witte balk met een groene lijn boven en onder; de logo's lopen door. De rij staat
-                er twee keer in en de lus schuift precies één rij op, dus de naad is niet te zien. De kopie is voor schermlezers
-                en toetsenbord verborgen. */}
-            {/* 9 oktober 2026 (Marinus): "Graag deze niet laten doodlopen dus gwn door laten gaan." Vijf logo's waren op een breed
-                scherm smaller dan de balk, dus de rij liep leeg voor de lus rondging. Elke helft herhaalt de vijf nu vier keer, breder
-                dan de strook (proef: scripts/proef-logobalken.mjs). Alleen de eerste set is leesbaar voor schermlezers. */}
-            <div className="h-talking">
-              <span className="h-talking-label">NEXT TALKS</span>
-              <div className="h-talking-strook">
-                <div className="h-talking-lus">
-                  {[false, true].map(kopie => (
-                    <ul key={String(kopie)} className="h-attesso-logos" aria-hidden={kopie || undefined}>
-                      {[0, 1, 2, 3].flatMap(set => TALKING_TO.map(([naam, url, logo, breed, hoog]) => {
-                        const verborgen = kopie || set > 0;
-                        return <li key={`${set}-${naam}`} aria-hidden={!kopie && set > 0 || undefined}><a href={url} target="_blank" rel="noopener" tabIndex={verborgen ? -1 : undefined}><img src={logo} alt={verborgen ? "" : naam} width={breed} height={hoog} /></a></li>;
-                      }))}
-                    </ul>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </Tegel>
-      </Bento>
-      <Deuren />
-      {/* 28 september 2026 (Marinus): AI wordt verkeerd begrepen; mensen zijn de verbindende laag. Met vacature. */}
-      <MensEnAI />
-      <VacaturesBento />
-      {/* Veiligheidsblok met video en sleutelbelofte-PDF (proposal/Veiligheid.tsx, van de veiligheidschat). */}
-      <VeiligheidBlok />
-      <Bento id="diensten" label="Ook dit is SocialNow" titel={<>Van merk tot techniek.<br /><span>Alles sluit op elkaar aan.</span></>} swipe>
-        {services.map((service) => (
-          <Tegel key={service.id} kop={service.title} breed={4} className="h-dienst-tegel">
-            <span className="h-dienst-streep" style={{ background: service.color }} aria-hidden="true" />
-            <p className="sn-tegel-tekst">{service.intro}</p>
-            <ul className="h-dienst-items">
-              {service.items.slice(0, 3).map((item) => <li key={item}>{item}</li>)}
-            </ul>
-            <div className="sn-tegel-onder"><TextLink to={`/diensten#${service.id}`}>Bekijk deze dienst</TextLink></div>
-          </Tegel>
-        ))}
-      </Bento>
-      <TrustStories />
-      <Bento id="vragen" label="Goed om te weten" titel={<>Eerst helderheid.<br /><span>Dan aan de slag.</span></>}>
-        {/* 30 september 2026 (Marinus): "Ik vind dit niet passen in de stijl", "desnoods dat het een AI-chat is". Het vragenblok
-            is een gesprek met Milo (MiloVragen); ernaast Steef als mens voor wie liever mailt of appt. */}
-        <Tegel kop="Vraag het Milo" breed={8} className="h-faq-tegel h-mv-tegel">
-          <MiloVragen />
-        </Tegel>
-        <Tegel kop="Liever een mens?" breed={4} soort="groen" className="h-faq-contact">
-          <figure className="h-mv-steef">
-            <img src="/images/Steef-Komen.webp" alt="Steef Komen" width="480" height="360" loading="lazy" decoding="async" />
-            <figcaption><b>Steef Komen</b><span>Partner, SocialNow</span></figcaption>
-          </figure>
-          <p className="sn-tegel-titel">Stuur ons gewoon een bericht.</p>
-          <p className="sn-tegel-tekst">Je krijgt antwoord van een mens uit ons team.</p>
-          <div className="sn-tegel-onder">
-            {heeftWhatsApp && (
-              <a className="os-claim sn-btn3d h-button" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
-                <span className="sn-btn3d-sheen" />
-                <MessageCircle size={17} aria-hidden="true" />
-                <span>Stuur een WhatsApp</span>
-              </a>
-            )}
-            <a className="os-claim sn-btn3d h-button" href={mailLink()}>
-              <span className="sn-btn3d-sheen" />
-              <Mail size={17} aria-hidden="true" />
-              <span translate="no">{CONTACT_MAIL}</span>
-            </a>
-          </div>
-        </Tegel>
-      </Bento>
-      </OnderDeVouw>
-    </>
-  );
+  useLanguage();
+  return <div className="sn-simple-home">
+    <LiveWebsites demo />
+    <div className="h-wrap sn-demo-agreement">
+      <p><strong>Tevreden? Dan mag je de demo houden.</strong><br />Anders spreken we een eerlijke prijs af en maken we je website samen perfect.</p>
+    </div>
+    <section className="h-section h-wrap sn-home-story" id="verhaal" aria-labelledby="sn-story-title">
+      <header><p className="h-eyebrow">Ons verhaal</p><h2 id="sn-story-title">Mensen maken het verschil.</h2><p>Human connection, powered by AI technology.</p></header>
+      <div className="sn-home-story-grid">
+        <FounderProfile />
+        <div><StoryPlayer /><p>Software is een tool. Wij verbinden mensen, ideeën en technologie om samen aan jouw bedrijf te bouwen.</p><Link className="h-text-link" to="/team">Ons verhaal en het team ↗</Link></div>
+      </div>
+    </section>
+    <OnderDeVouw ruimte={false}><Bereikt /></OnderDeVouw>
+    <section className="h-section h-wrap sn-home-operations" id="het-os" aria-labelledby="sn-operations-title">
+      <div className="sn-home-planet" aria-hidden="true"><BrandGlobe /></div>
+      <HomeExplainer />
+      <div className="sn-home-operations-copy"><p className="h-eyebrow">Operation &amp; Management</p><h2 id="sn-operations-title">Je website, CRM, content en advertenties. Samen in één systeem.</h2><p>SocialNow OS verbindt je dagelijkse bedrijfsvoering. Onze experts denken persoonlijk met je mee.</p><Link className="h-text-link" to="/het-os">Ontdek het systeem ↗</Link></div>
+    </section>
+  </div>;
 }

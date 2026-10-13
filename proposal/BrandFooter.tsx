@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { heeftWhatsApp, whatsappLink } from "./aanvragen";
 import {
   ArrowUpRight,
@@ -11,10 +11,12 @@ import {
 import { services } from "./content";
 import { Closing } from "./ui";
 export default function BrandFooter() {
+  const { pathname } = useLocation();
+  const home = /^\/(?:[a-z]{2}(?:-[a-z]{2})?\/?)?$/.test(pathname);
   return (
     <footer className="h-brand-footer">
       <div className="h-wrap">
-        <Closing />
+        <Closing compact={home} />
         <div className="h-footer-links">
           <div>
             <p className="h-eyebrow">Expertise</p>

@@ -73,18 +73,21 @@ export function Heading({
   title,
   text,
   children,
+  level = "h2",
 }: {
   id?: string;
   label: string;
   title: React.ReactNode;
   text?: string;
   children?: React.ReactNode;
+  level?: "h1" | "h2";
 }) {
+  const Title = level;
   return (
     <div className="h-section-heading">
       <div>
         <p className="h-eyebrow">{label}</p>
-        <h2 id={id}>{title}</h2>
+        <Title id={id}>{title}</Title>
         {text && <p className="h-intro">{text}</p>}
       </div>
       {children}
@@ -332,7 +335,13 @@ export function Questions() {
     </div>
   );
 }
-export function Closing() {
+export function Closing({ compact = false }: { compact?: boolean }) {
+  if (compact) return <section className="h-final-close sn-home-final" aria-labelledby="final-close-title">
+    <img className="h-final-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="135" loading="lazy" />
+    <h2 id="final-close-title">Start gratis met jouw systeem.</h2>
+    <p>Gratis tot 10 GB opslag. Daarna €20,- per maand.</p>
+    <a className="sn-home-cta" href="https://app.socialnow.nl/login/">Probeer SocialNow OS <ArrowUpRight size={20} aria-hidden="true" /></a>
+  </section>;
   return <section className="h-final-close" aria-labelledby="final-close-title">
     <img className="h-final-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="135" loading="lazy" />
     <p className="sn-product-attribution" lang="en" translate="no">a SocialNow product</p>

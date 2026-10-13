@@ -52,7 +52,7 @@ export default function BrandGlobe() {
     const motionPreference = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
-    const interaction = (stage.closest(".h-hero") || stage) as HTMLElement;
+    const interaction = (stage.closest(".h-hero, .sn-home-operations") || stage) as HTMLElement;
     const mobile = window.innerWidth <= 600;
     const frameInterval = 1000 / (mobile ? 24 : 30);
     let width = 0;
@@ -81,6 +81,11 @@ export default function BrandGlobe() {
 
     const draw = () => {
       if (width <= 0 || height <= 0) return;
+      // Fonts and content above the canvas can move it without resizing it.
+      // Resolve its document position each frame so coloured dots stay on the page grid.
+      const bounds = canvas.getBoundingClientRect();
+      gridX = (((16 - bounds.left - window.scrollX) % GRID) + GRID) % GRID;
+      gridY = (((16 - bounds.top - window.scrollY) % GRID) + GRID) % GRID;
       const radius = Math.min(width * 0.34, height * 0.49);
       const angleY = 0.3 + time * 0.22 + tiltX;
       const angleX = -0.1 + tiltY;

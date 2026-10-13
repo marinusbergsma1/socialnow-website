@@ -322,8 +322,8 @@ function ProposalShell() {
           ))}
           <Route path="*" element={<NotFound />} />
         </Routes>
-        {["/", "/het-os", "/prijzen"].includes(location.pathname) && <BrandFaq />}
-        {["/", "/het-os", "/team", "/diensten", "/prijzen", "/contact", "/vacatures"].includes(location.pathname) && <ConnectionLinks />}
+        {["/het-os", "/prijzen"].includes(location.pathname) && <BrandFaq />}
+        {["/het-os", "/team", "/diensten", "/prijzen", "/contact", "/vacatures"].includes(location.pathname) && <ConnectionLinks />}
         <NaLaden key={location.pathname} klaar={() => {
           zetMeta();
           if (location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ block: "start" });
@@ -343,3 +343,4 @@ function NaLaden({ klaar }: { klaar: () => void }) {
   useEffect(() => { klaar(); }, []);
   return null;
 }
+import "./product-start.css";

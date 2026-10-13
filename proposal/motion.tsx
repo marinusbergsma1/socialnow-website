@@ -81,6 +81,8 @@ export function AmbientVideo({
   suspended = false,
   hoverSound = false,
   wacht = false,
+  preloadMargin = "0px",
+  originalSrc,
 }: {
   src?: string;
   sources?: { src: string; type: string }[];
@@ -91,16 +93,19 @@ export function AmbientVideo({
   hoverSound?: boolean;
   // 30 september 2026: zolang wacht aan staat, laadt de film nog niet (in de hero: tot de poster van de OS-film staat).
   wacht?: boolean;
+  preloadMargin?: string;
+  originalSrc?: string;
 }) {
   const { enabled } = useMotion();
   const { ref, visible } = useInView<HTMLSpanElement>();
+  const { ref: preloadRef, visible: nearby } = useInView<HTMLSpanElement>(preloadMargin);
   const video = useRef<HTMLVideoElement>(null);
   const shouldPlay = useRef(false);
   const [loaded, setLoaded] = useState(false);
   const [playing, setPlaying] = useState(false);
   useEffect(() => {
-    if (visible && !wacht) setLoaded(true);
-  }, [visible, wacht]);
+    if (nearby && !wacht) setLoaded(true);
+  }, [nearby, wacht]);
   useEffect(() => {
     const element = video.current;
     if (!element) return;
@@ -125,7 +130,7 @@ export function AmbientVideo({
   }, [enabled, visible, loaded, suspended, wacht]);
   return (
     <span
-      ref={ref}
+      ref={element => { ref.current = element; preloadRef.current = element; }}
       className={`h-ambient-video ${className}`}
       role="img"
       data-playing={playing}
@@ -153,7 +158,7 @@ export function AmbientVideo({
           muted
           playsInline
           loop
-          preload="metadata"
+          preload="auto"
           aria-hidden="true"
           tabIndex={-1}
           onLoadedData={() => setPlaying(true)}
@@ -166,6 +171,7 @@ export function AmbientVideo({
           ))}
         </video>
       )}
+      {loaded && playing && originalSrc && <video src={originalSrc} preload="auto" hidden style={{display:"none"}} muted aria-hidden="true" tabIndex={-1} />}
     </span>
   );
 }

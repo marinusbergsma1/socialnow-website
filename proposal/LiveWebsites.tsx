@@ -42,7 +42,7 @@ const frameSrcOf = (project: Project) => {
 // Alle frames worden vooraf geladen zodra het onderdeel in de buurt komt: eerst de
 // actieve site, daarna een voor een de rest. Wisselen is dan direct, zonder herladen.
 const PRELOAD_TIMEOUT = 2500;
-export default function LiveWebsites() {
+export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
   const [index, setIndex] = useState(0);
   const [mobile, setMobile] = useState(false);
   const [interactive, setInteractive] = useState(false);
@@ -94,25 +94,28 @@ export default function LiveWebsites() {
     return () => window.clearTimeout(timer);
   }, [near, mounted.length]);
   const activeLoaded = loaded.includes(project.slug);
+  const still = project.fullPageScreenshot || project.image;
   return (
     <section
       className="h-section h-wrap h-live-websites"
       ref={ref}
       aria-labelledby="live-websites-title"
+      id={demo ? "gratis-websitedemo" : undefined}
     >
       <Heading
+        level={demo ? "h1" : "h2"}
         id="live-websites-title"
-        label="Webdesign & full-stack development"
+        label={demo ? "Zo begint onze samenwerking" : "Webdesign & full-stack development"}
         title={
-          <>
+          demo ? <>We beginnen altijd met een<br /><span>GRATIS websitedemo.</span></> : <>
             Gemaakt om
             <br />
             <span>te gebruiken.</span>
           </>
         }
-        text="Bekijk onze websites van dichtbij. Blader door het werk, scroll door een website en ontdek hoe ontwerp en techniek samenkomen."
+        text={demo ? "Bekijk wat we maken. Daarna maken we een gratis demo voor jouw bedrijf, als start van onze samenwerking." : "Bekijk onze websites van dichtbij. Blader door het werk, scroll door een website en ontdek hoe ontwerp en techniek samenkomen."}
       >
-        <TextLink to="/projecten">Alle projecten</TextLink>
+        {demo ? <a className="sn-home-cta" href="https://website.socialnow.nl">Vraag je gratis websitedemo aan <ExternalLink size={17} /></a> : <TextLink to="/projecten">Alle projecten</TextLink>}
       </Heading>
       <div className="h-live-toolbar">
         <div className="h-live-title" aria-live="polite">
@@ -183,15 +186,15 @@ export default function LiveWebsites() {
               />
             );
           })}
-          {!live && project.fullPageScreenshot && (
+          {still && (!live || !activeLoaded) && (
             <img
-              src={project.fullPageScreenshot}
+              src={still}
               alt={`Volledige paginaopname van de website van ${project.title}`}
-              loading="lazy"
+              loading={demo ? "eager" : "lazy"}
               decoding="async"
             />
           )}
-          {((!live && !project.fullPageScreenshot) || (live && !activeLoaded)) && (
+          {!still && ((!live) || !activeLoaded) && (
             <div className="h-live-direct">
               <strong>{project.title}</strong>
               {!project.offline && (
