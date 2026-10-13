@@ -16,14 +16,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { OnderDeVouw, later } from "./later";
 import HomeHeader, { HomeExplainer } from "./HomeHeader";
-import ExplainerPlayer from "./ExplainerPlayer";
 import FreeWebsite from "./FreeWebsite";
 import { Bento, Tegel } from "./Bento";
 import { MiloPortrait, TextLink } from "./ui";
 import OsPeople from "./OsPeople";
 import { agents } from "./content";
 import HomeTeam from "./HomeTeam";
-import CharacterAccent from "./CharacterAccent";
 import { useLanguage } from "./i18n/context";
 import "./home-simple.css";
 const Bereikt = later(() => import("./Bereikt").then(m => m.default));
@@ -44,12 +42,7 @@ export function Home() {
       <p><strong>Tevreden? Dan mag je de demo houden.</strong><br />Anders spreken we een eerlijke prijs af en maken we je website samen perfect.</p>
     </div>
     <FreeWebsite />
-    <section className="h-section h-wrap sn-home-story" id="verhaal" aria-labelledby="sn-story-title">
-      <div className="sn-home-story-card">
-        <div><p className="h-eyebrow">Ons verhaal</p><h2 id="sn-story-title">Software is een tool.<br />Mensen maken het verschil.</h2><p>Van grafische vormgeving naar AI en development. De persoonlijke verbinding blijft de kern van SocialNow.</p><Link className="h-text-link" to="/team#verhaal">Ons verhaal ↗</Link><ExplainerPlayer kind="story" compact /></div>
-        <CharacterAccent kind="coder" />
-      </div>
-    </section>
+
     <OnderDeVouw ruimte={false}><Bereikt /></OnderDeVouw>
     <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} className="sn-home-milos" swipe>
       {agents.map(agent => <Tegel key={agent.id} kop={agent.title} breed={3} className="h-os-agent">

@@ -1,3 +1,4 @@
+import ExplainerPlayer from "./ExplainerPlayer";
 import FounderProfile from "./FounderProfile";
 import React from "react";
 import CharacterAccent from "./CharacterAccent";
@@ -141,6 +142,7 @@ export default function Verhaal() {
         </Tegel>
         <Tegel kop="Mijn waarom" breed={8}>
           <Waarom />
+          <ExplainerPlayer kind="story" compact />
           <HeroReview />
           <LightArtStrook />
           <div className="sn-tegel-onder"><TextLink to="/projecten">Bekijk het werk achter mijn verhaal</TextLink></div>
