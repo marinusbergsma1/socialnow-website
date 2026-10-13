@@ -103,7 +103,7 @@ export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
       id={demo ? "gratis-websitedemo" : undefined}
     >
       <Heading
-        level={demo ? "h1" : "h2"}
+        level="h2"
         id="live-websites-title"
         label={demo ? "Zo begint onze samenwerking" : "Webdesign & full-stack development"}
         title={
