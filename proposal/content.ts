@@ -36,6 +36,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
     role: "Lead Photographer",
     image: "Emma-Peperkamp-V2.webp",
   },
+  { name: "Femke Oostendorp", role: "Fotograaf · Femke’s Fotografie", image: "Femke-Oostendorp.webp", instagram: "https://www.instagram.com/femkes_fotografie/", sinds: "2026-10-08" },
   { name: "Isa Zoer", role: "UGC & Content Creation · Social Media", image: "Isa-Zoer.jpg", sinds: "2026-10-12" },
   { name: "Nick van Keulen", role: "Head of Google Ads & Search", image: "Nick-VK.webp", linkedin: "https://www.linkedin.com/in/nick-van-keulen-nl/" },
   // 25 september 2026 (Marinus): nieuw teamlid.
@@ -88,6 +89,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
 ];
 // Bedrijfsreferenties zijn echte, bevestigde websites of het profiel van de oprichter.
 export const partnerReferences: Record<string, { name: string; url: string }[]> = {
+  "Femke Oostendorp": [{ name: "Femke’s Fotografie", url: "https://femkesfotografie.nl/" }],
   "Steef Komen": [{ name: "Komen Consultancy", url: "https://www.komenconsultancy.com/" }],
   "Michelle Yang": [{ name: "Komen Consultancy", url: "https://www.komenconsultancy.com/" }],
   "Sid van Kalken": [{ name: "Attesso", url: "https://www.attesso.com/" }],

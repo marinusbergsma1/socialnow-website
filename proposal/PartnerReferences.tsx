@@ -5,6 +5,7 @@ import "./partner-references.css";
 
 // Existing assets already used by TeamTrust. No logo or company relationship is inferred.
 const logoAssets: Record<string, string> = {
+  "Femke’s Fotografie": "/images/merken/femkes-fotografie.webp",
   "Komen Consultancy": "/images/merken/komen-consultancy.webp",
   "Bruggn Design": "/images/merken/bruggn-design.png",
   ByteChat: "/images/merken/bytechat.svg",
