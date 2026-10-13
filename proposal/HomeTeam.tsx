@@ -25,6 +25,28 @@ export default function HomeTeam() {
   const [filter, setFilter] = React.useState("");
   const id = React.useId();
   const team = React.useRef<HTMLElement>(null);
+  const [glowPulse, setGlowPulse] = React.useState(0);
+  React.useEffect(() => {
+    const el = team.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let visible = false;
+    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; });
+    observer.observe(el);
+    const move = (event: PointerEvent) => {
+      if (event.pointerType === "touch") return;
+      const rect = el.getBoundingClientRect();
+      el.style.setProperty("--team-mouse-x", `${event.clientX - rect.left}px`);
+      el.style.setProperty("--team-mouse-y", `${event.clientY - rect.top}px`);
+      el.dataset.mouseGlow = "true";
+    };
+    const leave = () => { delete el.dataset.mouseGlow; };
+    el.addEventListener("pointermove", move);
+    el.addEventListener("pointerleave", leave);
+    const timer = window.setInterval(() => {
+      if (visible && !document.hidden && !el.closest("[data-motion-pauze]")) setGlowPulse(value => value + 1);
+    }, 9000);
+    return () => { observer.disconnect(); window.clearInterval(timer); el.removeEventListener("pointermove", move); el.removeEventListener("pointerleave", leave); };
+  }, []);
   React.useEffect(() => {
     const el = team.current;
     if (!el || !window.IntersectionObserver || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -41,6 +63,10 @@ export default function HomeTeam() {
   }, [filter]);
   const shown = groups.filter(group => !filter || group.name === filter);
   return <section ref={team} className="sn-home-team" id="team" aria-labelledby={id}>
+    <div className="sn-team-glow-layer" aria-hidden="true">
+      <div className="sn-team-mouse-glow" />
+      {glowPulse > 0 && <div key={glowPulse} className="sn-team-glow-pulse" style={{ "--team-pulse-color": ["59,130,246", "250,204,21", "236,72,153"][(glowPulse - 1) % 3] } as React.CSSProperties} />}
+    </div>
     <header className="sn-home-team-intro">
       <div><span>OUR PEOPLE · INDEPENDENT EXPERTS</span><h2 id={id}>Human connection.<br /><em>Per expertise.</em></h2></div>
       <p>De juiste mensen voor jouw bedrijf.<br />Creatie, marketing, sales, data en techniek.</p>
