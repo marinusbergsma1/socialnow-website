@@ -16,6 +16,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { OnderDeVouw, later } from "./later";
 import HomeHeader, { HomeExplainer } from "./HomeHeader";
+import ExplainerPlayer from "./ExplainerPlayer";
 import FreeWebsite from "./FreeWebsite";
 import { Bento, Tegel } from "./Bento";
 import { MiloPortrait, TextLink } from "./ui";
@@ -45,7 +46,7 @@ export function Home() {
     <FreeWebsite />
     <section className="h-section h-wrap sn-home-story" id="verhaal" aria-labelledby="sn-story-title">
       <div className="sn-home-story-card">
-        <div><p className="h-eyebrow">Ons verhaal</p><h2 id="sn-story-title">Software is een tool.<br />Mensen maken het verschil.</h2><p>Van grafische vormgeving naar AI en development. De persoonlijke verbinding blijft de kern van SocialNow.</p><Link className="h-text-link" to="/team#verhaal">Ons verhaal ↗</Link></div>
+        <div><p className="h-eyebrow">Ons verhaal</p><h2 id="sn-story-title">Software is een tool.<br />Mensen maken het verschil.</h2><p>Van grafische vormgeving naar AI en development. De persoonlijke verbinding blijft de kern van SocialNow.</p><Link className="h-text-link" to="/team#verhaal">Ons verhaal ↗</Link><ExplainerPlayer kind="story" compact /></div>
         <CharacterAccent kind="coder" />
       </div>
     </section>
