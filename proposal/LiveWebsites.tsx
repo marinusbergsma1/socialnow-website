@@ -19,7 +19,6 @@ const EMBED = new Set([
   "ilgordo-website",
   "vdz-brigade-website",
   "divine-machines-website",
-  "vintage-watches-website",
   "newblack-website",
   // vastiq.ai staat framing toe voor socialnow.nl (frame-ancestors), niet voor andere hosts.
   "vastiq-website",
@@ -27,7 +26,7 @@ const EMBED = new Set([
 // Websites die online staan, of waarvan we een eigen kopie (previewUrl) in het frame
 // kunnen tonen. Blokkeert een site iframes, dan tonen we de volledige paginaopname
 // scrollbaar in het frame. Offline sites zonder kopie blijven alleen als case bestaan.
-const sites = webShowcaseProjects.filter((project) => !project.offline || project.previewUrl);
+const sites = webShowcaseProjects.filter((project) => project.slug !== "vintage-watches-website" && (!project.offline || project.previewUrl));
 // Sites die alleen vanaf socialnow.nl in een frame mogen. Elders (localhost, preview)
 // gebruikt de lokale ontwikkelserver een aparte loopback-preview; productie blijft direct live.
 const SOCIALNOW_ONLY = new Set(["vastiq-website"]);

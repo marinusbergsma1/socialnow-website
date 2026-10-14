@@ -19,164 +19,147 @@
 import type { LegalDoc, Language } from "./legal";
 
 export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: LegalDoc } = {
-  nl: {
-    title: "Cookieverklaring",
-    intro:
-      "Wat wij in je browser bewaren, waarom, hoe lang, en waar je het weer uitzet. Socialnow.nl plaatst geen trackingcookies en gebruikt geen advertentienetwerken. In SocialNow OS meten wij alleen als jij daar zelf toestemming voor geeft.",
-    updated: "Laatst bijgewerkt: 20 september 2026",
-    sections: [
+  "nl": {
+    "title": "Cookieverklaring",
+    "intro": "Wat wij in je browser bewaren, waarom, hoe lang, en waar je het weer uitzet. Socialnow.nl plaatst geen trackingcookies en gebruikt geen advertentienetwerken. In SocialNow OS meten wij alleen als jij daar zelf toestemming voor geeft.",
+    "updated": "Laatst bijgewerkt: 14 oktober 2026",
+    "sections": [
       {
-        title: "Kort",
-        paragraphs: [
-          "Op socialnow.nl staan alleen dingen die nodig zijn om de site te laten werken en om te onthouden wat jij koos. Daar is volgens artikel 11.7a lid 3 Telecommunicatiewet geen toestemming voor nodig, want zonder die dingen werkt de site niet of vergeet hij jouw keuze bij elke klik.",
-          "In SocialNow OS staat daarnaast vrijwillige gebruiksmeting met PostHog die toestemming vraagt. Dat staat standaard uit. Geef je geen toestemming, dan wordt PostHog niet geladen; er staat dan geen script van die partij op de pagina en er gaat niets naartoe.",
-          "Gemaskeerde schermopnames staan voor jou standaard uit en vragen afzonderlijke toestemming. Tekst, invoervelden en media worden afgeschermd; account-, CRM-, betaal- en beheerschermen zijn uitgesloten. Nieuwe opnames blijven 30 dagen bewaard. Er wordt geen geluid of camera opgenomen.",
-        ],
+        "title": "Kort",
+        "paragraphs": [
+          "Op socialnow.nl en in SocialNow OS gebruiken we geen gedragstracking, gebruiksanalytics of schermopnames. Functionele opslag onthoudt je login en voorkeuren. Feedback verzamelen we via persoonlijk contact."
+        ]
       },
       {
-        title: "Wat is een cookie, en wat valt er verder onder",
-        paragraphs: [
+        "title": "Wat is een cookie, en wat valt er verder onder",
+        "paragraphs": [
           "Een cookie is een klein tekstbestand dat een website in je browser zet en bij een volgend bezoek weer kan lezen. Onder dezelfde regels vallen localStorage en sessionStorage: andere technieken, dezelfde vraag, namelijk of er iets op jouw apparaat wordt gezet of uitgelezen.",
-          "Daarom staan ze hieronder door elkaar, met erbij welke techniek het is.",
-        ],
+          "Daarom staan ze hieronder door elkaar, met erbij welke techniek het is."
+        ]
       },
       {
-        title: "Op socialnow.nl",
-        paragraphs: [
-          "Noodzakelijk, geen toestemming nodig:",
-          "Er staat op socialnow.nl geen Google Analytics, geen Meta-pixel, geen LinkedIn Insight Tag en geen advertentiecookie. Als dat ooit verandert, verschijnt hier eerst een toestemmingsvraag en wordt deze verklaring bijgewerkt voordat er iets geladen wordt.",
+        "title": "Op socialnow.nl",
+        "paragraphs": [
+          "Noodzakelijk, geen toestemming nodig:"
         ],
-        bullets: [
+        "bullets": [
           [
             "sn-akkoord (localStorage, blijft tot je je browseropslag leegmaakt): onthoudt dat je het welkomstscherm met de voorwaarden hebt gezien, per versie van die tekst. Een nieuwe versie vraagt opnieuw.",
             "sn-koekje (localStorage, blijft tot je je browseropslag leegmaakt): onthoudt dat je de melding met Milo over cookies hebt gesloten, zodat hij niet op elke pagina terugkomt.",
             "sn-taal (cookie op .socialnow.nl, één jaar): de taal die je koos, zodat de site en het OS in dezelfde taal staan.",
-            "sn-land (cookie op .socialnow.nl, één jaar): het land dat je koos, waarmee wij de taal en de juiste contactgegevens bepalen.",
-            "sn-meten (cookie op .socialnow.nl, 180 dagen vanuit de app; een jaar vanuit de website) en sn-replay-v1 (180 dagen vanuit de app): afzonderlijke keuzes over meten en opnemen, ja of nee. Deze cookie is zelf noodzakelijk, want zonder hem weten wij niet dat je nee hebt gezegd.",
+            "sn-land (cookie op .socialnow.nl, één jaar): het land dat je koos, waarmee wij de taal en de juiste contactgegevens bepalen."
           ],
-          [],
-        ],
+          []
+        ]
       },
       {
-        title: "In SocialNow OS",
-        paragraphs: [
-          "Noodzakelijk, geen toestemming nodig:",
-          "Alleen met jouw toestemming:",
-          "Je verandert je keuze op elk moment: in het OS onder Account, of via de vraag onderin het scherm. Zet je hem op nee, dan stopt het versturen direct eerdere gegevens bij PostHog worden daarmee niet automatisch gewist; daarvoor kun je ons benaderen.",
+        "title": "In SocialNow OS",
+        "paragraphs": [
+          "Noodzakelijk, geen toestemming nodig:"
         ],
-        bullets: [
+        "bullets": [
           [
             "de sessiecookie van je inlog: houdt je ingelogd. Zonder deze cookie kun je het OS niet gebruiken.",
             "voorkeuren in localStorage: welk tabblad je open had, welke kolom je koos, een concept dat je nog niet verstuurd hebt. Deze blijven in jouw browser en komen nooit bij ons terecht.",
-            "de service worker en zijn cache: houdt het OS snel en laat het werken bij een haperende verbinding.",
-          ],
-          [
-            "PostHog (EU-datacentrum Frankfurt): vooraf bepaalde gebruiksgebeurtenissen en schermroutes, gekoppeld aan een pseudoniem en werkruimtekenmerk. De nieuwe appconfiguratie bewaart de analyticsidentiteit alleen in het geheugen. Oudere versies konden ph_*-cookies bewaren. Zonder toestemming wordt PostHog niet geladen. Met afzonderlijke toestemming zijn gemaskeerde schermopnames mogelijk; zie het privacybeleid.",
+            "de service worker en zijn cache: houdt het OS snel en laat het werken bij een haperende verbinding."
           ],
           [],
-        ],
+          []
+        ]
       },
       {
-        title: "Cookies van derden die wij niet zelf plaatsen",
-        paragraphs: [
+        "title": "Cookies van derden die wij niet zelf plaatsen",
+        "paragraphs": [
           "Koppel je in het OS je eigen kanalen — Meta, Google, je socialaccounts — dan gaat dat via de inlogschermen van die partijen. Op zo'n scherm gelden hun eigen cookies en hun eigen verklaring. Wij hebben daar geen invloed op en zetten daar zelf niets.",
-          "Staat er op een website die wij voor jou bouwen wél een pixel of een analyticsscript, dan ben jij daarvoor de verantwoordelijke en hoort op die website een eigen cookieverklaring en een eigen toestemmingsvraag. Wij helpen je die in te richten; de keuze om zo'n script te plaatsen is de jouwe.",
-        ],
+          "Staat er op een website die wij voor jou bouwen wél een pixel of een analyticsscript, dan ben jij daarvoor de verantwoordelijke en hoort op die website een eigen cookieverklaring en een eigen toestemmingsvraag. Wij helpen je die in te richten; de keuze om zo'n script te plaatsen is de jouwe."
+        ]
       },
       {
-        title: "Zelf uitzetten in je browser",
-        paragraphs: [
+        "title": "Zelf uitzetten in je browser",
+        "paragraphs": [
           "Naast onze eigen knop kun je cookies altijd in je browser blokkeren of verwijderen. Dat staat bij Chrome, Safari, Firefox en Edge onder instellingen bij privacy. Blokkeer je alles, dan werkt het inloggen in het OS niet meer, want dat leunt op de sessiecookie.",
-          "Een Do Not Track- of Global Privacy Control-signaal van je browser behandelen wij als een nee op de vraag over meten.",
-        ],
+          "Een Do Not Track- of Global Privacy Control-signaal van je browser behandelen wij als een nee op de vraag over meten."
+        ]
       },
       {
-        title: "Vragen",
-        paragraphs: [
-          "Klopt er iets niet in deze lijst, of zie je in je browser iets staan dat er volgens ons niet hoort te zijn: privacy@socialnow.nl. Dat willen wij weten, want een cookieverklaring die niet klopt is erger dan geen.",
-        ],
-      },
-    ],
+        "title": "Vragen",
+        "paragraphs": [
+          "Klopt er iets niet in deze lijst, of zie je in je browser iets staan dat er volgens ons niet hoort te zijn: privacy@socialnow.nl. Dat willen wij weten, want een cookieverklaring die niet klopt is erger dan geen."
+        ]
+      }
+    ]
   },
-  en: {
-    title: "Cookie statement",
-    intro:
-      "What we store in your browser, why, for how long, and where you switch it off. Socialnow.nl sets no tracking cookies and uses no ad networks. In SocialNow OS we measure only if you allow it yourself.",
-    updated: "Last updated: 20 September 2026",
-    sections: [
+  "en": {
+    "title": "Cookie statement",
+    "intro": "What we store in your browser, why, for how long, and where you switch it off. Socialnow.nl sets no tracking cookies and uses no ad networks. In SocialNow OS we measure only if you allow it yourself.",
+    "updated": "Last updated: 14 October 2026",
+    "sections": [
       {
-        title: "In short",
-        paragraphs: [
-          "Socialnow.nl only holds what is needed to make the site work and to remember what you chose. Under Article 11.7a(3) of the Dutch Telecommunications Act no consent is required for that, because without it the site does not work or forgets your choice on every click.",
-          "In SocialNow OS optional usage measurement with PostHog requires consent. It is off by default. If you do not consent, PostHog is not loaded; no script from that party is on the page and nothing is sent to it.",
-          "Masked session recordings are off for you by default and require separate consent. Text, inputs and media are masked; account, CRM, payment and administration screens are excluded. New recordings are retained for 30 days. No audio or camera is recorded.",
-        ],
+        "title": "In short",
+        "paragraphs": [
+          "On socialnow.nl and in SocialNow OS we do not use behavioural tracking, usage analytics or session recordings. Functional storage remembers your sign-in and preferences. Feedback comes from personal contact."
+        ]
       },
       {
-        title: "What is a cookie, and what else counts",
-        paragraphs: [
+        "title": "What is a cookie, and what else counts",
+        "paragraphs": [
           "A cookie is a small text file a website places in your browser and can read again on a later visit. The same rules cover localStorage and sessionStorage: different techniques, the same question, namely whether something is placed on or read from your device.",
-          "That is why they are listed together below, with the technique named.",
-        ],
+          "That is why they are listed together below, with the technique named."
+        ]
       },
       {
-        title: "On socialnow.nl",
-        paragraphs: [
+        "title": "On socialnow.nl",
+        "paragraphs": [
           "Necessary, no consent required:",
-          "There is no Google Analytics, no Meta pixel, no LinkedIn Insight Tag and no advertising cookie on socialnow.nl. Should that ever change, a consent request appears here first and this statement is updated before anything loads.",
+          "There is no Google Analytics, no Meta pixel, no LinkedIn Insight Tag and no advertising cookie on socialnow.nl. Should that ever change, a consent request appears here first and this statement is updated before anything loads."
         ],
-        bullets: [
+        "bullets": [
           [
             "sn-akkoord (localStorage, stays until you clear your browser storage): remembers that you have seen the welcome screen with the terms, per version of that text. A new version asks again.",
             "sn-koekje (localStorage, kept until you clear your browser storage): remembers that you closed the note with Milo about cookies, so it does not come back on every page.",
             "sn-taal (cookie on .socialnow.nl, one year): the language you chose, so the site and the OS are in the same language.",
-            "sn-land (cookie on .socialnow.nl, one year): the country you chose, from which we derive the language and the right contact details.",
-            "sn-meten (cookie on .socialnow.nl, 180 days from the app; one year from the website) and sn-replay-v1 (180 days from the app): separate choices about measurement and recording, yes or no. This cookie is itself necessary, because without it we do not know that you said no.",
+            "sn-land (cookie on .socialnow.nl, one year): the country you chose, from which we derive the language and the right contact details."
           ],
-          [],
-        ],
+          []
+        ]
       },
       {
-        title: "In SocialNow OS",
-        paragraphs: [
-          "Necessary, no consent required:",
-          "Only with your consent:",
-          "You change your choice at any time: in the OS under Account, or through the question at the bottom of the screen. Set it to no and sending stops immediately, existing data at PostHog is not automatically erased; contact us for an erasure request.",
+        "title": "In SocialNow OS",
+        "paragraphs": [
+          "Necessary, no consent required:"
         ],
-        bullets: [
+        "bullets": [
           [
             "the session cookie of your sign-in: keeps you signed in. Without it you cannot use the OS.",
             "preferences in localStorage: which tab you had open, which column you chose, a draft you have not sent. These stay in your browser and never reach us.",
-            "the service worker and its cache: keeps the OS fast and lets it work on a patchy connection.",
-          ],
-          [
-            "PostHog (EU data centre Frankfurt): predefined usage events and screen routes linked to a pseudonym and workspace identifier. The new app configuration keeps the analytics identity in memory. Older versions could store ph_* cookies. Without consent PostHog is not loaded. Masked session recordings require separate consent; see the privacy policy.",
+            "the service worker and its cache: keeps the OS fast and lets it work on a patchy connection."
           ],
           [],
-        ],
+          []
+        ]
       },
       {
-        title: "Third-party cookies we do not set ourselves",
-        paragraphs: [
+        "title": "Third-party cookies we do not set ourselves",
+        "paragraphs": [
           "If you connect your own channels in the OS — Meta, Google, your social accounts — that runs through those parties' own sign-in screens. On such a screen their cookies and their statement apply. We have no influence there and set nothing of our own.",
-          "If a website we build for you does carry a pixel or an analytics script, you are the controller for it and that website needs its own cookie statement and its own consent request. We help you set that up; the choice to place such a script is yours.",
-        ],
+          "If a website we build for you does carry a pixel or an analytics script, you are the controller for it and that website needs its own cookie statement and its own consent request. We help you set that up; the choice to place such a script is yours."
+        ]
       },
       {
-        title: "Switching off in your browser",
-        paragraphs: [
+        "title": "Switching off in your browser",
+        "paragraphs": [
           "Besides our own control, you can always block or delete cookies in your browser. In Chrome, Safari, Firefox and Edge this sits under settings, privacy. If you block everything, signing in to the OS no longer works, because it relies on the session cookie.",
-          "We treat a Do Not Track or Global Privacy Control signal from your browser as a no to the question about measurement.",
-        ],
+          "We treat a Do Not Track or Global Privacy Control signal from your browser as a no to the question about measurement."
+        ]
       },
       {
-        title: "Questions",
-        paragraphs: [
-          "If something in this list is wrong, or you see something in your browser that by our own account should not be there: privacy@socialnow.nl. We want to know, because a cookie statement that is wrong is worse than none.",
-        ],
-      },
-    ],
-  },
+        "title": "Questions",
+        "paragraphs": [
+          "If something in this list is wrong, or you see something in your browser that by our own account should not be there: privacy@socialnow.nl. We want to know, because a cookie statement that is wrong is worse than none."
+        ]
+      }
+    ]
+  }
 };
 
 export const ai: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: LegalDoc } = {
