@@ -7,9 +7,9 @@ const websiteFilms: Record<string, { video: string; poster: string; film: string
   "vdz-brigade-website": { video: "/video/vdz/vdz-house.mp4", poster: "/video/vdz/vdz-house-poster.jpg", film: "Website-animatie" },
   "ilgordo-website": { video: "/video/ilgordo/ilgordo-header.mp4", poster: "/video/ilgordo/ilgordo-header-poster.webp", film: "Websitefilm" },
 };
-// Dezelfde websites en volgorde als de eerdere balk, zonder kWh Garant.
+// Dezelfde websites en volgorde als de eerdere balk, zonder kWh Garant en Vintage Watches.
 const examples = webShowcaseProjects
-  .filter(project => project.slug !== "kwh-garant-website" && project.url && (!project.offline || project.previewUrl))
+  .filter(project => project.slug !== "kwh-garant-website" && project.slug !== "vintage-watches-website" && project.url && (!project.offline || project.previewUrl))
   .map(project => ({ name: project.title, url: project.url!, image: project.image, previewUrl: project.previewUrl, slug: project.slug, ...websiteFilms[project.slug] }));
 const frameSource = (project: typeof examples[number]) => project.previewUrl ||
   (project.slug === "vastiq-website" && import.meta.env.DEV ? "http://127.0.0.1:4330/" : project.url);
