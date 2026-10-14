@@ -23,6 +23,11 @@ export default function AdvisoryPartner() {
   const albert = people.find(person => person.name === "Albert Deltour");
   if (!albert) return null;
   return <article className="sn-advisory" aria-label={`Albert Deltour · ${text.title}`} translate="no">
+    <div className="sn-advisory-brand">
+      <a className="sn-advisory-logo" href="https://www.eltlive.com/" target="_blank" rel="noopener noreferrer" aria-label="ELT Live">
+        <img src="/images/merken/elt-live.webp" alt="ELT Live · Strategic Live Communication" width="1000" height="250" loading="lazy" decoding="async" />
+      </a>
+    </div>
     <a className="sn-advisory-profile" href={albert.linkedin} target="_blank" rel="noopener noreferrer" aria-label="Albert Deltour on LinkedIn">
       <img className="sn-advisory-photo" {...klein(albert.image, "(max-width: 640px) 40vw, 200px", [160, 320])} alt="Albert Deltour" width="200" height="200" loading="lazy" />
       <div className="sn-advisory-caption">
@@ -35,9 +40,7 @@ export default function AdvisoryPartner() {
       <strong>{text.title}</strong>
       <p>{text.experience}</p>
       <p>{text.intro}</p>
-      <a className="sn-advisory-logo" href="https://www.eltlive.com/" target="_blank" rel="noopener noreferrer" aria-label="ELT Live">
-        <img src="/images/merken/elt-live.webp" alt="ELT Live · Strategic Live Communication" width="1000" height="250" loading="lazy" decoding="async" />
-      </a>
+
     </div>
   </article>;
 }

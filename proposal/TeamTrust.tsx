@@ -237,4 +237,3 @@ export function Integraties() {
     <p className="h-integraties-belofte"><strong>One central platform.</strong> Your system, free or custom, <b>always stays yours.</b> Not only now, but forever.</p>
   </div>;
 }
-

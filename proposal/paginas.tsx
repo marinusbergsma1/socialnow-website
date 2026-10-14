@@ -468,7 +468,14 @@ export function TeamPage() {
           </div>
           <div className="h-team-duo is-fincer">
             <p className="h-team-duo-label" translate="no"><PartnerKoppen soort="fincer" /></p>
-            <TeamGrid members={fincer} />
+            <div className="sn-wealth-body">
+              <TeamGrid members={fincer} />
+              <div className="sn-wealth-copy">
+                <strong>Vermogensbeheer, met persoonlijk contact.</strong>
+                <p>Steven Goudsblom is oprichter van Fincer en onze partner voor vermogensbeheer. Hij denkt mee met SocialNow en ondernemers in ons netwerk.</p>
+                <p>Persoonlijk contact staat centraal. Zo verbinden we de juiste expertise aan de vragen die bij je bedrijf en vermogen horen.</p>
+              </div>
+            </div>
           </div>
           <AdvisoryPartner />
         </div>

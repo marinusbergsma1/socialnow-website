@@ -24,3 +24,18 @@
 :root .sn-site .h-teams-duo > .sn-advisory .sn-advisory-caption{padding:12px 0 0}
 :root .sn-site .h-teams-duo > .sn-advisory .sn-advisory-logo img{width:180px}
 @media(max-width:640px){:root .sn-site .h-teams-duo > .sn-advisory{grid-template-columns:1fr;padding:14px}:root .sn-site .h-teams-duo > .sn-advisory .sn-advisory-profile{width:min(200px,100%)}}
+
+/* Zelfde opbouw voor beide partners: merk, portret en persoonlijke toelichting. */
+:root .sn-site .h-teams-duo > .sn-advisory{grid-template-columns:minmax(0,160px) minmax(0,1fr);gap:20px}
+:root .sn-site .sn-advisory-brand{grid-column:1/-1;height:44px;display:flex;align-items:center;justify-content:center}
+:root .sn-site .sn-advisory-brand .sn-advisory-logo{margin:0;background:none;border:0;box-shadow:none;outline:none}
+:root .sn-site .sn-advisory-brand .sn-advisory-logo:focus-visible{outline:none;filter:drop-shadow(0 0 3px #9b632e)}
+:root .sn-site .h-teams-duo .h-team-duo.is-fincer{display:flex;flex-direction:column;gap:20px}
+:root .sn-site .h-teams-duo .h-team-duo.is-fincer .h-team-duo-label{height:44px;margin:0}
+:root .sn-site .sn-wealth-body{display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr);gap:20px;align-items:start}
+:root .sn-site .h-team-duo.is-fincer .sn-wealth-body .h-people-grid{grid-template-columns:minmax(0,1fr);gap:0}
+:root .sn-site .sn-wealth-body .h-portrait,:root .sn-site .sn-wealth-body .h-portrait img{height:auto;aspect-ratio:1;object-fit:cover}
+:root .sn-site .sn-wealth-copy{min-width:0;color:#243444}
+:root .sn-site .sn-wealth-copy strong{font-size:16px;line-height:1.4}
+:root .sn-site .sn-wealth-copy p{font-size:14px;line-height:1.5;margin:10px 0 12px;color:inherit}
+@media(max-width:640px){:root .sn-site .h-teams-duo > .sn-advisory,:root .sn-site .sn-wealth-body{grid-template-columns:1fr}:root .sn-site .sn-wealth-body .h-people-grid{width:min(200px,100%)}}
