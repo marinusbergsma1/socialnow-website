@@ -10,7 +10,7 @@ export const privacyNl: LegalDoc = {
     {
       "title": "1. Wie is verantwoordelijk",
       "paragraphs": [
-        "SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, KVK 90877179, is de verwerkingsverantwoordelijke voor de gegevens van bezoekers en accounthouders. Voor de gegevens die een accounthouder zelf in zijn werkruimte zet (zijn eigen klanten, contacten, orders en teamleden) is de accounthouder verantwoordelijke en is SocialNow verwerker; daarvoor geldt artikel 12.",
+        "SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, KVK 77146301, is de verwerkingsverantwoordelijke voor de gegevens van bezoekers en accounthouders. Voor de gegevens die een accounthouder zelf in zijn werkruimte zet (zijn eigen klanten, contacten, orders en teamleden) is de accounthouder verantwoordelijke en is SocialNow verwerker; daarvoor geldt artikel 12.",
         "Vragen, verzoeken en klachten over privacy: info@socialnow.nl. Wij reageren binnen een maand."
       ]
     },
@@ -241,7 +241,7 @@ export const privacyEn: LegalDoc = {
     {
       "title": "1. Who is responsible",
       "paragraphs": [
-        "SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands, Chamber of Commerce 90877179, is the controller for the data of visitors and account holders. For the data an account holder puts into their own workspace (their own customers, contacts, orders and team members) the account holder is the controller and SocialNow is the processor; section 12 applies to that.",
+        "SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands, Chamber of Commerce 77146301, is the controller for the data of visitors and account holders. For the data an account holder puts into their own workspace (their own customers, contacts, orders and team members) the account holder is the controller and SocialNow is the processor; section 12 applies to that.",
         "Questions, requests and complaints about privacy: info@socialnow.nl. We respond within one month."
       ]
     },

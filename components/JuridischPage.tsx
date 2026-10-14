@@ -28,7 +28,7 @@ const TEKST = {
     pdf: "Pdf",
     vragen: "Vragen over een van deze documenten, of een vragenlijst die ingevuld moet worden?",
     contact: "Mail privacy@socialnow.nl voor gegevens en privacy, security@socialnow.nl voor kwetsbaarheden.",
-    gegevens: "SocialNow · Amstelstraat 43G, 1017 DA Amsterdam · KVK 90877179 · privacy@socialnow.nl",
+    gegevens: "SocialNow · Amstelstraat 43G, 1017 DA Amsterdam · KVK 77146301 · privacy@socialnow.nl",
   },
   en: {
     titel: "Legal and compliance",
@@ -38,7 +38,7 @@ const TEKST = {
     pdf: "PDF",
     vragen: "Questions about any of these documents, or a questionnaire that needs filling in?",
     contact: "Mail privacy@socialnow.nl for data and privacy, security@socialnow.nl for vulnerabilities.",
-    gegevens: "SocialNow · Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands · CoC 90877179 · privacy@socialnow.nl",
+    gegevens: "SocialNow · Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands · CoC 77146301 · privacy@socialnow.nl",
   },
 } as const;
 

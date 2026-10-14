@@ -101,7 +101,7 @@ export default function BrandFooter() {
               </b>
             </div>
           </div>
-          <p>SocialNow · Software, creatie en marketing. Amsterdam · KVK 90877179.</p>
+          <p>SocialNow · Software, creatie en marketing. Amsterdam · KVK 77146301.</p>
           {/* 19 september 2026: er zijn zeven juridische documenten in plaats van twee. Ze staan
               bij elkaar op /juridisch; twee losse links in de voettekst suggereerden dat er
               niet meer was, en juist de verwerkersovereenkomst is degene waar klanten om vragen. */}
@@ -116,7 +116,7 @@ export default function BrandFooter() {
           <Link to="/cookies">Cookies</Link>
           <Link to="/juridisch">Juridisch</Link>
           <Link to="/veiligheid">Veiligheid</Link>
-          <span>KVK 90877179 · Sinds 2021</span>
+          <span>KVK 77146301 · Sinds 2021</span>
         </div>
 
       </div>

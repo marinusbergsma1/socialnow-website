@@ -39,7 +39,7 @@ export const dpa: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Lega
         "title": "Partijen en werking",
         "paragraphs": [
           "Verwerkingsverantwoordelijke: jij, de opdrachtgever, verder de klant. Jij bepaalt waarom en hoe de gegevens van jouw klanten, leads en medewerkers worden verwerkt.",
-          "Verwerker: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, KVK 90877179, verder SocialNow. Wij verwerken die gegevens uitsluitend voor jou.",
+          "Verwerker: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, KVK 77146301, verder SocialNow. Wij verwerken die gegevens uitsluitend voor jou.",
           "Deze overeenkomst gaat in op het moment dat je een account aanmaakt in SocialNow OS of een opdracht geeft waarbij wij persoonsgegevens namens jou verwerken, en loopt zolang die verwerking duurt. Hij gaat vóór de algemene voorwaarden waar die elkaar tegenspreken op het punt van persoonsgegevens.",
           "Waar deze overeenkomst spreekt over de AVG bedoelen wij Verordening (EU) 2016/679, en waar zij spreekt over de toezichthouder bedoelen wij de Autoriteit Persoonsgegevens, of de toezichthouder van het land waar jij gevestigd bent."
         ]
@@ -265,7 +265,7 @@ export const dpa: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Lega
         "title": "Parties and effect",
         "paragraphs": [
           "Controller: you, the client. You decide why and how the data of your customers, leads and staff is processed.",
-          "Processor: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands, Chamber of Commerce 90877179. We process that data solely for you.",
+          "Processor: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands, Chamber of Commerce 77146301. We process that data solely for you.",
           "This agreement takes effect when you create an account in SocialNow OS or give us an assignment in which we process personal data on your behalf, and lasts as long as that processing lasts. Where it conflicts with the terms of service on the subject of personal data, this agreement prevails.",
           "Where this agreement refers to the GDPR we mean Regulation (EU) 2016/679, and where it refers to the supervisory authority we mean the Dutch Data Protection Authority, or the authority of the country where you are established."
         ]

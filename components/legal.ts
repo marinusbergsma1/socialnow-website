@@ -26,7 +26,7 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
       {
         "title": "1. Definities",
         "paragraphs": [
-          "Opdrachtnemer: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, KVK 90877179. Opdrachtgever: de tegenpartij van opdrachtnemer, waaronder iedereen die een account aanmaakt in SocialNow OS. Overeenkomst: de overeenkomst tot dienstverlening, inclusief het gebruik van SocialNow OS."
+          "Opdrachtnemer: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, KVK 77146301. Opdrachtgever: de tegenpartij van opdrachtnemer, waaronder iedereen die een account aanmaakt in SocialNow OS. Overeenkomst: de overeenkomst tot dienstverlening, inclusief het gebruik van SocialNow OS."
         ]
       },
       {
@@ -160,7 +160,7 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
       {
         "title": "1. Definitions",
         "paragraphs": [
-          "Contractor: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands, Chamber of Commerce 90877179. Client: the counterparty of the contractor, including anyone who creates an account in SocialNow OS. Agreement: the agreement for services, including the use of SocialNow OS."
+          "Contractor: SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands, Chamber of Commerce 77146301. Client: the counterparty of the contractor, including anyone who creates an account in SocialNow OS. Agreement: the agreement for services, including the use of SocialNow OS."
         ]
       },
       {
