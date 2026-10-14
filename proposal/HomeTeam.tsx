@@ -41,7 +41,7 @@ export default function HomeTeam() {
       if (now - lastMove < 40) return;
       lastMove = now;
       const rect = el.getBoundingClientRect();
-      field.golf(event.clientX - rect.left, event.clientY - rect.top, "blauw", { straal: 96, duur: .45, breed: 64 });
+      field.golf(event.clientX - rect.left, event.clientY - rect.top, "groen", { straal: 96, duur: .45, breed: 64, sterkte: 1 });
     };
     el.addEventListener("pointermove", move, { passive: true });
     const timer = window.setInterval(() => {
