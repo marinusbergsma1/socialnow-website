@@ -34,6 +34,11 @@ export default function Deuren() {
       label="Optionele koppelingen / Odoo en partners"
       titel={<>Probeer het zelf.<br /><span>Of breng het naar je klanten.</span></>}
     >
+      <Tegel kop="Jouw data. Jouw connecties." breed={6}>
+        <h3 className="sn-tegel-titel" translate="no">Software as a tool. Not a service.</h3>
+        <p className="sn-tegel-tekst">Jouw gegevens blijven van jou. Jij houdt de regie over je eigen verbindingen en je systeem. De software verbindt jouw tools tot een persoonlijk of op maat gemaakt systeem. Wij zijn de persoonlijke servicelaag daaromheen.</p>
+        <p className="sn-tegel-tekst">We volgen je gedrag niet. Feedback komt uit persoonlijk contact. We begonnen met Odoo en Zernio omdat hun aanpak aansluit bij die van ons: eerst waarde bieden en jezelf bewijzen. Daarom maken we gratis websites voor iedereen.</p>
+      </Tegel>
       <Tegel kop="Wil je Odoo koppelen?" breed={6} soort="groen" className="h-deur">
         <h3 className="sn-tegel-titel">Probeer het OS gratis.</h3>
         <p className="sn-tegel-tekst">Gebruik Odoo als optionele koppeling voor je klanten en verkoop. Begin gratis met WEBSITE → CONTENT → STUDIO, met ons team erachter.</p>

@@ -3,193 +3,463 @@
 import type { LegalDoc } from "./legal";
 
 export const privacyNl: LegalDoc = {
-  title: "Privacybeleid",
-  intro: "Hoe SocialNow omgaat met persoonsgegevens op socialnow.nl en in SocialNow OS, volgens de Algemene verordening gegevensbescherming (AVG). Dit beleid geldt voor bezoekers van de website, voor iedereen met een account in het OS en voor de klanten, contacten en teamleden van die accounts.",
-  updated: "Laatst bijgewerkt: 20 september 2026",
-  sections: [
-    { title: "1. Wie is verantwoordelijk", paragraphs: ["SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, KVK 90877179, is de verwerkingsverantwoordelijke voor de gegevens van bezoekers en accounthouders. Voor de gegevens die een accounthouder zelf in zijn werkruimte zet (zijn eigen klanten, contacten, orders en teamleden) is de accounthouder verantwoordelijke en is SocialNow verwerker; daarvoor geldt artikel 12.", "Vragen, verzoeken en klachten over privacy: info@socialnow.nl. Wij reageren binnen een maand."] },
-    { title: "2. Welke gegevens wij verwerken", paragraphs: ["Op de website verwerken wij alleen wat je zelf achterlaat:", "In SocialNow OS verwerken wij daarnaast:", "Gegevens uit bronnen die je zelf koppelt, uitsluitend voor je eigen werkruimte:"], bullets: [
-      ["Naam, e-mailadres en telefoonnummer bij contact via het formulier, e-mail of WhatsApp", "Naam, e-mailadres, land en (als je dat invult) telefoonnummer als je via de welkomstmelding naar de demo gaat, zodat wij later contact met je kunnen opnemen over SocialNow", "Bedrijfsnaam en projectinformatie bij een aanvraag of offerte", "De inhoud van je bericht"],
-      ["Je account: naam, e-mailadres, profielfoto en de manier waarop je inlogt (Google, e-mailcode, inloglink of wachtwoord); je wachtwoord zelf zien wij nooit", "Je werkruimte: bedrijfsnaam, sector, website, branding (logo, kleuren, lettertypen, tone of voice) en alle gegevens die je zelf invult", "Teamleden: e-mailadres, naam en rol van de mensen die je uitnodigt", "Wat je in het OS maakt: uitingen, teksten, beelden, documenten, campagnes en de chatgesprekken met Milo", "Betalingen: het aangekochte tegoed en de betaalstatus; kaartgegevens gaan rechtstreeks naar Stripe en bereiken ons nooit", "Gebruiksgegevens: welke onderdelen je gebruikt, wat je aan het OS vraagt, foutmeldingen en hoe de tools presteren voor je werkruimte", "Technische gegevens: IP-adres, browser en tijdstip, alleen voor beveiliging, rate-limiting en foutopsporing", "Je taalkeuze en je akkoord op de voorwaarden (versie en tijdstip)"],
-      ["Odoo: klanten, contacten, leads, orders, facturen en producten, zoals je Odoo-omgeving ze levert", "Meta (Facebook en Instagram): pagina- en advertentiegegevens, statistieken en de berichten die je via het OS plaatst", "Google (Ads, Analytics, Business Profile): campagnestatistieken en accountgegevens", "De sleutels en tokens die je daarvoor invoert worden versleuteld bewaard en nooit meer getoond"],
-    ] },
-    { title: "3. Waarvoor en op welke grondslag", paragraphs: ["Wij gebruiken gegevens alleen voor deze doelen, elk met een grondslag uit artikel 6 AVG:"], bullets: [[
-      "Je vraag of aanvraag beantwoorden en een offerte maken: uitvoering van (het aangaan van) een overeenkomst",
-      "Het OS voor jou laten werken: inloggen, je werkruimte tonen, content en documenten maken, gekoppelde bronnen lezen: uitvoering van de overeenkomst",
-      "Factureren en betalingen verwerken: uitvoering van de overeenkomst en wettelijke plicht (bewaarplicht Belastingdienst)",
-      "Beveiliging, misbruik voorkomen en fouten oplossen: gerechtvaardigd belang",
-      "Vrijwillige gebruiksmeting en afzonderlijke gemaskeerde schermopnames voor productverbetering (artikel 4): toestemming",
-      "Je informeren over wijzigingen in het OS, de voorwaarden of dit beleid: uitvoering van de overeenkomst",
-      "Marketing aan bestaande klanten over vergelijkbare diensten: gerechtvaardigd belang, met altijd een afmeldmogelijkheid",
-    ]] },
-    {"title": "4. Gebruiksmeting, opnames en ondersteuning", "paragraphs": ["Een account aanmaken geeft ons geen algemene toestemming om je bedrijfsinhoud voor eigen productontwikkeling te gebruiken. Noodzakelijke beveiliging en ondersteuning baseren wij op de overeenkomst en ons gerechtvaardigd belang. Beheertoegang is beperkt tot bevoegde personen en wordt gelogd.", "Vrijwillige gebruiksmeting met PostHog in de EU start pas na jouw toestemming. We verzamelen een pseudoniem, een werkruimtekenmerk, schermroutes en vooraf bepaalde gebeurtenissen. E-mailadressen, vrije zoektermen, prompts, klantnamen en documenten horen niet in deze meting. Gepseudonimiseerde gegevens blijven persoonsgegevens.", "Gemaskeerde schermopnames hebben een afzonderlijke, standaard uitgeschakelde keuze. Tekst, invoervelden en media worden afgeschermd. Account-, CRM-, betaal- en beheerschermen worden niet opgenomen; chatinhoud wordt afgeschermd. Er wordt geen geluid, camera of volledig apparaatbeeld opgenomen. Nieuwe opnames worden 30 dagen bewaard. Gewone gebruiksgebeurtenissen blijven op ons huidige PostHog-plan maximaal één jaar beschikbaar, zodat wij ook seizoensverschillen kunnen vergelijken.", "Beide keuzes kun je onder Account intrekken zonder functies te verliezen. Daarmee stoppen nieuwe metingen en opnames. Intrekken verwijdert bestaande gegevens niet automatisch; daarvoor kun je een verzoek indienen via info@socialnow.nl. We verkopen deze gegevens niet, gebruiken ze niet voor advertenties van derden en delen ze niet met andere klanten.", "Gebruik van bedrijfsinhoud voor een aanvullend eigen doel vraagt een afzonderlijke beoordeling en grondslag. Het akkoord op de voorwaarden vervangt die niet."]},
-    { title: "5. Wie ons helpt (verwerkers)", paragraphs: ["Deze partijen verwerken gegevens in onze opdracht, onder een verwerkersovereenkomst of de standaardvoorwaarden van de leverancier die aan de AVG voldoen:"], bullets: [[
-      "Google Firebase (Google Ireland Ltd): inloggen met Google, e-mailcode of inloglink; accountgegevens",
-      "Vercel Inc.: hosting van het OS en de API, en opslag van je werkruimte (Vercel Blob, regio EU waar mogelijk)",
-      "PostHog Inc.: vrijwillige gebruiksmeting en afzonderlijk toegestane gemaskeerde schermopnames (dataregio EU)",
-      "Hostinger: het versturen van e-mail vanaf info@socialnow.nl, zoals inlogcodes, uitnodigingen en meldingen",
-      "Stripe Payments Europe Ltd: betalingen voor tegoed; Stripe is voor kaartgegevens zelfstandig verantwoordelijke",
-      "GitHub Inc.: hosting van socialnow.nl (GitHub Pages)",
-      "AI-leveranciers (artikel 6) voor het maken van teksten en beelden op jouw verzoek",
-    ]] },
-    { title: "6. Kunstmatige intelligentie", paragraphs: [
-      "Het OS maakt teksten, beelden en analyses met taal- en beeldmodellen. Daarvoor sturen wij de gegevens die nodig zijn voor jouw verzoek (je verhaal, je branding, de relevante cijfers) naar een modelleverancier. Wij gebruiken op dit moment Google (Gemini, via Google Cloud Vertex AI of de Gemini API) en, afhankelijk van de gekozen renderoptie, Higgsfield of OpenAI voor beeld.",
-      "Deze leveranciers verwerken de gegevens alleen om het antwoord te maken. Wij kiezen contract- en instellingen waarbij jouw invoer niet wordt gebruikt om hun modellen te trainen. Antwoorden van een model kunnen fouten bevatten; controleer wat je publiceert.",
-      "Milo, de assistent in het OS, ziet alleen de gegevens van je eigen werkruimte en de gegevens die je zelf in het gesprek deelt.",
-    ] },
-    { title: "7. Doorgifte buiten de EU", paragraphs: ["Een aantal leveranciers is gevestigd in de Verenigde Staten of verwerkt daar gegevens (Vercel, GitHub, Stripe, Google, OpenAI). Doorgifte gebeurt op basis van het EU-VS Data Privacy Framework waar de leverancier daarbij is aangesloten, en anders op basis van de standaardcontractbepalingen van de Europese Commissie met aanvullende maatregelen. Wij kiezen waar mogelijk voor opslag en verwerking in de EU."] },
-    { title: "8. Bewaartermijnen", paragraphs: ["Wij bewaren gegevens niet langer dan nodig:"], bullets: [[
-      "Contactgegevens van een aanvraag zonder opdracht: maximaal twee jaar na het laatste contact",
-      "Gegevens uit de demo-aanmelding: maximaal twee jaar, of korter als je vraagt ze te wissen",
-      "Account- en werkruimtegegevens: zolang je account bestaat; na verwijdering binnen dertig dagen gewist uit de actieve systemen en binnen negentig dagen uit back-ups",
-      "Gegevens uit gekoppelde bronnen: alleen zolang de koppeling bestaat; ontkoppelen wist de gekopieerde gegevens en de sleutel",
-      "Chatgesprekken met Milo en gemaakte uitingen: zolang je account bestaat, tenzij je ze zelf eerder verwijdert",
-      "Facturen en betaalgegevens: zeven jaar (fiscale bewaarplicht)",
-      "Technische logs (IP-adres, foutmeldingen): maximaal dertig dagen",
-      "Je akkoord op de voorwaarden: zolang je account bestaat, plus de wettelijke verjaringstermijn",
-    ]] },
-    { title: "9. Cookies en lokale opslag", paragraphs: ["Socialnow.nl plaatst geen trackingcookies en gebruikt geen analytics. Wij onthouden in je browser (localStorage) alleen dat je de melding over de voorwaarden hebt gezien, en in cookies op socialnow.nl welke taal en welk land je koos en of je toestemming gaf voor meten in het OS.", "SocialNow OS gebruikt functionele cookies en opslag, en meet alleen gebruik als jij daar toestemming voor geeft:"], bullets: [undefined as unknown as string[], [
-      "__session: houdt bij dat je bent ingelogd (55 minuten, of 30 dagen als je 'ingelogd blijven' aanvinkt)",
-      "sn-taal en sn-land: je taal- en landkeuze (een jaar)",
-      "sn-meten en sn-replay-v1: afzonderlijke keuzes voor meting en opname (180 dagen in de app); je wijzigt dit onder Account",
-      "Alleen met jouw toestemming: PostHog (EU) meet welke onderdelen je gebruikt, gekoppeld aan een pseudoniem en werkruimtekenmerk, om het OS te verbeteren. Zonder toestemming laadt PostHog niet",
-      "Firebase-opslag in je browser voor het inloggen en het onthouden van je inloglink-adres",
-      "Lokale opslag voor voorkeuren zoals je gekozen thema, en voor concepten die nog niet zijn opgeslagen",
-    ]] },
-    { title: "10. Beveiliging", paragraphs: ["Wij nemen passende technische en organisatorische maatregelen:"], bullets: [[
-      "Alle verbindingen lopen via https; de API accepteert alleen verzoeken vanuit de app zelf",
-      "Sleutels en tokens van gekoppelde bronnen worden versleuteld opgeslagen en nooit meer getoond; alleen de server kan ze gebruiken",
-      "Wachtwoorden worden beheerd door Google Firebase en zijn voor ons niet leesbaar; inlogcodes werken één keer en vervallen na vijftien minuten",
-      "Elke werkruimte is strikt gescheiden; de code die opslag benadert kan alleen bij de eigen werkruimte",
-      "Rate-limiting op inloggen en API-verzoeken, en logging van beheerhandelingen",
-      "Toegang van het SocialNow-team is beperkt tot wat nodig is en wordt gelogd",
-      "Bij een datalek dat risico oplevert melden wij dit binnen 72 uur bij de Autoriteit Persoonsgegevens en informeren wij de betrokkenen",
-    ]] },
-    { title: "11. Jouw rechten", paragraphs: ["Je hebt op grond van de AVG het recht op:", "In het OS zie je onder Account welke gegevens wij over je hebben, kun je je naam en taal wijzigen, je koppelingen verbreken en je account met werkruimten verwijderen. Voor al het andere mail je info@socialnow.nl; wij kunnen je vragen je identiteit te bevestigen. Je kunt ook een klacht indienen bij de Autoriteit Persoonsgegevens (autoriteitpersoonsgegevens.nl)."], bullets: [[
-      "Inzage in je gegevens en een kopie daarvan",
-      "Correctie van onjuiste gegevens",
-      "Verwijdering ('recht op vergetelheid')",
-      "Beperking van de verwerking",
-      "Overdracht van je gegevens in een gangbaar bestandsformaat (dataportabiliteit)",
-      "Bezwaar tegen verwerking op grond van gerechtvaardigd belang, waaronder noodzakelijke beveiliging en marketing",
-      "Intrekken van gegeven toestemming, zonder gevolgen voor wat daarvoor is verwerkt",
-    ]] },
-    { title: "12. Als jij verantwoordelijke bent: jouw klanten in het OS", paragraphs: ["Zet je gegevens van je eigen klanten, leads of teamleden in het OS, of koppel je Odoo, Meta of Google, dan ben jij daarvoor de verwerkingsverantwoordelijke en verwerkt SocialNow die gegevens in jouw opdracht. Tot 19 september 2026 stond hier een samenvatting die zichzelf verwerkersovereenkomst noemde. Vijf opsommingstekens zijn geen overeenkomst in de zin van artikel 28 lid 3 AVG; die bepaling eist een vaste lijst onderwerpen die daar niet in stond. Er is nu een volledige verwerkersovereenkomst op socialnow.nl/verwerkersovereenkomst, met de instructiebinding, de subverwerkers, de beveiligingsmaatregelen, de doorgifte, de audit en wat er bij het einde met je gegevens gebeurt. Die geldt, en hieronder staat waar het op neerkomt:"], bullets: [[
-      "Wij verwerken deze gegevens alleen om het OS voor jou te laten werken en volgens jouw instructies via het OS",
-      "Wij schakelen alleen de verwerkers uit artikel 5 en 6 in en informeren je op deze pagina over wijzigingen; je kunt daartegen bezwaar maken door je account te beëindigen",
-      "Wij nemen de maatregelen uit artikel 10, helpen je bij verzoeken van betrokkenen en bij een gegevensbeschermingseffectbeoordeling, en melden een datalek dat jouw gegevens raakt zonder onnodige vertraging",
-      "Bij het einde van je account wissen wij de gegevens volgens artikel 8, tenzij de wet ons verplicht ze te bewaren",
-      "Jij zorgt dat je een grondslag hebt om deze gegevens aan ons te geven en informeert je eigen klanten waar nodig",
-    ]] },
-    { title: "13. Kinderen", paragraphs: ["SocialNow OS is bedoeld voor bedrijven. Wij richten ons niet op personen jonger dan 16 jaar en verwerken hun gegevens niet bewust. Merken wij dat toch, dan wissen wij ze."] },
-    { title: "14. Geautomatiseerde besluitvorming", paragraphs: ["Het OS doet suggesties en maakt concepten, maar neemt geen besluiten met rechtsgevolgen of vergelijkbare gevolgen voor jou zonder menselijke tussenkomst. Publiceren, versturen en betalen gebeurt alleen op jouw uitdrukkelijke actie."] },
-    { title: "15. Wijzigingen", paragraphs: ["Wij kunnen dit beleid wijzigen, bijvoorbeeld bij een nieuwe functie of leverancier. De actuele versie staat altijd op socialnow.nl/privacy met de datum bovenaan. Bij een wijziging die je rechten raakt vragen wij in het OS opnieuw om akkoord en informeren wij accounthouders per e-mail."] },
-    { title: "16. Buiten de EU: het Verenigd Koninkrijk, Zwitserland en de Verenigde Staten", paragraphs: ["SocialNow is in Nederland gevestigd en werkt met klanten en bezoekers uit meer landen. Waar een ander regime van toepassing is, geldt het volgende naast de rest van dit beleid.", "Verenigd Koninkrijk: ben je in het VK gevestigd, dan geldt de UK GDPR en de Data Protection Act 2018. Je rechten zijn dezelfde als hierboven. Een klacht dien je in bij de Information Commissioner's Office (ico.org.uk). Doorgifte vanuit het VK naar ons berust op het adequaatheidsbesluit van het VK voor de EER; verlaat een gegeven daarna alsnog de EER, dan geldt de UK International Data Transfer Addendum bij de standaardcontractbepalingen.", "Zwitserland: ben je in Zwitserland gevestigd, dan geldt het Bundesgesetz über den Datenschutz. Je rechten zijn gelijkwaardig; je klacht gaat naar de Eidgenössischer Datenschutz- und Öffentlichkeitsbeauftragter (edoeb.admin.ch).", "Verenigde Staten, Californië: ben je inwoner van Californië, dan geeft de CCPA zoals gewijzigd door de CPRA je een aantal rechten die wij hieronder uitdrukkelijk bevestigen."], bullets: [undefined as unknown as string[], undefined as unknown as string[], undefined as unknown as string[], [
-      "Wij verkopen geen persoonsgegevens en delen ze niet voor cross-context gedragsreclame. Wij hebben dat nooit gedaan en zijn het niet van plan; daarom staat er op onze site ook geen 'Do Not Sell or Share'-knop, want er is niets om uit te zetten",
-      "Recht te weten welke categorieën persoonsgegevens wij verzamelen, waarvandaan, waarvoor en met wie wij ze delen: dat staat in artikel 2, 3 en 5",
-      "Recht op een kopie van de specifieke gegevens die wij over je hebben",
-      "Recht op verwijdering, en recht op correctie van onjuiste gegevens",
-      "Recht om het gebruik van gevoelige persoonsgegevens te beperken: wij verzamelen geen gevoelige categorieën in de zin van de CPRA",
-      "Recht om niet gediscrimineerd te worden omdat je een van deze rechten gebruikt: wij bieden geen andere prijs of een mindere dienst aan wie een verzoek doet",
-      "Een gemachtigde mag namens jou een verzoek doen; wij vragen dan om bewijs van die machtiging",
-      "Verzoeken: info@socialnow.nl. Wij bevestigen binnen tien werkdagen en antwoorden binnen 45 dagen, met een verlenging van 45 dagen als dat nodig is",
-    ]] },
-    { title: "17. Klacht indienen", paragraphs: ["Heb je een klacht over hoe wij met je gegevens omgaan, mail dan eerst info@socialnow.nl. Wij antwoorden binnen tien werkdagen met een mens, niet met een formulier.", "Kom je er met ons niet uit, dan kun je altijd naar een toezichthouder. In Nederland is dat de Autoriteit Persoonsgegevens (autoriteitpersoonsgegevens.nl, 088 - 1805 250). Woon je in een andere EU-lidstaat, dan mag je ook bij de toezichthouder van jouw eigen land terecht; die is even bevoegd. Buiten de EU: zie artikel 16."] },
-  ],
+  "title": "Privacybeleid",
+  "intro": "Hoe SocialNow omgaat met persoonsgegevens op socialnow.nl en in SocialNow OS, volgens de Algemene verordening gegevensbescherming (AVG). Dit beleid geldt voor bezoekers van de website, voor iedereen met een account in het OS en voor de klanten, contacten en teamleden van die accounts.",
+  "updated": "Laatst bijgewerkt: 14 oktober 2026",
+  "sections": [
+    {
+      "title": "1. Wie is verantwoordelijk",
+      "paragraphs": [
+        "SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, KVK 90877179, is de verwerkingsverantwoordelijke voor de gegevens van bezoekers en accounthouders. Voor de gegevens die een accounthouder zelf in zijn werkruimte zet (zijn eigen klanten, contacten, orders en teamleden) is de accounthouder verantwoordelijke en is SocialNow verwerker; daarvoor geldt artikel 12.",
+        "Vragen, verzoeken en klachten over privacy: info@socialnow.nl. Wij reageren binnen een maand."
+      ]
+    },
+    {
+      "title": "2. Welke gegevens wij verwerken",
+      "paragraphs": [
+        "Op de website verwerken wij alleen wat je zelf achterlaat:",
+        "In SocialNow OS verwerken wij daarnaast:",
+        "Gegevens uit bronnen die je zelf koppelt, uitsluitend voor je eigen werkruimte:"
+      ],
+      "bullets": [
+        [
+          "Naam, e-mailadres en telefoonnummer bij contact via het formulier, e-mail of WhatsApp",
+          "Naam, e-mailadres, land en (als je dat invult) telefoonnummer als je via de welkomstmelding naar de demo gaat, zodat wij later contact met je kunnen opnemen over SocialNow",
+          "Bedrijfsnaam en projectinformatie bij een aanvraag of offerte",
+          "De inhoud van je bericht"
+        ],
+        [
+          "Je account: naam, e-mailadres, profielfoto en de manier waarop je inlogt (Google, e-mailcode, inloglink of wachtwoord); je wachtwoord zelf zien wij nooit",
+          "Je werkruimte: bedrijfsnaam, sector, website, branding (logo, kleuren, lettertypen, tone of voice) en alle gegevens die je zelf invult",
+          "Teamleden: e-mailadres, naam en rol van de mensen die je uitnodigt",
+          "Wat je in het OS maakt: uitingen, teksten, beelden, documenten, campagnes en de chatgesprekken met Milo",
+          "Betalingen: het aangekochte tegoed en de betaalstatus; kaartgegevens gaan rechtstreeks naar Stripe en bereiken ons nooit",
+          "Technische gegevens: IP-adres, browser en tijdstip, alleen voor beveiliging, rate-limiting en foutopsporing",
+          "Je taalkeuze en je akkoord op de voorwaarden (versie en tijdstip)"
+        ],
+        [
+          "Odoo: klanten, contacten, leads, orders, facturen en producten, zoals je Odoo-omgeving ze levert",
+          "Meta (Facebook en Instagram): pagina- en advertentiegegevens, statistieken en de berichten die je via het OS plaatst",
+          "Google (Ads, Analytics, Business Profile): campagnestatistieken en accountgegevens",
+          "De sleutels en tokens die je daarvoor invoert worden versleuteld bewaard en nooit meer getoond"
+        ]
+      ]
+    },
+    {
+      "title": "3. Waarvoor en op welke grondslag",
+      "paragraphs": [
+        "Wij gebruiken gegevens alleen voor deze doelen, elk met een grondslag uit artikel 6 AVG:"
+      ],
+      "bullets": [
+        [
+          "Je vraag of aanvraag beantwoorden en een offerte maken: uitvoering van (het aangaan van) een overeenkomst",
+          "Het OS voor jou laten werken: inloggen, je werkruimte tonen, content en documenten maken, gekoppelde bronnen lezen: uitvoering van de overeenkomst",
+          "Factureren en betalingen verwerken: uitvoering van de overeenkomst en wettelijke plicht (bewaarplicht Belastingdienst)",
+          "Beveiliging, misbruik voorkomen en fouten oplossen: gerechtvaardigd belang",
+          "Je informeren over wijzigingen in het OS, de voorwaarden of dit beleid: uitvoering van de overeenkomst",
+          "Marketing aan bestaande klanten over vergelijkbare diensten: gerechtvaardigd belang, met altijd een afmeldmogelijkheid"
+        ]
+      ]
+    },
+    {
+      "title": "4. Jouw gegevens en persoonlijk contact",
+      "paragraphs": [
+        "Je gegevens blijven van jou. Je houdt de regie over je eigen werkruimte, de tools die je koppelt en de opdrachten die je geeft.",
+        "We volgen je gedrag niet en maken geen schermopnames. Je bedrijfsgegevens worden niet gebruikt voor onze eigen productontwikkeling. Feedback verzamelen we via persoonlijk contact.",
+        "Noodzakelijke beveiligings- en storingslogboeken houden het systeem veilig en werkend. Toegang voor ondersteuning is beperkt tot bevoegde personen en wordt gelogd.",
+        "Software as a tool. De software verbindt jouw tools tot een persoonlijk of op maat gemaakt systeem. SocialNow levert de persoonlijke service daaromheen. Je data en je eigen connecties blijven onder jouw regie.",
+        "Eerder verzamelde gebruiksgegevens worden niet meer geraadpleegd. Je kunt verwijdering aanvragen via info@socialnow.nl."
+      ]
+    },
+    {
+      "title": "5. Wie ons helpt (verwerkers)",
+      "paragraphs": [
+        "Deze partijen verwerken gegevens in onze opdracht, onder een verwerkersovereenkomst of de standaardvoorwaarden van de leverancier die aan de AVG voldoen:"
+      ],
+      "bullets": [
+        [
+          "Google Firebase (Google Ireland Ltd): inloggen met Google, e-mailcode of inloglink; accountgegevens",
+          "Vercel Inc.: hosting van het OS en de API, en opslag van je werkruimte (Vercel Blob, regio EU waar mogelijk)",
+          "Hostinger: het versturen van e-mail vanaf info@socialnow.nl, zoals inlogcodes, uitnodigingen en meldingen",
+          "Stripe Payments Europe Ltd: betalingen voor tegoed; Stripe is voor kaartgegevens zelfstandig verantwoordelijke",
+          "GitHub Inc.: hosting van socialnow.nl (GitHub Pages)",
+          "AI-leveranciers (artikel 6) voor het maken van teksten en beelden op jouw verzoek"
+        ]
+      ]
+    },
+    {
+      "title": "6. Kunstmatige intelligentie",
+      "paragraphs": [
+        "Het OS maakt teksten, beelden en analyses met taal- en beeldmodellen. Daarvoor sturen wij de gegevens die nodig zijn voor jouw verzoek (je verhaal, je branding, de relevante cijfers) naar een modelleverancier. Wij gebruiken op dit moment Google (Gemini, via Google Cloud Vertex AI of de Gemini API) en, afhankelijk van de gekozen renderoptie, Higgsfield of OpenAI voor beeld.",
+        "Deze leveranciers verwerken de gegevens alleen om het antwoord te maken. Wij kiezen contract- en instellingen waarbij jouw invoer niet wordt gebruikt om hun modellen te trainen. Antwoorden van een model kunnen fouten bevatten; controleer wat je publiceert.",
+        "Milo, de assistent in het OS, ziet alleen de gegevens van je eigen werkruimte en de gegevens die je zelf in het gesprek deelt."
+      ]
+    },
+    {
+      "title": "7. Doorgifte buiten de EU",
+      "paragraphs": [
+        "Een aantal leveranciers is gevestigd in de Verenigde Staten of verwerkt daar gegevens (Vercel, GitHub, Stripe, Google, OpenAI). Doorgifte gebeurt op basis van het EU-VS Data Privacy Framework waar de leverancier daarbij is aangesloten, en anders op basis van de standaardcontractbepalingen van de Europese Commissie met aanvullende maatregelen. Wij kiezen waar mogelijk voor opslag en verwerking in de EU."
+      ]
+    },
+    {
+      "title": "8. Bewaartermijnen",
+      "paragraphs": [
+        "Wij bewaren gegevens niet langer dan nodig:"
+      ],
+      "bullets": [
+        [
+          "Contactgegevens van een aanvraag zonder opdracht: maximaal twee jaar na het laatste contact",
+          "Gegevens uit de demo-aanmelding: maximaal twee jaar, of korter als je vraagt ze te wissen",
+          "Account- en werkruimtegegevens: zolang je account bestaat; na verwijdering binnen dertig dagen gewist uit de actieve systemen en binnen negentig dagen uit back-ups",
+          "Gegevens uit gekoppelde bronnen: alleen zolang de koppeling bestaat; ontkoppelen wist de gekopieerde gegevens en de sleutel",
+          "Chatgesprekken met Milo en gemaakte uitingen: zolang je account bestaat, tenzij je ze zelf eerder verwijdert",
+          "Facturen en betaalgegevens: zeven jaar (fiscale bewaarplicht)",
+          "Technische logs (IP-adres, foutmeldingen): maximaal dertig dagen",
+          "Je akkoord op de voorwaarden: zolang je account bestaat, plus de wettelijke verjaringstermijn"
+        ]
+      ]
+    },
+    {
+      "title": "9. Cookies en lokale opslag",
+      "paragraphs": [
+        "Socialnow.nl plaatst geen trackingcookies en gebruikt geen analytics. Wij onthouden in je browser (localStorage) alleen dat je de melding over de voorwaarden hebt gezien, en in cookies op socialnow.nl welke taal en welk land je koos en of je toestemming gaf voor meten in het OS.",
+        "SocialNow OS gebruikt functionele cookies en opslag, en meet alleen gebruik als jij daar toestemming voor geeft:"
+      ],
+      "bullets": [
+        [
+          "__session: houdt bij dat je bent ingelogd (55 minuten, of 30 dagen als je 'ingelogd blijven' aanvinkt)",
+          "sn-taal en sn-land: je taal- en landkeuze (een jaar)",
+          "Firebase-opslag in je browser voor het inloggen en het onthouden van je inloglink-adres",
+          "Lokale opslag voor voorkeuren zoals je gekozen thema, en voor concepten die nog niet zijn opgeslagen"
+        ]
+      ]
+    },
+    {
+      "title": "10. Beveiliging",
+      "paragraphs": [
+        "Wij nemen passende technische en organisatorische maatregelen:"
+      ],
+      "bullets": [
+        [
+          "Alle verbindingen lopen via https; de API accepteert alleen verzoeken vanuit de app zelf",
+          "Sleutels en tokens van gekoppelde bronnen worden versleuteld opgeslagen en nooit meer getoond; alleen de server kan ze gebruiken",
+          "Wachtwoorden worden beheerd door Google Firebase en zijn voor ons niet leesbaar; inlogcodes werken één keer en vervallen na vijftien minuten",
+          "Elke werkruimte is strikt gescheiden; de code die opslag benadert kan alleen bij de eigen werkruimte",
+          "Rate-limiting op inloggen en API-verzoeken, en logging van beheerhandelingen",
+          "Toegang van het SocialNow-team is beperkt tot wat nodig is en wordt gelogd",
+          "Bij een datalek dat risico oplevert melden wij dit binnen 72 uur bij de Autoriteit Persoonsgegevens en informeren wij de betrokkenen"
+        ]
+      ]
+    },
+    {
+      "title": "11. Jouw rechten",
+      "paragraphs": [
+        "Je hebt op grond van de AVG het recht op:",
+        "In het OS zie je onder Account welke gegevens wij over je hebben, kun je je naam en taal wijzigen, je koppelingen verbreken en je account met werkruimten verwijderen. Voor al het andere mail je info@socialnow.nl; wij kunnen je vragen je identiteit te bevestigen. Je kunt ook een klacht indienen bij de Autoriteit Persoonsgegevens (autoriteitpersoonsgegevens.nl)."
+      ],
+      "bullets": [
+        [
+          "Inzage in je gegevens en een kopie daarvan",
+          "Correctie van onjuiste gegevens",
+          "Verwijdering ('recht op vergetelheid')",
+          "Beperking van de verwerking",
+          "Overdracht van je gegevens in een gangbaar bestandsformaat (dataportabiliteit)",
+          "Bezwaar tegen verwerking op grond van gerechtvaardigd belang, waaronder noodzakelijke beveiliging en marketing",
+          "Intrekken van gegeven toestemming, zonder gevolgen voor wat daarvoor is verwerkt"
+        ]
+      ]
+    },
+    {
+      "title": "12. Als jij verantwoordelijke bent: jouw klanten in het OS",
+      "paragraphs": [
+        "Zet je gegevens van je eigen klanten, leads of teamleden in het OS, of koppel je Odoo, Meta of Google, dan ben jij daarvoor de verwerkingsverantwoordelijke en verwerkt SocialNow die gegevens in jouw opdracht. Tot 19 september 2026 stond hier een samenvatting die zichzelf verwerkersovereenkomst noemde. Vijf opsommingstekens zijn geen overeenkomst in de zin van artikel 28 lid 3 AVG; die bepaling eist een vaste lijst onderwerpen die daar niet in stond. Er is nu een volledige verwerkersovereenkomst op socialnow.nl/verwerkersovereenkomst, met de instructiebinding, de subverwerkers, de beveiligingsmaatregelen, de doorgifte, de audit en wat er bij het einde met je gegevens gebeurt. Die geldt, en hieronder staat waar het op neerkomt:"
+      ],
+      "bullets": [
+        [
+          "Wij verwerken deze gegevens alleen om het OS voor jou te laten werken en volgens jouw instructies via het OS",
+          "Wij schakelen alleen de verwerkers uit artikel 5 en 6 in en informeren je op deze pagina over wijzigingen; je kunt daartegen bezwaar maken door je account te beëindigen",
+          "Wij nemen de maatregelen uit artikel 10, helpen je bij verzoeken van betrokkenen en bij een gegevensbeschermingseffectbeoordeling, en melden een datalek dat jouw gegevens raakt zonder onnodige vertraging",
+          "Bij het einde van je account wissen wij de gegevens volgens artikel 8, tenzij de wet ons verplicht ze te bewaren",
+          "Jij zorgt dat je een grondslag hebt om deze gegevens aan ons te geven en informeert je eigen klanten waar nodig"
+        ]
+      ]
+    },
+    {
+      "title": "13. Kinderen",
+      "paragraphs": [
+        "SocialNow OS is bedoeld voor bedrijven. Wij richten ons niet op personen jonger dan 16 jaar en verwerken hun gegevens niet bewust. Merken wij dat toch, dan wissen wij ze."
+      ]
+    },
+    {
+      "title": "14. Geautomatiseerde besluitvorming",
+      "paragraphs": [
+        "Het OS doet suggesties en maakt concepten, maar neemt geen besluiten met rechtsgevolgen of vergelijkbare gevolgen voor jou zonder menselijke tussenkomst. Publiceren, versturen en betalen gebeurt alleen op jouw uitdrukkelijke actie."
+      ]
+    },
+    {
+      "title": "15. Wijzigingen",
+      "paragraphs": [
+        "Wij kunnen dit beleid wijzigen, bijvoorbeeld bij een nieuwe functie of leverancier. De actuele versie staat altijd op socialnow.nl/privacy met de datum bovenaan. Bij een wijziging die je rechten raakt vragen wij in het OS opnieuw om akkoord en informeren wij accounthouders per e-mail."
+      ]
+    },
+    {
+      "title": "16. Buiten de EU: het Verenigd Koninkrijk, Zwitserland en de Verenigde Staten",
+      "paragraphs": [
+        "SocialNow is in Nederland gevestigd en werkt met klanten en bezoekers uit meer landen. Waar een ander regime van toepassing is, geldt het volgende naast de rest van dit beleid.",
+        "Verenigd Koninkrijk: ben je in het VK gevestigd, dan geldt de UK GDPR en de Data Protection Act 2018. Je rechten zijn dezelfde als hierboven. Een klacht dien je in bij de Information Commissioner's Office (ico.org.uk). Doorgifte vanuit het VK naar ons berust op het adequaatheidsbesluit van het VK voor de EER; verlaat een gegeven daarna alsnog de EER, dan geldt de UK International Data Transfer Addendum bij de standaardcontractbepalingen.",
+        "Zwitserland: ben je in Zwitserland gevestigd, dan geldt het Bundesgesetz über den Datenschutz. Je rechten zijn gelijkwaardig; je klacht gaat naar de Eidgenössischer Datenschutz- und Öffentlichkeitsbeauftragter (edoeb.admin.ch).",
+        "Verenigde Staten, Californië: ben je inwoner van Californië, dan geeft de CCPA zoals gewijzigd door de CPRA je een aantal rechten die wij hieronder uitdrukkelijk bevestigen."
+      ],
+      "bullets": [
+        [
+          "Wij verkopen geen persoonsgegevens en delen ze niet voor cross-context gedragsreclame. Wij hebben dat nooit gedaan en zijn het niet van plan; daarom staat er op onze site ook geen 'Do Not Sell or Share'-knop, want er is niets om uit te zetten",
+          "Recht te weten welke categorieën persoonsgegevens wij verzamelen, waarvandaan, waarvoor en met wie wij ze delen: dat staat in artikel 2, 3 en 5",
+          "Recht op een kopie van de specifieke gegevens die wij over je hebben",
+          "Recht op verwijdering, en recht op correctie van onjuiste gegevens",
+          "Recht om het gebruik van gevoelige persoonsgegevens te beperken: wij verzamelen geen gevoelige categorieën in de zin van de CPRA",
+          "Recht om niet gediscrimineerd te worden omdat je een van deze rechten gebruikt: wij bieden geen andere prijs of een mindere dienst aan wie een verzoek doet",
+          "Een gemachtigde mag namens jou een verzoek doen; wij vragen dan om bewijs van die machtiging",
+          "Verzoeken: info@socialnow.nl. Wij bevestigen binnen tien werkdagen en antwoorden binnen 45 dagen, met een verlenging van 45 dagen als dat nodig is"
+        ]
+      ]
+    },
+    {
+      "title": "17. Klacht indienen",
+      "paragraphs": [
+        "Heb je een klacht over hoe wij met je gegevens omgaan, mail dan eerst info@socialnow.nl. Wij antwoorden binnen tien werkdagen met een mens, niet met een formulier.",
+        "Kom je er met ons niet uit, dan kun je altijd naar een toezichthouder. In Nederland is dat de Autoriteit Persoonsgegevens (autoriteitpersoonsgegevens.nl, 088 - 1805 250). Woon je in een andere EU-lidstaat, dan mag je ook bij de toezichthouder van jouw eigen land terecht; die is even bevoegd. Buiten de EU: zie artikel 16."
+      ]
+    }
+  ]
 };
 
 export const privacyEn: LegalDoc = {
-  title: "Privacy Policy",
-  intro: "How SocialNow handles personal data on socialnow.nl and in SocialNow OS, under the General Data Protection Regulation (GDPR). This policy applies to website visitors, to everyone with an account in the OS, and to the customers, contacts and team members of those accounts. The Dutch version is the binding one.",
-  updated: "Last updated: 20 September 2026",
-  sections: [
-    { title: "1. Who is responsible", paragraphs: ["SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands, Chamber of Commerce 90877179, is the controller for the data of visitors and account holders. For the data an account holder puts into their own workspace (their own customers, contacts, orders and team members) the account holder is the controller and SocialNow is the processor; section 12 applies to that.", "Questions, requests and complaints about privacy: info@socialnow.nl. We respond within one month."] },
-    { title: "2. What we process", paragraphs: ["On the website we only process what you leave yourself:", "In SocialNow OS we additionally process:", "Data from sources you connect yourself, only for your own workspace:"], bullets: [
-      ["Name, e-mail address and phone number when you contact us through the form, e-mail or WhatsApp", "Name, e-mail address, country and (if you fill it in) phone number when you go to the demo through the welcome notice, so we can contact you about SocialNow later", "Company name and project information with a request or quote", "The content of your message"],
-      ["Your account: name, e-mail address, profile picture and how you sign in (Google, e-mail code, sign-in link or password); we never see your password itself", "Your workspace: company name, industry, website, branding (logo, colours, fonts, tone of voice) and everything you fill in yourself", "Team members: e-mail address, name and role of the people you invite", "What you create in the OS: pieces, texts, images, documents, campaigns and the chat conversations with Milo", "Payments: the credit bought and the payment status; card details go straight to Stripe and never reach us", "Usage data: which parts you use, what you ask the OS, error messages and how the tools perform for your workspace", "Technical data: IP address, browser and time, only for security, rate limiting and troubleshooting", "Your language choice and your agreement to the terms (version and time)"],
-      ["Odoo: customers, contacts, leads, orders, invoices and products, as your Odoo environment supplies them", "Meta (Facebook and Instagram): page and ad data, statistics and the posts you publish through the OS", "Google (Ads, Analytics, Business Profile): campaign statistics and account data", "The keys and tokens you enter for this are stored encrypted and never shown again"],
-    ] },
-    { title: "3. Purposes and legal bases", paragraphs: ["We use data only for these purposes, each with a legal basis under article 6 GDPR:"], bullets: [[
-      "Answering your question or request and preparing a quote: performance of (entering into) a contract",
-      "Making the OS work for you: signing in, showing your workspace, creating content and documents, reading connected sources: performance of the contract",
-      "Invoicing and processing payments: performance of the contract and legal obligation (tax retention duty)",
-      "Security, preventing abuse and fixing errors: legitimate interest",
-      "Optional usage measurement and separate masked session recordings for product improvement (section 4): consent",
-      "Informing you about changes to the OS, the terms or this policy: performance of the contract",
-      "Marketing to existing customers about similar services: legitimate interest, always with an opt-out",
-    ]] },
-    {"title": "4. Usage measurement, recordings and support", "paragraphs": ["Creating an account does not give us blanket permission to use your business content for our own product development. Necessary security and support rely on the agreement and our legitimate interest. Administrative access is limited to authorised people and is logged.", "Optional usage measurement with PostHog in the EU starts only after consent. We collect a pseudonymous identifier, a workspace identifier, screen routes and predefined events. Email addresses, free-text searches, prompts, customer names and documents are excluded from this measurement. Pseudonymous data remains personal data.", "Masked session recordings require a separate choice, off by default. Text, inputs and media are masked. Account, CRM, payment and administration screens are excluded; chat content is blocked. No audio, camera or full-device screen is recorded. New recordings are retained for 30 days. Ordinary usage events remain available for up to one year on our current PostHog plan, allowing seasonal comparisons.", "You can withdraw either choice under Account without losing functionality. This stops new measurements and recordings. Withdrawal does not automatically erase existing data; request erasure at info@socialnow.nl. We do not sell this data, use it for third-party advertising or share it with other customers.", "Using business content for an additional purpose of our own requires a separate assessment and legal basis. Acceptance of the terms does not replace this."]},
-    { title: "5. Who helps us (processors)", paragraphs: ["These parties process data on our behalf, under a data processing agreement or the provider's standard GDPR terms:"], bullets: [[
-      "Google Firebase (Google Ireland Ltd): signing in with Google, e-mail code or sign-in link; account data",
-      "Vercel Inc.: hosting of the OS and the API, and storage of your workspace (Vercel Blob, EU region where possible)",
-      "PostHog Inc.: optional usage measurement and separately permitted masked session recordings (EU data region)",
-      "Hostinger: sending e-mail from info@socialnow.nl, such as sign-in codes, invitations and notifications",
-      "Stripe Payments Europe Ltd: payments for credit; for card details Stripe is an independent controller",
-      "GitHub Inc.: hosting of socialnow.nl (GitHub Pages)",
-      "AI providers (section 6) for creating texts and images at your request",
-    ]] },
-    { title: "6. Artificial intelligence", paragraphs: [
-      "The OS creates texts, images and analyses with language and image models. For that we send the data needed for your request (your story, your branding, the relevant figures) to a model provider. We currently use Google (Gemini, via Google Cloud Vertex AI or the Gemini API) and, depending on the chosen render option, Higgsfield or OpenAI for images.",
-      "These providers process the data only to produce the response. We choose contracts and settings under which your input is not used to train their models. Model output can contain errors; check what you publish.",
-      "Milo, the assistant in the OS, only sees the data of your own workspace and what you share in the conversation yourself.",
-    ] },
-    { title: "7. Transfers outside the EU", paragraphs: ["Some providers are based in the United States or process data there (Vercel, GitHub, Stripe, Google, OpenAI). Transfers rely on the EU-US Data Privacy Framework where the provider is certified, and otherwise on the European Commission's standard contractual clauses with additional measures. Where possible we choose storage and processing in the EU."] },
-    { title: "8. Retention", paragraphs: ["We keep data no longer than needed:"], bullets: [[
-      "Contact details of a request without an order: at most two years after the last contact",
-      "Data from the demo sign-up: at most two years, or shorter if you ask us to erase it",
-      "Account and workspace data: as long as your account exists; after deletion erased from active systems within thirty days and from backups within ninety days",
-      "Data from connected sources: only while the connection exists; disconnecting erases the copied data and the key",
-      "Chat conversations with Milo and created pieces: as long as your account exists, unless you delete them earlier",
-      "Invoices and payment data: seven years (tax retention duty)",
-      "Technical logs (IP address, error messages): at most thirty days",
-      "Your agreement to the terms: as long as your account exists, plus the statutory limitation period",
-    ]] },
-    { title: "9. Cookies and local storage", paragraphs: ["Socialnow.nl sets no tracking cookies and uses no analytics. In your browser (localStorage) we only remember that you have seen the notice about the terms, and in cookies on socialnow.nl which language and country you chose and whether you allowed measurement in the OS.", "SocialNow OS uses functional cookies and storage, and measures usage only if you allow it:"], bullets: [undefined as unknown as string[], [
-      "__session: keeps note that you are signed in (55 minutes, or 30 days if you tick 'keep me signed in')",
-      "sn-taal and sn-land: your language and country choice (one year)",
-      "sn-meten and sn-replay-v1: separate choices for measurement and recording (180 days in the app); change them under Account",
-      "Only with your consent: PostHog (EU) measures which parts you use, linked to a pseudonym and workspace identifier, to improve the OS. Without consent PostHog does not load",
-      "Firebase storage in your browser for signing in and remembering your sign-in link address",
-      "Local storage for preferences such as your chosen theme, and for drafts not yet saved",
-    ]] },
-    { title: "10. Security", paragraphs: ["We take appropriate technical and organisational measures:"], bullets: [[
-      "All connections run over https; the API only accepts requests from the app itself",
-      "Keys and tokens of connected sources are stored encrypted and never shown again; only the server can use them",
-      "Passwords are managed by Google Firebase and are not readable by us; sign-in codes work once and expire after fifteen minutes",
-      "Every workspace is strictly separated; the code that accesses storage can only reach its own workspace",
-      "Rate limiting on sign-in and API requests, and logging of admin actions",
-      "Access by the SocialNow team is limited to what is needed and is logged",
-      "In the event of a data breach that poses a risk we notify the Dutch Data Protection Authority within 72 hours and inform those affected",
-    ]] },
-    { title: "11. Your rights", paragraphs: ["Under the GDPR you have the right to:", "In the OS you see under Account which data we hold about you, you can change your name and language, disconnect your sources and delete your account with its workspaces. For everything else e-mail info@socialnow.nl; we may ask you to confirm your identity. You can also lodge a complaint with the Dutch Data Protection Authority (autoriteitpersoonsgegevens.nl)."], bullets: [[
-      "Access to your data and a copy of it",
-      "Correction of inaccurate data",
-      "Erasure ('right to be forgotten')",
-      "Restriction of processing",
-      "Transfer of your data in a common file format (data portability)",
-      "Objection to processing based on legitimate interest, including necessary security and marketing",
-      "Withdrawal of consent given, without affecting what was processed before",
-    ]] },
-    { title: "12. When you are the controller: your customers in the OS", paragraphs: ["If you put data of your own customers, leads or team members into the OS, or connect your Odoo, Meta or Google, you are the controller for that data and SocialNow processes it on your behalf. Until 19 September 2026 this section held a summary that called itself a data processing agreement. Five bullet points are not an agreement within the meaning of Article 28(3) GDPR, which requires a fixed list of subjects that was not in it. There is now a full data processing agreement at socialnow.nl/verwerkersovereenkomst, covering the instruction binding, the sub-processors, the security measures, transfers, audit and what happens to your data at the end. That agreement applies, and this is what it comes down to:"], bullets: [[
-      "We process this data only to make the OS work for you and according to your instructions through the OS",
-      "We only engage the processors in sections 5 and 6 and inform you on this page about changes; you can object by ending your account",
-      "We take the measures in section 10, help you with data subject requests and with a data protection impact assessment, and report a data breach affecting your data without undue delay",
-      "When your account ends we erase the data as in section 8, unless the law requires us to keep it",
-      "You make sure you have a legal basis to give us this data and inform your own customers where needed",
-    ]] },
-    { title: "13. Children", paragraphs: ["SocialNow OS is meant for businesses. We do not target people under 16 and do not knowingly process their data. If we notice we did, we erase it."] },
-    { title: "14. Automated decision-making", paragraphs: ["The OS makes suggestions and drafts, but takes no decisions with legal or similarly significant effects for you without human involvement. Publishing, sending and paying only happen on your explicit action."] },
-    { title: "15. Changes", paragraphs: ["We may change this policy, for example for a new feature or provider. The current version is always at socialnow.nl/privacy with the date at the top. For a change that affects your rights we ask for your agreement again in the OS and inform account holders by e-mail."] },
-    { title: "16. Outside the EU: the United Kingdom, Switzerland and the United States", paragraphs: ["SocialNow is established in the Netherlands and works with clients and visitors from more countries. Where another regime applies, the following applies alongside the rest of this policy.", "United Kingdom: if you are established in the UK, the UK GDPR and the Data Protection Act 2018 apply. Your rights are the same as above. A complaint goes to the Information Commissioner's Office (ico.org.uk). Transfers from the UK to us rest on the UK adequacy regulations for the EEA; if data subsequently leaves the EEA, the UK International Data Transfer Addendum to the standard contractual clauses applies.", "Switzerland: if you are established in Switzerland, the Federal Act on Data Protection applies. Your rights are equivalent; your complaint goes to the Federal Data Protection and Information Commissioner (edoeb.admin.ch).", "United States, California: if you are a California resident, the CCPA as amended by the CPRA gives you a number of rights which we expressly confirm below."], bullets: [undefined as unknown as string[], undefined as unknown as string[], undefined as unknown as string[], [
-      "We do not sell personal information and do not share it for cross-context behavioural advertising. We never have and do not intend to; that is also why there is no 'Do Not Sell or Share' control on our site, because there is nothing to switch off",
-      "Right to know which categories of personal information we collect, from where, for what and with whom we share it: that is in sections 2, 3 and 5",
-      "Right to a copy of the specific information we hold about you",
-      "Right to deletion, and right to correction of inaccurate information",
-      "Right to limit the use of sensitive personal information: we collect no sensitive categories within the meaning of the CPRA",
-      "Right not to be discriminated against for using any of these rights: we do not offer a different price or a lesser service to anyone who makes a request",
-      "An authorised agent may make a request on your behalf; we will ask for proof of that authorisation",
-      "Requests: info@socialnow.nl. We acknowledge within ten working days and respond within 45 days, with a 45-day extension where needed",
-    ]] },
-    { title: "17. Making a complaint", paragraphs: ["If you have a complaint about how we handle your data, e-mail info@socialnow.nl first. We reply within ten working days, with a person, not a form.", "If we cannot resolve it together, you can always go to a supervisory authority. In the Netherlands that is the Dutch Data Protection Authority (autoriteitpersoonsgegevens.nl). If you live in another EU Member State you may also go to the authority of your own country; it is equally competent. Outside the EU: see section 16."] },
-  ],
+  "title": "Privacy Policy",
+  "intro": "How SocialNow handles personal data on socialnow.nl and in SocialNow OS, under the General Data Protection Regulation (GDPR). This policy applies to website visitors, to everyone with an account in the OS, and to the customers, contacts and team members of those accounts. The Dutch version is the binding one.",
+  "updated": "Last updated: 14 October 2026",
+  "sections": [
+    {
+      "title": "1. Who is responsible",
+      "paragraphs": [
+        "SocialNow, Amstelstraat 43G, 1017 DA Amsterdam, the Netherlands, Chamber of Commerce 90877179, is the controller for the data of visitors and account holders. For the data an account holder puts into their own workspace (their own customers, contacts, orders and team members) the account holder is the controller and SocialNow is the processor; section 12 applies to that.",
+        "Questions, requests and complaints about privacy: info@socialnow.nl. We respond within one month."
+      ]
+    },
+    {
+      "title": "2. What we process",
+      "paragraphs": [
+        "On the website we only process what you leave yourself:",
+        "In SocialNow OS we additionally process:",
+        "Data from sources you connect yourself, only for your own workspace:"
+      ],
+      "bullets": [
+        [
+          "Name, e-mail address and phone number when you contact us through the form, e-mail or WhatsApp",
+          "Name, e-mail address, country and (if you fill it in) phone number when you go to the demo through the welcome notice, so we can contact you about SocialNow later",
+          "Company name and project information with a request or quote",
+          "The content of your message"
+        ],
+        [
+          "Your account: name, e-mail address, profile picture and how you sign in (Google, e-mail code, sign-in link or password); we never see your password itself",
+          "Your workspace: company name, industry, website, branding (logo, colours, fonts, tone of voice) and everything you fill in yourself",
+          "Team members: e-mail address, name and role of the people you invite",
+          "What you create in the OS: pieces, texts, images, documents, campaigns and the chat conversations with Milo",
+          "Payments: the credit bought and the payment status; card details go straight to Stripe and never reach us",
+          "Technical data: IP address, browser and time, only for security, rate limiting and troubleshooting",
+          "Your language choice and your agreement to the terms (version and time)"
+        ],
+        [
+          "Odoo: customers, contacts, leads, orders, invoices and products, as your Odoo environment supplies them",
+          "Meta (Facebook and Instagram): page and ad data, statistics and the posts you publish through the OS",
+          "Google (Ads, Analytics, Business Profile): campaign statistics and account data",
+          "The keys and tokens you enter for this are stored encrypted and never shown again"
+        ]
+      ]
+    },
+    {
+      "title": "3. Purposes and legal bases",
+      "paragraphs": [
+        "We use data only for these purposes, each with a legal basis under article 6 GDPR:"
+      ],
+      "bullets": [
+        [
+          "Answering your question or request and preparing a quote: performance of (entering into) a contract",
+          "Making the OS work for you: signing in, showing your workspace, creating content and documents, reading connected sources: performance of the contract",
+          "Invoicing and processing payments: performance of the contract and legal obligation (tax retention duty)",
+          "Security, preventing abuse and fixing errors: legitimate interest",
+          "Informing you about changes to the OS, the terms or this policy: performance of the contract",
+          "Marketing to existing customers about similar services: legitimate interest, always with an opt-out"
+        ]
+      ]
+    },
+    {
+      "title": "4. Your data and personal contact",
+      "paragraphs": [
+        "Your data belongs to you. You control your own workspace, the tools you connect and the instructions you give.",
+        "We do not track your behaviour or record your screen. We do not use your business data for our own product development. Feedback comes from personal contact.",
+        "Necessary security and error logs keep the system safe and working. Support access is limited to authorised people and is logged.",
+        "Software as a tool. The software connects your tools into a personal or custom system tailored to your wishes. SocialNow is the service layer on top of the software. Your data and your own connections remain under your control.",
+        "Previously collected usage data is no longer consulted. You can request erasure at info@socialnow.nl."
+      ]
+    },
+    {
+      "title": "5. Who helps us (processors)",
+      "paragraphs": [
+        "These parties process data on our behalf, under a data processing agreement or the provider's standard GDPR terms:"
+      ],
+      "bullets": [
+        [
+          "Google Firebase (Google Ireland Ltd): signing in with Google, e-mail code or sign-in link; account data",
+          "Vercel Inc.: hosting of the OS and the API, and storage of your workspace (Vercel Blob, EU region where possible)",
+          "Hostinger: sending e-mail from info@socialnow.nl, such as sign-in codes, invitations and notifications",
+          "Stripe Payments Europe Ltd: payments for credit; for card details Stripe is an independent controller",
+          "GitHub Inc.: hosting of socialnow.nl (GitHub Pages)",
+          "AI providers (section 6) for creating texts and images at your request"
+        ]
+      ]
+    },
+    {
+      "title": "6. Artificial intelligence",
+      "paragraphs": [
+        "The OS creates texts, images and analyses with language and image models. For that we send the data needed for your request (your story, your branding, the relevant figures) to a model provider. We currently use Google (Gemini, via Google Cloud Vertex AI or the Gemini API) and, depending on the chosen render option, Higgsfield or OpenAI for images.",
+        "These providers process the data only to produce the response. We choose contracts and settings under which your input is not used to train their models. Model output can contain errors; check what you publish.",
+        "Milo, the assistant in the OS, only sees the data of your own workspace and what you share in the conversation yourself."
+      ]
+    },
+    {
+      "title": "7. Transfers outside the EU",
+      "paragraphs": [
+        "Some providers are based in the United States or process data there (Vercel, GitHub, Stripe, Google, OpenAI). Transfers rely on the EU-US Data Privacy Framework where the provider is certified, and otherwise on the European Commission's standard contractual clauses with additional measures. Where possible we choose storage and processing in the EU."
+      ]
+    },
+    {
+      "title": "8. Retention",
+      "paragraphs": [
+        "We keep data no longer than needed:"
+      ],
+      "bullets": [
+        [
+          "Contact details of a request without an order: at most two years after the last contact",
+          "Data from the demo sign-up: at most two years, or shorter if you ask us to erase it",
+          "Account and workspace data: as long as your account exists; after deletion erased from active systems within thirty days and from backups within ninety days",
+          "Data from connected sources: only while the connection exists; disconnecting erases the copied data and the key",
+          "Chat conversations with Milo and created pieces: as long as your account exists, unless you delete them earlier",
+          "Invoices and payment data: seven years (tax retention duty)",
+          "Technical logs (IP address, error messages): at most thirty days",
+          "Your agreement to the terms: as long as your account exists, plus the statutory limitation period"
+        ]
+      ]
+    },
+    {
+      "title": "9. Cookies and local storage",
+      "paragraphs": [
+        "Socialnow.nl sets no tracking cookies and uses no analytics. In your browser (localStorage) we only remember that you have seen the notice about the terms, and in cookies on socialnow.nl which language and country you chose and whether you allowed measurement in the OS.",
+        "SocialNow OS uses functional cookies and storage, and measures usage only if you allow it:"
+      ],
+      "bullets": [
+        [
+          "__session: keeps note that you are signed in (55 minutes, or 30 days if you tick 'keep me signed in')",
+          "sn-taal and sn-land: your language and country choice (one year)",
+          "Firebase storage in your browser for signing in and remembering your sign-in link address",
+          "Local storage for preferences such as your chosen theme, and for drafts not yet saved"
+        ]
+      ]
+    },
+    {
+      "title": "10. Security",
+      "paragraphs": [
+        "We take appropriate technical and organisational measures:"
+      ],
+      "bullets": [
+        [
+          "All connections run over https; the API only accepts requests from the app itself",
+          "Keys and tokens of connected sources are stored encrypted and never shown again; only the server can use them",
+          "Passwords are managed by Google Firebase and are not readable by us; sign-in codes work once and expire after fifteen minutes",
+          "Every workspace is strictly separated; the code that accesses storage can only reach its own workspace",
+          "Rate limiting on sign-in and API requests, and logging of admin actions",
+          "Access by the SocialNow team is limited to what is needed and is logged",
+          "In the event of a data breach that poses a risk we notify the Dutch Data Protection Authority within 72 hours and inform those affected"
+        ]
+      ]
+    },
+    {
+      "title": "11. Your rights",
+      "paragraphs": [
+        "Under the GDPR you have the right to:",
+        "In the OS you see under Account which data we hold about you, you can change your name and language, disconnect your sources and delete your account with its workspaces. For everything else e-mail info@socialnow.nl; we may ask you to confirm your identity. You can also lodge a complaint with the Dutch Data Protection Authority (autoriteitpersoonsgegevens.nl)."
+      ],
+      "bullets": [
+        [
+          "Access to your data and a copy of it",
+          "Correction of inaccurate data",
+          "Erasure ('right to be forgotten')",
+          "Restriction of processing",
+          "Transfer of your data in a common file format (data portability)",
+          "Objection to processing based on legitimate interest, including necessary security and marketing",
+          "Withdrawal of consent given, without affecting what was processed before"
+        ]
+      ]
+    },
+    {
+      "title": "12. When you are the controller: your customers in the OS",
+      "paragraphs": [
+        "If you put data of your own customers, leads or team members into the OS, or connect your Odoo, Meta or Google, you are the controller for that data and SocialNow processes it on your behalf. Until 19 September 2026 this section held a summary that called itself a data processing agreement. Five bullet points are not an agreement within the meaning of Article 28(3) GDPR, which requires a fixed list of subjects that was not in it. There is now a full data processing agreement at socialnow.nl/verwerkersovereenkomst, covering the instruction binding, the sub-processors, the security measures, transfers, audit and what happens to your data at the end. That agreement applies, and this is what it comes down to:"
+      ],
+      "bullets": [
+        [
+          "We process this data only to make the OS work for you and according to your instructions through the OS",
+          "We only engage the processors in sections 5 and 6 and inform you on this page about changes; you can object by ending your account",
+          "We take the measures in section 10, help you with data subject requests and with a data protection impact assessment, and report a data breach affecting your data without undue delay",
+          "When your account ends we erase the data as in section 8, unless the law requires us to keep it",
+          "You make sure you have a legal basis to give us this data and inform your own customers where needed"
+        ]
+      ]
+    },
+    {
+      "title": "13. Children",
+      "paragraphs": [
+        "SocialNow OS is meant for businesses. We do not target people under 16 and do not knowingly process their data. If we notice we did, we erase it."
+      ]
+    },
+    {
+      "title": "14. Automated decision-making",
+      "paragraphs": [
+        "The OS makes suggestions and drafts, but takes no decisions with legal or similarly significant effects for you without human involvement. Publishing, sending and paying only happen on your explicit action."
+      ]
+    },
+    {
+      "title": "15. Changes",
+      "paragraphs": [
+        "We may change this policy, for example for a new feature or provider. The current version is always at socialnow.nl/privacy with the date at the top. For a change that affects your rights we ask for your agreement again in the OS and inform account holders by e-mail."
+      ]
+    },
+    {
+      "title": "16. Outside the EU: the United Kingdom, Switzerland and the United States",
+      "paragraphs": [
+        "SocialNow is established in the Netherlands and works with clients and visitors from more countries. Where another regime applies, the following applies alongside the rest of this policy.",
+        "United Kingdom: if you are established in the UK, the UK GDPR and the Data Protection Act 2018 apply. Your rights are the same as above. A complaint goes to the Information Commissioner's Office (ico.org.uk). Transfers from the UK to us rest on the UK adequacy regulations for the EEA; if data subsequently leaves the EEA, the UK International Data Transfer Addendum to the standard contractual clauses applies.",
+        "Switzerland: if you are established in Switzerland, the Federal Act on Data Protection applies. Your rights are equivalent; your complaint goes to the Federal Data Protection and Information Commissioner (edoeb.admin.ch).",
+        "United States, California: if you are a California resident, the CCPA as amended by the CPRA gives you a number of rights which we expressly confirm below."
+      ],
+      "bullets": [
+        [
+          "We do not sell personal information and do not share it for cross-context behavioural advertising. We never have and do not intend to; that is also why there is no 'Do Not Sell or Share' control on our site, because there is nothing to switch off",
+          "Right to know which categories of personal information we collect, from where, for what and with whom we share it: that is in sections 2, 3 and 5",
+          "Right to a copy of the specific information we hold about you",
+          "Right to deletion, and right to correction of inaccurate information",
+          "Right to limit the use of sensitive personal information: we collect no sensitive categories within the meaning of the CPRA",
+          "Right not to be discriminated against for using any of these rights: we do not offer a different price or a lesser service to anyone who makes a request",
+          "An authorised agent may make a request on your behalf; we will ask for proof of that authorisation",
+          "Requests: info@socialnow.nl. We acknowledge within ten working days and respond within 45 days, with a 45-day extension where needed"
+        ]
+      ]
+    },
+    {
+      "title": "17. Making a complaint",
+      "paragraphs": [
+        "If you have a complaint about how we handle your data, e-mail info@socialnow.nl first. We reply within ten working days, with a person, not a form.",
+        "If we cannot resolve it together, you can always go to a supervisory authority. In the Netherlands that is the Dutch Data Protection Authority (autoriteitpersoonsgegevens.nl). If you live in another EU Member State you may also go to the authority of your own country; it is equally competent. Outside the EU: see section 16."
+      ]
+    }
+  ]
 };
