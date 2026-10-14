@@ -65,7 +65,7 @@ export default function GratisWebsite() {
       <section className="gw-sec"><div className="gw-sec-head"><span className="gw-num">02</span><h2>Jouw website</h2></div><div className="gw-card"><div className="gw-rij">{VRAGEN.slice(0, 2).map(veld)}</div>{VRAGEN.slice(2).map(veld)}</div>
         <p className="gw-juridisch">{heeftWhatsApp ? "Je aanvraag opent WhatsApp met al je ingevulde antwoorden. Verstuur het bericht daar zelf naar Steef." : "Je aanvraag opent je e-mailapp met al je ingevulde antwoorden. Verstuur de mail daar zelf naar Steef."} Lees ons <a href={`${languagePrefix(language)}/privacy/`}>privacybeleid</a>.</p>
         {fout ? <p className="gw-fout" role="alert">{fout}</p> : null}
-        <button type="submit" className="sn-btn3d h-button gw-verder"><span className="sn-btn3d-sheen" /><span>{heeftWhatsApp ? "Stuur mijn aanvraag via WhatsApp" : "Stuur mijn aanvraag per e-mail"}</span><span className="h-button-icon"><ArrowUpRight size={16} /></span></button>
+        <button type="submit" className="sn-pill sn-btn3d h-button gw-verder"><span className="sn-btn3d-sheen" /><span>{heeftWhatsApp ? "Stuur mijn aanvraag via WhatsApp" : "Stuur mijn aanvraag per e-mail"}</span><span className="h-button-icon"><ArrowUpRight size={16} /></span></button>
       </section>
     </form>
   </div></div>;

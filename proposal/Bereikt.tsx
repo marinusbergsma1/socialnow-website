@@ -329,7 +329,7 @@ export default function Bereikt() {
         <p className="sn-tegel-titel">Wat zij bereikten, begint voor jou met tien vragen.</p>
         <p className="sn-tegel-tekst">Start een nieuw bedrijf of koppel je bestaande. Gratis te gebruiken, met ons team erachter.</p>
         <div className="sn-tegel-onder">
-          <a className="os-claim sn-btn3d h-button" href={GRATIS_OS_URL}>
+          <a className="sn-pill os-claim sn-btn3d h-button" href={GRATIS_OS_URL}>
             <span className="sn-btn3d-sheen" />
             <span>Begin gratis</span>
             <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>

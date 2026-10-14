@@ -137,10 +137,9 @@ export function InstallKnop({ dock = false, compact = false }: { dock?: boolean;
         {dock && (compact
           ? <span className="h-dock-label" translate="no">DOWNLOAD</span>
           : <span className="h-dock-label">{t("Download voor")}</span>)}
-        {!dock && <button type="button" className="os-install sn-btn3d h-button h-button-secondary h-install-knop" onClick={eigen} aria-expanded={open === "eigen"} aria-controls={helpId}>
+        {!dock && <button type="button" className="sn-pill os-install sn-btn3d h-button h-button-secondary h-install-knop" onClick={eigen} aria-expanded={open === "eigen"} aria-controls={helpId}>
           <span className="sn-btn3d-sheen" />
-          <Download size={19} aria-hidden="true" className="h-download-icoon" />
-          <span>Download</span>
+          <span>Download</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
         </button>}
         <span
           ref={rijRef}
@@ -186,7 +185,7 @@ export const LIVE_DEMO_URL = mailLink("Free end to end demo with Marinus and Sid
 export function OsDock({ held = false }: { held?: boolean }) {
   const { t } = useLanguage();
   const login = (
-    <a className="h-dock-login" href={GRATIS_OS_URL}>
+    <a className="sn-pill h-dock-login" href={GRATIS_OS_URL}>
       <span>{t("Log in op je gratis OS")}</span>
       <span className="h-dock-arrow"><ArrowUpRight size={24} aria-hidden="true" /></span>
     </a>
@@ -195,7 +194,7 @@ export function OsDock({ held = false }: { held?: boolean }) {
     <div className="h-dock-rij">
       {login}
       {/* 5 oktober 2026 (Marinus): "Plan een demo misschien beter, Plan a talk within your company oid." en "Plan a talk." */}
-      <a className="h-dock-demo" href={LIVE_DEMO_URL} translate="no">Plan a talk</a>
+      <a className="sn-pill h-dock-demo" href={LIVE_DEMO_URL} translate="no"><span>Plan a talk</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span></a>
     </div>
     <InstallKnop dock compact />
   </div>;

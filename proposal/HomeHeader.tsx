@@ -22,8 +22,8 @@ export default function HomeHeader() {
       <p><strong>Start GRATIS tot 10 GB.</strong><span>Daarna €20,- per maand.</span></p>
     </div>
     <div className="sn-home-actions">
-      <a href="https://app.socialnow.nl/login/" className="sn-home-cta">Start gratis <ArrowUpRight size={23} aria-hidden="true" /></a>
-      <Link to="/audit" className="sn-home-cta sn-home-secondary"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285f4" d="M13.3 2.8a3.3 3.3 0 0 1 4.5 1.2l5.1 8.8a3.3 3.3 0 0 1-5.7 3.3L12.1 7.3a3.3 3.3 0 0 1 1.2-4.5Z"/><path fill="#fbbc04" d="M12.1 4a3.3 3.3 0 0 1 5.7 3.3L8.7 23a3.3 3.3 0 0 1-5.7-3.3Z"/><circle fill="#34a853" cx="5.9" cy="21.3" r="3.3"/></svg>Gratis Google Ads-scan <ArrowUpRight size={23} aria-hidden="true" /></Link>
+      <a href="https://app.socialnow.nl/login/" className="sn-pill sn-home-cta">Start gratis <ArrowUpRight size={23} aria-hidden="true" /></a>
+      <Link to="/audit" className="sn-pill sn-home-cta sn-home-secondary"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285f4" d="M13.3 2.8a3.3 3.3 0 0 1 4.5 1.2l5.1 8.8a3.3 3.3 0 0 1-5.7 3.3L12.1 7.3a3.3 3.3 0 0 1 1.2-4.5Z"/><path fill="#fbbc04" d="M12.1 4a3.3 3.3 0 0 1 5.7 3.3L8.7 23a3.3 3.3 0 0 1-5.7-3.3Z"/><circle fill="#34a853" cx="5.9" cy="21.3" r="3.3"/></svg>Gratis Google Ads-scan <ArrowUpRight size={23} aria-hidden="true" /></Link>
     </div>
     <div className="sn-home-extras">
       <a href="https://website.socialnow.nl">Gratis website <ArrowUpRight size={16} aria-hidden="true" /></a>

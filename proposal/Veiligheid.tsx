@@ -21,9 +21,9 @@ function useTaal(): Taal {
 
 function PdfKnop({ taal, label }: { taal: Taal; label?: string }) {
   return (
-    <a className="vh-knop" href={pdfPad(taal)} target="_blank" rel="noopener" download>
-      <Download size={17} aria-hidden="true" />
+    <a className="sn-pill vh-knop" href={pdfPad(taal)} target="_blank" rel="noopener" download>
       <span>{label || "Download de sleutelbelofte (PDF)"}</span>
+      <span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
     </a>
   );
 }
@@ -85,7 +85,7 @@ export function VeiligheidPagina() {
         <p className="vh-intro">Het OS werkt pas echt als je het koppelt aan je eigen systemen. Daarvoor geef je ons een sleutel. Hier lees je wat we daarmee doen, en vooral wat niet.</p>
         <div className="vh-acties">
           <PdfKnop taal={taal} />
-          <a className="vh-knop" href={DATA_DOCUMENT} download><Download size={17} aria-hidden="true" /><span>Uitgebreide documentatie (PDF · NL)</span></a>
+          <a className="sn-pill vh-knop" href={DATA_DOCUMENT} download><span>Uitgebreide documentatie (PDF · NL)</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span></a>
         </div>
       </section>
       <Bento className="vh-bento vh-films">
@@ -114,7 +114,7 @@ export function VeiligheidPagina() {
       <section className="h-wrap vh-sectie vh-documenten" aria-labelledby="vh-doc-kop">
         <h2 id="vh-doc-kop">Uitgebreide documentatie</h2>
         <p>Download het handboek over eigendom, privacy en beveiliging: toegang, versleuteling, AI, leveranciers, incidenten, export en praktische checklists.</p>
-        <div className="vh-acties"><a className="vh-knop" href={DATA_DOCUMENT} download><Download size={17} aria-hidden="true" /><span>Uitgebreide documentatie (PDF · NL)</span></a></div>
+        <div className="vh-acties"><a className="sn-pill vh-knop" href={DATA_DOCUMENT} download><span>Uitgebreide documentatie (PDF · NL)</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span></a></div>
         <p>De sleutelbelofte als pdf, in het Nederlands en in het Engels. Lees verder in onze beveiligingsmaatregelen en de verwerkersovereenkomst.</p>
         <div className="vh-acties">
           <PdfKnop taal="nl" label="Sleutelbelofte, Nederlands (PDF)" />

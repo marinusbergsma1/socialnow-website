@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrowUpRight } from "lucide-react";
 import { TextLink } from "./ui";
 import { people } from "./content";
 import { Bento, Tegel } from "./Bento";
@@ -94,9 +95,9 @@ export default function MensEnAI() {
             een persoonlijk systeem op maat met je mee.
           </p>
           <div className="sn-tegel-onder">
-            <a className="os-claim sn-btn3d h-button" href="https://app.socialnow.nl/login/">
+            <a className="sn-pill os-claim sn-btn3d h-button" href="https://app.socialnow.nl/login/">
               <span className="sn-btn3d-sheen" />
-              <span>Start gratis</span>
+              <span>Start gratis</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
             </a>
             <TextLink to="/prijzen">Pakketten en OS op maat</TextLink>
           </div>

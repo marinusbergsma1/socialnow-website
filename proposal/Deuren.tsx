@@ -39,7 +39,7 @@ export default function Deuren() {
         <p className="sn-tegel-tekst">Gebruik Odoo als optionele koppeling voor je klanten en verkoop. Begin gratis met WEBSITE → CONTENT → STUDIO, met ons team erachter.</p>
         <p className="h-deur-waarom"><b>Hoe werkt het aanbod?</b> Tot 10 GB opslag is het OS gratis. Daarna €20 per maand, of een persoonlijk systeem met begeleiding van ons team.</p>
         <div className="sn-tegel-onder">
-          <a className="os-claim sn-btn3d h-button h-deur-knop" href="https://app.socialnow.nl/login/">
+          <a className="sn-pill os-claim sn-btn3d h-button h-deur-knop" href="https://app.socialnow.nl/login/">
             <span className="sn-btn3d-sheen" />
             <span>Log in op je gratis OS</span>
             <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
@@ -55,10 +55,10 @@ export default function Deuren() {
         </div>
         <div className="sn-tegel-onder">
           {heeftWhatsApp && (
-            <a className="sn-btn3d h-button h-deur-knop is-partner" href={whatsappLink(bericht)} target="_blank" rel="noopener noreferrer">
+            <a className="sn-pill sn-btn3d h-button h-deur-knop is-partner" href={whatsappLink(bericht)} target="_blank" rel="noopener noreferrer">
               <span className="sn-btn3d-sheen" />
-              <MessageCircle size={17} aria-hidden="true" />
               <span>Stuur een WhatsApp</span>
+              <span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
             </a>
           )}
           <a className="h-text-link h-deur-mail" href={MAIL + encodeURIComponent(onderwerp)}>

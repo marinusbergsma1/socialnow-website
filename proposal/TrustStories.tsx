@@ -19,10 +19,10 @@ function Beeld({ children }: { children: React.ReactNode }) {
 function Pil({ to, children }: { to: string; children: React.ReactNode }) {
   return (
     <div className="sn-tegel-onder">
-      <Link className="sn-btn3d h-button h-button-secondary" to={to}>
+      <Link className="sn-pill sn-btn3d h-button h-button-secondary" to={to}>
         <span className="sn-btn3d-sheen" />
         <span>{children}</span>
-        <ArrowUpRight size={16} aria-hidden="true" />
+        <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
       </Link>
     </div>
   );

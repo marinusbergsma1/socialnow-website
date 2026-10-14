@@ -776,10 +776,10 @@ export function ContactPage() {
             verstuurt de e-mail daar zelf.{" "}
             <Link to="/privacy">Privacybeleid</Link>
           </p>
-          <button type="submit" className="sn-btn3d h-button">
+          <button type="submit" className="sn-pill sn-btn3d h-button">
             <span className="sn-btn3d-sheen" />
             <span>Open e-mailconcept</span>
-            <Mail size={17} />
+            <span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
           </button>
           {prepared && (
             <div className="h-form-result" role="status">

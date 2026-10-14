@@ -123,7 +123,7 @@ export function VacaturesPage() {
                     <h3>Wie je bent</h3>
                     <ul>{v.wie.map((r) => <li key={r}>{r}</li>)}</ul>
                   </div>
-                  <a className="sn-btn3d h-button h-vac-knop" href={vacatureMail(t(v.titel))}>
+                  <a className="sn-pill sn-btn3d h-button h-vac-knop" href={vacatureMail(t(v.titel))}>
                     <span className="sn-btn3d-sheen" />
                     <span>Solliciteer</span>
                     <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>

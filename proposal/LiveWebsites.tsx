@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
+  ArrowUpRight,
   ChevronLeft,
   ChevronRight,
   ExternalLink,
@@ -114,7 +115,7 @@ export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
         }
         text={demo ? "Bekijk wat we maken. Daarna maken we een gratis demo voor jouw bedrijf, als start van onze samenwerking." : "Bekijk onze websites van dichtbij. Blader door het werk, scroll door een website en ontdek hoe ontwerp en techniek samenkomen."}
       >
-        {demo ? <a className="sn-home-cta" href="https://website.socialnow.nl">Vraag je gratis websitedemo aan <ExternalLink size={17} /></a> : <TextLink to="/projecten">Alle projecten</TextLink>}
+        {demo ? <a className="sn-pill sn-home-cta" href="https://website.socialnow.nl">Vraag je gratis websitedemo aan <ArrowUpRight size={18} aria-hidden="true" /></a> : <TextLink to="/projecten">Alle projecten</TextLink>}
       </Heading>
       <div className="h-live-toolbar">
         <div className="h-live-title" aria-live="polite">
@@ -197,8 +198,8 @@ export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
             <div className="h-live-direct">
               <strong>{project.title}</strong>
               {!project.offline && (
-                <a className="sn-btn3d h-button" href={project.url} target="_blank" rel="noopener noreferrer">
-                  <span>Open live website</span><span><ExternalLink size={18} /></span>
+                <a className="sn-pill sn-btn3d h-button" href={project.url} target="_blank" rel="noopener noreferrer">
+                  <span>Open live website</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
                 </a>
               )}
               <span>{live ? "De live website wordt geladen." : "Deze website opent in een nieuw tabblad."}</span>

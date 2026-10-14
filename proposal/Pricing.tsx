@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ChevronDown } from "lucide-react";
 import { Action } from "./ui";
 import { GRATIS_OS_URL } from "./os-entry";
 import { useLanguage } from "./i18n/context";
@@ -224,11 +224,11 @@ export default function Pricing() {
             <ProductRoute />
             <ProductOffer />
             <div className="prijs-knoppen">
-              <a className="os-claim sn-btn3d h-button" href={PROBEER_URL}>
+              <a className="sn-pill os-claim sn-btn3d h-button" href={PROBEER_URL}>
                 <span className="sn-btn3d-sheen" />
                 <span>Probeer het OS gratis</span>
                 <span className="h-button-icon">
-                  <ArrowRight size={16} aria-hidden="true" />
+                  <ArrowUpRight size={16} aria-hidden="true" />
                 </span>
               </a>
               <Action to="/gratis-website" secondary>

@@ -10,6 +10,7 @@ import {
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { CLAIM_URL } from "./os-entry";
 import { Action } from "./ui";
+import { useButtonMagnetism } from "./useButtonMagnetism";
 import { Home } from "./pages";
 // 30 september 2026 (Marinus: "WIL ECHT INSTANT LOADING"): elke pagina buiten de homepage is een eigen bestand dat pas
 // laadt als iemand die pagina opent (proposal/later.tsx). Het eerste script draagt alleen de header en de hero.
@@ -92,6 +93,7 @@ export default function WebsiteProposal({language="en"}:{language?:Language}) {
   );
 }
 function ProposalShell() {
+  useButtonMagnetism();
   const {language,t}=useLanguage();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -229,7 +231,7 @@ function ProposalShell() {
           </nav>
           <LanguageSwitch />
           {/* 26 september 2026 (Marinus): geen reclame in de header, rechtsboven de login voor het gratis OS. */}
-          <a className="h-header-claim" href="https://app.socialnow.nl/login/">
+          <a className="sn-pill h-header-claim" href="https://app.socialnow.nl/login/">
             <span className="h-header-login-full">Inloggen gratis OS</span>
             <span className="h-header-login-short">Inloggen</span>
             <ArrowUpRight size={15} />

@@ -1,5 +1,5 @@
 import React, { useEffect, useId, useRef, useState } from "react";
-import { ArrowRight, Check, X } from "lucide-react";
+import { ArrowUpRight, Check, X } from "lucide-react";
 import { type Language, useLanguage } from "./i18n/context";
 import { aanvraagWhatsApp } from "./aanvragen";
 
@@ -62,8 +62,8 @@ export default function QrOsWelcome({ ready }: { ready: boolean }) {
           <h1 id="qr-os-title">{copy.welcome}</h1>
           <p className="qr-os-lead">{copy.explore}</p>
           <div className="qr-os-actions">
-            <button className="qr-os-primary" type="button" onClick={() => setStep("details")}>{copy.yes} <ArrowRight size={17} /></button>
-            <a className="qr-os-secondary" href="/">{copy.no}</a>
+            <button className="sn-pill qr-os-primary" type="button" onClick={() => setStep("details")}><span>{copy.yes}</span> <ArrowUpRight size={17} aria-hidden="true" /></button>
+            <a className="sn-pill qr-os-secondary" href="/"><span>{copy.no}</span><ArrowUpRight size={17} aria-hidden="true" /></a>
           </div>
         </> : <>
           <img className="qr-os-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="136" loading="lazy" />
@@ -74,7 +74,7 @@ export default function QrOsWelcome({ ready }: { ready: boolean }) {
           <form onSubmit={continueToWhatsApp} className="qr-os-form">
             <div className="qr-os-grid"><label htmlFor={firstName}>{copy.first}<input id={firstName} name="firstName" autoComplete="given-name" required /></label><label htmlFor={lastName}>{copy.last}<input id={lastName} name="lastName" autoComplete="family-name" required /></label></div>
             <label htmlFor={email}>{copy.email}<input id={email} type="email" name="email" autoComplete="email" required /></label>
-            <button className="qr-os-primary qr-os-try" type="submit">{copy.submit} <ArrowRight size={17} /></button>
+            <button className="sn-pill qr-os-primary qr-os-try" type="submit"><span>{copy.submit}</span> <ArrowUpRight size={17} aria-hidden="true" /></button>
             <p className="qr-os-secure">{copy.edit}</p>
           </form>
         </>}

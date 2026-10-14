@@ -214,7 +214,7 @@ export function AuditPage() {
             {/* Honeypot: een mens ziet dit veld nooit. */}
             <input name="bedrijfsnaam2" tabIndex={-1} autoComplete="off" aria-hidden="true" className="h-audit-honing" />
             {fout && <p className="h-audit-fout" role="alert">{fout}</p>}
-            <button className="sn-btn3d h-button" type="submit" disabled={status === "bezig"}>
+            <button className="sn-pill sn-btn3d h-button" type="submit" disabled={status === "bezig"}>
               <span className="sn-btn3d-sheen" />
               <span>{status === "bezig" ? "Versturen…" : "Vraag je audit aan"}</span>
               <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>

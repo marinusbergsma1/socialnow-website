@@ -9,6 +9,7 @@ import "./concept.css";
 import "./concept-tech.css";
 import "./partner-colors.css";
 import "./language-menu.css";
+import "./button-design.css";
 
 // De oude directe dev-ingang blijft bruikbaar; alle echte previewroutes
 // leven onder /voorstel en kunnen ook rechtstreeks worden geopend.

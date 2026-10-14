@@ -32,9 +32,9 @@ function Inhoud({ vacature, groot }: { vacature: Vacature; groot?: boolean }) {
         </ul>
       )}
       <div className="sn-tegel-onder">
-        <a className="os-claim sn-btn3d h-button" href={vacatureMail(t(vacature.titel))}>
+        <a className="sn-pill os-claim sn-btn3d h-button" href={vacatureMail(t(vacature.titel))}>
           <span className="sn-btn3d-sheen" />
-          <span>Solliciteer direct</span>
+          <span>Solliciteer direct</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
         </a>
         <Link className="h-text-link" to={`/vacatures#${vacature.slug}`}>
           Lees meer
@@ -48,9 +48,9 @@ function Inhoud({ vacature, groot }: { vacature: Vacature; groot?: boolean }) {
 // Investeerders doen hun aanvraag op /investeerders (naar invest@socialnow.nl, Marinus 28 september 2026).
 function InvestKnop() {
   return (
-    <Link className="os-claim sn-btn3d h-button" to="/investeerders">
+    <Link className="sn-pill os-claim sn-btn3d h-button" to="/investeerders">
       <span className="sn-btn3d-sheen" />
-      <span>Doe een aanvraag</span>
+      <span>Doe een aanvraag</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
     </Link>
   );
 }

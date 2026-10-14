@@ -28,7 +28,7 @@ export default function ExplainerPlayer({ kind = "explainer", compact = false }:
   return <>
     <button className={`sn-explainer-cover${compact ? " sn-video-compact" : ""}`} type="button" onClick={open} aria-label={label}>
       {!compact && <img src={poster} alt="" width="1280" height="720" />}
-      <span><Play size={20} aria-hidden="true" />{label}</span>
+      <span className="sn-pill"><span>{label}</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span></span>
     </button>
     <dialog className="sn-video-dialog" ref={dialog} onClose={restore} aria-label={story ? "Ons verhaal" : "SocialNow OS explainer"} onClick={e => { if (e.target === dialog.current) dialog.current.close(); }}>
       <div className="sn-video-shell">
@@ -40,10 +40,10 @@ export default function ExplainerPlayer({ kind = "explainer", compact = false }:
           }}>
             {paused ? <Play size={20} aria-hidden="true" /> : <Pause size={20} aria-hidden="true" />}{paused ? "Afspelen" : "Pauzeren"}
           </button>
-          <a className="sn-video-try" href="https://app.socialnow.nl/login/" translate="no">Try it yourself<span><ArrowUpRight size={21} aria-hidden="true" /></span></a>
+          <a className="sn-pill sn-video-try" href="https://app.socialnow.nl/login/" translate="no"><span>Try it yourself</span><span className="h-button-icon"><ArrowUpRight size={21} aria-hidden="true" /></span></a>
         </header>
         <video ref={video} controls playsInline controlsList="nofullscreen" disablePictureInPicture preload="metadata" poster={poster} aria-label={story ? "Ons verhaal" : "SocialNow OS explainer (Engels)"} onPlay={() => setPaused(false)} onPause={() => setPaused(true)} onEnded={() => setPaused(true)}><source src={movie} type="video/mp4" /></video>
-        {failed && <button className="sn-video-retry" type="button" onClick={() => { setFailed(false); video.current?.load(); video.current?.play().catch(() => setFailed(true)); }}>Start de video</button>}
+        {failed && <button className="sn-pill sn-video-retry" type="button" onClick={() => { setFailed(false); video.current?.load(); video.current?.play().catch(() => setFailed(true)); }}><span>Start de video</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span></button>}
       </div>
     </dialog>
   </>;

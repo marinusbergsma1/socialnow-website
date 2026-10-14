@@ -1,6 +1,6 @@
 import { CONTACT_MAIL, whatsappLink } from "./aanvragen";
 import React from "react";
-import { Mail, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Mail, MessageCircle } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 import "./site-visie.css";
 
@@ -23,10 +23,10 @@ export default function PartnerMichelle() {
           <h2 id="partner-michelle-titel">Praat met Michelle.</h2>
           <p className="h-partner-tekst">Bespreek wat het OS voor jouw klanten kan betekenen, net als de partners die je voorgingen.</p>
           <div className="h-partner-acties">
-            <a className="sn-btn3d h-button h-try-button" href={whatsappLink(bericht)} target="_blank" rel="noopener noreferrer">
+            <a className="sn-pill sn-btn3d h-button h-try-button" href={whatsappLink(bericht)} target="_blank" rel="noopener noreferrer">
               <span className="sn-btn3d-sheen" />
-              <MessageCircle size={17} aria-hidden="true" />
               <span>Stuur een WhatsApp</span>
+              <span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
             </a>
             <a className="h-text-link" href={MAIL + encodeURIComponent(onderwerp)}>
               <Mail size={16} aria-hidden="true" />

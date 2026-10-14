@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrowUpRight } from "lucide-react";
 import { Bento, Tegel } from "./Bento";
 import { mailLink } from "./aanvragen";
 import "./statement.css";
@@ -32,7 +33,7 @@ export function Statement() {
               <p className="sn-founder-naam"><strong>Marinus Bergsma</strong> Founder, SocialNow</p>
             </div>
           </div>
-          <a className="sn-founder-knop" href={mailLink("Free end to end demo with Marinus")}>Book your free live demo</a>
+          <a className="sn-pill sn-founder-knop" href={mailLink("Free end to end demo with Marinus")}><span>Book your free live demo</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span></a>
         </Tegel>
       </Bento>
     </div>

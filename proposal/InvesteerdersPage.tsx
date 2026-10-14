@@ -115,10 +115,10 @@ export function InvesteerdersPage() {
             <Link to="/privacy">Privacybeleid</Link>
           </p>
           {fout && <p className="h-form-note" role="alert">{fout}</p>}
-          <button type="submit" className="sn-btn3d h-button">
+          <button type="submit" className="sn-pill sn-btn3d h-button">
             <span className="sn-btn3d-sheen" />
             <span>Verstuur je aanvraag</span>
-            <Mail size={17} />
+            <span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
           </button>
           {concept && (
             <div className="h-form-result" role="status">
