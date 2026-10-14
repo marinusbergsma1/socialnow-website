@@ -18,3 +18,9 @@
 :root .sn-site .sn-advisory-logo img { display: block; width: 200px; max-width: 100%; height: auto; object-fit: contain; filter: none; transform: none; }
 .sn-site .sn-advisory-logo:focus-visible { outline: 2px solid #9b632e; outline-offset: 4px; }
 @media (max-width: 640px) { .sn-site .sn-advisory { grid-template-columns: 1fr; padding: 18px; gap: 16px; } .sn-site .sn-advisory-profile { width: min(200px, 100%); } }
+
+/* Albert staat in dezelfde partnergrid naast Steven; op mobiel volgt hij eronder. */
+:root .sn-site .h-teams-duo > .sn-advisory{grid-column:auto;margin:0;grid-template-columns:minmax(0,140px) minmax(0,1fr);align-content:start;gap:20px;border-radius:20px;padding:16px}
+:root .sn-site .h-teams-duo > .sn-advisory .sn-advisory-caption{padding:12px 0 0}
+:root .sn-site .h-teams-duo > .sn-advisory .sn-advisory-logo img{width:180px}
+@media(max-width:640px){:root .sn-site .h-teams-duo > .sn-advisory{grid-template-columns:1fr;padding:14px}:root .sn-site .h-teams-duo > .sn-advisory .sn-advisory-profile{width:min(200px,100%)}}

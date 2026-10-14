@@ -10,10 +10,6 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { agents, faqs, logos, people } from "./content";
-import { OnderDeVouw, later } from "./later";
-// 11 oktober 2026: de partnerreferenties (alleen op de teampagina's) laden na het eerste script.
-import "./partner-references.css";
-const PartnerReferences = later(() => import("./PartnerReferences").then((m) => m.default));
 import type { Language } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
 import { NaamMetLinkedIn } from "./LinkedInMark";
@@ -281,7 +277,6 @@ export function TeamGrid({ short = false, members = people }: { short?: boolean;
             <span>{person.role}</span>
             {person.description && <span>{person.description}</span>}
             {person.quote && <span>“{person.quote}”</span>}
-            <OnderDeVouw ruimte={false}><PartnerReferences personName={person.name} /></OnderDeVouw>
           </figcaption>
         </figure>
       ))}

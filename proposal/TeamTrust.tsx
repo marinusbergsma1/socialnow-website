@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { people } from "./content";
 import { klein } from "./licht";
-import LinkedInMark, { NaamMetLinkedIn } from "./LinkedInMark";
-import InstagramMark from "./InstagramMark";
+import { NaamMetLinkedIn } from "./LinkedInMark";
 // 11 oktober 2026: Albert's tegel (negen talen tekst) laadt na het eerste script; de opmaak blijft in het ene css-bestand.
 import "./advisory-partner.css";
 import { useLanguage } from "./i18n/context";
@@ -212,7 +211,6 @@ export function TeamJoin() {
       {BOARD.map(naam => <DuoTegel key={naam} naam={naam} />)}
     </div>
     <TeamPerFunctie />
-    <Bedrijfsreferenties />
   </div>;
 }
 
@@ -225,21 +223,6 @@ export const INTEGRATIES = [
   { naam: "HubSpot", src: "/images/partners/integraties/hubspot.svg", hoog: 20, url: "https://www.hubspot.com" },
   { naam: "Microsoft Dynamics 365", src: "/images/partners/integraties/dynamics-365.svg", hoog: 22, url: "https://dynamics.microsoft.com" },
 ];
-
-// Bedrijfslogo's linken naar de bevestigde bedrijfswebsites.
-const extern = { target: "_blank", rel: "noopener noreferrer" } as const;
-
-// 10 oktober 2026: zonder bevestigd LinkedIn-profiel linkt de naam naar Instagram, met het Instagram-teken.
-function Bouwer({ naam, rol, linkedin, instagram, nieuw, children }: { naam: string; rol: string; linkedin?: string; instagram?: string; nieuw?: boolean; children: React.ReactNode }) {
-  const person = people.find(p => p.name === naam);
-  return <div className="h-bouwer">
-    {person && <img className="h-bouwer-foto" {...klein(person.image, 40)} alt="" width="40" height="40" loading="lazy" />}
-    <a className="h-bouwer-naam" href={linkedin ?? instagram} {...extern} aria-label={`${person?.name ?? naam} on ${linkedin ? "LinkedIn" : "Instagram"}`}>
-      <strong>{person?.name ?? naam} {linkedin ? <LinkedInMark /> : <InstagramMark />}{nieuw && <span className="h-bouwer-nieuw">New partner</span>}</strong><i>{rol}</i>
-    </a>
-    <span className="h-bouwer-merken">{children}</span>
-  </div>;
-}
 
 export function Integraties() {
   return <div className="h-integraties">
@@ -255,24 +238,3 @@ export function Integraties() {
   </div>;
 }
 
-// De bedrijfsreferenties horen bij het team; ERP-koppelingen staan na het persoonlijke verhaal.
-export function Bedrijfsreferenties() {
-  return <div className="h-bouwers" role="group" aria-label="Team track record">
-      <Bouwer naam="Douwe Kramer" rol="Co-founder" linkedin="https://www.linkedin.com/in/douwe-kramer-attesso/">
-        <a className="h-bouwer-merk" href="https://bytechat.io" {...extern}><img src="/images/merken/bytechat.svg" alt="" style={{ height: 16 }} loading="lazy" /><span>Byte<em>Chat</em></span></a>
-        <a className="h-bouwer-merk" href="https://bytevision.io" {...extern}><img src="/images/merken/bytevision.png" alt="" style={{ height: 16 }} loading="lazy" />ByteVision</a>
-      </Bouwer>
-      {/* 5 oktober 2026 (Marinus): Steven Goudsblom (Fincer B.V.) komt erbij als partner voor vermogensbeheer, voor ons en
-          Fincer verwijst naar het bevestigde profiel van Steven. */}
-      <Bouwer naam="Steven Goudsblom" rol="Founder · Wealth management" linkedin="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" nieuw>
-        <a href="https://www.abnamro.nl" {...extern}><img src="/images/merken/abn-amro.svg" alt="ABN AMRO" style={{ height: 15 }} loading="lazy" /></a>
-        <a href="https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" {...extern} aria-label="Fincer, Steven Goudsblom on LinkedIn"><img src="/images/merken/fincer.png" alt="Fincer" style={{ height: 15 }} loading="lazy" /></a>
-      </Bouwer>
-      {/* 10 oktober 2026 (Marinus): Daniel Schotman van Creator Code, "Hoeft niet groot" en bij deze regel "Zo iets is wel
-          mooi". Logo naar thecreatorcode.nl, naam naar zijn Instagram, en het cijfer van zijn eigen site. */}
-      <Bouwer naam="Daniel Schotman" rol="Founder · Content & personal branding" instagram="https://www.instagram.com/danielschotman/" nieuw>
-        <a href="https://www.thecreatorcode.nl/" {...extern}><img src="/images/merken/creator-code.webp" alt="Creator Code" style={{ height: 17 }} loading="lazy" /></a>
-        <span className="h-bouwer-cijfer">10M+ views</span>
-      </Bouwer>
-    </div>;
-}

@@ -35,7 +35,7 @@ import { allPosts } from "../data/posts";
 import InstagramWork from "./InstagramWork";
 import PartnerMichelle from "./PartnerMichelle";
 import PartnerIntro from "./PartnerIntro";
-import { Bedrijfsreferenties, PartnerKoppen } from "./TeamTrust";
+import { PartnerKoppen } from "./TeamTrust";
 import {
   Action,
   AgentCards,
@@ -470,13 +470,12 @@ export function TeamPage() {
             <p className="h-team-duo-label" translate="no"><PartnerKoppen soort="fincer" /></p>
             <TeamGrid members={fincer} />
           </div>
+          <AdvisoryPartner />
         </div>
         <p className="h-footnote">
           Marinus en Steef bouwen het OS en maken het schaalbaar. Sid en Douwe van Attesso werken aan veilige agentic payments. Steven van Fincer is onze partner voor vermogensbeheer. Marinus en Sid spreken samen: live demo&apos;s, talks en workshops, overal ter wereld.
         </p>
-        <Bedrijfsreferenties />
       </section>
-      <section className="h-wrap" aria-label="Extern advies aan SocialNow"><AdvisoryPartner /></section>
       <section className="h-wrap">
         <Founder />
       </section>
