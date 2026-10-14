@@ -9,7 +9,6 @@
 // Bewust niet: "wij kunnen er technisch niet bij", SOC 2, ISO 27001, "alle data in de EU".
 // Wie deze zinnen wijzigt: ook de sleutels in proposal/i18n/en.json, de.json en fr.json bijwerken.
 export const BELOFTES: { kop: string; tekst: string }[] = [
-  { kop: "Jouw data. Jouw connecties. Jouw regie.", tekst: "We volgen je gedrag niet en gebruiken je bedrijfsgegevens niet voor onze eigen productontwikkeling. Feedback komt uit persoonlijk contact." },
   { kop: "Je sleutels staan versleuteld per werkruimte.", tekst: "Versleuteld met AES-256-GCM, met een eigen sleutel per werkruimte." },
   { kop: "Niemand bij SocialNow ziet je sleutel.", tekst: "Niet in de app en niet in het beheerscherm. Hij gaat nooit terug naar de browser." },
   { kop: "Alleen gebruikt voor wat jij aanzet.", tekst: "We gebruiken je sleutel alleen voor de koppeling die jij aanzet, in jouw eigen werkruimte." },

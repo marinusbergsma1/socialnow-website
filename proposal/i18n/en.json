@@ -2500,5 +2500,8 @@
   "Jouw data. Jouw connecties. Jouw regie.": "Your data. Your connections. Your control.",
   "Jouw gegevens blijven van jou. Jij houdt de regie over je eigen verbindingen en je systeem. De software verbindt jouw tools tot een persoonlijk of op maat gemaakt systeem. Wij zijn de persoonlijke servicelaag daaromheen.": "Your data belongs to you. You control your own connections and system. The software connects your tools into a personal or custom system. We are the personal service layer on top of the software.",
   "We volgen je gedrag niet. Feedback komt uit persoonlijk contact. We begonnen met Odoo en Zernio omdat hun aanpak aansluit bij die van ons: eerst waarde bieden en jezelf bewijzen. Daarom maken we gratis websites voor iedereen.": "We do not track your behaviour. Feedback comes from personal contact. We started with Odoo and Zernio because their approach aligns with ours: provide value first and prove yourself. That is why we create free websites for everyone.",
-  "We volgen je gedrag niet en gebruiken je bedrijfsgegevens niet voor onze eigen productontwikkeling. Feedback komt uit persoonlijk contact.": "We do not track your behaviour or use your business data for our own product development. Feedback comes from personal contact."
+  "We volgen je gedrag niet en gebruiken je bedrijfsgegevens niet voor onze eigen productontwikkeling. Feedback komt uit persoonlijk contact.": "We do not track your behaviour or use your business data for our own product development. Feedback comes from personal contact.",
+  "Eerst waarde bieden.": "Provide value first.",
+  "Software as a tool.": "Software as a tool.",
+  "Not a service.": "Not a service."
 }

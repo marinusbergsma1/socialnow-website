@@ -44,6 +44,15 @@ export function Home() {
       <p><strong>Tevreden? Dan mag je de demo houden.</strong><br />Anders spreken we een eerlijke prijs af en maken we je website samen perfect.</p>
     </div>
     <FreeWebsite />
+    <Bento id="jouw-systeem" label="Jouw data. Jouw connecties." titel={<>Software as a tool.<br /><span>Not a service.</span></>}>
+      <Tegel kop="Jouw data. Jouw connecties." breed={6}>
+        <h3 className="sn-tegel-titel" translate="no">We are the service layer.</h3>
+        <p className="sn-tegel-tekst">Jouw gegevens blijven van jou. Jij houdt de regie over je eigen verbindingen en je systeem. De software verbindt jouw tools tot een persoonlijk of op maat gemaakt systeem. Wij zijn de persoonlijke servicelaag daaromheen.</p>
+      </Tegel>
+      <Tegel kop="Eerst waarde bieden." breed={6}>
+        <p className="sn-tegel-tekst">We volgen je gedrag niet. Feedback komt uit persoonlijk contact. We begonnen met Odoo en Zernio omdat hun aanpak aansluit bij die van ons: eerst waarde bieden en jezelf bewijzen. Daarom maken we gratis websites voor iedereen.</p>
+      </Tegel>
+    </Bento>
 
     <OnderDeVouw ruimte={false}><Bereikt /></OnderDeVouw>
     <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} className="sn-home-milos" swipe>
