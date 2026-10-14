@@ -8,7 +8,7 @@ import "./home-team.css";
 
 const groups = [
   { name: "Strategy & guidance", members: ["Albert Deltour", "Hossam Hassan"] },
-  { name: "AI development", members: ["Douwe Kramer"] },
+  { name: "AI development", members: ["Douwe Kramer", "Thomas Huijsmans"] },
   { name: "Web development", members: ["Sid van Kalken", "Antony Soosaipillaj"] },
   { name: "Finance & operations", members: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
   { name: "Ads & search", members: ["Jos Hollenberg", "Nick van Keulen", "Sergio Jovovic"] },

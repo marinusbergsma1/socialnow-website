@@ -4,6 +4,7 @@ import { CLAIM_URL } from "./os-entry";
 // 5 oktober 2026 (Marinus): "graag bij iedereen Linkedin doorlink". Alleen profielen die zeker van deze persoon zijn
 // (teamonderzoek 4 en 5 oktober); bij de rest volgt de link zodra de juiste URL bevestigd is.
 export const people: { name: string; role: string; image: string; linkedin?: string; sinds?: string; description?: string; quote?: string; instagram?: string }[] = [
+  { name: "Thomas Huijsmans", role: "AI Strategy & Automation Consultant · FNDR Studio", linkedin: "https://www.linkedin.com/in/thomashuijsmans/", image: "Thomas-Huijsmans.webp", sinds: "2026-10-14" },
   { name: "Hossam Hassan", role: "Brand and Marketing Consultant", linkedin: "https://www.linkedin.com/in/hossam-hassan-abdelrehim/", image: "Hossam-Hassan.webp", sinds: "2026-10-14" },
   { name: "Albert Deltour", role: "Extern adviseur en klankbord", image: "Albert-Deltour.webp", linkedin: "https://www.linkedin.com/in/albert-deltour-020a8438/", sinds: "2026-10-07" },
   {
