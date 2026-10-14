@@ -80,7 +80,23 @@ html:root .sn-site .sn-pill :is(.h-button-icon, .h-dock-arrow) svg { width: 18px
 html:root .sn-site .sn-pill:is(:hover, :focus-visible) :is(.h-button-icon, .h-dock-arrow),
 html:root .sn-site .sn-pill:is(:hover, :focus-visible) > svg:last-child { background: #fff !important; color: var(--sn-pill-green) !important; }
 html:root .sn-site .sn-explainer-cover:is(:hover, :focus-visible) > .sn-pill .h-button-icon { background: #fff !important; color: var(--sn-pill-green) !important; }
-html:root .sn-site .sn-explainer-cover > .sn-pill { width: auto; }
+html:root .sn-site .sn-explainer-cover > .sn-pill {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: max-content;
+  max-width: calc(100% - 32px);
+}
+html:root .sn-site .sn-video-compact > .sn-pill { position: relative; inset: auto; translate: none; max-width: 100%; }
+html:root .sn-site .sn-pill.sn-video-retry { position: absolute; translate: -50% -50%; }
+html:root .sn-site .sn-pill.sn-video-try > span:not(.h-button-icon) {
+  display: block;
+  width: auto;
+  height: auto;
+  background: transparent;
+  transform: none;
+}
 html:root .sn-site .sn-pill:active { scale: .98; }
 html:root .sn-site .sn-pill:disabled { opacity: .5; cursor: not-allowed; }
 /* De OS-downloadbalk houdt zijn platformkeuze; alleen de CTA wordt de gekozen pill. */
