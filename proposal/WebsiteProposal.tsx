@@ -214,9 +214,7 @@ function ProposalShell() {
             aria-label="SocialNow, naar de homepage"
           >
             <img
-              src="/images/klein/SocialNow-Logo-2026-400.webp"
-              srcSet="/images/klein/SocialNow-Logo-2026-400.webp 400w, /images/klein/SocialNow-Logo-2026-600.webp 600w"
-              sizes="200px"
+              src="/images/SocialNow-Logo-2026.webp"
               alt="SocialNow"
               width="200"
               height="38"

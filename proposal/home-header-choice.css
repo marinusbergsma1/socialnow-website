@@ -102,3 +102,8 @@
 
 .sn-site.sn-choice-page>.h-header .h-desktop-nav{gap:28px}
 .sn-site.sn-choice-page>.h-header .h-desktop-nav a{font-family:inherit;font-size:13px;letter-spacing:.04em;text-transform:none;font-weight:400;color:#b9c8c0}
+
+/* Keep the complete navigation wordmark in its original proportions. */
+:root .sn-site>.h-header .h-brand{display:block;flex:none;width:200px;height:auto;overflow:visible;clip-path:none}
+:root .sn-site>.h-header .h-brand img{display:block;width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:contain;object-position:left center;clip-path:none;transform:none}
+@media(max-width:760px){:root .sn-site>.h-header .h-brand{width:145px}}
