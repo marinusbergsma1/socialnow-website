@@ -201,7 +201,7 @@ function ProposalShell() {
   }, [menuOpen]);
   if (location.pathname.replace(/\/+$/, "") === "/antwoord-aanvragen") return <div className="sn-site" data-style="signature"><main id="inhoud"><Suspense fallback={null}><AntwoordPagina /></Suspense></main></div>;
   return (
-    <div className="sn-site" data-style="signature">
+    <div className={`sn-site${location.pathname === "/" ? " sn-choice-page" : ""}`} data-style="signature">
       {qrBezoek && <Suspense fallback={null}><QrOsWelcome ready={introDone} /></Suspense>}
       <a className="h-skip" href="#inhoud">
         Ga naar inhoud
@@ -223,13 +223,13 @@ function ProposalShell() {
             />
           </Link>
           <nav className="h-desktop-nav" aria-label="Hoofdnavigatie">
-            {nav.map(([path, title]) => (
+            {(location.pathname === "/" ? [["/#diensten", "OS & Connect"], ["/#os-explainer", "Bekijk het gemak"], ["/#team", "Het team"]] : nav).map(([path, title]) => (
               <NavLink key={path} to={path}>
                 {title}
               </NavLink>
             ))}
           </nav>
-          <LanguageSwitch />
+          {location.pathname !== "/" && <LanguageSwitch />}
           {/* 26 september 2026 (Marinus): geen reclame in de header, rechtsboven de login voor het gratis OS. */}
           <a className="sn-pill h-header-claim" href="https://app.socialnow.nl/login/">
             <span className="h-header-login-full">Inloggen gratis OS</span>

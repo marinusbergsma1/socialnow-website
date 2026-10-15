@@ -1,112 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
-import { MiloMotion } from "./motion";
-import { people, logos } from "./content";
+import { ArrowUpRight, X } from "lucide-react";
+import { people } from "./content";
 import { klein } from "./licht";
+import { GRATIS_OS_URL } from "./os-entry";
 import ExplainerPlayer from "./ExplainerPlayer";
-import { InstallKnop, GRATIS_OS_URL } from "./os-entry";
 import "./home-header-approved.css";
+import "./home-header-choice.css";
 
-function ConnectColor() {
-  return <svg className="rx-color-filters" aria-hidden="true" focusable="false"><defs><filter id="sn-connect-blue" colorInterpolationFilters="sRGB"><feComponentTransfer><feFuncR type="linear" slope="0.6" intercept="0.02"/><feFuncG type="linear" slope="0.55" intercept="0.43"/><feFuncB type="linear" slope="0.45" intercept="0.5"/></feComponentTransfer></filter></defs></svg>;
-}
-function ProductLogo({ connect = false }: { connect?: boolean }) {
-  const src = "/images/home-header/socialnow-connect.png";
-  return <div className="rx-logo" translate="no">{connect
-    ? <span className="rx-connect-tint"><img className="rx-connect" src={src} alt="SocialNow Connect" width="1362" height="171"/><img className="rx-connect rx-connect-overlay" src={src} alt="" aria-hidden="true" width="1362" height="171"/></span>
-    : <img className="rx-os" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="92"/>}</div>;
-}
-const connectFaces = ["Marinus Bergsma", "Sid van Kalken", "Douwe Kramer", "Steef Komen", "Emma Peperkamp", "Isa Zoer"]
-  .flatMap(name => { const person = people.find(person => person.name === name); return person ? [person] : []; });
-const connectPeople = [...connectFaces, ...people.filter(person => !connectFaces.some(face => face.name === person.name))];
-function ConnectPeople() {
-  const row = React.useRef<HTMLDivElement>(null);
-  const [shown, setShown] = React.useState(6);
-  React.useEffect(() => {
-    const element = row.current;
-    if (!element) return;
-    const update = () => {
-      const width = element.clientWidth;
-      const mobile = window.matchMedia("(max-width: 760px)").matches;
-      const size = mobile ? 48 : 58, overlap = 18, gap = mobile ? 6 : 8;
-      const allWidth = connectPeople.length * (size - overlap) + overlap;
-      setShown(width >= allWidth ? connectPeople.length : Math.max(1, Math.min(connectPeople.length - 1, Math.floor((width - overlap - size - gap) / (size - overlap)))));
-    };
-    const observer = new ResizeObserver(update);
-    observer.observe(element); update(); window.addEventListener("resize", update);
-    return () => { observer.disconnect(); window.removeEventListener("resize", update); };
-  }, []);
-  const remaining = connectPeople.length - shown;
-  return <div ref={row} className="rx-product-visuals rx-people">
-    {connectPeople.slice(0, shown).map(person => <Link key={person.name} to="/team" title={person.name} aria-label={person.name}>
-      <img {...klein(person.image, 58, [96, 160], undefined, "20261015-team")} alt={person.name} width="58" height="58" />
-    </Link>)}
-    {remaining > 0 && <Link className="rx-more-people" to="/team" title="Maak kennis met het team ↗"><b translate="no">+{remaining}</b></Link>}
-  </div>;
-}
-function ProductVisuals({ connect }: { connect: boolean }) {
-  return connect ? <ConnectPeople/> : <div className="rx-product-visuals rx-milos">
-    {[{ role: "website", name: "Website" }, { role: "crm", name: "CRM" }, { role: "content", name: "Content" }, { role: "ads", name: "Ads" }].map(milo =>
-      <div key={milo.role} title={milo.name}><MiloMotion role={milo.role} name={milo.name} maat={128} /></div>)}
-  </div>;
-}
-function Product({ connect = false }: { connect?: boolean }) {
-  return <article className={`rx-product${connect ? " rx-product-connect" : ""}`}>
-    <ProductVisuals connect={connect}/>
-    <div className="rx-product-heading"><ProductLogo connect={connect}/>{!connect && <div className="rx-downloads"><div className="sn-header-download"><InstallKnop dock compact/></div></div>}</div>
-    <p className="rx-service-label">{connect ? "Ons verbindende platform." : "AI management & operations."}</p>
-    {connect && <p className="rx-desc"><b>De juiste experts voor jouw bedrijf.</b></p>}
-    {!connect && <p className="rx-price"><b>Gratis tot 10 GB aan opslag.</b><br/>Of vraag een eigen systeem op maat aan.</p>}
-    <a className="rx-button" href={connect ? "/connect/" : GRATIS_OS_URL} translate="no"><span>{connect ? "Find out more" : "Login"}</span><span className="rx-arrow"><ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true"/></span></a>
-  </article>;
-}
-const trustedBrands = [
-  ["merken/BETCITY-LOGO.svg", "BetCity"],
-  ...["Universal", "MOJO"].flatMap(name => {
-    const logo = logos.find(logo => logo[1] === name); return logo ? [[logo[0], logo[1]]] : [];
-  }),
-  ...logos.filter(logo => !["Universal", "MOJO", "AZ", "Light Art Collection", "Chin Chin Club", "kWh Garant", "DIVINE", "PrimeFone"].includes(logo[1])).map(logo => [logo[0], logo[1]]),
-];
-function TrustedBy() {
-  return <div className="rx-trusted" translate="no">
-    <div className="rx-trusted-heading"><img src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="126" height="24"/><span>is trusted by</span></div>
-    <div className="rx-trusted-brands"><div className="rx-trusted-track">{[0, 1].map(copy => <div key={copy} className="rx-trusted-group" aria-hidden={copy ? true : undefined}>{trustedBrands.map(([src, name]) => <div key={name} data-brand={name}><img src={`/images/${src}`} alt={copy ? "" : name} width="180" height="64" decoding="async" /></div>)}</div>)}</div></div>
-  </div>;
-}
-export function HomeExplainer() {
-  return <section className="rx-media" id="os-explainer" aria-labelledby="rx-explainer-title">
-    <div className="rx-explainer-main">
-    <h2 id="rx-explainer-title">Alles op één plek.</h2>
-    <p className="rx-explainer-intro">Waar je nu anderen voor betaalt, beheer je bij ons gratis.</p>
-    <ExplainerPlayer ctaLabel="Bekijk het gemak"/>
-    </div>
-    <TrustedBy/>
-  </section>;
-}
-function DevelopmentPartners() {
-  return <section className="rx-partners rx-partners-opening" aria-label="Doorontwikkeling">
-    <h2 className="rx-partners-title" translate="no">Working together to improve daily with…</h2>
-    <div className="rx-partner"><ProductLogo/><div className="rx-built"><span>Doorontwikkeling door</span><a href="https://indexworld.net" aria-label="Indexworld" target="_blank" rel="noopener noreferrer"><img src="/images/home-header/indexworld.png" alt="Indexworld" width="725" height="176" loading="lazy"/></a></div></div>
-    <div className="rx-partner"><ProductLogo connect/><div className="rx-built"><span>Doorontwikkeling door</span><a className="rx-uncanny" href="https://uncannycs.com" aria-label="Uncanny" target="_blank" rel="noopener noreferrer"><img src="/images/home-header/uncanny.svg" alt="Uncanny" width="1365" height="300" loading="lazy"/></a></div></div>
-  </section>;
-}
-export function HomeDevelopmentPartners() {
-  return <div className="rx rx-development-partners"><DevelopmentPartners/></div>;
-}
-export default function HomeHeader() {
-  return <div className="rx rx-3">
-    <ConnectColor/>
-    <div className="rx-grid">
-      <div className="rx-heading"><p className="rx-pain">Te veel losse tools om je bedrijf te runnen?</p><h1>Je hele bedrijf op één plek.</h1><p className="rx-intro">Eén plek om je website, CRM, content en advertenties te runnen.</p></div>
-      <HomeExplainer/>
-      <div className="rx-details"><h2 className="rx-services-title">Twee diensten. Eén geheel.</h2><div className="rx-products"><Product/><Product connect/></div>
-        <nav className="rx-free" aria-label="Start gratis" translate="no">
-          <a href="https://website.socialnow.nl/" title="Website-demo, tijdelijk inclusief rebranding">Free website demo <span aria-hidden="true">↗</span></a>
-          <Link to="/audit#aanvragen">Free Google Ads scan <span aria-hidden="true">↗</span></Link>
-          <a href={GRATIS_OS_URL}>Free SocialNow/OS <span aria-hidden="true">↗</span></a>
-        </nav>
-      </div>
-    </div>
-  </div>;
-}
+const faces = ["Marinus Bergsma", "Sid van Kalken", "Douwe Kramer", "Steef Komen", "Emma Peperkamp", "Isa Zoer", "Thomas Huijsmans", "Carmel Boon", "Michelle Yang", "Nick van Keulen"].flatMap(name => { const person=people.find(p=>p.name===name);return person?[person]:[]; });
+function ConnectLogo(){return <span className="connect-logo"><img src="/images/home-header/socialnow-connect.png" alt="SocialNow Connect" width="1362" height="171"/><img className="blue-overlay" src="/images/home-header/socialnow-connect.png" alt="" aria-hidden="true" width="1362" height="171"/></span>}
+function Filters(){return <svg className="filters" aria-hidden="true"><defs><filter id="connect-blue" colorInterpolationFilters="sRGB"><feComponentTransfer><feFuncR type="linear" slope=".6" intercept=".02"/><feFuncG type="linear" slope=".55" intercept=".43"/><feFuncB type="linear" slope=".45" intercept=".5"/></feComponentTransfer></filter></defs></svg>}
+function Action({connect=false}:{connect?:boolean}){return <div className="action"><a className="pill" href={connect?"/connect/":GRATIS_OS_URL} translate="no">{connect?"Find out more":"Login"}<span className="arrow"><ArrowUpRight size={17}/></span></a></div>}
+function Downloads(){return <div className="downloads"><span>DOWNLOAD</span><a className="download" href={GRATIS_OS_URL} aria-label="Download voor Mac"><svg className="os-install-apple" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"></path></svg></a><a className="download" href={GRATIS_OS_URL} aria-label="Download voor iPhone en iPad"><svg className="os-install-telefoon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="6.5" y="2" width="11" height="20" rx="2.6" fill="none" stroke="currentColor" strokeWidth="2"></rect><path d="M10.5 18.5h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path></svg></a><a className="download" href={GRATIS_OS_URL} aria-label="Download voor Windows"><svg className="os-install-windows" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M1 3.5 10 2.3v8.7H1zm10-1.3L23 .5V11H11zM1 12h9v8.7L1 19.5zm10 0h12v11.5l-12-1.7z"></path></svg></a><a className="download" href={GRATIS_OS_URL} aria-label="Download voor Android"><svg className="os-install-android" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.87 3.23a11.4 11.4 0 0 0-9.82 0L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"></path></svg></a></div>}
+export function HomeExplainer(){return <section className="video-section" id="os-explainer"><div className="wrap"><div className="section-head video-intro"><div className="video-title"><h1>Begin <span className="free-word">GRATIS.</span></h1><p className="pay-line">Betaal voor <strong>échte experts.</strong></p></div><p className="product-explainer"><strong className="os-name">SocialNow OS</strong> brengt je website, CRM, content en advertenties samen.<br/><strong className="connect-name">SocialNow Connect</strong> verbindt je met experts die je verder helpen.</p></div><ExplainerPlayer ctaLabel="Bekijk het gemak"/></div></section>}
+export function HomeConnectBand(){return <div className="sn-choice"><div className="sn-team-product"><ConnectLogo/><p><strong>Het netwerk van SocialNow Connect.</strong><br/>Onafhankelijke experts, verbonden met jouw bedrijf.</p></div></div>}
+export function HomeDevelopmentPartners(){return <div className="sn-choice"><section className="building-partners" aria-label="Development partnerships"><div className="wrap"><h2>Building together with<span className="dot">.</span></h2><div className="building-grid"><div className="building-pair"><img className="building-product" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS"/><span className="building-cross" aria-hidden="true"><X size={22}/></span><a className="building-company indexworld" href="https://indexworld.net" target="_blank" rel="noopener noreferrer" aria-label="Indexworld"><img src="/images/home-header/indexworld.png" alt="Indexworld"/></a></div><div className="building-pair"><ConnectLogo/><span className="building-cross" aria-hidden="true"><X size={22}/></span><a className="building-company uncanny" href="https://uncannycs.com" target="_blank" rel="noopener noreferrer" aria-label="Uncanny"><img src="/images/home-header/uncanny.svg" alt="Uncanny"/></a></div></div></div></section></div>}
+export default function HomeHeader(){return <div className="sn-choice"><Filters/><div className="showcase wrap"><section className="hero" id="diensten"><div className="wrap"><div className="intro"><p className="eyebrow">Twee diensten. Eén geheel.</p></div><div className="services"><article className="service os"><div className="logo-row"><img className="os-logo" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS"/><Downloads/></div><h2>AI management &amp; operations.</h2><div className="visual milos">{[{role:"website",name:"Website"},{role:"crm",name:"CRM"},{role:"content",name:"Content"},{role:"ads-magenta",name:"Ads"}].map(m=><figure key={m.role}><img src={`/proposal/milo/${m.role}-128.webp`} alt={`Milo ${m.name}`} width="80" height="80"/><figcaption>{m.name}</figcaption></figure>)}</div><p className="summary"><strong>Gratis tot 10 GB aan opslag.</strong></p><Action/></article><article className="service connect"><div className="logo-row"><ConnectLogo/></div><h2>Ons verbindende platform.</h2><div className="visual faces">{faces.map(p=><span key={p.name} title={p.name}><img {...klein(p.image,52,[96,160],undefined,"20261015-team")} alt={p.name} width="52" height="52"/></span>)}<Link className="more" to="/team" aria-label="Bekijk het hele team"><span className="desktop-count">+{people.length-faces.length}</span><span className="mobile-count">+{people.length-7}</span></Link></div><p className="summary"><strong>De juiste experts voor jouw bedrijf.</strong></p><Action connect/></article></div></div></section><HomeExplainer/></div></div>}

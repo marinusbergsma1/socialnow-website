@@ -75,7 +75,7 @@ export default function HomeTeam() {
   return <section ref={team} className="sn-home-team" id="team" aria-labelledby={id}>
     <canvas ref={dots} className="sn-team-dot-layer" aria-hidden="true" />
     <header className="sn-home-team-intro">
-      <div><span>OUR PEOPLE · INDEPENDENT EXPERTS</span><h2 id={id}>Human connection.<br /><em>Per expertise.</em></h2></div>
+      <div><span>SOCIALNOW CONNECT · ONAFHANKELIJKE EXPERTS</span><h2 id={id}>De experts van Connect.<br /><em>Per expertise.</em></h2></div>
       <p>De juiste mensen voor jouw bedrijf.<br />Creatie, marketing, sales, data en techniek.</p>
       <div className="sn-home-team-count">{people.length}<small>mensen · één netwerk</small></div>
     </header>
