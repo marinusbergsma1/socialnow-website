@@ -56,7 +56,7 @@ function Product({ connect = false }: { connect?: boolean }) {
     <ProductVisuals connect={connect}/>
     <div className="rx-product-heading"><ProductLogo connect={connect}/>{!connect && <div className="rx-downloads"><div className="sn-header-download"><InstallKnop dock compact/></div></div>}</div>
     <p className="rx-service-label">{connect ? "Ons verbindende platform." : "AI management & operations."}</p>
-    {connect && <p className="rx-desc"><b>De juiste experts voor jouw bedrijf.</b><br/><span>Van strategie en creatie tot marketing en techniek.</span><br/><span>Eén netwerk. Samen aan jouw groei.</span></p>}
+    {connect && <p className="rx-desc"><b>De juiste experts voor jouw bedrijf.</b></p>}
     {!connect && <p className="rx-price"><b>Gratis tot 10 GB aan opslag.</b><br/>Of vraag een eigen systeem op maat aan.</p>}
     <a className="rx-button" href={connect ? "/connect/" : GRATIS_OS_URL} translate="no"><span>{connect ? "Find out more" : "Login"}</span><span className="rx-arrow"><ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true"/></span></a>
   </article>;
