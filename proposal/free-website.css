@@ -52,3 +52,8 @@
 .sn-site .sn-web-deck{height:auto;aspect-ratio:2/1}.sn-site .sn-web-address a{font-family:inherit;font-size:12px;font-weight:700;line-height:1.2}
 @media(max-width:650px){.sn-site .sn-web-deck{height:auto;aspect-ratio:1.55}.sn-site .sn-web-address a{font-size:11px}}
 .sn-site .sn-web-navigation>.sn-web-pause{width:32px;height:32px;font-size:15px;border-color:#294537;color:#b6cabc;margin-left:0}
+/* The carousel contains the actual websites, scaled as desktop browser windows. */
+.sn-site .sn-web-preview{position:relative}
+.sn-site .sn-web-preview iframe{display:block;border:0;width:1280px;height:800px;max-width:none;transform:scale(var(--preview-scale,1));transform-origin:top left;background:#fff;pointer-events:none}
+.sn-site .sn-web-tile.is-active .sn-web-preview iframe{pointer-events:auto}
+.sn-site .sn-web-tile.is-active .sn-web-preview{cursor:auto}

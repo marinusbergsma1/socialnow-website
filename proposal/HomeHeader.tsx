@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import { MiloMotion } from "./motion";
+import { people, logos } from "./content";
+import { klein } from "./licht";
 import ExplainerPlayer from "./ExplainerPlayer";
 import { InstallKnop, GRATIS_OS_URL } from "./os-entry";
 import "./home-header-approved.css";
@@ -14,19 +17,45 @@ function ProductLogo({ connect = false }: { connect?: boolean }) {
     ? <span className="rx-connect-tint"><img className="rx-connect" src={src} alt="SocialNow Connect" width="1362" height="171"/><img className="rx-connect rx-connect-overlay" src={src} alt="" aria-hidden="true" width="1362" height="171"/></span>
     : <img className="rx-os" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="92"/>}</div>;
 }
+const connectFaces = ["Marinus Bergsma", "Sid van Kalken", "Douwe Kramer", "Steef Komen", "Emma Peperkamp", "Isa Zoer"]
+  .flatMap(name => { const person = people.find(person => person.name === name); return person ? [person] : []; });
+function ProductVisuals({ connect }: { connect: boolean }) {
+  return connect ? <div className="rx-product-visuals rx-people">
+    {connectFaces.map(person => <Link key={person.name} to="/team" title={person.name} aria-label={person.name}>
+      <img {...klein(person.image, 56, [96, 160], undefined, "20261015-team")} alt={person.name} width="56" height="56" />
+    </Link>)}
+  </div> : <div className="rx-product-visuals rx-milos">
+    {[{ role: "website", name: "Website" }, { role: "crm", name: "CRM" }, { role: "content", name: "Content" }, { role: "ads", name: "Ads" }].map(milo =>
+      <div key={milo.role} title={milo.name}><MiloMotion role={milo.role} name={milo.name} maat={128} /></div>)}
+  </div>;
+}
 function Product({ connect = false }: { connect?: boolean }) {
   return <article className={`rx-product${connect ? " rx-product-connect" : ""}`}>
-    <ProductLogo connect={connect}/>
+    <ProductVisuals connect={connect}/>
+    <div className="rx-product-heading"><ProductLogo connect={connect}/>{!connect && <div className="rx-downloads"><div className="sn-header-download"><InstallKnop dock compact/></div></div>}</div>
     <p className="rx-desc">{connect ? "De juiste experts voor jouw bedrijf." : "Eén plek om je website, CRM, content en advertenties te runnen."}</p>
     {!connect && <p className="rx-price"><b>Gratis tot 10 GB.</b><br/>Daarna €20,- per maand.</p>}
     <a className="rx-button" href={connect ? "/connect/" : GRATIS_OS_URL} translate="no"><span>{connect ? "Find out more" : "Login"}</span><span className="rx-arrow"><ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true"/></span></a>
   </article>;
 }
+const trustedBrands = [
+  ["merken/BETCITY-LOGO.svg", "BetCity"],
+  ...["Universal", "MOJO"].flatMap(name => {
+    const logo = logos.find(logo => logo[1] === name); return logo ? [[logo[0], logo[1]]] : [];
+  }),
+  ...logos.filter(logo => !["Universal", "MOJO"].includes(logo[1])).map(logo => [logo[0], logo[1]]),
+];
+function TrustedBy() {
+  return <div className="rx-trusted" translate="no">
+    <div className="rx-trusted-heading"><img src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="126" height="24"/><span>is trusted by</span></div>
+    <div className="rx-trusted-brands"><div className="rx-trusted-track">{[0, 1].map(copy => <div key={copy} className="rx-trusted-group" aria-hidden={copy ? true : undefined}>{trustedBrands.map(([src, name]) => <div key={name} data-brand={name}><img src={`/images/${src}`} alt={copy ? "" : name} width="180" height="64" decoding="async" /></div>)}</div>)}</div></div>
+  </div>;
+}
 export function HomeExplainer() {
   return <section className="rx-media" id="os-explainer" aria-labelledby="rx-explainer-title">
     <h2 id="rx-explainer-title">Bekijk hoe het OS werkt.</h2>
     <ExplainerPlayer/>
-    <div className="rx-downloads"><div className="sn-header-download"><InstallKnop dock compact/></div></div>
+    <TrustedBy/>
   </section>;
 }
 function DevelopmentPartners() {

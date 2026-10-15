@@ -6,36 +6,28 @@ export const ONBOARDING_URL = "https://website.socialnow.nl";
 const examples = webShowcaseProjects
   .filter(project => project.slug !== "kwh-garant-website" && project.slug !== "vintage-watches-website" && project.url && (!project.offline || project.previewUrl))
   .map(project => ({ name: project.title, url: project.url!, slug: project.slug,
-    recording: `/images/website-previews/${project.slug}.mp4`,
-    poster: `/images/website-previews/${project.slug}.webp` }));
+    previewUrl: project.previewUrl }));
 
 function WebsiteExamples() {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [previewScale, setPreviewScale] = useState(1);
   const region = useRef<HTMLDivElement>(null);
-  const videos = useRef<(HTMLVideoElement | null)[]>([]);
   const pointer = useRef<{ x: number; y: number } | null>(null);
   const dragged = useRef(false);
   const choose = (next: number) => setIndex((next + examples.length) % examples.length);
   useEffect(() => {
-    const preference = matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReducedMotion(preference.matches);
-    update(); preference.addEventListener("change", update);
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: .1 });
-    if (region.current) observer.observe(region.current);
-    return () => { observer.disconnect(); preference.removeEventListener("change", update); };
+    const element = region.current;
+    if (!element) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setVisible(true); observer.disconnect(); }
+    }, { rootMargin: "400px" });
+    observer.observe(element);
+    const tile = element.querySelector(".sn-web-preview");
+    const resize = new ResizeObserver(([entry]) => setPreviewScale(entry.contentRect.width / 1280));
+    if (tile) resize.observe(tile);
+    return () => { observer.disconnect(); resize.disconnect(); };
   }, []);
-  useEffect(() => {
-    const update = () => videos.current.forEach((video, i) => {
-      if (!video) return;
-      if (i === index && visible && !reducedMotion && !paused && !document.hidden) void video.play().catch(() => {});
-      else video.pause();
-    });
-    update(); document.addEventListener("visibilitychange", update);
-    return () => document.removeEventListener("visibilitychange", update);
-  }, [index, visible, reducedMotion, paused]);
   return <div className="sn-fw-examples" ref={region} role="region" aria-label="Live websitevoorbeelden" aria-roledescription="carrousel">
     <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Ons werk · live websites</p><h3>Bekijk wat we maken.</h3></div><p>Eerder werk, ter inspiratie voor jouw demo.</p></div>
     <div className="sn-web-deck" tabIndex={0} aria-label="Websitevoorbeelden. Gebruik de pijltjestoetsen om te bladeren."
@@ -53,15 +45,18 @@ function WebsiteExamples() {
         if (offset > examples.length / 2) offset -= examples.length;
         const active = offset === 0;
         return <article key={item.slug} className={`sn-web-tile${active ? " is-active" : ""}`} data-offset={offset}
-          style={{ "--offset": offset, "--distance": Math.abs(offset) } as import("react").CSSProperties}>
+          style={{ "--offset": offset, "--distance": Math.abs(offset), "--preview-scale": previewScale } as import("react").CSSProperties}>
           <div className="sn-web-address"><span className="sn-web-lights" aria-hidden="true"><i /><i /><i /></span><span className="sn-web-host" translate="no">{new URL(item.url).hostname.replace(/^www\./, "")}</span>
             {active && <a href={item.url} target="_blank" rel="noopener noreferrer" onClick={event => { if (dragged.current) event.preventDefault(); }}>Bekijk live <span aria-hidden="true">↗</span></a>}
           </div>
-          <button type="button" className="sn-web-preview" tabIndex={active ? -1 : 0} aria-label={item.name}
-            onClick={() => { if (!dragged.current && !active) choose(i); }}>
-            <video ref={element => { videos.current[i] = element; }} src={visible && active && !reducedMotion ? item.recording : undefined}
-              poster={item.poster} muted loop playsInline preload="none" aria-hidden="true" />
-          </button>
+          <div className="sn-web-preview" role={active ? undefined : "button"} tabIndex={active ? undefined : 0} aria-label={active ? undefined : item.name}
+            onKeyDown={event => { if (!active && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); choose(i); } }}
+            onClick={event => { if ((!dragged.current || event.detail === 0) && !active) choose(i); }}>
+            {visible && Math.abs(offset) <= 1 && <iframe src={item.previewUrl || item.url} title={item.name} tabIndex={active ? 0 : -1}
+              inert={!active ? true : undefined} aria-hidden={!active ? true : undefined} loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" />}
+          </div>
         </article>;
       })}
     </div>
@@ -69,7 +64,6 @@ function WebsiteExamples() {
       <button type="button" aria-label="Vorige website" onClick={() => choose(index - 1)}>←</button>
       <div className="sn-web-pagination" role="group" aria-label="Kies een website">{examples.map((item, i) => <button type="button" key={item.slug} aria-label={item.name} aria-pressed={i === index} onClick={() => choose(i)}><span /></button>)}</div>
       <button type="button" aria-label="Volgende website" onClick={() => choose(index + 1)}>→</button>
-      {!reducedMotion && <button type="button" className="sn-web-pause" aria-label={paused ? "Opname afspelen" : "Opname pauzeren"} aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? "▷" : "Ⅱ"}</button>}
     </div>
     <p className="sn-web-announcement" aria-live="polite" translate="no">{examples[index].name} · {index + 1} / {examples.length}</p>
   </div>;
