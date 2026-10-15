@@ -107,3 +107,14 @@
 :root .sn-site>.h-header .h-brand{display:block;flex:none;width:200px;height:auto;overflow:visible;clip-path:none}
 :root .sn-site>.h-header .h-brand img{display:block;width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:contain;object-position:left center;clip-path:none;transform:none}
 @media(max-width:760px){:root .sn-site>.h-header .h-brand{width:145px}}
+
+/* The white team section starts immediately below the blue gradient divider. */
+.sn-site .sn-choice .sn-team-product{position:relative;border-bottom:0}
+.sn-site .sn-choice .sn-team-product::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,#20afde 0%,rgba(32,175,222,.35) 22%,transparent 58%);pointer-events:none}
+:root .sn-site .sn-approved-hero>.sn-choice+.sn-below-new-header .sn-home-team{margin-top:0}
+
+/* Each product, cross and partner reads as one compact collaboration. */
+.sn-site .sn-choice .building-pair{grid-template-columns:auto 22px auto;justify-content:start;gap:16px}
+.sn-site .sn-choice .building-company{justify-self:start}
+@media(max-width:1150px){.sn-site .sn-choice .building-product{width:170px}.sn-site .sn-choice .building-pair .connect-logo{width:210px}.sn-site .sn-choice .building-company img{width:150px}}
+@media(max-width:760px){.sn-site .sn-choice .building-pair{grid-template-columns:auto 18px minmax(0,1fr);gap:10px}.sn-site .sn-choice .building-product{width:150px}.sn-site .sn-choice .building-pair .connect-logo{width:190px}.sn-site .sn-choice .building-company img{width:110px}}
