@@ -290,3 +290,19 @@
 :root .sn-site .rx-people a:not(.rx-more-people)+a:not(.rx-more-people){margin-left:-18px}
 :root .sn-site .rx-people a.rx-more-people{margin-left:auto}
 @media(max-width:760px){:root .sn-site .rx-people a:not(.rx-more-people)+a:not(.rx-more-people){margin-left:-18px}:root .sn-site .rx-people a.rx-more-people{margin-left:auto}}
+/* Selected partner layout: spacious transparent labels, with larger marks. */
+:root .sn-site .rx .rx-partners-opening{gap:18px 32px}
+:root .sn-site .rx .rx-partners-title{font-size:24px!important;font-weight:700;line-height:1.25;letter-spacing:0;margin:0 0 6px;color:#e1ece6}
+:root .sn-site .rx .rx-partner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:22px 24px;border:1px solid #ffffff28;border-radius:22px;align-items:center;transition:border-color .2s}
+:root .sn-site .rx .rx-partner .rx-built{display:contents}
+:root .sn-site .rx .rx-partner .rx-built>span{grid-column:1/-1;grid-row:1;text-transform:uppercase;letter-spacing:.08em;font-size:10px;line-height:1.4;color:#9fb6aa}
+:root .sn-site .rx .rx-partner>.rx-logo{grid-column:1;grid-row:2;min-width:0}
+:root .sn-site .rx .rx-partner .rx-built a,:root .sn-site .rx .rx-partner .rx-built a[href="https://indexworld.net"]{grid-column:2;grid-row:2;width:218px;height:64px;padding:13px 20px;border-radius:14px}
+:root .sn-site .rx .rx-partner .rx-built img,:root .sn-site .rx .rx-partner .rx-built a[href="https://indexworld.net"] img{width:100%;height:100%;object-fit:contain}
+:root .sn-site .rx .rx-partner .rx-os{width:170px}
+:root .sn-site .rx .rx-partner .rx-connect-tint{width:224px}
+:root .sn-site .rx .rx-partner:hover{border-color:#25d36670}
+:root .sn-site .rx .rx-partner:has(.rx-uncanny):hover{border-color:#20afde70}
+@media(max-width:1100px){:root .sn-site .rx .rx-partner{grid-template-columns:minmax(0,1fr);gap:16px}:root .sn-site .rx .rx-partner .rx-built a,:root .sn-site .rx .rx-partner .rx-built a[href="https://indexworld.net"]{grid-column:1;grid-row:3}:root .sn-site .rx .rx-partner>.rx-logo{grid-row:2}}
+@media(max-width:760px){:root .sn-site .rx .rx-partners-opening{grid-template-columns:minmax(0,1fr);gap:20px}:root .sn-site .rx .rx-partners-title{font-size:21px!important;margin-bottom:2px}:root .sn-site .rx .rx-partner{padding:20px 22px}}
+:root .sn-site .rx .rx-partner .rx-built a.rx-uncanny{transform:translateY(3px)}
