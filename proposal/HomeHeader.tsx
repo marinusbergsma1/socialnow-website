@@ -75,8 +75,9 @@ function TrustedBy() {
 }
 export function HomeExplainer() {
   return <section className="rx-media" id="os-explainer" aria-labelledby="rx-explainer-title">
-    <h2 id="rx-explainer-title">Bekijk hoe het OS werkt.</h2>
-    <ExplainerPlayer/>
+    <h2 id="rx-explainer-title">Met twee connecties alles op één plek.</h2>
+    <p className="rx-explainer-intro">Wat je nu duizenden euro’s kost, begint hier gratis.</p>
+    <ExplainerPlayer ctaLabel="Bekijk het gemak"/>
     <TrustedBy/>
   </section>;
 }

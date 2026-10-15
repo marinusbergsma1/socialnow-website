@@ -318,6 +318,12 @@
 :root .sn-site .rx-3 .rx-grid>.rx-media{align-self:stretch;display:flex;flex-direction:column}
 :root .sn-site .rx-3 .rx-media .rx-trusted{margin-top:auto;padding-top:24px}
 :root .sn-site .rx-3 .rx-grid>.rx-details{align-self:stretch;display:flex;flex-direction:column}
-:root .sn-site .rx-3 .rx-products{flex:1;grid-template-rows:1fr 1fr}
-:root .sn-site .rx-3 .rx-product{align-content:space-between}
+:root .sn-site .rx-3 .rx-products{flex:1;grid-template-rows:auto auto;align-content:space-between}
+:root .sn-site .rx-3 .rx-product{align-content:start}
 }
+
+/* Keep each product's people, logo and explanation together. */
+:root .sn-site .rx-3 .rx-product>.rx-product-visuals{margin-bottom:12px}
+:root .sn-site .rx-3 .rx-product>.rx-product-heading{margin-bottom:12px}
+:root .sn-site .rx-media .rx-explainer-intro{font-size:17px;line-height:1.45;color:#c6d4cc;margin:0 0 18px}
+:root .sn-site .rx-media #rx-explainer-title{margin-bottom:8px}

@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { Play, Pause, X, ArrowUpRight } from "lucide-react";
 import "./explainer-player.css";
 
-export default function ExplainerPlayer({ kind = "explainer", compact = false }: { kind?: "explainer" | "story"; compact?: boolean }) {
+export default function ExplainerPlayer({ kind = "explainer", compact = false, ctaLabel }: { kind?: "explainer" | "story"; compact?: boolean; ctaLabel?: string }) {
   const story = kind === "story";
   const movie = story ? "/video/verhaal/story-presentatie.mp4?v=story-short-20261013" : "/video/os/socialnow-os-explainer.mp4?v=20261012-player2";
   const poster = story ? "/video/verhaal/story-presentatie-poster.jpg" : "/video/os/socialnow-os-explainer-poster.jpg";
-  const label = story ? "Bekijk mijn verhaal" : "Bekijk de explainer";
+  const label = ctaLabel ?? (story ? "Bekijk mijn verhaal" : "Bekijk de explainer");
   const [paused, setPaused] = useState(true);
   const dialog = useRef<HTMLDialogElement>(null);
   const video = useRef<HTMLVideoElement>(null);
