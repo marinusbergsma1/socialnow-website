@@ -19,14 +19,34 @@ function ProductLogo({ connect = false }: { connect?: boolean }) {
 }
 const connectFaces = ["Marinus Bergsma", "Sid van Kalken", "Douwe Kramer", "Steef Komen", "Emma Peperkamp", "Isa Zoer"]
   .flatMap(name => { const person = people.find(person => person.name === name); return person ? [person] : []; });
-function ProductVisuals({ connect }: { connect: boolean }) {
-  return connect ? <div className="rx-product-visuals rx-people">
-    {connectFaces.map(person => <Link key={person.name} to="/team" title={person.name} aria-label={person.name}>
-      <img {...klein(person.image, 56, [96, 160], undefined, "20261015-team")} alt={person.name} width="56" height="56" />
+const connectPeople = [...connectFaces, ...people.filter(person => !connectFaces.some(face => face.name === person.name))];
+function ConnectPeople() {
+  const row = React.useRef<HTMLDivElement>(null);
+  const [shown, setShown] = React.useState(6);
+  React.useEffect(() => {
+    const element = row.current;
+    if (!element) return;
+    const update = () => {
+      const width = element.getBoundingClientRect().width;
+      const mobile = window.matchMedia("(max-width: 760px)").matches;
+      const size = mobile ? 48 : 58, overlap = mobile ? 12 : 10, gap = mobile ? 6 : 8;
+      const allWidth = connectPeople.length * (size - overlap) + overlap;
+      setShown(width >= allWidth ? connectPeople.length : Math.max(1, Math.min(connectPeople.length - 1, Math.floor((width - overlap - size - gap) / (size - overlap)))));
+    };
+    const observer = new ResizeObserver(update);
+    observer.observe(element); update(); window.addEventListener("resize", update);
+    return () => { observer.disconnect(); window.removeEventListener("resize", update); };
+  }, []);
+  const remaining = connectPeople.length - shown;
+  return <div ref={row} className="rx-product-visuals rx-people">
+    {connectPeople.slice(0, shown).map(person => <Link key={person.name} to="/team" title={person.name} aria-label={person.name}>
+      <img {...klein(person.image, 58, [96, 160], undefined, "20261015-team")} alt={person.name} width="58" height="58" />
     </Link>)}
-    <Link className="rx-more-people" to="/team"><b translate="no">+{Math.max(0, people.length - connectFaces.length)}</b><span>anderen</span></Link>
-    <Link className="rx-more-people" to="/team"><b translate="no">+{Math.max(0, people.length - connectFaces.length)}</b><span>anderen</span></Link>
-  </div> : <div className="rx-product-visuals rx-milos">
+    {remaining > 0 && <Link className="rx-more-people" to="/team"><b translate="no">+{remaining}</b><span>anderen</span></Link>}
+  </div>;
+}
+function ProductVisuals({ connect }: { connect: boolean }) {
+  return connect ? <ConnectPeople/> : <div className="rx-product-visuals rx-milos">
     {[{ role: "website", name: "Website" }, { role: "crm", name: "CRM" }, { role: "content", name: "Content" }, { role: "ads", name: "Ads" }].map(milo =>
       <div key={milo.role} title={milo.name}><MiloMotion role={milo.role} name={milo.name} maat={128} /></div>)}
   </div>;
