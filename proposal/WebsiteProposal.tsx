@@ -223,13 +223,13 @@ function ProposalShell() {
             />
           </Link>
           <nav className="h-desktop-nav" aria-label="Hoofdnavigatie">
-            {(location.pathname === "/" ? [["/#diensten", "OS & Connect"], ["/#os-explainer", "Bekijk het gemak"], ["/#team", "Het team"]] : nav).map(([path, title]) => (
+            {nav.map(([path, title]) => (
               <NavLink key={path} to={path}>
                 {title}
               </NavLink>
             ))}
           </nav>
-          {location.pathname !== "/" && <LanguageSwitch />}
+          <LanguageSwitch />
           {/* 26 september 2026 (Marinus): geen reclame in de header, rechtsboven de login voor het gratis OS. */}
           <a className="sn-pill h-header-claim" href="https://app.socialnow.nl/login/">
             <span className="h-header-login-full">Inloggen gratis OS</span>
