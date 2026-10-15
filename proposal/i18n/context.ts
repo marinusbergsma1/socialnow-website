@@ -86,17 +86,28 @@ export function LanguageProvider({children, language="en"}:{children:React.React
  useEffect(()=>{ document.documentElement.lang=language; },[language]);
  return React.createElement(LanguageContext.Provider,{value:language},children);
 }
+// Accent sentence-ending full stops after translation, including nested heading spans.
+const HeadingText = React.createContext(false);
 export function LocalizedElement({element, ...props}:{element:any;[key:string]:any}) {
  const language=useContext(LanguageContext);
  const inherited=useContext(NoTranslation);
+ const inHeading=useContext(HeadingText);
+ const heading=typeof element === "string" && /^h[1-6]$/.test(element);
  const disabled=inherited || props.translate === "no" || ["script","style","code","pre"].includes(element);
  const next={...props};
  if(!disabled) {
   for(const attr of ["title","placeholder","alt","aria-label","aria-description"]) if(typeof next[attr]==="string") next[attr]=translate(next[attr],language);
  }
- const localize=(child:any):any => !disabled && typeof child==="string" ? translate(child,language) : Array.isArray(child) ? child.map(localize) : child;
+ const localize=(child:any):any => {
+  if(Array.isArray(child)) return child.map(localize);
+  if(typeof child!=="string") return child;
+  const text=disabled ? child : translate(child,language);
+  if(!heading && !inHeading) return text;
+  return text.split(/(\.(?=\s|$))/g).map((part,index)=>part==="." ? React.createElement("span",{className:"sn-title-dot",key:index},part) : part);
+ };
  let children=localize(next.children); delete next.children;
  if(disabled && !inherited && children != null) children=React.createElement(NoTranslation.Provider,{value:true},children);
+ if(heading && children != null) children=React.createElement(HeadingText.Provider,{value:true},children);
  // Preserve void elements, refs, handlers and form values exactly.
  return children === undefined ? React.createElement(element,next) : React.createElement(element,next,children);
 }

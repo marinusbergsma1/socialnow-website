@@ -172,3 +172,5 @@
 @media(max-width:760px){:root .sn-site>.h-header{padding-top:6px;padding-bottom:6px}:root .sn-site .rx{padding-top:32px;padding-bottom:28px}:root .sn-site .sn-home-team{padding-top:44px}}
 :root .sn-site .sn-approved-hero .sn-home-team{padding-top:64px}
 @media(max-width:760px){:root .sn-site .sn-approved-hero .sn-home-team{padding-top:44px}}
+
+:root .sn-site .sn-title-dot{color:#25d366!important}

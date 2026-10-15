@@ -6,15 +6,14 @@
 // als er iets beweegt. Met "minder beweging" aan staat alles meteen in de eindstand, zonder animatie.
 
 export const STIPKLEUR = {
-  geel: "#25D366", blauw: "#25D366", roze: "#25D366", groen: "#25D366",
-  website: "#25D366", crm: "#25D366", studio: "#25D366", ads: "#25D366", wit: "#25D366",
+  geel: "#F5C518", blauw: "#1f6fd1", roze: "#EC1670", groen: "#25D366",
+  website: "#25D366", crm: "#1965C2", studio: "#F5940D", ads: "#EC1670", wit: "#ffffff",
 } as const;
 export type Kleur = keyof typeof STIPKLEUR | `#${string}`;
 const GOLFKLEUREN: Kleur[] = ["geel", "blauw", "roze", "groen"];
 
 type RGB = [number, number, number];
-// All dot effects stay green, including callers that pass a literal color.
-const hex = (_k: Kleur): RGB => [37, 211, 102];
+const hex = (k: Kleur): RGB => { const h = (STIPKLEUR as Record<string, string>)[k] || k; return [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)) as RGB; };
 const sm = (x: number) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
 // Stil = prefers-reduced-motion of de knop "Animaties pauzeren" (proposal/motion.tsx zet dan data-motion-pauze="ja";
 // niet data-motion="paused", want dat staat er ook even bij het laden, tot het eerste effect van de MotionProvider).
@@ -43,8 +42,8 @@ type Effect = {
 
 export type VeldOpties = {
   stap?: number; r?: number;
-  basis?: string | null;          // null = geen rust-stippen; anders altijd de groene merkstippen
-  licht?: boolean;                // behouden voor bestaande callers; stippen blijven groen
+  basis?: string | null;          // kleur van de rust-stippen; null = niet tekenen (de css-achtergrond doet dat)
+  licht?: boolean;                // op wit: grijze stippen
   vast?: boolean;                 // canvas is position: fixed en volgt de scroll (sitebreed veld)
 };
 
@@ -70,7 +69,7 @@ export class Veld {
     // Raster 32 px; fijner alleen als onderverdeling (16 of 8), zodat het grote raster erin blijft vallen.
     const s = o.stap ?? 32; this.stap = s >= 24 ? 32 : s >= 14 ? 16 : 8;
     this.r = o.r ?? 1.6; this.vast = !!o.vast; this.inBeeld = this.vast;
-    this.basis = o.basis === null ? null : "rgba(37,211,102,.16)";
+    this.basis = o.basis === undefined ? (o.licht ? "rgba(20,35,56,.16)" : "rgba(255,255,255,.13)") : o.basis;
     this.ctx = canvas.getContext("2d")!;
     minderBeweging(); velden.add(this); tabWeg = typeof document !== "undefined" && document.hidden;
     this.ro = new ResizeObserver(() => this.maat()); this.ro.observe(canvas); this.maat();
@@ -318,7 +317,7 @@ export function siteVeld(): Veld | null {
   c.dataset.straal = "1";
   // Basis en belichting gebruiken hetzelfde raster; CSS blijft fallback zonder canvas.
   if (!c.getContext("2d")) { c.remove(); return null; }
-  site = new Veld(c, { basis: "rgba(37,211,102,.16)", vast: true, r: 1 });
+  site = new Veld(c, { basis: "rgba(255,255,255,.1)", vast: true, r: 1 });
   if (site.W > 0 && site.H > 0) document.documentElement.classList.add("sn-stipveld-ready");
   // A short, soft trail illuminates the existing grid underneath the pointer.
   let laatsteMuis = -Infinity;
