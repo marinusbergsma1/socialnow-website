@@ -42,7 +42,7 @@ function ConnectPeople() {
     {connectPeople.slice(0, shown).map(person => <Link key={person.name} to="/team" title={person.name} aria-label={person.name}>
       <img {...klein(person.image, 58, [96, 160], undefined, "20261015-team")} alt={person.name} width="58" height="58" />
     </Link>)}
-    {remaining > 0 && <Link className="rx-more-people" to="/team"><b translate="no">+{remaining}</b><span>anderen</span></Link>}
+    {remaining > 0 && <Link className="rx-more-people" to="/team" title="Maak kennis met het team ↗"><b translate="no">+{remaining}</b></Link>}
   </div>;
 }
 function ProductVisuals({ connect }: { connect: boolean }) {

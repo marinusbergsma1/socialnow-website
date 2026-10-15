@@ -279,3 +279,7 @@
 :root .sn-site .rx-3 .rx-product>.rx-people{min-width:0;max-width:100%}
 @media(max-width:1200px){:root .sn-site .rx-3 .rx-product{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:760px){:root .sn-site .rx-3 .rx-grid{grid-template-columns:minmax(0,1fr)}}
+:root .sn-site .rx-people a.rx-more-people{display:flex;align-items:center;justify-content:center;padding:0;line-height:1;flex-direction:row;transition:background .2s,border-color .2s,color .2s}
+:root .sn-site .rx-more-people b{font-size:18px;line-height:1;letter-spacing:0;font-weight:700}
+:root .sn-site .rx-people a.rx-more-people:is(:hover,:focus-visible){background:#20afde;border-color:#20afde;color:#041d27;transform:none}
+@media(max-width:760px){:root .sn-site .rx-more-people b{font-size:15px}}
