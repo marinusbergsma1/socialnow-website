@@ -77,7 +77,7 @@ function TrustedBy() {
 export function HomeExplainer() {
   return <section className="rx-media" id="os-explainer" aria-labelledby="rx-explainer-title">
     <div className="rx-explainer-main">
-    <h2 id="rx-explainer-title">Met twee connecties alles op één plek.</h2>
+    <h2 id="rx-explainer-title">Alles op één plek.</h2>
     <p className="rx-explainer-intro">Waar je nu anderen voor betaalt, beheer je bij ons gratis.</p>
     <ExplainerPlayer ctaLabel="Bekijk het gemak"/>
     </div>
@@ -98,7 +98,7 @@ export default function HomeHeader() {
   return <div className="rx rx-3">
     <ConnectColor/>
     <div className="rx-grid">
-      <div className="rx-heading"><p className="rx-pain">Te veel losse tools om je bedrijf te runnen?</p><h1>Jij onderneemt. Wij verbinden.</h1><p className="rx-intro">Eén plek om je website, CRM, content en advertenties te runnen.</p></div>
+      <div className="rx-heading"><p className="rx-pain">Te veel losse tools om je bedrijf te runnen?</p><h1>Je hele bedrijf op één plek.</h1><p className="rx-intro">Eén plek om je website, CRM, content en advertenties te runnen.</p></div>
       <HomeExplainer/>
       <div className="rx-details"><h2 className="rx-services-title">Twee diensten. Eén geheel.</h2><div className="rx-products"><Product/><Product connect/></div>
         <nav className="rx-free" aria-label="Start gratis" translate="no">

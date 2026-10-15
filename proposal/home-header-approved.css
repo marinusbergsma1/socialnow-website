@@ -381,7 +381,20 @@
 
 :root .sn-site .rx-3 .rx-product:not(.rx-product-connect)>.rx-price{grid-row:4}
 @media(min-width:1101px){
-:root .sn-site .rx-3 .rx-product{padding:15px 0}
+:root .sn-site .rx-3 .rx-product{padding:13px 0}
 :root .sn-site .rx-3 .rx-product>.rx-service-label,:root .sn-site .rx-3 .rx-product>.rx-product-visuals{margin-bottom:10px}
 :root .sn-site .rx-3 .rx-free{padding-top:18px}
+}
+
+/* Keep the English header within shorter desktop screens as well. */
+@media(min-width:1211px) and (max-height:950px){
+:root .sn-site .sn-approved-hero>.rx-3{padding-top:20px;padding-bottom:18px}
+:root .sn-site .rx-3 .rx-heading h1{font-size:36px!important;margin-bottom:8px!important}
+:root .sn-site .rx-3 .rx-heading .rx-intro{margin-bottom:16px}
+:root .sn-site .rx-3 .rx-product{padding:8px 0}
+:root .sn-site .rx-3 .rx-product>.rx-service-label,:root .sn-site .rx-3 .rx-product>.rx-product-visuals{margin-bottom:8px}
+:root .sn-site .rx-3 .rx-free{margin-top:12px;padding-top:12px}
+:root .sn-site .rx-milos,:root .sn-site .rx-milos>div,:root .sn-site .rx-milos .h-milo-animated,:root .sn-site .rx-milos .h-milo-animated>img,:root .sn-site .rx-milos .h-milo-animated>video{height:56px!important}
+:root .sn-site .rx-3 .rx-product>.rx-people{height:48px}
+:root .sn-site .rx-people a:not(.rx-more-people),:root .sn-site .rx-people a.rx-more-people{width:48px;height:48px;min-width:48px;flex-basis:48px}
 }
