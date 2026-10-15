@@ -297,7 +297,7 @@
 :root .sn-site .rx .rx-partner .rx-built{display:contents}
 :root .sn-site .rx .rx-partner .rx-built>span{grid-column:1/-1;grid-row:1;text-transform:uppercase;letter-spacing:.08em;font-size:10px;line-height:1.4;color:#9fb6aa}
 :root .sn-site .rx .rx-partner>.rx-logo{grid-column:1;grid-row:2;min-width:0}
-:root .sn-site .rx .rx-partner .rx-built a,:root .sn-site .rx .rx-partner .rx-built a[href="https://indexworld.net"]{grid-column:2;grid-row:2;width:218px;height:64px;padding:13px 20px;border-radius:14px}
+:root .sn-site .rx .rx-partner .rx-built a,:root .sn-site .rx .rx-partner .rx-built a[href="https://indexworld.net"]{grid-column:2;grid-row:2;width:218px;height:64px;padding:13px 20px;border-radius:999px}
 :root .sn-site .rx .rx-partner .rx-built img,:root .sn-site .rx .rx-partner .rx-built a[href="https://indexworld.net"] img{width:100%;height:100%;object-fit:contain}
 :root .sn-site .rx .rx-partner .rx-os{width:170px}
 :root .sn-site .rx .rx-partner .rx-connect-tint{width:224px}
