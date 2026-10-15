@@ -24,6 +24,8 @@ function ProductVisuals({ connect }: { connect: boolean }) {
     {connectFaces.map(person => <Link key={person.name} to="/team" title={person.name} aria-label={person.name}>
       <img {...klein(person.image, 56, [96, 160], undefined, "20261015-team")} alt={person.name} width="56" height="56" />
     </Link>)}
+    <Link className="rx-more-people" to="/team"><b translate="no">+{Math.max(0, people.length - connectFaces.length)}</b><span>anderen</span></Link>
+    <Link className="rx-more-people" to="/team"><b translate="no">+{Math.max(0, people.length - connectFaces.length)}</b><span>anderen</span></Link>
   </div> : <div className="rx-product-visuals rx-milos">
     {[{ role: "website", name: "Website" }, { role: "crm", name: "CRM" }, { role: "content", name: "Content" }, { role: "ads", name: "Ads" }].map(milo =>
       <div key={milo.role} title={milo.name}><MiloMotion role={milo.role} name={milo.name} maat={128} /></div>)}
@@ -33,7 +35,7 @@ function Product({ connect = false }: { connect?: boolean }) {
   return <article className={`rx-product${connect ? " rx-product-connect" : ""}`}>
     <ProductVisuals connect={connect}/>
     <div className="rx-product-heading"><ProductLogo connect={connect}/>{!connect && <div className="rx-downloads"><div className="sn-header-download"><InstallKnop dock compact/></div></div>}</div>
-    <p className="rx-desc">{connect ? "De juiste experts voor jouw bedrijf." : "Eén plek om je website, CRM, content en advertenties te runnen."}</p>
+    {connect && <p className="rx-desc">De juiste experts voor jouw bedrijf.</p>}
     {!connect && <p className="rx-price"><b>Gratis tot 10 GB.</b><br/>Daarna €20,- per maand.</p>}
     <a className="rx-button" href={connect ? "/connect/" : GRATIS_OS_URL} translate="no"><span>{connect ? "Find out more" : "Login"}</span><span className="rx-arrow"><ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true"/></span></a>
   </article>;
@@ -43,7 +45,7 @@ const trustedBrands = [
   ...["Universal", "MOJO"].flatMap(name => {
     const logo = logos.find(logo => logo[1] === name); return logo ? [[logo[0], logo[1]]] : [];
   }),
-  ...logos.filter(logo => !["Universal", "MOJO"].includes(logo[1])).map(logo => [logo[0], logo[1]]),
+  ...logos.filter(logo => !["Universal", "MOJO", "Light Art Collection", "Chin Chin Club", "kWh Garant", "DIVINE", "PrimeFone"].includes(logo[1])).map(logo => [logo[0], logo[1]]),
 ];
 function TrustedBy() {
   return <div className="rx-trusted" translate="no">
@@ -70,7 +72,7 @@ export default function HomeHeader() {
     <ConnectColor/>
     <DevelopmentPartners/>
     <div className="rx-grid">
-      <div className="rx-heading"><p className="rx-pain">Te veel losse tools om je bedrijf te runnen?</p><h1>Jij onderneemt. Wij verbinden.</h1></div>
+      <div className="rx-heading"><p className="rx-pain">Te veel losse tools om je bedrijf te runnen?</p><h1>Jij onderneemt. Wij verbinden.</h1><p className="rx-intro">Eén plek om je website, CRM, content en advertenties te runnen.</p></div>
       <HomeExplainer/>
       <div className="rx-details"><div className="rx-products"><Product/><Product connect/></div>
         <nav className="rx-free" aria-label="Start gratis" translate="no">
