@@ -204,8 +204,8 @@
 @media(max-width:760px){:root .sn-site .rx{width:calc(100% - 36px);padding-top:36px;padding-bottom:40px}:root .sn-site .rx-3 .rx-heading h1{font-size:36px!important;margin-bottom:30px!important}:root .sn-site .rx-3 .rx-grid>.rx-media{margin-bottom:38px}:root .sn-site .rx-3 .rx-product{grid-template-columns:1fr;padding:26px 0 30px}:root .sn-site .rx-3 .rx-product>.rx-button{grid-column:1;grid-row:5;margin-top:16px}:root .sn-site .rx-3 .rx-product>.rx-desc{font-size:17px!important}:root .sn-site .rx-3 .rx-product>.rx-product-visuals{margin-bottom:20px}:root .sn-site .rx-milos{gap:10px}:root .sn-site .rx-milos,:root .sn-site .rx-milos>div,:root .sn-site .rx-milos .h-milo-animated,:root .sn-site .rx-milos .h-milo-animated>img,:root .sn-site .rx-milos .h-milo-animated>video{width:62px!important;height:62px!important}:root .sn-site .rx-milos{width:auto!important}:root .sn-site .rx-partners{margin-top:36px;padding-top:28px;row-gap:30px}:root .sn-site .rx-3 .rx-free{padding-top:26px;margin-top:8px;row-gap:16px}}
 @media(prefers-reduced-motion:reduce){:root .sn-site .rx-people a{transition:none}}
 @media(max-width:760px){:root .sn-site .rx-3 .rx-grid{grid-template-columns:minmax(0,1fr)}}
-/* Desktop: size the hero to its content. */
-@media(min-width:1101px){:root .sn-site .rx{min-height:0;display:flex;flex-direction:column;justify-content:center}}
+/* Desktop: navigation plus hero occupy at least one complete viewport. */
+@media(min-width:1101px){:root .sn-site .rx{min-height:calc(100svh - 80px);display:flex;flex-direction:column;justify-content:center}}
 :root .sn-site .rx-trusted{margin-top:38px;padding-top:24px;border-top:1px solid #ffffff20;background:#000}
 :root .sn-site .rx-trusted-heading{display:flex;align-items:center;gap:12px;margin-bottom:24px;background:#000}
 :root .sn-site .rx-trusted-heading>img{display:block;width:126px;height:auto;max-height:24px;object-fit:contain;object-position:left;background:#000}
@@ -310,5 +310,14 @@
 :root .sn-site .rx.rx-development-partners .rx-partners{margin:0;padding:0;border:0}
 @media(max-width:760px){:root .sn-site .rx.rx-development-partners{padding-top:32px;padding-bottom:32px}}
 
-/* Let the hero end after its content instead of filling the viewport. */
+/* Fill the screen by distributing content over the available hero height. */
 :root .sn-site .sn-approved-hero>.rx-3{padding-bottom:24px}
+@media(min-width:1101px){
+:root .sn-site .sn-approved-hero>.rx-3{min-height:calc(100svh - 80px)}
+:root .sn-site .rx-3 .rx-grid{flex:1}
+:root .sn-site .rx-3 .rx-grid>.rx-media{align-self:stretch;display:flex;flex-direction:column}
+:root .sn-site .rx-3 .rx-media .rx-trusted{margin-top:auto;padding-top:24px}
+:root .sn-site .rx-3 .rx-grid>.rx-details{align-self:stretch;display:flex;flex-direction:column}
+:root .sn-site .rx-3 .rx-products{flex:1;grid-template-rows:1fr 1fr}
+:root .sn-site .rx-3 .rx-product{align-content:space-between}
+}
