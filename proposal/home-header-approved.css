@@ -236,3 +236,8 @@
 @media(prefers-reduced-motion:reduce){:root .sn-site .rx-trusted-track{animation:none}:root .sn-site .rx-trusted-brands{overflow-x:auto;mask-image:none}:root .sn-site .rx-trusted-group[aria-hidden=true]{display:none}}
 :root .sn-site [data-motion-pauze=ja] .rx-trusted-track{animation-play-state:paused}
 [data-motion="paused"] .sn-site .rx-trusted-track{animation-play-state:paused}
+
+/* Put development partners first, so the complete row is visible on arrival. */
+:root .sn-site .rx .rx-partners-opening{margin:0 0 28px;padding:0 0 22px;border-top:0;border-bottom:1px solid #ffffff30;gap:12px 40px}
+:root .sn-site .rx .rx-partners-title{grid-column:1/-1;margin:0 0 4px;font-size:14px!important;line-height:1.3;letter-spacing:.02em;color:#c6d4cc}
+@media(max-width:760px){:root .sn-site .rx .rx-partners-opening{margin-bottom:28px;row-gap:16px;padding-bottom:20px}}
