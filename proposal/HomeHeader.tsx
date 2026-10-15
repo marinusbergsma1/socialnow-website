@@ -56,7 +56,7 @@ function Product({ connect = false }: { connect?: boolean }) {
     <ProductVisuals connect={connect}/>
     <div className="rx-product-heading"><ProductLogo connect={connect}/>{!connect && <div className="rx-downloads"><div className="sn-header-download"><InstallKnop dock compact/></div></div>}</div>
     {connect && <p className="rx-desc">De juiste experts voor jouw bedrijf.</p>}
-    {!connect && <p className="rx-price"><b>Gratis tot 10 GB.</b><br/>Daarna €20,- per maand.</p>}
+    {!connect && <p className="rx-price"><b>Gratis tot 10 GB.</b><br/>Daarna €20,- per maand.<br/>Of een persoonlijk systeem op maat.</p>}
     <a className="rx-button" href={connect ? "/connect/" : GRATIS_OS_URL} translate="no"><span>{connect ? "Find out more" : "Login"}</span><span className="rx-arrow"><ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true"/></span></a>
   </article>;
 }
@@ -75,9 +75,11 @@ function TrustedBy() {
 }
 export function HomeExplainer() {
   return <section className="rx-media" id="os-explainer" aria-labelledby="rx-explainer-title">
+    <div className="rx-explainer-main">
     <h2 id="rx-explainer-title">Met twee connecties alles op één plek.</h2>
     <p className="rx-explainer-intro">Wat je nu duizenden euro’s kost, begint hier gratis.</p>
     <ExplainerPlayer ctaLabel="Bekijk het gemak"/>
+    </div>
     <TrustedBy/>
   </section>;
 }
