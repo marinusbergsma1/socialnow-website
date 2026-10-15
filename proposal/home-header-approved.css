@@ -304,3 +304,8 @@
 @media(max-width:1100px){:root .sn-site .rx .rx-partner{grid-template-columns:minmax(0,1fr);gap:16px}:root .sn-site .rx .rx-partner .rx-built a,:root .sn-site .rx .rx-partner .rx-built a[href="https://indexworld.net"]{grid-column:1;grid-row:3}:root .sn-site .rx .rx-partner>.rx-logo{grid-row:2}}
 @media(max-width:760px){:root .sn-site .rx .rx-partners-opening{grid-template-columns:minmax(0,1fr);gap:20px}:root .sn-site .rx .rx-partners-title{font-size:21px!important;margin-bottom:2px}:root .sn-site .rx .rx-partner{padding:20px 22px}}
 :root .sn-site .rx .rx-partner .rx-built a.rx-uncanny{transform:translateY(3px)}
+
+/* Development credits follow the team instead of competing with the hero. */
+:root .sn-site .rx.rx-development-partners{min-height:0;display:block;padding-top:44px;padding-bottom:44px;grid-column:1/-1}
+:root .sn-site .rx.rx-development-partners .rx-partners{margin:0;padding:0;border:0}
+@media(max-width:760px){:root .sn-site .rx.rx-development-partners{padding-top:32px;padding-bottom:32px}}

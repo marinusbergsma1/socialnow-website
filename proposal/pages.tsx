@@ -15,7 +15,7 @@ import "./wereldkaart.css";
 import React from "react";
 import { Link } from "react-router-dom";
 import { OnderDeVouw, later } from "./later";
-import HomeHeader from "./HomeHeader";
+import HomeHeader, { HomeDevelopmentPartners } from "./HomeHeader";
 import FreeWebsite from "./FreeWebsite";
 import { Bento, Tegel } from "./Bento";
 import { MiloPortrait, TextLink } from "./ui";
@@ -34,6 +34,9 @@ export function Home() {
       <HomeHeader />
       <div className="h-wrap h-hero-content sn-below-new-header">
         <HomeTeam />
+      </div>
+      <HomeDevelopmentPartners />
+      <div className="h-wrap h-hero-content sn-below-new-header">
         <PixelInfrastructure />
       </div>
     </section>

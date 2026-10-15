@@ -82,15 +82,17 @@ export function HomeExplainer() {
 }
 function DevelopmentPartners() {
   return <section className="rx-partners rx-partners-opening" aria-label="Doorontwikkeling">
-    <h2 className="rx-partners-title" translate="no">Working on our product</h2>
+    <h2 className="rx-partners-title" translate="no">Working together to improve daily with…</h2>
     <div className="rx-partner"><ProductLogo/><div className="rx-built"><span>Doorontwikkeling door</span><a href="https://indexworld.net" aria-label="Indexworld" target="_blank" rel="noopener noreferrer"><img src="/images/home-header/indexworld.png" alt="Indexworld" width="725" height="176" loading="lazy"/></a></div></div>
     <div className="rx-partner"><ProductLogo connect/><div className="rx-built"><span>Doorontwikkeling door</span><a className="rx-uncanny" href="https://uncannycs.com" aria-label="Uncanny" target="_blank" rel="noopener noreferrer"><img src="/images/home-header/uncanny.svg" alt="Uncanny" width="1365" height="300" loading="lazy"/></a></div></div>
   </section>;
 }
+export function HomeDevelopmentPartners() {
+  return <div className="rx rx-development-partners"><DevelopmentPartners/></div>;
+}
 export default function HomeHeader() {
   return <div className="rx rx-3">
     <ConnectColor/>
-    <DevelopmentPartners/>
     <div className="rx-grid">
       <div className="rx-heading"><p className="rx-pain">Te veel losse tools om je bedrijf te runnen?</p><h1>Jij onderneemt. Wij verbinden.</h1><p className="rx-intro">Eén plek om je website, CRM, content en advertenties te runnen.</p></div>
       <HomeExplainer/>
