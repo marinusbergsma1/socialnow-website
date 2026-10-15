@@ -15,7 +15,7 @@ import "./wereldkaart.css";
 import React from "react";
 import { Link } from "react-router-dom";
 import { OnderDeVouw, later } from "./later";
-import HomeHeader, { HomeExplainer } from "./HomeHeader";
+import HomeHeader from "./HomeHeader";
 import FreeWebsite from "./FreeWebsite";
 import { Bento, Tegel } from "./Bento";
 import { MiloPortrait, TextLink } from "./ui";
@@ -26,16 +26,13 @@ import PixelInfrastructure from "./PixelInfrastructure";
 import { useLanguage } from "./i18n/context";
 import "./home-simple.css";
 const Bereikt = later(() => import("./Bereikt").then(m => m.default));
-const BrandGlobe = later(() => import("./BrandGlobe").then(m => m.default));
 
 export function Home() {
   useLanguage();
   return <div className="sn-simple-home">
-    <section className="h-hero" id="home">
-      <div className="h-hero-background"><BrandGlobe /></div>
-      <div className="h-wrap h-hero-content">
-        <div className="h-hero-tekst"><HomeHeader /></div>
-        <HomeExplainer />
+    <section className="h-hero sn-approved-hero" id="home">
+      <HomeHeader />
+      <div className="h-wrap h-hero-content sn-below-new-header">
         <HomeTeam />
         <PixelInfrastructure />
       </div>

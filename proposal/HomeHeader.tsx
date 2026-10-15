@@ -1,44 +1,54 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Play } from "lucide-react";
-import TeamTrust from "./TeamTrust";
+import { ArrowUpRight } from "lucide-react";
 import ExplainerPlayer from "./ExplainerPlayer";
-import "./home-header.css";
+import { InstallKnop, GRATIS_OS_URL } from "./os-entry";
+import "./home-header-approved.css";
 
-// 12 oktober 2026: gekozen header 3, met bedrijfsvoering en de menselijke verbinding centraal.
-export default function HomeHeader() {
-  return <div className="sn-home-copy">
-    <TeamTrust />
-    <div className="sn-home-pain">
-      <strong>Weet jij waar welke kosten vandaan komen?</strong>
-      <span>Marketingbureau · Webdesigner · Ads-bureau · Softwarelicenties</span>
-    </div>
-    <h1 className="sn-home-title">Wij doen het anders.</h1>
-    <p className="sn-home-human" translate="no">Human connection,<br />powered by AI technology.</p>
-    <p className="sn-home-lead">Eén Operation &amp; Management-systeem voor je website, CRM, content en advertenties.</p>
-    <p className="sn-home-connect">Onze experts denken met je mee over je bedrijf.</p>
-    <div className="sn-home-offer">
-      <img src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="140" />
-      <p><strong>Start GRATIS tot 10 GB.</strong><span>Daarna €20,- per maand.</span></p>
-    </div>
-    <div className="sn-home-actions">
-      <a href="https://app.socialnow.nl/login/" className="sn-pill sn-home-cta">Start gratis <ArrowUpRight size={23} aria-hidden="true" /></a>
-      <Link to="/audit" className="sn-pill sn-home-cta sn-home-secondary"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285f4" d="M13.3 2.8a3.3 3.3 0 0 1 4.5 1.2l5.1 8.8a3.3 3.3 0 0 1-5.7 3.3L12.1 7.3a3.3 3.3 0 0 1 1.2-4.5Z"/><path fill="#fbbc04" d="M12.1 4a3.3 3.3 0 0 1 5.7 3.3L8.7 23a3.3 3.3 0 0 1-5.7-3.3Z"/><circle fill="#34a853" cx="5.9" cy="21.3" r="3.3"/></svg>Gratis Google Ads-scan <ArrowUpRight size={23} aria-hidden="true" /></Link>
-    </div>
-    <div className="sn-home-extras">
-      <a href="https://website.socialnow.nl">Gratis website <ArrowUpRight size={16} aria-hidden="true" /></a>
-      <a href="#os-explainer"><Play size={15} aria-hidden="true" />Bekijk de explainer</a>
-    </div>
-  </div>;
+function ConnectColor() {
+  return <svg className="rx-color-filters" aria-hidden="true" focusable="false"><defs><filter id="sn-connect-blue" colorInterpolationFilters="sRGB"><feComponentTransfer><feFuncR type="linear" slope="0.6" intercept="0.02"/><feFuncG type="linear" slope="0.55" intercept="0.43"/><feFuncB type="linear" slope="0.45" intercept="0.5"/></feComponentTransfer></filter></defs></svg>;
 }
-
+function ProductLogo({ connect = false }: { connect?: boolean }) {
+  const src = "/images/home-header/socialnow-connect.png";
+  return <div className="rx-logo" translate="no">{connect
+    ? <span className="rx-connect-tint"><img className="rx-connect" src={src} alt="SocialNow Connect" width="1362" height="171"/><img className="rx-connect rx-connect-overlay" src={src} alt="" aria-hidden="true" width="1362" height="171"/></span>
+    : <img className="rx-os" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="92"/>}</div>;
+}
+function Product({ connect = false }: { connect?: boolean }) {
+  return <article className={`rx-product${connect ? " rx-product-connect" : ""}`}>
+    <ProductLogo connect={connect}/>
+    <p className="rx-desc">{connect ? "De juiste experts voor jouw bedrijf." : "Eén plek om je website, CRM, content en advertenties te runnen."}</p>
+    {!connect && <p className="rx-price"><b>Gratis tot 10 GB.</b><br/>Daarna €20,- per maand.</p>}
+    <a className="rx-button" href={connect ? "/connect/" : GRATIS_OS_URL} translate="no"><span>{connect ? "Find out more" : "Login"}</span><span className="rx-arrow"><ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true"/></span></a>
+  </article>;
+}
 export function HomeExplainer() {
-  return <section className="sn-home-explainer" id="os-explainer" aria-labelledby="sn-explainer-title">
-    <div className="sn-home-explainer-intro">
-      <img className="sn-home-explainer-logo" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="140" />
-      <h2 id="sn-explainer-title">Je bedrijfsvoering.<br />Alles verbonden.</h2>
-      <p>Ontdek hoe mensen, je bedrijfsvoering en AI samenkomen.</p>
-    </div>
-    <ExplainerPlayer />
+  return <section className="rx-media" id="os-explainer" aria-labelledby="rx-explainer-title">
+    <h2 id="rx-explainer-title">Bekijk hoe het OS werkt.</h2>
+    <ExplainerPlayer/>
+    <div className="rx-downloads"><div className="sn-header-download"><InstallKnop dock compact/></div></div>
   </section>;
+}
+function DevelopmentPartners() {
+  return <section className="rx-partners" aria-label="Doorontwikkeling">
+    <div className="rx-partner"><ProductLogo/><div className="rx-built"><span>Doorontwikkeling door</span><a href="https://indexworld.net" aria-label="Indexworld" target="_blank" rel="noopener noreferrer"><img src="/images/home-header/indexworld.png" alt="Indexworld" width="725" height="176" loading="lazy"/></a></div></div>
+    <div className="rx-partner"><ProductLogo connect/><div className="rx-built"><span>Doorontwikkeling door</span><a className="rx-uncanny" href="https://uncannycs.com" aria-label="Uncanny" target="_blank" rel="noopener noreferrer"><img src="/images/home-header/uncanny.svg" alt="Uncanny" width="1365" height="300" loading="lazy"/></a></div></div>
+  </section>;
+}
+export default function HomeHeader() {
+  return <div className="rx rx-3">
+    <ConnectColor/>
+    <div className="rx-grid">
+      <div className="rx-heading"><p className="rx-pain">Te veel losse tools om je bedrijf te runnen?</p><h1>Jij onderneemt. Wij verbinden.</h1></div>
+      <HomeExplainer/>
+      <div className="rx-details"><div className="rx-products"><Product/><Product connect/></div>
+        <nav className="rx-free" aria-label="Start gratis" translate="no">
+          <a href="https://website.socialnow.nl/" title="Website-demo, tijdelijk inclusief rebranding">Free website demo <span aria-hidden="true">↗</span></a>
+          <Link to="/audit#aanvragen">Free Google Ads scan <span aria-hidden="true">↗</span></Link>
+          <a href={GRATIS_OS_URL}>Free SocialNow/OS <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </div>
+    <DevelopmentPartners/>
+  </div>;
 }
