@@ -3,53 +3,76 @@ import "./free-website.css";
 import { webShowcaseProjects } from "../data/projects";
 
 export const ONBOARDING_URL = "https://website.socialnow.nl";
-const websiteFilms: Record<string, { video: string; poster: string; film: string }> = {
-  "vdz-brigade-website": { video: "/video/vdz/vdz-house.mp4", poster: "/video/vdz/vdz-house-poster.jpg", film: "Website-animatie" },
-  "ilgordo-website": { video: "/video/ilgordo/ilgordo-header.mp4", poster: "/video/ilgordo/ilgordo-header-poster.webp", film: "Websitefilm" },
-};
-// Dezelfde websites en volgorde als de eerdere balk, zonder kWh Garant en Vintage Watches.
 const examples = webShowcaseProjects
   .filter(project => project.slug !== "kwh-garant-website" && project.slug !== "vintage-watches-website" && project.url && (!project.offline || project.previewUrl))
-  .map(project => ({ name: project.title, url: project.url!, image: project.image, previewUrl: project.previewUrl, slug: project.slug, ...websiteFilms[project.slug] }));
-const frameSource = (project: typeof examples[number]) => project.previewUrl ||
-  (project.slug === "vastiq-website" && import.meta.env.DEV ? "http://127.0.0.1:4330/" : project.url);
+  .map(project => ({ name: project.title, url: project.url!, slug: project.slug,
+    recording: `/images/website-previews/${project.slug}.mp4`,
+    poster: `/images/website-previews/${project.slug}.webp` }));
 
 function WebsiteExamples() {
   const [index, setIndex] = useState(0);
-  const [view, setView] = useState<"website" | "video">("website");
-  const [near, setNear] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const region = useRef<HTMLDivElement>(null);
+  const videos = useRef<(HTMLVideoElement | null)[]>([]);
+  const pointer = useRef<{ x: number; y: number } | null>(null);
+  const dragged = useRef(false);
+  const choose = (next: number) => setIndex((next + examples.length) % examples.length);
   useEffect(() => {
-    if (!region.current) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setNear(true); observer.disconnect(); }
-    }, { rootMargin: "200px" });
-    observer.observe(region.current);
-    return () => observer.disconnect();
+    const preference = matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(preference.matches);
+    update(); preference.addEventListener("change", update);
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: .1 });
+    if (region.current) observer.observe(region.current);
+    return () => { observer.disconnect(); preference.removeEventListener("change", update); };
   }, []);
-  const project = examples[index];
-  const choose = (next: number) => { setIndex(Math.max(0, Math.min(examples.length - 1, next))); setView("website"); };
+  useEffect(() => {
+    const update = () => videos.current.forEach((video, i) => {
+      if (!video) return;
+      if (i === index && visible && !reducedMotion && !paused && !document.hidden) void video.play().catch(() => {});
+      else video.pause();
+    });
+    update(); document.addEventListener("visibilitychange", update);
+    return () => document.removeEventListener("visibilitychange", update);
+  }, [index, visible, reducedMotion, paused]);
   return <div className="sn-fw-examples" ref={region} role="region" aria-label="Live websitevoorbeelden" aria-roledescription="carrousel">
     <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Ons werk · live websites</p><h3>Bekijk wat we maken.</h3></div><p>Eerder werk, ter inspiratie voor jouw demo.</p></div>
-    <div className="sn-fw-previewbar">
-      <strong translate="no">{project.name}</strong>
-      <div role="group" aria-label="Kies de weergave"><button type="button" aria-pressed={view === "website"} onClick={() => setView("website")}>Live website</button>{project.video && <button type="button" aria-pressed={view === "video"} onClick={() => setView("video")}>{project.film}</button>}</div>
-      <a href={project.url} target="_blank" rel="noopener noreferrer">Open website ↗</a>
+    <div className="sn-web-deck" tabIndex={0} aria-label="Websitevoorbeelden. Gebruik de pijltjestoetsen om te bladeren."
+      onKeyDown={event => { if (event.key === "ArrowRight" || event.key === "ArrowLeft") { event.preventDefault(); choose(index + (event.key === "ArrowRight" ? 1 : -1)); } }}
+      onPointerDown={event => { pointer.current = { x: event.clientX, y: event.clientY }; dragged.current = false; }}
+      onPointerMove={event => { if (pointer.current && Math.abs(event.clientX - pointer.current.x) > 12) dragged.current = true; }}
+      onPointerUp={event => {
+        if (!pointer.current) return;
+        const dx = event.clientX - pointer.current.x, dy = event.clientY - pointer.current.y;
+        pointer.current = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { dragged.current = true; choose(index + (dx < 0 ? 1 : -1)); }
+      }} onPointerCancel={() => { pointer.current = null; }}>
+      {examples.map((item, i) => {
+        let offset = (i - index + examples.length) % examples.length;
+        if (offset > examples.length / 2) offset -= examples.length;
+        const active = offset === 0;
+        return <article key={item.slug} className={`sn-web-tile${active ? " is-active" : ""}`} data-offset={offset}
+          style={{ "--offset": offset, "--distance": Math.abs(offset) } as import("react").CSSProperties}>
+          <div className="sn-web-address"><span className="sn-web-lights" aria-hidden="true"><i /><i /><i /></span><span className="sn-web-host" translate="no">{new URL(item.url).hostname.replace(/^www\./, "")}</span>
+            {active && <a href={item.url} target="_blank" rel="noopener noreferrer" onClick={event => { if (dragged.current) event.preventDefault(); }}>Bekijk live <span aria-hidden="true">↗</span></a>}
+          </div>
+          <button type="button" className="sn-web-preview" tabIndex={active ? -1 : 0} aria-label={item.name}
+            onClick={() => { if (!dragged.current && !active) choose(i); }}>
+            <video ref={element => { videos.current[i] = element; }} src={visible && active && !reducedMotion ? item.recording : undefined}
+              poster={item.poster} muted loop playsInline preload="none" aria-hidden="true" />
+          </button>
+        </article>;
+      })}
     </div>
-    <div className={`sn-fw-slider-window ${view === "video" ? "is-video" : ""}`}>
-      {view === "website" ? <div className="sn-fw-live-track" style={{transform: `translateX(-${index * 100}%)`}}>
-        {examples.map((item, i) => <div className="sn-fw-live-tile" key={item.url} aria-hidden={i !== index} inert={i !== index ? true : undefined}>
-          {near && <iframe src={frameSource(item)} title={item.name} loading="lazy" tabIndex={-1} referrerPolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" />}
-        </div>)}
-      </div> : near && <video key={project.video} controls playsInline preload="metadata" poster={project.poster} aria-label={project.film}><source src={project.video} type="video/mp4" /></video>}
+    <div className="sn-web-navigation">
+      <button type="button" aria-label="Vorige website" onClick={() => choose(index - 1)}>←</button>
+      <div className="sn-web-pagination" role="group" aria-label="Kies een website">{examples.map((item, i) => <button type="button" key={item.slug} aria-label={item.name} aria-pressed={i === index} onClick={() => choose(i)}><span /></button>)}</div>
+      <button type="button" aria-label="Volgende website" onClick={() => choose(index + 1)}>→</button>
+      {!reducedMotion && <button type="button" className="sn-web-pause" aria-label={paused ? "Opname afspelen" : "Opname pauzeren"} aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? "▷" : "Ⅱ"}</button>}
     </div>
-    <div className="sn-fw-slider-nav">
-      <button type="button" aria-label="Vorige website" disabled={index === 0} onClick={() => choose(index - 1)}>←</button>
-      <div className="sn-fw-position"><input type="range" min="0" max={examples.length - 1} step="1" value={index} aria-label="Kies een website" aria-valuetext={project.name} onChange={event => choose(Number(event.target.value))} /><div className="sn-fw-site-labels">{examples.map((item, i) => <button type="button" key={item.name} aria-pressed={i === index} onClick={() => choose(i)} translate="no">{item.name}</button>)}</div></div>
-      <button type="button" aria-label="Volgende website" disabled={index === examples.length - 1} onClick={() => choose(index + 1)}>→</button>
-    </div>
+    <p className="sn-web-announcement" aria-live="polite" translate="no">{examples[index].name} · {index + 1} / {examples.length}</p>
   </div>;
-
 }
 
 export default function FreeWebsite() {
