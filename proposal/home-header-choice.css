@@ -118,3 +118,7 @@
 .sn-site .sn-choice .building-company{justify-self:start}
 @media(max-width:1150px){.sn-site .sn-choice .building-product{width:170px}.sn-site .sn-choice .building-pair .connect-logo{width:210px}.sn-site .sn-choice .building-company img{width:150px}}
 @media(max-width:760px){.sn-site .sn-choice .building-pair{grid-template-columns:auto 18px minmax(0,1fr);gap:10px}.sn-site .sn-choice .building-product{width:150px}.sn-site .sn-choice .building-pair .connect-logo{width:190px}.sn-site .sn-choice .building-company img{width:110px}}
+
+/* Fade the upper blue divider below the hero, matching the lower divider. */
+.sn-site .sn-choice .sn-team-product{border-top:0}
+.sn-site .sn-choice .sn-team-product::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,#20afde 0%,rgba(32,175,222,.35) 22%,transparent 58%);pointer-events:none}
