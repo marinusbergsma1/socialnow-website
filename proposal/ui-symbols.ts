@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowUpRight, Pause, Play, Rocket } from "lucide-react";
 
-const icons = { "↗": ArrowUpRight, "▶": Play, "Ⅱ": Pause, "🚀": Rocket };
+const icons = new Map([ ["↗", ArrowUpRight], ["▶", Play], ["Ⅱ", Pause], ["🚀", Rocket] ]);
 const symbols = /(↗|▶|Ⅱ|🚀)[\uFE0E\uFE0F]?/u;
 
 // iOS and Android can draw text symbols as coloured emoji. Keep translated labels
@@ -10,7 +10,7 @@ export function renderUiSymbols(child: React.ReactNode): React.ReactNode {
   if (Array.isArray(child)) return child.map(renderUiSymbols);
   if (typeof child !== "string" || !symbols.test(child)) return child;
   return child.split(symbols).map((part, index) => {
-    const Icon = icons[part as keyof typeof icons];
+    const Icon = icons.get(part);
     return Icon ? React.createElement(Icon, {
       key: index,
       "aria-hidden": true,
