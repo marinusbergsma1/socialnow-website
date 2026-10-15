@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect } from "react";
+import { renderUiSymbols } from "../ui-symbols";
 // 30 september 2026: in de productiebuild bevat english alleen de kern (de zinnen van het eerste script) en starten
 // german en french (en de andere talen) leeg; de rest komt per taal via laadWoordenboek(). Zie scripts/woordenboek-split.mjs.
 import english from "./en.json";
@@ -106,6 +107,8 @@ export function LocalizedElement({element, ...props}:{element:any;[key:string]:a
   return text.split(/(\.(?=\s|$))/g).map((part,index)=>part==="." ? React.createElement("span",{className:"sn-title-dot",key:index},part) : part);
  };
  let children=localize(next.children); delete next.children;
+ // Translate the complete label first, then draw symbols as SVG on every device.
+ if (!["script","style","code","pre","textarea","option"].includes(element)) children=renderUiSymbols(children);
  if(disabled && !inherited && children != null) children=React.createElement(NoTranslation.Provider,{value:true},children);
  if(heading && children != null) children=React.createElement(HeadingText.Provider,{value:true},children);
  // Preserve void elements, refs, handlers and form values exactly.
