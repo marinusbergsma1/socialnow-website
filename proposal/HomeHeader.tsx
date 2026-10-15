@@ -29,7 +29,7 @@ function ConnectPeople() {
     const update = () => {
       const width = element.getBoundingClientRect().width;
       const mobile = window.matchMedia("(max-width: 760px)").matches;
-      const size = mobile ? 48 : 58, overlap = mobile ? 12 : 10, gap = mobile ? 6 : 8;
+      const size = mobile ? 48 : 58, overlap = 18, gap = mobile ? 6 : 8;
       const allWidth = connectPeople.length * (size - overlap) + overlap;
       setShown(width >= allWidth ? connectPeople.length : Math.max(1, Math.min(connectPeople.length - 1, Math.floor((width - overlap - size - gap) / (size - overlap)))));
     };
