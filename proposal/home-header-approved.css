@@ -363,3 +363,25 @@
 :root .sn-site .rx-3 .rx-product>.rx-price{font-size:15px!important}
 :root .sn-site .rx-3 .rx-product>.rx-desc{font-size:18px!important}
 }
+
+/* Two complementary services, each introduced by its own brand and purpose. */
+:root .sn-site .rx-3 .rx-services-title{font-size:18px!important;line-height:1.3!important;margin:0 0 12px;color:#b5cabe}
+:root .sn-site .rx-3 .rx-product>.rx-product-heading{grid-row:1;margin-bottom:8px}
+:root .sn-site .rx-3 .rx-product>.rx-service-label{grid-column:1/-1;grid-row:2;margin:0 0 14px;font-size:17px;line-height:1.4;font-weight:600;color:#57de8e}
+:root .sn-site .rx-3 .rx-product-connect>.rx-service-label{color:#20afde}
+:root .sn-site .rx-3 .rx-product>.rx-product-visuals{grid-row:3;margin-bottom:14px}
+:root .sn-site .rx-3 .rx-product>.rx-price,:root .sn-site .rx-3 .rx-product>.rx-desc{grid-column:1;grid-row:4;margin:0;font-size:16px;line-height:1.5}
+:root .sn-site .rx-3 .rx-product>.rx-desc b{font-weight:600;color:#20afde}
+:root .sn-site .rx-3 .rx-product>.rx-desc span{color:#b5cabe}
+:root .sn-site .rx-3 .rx-product>.rx-button,:root .sn-site .rx-3 .rx-product:not(.rx-product-connect)>.rx-button{grid-column:2;grid-row:4;align-self:center}
+@media(max-width:1200px){:root .sn-site .rx-3 .rx-product>.rx-button,:root .sn-site .rx-3 .rx-product:not(.rx-product-connect)>.rx-button{grid-column:1;grid-row:5;margin-top:14px}}
+@media(max-width:760px){:root .sn-site .rx-3 .rx-services-title{margin-top:8px}:root .sn-site .rx-3 .rx-product>.rx-service-label{font-size:16px}:root .sn-site .rx-3 .rx-product>.rx-desc{font-size:15px!important}}
+
+:root .sn-site .rx-3 .rx-product-heading>.rx-downloads{transform:translateY(4px)}
+
+:root .sn-site .rx-3 .rx-product:not(.rx-product-connect)>.rx-price{grid-row:4}
+@media(min-width:1101px){
+:root .sn-site .rx-3 .rx-product{padding:15px 0}
+:root .sn-site .rx-3 .rx-product>.rx-service-label,:root .sn-site .rx-3 .rx-product>.rx-product-visuals{margin-bottom:10px}
+:root .sn-site .rx-3 .rx-free{padding-top:18px}
+}

@@ -55,7 +55,8 @@ function Product({ connect = false }: { connect?: boolean }) {
   return <article className={`rx-product${connect ? " rx-product-connect" : ""}`}>
     <ProductVisuals connect={connect}/>
     <div className="rx-product-heading"><ProductLogo connect={connect}/>{!connect && <div className="rx-downloads"><div className="sn-header-download"><InstallKnop dock compact/></div></div>}</div>
-    {connect && <p className="rx-desc">De juiste experts voor jouw bedrijf.</p>}
+    <p className="rx-service-label">{connect ? "Ons verbindende platform." : "AI management & operations."}</p>
+    {connect && <p className="rx-desc"><b>De juiste experts voor jouw bedrijf.</b><br/><span>Van strategie en creatie tot marketing en techniek.</span><br/><span>Eén netwerk. Samen aan jouw groei.</span></p>}
     {!connect && <p className="rx-price"><b>Gratis tot 10 GB aan opslag.</b><br/>Daarna €20,- per maand.<br/>Of een persoonlijk systeem op maat.</p>}
     <a className="rx-button" href={connect ? "/connect/" : GRATIS_OS_URL} translate="no"><span>{connect ? "Find out more" : "Login"}</span><span className="rx-arrow"><ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true"/></span></a>
   </article>;
@@ -99,7 +100,7 @@ export default function HomeHeader() {
     <div className="rx-grid">
       <div className="rx-heading"><p className="rx-pain">Te veel losse tools om je bedrijf te runnen?</p><h1>Jij onderneemt. Wij verbinden.</h1><p className="rx-intro">Eén plek om je website, CRM, content en advertenties te runnen.</p></div>
       <HomeExplainer/>
-      <div className="rx-details"><div className="rx-products"><Product/><Product connect/></div>
+      <div className="rx-details"><h2 className="rx-services-title">Twee diensten. Eén geheel.</h2><div className="rx-products"><Product/><Product connect/></div>
         <nav className="rx-free" aria-label="Start gratis" translate="no">
           <a href="https://website.socialnow.nl/" title="Website-demo, tijdelijk inclusief rebranding">Free website demo <span aria-hidden="true">↗</span></a>
           <Link to="/audit#aanvragen">Free Google Ads scan <span aria-hidden="true">↗</span></Link>
