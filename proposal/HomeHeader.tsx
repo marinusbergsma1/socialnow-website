@@ -65,7 +65,7 @@ const trustedBrands = [
   ...["Universal", "MOJO"].flatMap(name => {
     const logo = logos.find(logo => logo[1] === name); return logo ? [[logo[0], logo[1]]] : [];
   }),
-  ...logos.filter(logo => !["Universal", "MOJO", "Light Art Collection", "Chin Chin Club", "kWh Garant", "DIVINE", "PrimeFone"].includes(logo[1])).map(logo => [logo[0], logo[1]]),
+  ...logos.filter(logo => !["Universal", "MOJO", "AZ", "Light Art Collection", "Chin Chin Club", "kWh Garant", "DIVINE", "PrimeFone"].includes(logo[1])).map(logo => [logo[0], logo[1]]),
 ];
 function TrustedBy() {
   return <div className="rx-trusted" translate="no">
