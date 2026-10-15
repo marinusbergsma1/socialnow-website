@@ -48,7 +48,7 @@ def gezichten():
     # Teamstrook 48 px, Mens en AI 36 px, voettekst en pop-up 34 tot 38 px: 96 (1x en 2x) en 160 (3x).
     for naam in mensen():
         stam = os.path.splitext(naam)[0]
-        for maat in (96, 160):
+        for maat in (96, 160, 320, 480):
             webp(pad("images", naam), os.path.join(KLEIN, f"{stam}-{maat}.webp"), kort=maat, kwaliteit=80)
     # Sprekersblok in de hero (vierkant in een staande kaart van ongeveer 340 bij 420): 480 en 800.
     for naam in ("marinus-profiel-blauw.webp", "sid-attesso.webp"):

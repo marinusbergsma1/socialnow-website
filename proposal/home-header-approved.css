@@ -164,3 +164,11 @@
 :root .sn-site .rx .h-dock-tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);opacity:0;pointer-events:none;white-space:nowrap;background:#102116;border:1px solid #375a43;border-radius:4px;padding:4px 7px;color:#fff;font-size:11px;line-height:1.4;z-index:4}
 :root .sn-site .rx .h-dock-platform:is(:hover,:focus-visible) .h-dock-tip{opacity:1}
 @media(max-width:760px){:root .sn-site .sn-approved-hero>.h-wrap.sn-below-new-header{width:calc(100% - 36px)!important}}
+
+/* More breathing room around navigation and the people section. */
+:root .sn-site>.h-header{padding-top:8px;padding-bottom:8px}
+:root .sn-site .rx{padding-top:46px;padding-bottom:36px}
+:root .sn-site .sn-home-team{padding-top:64px}
+@media(max-width:760px){:root .sn-site>.h-header{padding-top:6px;padding-bottom:6px}:root .sn-site .rx{padding-top:32px;padding-bottom:28px}:root .sn-site .sn-home-team{padding-top:44px}}
+:root .sn-site .sn-approved-hero .sn-home-team{padding-top:64px}
+@media(max-width:760px){:root .sn-site .sn-approved-hero .sn-home-team{padding-top:44px}}

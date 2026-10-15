@@ -6,14 +6,15 @@ import React from "react";
 
 // Een foto uit public/images in de kleine varianten uit public/images/klein (96 en 160 px voor gezichten). Ontbreekt
 // een variant, bijvoorbeeld bij een nieuw teamlid voordat het script gedraaid heeft, dan valt het beeld terug op het origineel.
-export function klein(bestand: string, sizes: number | string, maten: number[] = [96, 160], origineelBreed?: number) {
+export function klein(bestand: string, sizes: number | string, maten: number[] = [96, 160], origineelBreed?: number, versie?: string) {
   const naam = bestand.replace(/^\/?images\//, "");
   const stam = naam.replace(/\.[a-z]+$/i, "");
   const origineel = `/images/${naam}`;
-  const kandidaten = maten.map((m) => `/images/klein/${stam}-${m}.webp ${m}w`);
+  const query = versie ? `?v=${encodeURIComponent(versie)}` : "";
+  const kandidaten = maten.map((m) => `/images/klein/${stam}-${m}.webp${query} ${m}w`);
   if (origineelBreed) kandidaten.push(`${origineel} ${origineelBreed}w`);
   return {
-    src: `/images/klein/${stam}-${maten[0]}.webp`,
+    src: `/images/klein/${stam}-${maten[0]}.webp${query}`,
     srcSet: kandidaten.join(", "),
     sizes: typeof sizes === "number" ? `${sizes}px` : sizes,
     onError: (event: React.SyntheticEvent<HTMLImageElement>) => {

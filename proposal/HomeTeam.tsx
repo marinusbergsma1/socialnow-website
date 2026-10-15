@@ -90,7 +90,7 @@ export default function HomeTeam() {
           {findPeople(group.members).map((person, index) => {
             const url = person.linkedin || person.instagram;
             return <article className="sn-home-team-person" key={person.name} style={{ "--team-delay": `${Math.min(index % 6, 4) * 60}ms` } as React.CSSProperties}>
-              <img {...klein(person.image, "(max-width: 650px) 45vw, (max-width: 1100px) 22vw, 12vw", [160, 320, 480])} alt={person.name} width="320" height="400" loading="lazy" className={person.name === "Jelle Ursem" ? "is-jelle" : undefined} />
+              <img {...klein(person.image, "(max-width: 650px) 45vw, (max-width: 1100px) 22vw, 12vw", [160, 320, 480], undefined, "20261015-team")} alt={person.name} width="320" height="400" loading="lazy" className={person.name === "Jelle Ursem" ? "is-jelle" : undefined} />
               <div className="sn-home-team-info">
                 <strong><span translate="no">{person.name}</span></strong>
                 <span>{person.name === "Ruben Spyckerelle" ? "B2B Cold Calling & Appointment Setting" : person.role}</span>
