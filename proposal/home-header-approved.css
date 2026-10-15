@@ -342,3 +342,12 @@
 :root .sn-site .rx-3 .rx-product-connect>.rx-button{grid-row:3;align-self:center}
 :root .sn-site .rx-3 .rx-product-connect>.rx-desc{margin:0;align-self:center}
 }
+
+/* One green divider below the navigation; keep the brand clearly visible. */
+:root .sn-site>.h-header{border:0!important;box-shadow:none!important;background:#000}
+:root .sn-site>.h-header::before{content:none!important}
+:root .sn-site>.h-header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:#25d366;box-shadow:0 0 6px #25d366a6,0 0 14px #25d36659;pointer-events:none}
+:root .sn-site>.h-header .h-nav{border:0;box-shadow:none}
+:root .sn-site .sn-approved-hero{border-top:0!important}
+:root .sn-site>.h-header .h-brand img{height:32px!important;width:auto!important;max-width:190px}
+@media(max-width:760px){:root .sn-site>.h-header .h-brand img{height:25px!important;max-width:132px}}
