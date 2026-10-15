@@ -333,14 +333,12 @@
 :root .sn-site .rx-3 .rx-media .rx-trusted{margin-top:0}
 }
 
-/* Give the hero copy more presence while keeping mobile readable. */
-:root .sn-site .rx-3 .rx-media #rx-explainer-title{font-size:26px!important;line-height:1.25!important}
-:root .sn-site .rx-3 .rx-media .rx-explainer-intro{font-size:20px;line-height:1.45}
-:root .sn-site .rx-3 .rx-product>.rx-price{font-size:16px;line-height:1.5}
-:root .sn-site .rx-3 .rx-product>.rx-desc{font-size:20px;line-height:1.5}
-@media(max-width:760px){
-:root .sn-site .rx-3 .rx-media #rx-explainer-title{font-size:23px!important}
-:root .sn-site .rx-3 .rx-media .rx-explainer-intro{font-size:18px}
-:root .sn-site .rx-3 .rx-product>.rx-price{font-size:15px!important}
-:root .sn-site .rx-3 .rx-product>.rx-desc{font-size:18px!important}
+/* Match the approved 110% browser view at the normal desktop zoom. */
+@media(min-width:1211px){
+:root .sn-site .sn-approved-hero>.rx-3{zoom:1.1;min-height:calc((100svh - 80px)/1.1)}
+}
+
+@media(min-width:1201px){
+:root .sn-site .rx-3 .rx-product-connect>.rx-button{grid-row:3;align-self:center}
+:root .sn-site .rx-3 .rx-product-connect>.rx-desc{margin:0;align-self:center}
 }

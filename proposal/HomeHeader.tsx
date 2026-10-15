@@ -27,7 +27,7 @@ function ConnectPeople() {
     const element = row.current;
     if (!element) return;
     const update = () => {
-      const width = element.getBoundingClientRect().width;
+      const width = element.clientWidth;
       const mobile = window.matchMedia("(max-width: 760px)").matches;
       const size = mobile ? 48 : 58, overlap = 18, gap = mobile ? 6 : 8;
       const allWidth = connectPeople.length * (size - overlap) + overlap;
