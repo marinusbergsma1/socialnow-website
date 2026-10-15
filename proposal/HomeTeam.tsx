@@ -4,7 +4,6 @@ import { people } from "./content";
 import { klein } from "./licht";
 import LinkedInMark from "./LinkedInMark";
 import InstagramMark from "./InstagramMark";
-import { Veld, minderBeweging } from "./stippen";
 import "./home-team.css";
 
 const groups = [
@@ -26,37 +25,6 @@ export default function HomeTeam() {
   const [filter, setFilter] = React.useState("");
   const id = React.useId();
   const team = React.useRef<HTMLElement>(null);
-  const dots = React.useRef<HTMLCanvasElement>(null);
-  React.useEffect(() => {
-    const el = team.current, canvas = dots.current;
-    if (!el || !canvas || !canvas.getContext("2d")) return;
-    const field = new Veld(canvas, { basis: "#cdd1d5", r: 1 });
-    el.classList.add("has-team-dots");
-    let visible = false, lastMove = -Infinity;
-    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; });
-    observer.observe(el);
-    const move = (event: PointerEvent) => {
-      if (event.pointerType === "touch" || minderBeweging()) return;
-      const now = performance.now();
-      if (now - lastMove < 40) return;
-      lastMove = now;
-      const rect = el.getBoundingClientRect();
-      field.golf(event.clientX - rect.left, event.clientY - rect.top, "groen", { straal: 96, duur: .45, breed: 64, sterkte: 1 });
-    };
-    el.addEventListener("pointermove", move, { passive: true });
-    const timer = window.setInterval(() => {
-      if (visible && !document.hidden && !minderBeweging()) {
-        const rect = el.getBoundingClientRect();
-        // Start in the visible part of the section, including on tall mobile layouts.
-        const y = Math.max(0, -rect.top) + (Math.min(innerHeight, rect.bottom) - Math.max(0, rect.top)) / 2;
-        field.golfReeks(rect.width / 2, y, { straal: Math.hypot(rect.width, innerHeight), duur: 2.8, tussen: .4 });
-      }
-    }, 9000);
-    return () => {
-      observer.disconnect(); window.clearInterval(timer); el.removeEventListener("pointermove", move);
-      field.stop(); el.classList.remove("has-team-dots");
-    };
-  }, []);
   React.useEffect(() => {
     const el = team.current;
     if (!el || !window.IntersectionObserver || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -73,7 +41,6 @@ export default function HomeTeam() {
   }, [filter]);
   const shown = groups.filter(group => !filter || group.name === filter);
   return <section ref={team} className="sn-home-team" id="team" aria-labelledby={id}>
-    <canvas ref={dots} className="sn-team-dot-layer" aria-hidden="true" />
     <header className="sn-home-team-intro">
       <div><span>SOCIALNOW CONNECT · ONAFHANKELIJKE EXPERTS</span><h2 id={id}>De experts van Connect.<br /><em>Per expertise.</em></h2></div>
       <p>De juiste mensen voor jouw bedrijf.<br />Creatie, marketing, sales, data en techniek.</p>
