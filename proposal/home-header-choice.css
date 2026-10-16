@@ -135,3 +135,9 @@
 .sn-site .sn-choice .building-company.uncanny img{filter:none;max-width:none}
 @media(min-width:761px) and (max-width:1000px){.sn-site .sn-choice .building-grid{grid-template-columns:minmax(0,1fr);gap:26px}}
 @media(max-width:760px){.sn-site .sn-choice .showcase>.video-section{order:-1}}  /* 16 okt 2026 (Marinus): op mobiel eerst titel en video */
+/* 16 okt 2026 (Marinus): titel en de regels eronder iets kleiner, vooral op mobiel; geen negatieve letterafstand.
+   Proef: scripts/check-hero-titel-maat.mjs */
+.sn-site .sn-choice .showcase .video-title h1{font-size:clamp(40px,3.3vw,58px)!important;line-height:1.04!important;margin:0 0 12px!important;letter-spacing:0!important}
+.sn-site .sn-choice .showcase .video-intro .pay-line{font-size:clamp(20px,1.5vw,25px);line-height:1.35}
+@media(max-width:1150px){.sn-site .sn-choice .showcase .video-title h1{font-size:40px!important}.sn-site .sn-choice .showcase .video-intro .pay-line{font-size:20px}}
+@media(max-width:760px){.sn-site .sn-choice .showcase .video-title h1{font-size:clamp(25px,6.8vw,34px)!important;line-height:1.12!important;margin:0 0 8px!important}.sn-site .sn-choice .showcase .video-intro .pay-line{font-size:18px;line-height:1.35}.sn-site .sn-choice .showcase .video-title .expertise-included{font-size:15px;line-height:1.45;margin-top:9px}}
