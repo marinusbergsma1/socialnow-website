@@ -42,8 +42,7 @@ export default function HomeTeam() {
   const shown = groups.filter(group => !filter || group.name === filter);
   return <section ref={team} className="sn-home-team" id="team" aria-labelledby={id}>
     <header className="sn-home-team-intro">
-      <div><span>SOCIALNOW CONNECT · ONAFHANKELIJKE EXPERTS</span><h2 id={id}>De experts van Connect.<br /><em>Per expertise.</em></h2></div>
-      <p>De juiste mensen voor jouw bedrijf.<br />Creatie, marketing, sales, data en techniek.</p>
+      <div><h2 id={id}>De experts van Connect.</h2></div>
       <div className="sn-home-team-count">{people.length}<small>mensen · één netwerk</small></div>
     </header>
     <div className="sn-home-team-filters" role="group" aria-label="Filter team by expertise">

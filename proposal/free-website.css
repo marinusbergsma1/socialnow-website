@@ -92,3 +92,11 @@
 .sn-site .sn-fw-showcase-head>div{max-width:760px}
 .sn-site .sn-fw-showcase-head>p{font-size:17px;line-height:1.55;max-width:400px}
 @media(max-width:850px){.sn-site .sn-fw-showcase-head{align-items:start}.sn-site .sn-fw-showcase-head>p{max-width:600px}}
+/* Stable website previews: instant side images, live websites kept after first visit. */
+.sn-site .sn-web-preview .sn-web-thumbnail{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;pointer-events:none}
+.sn-site .sn-web-preview iframe{position:absolute;left:0;top:0;opacity:0;transition:opacity .2s}
+.sn-site .sn-web-tile.is-active .sn-web-preview iframe[data-ready=true]{opacity:1}
+.sn-site .sn-web-loading{position:absolute;left:14px;bottom:14px;z-index:2;padding:8px 12px;border:1px solid #ffffff30;border-radius:8px;background:#08110de8;color:#e4ece8;font-size:12px;line-height:1.3;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.sn-site .sn-web-preview iframe{transition:none}}
+.sn-site .sn-web-tile.is-active .sn-web-preview iframe{pointer-events:none}
+.sn-site .sn-web-tile.is-active .sn-web-preview iframe[data-ready=true]{pointer-events:auto}
