@@ -122,3 +122,8 @@
 /* Fade the upper blue divider below the hero, matching the lower divider. */
 .sn-site .sn-choice .sn-team-product{border-top:0}
 .sn-site .sn-choice .sn-team-product::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,#20afde 0%,rgba(32,175,222,.35) 22%,transparent 58%);pointer-events:none}
+
+/* Expertise first: clear supporting copy above the explainer. */
+.sn-site .sn-choice .showcase .video-title .expertise-description{max-width:780px;font-size:18px;line-height:1.6;color:#b0c1b6;margin:20px 0 0}
+.sn-site .sn-choice .showcase .video-title .expertise-included{max-width:780px;font-size:16px;line-height:1.5;color:#f5faf7;font-weight:600;margin:16px 0 0}
+@media(max-width:650px){.sn-site .sn-choice .showcase .video-title h1{font-size:clamp(30px,8vw,45px)!important;line-height:1.1!important}.sn-site .sn-choice .showcase .video-title .expertise-description{font-size:16px}.sn-site .sn-choice .showcase .video-title .expertise-included{font-size:15px}}
