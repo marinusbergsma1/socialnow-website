@@ -67,3 +67,8 @@
   .sn-site .sn-bento-streepjes button[aria-current="true"] { width: 44px; }
   .sn-site .sn-bento-streepjes button[aria-current="true"]::before { background: #25d366; }
 }
+
+/* 16 okt 2026: twee bevestigde presentaties in de tegel "Uitgenodigd" (SEC Brussel en Talland College, met logo) */
+.sn-site .h-bereikt-talks { display: flex; flex-direction: column; gap: 10px; margin: 12px 0; font-size: 16px; line-height: 1.3; color: #ffffffcc; }
+.sn-site .h-bereikt-talks .h-talland { display: flex; align-items: center; gap: 10px; }
+.sn-site .h-bereikt-talks .h-talland img { height: 24px; width: auto; flex: none; }
