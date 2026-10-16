@@ -127,3 +127,5 @@
 @media(max-width:650px){.sn-site .sn-choice .showcase .video-title h1{font-size:clamp(30px,8vw,45px)!important;line-height:1.1!important}}
 
 .sn-site .sn-choice .showcase .video-title .expertise-included{max-width:650px;font-size:16px;line-height:1.55;color:#b0c1b6;margin:14px 0 0}
+
+.sn-site .sn-choice .showcase .os-account-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start}.sn-site .sn-choice .showcase .os-account-actions .pill{width:max-content;min-width:0;max-width:100%;gap:16px}.sn-site .sn-choice .showcase .os-account-actions .pill>span:not(.arrow){position:relative;z-index:1}.sn-site .sn-choice .showcase .os-account-actions .os-login-secondary{border-color:#496453}
