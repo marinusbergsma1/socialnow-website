@@ -273,7 +273,12 @@ export default function Bereikt() {
       </Tegel>
       <Tegel kop="Uitgenodigd" breed={4} className="h-bereikt-sec">
         <VinkStippen />
-        <p className="sn-tegel-titel">Om te presenteren bij de Student Entrepreneurs Club.</p>
+        <p className="sn-tegel-titel">Om te presenteren bij de Student Entrepreneurs Club en Talland College.</p>
+        {/* 16 oktober 2026 (Marinus): ook Talland College bevestigd, met het officiële logo (talland.nl). */}
+        <div className="h-bereikt-talks">
+          <span>Student Entrepreneurs Club · Brussel</span>
+          <span className="h-talland"><img src="/images/talland-logo-wit.svg" alt="Talland College" width="93" height="28" /><span>Graphic Design · Hoorn</span></span>
+        </div>
         <p className="sn-tegel-tekst">Na drie dagen op de beurs in Brussel. Dank je, Michelle.</p>
       </Tegel>
       <Tegel kop="kWh Garant" breed={4} className="h-bereikt-kwh">

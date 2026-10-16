@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Proef: de site-explainer v4 (16 okt 2026, ±2:30, uit code; risicostuk met grote namen) staat op de site.
+// Proef: de site-explainer v5 (16 okt 2026, 2:29,6, uit code): v4 plus groter Connect-team, kop "Free software and automation.
+// Pay for expertise." en het Talland-logo bij "Next talks". Het videobestand is precies de webversie van proef09 (sha256).
 // Eisen: 1) de speler laadt de nieuwe versie (cache-versie 20261016-v3) voor video én poster;
 //        2) het videobestand is de nieuwe film (145–155 s, niet v3 van 138 s);
 //        3) webgeschikt: H.264 1280×720, AAC, moov vóór mdat (snel starten), kleiner dan 40 MB;
@@ -7,8 +8,10 @@
 // Gebruik: node scripts/check-explainer-v3.mjs   (rood op main vóór de wijziging, groen erna)
 import fs from "node:fs";
 import { execFileSync } from "node:child_process";
+import crypto from "node:crypto";
 
-const VERSIE = "20261016-v4";
+const VERSIE = "20261016-v5";
+const SHA = "d2b05dd4720239fcbfaf1c9a43734adea2ab5a4f335bfe1e12d12370c5376da4";
 const VIDEO = "public/video/os/socialnow-os-explainer.mp4";
 const POSTER = "public/video/os/socialnow-os-explainer-poster.jpg";
 const fouten = [];
@@ -26,6 +29,7 @@ eis(duur > 145 && duur < 155, `video is de nieuwe film (145–155 s): ${duur.toF
 eis(beeld?.codec_name === "h264" && beeld.width === 1280 && beeld.height === 720, `H.264 1280×720: ${beeld?.codec_name} ${beeld?.width}×${beeld?.height}`);
 eis(geluid?.codec_name === "aac", `AAC-geluid: ${geluid?.codec_name}`);
 eis(mb < 40, `kleiner dan 40 MB: ${mb.toFixed(1)} MB`);
+eis(crypto.createHash("sha256").update(fs.readFileSync(VIDEO)).digest("hex") === SHA, "videobestand is de webversie van proef09 (sha256)");
 const kop = fs.readFileSync(VIDEO).subarray(0, 4096).toString("latin1");
 eis(kop.indexOf("moov") >= 0 && (kop.indexOf("mdat") < 0 || kop.indexOf("moov") < kop.indexOf("mdat")), "moov vóór mdat (faststart)");
 

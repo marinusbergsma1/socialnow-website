@@ -134,3 +134,4 @@
 .sn-site .sn-choice .building-company.uncanny{flex:0 0 auto}
 .sn-site .sn-choice .building-company.uncanny img{filter:none;max-width:none}
 @media(min-width:761px) and (max-width:1000px){.sn-site .sn-choice .building-grid{grid-template-columns:minmax(0,1fr);gap:26px}}
+@media(max-width:760px){.sn-site .sn-choice .showcase>.video-section{order:-1}}  /* 16 okt 2026 (Marinus): op mobiel eerst titel en video */
