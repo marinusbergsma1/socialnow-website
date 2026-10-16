@@ -1,14 +1,14 @@
 #!/usr/bin/env node
-// Proef: de site-explainer v3 (16 okt 2026, 2:18, uit code) staat op de site.
+// Proef: de site-explainer v4 (16 okt 2026, ±2:30, uit code; risicostuk met grote namen) staat op de site.
 // Eisen: 1) de speler laadt de nieuwe versie (cache-versie 20261016-v3) voor video én poster;
-//        2) het videobestand is de nieuwe film (130–145 s, niet de oude van 217 s);
+//        2) het videobestand is de nieuwe film (145–155 s, niet v3 van 138 s);
 //        3) webgeschikt: H.264 1280×720, AAC, moov vóór mdat (snel starten), kleiner dan 40 MB;
 //        4) de poster is 1280×720.
 // Gebruik: node scripts/check-explainer-v3.mjs   (rood op main vóór de wijziging, groen erna)
 import fs from "node:fs";
 import { execFileSync } from "node:child_process";
 
-const VERSIE = "20261016-v3";
+const VERSIE = "20261016-v4";
 const VIDEO = "public/video/os/socialnow-os-explainer.mp4";
 const POSTER = "public/video/os/socialnow-os-explainer-poster.jpg";
 const fouten = [];
@@ -22,7 +22,7 @@ eis(speler.includes(`/video/os/socialnow-os-explainer-poster.jpg?v=${VERSIE}`), 
 const v = probe(VIDEO, ["-show_entries", "format=duration,size:stream=codec_type,codec_name,width,height"]);
 const duur = +v.format.duration, mb = +v.format.size / 1e6;
 const beeld = v.streams.find(s => s.codec_type === "video"), geluid = v.streams.find(s => s.codec_type === "audio");
-eis(duur > 130 && duur < 145, `video is de nieuwe film (130–145 s): ${duur.toFixed(1)} s`);
+eis(duur > 145 && duur < 155, `video is de nieuwe film (145–155 s): ${duur.toFixed(1)} s`);
 eis(beeld?.codec_name === "h264" && beeld.width === 1280 && beeld.height === 720, `H.264 1280×720: ${beeld?.codec_name} ${beeld?.width}×${beeld?.height}`);
 eis(geluid?.codec_name === "aac", `AAC-geluid: ${geluid?.codec_name}`);
 eis(mb < 40, `kleiner dan 40 MB: ${mb.toFixed(1)} MB`);
