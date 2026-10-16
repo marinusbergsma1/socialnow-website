@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // Proef: de hero van de homepage (Marinus 16 okt 2026, avond):
-//   h1 "Meer inzicht in je bedrijf." · eronder "Hogere winst, lagere kosten." · daaronder "Software en automatisering gratis. Je betaalt voor onze expertise."
+//   h1 "Meer inzicht in je bedrijf." · eronder "Hogere winst, lagere kosten." · daaronder "Plug-and-play software die je zelf bezit en experts die je inhuurt."
+//   (en, woorden van Marinus: "Plug and Play software you can own and Experts you can hire.")
 // in alle 10 talen vertaald, en zo in de gebouwde pagina's (prerender) van nl en en.
 // Gebruik: node scripts/check-hero-titel.mjs [--dist]   (rood op main vóór de wijziging, groen erna)
 import fs from "node:fs";
-const H1 = "Meer inzicht in je bedrijf.", PAY = "Hogere winst, lagere kosten.", INC = "Software en automatisering gratis. Je betaalt voor onze expertise.";
-const EN = { [H1]: "More insight into your business.", [PAY]: "Higher profit, lower costs.", [INC]: "Software and automation for free. You pay for our expertise." };
+const H1 = "Meer inzicht in je bedrijf.", PAY = "Hogere winst, lagere kosten.", INC = "Plug-and-play software die je zelf bezit en experts die je inhuurt.";
+const EN = { [H1]: "More insight into your business.", [PAY]: "Higher profit, lower costs.", [INC]: "Plug and Play software you can own and Experts you can hire." };
 const TALEN = ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"];
 const fouten = [];
 const eis = (ok, tekst) => { console.log(`${ok ? "GROEN" : "ROOD "}  ${tekst}`); if (!ok) fouten.push(tekst); };
