@@ -129,3 +129,8 @@
 .sn-site .sn-choice .showcase .video-title .expertise-included{max-width:650px;font-size:16px;line-height:1.55;color:#b0c1b6;margin:14px 0 0}
 
 .sn-site .sn-choice .showcase .os-account-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start}.sn-site .sn-choice .showcase .os-account-actions .pill{width:max-content;min-width:0;max-width:100%;gap:16px}.sn-site .sn-choice .showcase .os-account-actions .pill>span:not(.arrow){position:relative;z-index:1}.sn-site .sn-choice .showcase .os-account-actions .os-login-secondary{border-color:#496453}
+/* 16 okt 2026 (Marinus): Uncanny in de eigen merkkleuren (paars blijft, donkerpaars wit op zwart, zoals hun witte versie)
+   en even groot als INDEXWORLD: hij krimpt niet meer; het bredere Connect-logo ernaast geeft ruimte. Proef: scripts/check-uncanny-logo.mjs */
+.sn-site .sn-choice .building-company.uncanny{flex:0 0 auto}
+.sn-site .sn-choice .building-company.uncanny img{filter:none;max-width:none}
+@media(min-width:761px) and (max-width:1000px){.sn-site .sn-choice .building-grid{grid-template-columns:minmax(0,1fr);gap:26px}}
