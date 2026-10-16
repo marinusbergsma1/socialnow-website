@@ -4,8 +4,8 @@ import "./explainer-player.css";
 
 export default function ExplainerPlayer({ kind = "explainer", compact = false, ctaLabel }: { kind?: "explainer" | "story"; compact?: boolean; ctaLabel?: string }) {
   const story = kind === "story";
-  const movie = story ? "/video/verhaal/story-presentatie.mp4?v=story-short-20261013" : "/video/os/socialnow-os-explainer.mp4?v=20261012-player2";
-  const poster = story ? "/video/verhaal/story-presentatie-poster.jpg" : "/video/os/socialnow-os-explainer-poster.jpg";
+  const movie = story ? "/video/verhaal/story-presentatie.mp4?v=story-short-20261013" : "/video/os/socialnow-os-explainer.mp4?v=20261016-v3";
+  const poster = story ? "/video/verhaal/story-presentatie-poster.jpg" : "/video/os/socialnow-os-explainer-poster.jpg?v=20261016-v3";
   const label = ctaLabel ?? (story ? "Bekijk mijn verhaal" : "Bekijk de explainer");
   const [paused, setPaused] = useState(true);
   const dialog = useRef<HTMLDialogElement>(null);
