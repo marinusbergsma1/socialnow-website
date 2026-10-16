@@ -36,15 +36,10 @@ export function Home() {
       <div className="h-wrap h-hero-content sn-below-new-header">
         <HomeTeam />
       </div>
-      <HomeDevelopmentPartners />
-      <div className="h-wrap h-hero-content sn-below-new-header">
-        <PixelInfrastructure />
-      </div>
     </section>
-    <div className="h-wrap sn-demo-agreement">
-      <p><strong>Tevreden? Dan mag je de demo houden.</strong><br />Anders spreken we een eerlijke prijs af en maken we je website samen perfect.</p>
-    </div>
     <FreeWebsite />
+    <div className="h-wrap sn-platform-foundation"><PixelInfrastructure /></div>
+    <HomeDevelopmentPartners />
     <Bento id="jouw-systeem" label="Jouw data. Jouw connecties." titel={<>Software as a tool.<br /><span>Not a service.</span></>}>
       <Tegel kop="Jouw data. Jouw connecties." breed={6}>
         <h3 className="sn-tegel-titel" translate="no">We are the service layer.</h3>

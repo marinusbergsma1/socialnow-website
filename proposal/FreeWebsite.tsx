@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./free-website.css";
+import { GRATIS_OS_URL } from "./os-entry";
 import { webShowcaseProjects } from "../data/projects";
 
 export const ONBOARDING_URL = "https://website.socialnow.nl";
@@ -72,12 +73,12 @@ function WebsiteExamples() {
 export default function FreeWebsite() {
   return <section id="free-website" className="sn-free-website" aria-labelledby="free-website-titel">
     <div className="h-wrap sn-fw-binnen">
-      <div className="sn-fw-kop">
-        <p className="sn-fw-label">Twee gratis starts voor je bedrijf</p>
-        <h2 id="free-website-titel">Boekhouding geregeld.<br /><span>Je nieuwe website in beeld.</span></h2>
-        <p className="sn-fw-intro">Start gratis met boekhouding in Odoo. Laat ons daarnaast een gratis demo van jouw nieuwe website maken.</p>
-      </div>
       <WebsiteExamples />
+      <div className="sn-fw-kop">
+        <p className="sn-fw-label">Drie manieren om te beginnen</p>
+        <h2 id="free-website-titel">Je bedrijf.<br /><span>Goed geregeld.</span></h2>
+        <p className="sn-fw-intro">Een gratis websitedemo van ons team, boekhouding via Odoo en social media via Zernio. Kies waar je begint.</p>
+      </div>
       <div className="sn-fw-offers">
         <article className="sn-fw-accounting" aria-labelledby="free-accounting-title">
           <div className="sn-fw-brand"><img src="/images/partners/odoo.svg" alt="Odoo" width="130" height="51" /></div>
@@ -92,6 +93,14 @@ export default function FreeWebsite() {
           <div className="sn-fw-tile-bottom"><a className="sn-fw-button" href="https://www.odoo.com/app/accounting" target="_blank" rel="noopener noreferrer"><span>Start gratis met boekhouding</span><b aria-hidden="true">↗</b></a>
           <p className="sn-fw-fine">Blijft gratis zolang je alleen de Boekhouding-app gebruikt binnen One App Free op Odoo Online. Extra apps of maatwerk kunnen betaald zijn. <a href="https://www.odoo.com/pricing" target="_blank" rel="noopener noreferrer">Bekijk de voorwaarden</a></p></div>
         </article>
+        <article className="sn-fw-zernio" aria-labelledby="zernio-start-title">
+          <div className="sn-fw-brand"><img src="/images/partners/zernio.svg" alt="Zernio" width="220" height="51" /></div>
+          <p className="sn-fw-offer-label">Social media · via Zernio</p>
+          <h3 id="zernio-start-title">Je socials.<br />Eén agenda.</h3>
+          <p>Plan en publiceer je content via Zernio. Houd je kanalen en publicaties overzichtelijk bij elkaar.</p>
+          <div className="sn-fw-ledger"><p>Van idee naar publicatie</p><ul><li><span>Content voorbereiden</span><b aria-hidden="true">✓</b></li><li><span>Publicaties plannen</span><b aria-hidden="true">✓</b></li><li><span>Kanalen verbinden</span><b aria-hidden="true">✓</b></li></ul></div>
+          <div className="sn-fw-tile-bottom"><a className="sn-fw-button" href={GRATIS_OS_URL}><span>Open je contentagenda</span><b aria-hidden="true">↗</b></a><p className="sn-fw-fine"><a href="https://zernio.com/social-media-api" target="_blank" rel="noopener noreferrer">Meer over Zernio</a></p></div>
+        </article>
         <article className="sn-fw-demo" aria-labelledby="free-website-route-demo">
           <div className="sn-fw-brand"><img src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="220" height="34" /></div>
           <p className="sn-fw-offer-label">Gratis websitedemo · door ons team</p>
@@ -102,7 +111,7 @@ export default function FreeWebsite() {
           <p className="sn-fw-fine">De demo is gratis. Daarna beslis je of we verder bouwen.</p></div>
         </article>
       </div>
-      <p className="sn-fw-notice">Odoo verzorgt je gratis boekhouding. De websitedemo maken wij voor je. Je hoeft daarvoor geen extra Website-app aan je Odoo-account toe te voegen.</p>
+      <p className="sn-fw-notice">Odoo voor je boekhouding, Zernio voor je socials en ons team voor je website. Je OS brengt de onderdelen samen.</p>
     </div>
   </section>;
 }

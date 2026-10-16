@@ -57,3 +57,33 @@
 .sn-site .sn-web-preview iframe{display:block;border:0;width:1280px;height:800px;max-width:none;transform:scale(var(--preview-scale,1));transform-origin:top left;background:#fff;pointer-events:none}
 .sn-site .sn-web-tile.is-active .sn-web-preview iframe{pointer-events:auto}
 .sn-site .sn-web-tile.is-active .sn-web-preview{cursor:auto}
+
+/* One offer row, using the same spacing and corners as the other home tiles. */
+.sn-site .sn-free-website{margin-top:0;padding-top:64px;padding-bottom:40px}
+.sn-site .sn-fw-binnen{gap:40px}
+.sn-site .sn-fw-examples{margin:0 0 24px}
+:root .sn-site .sn-free-website h2{font-size:clamp(36px,4vw,54px)!important}
+.sn-site .sn-fw-offers{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.sn-site .sn-fw-accounting,.sn-site .sn-fw-zernio,.sn-site .sn-fw-demo{display:flex;flex-direction:column;min-width:0;min-height:640px;padding:30px;border:1px solid #2b3d31;border-radius:22px;box-shadow:none}
+.sn-site .sn-fw-zernio{background:#101914;color:#e4ece8}
+.sn-site .sn-fw-zernio>p:not(.sn-fw-offer-label){color:#afc4b6;font-size:16px;line-height:1.6;margin:16px 0 0}
+.sn-site .sn-fw-brand{margin-bottom:24px}
+:root .sn-site .sn-fw-offers h3{font-size:clamp(27px,2.2vw,34px)!important}
+.sn-site .sn-fw-ledger{padding:18px;margin:24px 0;border-radius:14px}
+.sn-site .sn-fw-zernio .sn-fw-ledger{background:#18271f;border-color:#344c3d}
+.sn-site .sn-fw-zernio .sn-fw-ledger :is(p,li){color:#d0e1d7}
+.sn-site .sn-fw-zernio .sn-fw-ledger p{border-color:#344c3d}
+.sn-site .sn-fw-zernio .sn-fw-ledger b{color:#25d366}
+.sn-site .sn-fw-tile-bottom{min-height:0;padding-top:28px}
+:root .sn-site .sn-fw-button{font-size:15px;box-shadow:none;border-radius:12px}
+.sn-site .sn-fw-shortsteps li{padding:14px 0 14px 30px}
+.sn-site .sn-fw-shortsteps li:before{top:14px}
+.sn-site .sn-fw-shortsteps strong{font-size:16px}
+.sn-site .sn-fw-shortsteps span{font-size:14px}
+@media(max-width:1050px){.sn-site .sn-fw-offers{grid-template-columns:1fr}.sn-site .sn-fw-accounting,.sn-site .sn-fw-zernio,.sn-site .sn-fw-demo{min-height:0}.sn-site .sn-fw-tile-bottom{margin-top:16px}}
+@media(max-width:650px){.sn-site .sn-free-website{padding-top:40px;padding-bottom:24px}.sn-site .sn-fw-binnen{gap:28px}.sn-site .sn-fw-accounting,.sn-site .sn-fw-zernio,.sn-site .sn-fw-demo{padding:24px}.sn-site .sn-fw-brand{margin-bottom:20px}}
+
+@media(max-width:1050px){.sn-site .sn-fw-offers{grid-auto-rows:auto}}
+.sn-site .sn-free-website,.sn-site .sn-infrastructure{font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0}
+.sn-site .sn-fw-offers .sn-fw-fine{min-height:64px}
+@media(max-width:1050px){.sn-site .sn-fw-offers .sn-fw-fine{min-height:0}}
