@@ -87,3 +87,8 @@
 .sn-site .sn-free-website,.sn-site .sn-infrastructure{font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0}
 .sn-site .sn-fw-offers .sn-fw-fine{min-height:64px}
 @media(max-width:1050px){.sn-site .sn-fw-offers .sn-fw-fine{min-height:0}}
+
+.sn-site .sn-fw-showcase-head{align-items:center}
+.sn-site .sn-fw-showcase-head>div{max-width:760px}
+.sn-site .sn-fw-showcase-head>p{font-size:17px;line-height:1.55;max-width:400px}
+@media(max-width:850px){.sn-site .sn-fw-showcase-head{align-items:start}.sn-site .sn-fw-showcase-head>p{max-width:600px}}

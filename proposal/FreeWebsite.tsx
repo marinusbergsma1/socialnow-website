@@ -30,7 +30,7 @@ function WebsiteExamples() {
     return () => { observer.disconnect(); resize.disconnect(); };
   }, []);
   return <div className="sn-fw-examples" ref={region} role="region" aria-label="Live websitevoorbeelden" aria-roledescription="carrousel">
-    <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Ons werk · live websites</p><h3>Bekijk wat we maken.</h3></div><p>Eerder werk, ter inspiratie voor jouw demo.</p></div>
+    <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Gratis websitedemo · persoonlijk gemaakt</p><h3>Wij beginnen altijd met een gratis websitedemo.</h3></div><p>Persoonlijk gemaakt voor jouw bedrijf. Geen AI-slop. Bekijk hieronder voorbeelden van onze websites.</p></div>
     <div className="sn-web-deck" tabIndex={0} aria-label="Websitevoorbeelden. Gebruik de pijltjestoetsen om te bladeren."
       onKeyDown={event => { if (event.key === "ArrowRight" || event.key === "ArrowLeft") { event.preventDefault(); choose(index + (event.key === "ArrowRight" ? 1 : -1)); } }}
       onPointerDown={event => { pointer.current = { x: event.clientX, y: event.clientY }; dragged.current = false; }}
