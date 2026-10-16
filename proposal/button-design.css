@@ -125,3 +125,16 @@ html:root .sn-site .sn-pill.h-dock-demo { margin: 12px; width: calc(100% - 24px)
   html:root .sn-site .sn-pill :is(.h-button-icon, .h-dock-arrow),
   html:root .sn-site .sn-pill > svg:last-child { transition: none !important; }
 }
+/* 16 okt 2026: "Inloggen" in de kopbalk werd op een telefoon in 17–64 px geperst (alleen een stukje tekst zichtbaar).
+   Op smalle schermen: knop krimpt niet, zonder pijl; het logo geeft de ruimte. Proef: scripts/check-inloggen-mobiel.mjs */
+@media(max-width: 480px) {
+  html:root .sn-site .h-nav .h-brand { flex: 0 1 auto; min-width: 0; }
+  html:root .sn-site .h-nav .h-brand img { width: 118px; height: auto; }
+  html:root .sn-site .sn-pill.h-header-claim { flex: 0 0 auto; padding: 0 12px !important; gap: 0; }
+  html:root .sn-site .sn-pill.h-header-claim > svg { display: none !important; }
+}
+@media(max-width: 360px) {
+  html:root .sn-site .h-nav { gap: 6px; }
+  html:root .sn-site .h-nav .h-brand img { width: 92px; }
+  html:root .sn-site .sn-pill.h-header-claim { padding: 0 10px !important; }
+}
