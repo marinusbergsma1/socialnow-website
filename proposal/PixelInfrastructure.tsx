@@ -13,7 +13,7 @@ export default function PixelInfrastructure() { return <section className="sn-in
     <article><ShieldCheck size={22} aria-hidden="true" /><div><h3>Veiligheid. Zwart op wit.</h3><p>Versleutelde sleutels, toegang per werkruimte en jouw akkoord voor acties. Lees uitgebreid hoe wij je data beschermen en wat jouw eigen rol is.</p><a href={DATA_DOCUMENT} download><Download size={17} aria-hidden="true" />Uitgebreide documentatie (PDF · NL)</a><Link to="/veiligheid">Alles over veiligheid <ArrowUpRight size={16} aria-hidden="true" /></Link></div></article>
   </div>
   <div className="sn-infra-integrations">
-  <div className="sn-infra-strip"><div className="sn-infra-strip-head"><div><h3>ERP &amp; CRM</h3><p>De volgende stap: koppelen aan jouw bedrijfssoftware.</p></div><span>Mogelijke koppelingen</span></div><Marks items={next} /></div>
+  <div className="sn-infra-strip"><div className="sn-infra-strip-head"><div><h3>ERP &amp; CRM</h3><p>Meer automatisering en overzicht in al je bedrijfssoftware. Maak je eigen koppelingen. Je data blijft van jou.</p></div><span>Mogelijke koppelingen</span></div><Marks items={next} /></div>
   <div className="sn-infra-strip"><div className="sn-infra-strip-head"><h3>Ons netwerk groeit.</h3><span>In gesprek</span></div><Marks items={talks} /><p className="sn-infra-note">Verkennende gesprekken · Geen bevestigde partnerschappen. Ook in gesprek met TrainMore.</p></div>
   </div>
 </section>; }

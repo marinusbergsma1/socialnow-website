@@ -100,3 +100,21 @@
 @media(prefers-reduced-motion:reduce){.sn-site .sn-web-preview iframe{transition:none}}
 .sn-site .sn-web-tile.is-active .sn-web-preview iframe{pointer-events:none}
 .sn-site .sn-web-tile.is-active .sn-web-preview iframe[data-ready=true]{pointer-events:auto}
+
+/* Studio inside the SocialNow tile: a compact workspace preview after the free website demo. */
+.sn-site .sn-studio-preview{margin:24px 0 0;border:1px solid #25d36638;border-radius:14px;background:#000;overflow:hidden}
+.sn-site .sn-studio-bar{display:flex;align-items:center;gap:12px;height:40px;padding:0 14px;background:#0b1510;border-bottom:1px solid #ffffff12;font-size:13px;color:#becfc5}
+.sn-site .sn-studio-bar b{color:#fff;font-weight:700}.sn-site .sn-studio-bar>span:last-child{margin-left:auto;color:#25d366;font-size:12px;font-weight:700}
+:root .sn-site .sn-fw-demo .sn-studio-brand{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:0;padding:12px 14px;font-size:13px!important;line-height:1.4!important;color:#afc4b6}
+.sn-site .sn-studio-brand span{padding:3px 8px;border:1px solid #2b3d31;border-radius:999px;color:#e4ece8;font-size:12px}
+.sn-site .sn-studio-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:0 14px}
+.sn-site .sn-studio-grid figure{margin:0;min-width:0}.sn-site .sn-studio-grid img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:8px;background:#101914}
+.sn-site .sn-studio-grid figcaption{margin-top:6px;font-size:12px;color:#afc4b6;text-align:center}
+.sn-site .sn-studio-flow{display:flex;justify-content:space-between;gap:8px;margin:12px 14px 0;padding:11px 0 13px;border-top:1px solid #ffffff12;font-size:12px;color:#e4ece8}
+.sn-site .sn-studio-flow span{display:flex;align-items:center;gap:6px}.sn-site .sn-studio-flow span:before{content:"";width:6px;height:6px;border-radius:50%;background:#25d366}
+:root .sn-site .sn-fw-studio-button{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;margin-top:12px;padding:15px 20px;border:1px solid #25d366;border-radius:12px;background:transparent;color:#25d366!important;font-size:15px;font-weight:700;line-height:1.3;text-decoration:none}
+:root .sn-site .sn-fw-studio-button :is(span,b){color:#25d366!important}.sn-site .sn-fw-studio-button b{font-size:22px;font-weight:400}.sn-site .sn-fw-studio-button:hover{background:#25d36614}
+.sn-site .sn-studio-brand small{flex-basis:100%;font-size:12px;color:#afc4b6}
+.sn-site .sn-studio-preview :is(figcaption,span,small,b){font-family:inherit}
+
+.sn-site .sn-fw-offers{align-items:stretch}.sn-site .sn-fw-offers .sn-fw-start-note{font-size:14px;line-height:1.5;margin:0 0 12px;font-weight:600}.sn-site .sn-fw-offers .sn-fw-brand{min-height:51px;display:flex;align-items:center}.sn-site .sn-fw-demo .sn-fw-brand{background:#05130b}.sn-site .sn-fw-offers .sn-fw-fine{min-height:0}
