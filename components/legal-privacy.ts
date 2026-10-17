@@ -79,7 +79,7 @@ export const privacyNl: LegalDoc = {
       "bullets": [
         [
           "Google Firebase (Google Ireland Ltd): inloggen met Google, e-mailcode of inloglink; accountgegevens",
-          "Vercel Inc.: hosting van het OS en de API, en opslag van je werkruimte (Vercel Blob, regio EU waar mogelijk)",
+          "Vercel Inc.: hosting van socialnow.nl, het OS en de API, opslag van je werkruimte (Vercel Blob, regio EU waar mogelijk), en bezoekersstatistiek van socialnow.nl (Vercel Web Analytics, zonder cookies)",
           "Hostinger: het versturen van e-mail vanaf info@socialnow.nl, zoals inlogcodes, uitnodigingen en meldingen",
           "Stripe Payments Europe Ltd: betalingen voor tegoed; Stripe is voor kaartgegevens zelfstandig verantwoordelijke",
           "GitHub Inc.: hosting van socialnow.nl (GitHub Pages)",
@@ -122,7 +122,7 @@ export const privacyNl: LegalDoc = {
     {
       "title": "9. Cookies en lokale opslag",
       "paragraphs": [
-        "Socialnow.nl plaatst geen trackingcookies en gebruikt geen analytics. Wij onthouden in je browser (localStorage) alleen dat je de melding over de voorwaarden hebt gezien, en in cookies op socialnow.nl welke taal en welk land je koos en of je toestemming gaf voor meten in het OS.",
+        "Socialnow.nl plaatst geen trackingcookies. Wij tellen bezoeken met Vercel Web Analytics: welke pagina, waarvandaan, welk land en welk soort apparaat. Dat gebeurt zonder cookies en zonder iets in je browser op te slaan; je IP-adres wordt niet bewaard en een bezoeker is niet over meerdere dagen te volgen. Grondslag is ons gerechtvaardigd belang om te zien hoe de site gebruikt wordt. Wij onthouden in je browser (localStorage) alleen dat je de melding over de voorwaarden hebt gezien, en in cookies op socialnow.nl welke taal en welk land je koos en of je toestemming gaf voor meten in het OS.",
         "SocialNow OS gebruikt functionele cookies en opslag, en meet alleen gebruik als jij daar toestemming voor geeft:"
       ],
       "bullets": [
@@ -310,7 +310,7 @@ export const privacyEn: LegalDoc = {
       "bullets": [
         [
           "Google Firebase (Google Ireland Ltd): signing in with Google, e-mail code or sign-in link; account data",
-          "Vercel Inc.: hosting of the OS and the API, and storage of your workspace (Vercel Blob, EU region where possible)",
+          "Vercel Inc.: hosting of socialnow.nl, the OS and the API, storage of your workspace (Vercel Blob, EU region where possible), and visitor statistics for socialnow.nl (Vercel Web Analytics, without cookies)",
           "Hostinger: sending e-mail from info@socialnow.nl, such as sign-in codes, invitations and notifications",
           "Stripe Payments Europe Ltd: payments for credit; for card details Stripe is an independent controller",
           "GitHub Inc.: hosting of socialnow.nl (GitHub Pages)",
@@ -353,7 +353,7 @@ export const privacyEn: LegalDoc = {
     {
       "title": "9. Cookies and local storage",
       "paragraphs": [
-        "Socialnow.nl sets no tracking cookies and uses no analytics. In your browser (localStorage) we only remember that you have seen the notice about the terms, and in cookies on socialnow.nl which language and country you chose and whether you allowed measurement in the OS.",
+        "Socialnow.nl sets no tracking cookies. We count visits with Vercel Web Analytics: which page, from where, which country and which kind of device. This happens without cookies and without storing anything in your browser; your IP address is not kept and a visitor cannot be followed across days. The legal basis is our legitimate interest in seeing how the site is used. In your browser (localStorage) we only remember that you have seen the notice about the terms, and in cookies on socialnow.nl which language and country you chose and whether you allowed measurement in the OS.",
         "SocialNow OS uses functional cookies and storage, and measures usage only if you allow it:"
       ],
       "bullets": [
