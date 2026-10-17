@@ -15,7 +15,9 @@ import "./wereldkaart.css";
 import React from "react";
 import { Link } from "react-router-dom";
 import { OnderDeVouw, later } from "./later";
-import HomeHeader, { HomeDevelopmentPartners, HomeConnectBand } from "./HomeHeader";
+import { HomeDevelopmentPartners, HomeConnectBand } from "./HomeHeader";
+// 17 oktober 2026: A/B-test van de header (A gratis OS, B Custom OS); uitleg in server/ab.mjs.
+import HomeHeaderAB from "./HomeHeaderAB";
 import FreeWebsite from "./FreeWebsite";
 import { Bento, Tegel } from "./Bento";
 import { MiloPortrait, TextLink } from "./ui";
@@ -31,7 +33,7 @@ export function Home() {
   useLanguage();
   return <div className="sn-simple-home">
     <section className="h-hero sn-approved-hero" id="home">
-      <HomeHeader />
+      <HomeHeaderAB />
       <HomeConnectBand />
       <div className="h-wrap h-hero-content sn-below-new-header">
         <HomeTeam />
