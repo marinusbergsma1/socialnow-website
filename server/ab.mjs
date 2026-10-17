@@ -52,6 +52,8 @@ export function kiesVariant({ id, gewichtB, utm = "", taal = "nl" }) {
   // De belofte van de advertentie moet kloppen met wat iemand ziet.
   if (/custom/i.test(utm)) return { variant: "b", reden: "campagne" };
   if (/gratis|free/i.test(utm)) return { variant: "a", reden: "campagne" };
+  // Zonder PostHog-sleutel valt er niets te meten; dan staat de test uit en ziet iedereen A.
+  if (!/^phc_[A-Za-z0-9]{20,80}$/.test(process.env.POSTHOG_KEY || "")) return { variant: "a", reden: "uit" };
   const u = parseInt(id.slice(0, 8), 16) / 0x100000000;
   return { variant: u < gewichtB ? "b" : "a", reden: "test" };
 }
