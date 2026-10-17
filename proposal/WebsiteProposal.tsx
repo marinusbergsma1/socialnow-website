@@ -58,6 +58,10 @@ const JuridischPage = later(() => import("../components/JuridischPage").then((m)
 // Staat uit tot er een script op de site komt dat toestemming nodig heeft; de afweging staat
 // in het bestand zelf.
 import Cookiebot from "./Cookiebot";
+// 17 oktober 2026 (Marinus): "zodat ik bezoekers zie". Vercel Web Analytics telt bezoeken zonder
+// cookies en zonder iets in de browser op te slaan, dus er hoeft geen toestemming voor gevraagd te
+// worden. Het script komt van socialnow.nl zelf (/_vercel/insights), de CSP hoeft niet te wijzigen.
+import { Analytics } from "@vercel/analytics/react";
 
 const nav = [
   ["/het-os", "Het OS"],
@@ -333,6 +337,7 @@ function ProposalShell() {
       <OnderDeVouw ruimte={false}><BrandFooter /></OnderDeVouw>
       {/* 27 september 2026: de onboarding-popup (ConsentPopup) is op verzoek van Marinus van de site gehaald. */}
       <Cookiebot />
+      <Analytics />
       {/* 11 oktober 2026 (Marinus): "Coockie pop up weg". Geen trackingcookies, dus geen melding nodig; de cookieverklaring staat in de voettekst. */}
     </div>
   );

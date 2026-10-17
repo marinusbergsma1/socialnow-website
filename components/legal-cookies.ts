@@ -27,7 +27,7 @@ export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
       {
         "title": "Kort",
         "paragraphs": [
-          "Op socialnow.nl en in SocialNow OS gebruiken we geen gedragstracking, gebruiksanalytics of schermopnames. Functionele opslag onthoudt je login en voorkeuren. Feedback verzamelen we via persoonlijk contact."
+          "Op socialnow.nl en in SocialNow OS gebruiken we geen gedragstracking of schermopnames. Op socialnow.nl tellen we bezoeken met Vercel Web Analytics; dat werkt zonder cookies en slaat niets op in je browser. Functionele opslag onthoudt je login en voorkeuren. Feedback verzamelen we via persoonlijk contact."
         ]
       },
       {
@@ -97,7 +97,7 @@ export const cookies: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: 
       {
         "title": "In short",
         "paragraphs": [
-          "On socialnow.nl and in SocialNow OS we do not use behavioural tracking, usage analytics or session recordings. Functional storage remembers your sign-in and preferences. Feedback comes from personal contact."
+          "On socialnow.nl and in SocialNow OS we do not use behavioural tracking or session recordings. On socialnow.nl we count visits with Vercel Web Analytics; it works without cookies and stores nothing in your browser. Functional storage remembers your sign-in and preferences. Feedback comes from personal contact."
         ]
       },
       {
