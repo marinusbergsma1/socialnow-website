@@ -53,11 +53,10 @@ try {
       await open("/prijzen");
       await fits();
       await page.screenshot({ path: path.join(output, `${language}-prijzen-${width}.png`) });
-      // 18 oktober 2026: het blok "Daarna €20 per maand" is weg; de call voor een hulppakket staat in de drie lagen.
-      await page.locator('#prijs-lagen a[href*="onderwerp"]').click();
-      await page.waitForLoadState("networkidle");
-      assert.equal(new URL(page.url()).searchParams.get("onderwerp"), "Plan een call: hulppakket");
-      assert.ok(await page.locator('input[name="subject"]').inputValue());
+      // 18 oktober 2026: het blok "Daarna €20 per maand" is weg; "Plan een call" in de drie lagen opent het boekingspaneel.
+      await page.locator('#prijs-lagen button[aria-haspopup="dialog"]').click();
+      await page.locator('dialog.sn-call').waitFor({ state: "visible" });
+      await page.keyboard.press("Escape");
       if (width === 390) {
         const toggle = page.locator(".h-menu-toggle");
         const box = await toggle.boundingBox();

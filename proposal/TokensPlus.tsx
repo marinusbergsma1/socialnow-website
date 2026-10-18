@@ -2,6 +2,7 @@ import React from "react";
 import { Bento, Tegel } from "./Bento";
 import { Action } from "./ui";
 import { GRATIS_OS_URL } from "./os-entry";
+import { PlanCallKnop } from "./PlanCall";
 import "./tokens-plus.css";
 
 // 18 oktober 2026 (Marinus): "tokens kopen moet een groter onderdeel zijn". Dezelfde dag koos hij in de sessie
@@ -51,8 +52,6 @@ const VIDEO = [
   { wat: "Seedance 2.5", maat: "Video van 5 seconden met geluid", tokens: "260 tokens" },
 ];
 
-// De integrator koppelt dit bij het samenvoegen aan de boekingsroute van de sessie "Plan a call".
-const PLAN_CALL = `/contact?onderwerp=${encodeURIComponent("Plan een call: hulppakket")}`;
 
 function Regels({ items }: { items: string[] }) {
   return (
@@ -118,7 +117,7 @@ export function PrijsLagen() {
         <p className="tp-start">Bij elk pakket: je eigen veilige management &amp; operations systeem en een gratis website.</p>
         <Regels items={["Custom OS, gebouwd rond je bedrijf", "Gratis website", "Connect: echte experts per pakket", "Persoonlijke call met uitleg van je systeem"]} />
         <div className="sn-tegel-onder">
-          <Action to={PLAN_CALL}>Plan een call</Action>
+          <PlanCallKnop className="sn-pill sn-btn3d h-button" label="Plan een call" />
           <a className="tp-link" href="#hulppakketten">Bekijk de pakketten</a>
         </div>
       </Tegel>
