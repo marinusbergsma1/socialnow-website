@@ -123,7 +123,7 @@ export default function PlanCallPaneel({ voor, sluit }: { voor: CallVoorinvullin
   return <dialog ref={dialoog} className="sn-call" aria-labelledby="sn-call-titel" onClose={sluit} onClick={(e) => { if (e.target === dialoog.current) dialoog.current.close(); }}>
     <form className="sn-call-vel" onSubmit={verder} noValidate>
       <header className="sn-call-kop">
-        <p className="sn-call-eyebrow">Hulppakket vanaf €3.000 p/m</p>
+        <p className="sn-call-eyebrow">Hulppakket met custom OS</p>
         <button type="button" className="sn-call-sluit" aria-label="Sluiten" onClick={() => dialoog.current?.close()}><X size={22} aria-hidden="true" /></button>
         <h2 id="sn-call-titel">Plan een call voor je custom OS.</h2>
         {stap < 3 && <div className="sn-call-stappen" aria-hidden="true">{[0, 1, 2].map((i) => <span key={i} className={i <= stap ? "aan" : ""} />)}</div>}
