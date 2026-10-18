@@ -1,0 +1,14 @@
+/* 18 oktober 2026: de opening van /projecten (ResultatenHero.tsx). Eén kop, de cijfers als blikvanger in mono zoals de
+   resultaattegels op de homepage (bereikt.css), de merkenbalk en dan de cases, zonder groot gat ertussen. */
+.sn-site .sn-resultaten-hero .h-page-heading.sn-resultaten-kop { padding-bottom: 0; }
+.sn-site .sn-resultaten-hero .sn-bento.sn-resultaten-cijfers { padding-top: clamp(28px, 3.4vw, 48px); }
+.sn-site .sn-resultaat-groot .sn-resultaat-cijfer { display: grid; gap: 10px; margin: 6px 0 18px; }
+.sn-site .sn-resultaat-groot .sn-resultaat-cijfer b { font-family: var(--c-mono, ui-monospace, Menlo, monospace); font-size: clamp(56px, 6.4vw, 104px); font-weight: 500; letter-spacing: 0; line-height: .95; color: #fff; }
+.sn-site .sn-resultaat-groot .sn-resultaat-cijfer span { font-family: var(--c-mono, ui-monospace, Menlo, monospace); font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--c-accent, #25d366); }
+.sn-site .sn-resultaten-hero > .h-clients { padding-top: clamp(28px, 3.4vw, 44px); }
+/* De cases volgen direct: hun eigen kop is weg, dus ook de grote ruimte erboven. */
+.sn-site .sn-resultaten-hero + .h-featured-work { padding-top: clamp(40px, 5vw, 72px); }
+@media (max-width: 700px) {
+  .sn-site .sn-resultaat-groot .sn-resultaat-cijfer { margin-bottom: 14px; }
+  .sn-site .sn-resultaat-groot .sn-resultaat-cijfer b { font-size: clamp(52px, 16vw, 72px); }
+}
