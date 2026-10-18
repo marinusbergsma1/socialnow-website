@@ -1060,7 +1060,7 @@
   "Meta + Google": "Meta + Google",
   "Meta Ads opgezet en beheerd": "Meta Ads uppsatt och förvaltat",
   "Milo-agents op je eigen data": "Milo-agenter på din egen data",
-  "Op aanvraag": "På förfrågan",
+  "Op aanvraag": "På begäran",
   "Overal": "Överallt",
   "Pakket Compleet": "Paket Komplett",
   "Pakket Content": "Paket Content",
@@ -2364,5 +2364,14 @@
   "De app heeft een open API. Wij bouwen de koppeling op maat.": "Appen har ett öppet API. Vi bygger kopplingen skräddarsytt.",
   "Mis je een app?": "Saknar du en app?",
   "Heeft je software een API, dan maken we hem zichtbaar in je OS.": "Har din programvara ett API gör vi den synlig i ditt OS.",
-  "apps werken nu in het OS. Logo's zijn merken van hun eigenaars.": "appar fungerar redan i OS:et. Logotyperna är varumärken som tillhör sina ägare."
+  "apps werken nu in het OS. Logo's zijn merken van hun eigenaars.": "appar fungerar redan i OS:et. Logotyperna är varumärken som tillhör sina ägare.",
+  "De koppeling bestaat. Wij zetten hem voor je aan.": "Kopplingen finns redan. Vi slår på den åt dig.",
+  "Vraagt de leverancier eerst goedkeuring of een abonnement, dan zie je dat bij de app.": "Kräver leverantören först godkännande eller ett abonnemang ser du det vid appen.",
+  "Vraagt eerst goedkeuring van het platform.": "Kräver först godkännande av plattformen.",
+  "Vraagt aanmelding als ontwikkelaar of partner bij de leverancier.": "Kräver registrering som utvecklare eller partner hos leverantören.",
+  "Vraagt een betaald abonnement of API-pakket bij de leverancier.": "Kräver ett betalt abonnemang eller API-paket hos leverantören.",
+  "Banken koppelen alleen via een erkende PSD2-aanbieder.": "Banker kopplas bara via en godkänd PSD2-leverantör.",
+  "Vraagt het Odoo Custom-abonnement.": "Kräver Odoo Custom-abonnemanget.",
+  "Via je eigen Zernio-account.": "Via ditt eget Zernio-konto.",
+  "Werkt nu. Je koppelt het zelf in je OS, of het zit al in Studio.": "Fungerar redan nu. Du kopplar in det själv i ditt OS, eller så finns det redan i Studio."
 }
