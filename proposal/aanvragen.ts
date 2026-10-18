@@ -43,3 +43,18 @@ export function aanvraagWhatsApp(soort: AanvraagSoort, taal: Language, gegevens:
   if (heeftWhatsApp) return `https://wa.me/${WHATSAPP_NUMMER}?text=${encodeURIComponent(bericht)}`;
   return `mailto:${CONTACT_MAIL}?subject=${encodeURIComponent(woorden[taal][soort])}&body=${encodeURIComponent(bericht)}`;
 }
+
+// 18 oktober 2026 (Marinus): "Plan een call voor custom OS" in de hero, met een eigen boekingspaneel (PlanCallPaneel.tsx).
+// Vul hier de boekingspagina van de Google Agenda in, dezelfde als APP_AFSPRAAK_URL in het OS (api/_team-socialnow.js).
+// Bij voorkeur de volledige link https://calendar.google.com/calendar/appointments/schedules/...: die toont het paneel
+// direct als agenda met vrije momenten, en Google stuurt zelf de bevestiging en de uitnodiging. Een korte link
+// (calendar.app.google/...) of een andere https-agenda opent in een nieuw venster. Leeg: de bezoeker kiest een
+// voorkeursmoment en de aanvraag gaat als ingevuld concept per e-mail (of WhatsApp) naar Steef, net als elke andere aanvraag.
+export const AGENDA_LINK = "";
+export const heeftAgenda = /^https:\/\//.test(AGENDA_LINK);
+export const agendaInbedden = (link = AGENDA_LINK) =>
+  /^https:\/\/calendar\.google\.com\/calendar\/appointments\//.test(link) ? `${link}${link.includes("?") ? "&" : "?"}gv=true` : "";
+export const conceptLink = (onderwerp: string, bericht: string) =>
+  heeftWhatsApp
+    ? `https://wa.me/${WHATSAPP_NUMMER}?text=${encodeURIComponent(`${onderwerp}\n\n${bericht}`)}`
+    : `mailto:${CONTACT_MAIL}?subject=${encodeURIComponent(onderwerp)}&body=${encodeURIComponent(bericht)}`;

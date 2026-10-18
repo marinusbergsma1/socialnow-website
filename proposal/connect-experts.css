@@ -1,0 +1,88 @@
+/* 18 oktober 2026: De experts van Connect als "stel je team samen" in de gedeelde tegeltaal (bento.css).
+   Connect houdt zijn eigen blauw (#00a3e0) als accent; de groene stip boven elke tegel blijft. */
+
+.sn-site .sn-cx { --cx-blauw: #00a3e0; --cx-blauw-zacht: #7fd3f5; --cx-rand: rgba(255, 255, 255, .1); }
+.sn-site .sn-cx .sn-bento-kop > h2 > span { color: var(--cx-blauw-zacht); }
+
+/* Kies wat je nodig hebt: acht vakgebieden als schakelaars. */
+.sn-site .sn-cx-vakken { display: grid; gap: 8px; }
+.sn-site .sn-cx-vak { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto 26px; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 8px 14px 8px 12px; border: 1px solid var(--cx-rand); border-radius: 14px; background: rgba(255, 255, 255, .02); color: #dfe6ec; font: inherit; font-size: 15.5px; font-weight: 600; text-align: left; cursor: pointer; transition: background-color .25s ease, border-color .25s ease, color .25s ease; }
+.sn-site .sn-cx-vak:hover { border-color: rgba(255, 255, 255, .24); }
+.sn-site .sn-cx-vak[aria-pressed="true"] { background: rgba(0, 163, 224, .1); border-color: rgba(0, 163, 224, .55); color: #fff; }
+.sn-site .sn-cx-vink { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, .3); color: #04121a; transition: background-color .25s ease, border-color .25s ease; }
+.sn-site .sn-cx-vak[aria-pressed="true"] .sn-cx-vink { background: var(--cx-blauw); border-color: var(--cx-blauw); }
+.sn-site .sn-cx-vaknaam { min-width: 0; overflow-wrap: anywhere; }
+.sn-site .sn-cx-aantal { justify-self: end; font-size: 13px; font-weight: 600; color: #8996a2; font-variant-numeric: tabular-nums; }
+.sn-site .sn-cx-snel { margin-top: auto; padding-top: 4px; }
+.sn-site .sn-cx-snel button { padding: 6px 0; border: 0; background: none; color: #aeb8c1; font: inherit; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.sn-site .sn-cx-snel button:hover { color: #fff; }
+
+/* Gestapelde gezichtjes: in de schakelaars, bij de eigen bedrijven. */
+.sn-site .sn-cx-stapel { display: flex; align-items: center; }
+.sn-site .sn-cx-stapel > img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; object-position: center 25%; border: 2px solid #0b0f12; background: #1b232a; }
+.sn-site .sn-cx-stapel > img + img { margin-left: -9px; }
+
+/* Jouw team. */
+.sn-site .sn-cx-telling { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin: 0; color: #fff; }
+.sn-site .sn-cx-telling > strong { font-size: clamp(44px, 4.4vw, 68px); line-height: .95; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.sn-site .sn-cx-telling > span { font-size: clamp(20px, 1.6vw, 26px); font-weight: 700; }
+.sn-site .sn-cx-telling > small { font-size: 15px; color: var(--cx-blauw-zacht); }
+.sn-site .sn-cx-gezichten { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px 12px; margin: 6px 0 4px; padding: 0; list-style: none; }
+.sn-site .sn-cx-gezichten > li { min-width: 0; animation: sn-cx-in .55s cubic-bezier(.22, 1, .36, 1) both; }
+.sn-site .sn-cx-gezichten :is(a, div) { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; border-radius: 14px; }
+.sn-site .sn-cx-gezichten img { width: 100%; aspect-ratio: 4 / 5; height: auto; margin-bottom: 7px; border-radius: 14px; object-fit: cover; object-position: center 22%; background: #10181f; transition: transform .45s cubic-bezier(.22, 1, .36, 1); }
+.sn-site .sn-cx-gezichten img.is-jelle { object-position: 38% 20%; }
+.sn-site .sn-cx-gezichten a:hover img { transform: translateY(-3px); }
+.sn-site .sn-cx-gezichten strong { font-size: 15px; line-height: 1.2; color: #fff; overflow-wrap: anywhere; }
+.sn-site .sn-cx-gezichten span { font-size: 12.5px; line-height: 1.35; color: #aeb8c1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.sn-site .sn-cx-gezichten.is-vol { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px 10px; }
+.sn-site .sn-cx-gezichten.is-vol strong { font-size: 13px; }
+.sn-site .sn-cx-gezichten.is-vol span { display: none; }
+.sn-site .sn-cx-leeg { margin: 0; padding: 36px 0; color: #aeb8c1; font-size: 16px; }
+@keyframes sn-cx-in { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: none; } }
+
+/* Ieder een eigen bedrijf. */
+.sn-site .sn-cx-bedrijven ul, .sn-site .sn-cx-nieuw ul { display: grid; margin: 0; padding: 0; list-style: none; }
+.sn-site .sn-cx-bedrijven li { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; border-bottom: 1px solid var(--cx-rand); font-size: 15.5px; font-weight: 600; color: #e7edf2; }
+.sn-site .sn-cx-bedrijven li:last-child { border-bottom: 0; }
+.sn-site .sn-cx-bedrijven a { color: inherit; text-decoration: none; }
+.sn-site .sn-cx-bedrijven a:hover { color: var(--cx-blauw-zacht); }
+.sn-site .sn-cx-bedrijven .sn-cx-stapel > img { border-color: #0b0f12; }
+
+/* Nieuw in het netwerk. */
+.sn-site .sn-cx-nieuw ul { gap: 12px; }
+.sn-site .sn-cx-nieuw li { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; align-items: center; gap: 12px; }
+.sn-site .sn-cx-nieuw img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: center 25%; }
+.sn-site .sn-cx-nieuw li > span { display: flex; flex-direction: column; min-width: 0; }
+.sn-site .sn-cx-nieuw strong { font-size: 15.5px; color: #fff; }
+.sn-site .sn-cx-nieuw .sn-cx-rol { font-size: 13px; line-height: 1.35; color: #aeb8c1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sn-site .sn-cx-nieuw time { font-size: 12px; font-weight: 700; color: #04121a; background: var(--cx-blauw-zacht); border-radius: 999px; padding: 4px 9px; white-space: nowrap; }
+
+/* Het hele netwerk: alle gezichten als kleine muur. */
+.sn-site .sn-cx-muur { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.sn-site .sn-cx-muur > img { width: 100%; height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; object-position: center 25%; background: #1b232a; }
+.sn-site .sn-cx-net .sn-tegel-tekst strong { color: #fff; }
+.sn-site .sn-cx-links { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+.sn-site .sn-cx-links a { color: #fff; font-size: 15px; font-weight: 600; text-decoration: none; }
+.sn-site .sn-cx-links a:hover { color: var(--cx-blauw-zacht); }
+
+.sn-site .sn-cx :is(a, button):focus-visible { outline: 2px solid var(--cx-blauw-zacht); outline-offset: 3px; }
+
+@media (min-width: 761px) and (max-width: 1099px) {
+  .sn-site .sn-cx .sn-tegel.sn-cx-kies, .sn-site .sn-cx .sn-tegel.sn-cx-net { grid-column: span 12; }
+}
+@media (max-width: 760px) {
+  .sn-site .sn-cx-vakken { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sn-site .sn-cx-vak { grid-template-columns: 20px minmax(0, 1fr); min-height: 54px; gap: 8px; padding: 8px 10px; font-size: 14px; line-height: 1.25; border-radius: 12px; }
+  .sn-site .sn-cx-vak .sn-cx-stapel, .sn-site .sn-cx-vak .sn-cx-aantal { display: none; }
+  .sn-site .sn-cx-vink { width: 20px; height: 20px; }
+  .sn-site .sn-cx-gezichten { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 10px; }
+  .sn-site .sn-cx-gezichten.is-vol { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .sn-site .sn-cx-gezichten strong { font-size: 13.5px; }
+  .sn-site .sn-cx-gezichten span { font-size: 12px; }
+  .sn-site .sn-cx .sn-tegel-onder .h-button { width: 100%; justify-content: space-between; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sn-site .sn-cx-gezichten > li { animation: none; }
+  .sn-site .sn-cx-gezichten img, .sn-site .sn-cx-vak, .sn-site .sn-cx-vink { transition: none; }
+}
