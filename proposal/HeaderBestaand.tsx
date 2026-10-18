@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Check, ShieldCheck } from "lucide-react";
 import { klein } from "./licht";
@@ -26,7 +26,7 @@ import "./header-bestaand.css";
 // 1.000, 2.500 en 5.000 tokens). De hulppakketten zijn die van /prijzen (Pricing.tsx). Het gekozen pakket gaat als ?pakket= mee naar de aanmelding van het OS; het OS
 // moet die keuze en het koppelen van de rekening nog zelf tonen.
 
-type Doel = "gratis_os" | "connect" | "explainer" | "veiligheid";
+type Doel = "gratis_os" | "custom_os" | "connect" | "explainer" | "veiligheid";
 
 const START = [
   { id: "gratis", naam: "Gratis", groot: "10 GB", sub: "opslag" },
@@ -45,7 +45,37 @@ const HULP = [
   { id: "hulp-meta", naam: "Content + Meta", wie: "Plus Meta Ads opgezet en beheerd" },
   { id: "hulp-google", naam: "Meta + Google", wie: "Plus Google Ads, één rapport" },
   { id: "hulp-compleet", naam: "Compleet", wie: "Plus boekhouding en finance" },
+  // "Echte experts, per pakket. Of als losse opdrachten." Een losse opdracht is geen maandpakket.
+  { id: "hulp-los", naam: "Losse opdracht", wie: "Eén expert uit Connect voor één klus, zonder maandpakket", los: true },
 ];
+
+// 18 oktober 2026 (Marinus): "er moet een switch zijn van normale OS naar Call inplannen for custom os [...] waar je
+// ook de mensen ziet die om de zoveel tijd switched". Bij Custom OS wisselt elke paar seconden wie er in beeld is.
+// Het boekingspaneel (PlanCall) staat nog alleen in batch 2; tot die op main staat gaat de knop naar /contact.
+const PLAN_CALL = `/contact?onderwerp=${encodeURIComponent("Plan een call: Custom OS")}`;
+const BOUWERS = ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer", "Thomas Huijsmans", "Michelle Yang"].flatMap(naam => people.filter(p => p.name === naam));
+const WISSEL_MS = 3500;
+
+function Bouwers() {
+  const [nu, setNu] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = window.setInterval(() => { if (!document.hidden) setNu(n => (n + 1) % BOUWERS.length); }, WISSEL_MS);
+    return () => window.clearInterval(t);
+  }, []);
+  const p = BOUWERS[nu];
+  return (
+    <div className="bs-bouwers">
+      <div className="bs-bouwer" key={p.name} aria-live="polite">
+        <img {...klein(p.image, 72, [96, 160], undefined, "20261015-team")} alt="" width="72" height="72" />
+        <span><b translate="no">{p.name}</b><small>{p.role}</small></span>
+      </div>
+      <div className="bs-stapel" aria-hidden="true">
+        {BOUWERS.map((b, i) => <button key={b.name} type="button" tabIndex={-1} className={i === nu ? "nu" : ""} onClick={() => setNu(i)}><img {...klein(b.image, 34, [96], undefined, "20261015-team")} alt="" width="34" height="34" /></button>)}
+      </div>
+    </div>
+  );
+}
 
 // Een keuzegroep zoals een radiogroep hoort te werken: Tab gaat naar de gekozen optie, de pijltjes wisselen.
 function pijltjes(e: React.KeyboardEvent<HTMLElement>, ids: string[], nu: string, kies: (id: string) => void) {
@@ -59,6 +89,7 @@ function pijltjes(e: React.KeyboardEvent<HTMLElement>, ids: string[], nu: string
 
 export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void }) {
   const [start, setStart] = useState("gratis");
+  const [modus, setModus] = useState<"os" | "custom">("os");
   const [hulp, setHulp] = useState(HULP[0].id);
   const gekozen = START.find(s => s.id === start)!;
   const hulpPakket = HULP.find(h => h.id === hulp)!;
@@ -72,6 +103,18 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
             <div className="services">
               <article className="service os">
                 <div className="logo-row"><img className="os-logo" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" /><Downloads /></div>
+                <div className="bs-switch" role="group" aria-label="Kies OS of Custom OS">
+                  <button type="button" aria-pressed={modus === "os"} onClick={() => setModus("os")}>OS</button>
+                  <button type="button" aria-pressed={modus === "custom"} onClick={() => setModus("custom")}>Custom OS</button>
+                </div>
+                {modus === "custom" ? <>
+                <h2>Je eigen OS, gebouwd rond je bedrijf.</h2>
+                <Bouwers />
+                <p className="bs-uitleg"><strong>Een veilig persoonlijk management &amp; operations systeem.</strong> Wij brengen in kaart hoe jullie werken, koppelen wat er al is en bouwen het met je. Echte developers en dataspecialisten, geen ticketsysteem.</p>
+                <div className="action os-account-actions">
+                  <Link className="pill" to={PLAN_CALL} onClick={() => meet("custom_os")}><span>Plan een call</span><span className="arrow"><ArrowUpRight size={17} /></span></Link>
+                </div>
+                </> : <>
                 <h2>AI management &amp; operations.</h2>
                 <div className="visual milos bs-milos">{MILOS.map(m => <figure key={m.rol}><MiloMotion role={m.rol} name={`Milo ${m.naam}`} maat={128} /><figcaption>{m.naam}</figcaption></figure>)}</div>
                 <p className="bs-kop-start">Kies hoe je start.</p>
@@ -94,18 +137,21 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                   <a className="pill" href={`${GRATIS_OS_URL}?pakket=${start}`} onClick={() => meet("gratis_os")}><span>Start for free</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
                   <a className="pill os-login-secondary" href={GRATIS_OS_URL} onClick={() => meet("gratis_os")}><span>Log in</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
                 </div>
+                </>}
               </article>
               <article className="service connect">
                 <div className="logo-row"><ConnectLogo /></div>
                 <div className="visual faces">{faces.map(p => <span key={p.name} title={p.name}><img {...klein(p.image, 52, [96, 160], undefined, "20261015-team")} alt={p.name} width="52" height="52" /></span>)}<Link className="more" to="/team" aria-label="Bekijk het hele team"><span className="desktop-count">+{people.length - faces.length}</span><span className="mobile-count">+{people.length - 7}</span></Link></div>
-                <p className="bs-kop-hulp"><strong>Echte experts, per pakket.</strong></p>
+                <p className="bs-kop-hulp"><strong>Echte experts, per pakket.</strong> <span>Of als losse opdrachten.</span></p>
                 <div className="bs-hulp" role="radiogroup" aria-label="Kies je hulppakket" onKeyDown={e => pijltjes(e, HULP.map(x => x.id), hulp, setHulp)}>
                   {HULP.map(h => (
                     <button key={h.id} type="button" role="radio" aria-checked={hulp === h.id} tabIndex={hulp === h.id ? 0 : -1} data-id={h.id} className="bs-chip" onClick={() => setHulp(h.id)} translate="no">{h.naam}</button>
                   ))}
                 </div>
-                <p className="bs-uitleg bs-uitleg-hulp"><strong>Bij elk pakket: je eigen veilige management &amp; operations systeem en een gratis website.</strong> {hulpPakket.wie}, met een persoonlijke call waarin we je systeem uitleggen. De prijs zie je na het aanmaken van je account.</p>
-                <div className="action"><a className="pill" href={`${GRATIS_OS_URL}?pakket=${hulp}`} onClick={() => meet("connect")}><span>Start met {hulpPakket.naam}</span><span className="arrow"><ArrowUpRight size={17} /></span></a></div>
+                <p className="bs-uitleg bs-uitleg-hulp">{hulpPakket.los
+                  ? <>{hulpPakket.wie}. Je kiest zelf wie je erbij haalt. De prijs zie je na het aanmaken van je account.</>
+                  : <><strong>Bij elk pakket: je eigen veilige management &amp; operations systeem en een gratis website.</strong> {hulpPakket.wie}, met een persoonlijke call waarin we je systeem uitleggen. De prijs zie je na het aanmaken van je account.</>}</p>
+                <div className="action"><a className="pill" href={`${GRATIS_OS_URL}?pakket=${hulp}`} onClick={() => meet("connect")}><span>{hulpPakket.los ? "Start een losse opdracht" : `Start met ${hulpPakket.naam}`}</span><span className="arrow"><ArrowUpRight size={17} /></span></a></div>
               </article>
             </div>
           </div>
