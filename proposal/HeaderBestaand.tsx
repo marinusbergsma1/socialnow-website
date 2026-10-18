@@ -50,11 +50,11 @@ const HULP = [
 ];
 
 // 18 oktober 2026 (Marinus): "er moet een switch zijn van normale OS naar Call inplannen for custom os [...] waar je
-// ook de mensen ziet die om de zoveel tijd switched". Bij Custom OS wisselt elke paar seconden wie er in beeld is.
+// ook de mensen ziet die om de zoveel tijd switched".
 // Het boekingspaneel (PlanCall) staat nog alleen in batch 2; tot die op main staat gaat de knop naar /contact.
-const PLAN_CALL = `/contact?onderwerp=${encodeURIComponent("Plan een call: Custom OS")}`;
-const BOUWERS = ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer", "Thomas Huijsmans", "Michelle Yang"].flatMap(naam => people.filter(p => p.name === naam));
-const WISSEL_MS = 3500;
+// Daarna: "Bij Custom os liever gewoon de pakketten laten zien of uitspraken van het team." Er staan nog geen echte
+// uitspraken van het team in content.ts (alleen die van Ruben), dus de pakketten: bij elk zit het Custom OS.
+const CUSTOM = HULP.filter(h => !h.los);
 
 // 18 oktober 2026 (Marinus): "En veiliger. Klinkt een beetje matig [...] Veiligheid, minder kosten meer winst eigen data
 // etc etc menselijk contact dat zijn de belangrijke onderdelen 3 best mogelijke zinnen die om de zoveel tijd teruggetypt
@@ -84,27 +84,6 @@ function Typer() {
   return <span className="bs-typer"><span className="bs-sr">{ZINNEN.join(" ")}</span><span aria-hidden="true">{tekst}<i className="bs-cursor" /></span></span>;
 }
 
-function Bouwers() {
-  const [nu, setNu] = useState(0);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = window.setInterval(() => { if (!document.hidden) setNu(n => (n + 1) % BOUWERS.length); }, WISSEL_MS);
-    return () => window.clearInterval(t);
-  }, []);
-  const p = BOUWERS[nu];
-  return (
-    <div className="bs-bouwers">
-      <div className="bs-bouwer" key={p.name} aria-live="polite">
-        <img {...klein(p.image, 72, [96, 160], undefined, "20261015-team")} alt="" width="72" height="72" />
-        <span><b translate="no">{p.name}</b><small>{p.role}</small></span>
-      </div>
-      <div className="bs-stapel" aria-hidden="true">
-        {BOUWERS.map((b, i) => <button key={b.name} type="button" tabIndex={-1} className={i === nu ? "nu" : ""} onClick={() => setNu(i)}><img {...klein(b.image, 34, [96], undefined, "20261015-team")} alt="" width="34" height="34" /></button>)}
-      </div>
-    </div>
-  );
-}
-
 // Een keuzegroep zoals een radiogroep hoort te werken: Tab gaat naar de gekozen optie, de pijltjes wisselen.
 function pijltjes(e: React.KeyboardEvent<HTMLElement>, ids: string[], nu: string, kies: (id: string) => void) {
   const stap = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
@@ -118,6 +97,8 @@ function pijltjes(e: React.KeyboardEvent<HTMLElement>, ids: string[], nu: string
 export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void }) {
   const [start, setStart] = useState("gratis");
   const [modus, setModus] = useState<"os" | "custom">("os");
+  const [custom, setCustom] = useState(CUSTOM[0].id);
+  const customPakket = CUSTOM.find(c => c.id === custom)!;
   const [hulp, setHulp] = useState(HULP[0].id);
   const gekozen = START.find(s => s.id === start)!;
   const hulpPakket = HULP.find(h => h.id === hulp)!;
@@ -137,10 +118,19 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 </div>
                 {modus === "custom" ? <>
                 <h2>Je eigen OS, gebouwd rond je bedrijf.</h2>
-                <Bouwers />
-                <p className="bs-uitleg"><strong>Een veilig persoonlijk management &amp; operations systeem.</strong> Wij brengen in kaart hoe jullie werken, koppelen wat er al is en bouwen het met je. Echte developers en dataspecialisten, geen ticketsysteem.</p>
+                <div className="bs-keuze bs-custom" role="radiogroup" aria-label="Kies je pakket met Custom OS" onKeyDown={e => pijltjes(e, CUSTOM.map(x => x.id), custom, setCustom)}>
+                  {CUSTOM.map(c => (
+                    <button key={c.id} type="button" role="radio" aria-checked={custom === c.id} tabIndex={custom === c.id ? 0 : -1} data-id={c.id} className="bs-pakket" onClick={() => setCustom(c.id)}>
+                      <span className="bs-vink" aria-hidden="true">{custom === c.id && <Check size={12} strokeWidth={3} />}</span>
+                      <b>Custom OS +</b>
+                      <strong translate="no">{c.naam}</strong>
+                      <small>{c.wie}</small>
+                    </button>
+                  ))}
+                </div>
+                <p className="bs-uitleg"><strong>Een veilig persoonlijk management &amp; operations systeem, bij elk pakket.</strong> Met een gratis website. Wij brengen in kaart hoe jullie werken, koppelen wat er al is en bouwen het met je.</p>
                 <div className="action os-account-actions">
-                  <Link className="pill" to={PLAN_CALL} onClick={() => meet("custom_os")}><span>Plan een call</span><span className="arrow"><ArrowUpRight size={17} /></span></Link>
+                  <Link className="pill" to={`/contact?onderwerp=${encodeURIComponent(`Plan een call: Custom OS + ${customPakket.naam}`)}`} onClick={() => meet("custom_os")}><span>Plan een call</span><span className="arrow"><ArrowUpRight size={17} /></span></Link>
                 </div>
                 </> : <>
                 <h2>AI management &amp; operations.</h2>
