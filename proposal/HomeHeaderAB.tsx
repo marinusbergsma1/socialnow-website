@@ -29,7 +29,11 @@ function meet(gebeurtenis: "header_getoond" | "header_klik", variant: Variant, d
 }
 
 // Welke klik in variant A telt als welk doel.
-function doelA(link: HTMLAnchorElement): string | null {
+// 18 oktober 2026 (integrator batch 2): de knoppen "Plan een call voor custom OS" zijn <button>s die een
+// boekingspaneel openen (aria-haspopup="dialog"); die tellen als custom_os, anders vergelijkt de test scheef.
+function doelA(el: HTMLElement): string | null {
+  if (el instanceof HTMLButtonElement) return el.getAttribute("aria-haspopup") === "dialog" ? "custom_os" : null;
+  const link = el as HTMLAnchorElement;
   if (link.href.includes("app.socialnow.nl")) return "gratis_os";
   if (link.href.includes("/connect")) return "connect";
   if (link.closest("#os-explainer")) return "explainer";
@@ -62,8 +66,8 @@ export default function HomeHeaderAB() {
       style={{ display: "contents" }}
       onClickCapture={e => {
         if (variant !== "a" || !meten) return;
-        const link = (e.target as Element).closest("a");
-        const doel = link && doelA(link);
+        const el = (e.target as Element).closest<HTMLElement>('a, button[aria-haspopup="dialog"]');
+        const doel = el && doelA(el);
         if (doel) meet("header_klik", "a", doel);
       }}
     >
