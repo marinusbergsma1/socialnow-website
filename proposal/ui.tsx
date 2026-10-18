@@ -334,7 +334,7 @@ export function Closing({ compact = false }: { compact?: boolean }) {
   if (compact) return <section className="h-final-close sn-home-final" aria-labelledby="final-close-title">
     <img className="h-final-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="135" loading="lazy" />
     <h2 id="final-close-title">Start gratis met jouw systeem.</h2>
-    <p>Gratis tot 10 GB opslag. Daarna €20,- per maand.</p>
+    <p>Gratis tot 10 GB opslag. Zolang je daaronder blijft, schrijven we niets af.</p>
     <a className="sn-pill sn-home-cta" href="https://app.socialnow.nl/login/">Probeer SocialNow OS <ArrowUpRight size={20} aria-hidden="true" /></a>
   </section>;
   return <section className="h-final-close" aria-labelledby="final-close-title">

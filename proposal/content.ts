@@ -273,8 +273,8 @@ export const prices = [
   },
   {
     name: "02 / Jouw Custom OS",
-    price: "Vanaf €10.000",
-    period: "Een OS gebouwd rond je bedrijf",
+    price: "Vanaf €3.000 per maand",
+    period: "Custom OS en gratis website in elk hulppakket",
     description:
       "Van je eerste ervaring met het OS naar een OS rond jouw bedrijf.",
     items: [

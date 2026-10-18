@@ -5,14 +5,22 @@ import { GRATIS_OS_URL } from "./os-entry";
 import { PlanCallKnop } from "./PlanCall";
 import "./tokens-plus.css";
 
-// 18 oktober 2026 (Marinus): "tokens kopen moet een groter onderdeel zijn". Het aanbod in vier lagen: Gratis tot 10 GB,
-// Plus voor €20 per maand (start pas boven 10 GB, met maandelijks rendertegoed in de merkgetrainde Studio), Tokens voor
-// extra renders, en het OS op maat vanaf €10.000. Op /prijzen staan de vier lagen en het tokenblok; op de homepage staat
-// een kort tokenblok direct na de vier onderdelen van het OS, waar de Studio zit.
+// 18 oktober 2026 (Marinus): "tokens kopen moet een groter onderdeel zijn". Dezelfde dag koos hij in de sessie
+// "SocialNow header A/B test versies" het model hieronder, boven het conceptmodel met Plus voor €20 (socialnow-app #148):
+//   - "Verder is alles maandelijks."
+//   - Gratis tot 10 GB. Bij de aanmelding koppel je alvast je rekening met een SEPA-machtiging; onder 10 GB wordt niets
+//     afgeschreven.
+//   - Tokens per maand: 1.000 / 2.500 / 5.000 tokens voor €10 / €25 / €50.
+//   - Hulppakketten vanaf €3.000 per maand: "het is van belang dat het duidelijk is dat je voor 3K een veilig persoonlijk
+//     management and operation systeem hebt. Custom is bij alle pakketten naast gratis website inbegrepen."
+//   - Geen los blok "OS op maat vanaf €10.000" meer. De prijs per hulppakket heeft hij nog niet gegeven, dus staat er
+//     alleen "vanaf €3.000 per maand".
+// Op /prijzen staan de drie lagen en het tokenblok. Op de homepage staat een kort tokenblok direct na de vier onderdelen
+// van het OS, zonder eurobedragen: in de homepage-header staan bewust geen prijzen ("Die prijzen mag na het account
+// aanmaken").
 //
-// Alle tokenbedragen komen uit de OS-code (Flyinghighscalingup/socialnow-app, tak os, 18 oktober 2026):
-//   api/_studio-tokens.js   TOKEN_BUNDLES: €10 = 1.000 tokens, €25 = 2.500, €50 = 5.000. Eén token is één eurocent
-//                           rendertegoed. Afrekenen via Stripe, btw exclusief (tax_behavior exclusive).
+// Wat een render kost, komt uit de OS-code (Flyinghighscalingup/socialnow-app, tak os, 18 oktober 2026):
+//   api/_studio-tokens.js   één token is één eurocent rendertegoed.
 //   api/_prijzen.js         de klant betaalt de normale prijs van het model maal MARGE_FACTOR (2):
 //                           Nano Banana Pro 2K 14 → 28, Nano Banana 2 2K 11 → 22, Nano Banana 2 Lite 4 → 8,
 //                           GPT Image 2.5 9 → 18; video per seconde Veo 3.1 Fast 10 → 20, Veo 3.1 Lite 5 → 10,
@@ -21,19 +29,13 @@ import "./tokens-plus.css";
 //                           hier zonder getal).
 // Verandert een prijs in het OS, dan verandert hij hier ook. Geen geschatte of verzonnen bedragen.
 //
-// VOORLOPIG tot Marinus bevestigt. Plus volgens het conceptprijsmodel van 18 oktober 2026 (socialnow-app PR #148, docs/PRIJSMODEL-PLUS-2026-10-18.md, sessie
-// "Prijsmodel en marges"): €20 per maand excl. btw (€24,20 incl.), 50 GB opslag, 1.000 tokens rendertegoed per maand
-// (vervalt aan het einde van de maand), fair use 25 GB download per maand, maandelijks opzegbaar. Plus start bij 10 GB
-// alleen met een SEPA-machtiging die de klant vooraf zelf geeft, met eerst een melding en minstens 7 dagen tot de eerste
-// incasso. Gekochte tokens vervallen nooit.
-// Excl. of incl. btw wacht nog op Marinus: dat staat alleen hier in PLUS.per. Voor incl. btw wordt het
-// { prijs: "€24,20", per: "per maand, incl. btw" }; beide zinnen staan al in proposal/i18n/*.json.
-export const PLUS = { prijs: "€20", per: "per maand, excl. btw" };
+// Btw staat op één plek: excl. of incl. btw wacht nog op Marinus. Alle bedragen hieronder lezen BTW_PER_MAAND.
+export const BTW_PER_MAAND = "per maand, excl. btw";
 
 const PAKKETTEN = [
-  { prijs: "€10", tokens: "1.000 tokens", beeld: "Tot 35 beelden met Nano Banana Pro", video: "of 6 video's van 8 seconden met Veo 3.1 Fast", soort: "vlak" as const },
-  { prijs: "€25", tokens: "2.500 tokens", beeld: "Tot 89 beelden met Nano Banana Pro", video: "of 15 video's van 8 seconden met Veo 3.1 Fast", soort: "groen" as const },
-  { prijs: "€50", tokens: "5.000 tokens", beeld: "Tot 178 beelden met Nano Banana Pro", video: "of 31 video's van 8 seconden met Veo 3.1 Fast", soort: "vlak" as const },
+  { prijs: "€10", tokens: "1.000 tokens per maand", beeld: "Tot 35 beelden per maand met Nano Banana Pro", video: "of 6 video's van 8 seconden met Veo 3.1 Fast", soort: "vlak" as const },
+  { prijs: "€25", tokens: "2.500 tokens per maand", beeld: "Tot 89 beelden per maand met Nano Banana Pro", video: "of 15 video's van 8 seconden met Veo 3.1 Fast", soort: "groen" as const },
+  { prijs: "€50", tokens: "5.000 tokens per maand", beeld: "Tot 178 beelden per maand met Nano Banana Pro", video: "of 31 video's van 8 seconden met Veo 3.1 Fast", soort: "vlak" as const },
 ];
 
 const BEELD = [
@@ -88,48 +90,48 @@ function RenderLijst({ titel, items }: { titel: string; items: { wat: string; ma
   );
 }
 
-// De incassozin staat op één plek, zodat hij op de homepage en op /prijzen altijd hetzelfde zegt.
-function Incasso() {
-  return <p className="tp-juridisch">Plus start alleen met een SEPA-machtiging die je vooraf zelf geeft. Bij 10 GB krijg je eerst een melding; de eerste incasso volgt minstens 7 dagen later. Zolang je onder 10 GB blijft, schrijven we niets af. Maandelijks opzegbaar.</p>;
+// De machtigingszin staat op één plek, zodat hij op de homepage en op /prijzen altijd hetzelfde zegt. Hij volgt de
+// homepage-header (variant B, proposal/HeaderBestaand.tsx).
+function Machtiging() {
+  return <p className="tp-juridisch">Bij je aanmelding koppel je alvast je rekening met een SEPA-machtiging. Zolang je onder 10 GB blijft, schrijven we niets af. Er wordt pas iets afgeschreven nadat je daar zelf uitdrukkelijk akkoord voor geeft, en alles is maandelijks opzegbaar.</p>;
 }
 
-// /prijzen: het aanbod in vier lagen.
+// /prijzen: het aanbod in drie lagen.
 export function PrijsLagen() {
   return (
-    <Bento id="prijs-lagen" label="Ons aanbod in vier lagen" titel={<>Gratis beginnen.<br /><span>Betalen als je groeit.</span></>} className="tp">
-      <Tegel kop="Gratis" breed={3} className="tp-laag">
+    <Bento id="prijs-lagen" label="Ons aanbod in drie lagen" titel={<>Gratis beginnen.<br /><span>Alles verder per maand.</span></>} className="tp">
+      <Tegel kop="Gratis" breed={4} className="tp-laag">
         <Bedrag prijs="€0" per="tot 10 GB opslag" />
         <Regels items={["Het OS met Studio, CRM, Social en Milo", "Connect: de juiste experts voor jouw bedrijf", "Je eerste beeldrenders zijn gratis", "Tien HTML-uitingen per dag zijn gratis"]} />
+        <Machtiging />
         <div className="sn-tegel-onder"><Action href={GRATIS_OS_URL}>Probeer het OS gratis</Action></div>
       </Tegel>
-      <Tegel kop="Plus" breed={3} soort="groen" className="tp-laag is-plus">
-        <Bedrag prijs={PLUS.prijs} per={PLUS.per} />
-        <p className="tp-start">Start pas boven 10 GB, met je eigen machtiging</p>
-        <Regels items={["50 GB opslag", "1.000 tokens rendertegoed per maand in je merkgetrainde Studio", "Rendertegoed vervalt aan het einde van de maand", "Fair use: 25 GB download per maand", "Automatische incasso via je bank, maandelijks opzegbaar"]} />
-        <Incasso />
-      </Tegel>
-      <Tegel kop="Tokens" breed={3} className="tp-laag">
-        <Bedrag prijs="€10" per="voor 1.000 tokens" vanaf />
-        <Regels items={["Extra renders bovenop je tegoed", "Video en premium modellen", "Eenmalig, geen abonnement", "Gekochte tokens vervallen nooit", "Eén token is één cent rendertegoed"]} />
+      <Tegel kop="Tokens" breed={4} soort="groen" className="tp-laag is-plus">
+        <Bedrag prijs="€10" per={BTW_PER_MAAND} vanaf />
+        <p className="tp-start">1.000, 2.500 of 5.000 tokens per maand</p>
+        <Regels items={["Rendertegoed in je merkgetrainde Studio", "Beeld, video en premium modellen", "Eén token is één cent rendertegoed", "Maandelijks opzegbaar"]} />
         <div className="sn-tegel-onder"><a className="tp-link" href="#tokens">Wat krijg je per pakket</a></div>
       </Tegel>
-      <Tegel kop="OS op maat" breed={3} className="tp-laag">
-        {/* 29 september 2026 (Marinus): het OS op maat zakelijk, geen reuzencijfer (scripts/check-aanbod.mjs). */}
-        <p className="tp-zakelijk">Vanaf €10.000 · prijs op aanvraag</p>
-        <Regels items={["Je eigen OS rond je bedrijf", "Milo-agents op je eigen data", "Developers en dataspecialisten van ons team"]} />
-        <div className="sn-tegel-onder"><PlanCallKnop className="sn-pill sn-btn3d h-button h-button-secondary" label="Plan een call" /></div>
+      <Tegel kop="Hulppakketten" breed={4} className="tp-laag">
+        <Bedrag prijs="€3.000" per={BTW_PER_MAAND} vanaf />
+        <p className="tp-start">Bij elk pakket: je eigen veilige management &amp; operations systeem en een gratis website.</p>
+        <Regels items={["Custom OS, gebouwd rond je bedrijf", "Gratis website", "Connect: echte experts per pakket", "Persoonlijke call met uitleg van je systeem"]} />
+        <div className="sn-tegel-onder">
+          <PlanCallKnop className="sn-pill sn-btn3d h-button" label="Plan een call" />
+          <a className="tp-link" href="#hulppakketten">Bekijk de pakketten</a>
+        </div>
       </Tegel>
     </Bento>
   );
 }
 
-// /prijzen: tokens kopen, met wat je per pakket krijgt en wat een render kost.
+// /prijzen: tokens per maand, met wat je per pakket krijgt en wat een render kost.
 export function TokenPakketten() {
   return (
-    <Bento id="tokens" label="Tokens voor de Studio" titel={<>Tokens kopen.<br /><span>Meer maken in je eigen merk.</span></>} className="tp">
+    <Bento id="tokens" label="Tokens voor de Studio" titel={<>Tokens per maand.<br /><span>Meer maken in je eigen merk.</span></>} className="tp">
       {PAKKETTEN.map((pakket) => (
         <Tegel key={pakket.prijs} kop={pakket.tokens} breed={4} soort={pakket.soort} className="tp-pakket">
-          <Bedrag prijs={pakket.prijs} per="eenmalig, excl. btw" />
+          <Bedrag prijs={pakket.prijs} per={BTW_PER_MAAND} />
           <p className="tp-krijg">{pakket.beeld}</p>
           <p className="tp-of">{pakket.video}</p>
         </Tegel>
@@ -141,26 +143,25 @@ export function TokenPakketten() {
         </div>
       </Tegel>
       <Tegel kop="Zo werkt het" breed={4} className="tp-hoe">
-        <Regels items={["Je kiest het model, de Studio laat de prijs zien voordat je rendert", "Je betaalt alleen voor wat je rendert", "Gekochte tokens vervallen nooit", "Tien HTML-uitingen per dag zijn gratis"]} />
-        <div className="sn-tegel-onder"><Action href={GRATIS_OS_URL}>Tokens kopen in je OS</Action></div>
+        <Regels items={["Je kiest het model, de Studio laat de prijs zien voordat je rendert", "Je eerste beeldrenders zijn gratis", "Tien HTML-uitingen per dag zijn gratis", "Maandelijks opzegbaar"]} />
+        <div className="sn-tegel-onder"><Action href={GRATIS_OS_URL}>Kies je tokenpakket in je OS</Action></div>
       </Tegel>
     </Bento>
   );
 }
 
-// Homepage: kort tokenblok direct na de vier onderdelen van het OS.
+// Homepage: kort tokenblok direct na de vier onderdelen van het OS, zonder eurobedragen.
 export function TokensHome() {
   return (
-    <Bento id="studio-tokens" label="Renderen in de Studio" titel={<>Maak meer in je merk.<br /><span>Betaal alleen per render.</span></>} className="tp tp-home">
+    <Bento id="studio-tokens" label="Renderen in de Studio" titel={<>Maak meer in je merk.<br /><span>Met tokens per maand.</span></>} className="tp tp-home">
       <Tegel kop="Wat kost een render?" breed={5} soort="groen">
         <RenderLijst titel="Voorbeelden" items={[BEELD[3], BEELD[0], VIDEO[2]]} />
-        <p className="tp-klein">Eén token is één cent. Je eerste beeldrenders zijn gratis.</p>
+        <p className="tp-klein">Je eerste beeldrenders zijn gratis.</p>
       </Tegel>
-      <Tegel kop="Tokens kopen" breed={4}>
+      <Tegel kop="Tokens per maand" breed={4}>
         <ul className="tp-pakjes">
           {PAKKETTEN.map((pakket) => (
             <li key={pakket.prijs}>
-              <strong>{pakket.prijs}</strong>
               <span>{pakket.tokens}</span>
               <small>{pakket.beeld}</small>
             </li>
@@ -168,11 +169,10 @@ export function TokensHome() {
         </ul>
         <div className="sn-tegel-onder"><Action to="/prijzen#tokens" secondary>Bekijk alle prijzen</Action></div>
       </Tegel>
-      <Tegel kop="Plus" breed={3} className="tp-laag is-plus">
-        <Bedrag prijs={PLUS.prijs} per={PLUS.per} />
-        <p className="tp-start">Start pas boven 10 GB, met je eigen machtiging</p>
-        <Regels items={["50 GB opslag", "1.000 tokens rendertegoed per maand", "Maandelijks opzegbaar"]} />
-        <Incasso />
+      <Tegel kop="Gratis tot 10 GB" breed={3} className="tp-laag">
+        <Regels items={["Het OS met Studio, CRM, Social en Milo", "Je eerste beeldrenders zijn gratis", "Maandelijks opzegbaar"]} />
+        <Machtiging />
+        <div className="sn-tegel-onder"><Action href={GRATIS_OS_URL}>Probeer het OS gratis</Action></div>
       </Tegel>
     </Bento>
   );

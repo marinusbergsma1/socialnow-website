@@ -53,3 +53,6 @@
   .sn-site .tp .tp-laag { grid-column: auto; }
   .sn-site .tp .tp-kosten-raster { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Homepage: pakketten zonder eurobedrag, één kolom. */
+.sn-site .tp-home .tp-pakjes li { grid-template-columns: minmax(0, 1fr); }
