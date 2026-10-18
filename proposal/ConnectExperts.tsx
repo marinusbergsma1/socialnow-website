@@ -4,7 +4,7 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { Bento, Tegel } from "./Bento";
 import { people, expertGroepen, vindMensen, partnerReferences } from "./content";
 import { klein } from "./licht";
-import { mailLink } from "./aanvragen";
+import { openPlanCall } from "./PlanCall";
 import { useLanguage, LOCALES } from "./i18n/context";
 import "./connect-experts.css";
 
@@ -81,9 +81,9 @@ export default function ConnectExperts() {
         })}
       </ul> : <p className="sn-cx-leeg">Kies een vakgebied en zie wie er aanschuift.</p>}
       <div className="sn-tegel-onder">
-        <a className="sn-pill os-claim sn-btn3d h-button" href={mailLink(groepen.length ? onderwerp : t("Team via Connect"))}>
+        <button type="button" className="sn-pill os-claim sn-btn3d h-button" aria-haspopup="dialog" onClick={() => openPlanCall({ toelichting: groepen.length ? onderwerp : t("Team via Connect") })}>
           <span>Plan een call met dit team</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
-        </a>
+        </button>
         <a className="sn-pill sn-btn3d h-button h-button-secondary" href="/connect/">
           <span>Word lid van Connect</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
         </a>

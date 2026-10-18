@@ -2,6 +2,7 @@ import React from "react";
 import { Bento, Tegel } from "./Bento";
 import { Action } from "./ui";
 import { GRATIS_OS_URL } from "./os-entry";
+import { PlanCallKnop } from "./PlanCall";
 import "./tokens-plus.css";
 
 // 18 oktober 2026 (Marinus): "tokens kopen moet een groter onderdeel zijn". Het aanbod in vier lagen: Gratis tot 10 GB,
@@ -49,7 +50,6 @@ const VIDEO = [
   { wat: "Seedance 2.5", maat: "Video van 5 seconden met geluid", tokens: "260 tokens" },
 ];
 
-const PLAN_CALL = `/contact?onderwerp=${encodeURIComponent("Plan een call: OS op maat")}`;
 
 function Regels({ items }: { items: string[] }) {
   return (
@@ -117,7 +117,7 @@ export function PrijsLagen() {
         {/* 29 september 2026 (Marinus): het OS op maat zakelijk, geen reuzencijfer (scripts/check-aanbod.mjs). */}
         <p className="tp-zakelijk">Vanaf €10.000 · prijs op aanvraag</p>
         <Regels items={["Je eigen OS rond je bedrijf", "Milo-agents op je eigen data", "Developers en dataspecialisten van ons team"]} />
-        <div className="sn-tegel-onder"><Action to={PLAN_CALL} secondary>Plan een call</Action></div>
+        <div className="sn-tegel-onder"><PlanCallKnop className="sn-pill sn-btn3d h-button h-button-secondary" label="Plan een call" /></div>
       </Tegel>
     </Bento>
   );

@@ -12,7 +12,8 @@ import "./plan-call.css";
 // Vanuit de custom OS configurator (18 oktober 2026, sessie os-custom): /?bron=os&onderwerp=custom-os&ref=<uuid>#plan-een-call.
 // bron=os en een geldige uuid in ref gaan mee in het bericht aan het team; onbekende waarden vallen weg. Het paneel staat
 // sitebreed (WebsiteProposal.tsx), dus #plan-een-call werkt op elke pagina.
-export type CallVoorinvulling = { bedrijf?: string; onderdelen?: string[]; budget?: string; bron?: "os"; ref?: string };
+// toelichting: een voorgevulde regel in het vrije veld, bijvoorbeeld de vakgebieden uit Connect (batch 2, integrator).
+export type CallVoorinvulling = { bedrijf?: string; onderdelen?: string[]; budget?: string; bron?: "os"; ref?: string; toelichting?: string };
 export const PLAN_CALL_ANKER = "plan-een-call";
 const OPEN = "sn-plan-call";
 export function openPlanCall(voor: CallVoorinvulling = {}) { window.dispatchEvent(new CustomEvent<CallVoorinvulling>(OPEN, { detail: voor })); }
