@@ -21,7 +21,7 @@ import { Bento, Tegel } from "./Bento";
 import { MiloPortrait, TextLink } from "./ui";
 import OsPeople from "./OsPeople";
 import { agents } from "./content";
-import HomeTeam from "./HomeTeam";
+import ConnectExperts from "./ConnectExperts";
 import PixelInfrastructure from "./PixelInfrastructure";
 import { useLanguage } from "./i18n/context";
 import "./home-simple.css";
@@ -33,10 +33,8 @@ export function Home() {
     <section className="h-hero sn-approved-hero" id="home">
       <HomeHeader />
       <HomeConnectBand />
-      <div className="h-wrap h-hero-content sn-below-new-header">
-        <HomeTeam />
-      </div>
     </section>
+    <ConnectExperts />
     <FreeWebsite />
     <div className="h-wrap sn-platform-foundation"><PixelInfrastructure /></div>
     <HomeDevelopmentPartners />
