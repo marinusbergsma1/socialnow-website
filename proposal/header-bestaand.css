@@ -37,7 +37,7 @@
 .sn-site .sn-bestaand .bs-switch button[aria-pressed=true]{background:var(--green);color:#002912}
 .sn-site .sn-bestaand .bs-switch button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .sn-site .sn-bestaand .bs-kop-hulp span{color:#c8d8ce;font-weight:600}
-.sn-site .sn-bestaand .bs-typer{display:block;min-height:2.1em;color:var(--green)}
+.sn-site .sn-bestaand .bs-typer{display:block;min-height:2.3em;color:var(--green)}
 @media(min-width:1151px){.sn-site .sn-bestaand .bs-typer{min-height:1.05em;white-space:nowrap;font-size:.72em}}
 .sn-site .sn-bestaand .bs-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .sn-site .sn-bestaand .bs-cursor{display:inline-block;width:.07em;height:.9em;margin-left:.06em;vertical-align:-.08em;background:var(--green);animation:bs-knipper 1s steps(1) infinite}
@@ -56,3 +56,5 @@
 .sn-site .sn-bestaand .bs-punten li{display:flex;align-items:flex-start;gap:9px;font-size:14.5px;line-height:1.4;color:#d6e5dc;text-align:left}
 .sn-site .sn-bestaand .bs-punten svg{flex:0 0 15px;margin-top:3px;color:var(--green)}
 .sn-site .sn-bestaand .bs-uitleg-klein{min-height:0;margin:12px 0 18px;font-size:13px;color:#8da297}
+@media(min-width:761px) and (max-width:1150px){.sn-site .sn-bestaand .bs-typer{min-height:1.05em;white-space:nowrap;font-size:.6em}}
+.sn-site .sn-bestaand .bs-pakket b{padding-right:20px}
