@@ -19,9 +19,18 @@ eis(/naar: "\/project\/ilgordo-website"/.test(blok), "derde cijfer (Il Gordo, Li
 eis(/waarde: "€100K"/.test(blok) && /waarde: "100", eenheid: "leads in één week"/.test(blok), "€100K en 100 leads in één week");
 for (const slug of ["vdz-brigade-website", "kwh-garant-website"]) eis(blok.includes(`/project/${slug}`) && projecten.includes(`slug: "${slug}"`), `link naar de bestaande case ${slug}`);
 eis(/Bento/.test(blok) && /Tegel/.test(blok), "in de bestaande bentotaal");
+// Derde ronde (Marinus: "Neem daarbij ook andere resultaten van mijn team mee"): alleen bestaande trackrecords, met foto.
+const team = lees("proposal/TeamTrackrecord.tsx");
+const content = lees("proposal/content.ts");
+eis(/<TeamTrackrecord \/>/.test(blok), "rij Trackrecord van ons team staat in de opening");
+const namen = [...team.matchAll(/\["([^"]+)", \[M\./g)].map((m) => m[1]);
+eis(namen.length >= 10 && namen.every((n) => content.includes(`name: "${n}"`)), `alle ${namen.length} teamleden bestaan in content.ts (foto en rol)`);
+const zonderBron = ["Emma Peperkamp", "Antony Soosaipillaj", "Aron", "Youri van der Donk", "Pieter Bergsma"];
+eis(zonderBron.every((n) => !namen.includes(n)), "teamleden zonder bron staan er niet in");
+for (const logo of [...team.matchAll(/logo: "([^"]+)"/g)].map((m) => m[1])) eis(existsSync(`public${logo}`), `logo bestaat: ${logo}`);
 for (const taal of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const d = JSON.parse(lees(`proposal/i18n/${taal}.json`) || "{}");
-  const mist = ["Wat ons werk oplevert.", "In cijfers.", "Resultaten", "Werk gemaakt voor onder meer", "Snel, vindbaar, gebouwd door ons team.", "omzet voor VDZ", "leads in één week", "Van nul online zichtbaarheid naar een merk dat verkoopt.", "Meta en Odoo gekoppeld. Elke offerteaanvraag komt direct in hun OS binnen.", "Bekijk de case"].filter((z) => !(z in d));
+  const mist = ["Trackrecord van ons team", "Wat ons werk oplevert.", "In cijfers.", "Resultaten", "Werk gemaakt voor onder meer", "Snel, vindbaar, gebouwd door ons team.", "omzet voor VDZ", "leads in één week", "Van nul online zichtbaarheid naar een merk dat verkoopt.", "Meta en Odoo gekoppeld. Elke offerteaanvraag komt direct in hun OS binnen.", "Bekijk de case"].filter((z) => !(z in d));
   eis(mist.length === 0, `${taal}.json heeft alle zinnen${mist.length ? `; mist: ${mist.join(" | ")}` : ""}`);
 }
 process.exit(fouten.length ? 1 : 0);
