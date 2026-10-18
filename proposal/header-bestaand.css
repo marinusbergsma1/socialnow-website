@@ -31,3 +31,4 @@
 .sn-site .sn-bestaand .bs-zeker svg{color:var(--green)}
 .sn-site .sn-bestaand .bs-zeker a{color:#fff;border-bottom:1px solid #25d36688}
 .sn-site .sn-bestaand .service.connect>.action .pill{width:max-content;max-width:100%;gap:16px;white-space:nowrap}
+.sn-site .sn-bestaand .bs-uitleg-hulp strong{display:block;margin-bottom:4px;color:var(--blue)}

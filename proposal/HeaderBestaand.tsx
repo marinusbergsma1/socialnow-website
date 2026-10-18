@@ -36,6 +36,9 @@ const START = [
 ];
 const MILOS = [{ rol: "website", naam: "Website" }, { rol: "crm", naam: "CRM" }, { rol: "content", naam: "Content" }, { rol: "ads", naam: "Ads" }];
 
+// 18 oktober 2026 (Marinus): "het is van belang dat het duidelijk is dat je voor 3K een veilig persoonlijk
+// management and operation systeem hebt. Custom is bij alle pakketten naast gratis website inbegrepen." Het bedrag
+// zelf staat pas na het aanmaken van een account; hier alleen wat er in elk pakket zit.
 // Ook een hulppakket kies je bij het aanmaken van je account; de prijs volgt daarna in het OS.
 const HULP = [
   { id: "hulp-content", naam: "Content", wie: "Content in je merk, gepland en geplaatst" },
@@ -101,7 +104,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                     <button key={h.id} type="button" role="radio" aria-checked={hulp === h.id} tabIndex={hulp === h.id ? 0 : -1} data-id={h.id} className="bs-chip" onClick={() => setHulp(h.id)} translate="no">{h.naam}</button>
                   ))}
                 </div>
-                <p className="bs-uitleg bs-uitleg-hulp">{hulpPakket.wie}. Met een persoonlijke call waarin we je systeem uitleggen. De prijs zie je na het aanmaken van je account.</p>
+                <p className="bs-uitleg bs-uitleg-hulp"><strong>Bij elk pakket: je eigen veilige management &amp; operations systeem en een gratis website.</strong> {hulpPakket.wie}, met een persoonlijke call waarin we je systeem uitleggen. De prijs zie je na het aanmaken van je account.</p>
                 <div className="action"><a className="pill" href={`${GRATIS_OS_URL}?pakket=${hulp}`} onClick={() => meet("connect")}><span>Start met {hulpPakket.naam}</span><span className="arrow"><ArrowUpRight size={17} /></span></a></div>
               </article>
             </div>
