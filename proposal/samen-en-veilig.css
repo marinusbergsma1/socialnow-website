@@ -1,0 +1,45 @@
+/* SamenEnVeilig.tsx, direct onder de homepage-header — 18 oktober 2026. Alles onder .sn-samen. */
+.sn-samen{--s-groen:#25d366;--s-lijn:#ffffff1a;--s-grijs:#8b9691;--s-mono:var(--v-mono,ui-monospace,Menlo,monospace);background:#000;border-top:1px solid var(--s-lijn);border-bottom:1px solid var(--s-lijn)}
+.sn-samen-wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(20px,3vw,40px);max-width:1320px;margin:0 auto;padding:clamp(32px,4vw,56px) clamp(16px,4vw,48px)}
+.sn-samen-wrap>*{min-width:0}
+@media(max-width:900px){.sn-samen-wrap{grid-template-columns:1fr}}
+.sn-samen-blok{padding:clamp(20px,2.4vw,32px);border:1px solid var(--s-lijn);border-radius:14px;background:#06090b}
+:root .sn-site .sn-samen .sn-samen-label{display:flex;align-items:center;gap:8px;margin:0;font-family:var(--s-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--s-grijs)}
+.sn-samen-label i{flex:0 0 6px;height:6px;border-radius:50%;background:var(--s-groen);box-shadow:0 0 10px #25d36688}
+.sn-samen-label svg{color:var(--s-groen)}
+:root .sn-site .sn-samen h2{max-width:none;margin:14px 0 0;font-size:clamp(24px,2.3vw,32px)!important;font-weight:600;line-height:1.12;letter-spacing:-.02em;text-align:left}
+:root .sn-site .sn-samen h3{margin:14px 0 0;font-size:clamp(20px,1.7vw,24px);font-weight:600;line-height:1.2;color:#fff}
+:root .sn-site .sn-samen .sn-samen-uitleg{max-width:56ch;margin-top:12px;font-size:15px;line-height:1.5;color:#b9c2be}
+.sn-samen-paren{display:grid;gap:14px;margin-top:24px}
+.sn-samen-paar{display:flex;align-items:center;gap:16px;min-height:64px;padding:12px 18px;border:1px solid var(--s-lijn);border-radius:12px;background:#0b0f12}
+.sn-samen-paar>svg{flex:0 0 auto;color:#607c6c}
+.sn-samen-paar .sn-samen-os{width:min(170px,40%);height:auto}
+.sn-samen-paar .connect-logo{position:relative;display:block;width:min(210px,45%);flex:0 1 auto}
+.sn-samen-paar .connect-logo img{display:block;width:100%;height:auto}
+.sn-samen-paar .connect-logo .blue-overlay{position:absolute;inset:0;clip-path:inset(0 0 0 61.5%);filter:url(#samen-connect-blue)}
+.sn-samen-filter{position:absolute;width:0;height:0;overflow:hidden}
+.sn-samen-paar a{display:flex;align-items:center;margin-left:auto;border-radius:6px}
+.sn-samen-paar a img{width:140px;max-width:100%;max-height:34px;object-fit:contain}
+.sn-samen-paar a img.sn-samen-wit{filter:brightness(0) invert(1)}
+.sn-samen-paar a:focus-visible{outline:2px solid #fff;outline-offset:4px}
+@media(max-width:480px){.sn-samen-paar{gap:10px;padding:12px}.sn-samen-paar a img{width:96px}}
+.sn-site .sn-samen .sn-samen-docs ul{display:grid;gap:6px;margin:20px 0 0;padding:0;list-style:none}
+.sn-samen-docs li a{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--s-lijn);border-radius:10px;background:#0b0f12;font-size:14.5px;color:#e8ecea;text-decoration:none;transition:border-color .2s,background .2s}
+.sn-samen-docs li a:hover{border-color:#25d36666;background:#25d3660d}
+.sn-samen-docs li a:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.sn-samen-docs li svg{flex:0 0 auto;color:var(--s-groen)}
+.sn-samen-docs li span{flex:1;min-width:0}
+.sn-samen-docs li small{font-family:var(--s-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--s-grijs);white-space:nowrap}
+.sn-samen-alles{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:14.5px;font-weight:600;color:#fff;text-decoration:none;border-bottom:1px solid #25d36688;padding-bottom:2px}
+.sn-samen-alles:hover{color:var(--s-groen)}
+.sn-samen-mens{grid-column:1/-1}
+.sn-site .sn-samen .sn-samen-mens ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:24px 0 0;padding:0;list-style:none;counter-reset:mens}
+@media(max-width:1100px){.sn-site .sn-samen .sn-samen-mens ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.sn-site .sn-samen .sn-samen-mens ol{grid-template-columns:1fr}}
+.sn-samen-mens li{display:flex;flex-direction:column;gap:8px;padding:16px;border:1px solid var(--s-lijn);border-radius:12px;background:#0b0f12;counter-increment:mens}
+.sn-samen-mens li:before{content:"0" counter(mens);font-family:var(--s-mono);font-size:11px;letter-spacing:.08em;color:var(--s-groen)}
+.sn-samen-mens li strong{font-size:16px;font-weight:600;line-height:1.25;color:#fff}
+:root .sn-site .sn-samen .sn-samen-mens li p{flex:1;margin:0;font-size:14px;line-height:1.45;color:#b9c2be}
+.sn-samen-mens li a{display:inline-flex;align-items:center;gap:4px;font-family:var(--s-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--s-grijs);text-decoration:none}
+.sn-samen-mens li a:hover{color:var(--s-groen)}
+.sn-samen-mens li a:focus-visible{outline:2px solid #fff;outline-offset:3px}

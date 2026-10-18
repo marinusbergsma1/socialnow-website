@@ -10,6 +10,10 @@
 :root .sn-site .sn-cos .cos-lead{margin-top:18px;max-width:52ch;font-size:clamp(16px,1.2vw,18px);line-height:1.5;color:#b9c2be}
 :root .sn-site .sn-cos .cos-voor-jou{margin-top:20px;padding:12px 14px;border:1px solid #25d36640;border-radius:10px;background:#25d3660d;font-size:14px;line-height:1.45;color:#cfe9da}
 .sn-cos .cos-voor-jou b{color:#fff;font-weight:600}
+.sn-cos .cos-risicos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;margin:20px 0 0;padding:0;list-style:none}
+@media(max-width:560px){.sn-cos .cos-risicos{grid-template-columns:1fr}}
+:root .sn-site .sn-cos .cos-risicos li{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.35;color:#cfd6d3}
+.sn-cos .cos-risicos i{flex:0 0 8px;height:8px;margin-top:5px;border-radius:50%;background:#f62961;box-shadow:0 0 8px #f6296188}
 .sn-cos .cos-acties{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 html:root .sn-site .sn-cos .sn-pill.cos-stil{border-color:var(--cos-lijn-sterk)!important}
 html:root .sn-site .sn-cos .sn-pill.cos-stil:before{background:#ffffff14!important}

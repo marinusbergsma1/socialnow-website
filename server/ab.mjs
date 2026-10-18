@@ -33,7 +33,7 @@ import { createHash, randomBytes } from "node:crypto";
 
 export const VARIANTEN = ["a", "b"];
 export const GEBEURTENISSEN = ["header_getoond", "header_klik"];
-export const DOELEN = ["gratis_os", "custom_os", "connect", "werk", "explainer"];
+export const DOELEN = ["gratis_os", "custom_os", "connect", "werk", "veiligheid", "explainer"];
 const MIN = 0.1;
 const MAX = 0.9;
 const VERNIEUW_MS = 6 * 60 * 60 * 1000;

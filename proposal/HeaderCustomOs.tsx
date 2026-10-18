@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import "./header-custom-os.css";
 
 // Variant B van de homepage-header — 17 oktober 2026.
 // MARINUS: "nieuwe explainer gefocust op custom os ipv beginnende ondernemers". Voor bestaande
-// bedrijven; variant A (HomeHeader) blijft voor starters met het gratis OS. Wie welke variant ziet
+// bedrijven; variant A (HomeHeader) blijft voor starters met het gratis OS.
+// 18 oktober 2026 (Marinus): voor wie al een bedrijf heeft, "met focus meer op reden dat verouderde
+// systemen zorgen dat je gehackt word en wij het overzicht verbeteren. Echte experts je helpen". Wie welke variant ziet
 // en hoe de verdeling zichzelf bijstelt: server/ab.mjs. Voorbeeld en regels:
 // 01_WEBSITE/socialnow-ab-custom-os-20261017/index.html.
 //
@@ -12,9 +15,11 @@ import "./header-custom-os.css";
 // algemene tekst. Alleen Nederlands, daarom geen vertalingen in i18n.
 
 export type Profiel = { bedrijf: string; branche?: string; mensen?: number };
-type Doel = "custom_os" | "werk" | "explainer";
+type Doel = "custom_os" | "veiligheid" | "explainer";
 
-const CONTACT = "/contact?onderwerp=Custom%20OS";
+const CONTACT = "/contact?onderwerp=Systeemcheck%20Custom%20OS";
+// Waar het bij bestaande bedrijven meestal lekt. Bewust geen percentages: die hebben we niet zelf gemeten.
+const RISICOS = ["Software en plug-ins zonder updates", "Wachtwoorden en sleutels in mail en WhatsApp", "Klantdata in losse lijsten, zonder rechten per persoon", "Niemand die het geheel overziet"];
 const BRANCHE: Record<string, string> = {
   retail: "winkels, voorraad en online verkoop",
   bouw: "projecten, planning en offertes",
@@ -57,9 +62,9 @@ function Teller({ doel, actief }: { doel: number; actief: boolean }) {
 
 function Explainer({ osNaam, meet }: { osNaam: string; meet: (doel: Doel) => void }) {
   const scenes = [
-    { kort: "Nu", tijd: 3200, tekst: "Vandaag: acht losse systemen. Niemand ziet het geheel." },
-    { kort: "In kaart", tijd: 3000, tekst: "Wij brengen in kaart hoe jullie echt werken, en koppelen wat er al is." },
-    { kort: "Eén OS", tijd: 3600, tekst: `Eén OS rond jullie processen. ${osNaam === "Jouw OS" ? "Je cijfers live op één scherm." : `${osNaam}, live op één scherm.`}` },
+    { kort: "Nu", tijd: 3400, tekst: "Vandaag: acht losse systemen, oude software en niemand die het geheel ziet." },
+    { kort: "Check", tijd: 3200, tekst: "Onze experts brengen alles in kaart, sluiten de gaten en koppelen wat er al is." },
+    { kort: "Overzicht", tijd: 3600, tekst: `Eén OS met rechten per persoon. ${osNaam === "Jouw OS" ? "Je cijfers live op één scherm." : `${osNaam}, live op één scherm.`}` },
     { kort: "Milo", tijd: 4600, tekst: "Milo-agents werken op jullie eigen data en stellen voor wat er nu moet gebeuren." },
   ];
   const [nu, setNu] = useState(0);
@@ -83,8 +88,8 @@ function Explainer({ osNaam, meet }: { osNaam: string; meet: (doel: Doel) => voi
   }, [nu]);
   const fase = `s${nu + 1}`;
   return (
-    <div className={`cos-speler ${fase}`} aria-roledescription="animatie" aria-label="Van losse systemen naar één OS">
-      <div className="cos-speler-kop"><span className="cos-live"><i />Explainer · Custom OS</span><span>0{nu + 1} / 04</span></div>
+    <div className={`cos-speler ${fase}`} aria-roledescription="animatie" aria-label="Van losse, verouderde systemen naar één veilig OS">
+      <div className="cos-speler-kop"><span className="cos-live"><i />Systeemcheck · Custom OS</span><span>0{nu + 1} / 04</span></div>
       <div className="cos-podium">
         <svg className="cos-lijnen" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">{LIJNEN.map(d => <path key={d} d={d} />)}</svg>
         <div className="cos-kern"><img src="/images/SocialNow-OS-Logo-transparant.webp" alt="" /></div>
@@ -127,13 +132,14 @@ export default function HeaderCustomOs({ profiel, meet }: { profiel?: Profiel | 
     <div className="sn-cos">
       <section className="cos-hero" data-variant="custom-os" id="diensten">
         <div>
-          <p className="cos-eyebrow"><i />{naam ? `Custom OS / Voorbereid voor ${naam}` : "Custom OS / Voor bedrijven die verder willen"}</p>
-          <h1>{naam ? <>Zo zou het OS van {naam} <span>eruit kunnen zien.</span></> : <>Eén systeem, gebouwd rond <span>hoe jouw bedrijf werkt.</span></>}</h1>
-          <p className="cos-lead">Website, CRM, content, advertenties en je cijfers in één OS. Wij brengen je werkwijze in kaart, koppelen wat je al hebt en zetten Milo-agents op je eigen data.</p>
+          <p className="cos-eyebrow"><i />{naam ? `Custom OS / Voorbereid voor ${naam}` : "Voor bestaande bedrijven / Systeemcheck en Custom OS"}</p>
+          <h1>{naam ? <>Zo zou het OS van {naam} <span>eruit kunnen zien.</span></> : <>Verouderde systemen zijn een open deur voor hackers. <span>Wij brengen weer overzicht.</span></>}</h1>
+          <p className="cos-lead">Software zonder updates, wachtwoorden in de mail en klantdata verspreid over vijf tools. Daar komen inbrekers binnen. Onze experts brengen in kaart wat je hebt, sluiten de gaten en zetten alles in één OS dat je zelf overziet.</p>
+          <ul className="cos-risicos" aria-label="Waar het vaak misgaat">{RISICOS.map(r => <li key={r}><i aria-hidden="true" />{r}</li>)}</ul>
           {naam && <p className="cos-voor-jou"><b>Voor {naam}: </b>{regels.length ? regels.join(", ") : "op maat van jullie processen"}. In een eerste gesprek van 30 minuten laten we zien wat er al te koppelen is.</p>}
           <div className="cos-acties">
-            <a className="sn-pill sn-home-cta" href={CONTACT} onClick={() => meet("custom_os")}><span>Bespreek jouw Custom OS</span><ArrowUpRight size={18} /></a>
-            <a className="sn-pill cos-stil" href="/projecten" onClick={() => meet("werk")}><span>Bekijk ons werk</span><ArrowUpRight size={18} /></a>
+            <a className="sn-pill sn-home-cta" href={CONTACT} onClick={() => meet("custom_os")}><span>Plan een systeemcheck</span><ArrowUpRight size={18} /></a>
+            <Link className="sn-pill cos-stil" to="/veiligheid" onClick={() => meet("veiligheid")}><span>Zo beveiligen wij</span><ArrowUpRight size={18} /></Link>
           </div>
           <p className="cos-prijs">Custom OS <b>vanaf €10.000</b> · scope en kosten vooraf vastgelegd</p>
           <div className="cos-bouwers">
@@ -142,10 +148,10 @@ export default function HeaderCustomOs({ profiel, meet }: { profiel?: Profiel | 
               <img src="/images/klein/Steef-Komen-160.webp" alt="Steef Komen" width="40" height="40" />
               <img src="/images/klein/sid-attesso-96.webp" alt="Sid van Kalken" width="40" height="40" />
             </div>
-            <p><strong>Marinus, Steef en Sid bouwen het met je.</strong>Developers en dataspecialisten, geen ticketsysteem.</p>
+            <p><strong>Echte experts, geen chatbot of ticketsysteem.</strong>Marinus, Steef en Sid kijken zelf mee: developers en dataspecialisten.</p>
           </div>
           <ol className="cos-stappen" aria-label="Zo gaat het">
-            <li><span>01</span>Werkwijze in kaart</li><li><span>02</span>Koppelen en bouwen</li><li><span>03</span>Live met begeleiding</li>
+            <li><span>01</span>Systeemcheck</li><li><span>02</span>Gaten dichten en koppelen</li><li><span>03</span>Eén OS met overzicht</li>
           </ol>
         </div>
         <Explainer osNaam={osNaam} meet={meet} />

@@ -15,7 +15,9 @@ import "./wereldkaart.css";
 import React from "react";
 import { Link } from "react-router-dom";
 import { OnderDeVouw, later } from "./later";
-import { HomeDevelopmentPartners, HomeConnectBand } from "./HomeHeader";
+import { HomeConnectBand } from "./HomeHeader";
+// 18 oktober 2026: partners en veiligheidsdocumenten direct onder de header, zie SamenEnVeilig.tsx.
+import SamenEnVeilig from "./SamenEnVeilig";
 // 17 oktober 2026: A/B-test van de header (A gratis OS, B Custom OS); uitleg in server/ab.mjs.
 import HomeHeaderAB from "./HomeHeaderAB";
 import FreeWebsite from "./FreeWebsite";
@@ -34,6 +36,7 @@ export function Home() {
   return <div className="sn-simple-home">
     <section className="h-hero sn-approved-hero" id="home">
       <HomeHeaderAB />
+      <SamenEnVeilig />
       <HomeConnectBand />
       <div className="h-wrap h-hero-content sn-below-new-header">
         <HomeTeam />
@@ -41,7 +44,6 @@ export function Home() {
     </section>
     <FreeWebsite />
     <div className="h-wrap sn-platform-foundation"><PixelInfrastructure /></div>
-    <HomeDevelopmentPartners />
     <Bento id="jouw-systeem" label="Jouw data. Jouw connecties." titel={<>Software as a tool.<br /><span>Not a service.</span></>}>
       <Tegel kop="Jouw data. Jouw connecties." breed={6}>
         <h3 className="sn-tegel-titel" translate="no">We are the service layer.</h3>
