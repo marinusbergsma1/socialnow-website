@@ -5,6 +5,7 @@ import { klein } from "./licht";
 import { people } from "./content";
 import { GRATIS_OS_URL } from "./os-entry";
 import ExplainerPlayer from "./ExplainerPlayer";
+import { MiloMotion } from "./motion";
 import { ConnectLogo, Downloads, Filters, faces } from "./HomeHeader";
 import "./home-header-approved.css";
 import "./home-header-choice.css";
@@ -18,6 +19,8 @@ import "./header-bestaand.css";
 // Daarom dezelfde opzet als variant A (HomeHeader), met een pakketkeuze in plaats van de Milo's en de Connect-gezichten
 // plus hulppakketten. Geen €10.000 meer in de header.
 //
+// Daarna: "Verder is alles maandelijks." en "liever de bewegende robots weer terug": tokens per maand, de vier Milo's
+// als bewegende video (MiloMotion) zoals op de rest van de site.
 // Daarna: "Die prijzen mag na het account aanmaken." Dus geen bedragen in de header: alleen de pakketten. De
 // tokenpakketten zijn die uit de OS-code (Flyinghighscalingup/socialnow-app, api/_studio-tokens.js, TOKEN_BUNDLES:
 // 1.000, 2.500 en 5.000 tokens). De hulppakketten zijn die van /prijzen (Pricing.tsx). Het gekozen pakket gaat als ?pakket= mee naar de aanmelding van het OS; het OS
@@ -27,10 +30,12 @@ type Doel = "gratis_os" | "connect" | "explainer" | "veiligheid";
 
 const START = [
   { id: "gratis", naam: "Gratis", groot: "10 GB", sub: "opslag" },
-  { id: "tokens-1000", naam: "Tokens", groot: "1.000", sub: "eenmalig" },
-  { id: "tokens-2500", naam: "Tokens", groot: "2.500", sub: "eenmalig" },
-  { id: "tokens-5000", naam: "Tokens", groot: "5.000", sub: "eenmalig" },
+  { id: "tokens-1000", naam: "Tokens", groot: "1.000", sub: "per maand" },
+  { id: "tokens-2500", naam: "Tokens", groot: "2.500", sub: "per maand" },
+  { id: "tokens-5000", naam: "Tokens", groot: "5.000", sub: "per maand" },
 ];
+const MILOS = [{ rol: "website", naam: "Website" }, { rol: "crm", naam: "CRM" }, { rol: "content", naam: "Content" }, { rol: "ads", naam: "Ads" }];
+
 // Ook een hulppakket kies je bij het aanmaken van je account; de prijs volgt daarna in het OS.
 const HULP = [
   { id: "hulp-content", naam: "Content", wie: "Content in je merk, gepland en geplaatst" },
@@ -64,7 +69,9 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
             <div className="services">
               <article className="service os">
                 <div className="logo-row"><img className="os-logo" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" /><Downloads /></div>
-                <h2>Kies hoe je start.</h2>
+                <h2>AI management &amp; operations.</h2>
+                <div className="visual milos bs-milos">{MILOS.map(m => <figure key={m.rol}><MiloMotion role={m.rol} name={`Milo ${m.naam}`} maat={128} /><figcaption>{m.naam}</figcaption></figure>)}</div>
+                <p className="bs-kop-start">Kies hoe je start.</p>
                 <div className="bs-keuze" role="radiogroup" aria-label="Kies je startpakket" onKeyDown={e => pijltjes(e, START.map(x => x.id), start, setStart)}>
                   {START.map(s => (
                     <button key={s.id} type="button" role="radio" aria-checked={start === s.id} tabIndex={start === s.id ? 0 : -1} data-id={s.id} className="bs-pakket" onClick={() => setStart(s.id)}>
@@ -78,7 +85,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <p className="bs-uitleg">
                   {start === "gratis"
                     ? <><strong>Gratis tot 10 GB aan opslag.</strong> Bij je aanmelding koppel je alvast je rekening. Zolang je onder 10 GB blijft, schrijven we niets af.</>
-                    : <><strong>Gratis tot 10 GB, plus {gekozen.groot} tokens voor de Studio.</strong> Eenmalig, geen abonnement. De prijs zie je nadat je je account hebt aangemaakt.</>}
+                    : <><strong>Gratis tot 10 GB, plus {gekozen.groot} tokens per maand voor de Studio.</strong> De prijs zie je nadat je je account hebt aangemaakt.</>}
                 </p>
                 <div className="action os-account-actions">
                   <a className="pill" href={`${GRATIS_OS_URL}?pakket=${start}`} onClick={() => meet("gratis_os")}><span>Start for free</span><span className="arrow"><ArrowUpRight size={17} /></span></a>

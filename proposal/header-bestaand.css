@@ -1,5 +1,9 @@
 /* HeaderBestaand.tsx, variant B voor bestaande bedrijven — 18 oktober 2026. Bovenop home-header-choice.css. */
 .sn-site .sn-bestaand .service h2{text-align:left}
+.sn-site .sn-bestaand .bs-milos{justify-content:flex-start}
+.sn-site .sn-bestaand .bs-milos .h-milo-animated{position:relative;display:block;width:80px;height:80px;margin:auto}
+.sn-site .sn-bestaand .bs-milos .h-milo-animated>:is(img,video){position:absolute;inset:0;width:80px;height:80px;object-fit:contain;background:transparent}
+.sn-site .sn-bestaand .bs-kop-start{margin:10px 0 10px;font-size:18px;font-weight:700;color:var(--green);text-align:left}
 .sn-site .sn-bestaand .bs-keuze{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:4px 0 0}
 @media(max-width:560px){.sn-site .sn-bestaand .bs-keuze{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .sn-site .sn-bestaand .bs-pakket{position:relative;display:grid;gap:2px;justify-items:start;padding:12px 12px 11px;border:1px solid #2a3b31;border-radius:12px;background:#07100b;color:#d6e5dc;text-align:left;cursor:pointer;transition:border-color .2s,background .2s}
