@@ -4,11 +4,7 @@
 .sn-site .sn-choice .showcase .os-custom-call>p strong{color:#fff;font-weight:700}
 .sn-site .sn-choice .showcase .os-custom-call .pill{width:max-content;min-width:0;max-width:100%;gap:16px;border-color:#25d36699}
 .sn-site .sn-choice .showcase .os-custom-call .pill>span:not(.arrow){position:relative;z-index:1}
-.sn-site .sn-choice .video-intro .custom-call-line{margin:12px 0 0;font-size:16px;line-height:1.45;color:#b0c1b6}
-.sn-site .sn-choice .video-intro .custom-call-line button{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0;border:0;background:none;color:#fff;font-weight:700;cursor:pointer;text-decoration:underline;text-decoration-color:#25d36699;text-underline-offset:5px}
-.sn-site .sn-choice .video-intro .custom-call-line button:hover{text-decoration-color:var(--green,#25d366)}
-.sn-site .sn-choice .video-intro .custom-call-line button>.arrow{display:inline-grid;place-items:center;color:var(--green,#25d366)}
-@media(max-width:760px){.sn-site .sn-choice .showcase .os-custom-call{gap:10px}.sn-site .sn-choice .video-intro .custom-call-line{font-size:15px;margin-top:6px}}
+@media(max-width:760px){.sn-site .sn-choice .showcase .os-custom-call{gap:10px}}
 
 /* Het paneel: een modale dialoog, op mobiel een vel over het hele scherm. */
 :root .sn-call{width:min(720px,calc(100% - 32px));max-width:none;max-height:min(880px,calc(100dvh - 48px));margin:auto;padding:0;border:1px solid #ffffff24;border-radius:18px;background:#050907;color:#fff;box-shadow:0 30px 90px #000c;overflow:hidden}
