@@ -132,6 +132,7 @@ const INBEGREPEN = [
 // Tokens per maand voor de merkgetrainde Studio (Marinus, 18 oktober 2026). Tokens per pakket uit de OS-code
 // (api/_studio-tokens.js: één token is één eurocent rendertegoed); wat je ervoor krijgt uit api/_prijzen.js: een beeld met
 // Nano Banana Pro in 2K kost 28 tokens, een video van 8 seconden met Veo 3.1 Fast 160 tokens (naar beneden afgerond).
+// Tokens en de SEPA-machtiging staan in het OS nog uit, dus de knop leidt naar de gratis aanmelding.
 const TOKENS: Pakket[] = [
   {
     naam: "1.000 tokens",
@@ -144,7 +145,7 @@ const TOKENS: Pakket[] = [
     ],
     team: ["carmel", "sam", "emma"],
     kleur: "var(--prijs-geel)",
-    actie: "Kies 1.000 tokens",
+    actie: "Probeer het OS gratis",
     onderwerp: "Tokens 1.000 per maand",
     href: GRATIS_OS_URL,
   },
@@ -159,7 +160,7 @@ const TOKENS: Pakket[] = [
     ],
     team: ["carmel", "sam", "emma"],
     kleur: "var(--prijs-roze)",
-    actie: "Kies 2.500 tokens",
+    actie: "Probeer het OS gratis",
     onderwerp: "Tokens 2.500 per maand",
     href: GRATIS_OS_URL,
   },
@@ -174,10 +175,21 @@ const TOKENS: Pakket[] = [
     ],
     team: ["carmel", "sam", "emma"],
     kleur: "var(--prijs-blauw)",
-    actie: "Kies 5.000 tokens",
+    actie: "Probeer het OS gratis",
     onderwerp: "Tokens 5.000 per maand",
     href: GRATIS_OS_URL,
   },
+];
+
+// 18 oktober 2026 (Marinus): "Ik wil ook dat de partner gecertificeerde logo's erbij komen dus van Uncanny etc." Alleen logo's
+// en relaties die al op de site staan: "Building together with" (HomeHeader.tsx: SocialNow OS × Indexworld, Connect × Uncanny),
+// de partners uit TeamTrust.tsx (Komen Consultancy, Attesso, Fincer) en "Gecertificeerd & erkend" uit de footer
+// (BrandFooter.tsx: Google Partner, Meta Business Partner, Google Developers). Wit op zwart zoals op de homepage.
+const PARTNERS = [
+  { naam: "Indexworld", bij: "SocialNow OS", href: "https://indexworld.net", logo: "/images/home-header/indexworld.png", wit: true },
+  { naam: "Uncanny", bij: "Connect", href: "https://uncannycs.com", logo: "/images/home-header/uncanny-op-zwart.svg", wit: false },
+  { naam: "Komen Consultancy", bij: "Operation Systems", href: "https://www.komenconsultancy.com/", logo: "/images/merken/komen-operation-systems.webp", wit: true },
+  { naam: "Fincer", bij: "Wealth management", href: "https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/", logo: "/images/merken/fincer-wit.png", wit: false },
 ];
 
 const GRATIS = [
@@ -375,6 +387,35 @@ export default function Pricing() {
           {MAAND.map((pakket) => (
             <Kaart key={pakket.naam} pakket={pakket} />
           ))}
+        </div>
+        <div className="prijs-partners">
+          <div className="prijs-partners-groep">
+            <p className="h-eyebrow">Gebouwd met</p>
+            <ul>
+              {PARTNERS.map((partner) => (
+                <li key={partner.naam}>
+                  <a href={partner.href} target="_blank" rel="noopener noreferrer" aria-label={partner.naam}>
+                    <img className={partner.wit ? "is-wit" : undefined} src={partner.logo} alt={partner.naam} loading="lazy" />
+                  </a>
+                  <small translate="no">{partner.bij}</small>
+                </li>
+              ))}
+              <li>
+                <a href="https://www.attesso.com/" target="_blank" rel="noopener noreferrer" aria-label="Attesso">
+                  <code translate="no">~/attesso</code>
+                </a>
+                <small translate="no">AI Payments</small>
+              </li>
+            </ul>
+          </div>
+          <div className="prijs-partners-groep">
+            <p className="h-eyebrow">Gecertificeerd &amp; erkend</p>
+            <ul className="prijs-erkend">
+              <li><img className="is-wit" src="/google-logo.svg" alt="Google Partner" loading="lazy" /></li>
+              <li><img className="is-wit" src="/meta-logo.svg" alt="Meta Business Partner" loading="lazy" /></li>
+              <li><b>Google Developers</b></li>
+            </ul>
+          </div>
         </div>
       </section>
     </div>
