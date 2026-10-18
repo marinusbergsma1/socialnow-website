@@ -86,3 +86,34 @@
   .sn-site .sn-cx-gezichten > li { animation: none; }
   .sn-site .sn-cx-gezichten img, .sn-site .sn-cx-vak, .sn-site .sn-cx-vink { transition: none; }
 }
+
+/* VOORSTEL 18 oktober 2026: drie versies voor de telefoon, te kiezen met ?cx=1|2|3 (zie ConnectExperts.tsx). */
+.sn-site .cx-tabs { display: none; }
+@media (max-width: 760px) {
+  /* 1: zijwaartse strook (Bento swipe). De vakgebieden in één kolom, zodat een tegel niet te hoog wordt. */
+  .sn-site .cx-v1 .sn-cx-vakken { grid-template-columns: 1fr; gap: 6px; }
+  .sn-site .cx-v1 .sn-cx-vak { min-height: 44px; }
+  .sn-site .cx-v1 .sn-cx-gezichten { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .sn-site .cx-v1 .sn-bento-rooster.is-swipe { align-items: flex-start; }
+
+  /* 2: tabbladen naast elkaar, één onderdeel tegelijk. */
+  .sn-site .cx-v2 .cx-tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 -20px 4px; padding: 0 20px 2px; grid-column: 1 / -1; }
+  .sn-site .cx-v2 .cx-tabs::-webkit-scrollbar { display: none; }
+  .sn-site .cx-v2 .cx-tabs button { flex: 0 0 auto; padding: 10px 16px; border: 1px solid var(--cx-rand); border-radius: 999px; background: rgba(255,255,255,.03); color: #c6d0d8; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .sn-site .cx-v2 .cx-tabs button[aria-selected="true"] { background: var(--cx-blauw); border-color: var(--cx-blauw); color: #04121a; }
+  .sn-site .cx-v2 .sn-bento-rooster > .sn-tegel:not(.is-tab) { display: none; }
+
+  /* 3: alles in rijen naast elkaar: vakgebieden, je team, de bedrijven, de nieuwkomers en het netwerk schuiven opzij. */
+  .sn-site .cx-v3 .sn-tegel { padding-inline: 14px; }
+  .sn-site .cx-v3 :is(.sn-cx-vakken, .sn-cx-gezichten, .sn-cx-bedrijven ul, .sn-cx-nieuw ul, .sn-cx-muur) { display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; margin-inline: -14px; padding: 2px 14px 6px; }
+  .sn-site .cx-v3 :is(.sn-cx-vakken, .sn-cx-gezichten, .sn-cx-bedrijven ul, .sn-cx-nieuw ul, .sn-cx-muur)::-webkit-scrollbar { display: none; }
+  .sn-site .cx-v3 .sn-cx-vak { flex: 0 0 auto; width: auto; min-height: 42px; padding: 6px 14px 6px 10px; white-space: nowrap; border-radius: 999px; scroll-snap-align: start; }
+  .sn-site .cx-v3 .sn-cx-gezichten > li, .sn-site .cx-v3 .sn-cx-gezichten.is-vol > li { flex: 0 0 108px; scroll-snap-align: start; }
+  .sn-site .cx-v3 .sn-cx-gezichten.is-vol span { display: -webkit-box; }
+  .sn-site .cx-v3 .sn-cx-bedrijven li { flex: 0 0 auto; min-height: 44px; padding: 6px 12px; border: 1px solid var(--cx-rand); border-radius: 999px; white-space: nowrap; }
+  .sn-site .cx-v3 .sn-cx-bedrijven li:last-child { border-bottom: 1px solid var(--cx-rand); }
+  .sn-site .cx-v3 .sn-cx-nieuw li { flex: 0 0 170px; grid-template-columns: 40px minmax(0, 1fr); padding: 10px; border: 1px solid var(--cx-rand); border-radius: 14px; }
+  .sn-site .cx-v3 .sn-cx-nieuw img { width: 40px; height: 40px; }
+  .sn-site .cx-v3 .sn-cx-nieuw time { grid-column: 1 / -1; justify-self: start; }
+  .sn-site .cx-v3 .sn-cx-muur > img { flex: 0 0 40px; }
+}

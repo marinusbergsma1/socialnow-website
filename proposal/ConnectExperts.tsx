@@ -34,7 +34,20 @@ function Gezicht({ naam, beeld, maat = 48 }: { naam: string; beeld: string; maat
   return <img {...klein(beeld, maat, [96, 160], undefined, VERSIE)} alt="" width={maat} height={maat} loading="lazy" title={naam} translate="no" />;
 }
 
+// VOORSTEL 18 oktober 2026, alleen om te vergelijken (niet mergen zoals het hier staat). Marinus: "de connect waar ik ook
+// nog 3 versies van wil zien want op mobiel moeten de verschillende functies niet op elkaar maar naast elkaar staan."
+// ?cx=1 zijwaartse strook, ?cx=2 tabbladen, ?cx=3 twee kolommen. Alleen op de telefoon (tot 760 px) anders.
+const TABS = ["Kies", "Jouw team", "Bedrijven", "Nieuw", "Netwerk"];
+function useVersie() {
+  const [v, setV] = React.useState(0);
+  React.useEffect(() => { const x = Number(new URLSearchParams(window.location.search).get("cx")); if (x >= 1 && x <= 3) setV(x); }, []);
+  return v;
+}
+
 export default function ConnectExperts() {
+  const versie = useVersie();
+  const [tab, setTab] = React.useState(0);
+  const tegel = (i: number, naam: string) => `${naam}${versie === 2 && tab === i ? " is-tab" : ""}`;
   const { language, t } = useLanguage();
   const [gekozen, setGekozen] = React.useState<string[]>(START);
   const wissel = (naam: string) => setGekozen(lijst => lijst.includes(naam) ? lijst.filter(n => n !== naam) : [...lijst, naam]);
@@ -44,8 +57,9 @@ export default function ConnectExperts() {
   const onderwerp = `${t("Team via Connect")}: ${groepen.map(groep => t(groep.name)).join(", ")}`;
   const datum = new Intl.DateTimeFormat(LOCALES[language].replace("_", "-"), { day: "numeric", month: "short" });
 
-  return <Bento id="team" label="SocialNow Connect" titel={<>De experts van Connect.<br /><span>Stel je eigen team samen.</span></>} className="sn-cx">
-    <Tegel kop="Kies wat je nodig hebt" breed={5} className="sn-cx-kies">
+  return <Bento id="team" label="SocialNow Connect" titel={<>De experts van Connect.<br /><span>Stel je eigen team samen.</span></>} className={`sn-cx${versie ? ` cx-v${versie}` : ""}`} swipe={versie === 1}>
+    {versie === 2 && <div className="cx-tabs" role="tablist" aria-label="Onderdelen van Connect">{TABS.map((naam, i) => <button key={naam} type="button" role="tab" aria-selected={tab === i} onClick={() => setTab(i)}>{naam}</button>)}</div>}
+    <Tegel kop="Kies wat je nodig hebt" breed={5} className={tegel(0, "sn-cx-kies")}>
       <div className="sn-cx-vakken" role="group" aria-label="Vakgebieden">
         {expertGroepen.map(groep => {
           const mensen = vindMensen(groep.members);
@@ -63,7 +77,7 @@ export default function ConnectExperts() {
       </div>
     </Tegel>
 
-    <Tegel kop="Jouw team" breed={7} soort="blauw" className="sn-cx-team">
+    <Tegel kop="Jouw team" breed={7} soort="blauw" className={tegel(1, "sn-cx-team")}>
       <p className="sn-cx-telling" aria-live="polite">
         <strong>{team.length}</strong>
         <span>{team.length === 1 ? "expert" : "experts"}</span>
@@ -90,7 +104,7 @@ export default function ConnectExperts() {
       </div>
     </Tegel>
 
-    <Tegel kop="Ieder een eigen bedrijf" breed={4} className="sn-cx-bedrijven">
+    <Tegel kop="Ieder een eigen bedrijf" breed={4} className={tegel(2, "sn-cx-bedrijven")}>
       <ul>
         {bedrijven.map(bedrijf => {
           const mensen = vindMensen(bedrijf.mensen);
@@ -103,7 +117,7 @@ export default function ConnectExperts() {
       </ul>
     </Tegel>
 
-    <Tegel kop="Nieuw in het netwerk" breed={4} className="sn-cx-nieuw">
+    <Tegel kop="Nieuw in het netwerk" breed={4} className={tegel(3, "sn-cx-nieuw")}>
       <ul>
         {nieuwste.map(persoon => <li key={persoon.name}>
           <Gezicht naam={persoon.name} beeld={persoon.image} maat={48} />
@@ -113,7 +127,7 @@ export default function ConnectExperts() {
       </ul>
     </Tegel>
 
-    <Tegel kop="Het hele netwerk" breed={4} className="sn-cx-net">
+    <Tegel kop="Het hele netwerk" breed={4} className={tegel(4, "sn-cx-net")}>
       <div className="sn-cx-muur" aria-hidden="true">{people.map(persoon => <Gezicht key={persoon.name} naam={persoon.name} beeld={persoon.image} maat={40} />)}</div>
       <p className="sn-tegel-tekst"><strong>{people.length}</strong> experts in <strong>{expertGroepen.length}</strong> vakgebieden.</p>
       <div className="sn-cx-links">
