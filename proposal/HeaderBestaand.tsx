@@ -18,18 +18,18 @@ import "./header-bestaand.css";
 // Daarom dezelfde opzet als variant A (HomeHeader), met een pakketkeuze in plaats van de Milo's en de Connect-gezichten
 // plus hulppakketten. Geen €10.000 meer in de header.
 //
-// Tokenbedragen uit de OS-code (Flyinghighscalingup/socialnow-app, api/_studio-tokens.js, TOKEN_BUNDLES):
-// €10 = 1.000, €25 = 2.500, €50 = 5.000 tokens, excl. btw. De hulppakketten zijn die van /prijzen (Pricing.tsx); hun
-// maandbedrag staat bewust alleen daar. Het gekozen pakket gaat als ?pakket= mee naar de aanmelding van het OS; het OS
+// Daarna: "Die prijzen mag na het account aanmaken." Dus geen bedragen in de header: alleen de pakketten. De
+// tokenpakketten zijn die uit de OS-code (Flyinghighscalingup/socialnow-app, api/_studio-tokens.js, TOKEN_BUNDLES:
+// 1.000, 2.500 en 5.000 tokens). De hulppakketten zijn die van /prijzen (Pricing.tsx). Het gekozen pakket gaat als ?pakket= mee naar de aanmelding van het OS; het OS
 // moet die keuze en het koppelen van de rekening nog zelf tonen.
 
 type Doel = "gratis_os" | "connect" | "explainer" | "veiligheid";
 
 const START = [
-  { id: "gratis", naam: "Gratis", prijs: "€0", sub: "tot 10 GB" },
-  { id: "tokens-1000", naam: "1.000 tokens", prijs: "€10", sub: "eenmalig" },
-  { id: "tokens-2500", naam: "2.500 tokens", prijs: "€25", sub: "eenmalig" },
-  { id: "tokens-5000", naam: "5.000 tokens", prijs: "€50", sub: "eenmalig" },
+  { id: "gratis", naam: "Gratis", groot: "10 GB", sub: "opslag" },
+  { id: "tokens-1000", naam: "Tokens", groot: "1.000", sub: "eenmalig" },
+  { id: "tokens-2500", naam: "Tokens", groot: "2.500", sub: "eenmalig" },
+  { id: "tokens-5000", naam: "Tokens", groot: "5.000", sub: "eenmalig" },
 ];
 const HULP = [
   { id: "Content", wie: "Content in je merk, gepland en geplaatst" },
@@ -59,7 +59,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                     <button key={s.id} type="button" role="radio" aria-checked={start === s.id} className="bs-pakket" onClick={() => setStart(s.id)}>
                       <span className="bs-vink" aria-hidden="true">{start === s.id && <Check size={12} strokeWidth={3} />}</span>
                       <b>{s.naam}</b>
-                      <strong>{s.prijs}</strong>
+                      <strong>{s.groot}</strong>
                       <small>{s.sub}</small>
                     </button>
                   ))}
@@ -67,7 +67,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <p className="bs-uitleg">
                   {start === "gratis"
                     ? <><strong>Gratis tot 10 GB aan opslag.</strong> Bij je aanmelding koppel je alvast je rekening. Zolang je onder 10 GB blijft, schrijven we niets af.</>
-                    : <><strong>Gratis tot 10 GB, plus {gekozen.naam} voor de Studio.</strong> Eenmalig, geen abonnement. Bij je aanmelding koppel je je rekening.</>}
+                    : <><strong>Gratis tot 10 GB, plus {gekozen.groot} tokens voor de Studio.</strong> Eenmalig, geen abonnement. De prijs zie je nadat je je account hebt aangemaakt.</>}
                 </p>
                 <div className="action os-account-actions">
                   <a className="pill" href={`${GRATIS_OS_URL}?pakket=${start}`} onClick={() => meet("gratis_os")}><span>Start for free</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
@@ -83,7 +83,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                     <button key={h.id} type="button" role="radio" aria-checked={hulp === h.id} className="bs-chip" onClick={() => setHulp(h.id)} translate="no">{h.id}</button>
                   ))}
                 </div>
-                <p className="bs-uitleg bs-uitleg-hulp">{hulpPakket.wie}. Met een persoonlijke call waarin we je systeem uitleggen. <Link to="/prijzen">Bekijk de prijzen</Link></p>
+                <p className="bs-uitleg bs-uitleg-hulp">{hulpPakket.wie}. Met een persoonlijke call waarin we je systeem uitleggen. De prijs zie je na het aanmaken van je account.</p>
                 <div className="action"><Link className="pill" to={`/contact?onderwerp=${encodeURIComponent(`Pakket ${hulp}`)}`} onClick={() => meet("connect")}><span>Kies {hulp}</span><span className="arrow"><ArrowUpRight size={17} /></span></Link></div>
               </article>
             </div>
