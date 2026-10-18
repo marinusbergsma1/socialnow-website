@@ -13,15 +13,15 @@ Je begint gratis. Kies je voor maatwerk, dan organiseert en betaalt SocialNow B.
 ## Product en aanbod
 
 - SocialNow OS brengt website, CRM, content en advertenties samen. De startroute is WEBSITE → CONTENT → STUDIO.
-- GRATIS tot 10 GB opslag. Bij de aanmelding koppel je alvast je rekening met een SEPA-machtiging; zolang je onder 10 GB blijft, wordt er niets afgeschreven. Genoemde prijzen zijn exclusief btw.
-- Alles verder is maandelijks. Tokens voor de Studio: 1.000, 2.500 of 5.000 tokens voor €10, €25 of €50 per maand. Eén token is één cent rendertegoed.
-- Hulppakketten vanaf €3.000 per maand. Bij elk pakket horen een custom OS (een veilig persoonlijk management- en operationsysteem) en een gratis website.
+- GRATIS tot 10 GB opslag. Bij de aanmelding koppel je je rekening met een SEPA-machtiging; onder 10 GB wordt niets afgeschreven. Voor meer opslag neem je contact op. Genoemde prijzen zijn exclusief btw.
+- Tokens voor de Studio: 1.000, 2.500 of 5.000 tokens voor €10, €25 of €50 per maand. Eén token is één cent rendertegoed.
+- Een custom OS zit in elk maandpakket. Inrichting, koppelingen en begeleiding spreken we persoonlijk af.
 - Odoo is een optionele koppeling voor klanten en verkoop. Odoo is geen vereiste om met SocialNow OS te beginnen.
 - Beschikbare gegevens hangen af van de gekozen koppelingen en toegangsrechten. Functies en persoonlijke inrichting worden samen afgesproken; de testomgeving is in ontwikkeling.
 
 ## Aanvullende samenwerking
 
-De hulppakketten Content, Content + Meta, Meta + Google en Compleet beginnen vanaf €3.000 per maand, exclusief btw. Ze zijn maandelijks en een extra laag bovenop het gratis OS, met custom OS, gratis website en Connect. Scope en kosten worden vooraf afgesproken; de details staan op de [aanbodpagina](https://socialnow.nl/nl/prijzen).
+De gepubliceerde maandpakketten lopen minimaal 3 maanden: Content €4.000 per maand, Content + Meta €5.000 per maand, Meta + Google €5.500 per maand en Compleet €6.000 per maand, exclusief btw. Ze zijn een extra laag bovenop het gratis OS. Scope en kosten worden vooraf afgesproken; de details staan op de [aanbodpagina](https://socialnow.nl/nl/prijzen).
 
 ## Voorbeeld: VDZ Brigade
 

@@ -9,7 +9,6 @@ import "./audit.css";
 import "./cases.css";
 import "./media-bento.css";
 import "./pricing.css";
-import "./tokens-plus.css";
 import "./site-visie.css";
 import "./free-website.css";
 import "./wereldkaart.css";
@@ -27,7 +26,6 @@ import PixelInfrastructure from "./PixelInfrastructure";
 import { useLanguage } from "./i18n/context";
 import "./home-simple.css";
 const Bereikt = later(() => import("./Bereikt").then(m => m.default));
-const TokensHome = later(() => import("./TokensPlus").then(m => m.TokensHome));
 
 export function Home() {
   useLanguage();
@@ -60,7 +58,5 @@ export function Home() {
         <div className="sn-tegel-onder"><TextLink to={`/het-os#${agent.id}`}>Ontdek dit onderdeel</TextLink></div>
       </Tegel>)}
     </Bento>
-    {/* 18 oktober 2026 (Marinus): "tokens kopen moet een groter onderdeel zijn". Direct na de Studio, zie TokensPlus.tsx. */}
-    <OnderDeVouw ruimte={false}><TokensHome /></OnderDeVouw>
   </div>;
 }
