@@ -1,0 +1,48 @@
+/* HeaderBestaand.tsx, variant B voor bestaande bedrijven — 18 oktober 2026. Bovenop home-header-choice.css. */
+.sn-site .sn-bestaand .service h2{text-align:left}
+.sn-site .sn-bestaand .bs-milos{justify-content:flex-start}
+.sn-site .sn-bestaand .bs-milos .h-milo-animated{position:relative;display:block;width:80px;height:80px;margin:auto}
+.sn-site .sn-bestaand .bs-milos .h-milo-animated>:is(img,video){position:absolute;inset:0;width:80px;height:80px;object-fit:contain;background:transparent}
+.sn-site .sn-bestaand .bs-kop-start{margin:10px 0 10px;font-size:18px;font-weight:700;color:var(--green);text-align:left}
+.sn-site .sn-bestaand .bs-keuze{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:4px 0 0}
+@media(max-width:560px){.sn-site .sn-bestaand .bs-keuze{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.sn-site .sn-bestaand .bs-pakket{position:relative;display:grid;gap:2px;justify-items:start;padding:12px 12px 11px;border:1px solid #2a3b31;border-radius:12px;background:#07100b;color:#d6e5dc;text-align:left;cursor:pointer;transition:border-color .2s,background .2s}
+.sn-site .sn-bestaand .bs-pakket:hover{border-color:#25d36688}
+.sn-site .sn-bestaand .bs-pakket[aria-checked=true]{border-color:var(--green);background:#0b1f13;box-shadow:0 0 0 1px var(--green) inset}
+.sn-site .sn-bestaand .bs-pakket b{font-size:12.5px;font-weight:600;color:#c8d8ce}
+.sn-site .sn-bestaand .bs-pakket strong{font-size:22px;font-weight:700;line-height:1.1;color:#fff}
+.sn-site .sn-bestaand .bs-pakket small{font-size:11px;color:#8da297}
+.sn-site .sn-bestaand .bs-vink{position:absolute;right:9px;top:9px;width:16px;height:16px;border-radius:50%;border:1px solid #385143;display:grid;place-items:center;color:#002912}
+.sn-site .sn-bestaand .bs-pakket[aria-checked=true] .bs-vink{background:var(--green);border-color:var(--green)}
+.sn-site .sn-bestaand .bs-uitleg{min-height:52px;margin:14px 0 18px;font-size:14.5px;line-height:1.5;color:#afc0b6;text-align:left}
+.sn-site .sn-bestaand .bs-uitleg strong{color:var(--green);font-weight:700}
+.sn-site .sn-bestaand .bs-uitleg a{color:#fff;border-bottom:1px solid #20afde88}
+.sn-site .sn-bestaand .bs-kop-hulp{margin:12px 0 10px;font-size:18px;text-align:left}
+.sn-site .sn-bestaand .bs-kop-hulp strong{color:var(--blue)}
+.sn-site .sn-bestaand .bs-hulp{display:flex;flex-wrap:wrap;gap:8px}
+.sn-site .sn-bestaand .bs-chip{padding:9px 14px;border:1px solid #1d4250;border-radius:999px;background:#061318;color:#cfe6ee;font-size:13px;font-weight:600;cursor:pointer;transition:border-color .2s,background .2s}
+.sn-site .sn-bestaand .bs-chip:hover{border-color:#20afde88}
+.sn-site .sn-bestaand .bs-chip[aria-checked=true]{border-color:var(--blue);background:#0a2530;color:#fff;box-shadow:0 0 0 1px var(--blue) inset}
+.sn-site .sn-bestaand :is(.bs-pakket,.bs-chip):focus-visible{outline:2px solid #fff;outline-offset:3px}
+.sn-site .sn-bestaand .bs-uitleg-hulp{min-height:0}
+.sn-site .sn-bestaand .service.connect>.action{text-align:left}
+.sn-site .sn-bestaand .bs-zeker{display:flex;flex-wrap:wrap;gap:8px 20px;margin:16px 0 0;padding:0;list-style:none}
+.sn-site .sn-bestaand .bs-zeker li{display:flex;align-items:center;gap:7px;font-size:14px;color:#c8d8ce}
+.sn-site .sn-bestaand .bs-zeker svg{color:var(--green)}
+.sn-site .sn-bestaand .bs-zeker a{color:#fff;border-bottom:1px solid #25d36688}
+.sn-site .sn-bestaand .service.connect>.action .pill{width:max-content;max-width:100%;gap:16px;white-space:nowrap}
+.sn-site .sn-bestaand .bs-uitleg-hulp strong{display:block;margin-bottom:4px;color:var(--blue)}
+.sn-site .sn-bestaand .bs-switch{display:inline-flex;gap:4px;margin:14px 0 0;padding:4px;border:1px solid #2a3b31;border-radius:999px;background:#07100b}
+.sn-site .sn-bestaand .bs-switch button{padding:8px 16px;border:0;border-radius:999px;background:transparent;color:#a8b8af;font-size:13px;font-weight:700;letter-spacing:.02em;cursor:pointer;transition:background .2s,color .2s}
+.sn-site .sn-bestaand .bs-switch button[aria-pressed=true]{background:var(--green);color:#002912}
+.sn-site .sn-bestaand .bs-switch button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.sn-site .sn-bestaand .bs-kop-hulp span{color:#c8d8ce;font-weight:600}
+.sn-site .sn-bestaand .bs-typer{display:block;min-height:2.1em;color:var(--green)}
+@media(min-width:1151px){.sn-site .sn-bestaand .bs-typer{min-height:1.05em;white-space:nowrap;font-size:.72em}}
+.sn-site .sn-bestaand .bs-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sn-site .sn-bestaand .bs-cursor{display:inline-block;width:.07em;height:.9em;margin-left:.06em;vertical-align:-.08em;background:var(--green);animation:bs-knipper 1s steps(1) infinite}
+@keyframes bs-knipper{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.sn-site .sn-bestaand .bs-cursor{display:none}}
+.sn-site .sn-bestaand .bs-custom{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sn-site .sn-bestaand .bs-custom .bs-pakket strong{font-size:19px}
+.sn-site .sn-bestaand .bs-custom .bs-pakket small{font-size:12.5px;line-height:1.35;padding-right:4px}
