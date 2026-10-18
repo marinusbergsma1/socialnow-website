@@ -146,3 +146,18 @@
   .sn-site .cx-keuze p { font-size: 13px; }
   .sn-site .cx-keuze .h-button { width: 100%; justify-content: space-between; padding-left: 14px; font-size: 11.5px; letter-spacing: .03em; gap: 10px; }
 }
+
+/* Basisversie op wit. Blauw donkerder dan #00a3e0, zodat het op wit genoeg contrast heeft. */
+.sn-site .cx-wit { background: #fff; color: #0b0f12; }
+html:root .sn-site .cx-wit .sn-bento-kop > h2 { color: #0b0f12 !important; }
+html:root .sn-site .cx-wit .sn-bento-kop > h2 > span { color: #00739e !important; }
+html:root .sn-site .cx-wit .sn-bento-kop > .h-eyebrow { color: #4f5b66; }
+.sn-site .cx-wit .cx-rij img { background: #eef2f5; }
+html:root .sn-site .cx-wit .cx-rij strong { color: #0b0f12; }
+html:root .sn-site .cx-wit .cx-rij span { color: #55616c; }
+html:root .sn-site .cx-wit .cx-zin { color: #3c4752; }
+html:root .sn-site .cx-wit .cx-zin strong { color: #0b0f12; }
+.sn-site .cx-wit .cx-keuze { background: #f3f6f8; border-color: #e1e7ec; }
+html:root .sn-site .cx-wit .cx-keuze p { color: #4f5b66; }
+html:root .sn-site .cx-wit .cx-keuze .cx-vraag { color: #0b0f12; }
+.sn-site .cx-wit :is(a, button):focus-visible { outline-color: #00739e; }

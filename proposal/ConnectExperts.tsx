@@ -58,7 +58,8 @@ export default function ConnectExperts() {
   const onderwerp = `${t("Team via Connect")}: ${groepen.map(groep => t(groep.name)).join(", ")}`;
   const datum = new Intl.DateTimeFormat(LOCALES[language].replace("_", "-"), { day: "numeric", month: "short" });
 
-  if (versie === 4) return <section id="team" className="sn-cx sn-cx-basis h-wrap" aria-labelledby="team-titel">
+  // "Zo iets inderdaad maar wel graag de witte achtergrond."
+  if (versie === 4) return <div className="cx-wit"><section id="team" className="sn-cx sn-cx-basis h-wrap" aria-labelledby="team-titel">
     <div className="sn-bento-kop">
       <p className="h-eyebrow"><i />SocialNow Connect</p>
       <h2 id="team-titel">De experts van Connect.<br /><span>Echte mensen, ieder met een eigen bedrijf.</span></h2>
@@ -88,7 +89,7 @@ export default function ConnectExperts() {
         </a>
       </div>
     </div>
-  </section>;
+  </section></div>;
 
   return <Bento id="team" label="SocialNow Connect" titel={<>De experts van Connect.<br /><span>Stel je eigen team samen.</span></>} className={`sn-cx${versie ? ` cx-v${versie}` : ""}`} swipe={versie === 1}>
     {versie === 2 && <div className="cx-tabs" role="tablist" aria-label="Onderdelen van Connect">{TABS.map((naam, i) => <button key={naam} type="button" role="tab" aria-selected={tab === i} onClick={() => setTab(i)}>{naam}</button>)}</div>}
