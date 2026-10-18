@@ -22,7 +22,6 @@ import { MiloPortrait, TextLink } from "./ui";
 import OsPeople from "./OsPeople";
 import { agents } from "./content";
 import HomeTeam from "./HomeTeam";
-import WatIsNieuw from "./WatIsNieuw";
 import PixelInfrastructure from "./PixelInfrastructure";
 import { useLanguage } from "./i18n/context";
 import "./home-simple.css";
@@ -33,7 +32,6 @@ export function Home() {
   return <div className="sn-simple-home">
     <section className="h-hero sn-approved-hero" id="home">
       <HomeHeader />
-      <WatIsNieuw />
       <HomeConnectBand />
       <div className="h-wrap h-hero-content sn-below-new-header">
         <HomeTeam />
