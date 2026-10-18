@@ -117,3 +117,32 @@
   .sn-site .cx-v3 .sn-cx-nieuw time { grid-column: 1 / -1; justify-self: start; }
   .sn-site .cx-v3 .sn-cx-muur > img { flex: 0 0 40px; }
 }
+
+/* Basisversie (?cx=4): één rij experts die opzij schuift, op elke schermbreedte. */
+.sn-site .sn-cx-basis { padding-block: clamp(48px, 6vw, 88px); }
+.sn-site .cx-rij { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; margin: 0; padding: 0 0 8px; list-style: none; }
+.sn-site .cx-kort { display: none; }
+.sn-site .cx-rij::-webkit-scrollbar { display: none; }
+.sn-site .cx-rij > li { flex: 0 0 150px; display: flex; flex-direction: column; gap: 3px; scroll-snap-align: start; }
+.sn-site .cx-rij img { width: 150px; height: 188px; margin-bottom: 8px; border-radius: 14px; object-fit: cover; object-position: center 22%; background: #10181f; }
+.sn-site .cx-rij strong { font-size: 15px; color: #fff; }
+.sn-site .cx-rij span { font-size: 12.5px; line-height: 1.35; color: #aeb8c1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.sn-site .cx-zin { margin: 22px 0 0; font-size: 17px; color: #c6d0d8; }
+.sn-site .cx-zin strong { color: #fff; }
+.sn-site .cx-keuzes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+.sn-site .cx-keuze { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 20px; border: 1px solid var(--cx-rand); border-radius: 18px; background: rgba(255, 255, 255, .02); }
+.sn-site .cx-keuze p { margin: 0; font-size: 15px; line-height: 1.45; color: #aeb8c1; }
+.sn-site .cx-keuze .cx-vraag { font-size: 20px; font-weight: 700; color: #fff; }
+.sn-site .cx-keuze .h-button { margin-top: auto; }
+@media (max-width: 760px) {
+  .sn-site .cx-rij { margin-inline: -20px; padding-inline: 20px; scroll-padding-inline: 20px; }
+  .sn-site .cx-kort { display: inline; }
+  .sn-site .cx-lang { display: none; }
+  .sn-site .cx-rij > li { flex-basis: 128px; }
+  .sn-site .cx-rij img { width: 128px; height: 160px; }
+  .sn-site .cx-keuzes { gap: 10px; }
+  .sn-site .cx-keuze { padding: 14px 12px; border-radius: 14px; }
+  .sn-site .cx-keuze .cx-vraag { font-size: 16px; }
+  .sn-site .cx-keuze p { font-size: 13px; }
+  .sn-site .cx-keuze .h-button { width: 100%; justify-content: space-between; padding-left: 14px; font-size: 11.5px; letter-spacing: .03em; gap: 10px; }
+}
