@@ -1,6 +1,7 @@
 import React from "react";
 import { Bento, Tegel } from "./Bento";
 import { ClientLogos, TextLink } from "./ui";
+import TeamTrackrecord from "./TeamTrackrecord";
 
 // 18 oktober 2026 (Marinus): "Bij resultaten graag ook even bovenaan die 100k en de 100 leads in 1 week" en daarna over
 // de oude opening ("Ons werk / Ideeën die vorm hebben gekregen", een groot gat, dan nog een intro): "Dit triggert mij niet
@@ -29,6 +30,8 @@ export default function ResultatenHero() {
           </Tegel>
         ))}
       </Bento>
+      {/* 18 oktober 2026 (Marinus): "Neem daarbij ook andere resultaten van mijn team mee." */}
+      <TeamTrackrecord />
       <ClientLogos />
     </div>
   );

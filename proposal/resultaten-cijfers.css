@@ -12,3 +12,18 @@
   .sn-site .sn-resultaat-groot .sn-resultaat-cijfer { margin-bottom: 14px; }
   .sn-site .sn-resultaat-groot .sn-resultaat-cijfer b { font-size: clamp(52px, 16vw, 72px); }
 }
+/* Trackrecord van ons team (TeamTrackrecord.tsx): foto, naam, rol en de merken als kleine logo's op een neutrale drager,
+   zoals de bedrijfsreferenties op /team (partner-references.css). */
+.sn-site .sn-resultaten-hero .sn-bento.sn-team-trackrecord { padding-top: clamp(36px, 4vw, 56px); }
+.sn-site .sn-trackrecord-tegel { gap: 14px; }
+.sn-site .sn-trackrecord-wie { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.sn-site .sn-trackrecord-wie > img { flex: none; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: center 26%; background: #0b1920; }
+.sn-site .sn-trackrecord-wie > p { display: grid; gap: 2px; margin: 0; min-width: 0; }
+.sn-site .sn-trackrecord-wie b { color: #fff; font-size: 15px; font-weight: 700; line-height: 1.25; }
+.sn-site .sn-trackrecord-wie span { color: #8da297; font-size: 12px; line-height: 1.35; }
+.sn-site .sn-trackrecord-merken { display: flex; flex-wrap: wrap; gap: 6px; margin: auto 0 0; padding: 0; list-style: none; }
+.sn-site .sn-trackrecord-merken li { display: flex; align-items: center; justify-content: center; min-height: 34px; padding: 6px 9px; border: 1px solid #dfe5e2; border-radius: 6px; background: #fff; color: #20272d; }
+.sn-site .sn-trackrecord-merken li.is-donker { background: #172923; border-color: #172923; color: #fff; }
+.sn-site .sn-trackrecord-merken img { display: block; width: auto; max-width: 96px; height: 18px; object-fit: contain; }
+.sn-site .sn-trackrecord-merken span { font-size: 11px; font-weight: 600; line-height: 1.3; }
+.sn-site .sn-trackrecord-merken span.is-woordmerk { font-family: ui-monospace, Menlo, monospace; font-weight: 500; }
