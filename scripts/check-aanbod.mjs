@@ -2,7 +2,7 @@
 //
 // Marinus, 29 september 2026: "Voordat iets live komt moet het altijd RED/GREEN getest worden."
 // Deze proef legt vast wat hij die avond vroeg, en is rood op main van vóór de wijziging en groen erna:
-//   - het OS op maat zakelijk: "Vanaf €10.000 · prijs op aanvraag", geen reuzencijfer;
+//   - (18 oktober 2026) het OS op maat zit in elk pakket, geen los blok vanaf €10.000; tokens per maand als kaarten;
 //   - maandpakketten minimaal drie maanden, met custom OS, complete rebranding, website en uitlegcall;
 //   - maandprijzen blijven zichtbaar, het losse websiteblok (vanaf €3.500) is weg;
 //   - geen "Echt waar", en de aanbodpagina in het diepzwart van de homepage;
@@ -67,7 +67,13 @@ try {
   const home = render("/");
 
   // Aanbod
-  eis(prijzen.includes("Vanaf €10.000 · prijs op aanvraag"), "/prijzen: 'Vanaf €10.000 · prijs op aanvraag' ontbreekt");
+  // 18 oktober 2026 (Marinus): het OS op maat zit in elk pakket; geen los blok vanaf €10.000 en geen "daarna €20 per maand".
+  // Tokens per maand staan als drie kaarten in dezelfde stijl als de pakketten.
+  eis(!prijzen.includes("€10.000"), "/prijzen: het losse blok vanaf €10.000 staat er nog");
+  eis(!/€20[,-]* per maand/.test(prijzen), "/prijzen: '€20 per maand' staat er nog");
+  for (const bedrag of ["€10", "€25", "€50"])
+    eis(prijzen.includes(`<strong>${bedrag}</strong>`), `/prijzen: tokenprijs ${bedrag} ontbreekt`);
+  eis(prijzen.includes("Je ziet de prijs per render in de Studio voordat je rendert."), "/prijzen: regel over de prijs per render ontbreekt");
   eis(!/<strong>€10\.000<\/strong>/.test(prijzen), "/prijzen: €10.000 staat nog als groot cijfer");
   eis(prijzen.includes("Maandpakketten · minimaal 3 maanden"), "/prijzen: 'minimaal 3 maanden' ontbreekt");
   for (const item of ["Custom OS", "Complete rebranding", "Je website", "Persoonlijke call met uitleg van je systeem"])
@@ -100,7 +106,7 @@ try {
   // uit het woordenboek zelf, zodat de proef geen tweede kopie van de vertalingen bijhoudt.
   const escape = (t) => t.replaceAll("&", "&amp;").replaceAll("'", "&#x27;").replaceAll('"', "&quot;");
   const nieuweZinnen = [
-    "Vanaf €10.000 · prijs op aanvraag", "Maandpakketten · minimaal 3 maanden",
+    "Tokens · per maand", "Maandpakketten · minimaal 3 maanden",
     "Elk pakket is een extra laag bovenop de gratis versie en loopt minimaal drie maanden.",
     "In elk pakket inbegrepen:", "Complete rebranding", "Persoonlijke call met uitleg van je systeem",
   ];
