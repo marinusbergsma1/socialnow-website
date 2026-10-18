@@ -1,25 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { people } from "./content";
+import { people, expertGroepen, vindMensen } from "./content";
 import { klein } from "./licht";
 import LinkedInMark from "./LinkedInMark";
 import InstagramMark from "./InstagramMark";
 import "./home-team.css";
 
-const groups = [
-  { name: "Strategy & guidance", members: ["Albert Deltour", "Hossam Hassan"] },
-  { name: "AI development", members: ["Douwe Kramer", "Thomas Huijsmans"] },
-  { name: "Web development", members: ["Sid van Kalken", "Antony Soosaipillaj"] },
-  { name: "Finance & operations", members: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
-  { name: "Ads & search", members: ["Jos Hollenberg", "Nick van Keulen", "Sergio Jovovic"] },
-  { name: "Video, photo & design", members: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Pepijn Bos", "Armando van Bruggen"] },
-  { name: "UGC & social media", members: ["Isa Zoer", "Daniel Schotman"] },
-  { name: "Sales & partnerships", members: ["Marinus Bergsma", "Elian Coellar", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster", "Ruben Spyckerelle"] },
-];
-const findPeople = (names: string[]) => names.flatMap(name => {
-  const person = people.find(p => p.name === name);
-  return person ? [person] : [];
-});
+const groups = expertGroepen;
+const findPeople = vindMensen;
 
 export default function HomeTeam() {
   const [filter, setFilter] = React.useState("");
