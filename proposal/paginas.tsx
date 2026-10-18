@@ -22,6 +22,7 @@ import { translate, useLanguage } from "./i18n/context";
 import { Bento, Tegel } from "./Bento";
 import { AuditTeaser } from "./AuditPage";
 import FeaturedWork from "./FeaturedWork";
+import ResultatenCijfers from "./ResultatenCijfers";
 import LiveWebsites from "./LiveWebsites";
 import { ImageSliders, VideoSlider } from "./MediaSliders";
 import OsEntry, { GRATIS_OS_URL } from "./os-entry";
@@ -248,6 +249,7 @@ export function ProjectsPage() {
         }
         text="Van campagnes voor merken als AZ, Universal en Sony tot AI-websites en dataplatforms als VASTIQ. Ontdek het werk achter SocialNow."
       />
+      <ResultatenCijfers />
       <FeaturedWork />
       <LiveWebsites />
       <ImageSliders />
