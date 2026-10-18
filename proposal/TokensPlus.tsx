@@ -20,7 +20,7 @@ import "./tokens-plus.css";
 //                           hier zonder getal).
 // Verandert een prijs in het OS, dan verandert hij hier ook. Geen geschatte of verzonnen bedragen.
 //
-// Plus volgens het prijsmodel van 18 oktober 2026 (socialnow-app PR #148, docs/PRIJSMODEL-PLUS-2026-10-18.md, sessie
+// VOORLOPIG tot Marinus bevestigt. Plus volgens het conceptprijsmodel van 18 oktober 2026 (socialnow-app PR #148, docs/PRIJSMODEL-PLUS-2026-10-18.md, sessie
 // "Prijsmodel en marges"): €20 per maand excl. btw (€24,20 incl.), 50 GB opslag, 1.000 tokens rendertegoed per maand
 // (vervalt aan het einde van de maand), fair use 25 GB download per maand, maandelijks opzegbaar. Plus start bij 10 GB
 // alleen met een SEPA-machtiging die de klant vooraf zelf geeft, met eerst een melding en minstens 7 dagen tot de eerste
