@@ -26,3 +26,4 @@
 .sn-site .sn-bestaand .bs-zeker li{display:flex;align-items:center;gap:7px;font-size:14px;color:#c8d8ce}
 .sn-site .sn-bestaand .bs-zeker svg{color:var(--green)}
 .sn-site .sn-bestaand .bs-zeker a{color:#fff;border-bottom:1px solid #25d36688}
+.sn-site .sn-bestaand .service.connect>.action .pill{width:max-content;max-width:100%;gap:16px;white-space:nowrap}

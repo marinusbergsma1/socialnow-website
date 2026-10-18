@@ -31,16 +31,27 @@ const START = [
   { id: "tokens-2500", naam: "Tokens", groot: "2.500", sub: "eenmalig" },
   { id: "tokens-5000", naam: "Tokens", groot: "5.000", sub: "eenmalig" },
 ];
+// Ook een hulppakket kies je bij het aanmaken van je account; de prijs volgt daarna in het OS.
 const HULP = [
-  { id: "Content", wie: "Content in je merk, gepland en geplaatst" },
-  { id: "Content + Meta", wie: "Plus Meta Ads opgezet en beheerd" },
-  { id: "Meta + Google", wie: "Plus Google Ads, één rapport" },
-  { id: "Compleet", wie: "Plus boekhouding en finance" },
+  { id: "hulp-content", naam: "Content", wie: "Content in je merk, gepland en geplaatst" },
+  { id: "hulp-meta", naam: "Content + Meta", wie: "Plus Meta Ads opgezet en beheerd" },
+  { id: "hulp-google", naam: "Meta + Google", wie: "Plus Google Ads, één rapport" },
+  { id: "hulp-compleet", naam: "Compleet", wie: "Plus boekhouding en finance" },
 ];
+
+// Een keuzegroep zoals een radiogroep hoort te werken: Tab gaat naar de gekozen optie, de pijltjes wisselen.
+function pijltjes(e: React.KeyboardEvent<HTMLElement>, ids: string[], nu: string, kies: (id: string) => void) {
+  const stap = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+  if (!stap) return;
+  e.preventDefault();
+  const volgende = ids[(ids.indexOf(nu) + stap + ids.length) % ids.length];
+  kies(volgende);
+  (e.currentTarget.querySelector(`[data-id="${volgende}"]`) as HTMLElement | null)?.focus();
+}
 
 export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void }) {
   const [start, setStart] = useState("gratis");
-  const [hulp, setHulp] = useState("Content");
+  const [hulp, setHulp] = useState(HULP[0].id);
   const gekozen = START.find(s => s.id === start)!;
   const hulpPakket = HULP.find(h => h.id === hulp)!;
   return (
@@ -54,9 +65,9 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
               <article className="service os">
                 <div className="logo-row"><img className="os-logo" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" /><Downloads /></div>
                 <h2>Kies hoe je start.</h2>
-                <div className="bs-keuze" role="radiogroup" aria-label="Kies je startpakket">
+                <div className="bs-keuze" role="radiogroup" aria-label="Kies je startpakket" onKeyDown={e => pijltjes(e, START.map(x => x.id), start, setStart)}>
                   {START.map(s => (
-                    <button key={s.id} type="button" role="radio" aria-checked={start === s.id} className="bs-pakket" onClick={() => setStart(s.id)}>
+                    <button key={s.id} type="button" role="radio" aria-checked={start === s.id} tabIndex={start === s.id ? 0 : -1} data-id={s.id} className="bs-pakket" onClick={() => setStart(s.id)}>
                       <span className="bs-vink" aria-hidden="true">{start === s.id && <Check size={12} strokeWidth={3} />}</span>
                       <b>{s.naam}</b>
                       <strong>{s.groot}</strong>
@@ -78,13 +89,13 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <div className="logo-row"><ConnectLogo /></div>
                 <div className="visual faces">{faces.map(p => <span key={p.name} title={p.name}><img {...klein(p.image, 52, [96, 160], undefined, "20261015-team")} alt={p.name} width="52" height="52" /></span>)}<Link className="more" to="/team" aria-label="Bekijk het hele team"><span className="desktop-count">+{people.length - faces.length}</span><span className="mobile-count">+{people.length - 7}</span></Link></div>
                 <p className="bs-kop-hulp"><strong>Echte experts, per pakket.</strong></p>
-                <div className="bs-hulp" role="radiogroup" aria-label="Kies je hulppakket">
+                <div className="bs-hulp" role="radiogroup" aria-label="Kies je hulppakket" onKeyDown={e => pijltjes(e, HULP.map(x => x.id), hulp, setHulp)}>
                   {HULP.map(h => (
-                    <button key={h.id} type="button" role="radio" aria-checked={hulp === h.id} className="bs-chip" onClick={() => setHulp(h.id)} translate="no">{h.id}</button>
+                    <button key={h.id} type="button" role="radio" aria-checked={hulp === h.id} tabIndex={hulp === h.id ? 0 : -1} data-id={h.id} className="bs-chip" onClick={() => setHulp(h.id)} translate="no">{h.naam}</button>
                   ))}
                 </div>
                 <p className="bs-uitleg bs-uitleg-hulp">{hulpPakket.wie}. Met een persoonlijke call waarin we je systeem uitleggen. De prijs zie je na het aanmaken van je account.</p>
-                <div className="action"><Link className="pill" to={`/contact?onderwerp=${encodeURIComponent(`Pakket ${hulp}`)}`} onClick={() => meet("connect")}><span>Kies {hulp}</span><span className="arrow"><ArrowUpRight size={17} /></span></Link></div>
+                <div className="action"><a className="pill" href={`${GRATIS_OS_URL}?pakket=${hulp}`} onClick={() => meet("connect")}><span>Start met {hulpPakket.naam}</span><span className="arrow"><ArrowUpRight size={17} /></span></a></div>
               </article>
             </div>
           </div>
