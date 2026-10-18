@@ -19,8 +19,9 @@ import { OnderDeVouw, later } from "./later";
 import { HomeConnectBand } from "./HomeHeader";
 // 18 oktober 2026: partners en veiligheidsdocumenten direct onder de header, zie SamenEnVeilig.tsx.
 import SamenEnVeilig from "./SamenEnVeilig";
-// 17 oktober 2026: A/B-test van de header (A gratis OS, B Custom OS); uitleg in server/ab.mjs.
-import HomeHeaderAB from "./HomeHeaderAB";
+// 18 oktober 2026 (Marinus): "1 VERSIE DIE IK AANGAF WACHT MET AB TESTEN". Dus geen A/B-test meer: variant B
+// (HeaderBestaand) is de header in elke taal. De test zelf (HomeHeaderAB.tsx, server/ab.mjs) blijft staan voor later.
+import HeaderBestaand from "./HeaderBestaand";
 import FreeWebsite from "./FreeWebsite";
 import { Bento, Tegel } from "./Bento";
 import { MiloPortrait, TextLink } from "./ui";
@@ -36,7 +37,7 @@ export function Home() {
   useLanguage();
   return <div className="sn-simple-home">
     <section className="h-hero sn-approved-hero" id="home">
-      <HomeHeaderAB />
+      <HeaderBestaand meet={() => {}} />
       <SamenEnVeilig />
       <HomeConnectBand />
     </section>

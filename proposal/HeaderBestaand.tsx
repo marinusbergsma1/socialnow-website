@@ -9,6 +9,7 @@ import { openPlanCall } from "./PlanCall";
 import { MAAND, TEAM } from "./Pricing";
 import { MiloMotion } from "./motion";
 import { ConnectLogo, Downloads, Filters, faces } from "./HomeHeader";
+import { useLanguage, type Language } from "./i18n/context";
 import "./home-header-approved.css";
 import "./home-header-choice.css";
 import "./header-bestaand.css";
@@ -57,7 +58,9 @@ const VEILIG = [
   "Je data blijft van jou en blijft in je eigen koppelingen.",
   "Persoonlijke call met uitleg van je systeem.",
 ];
-const namen = (ids: string[]) => { const n = ids.map(id => TEAM[id].naam.split(" ")[0]); return n.length > 1 ? `${n.slice(0, -1).join(", ")} en ${n[n.length - 1]}` : n[0]; };
+// Sinds 18 oktober 2026 staat variant B in elke taal; "Met Jos en Marinus." wordt hier per taal opgebouwd.
+const MET: Record<Language, [string, string]> = { nl: ["Met", "en"], en: ["With", "and"], de: ["Mit", "und"], fr: ["Avec", "et"], es: ["Con", "y"], it: ["Con", "e"], pt: ["Com", "e"], pl: ["Z", "i"], sv: ["Med", "och"], da: ["Med", "og"] };
+const namen = (ids: string[], taal: Language) => { const [met, en] = MET[taal] || MET.en; const n = ids.map(id => TEAM[id].naam.split(" ")[0]); return `${met} ${n.length > 1 ? `${n.slice(0, -1).join(", ")} ${en} ${n[n.length - 1]}` : n[0]}.`; };
 const ONDERDELEN: Record<string, string[]> = {
   "hulp-content": ["website", "content", "studio"],
   "hulp-meta": ["website", "content", "studio", "ads"],
@@ -72,8 +75,13 @@ const ZINNEN = ["Veiliger dan je oude software.", "Minder kosten. Meer winst.", 
 const TIK = 55, WEG = 28, STAAN = 3000;
 
 function Typer() {
-  const [tekst, setTekst] = useState(ZINNEN[0]);
+  // De zinnen worden vooraf vertaald: de getypte tussenstukken staan niet in het woordenboek.
+  const { language, t } = useLanguage();
+  const zinnen = ZINNEN.map(z => t(z));
+  const [tekst, setTekst] = useState(zinnen[0]);
   useEffect(() => {
+    const ZINNEN = zinnen;
+    setTekst(ZINNEN[0]);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let i = 0, n = ZINNEN[0].length, weg = true, t = window.setTimeout(stap, STAAN);
     function stap() {
@@ -89,8 +97,8 @@ function Typer() {
       }
     }
     return () => window.clearTimeout(t);
-  }, []);
-  return <span className="bs-typer"><span className="bs-sr">{ZINNEN.join(" ")}</span><span aria-hidden="true">{tekst}<i className="bs-cursor" /></span></span>;
+  }, [language]);
+  return <span className="bs-typer" translate="no"><span className="bs-sr">{zinnen.join(" ")}</span><span aria-hidden="true">{tekst}<i className="bs-cursor" /></span></span>;
 }
 
 // Een keuzegroep zoals een radiogroep hoort te werken: Tab gaat naar de gekozen optie, de pijltjes wisselen.
@@ -104,6 +112,7 @@ function pijltjes(e: React.KeyboardEvent<HTMLElement>, ids: string[], nu: string
 }
 
 export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void }) {
+  const { language } = useLanguage();
   const [modus, setModus] = useState<"os" | "custom">("os");
   const [custom, setCustom] = useState(CUSTOM[0].id);
   return (
@@ -136,7 +145,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 {/* Marinus: "en echte experts die mee kunnen kijken met de toegang die jij zelf bepaald." en daarna "Meer zo iets.": een korte
                     lijst, alleen wat nu live staat in het OS (teamrollen met direct intrekken, OS-PR #134; eigen AI via MCP/API met
                     sleutels standaard alleen lezen, #135). Budgetakkoord via Attesso is nog niet live en staat er daarom niet bij. */}
-                <p className="bs-uitleg bs-met"><strong>Met {namen(CUSTOM.find(c => c.id === custom)!.pakket.team)}.</strong></p>
+                <p className="bs-uitleg bs-met" translate="no"><strong>{namen(CUSTOM.find(c => c.id === custom)!.pakket.team, language)}</strong></p>
                 <ul className="bs-punten">
                   {VEILIG.map(punt => <li key={punt}><Check size={15} strokeWidth={3} aria-hidden="true" />{punt}</li>)}
                 </ul>
@@ -151,7 +160,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                     Dus geen tokenpakketten meer in de header; die kies je na het aanmaken van je account. */}
                 <p className="bs-uitleg bs-uitleg-kort"><strong>Gratis tot 10 GB aan opslag.</strong> Bij je aanmelding koppel je alvast je rekening.</p>
                 <div className="action os-account-actions">
-                  <a className="pill" href={`${GRATIS_OS_URL}?pakket=gratis`} onClick={() => meet("gratis_os")}><span>Start for free</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
+                  <a className="pill" href={`${GRATIS_OS_URL}?pakket=gratis`} onClick={() => meet("gratis_os")}><span translate="no">Start for free</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
                   <a className="pill os-login-secondary" href={GRATIS_OS_URL} onClick={() => meet("gratis_os")}><span>Log in</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
                 </div>
                 </>}
