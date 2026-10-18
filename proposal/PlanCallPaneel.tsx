@@ -53,7 +53,7 @@ export default function PlanCallPaneel({ voor, sluit }: { voor: CallVoorinvullin
     bedrijf: voor.bedrijf || "",
     onderdelen: (voor.onderdelen || []).filter((id) => ONDERDELEN.some((o) => o.id === id)),
     budget: BUDGETTEN.some((b) => b.id === voor.budget) ? voor.budget! : "",
-    dag: "", tijd: "", naam: "", email: "", telefoon: "", toelichting: (voor.toelichting || "").slice(0, 1200),
+    dag: "", tijd: "", naam: "", email: "", telefoon: "", toelichting: "",
   }));
   const zet = <K extends keyof Gegevens>(veld: K, waarde: Gegevens[K]) => zetG((oud) => ({ ...oud, [veld]: waarde }));
   const dagen = useMemo(werkdagen, []);
