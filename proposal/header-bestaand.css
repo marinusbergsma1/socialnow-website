@@ -59,3 +59,9 @@
 @media(min-width:761px) and (max-width:1150px){.sn-site .sn-bestaand .bs-typer{min-height:1.05em;white-space:nowrap;font-size:.6em}}
 .sn-site .sn-bestaand .bs-pakket b{padding-right:20px}
 .sn-site .sn-bestaand .bs-uitleg-kort{min-height:0;margin:16px 0 18px}
+.sn-site .sn-bestaand .bs-uitleg-connect{min-height:0;margin:0 0 18px}
+.sn-site .sn-bestaand .service.connect>.action{display:flex;flex-wrap:wrap;gap:12px}
+/* Custom OS: de vier pakketten op een rij vanaf 1151 px, zodat de header met Custom OS ook in 1920x1080 past. */
+@media(min-width:1151px){.sn-site .sn-bestaand .bs-custom{grid-template-columns:repeat(4,minmax(0,1fr))}.sn-site .sn-bestaand .bs-custom .bs-pakket b{font-size:11.5px;line-height:1.3}}
+.sn-site .sn-bestaand .bs-looptijd{font-size:13px;color:#8da297}
+.sn-site .sn-bestaand .bs-punten+.action{margin-top:18px}

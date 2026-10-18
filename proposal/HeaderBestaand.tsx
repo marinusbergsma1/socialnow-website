@@ -52,10 +52,11 @@ const HULP = [
 // Daarna: "Bij Custom os liever gewoon de pakketten laten zien of uitspraken van het team." Er staan nog geen echte
 // uitspraken van het team in content.ts (alleen die van Ruben), dus de pakketten: bij elk zit het Custom OS.
 const CUSTOM = HULP.map(h => ({ ...h, pakket: MAAND.find(m => m.naam === h.naam)! }));
+// 18 oktober 2026 (Marinus): "custom os heeft nu iets te veel tekst connect iets te weinig en hier ook iets te veel".
+// Dus drie korte punten in plaats van vier lange, en de kleine lettertjes alleen nog over de looptijd.
 const VEILIG = [
-  "Echte experts kijken mee in je OS, met de toegang die jij bepaalt. Intrekken kan altijd.",
-  "Koppel je eigen AI veilig: sleutels standaard alleen lezen, schrijven alleen als jij het toestaat.",
-  "Je data blijft van jou en blijft in je eigen koppelingen.",
+  "Experts met de toegang die jij bepaalt.",
+  "Je eigen AI veilig gekoppeld.",
   "Persoonlijke call met uitleg van je systeem.",
 ];
 // Sinds 18 oktober 2026 staat variant B in elke taal; "Met Jos en Marinus." wordt hier per taal opgebouwd.
@@ -145,11 +146,10 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 {/* Marinus: "en echte experts die mee kunnen kijken met de toegang die jij zelf bepaald." en daarna "Meer zo iets.": een korte
                     lijst, alleen wat nu live staat in het OS (teamrollen met direct intrekken, OS-PR #134; eigen AI via MCP/API met
                     sleutels standaard alleen lezen, #135). Budgetakkoord via Attesso is nog niet live en staat er daarom niet bij. */}
-                <p className="bs-uitleg bs-met" translate="no"><strong>{namen(CUSTOM.find(c => c.id === custom)!.pakket.team, language)}</strong></p>
+                <p className="bs-uitleg bs-met"><strong translate="no">{namen(CUSTOM.find(c => c.id === custom)!.pakket.team, language)}</strong> <span className="bs-looptijd">Per maand excl. btw, minimaal 3 maanden.</span></p>
                 <ul className="bs-punten">
                   {VEILIG.map(punt => <li key={punt}><Check size={15} strokeWidth={3} aria-hidden="true" />{punt}</li>)}
                 </ul>
-                <p className="bs-uitleg bs-uitleg-klein">Ook in elk pakket: je custom OS, een complete rebranding en je website. Per maand excl. btw, minimaal 3 maanden.</p>
                 <div className="action os-account-actions">
                   <button type="button" className="pill" aria-haspopup="dialog" onClick={() => { meet("custom_os"); openPlanCall({ onderdelen: ONDERDELEN[custom] }); }}><span>Plan een call</span><span className="arrow"><ArrowUpRight size={17} /></span></button>
                 </div>
@@ -170,7 +170,11 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <div className="visual faces">{faces.map(p => <span key={p.name} title={p.name}><img {...klein(p.image, 52, [96, 160], undefined, "20261015-team")} alt={p.name} width="52" height="52" /></span>)}<Link className="more" to="/team" aria-label="Bekijk het hele team"><span className="desktop-count">+{people.length - faces.length}</span><span className="mobile-count">+{people.length - 7}</span></Link></div>
                 {/* Zelfde reden als hierboven: geen soorten diensten met tabbladen, één zin en één knop. */}
                 <p className="bs-kop-hulp"><strong>Echte experts in je OS.</strong> <span>Of voor een losse opdracht.</span></p>
-                <div className="action"><a className="pill" href="/connect/" onClick={() => meet("connect")}><span>Bekijk Connect</span><span className="arrow"><ArrowUpRight size={17} /></span></a></div>
+                <p className="bs-uitleg bs-uitleg-connect">Zij werken mee in je eigen OS, per maand of per opdracht.</p>
+                <div className="action">
+                  <a className="pill" href="/connect/" onClick={() => meet("connect")}><span>Bekijk Connect</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
+                  <Link className="pill" to="/team"><span>Bekijk het hele team</span><span className="arrow"><ArrowUpRight size={17} /></span></Link>
+                </div>
               </article>
             </div>
           </div>
@@ -180,7 +184,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
             <div className="section-head video-intro">
               <div className="video-title">
                 <h1>Meer inzicht in je bedrijf. <Typer /></h1>
-                <p className="pay-line">Verouderde systemen zijn een open deur voor hackers. Wij maken je data inzichtelijker én veiliger, met echte experts en AI.</p>
+                <p className="pay-line">Wij maken je data inzichtelijker én veiliger, met echte experts en AI.</p>
                 <ul className="bs-zeker">
                   <li><ShieldCheck size={15} aria-hidden="true" /><b>Veiliger dan verouderde software en processen</b></li>
                   <li><ShieldCheck size={15} aria-hidden="true" />Rechten per persoon</li>
