@@ -12,6 +12,7 @@ import "./pricing.css";
 import "./site-visie.css";
 import "./free-website.css";
 import "./wereldkaart.css";
+import "./resultaten-cijfers.css";
 import React from "react";
 import { Link } from "react-router-dom";
 import { OnderDeVouw, later } from "./later";
