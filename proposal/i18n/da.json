@@ -1060,7 +1060,7 @@
   "Meta + Google": "Meta + Google",
   "Meta Ads opgezet en beheerd": "Meta Ads sat op og administreret",
   "Milo-agents op je eigen data": "Milo-agenter på dine egne data",
-  "Op aanvraag": "Efter aftale",
+  "Op aanvraag": "På anmodning",
   "Overal": "Overalt",
   "Pakket Compleet": "Pakken Komplet",
   "Pakket Content": "Pakken Content",
@@ -2364,5 +2364,14 @@
   "De app heeft een open API. Wij bouwen de koppeling op maat.": "Appen har et åbent API. Vi bygger forbindelsen skræddersyet.",
   "Mis je een app?": "Mangler du en app?",
   "Heeft je software een API, dan maken we hem zichtbaar in je OS.": "Har din software et API, gør vi den synlig i dit OS.",
-  "apps werken nu in het OS. Logo's zijn merken van hun eigenaars.": "apps virker allerede i OS’et. Logoer er varemærker tilhørende deres ejere."
+  "apps werken nu in het OS. Logo's zijn merken van hun eigenaars.": "apps virker allerede i OS’et. Logoer er varemærker tilhørende deres ejere.",
+  "De koppeling bestaat. Wij zetten hem voor je aan.": "Forbindelsen findes. Vi slår den til for dig.",
+  "Vraagt de leverancier eerst goedkeuring of een abonnement, dan zie je dat bij de app.": "Kræver leverandøren først godkendelse eller et abonnement, kan du se det ved appen.",
+  "Vraagt eerst goedkeuring van het platform.": "Kræver først godkendelse fra platformen.",
+  "Vraagt aanmelding als ontwikkelaar of partner bij de leverancier.": "Kræver registrering som udvikler eller partner hos leverandøren.",
+  "Vraagt een betaald abonnement of API-pakket bij de leverancier.": "Kræver et betalt abonnement eller en API-pakke hos leverandøren.",
+  "Banken koppelen alleen via een erkende PSD2-aanbieder.": "Banker forbindes kun via en godkendt PSD2-udbyder.",
+  "Vraagt het Odoo Custom-abonnement.": "Kræver Odoo Custom-abonnementet.",
+  "Via je eigen Zernio-account.": "Via din egen Zernio-konto.",
+  "Werkt nu. Je koppelt het zelf in je OS, of het zit al in Studio.": "Virker nu. Du forbinder det selv i dit OS, eller det er allerede bygget ind i Studio."
 }

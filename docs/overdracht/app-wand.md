@@ -46,3 +46,13 @@ de tijdelijke launch-config `app-wand-dist` (vite preview op 4391); die regel in
 ## Vervolg (niet gedaan)
 - Officiële SVG's voor de 100 teksttegels (Salesforce, Slack, LinkedIn, OpenAI, Zernio, Exact, Mollie, Microsoft) via hun merkpagina's, per merk met toestemming of volgens hun regels.
 - De oude CSS van de drie kaarten in `proposal/free-website.css` (`sn-fw-offers`, `sn-studio-preview`) is nu ongebruikt.
+
+## Ronde 2 (18 oktober, na livegang c192e5b)
+- Kleur: logo's in hun merkkleur (Simple Icons `hex`), zwarte merken wit, zachte tint per tegel (`--merk`).
+- Officiële logo's: `scripts/app-logos-officieel.json` (bron, pagina, licentie, regels). Nu: Mollie (wit), Moneybird, Zernio (wit), OpenAI Blossom wit (OpenAI API en Codex).
+  Toestemming nodig of verboden, dus teksttegel: HubSpot, Salesforce, LinkedIn, Slack, Google, Higgsfield, Microsoft, Adobe, Amazon, Bol, Exact, AFAS, Pipedrive, Teamleader, DocuSign, monday.com, Canva. MiniMax levert alleen PNG en .ai.
+- Derde label "Op aanvraag" en tooltipnotities: `scripts/app-status-controle.json`. Een in_os-app zonder controle wordt "Op aanvraag".
+- Namen op twee regels in plaats van afkappen.
+- Controle zelfbediening (origin/os 4f4e98eb): 15 In het OS (Odoo, Zernio, Instagram, Facebook, Threads, LinkedIn, Google Business Profile via eigen Zernio-account; Claude, Cursor, Codex, Gemini via de MCP-koppeling; Studio-modellen OpenAI, Veo, Seedance, MiniMax), 18 Op aanvraag, Anthropic Claude API, ElevenLabs en Higgsfield terug naar Via API. Bewijs per app in `scripts/app-status-controle.json`.
+- Veo krijgt geen Gemini-icoon (alleen als vervanger met akkoord van Google).
+- Nog open: logo-onderzoek marketing en AI (Klaviyo, ActiveCampaign, MailerLite, Ahrefs, Twilio, Runway, HeyGen, Synthesia en meer) in een volgende commit.

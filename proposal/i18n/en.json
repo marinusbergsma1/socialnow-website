@@ -2823,5 +2823,14 @@
   "De app heeft een open API. Wij bouwen de koppeling op maat.": "The app has an open API. We build the connection for you, made to measure.",
   "Mis je een app?": "Missing an app?",
   "Heeft je software een API, dan maken we hem zichtbaar in je OS.": "If your software has an API, we make it visible in your OS.",
-  "apps werken nu in het OS. Logo's zijn merken van hun eigenaars.": "apps work in the OS today. Logos are trademarks of their owners."
+  "apps werken nu in het OS. Logo's zijn merken van hun eigenaars.": "apps work in the OS today. Logos are trademarks of their owners.",
+  "De koppeling bestaat. Wij zetten hem voor je aan.": "The connection exists. We switch it on for you.",
+  "Vraagt de leverancier eerst goedkeuring of een abonnement, dan zie je dat bij de app.": "If the supplier first requires approval or a subscription, you will see it on the app.",
+  "Vraagt eerst goedkeuring van het platform.": "Requires approval from the platform first.",
+  "Vraagt aanmelding als ontwikkelaar of partner bij de leverancier.": "Requires registration as a developer or partner with the supplier.",
+  "Vraagt een betaald abonnement of API-pakket bij de leverancier.": "Requires a paid subscription or API plan with the supplier.",
+  "Banken koppelen alleen via een erkende PSD2-aanbieder.": "Banks connect only through a licensed PSD2 provider.",
+  "Vraagt het Odoo Custom-abonnement.": "Requires the Odoo Custom plan.",
+  "Via je eigen Zernio-account.": "Through your own Zernio account.",
+  "Werkt nu. Je koppelt het zelf in je OS, of het zit al in Studio.": "Works today. You connect it yourself in your OS, or it is already built into Studio."
 }

@@ -1,7 +1,8 @@
 # Bronnen van de applogo's
 
 Gegenereerd door `scripts/apps-genereer.mjs` op 2026-10-18. Elk logo is het onveranderde merkteken uit de bron
-hieronder. De site toont het monochroom wit op zwart (CSS-filter) en bij hover in de merkkleur. Apps zonder bruikbaar
+hieronder. De site toont het in de officiële merkkleur; een merk met een zwart of bijna zwart logo (OpenAI, Notion, X)
+staat in de witte versie op de donkere achtergrond. Apps zonder bruikbaar
 SVG staan op de appwand als teksttegel met alleen de naam.
 
 Simple Icons is uitgegeven onder CC0-1.0; het merkrecht op elk logo blijft bij de eigenaar
@@ -49,7 +50,6 @@ staan ze in de laatste kolom.
 | Google Search Console | google-search-console.svg | Simple Icons 16.35.0, icoon `googlesearchconsole`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/googlesearchconsole.svg (tekening van https://search.google.com/search-console) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://partnermarketinghub.withgoogle.com/brands/google/overview/ | 2026-10-18 |
 | Google Sheets | google-sheets.svg | Simple Icons 16.35.0, icoon `googlesheets`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/googlesheets.svg (tekening van https://sheets.google.com) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar |  | 2026-10-18 |
 | Google Tag Manager | google-tag-manager.svg | Simple Icons 16.35.0, icoon `googletagmanager`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/googletagmanager.svg (tekening van https://tagmanager.google.com/#/home) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://partnermarketinghub.withgoogle.com/brands/google/overview/ | 2026-10-18 |
-| Google Veo | veo.svg | Simple Icons 16.35.0, icoon `googlegemini`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/googlegemini.svg (tekening van https://gemini.google.com) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://partnermarketinghub.withgoogle.com/brands/google/overview/ | 2026-10-18 |
 | Google Workspace | google-workspace.svg | Simple Icons 16.35.0, icoon `googledrive`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/googledrive.svg (tekening van https://developers.google.com/drive/web/branding) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://developers.google.com/workspace/drive/api/guides/branding | 2026-10-18 |
 | HiBob | hibob.svg | Simple Icons 16.35.0, icoon `hibob`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/hibob.svg (tekening van https://www.hibob.com) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar |  | 2026-10-18 |
 | Hootsuite | hootsuite.svg | Simple Icons 16.35.0, icoon `hootsuite`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/hootsuite.svg (tekening van https://hootsuite.widencollective.com/portals/bafpk5oo/bafpk5oo/MediaKitAssets/c/b9e3a7bb-aca7-48d7-90ed-cff5898aafd0) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://www.hootsuite.com/legal/brand-assets | 2026-10-18 |
@@ -70,11 +70,15 @@ staan ze in de laatste kolom.
 | Meta Llama | llama.svg | Simple Icons 16.35.0, icoon `meta`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/meta.svg (tekening van https://www.meta.com) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://www.facebook.com/brand/resources/meta/company-brand | 2026-10-18 |
 | Miro | miro.svg | Simple Icons 16.35.0, icoon `miro`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/miro.svg (tekening van https://miro.com) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar |  | 2026-10-18 |
 | Mistral AI | mistral.svg | Simple Icons 16.35.0, icoon `mistralai`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/mistralai.svg (tekening van https://chat.mistral.ai) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar |  | 2026-10-18 |
+| Mollie | mollie.svg | Officieel: https://framerusercontent.com/assets/UF46Vonh1CKzsxM5M4v7iQWI8.zip (Mollie-Logo-2023/SVG/Mollie-Logo-White-2023.svg) (via https://www.mollie.com/resources) | Merklogo van Mollie, logopakket vrij aangeboden op de resourcespagina; merkrecht bij Mollie | Officiële witte versie (het logo is zwart, op donker gebruikt Mollie wit); niet aangepast | 2026-10-18 |
+| Moneybird | moneybird.svg | Officieel: https://moneybird.cdn.prismic.io/moneybird/ZkXWvCol0Zci9Mhr_logo_birdblue.svg (via https://www.moneybird.nl/huisstijl/) | Merklogo van Moneybird; het primaire logo mag zonder toestemming gebruikt worden (huisstijlpagina); merkrecht bij Moneybird | Primair logo in Moneybird-blauw, niet aangepast | 2026-10-18 |
 | n8n | n8n.svg | Simple Icons 16.35.0, icoon `n8n`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/n8n.svg (tekening van https://n8n.io/press) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar |  | 2026-10-18 |
 | Netlify | netlify.svg | Simple Icons 16.35.0, icoon `netlify`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/netlify.svg (tekening van https://www.netlify.com/press/) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://www.netlify.com/about/ | 2026-10-18 |
 | Nextcloud | nextcloud.svg | Simple Icons 16.35.0, icoon `nextcloud`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/nextcloud.svg (tekening van https://nextcloud.com/press/) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://nextcloud.com/trademarks/ | 2026-10-18 |
 | Notion | notion.svg | Simple Icons 16.35.0, icoon `notion`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/notion.svg (tekening van https://www.notion.so) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar |  | 2026-10-18 |
 | Odoo | odoo.svg | Simple Icons 16.35.0, icoon `odoo`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/odoo.svg (tekening van https://www.odoo.com/page/brand-assets) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://www.odoo.com/page/brand-assets | 2026-10-18 |
+| OpenAI API | openai.svg | Officieel: https://cdn.openai.com/brand/openai-logos.zip (OpenAI-logos/SVGs/OAI_OpenAI-Blossom_White.svg) (via https://openai.com/brand/) | Merklogo van OpenAI; API-gebruikers mogen naar de gebruikte OpenAI-technologie verwijzen, zonder partnerschap te suggereren; merkrecht bij OpenAI | Blossom alleen in zwart of wit, nooit ingekleurd; hier de witte versie, niet aangepast | 2026-10-18 |
+| OpenAI Codex | codex.svg | Officieel: https://cdn.openai.com/brand/openai-logos.zip (OpenAI-logos/SVGs/OAI_OpenAI-Blossom_White.svg) (via https://openai.com/brand/) | Merklogo van OpenAI; API-gebruikers mogen naar de gebruikte OpenAI-technologie verwijzen, zonder partnerschap te suggereren; merkrecht bij OpenAI | Blossom alleen in zwart of wit, nooit ingekleurd; hier de witte versie, niet aangepast | 2026-10-18 |
 | OpenRouter | openrouter.svg | Simple Icons 16.35.0, icoon `openrouter`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/openrouter.svg (tekening van https://openrouter.ai) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar |  | 2026-10-18 |
 | Paddle | paddle.svg | Simple Icons 16.35.0, icoon `paddle`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/paddle.svg (tekening van https://www.paddle.com) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar |  | 2026-10-18 |
 | PayPal | paypal.svg | Simple Icons 16.35.0, icoon `paypal`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/paypal.svg (tekening van https://www.paypal.com/us) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://newsroom.paypal-corp.com/media-resources | 2026-10-18 |
@@ -122,22 +126,20 @@ staan ze in de laatste kolom.
 | Zalando Partner (zDirect) | zalando.svg | Simple Icons 16.35.0, icoon `zalando`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/zalando.svg (tekening van https://www.zalando.co.uk) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar |  | 2026-10-18 |
 | Zapier | zapier.svg | Simple Icons 16.35.0, icoon `zapier`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/zapier.svg (tekening van https://www.figma.com/file/NQFxTCE5pGR3dHZt0DkOyy/Zapier-Brand-Guidelines-%5BExternal%5D?type=design&node-id=101-9701&mode=design) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://www.figma.com/file/NQFxTCE5pGR3dHZt0DkOyy/Zapier-Brand-Guidelines-%5BExternal%5D?type=design&node-id=101-9701&mode=design | 2026-10-18 |
 | Zendesk | zendesk.svg | Simple Icons 16.35.0, icoon `zendesk`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/zendesk.svg (tekening van https://brandland.zendesk.com) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://brandland.zendesk.com | 2026-10-18 |
+| Zernio | zernio.svg | Officieel: https://zernio.com/brand/logo-white.svg (via https://zernio.com/press) | Merklogo van Zernio, vrij aangeboden voor pers, partners en iedereen die over Zernio schrijft; merkrecht bij Zernio | Witte versie, bedoeld voor donkere achtergronden; niet aangepast; kleuren alleen Coral, Charcoal of wit | 2026-10-18 |
 | Zoho Books | zoho-books.svg | Simple Icons 16.35.0, icoon `zoho`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/zoho.svg (tekening van https://www.zoho.com/branding) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar |  | 2026-10-18 |
 | Zoho CRM | zoho-crm.svg | Simple Icons 16.35.0, icoon `zoho`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/zoho.svg (tekening van https://www.zoho.com/branding) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar |  | 2026-10-18 |
 | Zoom | zoom.svg | Simple Icons 16.35.0, icoon `zoom`: https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/zoom.svg (tekening van https://brand.zoom.us/media-library/) | CC0-1.0 via Simple Icons; merkrecht bij de eigenaar | https://brand.zoom.com/ | 2026-10-18 |
 
 ## Zonder logo (teksttegel)
 
-- HubSpot (wel in Simple Icons, maar logo alleen met toestemming of eigen licentie: https://www.hubspot.com/style-guide)
-- Salesforce
 - Google Business Profile
 - LinkedIn
-- LinkedIn Ads
-- Zernio
-- OpenAI API
-- OpenAI Codex
-- Higgsfield
+- Google Veo (wel in Simple Icons, maar logo alleen met toestemming of eigen licentie: https://partnermarketinghub.withgoogle.com/brands/google/overview/)
 - MiniMax
+- HubSpot (wel in Simple Icons, maar logo alleen met toestemming of eigen licentie: https://www.hubspot.com/style-guide)
+- Salesforce
+- LinkedIn Ads
 - Slack
 - AFAS Profit
 - bexio
@@ -148,7 +150,6 @@ staan ze in de laatste kolom.
 - Informer
 - Jortt
 - Microsoft Dynamics 365 Business Central
-- Moneybird
 - Oracle NetSuite
 - Pennylane
 - Rompslomp
@@ -173,7 +174,6 @@ staan ze in de laatste kolom.
 - ING (Open Banking)
 - Lightspeed eCom (C-Series)
 - Lightspeed Retail (X-Series)
-- Mollie
 - MultiSafepay
 - MyParcel
 - Picqer
@@ -201,6 +201,7 @@ staan ze in de laatste kolom.
 - Canva
 - Descript
 - HeyGen
+- Higgsfield
 - Ideogram
 - Kling AI
 - Leonardo.ai
