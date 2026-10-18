@@ -48,6 +48,8 @@ let allPosts: typeof import("../data/posts").allPosts = [];
 let brandMeta: typeof import("../scripts/brand-meta.mjs").brandMeta | null = null;
 import { MotionProvider } from "./motion";
 import LanguageSwitch from "./LanguageSwitch";
+import { HeaderCall, NAV_LINKS, PRODUCTEN, ProductenMenu } from "./Producten";
+import { PlanCallHost, openPlanCall } from "./PlanCall";
 import { LanguageProvider, LANGUAGES, languagePrefix, type Language, useLanguage } from "./i18n/context";
 const PrivacyPage = later(() => import("../components/PrivacyPage").then((m) => m.default));
 const TermsPage = later(() => import("../components/TermsPage").then((m) => m.default));
@@ -63,17 +65,13 @@ import Cookiebot from "./Cookiebot";
 // worden. Het script komt van socialnow.nl zelf (/_vercel/insights), de CSP hoeft niet te wijzigen.
 import { Analytics } from "@vercel/analytics/react";
 
-const nav = [
-  ["/het-os", "Het OS"],
-  ["/projecten", "Ons werk"],
-  ["/diensten", "Diensten"],
-  ["/prijzen", "Aanbod"],
-  ["/team", "Team"],
-  ["/blog", "Blog"],
-  ["/contact", "Contact"],
-];
+// 18 oktober 2026: Producten, Diensten, Resultaten, Prijzen, Team (proposal/Producten.tsx). Blog en Contact staan in de voettekst.
+const nav = NAV_LINKS;
 // Pagina's buiten het menu houden hun eigen titel, ook als je ze rechtstreeks opent.
 const paginaTitels: Record<string, string> = {
+  "/het-os": "Het OS",
+  "/blog": "Blog",
+  "/contact": "Contact",
   "/audit": "Gratis Google Ads audit",
   "/gratis-website": "Gratis website aanvragen",
   "/gratis-os-demo": "Gratis OS-demo",
@@ -225,6 +223,7 @@ function ProposalShell() {
             />
           </Link>
           <nav className="h-desktop-nav" aria-label="Hoofdnavigatie">
+            <ProductenMenu />
             {nav.map(([path, title]) => (
               <NavLink key={path} to={path}>
                 {title}
@@ -232,6 +231,7 @@ function ProposalShell() {
             ))}
           </nav>
           <LanguageSwitch />
+          <HeaderCall />
           {/* 26 september 2026 (Marinus): geen reclame in de header, rechtsboven de login voor het gratis OS. */}
           <a className="sn-pill h-header-claim" href="https://app.socialnow.nl/login/">
             <span className="h-header-login-full">Inloggen gratis OS</span>
@@ -256,10 +256,17 @@ function ProposalShell() {
           aria-label="Mobiele navigatie"
           hidden={!menuOpen}
         >
-          {[["/", "Home"], ...nav].map(([path, title]) => (
+          <NavLink end to="/" onClick={() => setMenuOpen(false)}>Home<ArrowUpRight size={17} /></NavLink>
+          <p className="h-mobile-groep">Producten</p>
+          {PRODUCTEN.map((p) => {
+            const inhoud = <><span translate="no">SocialNow {p.naam}</span><ArrowUpRight size={17} /></>;
+            return "naar" in p
+              ? <NavLink key={p.soort} className="h-mobile-product" to={p.naar} onClick={() => setMenuOpen(false)}>{inhoud}</NavLink>
+              : <a key={p.soort} className="h-mobile-product" href={p.href}>{inhoud}</a>;
+          })}
+          {nav.map(([path, title]) => (
             <NavLink
               key={path}
-              end={path === "/"}
               to={path}
               onClick={() => setMenuOpen(false)}
             >
@@ -267,8 +274,13 @@ function ProposalShell() {
               <ArrowUpRight size={17} />
             </NavLink>
           ))}
+          <button type="button" className="h-mobile-call" aria-haspopup="dialog" onClick={() => { setMenuOpen(false); openPlanCall(); }}>
+            Plan een call voor custom OS
+            <ArrowUpRight size={17} />
+          </button>
         </nav>
       </header>
+      <PlanCallHost />
       <main id="inhoud" ref={main} tabIndex={-1}>
         <Suspense fallback={<div aria-hidden="true" style={{ minHeight: "100vh" }} />}>
         <Routes>

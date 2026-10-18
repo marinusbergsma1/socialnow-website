@@ -98,6 +98,8 @@ export default function PlanCallPaneel({ voor, sluit }: { voor: CallVoorinvullin
     ];
     if (g.telefoon.trim()) regels.push(`${t("Telefoonnummer")}: ${g.telefoon.trim()}`);
     if (g.toelichting.trim()) regels.push("", `${t("Toelichting")}: ${g.toelichting.trim()}`);
+    if (voor.bron === "os") regels.push("", `${t("Bron")}: SocialNow OS`);
+    if (voor.ref) regels.push(`${t("Referentie")}: ${voor.ref}`);
     return regels.join("\n");
   };
   const verder = (e?: React.FormEvent) => {
@@ -109,6 +111,8 @@ export default function PlanCallPaneel({ voor, sluit }: { voor: CallVoorinvullin
     const adres = conceptLink(`${t("Plan een call voor custom OS")}: ${g.bedrijf.trim()}`, bericht());
     zetLink(adres);
     zetStap(3);
+    // Droog in proeven en previews: geautomatiseerde browsers en ?proef in het adres openen nooit een echte mail of WhatsApp.
+    if (navigator.webdriver || new URLSearchParams(window.location.search).has("proef")) return;
     window.location.href = adres;
   };
   const terug = () => { zetFout(""); zetStap(Math.max(0, stap - 1)); };
