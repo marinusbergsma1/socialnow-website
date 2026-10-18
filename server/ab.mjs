@@ -2,7 +2,7 @@
 //
 // MARINUS VROEG: "A/B testen wat interessanter is voor mijn omzet ... constant updaten op basis van
 // wie bezoekt en wat die persoon te zien krijgt." Variant A is de huidige header (gratis OS voor
-// starters), variant B de Custom OS-header (proposal/HeaderCustomOs.tsx).
+// starters), variant B de header voor bestaande bedrijven (proposal/HeaderBestaand.tsx).
 //
 // ZONDER COOKIES
 //   Er wordt niets in de browser opgeslagen. De server maakt per bezoeker een id uit IP-adres,

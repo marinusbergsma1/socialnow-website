@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import HomeHeader from "./HomeHeader";
 // Variant B pas laden als hij nodig is, zodat de eerste bundel niet groeit.
-const HeaderCustomOs = lazy(() => import("./HeaderCustomOs"));
+const HeaderBestaand = lazy(() => import("./HeaderBestaand"));
 import { useLanguage } from "./i18n/context";
 
 // A/B-test van de homepage-header, 17 oktober 2026. Uitleg: server/ab.mjs.
@@ -56,7 +56,7 @@ export default function HomeHeaderAB() {
     return () => { weg = true; };
   }, [language]);
 
-  if (variant === "b") return <Suspense fallback={<HomeHeader />}><HeaderCustomOs meet={doel => { if (meten) meet("header_klik", "b", doel); }} /></Suspense>;
+  if (variant === "b") return <Suspense fallback={<HomeHeader />}><HeaderBestaand meet={doel => { if (meten) meet("header_klik", "b", doel); }} /></Suspense>;
   return (
     <div
       style={{ display: "contents" }}
