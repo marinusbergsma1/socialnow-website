@@ -33,12 +33,6 @@ import "./header-bestaand.css";
 
 type Doel = "gratis_os" | "custom_os" | "connect" | "explainer" | "veiligheid";
 
-const START = [
-  { id: "gratis", naam: "Gratis", groot: "€0", sub: "tot 10 GB", tokens: "" },
-  { id: "tokens-1000", naam: "1.000 tokens", groot: "€10", sub: "per maand", tokens: "1.000" },
-  { id: "tokens-2500", naam: "2.500 tokens", groot: "€25", sub: "per maand", tokens: "2.500" },
-  { id: "tokens-5000", naam: "5.000 tokens", groot: "€50", sub: "per maand", tokens: "5.000" },
-];
 const MILOS = [{ rol: "website", naam: "Website" }, { rol: "crm", naam: "CRM" }, { rol: "content", naam: "Content" }, { rol: "ads", naam: "Ads" }];
 
 // 18 oktober 2026 (Marinus): "het is van belang dat het duidelijk is dat je voor 3K een veilig persoonlijk
@@ -49,8 +43,6 @@ const HULP = [
   { id: "hulp-meta", naam: "Content + Meta", wie: "Plus Meta Ads opgezet en beheerd" },
   { id: "hulp-google", naam: "Meta + Google", wie: "Plus Google Ads, één rapport" },
   { id: "hulp-compleet", naam: "Compleet", wie: "Plus boekhouding en finance" },
-  // "Echte experts, per pakket. Of als losse opdrachten." Een losse opdracht is geen maandpakket.
-  { id: "hulp-los", naam: "Losse opdracht", wie: "Eén expert uit Connect voor één klus, zonder maandpakket", los: true },
 ];
 
 // 18 oktober 2026 (Marinus): "er moet een switch zijn van normale OS naar Call inplannen for custom os [...] waar je
@@ -58,14 +50,13 @@ const HULP = [
 // "Plan een call" opent het boekingspaneel (PlanCall.tsx) met de onderdelen van het gekozen pakket alvast aangevinkt.
 // Daarna: "Bij Custom os liever gewoon de pakketten laten zien of uitspraken van het team." Er staan nog geen echte
 // uitspraken van het team in content.ts (alleen die van Ruben), dus de pakketten: bij elk zit het Custom OS.
-const CUSTOM = HULP.filter(h => !h.los).map(h => ({ ...h, pakket: MAAND.find(m => m.naam === h.naam)! }));
+const CUSTOM = HULP.map(h => ({ ...h, pakket: MAAND.find(m => m.naam === h.naam)! }));
 const VEILIG = [
   "Echte experts kijken mee in je OS, met de toegang die jij bepaalt. Intrekken kan altijd.",
   "Koppel je eigen AI veilig: sleutels standaard alleen lezen, schrijven alleen als jij het toestaat.",
   "Je data blijft van jou en blijft in je eigen koppelingen.",
   "Persoonlijke call met uitleg van je systeem.",
 ];
-const PAKKET = (naam: string) => MAAND.find(m => m.naam === naam);
 const namen = (ids: string[]) => { const n = ids.map(id => TEAM[id].naam.split(" ")[0]); return n.length > 1 ? `${n.slice(0, -1).join(", ")} en ${n[n.length - 1]}` : n[0]; };
 const ONDERDELEN: Record<string, string[]> = {
   "hulp-content": ["website", "content", "studio"],
@@ -113,12 +104,8 @@ function pijltjes(e: React.KeyboardEvent<HTMLElement>, ids: string[], nu: string
 }
 
 export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void }) {
-  const [start, setStart] = useState("gratis");
   const [modus, setModus] = useState<"os" | "custom">("os");
   const [custom, setCustom] = useState(CUSTOM[0].id);
-  const [hulp, setHulp] = useState(HULP[0].id);
-  const gekozen = START.find(s => s.id === start)!;
-  const hulpPakket = HULP.find(h => h.id === hulp)!;
   return (
     <div className="sn-choice sn-bestaand" data-variant="bestaand">
       <Filters />
@@ -160,24 +147,11 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 </> : <>
                 <h2>AI management &amp; operations.</h2>
                 <div className="visual milos bs-milos">{MILOS.map(m => <figure key={m.rol}><MiloMotion role={m.rol} name={`Milo ${m.naam}`} maat={128} /><figcaption>{m.naam}</figcaption></figure>)}</div>
-                <p className="bs-kop-start">Kies hoe je start.</p>
-                <div className="bs-keuze" role="radiogroup" aria-label="Kies je startpakket" onKeyDown={e => pijltjes(e, START.map(x => x.id), start, setStart)}>
-                  {START.map(s => (
-                    <button key={s.id} type="button" role="radio" aria-checked={start === s.id} tabIndex={start === s.id ? 0 : -1} data-id={s.id} className="bs-pakket" onClick={() => setStart(s.id)}>
-                      <span className="bs-vink" aria-hidden="true">{start === s.id && <Check size={12} strokeWidth={3} />}</span>
-                      <b translate="no">{s.naam}</b>
-                      <strong>{s.groot}</strong>
-                      <small>{s.sub}</small>
-                    </button>
-                  ))}
-                </div>
-                <p className="bs-uitleg">
-                  {start === "gratis"
-                    ? <><strong>Gratis tot 10 GB aan opslag.</strong> Bij je aanmelding koppel je alvast je rekening. Zolang je onder 10 GB blijft, schrijven we niets af.</>
-                    : <><strong>Gratis tot 10 GB, plus {gekozen.tokens} tokens per maand voor de Studio.</strong> {gekozen.groot} per maand excl. btw, maandelijks opzegbaar.</>}
-                </p>
+                {/* Marinus, 18 oktober 2026: "PAKKETTEN HOEVEN HIER NIET EN SOORTEN DIENSTEN OOK NIET ZODAT ALLES MOOI IN 1 1920X1080 BLIJFT."
+                    Dus geen tokenpakketten meer in de header; die kies je na het aanmaken van je account. */}
+                <p className="bs-uitleg bs-uitleg-kort"><strong>Gratis tot 10 GB aan opslag.</strong> Bij je aanmelding koppel je alvast je rekening.</p>
                 <div className="action os-account-actions">
-                  <a className="pill" href={`${GRATIS_OS_URL}?pakket=${start}`} onClick={() => meet("gratis_os")}><span>Start for free</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
+                  <a className="pill" href={`${GRATIS_OS_URL}?pakket=gratis`} onClick={() => meet("gratis_os")}><span>Start for free</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
                   <a className="pill os-login-secondary" href={GRATIS_OS_URL} onClick={() => meet("gratis_os")}><span>Log in</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
                 </div>
                 </>}
@@ -185,16 +159,9 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
               <article className="service connect">
                 <div className="logo-row"><ConnectLogo /></div>
                 <div className="visual faces">{faces.map(p => <span key={p.name} title={p.name}><img {...klein(p.image, 52, [96, 160], undefined, "20261015-team")} alt={p.name} width="52" height="52" /></span>)}<Link className="more" to="/team" aria-label="Bekijk het hele team"><span className="desktop-count">+{people.length - faces.length}</span><span className="mobile-count">+{people.length - 7}</span></Link></div>
-                <p className="bs-kop-hulp"><strong>Echte experts, per pakket.</strong> <span>Of als losse opdrachten.</span></p>
-                <div className="bs-hulp" role="radiogroup" aria-label="Kies je hulppakket" onKeyDown={e => pijltjes(e, HULP.map(x => x.id), hulp, setHulp)}>
-                  {HULP.map(h => (
-                    <button key={h.id} type="button" role="radio" aria-checked={hulp === h.id} tabIndex={hulp === h.id ? 0 : -1} data-id={h.id} className="bs-chip" onClick={() => setHulp(h.id)} translate="no">{h.naam}</button>
-                  ))}
-                </div>
-                <p className="bs-uitleg bs-uitleg-hulp">{hulpPakket.los
-                  ? <>{hulpPakket.wie}. Je kiest zelf wie je erbij haalt.</>
-                  : <><strong>Bij elk pakket: je eigen veilige management &amp; operations systeem en een gratis website.</strong> {hulpPakket.wie}, met een persoonlijke call waarin we je systeem uitleggen. {PAKKET(hulpPakket.naam)?.prijs} per maand excl. btw, minimaal 3 maanden.</>}</p>
-                <div className="action"><a className="pill" href={`${GRATIS_OS_URL}?pakket=${hulp}`} onClick={() => meet("connect")}><span>{hulpPakket.los ? "Start een losse opdracht" : `Start met ${hulpPakket.naam}`}</span><span className="arrow"><ArrowUpRight size={17} /></span></a></div>
+                {/* Zelfde reden als hierboven: geen soorten diensten met tabbladen, één zin en één knop. */}
+                <p className="bs-kop-hulp"><strong>Echte experts in je OS.</strong> <span>Of voor een losse opdracht.</span></p>
+                <div className="action"><a className="pill" href="/connect/" onClick={() => meet("connect")}><span>Bekijk Connect</span><span className="arrow"><ArrowUpRight size={17} /></span></a></div>
               </article>
             </div>
           </div>
