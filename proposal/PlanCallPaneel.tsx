@@ -4,7 +4,7 @@ import { LOCALES, languagePrefix, useLanguage } from "./i18n/context";
 import { AGENDA_LINK, CONTACT_MAIL, agendaInbedden, conceptLink, heeftAgenda, heeftWhatsApp } from "./aanvragen";
 import type { CallVoorinvulling } from "./PlanCall";
 
-// Boekingspaneel voor een call over een custom OS (vanaf €10.000). Drie stappen: wat er op maat moet, een moment, de
+// Boekingspaneel voor een call over een custom OS (in elk hulppakket, vanaf €3.000 per maand). Drie stappen: wat er op maat moet, een moment, de
 // gegevens. Met AGENDA_LINK (aanvragen.ts) boekt de bezoeker in stap 2 zelf een vrij moment in de Google Agenda en
 // stuurt Google de bevestiging. Zonder link kiest hij een voorkeursmoment. De antwoorden gaan in beide gevallen als
 // ingevuld concept naar Steef, via dezelfde route als elke andere aanvraag op de site.
@@ -19,10 +19,11 @@ const ONDERDELEN = [
   { id: "dashboard", label: "Dashboard en rapportage" },
   { id: "app", label: "Eigen app of portaal" },
 ];
+// Prijsmodel van 18 oktober 2026: alles maandelijks, hulppakket met custom OS en gratis website vanaf €3.000 per maand.
 const BUDGETTEN = [
-  { id: "10-20", label: "€10.000 tot €20.000" },
-  { id: "20-50", label: "€20.000 tot €50.000" },
-  { id: "50-plus", label: "Meer dan €50.000" },
+  { id: "3-5", label: "€3.000 tot €5.000 p/m" },
+  { id: "5-10", label: "€5.000 tot €10.000 p/m" },
+  { id: "10-plus", label: "Meer dan €10.000 p/m" },
   { id: "onbekend", label: "Weet ik nog niet" },
 ];
 const TIJDEN = ["09:30", "11:00", "13:30", "15:00", "16:30"];
@@ -122,7 +123,7 @@ export default function PlanCallPaneel({ voor, sluit }: { voor: CallVoorinvullin
   return <dialog ref={dialoog} className="sn-call" aria-labelledby="sn-call-titel" onClose={sluit} onClick={(e) => { if (e.target === dialoog.current) dialoog.current.close(); }}>
     <form className="sn-call-vel" onSubmit={verder} noValidate>
       <header className="sn-call-kop">
-        <p className="sn-call-eyebrow">Custom OS vanaf €10.000</p>
+        <p className="sn-call-eyebrow">Hulppakket vanaf €3.000 p/m</p>
         <button type="button" className="sn-call-sluit" aria-label="Sluiten" onClick={() => dialoog.current?.close()}><X size={22} aria-hidden="true" /></button>
         <h2 id="sn-call-titel">Plan een call voor je custom OS.</h2>
         {stap < 3 && <div className="sn-call-stappen" aria-hidden="true">{[0, 1, 2].map((i) => <span key={i} className={i <= stap ? "aan" : ""} />)}</div>}
@@ -136,7 +137,7 @@ export default function PlanCallPaneel({ voor, sluit }: { voor: CallVoorinvullin
           <fieldset className="sn-call-groep"><legend>Welke onderdelen wil je op maat?</legend>
             <div className="sn-call-chips">{ONDERDELEN.map((o) => <label key={o.id} className="sn-call-chip"><input type="checkbox" checked={g.onderdelen.includes(o.id)} onChange={() => wissel(o.id)} /><span><Check size={14} aria-hidden="true" />{o.label}</span></label>)}</div>
           </fieldset>
-          <fieldset className="sn-call-groep"><legend>Budgetindicatie</legend>
+          <fieldset className="sn-call-groep"><legend>Budgetindicatie per maand</legend>
             <div className="sn-call-chips sn-call-budget">{BUDGETTEN.map((b) => <label key={b.id} className="sn-call-chip"><input type="radio" name="sn-call-budget" checked={g.budget === b.id} onChange={() => zet("budget", b.id)} /><span>{b.label}</span></label>)}</div>
           </fieldset>
         </>}

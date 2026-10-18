@@ -7,8 +7,8 @@ import "./plan-call.css";
 // 18 oktober 2026 (Marinus): "Plan een call voor custom OS" in de hero. De knop en de host zitten in het eerste script;
 // het paneel zelf (PlanCallPaneel.tsx) laadt pas bij de eerste klik, samen met de rest van het woordenboek.
 // Openen kan ook van buitenaf, bijvoorbeeld vanuit de custom OS configurator in het OS:
-//   https://socialnow.nl/?call=custom-os&onderdelen=website,crm&budget=10-20&bedrijf=Naam#plan-een-call
-// onderdelen: website, crm, content, ads, studio, agents, koppelingen, dashboard, app; budget: 10-20, 20-50, 50-plus, onbekend.
+//   https://socialnow.nl/?call=custom-os&onderdelen=website,crm&budget=3-5&bedrijf=Naam#plan-een-call
+// onderdelen: website, crm, content, ads, studio, agents, koppelingen, dashboard, app; budget per maand: 3-5, 5-10, 10-plus, onbekend (duizenden euro).
 // Vanuit de custom OS configurator (18 oktober 2026, sessie os-custom): /?bron=os&onderwerp=custom-os&ref=<uuid>#plan-een-call.
 // bron=os en een geldige uuid in ref gaan mee in het bericht aan het team; onbekende waarden vallen weg. Het paneel staat
 // sitebreed (WebsiteProposal.tsx), dus #plan-een-call werkt op elke pagina.
