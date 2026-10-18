@@ -25,7 +25,7 @@ import { PlanCallKnop } from "./PlanCall";
 const PROBEER_URL = GRATIS_OS_URL;
 
 type Lid = { naam: string; rol: string; foto: string };
-const TEAM: Record<string, Lid> = {
+export const TEAM: Record<string, Lid> = {
   marinus: { naam: "Marinus Bergsma", rol: "Founder & CEO", foto: "marinus" },
   jos: { naam: "Jos Hollenberg", rol: "Head of Meta Ads", foto: "jos" },
   sergio: { naam: "Sergio Jovovic", rol: "Meta Ads Specialist", foto: "sergio" },
@@ -54,7 +54,7 @@ type Pakket = {
   top?: boolean;
 };
 
-const MAAND: Pakket[] = [
+export const MAAND: Pakket[] = [
   {
     naam: "Content",
     prijs: "€4.000",

@@ -1,14 +1,17 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HomeHeader from "./HomeHeader";
-// Variant B pas laden als hij nodig is, zodat de eerste bundel niet groeit.
-const HeaderBestaand = lazy(() => import("./HeaderBestaand"));
+// Variant B is de standaard op /nl, dus hij zit in de eerste bundel: geen flits van A naar B bij het laden.
+import HeaderBestaand from "./HeaderBestaand";
 import { useLanguage } from "./i18n/context";
 
 // A/B-test van de homepage-header, 17 oktober 2026. Uitleg: server/ab.mjs.
-// Alleen op de Nederlandse homepage (/nl). Zonder antwoord van /api/ab (lokaal, of niet ingesteld)
-// blijft het variant A en wordt er niets gemeten. Er wordt niets in de browser opgeslagen.
+// Alleen op de Nederlandse homepage (/nl). Er wordt niets in de browser opgeslagen.
+// 18 oktober 2026 (Marinus): "Zet alles maar even live dan pas ik m vanaf daar weer aan." Zolang de test uit staat
+// (geen POSTHOG_KEY, reden "uit") of /api/ab niet antwoordt, krijgt iedereen op /nl variant B en wordt er niets gemeten.
+// Variant A blijft te bekijken via /nl/?ab=a. Staat de test aan, dan verdeelt /api/ab A en B weer.
 
 type Variant = "a" | "b";
+const STANDAARD: Variant = "b";
 type Antwoord = { variant: Variant; reden: string } | null;
 
 let vraag: Promise<Antwoord> | null = null;
@@ -42,16 +45,18 @@ function doelA(el: HTMLElement): string | null {
 
 export default function HomeHeaderAB() {
   const { language } = useLanguage();
-  const [variant, setVariant] = useState<Variant | null>(null);
+  const [variant, setVariant] = useState<Variant | null>(language === "nl" ? STANDAARD : null);
   const [meten, setMeten] = useState(false);
   useEffect(() => {
-    if (language !== "nl") return;
+    // Bij een taalwissel: B is alleen Nederlands.
+    if (language !== "nl") { setVariant(null); setMeten(false); return; }
+    setVariant(STANDAARD);
     // socialnow.nl/nl/?ab=b toont een variant om te bekijken; dat telt niet mee in de test.
     const bekijk = new URLSearchParams(window.location.search).get("ab");
     if (bekijk === "a" || bekijk === "b") return setVariant(bekijk);
     let weg = false;
     haalVariant(language).then(antwoord => {
-      if (weg || !antwoord) return;
+      if (weg || !antwoord || antwoord.reden === "uit") return;
       const v: Variant = antwoord.variant === "b" ? "b" : "a";
       setVariant(v);
       setMeten(true);
@@ -60,7 +65,7 @@ export default function HomeHeaderAB() {
     return () => { weg = true; };
   }, [language]);
 
-  if (variant === "b") return <Suspense fallback={<HomeHeader />}><HeaderBestaand meet={doel => { if (meten) meet("header_klik", "b", doel); }} /></Suspense>;
+  if (variant === "b") return <HeaderBestaand meet={doel => { if (meten) meet("header_klik", "b", doel); }} />;
   return (
     <div
       style={{ display: "contents" }}
