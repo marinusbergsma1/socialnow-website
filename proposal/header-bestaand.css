@@ -58,3 +58,4 @@
 .sn-site .sn-bestaand .bs-uitleg-klein{min-height:0;margin:12px 0 18px;font-size:13px;color:#8da297}
 @media(min-width:761px) and (max-width:1150px){.sn-site .sn-bestaand .bs-typer{min-height:1.05em;white-space:nowrap;font-size:.6em}}
 .sn-site .sn-bestaand .bs-pakket b{padding-right:20px}
+.sn-site .sn-bestaand .bs-uitleg-kort{min-height:0;margin:16px 0 18px}
