@@ -22,7 +22,7 @@ import { translate, useLanguage } from "./i18n/context";
 import { Bento, Tegel } from "./Bento";
 import { AuditTeaser } from "./AuditPage";
 import FeaturedWork from "./FeaturedWork";
-import ResultatenCijfers from "./ResultatenCijfers";
+import ResultatenHero from "./ResultatenHero";
 import LiveWebsites from "./LiveWebsites";
 import { ImageSliders, VideoSlider } from "./MediaSliders";
 import OsEntry, { GRATIS_OS_URL } from "./os-entry";
@@ -238,19 +238,9 @@ export function ProjectsPage() {
   );
   return (
     <>
-      <PageHeading
-        label="Ons werk"
-        title={
-          <>
-            Ideeën die
-            <br />
-            <span>vorm hebben gekregen.</span>
-          </>
-        }
-        text="Van campagnes voor merken als AZ, Universal en Sony tot AI-websites en dataplatforms als VASTIQ. Ontdek het werk achter SocialNow."
-      />
-      <ResultatenCijfers />
-      <FeaturedWork />
+      {/* 18 oktober 2026 (Marinus): één opening met de resultaten voorop, daarna meteen de cases. */}
+      <ResultatenHero />
+      <FeaturedWork kop={false} />
       <LiveWebsites />
       <ImageSliders />
       <VideoSlider />
