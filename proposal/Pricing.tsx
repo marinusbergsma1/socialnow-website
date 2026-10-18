@@ -5,6 +5,7 @@ import { GRATIS_OS_URL } from "./os-entry";
 import { useLanguage } from "./i18n/context";
 import "./pricing.css";
 import { ProductOffer, ProductRoute } from "./ProductStart";
+import { PrijsLagen, TokenPakketten } from "./TokensPlus";
 
 // 23 september 2026 (Marinus): gratis starten is het grote verhaal, de prijzen staan klein en
 // helder eronder. Elk maandpakket heeft een custom OS; vanaf drie maanden hoort de complete
@@ -275,6 +276,10 @@ export default function Pricing() {
           </ul>
         </div>
       </section>
+
+      {/* 18 oktober 2026 (Marinus): "tokens kopen moet een groter onderdeel zijn". Vier lagen en het tokenblok, zie TokensPlus.tsx. */}
+      <PrijsLagen />
+      <TokenPakketten />
 
       <section className="prijs-maatwerk" aria-labelledby="prijs-maatwerk-titel">
         <div className="prijs-maatwerk-kop">
