@@ -27,13 +27,22 @@ regels woordelijk. Rapporteer kort, in het Nederlands, zonder streepjes.
 - [x] Sectie gevonden: `proposal/FreeWebsite.tsx` (kop, drie kaarten en de notice onder WebsiteExamples).
 - [x] Component `proposal/AppWand.tsx` plus `proposal/app-wand.css` (getest op 1440 en 390 met proefdata; Plan een call opent het paneel met Koppelingen aangevinkt)
 - [x] Generator `scripts/apps-genereer.mjs` (Simple Icons 16.35.0 via `npm pack` in de scratchpad, niet als afhankelijkheid)
-- [ ] `proposal/apps.ts` uit het echte onderzoek (nu proefdata, niet pushen)
-- [ ] Logo's en BRONNEN.md
+- [x] `proposal/apps.ts` uit het echte onderzoek: 215 apps, 36 In het OS, 115 met logo. Niet op de wand (geen officiële API): ChatGPT, Midjourney, Suno, CapCut, Loom
+- [x] Logo's alleen uit Simple Icons 16.35.0 en BRONNEN.md. HubSpot, Cloudflare (logo alleen met schriftelijke toestemming) en MiniMax (eigen licentie) zijn bewust teksttegels
 - [x] Vertalingen in alle negen `proposal/i18n/*.json` (prerender controleert Engels)
-- [ ] Build groen, `public/documenten` teruggezet
-- [ ] Schermafdrukken 390, 1024, 1440 in NL en EN in `docs/schermafdrukken/app-wand-20261018/`
+- [x] Build groen, `public/documenten` teruggezet
+- [x] Schermafdrukken 390, 1024, 1440 in NL en EN in `docs/schermafdrukken/app-wand-20261018/` (plus 1440 alle apps en 390 filter AI). Opnemen: `sn-taal`-cookie per taal, vaste header verbergen
 - [ ] Push, sha melden aan integrator en coördinator
 
 ## Werkwijze voorbeeld
 Poort 4330 is bezet door een andere sessie (vastiq-preview in vite.config), dus `npm run dev` faalt. Ik bekijk de productiebuild met
 de tijdelijke launch-config `app-wand-dist` (vite preview op 4391); die regel in `.claude/launch.json` niet committen.
+
+## Keuzes
+- Categorieën van het onderzoek naar de tien pillen: hr_planning en developer_hosting naar Werk & samenwerking, reviews naar Analytics & SEO, betalen_bank naar E-commerce & betalen.
+- Dubbelingen: eerste vermelding wint (volgorde bedrijf, ai-werk, marketing), dus Slack en Zapier bij Werk, Dropbox en Box bij Opslag.
+- Eerste weergave: 24 tegels (telefoon 15), alleen apps die In het OS zijn staan vooraan; "Toon alle 215 apps" klapt uit.
+
+## Vervolg (niet gedaan)
+- Officiële SVG's voor de 100 teksttegels (Salesforce, Slack, LinkedIn, OpenAI, Zernio, Exact, Mollie, Microsoft) via hun merkpagina's, per merk met toestemming of volgens hun regels.
+- De oude CSS van de drie kaarten in `proposal/free-website.css` (`sn-fw-offers`, `sn-studio-preview`) is nu ongebruikt.

@@ -22,7 +22,9 @@ const ONDERZOEK = arg("onderzoek", "/Volumes/WORK/02-SOCIALNOW/01_WEBSITE/integr
 const SI = arg("simple-icons", "");
 const DATUM = arg("datum", new Date().toISOString().slice(0, 10));
 const LOGOS = path.join(ROOT, "public/images/apps");
-const BESTANDEN = ["onderzoek-bedrijf.json", "onderzoek-marketing.json", "onderzoek-ai-werk.json"];
+// Volgorde telt bij dubbelingen: de eerste vermelding bepaalt de categorie. Zo staan Dropbox en Box bij opslag (bedrijf),
+// en Slack, Zapier, Make, n8n, Telegram en Discord bij werk of communicatie (ai-werk) in plaats van bij social (marketing).
+const BESTANDEN = ["onderzoek-bedrijf.json", "onderzoek-ai-werk.json", "onderzoek-marketing.json"];
 
 // De tien categorieën van de appwand, in de volgorde van de filterpillen. De regex vangt de woorden die het
 // onderzoek voor een categorie gebruikt (Nederlands of Engels).
@@ -39,6 +41,19 @@ export const CATEGORIEEN = [
   ["opslag", "Opslag & documenten", /opslag|storage|document|bestand|file|drive|cloud|onderteken|sign/i],
 ];
 const CATEGORIE_IDS = new Set(CATEGORIEEN.map(([id]) => id));
+// De categorieën van het onderzoek van 18 oktober 2026, vertaald naar de tien van de appwand.
+const ONDERZOEK_CATEGORIE = {
+  boekhouding_erp: "boekhouding", facturatie_abonnementen: "boekhouding",
+  crm_sales: "crm",
+  ecommerce_marktplaats: "commerce", betalen_bank: "commerce",
+  social_publiceren: "social", advertenties: "social",
+  analytics_seo: "analytics", reviews: "analytics",
+  email_automatisering: "communicatie", communicatie: "communicatie",
+  ai_modellen: "ai",
+  creatief_video: "creatie",
+  werk_samenwerking: "werk", hr_planning: "werk", developer_hosting: "werk",
+  opslag_documenten: "opslag",
+};
 
 const slugVan = (tekst) => String(tekst).normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/&/g, "and").replace(/\+/g, "plus").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const eerste = (o, ...namen) => { for (const n of namen) if (o[n] !== undefined && o[n] !== null && o[n] !== "") return o[n]; return undefined; };
@@ -53,6 +68,7 @@ function lijstUit(json) {
 
 function categorieVan(app) {
   const ruw = String(eerste(app, "categorie_id", "categorie", "category", "groep", "group") ?? "");
+  if (ONDERZOEK_CATEGORIE[ruw]) return ONDERZOEK_CATEGORIE[ruw];
   const id = slugVan(ruw);
   if (CATEGORIE_IDS.has(id)) return id;
   for (const [cid, label] of CATEGORIEEN) if (slugVan(ruw) === slugVan(label)) return cid;
@@ -63,6 +79,7 @@ function categorieVan(app) {
 // status_os: alleen een duidelijke ja telt als "In het OS". Twijfel, "gedeeltelijk" of "gepland" is "Via API".
 function statusVan(app) {
   const s = eerste(app, "status_os", "statusOs", "status", "in_os");
+  if (app.api === false || /geen_api|geen api|no_api/i.test(String(s ?? ""))) return "geen";
   if (s === true) return "os";
   const t = String(s ?? "").toLowerCase().trim();
   if (/^(ja|yes|true|in het os|in_os|geintegreerd|geïntegreerd|integrated|live|os)$/.test(t)) return "os";
@@ -76,6 +93,11 @@ if (SI) {
   for (const icoon of data) simpleIcons.set(icoon.slug, { ...icoon, versie });
   for (const icoon of data) for (const t of [icoon.title, ...(icoon.aliases?.aka || [])].map(slugVan)) if (!simpleIcons.has(`titel:${t}`)) simpleIcons.set(`titel:${t}`, { ...icoon, versie });
 }
+
+// Een logo dat volgens het onderzoek alleen met schriftelijke toestemming mag (HubSpot, Cloudflare) of een eigen licentie
+// heeft in plaats van CC0 (MiniMax), tonen we niet: die app wordt een teksttegel. Geldt voor elke regel met hetzelfde icoon.
+const logoNiet = (app) => /logo[^.]*(toestemming|permission)/i.test(`${app.opmerking ?? ""} ${app.logo_licentie ?? ""}`) || /eigen licentie|custom/i.test(String(app.logo_licentie ?? ""));
+const geblokkeerd = new Set();
 
 function simpleIcoon(app, naam) {
   const bron = String(eerste(app, "simple_icons_slug", "simpleIcons", "simple_icons", "logo_slug") ?? "");
@@ -106,6 +128,7 @@ const apps = new Map();
 const bronnen = [];
 const zonderCategorie = [];
 const ontbrekend = [];
+const zonderApi = [];
 for (const bestand of BESTANDEN) {
   const pad = path.join(ONDERZOEK, bestand);
   if (!existsSync(pad)) { ontbrekend.push(bestand); continue; }
@@ -116,7 +139,10 @@ for (const bestand of BESTANDEN) {
     if (!categorie) { zonderCategorie.push(`${naam} (${eerste(app, "categorie", "category") ?? "geen"}) in ${bestand}`); continue; }
     const slug = slugVan(eerste(app, "slug", "id") ?? naam);
     const status = statusVan(app);
-    const bestaand = apps.get(slug);
+    if (app.simple_icons_slug && logoNiet(app)) geblokkeerd.add(app.simple_icons_slug);
+    // Zonder officiële API (Midjourney, Suno, CapCut) hoort een app niet op de wand.
+    if (status === "geen") { zonderApi.push(naam); continue; }
+    const bestaand = apps.get(slug) || [...apps.values()].find((a) => slugVan(a.naam) === slugVan(naam));
     // Dubbel in twee bestanden: "In het OS" wint alleen als één van beide het echt zo noemt.
     if (bestaand) { if (status === "os") bestaand.status = "os"; continue; }
     apps.set(slug, { naam, slug, categorie, status, app });
@@ -128,14 +154,16 @@ mkdirSync(LOGOS, { recursive: true });
 const behouden = new Set(["BRONNEN.md"]);
 for (const item of apps.values()) {
   const { app, naam, slug } = item;
-  const icoon = simpleIcoon(app, naam);
+  const icoonGevonden = simpleIcoon(app, naam);
+  const icoon = icoonGevonden && !geblokkeerd.has(icoonGevonden.slug) ? icoonGevonden : undefined;
+  if (icoonGevonden && !icoon) item.merkregel = String(eerste(app, "merkregels_url") ?? icoonGevonden.guidelines ?? "");
   const lokaal = eerste(app, "logo_bestand", "logoBestand");
   if (icoon) {
     const svg = readFileSync(path.join(SI, "icons", `${icoon.slug}.svg`), "utf8").replace("<svg ", `<svg fill="#${icoon.hex}" `);
     writeFileSync(path.join(LOGOS, `${slug}.svg`), svg + "\n");
     item.logo = `/images/apps/${slug}.svg`;
     item.donker = lichtheid(icoon.hex) < 0.06;
-    bronnen.push([naam, `${slug}.svg`, `Simple Icons ${icoon.versie}, icoon \`${icoon.slug}\` (oorsprong: ${icoon.source})`, icoon.license?.type || "CC0-1.0 via Simple Icons; merkrecht bij de eigenaar", icoon.guidelines || ""]);
+    bronnen.push([naam, `${slug}.svg`, `Simple Icons ${icoon.versie}, icoon \`${icoon.slug}\`: ${eerste(app, "logo_svg_bron") ?? `https://cdn.jsdelivr.net/npm/simple-icons@${icoon.versie}/icons/${icoon.slug}.svg`} (tekening van ${icoon.source})`, icoon.license?.type || "CC0-1.0 via Simple Icons; merkrecht bij de eigenaar", String(eerste(app, "merkregels_url") ?? icoon.guidelines ?? "")]);
   } else if (lokaal && existsSync(String(lokaal)) && String(lokaal).endsWith(".svg")) {
     writeFileSync(path.join(LOGOS, `${slug}.svg`), schoneSvg(readFileSync(String(lokaal), "utf8")) + "\n");
     item.logo = `/images/apps/${slug}.svg`;
@@ -179,10 +207,11 @@ ${bronnen.sort((a, b) => a[0].localeCompare(b[0], "nl")).map((r) => `| ${r.map((
 
 ## Zonder logo (teksttegel)
 
-${lijst.filter((a) => !a.logo).map((a) => `- ${a.naam}`).join("\n") || "- geen"}
+${lijst.filter((a) => !a.logo).map((a) => `- ${a.naam}${a.merkregel ? ` (wel in Simple Icons, maar logo alleen met toestemming of eigen licentie: ${a.merkregel})` : ""}`).join("\n") || "- geen"}
 `;
 writeFileSync(path.join(LOGOS, "BRONNEN.md"), md);
 
 console.log(`${lijst.length} apps, ${lijst.filter((a) => a.status === "os").length} in het OS, ${lijst.filter((a) => a.logo).length} met logo.`);
 if (ontbrekend.length) console.log(`Ontbreekt nog: ${ontbrekend.join(", ")}`);
+if (zonderApi.length) console.log(`Niet op de wand, geen officiële API: ${zonderApi.join(", ")}`);
 if (zonderCategorie.length) console.log(`Overgeslagen zonder categorie:\n  ${zonderCategorie.join("\n  ")}`);

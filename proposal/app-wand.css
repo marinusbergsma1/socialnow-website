@@ -28,7 +28,7 @@
 .sn-site .sn-aw-logo b { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 15px; line-height: 1.15; font-weight: 800; letter-spacing: -.01em; color: #e9eef1; overflow-wrap: anywhere; }
 .sn-site .sn-aw-naam { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; font-weight: 600; color: #e3e9ed; }
 .sn-site .sn-aw-tegel.is-tekst .sn-aw-naam { visibility: hidden; }
-.sn-site .sn-aw-status { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; line-height: 1.2; font-weight: 600; color: #7d8a94; }
+.sn-site .sn-aw-status { display: inline-flex; align-items: center; gap: 6px; text-align: center; font-size: 11px; line-height: 1.2; font-weight: 600; color: #7d8a94; }
 .sn-site .sn-aw-tegel.is-os .sn-aw-status { color: #5fe596; }
 .sn-site .sn-aw-tegel.is-os .sn-aw-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #25d366; box-shadow: 0 0 8px #25d366; flex: none; }
 .sn-site .sn-aw-tegel.is-api .sn-aw-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; border: 1px solid #66737d; flex: none; box-sizing: border-box; }
@@ -70,7 +70,8 @@
   .sn-site .sn-aw-logo img { width: 32px; height: 32px; }
   .sn-site .sn-aw-logo b { font-size: 13px; }
   .sn-site .sn-aw-naam { font-size: 12px; }
-  .sn-site .sn-aw-status { font-size: 10px; gap: 4px; }
+  .sn-site .sn-aw-status { font-size: 10px; gap: 4px; justify-content: center; }
+  .sn-site .sn-aw-tegel.is-api .sn-aw-status::before { display: none; }
   .sn-site .sn-aw-mis { flex-direction: column; align-items: flex-start; }
   .sn-site .sn-aw-rooster.is-ingeklapt > li:nth-child(n+16) { display: none; }
 }
