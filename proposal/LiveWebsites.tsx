@@ -39,8 +39,10 @@ const frameSrcOf = (project: Project) => {
   }
   return project.previewUrl || (EMBED.has(project.slug) ? project.url : undefined);
 };
-// Alle frames worden vooraf geladen zodra het onderdeel in de buurt komt: eerst de
-// actieve site, daarna een voor een de rest. Wisselen is dan direct, zonder herladen.
+// 18 oktober 2026 (Marinus: "VASTIQ en gelijk laden, nu zie ik elke keer een lelijke screenshot"). De eerste site
+// (VASTIQ) laadt zodra de pagina opent, niet pas als het onderdeel in beeld komt. Is hij klaar, dan laadt de volgende,
+// en zo verder; komt de bezoeker in de buurt (1,5 scherm), dan gaat de rest ook door als een site blijft hangen.
+// Zolang een live site laadt, staat er een rustig skelet in plaats van een paginaopname; de site faadt erin zodra hij klaar is.
 const PRELOAD_TIMEOUT = 2500;
 export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
   const [index, setIndex] = useState(0);
@@ -65,6 +67,9 @@ export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
   useEffect(() => {
     if (visible) setNear(true);
   }, [visible]);
+  // Direct bij het openen van de pagina: de actieve (eerste) site begint al te laden.
+  const [gestart, setGestart] = useState(false);
+  useEffect(() => { setGestart(true); }, []);
   useEffect(() => {
     stopInteraction();
     return () => window.clearTimeout(interactionTimer.current);
@@ -84,9 +89,9 @@ export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
       return next ? [...current, next.slug] : current;
     });
   useEffect(() => {
-    if (!near || !live) return;
+    if (!(gestart || near) || !live) return;
     setMounted((current) => (current.includes(project.slug) ? current : [...current, project.slug]));
-  }, [near, live, project.slug]);
+  }, [gestart, near, live, project.slug]);
   useEffect(() => {
     if (!near) return;
     // Vangnet: laadt een site traag of nooit, dan gaat de volgende toch van start.
@@ -163,7 +168,7 @@ export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
           onPointerEnter={event => { if (live && event.pointerType === "mouse") startInteraction(); }}
           onPointerLeave={stopInteraction}
         >
-          {near && sites.map((site) => {
+          {sites.map((site) => {
             const src = frameSrcOf(site);
             if (!src || !mounted.includes(site.slug)) return null;
             const active = site.slug === project.slug;
@@ -172,7 +177,8 @@ export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
               <iframe
                 key={site.slug}
                 ref={active ? frame : undefined}
-                hidden={!show}
+                hidden={!active}
+                className={show ? "is-klaar" : undefined}
                 tabIndex={show && interactive ? 0 : -1}
                 style={{pointerEvents: show && interactive ? "auto" : "none"}}
                 title={`Live website van ${site.title}`}
@@ -181,12 +187,18 @@ export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
                 onLoad={() => {
                   setLoaded((current) => (current.includes(site.slug) ? current : [...current, site.slug]));
-                  mountNext();
+                  // Op afstand alleen de volgende site (2/6) vooraf; dichtbij de rest ook, een voor een.
+                  if (near || mounted.length < 2) mountNext();
                 }}
               />
             );
           })}
-          {still && (!live || !activeLoaded) && (
+          {live && !activeLoaded && (
+            <div className="h-live-skelet" aria-hidden="true">
+              <i /><i /><i /><i />
+            </div>
+          )}
+          {still && !live && (
             <img
               src={still}
               alt={`Volledige paginaopname van de website van ${project.title}`}
@@ -194,7 +206,7 @@ export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
               decoding="async"
             />
           )}
-          {!still && ((!live) || !activeLoaded) && (
+          {!still && !live && (
             <div className="h-live-direct">
               <strong>{project.title}</strong>
               {!project.offline && (

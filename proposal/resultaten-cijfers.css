@@ -1,0 +1,29 @@
+/* 18 oktober 2026: de opening van /projecten (ResultatenHero.tsx). Eén kop, de cijfers als blikvanger in mono zoals de
+   resultaattegels op de homepage (bereikt.css), de merkenbalk en dan de cases, zonder groot gat ertussen. */
+.sn-site .sn-resultaten-hero .h-page-heading.sn-resultaten-kop { padding-bottom: 0; }
+.sn-site .sn-resultaten-hero .sn-bento.sn-resultaten-cijfers { padding-top: clamp(28px, 3.4vw, 48px); }
+.sn-site .sn-resultaat-groot .sn-resultaat-cijfer { display: grid; gap: 10px; margin: 6px 0 18px; }
+.sn-site .sn-resultaat-groot .sn-resultaat-cijfer b { font-family: var(--c-mono, ui-monospace, Menlo, monospace); font-size: clamp(56px, 6.4vw, 104px); font-weight: 500; letter-spacing: 0; line-height: .95; color: #fff; }
+.sn-site .sn-resultaat-groot .sn-resultaat-cijfer span { font-family: var(--c-mono, ui-monospace, Menlo, monospace); font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--c-accent, #25d366); }
+.sn-site .sn-resultaten-hero > .h-clients { padding-top: clamp(28px, 3.4vw, 44px); }
+/* De cases volgen direct: hun eigen kop is weg, dus ook de grote ruimte erboven. */
+.sn-site .sn-resultaten-hero + .h-featured-work { padding-top: clamp(40px, 5vw, 72px); }
+@media (max-width: 700px) {
+  .sn-site .sn-resultaat-groot .sn-resultaat-cijfer { margin-bottom: 14px; }
+  .sn-site .sn-resultaat-groot .sn-resultaat-cijfer b { font-size: clamp(52px, 16vw, 72px); }
+}
+/* Trackrecord van ons team (TeamTrackrecord.tsx): foto, naam, rol en de merken als kleine logo's op een neutrale drager,
+   zoals de bedrijfsreferenties op /team (partner-references.css). */
+.sn-site .sn-resultaten-hero .sn-bento.sn-team-trackrecord { padding-top: clamp(36px, 4vw, 56px); }
+.sn-site .sn-trackrecord-tegel { gap: 14px; }
+.sn-site .sn-trackrecord-wie { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.sn-site .sn-trackrecord-wie > img { flex: none; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: center 26%; background: #0b1920; }
+.sn-site .sn-trackrecord-wie > p { display: grid; gap: 2px; margin: 0; min-width: 0; }
+.sn-site .sn-trackrecord-wie b { color: #fff; font-size: 15px; font-weight: 700; line-height: 1.25; }
+.sn-site .sn-trackrecord-wie span { color: #8da297; font-size: 12px; line-height: 1.35; }
+.sn-site .sn-trackrecord-merken { display: flex; flex-wrap: wrap; gap: 6px; margin: auto 0 0; padding: 0; list-style: none; }
+.sn-site .sn-trackrecord-merken li { display: flex; align-items: center; justify-content: center; min-height: 34px; padding: 6px 9px; border: 1px solid #dfe5e2; border-radius: 6px; background: #fff; color: #20272d; }
+.sn-site .sn-trackrecord-merken li.is-donker { background: #172923; border-color: #172923; color: #fff; }
+.sn-site .sn-trackrecord-merken img { display: block; width: auto; max-width: 96px; height: 18px; object-fit: contain; }
+.sn-site .sn-trackrecord-merken span { font-size: 11px; font-weight: 600; line-height: 1.3; }
+.sn-site .sn-trackrecord-merken span.is-woordmerk { font-family: ui-monospace, Menlo, monospace; font-weight: 500; }

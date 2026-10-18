@@ -542,3 +542,22 @@
 @media (max-width: 860px) {
   .sn-site .prijs-raster-drie { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* 18 oktober 2026 (Marinus): partnerlogo's bij de pakketten, alleen wat al op de site staat. Wit op zwart zoals op de homepage. */
+.sn-site .prijs-partners { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 24px 48px; margin-top: 28px; padding: 24px 26px; border: 1px solid var(--prijs-rand); border-radius: 18px; }
+.sn-site .prijs-partners .h-eyebrow { margin: 0 0 16px; color: #8b96a0; }
+.sn-site .prijs-partners ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 18px 34px; }
+.sn-site .prijs-partners li { display: grid; justify-items: start; gap: 6px; }
+.sn-site .prijs-partners a { display: flex; align-items: center; height: 34px; opacity: .85; transition: opacity .25s ease; }
+.sn-site .prijs-partners a:hover { opacity: 1; }
+.sn-site .prijs-partners img { display: block; width: auto; height: 26px; max-width: 160px; object-fit: contain; }
+.sn-site .prijs-partners img.is-wit { filter: brightness(0) invert(1); }
+.sn-site .prijs-partners code { font-family: var(--v-mono, ui-monospace, monospace); font-size: 18px; font-weight: 700; color: #f3c6e8; }
+.sn-site .prijs-partners small { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #6f7a83; }
+.sn-site .prijs-erkend { align-items: center; opacity: .7; }
+.sn-site .prijs-erkend img { height: 22px; }
+.sn-site .prijs-erkend b { font-size: 15px; font-weight: 600; color: #fff; }
+@media (max-width: 860px) {
+  .sn-site .prijs-partners { grid-template-columns: minmax(0, 1fr); padding: 20px; }
+  .sn-site .prijs-partners ul { gap: 16px 26px; }
+}

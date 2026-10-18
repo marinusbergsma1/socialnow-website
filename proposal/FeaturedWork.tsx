@@ -47,15 +47,17 @@ const selections = [
   },
 ];
 
-export default function FeaturedWork() {
+// kop={false}: op /projecten opent ResultatenHero de pagina, dan staat hier geen tweede intro (18 oktober 2026).
+export default function FeaturedWork({ kop = true }: { kop?: boolean }) {
   const [selected, setSelected] = useState<MediaItem | null>(null);
   return (
     <section
       className="h-section h-wrap h-featured-work"
       id="uitgelicht-werk"
-      aria-labelledby="featured-work-title"
+      aria-labelledby={kop ? "featured-work-title" : undefined}
+      aria-label={kop ? undefined : "Uitgelicht werk"}
     >
-      <Heading
+      {kop && <Heading
         id="featured-work-title"
         label="Uitgelicht werk / Gemaakt door SocialNow"
         title={
@@ -68,7 +70,7 @@ export default function FeaturedWork() {
         text="Bewegend beeld. Sterke merken. Oog voor ieder detail. Ontdek het werk achter onze ervaring."
       >
 
-      </Heading>
+      </Heading>}
       <div className="h-featured-cases">
         {selections.map((selection, index) => {
           const project = projects.find(

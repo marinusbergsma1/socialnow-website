@@ -1,0 +1,78 @@
+/* 18 oktober 2026: de appwand (AppWand.tsx) in plaats van "Drie manieren om te beginnen". Zwarte tegels met een dunne
+   rand zoals de bento, logo's wit en bij hover in hun merkkleur. "In het OS" is groen, "Via API te koppelen" grijs. */
+.sn-site .sn-aw { display: grid; gap: clamp(22px, 2.4vw, 32px); min-width: 0; }
+.sn-site .sn-aw-kop { max-width: 980px; }
+.sn-site .sn-aw-kop > .h-eyebrow { display: flex; align-items: center; margin: 0 0 18px; color: #c3ccd4; }
+:root .sn-site .sn-free-website .sn-aw-kop h2 > span { color: #25d366 !important; }
+.sn-site .sn-aw-intro { margin: 20px 0 0; max-width: 680px; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.55; color: #aeb8c1; }
+
+.sn-site .sn-aw-balk { display: flex; align-items: center; gap: 16px 28px; min-width: 0; }
+.sn-site .sn-aw-filters { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; flex: 1; }
+.sn-site .sn-aw-filters button { flex: none; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border: 1px solid rgba(255,255,255,.14); border-radius: 999px; background: #0b0f12; color: #d5dde3; font: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer; transition: border-color .2s, background .2s, color .2s; }
+.sn-site .sn-aw-filters button small { font-size: 12px; font-weight: 600; color: #7d8a94; }
+.sn-site .sn-aw-filters button:hover { border-color: rgba(255,255,255,.3); color: #fff; }
+.sn-site .sn-aw-filters button[aria-pressed="true"] { border-color: #25d366; background: #0a1e12; color: #fff; }
+.sn-site .sn-aw-filters button[aria-pressed="true"] small { color: #25d366; }
+.sn-site .sn-aw-teller { flex: none; margin: 0; font-size: 15px; color: #aeb8c1; white-space: nowrap; }
+.sn-site .sn-aw-teller b { font-size: clamp(30px, 2.6vw, 40px); font-weight: 800; letter-spacing: -.02em; color: #fff; margin-right: 2px; }
+
+.sn-site .sn-aw-rooster { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.sn-site .sn-aw-tegel { --hover: 1; position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; padding: 22px 10px 14px; border: 1px solid rgba(255,255,255,.09); border-radius: 16px; background: #07090b; text-align: center; transition: border-color .25s, background .25s; }
+.sn-site .sn-aw-tegel:hover { border-color: rgba(255,255,255,.22); background: #0c1014; }
+.sn-site .sn-aw-tegel.is-os { border-color: rgba(37, 211, 102, .26); }
+.sn-site .sn-aw-tegel.is-os:hover { border-color: rgba(37, 211, 102, .55); }
+.sn-site .sn-aw-logo { display: grid; place-items: center; width: 100%; height: 44px; }
+.sn-site .sn-aw-logo img { width: 40px; height: 40px; object-fit: contain; filter: brightness(0) invert(1); opacity: .86; transition: filter .25s, opacity .25s; }
+.sn-site .sn-aw-tegel:hover .sn-aw-logo img { filter: none; opacity: 1; }
+.sn-site .sn-aw-tegel.is-donker:hover .sn-aw-logo img { filter: brightness(0) invert(1); }
+.sn-site .sn-aw-logo b { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 15px; line-height: 1.15; font-weight: 800; letter-spacing: -.01em; color: #e9eef1; overflow-wrap: anywhere; }
+.sn-site .sn-aw-naam { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; font-weight: 600; color: #e3e9ed; }
+.sn-site .sn-aw-tegel.is-tekst .sn-aw-naam { visibility: hidden; }
+.sn-site .sn-aw-status { display: inline-flex; align-items: center; gap: 6px; text-align: center; font-size: 11px; line-height: 1.2; font-weight: 600; color: #7d8a94; }
+.sn-site .sn-aw-tegel.is-os .sn-aw-status { color: #5fe596; }
+.sn-site .sn-aw-tegel.is-os .sn-aw-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #25d366; box-shadow: 0 0 8px #25d366; flex: none; }
+.sn-site .sn-aw-tegel.is-api .sn-aw-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; border: 1px solid #66737d; flex: none; box-sizing: border-box; }
+
+.sn-site .sn-aw-meer { justify-self: center; min-height: 46px; padding: 0 22px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: #0b0f12; color: #fff; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; transition: border-color .2s; }
+.sn-site .sn-aw-meer:hover { border-color: #25d366; }
+
+.sn-site .sn-aw-onder { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 16px; }
+.sn-site .sn-aw-uitleg { display: grid; gap: 14px; margin: 0; padding: clamp(20px, 2vw, 28px); border: 1px solid rgba(255,255,255,.09); border-radius: 20px; background: #07090b; }
+.sn-site .sn-aw-uitleg dt { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: #fff; }
+.sn-site .sn-aw-uitleg dt i { width: 8px; height: 8px; border-radius: 50%; flex: none; box-sizing: border-box; }
+.sn-site .sn-aw-uitleg .is-os dt i { background: #25d366; box-shadow: 0 0 10px #25d366; }
+.sn-site .sn-aw-uitleg .is-api dt i { border: 1px solid #8a969f; }
+.sn-site .sn-aw-uitleg dd { margin: 4px 0 0 17px; font-size: 14px; line-height: 1.5; color: #aeb8c1; }
+.sn-site .sn-aw-mis { display: flex; align-items: center; justify-content: space-between; gap: 18px 28px; padding: clamp(20px, 2vw, 28px); border: 1px solid #1f5a3a; border-radius: 20px; background: radial-gradient(120% 90% at 0% 0%, rgba(37, 211, 102, .14), transparent 60%), #07110c; }
+:root .sn-site .sn-free-website .sn-aw-mis h3 { margin: 0; font-size: clamp(22px, 2vw, 30px) !important; line-height: 1.1; color: #fff; }
+.sn-site .sn-aw-mis p { margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: #aeb8c1; }
+.sn-site .sn-aw-call { display: inline-flex; flex: none; align-items: center; gap: 18px; min-height: 52px; padding: 6px 7px 6px 22px; border: 1.5px solid #25d366; border-radius: 999px; background: #08110d; color: #fff; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; transition: background .2s, color .2s; }
+.sn-site .sn-aw-call .arrow { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #25d366; color: #002912; }
+.sn-site .sn-aw-call:hover { background: #25d366; color: #001a0a; }
+.sn-site .sn-aw-call:hover .arrow { background: #fff; }
+.sn-site .sn-aw-bron { margin: 0; font-size: 12.5px; line-height: 1.6; color: #7d8a94; }
+.sn-site .sn-aw :is(button):focus-visible { outline: 2px solid #25d366; outline-offset: 3px; }
+
+@media (max-width: 1250px) { .sn-site .sn-aw-rooster { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+@media (max-width: 1050px) {
+  .sn-site .sn-aw-balk { flex-direction: column-reverse; align-items: stretch; }
+  .sn-site .sn-aw-onder { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) { .sn-site .sn-aw-rooster { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 650px) {
+  /* Telefoon: de pillen schuiven zijwaarts, drie tegels naast elkaar. */
+  .sn-site .sn-aw-filters { flex-wrap: nowrap; overflow-x: auto; margin: 0 -18px; padding: 2px 18px 6px; scrollbar-width: none; scroll-snap-type: x proximity; }
+  .sn-site .sn-aw-filters::-webkit-scrollbar { display: none; }
+  .sn-site .sn-aw-filters button { scroll-snap-align: start; min-height: 38px; font-size: 13px; }
+  .sn-site .sn-aw-rooster { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .sn-site .sn-aw-tegel { gap: 8px; padding: 16px 6px 11px; border-radius: 13px; }
+  .sn-site .sn-aw-logo { height: 34px; }
+  .sn-site .sn-aw-logo img { width: 32px; height: 32px; }
+  .sn-site .sn-aw-logo b { font-size: 13px; }
+  .sn-site .sn-aw-naam { font-size: 12px; }
+  .sn-site .sn-aw-status { font-size: 10px; gap: 4px; justify-content: center; }
+  .sn-site .sn-aw-tegel.is-api .sn-aw-status::before { display: none; }
+  .sn-site .sn-aw-mis { flex-direction: column; align-items: flex-start; }
+  .sn-site .sn-aw-rooster.is-ingeklapt > li:nth-child(n+16) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .sn-site .sn-aw-tegel, .sn-site .sn-aw-logo img, .sn-site .sn-aw-filters button { transition: none; } }

@@ -3025,3 +3025,15 @@ html {
 .sn-site .h-team-duo.is-attesso .h-team-duo-label code { color: #342d31; font-size: 22px; }
 .sn-site .h-team-duo .h-people-grid figcaption span { color: #4a5450; }
 .sn-site .h-team-duo .h-portrait { border-color: #dfe5e2; }
+
+/* 18 oktober 2026: live websites laden direct; tot een site klaar is staat er een rustig skelet, daarna faadt hij erin. */
+.sn-site .h-live-screen { position: relative; }
+.sn-site .h-live-screen > iframe { opacity: 0; transition: opacity .35s ease; }
+.sn-site .h-live-screen > iframe.is-klaar { opacity: 1; }
+.sn-site .h-live-skelet { position: absolute; inset: 0; display: grid; grid-template-rows: 64px 38% 1fr 1fr; gap: 18px; padding: 28px; background: #0b0d0c; pointer-events: none; }
+.sn-site .h-live-skelet > i { display: block; border-radius: 10px; background: linear-gradient(90deg, #141816 0%, #1b211e 50%, #141816 100%); background-size: 200% 100%; animation: h-live-skelet 1.6s ease-in-out infinite; }
+.sn-site .h-live-skelet > i:first-child { width: 42%; }
+.sn-site .h-live-skelet > i:nth-child(3) { width: 76%; }
+.sn-site .h-live-skelet > i:nth-child(4) { width: 58%; }
+@keyframes h-live-skelet { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+@media (prefers-reduced-motion: reduce) { .sn-site .h-live-skelet > i { animation: none; } .sn-site .h-live-screen > iframe { transition: none; } }
