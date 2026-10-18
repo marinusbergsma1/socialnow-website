@@ -127,6 +127,11 @@ const INBEGREPEN = [
   "Complete rebranding",
   "Je website",
   "Persoonlijke call met uitleg van je systeem",
+  // 18 oktober 2026 (Marinus: "en echte experts die mee kunnen kijken met de toegang die jij zelf bepaald"). Alleen wat live
+  // waar is: teamleden met een rol (OS #134), sleutels voor je eigen AI standaard alleen lezen (OS #135). Geen Connect-toegang.
+  "Echte experts kijken mee in je OS, met de toegang die jij bepaalt. Intrekken kan altijd.",
+  "Koppel je eigen AI veilig: sleutels standaard alleen lezen.",
+  "Je data blijft van jou.",
 ];
 
 // Tokens per maand voor de merkgetrainde Studio (Marinus, 18 oktober 2026). Tokens per pakket uit de OS-code
@@ -353,7 +358,7 @@ export default function Pricing() {
             <h2 id="prijs-tokens-titel">Meer maken in je Studio</h2>
           </div>
           <p>
-            Tokens zijn je rendertegoed voor beeld, video en premium modellen in je merkgetrainde Studio. Je ziet de prijs per render in de Studio voordat je rendert.
+            Tokens zijn je rendertegoed voor beeld, video en premium modellen in je merkgetrainde Studio. Je ziet de prijs per render in de Studio voordat je rendert. Maandelijks opzegbaar.
           </p>
         </div>
         <div className="prijs-raster prijs-raster-drie">
