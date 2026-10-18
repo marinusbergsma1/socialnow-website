@@ -24,6 +24,17 @@ const DATUM = arg("datum", new Date().toISOString().slice(0, 10));
 const LOGOS = path.join(ROOT, "public/images/apps");
 // Volgorde telt bij dubbelingen: de eerste vermelding bepaalt de categorie. Zo staan Dropbox en Box bij opslag (bedrijf),
 // en Slack, Zapier, Make, n8n, Telegram en Discord bij werk of communicatie (ai-werk) in plaats van bij social (marketing).
+// Officiële logo's van merkpagina's (voor apps die niet in Simple Icons staan). De SVG zelf staat al in
+// public/images/apps/<slug>.svg en wordt niet overschreven; per slug: bron, pagina, licentie, regels, datum en of het
+// logo in eigen kleur te donker is voor zwart (donker: true, dan blijft het bij hover wit).
+const OFFICIEEL_PAD = path.join(ROOT, "scripts/app-logos-officieel.json");
+const OFFICIEEL = existsSync(OFFICIEEL_PAD) ? JSON.parse(readFileSync(OFFICIEEL_PAD, "utf8")) : {};
+// Controle van 18 oktober 2026 (Marinus: "is het écht zo dat die allemaal gekoppeld kunnen worden?"): per app die het
+// onderzoek "in_os" noemt, is in de OS-code nagelopen of een klant hem nu zelf koppelt. status per slug: "os" (zelf
+// koppelen, met bewijs), "aanvraag" (koppeling bestaat, SocialNow zet hem aan) of "api". Een in_os-app die hier niet
+// staat, wordt "aanvraag": zonder controle geen "In het OS". notities per slug: review, partner, betaald, psd2, odoo, zernio.
+const CONTROLE_PAD = path.join(ROOT, "scripts/app-status-controle.json");
+const CONTROLE = existsSync(CONTROLE_PAD) ? JSON.parse(readFileSync(CONTROLE_PAD, "utf8")) : { status: {}, notities: {} };
 const BESTANDEN = ["onderzoek-bedrijf.json", "onderzoek-ai-werk.json", "onderzoek-marketing.json"];
 
 // De tien categorieën van de appwand, in de volgorde van de filterpillen. De regex vangt de woorden die het
@@ -96,8 +107,10 @@ if (SI) {
 
 // Een logo dat volgens het onderzoek alleen met schriftelijke toestemming mag (HubSpot, Cloudflare) of een eigen licentie
 // heeft in plaats van CC0 (MiniMax), tonen we niet: die app wordt een teksttegel. Geldt voor elke regel met hetzelfde icoon.
-const logoNiet = (app) => /logo[^.]*(toestemming|permission)/i.test(`${app.opmerking ?? ""} ${app.logo_licentie ?? ""}`) || /eigen licentie|custom/i.test(String(app.logo_licentie ?? ""));
+const logoNiet = (app) => /logo[^.]*(toestemming|permission)|alleen na akkoord|tijdelijke vervanger/i.test(`${app.opmerking ?? ""} ${app.logo_licentie ?? ""}`) || /eigen licentie|custom/i.test(String(app.logo_licentie ?? ""));
 const geblokkeerd = new Set();
+// Een app die een ander merkicoon alleen als tijdelijke vervanger zou lenen (Veo met het Gemini-icoon): geen logo.
+const geenLogo = new Set();
 
 function simpleIcoon(app, naam) {
   const bron = String(eerste(app, "simple_icons_slug", "simpleIcons", "simple_icons", "logo_slug") ?? "");
@@ -138,14 +151,20 @@ for (const bestand of BESTANDEN) {
     const categorie = categorieVan(app);
     if (!categorie) { zonderCategorie.push(`${naam} (${eerste(app, "categorie", "category") ?? "geen"}) in ${bestand}`); continue; }
     const slug = slugVan(eerste(app, "slug", "id") ?? naam);
-    const status = statusVan(app);
-    if (app.simple_icons_slug && logoNiet(app)) geblokkeerd.add(app.simple_icons_slug);
+    const onderzocht = statusVan(app);
+    const gecontroleerd = CONTROLE.status?.[slugVan(eerste(app, "slug", "id") ?? naam)]?.status;
+    const status = onderzocht === "geen" ? "geen" : onderzocht === "os" ? (gecontroleerd || "aanvraag") : (gecontroleerd === "aanvraag" ? "aanvraag" : "api");
+    if (app.simple_icons_slug && logoNiet(app)) {
+      if (/alleen na akkoord|tijdelijke vervanger/i.test(String(app.opmerking ?? ""))) geenLogo.add(slugVan(eerste(app, "slug", "id") ?? naam));
+      else geblokkeerd.add(app.simple_icons_slug);
+    }
     // Zonder officiële API (Midjourney, Suno, CapCut) hoort een app niet op de wand.
     if (status === "geen") { zonderApi.push(naam); continue; }
     const bestaand = apps.get(slug) || [...apps.values()].find((a) => slugVan(a.naam) === slugVan(naam));
     // Dubbel in twee bestanden: "In het OS" wint alleen als één van beide het echt zo noemt.
-    if (bestaand) { if (status === "os") bestaand.status = "os"; continue; }
-    apps.set(slug, { naam, slug, categorie, status, app });
+    const rang = { os: 0, aanvraag: 1, api: 2 };
+    if (bestaand) { if (rang[status] < rang[bestaand.status]) bestaand.status = status; continue; }
+    apps.set(slug, { naam, slug, categorie, status, notitie: CONTROLE.notities?.[slug], app });
   }
 }
 if (ontbrekend.length === BESTANDEN.length) { console.error(`Geen onderzoeksbestanden in ${ONDERZOEK}`); process.exit(1); }
@@ -155,14 +174,21 @@ const behouden = new Set(["BRONNEN.md"]);
 for (const item of apps.values()) {
   const { app, naam, slug } = item;
   const icoonGevonden = simpleIcoon(app, naam);
-  const icoon = icoonGevonden && !geblokkeerd.has(icoonGevonden.slug) ? icoonGevonden : undefined;
+  const icoon = icoonGevonden && !geblokkeerd.has(icoonGevonden.slug) && !geenLogo.has(slug) ? icoonGevonden : undefined;
   if (icoonGevonden && !icoon) item.merkregel = String(eerste(app, "merkregels_url") ?? icoonGevonden.guidelines ?? "");
   const lokaal = eerste(app, "logo_bestand", "logoBestand");
-  if (icoon) {
+  const officieel = OFFICIEEL[slug];
+  if (officieel && existsSync(path.join(LOGOS, `${slug}.svg`))) {
+    item.logo = `/images/apps/${slug}.svg`;
+    if (officieel.donker) item.donker = true;
+    if (officieel.kleur) item.kleur = officieel.kleur;
+    bronnen.push([naam, `${slug}.svg`, `Officieel: ${officieel.bron} (via ${officieel.pagina})`, officieel.licentie, officieel.regels, officieel.datum]);
+  } else if (icoon) {
     const svg = readFileSync(path.join(SI, "icons", `${icoon.slug}.svg`), "utf8").replace("<svg ", `<svg fill="#${icoon.hex}" `);
     writeFileSync(path.join(LOGOS, `${slug}.svg`), svg + "\n");
     item.logo = `/images/apps/${slug}.svg`;
     item.donker = lichtheid(icoon.hex) < 0.06;
+    if (!item.donker) item.kleur = `#${icoon.hex}`;
     bronnen.push([naam, `${slug}.svg`, `Simple Icons ${icoon.versie}, icoon \`${icoon.slug}\`: ${eerste(app, "logo_svg_bron") ?? `https://cdn.jsdelivr.net/npm/simple-icons@${icoon.versie}/icons/${icoon.slug}.svg`} (tekening van ${icoon.source})`, icoon.license?.type || "CC0-1.0 via Simple Icons; merkrecht bij de eigenaar", String(eerste(app, "merkregels_url") ?? icoon.guidelines ?? "")]);
   } else if (lokaal && existsSync(String(lokaal)) && String(lokaal).endsWith(".svg")) {
     writeFileSync(path.join(LOGOS, `${slug}.svg`), schoneSvg(readFileSync(String(lokaal), "utf8")) + "\n");
@@ -175,18 +201,22 @@ for (const item of apps.values()) {
 for (const f of readdirSync(LOGOS)) if (!behouden.has(f)) unlinkSync(path.join(LOGOS, f));
 
 const volgorde = new Map(CATEGORIEEN.map(([id], i) => [id, i]));
-const lijst = [...apps.values()].sort((a, b) => (a.status === b.status ? 0 : a.status === "os" ? -1 : 1) || volgorde.get(a.categorie) - volgorde.get(b.categorie) || a.naam.localeCompare(b.naam, "nl"));
+const STATUSVOLGORDE = { os: 0, aanvraag: 1, api: 2 };
+const lijst = [...apps.values()].sort((a, b) => STATUSVOLGORDE[a.status] - STATUSVOLGORDE[b.status] || volgorde.get(a.categorie) - volgorde.get(b.categorie) || a.naam.localeCompare(b.naam, "nl"));
 
 const ts = `// Gegenereerd door scripts/apps-genereer.mjs op ${DATUM} uit de drie onderzoeksbestanden in
 // integraties-onderzoek-20261018. Niet met de hand aanpassen: pas het onderzoek aan en draai de generator opnieuw.
-// status "os" = label "In het OS" (echt geïntegreerd), "api" = label "Via API te koppelen".
+// status "os" = label "In het OS" (klant koppelt zelf, gecontroleerd in de OS-code), "aanvraag" = "Op aanvraag"
+// (koppeling bestaat, SocialNow zet hem aan), "api" = "Via API te koppelen". notitie = korte uitleg in de tooltip.
 export type AppCategorie = ${CATEGORIEEN.map(([id]) => JSON.stringify(id)).join(" | ")};
-export type App = { naam: string; slug: string; categorie: AppCategorie; status: "os" | "api"; logo?: string; donker?: boolean };
+// kleur = merkkleur voor de zachte tint van de tegel; donker = logo in eigen kleur is (bijna) zwart, de site toont dan de witte versie.
+export type AppNotitie = "review" | "partner" | "betaald" | "psd2" | "odoo" | "zernio";
+export type App = { naam: string; slug: string; categorie: AppCategorie; status: "os" | "aanvraag" | "api"; notitie?: AppNotitie; logo?: string; kleur?: string; donker?: boolean };
 export const APP_CATEGORIEEN: { id: AppCategorie; label: string }[] = [
 ${CATEGORIEEN.map(([id, label]) => `  { id: ${JSON.stringify(id)}, label: ${JSON.stringify(label)} },`).join("\n")}
 ];
 export const APPS: App[] = [
-${lijst.map(({ naam, slug, categorie, status, logo, donker }) => `  ${JSON.stringify({ naam, slug, categorie, status, ...(logo ? { logo } : {}), ...(donker ? { donker } : {}) })},`).join("\n")}
+${lijst.map(({ naam, slug, categorie, status, notitie, logo, kleur, donker }) => `  ${JSON.stringify({ naam, slug, categorie, status, ...(notitie ? { notitie } : {}), ...(logo ? { logo } : {}), ...(kleur ? { kleur } : {}), ...(donker ? { donker } : {}) })},`).join("\n")}
 ];
 `;
 writeFileSync(path.join(ROOT, "proposal/apps.ts"), ts);
@@ -194,7 +224,8 @@ writeFileSync(path.join(ROOT, "proposal/apps.ts"), ts);
 const md = `# Bronnen van de applogo's
 
 Gegenereerd door \`scripts/apps-genereer.mjs\` op ${DATUM}. Elk logo is het onveranderde merkteken uit de bron
-hieronder. De site toont het monochroom wit op zwart (CSS-filter) en bij hover in de merkkleur. Apps zonder bruikbaar
+hieronder. De site toont het in de officiële merkkleur; een merk met een zwart of bijna zwart logo (OpenAI, Notion, X)
+staat in de witte versie op de donkere achtergrond. Apps zonder bruikbaar
 SVG staan op de appwand als teksttegel met alleen de naam.
 
 Simple Icons is uitgegeven onder CC0-1.0; het merkrecht op elk logo blijft bij de eigenaar
@@ -203,7 +234,7 @@ staan ze in de laatste kolom.
 
 | App | Bestand | Bron | Licentie | Merkrichtlijnen | Datum |
 |---|---|---|---|---|---|
-${bronnen.sort((a, b) => a[0].localeCompare(b[0], "nl")).map((r) => `| ${r.map((c) => String(c).replace(/\|/g, "\\|")).join(" | ")} | ${DATUM} |`).join("\n")}
+${bronnen.sort((a, b) => a[0].localeCompare(b[0], "nl")).map((r) => `| ${[...r.slice(0, 5), r[5] || DATUM].map((c) => String(c).replace(/\|/g, "\\|")).join(" | ")} |`).join("\n")}
 
 ## Zonder logo (teksttegel)
 
@@ -211,7 +242,7 @@ ${lijst.filter((a) => !a.logo).map((a) => `- ${a.naam}${a.merkregel ? ` (wel in 
 `;
 writeFileSync(path.join(LOGOS, "BRONNEN.md"), md);
 
-console.log(`${lijst.length} apps, ${lijst.filter((a) => a.status === "os").length} in het OS, ${lijst.filter((a) => a.logo).length} met logo.`);
+console.log(`${lijst.length} apps: ${lijst.filter((a) => a.status === "os").length} in het OS, ${lijst.filter((a) => a.status === "aanvraag").length} op aanvraag, ${lijst.filter((a) => a.status === "api").length} via API; ${lijst.filter((a) => a.logo).length} met logo.`);
 if (ontbrekend.length) console.log(`Ontbreekt nog: ${ontbrekend.join(", ")}`);
 if (zonderApi.length) console.log(`Niet op de wand, geen officiële API: ${zonderApi.join(", ")}`);
 if (zonderCategorie.length) console.log(`Overgeslagen zonder categorie:\n  ${zonderCategorie.join("\n  ")}`);

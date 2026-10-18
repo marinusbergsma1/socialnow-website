@@ -1060,7 +1060,7 @@
   "Meta + Google": "Meta + Google",
   "Meta Ads opgezet en beheerd": "Meta Ads skonfigurowane i prowadzone",
   "Milo-agents op je eigen data": "Agenci Milo na Twoich własnych danych",
-  "Op aanvraag": "Na zapytanie",
+  "Op aanvraag": "Na życzenie",
   "Overal": "Wszędzie",
   "Pakket Compleet": "Pakiet Kompletny",
   "Pakket Content": "Pakiet Content",
@@ -2364,5 +2364,14 @@
   "De app heeft een open API. Wij bouwen de koppeling op maat.": "Aplikacja ma otwarte API. Budujemy połączenie na miarę.",
   "Mis je een app?": "Brakuje Ci aplikacji?",
   "Heeft je software een API, dan maken we hem zichtbaar in je OS.": "Jeśli Twoje oprogramowanie ma API, pokażemy je w Twoim OS.",
-  "apps werken nu in het OS. Logo's zijn merken van hun eigenaars.": "aplikacji działa już w OS. Logo są znakami towarowymi ich właścicieli."
+  "apps werken nu in het OS. Logo's zijn merken van hun eigenaars.": "aplikacji działa już w OS. Logo są znakami towarowymi ich właścicieli.",
+  "De koppeling bestaat. Wij zetten hem voor je aan.": "Połączenie już istnieje. Włączymy je dla Ciebie.",
+  "Vraagt de leverancier eerst goedkeuring of een abonnement, dan zie je dat bij de app.": "Jeśli dostawca wymaga najpierw zgody lub subskrypcji, zobaczysz to przy aplikacji.",
+  "Vraagt eerst goedkeuring van het platform.": "Wymaga najpierw zgody platformy.",
+  "Vraagt aanmelding als ontwikkelaar of partner bij de leverancier.": "Wymaga rejestracji jako deweloper lub partner u dostawcy.",
+  "Vraagt een betaald abonnement of API-pakket bij de leverancier.": "Wymaga płatnej subskrypcji lub pakietu API u dostawcy.",
+  "Banken koppelen alleen via een erkende PSD2-aanbieder.": "Banki można podłączyć tylko przez licencjonowanego dostawcę PSD2.",
+  "Vraagt het Odoo Custom-abonnement.": "Wymaga planu Odoo Custom.",
+  "Via je eigen Zernio-account.": "Przez Twoje własne konto Zernio.",
+  "Werkt nu. Je koppelt het zelf in je OS, of het zit al in Studio.": "Działa już teraz. Podłączasz to sam w swoim OS albo jest już wbudowane w Studio."
 }
