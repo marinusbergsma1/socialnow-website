@@ -28,9 +28,11 @@ function WebsiteExamples() {
     setProductionHost(["socialnow.nl", "www.socialnow.nl"].includes(window.location.hostname));
     const element = region.current;
     if (!element) return;
+    // 18 oktober 2026 (Marinus): "En de website-tiles gelijk laden." Zodra het blok in de buurt komt, laden alle
+    // websites tegelijk, zodat bladeren niet meer op "Website laden…" wacht.
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setVisible(true); observer.disconnect(); }
-    }, { rootMargin: "400px" });
+      if (entry.isIntersecting) { setVisible(true); setOpened(examples.map((_, i) => i)); observer.disconnect(); }
+    }, { rootMargin: "1200px" });
     observer.observe(element);
     const tile = element.querySelector(".sn-web-preview");
     const resize = new ResizeObserver(([entry]) => setPreviewScale(entry.contentRect.width / 1280));

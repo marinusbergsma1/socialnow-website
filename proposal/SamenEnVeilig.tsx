@@ -27,6 +27,10 @@ const BRON = {
 
 // Alleen Nederlandse brontekst: de eigen JSX-runtime vertaalt via proposal/i18n/*.json.
 const TEKST = {
+  // 18 oktober 2026 (Marinus): "Echt duidelijk maken dat het VEILIGER is dan hun verouderde software en processen. Dat is een USP."
+  uspLabel: "Veiligheid",
+  uspKop: "Veiliger dan je verouderde software en processen.",
+  uspUitleg: "Software zonder updates is de grootste ingang voor hackers. Wij zetten alles in één OS, met rechten per persoon, versleutelde sleutels en echte experts die meekijken.",
   label: "Samen bouwen",
   kop: "We verbeteren het product met twee bedrijven.",
   uitleg: "SocialNow OS ontwikkelen we samen met Indexworld, Connect samen met Uncanny. Wat zij in de praktijk tegenkomen, gaat als eerste de volgende versie in.",
@@ -56,13 +60,18 @@ export default function SamenEnVeilig() {
   const t = TEKST;
   const docs = documenten(language === "nl" ? "nl" : "en");
   return (
-    <section className="sn-samen" aria-labelledby="sn-samen-kop">
+    <section className="sn-samen" aria-labelledby="sn-samen-usp">
       {/* Eigen kopie van het blauwfilter uit HomeHeader: variant B rendert dat filter niet. */}
       <svg className="sn-samen-filter" aria-hidden="true"><defs><filter id="samen-connect-blue" colorInterpolationFilters="sRGB"><feComponentTransfer><feFuncR type="linear" slope=".6" intercept=".02" /><feFuncG type="linear" slope=".55" intercept=".43" /><feFuncB type="linear" slope=".45" intercept=".5" /></feComponentTransfer></filter></defs></svg>
       <div className="sn-samen-wrap">
+        <div className="sn-samen-usp">
+          <p className="sn-samen-label"><ShieldCheck size={14} aria-hidden="true" />{t.uspLabel}</p>
+          <h2 id="sn-samen-usp">{t.uspKop}</h2>
+          <p className="sn-samen-uitleg">{t.uspUitleg}</p>
+        </div>
         <div className="sn-samen-blok">
           <p className="sn-samen-label"><i />{t.label}</p>
-          <h2 id="sn-samen-kop">{t.kop}</h2>
+          <h3 id="sn-samen-kop">{t.kop}</h3>
           <p className="sn-samen-uitleg">{t.uitleg}</p>
           <div className="sn-samen-paren">
             <div className="sn-samen-paar">

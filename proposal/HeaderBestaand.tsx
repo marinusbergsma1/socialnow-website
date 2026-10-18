@@ -66,7 +66,7 @@ const ONDERDELEN: Record<string, string[]> = {
 // 18 oktober 2026 (Marinus): "En veiliger. Klinkt een beetje matig [...] Veiligheid, minder kosten meer winst eigen data
 // etc etc menselijk contact dat zijn de belangrijke onderdelen 3 best mogelijke zinnen die om de zoveel tijd teruggetypt
 // en opnieuw uitgetypt worden [...] maar niet te druk maken." Drie korte zinnen, elk 3 seconden in beeld.
-const ZINNEN = ["Minder kosten. Meer winst.", "Veilig. Je data blijft van jou.", "Met echte mensen, niet alleen AI."];
+const ZINNEN = ["Veiliger dan je oude software.", "Minder kosten. Meer winst.", "Met echte mensen, niet alleen AI."];
 const TIK = 55, WEG = 28, STAAN = 3000;
 
 function Typer() {
@@ -187,7 +187,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <h1>Meer inzicht in je bedrijf. <Typer /></h1>
                 <p className="pay-line">Verouderde systemen zijn een open deur voor hackers. Wij maken je data inzichtelijker én veiliger, met echte experts en AI.</p>
                 <ul className="bs-zeker">
-                  <li><ShieldCheck size={15} aria-hidden="true" />Updates en toegang op orde</li>
+                  <li><ShieldCheck size={15} aria-hidden="true" /><b>Veiliger dan verouderde software en processen</b></li>
                   <li><ShieldCheck size={15} aria-hidden="true" />Rechten per persoon</li>
                   <li><ShieldCheck size={15} aria-hidden="true" /><Link to="/veiligheid" onClick={() => meet("veiligheid")}>Zo beveiligen wij</Link></li>
                 </ul>
