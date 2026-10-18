@@ -53,9 +53,10 @@ try {
       await open("/prijzen");
       await fits();
       await page.screenshot({ path: path.join(output, `${language}-prijzen-${width}.png`) });
-      await page.locator(".prijs-opslag a").click();
+      // 18 oktober 2026: het blok "Daarna €20 per maand" is weg; de call voor een hulppakket staat in de drie lagen.
+      await page.locator('#prijs-lagen a[href*="onderwerp"]').click();
       await page.waitForLoadState("networkidle");
-      assert.equal(new URL(page.url()).searchParams.get("onderwerp"), "Opslag boven 10 GB");
+      assert.equal(new URL(page.url()).searchParams.get("onderwerp"), "Plan een call: hulppakket");
       assert.ok(await page.locator('input[name="subject"]').inputValue());
       if (width === 390) {
         const toggle = page.locator(".h-menu-toggle");

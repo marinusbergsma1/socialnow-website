@@ -37,7 +37,7 @@ export default function Deuren() {
       <Tegel kop="Wil je Odoo koppelen?" breed={6} soort="groen" className="h-deur">
         <h3 className="sn-tegel-titel">Probeer het OS gratis.</h3>
         <p className="sn-tegel-tekst">Gebruik Odoo als optionele koppeling voor je klanten en verkoop. Begin gratis met WEBSITE → CONTENT → STUDIO, met ons team erachter.</p>
-        <p className="h-deur-waarom"><b>Hoe werkt het aanbod?</b> Tot 10 GB opslag is het OS gratis. Daarna €20 per maand, of een persoonlijk systeem met begeleiding van ons team.</p>
+        <p className="h-deur-waarom"><b>Hoe werkt het aanbod?</b> Tot 10 GB opslag is het OS gratis. Tokens en hulppakketten met begeleiding van ons team zijn per maand.</p>
         <div className="sn-tegel-onder">
           <a className="sn-pill os-claim sn-btn3d h-button h-deur-knop" href="https://app.socialnow.nl/login/">
             <span className="sn-btn3d-sheen" />

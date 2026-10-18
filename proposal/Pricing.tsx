@@ -18,6 +18,11 @@ import { PrijsLagen, TokenPakketten } from "./TokensPlus";
 // website met persoonlijke call voor systeem uitleg." Het bedrag van het OS op maat is één rustige regel; elk
 // maandpakket loopt minimaal drie maanden en bevat custom OS, complete rebranding, website en een uitlegcall. Het losse
 // websiteblok vervalt, want de website zit nu in elk pakket.
+// 18 oktober 2026 (Marinus, sessie "SocialNow header A/B test versies"): "Verder is alles maandelijks." Hulppakketten vanaf
+// €3.000 per maand: "het is van belang dat het duidelijk is dat je voor 3K een veilig persoonlijk management and operation
+// systeem hebt. Custom is bij alle pakketten naast gratis website inbegrepen." Het losse blok "OS op maat vanaf €10.000" en
+// "Daarna €20 per maand" vervallen; de drie lagen en de tokens staan in TokensPlus.tsx. De prijs per pakket heeft hij nog
+// niet gegeven, dus de kaarten tonen geen bedrag en de kop zegt "vanaf €3.000 per maand".
 const PROBEER_URL = GRATIS_OS_URL;
 
 type Lid = { naam: string; rol: string; foto: string };
@@ -32,8 +37,8 @@ const TEAM: Record<string, Lid> = {
 
 type Pakket = {
   naam: string;
-  prijs: string;
-  per: string;
+  prijs?: string;
+  per?: string;
   belofte: string;
   punten: { tekst: string; erfenis?: boolean; sterk?: boolean }[];
   team: string[];
@@ -47,8 +52,6 @@ type Pakket = {
 const MAAND: Pakket[] = [
   {
     naam: "Content",
-    prijs: "€4.000",
-    per: "per maand",
     belofte: "Altijd aanwezig, altijd in je merk.",
     punten: [
       { tekst: "Bovenop je gratis OS met Studio en Milo", sterk: true },
@@ -62,8 +65,6 @@ const MAAND: Pakket[] = [
   },
   {
     naam: "Content + Meta",
-    prijs: "€5.000",
-    per: "per maand",
     belofte: "Bereik de juiste mensen op Instagram en Facebook.",
     punten: [
       { tekst: "Alles uit Content", erfenis: true },
@@ -78,8 +79,6 @@ const MAAND: Pakket[] = [
   },
   {
     naam: "Meta + Google",
-    prijs: "€5.500",
-    per: "per maand",
     belofte: "Gevonden worden op het moment dat ze zoeken.",
     punten: [
       { tekst: "Alles uit Content + Meta", erfenis: true },
@@ -94,8 +93,6 @@ const MAAND: Pakket[] = [
   },
   {
     naam: "Compleet",
-    prijs: "€6.000",
-    per: "per maand",
     belofte: "Marketing en financiën, volledig geregeld.",
     punten: [
       { tekst: "Alles uit Meta + Google", erfenis: true },
@@ -111,23 +108,14 @@ const MAAND: Pakket[] = [
   },
 ];
 
-// Wat elk maandpakket meekrijgt (minimaal drie maanden). Het losse websitepakket is hierin opgegaan.
+// Wat elk hulppakket meekrijgt. Het losse websitepakket en het OS op maat zijn hierin opgegaan.
 const INBEGREPEN = [
   "Custom OS",
+  "Gratis website",
   "Complete rebranding",
-  "Je website",
+  "Connect: echte experts per pakket",
   "Persoonlijke call met uitleg van je systeem",
 ];
-
-const MAATWERK = {
-  punten: [
-    { titel: "Je eigen OS rond je bedrijf", tekst: "Gebouwd rond hoe jouw bedrijf echt werkt, niet andersom." },
-    { titel: "Dashboard, CRM, Studio en website", tekst: "Elk onderdeel ingericht op je eigen processen en koppelingen." },
-    { titel: "Milo-agents op je eigen data", tekst: "AI die je verkoop, klanten en cijfers kent en meedenkt." },
-    { titel: "Developers en dataspecialisten", tekst: "Ons team en onze partners bouwen, koppelen en begeleiden." },
-  ],
-  team: ["marinus", "steef", "sid"],
-};
 
 const GRATIS = [
   { titel: "Een complete demowebsite", tekst: "Geen schets. Een volledige website in je merk, klaar om live te gaan." },
@@ -181,10 +169,12 @@ function Kaart({ pakket, breed = false }: { pakket: Pakket; breed?: boolean }) {
       {pakket.top && <span className="prijs-vlag">Meest compleet</span>}
       <div className="prijs-kop">
         <h3>{pakket.naam}</h3>
-        <p className="prijs-bedrag">
-          <strong>{pakket.prijs}</strong>
-          <span>{pakket.per}</span>
-        </p>
+        {pakket.prijs && (
+          <p className="prijs-bedrag">
+            <strong>{pakket.prijs}</strong>
+            <span>{pakket.per}</span>
+          </p>
+        )}
         <p className="prijs-belofte">{pakket.belofte}</p>
       </div>
       <ul className="prijs-punten">
@@ -205,7 +195,7 @@ function Kaart({ pakket, breed = false }: { pakket: Pakket; breed?: boolean }) {
 }
 
 export default function Pricing() {
-  const { t } = useLanguage();
+  useLanguage();
   return (
     <div className="prijs h-wrap">
       <section className="prijs-gratis" aria-labelledby="prijs-gratis-titel">
@@ -221,7 +211,7 @@ export default function Pricing() {
           <div className="prijs-gratis-tekst">
             {/* 29 september 2026 (Marinus): "Echt waar" vond hij stom; het blijft bij de feitelijke zin. */}
             <p className="prijs-echt">GRATIS tot 10 GB opslag</p>
-            <p className="prijs-lead">{t("Begin gratis met je website, content en AI in Studio. Tot 10 GB opslag is het OS gratis, daarna €20 per maand. Voor creatieve samenwerking, advies of een systeem op maat maak je persoonlijk kennis met ons team.")}</p>
+            <p className="prijs-lead">Begin gratis met je website, content en AI in Studio. Tot 10 GB opslag is het OS gratis. Tokens en hulppakketten zijn per maand. Voor creatieve samenwerking, advies of een systeem op maat maak je persoonlijk kennis met ons team.</p>
             <ProductRoute />
             <ProductOffer />
             <div className="prijs-knoppen">
@@ -240,11 +230,6 @@ export default function Pricing() {
           </div>
         </div>
 
-        <section className="prijs-opslag" aria-labelledby="prijs-opslag-titel">
-          <h2 id="prijs-opslag-titel">Daarna €20 per maand</h2>
-          <p>Voor wie verdergaat boven 10 GB opslag. Wil je begeleiding en inrichting rond je bedrijf? Bespreek een persoonlijk systeem met ons team.</p>
-          <Action to="/contact?onderwerp=Opslag%20boven%2010%20GB" secondary>Bespreek extra opslag</Action>
-        </section>
         <div className="prijs-cadeaus">
           {GRATIS.map((item) => (
             <div className="prijs-cadeau" key={item.titel}>
@@ -277,46 +262,18 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* 18 oktober 2026 (Marinus): "tokens kopen moet een groter onderdeel zijn". Vier lagen en het tokenblok, zie TokensPlus.tsx. */}
+      {/* 18 oktober 2026 (Marinus): "tokens kopen moet een groter onderdeel zijn". Drie lagen en het tokenblok, zie TokensPlus.tsx. */}
       <PrijsLagen />
       <TokenPakketten />
 
-      <section className="prijs-maatwerk" aria-labelledby="prijs-maatwerk-titel">
-        <div className="prijs-maatwerk-kop">
-          <p className="h-eyebrow">Een persoonlijk systeem</p>
-          <h2 id="prijs-maatwerk-titel">
-            Jouw eigen OS,
-            <br />
-            <em>gebouwd rond je bedrijf.</em>
-          </h2>
-          <p className="prijs-maatwerk-bedrag">Vanaf €10.000 · prijs op aanvraag</p>
-          <p className="prijs-maatwerk-lead">Het gratis OS laat zien wat kan. Het OS op maat maakt het van jou: je eigen data, je eigen processen en je eigen agents, in één systeem.</p>
-          <p className="prijs-waarom"><b>Waarom het OS gratis kan.</b> We verdienen aan het OS op maat en aan de pakketten van ons team. Partners als Komen Consultancy helpen het OS schaalbaar te maken, en Odoo-implementatiepartners brengen het naar hun klanten.</p>
-          <div className="prijs-knoppen">
-            <Action to={`/contact?onderwerp=${encodeURIComponent("OS op maat")}`}>Bespreek een persoonlijk systeem</Action>
-          </div>
-        </div>
-        <ul className="prijs-maatwerk-punten">
-          {MAATWERK.punten.map((punt) => (
-            <li key={punt.titel}>
-              <b>{punt.titel}</b>
-              <span>{punt.tekst}</span>
-            </li>
-          ))}
-        </ul>
-        <div className="prijs-maatwerk-team">
-          <Team ids={MAATWERK.team} />
-        </div>
-      </section>
-
-      <section className="prijs-pakketten" aria-labelledby="prijs-pakketten-titel">
+      <section id="hulppakketten" className="prijs-pakketten" aria-labelledby="prijs-pakketten-titel">
         <div className="prijs-pakketten-kop">
           <div>
-            <p className="h-eyebrow">Maandpakketten · minimaal 3 maanden</p>
+            <p className="h-eyebrow">Hulppakketten · vanaf €3.000 per maand</p>
             <h2 id="prijs-pakketten-titel">Bovenop je gratis OS</h2>
           </div>
           <p>
-            Elk pakket is een extra laag bovenop de gratis versie en loopt minimaal drie maanden. <strong>In elk pakket inbegrepen:</strong>
+            Voor €3.000 per maand heb je een veilig persoonlijk management &amp; operations systeem. Elk pakket is maandelijks en een extra laag bovenop de gratis versie. <strong>In elk pakket inbegrepen:</strong>
           </p>
         </div>
         <ul className="prijs-inbegrepen">

@@ -2,9 +2,9 @@
 //
 // Marinus, 29 september 2026: "Voordat iets live komt moet het altijd RED/GREEN getest worden."
 // Deze proef legt vast wat hij die avond vroeg, en is rood op main van vóór de wijziging en groen erna:
-//   - het OS op maat zakelijk: "Vanaf €10.000 · prijs op aanvraag", geen reuzencijfer;
-//   - maandpakketten minimaal drie maanden, met custom OS, complete rebranding, website en uitlegcall;
-//   - maandprijzen blijven zichtbaar, het losse websiteblok (vanaf €3.500) is weg;
+//   - (18 oktober 2026 vervangen) alles maandelijks: tokens €10/€25/€50 per maand, hulppakketten vanaf €3.000 per maand
+//     met custom OS, gratis website, complete rebranding en uitlegcall; geen Plus €20 en geen los blok €10.000;
+//   - het losse websiteblok (vanaf €3.500) is weg;
 //   - geen "Echt waar", en de aanbodpagina in het diepzwart van de homepage;
 //   - het echte Salesforce-logo in de hero en in de Salesforce-tegel;
 //   - de teamstrook knijpt de tekst niet meer tot een smal kolommetje;
@@ -66,32 +66,37 @@ try {
   const prijzen = render("/prijzen");
   const home = render("/");
 
-  // Aanbod
-  eis(prijzen.includes("Vanaf €10.000 · prijs op aanvraag"), "/prijzen: 'Vanaf €10.000 · prijs op aanvraag' ontbreekt");
-  eis(!/<strong>€10\.000<\/strong>/.test(prijzen), "/prijzen: €10.000 staat nog als groot cijfer");
-  eis(prijzen.includes("Maandpakketten · minimaal 3 maanden"), "/prijzen: 'minimaal 3 maanden' ontbreekt");
-  for (const item of ["Custom OS", "Complete rebranding", "Je website", "Persoonlijke call met uitleg van je systeem"])
+  // Aanbod. 18 oktober 2026 (Marinus, sessie "SocialNow header A/B test versies"): alles maandelijks, tokens €10/€25/€50
+  // per maand, hulppakketten vanaf €3.000 per maand met custom OS en gratis website. Plus voor €20 en het losse blok
+  // "OS op maat vanaf €10.000" zijn weg; de prijs per pakket is nog niet bekend, dus de kaarten tonen geen bedrag.
+  eis(prijzen.includes("Hulppakketten · vanaf €3.000 per maand"), "/prijzen: 'Hulppakketten · vanaf €3.000 per maand' ontbreekt");
+  eis(!prijzen.includes("€10.000"), "/prijzen: het losse blok €10.000 staat er nog");
+  eis(!/€20[,-]* per maand/.test(prijzen), "/prijzen: '€20 per maand' staat er nog");
+  eis(!prijzen.includes("minimaal 3 maanden") && !prijzen.includes("minimaal drie maanden"), "/prijzen: 'minimaal 3 maanden' staat er nog");
+  for (const item of ["Custom OS", "Gratis website", "Complete rebranding", "Persoonlijke call met uitleg van je systeem"])
     eis(prijzen.includes(`<li>${item}</li>`), `/prijzen: inbegrepen '${item}' ontbreekt`);
   for (const bedrag of ["€4.000", "€5.000", "€5.500", "€6.000"])
-    eis(prijzen.includes(bedrag), `/prijzen: maandprijs ${bedrag} ontbreekt`);
+    eis(!prijzen.includes(bedrag), `/prijzen: oude maandprijs ${bedrag} staat er nog`);
+  for (const bedrag of ["€10", "€25", "€50", "€3.000"])
+    eis(prijzen.includes(`<strong>${bedrag}</strong>`), `/prijzen: bedrag ${bedrag} ontbreekt`);
   eis(!prijzen.includes("vanaf €3.500"), "/prijzen: los websiteblok 'vanaf €3.500' staat er nog");
   eis(!prijzen.includes("Echt waar"), "/prijzen: 'Echt waar' staat er nog");
 
-  // Bedragen in de notatie van de taal. 30 september 2026: de maandprijzen stonden in en/de/fr als "€4.000"
-  // onder "From €10,000"; in het Engels leest €4.000 als vier euro. De vertaling loopt via het woordenboek
-  // (hele tekstknoop "€4.000" is de sleutel). Frans met hetzelfde spatieteken als "10 000 €" in fr.json.
-  const frSpatie = (JSON.parse(lees("proposal/i18n/fr.json") || "{}")["Vanaf €10.000 · prijs op aanvraag"] || "").match(/10(.)000/)?.[1] ?? " ";
+  // Bedragen in de notatie van de taal. 30 september 2026: in het Engels leest €4.000 als vier euro. De vertaling loopt
+  // via het woordenboek (hele tekstknoop "€3.000" is de sleutel). Frans met hetzelfde spatieteken als in fr.json.
+  const frSpatie = (JSON.parse(lees("proposal/i18n/fr.json") || "{}")["€3.000"] || "").match(/3(.)000/)?.[1] ?? " ";
   const notatie = {
-    en: (d) => `€${d},000`, de: (d) => `${d}.000 €`, fr: (d) => `${d}${frSpatie}000 €`,
+    en: (d) => `€${d}`, de: (d) => `${d} €`, fr: (d) => `${d} €`,
   };
+  const duizend = { en: "3,000", de: "3.000", fr: `3${frSpatie}000` };
   for (const [taal, maak] of Object.entries(notatie)) {
     const pagina = render("/prijzen", taal);
-    for (const [bedrag, duizend] of [["€4.000", "4"], ["€5.000", "5"], ["€5.500", "5"], ["€6.000", "6"]]) {
-      const verwacht = bedrag === "€5.500" ? maak("5").replace(/000/, "500") : maak(duizend);
-      eis(pagina.includes(`<strong>${verwacht}</strong>`), `${taal} /prijzen: maandprijs ${bedrag} niet als '${verwacht}'`);
+    for (const bedrag of ["10", "25", "50", duizend[taal]]) {
+      const verwacht = maak(bedrag);
+      eis(pagina.includes(`<strong>${verwacht}</strong>`), `${taal} /prijzen: bedrag niet als '${verwacht}'`);
     }
-    eis(!/<strong>€\d\.\d{3}<\/strong>/.test(pagina), `${taal} /prijzen: een maandprijs staat nog in Nederlandse notatie`);
-    // Duits en Frans zetten het euroteken achter het getal, ook bij €0 op de drie gratis-tegels.
+    eis(!/<strong>€\d\.\d{3}<\/strong>/.test(pagina), `${taal} /prijzen: een bedrag staat nog in Nederlandse notatie`);
+    // Duits en Frans zetten het euroteken achter het getal, ook bij €0.
     if (taal !== "en") eis(!/€\s?\d/.test(pagina.replace(/<[^>]+>/g, " ")), `${taal} /prijzen: bedrag met € ervoor`);
   }
 
@@ -100,9 +105,9 @@ try {
   // uit het woordenboek zelf, zodat de proef geen tweede kopie van de vertalingen bijhoudt.
   const escape = (t) => t.replaceAll("&", "&amp;").replaceAll("'", "&#x27;").replaceAll('"', "&quot;");
   const nieuweZinnen = [
-    "Vanaf €10.000 · prijs op aanvraag", "Maandpakketten · minimaal 3 maanden",
-    "Elk pakket is een extra laag bovenop de gratis versie en loopt minimaal drie maanden.",
-    "In elk pakket inbegrepen:", "Complete rebranding", "Persoonlijke call met uitleg van je systeem",
+    "Hulppakketten · vanaf €3.000 per maand", "In elk pakket inbegrepen:", "Complete rebranding",
+    "Persoonlijke call met uitleg van je systeem", "Gratis website", "Ons aanbod in drie lagen",
+    "Bij je aanmelding koppel je alvast je rekening met een SEPA-machtiging. Zolang je onder 10 GB blijft, schrijven we niets af. Er wordt pas iets afgeschreven nadat je daar zelf uitdrukkelijk akkoord voor geeft, en alles is maandelijks opzegbaar.",
   ];
   for (const taal of ["en", "de", "fr"]) {
     const woorden = JSON.parse(lees(`proposal/i18n/${taal}.json`) || "{}");
@@ -141,8 +146,10 @@ const regel = "De AI-gestuurde persoonlijke werkplek, met échte professionals e
 eis((lees("index.html").match(new RegExp(regel.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g")) || []).length === 3, "index.html: positionering niet in description, og en twitter");
 const llms = lees("public/llms.txt");
 eis(llms.includes("AI-gestuurde persoonlijke werkplek"), "llms.txt: positionering ontbreekt");
-eis(!llms.includes("vanaf €3.000 per maand"), "llms.txt: oude prijs €3.000 per maand staat er nog");
-eis(llms.includes("minimaal 3 maanden"), "llms.txt: maandpakketten zonder minimale looptijd");
+// 18 oktober 2026: het nieuwe model (tokens per maand, hulppakketten vanaf €3.000 per maand) en niets meer van het oude.
+eis(llms.includes("Hulppakketten vanaf €3.000 per maand"), "llms.txt: hulppakketten vanaf €3.000 per maand ontbreken");
+eis(llms.includes("€10, €25 of €50 per maand"), "llms.txt: tokens per maand ontbreken");
+eis(!/€20 per maand|€10\.000|minimaal 3 maanden/.test(llms), "llms.txt: oude prijzen (€20, €10.000 of minimaal 3 maanden) staan er nog");
 // 30 september 2026: llms.txt beloofde AI-crawlers nog een "gratis proof of concept" en een "discovery call"; die
 // bestaan niet meer (gratis OS, demowebsite en basic rebranding; een gesprek via /contact).
 eis(!/proof of concept|discovery call/i.test(llms), "llms.txt: oud aanbod (proof of concept, discovery call)");
