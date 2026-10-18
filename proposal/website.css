@@ -220,7 +220,8 @@ video {
   padding: 12px 20px;
   border-radius: 30px;
 }
-.h-skip:focus {
+/* 18 oktober 2026: alleen bij toetsenbordfocus in beeld, niet na een klik of een focus vanuit een script. */
+.h-skip:focus-visible {
   top: 12px;
 }
 .h-preview {

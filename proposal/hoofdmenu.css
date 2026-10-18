@@ -1,0 +1,38 @@
+/* 18 oktober 2026: hoofdnavigatie met Producten-menu en Plan een call (Producten.tsx). De knop Producten volgt de
+   navigatielinks: mono, 12 px, hoofdletters op de gewone pagina's, gewone letters op de homepage. */
+:root .sn-site .h-desktop-nav .h-producten{position:relative;display:flex;align-items:center}
+:root .sn-site .h-desktop-nav .h-producten-knop{position:relative;display:inline-flex;align-items:center;gap:5px;padding:8px 0;border:0;background:none;cursor:pointer;white-space:nowrap;font-family:var(--v-mono,ui-monospace,SFMono-Regular,Menlo,Consolas,monospace);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:#b3bbb7}
+:root .sn-site.sn-choice-page>.h-header .h-desktop-nav .h-producten-knop{text-transform:none;color:#b9c8c0}
+:root .sn-site .h-desktop-nav .h-producten-knop:hover,:root .sn-site .h-desktop-nav .h-producten.open .h-producten-knop,:root .sn-site .h-desktop-nav .h-producten-knop.active{color:#fff}
+:root .sn-site .h-desktop-nav .h-producten-knop.active::after{content:"";position:absolute;bottom:0;left:0;width:16px;height:2px;background:#25d366}
+:root .sn-site .h-desktop-nav .h-producten-knop>svg{transition:transform .2s}
+:root .sn-site .h-desktop-nav .h-producten.open .h-producten-knop>svg{transform:rotate(180deg)}
+:root .sn-site .h-desktop-nav .h-producten-knop:focus-visible{outline:2px solid #25d366;outline-offset:4px;border-radius:2px}
+/* Het menu hangt onder de knop; de onzichtbare strook erboven houdt het open als de muis naar beneden gaat. */
+:root .sn-site .h-producten-menu{position:absolute;top:100%;left:-18px;z-index:60;display:grid;gap:4px;width:320px;margin-top:10px;padding:8px;border:1px solid #ffffff1f;border-radius:14px;background:#070b09;box-shadow:0 22px 60px #000c}
+:root .sn-site .h-producten-menu[hidden]{display:none}
+:root .sn-site .h-producten-menu::before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px}
+:root .sn-site .h-desktop-nav .h-producten-menu a{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2px 12px;padding:12px 14px;border-radius:10px;white-space:normal;text-transform:none;letter-spacing:0;font-family:inherit;color:#fff}
+:root .sn-site .h-desktop-nav .h-producten-menu a::after{display:none}
+:root .sn-site .h-desktop-nav .h-producten-menu a:hover,:root .sn-site .h-desktop-nav .h-producten-menu a:focus-visible{background:#0f1a14}
+:root .sn-site .h-desktop-nav .h-producten-menu a:focus-visible{outline:2px solid #25d366;outline-offset:-2px}
+:root .sn-site .h-producten-menu b{grid-column:1;font-family:"TT Norms",Arial,sans-serif;font-size:16px;font-weight:700;line-height:1.25;letter-spacing:0;text-transform:none}
+:root .sn-site .h-producten-menu b>i{font-style:normal;color:#25d366}
+:root .sn-site .h-producten-menu b>i.connect{color:#20afde}
+:root .sn-site .h-producten-menu span{grid-column:1;font-family:"TT Norms",Arial,sans-serif;font-size:13px;line-height:1.4;letter-spacing:0;text-transform:none;color:#a9b8af}
+:root .sn-site .h-producten-menu a>svg{grid-column:2;grid-row:1/span 2;color:#25d366}
+
+/* Plan een call: de tweede pil rechts, rustiger dan de groene inlogpil. */
+html:root .sn-site .h-header-call{display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;min-height:46px;padding:0 16px;border:1.5px solid #ffffff38;border-radius:999px;background:transparent;color:#fff;cursor:pointer;white-space:nowrap;font-family:var(--v-mono,ui-monospace,SFMono-Regular,Menlo,Consolas,monospace);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+html:root .sn-site .h-header-call>svg{color:#25d366}
+html:root .sn-site .h-header-call:hover{border-color:#25d366}
+html:root .sn-site .h-header-call:focus-visible{outline:2px solid #25d366;outline-offset:3px}
+@media (max-width:1180px){html:root .sn-site .h-header-call{min-height:40px;padding:0 12px;font-size:10px}}
+@media (max-width:980px){html:root .sn-site .h-header-call{display:none}}
+
+/* Mobiel menu: Producten als kopje met de twee producten, onderaan Plan een call. */
+:root .sn-site .h-mobile-nav .h-mobile-groep{margin:18px 0 0;padding:0;color:#7f9187;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+:root .sn-site .h-mobile-nav a.h-mobile-product{padding-left:14px}
+:root .sn-site .h-mobile-nav a.h-mobile-product>span{font-weight:600}
+:root .sn-site .h-mobile-nav .h-mobile-call{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;margin-top:18px;padding:0 18px;border:1.5px solid #25d366;border-radius:999px;background:#0c1510;color:#fff;cursor:pointer;font-family:inherit;font-size:16px;font-weight:600;text-align:left}
+:root .sn-site .h-mobile-nav .h-mobile-call>svg{color:#25d366;flex:none}

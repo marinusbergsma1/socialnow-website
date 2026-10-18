@@ -90,6 +90,21 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   // Nog geen LinkedIn bevestigd; in het track record linkt zijn naam naar instagram.com/danielschotman.
   { name: "Daniel Schotman", role: "Content & Personal Branding · Creator Code", image: "Daniel-Schotman.webp", sinds: "2026-10-10" },
 ];
+// De vakgebieden van Connect met hun mensen, in de volgorde van de homepage en /team.
+export const expertGroepen = [
+  { name: "Strategy & guidance", members: ["Albert Deltour", "Hossam Hassan"] },
+  { name: "AI development", members: ["Douwe Kramer", "Thomas Huijsmans"] },
+  { name: "Web development", members: ["Sid van Kalken", "Antony Soosaipillaj"] },
+  { name: "Finance & operations", members: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
+  { name: "Ads & search", members: ["Jos Hollenberg", "Nick van Keulen", "Sergio Jovovic"] },
+  { name: "Video, photo & design", members: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Pepijn Bos", "Armando van Bruggen"] },
+  { name: "UGC & social media", members: ["Isa Zoer", "Daniel Schotman"] },
+  { name: "Sales & partnerships", members: ["Marinus Bergsma", "Elian Coellar", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster", "Ruben Spyckerelle"] },
+];
+export const vindMensen = (names: string[]) => names.flatMap(name => {
+  const person = people.find(p => p.name === name);
+  return person ? [person] : [];
+});
 // Bedrijfsreferenties zijn echte, bevestigde websites of het profiel van de oprichter.
 export const partnerReferences: Record<string, { name: string; url: string }[]> = {
   "Marinus Bergsma": [{ name: "SocialNow", url: "https://socialnow.nl/" }, { name: "MOJO", url: "https://www.mojo.nl/" }, { name: "Universal", url: "https://www.universalpictures.nl/" }],

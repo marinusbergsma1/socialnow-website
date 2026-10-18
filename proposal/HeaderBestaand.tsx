@@ -5,6 +5,7 @@ import { klein } from "./licht";
 import { people } from "./content";
 import { GRATIS_OS_URL } from "./os-entry";
 import ExplainerPlayer from "./ExplainerPlayer";
+import { openPlanCall } from "./PlanCall";
 import { MiloMotion } from "./motion";
 import { ConnectLogo, Downloads, Filters, faces } from "./HomeHeader";
 import "./home-header-approved.css";
@@ -51,10 +52,16 @@ const HULP = [
 
 // 18 oktober 2026 (Marinus): "er moet een switch zijn van normale OS naar Call inplannen for custom os [...] waar je
 // ook de mensen ziet die om de zoveel tijd switched".
-// Het boekingspaneel (PlanCall) staat nog alleen in batch 2; tot die op main staat gaat de knop naar /contact.
+// "Plan een call" opent het boekingspaneel (PlanCall.tsx) met de onderdelen van het gekozen pakket alvast aangevinkt.
 // Daarna: "Bij Custom os liever gewoon de pakketten laten zien of uitspraken van het team." Er staan nog geen echte
 // uitspraken van het team in content.ts (alleen die van Ruben), dus de pakketten: bij elk zit het Custom OS.
 const CUSTOM = HULP.filter(h => !h.los);
+const ONDERDELEN: Record<string, string[]> = {
+  "hulp-content": ["website", "content", "studio"],
+  "hulp-meta": ["website", "content", "studio", "ads"],
+  "hulp-google": ["website", "content", "studio", "ads"],
+  "hulp-compleet": ["website", "content", "studio", "ads", "crm", "dashboard"],
+};
 
 // 18 oktober 2026 (Marinus): "En veiliger. Klinkt een beetje matig [...] Veiligheid, minder kosten meer winst eigen data
 // etc etc menselijk contact dat zijn de belangrijke onderdelen 3 best mogelijke zinnen die om de zoveel tijd teruggetypt
@@ -98,7 +105,6 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
   const [start, setStart] = useState("gratis");
   const [modus, setModus] = useState<"os" | "custom">("os");
   const [custom, setCustom] = useState(CUSTOM[0].id);
-  const customPakket = CUSTOM.find(c => c.id === custom)!;
   const [hulp, setHulp] = useState(HULP[0].id);
   const gekozen = START.find(s => s.id === start)!;
   const hulpPakket = HULP.find(h => h.id === hulp)!;
@@ -130,7 +136,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 </div>
                 <p className="bs-uitleg"><strong>Een veilig persoonlijk management &amp; operations systeem, bij elk pakket.</strong> Met een gratis website. Wij brengen in kaart hoe jullie werken, koppelen wat er al is en bouwen het met je.</p>
                 <div className="action os-account-actions">
-                  <Link className="pill" to={`/contact?onderwerp=${encodeURIComponent(`Plan een call: Custom OS + ${customPakket.naam}`)}`} onClick={() => meet("custom_os")}><span>Plan een call</span><span className="arrow"><ArrowUpRight size={17} /></span></Link>
+                  <button type="button" className="pill" aria-haspopup="dialog" onClick={() => { meet("custom_os"); openPlanCall({ onderdelen: ONDERDELEN[custom] }); }}><span>Plan een call</span><span className="arrow"><ArrowUpRight size={17} /></span></button>
                 </div>
                 </> : <>
                 <h2>AI management &amp; operations.</h2>
