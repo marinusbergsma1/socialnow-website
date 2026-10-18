@@ -6,6 +6,7 @@ import { people } from "./content";
 import { GRATIS_OS_URL } from "./os-entry";
 import ExplainerPlayer from "./ExplainerPlayer";
 import { openPlanCall } from "./PlanCall";
+import { MAAND, TEAM } from "./Pricing";
 import { MiloMotion } from "./motion";
 import { ConnectLogo, Downloads, Filters, faces } from "./HomeHeader";
 import "./home-header-approved.css";
@@ -26,21 +27,23 @@ import "./header-bestaand.css";
 // tokenpakketten zijn die uit de OS-code (Flyinghighscalingup/socialnow-app, api/_studio-tokens.js, TOKEN_BUNDLES:
 // 1.000, 2.500 en 5.000 tokens). De hulppakketten zijn die van /prijzen (Pricing.tsx). Het gekozen pakket gaat als ?pakket= mee naar de aanmelding van het OS; het OS
 // moet die keuze en het koppelen van de rekening nog zelf tonen.
+// Later dezelfde dag, via de coördinator: "Hier moet een prijs bij en bij custom os moeten ook de prijzen en mensen die
+// je in dat pakket helpen erbij." Dus in variant B wel bedragen: tokens €10/€25/€50 per maand (excl. btw, maandelijks
+// opzegbaar) en bij Custom OS de vier pakketten van /prijzen met hun bedragen en mensen, uit dezelfde bron (Pricing.tsx).
 
 type Doel = "gratis_os" | "custom_os" | "connect" | "explainer" | "veiligheid";
 
 const START = [
-  { id: "gratis", naam: "Gratis", groot: "10 GB", sub: "opslag" },
-  { id: "tokens-1000", naam: "Tokens", groot: "1.000", sub: "per maand" },
-  { id: "tokens-2500", naam: "Tokens", groot: "2.500", sub: "per maand" },
-  { id: "tokens-5000", naam: "Tokens", groot: "5.000", sub: "per maand" },
+  { id: "gratis", naam: "Gratis", groot: "€0", sub: "tot 10 GB", tokens: "" },
+  { id: "tokens-1000", naam: "1.000 tokens", groot: "€10", sub: "per maand", tokens: "1.000" },
+  { id: "tokens-2500", naam: "2.500 tokens", groot: "€25", sub: "per maand", tokens: "2.500" },
+  { id: "tokens-5000", naam: "5.000 tokens", groot: "€50", sub: "per maand", tokens: "5.000" },
 ];
 const MILOS = [{ rol: "website", naam: "Website" }, { rol: "crm", naam: "CRM" }, { rol: "content", naam: "Content" }, { rol: "ads", naam: "Ads" }];
 
 // 18 oktober 2026 (Marinus): "het is van belang dat het duidelijk is dat je voor 3K een veilig persoonlijk
-// management and operation systeem hebt. Custom is bij alle pakketten naast gratis website inbegrepen." Het bedrag
-// zelf staat pas na het aanmaken van een account; hier alleen wat er in elk pakket zit.
-// Ook een hulppakket kies je bij het aanmaken van je account; de prijs volgt daarna in het OS.
+// management and operation systeem hebt. Custom is bij alle pakketten naast gratis website inbegrepen."
+// Een hulppakket kies je ook bij het aanmaken van je account; de bedragen komen uit Pricing.tsx (MAAND).
 const HULP = [
   { id: "hulp-content", naam: "Content", wie: "Content in je merk, gepland en geplaatst" },
   { id: "hulp-meta", naam: "Content + Meta", wie: "Plus Meta Ads opgezet en beheerd" },
@@ -55,7 +58,9 @@ const HULP = [
 // "Plan een call" opent het boekingspaneel (PlanCall.tsx) met de onderdelen van het gekozen pakket alvast aangevinkt.
 // Daarna: "Bij Custom os liever gewoon de pakketten laten zien of uitspraken van het team." Er staan nog geen echte
 // uitspraken van het team in content.ts (alleen die van Ruben), dus de pakketten: bij elk zit het Custom OS.
-const CUSTOM = HULP.filter(h => !h.los);
+const CUSTOM = HULP.filter(h => !h.los).map(h => ({ ...h, pakket: MAAND.find(m => m.naam === h.naam)! }));
+const PAKKET = (naam: string) => MAAND.find(m => m.naam === naam);
+const namen = (ids: string[]) => { const n = ids.map(id => TEAM[id].naam.split(" ")[0]); return n.length > 1 ? `${n.slice(0, -1).join(", ")} en ${n[n.length - 1]}` : n[0]; };
 const ONDERDELEN: Record<string, string[]> = {
   "hulp-content": ["website", "content", "studio"],
   "hulp-meta": ["website", "content", "studio", "ads"],
@@ -128,13 +133,14 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                   {CUSTOM.map(c => (
                     <button key={c.id} type="button" role="radio" aria-checked={custom === c.id} tabIndex={custom === c.id ? 0 : -1} data-id={c.id} className="bs-pakket" onClick={() => setCustom(c.id)}>
                       <span className="bs-vink" aria-hidden="true">{custom === c.id && <Check size={12} strokeWidth={3} />}</span>
-                      <b>Custom OS +</b>
-                      <strong translate="no">{c.naam}</strong>
-                      <small>{c.wie}</small>
+                      <b translate="no">Custom OS + {c.naam}</b>
+                      <strong>{c.pakket.prijs}</strong>
+                      <small>per maand</small>
+                      <span className="bs-team" aria-hidden="true">{c.pakket.team.map(id => <img key={id} src={`/images/prijzen/${TEAM[id].foto}.webp`} alt="" width="26" height="26" />)}</span>
                     </button>
                   ))}
                 </div>
-                <p className="bs-uitleg"><strong>Een veilig persoonlijk management &amp; operations systeem, bij elk pakket.</strong> Met een gratis website. Wij brengen in kaart hoe jullie werken, koppelen wat er al is en bouwen het met je.</p>
+                <p className="bs-uitleg"><strong>Met {namen(CUSTOM.find(c => c.id === custom)!.pakket.team)}.</strong> Bij elk pakket: je eigen veilige management &amp; operations systeem, een complete rebranding, je website en een persoonlijke call. Per maand excl. btw, minimaal 3 maanden.</p>
                 <div className="action os-account-actions">
                   <button type="button" className="pill" aria-haspopup="dialog" onClick={() => { meet("custom_os"); openPlanCall({ onderdelen: ONDERDELEN[custom] }); }}><span>Plan een call</span><span className="arrow"><ArrowUpRight size={17} /></span></button>
                 </div>
@@ -146,7 +152,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                   {START.map(s => (
                     <button key={s.id} type="button" role="radio" aria-checked={start === s.id} tabIndex={start === s.id ? 0 : -1} data-id={s.id} className="bs-pakket" onClick={() => setStart(s.id)}>
                       <span className="bs-vink" aria-hidden="true">{start === s.id && <Check size={12} strokeWidth={3} />}</span>
-                      <b>{s.naam}</b>
+                      <b translate="no">{s.naam}</b>
                       <strong>{s.groot}</strong>
                       <small>{s.sub}</small>
                     </button>
@@ -155,7 +161,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <p className="bs-uitleg">
                   {start === "gratis"
                     ? <><strong>Gratis tot 10 GB aan opslag.</strong> Bij je aanmelding koppel je alvast je rekening. Zolang je onder 10 GB blijft, schrijven we niets af.</>
-                    : <><strong>Gratis tot 10 GB, plus {gekozen.groot} tokens per maand voor de Studio.</strong> De prijs zie je nadat je je account hebt aangemaakt.</>}
+                    : <><strong>Gratis tot 10 GB, plus {gekozen.tokens} tokens per maand voor de Studio.</strong> {gekozen.groot} per maand excl. btw, maandelijks opzegbaar.</>}
                 </p>
                 <div className="action os-account-actions">
                   <a className="pill" href={`${GRATIS_OS_URL}?pakket=${start}`} onClick={() => meet("gratis_os")}><span>Start for free</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
@@ -173,8 +179,8 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                   ))}
                 </div>
                 <p className="bs-uitleg bs-uitleg-hulp">{hulpPakket.los
-                  ? <>{hulpPakket.wie}. Je kiest zelf wie je erbij haalt. De prijs zie je na het aanmaken van je account.</>
-                  : <><strong>Bij elk pakket: je eigen veilige management &amp; operations systeem en een gratis website.</strong> {hulpPakket.wie}, met een persoonlijke call waarin we je systeem uitleggen. De prijs zie je na het aanmaken van je account.</>}</p>
+                  ? <>{hulpPakket.wie}. Je kiest zelf wie je erbij haalt.</>
+                  : <><strong>Bij elk pakket: je eigen veilige management &amp; operations systeem en een gratis website.</strong> {hulpPakket.wie}, met een persoonlijke call waarin we je systeem uitleggen. {PAKKET(hulpPakket.naam)?.prijs} per maand excl. btw, minimaal 3 maanden.</>}</p>
                 <div className="action"><a className="pill" href={`${GRATIS_OS_URL}?pakket=${hulp}`} onClick={() => meet("connect")}><span>{hulpPakket.los ? "Start een losse opdracht" : `Start met ${hulpPakket.naam}`}</span><span className="arrow"><ArrowUpRight size={17} /></span></a></div>
               </article>
             </div>
