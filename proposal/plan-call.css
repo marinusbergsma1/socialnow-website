@@ -1,0 +1,90 @@
+/* 18 oktober 2026: "Plan een call voor custom OS" in de hero (PlanCall.tsx) en het boekingspaneel (PlanCallPaneel.tsx). */
+.sn-site .sn-choice .showcase .os-custom-call{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:14px;padding-top:14px;border-top:1px solid #ffffff14}
+.sn-site .sn-choice .showcase .os-custom-call>p{margin:0;font-size:14px;line-height:1.45;color:#afc0b6}
+.sn-site .sn-choice .showcase .os-custom-call>p strong{color:#fff;font-weight:700}
+.sn-site .sn-choice .showcase .os-custom-call .pill{width:max-content;min-width:0;max-width:100%;gap:16px;border-color:#25d36699}
+.sn-site .sn-choice .showcase .os-custom-call .pill>span:not(.arrow){position:relative;z-index:1}
+.sn-site .sn-choice .video-intro .custom-call-line{margin:12px 0 0;font-size:16px;line-height:1.45;color:#b0c1b6}
+.sn-site .sn-choice .video-intro .custom-call-line button{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0;border:0;background:none;color:#fff;font-weight:700;cursor:pointer;text-decoration:underline;text-decoration-color:#25d36699;text-underline-offset:5px}
+.sn-site .sn-choice .video-intro .custom-call-line button:hover{text-decoration-color:var(--green,#25d366)}
+.sn-site .sn-choice .video-intro .custom-call-line button>.arrow{display:inline-grid;place-items:center;color:var(--green,#25d366)}
+@media(max-width:760px){.sn-site .sn-choice .showcase .os-custom-call{gap:10px}.sn-site .sn-choice .video-intro .custom-call-line{font-size:15px;margin-top:6px}}
+
+/* Het paneel: een modale dialoog, op mobiel een vel over het hele scherm. */
+:root .sn-call{width:min(720px,calc(100% - 32px));max-width:none;max-height:min(880px,calc(100dvh - 48px));margin:auto;padding:0;border:1px solid #ffffff24;border-radius:18px;background:#050907;color:#fff;box-shadow:0 30px 90px #000c;overflow:hidden}
+:root .sn-call::backdrop{background:#000000c2;backdrop-filter:blur(4px)}
+:root .sn-call[open]{display:flex}
+:root .sn-call .sn-call-vel{display:flex;flex-direction:column;width:100%;max-height:inherit;min-height:0;margin:0}
+:root .sn-call .sn-call-kop{position:relative;padding:24px 28px 18px;border-bottom:1px solid #ffffff14;background-image:radial-gradient(circle,#29433770 .8px,transparent 1px);background-size:24px 24px}
+:root .sn-call .sn-call-eyebrow{display:flex;align-items:center;gap:9px;margin:0 0 10px;color:#a8b8af;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+:root .sn-call .sn-call-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:#25d366;box-shadow:0 0 12px #25d36688}
+:root .sn-call h2{margin:0;padding-right:44px;font-size:clamp(24px,3vw,32px);line-height:1.12;font-weight:700;letter-spacing:0}
+:root .sn-call .sn-call-sluit{position:absolute;top:16px;right:16px;display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid #ffffff24;border-radius:50%;background:#0b120e;color:#fff;cursor:pointer}
+:root .sn-call .sn-call-sluit:hover{border-color:#25d366}
+:root .sn-call .sn-call-stappen{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:18px}
+:root .sn-call .sn-call-stappen>span{height:3px;border-radius:3px;background:#ffffff1f}
+:root .sn-call .sn-call-stappen>span.aan{background:#25d366}
+:root .sn-call .sn-call-inhoud{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:22px 28px 8px;display:grid;gap:18px;align-content:start}
+:root .sn-call .sn-call-stap{display:grid;gap:4px;margin:0;font-size:19px;font-weight:600;line-height:1.3;outline:0}
+:root .sn-call .sn-call-stap>span{color:#25d366;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+:root .sn-call .sn-call-uitleg{margin:0;color:#b0c1b6;font-size:15px;line-height:1.5}
+:root .sn-call .sn-call-veld{display:grid;gap:7px;font-size:13px;color:#cfdad3}
+:root .sn-call .sn-call-veld i{font-style:normal;color:#8da297}
+:root .sn-call .sn-call-veld input,:root .sn-call .sn-call-veld textarea{width:100%;min-height:48px;padding:12px 14px;border:1px solid #ffffff2b;border-radius:10px;background:#0b120e;color:#fff;font:inherit;font-size:16px;line-height:1.4}
+:root .sn-call .sn-call-veld textarea{resize:vertical;min-height:88px}
+:root .sn-call .sn-call-veld input:focus,:root .sn-call .sn-call-veld textarea:focus{outline:2px solid #25d366;outline-offset:1px;border-color:transparent}
+:root .sn-call .sn-call-rij{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+:root .sn-call .sn-call-groep{margin:0;padding:0;border:0;min-width:0}
+:root .sn-call .sn-call-groep>legend{margin-bottom:10px;padding:0;font-size:13px;color:#cfdad3}
+:root .sn-call .sn-call-chips{display:flex;flex-wrap:wrap;gap:8px}
+:root .sn-call .sn-call-chip{position:relative;display:inline-flex;cursor:pointer}
+:root .sn-call .sn-call-chip>input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+:root .sn-call .sn-call-chip>span{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:9px 15px;border:1px solid #ffffff2b;border-radius:999px;background:#0b120e;color:#dfe8e2;font-size:14px;line-height:1.25;transition:border-color .15s,background .15s,color .15s}
+:root .sn-call .sn-call-chip>span>svg{display:none;color:#25d366}
+:root .sn-call .sn-call-chip:hover>span{border-color:#25d36699}
+:root .sn-call .sn-call-chip>input:checked+span{border-color:#25d366;background:#0f2a1a;color:#fff}
+:root .sn-call .sn-call-chip>input:checked+span>svg{display:block}
+:root .sn-call .sn-call-chip>input:focus-visible+span{outline:2px solid #25d366;outline-offset:3px}
+:root .sn-call .sn-call-budget{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+:root .sn-call .sn-call-budget>.sn-call-chip>span{width:100%;border-radius:12px}
+:root .sn-call .sn-call-dagen{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+:root .sn-call .sn-call-dag>span{display:grid;justify-items:center;gap:1px;width:100%;padding:9px 4px;border-radius:12px;text-align:center}
+:root .sn-call .sn-call-dag i{font-style:normal;font-size:11px;letter-spacing:0;color:#8da297;text-transform:capitalize}
+:root .sn-call .sn-call-dag b{font-size:19px;font-weight:700;line-height:1.15}
+:root .sn-call .sn-call-dag>input:checked+span i{color:#cfe9d8}
+:root .sn-call .sn-call-agenda{display:grid;gap:14px}
+:root .sn-call .sn-call-agenda iframe{width:100%;height:560px;border:0;border-radius:12px;background:#fff}
+:root .sn-call .sn-call-klein{margin:0;color:#8da297;font-size:13px;line-height:1.5}
+:root .sn-call .sn-call-klein a,:root .sn-call .sn-call-klaar a{color:#fff;text-underline-offset:4px}
+:root .sn-call .sn-call-fout{margin:0;color:#ff9c8a;font-size:14px}
+:root .sn-call .sn-call-klaar{display:grid;justify-items:start;gap:10px;padding:8px 0 4px}
+:root .sn-call .sn-call-klaar h3{margin:0;font-size:24px;outline:0}
+:root .sn-call .sn-call-klaar p{margin:0;color:#b0c1b6;font-size:15px;line-height:1.5;max-width:52ch}
+:root .sn-call .sn-call-vink{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#25d366;color:#04230f}
+:root .sn-call .sn-call-voet{display:flex;align-items:center;justify-content:flex-end;gap:12px;padding:16px 28px 22px;border-top:1px solid #ffffff14;background:#050907}
+:root .sn-call .sn-call-terug{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-right:auto;padding:0 6px;border:0;background:none;color:#cfdad3;font:inherit;font-size:14px;cursor:pointer}
+:root .sn-call .sn-call-terug:hover{color:#fff}
+:root .sn-call .sn-call-terug:focus-visible,:root .sn-call .sn-call-sluit:focus-visible{outline:2px solid #25d366;outline-offset:3px}
+/* De pil van de hero, ook binnen het paneel. */
+:root .sn-call .pill{position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:space-between;gap:16px;min-height:50px;padding:7px 8px 7px 21px;border:1.5px solid #25d366;border-radius:999px;overflow:hidden;background:#0c1510;color:#fff;font:700 13px/1.3 inherit;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;cursor:pointer}
+:root .sn-call .pill::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:#25d366;transform:translateX(-101%);transition:transform .5s cubic-bezier(.23,1,.32,1);pointer-events:none}
+:root .sn-call .pill:is(:hover,:focus-visible)::before{transform:translateX(0)}
+:root .sn-call .pill:focus-visible{outline:2px solid #25d366;outline-offset:4px}
+:root .sn-call .pill>.arrow{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:#25d366;color:#062311}
+:root .sn-call .pill:is(:hover,:focus-visible)>.arrow{background:#fff;color:#052310}
+:root .sn-call .sn-call-open{justify-self:start}
+:root .sn-call .pill.sn-call-dicht{justify-content:center;padding:7px 28px}
+@media(prefers-reduced-motion:reduce){.sn-call .pill::before{transition:none}}
+@media(max-width:640px){
+  :root .sn-call{width:100%;max-height:100dvh;height:100dvh;border:0;border-radius:0}
+  :root .sn-call .sn-call-kop{padding:18px 16px 14px}
+  :root .sn-call .sn-call-sluit{top:12px;right:12px}
+  :root .sn-call .sn-call-inhoud{padding:18px 16px 8px}
+  :root .sn-call .sn-call-voet{padding:12px 16px calc(14px + env(safe-area-inset-bottom))}
+  :root .sn-call .sn-call-rij,:root .sn-call .sn-call-budget{grid-template-columns:minmax(0,1fr)}
+  :root .sn-call .sn-call-dagen{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  :root .sn-call .sn-call-dag b{font-size:17px}
+  :root .sn-call .sn-call-chip>span{font-size:13.5px;padding:9px 13px}
+  :root .sn-call .sn-call-agenda iframe{height:520px}
+  :root .sn-call .pill.sn-call-verder{flex:1;max-width:280px;margin-left:auto}
+}
