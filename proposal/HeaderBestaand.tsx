@@ -59,6 +59,12 @@ const HULP = [
 // Daarna: "Bij Custom os liever gewoon de pakketten laten zien of uitspraken van het team." Er staan nog geen echte
 // uitspraken van het team in content.ts (alleen die van Ruben), dus de pakketten: bij elk zit het Custom OS.
 const CUSTOM = HULP.filter(h => !h.los).map(h => ({ ...h, pakket: MAAND.find(m => m.naam === h.naam)! }));
+const VEILIG = [
+  "Echte experts kijken mee in je OS, met de toegang die jij bepaalt. Intrekken kan altijd.",
+  "Koppel je eigen AI veilig: sleutels standaard alleen lezen, schrijven alleen als jij het toestaat.",
+  "Je data blijft van jou en blijft in je eigen koppelingen.",
+  "Persoonlijke call met uitleg van je systeem.",
+];
 const PAKKET = (naam: string) => MAAND.find(m => m.naam === naam);
 const namen = (ids: string[]) => { const n = ids.map(id => TEAM[id].naam.split(" ")[0]); return n.length > 1 ? `${n.slice(0, -1).join(", ")} en ${n[n.length - 1]}` : n[0]; };
 const ONDERDELEN: Record<string, string[]> = {
@@ -140,7 +146,14 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                     </button>
                   ))}
                 </div>
-                <p className="bs-uitleg"><strong>Met {namen(CUSTOM.find(c => c.id === custom)!.pakket.team)}.</strong> Bij elk pakket: je eigen veilige management &amp; operations systeem, een complete rebranding, je website en een persoonlijke call. Per maand excl. btw, minimaal 3 maanden.</p>
+                {/* Marinus: "en echte experts die mee kunnen kijken met de toegang die jij zelf bepaald." en daarna "Meer zo iets.": een korte
+                    lijst, alleen wat nu live staat in het OS (teamrollen met direct intrekken, OS-PR #134; eigen AI via MCP/API met
+                    sleutels standaard alleen lezen, #135). Budgetakkoord via Attesso is nog niet live en staat er daarom niet bij. */}
+                <p className="bs-uitleg bs-met"><strong>Met {namen(CUSTOM.find(c => c.id === custom)!.pakket.team)}.</strong></p>
+                <ul className="bs-punten">
+                  {VEILIG.map(punt => <li key={punt}><Check size={15} strokeWidth={3} aria-hidden="true" />{punt}</li>)}
+                </ul>
+                <p className="bs-uitleg bs-uitleg-klein">Ook in elk pakket: je custom OS, een complete rebranding en je website. Per maand excl. btw, minimaal 3 maanden.</p>
                 <div className="action os-account-actions">
                   <button type="button" className="pill" aria-haspopup="dialog" onClick={() => { meet("custom_os"); openPlanCall({ onderdelen: ONDERDELEN[custom] }); }}><span>Plan een call</span><span className="arrow"><ArrowUpRight size={17} /></span></button>
                 </div>
