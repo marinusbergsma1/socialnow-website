@@ -1,0 +1,191 @@
+{
+  "_uitleg": "status: uitkomst van de controle in de OS-code (origin/os) per app die het onderzoek in_os noemt. notities: korte uitleg in de tooltip, uit api_kosten en opmerking van het onderzoek, met de hand nagelopen (Bluesky en Snapchat Ads vragen geen goedkeuring, Wise is geen bank via PSD2). Controle op origin/os 4f4e98eb, 18 oktober 2026. Studio-modellen die een klant meteen in Studio gebruikt (op tokens) tellen als In het OS; de legenda zegt dat.",
+  "status": {
+    "odoo": {
+      "status": "os",
+      "bewijs": "os/dashboard-unlock.js:438, os/dashboard-wizard.js:276 naar api/setup.js:96 (type odoo) en api/setup-test.js"
+    },
+    "zernio": {
+      "status": "os",
+      "bewijs": "os/dashboard-kanalen.js:395, os/telefoon-connect.js:314 naar api/kanalen.js:160 (eigen Zernio-sleutel)"
+    },
+    "instagram": {
+      "status": "os",
+      "bewijs": "os/dashboard-kanalen.js, os/dashboard-wizard.js:566 naar api/kanalen.js:160 en api/_zernio.js KANALEN"
+    },
+    "facebook": {
+      "status": "os",
+      "bewijs": "os/dashboard-kanalen.js naar api/kanalen.js en api/_zernio.js KANALEN"
+    },
+    "threads": {
+      "status": "os",
+      "bewijs": "os/dashboard-kanalen.js naar api/kanalen.js en api/_zernio.js KANALEN (threads)"
+    },
+    "linkedin": {
+      "status": "os",
+      "bewijs": "os/dashboard-kanalen.js naar api/kanalen.js en api/_zernio.js KANALEN (linkedin)"
+    },
+    "google-business-profile": {
+      "status": "os",
+      "bewijs": "os/dashboard-kanalen.js naar api/kanalen.js en api/_zernio.js KANALEN (googlebusiness), alleen plaatsen"
+    },
+    "claude": {
+      "status": "os",
+      "bewijs": "account/index.html:90 en os/ai-verbinding.js:176 naar api/mcp-koppeling.js (claude-code, claude-desktop) en api/mcp.js"
+    },
+    "cursor": {
+      "status": "os",
+      "bewijs": "os/ai-verbinding.js naar api/mcp-koppeling.js (cursor) en api/mcp.js"
+    },
+    "codex": {
+      "status": "os",
+      "bewijs": "os/ai-verbinding.js naar api/mcp-koppeling.js (codex) en api/mcp.js"
+    },
+    "gemini": {
+      "status": "os",
+      "bewijs": "os/ai-verbinding.js naar api/mcp-koppeling.js (gemini, Gemini CLI); daarnaast draaien chat en Studio-beelden op Gemini"
+    },
+    "openai": {
+      "status": "os",
+      "bewijs": "ingebouwd in Studio: api/_studio-model-catalog.js:237 (GPT Image), api/_studio-openai.js, os/studio-render-motor.js:49"
+    },
+    "veo": {
+      "status": "os",
+      "bewijs": "ingebouwd in Studio: api/_studio-model-catalog.js:258 en api/_studio-veo.js"
+    },
+    "seedance": {
+      "status": "os",
+      "bewijs": "ingebouwd in Studio: api/_studio-model-catalog.js en api/_studio-seedance.js"
+    },
+    "minimax": {
+      "status": "os",
+      "bewijs": "ingebouwd in Studio: api/_studio-model-catalog.js en api/_studio-minimax.js"
+    },
+    "hubspot": {
+      "status": "aanvraag",
+      "bewijs": "api/_integraties.js en api/integraties.js, geen koppelscherm"
+    },
+    "salesforce": {
+      "status": "aanvraag",
+      "bewijs": "api/_integraties.js en api/integraties.js, alleen weergave in os/dashboard-hub.js:131"
+    },
+    "shopify": {
+      "status": "aanvraag",
+      "bewijs": "api/_integraties.js, geen koppelscherm"
+    },
+    "huggingface": {
+      "status": "aanvraag",
+      "bewijs": "api/_integraties.js, geen koppelscherm"
+    },
+    "slack": {
+      "status": "aanvraag",
+      "bewijs": "api/_integraties.js, geen koppelscherm"
+    },
+    "notion": {
+      "status": "aanvraag",
+      "bewijs": "api/_integraties.js, geen koppelscherm"
+    },
+    "airtable": {
+      "status": "aanvraag",
+      "bewijs": "api/_integraties.js, geen koppelscherm"
+    },
+    "asana": {
+      "status": "aanvraag",
+      "bewijs": "api/_integraties.js, geen koppelscherm"
+    },
+    "trello": {
+      "status": "aanvraag",
+      "bewijs": "api/_integraties.js, geen koppelscherm"
+    },
+    "github": {
+      "status": "aanvraag",
+      "bewijs": "api/_integraties.js, geen koppelscherm"
+    },
+    "zapier": {
+      "status": "aanvraag",
+      "bewijs": "api/_integraties.js, geen koppelscherm"
+    },
+    "mailchimp": {
+      "status": "aanvraag",
+      "bewijs": "api/_integraties.js, geen koppelscherm"
+    },
+    "google-reviews": {
+      "status": "aanvraag",
+      "bewijs": "api/_google-lezen.js:163, locatie alleen via api/setup.js zonder scherm"
+    },
+    "meta-ads": {
+      "status": "aanvraag",
+      "bewijs": "os/meta-aanvraag.js (aanvraag per mail), api/meta.js:296"
+    },
+    "google-ads": {
+      "status": "aanvraag",
+      "bewijs": "api/google-oauth.js zonder knop"
+    },
+    "linkedin-ads": {
+      "status": "aanvraag",
+      "bewijs": "api/linkedin.js:84 en api/linkedin-oauth.js zonder knop"
+    },
+    "google-analytics-4": {
+      "status": "aanvraag",
+      "bewijs": "api/_google-lezen.js:59, property alleen via api/setup.js zonder scherm"
+    },
+    "google-search-console": {
+      "status": "aanvraag",
+      "bewijs": "api/_google-lezen.js:95, geen invoerveld"
+    },
+    "anthropic": {
+      "status": "api",
+      "bewijs": "alleen intern: api/_explainer.js met de sleutel van SocialNow, klant koppelt geen eigen sleutel"
+    },
+    "elevenlabs": {
+      "status": "api",
+      "bewijs": "alleen intern: api/tts.js voor de voorleesstem van de dagupdate"
+    },
+    "higgsfield": {
+      "status": "api",
+      "bewijs": "niet kiesbaar in Studio: os/studio-render-motor.js:49 filtert hem weg"
+    }
+  },
+  "notities": {
+    "abn-amro": "psd2",
+    "amazon-seller": "partner",
+    "channable": "betaald",
+    "docusign": "review",
+    "enable-banking": "betaald",
+    "exact-online": "review",
+    "facebook": "zernio",
+    "fortnox": "partner",
+    "google-ads": "review",
+    "google-business-profile": "zernio",
+    "google-reviews": "review",
+    "hootsuite": "review",
+    "ing": "psd2",
+    "instagram": "zernio",
+    "linkedin": "zernio",
+    "linkedin-ads": "review",
+    "loket": "partner",
+    "meta-ads": "review",
+    "nmbrs": "partner",
+    "odoo": "odoo",
+    "pinterest": "review",
+    "pinterest-ads": "review",
+    "quickbooks": "partner",
+    "rabobank": "psd2",
+    "reddit": "review",
+    "reddit-ads": "review",
+    "revolut": "betaald",
+    "salesforce": "betaald",
+    "snelstart": "partner",
+    "synthesia": "betaald",
+    "threads": "zernio",
+    "tikkie": "betaald",
+    "tiktok": "review",
+    "tiktok-ads": "review",
+    "twinfield": "partner",
+    "visma-eaccounting": "partner",
+    "x-ads": "review",
+    "xero": "betaald",
+    "youtrust": "betaald",
+    "zalando": "partner"
+  }
+}

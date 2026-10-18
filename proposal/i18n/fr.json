@@ -2446,5 +2446,14 @@
   "De app heeft een open API. Wij bouwen de koppeling op maat.": "L’app dispose d’une API ouverte. Nous construisons la connexion sur mesure.",
   "Mis je een app?": "Une app vous manque ?",
   "Heeft je software een API, dan maken we hem zichtbaar in je OS.": "Si votre logiciel a une API, nous le rendons visible dans votre OS.",
-  "apps werken nu in het OS. Logo's zijn merken van hun eigenaars.": "apps fonctionnent déjà dans l’OS. Les logos sont des marques de leurs propriétaires."
+  "apps werken nu in het OS. Logo's zijn merken van hun eigenaars.": "apps fonctionnent déjà dans l’OS. Les logos sont des marques de leurs propriétaires.",
+  "De koppeling bestaat. Wij zetten hem voor je aan.": "La connexion existe. Nous l’activons pour vous.",
+  "Vraagt de leverancier eerst goedkeuring of een abonnement, dan zie je dat bij de app.": "Si le fournisseur exige d’abord une validation ou un abonnement, vous le verrez sur l’app.",
+  "Vraagt eerst goedkeuring van het platform.": "Nécessite d’abord la validation de la plateforme.",
+  "Vraagt aanmelding als ontwikkelaar of partner bij de leverancier.": "Nécessite une inscription comme développeur ou partenaire chez le fournisseur.",
+  "Vraagt een betaald abonnement of API-pakket bij de leverancier.": "Nécessite un abonnement payant ou une offre API chez le fournisseur.",
+  "Banken koppelen alleen via een erkende PSD2-aanbieder.": "Les banques se connectent uniquement via un prestataire PSD2 agréé.",
+  "Vraagt het Odoo Custom-abonnement.": "Nécessite l’abonnement Odoo Custom.",
+  "Via je eigen Zernio-account.": "Via votre propre compte Zernio.",
+  "Werkt nu. Je koppelt het zelf in je OS, of het zit al in Studio.": "Fonctionne dès maintenant. Vous le connectez vous-même dans votre OS, ou il est déjà intégré au Studio."
 }

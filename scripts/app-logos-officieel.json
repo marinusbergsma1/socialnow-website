@@ -1,0 +1,39 @@
+{
+  "mollie": {
+    "bron": "https://framerusercontent.com/assets/UF46Vonh1CKzsxM5M4v7iQWI8.zip (Mollie-Logo-2023/SVG/Mollie-Logo-White-2023.svg)",
+    "pagina": "https://www.mollie.com/resources",
+    "licentie": "Merklogo van Mollie, logopakket vrij aangeboden op de resourcespagina; merkrecht bij Mollie",
+    "regels": "Officiële witte versie (het logo is zwart, op donker gebruikt Mollie wit); niet aangepast",
+    "datum": "2026-10-18"
+  },
+  "moneybird": {
+    "bron": "https://moneybird.cdn.prismic.io/moneybird/ZkXWvCol0Zci9Mhr_logo_birdblue.svg",
+    "pagina": "https://www.moneybird.nl/huisstijl/",
+    "licentie": "Merklogo van Moneybird; het primaire logo mag zonder toestemming gebruikt worden (huisstijlpagina); merkrecht bij Moneybird",
+    "regels": "Primair logo in Moneybird-blauw, niet aangepast",
+    "datum": "2026-10-18",
+    "kleur": "#0073E6"
+  },
+  "zernio": {
+    "bron": "https://zernio.com/brand/logo-white.svg",
+    "pagina": "https://zernio.com/press",
+    "licentie": "Merklogo van Zernio, vrij aangeboden voor pers, partners en iedereen die over Zernio schrijft; merkrecht bij Zernio",
+    "regels": "Witte versie, bedoeld voor donkere achtergronden; niet aangepast; kleuren alleen Coral, Charcoal of wit",
+    "datum": "2026-10-18",
+    "kleur": "#EB3514"
+  },
+  "openai": {
+    "bron": "https://cdn.openai.com/brand/openai-logos.zip (OpenAI-logos/SVGs/OAI_OpenAI-Blossom_White.svg)",
+    "pagina": "https://openai.com/brand/",
+    "licentie": "Merklogo van OpenAI; API-gebruikers mogen naar de gebruikte OpenAI-technologie verwijzen, zonder partnerschap te suggereren; merkrecht bij OpenAI",
+    "regels": "Blossom alleen in zwart of wit, nooit ingekleurd; hier de witte versie, niet aangepast",
+    "datum": "2026-10-18"
+  },
+  "codex": {
+    "bron": "https://cdn.openai.com/brand/openai-logos.zip (OpenAI-logos/SVGs/OAI_OpenAI-Blossom_White.svg)",
+    "pagina": "https://openai.com/brand/",
+    "licentie": "Merklogo van OpenAI; API-gebruikers mogen naar de gebruikte OpenAI-technologie verwijzen, zonder partnerschap te suggereren; merkrecht bij OpenAI",
+    "regels": "Blossom alleen in zwart of wit, nooit ingekleurd; hier de witte versie, niet aangepast",
+    "datum": "2026-10-18"
+  }
+}

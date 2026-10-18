@@ -1060,7 +1060,7 @@
   "Meta + Google": "Meta + Google",
   "Meta Ads opgezet en beheerd": "Meta Ads configurado e gerido",
   "Milo-agents op je eigen data": "Agentes Milo sobre os teus próprios dados",
-  "Op aanvraag": "Sob pedido",
+  "Op aanvraag": "Mediante pedido",
   "Overal": "Em todo o lado",
   "Pakket Compleet": "Plano Complete",
   "Pakket Content": "Plano Content",
@@ -2297,5 +2297,14 @@
   "De app heeft een open API. Wij bouwen de koppeling op maat.": "A app tem uma API aberta. Construímos a ligação à medida.",
   "Mis je een app?": "Falta-lhe uma app?",
   "Heeft je software een API, dan maken we hem zichtbaar in je OS.": "Se o seu software tem uma API, tornamo-lo visível no seu OS.",
-  "apps werken nu in het OS. Logo's zijn merken van hun eigenaars.": "apps já funcionam no OS. Os logótipos são marcas dos seus proprietários."
+  "apps werken nu in het OS. Logo's zijn merken van hun eigenaars.": "apps já funcionam no OS. Os logótipos são marcas dos seus proprietários.",
+  "De koppeling bestaat. Wij zetten hem voor je aan.": "A ligação já existe. Ativamo-la por si.",
+  "Vraagt de leverancier eerst goedkeuring of een abonnement, dan zie je dat bij de app.": "Se o fornecedor exigir primeiro aprovação ou uma subscrição, vê isso na app.",
+  "Vraagt eerst goedkeuring van het platform.": "Requer primeiro a aprovação da plataforma.",
+  "Vraagt aanmelding als ontwikkelaar of partner bij de leverancier.": "Requer registo como programador ou parceiro junto do fornecedor.",
+  "Vraagt een betaald abonnement of API-pakket bij de leverancier.": "Requer uma subscrição paga ou um plano de API junto do fornecedor.",
+  "Banken koppelen alleen via een erkende PSD2-aanbieder.": "Os bancos só se ligam através de um prestador PSD2 autorizado.",
+  "Vraagt het Odoo Custom-abonnement.": "Requer o plano Odoo Custom.",
+  "Via je eigen Zernio-account.": "Através da sua própria conta Zernio.",
+  "Werkt nu. Je koppelt het zelf in je OS, of het zit al in Studio.": "Já funciona. Liga-o você mesmo no seu OS, ou já vem integrado no Studio."
 }
