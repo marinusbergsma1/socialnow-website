@@ -137,7 +137,7 @@ function ProposalShell() {
     const description =
       project?.description ||
       post?.excerpt ||
-      "De AI-gestuurde persoonlijke werkplek, met échte professionals en menselijk contact. WEBSITE → CONTENT → STUDIO. GRATIS tot 10 GB opslag. Daarna €20 per maand, of een persoonlijk systeem. Odoo is een optionele koppeling.";
+      "De AI-gestuurde persoonlijke werkplek, met échte professionals en menselijk contact. WEBSITE → CONTENT → STUDIO. GRATIS tot 10 GB opslag. Hulppakketten met een custom OS en een gratis website, en tokens voor de Studio. Odoo is een optionele koppeling.";
     // 30 september 2026: postbuild.mjs en localize-build.mjs zetten per route en per taal al de eigen title,
     // description en canonical in de html; alleen localize-build zet daarbij hreflang x-default. Daarna zette
     // deze regel op elke route de algemene zin en het menulabel terug, en Google (dat JavaScript uitvoert) zag

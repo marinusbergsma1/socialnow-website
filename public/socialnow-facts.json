@@ -71,38 +71,23 @@
     ]
   },
   "pricing": {
-    "currency": "EUR",
-    "vatIncluded": false,
     "freeEntry": {
-      "price": 0,
+      "free": true,
       "storageLimit": {
         "value": 10,
         "unit": "GB"
       },
       "description": {
-        "nl": "GRATIS tot 10 GB opslag.",
-        "en": "FREE up to 10 GB of storage."
+        "nl": "GRATIS tot 10 GB opslag. Bij je aanmelding koppel je je rekening met een SEPA-machtiging; zolang je onder 10 GB blijft, wordt er niets afgeschreven.",
+        "en": "FREE up to 10 GB of storage. When you sign up, you link your account with a SEPA mandate; as long as you stay under 10 GB, nothing is debited."
       }
     },
-    "aboveFreeStorageLimit": {
-      "price": 20,
+    "monthly": {
       "billingPeriod": "month",
-      "appliesWhenStorageExceeds": {
-        "value": 10,
-        "unit": "GB"
-      },
       "description": {
-        "nl": "Daarna €20 per maand.",
-        "en": "After that, €20 per month."
+        "nl": "Alles verder is maandelijks: tokens voor de Studio en hulppakketten met een custom OS en een gratis website. Prijzen zie je na het aanmaken van je account.",
+        "en": "Everything else is monthly: tokens for the Studio and support packages with a custom OS and a free website. You see prices after creating your account."
       }
-    },
-    "customSystem": {
-      "priceType": "onRequest",
-      "description": {
-        "nl": "Een persoonlijk systeem op maat: vanaf €10.000, prijs op aanvraag. Inrichting, koppelingen en begeleiding worden in het voorstel afgesproken.",
-        "en": "A system tailored to your business: from €10,000, price on request. Setup, integrations and support are agreed in the proposal."
-      },
-      "startingPrice": 10000
     },
     "sourcePageIds": [
       "pricing",
