@@ -50,3 +50,9 @@
 .sn-site .sn-bestaand .bs-stapel img{width:100%;height:100%;object-fit:cover;object-position:center 26%}
 .sn-site .sn-bestaand .bs-kop-hulp span{color:#c8d8ce;font-weight:600}
 @media(prefers-reduced-motion:reduce){.sn-site .sn-bestaand .bs-bouwer{animation:none}}
+.sn-site .sn-bestaand .bs-typer{display:block;min-height:2.1em;color:var(--green)}
+@media(min-width:1151px){.sn-site .sn-bestaand .bs-typer{min-height:1.05em;white-space:nowrap;font-size:.72em}}
+.sn-site .sn-bestaand .bs-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sn-site .sn-bestaand .bs-cursor{display:inline-block;width:.07em;height:.9em;margin-left:.06em;vertical-align:-.08em;background:var(--green);animation:bs-knipper 1s steps(1) infinite}
+@keyframes bs-knipper{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.sn-site .sn-bestaand .bs-cursor{display:none}}

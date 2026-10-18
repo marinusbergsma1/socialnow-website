@@ -56,6 +56,34 @@ const PLAN_CALL = `/contact?onderwerp=${encodeURIComponent("Plan een call: Custo
 const BOUWERS = ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer", "Thomas Huijsmans", "Michelle Yang"].flatMap(naam => people.filter(p => p.name === naam));
 const WISSEL_MS = 3500;
 
+// 18 oktober 2026 (Marinus): "En veiliger. Klinkt een beetje matig [...] Veiligheid, minder kosten meer winst eigen data
+// etc etc menselijk contact dat zijn de belangrijke onderdelen 3 best mogelijke zinnen die om de zoveel tijd teruggetypt
+// en opnieuw uitgetypt worden [...] maar niet te druk maken." Drie korte zinnen, elk 3 seconden in beeld.
+const ZINNEN = ["Minder kosten. Meer winst.", "Veilig. Je data blijft van jou.", "Met echte mensen, niet alleen AI."];
+const TIK = 55, WEG = 28, STAAN = 3000;
+
+function Typer() {
+  const [tekst, setTekst] = useState(ZINNEN[0]);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let i = 0, n = ZINNEN[0].length, weg = true, t = window.setTimeout(stap, STAAN);
+    function stap() {
+      const zin = ZINNEN[i];
+      if (weg) {
+        n--; setTekst(zin.slice(0, n));
+        if (n === 0) { weg = false; i = (i + 1) % ZINNEN.length; }
+        t = window.setTimeout(stap, WEG);
+      } else {
+        const nieuw = ZINNEN[i]; n++; setTekst(nieuw.slice(0, n));
+        if (n === nieuw.length) { weg = true; t = window.setTimeout(stap, STAAN); }
+        else t = window.setTimeout(stap, TIK);
+      }
+    }
+    return () => window.clearTimeout(t);
+  }, []);
+  return <span className="bs-typer"><span className="bs-sr">{ZINNEN.join(" ")}</span><span aria-hidden="true">{tekst}<i className="bs-cursor" /></span></span>;
+}
+
 function Bouwers() {
   const [nu, setNu] = useState(0);
   useEffect(() => {
@@ -160,7 +188,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
           <div className="wrap">
             <div className="section-head video-intro">
               <div className="video-title">
-                <h1>Meer inzicht in je bedrijf. <span className="free-word">En veiliger.</span></h1>
+                <h1>Meer inzicht in je bedrijf. <Typer /></h1>
                 <p className="pay-line">Verouderde systemen zijn een open deur voor hackers. Wij maken je data inzichtelijker én veiliger, met echte experts en AI.</p>
                 <ul className="bs-zeker">
                   <li><ShieldCheck size={15} aria-hidden="true" />Updates en toegang op orde</li>
