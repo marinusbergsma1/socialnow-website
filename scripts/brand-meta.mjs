@@ -1,4 +1,5 @@
 // Route metadata for the confirmed SocialNow brand and offer.
+// 18 October 2026 (Marinus): no amounts in metadata. Prices come after creating an account; /prijzen shows the offer.
 // Values are plain text: the caller must escape them when writing HTML.
 // Keep route names unprefixed; language prefixes belong to the caller.
 const metadata = {
@@ -9,7 +10,7 @@ const metadata = {
     ],
     '/het-os': [
       'Operation & Management system | SocialNow',
-      'Bring your website, CRM, content and ads together in SocialNow OS, with personal support. Free up to 10 GB storage, then €20/month. Custom systems on request.',
+      'Bring your website, CRM, content and ads together in SocialNow OS, with personal support. Free up to 10 GB storage. Support packages include a custom OS and a free website.',
     ],
     '/team': [
       'Meet our people and independent partners | SocialNow',
@@ -21,7 +22,7 @@ const metadata = {
     ],
     '/prijzen': [
       'OS pricing: free start and custom projects | SocialNow',
-      'SocialNow OS is free up to 10 GB storage, then €20/month. Custom systems and partner services are priced on request through SocialNow B.V.',
+      'SocialNow OS is free up to 10 GB storage. Studio tokens and support packages with a custom OS and a free website are monthly, through SocialNow B.V.',
     ],
     '/contact': [
       'Contact us about the OS or a custom project | SocialNow',
@@ -39,7 +40,7 @@ const metadata = {
     ],
     '/het-os': [
       'Operation & Management-systeem | SocialNow',
-      'Breng website, CRM, content en advertenties samen in SocialNow OS, met persoonlijk contact. Gratis tot 10 GB opslag, daarna €20/maand. Maatwerk op aanvraag.',
+      'Breng website, CRM, content en advertenties samen in SocialNow OS, met persoonlijk contact. Gratis tot 10 GB opslag. Hulppakketten met custom OS en gratis website.',
     ],
     '/team': [
       'Onze mensen en zelfstandige partners | SocialNow',
@@ -51,7 +52,7 @@ const metadata = {
     ],
     '/prijzen': [
       'OS-prijzen: gratis starten en maatwerk | SocialNow',
-      'SocialNow OS is gratis tot 10 GB opslag, daarna €20/maand. Een systeem op maat en partnerdiensten krijg je op aanvraag via SocialNow B.V.',
+      'SocialNow OS is gratis tot 10 GB opslag. Tokens voor de Studio en hulppakketten met custom OS en gratis website zijn maandelijks, via SocialNow B.V.',
     ],
     '/contact': [
       'Contact over het OS of jouw maatwerkproject | SocialNow',
@@ -69,7 +70,7 @@ const metadata = {
     ],
     '/het-os': [
       'Operation & Management-System | SocialNow',
-      'Website, CRM, Inhalte und Werbung in SocialNow OS verbinden, mit persönlicher Begleitung. Kostenlos bis 10 GB Speicher, danach 20 €/Monat. Maßarbeit auf Anfrage.',
+      'Website, CRM, Inhalte und Werbung in SocialNow OS verbinden, mit persönlicher Begleitung. Kostenlos bis 10 GB Speicher. Hilfspakete mit individuellem OS und kostenloser Website.',
     ],
     '/team': [
       'Unsere Menschen und selbstständigen Partner | SocialNow',
@@ -81,7 +82,7 @@ const metadata = {
     ],
     '/prijzen': [
       'OS-Preise: kostenloser Einstieg und Maßarbeit | SocialNow',
-      'SocialNow OS ist bis 10 GB Speicher kostenlos, danach 20 €/Monat. Individuelle Systeme und Partnerleistungen erhalten Sie auf Anfrage über SocialNow B.V.',
+      'SocialNow OS ist bis 10 GB Speicher kostenlos. Tokens für das Studio und Hilfspakete mit individuellem OS und kostenloser Website sind monatlich, über SocialNow B.V.',
     ],
     '/contact': [
       'Kontakt zum OS und zu individuellen Projekten | SocialNow',
@@ -99,7 +100,7 @@ const metadata = {
     ],
     '/het-os': [
       'Système Operation & Management | SocialNow',
-      'Réunissez site web, CRM, contenu et publicité dans SocialNow OS, avec un accompagnement humain. Gratuit jusqu’à 10 Go, puis 20 €/mois. Sur mesure sur demande.',
+      'Réunissez site web, CRM, contenu et publicité dans SocialNow OS, avec un accompagnement humain. Gratuit jusqu’à 10 Go. Forfaits avec OS sur mesure et site web gratuit.',
     ],
     '/team': [
       'Notre équipe et nos partenaires indépendants | SocialNow',
@@ -111,7 +112,7 @@ const metadata = {
     ],
     '/prijzen': [
       'Tarifs OS : accès gratuit et sur mesure | SocialNow',
-      'SocialNow OS est gratuit jusqu’à 10 Go de stockage, puis 20 €/mois. Systèmes sur mesure et services des partenaires sur devis auprès de SocialNow B.V.',
+      'SocialNow OS est gratuit jusqu’à 10 Go de stockage. Les tokens du Studio et les forfaits avec OS sur mesure et site web gratuit sont mensuels, via SocialNow B.V.',
     ],
     '/contact': [
       'Contact pour l’OS ou votre projet sur mesure | SocialNow',
@@ -129,7 +130,7 @@ const metadata = {
     ],
     '/het-os': [
       'Sistema Operation & Management | SocialNow',
-      'Reúne web, CRM, contenido y anuncios en SocialNow OS, con atención personal. Gratis hasta 10 GB de almacenamiento, después 20 €/mes. Soluciones a medida bajo consulta.',
+      'Reúne web, CRM, contenido y anuncios en SocialNow OS, con atención personal. Gratis hasta 10 GB de almacenamiento. Paquetes de ayuda con OS a medida y web gratuita.',
     ],
     '/team': [
       'Nuestro equipo y socios independientes | SocialNow',
@@ -141,7 +142,7 @@ const metadata = {
     ],
     '/prijzen': [
       'Precios del OS: acceso gratuito y a medida | SocialNow',
-      'SocialNow OS es gratis hasta 10 GB de almacenamiento, después 20 €/mes. Sistemas a medida y servicios de socios con presupuesto de SocialNow B.V.',
+      'SocialNow OS es gratis hasta 10 GB de almacenamiento. Los tokens del Studio y los paquetes de ayuda con OS a medida y web gratuita son mensuales, vía SocialNow B.V.',
     ],
     '/contact': [
       'Contacto para el OS o tu proyecto a medida | SocialNow',
@@ -159,7 +160,7 @@ const metadata = {
     ],
     '/het-os': [
       'Sistema Operation & Management | SocialNow',
-      'Riunisci sito, CRM, contenuti e pubblicità in SocialNow OS, con assistenza personale. Gratuito fino a 10 GB, poi 20 €/mese. Sistemi su misura su richiesta.',
+      'Riunisci sito, CRM, contenuti e pubblicità in SocialNow OS, con assistenza personale. Gratuito fino a 10 GB. Pacchetti con OS su misura e sito web gratuito.',
     ],
     '/team': [
       'Il nostro team e i partner indipendenti | SocialNow',
@@ -171,7 +172,7 @@ const metadata = {
     ],
     '/prijzen': [
       'Prezzi OS: accesso gratuito e su misura | SocialNow',
-      'SocialNow OS è gratuito fino a 10 GB di spazio, poi 20 €/mese. Sistemi su misura e servizi dei partner su preventivo tramite SocialNow B.V.',
+      'SocialNow OS è gratuito fino a 10 GB di spazio. I token per lo Studio e i pacchetti con OS su misura e sito web gratuito sono mensili, tramite SocialNow B.V.',
     ],
     '/contact': [
       'Contatti per l’OS o un progetto su misura | SocialNow',
@@ -189,7 +190,7 @@ const metadata = {
     ],
     '/het-os': [
       'Sistema Operation & Management | SocialNow',
-      'Junte site, CRM, conteúdos e anúncios no SocialNow OS, com apoio pessoal. Gratuito até 10 GB, depois 20 €/mês. Sistemas à medida sob consulta.',
+      'Junte site, CRM, conteúdos e anúncios no SocialNow OS, com apoio pessoal. Gratuito até 10 GB. Pacotes de apoio com OS à medida e website gratuito.',
     ],
     '/team': [
       'A nossa equipa e os parceiros independentes | SocialNow',
@@ -201,7 +202,7 @@ const metadata = {
     ],
     '/prijzen': [
       'Preços do OS: acesso gratuito e à medida | SocialNow',
-      'O SocialNow OS é gratuito até 10 GB de armazenamento, depois 20 €/mês. Sistemas à medida e serviços dos parceiros sob orçamento da SocialNow B.V.',
+      'O SocialNow OS é gratuito até 10 GB de armazenamento. Os tokens do Studio e os pacotes com OS à medida e website gratuito são mensais, via SocialNow B.V.',
     ],
     '/contact': [
       'Contacto sobre o OS ou um projeto à medida | SocialNow',
@@ -219,7 +220,7 @@ const metadata = {
     ],
     '/het-os': [
       'System Operation & Management | SocialNow',
-      'Połącz stronę, CRM, treści i reklamy w SocialNow OS z osobistym wsparciem. Bezpłatnie do 10 GB pamięci, potem 20 €/miesiąc. System na miarę na zapytanie.',
+      'Połącz stronę, CRM, treści i reklamy w SocialNow OS z osobistym wsparciem. Bezpłatnie do 10 GB pamięci. Pakiety wsparcia z OS na miarę i darmową stroną.',
     ],
     '/team': [
       'Nasz zespół i niezależni partnerzy | SocialNow',
@@ -231,7 +232,7 @@ const metadata = {
     ],
     '/prijzen': [
       'Cennik OS: bezpłatny start i system na miarę | SocialNow',
-      'SocialNow OS jest bezpłatny do 10 GB pamięci, potem 20 €/miesiąc. Systemy na miarę i usługi partnerów wycenia SocialNow B.V. na zapytanie.',
+      'SocialNow OS jest bezpłatny do 10 GB pamięci. Tokeny do Studio i pakiety wsparcia z OS na miarę i darmową stroną są miesięczne, przez SocialNow B.V.',
     ],
     '/contact': [
       'Kontakt w sprawie OS lub projektu na miarę | SocialNow',
@@ -249,7 +250,7 @@ const metadata = {
     ],
     '/het-os': [
       'Operation & Management-system | SocialNow',
-      'Samla webbplats, CRM, innehåll och annonser i SocialNow OS med personlig hjälp. Gratis upp till 10 GB lagring, sedan 20 €/månad. Anpassade system på förfrågan.',
+      'Samla webbplats, CRM, innehåll och annonser i SocialNow OS med personlig hjälp. Gratis upp till 10 GB lagring. Hjälppaket med skräddarsytt OS och gratis webbplats.',
     ],
     '/team': [
       'Våra människor och självständiga partner | SocialNow',
@@ -261,7 +262,7 @@ const metadata = {
     ],
     '/prijzen': [
       'OS-priser: gratis start och anpassade system | SocialNow',
-      'SocialNow OS är gratis upp till 10 GB lagring, sedan 20 €/månad. Anpassade system och partnertjänster offereras av SocialNow B.V. på förfrågan.',
+      'SocialNow OS är gratis upp till 10 GB lagring. Tokens för Studio och hjälppaket med skräddarsytt OS och gratis webbplats är månadsvisa, via SocialNow B.V.',
     ],
     '/contact': [
       'Kontakt om OS eller ditt anpassade projekt | SocialNow',
@@ -279,7 +280,7 @@ const metadata = {
     ],
     '/het-os': [
       'Operation & Management-system | SocialNow',
-      'Saml hjemmeside, CRM, indhold og annoncer i SocialNow OS med personlig hjælp. Gratis op til 10 GB lagerplads, derefter 20 €/måned. Tilpassede systemer på forespørgsel.',
+      'Saml hjemmeside, CRM, indhold og annoncer i SocialNow OS med personlig hjælp. Gratis op til 10 GB lagerplads. Hjælpepakker med skræddersyet OS og gratis hjemmeside.',
     ],
     '/team': [
       'Vores mennesker og selvstændige partnere | SocialNow',
@@ -291,7 +292,7 @@ const metadata = {
     ],
     '/prijzen': [
       'OS-priser: gratis start og tilpassede systemer | SocialNow',
-      'SocialNow OS er gratis op til 10 GB lagerplads, derefter 20 €/måned. Tilpassede systemer og partnerydelser får du tilbud på gennem SocialNow B.V.',
+      'SocialNow OS er gratis op til 10 GB lagerplads. Tokens til Studio og hjælpepakker med skræddersyet OS og gratis hjemmeside er månedlige, via SocialNow B.V.',
     ],
     '/contact': [
       'Kontakt om OS eller dit tilpassede projekt | SocialNow',

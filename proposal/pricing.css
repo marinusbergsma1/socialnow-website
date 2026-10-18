@@ -533,3 +533,12 @@
 .sn-site .prijs-kaart { border-color: rgba(255, 255, 255, .1); }
 .sn-site .prijs-maatwerk { background: radial-gradient(90% 80% at 0% 0%, rgba(37, 211, 102, .07), transparent 60%), #000; border-color: rgba(255, 255, 255, .12); }
 .sn-site .prijs-maatwerk-punten li { background: #0b0f12; border-color: rgba(255, 255, 255, .1); }
+
+/* 18 oktober 2026 (Marinus): tokens per maand in dezelfde kaartstijl als de pakketten, drie naast elkaar; het OS op maat
+   is één regel met Plan een call in de pakketten. */
+.sn-site .prijs-raster-drie { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.sn-site .prijs-maatwerk-regel { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin-top: 20px; padding: 18px 22px; border: 1px solid var(--prijs-rand); border-radius: 16px; }
+.sn-site .prijs-maatwerk-regel p { margin: 0; max-width: 640px; font-size: 15px; line-height: 1.5; color: #d3d8dc; }
+@media (max-width: 860px) {
+  .sn-site .prijs-raster-drie { grid-template-columns: minmax(0, 1fr); }
+}

@@ -5,6 +5,7 @@ import { GRATIS_OS_URL } from "./os-entry";
 import { useLanguage } from "./i18n/context";
 import "./pricing.css";
 import { ProductOffer, ProductRoute } from "./ProductStart";
+import { PlanCallKnop } from "./PlanCall";
 
 // 23 september 2026 (Marinus): gratis starten is het grote verhaal, de prijzen staan klein en
 // helder eronder. Elk maandpakket heeft een custom OS; vanaf drie maanden hoort de complete
@@ -17,6 +18,10 @@ import { ProductOffer, ProductRoute } from "./ProductStart";
 // website met persoonlijke call voor systeem uitleg." Het bedrag van het OS op maat is één rustige regel; elk
 // maandpakket loopt minimaal drie maanden en bevat custom OS, complete rebranding, website en een uitlegcall. Het losse
 // websiteblok vervalt, want de website zit nu in elk pakket.
+// 18 oktober 2026 (Marinus): "Nee niet sterk, we hadden prijzen al mooi met écht de mensen en de hulp etc erbij." De pagina blijft
+// zoals hij was; alleen wat botst met zijn keuzes van die dag is aangepast. Geen "daarna €20 per maand" meer (wat er boven 10 GB
+// gebeurt, heeft hij nog niet besloten), de SEPA-machtiging bij aanmelding in plaats van "geen verplichting", het OS op maat zit
+// in elk pakket (geen los blok vanaf €10.000 meer), en tokens per maand als één sectie in dezelfde kaartstijl als de pakketten.
 const PROBEER_URL = GRATIS_OS_URL;
 
 type Lid = { naam: string; rol: string; foto: string };
@@ -27,7 +32,12 @@ export const TEAM: Record<string, Lid> = {
   nick: { naam: "Nick van Keulen", rol: "Head of Google Ads & Search", foto: "nick" },
   steef: { naam: "Steef Komen", rol: "Partner · Head of Finance & Data", foto: "steef" },
   sid: { naam: "Sid van Kalken", rol: "Head of Web Development & AI Payments · Attesso", foto: "sid" },
+  // De mensen achter content en de Studio, dezelfde als bij Content in OsPeople.tsx.
+  carmel: { naam: "Carmel Boon", rol: "Head of Video Production", foto: "/images/klein/Carmel-Boon-V2-96.webp" },
+  sam: { naam: "Sam van der Sluis", rol: "Lead Videographer", foto: "/images/klein/Sam-van-der-Sluis-96.webp" },
+  emma: { naam: "Emma Peperkamp", rol: "Lead Photographer", foto: "/images/klein/Emma-Peperkamp-V2-96.webp" },
 };
+const fotoVan = (foto: string) => (foto.startsWith("/") ? foto : `/images/prijzen/${foto}.webp`);
 
 type Pakket = {
   naam: string;
@@ -40,6 +50,7 @@ type Pakket = {
   kleur: string;
   actie: string;
   onderwerp: string;
+  href?: string;
   top?: boolean;
 };
 
@@ -118,15 +129,56 @@ const INBEGREPEN = [
   "Persoonlijke call met uitleg van je systeem",
 ];
 
-const MAATWERK = {
-  punten: [
-    { titel: "Je eigen OS rond je bedrijf", tekst: "Gebouwd rond hoe jouw bedrijf echt werkt, niet andersom." },
-    { titel: "Dashboard, CRM, Studio en website", tekst: "Elk onderdeel ingericht op je eigen processen en koppelingen." },
-    { titel: "Milo-agents op je eigen data", tekst: "AI die je verkoop, klanten en cijfers kent en meedenkt." },
-    { titel: "Developers en dataspecialisten", tekst: "Ons team en onze partners bouwen, koppelen en begeleiden." },
-  ],
-  team: ["marinus", "steef", "sid"],
-};
+// Tokens per maand voor de merkgetrainde Studio (Marinus, 18 oktober 2026). Tokens per pakket uit de OS-code
+// (api/_studio-tokens.js: één token is één eurocent rendertegoed); wat je ervoor krijgt uit api/_prijzen.js: een beeld met
+// Nano Banana Pro in 2K kost 28 tokens, een video van 8 seconden met Veo 3.1 Fast 160 tokens (naar beneden afgerond).
+const TOKENS: Pakket[] = [
+  {
+    naam: "1.000 tokens",
+    prijs: "€10",
+    per: "per maand, excl. btw",
+    belofte: "Tot 35 beelden met Nano Banana Pro.",
+    punten: [
+      { tekst: "Of 6 video's van 8 seconden met Veo 3.1 Fast" },
+      { tekst: "Rendertegoed in je merkgetrainde Studio", sterk: true },
+    ],
+    team: ["carmel", "sam", "emma"],
+    kleur: "var(--prijs-geel)",
+    actie: "Kies 1.000 tokens",
+    onderwerp: "Tokens 1.000 per maand",
+    href: GRATIS_OS_URL,
+  },
+  {
+    naam: "2.500 tokens",
+    prijs: "€25",
+    per: "per maand, excl. btw",
+    belofte: "Tot 89 beelden met Nano Banana Pro.",
+    punten: [
+      { tekst: "Of 15 video's van 8 seconden met Veo 3.1 Fast" },
+      { tekst: "Rendertegoed in je merkgetrainde Studio", sterk: true },
+    ],
+    team: ["carmel", "sam", "emma"],
+    kleur: "var(--prijs-roze)",
+    actie: "Kies 2.500 tokens",
+    onderwerp: "Tokens 2.500 per maand",
+    href: GRATIS_OS_URL,
+  },
+  {
+    naam: "5.000 tokens",
+    prijs: "€50",
+    per: "per maand, excl. btw",
+    belofte: "Tot 178 beelden met Nano Banana Pro.",
+    punten: [
+      { tekst: "Of 31 video's van 8 seconden met Veo 3.1 Fast" },
+      { tekst: "Rendertegoed in je merkgetrainde Studio", sterk: true },
+    ],
+    team: ["carmel", "sam", "emma"],
+    kleur: "var(--prijs-blauw)",
+    actie: "Kies 5.000 tokens",
+    onderwerp: "Tokens 5.000 per maand",
+    href: GRATIS_OS_URL,
+  },
+];
 
 const GRATIS = [
   { titel: "Een complete demowebsite", tekst: "Geen schets. Een volledige website in je merk, klaar om live te gaan." },
@@ -153,7 +205,7 @@ function Team({ ids, nieuw }: { ids: string[]; nieuw?: string }) {
       <summary>
         <span className="prijs-rondjes" aria-hidden="true">
           {leden.map((lid, i) => (
-            <img key={lid.foto} className={ids[i] === nieuw ? "is-nieuw" : undefined} src={`/images/prijzen/${lid.foto}.webp`} alt="" width="28" height="28" />
+            <img key={lid.foto} className={ids[i] === nieuw ? "is-nieuw" : undefined} src={fotoVan(lid.foto)} alt="" width="28" height="28" />
           ))}
         </span>
         <span className="prijs-namen" translate="no">{namen.join(" · ")}</span>
@@ -162,7 +214,7 @@ function Team({ ids, nieuw }: { ids: string[]; nieuw?: string }) {
       <ul className="prijs-leden">
         {leden.map((lid) => (
           <li key={lid.foto}>
-            <img src={`/images/prijzen/${lid.foto}.webp`} alt="" width="30" height="30" />
+            <img src={fotoVan(lid.foto)} alt="" width="30" height="30" />
             <span>
               <b translate="no">{lid.naam}</b>
               <small>{lid.rol}</small>
@@ -195,16 +247,22 @@ function Kaart({ pakket, breed = false }: { pakket: Pakket; breed?: boolean }) {
       </ul>
       <div className="prijs-voet">
         <Team ids={pakket.team} nieuw={pakket.nieuw} />
-        <Action to={`/contact?onderwerp=${encodeURIComponent(pakket.onderwerp)}`} secondary={!pakket.top}>
-          {pakket.actie}
-        </Action>
+        {pakket.href ? (
+          <Action href={pakket.href} secondary={!pakket.top}>
+            {pakket.actie}
+          </Action>
+        ) : (
+          <Action to={`/contact?onderwerp=${encodeURIComponent(pakket.onderwerp)}`} secondary={!pakket.top}>
+            {pakket.actie}
+          </Action>
+        )}
       </div>
     </article>
   );
 }
 
 export default function Pricing() {
-  const { t } = useLanguage();
+  useLanguage();
   return (
     <div className="prijs h-wrap">
       <section className="prijs-gratis" aria-labelledby="prijs-gratis-titel">
@@ -220,7 +278,7 @@ export default function Pricing() {
           <div className="prijs-gratis-tekst">
             {/* 29 september 2026 (Marinus): "Echt waar" vond hij stom; het blijft bij de feitelijke zin. */}
             <p className="prijs-echt">GRATIS tot 10 GB opslag</p>
-            <p className="prijs-lead">{t("Begin gratis met je website, content en AI in Studio. Tot 10 GB opslag is het OS gratis, daarna €20 per maand. Voor creatieve samenwerking, advies of een systeem op maat maak je persoonlijk kennis met ons team.")}</p>
+            <p className="prijs-lead">Begin gratis met je website, content en AI in Studio. Tot 10 GB opslag is het OS gratis. Voor creatieve samenwerking, advies of een systeem op maat maak je persoonlijk kennis met ons team.</p>
             <ProductRoute />
             <ProductOffer />
             <div className="prijs-knoppen">
@@ -235,13 +293,13 @@ export default function Pricing() {
                 Gratis demowebsite aanvragen
               </Action>
             </div>
-            <p className="prijs-klein">Geen creditcard. Geen verplichting. Geen addertje.</p>
+            <p className="prijs-klein">Geen creditcard. Je koppelt je rekening met een SEPA-machtiging; onder 10 GB schrijven we niets af. Maandelijks opzegbaar.</p>
           </div>
         </div>
 
         <section className="prijs-opslag" aria-labelledby="prijs-opslag-titel">
-          <h2 id="prijs-opslag-titel">Daarna €20 per maand</h2>
-          <p>Voor wie verdergaat boven 10 GB opslag. Wil je begeleiding en inrichting rond je bedrijf? Bespreek een persoonlijk systeem met ons team.</p>
+          <h2 id="prijs-opslag-titel">Meer dan 10 GB nodig?</h2>
+          <p>Het OS is gratis tot 10 GB opslag. Heb je meer nodig, neem dan contact met ons op. Wil je begeleiding en inrichting rond je bedrijf? Kies een pakket met ons team.</p>
           <Action to="/contact?onderwerp=Opslag%20boven%2010%20GB" secondary>Bespreek extra opslag</Action>
         </section>
         <div className="prijs-cadeaus">
@@ -276,31 +334,20 @@ export default function Pricing() {
         </div>
       </section>
 
-      <section className="prijs-maatwerk" aria-labelledby="prijs-maatwerk-titel">
-        <div className="prijs-maatwerk-kop">
-          <p className="h-eyebrow">Een persoonlijk systeem</p>
-          <h2 id="prijs-maatwerk-titel">
-            Jouw eigen OS,
-            <br />
-            <em>gebouwd rond je bedrijf.</em>
-          </h2>
-          <p className="prijs-maatwerk-bedrag">Vanaf €10.000 · prijs op aanvraag</p>
-          <p className="prijs-maatwerk-lead">Het gratis OS laat zien wat kan. Het OS op maat maakt het van jou: je eigen data, je eigen processen en je eigen agents, in één systeem.</p>
-          <p className="prijs-waarom"><b>Waarom het OS gratis kan.</b> We verdienen aan het OS op maat en aan de pakketten van ons team. Partners als Komen Consultancy helpen het OS schaalbaar te maken, en Odoo-implementatiepartners brengen het naar hun klanten.</p>
-          <div className="prijs-knoppen">
-            <Action to={`/contact?onderwerp=${encodeURIComponent("OS op maat")}`}>Bespreek een persoonlijk systeem</Action>
+      <section id="tokens" className="prijs-pakketten prijs-tokens" aria-labelledby="prijs-tokens-titel">
+        <div className="prijs-pakketten-kop">
+          <div>
+            <p className="h-eyebrow">Tokens · per maand</p>
+            <h2 id="prijs-tokens-titel">Meer maken in je Studio</h2>
           </div>
+          <p>
+            Tokens zijn je rendertegoed voor beeld, video en premium modellen in je merkgetrainde Studio. Je ziet de prijs per render in de Studio voordat je rendert.
+          </p>
         </div>
-        <ul className="prijs-maatwerk-punten">
-          {MAATWERK.punten.map((punt) => (
-            <li key={punt.titel}>
-              <b>{punt.titel}</b>
-              <span>{punt.tekst}</span>
-            </li>
+        <div className="prijs-raster prijs-raster-drie">
+          {TOKENS.map((pakket) => (
+            <Kaart key={pakket.naam} pakket={pakket} />
           ))}
-        </ul>
-        <div className="prijs-maatwerk-team">
-          <Team ids={MAATWERK.team} />
         </div>
       </section>
 
@@ -319,6 +366,11 @@ export default function Pricing() {
             <li key={item}>{item}</li>
           ))}
         </ul>
+        {/* 18 oktober 2026: het OS op maat zit in elk pakket; het losse blok vanaf €10.000 is één regel met Plan een call geworden. */}
+        <div className="prijs-maatwerk-regel">
+          <p>Je custom OS zit in elk pakket: een veilig persoonlijk management- en operationsysteem, gebouwd rond je bedrijf.</p>
+          <PlanCallKnop className="sn-pill sn-btn3d h-button h-button-secondary" label="Plan een call" />
+        </div>
         <div className="prijs-raster">
           {MAAND.map((pakket) => (
             <Kaart key={pakket.naam} pakket={pakket} />
