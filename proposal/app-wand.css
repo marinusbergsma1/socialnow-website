@@ -26,7 +26,8 @@
 .sn-site .sn-aw-logo img { width: auto; max-width: 88%; height: 36px; object-fit: contain; transition: transform .25s; }
 .sn-site .sn-aw-tegel:hover .sn-aw-logo img { transform: scale(1.06); }
 /* Zwart merklogo: de witte versie op de donkere achtergrond. */
-.sn-site .sn-aw-tegel.is-donker .sn-aw-logo img { filter: brightness(0) invert(1); }
+/* 19 oktober 2026 (Marinus): "Alles moet de svg hebben met originele kleuren. Verder graag op een wit blok." Dus geen
+   witfilter meer: elk logo in eigen kleuren op een wit blok. */
 /* Zachte tint van de merkkleur, niet meer dan een gloed linksboven. */
 .sn-site .sn-aw-tegel[style] { background: radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--merk) 13%, transparent), transparent 70%), #07090b; }
 .sn-site .sn-aw-tegel[style]:hover { background: radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--merk) 20%, transparent), transparent 75%), #0c1014; }
@@ -96,3 +97,15 @@
 .sn-site .sn-aw-tegel:is([data-app="openai"], [data-app="codex"]) .sn-aw-logo img { height: 64px; max-width: none; margin: -14px 0; }
 @media (max-width: 650px) { .sn-site .sn-aw-tegel:is([data-app="openai"], [data-app="codex"]) .sn-aw-logo img { height: 54px; margin: -12px 0; } }
 :root .sn-site .sn-aw .sn-aw-let-uitleg { display: flex; align-items: center; gap: 8px; margin: 14px 0 0; font-size: 13px !important; line-height: 1.45; color: #8f9ba4; }
+
+/* Wit blok achter elk logo (19 oktober 2026). */
+.sn-site .sn-aw-logo { height: 66px; padding: 10px 12px; box-sizing: border-box; border-radius: 12px; background: #fff; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
+.sn-site .sn-aw-logo img { max-width: 100%; height: 40px; }
+.sn-site .sn-aw-logo b { color: #0b0f12; }
+@media (max-width: 760px) {
+  .sn-site .sn-aw-logo { height: 54px; padding: 8px; border-radius: 10px; }
+  .sn-site .sn-aw-logo img { height: 32px; }
+}
+/* Het i-rondje valt over de hoek van het witte blok: eigen donkere achtergrond, zodat het leesbaar blijft. */
+.sn-site .sn-aw-let { top: 5px; right: 5px; z-index: 1; }
+.sn-site .sn-aw-let > i { background: #07090b; }
