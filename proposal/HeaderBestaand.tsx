@@ -76,7 +76,9 @@ const ONDERDELEN: Record<string, string[]> = {
 // management systeem. Plug and play eigen keuzes etc".
 // En: "In die titel al dus verder nog iets simpeler". De titel zegt nu zelf "Echt 100% je eigen systeem."; de getypte regel
 // eronder is kort: drie woordgroepen.
-const ZINNEN = ["Persoonlijk ingericht.", "Plug and play.", "Met jouw keuzes."];
+// 19 oktober 2026 (Marinus): "Ik wil iets meer de focus op dat wij écht werk doen en software gratis is. Meer inzicht in je
+// bedrijf. Mag blijven". Titel terug; de getypte regel zegt nu dat het systeem van jou is, de zin eronder gratis en echt werk.
+const ZINNEN = ["Echt 100% je eigen systeem.", "Persoonlijk ingericht.", "Plug and play."];
 const TIK = 55, WEG = 28, STAAN = 3000;
 
 function Typer() {
@@ -162,7 +164,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <div className="visual milos bs-milos">{MILOS.map(m => <figure key={m.rol}><MiloMotion role={m.rol} name={`Milo ${m.naam}`} maat={128} /><figcaption>{m.naam}</figcaption></figure>)}</div>
                 {/* Marinus, 18 oktober 2026: "PAKKETTEN HOEVEN HIER NIET EN SOORTEN DIENSTEN OOK NIET ZODAT ALLES MOOI IN 1 1920X1080 BLIJFT."
                     Dus geen tokenpakketten meer in de header; die kies je na het aanmaken van je account. */}
-                <p className="bs-uitleg bs-uitleg-kort"><strong>Gratis tot 10 GB aan opslag.</strong> Bij je aanmelding koppel je alvast je rekening.</p>
+                <p className="bs-uitleg bs-uitleg-kort"><strong>Gratis tot 10 GB aan opslag.</strong></p>
                 <div className="action os-account-actions">
                   <a className="pill" href={`${GRATIS_OS_URL}?pakket=gratis`} onClick={() => meet("gratis_os")}><span translate="no">Start for free</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
                   <a className="pill os-login-secondary" href={GRATIS_OS_URL} onClick={() => meet("gratis_os")}><span>Log in</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
@@ -173,8 +175,9 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <div className="logo-row"><ConnectLogo /></div>
                 <div className="visual faces">{faces.map(p => <span key={p.name} title={p.name}><img {...klein(p.image, 52, [96, 160], undefined, "20261015-team")} alt={p.name} width="52" height="52" /></span>)}<Link className="more" to="/team" aria-label="Bekijk het hele team"><span className="desktop-count">+{people.length - faces.length}</span><span className="mobile-count">+{people.length - 7}</span></Link></div>
                 {/* Zelfde reden als hierboven: geen soorten diensten met tabbladen, één zin en één knop. */}
-                <p className="bs-kop-hulp"><strong>Echte experts in je OS.</strong> <span>Of voor een losse opdracht.</span></p>
-                <p className="bs-uitleg bs-uitleg-connect">Zij werken mee in je eigen OS, per maand of per opdracht.</p>
+                {/* 19 oktober 2026 (Marinus): "Meer focus op dat wij écht werk voor je doen, meer leads betere marketing etc. finance." */}
+                <p className="bs-kop-hulp"><strong>Meer leads. Betere marketing.</strong> <span>Finance op orde.</span></p>
+                <p className="bs-uitleg bs-uitleg-connect">Echte experts doen het werk in je eigen OS, per maand of per opdracht.</p>
                 <div className="action">
                   <a className="pill" href="/connect/" onClick={() => meet("connect")}><span>Bekijk Connect</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
                   <Link className="pill" to="/team"><span>Bekijk het hele team</span><span className="arrow"><ArrowUpRight size={17} /></span></Link>
@@ -187,8 +190,8 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
           <div className="wrap">
             <div className="section-head video-intro">
               <div className="video-title">
-                <h1>Echt 100% je eigen systeem. <Typer /></h1>
-                <p className="pay-line">Wij maken je data inzichtelijker én veiliger, met echte experts en AI.</p>
+                <h1>Meer inzicht in je bedrijf. <Typer /></h1>
+                <p className="pay-line">De software is gratis. Onze experts doen het echte werk.</p>
                 <ul className="bs-zeker">
                   {/* 18 oktober 2026 (Marinus): "Die punten eronderaan Gratis website en rebranding, veilig. Eigen beheer en keuzes." */}
                   <li><ShieldCheck size={15} aria-hidden="true" /><b>Gratis website en rebranding</b></li>
