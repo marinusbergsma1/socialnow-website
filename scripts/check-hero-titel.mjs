@@ -12,7 +12,8 @@ const TALEN = ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"];
 const fouten = [];
 const eis = (ok, tekst) => { console.log(`${ok ? "GROEN" : "ROOD "}  ${tekst}`); if (!ok) fouten.push(tekst); };
 const kop = fs.readFileSync("proposal/HeaderBestaand.tsx", "utf8");
-eis(kop.includes(`<h1>${H1} <Typer /></h1>`), `h1 is "${H1}" met de getypte regel`);
+// Sinds PR #132 heeft de h1 een style (--tekens, maximaal twee regels); de tekst en de typregel blijven gelijk.
+eis(new RegExp(`<h1( [^>]*)?>${H1.replace(/[.]/g, "\\.")} <Typer /></h1>`).test(kop), `h1 is "${H1}" met de getypte regel`);
 eis(kop.includes(`const ZINNEN = ${JSON.stringify(TYPER).replace(/,/g, ", ")};`), `getypte regel wisselt tussen ${TYPER.join(" ")}`);
 eis(!kop.includes("Meer inzicht in je bedrijf."), "oude titel staat niet meer in de hero");
 for (const t of TALEN) {
