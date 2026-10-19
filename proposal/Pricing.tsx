@@ -63,7 +63,7 @@ const OS: Pakket[] = [
     punten: [
       { tekst: "Nodig 2 mensen uit", sterk: true },
       { tekst: "10 GB opslag", sterk: true },
-      { tekst: "Gratis demowebsite", sterk: true },
+      { tekst: "Gratis website en rebranding", sterk: true },
       { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },
       { tekst: "Dashboard, CRM en AI agents" },
       { tekst: "Agentic Payments", uit: true },
@@ -87,7 +87,7 @@ const OS: Pakket[] = [
     punten: [
       { tekst: "2 tot 5 medewerkers", sterk: true },
       { tekst: "50 GB opslag", sterk: true },
-      { tekst: "Gratis demowebsite" },
+      { tekst: "Gratis website en rebranding", sterk: true },
       { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },
       { tekst: "Dashboard, CRM en AI agents" },
       { tekst: "Agentic Payments", sterk: true },
@@ -110,7 +110,7 @@ const OS: Pakket[] = [
     punten: [
       { tekst: "5 tot 10 medewerkers", sterk: true },
       { tekst: "Onbeperkte opslag", sterk: true },
-      { tekst: "Gratis website", sterk: true },
+      { tekst: "Gratis website en rebranding", sterk: true },
       { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },
       { tekst: "Dashboard, CRM en AI agents" },
       { tekst: "Agentic Payments" },
@@ -129,7 +129,7 @@ const OS: Pakket[] = [
 // Wat al in het gratis OS zit, groot uitgelicht boven de kaarten (Marinus: "Allemaal al vanaf het gratis instapmodel").
 // 19 oktober 2026 (Marinus): "Gratis website demo moet er ook overal even bij."
 const GRATIS_USPS = [
-  { titel: "Gratis demowebsite", tekst: "Een complete website in je merk, klaar om live te gaan." },
+  { titel: "Gratis website en rebranding", tekst: "Een complete website in je merk, klaar om live te gaan." },
   { titel: "Gratis Studio", tekst: "Posts, advertenties en video in je eigen merk." },
   { titel: "5.000 stockfoto's", tekst: "Eigen beelden, gratis te gebruiken." },
   { titel: "Social media management", tekst: "Plannen en posten op al je kanalen." },
@@ -202,6 +202,8 @@ const UNIEK = [
 
 // Connect-pakketten: minimaal drie maanden, en in elk pakket website, custom OS, branding, content en advertenties gemaakt.
 // HeaderBestaand.tsx toont dezelfde vier in de Custom OS-tab.
+// 19 oktober 2026, avond (Marinus): "Gratis website en rebranding moet bij elk pakket staan." Dus die regel bovenaan bij alle
+// zeven pakketten (OS en Connect), sterk; bij Connect staat het custom OS er los onder.
 export const CONNECT: Pakket[] = [
   {
     id: "start",
@@ -210,7 +212,8 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Alles om goed zichtbaar te worden.",
     punten: [
-      { tekst: "Website, custom OS en branding" },
+      { tekst: "Gratis website en rebranding", sterk: true },
+      { tekst: "Custom OS rond je bedrijf" },
       { tekst: "Content en ad-creatie in je merk" },
       { tekst: "Vast aanspreekpunt uit ons team" },
       { tekst: "Meta Ads en leads in je CRM", uit: true },
@@ -232,7 +235,8 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Bereik de juiste mensen op Instagram en Facebook.",
     punten: [
-      { tekst: "Website, custom OS en branding" },
+      { tekst: "Gratis website en rebranding", sterk: true },
+      { tekst: "Custom OS rond je bedrijf" },
       { tekst: "Content en ad-creatie in je merk" },
       { tekst: "Vast aanspreekpunt uit ons team" },
       { tekst: "Meta Ads en leads in je CRM", sterk: true },
@@ -256,7 +260,8 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Gevonden worden op het moment dat ze zoeken.",
     punten: [
-      { tekst: "Website, custom OS en branding" },
+      { tekst: "Gratis website en rebranding", sterk: true },
+      { tekst: "Custom OS rond je bedrijf" },
       { tekst: "Content en ad-creatie in je merk" },
       { tekst: "Vast aanspreekpunt uit ons team" },
       { tekst: "Meta Ads en leads in je CRM" },
@@ -278,7 +283,8 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Marketing en financiën, volledig geregeld.",
     punten: [
-      { tekst: "Website, custom OS en branding" },
+      { tekst: "Gratis website en rebranding", sterk: true },
+      { tekst: "Custom OS rond je bedrijf" },
       { tekst: "Content en ad-creatie in je merk" },
       { tekst: "Vast aanspreekpunt uit ons team" },
       { tekst: "Meta Ads en leads in je CRM" },
