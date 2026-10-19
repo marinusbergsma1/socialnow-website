@@ -67,3 +67,7 @@
 .sn-site .sn-bestaand .bs-punten+.action{margin-top:18px}
 /* 18 oktober 2026 (Marinus): "zin onder die titel kleiner zodat het niet 2 zinnen zijn". Op desktop één regel. */
 @media(min-width:1151px){.sn-site .sn-choice.sn-bestaand .showcase .video-intro .pay-line{font-size:clamp(14px,1.1vw,22px);text-wrap:balance}}
+
+/* Titel maximaal twee regels (19 oktober 2026): de grootte volgt de breedte van de titelkolom en de lengte van de titel. */
+html:root .sn-site .sn-bestaand .video-title{container-type:inline-size}
+html:root .sn-site .sn-choice.sn-bestaand .showcase .video-title h1{max-width:none!important;text-wrap:balance;font-size:min(64px,calc(100cqi * 3.2 / var(--tekens,30)))!important}

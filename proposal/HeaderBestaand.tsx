@@ -117,7 +117,7 @@ function pijltjes(e: React.KeyboardEvent<HTMLElement>, ids: string[], nu: string
 }
 
 export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void }) {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [modus, setModus] = useState<"os" | "custom">("os");
   const [custom, setCustom] = useState(CUSTOM[0].id);
   return (
@@ -189,7 +189,9 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
           <div className="wrap">
             <div className="section-head video-intro">
               <div className="video-title">
-                <h1>Haal meer uit je bedrijf. <Typer /></h1>
+                {/* 19 oktober 2026 (Marinus): "Graag nooit 3 regels onder elkaar. Maximaal 2." De lettergrootte schaalt met de kolom en
+                    met de lengte van de titel in de gekozen taal (--tekens), zodat hij in elke taal op twee regels past. */}
+                <h1 style={{ "--tekens": t("Haal meer uit je bedrijf.").length } as React.CSSProperties}>Haal meer uit je bedrijf. <Typer /></h1>
                 <p className="pay-line">De software is gratis. Onze experts doen het echte werk.</p>
                 <ul className="bs-zeker">
                   {/* 18 oktober 2026 (Marinus): "Die punten eronderaan Gratis website en rebranding, veilig. Eigen beheer en keuzes." */}
