@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Search } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Search } from "lucide-react";
 import { people, expertGroepen } from "./content";
 import { klein } from "./licht";
 import { mailLink } from "./aanvragen";
@@ -20,23 +20,23 @@ const VERSIE = "20261015-team";
 // profielen. Wie in een vakgebied zit komt uit expertGroepen; zonder groep valt iemand alleen onder Alles.
 const ALLES = "Alles";
 // 19 oktober 2026 (Marinus): "dat onderdeel met mensen altijd met een witte achtergrond." Zelfde ontwerp, op wit.
+// Later die avond: "Connect gedeelte moet blauw zijn en expertlaag 1 laag die je kan sliden en logo niet 2x staat daarboven
+// al." Dus Connect-blauw in plaats van groen, alle experts in één rij die schuift (met pijlen voor de muis), en geen eigen
+// woordmerk meer boven de kop: de Connect-band erboven toont het logo al.
 
 export default function ConnectExperts() {
   const { t } = useLanguage();
   const [vak, zetVak] = useState(ALLES);
   const [zoek, zetZoek] = useState("");
-  const [allesTonen, zetAllesTonen] = useState(false);
+  const rij = useRef<HTMLUListElement>(null);
+  const schuif = (richting: number) => rij.current?.scrollBy({ left: richting * rij.current.clientWidth * 0.8, behavior: "smooth" });
   const groepVan = (naam: string) => expertGroepen.find((g) => g.members.includes(naam))?.name ?? "";
   const q = zoek.trim().toLowerCase();
   const lijst = people.filter((p) => (vak === ALLES || groepVan(p.name) === vak)
     && (!q || `${p.name} ${p.role} ${t(groepVan(p.name))}`.toLowerCase().includes(q)));
-  // Eerst acht gezichten; zoeken, een vakgebied of de knop toont alles wat past.
-  const ingekort = vak === ALLES && !q && !allesTonen && lijst.length > 8;
-  const zichtbaar = ingekort ? lijst.slice(0, 8) : lijst;
   return <div className="cx-connect">
     <section id="team" className="sn-cx h-wrap" aria-labelledby="team-titel">
       <div className="cx-boven">
-        <p className="cx-merk" translate="no">SocialNow <b>Connect</b></p>
         <h2 id="team-titel">Vind je expert.</h2>
         <p className="cx-zin"><strong>{people.length}</strong> experts in <strong>{expertGroepen.length}</strong> vakgebieden. Zoek, vergelijk en kies zelf.</p>
         <label className="cx-zoek">
@@ -49,8 +49,12 @@ export default function ConnectExperts() {
           ))}
         </div>
       </div>
-      <ul className="cx-raster">
-        {zichtbaar.map((persoon) => {
+      <div className="cx-pijlen">
+        <button type="button" aria-label="Vorige experts" onClick={() => schuif(-1)}><ArrowLeft size={18} aria-hidden="true" /></button>
+        <button type="button" aria-label="Volgende experts" onClick={() => schuif(1)}><ArrowRight size={18} aria-hidden="true" /></button>
+      </div>
+      <ul className="cx-raster" ref={rij}>
+        {lijst.map((persoon) => {
           const profiel = persoon.linkedin ?? persoon.instagram;
           return <li key={persoon.name}>
             <img {...klein(persoon.image, "260px", [160, 320], undefined, VERSIE)} alt="" width="260" height="260" loading="lazy" className={persoon.name === "Jelle Ursem" ? "is-jelle" : undefined} />
@@ -65,9 +69,6 @@ export default function ConnectExperts() {
         })}
       </ul>
       {lijst.length === 0 && <p className="cx-leeg">Geen expert gevonden. Probeer een ander woord.</p>}
-      {ingekort && <button type="button" className="sn-pill sn-btn3d h-button h-button-secondary cx-wit-knop cx-meer" onClick={() => zetAllesTonen(true)}>
-        <span>Toon alle experts</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
-      </button>}
       <div className="cx-onder">
         <p>Ben je expert met een eigen bedrijf? Meld je aan bij Connect.</p>
         <a className="sn-pill sn-btn3d h-button h-button-secondary cx-wit-knop" href={mailLink(t("Aanmelden als expert bij Connect"))}>
