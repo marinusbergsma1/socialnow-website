@@ -283,7 +283,6 @@
 :root .sn-site .rx-more-people b{font-size:18px;line-height:1;letter-spacing:0;font-weight:700}
 :root .sn-site .rx-people a.rx-more-people:is(:hover,:focus-visible){background:#20afde;border-color:#20afde;color:#041d27;transform:none}
 @media(max-width:760px){:root .sn-site .rx-more-people b{font-size:15px}}
-:root .sn-site .rx-people img[alt="Hossam Hassan"]{object-position:center top;transform:scale(1.55);transform-origin:65% top}
 :root .sn-site .rx-partner .rx-built a[href="https://indexworld.net"]{height:48px;padding:10px 16px}
 :root .sn-site .rx-partner .rx-built a[href="https://indexworld.net"] img{width:146px;height:28px}
 :root .sn-site .rx-3 .rx-product>.rx-people{justify-content:flex-start}
