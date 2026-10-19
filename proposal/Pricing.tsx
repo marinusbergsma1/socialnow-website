@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { Action } from "./ui";
 import { GRATIS_OS_URL } from "./os-entry";
@@ -31,7 +31,7 @@ type Pakket = {
   naam: string;
   prijs: string;
   per: string;
-  // Met een jaarabonnement bespaar je 25% op de maandprijs (Marinus, 19 oktober 2026); alleen voor het OS.
+  // Met een jaarabonnement bespaar je 25%; de maandprijs zie je pas bij betaling in het OS (Marinus, 19 oktober 2026).
   maand?: { prijs: string; per: string };
   tokens?: { aantal: string; waarde: string; goedVoor: string };
   belofte: string;
@@ -82,7 +82,6 @@ const OS: Pakket[] = [
     naam: "Business",
     prijs: "€35",
     per: "per maand, jaarlijks",
-    maand: { prijs: "€46,67", per: "per maand, maandelijks opzegbaar" },
     tokens: { aantal: "1.500 tokens per maand", waarde: "t.w.v. €15", goedVoor: "Ruim 50 beelden of 9 video's van 8 seconden" },
     belofte: "Voor een klein team dat samen werkt.",
     punten: [
@@ -99,14 +98,13 @@ const OS: Pakket[] = [
     ],
     kleur: "var(--prijs-blauw)",
     actie: "Kies Business",
-    href: `${GRATIS_OS_URL}?pakket=business`,
+    href: `${GRATIS_OS_URL}?pakket=business&periode=jaar`,
   },
   {
     id: "enterprise",
     naam: "Enterprise",
     prijs: "€65",
     per: "per maand, jaarlijks",
-    maand: { prijs: "€86,67", per: "per maand, maandelijks opzegbaar" },
     tokens: { aantal: "4.000 tokens per maand", waarde: "t.w.v. €40", goedVoor: "Ruim 140 beelden of 25 video's van 8 seconden" },
     belofte: "Voor het hele bedrijf, zonder grenzen aan je opslag.",
     punten: [
@@ -123,7 +121,7 @@ const OS: Pakket[] = [
     ],
     kleur: "var(--prijs-geel)",
     actie: "Kies Enterprise",
-    href: `${GRATIS_OS_URL}?pakket=enterprise`,
+    href: `${GRATIS_OS_URL}?pakket=enterprise&periode=jaar`,
     vlag: "Meeste waarde",
   },
 ];
@@ -395,7 +393,7 @@ function Rij({ id, label, titel, tekst, pakketten, children, maandelijks = false
 // dus de kop is dan de h1 van de pagina.
 export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
   useLanguage();
-  const [maandelijks, zetMaandelijks] = useState(false);
+  const maandelijks = false;
   const Kop = bovenaan ? "h1" : "h2";
   return (
     <div id="prijzen" className={`prijs prijs-diensten h-wrap${bovenaan ? " is-bovenaan" : ""}`}>
@@ -419,12 +417,8 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
         pakketten={OS}
         maandelijks={maandelijks}
       >
-        <div className="prijs-periode" role="group" aria-label="Betaalperiode">
-          {/* 19 oktober 2026 (Marinus): "Benoem bespaar 25% extra als je een abonnement hebt per jaar." Daarna "Maak er maar 25% van
-              dan.": de maandprijzen zijn €46,67 en €86,67, zodat €35 en €65 per jaar echt 25% schelen. */}
-          <button type="button" aria-pressed={!maandelijks} onClick={() => zetMaandelijks(false)}>Jaarlijks <span className="prijs-bespaar">Bespaar 25%</span></button>
-          <button type="button" aria-pressed={maandelijks} onClick={() => zetMaandelijks(true)}>Maandelijks</button>
-        </div>
+        {/* 19 oktober 2026 (Marinus): "Ik wil dat je die duurdere prijzen pas ziet bij betaling." Geen schakelaar meer; de maandprijzen
+            (€46,67 en €86,67) staan alleen in de betaalstap van het OS. */}
         <div className="prijs-usps">
           <p className="prijs-usps-label">Al in je gratis OS</p>
           <ul>

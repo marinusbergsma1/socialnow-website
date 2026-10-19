@@ -75,7 +75,7 @@ try {
   // 19 oktober 2026 (Marinus): Team heet Business, Business heet Enterprise met onbeperkte opslag; USP's van het gratis OS;
   // Connect per periode van 3 maanden, vanaf Meta 1 maand gratis bij geen winst en minimaal €1.000 mediabudget; team per vakgebied.
   for (const zin of ["Gratis Studio", "Studio, 5.000 stockfoto&#x27;s, social media en boekhouding", "Social media management", "Boekhoudpakket", "Geen minimum mediabudget",
-    "Kies Enterprise", "Onbeperkte opslag", "Complete branding: logo, kleuren en stijl", "Google Ads: Search, Shopping en Performance Max", "Gratis demowebsite", "Gratis website", "Jaarlijks", "Maandelijks", "Altijd 3 maanden", "Geen winst? 1 maand gratis", "Mediabudget vanaf €1.000", "Hulp binnen Odoo: inrichting en vragen", "Vast aanspreekpunt uit ons team",
+    "Kies Enterprise", "Onbeperkte opslag", "Complete branding: logo, kleuren en stijl", "Google Ads: Search, Shopping en Performance Max", "Gratis demowebsite", "Gratis website", "Altijd 3 maanden", "Geen winst? 1 maand gratis", "Mediabudget vanaf €1.000", "Hulp binnen Odoo: inrichting en vragen", "Vast aanspreekpunt uit ons team",
     "Nodig 2 mensen uit", "2 tot 5 medewerkers", "5 tot 10 medewerkers", "1.500 tokens per maand", "4.000 tokens per maand",
     "Custom OS ingericht rond je bedrijf", "Ad-creatie: beeld en video voor je advertenties", "€2.000 tot €5.000", "vanaf €10.000"])
     eis(diensten.includes(zin), `/diensten: '${zin}' ontbreekt`);
@@ -139,6 +139,9 @@ const connectPagina = lees("public/connect/index.html");
 eis(!/workers\.dev/.test(connectPagina) && /Coming <span>November 15th\.<\/span>/.test(connectPagina), "/connect/: nog de pilot of geen Coming November 15th");
 eis(!/workers\.dev/.test(lees("proposal/ConnectExperts.tsx")) && !/href="\/connect\/">\s*<span className="cx-lang">Meld je aan/.test(lees("proposal/ConnectExperts.tsx")), "Connect-sectie: aanmelden gaat nog naar de pilot");
 eis(lees("proposal/ConnectExperts.tsx").includes("cx-binnenkort"), "Connect-sectie: Coming November 15th ontbreekt");
+
+// 19 oktober 2026 (Marinus): "Ik wil dat je die duurdere prijzen pas ziet bij betaling."
+eis(!/46,67|86,67|43,75|81,25/.test(lees("proposal/Pricing.tsx").replace(/\/\/.*|\{\/\*[\s\S]*?\*\/\}/g, "")) && !lees("proposal/Pricing.tsx").includes("prijs-periode\""), "/diensten: maandprijzen of schakelaar nog zichtbaar");
 
 // Kleur: diepzwart zoals de homepage
 const prijsCss = lees("proposal/pricing.css");
