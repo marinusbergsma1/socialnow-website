@@ -400,11 +400,11 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
       <div className="prijs-diensten-kop">
         <p className="h-eyebrow prijs-groen-tekst">Diensten en prijzen</p>
         {/* 19 oktober 2026 (Marinus): "Software, studio, socialmedia management, boekhouding en Ai agents gratis. Dat is wel belangrijk
-            ipv alleen software. Bij ons betaal je voor winst en expertise" */}
+            ipv alleen software. Bij ons betaal je voor winst en expertise". Daarna: "Je betaalt voor onze expertise in jouw winstgevend maken." */}
         <Kop>
           Software, Studio, social media, boekhouding en AI agents gratis.
           <br />
-          <em>Je betaalt voor winst en expertise.</em>
+          <em>Je betaalt voor onze expertise om jou winstgevend te maken.</em>
         </Kop>
         <p>Alle bedragen zijn exclusief btw.</p>
       </div>
