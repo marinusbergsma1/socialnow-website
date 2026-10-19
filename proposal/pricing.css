@@ -607,19 +607,9 @@
 .sn-site .prijs-diensten.is-bovenaan { margin-top: 0; padding-top: 85px; }
 :root .sn-site .prijs-diensten.is-bovenaan .prijs-diensten-kop h1 { margin-top: 18px; font-size: clamp(34px, 4vw, 56px) !important; line-height: 1.04; }
 .sn-site .prijs-diensten-kop h1 em { font-style: normal; color: var(--prijs-groen); }
-.sn-site .h-dienst-strook-sectie { margin-top: 88px; }
-.sn-site .h-dienst-strook-kop h2 { margin-top: 12px; }
-.sn-site .h-dienst-strook { list-style: none; margin: 24px 0 0; padding: 0 0 12px; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(280px, 340px); gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; }
-.sn-site .h-dienst-strook > li { scroll-snap-align: start; display: flex; flex-direction: column; gap: 10px; padding: 18px; border: 1px solid rgba(255, 255, 255, .1); border-radius: 16px; background: #0b0f12; scroll-margin-top: 96px; }
-.sn-site .h-dienst-strook h3 { margin: 0; font-size: 17px; }
-.sn-site .h-dienst-strook p { margin: 0; flex: 1; font-size: 13.5px; line-height: 1.5; color: #99a2ab; }
 @media (max-width: 640px) {
   .sn-site .prijs-diensten.is-bovenaan { padding-top: 55px; }
-  .sn-site .h-dienst-strook { grid-auto-columns: 78%; }
 }
-.sn-site .h-dienst-strook h3 { display: flex; align-items: center; gap: 9px; }
-.sn-site .h-dienst-strook h3::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-.sn-site .h-dienst-items span + span::before { content: " · "; }
 
 /* 19 oktober 2026 (Marinus): de USP's van het gratis OS uitgelicht, wat ons uniek maakt, en de voorwaarden van de Connect-pakketten. */
 .sn-site .prijs-usps { margin-top: 24px; padding: 18px; border: 1px solid #25d36652; border-radius: 18px; background: radial-gradient(600px 200px at 0% 0%, #25d36614, transparent 70%), #050806; }
@@ -638,13 +628,6 @@
 @media (max-width: 1000px) { .sn-site .prijs-usps ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 760px) { .sn-site .prijs-uniek, .sn-site .prijs-voorwaarden { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 420px) { .sn-site .prijs-usps ul { grid-template-columns: minmax(0, 1fr); } }
-.sn-site .h-dienst-strook .h-dienst-intro { flex: none; color: #c9d0d6; }
-.sn-site .h-dienst-mensen { list-style: none; margin: 4px 0; padding: 10px 0; display: grid; gap: 8px; border-block: 1px solid rgba(255, 255, 255, .08); }
-.sn-site .h-dienst-mensen li { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.sn-site .h-dienst-mensen img { flex: none; width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
-.sn-site .h-dienst-mensen span { display: grid; min-width: 0; }
-.sn-site .h-dienst-mensen b { font-size: 14px; color: #fff; }
-.sn-site .h-dienst-mensen i { font-style: normal; font-size: 12px; line-height: 1.35; color: #8f98a1; }
 .sn-site .prijs-periode { display: inline-flex; gap: 4px; margin-top: 20px; padding: 4px; border: 1px solid var(--prijs-rand); border-radius: 999px; background: #050806; }
 .sn-site .prijs-periode button { padding: 8px 16px; border: 0; border-radius: 999px; background: transparent; color: #a8b8af; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
 .sn-site .prijs-periode button[aria-pressed=true] { background: var(--prijs-groen); color: #fff; }
@@ -653,10 +636,25 @@
 @media (max-width: 1100px) { .sn-site .prijs-usps ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 760px) { .sn-site .prijs-usps ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 420px) { .sn-site .prijs-usps ul { grid-template-columns: minmax(0, 1fr); } }
-.sn-site .h-dienst-strook p.h-dienst-items { display: block !important; }
-.sn-site .h-dienst-strook p.h-dienst-items span { display: inline !important; }
 /* Vaste rijen: niet inbegrepen staat grijs met een streepje op dezelfde plek. */
 .sn-site .prijs-punten li.is-uit { color: #5d666e; }
 .sn-site .prijs-punten li.is-uit::before { border-color: #39424a; }
 .sn-site .prijs-punten li.is-uit::after { left: 3.5px; top: 9px; width: 6px; height: 0; border-width: 0 0 1.5px 0; border-color: #4b545c; transform: none; }
 .sn-site .prijs-diensten .prijs-belofte { min-height: 2.9em; }
+.sn-site .prijs-punten li.prijs-groep { padding: 6px 0 0; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8f98a1; }
+.sn-site .prijs-punten li.prijs-groep:first-child { padding-top: 0; }
+.sn-site .prijs-punten li.prijs-groep::before, .sn-site .prijs-punten li.prijs-groep::after { content: none; }
+
+.sn-site .h-dienst-ankers { margin-top: 88px; }
+.sn-site .h-dienst-ankers > span { display: block; scroll-margin-top: 96px; }
+.sn-site .prijs-los { margin-top: 64px; }
+.sn-site .prijs-los .prijs-pakketten-kop h3 { margin-top: 12px; font-size: clamp(24px, 2.2vw, 32px) !important; }
+.sn-site .prijs-los > ul { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.sn-site .prijs-los > ul > li { display: flex; flex-direction: column; gap: 6px; padding: 20px; border: 1px solid rgba(255, 255, 255, .1); border-radius: 18px; background: #0b0f12; min-width: 0; }
+.sn-site .prijs-los h4 { margin: 0; font-size: 17px; color: #fff; }
+.sn-site .prijs-los .prijs-bedrag { flex-wrap: wrap; white-space: normal; }
+.sn-site .prijs-los .prijs-bedrag strong { white-space: nowrap; }
+.sn-site .prijs-los .prijs-belofte { flex: 1; min-height: 0; }
+.sn-site .prijs-los .h-button { width: 100%; margin-top: 10px; }
+@media (max-width: 860px) { .sn-site .prijs-los > ul { grid-template-columns: minmax(0, 1fr); } }
+.sn-site .prijs-los button.h-button { cursor: pointer; }

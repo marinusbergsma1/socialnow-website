@@ -75,20 +75,26 @@ try {
   // 19 oktober 2026 (Marinus): Team heet Business, Business heet Enterprise met onbeperkte opslag; USP's van het gratis OS;
   // Connect per periode van 3 maanden, vanaf Meta 1 maand gratis bij geen winst en minimaal €1.000 mediabudget; team per vakgebied.
   for (const zin of ["Gratis Studio", "Studio, 5.000 stockfoto&#x27;s, social media en boekhouding", "Social media management", "Boekhoudpakket", "Geen minimum mediabudget",
-    "Kies Enterprise", "Onbeperkte opslag", "Gratis demowebsite", "Gratis website", "Jaarlijks", "Maandelijks", "Altijd 3 maanden", "Geen winst? 1 maand gratis", "Mediabudget vanaf €1.000", "Team en expertise",
+    "Kies Enterprise", "Onbeperkte opslag", "Complete branding: logo, kleuren en stijl", "Google Ads: Search, Shopping en Performance Max", "Gratis demowebsite", "Gratis website", "Jaarlijks", "Maandelijks", "Altijd 3 maanden", "Geen winst? 1 maand gratis", "Mediabudget vanaf €1.000", "Hulp binnen Odoo: inrichting en vragen", "Vast aanspreekpunt uit ons team",
     "Nodig 2 mensen uit", "2 tot 5 medewerkers", "5 tot 10 medewerkers", "1.500 tokens per maand", "4.000 tokens per maand",
-    "Website, custom OS en branding", "Content en advertenties gemaakt", "€2.000 tot €5.000", "vanaf €10.000"])
+    "Custom OS ingericht rond je bedrijf", "Ad-creatie: beeld en video voor je advertenties", "€2.000 tot €5.000", "vanaf €10.000"])
     eis(diensten.includes(zin), `/diensten: '${zin}' ontbreekt`);
   eis(diensten.includes("Meest gekozen") && diensten.includes("Meeste waarde"), "/diensten: geen nadruk op Meta en Business");
   // 19 oktober 2026 (Marinus): pakketten boven de losse diensten; die staan als strook eronder. "Doe maar 4K meest gekozen."
   eis(diensten.indexOf('id="prijzen"') > -1 && diensten.indexOf('id="prijzen"') < diensten.indexOf('id="development"'), "/diensten: pakketten staan niet boven de diensten");
-  eis(diensten.includes('class="h-dienst-strook"'), "/diensten: diensten niet als strook");
+  eis(diensten.includes('class="cx-rij"') && diensten.indexOf('class="cx-rij"') > diensten.indexOf('id="prijzen"'), "/diensten: Connect-sectie van de homepage staat niet onder de prijzen");
   eis(/Meest gekozen[\s\S]{0,200}<h3>Meta<\/h3>/.test(diensten), "/diensten: Meta (€4.000) niet als meest gekozen");
   // 19 oktober 2026 (Marinus): "De punten moeten altijd overeenkomen." Elke kaart in een rij heeft evenveel regels, opslag op plek 2.
-  const kaarten = [...diensten.matchAll(/<ul class="prijs-punten">([\s\S]*?)<\/ul>/g)].map((m) => [...m[1].matchAll(/<li[^>]*>([^<]*)<\/li>/g)].map((l) => l[1]));
+  const kaarten = [...diensten.matchAll(/<ul class="prijs-punten">([\s\S]*?)<\/ul>/g)].map((m) => [...m[1].matchAll(/<li(?! class="prijs-groep")[^>]*>([^<]*)<\/li>/g)].map((l) => l[1]));
   eis(kaarten.length === 7, `/diensten: ${kaarten.length} kaarten in plaats van 7`);
   eis(kaarten.slice(0, 3).every((k) => k.length === 10 && /opslag/i.test(k[1])), "/diensten: OS-kaarten hebben niet dezelfde rijen met opslag op plek 2");
-  eis(kaarten.slice(3).every((k) => k.length === 11 && /Meta Ads/.test(k[3])), "/diensten: Connect-kaarten hebben niet dezelfde rijen");
+  eis(kaarten.slice(3).every((k) => k.length === 20 && /Meta Ads/.test(k[6])), "/diensten: Connect-kaarten hebben niet dezelfde rijen");
+  // 19 oktober 2026 (Marinus): "AI agents ipv Milo" in de prijzen, en de Connect-pakketten per onderwerp uitgewerkt.
+  // "De prijs voor websites moeten er ook staan."
+  for (const bedrag of ["€2.000 tot €5.000", "vanaf €10.000"]) eis(diensten.includes(`<strong>${bedrag}</strong>`), `/diensten: losse prijs ${bedrag} niet groot in beeld`);
+  eis(!/Dashboard, CRM en Milo/.test(diensten) && diensten.includes("Dashboard, CRM en AI agents"), "/diensten: Milo staat nog in de prijzen");
+  for (const groep of ["Merk en website", "Content", "Advertenties", "Begeleiding", "Financiën", "Afspraken"])
+    eis((diensten.match(new RegExp(`<li class="prijs-groep">${groep}</li>`, "g")) || []).length === 4, `/diensten: kopje '${groep}' niet in alle vier de pakketten`);
   eis(diensten.includes("Head of Meta Ads") && !diensten.includes("Meta Ads Specialist"), "/diensten: Sergio niet als Head of Meta Ads");
   for (const oud of ["€5.500", "€6.000", "Content + Meta", "Onbeperkt teamleden", "Kies Team", "100 GB opslag", "Losse diensten"])
     eis(!diensten.includes(oud), `/diensten: oud pakket '${oud}' staat er nog`);
@@ -104,7 +110,7 @@ try {
 
   // Wat de bezoeker in en/de/fr ziet, niet alleen of de sleutel in de json staat. De verwachte tekst komt uit het woordenboek.
   const escape = (t) => t.replaceAll("&", "&amp;").replaceAll("'", "&#x27;").replaceAll('"', "&quot;");
-  const nieuweZinnen = ["Diensten en prijzen", "Team en expertise", "Al in je gratis OS", "Geen winst? 1 maand gratis", "Wij doen het werk, met échte mensen", "Nodig 2 mensen uit", "Website, custom OS en branding"];
+  const nieuweZinnen = ["Diensten en prijzen", "Al in je gratis OS", "Geen winst? 1 maand gratis", "Wij doen het werk, met échte mensen", "Nodig 2 mensen uit", "Custom OS ingericht rond je bedrijf"];
   for (const taal of ["en", "de", "fr"]) {
     const woorden = JSON.parse(lees(`proposal/i18n/${taal}.json`) || "{}");
     const pagina = render("/diensten", taal);

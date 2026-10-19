@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { Action } from "./ui";
 import { GRATIS_OS_URL } from "./os-entry";
 import { useLanguage } from "./i18n/context";
 import "./pricing.css";
-import { PlanCallKnop } from "./PlanCall";
+import { openPlanCall } from "./PlanCall";
 
 // 23 september tot 18 oktober 2026: /prijzen groeide van gratis plus vier maandpakketten naar opslag, tokens per maand en
 // pakketten van €4.000 tot €6.000. Marinus vond dat op 19 oktober "nog totaal niet duidelijk".
@@ -37,7 +37,9 @@ type Pakket = {
   belofte: string;
   // 19 oktober 2026 (Marinus): "De punten moeten altijd overeenkomen. Dus altijd opslag op dezelfde plek bij alle 3." Elke kaart
   // in een rij heeft dezelfde regels in dezelfde volgorde; wat er niet in zit staat er grijs bij (uit).
-  punten: { tekst: string; erfenis?: boolean; sterk?: boolean; uit?: boolean }[];
+  // groep: een kopje boven de regel (19 oktober 2026, Marinus over de Connect-pakketten: "Juist hier veel meer in details gaan" en
+  // "Hulp binnen Odoo. en maak sws de duurdere pakketten met menselijke hulp écht even een stuk uitgebreider met goeie USP'S").
+  punten: { tekst: string; erfenis?: boolean; sterk?: boolean; uit?: boolean; groep?: string }[];
   team?: string[];
   kleur: string;
   actie: string;
@@ -63,7 +65,7 @@ const OS: Pakket[] = [
       { tekst: "10 GB opslag", sterk: true },
       { tekst: "Gratis demowebsite", sterk: true },
       { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },
-      { tekst: "Dashboard, CRM en Milo" },
+      { tekst: "Dashboard, CRM en AI agents" },
       { tekst: "Agentic Payments", uit: true },
       { tekst: "Experts met de toegang die jij bepaalt", uit: true },
       { tekst: "Je eigen AI veilig gekoppeld", uit: true },
@@ -88,7 +90,7 @@ const OS: Pakket[] = [
       { tekst: "50 GB opslag", sterk: true },
       { tekst: "Gratis demowebsite" },
       { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },
-      { tekst: "Dashboard, CRM en Milo" },
+      { tekst: "Dashboard, CRM en AI agents" },
       { tekst: "Agentic Payments", sterk: true },
       { tekst: "Experts met de toegang die jij bepaalt" },
       { tekst: "Je eigen AI veilig gekoppeld" },
@@ -112,7 +114,7 @@ const OS: Pakket[] = [
       { tekst: "Onbeperkte opslag", sterk: true },
       { tekst: "Gratis website", sterk: true },
       { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },
-      { tekst: "Dashboard, CRM en Milo" },
+      { tekst: "Dashboard, CRM en AI agents" },
       { tekst: "Agentic Payments" },
       { tekst: "Experts met de toegang die jij bepaalt" },
       { tekst: "Je eigen AI veilig gekoppeld" },
@@ -136,6 +138,13 @@ const GRATIS_USPS = [
   { titel: "Boekhoudpakket", tekst: "Facturen en boekhouding, gratis." },
 ];
 
+// Losse producten, buiten de abonnementen en pakketten om.
+const LOS = [
+  { naam: "Demowebsite", prijs: "€0", per: "gratis", tekst: "Een complete website in je merk, klaar om live te gaan. Geen verplichting.", actie: "Vraag je demo aan", to: "/gratis-website", kleur: "var(--prijs-groen)" },
+  { naam: "Je website", prijs: "€2.000 tot €5.000", per: "eenmalig", tekst: "Ontworpen en gebouwd in je merk. De prijs hangt af van pagina's en koppelingen.", actie: "Bespreek je website", to: "/contact?onderwerp=Website", kleur: "var(--prijs-blauw)" },
+  { naam: "Custom OS", prijs: "vanaf €10.000", per: "eenmalig", tekst: "Alleen het systeem, gebouwd rond je bedrijf en je processen.", actie: "Plan een call", call: true, kleur: "var(--prijs-geel)" },
+];
+
 // Wat ons anders maakt dan losse software (positionering 29 september 2026: draait op Odoo, met échte professionals).
 const UNIEK = [
   { titel: "Echte mensen achter je OS", tekst: "Experts uit ons team kijken mee, met de toegang die jij bepaalt." },
@@ -154,16 +163,25 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Alles om goed zichtbaar te worden.",
     punten: [
-      { tekst: "Website, custom OS en branding" },
-      { tekst: "Content en advertenties gemaakt" },
-      { tekst: "Persoonlijke call met uitleg van je systeem" },
-      { tekst: "Meta Ads opgezet en beheerd", uit: true },
+      { tekst: "Website ontworpen en gebouwd", groep: "Merk en website" },
+      { tekst: "Custom OS ingericht rond je bedrijf" },
+      { tekst: "Complete branding: logo, kleuren en stijl" },
+      { tekst: "Content in je merk, gepland en geplaatst", groep: "Content" },
+      { tekst: "Ad-creatie: beeld en video voor je advertenties" },
+      { tekst: "Short-form video en motion design" },
+      { tekst: "Meta Ads: campagnes, doelgroepen en retargeting", groep: "Advertenties", uit: true },
       { tekst: "Leads direct in je CRM", uit: true },
-      { tekst: "Google Ads opgezet en beheerd", uit: true },
+      { tekst: "Google Ads: Search, Shopping en Performance Max", uit: true },
+      { tekst: "Landingspagina's voor je campagnes", uit: true },
+      { tekst: "A/B-tests op je advertenties", uit: true },
       { tekst: "Eén rapport voor elk kanaal", uit: true },
-      { tekst: "Boekhouding en accounting", uit: true },
-      { tekst: "Odoo-inrichting als je die nodig hebt", uit: true },
-      { tekst: "Geen winst? 1 maand gratis", uit: true },
+      { tekst: "Vast aanspreekpunt uit ons team", groep: "Begeleiding" },
+      { tekst: "Persoonlijke call met uitleg van je systeem" },
+      { tekst: "Maandelijkse strategiesessie", uit: true },
+      { tekst: "Wekelijkse optimalisatie van je campagnes", uit: true },
+      { tekst: "Boekhouding en accounting", groep: "Financiën", uit: true },
+      { tekst: "Hulp binnen Odoo: inrichting en vragen", uit: true },
+      { tekst: "Geen winst? 1 maand gratis", groep: "Afspraken", uit: true },
       { tekst: "Geen minimum mediabudget" },
     ],
     team: ["marinus"],
@@ -178,16 +196,25 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Bereik de juiste mensen op Instagram en Facebook.",
     punten: [
-      { tekst: "Website, custom OS en branding" },
-      { tekst: "Content en advertenties gemaakt" },
-      { tekst: "Persoonlijke call met uitleg van je systeem" },
-      { tekst: "Meta Ads opgezet en beheerd", sterk: true },
+      { tekst: "Website ontworpen en gebouwd", groep: "Merk en website" },
+      { tekst: "Custom OS ingericht rond je bedrijf" },
+      { tekst: "Complete branding: logo, kleuren en stijl" },
+      { tekst: "Content in je merk, gepland en geplaatst", groep: "Content" },
+      { tekst: "Ad-creatie: beeld en video voor je advertenties" },
+      { tekst: "Short-form video en motion design" },
+      { tekst: "Meta Ads: campagnes, doelgroepen en retargeting", groep: "Advertenties", sterk: true },
       { tekst: "Leads direct in je CRM" },
-      { tekst: "Google Ads opgezet en beheerd", uit: true },
+      { tekst: "Google Ads: Search, Shopping en Performance Max", uit: true },
+      { tekst: "Landingspagina's voor je campagnes", uit: true },
+      { tekst: "A/B-tests op je advertenties" },
       { tekst: "Eén rapport voor elk kanaal", uit: true },
-      { tekst: "Boekhouding en accounting", uit: true },
-      { tekst: "Odoo-inrichting als je die nodig hebt", uit: true },
-      { tekst: "Geen winst? 1 maand gratis", sterk: true },
+      { tekst: "Vast aanspreekpunt uit ons team", groep: "Begeleiding" },
+      { tekst: "Persoonlijke call met uitleg van je systeem" },
+      { tekst: "Maandelijkse strategiesessie" },
+      { tekst: "Wekelijkse optimalisatie van je campagnes" },
+      { tekst: "Boekhouding en accounting", groep: "Financiën", uit: true },
+      { tekst: "Hulp binnen Odoo: inrichting en vragen", uit: true },
+      { tekst: "Geen winst? 1 maand gratis", groep: "Afspraken", sterk: true },
       { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
     team: ["marinus", "jos", "sergio"],
@@ -204,16 +231,25 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Gevonden worden op het moment dat ze zoeken.",
     punten: [
-      { tekst: "Website, custom OS en branding" },
-      { tekst: "Content en advertenties gemaakt" },
-      { tekst: "Persoonlijke call met uitleg van je systeem" },
-      { tekst: "Meta Ads opgezet en beheerd" },
+      { tekst: "Website ontworpen en gebouwd", groep: "Merk en website" },
+      { tekst: "Custom OS ingericht rond je bedrijf" },
+      { tekst: "Complete branding: logo, kleuren en stijl" },
+      { tekst: "Content in je merk, gepland en geplaatst", groep: "Content" },
+      { tekst: "Ad-creatie: beeld en video voor je advertenties" },
+      { tekst: "Short-form video en motion design" },
+      { tekst: "Meta Ads: campagnes, doelgroepen en retargeting", groep: "Advertenties" },
       { tekst: "Leads direct in je CRM" },
-      { tekst: "Google Ads opgezet en beheerd", sterk: true },
+      { tekst: "Google Ads: Search, Shopping en Performance Max", sterk: true },
+      { tekst: "Landingspagina's voor je campagnes" },
+      { tekst: "A/B-tests op je advertenties" },
       { tekst: "Eén rapport voor elk kanaal" },
-      { tekst: "Boekhouding en accounting", uit: true },
-      { tekst: "Odoo-inrichting als je die nodig hebt", uit: true },
-      { tekst: "Geen winst? 1 maand gratis" },
+      { tekst: "Vast aanspreekpunt uit ons team", groep: "Begeleiding" },
+      { tekst: "Persoonlijke call met uitleg van je systeem" },
+      { tekst: "Maandelijkse strategiesessie" },
+      { tekst: "Wekelijkse optimalisatie van je campagnes" },
+      { tekst: "Boekhouding en accounting", groep: "Financiën", uit: true },
+      { tekst: "Hulp binnen Odoo: inrichting en vragen", uit: true },
+      { tekst: "Geen winst? 1 maand gratis", groep: "Afspraken" },
       { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
     team: ["marinus", "jos", "sergio", "nick"],
@@ -228,16 +264,25 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Marketing en financiën, volledig geregeld.",
     punten: [
-      { tekst: "Website, custom OS en branding" },
-      { tekst: "Content en advertenties gemaakt" },
-      { tekst: "Persoonlijke call met uitleg van je systeem" },
-      { tekst: "Meta Ads opgezet en beheerd" },
+      { tekst: "Website ontworpen en gebouwd", groep: "Merk en website" },
+      { tekst: "Custom OS ingericht rond je bedrijf" },
+      { tekst: "Complete branding: logo, kleuren en stijl" },
+      { tekst: "Content in je merk, gepland en geplaatst", groep: "Content" },
+      { tekst: "Ad-creatie: beeld en video voor je advertenties" },
+      { tekst: "Short-form video en motion design" },
+      { tekst: "Meta Ads: campagnes, doelgroepen en retargeting", groep: "Advertenties" },
       { tekst: "Leads direct in je CRM" },
-      { tekst: "Google Ads opgezet en beheerd" },
+      { tekst: "Google Ads: Search, Shopping en Performance Max" },
+      { tekst: "Landingspagina's voor je campagnes" },
+      { tekst: "A/B-tests op je advertenties" },
       { tekst: "Eén rapport voor elk kanaal" },
-      { tekst: "Boekhouding en accounting", sterk: true },
-      { tekst: "Odoo-inrichting als je die nodig hebt" },
-      { tekst: "Geen winst? 1 maand gratis" },
+      { tekst: "Vast aanspreekpunt uit ons team", groep: "Begeleiding" },
+      { tekst: "Persoonlijke call met uitleg van je systeem" },
+      { tekst: "Maandelijkse strategiesessie" },
+      { tekst: "Wekelijkse optimalisatie van je campagnes" },
+      { tekst: "Boekhouding en accounting", groep: "Financiën", sterk: true },
+      { tekst: "Hulp binnen Odoo: inrichting en vragen" },
+      { tekst: "Geen winst? 1 maand gratis", groep: "Afspraken" },
       { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
     team: ["marinus", "jos", "sergio", "nick", "steef"],
@@ -307,9 +352,10 @@ function Kaart({ pakket, maandelijks = false }: { pakket: Pakket; maandelijks?: 
       </div>
       <ul className="prijs-punten">
         {pakket.punten.map((punt) => (
-          <li key={punt.tekst} className={punt.uit ? "is-uit" : punt.erfenis ? "is-erfenis" : punt.sterk ? "is-sterk" : undefined}>
-            {punt.tekst}
-          </li>
+          <React.Fragment key={punt.tekst}>
+            {punt.groep && <li className="prijs-groep">{punt.groep}</li>}
+            <li className={punt.uit ? "is-uit" : punt.erfenis ? "is-erfenis" : punt.sterk ? "is-sterk" : undefined}>{punt.tekst}</li>
+          </React.Fragment>
         ))}
       </ul>
       <div className="prijs-voet">
@@ -406,12 +452,34 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
         </ul>
       </Rij>
 
-      <div className="prijs-maatwerk-regel">
-        <p>
-          <b>Liever één ding?</b> Een gratis demowebsite, je website voor €2.000 tot €5.000 eenmalig, of alleen een custom OS vanaf €10.000 eenmalig.
-        </p>
-        <PlanCallKnop className="sn-pill sn-btn3d h-button h-button-secondary" label="Plan een call" />
-      </div>
+      {/* 19 oktober 2026 (Marinus): "De prijs voor websites moeten er ook staan." Drie losse producten met de prijs groot. */}
+      <section className="prijs-los" aria-labelledby="prijs-los-titel">
+        <div className="prijs-pakketten-kop">
+          <div>
+            <p className="h-eyebrow">03 / Los</p>
+            <h3 id="prijs-los-titel">Liever één ding?</h3>
+          </div>
+          <p>Een website of alleen je eigen systeem, voor een vaste prijs vooraf.</p>
+        </div>
+        <ul>
+          {LOS.map((item) => (
+            <li key={item.naam} style={{ "--kleur": item.kleur } as React.CSSProperties}>
+              <h4>{item.naam}</h4>
+              <p className="prijs-bedrag"><strong>{item.prijs}</strong><span>{item.per}</span></p>
+              <p className="prijs-belofte">{item.tekst}</p>
+              {item.call ? (
+                <button type="button" className="sn-pill sn-btn3d h-button h-button-secondary" aria-haspopup="dialog" onClick={() => openPlanCall()}>
+                  <span className="sn-btn3d-sheen" />
+                  <span>{item.actie}</span>
+                  <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
+                </button>
+              ) : (
+                <Action to={item.to!} secondary>{item.actie}</Action>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }
