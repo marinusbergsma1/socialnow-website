@@ -39,3 +39,13 @@
 .sn-site .sn-home-techniek .sn-techniek-links { display: flex; flex-wrap: wrap; gap: 10px 18px; }
 .sn-site .sn-home-techniek .sn-techniek-links a { display: inline-flex; align-items: center; gap: 6px; color: #fff; font-weight: 600; text-decoration: none; }
 .sn-site .sn-home-techniek .sn-techniek-links a:hover { color: #25d366; }
+
+/* Slotblok gratis OS (19 oktober 2026): het gratis pakket van nu, knoppen groen met wit en wit met groen. */
+.sn-home-final .sn-slot-punten{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:18px 0 0;padding:0;list-style:none}
+.sn-home-final .sn-slot-punten li{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:#fff}
+.sn-home-final .sn-slot-punten svg{color:#25d366}
+.sn-home-final .sn-slot-knoppen{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}
+.sn-home-final .sn-slot-start{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;border:2px solid #25d366;background:#25d366;color:#fff;font-weight:800;text-decoration:none}
+.sn-home-final .sn-slot-pakketten{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;border:2px solid #25d366;background:#fff;color:#1a9c4b;font-weight:800;text-decoration:none}
+.sn-home-final .sn-slot-start:hover,.sn-home-final .sn-slot-pakketten:hover{transform:translateY(-1px)}
+.sn-home-final .sn-slot-start:focus-visible,.sn-home-final .sn-slot-pakketten:focus-visible{outline:2px solid #fff;outline-offset:3px}
