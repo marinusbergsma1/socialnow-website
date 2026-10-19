@@ -401,10 +401,12 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
     <div id="prijzen" className={`prijs prijs-diensten h-wrap${bovenaan ? " is-bovenaan" : ""}`}>
       <div className="prijs-diensten-kop">
         <p className="h-eyebrow prijs-groen-tekst">Diensten en prijzen</p>
+        {/* 19 oktober 2026 (Marinus): "Software, studio, socialmedia management, boekhouding en Ai agents gratis. Dat is wel belangrijk
+            ipv alleen software. Bij ons betaal je voor winst en expertise" */}
         <Kop>
-          Software gratis.
+          Software, Studio, social media, boekhouding en AI agents gratis.
           <br />
-          <em>Echt werk voor een vaste prijs.</em>
+          <em>Je betaalt voor winst en expertise.</em>
         </Kop>
         <p>Alle bedragen zijn exclusief btw.</p>
       </div>
