@@ -138,7 +138,7 @@ try {
 const connectPagina = lees("public/connect/index.html");
 eis(!/workers\.dev/.test(connectPagina) && /Coming <span>November 15th\.<\/span>/.test(connectPagina), "/connect/: nog de pilot of geen Coming November 15th");
 eis(!/workers\.dev/.test(lees("proposal/ConnectExperts.tsx")) && !/href="\/connect\/">\s*<span className="cx-lang">Meld je aan/.test(lees("proposal/ConnectExperts.tsx")), "Connect-sectie: aanmelden gaat nog naar de pilot");
-eis(lees("proposal/ConnectExperts.tsx").includes("cx-binnenkort"), "Connect-sectie: Coming November 15th ontbreekt");
+eis(!lees("proposal/ConnectExperts.tsx").includes("cx-binnenkort"), "Connect-sectie: Coming November 15th staat er nog (alleen op /connect/)");
 
 // 19 oktober 2026 (Marinus): "Ik wil dat je die duurdere prijzen pas ziet bij betaling."
 eis(!/46,67|86,67|43,75|81,25/.test(lees("proposal/Pricing.tsx").replace(/\/\/.*|\{\/\*[\s\S]*?\*\/\}/g, "")) && !lees("proposal/Pricing.tsx").includes("prijs-periode\""), "/diensten: maandprijzen of schakelaar nog zichtbaar");
