@@ -602,3 +602,21 @@
 .sn-site .prijs-tokenbox .prijs-tokenbox-uitleg { display: block; margin-top: 4px; font-size: 12.5px; line-height: 1.45; color: #b9c2cc; }
 .sn-site .prijs-tokenbox.is-leeg { border-color: var(--prijs-rand); background: transparent; }
 .sn-site .prijs-tokenbox.is-leeg b { font-size: 14px; font-weight: 600; color: #b9c2cc; }
+
+/* 19 oktober 2026: prijzen openen /diensten; daaronder de losse diensten als zijwaartse strook. */
+.sn-site .prijs-diensten.is-bovenaan { margin-top: 0; padding-top: 85px; }
+:root .sn-site .prijs-diensten.is-bovenaan .prijs-diensten-kop h1 { margin-top: 18px; font-size: clamp(34px, 4vw, 56px) !important; line-height: 1.04; }
+.sn-site .prijs-diensten-kop h1 em { font-style: normal; color: var(--prijs-groen); }
+.sn-site .h-dienst-strook-sectie { margin-top: 88px; }
+.sn-site .h-dienst-strook-kop h2 { margin-top: 12px; }
+.sn-site .h-dienst-strook { list-style: none; margin: 24px 0 0; padding: 0 0 12px; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, 300px); gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.sn-site .h-dienst-strook li { scroll-snap-align: start; display: flex; flex-direction: column; gap: 10px; padding: 18px; border: 1px solid rgba(255, 255, 255, .1); border-radius: 16px; background: #0b0f12; scroll-margin-top: 96px; }
+.sn-site .h-dienst-strook h3 { margin: 0; font-size: 17px; }
+.sn-site .h-dienst-strook p { margin: 0; flex: 1; font-size: 13.5px; line-height: 1.5; color: #99a2ab; }
+@media (max-width: 640px) {
+  .sn-site .prijs-diensten.is-bovenaan { padding-top: 55px; }
+  .sn-site .h-dienst-strook { grid-auto-columns: 78%; }
+}
+.sn-site .h-dienst-strook h3 { display: flex; align-items: center; gap: 9px; }
+.sn-site .h-dienst-strook h3::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.sn-site .h-dienst-strook p span + span::before { content: " · "; }

@@ -75,7 +75,11 @@ try {
   for (const zin of ["Nodig 2 mensen uit", "2 tot 5 medewerkers", "5 tot 10 medewerkers", "1.500 tokens per maand", "4.000 tokens per maand",
     "Website, custom OS en branding", "Content en advertenties gemaakt", "€2.000 tot €5.000", "vanaf €10.000"])
     eis(diensten.includes(zin), `/diensten: '${zin}' ontbreekt`);
-  eis(diensten.includes("Meest gekozen") && diensten.includes("Meeste waarde"), "/diensten: geen nadruk op Start en Business");
+  eis(diensten.includes("Meest gekozen") && diensten.includes("Meeste waarde"), "/diensten: geen nadruk op Meta en Business");
+  // 19 oktober 2026 (Marinus): pakketten boven de losse diensten; die staan als strook eronder. "Doe maar 4K meest gekozen."
+  eis(diensten.indexOf('id="prijzen"') > -1 && diensten.indexOf('id="prijzen"') < diensten.indexOf('id="development"'), "/diensten: pakketten staan niet boven de diensten");
+  eis(diensten.includes('class="h-dienst-strook"'), "/diensten: diensten niet als strook");
+  eis(/Meest gekozen[\s\S]{0,200}<h3>Meta<\/h3>/.test(diensten), "/diensten: Meta (€4.000) niet als meest gekozen");
   eis(diensten.includes("Head of Meta Ads") && !diensten.includes("Meta Ads Specialist"), "/diensten: Sergio niet als Head of Meta Ads");
   for (const oud of ["€5.500", "€6.000", "Content + Meta", "Onbeperkt teamleden"])
     eis(!diensten.includes(oud), `/diensten: oud pakket '${oud}' staat er nog`);
@@ -91,7 +95,7 @@ try {
 
   // Wat de bezoeker in en/de/fr ziet, niet alleen of de sleutel in de json staat. De verwachte tekst komt uit het woordenboek.
   const escape = (t) => t.replaceAll("&", "&amp;").replaceAll("'", "&#x27;").replaceAll('"', "&quot;");
-  const nieuweZinnen = ["Wat het kost", "Hoe groter je team, hoe meer je krijgt", "Wij doen het werk, met échte mensen", "Nodig 2 mensen uit", "Website, custom OS en branding"];
+  const nieuweZinnen = ["Diensten en prijzen", "Losse diensten", "Hoe groter je team, hoe meer je krijgt", "Wij doen het werk, met échte mensen", "Nodig 2 mensen uit", "Website, custom OS en branding"];
   for (const taal of ["en", "de", "fr"]) {
     const woorden = JSON.parse(lees(`proposal/i18n/${taal}.json`) || "{}");
     const pagina = render("/diensten", taal);
