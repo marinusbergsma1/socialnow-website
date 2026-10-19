@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Download, ShieldCheck, Database } from "lucide-react";
 import "./pixel-infrastructure.css";
-const next = [["salesforce", "Salesforce", "/images/partners/salesforce.svg"], ["afas", "AFAS", "/images/partners/integraties/afas.png"], ["exact", "Exact", "/images/partners/integraties/exact.svg"], ["hubspot", "HubSpot", "/images/partners/integraties/hubspot.svg"], ["dynamics", "Microsoft Dynamics 365", "/images/partners/integraties/dynamics-365.svg"]];
+export const next = [["salesforce", "Salesforce", "/images/partners/salesforce.svg"], ["afas", "AFAS", "/images/partners/integraties/afas.png"], ["exact", "Exact", "/images/partners/integraties/exact.svg"], ["hubspot", "HubSpot", "/images/partners/integraties/hubspot.svg"], ["dynamics", "Microsoft Dynamics 365", "/images/partners/integraties/dynamics-365.svg"]];
 const talks = [["visa", "Visa", "/images/partners/betalen/visa.svg"], ["mastercard", "Mastercard", "/images/partners/betalen/mastercard.svg"], ["airwallex", "Airwallex", "/images/partners/betalen/airwallex.webp"], ["adyen", "Adyen", "/images/partners/betalen/adyen.svg"], ["rabobank", "Rabobank", "/images/partners/betalen/rabobank.svg"], ["xxl", "XXL Nutrition", "/images/merken/xxl-nutrition.svg"]];
 export const DATA_DOCUMENT = "/documenten/socialnow-veiligheid-en-data-nl.pdf";
-function Marks({ items }: { items: string[][] }) { return <div className="sn-infra-marks">{items.map(([id, name, src]) => <div key={id}><img src={src} alt={name} loading="lazy" /></div>)}</div>; }
+export function Marks({ items }: { items: string[][] }) { return <div className="sn-infra-marks">{items.map(([id, name, src]) => <div key={id}><img src={src} alt={name} loading="lazy" /></div>)}</div>; }
 export default function PixelInfrastructure() { return <section className="sn-infrastructure" aria-labelledby="sn-infra-title">
   <header className="sn-infra-intro"><div><span className="sn-infra-eyebrow">Technologie met een duidelijke rol</span><h2 id="sn-infra-title">Een sterke basis.<br />Ruimte om te verbinden.</h2></div><p>Odoo, Zernio en je OS komen samen. Hieronder zie je hoe je data, veiligheid en koppelingen zijn geregeld.</p></header>
   <div className="sn-infra-trust">

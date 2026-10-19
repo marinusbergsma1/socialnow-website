@@ -24,14 +24,43 @@ import SamenEnVeilig from "./SamenEnVeilig";
 import HeaderBestaand from "./HeaderBestaand";
 import FreeWebsite from "./FreeWebsite";
 import { Bento, Tegel } from "./Bento";
-import { MiloPortrait, TextLink } from "./ui";
-import OsPeople from "./OsPeople";
-import { agents } from "./content";
+import { TextLink } from "./ui";
+import { ArrowUpRight, Download } from "lucide-react";
 import ConnectExperts from "./ConnectExperts";
-import PixelInfrastructure from "./PixelInfrastructure";
+import { DATA_DOCUMENT, Marks, next } from "./PixelInfrastructure";
+import "./pixel-infrastructure.css";
 import { useLanguage } from "./i18n/context";
 import "./home-simple.css";
 const Bereikt = later(() => import("./Bereikt").then(m => m.default));
+
+// 19 oktober 2026, avond (Marinus): "websites Technologie met een duidelijke rol en plug and play gedeelte in 1 bentogrid zodat
+// ie korter is". Dus het blok PixelInfrastructure en de bento "Software as a tool" samen in vijf tegels, met hun eigen teksten.
+// "Ons netwerk groeit" (verkennende gesprekken) valt weg om het kort te houden; PixelInfrastructure staat nog op zijn eigen pagina.
+function HomeTechniek() {
+  return <Bento id="techniek" label="Technologie met een duidelijke rol" titel={<>Een sterke basis.<br /><span>Plug and play.</span></>} className="sn-home-techniek">
+    <Tegel kop="SocialNow OS" breed={6}>
+      <img className="sn-techniek-os" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" loading="lazy" width="170" />
+      <h3 className="sn-tegel-titel">Samen laten werken.</h3>
+      <p className="sn-tegel-tekst">Odoo, Zernio en je OS komen samen. Je OS, Studio, Ads en Sales. Met persoonlijke ondersteuning.</p>
+      <div className="sn-tegel-onder"><TextLink to="/het-os">Ontdek je OS</TextLink></div>
+    </Tegel>
+    <Tegel kop="Plug and play." breed={6}>
+      <p className="sn-tegel-tekst">Meer automatisering en overzicht in al je bedrijfssoftware. Maak je eigen koppelingen. Je data blijft van jou.</p>
+      <Marks items={next} />
+    </Tegel>
+    <Tegel kop="Jouw data. Jouw connecties." breed={4}>
+      <h3 className="sn-tegel-titel" translate="no">We are the service layer.</h3>
+      <p className="sn-tegel-tekst">Jouw gegevens blijven van jou. Jij houdt de regie over je eigen verbindingen en je systeem. De software verbindt jouw tools tot een persoonlijk of op maat gemaakt systeem. Wij zijn de persoonlijke servicelaag daaromheen.</p>
+    </Tegel>
+    <Tegel kop="Veiligheid. Zwart op wit." breed={4}>
+      <p className="sn-tegel-tekst">Versleutelde sleutels, toegang per werkruimte en jouw akkoord voor acties. Lees uitgebreid hoe wij je data beschermen en wat jouw eigen rol is.</p>
+      <div className="sn-tegel-onder sn-techniek-links"><a href={DATA_DOCUMENT} download><Download size={16} aria-hidden="true" />Uitgebreide documentatie (PDF · NL)</a><Link to="/veiligheid">Alles over veiligheid <ArrowUpRight size={16} aria-hidden="true" /></Link></div>
+    </Tegel>
+    <Tegel kop="Eerst waarde bieden." breed={4}>
+      <p className="sn-tegel-tekst">We volgen je gedrag niet. Feedback komt uit persoonlijk contact. We begonnen met Odoo en Zernio omdat hun aanpak aansluit bij die van ons: eerst waarde bieden en jezelf bewijzen. Daarom maken we gratis websites voor iedereen.</p>
+    </Tegel>
+  </Bento>;
+}
 
 export function Home() {
   useLanguage();
@@ -43,26 +72,10 @@ export function Home() {
     </section>
     <ConnectExperts />
     <FreeWebsite />
-    <div className="h-wrap sn-platform-foundation"><PixelInfrastructure /></div>
-    <Bento id="jouw-systeem" label="Jouw data. Jouw connecties." titel={<>Software as a tool.<br /><span>Not a service.</span></>}>
-      <Tegel kop="Jouw data. Jouw connecties." breed={6}>
-        <h3 className="sn-tegel-titel" translate="no">We are the service layer.</h3>
-        <p className="sn-tegel-tekst">Jouw gegevens blijven van jou. Jij houdt de regie over je eigen verbindingen en je systeem. De software verbindt jouw tools tot een persoonlijk of op maat gemaakt systeem. Wij zijn de persoonlijke servicelaag daaromheen.</p>
-      </Tegel>
-      <Tegel kop="Eerst waarde bieden." breed={6}>
-        <p className="sn-tegel-tekst">We volgen je gedrag niet. Feedback komt uit persoonlijk contact. We begonnen met Odoo en Zernio omdat hun aanpak aansluit bij die van ons: eerst waarde bieden en jezelf bewijzen. Daarom maken we gratis websites voor iedereen.</p>
-      </Tegel>
-    </Bento>
+    {/* 19 oktober 2026, avond (Marinus): na Connect de websites, dan technologie en plug and play in één bentogrid, dan resultaten. */}
+    <HomeTechniek />
 
     <OnderDeVouw ruimte={false}><Bereikt /></OnderDeVouw>
-    <Bento id="het-os" label="Vier onderdelen / Eén verbonden bedrijf" titel={<>Vier gezichten.<br /><span>Eén geheel.</span></>} className="sn-home-milos" swipe>
-      {agents.map(agent => <Tegel key={agent.id} kop={agent.title} breed={3} className="h-os-agent">
-        <MiloPortrait role={agent.id} name={agent.name} maat={256} />
-        <strong className="h-os-belofte" style={{ color: agent.color }}>{agent.promise}</strong>
-        <p className="sn-tegel-tekst">{agent.text}</p>
-        <OsPeople role={agent.id} />
-        <div className="sn-tegel-onder"><TextLink to={`/het-os#${agent.id}`}>Ontdek dit onderdeel</TextLink></div>
-      </Tegel>)}
-    </Bento>
+    {/* Het blok met de vier Milo-tegels is weg (Marinus, 19 oktober 2026: "dit gedeelte kan denk ik wel weg"); de onderdelen staan op /het-os. */}
   </div>;
 }
