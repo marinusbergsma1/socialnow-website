@@ -37,7 +37,10 @@ export default function ConnectExperts() {
   return <div className="cx-connect">
     <section id="team" className="sn-cx h-wrap" aria-labelledby="team-titel">
       <div className="cx-boven">
+        <p className="cx-label">Ons team</p>
         <h2 id="team-titel">Vind je expert.</h2>
+        {/* 19 oktober 2026, avond (Marinus): "verbeterd SocialNow/Connect met meer praten over ons als team". */}
+        <p className="cx-team">Wij zijn het team achter SocialNow en Connect: strategen, developers, designers, ad-specialisten en financiële experts. Echte mensen die je bij naam kent en die meewerken in jouw OS.</p>
         <p className="cx-zin"><strong>{people.length}</strong> experts in <strong>{expertGroepen.length}</strong> vakgebieden. Zoek, vergelijk en kies zelf.</p>
         <label className="cx-zoek">
           <Search size={18} aria-hidden="true" />

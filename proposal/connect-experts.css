@@ -103,3 +103,7 @@ html:root .sn-site .cx-connect .sn-title-dot { color: #00a3e0 !important; }
 .sn-site .cx-pijlen button { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1px solid #00a3e0; background: #fff; color: #00739e; cursor: pointer; }
 .sn-site .cx-pijlen button:hover { background: #00739e; border-color: #00739e; color: #fff; }
 @media (max-width: 760px) { .sn-site .cx-pijlen { display: none; } .sn-site .cx-raster { margin-top: 24px; } }
+
+/* Ons team, boven Vind je expert (19 oktober 2026, avond). */
+html:root .sn-site .cx-connect .cx-label { margin: 0; font-family: var(--v-mono, ui-monospace, Menlo, monospace); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #00739e; }
+html:root .sn-site .cx-connect .cx-team { margin: 0; max-width: 640px; font-size: 19px; line-height: 1.5; color: #0b0f12; }

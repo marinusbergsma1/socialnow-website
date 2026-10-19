@@ -32,3 +32,10 @@
 :root .sn-site .sn-home-story-card .h-character-coder{border-radius:14px;overflow:hidden;background:#000}
 
 .sn-site .sn-home-milos .h-os-agent .sn-tegel-vlak > :first-child{width:160px;height:160px;margin:0 auto 12px}.sn-site .sn-home-milos .h-os-belofte{min-height:2.4em}.sn-site .sn-home-milos .sn-tegel-tekst{line-height:1.55}
+
+/* Technologie en plug and play in één bentogrid (19 oktober 2026, avond). */
+.sn-site .sn-home-techniek .sn-techniek-os { display: block; width: 170px; height: auto; margin-bottom: 14px; }
+.sn-site .sn-home-techniek .sn-infra-marks { margin-top: 16px; }
+.sn-site .sn-home-techniek .sn-techniek-links { display: flex; flex-wrap: wrap; gap: 10px 18px; }
+.sn-site .sn-home-techniek .sn-techniek-links a { display: inline-flex; align-items: center; gap: 6px; color: #fff; font-weight: 600; text-decoration: none; }
+.sn-site .sn-home-techniek .sn-techniek-links a:hover { color: #25d366; }

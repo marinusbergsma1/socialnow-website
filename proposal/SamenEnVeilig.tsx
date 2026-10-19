@@ -11,6 +11,7 @@ import "./samen-en-veilig.css";
 // naar veiligheid etc dat ze de documentatie kunnen downloaden die belangrijk is."
 // Vervangt "Building together with" (HomeDevelopmentPartners) dat lager op de pagina stond.
 // Het handboek Veiligheid en data bestaat alleen in het Nederlands; de andere pdf's in nl en en.
+// 19 oktober 2026, avond (Marinus): het blok Developers + AI "kan wel weg"; de teksten en BRONNEN blijven hier staan voor later.
 // Daarna, zelfde dag: "Beschrijf hoe code gemaakt door developers en Ai Techniek zorgt voor betere
 // bescherming met bronnen erbij ook." Elk cijfer in BRONNEN is nagelezen bij de bron zelf
 // (18 oktober 2026). Het GitHub-cijfer komt van GitHub zelf; dat staat er daarom bij.
@@ -143,20 +144,6 @@ export default function SamenEnVeilig() {
             ))}
           </ul>
           <Link className="sn-samen-alles" to="/veiligheid">{t.alles}<ArrowUpRight size={16} aria-hidden="true" /></Link>
-        </div>
-        <div className="sn-samen-blok sn-samen-mens">
-          <p className="sn-samen-label"><i />{t.mLabel}</p>
-          <h3>{t.mKop}</h3>
-          <p className="sn-samen-uitleg">{t.mUitleg}</p>
-          <ol>
-            {t.punten.map(p => (
-              <li key={p.kop}>
-                <strong>{p.kop}</strong>
-                <p>{p.tekst}</p>
-                <a href={p.href} target="_blank" rel="noopener noreferrer">Bron: {p.bron}<ArrowUpRight size={13} aria-hidden="true" /></a>
-              </li>
-            ))}
-          </ol>
         </div>
       </div>
     </section>
