@@ -99,7 +99,7 @@ export default function MensEnAI() {
               <span className="sn-btn3d-sheen" />
               <span>Start gratis</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
             </a>
-            <TextLink to="/prijzen">Pakketten en OS op maat</TextLink>
+            <TextLink to="/diensten#prijzen">Pakketten en OS op maat</TextLink>
           </div>
         </div>
       </Tegel>

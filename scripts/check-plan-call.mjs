@@ -21,7 +21,8 @@ eis(!/custom-call-line/.test(kop), "geen tweede tekstlink Plan een call onder de
 eis(/<PlanCallHost \/>/.test(shell) && !/<PlanCallHost/.test(kop), "paneel-host staat sitebreed in WebsiteProposal.tsx (één keer)");
 // Hoofdnavigatie (18 okt): Producten, Diensten, Resultaten, Prijzen, Team; rechts Plan een call en Inloggen gratis OS.
 eis(/<ProductenMenu \/>/.test(shell) && /const nav = NAV_LINKS/.test(shell), "hoofdnavigatie begint met het Producten-menu");
-eis(/\["\/diensten", "Diensten"\],\s*\["\/projecten", "Resultaten"\],\s*\["\/prijzen", "Prijzen"\],\s*\["\/team", "Team"\]/.test(menu), "Diensten, Resultaten, Prijzen, Team in die volgorde");
+// 19 oktober 2026 (Marinus): Prijzen staat op de Dienstenpagina en niet meer in het menu.
+eis(/\["\/diensten", "Diensten"\],\s*\["\/projecten", "Resultaten"\],\s*\["\/team", "Team"\]/.test(menu), "Diensten, Resultaten, Team in die volgorde");
 eis(/"\/het-os"/.test(menu) && /"\/connect\/"/.test(menu), "Producten toont OS en Connect");
 eis(/<HeaderCall \/>/.test(shell) && /openPlanCall/.test(menu), "Plan een call rechts in de header opent het paneel");
 eis(/h-mobile-call/.test(shell), "mobiel menu heeft Plan een call");

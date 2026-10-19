@@ -561,3 +561,44 @@
   .sn-site .prijs-partners { grid-template-columns: minmax(0, 1fr); padding: 20px; }
   .sn-site .prijs-partners ul { gap: 16px 26px; }
 }
+
+/* 19 oktober 2026 (Marinus): de prijzen staan als één blok onderaan /diensten (#prijzen), in drie rijen: het OS per team,
+   de website en het werk met ons team. Tokens en Connect zijn twee rustige regels eronder. */
+.sn-site .prijs-diensten { padding-top: 0; margin-top: clamp(72px, 9vw, 128px); scroll-margin-top: 96px; }
+.sn-site .prijs-diensten-kop { max-width: 760px; }
+:root .sn-site .prijs-diensten-kop h2 { margin-top: 18px; font-size: clamp(34px, 4vw, 56px) !important; line-height: 1.04; }
+.sn-site .prijs-diensten-kop h2 em { font-style: normal; color: var(--prijs-groen); }
+.sn-site .prijs-diensten-kop > p { margin-top: 16px; font-size: 14px; color: #8f98a1; }
+.sn-site .prijs-rij { margin-top: 64px; }
+:root .sn-site .prijs-rij .prijs-pakketten-kop h3 { margin-top: 12px; font-size: clamp(24px, 2.2vw, 32px) !important; line-height: 1.15; letter-spacing: 0; }
+.sn-site .prijs-rij .prijs-pakketten-kop > p { padding-top: 26px; }
+.sn-site .prijs-kaart button.h-button { width: 100%; cursor: pointer; }
+.sn-site .prijs-rij .prijs-raster { margin-top: 24px; }
+.sn-site .prijs-raster-twee { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sn-site .prijs-rij .prijs-bedrag { flex-wrap: wrap; white-space: normal; }
+.sn-site .prijs-rij .prijs-bedrag strong { white-space: nowrap; }
+.sn-site .prijs-extra { list-style: none; margin: 40px 0 0; padding: 0; display: grid; gap: 12px; }
+.sn-site .prijs-extra > li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 32px; padding: 18px 22px; border: 1px solid var(--prijs-rand); border-radius: 16px; background: #0b0f12; }
+.sn-site .prijs-extra > li > div { display: grid; gap: 4px; max-width: 620px; }
+.sn-site .prijs-extra > li > div b { font-size: 16px; color: #fff; font-weight: 600; }
+.sn-site .prijs-extra > li > div span { font-size: 14px; line-height: 1.5; color: #99a2ab; }
+.sn-site .prijs-extra-bedragen { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.sn-site .prijs-extra-bedragen span { padding: 7px 13px; border: 1px solid var(--prijs-rand); border-radius: 999px; font-size: 13px; color: #c9d0d6; white-space: nowrap; }
+.sn-site .prijs-extra-bedragen span b { color: #fff; font-weight: 600; margin-right: 4px; }
+.sn-site .prijs-diensten .prijs-partners { margin-top: 40px; }
+@media (max-width: 860px) {
+  .sn-site .prijs-raster-twee { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .prijs-rij { margin-top: 48px; }
+}
+.sn-site .prijs-kop { display: flex; flex-direction: column; }
+.sn-site .prijs-diensten .prijs-kaart.is-top { box-shadow: 0 0 0 1px #25d36680, 0 18px 60px -30px #25d36666; }
+.sn-site .prijs-maatwerk-regel b { color: #fff; font-weight: 600; }
+.sn-site .prijs-diensten .prijs-maatwerk-regel { margin-top: 40px; }
+/* 19 oktober 2026 (Marinus): "alles duidelijk maken wat je krijgt hoeveel tokens etc de waarde daarvan". Een eigen vak per kaart. */
+.sn-site .prijs-tokenbox { margin-top: 14px; padding: 12px 14px; border: 1px solid color-mix(in srgb, var(--kleur) 55%, transparent); border-radius: 12px; background: color-mix(in srgb, var(--kleur) 9%, #0b0f12); }
+.sn-site .prijs-tokenbox p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 0; }
+.sn-site .prijs-tokenbox b { font-size: 17px; font-weight: 700; color: #fff; }
+.sn-site .prijs-tokenbox span { font-size: 13px; font-weight: 600; color: var(--kleur); }
+.sn-site .prijs-tokenbox .prijs-tokenbox-uitleg { display: block; margin-top: 4px; font-size: 12.5px; line-height: 1.45; color: #b9c2cc; }
+.sn-site .prijs-tokenbox.is-leeg { border-color: var(--prijs-rand); background: transparent; }
+.sn-site .prijs-tokenbox.is-leeg b { font-size: 14px; font-weight: 600; color: #b9c2cc; }

@@ -33,7 +33,7 @@ export default function BrandFooter() {
             <Link to="/het-os#crm">CRM</Link>
             <Link to="/het-os#content">Studio</Link>
             <Link to="/het-os#ads">Advertenties</Link>
-            <Link to="/prijzen">Aanbod & inrichting</Link>
+            <Link to="/diensten#prijzen">Aanbod & inrichting</Link>
           </div>
           <div>
             <p className="h-eyebrow">SocialNow</p>

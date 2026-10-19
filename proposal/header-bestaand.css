@@ -33,9 +33,9 @@
 .sn-site .sn-bestaand .service.connect>.action .pill{width:max-content;max-width:100%;gap:16px;white-space:nowrap}
 .sn-site .sn-bestaand .bs-uitleg-hulp strong{display:block;margin-bottom:4px;color:var(--blue)}
 .sn-site .sn-bestaand .bs-switch{display:inline-flex;gap:4px;margin:14px 0 0;padding:4px;border:1px solid #2a3b31;border-radius:999px;background:#07100b}
-.sn-site .sn-bestaand .bs-switch button{padding:8px 16px;border:0;border-radius:999px;background:transparent;color:#a8b8af;font-size:13px;font-weight:700;letter-spacing:.02em;cursor:pointer;transition:background .2s,color .2s}
+.sn-site .sn-bestaand .bs-switch :is(button,a){text-decoration:none;padding:8px 16px;border:0;border-radius:999px;background:transparent;color:#a8b8af;font-size:13px;font-weight:700;letter-spacing:.02em;cursor:pointer;transition:background .2s,color .2s}
 .sn-site .sn-bestaand .bs-switch button[aria-pressed=true]{background:var(--green);color:#002912}
-.sn-site .sn-bestaand .bs-switch button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.sn-site .sn-bestaand .bs-switch :is(button,a):focus-visible{outline:2px solid #fff;outline-offset:2px}
 .sn-site .sn-bestaand .bs-kop-hulp span{color:#c8d8ce;font-weight:600}
 .sn-site .sn-bestaand .bs-typer{display:block;min-height:2.3em;color:var(--green)}
 @media(min-width:1151px){.sn-site .sn-bestaand .bs-typer{min-height:1.05em;white-space:nowrap;font-size:.72em}}

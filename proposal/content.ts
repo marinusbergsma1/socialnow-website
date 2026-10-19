@@ -16,8 +16,8 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   { name: "Jos Hollenberg", role: "Head of Meta Ads", image: "Jos-Hollenberg-1.webp" },
   {
     name: "Sergio Jovovic",
-    // 28 september 2026 (Marinus): Sergio staat ook bij Meta Ads.
-    role: "Meta Ads en automations specialist",
+    // 28 september 2026 (Marinus): Sergio staat ook bij Meta Ads. 19 oktober 2026 (Marinus): "Maak Sergio Head of meta ads".
+    role: "Head of Meta Ads",
     image: "Sergio-Jovovic.webp",
     linkedin: "https://www.linkedin.com/in/sergio-jovovic-203483220/",
   },

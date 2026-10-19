@@ -8,7 +8,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const LANGUAGES = ['en', 'nl', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'sv', 'da'];
-export const CORE_ROUTES = ['/', '/het-os', '/diensten', '/projecten', '/prijzen', '/team', '/contact', '/vacatures'];
+// 19 oktober 2026: /prijzen stuurt door naar /diensten#prijzen en is geen kernpagina meer.
+export const CORE_ROUTES = ['/', '/het-os', '/diensten', '/projecten', '/team', '/contact', '/vacatures'];
 const BASE = 'https://socialnow.nl';
 const LOCALES = { en: 'en_GB', nl: 'nl_NL', de: 'de_DE', fr: 'fr_FR', es: 'es_ES', it: 'it_IT', pt: 'pt_PT', pl: 'pl_PL', sv: 'sv_SE', da: 'da_DK' };
 const localizedPath = (route, language) => `${language === 'en' ? '' : `/${language}`}${route}`;

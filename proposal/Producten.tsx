@@ -10,7 +10,6 @@ import "./hoofdmenu.css";
 export const NAV_LINKS: Array<[string, string]> = [
   ["/diensten", "Diensten"],
   ["/projecten", "Resultaten"],
-  ["/prijzen", "Prijzen"],
   ["/team", "Team"],
 ];
 // href in plaats van to: Connect is een eigen pagina buiten de app.

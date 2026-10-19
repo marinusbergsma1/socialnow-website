@@ -15,7 +15,7 @@
 /* Slot onderaan elke pagina: twee tekstlinks onder elkaar krijgen lucht. */
 .sn-site .h-final-close > .h-text-link + .h-text-link { margin-top: 10px; }
 
-/* Waarom het OS gratis kan, onder het OS op maat op /prijzen. */
+/* Waarom het OS gratis kan, onder het OS op maat op /diensten#prijzen. */
 .sn-site .prijs-waarom { max-width: 620px; margin: 16px 0 0; font-size: 14px; line-height: 1.55; color: #9aa6ae; }
 .sn-site .prijs-waarom b { color: #fff; font-weight: 700; }
 

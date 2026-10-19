@@ -347,7 +347,7 @@ const routeSitemapMeta = {
 
 const sitemapUrls = [
   { loc: `${BASE}/`, changefreq: 'weekly', priority: '1.0' },
-  ...Object.keys(routeMeta).filter((route) => route !== 'antwoord-aanvragen').map((route) => ({
+  ...Object.keys(routeMeta).filter((route) => route !== 'antwoord-aanvragen' && route !== 'prijzen').map((route) => ({
     loc: `${BASE}/${route}`,
     ...(routeSitemapMeta[route] || { changefreq: 'monthly', priority: '0.7' }),
   })),
