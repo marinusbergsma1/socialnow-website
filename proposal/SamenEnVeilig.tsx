@@ -34,6 +34,7 @@ const TEKST = {
   label: "Samen bouwen",
   kop: "We verbeteren het product met twee bedrijven.",
   uitleg: "SocialNow OS ontwikkelen we samen met Indexworld, Connect samen met Uncanny. Wat zij in de praktijk tegenkomen, gaat als eerste de volgende versie in.",
+  partnersLabel: "Partners",
   vLabel: "Veiligheid en documentatie",
   vKop: "Zwart op wit hoe we je data beschermen.",
   alles: "Alles over veiligheid",
@@ -47,6 +48,37 @@ const TEKST = {
     { kop: "Gaten sneller dicht.", tekst: "Met AI-voorstellen losten developers beveiligingsmeldingen op in 28 minuten (mediaan), tegen 1,5 uur met de hand. Cijfers van GitHub zelf.", bron: "GitHub, 2024", href: BRON.github },
   ],
 };
+// 19 oktober 2026 (Marinus): "Graag bij Uncanny en Indexworld nog deze balkjes en partners duidelijk maken waarom het een
+// waardevolle toevoeging is om hun erbij te betrekken." De balkjes zijn hun eigen partnerrijen (indexworld.net "Our trusted
+// partners", uncannycs.com "Partnered with"; hun Odoo-, Shopify-, Salesforce- en Adobe-logo hebben het partnerniveau
+// al in het beeld, dus geen onderschrift); de cijfers staan zo op hun eigen homepage (nagelezen 19 oktober 2026).
+const SAMEN = [
+  {
+    naam: "Indexworld", href: "https://indexworld.net", logo: "/images/home-header/indexworld.png", wit: true, product: "os",
+    kop: "Boekhouding en ERP, nagekeken door accountants.",
+    tekst: "Indexworld is een Odoo-partner onder leiding van registeraccountants (CPA) in de VS. Zij zorgen dat je cijfers in het OS kloppen en halen je boekhouding veilig over uit QuickBooks of Sage.",
+    cijfers: ["150+ klanten", "3 continenten", "Geleid door CPA's"],
+    partners: [
+      { naam: "Claude", src: "/images/partners/samen/claude.png", wit: true },
+      { naam: "Odoo", src: "/images/partners/samen/odoo-partner.webp", wit: true, sub: "Partner" },
+      { naam: "Sage", src: "/images/partners/samen/sage.svg", wit: true },
+      { naam: "QuickBooks", src: "/images/partners/samen/quickbooks.webp", wit: true },
+    ],
+  },
+  {
+    naam: "Uncanny", href: "https://uncannycs.com", logo: "/images/home-header/uncanny-op-zwart.svg", wit: false, product: "connect",
+    kop: "Webshop, CRM en ERP echt aan elkaar gekoppeld.",
+    tekst: "Uncanny is Odoo Silver Partner en Shopify-partner, met Salesforce- en Adobe-specialisten in huis. Zij bouwen de koppelingen achter Connect, zodat experts direct in jouw systemen werken.",
+    cijfers: ["135+ klanten", "250+ projecten", "60+ tech-experts"],
+    partners: [
+      { naam: "Odoo Silver Partner", src: "/images/partners/samen/odoo.svg" },
+      { naam: "Shopify Partners", src: "/images/partners/samen/shopify.svg" },
+      { naam: "Salesforce ISV-partner", src: "/images/partners/samen/salesforce.svg" },
+      { naam: "Adobe Certified Professional", src: "/images/partners/samen/adobe.svg" },
+    ],
+  },
+] as const;
+
 const documenten = (taal: Taal) => [
   ...(taal === "nl" ? [{ naam: "Veiligheid en data, handboek", href: DATA_DOCUMENT, meta: "PDF · 24 p." }] : []),
   { naam: "Beveiligingsmaatregelen", href: doc("beveiliging", taal), meta: "PDF" },
@@ -74,16 +106,28 @@ export default function SamenEnVeilig() {
           <h3 id="sn-samen-kop">{t.kop}</h3>
           <p className="sn-samen-uitleg">{t.uitleg}</p>
           <div className="sn-samen-paren">
-            <div className="sn-samen-paar">
-              <img className="sn-samen-os" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" />
-              <X size={18} aria-hidden="true" />
-              <a href="https://indexworld.net" target="_blank" rel="noopener noreferrer"><img className="sn-samen-wit" src="/images/home-header/indexworld.png" alt="Indexworld" /></a>
-            </div>
-            <div className="sn-samen-paar">
-              <ConnectLogo />
-              <X size={18} aria-hidden="true" />
-              <a href="https://uncannycs.com" target="_blank" rel="noopener noreferrer"><img src="/images/home-header/uncanny-op-zwart.svg" alt="Uncanny" /></a>
-            </div>
+            {SAMEN.map(b => (
+              <article className="sn-samen-partner" key={b.naam}>
+                <div className="sn-samen-paar">
+                  {b.product === "os" ? <img className="sn-samen-os" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" /> : <ConnectLogo />}
+                  <X size={18} aria-hidden="true" />
+                  <a href={b.href} target="_blank" rel="noopener noreferrer"><img className={b.wit ? "sn-samen-wit" : undefined} src={b.logo} alt={b.naam} /></a>
+                </div>
+                <div className="sn-samen-waarom">
+                  <h4>{b.kop}</h4>
+                  <p>{b.tekst}</p>
+                  <ul className="sn-samen-cijfers">{b.cijfers.map(c => <li key={c}>{c}</li>)}</ul>
+                </div>
+                <div className="sn-samen-balk">
+                  <span>{t.partnersLabel}</span>
+                  <ul>
+                    {b.partners.map(p => (
+                      <li key={p.naam}><img className={"wit" in p && p.wit ? "sn-samen-wit" : undefined} src={p.src} alt={p.naam} loading="lazy" />{"sub" in p && <small>{p.sub}</small>}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
         <div className="sn-samen-blok sn-samen-docs">
