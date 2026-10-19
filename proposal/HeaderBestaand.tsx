@@ -187,7 +187,8 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
           <div className="wrap">
             <div className="section-head video-intro">
               <div className="video-title">
-                <h1>Meer inzicht in je bedrijf. <Typer /></h1>
+                {/* 19 oktober 2026 (Marinus): "Meer winst uit jouw bedrijf en de tussenruimte etc verbeteren" en "Te klein vooral die zin eronder." */}
+                <h1>Meer winst uit jouw bedrijf. <Typer /></h1>
                 <p className="pay-line">De software is gratis. Onze experts doen het echte werk.</p>
                 <ul className="bs-zeker">
                   {/* 18 oktober 2026 (Marinus): "Die punten eronderaan Gratis website en rebranding, veilig. Eigen beheer en keuzes." */}

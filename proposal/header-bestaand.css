@@ -67,3 +67,13 @@
 .sn-site .sn-bestaand .bs-punten+.action{margin-top:18px}
 /* 18 oktober 2026 (Marinus): "zin onder die titel kleiner zodat het niet 2 zinnen zijn". Op desktop één regel. */
 @media(min-width:1151px){.sn-site .sn-choice.sn-bestaand .showcase .video-intro .pay-line{font-size:clamp(14px,1.1vw,22px);text-wrap:balance}}
+
+/* 19 oktober 2026 (Marinus): "Meer winst uit jouw bedrijf en de tussenruimte etc verbeteren" en "Te klein vooral die zin eronder."
+   Zin onder de titel groter, de drie punten groter, en meer lucht tussen titel, getypte regel, zin en punten. */
+.sn-site .sn-choice.sn-bestaand .showcase .video-title h1{margin:0 0 22px!important}
+.sn-site .sn-choice.sn-bestaand .showcase .video-intro .pay-line{font-size:clamp(19px,1.55vw,27px)!important;line-height:1.4;color:#d6e2db;text-wrap:balance}
+.sn-site .sn-bestaand .bs-zeker{gap:12px 26px;margin:26px 0 0}
+.sn-site .sn-bestaand .bs-zeker li{font-size:clamp(15px,1.05vw,17px);gap:9px}
+.sn-site .sn-bestaand .bs-zeker svg{width:18px;height:18px}
+@media(min-width:1151px){.sn-site .sn-bestaand .bs-typer{margin-top:6px}}
+@media(max-width:760px){.sn-site .sn-choice.sn-bestaand .showcase .video-title h1{margin:0 0 16px!important}.sn-site .sn-bestaand .bs-zeker{margin-top:20px;gap:10px 18px}}
