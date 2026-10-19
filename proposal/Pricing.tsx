@@ -401,9 +401,9 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
         <p className="h-eyebrow prijs-groen-tekst">Diensten en prijzen</p>
         {/* 19 oktober 2026 (Marinus): "Software, studio, socialmedia management, boekhouding en Ai agents gratis. Dat is wel belangrijk
             ipv alleen software. Bij ons betaal je voor winst en expertise". Daarna: "Je betaalt voor onze expertise in jouw winstgevend maken." */}
-        <Kop>
-          Software, Studio, social media, boekhouding en AI agents gratis.
-          <br />
+        {/* Variant A "klein en rustig" (Marinus, 19 oktober 2026): wat gratis is klein erboven, waar je voor betaalt groot. */}
+        <Kop className="prijs-kop-a">
+          <span className="prijs-kop-r1">Software, Studio, social media, boekhouding en AI agents gratis.</span>
           <em>Je betaalt voor onze expertise om jou winstgevend te maken.</em>
         </Kop>
         <p>Alle bedragen zijn exclusief btw.</p>

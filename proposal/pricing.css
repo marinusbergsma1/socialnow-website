@@ -674,3 +674,6 @@
 .sn-site .prijs-vergelijk td.is-nee { color: #4b545c; }
 .sn-site .prijs-los .prijs-betaling { margin: 4px 0 0; font-size: 13px; font-weight: 600; color: #fff; }
 .sn-site .prijs-periode .prijs-bespaar { margin-left: 6px; padding: 2px 7px; border-radius: 999px; background: #0b7a37; color: #fff; font-size: 11px; }
+/* 19 oktober 2026: kopvariant A, klein en rustig. */
+:root .sn-site .prijs-diensten-kop .prijs-kop-a { display: grid; gap: 10px; font-size: clamp(32px, 4.4vw, 56px) !important; line-height: 1.05; }
+:root .sn-site .prijs-diensten-kop .prijs-kop-a .prijs-kop-r1 { font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; line-height: 1.25; color: #d6dbe0; }
