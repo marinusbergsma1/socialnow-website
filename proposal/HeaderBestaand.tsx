@@ -72,7 +72,11 @@ const ONDERDELEN: Record<string, string[]> = {
 // 18 oktober 2026 (Marinus): "En veiliger. Klinkt een beetje matig [...] Veiligheid, minder kosten meer winst eigen data
 // etc etc menselijk contact dat zijn de belangrijke onderdelen 3 best mogelijke zinnen die om de zoveel tijd teruggetypt
 // en opnieuw uitgetypt worden [...] maar niet te druk maken." Drie korte zinnen, elk 3 seconden in beeld.
-const ZINNEN = ["Veiliger dan je oude software.", "Minder kosten. Meer winst.", "Met echte mensen, niet alleen AI."];
+// Daarna: "Minder kosten. Meer winst is een beetje goedkoop" en "focus meer op persoonlijk én écht 100% eigen operation en
+// management systeem. Plug and play eigen keuzes etc".
+// En: "In die titel al dus verder nog iets simpeler". De titel zegt nu zelf "Echt 100% je eigen systeem."; de getypte regel
+// eronder is kort: drie woordgroepen.
+const ZINNEN = ["Persoonlijk ingericht.", "Plug and play.", "Met jouw keuzes."];
 const TIK = 55, WEG = 28, STAAN = 3000;
 
 function Typer() {
@@ -183,12 +187,13 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
           <div className="wrap">
             <div className="section-head video-intro">
               <div className="video-title">
-                <h1>Meer inzicht in je bedrijf. <Typer /></h1>
+                <h1>Echt 100% je eigen systeem. <Typer /></h1>
                 <p className="pay-line">Wij maken je data inzichtelijker én veiliger, met echte experts en AI.</p>
                 <ul className="bs-zeker">
-                  <li><ShieldCheck size={15} aria-hidden="true" /><b>Veiliger dan verouderde software en processen</b></li>
-                  <li><ShieldCheck size={15} aria-hidden="true" />Rechten per persoon</li>
-                  <li><ShieldCheck size={15} aria-hidden="true" /><Link to="/veiligheid" onClick={() => meet("veiligheid")}>Zo beveiligen wij</Link></li>
+                  {/* 18 oktober 2026 (Marinus): "Die punten eronderaan Gratis website en rebranding, veilig. Eigen beheer en keuzes." */}
+                  <li><ShieldCheck size={15} aria-hidden="true" /><b>Gratis website en rebranding</b></li>
+                  <li><ShieldCheck size={15} aria-hidden="true" /><Link to="/veiligheid" onClick={() => meet("veiligheid")}>Veilig</Link></li>
+                  <li><ShieldCheck size={15} aria-hidden="true" />Eigen beheer en keuzes</li>
                 </ul>
               </div>
             </div>
