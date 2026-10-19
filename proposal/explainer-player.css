@@ -6,3 +6,6 @@
 :root .sn-site .sn-video-compact{display:inline-block;width:auto;margin-top:16px;background:#102337;color:white}
 :root .sn-site .sn-video-compact>span{position:static;transform:none;background:transparent;border:0;padding:12px 16px;white-space:normal}
 @media(max-width:600px){.sn-video-toolbar{gap:8px;flex-wrap:wrap}.sn-video-toggle{padding:9px 10px}.sn-video-try{gap:8px;padding-left:10px}}
+/* 19 oktober 2026 (Marinus, "Dit ziet er niet uit"): de knop "Bekijk mijn verhaal" in Mijn waarom viel weg in een smalle balk
+   van 14 px hoog, omdat de algemene omslagregels (blok, overflow hidden) wonnen. De compacte speler is gewoon een knop. */
+html:root .sn-site .sn-explainer-cover.sn-video-compact{display:inline-flex;align-self:flex-start;width:auto;height:auto;min-height:0;aspect-ratio:auto;overflow:visible;margin-top:20px;padding:0;border:0;border-radius:999px;background:transparent;box-shadow:none}

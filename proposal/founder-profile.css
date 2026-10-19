@@ -1,0 +1,33 @@
+/* Founder-profiel (Marinus, foto met ervaring). Tot 15 oktober 2026 stond dit in home-header.css; die wordt sinds de nieuwe
+   header nergens meer geladen, waardoor het profiel op /team zonder opmaak verscheen ("Dit ziet er niet uit", 19 oktober 2026).
+   Daarna: "Graag zoals Linkedin" en "Verhoudingen etc": gelijke vierkante logo's van 48 px, vaste kolom, gewone letter. */
+:root .sn-site .h-verhaal-portret .sn-tegel-vlak{min-height:0}
+:root .sn-site .h-verhaal-portret .sn-tegel-vlak::after{display:none}
+.sn-site .sn-founder-profile{margin:0}
+.sn-site .sn-founder-profile>img{position:relative;display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:center 22%}
+.sn-site .sn-founder-experience{display:grid;gap:18px;padding:22px 22px 24px;background:#0c1622;color:#fff;border-top:1px solid #ffffff26;font-family:"TT Norms",Arial,sans-serif}
+.sn-site .sn-founder-kop{display:grid;gap:4px}
+.sn-site .sn-founder-kop strong{font-family:inherit;font-size:20px;font-weight:700;line-height:1.25;color:#fff;letter-spacing:0}
+.sn-site .sn-founder-kop span{font-size:14px;line-height:1.45;color:#aebbc7}
+.sn-site .sn-founder-label{margin:0;padding-top:16px;border-top:1px solid #ffffff1f;font-size:16px;font-weight:700;color:#fff}
+.sn-site .sn-founder-lijst{list-style:none;margin:0;padding:0;display:grid}
+.sn-site .sn-founder-lijst li{display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;align-items:start;padding:14px 0}
+.sn-site .sn-founder-lijst li+li{border-top:1px solid #ffffff1a}
+/* Zoals LinkedIn: SocialNow vult een zwart vak met ronde hoeken, het eigen logo staat los zonder vlak. */
+.sn-site .sn-founder-logo{display:block;width:48px;height:48px;overflow:hidden}
+.sn-site .sn-founder-logo img{display:block;width:100%;height:100%;object-fit:contain}
+.sn-site .sn-founder-logo.is-vlak{border-radius:8px;background:#000}
+.sn-site .sn-founder-logo.is-vlak img{object-fit:cover}
+.sn-site .sn-founder-regels{display:grid;gap:2px;min-width:0}
+.sn-site .sn-founder-regels b{font-size:15px;font-weight:700;line-height:1.35;color:#fff}
+.sn-site .sn-founder-regels span{font-size:14px;line-height:1.4;color:#d3dbe2}
+.sn-site .sn-founder-regels .sn-founder-duur{font-size:13px;color:#8d9aa6}
+.sn-site .sn-founder-regels .sn-founder-tekst{margin-top:8px;font-size:14px;line-height:1.5;color:#d3dbe2}
+
+/* Mijn waarom naast het profiel: de tegel is een kolom met overflow hidden, waardoor de quote uitrekte (lege ruimte) en de knop
+   "Bekijk mijn verhaal" tot 12 px werd samengeperst. Alles op eigen hoogte, de tegel groeit mee. */
+.sn-site .h-verhaal .sn-tegel-vlak:has(> .h-verhaal-waarom) { height: auto; overflow: visible; }
+.sn-site .h-verhaal .sn-tegel-vlak:has(> .h-verhaal-waarom) > * { flex-shrink: 0; }
+.sn-site .h-verhaal .sn-tegel-vlak > .h-verhaal-waarom { height: auto; justify-content: flex-start; }
+/* De site zet elke figcaption in monospace (met !important); de ervaring leest zoals LinkedIn in de gewone letter. */
+:root .sn-site .sn-founder-experience, :root .sn-site .sn-founder-experience * { font-family: "TT Norms", Arial, sans-serif !important; letter-spacing: 0 !important; text-transform: none !important; }
