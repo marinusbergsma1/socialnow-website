@@ -35,5 +35,728 @@
     "licentie": "Merklogo van OpenAI; API-gebruikers mogen naar de gebruikte OpenAI-technologie verwijzen, zonder partnerschap te suggereren; merkrecht bij OpenAI",
     "regels": "Blossom alleen in zwart of wit, nooit ingekleurd; hier de witte versie, niet aangepast",
     "datum": "2026-10-18"
+  },
+  "flux": {
+    "bron": "https://bfl.ai/brand/symbol-white.svg",
+    "pagina": "https://bfl.ai/brand",
+    "licentie": "Merklogo van Black Forest Labs; brand- en presskitpagina is bedoeld voor externe partijen; alleen zwart of wit, geen vervorming, rotatie, herkleuring of effecten; symbool alleen op kleine formaten; merkrecht bij Black Forest Labs",
+    "regels": "Officiële witte symbool (FLUX/BFL), niet aangepast",
+    "datum": "2026-10-19"
+  },
+  "cohere": {
+    "bron": "https://cohere.com/logo_mobile_dark.svg",
+    "pagina": "https://cohere.com",
+    "licentie": "Merklogo van Cohere, zoals het bedrijf zelf het op de eigen site toont; geen aparte brandpagina gevonden; merkrecht bij Cohere",
+    "regels": "Wit compact symbool uit de donkere mobiele variant op cohere.com, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#355146"
+  },
+  "descript": {
+    "bron": "https://cdn.prod.website-files.com/5d761d627a6dfa6a5b28ab12/697a55efbadd658cca31d24d_descript-favicon-32.svg",
+    "pagina": "https://www.descript.com",
+    "licentie": "Merklogo van Descript, huidige favicon/app-icoon van de eigen site; geen persmap gevonden (descript.com/press geeft 404); merkrecht bij Descript",
+    "regels": "Niet aangepast; donkerrood afgerond vlak met roze/rode D, dus eigen achtergrond op de donkere tegel",
+    "datum": "2026-10-19",
+    "kleur": "#F73B3B"
+  },
+  "groq": {
+    "bron": "https://groq.com/favicon.svg",
+    "pagina": "https://groq.com",
+    "licentie": "Merklogo van Groq, huidige favicon van de eigen site (oranje bliksemvlak); de oude brandgids (groq.com/brand-guidelines) bestaat niet meer, mini-stijlgids v2 beschrijft Groq Orange #F55036; merkrecht bij Groq",
+    "regels": "Niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#F55036"
+  },
+  "heygen": {
+    "bron": "https://dynamic.heygen.ai/Heygen%20Brand-kit/heygen-brandkit.zip (heygen-brandkit/heygen-full-white-color-logo.svg)",
+    "pagina": "https://www.heygen.com/brand-kit",
+    "licentie": "Merklogo van HeyGen Inc.; brandkit is publiek downloadbaar en alleen te gebruiken volgens de HeyGen-richtlijnen en Style Guide; merkrecht bij HeyGen",
+    "regels": "Gestapeld volledig logo, witte tekst met kleurensymbool (voor donkere achtergrond); niet aangepast. De symbool-only SVG's uit het pakket bevatten een ingebedde bitmap en zijn daarom niet gebruikt",
+    "datum": "2026-10-19"
+  },
+  "higgsfield": {
+    "bron": "https://higgsfield.ai (inline SVG in de header, element .hf-logo__glyph)",
+    "pagina": "https://higgsfield.ai",
+    "licentie": "Merklogo van Higgsfield, glyph uit de eigen header; geen brandpagina of persmap gevonden; merkrecht bij Higgsfield",
+    "regels": "Pad ongewijzigd; fill currentColor vervangen door wit, class/aria-attributen verwijderd en xmlns toegevoegd",
+    "datum": "2026-10-19"
+  },
+  "ideogram": {
+    "bron": "https://ideogram.ai/_astro/new-logo.wmOvXw7A.svg",
+    "pagina": "https://ideogram.ai",
+    "licentie": "Merklogo van Ideogram (nieuwe huisstijl 2026, in de header van de eigen site); geen brandpagina gevonden; merkrecht bij Ideogram",
+    "regels": "Niet aangepast; embleem plus woordmerk, donkerpaars (#272038), dus alleen leesbaar op een lichte ondergrond. Bestand is via de browser opgehaald omdat Cloudflare curl blokkeert",
+    "datum": "2026-10-19",
+    "kleur": "#272038",
+    "donker": true
+  },
+  "kling": {
+    "bron": "https://klingai.com (inline SVG in de header, icon IconKlingLogoEn)",
+    "pagina": "https://klingai.com",
+    "licentie": "Merklogo van Kling AI (Kuaishou), logo uit de eigen header; geen persmap gevonden; merkrecht bij Kuaishou/Kling",
+    "regels": "Pad ongewijzigd; fill currentColor vervangen door wit, overige attributen verwijderd en xmlns toegevoegd; embleem plus woordmerk",
+    "datum": "2026-10-19"
+  },
+  "leonardo": {
+    "bron": "https://leonardo.ai/images/leonardo_wordmark.svg",
+    "pagina": "https://leonardo.ai",
+    "licentie": "Merklogo van Leonardo.Ai (Canva), woordmerk uit de header van de eigen site (lichtgrijs #EDEDED, bedoeld voor donker); geen persmap gevonden; merkrecht bij Leonardo.Ai",
+    "regels": "Niet aangepast; alleen woordmerk (breed), geen losse symboolversie als SVG beschikbaar. Bestand is via de browser opgehaald omdat Cloudflare curl blokkeert",
+    "datum": "2026-10-19"
+  },
+  "luma": {
+    "bron": "https://lumalabs.ai/images/brand/luma-ai/logo-white.svg",
+    "pagina": "https://lumalabs.ai",
+    "licentie": "Merklogo van Luma AI, uit de brandmap van de eigen site; geen brandrichtlijnen gevonden; merkrecht bij Luma AI",
+    "regels": "Witte symboolversie, niet aangepast",
+    "datum": "2026-10-19"
+  },
+  "pika": {
+    "bron": "https://pika.art/icon.svg",
+    "pagina": "https://pika.art",
+    "licentie": "Merklogo van Pika, het site-icoon van pika.art; geen persmap gevonden; merkrecht bij Pika",
+    "regels": "Pad ongewijzigd; het donkere-modus-stijlblok verwijderd en fill zwart vervangen door wit (de oorspronkelijke SVG is zwart en wordt alleen wit in donkere modus)",
+    "datum": "2026-10-19"
+  },
+  "remotion": {
+    "bron": "https://raw.githubusercontent.com/remotion-dev/brand/main/logo.svg",
+    "pagina": "https://www.remotion.dev/brand",
+    "licentie": "Merklogo van Remotion uit de eigen brandrepository (github.com/remotion-dev/brand), gelinkt vanaf remotion.dev/brand; repository heeft geen aparte licentietekst; merkrecht bij Remotion",
+    "regels": "Kleurenlogo (blauw #0B84F3), niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#0B84F3"
+  },
+  "runway": {
+    "bron": "https://runway.com/assets/Runway-Brand-Guidelines.zip (Runway Brand Guidelines/Runway_White_Symbol_SVG.svg)",
+    "pagina": "https://runway.com/brand-guidelines",
+    "licentie": "Merklogo van Runway; logopakket staat op de brandpagina (download vraagt akkoord met de richtlijnen, het zip is direct opgehaald, de gebruiksvoorwaarden zijn niet geaccepteerd in de pagina); merkrecht bij Runway",
+    "regels": "Officiële witte symbool, niet aangepast",
+    "datum": "2026-10-19"
+  },
+  "synthesia": {
+    "bron": "https://cdn.prod.website-files.com/65e89895c5a4b8d764c0d710/65eae6894e82dff052cd139f_Logo-white.svg",
+    "pagina": "https://www.synthesia.io/press",
+    "licentie": "Merklogo van Synthesia, witte logo-variant van de eigen site/persmap; merkrecht bij Synthesia",
+    "regels": "Niet aangepast; symbool plus woordmerk (breed)",
+    "datum": "2026-10-19"
+  },
+  "minimax": {
+    "bron": "https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/minimax.svg",
+    "pagina": "https://simpleicons.org/?q=minimax",
+    "licentie": "Simple Icons (CC0) voor het pad; merkrecht bij MiniMax",
+    "regels": "Pad ongewijzigd; fill #E73562 (Simple Icons-merkkleur) toegevoegd omdat het bestand geen kleur heeft",
+    "datum": "2026-10-19",
+    "kleur": "#E73562"
+  },
+  "canva": {
+    "bron": "https://en.wikipedia.org/wiki/Special:FilePath/Canva_Logo.svg",
+    "pagina": "https://en.wikipedia.org/wiki/File:Canva_Logo.svg",
+    "licentie": "Officieel Canva-logo zoals opgeslagen op Wikipedia (public domain als tekstlogo); merkrecht bij Canva; de Canva-brandhub (canvacreative.team/brand-logo) kon niet geopend worden en het Canva-ontwikkelaarsdossier staat alleen gebruik toe zoals in de richtlijnen beschreven",
+    "regels": "Niet aangepast; schrijfletter-woordmerk in kleurverloop, geen losse symboolversie",
+    "datum": "2026-10-19",
+    "kleur": "#7D2AE8"
+  },
+  "adobe-firefly": {
+    "bron": "https://commons.wikimedia.org/wiki/Special:FilePath/Adobe_Firefly_CC_2026_icon.svg",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Adobe_Firefly_CC_2026_icon.svg",
+    "licentie": "Wikimedia Commons: public domain (tekstlogo), als 'trademarked' gemarkeerd; auteur Adobe Inc.; merkrecht bij Adobe; Adobe's eigen brandpagina vraagt om in te loggen en blokkeert downloads",
+    "regels": "Niet aangepast; actuele Firefly-app-icoon (rood vlak met Fi)",
+    "datum": "2026-10-19",
+    "kleur": "#EB1000"
+  },
+  "grok": {
+    "bron": "https://commons.wikimedia.org/wiki/Special:FilePath/Grok-feb-2025-logo.svg",
+    "pagina": "https://x.ai/legal/brand-guidelines",
+    "licentie": "Wikimedia Commons: public domain, als 'trademarked' gemarkeerd, auteur X.AI Corp. (nu SpaceXAI), huidig Grok-logo sinds februari 2025; het officiële logopakket op x.ai (data.x.ai/logos/SpaceXAI_Grok_Assets.zip) gaf 403 voor een geautomatiseerde download; merkrecht bij xAI/SpaceXAI; gebruik alleen zoals aangeleverd, zonder wijziging",
+    "regels": "Alleen class-attribuut verwijderd en currentColor vervangen door zwart (#000); logo is zwart en er is geen witte versie opgehaald, daarom donker: true; symbool plus woordmerk",
+    "datum": "2026-10-19",
+    "donker": true
+  },
+  "linkedin": {
+    "bron": "https://commons.wikimedia.org/wiki/Special:FilePath/Linkedin-logo-blue-In-square-40px.svg",
+    "pagina": "https://brand.linkedin.com/in-logo",
+    "licentie": "Wikimedia Commons: CC0, door een gebruiker herkleurde versie van het officiële [in]-icoon in de huidige LinkedIn-blauw (#0A66C2); de officiële brandpagina biedt het [in]-logo alleen als PNG aan; merkrecht bij LinkedIn (Microsoft)",
+    "regels": "Niet aangepast; let op: zelf-gemaakte SVG-kopie, vormgelijk aan het officiële [in]-icoon",
+    "datum": "2026-10-19",
+    "kleur": "#0A66C2"
+  },
+  "linkedin-ads": {
+    "bron": "https://commons.wikimedia.org/wiki/Special:FilePath/Linkedin-logo-blue-In-square-40px.svg",
+    "pagina": "https://brand.linkedin.com/in-logo",
+    "licentie": "Wikimedia Commons: CC0, door een gebruiker herkleurde versie van het officiële [in]-icoon in de huidige LinkedIn-blauw (#0A66C2); de officiële brandpagina biedt het [in]-logo alleen als PNG aan; merkrecht bij LinkedIn (Microsoft)",
+    "regels": "Niet aangepast; zelfde bestand als linkedin (LinkedIn Ads heeft geen eigen symbool; LinkedIn-merkrichtlijnen)",
+    "datum": "2026-10-19",
+    "kleur": "#0A66C2"
+  },
+  "microsoft-ads": {
+    "bron": "https://commons.wikimedia.org/wiki/Special:FilePath/Microsoft_logo.svg",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Microsoft_logo.svg",
+    "licentie": "Wikimedia Commons: public domain (tekstlogo), als 'trademarked' gemarkeerd, auteur Microsoft; merkrecht bij Microsoft; Microsoft Advertising heeft zelf geen SVG-merkpakket gevonden (alleen een PNG op Wikipedia)",
+    "regels": "Lichtgrijze achtergrondrechthoek (#f3f3f3) verwijderd, vier kleurvlakken ongewijzigd; Microsoft-bedrijfslogo als symbool voor Microsoft Advertising (twijfelgeval)",
+    "datum": "2026-10-19"
+  },
+  "openai-ads": {
+    "bron": "https://cdn.openai.com/brand/openai-logos.zip (OpenAI-logos/SVGs/OAI_OpenAI-Blossom_White.svg)",
+    "pagina": "https://openai.com/brand/",
+    "licentie": "Merklogo van OpenAI; blossom alleen in zwart of wit, nooit ingekleurd; merkrecht bij OpenAI",
+    "regels": "Witte blossom, niet aangepast; OpenAI Ads heeft geen eigen symbool, het OpenAI-merk wordt gebruikt",
+    "datum": "2026-10-19"
+  },
+  "veo": {
+    "bron": "https://storage.googleapis.com/gdm-deepmind-com-prod-public/media/original_images/nav__dm__veo__large.svg",
+    "pagina": "https://deepmind.google/models/veo/",
+    "licentie": "Navigatie-icoon van Veo op de Google DeepMind-site; Veo heeft geen apart merkpakket gevonden; merkrecht bij Google",
+    "regels": "Niet aangepast; blauw afspeelicoon met sterretje, geen woordmerk (twijfelgeval: icoon van het model, geen vastgelegd logo)",
+    "datum": "2026-10-19"
+  },
+  "hubspot": {
+    "bron": "https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/hubspot.svg",
+    "pagina": "https://simpleicons.org/?q=hubspot",
+    "licentie": "Simple Icons (CC0 voor het bestand); merkrecht bij HubSpot; HubSpot publiceert geen openbaar SVG-pakket",
+    "regels": "Sprocket-symbool; alleen fill=\"#FF7A59\" (HubSpot-oranje) toegevoegd, want het bestand is zonder kleur zwart",
+    "datum": "2026-10-19",
+    "kleur": "#FF7A59"
+  },
+  "hubspot-marketing": {
+    "bron": "https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/hubspot.svg",
+    "pagina": "https://simpleicons.org/?q=hubspot",
+    "licentie": "Simple Icons (CC0 voor het bestand); merkrecht bij HubSpot; HubSpot publiceert geen openbaar SVG-pakket",
+    "regels": "Zelfde HubSpot-sprocket als HubSpot (Marketing Hub deelt het merksymbool); alleen fill=\"#FF7A59\" toegevoegd",
+    "datum": "2026-10-19",
+    "kleur": "#FF7A59"
+  },
+  "salesforce": {
+    "bron": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/11/logo-salesforce.svg",
+    "pagina": "https://www.salesforce.com/",
+    "licentie": "Merklogo van Salesforce, rechtstreeks van salesforce.com; merkrecht bij Salesforce; geen openbare brandpagina gevonden",
+    "regels": "Wolk met woordmerk in blauw en wit, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#00A1E0"
+  },
+  "attio": {
+    "bron": "https://a.storyblok.com/f/234930/8a6f825750/attio-logo-pack.zip (attio-logo-pack/svg/attio-logomark-white.svg)",
+    "pagina": "https://attio.com/brand",
+    "licentie": "Merklogo van Attio, logopakket vrij aangeboden op de merkpagina; merkrecht bij Attio",
+    "regels": "Officiële witte logomark (het logo is zwart, op donker gebruikt Attio wit); niet aangepast. Attio heeft geen merkkleur, dus geen kleur opgegeven",
+    "datum": "2026-10-19"
+  },
+  "close": {
+    "bron": "https://close.com/downloads/close-logo-2024 (zip: close-logo-2024/mark.svg)",
+    "pagina": "https://close.com/brand",
+    "licentie": "Merklogo van Close, logopakket (SVG, PNG, EPS) aangeboden op de merkpagina bij de richtlijn voor het noemen van Close; merkrecht bij Close",
+    "regels": "Symbool (mark) in merkkleuren, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#1463FF"
+  },
+  "copper": {
+    "bron": "https://cdn.prod.website-files.com/69bdc11d6d8dca48c8a32ff4/69c58163b6548ea11daddf60_copper%20logo%20-%20black.svg",
+    "pagina": "https://www.copper.com/press",
+    "licentie": "Merklogo van Copper, rechtstreeks van copper.com; de persmap op de persmap-pagina bevat alleen PNG's; merkrecht bij Copper",
+    "regels": "Woordmerk met roze dubbele punt, niet aangepast. Het logo is bijna zwart (#19092F), dus donker: true; de persmap-PNG in wit bestaat maar is geen SVG",
+    "datum": "2026-10-19",
+    "kleur": "#FF3465",
+    "donker": true
+  },
+  "freshsales": {
+    "bron": "https://developers.freshworks.com/docs/sample-apps/ (freshsales_suite.svg, ingebed als data-URI op de pagina)",
+    "pagina": "https://developers.freshworks.com/docs/sample-apps/",
+    "licentie": "App-icoon van Freshsales uit de Freshworks-developerdocs; merkrecht bij Freshworks; geen openbare brandpagina gevonden",
+    "regels": "Icoon in oranje, niet aangepast; bestand uit de base64-afbeelding van de pagina gedecodeerd",
+    "datum": "2026-10-19",
+    "kleur": "#E57300"
+  },
+  "pipedrive": {
+    "bron": "https://www.pipedrive.com/nl (inlinesvg van de monogram in de sitekop)",
+    "pagina": "https://www.pipedrive.com/en/newsroom/press-kit",
+    "licentie": "Merklogo van Pipedrive; het officiële logopakket vraagt een aanvraag en is niet openbaar; merkrecht bij Pipedrive",
+    "regels": "Monogram van pipedrive.com; clip-path verwijderd en de cirkel kreeg fill=\"#017737\" (Pipedrive-groen uit de sitelogo), want de sitekop kleurt hem via CSS",
+    "datum": "2026-10-19",
+    "kleur": "#017737"
+  },
+  "salesflare": {
+    "bron": "https://salesflare.com/assets/imported/5fab3162bc556f413297.svg",
+    "pagina": "https://salesflare.com/",
+    "licentie": "Merklogo van Salesflare, rechtstreeks van salesflare.com; geen brandpagina gevonden; merkrecht bij Salesflare",
+    "regels": "Alleen het symbool in blauw overgenomen: de woordmerk-paden weggelaten en viewBox bijgesneden; de vorm zelf niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#0053FF"
+  },
+  "teamleader": {
+    "bron": "https://go.teamleader.eu/hubfs/_Lot-Testfolder/Brand%20Assets.zip (Brand Assets/RGB/Teamleader_Icon/Teamleader_Icon.svg)",
+    "pagina": "https://www.teamleader.eu/brand-downloads",
+    "licentie": "Merklogo van Teamleader (Focus is een product van Teamleader), brandpagina met download; het origamisymbool is bedoeld voor plekken waar het standaardlogo niet past; merkrecht bij Teamleader",
+    "regels": "Officieel origami-symbool in teal, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#00B2B2"
+  },
+  "activecampaign": {
+    "bron": "https://active-campaign.files.svdcdn.com/production/general/ActiveCampaign-Logos.zip (ActiveCampaign Glyph/AC_Glyph_Blue/ActiveCampaign-Glyph-Blue.svg)",
+    "pagina": "https://www.activecampaign.com/brand",
+    "licentie": "Merklogo van ActiveCampaign, logopakket aangeboden op de merkpagina; merkrecht bij ActiveCampaign",
+    "regels": "Officiële glyph in ActiveCampaign-blauw, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#004CFF"
+  },
+  "freshdesk": {
+    "bron": "https://www.freshworks.com/beta/icons/template-2026/freshdesk-logo-icon.svg",
+    "pagina": "https://www.freshworks.com/freshdesk/",
+    "licentie": "Productlogo van Freshdesk, rechtstreeks van freshworks.com; geen openbare brandpagina gevonden; merkrecht bij Freshworks",
+    "regels": "Icoon in groen met witte bloem, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#00AC4C"
+  },
+  "klaviyo": {
+    "bron": "https://www.klaviyo.com/ (inlinesvg van het logo in de sitekop)",
+    "pagina": "https://brandpad.io/klaviyo-guidelines",
+    "licentie": "Merklogo van Klaviyo; de richtlijnen staan op Brandpad (niet openbaar leesbaar) en noemen wit of charcoal als toegestane kleuren; merkrecht bij Klaviyo",
+    "regels": "Woordmerk met vlag; currentColor vervangen door wit (#FFFFFF), style en class van de site weggehaald; verder niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#232426"
+  },
+  "mailerlite": {
+    "bron": "https://storage.googleapis.com/mailerlite-website-bucket/download/brand-assets/mailerlite-brand_assets-logo.zip (MailerLite white logo.svg)",
+    "pagina": "https://www.mailerlite.com/brand-assets",
+    "licentie": "Merklogo van MailerLite, logopakket aangeboden op de brand-assets-pagina; merkrecht bij MailerLite",
+    "regels": "Officiële witte versie voor donkere achtergronden, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#09C269"
+  },
+  "postmark": {
+    "bron": "https://active-campaign.files.svdcdn.com/production/general/ActiveCampaign-Logos.zip (Postmark Logo/Postmark Logo White/PM-Logo-White.svg)",
+    "pagina": "https://www.activecampaign.com/brand",
+    "licentie": "Merklogo van Postmark (onderdeel van ActiveCampaign), logopakket op de ActiveCampaign-merkpagina; merkrecht bij ActiveCampaign",
+    "regels": "Officiële witte versie, niet aangepast; bevat de kleine tekst ActiveCampaign boven het woordmerk",
+    "datum": "2026-10-19",
+    "kleur": "#FFDE00"
+  },
+  "twilio": {
+    "bron": "https://raw.githubusercontent.com/gilbarbara/logos/main/logos/twilio-icon.svg",
+    "pagina": "https://www.twilio.com/en-us/legal/logo-use",
+    "licentie": "Bestand uit gilbarbara/logos (CC0); merkrecht bij Twilio; Twilio geeft buiten de Powered by Twilio-badge alleen met schriftelijke toestemming gebruik van het logo vrij",
+    "regels": "Symbool (cirkel met vier stippen) in Twilio-rood, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#F22F46"
+  },
+  "ahrefs": {
+    "bron": "https://static.ahrefs.com/favicon.svg?v=2",
+    "pagina": "https://ahrefs.com/",
+    "licentie": "Merksymbool van Ahrefs, de favicon van ahrefs.com; geen brandpagina gevonden (alle varianten geven 404); merkrecht bij Ahrefs",
+    "regels": "Oranje a-symbool, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#FF8D00"
+  },
+  "microsoft-clarity": {
+    "bron": "https://claritystatic.azureedge.net/images/logo.svg",
+    "pagina": "https://clarity.microsoft.com/",
+    "licentie": "Merklogo van Microsoft Clarity, rechtstreeks van de Clarity-site; geen openbare brandpagina gevonden; merkrecht bij Microsoft",
+    "regels": "Symbool in blauw; alleen de viewBox verruimd naar -0.8 -1.1 21.6 19.6, want de driehoek stak buiten het origineel en werd bovenaan afgekapt",
+    "datum": "2026-10-19",
+    "kleur": "#2B7CD3"
+  },
+  "docusign": {
+    "bron": "https://www.docusign.com/assets/images/docusign-logo.svg",
+    "pagina": "https://www.docusign.com/",
+    "licentie": "Merklogo van DocuSign, rechtstreeks van docusign.com (zelfde bestand als Wikimedia Commons Docusign Full Color.svg); geen openbare brandpagina gevonden; merkrecht bij DocuSign",
+    "regels": "Symbool plus woordmerk, niet aangepast. Het woordmerk is zwart, dus donker: true; een witte officiële versie is niet openbaar gevonden",
+    "datum": "2026-10-19",
+    "kleur": "#4C00FF",
+    "donker": true
+  },
+  "onedrive": {
+    "bron": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Microsoft_OneDrive_Icon_%282025_-_present%29.svg",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Microsoft_OneDrive_Icon_(2025_-_present).svg",
+    "licentie": "Wikimedia Commons, vermeld als publiek domein; merkrecht bij Microsoft",
+    "regels": "Actueel OneDrive-icoon (2025 tot nu), niet aangepast; geldt voor OneDrive, voor SharePoint is geen apart logo toegevoegd",
+    "datum": "2026-10-19",
+    "kleur": "#0078D4"
+  },
+  "youtrust": {
+    "bron": "https://youtrust.com/favicon.svg",
+    "pagina": "https://youtrust.com/",
+    "licentie": "Merksymbool van Youtrust (voorheen Yousign; yousign.com stuurt door naar youtrust.com), de favicon van youtrust.com; geen brandpagina gevonden; merkrecht bij Youtrust",
+    "regels": "Symbool op limoengroene cirkel, niet aangepast; alleen het metadata-blok van de favicon-generator weggehaald (bevatte een externe verwijzing)",
+    "datum": "2026-10-19",
+    "kleur": "#CEFF8F"
+  },
+  "afas": {
+    "bron": "https://media.afas.nl/api/download/file/DcUuVKGSeJSlgAMJ/original/svg/x (AFAS Logo Wit - RGB.svg, collectie AFAS Huisstijl)",
+    "pagina": "https://www.afas.nl/huisstijl",
+    "licentie": "Merklogo van AFAS Software, aangeboden in de AFAS-mediabank via de huisstijlpagina; merkrecht bij AFAS. Huisstijl: logo alleen in blauw of wit (op donker), niet combineren met de oude slogan; voor reclame, print en sponsoring is akkoord van AFAS-marketing nodig",
+    "regels": "Stapellogo in het wit (officiële versie voor donkere achtergrond), niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#005FAA"
+  },
+  "bexio": {
+    "bron": "https://cdn.bexio.com/img/c/l/bexio-nx.svg",
+    "pagina": "https://www.bexio.com/de-CH/ueber-uns/medien",
+    "licentie": "Merklogo van bexio (Bexio AG), SVG uit de header van bexio.com; de mediapagina noemt geen logo-download of gebruiksvoorwaarden; merkrecht bij bexio",
+    "regels": "Alleen het symbool (blauw vlak met groene bx) bewaard, het woordmerk (donkerblauw, onleesbaar op zwart) weggehaald en het kader aangepast; kleuren en vormen verder niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#0D407E"
+  },
+  "business-central": {
+    "bron": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Dynamics_365_Business_Central_logo.svg",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Dynamics_365_Business_Central_logo.svg",
+    "licentie": "Officieel pictogram van Microsoft Dynamics 365 Business Central via Wikimedia Commons (licentie 'Public domain', markering 'trademarked'); merkrecht bij Microsoft",
+    "regels": "Niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#00B1BE"
+  },
+  "chargebee": {
+    "bron": "https://www.chargebee.com/static/resources/brand/chargebee-icon-orange.svg",
+    "pagina": "https://www.chargebee.com/company/press/brand-guidelines/",
+    "licentie": "Merksymbool van Chargebee uit de eigen brand-map op chargebee.com; de brand guidelines noemen geen expliciete licentie (mediakit: https://www.chargebee.com/static/resources/press/chargebee-media-kit.zip); regels: niet vervormen, geen schaduw of verloop, niet op foto's; merkrecht bij Chargebee",
+    "regels": "Symbool in Confident Orange, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#FF3300"
+  },
+  "e-boekhouden": {
+    "bron": "https://cdn.e-boekhouden.nl/branding/eb-logo-full-white.svg",
+    "pagina": "https://www.e-boekhouden.nl/",
+    "licentie": "Merklogo van e-Boekhouden.nl uit de eigen branding-map op de website (geen pers- of huisstijlpagina gevonden); merkrecht bij e-Boekhouden.nl",
+    "regels": "Volledig logo, witte versie voor donkere achtergrond, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#333F64"
+  },
+  "exact-online": {
+    "bron": "https://www.exact.com/media/templates/site/exact/images/favicon/favicon.svg",
+    "pagina": "https://www.exact.com/nl",
+    "licentie": "Merksymbool (rode e) van Exact uit de eigen sitemap op exact.com (geen pers- of huisstijlpagina gevonden); merkrecht bij Exact",
+    "regels": "Alleen het pad van het symbool bewaard, het ingebedde style-blok met kleurfilter weggehaald; kleur #E1141D ongewijzigd",
+    "datum": "2026-10-19",
+    "kleur": "#E1141D"
+  },
+  "fortnox": {
+    "bron": "https://www.fortnox.se/images/brand/fortnox-brand-symbol.svg",
+    "pagina": "https://www.fortnox.se/",
+    "licentie": "Merksymbool van Fortnox uit de eigen map /images/brand/ op fortnox.se (geen pers- of huisstijlpagina gevonden); merkrecht bij Fortnox",
+    "regels": "Symbool in merkkleuren (witte F in groen/geel/donkergroen ring), niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#00DB33"
+  },
+  "informer": {
+    "bron": "https://www.informer.eu/_astro/logo-mark.zwjelEW8.svg",
+    "pagina": "https://www.informer.eu/",
+    "licentie": "Merksymbool van Informer uit de header van informer.eu (geen pers- of huisstijlpagina gevonden); merkrecht bij Informer",
+    "regels": "Symbool in paars, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#714EF2"
+  },
+  "jortt": {
+    "bron": "https://www.jortt.nl/over-ons/logo/jortt-logo-wit.svg",
+    "pagina": "https://www.jortt.nl/pers/",
+    "licentie": "Merklogo van Jortt (jortt bv), aangeboden op de perspagina als SVG, PNG en EPS in blauw en wit; geen expliciete licentie, alleen niet uitrekken, kantelen of voorzien van schaduw of rand; merkrecht bij jortt bv",
+    "regels": "Officiële witte versie (voor donker), niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#3399CC"
+  },
+  "netsuite": {
+    "bron": "https://www.netsuite.com/portal/assets/img/Oracle-NetSuite-Logo-white.svg",
+    "pagina": "https://www.netsuite.com/portal/home.shtml",
+    "licentie": "Merklogo van Oracle NetSuite, witte versie uit de header van netsuite.com (geen aparte brandpagina gevonden); merkrecht bij Oracle",
+    "regels": "Gestapeld Oracle NetSuite-logo in het wit, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#C74634"
+  },
+  "pennylane": {
+    "bron": "https://www.pennylane.com/_nuxt/logo.BkRDgVYD.svg",
+    "pagina": "https://www.pennylane.com/",
+    "licentie": "Merklogo van Pennylane uit de eigen bundel van pennylane.com (geen pers- of huisstijlpagina gevonden); merkrecht bij Pennylane",
+    "regels": "Alleen het symbool bewaard (woordmerk is donker en onleesbaar op zwart), kader aangepast; kleuren niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#00F872"
+  },
+  "rompslomp": {
+    "bron": "https://rompslomp.nl/hubfs/logo.svg",
+    "pagina": "https://www.rompslomp.nl/",
+    "licentie": "Merklogo van Rompslomp uit de HubSpot-bestanden van rompslomp.nl (geen pers- of huisstijlpagina gevonden); merkrecht bij Rompslomp",
+    "regels": "Alleen het symbool (geel vlak met streepjes) bewaard, woordmerk en 'sinds 2015' weggehaald (donker, onleesbaar op zwart), kader aangepast; kleuren niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#F8AE2F"
+  },
+  "snelstart": {
+    "bron": "https://www.snelstart.nl/hubfs/2024/image/Logo.svg",
+    "pagina": "https://www.snelstart.nl/",
+    "licentie": "Merklogo van SnelStart uit de HubSpot-bestanden van snelstart.nl (geen pers- of huisstijlpagina gevonden); merkrecht bij SnelStart",
+    "regels": "Volledig logo (ster plus woordmerk) in blauw en wit, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#0D6EFD"
+  },
+  "visma-eaccounting": {
+    "bron": "https://cdn.prod.website-files.com/69787181d8720ea08c1f22d4/69787181d8720ea08c1f2413_4c4692eb5ce941a6ed0e8a9ea8c1dfc3_vismalogo.svg",
+    "pagina": "https://www.visma.com/",
+    "licentie": "Merklogo van Visma uit de header van visma.com (geen pers- of huisstijlpagina met voorwaarden gevonden; Visma verwijst naar visma.com voor huisstijl); merkrecht bij Visma AS",
+    "regels": "Moederlogo Visma, geen apart eAccounting-logo (dit product heet in de Noordse markt inmiddels Spiris); currentColor vervangen door wit voor de donkere tegel, vormen niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#E60641"
+  },
+  "gocardless": {
+    "bron": "https://brand.gocardless.com/_assets/GC-Symbol.svg",
+    "pagina": "https://brand.gocardless.com/logo",
+    "licentie": "Merk-symbool van GoCardless; logopakket vrij te downloaden op de officiële brandgids; merkrecht bij GoCardless",
+    "regels": "Officieel symbool (gele roundel), niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#FFE500"
+  },
+  "sendcloud": {
+    "bron": "https://framerusercontent.com/images/42cXDspPEL7fiY0Ghw8qS8d6wAc.svg",
+    "pagina": "https://www.sendcloud.com/press/",
+    "licentie": "App-symbool van Sendcloud, geladen van de eigen website; persmateriaal staat op de perspagina en het brandportaal brand.sendcloud.com (portaal was niet te openen); merkrecht bij Sendcloud",
+    "regels": "Symbool (wolk met doos in afgeronde tegel) zoals op sendcloud.com, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#1D96FF"
+  },
+  "qonto": {
+    "bron": "https://qonto.com/blog/assets/logo-7d4cecd23c516a73d28522b73227cb8bdc80cbbe1d7c83d9228a7e0ab84a0852.svg",
+    "pagina": "https://qonto.com/en/press/kit",
+    "licentie": "Merklogo van Qonto, SVG van de eigen website; de officiële mediakit biedt het logo alleen als PNG; merkrecht bij Qonto",
+    "regels": "Zwart woordmerk, niet aangepast; geen officiële witte SVG gevonden, daarom donker",
+    "datum": "2026-10-19",
+    "kleur": "#1D1D1B",
+    "donker": true
+  },
+  "abn-amro": {
+    "bron": "https://upload.wikimedia.org/wikipedia/commons/8/81/ABN_AMRO_logo.svg",
+    "pagina": "https://commons.wikimedia.org/wiki/File:ABN_AMRO_logo.svg",
+    "licentie": "Logo geüpload door ABN AMRO Bank N.V. op Wikimedia Commons (als public domain gemarkeerd, merk wel beschermd); merkrecht bij ABN AMRO",
+    "regels": "Volledig logo (schild + woordmerk) in huiskleuren, niet aangepast; woordmerk is donkergroen, daarom donker",
+    "datum": "2026-10-19",
+    "kleur": "#009286",
+    "donker": true
+  },
+  "tikkie": {
+    "bron": "https://www.tikkie.me/images/svg/tikkie_logo.svg",
+    "pagina": "https://www.tikkie.me",
+    "licentie": "Merklogo van Tikkie (ABN AMRO), SVG van tikkie.me; merkrecht bij ABN AMRO",
+    "regels": "Officieel logo in paarsblauw met groenblauwe euro-bel, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#6A6BD4"
+  },
+  "ing": {
+    "bron": "https://www.ing.com/webfiles/1792143907485/images/ing-logo.svg",
+    "pagina": "https://www.ing.com",
+    "licentie": "Merklogo van ING, SVG van ing.com; logo-richtlijn (PDF) op https://assets.ing.com/m/a8316ae4a3e95434/LogoGuidelines.pdf; merkrecht bij ING",
+    "regels": "Primair logo (blauw woordmerk + oranje leeuw), niet aangepast; officieel alleen op wit bedoeld, daarom donker",
+    "datum": "2026-10-19",
+    "kleur": "#FF6200",
+    "donker": true
+  },
+  "rabobank": {
+    "bron": "https://upload.wikimedia.org/wikipedia/commons/5/55/Rabobank_text_logo.svg",
+    "pagina": "https://www.rabobank.nl/over-ons/pers/mediakit",
+    "licentie": "Woordmerk van Rabobank op Wikimedia Commons (uploader Coöperatieve Rabobank U.A.); de persmediakit toont geen logobestanden; merkrecht bij Rabobank",
+    "regels": "Zelfde woordmerk als in de kop van rabobank.nl; fill #283a93 vervangen door wit, omdat rabobank.nl dit woordmerk zelf wit toont op donker; verder niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#283A93"
+  },
+  "bol": {
+    "bron": "https://upload.wikimedia.org/wikipedia/commons/5/53/Logo_of_Bol_(2025).svg",
+    "pagina": "https://over.bol.com/nl/beeldbank/logo-s-bol/",
+    "licentie": "Logo van bol (2025) via Wikimedia Commons; de beeldbank van bol biedt het logo alleen als JPG en staat gebruik door media toe, niet voor commerciële doeleinden; merkrecht bij bol",
+    "regels": "Blauwe logo bol., niet aangepast; geen officiële witte versie gevonden, daarom donker",
+    "datum": "2026-10-19",
+    "kleur": "#0000A4",
+    "donker": true
+  },
+  "magento": {
+    "bron": "https://upload.wikimedia.org/wikipedia/commons/5/55/Magento_Logo.svg",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Magento_Logo.svg",
+    "licentie": "Logo (c) 2019 Magento, via Wikimedia Commons; merkrecht bij Adobe/Magento",
+    "regels": "Logo met oranje icoon, woordmerk en \"An Adobe Company\", niet aangepast; geen officiële Adobe Commerce-SVG gevonden; grijs woordmerk, daarom donker",
+    "datum": "2026-10-19",
+    "kleur": "#F26322",
+    "donker": true
+  },
+  "amazon-seller": {
+    "bron": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Amazon_icon.svg",
+    "licentie": "Amazon-icoon van Amazon.com, Inc. via Wikimedia Commons; merkrecht bij Amazon",
+    "regels": "Algemeen Amazon-icoon (zwarte a + oranje pijl), geen apart Seller Central-logo; niet aangepast; zwart, daarom donker",
+    "datum": "2026-10-19",
+    "kleur": "#FF9900",
+    "donker": true
+  },
+  "channable": {
+    "bron": "https://eu-central-1-enterprise-euc1.graphassets.com/cm872xsuo009o07ur07ysh2f5/koT3tNvdREaNJih2RMZe",
+    "pagina": "https://www.channable.com/press",
+    "licentie": "Merklogo van Channable, SVG uit de kop van channable.com; de persmediakit (Google Drive) bevat alleen een brandbook-PDF; merkrecht bij Channable",
+    "regels": "Kleurenicoon + donkerpaars woordmerk, niet aangepast; woordmerk is donker, daarom donker",
+    "datum": "2026-10-19",
+    "donker": true
+  },
+  "enable-banking": {
+    "bron": "https://enablebanking.com/logo.svg",
+    "pagina": "https://enablebanking.com",
+    "licentie": "Merklogo van Enable Banking, SVG van de eigen website; geen brand- of perspagina gevonden; merkrecht bij Enable Banking",
+    "regels": "Zwart logo (symbool + woordmerk), niet aangepast; geen witte SVG gevonden, daarom donker",
+    "datum": "2026-10-19",
+    "donker": true
+  },
+  "lightspeed-ecom": {
+    "bron": "https://www.lightspeedhq.com/favicon.svg",
+    "pagina": "https://www.lightspeedhq.com/legal/lightspeed-trademark-and-copyright-guidelines/",
+    "licentie": "Vlam-symbool van Lightspeed, favicon-SVG van lightspeedhq.com; Lightspeed noemt gebruik door derden in zijn trademark-richtlijnen (alleen met licentie of zakelijke relatie); brandgids op lightspeedhq.com/brand/ is niet te lezen zonder JS; merkrecht bij Lightspeed Commerce",
+    "regels": "Officieel rood vlam-symbool, niet aangepast; Lightspeed gebruikt hetzelfde merk voor eCom (C-Series)",
+    "datum": "2026-10-19",
+    "kleur": "#E81C1C"
+  },
+  "lightspeed-retail": {
+    "bron": "https://www.lightspeedhq.com/favicon.svg",
+    "pagina": "https://www.lightspeedhq.com/legal/lightspeed-trademark-and-copyright-guidelines/",
+    "licentie": "Vlam-symbool van Lightspeed, favicon-SVG van lightspeedhq.com; Lightspeed noemt gebruik door derden in zijn trademark-richtlijnen (alleen met licentie of zakelijke relatie); brandgids op lightspeedhq.com/brand/ is niet te lezen zonder JS; merkrecht bij Lightspeed Commerce",
+    "regels": "Officieel rood vlam-symbool, niet aangepast; Lightspeed gebruikt hetzelfde merk voor Retail (X-Series)",
+    "datum": "2026-10-19",
+    "kleur": "#E81C1C"
+  },
+  "multisafepay": {
+    "bron": "https://www.multisafepay.com/fileadmin/user_upload/2025css/img/multisafepay-logo-inv.svg",
+    "pagina": "https://www.multisafepay.com",
+    "licentie": "Merklogo van MultiSafepay, witte SVG van de eigen website; geen perspagina gevonden; merkrecht bij MultiSafepay",
+    "regels": "Witte (inverse) versie voor donkere achtergrond, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#00ABEE"
+  },
+  "myparcel": {
+    "bron": "https://www.myparcel.com/images/logo.svg",
+    "pagina": "https://www.myparcel.com/nl-NL/",
+    "licentie": "Merklogo van MyParcel, SVG van de eigen website; geen perspagina gevonden; merkrecht bij MyParcel",
+    "regels": "Donkergroen logo (icoon + woordmerk), niet aangepast; wit alleen als bitmap-favicon beschikbaar, daarom donker",
+    "datum": "2026-10-19",
+    "kleur": "#0F5C47",
+    "donker": true
+  },
+  "picqer": {
+    "bron": "https://picqer.com/favicon.svg",
+    "pagina": "https://picqer.com/en",
+    "licentie": "Merk-symbool van Picqer, favicon-SVG van picqer.com; geen perspagina gevonden; merkrecht bij Picqer",
+    "regels": "Symbool met de donkere-modus-variant van de eigen SVG (klasse b wit in plaats van paars, het @media-blok vervangen door vaste waarde); vormen niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#6B21FC"
+  },
+  "slack": {
+    "bron": "https://a.slack-edge.com/9cc0056/marketing/img/nav/logo.svg",
+    "pagina": "https://slack.com/media-kit",
+    "licentie": "Merklogo van Slack (Salesforce), door Slack zelf als SVG geserveerd op slack.com; de downloads op brand.slackhq.com vragen een login, dus de officiële SVG van de eigen site gebruikt; merkrecht bij Slack",
+    "regels": "Kleurensymbool (hash) uit de navigatie van slack.com, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#4A154B"
+  },
+  "bamboohr": {
+    "bron": "https://commons.wikimedia.org/wiki/Special:FilePath/BambooHR_logo.svg",
+    "pagina": "https://www.bamboohr.com/about/media-assets/",
+    "licentie": "Merklogo van BambooHR; de eigen mediapagina biedt alleen een PNG (bamboohr-logo-green.png), daarom de SVG van Wikimedia Commons, die er identiek uitziet; merkrecht bij BambooHR",
+    "regels": "Groene woordmerk met blad, niet aangepast; Commons-versie heeft ™ waar de PNG ® heeft",
+    "datum": "2026-10-19",
+    "kleur": "#73C41D"
+  },
+  "cloudflare": {
+    "bron": "https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/cloudflare.svg",
+    "pagina": "https://www.cloudflare.com/press/press-kit/",
+    "licentie": "Simple Icons (CC0) van het Cloudflare-wolkje; merkrecht bij Cloudflare; de eigen persmap bevat alleen PNG/JPG",
+    "regels": "Alleen fill=\"#F38020\" (Cloudflare-oranje) op het pad gezet, geen vormwijziging",
+    "datum": "2026-10-19",
+    "kleur": "#F38020"
+  },
+  "deel": {
+    "bron": "https://website-media.deel.com/logo_revamp_white_3237bd2303.svg",
+    "pagina": "https://www.deel.com/press/",
+    "licentie": "Merklogo van Deel, door Deel zelf als SVG geserveerd op deel.com (witte versie); er is geen publieke brandpagina met downloads; merkrecht bij Deel",
+    "regels": "Witte woordmerk 'deel.' voor donkere achtergronden, niet aangepast",
+    "datum": "2026-10-19"
+  },
+  "factorial": {
+    "bron": "https://factorial.com/images/factorial-logo-square.svg",
+    "pagina": "https://factorial.com/press",
+    "licentie": "Merklogo van Factorial, door Factorial zelf als SVG geserveerd op factorial.com; de persmap (zip) bevat alleen PNG; merkrecht bij Factorial",
+    "regels": "Symbool in Factorial-rood, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#FF355E"
+  },
+  "fireflies": {
+    "bron": "https://fireflies.ai/_next/static/media/logo.4ae482a6.svg",
+    "pagina": "https://fireflies.ai/",
+    "licentie": "Merklogo van Fireflies.ai, het navigatielogo van de eigen site; er is geen publieke brandpagina gevonden; merkrecht bij Fireflies.ai",
+    "regels": "Symbool met kleurverloop, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#DE286E"
+  },
+  "granola": {
+    "bron": "https://www.granola.ai/",
+    "pagina": "https://www.granola.ai/",
+    "licentie": "Merklogo van Granola (inline SVG uit de kop van granola.ai, rebrand 2026); er is geen publieke brandpagina; merkrecht bij Granola",
+    "regels": "Inline SVG uit de paginabron gehaald, alleen class-attributen weggelaten; woordmerk met spiraal, bijna zwart (#1E1E1E); er is geen witte versie gevonden",
+    "datum": "2026-10-19",
+    "donker": true
+  },
+  "loket": {
+    "bron": "https://loket.nl/wp-content/uploads/Loket-beeldmerk-logo.svg",
+    "pagina": "https://loket.nl/",
+    "licentie": "Merklogo (beeldmerk) van Loket.nl, door Loket zelf als SVG geserveerd op loket.nl; er is geen publieke brandpagina; merkrecht bij Loket / Van Spaendonck",
+    "regels": "Beeldmerk alleen (zonder tekst), niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#BC346E"
+  },
+  "microsoft-365": {
+    "bron": "https://commons.wikimedia.org/wiki/File:Microsoft_365_(2022).svg",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Microsoft_365_(2022).svg",
+    "licentie": "Merklogo van Microsoft, SVG van Wikimedia Commons (officieel logo 2022); merkrecht bij Microsoft; Microsoft publiceert de officiële iconen niet als vrije download",
+    "regels": "Niet aangepast",
+    "datum": "2026-10-19"
+  },
+  "microsoft-teams": {
+    "bron": "https://commons.wikimedia.org/wiki/File:Microsoft_Office_Teams_(2025–present).svg",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Microsoft_Office_Teams_(2025–present).svg",
+    "licentie": "Merklogo van Microsoft, SVG van Wikimedia Commons (huidige Teams-icoon 2025); merkrecht bij Microsoft",
+    "regels": "Niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#5B5FC7"
+  },
+  "monday": {
+    "bron": "https://commons.wikimedia.org/wiki/Special:FilePath/Monday_logo.svg",
+    "pagina": "https://monday.com/p/brand-assets",
+    "licentie": "Merklogo van monday.com; SVG van Wikimedia Commons, afkomstig uit de eigen site van monday.com; de eigen brandpagina bood geen SVG-download; merkrecht bij monday.com",
+    "regels": "Niet aangepast; symbool plus woordmerk 'monday.com' in donkergrijs",
+    "datum": "2026-10-19",
+    "kleur": "#F62B54"
+  },
+  "nmbrs": {
+    "bron": "https://www.nmbrs.com/hubfs/raw_assets/public/nmbrs/templates/assets/logo/logo-primary-dark.svg",
+    "pagina": "https://www.nmbrs.com/press",
+    "licentie": "Merklogo van Nmbrs (Visma), door Nmbrs zelf als SVG geserveerd op nmbrs.com; de versie voor donkere achtergrond (wit woordmerk); merkrecht bij Nmbrs",
+    "regels": "Niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#6B5DFF"
+  },
+  "outlook": {
+    "bron": "https://commons.wikimedia.org/wiki/Special:FilePath/Microsoft_Outlook_Icon_(2025–present).svg",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Microsoft_Outlook_Icon_(2025–present).svg",
+    "licentie": "Merklogo van Microsoft, SVG van Wikimedia Commons (nieuw Outlook-icoon 2025); merkrecht bij Microsoft",
+    "regels": "Niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#0F6CBD"
+  },
+  "planday": {
+    "bron": "https://eu-central-1-shared-euc1-02.graphassets.com/cmj0gspo700ig07ur2hf72z0m/cmal5gjco26da08upsmelclvo",
+    "pagina": "https://www.planday.com/",
+    "licentie": "Merklogo (symbool) van Planday, door Planday zelf als SVG geserveerd op planday.com; de persruimte biedt geen download, alleen op aanvraag; merkrecht bij Planday",
+    "regels": "Symbool alleen, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#02B1FF"
+  },
+  "recruitee": {
+    "bron": "https://recruitee.com/hubfs/raw_assets/public/Tellent_Theme_V3/bright/templates/assets/logo/tellent-logo-white.svg",
+    "pagina": "https://recruitee.com/",
+    "licentie": "Merklogo 'tellent recruitee' door Recruitee zelf als SVG geserveerd op recruitee.com (witte versie); er is geen publieke brandpagina; merkrecht bij Recruitee / Tellent",
+    "regels": "Niet aangepast; bevat sinds de samenvoeging ook het woord 'tellent'",
+    "datum": "2026-10-19",
+    "kleur": "#5A1CB7"
+  },
+  "shiftbase": {
+    "bron": "https://www.shiftbase.com/favicon.svg",
+    "pagina": "https://www.shiftbase.com/",
+    "licentie": "Merklogo (app-icoon) van Shiftbase, door Shiftbase zelf als SVG geserveerd op shiftbase.com; er is geen publieke brandpagina; merkrecht bij Shiftbase",
+    "regels": "Favicon met verloop in afgeronde tegel, niet aangepast",
+    "datum": "2026-10-19",
+    "kleur": "#c86bfa"
   }
 }

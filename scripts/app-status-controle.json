@@ -13,7 +13,7 @@
       "status": "os",
       "bewijs": "os/dashboard-kanalen.js, os/dashboard-wizard.js:566 naar api/kanalen.js:160 en api/_zernio.js KANALEN"
     },
-    "facebook": {
+    "meta": {
       "status": "os",
       "bewijs": "os/dashboard-kanalen.js naar api/kanalen.js en api/_zernio.js KANALEN"
     },
@@ -153,7 +153,7 @@
     "docusign": "review",
     "enable-banking": "betaald",
     "exact-online": "review",
-    "facebook": "zernio",
+    "meta": "zernio",
     "fortnox": "partner",
     "google-ads": "review",
     "google-business-profile": "zernio",
