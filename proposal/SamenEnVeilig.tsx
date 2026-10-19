@@ -31,9 +31,10 @@ const TEKST = {
   uspLabel: "Veiligheid",
   uspKop: "Veiliger dan je verouderde software en processen.",
   uspUitleg: "Software zonder updates is de grootste ingang voor hackers. Wij zetten alles in één OS, met rechten per persoon, versleutelde sleutels en echte experts die meekijken.",
+  // 19 oktober 2026, avond (Marinus): "Moet de producten zijn en team van Connect voor de rest van het doorontwikkel verhaal."
   label: "Samen bouwen",
-  kop: "We verbeteren het product met twee bedrijven.",
-  uitleg: "SocialNow OS ontwikkelen we samen met Indexworld, Connect samen met Uncanny. Wat zij in de praktijk tegenkomen, gaat als eerste de volgende versie in.",
+  kop: "We verbeteren de producten met twee bedrijven.",
+  uitleg: "SocialNow OS ontwikkelen we samen met Indexworld, Connect samen met Uncanny. De rest van de doorontwikkeling doen we met het team van Connect: wat zij in de praktijk tegenkomen, gaat als eerste de volgende versie in.",
   partnersLabel: "Partners",
   vLabel: "Veiligheid en documentatie",
   vKop: "Zwart op wit hoe we je data beschermen.",
