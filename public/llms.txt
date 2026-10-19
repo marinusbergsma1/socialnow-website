@@ -13,15 +13,15 @@ Je begint gratis. Kies je voor maatwerk, dan organiseert en betaalt SocialNow B.
 ## Product en aanbod
 
 - SocialNow OS brengt website, CRM, content en advertenties samen. De startroute is WEBSITE → CONTENT → STUDIO.
-- GRATIS tot 10 GB opslag. Bij de aanmelding koppel je je rekening met een SEPA-machtiging; onder 10 GB wordt niets afgeschreven. Voor meer opslag neem je contact op. Genoemde prijzen zijn exclusief btw.
-- Tokens voor de Studio: 1.000, 2.500 of 5.000 tokens voor €10, €25 of €50 per maand. Eén token is één cent rendertegoed.
-- Een custom OS zit in elk maandpakket. Inrichting, koppelingen en begeleiding spreken we persoonlijk af.
+- Het OS: Gratis met 10 GB opslag en 2 uitgenodigde mensen. Team €35 per maand voor 2 tot 5 medewerkers met 1.500 tokens per maand en 50 GB opslag. Business €65 per maand voor 5 tot 10 medewerkers met 4.000 tokens per maand, 100 GB opslag en korting op extra tokens. Maandelijks opzegbaar. Genoemde prijzen zijn exclusief btw.
+- Tokens zijn rendertegoed voor de Studio; één token is één cent. Extra tokens koop je los: 1.000, 2.500 of 5.000 tokens voor €10, €25 of €50.
+- Los: een gratis demowebsite, een website voor €2.000 tot €5.000 eenmalig, of alleen een custom OS vanaf €10.000 eenmalig.
 - Odoo is een optionele koppeling voor klanten en verkoop. Odoo is geen vereiste om met SocialNow OS te beginnen.
 - Beschikbare gegevens hangen af van de gekozen koppelingen en toegangsrechten. Functies en persoonlijke inrichting worden samen afgesproken; de testomgeving is in ontwikkeling.
 
 ## Aanvullende samenwerking
 
-De gepubliceerde maandpakketten lopen minimaal 3 maanden: Content €4.000 per maand, Content + Meta €5.000 per maand, Meta + Google €5.500 per maand en Compleet €6.000 per maand, exclusief btw. Ze zijn een extra laag bovenop het gratis OS. Scope en kosten worden vooraf afgesproken; de details staan op de [aanbodpagina](https://socialnow.nl/nl/prijzen).
+Connect-pakketten lopen minimaal 3 maanden, exclusief btw en mediabudget. In elk pakket maken we website, custom OS, branding, content en advertenties: Start €3.000 per maand, Meta €4.000 per maand (met Meta Ads beheer), Meta + Google €4.500 per maand en Compleet €5.000 per maand (met boekhouding). Alle bedragen staan op de [dienstenpagina](https://socialnow.nl/nl/diensten#prijzen).
 
 ## Voorbeeld: VDZ Brigade
 
@@ -34,7 +34,6 @@ Onderstaande links verwijzen naar bestaande Nederlandse pagina's. De Engelse ver
 - [Home](https://socialnow.nl/nl/): menselijke verbinding, producten en samenwerking.
 - [SocialNow OS](https://socialnow.nl/nl/het-os): het product, onderdelen en optionele koppelingen.
 - [Diensten](https://socialnow.nl/nl/diensten): development, branding, content, SEO en advertenties.
-- [Prijzen](https://socialnow.nl/nl/prijzen): gratis instap, opslag en persoonlijk maatwerk.
 - [Team en partners](https://socialnow.nl/nl/team): mensen, expertise en bevestigde publieke referenties.
 - [Projecten](https://socialnow.nl/nl/projecten): gepubliceerd werk en cases.
 - [Contact](https://socialnow.nl/nl/contact): persoonlijk gesprek over het OS of een opdracht.

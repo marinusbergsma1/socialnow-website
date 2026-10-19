@@ -27,3 +27,6 @@
 .sn-site .sn-trackrecord-merken img { display: block; width: auto; max-width: 96px; height: 18px; object-fit: contain; }
 .sn-site .sn-trackrecord-merken span { font-size: 11px; font-weight: 600; line-height: 1.3; }
 .sn-site .sn-trackrecord-merken span.is-woordmerk { font-family: ui-monospace, Menlo, monospace; font-weight: 500; }
+/* 19 oktober 2026 (Marinus): geen logo's meer, alleen een link naar het profiel. */
+.sn-site .sn-trackrecord-profiel { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; margin-top: auto; padding: 7px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; font-size: 13px; color: #e7eaee; text-decoration: none; transition: border-color .2s; }
+.sn-site .sn-trackrecord-profiel:hover { border-color: #25d366; }

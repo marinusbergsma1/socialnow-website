@@ -23,12 +23,13 @@ import { Bento, Tegel } from "./Bento";
 import { AuditTeaser } from "./AuditPage";
 import FeaturedWork from "./FeaturedWork";
 import ResultatenHero from "./ResultatenHero";
-import LiveWebsites from "./LiveWebsites";
+import { WebsiteTegel } from "./FreeWebsite";
 import { ImageSliders, VideoSlider } from "./MediaSliders";
 import OsEntry, { GRATIS_OS_URL } from "./os-entry";
 import { agents, people, services } from "./content";
 import { projects } from "./projecten";
 import Pricing from "./Pricing";
+import { PlanCallKnop } from "./PlanCall";
 import TeamTrust from "./TeamTrust";
 import OsPeople from "./OsPeople";
 import { ProductOffer, ProductRoute } from "./ProductStart";
@@ -241,7 +242,8 @@ export function ProjectsPage() {
       {/* 18 oktober 2026 (Marinus): één opening met de resultaten voorop, daarna meteen de cases. */}
       <ResultatenHero />
       <FeaturedWork kop={false} />
-      <LiveWebsites />
+      {/* 19 oktober 2026 (Marinus): "Deze vervangen door de andere website tile." */}
+      <WebsiteTegel />
       <ImageSliders />
       <VideoSlider />
       <ShowcaseFilms />
@@ -325,6 +327,7 @@ export function ServicesPage() {
           </article>
         ))}
       </section>
+      <Pricing />
       <section className="h-section h-wrap h-service-cta">
         <Heading
           label="Samen aan de slag"
@@ -337,69 +340,7 @@ export function ServicesPage() {
           }
           text="Probeer het OS gratis en bespreek je OS op maat. Voor een losse opdracht maken we een gericht voorstel met een duidelijke scope."
         />
-        <Action to="/prijzen">Bekijk de prijzen</Action>
-      </section>
-    </>
-  );
-}
-export function PricesPage() {
-  return (
-    <>
-      <Pricing />
-      <section className="h-section h-wrap">
-        <Heading
-          label="Wat bepaalt je investering?"
-          title={
-            <>
-              De inrichting volgt
-              <br />
-              <span>jouw dagelijkse praktijk.</span>
-            </>
-          }
-        />
-        <ol className="h-steps">
-          <li>
-            <span>01 / Bedrijf</span>
-            <h3>Hoe werk je?</h3>
-            <p>
-              Je team, processen en prioriteiten bepalen waar je OS op maat het
-              verschil moet maken.
-            </p>
-          </li>
-          <li>
-            <span>02 / Inrichting</span>
-            <h3>Wat verbinden we?</h3>
-            <p>
-              We spreken af welke systemen, gegevens, schermen en werkwijzen
-              onderdeel worden van jouw OS.
-            </p>
-          </li>
-          <li>
-            <span>03 / Samenwerking</span>
-            <h3>Waar helpen we bij?</h3>
-            <p>
-              Van uitleg en beheer tot content, campagnes of development. De
-              inzet van het team stemmen we af op je behoefte.
-            </p>
-          </li>
-        </ol>
-        <ConversionBridge />
-      </section>
-      <section className="h-section h-wrap h-service-cta">
-        <Heading
-          label="Ook voor gerichte opdrachten"
-          title={
-            <>
-              Een website. Een campagne.
-              <br />
-              <span>Een sterker merk.</span>
-            </>
-          }
-          text="Onze creatieve en technische diensten blijven beschikbaar. We maken een voorstel voor je project of nemen ze mee in de samenwerking rond je OS op maat."
-        />
-        <Action to="/diensten" secondary>
-          Bekijk onze diensten
-        </Action>
+        <PlanCallKnop className="sn-pill sn-btn3d h-button" label="Plan een call" />
       </section>
       <section className="h-section h-wrap h-faq-layout">
         <Heading label="Voor we beginnen" title="Duidelijke afspraken." />

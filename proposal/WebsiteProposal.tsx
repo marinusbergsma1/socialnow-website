@@ -20,7 +20,6 @@ const BlogPostPage = later(() => import("./paginas").then((m) => m.BlogPostPage)
 const ContactPage = later(() => import("./paginas").then((m) => m.ContactPage));
 const NotFound = later(() => import("./paginas").then((m) => m.NotFound));
 const OsPage = later(() => import("./paginas").then((m) => m.OsPage));
-const PricesPage = later(() => import("./paginas").then((m) => m.PricesPage));
 const ProjectPage = later(() => import("./paginas").then((m) => m.ProjectPage));
 const ProjectsPage = later(() => import("./paginas").then((m) => m.ProjectsPage));
 const ServicesPage = later(() => import("./paginas").then((m) => m.ServicesPage));
@@ -290,7 +289,8 @@ function ProposalShell() {
           <Route path="/projecten" element={<ProjectsPage />} />
           <Route path="/project/:slug" element={<ProjectPage />} />
           <Route path="/diensten" element={<ServicesPage />} />
-          <Route path="/prijzen" element={<PricesPage />} />
+          {/* 19 oktober 2026 (Marinus): "kan het bij diensten ipv prijzen en prijzen weg?" De prijzen staan op /diensten#prijzen. */}
+          <Route path="/prijzen" element={<Navigate to="/diensten#prijzen" replace />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/audit" element={<AuditPage />} />
           <Route path="/vacatures" element={<VacaturesPage />} />
@@ -338,8 +338,8 @@ function ProposalShell() {
           ))}
           <Route path="*" element={<NotFound />} />
         </Routes>
-        {["/het-os", "/prijzen"].includes(location.pathname) && <BrandFaq />}
-        {["/het-os", "/team", "/diensten", "/prijzen", "/contact", "/vacatures"].includes(location.pathname) && <ConnectionLinks />}
+        {["/het-os"].includes(location.pathname) && <BrandFaq />}
+        {["/het-os", "/team", "/diensten", "/contact", "/vacatures"].includes(location.pathname) && <ConnectionLinks />}
         <NaLaden key={location.pathname} klaar={() => {
           zetMeta();
           if (location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ block: "start" });

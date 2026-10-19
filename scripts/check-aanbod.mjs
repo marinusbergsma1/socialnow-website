@@ -2,9 +2,8 @@
 //
 // Marinus, 29 september 2026: "Voordat iets live komt moet het altijd RED/GREEN getest worden."
 // Deze proef legt vast wat hij die avond vroeg, en is rood op main van vóór de wijziging en groen erna:
-//   - (18 oktober 2026) het OS op maat zit in elk pakket, geen los blok vanaf €10.000; tokens per maand als kaarten;
-//   - maandpakketten minimaal drie maanden, met custom OS, complete rebranding, website en uitlegcall;
-//   - maandprijzen blijven zichtbaar, het losse websiteblok (vanaf €3.500) is weg;
+//   - (19 oktober 2026) prijzen als blok op /diensten: OS Gratis/€35/€65, website €0 en €2.000 tot €5.000,
+//     marketing €3.000 per maand met custom OS, custom OS vanaf €10.000, tokens los, Connect 15%;
 //   - geen "Echt waar", en de aanbodpagina in het diepzwart van de homepage;
 //   - het echte Salesforce-logo in de hero en in de Salesforce-tegel;
 //   - de teamstrook knijpt de tekst niet meer tot een smal kolommetje;
@@ -63,60 +62,43 @@ try {
         React.createElement(Page, { language }),
       ),
     );
-  const prijzen = render("/prijzen");
+  // 19 oktober 2026 (Marinus): de prijzen staan als blok #prijzen op /diensten; /prijzen stuurt door en staat niet meer in het menu.
+  const diensten = render("/diensten");
   const home = render("/");
 
-  // Aanbod
-  // 18 oktober 2026 (Marinus): het OS op maat zit in elk pakket; geen los blok vanaf €10.000 en geen "daarna €20 per maand".
-  // Tokens per maand staan als drie kaarten in dezelfde stijl als de pakketten.
-  eis(!prijzen.includes("€10.000"), "/prijzen: het losse blok vanaf €10.000 staat er nog");
-  eis(!/€20[,-]* per maand/.test(prijzen), "/prijzen: '€20 per maand' staat er nog");
-  for (const bedrag of ["€10", "€25", "€50"])
-    eis(prijzen.includes(`<strong>${bedrag}</strong>`), `/prijzen: tokenprijs ${bedrag} ontbreekt`);
-  eis(prijzen.includes("Je ziet de prijs per render in de Studio voordat je rendert."), "/prijzen: regel over de prijs per render ontbreekt");
-  eis(!/<strong>€10\.000<\/strong>/.test(prijzen), "/prijzen: €10.000 staat nog als groot cijfer");
-  eis(prijzen.includes("Maandpakketten · minimaal 3 maanden"), "/prijzen: 'minimaal 3 maanden' ontbreekt");
-  for (const item of ["Custom OS", "Complete rebranding", "Je website", "Persoonlijke call met uitleg van je systeem"])
-    eis(prijzen.includes(`<li>${item}</li>`), `/prijzen: inbegrepen '${item}' ontbreekt`);
-  for (const bedrag of ["€4.000", "€5.000", "€5.500", "€6.000"])
-    eis(prijzen.includes(bedrag), `/prijzen: maandprijs ${bedrag} ontbreekt`);
-  eis(!prijzen.includes("vanaf €3.500"), "/prijzen: los websiteblok 'vanaf €3.500' staat er nog");
-  eis(!prijzen.includes("Echt waar"), "/prijzen: 'Echt waar' staat er nog");
+  // Aanbod: het OS per team, de website en het werk met ons team.
+  eis(diensten.includes('id="prijzen"'), "/diensten: prijsblok #prijzen ontbreekt");
+  eis(!render("/prijzen").includes("prijs-kaart"), "/prijzen: toont nog een eigen prijspagina");
+  eis(!home.includes('href="/voorstel/prijzen"'), "menu: link naar /prijzen staat er nog");
+  for (const bedrag of ["€0", "€35", "€65", "€3.000", "€4.000", "€4.500", "€5.000"])
+    eis(diensten.includes(`<strong>${bedrag}</strong>`), `/diensten: prijs ${bedrag} ontbreekt`);
+  for (const zin of ["Nodig 2 mensen uit", "2 tot 5 medewerkers", "5 tot 10 medewerkers", "1.500 tokens per maand", "4.000 tokens per maand",
+    "Website, custom OS en branding", "Content en advertenties gemaakt", "€2.000 tot €5.000", "vanaf €10.000"])
+    eis(diensten.includes(zin), `/diensten: '${zin}' ontbreekt`);
+  eis(diensten.includes("Meest gekozen") && diensten.includes("Meeste waarde"), "/diensten: geen nadruk op Start en Business");
+  eis(diensten.includes("Head of Meta Ads") && !diensten.includes("Meta Ads Specialist"), "/diensten: Sergio niet als Head of Meta Ads");
+  for (const oud of ["€5.500", "€6.000", "Content + Meta", "Onbeperkt teamleden"])
+    eis(!diensten.includes(oud), `/diensten: oud pakket '${oud}' staat er nog`);
+  eis(!/Nano Banana|Veo 3/.test(diensten), "/diensten: modelnamen in de prijzen");
+  eis(!diensten.includes("Echt waar"), "/diensten: 'Echt waar' staat er nog");
 
-  // Bedragen in de notatie van de taal. 30 september 2026: de maandprijzen stonden in en/de/fr als "€4.000"
-  // onder "From €10,000"; in het Engels leest €4.000 als vier euro. De vertaling loopt via het woordenboek
-  // (hele tekstknoop "€4.000" is de sleutel). Frans met hetzelfde spatieteken als "10 000 €" in fr.json.
-  const frSpatie = (JSON.parse(lees("proposal/i18n/fr.json") || "{}")["Vanaf €10.000 · prijs op aanvraag"] || "").match(/10(.)000/)?.[1] ?? " ";
-  const notatie = {
-    en: (d) => `€${d},000`, de: (d) => `${d}.000 €`, fr: (d) => `${d}${frSpatie}000 €`,
-  };
-  for (const [taal, maak] of Object.entries(notatie)) {
-    const pagina = render("/prijzen", taal);
-    for (const [bedrag, duizend] of [["€4.000", "4"], ["€5.000", "5"], ["€5.500", "5"], ["€6.000", "6"]]) {
-      const verwacht = bedrag === "€5.500" ? maak("5").replace(/000/, "500") : maak(duizend);
-      eis(pagina.includes(`<strong>${verwacht}</strong>`), `${taal} /prijzen: maandprijs ${bedrag} niet als '${verwacht}'`);
-    }
-    eis(!/<strong>€\d\.\d{3}<\/strong>/.test(pagina), `${taal} /prijzen: een maandprijs staat nog in Nederlandse notatie`);
-    // Duits en Frans zetten het euroteken achter het getal, ook bij €0 op de drie gratis-tegels.
-    if (taal !== "en") eis(!/€\s?\d/.test(pagina.replace(/<[^>]+>/g, " ")), `${taal} /prijzen: bedrag met € ervoor`);
+  // Bedragen in de notatie van de taal: in het Engels leest €3.000 als drie euro.
+  const notatie = { en: ["€3,000", "€4,500"], de: ["3.000 €", "4.500 €"] };
+  for (const [taal, verwacht] of Object.entries(notatie)) {
+    const pagina = render("/diensten", taal);
+    for (const bedrag of verwacht) eis(pagina.includes(`<strong>${bedrag}</strong>`), `${taal} /diensten: bedrag niet als '${bedrag}'`);
   }
 
-  // Wat de bezoeker in en/de/fr ziet, niet alleen of de sleutel in de json staat: een sleutel die net anders
-  // gespeld is dan de JSX-zin bleef eerder groen terwijl de pagina Nederlands toonde. De verwachte tekst komt
-  // uit het woordenboek zelf, zodat de proef geen tweede kopie van de vertalingen bijhoudt.
+  // Wat de bezoeker in en/de/fr ziet, niet alleen of de sleutel in de json staat. De verwachte tekst komt uit het woordenboek.
   const escape = (t) => t.replaceAll("&", "&amp;").replaceAll("'", "&#x27;").replaceAll('"', "&quot;");
-  const nieuweZinnen = [
-    "Tokens · per maand", "Maandpakketten · minimaal 3 maanden",
-    "Elk pakket is een extra laag bovenop de gratis versie en loopt minimaal drie maanden.",
-    "In elk pakket inbegrepen:", "Complete rebranding", "Persoonlijke call met uitleg van je systeem",
-  ];
+  const nieuweZinnen = ["Wat het kost", "Hoe groter je team, hoe meer je krijgt", "Wij doen het werk, met échte mensen", "Nodig 2 mensen uit", "Website, custom OS en branding"];
   for (const taal of ["en", "de", "fr"]) {
     const woorden = JSON.parse(lees(`proposal/i18n/${taal}.json`) || "{}");
-    const pagina = render("/prijzen", taal);
+    const pagina = render("/diensten", taal);
     for (const zin of nieuweZinnen) {
       const vertaald = woorden[zin];
-      eis(Boolean(vertaald) && pagina.includes(escape(vertaald)), `${taal} /prijzen: '${zin}' niet vertaald op de pagina`);
-      if (vertaald && vertaald !== zin) eis(!pagina.includes(escape(zin)), `${taal} /prijzen: Nederlands '${zin}' staat er nog`);
+      eis(Boolean(vertaald) && pagina.includes(escape(vertaald)), `${taal} /diensten: '${zin}' niet vertaald op de pagina`);
+      if (vertaald && vertaald !== zin) eis(!pagina.includes(escape(zin)), `${taal} /diensten: Nederlands '${zin}' staat er nog`);
     }
   }
 

@@ -6,7 +6,7 @@ import { people } from "./content";
 import { GRATIS_OS_URL } from "./os-entry";
 import ExplainerPlayer from "./ExplainerPlayer";
 import { openPlanCall } from "./PlanCall";
-import { MAAND, TEAM } from "./Pricing";
+import { CONNECT, TEAM, fotoVan } from "./Pricing";
 import { MiloMotion } from "./motion";
 import { ConnectLogo, Downloads, Filters, faces } from "./HomeHeader";
 import { useLanguage, type Language } from "./i18n/context";
@@ -38,20 +38,16 @@ const MILOS = [{ rol: "website", naam: "Website" }, { rol: "crm", naam: "CRM" },
 
 // 18 oktober 2026 (Marinus): "het is van belang dat het duidelijk is dat je voor 3K een veilig persoonlijk
 // management and operation systeem hebt. Custom is bij alle pakketten naast gratis website inbegrepen."
-// Een hulppakket kies je ook bij het aanmaken van je account; de bedragen komen uit Pricing.tsx (MAAND).
-const HULP = [
-  { id: "hulp-content", naam: "Content", wie: "Content in je merk, gepland en geplaatst" },
-  { id: "hulp-meta", naam: "Content + Meta", wie: "Plus Meta Ads opgezet en beheerd" },
-  { id: "hulp-google", naam: "Meta + Google", wie: "Plus Google Ads, één rapport" },
-  { id: "hulp-compleet", naam: "Compleet", wie: "Plus boekhouding en finance" },
-];
+// Een hulppakket kies je ook bij het aanmaken van je account; de bedragen komen uit Pricing.tsx (TEAMWERK).
+
 
 // 18 oktober 2026 (Marinus): "er moet een switch zijn van normale OS naar Call inplannen for custom os [...] waar je
 // ook de mensen ziet die om de zoveel tijd switched".
 // "Plan een call" opent het boekingspaneel (PlanCall.tsx) met de onderdelen van het gekozen pakket alvast aangevinkt.
 // Daarna: "Bij Custom os liever gewoon de pakketten laten zien of uitspraken van het team." Er staan nog geen echte
 // uitspraken van het team in content.ts (alleen die van Ruben), dus de pakketten: bij elk zit het Custom OS.
-const CUSTOM = HULP.map(h => ({ ...h, pakket: MAAND.find(m => m.naam === h.naam)! }));
+// 19 oktober 2026 (Marinus): de Connect-pakketten uit Pricing.tsx, vanaf €3.000 per maand, bij elk het custom OS.
+const CUSTOM = CONNECT.map(pakket => ({ id: pakket.id, naam: pakket.naam, pakket }));
 // 18 oktober 2026 (Marinus): "custom os heeft nu iets te veel tekst connect iets te weinig en hier ook iets te veel".
 // Dus drie korte punten in plaats van vier lange, en de kleine lettertjes alleen nog over de looptijd.
 const VEILIG = [
@@ -63,10 +59,10 @@ const VEILIG = [
 const MET: Record<Language, [string, string]> = { nl: ["Met", "en"], en: ["With", "and"], de: ["Mit", "und"], fr: ["Avec", "et"], es: ["Con", "y"], it: ["Con", "e"], pt: ["Com", "e"], pl: ["Z", "i"], sv: ["Med", "och"], da: ["Med", "og"] };
 const namen = (ids: string[], taal: Language) => { const [met, en] = MET[taal] || MET.en; const n = ids.map(id => TEAM[id].naam.split(" ")[0]); return `${met} ${n.length > 1 ? `${n.slice(0, -1).join(", ")} ${en} ${n[n.length - 1]}` : n[0]}.`; };
 const ONDERDELEN: Record<string, string[]> = {
-  "hulp-content": ["website", "content", "studio"],
-  "hulp-meta": ["website", "content", "studio", "ads"],
-  "hulp-google": ["website", "content", "studio", "ads"],
-  "hulp-compleet": ["website", "content", "studio", "ads", "crm", "dashboard"],
+  start: ["website", "content", "studio"],
+  meta: ["website", "content", "studio", "ads"],
+  "meta-google": ["website", "content", "studio", "ads"],
+  compleet: ["website", "content", "studio", "ads", "crm", "dashboard"],
 };
 
 // 18 oktober 2026 (Marinus): "En veiliger. Klinkt een beetje matig [...] Veiligheid, minder kosten meer winst eigen data
@@ -134,7 +130,8 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <div className="logo-row"><img className="os-logo" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" /><Downloads /></div>
                 <div className="bs-switch" role="group" aria-label="Kies OS of Custom OS">
                   <button type="button" aria-pressed={modus === "os"} onClick={() => setModus("os")}>OS</button>
-                  <button type="button" aria-pressed={modus === "custom"} onClick={() => setModus("custom")}>Custom OS</button>
+                  {/* 19 oktober 2026 (Marinus): "Dit klopt niet. Wijs gewoon door naar de Dienstenpagina." */}
+                  <Link to="/diensten#prijzen" onClick={() => meet("custom_os")}>Custom OS</Link>
                 </div>
                 {modus === "custom" ? <>
                 <h2>Je eigen OS, gebouwd rond je bedrijf.</h2>
@@ -144,15 +141,15 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                       <span className="bs-vink" aria-hidden="true">{custom === c.id && <Check size={12} strokeWidth={3} />}</span>
                       <b translate="no">Custom OS + {c.naam}</b>
                       <strong>{c.pakket.prijs}</strong>
-                      <small>per maand</small>
-                      <span className="bs-team" aria-hidden="true">{c.pakket.team.map(id => <img key={id} src={`/images/prijzen/${TEAM[id].foto}.webp`} alt="" width="26" height="26" />)}</span>
+                      <small>{c.pakket.per}</small>
+                      <span className="bs-team" aria-hidden="true">{(c.pakket.team ?? []).map(id => <img key={id} src={fotoVan(TEAM[id].foto)} alt="" width="26" height="26" />)}</span>
                     </button>
                   ))}
                 </div>
                 {/* Marinus: "en echte experts die mee kunnen kijken met de toegang die jij zelf bepaald." en daarna "Meer zo iets.": een korte
                     lijst, alleen wat nu live staat in het OS (teamrollen met direct intrekken, OS-PR #134; eigen AI via MCP/API met
                     sleutels standaard alleen lezen, #135). Budgetakkoord via Attesso is nog niet live en staat er daarom niet bij. */}
-                <p className="bs-uitleg bs-met"><strong translate="no">{namen(CUSTOM.find(c => c.id === custom)!.pakket.team, language)}</strong> <span className="bs-looptijd">Per maand excl. btw, minimaal 3 maanden.</span></p>
+                <p className="bs-uitleg bs-met"><strong translate="no">{namen(CUSTOM.find(c => c.id === custom)!.pakket.team ?? [], language)}</strong> <span className="bs-looptijd">Per maand excl. btw, minimaal 3 maanden.</span></p>
                 <ul className="bs-punten">
                   {VEILIG.map(punt => <li key={punt}><Check size={15} strokeWidth={3} aria-hidden="true" />{punt}</li>)}
                 </ul>

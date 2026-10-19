@@ -41,5 +41,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/prijzen",
+      "destination": "/diensten#prijzen",
+      "permanent": true
+    },
+    {
+      "source": "/:taal(nl|de|fr|es|it|pt|pl|sv|da)/prijzen",
+      "destination": "/:taal/diensten#prijzen",
+      "permanent": true
+    }
   ]
 }

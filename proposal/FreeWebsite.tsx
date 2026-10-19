@@ -8,7 +8,7 @@ const examples = webShowcaseProjects
   .map(project => ({ name: project.title, url: project.url!, slug: project.slug,
     previewUrl: project.previewUrl || (project.slug === "vdz-brigade-website" ? "https://www.vdz-brigade.nl/" : undefined), image: project.image }));
 
-function WebsiteExamples() {
+export function WebsiteExamples() {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(false);
   const [productionHost, setProductionHost] = useState(true);
@@ -81,6 +81,13 @@ function WebsiteExamples() {
     </div>
     <p className="sn-web-announcement" aria-live="polite" translate="no">{examples[index].name} · {index + 1} / {examples.length}</p>
   </div>;
+}
+
+// 19 oktober 2026 (Marinus): op Resultaten vervangt deze websitetegel de oude LiveWebsites-tegel.
+export function WebsiteTegel() {
+  return <section className="sn-free-website sn-fw-resultaten">
+    <div className="h-wrap sn-fw-binnen"><WebsiteExamples /></div>
+  </section>;
 }
 
 export default function FreeWebsite() {
