@@ -1,0 +1,87 @@
+/* 19 oktober 2026: /vacatures met twee ingangen, zoeken en filteren per team, een aanmeldformulier per functie en Connect
+   op wit (Marinus: "dat onderdeel met mensen altijd met een witte achtergrond"). Knoppen groen met wit, nooit zwart. */
+
+.sn-site .h-vac-ingangen { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0 0 clamp(40px, 5vw, 72px); }
+.sn-site .h-vac-ingang { display: grid; gap: 8px; align-content: start; padding: clamp(22px, 2.6vw, 34px); border-radius: 24px; border: 1px solid #1f5a3a; background: radial-gradient(90% 160% at 0% 0%, rgba(37,211,102,.16), transparent 60%), #07110c; color: #c3ccd4; text-decoration: none; transition: border-color .3s cubic-bezier(0.16, 1, 0.3, 1), transform .3s cubic-bezier(0.16, 1, 0.3, 1); }
+.sn-site .h-vac-ingang:hover { border-color: #25d366; transform: translateY(-2px); }
+.sn-site .h-vac-ingang:focus-visible { outline: 2px solid #25d366; outline-offset: 3px; }
+.sn-site .h-vac-ingang-label { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #76e7a2; }
+.sn-site .h-vac-ingang strong { font-size: clamp(26px, 2.6vw, 40px); line-height: 1.1; color: #fff; }
+.sn-site .h-vac-ingang > span:not(.h-vac-ingang-label):not(.h-text-link) { font-size: 16px; line-height: 1.5; }
+.sn-site .h-vac-ingang .h-text-link { margin-top: 8px; }
+.sn-site .h-vac-ingang.is-connect { border-color: #e1e7ec; background: #fff; color: #55616c; }
+.sn-site .h-vac-ingang.is-connect strong { color: #0b0f12; }
+.sn-site .h-vac-ingang.is-connect .h-vac-ingang-label, .sn-site .h-vac-ingang.is-connect .h-text-link { color: #0a7ea8; }
+.sn-site .h-vac-ingang.is-connect:hover { border-color: #20afde; }
+
+.sn-site .h-vac-functies { scroll-margin-top: 96px; }
+.sn-site .h-vac-kopregel { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; margin: 0 0 16px; }
+.sn-site .h-vac-kopregel h2 { margin: 0; font-size: clamp(28px, 3vw, 44px); color: #fff; }
+.sn-site .h-vac-kopregel h2 span { color: #25d366; }
+.sn-site .h-vac-zoek { flex: 0 1 420px; display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; background: #0a0a0a; border: 1px solid rgba(255,255,255,.18); color: #9aa4ad; }
+.sn-site .h-vac-zoek:focus-within { border-color: #25d366; box-shadow: 0 0 0 3px #25d36633; }
+.sn-site .h-vac-zoek input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; font-size: 16px; color: #fff; }
+.sn-site .h-vac-teams, .sn-site .h-vac-keuzes { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
+.sn-site .h-vac-teams button, .sn-site .h-vac-keuzes button { padding: 8px 14px; border-radius: 999px; border: 1px solid #1f5a3a; background: transparent; color: #76e7a2; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.sn-site .h-vac-teams button span { margin-left: 4px; opacity: .7; font-weight: 600; }
+.sn-site .h-vac-teams button[aria-pressed="true"], .sn-site .h-vac-keuzes button[aria-pressed="true"] { background: #25d366; border-color: #25d366; color: #fff; }
+.sn-site .h-vac-teams button:focus-visible, .sn-site .h-vac-keuzes button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.sn-site .h-vac-meta .h-vac-team { color: #76e7a2; }
+.sn-site .h-vac-leeg { margin: 16px 0 0; color: #aeb8c1; font-size: 16px; }
+.sn-site .h-vac-item { scroll-margin-top: 96px; }
+
+.sn-site .h-vac-aanmelden { grid-column: 1 / -1; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.1); }
+.sn-site .h-vac-vorm { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; }
+.sn-site .h-vac-vorm .is-breed { grid-column: 1 / -1; }
+.sn-site .h-vac-veld { display: grid; gap: 7px; margin: 0; padding: 0; border: 0; font-size: 14px; color: #cfdad3; min-width: 0; }
+.sn-site .h-vac-veld legend { margin: 0 0 8px; padding: 0; font-size: 14px; }
+.sn-site .h-vac-veld i { font-style: normal; color: #8da297; }
+.sn-site .h-vac-veld input, .sn-site .h-vac-veld textarea { width: 100%; box-sizing: border-box; min-height: 48px; padding: 12px 14px; border: 1px solid #ffffff2b; border-radius: 10px; background: #0b120e; color: #fff; font: inherit; font-size: 16px; line-height: 1.4; }
+.sn-site .h-vac-veld textarea { resize: vertical; min-height: 104px; }
+.sn-site .h-vac-veld input:focus, .sn-site .h-vac-veld textarea:focus { outline: 2px solid #25d366; outline-offset: 1px; border-color: transparent; }
+.sn-site .h-vac-veld input:user-invalid, .sn-site .h-vac-veld textarea:user-invalid { border-color: #ff6b6b; }
+.sn-site .h-vac-verstuur { display: grid; gap: 10px; justify-items: start; }
+.sn-site .h-vac-verstuur p { margin: 0; font-size: 13px; line-height: 1.5; color: #8da297; }
+.sn-site .h-vac-verstuur a { color: #76e7a2; }
+.sn-site .h-vac-keuzes { margin: 0; }
+
+.sn-site .h-vac-contacten { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: clamp(24px, 3vw, 40px); }
+.sn-site .h-vac-contacten .h-vac-contact { margin: 0; }
+
+/* Connect op wit. Marinus, 19 oktober 2026: "Met de details daar allemaal blauw niet groen." Blauw van het Connect-logo
+   #20afde, als letter op wit #0a7ea8. */
+.sn-site .h-vac-connect { scroll-margin-top: 72px; background: #fff; color: #55616c; padding: clamp(56px, 7vw, 112px) 0; }
+html:root .sn-site .h-vac-connect .cx-merk { margin: 0 0 10px; font-size: 18px; font-weight: 900; color: #0b0f12; }
+.sn-site .h-vac-connect .cx-merk b { color: #0a7ea8; }
+html:root .sn-site .h-vac-connect h2 { margin: 0 0 14px; font-size: clamp(32px, 4vw, 60px); line-height: 1.05; color: #0b0f12; }
+.sn-site .h-vac-connect-intro { max-width: 760px; margin: 0 0 28px; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.55; color: #3d4852; }
+.sn-site .h-vac-feiten { list-style: none; margin: 0 0 clamp(36px, 4vw, 56px); padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.sn-site .h-vac-feiten li { display: grid; gap: 4px; padding: 18px 20px; border-radius: 16px; background: #f3f6f8; border: 1px solid #e1e7ec; }
+html:root .sn-site .h-vac-feiten strong { font-size: clamp(24px, 2.4vw, 34px); color: #0a7ea8; }
+.sn-site .h-vac-feiten span { font-size: 14px; color: #55616c; }
+html:root .sn-site .h-vac-connect h3 { margin: 0 0 16px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0a7ea8; }
+.sn-site .h-vac-stappen { list-style: none; margin: 0 0 20px; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.sn-site .h-vac-stappen li { display: grid; align-content: start; gap: 8px; padding: 20px; border-radius: 16px; border: 1px solid #e1e7ec; }
+.sn-site .h-vac-stap-nr { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #20afde; color: #fff; font-weight: 800; font-size: 15px; }
+html:root .sn-site .h-vac-stappen strong { font-size: 17px; color: #0b0f12; }
+.sn-site .h-vac-stappen p { margin: 0; font-size: 15px; line-height: 1.5; color: #55616c; }
+.sn-site .h-vac-connect-klein { max-width: 760px; margin: 0 0 clamp(36px, 4vw, 56px); font-size: 15px; line-height: 1.6; color: #55616c; }
+.sn-site .h-vac-connect-vorm { padding: clamp(22px, 3vw, 40px); border-radius: 24px; background: #0b0f12; }
+html:root .sn-site .h-vac-connect-vorm h3 { color: #7fd6f2; }
+.sn-site .h-vac-connect-meer { margin-top: 24px; color: #0a7ea8; }
+
+.sn-site .h-vac-connect .h-vac-keuzes button { border-color: #1d6f8c; color: #7fd6f2; }
+.sn-site .h-vac-connect .h-vac-keuzes button[aria-pressed="true"] { background: #20afde; border-color: #20afde; color: #fff; }
+.sn-site .h-vac-connect .h-vac-veld input:focus, .sn-site .h-vac-connect .h-vac-veld textarea:focus { outline-color: #20afde; }
+.sn-site .h-vac-connect .h-vac-veld i, .sn-site .h-vac-connect .h-vac-verstuur p { color: #8fa3ad; }
+.sn-site .h-vac-connect .h-vac-verstuur a { color: #7fd6f2; }
+html:root .sn-site .h-vac-connect .h-vac-verstuur .h-button { background: #20afde !important; border-color: #20afde !important; color: #fff !important; }
+html:root .sn-site .h-vac-connect .h-vac-verstuur .h-button::before { background: #0a7ea8 !important; }
+html:root .sn-site .h-vac-connect .h-vac-verstuur .h-button .h-button-icon { background: #fff !important; color: #0a7ea8 !important; }
+@media (max-width: 1100px) { .sn-site .h-vac-stappen { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .sn-site .h-vac-ingangen, .sn-site .h-vac-contacten, .sn-site .h-vac-vorm { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .h-vac-feiten { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sn-site .h-vac-stappen { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .h-vac-zoek { flex-basis: 100%; }
+}

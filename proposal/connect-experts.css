@@ -59,21 +59,21 @@ html:root .sn-site .cx-wit .cx-keuze .h-button .h-button-icon { flex: none; marg
 }
 
 /* 19 oktober 2026: ontwerp 1, Connect als eigen platform om zelf een expert te kiezen.
-   Marinus, dezelfde avond: "dat onderdeel met mensen altijd met een witte achtergrond." Groen als letter op wit is #1a9c4b. */
+   Marinus, dezelfde avond: "dat onderdeel met mensen altijd met een witte achtergrond." Groen als letter op wit is #0a7ea8. */
 .sn-site .cx-connect { background: #fff; color: #0b0f12; }
 .sn-site .cx-connect .sn-cx { padding-block: clamp(48px, 6vw, 88px); }
 .sn-site .cx-boven { display: grid; gap: 16px; max-width: 760px; }
 html:root .sn-site .cx-connect .cx-merk { margin: 0; font-size: 18px; font-weight: 900; color: #0b0f12; }
-.sn-site .cx-connect .cx-merk b { color: #1a9c4b; }
+.sn-site .cx-connect .cx-merk b { color: #0a7ea8; }
 html:root .sn-site .cx-connect h2 { margin: 0; font-size: clamp(34px, 4.4vw, 60px) !important; line-height: 1.02; color: #0b0f12 !important; }
 html:root .sn-site .cx-connect .cx-zin { margin: 0; font-size: 18px; color: #3c4752; }
 html:root .sn-site .cx-connect .cx-zin strong { color: #0b0f12; }
-.sn-site .cx-zoek { display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 18px; border-radius: 999px; background: #fff; border: 2px solid #25d366; color: #55616c; }
+.sn-site .cx-zoek { display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 18px; border-radius: 999px; background: #fff; border: 2px solid #20afde; color: #55616c; }
 .sn-site .cx-zoek input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; font-size: 17px; color: #0b0f12; }
-.sn-site .cx-zoek:focus-within { box-shadow: 0 0 0 3px #25d36655; }
+.sn-site .cx-zoek:focus-within { box-shadow: 0 0 0 3px #20afde55; }
 .sn-site .cx-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.sn-site .cx-chips button { padding: 8px 14px; border-radius: 999px; border: 1px solid #25d366; background: #fff; color: #1a9c4b; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
-.sn-site .cx-chips button[aria-pressed="true"] { background: #25d366; border-color: #25d366; color: #fff; }
+.sn-site .cx-chips button { padding: 8px 14px; border-radius: 999px; border: 1px solid #20afde; background: #fff; color: #0a7ea8; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.sn-site .cx-chips button[aria-pressed="true"] { background: #20afde; border-color: #20afde; color: #fff; }
 .sn-site .cx-chips button:focus-visible { outline: 2px solid #0b0f12; outline-offset: 2px; }
 .sn-site .cx-raster { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .sn-site .cx-raster > li { display: grid; background: #f3f6f8; border: 1px solid #e1e7ec; border-radius: 16px; overflow: hidden; min-width: 0; }
@@ -81,14 +81,20 @@ html:root .sn-site .cx-connect .cx-zin strong { color: #0b0f12; }
 .sn-site .cx-raster > li > div { display: grid; gap: 3px; padding: 12px 14px 14px; }
 html:root .sn-site .cx-raster strong { font-size: 15px; color: #0b0f12; }
 html:root .sn-site .cx-raster span { font-size: 13px; color: #55616c; }
-html:root .sn-site .cx-raster .cx-profiel { margin-top: 6px; display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; color: #1a9c4b; text-decoration: none; }
+html:root .sn-site .cx-raster .cx-profiel { margin-top: 6px; display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; color: #0a7ea8; text-decoration: none; }
 .sn-site .cx-connect :is(a, button):focus-visible { outline: 2px solid #0b0f12; outline-offset: 3px; }
 .sn-site .cx-leeg { margin: 20px 0 0; color: #55616c; }
 .sn-site .cx-onder { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; padding: 18px 20px; border: 1px solid #e1e7ec; border-radius: 16px; background: #f3f6f8; }
 html:root .sn-site .cx-onder p { margin: 0; color: #3c4752; }
-/* Knop wit met groene letters, tekst naast het icoon. */
-html:root .sn-site .cx-connect .cx-wit-knop { display: inline-flex; align-items: center; gap: 12px; padding-right: 6px; background: #fff !important; border-color: #25d366 !important; color: #1a9c4b !important; box-shadow: none !important; }
-html:root .sn-site .cx-connect .cx-wit-knop > span:first-child { color: #1a9c4b !important; -webkit-text-fill-color: #1a9c4b !important; }
-html:root .sn-site .cx-connect .cx-wit-knop .h-button-icon { flex: none; margin-left: auto; background: #25d366 !important; color: #fff !important; }
+.sn-site .cx-onder-knoppen { display: flex; flex-wrap: wrap; gap: 10px; }
+/* Knop wit met blauwe letters, tekst naast het icoon; vult blauw met witte tekst. */
+html:root .sn-site .cx-connect .cx-wit-knop { display: inline-flex; align-items: center; gap: 12px; padding-right: 6px; background: #fff !important; border-color: #20afde !important; color: #0a7ea8 !important; box-shadow: none !important; }
+html:root .sn-site .cx-connect .cx-wit-knop > span:first-child { color: #0a7ea8 !important; -webkit-text-fill-color: #0a7ea8 !important; }
+html:root .sn-site .cx-connect .cx-wit-knop .h-button-icon { flex: none; margin-left: auto; background: #20afde !important; color: #fff !important; }
+/* 19 oktober 2026 (Marinus): "Bij vullen de tekst graag wit maken." Als de knop vult, wordt de tekst wit. */
+html:root .sn-site .cx-connect .cx-wit-knop::before { background: #20afde !important; }
+html:root .sn-site .cx-connect .cx-wit-knop:is(:hover, :focus-visible, :active) { color: #fff !important; }
+html:root .sn-site .cx-connect .cx-wit-knop:is(:hover, :focus-visible, :active) > span:first-child { color: #fff !important; -webkit-text-fill-color: #fff !important; }
+html:root .sn-site .cx-connect .cx-wit-knop:is(:hover, :focus-visible, :active) .h-button-icon { background: #fff !important; color: #0a7ea8 !important; }
 @media (max-width: 900px) { .sn-site .cx-raster { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .sn-site .cx-meer { margin-top: 18px; cursor: pointer; font: inherit; }

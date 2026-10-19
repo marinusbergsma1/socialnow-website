@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, Search } from "lucide-react";
 import { people, expertGroepen } from "./content";
 import { klein } from "./licht";
-import { mailLink } from "./aanvragen";
 import { useLanguage } from "./i18n/context";
 import "./connect-experts.css";
 
@@ -37,7 +36,8 @@ export default function ConnectExperts() {
     <section id="team" className="sn-cx h-wrap" aria-labelledby="team-titel">
       <div className="cx-boven">
         <p className="cx-merk" translate="no">SocialNow <b>Connect</b></p>
-        <h2 id="team-titel">Vind je expert.</h2>
+        {/* 19 oktober 2026 (Marinus): "En bij SocialNow Connect graag our team of experts. Met de details daar allemaal blauw niet groen." */}
+        <h2 id="team-titel">Ons team van experts.</h2>
         <p className="cx-zin"><strong>{people.length}</strong> experts in <strong>{expertGroepen.length}</strong> vakgebieden. Zoek, vergelijk en kies zelf.</p>
         <label className="cx-zoek">
           <Search size={18} aria-hidden="true" />
@@ -69,10 +69,16 @@ export default function ConnectExperts() {
         <span>Toon alle experts</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
       </button>}
       <div className="cx-onder">
-        <p>Ben je expert met een eigen bedrijf? Meld je aan bij Connect.</p>
-        <a className="sn-pill sn-btn3d h-button h-button-secondary cx-wit-knop" href={mailLink(t("Aanmelden als expert bij Connect"))}>
+        <p>Ben je expert met een eigen bedrijf? Meld je aan bij Connect. Of kom bij ons team werken.</p>
+        {/* 19 oktober 2026 (Marinus): aanmelden met uitleg en de vacatures staan samen op /vacatures. */}
+        <div className="cx-onder-knoppen">
+        <Link className="sn-pill sn-btn3d h-button h-button-secondary cx-wit-knop" to="/vacatures#connect">
           <span>Meld je aan als expert</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
-        </a>
+        </Link>
+        <Link className="sn-pill sn-btn3d h-button h-button-secondary cx-wit-knop" to="/vacatures#functies">
+          <span>Bekijk vacatures</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
+        </Link>
+        </div>
       </div>
     </section>
   </div>;

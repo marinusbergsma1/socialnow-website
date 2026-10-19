@@ -11,6 +11,8 @@ export const NAV_LINKS: Array<[string, string]> = [
   ["/diensten", "Diensten"],
   ["/projecten", "Resultaten"],
   ["/team", "Team"],
+  // 19 oktober 2026 (Marinus): "Ik mis even de job offers die er eerst wel stonden." Vacatures en aanmelden voor Connect.
+  ["/vacatures", "Vacatures"],
 ];
 // href in plaats van to: Connect is een eigen pagina buiten de app.
 export const PRODUCTEN = [
