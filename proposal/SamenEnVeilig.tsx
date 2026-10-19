@@ -51,7 +51,8 @@ const TEKST = {
 // 19 oktober 2026 (Marinus): "Graag bij Uncanny en Indexworld nog deze balkjes en partners duidelijk maken waarom het een
 // waardevolle toevoeging is om hun erbij te betrekken." De balkjes zijn hun eigen partnerrijen (indexworld.net "Our trusted
 // partners", uncannycs.com "Partnered with"; hun Odoo-, Shopify-, Salesforce- en Adobe-logo hebben het partnerniveau
-// al in het beeld, dus geen onderschrift); de cijfers staan zo op hun eigen homepage (nagelezen 19 oktober 2026).
+// al in het beeld, dus geen onderschrift). Marinus, zelfde avond: "Graag logo's gewoon in kleur." Dus de merkkleuren, met
+// alleen zwarte letters omgezet naar wit (Claude, QuickBooks) en de donkere-grondversies van Uncanny; de cijfers staan zo op hun eigen homepage (nagelezen 19 oktober 2026).
 const SAMEN = [
   {
     naam: "Indexworld", href: "https://indexworld.net", logo: "/images/home-header/indexworld.png", wit: true, product: "os",
@@ -59,10 +60,10 @@ const SAMEN = [
     tekst: "Indexworld is een Odoo-partner onder leiding van registeraccountants (CPA) in de VS. Zij zorgen dat je cijfers in het OS kloppen en halen je boekhouding veilig over uit QuickBooks of Sage.",
     cijfers: ["150+ klanten", "3 continenten", "Geleid door CPA's"],
     partners: [
-      { naam: "Claude", src: "/images/partners/samen/claude.png", wit: true },
-      { naam: "Odoo", src: "/images/partners/samen/odoo-partner.webp", wit: true, sub: "Partner" },
-      { naam: "Sage", src: "/images/partners/samen/sage.svg", wit: true },
-      { naam: "QuickBooks", src: "/images/partners/samen/quickbooks.webp", wit: true },
+      { naam: "Claude", src: "/images/partners/samen/claude.png" },
+      { naam: "Odoo", src: "/images/partners/samen/odoo-partner.webp", sub: "Partner" },
+      { naam: "Sage", src: "/images/partners/samen/sage.svg" },
+      { naam: "QuickBooks", src: "/images/partners/samen/quickbooks.png" },
     ],
   },
   {
@@ -122,7 +123,7 @@ export default function SamenEnVeilig() {
                   <span>{t.partnersLabel}</span>
                   <ul>
                     {b.partners.map(p => (
-                      <li key={p.naam}><img className={"wit" in p && p.wit ? "sn-samen-wit" : undefined} src={p.src} alt={p.naam} loading="lazy" />{"sub" in p && <small>{p.sub}</small>}</li>
+                      <li key={p.naam}><img src={p.src} alt={p.naam} loading="lazy" />{"sub" in p && <small>{p.sub}</small>}</li>
                     ))}
                   </ul>
                 </div>

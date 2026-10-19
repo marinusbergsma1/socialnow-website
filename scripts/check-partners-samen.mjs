@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 // Proef: blok "Samen bouwen" op de homepage (Marinus 19 okt 2026): bij Indexworld en Uncanny hun eigen partnerbalk
 // en waarom ze een waardevolle toevoeging zijn, in alle 10 talen, en zo in de gebouwde pagina's van nl en en.
+// Daarna: "Graag logo's gewoon in kleur."
 // Gebruik: node scripts/check-partners-samen.mjs [--dist]   (rood op main vóór de wijziging, groen erna)
 import fs from "node:fs";
 const KOP_IW = "Boekhouding en ERP, nagekeken door accountants.", KOP_UN = "Webshop, CRM en ERP echt aan elkaar gekoppeld.";
-const BALK = { Indexworld: ["claude.png", "odoo-partner.webp", "sage.svg", "quickbooks.webp"], Uncanny: ["odoo.svg", "shopify.svg", "salesforce.svg", "adobe.svg"] };
+const BALK = { Indexworld: ["claude.png", "odoo-partner.webp", "sage.svg", "quickbooks.png"], Uncanny: ["odoo.svg", "shopify.svg", "salesforce.svg", "adobe.svg"] };
 const CIJFERS = ["150+ klanten", "3 continenten", "135+ klanten", "250+ projecten", "60+ tech-experts"];
 const EN = { [KOP_IW]: "Accounting and ERP, checked by accountants.", [KOP_UN]: "Webshop, CRM and ERP truly connected." };
 const TALEN = ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"];
@@ -18,6 +19,7 @@ for (const [naam, logos] of Object.entries(BALK)) {
   eis(src.includes(`naam: "${naam}"`) && logos.every(l => blok.includes(`/images/partners/samen/${l}`)), `${naam}: partnerbalk met ${logos.join(", ")}`);
 }
 eis(Object.values(BALK).flat().every(l => fs.existsSync(`public/images/partners/samen/${l}`)), "alle logobestanden bestaan");
+eis(!src.slice(src.indexOf("const SAMEN")).match(/partners: \[[^\]]*wit: true/) && !fs.readFileSync("proposal/samen-en-veilig.css", "utf8").includes(".sn-samen-balk img.sn-samen-wit"), "partnerlogo's in kleur, zonder witfilter");
 eis(src.includes(`className="sn-samen-balk"`) && fs.readFileSync("proposal/samen-en-veilig.css", "utf8").includes(".sn-samen-balk{"), "balk heeft eigen opmaak");
 for (const t of TALEN) {
   const w = JSON.parse(fs.readFileSync(`proposal/i18n/${t}.json`, "utf8"));
