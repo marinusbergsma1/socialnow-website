@@ -27,6 +27,7 @@ import { WebsiteTegel } from "./FreeWebsite";
 import { ImageSliders, VideoSlider } from "./MediaSliders";
 import OsEntry, { GRATIS_OS_URL } from "./os-entry";
 import { agents, people, services } from "./content";
+import { klein } from "./licht";
 import { projects } from "./projecten";
 import Pricing from "./Pricing";
 import { PlanCallKnop } from "./PlanCall";
@@ -285,6 +286,15 @@ export function ProjectPage() {
   return <ProjectCase key={project.slug} project={project} next={next} />;
 }
 
+// Wie bij welk vakgebied hoort; namen zoals in content.ts.
+const EXPERTS: Record<string, string[]> = {
+  development: ["Sid van Kalken", "Douwe Kramer"],
+  seo: ["Nick van Keulen"],
+  advertising: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"],
+  content: ["Carmel Boon", "Sam van der Sluis", "Emma Peperkamp"],
+  branding: ["Marinus Bergsma", "Armando van Bruggen"],
+  ai: ["Marinus Bergsma", "Steef Komen"],
+};
 // 19 oktober 2026 (Marinus): "Bij diensten moeten de pakketten boven de regels nikszeggende diensten komen. Nikszeggende diensten
 // misschien zelfs helemaal weg of in een horizontale slider." De prijzen openen de pagina; de diensten zijn een smalle strook
 // eronder. De ankers (/diensten#development enz. uit de footer) blijven op de kaarten staan.
@@ -292,19 +302,35 @@ export function ServicesPage() {
   return (
     <>
       <Pricing bovenaan />
-      <section className="h-wrap h-dienst-strook-sectie" aria-labelledby="losse-diensten-titel">
+      {/* 19 oktober 2026 (Marinus): "Hier graag meer nog het team en expertise ipv los en deze mogen best een stukje langer".
+          Per vakgebied de mensen die het doen; de ankers (#development enz.) blijven. */}
+      <section className="h-wrap h-dienst-strook-sectie" aria-labelledby="team-expertise-titel">
         <div className="h-dienst-strook-kop">
-          <p className="h-eyebrow">Losse diensten</p>
-          <h2 id="losse-diensten-titel">Ook voor één opdracht.</h2>
+          <p className="h-eyebrow">Team en expertise</p>
+          <h2 id="team-expertise-titel">De mensen achter je pakket.</h2>
         </div>
         <ul className="h-dienst-strook">
-          {services.map((service) => (
-            <li id={service.id} key={service.id} style={{ "--accent": service.color } as React.CSSProperties}>
-              <h3>{service.title}</h3>
-              <p>{service.items.slice(0, 4).map((item) => <span key={item}>{item}</span>)}</p>
-              <TextLink to={`/contact?onderwerp=${encodeURIComponent(service.title)}`}>Bespreek je project</TextLink>
-            </li>
-          ))}
+          {services.map((service) => {
+            const wie = (EXPERTS[service.id] ?? []).flatMap((naam) => people.filter((p) => p.name === naam));
+            return (
+              <li id={service.id} key={service.id} style={{ "--accent": service.color } as React.CSSProperties}>
+                <h3>{service.title}</h3>
+                <p className="h-dienst-intro">{service.intro}</p>
+                {wie.length > 0 && (
+                  <ul className="h-dienst-mensen">
+                    {wie.map((p) => (
+                      <li key={p.name}>
+                        <img {...klein(p.image, 36, [96, 160], undefined, "20261015-team")} alt="" width="36" height="36" loading="lazy" />
+                        <span><b translate="no">{p.name}</b><i>{p.role}</i></span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <p className="h-dienst-items">{service.items.slice(0, 4).map((item) => <span key={item}>{item}</span>)}</p>
+                <TextLink to={`/contact?onderwerp=${encodeURIComponent(service.title)}`}>Bespreek je project</TextLink>
+              </li>
+            );
+          })}
         </ul>
       </section>
       <section className="h-section h-wrap h-faq-layout">

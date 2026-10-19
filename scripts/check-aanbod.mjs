@@ -72,7 +72,11 @@ try {
   eis(!home.includes('href="/voorstel/prijzen"'), "menu: link naar /prijzen staat er nog");
   for (const bedrag of ["€0", "€35", "€65", "€3.000", "€4.000", "€4.500", "€5.000"])
     eis(diensten.includes(`<strong>${bedrag}</strong>`), `/diensten: prijs ${bedrag} ontbreekt`);
-  for (const zin of ["Nodig 2 mensen uit", "2 tot 5 medewerkers", "5 tot 10 medewerkers", "1.500 tokens per maand", "4.000 tokens per maand",
+  // 19 oktober 2026 (Marinus): Team heet Business, Business heet Enterprise met onbeperkte opslag; USP's van het gratis OS;
+  // Connect per periode van 3 maanden, vanaf Meta 1 maand gratis bij geen winst en minimaal €1.000 mediabudget; team per vakgebied.
+  for (const zin of ["Gratis Studio", "5.000 gratis stockfoto&#x27;s", "Gratis social media management", "Gratis boekhoudpakket",
+    "Kies Enterprise", "Onbeperkte opslag", "Gratis demowebsite", "Gratis website", "Jaarlijks", "Maandelijks", "Altijd 3 maanden", "Geen winst? 1 maand gratis", "Mediabudget vanaf €1.000", "Team en expertise",
+    "Nodig 2 mensen uit", "2 tot 5 medewerkers", "5 tot 10 medewerkers", "1.500 tokens per maand", "4.000 tokens per maand",
     "Website, custom OS en branding", "Content en advertenties gemaakt", "€2.000 tot €5.000", "vanaf €10.000"])
     eis(diensten.includes(zin), `/diensten: '${zin}' ontbreekt`);
   eis(diensten.includes("Meest gekozen") && diensten.includes("Meeste waarde"), "/diensten: geen nadruk op Meta en Business");
@@ -81,7 +85,7 @@ try {
   eis(diensten.includes('class="h-dienst-strook"'), "/diensten: diensten niet als strook");
   eis(/Meest gekozen[\s\S]{0,200}<h3>Meta<\/h3>/.test(diensten), "/diensten: Meta (€4.000) niet als meest gekozen");
   eis(diensten.includes("Head of Meta Ads") && !diensten.includes("Meta Ads Specialist"), "/diensten: Sergio niet als Head of Meta Ads");
-  for (const oud of ["€5.500", "€6.000", "Content + Meta", "Onbeperkt teamleden"])
+  for (const oud of ["€5.500", "€6.000", "Content + Meta", "Onbeperkt teamleden", "Kies Team", "100 GB opslag", "Losse diensten"])
     eis(!diensten.includes(oud), `/diensten: oud pakket '${oud}' staat er nog`);
   eis(!/Nano Banana|Veo 3/.test(diensten), "/diensten: modelnamen in de prijzen");
   eis(!diensten.includes("Echt waar"), "/diensten: 'Echt waar' staat er nog");
@@ -95,7 +99,7 @@ try {
 
   // Wat de bezoeker in en/de/fr ziet, niet alleen of de sleutel in de json staat. De verwachte tekst komt uit het woordenboek.
   const escape = (t) => t.replaceAll("&", "&amp;").replaceAll("'", "&#x27;").replaceAll('"', "&quot;");
-  const nieuweZinnen = ["Diensten en prijzen", "Losse diensten", "Hoe groter je team, hoe meer je krijgt", "Wij doen het werk, met échte mensen", "Nodig 2 mensen uit", "Website, custom OS en branding"];
+  const nieuweZinnen = ["Diensten en prijzen", "Team en expertise", "Al in je gratis OS", "Geen winst? 1 maand gratis", "Wij doen het werk, met échte mensen", "Nodig 2 mensen uit", "Website, custom OS en branding"];
   for (const taal of ["en", "de", "fr"]) {
     const woorden = JSON.parse(lees(`proposal/i18n/${taal}.json`) || "{}");
     const pagina = render("/diensten", taal);
@@ -134,7 +138,7 @@ eis((lees("index.html").match(new RegExp(regel.replace(/[.*+?^${}()|[\]\\]/g, "\
 const llms = lees("public/llms.txt");
 eis(llms.includes("AI-gestuurde persoonlijke werkplek"), "llms.txt: positionering ontbreekt");
 eis(!llms.includes("vanaf €3.000 per maand"), "llms.txt: oude prijs €3.000 per maand staat er nog");
-eis(llms.includes("minimaal 3 maanden"), "llms.txt: maandpakketten zonder minimale looptijd");
+eis(llms.includes("per periode van 3 maanden"), "llms.txt: Connect-pakketten zonder periode van 3 maanden");
 // 30 september 2026: llms.txt beloofde AI-crawlers nog een "gratis proof of concept" en een "discovery call"; die
 // bestaan niet meer (gratis OS, demowebsite en basic rebranding; een gesprek via /contact).
 eis(!/proof of concept|discovery call/i.test(llms), "llms.txt: oud aanbod (proof of concept, discovery call)");

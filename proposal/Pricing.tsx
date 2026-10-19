@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Action } from "./ui";
 import { GRATIS_OS_URL } from "./os-entry";
@@ -31,6 +31,8 @@ type Pakket = {
   naam: string;
   prijs: string;
   per: string;
+  // Maandelijks opzegbaar kost 25% meer dan bij een jaarabonnement (Marinus, 19 oktober 2026); alleen voor het OS.
+  maand?: { prijs: string; per: string };
   tokens?: { aantal: string; waarde: string; goedVoor: string };
   belofte: string;
   punten: { tekst: string; erfenis?: boolean; sterk?: boolean }[];
@@ -45,6 +47,8 @@ type Pakket = {
 // Het OS per team. Tokens zijn rendertegoed tegen de klantprijs (2x inkoop, api/_prijzen.js), dus bij volledig gebruik kost
 // 1.500 tokens ons hooguit €7,50 en 4.000 tokens hooguit €20: Team en Business blijven ruim winstgevend. Wat je ermee maakt
 // volgt uit dezelfde tabel: een beeld in topkwaliteit kost 28 tokens, een video van 8 seconden 160 (naar beneden afgerond).
+// 19 oktober 2026 (Marinus): "Team, Business worden en Business Enterprise met onneindig opslag en dus langer met meer de usp's
+// wat maakt ons nou zo uniek." De ids volgen de nieuwe namen; ?pakket=business is €35, ?pakket=enterprise is €65.
 const OS: Pakket[] = [
   {
     id: "gratis",
@@ -55,7 +59,12 @@ const OS: Pakket[] = [
     punten: [
       { tekst: "10 GB opslag", sterk: true },
       { tekst: "Nodig 2 mensen uit", sterk: true },
-      { tekst: "Dashboard, Studio, Social, CRM en Milo" },
+      { tekst: "Gratis demowebsite", sterk: true },
+      { tekst: "Gratis Studio" },
+      { tekst: "5.000 gratis stockfoto's" },
+      { tekst: "Gratis social media management" },
+      { tekst: "Gratis boekhoudpakket" },
+      { tekst: "Dashboard, CRM en Milo" },
     ],
     kleur: "var(--prijs-groen)",
     tokens: { aantal: "Geen tokens inbegrepen", waarde: "", goedVoor: "Los bij te kopen: 1.000 tokens voor €10" },
@@ -63,10 +72,11 @@ const OS: Pakket[] = [
     href: `${GRATIS_OS_URL}?pakket=gratis`,
   },
   {
-    id: "team",
-    naam: "Team",
+    id: "business",
+    naam: "Business",
     prijs: "€35",
-    per: "per maand",
+    per: "per maand, jaarlijks",
+    maand: { prijs: "€43,75", per: "per maand, maandelijks opzegbaar" },
     tokens: { aantal: "1.500 tokens per maand", waarde: "t.w.v. €15", goedVoor: "Ruim 50 beelden of 9 video's van 8 seconden" },
     belofte: "Voor een klein team dat samen werkt.",
     punten: [
@@ -74,30 +84,53 @@ const OS: Pakket[] = [
       { tekst: "2 tot 5 medewerkers", sterk: true },
       { tekst: "Agentic Payments", sterk: true },
       { tekst: "50 GB opslag" },
+      { tekst: "Experts met de toegang die jij bepaalt" },
+      { tekst: "Je eigen AI veilig gekoppeld" },
     ],
     kleur: "var(--prijs-blauw)",
-    actie: "Kies Team",
-    href: `${GRATIS_OS_URL}?pakket=team`,
-  },
-  {
-    id: "business",
-    naam: "Business",
-    prijs: "€65",
-    per: "per maand",
-    tokens: { aantal: "4.000 tokens per maand", waarde: "t.w.v. €40", goedVoor: "Ruim 140 beelden of 25 video's van 8 seconden" },
-    belofte: "Voor het hele bedrijf, met de meeste ruimte.",
-    punten: [
-      { tekst: "Alles uit Team", erfenis: true },
-      { tekst: "5 tot 10 medewerkers", sterk: true },
-      { tekst: "100 GB opslag" },
-      { tekst: "Korting op extra tokens" },
-    ],
-    kleur: "var(--prijs-geel)",
     actie: "Kies Business",
     href: `${GRATIS_OS_URL}?pakket=business`,
+  },
+  {
+    id: "enterprise",
+    naam: "Enterprise",
+    prijs: "€65",
+    per: "per maand, jaarlijks",
+    maand: { prijs: "€81,25", per: "per maand, maandelijks opzegbaar" },
+    tokens: { aantal: "4.000 tokens per maand", waarde: "t.w.v. €40", goedVoor: "Ruim 140 beelden of 25 video's van 8 seconden" },
+    belofte: "Voor het hele bedrijf, zonder grenzen aan je opslag.",
+    punten: [
+      { tekst: "Alles uit Business", erfenis: true },
+      { tekst: "5 tot 10 medewerkers", sterk: true },
+      { tekst: "Onbeperkte opslag", sterk: true },
+      { tekst: "Gratis website", sterk: true },
+      { tekst: "Korting op extra tokens" },
+      { tekst: "Persoonlijke uitleg van je systeem" },
+    ],
+    kleur: "var(--prijs-geel)",
+    actie: "Kies Enterprise",
+    href: `${GRATIS_OS_URL}?pakket=enterprise`,
     vlag: "Meeste waarde",
   },
 ];
+
+// Wat al in het gratis OS zit, groot uitgelicht boven de kaarten (Marinus: "Allemaal al vanaf het gratis instapmodel").
+// 19 oktober 2026 (Marinus): "Gratis website demo moet er ook overal even bij."
+const GRATIS_USPS = [
+  { titel: "Gratis demowebsite", tekst: "Een complete website in je merk, klaar om live te gaan." },
+  { titel: "Gratis Studio", tekst: "Posts, advertenties en video in je eigen merk." },
+  { titel: "5.000 stockfoto's", tekst: "Eigen beelden, gratis te gebruiken." },
+  { titel: "Social media management", tekst: "Plannen en posten op al je kanalen." },
+  { titel: "Boekhoudpakket", tekst: "Facturen en boekhouding, gratis." },
+];
+
+// Wat ons anders maakt dan losse software (positionering 29 september 2026: draait op Odoo, met échte professionals).
+const UNIEK = [
+  { titel: "Echte mensen achter je OS", tekst: "Experts uit ons team kijken mee, met de toegang die jij bepaalt." },
+  { titel: "Je data blijft van jou", tekst: "Je eigen gegevens, je eigen AI, altijd in te trekken." },
+  { titel: "Draait op Odoo", tekst: "Je administratie blijft waar hij hoort; wij bouwen erbovenop." },
+];
+
 
 // Connect-pakketten: minimaal drie maanden, en in elk pakket website, custom OS, branding, content en advertenties gemaakt.
 // HeaderBestaand.tsx toont dezelfde vier in de Custom OS-tab.
@@ -128,6 +161,8 @@ export const CONNECT: Pakket[] = [
       { tekst: "Alles uit Start", erfenis: true },
       { tekst: "Meta Ads opgezet en beheerd", sterk: true },
       { tekst: "Leads direct in je CRM" },
+      { tekst: "Geen winst? 1 maand gratis", sterk: true },
+      { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
     team: ["marinus", "jos", "sergio"],
     kleur: "var(--prijs-roze)",
@@ -198,21 +233,24 @@ function Team({ ids }: { ids: string[] }) {
   );
 }
 
-function Knop({ pakket }: { pakket: Pakket }) {
+function Knop({ pakket, maandelijks = false }: { pakket: Pakket; maandelijks?: boolean }) {
   const secundair = !pakket.vlag;
-  if (pakket.href) return <Action href={pakket.href} secondary={secundair}>{pakket.actie}</Action>;
+  // De gekozen betaalperiode gaat mee naar de aanmelding van het OS.
+  const href = pakket.href && pakket.maand ? `${pakket.href}&periode=${maandelijks ? "maand" : "jaar"}` : pakket.href;
+  if (href) return <Action href={href} secondary={secundair}>{pakket.actie}</Action>;
   return <Action to={`/contact?onderwerp=${encodeURIComponent(pakket.onderwerp ?? pakket.naam)}`} secondary={secundair}>{pakket.actie}</Action>;
 }
 
-function Kaart({ pakket }: { pakket: Pakket }) {
+function Kaart({ pakket, maandelijks = false }: { pakket: Pakket; maandelijks?: boolean }) {
+  const bedrag = maandelijks && pakket.maand ? pakket.maand : pakket;
   return (
     <article className={`prijs-kaart${pakket.vlag ? " is-top" : ""}`} style={{ "--kleur": pakket.kleur } as React.CSSProperties}>
       {pakket.vlag && <span className="prijs-vlag">{pakket.vlag}</span>}
       <div className="prijs-kop">
         <h3>{pakket.naam}</h3>
         <p className="prijs-bedrag">
-          <strong>{pakket.prijs}</strong>
-          <span>{pakket.per}</span>
+          <strong>{bedrag.prijs}</strong>
+          <span>{bedrag.per}</span>
         </p>
         <p className="prijs-belofte">{pakket.belofte}</p>
         {pakket.tokens && (
@@ -234,13 +272,13 @@ function Kaart({ pakket }: { pakket: Pakket }) {
       </ul>
       <div className="prijs-voet">
         {pakket.team && <Team ids={pakket.team} />}
-        <Knop pakket={pakket} />
+        <Knop pakket={pakket} maandelijks={maandelijks} />
       </div>
     </article>
   );
 }
 
-function Rij({ id, label, titel, tekst, pakketten }: { id: string; label: string; titel: string; tekst: string; pakketten: Pakket[] }) {
+function Rij({ id, label, titel, tekst, pakketten, children, maandelijks = false }: { id: string; label: string; titel: string; tekst: string; pakketten: Pakket[]; children?: React.ReactNode; maandelijks?: boolean }) {
   return (
     <section className="prijs-pakketten prijs-rij" aria-labelledby={`prijs-${id}-titel`}>
       <div className="prijs-pakketten-kop">
@@ -250,9 +288,10 @@ function Rij({ id, label, titel, tekst, pakketten }: { id: string; label: string
         </div>
         <p>{tekst}</p>
       </div>
+      {children}
       <div className={`prijs-raster${pakketten.length === 3 ? " prijs-raster-drie" : ""}`}>
         {pakketten.map((pakket) => (
-          <Kaart key={pakket.id} pakket={pakket} />
+          <Kaart key={pakket.id} pakket={pakket} maandelijks={maandelijks} />
         ))}
       </div>
     </section>
@@ -263,6 +302,7 @@ function Rij({ id, label, titel, tekst, pakketten }: { id: string; label: string
 // dus de kop is dan de h1 van de pagina.
 export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
   useLanguage();
+  const [maandelijks, zetMaandelijks] = useState(false);
   const Kop = bovenaan ? "h1" : "h2";
   return (
     <div id="prijzen" className={`prijs prijs-diensten h-wrap${bovenaan ? " is-bovenaan" : ""}`}>
@@ -279,17 +319,50 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
       <Rij
         id="os"
         label="01 / Het OS"
-        titel="Hoe groter je team, hoe meer je krijgt"
-        tekst="Begin gratis. Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Maandelijks opzegbaar."
+        titel="Begin gratis. Betaal pas als je team groeit."
+        tekst="Je software is gratis. Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Jaarlijks betaal je het minst; maandelijks opzegbaar kost 25% meer."
         pakketten={OS}
-      />
+        maandelijks={maandelijks}
+      >
+        <div className="prijs-periode" role="group" aria-label="Betaalperiode">
+          <button type="button" aria-pressed={!maandelijks} onClick={() => zetMaandelijks(false)}>Jaarlijks</button>
+          <button type="button" aria-pressed={maandelijks} onClick={() => zetMaandelijks(true)}>Maandelijks</button>
+        </div>
+        <div className="prijs-usps">
+          <p className="prijs-usps-label">Al in je gratis OS</p>
+          <ul>
+            {GRATIS_USPS.map((usp) => (
+              <li key={usp.titel}>
+                <b>{usp.titel}</b>
+                <span>{usp.tekst}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Rij>
+      <ul className="prijs-uniek" aria-label="Wat ons anders maakt">
+        {UNIEK.map((punt) => (
+          <li key={punt.titel}>
+            <b>{punt.titel}</b>
+            <span>{punt.tekst}</span>
+          </li>
+        ))}
+      </ul>
       <Rij
         id="connect"
-        label="02 / Connect-pakketten · minimaal 3 maanden"
+        label="02 / Connect-pakketten · per periode van 3 maanden"
         titel="Wij doen het werk, met échte mensen"
         tekst="In elk pakket maken we je website, custom OS, branding, content en advertenties. Hoe verder je gaat, hoe meer mensen er voor je werken."
         pakketten={CONNECT}
-      />
+      >
+        {/* 19 oktober 2026 (Marinus): "altijd een periode van 3 maanden en bij geen winst 1 maand gratis. Vanaf Meta pakketten.
+            Minimaal €1000,- ad spend wel voor ads per maand bij alles vanaf Meta." */}
+        <ul className="prijs-voorwaarden">
+          <li><b>Altijd 3 maanden</b><span>Elk pakket loopt per periode van 3 maanden.</span></li>
+          <li><b>Geen winst? 1 maand gratis</b><span>Vanaf Meta: levert je periode geen winst op, dan werken we 1 maand gratis door.</span></li>
+          <li><b>Mediabudget vanaf €1.000</b><span>Vanaf Meta betaal je zelf minimaal €1.000 per maand aan advertenties.</span></li>
+        </ul>
+      </Rij>
 
       <div className="prijs-maatwerk-regel">
         <p>
