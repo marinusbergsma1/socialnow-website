@@ -2,6 +2,8 @@
 // Proef: appwand (proposal/apps.ts), Marinus 19 okt 2026: "Zoek met meerdere chats overal het juiste svg logo van." en
 // "Verder bestaat Facebook niet eens meer dus kan die weg. Meta ervan maken."
 // Vijf chats zochten de officiële SVG's; vijf apps hebben er aantoonbaar geen en houden een naamtegel.
+// Daarna: "Alles moet de svg hebben met originele kleuren. Verder graag op een wit blok." Dus officiële kleurenlogo's,
+// geen witfilter of donker-vlag meer, en elk logo op een wit blok in de tegel.
 // Gebruik: node scripts/check-app-logos.mjs   (rood op main vóór de wijziging, groen erna)
 import fs from "node:fs";
 const fouten = [];
@@ -18,6 +20,10 @@ const officieel = JSON.parse(fs.readFileSync("scripts/app-logos-officieel.json",
 eis(Object.keys(officieel).every(s => fs.existsSync(`public/images/apps/${s}.svg`) && officieel[s].bron && officieel[s].pagina && officieel[s].licentie), "elk officieel logo heeft een bestand en een bron, pagina en licentie");
 const vuil = fs.readdirSync("public/images/apps").filter(f => f.endsWith(".svg") && !f.startsWith("._")).filter(f => /<script|\son[a-z]+=|href="https?:|<image|<foreignObject/i.test(fs.readFileSync(`public/images/apps/${f}`, "utf8")));
 eis(vuil.length === 0, `geen scripts, links of bitmaps in de logo's${vuil.length ? ": " + vuil.join(", ") : ""}`);
+eis(!apps.some(a => a.donker), "geen enkel logo wordt nog wit gemaakt (geen donker-vlag)");
+eis(apps.filter(a => a.logo && !officieel[a.slug]).map(a => a.slug).join(",") === "seedance", "elk logo is het officiële kleurenlogo, behalve Seedance (geen officieel logo, Simple Icons in merkblauw)");
+const wand = fs.readFileSync("proposal/app-wand.css", "utf8");
+eis(!/brightness\(0\) invert\(1\)/.test(wand) && /\.sn-aw-logo \{[^}]*background: #fff/.test(wand), "logo's op een wit blok, zonder witfilter");
 const bronnen = fs.readFileSync("public/images/apps/BRONNEN.md", "utf8");
 eis(apps.filter(a => a.logo).every(a => bronnen.includes(`| ${a.slug}.svg |`)), "elk logo staat met bron in BRONNEN.md");
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");
