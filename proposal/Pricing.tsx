@@ -35,7 +35,9 @@ type Pakket = {
   maand?: { prijs: string; per: string };
   tokens?: { aantal: string; waarde: string; goedVoor: string };
   belofte: string;
-  punten: { tekst: string; erfenis?: boolean; sterk?: boolean }[];
+  // 19 oktober 2026 (Marinus): "De punten moeten altijd overeenkomen. Dus altijd opslag op dezelfde plek bij alle 3." Elke kaart
+  // in een rij heeft dezelfde regels in dezelfde volgorde; wat er niet in zit staat er grijs bij (uit).
+  punten: { tekst: string; erfenis?: boolean; sterk?: boolean; uit?: boolean }[];
   team?: string[];
   kleur: string;
   actie: string;
@@ -57,14 +59,16 @@ const OS: Pakket[] = [
     per: "altijd",
     belofte: "Je eigen OS om mee te beginnen.",
     punten: [
-      { tekst: "10 GB opslag", sterk: true },
       { tekst: "Nodig 2 mensen uit", sterk: true },
+      { tekst: "10 GB opslag", sterk: true },
       { tekst: "Gratis demowebsite", sterk: true },
-      { tekst: "Gratis Studio" },
-      { tekst: "5.000 gratis stockfoto's" },
-      { tekst: "Gratis social media management" },
-      { tekst: "Gratis boekhoudpakket" },
+      { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },
       { tekst: "Dashboard, CRM en Milo" },
+      { tekst: "Agentic Payments", uit: true },
+      { tekst: "Experts met de toegang die jij bepaalt", uit: true },
+      { tekst: "Je eigen AI veilig gekoppeld", uit: true },
+      { tekst: "Korting op extra tokens", uit: true },
+      { tekst: "Persoonlijke uitleg van je systeem", uit: true },
     ],
     kleur: "var(--prijs-groen)",
     tokens: { aantal: "Geen tokens inbegrepen", waarde: "", goedVoor: "Los bij te kopen: 1.000 tokens voor €10" },
@@ -80,12 +84,16 @@ const OS: Pakket[] = [
     tokens: { aantal: "1.500 tokens per maand", waarde: "t.w.v. €15", goedVoor: "Ruim 50 beelden of 9 video's van 8 seconden" },
     belofte: "Voor een klein team dat samen werkt.",
     punten: [
-      { tekst: "Alles uit Gratis", erfenis: true },
       { tekst: "2 tot 5 medewerkers", sterk: true },
+      { tekst: "50 GB opslag", sterk: true },
+      { tekst: "Gratis demowebsite" },
+      { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },
+      { tekst: "Dashboard, CRM en Milo" },
       { tekst: "Agentic Payments", sterk: true },
-      { tekst: "50 GB opslag" },
       { tekst: "Experts met de toegang die jij bepaalt" },
       { tekst: "Je eigen AI veilig gekoppeld" },
+      { tekst: "Korting op extra tokens", uit: true },
+      { tekst: "Persoonlijke uitleg van je systeem", uit: true },
     ],
     kleur: "var(--prijs-blauw)",
     actie: "Kies Business",
@@ -100,12 +108,16 @@ const OS: Pakket[] = [
     tokens: { aantal: "4.000 tokens per maand", waarde: "t.w.v. €40", goedVoor: "Ruim 140 beelden of 25 video's van 8 seconden" },
     belofte: "Voor het hele bedrijf, zonder grenzen aan je opslag.",
     punten: [
-      { tekst: "Alles uit Business", erfenis: true },
       { tekst: "5 tot 10 medewerkers", sterk: true },
       { tekst: "Onbeperkte opslag", sterk: true },
       { tekst: "Gratis website", sterk: true },
-      { tekst: "Korting op extra tokens" },
-      { tekst: "Persoonlijke uitleg van je systeem" },
+      { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },
+      { tekst: "Dashboard, CRM en Milo" },
+      { tekst: "Agentic Payments" },
+      { tekst: "Experts met de toegang die jij bepaalt" },
+      { tekst: "Je eigen AI veilig gekoppeld" },
+      { tekst: "Korting op extra tokens", sterk: true },
+      { tekst: "Persoonlijke uitleg van je systeem", sterk: true },
     ],
     kleur: "var(--prijs-geel)",
     actie: "Kies Enterprise",
@@ -142,9 +154,17 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Alles om goed zichtbaar te worden.",
     punten: [
-      { tekst: "Website, custom OS en branding", sterk: true },
+      { tekst: "Website, custom OS en branding" },
       { tekst: "Content en advertenties gemaakt" },
       { tekst: "Persoonlijke call met uitleg van je systeem" },
+      { tekst: "Meta Ads opgezet en beheerd", uit: true },
+      { tekst: "Leads direct in je CRM", uit: true },
+      { tekst: "Google Ads opgezet en beheerd", uit: true },
+      { tekst: "Eén rapport voor elk kanaal", uit: true },
+      { tekst: "Boekhouding en accounting", uit: true },
+      { tekst: "Odoo-inrichting als je die nodig hebt", uit: true },
+      { tekst: "Geen winst? 1 maand gratis", uit: true },
+      { tekst: "Geen minimum mediabudget" },
     ],
     team: ["marinus"],
     kleur: "var(--prijs-groen)",
@@ -158,9 +178,15 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Bereik de juiste mensen op Instagram en Facebook.",
     punten: [
-      { tekst: "Alles uit Start", erfenis: true },
+      { tekst: "Website, custom OS en branding" },
+      { tekst: "Content en advertenties gemaakt" },
+      { tekst: "Persoonlijke call met uitleg van je systeem" },
       { tekst: "Meta Ads opgezet en beheerd", sterk: true },
       { tekst: "Leads direct in je CRM" },
+      { tekst: "Google Ads opgezet en beheerd", uit: true },
+      { tekst: "Eén rapport voor elk kanaal", uit: true },
+      { tekst: "Boekhouding en accounting", uit: true },
+      { tekst: "Odoo-inrichting als je die nodig hebt", uit: true },
       { tekst: "Geen winst? 1 maand gratis", sterk: true },
       { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
@@ -178,9 +204,17 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Gevonden worden op het moment dat ze zoeken.",
     punten: [
-      { tekst: "Alles uit Meta", erfenis: true },
+      { tekst: "Website, custom OS en branding" },
+      { tekst: "Content en advertenties gemaakt" },
+      { tekst: "Persoonlijke call met uitleg van je systeem" },
+      { tekst: "Meta Ads opgezet en beheerd" },
+      { tekst: "Leads direct in je CRM" },
       { tekst: "Google Ads opgezet en beheerd", sterk: true },
       { tekst: "Eén rapport voor elk kanaal" },
+      { tekst: "Boekhouding en accounting", uit: true },
+      { tekst: "Odoo-inrichting als je die nodig hebt", uit: true },
+      { tekst: "Geen winst? 1 maand gratis" },
+      { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
     team: ["marinus", "jos", "sergio", "nick"],
     kleur: "var(--prijs-blauw)",
@@ -194,9 +228,17 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Marketing en financiën, volledig geregeld.",
     punten: [
-      { tekst: "Alles uit Meta + Google", erfenis: true },
+      { tekst: "Website, custom OS en branding" },
+      { tekst: "Content en advertenties gemaakt" },
+      { tekst: "Persoonlijke call met uitleg van je systeem" },
+      { tekst: "Meta Ads opgezet en beheerd" },
+      { tekst: "Leads direct in je CRM" },
+      { tekst: "Google Ads opgezet en beheerd" },
+      { tekst: "Eén rapport voor elk kanaal" },
       { tekst: "Boekhouding en accounting", sterk: true },
       { tekst: "Odoo-inrichting als je die nodig hebt" },
+      { tekst: "Geen winst? 1 maand gratis" },
+      { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
     team: ["marinus", "jos", "sergio", "nick", "steef"],
     kleur: "var(--prijs-geel)",
@@ -265,7 +307,7 @@ function Kaart({ pakket, maandelijks = false }: { pakket: Pakket; maandelijks?: 
       </div>
       <ul className="prijs-punten">
         {pakket.punten.map((punt) => (
-          <li key={punt.tekst} className={punt.erfenis ? "is-erfenis" : punt.sterk ? "is-sterk" : undefined}>
+          <li key={punt.tekst} className={punt.uit ? "is-uit" : punt.erfenis ? "is-erfenis" : punt.sterk ? "is-sterk" : undefined}>
             {punt.tekst}
           </li>
         ))}

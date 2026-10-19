@@ -655,3 +655,8 @@
 @media (max-width: 420px) { .sn-site .prijs-usps ul { grid-template-columns: minmax(0, 1fr); } }
 .sn-site .h-dienst-strook p.h-dienst-items { display: block !important; }
 .sn-site .h-dienst-strook p.h-dienst-items span { display: inline !important; }
+/* Vaste rijen: niet inbegrepen staat grijs met een streepje op dezelfde plek. */
+.sn-site .prijs-punten li.is-uit { color: #5d666e; }
+.sn-site .prijs-punten li.is-uit::before { border-color: #39424a; }
+.sn-site .prijs-punten li.is-uit::after { left: 3.5px; top: 9px; width: 6px; height: 0; border-width: 0 0 1.5px 0; border-color: #4b545c; transform: none; }
+.sn-site .prijs-diensten .prijs-belofte { min-height: 2.9em; }
