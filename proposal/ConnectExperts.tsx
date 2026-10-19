@@ -22,8 +22,8 @@ export default function ConnectExperts() {
       <div className="sn-bento-kop">
         <p className="h-eyebrow"><i />SocialNow Connect</p>
         <h2 id="team-titel">De experts van Connect.<br /><span>Echte mensen, ieder met een eigen bedrijf.</span></h2>
-        {/* 19 oktober 2026 (Marinus): "graag gewoon groot coming november 15th." */}
-        <p className="cx-binnenkort" translate="no">Coming <span>November 15th.</span></p>
+        {/* 19 oktober 2026 (Marinus): "Coming November 15th. - Mag wel weg bij de voorvertoning aangezien ze in principe gwn via mij
+            die experts alsnog kunnen benaderen." De melding staat alleen nog op /connect/. */}
       </div>
       <ul className="cx-rij">
         {people.map(persoon => <li key={persoon.name}>
