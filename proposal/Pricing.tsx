@@ -188,7 +188,7 @@ function Vergelijk() {
 // oplevering." Dat geldt voor de eenmalige website en het custom OS.
 const LOS = [
   { naam: "Demowebsite", prijs: "€0", per: "gratis", tekst: "Een complete website in je merk, klaar om live te gaan. Geen verplichting.", actie: "Vraag je demo aan", to: "/gratis-website", kleur: "var(--prijs-groen)" },
-  { naam: "Je website", prijs: "€2.000 tot €5.000", per: "eenmalig", tekst: "Ontworpen en gebouwd in je merk. De prijs hangt af van pagina's en koppelingen.", betaling: true, actie: "Bespreek je website", to: "/contact?onderwerp=Website", kleur: "var(--prijs-blauw)" },
+  { naam: "Website realisatie en ontwikkeling", prijs: "€2.000 tot €5.000", per: "eenmalig", tekst: "Ontworpen en gebouwd in je merk. De prijs hangt af van pagina's en koppelingen.", betaling: true, actie: "Bespreek je website", to: "/contact?onderwerp=Website", kleur: "var(--prijs-blauw)" },
   { naam: "Custom OS", prijs: "vanaf €10.000", per: "eenmalig", tekst: "Alleen het systeem, gebouwd rond je bedrijf en je processen.", betaling: true, actie: "Plan een call", call: true, kleur: "var(--prijs-geel)" },
 ];
 
