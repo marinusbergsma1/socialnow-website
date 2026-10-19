@@ -22,6 +22,8 @@ export default function ConnectExperts() {
       <div className="sn-bento-kop">
         <p className="h-eyebrow"><i />SocialNow Connect</p>
         <h2 id="team-titel">De experts van Connect.<br /><span>Echte mensen, ieder met een eigen bedrijf.</span></h2>
+        {/* 19 oktober 2026 (Marinus): "graag gewoon groot coming november 15th." */}
+        <p className="cx-binnenkort" translate="no">Coming <span>November 15th.</span></p>
       </div>
       <ul className="cx-rij">
         {people.map(persoon => <li key={persoon.name}>
@@ -42,7 +44,8 @@ export default function ConnectExperts() {
         <div className="cx-keuze">
           <p className="cx-vraag">Ben je expert?</p>
           <p>Meld je aan bij Connect en krijg opdrachten van bedrijven.</p>
-          <a className="sn-pill sn-btn3d h-button h-button-secondary" href="/connect/">
+          {/* 19 oktober 2026: niet meer naar de pilot; aanmelden per mail tot Connect op 15 november opent. */}
+          <a className="sn-pill sn-btn3d h-button h-button-secondary" href={mailLink(t("Aanmelden als expert bij Connect"))}>
             <span className="cx-lang">Meld je aan als expert</span><span className="cx-kort">Aanmelden</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
           </a>
         </div>

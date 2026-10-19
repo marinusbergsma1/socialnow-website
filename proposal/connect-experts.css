@@ -40,3 +40,7 @@ html:root .sn-site .cx-wit .cx-keuze .cx-vraag { font-size: 20px; font-weight: 7
   .sn-site .cx-kort { display: inline; }
   .sn-site .cx-lang { display: none; }
 }
+
+/* 19 oktober 2026: Connect opent op 15 november; groot in beeld boven de experts. */
+html:root .sn-site .cx-wit .cx-binnenkort { margin: 18px 0 0; font-size: clamp(40px, 7vw, 96px) !important; font-weight: 900; line-height: .95; letter-spacing: -.02em; color: #0b1a12; }
+.sn-site .cx-binnenkort span { color: #1fa855; }

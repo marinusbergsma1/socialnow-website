@@ -134,6 +134,12 @@ try {
   await server.close();
 }
 
+// 19 oktober 2026 (Marinus): de Connect-pilot op workers.dev weg van socialnow.nl; /connect/ zegt groot "Coming November 15th".
+const connectPagina = lees("public/connect/index.html");
+eis(!/workers\.dev/.test(connectPagina) && /Coming <span>November 15th\.<\/span>/.test(connectPagina), "/connect/: nog de pilot of geen Coming November 15th");
+eis(!/workers\.dev/.test(lees("proposal/ConnectExperts.tsx")) && !/href="\/connect\/">\s*<span className="cx-lang">Meld je aan/.test(lees("proposal/ConnectExperts.tsx")), "Connect-sectie: aanmelden gaat nog naar de pilot");
+eis(lees("proposal/ConnectExperts.tsx").includes("cx-binnenkort"), "Connect-sectie: Coming November 15th ontbreekt");
+
 // Kleur: diepzwart zoals de homepage
 const prijsCss = lees("proposal/pricing.css");
 eis(!/\.prijs-maatwerk-bedrag strong \{[^}]*120px/.test(prijsCss), "css: reuzencijfer voor het OS op maat staat er nog");

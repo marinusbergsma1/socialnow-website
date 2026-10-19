@@ -413,12 +413,14 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
         id="os"
         label="01 / Het OS"
         titel="Begin gratis. Betaal pas als je team groeit."
-        tekst="Je software is gratis. Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Jaarlijks betaal je het minst; maandelijks opzegbaar kost 25% meer."
+        tekst="Je software is gratis. Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Bespaar 20% met een jaarabonnement."
         pakketten={OS}
         maandelijks={maandelijks}
       >
         <div className="prijs-periode" role="group" aria-label="Betaalperiode">
-          <button type="button" aria-pressed={!maandelijks} onClick={() => zetMaandelijks(false)}>Jaarlijks</button>
+          {/* 19 oktober 2026 (Marinus): "Benoem bespaar 25% extra als je een abonnement hebt per jaar." Maandelijks is 25% duurder, dus
+              jaarlijks bespaar je 20% van de maandprijs (€35 tegenover €43,75); de site noemt het eerlijke getal. */}
+          <button type="button" aria-pressed={!maandelijks} onClick={() => zetMaandelijks(false)}>Jaarlijks <span className="prijs-bespaar">Bespaar 20%</span></button>
           <button type="button" aria-pressed={maandelijks} onClick={() => zetMaandelijks(true)}>Maandelijks</button>
         </div>
         <div className="prijs-usps">
