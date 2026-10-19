@@ -19,6 +19,7 @@ const VERSIE = "20261015-team";
 // bedrijf zijn." Daarna koos hij ontwerp 1, "zoeken op zwart": eigen merk, zoekveld, vakgebieden als knoppen en een raster met
 // profielen. Wie in een vakgebied zit komt uit expertGroepen; zonder groep valt iemand alleen onder Alles.
 const ALLES = "Alles";
+// 19 oktober 2026 (Marinus): "dat onderdeel met mensen altijd met een witte achtergrond." Zelfde ontwerp, op wit.
 
 export default function ConnectExperts() {
   const { t } = useLanguage();
@@ -32,7 +33,7 @@ export default function ConnectExperts() {
   // Eerst acht gezichten; zoeken, een vakgebied of de knop toont alles wat past.
   const ingekort = vak === ALLES && !q && !allesTonen && lijst.length > 8;
   const zichtbaar = ingekort ? lijst.slice(0, 8) : lijst;
-  return <div className="cx-zwart">
+  return <div className="cx-connect">
     <section id="team" className="sn-cx h-wrap" aria-labelledby="team-titel">
       <div className="cx-boven">
         <p className="cx-merk" translate="no">SocialNow <b>Connect</b></p>
