@@ -285,62 +285,27 @@ export function ProjectPage() {
   return <ProjectCase key={project.slug} project={project} next={next} />;
 }
 
+// 19 oktober 2026 (Marinus): "Bij diensten moeten de pakketten boven de regels nikszeggende diensten komen. Nikszeggende diensten
+// misschien zelfs helemaal weg of in een horizontale slider." De prijzen openen de pagina; de diensten zijn een smalle strook
+// eronder. De ankers (/diensten#development enz. uit de footer) blijven op de kaarten staan.
 export function ServicesPage() {
   return (
     <>
-      <PageHeading
-        label="Diensten"
-        title={
-          <>
-            Goed bedacht.
-            <br />
-            <span>Volledig gemaakt.</span>
-          </>
-        }
-        text="Hier begon SocialNow: ontwerp, beeld en campagnes. Vandaag werken we ook met AI en development, en het blijft persoonlijk. Voor één gerichte opdracht of als team naast je bedrijf."
-      />
-      <section className="h-wrap h-services">
-        {services.map((service, index) => (
-          <article
-            id={service.id}
-            key={service.id}
-            style={{ "--accent": service.color } as React.CSSProperties}
-          >
-            <div>
-              <p className="h-eyebrow">0{index + 1} / Expertise</p>
-              <h2>{service.title}</h2>
-              <p>{service.intro}</p>
-            </div>
-            <ul>
-              {service.items.map((item) => (
-                <li key={item}>
-                  <Check size={15} />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <TextLink
-              to={`/contact?onderwerp=${encodeURIComponent(service.title)}`}
-            >
-              Bespreek je project
-            </TextLink>
-          </article>
-        ))}
-      </section>
-      <Pricing />
-      <section className="h-section h-wrap h-service-cta">
-        <Heading
-          label="Samen aan de slag"
-          title={
-            <>
-              Een losse opdracht.
-              <br />
-              <span>Of verder bouwen.</span>
-            </>
-          }
-          text="Probeer het OS gratis en bespreek je OS op maat. Voor een losse opdracht maken we een gericht voorstel met een duidelijke scope."
-        />
-        <PlanCallKnop className="sn-pill sn-btn3d h-button" label="Plan een call" />
+      <Pricing bovenaan />
+      <section className="h-wrap h-dienst-strook-sectie" aria-labelledby="losse-diensten-titel">
+        <div className="h-dienst-strook-kop">
+          <p className="h-eyebrow">Losse diensten</p>
+          <h2 id="losse-diensten-titel">Ook voor één opdracht.</h2>
+        </div>
+        <ul className="h-dienst-strook">
+          {services.map((service) => (
+            <li id={service.id} key={service.id} style={{ "--accent": service.color } as React.CSSProperties}>
+              <h3>{service.title}</h3>
+              <p>{service.items.slice(0, 4).map((item) => <span key={item}>{item}</span>)}</p>
+              <TextLink to={`/contact?onderwerp=${encodeURIComponent(service.title)}`}>Bespreek je project</TextLink>
+            </li>
+          ))}
+        </ul>
       </section>
       <section className="h-section h-wrap h-faq-layout">
         <Heading label="Voor we beginnen" title="Duidelijke afspraken." />

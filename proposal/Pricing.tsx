@@ -117,7 +117,6 @@ export const CONNECT: Pakket[] = [
     kleur: "var(--prijs-groen)",
     actie: "Kies Start",
     onderwerp: "Connect-pakket Start",
-    vlag: "Meest gekozen",
   },
   {
     id: "meta",
@@ -134,6 +133,8 @@ export const CONNECT: Pakket[] = [
     kleur: "var(--prijs-roze)",
     actie: "Kies Meta",
     onderwerp: "Connect-pakket Meta",
+    // 19 oktober 2026 (Marinus): "Doe maar 4K meest gekozen."
+    vlag: "Meest gekozen",
   },
   {
     id: "meta-google",
@@ -258,17 +259,20 @@ function Rij({ id, label, titel, tekst, pakketten }: { id: string; label: string
   );
 }
 
-export default function Pricing() {
+// bovenaan: het prijsblok opent de pagina (19 oktober 2026: "Bij diensten moeten de pakketten boven [...] de diensten komen"),
+// dus de kop is dan de h1 van de pagina.
+export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
   useLanguage();
+  const Kop = bovenaan ? "h1" : "h2";
   return (
-    <div id="prijzen" className="prijs prijs-diensten h-wrap">
+    <div id="prijzen" className={`prijs prijs-diensten h-wrap${bovenaan ? " is-bovenaan" : ""}`}>
       <div className="prijs-diensten-kop">
-        <p className="h-eyebrow prijs-groen-tekst">Wat het kost</p>
-        <h2>
+        <p className="h-eyebrow prijs-groen-tekst">Diensten en prijzen</p>
+        <Kop>
           Software gratis.
           <br />
           <em>Echt werk voor een vaste prijs.</em>
-        </h2>
+        </Kop>
         <p>Alle bedragen zijn exclusief btw.</p>
       </div>
 
