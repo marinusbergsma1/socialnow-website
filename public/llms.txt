@@ -15,7 +15,7 @@ Je begint gratis. Kies je voor maatwerk, dan organiseert en betaalt SocialNow B.
 - SocialNow OS brengt website, CRM, content en advertenties samen. De startroute is WEBSITE → CONTENT → STUDIO.
 - Het OS: Gratis met 10 GB opslag en 2 uitgenodigde mensen, inclusief een gratis demowebsite, gratis Studio, 5.000 gratis stockfoto's, gratis social media management en een gratis boekhoudpakket. Business €35 per maand bij een jaarabonnement (maandelijks opzegbaar €43,75) voor 2 tot 5 medewerkers met 1.500 tokens per maand, Agentic Payments en 50 GB opslag. Enterprise €65 per maand bij een jaarabonnement (maandelijks opzegbaar €81,25) voor 5 tot 10 medewerkers met 4.000 tokens per maand, onbeperkte opslag, korting op extra tokens en een gratis website. Genoemde prijzen zijn exclusief btw.
 - Tokens zijn rendertegoed voor de Studio; één token is één cent. Extra tokens koop je los: 1.000, 2.500 of 5.000 tokens voor €10, €25 of €50.
-- Los: een gratis demowebsite, een website voor €2.000 tot €5.000 eenmalig, of alleen een custom OS vanaf €10.000 eenmalig.
+- Los: een gratis demowebsite, een website voor €2.000 tot €5.000 eenmalig, of alleen een custom OS vanaf €10.000 eenmalig; daarvan betaal je de helft vooraf en de helft bij oplevering.
 - Odoo is een optionele koppeling voor klanten en verkoop. Odoo is geen vereiste om met SocialNow OS te beginnen.
 - Beschikbare gegevens hangen af van de gekozen koppelingen en toegangsrechten. Functies en persoonlijke inrichting worden samen afgesproken; de testomgeving is in ontwikkeling.
 

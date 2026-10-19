@@ -88,13 +88,16 @@ try {
   const kaarten = [...diensten.matchAll(/<ul class="prijs-punten">([\s\S]*?)<\/ul>/g)].map((m) => [...m[1].matchAll(/<li(?! class="prijs-groep")[^>]*>([^<]*)<\/li>/g)].map((l) => l[1]));
   eis(kaarten.length === 7, `/diensten: ${kaarten.length} kaarten in plaats van 7`);
   eis(kaarten.slice(0, 3).every((k) => k.length === 10 && /opslag/i.test(k[1])), "/diensten: OS-kaarten hebben niet dezelfde rijen met opslag op plek 2");
-  eis(kaarten.slice(3).every((k) => k.length === 20 && /Meta Ads/.test(k[6])), "/diensten: Connect-kaarten hebben niet dezelfde rijen");
+  eis(kaarten.slice(3).every((k) => k.length === 9 && /Meta Ads/.test(k[3])), "/diensten: Connect-kaarten hebben niet dezelfde negen rijen");
+  // "Deze zijn nu wel écht te lang." De details staan in één uitklapbare tabel.
+  eis(diensten.includes('class="prijs-vergelijk"'), "/diensten: vergelijkingstabel ontbreekt");
   // 19 oktober 2026 (Marinus): "AI agents ipv Milo" in de prijzen, en de Connect-pakketten per onderwerp uitgewerkt.
+  eis((diensten.match(/Helft vooraf, helft bij oplevering\./g) || []).length === 2, "/diensten: betaling helft vooraf, helft bij oplevering niet bij website en custom OS");
   // "De prijs voor websites moeten er ook staan."
   for (const bedrag of ["€2.000 tot €5.000", "vanaf €10.000"]) eis(diensten.includes(`<strong>${bedrag}</strong>`), `/diensten: losse prijs ${bedrag} niet groot in beeld`);
   eis(!/Dashboard, CRM en Milo/.test(diensten) && diensten.includes("Dashboard, CRM en AI agents"), "/diensten: Milo staat nog in de prijzen");
   for (const groep of ["Merk en website", "Content", "Advertenties", "Begeleiding", "Financiën", "Afspraken"])
-    eis((diensten.match(new RegExp(`<li class="prijs-groep">${groep}</li>`, "g")) || []).length === 4, `/diensten: kopje '${groep}' niet in alle vier de pakketten`);
+    eis(diensten.includes(`colSpan="5">${groep}</th>`) || diensten.includes(`colspan="5">${groep}</th>`), `/diensten: groep '${groep}' niet in de vergelijkingstabel`);
   eis(diensten.includes("Head of Meta Ads") && !diensten.includes("Meta Ads Specialist"), "/diensten: Sergio niet als Head of Meta Ads");
   for (const oud of ["€5.500", "€6.000", "Content + Meta", "Onbeperkt teamleden", "Kies Team", "100 GB opslag", "Losse diensten"])
     eis(!diensten.includes(oud), `/diensten: oud pakket '${oud}' staat er nog`);

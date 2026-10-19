@@ -37,7 +37,7 @@ type Pakket = {
   belofte: string;
   // 19 oktober 2026 (Marinus): "De punten moeten altijd overeenkomen. Dus altijd opslag op dezelfde plek bij alle 3." Elke kaart
   // in een rij heeft dezelfde regels in dezelfde volgorde; wat er niet in zit staat er grijs bij (uit).
-  // groep: een kopje boven de regel (19 oktober 2026, Marinus over de Connect-pakketten: "Juist hier veel meer in details gaan" en
+  // groep: een kopje boven de regel (wordt nu niet gebruikt op de kaarten; 19 oktober 2026, Marinus over de Connect-pakketten: "Juist hier veel meer in details gaan" en
   // "Hulp binnen Odoo. en maak sws de duurdere pakketten met menselijke hulp écht even een stuk uitgebreider met goeie USP'S").
   punten: { tekst: string; erfenis?: boolean; sterk?: boolean; uit?: boolean; groep?: string }[];
   team?: string[];
@@ -138,11 +138,60 @@ const GRATIS_USPS = [
   { titel: "Boekhoudpakket", tekst: "Facturen en boekhouding, gratis." },
 ];
 
-// Losse producten, buiten de abonnementen en pakketten om.
+// Alles wat in de Connect-pakketten zit, als uitklapbare tabel onder de kaarten. vanaf: 0 Start, 1 Meta, 2 Meta + Google, 3 Compleet.
+// 19 oktober 2026 (Marinus): eerst "Juist hier veel meer in details gaan", daarna "Deze zijn nu wel écht te lang." Dus korte kaarten
+// en de details hier.
+const VERGELIJK: { groep: string; regels: [string, number][] }[] = [
+  { groep: "Merk en website", regels: [["Website ontworpen en gebouwd", 0], ["Custom OS ingericht rond je bedrijf", 0], ["Complete branding: logo, kleuren en stijl", 0]] },
+  { groep: "Content", regels: [["Content in je merk, gepland en geplaatst", 0], ["Ad-creatie: beeld en video voor je advertenties", 0], ["Short-form video en motion design", 0]] },
+  { groep: "Advertenties", regels: [["Meta Ads: campagnes, doelgroepen en retargeting", 1], ["Leads direct in je CRM", 1], ["A/B-tests op je advertenties", 1], ["Google Ads: Search, Shopping en Performance Max", 2], ["Landingspagina's voor je campagnes", 2], ["Eén rapport voor elk kanaal", 2]] },
+  { groep: "Begeleiding", regels: [["Vast aanspreekpunt uit ons team", 0], ["Persoonlijke call met uitleg van je systeem", 0], ["Maandelijkse strategiesessie", 1], ["Wekelijkse optimalisatie van je campagnes", 1]] },
+  { groep: "Financiën", regels: [["Boekhouding en accounting", 3], ["Hulp binnen Odoo: inrichting en vragen", 3]] },
+  { groep: "Afspraken", regels: [["Geen winst? 1 maand gratis", 1]] },
+];
+
+function Vergelijk() {
+  return (
+    <details className="prijs-vergelijk">
+      <summary>
+        <span>Vergelijk alles wat erin zit</span>
+        <ChevronDown size={16} aria-hidden="true" />
+      </summary>
+      <div className="prijs-vergelijk-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col"><span className="sr-only">Onderdeel</span></th>
+              {CONNECT.map((p) => <th key={p.id} scope="col" translate="no">{p.naam}</th>)}
+            </tr>
+          </thead>
+          {VERGELIJK.map((blok) => (
+            <tbody key={blok.groep}>
+              <tr className="prijs-vergelijk-groep"><th scope="rowgroup" colSpan={CONNECT.length + 1}>{blok.groep}</th></tr>
+              {blok.regels.map(([tekst, vanaf]) => (
+                <tr key={tekst}>
+                  <th scope="row">{tekst}</th>
+                  {CONNECT.map((p, i) => (
+                    <td key={p.id} className={i >= vanaf ? "is-ja" : "is-nee"}>
+                      {i >= vanaf ? <span aria-label="ja">✓</span> : <span aria-label="nee">–</span>}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          ))}
+        </table>
+      </div>
+    </details>
+  );
+}
+
+// Losse producten, buiten de abonnementen en pakketten om. 19 oktober 2026 (Marinus): "Helft aanbetaling vooraf andere helft bij
+// oplevering." Dat geldt voor de eenmalige website en het custom OS.
 const LOS = [
   { naam: "Demowebsite", prijs: "€0", per: "gratis", tekst: "Een complete website in je merk, klaar om live te gaan. Geen verplichting.", actie: "Vraag je demo aan", to: "/gratis-website", kleur: "var(--prijs-groen)" },
-  { naam: "Je website", prijs: "€2.000 tot €5.000", per: "eenmalig", tekst: "Ontworpen en gebouwd in je merk. De prijs hangt af van pagina's en koppelingen.", actie: "Bespreek je website", to: "/contact?onderwerp=Website", kleur: "var(--prijs-blauw)" },
-  { naam: "Custom OS", prijs: "vanaf €10.000", per: "eenmalig", tekst: "Alleen het systeem, gebouwd rond je bedrijf en je processen.", actie: "Plan een call", call: true, kleur: "var(--prijs-geel)" },
+  { naam: "Je website", prijs: "€2.000 tot €5.000", per: "eenmalig", tekst: "Ontworpen en gebouwd in je merk. De prijs hangt af van pagina's en koppelingen.", betaling: true, actie: "Bespreek je website", to: "/contact?onderwerp=Website", kleur: "var(--prijs-blauw)" },
+  { naam: "Custom OS", prijs: "vanaf €10.000", per: "eenmalig", tekst: "Alleen het systeem, gebouwd rond je bedrijf en je processen.", betaling: true, actie: "Plan een call", call: true, kleur: "var(--prijs-geel)" },
 ];
 
 // Wat ons anders maakt dan losse software (positionering 29 september 2026: draait op Odoo, met échte professionals).
@@ -163,25 +212,14 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Alles om goed zichtbaar te worden.",
     punten: [
-      { tekst: "Website ontworpen en gebouwd", groep: "Merk en website" },
-      { tekst: "Custom OS ingericht rond je bedrijf" },
-      { tekst: "Complete branding: logo, kleuren en stijl" },
-      { tekst: "Content in je merk, gepland en geplaatst", groep: "Content" },
-      { tekst: "Ad-creatie: beeld en video voor je advertenties" },
-      { tekst: "Short-form video en motion design" },
-      { tekst: "Meta Ads: campagnes, doelgroepen en retargeting", groep: "Advertenties", uit: true },
-      { tekst: "Leads direct in je CRM", uit: true },
-      { tekst: "Google Ads: Search, Shopping en Performance Max", uit: true },
-      { tekst: "Landingspagina's voor je campagnes", uit: true },
-      { tekst: "A/B-tests op je advertenties", uit: true },
-      { tekst: "Eén rapport voor elk kanaal", uit: true },
-      { tekst: "Vast aanspreekpunt uit ons team", groep: "Begeleiding" },
-      { tekst: "Persoonlijke call met uitleg van je systeem" },
-      { tekst: "Maandelijkse strategiesessie", uit: true },
-      { tekst: "Wekelijkse optimalisatie van je campagnes", uit: true },
-      { tekst: "Boekhouding en accounting", groep: "Financiën", uit: true },
-      { tekst: "Hulp binnen Odoo: inrichting en vragen", uit: true },
-      { tekst: "Geen winst? 1 maand gratis", groep: "Afspraken", uit: true },
+      { tekst: "Website, custom OS en branding" },
+      { tekst: "Content en ad-creatie in je merk" },
+      { tekst: "Vast aanspreekpunt uit ons team" },
+      { tekst: "Meta Ads en leads in je CRM", uit: true },
+      { tekst: "Strategiesessie en wekelijkse optimalisatie", uit: true },
+      { tekst: "Google Ads en landingspagina's", uit: true },
+      { tekst: "Boekhouding en hulp binnen Odoo", uit: true },
+      { tekst: "Geen winst? 1 maand gratis", uit: true },
       { tekst: "Geen minimum mediabudget" },
     ],
     team: ["marinus"],
@@ -196,25 +234,14 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Bereik de juiste mensen op Instagram en Facebook.",
     punten: [
-      { tekst: "Website ontworpen en gebouwd", groep: "Merk en website" },
-      { tekst: "Custom OS ingericht rond je bedrijf" },
-      { tekst: "Complete branding: logo, kleuren en stijl" },
-      { tekst: "Content in je merk, gepland en geplaatst", groep: "Content" },
-      { tekst: "Ad-creatie: beeld en video voor je advertenties" },
-      { tekst: "Short-form video en motion design" },
-      { tekst: "Meta Ads: campagnes, doelgroepen en retargeting", groep: "Advertenties", sterk: true },
-      { tekst: "Leads direct in je CRM" },
-      { tekst: "Google Ads: Search, Shopping en Performance Max", uit: true },
-      { tekst: "Landingspagina's voor je campagnes", uit: true },
-      { tekst: "A/B-tests op je advertenties" },
-      { tekst: "Eén rapport voor elk kanaal", uit: true },
-      { tekst: "Vast aanspreekpunt uit ons team", groep: "Begeleiding" },
-      { tekst: "Persoonlijke call met uitleg van je systeem" },
-      { tekst: "Maandelijkse strategiesessie" },
-      { tekst: "Wekelijkse optimalisatie van je campagnes" },
-      { tekst: "Boekhouding en accounting", groep: "Financiën", uit: true },
-      { tekst: "Hulp binnen Odoo: inrichting en vragen", uit: true },
-      { tekst: "Geen winst? 1 maand gratis", groep: "Afspraken", sterk: true },
+      { tekst: "Website, custom OS en branding" },
+      { tekst: "Content en ad-creatie in je merk" },
+      { tekst: "Vast aanspreekpunt uit ons team" },
+      { tekst: "Meta Ads en leads in je CRM", sterk: true },
+      { tekst: "Strategiesessie en wekelijkse optimalisatie" },
+      { tekst: "Google Ads en landingspagina's", uit: true },
+      { tekst: "Boekhouding en hulp binnen Odoo", uit: true },
+      { tekst: "Geen winst? 1 maand gratis", sterk: true },
       { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
     team: ["marinus", "jos", "sergio"],
@@ -231,25 +258,14 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Gevonden worden op het moment dat ze zoeken.",
     punten: [
-      { tekst: "Website ontworpen en gebouwd", groep: "Merk en website" },
-      { tekst: "Custom OS ingericht rond je bedrijf" },
-      { tekst: "Complete branding: logo, kleuren en stijl" },
-      { tekst: "Content in je merk, gepland en geplaatst", groep: "Content" },
-      { tekst: "Ad-creatie: beeld en video voor je advertenties" },
-      { tekst: "Short-form video en motion design" },
-      { tekst: "Meta Ads: campagnes, doelgroepen en retargeting", groep: "Advertenties" },
-      { tekst: "Leads direct in je CRM" },
-      { tekst: "Google Ads: Search, Shopping en Performance Max", sterk: true },
-      { tekst: "Landingspagina's voor je campagnes" },
-      { tekst: "A/B-tests op je advertenties" },
-      { tekst: "Eén rapport voor elk kanaal" },
-      { tekst: "Vast aanspreekpunt uit ons team", groep: "Begeleiding" },
-      { tekst: "Persoonlijke call met uitleg van je systeem" },
-      { tekst: "Maandelijkse strategiesessie" },
-      { tekst: "Wekelijkse optimalisatie van je campagnes" },
-      { tekst: "Boekhouding en accounting", groep: "Financiën", uit: true },
-      { tekst: "Hulp binnen Odoo: inrichting en vragen", uit: true },
-      { tekst: "Geen winst? 1 maand gratis", groep: "Afspraken" },
+      { tekst: "Website, custom OS en branding" },
+      { tekst: "Content en ad-creatie in je merk" },
+      { tekst: "Vast aanspreekpunt uit ons team" },
+      { tekst: "Meta Ads en leads in je CRM" },
+      { tekst: "Strategiesessie en wekelijkse optimalisatie" },
+      { tekst: "Google Ads en landingspagina's", sterk: true },
+      { tekst: "Boekhouding en hulp binnen Odoo", uit: true },
+      { tekst: "Geen winst? 1 maand gratis" },
       { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
     team: ["marinus", "jos", "sergio", "nick"],
@@ -264,25 +280,14 @@ export const CONNECT: Pakket[] = [
     per: "per maand",
     belofte: "Marketing en financiën, volledig geregeld.",
     punten: [
-      { tekst: "Website ontworpen en gebouwd", groep: "Merk en website" },
-      { tekst: "Custom OS ingericht rond je bedrijf" },
-      { tekst: "Complete branding: logo, kleuren en stijl" },
-      { tekst: "Content in je merk, gepland en geplaatst", groep: "Content" },
-      { tekst: "Ad-creatie: beeld en video voor je advertenties" },
-      { tekst: "Short-form video en motion design" },
-      { tekst: "Meta Ads: campagnes, doelgroepen en retargeting", groep: "Advertenties" },
-      { tekst: "Leads direct in je CRM" },
-      { tekst: "Google Ads: Search, Shopping en Performance Max" },
-      { tekst: "Landingspagina's voor je campagnes" },
-      { tekst: "A/B-tests op je advertenties" },
-      { tekst: "Eén rapport voor elk kanaal" },
-      { tekst: "Vast aanspreekpunt uit ons team", groep: "Begeleiding" },
-      { tekst: "Persoonlijke call met uitleg van je systeem" },
-      { tekst: "Maandelijkse strategiesessie" },
-      { tekst: "Wekelijkse optimalisatie van je campagnes" },
-      { tekst: "Boekhouding en accounting", groep: "Financiën", sterk: true },
-      { tekst: "Hulp binnen Odoo: inrichting en vragen" },
-      { tekst: "Geen winst? 1 maand gratis", groep: "Afspraken" },
+      { tekst: "Website, custom OS en branding" },
+      { tekst: "Content en ad-creatie in je merk" },
+      { tekst: "Vast aanspreekpunt uit ons team" },
+      { tekst: "Meta Ads en leads in je CRM" },
+      { tekst: "Strategiesessie en wekelijkse optimalisatie" },
+      { tekst: "Google Ads en landingspagina's" },
+      { tekst: "Boekhouding en hulp binnen Odoo", sterk: true },
+      { tekst: "Geen winst? 1 maand gratis" },
       { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
     team: ["marinus", "jos", "sergio", "nick", "steef"],
@@ -451,6 +456,7 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
           <li><b>Mediabudget vanaf €1.000</b><span>Vanaf Meta betaal je zelf minimaal €1.000 per maand aan advertenties.</span></li>
         </ul>
       </Rij>
+      <Vergelijk />
 
       {/* 19 oktober 2026 (Marinus): "De prijs voor websites moeten er ook staan." Drie losse producten met de prijs groot. */}
       <section className="prijs-los" aria-labelledby="prijs-los-titel">
@@ -467,6 +473,7 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
               <h4>{item.naam}</h4>
               <p className="prijs-bedrag"><strong>{item.prijs}</strong><span>{item.per}</span></p>
               <p className="prijs-belofte">{item.tekst}</p>
+              {item.betaling && <p className="prijs-betaling">Helft vooraf, helft bij oplevering.</p>}
               {item.call ? (
                 <button type="button" className="sn-pill sn-btn3d h-button h-button-secondary" aria-haspopup="dialog" onClick={() => openPlanCall()}>
                   <span className="sn-btn3d-sheen" />

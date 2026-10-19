@@ -658,3 +658,18 @@
 .sn-site .prijs-los .h-button { width: 100%; margin-top: 10px; }
 @media (max-width: 860px) { .sn-site .prijs-los > ul { grid-template-columns: minmax(0, 1fr); } }
 .sn-site .prijs-los button.h-button { cursor: pointer; }
+/* Uitklapbare vergelijking van de Connect-pakketten. */
+.sn-site .prijs-vergelijk { margin-top: 16px; border: 1px solid var(--prijs-rand); border-radius: 16px; background: #0b0f12; }
+.sn-site .prijs-vergelijk summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; cursor: pointer; list-style: none; font-weight: 700; color: #fff; }
+.sn-site .prijs-vergelijk summary::-webkit-details-marker { display: none; }
+.sn-site .prijs-vergelijk[open] summary svg { transform: rotate(180deg); }
+.sn-site .prijs-vergelijk summary:focus-visible { outline: 2px solid #fff; outline-offset: -2px; border-radius: 16px; }
+.sn-site .prijs-vergelijk-scroll { overflow-x: auto; padding: 0 20px 18px; }
+.sn-site .prijs-vergelijk table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: 14px; }
+.sn-site .prijs-vergelijk th, .sn-site .prijs-vergelijk td { padding: 9px 10px; border-bottom: 1px solid rgba(255, 255, 255, .07); text-align: left; font-weight: 400; color: #d3d8de; }
+.sn-site .prijs-vergelijk thead th { font-weight: 700; color: #fff; }
+.sn-site .prijs-vergelijk td, .sn-site .prijs-vergelijk thead th:not(:first-child) { text-align: center; width: 13%; }
+.sn-site .prijs-vergelijk .prijs-vergelijk-groep th { padding-top: 16px; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8f98a1; }
+.sn-site .prijs-vergelijk td.is-ja { color: var(--prijs-groen); font-weight: 700; }
+.sn-site .prijs-vergelijk td.is-nee { color: #4b545c; }
+.sn-site .prijs-los .prijs-betaling { margin: 4px 0 0; font-size: 13px; font-weight: 600; color: #fff; }
