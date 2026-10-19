@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { CONTACT_MAIL, heeftWhatsApp, mailLink, whatsappLink } from "./aanvragen";
 import {
+  Check,
   ArrowRight,
   ArrowUp,
   ArrowUpRight,
@@ -334,8 +335,16 @@ export function Closing({ compact = false }: { compact?: boolean }) {
   if (compact) return <section className="h-final-close sn-home-final" aria-labelledby="final-close-title">
     <img className="h-final-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="135" loading="lazy" />
     <h2 id="final-close-title">Start gratis met jouw systeem.</h2>
-    <p>Gratis tot 10 GB opslag. Onder 10 GB schrijven we niets af.</p>
-    <a className="sn-pill sn-home-cta" href="https://app.socialnow.nl/login/">Probeer SocialNow OS <ArrowUpRight size={20} aria-hidden="true" /></a>
+    {/* 19 oktober 2026 (Marinus): "Dit kan ook nog beter plus klopt niet helemaal meer." Dus het gratis pakket van nu en twee
+        knoppen in de knopregel (groen met wit, wit met groen), in plaats van de oude afschrijfzin en een zwarte knop. */}
+    <ul className="sn-slot-punten">
+      {["10 GB opslag", "Nodig 2 mensen uit", "Gratis website en rebranding"].map(p => <li key={p}><Check size={16} strokeWidth={3} aria-hidden="true" />{p}</li>)}
+    </ul>
+    <p>Meer nodig? Kies later Business of Enterprise.</p>
+    <div className="sn-slot-knoppen">
+      <a className="sn-slot-start" href={GRATIS_OS_URL}><span>Start gratis</span><ArrowUpRight size={18} aria-hidden="true" /></a>
+      <Link className="sn-slot-pakketten" to="/diensten#prijzen"><span>Bekijk de pakketten</span><ArrowUpRight size={18} aria-hidden="true" /></Link>
+    </div>
   </section>;
   return <section className="h-final-close" aria-labelledby="final-close-title">
     <img className="h-final-logo" src="/images/SocialNow-OS-Logo.webp" alt="SocialNow OS" width="900" height="135" loading="lazy" />
