@@ -4,29 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="referrer" content="no-referrer" />
-    <meta http-equiv="refresh" content="0; url=https://socialnow-connect.socialnow-marinus.workers.dev/" />
-    <title>Open SocialNow / Connect</title>
+    <title>SocialNow Connect | Coming November 15th</title>
+    <meta name="description" content="SocialNow Connect: de juiste experts voor jouw bedrijf. Coming November 15th." />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+    <!-- 19 oktober 2026 (Marinus): de pilotpagina van Connect vond hij "verschrikkelijk". "Bij SocialNow/connect die gwn moet
+         blijven en ook hier moet staan graag gewoon groot coming november 15th." Dus geen doorverwijzing meer naar de pilot,
+         maar een eigen pagina in de stijl van socialnow.nl. -->
     <style>
-      :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #090f12; color: #f2f8f4; }
-      body { margin: 0; min-height: 100svh; display: grid; place-items: center; }
-      main { width: min(36rem, calc(100% - 3rem)); padding-block: 3rem; }
-      img { width: 11rem; height: auto; }
-      h1 { margin-top: 2rem; font-size: clamp(1.75rem, 5vw, 2.5rem); }
-      p { color: #d3d8d5; line-height: 1.6; }
-      a { display: inline-block; margin-top: 1rem; border-radius: .5rem; padding: .9rem 1.2rem; background: #25d366; color: #07150c; font-weight: 700; text-decoration: none; }
-      a:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+      @font-face { font-family: "Inter"; src: url("/fonts/inter-latin-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+      @font-face { font-family: "Inter"; src: url("/fonts/inter-latin-900.woff2") format("woff2"); font-weight: 900; font-display: swap; }
+      :root { color-scheme: dark; --zwart: #000; --rand: #ffffff1f; --tekst: #f2f5f3; --zacht: #9aa5ad; --groen: #25d366; }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100svh; display: grid; background: var(--zwart); color: var(--tekst); font-family: "Inter", system-ui, sans-serif; }
+      main { width: min(1100px, 100%); margin: 0 auto; padding: 40px 20px 56px; display: grid; align-content: space-between; gap: 48px; }
+      header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+      header img { width: min(320px, 70vw); height: auto; display: block; }
+      header a { color: var(--zacht); text-decoration: none; font-size: 14px; font-weight: 500; }
+      header a:hover, header a:focus-visible { color: var(--tekst); }
+      .label { margin: 0 0 18px; font-size: 13px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--groen); }
+      h1 { margin: 0; font-size: clamp(56px, 12vw, 168px); font-weight: 900; line-height: .92; letter-spacing: -.03em; text-wrap: balance; }
+      h1 span { display: block; color: var(--groen); }
+      .lead { margin: 28px 0 0; max-width: 34em; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.55; color: #c9d0d6; }
+      .knoppen { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+      .knop { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; border: 2px solid var(--groen); color: #fff; text-decoration: none; font-weight: 900; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+      .knop span { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--groen); color: #fff; font-weight: 500; }
+      .knop:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+      footer { font-size: 13px; color: var(--zacht); }
     </style>
-    <script>window.location.replace("https://socialnow-connect.socialnow-marinus.workers.dev/");</script>
   </head>
   <body>
     <main>
-      <img src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="900" height="135" />
-      <h1>SocialNow / Connect</h1>
-      <p>Connect verbindt klanten en zelfstandige ondernemers. Je wordt doorgestuurd naar de pilot voor profielen, aanvragen en berichten.</p>
-      <p>Gebeurt dat niet vanzelf? Open Connect via de knop hieronder.</p>
-      <a href="https://socialnow-connect.socialnow-marinus.workers.dev/">Open SocialNow / Connect</a>
+      <header>
+        <a href="/" aria-label="Naar socialnow.nl"><img src="/images/home-header/socialnow-connect.png" alt="SocialNow Connect" width="1362" height="171" /></a>
+        <a href="/">socialnow.nl ↗</a>
+      </header>
+      <section>
+        <p class="label">SocialNow Connect</p>
+        <h1>Coming <span>November 15th.</span></h1>
+        <p class="lead">De juiste experts voor jouw bedrijf. Echte mensen, ieder met een eigen bedrijf, per pakket of als losse opdracht.</p>
+        <div class="knoppen">
+          <a class="knop" href="/diensten#team">Bekijk de experts <span aria-hidden="true">↗</span></a>
+          <a class="knop" href="mailto:steef@socialnow.nl?subject=Aanmelden%20als%20expert%20bij%20Connect">Meld je aan als expert <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+      <footer>© SocialNow B.V. · Amstelstraat 43G, Amsterdam</footer>
     </main>
   </body>
 </html>

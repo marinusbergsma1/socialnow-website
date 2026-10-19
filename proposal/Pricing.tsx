@@ -31,7 +31,7 @@ type Pakket = {
   naam: string;
   prijs: string;
   per: string;
-  // Maandelijks opzegbaar kost 25% meer dan bij een jaarabonnement (Marinus, 19 oktober 2026); alleen voor het OS.
+  // Met een jaarabonnement bespaar je 25% op de maandprijs (Marinus, 19 oktober 2026); alleen voor het OS.
   maand?: { prijs: string; per: string };
   tokens?: { aantal: string; waarde: string; goedVoor: string };
   belofte: string;
@@ -82,7 +82,7 @@ const OS: Pakket[] = [
     naam: "Business",
     prijs: "€35",
     per: "per maand, jaarlijks",
-    maand: { prijs: "€43,75", per: "per maand, maandelijks opzegbaar" },
+    maand: { prijs: "€46,67", per: "per maand, maandelijks opzegbaar" },
     tokens: { aantal: "1.500 tokens per maand", waarde: "t.w.v. €15", goedVoor: "Ruim 50 beelden of 9 video's van 8 seconden" },
     belofte: "Voor een klein team dat samen werkt.",
     punten: [
@@ -106,7 +106,7 @@ const OS: Pakket[] = [
     naam: "Enterprise",
     prijs: "€65",
     per: "per maand, jaarlijks",
-    maand: { prijs: "€81,25", per: "per maand, maandelijks opzegbaar" },
+    maand: { prijs: "€86,67", per: "per maand, maandelijks opzegbaar" },
     tokens: { aantal: "4.000 tokens per maand", waarde: "t.w.v. €40", goedVoor: "Ruim 140 beelden of 25 video's van 8 seconden" },
     belofte: "Voor het hele bedrijf, zonder grenzen aan je opslag.",
     punten: [
@@ -413,12 +413,14 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
         id="os"
         label="01 / Het OS"
         titel="Begin gratis. Betaal pas als je team groeit."
-        tekst="Je software is gratis. Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Jaarlijks betaal je het minst; maandelijks opzegbaar kost 25% meer."
+        tekst="Je software is gratis. Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Bespaar 25% met een jaarabonnement."
         pakketten={OS}
         maandelijks={maandelijks}
       >
         <div className="prijs-periode" role="group" aria-label="Betaalperiode">
-          <button type="button" aria-pressed={!maandelijks} onClick={() => zetMaandelijks(false)}>Jaarlijks</button>
+          {/* 19 oktober 2026 (Marinus): "Benoem bespaar 25% extra als je een abonnement hebt per jaar." Daarna "Maak er maar 25% van
+              dan.": de maandprijzen zijn €46,67 en €86,67, zodat €35 en €65 per jaar echt 25% schelen. */}
+          <button type="button" aria-pressed={!maandelijks} onClick={() => zetMaandelijks(false)}>Jaarlijks <span className="prijs-bespaar">Bespaar 25%</span></button>
           <button type="button" aria-pressed={maandelijks} onClick={() => zetMaandelijks(true)}>Maandelijks</button>
         </div>
         <div className="prijs-usps">
