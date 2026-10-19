@@ -82,7 +82,12 @@ try {
   eis(diensten.includes("Meest gekozen") && diensten.includes("Meeste waarde"), "/diensten: geen nadruk op Meta en Business");
   // 19 oktober 2026 (Marinus): pakketten boven de losse diensten; die staan als strook eronder. "Doe maar 4K meest gekozen."
   eis(diensten.indexOf('id="prijzen"') > -1 && diensten.indexOf('id="prijzen"') < diensten.indexOf('id="development"'), "/diensten: pakketten staan niet boven de diensten");
-  eis(diensten.includes('class="cx-rij"') && diensten.indexOf('class="cx-rij"') > diensten.indexOf('id="prijzen"'), "/diensten: Connect-sectie van de homepage staat niet onder de prijzen");
+  eis(diensten.includes('class="cx-raster"') && diensten.indexOf('class="cx-raster"') > diensten.indexOf('id="prijzen"'), "/diensten: Connect-sectie van de homepage staat niet onder de prijzen");
+  // 19 oktober 2026 (Marinus): Connect is een eigen platform waar je zelf zoekt (ontwerp 1). Geen "wij koppelen je" meer.
+  for (const pagina of [diensten, home]) {
+    eis(pagina.includes('class="cx-zoek"') && pagina.includes('class="cx-chips"'), "Connect-sectie: zoekveld of vakgebieden ontbreken");
+    eis(!pagina.includes("Wij koppelen je aan de juiste expert"), "Connect-sectie: zegt nog dat wij koppelen");
+  }
   eis(/Meest gekozen[\s\S]{0,200}<h3>Meta<\/h3>/.test(diensten), "/diensten: Meta (€4.000) niet als meest gekozen");
   // 19 oktober 2026 (Marinus): "De punten moeten altijd overeenkomen." Elke kaart in een rij heeft evenveel regels, opslag op plek 2.
   const kaarten = [...diensten.matchAll(/<ul class="prijs-punten">([\s\S]*?)<\/ul>/g)].map((m) => [...m[1].matchAll(/<li(?! class="prijs-groep")[^>]*>([^<]*)<\/li>/g)].map((l) => l[1]));
