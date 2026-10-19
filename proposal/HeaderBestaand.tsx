@@ -74,7 +74,9 @@ const ONDERDELEN: Record<string, string[]> = {
 // eronder is kort: drie woordgroepen.
 // 19 oktober 2026 (Marinus): "Ik wil iets meer de focus op dat wij écht werk doen en software gratis is. Meer inzicht in je
 // bedrijf. Mag blijven". Titel terug; de getypte regel zegt nu dat het systeem van jou is, de zin eronder gratis en echt werk.
-const ZINNEN = ["Echt 100% je eigen systeem.", "Persoonlijk ingericht.", "Plug and play."];
+// 19 oktober 2026, later (Marinus): "Get more out of your business. En daaronder, more insights, better management everything
+// custom made plug and play". Titel "Haal meer uit je bedrijf."; de getypte regel noemt die vier.
+const ZINNEN = ["Meer inzicht.", "Beter management.", "Alles op maat.", "Plug and play."];
 const TIK = 55, WEG = 28, STAAN = 3000;
 
 function Typer() {
@@ -187,7 +189,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
           <div className="wrap">
             <div className="section-head video-intro">
               <div className="video-title">
-                <h1>Meer inzicht in je bedrijf. <Typer /></h1>
+                <h1>Haal meer uit je bedrijf. <Typer /></h1>
                 <p className="pay-line">De software is gratis. Onze experts doen het echte werk.</p>
                 <ul className="bs-zeker">
                   {/* 18 oktober 2026 (Marinus): "Die punten eronderaan Gratis website en rebranding, veilig. Eigen beheer en keuzes." */}
