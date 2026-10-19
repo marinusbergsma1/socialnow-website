@@ -5,7 +5,8 @@ import { CLAIM_URL } from "./os-entry";
 // (teamonderzoek 4 en 5 oktober); bij de rest volgt de link zodra de juiste URL bevestigd is.
 export const people: { name: string; role: string; image: string; linkedin?: string; sinds?: string; description?: string; quote?: string; instagram?: string }[] = [
   { name: "Thomas Huijsmans", role: "AI Strategy & Consulting", linkedin: "https://www.linkedin.com/in/thomashuijsmans/", image: "Thomas-Huijsmans.webp", sinds: "2026-10-14" },
-  // 19 oktober 2026 (Marinus): "Hossam Hassan valt hier weg."
+  // 19 oktober 2026 (Marinus): "Hossam moet er wel in maar beter op zijn plek gewoon beter in het veld." Eigen uitsnede, hoofd en schouders.
+  { name: "Hossam Hassan", role: "Brand and Marketing Consultant", linkedin: "https://www.linkedin.com/in/hossam-hassan-abdelrehim/", image: "Hossam-Hassan-portret.webp", sinds: "2026-10-14" },
   { name: "Albert Deltour", role: "Extern adviseur en klankbord", image: "Albert-Deltour.webp", linkedin: "https://www.linkedin.com/in/albert-deltour-020a8438/", sinds: "2026-10-07" },
   {
     name: "Marinus Bergsma",
@@ -92,7 +93,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
 ];
 // De vakgebieden van Connect met hun mensen, in de volgorde van de homepage en /team.
 export const expertGroepen = [
-  { name: "Strategy & guidance", members: ["Albert Deltour"] },
+  { name: "Strategy & guidance", members: ["Albert Deltour", "Hossam Hassan"] },
   { name: "AI development", members: ["Douwe Kramer", "Thomas Huijsmans"] },
   { name: "Web development", members: ["Sid van Kalken", "Antony Soosaipillaj"] },
   { name: "Finance & operations", members: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
