@@ -56,7 +56,7 @@
 :root .sn-call .sn-call-klaar{display:grid;justify-items:start;gap:10px;padding:8px 0 4px}
 :root .sn-call .sn-call-klaar h3{margin:0;font-size:24px;outline:0}
 :root .sn-call .sn-call-klaar p{margin:0;color:#b0c1b6;font-size:15px;line-height:1.5;max-width:52ch}
-:root .sn-call .sn-call-vink{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#25d366;color:#04230f}
+:root .sn-call .sn-call-vink{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#25d366;color:#fff}
 :root .sn-call .sn-call-voet{display:flex;align-items:center;justify-content:flex-end;gap:12px;padding:16px 28px 22px;border-top:1px solid #ffffff14;background:#050907}
 :root .sn-call .sn-call-terug{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-right:auto;padding:0 6px;border:0;background:none;color:#cfdad3;font:inherit;font-size:14px;cursor:pointer}
 :root .sn-call .sn-call-terug:hover{color:#fff}
@@ -66,7 +66,7 @@
 :root .sn-call .pill::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:#25d366;transform:translateX(-101%);transition:transform .5s cubic-bezier(.23,1,.32,1);pointer-events:none}
 :root .sn-call .pill:is(:hover,:focus-visible)::before{transform:translateX(0)}
 :root .sn-call .pill:focus-visible{outline:2px solid #25d366;outline-offset:4px}
-:root .sn-call .pill>.arrow{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:#25d366;color:#062311}
+:root .sn-call .pill>.arrow{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:#25d366;color:#fff}
 :root .sn-call .pill:is(:hover,:focus-visible)>.arrow{background:#fff;color:#052310}
 :root .sn-call .sn-call-open{justify-self:start}
 :root .sn-call .pill.sn-call-dicht{justify-content:center;padding:7px 28px}

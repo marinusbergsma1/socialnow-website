@@ -1803,7 +1803,7 @@ video {
 .h-milo-bericht.is-bezoeker p {
   max-width: 85%;
   background: #25d366;
-  color: #08120c;
+  color:#fff;
   font-weight: 500;
   border-radius: 15px 15px 4px 15px;
   padding: 10px 14px;
@@ -1828,7 +1828,7 @@ video {
 }
 .h-milo-links a:hover {
   background: #25d366;
-  color: #08120c;
+  color:#fff;
 }
 .h-milo-denkt {
   display: flex;
@@ -1917,7 +1917,7 @@ video {
   border: 0;
   border-radius: 50%;
   background: #25d366;
-  color: #08120c;
+  color:#fff;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -98,3 +98,12 @@ html:root .sn-site .cx-connect .cx-wit-knop:is(:hover, :focus-visible, :active) 
 html:root .sn-site .cx-connect .cx-wit-knop:is(:hover, :focus-visible, :active) .h-button-icon { background: #fff !important; color: #0a7ea8 !important; }
 @media (max-width: 900px) { .sn-site .cx-raster { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .sn-site .cx-meer { margin-top: 18px; cursor: pointer; font: inherit; }
+
+/* 19 oktober 2026 (Marinus): "Altijd 1 bar die je gwn kan sliden nooit zoveel onder elkaar." Vakgebieden op één rij die
+   opzij schuift, zonder zichtbare schuifbalk. En de punt achter de kop in Connect-blauw. */
+.sn-site .cx-chips { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none; margin-inline: calc(-1 * var(--cx-rand, 0px)); padding-bottom: 2px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); }
+.sn-site .cx-chips::-webkit-scrollbar { display: none; }
+.sn-site .cx-chips button { flex: none; white-space: nowrap; scroll-snap-align: start; }
+.sn-site .cx-boven { max-width: none; }
+.sn-site .cx-boven > :not(.cx-chips) { max-width: 760px; }
+html:root .sn-site .cx-connect .sn-title-dot { color: #20afde !important; -webkit-text-fill-color: #20afde !important; }

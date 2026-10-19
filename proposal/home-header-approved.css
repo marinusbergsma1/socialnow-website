@@ -102,9 +102,9 @@
 :root .sn-site .rx-3 .rx-product{grid-template-columns:minmax(0,1fr) 194px;column-gap:22px}
 :root .sn-site .rx-3 .rx-product .rx-button{width:194px;min-width:194px;min-height:48px;padding:7px 8px 7px 19px;gap:14px;border:1.5px solid #25d366!important;background:#0c1510!important;border-radius:999px!important;display:flex;align-items:center;justify-content:space-between;overflow:visible;box-shadow:inset 0 1px 0 #ffffff08;line-height:1.3}
 :root .sn-site .rx-3 .rx-product .rx-button>span:first-child{font-size:12px;font-weight:700;letter-spacing:.015em;line-height:1.3;white-space:nowrap;flex:0 1 auto}
-:root .sn-site .rx-3 .rx-product .rx-button .rx-arrow{width:30px;height:30px;min-width:30px;flex:0 0 30px;border-radius:50%;background:#25d366;color:#062311;display:flex;align-items:center;justify-content:center}
+:root .sn-site .rx-3 .rx-product .rx-button .rx-arrow{width:30px;height:30px;min-width:30px;flex:0 0 30px;border-radius:50%;background:#25d366;color:#fff;display:flex;align-items:center;justify-content:center}
 :root .sn-site .rx-3 .rx-product .rx-button .rx-arrow svg{display:block;width:17px;height:17px;flex:none}
-:root .sn-site .rx-3 .rx-product .rx-button:hover,:root .sn-site .rx-3 .rx-product .rx-button:focus-visible{background:#25d366!important;color:#052310!important;box-shadow:none}
+:root .sn-site .rx-3 .rx-product .rx-button:hover,:root .sn-site .rx-3 .rx-product .rx-button:focus-visible{background:#25d366!important;color:#fff!important;box-shadow:none}
 :root .sn-site .rx-3 .rx-product .rx-button:hover>span:first-child,:root .sn-site .rx-3 .rx-product .rx-button:focus-visible>span:first-child{color:#052310}
 :root .sn-site .rx-3 .rx-product .rx-button:hover .rx-arrow{background:#062d16;color:#fff}
 @media(max-width:1100px) and (min-width:761px){:root .sn-site .rx-3 .rx-product{grid-template-columns:1fr}:root .sn-site .rx-3 .rx-product .rx-button{grid-column:1;grid-row:auto;margin-top:12px}}

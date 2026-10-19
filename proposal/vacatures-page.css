@@ -85,3 +85,9 @@ html:root .sn-site .h-vac-connect .h-vac-verstuur .h-button .h-button-icon { bac
   .sn-site .h-vac-stappen { grid-template-columns: minmax(0, 1fr); }
   .sn-site .h-vac-zoek { flex-basis: 100%; }
 }
+
+/* Eén rij die opzij schuift, nooit meerdere rijen onder elkaar (Marinus, 19 oktober 2026). */
+.sn-site :is(.h-vac-teams, .h-vac-keuzes) { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none; padding-bottom: 2px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); }
+.sn-site :is(.h-vac-teams, .h-vac-keuzes)::-webkit-scrollbar { display: none; }
+.sn-site :is(.h-vac-teams, .h-vac-keuzes) button { flex: none; white-space: nowrap; scroll-snap-align: start; }
+html:root .sn-site .h-vac-connect .sn-title-dot { color: #20afde !important; -webkit-text-fill-color: #20afde !important; }

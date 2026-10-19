@@ -101,6 +101,18 @@ try {
   // "Bij vullen de tekst graag wit maken."
   eis(/cx-wit-knop:is\(:hover, :focus-visible, :active\) > span:first-child \{ color: #fff !important; -webkit-text-fill-color: #fff/.test(cxCss), "Connect-knop: tekst niet wit bij vullen");
 
+  // "Witte tekst in groen vlak ALTIJD": geen CSS-regel met een groen vlak en donkere tekst.
+  const { readdirSync } = await import("node:fs");
+  for (const bestand of readdirSync("proposal").filter((f) => f.endsWith(".css"))) {
+    for (const [, kiezer, body] of lees(`proposal/${bestand}`).matchAll(/([^{}]*)\{([^{}]*)\}/g)) {
+      if (/background(-color)?\s*:\s*#25d366/i.test(body) && /(?<![-\w])color\s*:\s*#0[0-9a-f]{5}\b/i.test(body))
+        eis(false, `${bestand}: donkere tekst op groen in '${kiezer.trim().slice(0, 70)}'`);
+    }
+  }
+  // "Altijd 1 bar die je gwn kan sliden": vakgebieden en teams op één schuifbare rij.
+  eis(/\.cx-chips \{ flex-wrap: nowrap; overflow-x: auto/.test(cxCss), "Connect: vakgebieden lopen nog over meerdere rijen");
+  eis(/:is\(\.h-vac-teams, \.h-vac-keuzes\) \{ flex-wrap: nowrap; overflow-x: auto/.test(vacCss), "/vacatures: teams lopen nog over meerdere rijen");
+
   // Wat de bezoeker in en/de/fr ziet.
   const escape = (t) => t.replaceAll("&", "&amp;").replaceAll("'", "&#x27;").replaceAll('"', "&quot;");
   const nieuweZinnen = ["Ons team van experts.", "Word expert op Connect.", "Kies je plek.", "Meld je aan als expert", "Sales Development Representative", "Veilig betaald", "Marketing en content"];
