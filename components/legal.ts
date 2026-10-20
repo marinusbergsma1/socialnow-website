@@ -12,7 +12,8 @@ export type Language = "en" | "nl" | "de" | "fr" | "it" | "es" | "pt" | "pl" | "
 export type Section = { title: string; paragraphs: string[]; bullets?: string[][] };
 export type LegalDoc = { title: string; intro: string; updated: string; sections: Section[] };
 
-// 20 oktober 2026 (Marinus): artikel 15 eigendom bij custom OS, Connect-pakketten en het eigen account. LEGAL_VERSION bewust niet
+// 20 oktober 2026 (Marinus, review 9.2 en 9.4): artikel 15 eigendom na betaling van wat voor de klant is gemaakt, eigen account en data;
+// inzage door het team alleen lezen en gelogd (api/_platform-toegang.js, geen toestemmingsstap). LEGAL_VERSION bewust niet
 // opgehoogd: dat toont iedere bezoeker opnieuw de akkoordpopup; dat besluit ligt bij Marinus (zie PR).
 export const LEGAL_VERSION = "2026-10-14";
 
@@ -112,9 +113,9 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
       {
         "title": "15. Auteursrecht en intellectueel eigendom",
         "paragraphs": [
-          "Bij een custom OS en bij elk pakket op SocialNow Connect wordt opdrachtgever eigenaar van wat opdrachtnemer voor hem oplevert: de website, het systeem, de branding, de content en de advertenties. Het eigendom gaat over zodra opdrachtgever de vergoeding daarvoor volledig heeft betaald.",
-          "Bij het gewone SocialNow OS is opdrachtgever eigenaar van zijn account en van de gegevens daarin. Opdrachtnemer kijkt alleen mee als opdrachtgever hem die rol zelf geeft, voor persoonlijke hulp bij de software, en alleen zolang die rol openstaat.",
-          "Kennis en gereedschap blijven van wie ze zijn. De onderliggende software van SocialNow OS, gedeelde onderdelen en bouwstenen, werkwijzen en sjablonen blijven van opdrachtnemer; software, beelden en diensten van derden, zoals Odoo en stockbeelden, blijven van hun eigenaar en vallen onder hun eigen licentie. Opdrachtgever krijgt daarop het gebruiksrecht dat nodig is om het opgeleverde werk te gebruiken. Opdrachtnemer mag de kennis die hij door de werkzaamheden opdoet voor andere doeleinden gebruiken, zolang geen vertrouwelijke informatie bij derden terechtkomt.",
+          "Na betaling worden de voor opdrachtgever gemaakte website, branding, content, advertenties en het voor hem ingerichte systeem zijn eigendom. Dat geldt bij een custom OS en bij elk pakket op SocialNow Connect. Software en materiaal van derden (zoals Odoo, stockbeelden, lettertypen en AI-diensten) en de standaardonderdelen van SocialNow OS vallen daar niet onder; daarvoor geldt de licentie van de leverancier of een gebruiksrecht.",
+          "Bij het gewone SocialNow OS is opdrachtgever eigenaar van zijn account en van de gegevens daarin. Het team van opdrachtnemer kan voor ondersteuning alleen lezen, en elke inzage wordt vastgelegd.",
+          "Opdrachtnemer mag de kennis die hij door de werkzaamheden opdoet voor andere doeleinden gebruiken, zolang geen vertrouwelijke informatie bij derden terechtkomt.",
           "Opdrachtgever stemt ermee in dat zijn logo, de gemaakte ontwerpen en zijn ervaringen herkenbaar voor promotie worden gebruikt, tenzij die gevoelige of vertrouwelijke informatie bevatten; opdrachtgever kan daar bezwaar tegen maken, waarna opdrachtnemer de publicatie niet plaatst of waar mogelijk verwijdert."
         ]
       },
@@ -249,9 +250,9 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
       {
         "title": "15. Copyright and intellectual property",
         "paragraphs": [
-          "With a custom OS and with every package on SocialNow Connect, the client becomes the owner of what the contractor delivers for it: the website, the system, the branding, the content and the ads. Ownership passes as soon as the client has paid the fee for it in full.",
-          "With the standard SocialNow OS, the client owns its account and the data in it. The contractor only looks along if the client gives it that role itself, for personal help with the software, and only while that role is open.",
-          "Knowledge and tools stay with whoever owns them. The underlying software of SocialNow OS, shared components and building blocks, methods and templates remain the contractor's; software, images and services of third parties, such as Odoo and stock images, remain their owners' and fall under their own licence. The client receives the right of use needed to use the delivered work. The contractor may use the knowledge gained through the work for other purposes as long as no confidential information reaches third parties.",
+          "After payment, the website, branding, content and ads made for the client and the system set up for it become the client's property. This applies to a custom OS and to every package on SocialNow Connect. Software and material of third parties (such as Odoo, stock images, fonts and AI services) and the standard components of SocialNow OS are not included; for those, the supplier's licence or a right of use applies.",
+          "With the standard SocialNow OS, the client owns its account and the data in it. The contractor's team can only read for support, and every look is logged.",
+          "The contractor may use the knowledge gained through the work for other purposes as long as no confidential information reaches third parties.",
           "The client agrees that its logo, the designs made and its experiences may be used recognisably for promotion, unless they contain sensitive or confidential information; the client may object, after which the contractor does not publish or removes where possible."
         ]
       },
