@@ -67,11 +67,21 @@ export default function ConnectExperts() {
         })}
       </ul>
       {lijst.length === 0 && <p className="cx-leeg">Geen expert gevonden. Probeer een ander woord.</p>}
+      {/* 20 oktober 2026 (Marinus): "Vulling hier blauw met witte tekst. Verder moet er ook een gedeelte komen met vraag een
+          opdracht aan." Twee vakken naast elkaar: opdracht aanvragen en aanmelden als expert, elk met een blauwe knop. */}
       <div className="cx-onder">
-        <p>Ben je expert met een eigen bedrijf? Meld je aan bij Connect.</p>
-        <a className="sn-pill sn-btn3d h-button h-button-secondary cx-wit-knop" href={mailLink(t("Aanmelden als expert bij Connect"))}>
-          <span>Meld je aan als expert</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
-        </a>
+        <div className="cx-onder-vak">
+          <p>Heb je een opdracht? Vraag hem aan bij Connect.</p>
+          <a className="sn-pill sn-btn3d h-button h-button-secondary cx-blauw-knop" href={mailLink(t("Opdracht aanvragen bij Connect"))}>
+            <span>Vraag een opdracht aan</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
+          </a>
+        </div>
+        <div className="cx-onder-vak">
+          <p>Ben je expert met een eigen bedrijf? Meld je aan bij Connect.</p>
+          <a className="sn-pill sn-btn3d h-button h-button-secondary cx-blauw-knop" href={mailLink(t("Aanmelden als expert bij Connect"))}>
+            <span>Meld je aan als expert</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span>
+          </a>
+        </div>
       </div>
     </section>
   </div>;

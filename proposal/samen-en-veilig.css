@@ -97,3 +97,33 @@
 .sn-samen-partners{grid-column:1/-1}
 .sn-samen-partners .sn-samen-paren{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:900px){.sn-samen-partners .sn-samen-paren{grid-template-columns:1fr}}
+
+/* 20 oktober 2026, later: korter en op de telefoon naast elkaar (schuifrij), en Attesso als derde partner met de Talking to-balk. */
+@media(max-width:700px){
+  .sn-samen-po,:root .sn-site .sn-samen .sn-samen-vormen{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:-16px;padding-inline:16px;scroll-padding-inline:16px}
+  .sn-samen-po::-webkit-scrollbar,:root .sn-site .sn-samen .sn-samen-vormen::-webkit-scrollbar{display:none}
+  :root .sn-site .sn-samen .sn-samen-po p{flex:0 0 78%;scroll-snap-align:start}
+  .sn-samen-vormen li{flex:0 0 46%;scroll-snap-align:start}
+  .sn-samen-training .sn-samen-vormen{margin-inline:calc(-1*clamp(20px,2.4vw,32px));padding-inline:clamp(20px,2.4vw,32px)}
+}
+.sn-samen-partners .sn-samen-paren{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:1180px){.sn-samen-partners .sn-samen-paren{grid-template-columns:repeat(2,minmax(0,1fr))}.sn-samen-partners .sn-samen-partner:nth-child(3){grid-column:1/-1}}
+@media(max-width:900px){.sn-samen-partners .sn-samen-paren{grid-template-columns:1fr}}
+.sn-samen-partner .sn-samen-waarom{flex:1}
+.sn-samen-woordmerk{font-family:ui-monospace,Menlo,monospace;font-size:19px;font-weight:600;letter-spacing:0;color:#fff;white-space:nowrap}
+.sn-samen-paar a:hover .sn-samen-woordmerk{color:#f3c6e8}
+/* De Talking to-balk van 5 oktober: wit, groene lijn boven en onder, logo's lopen door; stil bij hover en bij minder beweging. */
+.sn-samen-praat{display:flex;align-items:center;gap:14px;padding:12px 0 12px 18px;background:#fff;border-top:2px solid var(--s-groen);border-bottom:2px solid var(--s-groen);overflow:hidden}
+.sn-samen-praat>span{flex:0 0 auto;font-family:var(--s-mono);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0b0f12}
+.sn-samen-strook{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.sn-samen-lus{display:flex;width:max-content;animation:sn-samen-loop 22s linear infinite}
+.sn-samen-praat:hover .sn-samen-lus,.sn-samen-praat:focus-within .sn-samen-lus{animation-play-state:paused}
+:root .sn-site .sn-samen .sn-samen-lus ul{display:flex;align-items:center;gap:30px;margin:0;padding:0 30px 0 0;list-style:none}
+.sn-samen-lus li{display:flex;align-items:center}
+.sn-samen-lus a{display:flex;align-items:center;border-radius:4px}
+.sn-samen-lus a:focus-visible{outline:2px solid #0b7a37;outline-offset:3px}
+.sn-samen-lus img{display:block;height:18px;width:auto;max-width:110px;object-fit:contain}
+.sn-samen-lus img[alt="Visa"],.sn-samen-lus img[alt="Adyen"]{height:15px}
+@keyframes sn-samen-loop{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.sn-samen-lus{animation:none}}
+@media(min-width:1181px){.sn-samen-partners .sn-samen-balk{flex-direction:column;align-items:flex-start;gap:10px}.sn-samen-partners .sn-samen-balk ul{gap:10px 18px}.sn-samen-partners .sn-samen-balk img{height:21px}}

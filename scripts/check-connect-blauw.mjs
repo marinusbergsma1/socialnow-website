@@ -17,7 +17,8 @@ eis(!tsx.includes("Toon alle experts") && !tsx.includes("slice(0, 8)"), "geen tw
 eis(/aria-label="Vorige experts"/.test(tsx) && /aria-label="Volgende experts"/.test(tsx), "pijlen om te schuiven met de muis");
 const samen = fs.readFileSync("proposal/SamenEnVeilig.tsx", "utf8");
 // Zelfde avond: "We verbeteren het product met twee bedrijven. Moet de producten zijn en team van Connect voor de rest van het doorontwikkel verhaal."
-eis(samen.includes("We verbeteren de producten met twee bedrijven.") && !samen.includes("We verbeteren het product met"), "kop zegt de producten");
+// 20 oktober 2026: met Attesso erbij zijn het drie bedrijven; "de producten" blijft.
+eis(/We verbeteren de producten met (twee|drie) bedrijven\./.test(samen) && !samen.includes("We verbeteren het product met"), "kop zegt de producten");
 eis(/doorontwikkeling doen we met het team van Connect/.test(samen), "het team van Connect draagt de rest van de doorontwikkeling");
 const en = JSON.parse(fs.readFileSync("proposal/i18n/en.json", "utf8"));
 eis(["Vorige experts", "Volgende experts"].every(k => en[k] && en[k] !== k), "pijlen vertaald");

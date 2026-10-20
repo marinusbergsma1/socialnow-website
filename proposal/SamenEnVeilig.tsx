@@ -34,7 +34,8 @@ const TEKST = {
   // De veiligheidskop van 18 oktober ("Veiliger dan je verouderde software en processen.") is daarmee weg; de documenten blijven rechts.
   uspLabel: "Groeipartner",
   uspKop: "Jouw groeipartner in het AGI-tijdperk.",
-  uspUitleg: "Wij geloven in een toekomst waarin software gratis is en expertise het verschil maakt. AI maakt software elke maand goedkoper, maar de kennis en ervaring van echte mensen kun je niet automatiseren.",
+  // 20 oktober 2026, later (Marinus): "Dit mag iets korter en misschien naast elkaar."
+  uspUitleg: "Wij geloven dat software gratis hoort te zijn. Expertise kun je niet automatiseren.",
   probleemLabel: "Het probleem",
   // Zelfde dag (Marinus): "Het probleem, je betaald 10tallen euro's voor abbonementen op software en diensten die niet samenwerken."
   probleem: "Je betaalt tientallen euro's aan abonnementen op software en diensten die niet met elkaar samenwerken.",
@@ -49,13 +50,14 @@ const TEKST = {
   tLabel: "Training en workshops",
   tKop: "We trainen je hele team in AI.",
   // Zelfde dag (Marinus): "Maar trainingen, workshops op maat en op locatie zodat jullie klaar zijn voor groei."
-  tUitleg: "Bij elk pakket op maat hoort een volledige AI-training voor je team. Geen handleiding met succes ermee, maar trainingen en workshops op maat en op locatie, zodat jullie klaar zijn voor groei.",
+  // 20 oktober 2026, later (Marinus): "Dit mag iets korter en misschien naast elkaar."
+  tUitleg: "Bij elk pakket op maat hoort een volledige AI-training: trainingen en workshops op maat en op locatie, zodat jullie klaar zijn voor groei.",
   // De beursfoto (IMG_0858) is eruit: "Dit is de slechtste foto die je kon kiezen [...] niet dat je ziet dat we in gesprek
   // gaan met mensen." Een echte foto van Marinus en Steef in gesprek met een groep komt terug zodra die er is.
   vormen: [
-    { kop: "Teamtrainingen", tekst: "Op locatie of online, afgestemd op hoe jullie werken." },
-    { kop: "AI-workshops", tekst: "Meteen aan de slag met je eigen data, agents en content." },
-    { kop: "Cursussen", tekst: "Stap voor stap, zodat nieuwe collega's ook snel meedoen." },
+    { kop: "Teamtrainingen", tekst: "Op locatie of online." },
+    { kop: "AI-workshops", tekst: "Aan de slag met je eigen data." },
+    { kop: "Cursussen", tekst: "Stap voor stap, ook voor nieuwe collega's." },
   ],
   // Zelfde dag (Marinus): "Bevestigde workshops. Of lezingen oid." en daarna "Of volgende lezingen."
   sessiesLabel: "Volgende lezingen",
@@ -65,8 +67,9 @@ const TEKST = {
   ],
   // 19 oktober 2026, avond (Marinus): "Moet de producten zijn en team van Connect voor de rest van het doorontwikkel verhaal."
   label: "Samen bouwen",
-  kop: "We verbeteren de producten met twee bedrijven.",
-  uitleg: "SocialNow OS ontwikkelen we samen met Indexworld, Connect samen met Uncanny. De rest van de doorontwikkeling doen we met het team van Connect: wat zij in de praktijk tegenkomen, gaat als eerste de volgende versie in.",
+  // 20 oktober 2026: met Attesso erbij zijn het drie bedrijven.
+  kop: "We verbeteren de producten met drie bedrijven.",
+  uitleg: "SocialNow OS ontwikkelen we samen met Indexworld en Attesso, Connect samen met Uncanny. De rest van de doorontwikkeling doen we met het team van Connect: wat zij in de praktijk tegenkomen, gaat als eerste de volgende versie in.",
   partnersLabel: "Partners",
   vLabel: "Veiligheid en documentatie",
   vKop: "Zwart op wit hoe we je data beschermen.",
@@ -109,6 +112,24 @@ const SAMEN = [
       { naam: "Shopify Partners", src: "/images/partners/samen/shopify.svg" },
       { naam: "Salesforce ISV-partner", src: "/images/partners/samen/salesforce.svg" },
       { naam: "Adobe Certified Professional", src: "/images/partners/samen/adobe.svg" },
+    ],
+  },
+  // 20 oktober 2026 (Marinus): "bij samen bouwen Attesso met de gehele economie erbij in de talking to balk zoals eerder ook was
+  // ingezet." De balk is die van 5 oktober (commit 2dd3a5f): wit, groene lijn boven en onder, logo's lopen door. De omschrijving
+  // volgt attesso.com ("Authorization and signed evidence for agentic commerce", nagelezen 20 oktober 2026); de SaaSHub-plek
+  // staat al op /team (TeamTrust.tsx). Attesso heeft geen beeldlogo, alleen het woordmerk ~/attesso.
+  {
+    naam: "Attesso", href: "https://www.attesso.com/", logo: "", wit: false, product: "os",
+    kop: "Betalingen door AI, veilig en aantoonbaar.",
+    tekst: "Attesso is de autorisatielaag voor agentic commerce. Je keurt de grenzen één keer goed; elke betaling die een AI-agent daarna doet, wordt daartegen gecontroleerd en ondertekend vastgelegd.",
+    cijfers: ["#1 agentic payment on SaaSHub", "Ondertekend bewijs", "Elke betaalvorm"],
+    partners: [],
+    praat: [
+      { naam: "Visa", href: "https://www.visa.nl", src: "/images/partners/betalen/visa.svg" },
+      { naam: "Mastercard", href: "https://www.mastercard.nl", src: "/images/partners/betalen/mastercard.svg" },
+      { naam: "Airwallex", href: "https://www.airwallex.com", src: "/images/partners/betalen/airwallex.webp" },
+      { naam: "Adyen", href: "https://www.adyen.com", src: "/images/partners/betalen/adyen.svg" },
+      { naam: "Rabobank", href: "https://www.rabobank.nl", src: "/images/partners/betalen/rabobank.svg" },
     ],
   },
 ] as const;
@@ -189,21 +210,37 @@ export default function SamenEnVeilig() {
                 <div className="sn-samen-paar">
                   {b.product === "os" ? <img className="sn-samen-os" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" /> : <ConnectLogo />}
                   <X size={18} aria-hidden="true" />
-                  <a href={b.href} target="_blank" rel="noopener noreferrer"><img className={b.wit ? "sn-samen-wit" : undefined} src={b.logo} alt={b.naam} /></a>
+                  <a href={b.href} target="_blank" rel="noopener noreferrer">{b.logo ? <img className={b.wit ? "sn-samen-wit" : undefined} src={b.logo} alt={b.naam} /> : <code className="sn-samen-woordmerk" translate="no" aria-label={b.naam}>~/attesso</code>}</a>
                 </div>
                 <div className="sn-samen-waarom">
                   <h4>{b.kop}</h4>
                   <p>{b.tekst}</p>
                   <ul className="sn-samen-cijfers">{b.cijfers.map(c => <li key={c}>{c}</li>)}</ul>
                 </div>
-                <div className="sn-samen-balk">
-                  <span>{t.partnersLabel}</span>
-                  <ul>
-                    {b.partners.map(p => (
-                      <li key={p.naam}><img src={p.src} alt={p.naam} loading="lazy" />{"sub" in p && <small>{p.sub}</small>}</li>
-                    ))}
-                  </ul>
-                </div>
+                {"praat" in b ? (
+                  <div className="sn-samen-praat">
+                    <span translate="no">Talking to</span>
+                    <div className="sn-samen-strook">
+                      <div className="sn-samen-lus">
+                        {/* De rij staat er twee keer in en de lus schuift precies één rij op, dus de naad is niet te zien. */}
+                        {[false, true].map(kopie => (
+                          <ul key={String(kopie)} aria-hidden={kopie || undefined}>
+                            {b.praat.map(m => <li key={m.naam}><a href={m.href} target="_blank" rel="noopener" tabIndex={kopie ? -1 : undefined}><img src={m.src} alt={kopie ? "" : m.naam} loading="lazy" /></a></li>)}
+                          </ul>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="sn-samen-balk">
+                    <span>{t.partnersLabel}</span>
+                    <ul>
+                      {b.partners.map(p => (
+                        <li key={p.naam}><img src={p.src} alt={p.naam} loading="lazy" />{"sub" in p && <small>{p.sub}</small>}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </article>
             ))}
           </div>
