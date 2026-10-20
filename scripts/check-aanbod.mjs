@@ -75,7 +75,7 @@ try {
   // 19 oktober 2026 (Marinus): Team heet Business, Business heet Enterprise met onbeperkte opslag; USP's van het gratis OS;
   // Connect per periode van 3 maanden, vanaf Meta 1 maand gratis bij geen winst en minimaal €1.000 mediabudget; team per vakgebied.
   for (const zin of ["Gratis Studio", "Studio, 5.000 stockfoto&#x27;s, social media en boekhouding", "Social media management", "Boekhoudpakket", "Geen minimum mediabudget",
-    "Kies Enterprise", "Onbeperkte opslag", "Complete branding: logo, kleuren en stijl", "Google Ads: Search, Shopping en Performance Max", "Gratis demowebsite", "Gratis website", "Altijd 3 maanden", "Geen winst? 1 maand gratis", "Mediabudget vanaf €1.000", "Hulp binnen Odoo: inrichting en vragen", "Vast aanspreekpunt uit ons team",
+    "Kies Enterprise", "Onbeperkte opslag", "Complete branding: logo, kleuren en stijl", "Google Ads: Search, Shopping en Performance Max", "Gratis demowebsite", "Gratis website", "Altijd 3 maanden", "Niet tevreden? 1 maand gratis", "Mediabudget vanaf €1.000", "Hulp binnen Odoo: inrichting en vragen", "Vast aanspreekpunt uit ons team",
     "Nodig 2 mensen uit", "2 tot 5 medewerkers", "5 tot 10 medewerkers", "1.500 tokens per maand", "4.000 tokens per maand",
     "Custom OS ingericht rond je bedrijf", "Ad-creatie: beeld en video voor je advertenties", "€2.000 tot €5.000", "vanaf €10.000"])
     eis(diensten.includes(zin), `/diensten: '${zin}' ontbreekt`);
@@ -119,7 +119,7 @@ try {
 
   // Wat de bezoeker in en/de/fr ziet, niet alleen of de sleutel in de json staat. De verwachte tekst komt uit het woordenboek.
   const escape = (t) => t.replaceAll("&", "&amp;").replaceAll("'", "&#x27;").replaceAll('"', "&quot;");
-  const nieuweZinnen = ["Diensten en prijzen", "Al in je gratis OS", "Geen winst? 1 maand gratis", "Wij doen het werk, met échte mensen", "Nodig 2 mensen uit", "Custom OS ingericht rond je bedrijf"];
+  const nieuweZinnen = ["Diensten en prijzen", "Al in je gratis OS", "Niet tevreden? 1 maand gratis", "Wij doen het werk, met échte mensen", "Nodig 2 mensen uit", "Custom OS ingericht rond je bedrijf"];
   for (const taal of ["en", "de", "fr"]) {
     const woorden = JSON.parse(lees(`proposal/i18n/${taal}.json`) || "{}");
     const pagina = render("/diensten", taal);
