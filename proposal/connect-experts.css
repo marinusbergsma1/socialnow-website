@@ -110,9 +110,14 @@ html:root .sn-site .cx-connect .sn-title-dot { color: #00a3e0 !important; }
 html:root .sn-site .cx-connect .cx-label { margin: 0; font-family: var(--v-mono, ui-monospace, Menlo, monospace); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #00739e; }
 html:root .sn-site .cx-connect .cx-team { margin: 0; max-width: 640px; font-size: 19px; line-height: 1.5; color: #0b0f12; }
 
-/* 20 oktober 2026 (Marinus): "Vulling hier blauw met witte tekst." Blauw vlak (#00739e, 5,3 tegen wit) met witte letters en een wit
-   rondje met blauwe pijl; ook bij hover en focus blijft hij blauw (de algemene knopstijl maakte hem groen met blauwe letters). */
-html:root .sn-site .cx-connect .cx-blauw-knop, html:root .sn-site .cx-connect .cx-blauw-knop:hover, html:root .sn-site .cx-connect .cx-blauw-knop:focus-visible { display: inline-flex; align-items: center; gap: 12px; padding-right: 6px; background: #00739e !important; border-color: #00739e !important; color: #fff !important; box-shadow: none !important; }
-html:root .sn-site .cx-connect .cx-blauw-knop:hover { background: #005f82 !important; border-color: #005f82 !important; }
-html:root .sn-site .cx-connect .cx-blauw-knop > span:first-child, html:root .sn-site .cx-connect .cx-blauw-knop:hover > span:first-child { color: #fff !important; -webkit-text-fill-color: #fff !important; }
-html:root .sn-site .cx-connect .cx-blauw-knop .h-button-icon, html:root .sn-site .cx-connect .cx-blauw-knop:hover .h-button-icon { flex: none; margin-left: auto; background: #fff !important; color: #00739e !important; }
+/* 20 oktober 2026 (Marinus): "Vulling hier blauw met witte tekst." en daarna "Licht met blauwe tekst naar blauw met witte tekst bij
+   de blauwe knoppen." In rust licht met blauwe letters en een blauw rondje met witte pijl; bij hover en focus schuift de vulling
+   van .sn-pill::before er in Connect-blauw (#00739e, 5,3 tegen wit) overheen, met witte letters en een wit rondje met blauwe pijl.
+   Die vulling was groen (button-design.css). De tekst blijft op één regel. */
+html:root .sn-site .cx-connect .cx-blauw-knop { display: inline-flex; align-items: center; gap: 12px; max-width: 100%; padding-right: 6px; background: #fff !important; border-color: #00739e !important; color: #00739e !important; box-shadow: none !important; }
+html:root .sn-site .cx-connect .cx-blauw-knop::before { background: #00739e !important; }
+html:root .sn-site .cx-connect .cx-blauw-knop > span:first-child { white-space: nowrap; color: #00739e !important; -webkit-text-fill-color: #00739e !important; transition: color .3s, -webkit-text-fill-color .3s; }
+html:root .sn-site .cx-connect .cx-blauw-knop .h-button-icon { flex: none; margin-left: auto; background: #00739e !important; color: #fff !important; transition: background .3s, color .3s; }
+html:root .sn-site .cx-connect .cx-blauw-knop:is(:hover, :focus-visible) > span:first-child { color: #fff !important; -webkit-text-fill-color: #fff !important; }
+html:root .sn-site .cx-connect .cx-blauw-knop:is(:hover, :focus-visible) .h-button-icon { background: #fff !important; color: #00739e !important; }
+@media (max-width: 420px) { html:root .sn-site .cx-connect .cx-blauw-knop { gap: 8px; padding-left: 18px; } html:root .sn-site .cx-connect .cx-blauw-knop > span:first-child { font-size: 12px; letter-spacing: .1em; } }
