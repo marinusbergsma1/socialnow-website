@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import "./free-website.css";
-import AppWand from "./AppWand";
 import { webShowcaseProjects } from "../data/projects";
 
 const examples = webShowcaseProjects
@@ -99,8 +98,8 @@ export default function FreeWebsite() {
   return <section id="free-website" className="sn-free-website" aria-labelledby="free-website-titel">
     <div className="h-wrap sn-fw-binnen">
       <WebsiteExamples />
-      {/* 18 oktober 2026: de appwand vervangt "Drie manieren om te beginnen" (Odoo, Zernio, SocialNow), zie AppWand.tsx. */}
-      <AppWand />
+      {/* 20 oktober 2026 (Marinus): "Apps is misschien iets voor os zelf niet voor de homepage." De appwand staat niet meer op de
+          homepage; AppWand.tsx, apps.ts en public/images/apps blijven voor het OS. */}
     </div>
   </section>;
 }
