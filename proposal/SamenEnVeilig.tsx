@@ -48,7 +48,8 @@ const TEKST = {
   // alleen het Komen-lockup op de achterwand is weggeretoucheerd (feedback-geen-partnerlogos).
   tLabel: "Training en workshops",
   tKop: "We trainen je hele team in AI.",
-  tUitleg: "Bij elk pakket op maat hoort een volledige AI-training voor je team. Geen handleiding met succes ermee, maar samen oefenen tot iedereen er beter van wordt.",
+  // Zelfde dag (Marinus): "Maar trainingen, workshops op maat en op locatie zodat jullie klaar zijn voor groei."
+  tUitleg: "Bij elk pakket op maat hoort een volledige AI-training voor je team. Geen handleiding met succes ermee, maar trainingen en workshops op maat en op locatie, zodat jullie klaar zijn voor groei.",
   // De beursfoto (IMG_0858) is eruit: "Dit is de slechtste foto die je kon kiezen [...] niet dat je ziet dat we in gesprek
   // gaan met mensen." Een echte foto van Marinus en Steef in gesprek met een groep komt terug zodra die er is.
   vormen: [

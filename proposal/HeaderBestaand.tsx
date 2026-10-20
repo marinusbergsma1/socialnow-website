@@ -178,7 +178,8 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <p className="bs-kop-hulp"><strong>Meer leads. Betere marketing.</strong> <span>Finance op orde.</span></p>
                 <p className="bs-uitleg bs-uitleg-connect">Echte experts doen het werk in je eigen OS, per maand of per opdracht.</p>
                 <div className="action">
-                  <a className="pill" href="/connect/" onClick={() => meet("connect")}><span>Bekijk Connect</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
+                  {/* 20 oktober 2026 (Marinus): "Bekijk Connect mag ook naar dat onderdeel doorverwijzen." Dus naar het Connect-blok op deze pagina, niet naar /connect/. */}
+                  <a className="pill" href="#connect" onClick={event => { meet("connect"); const doel = document.getElementById("connect"); if (doel) { event.preventDefault(); doel.scrollIntoView({ behavior: "smooth", block: "start" }); history.replaceState(history.state, "", "#connect"); } }}><span>Bekijk Connect</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
                   <Link className="pill" to="/team"><span>Bekijk het hele team</span><span className="arrow"><ArrowUpRight size={17} /></span></Link>
                 </div>
               </article>

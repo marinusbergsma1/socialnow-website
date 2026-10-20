@@ -85,7 +85,8 @@ try {
   eis(diensten.includes('class="cx-raster"') && diensten.indexOf('class="cx-raster"') > diensten.indexOf('id="prijzen"'), "/diensten: Connect-sectie van de homepage staat niet onder de prijzen");
   // 19 oktober 2026 (Marinus): Connect is een eigen platform waar je zelf zoekt (ontwerp 1). Geen "wij koppelen je" meer.
   for (const pagina of [diensten, home]) {
-    eis(pagina.includes('class="cx-zoek"') && pagina.includes('class="cx-chips"'), "Connect-sectie: zoekveld of vakgebieden ontbreken");
+    // 20 oktober 2026 (Marinus): "Ik wil nooit meer dan 1 regel met expertises [...] Haal maar weg." De vakgebiedknoppen zijn weg.
+    eis(pagina.includes('class="cx-zoek"') && !pagina.includes('class="cx-chips"'), "Connect-sectie: zoekveld ontbreekt of de vakgebiedknoppen staan er nog");
     eis(!pagina.includes("Wij koppelen je aan de juiste expert"), "Connect-sectie: zegt nog dat wij koppelen");
   }
   eis(/Meest gekozen[\s\S]{0,200}<h3>Meta<\/h3>/.test(diensten), "/diensten: Meta (€4.000) niet als meest gekozen");
