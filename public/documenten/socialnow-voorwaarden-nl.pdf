@@ -14,7 +14,7 @@ BT /F1 11 Tf 1 0 0 1 56.69 607.56 Tm (Deze voorwaarden gelden voor elke offerte,
 BT /F1 11 Tf 1 0 0 1 56.69 591.06 Tm (aanmelding voor het OS ga je hiermee akkoord.) Tj ET
 0 0 0 rg
 0.85 0.85 0.85 RG 0.6 w 56.69291338582678 130.39 m 538.58 130.39 l S 0 0 0 RG
-BT /F2 8.6 Tf 1 0 0 1 56.69 124.39 Tm (Laatst bijgewerkt: 14 oktober 2026) Tj ET
+BT /F2 8.6 Tf 1 0 0 1 56.69 124.39 Tm (Laatst bijgewerkt: 20 oktober 2026) Tj ET
 0.35 0.35 0.35 rg
 BT /F1 8.4 Tf 1 0 0 1 56.69 109.99 Tm (De Nederlandse tekst is de bindende versie. De actuele versie staat altijd op socialnow.nl/voorwaarden) Tj ET
 0 0 0 rg
@@ -93,7 +93,7 @@ BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (2 / 5) Tj ET 0 0 0 rg
 endstream
 endobj
 3 0 obj
-<< /Length 6208 >>
+<< /Length 6330 >>
 stream
 BT /F1 9.6 Tf 1 0 0 1 56.69 779.53 Tm (anders de declaraties voor het tot dan verrichte werk. Zegt opdrachtnemer op, dan draagt hij in overleg zorg voor) Tj ET
 BT /F1 9.6 Tf 1 0 0 1 56.69 765.13 Tm (overdracht van het resterende werk, tenzij de opzegging aan opdrachtgever toerekenbaar is; extra kosten van) Tj ET
@@ -146,90 +146,97 @@ BT /F1 9.6 Tf 1 0 0 1 56.69 229.63 Tm (bepaling, dan is hij niet tot schadevergo
 0.04 0.48 0.22 rg
 BT /F2 10.6 Tf 1 0 0 1 56.69 207.83 Tm (15. Auteursrecht en intellectueel eigendom) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 193.18 Tm (Opdrachtnemer behoudt de rechten die hem op grond van de Auteurswet toekomen. Verstrekte stukken,) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 178.78 Tm (ontwerpen, software en andere resultaten zijn uitsluitend bestemd voor gebruik door opdrachtgever en mogen) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 164.38 Tm (zonder toestemming niet worden verveelvoudigd, openbaar gemaakt of aan derden verstrekt. Opdrachtnemer) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 149.98 Tm (mag de kennis die hij door de werkzaamheden opdoet voor andere doeleinden gebruiken, zolang geen) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 135.58 Tm (vertrouwelijke informatie bij derden terechtkomt. Opdrachtgever stemt ermee in dat zijn logo, de gemaakte) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 121.18 Tm (ontwerpen en zijn ervaringen herkenbaar voor promotie worden gebruikt, tenzij die gevoelige of vertrouwelijke) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 106.78 Tm (informatie bevatten; opdrachtgever kan daar bezwaar tegen maken, waarna opdrachtnemer de publicatie niet) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 92.38 Tm (plaatst of waar mogelijk verwijdert.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 193.18 Tm (Bij een custom OS en bij elk pakket op SocialNow Connect wordt opdrachtgever eigenaar van wat) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 178.78 Tm (opdrachtnemer voor hem oplevert: de website, het systeem, de branding, de content en de advertenties. Het) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 164.38 Tm (eigendom gaat over zodra opdrachtgever de vergoeding daarvoor volledig heeft betaald.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 146.58 Tm (Bij het gewone SocialNow OS is opdrachtgever eigenaar van zijn account en van de gegevens daarin.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 132.18 Tm (Opdrachtnemer kijkt alleen mee als opdrachtgever hem die rol zelf geeft, voor persoonlijke hulp bij de software,) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 117.78 Tm (en alleen zolang die rol openstaat.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 99.98 Tm (Kennis en gereedschap blijven van wie ze zijn. De onderliggende software van SocialNow OS, gedeelde) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 85.58 Tm (onderdelen en bouwstenen, werkwijzen en sjablonen blijven van opdrachtnemer; software, beelden en diensten) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 71.18 Tm (van derden, zoals Odoo en stockbeelden, blijven van hun eigenaar en vallen onder hun eigen licentie.) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Algemene voorwaarden \267 SocialNow \267 socialnow.nl/voorwaarden) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (3 / 5) Tj ET 0 0 0 rg
 endstream
 endobj
 4 0 obj
-<< /Length 6269 >>
+<< /Length 6171 >>
 stream
+BT /F1 9.6 Tf 1 0 0 1 56.69 779.53 Tm (Opdrachtgever krijgt daarop het gebruiksrecht dat nodig is om het opgeleverde werk te gebruiken.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 765.13 Tm (Opdrachtnemer mag de kennis die hij door de werkzaamheden opdoet voor andere doeleinden gebruiken, zolang) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 750.73 Tm (geen vertrouwelijke informatie bij derden terechtkomt.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 732.93 Tm (Opdrachtgever stemt ermee in dat zijn logo, de gemaakte ontwerpen en zijn ervaringen herkenbaar voor) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 718.53 Tm (promotie worden gebruikt, tenzij die gevoelige of vertrouwelijke informatie bevatten; opdrachtgever kan daar) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 704.13 Tm (bezwaar tegen maken, waarna opdrachtnemer de publicatie niet plaatst of waar mogelijk verwijdert.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 775.53 Tm (16. Geschillen en toepasselijk recht) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 682.33 Tm (16. Geschillen en toepasselijk recht) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 760.88 Tm (Partijen spannen zich in om een geschil in onderling overleg op te lossen. De rechter in de vestigingsplaats van) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 746.48 Tm (opdrachtnemer is bij uitsluiting bevoegd, tenzij de kantonrechter bevoegd is. Op deze voorwaarden en elke) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 732.08 Tm (overeenkomst is Nederlands recht van toepassing. Opdrachtnemer mag deze voorwaarden wijzigen en brengt) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 717.68 Tm (opdrachtgever daarvan op de hoogte; de actuele versie staat altijd op socialnow.nl/voorwaarden.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 667.68 Tm (Partijen spannen zich in om een geschil in onderling overleg op te lossen. De rechter in de vestigingsplaats van) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 653.28 Tm (opdrachtnemer is bij uitsluiting bevoegd, tenzij de kantonrechter bevoegd is. Op deze voorwaarden en elke) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 638.88 Tm (overeenkomst is Nederlands recht van toepassing. Opdrachtnemer mag deze voorwaarden wijzigen en brengt) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 624.48 Tm (opdrachtgever daarvan op de hoogte; de actuele versie staat altijd op socialnow.nl/voorwaarden.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 695.88 Tm (17. SocialNow OS: jouw data en eigen regie) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 602.68 Tm (17. SocialNow OS: jouw data en eigen regie) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 681.23 Tm (SocialNow OS is de online omgeving op app.socialnow.nl waarin opdrachtgever zijn website, klanten, content en) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 666.83 Tm (advertenties beheert. Wie een account aanmaakt gaat akkoord met deze voorwaarden en met het privacybeleid) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 652.43 Tm (op socialnow.nl/privacy.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 634.63 Tm (SocialNow verkoopt deze gegevens nooit, deelt ze nooit met andere klanten en gebruikt ze nooit voor) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 620.23 Tm (advertenties van derden. Gegevens van gekoppelde bronnen zoals Odoo, Meta en Google worden alleen) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 605.83 Tm (gelezen voor de eigen werkruimte van opdrachtgever; de sleutels die opdrachtgever invoert worden versleuteld) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 591.43 Tm (bewaard en niet getoond.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 573.63 Tm (Opdrachtgever blijft eigenaar van zijn gegevens en kan zijn account op elk moment verwijderen onder Account in) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 559.23 Tm (het OS. Toegang wordt gesloten en verwijdering wordt afgehandeld volgens het privacybeleid; wettelijke) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 544.83 Tm (bewaarplichten blijven gelden.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 527.03 Tm (Het OS wordt geleverd zoals het is en wordt voortdurend doorontwikkeld. SocialNow geeft geen garantie op) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 512.63 Tm (ononderbroken beschikbaarheid en mag functies wijzigen of be\353indigen. Opdrachtgever gebruikt het OS niet) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 498.23 Tm (voor illegale doeleinden, spam of misbruik van gekoppelde platformen en houdt zich aan de voorwaarden van die) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 483.83 Tm (platformen.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 466.03 Tm (Je gegevens blijven van jou. Je houdt de regie over je eigen werkruimte, de tools die je koppelt en de opdrachten) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 451.63 Tm (die je geeft.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 433.83 Tm (We volgen je gedrag niet en maken geen schermopnames. Je bedrijfsgegevens worden niet gebruikt voor onze) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 419.43 Tm (eigen productontwikkeling. Feedback verzamelen we via persoonlijk contact.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 401.63 Tm (Noodzakelijke beveiligings- en storingslogboeken houden het systeem veilig en werkend. Toegang voor) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 387.23 Tm (ondersteuning is beperkt tot bevoegde personen en wordt gelogd.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 369.43 Tm (Software as a tool. De software verbindt jouw tools tot een persoonlijk of op maat gemaakt systeem. SocialNow) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 355.03 Tm (levert de persoonlijke service daaromheen. Je data en je eigen connecties blijven onder jouw regie.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 588.03 Tm (SocialNow OS is de online omgeving op app.socialnow.nl waarin opdrachtgever zijn website, klanten, content en) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 573.63 Tm (advertenties beheert. Wie een account aanmaakt gaat akkoord met deze voorwaarden en met het privacybeleid) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 559.23 Tm (op socialnow.nl/privacy.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 541.43 Tm (SocialNow verkoopt deze gegevens nooit, deelt ze nooit met andere klanten en gebruikt ze nooit voor) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 527.03 Tm (advertenties van derden. Gegevens van gekoppelde bronnen zoals Odoo, Meta en Google worden alleen) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 512.63 Tm (gelezen voor de eigen werkruimte van opdrachtgever; de sleutels die opdrachtgever invoert worden versleuteld) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 498.23 Tm (bewaard en niet getoond.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 480.43 Tm (Opdrachtgever blijft eigenaar van zijn gegevens en kan zijn account op elk moment verwijderen onder Account in) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 466.03 Tm (het OS. Toegang wordt gesloten en verwijdering wordt afgehandeld volgens het privacybeleid; wettelijke) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 451.63 Tm (bewaarplichten blijven gelden.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 433.83 Tm (Het OS wordt geleverd zoals het is en wordt voortdurend doorontwikkeld. SocialNow geeft geen garantie op) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 419.43 Tm (ononderbroken beschikbaarheid en mag functies wijzigen of be\353indigen. Opdrachtgever gebruikt het OS niet) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 405.03 Tm (voor illegale doeleinden, spam of misbruik van gekoppelde platformen en houdt zich aan de voorwaarden van die) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 390.63 Tm (platformen.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 372.83 Tm (Je gegevens blijven van jou. Je houdt de regie over je eigen werkruimte, de tools die je koppelt en de opdrachten) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 358.43 Tm (die je geeft.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 340.63 Tm (We volgen je gedrag niet en maken geen schermopnames. Je bedrijfsgegevens worden niet gebruikt voor onze) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 326.23 Tm (eigen productontwikkeling. Feedback verzamelen we via persoonlijk contact.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 308.43 Tm (Noodzakelijke beveiligings- en storingslogboeken houden het systeem veilig en werkend. Toegang voor) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 294.03 Tm (ondersteuning is beperkt tot bevoegde personen en wordt gelogd.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 276.23 Tm (Software as a tool. De software verbindt jouw tools tot een persoonlijk of op maat gemaakt systeem. SocialNow) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 261.83 Tm (levert de persoonlijke service daaromheen. Je data en je eigen connecties blijven onder jouw regie.) Tj ET
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 333.23 Tm (Aanvullend: hosting) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 240.03 Tm (Aanvullend: hosting) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 318.58 Tm (Opdrachtnemer geeft voor hosting en systemen geen garantie op minimumsnelheden, ononderbroken werking of) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 304.18 Tm (bereikbaarheid; schade daardoor, inclusief gevolgschade, is niet verhaalbaar. Opdrachtnemer is niet) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 289.78 Tm (aansprakelijk voor door opdrachtgever geplaatste inhoud; schade door misbruik wordt op opdrachtgever) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 275.38 Tm (verhaald. Abonnementen worden per einde contract schriftelijk opgezegd, tussentijds opzeggen is niet mogelijk) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 260.98 Tm (en er vindt geen restitutie plaats. Opdrachtnemer mag de dienst per direct be\353indigen bij vermoeden van illegale) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 246.58 Tm (activiteiten of uitblijvende betaling; de betalingsverplichting loopt door tot de eerstvolgende opzegmogelijkheid.) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 232.18 Tm (Domeinnaamregistraties gelden voor een jaar en worden telkens met een jaar verlengd; overige diensten zoals) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 217.78 Tm (e-mail- en webhosting gelden voor drie maanden met stilzwijgende verlenging. De opzegtermijn is \351\351n maand;) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 203.38 Tm (de opzegging moet uiterlijk twee dagen voor de nieuwe periode binnen zijn.) Tj ET
-0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 181.58 Tm (Aanvullend: web solutions) Tj ET
-0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 166.93 Tm (Bij het ontwerp van een website, app of gebruikersinterface heeft opdrachtgever recht op twee revisies van het) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 152.53 Tm (initi\353le ontwerp. Na schriftelijke goedkeuring geldt \351\351n maand garantie op de werking van het product in de staat) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 138.13 Tm (waarin het is opgeleverd. Wijzigingen door anderen dan opdrachtnemer laten de garantie vervallen. Bij) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 123.73 Tm (tussentijdse annulering is de aanbetaling verschuldigd, plus de declaraties voor het verrichte werk en \200 39,-) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 109.33 Tm (annuleringskosten exclusief btw; voorlopige resultaten worden waar redelijkerwijs mogelijk ter beschikking) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 94.93 Tm (gesteld.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 225.38 Tm (Opdrachtnemer geeft voor hosting en systemen geen garantie op minimumsnelheden, ononderbroken werking of) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 210.98 Tm (bereikbaarheid; schade daardoor, inclusief gevolgschade, is niet verhaalbaar. Opdrachtnemer is niet) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 196.58 Tm (aansprakelijk voor door opdrachtgever geplaatste inhoud; schade door misbruik wordt op opdrachtgever) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 182.18 Tm (verhaald. Abonnementen worden per einde contract schriftelijk opgezegd, tussentijds opzeggen is niet mogelijk) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 167.78 Tm (en er vindt geen restitutie plaats. Opdrachtnemer mag de dienst per direct be\353indigen bij vermoeden van illegale) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 153.38 Tm (activiteiten of uitblijvende betaling; de betalingsverplichting loopt door tot de eerstvolgende opzegmogelijkheid.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 138.98 Tm (Domeinnaamregistraties gelden voor een jaar en worden telkens met een jaar verlengd; overige diensten zoals) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 124.58 Tm (e-mail- en webhosting gelden voor drie maanden met stilzwijgende verlenging. De opzegtermijn is \351\351n maand;) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 110.18 Tm (de opzegging moet uiterlijk twee dagen voor de nieuwe periode binnen zijn.) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Algemene voorwaarden \267 SocialNow \267 socialnow.nl/voorwaarden) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (4 / 5) Tj ET 0 0 0 rg
 endstream
 endobj
 5 0 obj
-<< /Length 1190 >>
+<< /Length 2131 >>
 stream
 0.04 0.48 0.22 rg
-BT /F2 10.6 Tf 1 0 0 1 56.69 775.53 Tm (Aanvullend: design en beeld) Tj ET
+BT /F2 10.6 Tf 1 0 0 1 56.69 775.53 Tm (Aanvullend: web solutions) Tj ET
 0 0 0 rg
-BT /F1 9.6 Tf 1 0 0 1 56.69 760.88 Tm (Bij een ontwerp heeft opdrachtgever recht op twee revisies van het initi\353le ontwerp. Voor gegevens die) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 746.48 Tm (opdrachtgever aanlevert en in een ontwerp worden gebruikt is opdrachtnemer niet aansprakelijk voor \(typ\)fouten;) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 732.08 Tm (de controle ligt bij opdrachtgever en het recht op garantie vervalt. Bij ontwerp inclusief druk geldt garantie op de) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 717.68 Tm (kwaliteit van het drukwerk, waarbij de bewijsexemplaren van de drukker bindend zijn; lichte afwijkingen in kleur) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 703.28 Tm (en kwaliteit kunnen voorkomen en de inschatting van opdrachtnemer daarover is bindend. Bij tussentijdse) Tj ET
-BT /F1 9.6 Tf 1 0 0 1 56.69 688.88 Tm (annulering gelden dezelfde kosten als bij web solutions.) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 760.88 Tm (Bij het ontwerp van een website, app of gebruikersinterface heeft opdrachtgever recht op twee revisies van het) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 746.48 Tm (initi\353le ontwerp. Na schriftelijke goedkeuring geldt \351\351n maand garantie op de werking van het product in de staat) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 732.08 Tm (waarin het is opgeleverd. Wijzigingen door anderen dan opdrachtnemer laten de garantie vervallen. Bij) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 717.68 Tm (tussentijdse annulering is de aanbetaling verschuldigd, plus de declaraties voor het verrichte werk en \200 39,-) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 703.28 Tm (annuleringskosten exclusief btw; voorlopige resultaten worden waar redelijkerwijs mogelijk ter beschikking) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 688.88 Tm (gesteld.) Tj ET
+0.04 0.48 0.22 rg
+BT /F2 10.6 Tf 1 0 0 1 56.69 667.08 Tm (Aanvullend: design en beeld) Tj ET
+0 0 0 rg
+BT /F1 9.6 Tf 1 0 0 1 56.69 652.43 Tm (Bij een ontwerp heeft opdrachtgever recht op twee revisies van het initi\353le ontwerp. Voor gegevens die) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 638.03 Tm (opdrachtgever aanlevert en in een ontwerp worden gebruikt is opdrachtnemer niet aansprakelijk voor \(typ\)fouten;) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 623.63 Tm (de controle ligt bij opdrachtgever en het recht op garantie vervalt. Bij ontwerp inclusief druk geldt garantie op de) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 609.23 Tm (kwaliteit van het drukwerk, waarbij de bewijsexemplaren van de drukker bindend zijn; lichte afwijkingen in kleur) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 594.83 Tm (en kwaliteit kunnen voorkomen en de inschatting van opdrachtnemer daarover is bindend. Bij tussentijdse) Tj ET
+BT /F1 9.6 Tf 1 0 0 1 56.69 580.43 Tm (annulering gelden dezelfde kosten als bij web solutions.) Tj ET
 0.45 0.45 0.45 rg BT /F1 7.4 Tf 1 0 0 1 56.69291338582678 47.69 Tm (Algemene voorwaarden \267 SocialNow \267 socialnow.nl/voorwaarden) Tj ET
 BT /F1 7.4 Tf 1 0 0 1 524.18 47.69 Tm (5 / 5) Tj ET 0 0 0 rg
 endstream
@@ -270,20 +277,20 @@ xref
 0000000015 00000 n 
 0000000995 00000 n 
 0000007592 00000 n 
-0000013852 00000 n 
-0000020173 00000 n 
-0000021415 00000 n 
-0000021512 00000 n 
-0000021614 00000 n 
-0000021757 00000 n 
-0000021900 00000 n 
-0000022044 00000 n 
-0000022188 00000 n 
-0000022332 00000 n 
-0000022417 00000 n 
-0000022523 00000 n 
+0000013974 00000 n 
+0000020197 00000 n 
+0000022380 00000 n 
+0000022477 00000 n 
+0000022579 00000 n 
+0000022722 00000 n 
+0000022865 00000 n 
+0000023009 00000 n 
+0000023153 00000 n 
+0000023297 00000 n 
+0000023382 00000 n 
+0000023488 00000 n 
 trailer
 << /Size 16 /Root 15 0 R /Info 14 0 R >>
 startxref
-22574
+23539
 %%EOF
