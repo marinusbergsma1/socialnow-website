@@ -71,3 +71,5 @@
 /* Titel maximaal twee regels (19 oktober 2026): de grootte volgt de breedte van de titelkolom en de lengte van de titel. */
 html:root .sn-site .sn-bestaand .video-title{container-type:inline-size}
 html:root .sn-site .sn-choice.sn-bestaand .showcase .video-title h1{max-width:none!important;text-wrap:balance;font-size:min(64px,calc(100cqi * 3.2 / var(--tekens,30)))!important}
+/* 20 oktober 2026: explainer v8, één regel onder de speler (02-webtekst §1). */
+.sn-site .sn-bestaand .bs-explainer-onder{margin:12px 0 0;font-size:14px;line-height:1.5;color:#9fb2a7;text-wrap:pretty}

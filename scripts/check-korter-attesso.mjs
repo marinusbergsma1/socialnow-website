@@ -19,14 +19,16 @@ const praat = ["visa.svg", "mastercard.svg", "airwallex.webp", "adyen.svg", "rab
 eis(praat.every(l => src.includes(`/images/partners/betalen/${l}`) && fs.existsSync(`public/images/partners/betalen/${l}`)), "Talking to-balk met Visa, Mastercard, Airwallex, Adyen en Rabobank");
 eis(src.includes('<span translate="no">Talking to</span>') && /\.sn-samen-praat\{[^}]*background:#fff;border-top:2px solid var\(--s-groen\);border-bottom:2px solid var\(--s-groen\)/.test(css), "balk is wit met een groene lijn boven en onder, zoals op 5 oktober");
 eis(/animation:sn-samen-loop/.test(css) && /prefers-reduced-motion:reduce\)\{\.sn-samen-lus\{animation:none\}/.test(css) && /\.sn-samen-praat:hover \.sn-samen-lus/.test(css), "logo's lopen door, stil bij hover en bij minder beweging");
-eis(src.includes('\n  kop: "We verbeteren de producten met drie bedrijven.",') && /\n  uitleg: "SocialNow OS ontwikkelen we samen met Indexworld en Attesso/.test(src), "kop en uitleg noemen drie bedrijven");
+// 20 oktober 2026, explainer v8 (02-webtekst §2): "drie bedrijven" klopt niet meer; vier partners, elk met een eigen rol, Attesso daarbij.
+eis(src.includes('\n  kop: "SocialNow en vier partners, elk met een eigen rol.",') && /wie: "Attesso"/.test(src), "kop en rollen noemen de partners, met Attesso");
 if (process.argv.includes("--dist")) {
   for (const f of ["dist/nl/index.html", "dist/index.html"]) {
     const h = fs.readFileSync(f, "utf8");
     eis(h.includes("Talking to") && h.includes("~/attesso") && h.includes("/images/partners/betalen/rabobank.svg"), `${f}: Attesso met Talking to-balk`);
   }
   const en = fs.readFileSync("dist/index.html", "utf8").replace(/<span class="sn-title-dot">\.<\/span>/g, ".");
-  eis(en.includes("We improve the products with three companies.") && en.includes("AI payments, safe and provable."), "dist/index.html: Engelse koppen vertaald");
+  // 20 oktober 2026, explainer v8 (02-webtekst §2): nieuwe kop en Attesso-kop.
+  eis(en.includes("SocialNow and four partners, each with its own role.") && en.includes("Ad spend within your budget."), "dist/index.html: Engelse koppen vertaald");
 }
 const url = process.argv.slice(2).find(a => a.startsWith("http"));
 if (url) {

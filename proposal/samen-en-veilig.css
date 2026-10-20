@@ -127,3 +127,24 @@
 @keyframes sn-samen-loop{to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.sn-samen-lus{animation:none}}
 @media(min-width:1181px){.sn-samen-partners .sn-samen-balk{flex-direction:column;align-items:flex-start;gap:10px}.sn-samen-partners .sn-samen-balk ul{gap:10px 18px}.sn-samen-partners .sn-samen-balk img{height:21px}}
+/* 20 oktober 2026, explainer v8 (02-webtekst §2): rollen per bedrijf, de verbetercyclus en wie wat ziet. */
+:root .sn-site .sn-samen .sn-samen-rollen{display:grid;gap:0;margin:20px 0 0;padding:0;list-style:none;border-top:1px solid var(--s-lijn)}
+.sn-samen-rollen li{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);gap:6px 20px;padding:11px 0;border-bottom:1px solid var(--s-lijn)}
+:root .sn-site .sn-samen .sn-samen-rollen strong{font-size:14px;font-weight:600;color:#fff;overflow-wrap:anywhere}
+:root .sn-site .sn-samen .sn-samen-rollen span{font-size:14px;line-height:1.5;color:#b9c2be}
+@media(max-width:640px){.sn-samen-rollen li{grid-template-columns:1fr;gap:2px}}
+.sn-samen-twee{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:14px}
+.sn-samen-cyclus,.sn-samen-toegang{padding:16px 18px 18px;border:1px solid var(--s-lijn);border-radius:12px;background:#0b0f12;min-width:0}
+:root .sn-site .sn-samen .sn-samen-twee h4{margin:0;font-size:16px;font-weight:600;line-height:1.3;letter-spacing:-.01em;color:#fff}
+:root .sn-site .sn-samen .sn-samen-cyclus ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:14px 0 0;padding:0;list-style:none;counter-reset:stap}
+.sn-samen-cyclus li{position:relative;display:flex;align-items:flex-start;gap:6px;min-width:0;padding:10px 10px 12px;border:1px solid var(--s-lijn);border-radius:10px;background:#06090b;counter-increment:stap}
+:root .sn-site .sn-samen .sn-samen-cyclus li span{flex:1;min-width:0;font-size:14px;line-height:1.4;color:#e8ecea}
+.sn-samen-cyclus li span::before{content:counter(stap);display:block;margin-bottom:4px;font-family:var(--s-mono);font-size:10.5px;color:var(--s-groen)}
+.sn-samen-pijl{flex:0 0 16px;margin-top:2px;color:var(--s-groen)}
+:root .sn-site .sn-samen .sn-samen-cyclus>p{margin:12px 0 0;font-size:14px;line-height:1.5;color:#b9c2be}
+@media(max-width:900px){:root .sn-site .sn-samen .sn-samen-cyclus ol{grid-template-columns:1fr}.sn-samen-cyclus li{align-items:center;padding:9px 12px}.sn-samen-cyclus li span::before{display:inline;margin:0 8px 0 0}.sn-samen-pijl:not(.sn-samen-terug){transform:rotate(90deg)}}
+:root .sn-site .sn-samen .sn-samen-toegang ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin:14px 0 0;padding:0;list-style:none}
+@media(max-width:900px){:root .sn-site .sn-samen .sn-samen-toegang ul{grid-template-columns:1fr}}
+.sn-samen-toegang li{display:flex;align-items:flex-start;gap:9px}
+.sn-samen-toegang li svg{flex:0 0 16px;margin-top:3px;color:var(--s-groen)}
+:root .sn-site .sn-samen .sn-samen-toegang li span{font-size:14px;line-height:1.5;color:#b9c2be}

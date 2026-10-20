@@ -18,8 +18,10 @@ eis(/aria-label="Vorige experts"/.test(tsx) && /aria-label="Volgende experts"/.t
 const samen = fs.readFileSync("proposal/SamenEnVeilig.tsx", "utf8");
 // Zelfde avond: "We verbeteren het product met twee bedrijven. Moet de producten zijn en team van Connect voor de rest van het doorontwikkel verhaal."
 // 20 oktober 2026: met Attesso erbij zijn het drie bedrijven; "de producten" blijft.
-eis(/We verbeteren de producten met (twee|drie) bedrijven\./.test(samen) && !samen.includes("We verbeteren het product met"), "kop zegt de producten");
-eis(/doorontwikkeling doen we met het team van Connect/.test(samen), "het team van Connect draagt de rest van de doorontwikkeling");
+// 20 oktober 2026, explainer v8 (81-explainer-v8/werk/02-webtekst.md §2, DEFINITIEF): de kop noemt nu SocialNow en vier partners met
+// elk een rol, en de praktijk komt van klanten en experts (de experts zijn het team van Connect). Zie scripts/check-explainer-v8.mjs.
+eis(samen.includes('kop: "SocialNow en vier partners, elk met een eigen rol."') && !samen.includes("We verbeteren het product met"), "kop noemt SocialNow en de partners met hun rol");
+eis(/Wat klanten en experts in de praktijk tegenkomen, gaat als eerste de volgende versie in\./.test(samen), "wat klanten en experts (Connect) tegenkomen gaat als eerste de volgende versie in");
 const en = JSON.parse(fs.readFileSync("proposal/i18n/en.json", "utf8"));
 eis(["Vorige experts", "Volgende experts"].every(k => en[k] && en[k] !== k), "pijlen vertaald");
 eis(["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"].every(l => { const w = JSON.parse(fs.readFileSync(`proposal/i18n/${l}.json`, "utf8")); return w["We verbeteren de producten met twee bedrijven."] && Object.keys(w).some(k => k.includes("doorontwikkeling doen we met het team van Connect")); }), "nieuwe kop en uitleg in alle talen");
