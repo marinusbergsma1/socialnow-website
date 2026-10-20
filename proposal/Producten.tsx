@@ -14,7 +14,7 @@ export const NAV_LINKS: Array<[string, string]> = [
 ];
 // href in plaats van to: Connect is een eigen pagina buiten de app.
 export const PRODUCTEN = [
-  { naar: "/het-os", naam: "OS", regel: "AI management & operations.", soort: "os" },
+  { naar: "/het-os", naam: "OS", regel: "AI-powered management & operations.", soort: "os" },
   { href: "/connect/", naam: "Connect", regel: "De juiste experts voor jouw bedrijf.", soort: "connect" },
 ] as const;
 

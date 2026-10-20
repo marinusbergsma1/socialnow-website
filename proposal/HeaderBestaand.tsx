@@ -159,7 +159,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                   <button type="button" className="pill" aria-haspopup="dialog" onClick={() => { meet("custom_os"); openPlanCall({ onderdelen: ONDERDELEN[custom] }); }}><span>Plan een call</span><span className="arrow"><ArrowUpRight size={17} /></span></button>
                 </div>
                 </> : <>
-                <h2>AI management &amp; operations.</h2>
+                <h2>AI-powered management &amp; operations.</h2>
                 <div className="visual milos bs-milos">{MILOS.map(m => <figure key={m.rol}><MiloMotion role={m.rol} name={`Milo ${m.naam}`} maat={128} /><figcaption>{m.naam}</figcaption></figure>)}</div>
                 {/* Marinus, 18 oktober 2026: "PAKKETTEN HOEVEN HIER NIET EN SOORTEN DIENSTEN OOK NIET ZODAT ALLES MOOI IN 1 1920X1080 BLIJFT."
                     Dus geen tokenpakketten meer in de header; die kies je na het aanmaken van je account. */}
