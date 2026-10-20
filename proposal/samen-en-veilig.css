@@ -66,3 +66,34 @@
 .sn-samen-balk small{font-family:var(--s-mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--s-grijs);white-space:nowrap}
 @media(max-width:560px){.sn-samen-balk{flex-direction:column;align-items:flex-start;gap:10px}.sn-samen-balk ul{gap:12px 18px}}
 .sn-samen-wrap>.sn-samen-docs{align-self:start}
+
+/* Groeipartner en training, 20 oktober 2026: probleem en oplossing onder de kop, links de training met de beursfoto, rechts de documenten, partners eronder. */
+:root .sn-site .sn-samen .sn-samen-usp h2{max-width:24ch}
+.sn-samen-label svg{color:var(--s-groen)}
+.sn-samen-po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:980px;margin-top:24px}
+@media(max-width:700px){.sn-samen-po{grid-template-columns:1fr}}
+:root .sn-site .sn-samen .sn-samen-po p{margin:0;padding:16px 18px;border:1px solid var(--s-lijn);border-radius:12px;background:#0b0f12;font-size:15px;line-height:1.5;color:#d6ddda}
+:root .sn-site .sn-samen .sn-samen-po p:last-child{border-color:#25d36655;background:linear-gradient(135deg,#25d36614,#0b0f12 60%)}
+.sn-samen-po span{display:block;margin-bottom:6px;font-family:var(--s-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--s-grijs)}
+.sn-samen-po p:last-child span{color:var(--s-groen)}
+:root .sn-site .sn-samen .sn-samen-blok h3#sn-samen-training{max-width:none;margin:14px 0 0;font-size:clamp(22px,2vw,28px)!important;font-weight:600;line-height:1.12;letter-spacing:-.02em}
+.sn-samen-foto{position:relative;margin:22px 0 0;border:1px solid var(--s-lijn);border-radius:12px;overflow:hidden;background:#0b0f12}
+.sn-samen-foto img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.sn-samen-foto figcaption{position:absolute;left:12px;bottom:12px;padding:5px 10px;border-radius:999px;background:#000000b3;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-family:var(--s-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#e8ecea}
+:root .sn-site .sn-samen .sn-samen-vormen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 0;padding:0;list-style:none}
+@media(max-width:560px){:root .sn-site .sn-samen .sn-samen-vormen{grid-template-columns:1fr}}
+.sn-samen-vormen li{display:flex;flex-direction:column;gap:4px;padding:14px;border:1px solid var(--s-lijn);border-radius:12px;background:#0b0f12}
+.sn-samen-vormen strong{font-size:15px;font-weight:600;color:#fff}
+.sn-samen-vormen span{font-size:13.5px;line-height:1.45;color:#b9c2be}
+.sn-samen-sessies{display:flex;align-items:center;gap:18px;margin-top:14px;padding:14px 16px;border:1px solid #25d36640;border-radius:12px;background:#0b0f12}
+.sn-samen-sessies>span{flex:0 0 auto;font-family:var(--s-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s-groen)}
+:root .sn-site .sn-samen .sn-samen-sessies ul{display:flex;flex-wrap:wrap;gap:10px 22px;margin:0;padding:0;list-style:none}
+.sn-samen-sessies li{display:flex;align-items:center;gap:10px}
+.sn-samen-vlag{flex:0 0 auto;width:27px;height:18px;border-radius:3px;box-shadow:0 0 0 1px #ffffff26}
+.sn-samen-sessie{display:flex;flex-direction:column;line-height:1.25}
+.sn-samen-sessie strong{font-size:14.5px;font-weight:600;color:#fff}
+.sn-samen-sessie small{font-size:12.5px;color:var(--s-grijs)}
+@media(max-width:560px){.sn-samen-sessies{flex-direction:column;align-items:flex-start;gap:10px}}
+.sn-samen-partners{grid-column:1/-1}
+.sn-samen-partners .sn-samen-paren{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:900px){.sn-samen-partners .sn-samen-paren{grid-template-columns:1fr}}
