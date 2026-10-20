@@ -146,5 +146,8 @@
 :root .sn-site .sn-samen .sn-samen-toegang ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin:14px 0 0;padding:0;list-style:none}
 @media(max-width:900px){:root .sn-site .sn-samen .sn-samen-toegang ul{grid-template-columns:1fr}}
 .sn-samen-toegang li{display:flex;align-items:flex-start;gap:9px}
-.sn-samen-toegang li svg{flex:0 0 16px;margin-top:3px;color:var(--s-groen)}
+.sn-samen-toegang li svg{flex:0 0 16px;margin-top:3px}
+.sn-samen-status-werkt{color:var(--s-groen)}.sn-samen-status-bouwt{color:#9aa6a1}.sn-samen-status-volgt{color:#e8c25a}
+:root .sn-site .sn-samen .sn-samen-legenda{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 0;font-family:var(--s-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--s-grijs)}
+.sn-samen-legenda span{display:inline-flex;align-items:center;gap:6px}.sn-samen-legenda svg{flex:0 0 14px;width:14px;height:14px}
 :root .sn-site .sn-samen .sn-samen-toegang li span{font-size:14px;line-height:1.5;color:#b9c2be}

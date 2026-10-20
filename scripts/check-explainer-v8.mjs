@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Proef: de site-explainer v8 (20 okt 2026, ca. 3:05, uit code): v7 plus hoe SocialNow OS en SocialNow Connect samenwerken,
-// wie eraan bouwt (SocialNow, INDEXWORLD, Uncanny, Komen Consultancy Operation Systems, Attesso) en hoe elke versie beter wordt.
+// Proef: de site-explainer v8 (20 okt 2026, 3:05, uit code): v7 plus hoe SocialNow OS en SocialNow Connect samenwerken,
+// wie eraan bouwt (SocialNow, INDEXWORLD, Uncanny, Komen Consultancy Operation Systems, Attesso) en wat het kost (custom OS en prijzen).
 // Bron: 04_OS-VIDEO/video-project/81-explainer-v8 (bouw_v8.py). Webteksten: 81-explainer-v8/werk/02-webtekst.md (DEFINITIEF).
 // Eisen: 1) de speler laadt de nieuwe versie (cache-versie 20261020-v8) voor video én poster;
 //        2) het videobestand is de nieuwe film (180–190 s, niet v7 van 146,3 s) en precies de webversie van proef02 (sha256);
@@ -39,8 +39,8 @@ eis(p.width === 1280 && p.height === 720, `poster 1280×720: ${p.width}×${p.hei
 
 // webteksten (NL in de bron, EN in en.json): 02-webtekst.md §1 en §2
 const TEKST = {
-  "In drie minuten: wat je met OS en Connect doet, wie eraan bouwt en hoe elke versie beter wordt. Gesproken in het Engels.":
-    "In three minutes: what you do with OS and Connect, who builds them and how every version gets better. Spoken in English.",
+  "In drie minuten: wat je met OS en Connect doet, wie eraan bouwt en wat het kost. Gesproken in het Engels.":
+    "In three minutes: what you do with OS and Connect, who builds them and what it costs. Spoken in English.",
   "SocialNow en vier partners, elk met een eigen rol.": "SocialNow and four partners, each with its own role.",
   "Visie, stijl, UI/UX en AI-workflows. Wij keuren elke versie goed voor die live gaat.": "Vision, style, UI/UX and AI workflows. We approve every version before it goes live.",
   "Bouwt SocialNow OS en de gedeelde basis voor OS en Connect: accounts, rechten en audit.": "Builds SocialNow OS and the shared foundation for OS and Connect: accounts, permissions and audit.",
@@ -64,6 +64,8 @@ for (const taal of ["de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
 const samen = fs.readFileSync("proposal/SamenEnVeilig.tsx", "utf8");
 eis(["SocialNow", "Indexworld", "Uncanny", "Komen Consultancy Operation Systems", "Attesso"].every(n => samen.includes(`wie: "${n}"`)), "vijf rollen: SocialNow, Indexworld, Uncanny, Komen, Attesso");
 eis(!/drie bedrijven|registeraccountants|Geleid door CPA|nagekeken door accountants|direct in jouw systemen|Elke betaalvorm|Binnenkort/.test(samen), "geen geschrapte claims (drie bedrijven, CPA-leiding, direct in jouw systemen, elke betaalvorm, binnenkort)");
+eis(/status: "werkt"/.test(samen) && /status: "bouwt"/.test(samen) && /status: "volgt"/.test(samen) && ["Werkt al", "In ontwikkeling", "Volgende stap"].every(k => en[k] && en[k] !== k),
+  "wie wat ziet: werkt al, in ontwikkeling en volgende stap hebben elk een eigen icoon en label (review 6a.3)");
 eis(/partnersLabel: "Hun partners"/.test(samen) && en["Hun partners"] === "Their partners", "de logobalk heet Hun partners: partners van Indexworld en Uncanny, niet van SocialNow");
 
 if (process.argv.includes("--dist")) {

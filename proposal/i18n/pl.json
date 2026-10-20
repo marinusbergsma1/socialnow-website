@@ -2683,7 +2683,6 @@
   "Heb je een opdracht? Vraag hem aan bij Connect.": "Masz zlecenie? Zgłoś je przez Connect.",
   "Opdracht aanvragen bij Connect": "Zgłoszenie zlecenia przez Connect",
   "AI-powered management & operations.": "AI-powered management & operations.",
-  "In drie minuten: wat je met OS en Connect doet, wie eraan bouwt en hoe elke versie beter wordt. Gesproken in het Engels.": "W trzy minuty: co robisz z OS i Connect, kto je buduje i jak każda wersja staje się lepsza. Mówione po angielsku.",
   "SocialNow en vier partners, elk met een eigen rol.": "SocialNow i czterech partnerów, każdy z własną rolą.",
   "Hun partners": "Ich partnerzy",
   "Visie, stijl, UI/UX en AI-workflows. Wij keuren elke versie goed voor die live gaat.": "Wizja, styl, UI/UX i workflow AI. Zatwierdzamy każdą wersję, zanim trafi na żywo.",
@@ -2714,5 +2713,9 @@
   "Connect, gebouwd als eigen app.": "Connect, zbudowany jako osobna aplikacja.",
   "Jij keurt één keer een budget goed. Attesso controleert elke advertentie-uitgave van een agent daartegen en legt die ondertekend vast. Het zit al in het OS, maar staat nog uit. Betalingen aan experts in Connect lopen apart, via Stripe.": "Zatwierdzasz budżet raz. Attesso sprawdza z nim każdy wydatek agenta na reklamy i zapisuje go z podpisem. Jest już wbudowane w OS, ale na razie wyłączone. Płatności dla ekspertów w Connect działają osobno, przez Stripe.",
   "Meta en Google": "Meta i Google",
-  "Eén budget per platform": "Jeden budżet na platformę"
+  "Eén budget per platform": "Jeden budżet na platformę",
+  "In drie minuten: wat je met OS en Connect doet, wie eraan bouwt en wat het kost. Gesproken in het Engels.": "W trzy minuty: co robisz z OS i Connect, kto je buduje i ile to kosztuje. Mówione po angielsku.",
+  "Werkt al": "Już działa",
+  "In ontwikkeling": "W trakcie budowy",
+  "Volgende stap": "Następny krok"
 }
