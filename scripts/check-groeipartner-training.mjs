@@ -20,6 +20,7 @@ eis(!src.includes(`uspKop: "${OUD}"`), "de oude veiligheidskop staat niet meer b
 eis(/software gratis/.test(veld("uspUitleg")) && /niet automatiseren/.test(veld("uspUitleg")), "geloof: software gratis, expertise niet te automatiseren");
 eis(!!veld("probleem") && !!veld("oplossing") && src.includes("{t.probleemLabel}") && src.includes("{t.oplossingLabel}"), "probleem en oplossing staan er concreet en zichtbaar");
 eis(/volledige AI-training/.test(veld("tUitleg")) && /pakket op maat/.test(veld("tUitleg")), "volledige AI-training bij elk pakket op maat");
+eis(/trainingen en workshops op maat en op locatie, zodat jullie klaar zijn voor groei/.test(veld("tUitleg")), "trainingen en workshops op maat en op locatie, klaar voor groei");
 eis(VORMEN.every(v => src.includes(`kop: "${v}"`)) && src.includes("sn-samen-vormen"), "teamtrainingen, AI-workshops en cursussen");
 eis(/vlag: "be", naam: "Student Entrepreneurs Club", plaats: "Brussel"/.test(src) && /vlag: "nl", naam: "Talland College", plaats: "Hoorn"/.test(src), "bevestigde sessies in Brussel en Hoorn");
 eis(src.includes('"#fdda24"') && src.includes('"#21468b"') && src.includes("<Vlag land={x.vlag} />") && css.includes(".sn-samen-vlag{"), "Belgische en Nederlandse vlag als svg");

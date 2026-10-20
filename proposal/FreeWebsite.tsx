@@ -33,10 +33,15 @@ export function WebsiteExamples() {
       if (entry.isIntersecting) { setVisible(true); setOpened(examples.map((_, i) => i)); observer.disconnect(); }
     }, { rootMargin: "1200px" });
     observer.observe(element);
+    // 20 oktober 2026 (Marinus): "ALTIJD ALLEMAAL LADEN". Niet pas als het blok in beeld komt: direct na het laden van de
+    // pagina starten alle sites, zodat ze klaar zijn voordat iemand bij de websites is.
+    const allesLaden = () => { setVisible(true); setOpened(examples.map((_, i) => i)); };
+    const start = () => window.setTimeout(allesLaden, 300);
+    if (document.readyState === "complete") start(); else window.addEventListener("load", start, { once: true });
     const tile = element.querySelector(".sn-web-preview");
     const resize = new ResizeObserver(([entry]) => setPreviewScale(entry.contentRect.width / 1280));
     if (tile) resize.observe(tile);
-    return () => { observer.disconnect(); resize.disconnect(); };
+    return () => { observer.disconnect(); resize.disconnect(); window.removeEventListener("load", start); };
   }, []);
   return <div className="sn-fw-examples" ref={region} role="region" aria-label="Live websitevoorbeelden" aria-roledescription="carrousel">
     <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Onze websites</p><h3>Altijd een gratis websitedemo.</h3></div><p>Persoonlijk gemaakt. Geen AI-slop.</p></div>

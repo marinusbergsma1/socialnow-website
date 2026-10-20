@@ -18,7 +18,6 @@ const VERSIE = "20261015-team";
 // 19 oktober 2026 (Marinus): "Verder is het meer zoeken naar expert dan dat je het aan ons over laat." en "Het moet een losstaand
 // bedrijf zijn." Daarna koos hij ontwerp 1, "zoeken op zwart": eigen merk, zoekveld, vakgebieden als knoppen en een raster met
 // profielen. Wie in een vakgebied zit komt uit expertGroepen; zonder groep valt iemand alleen onder Alles.
-const ALLES = "Alles";
 // 19 oktober 2026 (Marinus): "dat onderdeel met mensen altijd met een witte achtergrond." Zelfde ontwerp, op wit.
 // Later die avond: "Connect gedeelte moet blauw zijn en expertlaag 1 laag die je kan sliden en logo niet 2x staat daarboven
 // al." Dus Connect-blauw in plaats van groen, alle experts in één rij die schuift (met pijlen voor de muis), en geen eigen
@@ -26,14 +25,12 @@ const ALLES = "Alles";
 
 export default function ConnectExperts() {
   const { t } = useLanguage();
-  const [vak, zetVak] = useState(ALLES);
   const [zoek, zetZoek] = useState("");
   const rij = useRef<HTMLUListElement>(null);
   const schuif = (richting: number) => rij.current?.scrollBy({ left: richting * rij.current.clientWidth * 0.8, behavior: "smooth" });
   const groepVan = (naam: string) => expertGroepen.find((g) => g.members.includes(naam))?.name ?? "";
   const q = zoek.trim().toLowerCase();
-  const lijst = people.filter((p) => (vak === ALLES || groepVan(p.name) === vak)
-    && (!q || `${p.name} ${p.role} ${t(groepVan(p.name))}`.toLowerCase().includes(q)));
+  const lijst = people.filter((p) => !q || `${p.name} ${p.role} ${t(groepVan(p.name))}`.toLowerCase().includes(q));
   return <div className="cx-connect">
     <section id="team" className="sn-cx h-wrap" aria-labelledby="team-titel">
       <div className="cx-boven">
@@ -46,11 +43,9 @@ export default function ConnectExperts() {
           <Search size={18} aria-hidden="true" />
           <input type="search" value={zoek} onChange={(e) => zetZoek(e.target.value)} placeholder="Zoek op naam of vak, bijvoorbeeld Meta Ads" aria-label="Zoek een expert" />
         </label>
-        <div className="cx-chips" role="group" aria-label="Vakgebied">
-          {[ALLES, ...expertGroepen.map((g) => g.name)].map((naam) => (
-            <button key={naam} type="button" aria-pressed={vak === naam} onClick={() => zetVak(naam)}>{naam}</button>
-          ))}
-        </div>
+        {/* 20 oktober 2026 (Marinus): "Ik wil nooit meer dan 1 regel met expertises altijd 1 balk en misschien al die vlakjes wel
+            gewoon weg is voor later. Haal maar weg." De vakgebiedknoppen (cx-chips) zijn weg; zoeken op vak kan nog via het zoekveld.
+            Terugzetten kan met ALLES, expertGroepen en de opmaak .cx-chips in connect-experts.css, dan als één schuifbalk. */}
       </div>
       <div className="cx-pijlen">
         <button type="button" aria-label="Vorige experts" onClick={() => schuif(-1)}><ArrowLeft size={18} aria-hidden="true" /></button>
