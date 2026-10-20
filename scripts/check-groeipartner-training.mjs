@@ -23,10 +23,14 @@ eis(/volledige AI-training/.test(veld("tUitleg")) && /pakket op maat/.test(veld(
 eis(VORMEN.every(v => src.includes(`kop: "${v}"`)) && src.includes("sn-samen-vormen"), "teamtrainingen, AI-workshops en cursussen");
 eis(/vlag: "be", naam: "Student Entrepreneurs Club", plaats: "Brussel"/.test(src) && /vlag: "nl", naam: "Talland College", plaats: "Hoorn"/.test(src), "bevestigde sessies in Brussel en Hoorn");
 eis(src.includes('"#fdda24"') && src.includes('"#21468b"') && src.includes("<Vlag land={x.vlag} />") && css.includes(".sn-samen-vlag{"), "Belgische en Nederlandse vlag als svg");
-eis(FOTO.every(f => fs.existsSync(f) && fs.statSync(f).size > 20000) && FOTO.every(f => src.includes(f.replace("public", ""))), "echte beursfoto van Marinus en Steef in drie maten");
-eis(/Odoo Experience/.test(veld("fotoAlt")) && /Marinus/.test(veld("fotoAlt")) && /Steef/.test(veld("fotoAlt")), "foto heeft een beschrijvende alt");
+// Zelfde dag: de beursfoto viel af ("niet dat je ziet dat we in gesprek gaan met mensen"); de lezingen heten "Volgende lezingen".
+eis(veld("sessiesLabel") === "Volgende lezingen", "label boven de sessies is Volgende lezingen");
+eis(/abonnementen/.test(veld("probleem")) && /niet met elkaar samenwerken/.test(veld("probleem")), "probleem: abonnementen op software en diensten die niet samenwerken");
+eis(/plug and play software met begeleiding en écht ownership/.test(veld("oplossing")) && /projecttarief voor onze experts/.test(veld("oplossing")), "oplossing: plug and play, begeleiding, ownership, projecttarief");
+eis(src.includes("<Rocket size={14}") && !src.includes("Sparkles"), "raket bij Groeipartner, geen sterretje");
+eis(!src.includes("sn-samen-foto") && FOTO.every(f => !fs.existsSync(f)), "de afgekeurde beursfoto staat er niet meer in");
 eis(src.includes('naam: "Indexworld"') && src.includes('naam: "Uncanny"') && src.includes("sn-samen-partners"), "partners Indexworld en Uncanny blijven erin");
-const nieuw = ["uspLabel", "uspKop", "uspUitleg", "probleemLabel", "probleem", "oplossingLabel", "oplossing", "tLabel", "tKop", "tUitleg", "fotoAlt", "fotoOnder", "sessiesLabel"].map(veld)
+const nieuw = ["uspLabel", "uspKop", "uspUitleg", "probleemLabel", "probleem", "oplossingLabel", "oplossing", "tLabel", "tKop", "tUitleg", "sessiesLabel"].map(veld)
   .concat(VORMEN, [...src.matchAll(/kop: "[^"]*", tekst: "([^"]*)"/g)].map(m => m[1]).filter(t => !/Indexworld|Uncanny/.test(t)).slice(0, 3));
 for (const t of TALEN) {
   const w = JSON.parse(fs.readFileSync(`proposal/i18n/${t}.json`, "utf8"));
@@ -37,8 +41,8 @@ for (const t of TALEN) {
 if (process.argv.includes("--dist")) {
   const tekst = f => fs.readFileSync(f, "utf8").replace(/<span class="sn-title-dot">\.<\/span>/g, ".");
   const nl = tekst("dist/nl/index.html"), en = tekst("dist/index.html");
-  eis(nl.includes(KOP) && nl.includes("Talland College"), "gebouwde nl-pagina toont kop en sessies");
-  eis(en.includes(KOP_EN) && en.includes("/images/beurs/marinus-steef-odoo-experience-1600.jpg"), "gebouwde en-pagina toont kop en foto");
+  eis(nl.includes(KOP) && nl.includes("Volgende lezingen") && nl.includes("Talland College"), "gebouwde nl-pagina toont kop en Volgende lezingen");
+  eis(en.includes(KOP_EN) && en.includes("Upcoming talks") && !en.includes("marinus-steef-odoo-experience"), "gebouwde en-pagina toont kop, Upcoming talks en geen beursfoto");
 }
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");
 process.exit(fouten.length ? 1 : 0);

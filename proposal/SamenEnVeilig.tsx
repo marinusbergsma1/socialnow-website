@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Download, GraduationCap, ShieldCheck, Sparkles, X } from "lucide-react";
+import { ArrowUpRight, Download, GraduationCap, Rocket, ShieldCheck, X } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 import { ConnectLogo } from "./HomeHeader";
 import { DATA_DOCUMENT } from "./PixelInfrastructure";
@@ -36,9 +36,12 @@ const TEKST = {
   uspKop: "Jouw groeipartner in het AGI-tijdperk.",
   uspUitleg: "Wij geloven in een toekomst waarin software gratis is en expertise het verschil maakt. AI maakt software elke maand goedkoper, maar de kennis en ervaring van echte mensen kun je niet automatiseren.",
   probleemLabel: "Het probleem",
-  probleem: "Teams betalen voor tien losse pakketten en krijgen er geen hulp bij. AI verandert sneller dan iemand alleen kan bijhouden.",
+  // Zelfde dag (Marinus): "Het probleem, je betaald 10tallen euro's voor abbonementen op software en diensten die niet samenwerken."
+  probleem: "Je betaalt tientallen euro's aan abonnementen op software en diensten die niet met elkaar samenwerken.",
   oplossingLabel: "Onze oplossing",
-  oplossing: "Je krijgt de software gratis en betaalt voor mensen die je groei versnellen. Bij elk pakket op maat trainen we je hele team, zodat iedereen meegroeit met AI.",
+  // Zelfde dag (Marinus): "Onze oplossing. Persoonlijke plug and play software met begeleiding en écht ownership. Je koopt de
+  // software en betaald op projecttarief voor onze experts." "Meer zo iets."
+  oplossing: "Persoonlijke plug and play software met begeleiding en écht ownership. Je koopt de software en betaalt een projecttarief voor onze experts.",
   // Zelfde dag: "Volledige training van hun team. Team trainingen en ai workshops en cursussen met de 2 bevestigde afspraken bij
   // student entrepeneursclub Brussel en Talland College Hoorn met vlaggen van de landen erbij." En: "gewoon een mooie foto dat
   // Marinus in gesprek is met een groep mensen en Steef ook". De foto is een echt beeld uit IMG_0858.MOV (25 sep, stand C21);
@@ -46,14 +49,15 @@ const TEKST = {
   tLabel: "Training en workshops",
   tKop: "We trainen je hele team in AI.",
   tUitleg: "Bij elk pakket op maat hoort een volledige AI-training voor je team. Geen handleiding met succes ermee, maar samen oefenen tot iedereen er beter van wordt.",
-  fotoAlt: "Marinus Bergsma en Steef Komen geven uitleg op de stand van SocialNow tijdens Odoo Experience in Brussel",
-  fotoOnder: "Marinus en Steef op Odoo Experience, Brussel",
+  // De beursfoto (IMG_0858) is eruit: "Dit is de slechtste foto die je kon kiezen [...] niet dat je ziet dat we in gesprek
+  // gaan met mensen." Een echte foto van Marinus en Steef in gesprek met een groep komt terug zodra die er is.
   vormen: [
     { kop: "Teamtrainingen", tekst: "Op locatie of online, afgestemd op hoe jullie werken." },
     { kop: "AI-workshops", tekst: "Meteen aan de slag met je eigen data, agents en content." },
     { kop: "Cursussen", tekst: "Stap voor stap, zodat nieuwe collega's ook snel meedoen." },
   ],
-  sessiesLabel: "Bevestigde sessies",
+  // Zelfde dag (Marinus): "Bevestigde workshops. Of lezingen oid." en daarna "Of volgende lezingen."
+  sessiesLabel: "Volgende lezingen",
   sessies: [
     { vlag: "be", naam: "Student Entrepreneurs Club", plaats: "Brussel" },
     { vlag: "nl", naam: "Talland College", plaats: "Hoorn" },
@@ -138,7 +142,7 @@ export default function SamenEnVeilig() {
       <svg className="sn-samen-filter" aria-hidden="true"><defs><filter id="samen-connect-blue" colorInterpolationFilters="sRGB"><feComponentTransfer><feFuncR type="linear" slope=".6" intercept=".02" /><feFuncG type="linear" slope=".55" intercept=".43" /><feFuncB type="linear" slope=".45" intercept=".5" /></feComponentTransfer></filter></defs></svg>
       <div className="sn-samen-wrap">
         <div className="sn-samen-usp">
-          <p className="sn-samen-label"><Sparkles size={14} aria-hidden="true" />{t.uspLabel}</p>
+          <p className="sn-samen-label"><Rocket size={14} aria-hidden="true" />{t.uspLabel}</p>
           <h2 id="sn-samen-usp">{t.uspKop}</h2>
           <p className="sn-samen-uitleg">{t.uspUitleg}</p>
           <div className="sn-samen-po">
@@ -150,13 +154,6 @@ export default function SamenEnVeilig() {
           <p className="sn-samen-label"><GraduationCap size={14} aria-hidden="true" />{t.tLabel}</p>
           <h3 id="sn-samen-training">{t.tKop}</h3>
           <p className="sn-samen-uitleg">{t.tUitleg}</p>
-          <figure className="sn-samen-foto">
-            <picture>
-              <source type="image/webp" srcSet="/images/beurs/marinus-steef-odoo-experience-800.webp 800w, /images/beurs/marinus-steef-odoo-experience-1600.webp 1600w" sizes="(max-width: 900px) 92vw, 680px" />
-              <img src="/images/beurs/marinus-steef-odoo-experience-1600.jpg" alt={t.fotoAlt} width="1600" height="1200" loading="lazy" decoding="async" />
-            </picture>
-            <figcaption>{t.fotoOnder}</figcaption>
-          </figure>
           <ul className="sn-samen-vormen">
             {t.vormen.map(v => <li key={v.kop}><strong>{v.kop}</strong><span>{v.tekst}</span></li>)}
           </ul>
