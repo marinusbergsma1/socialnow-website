@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Download, ShieldCheck, X } from "lucide-react";
+import { ArrowUpRight, Download, GraduationCap, ShieldCheck, Sparkles, X } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 import { ConnectLogo } from "./HomeHeader";
 import { DATA_DOCUMENT } from "./PixelInfrastructure";
@@ -28,10 +28,36 @@ const BRON = {
 
 // Alleen Nederlandse brontekst: de eigen JSX-runtime vertaalt via proposal/i18n/*.json.
 const TEKST = {
-  // 18 oktober 2026 (Marinus): "Echt duidelijk maken dat het VEILIGER is dan hun verouderde software en processen. Dat is een USP."
-  uspLabel: "Veiligheid",
-  uspKop: "Veiliger dan je verouderde software en processen.",
-  uspUitleg: "Software zonder updates is de grootste ingang voor hackers. Wij zetten alles in één OS, met rechten per persoon, versleutelde sleutels en echte experts die meekijken.",
+  // 20 oktober 2026 (Marinus): "Focus dit stuk op: Dat wij bij alle custom pakketten zorgen voor volledige training van Ai en meer
+  // positief gericht team trainingen etc [...] Your growth partner in the AGI Era bijvoorbeeld en concreet wel het probleem en oplossing
+  // opnoemen over ons geloof in een toekomst waar software gratis hoort te zijn en expertise niet geautomatiseerd kan worden."
+  // De veiligheidskop van 18 oktober ("Veiliger dan je verouderde software en processen.") is daarmee weg; de documenten blijven rechts.
+  uspLabel: "Groeipartner",
+  uspKop: "Jouw groeipartner in het AGI-tijdperk.",
+  uspUitleg: "Wij geloven in een toekomst waarin software gratis is en expertise het verschil maakt. AI maakt software elke maand goedkoper, maar de kennis en ervaring van echte mensen kun je niet automatiseren.",
+  probleemLabel: "Het probleem",
+  probleem: "Teams betalen voor tien losse pakketten en krijgen er geen hulp bij. AI verandert sneller dan iemand alleen kan bijhouden.",
+  oplossingLabel: "Onze oplossing",
+  oplossing: "Je krijgt de software gratis en betaalt voor mensen die je groei versnellen. Bij elk pakket op maat trainen we je hele team, zodat iedereen meegroeit met AI.",
+  // Zelfde dag: "Volledige training van hun team. Team trainingen en ai workshops en cursussen met de 2 bevestigde afspraken bij
+  // student entrepeneursclub Brussel en Talland College Hoorn met vlaggen van de landen erbij." En: "gewoon een mooie foto dat
+  // Marinus in gesprek is met een groep mensen en Steef ook". De foto is een echt beeld uit IMG_0858.MOV (25 sep, stand C21);
+  // alleen het Komen-lockup op de achterwand is weggeretoucheerd (feedback-geen-partnerlogos).
+  tLabel: "Training en workshops",
+  tKop: "We trainen je hele team in AI.",
+  tUitleg: "Bij elk pakket op maat hoort een volledige AI-training voor je team. Geen handleiding met succes ermee, maar samen oefenen tot iedereen er beter van wordt.",
+  fotoAlt: "Marinus Bergsma en Steef Komen geven uitleg op de stand van SocialNow tijdens Odoo Experience in Brussel",
+  fotoOnder: "Marinus en Steef op Odoo Experience, Brussel",
+  vormen: [
+    { kop: "Teamtrainingen", tekst: "Op locatie of online, afgestemd op hoe jullie werken." },
+    { kop: "AI-workshops", tekst: "Meteen aan de slag met je eigen data, agents en content." },
+    { kop: "Cursussen", tekst: "Stap voor stap, zodat nieuwe collega's ook snel meedoen." },
+  ],
+  sessiesLabel: "Bevestigde sessies",
+  sessies: [
+    { vlag: "be", naam: "Student Entrepreneurs Club", plaats: "Brussel" },
+    { vlag: "nl", naam: "Talland College", plaats: "Hoorn" },
+  ],
   // 19 oktober 2026, avond (Marinus): "Moet de producten zijn en team van Connect voor de rest van het doorontwikkel verhaal."
   label: "Samen bouwen",
   kop: "We verbeteren de producten met twee bedrijven.",
@@ -90,6 +116,18 @@ const documenten = (taal: Taal) => [
   { naam: "Privacybeleid", href: doc("privacy", taal), meta: "PDF" },
 ];
 
+// Vlaggen als eigen svg: emoji-vlaggen tonen op Windows alleen twee letters.
+function Vlag({ land }: { land: string }) {
+  const banen = land === "be" ? ["#000", "#fdda24", "#ef3340"] : ["#ae1c28", "#fff", "#21468b"];
+  return (
+    <svg className="sn-samen-vlag" viewBox="0 0 30 20" aria-hidden="true">
+      {banen.map((kleur, i) => land === "be"
+        ? <rect key={kleur} x={i * 10} y="0" width="10" height="20" fill={kleur} />
+        : <rect key={kleur} x="0" y={i * 20 / 3} width="30" height={20 / 3} fill={kleur} />)}
+    </svg>
+  );
+}
+
 export default function SamenEnVeilig() {
   const { language } = useLanguage();
   const t = TEKST;
@@ -100,11 +138,50 @@ export default function SamenEnVeilig() {
       <svg className="sn-samen-filter" aria-hidden="true"><defs><filter id="samen-connect-blue" colorInterpolationFilters="sRGB"><feComponentTransfer><feFuncR type="linear" slope=".6" intercept=".02" /><feFuncG type="linear" slope=".55" intercept=".43" /><feFuncB type="linear" slope=".45" intercept=".5" /></feComponentTransfer></filter></defs></svg>
       <div className="sn-samen-wrap">
         <div className="sn-samen-usp">
-          <p className="sn-samen-label"><ShieldCheck size={14} aria-hidden="true" />{t.uspLabel}</p>
+          <p className="sn-samen-label"><Sparkles size={14} aria-hidden="true" />{t.uspLabel}</p>
           <h2 id="sn-samen-usp">{t.uspKop}</h2>
           <p className="sn-samen-uitleg">{t.uspUitleg}</p>
+          <div className="sn-samen-po">
+            <p><span>{t.probleemLabel}</span>{t.probleem}</p>
+            <p><span>{t.oplossingLabel}</span>{t.oplossing}</p>
+          </div>
         </div>
-        <div className="sn-samen-blok">
+        <div className="sn-samen-blok sn-samen-training">
+          <p className="sn-samen-label"><GraduationCap size={14} aria-hidden="true" />{t.tLabel}</p>
+          <h3 id="sn-samen-training">{t.tKop}</h3>
+          <p className="sn-samen-uitleg">{t.tUitleg}</p>
+          <figure className="sn-samen-foto">
+            <picture>
+              <source type="image/webp" srcSet="/images/beurs/marinus-steef-odoo-experience-800.webp 800w, /images/beurs/marinus-steef-odoo-experience-1600.webp 1600w" sizes="(max-width: 900px) 92vw, 680px" />
+              <img src="/images/beurs/marinus-steef-odoo-experience-1600.jpg" alt={t.fotoAlt} width="1600" height="1200" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>{t.fotoOnder}</figcaption>
+          </figure>
+          <ul className="sn-samen-vormen">
+            {t.vormen.map(v => <li key={v.kop}><strong>{v.kop}</strong><span>{v.tekst}</span></li>)}
+          </ul>
+          <div className="sn-samen-sessies">
+            <span>{t.sessiesLabel}</span>
+            <ul>
+              {t.sessies.map(x => (
+                <li key={x.naam}><Vlag land={x.vlag} /><span className="sn-samen-sessie"><strong>{x.naam}</strong><small>{x.plaats}</small></span></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="sn-samen-blok sn-samen-docs">
+          <p className="sn-samen-label"><ShieldCheck size={14} aria-hidden="true" />{t.vLabel}</p>
+          <h3>{t.vKop}</h3>
+          <ul>
+            {docs.map(d => (
+              <li key={d.href}>
+                <a href={d.href} download target="_blank" rel="noopener"><Download size={16} aria-hidden="true" /><span>{d.naam}</span><small>{d.meta}</small></a>
+              </li>
+            ))}
+          </ul>
+          <Link className="sn-samen-alles" to="/veiligheid">{t.alles}<ArrowUpRight size={16} aria-hidden="true" /></Link>
+        </div>
+        <div className="sn-samen-blok sn-samen-partners">
           <p className="sn-samen-label"><i />{t.label}</p>
           <h3 id="sn-samen-kop">{t.kop}</h3>
           <p className="sn-samen-uitleg">{t.uitleg}</p>
@@ -132,18 +209,6 @@ export default function SamenEnVeilig() {
               </article>
             ))}
           </div>
-        </div>
-        <div className="sn-samen-blok sn-samen-docs">
-          <p className="sn-samen-label"><ShieldCheck size={14} aria-hidden="true" />{t.vLabel}</p>
-          <h3>{t.vKop}</h3>
-          <ul>
-            {docs.map(d => (
-              <li key={d.href}>
-                <a href={d.href} download target="_blank" rel="noopener"><Download size={16} aria-hidden="true" /><span>{d.naam}</span><small>{d.meta}</small></a>
-              </li>
-            ))}
-          </ul>
-          <Link className="sn-samen-alles" to="/veiligheid">{t.alles}<ArrowUpRight size={16} aria-hidden="true" /></Link>
         </div>
       </div>
     </section>
