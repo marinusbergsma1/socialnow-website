@@ -197,7 +197,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <ul className="bs-zeker">
                   {/* 18 oktober 2026 (Marinus): "Die punten eronderaan Gratis website en rebranding, veilig. Eigen beheer en keuzes." */}
                   <li><ShieldCheck size={15} aria-hidden="true" /><b>Gratis website en rebranding</b></li>
-                  <li><ShieldCheck size={15} aria-hidden="true" /><Link to="/veiligheid" onClick={() => meet("veiligheid")}>Veilig</Link></li>
+                  <li><ShieldCheck size={15} aria-hidden="true" /><Link to="/veiligheid" onClick={() => meet("veiligheid")}><span>Veilig</span></Link></li>
                   <li><ShieldCheck size={15} aria-hidden="true" />Eigen beheer en keuzes</li>
                 </ul>
               </div>

@@ -29,7 +29,10 @@
 .sn-site .sn-bestaand .bs-zeker{display:flex;flex-wrap:wrap;gap:8px 20px;margin:16px 0 0;padding:0;list-style:none}
 .sn-site .sn-bestaand .bs-zeker li{display:flex;align-items:center;gap:7px;font-size:14px;color:#c8d8ce}
 .sn-site .sn-bestaand .bs-zeker svg{color:var(--green)}
-.sn-site .sn-bestaand .bs-zeker a{color:#fff;border-bottom:1px solid #25d36688}
+/* 21 oktober 2026: op een aanraakscherm geeft index.css elke link min-height 44px. De streep zit daarom op de tekst
+   en de link centreert die tekst, zodat "Veilig" op één lijn met zijn vinkje staat en het tikvlak 44px blijft. */
+.sn-site .sn-bestaand .bs-zeker a{display:inline-flex;align-items:center;color:#fff}
+.sn-site .sn-bestaand .bs-zeker a>span{border-bottom:1px solid #25d36688}
 .sn-site .sn-bestaand .service.connect>.action .pill{width:max-content;max-width:100%;gap:16px;white-space:nowrap}
 .sn-site .sn-bestaand .bs-uitleg-hulp strong{display:block;margin-bottom:4px;color:var(--blue)}
 .sn-site .sn-bestaand .bs-switch{display:inline-flex;gap:4px;margin:14px 0 0;padding:4px;border:1px solid #2a3b31;border-radius:999px;background:#07100b}
