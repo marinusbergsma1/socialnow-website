@@ -1,0 +1,15 @@
+ROOD   375px aanraak: "Veilig" midden op zijn vinkje (verschil -12 px)
+ROOD   375px aanraak: "Veilig" op dezelfde regel als "Gratis website en rebranding" (verschil -11.8 px)
+ROOD   375px aanraak: groene streep direct onder de tekst (26 px)
+GROEN  375px aanraak: letterdikte en -grootte gelijk aan "Eigen beheer en keuzes" (400/14px tegen 400/14px)
+GROEN  375px aanraak: tikvlak minstens 44 px (44 px)
+GROEN  375px muis: "Veilig" midden op zijn vinkje (verschil -0.6 px)
+GROEN  375px muis: "Veilig" op dezelfde regel als "Gratis website en rebranding" (verschil -0.5 px)
+GROEN  375px muis: groene streep direct onder de tekst (3.3 px)
+GROEN  375px muis: letterdikte en -grootte gelijk aan "Eigen beheer en keuzes" (400/14px tegen 400/14px)
+GROEN  1440px: "Veilig" midden op zijn vinkje (verschil -0.6 px)
+GROEN  1440px: "Veilig" op dezelfde regel als "Gratis website en rebranding" (verschil -0.5 px)
+GROEN  1440px: groene streep direct onder de tekst (3.3 px)
+GROEN  1440px: letterdikte en -grootte gelijk aan "Eigen beheer en keuzes" (400/14px tegen 400/14px)
+
+3 eis(en) rood
