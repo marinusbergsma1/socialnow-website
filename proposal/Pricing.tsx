@@ -145,8 +145,8 @@ const VERGELIJK: { groep: string; regels: [string, number][] }[] = [
   { groep: "Advertenties", regels: [["Meta Ads: campagnes, doelgroepen en retargeting", 1], ["Leads direct in je CRM", 1], ["A/B-tests op je advertenties", 1], ["Google Ads: Search, Shopping en Performance Max", 2], ["Landingspagina's voor je campagnes", 2], ["Eén rapport voor elk kanaal", 2]] },
   { groep: "Begeleiding", regels: [["Vast aanspreekpunt uit ons team", 0], ["Persoonlijke call met uitleg van je systeem", 0], ["Maandelijkse strategiesessie", 1], ["Wekelijkse optimalisatie van je campagnes", 1]] },
   { groep: "Financiën", regels: [["Boekhouding en accounting", 3], ["Hulp binnen Odoo: inrichting en vragen", 3]] },
-  // 20 oktober 2026 (Marinus): "Niet tevreden? 1 maand gratis" bij elk pakket, ook Start, bij echte ontevredenheid.
-  { groep: "Afspraken", regels: [["Niet tevreden? 1 maand gratis", 0]] },
+  // 20 oktober 2026 (Marinus): "Geen groei? 1 maand gratis" bij elk pakket, ook Start, bij echte ontevredenheid.
+  { groep: "Afspraken", regels: [["Geen groei? 1 maand gratis", 0]] },
 ];
 
 function Vergelijk() {
@@ -221,7 +221,7 @@ export const CONNECT: Pakket[] = [
       { tekst: "Strategiesessie en wekelijkse optimalisatie", uit: true },
       { tekst: "Google Ads en landingspagina's", uit: true },
       { tekst: "Boekhouding en hulp binnen Odoo", uit: true },
-      { tekst: "Niet tevreden? 1 maand gratis" },
+      { tekst: "Geen groei? 1 maand gratis" },
       { tekst: "Geen minimum mediabudget" },
     ],
     team: ["marinus"],
@@ -244,7 +244,7 @@ export const CONNECT: Pakket[] = [
       { tekst: "Strategiesessie en wekelijkse optimalisatie" },
       { tekst: "Google Ads en landingspagina's", uit: true },
       { tekst: "Boekhouding en hulp binnen Odoo", uit: true },
-      { tekst: "Niet tevreden? 1 maand gratis", sterk: true },
+      { tekst: "Geen groei? 1 maand gratis", sterk: true },
       { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
     team: ["marinus", "jos", "sergio"],
@@ -269,7 +269,7 @@ export const CONNECT: Pakket[] = [
       { tekst: "Strategiesessie en wekelijkse optimalisatie" },
       { tekst: "Google Ads en landingspagina's", sterk: true },
       { tekst: "Boekhouding en hulp binnen Odoo", uit: true },
-      { tekst: "Niet tevreden? 1 maand gratis" },
+      { tekst: "Geen groei? 1 maand gratis" },
       { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
     team: ["marinus", "jos", "sergio", "nick"],
@@ -292,7 +292,7 @@ export const CONNECT: Pakket[] = [
       { tekst: "Strategiesessie en wekelijkse optimalisatie" },
       { tekst: "Google Ads en landingspagina's" },
       { tekst: "Boekhouding en hulp binnen Odoo", sterk: true },
-      { tekst: "Niet tevreden? 1 maand gratis" },
+      { tekst: "Geen groei? 1 maand gratis" },
       { tekst: "Mediabudget vanaf €1.000 per maand" },
     ],
     team: ["marinus", "jos", "sergio", "nick", "steef"],
@@ -457,8 +457,8 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
             Minimaal €1000,- ad spend wel voor ads per maand bij alles vanaf Meta." */}
         <ul className="prijs-voorwaarden">
           <li><b>Altijd 3 maanden</b><span>Elk pakket loopt per periode van 3 maanden.</span></li>
-          {/* 20 oktober 2026 (Marinus): "op het moment dat ze écht niet tevreden zijn [...] dat is een mooie belofte". Voor elk pakket, ook Start. */}
-          <li><b>Niet tevreden? 1 maand gratis</b><span>Bij elk pakket: ben je echt niet tevreden over je periode, dan werken we 1 maand gratis door.</span></li>
+          {/* 21 oktober 2026 (Marinus): "As a growth partner we garentee growth. If not you still own everything and even get one month of." Voor elk pakket, ook Start. */}
+          <li><b>Geen groei? 1 maand gratis</b><span>Bij elk pakket garanderen we groei. Groei je in je periode niet, dan werken we 1 maand gratis door.</span></li>
           <li><b>Mediabudget vanaf €1.000</b><span>Vanaf Meta betaal je zelf minimaal €1.000 per maand aan advertenties.</span></li>
         </ul>
       </Rij>
