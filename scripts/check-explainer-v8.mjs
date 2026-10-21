@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-// Proef: de site-explainer v8 (20 okt 2026, 3:05, uit code): v7 plus hoe SocialNow OS en SocialNow Connect samenwerken,
+// Proef: de site-explainer v8 (21 okt 2026, 3:15, uit code): v7 plus hoe SocialNow OS en SocialNow Connect samenwerken,
 // wie eraan bouwt (SocialNow, INDEXWORLD, Uncanny, Komen Consultancy Operation Systems, Attesso) en wat het kost (custom OS en prijzen).
 // Bron: 04_OS-VIDEO/video-project/81-explainer-v8 (bouw_v8.py). Webteksten: 81-explainer-v8/werk/02-webtekst.md (DEFINITIEF).
 // Eisen: 1) de speler laadt de nieuwe versie (cache-versie 20261020-v8) voor video én poster;
-//        2) het videobestand is de nieuwe film (180–190 s, niet v7 van 146,3 s) en precies de webversie van proef02 (sha256);
+//        2) het videobestand is de nieuwe film (190–200 s, niet v7 van 146,3 s) en precies de webversie van eind03a (sha256);
 //        3) webgeschikt: H.264 1280×720, AAC, moov vóór mdat (snel starten), kleiner dan 40 MB; poster 1280×720;
 //        4) de regel onder de speler en het blok "Samen bouwen" (rollen, verbetercyclus, wie wat ziet) staan in de bron en in en.json;
 //        5) niets meer van wat 01-bronnen §3b schrapt ("drie bedrijven", CPA-leiding, "direct in jouw systemen").
@@ -13,7 +13,7 @@ import { execFileSync } from "node:child_process";
 import crypto from "node:crypto";
 
 const VERSIE = "20261020-v8";
-const SHA = "47aa4b1c45206d1c75a9e1bb5c86429fa960d09d7028fa04487fe23c8651e610";   // renders/explainer-v8-proef02-web.mp4
+const SHA = "ca00d33d2863113a5af22dc1af1726a10171baeb3955807bfcc67d824a2f9a11";   // renders/explainer-v8-eind03a-web.mp4 (script 5.7, slot A)
 const VIDEO = "public/video/os/socialnow-os-explainer.mp4";
 const POSTER = "public/video/os/socialnow-os-explainer-poster.jpg";
 const fouten = [];
@@ -27,11 +27,11 @@ eis(speler.includes(`/video/os/socialnow-os-explainer-poster.jpg?v=${VERSIE}`), 
 const v = probe(VIDEO, ["-show_entries", "format=duration,size:stream=codec_type,codec_name,width,height"]);
 const duur = +v.format.duration, mb = +v.format.size / 1e6;
 const beeld = v.streams.find(s => s.codec_type === "video"), geluid = v.streams.find(s => s.codec_type === "audio");
-eis(duur > 180 && duur < 190, `video is de nieuwe film (180–190 s): ${duur.toFixed(1)} s`);
+eis(duur > 190 && duur < 200, `video is de nieuwe film (190–200 s): ${duur.toFixed(1)} s`);
 eis(beeld?.codec_name === "h264" && beeld.width === 1280 && beeld.height === 720, `H.264 1280×720: ${beeld?.codec_name} ${beeld?.width}×${beeld?.height}`);
 eis(geluid?.codec_name === "aac", `AAC-geluid: ${geluid?.codec_name}`);
 eis(mb < 40, `kleiner dan 40 MB: ${mb.toFixed(1)} MB`);
-eis(crypto.createHash("sha256").update(fs.readFileSync(VIDEO)).digest("hex") === SHA, "videobestand is de webversie van de v8-render (sha256)");
+eis(crypto.createHash("sha256").update(fs.readFileSync(VIDEO)).digest("hex") === SHA, "videobestand is de webversie van eind03a (sha256)");
 const kop = fs.readFileSync(VIDEO).subarray(0, 4096).toString("latin1");
 eis(kop.indexOf("moov") >= 0 && (kop.indexOf("mdat") < 0 || kop.indexOf("moov") < kop.indexOf("mdat")), "moov vóór mdat (faststart)");
 const p = probe(POSTER, ["-show_entries", "stream=width,height"]).streams[0];
