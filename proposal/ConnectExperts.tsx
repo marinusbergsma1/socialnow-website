@@ -5,6 +5,7 @@ import { people, expertGroepen } from "./content";
 import { klein } from "./licht";
 import { mailLink } from "./aanvragen";
 import { useLanguage } from "./i18n/context";
+import ExplainerPlayer from "./ExplainerPlayer";
 import "./connect-experts.css";
 
 // SocialNow Connect op de homepage, 18 oktober 2026.
@@ -39,6 +40,12 @@ export default function ConnectExperts() {
         {/* 19 oktober 2026, avond (Marinus): "verbeterd SocialNow/Connect met meer praten over ons als team". */}
         <p className="cx-team">Wij zijn het team achter SocialNow en Connect: strategen, developers, designers, ad-specialisten en financiële experts. Echte mensen die je bij naam kent en die meewerken in jouw OS.</p>
         <p className="cx-zin"><strong>{people.length}</strong> experts in <strong>{expertGroepen.length}</strong> vakgebieden. Zoek, vergelijk en kies zelf.</p>
+        {/* 21 oktober 2026 (Marinus): "Voor Connect dan gewoon een ijzersterke unieke video." De OS-film in de header verwijst hiernaar
+            ("Meet the experts in the Connect film below"). Bron: 04_OS-VIDEO/video-project/82-connect-film-v1. */}
+        <div className="cx-film">
+          <ExplainerPlayer kind="connect" ctaLabel="Bekijk de Connect-film" />
+          <p className="cx-film-onder">In één minuut: zelf je expert kiezen, wat een expert van je ziet, de pakketten en onze groeigarantie. Gesproken in het Engels.</p>
+        </div>
         <label className="cx-zoek">
           <Search size={18} aria-hidden="true" />
           <input type="search" value={zoek} onChange={(e) => zetZoek(e.target.value)} placeholder="Zoek op naam of vak, bijvoorbeeld Meta Ads" aria-label="Zoek een expert" />

@@ -203,8 +203,8 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
               </div>
             </div>
             <div onClickCapture={() => meet("explainer")}><ExplainerPlayer ctaLabel="Ontdek SocialNow" /></div>
-            {/* 20 oktober 2026: explainer v8 (81-explainer-v8/werk/02-webtekst.md §1). Eén regel onder de speler: wat de film laat zien. */}
-            <p className="bs-explainer-onder">In ruim drie minuten: wat je met OS en Connect doet, wie eraan bouwt en wat het kost. Gesproken in het Engels.</p>
+            {/* 21 oktober 2026: OS-film v9 (81-explainer-v8/werk/02-webtekst.md §1, versie 4). Eén regel onder de speler: wat de film laat zien. */}
+            <p className="bs-explainer-onder">In ruim twee minuten: wat je met het OS doet, wie het bouwt en wat het kost. Gesproken in het Engels.</p>
           </div>
         </section>
       </div>

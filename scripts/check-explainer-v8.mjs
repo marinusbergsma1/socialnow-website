@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-// Proef: de site-explainer v8 (21 okt 2026, 3:17, uit code): v7 plus hoe SocialNow OS en SocialNow Connect samenwerken,
+// Proef: de site-explainer v8 (21 okt 2026, OS-film v9 2:08 en Connect-film v1 1:02, uit code): v7 plus hoe SocialNow OS en SocialNow Connect samenwerken,
 // wie eraan bouwt (SocialNow, INDEXWORLD, Uncanny, Komen Consultancy Operation Systems, Attesso) en wat het kost (custom OS en prijzen).
 // Bron: 04_OS-VIDEO/video-project/81-explainer-v8 (bouw_v8.py). Webteksten: 81-explainer-v8/werk/02-webtekst.md (DEFINITIEF).
 // Eisen: 1) de speler laadt de nieuwe versie (cache-versie 20261020-v8) voor video én poster;
-//        2) het videobestand is de nieuwe film (190–200 s, niet v7 van 146,3 s) en precies de webversie van eind07a (sha256);
+//        2) het videobestand is de OS-film v9 (120–135 s, niet v7 van 146,3 s) en precies de webversie van v9-os01 (sha256);
 //        3) webgeschikt: H.264 1280×720, AAC, moov vóór mdat (snel starten), kleiner dan 40 MB; poster 1280×720;
 //        4) de regel onder de speler en het blok "Samen bouwen" (rollen, verbetercyclus, wie wat ziet) staan in de bron en in en.json;
 //        5) niets meer van wat 01-bronnen §3b schrapt ("drie bedrijven", CPA-leiding, "direct in jouw systemen").
@@ -12,8 +12,8 @@ import fs from "node:fs";
 import { execFileSync } from "node:child_process";
 import crypto from "node:crypto";
 
-const VERSIE = "20261021-v8";
-const SHA = "a290d01512bb3d8b57525974cad92c5eb4aa302363f81c702ca64c5ce5e9dcf8";   // renders/explainer-v8-eind07a-web.mp4 (script 5.8, slot A)
+const VERSIE = "20261021-v9";
+const SHA = "ec952eeee6848257d10213b5f957d24fc1ba81717234dbd49adc2b97a7224dbe";   // 81-explainer-v8/renders/explainer-v9-os01-web.mp4 (OS-film v9, 2:08)
 const VIDEO = "public/video/os/socialnow-os-explainer.mp4";
 const POSTER = "public/video/os/socialnow-os-explainer-poster.jpg";
 const fouten = [];
@@ -27,21 +27,39 @@ eis(speler.includes(`/video/os/socialnow-os-explainer-poster.jpg?v=${VERSIE}`), 
 const v = probe(VIDEO, ["-show_entries", "format=duration,size:stream=codec_type,codec_name,width,height"]);
 const duur = +v.format.duration, mb = +v.format.size / 1e6;
 const beeld = v.streams.find(s => s.codec_type === "video"), geluid = v.streams.find(s => s.codec_type === "audio");
-eis(duur > 190 && duur < 200, `video is de nieuwe film (190–200 s): ${duur.toFixed(1)} s`);
+eis(duur > 120 && duur < 135, `video is de OS-film v9 (120–135 s): ${duur.toFixed(1)} s`);
 eis(beeld?.codec_name === "h264" && beeld.width === 1280 && beeld.height === 720, `H.264 1280×720: ${beeld?.codec_name} ${beeld?.width}×${beeld?.height}`);
 eis(geluid?.codec_name === "aac", `AAC-geluid: ${geluid?.codec_name}`);
 eis(mb < 40, `kleiner dan 40 MB: ${mb.toFixed(1)} MB`);
-eis(crypto.createHash("sha256").update(fs.readFileSync(VIDEO)).digest("hex") === SHA, "videobestand is de webversie van eind07a (sha256)");
+eis(crypto.createHash("sha256").update(fs.readFileSync(VIDEO)).digest("hex") === SHA, "videobestand is de webversie van v9-os01 (sha256)");
 const kop = fs.readFileSync(VIDEO).subarray(0, 4096).toString("latin1");
 eis(kop.indexOf("moov") >= 0 && (kop.indexOf("mdat") < 0 || kop.indexOf("moov") < kop.indexOf("mdat")), "moov vóór mdat (faststart)");
 const p = probe(POSTER, ["-show_entries", "stream=width,height"]).streams[0];
 eis(p.width === 1280 && p.height === 720, `poster 1280×720: ${p.width}×${p.height}`);
 
+// tweede speler: de Connect-film in het Connect-blok (82-connect-film-v1), eigen poster en cachebuster
+const C_VERSIE = "20261021-c1", C_VIDEO = "public/video/connect/socialnow-connect-film.mp4", C_POSTER = "public/video/connect/socialnow-connect-film-poster.jpg";
+const C_SHA = "813b17859ee3c04e02c312510897f1e3b2760a5f918608be48028bad1d602744";   // 82-connect-film-v1/renders/connect-c1-01-web.mp4 (Connect-film v1, 1:02)
+const experts = fs.readFileSync("proposal/ConnectExperts.tsx", "utf8");
+eis(speler.includes(`/video/connect/socialnow-connect-film.mp4?v=${C_VERSIE}`) && speler.includes(`/video/connect/socialnow-connect-film-poster.jpg?v=${C_VERSIE}`), `Connect-speler laadt film en poster met ?v=${C_VERSIE}`);
+eis(/<ExplainerPlayer kind="connect"/.test(experts), "het Connect-blok (ConnectExperts.tsx) heeft de tweede speler");
+if (fs.existsSync(C_VIDEO) && fs.existsSync(C_POSTER)) {
+  const cv = probe(C_VIDEO, ["-show_entries", "format=duration,size:stream=codec_type,codec_name,width,height"]);
+  const cd = +cv.format.duration, cb = cv.streams.find(s => s.codec_type === "video"), cg = cv.streams.find(s => s.codec_type === "audio");
+  eis(cd > 55 && cd < 90 && cb?.codec_name === "h264" && cb.width === 1280 && cb.height === 720 && cg?.codec_name === "aac" && +cv.format.size < 15e6, `Connect-film 55–90 s, H.264 1280×720, AAC, < 15 MB: ${cd.toFixed(1)} s`);
+  eis(crypto.createHash("sha256").update(fs.readFileSync(C_VIDEO)).digest("hex") === C_SHA, "Connect-film is de webversie van de render (sha256)");
+  const ck = fs.readFileSync(C_VIDEO).subarray(0, 4096).toString("latin1");
+  eis(ck.indexOf("moov") >= 0 && (ck.indexOf("mdat") < 0 || ck.indexOf("moov") < ck.indexOf("mdat")), "Connect-film: moov vóór mdat (faststart)");
+  const cp = probe(C_POSTER, ["-show_entries", "stream=width,height"]).streams[0];
+  eis(cp.width === 1280 && cp.height === 720, `Connect-poster 1280×720: ${cp.width}×${cp.height}`);
+} else eis(false, "Connect-film en poster staan in public/video/connect/");
+
 // webteksten (NL in de bron, EN in en.json): 02-webtekst.md §1 en §2
 const TEKST = {
-  "In ruim drie minuten: wat je met OS en Connect doet, wie eraan bouwt en wat het kost. Gesproken in het Engels.":
-    "In just over three minutes: what you do with OS and Connect, who builds them and what it costs. Spoken in English.",
+  "In ruim twee minuten: wat je met het OS doet, wie het bouwt en wat het kost. Gesproken in het Engels.":
+    "In just over two minutes: what you do with the OS, who builds it and what it costs. Spoken in English.",
   "SocialNow en vier partners, elk met een eigen rol.": "SocialNow and four partners, each with its own role.",
+  "In één minuut: zelf je expert kiezen, wat een expert van je ziet, de pakketten en onze groeigarantie. Gesproken in het Engels.": "In one minute: choosing your own expert, what an expert sees, the packages and our growth guarantee. Spoken in English.",
   "Visie, stijl, UI/UX en AI-workflows. Wij keuren elke versie goed voor die live gaat.": "Vision, style, UI/UX and AI workflows. We approve every version before it goes live.",
   "Bouwt SocialNow OS en de gedeelde basis voor OS en Connect: accounts, rechten en audit.": "Builds SocialNow OS and the shared foundation for OS and Connect: accounts, permissions and audit.",
   "Bouwt SocialNow Connect als eigen app, op die gedeelde basis.": "Builds SocialNow Connect as its own app, on that shared foundation.",
@@ -54,7 +72,7 @@ const TEKST = {
   "Chatten met een expert opent nooit je OS.": "Chatting with an expert never opens your OS.",
   "Advertentiegeld binnen jouw budget.": "Ad spend within your budget.",
 };
-const bron = ["proposal/HeaderBestaand.tsx", "proposal/SamenEnVeilig.tsx"].map(f => fs.readFileSync(f, "utf8")).join("\n");
+const bron = ["proposal/HeaderBestaand.tsx", "proposal/SamenEnVeilig.tsx", "proposal/ConnectExperts.tsx"].map(f => fs.readFileSync(f, "utf8")).join("\n");
 const en = JSON.parse(fs.readFileSync("proposal/i18n/en.json", "utf8"));
 for (const [nl, eng] of Object.entries(TEKST)) eis(bron.includes(nl) && en[nl] === eng, `NL in de bron en EN in en.json: ${nl.slice(0, 48)}…`);
 for (const taal of ["de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
