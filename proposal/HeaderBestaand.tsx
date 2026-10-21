@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Check, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Check, LayoutDashboard, ShieldCheck, Users } from "lucide-react";
 import { klein } from "./licht";
 import { people } from "./content";
 import { GRATIS_OS_URL } from "./os-entry";
@@ -119,6 +119,9 @@ function pijltjes(e: React.KeyboardEvent<HTMLElement>, ids: string[], nu: string
 export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void }) {
   const { language, t } = useLanguage();
   const [modus, setModus] = useState<"os" | "custom">("os");
+  // 21 oktober 2026 (Marinus): "kleine switch boven de explainer video in de header wat een beeld geeft hoe ze m kunnen switchen
+  // tussen de 2 video's." Eén speler; de schakelaar wisselt film, poster en de regel eronder. Standaard de OS-film.
+  const [film, setFilm] = useState<"os" | "connect">("os");
   const [custom, setCustom] = useState(CUSTOM[0].id);
   return (
     <div className="sn-choice sn-bestaand" data-variant="bestaand">
@@ -202,7 +205,24 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 </ul>
               </div>
             </div>
-            <div onClickCapture={() => meet("explainer")}><ExplainerPlayer ctaLabel="Ontdek SocialNow" /></div>
+            <div className="bs-filmkeuze" role="group" aria-label="Kies een film">
+              <button type="button" className={`bs-film-os${film === "os" ? " is-aan" : ""}`} aria-pressed={film === "os"} onClick={() => setFilm("os")}>
+                <LayoutDashboard size={15} aria-hidden="true" /><span translate="no">SocialNow OS</span>
+              </button>
+              <button type="button" className={`bs-film-connect${film === "connect" ? " is-aan" : ""}`} aria-pressed={film === "connect"} onClick={() => setFilm("connect")}>
+                <Users size={15} aria-hidden="true" /><span translate="no">SocialNow Connect</span>
+              </button>
+            </div>
+            <div onClickCapture={() => meet("explainer")}>
+              {film === "os"
+                ? <ExplainerPlayer key="os" ctaLabel="Ontdek SocialNow" />
+                : <ExplainerPlayer key="connect" kind="connect" ctaLabel="Bekijk de Connect-film" />}
+            </div>
+            {/* 21 oktober 2026: OS-film v9 (81-explainer-v8/werk/02-webtekst.md §1, versie 4) en Connect-film v1 (82-connect-film-v1/werk/02-webtekst.md).
+                De regel onder de speler wisselt mee; de ruimte is vast, zodat de layout niet verspringt. */}
+            <p className="bs-explainer-onder">{film === "os"
+              ? "In ruim twee minuten: wat je met het OS doet, wie het bouwt en wat het kost. Gesproken in het Engels."
+              : "In één minuut: zelf je expert kiezen, wat een expert van je ziet, de pakketten en onze groeigarantie. Gesproken in het Engels."}</p>
           </div>
         </section>
       </div>

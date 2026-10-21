@@ -36,9 +36,12 @@ export default function ConnectExperts() {
       <div className="cx-boven">
         <p className="cx-label">Ons team</p>
         <h2 id="team-titel">Vind je expert.</h2>
-        {/* 19 oktober 2026, avond (Marinus): "verbeterd SocialNow/Connect met meer praten over ons als team". */}
-        <p className="cx-team">Wij zijn het team achter SocialNow en Connect: strategen, developers, designers, ad-specialisten en financiële experts. Echte mensen die je bij naam kent en die meewerken in jouw OS.</p>
+        {/* 19 oktober 2026, avond (Marinus): "verbeterd SocialNow/Connect met meer praten over ons als team". 21 oktober 2026: tweede zin volgt de
+            Connect-film (82-connect-film-v1/werk/02-webtekst.md 1.10): experts zien alleen wat je per opdracht deelt. */}
+        <p className="cx-team">Wij zijn het team achter SocialNow en Connect: strategen, developers, designers, ad-specialisten en financiële experts. Echte mensen die je bij naam kent, en die alleen zien wat jij per opdracht deelt.</p>
         <p className="cx-zin"><strong>{people.length}</strong> experts in <strong>{expertGroepen.length}</strong> vakgebieden. Zoek, vergelijk en kies zelf.</p>
+        {/* 21 oktober 2026 (Marinus): "Dan moet nog even video eronder eruit ... die moet met switch te changen zijn." De Connect-film
+            staat alleen nog in de header, achter de schakelaar SocialNow OS / SocialNow Connect (HeaderBestaand.tsx). */}
         <label className="cx-zoek">
           <Search size={18} aria-hidden="true" />
           <input type="search" value={zoek} onChange={(e) => zetZoek(e.target.value)} placeholder="Zoek op naam of vak, bijvoorbeeld Meta Ads" aria-label="Zoek een expert" />

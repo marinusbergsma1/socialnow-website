@@ -4,10 +4,11 @@
 // Daarna: "Graag logo's gewoon in kleur."
 // Gebruik: node scripts/check-partners-samen.mjs [--dist]   (rood op main vóór de wijziging, groen erna)
 import fs from "node:fs";
-const KOP_IW = "Boekhouding en ERP, nagekeken door accountants.", KOP_UN = "Webshop, CRM en ERP echt aan elkaar gekoppeld.";
+// 20 oktober 2026, explainer v8 (81-explainer-v8/werk/02-webtekst.md §2b): nieuwe koppen zonder CPA- en koppelingsclaim, in alle 10 talen.
+const KOP_IW = "Het OS en de gedeelde basis, gebouwd door Odoo-specialisten.", KOP_UN = "Connect, gebouwd als eigen app.";
 const BALK = { Indexworld: ["claude.png", "odoo-partner.webp", "sage.svg", "quickbooks.png"], Uncanny: ["odoo.svg", "shopify.svg", "salesforce.svg", "adobe.svg"] };
 const CIJFERS = ["150+ klanten", "3 continenten", "135+ klanten", "250+ projecten", "60+ tech-experts"];
-const EN = { [KOP_IW]: "Accounting and ERP, checked by accountants.", [KOP_UN]: "Webshop, CRM and ERP truly connected." };
+const EN = { [KOP_IW]: "The OS and its shared foundation, built by Odoo specialists.", [KOP_UN]: "Connect, built as its own app." };
 const TALEN = ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"];
 const fouten = [];
 const eis = (ok, tekst) => { console.log(`${ok ? "GROEN" : "ROOD "}  ${tekst}`); if (!ok) fouten.push(tekst); };

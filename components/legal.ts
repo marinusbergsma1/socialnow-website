@@ -12,6 +12,10 @@ export type Language = "en" | "nl" | "de" | "fr" | "it" | "es" | "pt" | "pl" | "
 export type Section = { title: string; paragraphs: string[]; bullets?: string[][] };
 export type LegalDoc = { title: string; intro: string; updated: string; sections: Section[] };
 
+// 20 oktober 2026 (Marinus, review 9.2 en 9.4): artikel 15 eigendom na betaling van wat voor de klant is gemaakt, eigen account en data;
+// inzage door het team alleen lezen en gelogd (api/_platform-toegang.js, geen toestemmingsstap). 21 oktober: artikel 8 groeigarantie
+// bij de Connect-pakketten (review 14.1). LEGAL_VERSION bewust niet
+// opgehoogd: dat toont iedere bezoeker opnieuw de akkoordpopup; dat besluit ligt bij Marinus (zie PR).
 export const LEGAL_VERSION = "2026-10-14";
 
 import { privacyNl, privacyEn } from "./legal-privacy";
@@ -21,7 +25,7 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
   "nl": {
     "title": "Algemene voorwaarden",
     "intro": "Deze voorwaarden gelden voor elke offerte, overeenkomst en elk gebruik van SocialNow OS. Bij aanmelding voor het OS ga je hiermee akkoord.",
-    "updated": "Laatst bijgewerkt: 14 oktober 2026",
+    "updated": "Laatst bijgewerkt: 20 oktober 2026",
     "sections": [
       {
         "title": "1. Definities",
@@ -68,7 +72,8 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
       {
         "title": "8. Revisies en garantie",
         "paragraphs": [
-          "Is het recht op revisies overeengekomen, dan kan opdrachtnemer per geval extra revisies toestaan als de opmerkingen van opdrachtgever redelijk zijn. Beide partijen kunnen de overeenkomst schriftelijk of per e-mail opzeggen. Zegt opdrachtgever tussentijds op, dan betaalt hij het bedrag uit de aanvullende voorwaarden en anders de declaraties voor het tot dan verrichte werk. Zegt opdrachtnemer op, dan draagt hij in overleg zorg voor overdracht van het resterende werk, tenzij de opzegging aan opdrachtgever toerekenbaar is; extra kosten van overdracht zijn voor opdrachtgever."
+          "Is het recht op revisies overeengekomen, dan kan opdrachtnemer per geval extra revisies toestaan als de opmerkingen van opdrachtgever redelijk zijn. Beide partijen kunnen de overeenkomst schriftelijk of per e-mail opzeggen. Zegt opdrachtgever tussentijds op, dan betaalt hij het bedrag uit de aanvullende voorwaarden en anders de declaraties voor het tot dan verrichte werk. Zegt opdrachtnemer op, dan draagt hij in overleg zorg voor overdracht van het resterende werk, tenzij de opzegging aan opdrachtgever toerekenbaar is; extra kosten van overdracht zijn voor opdrachtgever.",
+          "Groeigarantie bij de Connect-pakketten. Bij de start van een Connect-pakket leggen partijen samen vast waarop groei wordt gemeten (bijvoorbeeld leads, bereik of omzet ten opzichte van de beginsituatie). Is er aan het einde van een periode van 3 maanden geen groei op dat punt, dan werkt opdrachtnemer één maand zonder kosten door. Dat is de enige vergoeding onder deze garantie; het eigendom volgens artikel 15 blijft gelden."
         ]
       },
       {
@@ -110,7 +115,10 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
       {
         "title": "15. Auteursrecht en intellectueel eigendom",
         "paragraphs": [
-          "Opdrachtnemer behoudt de rechten die hem op grond van de Auteurswet toekomen. Verstrekte stukken, ontwerpen, software en andere resultaten zijn uitsluitend bestemd voor gebruik door opdrachtgever en mogen zonder toestemming niet worden verveelvoudigd, openbaar gemaakt of aan derden verstrekt. Opdrachtnemer mag de kennis die hij door de werkzaamheden opdoet voor andere doeleinden gebruiken, zolang geen vertrouwelijke informatie bij derden terechtkomt. Opdrachtgever stemt ermee in dat zijn logo, de gemaakte ontwerpen en zijn ervaringen herkenbaar voor promotie worden gebruikt, tenzij die gevoelige of vertrouwelijke informatie bevatten; opdrachtgever kan daar bezwaar tegen maken, waarna opdrachtnemer de publicatie niet plaatst of waar mogelijk verwijdert."
+          "Na betaling worden de voor opdrachtgever gemaakte website, branding, content, advertenties en het voor hem ingerichte systeem zijn eigendom. Dat geldt bij een custom OS en bij elk pakket op SocialNow Connect. Software en materiaal van derden (zoals Odoo, stockbeelden, lettertypen en AI-diensten) en de standaardonderdelen van SocialNow OS vallen daar niet onder; daarvoor geldt de licentie van de leverancier of een gebruiksrecht.",
+          "Bij het gewone SocialNow OS is opdrachtgever eigenaar van zijn account en van de gegevens daarin. Het team van opdrachtnemer kan voor ondersteuning alleen lezen, en elke inzage wordt vastgelegd.",
+          "Opdrachtnemer mag de kennis die hij door de werkzaamheden opdoet voor andere doeleinden gebruiken, zolang geen vertrouwelijke informatie bij derden terechtkomt.",
+          "Opdrachtgever stemt ermee in dat zijn logo, de gemaakte ontwerpen en zijn ervaringen herkenbaar voor promotie worden gebruikt, tenzij die gevoelige of vertrouwelijke informatie bevatten; opdrachtgever kan daar bezwaar tegen maken, waarna opdrachtnemer de publicatie niet plaatst of waar mogelijk verwijdert."
         ]
       },
       {
@@ -155,7 +163,7 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
   "en": {
     "title": "Terms of Service",
     "intro": "These terms apply to every quote, agreement and every use of SocialNow OS. By creating an account in the OS you agree to them. The Dutch version is the binding one.",
-    "updated": "Last updated: 14 October 2026",
+    "updated": "Last updated: 20 October 2026",
     "sections": [
       {
         "title": "1. Definitions",
@@ -202,7 +210,8 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
       {
         "title": "8. Revisions and warranty",
         "paragraphs": [
-          "Where a right to revisions is agreed, the contractor may allow extra revisions case by case when the client's remarks are reasonable. Both parties may terminate the agreement in writing or by e-mail. If the client terminates early, the amount from the additional terms is due, or otherwise the invoices for the work done so far. If the contractor terminates, it arranges the handover of remaining work in consultation, unless the termination is attributable to the client; extra handover costs are for the client."
+          "Where a right to revisions is agreed, the contractor may allow extra revisions case by case when the client's remarks are reasonable. Both parties may terminate the agreement in writing or by e-mail. If the client terminates early, the amount from the additional terms is due, or otherwise the invoices for the work done so far. If the contractor terminates, it arranges the handover of remaining work in consultation, unless the termination is attributable to the client; extra handover costs are for the client.",
+          "Growth guarantee with the Connect packages. At the start of a Connect package, the parties agree together on what growth is measured by (for example leads, reach or revenue compared with the starting point). If at the end of a 3-month period there is no growth on that point, the contractor keeps working for one month at no cost. That is the only remedy under this guarantee; ownership under article 15 still applies."
         ]
       },
       {
@@ -244,7 +253,10 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
       {
         "title": "15. Copyright and intellectual property",
         "paragraphs": [
-          "The contractor keeps the rights it holds under copyright law. Supplied documents, designs, software and other results are meant only for use by the client and may not be reproduced, published or passed to third parties without permission. The contractor may use the knowledge gained through the work for other purposes as long as no confidential information reaches third parties. The client agrees that its logo, the designs made and its experiences may be used recognisably for promotion, unless they contain sensitive or confidential information; the client may object, after which the contractor does not publish or removes where possible."
+          "After payment, the website, branding, content and ads made for the client and the system set up for it become the client's property. This applies to a custom OS and to every package on SocialNow Connect. Software and material of third parties (such as Odoo, stock images, fonts and AI services) and the standard components of SocialNow OS are not included; for those, the supplier's licence or a right of use applies.",
+          "With the standard SocialNow OS, the client owns its account and the data in it. The contractor's team can only read for support, and every look is logged.",
+          "The contractor may use the knowledge gained through the work for other purposes as long as no confidential information reaches third parties.",
+          "The client agrees that its logo, the designs made and its experiences may be used recognisably for promotion, unless they contain sensitive or confidential information; the client may object, after which the contractor does not publish or removes where possible."
         ]
       },
       {

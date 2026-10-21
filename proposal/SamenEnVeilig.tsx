@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Download, GraduationCap, Rocket, ShieldCheck, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, CircleDashed, Download, GraduationCap, Rocket, RotateCcw, ShieldCheck, X } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 import { ConnectLogo } from "./HomeHeader";
 import { DATA_DOCUMENT } from "./PixelInfrastructure";
@@ -67,10 +67,34 @@ const TEKST = {
   ],
   // 19 oktober 2026, avond (Marinus): "Moet de producten zijn en team van Connect voor de rest van het doorontwikkel verhaal."
   label: "Samen bouwen",
-  // 20 oktober 2026: met Attesso erbij zijn het drie bedrijven.
-  kop: "We verbeteren de producten met drie bedrijven.",
-  uitleg: "SocialNow OS ontwikkelen we samen met Indexworld en Attesso, Connect samen met Uncanny. De rest van de doorontwikkeling doen we met het team van Connect: wat zij in de praktijk tegenkomen, gaat als eerste de volgende versie in.",
-  partnersLabel: "Partners",
+  // 20 oktober 2026, explainer v8 (81-explainer-v8/werk/02-webtekst.md §2, DEFINITIEF): wie doet wat, hoe een verbetering loopt
+  // en wie wat ziet. "Drie bedrijven" klopte niet meer; "zij" zijn de klanten en experts die het in de praktijk gebruiken (01-bronnen §3a).
+  kop: "SocialNow en vier partners, elk met een eigen rol.",
+  uitleg: "SocialNow OS bouwen we samen met Indexworld, Connect samen met Uncanny. Wat klanten en experts in de praktijk tegenkomen, gaat als eerste de volgende versie in.",
+  // Claude, Odoo, Sage, QuickBooks, Shopify, Salesforce en Adobe zijn partners van Indexworld en Uncanny, niet van SocialNow (01-bronnen §3b).
+  partnersLabel: "Hun partners",
+  rollen: [
+    { wie: "SocialNow", rol: "Visie, stijl, UI/UX en AI-workflows. Wij keuren elke versie goed voor die live gaat." },
+    { wie: "Indexworld", rol: "Bouwt SocialNow OS en de gedeelde basis voor OS en Connect: accounts, rechten en audit." },
+    { wie: "Uncanny", rol: "Bouwt SocialNow Connect als eigen app, op die gedeelde basis." },
+    { wie: "Komen Consultancy Operation Systems", rol: "Brengt kennis van finance, data en operations." },
+    { wie: "Attesso", rol: "Ingebouwd, staat nog uit: agents geven advertentiegeld alleen uit binnen het budget dat jij goedkeurt. Los van betalingen aan experts via Stripe." },
+  ],
+  cyclusKop: "Zo wordt elke versie beter.",
+  cyclus: ["Idee en ontwerp", "Partners bouwen", "Review en tests door mensen", "Eerst een testomgeving, dan een kleine groep", "Feedback gaat als eerste de volgende versie in"],
+  cyclusRegel: "AI helpt bouwen en testen. Mensen beslissen en blijven verantwoordelijk; niemand keurt zijn eigen werk goed.",
+  // Status per punt (01-bronnen §3): 1 werkt al; 2 en 3 afgesproken architectuur; 4 en 5 nieuwe scope ("Volgende stap", nooit "binnenkort"); 6 afgesproken en werkt al.
+  toegangKop: "Jij bepaalt wie wat ziet.",
+  // Status per punt zichtbaar (review 6a.3): werkt al = groen vinkje, afgesproken = in ontwikkeling, nieuwe scope = volgende stap.
+  toegangStatus: { werkt: "Werkt al", bouwt: "In ontwikkeling", volgt: "Volgende stap" },
+  toegang: [
+    { status: "werkt", tekst: "Iedereen in je team krijgt een rol, en alleen de rechten die daarbij horen." },
+    { status: "bouwt", tekst: "Per opdracht kies jij wat een expert van Connect mag zien. Alleen lezen, tot de opdracht klaar is, en altijd in te trekken. Wijzigingen komen als voorstel bij jou." },
+    { status: "bouwt", tekst: "Chatten met een expert opent nooit je OS." },
+    { status: "volgt", tekst: "Volgende stap: gasttoegang. Nodig een expert uit in een deel van je OS, met een eigen login en alleen de rechten die jij geeft." },
+    { status: "volgt", tekst: "Volgende stap: Connect ook los, zonder OS." },
+    { status: "bouwt", tekst: "OS en Connect delen één basis, elk met eigen muren. Zware taken draaien apart, zodat je dagelijkse werk snel blijft. Zo is het ontworpen om kosten en groei beheersbaar te houden." },
+  ],
   vLabel: "Veiligheid en documentatie",
   vKop: "Zwart op wit hoe we je data beschermen.",
   alles: "Alles over veiligheid",
@@ -92,9 +116,10 @@ const TEKST = {
 const SAMEN = [
   {
     naam: "Indexworld", href: "https://indexworld.net", logo: "/images/home-header/indexworld.png", wit: true, product: "os",
-    kop: "Boekhouding en ERP, nagekeken door accountants.",
-    tekst: "Indexworld is een Odoo-partner onder leiding van registeraccountants (CPA) in de VS. Zij zorgen dat je cijfers in het OS kloppen en halen je boekhouding veilig over uit QuickBooks of Sage.",
-    cijfers: ["150+ klanten", "3 continenten", "Geleid door CPA's"],
+    kop: "Het OS en de gedeelde basis, gebouwd door Odoo-specialisten.",
+    // 20 oktober 2026 (02-webtekst §2b): geen CPA-leiding en geen overzetten uit QuickBooks of Sage (01-bronnen §3b).
+    tekst: "Indexworld is een Odoo-partner met boekhouding en ERP als kern. Zij bouwen SocialNow OS en de gedeelde basis voor accounts, rechten en audit.",
+    cijfers: ["150+ klanten", "3 continenten", "Odoo-partner"],
     partners: [
       { naam: "Claude", src: "/images/partners/samen/claude.png" },
       { naam: "Odoo", src: "/images/partners/samen/odoo-partner.webp", sub: "Partner" },
@@ -104,8 +129,9 @@ const SAMEN = [
   },
   {
     naam: "Uncanny", href: "https://uncannycs.com", logo: "/images/home-header/uncanny-op-zwart.svg", wit: false, product: "connect",
-    kop: "Webshop, CRM en ERP echt aan elkaar gekoppeld.",
-    tekst: "Uncanny is Odoo Silver Partner en Shopify-partner, met Salesforce- en Adobe-specialisten in huis. Zij bouwen de koppelingen achter Connect, zodat experts direct in jouw systemen werken.",
+    kop: "Connect, gebouwd als eigen app.",
+    // 20 oktober 2026 (02-webtekst §2b): experts krijgen alleen leestoegang per opdracht (ADR-013), dus geen koppelingen waarmee ze in je systemen werken.
+    tekst: "Uncanny is Odoo Silver Partner en Shopify-partner. Zij bouwen Connect: profielen, aanbod, opdrachten, betalen en vertrouwen.",
     cijfers: ["135+ klanten", "250+ projecten", "60+ tech-experts"],
     partners: [
       { naam: "Odoo Silver Partner", src: "/images/partners/samen/odoo.svg" },
@@ -120,9 +146,11 @@ const SAMEN = [
   // staat al op /team (TeamTrust.tsx). Attesso heeft geen beeldlogo, alleen het woordmerk ~/attesso.
   {
     naam: "Attesso", href: "https://www.attesso.com/", logo: "", wit: false, product: "os",
-    kop: "Betalingen door AI, veilig en aantoonbaar.",
-    tekst: "Attesso is de autorisatielaag voor agentic commerce. Je keurt de grenzen één keer goed; elke betaling die een AI-agent daarna doet, wordt daartegen gecontroleerd en ondertekend vastgelegd.",
-    cijfers: ["#1 agentic payment on SaaSHub", "Ondertekend bewijs", "Elke betaalvorm"],
+    // 20 oktober 2026 (02-webtekst §2b): de controle zit in het OS maar staat nog uit in productie; los van Stripe in Connect.
+    kop: "Advertentiegeld binnen jouw budget.",
+    tekst: "Jij keurt één keer een budget goed. Attesso controleert elke advertentie-uitgave van een agent daartegen en legt die ondertekend vast. Het zit al in het OS, maar staat nog uit. Betalingen aan experts in Connect lopen apart, via Stripe.",
+    // Het cijfer over alle betaalvormen is weg: Attesso gaat hier alleen over advertentie-uitgaven van agents (01-bronnen §2); "#1" mag blijven met de bestaande bron.
+    cijfers: ["Meta en Google", "Eén budget per platform", "Ondertekend bewijs", "#1 agentic payment on SaaSHub"],
     partners: [],
     praat: [
       { naam: "Visa", href: "https://www.visa.nl", src: "/images/partners/betalen/visa.svg" },
@@ -141,6 +169,12 @@ const documenten = (taal: Taal) => [
   { naam: "Sleutelbelofte", href: doc("sleutelbelofte", taal), meta: "PDF" },
   { naam: "Privacybeleid", href: doc("privacy", taal), meta: "PDF" },
 ];
+
+// Status van een punt in "Jij bepaalt wie wat ziet": vinkje voor wat al werkt, open cirkel voor wat we bouwen, pijl voor de volgende stap.
+function Status({ status, label }: { status: "werkt" | "bouwt" | "volgt"; label?: string }) {
+  const Icoon = status === "werkt" ? Check : status === "bouwt" ? CircleDashed : ArrowRight;
+  return <Icoon className={`sn-samen-status sn-samen-status-${status}`} size={16} aria-label={label} aria-hidden={label ? undefined : true} />;
+}
 
 // Vlaggen als eigen svg: emoji-vlaggen tonen op Windows alleen twee letters.
 function Vlag({ land }: { land: string }) {
@@ -204,6 +238,9 @@ export default function SamenEnVeilig() {
           <p className="sn-samen-label"><i />{t.label}</p>
           <h3 id="sn-samen-kop">{t.kop}</h3>
           <p className="sn-samen-uitleg">{t.uitleg}</p>
+          <ul className="sn-samen-rollen">
+            {t.rollen.map(r => <li key={r.wie}><strong translate="no">{r.wie}</strong><span>{r.rol}</span></li>)}
+          </ul>
           <div className="sn-samen-paren">
             {SAMEN.map(b => (
               <article className="sn-samen-partner" key={b.naam}>
@@ -243,6 +280,19 @@ export default function SamenEnVeilig() {
                 )}
               </article>
             ))}
+          </div>
+          <div className="sn-samen-twee">
+            <div className="sn-samen-cyclus">
+              <h4>{t.cyclusKop}</h4>
+              {/* Een kring: elke stap wijst naar de volgende, de laatste terug naar het begin (complete pijlen). */}
+              <ol>{t.cyclus.map((stap, i) => <li key={stap}><span>{stap}</span>{i < t.cyclus.length - 1 ? <ArrowRight className="sn-samen-pijl" size={16} aria-hidden="true" /> : <RotateCcw className="sn-samen-pijl sn-samen-terug" size={16} aria-hidden="true" />}</li>)}</ol>
+              <p>{t.cyclusRegel}</p>
+            </div>
+            <div className="sn-samen-toegang">
+              <h4>{t.toegangKop}</h4>
+              <p className="sn-samen-legenda">{(["werkt", "bouwt", "volgt"] as const).map(st => <span key={st}><Status status={st} />{t.toegangStatus[st]}</span>)}</p>
+              <ul>{t.toegang.map(punt => <li key={punt.tekst} className={`sn-samen-${punt.status}`}><Status status={punt.status} label={t.toegangStatus[punt.status]} /><span>{punt.tekst}</span></li>)}</ul>
+            </div>
           </div>
         </div>
       </div>

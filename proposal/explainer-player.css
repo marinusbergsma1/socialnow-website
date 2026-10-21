@@ -6,3 +6,8 @@
 :root .sn-site .sn-video-compact{display:inline-block;width:auto;margin-top:16px;background:#102337;color:white}
 :root .sn-site .sn-video-compact>span{position:static;transform:none;background:transparent;border:0;padding:12px 16px;white-space:normal}
 @media(max-width:600px){.sn-video-toolbar{gap:8px;flex-wrap:wrap}.sn-video-toggle{padding:9px 10px}.sn-video-try{gap:8px;padding-left:10px}}
+
+/* 21 oktober 2026: de Connect-film in het Connect-blok krijgt een knop in Connect-blauw. */
+html:root .sn-site .sn-pill.sn-pill-connect{--sn-pill-green:#00739e;background:#00739e !important;border-color:#00739e !important;color:#fff !important}
+html:root .sn-site .sn-pill.sn-pill-connect > span:not(.h-button-icon){color:#fff !important;-webkit-text-fill-color:#fff !important}
+html:root .sn-site .sn-pill.sn-pill-connect .h-button-icon{background:#fff !important;color:#00739e !important}
