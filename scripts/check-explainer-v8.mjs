@@ -12,8 +12,8 @@ import fs from "node:fs";
 import { execFileSync } from "node:child_process";
 import crypto from "node:crypto";
 
-const VERSIE = "20261021-v9";
-const SHA = "ec952eeee6848257d10213b5f957d24fc1ba81717234dbd49adc2b97a7224dbe";   // 81-explainer-v8/renders/explainer-v9-os01-web.mp4 (OS-film v9, 2:08)
+const VERSIE = "20261021-os04";
+const SHA = "b049e5201edaeca96026ea573776459d3d8ebe11cce84e2ef4152b2c1a7e4012";   // 81-explainer-v8/renders/explainer-v9-os04-web.mp4 (OS-film v9, script 6.2, rustig bed, 2:11)
 const VIDEO = "public/video/os/socialnow-os-explainer.mp4";
 const POSTER = "public/video/os/socialnow-os-explainer-poster.jpg";
 const fouten = [];
@@ -31,7 +31,7 @@ eis(duur > 120 && duur < 135, `video is de OS-film v9 (120–135 s): ${duur.toFi
 eis(beeld?.codec_name === "h264" && beeld.width === 1280 && beeld.height === 720, `H.264 1280×720: ${beeld?.codec_name} ${beeld?.width}×${beeld?.height}`);
 eis(geluid?.codec_name === "aac", `AAC-geluid: ${geluid?.codec_name}`);
 eis(mb < 40, `kleiner dan 40 MB: ${mb.toFixed(1)} MB`);
-eis(crypto.createHash("sha256").update(fs.readFileSync(VIDEO)).digest("hex") === SHA, "videobestand is de webversie van v9-os01 (sha256)");
+eis(crypto.createHash("sha256").update(fs.readFileSync(VIDEO)).digest("hex") === SHA, "videobestand is de webversie van v9-os04 (sha256)");
 const kop = fs.readFileSync(VIDEO).subarray(0, 4096).toString("latin1");
 eis(kop.indexOf("moov") >= 0 && (kop.indexOf("mdat") < 0 || kop.indexOf("moov") < kop.indexOf("mdat")), "moov vóór mdat (faststart)");
 const p = probe(POSTER, ["-show_entries", "stream=width,height"]).streams[0];
