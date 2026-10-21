@@ -13,7 +13,8 @@ export type Section = { title: string; paragraphs: string[]; bullets?: string[][
 export type LegalDoc = { title: string; intro: string; updated: string; sections: Section[] };
 
 // 20 oktober 2026 (Marinus, review 9.2 en 9.4): artikel 15 eigendom na betaling van wat voor de klant is gemaakt, eigen account en data;
-// inzage door het team alleen lezen en gelogd (api/_platform-toegang.js, geen toestemmingsstap). LEGAL_VERSION bewust niet
+// inzage door het team alleen lezen en gelogd (api/_platform-toegang.js, geen toestemmingsstap). 21 oktober: artikel 8 groeigarantie
+// bij de Connect-pakketten (review 14.1). LEGAL_VERSION bewust niet
 // opgehoogd: dat toont iedere bezoeker opnieuw de akkoordpopup; dat besluit ligt bij Marinus (zie PR).
 export const LEGAL_VERSION = "2026-10-14";
 
@@ -71,7 +72,8 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
       {
         "title": "8. Revisies en garantie",
         "paragraphs": [
-          "Is het recht op revisies overeengekomen, dan kan opdrachtnemer per geval extra revisies toestaan als de opmerkingen van opdrachtgever redelijk zijn. Beide partijen kunnen de overeenkomst schriftelijk of per e-mail opzeggen. Zegt opdrachtgever tussentijds op, dan betaalt hij het bedrag uit de aanvullende voorwaarden en anders de declaraties voor het tot dan verrichte werk. Zegt opdrachtnemer op, dan draagt hij in overleg zorg voor overdracht van het resterende werk, tenzij de opzegging aan opdrachtgever toerekenbaar is; extra kosten van overdracht zijn voor opdrachtgever."
+          "Is het recht op revisies overeengekomen, dan kan opdrachtnemer per geval extra revisies toestaan als de opmerkingen van opdrachtgever redelijk zijn. Beide partijen kunnen de overeenkomst schriftelijk of per e-mail opzeggen. Zegt opdrachtgever tussentijds op, dan betaalt hij het bedrag uit de aanvullende voorwaarden en anders de declaraties voor het tot dan verrichte werk. Zegt opdrachtnemer op, dan draagt hij in overleg zorg voor overdracht van het resterende werk, tenzij de opzegging aan opdrachtgever toerekenbaar is; extra kosten van overdracht zijn voor opdrachtgever.",
+          "Groeigarantie bij de Connect-pakketten. Bij de start van een Connect-pakket leggen partijen samen vast waarop groei wordt gemeten (bijvoorbeeld leads, bereik of omzet ten opzichte van de beginsituatie). Is er aan het einde van een periode van 3 maanden geen groei op dat punt, dan werkt opdrachtnemer één maand zonder kosten door. Dat is de enige vergoeding onder deze garantie; het eigendom volgens artikel 15 blijft gelden."
         ]
       },
       {
@@ -208,7 +210,8 @@ export const terms: Partial<Record<Language, LegalDoc>> & { nl: LegalDoc; en: Le
       {
         "title": "8. Revisions and warranty",
         "paragraphs": [
-          "Where a right to revisions is agreed, the contractor may allow extra revisions case by case when the client's remarks are reasonable. Both parties may terminate the agreement in writing or by e-mail. If the client terminates early, the amount from the additional terms is due, or otherwise the invoices for the work done so far. If the contractor terminates, it arranges the handover of remaining work in consultation, unless the termination is attributable to the client; extra handover costs are for the client."
+          "Where a right to revisions is agreed, the contractor may allow extra revisions case by case when the client's remarks are reasonable. Both parties may terminate the agreement in writing or by e-mail. If the client terminates early, the amount from the additional terms is due, or otherwise the invoices for the work done so far. If the contractor terminates, it arranges the handover of remaining work in consultation, unless the termination is attributable to the client; extra handover costs are for the client.",
+          "Growth guarantee with the Connect packages. At the start of a Connect package, the parties agree together on what growth is measured by (for example leads, reach or revenue compared with the starting point). If at the end of a 3-month period there is no growth on that point, the contractor keeps working for one month at no cost. That is the only remedy under this guarantee; ownership under article 15 still applies."
         ]
       },
       {

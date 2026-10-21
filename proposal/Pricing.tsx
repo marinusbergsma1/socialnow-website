@@ -145,7 +145,7 @@ const VERGELIJK: { groep: string; regels: [string, number][] }[] = [
   { groep: "Advertenties", regels: [["Meta Ads: campagnes, doelgroepen en retargeting", 1], ["Leads direct in je CRM", 1], ["A/B-tests op je advertenties", 1], ["Google Ads: Search, Shopping en Performance Max", 2], ["Landingspagina's voor je campagnes", 2], ["Eén rapport voor elk kanaal", 2]] },
   { groep: "Begeleiding", regels: [["Vast aanspreekpunt uit ons team", 0], ["Persoonlijke call met uitleg van je systeem", 0], ["Maandelijkse strategiesessie", 1], ["Wekelijkse optimalisatie van je campagnes", 1]] },
   { groep: "Financiën", regels: [["Boekhouding en accounting", 3], ["Hulp binnen Odoo: inrichting en vragen", 3]] },
-  // 20 oktober 2026 (Marinus): "Geen groei? 1 maand gratis" bij elk pakket, ook Start, bij echte ontevredenheid.
+  // 21 oktober 2026 (Marinus): groeigarantie, "Geen groei? 1 maand gratis" bij elk pakket, ook Start; afgebakend in voorwaarden artikel 8.
   { groep: "Afspraken", regels: [["Geen groei? 1 maand gratis", 0]] },
 ];
 
