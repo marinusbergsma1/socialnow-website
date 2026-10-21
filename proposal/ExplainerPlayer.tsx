@@ -33,7 +33,7 @@ export default function ExplainerPlayer({ kind = "explainer", compact = false, c
   return <>
     <button className={`sn-explainer-cover${compact ? " sn-video-compact" : ""}${connect ? " sn-explainer-connect" : ""}`} type="button" onClick={open} aria-label={label}>
       {!compact && <img src={poster} alt="" width="1280" height="720" />}
-      <span className="sn-pill"><span>{label}</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span></span>
+      <span className={`sn-pill${connect ? " sn-pill-connect" : ""}`}><span>{label}</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span></span>
     </button>
     <dialog className="sn-video-dialog" ref={dialog} onClose={restore} onCancel={restore} aria-label={naam} onClick={e => { if (e.target === dialog.current) { dialog.current.close(); restore(); } }}>
       <div className="sn-video-shell">
@@ -46,7 +46,7 @@ export default function ExplainerPlayer({ kind = "explainer", compact = false, c
             {paused ? <Play size={20} aria-hidden="true" /> : <Pause size={20} aria-hidden="true" />}{paused ? "Afspelen" : "Pauzeren"}
           </button>
           {connect
-            ? <button type="button" className="sn-pill sn-video-try" aria-haspopup="dialog" onClick={() => { dialog.current?.close(); restore(); openPlanCall(); }}><span>Plan een call</span><span className="h-button-icon"><ArrowUpRight size={21} aria-hidden="true" /></span></button>
+            ? <button type="button" className="sn-pill sn-video-try sn-pill-connect" aria-haspopup="dialog" onClick={() => { dialog.current?.close(); restore(); openPlanCall(); }}><span>Plan een call</span><span className="h-button-icon"><ArrowUpRight size={21} aria-hidden="true" /></span></button>
             : <a className="sn-pill sn-video-try" href="https://app.socialnow.nl/login/" translate="no"><span>Try it yourself</span><span className="h-button-icon"><ArrowUpRight size={21} aria-hidden="true" /></span></a>}
         </header>
         <video ref={video} controls playsInline controlsList="nofullscreen" disablePictureInPicture preload="metadata" poster={poster} aria-label={story ? "Ons verhaal" : `${naam} (Engels)`} onPlay={() => setPaused(false)} onPause={() => setPaused(true)} onEnded={() => setPaused(true)}><source src={movie} type="video/mp4" /></video>
