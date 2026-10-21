@@ -38,7 +38,7 @@ const p = probe(POSTER, ["-show_entries", "stream=width,height"]).streams[0];
 eis(p.width === 1280 && p.height === 720, `poster 1280×720: ${p.width}×${p.height}`);
 
 // tweede speler: de Connect-film in het Connect-blok (82-connect-film-v1), eigen poster en cachebuster
-const C_VERSIE = "20261021-c1", C_VIDEO = "public/video/connect/socialnow-connect-film.mp4", C_POSTER = "public/video/connect/socialnow-connect-film-poster.jpg";
+const C_VERSIE = "20261021-c2", C_VIDEO = "public/video/connect/socialnow-connect-film.mp4", C_POSTER = "public/video/connect/socialnow-connect-film-poster.jpg";
 const C_SHA = "b8b87db33efe906200e24ace9da66cae95c7ea59b1cf804591269cef5faf2b7e";   // 82-connect-film-v1/renders/connect-c1-02-web.mp4 (Connect-film v1, 1:02, eigen muziek)
 const experts = fs.readFileSync("proposal/ConnectExperts.tsx", "utf8");
 eis(speler.includes(`/video/connect/socialnow-connect-film.mp4?v=${C_VERSIE}`) && speler.includes(`/video/connect/socialnow-connect-film-poster.jpg?v=${C_VERSIE}`), `Connect-speler laadt film en poster met ?v=${C_VERSIE}`);

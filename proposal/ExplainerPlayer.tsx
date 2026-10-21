@@ -7,8 +7,8 @@ import "./explainer-player.css";
 // (ConnectExperts.tsx), met eigen poster, cachebuster en een blauwe knop.
 export default function ExplainerPlayer({ kind = "explainer", compact = false, ctaLabel }: { kind?: "explainer" | "story" | "connect"; compact?: boolean; ctaLabel?: string }) {
   const story = kind === "story", connect = kind === "connect";
-  const movie = story ? "/video/verhaal/story-presentatie.mp4?v=story-short-20261013" : connect ? "/video/connect/socialnow-connect-film.mp4?v=20261021-c1" : "/video/os/socialnow-os-explainer.mp4?v=20261021-v9";
-  const poster = story ? "/video/verhaal/story-presentatie-poster.jpg" : connect ? "/video/connect/socialnow-connect-film-poster.jpg?v=20261021-c1" : "/video/os/socialnow-os-explainer-poster.jpg?v=20261021-v9";
+  const movie = story ? "/video/verhaal/story-presentatie.mp4?v=story-short-20261013" : connect ? "/video/connect/socialnow-connect-film.mp4?v=20261021-c2" : "/video/os/socialnow-os-explainer.mp4?v=20261021-v9";
+  const poster = story ? "/video/verhaal/story-presentatie-poster.jpg" : connect ? "/video/connect/socialnow-connect-film-poster.jpg?v=20261021-c2" : "/video/os/socialnow-os-explainer-poster.jpg?v=20261021-v9";
   const label = ctaLabel ?? (story ? "Bekijk mijn verhaal" : connect ? "Bekijk de Connect-film" : "Bekijk de explainer");
   const naam = story ? "Ons verhaal" : connect ? "SocialNow Connect-film" : "SocialNow OS explainer";
   const [paused, setPaused] = useState(true);
