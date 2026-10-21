@@ -73,3 +73,14 @@ html:root .sn-site .sn-bestaand .video-title{container-type:inline-size}
 html:root .sn-site .sn-choice.sn-bestaand .showcase .video-title h1{max-width:none!important;text-wrap:balance;font-size:min(64px,calc(100cqi * 3.2 / var(--tekens,30)))!important}
 /* 20 oktober 2026: explainer v8, één regel onder de speler (02-webtekst §1). */
 .sn-site .sn-bestaand .bs-explainer-onder{margin:12px 0 0;font-size:14px;line-height:1.5;color:#9fb2a7;text-wrap:pretty}
+/* 21 oktober 2026: schakelaar tussen de OS-film en de Connect-film boven de speler. Actief gevuld in de merkkleur met witte tekst,
+   inactief wit met de merkkleur; nooit zwart; op 375 px op één regel. */
+.sn-site .sn-bestaand .bs-filmkeuze{display:inline-flex;gap:4px;margin:0 0 12px;padding:4px;border-radius:999px;background:#fff;max-width:100%}
+.sn-site .sn-bestaand .bs-filmkeuze button{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:0 14px;border:0;border-radius:999px;background:#fff;font-size:13px;font-weight:700;letter-spacing:.01em;white-space:nowrap;cursor:pointer;transition:background .2s,color .2s}
+.sn-site .sn-bestaand .bs-filmkeuze .bs-film-os{color:#0B7A37}
+.sn-site .sn-bestaand .bs-filmkeuze .bs-film-connect{color:#00739E}
+.sn-site .sn-bestaand .bs-filmkeuze .bs-film-os.is-aan{background:#0B7A37;color:#fff}
+.sn-site .sn-bestaand .bs-filmkeuze .bs-film-connect.is-aan{background:#00739E;color:#fff}
+.sn-site .sn-bestaand .bs-filmkeuze button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.sn-site .sn-bestaand .bs-explainer-onder{min-height:3em}
+@media(max-width:600px){.sn-site .sn-bestaand .bs-filmkeuze button{padding:0 11px;font-size:12px;gap:6px}.sn-site .sn-bestaand .bs-explainer-onder{min-height:4.5em}}

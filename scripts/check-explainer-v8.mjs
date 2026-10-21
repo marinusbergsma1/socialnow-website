@@ -86,6 +86,16 @@ eis(/status: "werkt"/.test(samen) && /status: "bouwt"/.test(samen) && /status: "
   "wie wat ziet: werkt al, in ontwikkeling en volgende stap hebben elk een eigen icoon en label (review 6a.3)");
 eis(/partnersLabel: "Hun partners"/.test(samen) && en["Hun partners"] === "Their partners", "de logobalk heet Hun partners: partners van Indexworld en Uncanny, niet van SocialNow");
 
+// schakelaar boven de header-speler (Marinus 21 okt 2026): OS en Connect in één speler, OS standaard, regel eronder wisselt mee
+const hdr = fs.readFileSync("proposal/HeaderBestaand.tsx", "utf8"), hdrCss = fs.readFileSync("proposal/header-bestaand.css", "utf8");
+eis(/useState<"os" \| "connect">\("os"\)/.test(hdr), "header: filmkeuze met OS als standaard");
+eis(/className="bs-filmkeuze"/.test(hdr) && (hdr.match(/aria-pressed=\{film === "(os|connect)"\}/g) || []).length === 2, "header: schakelaar met twee knoppen en aria-pressed");
+eis(/<span translate="no">SocialNow OS<\/span>/.test(hdr) && /<span translate="no">SocialNow Connect<\/span>/.test(hdr) && /<LayoutDashboard /.test(hdr) && /<Users /.test(hdr), "header: SocialNow OS en SocialNow Connect, elk met een icoon naast de tekst");
+eis(/<ExplainerPlayer key="connect" kind="connect"/.test(hdr) && /<ExplainerPlayer key="os"/.test(hdr), "header: de schakelaar wisselt de speler tussen de OS-film en de Connect-film");
+eis(/film === "os"\s*\? "In ruim twee minuten/.test(hdr) && hdr.includes("In één minuut: zelf je expert kiezen"), "header: de regel onder de speler wisselt mee");
+eis(/\.bs-film-os\.is-aan\{background:#0B7A37;color:#fff\}/.test(hdrCss) && /\.bs-film-connect\.is-aan\{background:#00739E;color:#fff\}/.test(hdrCss) && !/bs-filmkeuze[^}]*(#000|black)/.test(hdrCss), "header: actief groen of blauw met witte tekst, nooit zwart");
+eis(/\.bs-explainer-onder\{min-height:/.test(hdrCss) && en["Kies een film"] === "Choose a film", "header: vaste hoogte onder de speler (geen verspringen) en vertaald groepslabel");
+
 if (process.argv.includes("--dist")) {
   const tekst = f => fs.readFileSync(f, "utf8").replace(/<span class="sn-title-dot">\.<\/span>/g, ".");
   const nl = tekst("dist/nl/index.html"), enHtml = tekst("dist/index.html");
