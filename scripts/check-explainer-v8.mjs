@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-// Proef: de site-explainer v8 (21 okt 2026, 3:15, uit code): v7 plus hoe SocialNow OS en SocialNow Connect samenwerken,
+// Proef: de site-explainer v8 (21 okt 2026, 3:17, uit code): v7 plus hoe SocialNow OS en SocialNow Connect samenwerken,
 // wie eraan bouwt (SocialNow, INDEXWORLD, Uncanny, Komen Consultancy Operation Systems, Attesso) en wat het kost (custom OS en prijzen).
 // Bron: 04_OS-VIDEO/video-project/81-explainer-v8 (bouw_v8.py). Webteksten: 81-explainer-v8/werk/02-webtekst.md (DEFINITIEF).
 // Eisen: 1) de speler laadt de nieuwe versie (cache-versie 20261020-v8) voor video én poster;
-//        2) het videobestand is de nieuwe film (190–200 s, niet v7 van 146,3 s) en precies de webversie van eind03a (sha256);
+//        2) het videobestand is de nieuwe film (190–200 s, niet v7 van 146,3 s) en precies de webversie van eind07a (sha256);
 //        3) webgeschikt: H.264 1280×720, AAC, moov vóór mdat (snel starten), kleiner dan 40 MB; poster 1280×720;
 //        4) de regel onder de speler en het blok "Samen bouwen" (rollen, verbetercyclus, wie wat ziet) staan in de bron en in en.json;
 //        5) niets meer van wat 01-bronnen §3b schrapt ("drie bedrijven", CPA-leiding, "direct in jouw systemen").
@@ -12,8 +12,8 @@ import fs from "node:fs";
 import { execFileSync } from "node:child_process";
 import crypto from "node:crypto";
 
-const VERSIE = "20261020-v8";
-const SHA = "ca00d33d2863113a5af22dc1af1726a10171baeb3955807bfcc67d824a2f9a11";   // renders/explainer-v8-eind03a-web.mp4 (script 5.7, slot A)
+const VERSIE = "20261021-v8";
+const SHA = "a290d01512bb3d8b57525974cad92c5eb4aa302363f81c702ca64c5ce5e9dcf8";   // renders/explainer-v8-eind07a-web.mp4 (script 5.8, slot A)
 const VIDEO = "public/video/os/socialnow-os-explainer.mp4";
 const POSTER = "public/video/os/socialnow-os-explainer-poster.jpg";
 const fouten = [];
@@ -31,7 +31,7 @@ eis(duur > 190 && duur < 200, `video is de nieuwe film (190–200 s): ${duur.toF
 eis(beeld?.codec_name === "h264" && beeld.width === 1280 && beeld.height === 720, `H.264 1280×720: ${beeld?.codec_name} ${beeld?.width}×${beeld?.height}`);
 eis(geluid?.codec_name === "aac", `AAC-geluid: ${geluid?.codec_name}`);
 eis(mb < 40, `kleiner dan 40 MB: ${mb.toFixed(1)} MB`);
-eis(crypto.createHash("sha256").update(fs.readFileSync(VIDEO)).digest("hex") === SHA, "videobestand is de webversie van eind03a (sha256)");
+eis(crypto.createHash("sha256").update(fs.readFileSync(VIDEO)).digest("hex") === SHA, "videobestand is de webversie van eind07a (sha256)");
 const kop = fs.readFileSync(VIDEO).subarray(0, 4096).toString("latin1");
 eis(kop.indexOf("moov") >= 0 && (kop.indexOf("mdat") < 0 || kop.indexOf("moov") < kop.indexOf("mdat")), "moov vóór mdat (faststart)");
 const p = probe(POSTER, ["-show_entries", "stream=width,height"]).streams[0];
@@ -39,8 +39,8 @@ eis(p.width === 1280 && p.height === 720, `poster 1280×720: ${p.width}×${p.hei
 
 // webteksten (NL in de bron, EN in en.json): 02-webtekst.md §1 en §2
 const TEKST = {
-  "In drie minuten: wat je met OS en Connect doet, wie eraan bouwt en wat het kost. Gesproken in het Engels.":
-    "In three minutes: what you do with OS and Connect, who builds them and what it costs. Spoken in English.",
+  "In ruim drie minuten: wat je met OS en Connect doet, wie eraan bouwt en wat het kost. Gesproken in het Engels.":
+    "In just over three minutes: what you do with OS and Connect, who builds them and what it costs. Spoken in English.",
   "SocialNow en vier partners, elk met een eigen rol.": "SocialNow and four partners, each with its own role.",
   "Visie, stijl, UI/UX en AI-workflows. Wij keuren elke versie goed voor die live gaat.": "Vision, style, UI/UX and AI workflows. We approve every version before it goes live.",
   "Bouwt SocialNow OS en de gedeelde basis voor OS en Connect: accounts, rechten en audit.": "Builds SocialNow OS and the shared foundation for OS and Connect: accounts, permissions and audit.",
