@@ -185,15 +185,7 @@
 :root .sn-site .pc-afsluiter p { font-size: 17px; color: #f5f5f5; }
 :root .sn-site .pc-afsluiter .pc-knop { margin-top: 10px; }
 
-/* 22 oktober 2026, later: twee grote knoppen naast elkaar, bij de uitslag en onderaan. */
-:root .sn-site .pc-oproepen { margin-top: 22px; }
-:root .sn-site .pc-oproep-knoppen { display: flex; flex-wrap: wrap; gap: 12px; }
-:root .sn-site .pc-oproep-knoppen .pc-knop { margin-top: 0; }
-:root .sn-site .pc-knop.pc-groot { min-height: 58px; font-size: 16px; padding: 12px 12px 12px 26px; }
-:root .sn-site .pc-knop.pc-groot .pc-knop-icoon { width: 36px; height: 36px; }
-:root .sn-site .pc-oproepen .pc-formulier { margin-top: 16px; }
 :root .sn-site p.pc-disclaimer { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--pc-rand); font-size: 14px; line-height: 1.55; color: #b8b8bd; }
-:root .sn-site .pc-slot .pc-oproepen { margin-top: 26px; max-width: 720px; }
 :root .sn-site .pc-documenten { background: #fff; color: #111; padding: 48px 0; margin: 24px 0; }
 :root .sn-site .pc-documenten h2 { margin: 0; font-size: 22px; line-height: 1.2; color: #111; }
 :root .sn-site .pc-docs { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
@@ -202,9 +194,67 @@
 :root .sn-site .pc-docs small { color: #2f7d3b; font-weight: 700; font-size: 12px; }
 :root .sn-site .pc-faq-blok .pc-faq { margin-top: 24px; }
 
-:root .sn-site .pc-film { padding-top: 0; }
-:root .sn-site .pc-video { display: block; width: 100%; max-width: 1000px; aspect-ratio: 16 / 9; border-radius: 18px; border: 1px solid var(--pc-rand); background: #000; }
-:root .sn-site .pc-video-9x16 { aspect-ratio: 9 / 16; max-width: 420px; margin: 0 auto; }
+:root .sn-site .pc-film { padding-top: 130px; }
+:root .sn-site .pc-film + .pc-hero { padding-top: 48px; }
+:root .sn-site .pc-video { display: block; width: 100%; max-width: 1100px; aspect-ratio: 16 / 9; border-radius: 18px; border: 1px solid var(--pc-rand); background: #000; }
+/* 9:16 op mobiel: zo breed als het scherm, maar nooit hoger dan het scherm zodat de check er direct onder begint. */
+:root .sn-site .pc-video-9x16 { aspect-ratio: 9 / 16; width: auto; max-width: 100%; height: min(78svh, calc((100vw - 32px) * 16 / 9)); max-height: 78svh; margin: 0 auto; }
+
+/* 22 oktober 2026, middag (Marinus): "PHP is het allerbelangrijkste." Het PHP-blok staat bovenaan in de uitslag, groot,
+   met een gekleurde rand per status. Groen blijft een accent: de rand en de stip, nooit een vlak. */
+:root .sn-site .pc-uitslag { border-color: var(--pc-rand); }
+:root .sn-site .pc-php { position: relative; border-radius: 18px; border: 1px solid var(--pc-rand); border-left: 6px solid var(--pc-grijs); background: #050505; padding: 26px 26px 10px; }
+:root .sn-site .pc-php.pc-rood { border-color: #ff5a5f66; border-left-color: var(--pc-rood); }
+:root .sn-site .pc-php.pc-oranje { border-color: #ff9f1a66; border-left-color: var(--pc-oranje); }
+:root .sn-site .pc-php.pc-groen { border-color: #25d36666; border-left-color: var(--pc-groen); }
+:root .sn-site .pc-php.pc-onbekend { border-left-color: #b8b8bd; }
+:root .sn-site .pc-php .pc-label { flex-wrap: wrap; }
+:root .sn-site .pc-php .pc-label b { font-weight: 700; color: #fff; letter-spacing: .1em; }
+:root .sn-site .pc-php .pc-label span { color: #8e8e93; }
+:root .sn-site .pc-php .pc-label span::before { content: "·"; margin-right: 10px; }
+:root .sn-site .pc-php.pc-rood .pc-label b { color: var(--pc-rood); }
+:root .sn-site .pc-php.pc-oranje .pc-label b { color: var(--pc-oranje); }
+:root .sn-site .pc-php.pc-groen .pc-label b { color: var(--pc-groen); }
+/* De site zet elke h2 met !important op hoogstens 26 px; de PHP-uitslag is de uitzondering (gemeten: zonder dit 26 px). */
+:root .sn-site .pc-php h2 { font-size: clamp(30px, 3.4vw, 44px) !important; line-height: 1.08; letter-spacing: -0.025em; margin: 16px 0 0; text-wrap: balance; }
+:root .sn-site .pc-php-versie { display: flex; flex-wrap: wrap; gap: 10px 36px; margin: 22px 0 0; }
+:root .sn-site .pc-php-versie div { min-width: 0; }
+:root .sn-site .pc-php-versie dt { font-size: 12px; color: #8e8e93; letter-spacing: .04em; }
+:root .sn-site .pc-php-versie dd { margin: 4px 0 0; font-size: clamp(24px, 3.4vw, 32px); font-weight: 700; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; color: #f5f5f5; overflow-wrap: anywhere; }
+:root .sn-site .pc-php-versie div + div dd { font-size: 17px; font-weight: 400; letter-spacing: 0; }
+:root .sn-site .pc-php.pc-rood .pc-php-versie div:first-child dd { color: var(--pc-rood); }
+:root .sn-site .pc-php.pc-oranje .pc-php-versie div:first-child dd { color: var(--pc-oranje); }
+:root .sn-site p.pc-php-zin { margin: 18px 0 0; font-size: 18px; line-height: 1.5; color: #e5e5e7; max-width: 760px; }
+:root .sn-site .pc-php .pc-eerst { margin-top: 22px; }
+:root .sn-site .pc-php .pc-eerst h3 { font-size: 18px; }
+:root .sn-site .pc-meer { display: inline-block; margin: 0 0 12px 40px; font-size: 14px; color: var(--pc-groen); }
+
+/* Steef en Michelle in plaats van knoppenparen: foto, naam, rol, en per persoon twee directe wegen als tekstlinks. */
+:root .sn-site .pc-mensen { margin-top: 32px; padding-top: 26px; border-top: 1px solid var(--pc-rand); }
+:root .sn-site .pc-mensen h3 { margin: 0; font-size: clamp(20px, 2.6vw, 24px); line-height: 1.2; text-wrap: balance; }
+:root .sn-site .pc-mensen > p { margin-top: 8px; font-size: 15px; line-height: 1.55; color: #b8b8bd; max-width: 680px; }
+:root .sn-site .pc-mensen ul { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+:root .sn-site .pc-mens { display: flex; gap: 16px; align-items: flex-start; padding: 16px; border: 1px solid var(--pc-rand); border-radius: 16px; background: #050505; min-width: 0; }
+:root .sn-site .pc-mens img { width: 88px; height: 88px; flex: none; border-radius: 50%; object-fit: cover; object-position: 50% 20%; background: #1c1c1e; }
+:root .sn-site .pc-mens > div { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+:root .sn-site .pc-mens strong { font-size: 17px; color: #fff; }
+:root .sn-site .pc-mens small { font-size: 12px; color: #8e8e93; line-height: 1.45; } /* mono, zoals elke small op de site */
+:root .sn-site .pc-mens-wegen { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+:root .sn-site .pc-mens-wegen a { display: inline-flex; align-items: center; gap: 8px; color: #f5f5f5; font-size: 15px; text-decoration: none; overflow-wrap: anywhere; }
+:root .sn-site .pc-mens-wegen a svg { color: var(--pc-groen); flex: none; }
+:root .sn-site .pc-mens-wegen a span { border-bottom: 1px solid #3a3a3c; }
+:root .sn-site .pc-mens-wegen a:hover span { border-bottom-color: var(--pc-groen); }
+:root .sn-site .pc-mens-wegen a:focus-visible { outline: 2px solid var(--pc-groen); outline-offset: 3px; border-radius: 4px; }
+:root .sn-site p.pc-php-oud { margin: 12px 0 0; font-size: 16px; line-height: 1.5; color: var(--pc-oranje); max-width: 760px; }
+/* Kort in het PHP-blok bij oranje en rood: de regel over de gratis updates, met Steef en Michelle er direct onder. */
+:root .sn-site .pc-mensen-kort { margin-top: 18px; padding-top: 0; border-top: 0; }
+:root .sn-site p.pc-gratis { margin: 0; font-size: 17px; line-height: 1.5; color: #fff; font-weight: 600; max-width: 760px; }
+:root .sn-site .pc-mensen-kort ul { margin-top: 12px; }
+:root .sn-site .pc-mensen-kort .pc-mens { padding: 12px; gap: 12px; align-items: center; }
+:root .sn-site .pc-mensen-kort .pc-mens img { width: 56px; height: 56px; }
+:root .sn-site .pc-mensen-kort .pc-mens-wegen { flex-direction: row; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; }
+:root .sn-site .pc-slot .pc-mensen { border-top: 0; padding-top: 0; margin-top: 22px; max-width: 880px; }
+:root .sn-site .pc-slot .pc-formulier { margin-top: 18px; max-width: 880px; }
 @media (max-width: 999px) {
   :root .sn-site .pc-docs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   :root .sn-site .pc-kolommen { grid-template-columns: 1fr; gap: 16px; }
@@ -212,15 +262,55 @@
   :root .sn-site .pc-tegels { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
-  :root .sn-site .pc-oproep-knoppen .pc-knop { width: 100%; justify-content: space-between; }
+  :root .sn-site .pc-film { padding-top: 96px; }
+  :root .sn-site .pc-film + .pc-hero { padding-top: 32px; }
+  :root .sn-site .pc-php { padding: 20px 18px 6px; border-left-width: 5px; }
+  :root .sn-site .pc-mensen ul { grid-template-columns: 1fr; }
+  :root .sn-site .pc-mens img { width: 72px; height: 72px; }
+  :root .sn-site .pc-meer { margin-left: 0; }
   :root .sn-site .pc-docs { grid-template-columns: 1fr; }
   :root .sn-site .pc-documenten { padding: 36px 0; }
   :root .sn-site .pc-acties { grid-template-columns: 1fr; gap: 14px; }
-  :root .sn-site .pc-hero { padding-top: 112px; }
+  :root .sn-site .pc-hero { padding-top: 32px; }
   :root .sn-site .pc-hero.h-wrap, :root .sn-site .pc .h-wrap { width: calc(100% - 32px); }
   :root .sn-site .pc-check, :root .sn-site .pc-uitslag, :root .sn-site .pc-formulier { padding: 20px; border-radius: 18px; }
   :root .sn-site .pc-rij { grid-template-columns: 1fr; gap: 0; }
   :root .sn-site .pc-gegevens { grid-template-columns: 1fr; gap: 8px; }
   :root .sn-site .pc-intro { font-size: 16px; }
   :root .sn-site .pc-knop { white-space: normal; text-align: left; }
+}
+
+/* 22 oktober 2026, middag: Wie werd geraakt en Wie loopt risico, tussen de film en de scan. Logo's in eigen kleur, even
+   hoog in een vast vak; overheden met een zelf getekende vlag en de naam van de organisatie. */
+:root .sn-site .pc-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+:root .sn-site .pc-geraakt { padding-top: 56px; }
+:root .sn-site .pc-risico { padding-top: 48px; }
+:root .sn-site .pc-blokkop { margin: 0; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.15; letter-spacing: -0.02em; text-wrap: balance; }
+:root .sn-site .pc-logos { list-style: none; padding: 0; margin: 22px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; max-width: 1100px; }
+:root .sn-site .pc-geraakt .pc-logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+:root .sn-site .pc-logos-platform { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+:root .sn-site .pc-logo-link { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; height: 100%; padding: 18px; border: 1px solid var(--pc-rand); border-radius: 16px; background: var(--pc-grond); color: #f5f5f5; text-decoration: none; transition: border-color .2s; }
+:root .sn-site .pc-logo-link:hover { border-color: #3a3a3c; }
+:root .sn-site .pc-logo-link:focus-visible { outline: 2px solid var(--pc-groen); outline-offset: 2px; }
+:root .sn-site .pc-logo { display: block; height: 44px; width: auto; max-width: 100%; object-fit: contain; object-position: left center; }
+:root .sn-site .pc-logos-platform .pc-logo { height: 34px; max-width: 150px; }
+:root .sn-site .pc-logo-naam { font-size: 13px; color: #8e8e93; }
+:root .sn-site .pc-merk { display: flex; flex-direction: column; gap: 8px; }
+:root .sn-site .pc-merk strong { font-size: 15px; color: #fff; }
+:root .sn-site .pc-logo-wat { font-size: 14px; line-height: 1.45; color: #cacacf; }
+:root .sn-site .pc-logo-wat sup { font-size: 10px; color: var(--pc-groen); margin-left: 2px; }
+:root .sn-site .pc-vlag-naam { display: grid; grid-template-columns: 48px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 12px; align-items: center; min-height: 44px; }
+:root .sn-site .pc-vlag { grid-row: 1 / 3; justify-self: start; width: auto; max-width: 48px; height: 32px; border: 1px solid #3a3a3c; border-radius: 3px; }
+:root .sn-site .pc-vlag-naam strong { font-size: 17px; color: #fff; }
+:root .sn-site .pc-vlag-naam small { font-size: 12px; color: #8e8e93; overflow-wrap: anywhere; }
+:root .sn-site .pc-geen-klant { margin-top: 14px; font-size: 13px; line-height: 1.5; color: #8e8e93; max-width: 760px; }
+:root .sn-site .pc-geraakt-bronnen { margin-top: 10px; max-width: 1100px; }
+:root .sn-site .pc-risico-oproep { margin-top: 20px; font-size: 18px; line-height: 1.45; color: #fff; font-weight: 600; max-width: 760px; }
+:root .sn-site .pc-risico-host { margin-top: 6px; font-size: 15px; line-height: 1.5; color: #cacacf; max-width: 760px; }
+@media (max-width: 760px) {
+  :root .sn-site .pc-geraakt { padding-top: 40px; }
+  :root .sn-site .pc-logos, :root .sn-site .pc-geraakt .pc-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  :root .sn-site .pc-logo-link { padding: 14px; }
+  :root .sn-site .pc-logo { height: 32px; }
+  :root .sn-site .pc-logos-platform .pc-logo { height: 26px; }
 }

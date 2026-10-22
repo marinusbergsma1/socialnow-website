@@ -46,7 +46,7 @@ for(const route of paths){
   output=output.replace('</head>',`${alternates(route)}</head>`);
   if(language!=='nl'){
    output=output.replace(/<title>([^<]+)<\/title>/,(_,v)=>`<title>${escape(localize(unescape(v),language))}</title>`)
-    .replace(/(<meta\s+(?:name|property)="(?:description|og:title|og:description|twitter:title|twitter:description)"\s+content=")([^"]+)(")/g,(_,a,v,z)=>{
+    .replace(/(<meta\s+(?:name|property)="(?:description|og:title|og:description|og:image:alt|twitter:title|twitter:description)"\s+content=")([^"]+)(")/g,(_,a,v,z)=>{
       const text=unescape(v);const translated=localize(text,language);
       if(translated===text&&language==='en')meld(text);
       return a+escape(translated)+z;

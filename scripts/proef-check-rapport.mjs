@@ -76,6 +76,18 @@ else {
   const api = lees("api/check-rapport.js");
   eis(/binnenLimiet\(`rapport-\$\{deel\}-ip:/.test(api) && /rapport-domein:/.test(lees("server/check-rapport.mjs")) && /CACHE_MS = 10 \* 60 \* 1000/.test(lees("server/check-rapport.mjs")), "limiet per IP en per domein, cache 10 minuten");
   eis(/punten: leeg\("fout"\)/.test(api), "api geeft bij een eigen fout ook punten (niet te meten)");
+  // Live gevonden 22 oktober 2026: bloemist.nl (X-Powered-By: PHP/5.2.12) kreeg "Verouderde software: Goed".
+  const hp = (xpb) => ({ ok: true, status: 200, url: "https://proef.invalid/", body: "<html><body>hoi</body></html>", headers: { "content-type": "text/html", ...(xpb ? { "x-powered-by": xpb } : {}) } });
+  const oud = await r.meetSoftware(hp("PHP/5.2.12"), Date.now() + 1500);
+  eis(oud.status === "slecht" && oud.problemen.includes("php-eol") && oud.waarde?.php === "5.2.12", "software: PHP 5.2.12 in X-Powered-By is verouderd (slecht), nooit goed");
+  const acht1 = await r.meetSoftware(hp("PHP/8.1.33"), Date.now() + 1500);
+  eis(acht1.status === "slecht" && acht1.problemen.includes("php-eol"), "software: PHP 8.1 krijgt sinds 2026 geen updates meer (slecht)");
+  const nieuw = await r.meetSoftware(hp("PHP/8.4.27"), Date.now() + 1500);
+  eis(nieuw.status === "onbekend" && !nieuw.problemen.includes("php-eol"), "software: ondersteunde PHP-tak zonder andere software is niet te meten, geen eol");
+  const viaHttp = await r.meetSoftware(hp(""), Date.now() + 1500, [hp(""), hp("PHP/5.2.12")]);
+  eis(viaHttp.status === "slecht" && viaHttp.waarde?.php === "5.2.12", "software: PHP-versie ook uit het http-antwoord als https hem niet noemt (bloemist.nl)");
+  const niets = await r.meetSoftware(hp(""), Date.now() + 1500);
+  eis(niets.status === "onbekend" && niets.reden === "geen-software", "software: niets herkend is niet te meten, nooit goed");
 }
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");
 process.exit(fouten.length ? 1 : 0);

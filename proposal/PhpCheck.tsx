@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Check, Copy } from "lucide-react";
+import { ArrowUpRight, CalendarDays, Check, Copy, Mail } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 import { boekExtern, boekLink, conceptLink } from "./aanvragen";
+import { people } from "./content";
+import { klein } from "./licht";
 import "./php-check.css";
 import { CheckRapport } from "./CheckRapport";
 
@@ -130,8 +132,8 @@ function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uit
       throw new Error("aanvraag");
     } catch {
       // Onze eigen functie is onbereikbaar: dan gaat de aanvraag als ingevuld concept per mail, zodat hij niet verdwijnt.
-      const tekst = [`${t("Naam")}: ${data.naam}`, `${t("E-mail")}: ${data.email}`, `${t("Website")}: ${data.domein}`, data.uitslag ? `${t("Uitslag van de check")}: ${data.uitslag}${data.phpVersie ? `, PHP ${data.phpVersie}` : ""}` : "", data.vraag].filter(Boolean).join("\n");
-      window.location.href = conceptLink(`Check-aanvraag: ${data.domein}`, tekst);
+      const tekst = [`${t("Naam")}: ${data.naam}`, `${t("E-mail")}: ${data.email}`, `${t("Website")}: ${data.domein}`, data.uitslag ? `${t("Uitslag van de securityscan")}: ${data.uitslag}${data.phpVersie ? `, PHP ${data.phpVersie}` : ""}` : "", data.vraag].filter(Boolean).join("\n");
+      window.location.href = conceptLink(`Securityscan-aanvraag: ${data.domein}`, tekst);
       zetStaat("mail");
     }
   };
@@ -143,7 +145,7 @@ function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uit
   );
   return (
     <form className={`pc-formulier${kort ? " pc-kort" : ""}`} onSubmit={verstuur} noValidate>
-      {!kort && <h2>Vraag je gratis check aan.</h2>}
+      {!kort && <h2>Vraag je gratis securityscan aan.</h2>}
       <div className="pc-rij">
         <label>Je naam<input name="naam" autoComplete="name" placeholder="Voor- en achternaam" /></label>
         <label>E-mail<input name="email" type="email" autoComplete="email" placeholder="naam@bedrijf.nl" /></label>
@@ -163,52 +165,62 @@ function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uit
       <input name="website2" tabIndex={-1} autoComplete="off" aria-hidden="true" className="pc-honing" />
       {hint && <p className="pc-hint" role="alert">{hint}</p>}
       <button className="pc-knop" type="submit" disabled={staat === "bezig"}>
-        <span>{staat === "bezig" ? "Versturen…" : kort ? "Verstuur" : "Vraag de gratis check aan"}</span>
+        <span>{staat === "bezig" ? "Versturen…" : kort ? "Verstuur" : "Vraag de gratis securityscan aan"}</span>
         <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
       </button>
     </form>
   );
 }
 
-// 22 oktober 2026 (Marinus): twee grote knoppen naast elkaar, bij de uitslag en onderaan. "Plan een uitgebreide check" gaat
-// naar de boekingspagina (soort "uitgebreide-check"), of opent tot die live is het korte formulier. "Neem contact op" opent
-// het korte formulier: drie velden, domein al ingevuld, naar secure@socialnow.nl.
-function Oproepen({ domein = "", uitslag, anker = false }: { domein?: string; uitslag?: Uitslag | null; anker?: boolean }) {
-  const { language } = useLanguage();
-  const [open, zetOpen] = useState<"" | "scan" | "contact">("");
-  const plek = useRef<HTMLDivElement>(null);
+// 22 oktober 2026, middag (Marinus): "geen pillknoppen", hij wil de mensen zien. In plaats van de knoppenparen een
+// contactblok met Steef en Michelle: foto, naam en rol komen uit proposal/content.ts (niets verzonnen). Per persoon een
+// directe weg: een call plannen (boekingspagina met type uitgebreide-check en het domein ingevuld; zolang die niet live is
+// het korte formulier op #aanvraag) en mailen naar secure@socialnow.nl.
+const SECURE = "secure@socialnow.nl";
+const MENSEN = ["Steef Komen", "Michelle Yang"];
+
+// Regiechat, 22 oktober 2026 (gelijk met de socialvideo van Marinus): de updates zijn tijdelijk gratis. Bij een oude
+// versie (oranje of rood) staat deze regel in het PHP-blok, direct boven Steef en Michelle (kort).
+const GRATIS_UPDATE = "Omdat dit ons allemaal raakt, voeren we de essentiële updates tijdelijk gratis uit. Plan een call of stuur een mail.";
+
+function Mensen({ domein = "", kort = false }: { domein?: string; kort?: boolean }) {
+  const { t, language } = useLanguage();
   const boek = boekLink(language, domein, "uitgebreide-check");
-  // socialnow.nl/check#aanvraag (ook /nl/check#aanvraag, de mailing linkt hierheen): het formulier voor de uitgebreide
-  // check staat direct open en de pagina scrolt ernaartoe.
-  useEffect(() => {
-    if (!anker) return;
-    const kijk = () => {
-      if (window.location.hash !== "#aanvraag") return;
-      zetOpen("scan");
-      requestAnimationFrame(() => plek.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
-    };
-    kijk();
-    window.addEventListener("hashchange", kijk);
-    return () => window.removeEventListener("hashchange", kijk);
-  }, [anker]);
-  const knop = (tekst: React.ReactNode) => (
-    <><span>{tekst}</span><span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span></>
-  );
+  const onderwerp = encodeURIComponent(domein ? `${t("Securityscan")}: ${domein}` : t("Securityscan"));
   return (
-    <div className="pc-oproepen" id={anker ? "aanvraag" : undefined} ref={plek}>
-      <div className="pc-oproep-knoppen">
-        {boekExtern
-          ? <a className="pc-knop pc-groot" href={boek} target="_blank" rel="noopener">{knop("Plan een uitgebreide check")}</a>
-          : <button type="button" className="pc-knop pc-groot" aria-expanded={open === "scan"} onClick={() => zetOpen("scan")}>{knop("Plan een uitgebreide check")}</button>}
-        <button type="button" className="pc-knop pc-knop-wit pc-groot" aria-expanded={open === "contact"} onClick={() => zetOpen("contact")}>{knop("Neem contact op")}</button>
-      </div>
-      {open && <Aanvraag kort telefoon={open === "scan"} soort={open === "scan" ? "uitgebreide-check" : "contact"} domein={domein} uitslag={uitslag} key={open} />}
+    <div className={`pc-mensen${kort ? " pc-mensen-kort" : ""}`}>
+      {kort ? <p className="pc-gratis">{t(GRATIS_UPDATE)}</p> : (
+        <>
+          <h3>Praat met Steef of Michelle.</h3>
+          <p>Omdat dit ons allemaal raakt, voeren we de essentiële updates tijdelijk gratis uit. Wil je dieper gaan, dan bespreken we de scope met je.</p>
+        </>
+      )}
+      <ul>
+        {MENSEN.map((naam) => people.find((p) => p.name === naam)).filter((p): p is (typeof people)[number] => !!p).map((p) => (
+          <li key={p.name} className="pc-mens">
+            <img {...klein(p.image, kort ? "56px" : "88px", [96, 160])} alt={p.name} width={kort ? 56 : 88} height={kort ? 56 : 88} loading="lazy" />
+            <div>
+              <strong translate="no">{p.name}</strong>
+              <small translate="no">{p.role}</small>
+              <span className="pc-mens-wegen">
+                <a href={boekExtern ? boek : "#aanvraag"} {...(boekExtern ? { target: "_blank", rel: "noopener" } : {})}>
+                  <CalendarDays size={16} aria-hidden="true" /><span>Plan een call</span>
+                </a>
+                <a href={`mailto:${SECURE}?subject=${onderwerp}`}>
+                  <Mail size={16} aria-hidden="true" /><span translate="no">{SECURE}</span>
+                </a>
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
-// 22 oktober 2026 (Marinus): de uitlegfilm (HyperFrames) onder de uitslag. Klik om af te spelen, ondertitels in NL of EN,
-// poster als voorbeeldbeeld; op mobiel de 9:16-versie. Ondertitels staan in het beeld, in NL of EN.
+// 22 oktober 2026 (Marinus): de uitlegfilm (HyperFrames), sinds de middag helemaal bovenaan de pagina, boven de check.
+// Klik om af te spelen, poster als voorbeeldbeeld; op mobiel de 9:16-versie. Ondertitels staan in het beeld, in NL of EN.
+// Sessie check-film maakt een nieuwe Engelse versie; die vervangt check-16x9.mp4 en check-9x16.mp4 met dezelfde namen.
 function Film() {
   const { language } = useLanguage();
   const [hoog, zetHoog] = useState(false);
@@ -223,7 +235,7 @@ function Film() {
   // Tekst en ondertitels staan in het beeld zelf: Nederlands op /nl, Engels in alle andere talen.
   const nl = language === "nl" ? "-nl" : "";
   return (
-    <section className="h-section h-wrap pc-film">
+    <section className="h-wrap pc-film">
       <video
         key={vorm + nl}
         className={`pc-video pc-video-${vorm}`}
@@ -231,7 +243,7 @@ function Film() {
         playsInline
         preload="none"
         poster={`/websitecheck/film/poster-${vorm}${nl}.jpg`}
-        aria-label="Uitlegfilm: zo werkt de websitecheck"
+        aria-label="Uitlegfilm: zo werkt de securityscan"
       >
         <source src={`/websitecheck/film/check-${vorm}${nl}.mp4`} type="video/mp4" />
       </video>
@@ -248,6 +260,157 @@ const DOCUMENTEN: { naam: string; bestand: string }[] = [
   { naam: "De uitgebreide check", bestand: "de-uitgebreide-check" },
 ];
 
+// 22 oktober 2026, middag (Marinus): "PHP is het allerbelangrijkste." Live zag hij bij wikipedia.org en link.nl "niks
+// terug van de php": bij een afgeschermde versie toonde de uitslag alleen een kop en een belregel, zonder versie, zonder
+// betekenis en zonder stappen, en daaronder nam het rapport met vijf punten de ruimte. Nu staat bovenaan in de uitslag
+// altijd dit blok, bij elke uitkomst compleet: de status, de PHP-versie of "afgeschermd", één zin wat het betekent en de
+// eerste drie stappen. Teksten volgen de beslistabel in ONDERZOEK.md 5.2: rood alleen met bewijs, nooit "veilig".
+const LABEL: Record<string, string> = { groen: "Fix gezien", rood: "Niet gepatcht", oranje: "Twijfel", onbekend: "Afgeschermd" };
+
+function phpTekst(u: Uitslag, t: (s: string) => string) {
+  const w = { versie: u.phpVersie, fix: u.hersteldVanaf, release: u.release, naar: u.doorverwezenNaar };
+  const r = u.code || u.reden || "";
+  const zin = (s: string) => invul(t(s), w);
+  if (u.uitslag === "groen") return {
+    kop: t("Je PHP bevat de fix."),
+    zin: zin(r === "ubuntu-hersteld"
+      ? "Je server draait PHP {versie}, de herstelde build van {release}, maar dat zegt niets over een eerdere inbraak."
+      : "De PHP-versie die je server laat zien bevat de fix, maar dat zegt niets over een eerdere inbraak."),
+  };
+  if (u.uitslag === "rood") return {
+    kop: t("Je PHP is niet gepatcht."),
+    zin: zin("Je server draait PHP {versie} zonder de fix uit {fix}, dus je site is kwetsbaar voor php2shell."),
+  };
+  if (u.uitslag === "oranje") {
+    if (r === "onder-de-fix-zonder-bewijs" || r === "el-leverancier-onder-fix") return {
+      kop: t("Waarschijnlijk niet gepatcht."),
+      zin: zin("Je server meldt PHP {versie}, lager dan de fix in {fix}, maar sommige hosts patchen zonder het nummer te veranderen."),
+    };
+    if (r === "doorverwijzing") return { kop: t("Je domein stuurt door."), zin: zin("Je domein stuurt door naar {naar}, en die server meldt PHP {versie} zonder de fix.") };
+    if (r === "eol-alleen-via-host") return { kop: t("Verouderde PHP, vraag je host."), zin: zin("PHP {versie} krijgt geen officiële fix meer, dus alleen je host kan hem nog gepatcht hebben.") };
+    const oranje: Record<string, string> = {
+      "tegenstrijdige-versies": "Je server noemt meer dan één PHP-versie, dus we zeggen liever niets dan iets verkeerds.",
+      "geen-patchnummer": "Je server meldt PHP {versie} zonder het laatste cijfer, dus we zien niet of de fix erin zit.",
+    };
+    return { kop: t("Van buitenaf niet te zeggen."), zin: zin(oranje[r] || "Je server meldt PHP {versie} uit een pakket waarvan we de fixversie nog niet kennen.") };
+  }
+  // Onbekend, om welke reden ook (versie verborgen, geen PHP te zien, site onbereikbaar, onze functie faalde).
+  return {
+    kop: t("Je site schermt dit af."),
+    zin: t(r === "versie-verborgen"
+      ? "Er draait PHP, maar je server verbergt de versie, dus van buitenaf zien we niet of de fix erin zit."
+      : r === "geen-php-gezien"
+        ? "We zien van buitenaf geen PHP, dus we kunnen niet zeggen of de fix erin zit."
+        : "We konden je site niet volledig lezen, dus we zien van buitenaf niet of de fix erin zit."),
+  };
+}
+
+export function PhpBlok({ u }: { u: Uitslag }) {
+  const { t } = useLanguage();
+  const kleur = u.uitslag || "onbekend";
+  const tekst = phpTekst(u, t);
+  // PHP 8.1 en ouder krijgt geen officiële fix meer (regiechat 22 oktober 2026).
+  const [hoofd, minor] = (u.phpVersie || "").split(/[.-]/).map(Number);
+  const oud = !!u.phpVersie && Number.isFinite(hoofd) && (hoofd < 8 || (hoofd === 8 && minor <= 1));
+  return (
+    <div className={`pc-php pc-${kleur}`}>
+      <p className="pc-label"><i aria-hidden="true" /><b>{LABEL[kleur]}</b><span translate="no">PHP · php2shell</span></p>
+      <h2>{tekst.kop}</h2>
+      <dl className="pc-php-versie">
+        <div><dt>PHP-versie</dt>{u.phpVersie ? <dd translate="no">{u.phpVersie}</dd> : <dd>afgeschermd</dd>}</div>
+        {u.hersteldVanaf && <div><dt>Hersteld vanaf</dt><dd translate="no">{u.hersteldVanaf}</dd></div>}
+        {u.domein && <div><dt>Domein</dt><dd translate="no">{u.domein}</dd></div>}
+      </dl>
+      <p className="pc-php-zin">{tekst.zin}</p>
+      {oud && <p className="pc-php-oud">{t("Voor PHP 8.1 en ouder komt geen officiële fix meer. We plannen samen de overstap.")}</p>}
+      {(kleur === "rood" || kleur === "oranje") && <Mensen domein={u.domein || ""} kort />}
+      <div className="pc-eerst">
+        <h3>Dit kun je zelf al doen.</h3>
+        <Stappen aantal={3} domein={u.domein} />
+        <a className="pc-meer" href="#zelf">Alle zeven stappen</a>
+      </div>
+    </div>
+  );
+}
+
+// 22 oktober 2026, middag (Marinus, via de regiechat): direct onder de film en boven de scan wie er geraakt is en wie risico
+// loopt. Logo's in eigen kleur, even hoog, elk een link naar de bron van het incident (niet naar het merk). Overheden
+// krijgen alleen hun landvlag met de naam van de organisatie: overheidslogo's en wapens mogen bedrijven niet gebruiken.
+// Geen banken en geen bedrijven zonder bron. Bij "risico" geen bedrijven die kwetsbaar zouden zijn, alleen platforms.
+// Bronnen geopend en live 200 op 22 oktober 2026: /Volumes/WORK/02-SOCIALNOW/php-check/logos-security/BRONNEN.md.
+type Geraakt = { naam: string; logo?: string; vlag?: string; org?: string; wat: string; bron: string; uitgever: string };
+const GERAAKT: Geraakt[] = [
+  { naam: "Nintendo", logo: "/security/logos/nintendo.svg", wat: "Haalde diensten offline tijdens het herstel", bron: "https://therecord.media/php-script-vulnerabilities-warnings", uitgever: "The Record, 21.10.2026" },
+  { naam: "Wikipedia", logo: "/security/logos/wikipedia.svg", wat: "Haalde ondersteunende diensten offline tot de patch", bron: "https://diff.wikimedia.org/2026/10/21/impact-of-php-vulnerabilities-on-wikimedia-tools-and-services/", uitgever: "Wikimedia Foundation (Diff), 21.10.2026" },
+  { naam: "Duitsland", vlag: "de", org: "Digitalministerium", wat: "Haalde uit voorzorg federale websites offline", bron: "https://thenextweb.com/news/europe-governments-websites-offline-php-security-flaws", uitgever: "The Next Web (Reuters), 21.10.2026" },
+  { naam: "Finland", vlag: "fi", org: "Valtori", wat: "Sloot uit voorzorg publieke overheidsdiensten af", bron: "https://valtori.fi/-/paivitys-21.10.-klo-18-php-korjauspaivityksen-asennukset-aloitettu", uitgever: "Valtori, 21.10.2026" },
+  { naam: "België", vlag: "be", org: "FOD Buitenlandse Zaken", wat: "Haalde tijdelijk de eigen websites offline", bron: "https://www.vrt.be/vrtnws/nl/2026/10/21/cyberbeveiliger-ziet-eerste-aanvallen-rond-kwetsbaarheden-in-pop/", uitgever: "VRT NWS, 21.10.2026" },
+  { naam: "Nederland", vlag: "nl", org: "Tweede Kamer", wat: "Haalde uit voorzorg de website offline", bron: "https://nieuws.nl/algemeen/website-tweede-kamer-uit-voorzorg-offline-om-kwetsbaarheden-php", uitgever: "ANP (Nieuws.nl), 21.10.2026" },
+];
+type Platform = { naam: string; logo: string; bron: string };
+const RISICO: Platform[] = [
+  { naam: "WordPress", logo: "/security/logos/wordpress.png", bron: "https://wordpress.org/news/2026/10/critical-php-security-release/" },
+  { naam: "WooCommerce", logo: "/security/logos/woocommerce.svg", bron: "https://developer.woocommerce.com/2026/10/21/php-security-release/" },
+  { naam: "Magento", logo: "/security/logos/magento.svg", bron: "https://developer.adobe.com/commerce/" },
+  { naam: "Joomla", logo: "/security/logos/joomla.svg", bron: "https://www.joomla.org/" },
+  { naam: "Drupal", logo: "/security/logos/drupal.svg", bron: "https://www.drupal.org/psa-2026-10-20" },
+  { naam: "PrestaShop", logo: "/security/logos/prestashop.svg", bron: "https://build.prestashop-project.org/news/2026/php-security-updates-october-2026/" },
+  { naam: "Laravel", logo: "/security/logos/laravel.svg", bron: "https://laravel.com/blog/php-critical-vulnerability-response-updates" },
+];
+
+function Extern({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
+  return (
+    <a className={className} href={href} target="_blank" rel="noopener">
+      {children}
+      <span className="pc-sr">(opent in een nieuw tabblad)</span>
+    </a>
+  );
+}
+
+function Geraakt() {
+  return (
+    <section className="h-wrap pc-geraakt" aria-labelledby="pc-geraakt-kop">
+      <h2 className="pc-blokkop" id="pc-geraakt-kop">Wie werd geraakt.</h2>
+      <ul className="pc-logos">
+        {GERAAKT.map((g, i) => (
+          <li key={g.naam}>
+            <Extern href={g.bron} className="pc-logo-link">
+              {g.logo
+                ? <span className="pc-merk"><img className="pc-logo" src={g.logo} alt={g.naam} height="48" loading="lazy" /><strong translate="no" aria-hidden="true">{g.naam}</strong></span>
+                : <span className="pc-vlag-naam"><img className="pc-vlag" src={`/security/vlaggen/${g.vlag}.svg`} alt="" height="40" loading="lazy" /><strong>{g.naam}</strong><small translate="no">{g.org}</small></span>}
+              <span className="pc-logo-wat">{g.wat}<sup>{i + 1}</sup></span>
+            </Extern>
+          </li>
+        ))}
+      </ul>
+      <p className="pc-geen-klant">Deze organisaties zijn geen klanten of partners van SocialNow. Ze gingen offline of kregen problemen door php2shell. Bronnen hieronder.</p>
+      <ol className="pc-bronnen pc-geraakt-bronnen">
+        {GERAAKT.map((g) => (
+          <li key={g.naam}><span>{g.naam}</span>{g.org && <span translate="no">, {g.org}</span>}<span aria-hidden="true">: </span><Extern href={g.bron}><span translate="no">{g.uitgever}</span></Extern></li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function Risico() {
+  return (
+    <section className="h-wrap pc-risico" aria-labelledby="pc-risico-kop">
+      <h2 className="pc-blokkop" id="pc-risico-kop">Wie loopt risico.</h2>
+      <ul className="pc-logos pc-logos-platform">
+        {RISICO.map((p) => (
+          <li key={p.naam}>
+            <Extern href={p.bron} className="pc-logo-link"><img className="pc-logo" src={p.logo} alt={p.naam} height="40" loading="lazy" /><span className="pc-logo-naam" translate="no" aria-hidden="true">{p.naam}</span></Extern>
+          </li>
+        ))}
+      </ul>
+      <p className="pc-risico-oproep">Gebouwd op een van deze en heeft niemand er al een tijdje naar omgekeken? Doe de scan.</p>
+      <p className="pc-risico-host">Een site bij een moderne host die PHP zelf bijwerkt, loopt minder risico.</p>
+      <p className="pc-geen-klant">Deze platforms draaien op PHP. Het zijn geen klanten of partners van SocialNow.</p>
+    </section>
+  );
+}
+
 export function PhpCheckPage() {
   const { t, language } = useLanguage();
   const [domein, zetDomein] = useState("");
@@ -258,8 +421,22 @@ export function PhpCheckPage() {
   const [vooraf, zetVooraf] = useState("");
   useEffect(() => { try { zetVooraf(normaliseerInvoer(new URLSearchParams(window.location.search).get("domein") || "")); } catch { /* geen domein */ } }, []);
   const uitslagRef = useRef<HTMLDivElement>(null);
-  // Websiterapport onder de PHP-uitslag (feat/check-rapport): elke nieuwe check is een nieuwe ronde.
+  const aanvraagRef = useRef<HTMLElement>(null);
+  // Websiterapport onder het PHP-blok (feat/check-rapport): elke nieuwe check is een nieuwe ronde.
   const [ronde, zetRonde] = useState(0);
+  // socialnow.nl/security#aanvraag (ook /nl/security#aanvraag, en /check#aanvraag via de 308 uit vercel.json; de mailing
+  // linkt hierheen): de pagina scrolt naar het formulier. Live bleef scrollY 0, want de pagina bouwt na het laden nog op
+  // (taalwissel, film, rapport); daarom een paar keer opnieuw in beeld zetten (overgenomen uit PR #148).
+  useEffect(() => {
+    const wekkers: number[] = [];
+    const kijk = () => {
+      if (window.location.hash !== "#aanvraag") return;
+      for (const ms of [0, 300, 900, 1800]) wekkers.push(window.setTimeout(() => aanvraagRef.current?.scrollIntoView({ block: "start" }), ms));
+    };
+    kijk();
+    window.addEventListener("hashchange", kijk);
+    return () => { window.removeEventListener("hashchange", kijk); wekkers.forEach((w) => window.clearTimeout(w)); };
+  }, []);
 
   const toon = (u: Uitslag) => { zetUitslag(u); requestAnimationFrame(() => uitslagRef.current?.focus()); };
 
@@ -276,7 +453,7 @@ export function PhpCheckPage() {
       const r = await fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ domein: host }) });
       const j: Uitslag | null = await r.json().catch(() => null);
       if (j && !j.ok && ["leeg", "ongeldig", "ip", "poort"].includes(j.code || j.reden || "")) zetHint(t("Vul een domein in, bijvoorbeeld jouwbedrijf.nl."));
-      else if (r.status === 429) zetHint(t("Veel checks vanaf jouw netwerk. Probeer het over een paar minuten nog eens."));
+      else if (r.status === 429) zetHint(t("Veel scans vanaf jouw netwerk. Probeer het over een paar minuten nog eens."));
       else toon(j?.ok && j.uitslag ? j : { ok: true, domein: host, uitslag: "onbekend", phpVersie: null, code: "fout" });
     } catch {
       // Een check lukt altijd: ook als onze eigen functie niet antwoordt, krijgt de bezoeker een uitslag.
@@ -286,57 +463,18 @@ export function PhpCheckPage() {
     }
   };
 
-  // Teksten volgen de beslistabel in ONDERZOEK.md 5.2: rood alleen met bewijs, nooit "veilig".
-  const tekst = (u: Uitslag) => {
-    const w = { versie: u.phpVersie, fix: u.hersteldVanaf, domein: u.domein, release: u.release };
-    const r = u.code || u.reden || "";
-    if (u.uitslag === "groen") return {
-      kop: t("Je PHP bevat de fix."),
-      uitleg: invul(t(r === "ubuntu-hersteld"
-        ? "We zien PHP {versie}, de herstelde build van {release}. Dit zegt niets over een eerdere inbraak, andere PHP-versies op dezelfde server, of dat alle PHP-processen opnieuw zijn gestart."
-        : "We zien PHP {versie}. Dat is gelijk aan of nieuwer dan de herstelde versie. Dit zegt niets over een eerdere inbraak, andere PHP-versies op dezelfde server, of dat alle PHP-processen opnieuw zijn gestart."), w),
-    };
-    if (u.uitslag === "rood") return {
-      kop: t("Je PHP is niet gepatcht."),
-      uitleg: invul(t("Je server meldt PHP {versie}. De herstelde versie is {fix}. Werk het PHP-pakket bij, herstart PHP en laat controleren of er al misbruik is geweest. Wij doen dat gratis voor je."), w),
-    };
-    if (u.uitslag === "oranje") {
-      if (r === "onder-de-fix-zonder-bewijs" || r === "el-leverancier-onder-fix") return {
-        kop: t("Waarschijnlijk niet gepatcht."),
-        uitleg: invul(t("Je server meldt PHP {versie}. De fix zit in {fix} en nieuwer. Sommige hosts patchen zonder het nummer te veranderen. Vraag je host schriftelijk of PHP is bijgewerkt voor CVE-2026-109618 en CVE-2026-109619, of laat het ons gratis uitzoeken."), w),
-      };
-      if (r === "doorverwijzing") return {
-        kop: t("Je domein stuurt door."),
-        uitleg: invul(t("Je domein stuurt door naar {naar}. Die server meldt PHP {versie}, zonder de fix. Of dat jouw server is, zien we van buitenaf niet. Laat het ons gratis uitzoeken."), { ...w, naar: u.doorverwezenNaar }),
-      };
-      if (r === "eol-alleen-via-host") return {
-        kop: t("Verouderde PHP, vraag je host."),
-        uitleg: invul(t("PHP {versie} krijgt geen officiële fix meer. Alleen een host of LTS-leverancier kan hem gepatcht hebben. Vraag het je host schriftelijk, of stap over op PHP 8.3 of nieuwer. We helpen je daar gratis mee."), w),
-      };
-      const oranje: Record<string, string> = {
-        "tegenstrijdige-versies": "Je server noemt meer dan één PHP-versie. Daarom zeggen we liever niets dan iets verkeerds.",
-        "geen-patchnummer": "Je server meldt PHP {versie}, zonder het laatste cijfer. Daaraan zien we niet of de fix erin zit.",
-      };
-      return {
-        kop: t("Van buitenaf niet te zeggen."),
-        uitleg: invul(t(oranje[r] || "Je server meldt PHP {versie} uit een pakket waarvan we de fixversie nog niet kennen. Zulke pakketten krijgen de fix vaak zonder dat het nummer verandert."), w) + " " + t("Laat ons handmatig kijken, dat is gratis."),
-      };
-    }
-    // Onbekend, om welke reden ook (versie verborgen, geen PHP te zien, site onbereikbaar, onze functie faalde).
-    return { kop: t("Je site schermt dit af."), uitleg: t("Plan een call in of vul het formulier in, dan nemen we contact met je op.") };
-  };
-
-  const LABEL: Record<string, string> = { groen: "Fix gezien", rood: "Niet gepatcht", oranje: "Twijfel", onbekend: "Afgeschermd" };
-
   const u = uitslag?.ok ? uitslag : null;
-  const uitleg = u ? tekst(u) : null;
-  const kleur = u?.uitslag || "onbekend";
   const gecheckt = u?.domein || normaliseerInvoer(domein);
 
   return (
     <div className="pc">
+      {/* 22 oktober 2026, middag (Marinus): de film staat helemaal bovenaan, boven de scan. */}
+      <Film />
+      <Geraakt />
+      <Risico />
+
       <section className="pc-hero h-wrap">
-        <p className="h-eyebrow pc-eyebrow"><i aria-hidden="true" /> Gratis php2shell-check</p>
+        <p className="h-eyebrow pc-eyebrow"><i aria-hidden="true" /> Gratis securityscan</p>
         <h1 className="pc-kop">Is je website veilig?</h1>
 
         <form className="pc-check" onSubmit={start} noValidate>
@@ -357,43 +495,25 @@ export function PhpCheckPage() {
           </label>
           {hint && <p className="pc-hint" id="pc-check-hint">{hint}</p>}
           <button className="pc-knop" type="submit" disabled={bezig}>
-            <span>{bezig ? "Bezig met de check…" : "Doe de gratis check"}</span>
+            <span>{bezig ? "Bezig met de scan…" : "Doe de gratis securityscan"}</span>
             <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
           </button>
         </form>
 
         <div className="pc-uitslag-plek" aria-live="polite">
-          {u && uitleg && (
-            <div className={`pc-uitslag pc-${kleur}`} ref={uitslagRef} tabIndex={-1}>
-              <p className="pc-label"><i aria-hidden="true" />{LABEL[kleur]}</p>
-              <h2>{uitleg.kop}</h2>
-              <p>{uitleg.uitleg}</p>
-              {/* 22 oktober 2026 (Marinus): bovenaan bij de uitslag twee grote knoppen, zo snel en makkelijk mogelijk. */}
-              <Oproepen domein={u.domein || ""} uitslag={u} />
-              {(kleur === "rood" || kleur === "oranje") && (
-                <div className="pc-eerst">
-                  <h3>Doe dit eerst.</h3>
-                  <Stappen aantal={3} domein={u.domein} />
-                </div>
-              )}
-              {kleur !== "onbekend" && (
-                <dl className="pc-gegevens">
-                  <div><dt>Domein</dt><dd translate="no">{u.domein}</dd></div>
-                  <div><dt>PHP-versie</dt><dd translate="no">{u.phpVersie || "-"}</dd></div>
-                  <div><dt>Hersteld vanaf</dt><dd translate="no">{u.hersteldVanaf || "-"}</dd></div>
-                </dl>
-              )}
-              <p className="pc-disclaimer">Deze check leest alleen openbare informatie van je website. Het is een snelle indicatie, geen volledige beveiligingsaudit en geen garantie. Wil je zekerheid? Plan een gratis call met ons team.</p>
-              {/* 22 oktober 2026 (Marinus): onder de PHP-uitslag de vijf punten met echte data. */}
-              {u.domein && <CheckRapport domein={u.domein} ronde={ronde} boek={boekLink(language, u.domein, "uitgebreide-check")} />}
+          {u && (
+            <div className="pc-uitslag" ref={uitslagRef} tabIndex={-1}>
+              {/* Eerst PHP, groot en compleet; pas daaronder de vijf punten, dan Steef en Michelle. */}
+              <PhpBlok u={u} />
+              {u.domein && <CheckRapport domein={u.domein} ronde={ronde} />}
+              {u.uitslag !== "rood" && u.uitslag !== "oranje" && <Mensen domein={u.domein || ""} />}
+              <p className="pc-disclaimer">Deze scan leest alleen openbare informatie van je website. Het is een snelle indicatie, geen volledige beveiligingsaudit en geen garantie. Wil je zekerheid? Plan een gratis call met ons team.</p>
             </div>
           )}
         </div>
       </section>
 
-      <Film />
-
-      {/* 22 oktober 2026 (Marinus): direct onder de uitslag. De volgorde telt, dus genummerd. */}
+      {/* 22 oktober 2026 (Marinus): de hele lijst. De volgorde telt, dus genummerd. */}
       <section className="h-section h-wrap pc-zelf" id="zelf">
         <h2 className="pc-sectiekop">Dit kun je zelf al doen.</h2>
         <Stappen domein={gecheckt} />
@@ -444,10 +564,11 @@ export function PhpCheckPage() {
         </ol>
       </section>
 
-      <section className="h-section h-wrap pc-slot" id="contact">
+      {/* Onderaan: Steef en Michelle, met het korte formulier eronder. De mailing linkt naar #aanvraag. */}
+      <section className="h-section h-wrap pc-slot" id="aanvraag" ref={aanvraagRef}>
         <h2 className="pc-sectiekop">Lukt het niet of wil je zekerheid?</h2>
-        <p className="pc-intro">Wij doen de check en de updates gratis. Wil je dieper gaan, dan bespreken we de scope met je.</p>
-        <Oproepen domein={gecheckt || vooraf} uitslag={u} anker />
+        <Mensen domein={gecheckt || vooraf} />
+        <Aanvraag kort telefoon soort="uitgebreide-check" domein={gecheckt || vooraf} uitslag={u} key={gecheckt || vooraf || "leeg"} />
       </section>
     </div>
   );

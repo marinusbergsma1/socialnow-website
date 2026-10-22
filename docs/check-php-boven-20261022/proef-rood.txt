@@ -1,0 +1,26 @@
+ROOD   in de uitslag eerst het PHP-blok, dan de vijf punten, dan Steef en Michelle
+ROOD   tussen PHP-blok en vijf punten geen knoppenrij
+ROOD   statuskop minstens 28 px en PHP-versie minstens 24 px
+       (render: Build failed with 1 error:)
+ROOD   PhpBlok is los te renderen (export function PhpBlok in PhpCheck.tsx)
+ROOD   film helemaal bovenaan, boven de kop en de check
+GROEN  film: 16:9 op desktop, 9:16 op mobiel, klik om af te spelen, poster, ondertitels in beeld
+ROOD   9:16 op mobiel past op het scherm (max-height in svh)
+ROOD   geen knoppenparen meer (uitgebreide check + contact, call + laat het ons oplossen)
+ROOD   contactblok met Steef en Michelle: foto, naam en rol uit proposal/content.ts, geen verzonnen rollen
+ROOD   per persoon: call plannen (boekingspagina, tot die live is het formulier) en mailen naar secure@socialnow.nl
+ROOD   boekingslink voor de uitgebreide check met type en domein ingevuld (&domein=)
+ROOD   onderaan Steef en Michelle, met het korte formulier (#aanvraag) eronder
+ROOD   mensen met foto, hun links zijn geen pillknoppen
+ROOD   zonder PageSpeed: "Server response" met het gemeten getal en een neutrale status
+ROOD   zonder PageSpeed nooit "laadt snel": "kon niet volledig gemeten worden"
+ROOD   eigen meting telt niet mee als goed of slecht
+GROEN  met PAGESPEED_API_KEY de echte PageSpeed-score
+ROOD   verbeteringen gegroepeerd per punt, elke titel één keer, geen dubbele adviezen
+GROEN  geen toestemmingsvinkje
+GROEN  nooit een foutmelding
+GROEN  zwarte grond, geen ligaturen
+ROOD   elke t()-zin heeft Engels (mist: ontbreekt)
+GROEN  ook in de acht andere talen
+
+17 rood
