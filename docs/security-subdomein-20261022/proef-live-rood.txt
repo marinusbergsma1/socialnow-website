@@ -1,0 +1,11 @@
+GROEN  één omleiding met host-voorwaarde security.socialnow.nl
+GROEN  elk pad op het subdomein gaat mee
+GROEN  doel is https://socialnow.nl/security
+GROEN  permanent (308)
+GROEN  staat bovenaan, vóór de andere omleidingen
+ROOD   live: security.socialnow.nl/ geeft 308 naar https://socialnow.nl/security (kreeg 200 )
+ROOD   live: security.socialnow.nl/?domein=link.nl geeft 308 naar https://socialnow.nl/security?domein=link.nl (kreeg 200 )
+GROEN  live: security.socialnow.nl/iets geeft 308 naar https://socialnow.nl/security (kreeg 308 https://socialnow.nl/security)
+GROEN  live: https://socialnow.nl/security geeft 200 (kreeg 200)
+
+2 eis(en) rood

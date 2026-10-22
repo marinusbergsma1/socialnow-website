@@ -10,7 +10,8 @@ const cfg = JSON.parse(fs.readFileSync("vercel.json", "utf8"));
 const regels = (cfg.redirects || []).filter((r) => (r.has || []).some((h) => h.type === "host" && h.value === "security.socialnow.nl"));
 eis(regels.length === 1, "één omleiding met host-voorwaarde security.socialnow.nl");
 const r = regels[0] || {};
-eis(r.source === "/:pad*" || r.source === "/(.*)", "elk pad op het subdomein gaat mee");
+// "/:pad*" pakt live de kale "/" niet (22 okt gemeten: 200 in plaats van 308), "/(.*)" wel.
+eis(r.source === "/(.*)", "elk pad op het subdomein gaat mee, ook de kale /");
 eis(r.destination === "https://socialnow.nl/security", "doel is https://socialnow.nl/security");
 eis(r.permanent === true, "permanent (308)");
 eis((cfg.redirects || []).indexOf(r) === 0, "staat bovenaan, vóór de andere omleidingen");
