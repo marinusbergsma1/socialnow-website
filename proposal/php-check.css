@@ -352,6 +352,11 @@
   :root .sn-site .pc-print-voet { display: block; margin: 12px 0 0; font-size: 12px; color: #8e8e93; }
 }
 
+/* 22 oktober 2026, 16.15: liggende film op desktop, verticale op mobiel. */
+:root .sn-site .pc-video-16x9 { margin: 0 auto; }
+@media (min-width: 761px) { :root .sn-site .pc-video-9x16 { display: none; } }
+@media (max-width: 760px) { :root .sn-site .pc-video-16x9 { display: none; } }
+
 /* Bentogrid: wie werd geraakt en wie loopt risico, onder de scan. Vier kolommen op desktop, twee op mobiel. */
 :root .sn-site .pc-bento-blok { padding-top: 88px; }
 :root .sn-site .pc-bento { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 1100px; }
