@@ -22,7 +22,7 @@ export function ProductOffer() {
       <img src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" width="600" height="92" />
     </div>
     <div className="sn-product-offer">
-      <p><strong>GRATIS tot 10 GB opslag</strong><span>Meer opslag? Neem contact op</span><span className="sn-product-attribution" lang="en" translate="no">a SocialNow product</span></p>
+      <p><strong>GRATIS voor jou en 2 teamleden</strong><span>Met 10 GB opslag. Groter team? Kies Business of Enterprise.</span><span className="sn-product-attribution" lang="en" translate="no">a SocialNow product</span></p>
       <Link to="/contact?onderwerp=Een%20persoonlijk%20systeem">Bouw samen met ons team</Link>
       {/* 11 oktober 2026 (Marinus): een duidelijke link naar de website-onboarding. Sinds "FREE WEBSITE, groen vlak" wijst
           hij naar de sectie #free-website op de homepage (FreeWebsite.tsx), met uitleg over beide routes en de knop naar
