@@ -1,0 +1,38 @@
+GROEN  in de uitslag eerst het PHP-blok, dan de vijf punten, dan Steef en Michelle
+GROEN  tussen PHP-blok en vijf punten geen knoppenrij
+GROEN  statuskop minstens 28 px en PHP-versie minstens 24 px
+GROEN  NL afgeschermd (wikipedia.org, link.nl): status "Je site schermt dit af.", PHP-versie afgeschermd, één zin, 3 stappen
+GROEN  EN afgeschermd (wikipedia.org, link.nl): status "Your site shields this.", PHP-versie shielded, één zin, 3 stappen
+GROEN  NL geen PHP te zien: status "Je site schermt dit af.", PHP-versie afgeschermd, één zin, 3 stappen
+GROEN  EN geen PHP te zien: status "Your site shields this.", PHP-versie shielded, één zin, 3 stappen
+GROEN  NL onze functie faalt: status "Je site schermt dit af.", PHP-versie afgeschermd, één zin, 3 stappen
+GROEN  EN onze functie faalt: status "Your site shields this.", PHP-versie shielded, één zin, 3 stappen
+GROEN  NL oranje, PHP 5.2.12 (bloemist.nl): status "Verouderde PHP, vraag je host.", PHP-versie 5.2.12, één zin, 3 stappen
+GROEN  EN oranje, PHP 5.2.12 (bloemist.nl): status "Outdated PHP, ask your host.", PHP-versie 5.2.12, één zin, 3 stappen
+GROEN  NL oranje, nummer onder de fix: status "Waarschijnlijk niet gepatcht.", PHP-versie 8.4.26, één zin, 3 stappen
+GROEN  EN oranje, nummer onder de fix: status "Probably not patched.", PHP-versie 8.4.26, één zin, 3 stappen
+GROEN  NL rood, Ubuntu-build: status "Je PHP is niet gepatcht.", PHP-versie 8.1.2-1ubuntu2.25, één zin, 3 stappen
+GROEN  EN rood, Ubuntu-build: status "Your PHP is not patched.", PHP-versie 8.1.2-1ubuntu2.25, één zin, 3 stappen
+GROEN  NL groen: status "Je PHP bevat de fix.", PHP-versie 8.5.12, één zin, 3 stappen
+GROEN  EN groen: status "Your PHP has the fix.", PHP-versie 8.5.12, één zin, 3 stappen
+GROEN  film helemaal bovenaan, boven de kop en de check
+GROEN  film: 16:9 op desktop, 9:16 op mobiel, klik om af te spelen, poster, ondertitels in beeld
+GROEN  9:16 op mobiel past op het scherm (max-height in svh)
+GROEN  geen knoppenparen meer (uitgebreide check + contact, call + laat het ons oplossen)
+GROEN  contactblok met Steef en Michelle: foto, naam en rol uit proposal/content.ts, geen verzonnen rollen
+GROEN  per persoon: call plannen (boekingspagina, tot die live is het formulier) en mailen naar secure@socialnow.nl
+GROEN  boekingslink voor de uitgebreide check met type en domein ingevuld (&domein=)
+GROEN  onderaan Steef en Michelle, met het korte formulier (#aanvraag) eronder
+GROEN  mensen met foto, hun links zijn geen pillknoppen
+GROEN  zonder PageSpeed: "Server response" met het gemeten getal en een neutrale status
+GROEN  zonder PageSpeed nooit "laadt snel": "kon niet volledig gemeten worden"
+GROEN  eigen meting telt niet mee als goed of slecht
+GROEN  met PAGESPEED_API_KEY de echte PageSpeed-score
+GROEN  verbeteringen gegroepeerd per punt, elke titel één keer, geen dubbele adviezen
+GROEN  geen toestemmingsvinkje
+GROEN  nooit een foutmelding
+GROEN  zwarte grond, geen ligaturen
+GROEN  elke t()-zin heeft Engels
+GROEN  ook in de acht andere talen
+
+alles groen

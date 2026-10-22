@@ -25,6 +25,10 @@ const TITEL: Record<Sleutel, string> = {
   email: "E-mailbeveiliging",
 };
 const LABEL: Record<Status, string> = { goed: "Goed", aandacht: "Aandacht", slecht: "Slecht", onbekend: "Niet te meten" };
+// 22 oktober 2026, middag (Marinus): eerlijke snelheid. Zonder Google PageSpeed (PAGESPEED_API_KEY ontbreekt of Google
+// antwoordt niet) is er alleen onze eigen meting van de serverreactie. Dat zegt niets over de snelheid op mobiel, dus nooit
+// "Goed, je site laadt snel": dan heet het punt "Serverreactie", met het gemeten getal en een neutrale status.
+const EIGEN_ZIN = "Google PageSpeed was niet beschikbaar, dus de snelheid op mobiel kon niet volledig gemeten worden. Je server antwoordde in {ttfb} ms.";
 
 // Waarom iets niet gemeten kon worden, in gewone taal.
 const REDEN: Record<string, string> = {
@@ -47,17 +51,6 @@ const REDEN: Record<string, string> = {
   limiet: "Dit domein is net al vaak gecheckt. Probeer het over tien minuten opnieuw.",
   fout: "Er ging aan onze kant iets mis.",
   "geen-http": "Je server gaf geen geldig webantwoord.",
-};
-const PSI_REDEN: Record<string, string> = {
-  "psi-limiet-zonder-sleutel": "Google PageSpeed zit aan zijn gratis daglimiet; dit is onze eigen meting.",
-  "psi-limiet": "Google PageSpeed zit aan zijn daglimiet; dit is onze eigen meting.",
-  "psi-timeout": "Google PageSpeed deed er te lang over; dit is onze eigen meting.",
-  "psi-onbereikbaar": "Google PageSpeed was niet bereikbaar; dit is onze eigen meting.",
-  "psi-kon-site-niet-laden": "Google kon je site niet laden; dit is onze eigen meting.",
-  "psi-sleutel": "Google PageSpeed was niet beschikbaar; dit is onze eigen meting.",
-  "psi-fout": "Google PageSpeed was niet beschikbaar; dit is onze eigen meting.",
-  "psi-geen-score": "Google gaf geen score; dit is onze eigen meting.",
-  limiet: "Dit domein is net al vaak door Google gemeten; dit is onze eigen meting.",
 };
 
 // Eén zin over wat het voor de ondernemer betekent, per eerste probleem.
@@ -176,12 +169,11 @@ function zin(k: Sleutel, p: Punt, t: (s: string) => string): string {
   const w = p.waarde || {};
   const eerste = p.problemen.find((c) => BETEKENIS[c]);
   const vulling = { php: w.php, lcp: w.lcpMs != null ? (w.lcpMs / 1000).toFixed(1) : "", ttfb: w.ttfbMs, mb: w.bytes != null ? (w.bytes / 1e6).toFixed(1) : "", tls: w.tls, dagen: w.dagen };
-  const basis = eerste ? invul(t(BETEKENIS[eerste]), vulling) : t(GOED[k]);
-  if (k === "snelheid" && w.bron === "eigen") return `${basis} ${t(PSI_REDEN[w.psiReden] || PSI_REDEN["psi-fout"])}`.trim();
-  return basis;
+  if (k === "snelheid" && w.bron === "eigen") return invul(t(EIGEN_ZIN), vulling);
+  return eerste ? invul(t(BETEKENIS[eerste]), vulling) : t(GOED[k]);
 }
 
-export function CheckRapport({ domein, ronde, boek }: { domein: string; ronde: number; boek: string }) {
+export function CheckRapport({ domein, ronde }: { domein: string; ronde: number }) {
   const { t } = useLanguage();
   const [punten, zetPunten] = useState<Partial<Record<Sleutel, Punt>>>({});
   const [seconden, zetSeconden] = useState(0);
@@ -208,8 +200,14 @@ export function CheckRapport({ domein, ronde, boek }: { domein: string; ronde: n
   }, [domein, ronde]);
 
   const snelheidBezig = !punten.snelheid;
-  const slecht = VOLGORDE.filter((k) => punten[k]?.status === "slecht");
-  const adviesPunten = slecht.length ? slecht : VOLGORDE.filter((k) => punten[k]?.status === "aandacht");
+  // Wat telt als goed of slecht: de eigen meting van de serverreactie niet (zie EIGEN_ZIN).
+  const telt = (k: Sleutel) => { const p = punten[k]; return p && !(k === "snelheid" && p.waarde?.bron === "eigen") ? p.status : undefined; };
+  const slecht = VOLGORDE.filter((k) => telt(k) === "slecht");
+  // Verbeteringen per punt (Marinus: geen dubbele labels onder elkaar): eerst slecht, dan aandacht, elk punt één keer
+  // met zijn eigen adviezen eronder.
+  const adviezen = [...slecht, ...VOLGORDE.filter((k) => telt(k) === "aandacht")]
+    .map((k) => ({ k, regels: [...new Set((punten[k]?.problemen || []).filter((c) => ADVIES[c]).map((c) => ADVIES[c]))].slice(0, 3) }))
+    .filter((g) => g.regels.length);
 
   return (
     <div className="cr" aria-live="polite">
@@ -235,12 +233,13 @@ export function CheckRapport({ domein, ronde, boek }: { domein: string; ronde: n
               </li>
             );
           }
+          const eigen = k === "snelheid" && p.waarde?.bron === "eigen" && p.status !== "onbekend";
           return (
-            <li key={k} className={`cr-rij cr-${p.status}`}>
+            <li key={k} className={`cr-rij cr-${eigen ? "neutraal" : p.status}`}>
               <details>
                 <summary className="cr-hoofd">
-                  <span className="cr-status">{t(LABEL[p.status])}</span>
-                  <span className="cr-titel">{t(TITEL[k])}</span>
+                  <span className="cr-status">{t(eigen ? "Gemeten" : LABEL[p.status])}</span>
+                  <span className="cr-titel">{t(eigen ? "Serverreactie" : TITEL[k])}</span>
                   <span className="cr-waarde" translate="no">{kopwaarde(k, p, t)}</span>
                 </summary>
                 <div className="cr-bewijs">
@@ -263,18 +262,15 @@ export function CheckRapport({ domein, ronde, boek }: { domein: string; ronde: n
         })}
       </ol>
       {snelheidBezig && <p className="cr-noot">{t("De andere punten staan al klaar. De snelheid volgt zodra Google klaar is.")}</p>}
-      {adviesPunten.length > 0 && (
+      {adviezen.length > 0 && (
         <div className="cr-advies">
           <h3>{slecht.length ? t("Dit kun je zelf doen.") : t("Kleine verbeteringen.")}</h3>
-          <ul>
-            {adviesPunten.flatMap((k) => (punten[k]?.problemen || []).filter((c) => ADVIES[c]).slice(0, 2).map((c) => (
-              <li key={`${k}-${c}`}><strong>{t(TITEL[k])}</strong> {t(ADVIES[c])}</li>
-            )))}
-          </ul>
-          <div className="cr-knoppen">
-            <a className="pc-knop" href={boek} target="_blank" rel="noopener"><span>{t("Plan een call")}</span></a>
-            <a className="pc-knop pc-knop-wit" href="#aanvraag"><span>{t("Laat het ons oplossen")}</span></a>
-          </div>
+          {adviezen.map(({ k, regels }) => (
+            <div className="cr-groep" key={k}>
+              <h4>{t(TITEL[k])}</h4>
+              <ul>{regels.map((r) => <li key={r}>{t(r)}</li>)}</ul>
+            </div>
+          ))}
         </div>
       )}
       <p className="cr-noot">{t("Alleen openbare informatie: je homepage, hooguit vijf gelinkte pagina's, DNS en Google PageSpeed. Bekende lekken komen uit OSV.dev en WordPress.org.")}</p>
