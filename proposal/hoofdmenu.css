@@ -39,9 +39,39 @@ html:root .sn-site .h-header-call:focus-visible{outline:2px solid #25d366;outlin
   html:root .sn-site .sn-pill.h-header-claim{flex:0 0 auto}
 }
 
-/* Mobiel menu: Producten als kopje met de twee producten, onderaan Plan een call. */
+/* Mobiel menu: Producten en Diensten als kopje met hun kaarten, onderaan Plan een call. */
 :root .sn-site .h-mobile-nav .h-mobile-groep{margin:18px 0 0;padding:0;color:#7f9187;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-:root .sn-site .h-mobile-nav a.h-mobile-product{padding-left:14px}
-:root .sn-site .h-mobile-nav a.h-mobile-product>span{font-weight:600}
+/* 22 oktober 2026: Producten en Diensten op mobiel als kaarten, zoals het desktopmenu: de naam met OS in groen en Connect in
+   blauw, daaronder één regel uitleg, het groene pijltje rechts. Het hele vak is het tikvlak (minimaal 64 px hoog). */
+/* Met de kaarten is het menu hoger dan een telefoonscherm; de header plakt bovenaan, dus het menu scrolt zelf, anders blijft
+   Plan een call onder de rand. Met een open menu is de header een kolom van één schermhoogte en vult het menu de rest.
+   Zonder :has een vaste ruimte voor de headerbalk (hooguit 64 px plus 2 x 8 px). */
+:root .sn-site .h-mobile-nav{max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);overflow-y:auto;overscroll-behavior:contain}
+@supports selector(:has(*)){
+  :root .sn-site>.h-header:has(>.h-mobile-nav:not([hidden])){display:flex;flex-direction:column;max-height:100vh;max-height:100dvh}
+  :root .sn-site>.h-header>.h-nav{flex:none}
+  :root .sn-site>.h-header>.h-mobile-nav{flex:0 1 auto;min-height:0;max-height:none}
+}
+:root .sn-site .h-mobile-nav .h-mobile-kaarten{display:grid;gap:8px;margin:10px 0 14px;min-width:0}
+:root .sn-site .h-mobile-nav a.h-mobile-product{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:3px 14px;min-height:64px;padding:14px 16px;border:1px solid #ffffff1f;border-radius:14px;background:#070b09;color:#fff;font-size:16px;overflow-wrap:anywhere}
+:root .sn-site .h-mobile-nav a.h-mobile-product.active{color:#fff;border-color:#25d366}
+:root .sn-site .h-mobile-nav a.h-mobile-product:active,:root .sn-site .h-mobile-nav a.h-mobile-product:focus-visible{background:#0f1a14}
+:root .sn-site .h-mobile-nav a.h-mobile-product:focus-visible{outline:2px solid #25d366;outline-offset:2px}
+:root .sn-site .h-mobile-nav a.h-mobile-product>b{grid-column:1;font-family:"TT Norms",Arial,sans-serif;font-size:17px;font-weight:700;line-height:1.25;letter-spacing:0}
+:root .sn-site .h-mobile-nav a.h-mobile-product>b>i{font-style:normal;color:#25d366}
+:root .sn-site .h-mobile-nav a.h-mobile-product>b>i.connect{color:#20afde}
+:root .sn-site .h-mobile-nav a.h-mobile-product>span{grid-column:1;font-family:"TT Norms",Arial,sans-serif;font-size:14px;font-weight:400;line-height:1.4;color:#a9b8af}
+:root .sn-site .h-mobile-nav a.h-mobile-product>svg{grid-column:2;grid-row:1/span 2;color:#25d366}
 :root .sn-site .h-mobile-nav .h-mobile-call{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;margin-top:18px;padding:0 18px;border:1.5px solid #25d366;border-radius:999px;background:#0c1510;color:#fff;cursor:pointer;font-family:inherit;font-size:16px;font-weight:600;text-align:left}
 :root .sn-site .h-mobile-nav .h-mobile-call>svg{color:#25d366;flex:none}
+
+/* 22 oktober 2026 (Marinus): letters nooit aan elkaar, ook niet in de uitklapmenu's en de mobiele kaarten. */
+:root .sn-site .h-producten-menu,:root .sn-site .h-producten-menu :is(a,b,i,span),:root .sn-site .h-mobile-nav,:root .sn-site .h-mobile-nav :is(a,b,i,span,p){font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0,"dlig" 0,"hlig" 0}
+
+/* 22 oktober 2026: Security als hoofdpunt, rustig. Zelfde letter als de andere navigatielinks, alleen een klein groen
+   schildje ervoor; geen rand, geen vlak, geen pil. Op mobiel een gewone menuregel met het schildje. */
+:root .sn-site .h-desktop-nav a.h-security{display:inline-flex;align-items:center;gap:6px}
+:root .sn-site .h-desktop-nav a.h-security>svg{flex:none;color:#25d366}
+:root .sn-site .h-mobile-nav a.h-security-mobiel{justify-content:flex-start;gap:10px}
+:root .sn-site .h-mobile-nav a.h-security-mobiel>svg:first-child{flex:none;color:#25d366}
+:root .sn-site .h-mobile-nav a.h-security-mobiel>svg:last-child{margin-left:auto}
