@@ -33,6 +33,8 @@ const routeMeta = {
   'gratis-os-demo': {title: 'Gratis OS-demo | SocialNow', description: 'Vraag een gratis demo van SocialNow OS aan via WhatsApp met je naam en e-mailadres.'},
   'antwoord-aanvragen': {title: 'Antwoord op aanvragen | SocialNow', description: 'Persoonlijke antwoordpagina voor aanvragen via WhatsApp.'},
   audit: {title: 'Gratis Google Ads audit | SocialNow', description: 'Nick van Keulen loopt je Google Ads handmatig door: tracking, structuur, biedstrategie en productfeed. Met actieplan en videocall. Gratis.'},
+  // 22 oktober 2026: gratis php2shell-check (CVE-2026-109618 en CVE-2026-109619).
+  check: {title: 'Is je website veilig? Gratis php2shell-check | SocialNow', description: 'Controleer gratis of je server een PHP-versie toont met het php2shell-lek (CVE-2026-109618 en CVE-2026-109619). Eén gewone GET op je homepage, niets opgeslagen. Handmatige check en updates gratis.'},
   vacatures: {title: 'Vacatures: word de verbindende laag | SocialNow', description: 'AI doet het werk, mensen maken het verschil. Bekijk de vacatures bij SocialNow: partner, customer success, onboarding, Odoo, sales, support, content, ads en development.'},
   team: {title: 'Team: de mensen achter het OS | SocialNow', description: 'Maak kennis met oprichter Marinus Bergsma, partner Steef Komen en de specialisten achter SocialNow.'},
   blog: {title: 'Blog: vanuit de praktijk | SocialNow', description: 'Inzichten over websites, AI, content en vindbaarheid vanuit het werk van SocialNow.'},
@@ -64,6 +66,7 @@ const crumbLabels = {
   'gratis-os-demo': 'Gratis OS-demo',
   'antwoord-aanvragen': 'Antwoord op aanvragen',
   audit: 'Gratis Google Ads audit',
+  check: 'Gratis php2shell-check',
   blog: 'Blog',
   juridisch: 'Juridisch en compliance',
   verwerkersovereenkomst: 'Verwerkersovereenkomst',

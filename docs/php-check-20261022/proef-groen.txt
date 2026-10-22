@@ -1,0 +1,62 @@
+GROEN  route /check bestaat (en /nl/check via de taalprefix)
+GROEN  postbuild maakt dist/check/index.html met eigen titel en omschrijving, en zet hem in de sitemap
+GROEN  /php-check verwijst door naar /check
+GROEN  boekknop uit één configwaarde (BOEK_URL), anders het contactformulier
+GROEN  disclaimer en boekknop bij elke uitslag, niet alleen rood
+GROEN  minder uitleg: geen drie niveaus en geen technische FAQ meer
+GROEN  cijfers over php2shell met bronnen in een voetnoot
+GROEN  korte FAQ: precies drie vragen in gewone taal
+GROEN  twee grote knoppen bij de uitslag en onderaan: uitgebreide check (boeking, anders formulier) en contact
+GROEN  kort formulier: drie velden, domein al ingevuld
+GROEN  anker #aanvraag opent het formulier voor de uitgebreide check en scrolt ernaartoe
+GROEN  formulier uitgebreide check: naam, e-mail, website en optioneel telefoon
+GROEN  ?domein= vult de website alvast in
+GROEN  uitlegfilm onder de uitslag: klik om af te spelen, poster, NL-film op /nl en EN-film elders, ondertitels in beeld, 9:16 op mobiel
+GROEN  vier documenten in NL en EN, elk bestand bestaat en is een pdf (nooit een kapotte link)
+GROEN  documenten in een witte sectie
+GROEN  documentenblok verschijnt alleen als er bestanden zijn, nooit een lege link
+GROEN  kop "Is je website veilig?"
+GROEN  geen vinkje: de publieke scan is één gewone GET
+GROEN  onder de knop alleen het veld en de knop, geen geruststellende regels
+GROEN  invoer eerst normaliseren, pas daarna valideren; onzin krijgt een hint, geen fout
+GROEN  elke invoer werkt: link.nl, www.link.nl, https://link.nl/pagina, LINK.NL , link.nl/
+GROEN  server probeert https, http, met en zonder www
+GROEN  een check lukt altijd: faalt onze API of geeft hij geen JSON, dan een nette uitslag "onbekend"
+GROEN  onbekend heet "Je site schermt dit af", met belknop en kort formulier naast elkaar
+GROEN  blok "Dit kun je zelf al doen" met zeven stappen, direct onder de uitslag
+GROEN  rood en oranje tonen stap 1 tot en met 3 in de uitslag
+GROEN  voorbeeldmail om te kopiëren, opmerking over expose_php en bronnen php.net, NCSC en NSA
+GROEN  afsluiting: gratis check en updates, scope bij meer diepgang
+GROEN  formulieren gaan naar api/check-aanvraag (mail naar secure@), met honeypot
+GROEN  EN-kop is "Is your website safe?"
+GROEN  EN-zin over gratis check en scope klopt letterlijk
+GROEN  EN-teksten voor afgeschermd, zelf doen en Copy email letterlijk
+GROEN  EN-disclaimer en knop "Book a free call" letterlijk
+GROEN  elke zin op de pagina heeft een Engelse vertaling (85 zinnen)
+GROEN  EN-titel voor de metadata
+GROEN  ook vertaald in DE, FR, ES, IT, PT, PL, SV en DA
+GROEN  stappen niet dubbel vertaald (anders faalt de prerender)
+GROEN  taal: eerder gekozen taal wint, dan browsertaal, dan land, anders Engels; geen lus op /nl/check; taalkiezer onthoudt
+GROEN  zwarte grond
+GROEN  geen ligaturen
+GROEN  gevulde knop #0b7a37 met witte tekst
+GROEN  geen witte tekst op felgroen #25d366
+GROEN  koppen schalen mee en verdelen hun regels (twee regels gemeten in de PR)
+GROEN  api/php-check.js geeft bij een eigen fout ook een uitslag
+GROEN  limiet per IP
+GROEN  slaat niets op en trackt niets
+GROEN  interne adressen en cloud-metadata worden geweigerd, publieke niet
+GROEN  IP-adressen, andere poorten en inloggegevens als invoer geweigerd
+GROEN  invoer met schema, hoofdletters en pad wordt een hostnaam
+GROEN  versies als getallen vergeleken, niet als tekst
+GROEN  Ubuntu- en Debian-builds in dpkg-volgorde
+GROEN  gewoon nummer onder de fix is oranje, nooit rood (cPanel, CloudLinux, RHEL patchen met het oude nummer)
+GROEN  Ubuntu-build: rood en groen met bewijs
+GROEN  op of boven de fix is groen
+GROEN  versie nooit uit paginatekst; geen PHP zichtbaar is onbekend, niet groen
+GROEN  aanvraag wordt één mail naar secure@socialnow.nl (alias van info@) met naam, e-mail, domein, uitslag, PHP-versie of "afgeschermd", taal, tijdstip, vraag en Reply-To bezoeker (nep-transport)
+GROEN  lukt versturen niet (twee pogingen), dan staat de hele aanvraag in de logs: niets verdwijnt stilletjes
+GROEN  honeypot vangt bots
+GROEN  limiet per IP en per adres; SMTP-gegevens alleen uit env
+
+alles groen

@@ -1,4 +1,5 @@
 import path from "path";
+import { pathToFileURL } from "url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { startVastiqPreview } from "./scripts/vastiq-preview.mjs";
@@ -24,6 +25,26 @@ export default defineConfig({
     // 30 september 2026: alleen de kern van elk woordenboek gaat mee in het eerste script (zie het bestand zelf).
     woordenboekSplit({ verslag: (v) => console.log(`[woordenboek] ${v.kern} van ${v.sleutels} zinnen in het eerste script, waarvan ${v.patroon.length} via een sjabloon; ${v.nergens} staan nergens letterlijk in de code`) }),
     react({ jsxImportSource: "@socialnow/i18n" }),
+    // 22 oktober 2026: de check-functies (api/php-check.js, api/check-aanvraag.js) ook lokaal, in vite dev én vite preview.
+    // Zonder dit gaf een lokale preview HTML terug op /api/php-check en zag de bezoeker "De check lukte niet".
+    (() => {
+      const koppel = (middlewares: { use: (pad: string, fn: (req: any, res: any) => void) => void }) => {
+        for (const naam of ["php-check", "check-aanvraag", "check-rapport"]) {
+          middlewares.use(`/api/${naam}`, async (req, res) => {
+            const stukken: Buffer[] = [];
+            for await (const s of req) stukken.push(s as Buffer);
+            const { default: handler } = await import(pathToFileURL(path.resolve(__dirname, `api/${naam}.js`)).href);
+            const r = Object.assign(req, { body: Buffer.concat(stukken).toString("utf8") });
+            const uit = Object.assign(res, {
+              status(code: number) { res.statusCode = code; return uit; },
+              json(data: unknown) { res.setHeader("Content-Type", "application/json"); res.end(JSON.stringify(data)); return uit; },
+            });
+            await handler(r, uit);
+          });
+        }
+      };
+      return { name: "local-check-api", configureServer: (server: any) => koppel(server.middlewares), configurePreviewServer: (server: any) => koppel(server.middlewares) };
+    })(),
     {
       name: "socialnow-preview-routes",
       configureServer(server) {

@@ -23,7 +23,14 @@ export function languageForCountry(country: string, browserLanguages: readonly s
 }
 function writePreference(name: string, value: string) {
   const domain = /(^|\.)socialnow\.nl$/.test(location.hostname) ? '; Domain=.socialnow.nl' : '';
-  document.cookie = `${name}=${value}; Path=/; Max-Age=31536000; SameSite=Lax${domain}${location.protocol === 'https:' ? '; Secure' : ''}`;
+  // 22 oktober 2026: opslag kan geblokkeerd zijn (privémodus, strenge instellingen); dan gewoon zonder onthouden verder.
+  try { document.cookie = `${name}=${value}; Path=/; Max-Age=31536000; SameSite=Lax${domain}${location.protocol === 'https:' ? '; Secure' : ''}`; } catch { /* niet onthouden */ }
+}
+// 22 oktober 2026 (Marinus, bij /check): volgorde is eerst een eerder gekozen taal, dan de browsertaal, dan het land,
+// en anders Engels. De eerste browsertaal die de site heeft, wint.
+function browserTaal(): Language | null {
+  const talen = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]).filter(Boolean);
+  return (talen.map(value => value.toLowerCase().split('-')[0]).find(isLanguage) as Language | undefined) || null;
 }
 export function rememberLanguage(language: Language) {
   writePreference('sn-taal', language);
@@ -38,6 +45,7 @@ export function needsCountryLookup(): boolean {
   if (languageInPath()) return false;
   const saved = document.cookie.match(/(?:^|;\s*)sn-taal=([a-z]{2})(?:;|$)/)?.[1];
   if (saved && isLanguage(saved)) return false;
+  if (browserTaal()) return false;
   try { if (sessionStorage.getItem('sn-detected-country')) return false; } catch {}
   return true;
 }
@@ -46,7 +54,9 @@ export async function detectVisitorLanguage(): Promise<void> {
   if (/^\/(nl|de|fr|es|it|pt|pl|sv|da)(?:\/|$)/.test(location.pathname)) return;
   const saved = document.cookie.match(/(?:^|;\s*)sn-taal=(en|nl|de|fr|es|it|pt|pl|sv|da)(?:;|$)/)?.[1];
   let language: Language = saved && isLanguage(saved) ? saved : 'en';
-  if (!saved) {
+  const uitBrowser = saved ? null : browserTaal();
+  if (uitBrowser) language = uitBrowser;
+  else if (!saved) {
     const browserLanguages = navigator.languages || [navigator.language];
     let country: string | null = null;
     try { country = sessionStorage.getItem('sn-detected-country'); } catch {}

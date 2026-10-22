@@ -1,0 +1,226 @@
+/* Gratis php2shell-check (PhpCheck.tsx), 22 oktober 2026. Zwarte grond, groen #25d366 alleen als accent
+   (stip, rand, vinkje), gevulde knoppen in #0b7a37 met witte tekst (5,45 op 1 met wit). Koppen lopen
+   nooit over drie regels: gemeten op 320 tot 1920 px in EN en NL (zie de PR). */
+:root .sn-site .pc {
+  --pc-groen: #25d366;
+  --pc-vlak: #0b7a37;
+  --pc-vlak-hover: #0d8a3f;
+  --pc-rood: #ff5a5f;
+  --pc-oranje: #ff9f1a;
+  --pc-grijs: #8e8e93;
+  --pc-rand: #2a2a2a;
+  --pc-grond: #0a0a0a;
+  background: #000;
+  color: #f5f5f5;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0, "dlig" 0, "hlig" 0, "calt" 0;
+  padding-bottom: 120px;
+}
+:root .sn-site .pc *, :root .sn-site .pc *::before, :root .sn-site .pc *::after { box-sizing: border-box; }
+
+:root .sn-site .pc-hero { padding-top: 150px; }
+:root .sn-site .pc-hero > * { max-width: 880px; }
+:root .sn-site .pc-eyebrow { display: flex; align-items: center; gap: 10px; color: #cacacf; }
+:root .sn-site .pc-eyebrow i, :root .sn-site .pc-label i {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--pc-groen); display: inline-block; flex: none;
+}
+:root .sn-site .pc-kop {
+  /* De maat komt van de site: :root .sn-site h1 zet elke h1 met !important op hoogstens 36 px. */
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+  margin: 22px 0 0;
+  text-wrap: balance;
+}
+:root .sn-site .pc-intro { font-size: 17px; line-height: 1.55; color: #cacacf; margin-top: 24px; max-width: 680px; }
+
+/* De check */
+:root .sn-site .pc-check {
+  margin-top: 40px;
+  background: var(--pc-grond);
+  border: 1px solid var(--pc-rand);
+  box-shadow: inset 0 1px #ffffff14;
+  border-radius: 22px;
+  padding: 28px;
+}
+:root .sn-site .pc-veld span { display: block; font-size: 12px; color: #cacacf; }
+:root .sn-site .pc input, :root .sn-site .pc textarea {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  border: 1px solid #393939;
+  border-radius: 10px;
+  background: #050505;
+  color: #f5f5f5;
+  font: inherit;
+  font-size: 16px;
+  padding: 14px 16px;
+}
+:root .sn-site .pc-veld input { font-size: 20px; padding: 16px 18px; }
+:root .sn-site .pc input:focus-visible, :root .sn-site .pc textarea:focus-visible { outline: 2px solid var(--pc-groen); outline-offset: 1px; border-color: transparent; }
+:root .sn-site .pc input::placeholder, :root .sn-site .pc textarea::placeholder { color: #6e6e73; }
+
+:root .sn-site .pc-vink { display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; font-size: 15px; line-height: 1.45; color: #e5e5e7; cursor: pointer; }
+:root .sn-site .pc-vink input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+:root .sn-site .pc-vinkje {
+  flex: none; width: 22px; height: 22px; margin-top: 1px; border-radius: 6px; border: 1.5px solid #5a5a5f;
+  display: grid; place-items: center; color: transparent; transition: background .2s, border-color .2s;
+}
+:root .sn-site .pc-vink input:checked + .pc-vinkje { background: var(--pc-vlak); border-color: var(--pc-groen); color: #fff; }
+:root .sn-site .pc-vink input:focus-visible + .pc-vinkje { outline: 2px solid var(--pc-groen); outline-offset: 2px; }
+
+:root .sn-site .pc-knop {
+  display: inline-flex; align-items: center; gap: 12px;
+  margin-top: 22px; padding: 10px 10px 10px 22px; min-height: 50px;
+  border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--pc-vlak); color: #fff;
+  font: inherit; font-size: 15px; font-weight: 600; text-decoration: none; white-space: nowrap;
+  transition: background .2s;
+}
+:root .sn-site .pc-knop:hover { background: var(--pc-vlak-hover); }
+:root .sn-site .pc-knop:focus-visible { outline: 2px solid var(--pc-groen); outline-offset: 3px; }
+:root .sn-site .pc-knop:disabled { opacity: .7; cursor: progress; }
+:root .sn-site .pc-knop span { color: #fff; }
+:root .sn-site .pc-knop-icoon { width: 32px; height: 32px; border-radius: 50%; background: #fff; display: grid; place-items: center; flex: none; }
+:root .sn-site .pc-knop .pc-knop-icoon svg { color: var(--pc-vlak); }
+:root .sn-site .pc-knop-wit { background: #fff; }
+:root .sn-site .pc-knop-wit:hover { background: #ecfdf3; }
+:root .sn-site .pc-knop-wit span { color: var(--pc-vlak); }
+:root .sn-site .pc-knop-wit .pc-knop-icoon { background: var(--pc-vlak); }
+:root .sn-site .pc-knop-wit .pc-knop-icoon svg { color: #fff; }
+
+:root .sn-site .pc-klein { font-size: 13px; line-height: 1.5; color: #8e8e93; margin-top: 14px; }
+:root .sn-site .pc-klein a { color: var(--pc-groen); }
+:root .sn-site .pc-fout { margin-top: 16px; color: #ffb4b6; font-size: 14px; }
+
+/* De uitslag */
+:root .sn-site .pc-uitslag-plek { margin-top: 24px; }
+:root .sn-site .pc-uitslag {
+  border-radius: 22px; padding: 28px; border: 1px solid var(--pc-rand); background: var(--pc-grond);
+  animation: pc-in .5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+:root .sn-site .pc-uitslag:focus { outline: none; }
+:root .sn-site .pc-uitslag.pc-rood { border-color: #ff5a5f88; box-shadow: 0 0 0 1px #ff5a5f22 inset; }
+:root .sn-site .pc-uitslag.pc-groen { border-color: #25d36688; }
+:root .sn-site .pc-uitslag.pc-oranje { border-color: #ff9f1a88; }
+:root .sn-site .pc-uitslag.pc-onbekend { border-color: #3a3a3c; }
+:root .sn-site .pc-label { display: flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #cacacf; }
+:root .sn-site .pc-rood .pc-label i { background: var(--pc-rood); }
+:root .sn-site .pc-oranje .pc-label i { background: var(--pc-oranje); }
+:root .sn-site .pc-onbekend .pc-label i { background: var(--pc-grijs); }
+:root .sn-site .pc-uitslag h2 { font-size: clamp(24px, 4.2vw, 36px); line-height: 1.12; letter-spacing: -0.02em; margin: 14px 0 0; text-wrap: balance; }
+:root .sn-site .pc-uitslag > p:not(.pc-label) { margin-top: 14px; font-size: 16px; line-height: 1.55; color: #d6d6da; }
+:root .sn-site .pc-gegevens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 22px 0 0; }
+:root .sn-site .pc-gegevens div { border-top: 1px solid var(--pc-rand); padding-top: 10px; min-width: 0; }
+:root .sn-site .pc-gegevens dt { font-size: 12px; color: #8e8e93; }
+:root .sn-site .pc-gegevens dd { margin: 4px 0 0; font-size: 15px; overflow-wrap: anywhere; }
+@keyframes pc-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { :root .sn-site .pc-uitslag { animation: none; } }
+
+/* Uitleg */
+:root .sn-site .pc-sectiekop { font-size: clamp(28px, 3.6vw, 44px); line-height: 1.06; letter-spacing: -0.03em; font-weight: 700; margin: 0; text-wrap: balance; max-width: 18ch; }
+:root .sn-site .pc-tegels { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+:root .sn-site .pc-tegels li { background: var(--pc-grond); border: 1px solid var(--pc-rand); border-radius: 20px; padding: 26px; }
+:root .sn-site .pc-tegels span { font-size: 12px; color: var(--pc-groen); letter-spacing: .1em; }
+:root .sn-site .pc-tegels h3 { font-size: 22px; margin: 14px 0 0; }
+:root .sn-site .pc-tegels p { margin-top: 10px; font-size: 15px; line-height: 1.55; color: #cacacf; }
+:root .sn-site .pc-versies { margin-top: 22px; }
+
+/* Handmatig */
+:root .sn-site .pc-handmatig { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
+:root .sn-site .pc-lijst { list-style: none; padding: 0; margin: 28px 0 0; border-top: 1px solid var(--pc-rand); }
+:root .sn-site .pc-lijst li { border-bottom: 1px solid var(--pc-rand); padding: 14px 0; font-size: 15px; display: flex; gap: 14px; align-items: center; }
+:root .sn-site .pc-lijst li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--pc-groen); flex: none; }
+:root .sn-site .pc-formulier { background: var(--pc-grond); border: 1px solid var(--pc-rand); box-shadow: inset 0 1px #ffffff14; border-radius: 22px; padding: 30px; }
+:root .sn-site .pc-formulier h2 { font-size: clamp(22px, 3.4vw, 28px); margin: 0 0 8px; }
+:root .sn-site .pc-formulier > p { margin-top: 12px; color: #d6d6da; line-height: 1.55; }
+:root .sn-site .pc-formulier label { display: block; font-size: 12px; color: #cacacf; margin-top: 16px; }
+:root .sn-site .pc-rij { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Disclaimer bij elke uitslag, met de boekknop (22 oktober 2026). */
+:root .sn-site .pc-disclaimer { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--pc-rand); }
+:root .sn-site .pc-disclaimer > p { font-size: 14px; line-height: 1.55; color: #b8b8bd; }
+:root .sn-site .pc-knoppen { display: flex; flex-wrap: wrap; gap: 12px; }
+:root .sn-site .pc-knoppen .pc-knop { margin-top: 16px; }
+
+/* Drie niveaus, php2shell, data en FAQ */
+:root .sn-site .pc-onder { margin-top: 26px; }
+:root .sn-site .pc-kolommen { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 28px; }
+:root .sn-site .pc-kolommen p { font-size: 16px; line-height: 1.6; color: #d6d6da; }
+:root .sn-site .pc-kolommen a, :root .sn-site .pc-bronnen a { color: var(--pc-groen); }
+:root .sn-site .pc-kolommen sup { font-size: 11px; color: var(--pc-groen); margin-left: 1px; }
+:root .sn-site .pc-bronnen { list-style: decimal; margin: 28px 0 0; padding-left: 18px; font-size: 13px; line-height: 1.6; color: #8e8e93; border-top: 1px solid var(--pc-rand); padding-top: 14px; }
+:root .sn-site .pc-faq { margin-top: 40px; border-top: 1px solid var(--pc-rand); }
+:root .sn-site .pc-faq details { border-bottom: 1px solid var(--pc-rand); padding: 18px 0; }
+:root .sn-site .pc-faq summary { cursor: pointer; font-size: 17px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+:root .sn-site .pc-faq summary::-webkit-details-marker { display: none; }
+:root .sn-site .pc-faq summary::after { content: "+"; color: var(--pc-groen); font-weight: 400; font-size: 22px; line-height: 1; }
+:root .sn-site .pc-faq details[open] summary::after { content: "–"; }
+:root .sn-site .pc-faq details p { margin-top: 12px; font-size: 15px; line-height: 1.6; color: #cacacf; max-width: 760px; }
+:root .sn-site .pc-handmatig-tekst .pc-knop { margin-top: 28px; }
+
+/* 22 oktober 2026, later: hint onder het veld, "Je site schermt dit af" met twee acties, de zelf-te-nemen stappen. */
+:root .sn-site .pc-hint { margin-top: 10px; font-size: 14px; color: #cacacf; }
+:root .sn-site .pc-honing { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+:root .sn-site .pc-acties { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 20px; align-items: start; margin-top: 22px; }
+:root .sn-site .pc-actie-bel .pc-knop { margin-top: 0; }
+:root .sn-site .pc-formulier.pc-kort { padding: 18px; border-radius: 16px; background: #050505; box-shadow: none; }
+:root .sn-site .pc-formulier.pc-kort label:first-child { margin-top: 0; }
+:root .sn-site .pc-formulier h3 { font-size: 18px; margin: 0; }
+:root .sn-site .pc-eerst { margin-top: 22px; padding: 18px 18px 6px; border: 1px solid var(--pc-rand); border-radius: 16px; background: #050505; }
+:root .sn-site .pc-eerst h3 { font-size: 16px; margin: 0; }
+:root .sn-site .pc-stappen { list-style: none; counter-reset: stap; margin: 14px 0 0; padding: 0; }
+:root .sn-site .pc-stappen li { counter-increment: stap; position: relative; padding: 0 0 14px 40px; font-size: 15px; line-height: 1.55; color: #d6d6da; }
+:root .sn-site .pc-stappen li::before { content: counter(stap); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--pc-groen); color: var(--pc-groen); font-size: 13px; display: grid; place-items: center; }
+:root .sn-site .pc-zelf .pc-stappen { margin-top: 28px; max-width: 820px; }
+:root .sn-site .pc-zelf .pc-stappen li { font-size: 16px; padding-bottom: 18px; }
+:root .sn-site .pc-stappen li > span { display: block; }
+:root .sn-site .pc-stappen sup { font-size: 11px; color: var(--pc-groen); margin-left: 2px; }
+:root .sn-site .pc-kopieer { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--pc-groen); background: transparent; color: #fff; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+:root .sn-site .pc-kopieer svg { color: var(--pc-groen); }
+:root .sn-site .pc-kopieer:focus-visible { outline: 2px solid var(--pc-groen); outline-offset: 2px; }
+:root .sn-site .pc-noot { margin-top: 6px; font-size: 14px; color: #8e8e93; max-width: 820px; }
+:root .sn-site .pc-noot code { color: #cacacf; font-size: 13px; }
+:root .sn-site .pc-afsluiter { margin-top: 26px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; }
+:root .sn-site .pc-afsluiter p { font-size: 17px; color: #f5f5f5; }
+:root .sn-site .pc-afsluiter .pc-knop { margin-top: 10px; }
+
+/* 22 oktober 2026, later: twee grote knoppen naast elkaar, bij de uitslag en onderaan. */
+:root .sn-site .pc-oproepen { margin-top: 22px; }
+:root .sn-site .pc-oproep-knoppen { display: flex; flex-wrap: wrap; gap: 12px; }
+:root .sn-site .pc-oproep-knoppen .pc-knop { margin-top: 0; }
+:root .sn-site .pc-knop.pc-groot { min-height: 58px; font-size: 16px; padding: 12px 12px 12px 26px; }
+:root .sn-site .pc-knop.pc-groot .pc-knop-icoon { width: 36px; height: 36px; }
+:root .sn-site .pc-oproepen .pc-formulier { margin-top: 16px; }
+:root .sn-site p.pc-disclaimer { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--pc-rand); font-size: 14px; line-height: 1.55; color: #b8b8bd; }
+:root .sn-site .pc-slot .pc-oproepen { margin-top: 26px; max-width: 720px; }
+:root .sn-site .pc-documenten { background: #fff; color: #111; padding: 48px 0; margin: 24px 0; }
+:root .sn-site .pc-documenten h2 { margin: 0; font-size: 22px; line-height: 1.2; color: #111; }
+:root .sn-site .pc-docs { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+:root .sn-site .pc-docs a { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 52px; padding: 12px 16px; border: 1px solid #e3e3e6; border-radius: 12px; background: #fff; color: #111; font-size: 15px; line-height: 1.35; text-decoration: none; }
+:root .sn-site .pc-docs a:hover { border-color: #2f7d3b; }
+:root .sn-site .pc-docs small { color: #2f7d3b; font-weight: 700; font-size: 12px; }
+:root .sn-site .pc-faq-blok .pc-faq { margin-top: 24px; }
+
+:root .sn-site .pc-film { padding-top: 0; }
+:root .sn-site .pc-video { display: block; width: 100%; max-width: 1000px; aspect-ratio: 16 / 9; border-radius: 18px; border: 1px solid var(--pc-rand); background: #000; }
+:root .sn-site .pc-video-9x16 { aspect-ratio: 9 / 16; max-width: 420px; margin: 0 auto; }
+@media (max-width: 999px) {
+  :root .sn-site .pc-docs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  :root .sn-site .pc-kolommen { grid-template-columns: 1fr; gap: 16px; }
+  :root .sn-site .pc-handmatig { grid-template-columns: 1fr; gap: 36px; }
+  :root .sn-site .pc-tegels { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  :root .sn-site .pc-oproep-knoppen .pc-knop { width: 100%; justify-content: space-between; }
+  :root .sn-site .pc-docs { grid-template-columns: 1fr; }
+  :root .sn-site .pc-documenten { padding: 36px 0; }
+  :root .sn-site .pc-acties { grid-template-columns: 1fr; gap: 14px; }
+  :root .sn-site .pc-hero { padding-top: 112px; }
+  :root .sn-site .pc-hero.h-wrap, :root .sn-site .pc .h-wrap { width: calc(100% - 32px); }
+  :root .sn-site .pc-check, :root .sn-site .pc-uitslag, :root .sn-site .pc-formulier { padding: 20px; border-radius: 18px; }
+  :root .sn-site .pc-rij { grid-template-columns: 1fr; gap: 0; }
+  :root .sn-site .pc-gegevens { grid-template-columns: 1fr; gap: 8px; }
+  :root .sn-site .pc-intro { font-size: 16px; }
+  :root .sn-site .pc-knop { white-space: normal; text-align: left; }
+}

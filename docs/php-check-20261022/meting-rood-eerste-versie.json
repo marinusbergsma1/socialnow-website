@@ -1,0 +1,761 @@
+{
+  "url": "http://127.0.0.1:4392/api/php-check",
+  "n": 75,
+  "straf": 30,
+  "score": 0.6,
+  "foutRood": 3,
+  "foutGroen": 3,
+  "groen": false,
+  "rijen": [
+    {
+      "id": "upstream-8-5-11",
+      "verwacht": "oranje",
+      "gekregen": "oranje",
+      "vVerwacht": "8.5.11",
+      "vGekregen": "8.5.11",
+      "oordeel": "GOED",
+      "ms": 59,
+      "reden": "mogelijk-leverancier"
+    },
+    {
+      "id": "upstream-8-4-26",
+      "verwacht": "oranje",
+      "gekregen": "oranje",
+      "vVerwacht": "8.4.26",
+      "vGekregen": "8.4.26",
+      "oordeel": "GOED",
+      "ms": 48,
+      "reden": "mogelijk-leverancier"
+    },
+    {
+      "id": "upstream-8-3-35",
+      "verwacht": "oranje",
+      "gekregen": "oranje",
+      "vVerwacht": "8.3.35",
+      "vGekregen": "8.3.35",
+      "oordeel": "GOED",
+      "ms": 48,
+      "reden": "mogelijk-leverancier"
+    },
+    {
+      "id": "upstream-8-2-34",
+      "verwacht": "oranje",
+      "gekregen": "oranje",
+      "vVerwacht": "8.2.34",
+      "vGekregen": "8.2.34",
+      "oordeel": "GOED",
+      "ms": 48,
+      "reden": "mogelijk-leverancier"
+    },
+    {
+      "id": "upstream-8-1-31",
+      "verwacht": "oranje",
+      "gekregen": "rood",
+      "vVerwacht": "8.1.31",
+      "vGekregen": "8.1.31",
+      "oordeel": "FOUT-ROOD",
+      "ms": 49,
+      "reden": "eol-zonder-fix"
+    },
+    {
+      "id": "upstream-7-4-30",
+      "verwacht": "oranje",
+      "gekregen": "rood",
+      "vVerwacht": "7.4.30",
+      "vGekregen": "7.4.30",
+      "oordeel": "FOUT-ROOD",
+      "ms": 49,
+      "reden": "eol-zonder-fix"
+    },
+    {
+      "id": "valkuil-8-4-3",
+      "verwacht": "oranje",
+      "gekregen": "rood",
+      "vVerwacht": "8.4.3",
+      "vGekregen": "8.4.3",
+      "oordeel": "FOUT-ROOD",
+      "ms": 10,
+      "reden": "voor-de-fix"
+    },
+    {
+      "id": "valkuil-8-0-30",
+      "verwacht": "oranje",
+      "gekregen": "oranje",
+      "vVerwacht": "8.0.30",
+      "vGekregen": "8.0.30",
+      "oordeel": "GOED",
+      "ms": 9,
+      "reden": "eol-mogelijk-leverancier"
+    },
+    {
+      "id": "valkuil-8-3-33",
+      "verwacht": "oranje",
+      "gekregen": "oranje",
+      "vVerwacht": "8.3.33",
+      "vGekregen": "8.3.33",
+      "oordeel": "GOED",
+      "ms": 10,
+      "reden": "mogelijk-leverancier"
+    },
+    {
+      "id": "cpanel-ea-php84",
+      "verwacht": "oranje",
+      "gekregen": "oranje",
+      "vVerwacht": "8.4.26",
+      "vGekregen": "8.4.26",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "mogelijk-leverancier"
+    },
+    {
+      "id": "docker-php-apache-8-4-26",
+      "verwacht": "oranje",
+      "gekregen": "oranje",
+      "vVerwacht": "8.4.26",
+      "vGekregen": "8.4.26",
+      "oordeel": "GOED",
+      "ms": 9,
+      "reden": "mogelijk-leverancier"
+    },
+    {
+      "id": "upstream-8-5-12",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.5.12",
+      "vGekregen": "8.5.12",
+      "oordeel": "GOED",
+      "ms": 8,
+      "reden": "hersteld"
+    },
+    {
+      "id": "upstream-8-4-27",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.4.27",
+      "vGekregen": "8.4.27",
+      "oordeel": "GOED",
+      "ms": 5,
+      "reden": "hersteld"
+    },
+    {
+      "id": "upstream-8-3-36",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.3.36",
+      "vGekregen": "8.3.36",
+      "oordeel": "GOED",
+      "ms": 5,
+      "reden": "hersteld"
+    },
+    {
+      "id": "upstream-8-2-35",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.2.35",
+      "vGekregen": "8.2.35",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "hersteld"
+    },
+    {
+      "id": "nieuwer-8-5-13",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.5.13",
+      "vGekregen": "8.5.13",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "hersteld"
+    },
+    {
+      "id": "nieuwer-8-6-0",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.6.0",
+      "vGekregen": "8.6.0",
+      "oordeel": "GOED",
+      "ms": 8,
+      "reden": "nieuwere-tak"
+    },
+    {
+      "id": "plesk-hersteld",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.4.27",
+      "vGekregen": "8.4.27",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "hersteld"
+    },
+    {
+      "id": "rhel9-8-2-35",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.2.35",
+      "vGekregen": "8.2.35",
+      "oordeel": "GOED",
+      "ms": 10,
+      "reden": "hersteld"
+    },
+    {
+      "id": "grote-pagina",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.5.12",
+      "vGekregen": "8.5.12",
+      "oordeel": "GOED",
+      "ms": 11,
+      "reden": "hersteld"
+    },
+    {
+      "id": "apache-connection-upgrade",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "7.2.24-0ubuntu0.18.04.17+esm14",
+      "vGekregen": "7.2.24-0ubuntu0.18.04.17+esm14",
+      "oordeel": "GOED",
+      "ms": 11,
+      "reden": "ubuntu-hersteld"
+    },
+    {
+      "id": "ubuntu-jammy-hersteld",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.1.2-1ubuntu2.28",
+      "vGekregen": "8.1.2-1ubuntu2.28",
+      "oordeel": "GOED",
+      "ms": 11,
+      "reden": "ubuntu-hersteld"
+    },
+    {
+      "id": "ubuntu-jammy-grens-2-27",
+      "verwacht": "rood",
+      "gekregen": "rood",
+      "vVerwacht": "8.1.2-1ubuntu2.27",
+      "vGekregen": "8.1.2-1ubuntu2.27",
+      "oordeel": "GOED",
+      "ms": 11,
+      "reden": "ubuntu-voor-de-fix"
+    },
+    {
+      "id": "ubuntu-jammy-juli-2-25",
+      "verwacht": "rood",
+      "gekregen": "rood",
+      "vVerwacht": "8.1.2-1ubuntu2.25",
+      "vGekregen": "8.1.2-1ubuntu2.25",
+      "oordeel": "GOED",
+      "ms": 11,
+      "reden": "ubuntu-voor-de-fix"
+    },
+    {
+      "id": "ubuntu-noble-hersteld",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.3.6-0ubuntu0.24.04.13",
+      "vGekregen": "8.3.6-0ubuntu0.24.04.13",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "ubuntu-hersteld"
+    },
+    {
+      "id": "ubuntu-noble-grens-12",
+      "verwacht": "rood",
+      "gekregen": "rood",
+      "vVerwacht": "8.3.6-0ubuntu0.24.04.12",
+      "vGekregen": "8.3.6-0ubuntu0.24.04.12",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "ubuntu-voor-de-fix"
+    },
+    {
+      "id": "ubuntu-focal-esm5-hersteld",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "7.4.3-4ubuntu2.29+esm5",
+      "vGekregen": "7.4.3-4ubuntu2.29+esm5",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "ubuntu-hersteld"
+    },
+    {
+      "id": "ubuntu-focal-grens-esm4",
+      "verwacht": "rood",
+      "gekregen": "rood",
+      "vVerwacht": "7.4.3-4ubuntu2.29+esm4",
+      "vGekregen": "7.4.3-4ubuntu2.29+esm4",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "ubuntu-voor-de-fix"
+    },
+    {
+      "id": "ubuntu-focal-zonder-pro",
+      "verwacht": "rood",
+      "gekregen": "rood",
+      "vVerwacht": "7.4.3-4ubuntu2.24",
+      "vGekregen": "7.4.3-4ubuntu2.24",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "ubuntu-voor-de-fix"
+    },
+    {
+      "id": "ubuntu-resolute-hersteld",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.5.4-0ubuntu1.5",
+      "vGekregen": "8.5.4-0ubuntu1.5",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "ubuntu-hersteld"
+    },
+    {
+      "id": "ubuntu-stonking-hersteld",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.5.9-0ubuntu2.1",
+      "vGekregen": "8.5.9-0ubuntu2.1",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "ubuntu-hersteld"
+    },
+    {
+      "id": "ubuntu-stonking-zonder-punt",
+      "verwacht": "rood",
+      "gekregen": "rood",
+      "vVerwacht": "8.5.9-0ubuntu2",
+      "vGekregen": "8.5.9-0ubuntu2",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "ubuntu-voor-de-fix"
+    },
+    {
+      "id": "ubuntu-versie-in-server-header",
+      "verwacht": "rood",
+      "gekregen": "rood",
+      "vVerwacht": "8.1.2-1ubuntu2.27",
+      "vGekregen": "8.1.2-1ubuntu2.27",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "ubuntu-voor-de-fix"
+    },
+    {
+      "id": "debian-bookworm-hersteld",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.2.35-1~deb12u1",
+      "vGekregen": "8.2.35-1~deb12u1",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "debian-hersteld"
+    },
+    {
+      "id": "debian-bookworm-kwetsbaar",
+      "verwacht": "rood",
+      "gekregen": "rood",
+      "vVerwacht": "8.2.32-1~deb12u1",
+      "vGekregen": "8.2.32-1~deb12u1",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "debian-voor-de-fix"
+    },
+    {
+      "id": "debian-trixie-hersteld",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.4.27-1~deb13u1",
+      "vGekregen": "8.4.27-1~deb13u1",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "debian-hersteld"
+    },
+    {
+      "id": "debian-trixie-kwetsbaar",
+      "verwacht": "rood",
+      "gekregen": "rood",
+      "vVerwacht": "8.4.24-1~deb13u1",
+      "vGekregen": "8.4.24-1~deb13u1",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "debian-voor-de-fix"
+    },
+    {
+      "id": "debian-sid-hersteld",
+      "verwacht": "groen",
+      "gekregen": "oranje",
+      "vVerwacht": "8.4.27-1",
+      "vGekregen": "8.4.27-1",
+      "oordeel": "FOUT",
+      "ms": 6,
+      "reden": "onbekend-pakket"
+    },
+    {
+      "id": "debian-bullseye-onbekend",
+      "verwacht": "oranje (of onbekend)",
+      "gekregen": "oranje",
+      "vVerwacht": "7.4.33-1+deb11u8",
+      "vGekregen": "7.4.33-1+deb11u8",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "debian-tak-onbekend"
+    },
+    {
+      "id": "sury-8-3-35",
+      "verwacht": "oranje (of rood)",
+      "gekregen": "rood",
+      "vVerwacht": "8.3.35-1+ubuntu24.04.1+deb.sury.org+1",
+      "vGekregen": "8.3.35-1+ubuntu24.04.1+deb.sury.org+1",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "sury-voor-de-fix"
+    },
+    {
+      "id": "sury-8-3-36",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.3.36-1+ubuntu22.04.1+deb.sury.org+1",
+      "vGekregen": "8.3.36-1+ubuntu22.04.1+deb.sury.org+1",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "sury-hersteld"
+    },
+    {
+      "id": "alma9-8-0-30",
+      "verwacht": "oranje (of onbekend)",
+      "gekregen": "oranje",
+      "vVerwacht": "8.0.30",
+      "vGekregen": "8.0.30",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "el-leverancier"
+    },
+    {
+      "id": "alma9-8-2-31",
+      "verwacht": "oranje (of rood)",
+      "gekregen": "oranje",
+      "vVerwacht": "8.2.31",
+      "vGekregen": "8.2.31",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "el-leverancier"
+    },
+    {
+      "id": "rhel8-7-4-33",
+      "verwacht": "oranje (of onbekend)",
+      "gekregen": "oranje",
+      "vVerwacht": "7.4.33",
+      "vGekregen": "7.4.33",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "el-leverancier"
+    },
+    {
+      "id": "rocky9-8-0-30",
+      "verwacht": "oranje (of onbekend)",
+      "gekregen": "oranje",
+      "vVerwacht": "8.0.30",
+      "vGekregen": "8.0.30",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "el-leverancier"
+    },
+    {
+      "id": "alma10-8-4-24",
+      "verwacht": "oranje (of onbekend)",
+      "gekregen": "oranje",
+      "vVerwacht": "8.4.24",
+      "vGekregen": "8.4.24",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "el-leverancier"
+    },
+    {
+      "id": "verborgen-phpsessid",
+      "verwacht": "onbekend",
+      "gekregen": "oranje",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "FOUT",
+      "ms": 6,
+      "reden": "versie-verborgen"
+    },
+    {
+      "id": "verborgen-laravel",
+      "verwacht": "onbekend",
+      "gekregen": "oranje",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "FOUT",
+      "ms": 7,
+      "reden": "versie-verborgen"
+    },
+    {
+      "id": "alleen-server-header",
+      "verwacht": "onbekend",
+      "gekregen": "onbekend",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "geen-php-gezien"
+    },
+    {
+      "id": "wordpress-generator",
+      "verwacht": "onbekend",
+      "gekregen": "oranje",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "FOUT",
+      "ms": 8,
+      "reden": "versie-verborgen"
+    },
+    {
+      "id": "wordpress-cloudflare",
+      "verwacht": "onbekend",
+      "gekregen": "oranje",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "FOUT",
+      "ms": 8,
+      "reden": "versie-verborgen"
+    },
+    {
+      "id": "hostinger-onder-fix",
+      "verwacht": "oranje",
+      "gekregen": "oranje",
+      "vVerwacht": "8.2.34",
+      "vGekregen": "8.2.34",
+      "oordeel": "GOED",
+      "ms": 8,
+      "reden": "mogelijk-leverancier"
+    },
+    {
+      "id": "hostinger-hersteld",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.3.36",
+      "vGekregen": "8.3.36",
+      "oordeel": "GOED",
+      "ms": 8,
+      "reden": "hersteld"
+    },
+    {
+      "id": "hostinger-verborgen",
+      "verwacht": "onbekend",
+      "gekregen": "oranje",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "FOUT",
+      "ms": 8,
+      "reden": "versie-verborgen"
+    },
+    {
+      "id": "redirect-https",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.4.27",
+      "vGekregen": "8.4.27",
+      "oordeel": "GOED",
+      "ms": 8,
+      "reden": "hersteld"
+    },
+    {
+      "id": "redirect-www",
+      "verwacht": "rood",
+      "gekregen": "rood",
+      "vVerwacht": "8.1.2-1ubuntu2.25",
+      "vGekregen": "8.1.2-1ubuntu2.25",
+      "oordeel": "GOED",
+      "ms": 12,
+      "reden": "ubuntu-voor-de-fix"
+    },
+    {
+      "id": "redirect-ketting",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.5.12",
+      "vGekregen": "8.5.12",
+      "oordeel": "GOED",
+      "ms": 18,
+      "reden": "hersteld"
+    },
+    {
+      "id": "redirect-lus",
+      "verwacht": "onbekend",
+      "gekregen": "onbekend",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "GOED",
+      "ms": 27,
+      "reden": "onbereikbaar-te-veel-redirects"
+    },
+    {
+      "id": "redirect-naar-prive-ip",
+      "verwacht": "onbekend",
+      "gekregen": "onbekend",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "onbereikbaar-intern"
+    },
+    {
+      "id": "redirect-andere-poort",
+      "verwacht": "onbekend",
+      "gekregen": "onbekend",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "onbereikbaar-poort"
+    },
+    {
+      "id": "alleen-http",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.2.35",
+      "vGekregen": "8.2.35",
+      "oordeel": "GOED",
+      "ms": 10,
+      "reden": "hersteld"
+    },
+    {
+      "id": "invoer-met-schema",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.5.12",
+      "vGekregen": "8.5.12",
+      "oordeel": "GOED",
+      "ms": 7,
+      "reden": "hersteld"
+    },
+    {
+      "id": "traag-6s",
+      "verwacht": "groen",
+      "gekregen": "groen",
+      "vVerwacht": "8.5.12",
+      "vGekregen": "8.5.12",
+      "oordeel": "GOED",
+      "ms": 6006,
+      "reden": "hersteld"
+    },
+    {
+      "id": "timeout",
+      "verwacht": "onbekend",
+      "gekregen": "onbekend",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "GOED",
+      "ms": 8004,
+      "reden": "onbereikbaar-timeout"
+    },
+    {
+      "id": "fout-500-met-versie",
+      "verwacht": "rood",
+      "gekregen": "rood",
+      "vVerwacht": "8.4.26-1~deb13u1",
+      "vGekregen": "8.4.26-1~deb13u1",
+      "oordeel": "GOED",
+      "ms": 5,
+      "reden": "debian-voor-de-fix"
+    },
+    {
+      "id": "fout-500-zonder-info",
+      "verwacht": "onbekend",
+      "gekregen": "onbekend",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "GOED",
+      "ms": 5,
+      "reden": "geen-php-gezien"
+    },
+    {
+      "id": "waf-403",
+      "verwacht": "onbekend",
+      "gekregen": "onbekend",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "GOED",
+      "ms": 5,
+      "reden": "geen-php-gezien"
+    },
+    {
+      "id": "tls-ongeldig",
+      "verwacht": "rood (of onbekend)",
+      "gekregen": "rood",
+      "vVerwacht": "8.3.6-0ubuntu0.24.04.12",
+      "vGekregen": "8.3.6-0ubuntu0.24.04.12",
+      "oordeel": "GOED",
+      "ms": 4,
+      "reden": "ubuntu-voor-de-fix"
+    },
+    {
+      "id": "verbinding-verbroken",
+      "verwacht": "onbekend",
+      "gekregen": "onbekend",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "GOED",
+      "ms": 8,
+      "reden": "onbereikbaar-verbinding"
+    },
+    {
+      "id": "rommel",
+      "verwacht": "onbekend",
+      "gekregen": "onbekend",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "GOED",
+      "ms": 6,
+      "reden": "onbereikbaar-geen-http"
+    },
+    {
+      "id": "domein-bestaat-niet",
+      "verwacht": "onbekend",
+      "gekregen": "onbekend",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "GOED",
+      "ms": 1,
+      "reden": "onbereikbaar-dns"
+    },
+    {
+      "id": "nextjs-vercel",
+      "verwacht": "onbekend",
+      "gekregen": "groen",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "FOUT-GROEN",
+      "ms": 4,
+      "reden": "geen-php-platform"
+    },
+    {
+      "id": "statisch-github-pages",
+      "verwacht": "onbekend",
+      "gekregen": "groen",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "FOUT-GROEN",
+      "ms": 4,
+      "reden": "geen-php-platform"
+    },
+    {
+      "id": "nextjs-artikel-over-php",
+      "verwacht": "onbekend",
+      "gekregen": "groen",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "FOUT-GROEN",
+      "ms": 4,
+      "reden": "geen-php-platform"
+    },
+    {
+      "id": "express-node",
+      "verwacht": "onbekend",
+      "gekregen": "onbekend",
+      "vVerwacht": "null",
+      "vGekregen": "null",
+      "oordeel": "GOED",
+      "ms": 4,
+      "reden": "geen-php-gezien"
+    }
+  ]
+}
