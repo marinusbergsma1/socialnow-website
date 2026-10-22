@@ -27,7 +27,7 @@ http.createServer(async (req, res) => {
       return res.end(String(f.message));
     }
   }
-  const pad = normalize(url.pathname === "/" ? "/index.html" : url.pathname).replace(/^(\.\.[/\\])+/, "");
+  const pad = normalize(!extname(url.pathname) ? "/index.html" : url.pathname).replace(/^(\.\.[/\\])+/, "");
   try {
     const inhoud = await readFile(join(map, "public", pad));
     res.setHeader("content-type", soorten[extname(pad)] || "application/octet-stream");
