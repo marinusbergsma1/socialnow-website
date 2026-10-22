@@ -208,7 +208,7 @@ function Oproepen({ domein = "", uitslag, anker = false }: { domein?: string; ui
 }
 
 // 22 oktober 2026 (Marinus): de uitlegfilm (HyperFrames) onder de uitslag. Klik om af te spelen, ondertitels in NL of EN,
-// poster als voorbeeldbeeld; op mobiel de 9:16-versie. Engels staat ingebrand, Nederlands als spoor.
+// poster als voorbeeldbeeld; op mobiel de 9:16-versie. Ondertitels staan in het beeld, in NL of EN.
 function Film() {
   const { language } = useLanguage();
   const [hoog, zetHoog] = useState(false);
@@ -220,21 +220,20 @@ function Film() {
     return () => m.removeEventListener("change", kies);
   }, []);
   const vorm = hoog ? "9x16" : "16x9";
-  const taal = language === "nl" ? "nl" : "en";
+  // Tekst en ondertitels staan in het beeld zelf: Nederlands op /nl, Engels in alle andere talen.
+  const nl = language === "nl" ? "-nl" : "";
   return (
     <section className="h-section h-wrap pc-film">
       <video
-        key={vorm}
+        key={vorm + nl}
         className={`pc-video pc-video-${vorm}`}
         controls
         playsInline
         preload="none"
-        poster={`/websitecheck/film/poster-${vorm}.jpg`}
+        poster={`/websitecheck/film/poster-${vorm}${nl}.jpg`}
         aria-label="Uitlegfilm: zo werkt de websitecheck"
       >
-        <source src={`/websitecheck/film/check-${vorm}.mp4`} type="video/mp4" />
-        {/* De Engelse ondertitels staan in het beeld zelf; Nederlands krijgt een eigen spoor, bovenin. */}
-        <track kind="subtitles" src="/websitecheck/film/check-nl.vtt" srcLang="nl" label="Nederlands" default={taal === "nl"} />
+        <source src={`/websitecheck/film/check-${vorm}${nl}.mp4`} type="video/mp4" />
       </video>
     </section>
   );
