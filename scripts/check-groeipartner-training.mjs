@@ -4,7 +4,8 @@
 // teamtrainingen, AI-workshops en cursussen, de twee bevestigde sessies met vlag, en een echte beursfoto van Marinus en Steef.
 // Gebruik: node scripts/check-groeipartner-training.mjs [--dist]   (rood op main vóór de wijziging, groen erna)
 import fs from "node:fs";
-const KOP = "Jouw groeipartner in het AGI-tijdperk.", KOP_EN = "Your growth partner in the AGI era.";
+// 22 oktober 2026: kop met cybersecurity erbij (Marinus).
+const KOP = "Groei en cybersecurity in het AGI-tijdperk.", KOP_EN = "Growth and cyber security for the AGI era.";
 const OUD = "Veiliger dan je verouderde software en processen.";
 const VORMEN = ["Teamtrainingen", "AI-workshops", "Cursussen"];
 const FOTO = ["800.webp", "1600.webp", "1600.jpg"].map(e => `public/images/beurs/marinus-steef-odoo-experience-${e}`);
@@ -17,7 +18,8 @@ const css = fs.readFileSync("proposal/samen-en-veilig.css", "utf8");
 const veld = naam => (src.match(new RegExp(`\\b${naam}: "([^"]*)"`)) || [])[1] || "";
 eis(veld("uspKop") === KOP, "kop is de groeipartner in het AGI-tijdperk");
 eis(!src.includes(`uspKop: "${OUD}"`), "de oude veiligheidskop staat niet meer bovenaan");
-eis(/software gratis/.test(veld("uspUitleg")) && /niet automatiseren/.test(veld("uspUitleg")), "geloof: software gratis, expertise niet te automatiseren");
+eis(/échte taken/.test(veld("uspUitleg")) && /cybersecurity-experts/.test(veld("uspUitleg")), "echte taken en doelen, cybersecurity-experts die je data beschermen (22 okt)");
+eis(/honderden euro/.test(veld("probleem")) && /bezit en zelf host/.test(veld("oplossing")), "probleem honderden euro's; oplossing: kopen, bezitten en zelf hosten (22 okt)");
 eis(!!veld("probleem") && !!veld("oplossing") && src.includes("{t.probleemLabel}") && src.includes("{t.oplossingLabel}"), "probleem en oplossing staan er concreet en zichtbaar");
 eis(/volledige AI-training/.test(veld("tUitleg")) && /pakket op maat/.test(veld("tUitleg")), "volledige AI-training bij elk pakket op maat");
 eis(/trainingen en workshops op maat en op locatie, zodat jullie klaar zijn voor groei/.test(veld("tUitleg")), "trainingen en workshops op maat en op locatie, klaar voor groei");
@@ -27,7 +29,7 @@ eis(src.includes('"#fdda24"') && src.includes('"#21468b"') && src.includes("<Vla
 // Zelfde dag: de beursfoto viel af ("niet dat je ziet dat we in gesprek gaan met mensen"); de lezingen heten "Volgende lezingen".
 eis(veld("sessiesLabel") === "Volgende lezingen", "label boven de sessies is Volgende lezingen");
 eis(/abonnementen/.test(veld("probleem")) && /niet met elkaar samenwerken/.test(veld("probleem")), "probleem: abonnementen op software en diensten die niet samenwerken");
-eis(/plug and play software met begeleiding en écht ownership/.test(veld("oplossing")) && /projecttarief voor onze experts/.test(veld("oplossing")), "oplossing: plug and play, begeleiding, ownership, projecttarief");
+eis(/bezit en zelf host/.test(veld("oplossing")) && /projecttarief/.test(veld("oplossing")), "oplossing: kopen, bezitten, zelf hosten, experts tegen projecttarief");
 eis(src.includes("<Rocket size={14}") && !src.includes("Sparkles"), "raket bij Groeipartner, geen sterretje");
 eis(!src.includes("sn-samen-foto") && FOTO.every(f => !fs.existsSync(f)), "de afgekeurde beursfoto staat er niet meer in");
 eis(src.includes('naam: "Indexworld"') && src.includes('naam: "Uncanny"') && src.includes("sn-samen-partners"), "partners Indexworld en Uncanny blijven erin");

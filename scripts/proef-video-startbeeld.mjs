@@ -38,11 +38,12 @@ eis(/poster=\{start \? undefined : poster\}/.test(speler), "ook in de speler gee
 
 // 2. Logo's boven: SocialNow even groot, Connect zonder schuine streep, met de partners.
 const os = webpMaat("public/images/merk/socialnow-os-bijgesneden.webp"), con = webpMaat("public/images/merk/socialnow-connect.webp");
-eis(start.includes('src="/images/merk/socialnow-os-bijgesneden.webp"') && start.includes('src="/images/merk/socialnow-connect.webp"') && !start.includes("connect-bijgesneden"), "startbeeld gebruikt het OS-logo uit het brein en het Connect-logo van de site (zonder schuine streep)");
+// Later op 22 oktober: boven geen paren meer maar Software Partners met één balk, zie scripts/proef-software-partners.mjs.
+eis(start.includes("Software Partners") && !start.includes("sn-startbeeld-paren"), "boven Software Partners in plaats van de paren");
 eis(os?.join("x") === "596x88", `OS-logo is de brein-uitsnede 596x88: ${os?.join("x") ?? "ontbreekt"}`);
 eis(con && Math.abs(con[0] / con[1] - 1359 / 153) < 0.05, `Connect-logo is het site-logo, bijgesneden tot 1359x153: ${con?.join("x") ?? "ontbreekt"}`);
 eis(/\.sn-startbeeld-connect\{height:calc\(var\(--logo-h\) \* 1\.017\)\}/.test(css) && /\.sn-startbeeld-os\{height:var\(--logo-h\)\}/.test(css), "Connect op 1,017 x de hoogte: woord SocialNow even breed als in het OS-logo (3,955 tegen 3,889)");
-eis(start.includes('src="/images/home-header/indexworld.png"') && start.includes('src="/images/home-header/uncanny-op-zwart.svg"') && (start.match(/<X className="sn-startbeeld-x"/g) || []).length === 2, "partners: SocialNow OS x Indexworld en SocialNow Connect x Uncanny, zoals de partnerkaarten");
+eis(start.includes('src="/images/home-header/indexworld.png"') && start.includes('src="/images/home-header/uncanny-op-zwart.svg"'), "partners Indexworld en Uncanny staan in het startbeeld");
 
 // 3. Vlak, knop, zin, Trusted by.
 eis(/\.sn-explainer-cover\.sn-explainer-start\{[^}]*background:#000;[^}]*border:1px solid #ffffff/.test(css), "donker vlak met een dunne witte rand");

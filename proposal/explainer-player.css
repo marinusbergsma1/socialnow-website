@@ -26,7 +26,18 @@ html:root .sn-site .sn-startbeeld-os{height:var(--logo-h)}
 html:root .sn-site .sn-startbeeld-connect{height:calc(var(--logo-h) * 1.017)}
 html:root .sn-site .sn-startbeeld-partner{height:calc(var(--logo-h) * 1.1)}
 html:root .sn-site .sn-startbeeld-partner.is-wit{filter:brightness(0) invert(1)}
-html:root .sn-site .sn-startbeeld-x{color:#7d8f86;justify-self:center}
+html:root .sn-site .sn-startbeeld-x{color:#7d8f86;justify-self:center;flex:none}
+/* Software Partners: kopje sterk, daaronder één balk zoals het slotbeeld van de film. */
+html:root .sn-site .sn-startbeeld-software{display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1.8cqi,12px);width:100%}
+html:root .sn-site .sn-startbeeld-kop{font-size:clamp(11px,1.9cqi,13px);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;white-space:nowrap}
+html:root .sn-site .sn-startbeeld-partnerbalk{--balk-h:calc(var(--logo-h) * .82);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px clamp(8px,1.8cqi,14px)}
+html:root .sn-site .sn-startbeeld-partnerbalk img{display:block;width:auto}
+html:root .sn-site .sn-startbeeld-partnerbalk .sn-startbeeld-os{height:var(--balk-h)}
+html:root .sn-site .sn-startbeeld-partnerbalk .sn-startbeeld-partner{height:calc(var(--balk-h) * 1.05)}
+html:root .sn-site .sn-startbeeld-komen{height:calc(var(--balk-h) * 1.15);filter:brightness(0) invert(1)}
+html:root .sn-site .sn-startbeeld-attesso{display:inline-flex;align-items:center;gap:6px;color:#fff;white-space:nowrap}
+html:root .sn-site .sn-startbeeld-attesso b{display:grid;place-items:center;height:calc(var(--balk-h) * .95);aspect-ratio:1;border-radius:5px;background:#fff;color:#0b0d0c;font:500 calc(var(--balk-h) * .42)/1 AttessoMono,ui-monospace,Menlo,monospace;letter-spacing:-.04em}
+html:root .sn-site .sn-startbeeld-attesso code{font:400 calc(var(--balk-h) * .62)/1 AttessoMono,ui-monospace,Menlo,monospace;letter-spacing:0;color:#fff}
 html:root .sn-site .sn-startbeeld-midden{align-self:center;display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2.2cqi,16px)}
 html:root .sn-site .sn-startbeeld-zin{max-width:44ch;margin:0;font-size:clamp(13px,2.3cqi,16px);font-weight:500;line-height:1.45;letter-spacing:0;text-align:center;text-transform:none;color:#c6d3cc;text-wrap:balance}
 html:root .sn-site .sn-startbeeld-trusted{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;padding-top:clamp(10px,2.2cqi,14px);border-top:1px solid #ffffff1f}
@@ -36,6 +47,8 @@ html:root .sn-site .sn-startbeeld-groep{display:flex;align-items:center;gap:clam
 html:root .sn-site .sn-startbeeld-groep+.sn-startbeeld-groep{padding-left:clamp(16px,3.4cqi,26px);border-left:1px solid #ffffff26}
 /* Crafture-logo, dan een dunne streep, dan de merken die via Crafture liepen (Marinus 22 okt). Op een smal vlak gaat de route als geheel naar de tweede regel. */
 html:root .sn-site .sn-startbeeld-route>.sn-startbeeld-groep{padding-left:0;border-left:0}
+/* 22 okt (Marinus): geen streep tussen Supperclub en Crafture. */
+html:root .sn-site .sn-startbeeld-groep+.sn-startbeeld-route{padding-left:0;border-left:0}
 html:root .sn-site .sn-startbeeld-streep{display:block;flex:none;width:1px;height:calc(var(--merk-h) * 1.3);background:#ffffff26}
 html:root .sn-site .sn-startbeeld-merken img{display:block;height:calc(var(--merk-h) * var(--maat, 1));width:auto;filter:brightness(0) invert(1);opacity:.72}
 html:root .sn-site .sn-startbeeld-merken img.is-kleur{filter:grayscale(1) brightness(1.25) contrast(1.1)}

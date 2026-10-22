@@ -1,0 +1,7 @@
+ROOD   één omleiding met host-voorwaarde security.socialnow.nl
+ROOD   elk pad op het subdomein gaat mee
+ROOD   doel is https://socialnow.nl/security
+ROOD   permanent (308)
+ROOD   staat bovenaan, vóór de andere omleidingen
+
+5 eis(en) rood

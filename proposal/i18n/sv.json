@@ -2415,6 +2415,7 @@
   "Werkt nu. Je koppelt het zelf in je OS, of het zit al in Studio.": "Fungerar redan nu. Du kopplar in det själv i ditt OS, eller så finns det redan i Studio.",
   "Kies OS of Custom OS": "Välj OS eller Custom OS",
   "Gratis tot 10 GB aan opslag.": "Gratis upp till 10 GB lagring.",
+  "Gratis voor jou en 2 teamleden.": "Gratis för dig och 2 teammedlemmar.",
   "Bij je aanmelding koppel je alvast je rekening.": "När du registrerar dig kopplar du direkt ditt konto.",
   "Echte experts in je OS.": "Riktiga experter i ditt OS.",
   "Of voor een losse opdracht.": "Eller för ett enskilt uppdrag.",
@@ -3072,5 +3073,19 @@
   "Buitenlandse Zaken": "Utrikesfrågor",
   "ITZBund": "ITZBund",
   "Valtori": "Valtori",
-  "Overheid.nl": "Overheid.nl"
+  "Overheid.nl": "Overheid.nl",
+  "Mensen testen": "Människor testar",
+  "Eerst een kleine groep": "Först en liten grupp",
+  "Feedback naar de volgende versie": "Feedback in i nästa version",
+  "AI helpt, mensen beslissen.": "AI hjälper, människor bestämmer.",
+  "Iedereen in je team ziet alleen wat bij zijn rol hoort.": "Alla i ditt team ser bara det som hör till deras roll.",
+  "Een expert ziet per opdracht alleen wat jij deelt, en je trekt het altijd in.": "Per uppdrag ser en expert bara det du delar, och du kan när som helst dra tillbaka det.",
+  "Mijn verhaal in twee minuten": "Min historia på två minuter",
+  "Samen gebouwd": "Byggt tillsammans",
+  "Met Indexworld, Uncanny en Attesso.": "Med Indexworld, Uncanny och Attesso.",
+  "Groei en cybersecurity": "Tillväxt och cybersäkerhet",
+  "Groei en cybersecurity in het AGI-tijdperk.": "Tillväxt och cybersäkerhet i AGI-eran.",
+  "Onze experts voeren échte taken uit en halen je doelen. Als cybersecurity-experts beschermen we je gegevens en data écht.": "Våra experter gör verkligt arbete och når dina mål. Som cybersäkerhetsexperter skyddar vi verkligen din information och dina data.",
+  "Je betaalt honderden euro's aan abonnementen op software en diensten die niet met elkaar samenwerken.": "Du betalar hundratals euro för abonnemang på mjukvara och tjänster som inte fungerar ihop.",
+  "Software die je koopt, daarna bezit en zelf host, in plaats van elke maand te huren. Met begeleiding van onze experts tegen een projecttarief.": "Mjukvara som du köper, sedan äger och driftar själv, i stället för att hyra varje månad. Med stöd av våra experter till ett projektpris."
 }
