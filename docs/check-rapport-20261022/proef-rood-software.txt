@@ -1,0 +1,43 @@
+GROEN  rapport staat onder de PHP-uitslag in PhpCheck.tsx
+GROEN  api/check-rapport ook lokaal en met maxDuration op Vercel
+GROEN  niet te meten heet zo; snelheid met zichtbare voortgang
+GROEN  faalt onze API, dan per punt 'Niet te meten', geen foutmelding
+GROEN  verbinding: https, geldig, HSTS, doorsturen = goed
+GROEN  verbinding: certificaat verloopt over 10 dagen = aandacht (grens 21)
+GROEN  verbinding: verlopen certificaat = slecht
+GROEN  verbinding: TLS 1.0 = slecht
+GROEN  verbinding: alleen http = slecht
+GROEN  verbinding: geen HSTS en geen doorsturen = aandacht
+GROEN  verbinding: onbereikbaar = niet te meten, nooit rood
+GROEN  headers: alle vijf (frame via frame-ancestors) = goed
+GROEN  headers: Server met versie = versielek, aandacht
+GROEN  headers: 1 van 5 = slecht
+GROEN  headers: alleen Report-Only telt niet als CSP
+GROEN  e-mail: SPF -all en DMARC reject = goed
+GROEN  e-mail: DMARC p=none = aandacht
+GROEN  e-mail: geen SPF en geen DMARC = slecht
+GROEN  e-mail: SPF +all = slecht
+GROEN  e-mail: DMARC-opzoeking mislukt = niet te meten, niet goed op de helft
+GROEN  e-mail: domein bestaat niet = niet te meten, nooit rood
+GROEN  snelheid: PageSpeed 95 = goed, score als getal
+GROEN  snelheid: PageSpeed 34 met LCP 7,2 s = slecht
+GROEN  snelheid: zonder Google een eigen meting (TTFB 2,3 s = slecht, geen compressie)
+GROEN  snelheid: niets te meten = niet te meten
+GROEN  software: WordPress-versie uit de generator
+GROEN  software: jQuery via wp-includes ?ver= en code.jquery.com, Bootstrap via cdnjs
+GROEN  software: pluginversie alleen uit de HTML; ?ver= gelijk aan WordPress telt niet
+GROEN  software: WordPress-versie uit de gelinkte feed
+GROEN  robots.txt: langste regel wint
+GROEN  robots.txt: eigen groep voor SocialNowCheck gaat voor *
+GROEN  eigen user agent
+GROEN  SSRF: IP-adressen, localhost en interne namen geweigerd
+GROEN  pagina's: alleen interne links, geen wp-admin, geen bestanden, geen dubbele
+GROEN  limiet per IP en per domein, cache 10 minuten
+GROEN  api geeft bij een eigen fout ook punten (niet te meten)
+ROOD   software: PHP 5.2.12 in X-Powered-By is verouderd (slecht), nooit goed
+ROOD   software: PHP 8.1 krijgt sinds 2026 geen updates meer (slecht)
+ROOD   software: ondersteunde PHP-tak zonder andere software is niet te meten, geen eol
+ROOD   software: PHP-versie ook uit het http-antwoord als https hem niet noemt (bloemist.nl)
+ROOD   software: niets herkend is niet te meten, nooit goed
+
+5 eis(en) rood

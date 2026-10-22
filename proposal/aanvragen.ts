@@ -61,10 +61,11 @@ export const conceptLink = (onderwerp: string, bericht: string) =>
 
 // 22 oktober 2026 (Marinus): de knoppen op /check. Eén configwaarde: vul hier de boekingspagina in zodra book.socialnow.nl
 // live staat (PR #144): https://book.socialnow.nl/. Het soort call ("security", "uitgebreide-check"), de taal en het gecheckte
-// domein gaan mee als ?type=, &lang= en &vraag=. Leeg: de knop opent het korte formulier of het contactformulier.
+// domein gaan mee als ?type=, &lang= en &vraag=; bij de uitgebreide check ook als &domein= (zo vult de boekingspagina het in).
+// Leeg: de knop opent het korte formulier of het contactformulier.
 export const BOEK_URL = "";
 export const boekExtern = /^https:\/\//.test(BOEK_URL);
 export const boekLink = (taal: Language, domein = "", type = "security") =>
   boekExtern
-    ? `${BOEK_URL}${BOEK_URL.includes("?") ? "&" : "?"}type=${encodeURIComponent(type)}&lang=${taal === "nl" ? "nl" : "en"}${domein ? `&vraag=${encodeURIComponent(domein)}` : ""}`
+    ? `${BOEK_URL}${BOEK_URL.includes("?") ? "&" : "?"}type=${encodeURIComponent(type)}&lang=${taal === "nl" ? "nl" : "en"}${domein ? `&vraag=${encodeURIComponent(domein)}` : ""}${type === "uitgebreide-check" && domein ? `&domein=${encodeURIComponent(domein)}` : ""}`
     : `${taal === "en" ? "" : `/${taal}`}/contact?onderwerp=${encodeURIComponent("Gratis call over de php2shell-check")}`;

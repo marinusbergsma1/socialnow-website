@@ -1,11 +1,13 @@
 /* Websiterapport onder de PHP-uitslag op /check (22 oktober 2026). Zwarte grond, groen alleen als accent, geen ligaturen. */
-:root .sn-site .cr { margin-top: 28px; font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0; }
+:root .sn-site .cr { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--pc-rand, #2a2a2a); font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0; }
 :root .sn-site .cr-kop { font-size: clamp(1.25rem, 3vw, 1.6rem); line-height: 1.2; margin: 0 0 14px; text-wrap: balance; color: #fff; }
 :root .sn-site .cr-rijen { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 :root .sn-site .cr-rij { border: 1px solid var(--pc-rand, #2a2a2a); border-left: 4px solid var(--pc-grijs, #8e8e93); border-radius: 12px; background: var(--pc-grond, #0a0a0a); padding: 12px 14px; }
 :root .sn-site .cr-goed { border-left-color: var(--pc-groen, #25d366); }
 :root .sn-site .cr-aandacht { border-left-color: var(--pc-oranje, #ff9f1a); }
 :root .sn-site .cr-slecht { border-left-color: var(--pc-rood, #ff5a5f); }
+/* Eigen meting van de serverreactie zonder PageSpeed: neutraal, nooit goed of slecht (22 oktober 2026, middag). */
+:root .sn-site .cr-neutraal { border-left-color: #5a5a5f; }
 :root .sn-site .cr-hoofd { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 10px; cursor: pointer; list-style: none; }
 :root .sn-site .cr-hoofd::-webkit-details-marker { display: none; }
 :root .sn-site .cr-bezig .cr-hoofd { cursor: default; }
@@ -31,9 +33,9 @@
 :root .sn-site .cr-noot { margin: 10px 0 0; color: var(--pc-grijs, #8e8e93); font-size: 0.85rem; }
 :root .sn-site .cr-advies { margin-top: 20px; padding: 16px; border: 1px solid var(--pc-rand, #2a2a2a); border-radius: 12px; }
 :root .sn-site .cr-advies h3 { margin: 0 0 10px; color: #fff; font-size: 1.1rem; }
-:root .sn-site .cr-advies ul { margin: 0 0 14px; padding-left: 1.1em; display: grid; gap: 6px; color: #cfcfcf; }
-:root .sn-site .cr-advies strong { color: #fff; }
-:root .sn-site .cr-knoppen { display: flex; flex-wrap: wrap; gap: 10px; }
+:root .sn-site .cr-groep + .cr-groep { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--pc-rand, #2a2a2a); }
+:root .sn-site .cr-groep h4 { margin: 0 0 6px; color: #fff; font-size: 0.95rem; font-weight: 600; }
+:root .sn-site .cr-advies ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; color: #cfcfcf; }
 @media (max-width: 520px) {
   :root .sn-site .cr-hoofd { grid-template-columns: 1fr auto; }
   :root .sn-site .cr-status { grid-column: 1 / -1; }
