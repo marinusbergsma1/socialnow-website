@@ -6,6 +6,12 @@ import config from "../config.mjs";
 
 let demo = null;
 let google = null;
+let proef = null;
+
+// Alleen voor de proeven: een agenda van buiten in plaats van Google of de voorbeeldagenda.
+export function zetProefAgenda(agenda) {
+  proef = agenda;
+}
 
 const lijst = (w) => String(w || "").split(",").map((s) => s.trim()).filter(Boolean);
 
@@ -24,6 +30,7 @@ export function instellingen(env = process.env) {
 }
 
 export function kiesAgenda(env = process.env) {
+  if (proef) return proef;
   const ins = instellingen(env);
   if (ins.heeftGoogle) {
     google ??= googleAgenda({
