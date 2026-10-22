@@ -30,6 +30,10 @@
 .sn-site .sn-bestaand .bs-zeker li{display:flex;align-items:center;gap:7px;font-size:14px;color:#c8d8ce}
 .sn-site .sn-bestaand .bs-zeker svg{color:var(--green)}
 .sn-site .sn-bestaand .bs-zeker a{color:#fff;border-bottom:1px solid #25d36688}
+/* 22 oktober 2026 (Marinus): "de uitlijning by security is verkeerd op mobiele versies". Op een touchscreen maakt de algemene
+   regel a{min-height:44px} van Veilig een hoge blokbox: tekst bovenaan, streep 44 px lager. Nu staat Veilig op de lijn van de
+   andere punten; het tikvlak blijft 44 px hoog via padding met een negatieve marge, de streep is een onderstreping. */
+.sn-site .sn-bestaand .bs-zeker a{display:inline-block;min-height:0;min-width:0;padding:12px 0;margin:-12px 0;line-height:20px;border-bottom:0;text-decoration:underline 1px #25d36688;text-underline-offset:4px}
 .sn-site .sn-bestaand .service.connect>.action .pill{width:max-content;max-width:100%;gap:16px;white-space:nowrap}
 .sn-site .sn-bestaand .bs-uitleg-hulp strong{display:block;margin-bottom:4px;color:var(--blue)}
 .sn-site .sn-bestaand .bs-switch{display:inline-flex;gap:4px;margin:14px 0 0;padding:4px;border:1px solid #2a3b31;border-radius:999px;background:#07100b}
