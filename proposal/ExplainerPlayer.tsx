@@ -13,12 +13,14 @@ import "./explainer-player.css";
 //   SocialNow in beide even breed en dus even groot (gemeten: woordbreedte/hoogte OS 3,955, Connect 3,889).
 //   Midden: de afspeelknop, groot, met daaronder één zin. Onder: Trusted by, eerlijk met de route: AZ en Supperclub direct,
 //   Universal, Warner Bros., MOJO, IMAX en Marvel via Crafture (werkervaring Marinus). Bestaande logobestanden, rustig van kleur, optisch even hoog.
+//   Later op 22 oktober (Marinus): de route staat er als Crafture-logo, niet als tekst: AZ, Supperclub | Crafture | Universal ... Marvel.
 // Hetzelfde startbeeld ligt in de speler over de film tot die speelt, dus nergens meer het zwembadframe.
 const STARTZIN = "In ruim twee minuten: wat je met het OS doet, wie het bouwt en wat het kost.";
 const DIRECT = [
   { naam: "AZ", src: "/images/merken/AZ-LOGO-KLEUR.svg", w: 235, h: 115, kleur: true, maat: 1.15 },
   { naam: "Supperclub", src: "/images/merken/SUPPERCLUB-LOGO.webp", w: 109, h: 120, maat: 1.55 },
 ];
+const CRAFTURE = { naam: "Crafture", src: "/images/merken/CRAFTURE-LOGO.svg", w: 527, h: 707, maat: 1.55 };
 const VIA_CRAFTURE = [
   { naam: "Universal", src: "/images/merken/UNIVERSAL-LOGO.svg", w: 128, h: 79, maat: 1.55 },
   { naam: "Warner Bros.", src: "/images/merken/WARNER-BROS-LOGO.svg", w: 57, h: 80, maat: 1.3 },
@@ -47,7 +49,7 @@ function Startbeeld({ label, zinId }: { label: string; zinId: string }) {
       <span className="sn-startbeeld-label" translate="no">Trusted by</span>
       <span className="sn-startbeeld-merken">
         <span className="sn-startbeeld-groep">{DIRECT.map(merk)}</span>
-        <span className="sn-startbeeld-groep"><span className="sn-startbeeld-via" translate="no">via Crafture</span>{VIA_CRAFTURE.map(merk)}</span>
+        <span className="sn-startbeeld-groep sn-startbeeld-route">{merk(CRAFTURE)}<i className="sn-startbeeld-streep" /><span className="sn-startbeeld-groep">{VIA_CRAFTURE.map(merk)}</span></span>
       </span>
     </span>
   </span>;
