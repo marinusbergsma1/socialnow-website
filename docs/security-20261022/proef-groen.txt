@@ -1,4 +1,4 @@
-# node scripts/proef-security.mjs op feat/security-pagina
+# node scripts/proef-security.mjs op feat/security-pagina (bronnen gelijk aan de film)
 GROEN  /security is de securityscan (niet meer een alias van /veiligheid)
 GROEN  in de app: /check en /php-check naar /security, met ?domein= en #aanvraag
 GROEN  vercel.json: /check, /nl/check (alle talen) en /php-check permanent (308) naar /security
@@ -10,7 +10,7 @@ GROEN  aanvraagmail noemt socialnow.nl/security
 GROEN  de pagina heet Securityscan / Security scan, nergens meer "check"
 GROEN  volgorde: film, Wie werd geraakt, Wie loopt risico, dan de scan
 GROEN  geraakt: Nintendo en Wikipedia met hun logo uit public/
-GROEN  geraakt: vier overheden (DE, FI, BE, NL) met vlag en organisatienaam, geen banken
+GROEN  geraakt: vier overheden met vlag en de naam uit de film (ITZBund, Valtori, Foreign Affairs, Overheid.nl), geen banken
 GROEN  nooit een overheidslogo of wapen: vlaggen tekenen we zelf
 GROEN  risico: WordPress, WooCommerce, Magento, Joomla, Drupal, PrestaShop en Laravel met logo
 GROEN  elk logo en elke vlag linkt naar een bron (https), in een nieuw tabblad met rel=noopener

@@ -3067,6 +3067,14 @@
   "PrestaShop": "PrestaShop",
   "Laravel": "Laravel",
   "Finland": "Finlandia",
+  "Onderhoud aan online diensten gemeld": "Zgłoszono przerwę techniczną usług online",
+  "Overheidsportaal uit voorzorg offline": "Portal rządowy wyłączony prewencyjnie",
+  "Geen klanten of partners van SocialNow. Gemeld als offline of verstoord tijdens php2shell.": "Nie są klientami ani partnerami SocialNow. Zgłoszone jako niedostępne lub zakłócone podczas php2shell.",
+  "Platforms die op PHP draaien. Geen klanten of partners van SocialNow.": "Platformy działające na PHP. Nie są klientami ani partnerami SocialNow.",
+  "Buitenlandse Zaken": "Sprawy Zagraniczne",
+  "ITZBund": "ITZBund",
+  "Valtori": "Valtori",
+  "Overheid.nl": "Overheid.nl",
   "Mensen testen": "Ludzie testują",
   "Eerst een kleine groep": "Najpierw mała grupa",
   "Feedback naar de volgende versie": "Opinie do następnej wersji",
@@ -3080,5 +3088,12 @@
   "Groei en cybersecurity in het AGI-tijdperk.": "Wzrost i cyberbezpieczeństwo w erze AGI.",
   "Onze experts voeren échte taken uit en halen je doelen. Als cybersecurity-experts beschermen we je gegevens en data écht.": "Nasi eksperci wykonują prawdziwe zadania i realizują Twoje cele. Jako eksperci od cyberbezpieczeństwa naprawdę chronimy Twoje informacje i dane.",
   "Je betaalt honderden euro's aan abonnementen op software en diensten die niet met elkaar samenwerken.": "Płacisz setki euro za subskrypcje oprogramowania i usług, które ze sobą nie współpracują.",
-  "Software die je koopt, daarna bezit en zelf host, in plaats van elke maand te huren. Met begeleiding van onze experts tegen een projecttarief.": "Oprogramowanie, które kupujesz, a potem posiadasz i hostujesz sam, zamiast wynajmować je co miesiąc. Z pomocą naszych ekspertów w stawce projektowej."
+  "Software die je koopt, daarna bezit en zelf host, in plaats van elke maand te huren. Met begeleiding van onze experts tegen een projecttarief.": "Oprogramowanie, które kupujesz, a potem posiadasz i hostujesz sam, zamiast wynajmować je co miesiąc. Z pomocą naszych ekspertów w stawce projektowej.",
+  "Plan een diepgaand gesprek of claim de gratis update van je huidige systemen. Omdat dit ons allemaal raakt, voeren we de essentiële updates tijdelijk gratis uit.": "Zaplanuj szczegółową rozmowę lub odbierz bezpłatną aktualizację swoich obecnych systemów. Ponieważ dotyczy to nas wszystkich, tymczasowo wykonujemy najważniejsze aktualizacje za darmo.",
+  "Plan een diepgaand gesprek": "Zaplanuj szczegółową rozmowę",
+  "Claim je gratis update": "Odbierz bezpłatną aktualizację",
+  "Claim je gratis update.": "Odbierz bezpłatną aktualizację.",
+  "van de websites draait op PHP": "stron internetowych działa na PHP",
+  "Naar de scan": "Do skanu",
+  "Securityvideo: is je website veilig?": "Wideo o bezpieczeństwie: czy Twoja strona jest bezpieczna?"
 }

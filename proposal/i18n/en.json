@@ -3554,6 +3554,14 @@
   "Gratis securityscan: is je website veilig voor php2shell? | SocialNow": "Free security scan: is your website safe from php2shell? | SocialNow",
   "Scan je website gratis op het PHP-lek php2shell en vijf andere punten, van https tot e-mailbeveiliging. Passief, niets opgeslagen, uitslag in seconden.": "Scan your website for free for the PHP flaw php2shell and five more points, from https to email security. Passive, nothing stored, results in seconds.",
   "Is je website veilig? Gratis securityscan van SocialNow": "Is your website safe? Free security scan by SocialNow",
+  "Onderhoud aan online diensten gemeld": "Online services reported down for maintenance",
+  "Overheidsportaal uit voorzorg offline": "Government portal offline as a precaution",
+  "Geen klanten of partners van SocialNow. Gemeld als offline of verstoord tijdens php2shell.": "Not clients or partners of SocialNow. Reported offline or disrupted during php2shell.",
+  "Platforms die op PHP draaien. Geen klanten of partners van SocialNow.": "Platforms that run on PHP. Not clients or partners of SocialNow.",
+  "Buitenlandse Zaken": "Foreign Affairs",
+  "ITZBund": "ITZBund",
+  "Valtori": "Valtori",
+  "Overheid.nl": "Overheid.nl",
   "Mensen testen": "People test",
   "Eerst een kleine groep": "A small group first",
   "Feedback naar de volgende versie": "Feedback into the next version",
@@ -3567,5 +3575,12 @@
   "Groei en cybersecurity in het AGI-tijdperk.": "Growth and cyber security for the AGI era.",
   "Onze experts voeren échte taken uit en halen je doelen. Als cybersecurity-experts beschermen we je gegevens en data écht.": "Our experts do real work and hit your goals. As cyber security experts, we truly protect your information and data.",
   "Je betaalt honderden euro's aan abonnementen op software en diensten die niet met elkaar samenwerken.": "You pay hundreds of euros in subscriptions for software and services that don't work together.",
-  "Software die je koopt, daarna bezit en zelf host, in plaats van elke maand te huren. Met begeleiding van onze experts tegen een projecttarief.": "Software you buy, then own and host yourself, instead of renting it every month. Guided by our experts at a project rate."
+  "Software die je koopt, daarna bezit en zelf host, in plaats van elke maand te huren. Met begeleiding van onze experts tegen een projecttarief.": "Software you buy, then own and host yourself, instead of renting it every month. Guided by our experts at a project rate.",
+  "Plan een diepgaand gesprek of claim de gratis update van je huidige systemen. Omdat dit ons allemaal raakt, voeren we de essentiële updates tijdelijk gratis uit.": "Plan an in-depth conversation or claim the free update of your current systems. Because this affects all of us, we're temporarily doing the essential updates for free.",
+  "Plan een diepgaand gesprek": "Plan an in-depth conversation",
+  "Claim je gratis update": "Claim your free update",
+  "Claim je gratis update.": "Claim your free update.",
+  "van de websites draait op PHP": "of websites run on PHP",
+  "Naar de scan": "To the scan",
+  "Securityvideo: is je website veilig?": "Security video: is your website safe?"
 }

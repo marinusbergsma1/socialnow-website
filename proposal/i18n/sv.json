@@ -3066,6 +3066,14 @@
   "PrestaShop": "PrestaShop",
   "Laravel": "Laravel",
   "Finland": "Finland",
+  "Onderhoud aan online diensten gemeld": "Underhåll av onlinetjänster rapporterat",
+  "Overheidsportaal uit voorzorg offline": "Myndighetsportal offline av försiktighetsskäl",
+  "Geen klanten of partners van SocialNow. Gemeld als offline of verstoord tijdens php2shell.": "Inte kunder eller partner till SocialNow. Rapporterade som offline eller störda under php2shell.",
+  "Platforms die op PHP draaien. Geen klanten of partners van SocialNow.": "Plattformar som körs på PHP. Inte kunder eller partner till SocialNow.",
+  "Buitenlandse Zaken": "Utrikesfrågor",
+  "ITZBund": "ITZBund",
+  "Valtori": "Valtori",
+  "Overheid.nl": "Overheid.nl",
   "Mensen testen": "Människor testar",
   "Eerst een kleine groep": "Först en liten grupp",
   "Feedback naar de volgende versie": "Feedback in i nästa version",
@@ -3079,5 +3087,12 @@
   "Groei en cybersecurity in het AGI-tijdperk.": "Tillväxt och cybersäkerhet i AGI-eran.",
   "Onze experts voeren échte taken uit en halen je doelen. Als cybersecurity-experts beschermen we je gegevens en data écht.": "Våra experter gör verkligt arbete och når dina mål. Som cybersäkerhetsexperter skyddar vi verkligen din information och dina data.",
   "Je betaalt honderden euro's aan abonnementen op software en diensten die niet met elkaar samenwerken.": "Du betalar hundratals euro för abonnemang på mjukvara och tjänster som inte fungerar ihop.",
-  "Software die je koopt, daarna bezit en zelf host, in plaats van elke maand te huren. Met begeleiding van onze experts tegen een projecttarief.": "Mjukvara som du köper, sedan äger och driftar själv, i stället för att hyra varje månad. Med stöd av våra experter till ett projektpris."
+  "Software die je koopt, daarna bezit en zelf host, in plaats van elke maand te huren. Met begeleiding van onze experts tegen een projecttarief.": "Mjukvara som du köper, sedan äger och driftar själv, i stället för att hyra varje månad. Med stöd av våra experter till ett projektpris.",
+  "Plan een diepgaand gesprek of claim de gratis update van je huidige systemen. Omdat dit ons allemaal raakt, voeren we de essentiële updates tijdelijk gratis uit.": "Boka ett fördjupande samtal eller hämta den kostnadsfria uppdateringen av dina nuvarande system. Eftersom detta berör oss alla gör vi tillfälligt de viktigaste uppdateringarna gratis.",
+  "Plan een diepgaand gesprek": "Boka ett fördjupande samtal",
+  "Claim je gratis update": "Hämta din kostnadsfria uppdatering",
+  "Claim je gratis update.": "Hämta din kostnadsfria uppdatering.",
+  "van de websites draait op PHP": "av alla webbplatser körs på PHP",
+  "Naar de scan": "Till skanningen",
+  "Securityvideo: is je website veilig?": "Säkerhetsvideo: är din webbplats säker?"
 }
