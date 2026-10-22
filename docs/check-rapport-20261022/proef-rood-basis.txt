@@ -1,0 +1,7 @@
+ROOD   rapport staat onder de PHP-uitslag in PhpCheck.tsx
+ROOD   api/check-rapport ook lokaal en met maxDuration op Vercel
+ROOD   niet te meten heet zo; snelheid met zichtbare voortgang
+ROOD   faalt onze API, dan per punt 'Niet te meten', geen foutmelding
+ROOD   servermodules bestaan (server/rapport/*.mjs)
+
+5 eis(en) rood

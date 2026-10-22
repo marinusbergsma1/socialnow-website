@@ -1,0 +1,41 @@
+/* Websiterapport onder de PHP-uitslag op /check (22 oktober 2026). Zwarte grond, groen alleen als accent, geen ligaturen. */
+:root .sn-site .cr { margin-top: 28px; font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0; }
+:root .sn-site .cr-kop { font-size: clamp(1.25rem, 3vw, 1.6rem); line-height: 1.2; margin: 0 0 14px; text-wrap: balance; color: #fff; }
+:root .sn-site .cr-rijen { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+:root .sn-site .cr-rij { border: 1px solid var(--pc-rand, #2a2a2a); border-left: 4px solid var(--pc-grijs, #8e8e93); border-radius: 12px; background: var(--pc-grond, #0a0a0a); padding: 12px 14px; }
+:root .sn-site .cr-goed { border-left-color: var(--pc-groen, #25d366); }
+:root .sn-site .cr-aandacht { border-left-color: var(--pc-oranje, #ff9f1a); }
+:root .sn-site .cr-slecht { border-left-color: var(--pc-rood, #ff5a5f); }
+:root .sn-site .cr-hoofd { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 10px; cursor: pointer; list-style: none; }
+:root .sn-site .cr-hoofd::-webkit-details-marker { display: none; }
+:root .sn-site .cr-bezig .cr-hoofd { cursor: default; }
+:root .sn-site .cr-status { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--pc-grijs, #8e8e93); min-width: 6.5em; }
+:root .sn-site .cr-goed .cr-status { color: var(--pc-groen, #25d366); }
+:root .sn-site .cr-aandacht .cr-status { color: var(--pc-oranje, #ff9f1a); }
+:root .sn-site .cr-slecht .cr-status { color: var(--pc-rood, #ff5a5f); }
+:root .sn-site .cr-titel { color: #fff; font-weight: 600; }
+:root .sn-site .cr-waarde { color: #fff; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+:root .sn-site details[open] > .cr-hoofd .cr-titel::after { content: " –"; color: var(--pc-grijs, #8e8e93); }
+:root .sn-site .cr-hoofd .cr-titel::after { content: " +"; color: var(--pc-grijs, #8e8e93); }
+:root .sn-site .cr-bezig .cr-titel::after { content: ""; }
+:root .sn-site .cr-zin { margin: 6px 0 0; color: #cfcfcf; font-size: 0.95rem; line-height: 1.45; }
+:root .sn-site .cr-balk { height: 4px; border-radius: 2px; background: #1c1c1c; margin-top: 10px; overflow: hidden; }
+:root .sn-site .cr-balk i { display: block; height: 100%; background: var(--pc-groen, #25d366); transition: width 1s linear; }
+:root .sn-site .cr-bewijs { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--pc-rand, #2a2a2a); }
+:root .sn-site .cr-bewijs-kop { margin: 0 0 6px; color: var(--pc-grijs, #8e8e93); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+:root .sn-site .cr-bewijs dl { margin: 0; display: grid; gap: 4px; }
+:root .sn-site .cr-bewijs dl > div { display: grid; grid-template-columns: minmax(7em, 11em) 1fr; gap: 10px; }
+:root .sn-site .cr-bewijs dt { color: var(--pc-grijs, #8e8e93); font-size: 0.85rem; }
+:root .sn-site .cr-bewijs dd { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; color: #e6e6e6; word-break: break-word; white-space: pre-wrap; }
+:root .sn-site .cr-bewijs .cr-mis dd { color: var(--pc-rood, #ff5a5f); }
+:root .sn-site .cr-noot { margin: 10px 0 0; color: var(--pc-grijs, #8e8e93); font-size: 0.85rem; }
+:root .sn-site .cr-advies { margin-top: 20px; padding: 16px; border: 1px solid var(--pc-rand, #2a2a2a); border-radius: 12px; }
+:root .sn-site .cr-advies h3 { margin: 0 0 10px; color: #fff; font-size: 1.1rem; }
+:root .sn-site .cr-advies ul { margin: 0 0 14px; padding-left: 1.1em; display: grid; gap: 6px; color: #cfcfcf; }
+:root .sn-site .cr-advies strong { color: #fff; }
+:root .sn-site .cr-knoppen { display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 520px) {
+  :root .sn-site .cr-hoofd { grid-template-columns: 1fr auto; }
+  :root .sn-site .cr-status { grid-column: 1 / -1; }
+  :root .sn-site .cr-bewijs dl > div { grid-template-columns: 1fr; gap: 0; }
+}

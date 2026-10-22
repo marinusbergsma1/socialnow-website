@@ -3,6 +3,7 @@ import { ArrowUpRight, Check, Copy } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 import { boekExtern, boekLink, conceptLink } from "./aanvragen";
 import "./php-check.css";
+import { CheckRapport } from "./CheckRapport";
 
 // Gratis php2shell-check op /check (22 oktober 2026, Marinus): "Take the free check at socialnow.nl". De advertentie
 // stuurt alle bezoekers hierheen; /php-check verwijst door (vercel.json).
@@ -258,6 +259,8 @@ export function PhpCheckPage() {
   const [vooraf, zetVooraf] = useState("");
   useEffect(() => { try { zetVooraf(normaliseerInvoer(new URLSearchParams(window.location.search).get("domein") || "")); } catch { /* geen domein */ } }, []);
   const uitslagRef = useRef<HTMLDivElement>(null);
+  // Websiterapport onder de PHP-uitslag (feat/check-rapport): elke nieuwe check is een nieuwe ronde.
+  const [ronde, zetRonde] = useState(0);
 
   const toon = (u: Uitslag) => { zetUitslag(u); requestAnimationFrame(() => uitslagRef.current?.focus()); };
 
@@ -269,6 +272,7 @@ export function PhpCheckPage() {
     if (!host) { zetUitslag(null); return zetHint(t("Vul een domein in, bijvoorbeeld jouwbedrijf.nl.")); }
     zetBezig(true);
     zetUitslag(null);
+    zetRonde((r) => r + 1);
     try {
       const r = await fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ domein: host }) });
       const j: Uitslag | null = await r.json().catch(() => null);
@@ -381,7 +385,8 @@ export function PhpCheckPage() {
                 </dl>
               )}
               <p className="pc-disclaimer">Deze check leest alleen openbare informatie van je website. Het is een snelle indicatie, geen volledige beveiligingsaudit en geen garantie. Wil je zekerheid? Plan een gratis call met ons team.</p>
-              {/* Ruimte voor latere blokken onder de PHP-uitslag (feat/check-rapport). */}
+              {/* 22 oktober 2026 (Marinus): onder de PHP-uitslag de vijf punten met echte data. */}
+              {u.domein && <CheckRapport domein={u.domein} ronde={ronde} boek={boekLink(language, u.domein, "uitgebreide-check")} />}
             </div>
           )}
         </div>
