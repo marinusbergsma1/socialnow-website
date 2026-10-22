@@ -3552,5 +3552,13 @@
   "Laravel": "Laravel",
   "Gratis securityscan: is je website veilig voor php2shell? | SocialNow": "Free security scan: is your website safe from php2shell? | SocialNow",
   "Scan je website gratis op het PHP-lek php2shell en vijf andere punten, van https tot e-mailbeveiliging. Passief, niets opgeslagen, uitslag in seconden.": "Scan your website for free for the PHP flaw php2shell and five more points, from https to email security. Passive, nothing stored, results in seconds.",
-  "Is je website veilig? Gratis securityscan van SocialNow": "Is your website safe? Free security scan by SocialNow"
+  "Is je website veilig? Gratis securityscan van SocialNow": "Is your website safe? Free security scan by SocialNow",
+  "Onderhoud aan online diensten gemeld": "Online services reported down for maintenance",
+  "Overheidsportaal uit voorzorg offline": "Government portal offline as a precaution",
+  "Geen klanten of partners van SocialNow. Gemeld als offline of verstoord tijdens php2shell.": "Not clients or partners of SocialNow. Reported offline or disrupted during php2shell.",
+  "Platforms die op PHP draaien. Geen klanten of partners van SocialNow.": "Platforms that run on PHP. Not clients or partners of SocialNow.",
+  "Buitenlandse Zaken": "Foreign Affairs",
+  "ITZBund": "ITZBund",
+  "Valtori": "Valtori",
+  "Overheid.nl": "Overheid.nl"
 }

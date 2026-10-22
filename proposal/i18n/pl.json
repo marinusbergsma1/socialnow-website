@@ -3065,5 +3065,13 @@
   "Drupal": "Drupal",
   "PrestaShop": "PrestaShop",
   "Laravel": "Laravel",
-  "Finland": "Finlandia"
+  "Finland": "Finlandia",
+  "Onderhoud aan online diensten gemeld": "Zgłoszono przerwę techniczną usług online",
+  "Overheidsportaal uit voorzorg offline": "Portal rządowy wyłączony prewencyjnie",
+  "Geen klanten of partners van SocialNow. Gemeld als offline of verstoord tijdens php2shell.": "Nie są klientami ani partnerami SocialNow. Zgłoszone jako niedostępne lub zakłócone podczas php2shell.",
+  "Platforms die op PHP draaien. Geen klanten of partners van SocialNow.": "Platformy działające na PHP. Nie są klientami ani partnerami SocialNow.",
+  "Buitenlandse Zaken": "Sprawy Zagraniczne",
+  "ITZBund": "ITZBund",
+  "Valtori": "Valtori",
+  "Overheid.nl": "Overheid.nl"
 }

@@ -337,25 +337,26 @@ export function PhpBlok({ u }: { u: Uitslag }) {
 // loopt. Logo's in eigen kleur, even hoog, elk een link naar de bron van het incident (niet naar het merk). Overheden
 // krijgen alleen hun landvlag met de naam van de organisatie: overheidslogo's en wapens mogen bedrijven niet gebruiken.
 // Geen banken en geen bedrijven zonder bron. Bij "risico" geen bedrijven die kwetsbaar zouden zijn, alleen platforms.
-// Bronnen geopend en live 200 op 22 oktober 2026: /Volumes/WORK/02-SOCIALNOW/php-check/logos-security/BRONNEN.md.
-type Geraakt = { naam: string; logo?: string; vlag?: string; org?: string; wat: string; bron: string; uitgever: string };
+// Bronnen gelijk aan de film (regiechat, 22 oktober 2026), geopend en live 200; Mashable noemt ITZBund, Valtori, het
+// Belgische ministerie van Buitenlandse Zaken, Overheid.nl en Wikimedia. Platforms linken naar hun officiële systeemeisen.
+type Geraakt = { naam: string; logo?: string; vlag?: string; org?: string; wat: string; bron: string; uitgever: string; bron2?: string; uitgever2?: string };
 const GERAAKT: Geraakt[] = [
-  { naam: "Nintendo", logo: "/security/logos/nintendo.svg", wat: "Haalde diensten offline tijdens het herstel", bron: "https://therecord.media/php-script-vulnerabilities-warnings", uitgever: "The Record, 21.10.2026" },
-  { naam: "Wikipedia", logo: "/security/logos/wikipedia.svg", wat: "Haalde ondersteunende diensten offline tot de patch", bron: "https://diff.wikimedia.org/2026/10/21/impact-of-php-vulnerabilities-on-wikimedia-tools-and-services/", uitgever: "Wikimedia Foundation (Diff), 21.10.2026" },
-  { naam: "Duitsland", vlag: "de", org: "Digitalministerium", wat: "Haalde uit voorzorg federale websites offline", bron: "https://thenextweb.com/news/europe-governments-websites-offline-php-security-flaws", uitgever: "The Next Web (Reuters), 21.10.2026" },
-  { naam: "Finland", vlag: "fi", org: "Valtori", wat: "Sloot uit voorzorg publieke overheidsdiensten af", bron: "https://valtori.fi/-/paivitys-21.10.-klo-18-php-korjauspaivityksen-asennukset-aloitettu", uitgever: "Valtori, 21.10.2026" },
-  { naam: "België", vlag: "be", org: "FOD Buitenlandse Zaken", wat: "Haalde tijdelijk de eigen websites offline", bron: "https://www.vrt.be/vrtnws/nl/2026/10/21/cyberbeveiliger-ziet-eerste-aanvallen-rond-kwetsbaarheden-in-pop/", uitgever: "VRT NWS, 21.10.2026" },
-  { naam: "Nederland", vlag: "nl", org: "Tweede Kamer", wat: "Haalde uit voorzorg de website offline", bron: "https://nieuws.nl/algemeen/website-tweede-kamer-uit-voorzorg-offline-om-kwetsbaarheden-php", uitgever: "ANP (Nieuws.nl), 21.10.2026" },
+  { naam: "Nintendo", logo: "/security/logos/nintendo.svg", wat: "Onderhoud aan online diensten gemeld", bron: "https://www.dexerto.com/pokemon/pokemon-umamusume-and-other-major-games-taken-offline-over-critical-php-vulnerability-3420823/", uitgever: "Dexerto" },
+  { naam: "Wikipedia", logo: "/security/logos/wikipedia.svg", wat: "Haalde ondersteunende diensten offline tot de patch", bron: "https://mashable.com/tech/php-vulnerability-websites-offline-affected-services", uitgever: "Mashable", bron2: "https://en.wikipedia.org/wiki/PHP2Shell", uitgever2: "Wikipedia, PHP2Shell" },
+  { naam: "Duitsland", vlag: "de", org: "ITZBund", wat: "Haalde uit voorzorg federale websites offline", bron: "https://mashable.com/tech/php-vulnerability-websites-offline-affected-services", uitgever: "Mashable" },
+  { naam: "Finland", vlag: "fi", org: "Valtori", wat: "Sloot uit voorzorg publieke overheidsdiensten af", bron: "https://mashable.com/tech/php-vulnerability-websites-offline-affected-services", uitgever: "Mashable" },
+  { naam: "België", vlag: "be", org: "Buitenlandse Zaken", wat: "Haalde tijdelijk de eigen websites offline", bron: "https://mashable.com/tech/php-vulnerability-websites-offline-affected-services", uitgever: "Mashable" },
+  { naam: "Nederland", vlag: "nl", org: "Overheid.nl", wat: "Overheidsportaal uit voorzorg offline", bron: "https://mashable.com/tech/php-vulnerability-websites-offline-affected-services", uitgever: "Mashable", bron2: "https://en.wikipedia.org/wiki/PHP2Shell", uitgever2: "Wikipedia, PHP2Shell" },
 ];
 type Platform = { naam: string; logo: string; bron: string };
 const RISICO: Platform[] = [
-  { naam: "WordPress", logo: "/security/logos/wordpress.png", bron: "https://wordpress.org/news/2026/10/critical-php-security-release/" },
-  { naam: "WooCommerce", logo: "/security/logos/woocommerce.svg", bron: "https://developer.woocommerce.com/2026/10/21/php-security-release/" },
-  { naam: "Magento", logo: "/security/logos/magento.svg", bron: "https://developer.adobe.com/commerce/" },
-  { naam: "Joomla", logo: "/security/logos/joomla.svg", bron: "https://www.joomla.org/" },
-  { naam: "Drupal", logo: "/security/logos/drupal.svg", bron: "https://www.drupal.org/psa-2026-10-20" },
-  { naam: "PrestaShop", logo: "/security/logos/prestashop.svg", bron: "https://build.prestashop-project.org/news/2026/php-security-updates-october-2026/" },
-  { naam: "Laravel", logo: "/security/logos/laravel.svg", bron: "https://laravel.com/blog/php-critical-vulnerability-response-updates" },
+  { naam: "WordPress", logo: "/security/logos/wordpress.svg", bron: "https://wordpress.org/about/requirements/" },
+  { naam: "WooCommerce", logo: "/security/logos/woocommerce.svg", bron: "https://woocommerce.com/document/server-requirements/" },
+  { naam: "Magento", logo: "/security/logos/magento.svg", bron: "https://experienceleague.adobe.com/en/docs/commerce-operations/installation-guide/system-requirements" },
+  { naam: "Joomla", logo: "/security/logos/joomla.svg", bron: "https://manual.joomla.org/docs/next/get-started/technical-requirements/" },
+  { naam: "Drupal", logo: "/security/logos/drupal.svg", bron: "https://www.drupal.org/docs/getting-started/system-requirements/php-requirements" },
+  { naam: "PrestaShop", logo: "/security/logos/prestashop.svg", bron: "https://devdocs.prestashop-project.org/9/basics/installation/system-requirements/" },
+  { naam: "Laravel", logo: "/security/logos/laravel.svg", bron: "https://laravel.com/docs/12.x/deployment#server-requirements" },
 ];
 
 function Extern({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
@@ -377,16 +378,16 @@ function Geraakt() {
             <Extern href={g.bron} className="pc-logo-link">
               {g.logo
                 ? <span className="pc-merk"><img className="pc-logo" src={g.logo} alt={g.naam} height="48" loading="lazy" /><strong translate="no" aria-hidden="true">{g.naam}</strong></span>
-                : <span className="pc-vlag-naam"><img className="pc-vlag" src={`/security/vlaggen/${g.vlag}.svg`} alt="" height="40" loading="lazy" /><strong>{g.naam}</strong><small translate="no">{g.org}</small></span>}
+                : <span className="pc-vlag-naam"><img className="pc-vlag" src={`/security/vlaggen/${g.vlag}.svg`} alt="" height="40" loading="lazy" /><strong>{g.naam}</strong><small>{g.org}</small></span>}
               <span className="pc-logo-wat">{g.wat}<sup>{i + 1}</sup></span>
             </Extern>
           </li>
         ))}
       </ul>
-      <p className="pc-geen-klant">Deze organisaties zijn geen klanten of partners van SocialNow. Ze gingen offline of kregen problemen door php2shell. Bronnen hieronder.</p>
+      <p className="pc-geen-klant">Geen klanten of partners van SocialNow. Gemeld als offline of verstoord tijdens php2shell.</p>
       <ol className="pc-bronnen pc-geraakt-bronnen">
         {GERAAKT.map((g) => (
-          <li key={g.naam}><span>{g.naam}</span>{g.org && <span translate="no">, {g.org}</span>}<span aria-hidden="true">: </span><Extern href={g.bron}><span translate="no">{g.uitgever}</span></Extern></li>
+          <li key={g.naam}><span>{g.naam}</span>{g.org && <span>, {g.org}</span>}<span aria-hidden="true">: </span><Extern href={g.bron}><span translate="no">{g.uitgever}</span></Extern>{g.bron2 && <><span aria-hidden="true">; </span><Extern href={g.bron2}><span translate="no">{g.uitgever2}</span></Extern></>}</li>
         ))}
       </ol>
     </section>
@@ -406,7 +407,7 @@ function Risico() {
       </ul>
       <p className="pc-risico-oproep">Gebouwd op een van deze en heeft niemand er al een tijdje naar omgekeken? Doe de scan.</p>
       <p className="pc-risico-host">Een site bij een moderne host die PHP zelf bijwerkt, loopt minder risico.</p>
-      <p className="pc-geen-klant">Deze platforms draaien op PHP. Het zijn geen klanten of partners van SocialNow.</p>
+      <p className="pc-geen-klant">Platforms die op PHP draaien. Geen klanten of partners van SocialNow.</p>
     </section>
   );
 }
