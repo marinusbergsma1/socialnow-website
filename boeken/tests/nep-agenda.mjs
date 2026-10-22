@@ -32,11 +32,17 @@ export function nepAgenda({ bezet = [], wachtNaBezet = null } = {}) {
       afspraken.set(id, a);
       return { id, start: a.start, eind: a.eind, aangemaakt: a.aangemaakt };
     },
-    async nodigUit(id, { gasten, beschrijving }) {
+    async nodigUit(id, { gasten, beschrijving, naam, email, vraag }) {
       const a = afspraken.get(id);
       a.gasten = gasten;
+      Object.assign(a, { gastNaam: naam, gastEmail: email, vraag });
       a.beschrijving = beschrijving;
       return { id, start: a.start, eind: a.eind, meet: `https://meet.google.com/nep-${id}` };
+    },
+    async overzicht(van, tot) {
+      return actief()
+        .filter((a) => overlapt(a.start, a.eind, +van, +tot))
+        .map((a) => ({ id: a.id, start: a.start, eind: a.eind, soortId: a.soortId, gastNaam: a.gastNaam || "", gastEmail: a.gastEmail || "", vraag: a.vraag || "", meet: `https://meet.google.com/nep-${a.id}` }));
     },
     async haal(id) {
       const a = afspraken.get(id);

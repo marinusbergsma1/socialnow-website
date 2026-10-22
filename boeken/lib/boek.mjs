@@ -78,7 +78,7 @@ export async function boek({ agenda, config, soortId, start, naam, email, vraag 
   const beheer = beheerUrl ? beheerUrl(eigen.id) : null;
   const gasten = [{ naam, email }, ...extraGasten.filter((g) => g.email && g.email !== email)];
   const klaar = await agenda.nodigUit(eigen.id, {
-    gasten, naam, soortId, taal,
+    gasten, naam, email, vraag, soortId, taal,
     beschrijving: beschrijving({ config, soortId, taal, naam, email, vraag, beheer }),
   });
   return {

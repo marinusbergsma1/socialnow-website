@@ -9,7 +9,11 @@ import { createInterface } from "node:readline";
 import { randomBytes } from "node:crypto";
 
 const PROJECT = "socialnow-boeken";
-const SCOPES = ["https://www.googleapis.com/auth/calendar.events", "https://www.googleapis.com/auth/calendar.freebusy"];
+const SCOPES = [
+  "https://www.googleapis.com/auth/calendar.events",
+  "https://www.googleapis.com/auth/calendar.freebusy",
+  "https://www.googleapis.com/auth/calendar.calendarlist.readonly",
+];
 
 function vraag(tekst, verborgen = false) {
   return new Promise((klaar) => {

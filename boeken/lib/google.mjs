@@ -46,6 +46,32 @@ export function googleAgenda({ clientId, clientSecret, refreshToken, agendaId = 
   }
 
   const agendaPad = `/calendars/${encodeURIComponent(agendaId)}`;
+
+  // Elke agenda in het account telt mee voor vrij/bezet. Feestdagen, verjaardagen en weeknummers
+  // van Google zelf niet: die zijn de hele dag en zouden alles blokkeren. De lijst blijft hooguit
+  // een minuut in het geheugen; de bezette tijden zelf worden nooit bewaard.
+  let lijst = null;
+  let lijstTot = 0;
+  async function alleAgendas() {
+    if (lijst && Date.now() < lijstTot) return lijst;
+    const ids = new Set();
+    let heeftHoofd = false;
+    let pagina;
+    do {
+      const j = await api("GET", "/users/me/calendarList", { query: { minAccessRole: "freeBusyReader", showHidden: true, maxResults: 250, pageToken: pagina } });
+      for (const c of j.items || []) {
+        if (/#(holiday|contacts|weeknum)@group\.v\.calendar\.google\.com$/.test(c.id) || c.deleted) continue;
+        ids.add(c.id);
+        if (c.primary) heeftHoofd = true;
+      }
+      pagina = j.nextPageToken;
+    } while (pagina);
+    if (agendaId !== "primary" || !heeftHoofd) ids.add(agendaId);
+    for (const id of bezetAgendas) ids.add(id);
+    lijst = [...ids];
+    lijstTot = Date.now() + 60_000;
+    return lijst;
+  }
   const iso = (ms) => new Date(ms).toISOString();
   const naarAfspraak = (e) => ({
     id: e.id,
@@ -56,22 +82,33 @@ export function googleAgenda({ clientId, clientSecret, refreshToken, agendaId = 
     boeking: e.extendedProperties?.private?.[MARKERING] === "1",
     soortId: e.extendedProperties?.private?.soort || "",
     gastNaam: e.extendedProperties?.private?.gastNaam || "",
+    gastEmail: e.extendedProperties?.private?.gastEmail || e.attendees?.find((a) => !a.self && !a.organizer)?.email || "",
+    vraag: e.extendedProperties?.private?.vraag || "",
     meet: e.hangoutLink || e.conferenceData?.entryPoints?.find((p) => p.entryPointType === "video")?.uri || null,
   });
 
   return {
-    // Bezet in de boekingsagenda plus eventuele extra agenda's. Een fout bij één agenda telt als
-    // bezet: liever geen slot dan een dubbele boeking.
+    // Bezet uit alle agenda's via freeBusy: alleen begin en eind, nooit titels of namen.
+    // Een fout bij één agenda telt als bezet: liever geen slot dan een dubbele boeking.
     async bezet(van, tot) {
-      const ids = [agendaId, ...bezetAgendas];
-      const j = await api("POST", "/freeBusy", { body: { timeMin: iso(+van), timeMax: iso(+tot), timeZone: "UTC", items: ids.map((id) => ({ id })) } });
+      const ids = await alleAgendas();
       const uit = [];
-      for (const id of ids) {
-        const c = j.calendars?.[id] || (id === "primary" ? Object.values(j.calendars || {})[0] : null);
-        if (!c || c.errors?.length) throw new GoogleFout(502, `freebusy ${c?.errors?.[0]?.reason || "ontbreekt"}`);
-        for (const b of c.busy || []) uit.push({ start: Date.parse(b.start), eind: Date.parse(b.end) });
+      for (let i = 0; i < ids.length; i += 50) {
+        const deel = ids.slice(i, i + 50);
+        const j = await api("POST", "/freeBusy", { body: { timeMin: iso(+van), timeMax: iso(+tot), timeZone: "UTC", items: deel.map((id) => ({ id })) } });
+        for (const id of deel) {
+          const c = j.calendars?.[id] || (id === "primary" ? Object.values(j.calendars || {})[0] : null);
+          if (!c || c.errors?.length) throw new GoogleFout(502, `freebusy ${c?.errors?.[0]?.reason || "ontbreekt"}`);
+          for (const b of c.busy || []) uit.push({ start: Date.parse(b.start), eind: Date.parse(b.end) });
+        }
       }
       return uit;
+    },
+
+    // Alleen voor het beheer-endpoint en de racecontrole bij boeken; komt nooit op de publieke pagina.
+    // Leest uitsluitend afspraken die deze boekingspagina zelf heeft gemaakt.
+    async overzicht(van, tot) {
+      return this.boekingen(van, tot);
     },
 
     async boekingen(van, tot) {
@@ -100,13 +137,13 @@ export function googleAgenda({ clientId, clientSecret, refreshToken, agendaId = 
       return naarAfspraak(e);
     },
 
-    async nodigUit(id, { gasten, beschrijving, naam, soortId, taal }) {
+    async nodigUit(id, { gasten, beschrijving, naam, email, vraag, soortId, taal }) {
       const e = await api("PATCH", `${agendaPad}/events/${encodeURIComponent(id)}`, {
         query: { conferenceDataVersion: 1, sendUpdates: "all" },
         body: {
           description: beschrijving,
           attendees: gasten.map((g) => ({ email: g.email, displayName: g.naam || undefined })),
-          extendedProperties: { private: { [MARKERING]: "1", soort: soortId, taal, gastNaam: naam } },
+          extendedProperties: { private: { [MARKERING]: "1", soort: soortId, taal, gastNaam: naam, gastEmail: email, vraag: String(vraag || "").slice(0, 1000) } },
         },
       });
       return naarAfspraak(e);

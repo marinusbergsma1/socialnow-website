@@ -62,3 +62,12 @@ export function minutenVan(tijd) {
 export function tijdVan(minuten) {
   return `${String(Math.floor(minuten / 60)).padStart(2, "0")}:${String(minuten % 60).padStart(2, "0")}`;
 }
+
+// "2026-10-26T10:00:00+01:00": hetzelfde moment, geschreven in de klok van de zone.
+export function isoMetOffset(moment, tz) {
+  const ms = +new Date(moment);
+  const d = delenInZone(ms, tz);
+  const off = offsetMinuten(ms, tz);
+  const p2 = (n) => String(Math.abs(n)).padStart(2, "0");
+  return `${d.jaar}-${p2(d.maand)}-${p2(d.dag)}T${p2(d.uur)}:${p2(d.minuut)}:${p2(d.seconde)}${off < 0 ? "-" : "+"}${p2(Math.trunc(off / 60))}:${p2(off % 60)}`;
+}

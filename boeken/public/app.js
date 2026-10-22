@@ -164,6 +164,7 @@ async function kiesSoort(id, modus = "boek") {
   const j = await api(`/api/slots?type=${encodeURIComponent(id)}`);
   if (j.status === 503 || !j.ok) return toonNiet(j.reden);
   staat.slots = j.slots || [];
+  staat.opgehaald = Date.now();
   const dagen = groepeerPerDag(staat.slots, staat.zone);
   if (!dagen.some((d) => d.datum === staat.dag)) staat.dag = dagen[0]?.datum || null;
   toonMoment(modus);
@@ -349,6 +350,23 @@ function nieuweBoeking() {
   history.replaceState(null, "", `/?lang=${staat.taal}`);
   toonSoorten();
 }
+
+// ---------- altijd actueel ----------
+
+// Staat iemand langer dan een minuut op de tijdenkeuze, dan halen we de vrije tijden stil opnieuw op.
+async function ververs() {
+  if (!staat.soort || !paneel.querySelector(".tijden") || Date.now() - (staat.opgehaald || 0) < 60_000) return;
+  const j = await api(`/api/slots?type=${encodeURIComponent(staat.soort)}`);
+  if (!j.ok || !paneel.querySelector(".tijden")) return;
+  staat.slots = j.slots || [];
+  staat.opgehaald = Date.now();
+  if (staat.slot && !staat.slots.includes(staat.slot)) staat.slot = null;
+  const dagen = groepeerPerDag(staat.slots, staat.zone);
+  if (!dagen.some((d) => d.datum === staat.dag)) staat.dag = dagen[0]?.datum || null;
+  toonMoment(staat.modus);
+}
+setInterval(ververs, 15_000);
+document.addEventListener("visibilitychange", () => document.visibilityState === "visible" && ververs());
 
 // ---------- start ----------
 

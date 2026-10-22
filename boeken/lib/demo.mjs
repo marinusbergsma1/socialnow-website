@@ -33,10 +33,13 @@ export function demoAgenda(tz = "Europe/Amsterdam") {
       afspraken.set(a.id, a);
       return a;
     },
-    async nodigUit(id, { naam }) {
+    async nodigUit(id, { naam, email, vraag }) {
       const a = afspraken.get(id);
-      a.gastNaam = naam;
+      Object.assign(a, { gastNaam: naam, gastEmail: email, vraag });
       return { ...a, meet: null };
+    },
+    async overzicht(van, tot) {
+      return actief().filter((a) => overlapt(a.start, a.eind, +van, +tot)).map((a) => ({ ...a, meet: null }));
     },
     async haal(id) {
       return afspraken.get(id) || null;

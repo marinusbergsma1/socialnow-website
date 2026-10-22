@@ -146,7 +146,7 @@ test("beheer: zonder of met verkeerde sleutel geen toegang", async () => {
 test("beheer: met sleutel open slots en geboekte calls met naam, e-mail, soort, tijd en vraag", async () => {
   process.env.BOEKING_BEHEER_SLEUTEL = "proefsleutel-die-lang-genoeg-is-1234567890";
   const agenda = nepAgenda();
-  const start = Date.now() + 3 * 24 * 3600e3;
+  const start = Math.floor((Date.now() + 3 * 24 * 3600e3) / 60e3) * 60e3;
   const a = await agenda.maak({ start, eind: start + 20 * 60e3, titel: "x", beschrijving: "", soortId: "security" });
   await agenda.nodigUit(a.id, { gasten: [{ naam: "Sanne de Vries", email: "sanne@voorbeeld.nl" }], naam: "Sanne de Vries", email: "sanne@voorbeeld.nl", vraag: "voorbeeld.nl", soortId: "security", beschrijving: "" });
   zetProefAgenda(agenda);
