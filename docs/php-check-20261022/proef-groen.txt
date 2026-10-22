@@ -3,9 +3,17 @@ GROEN  postbuild maakt dist/check/index.html met eigen titel en omschrijving, en
 GROEN  /php-check verwijst door naar /check
 GROEN  boekknop uit één configwaarde (BOEK_URL), anders het contactformulier
 GROEN  disclaimer en boekknop bij elke uitslag, niet alleen rood
-GROEN  drie niveaus: publieke scan, verdiepte scan, audit
+GROEN  minder uitleg: geen drie niveaus en geen technische FAQ meer
 GROEN  cijfers over php2shell met bronnen in een voetnoot
-GROEN  FAQ met minstens vier vragen
+GROEN  korte FAQ: precies drie vragen in gewone taal
+GROEN  twee grote knoppen bij de uitslag en onderaan: uitgebreide check (boeking, anders formulier) en contact
+GROEN  kort formulier: drie velden, domein al ingevuld
+GROEN  anker #aanvraag opent het formulier voor de uitgebreide check en scrolt ernaartoe
+GROEN  formulier uitgebreide check: naam, e-mail, website en optioneel telefoon
+GROEN  ?domein= vult de website alvast in
+GROEN  vier documenten in NL en EN, elk bestand bestaat en is een pdf (nooit een kapotte link)
+GROEN  documenten in een witte sectie
+GROEN  documentenblok verschijnt alleen als er bestanden zijn, nooit een lege link
 GROEN  kop "Is je website veilig?"
 GROEN  geen vinkje: de publieke scan is één gewone GET
 GROEN  onder de knop alleen het veld en de knop, geen geruststellende regels
@@ -14,16 +22,16 @@ GROEN  elke invoer werkt: link.nl, www.link.nl, https://link.nl/pagina, LINK.NL 
 GROEN  server probeert https, http, met en zonder www
 GROEN  een check lukt altijd: faalt onze API of geeft hij geen JSON, dan een nette uitslag "onbekend"
 GROEN  onbekend heet "Je site schermt dit af", met belknop en kort formulier naast elkaar
-GROEN  blok "Dit kun je zelf al doen" met zeven stappen, direct onder de uitslag en vóór de drie niveaus
+GROEN  blok "Dit kun je zelf al doen" met zeven stappen, direct onder de uitslag
 GROEN  rood en oranje tonen stap 1 tot en met 3 in de uitslag
 GROEN  voorbeeldmail om te kopiëren, opmerking over expose_php en bronnen php.net, NCSC en NSA
-GROEN  formulier voor de gratis handmatige check en updates
+GROEN  afsluiting: gratis check en updates, scope bij meer diepgang
 GROEN  formulieren gaan naar api/check-aanvraag (mail naar secure@), met honeypot
 GROEN  EN-kop is "Is your website safe?"
 GROEN  EN-zin over gratis check en scope klopt letterlijk
 GROEN  EN-teksten voor afgeschermd, zelf doen en Copy email letterlijk
 GROEN  EN-disclaimer en knop "Book a free call" letterlijk
-GROEN  elke zin op de pagina heeft een Engelse vertaling (111 zinnen)
+GROEN  elke zin op de pagina heeft een Engelse vertaling (84 zinnen)
 GROEN  EN-titel voor de metadata
 GROEN  ook vertaald in DE, FR, ES, IT, PT, PL, SV en DA
 GROEN  stappen niet dubbel vertaald (anders faalt de prerender)

@@ -194,12 +194,16 @@
 :root .sn-site .pc-oproepen .pc-formulier { margin-top: 16px; }
 :root .sn-site p.pc-disclaimer { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--pc-rand); font-size: 14px; line-height: 1.55; color: #b8b8bd; }
 :root .sn-site .pc-slot .pc-oproepen { margin-top: 26px; max-width: 720px; }
-:root .sn-site .pc-docs { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-:root .sn-site .pc-docs a { display: flex; justify-content: space-between; gap: 12px; padding: 16px 18px; border: 1px solid var(--pc-rand); border-radius: 14px; background: var(--pc-grond); color: #f5f5f5; text-decoration: none; }
-:root .sn-site .pc-docs small { color: var(--pc-groen); }
+:root .sn-site .pc-documenten { background: #fff; color: #111; padding: 48px 0; margin: 24px 0; }
+:root .sn-site .pc-documenten h2 { margin: 0; font-size: 22px; line-height: 1.2; color: #111; }
+:root .sn-site .pc-docs { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+:root .sn-site .pc-docs a { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 52px; padding: 12px 16px; border: 1px solid #e3e3e6; border-radius: 12px; background: #fff; color: #111; font-size: 15px; line-height: 1.35; text-decoration: none; }
+:root .sn-site .pc-docs a:hover { border-color: #2f7d3b; }
+:root .sn-site .pc-docs small { color: #2f7d3b; font-weight: 700; font-size: 12px; }
 :root .sn-site .pc-faq-blok .pc-faq { margin-top: 24px; }
 
 @media (max-width: 999px) {
+  :root .sn-site .pc-docs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   :root .sn-site .pc-kolommen { grid-template-columns: 1fr; gap: 16px; }
   :root .sn-site .pc-handmatig { grid-template-columns: 1fr; gap: 36px; }
   :root .sn-site .pc-tegels { grid-template-columns: 1fr; }
@@ -207,6 +211,7 @@
 @media (max-width: 760px) {
   :root .sn-site .pc-oproep-knoppen .pc-knop { width: 100%; justify-content: space-between; }
   :root .sn-site .pc-docs { grid-template-columns: 1fr; }
+  :root .sn-site .pc-documenten { padding: 36px 0; }
   :root .sn-site .pc-acties { grid-template-columns: 1fr; gap: 14px; }
   :root .sn-site .pc-hero { padding-top: 112px; }
   :root .sn-site .pc-hero.h-wrap, :root .sn-site .pc .h-wrap { width: calc(100% - 32px); }

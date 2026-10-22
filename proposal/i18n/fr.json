@@ -2989,5 +2989,10 @@
   "Officiële documenten.": "Documents officiels.",
   "Je domein stuurt door.": "Ton domaine redirige ailleurs.",
   "Je domein stuurt door naar {naar}. Die server meldt PHP {versie}, zonder de fix. Of dat jouw server is, zien we van buitenaf niet. Laat het ons gratis uitzoeken.": "Ton domaine redirige vers {naar}. Ce serveur indique PHP {versie}, sans le correctif. Nous ne pouvons pas voir de l'extérieur si c'est ton serveur. Laisse-nous vérifier gratuitement.",
-  "Veel checks vanaf jouw netwerk. Probeer het over een paar minuten nog eens.": "Beaucoup de contrôles depuis ton réseau. Réessaie dans quelques minutes."
+  "Veel checks vanaf jouw netwerk. Probeer het over een paar minuten nog eens.": "Beaucoup de contrôles depuis ton réseau. Réessaie dans quelques minutes.",
+  "Hoe en wat we meten.": "Comment et ce que nous mesurons.",
+  "Verklaring verantwoord scannen": "Déclaration de scan responsable",
+  "Privacy en gegevens bij de websitecheck": "Confidentialité et données du contrôle de site",
+  "Zo lees je je uitslag": "Comprendre ton résultat",
+  "De uitgebreide check": "Le contrôle approfondi"
 }

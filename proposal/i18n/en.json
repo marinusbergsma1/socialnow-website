@@ -3334,5 +3334,10 @@
   "Officiële documenten.": "Official documents.",
   "Je domein stuurt door.": "Your domain redirects.",
   "Je domein stuurt door naar {naar}. Die server meldt PHP {versie}, zonder de fix. Of dat jouw server is, zien we van buitenaf niet. Laat het ons gratis uitzoeken.": "Your domain redirects to {naar}. That server reports PHP {versie}, without the fix. Whether that's your server, we can't see from the outside. Let us find out for free.",
-  "Veel checks vanaf jouw netwerk. Probeer het over een paar minuten nog eens.": "Lots of checks from your network. Please try again in a few minutes."
+  "Veel checks vanaf jouw netwerk. Probeer het over een paar minuten nog eens.": "Lots of checks from your network. Please try again in a few minutes.",
+  "Hoe en wat we meten.": "How and what we measure.",
+  "Verklaring verantwoord scannen": "Responsible Scanning Statement",
+  "Privacy en gegevens bij de websitecheck": "Privacy and Data in the Website Check",
+  "Zo lees je je uitslag": "Understanding Your Result",
+  "De uitgebreide check": "The Extended Check"
 }

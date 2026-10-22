@@ -32,6 +32,9 @@ eis(/\{!kort && \(/.test(kort) && (kort.slice(0, kort.indexOf("{!kort && (")).ma
 eis(/id=\{anker \? "aanvraag" : undefined\}/.test(tsx) && /hash !== "#aanvraag"/.test(tsx) && /scrollIntoView/.test(tsx) && /<Oproepen [^>]*anker \/>/.test(tsx), "anker #aanvraag opent het formulier voor de uitgebreide check en scrolt ernaartoe");
 eis(/\{kort && telefoon && <label>Telefoon/.test(tsx) && /telefoon=\{open === "scan"\}/.test(tsx), "formulier uitgebreide check: naam, e-mail, website en optioneel telefoon");
 eis(/get\("domein"\)/.test(tsx), "?domein= vult de website alvast in");
+const docs = [...tsx.matchAll(/bestand: "([a-z-]+)"/g)].map((m) => m[1]);
+eis(docs.length === 4 && docs.every((b) => ["nl", "en"].every((t) => fs.existsSync(`public/websitecheck/${b}-${t}.pdf`) && fs.readFileSync(`public/websitecheck/${b}-${t}.pdf`).subarray(0, 5).toString() === "%PDF-")), "vier documenten in NL en EN, elk bestand bestaat en is een pdf (nooit een kapotte link)");
+eis(/\.pc-documenten \{ background: #fff/.test(css), "documenten in een witte sectie");
 eis(/DOCUMENTEN\.length > 0 &&/.test(tsx), "documentenblok verschijnt alleen als er bestanden zijn, nooit een lege link");
 eis(/<h1[^>]*>Is je website veilig\?<\/h1>/.test(tsx), "kop \"Is je website veilig?\"");
 eis(!/type="checkbox"/.test(tsx) && !/toestemming/i.test(tsx) && !/toestemming/.test(lees("api/php-check.js")), "geen vinkje: de publieke scan is één gewone GET");

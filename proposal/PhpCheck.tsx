@@ -208,7 +208,12 @@ function Oproepen({ domein = "", uitslag, anker = false }: { domein?: string; ui
 
 // Officiële documenten (sessie check-documenten). Het blok verschijnt pas als hier bestanden staan die in public/ bestaan:
 // nooit een lege of kapotte link.
-const DOCUMENTEN: { naam: string; nl: string; en: string }[] = [];
+const DOCUMENTEN: { naam: string; bestand: string }[] = [
+  { naam: "Verklaring verantwoord scannen", bestand: "verklaring-verantwoord-scannen" },
+  { naam: "Privacy en gegevens bij de websitecheck", bestand: "privacy-en-gegevens" },
+  { naam: "Zo lees je je uitslag", bestand: "zo-lees-je-je-uitslag" },
+  { naam: "De uitgebreide check", bestand: "de-uitgebreide-check" },
+];
 
 export function PhpCheckPage() {
   const { t, language } = useLanguage();
@@ -361,16 +366,20 @@ export function PhpCheckPage() {
         </ol>
       </section>
 
+      {/* 22 oktober 2026 (Marinus): een witte sectie in het zwart, voor menselijkheid en vertrouwen; de zwarte delen tonen
+          de data en de werking. Klein: hoe en wat we meten, als pdf in NL (Nederlands) of EN (alle andere talen). */}
       {DOCUMENTEN.length > 0 && (
-        <section className="h-section h-wrap pc-documenten">
-          <h2 className="pc-sectiekop">Officiële documenten.</h2>
-          <ul className="pc-docs">
-            {DOCUMENTEN.map((d) => (
-              <li key={d.naam}>
-                <a href={language === "nl" ? d.nl : d.en} download target="_blank" rel="noopener"><span>{d.naam}</span><small>PDF</small></a>
-              </li>
-            ))}
-          </ul>
+        <section className="pc-documenten">
+          <div className="h-wrap">
+            <h2>Hoe en wat we meten.</h2>
+            <ul className="pc-docs">
+              {DOCUMENTEN.map((d) => (
+                <li key={d.bestand}>
+                  <a href={`/websitecheck/${d.bestand}-${language === "nl" ? "nl" : "en"}.pdf`} target="_blank" rel="noopener"><span>{d.naam}</span><small>PDF</small></a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
       )}
 
