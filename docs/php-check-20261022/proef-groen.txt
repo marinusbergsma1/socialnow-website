@@ -18,12 +18,12 @@ GROEN  blok "Dit kun je zelf al doen" met zeven stappen, direct onder de uitslag
 GROEN  rood en oranje tonen stap 1 tot en met 3 in de uitslag
 GROEN  voorbeeldmail om te kopiëren, opmerking over expose_php en bronnen php.net, NCSC en NSA
 GROEN  formulier voor de gratis handmatige check en updates
-GROEN  formulieren gaan naar api/check-aanvraag (mail naar info@), met honeypot
+GROEN  formulieren gaan naar api/check-aanvraag (mail naar secure@), met honeypot
 GROEN  EN-kop is "Is your website safe?"
 GROEN  EN-zin over gratis check en scope klopt letterlijk
 GROEN  EN-teksten voor afgeschermd, zelf doen en Copy email letterlijk
 GROEN  EN-disclaimer en knop "Book a free call" letterlijk
-GROEN  elke zin op de pagina heeft een Engelse vertaling (107 zinnen)
+GROEN  elke zin op de pagina heeft een Engelse vertaling (111 zinnen)
 GROEN  EN-titel voor de metadata
 GROEN  ook vertaald in DE, FR, ES, IT, PT, PL, SV en DA
 GROEN  stappen niet dubbel vertaald (anders faalt de prerender)
@@ -45,7 +45,7 @@ GROEN  gewoon nummer onder de fix is oranje, nooit rood (cPanel, CloudLinux, RHE
 GROEN  Ubuntu-build: rood en groen met bewijs
 GROEN  op of boven de fix is groen
 GROEN  versie nooit uit paginatekst; geen PHP zichtbaar is onbekend, niet groen
-GROEN  aanvraag wordt één mail naar info@ met naam, e-mail, domein, uitslag, PHP-versie of "afgeschermd", taal, tijdstip, vraag en Reply-To bezoeker (nep-transport)
+GROEN  aanvraag wordt één mail naar secure@socialnow.nl (alias van info@) met naam, e-mail, domein, uitslag, PHP-versie of "afgeschermd", taal, tijdstip, vraag en Reply-To bezoeker (nep-transport)
 GROEN  lukt versturen niet (twee pogingen), dan staat de hele aanvraag in de logs: niets verdwijnt stilletjes
 GROEN  honeypot vangt bots
 GROEN  limiet per IP en per adres; SMTP-gegevens alleen uit env

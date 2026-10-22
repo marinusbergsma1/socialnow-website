@@ -2829,5 +2829,9 @@
   "Kopieer de e-mail": "Copiar o e-mail",
   "Is je website veilig? Gratis php2shell-check | SocialNow": "O teu site está seguro? Verificação php2shell gratuita | SocialNow",
   "Controleer gratis of je server een PHP-versie toont met het php2shell-lek (CVE-2026-109618 en CVE-2026-109619). Eén gewone GET op je homepage, niets opgeslagen. Handmatige check en updates gratis.": "Verifica grátis se o teu servidor mostra uma versão do PHP com a falha php2shell (CVE-2026-109618 e CVE-2026-109619). Um único GET normal à tua página inicial, nada é guardado. Verificação manual e atualizações grátis.",
-  "Gratis call over de php2shell-check": "Chamada gratuita sobre a verificação php2shell"
+  "Gratis call over de php2shell-check": "Chamada gratuita sobre a verificação php2shell",
+  "Fix gezien": "Correção detetada",
+  "Niet gepatcht": "Sem correção",
+  "Twijfel": "Incerto",
+  "Afgeschermd": "Protegido"
 }

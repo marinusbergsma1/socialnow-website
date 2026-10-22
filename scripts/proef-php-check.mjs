@@ -56,7 +56,7 @@ for (const m of jsx.matchAll(/>\s*([^<>{}]*[A-Za-zÀ-ž][^<>{}]*?)\s*</g)) zinne
 for (const m of tsx.matchAll(/\b(?:placeholder|aria-label|title|alt)="([^"]+)"/g)) zinnen.add(m[1]);
 for (const m of tsx.matchAll(/\bt\("([^"]+)"\)/g)) zinnen.add(m[1]);
 for (const m of tsx.matchAll(/^  "([^"]+)",$/gm)) zinnen.add(m[1]);
-for (const blok of tsx.matchAll(/const (?:FOUTEN|LABEL|oranje)[^=]*= \{([\s\S]*?)\n\s*\};/g)) for (const m of blok[1].matchAll(/:\s*"([^"]+)"/g)) zinnen.add(m[1]);
+for (const blok of tsx.matchAll(/const (?:FOUTEN|LABEL|oranje)[^=]*= \{([\s\S]*?)\};/g)) for (const m of blok[1].matchAll(/:\s*"([^"]+)"/g)) zinnen.add(m[1]);
 for (const m of tsx.matchAll(/\? "([^"]{12,})"\s*\n?\s*: "([^"]{12,})"/g)) { zinnen.add(m[1]); zinnen.add(m[2]); }
 const vaste = new Set(["Gratis php2shell-check", "PHP-versie", "expose_php=Off"]); // eigennamen en codes mogen gelijk blijven, maar staan er wel in
 const zonder = [...zinnen].filter((z) => /[a-z]{3}/i.test(z) && !/^[\w.-]+@[\w.-]+$/.test(z) && !(z in en) && !vaste.has(z));
