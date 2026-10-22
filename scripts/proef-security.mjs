@@ -10,7 +10,7 @@
 // 4. In het PHP-blok bij oranje en rood de regel over de tijdelijk gratis updates boven Steef en Michelle, en bij PHP 8.1
 //    en ouder de regel over de overstap. Echt gerenderd.
 // 5. #aanvraag scrolt naar het formulier, ook na de doorverwijzing.
-// 6. 22 oktober 2026: liggende 16:9-film op desktop, 9:16 op mobiel (zie onder bij 3).
+// 6. 22 oktober 2026: liggende 16:9-film op desktop, 9:16 op mobiel (zie onder bij 3); sinds de avond de beeldvullende v3.
 // Live (na de merge): PROEF_LIVE=1 node scripts/proef-security.mjs controleert ook de 308 op socialnow.nl.
 import fs from "node:fs";
 import path from "node:path";
@@ -78,6 +78,9 @@ const mp4 = (p) => (fs.existsSync(p) ? fs.readFileSync(p) : Buffer.alloc(0));
 const breed16 = mp4("public/security/film/security-16x9.mp4");
 const faststart = breed16.length > 0 && breed16.indexOf("moov") > 0 && breed16.indexOf("moov") < breed16.indexOf("mdat");
 eis(/className="pc-video pc-video-16x9"/.test(film) && /src="\/security\/film\/security-16x9\.mp4"/.test(film) && /poster="\/security\/film\/poster-16x9\.jpg"/.test(film) && fs.existsSync("public/security/film/poster-16x9.jpg") && breed16.length > 0 && breed16.length < 16e6 && faststart, `liggende film 16:9 met poster, faststart en onder 16 MB (${(breed16.length / 1e6).toFixed(1)} MB)`);
+// 22 oktober 2026, avond (Marinus): geen profielkaart of telefoon van hem in de liggende film; animaties beeldvullend
+// over 1920x1080, stem loopt door, CTA onderaan. Herkenbaar aan de metadata in het bestand (moov staat vooraan).
+eis(breed16.includes(Buffer.from("security 16x9 v3 beeldvullend")), "16:9-film is de beeldvullende versie zonder Marinus in beeld (v3)");
 eis(/className="pc-video pc-video-9x16"/.test(film) && /src="\/security\/film\/security-9x16\.mp4"/.test(film) && (film.match(/preload="none"/g) || []).length === 2, "mobiel houdt de 9:16-film; beide films laden pas bij afspelen");
 eis(/@media \(min-width: 761px\) \{[^}]*\.pc-video-9x16 \{ display: none; \}/.test(filmCss) && /@media \(max-width: 760px\) \{[^}]*\.pc-video-16x9 \{ display: none; \}/.test(filmCss), "desktop (vanaf 761 px) toont 16:9, mobiel (tot 760 px) toont 9:16");
 eis(["Plan een diepgaand gesprek", "Claim je gratis update", "Claim je gratis update.", "Naar de scan", "van de websites draait op PHP"].every((k) => en[k] && talen.every((t) => woorden[t][k])), "nieuwe teksten vertaald in EN en acht andere talen");
@@ -157,6 +160,8 @@ if (process.env.PROEF_LIVE) {
     const res = await fetch(`https://socialnow.nl/security/film/${f}`, { method: "HEAD" });
     eis(res.status === 200 && /^(video\/mp4|image\/jpeg)/.test(res.headers.get("content-type") || ""), `live: /security/film/${f} geeft ${res.status} ${res.headers.get("content-type")}`);
   }
+  const begin = Buffer.from(await (await fetch("https://socialnow.nl/security/film/security-16x9.mp4", { headers: { Range: "bytes=0-300000" } })).arrayBuffer());
+  eis(begin.includes(Buffer.from("security 16x9 v3 beeldvullend")), "live: de 16:9-film is de beeldvullende v3");
   const live16 = await (await fetch("https://socialnow.nl/security")).text();
   const bundel = [...live16.matchAll(/src="(\/assets\/[^"]+\.js)"/g)].map((m) => m[1]);
   let heeft16 = false;
