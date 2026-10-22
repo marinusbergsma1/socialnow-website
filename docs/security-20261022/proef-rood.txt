@@ -1,0 +1,43 @@
+# node scripts/proef-security.mjs op main (6b09d53, gelijk aan a29c468), plus PROEF_LIVE=1 tegen socialnow.nl vóór de merge
+ROOD   /security is de securityscan (niet meer een alias van /veiligheid)
+ROOD   in de app: /check en /php-check naar /security, met ?domein= en #aanvraag
+ROOD   vercel.json: /check, /nl/check (alle talen) en /php-check permanent (308) naar /security
+ROOD   postbuild: /security met eigen titel, description en kruimel; /check heeft geen eigen pagina meer
+ROOD   titel (0 tekens) en description (0 tekens) passen in Google
+ROOD   titel en description vertaald (EN "security scan" en acht andere talen)
+ROOD   eigen deelbeeld 1200x630 (0x0) voor og:image en twitter:image, alt-tekst vertaald
+ROOD   aanvraagmail noemt socialnow.nl/security
+ROOD   de pagina heet Securityscan / Security scan, nergens meer "check"
+ROOD   volgorde: film, Wie werd geraakt, Wie loopt risico, dan de scan
+ROOD   geraakt: Nintendo en Wikipedia met hun logo uit public/
+ROOD   geraakt: vier overheden (DE, FI, BE, NL) met vlag en organisatienaam, geen banken
+GROEN  nooit een overheidslogo of wapen: vlaggen tekenen we zelf
+ROOD   risico: WordPress, WooCommerce, Magento, Joomla, Drupal, PrestaShop en Laravel met logo
+ROOD   elk logo en elke vlag linkt naar een bron (https), in een nieuw tabblad met rel=noopener
+ROOD   externe links gemarkeerd voor schermlezers
+ROOD   kleine regel: geen klanten of partners (NL en EN letterlijk)
+ROOD   risico: oproep letterlijk, en eerlijk dat een moderne host die PHP bijwerkt minder risico geeft
+ROOD   bronnen per naam in de voetnoot
+ROOD   regels over gratis updates en PHP 8.1 letterlijk in EN en vertaald in alle talen
+ROOD   NL oranje PHP 5.2.12: regel gratis updates boven Steef en Michelle, regel PHP 8.1 en ouder
+ROOD   EN oranje PHP 5.2.12: regel gratis updates boven Steef en Michelle, regel PHP 8.1 en ouder
+ROOD   NL oranje PHP 8.4.26: regel gratis updates boven Steef en Michelle
+ROOD   EN oranje PHP 8.4.26: regel gratis updates boven Steef en Michelle
+ROOD   NL rood PHP 8.1.2 Ubuntu: regel gratis updates boven Steef en Michelle, regel PHP 8.1 en ouder
+ROOD   EN rood PHP 8.1.2 Ubuntu: regel gratis updates boven Steef en Michelle, regel PHP 8.1 en ouder
+GROEN  NL groen PHP 8.5.12: geen regel gratis updates
+GROEN  EN groen PHP 8.5.12: geen regel gratis updates
+GROEN  NL afgeschermd: geen regel gratis updates
+GROEN  EN afgeschermd: geen regel gratis updates
+ROOD   bij oranje en rood staan Steef en Michelle in het PHP-blok, niet nog eens onder het rapport
+ROOD   #aanvraag scrolt naar het formulier, ook als de pagina na het laden nog opbouwt
+ROOD   live: /check geeft 200 naar -
+ROOD   live: /nl/check geeft 200 naar -
+ROOD   live: /check?domein=link.nl geeft 200 naar -
+ROOD   live: /php-check geeft 308 naar /check
+ROOD   live: /de/check geeft 200 naar -
+ROOD   live: /security met eigen titel, canonical en deelbeeld
+ROOD   live: /nl/security met eigen titel, canonical en deelbeeld
+ROOD   live: sitemap noemt /security en niet /check
+
+35 rood

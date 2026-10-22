@@ -1,0 +1,11 @@
+Meting 22 oktober 2026 na het bijwerken met main (ce8c917, hero #149 en /check #145).
+Vóór = live socialnow.nl/nl/ (main). Na = lokale build van deze tak. Chrome, 390 px aanraak en 1440 px.
+
+stand        | Talking to-balk     | sectie hoogte | cyclusblok | toegangsblok | punten toegang | horizontaal scrollen
+390 vóór     | rgb(255, 255, 255)  | 4463 px       | 415 px     | 566 px       | 6              | nee
+390 na       | rgb(11, 15, 18)     | 4057 px       | 334 px     | 241 px       | 3              | nee
+1440 vóór    | rgb(255, 255, 255)  | 2379 px       | 207 px     | 262 px       | 6              | nee
+1440 na      | rgb(11, 15, 18)     | 2243 px       | 186 px     | 147 px       | 3              | nee
+
+Hero ongewijzigd door deze tak: labels "Groei | Veiligheid | Eigen beheer en keuzes", Veiligheid 0 px van zijn vinkje, tikvlak 44 px, op beide breedtes gelijk aan live.
+Vertalingen: bestand van main plus alleen de zes nieuwe sleutels van deze tak, in alle negen talen; geen sleutel van main gewijzigd of weggehaald.

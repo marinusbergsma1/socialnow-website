@@ -49,7 +49,7 @@ let allPosts: typeof import("../data/posts").allPosts = [];
 let brandMeta: typeof import("../scripts/brand-meta.mjs").brandMeta | null = null;
 import { MotionProvider } from "./motion";
 import LanguageSwitch from "./LanguageSwitch";
-import { HeaderCall, NAV_LINKS, PRODUCTEN, ProductenMenu } from "./Producten";
+import { DIENSTEN, DienstenMenu, HeaderCall, Kleurwoord, NAV_LINKS, PRODUCTEN, ProductenMenu, SecurityLink } from "./Producten";
 import { PlanCallHost, openPlanCall } from "./PlanCall";
 import { LanguageProvider, LANGUAGES, languagePrefix, type Language, useLanguage } from "./i18n/context";
 const PrivacyPage = later(() => import("../components/PrivacyPage").then((m) => m.default));
@@ -67,6 +67,12 @@ import Cookiebot from "./Cookiebot";
 import { Analytics } from "@vercel/analytics/react";
 
 // 18 oktober 2026: Producten, Diensten, Resultaten, Prijzen, Team (proposal/Producten.tsx). Blog en Contact staan in de voettekst.
+// /check en /php-check (oude campagnelinks en mails) naar /security, met ?domein= en #aanvraag erbij.
+function NaarSecurity() {
+  const { search, hash } = useLocation();
+  return <Navigate to={`/security${search}${hash}`} replace />;
+}
+
 const nav = NAV_LINKS;
 // Pagina's buiten het menu houden hun eigen titel, ook als je ze rechtstreeks opent.
 const paginaTitels: Record<string, string> = {
@@ -74,7 +80,7 @@ const paginaTitels: Record<string, string> = {
   "/blog": "Blog",
   "/contact": "Contact",
   "/audit": "Gratis Google Ads audit",
-  "/check": "Gratis php2shell-check",
+  "/security": "Gratis securityscan",
   "/gratis-website": "Gratis website aanvragen",
   "/gratis-os-demo": "Gratis OS-demo",
   "/antwoord-aanvragen": "Antwoord op aanvragen",
@@ -226,7 +232,7 @@ function ProposalShell() {
           </Link>
           <nav className="h-desktop-nav" aria-label="Hoofdnavigatie">
             <ProductenMenu />
-            {nav.map(([path, title]) => (
+            {nav.map(([path, title]) => path === "/diensten" ? <React.Fragment key={path}><DienstenMenu /><SecurityLink /></React.Fragment> : (
               <NavLink key={path} to={path}>
                 {title}
               </NavLink>
@@ -259,14 +265,28 @@ function ProposalShell() {
           hidden={!menuOpen}
         >
           <NavLink end to="/" onClick={() => setMenuOpen(false)}>Home<ArrowUpRight size={17} /></NavLink>
+          {/* 22 oktober 2026 (Marinus): ook op mobiel OS en Connect in kleur, als kaarten met dezelfde onderregel als het
+              desktopmenu, en de diensten net zo. Grote tikvlakken, niets over de rand. */}
           <p className="h-mobile-groep">Producten</p>
-          {PRODUCTEN.map((p) => {
-            const inhoud = <><span translate="no">SocialNow {p.naam}</span><ArrowUpRight size={17} /></>;
-            return "naar" in p
-              ? <NavLink key={p.soort} className="h-mobile-product" to={p.naar} onClick={() => setMenuOpen(false)}>{inhoud}</NavLink>
-              : <a key={p.soort} className="h-mobile-product" href={p.href}>{inhoud}</a>;
-          })}
-          {nav.map(([path, title]) => (
+          <div className="h-mobile-kaarten">
+            {PRODUCTEN.map((p) => {
+              const inhoud = <><b translate="no">SocialNow <i className={p.soort}>{p.naam}</i></b><span>{p.regel}</span><ArrowUpRight size={17} aria-hidden="true" /></>;
+              return "naar" in p
+                ? <NavLink key={p.soort} className="h-mobile-product" to={p.naar} onClick={() => setMenuOpen(false)}>{inhoud}</NavLink>
+                : <a key={p.soort} className="h-mobile-product" href={p.href}>{inhoud}</a>;
+            })}
+          </div>
+          {nav.map(([path, title]) => path === "/diensten" ? (
+            <React.Fragment key={path}>
+              <p className="h-mobile-groep">{title}</p>
+              <div className="h-mobile-kaarten">
+                {DIENSTEN.map((d) => <Link key={d.soort} className="h-mobile-product" to={d.naar} onClick={() => setMenuOpen(false)}>
+                  <b translate="no"><Kleurwoord tekst={d.titel} /></b><span>{d.regel}</span><ArrowUpRight size={17} aria-hidden="true" />
+                </Link>)}
+              </div>
+              <SecurityLink mobiel onClick={() => setMenuOpen(false)} />
+            </React.Fragment>
+          ) : (
             <NavLink
               key={path}
               to={path}
@@ -296,9 +316,12 @@ function ProposalShell() {
           <Route path="/prijzen" element={<Navigate to="/diensten#prijzen" replace />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/audit" element={<AuditPage />} />
-          {/* 22 oktober 2026: de campagnepagina van de php2shell-advertentie. /php-check is een alias. */}
-          <Route path="/check" element={<PhpCheckPage />} />
-          <Route path="/php-check" element={<Navigate to="/check" replace />} />
+          {/* 22 oktober 2026: de campagnepagina van de php2shell-advertentie. Marinus, middag: "de pagina heet security,
+              dit kan wel eens een belangrijke pagina worden." /check en /php-check sturen door, met het anker erbij
+              (vercel.json doet hetzelfde met een 308 voordat de app laadt). */}
+          <Route path="/security" element={<PhpCheckPage />} />
+          <Route path="/check" element={<NaarSecurity />} />
+          <Route path="/php-check" element={<NaarSecurity />} />
           <Route path="/vacatures" element={<VacaturesPage />} />
           {/* 28 september 2026 (Marinus): investeerders doen een aanvraag naar invest@. /investors is een alias. */}
           <Route path="/investeerders" element={<InvesteerdersPage />} />
@@ -306,9 +329,8 @@ function ProposalShell() {
           <Route path="/gratis-website" element={<GratisWebsite />} />
           <Route path="/gratis-os-demo" element={<GratisOsDemo />} />
           <Route path="/antwoord-aanvragen" element={<AntwoordPagina />} />
-          {/* 28 september 2026: veiligheidsvideo en sleutelbelofte. /security is een alias. */}
+          {/* 28 september 2026: veiligheidsvideo en sleutelbelofte. Sinds 22 oktober 2026 is /security de securityscan. */}
           <Route path="/veiligheid" element={<VeiligheidPagina />} />
-          <Route path="/security" element={<Navigate to="/veiligheid" replace />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route

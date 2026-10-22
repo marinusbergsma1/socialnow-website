@@ -58,8 +58,9 @@ if (fs.existsSync(C_VIDEO) && fs.existsSync(C_POSTER)) {
 
 // webteksten (NL in de bron, EN in en.json): 02-webtekst.md §1 en §2
 const TEKST = {
-  "In ruim twee minuten: wat je met het OS doet, wie het bouwt en wat het kost. Gesproken in het Engels.":
-    "In just over two minutes: what you do with the OS, who builds it and what it costs. Spoken in English.",
+  // 22 oktober 2026: de OS-zin staat korter in het startbeeld van de speler (ExplainerPlayer.tsx), zie scripts/proef-video-startbeeld.mjs.
+  "In ruim twee minuten: wat je met het OS doet, wie het bouwt en wat het kost.":
+    "In just over two minutes: what you do with the OS, who builds it and what it costs.",
   "SocialNow en vier partners, elk met een eigen rol.": "SocialNow and four partners, each with its own role.",
   "In één minuut: zelf je expert kiezen, wat een expert van je ziet, de pakketten en onze groeigarantie. Gesproken in het Engels.": "In one minute: choosing your own expert, what an expert sees, the packages and our growth guarantee. Spoken in English.",
   "Visie, stijl, UI/UX en AI-workflows. Wij keuren elke versie goed voor die live gaat.": "Vision, style, UI/UX and AI workflows. We approve every version before it goes live.",
@@ -74,7 +75,7 @@ const TEKST = {
   "Chatten met een expert opent nooit je OS.": "Chatting with an expert never opens your OS.",
   "Advertentiegeld binnen jouw budget.": "Ad spend within your budget.",
 };
-const bron = ["proposal/HeaderBestaand.tsx", "proposal/SamenEnVeilig.tsx", "proposal/ConnectExperts.tsx"].map(f => fs.readFileSync(f, "utf8")).join("\n");
+const bron = ["proposal/HeaderBestaand.tsx", "proposal/SamenEnVeilig.tsx", "proposal/ConnectExperts.tsx", "proposal/ExplainerPlayer.tsx"].map(f => fs.readFileSync(f, "utf8")).join("\n");
 const en = JSON.parse(fs.readFileSync("proposal/i18n/en.json", "utf8"));
 for (const [nl, eng] of Object.entries(TEKST)) eis(bron.includes(nl) && en[nl] === eng, `NL in de bron en EN in en.json: ${nl.slice(0, 48)}…`);
 for (const taal of ["de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
@@ -94,14 +95,14 @@ eis(/useState<"os" \| "connect">\("os"\)/.test(hdr), "header: filmkeuze met OS a
 eis(/className="bs-filmkeuze"/.test(hdr) && (hdr.match(/aria-pressed=\{film === "(os|connect)"\}/g) || []).length === 2, "header: schakelaar met twee knoppen en aria-pressed");
 eis(/<span translate="no">SocialNow OS<\/span>/.test(hdr) && /<span translate="no">SocialNow Connect<\/span>/.test(hdr) && /<LayoutDashboard /.test(hdr) && /<Users /.test(hdr), "header: SocialNow OS en SocialNow Connect, elk met een icoon naast de tekst");
 eis(/<ExplainerPlayer key="connect" kind="connect"/.test(hdr) && /<ExplainerPlayer key="os"/.test(hdr), "header: de schakelaar wisselt de speler tussen de OS-film en de Connect-film");
-eis(/film === "os"\s*\? "In ruim twee minuten/.test(hdr) && hdr.includes("In één minuut: zelf je expert kiezen"), "header: de regel onder de speler wisselt mee");
+eis(/film === "connect" && <p className="bs-explainer-onder">In één minuut: zelf je expert kiezen/.test(hdr) && !hdr.includes("In ruim twee minuten"), "header: de regel onder de speler alleen bij de Connect-film; de OS-zin staat in het startbeeld (22 okt 2026)");
 eis(/\.bs-film-os\.is-aan\{background:#0B7A37;color:#fff\}/.test(hdrCss) && /\.bs-film-connect\.is-aan\{background:#00739E;color:#fff\}/.test(hdrCss) && !/bs-filmkeuze[^}]*(#000|black)/.test(hdrCss), "header: actief groen of blauw met witte tekst, nooit zwart");
 eis(/\.bs-explainer-onder\{min-height:/.test(hdrCss) && en["Kies een film"] === "Choose a film", "header: vaste hoogte onder de speler (geen verspringen) en vertaald groepslabel");
 
 if (process.argv.includes("--dist")) {
   const tekst = f => fs.readFileSync(f, "utf8").replace(/<span class="sn-title-dot">\.<\/span>/g, ".");
   const nl = tekst("dist/nl/index.html"), enHtml = tekst("dist/index.html");
-  eis(enHtml.includes(`socialnow-os-explainer-poster.jpg?v=${VERSIE}`), "gebouwde en-pagina laadt de nieuwe poster");
+  eis(enHtml.includes("sn-explainer-start") && !enHtml.includes("socialnow-os-explainer-poster.jpg"), "gebouwde en-pagina toont het startbeeld, niet het filmframe als poster (22 okt 2026)");
   eis(Object.keys(TEKST).slice(0, 2).every(k => nl.includes(k)), "gebouwde nl-pagina toont de nieuwe teksten");
   eis(Object.values(TEKST).slice(0, 2).every(k => enHtml.includes(k)), "gebouwde en-pagina toont de Engelse teksten");
 }

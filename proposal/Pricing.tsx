@@ -53,9 +53,9 @@ type Pakket = {
 // volgt uit dezelfde tabel: een beeld in topkwaliteit kost 28 tokens, een video van 8 seconden 160 (naar beneden afgerond).
 // 19 oktober 2026 (Marinus): "Team, Business worden en Business Enterprise met onneindig opslag en dus langer met meer de usp's
 // wat maakt ons nou zo uniek." De ids volgen de nieuwe namen; ?pakket=business is €35, ?pakket=enterprise is €65.
-// 22 oktober 2026 (Marinus): "Free for teams of up to 2" en alle prijzen duidelijker. Elke kaart zegt bovenaan voor hoe
-// grote teams hij is (2, 5, 10 personen; was "Nodig 2 mensen uit", "2 tot 5" en "5 tot 10 medewerkers"), en "per maand bij
-// jaarabonnement" in plaats van "per maand, jaarlijks", dat ook als prijs per jaar te lezen was.
+// 22 oktober 2026 (Marinus): de teamgrootte in plaats van 10 GB, en alle prijzen duidelijker. Elke kaart zegt bovenaan voor wie
+// hij is: jij en 2 teamleden (gelijk aan de header, #157), teams tot 5 en tot 10 personen (was "Nodig 2 mensen uit", "2 tot 5" en
+// "5 tot 10 medewerkers"), en "per maand bij jaarabonnement" in plaats van "per maand, jaarlijks", dat als prijs per jaar te lezen was.
 const OS: Pakket[] = [
   {
     id: "gratis",
@@ -64,7 +64,7 @@ const OS: Pakket[] = [
     per: "voor altijd",
     belofte: "Je eigen OS om mee te beginnen.",
     punten: [
-      { tekst: "Teams tot 2 personen", sterk: true },
+      { tekst: "Jij en 2 teamleden", sterk: true },
       { tekst: "10 GB opslag", sterk: true },
       { tekst: "Gratis website en rebranding", sterk: true },
       { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },

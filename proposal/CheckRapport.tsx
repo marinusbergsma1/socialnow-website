@@ -48,7 +48,7 @@ const REDEN: Record<string, string> = {
   "geen-html": "Je homepage gaf geen gewone webpagina terug.",
   bron: "De openbare bron met versies antwoordde niet.",
   "geen-software": "Je site noemt geen versies van zijn software, dus we kunnen niet zien of die bij is.",
-  limiet: "Dit domein is net al vaak gecheckt. Probeer het over tien minuten opnieuw.",
+  limiet: "Dit domein is net al vaak gescand. Probeer het over tien minuten opnieuw.",
   fout: "Er ging aan onze kant iets mis.",
   "geen-http": "Je server gaf geen geldig webantwoord.",
 };

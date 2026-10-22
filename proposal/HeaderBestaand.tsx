@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Check, LayoutDashboard, ShieldCheck, Users } from "lucide-react";
 import { klein } from "./licht";
@@ -95,6 +95,24 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
   // 21 oktober 2026 (Marinus): "kleine switch boven de explainer video in de header wat een beeld geeft hoe ze m kunnen switchen
   // tussen de 2 video's." Eén speler; de schakelaar wisselt film, poster en de regel eronder. Standaard de OS-film.
   const [film, setFilm] = useState<"os" | "connect">("os");
+  // 22 oktober 2026 (Marinus): "Witte ring is nice maar moet echt een smooth morph transition zijn en Connect moet blauw zijn."
+  // Eén vlak glijdt naar de gekozen knop en neemt diens breedte over. De eerste plaatsing gebeurt zonder animatie.
+  const filmkeuze = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const groep = filmkeuze.current;
+    if (!groep) return;
+    const zet = () => {
+      const knop = groep.querySelector<HTMLElement>('button[aria-pressed="true"]');
+      if (!knop) return;
+      groep.style.setProperty("--glijder-x", `${knop.offsetLeft}px`);
+      groep.style.setProperty("--glijder-w", `${knop.offsetWidth}px`);
+      if (!groep.dataset.glijder) { groep.dataset.glijder = "staat"; requestAnimationFrame(() => requestAnimationFrame(() => { groep.dataset.glijder = "klaar"; })); }
+    };
+    zet();
+    const rs = typeof ResizeObserver === "function" ? new ResizeObserver(zet) : null;
+    rs?.observe(groep);
+    return () => rs?.disconnect();
+  }, [film]);
   const [custom, setCustom] = useState(CUSTOM[0].id);
   return (
     <div className="sn-choice sn-bestaand" data-variant="bestaand">
@@ -139,8 +157,8 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <div className="visual milos bs-milos">{MILOS.map(m => <figure key={m.rol}><MiloMotion role={m.rol} name={`Milo ${m.naam}`} maat={128} /><figcaption>{m.naam}</figcaption></figure>)}</div>
                 {/* Marinus, 18 oktober 2026: "PAKKETTEN HOEVEN HIER NIET EN SOORTEN DIENSTEN OOK NIET ZODAT ALLES MOOI IN 1 1920X1080 BLIJFT."
                     Dus geen tokenpakketten meer in de header; die kies je na het aanmaken van je account. */}
-                {/* 22 oktober 2026 (Marinus): "Free up to 10 GB of storage." was verwarrend; het gaat over de teamgrootte: "Free for teams of up to 2". */}
-                <p className="bs-uitleg bs-uitleg-kort"><strong>Gratis voor teams tot 2 personen.</strong></p>
+                {/* 22 oktober 2026 (Marinus): niet meer de opslag maar het aantal teamleden, gelijk aan "Nodig 2 mensen uit" op de prijskaart. */}
+                <p className="bs-uitleg bs-uitleg-kort"><strong>Gratis voor jou en 2 teamleden.</strong></p>
                 <div className="action os-account-actions">
                   <a className="pill" href={`${GRATIS_OS_URL}?pakket=gratis`} onClick={() => meet("gratis_os")}><span translate="no">Start for free</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
                   <a className="pill os-login-secondary" href={GRATIS_OS_URL} onClick={() => meet("gratis_os")}><span>Log in</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
@@ -180,7 +198,8 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 </ul>
               </div>
             </div>
-            <div className="bs-filmkeuze" role="group" aria-label="Kies een film">
+            <div className="bs-filmkeuze" role="group" aria-label="Kies een film" ref={filmkeuze} data-film={film}>
+              <span className="bs-film-glijder" aria-hidden="true" />
               <button type="button" className={`bs-film-os${film === "os" ? " is-aan" : ""}`} aria-pressed={film === "os"} onClick={() => setFilm("os")}>
                 <LayoutDashboard size={15} aria-hidden="true" /><span translate="no">SocialNow OS</span>
               </button>
@@ -193,11 +212,9 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 ? <ExplainerPlayer key="os" ctaLabel="Ontdek SocialNow" />
                 : <ExplainerPlayer key="connect" kind="connect" ctaLabel="Bekijk de Connect-film" />}
             </div>
-            {/* 21 oktober 2026: OS-film v9 (81-explainer-v8/werk/02-webtekst.md §1, versie 4) en Connect-film v1 (82-connect-film-v1/werk/02-webtekst.md).
-                De regel onder de speler wisselt mee; de ruimte is vast, zodat de layout niet verspringt. */}
-            <p className="bs-explainer-onder">{film === "os"
-              ? "In ruim twee minuten: wat je met het OS doet, wie het bouwt en wat het kost. Gesproken in het Engels."
-              : "In één minuut: zelf je expert kiezen, wat een expert van je ziet, de pakketten en onze groeigarantie. Gesproken in het Engels."}</p>
+            {/* 21 oktober 2026: Connect-film v1 (82-connect-film-v1/werk/02-webtekst.md).
+                22 oktober 2026: de uitlegzin van de OS-film staat nu in het startbeeld van de speler (ExplainerPlayer.tsx), dus niet nog eens hieronder. */}
+            {film === "connect" && <p className="bs-explainer-onder">In één minuut: zelf je expert kiezen, wat een expert van je ziet, de pakketten en onze groeigarantie. Gesproken in het Engels.</p>}
           </div>
         </section>
       </div>

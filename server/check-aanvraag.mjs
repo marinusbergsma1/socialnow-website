@@ -1,4 +1,4 @@
-// Aanvragen uit het formulier op socialnow.nl/check (22 oktober 2026, Marinus). Elke inzending wordt één mail naar
+// Aanvragen uit het formulier op socialnow.nl/security (eerst /check) (22 oktober 2026, Marinus). Elke inzending wordt één mail naar
 // secure@socialnow.nl (alias van de mailbox info@, dus hij komt in die inbox), met Reply-To op het adres van de bezoeker.
 // Geen bevestiging naar de bezoeker. Afzender: Hostinger laat verzenden namens een alias alleen in de webmail toe, niet
 // via SMTP; daarom is de afzender standaard het SMTP-account zelf (info@). Kan secure@ later toch als afzender, zet dan
@@ -50,7 +50,7 @@ export function bouwMail(a, { naar = process.env.CHECK_MAIL_NAAR || "secure@soci
     ["Soort", a.soort === "uitgebreide-check" ? "uitgebreide check" : a.soort], ["Naam", a.naam], ["E-mail", a.email], ["Domein", a.domein], ["Uitslag", uitslag], ["PHP-versie", versie],
     ["Telefoon", a.telefoon], ["Hosting", a.hosting], ["Taal", a.taal || "-"], ["Tijdstip", tijd],
   ].filter(([, w]) => w);
-  const tekst = regels.map(([k, w]) => `${k}: ${w}`).join("\n") + (a.vraag ? `\n\nVraag:\n${a.vraag}` : "") + "\n\nVia socialnow.nl/check";
+  const tekst = regels.map(([k, w]) => `${k}: ${w}`).join("\n") + (a.vraag ? `\n\nVraag:\n${a.vraag}` : "") + "\n\nVia socialnow.nl/security";
   return {
     from: `SocialNow check <${van}>`,
     to: naar,

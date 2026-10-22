@@ -1,14 +1,11 @@
-import ExplainerPlayer from "./ExplainerPlayer";
-import FounderProfile from "./FounderProfile";
 import React from "react";
 import CharacterAccent from "./CharacterAccent";
-import { HeroReview } from "./CustomerReviews";
-import LightArtStrook from "./LightArtStrook";
 import LinkedInMark from "./LinkedInMark";
-import { people } from "./content";
 import { TextLink } from "./ui";
 import { Bento, BentoFilm, Tegel } from "./Bento";
 import { klein } from "./licht";
+import { SamenParen } from "./SamenEnVeilig";
+import "./verhaal-story.css";
 
 
 // 28 september 2026 (Marinus): "wat belangrijk was bij de beurs van Odoo is dat ik merkte dat het persoonlijke
@@ -128,26 +125,41 @@ function Waarom({ groot }: { groot?: boolean }) {
   );
 }
 
+// 22 oktober 2026 (Marinus): "ik wil een compleet redesign van team en mijn story. Ook graag mijn story video wil ik erin niet
+// alleen dit zo groot en totaal uit verhouding allemaal. [...] Ook moet hier juist die samenwerking staan met Uncanny en Indexworld."
+// Dus bovenaan een rustig raster: portret in een vaste verhouding links, de storyfilm groot rechts met het waarom eronder.
+// De Artist Impressions en de review staan op /projecten en hier niet meer. Daaronder de samenwerking met Indexworld en Uncanny.
+const STORYFILM = "/video/verhaal/story-presentatie.mp4?v=story-short-20261013";
+const STORYPOSTER = "/video/verhaal/story-presentatie-poster.jpg";
+
 export default function Verhaal() {
   return (
     <>
-      <Bento
-        id="verhaal"
-        className="h-verhaal"
-        label="Het verhaal achter SocialNow"
-        titel={<>Van grafisch vormgever<br /><span>tot jouw OS.</span></>}
-      >
-        <Tegel kop="Marinus Bergsma" breed={4} soort="foto" className="h-verhaal-portret">
-          <FounderProfile />
-        </Tegel>
-        <Tegel kop="Mijn waarom" breed={8}>
-          <Waarom />
-          <ExplainerPlayer kind="story" compact />
-          <HeroReview />
-          <LightArtStrook />
-          <div className="sn-tegel-onder"><TextLink to="/projecten">Bekijk het werk achter mijn verhaal</TextLink></div>
-        </Tegel>
-      </Bento>
+      <section className="h-section h-wrap vs-story" id="verhaal" aria-labelledby="vs-story-titel">
+        <p className="h-eyebrow">Het verhaal achter SocialNow</p>
+        <h2 id="vs-story-titel">Van grafisch vormgever<br /><span>tot jouw OS.</span></h2>
+        <div className="vs-raster">
+          <figure className="vs-portret">
+            <img {...klein("marinus-profiel-blauw.webp", "(max-width: 760px) 92vw, 420px", [320, 480, 800])} alt="Marinus Bergsma, oprichter van SocialNow" width="640" height="680" loading="lazy" decoding="async" />
+            <figcaption>
+              <strong translate="no">Marinus Bergsma</strong>
+              <span>Founder & CEO</span>
+              <a href="https://www.linkedin.com/in/marinus-bergsma-20b81a144/" target="_blank" rel="noopener" translate="no"><LinkedInMark />LinkedIn</a>
+            </figcaption>
+          </figure>
+          <div className="vs-film">
+            <p className="vs-label">Mijn verhaal in twee minuten</p>
+            <video className="vs-video" src={STORYFILM} poster={STORYPOSTER} controls playsInline preload="none" width="1920" height="1080" />
+            <Waarom />
+            <div className="vs-onder"><TextLink to="/projecten">Bekijk het werk achter mijn verhaal</TextLink></div>
+          </div>
+        </div>
+      </section>
+      <section className="h-section h-wrap vs-samen" aria-labelledby="vs-samen-titel">
+        <p className="h-eyebrow">Samen gebouwd</p>
+        <h2 id="vs-samen-titel">Met Indexworld, Uncanny en Attesso.</h2>
+        <div className="sn-samen sn-samen-los"><div className="sn-samen-partners"><SamenParen /></div></div>
+      </section>
       <Bento className="h-verhaal-hoofdstukken">
         {HOOFDSTUKKEN.map((hoofdstuk) => (
           <Tegel key={hoofdstuk.titel} kop={hoofdstuk.wanneer} breed={hoofdstuk.breed} soort={hoofdstuk.soort ?? "vlak"} className="h-hoofdstuk">
