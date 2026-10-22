@@ -335,7 +335,10 @@ export function TeamPage() {
         }
         text="SocialNow begon in november 2021. Sindsdien groeiden we uit tot een team van specialisten in creatie, marketing, data en techniek. Samen bouwen we één OS dat je bedrijf ontzorgt, en het persoonlijke contact blijft."
       />
-      <section className="h-section h-wrap h-sterke-teams">
+      {/* 22 oktober 2026 (Marinus): redesign van team en mijn story. Eerst mijn story met de film en de samenwerking met
+          Indexworld en Uncanny, daarna het team. De losse oprichtersblok viel weg: dat verhaal staat nu in de story. */}
+      <Verhaal />
+      <section className="h-section h-wrap h-sterke-teams vs-team">
         <Heading
           label="SocialNow × Attesso × Fincer"
           title={
@@ -372,9 +375,6 @@ export function TeamPage() {
         <p className="h-footnote">
           Marinus en Steef bouwen het OS en maken het schaalbaar. Sid en Douwe van Attesso werken aan veilige agentic payments. Steven van Fincer is onze partner voor vermogensbeheer. Marinus en Sid spreken samen: live demo&apos;s, talks en workshops, overal ter wereld.
         </p>
-      </section>
-      <section className="h-wrap">
-        <Founder />
       </section>
       {/* 28 september 2026 (Marinus): een groot en duidelijk bedankje aan alle bedrijven waarmee we samen
           de developers- en datakant van het OS hebben doorgevoerd. */}
@@ -422,7 +422,6 @@ export function TeamPage() {
         <PixelInfrastructure />
         <AuditTeaser />
       </section>
-      <Verhaal />
     </>
   );
 }

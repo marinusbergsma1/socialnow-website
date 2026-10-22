@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Check, CircleDashed, Download, GraduationCap, Rocket, RotateCcw, ShieldCheck, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronDown, CircleDashed, Download, GraduationCap, Rocket, RotateCcw, ShieldCheck, X } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 import { ConnectLogo } from "./HomeHeader";
 import { DATA_DOCUMENT } from "./PixelInfrastructure";
@@ -32,17 +32,20 @@ const TEKST = {
   // positief gericht team trainingen etc [...] Your growth partner in the AGI Era bijvoorbeeld en concreet wel het probleem en oplossing
   // opnoemen over ons geloof in een toekomst waar software gratis hoort te zijn en expertise niet geautomatiseerd kan worden."
   // De veiligheidskop van 18 oktober ("Veiliger dan je verouderde software en processen.") is daarmee weg; de documenten blijven rechts.
-  uspLabel: "Groeipartner",
-  uspKop: "Jouw groeipartner in het AGI-tijdperk.",
+  // 22 oktober 2026 (Marinus): "meer focus op hoe wij behalve groeipartner die échte taken uitvoeren en klantdoelen behalen ook
+  // cybersecurity experts zijn die je gegevens en data écht beschermen en de software die je koopt en daarna ook bezit en zelf host
+  // niet elke maand huurt." En bij het probleem honderden euro's in plaats van tientallen.
+  uspLabel: "Groei en cybersecurity",
+  uspKop: "Groei en cybersecurity in het AGI-tijdperk.",
   // 20 oktober 2026, later (Marinus): "Dit mag iets korter en misschien naast elkaar."
-  uspUitleg: "Wij geloven dat software gratis hoort te zijn. Expertise kun je niet automatiseren.",
+  uspUitleg: "Onze experts voeren échte taken uit en halen je doelen. Als cybersecurity-experts beschermen we je gegevens en data écht.",
   probleemLabel: "Het probleem",
   // Zelfde dag (Marinus): "Het probleem, je betaald 10tallen euro's voor abbonementen op software en diensten die niet samenwerken."
-  probleem: "Je betaalt tientallen euro's aan abonnementen op software en diensten die niet met elkaar samenwerken.",
+  probleem: "Je betaalt honderden euro's aan abonnementen op software en diensten die niet met elkaar samenwerken.",
   oplossingLabel: "Onze oplossing",
   // Zelfde dag (Marinus): "Onze oplossing. Persoonlijke plug and play software met begeleiding en écht ownership. Je koopt de
   // software en betaald op projecttarief voor onze experts." "Meer zo iets."
-  oplossing: "Persoonlijke plug and play software met begeleiding en écht ownership. Je koopt de software en betaalt een projecttarief voor onze experts.",
+  oplossing: "Software die je koopt, daarna bezit en zelf host, in plaats van elke maand te huren. Met begeleiding van onze experts tegen een projecttarief.",
   // Zelfde dag: "Volledige training van hun team. Team trainingen en ai workshops en cursussen met de 2 bevestigde afspraken bij
   // student entrepeneursclub Brussel en Talland College Hoorn met vlaggen van de landen erbij." En: "gewoon een mooie foto dat
   // Marinus in gesprek is met een groep mensen en Steef ook". De foto is een echt beeld uit IMG_0858.MOV (25 sep, stand C21);
@@ -187,6 +190,54 @@ function Vlag({ land }: { land: string }) {
   );
 }
 
+// 22 oktober 2026 (Marinus): de samenwerking met Indexworld en Uncanny hoort ook op de Teampagina, bij mijn verhaal.
+// Daarom staan de twee partnerkaarten in een eigen component die beide pagina's gebruiken.
+export function SamenParen() {
+  const t = TEKST;
+  return (
+    <div className="sn-samen-paren">
+      {SAMEN.map(b => (
+        <article className="sn-samen-partner" key={b.naam}>
+          <div className="sn-samen-paar">
+            {b.product === "os" ? <img className="sn-samen-os" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" /> : <ConnectLogo />}
+            <X size={18} aria-hidden="true" />
+            <a href={b.href} target="_blank" rel="noopener noreferrer">{b.logo ? <img className={b.wit ? "sn-samen-wit" : undefined} src={b.logo} alt={b.naam} /> : <code className="sn-samen-woordmerk" translate="no" aria-label={b.naam}>~/attesso</code>}</a>
+          </div>
+          <div className="sn-samen-waarom">
+            <h4>{b.kop}</h4>
+            <p>{b.tekst}</p>
+            <ul className="sn-samen-cijfers">{b.cijfers.map(c => <li key={c}>{c}</li>)}</ul>
+          </div>
+          {"praat" in b ? (
+            <div className="sn-samen-praat">
+              <span translate="no">Talking to</span>
+              <div className="sn-samen-strook">
+                <div className="sn-samen-lus">
+                  {/* De rij staat er twee keer in en de lus schuift precies één rij op, dus de naad is niet te zien. */}
+                  {[false, true].map(kopie => (
+                    <ul key={String(kopie)} aria-hidden={kopie || undefined}>
+                      {b.praat.map(m => <li key={m.naam}><a href={m.href} target="_blank" rel="noopener" tabIndex={kopie ? -1 : undefined}><img src={m.src} alt={kopie ? "" : m.naam} loading="lazy" /></a></li>)}
+                    </ul>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="sn-samen-balk">
+              <span>{t.partnersLabel}</span>
+              <ul>
+                {b.partners.map(p => (
+                  <li key={p.naam}><img src={p.src} alt={p.naam} loading="lazy" />{"sub" in p && <small>{p.sub}</small>}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  );
+}
+
 export default function SamenEnVeilig() {
   const { language } = useLanguage();
   const t = TEKST;
@@ -237,62 +288,15 @@ export default function SamenEnVeilig() {
           <p className="sn-samen-label"><i />{t.label}</p>
           <h3 id="sn-samen-kop">{t.kop}</h3>
           <p className="sn-samen-uitleg">{t.uitleg}</p>
-          <ul className="sn-samen-rollen">
-            {t.rollen.map(r => <li key={r.wie}><strong translate="no">{r.wie}</strong><span>{r.rol}</span></li>)}
-          </ul>
-          <div className="sn-samen-paren">
-            {SAMEN.map(b => (
-              <article className="sn-samen-partner" key={b.naam}>
-                <div className="sn-samen-paar">
-                  {b.product === "os" ? <img className="sn-samen-os" src="/images/SocialNow-OS-Logo-transparant.webp" alt="SocialNow OS" /> : <ConnectLogo />}
-                  <X size={18} aria-hidden="true" />
-                  <a href={b.href} target="_blank" rel="noopener noreferrer">{b.logo ? <img className={b.wit ? "sn-samen-wit" : undefined} src={b.logo} alt={b.naam} /> : <code className="sn-samen-woordmerk" translate="no" aria-label={b.naam}>~/attesso</code>}</a>
-                </div>
-                <div className="sn-samen-waarom">
-                  <h4>{b.kop}</h4>
-                  <p>{b.tekst}</p>
-                  <ul className="sn-samen-cijfers">{b.cijfers.map(c => <li key={c}>{c}</li>)}</ul>
-                </div>
-                {"praat" in b ? (
-                  <div className="sn-samen-praat">
-                    <span translate="no">Talking to</span>
-                    <div className="sn-samen-strook">
-                      <div className="sn-samen-lus">
-                        {/* De rij staat er twee keer in en de lus schuift precies één rij op, dus de naad is niet te zien. */}
-                        {[false, true].map(kopie => (
-                          <ul key={String(kopie)} aria-hidden={kopie || undefined}>
-                            {b.praat.map(m => <li key={m.naam}><a href={m.href} target="_blank" rel="noopener" tabIndex={kopie ? -1 : undefined}><img src={m.src} alt={kopie ? "" : m.naam} loading="lazy" /></a></li>)}
-                          </ul>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="sn-samen-balk">
-                    <span>{t.partnersLabel}</span>
-                    <ul>
-                      {b.partners.map(p => (
-                        <li key={p.naam}><img src={p.src} alt={p.naam} loading="lazy" />{"sub" in p && <small>{p.sub}</small>}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </article>
-            ))}
-          </div>
-          <div className="sn-samen-twee">
-            <div className="sn-samen-cyclus">
-              <h4>{t.cyclusKop}</h4>
-              {/* Een kring: elke stap wijst naar de volgende, de laatste terug naar het begin (complete pijlen). */}
-              <ol>{t.cyclus.map((stap, i) => <li key={stap}><span>{stap}</span>{i < t.cyclus.length - 1 ? <ArrowRight className="sn-samen-pijl" size={16} aria-hidden="true" /> : <RotateCcw className="sn-samen-pijl sn-samen-terug" size={16} aria-hidden="true" />}</li>)}</ol>
-              <p>{t.cyclusRegel}</p>
-            </div>
-            <div className="sn-samen-toegang">
-              <h4>{t.toegangKop}</h4>
-              <p className="sn-samen-legenda">{(["werkt", "bouwt"] as const).map(st => <span key={st}><Status status={st} />{t.toegangStatus[st]}</span>)}</p>
-              <ul>{t.toegang.map(punt => <li key={punt.tekst} className={`sn-samen-${punt.status}`}><Status status={punt.status} label={t.toegangStatus[punt.status]} /><span>{punt.tekst}</span></li>)}</ul>
-            </div>
-          </div>
+          {/* 22 oktober 2026 (Marinus): "1 WEG EN 2 PAS BIJ MEER LEZEN EN DAN UITKLAPPEN OM HET KORTER EN SIMPELER TE HOUDEN."
+              De kring "Zo wordt elke versie beter" en "Jij bepaalt wie wat ziet" zijn weg; wie wat doet klapt pas open bij Lees meer. */}
+          <details className="sn-samen-meer">
+            <summary><span>Lees meer</span><ChevronDown size={16} aria-hidden="true" /></summary>
+            <ul className="sn-samen-rollen">
+              {t.rollen.map(r => <li key={r.wie}><strong translate="no">{r.wie}</strong><span>{r.rol}</span></li>)}
+            </ul>
+          </details>
+          <SamenParen />
         </div>
       </div>
     </section>
