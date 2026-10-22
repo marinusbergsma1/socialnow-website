@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useMatch } from "react-router-dom";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { Link, NavLink, useLocation, useMatch } from "react-router-dom";
+import { ArrowUpRight, ChevronDown, ShieldCheck } from "lucide-react";
 import { openPlanCall } from "./PlanCall";
 import { useLanguage } from "./i18n/context";
 import "./hoofdmenu.css";
@@ -82,6 +82,15 @@ export function DienstenMenu() {
       <b translate="no"><Kleurwoord tekst={d.titel} /></b><span>{d.regel}</span><ArrowUpRight size={16} aria-hidden="true" />
     </Link>)}
   </Uitklapmenu>;
+}
+
+// 22 oktober 2026 (Marinus, via de regie): Security wordt een hoofdpunt in het menu, rustig: een klein groen schildje,
+// geen pil. In elke taal "Security". De pagina /security bouwt de sessie check-fix; /check gaat er met 308 naartoe.
+export const SECURITY_PAD = "/security";
+export function SecurityLink({ mobiel = false, onClick }: { mobiel?: boolean; onClick?: () => void }) {
+  return <NavLink to={SECURITY_PAD} className={mobiel ? "h-security h-security-mobiel" : "h-security"} onClick={onClick}>
+    <ShieldCheck size={mobiel ? 18 : 14} aria-hidden="true" /><span translate="no">Security</span>{mobiel && <ArrowUpRight size={17} aria-hidden="true" />}
+  </NavLink>;
 }
 
 export function HeaderCall() {

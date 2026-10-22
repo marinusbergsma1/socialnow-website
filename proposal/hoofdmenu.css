@@ -67,3 +67,11 @@ html:root .sn-site .h-header-call:focus-visible{outline:2px solid #25d366;outlin
 
 /* 22 oktober 2026 (Marinus): letters nooit aan elkaar, ook niet in de uitklapmenu's en de mobiele kaarten. */
 :root .sn-site .h-producten-menu,:root .sn-site .h-producten-menu :is(a,b,i,span),:root .sn-site .h-mobile-nav,:root .sn-site .h-mobile-nav :is(a,b,i,span,p){font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0,"dlig" 0,"hlig" 0}
+
+/* 22 oktober 2026: Security als hoofdpunt, rustig. Zelfde letter als de andere navigatielinks, alleen een klein groen
+   schildje ervoor; geen rand, geen vlak, geen pil. Op mobiel een gewone menuregel met het schildje. */
+:root .sn-site .h-desktop-nav a.h-security{display:inline-flex;align-items:center;gap:6px}
+:root .sn-site .h-desktop-nav a.h-security>svg{flex:none;color:#25d366}
+:root .sn-site .h-mobile-nav a.h-security-mobiel{justify-content:flex-start;gap:10px}
+:root .sn-site .h-mobile-nav a.h-security-mobiel>svg:first-child{flex:none;color:#25d366}
+:root .sn-site .h-mobile-nav a.h-security-mobiel>svg:last-child{margin-left:auto}
