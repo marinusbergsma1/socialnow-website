@@ -245,6 +245,14 @@
 :root .sn-site .pc-mens-wegen a span { border-bottom: 1px solid #3a3a3c; }
 :root .sn-site .pc-mens-wegen a:hover span { border-bottom-color: var(--pc-groen); }
 :root .sn-site .pc-mens-wegen a:focus-visible { outline: 2px solid var(--pc-groen); outline-offset: 3px; border-radius: 4px; }
+:root .sn-site p.pc-php-oud { margin: 12px 0 0; font-size: 16px; line-height: 1.5; color: var(--pc-oranje); max-width: 760px; }
+/* Kort in het PHP-blok bij oranje en rood: de regel over de gratis updates, met Steef en Michelle er direct onder. */
+:root .sn-site .pc-mensen-kort { margin-top: 18px; padding-top: 0; border-top: 0; }
+:root .sn-site p.pc-gratis { margin: 0; font-size: 17px; line-height: 1.5; color: #fff; font-weight: 600; max-width: 760px; }
+:root .sn-site .pc-mensen-kort ul { margin-top: 12px; }
+:root .sn-site .pc-mensen-kort .pc-mens { padding: 12px; gap: 12px; align-items: center; }
+:root .sn-site .pc-mensen-kort .pc-mens img { width: 56px; height: 56px; }
+:root .sn-site .pc-mensen-kort .pc-mens-wegen { flex-direction: row; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; }
 :root .sn-site .pc-slot .pc-mensen { border-top: 0; padding-top: 0; margin-top: 22px; max-width: 880px; }
 :root .sn-site .pc-slot .pc-formulier { margin-top: 18px; max-width: 880px; }
 @media (max-width: 999px) {
@@ -270,4 +278,39 @@
   :root .sn-site .pc-gegevens { grid-template-columns: 1fr; gap: 8px; }
   :root .sn-site .pc-intro { font-size: 16px; }
   :root .sn-site .pc-knop { white-space: normal; text-align: left; }
+}
+
+/* 22 oktober 2026, middag: Wie werd geraakt en Wie loopt risico, tussen de film en de scan. Logo's in eigen kleur, even
+   hoog in een vast vak; overheden met een zelf getekende vlag en de naam van de organisatie. */
+:root .sn-site .pc-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+:root .sn-site .pc-geraakt { padding-top: 56px; }
+:root .sn-site .pc-risico { padding-top: 48px; }
+:root .sn-site .pc-blokkop { margin: 0; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.15; letter-spacing: -0.02em; text-wrap: balance; }
+:root .sn-site .pc-logos { list-style: none; padding: 0; margin: 22px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; max-width: 1100px; }
+:root .sn-site .pc-geraakt .pc-logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+:root .sn-site .pc-logos-platform { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+:root .sn-site .pc-logo-link { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; height: 100%; padding: 18px; border: 1px solid var(--pc-rand); border-radius: 16px; background: var(--pc-grond); color: #f5f5f5; text-decoration: none; transition: border-color .2s; }
+:root .sn-site .pc-logo-link:hover { border-color: #3a3a3c; }
+:root .sn-site .pc-logo-link:focus-visible { outline: 2px solid var(--pc-groen); outline-offset: 2px; }
+:root .sn-site .pc-logo { display: block; height: 44px; width: auto; max-width: 100%; object-fit: contain; object-position: left center; }
+:root .sn-site .pc-logos-platform .pc-logo { height: 34px; max-width: 150px; }
+:root .sn-site .pc-logo-naam { font-size: 13px; color: #8e8e93; }
+:root .sn-site .pc-merk { display: flex; flex-direction: column; gap: 8px; }
+:root .sn-site .pc-merk strong { font-size: 15px; color: #fff; }
+:root .sn-site .pc-logo-wat { font-size: 14px; line-height: 1.45; color: #cacacf; }
+:root .sn-site .pc-logo-wat sup { font-size: 10px; color: var(--pc-groen); margin-left: 2px; }
+:root .sn-site .pc-vlag-naam { display: grid; grid-template-columns: 48px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 12px; align-items: center; min-height: 44px; }
+:root .sn-site .pc-vlag { grid-row: 1 / 3; justify-self: start; width: auto; max-width: 48px; height: 32px; border: 1px solid #3a3a3c; border-radius: 3px; }
+:root .sn-site .pc-vlag-naam strong { font-size: 17px; color: #fff; }
+:root .sn-site .pc-vlag-naam small { font-size: 12px; color: #8e8e93; overflow-wrap: anywhere; }
+:root .sn-site .pc-geen-klant { margin-top: 14px; font-size: 13px; line-height: 1.5; color: #8e8e93; max-width: 760px; }
+:root .sn-site .pc-geraakt-bronnen { margin-top: 10px; max-width: 1100px; }
+:root .sn-site .pc-risico-oproep { margin-top: 20px; font-size: 18px; line-height: 1.45; color: #fff; font-weight: 600; max-width: 760px; }
+:root .sn-site .pc-risico-host { margin-top: 6px; font-size: 15px; line-height: 1.5; color: #cacacf; max-width: 760px; }
+@media (max-width: 760px) {
+  :root .sn-site .pc-geraakt { padding-top: 40px; }
+  :root .sn-site .pc-logos, :root .sn-site .pc-geraakt .pc-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  :root .sn-site .pc-logo-link { padding: 14px; }
+  :root .sn-site .pc-logo { height: 32px; }
+  :root .sn-site .pc-logos-platform .pc-logo { height: 26px; }
 }
