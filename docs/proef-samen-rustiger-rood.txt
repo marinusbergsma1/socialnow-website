@@ -1,0 +1,11 @@
+ROOD   Talking to-balk is niet wit
+GROEN  groene lijn boven en onder blijft
+ROOD   label Talking to is licht op donker
+ROOD   donkere woordmerken (Visa, Rabobank, Airwallex) wit op de donkere balk
+ROOD   vijf korte stappen (15, 15, 27, 44, 46 tekens)
+ROOD   één korte zin onder de stappen
+ROOD   hooguit drie korte punten bij "Jij bepaalt wie wat ziet" (6)
+ROOD   geen volgende-stap-punten meer in dit blok
+GROEN  vertaald in alle negen talen
+
+7 eis(en) rood
