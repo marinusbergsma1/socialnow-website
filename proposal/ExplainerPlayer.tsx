@@ -6,18 +6,50 @@ import "./explainer-player.css";
 // 21 oktober 2026 (Marinus): de explainer is twee films. De OS-film staat in de header, de Connect-film in het Connect-blok
 // (ConnectExperts.tsx), met eigen poster, cachebuster en een blauwe knop.
 // 22 oktober 2026 (Marinus): geen filmframe meer als voorbeeldbeeld van de OS-film (water dat in een zwembad spat) maar een
-// startbeeld in HTML/CSS: donker vlak met een dunne witte rand, bovenaan SocialNow OS en SocialNow Connect even groot (bijgesneden
-// bestanden uit brein 70-MERK/logo, Connect op 0,83 x de hoogte), in het midden de knop en daaronder één zin. Geen partnerlogo's
-// (regel 19 okt 2026). Hetzelfde startbeeld ligt in de speler over de film tot die speelt, dus nergens meer het zwembadframe.
+// startbeeld in HTML/CSS dat vertrouwen wekt vóór iemand de film start: donker vlak met een dunne witte rand.
+//   Boven: SocialNow OS x Indexworld en SocialNow Connect x Uncanny, zoals de partnerkaarten op de site (PR #125). Marinus wil hier
+//   wél de partners; dat gaat op deze plek voor de regel "geen partnerlogo's" van 19 oktober. Het Connect-logo is het logo van de
+//   site zonder schuine streep, bijgesneden en in de blauwtint van de site; met 1,02 x de hoogte van het OS-logo is het woord
+//   SocialNow in beide even breed en dus even groot (gemeten: woordbreedte/hoogte OS 3,955, Connect 3,889).
+//   Midden: de afspeelknop, groot, met daaronder één zin. Onder: Trusted by, eerlijk met de route: AZ en Supperclub direct,
+//   Universal, Warner Bros., MOJO, IMAX en Marvel via Crafture (werkervaring Marinus). Bestaande logobestanden, rustig van kleur, optisch even hoog.
+// Hetzelfde startbeeld ligt in de speler over de film tot die speelt, dus nergens meer het zwembadframe.
 const STARTZIN = "In ruim twee minuten: wat je met het OS doet, wie het bouwt en wat het kost.";
+const DIRECT = [
+  { naam: "AZ", src: "/images/merken/AZ-LOGO-KLEUR.svg", w: 235, h: 115, kleur: true, maat: 1.15 },
+  { naam: "Supperclub", src: "/images/merken/SUPPERCLUB-LOGO.webp", w: 109, h: 120, maat: 1.55 },
+];
+const VIA_CRAFTURE = [
+  { naam: "Universal", src: "/images/merken/UNIVERSAL-LOGO.svg", w: 128, h: 79, maat: 1.55 },
+  { naam: "Warner Bros.", src: "/images/merken/WARNER-BROS-LOGO.svg", w: 57, h: 80, maat: 1.3 },
+  { naam: "MOJO", src: "/images/merken/MOJO-LOGO.webp", w: 441, h: 120, maat: .8 },
+  { naam: "IMAX", src: "/images/merken/IMAX-LOGO.svg", w: 151, h: 33, maat: .7 },
+  { naam: "Marvel", src: "/images/merken/MARVEL-LOGO.svg", w: 1000, h: 402, kleur: true, maat: .85 },
+];
+// Optisch even hoog: vierkante merken iets hoger, brede woordmerken iets lager (zelfde aanpak als de Trusted by-balk in content.ts).
+const merk = (m: { naam: string; src: string; w: number; h: number; kleur?: boolean; maat: number }) =>
+  <img key={m.naam} className={m.kleur ? "is-kleur" : undefined} src={m.src} alt={m.naam} translate="no" width={m.w} height={m.h} loading="lazy" decoding="async" style={{ "--maat": m.maat } as React.CSSProperties} />;
 function Startbeeld({ label, zinId }: { label: string; zinId: string }) {
   return <span className="sn-startbeeld">
-    <span className="sn-startbeeld-logos" aria-hidden="true">
+    <span className="sn-startbeeld-paren" aria-hidden="true">
       <img className="sn-startbeeld-os" src="/images/merk/socialnow-os-bijgesneden.webp" alt="" width="596" height="88" decoding="async" />
-      <img className="sn-startbeeld-connect" src="/images/merk/socialnow-connect-bijgesneden.webp" alt="" width="814" height="80" decoding="async" />
+      <X className="sn-startbeeld-x" size={14} aria-hidden="true" />
+      <img className="sn-startbeeld-partner is-wit" src="/images/home-header/indexworld.png" alt="" width="725" height="176" decoding="async" />
+      <img className="sn-startbeeld-connect" src="/images/merk/socialnow-connect.webp" alt="" width="782" height="88" decoding="async" />
+      <X className="sn-startbeeld-x" size={14} aria-hidden="true" />
+      <img className="sn-startbeeld-partner" src="/images/home-header/uncanny-op-zwart.svg" alt="" width="1365" height="300" decoding="async" />
     </span>
-    <span className="sn-pill"><span>{label}</span><span className="h-button-icon"><ArrowUpRight size={18} aria-hidden="true" /></span></span>
-    <span className="sn-startbeeld-zin" id={zinId}>{STARTZIN}</span>
+    <span className="sn-startbeeld-midden">
+      <span className="sn-pill sn-startbeeld-knop"><span>{label}</span><span className="h-button-icon"><ArrowUpRight size={20} aria-hidden="true" /></span></span>
+      <span className="sn-startbeeld-zin" id={zinId}>{STARTZIN}</span>
+    </span>
+    <span className="sn-startbeeld-trusted" aria-hidden="true">
+      <span className="sn-startbeeld-label" translate="no">Trusted by</span>
+      <span className="sn-startbeeld-merken">
+        <span className="sn-startbeeld-groep">{DIRECT.map(merk)}</span>
+        <span className="sn-startbeeld-groep"><span className="sn-startbeeld-via" translate="no">via Crafture</span>{VIA_CRAFTURE.map(merk)}</span>
+      </span>
+    </span>
   </span>;
 }
 
