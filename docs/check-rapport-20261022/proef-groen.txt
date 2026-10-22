@@ -34,5 +34,10 @@ GROEN  SSRF: IP-adressen, localhost en interne namen geweigerd
 GROEN  pagina's: alleen interne links, geen wp-admin, geen bestanden, geen dubbele
 GROEN  limiet per IP en per domein, cache 10 minuten
 GROEN  api geeft bij een eigen fout ook punten (niet te meten)
+GROEN  software: PHP 5.2.12 in X-Powered-By is verouderd (slecht), nooit goed
+GROEN  software: PHP 8.1 krijgt sinds 2026 geen updates meer (slecht)
+GROEN  software: ondersteunde PHP-tak zonder andere software is niet te meten, geen eol
+GROEN  software: PHP-versie ook uit het http-antwoord als https hem niet noemt (bloemist.nl)
+GROEN  software: niets herkend is niet te meten, nooit goed
 
 alles groen

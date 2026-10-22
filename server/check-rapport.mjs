@@ -94,7 +94,7 @@ export function vindFeed(html, basisUrl) {
 // Punt 3: software
 // ---------------------------------------------------------------------------------------------
 
-async function meetSoftware(homepage, einde) {
+export async function meetSoftware(homepage, einde, andere = []) {
   if (!homepage?.ok || !/html/i.test(String(homepage.headers?.["content-type"] || "text/html"))) return onbekend(homepage?.reden || "geen-html");
   const basis = new URL(homepage.url);
   const origin = `${basis.protocol}//${basis.host}`;
@@ -116,9 +116,19 @@ async function meetSoftware(homepage, einde) {
   const gelezen = [{ url: homepage.url, body: homepage.body }, ...paginas.filter((p) => p.ok && p.status < 400 && ZELFDE_SITE(new URL(p.url).hostname, basis.hostname) && /html/i.test(String(p.headers?.["content-type"] || ""))).map((p) => ({ url: p.url, body: p.body }))];
   const gevonden = vindSoftware(gelezen, feedAntw?.ok ? { url: feedAntw.url, body: feedAntw.body } : null);
   const { onderdelen, bronFouten } = await beoordeelSoftware(gevonden);
+  // De PHP-versie die de server zelf noemt (X-Powered-By). Een tak zonder beveiligingsupdates (8.1 en ouder sinds
+  // 1 januari 2026, php.net/supported-versions) is verouderde software; of de versie de php2shell-fix heeft, zegt
+  // de PHP-check erboven.
+  // https en http kunnen op een andere server uitkomen; de versie telt uit elk antwoord van dit domein.
+  const php = [homepage, ...andere].map((a) => /\bPHP\/(\d+)\.(\d+)(?:\.(\d+))?/i.exec(String(a?.ok ? a.headers?.["x-powered-by"] || "" : ""))).find(Boolean) || null;
+  if (php && (+php[1] < 8 || (+php[1] === 8 && +php[2] < 2))) {
+    onderdelen.unshift({ soort: "server", naam: "PHP", versie: php[0].slice(4), status: "slecht", eol: true, bron: "x-powered-by", bewijs: `X-Powered-By: ${php[0]}`, url: homepage.url });
+  }
   const beoordeeld = onderdelen.filter((o) => o.status !== "onbekend");
-  const status = !onderdelen.length ? "goed" : !beoordeeld.length ? "onbekend" : beoordeeld.some((o) => o.status === "slecht") ? "slecht" : beoordeeld.some((o) => o.status === "aandacht") ? "aandacht" : "goed";
+  // Niets herkend is geen bewijs dat alles bij is: dan "niet te meten", nooit groen.
+  const status = !onderdelen.length ? "onbekend" : !beoordeeld.length ? "onbekend" : beoordeeld.some((o) => o.status === "slecht") ? "slecht" : beoordeeld.some((o) => o.status === "aandacht") ? "aandacht" : "goed";
   const problemen = [];
+  if (onderdelen.some((o) => o.soort === "server" && o.eol)) problemen.push("php-eol");
   if (onderdelen.some((o) => o.soort === "cms" && o.status === "slecht")) problemen.push(onderdelen.find((o) => o.soort === "cms").naam === "Drupal" ? "cms-eol" : "cms-onveilig");
   if (onderdelen.some((o) => o.soort === "bibliotheek" && o.status !== "goed" && o.aantalLekken)) problemen.push("bibliotheek-lek");
   if (onderdelen.some((o) => o.soort === "cms" && o.status === "aandacht")) problemen.push("cms-verouderd");
@@ -126,10 +136,11 @@ async function meetSoftware(homepage, einde) {
   const cms = gevonden.cms;
   return {
     status,
-    ...(status === "onbekend" ? { reden: "bron" } : {}),
+    ...(status === "onbekend" ? { reden: onderdelen.length ? "bron" : "geen-software" } : {}),
     problemen,
     waarde: {
       cms: cms ? { naam: cms.naam, versie: cms.versie } : null,
+      php: php && onderdelen.some((o) => o.soort === "server") ? php[0].slice(4) : null,
       metLekken: onderdelen.filter((o) => o.aantalLekken).length,
       verouderd: onderdelen.filter((o) => o.status === "slecht" || o.status === "aandacht").length,
       gevonden: onderdelen.length,
@@ -189,7 +200,7 @@ export async function maakRapport(invoer, { budgetMs = 22000 } = {}) {
   const [verbinding, headers, software, email] = await Promise.all([
     veilig(async () => beoordeelVerbinding({ https, http })),
     veilig(async () => afgeschermd || (homepage ? { ...beoordeelHeaders(homepage) } : onbekend(https.reden || http.reden || "verbinding"))),
-    veilig(async () => afgeschermd || (homepage ? meetSoftware(homepage, einde) : onbekend(https.reden || http.reden || "verbinding"))),
+    veilig(async () => afgeschermd || (homepage ? meetSoftware(homepage, einde, [https, http]) : onbekend(https.reden || http.reden || "verbinding"))),
     emailBelofte,
   ]);
   const uit = { ok: true, domein: d.host, gemetenOp: host, gemeten: new Date().toISOString(), duurMs: Date.now() - start, versie: VERSIE_RAPPORT, punten: { verbinding, software, headers, email } };
