@@ -1,6 +1,7 @@
 // Boeken, verzetten en annuleren. De agenda komt van buiten (lib/google.mjs, lib/demo.mjs of de
 // nep-agenda in de proeven), zodat de regels tegen dubbel boeken hier op één plek staan.
 import { kandidaten, isVrij, overlapt, trekAf } from "./slots.mjs";
+import { veldenVoor, schoonDomein } from "../public/velden.mjs";
 
 const MINUUT = 60_000;
 const EMAIL = /^[^\s@<>()",;:]+@[^\s@<>()",;:]+\.[a-z]{2,}$/i;
@@ -30,7 +31,7 @@ async function verliestRace(agenda, config, eigen, startMs, eindMs) {
     (r.aangemaakt < eigen.aangemaakt || (r.aangemaakt === eigen.aangemaakt && r.id < eigen.id)));
 }
 
-export function beschrijving({ config, soortId, taal, naam, email, vraag, beheer }) {
+export function beschrijving({ config, soortId, taal, naam, email, vraag, domein, beheer }) {
   const soort = config.soorten[soortId];
   const nl = taal === "nl";
   const regels = [
@@ -39,13 +40,14 @@ export function beschrijving({ config, soortId, taal, naam, email, vraag, beheer
     `${nl ? "Naam" : "Name"}: ${naam}`,
     `${nl ? "E-mail" : "Email"}: ${email}`,
   ];
+  if (domein) regels.push(`${nl ? "Domein" : "Domain"}: ${domein}`);
   if (vraag) regels.push("", `${nl ? "Vraag" : "Question"}:`, vraag);
   if (beheer) regels.push("", `${nl ? "Verzetten of annuleren" : "Reschedule or cancel"}: ${beheer}`);
   regels.push("", "socialnow.nl");
   return regels.join("\n");
 }
 
-export async function boek({ agenda, config, soortId, start, naam, email, vraag = "", taal = "en", nu = new Date(), beheerUrl = null, extraGasten = [] }) {
+export async function boek({ agenda, config, soortId, start, naam, email, vraag = "", domein = "", taal = "en", nu = new Date(), beheerUrl = null, extraGasten = [] }) {
   const soort = config.soorten?.[soortId];
   if (!soort) throw new BoekFout("soort", 400);
   naam = schoon(naam, 100);
@@ -53,6 +55,10 @@ export async function boek({ agenda, config, soortId, start, naam, email, vraag 
   vraag = schoon(vraag, 1000);
   taal = taal === "nl" ? "nl" : "en";
   if (!naam || !EMAIL.test(email)) throw new BoekFout("invoer", 400);
+  const velden = veldenVoor(soort);
+  domein = velden.includes("domein") ? schoonDomein(domein) : "";
+  if (velden.includes("domein") && !domein) throw new BoekFout("invoer", 400);
+  if (!velden.includes("vraag")) vraag = "";
 
   const startMs = Date.parse(start);
   controleerSlot(config, soortId, startMs, nu);
@@ -65,10 +71,10 @@ export async function boek({ agenda, config, soortId, start, naam, email, vraag 
 
   // Eerst stil aanmaken, dan controleren of er tegelijk een andere boeking binnenkwam,
   // en pas daarna de uitnodigingen versturen. Zo krijgt niemand een uitnodiging die weer vervalt.
-  const titel = `${soort.titel[taal]}: ${naam} × ${config.organisatie}`;
+  const titel = `${soort.titel[taal]}: ${naam} × ${config.organisatie}${domein ? ` (${domein})` : ""}`;
   const eigen = await agenda.maak({
-    start: startMs, eind: eindMs, titel, soortId, taal,
-    beschrijving: beschrijving({ config, soortId, taal, naam, email, vraag }),
+    start: startMs, eind: eindMs, titel, soortId, taal, domein,
+    beschrijving: beschrijving({ config, soortId, taal, naam, email, vraag, domein }),
   });
   if (await verliestRace(agenda, config, eigen, startMs, eindMs)) {
     await agenda.verwijder(eigen.id, { stil: true });
@@ -78,13 +84,13 @@ export async function boek({ agenda, config, soortId, start, naam, email, vraag 
   const beheer = beheerUrl ? beheerUrl(eigen.id) : null;
   const gasten = [{ naam, email }, ...extraGasten.filter((g) => g.email && g.email !== email)];
   const klaar = await agenda.nodigUit(eigen.id, {
-    gasten, naam, email, vraag, soortId, taal,
-    beschrijving: beschrijving({ config, soortId, taal, naam, email, vraag, beheer }),
+    gasten, naam, email, vraag, domein, soortId, taal,
+    beschrijving: beschrijving({ config, soortId, taal, naam, email, vraag, domein, beheer }),
   });
   return {
     id: eigen.id, soort: soortId,
     start: new Date(startMs).toISOString(), eind: new Date(eindMs).toISOString(),
-    meet: klaar?.meet || null, beheer,
+    meet: klaar?.meet || null, beheer, domein: domein || null,
   };
 }
 

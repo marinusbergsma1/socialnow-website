@@ -46,6 +46,16 @@ export default {
       },
       vraag: { en: "Which website should we look at?", nl: "Welke website moeten we bekijken?" },
     },
+    "uitgebreide-check": {
+      minuten: 30,
+      titel: { en: "Extended website check", nl: "Uitgebreide websitecheck" },
+      uitleg: {
+        en: "We go through your website in depth together: security, speed and what to fix first.",
+        nl: "We lopen samen je website grondig door: veiligheid, snelheid en wat je eerst moet oplossen.",
+      },
+      // Alleen naam, e-mail en het domein (komt ingevuld mee uit de link van socialnow.nl/check).
+      velden: ["naam", "email", "domein"],
+    },
     intro: {
       minuten: 30,
       titel: { en: "Intro call", nl: "Kennismakingscall" },

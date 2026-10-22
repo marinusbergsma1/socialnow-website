@@ -6,7 +6,8 @@
   "rewrites": [
     { "source": "/call", "destination": "/" },
     { "source": "/security", "destination": "/" },
-    { "source": "/intro", "destination": "/" }
+    { "source": "/intro", "destination": "/" },
+    { "source": "/uitgebreide-check", "destination": "/" }
   ],
   "headers": [
     {

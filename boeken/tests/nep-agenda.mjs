@@ -26,9 +26,9 @@ export function nepAgenda({ bezet = [], wachtNaBezet = null } = {}) {
         .filter((a) => overlapt(a.start, a.eind, +van, +tot))
         .map((a) => ({ id: a.id, start: a.start, eind: a.eind, aangemaakt: a.aangemaakt }));
     },
-    async maak({ start, eind, titel, beschrijving, soortId }) {
+    async maak({ start, eind, titel, beschrijving, soortId, domein }) {
       const id = `nep${++volgnummer}`;
-      const a = { id, start: +start, eind: +eind, titel, beschrijving, soortId, aangemaakt: klok++, status: "confirmed", gasten: [] };
+      const a = { id, start: +start, eind: +eind, titel, beschrijving, soortId, domein: domein || "", aangemaakt: klok++, status: "confirmed", gasten: [] };
       afspraken.set(id, a);
       return { id, start: a.start, eind: a.eind, aangemaakt: a.aangemaakt };
     },
@@ -42,7 +42,7 @@ export function nepAgenda({ bezet = [], wachtNaBezet = null } = {}) {
     async overzicht(van, tot) {
       return actief()
         .filter((a) => overlapt(a.start, a.eind, +van, +tot))
-        .map((a) => ({ id: a.id, start: a.start, eind: a.eind, soortId: a.soortId, gastNaam: a.gastNaam || "", gastEmail: a.gastEmail || "", vraag: a.vraag || "", meet: `https://meet.google.com/nep-${a.id}` }));
+        .map((a) => ({ id: a.id, start: a.start, eind: a.eind, soortId: a.soortId, gastNaam: a.gastNaam || "", gastEmail: a.gastEmail || "", vraag: a.vraag || "", domein: a.domein || "", meet: `https://meet.google.com/nep-${a.id}` }));
     },
     async haal(id) {
       const a = afspraken.get(id);

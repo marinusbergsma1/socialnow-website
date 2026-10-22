@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   const algemeen = {
     tijdzone: config.tijdzone,
     standaardSoort: config.standaardSoort,
-    soorten: Object.entries(config.soorten).map(([id, s]) => ({ id, minuten: s.minuten, titel: s.titel, uitleg: s.uitleg, vraag: s.vraag })),
+    soorten: Object.entries(config.soorten).map(([id, s]) => ({ id, minuten: s.minuten, titel: s.titel, uitleg: s.uitleg, vraag: s.vraag, velden: s.velden })),
     demo: ins.demo,
     noodroute: ins.noodroute || null,
   };

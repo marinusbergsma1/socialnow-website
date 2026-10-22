@@ -10,9 +10,12 @@ Losse Vercel-map (project `socialnow-boeken`); de website zelf (GitHub Pages) bl
 | Algemeen | `https://book.socialnow.nl/` |
 | php2shell-check (`BOEK_URL`) | `https://book.socialnow.nl/?type=security` |
 | OS-app (`APP_AFSPRAAK_URL`) | `https://book.socialnow.nl/?type=intro` |
-| Kortere vormen | `https://book.socialnow.nl/security`, `/intro`, en `https://socialnow.nl/call?type=security` |
+| socialnow.nl/check, uitgebreide websitecheck | `https://book.socialnow.nl/?type=uitgebreide-check&domein=voorbeeld.nl` (alleen naam en e-mail, domein staat ingevuld) |
+| Kortere vormen | `https://book.socialnow.nl/security`, `/intro`, `/uitgebreide-check?domein=…`, en `https://socialnow.nl/call?type=security` |
 
-Optioneel: `lang=nl|en`, `tz=Europe/Amsterdam`, en invulhulp `naam=`, `email=`, `vraag=` (bijvoorbeeld het gecheckte domein).
+Optioneel: `lang=nl|en`, `tz=Europe/Amsterdam`, en invulhulp `naam=`, `email=`, `vraag=`, `domein=`.
+`domein` mag met `https://` of een pad; de pagina houdt alleen de hostnaam over. Bij `uitgebreide-check`
+komt het domein in de titel en beschrijving van de afspraak, in de bevestiging en in het beheer-endpoint.
 Zonder `type` kiest de bezoeker zelf.
 
 ## Hoe het werkt
@@ -73,7 +76,8 @@ uit: daar ziet een bezoeker dan de noodroute (`BOEK_NOODROUTE_URL`) of het maila
       "soortTitel": "Gratis veiligheidscall",
       "start": "2026-10-27T14:00:00+01:00",
       "eind": "2026-10-27T14:20:00+01:00",
-      "vraag": "voorbeeld.nl",
+      "vraag": "",
+      "domein": "voorbeeld.nl",
       "meet": "https://meet.google.com/xxx-xxxx-xxx"
     }
   ]
@@ -100,6 +104,6 @@ uit: daar ziet een bezoeker dan de noodroute (`BOEK_NOODROUTE_URL`) of het maila
 ## Lokaal
 
 ```bash
-npm test        # 23 proeven: slots, dubbel boeken, tijdzones, werktijden, alle agenda's, privacy, beheer
+npm test        # 29 proeven: slots, dubbel boeken, tijdzones, werktijden, alle agenda's, privacy, beheer, websitecheck
 npm run dev     # http://localhost:5191 met voorbeeldagenda
 ```

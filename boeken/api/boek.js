@@ -4,7 +4,7 @@ import { instellingen, kiesAgenda } from "../lib/omgeving.mjs";
 import { maakBeheerToken } from "../lib/sleutel.mjs";
 import { basis, binnenLimiet, fout, ip, lichaam, basisUrlVan } from "../lib/http.mjs";
 
-// POST /api/boek { type, start, naam, email, vraag, taal } → { ok, start, eind, meet, beheer }
+// POST /api/boek { type, start, naam, email, vraag, domein, taal } → { ok, start, eind, meet, beheer }
 // Controleert vlak voor het aanmaken nog een keer vrij/bezet (lib/boek.mjs). Alles gebeurt vóór res.json().
 export default async function handler(req, res) {
   if (!basis(req, res, ["POST"])) return;
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
   try {
     const uit = await boek({
       agenda, config, soortId: String(b.type || ""), start: String(b.start || ""),
-      naam: b.naam, email: b.email, vraag: b.vraag, taal, beheerUrl, extraGasten: ins.extraGasten,
+      naam: b.naam, email: b.email, vraag: b.vraag, domein: b.domein, taal, beheerUrl, extraGasten: ins.extraGasten,
     });
     return res.status(200).json({ ok: true, demo: ins.demo, ...uit });
   } catch (f) {

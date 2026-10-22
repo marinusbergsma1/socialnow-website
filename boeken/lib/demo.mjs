@@ -28,8 +28,8 @@ export function demoAgenda(tz = "Europe/Amsterdam") {
     async boekingen(van, tot) {
       return actief().filter((a) => overlapt(a.start, a.eind, +van, +tot));
     },
-    async maak({ start, eind, soortId }) {
-      const a = { id: `demo${Date.now().toString(36)}${++volgnummer}`, start: +start, eind: +eind, soortId, aangemaakt: Date.now(), status: "confirmed", boeking: true, gastNaam: "" };
+    async maak({ start, eind, soortId, domein }) {
+      const a = { id: `demo${Date.now().toString(36)}${++volgnummer}`, start: +start, eind: +eind, soortId, domein: domein || "", aangemaakt: Date.now(), status: "confirmed", boeking: true, gastNaam: "" };
       afspraken.set(a.id, a);
       return a;
     },

@@ -1,6 +1,8 @@
 // Boekingspagina van SocialNow. Geen tracking, geen externe scripts.
-// Andere pagina's linken hierheen met ?type=security of ?type=intro (optioneel ?lang=nl, ?email=, ?naam=, ?vraag=).
+// Andere pagina's linken hierheen met ?type=security, ?type=intro of ?type=uitgebreide-check&domein=voorbeeld.nl
+// (optioneel ?lang=nl, ?email=, ?naam=, ?vraag=).
 import { groepeerPerDag, tijdIn, dagLabel, eigenZone, geldigeZone } from "./tijdzone.mjs";
+import { veldenVoor, schoonDomein } from "./velden.mjs";
 
 const T = {
   en: {
@@ -9,7 +11,7 @@ const T = {
     min: "min", moment: "Choose a moment", momentSub: "All times are shown in your time zone.",
     tot: "to", zone: "Time zone", terug: "Back", wissel: "Change",
     geen: "There are no free moments in the coming weeks. Mail info@socialnow.nl and we will find one.",
-    gegevens: "Your details", naam: "Name", email: "Email", vraag: "Short question (optional)",
+    gegevens: "Your details", naam: "Name", email: "Email", vraag: "Short question (optional)", domein: "Website", domeinFout: "Enter a valid website, for example yourcompany.com.",
     boek: "Book call", bezig: "Booking...",
     akkoord: "We only use your details to plan and hold this call. No tracking.", privacy: "Privacy",
     klaar: "You're booked", klaarSub: (e) => `The invite with the Google Meet link is on its way to ${e}.`,
@@ -35,7 +37,7 @@ const T = {
     min: "min", moment: "Kies een moment", momentSub: "Alle tijden staan in jouw tijdzone.",
     tot: "tot", zone: "Tijdzone", terug: "Terug", wissel: "Wijzig",
     geen: "Er zijn de komende weken geen vrije momenten. Mail info@socialnow.nl en we zoeken er een.",
-    gegevens: "Je gegevens", naam: "Naam", email: "E-mail", vraag: "Korte vraag (mag leeg)",
+    gegevens: "Je gegevens", naam: "Naam", email: "E-mail", vraag: "Korte vraag (mag leeg)", domein: "Website", domeinFout: "Vul een geldige website in, bijvoorbeeld jouwbedrijf.nl.",
     boek: "Call inplannen", bezig: "Bezig met inplannen...",
     akkoord: "We gebruiken je gegevens alleen om deze call te plannen en te houden. Geen tracking.", privacy: "Privacy",
     klaar: "Je call staat gepland", klaarSub: (e) => `De uitnodiging met de Google Meet-link is onderweg naar ${e}.`,
@@ -71,7 +73,7 @@ const staat = {
   slot: null,
   beheer: param.get("beheer"),
   afspraak: null,
-  vooraf: { naam: kortTekst(param.get("naam"), 100), email: kortTekst(param.get("email"), 200), vraag: kortTekst(param.get("vraag"), 1000) },
+  vooraf: { naam: kortTekst(param.get("naam"), 100), email: kortTekst(param.get("email"), 200), vraag: kortTekst(param.get("vraag"), 1000), domein: schoonDomein(param.get("domein")) },
 };
 
 const $ = (s) => document.querySelector(s);
@@ -219,6 +221,7 @@ function eindVan(startIso) {
 function toonGegevens(melding = "") {
   const s = soortVan(staat.soort);
   const v = staat.vooraf;
+  const velden = veldenVoor(s);
   toon(`
     <button class="terug" type="button" id="terug">${TERUG}${esc(t("terug"))}</button>
     <h2>${esc(t("gegevens"))}</h2>
@@ -226,7 +229,8 @@ function toonGegevens(melding = "") {
     <form id="form" novalidate>
       <label>${esc(t("naam"))}<input name="naam" autocomplete="name" required maxlength="100" value="${esc(v.naam)}"></label>
       <label>${esc(t("email"))}<input name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200" value="${esc(v.email)}"></label>
-      <label>${esc(t("vraag"))}<textarea name="vraag" maxlength="1000" placeholder="${esc(s.vraag?.[staat.taal] || "")}">${esc(v.vraag)}</textarea></label>
+      ${velden.includes("domein") ? `<label>${esc(t("domein"))}<input name="domein" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" required maxlength="253" placeholder="voorbeeld.nl" value="${esc(v.domein)}"></label>` : ""}
+      ${velden.includes("vraag") ? `<label>${esc(t("vraag"))}<textarea name="vraag" maxlength="1000" placeholder="${esc(s.vraag?.[staat.taal] || "")}">${esc(v.vraag)}</textarea></label>` : ""}
       <div class="honing" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
       <p class="melding" id="melding" role="alert">${esc(melding)}</p>
       <div class="knoppen">${knop(t("boek"), { type: "submit", id: "verstuur" })}</div>
@@ -241,14 +245,26 @@ function toonGegevens(melding = "") {
 async function verstuur(e) {
   e.preventDefault();
   const f = new FormData(e.target);
-  staat.vooraf = { naam: String(f.get("naam") || "").trim(), email: String(f.get("email") || "").trim(), vraag: String(f.get("vraag") || "").trim() };
+  const velden = veldenVoor(soortVan(staat.soort));
+  staat.vooraf = {
+    naam: String(f.get("naam") || "").trim(),
+    email: String(f.get("email") || "").trim(),
+    vraag: velden.includes("vraag") ? String(f.get("vraag") || "").trim() : staat.vooraf.vraag,
+    domein: velden.includes("domein") ? schoonDomein(f.get("domein")) : staat.vooraf.domein,
+  };
   if (!staat.vooraf.naam || !/^\S+@\S+\.\S{2,}$/.test(staat.vooraf.email)) return ($("#melding").textContent = t("invoer"));
+  if (velden.includes("domein") && !staat.vooraf.domein) return ($("#melding").textContent = t("domeinFout"));
   const verstuurKnop = $("#verstuur");
   verstuurKnop.disabled = true;
   verstuurKnop.querySelector("span").textContent = t("bezig");
   const j = await api("/api/boek", {
     method: "POST",
-    body: JSON.stringify({ type: staat.soort, start: staat.slot, ...staat.vooraf, taal: staat.taal, website: f.get("website") || "" }),
+    body: JSON.stringify({
+      type: staat.soort, start: staat.slot, naam: staat.vooraf.naam, email: staat.vooraf.email,
+      ...(velden.includes("vraag") ? { vraag: staat.vooraf.vraag } : {}),
+      ...(velden.includes("domein") ? { domein: staat.vooraf.domein } : {}),
+      taal: staat.taal, website: f.get("website") || "",
+    }),
   });
   if (j.ok) return toonKlaar(j);
   if (j.reden === "bezet" || j.reden === "tijd") {
@@ -272,7 +288,7 @@ function toonKlaar(j) {
     <div class="vinkje">${VINK}</div>
     <h2>${esc(t("klaar"))}</h2>
     <p class="sub">${esc(t("klaarSub")(staat.vooraf.email))}</p>
-    <div class="samenvatting"><strong>${esc(soortTitel(s))}, ${s.minuten} ${esc(t("min"))}</strong><span>${esc(momentTekst(j.start, j.eind))}</span><span>${esc(staat.zone.replace(/_/g, " "))}</span></div>
+    <div class="samenvatting"><strong>${esc(soortTitel(s))}, ${s.minuten} ${esc(t("min"))}</strong><span>${esc(momentTekst(j.start, j.eind))}</span><span>${esc(staat.zone.replace(/_/g, " "))}</span>${j.domein ? `<span>${esc(t("domein"))}: ${esc(j.domein)}</span>` : ""}</div>
     ${j.meet ? `<div class="knoppen">${linkKnop(t("meet"), j.meet)}</div>` : ""}
     <p class="klein ruimte">${esc(t("beheerUitleg"))}</p>`);
 }

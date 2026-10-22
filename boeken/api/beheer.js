@@ -7,7 +7,7 @@ import { basis, binnenLimiet, fout, ip } from "../lib/http.mjs";
 
 // Privé-overzicht voor Marinus (het SocialNow OS leest dit server-side). Contract in LEESMIJ.md.
 // GET /api/beheer?van=YYYY-MM-DD&tot=YYYY-MM-DD   Authorization: Bearer <BOEKING_BEHEER_SLEUTEL>
-// → { ok, tijdzone, van, tot, slots: [{ start, eind, soort }], calls: [{ id, naam, email, soort, soortTitel, start, eind, vraag, meet }] }
+// → { ok, tijdzone, van, tot, slots: [{ start, eind, soort }], calls: [{ id, naam, email, soort, soortTitel, start, eind, vraag, domein, meet }] }
 const DAG = 24 * 3600e3;
 const gelijk = (a, b) => timingSafeEqual(createHash("sha256").update(a).digest(), createHash("sha256").update(b).digest());
 
@@ -58,6 +58,7 @@ export default async function handler(req, res) {
         start: isoMetOffset(a.start, tz),
         eind: isoMetOffset(a.eind, tz),
         vraag: a.vraag || "",
+        domein: a.domein || "",
         meet: a.meet || null,
       }));
     return res.status(200).json({ ok: true, tijdzone: tz, van: vanDatum, tot: totDatum, slots, calls });

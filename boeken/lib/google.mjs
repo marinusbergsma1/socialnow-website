@@ -84,6 +84,7 @@ export function googleAgenda({ clientId, clientSecret, refreshToken, agendaId = 
     gastNaam: e.extendedProperties?.private?.gastNaam || "",
     gastEmail: e.extendedProperties?.private?.gastEmail || e.attendees?.find((a) => !a.self && !a.organizer)?.email || "",
     vraag: e.extendedProperties?.private?.vraag || "",
+    domein: e.extendedProperties?.private?.domein || "",
     meet: e.hangoutLink || e.conferenceData?.entryPoints?.find((p) => p.entryPointType === "video")?.uri || null,
   });
 
@@ -118,7 +119,7 @@ export function googleAgenda({ clientId, clientSecret, refreshToken, agendaId = 
       return (j.items || []).filter((e) => e.status !== "cancelled").map(naarAfspraak);
     },
 
-    async maak({ start, eind, titel, beschrijving, soortId, taal }) {
+    async maak({ start, eind, titel, beschrijving, soortId, taal, domein }) {
       const e = await api("POST", `${agendaPad}/events`, {
         query: { conferenceDataVersion: 1, sendUpdates: "none" },
         body: {
@@ -127,7 +128,7 @@ export function googleAgenda({ clientId, clientSecret, refreshToken, agendaId = 
           start: { dateTime: iso(start), timeZone: "UTC" },
           end: { dateTime: iso(eind), timeZone: "UTC" },
           conferenceData: { createRequest: { requestId: `sn-${start}-${Math.random().toString(36).slice(2, 10)}`, conferenceSolutionKey: { type: "hangoutsMeet" } } },
-          extendedProperties: { private: { [MARKERING]: "1", soort: soortId, taal } },
+          extendedProperties: { private: { [MARKERING]: "1", soort: soortId, taal, domein: domein || "" } },
           guestsCanInviteOthers: false,
           guestsCanModify: false,
           transparency: "opaque",
@@ -137,13 +138,13 @@ export function googleAgenda({ clientId, clientSecret, refreshToken, agendaId = 
       return naarAfspraak(e);
     },
 
-    async nodigUit(id, { gasten, beschrijving, naam, email, vraag, soortId, taal }) {
+    async nodigUit(id, { gasten, beschrijving, naam, email, vraag, domein, soortId, taal }) {
       const e = await api("PATCH", `${agendaPad}/events/${encodeURIComponent(id)}`, {
         query: { conferenceDataVersion: 1, sendUpdates: "all" },
         body: {
           description: beschrijving,
           attendees: gasten.map((g) => ({ email: g.email, displayName: g.naam || undefined })),
-          extendedProperties: { private: { [MARKERING]: "1", soort: soortId, taal, gastNaam: naam, gastEmail: email, vraag: String(vraag || "").slice(0, 1000) } },
+          extendedProperties: { private: { [MARKERING]: "1", soort: soortId, taal, gastNaam: naam, gastEmail: email, vraag: String(vraag || "").slice(0, 1000), domein: domein || "" } },
         },
       });
       return naarAfspraak(e);
