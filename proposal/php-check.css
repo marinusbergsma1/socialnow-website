@@ -314,6 +314,10 @@
 /* 22 oktober 2026, 15.45 (Marinus): de scan met de documenten in een witte sectie, zodat die het meest opvalt. De uitslag
    blijft een donker vlak (PHP-kleuren en rapport zijn op zwart gemeten); formulier en documenten worden licht. */
 :root .sn-site .pc-video-9x16 { height: min(80svh, 760px); max-height: 80svh; }
+/* 22 oktober 2026, 16.15: liggende film op desktop, verticale op mobiel. */
+:root .sn-site .pc-video-16x9 { margin: 0 auto; }
+@media (min-width: 761px) { :root .sn-site .pc-video-9x16 { display: none; } }
+@media (max-width: 760px) { :root .sn-site .pc-video-16x9 { display: none; } }
 :root .sn-site .pc-wit { background: #fff; color: #111; margin-top: 56px; padding: 72px 0 64px; }
 :root .sn-site .pc-wit .pc-hero { padding-top: 0; }
 :root .sn-site .pc-wit .pc-eyebrow { color: #3a3a3c; }
