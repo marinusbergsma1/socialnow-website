@@ -81,19 +81,18 @@ const TEKST = {
     { wie: "Attesso", rol: "Ingebouwd, staat nog uit: agents geven advertentiegeld alleen uit binnen het budget dat jij goedkeurt. Los van betalingen aan experts via Stripe." },
   ],
   cyclusKop: "Zo wordt elke versie beter.",
-  cyclus: ["Idee en ontwerp", "Partners bouwen", "Review en tests door mensen", "Eerst een testomgeving, dan een kleine groep", "Feedback gaat als eerste de volgende versie in"],
-  cyclusRegel: "AI helpt bouwen en testen. Mensen beslissen en blijven verantwoordelijk; niemand keurt zijn eigen werk goed.",
+  // 22 oktober 2026 (Marinus): "dit is denk teveel informatie". Vijf korte stappen en één zin.
+  cyclus: ["Idee en ontwerp", "Partners bouwen", "Mensen testen", "Eerst een kleine groep", "Feedback naar de volgende versie"],
+  cyclusRegel: "AI helpt, mensen beslissen.",
   // Status per punt (01-bronnen §3): 1 werkt al; 2 en 3 afgesproken architectuur; 4 en 5 nieuwe scope ("Volgende stap", nooit "binnenkort"); 6 afgesproken en werkt al.
   toegangKop: "Jij bepaalt wie wat ziet.",
   // Status per punt zichtbaar (review 6a.3): werkt al = groen vinkje, afgesproken = in ontwikkeling, nieuwe scope = volgende stap.
   toegangStatus: { werkt: "Werkt al", bouwt: "In ontwikkeling", volgt: "Volgende stap" },
+  // 22 oktober 2026 (Marinus): "teveel informatie". Drie punten; de volgende stappen en de architectuur staan op /veiligheid en in de explainer.
   toegang: [
-    { status: "werkt", tekst: "Iedereen in je team krijgt een rol, en alleen de rechten die daarbij horen." },
-    { status: "bouwt", tekst: "Per opdracht kies jij wat een expert van Connect mag zien. Alleen lezen, tot de opdracht klaar is, en altijd in te trekken. Wijzigingen komen als voorstel bij jou." },
+    { status: "werkt", tekst: "Iedereen in je team ziet alleen wat bij zijn rol hoort." },
+    { status: "bouwt", tekst: "Een expert ziet per opdracht alleen wat jij deelt, en je trekt het altijd in." },
     { status: "bouwt", tekst: "Chatten met een expert opent nooit je OS." },
-    { status: "volgt", tekst: "Volgende stap: gasttoegang. Nodig een expert uit in een deel van je OS, met een eigen login en alleen de rechten die jij geeft." },
-    { status: "volgt", tekst: "Volgende stap: Connect ook los, zonder OS." },
-    { status: "bouwt", tekst: "OS en Connect delen één basis, elk met eigen muren. Zware taken draaien apart, zodat je dagelijkse werk snel blijft. Zo is het ontworpen om kosten en groei beheersbaar te houden." },
   ],
   vLabel: "Veiligheid en documentatie",
   vKop: "Zwart op wit hoe we je data beschermen.",
@@ -290,7 +289,7 @@ export default function SamenEnVeilig() {
             </div>
             <div className="sn-samen-toegang">
               <h4>{t.toegangKop}</h4>
-              <p className="sn-samen-legenda">{(["werkt", "bouwt", "volgt"] as const).map(st => <span key={st}><Status status={st} />{t.toegangStatus[st]}</span>)}</p>
+              <p className="sn-samen-legenda">{(["werkt", "bouwt"] as const).map(st => <span key={st}><Status status={st} />{t.toegangStatus[st]}</span>)}</p>
               <ul>{t.toegang.map(punt => <li key={punt.tekst} className={`sn-samen-${punt.status}`}><Status status={punt.status} label={t.toegangStatus[punt.status]} /><span>{punt.tekst}</span></li>)}</ul>
             </div>
           </div>
