@@ -400,3 +400,27 @@
   :root .sn-site .pc-mensen-groot .pc-mens { padding: 16px; gap: 16px; align-items: flex-start; }
   :root .sn-site .pc-mensen-groot .pc-mens img { width: 80px; height: 80px; }
 }
+
+/* 22 oktober 2026, 16.45 (Marinus): onder Steef en Michelle een schakelaar zoals bij de films (witte ring, glijdend groen
+   vlak): Neem contact op (uitgebreid formulier) of Dit kun je zelf doen (zeven stappen). */
+:root .sn-site .pc-anker { display: block; position: relative; top: -96px; height: 0; }
+:root .sn-site .pc-keuze { position: relative; isolation: isolate; display: inline-flex; gap: 4px; margin: 40px 0 0; padding: 3px; border: 3px solid #fff; border-radius: 999px; max-width: 100%; }
+:root .sn-site .pc-keuze button { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 18px; border: 0; border-radius: 999px; background: transparent; color: #fff; font: inherit; font-size: 15px; font-weight: 700; white-space: nowrap; cursor: pointer; transition: background .2s; }
+:root .sn-site .pc-keuze button.is-aan { background: var(--pc-vlak); }
+:root .sn-site .pc-keuze button:not(.is-aan):hover { background: #ffffff1a; }
+:root .sn-site .pc-keuze button:focus-visible { outline: 2px solid #fff; outline-offset: -5px; }
+:root .sn-site .pc-keuze-glijder { position: absolute; z-index: 0; top: 3px; bottom: 3px; left: 0; transform: translateX(var(--glijder-x, 0)); width: var(--glijder-w, 0); border-radius: 999px; background: var(--pc-vlak); opacity: 0; pointer-events: none; }
+:root .sn-site .pc-keuze[data-glijder] .pc-keuze-glijder { opacity: 1; }
+:root .sn-site .pc-keuze[data-glijder] button.is-aan { background: transparent; }
+:root .sn-site .pc-keuze[data-glijder="klaar"] .pc-keuze-glijder { transition: transform .45s cubic-bezier(.65, 0, .25, 1), width .45s cubic-bezier(.65, 0, .25, 1); }
+@media (prefers-reduced-motion: reduce) { :root .sn-site .pc-keuze-glijder { transition: none !important; } }
+:root .sn-site .pc-keuze-vak { margin-top: 20px; max-width: 1100px; animation: pc-in .4s cubic-bezier(0.16, 1, 0.3, 1); }
+:root .sn-site .pc-keuze-zin { margin: 0 0 14px; font-size: 16px; line-height: 1.5; color: #cacacf; max-width: 760px; }
+:root .sn-site .pc-keuze-vak .pc-formulier { margin-top: 0; }
+:root .sn-site .pc-keuze-vak .pc-formulier > .pc-rij:first-child label, :root .sn-site .pc-keuze-vak .pc-formulier > label:first-child { margin-top: 0; }
+:root .sn-site .pc-keuze-vak.pc-zelf .pc-stappen { margin-top: 8px; max-width: 820px; }
+@media (max-width: 760px) {
+  :root .sn-site .pc-keuze { display: flex; }
+  :root .sn-site .pc-keuze button { flex: 1 1 0; justify-content: center; padding: 0 10px; font-size: 13px; min-width: 0; }
+  :root .sn-site .pc-keuze button span { overflow: hidden; text-overflow: ellipsis; }
+}
