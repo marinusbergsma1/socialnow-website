@@ -1,0 +1,12 @@
+express-node                    onbekend              onbekend  null                                   null                                   goed   
+
+Totaal: 75 gevallen, 75 goed, 0 fout
+  fout-rood     0  x5  rood genoemd terwijl dat niet mocht (kost vertrouwen, weegt het zwaarst)
+  fout-groen    0  x3  groen genoemd terwijl dat niet mocht (verzwijgt risico)
+  fout          0  x1  andere verkeerde uitslag
+  versie        0  x1  uitslag goed, PHP-versie fout
+  ongeldig      0  x1  geen geldig antwoord volgens CONTRACT.md
+Strafpunten: 0
+Score: (75 - 0) / 75 = 100.0%
+Eis voor groen: 0 fout-rood, 0 fout-groen en score minstens 90%
+Meting: GROEN
