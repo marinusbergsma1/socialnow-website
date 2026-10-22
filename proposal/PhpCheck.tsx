@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ArrowUp, ArrowUpRight, CalendarDays, Check, Copy, Mail, ShieldCheck } from "lucide-react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ArrowUp, ArrowUpRight, CalendarDays, Check, Copy, FileDown, Mail, MessageCircle, Send, ShieldCheck, Wrench } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 import { boekExtern, boekLink, conceptLink } from "./aanvragen";
 import { people } from "./content";
@@ -105,7 +105,7 @@ function Stappen({ aantal = STAPPEN.length, domein = "" }: { aantal?: number; do
 }
 
 // Kort formulier (naam, e-mail, domein) in de uitslag, of het volledige formulier onderaan. Beide gaan naar secure@socialnow.nl.
-function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uitslag }: { kort?: boolean; telefoon?: boolean; soort?: string; domein?: string; uitslag?: Uitslag | null }) {
+function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uitslag, kop = true, knop }: { kort?: boolean; telefoon?: boolean; soort?: string; domein?: string; uitslag?: Uitslag | null; kop?: boolean; knop?: string }) {
   const { t, language } = useLanguage();
   const [staat, zetStaat] = useState<"open" | "bezig" | "klaar" | "mail">("open");
   const [hint, zetHint] = useState("");
@@ -145,7 +145,7 @@ function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uit
   );
   return (
     <form className={`pc-formulier${kort ? " pc-kort" : ""}`} onSubmit={verstuur} noValidate>
-      {!kort && <h2>Vraag je gratis securityscan aan.</h2>}
+      {!kort && kop && <h2>Vraag je gratis securityscan aan.</h2>}
       <div className="pc-rij">
         <label>Je naam<input name="naam" autoComplete="name" placeholder="Voor- en achternaam" /></label>
         <label>E-mail<input name="email" type="email" autoComplete="email" placeholder="naam@bedrijf.nl" /></label>
@@ -165,7 +165,7 @@ function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uit
       <input name="website2" tabIndex={-1} autoComplete="off" aria-hidden="true" className="pc-honing" />
       {hint && <p className="pc-hint" role="alert">{hint}</p>}
       <button className="pc-knop" type="submit" disabled={staat === "bezig"}>
-        <span>{staat === "bezig" ? "Versturen…" : kort ? "Verstuur" : "Vraag de gratis securityscan aan"}</span>
+        <span>{staat === "bezig" ? "Versturen…" : knop ? knop : kort ? "Verstuur" : "Vraag de gratis securityscan aan"}</span>
         <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
       </button>
     </form>
@@ -176,7 +176,7 @@ function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uit
 // contactblok met Steef en Michelle: foto, naam en rol komen uit proposal/content.ts (niets verzonnen). Per persoon een
 // directe weg: een call plannen (boekingspagina met type uitgebreide-check en het domein ingevuld; zolang die niet live is
 // het korte formulier op #aanvraag) en mailen naar secure@socialnow.nl.
-const SECURE = "secure@socialnow.nl";
+const SECURE = "security@socialnow.nl";
 const MENSEN = ["Steef Komen", "Michelle Yang"];
 
 // Regiechat, 22 oktober 2026 (gelijk met de socialvideo van Marinus): de updates zijn tijdelijk gratis. Bij een oude
@@ -426,6 +426,96 @@ function Bento() {
   );
 }
 
+// 22 oktober 2026, 16.45 (Marinus): de uitslag bewaren of privé delen: WhatsApp, Messenger, e-mail, pdf en kopiëren. Geen
+// LinkedIn of andere openbare kanalen, want een uitslag post je meestal niet. Pdf via het printvenster (alleen de uitslag,
+// zie @media print in php-check.css). Messenger heeft geen deellink voor het web zonder app-id, dus alleen op telefoons.
+const DEEL_URL = "https://socialnow.nl/security";
+function Delen({ u }: { u: Uitslag }) {
+  const { t } = useLanguage();
+  const [gekopieerd, zetGekopieerd] = useState(false);
+  const [telefoon, zetTelefoon] = useState(false);
+  useEffect(() => { zetTelefoon(window.matchMedia("(pointer: coarse)").matches); }, []);
+  const kop = phpTekst(u, t).kop;
+  const tekst = `${invul(t("Securityscan van {domein}: {uitslag}"), { domein: u.domein || "", uitslag: kop })}${u.phpVersie ? ` (PHP ${u.phpVersie})` : ""}. ${t("Doe ook de gratis securityscan:")} ${DEEL_URL}`;
+  const kopieer = async () => {
+    try { await navigator.clipboard.writeText(tekst); }
+    catch {
+      const veld = document.createElement("textarea");
+      veld.value = tekst; veld.setAttribute("readonly", ""); veld.style.position = "fixed"; veld.style.opacity = "0";
+      document.body.appendChild(veld); veld.select();
+      try { document.execCommand("copy"); } catch { /* niet gelukt */ }
+      veld.remove();
+    }
+    zetGekopieerd(true);
+    window.setTimeout(() => zetGekopieerd(false), 2000);
+  };
+  return (
+    <div className="pc-delen">
+      <p>Bewaar of deel je uitslag.</p>
+      <div className="pc-delen-knoppen">
+        <a href={`https://wa.me/?text=${encodeURIComponent(tekst)}`} target="_blank" rel="noopener"><MessageCircle size={16} aria-hidden="true" /><span translate="no">WhatsApp</span></a>
+        {telefoon && <a href={`fb-messenger://share/?link=${encodeURIComponent(DEEL_URL)}`}><Send size={16} aria-hidden="true" /><span translate="no">Messenger</span></a>}
+        <a href={`mailto:?subject=${encodeURIComponent(t("Gratis securityscan"))}&body=${encodeURIComponent(tekst)}`}><Mail size={16} aria-hidden="true" /><span>E-mail</span></a>
+        <button type="button" onClick={() => window.print()}><FileDown size={16} aria-hidden="true" /><span>Opslaan als pdf</span></button>
+        <button type="button" onClick={kopieer}>{gekopieerd ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}<span>{gekopieerd ? "Gekopieerd" : "Kopieer"}</span></button>
+      </div>
+      <p className="pc-print-voet" aria-hidden="true">socialnow.nl/security · {new Date().toLocaleDateString()}</p>
+    </div>
+  );
+}
+
+// 22 oktober 2026, 16.45 (Marinus): het formulier stond te ver weg. Direct onder Steef en Michelle een schakelaar zoals bij
+// de films (witte ring, glijdend groen vlak): "Neem contact op" met het uitgebreide formulier (mail naar security@) of
+// "Dit kun je zelf doen" met de zeven stappen. #aanvraag opent het formulier, #zelf de stappen.
+type Keuze = "contact" | "zelf";
+function ContactOfZelf({ domein, uitslag, keuze, zetKeuze }: { domein: string; uitslag: Uitslag | null; keuze: Keuze; zetKeuze: (k: Keuze) => void }) {
+  const groepRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const groep = groepRef.current;
+    if (!groep) return;
+    const zet = () => {
+      const knop = groep.querySelector<HTMLElement>('button[aria-pressed="true"]');
+      if (!knop) return;
+      groep.style.setProperty("--glijder-x", `${knop.offsetLeft}px`);
+      groep.style.setProperty("--glijder-w", `${knop.offsetWidth}px`);
+      if (!groep.dataset.glijder) { groep.dataset.glijder = "staat"; requestAnimationFrame(() => requestAnimationFrame(() => { groep.dataset.glijder = "klaar"; })); }
+    };
+    zet();
+    const rs = typeof ResizeObserver === "function" ? new ResizeObserver(zet) : null;
+    rs?.observe(groep);
+    return () => rs?.disconnect();
+  }, [keuze]);
+  return (
+    <>
+      <div className="pc-keuze" ref={groepRef}>
+        <span className="pc-keuze-glijder" aria-hidden="true" />
+        <button type="button" className={keuze === "contact" ? "is-aan" : ""} aria-pressed={keuze === "contact"} onClick={() => zetKeuze("contact")}>
+          <Mail size={15} aria-hidden="true" /><span>Neem contact op</span>
+        </button>
+        <button type="button" className={keuze === "zelf" ? "is-aan" : ""} aria-pressed={keuze === "zelf"} onClick={() => zetKeuze("zelf")}>
+          <Wrench size={15} aria-hidden="true" /><span>Dit kun je zelf doen</span>
+        </button>
+      </div>
+      {keuze === "contact" ? (
+        <div className="pc-keuze-vak">
+          <p className="pc-keuze-zin">Vul je gegevens in, dan nemen Steef of Michelle contact met je op. Je aanvraag gaat naar <span translate="no">{SECURE}</span>.</p>
+          <Aanvraag telefoon soort="gratis-update" domein={domein} uitslag={uitslag} kop={false} knop="Claim je gratis update" key={domein || "leeg"} />
+        </div>
+      ) : (
+        <div className="pc-keuze-vak pc-zelf">
+          <Stappen domein={domein} />
+          <p className="pc-noot">De PHP-versie verbergen (<code translate="no">expose_php=Off</code>) maakt je minder zichtbaar, maar repareert niets.</p>
+          <ol className="pc-bronnen">
+            <li>PHP, ChangeLog 8, 21 oktober 2026. <a href="https://www.php.net/ChangeLog-8.php" target="_blank" rel="noopener">php.net</a></li>
+            <li>NCSC (VK), Critical security issue affecting PHP, oktober 2026. <a href="https://www.ncsc.gov.uk/sites/default/files/2026-10/Critical-security-issue-affecting-PHP_2.pdf" target="_blank" rel="noopener">ncsc.gov.uk</a></li>
+            <li>NSA-advies over php2shell, zoals gemeld door TweakTown, 22 oktober 2026. <a href="https://www.tweaktown.com/news/114213/nsa-warns-70-percent-of-websites-to-install-the-latest-php-patch-now-or-go-offline/index.html" target="_blank" rel="noopener">tweaktown.com</a></li>
+          </ol>
+        </div>
+      )}
+    </>
+  );
+}
+
 export function PhpCheckPage() {
   const { t, language } = useLanguage();
   const [domein, zetDomein] = useState("");
@@ -445,7 +535,9 @@ export function PhpCheckPage() {
   useEffect(() => {
     const wekkers: number[] = [];
     const kijk = () => {
-      if (window.location.hash !== "#aanvraag") return;
+      const hash = window.location.hash;
+      if (hash !== "#aanvraag" && hash !== "#zelf") return;
+      zetKeuze(hash === "#zelf" ? "zelf" : "contact");
       for (const ms of [0, 300, 900, 1800]) wekkers.push(window.setTimeout(() => aanvraagRef.current?.scrollIntoView({ block: "start" }), ms));
     };
     kijk();
@@ -453,6 +545,7 @@ export function PhpCheckPage() {
     return () => { window.removeEventListener("hashchange", kijk); wekkers.forEach((w) => window.clearTimeout(w)); };
   }, []);
 
+  const [keuze, zetKeuze] = useState<Keuze>("contact");
   const toon = (u: Uitslag) => { zetUitslag(u); requestAnimationFrame(() => uitslagRef.current?.focus()); };
 
   const start = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -487,12 +580,13 @@ export function PhpCheckPage() {
           daaronder de bento met wie werd geraakt en wie risico loopt, en direct Steef en Michelle. */}
       <Film />
 
-      <section className="pc-wit" id="scan">
+      <section className="pc-scan" id="scan">
       <div className="pc-hero h-wrap">
         <p className="h-eyebrow pc-eyebrow"><i aria-hidden="true" /> Gratis securityscan</p>
         <h1 className="pc-kop">Is je website veilig?</h1>
 
-        <form className="pc-check" onSubmit={start} noValidate>
+        <form className={`pc-check${bezig ? " pc-bezig" : ""}`} onSubmit={start} noValidate>
+          <span className="pc-laad" aria-hidden="true" />
           <label className="pc-veld">
             <span>Je domein</span>
             <input
@@ -520,6 +614,7 @@ export function PhpCheckPage() {
             <div className="pc-uitslag" ref={uitslagRef} tabIndex={-1}>
               {/* Eerst PHP, groot en compleet; pas daaronder de vijf punten, dan Steef en Michelle. */}
               <PhpBlok u={u} />
+              <Delen u={u} />
               {u.domein && <CheckRapport domein={u.domein} ronde={ronde} />}
               {u.uitslag !== "rood" && u.uitslag !== "oranje" && <Mensen domein={u.domein || ""} />}
               <p className="pc-disclaimer">Deze scan leest alleen openbare informatie van je website. Het is een snelle indicatie, geen volledige beveiligingsaudit en geen garantie. Wil je zekerheid? Plan een gratis call met ons team.</p>
@@ -545,20 +640,10 @@ export function PhpCheckPage() {
 
       <Bento />
 
-      <section className="h-wrap pc-team">
+      <section className="h-wrap pc-team" id="aanvraag" ref={aanvraagRef}>
+        <span id="zelf" className="pc-anker" aria-hidden="true" />
         <Mensen domein={gecheckt || vooraf} groot />
-      </section>
-
-      {/* 22 oktober 2026 (Marinus): de hele lijst. De volgorde telt, dus genummerd. */}
-      <section className="h-section h-wrap pc-zelf" id="zelf">
-        <h2 className="pc-sectiekop">Dit kun je zelf al doen.</h2>
-        <Stappen domein={gecheckt} />
-        <p className="pc-noot">De PHP-versie verbergen (<code translate="no">expose_php=Off</code>) maakt je minder zichtbaar, maar repareert niets.</p>
-        <ol className="pc-bronnen">
-          <li>PHP, ChangeLog 8, 21 oktober 2026. <a href="https://www.php.net/ChangeLog-8.php" target="_blank" rel="noopener">php.net</a></li>
-          <li>NCSC (VK), Critical security issue affecting PHP, oktober 2026. <a href="https://www.ncsc.gov.uk/sites/default/files/2026-10/Critical-security-issue-affecting-PHP_2.pdf" target="_blank" rel="noopener">ncsc.gov.uk</a></li>
-          <li>NSA-advies over php2shell, zoals gemeld door TweakTown, 22 oktober 2026. <a href="https://www.tweaktown.com/news/114213/nsa-warns-70-percent-of-websites-to-install-the-latest-php-patch-now-or-go-offline/index.html" target="_blank" rel="noopener">tweaktown.com</a></li>
-        </ol>
+        <ContactOfZelf domein={gecheckt || vooraf} uitslag={u} keuze={keuze} zetKeuze={zetKeuze} />
       </section>
 
       <section className="h-section h-wrap pc-faq-blok">
@@ -583,11 +668,6 @@ export function PhpCheckPage() {
         </ol>
       </section>
 
-      {/* Onderaan het korte formulier; Steef en Michelle staan al onder de bento. De mailing linkt naar #aanvraag. */}
-      <section className="h-section h-wrap pc-slot" id="aanvraag" ref={aanvraagRef}>
-        <h2 className="pc-sectiekop">Claim je gratis update.</h2>
-        <Aanvraag kort telefoon soort="uitgebreide-check" domein={gecheckt || vooraf} uitslag={u} key={gecheckt || vooraf || "leeg"} />
-      </section>
     </div>
   );
 }

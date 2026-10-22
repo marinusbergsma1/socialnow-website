@@ -55,7 +55,7 @@ eis(zelf > tsx.indexOf("pc-uitslag-plek") && zelf < faqKop && (tsx.match(/^  "[^
 eis(/<Stappen aantal=\{3\}/.test(tsx.slice(tsx.indexOf("export function PhpBlok"))) && !/kleur === "rood" \|\| kleur === "oranje"\) && \(/.test(tsx), "elke uitslag toont stap 1 tot en met 3 in het PHP-blok (sinds 22 oktober middag ook groen en afgeschermd)");
 eis(/Kopieer de e-mail/.test(tsx) && /navigator\.clipboard\.writeText/.test(tsx) && /expose_php=Off/.test(tsx) && /php\.net\/ChangeLog-8/.test(tsx) && /ncsc\.gov\.uk/.test(tsx) && /NSA/.test(tsx), "voorbeeldmail om te kopiëren, opmerking over expose_php en bronnen php.net, NCSC en NSA");
 eis(/Omdat dit ons allemaal raakt, voeren we de essentiële updates tijdelijk gratis uit\. Wil je dieper gaan, dan bespreken we de scope met je\./.test(tsx), "afsluiting: essentiële updates tijdelijk gratis, scope bij meer diepgang");
-eis(/fetch\(AANVRAAG/.test(tsx) && /const AANVRAAG = "\/api\/check-aanvraag"/.test(tsx) && /website2/.test(tsx), "formulieren gaan naar api/check-aanvraag (mail naar secure@), met honeypot");
+eis(/fetch\(AANVRAAG/.test(tsx) && /const AANVRAAG = "\/api\/check-aanvraag"/.test(tsx) && /website2/.test(tsx), "formulieren gaan naar api/check-aanvraag (mail naar security@), met honeypot");
 
 // 2. Engels compleet, met de vaste zinnen letterlijk
 const en = JSON.parse(lees("proposal/i18n/en.json") || "{}");
@@ -121,9 +121,9 @@ if (fs.existsSync("server/check-aanvraag.mjs")) {
   const aanvraag = a.leesAanvraag({ naam: "Test Persoon", email: "Test@Voorbeeld.NL", domein: "voorbeeld.nl", uitslag: "onbekend", phpVersie: "", taal: "nl", vraag: "Kunnen jullie kijken?" });
   const uit = await a.verstuurAanvraag(aanvraag, { transport: nep });
   const m = verzonden[0] || {};
-  eis(uit.verstuurd && m.to === "secure@socialnow.nl" && m.replyTo === "test@voorbeeld.nl" && m.subject === "Check-aanvraag: voorbeeld.nl (afgeschermd)"
+  eis(uit.verstuurd && m.to === "security@socialnow.nl" && m.replyTo === "test@voorbeeld.nl" && m.subject === "Check-aanvraag: voorbeeld.nl (afgeschermd)"
     && ["Naam: Test Persoon", "E-mail: test@voorbeeld.nl", "Domein: voorbeeld.nl", "Uitslag: afgeschermd", "PHP-versie: afgeschermd", "Taal: nl", "Tijdstip: ", "Kunnen jullie kijken?"].every((r) => String(m.text).includes(r)),
-    "aanvraag wordt één mail naar secure@socialnow.nl (alias van info@) met naam, e-mail, domein, uitslag, PHP-versie of \"afgeschermd\", taal, tijdstip, vraag en Reply-To bezoeker (nep-transport)");
+    "aanvraag wordt één mail naar security@socialnow.nl (alias van info@) met naam, e-mail, domein, uitslag, PHP-versie of \"afgeschermd\", taal, tijdstip, vraag en Reply-To bezoeker (nep-transport)");
   const logs = [];
   const kapot = { sendMail: async () => { throw new Error("SMTP weg"); } };
   const mis = await a.verstuurAanvraag(aanvraag, { transport: kapot, log: { error: (r) => logs.push(r) } });
