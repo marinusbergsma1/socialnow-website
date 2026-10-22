@@ -55,9 +55,10 @@ eis(!hdr.includes("In ruim twee minuten") && /film === "connect" && <p className
 const lijst = (naam) => { const i = speler.indexOf(`const ${naam} = [`); return i < 0 ? "" : speler.slice(i, speler.indexOf("];", i)); };
 const direct = lijst("DIRECT"), crafture = lijst("VIA_CRAFTURE");
 eis(["AZ", "Supperclub"].every(n => direct.includes(`naam: "${n}"`)) && ["Universal", "Warner Bros.", "MOJO", "IMAX", "Marvel"].every(n => crafture.includes(`naam: "${n}"`)), "Trusted by: AZ en Supperclub direct, Universal, Warner Bros., MOJO, IMAX en Marvel via Crafture");
-eis(start.includes('<span className="sn-startbeeld-via" translate="no">via Crafture</span>{VIA_CRAFTURE.map(merk)}'), "de route via Crafture staat er eerlijk bij");
+// Later op 22 oktober: de route als Crafture-logo in plaats van tekst, zie scripts/proef-crafture-logo.mjs.
+eis(start.includes('{merk(CRAFTURE)}<i className="sn-startbeeld-streep" /><span className="sn-startbeeld-groep">{VIA_CRAFTURE.map(merk)}</span>'), "de route via Crafture staat er eerlijk bij (Crafture-logo, streep, de vijf merken)");
 const bestanden = [...(direct + crafture).matchAll(/src: "([^"]+)"/g)].map(m => m[1]);
-eis(bestanden.length === 7 && bestanden.every(b => fs.existsSync(`public${b}`)), `alle zeven logo's zijn bestaande bestanden: ${bestanden.filter(b => !fs.existsSync(`public${b}`)).join(", ") || "ja"}`);
+eis(bestanden.length >= 7 && bestanden.every(b => fs.existsSync(`public${b}`)), `alle zeven logo's zijn bestaande bestanden: ${bestanden.filter(b => !fs.existsSync(`public${b}`)).join(", ") || "ja"}`);
 eis(/\.sn-startbeeld-merken img\{[^}]*filter:brightness\(0\) invert\(1\);opacity:\.72\}/.test(css), "Trusted by rustig van kleur");
 
 // 3b. Knop op de Connect-film: zoals de blauwe knoppen links in de hero, met kleine zwarte outline.

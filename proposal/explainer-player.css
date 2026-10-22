@@ -30,11 +30,13 @@ html:root .sn-site .sn-startbeeld-x{color:#7d8f86;justify-self:center}
 html:root .sn-site .sn-startbeeld-midden{align-self:center;display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2.2cqi,16px)}
 html:root .sn-site .sn-startbeeld-zin{max-width:44ch;margin:0;font-size:clamp(13px,2.3cqi,16px);font-weight:500;line-height:1.45;letter-spacing:0;text-align:center;text-transform:none;color:#c6d3cc;text-wrap:balance}
 html:root .sn-site .sn-startbeeld-trusted{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;padding-top:clamp(10px,2.2cqi,14px);border-top:1px solid #ffffff1f}
-html:root .sn-site .sn-startbeeld-label,html:root .sn-site .sn-startbeeld-via{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8fa39a;white-space:nowrap}
-html:root .sn-site .sn-startbeeld-via{letter-spacing:.08em;text-transform:none;font-size:11px;font-weight:600}
+html:root .sn-site .sn-startbeeld-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8fa39a;white-space:nowrap}
 html:root .sn-site .sn-startbeeld-merken{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px clamp(16px,3.4cqi,26px)}
 html:root .sn-site .sn-startbeeld-groep{display:flex;align-items:center;gap:clamp(12px,2.6cqi,20px)}
 html:root .sn-site .sn-startbeeld-groep+.sn-startbeeld-groep{padding-left:clamp(16px,3.4cqi,26px);border-left:1px solid #ffffff26}
+/* Crafture-logo, dan een dunne streep, dan de merken die via Crafture liepen (Marinus 22 okt). Op een smal vlak gaat de route als geheel naar de tweede regel. */
+html:root .sn-site .sn-startbeeld-route>.sn-startbeeld-groep{padding-left:0;border-left:0}
+html:root .sn-site .sn-startbeeld-streep{display:block;flex:none;width:1px;height:calc(var(--merk-h) * 1.3);background:#ffffff26}
 html:root .sn-site .sn-startbeeld-merken img{display:block;height:calc(var(--merk-h) * var(--maat, 1));width:auto;filter:brightness(0) invert(1);opacity:.72}
 html:root .sn-site .sn-startbeeld-merken img.is-kleur{filter:grayscale(1) brightness(1.25) contrast(1.1)}
 /* Afspeelknop (Marinus 22 okt): groot, transparante vulling, groene rand, witte tekst, groen pijlrondje en een kleine zwarte outline. */
