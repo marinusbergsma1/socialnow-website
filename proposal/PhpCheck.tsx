@@ -10,7 +10,7 @@ import "./php-check.css";
 // Groen betekent alleen dat de getoonde versie de fix bevat, nooit "veilig". Rood alleen met bewijs in de build.
 // Marinus, later die dag: een check lukt altijd. Geen vinkje, geen foutmelding: kan de check niets lezen, of faalt onze
 // eigen functie, dan is de uitslag "Je site schermt dit af" met een belknop en een kort formulier. Aanvragen gaan via
-// api/check-aanvraag.js als mail naar info@socialnow.nl.
+// api/check-aanvraag.js als mail naar secure@socialnow.nl.
 
 const ENDPOINT = "/api/php-check";
 const AANVRAAG = "/api/check-aanvraag";
@@ -93,7 +93,7 @@ function Stappen({ aantal = STAPPEN.length, domein = "" }: { aantal?: number; do
   );
 }
 
-// Kort formulier (naam, e-mail, domein) in de uitslag, of het volledige formulier onderaan. Beide gaan naar info@.
+// Kort formulier (naam, e-mail, domein) in de uitslag, of het volledige formulier onderaan. Beide gaan naar secure@socialnow.nl.
 function Aanvraag({ kort = false, domein = "", uitslag }: { kort?: boolean; domein?: string; uitslag?: Uitslag | null }) {
   const { t, language } = useLanguage();
   const [staat, zetStaat] = useState<"open" | "bezig" | "klaar" | "mail">("open");

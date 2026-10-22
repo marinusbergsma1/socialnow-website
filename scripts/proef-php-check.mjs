@@ -42,7 +42,7 @@ eis(zelf > tsx.indexOf("pc-uitslag-plek") && zelf < niveaus && (tsx.match(/^  "[
 eis(/<Stappen aantal=\{3\}/.test(tsx) && /kleur === "rood" \|\| kleur === "oranje"/.test(tsx), "rood en oranje tonen stap 1 tot en met 3 in de uitslag");
 eis(/Kopieer de e-mail/.test(tsx) && /navigator\.clipboard\.writeText/.test(tsx) && /expose_php=Off/.test(tsx) && /php\.net\/ChangeLog-8/.test(tsx) && /ncsc\.gov\.uk/.test(tsx) && /NSA/.test(tsx), "voorbeeldmail om te kopiëren, opmerking over expose_php en bronnen php.net, NCSC en NSA");
 eis(/We doen de check en de updates gratis\. Wil je dieper gaan, dan bespreken we de scope met je\./.test(tsx), "formulier voor de gratis handmatige check en updates");
-eis(/fetch\(AANVRAAG/.test(tsx) && /const AANVRAAG = "\/api\/check-aanvraag"/.test(tsx) && /website2/.test(tsx), "formulieren gaan naar api/check-aanvraag (mail naar info@), met honeypot");
+eis(/fetch\(AANVRAAG/.test(tsx) && /const AANVRAAG = "\/api\/check-aanvraag"/.test(tsx) && /website2/.test(tsx), "formulieren gaan naar api/check-aanvraag (mail naar secure@), met honeypot");
 
 // 2. Engels compleet, met de vaste zinnen letterlijk
 const en = JSON.parse(lees("proposal/i18n/en.json") || "{}");
@@ -108,9 +108,9 @@ if (fs.existsSync("server/check-aanvraag.mjs")) {
   const aanvraag = a.leesAanvraag({ naam: "Test Persoon", email: "Test@Voorbeeld.NL", domein: "voorbeeld.nl", uitslag: "onbekend", phpVersie: "", taal: "nl", vraag: "Kunnen jullie kijken?" });
   const uit = await a.verstuurAanvraag(aanvraag, { transport: nep });
   const m = verzonden[0] || {};
-  eis(uit.verstuurd && m.to === "info@socialnow.nl" && m.replyTo === "test@voorbeeld.nl" && m.subject === "Check-aanvraag: voorbeeld.nl (afgeschermd)"
+  eis(uit.verstuurd && m.to === "secure@socialnow.nl" && m.replyTo === "test@voorbeeld.nl" && m.subject === "Check-aanvraag: voorbeeld.nl (afgeschermd)"
     && ["Naam: Test Persoon", "E-mail: test@voorbeeld.nl", "Domein: voorbeeld.nl", "Uitslag: afgeschermd", "PHP-versie: afgeschermd", "Taal: nl", "Tijdstip: ", "Kunnen jullie kijken?"].every((r) => String(m.text).includes(r)),
-    "aanvraag wordt één mail naar info@ met naam, e-mail, domein, uitslag, PHP-versie of \"afgeschermd\", taal, tijdstip, vraag en Reply-To bezoeker (nep-transport)");
+    "aanvraag wordt één mail naar secure@socialnow.nl (alias van info@) met naam, e-mail, domein, uitslag, PHP-versie of \"afgeschermd\", taal, tijdstip, vraag en Reply-To bezoeker (nep-transport)");
   const logs = [];
   const kapot = { sendMail: async () => { throw new Error("SMTP weg"); } };
   const mis = await a.verstuurAanvraag(aanvraag, { transport: kapot, log: { error: (r) => logs.push(r) } });
