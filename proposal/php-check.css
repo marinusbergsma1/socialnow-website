@@ -318,6 +318,13 @@
 :root .sn-site .pc-scan .pc-hero { padding-top: 0; }
 :root .sn-site .pc-scan .pc-hero > * { max-width: 1100px; }
 :root .sn-site .pc-check { position: relative; overflow: hidden; background: transparent; }
+/* 22 oktober 2026, 17.15 (Marinus): "Het website sectie onderdeel wil ik graag gewoon wit." De scankaart zelf is wit (geen
+   grijs), op de zwarte pagina; het veld krijgt een lichte rand; de uitslag eronder blijft donker. */
+:root .sn-site .pc-scan .pc-check { background: #fff; border-color: #fff; box-shadow: none; }
+:root .sn-site .pc-scan .pc-check .pc-veld span { color: #3a3a3c; }
+:root .sn-site .pc-scan .pc-check .pc-veld input { border-color: #d1d1d6; }
+:root .sn-site .pc-scan .pc-check .pc-veld input:focus-visible { outline-color: var(--pc-vlak); border-color: transparent; }
+:root .sn-site .pc-scan .pc-check .pc-hint { color: #3a3a3c; }
 :root .sn-site .pc-check .pc-veld input { background: #fff; color: #111; border-color: #fff; }
 :root .sn-site .pc-check .pc-veld input::placeholder { color: #8e8e93; }
 :root .sn-site .pc-check .pc-veld input:-webkit-autofill, :root .sn-site .pc-check .pc-veld input:-webkit-autofill:hover, :root .sn-site .pc-check .pc-veld input:-webkit-autofill:focus { -webkit-text-fill-color: #111; box-shadow: 0 0 0 100px #fff inset; caret-color: #111; }
@@ -429,3 +436,25 @@
   :root .sn-site .pc-keuze button { flex: 1 1 0; justify-content: center; padding: 0 10px; font-size: 13px; min-width: 0; }
   :root .sn-site .pc-keuze button span { overflow: hidden; text-overflow: ellipsis; }
 }
+
+/* 22 oktober 2026, 17.20 (Marinus): wit voor vertrouwen, zwart voor de data. Naast de scankaart zijn ook de kaarten van
+   Steef en Michelle en het contactformulier wit; de schakelaar krijgt een dunnere rand. Uitslag, bento en stappen blijven
+   donker. */
+:root .sn-site .pc-keuze { border-width: 1.5px; padding: 4px; }
+:root .sn-site .pc-keuze-glijder { top: 4px; bottom: 4px; }
+:root .sn-site .pc-mensen-groot .pc-mens { background: #fff; border-color: #fff; }
+:root .sn-site .pc-mensen-groot .pc-mens strong { color: #111; }
+:root .sn-site .pc-mensen-groot .pc-mens small { color: #6e6e73; }
+:root .sn-site .pc-mensen-groot .pc-mens-wegen a { color: #111; }
+:root .sn-site .pc-mensen-groot .pc-mens-wegen a svg { color: var(--pc-vlak); }
+:root .sn-site .pc-mensen-groot .pc-mens-wegen a span { border-bottom-color: #d1d1d6; }
+:root .sn-site .pc-mensen-groot .pc-mens-wegen a:hover span { border-bottom-color: var(--pc-vlak); }
+:root .sn-site .pc-mensen-groot .pc-mens-wegen a:focus-visible { outline-color: var(--pc-vlak); }
+:root .sn-site .pc-keuze-vak .pc-formulier { background: #fff; border-color: #fff; box-shadow: none; color: #111; }
+:root .sn-site .pc-keuze-vak .pc-formulier label { color: #3a3a3c; }
+:root .sn-site .pc-keuze-vak .pc-formulier input, :root .sn-site .pc-keuze-vak .pc-formulier textarea { background: #fff; color: #111; border-color: #d1d1d6; }
+:root .sn-site .pc-keuze-vak .pc-formulier input::placeholder, :root .sn-site .pc-keuze-vak .pc-formulier textarea::placeholder { color: #8e8e93; }
+:root .sn-site .pc-keuze-vak .pc-formulier input:focus-visible, :root .sn-site .pc-keuze-vak .pc-formulier textarea:focus-visible { outline-color: var(--pc-vlak); }
+:root .sn-site .pc-keuze-vak .pc-formulier input:-webkit-autofill { -webkit-text-fill-color: #111; box-shadow: 0 0 0 100px #fff inset; }
+:root .sn-site .pc-keuze-vak .pc-formulier .pc-hint { color: #3a3a3c; }
+:root .sn-site .pc-keuze-vak .pc-formulier h3, :root .sn-site .pc-keuze-vak .pc-formulier > p { color: #111; }
