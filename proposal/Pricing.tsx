@@ -53,15 +53,18 @@ type Pakket = {
 // volgt uit dezelfde tabel: een beeld in topkwaliteit kost 28 tokens, een video van 8 seconden 160 (naar beneden afgerond).
 // 19 oktober 2026 (Marinus): "Team, Business worden en Business Enterprise met onneindig opslag en dus langer met meer de usp's
 // wat maakt ons nou zo uniek." De ids volgen de nieuwe namen; ?pakket=business is €35, ?pakket=enterprise is €65.
+// 22 oktober 2026 (Marinus): "Free for teams of up to 2" en alle prijzen duidelijker. Elke kaart zegt bovenaan voor hoe
+// grote teams hij is (2, 5, 10 personen; was "Nodig 2 mensen uit", "2 tot 5" en "5 tot 10 medewerkers"), en "per maand bij
+// jaarabonnement" in plaats van "per maand, jaarlijks", dat ook als prijs per jaar te lezen was.
 const OS: Pakket[] = [
   {
     id: "gratis",
     naam: "Gratis",
     prijs: "€0",
-    per: "altijd",
+    per: "voor altijd",
     belofte: "Je eigen OS om mee te beginnen.",
     punten: [
-      { tekst: "Nodig 2 mensen uit", sterk: true },
+      { tekst: "Teams tot 2 personen", sterk: true },
       { tekst: "10 GB opslag", sterk: true },
       { tekst: "Gratis website en rebranding", sterk: true },
       { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },
@@ -81,11 +84,11 @@ const OS: Pakket[] = [
     id: "business",
     naam: "Business",
     prijs: "€35",
-    per: "per maand, jaarlijks",
+    per: "per maand bij jaarabonnement",
     tokens: { aantal: "1.500 tokens per maand", waarde: "t.w.v. €15", goedVoor: "Ruim 50 beelden of 9 video's van 8 seconden" },
     belofte: "Voor een klein team dat samen werkt.",
     punten: [
-      { tekst: "2 tot 5 medewerkers", sterk: true },
+      { tekst: "Teams tot 5 personen", sterk: true },
       { tekst: "50 GB opslag", sterk: true },
       { tekst: "Gratis website en rebranding", sterk: true },
       { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },
@@ -104,11 +107,11 @@ const OS: Pakket[] = [
     id: "enterprise",
     naam: "Enterprise",
     prijs: "€65",
-    per: "per maand, jaarlijks",
+    per: "per maand bij jaarabonnement",
     tokens: { aantal: "4.000 tokens per maand", waarde: "t.w.v. €40", goedVoor: "Ruim 140 beelden of 25 video's van 8 seconden" },
     belofte: "Voor het hele bedrijf, zonder grenzen aan je opslag.",
     punten: [
-      { tekst: "5 tot 10 medewerkers", sterk: true },
+      { tekst: "Teams tot 10 personen", sterk: true },
       { tekst: "Onbeperkte opslag", sterk: true },
       { tekst: "Gratis website en rebranding", sterk: true },
       { tekst: "Studio, 5.000 stockfoto's, social media en boekhouding" },
@@ -205,12 +208,13 @@ const UNIEK = [
 // HeaderBestaand.tsx toont dezelfde vier in de Custom OS-tab.
 // 19 oktober 2026, avond (Marinus): "Gratis website en rebranding moet bij elk pakket staan." Dus die regel bovenaan bij alle
 // zeven pakketten (OS en Connect), sterk; bij Connect staat het custom OS er los onder.
+// 22 oktober 2026: "per maand, minimaal 3 maanden" op elke kaart; het label zei "per periode van 3 maanden" en las als een prijs per periode.
 export const CONNECT: Pakket[] = [
   {
     id: "start",
     naam: "Start",
     prijs: "€3.000",
-    per: "per maand",
+    per: "per maand, minimaal 3 maanden",
     belofte: "Alles om goed zichtbaar te worden.",
     punten: [
       { tekst: "Gratis website en rebranding", sterk: true },
@@ -233,7 +237,7 @@ export const CONNECT: Pakket[] = [
     id: "meta",
     naam: "Meta",
     prijs: "€4.000",
-    per: "per maand",
+    per: "per maand, minimaal 3 maanden",
     belofte: "Bereik de juiste mensen op Instagram en Facebook.",
     punten: [
       { tekst: "Gratis website en rebranding", sterk: true },
@@ -258,7 +262,7 @@ export const CONNECT: Pakket[] = [
     id: "meta-google",
     naam: "Meta + Google",
     prijs: "€4.500",
-    per: "per maand",
+    per: "per maand, minimaal 3 maanden",
     belofte: "Gevonden worden op het moment dat ze zoeken.",
     punten: [
       { tekst: "Gratis website en rebranding", sterk: true },
@@ -281,7 +285,7 @@ export const CONNECT: Pakket[] = [
     id: "compleet",
     naam: "Compleet",
     prijs: "€5.000",
-    per: "per maand",
+    per: "per maand, minimaal 3 maanden",
     belofte: "Marketing en financiën, volledig geregeld.",
     punten: [
       { tekst: "Gratis website en rebranding", sterk: true },
@@ -448,7 +452,7 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
       </ul>
       <Rij
         id="connect"
-        label="02 / Connect-pakketten · per periode van 3 maanden"
+        label="02 / Connect-pakketten"
         titel="Wij doen het werk, met échte mensen"
         tekst="In elk pakket maken we je website, custom OS, branding, content en advertenties. Hoe verder je gaat, hoe meer mensen er voor je werken."
         pakketten={CONNECT}

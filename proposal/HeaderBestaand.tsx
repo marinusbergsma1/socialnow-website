@@ -139,7 +139,8 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <div className="visual milos bs-milos">{MILOS.map(m => <figure key={m.rol}><MiloMotion role={m.rol} name={`Milo ${m.naam}`} maat={128} /><figcaption>{m.naam}</figcaption></figure>)}</div>
                 {/* Marinus, 18 oktober 2026: "PAKKETTEN HOEVEN HIER NIET EN SOORTEN DIENSTEN OOK NIET ZODAT ALLES MOOI IN 1 1920X1080 BLIJFT."
                     Dus geen tokenpakketten meer in de header; die kies je na het aanmaken van je account. */}
-                <p className="bs-uitleg bs-uitleg-kort"><strong>Gratis tot 10 GB aan opslag.</strong></p>
+                {/* 22 oktober 2026 (Marinus): "Free up to 10 GB of storage." was verwarrend; het gaat over de teamgrootte: "Free for teams of up to 2". */}
+                <p className="bs-uitleg bs-uitleg-kort"><strong>Gratis voor teams tot 2 personen.</strong></p>
                 <div className="action os-account-actions">
                   <a className="pill" href={`${GRATIS_OS_URL}?pakket=gratis`} onClick={() => meet("gratis_os")}><span translate="no">Start for free</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
                   <a className="pill os-login-secondary" href={GRATIS_OS_URL} onClick={() => meet("gratis_os")}><span>Log in</span><span className="arrow"><ArrowUpRight size={17} /></span></a>

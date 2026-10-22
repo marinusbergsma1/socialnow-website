@@ -3482,5 +3482,15 @@
   "Alleen openbare informatie: je homepage, hooguit vijf gelinkte pagina's, DNS en Google PageSpeed. Bekende lekken komen uit OSV.dev en WordPress.org.": "Public information only: your homepage, at most five linked pages, DNS and Google PageSpeed. Known vulnerabilities come from OSV.dev and WordPress.org.",
   "Vijf punten van je website.": "Five points about your website.",
   "Niet te meten": "Not measurable",
-  "Voeg een Permissions-Policy toe, bijvoorbeeld camera=(), microphone=(), geolocation=().": "Add a Permissions-Policy, for example camera=(), microphone=(), geolocation=()."
+  "Voeg een Permissions-Policy toe, bijvoorbeeld camera=(), microphone=(), geolocation=().": "Add a Permissions-Policy, for example camera=(), microphone=(), geolocation=().",
+  "Gratis voor teams tot 2 personen.": "Free for teams of up to 2.",
+  "GRATIS voor teams tot 2 personen": "FREE for teams of up to 2",
+  "Met 10 GB opslag. Groter team? Kies Business of Enterprise.": "With 10 GB of storage. Bigger team? Choose Business or Enterprise.",
+  "voor altijd": "forever",
+  "per maand bij jaarabonnement": "per month, billed yearly",
+  "per maand, minimaal 3 maanden": "per month, minimum 3 months",
+  "02 / Connect-pakketten": "02 / Connect packages",
+  "Teams tot 2 personen": "Teams of up to 2 people",
+  "Teams tot 5 personen": "Teams of up to 5 people",
+  "Teams tot 10 personen": "Teams of up to 10 people"
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Proef: slotblok op de homepage (Closing compact in proposal/ui.tsx), Marinus 19 okt 2026: "Dit kan ook nog beter plus klopt
-// niet helemaal meer." Het moet het gratis pakket van nu noemen (10 GB, 2 mensen, gratis website en rebranding), niet de oude
+// niet helemaal meer." Het moet het gratis pakket van nu noemen (teams tot 2 personen, 10 GB, gratis website en rebranding; 22 okt 2026), niet de oude
 // regel "Onder 10 GB schrijven we niets af", en de knoppen zijn groen met wit of wit met groen, nooit zwart.
 // Gebruik: node scripts/check-slot-gratis-os.mjs [--dist]   (rood op main vóór de wijziging, groen erna)
 import fs from "node:fs";
@@ -8,7 +8,7 @@ const fouten = [];
 const eis = (ok, tekst) => { console.log(`${ok ? "GROEN" : "ROOD "}  ${tekst}`); if (!ok) fouten.push(tekst); };
 const ui = fs.readFileSync("proposal/ui.tsx", "utf8");
 const blok = ui.slice(ui.indexOf("if (compact)"), ui.indexOf("</section>;", ui.indexOf("if (compact)")));
-const PUNTEN = ["10 GB opslag", "Nodig 2 mensen uit", "Gratis website en rebranding"];
+const PUNTEN = ["Teams tot 2 personen", "10 GB opslag", "Gratis website en rebranding"];
 eis(!blok.includes("schrijven we niets af"), "oude regel over afschrijven is weg");
 eis(PUNTEN.every(p => blok.includes(p)), `noemt het gratis pakket van nu: ${PUNTEN.join(", ")}`);
 eis(blok.includes("GRATIS_OS_URL") && blok.includes('to="/diensten#prijzen"'), "knop naar het gratis OS en naar de pakketten");

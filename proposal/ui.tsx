@@ -338,7 +338,7 @@ export function Closing({ compact = false }: { compact?: boolean }) {
     {/* 19 oktober 2026 (Marinus): "Dit kan ook nog beter plus klopt niet helemaal meer." Dus het gratis pakket van nu en twee
         knoppen in de knopregel (groen met wit, wit met groen), in plaats van de oude afschrijfzin en een zwarte knop. */}
     <ul className="sn-slot-punten">
-      {["10 GB opslag", "Nodig 2 mensen uit", "Gratis website en rebranding"].map(p => <li key={p}><Check size={16} strokeWidth={3} aria-hidden="true" />{p}</li>)}
+      {["Teams tot 2 personen", "10 GB opslag", "Gratis website en rebranding"].map(p => <li key={p}><Check size={16} strokeWidth={3} aria-hidden="true" />{p}</li>)}
     </ul>
     <p>Meer nodig? Kies later Business of Enterprise.</p>
     <div className="sn-slot-knoppen">
