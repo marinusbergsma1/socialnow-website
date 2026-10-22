@@ -7,8 +7,11 @@ import "./explainer-player.css";
 // (ConnectExperts.tsx), met eigen poster, cachebuster en een blauwe knop.
 // 22 oktober 2026 (Marinus): geen filmframe meer als voorbeeldbeeld van de OS-film (water dat in een zwembad spat) maar een
 // startbeeld in HTML/CSS dat vertrouwen wekt vóór iemand de film start: donker vlak met een dunne witte rand.
-//   Boven: SocialNow OS x Indexworld en SocialNow Connect x Uncanny, zoals de partnerkaarten op de site (PR #125). Marinus wil hier
-//   wél de partners; dat gaat op deze plek voor de regel "geen partnerlogo's" van 19 oktober. Het Connect-logo is het logo van de
+//   Boven: SocialNow OS en SocialNow Connect, daaronder "In partnership with:" met attesso x Komen Consultancy Operation Systems x
+//   Uncanny x Indexworld, in kleur en gescheiden door een kleine grijze x, naar de referentie van Marinus (22 okt). Marinus wil hier
+//   wél de partners; dat gaat op deze plek voor de regel "geen partnerlogo's" van 19 oktober. Komen en Attesso komen uit het
+//   partnerblok (05_SALES/12PROCENT-2026-10-20/partnerblok): Attesso is daar het beeldmerk ~/a met de naam ernaast. Nooit het oude
+//   chrome-lockup uit de prullenbak. Het Connect-logo is het logo van de
 //   site zonder schuine streep, bijgesneden en in de blauwtint van de site; met 1,02 x de hoogte van het OS-logo is het woord
 //   SocialNow in beide even breed en dus even groot (gemeten: woordbreedte/hoogte OS 3,955, Connect 3,889).
 //   Midden: de afspeelknop, groot, met daaronder één zin. Onder: Trusted by, eerlijk met de route: AZ en Supperclub direct,
@@ -33,13 +36,27 @@ const merk = (m: { naam: string; src: string; w: number; h: number; kleur?: bool
   <img key={m.naam} className={m.kleur ? "is-kleur" : undefined} src={m.src} alt={m.naam} translate="no" width={m.w} height={m.h} loading="lazy" decoding="async" style={{ "--maat": m.maat } as React.CSSProperties} />;
 function Startbeeld({ label, zinId }: { label: string; zinId: string }) {
   return <span className="sn-startbeeld">
-    <span className="sn-startbeeld-paren" aria-hidden="true">
-      <img className="sn-startbeeld-os" src="/images/merk/socialnow-os-bijgesneden.webp" alt="" width="596" height="88" decoding="async" />
-      <X className="sn-startbeeld-x" size={14} aria-hidden="true" />
-      <img className="sn-startbeeld-partner is-wit" src="/images/home-header/indexworld.png" alt="" width="725" height="176" decoding="async" />
-      <img className="sn-startbeeld-connect" src="/images/merk/socialnow-connect.webp" alt="" width="782" height="88" decoding="async" />
-      <X className="sn-startbeeld-x" size={14} aria-hidden="true" />
-      <img className="sn-startbeeld-partner" src="/images/home-header/uncanny-op-zwart.svg" alt="" width="1365" height="300" decoding="async" />
+    <span className="sn-startbeeld-boven" aria-hidden="true">
+      <span className="sn-startbeeld-merk">
+        <img className="sn-startbeeld-os" src="/images/merk/socialnow-os-bijgesneden.webp" alt="" width="596" height="88" decoding="async" />
+        <img className="sn-startbeeld-connect" src="/images/merk/socialnow-connect.webp" alt="" width="782" height="88" decoding="async" />
+      </span>
+      <span className="sn-startbeeld-partnerschap">
+        <span className="sn-startbeeld-label" translate="no">In partnership with:</span>
+        <span className="sn-startbeeld-partners">
+          <span className="sn-startbeeld-pgroep">
+            <span className="sn-startbeeld-attesso"><img src="/images/merken/ATTESSO-MARK.png" alt="" width="330" height="170" decoding="async" /><span translate="no">Attesso</span></span>
+            <X className="sn-startbeeld-x" size={12} aria-hidden="true" />
+            <img className="sn-startbeeld-komen" src="/images/merken/komen-operation-systems-partnerblok.webp" alt="" width="900" height="143" decoding="async" />
+          </span>
+          <X className="sn-startbeeld-x sn-startbeeld-x-groep" size={12} aria-hidden="true" />
+          <span className="sn-startbeeld-pgroep">
+            <img className="sn-startbeeld-partner" src="/images/home-header/uncanny-op-zwart.svg" alt="" width="1365" height="300" decoding="async" />
+            <X className="sn-startbeeld-x" size={12} aria-hidden="true" />
+            <img className="sn-startbeeld-partner is-wit" src="/images/home-header/indexworld.png" alt="" width="725" height="176" decoding="async" />
+          </span>
+        </span>
+      </span>
     </span>
     <span className="sn-startbeeld-midden">
       <span className="sn-pill sn-startbeeld-knop"><span>{label}</span><span className="h-button-icon"><ArrowUpRight size={20} aria-hidden="true" /></span></span>

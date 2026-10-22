@@ -13,20 +13,28 @@ html:root .sn-site .sn-pill.sn-pill-connect > span:not(.h-button-icon){color:#ff
 html:root .sn-site .sn-pill.sn-pill-connect .h-button-icon{background:#fff !important;color:#00739e !important}
 
 /* 22 oktober 2026 (Marinus): startbeeld van de OS-film in HTML/CSS in plaats van een filmframe (water in een zwembad).
-   Zwart vlak, dunne witte rand. Boven SocialNow OS x Indexworld en SocialNow Connect x Uncanny: de SocialNow-logo's links
-   uitgelijnd, zodat bol en woord SocialNow precies onder elkaar staan. Midden de afspeelknop met één zin. Onder Trusted by,
+   Zwart vlak, dunne witte rand. Boven SocialNow OS en SocialNow Connect, daaronder In partnership with. Midden de afspeelknop met één zin. Onder Trusted by,
    rustig van kleur (wit of grijs, 72 procent dekking), optisch even hoog. Letters nooit aan elkaar. Het vlak houdt 16:9 en
    groeit mee als de inhoud op een smal scherm meer ruimte vraagt. In de speler ligt hetzelfde startbeeld over de film tot die speelt. */
 html:root .sn-site .sn-explainer-cover.sn-explainer-start{container-type:inline-size;display:block;position:relative;width:100%;aspect-ratio:auto;padding:0;margin:0;background:#000;border:1px solid #ffffffd9;border-radius:12px;overflow:hidden;color:#fff;font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0}
-html:root .sn-site .sn-explainer-start>.sn-startbeeld{position:relative;inset:auto;transform:none;display:grid;grid-template-rows:auto 1fr auto;justify-items:center;gap:clamp(14px,3cqi,22px);width:100%;aspect-ratio:16/9;padding:clamp(18px,4.6cqi,32px) clamp(14px,4.6cqi,36px);border:0;border-radius:0;background:transparent;white-space:normal;font-size:inherit;font-weight:inherit;--logo-h:clamp(15px,min(4.3cqi,calc((100cqi - 80px) / 14.2)),30px);--merk-h:clamp(14px,2.8cqi,20px)}
+html:root .sn-site .sn-explainer-start>.sn-startbeeld{position:relative;inset:auto;transform:none;display:grid;grid-template-rows:auto 1fr auto;justify-items:center;gap:clamp(14px,3cqi,22px);width:100%;aspect-ratio:16/9;padding:clamp(18px,4.6cqi,32px) clamp(14px,4.6cqi,36px);border:0;border-radius:0;background:transparent;white-space:normal;font-size:inherit;font-weight:inherit;--logo-h:clamp(15px,min(3.9cqi,calc((100cqi - 100px) / 15.9)),28px);--merk-h:clamp(14px,2.8cqi,20px)}
 html:root .sn-site .sn-explainer-start img{aspect-ratio:auto;max-width:none;flex:none}
-html:root .sn-site .sn-startbeeld-paren{display:grid;grid-template-columns:auto auto auto;align-items:center;justify-items:start;gap:clamp(6px,1.6cqi,10px) clamp(10px,2.4cqi,16px)}
-html:root .sn-site .sn-startbeeld-paren img{display:block;width:auto}
+html:root .sn-site .sn-startbeeld-boven{display:flex;flex-direction:column;align-items:center;gap:clamp(12px,2.6cqi,18px);max-width:100%}
+html:root .sn-site .sn-startbeeld-merk{display:flex;align-items:center;justify-content:center;gap:clamp(14px,3.6cqi,28px)}
+html:root .sn-site .sn-startbeeld-boven img{display:block;width:auto}
+/* In partnership with: één rij in kleur, gescheiden door een kleine grijze x (referentie Marinus 22 okt). Twee paren, zodat de rij op
+   een smal vlak netjes in tweeën breekt en de x tussen de paren dan wegvalt. */
+html:root .sn-site .sn-startbeeld-partnerschap{display:flex;flex-direction:column;align-items:center;gap:9px}
+html:root .sn-site .sn-startbeeld-partners{--p-h:clamp(12px,2.4cqi,16px);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px clamp(10px,2.2cqi,14px)}
+html:root .sn-site .sn-startbeeld-pgroep{display:flex;align-items:center;gap:clamp(10px,2.2cqi,14px)}
+html:root .sn-site .sn-startbeeld-attesso{display:flex;align-items:center;gap:6px;color:#fff;font:700 calc(var(--p-h) * 1.05)/1 Arial,Helvetica,sans-serif;letter-spacing:-.01em}
+html:root .sn-site .sn-startbeeld-attesso img{height:calc(var(--p-h) * 1.15);filter:invert(1)}
+html:root .sn-site .sn-startbeeld-komen{height:calc(var(--p-h) * 1.5)}
 html:root .sn-site .sn-startbeeld-os{height:var(--logo-h)}
 html:root .sn-site .sn-startbeeld-connect{height:calc(var(--logo-h) * 1.017)}
-html:root .sn-site .sn-startbeeld-partner{height:calc(var(--logo-h) * 1.1)}
+html:root .sn-site .sn-startbeeld-partner{height:calc(var(--p-h) * 1.6)}
 html:root .sn-site .sn-startbeeld-partner.is-wit{filter:brightness(0) invert(1)}
-html:root .sn-site .sn-startbeeld-x{color:#7d8f86;justify-self:center}
+html:root .sn-site .sn-startbeeld-x{flex:none;color:#7d8f86}
 html:root .sn-site .sn-startbeeld-midden{align-self:center;display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2.2cqi,16px)}
 html:root .sn-site .sn-startbeeld-zin{max-width:44ch;margin:0;font-size:clamp(13px,2.3cqi,16px);font-weight:500;line-height:1.45;letter-spacing:0;text-align:center;text-transform:none;color:#c6d3cc;text-wrap:balance}
 html:root .sn-site .sn-startbeeld-trusted{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;padding-top:clamp(10px,2.2cqi,14px);border-top:1px solid #ffffff1f}
@@ -46,7 +54,9 @@ html:root .sn-site .sn-startbeeld-knop .h-button-icon{color:#002912 !important}
 html:root .sn-site .sn-explainer-start:is(:hover,:focus-visible) .sn-pill::before{transform:translateX(0)}
 html:root .sn-site .sn-explainer-start:is(:hover,:focus-visible) .sn-pill .h-button-icon{background:#fff !important;color:var(--sn-pill-green) !important}
 @container (max-width:520px){
-  html:root .sn-site .sn-explainer-start>.sn-startbeeld{--logo-h:clamp(15px,calc((100cqi - 72px) / 14.2),24px);--merk-h:15px;gap:14px}
+  html:root .sn-site .sn-explainer-start>.sn-startbeeld{--logo-h:clamp(15px,calc((100cqi - 72px) / 9.2),22px);--merk-h:15px;gap:14px}
+  html:root .sn-site .sn-startbeeld-merk{flex-direction:column;gap:8px}
+  html:root .sn-site .sn-startbeeld-x-groep{display:none}
   html:root .sn-site .sn-startbeeld-groep+.sn-startbeeld-groep{padding-left:0;border-left:0}
   html:root .sn-site .sn-startbeeld>.sn-startbeeld-midden>.sn-pill{--sn-pill-height:52px;font-size:12px !important;padding-left:20px;gap:14px}
 }
