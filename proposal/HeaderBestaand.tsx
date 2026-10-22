@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Check, LayoutDashboard, ShieldCheck, Users } from "lucide-react";
 import { klein } from "./licht";
@@ -76,35 +76,8 @@ const ONDERDELEN: Record<string, string[]> = {
 // bedrijf. Mag blijven". Titel terug; de getypte regel zegt nu dat het systeem van jou is, de zin eronder gratis en echt werk.
 // 19 oktober 2026, later (Marinus): "Get more out of your business. En daaronder, more insights, better management everything
 // custom made plug and play". Titel "Haal meer uit je bedrijf."; de getypte regel noemt die vier.
-const ZINNEN = ["Meer inzicht.", "Beter management.", "Alles op maat.", "Plug and play."];
-const TIK = 55, WEG = 28, STAAN = 3000;
-
-function Typer() {
-  // De zinnen worden vooraf vertaald: de getypte tussenstukken staan niet in het woordenboek.
-  const { language, t } = useLanguage();
-  const zinnen = ZINNEN.map(z => t(z));
-  const [tekst, setTekst] = useState(zinnen[0]);
-  useEffect(() => {
-    const ZINNEN = zinnen;
-    setTekst(ZINNEN[0]);
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let i = 0, n = ZINNEN[0].length, weg = true, t = window.setTimeout(stap, STAAN);
-    function stap() {
-      const zin = ZINNEN[i];
-      if (weg) {
-        n--; setTekst(zin.slice(0, n));
-        if (n === 0) { weg = false; i = (i + 1) % ZINNEN.length; }
-        t = window.setTimeout(stap, WEG);
-      } else {
-        const nieuw = ZINNEN[i]; n++; setTekst(nieuw.slice(0, n));
-        if (n === nieuw.length) { weg = true; t = window.setTimeout(stap, STAAN); }
-        else t = window.setTimeout(stap, TIK);
-      }
-    }
-    return () => window.clearTimeout(t);
-  }, [language]);
-  return <span className="bs-typer" translate="no"><span className="bs-sr">{zinnen.join(" ")}</span><span aria-hidden="true">{tekst}<i className="bs-cursor" /></span></span>;
-}
+// 22 oktober 2026 (Marinus): "A trusted growth and cyber security partner." en "Ipv dit en veranderende tekst. Gewoon bam
+// dat statement". De titel is alleen dat statement; de getypte regel is weg.
 
 // Een keuzegroep zoals een radiogroep hoort te werken: Tab gaat naar de gekozen optie, de pijltjes wisselen.
 function pijltjes(e: React.KeyboardEvent<HTMLElement>, ids: string[], nu: string, kies: (id: string) => void) {
@@ -195,12 +168,13 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
               <div className="video-title">
                 {/* 19 oktober 2026 (Marinus): "Graag nooit 3 regels onder elkaar. Maximaal 2." De lettergrootte schaalt met de kolom en
                     met de lengte van de titel in de gekozen taal (--tekens), zodat hij in elke taal op twee regels past. */}
-                <h1 style={{ "--tekens": t("Haal meer uit je bedrijf.").length } as React.CSSProperties}>Haal meer uit je bedrijf. <Typer /></h1>
+                <h1 style={{ "--tekens": t("Een betrouwbare partner voor groei en cybersecurity.").length } as React.CSSProperties}>Een betrouwbare partner voor groei en cybersecurity.</h1>
                 <p className="pay-line">De software is gratis. Onze experts doen het echte werk.</p>
                 <ul className="bs-zeker">
                   {/* 18 oktober 2026 (Marinus): "Die punten eronderaan Gratis website en rebranding, veilig. Eigen beheer en keuzes." */}
-                  <li><ShieldCheck size={15} aria-hidden="true" /><b>Gratis website en rebranding</b></li>
-                  <li><ShieldCheck size={15} aria-hidden="true" /><Link to="/veiligheid" onClick={() => meet("veiligheid")}>Veilig</Link></li>
+                  {/* 22 oktober 2026 (Marinus): "Hier graag growth - security - en eigen beheer en keuzes is wel goed." */}
+                  <li><ShieldCheck size={15} aria-hidden="true" />Groei</li>
+                  <li><ShieldCheck size={15} aria-hidden="true" /><Link to="/veiligheid" onClick={() => meet("veiligheid")}>Veiligheid</Link></li>
                   <li><ShieldCheck size={15} aria-hidden="true" />Eigen beheer en keuzes</li>
                 </ul>
               </div>
