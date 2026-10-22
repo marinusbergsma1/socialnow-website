@@ -63,5 +63,10 @@
       "destination": "/:taal/check",
       "permanent": true
     }
-  ]
+  ],
+  "functions": {
+    "api/check-rapport.js": {
+      "maxDuration": 60
+    }
+  }
 }

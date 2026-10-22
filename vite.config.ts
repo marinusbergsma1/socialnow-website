@@ -29,7 +29,7 @@ export default defineConfig({
     // Zonder dit gaf een lokale preview HTML terug op /api/php-check en zag de bezoeker "De check lukte niet".
     (() => {
       const koppel = (middlewares: { use: (pad: string, fn: (req: any, res: any) => void) => void }) => {
-        for (const naam of ["php-check", "check-aanvraag"]) {
+        for (const naam of ["php-check", "check-aanvraag", "check-rapport"]) {
           middlewares.use(`/api/${naam}`, async (req, res) => {
             const stukken: Buffer[] = [];
             for await (const s of req) stukken.push(s as Buffer);
