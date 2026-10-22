@@ -52,6 +52,21 @@
       "source": "/:taal(nl|de|fr|es|it|pt|pl|sv|da)/prijzen",
       "destination": "/:taal/diensten#prijzen",
       "permanent": true
+    },
+    {
+      "source": "/php-check",
+      "destination": "/check",
+      "permanent": true
+    },
+    {
+      "source": "/:taal(nl|de|fr|es|it|pt|pl|sv|da)/php-check",
+      "destination": "/:taal/check",
+      "permanent": true
     }
-  ]
+  ],
+  "functions": {
+    "api/check-rapport.js": {
+      "maxDuration": 60
+    }
+  }
 }
