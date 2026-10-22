@@ -185,11 +185,13 @@ function Oproepen({ domein = "", uitslag, anker = false }: { domein?: string; ui
     const kijk = () => {
       if (window.location.hash !== "#aanvraag") return;
       zetOpen("scan");
-      requestAnimationFrame(() => plek.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+      // De pagina bouwt na het laden nog op (taalwissel, film, rapport), dus een paar keer opnieuw in beeld zetten.
+      for (const ms of [0, 300, 900, 1800]) wekkers.push(window.setTimeout(() => plek.current?.scrollIntoView({ block: "start" }), ms));
     };
+    const wekkers: number[] = [];
     kijk();
     window.addEventListener("hashchange", kijk);
-    return () => window.removeEventListener("hashchange", kijk);
+    return () => { window.removeEventListener("hashchange", kijk); wekkers.forEach((w) => window.clearTimeout(w)); };
   }, [anker]);
   const knop = (tekst: React.ReactNode) => (
     <><span>{tekst}</span><span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span></>
