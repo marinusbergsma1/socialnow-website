@@ -1,0 +1,44 @@
+/* 22 oktober 2026 (Marinus): redesign van Mijn story op /team. Portret in een vaste verhouding, de storyfilm groot, het waarom
+   eronder, en daaronder de samenwerking met Indexworld en Uncanny. Alles op de zwarte grond van de site, letters nooit aan elkaar. */
+.sn-site .vs-story,.sn-site .vs-samen{font-variant-ligatures:none}
+html:root .sn-site .vs-story h2,html:root .sn-site .vs-samen h2{margin:14px 0 0;letter-spacing:0;text-wrap:balance}
+html:root .sn-site .vs-story h2 span{color:#25d366}
+.sn-site .vs-raster{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,8fr);gap:clamp(16px,2.4vw,28px);align-items:start;margin-top:clamp(24px,3.4vw,40px)}
+.sn-site .vs-raster>*{min-width:0}
+.sn-site .vs-portret{margin:0;border:1px solid #ffffff1f;border-radius:20px;overflow:hidden;background:#0a0f0c}
+.sn-site .vs-portret img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%}
+.sn-site .vs-portret figcaption{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;column-gap:12px;align-items:center;padding:16px 18px}
+.sn-site .vs-portret strong{font-size:18px;font-weight:700;color:#fff}
+.sn-site .vs-portret figcaption>span{grid-row:2;font-size:14px;color:#a9b5ae}
+.sn-site .vs-portret a{grid-column:2;grid-row:1/3;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:1px solid #ffffff33;border-radius:999px;color:#fff;font-size:13px;font-weight:700;text-decoration:none}
+.sn-site .vs-portret a:hover{border-color:#fff}
+.sn-site .vs-portret a svg{width:16px;height:16px}
+.sn-site .vs-film{display:flex;flex-direction:column;gap:16px}
+.sn-site .vs-label{margin:0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a9b5ae}
+.sn-site .vs-video{display:block;width:100%;height:auto;aspect-ratio:16/9;border:1px solid #ffffffd9;border-radius:16px;background:#000;object-fit:cover}
+.sn-site .vs-film .h-verhaal-waarom{margin:0;padding:20px 22px;border:1px solid #ffffff1f;border-radius:16px;background:#0a0f0c}
+.sn-site .vs-film .h-verhaal-waarom blockquote{margin:0}
+.sn-site .vs-film .h-verhaal-waarom blockquote p{margin:0;font-size:clamp(17px,1.6vw,21px);line-height:1.4;color:#fff}
+.sn-site .vs-film .h-verhaal-waarom figcaption{display:flex;align-items:center;gap:12px;margin-top:14px}
+.sn-site .vs-film .h-verhaal-waarom figcaption img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.sn-site .vs-film .h-verhaal-waarom figcaption>span{display:flex;flex-direction:column;font-size:13px;color:#a9b5ae}
+.sn-site .vs-film .h-verhaal-waarom figcaption strong{color:#fff;font-size:14px}
+.sn-site .vs-onder{display:flex}
+.sn-site .vs-samen .sn-samen.sn-samen-los{margin-top:clamp(20px,3vw,32px);background:transparent;border:0}
+@media(max-width:860px){.sn-site .vs-raster{grid-template-columns:1fr}.sn-site .vs-film{order:-1}.sn-site .vs-portret{max-width:440px}.sn-site .vs-portret img{aspect-ratio:1/1}}
+
+/* 22 oktober 2026: het team op /team in verhouding. De drie partnerteams naast elkaar, kleinere portretten in een vaste verhouding,
+   en de uitleg over partners als rustig donker vlak in plaats van een licht blok. Alleen op /team (.vs-team). */
+html:root .sn-site .vs-team .h-partner-uitleg{background:#0a0f0c;border:1px solid #ffffff1f;color:#c6d3cc}
+html:root .sn-site .vs-team .h-partner-uitleg :is(h3,p){color:inherit}
+html:root .sn-site .vs-team .h-partner-uitleg h3{color:#fff}
+html:root .sn-site .vs-team .h-teams-duo{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}
+html:root .sn-site .vs-team .h-team-duo .h-people-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+html:root .sn-site .vs-team .h-team-duo.is-fincer .h-people-grid{grid-template-columns:minmax(0,1fr)}
+html:root .sn-site .vs-team .h-team-duo .h-portrait{aspect-ratio:4/5;overflow:hidden;border-radius:14px}
+html:root .sn-site .vs-team .h-team-duo .h-portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+html:root .sn-site .vs-team .h-team-duo.is-fincer .sn-wealth-body{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+html:root .sn-site .vs-team .h-team-duo.is-fincer .h-portrait{aspect-ratio:16/10}
+html:root .sn-site .vs-team .h-teams-duo>:not(.h-team-duo){grid-column:1/-1}
+@media(max-width:1100px){html:root .sn-site .vs-team .h-teams-duo{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){html:root .sn-site .vs-team .h-teams-duo{grid-template-columns:1fr}}
