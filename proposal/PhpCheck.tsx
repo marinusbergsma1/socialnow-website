@@ -207,7 +207,7 @@ function Oproepen({ domein = "", uitslag, anker = false }: { domein?: string; ui
 }
 
 // 22 oktober 2026 (Marinus): de uitlegfilm (HyperFrames) onder de uitslag. Klik om af te spelen, ondertitels in NL of EN,
-// poster als voorbeeldbeeld; op mobiel de 9:16-versie.
+// poster als voorbeeldbeeld; op mobiel de 9:16-versie. Engels staat ingebrand, Nederlands als spoor.
 function Film() {
   const { language } = useLanguage();
   const [hoog, zetHoog] = useState(false);
@@ -232,8 +232,8 @@ function Film() {
         aria-label="Uitlegfilm: zo werkt de websitecheck"
       >
         <source src={`/websitecheck/film/check-${vorm}.mp4`} type="video/mp4" />
+        {/* De Engelse ondertitels staan in het beeld zelf; Nederlands krijgt een eigen spoor, bovenin. */}
         <track kind="subtitles" src="/websitecheck/film/check-nl.vtt" srcLang="nl" label="Nederlands" default={taal === "nl"} />
-        <track kind="subtitles" src="/websitecheck/film/check-en.vtt" srcLang="en" label="English" default={taal === "en"} />
       </video>
     </section>
   );
