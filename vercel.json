@@ -44,7 +44,7 @@
   ],
   "redirects": [
     {
-      "source": "/:pad*",
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "security.socialnow.nl" }],
       "destination": "https://socialnow.nl/security",
       "permanent": true
