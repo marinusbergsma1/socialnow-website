@@ -206,6 +206,39 @@ function Oproepen({ domein = "", uitslag, anker = false }: { domein?: string; ui
   );
 }
 
+// 22 oktober 2026 (Marinus): de uitlegfilm (HyperFrames) onder de uitslag. Klik om af te spelen, ondertitels in NL of EN,
+// poster als voorbeeldbeeld; op mobiel de 9:16-versie.
+function Film() {
+  const { language } = useLanguage();
+  const [hoog, zetHoog] = useState(false);
+  useEffect(() => {
+    const m = window.matchMedia("(max-width: 760px)");
+    const kies = () => zetHoog(m.matches);
+    kies();
+    m.addEventListener("change", kies);
+    return () => m.removeEventListener("change", kies);
+  }, []);
+  const vorm = hoog ? "9x16" : "16x9";
+  const taal = language === "nl" ? "nl" : "en";
+  return (
+    <section className="h-section h-wrap pc-film">
+      <video
+        key={vorm}
+        className={`pc-video pc-video-${vorm}`}
+        controls
+        playsInline
+        preload="none"
+        poster={`/websitecheck/film/poster-${vorm}.jpg`}
+        aria-label="Uitlegfilm: zo werkt de websitecheck"
+      >
+        <source src={`/websitecheck/film/check-${vorm}.mp4`} type="video/mp4" />
+        <track kind="subtitles" src="/websitecheck/film/check-nl.vtt" srcLang="nl" label="Nederlands" default={taal === "nl"} />
+        <track kind="subtitles" src="/websitecheck/film/check-en.vtt" srcLang="en" label="English" default={taal === "en"} />
+      </video>
+    </section>
+  );
+}
+
 // Officiële documenten (sessie check-documenten). Het blok verschijnt pas als hier bestanden staan die in public/ bestaan:
 // nooit een lege of kapotte link.
 const DOCUMENTEN: { naam: string; bestand: string }[] = [
@@ -353,6 +386,8 @@ export function PhpCheckPage() {
           )}
         </div>
       </section>
+
+      <Film />
 
       {/* 22 oktober 2026 (Marinus): direct onder de uitslag. De volgorde telt, dus genummerd. */}
       <section className="h-section h-wrap pc-zelf" id="zelf">
