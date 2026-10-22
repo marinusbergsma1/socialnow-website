@@ -1,0 +1,96 @@
+
+> php2shell-testbank@1.0.0 meet
+> node bin/meet.js http://127.0.0.1:4392/api/php-check
+
+Testbank draait al in een ander venster, die gebruik ik.
+
+php2shell-testbank: 75 gevallen tegen http://127.0.0.1:4392/api/php-check, beslisregels variant A
+
+geval                           verwacht              gekregen  versie verwacht                        versie gekregen                        oordeel
+------------------------------  --------------------  --------  -------------------------------------  -------------------------------------  -------
+upstream-8-5-11                 oranje                oranje    8.5.11                                 8.5.11                                 goed   
+upstream-8-4-26                 oranje                oranje    8.4.26                                 8.4.26                                 goed   
+upstream-8-3-35                 oranje                oranje    8.3.35                                 8.3.35                                 goed   
+upstream-8-2-34                 oranje                oranje    8.2.34                                 8.2.34                                 goed   
+upstream-8-1-31                 oranje                oranje    8.1.31                                 8.1.31                                 goed   
+upstream-7-4-30                 oranje                oranje    7.4.30                                 7.4.30                                 goed   
+valkuil-8-4-3                   oranje                oranje    8.4.3                                  8.4.3                                  goed   
+valkuil-8-0-30                  oranje                oranje    8.0.30                                 8.0.30                                 goed   
+valkuil-8-3-33                  oranje                oranje    8.3.33                                 8.3.33                                 goed   
+cpanel-ea-php84                 oranje                oranje    8.4.26                                 8.4.26                                 goed   
+docker-php-apache-8-4-26        oranje                oranje    8.4.26                                 8.4.26                                 goed   
+upstream-8-5-12                 groen                 groen     8.5.12                                 8.5.12                                 goed   
+upstream-8-4-27                 groen                 groen     8.4.27                                 8.4.27                                 goed   
+upstream-8-3-36                 groen                 groen     8.3.36                                 8.3.36                                 goed   
+upstream-8-2-35                 groen                 groen     8.2.35                                 8.2.35                                 goed   
+nieuwer-8-5-13                  groen                 groen     8.5.13                                 8.5.13                                 goed   
+nieuwer-8-6-0                   groen                 groen     8.6.0                                  8.6.0                                  goed   
+plesk-hersteld                  groen                 groen     8.4.27                                 8.4.27                                 goed   
+rhel9-8-2-35                    groen                 groen     8.2.35                                 8.2.35                                 goed   
+grote-pagina                    groen                 groen     8.5.12                                 8.5.12                                 goed   
+apache-connection-upgrade       groen                 groen     7.2.24-0ubuntu0.18.04.17+esm14         7.2.24-0ubuntu0.18.04.17+esm14         goed   
+ubuntu-jammy-hersteld           groen                 groen     8.1.2-1ubuntu2.28                      8.1.2-1ubuntu2.28                      goed   
+ubuntu-jammy-grens-2-27         rood                  rood      8.1.2-1ubuntu2.27                      8.1.2-1ubuntu2.27                      goed   
+ubuntu-jammy-juli-2-25          rood                  rood      8.1.2-1ubuntu2.25                      8.1.2-1ubuntu2.25                      goed   
+ubuntu-noble-hersteld           groen                 groen     8.3.6-0ubuntu0.24.04.13                8.3.6-0ubuntu0.24.04.13                goed   
+ubuntu-noble-grens-12           rood                  rood      8.3.6-0ubuntu0.24.04.12                8.3.6-0ubuntu0.24.04.12                goed   
+ubuntu-focal-esm5-hersteld      groen                 groen     7.4.3-4ubuntu2.29+esm5                 7.4.3-4ubuntu2.29+esm5                 goed   
+ubuntu-focal-grens-esm4         rood                  rood      7.4.3-4ubuntu2.29+esm4                 7.4.3-4ubuntu2.29+esm4                 goed   
+ubuntu-focal-zonder-pro         rood                  rood      7.4.3-4ubuntu2.24                      7.4.3-4ubuntu2.24                      goed   
+ubuntu-resolute-hersteld        groen                 groen     8.5.4-0ubuntu1.5                       8.5.4-0ubuntu1.5                       goed   
+ubuntu-stonking-hersteld        groen                 groen     8.5.9-0ubuntu2.1                       8.5.9-0ubuntu2.1                       goed   
+ubuntu-stonking-zonder-punt     rood                  rood      8.5.9-0ubuntu2                         8.5.9-0ubuntu2                         goed   
+ubuntu-versie-in-server-header  rood                  rood      8.1.2-1ubuntu2.27                      8.1.2-1ubuntu2.27                      goed   
+debian-bookworm-hersteld        groen                 groen     8.2.35-1~deb12u1                       8.2.35-1~deb12u1                       goed   
+debian-bookworm-kwetsbaar       rood                  rood      8.2.32-1~deb12u1                       8.2.32-1~deb12u1                       goed   
+debian-trixie-hersteld          groen                 groen     8.4.27-1~deb13u1                       8.4.27-1~deb13u1                       goed   
+debian-trixie-kwetsbaar         rood                  rood      8.4.24-1~deb13u1                       8.4.24-1~deb13u1                       goed   
+debian-sid-hersteld             groen                 groen     8.4.27-1                               8.4.27-1                               goed   
+debian-bullseye-onbekend        oranje (of onbekend)  oranje    7.4.33-1+deb11u8                       7.4.33-1+deb11u8                       goed   
+sury-8-3-35                     oranje (of rood)      rood      8.3.35-1+ubuntu24.04.1+deb.sury.org+1  8.3.35-1+ubuntu24.04.1+deb.sury.org+1  goed   
+sury-8-3-36                     groen                 groen     8.3.36-1+ubuntu22.04.1+deb.sury.org+1  8.3.36-1+ubuntu22.04.1+deb.sury.org+1  goed   
+alma9-8-0-30                    oranje (of onbekend)  oranje    8.0.30                                 8.0.30                                 goed   
+alma9-8-2-31                    oranje (of rood)      oranje    8.2.31                                 8.2.31                                 goed   
+rhel8-7-4-33                    oranje (of onbekend)  oranje    7.4.33                                 7.4.33                                 goed   
+rocky9-8-0-30                   oranje (of onbekend)  oranje    8.0.30                                 8.0.30                                 goed   
+alma10-8-4-24                   oranje (of onbekend)  oranje    8.4.24                                 8.4.24                                 goed   
+verborgen-phpsessid             onbekend              onbekend  null                                   null                                   goed   
+verborgen-laravel               onbekend              onbekend  null                                   null                                   goed   
+alleen-server-header            onbekend              onbekend  null                                   null                                   goed   
+wordpress-generator             onbekend              onbekend  null                                   null                                   goed   
+wordpress-cloudflare            onbekend              onbekend  null                                   null                                   goed   
+hostinger-onder-fix             oranje                oranje    8.2.34                                 8.2.34                                 goed   
+hostinger-hersteld              groen                 groen     8.3.36                                 8.3.36                                 goed   
+hostinger-verborgen             onbekend              onbekend  null                                   null                                   goed   
+redirect-https                  groen                 groen     8.4.27                                 8.4.27                                 goed   
+redirect-www                    rood                  rood      8.1.2-1ubuntu2.25                      8.1.2-1ubuntu2.25                      goed   
+redirect-ketting                groen                 groen     8.5.12                                 8.5.12                                 goed   
+redirect-lus                    onbekend              onbekend  null                                   null                                   goed   
+redirect-naar-prive-ip          onbekend              onbekend  null                                   null                                   goed   
+redirect-andere-poort           onbekend              onbekend  null                                   null                                   goed   
+alleen-http                     groen                 groen     8.2.35                                 8.2.35                                 goed   
+invoer-met-schema               groen                 groen     8.5.12                                 8.5.12                                 goed   
+traag-6s                        groen                 groen     8.5.12                                 8.5.12                                 goed   
+timeout                         onbekend              onbekend  null                                   null                                   goed   
+fout-500-met-versie             rood                  rood      8.4.26-1~deb13u1                       8.4.26-1~deb13u1                       goed   
+fout-500-zonder-info            onbekend              onbekend  null                                   null                                   goed   
+waf-403                         onbekend              onbekend  null                                   null                                   goed   
+tls-ongeldig                    rood (of onbekend)    rood      8.3.6-0ubuntu0.24.04.12                8.3.6-0ubuntu0.24.04.12                goed   
+verbinding-verbroken            onbekend              onbekend  null                                   null                                   goed   
+rommel                          onbekend              onbekend  null                                   null                                   goed   
+domein-bestaat-niet             onbekend              onbekend  null                                   null                                   goed   
+nextjs-vercel                   onbekend              onbekend  null                                   null                                   goed   
+statisch-github-pages           onbekend              onbekend  null                                   null                                   goed   
+nextjs-artikel-over-php         onbekend              onbekend  null                                   null                                   goed   
+express-node                    onbekend              onbekend  null                                   null                                   goed   
+
+Totaal: 75 gevallen, 75 goed, 0 fout
+  fout-rood     0  x5  rood genoemd terwijl dat niet mocht (kost vertrouwen, weegt het zwaarst)
+  fout-groen    0  x3  groen genoemd terwijl dat niet mocht (verzwijgt risico)
+  fout          0  x1  andere verkeerde uitslag
+  versie        0  x1  uitslag goed, PHP-versie fout
+  ongeldig      0  x1  geen geldig antwoord volgens CONTRACT.md
+Strafpunten: 0
+Score: (75 - 0) / 75 = 100.0%
+Eis voor groen: 0 fout-rood, 0 fout-groen en score minstens 90%
+Meting: GROEN

@@ -25,6 +25,8 @@ const ProjectsPage = later(() => import("./paginas").then((m) => m.ProjectsPage)
 const ServicesPage = later(() => import("./paginas").then((m) => m.ServicesPage));
 const TeamPage = later(() => import("./paginas").then((m) => m.TeamPage));
 const AuditPage = later(() => import("./AuditPage").then((m) => m.AuditPage));
+// 22 oktober 2026: gratis php2shell-check (api/php-check.js).
+const PhpCheckPage = later(() => import("./PhpCheck").then((m) => m.PhpCheckPage));
 const VacaturesPage = later(() => import("./VacaturesPage").then((m) => m.VacaturesPage));
 const InvesteerdersPage = later(() => import("./InvesteerdersPage").then((m) => m.InvesteerdersPage));
 // Opmaak blijft statisch, op de plek van voorheen (zie pages.tsx).
@@ -72,6 +74,7 @@ const paginaTitels: Record<string, string> = {
   "/blog": "Blog",
   "/contact": "Contact",
   "/audit": "Gratis Google Ads audit",
+  "/php-check": "Gratis php2shell-check",
   "/gratis-website": "Gratis website aanvragen",
   "/gratis-os-demo": "Gratis OS-demo",
   "/antwoord-aanvragen": "Antwoord op aanvragen",
@@ -293,6 +296,7 @@ function ProposalShell() {
           <Route path="/prijzen" element={<Navigate to="/diensten#prijzen" replace />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/audit" element={<AuditPage />} />
+          <Route path="/php-check" element={<PhpCheckPage />} />
           <Route path="/vacatures" element={<VacaturesPage />} />
           {/* 28 september 2026 (Marinus): investeerders doen een aanvraag naar invest@. /investors is een alias. */}
           <Route path="/investeerders" element={<InvesteerdersPage />} />

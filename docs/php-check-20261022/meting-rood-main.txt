@@ -1,0 +1,173 @@
+
+> php2shell-testbank@1.0.0 meet
+> node bin/meet.js http://127.0.0.1:4393/api/php-check
+
+Testbank draait al in een ander venster, die gebruik ik.
+
+php2shell-testbank: 75 gevallen tegen http://127.0.0.1:4393/api/php-check, beslisregels variant A
+
+geval                           verwacht              gekregen  versie verwacht                        versie gekregen  oordeel          
+------------------------------  --------------------  --------  -------------------------------------  ---------------  -----------------
+upstream-8-5-11                 oranje                -         8.5.11                                 -                ongeldig antwoord
+upstream-8-4-26                 oranje                -         8.4.26                                 -                ongeldig antwoord
+upstream-8-3-35                 oranje                -         8.3.35                                 -                ongeldig antwoord
+upstream-8-2-34                 oranje                -         8.2.34                                 -                ongeldig antwoord
+upstream-8-1-31                 oranje                -         8.1.31                                 -                ongeldig antwoord
+upstream-7-4-30                 oranje                -         7.4.30                                 -                ongeldig antwoord
+valkuil-8-4-3                   oranje                -         8.4.3                                  -                ongeldig antwoord
+valkuil-8-0-30                  oranje                -         8.0.30                                 -                ongeldig antwoord
+valkuil-8-3-33                  oranje                -         8.3.33                                 -                ongeldig antwoord
+cpanel-ea-php84                 oranje                -         8.4.26                                 -                ongeldig antwoord
+docker-php-apache-8-4-26        oranje                -         8.4.26                                 -                ongeldig antwoord
+upstream-8-5-12                 groen                 -         8.5.12                                 -                ongeldig antwoord
+upstream-8-4-27                 groen                 -         8.4.27                                 -                ongeldig antwoord
+upstream-8-3-36                 groen                 -         8.3.36                                 -                ongeldig antwoord
+upstream-8-2-35                 groen                 -         8.2.35                                 -                ongeldig antwoord
+nieuwer-8-5-13                  groen                 -         8.5.13                                 -                ongeldig antwoord
+nieuwer-8-6-0                   groen                 -         8.6.0                                  -                ongeldig antwoord
+plesk-hersteld                  groen                 -         8.4.27                                 -                ongeldig antwoord
+rhel9-8-2-35                    groen                 -         8.2.35                                 -                ongeldig antwoord
+grote-pagina                    groen                 -         8.5.12                                 -                ongeldig antwoord
+apache-connection-upgrade       groen                 -         7.2.24-0ubuntu0.18.04.17+esm14         -                ongeldig antwoord
+ubuntu-jammy-hersteld           groen                 -         8.1.2-1ubuntu2.28                      -                ongeldig antwoord
+ubuntu-jammy-grens-2-27         rood                  -         8.1.2-1ubuntu2.27                      -                ongeldig antwoord
+ubuntu-jammy-juli-2-25          rood                  -         8.1.2-1ubuntu2.25                      -                ongeldig antwoord
+ubuntu-noble-hersteld           groen                 -         8.3.6-0ubuntu0.24.04.13                -                ongeldig antwoord
+ubuntu-noble-grens-12           rood                  -         8.3.6-0ubuntu0.24.04.12                -                ongeldig antwoord
+ubuntu-focal-esm5-hersteld      groen                 -         7.4.3-4ubuntu2.29+esm5                 -                ongeldig antwoord
+ubuntu-focal-grens-esm4         rood                  -         7.4.3-4ubuntu2.29+esm4                 -                ongeldig antwoord
+ubuntu-focal-zonder-pro         rood                  -         7.4.3-4ubuntu2.24                      -                ongeldig antwoord
+ubuntu-resolute-hersteld        groen                 -         8.5.4-0ubuntu1.5                       -                ongeldig antwoord
+ubuntu-stonking-hersteld        groen                 -         8.5.9-0ubuntu2.1                       -                ongeldig antwoord
+ubuntu-stonking-zonder-punt     rood                  -         8.5.9-0ubuntu2                         -                ongeldig antwoord
+ubuntu-versie-in-server-header  rood                  -         8.1.2-1ubuntu2.27                      -                ongeldig antwoord
+debian-bookworm-hersteld        groen                 -         8.2.35-1~deb12u1                       -                ongeldig antwoord
+debian-bookworm-kwetsbaar       rood                  -         8.2.32-1~deb12u1                       -                ongeldig antwoord
+debian-trixie-hersteld          groen                 -         8.4.27-1~deb13u1                       -                ongeldig antwoord
+debian-trixie-kwetsbaar         rood                  -         8.4.24-1~deb13u1                       -                ongeldig antwoord
+debian-sid-hersteld             groen                 -         8.4.27-1                               -                ongeldig antwoord
+debian-bullseye-onbekend        oranje (of onbekend)  -         7.4.33-1+deb11u8                       -                ongeldig antwoord
+sury-8-3-35                     oranje (of rood)      -         8.3.35-1+ubuntu24.04.1+deb.sury.org+1  -                ongeldig antwoord
+sury-8-3-36                     groen                 -         8.3.36-1+ubuntu22.04.1+deb.sury.org+1  -                ongeldig antwoord
+alma9-8-0-30                    oranje (of onbekend)  -         8.0.30                                 -                ongeldig antwoord
+alma9-8-2-31                    oranje (of rood)      -         8.2.31                                 -                ongeldig antwoord
+rhel8-7-4-33                    oranje (of onbekend)  -         7.4.33                                 -                ongeldig antwoord
+rocky9-8-0-30                   oranje (of onbekend)  -         8.0.30                                 -                ongeldig antwoord
+alma10-8-4-24                   oranje (of onbekend)  -         8.4.24                                 -                ongeldig antwoord
+verborgen-phpsessid             onbekend              -         null                                   -                ongeldig antwoord
+verborgen-laravel               onbekend              -         null                                   -                ongeldig antwoord
+alleen-server-header            onbekend              -         null                                   -                ongeldig antwoord
+wordpress-generator             onbekend              -         null                                   -                ongeldig antwoord
+wordpress-cloudflare            onbekend              -         null                                   -                ongeldig antwoord
+hostinger-onder-fix             oranje                -         8.2.34                                 -                ongeldig antwoord
+hostinger-hersteld              groen                 -         8.3.36                                 -                ongeldig antwoord
+hostinger-verborgen             onbekend              -         null                                   -                ongeldig antwoord
+redirect-https                  groen                 -         8.4.27                                 -                ongeldig antwoord
+redirect-www                    rood                  -         8.1.2-1ubuntu2.25                      -                ongeldig antwoord
+redirect-ketting                groen                 -         8.5.12                                 -                ongeldig antwoord
+redirect-lus                    onbekend              -         null                                   -                ongeldig antwoord
+redirect-naar-prive-ip          onbekend              -         null                                   -                ongeldig antwoord
+redirect-andere-poort           onbekend              -         null                                   -                ongeldig antwoord
+alleen-http                     groen                 -         8.2.35                                 -                ongeldig antwoord
+invoer-met-schema               groen                 -         8.5.12                                 -                ongeldig antwoord
+traag-6s                        groen                 -         8.5.12                                 -                ongeldig antwoord
+timeout                         onbekend              -         null                                   -                ongeldig antwoord
+fout-500-met-versie             rood                  -         8.4.26-1~deb13u1                       -                ongeldig antwoord
+fout-500-zonder-info            onbekend              -         null                                   -                ongeldig antwoord
+waf-403                         onbekend              -         null                                   -                ongeldig antwoord
+tls-ongeldig                    rood (of onbekend)    -         8.3.6-0ubuntu0.24.04.12                -                ongeldig antwoord
+verbinding-verbroken            onbekend              -         null                                   -                ongeldig antwoord
+rommel                          onbekend              -         null                                   -                ongeldig antwoord
+domein-bestaat-niet             onbekend              -         null                                   -                ongeldig antwoord
+nextjs-vercel                   onbekend              -         null                                   -                ongeldig antwoord
+statisch-github-pages           onbekend              -         null                                   -                ongeldig antwoord
+nextjs-artikel-over-php         onbekend              -         null                                   -                ongeldig antwoord
+express-node                    onbekend              -         null                                   -                ongeldig antwoord
+
+Reden van de check bij elke fout:
+  upstream-8-5-11: HTTP 404
+  upstream-8-4-26: HTTP 404
+  upstream-8-3-35: HTTP 404
+  upstream-8-2-34: HTTP 404
+  upstream-8-1-31: HTTP 404
+  upstream-7-4-30: HTTP 404
+  valkuil-8-4-3: HTTP 404
+  valkuil-8-0-30: HTTP 404
+  valkuil-8-3-33: HTTP 404
+  cpanel-ea-php84: HTTP 404
+  docker-php-apache-8-4-26: HTTP 404
+  upstream-8-5-12: HTTP 404
+  upstream-8-4-27: HTTP 404
+  upstream-8-3-36: HTTP 404
+  upstream-8-2-35: HTTP 404
+  nieuwer-8-5-13: HTTP 404
+  nieuwer-8-6-0: HTTP 404
+  plesk-hersteld: HTTP 404
+  rhel9-8-2-35: HTTP 404
+  grote-pagina: HTTP 404
+  apache-connection-upgrade: HTTP 404
+  ubuntu-jammy-hersteld: HTTP 404
+  ubuntu-jammy-grens-2-27: HTTP 404
+  ubuntu-jammy-juli-2-25: HTTP 404
+  ubuntu-noble-hersteld: HTTP 404
+  ubuntu-noble-grens-12: HTTP 404
+  ubuntu-focal-esm5-hersteld: HTTP 404
+  ubuntu-focal-grens-esm4: HTTP 404
+  ubuntu-focal-zonder-pro: HTTP 404
+  ubuntu-resolute-hersteld: HTTP 404
+  ubuntu-stonking-hersteld: HTTP 404
+  ubuntu-stonking-zonder-punt: HTTP 404
+  ubuntu-versie-in-server-header: HTTP 404
+  debian-bookworm-hersteld: HTTP 404
+  debian-bookworm-kwetsbaar: HTTP 404
+  debian-trixie-hersteld: HTTP 404
+  debian-trixie-kwetsbaar: HTTP 404
+  debian-sid-hersteld: HTTP 404
+  debian-bullseye-onbekend: HTTP 404
+  sury-8-3-35: HTTP 404
+  sury-8-3-36: HTTP 404
+  alma9-8-0-30: HTTP 404
+  alma9-8-2-31: HTTP 404
+  rhel8-7-4-33: HTTP 404
+  rocky9-8-0-30: HTTP 404
+  alma10-8-4-24: HTTP 404
+  verborgen-phpsessid: HTTP 404
+  verborgen-laravel: HTTP 404
+  alleen-server-header: HTTP 404
+  wordpress-generator: HTTP 404
+  wordpress-cloudflare: HTTP 404
+  hostinger-onder-fix: HTTP 404
+  hostinger-hersteld: HTTP 404
+  hostinger-verborgen: HTTP 404
+  redirect-https: HTTP 404
+  redirect-www: HTTP 404
+  redirect-ketting: HTTP 404
+  redirect-lus: HTTP 404
+  redirect-naar-prive-ip: HTTP 404
+  redirect-andere-poort: HTTP 404
+  alleen-http: HTTP 404
+  invoer-met-schema: HTTP 404
+  traag-6s: HTTP 404
+  timeout: HTTP 404
+  fout-500-met-versie: HTTP 404
+  fout-500-zonder-info: HTTP 404
+  waf-403: HTTP 404
+  tls-ongeldig: HTTP 404
+  verbinding-verbroken: HTTP 404
+  rommel: HTTP 404
+  domein-bestaat-niet: HTTP 404
+  nextjs-vercel: HTTP 404
+  statisch-github-pages: HTTP 404
+  nextjs-artikel-over-php: HTTP 404
+  express-node: HTTP 404
+
+Totaal: 75 gevallen, 0 goed, 75 fout
+  fout-rood     0  x5  rood genoemd terwijl dat niet mocht (kost vertrouwen, weegt het zwaarst)
+  fout-groen    0  x3  groen genoemd terwijl dat niet mocht (verzwijgt risico)
+  fout          0  x1  andere verkeerde uitslag
+  versie        0  x1  uitslag goed, PHP-versie fout
+  ongeldig     75  x1  geen geldig antwoord volgens CONTRACT.md
+Strafpunten: 75
+Score: (75 - 75) / 75 = 0.0%
+Eis voor groen: 0 fout-rood, 0 fout-groen en score minstens 90%
+Meting: ROOD
