@@ -2977,5 +2977,17 @@
   "Fix gezien": "Correctif détecté",
   "Niet gepatcht": "Non corrigé",
   "Twijfel": "Incertain",
-  "Afgeschermd": "Masqué"
+  "Afgeschermd": "Masqué",
+  "Plan een uitgebreide check": "Réserve ton contrôle approfondi",
+  "Neem contact op": "Nous contacter",
+  "Verstuur": "Envoyer",
+  "Veelgestelde vragen.": "Questions fréquentes.",
+  "Lukt het niet of wil je zekerheid?": "Ça ne marche pas, ou tu veux une certitude ?",
+  "Wij doen de check en de updates gratis. Wil je dieper gaan, dan bespreken we de scope met je.": "Nous faisons le contrôle et les mises à jour gratuitement. Si tu veux aller plus loin, nous discutons du périmètre avec toi.",
+  "Een ernstig lek in PHP, de taal waarop ongeveer 70% van de websites draait.": "Une faille grave dans PHP, le langage sur lequel tournent environ 70 % des sites web.",
+  "Sinds 21 oktober 2026 is er een fix in PHP 8.5.12, 8.4.27, 8.3.36 en 8.2.35. Overheden in Nederland, Duitsland, Finland, België en Frankrijk haalden websites tijdelijk offline.": "Depuis le 21 octobre 2026, un correctif existe dans PHP 8.5.12, 8.4.27, 8.3.36 et 8.2.35. Des administrations aux Pays-Bas, en Allemagne, en Finlande, en Belgique et en France ont mis des sites temporairement hors ligne.",
+  "Officiële documenten.": "Documents officiels.",
+  "Je domein stuurt door.": "Ton domaine redirige ailleurs.",
+  "Je domein stuurt door naar {naar}. Die server meldt PHP {versie}, zonder de fix. Of dat jouw server is, zien we van buitenaf niet. Laat het ons gratis uitzoeken.": "Ton domaine redirige vers {naar}. Ce serveur indique PHP {versie}, sans le correctif. Nous ne pouvons pas voir de l'extérieur si c'est ton serveur. Laisse-nous vérifier gratuitement.",
+  "Veel checks vanaf jouw netwerk. Probeer het over een paar minuten nog eens.": "Beaucoup de contrôles depuis ton réseau. Réessaie dans quelques minutes."
 }

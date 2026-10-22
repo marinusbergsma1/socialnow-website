@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Check, Copy } from "lucide-react";
-import { languagePrefix, useLanguage } from "./i18n/context";
+import { useLanguage } from "./i18n/context";
 import { boekExtern, boekLink, conceptLink } from "./aanvragen";
 import "./php-check.css";
 
@@ -25,6 +25,7 @@ type Uitslag = {
   hersteldVanaf?: string | null;
   release?: string | null;
   platform?: string | null;
+  doorverwezenNaar?: string | null;
 };
 
 function invul(tekst: string, waarden: Record<string, string | number | undefined | null>) {
@@ -34,8 +35,15 @@ function invul(tekst: string, waarden: Record<string, string | number | undefine
 // Elke invoer moet werken: "LINK.NL ", "https://link.nl/pagina", "www.link.nl", "link.nl/". De server doet hetzelfde
 // en probeert daarna zelf https, http, met en zonder www. Alleen echte onzin krijgt een hint onder het veld.
 export function normaliseerInvoer(invoer: string) {
-  const s = invoer.trim().toLowerCase().replace(/^[a-z][a-z0-9+.-]*:\/\//, "").replace(/^[^@/]*@/, "").split(/[/?#\s]/)[0].replace(/:\d+$/, "").replace(/\.$/, "");
-  return /^([a-z0-9_](?:[a-z0-9_-]{0,61}[a-z0-9])?\.)+[a-z0-9-]{2,63}$/.test(s) && !/^\d+(\.\d+){3}$/.test(s) ? s : "";
+  // Eerst pad, query en hash eraf, dan pas inloggegevens (tot de laatste @): "link.nl?e=a@b.nl" blijft link.nl.
+  let s = invoer.replace(/[\u200B-\u200D\u2060\uFEFF]/g, "").trim().toLowerCase().replace(/^[a-z][a-z0-9+.-]*:\/\//, "");
+  s = s.split(/[/?#\s]/)[0];
+  s = s.slice(s.lastIndexOf("@") + 1).replace(/:\d+$/, "").replace(/\.$/, "");
+  if (!s || /^\d+(\.\d+){3}$/.test(s)) return "";
+  // Internationale namen (café.nl) worden punycode, zoals de server ze ook opzoekt.
+  let host = "";
+  try { host = new URL(`https://${s}`).hostname; } catch { return ""; }
+  return /^([a-z0-9_](?:[a-z0-9_-]{0,61}[a-z0-9])?\.)+(?:[a-z]{2,63}|xn--[a-z0-9-]{1,59})$/.test(host) ? host : "";
 }
 
 // De eerste drie stappen staan ook in de rode en oranje uitslag; de hele lijst staat onder de uitslag.
@@ -94,7 +102,7 @@ function Stappen({ aantal = STAPPEN.length, domein = "" }: { aantal?: number; do
 }
 
 // Kort formulier (naam, e-mail, domein) in de uitslag, of het volledige formulier onderaan. Beide gaan naar secure@socialnow.nl.
-function Aanvraag({ kort = false, domein = "", uitslag }: { kort?: boolean; domein?: string; uitslag?: Uitslag | null }) {
+function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uitslag }: { kort?: boolean; telefoon?: boolean; soort?: string; domein?: string; uitslag?: Uitslag | null }) {
   const { t, language } = useLanguage();
   const [staat, zetStaat] = useState<"open" | "bezig" | "klaar" | "mail">("open");
   const [hint, zetHint] = useState("");
@@ -106,7 +114,7 @@ function Aanvraag({ kort = false, domein = "", uitslag }: { kort?: boolean; dome
     const data = {
       naam: w("naam"), email: w("email"), domein: normaliseerInvoer(w("domein")) || w("domein"),
       uitslag: uitslag?.uitslag || "", phpVersie: uitslag?.phpVersie || "", telefoon: w("telefoon"), hosting: w("hosting"),
-      vraag: w("vraag"), taal: language, website2: w("website2"),
+      vraag: w("vraag"), taal: language, soort, website2: w("website2"),
     };
     zetHint("");
     if (!data.naam) return zetHint(t("Vul je naam in."));
@@ -140,6 +148,7 @@ function Aanvraag({ kort = false, domein = "", uitslag }: { kort?: boolean; dome
         <label>E-mail<input name="email" type="email" autoComplete="email" placeholder="naam@bedrijf.nl" /></label>
       </div>
       <label>Website<input name="domein" autoComplete="url" placeholder="jouwbedrijf.nl" defaultValue={domein} key={domein || "leeg"} /></label>
+      {kort && telefoon && <label>Telefoon<input name="telefoon" type="tel" autoComplete="tel" placeholder="Optioneel" /></label>}
       {!kort && (
         <>
           <div className="pc-rij">
@@ -153,12 +162,53 @@ function Aanvraag({ kort = false, domein = "", uitslag }: { kort?: boolean; dome
       <input name="website2" tabIndex={-1} autoComplete="off" aria-hidden="true" className="pc-honing" />
       {hint && <p className="pc-hint" role="alert">{hint}</p>}
       <button className="pc-knop" type="submit" disabled={staat === "bezig"}>
-        <span>{staat === "bezig" ? "Versturen…" : kort ? "Neem contact met me op" : "Vraag de gratis check aan"}</span>
+        <span>{staat === "bezig" ? "Versturen…" : kort ? "Verstuur" : "Vraag de gratis check aan"}</span>
         <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
       </button>
     </form>
   );
 }
+
+// 22 oktober 2026 (Marinus): twee grote knoppen naast elkaar, bij de uitslag en onderaan. "Plan een uitgebreide check" gaat
+// naar de boekingspagina (soort "uitgebreide-check"), of opent tot die live is het korte formulier. "Neem contact op" opent
+// het korte formulier: drie velden, domein al ingevuld, naar secure@socialnow.nl.
+function Oproepen({ domein = "", uitslag, anker = false }: { domein?: string; uitslag?: Uitslag | null; anker?: boolean }) {
+  const { language } = useLanguage();
+  const [open, zetOpen] = useState<"" | "scan" | "contact">("");
+  const plek = useRef<HTMLDivElement>(null);
+  const boek = boekLink(language, domein, "uitgebreide-check");
+  // socialnow.nl/check#aanvraag (ook /nl/check#aanvraag, de mailing linkt hierheen): het formulier voor de uitgebreide
+  // check staat direct open en de pagina scrolt ernaartoe.
+  useEffect(() => {
+    if (!anker) return;
+    const kijk = () => {
+      if (window.location.hash !== "#aanvraag") return;
+      zetOpen("scan");
+      requestAnimationFrame(() => plek.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+    };
+    kijk();
+    window.addEventListener("hashchange", kijk);
+    return () => window.removeEventListener("hashchange", kijk);
+  }, [anker]);
+  const knop = (tekst: React.ReactNode) => (
+    <><span>{tekst}</span><span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span></>
+  );
+  return (
+    <div className="pc-oproepen" id={anker ? "aanvraag" : undefined} ref={plek}>
+      <div className="pc-oproep-knoppen">
+        {boekExtern
+          ? <a className="pc-knop pc-groot" href={boek} target="_blank" rel="noopener">{knop("Plan een uitgebreide check")}</a>
+          : <button type="button" className="pc-knop pc-groot" aria-expanded={open === "scan"} onClick={() => zetOpen("scan")}>{knop("Plan een uitgebreide check")}</button>}
+        <button type="button" className="pc-knop pc-knop-wit pc-groot" aria-expanded={open === "contact"} onClick={() => zetOpen("contact")}>{knop("Neem contact op")}</button>
+      </div>
+      {open && <Aanvraag kort telefoon={open === "scan"} soort={open === "scan" ? "uitgebreide-check" : "contact"} domein={domein} uitslag={uitslag} key={open} />}
+    </div>
+  );
+}
+
+// Officiële documenten (sessie check-documenten). Het blok verschijnt pas als hier bestanden staan die in public/ bestaan:
+// nooit een lege of kapotte link.
+const DOCUMENTEN: { naam: string; nl: string; en: string }[] = [];
 
 export function PhpCheckPage() {
   const { t, language } = useLanguage();
@@ -166,6 +216,9 @@ export function PhpCheckPage() {
   const [bezig, zetBezig] = useState(false);
   const [hint, zetHint] = useState("");
   const [uitslag, zetUitslag] = useState<Uitslag | null>(null);
+  // ?domein=jouwbedrijf.nl (bijvoorbeeld uit de mailing) vult de website in het formulier alvast in.
+  const [vooraf, zetVooraf] = useState("");
+  useEffect(() => { try { zetVooraf(normaliseerInvoer(new URLSearchParams(window.location.search).get("domein") || "")); } catch { /* geen domein */ } }, []);
   const uitslagRef = useRef<HTMLDivElement>(null);
 
   const toon = (u: Uitslag) => { zetUitslag(u); requestAnimationFrame(() => uitslagRef.current?.focus()); };
@@ -182,6 +235,7 @@ export function PhpCheckPage() {
       const r = await fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ domein: host }) });
       const j: Uitslag | null = await r.json().catch(() => null);
       if (j && !j.ok && ["leeg", "ongeldig", "ip", "poort"].includes(j.code || j.reden || "")) zetHint(t("Vul een domein in, bijvoorbeeld jouwbedrijf.nl."));
+      else if (r.status === 429) zetHint(t("Veel checks vanaf jouw netwerk. Probeer het over een paar minuten nog eens."));
       else toon(j?.ok && j.uitslag ? j : { ok: true, domein: host, uitslag: "onbekend", phpVersie: null, code: "fout" });
     } catch {
       // Een check lukt altijd: ook als onze eigen functie niet antwoordt, krijgt de bezoeker een uitslag.
@@ -210,6 +264,10 @@ export function PhpCheckPage() {
         kop: t("Waarschijnlijk niet gepatcht."),
         uitleg: invul(t("Je server meldt PHP {versie}. De fix zit in {fix} en nieuwer. Sommige hosts patchen zonder het nummer te veranderen. Vraag je host schriftelijk of PHP is bijgewerkt voor CVE-2026-109618 en CVE-2026-109619, of laat het ons gratis uitzoeken."), w),
       };
+      if (r === "doorverwijzing") return {
+        kop: t("Je domein stuurt door."),
+        uitleg: invul(t("Je domein stuurt door naar {naar}. Die server meldt PHP {versie}, zonder de fix. Of dat jouw server is, zien we van buitenaf niet. Laat het ons gratis uitzoeken."), { ...w, naar: u.doorverwezenNaar }),
+      };
       if (r === "eol-alleen-via-host") return {
         kop: t("Verouderde PHP, vraag je host."),
         uitleg: invul(t("PHP {versie} krijgt geen officiële fix meer. Alleen een host of LTS-leverancier kan hem gepatcht hebben. Vraag het je host schriftelijk, of stap over op PHP 8.3 of nieuwer. We helpen je daar gratis mee."), w),
@@ -232,15 +290,7 @@ export function PhpCheckPage() {
   const u = uitslag?.ok ? uitslag : null;
   const uitleg = u ? tekst(u) : null;
   const kleur = u?.uitslag || "onbekend";
-  const pre = languagePrefix(language);
-  const boek = boekLink(language, u?.domein || normaliseerInvoer(domein));
-  const boekDoel = boekExtern ? { target: "_blank", rel: "noopener" } : {};
-  const BoekKnop = ({ kort = false }: { kort?: boolean }) => (
-    <a className="pc-knop" href={boek} {...boekDoel}>
-      <span>{kort ? "Plan een call" : "Plan een gratis call"}</span>
-      <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
-    </a>
-  );
+  const gecheckt = u?.domein || normaliseerInvoer(domein);
 
   return (
     <div className="pc">
@@ -277,54 +327,33 @@ export function PhpCheckPage() {
               <p className="pc-label"><i aria-hidden="true" />{LABEL[kleur]}</p>
               <h2>{uitleg.kop}</h2>
               <p>{uitleg.uitleg}</p>
-              {kleur === "onbekend" ? (
-                // 22 oktober 2026 (Marinus): bij "onbekend" direct twee acties naast elkaar: bellen of het korte formulier.
-                <div className="pc-acties">
-                  <div className="pc-actie-bel"><BoekKnop kort /></div>
-                  <Aanvraag kort domein={u.domein || ""} uitslag={u} />
+              {/* 22 oktober 2026 (Marinus): bovenaan bij de uitslag twee grote knoppen, zo snel en makkelijk mogelijk. */}
+              <Oproepen domein={u.domein || ""} uitslag={u} />
+              {(kleur === "rood" || kleur === "oranje") && (
+                <div className="pc-eerst">
+                  <h3>Doe dit eerst.</h3>
+                  <Stappen aantal={3} domein={u.domein} />
                 </div>
-              ) : (
-                <>
-                  {(kleur === "rood" || kleur === "oranje") && (
-                    <div className="pc-eerst">
-                      <h3>Doe dit eerst.</h3>
-                      <Stappen aantal={3} domein={u.domein} />
-                    </div>
-                  )}
-                  <dl className="pc-gegevens">
-                    <div><dt>Domein</dt><dd translate="no">{u.domein}</dd></div>
-                    <div><dt>PHP-versie</dt><dd translate="no">{u.phpVersie || "-"}</dd></div>
-                    <div><dt>Hersteld vanaf</dt><dd translate="no">{u.hersteldVanaf || "-"}</dd></div>
-                  </dl>
-                </>
               )}
-              {/* 22 oktober 2026 (Marinus): bij elke uitslag dezelfde disclaimer en de boekknop. */}
-              <div className="pc-disclaimer">
-                <p>Deze check leest alleen openbare informatie van je website. Het is een snelle indicatie, geen volledige beveiligingsaudit en geen garantie. Wil je zekerheid? Plan een gratis call met ons team.</p>
-                {kleur !== "onbekend" && (
-                  <div className="pc-knoppen">
-                    <BoekKnop />
-                    <a className="pc-knop pc-knop-wit" href="#handmatig">
-                      <span>{kleur === "rood" ? "Laat ons gratis updaten" : "Vraag de gratis check aan"}</span>
-                      <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
-                    </a>
-                  </div>
-                )}
-              </div>
+              {kleur !== "onbekend" && (
+                <dl className="pc-gegevens">
+                  <div><dt>Domein</dt><dd translate="no">{u.domein}</dd></div>
+                  <div><dt>PHP-versie</dt><dd translate="no">{u.phpVersie || "-"}</dd></div>
+                  <div><dt>Hersteld vanaf</dt><dd translate="no">{u.hersteldVanaf || "-"}</dd></div>
+                </dl>
+              )}
+              <p className="pc-disclaimer">Deze check leest alleen openbare informatie van je website. Het is een snelle indicatie, geen volledige beveiligingsaudit en geen garantie. Wil je zekerheid? Plan een gratis call met ons team.</p>
+              {/* Ruimte voor latere blokken onder de PHP-uitslag (feat/check-rapport). */}
             </div>
           )}
         </div>
       </section>
 
-      {/* 22 oktober 2026 (Marinus): direct onder de uitslag, vóór de drie niveaus. De volgorde telt, dus genummerd. */}
+      {/* 22 oktober 2026 (Marinus): direct onder de uitslag. De volgorde telt, dus genummerd. */}
       <section className="h-section h-wrap pc-zelf" id="zelf">
         <h2 className="pc-sectiekop">Dit kun je zelf al doen.</h2>
-        <Stappen domein={u?.domein || normaliseerInvoer(domein)} />
+        <Stappen domein={gecheckt} />
         <p className="pc-noot">De PHP-versie verbergen (<code translate="no">expose_php=Off</code>) maakt je minder zichtbaar, maar repareert niets.</p>
-        <div className="pc-afsluiter">
-          <p>Lukt het niet of wil je zekerheid? Wij doen de check en de updates gratis.</p>
-          <BoekKnop />
-        </div>
         <ol className="pc-bronnen">
           <li>PHP, ChangeLog 8, 21 oktober 2026. <a href="https://www.php.net/ChangeLog-8.php" target="_blank" rel="noopener">php.net</a></li>
           <li>NCSC (VK), Critical security issue affecting PHP, oktober 2026. <a href="https://www.ncsc.gov.uk/sites/default/files/2026-10/Critical-security-issue-affecting-PHP_2.pdf" target="_blank" rel="noopener">ncsc.gov.uk</a></li>
@@ -332,79 +361,45 @@ export function PhpCheckPage() {
         </ol>
       </section>
 
-      <section className="h-section h-wrap">
-        <h2 className="pc-sectiekop">Drie niveaus van zekerheid.</h2>
-        <ol className="pc-tegels">
-          <li>
-            <span>01 / Gratis en direct</span>
-            <h3>Publieke scan.</h3>
-            <p>Wat je hierboven doet. We lezen de PHP-versie die je server zelf aan iedere bezoeker laat zien. Snel, maar alleen zo zeker als wat je server openbaar maakt.</p>
-          </li>
-          <li>
-            <span>02 / Na eigendomsbewijs</span>
-            <h3>Verdiepte scan.</h3>
-            <p>Je bewijst dat de site van jou is met een klein PHP-bestand dat alleen de versie, SAPI en builddatum teruggeeft, of met een DNS TXT-record. Dan lezen we de exacte versie, ook als je server die verbergt.</p>
-          </li>
-          <li>
-            <span>03 / Door ons team</span>
-            <h3>Audit.</h3>
-            <p>Een specialist kijkt in de pakketchangelog van je server of vraagt je host om een schriftelijke bevestiging. Alleen zo is een teruggezette fix echt te bewijzen.</p>
-          </li>
-        </ol>
-        <p className="pc-intro pc-onder">We doen de check en de updates gratis. Wil je dieper gaan, dan bespreken we de scope met je.</p>
-      </section>
+      {DOCUMENTEN.length > 0 && (
+        <section className="h-section h-wrap pc-documenten">
+          <h2 className="pc-sectiekop">Officiële documenten.</h2>
+          <ul className="pc-docs">
+            {DOCUMENTEN.map((d) => (
+              <li key={d.naam}>
+                <a href={language === "nl" ? d.nl : d.en} download target="_blank" rel="noopener"><span>{d.naam}</span><small>PDF</small></a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
-      <section className="h-section h-wrap pc-wat">
-        <h2 className="pc-sectiekop">Wat is php2shell?</h2>
-        <div className="pc-kolommen">
-          <p>Op 21 oktober 2026 werden twee ernstige lekken in PHP bekend, CVE-2026-109618 en CVE-2026-109619. Via een gewoon verzoek kan een aanvaller zonder in te loggen code op een server uitvoeren. De fix zit in PHP 8.5.12, 8.4.27, 8.3.36 en 8.2.35. PHP 8.1 en ouder krijgen geen officiële fix meer.</p>
-          <p>Het raakt veel websites: ongeveer 70% van de websites waarvan de servertaal bekend is, draait op PHP.<sup>1</sup> Overheden in Nederland, Duitsland, Finland, België en Frankrijk haalden websites offline, net als de Wikimedia Foundation.<sup>2</sup> Ook Nintendo zette diensten uit.<sup>3</sup></p>
-        </div>
-        <ol className="pc-bronnen">
-          <li>W3Techs, gebruik van servertalen, stand augustus 2026. <a href="https://w3techs.com/technologies/details/pl-PHP" target="_blank" rel="noopener">w3techs.com</a></li>
-          <li>The Next Web, 21 oktober 2026. <a href="https://thenextweb.com/news/europe-governments-websites-offline-php-security-flaws" target="_blank" rel="noopener">thenextweb.com</a></li>
-          <li>The Record, 21 oktober 2026. <a href="https://therecord.media/php-script-vulnerabilities-warnings" target="_blank" rel="noopener">therecord.media</a></li>
-        </ol>
-      </section>
-
-      <section className="h-section h-wrap pc-data">
-        <h2 className="pc-sectiekop">Zo gaan we met je data om.</h2>
-        <div className="pc-kolommen">
-          <p>Bij SocialNow werkt AI samen met echte specialisten. De check zelf bewaart niets: geen domein, geen uitslag, geen profiel. Je IP-adres telt alleen tien minuten mee in het geheugen, zodat niemand de check misbruikt om sites te bestoken.</p>
-          <p>Vraag je een handmatige check aan, dan gaat je aanvraag per e-mail naar ons team en zien alleen de mensen die hem uitvoeren je gegevens, alleen voor deze check. Lees meer op onze pagina over <a href={`${pre}/veiligheid`}>veiligheid</a> en in ons <a href={`${pre}/privacy`}>privacybeleid</a>.</p>
-        </div>
+      <section className="h-section h-wrap pc-faq-blok">
+        <h2 className="pc-sectiekop">Veelgestelde vragen.</h2>
         <div className="pc-faq">
           <details>
-            <summary>Wat ziet de scan wel en niet?</summary>
-            <p>We doen één gewone GET op je homepage, zoals een browser, en volgen tot vijf redirects. We lezen de headers, de cookies en de HTML van die pagina. We proberen geen aanval, scannen geen poorten en openen geen andere paden. Wat je server niet openbaar maakt, zien wij ook niet.</p>
+            <summary>Wat is php2shell?</summary>
+            <p>Een ernstig lek in PHP, de taal waarop ongeveer 70% van de websites draait.<sup>1</sup> Sinds 21 oktober 2026 is er een fix in PHP 8.5.12, 8.4.27, 8.3.36 en 8.2.35. Overheden in Nederland, Duitsland, Finland, België en Frankrijk haalden websites tijdelijk offline.<sup>2</sup></p>
           </details>
           <details>
             <summary>Wat betekent "Je site schermt dit af"?</summary>
             <p>Je server laat niet zien welke PHP-versie hij draait, of we konden je site niet lezen. Dat is op zich goed, maar daardoor zien wij van buitenaf niet of PHP is bijgewerkt. Plan een call of vul het formulier in, dan kijken we samen.</p>
           </details>
           <details>
-            <summary>Wat betekent oranje?</summary>
-            <p>Je server meldt een versie onder de fix, maar zonder bewijs dat hij kwetsbaar is. Sommige hosts zetten de fix terug en houden het oude nummer. Waarschijnlijk is hij niet gepatcht: laat je host het schriftelijk bevestigen.</p>
-          </details>
-          <details>
             <summary>Is groen een garantie?</summary>
             <p>Nee. Groen betekent dat de versie die je server laat zien de fix bevat. Het zegt niets over een eerdere inbraak, andere PHP-versies op dezelfde server of de rest van je website.</p>
           </details>
         </div>
+        <ol className="pc-bronnen">
+          <li>W3Techs, gebruik van servertalen, stand augustus 2026. <a href="https://w3techs.com/technologies/details/pl-PHP" target="_blank" rel="noopener">w3techs.com</a></li>
+          <li>The Next Web, 21 oktober 2026. <a href="https://thenextweb.com/news/europe-governments-websites-offline-php-security-flaws" target="_blank" rel="noopener">thenextweb.com</a></li>
+        </ol>
       </section>
 
-      <section className="h-section h-wrap pc-handmatig" id="handmatig">
-        <div className="pc-handmatig-tekst">
-          <h2 className="pc-sectiekop">Gratis handmatige check en updates.</h2>
-          <p className="pc-intro">We doen de check en de updates gratis. Wil je dieper gaan, dan bespreken we de scope met je.</p>
-          <ul className="pc-lijst">
-            <li>We kijken zelf naar je server en je PHP-pakket</li>
-            <li>We zetten de update klaar of voeren hem uit</li>
-            <li>Je hoort binnen twee werkdagen van ons</li>
-          </ul>
-          <BoekKnop />
-        </div>
-        <Aanvraag domein={u?.domein || normaliseerInvoer(domein)} uitslag={u} />
+      <section className="h-section h-wrap pc-slot" id="contact">
+        <h2 className="pc-sectiekop">Lukt het niet of wil je zekerheid?</h2>
+        <p className="pc-intro">Wij doen de check en de updates gratis. Wil je dieper gaan, dan bespreken we de scope met je.</p>
+        <Oproepen domein={gecheckt || vooraf} uitslag={u} anker />
       </section>
     </div>
   );

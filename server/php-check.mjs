@@ -36,7 +36,7 @@ const MAX_BODY = 200 * 1024;
 // "Example.com", "HTTPS://www.Example.com/pad?x" en "example.com:443" worden een hostnaam.
 // Geen IP-adressen, geen andere poorten, geen gebruikersnamen.
 export function normaliseerDomein(invoer) {
-  let s = String(invoer ?? "").trim().toLowerCase();
+  let s = String(invoer ?? "").replace(/[\u200B-\u200D\u2060\uFEFF]/g, "").trim().toLowerCase();
   if (!s || s.length > 300) return { ok: false, reden: "leeg" };
   if (!/^[a-z][a-z0-9+.-]*:\/\//.test(s)) s = `https://${s}`;
   let url;
@@ -107,6 +107,7 @@ async function zoekAdres(host) {
 function eenVerzoek(url, adres, familie, restMs) {
   return new Promise((resolve) => {
     let klaar = false;
+    let opTijd = null; // na de headers: bij de klok toch beoordelen met wat er al binnen is
     const einde = (w) => { if (!klaar) { klaar = true; clearTimeout(wekker); resolve(w); } };
     const mod = url.protocol === "https:" ? https : http;
     let req;
@@ -127,6 +128,7 @@ function eenVerzoek(url, adres, familie, restMs) {
         const stukken = [];
         let lengte = 0;
         const af = () => einde({ ok: true, status: res.statusCode || 0, headers: res.headers, body: Buffer.concat(stukken).subarray(0, MAX_BODY).toString("latin1") });
+        opTijd = af;
         res.on("data", (d) => {
           if (lengte >= MAX_BODY) return;
           stukken.push(d); lengte += d.length;
@@ -138,7 +140,8 @@ function eenVerzoek(url, adres, familie, restMs) {
       });
     } catch { return resolve({ ok: false, reden: "verbinding" }); }
     // Eén harde klok voor dit verzoek: ook een server die de verbinding openhoudt en niets zegt.
-    const wekker = setTimeout(() => { req.destroy(); einde({ ok: false, reden: "timeout" }); }, Math.max(1, restMs));
+    // Kwamen de headers al binnen en druppelt alleen de body, dan beoordelen we met die headers (X-Powered-By staat erin).
+    const wekker = setTimeout(() => { const af = opTijd; if (af) af(); else einde({ ok: false, reden: "timeout" }); req.destroy(); }, Math.max(1, restMs));
     req.on("error", (e) => einde({ ok: false, reden: /cert|ssl|tls|EPROTO/i.test(String(e?.code || e?.message)) ? "tls" : e?.code === "HPE_INVALID_CONSTANT" || /parse/i.test(String(e?.code)) ? "geen-http" : "verbinding" }));
     req.end();
   });
@@ -339,6 +342,13 @@ export function beoordeel(antwoord, host = "") {
 // Alles samen
 // ---------------------------------------------------------------------------------------------
 
+// Registreerbaar domein, eenvoudig: de laatste twee labels, of drie bij bekende tweede niveaus (co.uk, com.au...).
+export function registreerbaar(host) {
+  const d = String(host).replace(/^www\./, "").split(".");
+  const n = d.length >= 3 && /^(co|com|org|net|ac|gov|edu|or|ne)$/.test(d[d.length - 2]) && d[d.length - 1].length === 2 ? 3 : 2;
+  return d.slice(-n).join(".");
+}
+
 // Contract (testbank/CONTRACT.md): "reden" is een korte Nederlandse uitleg; de code staat apart in "code".
 const UITLEG = {
   "hersteld": "De getoonde PHP-versie bevat de fix.",
@@ -355,6 +365,7 @@ const UITLEG = {
   "tegenstrijdige-versies": "De server noemt meer dan één PHP-versie.",
   "versie-verborgen": "Er draait PHP, maar de server verbergt de versie.",
   "geen-php-gezien": "Van buitenaf is geen PHP te zien.",
+  "doorverwijzing": "Je domein stuurt door naar een ander domein; die server mist de fix, maar of het jouw server is zien we niet.",
 };
 const uitlegVoor = (code) => UITLEG[code] || (/^onbereikbaar-/.test(code) ? "We konden de site niet lezen." : /-hersteld$/.test(code) ? "De getoonde PHP-versie bevat de fix." : /-niet-te-beoordelen$/.test(code) ? "Pakket waarvan we de fixversie nog niet kennen; laat je host het bevestigen." : "Van buitenaf niet te beoordelen.");
 
@@ -389,7 +400,11 @@ async function controleerKaal(invoer, opties = {}) {
     const eerder = a.stappen.slice(0, -1).map((st) => beoordeel(st, d.host)).find((b) => b.phpVersie);
     if (eerder) oordeel = eerder;
   }
-  return { ...basis, ...oordeel, status: a.status, hops: a.stappen.length - 1 };
+  // Stuurt het domein door naar een ander registreerbaar domein (bijv. een winkelplatform), dan is de server die we lezen
+  // niet zeker die van de bezoeker: dan nooit rood, hooguit oranje met de naam van dat domein.
+  const eindHost = new URL(a.eindUrl).hostname;
+  if (oordeel.uitslag === "rood" && registreerbaar(eindHost) !== registreerbaar(d.host)) oordeel = { ...oordeel, uitslag: "oranje", reden: "doorverwijzing", doorverwezenNaar: eindHost };
+  return { ...basis, ...oordeel, status: a.status, hops: a.stappen.length - 1, ...(registreerbaar(eindHost) !== registreerbaar(d.host) ? { doorverwezenNaar: eindHost } : {}) };
 }
 
 // ---------------------------------------------------------------------------------------------

@@ -3322,5 +3322,17 @@
   "tweaktown.com": "tweaktown.com",
   "Wat betekent \"Je site schermt dit af\"?": "What does \"Your site shields this\" mean?",
   "Je server laat niet zien welke PHP-versie hij draait, of we konden je site niet lezen. Dat is op zich goed, maar daardoor zien wij van buitenaf niet of PHP is bijgewerkt. Plan een call of vul het formulier in, dan kijken we samen.": "Your server doesn't show which PHP version it runs, or we couldn't read your site. That's fine in itself, but it means we can't see from the outside whether PHP has been updated. Book a call or fill in the form and we'll look at it together.",
-  "Vraag je een handmatige check aan, dan gaat je aanvraag per e-mail naar ons team en zien alleen de mensen die hem uitvoeren je gegevens, alleen voor deze check. Lees meer op onze pagina over": "If you request a manual check, your request goes to our team by email and only the people who carry it out see your details, only for this check. Read more on our page about"
+  "Vraag je een handmatige check aan, dan gaat je aanvraag per e-mail naar ons team en zien alleen de mensen die hem uitvoeren je gegevens, alleen voor deze check. Lees meer op onze pagina over": "If you request a manual check, your request goes to our team by email and only the people who carry it out see your details, only for this check. Read more on our page about",
+  "Plan een uitgebreide check": "Book your extended check",
+  "Neem contact op": "Contact us",
+  "Verstuur": "Send",
+  "Veelgestelde vragen.": "Frequently asked questions.",
+  "Lukt het niet of wil je zekerheid?": "Not working, or want certainty?",
+  "Wij doen de check en de updates gratis. Wil je dieper gaan, dan bespreken we de scope met je.": "We do the check and the updates for free. If you want to go deeper, we'll discuss the scope with you.",
+  "Een ernstig lek in PHP, de taal waarop ongeveer 70% van de websites draait.": "A serious flaw in PHP, the language about 70% of websites run on.",
+  "Sinds 21 oktober 2026 is er een fix in PHP 8.5.12, 8.4.27, 8.3.36 en 8.2.35. Overheden in Nederland, Duitsland, Finland, België en Frankrijk haalden websites tijdelijk offline.": "Since 21 October 2026 there is a fix in PHP 8.5.12, 8.4.27, 8.3.36 and 8.2.35. Governments in the Netherlands, Germany, Finland, Belgium and France temporarily took websites offline.",
+  "Officiële documenten.": "Official documents.",
+  "Je domein stuurt door.": "Your domain redirects.",
+  "Je domein stuurt door naar {naar}. Die server meldt PHP {versie}, zonder de fix. Of dat jouw server is, zien we van buitenaf niet. Laat het ons gratis uitzoeken.": "Your domain redirects to {naar}. That server reports PHP {versie}, without the fix. Whether that's your server, we can't see from the outside. Let us find out for free.",
+  "Veel checks vanaf jouw netwerk. Probeer het over een paar minuten nog eens.": "Lots of checks from your network. Please try again in a few minutes."
 }

@@ -2833,5 +2833,17 @@
   "Fix gezien": "Rettelse fundet",
   "Niet gepatcht": "Ikke rettet",
   "Twijfel": "Usikkert",
-  "Afgeschermd": "Skjult"
+  "Afgeschermd": "Skjult",
+  "Plan een uitgebreide check": "Book dit udvidede tjek",
+  "Neem contact op": "Kontakt os",
+  "Verstuur": "Send",
+  "Veelgestelde vragen.": "Ofte stillede spørgsmål.",
+  "Lukt het niet of wil je zekerheid?": "Lykkes det ikke, eller vil du være sikker?",
+  "Wij doen de check en de updates gratis. Wil je dieper gaan, dan bespreken we de scope met je.": "Vi laver tjekket og opdateringerne gratis. Vil du gå dybere, aftaler vi omfanget med dig.",
+  "Een ernstig lek in PHP, de taal waarop ongeveer 70% van de websites draait.": "Et alvorligt hul i PHP, sproget som omkring 70 % af alle hjemmesider kører på.",
+  "Sinds 21 oktober 2026 is er een fix in PHP 8.5.12, 8.4.27, 8.3.36 en 8.2.35. Overheden in Nederland, Duitsland, Finland, België en Frankrijk haalden websites tijdelijk offline.": "Siden 21. oktober 2026 findes der en rettelse i PHP 8.5.12, 8.4.27, 8.3.36 og 8.2.35. Myndigheder i Holland, Tyskland, Finland, Belgien og Frankrig tog midlertidigt hjemmesider offline.",
+  "Officiële documenten.": "Officielle dokumenter.",
+  "Je domein stuurt door.": "Dit domæne sender videre.",
+  "Je domein stuurt door naar {naar}. Die server meldt PHP {versie}, zonder de fix. Of dat jouw server is, zien we van buitenaf niet. Laat het ons gratis uitzoeken.": "Dit domæne sender videre til {naar}. Den server melder PHP {versie}, uden rettelsen. Om det er din server, kan vi ikke se udefra. Lad os finde ud af det gratis.",
+  "Veel checks vanaf jouw netwerk. Probeer het over een paar minuten nog eens.": "Mange tjek fra dit netværk. Prøv igen om et par minutter."
 }

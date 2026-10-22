@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 
   const testbank = testbankModus();
   const ip = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.socket?.remoteAddress || "?";
-  if (!testbank && !binnenLimiet(`ip:${ip}`, 20)) return res.status(429).json({ ok: false, reden: "limiet" });
+  if (!testbank && !binnenLimiet(`ip:${ip}`, 60)) return res.status(429).json({ ok: false, reden: "limiet" });
 
   let body = req.body;
   if (typeof body === "string") { try { body = JSON.parse(body); } catch { body = null; } }

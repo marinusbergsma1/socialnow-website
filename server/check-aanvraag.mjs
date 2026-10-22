@@ -29,6 +29,7 @@ export function leesAanvraag(b = {}) {
     hosting: schoon(b.hosting, 120),
     vraag: String(b.vraag ?? "").slice(0, 2000).trim(),
     taal: schoon(b.taal, 5),
+    soort: b.soort === "uitgebreide-check" ? "uitgebreide-check" : b.soort === "contact" ? "contact" : "",
     honing: schoon(b.website2, 100),
   };
 }
@@ -46,7 +47,7 @@ export function bouwMail(a, { naar = process.env.CHECK_MAIL_NAAR || "secure@soci
   const versie = a.phpVersie || (a.uitslag ? "afgeschermd" : "-");
   const tijd = nu.toLocaleString("nl-NL", { timeZone: "Europe/Amsterdam" });
   const regels = [
-    ["Naam", a.naam], ["E-mail", a.email], ["Domein", a.domein], ["Uitslag", uitslag], ["PHP-versie", versie],
+    ["Soort", a.soort === "uitgebreide-check" ? "uitgebreide check" : a.soort], ["Naam", a.naam], ["E-mail", a.email], ["Domein", a.domein], ["Uitslag", uitslag], ["PHP-versie", versie],
     ["Telefoon", a.telefoon], ["Hosting", a.hosting], ["Taal", a.taal || "-"], ["Tijdstip", tijd],
   ].filter(([, w]) => w);
   const tekst = regels.map(([k, w]) => `${k}: ${w}`).join("\n") + (a.vraag ? `\n\nVraag:\n${a.vraag}` : "") + "\n\nVia socialnow.nl/check";
@@ -54,7 +55,7 @@ export function bouwMail(a, { naar = process.env.CHECK_MAIL_NAAR || "secure@soci
     from: `SocialNow check <${van}>`,
     to: naar,
     replyTo: a.email,
-    subject: `Check-aanvraag: ${a.domein} (${uitslag})`,
+    subject: `${a.soort === "uitgebreide-check" ? "Uitgebreide check" : "Check-aanvraag"}: ${a.domein} (${uitslag})`,
     text: tekst,
   };
 }

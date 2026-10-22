@@ -2833,5 +2833,17 @@
   "Fix gezien": "Åtgärd hittad",
   "Niet gepatcht": "Inte åtgärdad",
   "Twijfel": "Osäkert",
-  "Afgeschermd": "Skyddad"
+  "Afgeschermd": "Skyddad",
+  "Plan een uitgebreide check": "Boka din utökade kontroll",
+  "Neem contact op": "Kontakta oss",
+  "Verstuur": "Skicka",
+  "Veelgestelde vragen.": "Vanliga frågor.",
+  "Lukt het niet of wil je zekerheid?": "Funkar det inte, eller vill du vara säker?",
+  "Wij doen de check en de updates gratis. Wil je dieper gaan, dan bespreken we de scope met je.": "Vi gör kontrollen och uppdateringarna gratis. Vill du gå djupare, går vi igenom omfattningen med dig.",
+  "Een ernstig lek in PHP, de taal waarop ongeveer 70% van de websites draait.": "Ett allvarligt säkerhetshål i PHP, språket som ungefär 70 % av alla webbplatser körs på.",
+  "Sinds 21 oktober 2026 is er een fix in PHP 8.5.12, 8.4.27, 8.3.36 en 8.2.35. Overheden in Nederland, Duitsland, Finland, België en Frankrijk haalden websites tijdelijk offline.": "Sedan 21 oktober 2026 finns en åtgärd i PHP 8.5.12, 8.4.27, 8.3.36 och 8.2.35. Myndigheter i Nederländerna, Tyskland, Finland, Belgien och Frankrike tog tillfälligt ner webbplatser.",
+  "Officiële documenten.": "Officiella dokument.",
+  "Je domein stuurt door.": "Din domän skickar vidare.",
+  "Je domein stuurt door naar {naar}. Die server meldt PHP {versie}, zonder de fix. Of dat jouw server is, zien we van buitenaf niet. Laat het ons gratis uitzoeken.": "Din domän skickar vidare till {naar}. Den servern visar PHP {versie}, utan åtgärden. Om det är din server kan vi inte se utifrån. Låt oss ta reda på det gratis.",
+  "Veel checks vanaf jouw netwerk. Probeer het over een paar minuten nog eens.": "Många kontroller från ditt nätverk. Försök igen om några minuter."
 }

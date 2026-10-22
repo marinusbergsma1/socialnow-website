@@ -1,10 +1,10 @@
 
 > php2shell-testbank@1.0.0 meet
-> node bin/meet.js http://127.0.0.1:4392/api/php-check
+> node bin/meet.js http://127.0.0.1:4300/api/php-check
 
 Testbank draait al in een ander venster, die gebruik ik.
 
-php2shell-testbank: 75 gevallen tegen http://127.0.0.1:4392/api/php-check, beslisregels variant A
+php2shell-testbank: 75 gevallen tegen http://127.0.0.1:4300/api/php-check, beslisregels variant A
 
 geval                           verwacht              gekregen  versie verwacht                        versie gekregen                        oordeel
 ------------------------------  --------------------  --------  -------------------------------------  -------------------------------------  -------
