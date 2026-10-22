@@ -54,13 +54,23 @@
       "permanent": true
     },
     {
+      "source": "/check",
+      "destination": "/security",
+      "permanent": true
+    },
+    {
+      "source": "/:taal(nl|de|fr|es|it|pt|pl|sv|da)/check",
+      "destination": "/:taal/security",
+      "permanent": true
+    },
+    {
       "source": "/php-check",
-      "destination": "/check",
+      "destination": "/security",
       "permanent": true
     },
     {
       "source": "/:taal(nl|de|fr|es|it|pt|pl|sv|da)/php-check",
-      "destination": "/:taal/check",
+      "destination": "/:taal/security",
       "permanent": true
     }
   ],

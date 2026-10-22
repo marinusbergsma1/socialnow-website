@@ -132,8 +132,8 @@ function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uit
       throw new Error("aanvraag");
     } catch {
       // Onze eigen functie is onbereikbaar: dan gaat de aanvraag als ingevuld concept per mail, zodat hij niet verdwijnt.
-      const tekst = [`${t("Naam")}: ${data.naam}`, `${t("E-mail")}: ${data.email}`, `${t("Website")}: ${data.domein}`, data.uitslag ? `${t("Uitslag van de check")}: ${data.uitslag}${data.phpVersie ? `, PHP ${data.phpVersie}` : ""}` : "", data.vraag].filter(Boolean).join("\n");
-      window.location.href = conceptLink(`Check-aanvraag: ${data.domein}`, tekst);
+      const tekst = [`${t("Naam")}: ${data.naam}`, `${t("E-mail")}: ${data.email}`, `${t("Website")}: ${data.domein}`, data.uitslag ? `${t("Uitslag van de securityscan")}: ${data.uitslag}${data.phpVersie ? `, PHP ${data.phpVersie}` : ""}` : "", data.vraag].filter(Boolean).join("\n");
+      window.location.href = conceptLink(`Securityscan-aanvraag: ${data.domein}`, tekst);
       zetStaat("mail");
     }
   };
@@ -145,7 +145,7 @@ function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uit
   );
   return (
     <form className={`pc-formulier${kort ? " pc-kort" : ""}`} onSubmit={verstuur} noValidate>
-      {!kort && <h2>Vraag je gratis check aan.</h2>}
+      {!kort && <h2>Vraag je gratis securityscan aan.</h2>}
       <div className="pc-rij">
         <label>Je naam<input name="naam" autoComplete="name" placeholder="Voor- en achternaam" /></label>
         <label>E-mail<input name="email" type="email" autoComplete="email" placeholder="naam@bedrijf.nl" /></label>
@@ -165,7 +165,7 @@ function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uit
       <input name="website2" tabIndex={-1} autoComplete="off" aria-hidden="true" className="pc-honing" />
       {hint && <p className="pc-hint" role="alert">{hint}</p>}
       <button className="pc-knop" type="submit" disabled={staat === "bezig"}>
-        <span>{staat === "bezig" ? "Versturen…" : kort ? "Verstuur" : "Vraag de gratis check aan"}</span>
+        <span>{staat === "bezig" ? "Versturen…" : kort ? "Verstuur" : "Vraag de gratis securityscan aan"}</span>
         <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
       </button>
     </form>
@@ -179,18 +179,26 @@ function Aanvraag({ kort = false, telefoon = false, soort = "", domein = "", uit
 const SECURE = "secure@socialnow.nl";
 const MENSEN = ["Steef Komen", "Michelle Yang"];
 
-function Mensen({ domein = "" }: { domein?: string }) {
+// Regiechat, 22 oktober 2026 (gelijk met de socialvideo van Marinus): de updates zijn tijdelijk gratis. Bij een oude
+// versie (oranje of rood) staat deze regel in het PHP-blok, direct boven Steef en Michelle (kort).
+const GRATIS_UPDATE = "Omdat dit ons allemaal raakt, voeren we de essentiële updates tijdelijk gratis uit. Plan een call of stuur een mail.";
+
+function Mensen({ domein = "", kort = false }: { domein?: string; kort?: boolean }) {
   const { t, language } = useLanguage();
   const boek = boekLink(language, domein, "uitgebreide-check");
-  const onderwerp = encodeURIComponent(domein ? `${t("Websitecheck")}: ${domein}` : t("Websitecheck"));
+  const onderwerp = encodeURIComponent(domein ? `${t("Securityscan")}: ${domein}` : t("Securityscan"));
   return (
-    <div className="pc-mensen">
-      <h3>Praat met Steef of Michelle.</h3>
-      <p>Wij doen de check en de updates gratis. Wil je dieper gaan, dan bespreken we de scope met je.</p>
+    <div className={`pc-mensen${kort ? " pc-mensen-kort" : ""}`}>
+      {kort ? <p className="pc-gratis">{t(GRATIS_UPDATE)}</p> : (
+        <>
+          <h3>Praat met Steef of Michelle.</h3>
+          <p>Omdat dit ons allemaal raakt, voeren we de essentiële updates tijdelijk gratis uit. Wil je dieper gaan, dan bespreken we de scope met je.</p>
+        </>
+      )}
       <ul>
         {MENSEN.map((naam) => people.find((p) => p.name === naam)).filter((p): p is (typeof people)[number] => !!p).map((p) => (
           <li key={p.name} className="pc-mens">
-            <img {...klein(p.image, "88px", [96, 160])} alt={p.name} width="88" height="88" loading="lazy" />
+            <img {...klein(p.image, kort ? "56px" : "88px", [96, 160])} alt={p.name} width={kort ? 56 : 88} height={kort ? 56 : 88} loading="lazy" />
             <div>
               <strong translate="no">{p.name}</strong>
               <small translate="no">{p.role}</small>
@@ -235,7 +243,7 @@ function Film() {
         playsInline
         preload="none"
         poster={`/websitecheck/film/poster-${vorm}${nl}.jpg`}
-        aria-label="Uitlegfilm: zo werkt de websitecheck"
+        aria-label="Uitlegfilm: zo werkt de securityscan"
       >
         <source src={`/websitecheck/film/check-${vorm}${nl}.mp4`} type="video/mp4" />
       </video>
@@ -301,6 +309,9 @@ export function PhpBlok({ u }: { u: Uitslag }) {
   const { t } = useLanguage();
   const kleur = u.uitslag || "onbekend";
   const tekst = phpTekst(u, t);
+  // PHP 8.1 en ouder krijgt geen officiële fix meer (regiechat 22 oktober 2026).
+  const [hoofd, minor] = (u.phpVersie || "").split(/[.-]/).map(Number);
+  const oud = !!u.phpVersie && Number.isFinite(hoofd) && (hoofd < 8 || (hoofd === 8 && minor <= 1));
   return (
     <div className={`pc-php pc-${kleur}`}>
       <p className="pc-label"><i aria-hidden="true" /><b>{LABEL[kleur]}</b><span translate="no">PHP · php2shell</span></p>
@@ -311,12 +322,92 @@ export function PhpBlok({ u }: { u: Uitslag }) {
         {u.domein && <div><dt>Domein</dt><dd translate="no">{u.domein}</dd></div>}
       </dl>
       <p className="pc-php-zin">{tekst.zin}</p>
+      {oud && <p className="pc-php-oud">{t("Voor PHP 8.1 en ouder komt geen officiële fix meer. We plannen samen de overstap.")}</p>}
+      {(kleur === "rood" || kleur === "oranje") && <Mensen domein={u.domein || ""} kort />}
       <div className="pc-eerst">
         <h3>Dit kun je zelf al doen.</h3>
         <Stappen aantal={3} domein={u.domein} />
         <a className="pc-meer" href="#zelf">Alle zeven stappen</a>
       </div>
     </div>
+  );
+}
+
+// 22 oktober 2026, middag (Marinus, via de regiechat): direct onder de film en boven de scan wie er geraakt is en wie risico
+// loopt. Logo's in eigen kleur, even hoog, elk een link naar de bron van het incident (niet naar het merk). Overheden
+// krijgen alleen hun landvlag met de naam van de organisatie: overheidslogo's en wapens mogen bedrijven niet gebruiken.
+// Geen banken en geen bedrijven zonder bron. Bij "risico" geen bedrijven die kwetsbaar zouden zijn, alleen platforms.
+// Bronnen geopend en live 200 op 22 oktober 2026: /Volumes/WORK/02-SOCIALNOW/php-check/logos-security/BRONNEN.md.
+type Geraakt = { naam: string; logo?: string; vlag?: string; org?: string; wat: string; bron: string; uitgever: string };
+const GERAAKT: Geraakt[] = [
+  { naam: "Nintendo", logo: "/security/logos/nintendo.svg", wat: "Haalde diensten offline tijdens het herstel", bron: "https://therecord.media/php-script-vulnerabilities-warnings", uitgever: "The Record, 21.10.2026" },
+  { naam: "Wikipedia", logo: "/security/logos/wikipedia.svg", wat: "Haalde ondersteunende diensten offline tot de patch", bron: "https://diff.wikimedia.org/2026/10/21/impact-of-php-vulnerabilities-on-wikimedia-tools-and-services/", uitgever: "Wikimedia Foundation (Diff), 21.10.2026" },
+  { naam: "Duitsland", vlag: "de", org: "Digitalministerium", wat: "Haalde uit voorzorg federale websites offline", bron: "https://thenextweb.com/news/europe-governments-websites-offline-php-security-flaws", uitgever: "The Next Web (Reuters), 21.10.2026" },
+  { naam: "Finland", vlag: "fi", org: "Valtori", wat: "Sloot uit voorzorg publieke overheidsdiensten af", bron: "https://valtori.fi/-/paivitys-21.10.-klo-18-php-korjauspaivityksen-asennukset-aloitettu", uitgever: "Valtori, 21.10.2026" },
+  { naam: "België", vlag: "be", org: "FOD Buitenlandse Zaken", wat: "Haalde tijdelijk de eigen websites offline", bron: "https://www.vrt.be/vrtnws/nl/2026/10/21/cyberbeveiliger-ziet-eerste-aanvallen-rond-kwetsbaarheden-in-pop/", uitgever: "VRT NWS, 21.10.2026" },
+  { naam: "Nederland", vlag: "nl", org: "Tweede Kamer", wat: "Haalde uit voorzorg de website offline", bron: "https://nieuws.nl/algemeen/website-tweede-kamer-uit-voorzorg-offline-om-kwetsbaarheden-php", uitgever: "ANP (Nieuws.nl), 21.10.2026" },
+];
+type Platform = { naam: string; logo: string; bron: string };
+const RISICO: Platform[] = [
+  { naam: "WordPress", logo: "/security/logos/wordpress.png", bron: "https://wordpress.org/news/2026/10/critical-php-security-release/" },
+  { naam: "WooCommerce", logo: "/security/logos/woocommerce.svg", bron: "https://developer.woocommerce.com/2026/10/21/php-security-release/" },
+  { naam: "Magento", logo: "/security/logos/magento.svg", bron: "https://developer.adobe.com/commerce/" },
+  { naam: "Joomla", logo: "/security/logos/joomla.svg", bron: "https://www.joomla.org/" },
+  { naam: "Drupal", logo: "/security/logos/drupal.svg", bron: "https://www.drupal.org/psa-2026-10-20" },
+  { naam: "PrestaShop", logo: "/security/logos/prestashop.svg", bron: "https://build.prestashop-project.org/news/2026/php-security-updates-october-2026/" },
+  { naam: "Laravel", logo: "/security/logos/laravel.svg", bron: "https://laravel.com/blog/php-critical-vulnerability-response-updates" },
+];
+
+function Extern({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
+  return (
+    <a className={className} href={href} target="_blank" rel="noopener">
+      {children}
+      <span className="pc-sr">(opent in een nieuw tabblad)</span>
+    </a>
+  );
+}
+
+function Geraakt() {
+  return (
+    <section className="h-wrap pc-geraakt" aria-labelledby="pc-geraakt-kop">
+      <h2 className="pc-blokkop" id="pc-geraakt-kop">Wie werd geraakt.</h2>
+      <ul className="pc-logos">
+        {GERAAKT.map((g, i) => (
+          <li key={g.naam}>
+            <Extern href={g.bron} className="pc-logo-link">
+              {g.logo
+                ? <span className="pc-merk"><img className="pc-logo" src={g.logo} alt={g.naam} height="48" loading="lazy" /><strong translate="no" aria-hidden="true">{g.naam}</strong></span>
+                : <span className="pc-vlag-naam"><img className="pc-vlag" src={`/security/vlaggen/${g.vlag}.svg`} alt="" height="40" loading="lazy" /><strong>{g.naam}</strong><small translate="no">{g.org}</small></span>}
+              <span className="pc-logo-wat">{g.wat}<sup>{i + 1}</sup></span>
+            </Extern>
+          </li>
+        ))}
+      </ul>
+      <p className="pc-geen-klant">Deze organisaties zijn geen klanten of partners van SocialNow. Ze gingen offline of kregen problemen door php2shell. Bronnen hieronder.</p>
+      <ol className="pc-bronnen pc-geraakt-bronnen">
+        {GERAAKT.map((g) => (
+          <li key={g.naam}><span>{g.naam}</span>{g.org && <span translate="no">, {g.org}</span>}<span aria-hidden="true">: </span><Extern href={g.bron}><span translate="no">{g.uitgever}</span></Extern></li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function Risico() {
+  return (
+    <section className="h-wrap pc-risico" aria-labelledby="pc-risico-kop">
+      <h2 className="pc-blokkop" id="pc-risico-kop">Wie loopt risico.</h2>
+      <ul className="pc-logos pc-logos-platform">
+        {RISICO.map((p) => (
+          <li key={p.naam}>
+            <Extern href={p.bron} className="pc-logo-link"><img className="pc-logo" src={p.logo} alt={p.naam} height="40" loading="lazy" /><span className="pc-logo-naam" translate="no" aria-hidden="true">{p.naam}</span></Extern>
+          </li>
+        ))}
+      </ul>
+      <p className="pc-risico-oproep">Gebouwd op een van deze en heeft niemand er al een tijdje naar omgekeken? Doe de scan.</p>
+      <p className="pc-risico-host">Een site bij een moderne host die PHP zelf bijwerkt, loopt minder risico.</p>
+      <p className="pc-geen-klant">Deze platforms draaien op PHP. Het zijn geen klanten of partners van SocialNow.</p>
+    </section>
   );
 }
 
@@ -333,13 +424,18 @@ export function PhpCheckPage() {
   const aanvraagRef = useRef<HTMLElement>(null);
   // Websiterapport onder het PHP-blok (feat/check-rapport): elke nieuwe check is een nieuwe ronde.
   const [ronde, zetRonde] = useState(0);
-  // socialnow.nl/check#aanvraag (ook /nl/check#aanvraag, de mailing linkt hierheen): de pagina scrolt naar het formulier,
-  // ook als de pagina na het laden nog verschuift.
+  // socialnow.nl/security#aanvraag (ook /nl/security#aanvraag, en /check#aanvraag via de 308 uit vercel.json; de mailing
+  // linkt hierheen): de pagina scrolt naar het formulier. Live bleef scrollY 0, want de pagina bouwt na het laden nog op
+  // (taalwissel, film, rapport); daarom een paar keer opnieuw in beeld zetten (overgenomen uit PR #148).
   useEffect(() => {
-    const kijk = () => { if (window.location.hash === "#aanvraag") requestAnimationFrame(() => aanvraagRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })); };
+    const wekkers: number[] = [];
+    const kijk = () => {
+      if (window.location.hash !== "#aanvraag") return;
+      for (const ms of [0, 300, 900, 1800]) wekkers.push(window.setTimeout(() => aanvraagRef.current?.scrollIntoView({ block: "start" }), ms));
+    };
     kijk();
     window.addEventListener("hashchange", kijk);
-    return () => window.removeEventListener("hashchange", kijk);
+    return () => { window.removeEventListener("hashchange", kijk); wekkers.forEach((w) => window.clearTimeout(w)); };
   }, []);
 
   const toon = (u: Uitslag) => { zetUitslag(u); requestAnimationFrame(() => uitslagRef.current?.focus()); };
@@ -357,7 +453,7 @@ export function PhpCheckPage() {
       const r = await fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ domein: host }) });
       const j: Uitslag | null = await r.json().catch(() => null);
       if (j && !j.ok && ["leeg", "ongeldig", "ip", "poort"].includes(j.code || j.reden || "")) zetHint(t("Vul een domein in, bijvoorbeeld jouwbedrijf.nl."));
-      else if (r.status === 429) zetHint(t("Veel checks vanaf jouw netwerk. Probeer het over een paar minuten nog eens."));
+      else if (r.status === 429) zetHint(t("Veel scans vanaf jouw netwerk. Probeer het over een paar minuten nog eens."));
       else toon(j?.ok && j.uitslag ? j : { ok: true, domein: host, uitslag: "onbekend", phpVersie: null, code: "fout" });
     } catch {
       // Een check lukt altijd: ook als onze eigen functie niet antwoordt, krijgt de bezoeker een uitslag.
@@ -372,11 +468,13 @@ export function PhpCheckPage() {
 
   return (
     <div className="pc">
-      {/* 22 oktober 2026, middag (Marinus): de film staat helemaal bovenaan, boven de check. */}
+      {/* 22 oktober 2026, middag (Marinus): de film staat helemaal bovenaan, boven de scan. */}
       <Film />
+      <Geraakt />
+      <Risico />
 
       <section className="pc-hero h-wrap">
-        <p className="h-eyebrow pc-eyebrow"><i aria-hidden="true" /> Gratis php2shell-check</p>
+        <p className="h-eyebrow pc-eyebrow"><i aria-hidden="true" /> Gratis securityscan</p>
         <h1 className="pc-kop">Is je website veilig?</h1>
 
         <form className="pc-check" onSubmit={start} noValidate>
@@ -397,7 +495,7 @@ export function PhpCheckPage() {
           </label>
           {hint && <p className="pc-hint" id="pc-check-hint">{hint}</p>}
           <button className="pc-knop" type="submit" disabled={bezig}>
-            <span>{bezig ? "Bezig met de check…" : "Doe de gratis check"}</span>
+            <span>{bezig ? "Bezig met de scan…" : "Doe de gratis securityscan"}</span>
             <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
           </button>
         </form>
@@ -408,8 +506,8 @@ export function PhpCheckPage() {
               {/* Eerst PHP, groot en compleet; pas daaronder de vijf punten, dan Steef en Michelle. */}
               <PhpBlok u={u} />
               {u.domein && <CheckRapport domein={u.domein} ronde={ronde} />}
-              <Mensen domein={u.domein || ""} />
-              <p className="pc-disclaimer">Deze check leest alleen openbare informatie van je website. Het is een snelle indicatie, geen volledige beveiligingsaudit en geen garantie. Wil je zekerheid? Plan een gratis call met ons team.</p>
+              {u.uitslag !== "rood" && u.uitslag !== "oranje" && <Mensen domein={u.domein || ""} />}
+              <p className="pc-disclaimer">Deze scan leest alleen openbare informatie van je website. Het is een snelle indicatie, geen volledige beveiligingsaudit en geen garantie. Wil je zekerheid? Plan een gratis call met ons team.</p>
             </div>
           )}
         </div>

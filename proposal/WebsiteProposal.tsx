@@ -67,6 +67,12 @@ import Cookiebot from "./Cookiebot";
 import { Analytics } from "@vercel/analytics/react";
 
 // 18 oktober 2026: Producten, Diensten, Resultaten, Prijzen, Team (proposal/Producten.tsx). Blog en Contact staan in de voettekst.
+// /check en /php-check (oude campagnelinks en mails) naar /security, met ?domein= en #aanvraag erbij.
+function NaarSecurity() {
+  const { search, hash } = useLocation();
+  return <Navigate to={`/security${search}${hash}`} replace />;
+}
+
 const nav = NAV_LINKS;
 // Pagina's buiten het menu houden hun eigen titel, ook als je ze rechtstreeks opent.
 const paginaTitels: Record<string, string> = {
@@ -74,7 +80,7 @@ const paginaTitels: Record<string, string> = {
   "/blog": "Blog",
   "/contact": "Contact",
   "/audit": "Gratis Google Ads audit",
-  "/check": "Gratis php2shell-check",
+  "/security": "Gratis securityscan",
   "/gratis-website": "Gratis website aanvragen",
   "/gratis-os-demo": "Gratis OS-demo",
   "/antwoord-aanvragen": "Antwoord op aanvragen",
@@ -296,9 +302,12 @@ function ProposalShell() {
           <Route path="/prijzen" element={<Navigate to="/diensten#prijzen" replace />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/audit" element={<AuditPage />} />
-          {/* 22 oktober 2026: de campagnepagina van de php2shell-advertentie. /php-check is een alias. */}
-          <Route path="/check" element={<PhpCheckPage />} />
-          <Route path="/php-check" element={<Navigate to="/check" replace />} />
+          {/* 22 oktober 2026: de campagnepagina van de php2shell-advertentie. Marinus, middag: "de pagina heet security,
+              dit kan wel eens een belangrijke pagina worden." /check en /php-check sturen door, met het anker erbij
+              (vercel.json doet hetzelfde met een 308 voordat de app laadt). */}
+          <Route path="/security" element={<PhpCheckPage />} />
+          <Route path="/check" element={<NaarSecurity />} />
+          <Route path="/php-check" element={<NaarSecurity />} />
           <Route path="/vacatures" element={<VacaturesPage />} />
           {/* 28 september 2026 (Marinus): investeerders doen een aanvraag naar invest@. /investors is een alias. */}
           <Route path="/investeerders" element={<InvesteerdersPage />} />
@@ -306,9 +315,8 @@ function ProposalShell() {
           <Route path="/gratis-website" element={<GratisWebsite />} />
           <Route path="/gratis-os-demo" element={<GratisOsDemo />} />
           <Route path="/antwoord-aanvragen" element={<AntwoordPagina />} />
-          {/* 28 september 2026: veiligheidsvideo en sleutelbelofte. /security is een alias. */}
+          {/* 28 september 2026: veiligheidsvideo en sleutelbelofte. Sinds 22 oktober 2026 is /security de securityscan. */}
           <Route path="/veiligheid" element={<VeiligheidPagina />} />
-          <Route path="/security" element={<Navigate to="/veiligheid" replace />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route
