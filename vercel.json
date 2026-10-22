@@ -44,6 +44,12 @@
   ],
   "redirects": [
     {
+      "source": "/:pad*",
+      "has": [{ "type": "host", "value": "security.socialnow.nl" }],
+      "destination": "https://socialnow.nl/security",
+      "permanent": true
+    },
+    {
       "source": "/prijzen",
       "destination": "/diensten#prijzen",
       "permanent": true
