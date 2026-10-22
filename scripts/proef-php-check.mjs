@@ -62,6 +62,9 @@ const vaste = new Set(["Gratis php2shell-check", "PHP-versie", "expose_php=Off"]
 const zonder = [...zinnen].filter((z) => /[a-z]{3}/i.test(z) && !/^[\w.-]+@[\w.-]+$/.test(z) && !(z in en) && !vaste.has(z));
 eis(zinnen.size > 60 && zonder.length === 0, `elke zin op de pagina heeft een Engelse vertaling (${zinnen.size} zinnen${zonder.length ? `, mist: ${zonder.slice(0, 4).join(" | ")}` : ""})`);
 eis(!!en["Is je website veilig? Gratis php2shell-check | SocialNow"], "EN-titel voor de metadata");
+const andere = ["de", "fr", "es", "it", "pt", "pl", "sv", "da"].flatMap((taal) => { const w = JSON.parse(lees(`proposal/i18n/${taal}.json`) || "{}"); return [...zinnen].filter((z) => /[a-z]{3}/i.test(z) && z in en && !(z in w)).map((z) => `${taal}: ${z}`); });
+eis(andere.length === 0, `ook vertaald in DE, FR, ES, IT, PT, PL, SV en DA${andere.length ? ` (mist ${andere.length}, bijv. ${andere.slice(0, 2).join(" | ")})` : ""}`);
+eis(!/\{t\(stap\)\}/.test(tsx), "stappen niet dubbel vertaald (anders faalt de prerender)");
 
 // Taal: eerder gekozen taal, dan browsertaal, dan land, anders Engels; keuze onthouden met try/catch.
 const det = lees("proposal/i18n/detect.ts");

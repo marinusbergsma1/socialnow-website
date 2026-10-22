@@ -7,20 +7,33 @@ GROEN  drie niveaus: publieke scan, verdiepte scan, audit
 GROEN  cijfers over php2shell met bronnen in een voetnoot
 GROEN  FAQ met minstens vier vragen
 GROEN  kop "Is je website veilig?"
-GROEN  vinkje: mijn site of toestemming
+GROEN  geen vinkje: de publieke scan is één gewone GET
+GROEN  onder de knop alleen het veld en de knop, geen geruststellende regels
+GROEN  invoer eerst normaliseren, pas daarna valideren; onzin krijgt een hint, geen fout
+GROEN  elke invoer werkt: link.nl, www.link.nl, https://link.nl/pagina, LINK.NL , link.nl/
+GROEN  server probeert https, http, met en zonder www
+GROEN  een check lukt altijd: faalt onze API of geeft hij geen JSON, dan een nette uitslag "onbekend"
+GROEN  onbekend heet "Je site schermt dit af", met belknop en kort formulier naast elkaar
+GROEN  blok "Dit kun je zelf al doen" met zeven stappen, direct onder de uitslag en vóór de drie niveaus
+GROEN  rood en oranje tonen stap 1 tot en met 3 in de uitslag
+GROEN  voorbeeldmail om te kopiëren, opmerking over expose_php en bronnen php.net, NCSC en NSA
 GROEN  formulier voor de gratis handmatige check en updates
-GROEN  aanvraag als ingevuld concept (aanvragen.ts), de site slaat niets op
+GROEN  formulieren gaan naar api/check-aanvraag (mail naar info@), met honeypot
 GROEN  EN-kop is "Is your website safe?"
 GROEN  EN-zin over gratis check en scope klopt letterlijk
+GROEN  EN-teksten voor afgeschermd, zelf doen en Copy email letterlijk
 GROEN  EN-disclaimer en knop "Book a free call" letterlijk
-GROEN  elke zin op de pagina heeft een Engelse vertaling (116 zinnen)
+GROEN  elke zin op de pagina heeft een Engelse vertaling (107 zinnen)
 GROEN  EN-titel voor de metadata
+GROEN  ook vertaald in DE, FR, ES, IT, PT, PL, SV en DA
+GROEN  stappen niet dubbel vertaald (anders faalt de prerender)
+GROEN  taal: eerder gekozen taal wint, dan browsertaal, dan land, anders Engels; geen lus op /nl/check; taalkiezer onthoudt
 GROEN  zwarte grond
 GROEN  geen ligaturen
 GROEN  gevulde knop #0b7a37 met witte tekst
 GROEN  geen witte tekst op felgroen #25d366
 GROEN  koppen schalen mee en verdelen hun regels (twee regels gemeten in de PR)
-GROEN  api/php-check.js vraagt het vinkje
+GROEN  api/php-check.js geeft bij een eigen fout ook een uitslag
 GROEN  limiet per IP
 GROEN  slaat niets op en trackt niets
 GROEN  interne adressen en cloud-metadata worden geweigerd, publieke niet
@@ -32,5 +45,9 @@ GROEN  gewoon nummer onder de fix is oranje, nooit rood (cPanel, CloudLinux, RHE
 GROEN  Ubuntu-build: rood en groen met bewijs
 GROEN  op of boven de fix is groen
 GROEN  versie nooit uit paginatekst; geen PHP zichtbaar is onbekend, niet groen
+GROEN  aanvraag wordt één mail naar info@ met naam, e-mail, domein, uitslag, PHP-versie of "afgeschermd", taal, tijdstip, vraag en Reply-To bezoeker (nep-transport)
+GROEN  lukt versturen niet (twee pogingen), dan staat de hele aanvraag in de logs: niets verdwijnt stilletjes
+GROEN  honeypot vangt bots
+GROEN  limiet per IP en per adres; SMTP-gegevens alleen uit env
 
 alles groen

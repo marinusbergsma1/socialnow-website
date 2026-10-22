@@ -7,22 +7,36 @@ ROOD   drie niveaus: publieke scan, verdiepte scan, audit
 ROOD   cijfers over php2shell met bronnen in een voetnoot
 ROOD   FAQ met minstens vier vragen
 ROOD   kop "Is je website veilig?"
-ROOD   vinkje: mijn site of toestemming
+GROEN  geen vinkje: de publieke scan is één gewone GET
+GROEN  onder de knop alleen het veld en de knop, geen geruststellende regels
+ROOD   invoer eerst normaliseren, pas daarna valideren; onzin krijgt een hint, geen fout
+ROOD   elke invoer werkt: link.nl, www.link.nl, https://link.nl/pagina, LINK.NL , link.nl/
+ROOD   server probeert https, http, met en zonder www
+ROOD   een check lukt altijd: faalt onze API of geeft hij geen JSON, dan een nette uitslag "onbekend"
+ROOD   onbekend heet "Je site schermt dit af", met belknop en kort formulier naast elkaar
+ROOD   blok "Dit kun je zelf al doen" met zeven stappen, direct onder de uitslag en vóór de drie niveaus
+ROOD   rood en oranje tonen stap 1 tot en met 3 in de uitslag
+ROOD   voorbeeldmail om te kopiëren, opmerking over expose_php en bronnen php.net, NCSC en NSA
 ROOD   formulier voor de gratis handmatige check en updates
-ROOD   aanvraag als ingevuld concept (aanvragen.ts), de site slaat niets op
+ROOD   formulieren gaan naar api/check-aanvraag (mail naar info@), met honeypot
 ROOD   EN-kop is "Is your website safe?"
 ROOD   EN-zin over gratis check en scope klopt letterlijk
+ROOD   EN-teksten voor afgeschermd, zelf doen en Copy email letterlijk
 ROOD   EN-disclaimer en knop "Book a free call" letterlijk
 ROOD   elke zin op de pagina heeft een Engelse vertaling (0 zinnen)
 ROOD   EN-titel voor de metadata
+GROEN  ook vertaald in DE, FR, ES, IT, PT, PL, SV en DA
+GROEN  stappen niet dubbel vertaald (anders faalt de prerender)
+ROOD   taal: eerder gekozen taal wint, dan browsertaal, dan land, anders Engels; geen lus op /nl/check; taalkiezer onthoudt
 ROOD   zwarte grond
 ROOD   geen ligaturen
 ROOD   gevulde knop #0b7a37 met witte tekst
 GROEN  geen witte tekst op felgroen #25d366
 ROOD   koppen schalen mee en verdelen hun regels (twee regels gemeten in de PR)
-ROOD   api/php-check.js vraagt het vinkje
+ROOD   api/php-check.js geeft bij een eigen fout ook een uitslag
 ROOD   limiet per IP
 GROEN  slaat niets op en trackt niets
 ROOD   server/php-check.mjs bestaat
+ROOD   server/check-aanvraag.mjs bestaat
 
-24 eis(en) rood
+34 eis(en) rood

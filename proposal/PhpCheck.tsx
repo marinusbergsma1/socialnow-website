@@ -80,7 +80,7 @@ function Stappen({ aantal = STAPPEN.length, domein = "" }: { aantal?: number; do
     <ol className="pc-stappen">
       {STAPPEN.slice(0, aantal).map((stap, i) => (
         <li key={stap}>
-          <span>{t(stap)}{i === 3 && <sup>2,3</sup>}</span>
+          <span>{stap}{i === 3 && <sup>2,3</sup>}</span>
           {i === 0 && (
             <button type="button" className="pc-kopieer" onClick={kopieer}>
               {gekopieerd ? <Check size={15} aria-hidden="true" /> : <Copy size={15} aria-hidden="true" />}
