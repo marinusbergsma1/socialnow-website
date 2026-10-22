@@ -84,7 +84,7 @@ const GERESERVEERD = /(^|\.)(localhost|local|internal|intranet|lan|home|corp|tes
 // Alleen in de testbank op deze Mac mag een nagebootste server op 127.0.0.1 draaien. Op Vercel
 // (VERCEL is daar altijd gezet) en in productie staat dit altijd uit.
 export function testbankModus() {
-  return process.env.PHP_CHECK_TESTBANK === "1" && !process.env.VERCEL && process.env.NODE_ENV !== "production";
+  return (process.env.PHP_CHECK_TESTBANK === "1" || process.env.PHPCHECK_TESTBANK === "1") && !process.env.VERCEL && process.env.NODE_ENV !== "production";
 }
 
 async function zoekAdres(host) {
@@ -339,13 +339,43 @@ export function beoordeel(antwoord, host = "") {
 // Alles samen
 // ---------------------------------------------------------------------------------------------
 
+// Contract (testbank/CONTRACT.md): "reden" is een korte Nederlandse uitleg; de code staat apart in "code".
+const UITLEG = {
+  "hersteld": "De getoonde PHP-versie bevat de fix.",
+  "nieuwere-tak": "De getoonde PHP-versie is nieuwer dan elke versie met het lek.",
+  "ubuntu-hersteld": "De Ubuntu-build bevat de teruggezette fix.",
+  "ubuntu-voor-de-fix": "De Ubuntu-build is ouder dan de build met de fix.",
+  "ubuntu-onbekende-build": "Ubuntu-build die we nog niet kennen; laat je host het bevestigen.",
+  "debian-voor-de-fix": "De Debian-build is ouder dan de build met de fix.",
+  "sury-voor-de-fix": "Het Surý-pakket is ouder dan de versie met de fix.",
+  "onder-de-fix-zonder-bewijs": "Versie onder de fix, maar sommige hosts patchen zonder het nummer te veranderen. Laat je host het bevestigen.",
+  "el-leverancier-onder-fix": "Versie onder de fix op een systeem dat fixes vaak terugzet. Laat je host het bevestigen.",
+  "eol-alleen-via-host": "Deze PHP-versie krijgt geen officiële fix meer; alleen je host kan hem gepatcht hebben.",
+  "geen-patchnummer": "De server noemt geen volledig versienummer.",
+  "tegenstrijdige-versies": "De server noemt meer dan één PHP-versie.",
+  "versie-verborgen": "Er draait PHP, maar de server verbergt de versie.",
+  "geen-php-gezien": "Van buitenaf is geen PHP te zien.",
+};
+const uitlegVoor = (code) => UITLEG[code] || (/^onbereikbaar-/.test(code) ? "We konden de site niet lezen." : /-hersteld$/.test(code) ? "De getoonde PHP-versie bevat de fix." : /-niet-te-beoordelen$/.test(code) ? "Pakket waarvan we de fixversie nog niet kennen; laat je host het bevestigen." : "Van buitenaf niet te beoordelen.");
+
 export async function controleer(invoer, opties = {}) {
+  const uit = await controleerKaal(invoer, opties);
+  return uit.ok ? { ...uit, code: uit.reden, reden: uitlegVoor(uit.reden) } : { ...uit, code: uit.reden };
+}
+
+async function controleerKaal(invoer, opties = {}) {
   const d = normaliseerDomein(invoer);
   if (!d.ok) return { ok: false, uitslag: "onbekend", phpVersie: null, reden: d.reden };
   const einde = Date.now() + (opties.timeoutMs || TIMEOUT_MS);
-  let a = await haalHomepage(d.host, { ...opties, einde });
-  // Geen https? Dan één keer gewoon http, zoals een browser die het adres zonder https krijgt.
-  if (!a.ok && !a.stappen?.length && ["verbinding", "tls", "geen-http"].includes(a.reden) && !opties.schema) a = await haalHomepage(d.host, { ...opties, einde, schema: "http" });
+  // 22 oktober 2026 (Marinus): elke invoer moet werken. Eerst https, dan http, en daarna hetzelfde met of zonder www,
+  // zolang er nog geen antwoord kwam (geen DNS, geen verbinding, kapotte TLS). Alles binnen dezelfde 8 seconden.
+  const ander = d.host.startsWith("www.") ? d.host.slice(4) : `www.${d.host}`;
+  const pogingen = opties.schema ? [[d.host, opties.schema]] : [[d.host, "https"], [d.host, "http"], [ander, "https"], [ander, "http"]];
+  let a;
+  for (const [host, schema] of pogingen) {
+    a = await haalHomepage(host, { ...opties, einde, schema });
+    if (a.ok || a.stappen?.length || !["dns", "verbinding", "tls", "geen-http"].includes(a.reden)) break;
+  }
   const basis = { ok: true, domein: d.host, check: VERSIE_CHECK };
   if (!a.ok) {
     // Een redirect die halverwege ophoudt kan al een versie hebben laten zien (bijv. een lus).

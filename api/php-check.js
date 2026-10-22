@@ -1,11 +1,12 @@
 import { binnenLimiet, controleer, testbankModus } from "../server/php-check.mjs";
 
-// POST /api/php-check  { domein, toestemming: true }
+// POST /api/php-check  { domein }
 //   → 200 { ok, domein, uitslag: "groen"|"rood"|"oranje"|"onbekend", phpVersie, reden, ... }
 // Uitleg, grenzen en beslisregels: server/php-check.mjs. Contract en meting:
 // /Volumes/WORK/02-SOCIALNOW/php-check/testbank (npm run meet). Alles gebeurt vóór res.json(): op Vercel
 // stopt de functie zodra het antwoord weg is, dus er loopt daarna niets meer.
-const HERKOMST = /^https:\/\/((www\.)?socialnow\.nl|socialnow-website-[a-z0-9-]+-socialnowmarinus-4115s-projects\.vercel\.app)$/;
+const HERKOMST = /^https:\/\/((www\.)?socialnow\.nl|socialnow-check-preview\.vercel\.app|socialnow-(website|check-preview)-[a-z0-9-]+-socialnowmarinus-4115s-projects\.vercel\.app)$/;
+const recent = new Map();
 const LOKAAL = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
 
 export default async function handler(req, res) {
@@ -22,21 +23,25 @@ export default async function handler(req, res) {
 
   const testbank = testbankModus();
   const ip = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.socket?.remoteAddress || "?";
-  if (!testbank && !binnenLimiet(`ip:${ip}`)) return res.status(429).json({ ok: false, reden: "limiet" });
+  if (!testbank && !binnenLimiet(`ip:${ip}`, 20)) return res.status(429).json({ ok: false, reden: "limiet" });
 
   let body = req.body;
   if (typeof body === "string") { try { body = JSON.parse(body); } catch { body = null; } }
   const domein = String(body?.domein || "").slice(0, 300);
-  // Het vinkje "dit is mijn site of ik heb toestemming" is verplicht. Alleen het meetscript op deze
-  // Mac (testbank, nooit op Vercel) mag zonder.
-  if (body?.toestemming !== true && !testbank) return res.status(400).json({ ok: false, reden: "toestemming" });
-  // Hetzelfde domein niet vaker dan elke 20 seconden: niemand gebruikt ons om een site te bestoken.
-  if (!testbank && !binnenLimiet(`domein:${domein.trim().toLowerCase()}`, 1, 20 * 1000)) return res.status(429).json({ ok: false, reden: "limiet-domein" });
+  // 22 oktober 2026 (Marinus): geen vinkje. De publieke scan is één gewone GET, zoals elke bezoeker doet.
+  // Hetzelfde domein hooguit eens per 20 seconden echt opvragen: niemand gebruikt ons om een site te bestoken.
+  // Wie binnen die tijd opnieuw checkt, krijgt de uitslag van daarnet (alleen in het geheugen, 20 s).
+  const sleutel = domein.trim().toLowerCase();
+  const eerder = !testbank && recent.get(sleutel);
+  if (eerder && Date.now() - eerder.t < 20 * 1000) return res.status(200).json(eerder.uit);
 
   try {
     const uit = await controleer(domein);
+    if (uit.ok && !testbank) { recent.set(sleutel, { t: Date.now(), uit }); if (recent.size > 500) recent.delete(recent.keys().next().value); }
     return res.status(uit.ok ? 200 : 400).json(uit);
-  } catch {
-    return res.status(200).json({ ok: true, domein, uitslag: "onbekend", phpVersie: null, reden: "fout" });
+  } catch (e) {
+    // Een check lukt altijd: faalt onze eigen functie, dan is de uitslag gewoon "onbekend".
+    console.error("php-check fout", String(e?.message || e));
+    return res.status(200).json({ ok: true, domein, uitslag: "onbekend", phpVersie: null, code: "fout", reden: "Van buitenaf niet te beoordelen." });
   }
 }
