@@ -11,3 +11,53 @@
 html:root .sn-site .sn-pill.sn-pill-connect{--sn-pill-green:#00739e;background:#00739e !important;border-color:#00739e !important;color:#fff !important}
 html:root .sn-site .sn-pill.sn-pill-connect > span:not(.h-button-icon){color:#fff !important;-webkit-text-fill-color:#fff !important}
 html:root .sn-site .sn-pill.sn-pill-connect .h-button-icon{background:#fff !important;color:#00739e !important}
+
+/* 22 oktober 2026 (Marinus): startbeeld van de OS-film in HTML/CSS in plaats van een filmframe (water in een zwembad).
+   Zwart vlak, dunne witte rand. Boven SocialNow OS x Indexworld en SocialNow Connect x Uncanny: de SocialNow-logo's links
+   uitgelijnd, zodat bol en woord SocialNow precies onder elkaar staan. Midden de afspeelknop met één zin. Onder Trusted by,
+   rustig van kleur (wit of grijs, 72 procent dekking), optisch even hoog. Letters nooit aan elkaar. Het vlak houdt 16:9 en
+   groeit mee als de inhoud op een smal scherm meer ruimte vraagt. In de speler ligt hetzelfde startbeeld over de film tot die speelt. */
+html:root .sn-site .sn-explainer-cover.sn-explainer-start{container-type:inline-size;display:block;position:relative;width:100%;aspect-ratio:auto;padding:0;margin:0;background:#000;border:1px solid #ffffffd9;border-radius:12px;overflow:hidden;color:#fff;font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0}
+html:root .sn-site .sn-explainer-start>.sn-startbeeld{position:relative;inset:auto;transform:none;display:grid;grid-template-rows:auto 1fr auto;justify-items:center;gap:clamp(14px,3cqi,22px);width:100%;aspect-ratio:16/9;padding:clamp(18px,4.6cqi,32px) clamp(14px,4.6cqi,36px);border:0;border-radius:0;background:transparent;white-space:normal;font-size:inherit;font-weight:inherit;--logo-h:clamp(15px,min(4.3cqi,calc((100cqi - 80px) / 14.2)),30px);--merk-h:clamp(14px,2.8cqi,20px)}
+html:root .sn-site .sn-explainer-start img{aspect-ratio:auto;max-width:none;flex:none}
+html:root .sn-site .sn-startbeeld-paren{display:grid;grid-template-columns:auto auto auto;align-items:center;justify-items:start;gap:clamp(6px,1.6cqi,10px) clamp(10px,2.4cqi,16px)}
+html:root .sn-site .sn-startbeeld-paren img{display:block;width:auto}
+html:root .sn-site .sn-startbeeld-os{height:var(--logo-h)}
+html:root .sn-site .sn-startbeeld-connect{height:calc(var(--logo-h) * 1.017)}
+html:root .sn-site .sn-startbeeld-partner{height:calc(var(--logo-h) * 1.1)}
+html:root .sn-site .sn-startbeeld-partner.is-wit{filter:brightness(0) invert(1)}
+html:root .sn-site .sn-startbeeld-x{color:#7d8f86;justify-self:center}
+html:root .sn-site .sn-startbeeld-midden{align-self:center;display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2.2cqi,16px)}
+html:root .sn-site .sn-startbeeld-zin{max-width:44ch;margin:0;font-size:clamp(13px,2.3cqi,16px);font-weight:500;line-height:1.45;letter-spacing:0;text-align:center;text-transform:none;color:#c6d3cc;text-wrap:balance}
+html:root .sn-site .sn-startbeeld-trusted{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;padding-top:clamp(10px,2.2cqi,14px);border-top:1px solid #ffffff1f}
+html:root .sn-site .sn-startbeeld-label,html:root .sn-site .sn-startbeeld-via{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8fa39a;white-space:nowrap}
+html:root .sn-site .sn-startbeeld-via{letter-spacing:.08em;text-transform:none;font-size:11px;font-weight:600}
+html:root .sn-site .sn-startbeeld-merken{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px clamp(16px,3.4cqi,26px)}
+html:root .sn-site .sn-startbeeld-groep{display:flex;align-items:center;gap:clamp(12px,2.6cqi,20px)}
+html:root .sn-site .sn-startbeeld-groep+.sn-startbeeld-groep{padding-left:clamp(16px,3.4cqi,26px);border-left:1px solid #ffffff26}
+html:root .sn-site .sn-startbeeld-merken img{display:block;height:calc(var(--merk-h) * var(--maat, 1));width:auto;filter:brightness(0) invert(1);opacity:.72}
+html:root .sn-site .sn-startbeeld-merken img.is-kleur{filter:grayscale(1) brightness(1.25) contrast(1.1)}
+/* Afspeelknop (Marinus 22 okt): groot, transparante vulling, groene rand, witte tekst, groen pijlrondje en een kleine zwarte outline. */
+html:root .sn-site .sn-startbeeld>.sn-startbeeld-midden>.sn-pill{--sn-pill-height:62px;position:relative;inset:auto;translate:none;width:max-content;max-width:100%;padding-left:28px;gap:22px;background:transparent !important;font-size:14px !important;outline:1.5px solid #000;outline-offset:0}
+/* Pijl donker op het groene rondje, zoals Start for free en Log in links in de hero: contrast 10,6:1 in plaats van 2:1 met wit. */
+html:root .sn-site .sn-startbeeld-knop .h-button-icon{color:#002912 !important}
+html:root .sn-site .sn-explainer-start:is(:hover,:focus-visible) .sn-pill::before{transform:translateX(0)}
+html:root .sn-site .sn-explainer-start:is(:hover,:focus-visible) .sn-pill .h-button-icon{background:#fff !important;color:var(--sn-pill-green) !important}
+@container (max-width:520px){
+  html:root .sn-site .sn-explainer-start>.sn-startbeeld{--logo-h:clamp(15px,calc((100cqi - 72px) / 14.2),24px);--merk-h:15px;gap:14px}
+  html:root .sn-site .sn-startbeeld-groep+.sn-startbeeld-groep{padding-left:0;border-left:0}
+  html:root .sn-site .sn-startbeeld>.sn-startbeeld-midden>.sn-pill{--sn-pill-height:52px;font-size:12px !important;padding-left:20px;gap:14px}
+}
+/* In de speler: zelfde beeld over de film, tot de film speelt. Bij een lage speler alleen logo's en knop. */
+.sn-video-stage{position:relative}
+html:root .sn-site .sn-explainer-cover.sn-video-startlaag{position:absolute;inset:0;border:0;border-radius:0}
+html:root .sn-site .sn-video-startlaag>.sn-startbeeld{height:100%;aspect-ratio:auto}
+@container (max-width:720px){html:root .sn-site .sn-video-startlaag .sn-startbeeld-zin,html:root .sn-site .sn-video-startlaag .sn-startbeeld-trusted{display:none}html:root .sn-site .sn-video-startlaag>.sn-startbeeld{grid-template-rows:auto 1fr}}
+@media(prefers-reduced-motion:reduce){html:root .sn-site .sn-startbeeld .sn-pill::before{transition:none}}
+
+/* 22 oktober 2026 (Marinus): de knop op de Connect-film krijgt het ontwerp van de blauwe knoppen links in de hero (Bekijk Connect,
+   Bekijk het hele team): geen vulling, blauwe rand, witte tekst, blauw pijlrondje, plus een kleine zwarte outline zodat hij opvalt op de film.
+   Een lichte donkere waas achter de tekst houdt het contrast boven 4,5:1, ook boven de lichte foto's in de poster. */
+html:root .sn-site .sn-explainer-cover>.sn-pill.sn-pill-connect{--sn-pill-green:#0a2530;background:#00000080 !important;border-color:#20afde !important;outline:1.5px solid #000;outline-offset:0;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+html:root .sn-site .sn-explainer-cover>.sn-pill.sn-pill-connect .h-button-icon{background:#20afde !important;color:#05282e !important}
+html:root .sn-site .sn-explainer-cover:is(:hover,:focus-visible)>.sn-pill.sn-pill-connect .h-button-icon{background:#fff !important;color:#05282e !important}
