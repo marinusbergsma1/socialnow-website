@@ -1,0 +1,7 @@
+GROEN  één omleiding met host-voorwaarde security.socialnow.nl
+GROEN  elk pad op het subdomein gaat mee
+GROEN  doel is https://socialnow.nl/security
+GROEN  permanent (308)
+GROEN  staat bovenaan, vóór de andere omleidingen
+
+alles groen
