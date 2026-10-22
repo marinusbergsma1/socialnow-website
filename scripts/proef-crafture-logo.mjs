@@ -33,7 +33,8 @@ eis(["Universal", "Warner Bros.", "MOJO", "IMAX", "Marvel"].map(n => lijst("VIA_
 // Streep en kleur
 eis(/\.sn-startbeeld-streep\{[^}]*width:1px;[^}]*background:#ffffff26/.test(css), "dunne verticale streep tussen Crafture en de vijf merken, zelfde kleur als de streep na Supperclub");
 eis(/\.sn-startbeeld-merken img\{[^}]*filter:brightness\(0\) invert\(1\);opacity:\.72\}/.test(css), "rustig van kleur, zoals de andere logo's");
-eis(/naam: "Crafture"[^}]*maat: 1\.55/.test(speler), "optisch even hoog als de andere staande logo's (maat 1,55, zoals Supperclub)");
+// Later op 22 oktober (Marinus): Crafture iets groter dan de rest, zie scripts/proef-software-partners.mjs.
+eis(/naam: "Crafture"[^}]*maat: 2\.1/.test(speler), "Crafture iets groter dan de andere logo's (maat 2,1)");
 
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");
 process.exit(fouten.length ? 1 : 0);

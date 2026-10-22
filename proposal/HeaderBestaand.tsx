@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Check, LayoutDashboard, ShieldCheck, Users } from "lucide-react";
 import { klein } from "./licht";
@@ -95,6 +95,24 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
   // 21 oktober 2026 (Marinus): "kleine switch boven de explainer video in de header wat een beeld geeft hoe ze m kunnen switchen
   // tussen de 2 video's." Eén speler; de schakelaar wisselt film, poster en de regel eronder. Standaard de OS-film.
   const [film, setFilm] = useState<"os" | "connect">("os");
+  // 22 oktober 2026 (Marinus): "Witte ring is nice maar moet echt een smooth morph transition zijn en Connect moet blauw zijn."
+  // Eén vlak glijdt naar de gekozen knop en neemt diens breedte over. De eerste plaatsing gebeurt zonder animatie.
+  const filmkeuze = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const groep = filmkeuze.current;
+    if (!groep) return;
+    const zet = () => {
+      const knop = groep.querySelector<HTMLElement>('button[aria-pressed="true"]');
+      if (!knop) return;
+      groep.style.setProperty("--glijder-x", `${knop.offsetLeft}px`);
+      groep.style.setProperty("--glijder-w", `${knop.offsetWidth}px`);
+      if (!groep.dataset.glijder) { groep.dataset.glijder = "staat"; requestAnimationFrame(() => requestAnimationFrame(() => { groep.dataset.glijder = "klaar"; })); }
+    };
+    zet();
+    const rs = typeof ResizeObserver === "function" ? new ResizeObserver(zet) : null;
+    rs?.observe(groep);
+    return () => rs?.disconnect();
+  }, [film]);
   const [custom, setCustom] = useState(CUSTOM[0].id);
   return (
     <div className="sn-choice sn-bestaand" data-variant="bestaand">
@@ -180,7 +198,8 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 </ul>
               </div>
             </div>
-            <div className="bs-filmkeuze" role="group" aria-label="Kies een film">
+            <div className="bs-filmkeuze" role="group" aria-label="Kies een film" ref={filmkeuze} data-film={film}>
+              <span className="bs-film-glijder" aria-hidden="true" />
               <button type="button" className={`bs-film-os${film === "os" ? " is-aan" : ""}`} aria-pressed={film === "os"} onClick={() => setFilm("os")}>
                 <LayoutDashboard size={15} aria-hidden="true" /><span translate="no">SocialNow OS</span>
               </button>

@@ -20,7 +20,8 @@ const DIRECT = [
   { naam: "AZ", src: "/images/merken/AZ-LOGO-KLEUR.svg", w: 235, h: 115, kleur: true, maat: 1.15 },
   { naam: "Supperclub", src: "/images/merken/SUPPERCLUB-LOGO.webp", w: 109, h: 120, maat: 1.55 },
 ];
-const CRAFTURE = { naam: "Crafture", src: "/images/merken/CRAFTURE-LOGO.svg", w: 527, h: 707, maat: 1.55 };
+// 22 oktober 2026 (Marinus): "Crafture iets groter dan de rest van de logo's".
+const CRAFTURE = { naam: "Crafture", src: "/images/merken/CRAFTURE-LOGO.svg", w: 527, h: 707, maat: 2.1 };
 const VIA_CRAFTURE = [
   { naam: "Universal", src: "/images/merken/UNIVERSAL-LOGO.svg", w: 128, h: 79, maat: 1.55 },
   { naam: "Warner Bros.", src: "/images/merken/WARNER-BROS-LOGO.svg", w: 57, h: 80, maat: 1.3 },
@@ -33,13 +34,20 @@ const merk = (m: { naam: string; src: string; w: number; h: number; kleur?: bool
   <img key={m.naam} className={m.kleur ? "is-kleur" : undefined} src={m.src} alt={m.naam} translate="no" width={m.w} height={m.h} loading="lazy" decoding="async" style={{ "--maat": m.maat } as React.CSSProperties} />;
 function Startbeeld({ label, zinId }: { label: string; zinId: string }) {
   return <span className="sn-startbeeld">
-    <span className="sn-startbeeld-paren" aria-hidden="true">
-      <img className="sn-startbeeld-os" src="/images/merk/socialnow-os-bijgesneden.webp" alt="" width="596" height="88" decoding="async" />
-      <X className="sn-startbeeld-x" size={14} aria-hidden="true" />
-      <img className="sn-startbeeld-partner is-wit" src="/images/home-header/indexworld.png" alt="" width="725" height="176" decoding="async" />
-      <img className="sn-startbeeld-connect" src="/images/merk/socialnow-connect.webp" alt="" width="782" height="88" decoding="async" />
-      <X className="sn-startbeeld-x" size={14} aria-hidden="true" />
-      <img className="sn-startbeeld-partner" src="/images/home-header/uncanny-op-zwart.svg" alt="" width="1365" height="300" decoding="async" />
+    {/* 22 oktober 2026 (Marinus): "Product Partners of Software Partners is hier sterk en dan de logobalk van hun. Zoals op het einde
+        van de video." Dus één balk zoals het slotbeeld van de OS-film, met het kopje Software Partners erboven.
+        Daarna: "Bij die Partnerbalk hoeft SocialNow verder niet." Dus alleen de vier partners. */}
+    <span className="sn-startbeeld-software" aria-hidden="true">
+      <span className="sn-startbeeld-kop" translate="no">Software Partners</span>
+      <span className="sn-startbeeld-partnerbalk">
+        <span className="sn-startbeeld-attesso" translate="no"><b>~/a</b><code>~/attesso</code></span>
+        <X className="sn-startbeeld-x" size={12} aria-hidden="true" />
+        <img className="sn-startbeeld-komen" src="/images/merken/komen-operation-systems.webp" alt="" width="600" height="96" decoding="async" />
+        <X className="sn-startbeeld-x" size={12} aria-hidden="true" />
+        <img className="sn-startbeeld-partner" src="/images/home-header/uncanny-op-zwart.svg" alt="" width="1365" height="300" decoding="async" />
+        <X className="sn-startbeeld-x" size={12} aria-hidden="true" />
+        <img className="sn-startbeeld-partner is-wit" src="/images/home-header/indexworld.png" alt="" width="725" height="176" decoding="async" />
+      </span>
     </span>
     <span className="sn-startbeeld-midden">
       <span className="sn-pill sn-startbeeld-knop"><span>{label}</span><span className="h-button-icon"><ArrowUpRight size={20} aria-hidden="true" /></span></span>
