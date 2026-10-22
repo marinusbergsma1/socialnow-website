@@ -192,11 +192,9 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 ? <ExplainerPlayer key="os" ctaLabel="Ontdek SocialNow" />
                 : <ExplainerPlayer key="connect" kind="connect" ctaLabel="Bekijk de Connect-film" />}
             </div>
-            {/* 21 oktober 2026: OS-film v9 (81-explainer-v8/werk/02-webtekst.md §1, versie 4) en Connect-film v1 (82-connect-film-v1/werk/02-webtekst.md).
-                De regel onder de speler wisselt mee; de ruimte is vast, zodat de layout niet verspringt. */}
-            <p className="bs-explainer-onder">{film === "os"
-              ? "In ruim twee minuten: wat je met het OS doet, wie het bouwt en wat het kost. Gesproken in het Engels."
-              : "In één minuut: zelf je expert kiezen, wat een expert van je ziet, de pakketten en onze groeigarantie. Gesproken in het Engels."}</p>
+            {/* 21 oktober 2026: Connect-film v1 (82-connect-film-v1/werk/02-webtekst.md).
+                22 oktober 2026: de uitlegzin van de OS-film staat nu in het startbeeld van de speler (ExplainerPlayer.tsx), dus niet nog eens hieronder. */}
+            {film === "connect" && <p className="bs-explainer-onder">In één minuut: zelf je expert kiezen, wat een expert van je ziet, de pakketten en onze groeigarantie. Gesproken in het Engels.</p>}
           </div>
         </section>
       </div>
