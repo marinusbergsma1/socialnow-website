@@ -2992,5 +2992,8 @@
   "Alleen openbare informatie: je homepage, hooguit vijf gelinkte pagina's, DNS en Google PageSpeed. Bekende lekken komen uit OSV.dev en WordPress.org.": "Apenas informação pública: a tua página inicial, no máximo cinco páginas ligadas, DNS e Google PageSpeed. As falhas conhecidas vêm do OSV.dev e do WordPress.org.",
   "Vijf punten van je website.": "Cinco pontos do teu site.",
   "Niet te meten": "Não mensurável",
-  "Voeg een Permissions-Policy toe, bijvoorbeeld camera=(), microphone=(), geolocation=().": "Adiciona uma Permissions-Policy, por exemplo camera=(), microphone=(), geolocation=()."
+  "Voeg een Permissions-Policy toe, bijvoorbeeld camera=(), microphone=(), geolocation=().": "Adiciona uma Permissions-Policy, por exemplo camera=(), microphone=(), geolocation=().",
+  "Je server draait PHP {php}. Die versie krijgt geen beveiligingsupdates meer.": "O teu servidor usa PHP {php}. Essa versão já não recebe atualizações de segurança.",
+  "Kies in je hostingpaneel PHP 8.3 of nieuwer en test je site daarna.": "Escolhe PHP 8.3 ou mais recente no painel de alojamento e testa o teu site a seguir.",
+  "Je site noemt geen versies van zijn software, dus we kunnen niet zien of die bij is.": "O teu site não indica versões do software, por isso não conseguimos ver se está atualizado."
 }
