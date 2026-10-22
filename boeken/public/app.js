@@ -29,6 +29,10 @@ const T = {
     onbekend: "We could not find this booking. It may have been cancelled or moved.",
     voorbij: "This call has already taken place.",
     demo: "Preview mode: nothing is put in a real calendar and no invites are sent.",
+    alleenKijken: "Online booking is not live yet. Pick a moment and request it through our contact form.",
+    kiesDag: "Choose a day", kiesTijd: "Choose a time",
+    aanvraagKop: "Request this moment", aanvraagUitleg: "Online booking goes live soon. Send this moment through our contact form and we will confirm it by email.",
+    aanvraag: "Request via the form", aanvraagOnderwerp: "Call request",
     voet: "No tracking. We only use your details for this call.",
   },
   nl: {
@@ -55,6 +59,10 @@ const T = {
     onbekend: "We vinden deze afspraak niet. Misschien is hij al geannuleerd of verzet.",
     voorbij: "Deze call is al geweest.",
     demo: "Voorbeeldmodus: er komt niets in een echte agenda en er gaan geen uitnodigingen uit.",
+    alleenKijken: "Online boeken staat nog niet live. Kies een moment en vraag het aan via ons contactformulier.",
+    kiesDag: "Kies een dag", kiesTijd: "Kies een tijd",
+    aanvraagKop: "Vraag dit moment aan", aanvraagUitleg: "Online boeken gaat binnenkort live. Stuur dit moment via ons contactformulier, dan bevestigen we het per mail.",
+    aanvraag: "Aanvragen via het formulier", aanvraagOnderwerp: "Call aanvragen",
     voet: "Geen tracking. We gebruiken je gegevens alleen voor deze call.",
   },
 };
@@ -125,7 +133,7 @@ function zetVast() {
   if (s) $("#feit-duur").textContent = `${s.minuten} ${t("min")}`;
   $("#feit-zone").textContent = staat.zone.replace(/_/g, " ");
   $("#demo").hidden = !staat.info?.demo;
-  $("#demo").textContent = t("demo");
+  $("#demo").textContent = staat.info?.alleenKijken ? t("alleenKijken") : t("demo");
   $("#voet").textContent = t("voet");
   $("#privacy").textContent = t("privacy");
   }
@@ -168,7 +176,7 @@ async function kiesSoort(id, modus = "boek") {
   staat.slots = j.slots || [];
   staat.opgehaald = Date.now();
   const dagen = groepeerPerDag(staat.slots, staat.zone);
-  if (!dagen.some((d) => d.datum === staat.dag)) staat.dag = dagen[0]?.datum || null;
+  if (!dagen.some((d) => d.datum === staat.dag)) staat.dag = null;
   toonMoment(modus);
 }
 
@@ -185,10 +193,11 @@ function zoneKeuze() {
 function toonMoment(modus = "boek") {
   staat.modus = modus;
   const dagen = groepeerPerDag(staat.slots, staat.zone);
-  const dag = dagen.find((d) => d.datum === staat.dag) || dagen[0];
+  // Eerst een dag, dan een tijdblok. Alleen dagen met nog iets vrij staan erin.
+  const dag = dagen.find((d) => d.datum === staat.dag) || null;
   const terug = modus === "verzet" ? "" : `<button class="terug" type="button" id="terug">${TERUG}${esc(t("terug"))}</button>`;
   const kop = modus === "verzet" ? t("verzetNaar") : t("moment");
-  if (!dag) {
+  if (!dagen.length) {
     return toon(`${terug}<h2>${esc(kop)}</h2><p class="leeg">${esc(t("geen"))}</p><div class="knoppen">${linkKnop(t("mail"), "mailto:info@socialnow.nl")}</div>`, () => {
       $("#terug") && ($("#terug").onclick = toonSoorten);
     });
@@ -197,15 +206,15 @@ function toonMoment(modus = "boek") {
     ${terug}
     <h2>${esc(kop)}</h2><p class="sub">${esc(t("momentSub"))}</p>
     ${zoneKeuze()}
-    <div class="dagen" role="group">${dagen.map((d) => {
+    <p class="daglabel">${esc(dag ? dagLabel(dag.datum, staat.taal, { weekday: "long", day: "numeric", month: "long" }) : t("kiesDag"))}</p>
+    <div class="dagen" role="group" aria-label="${esc(t("kiesDag"))}">${dagen.map((d) => {
       const [, , dd] = d.datum.split("-");
-      return `<button class="dag" type="button" data-dag="${d.datum}" aria-pressed="${d.datum === dag.datum}">
+      return `<button class="dag" type="button" data-dag="${d.datum}" aria-pressed="${d.datum === dag?.datum}">
         <small>${esc(dagLabel(d.datum, staat.taal, { weekday: "short" }).replace(".", ""))}</small><strong>${+dd}</strong><span>${esc(dagLabel(d.datum, staat.taal, { month: "short" }).replace(".", ""))}</span></button>`;
     }).join("")}</div>
-    <p class="daglabel">${esc(dagLabel(dag.datum, staat.taal, { weekday: "long", day: "numeric", month: "long" }))}</p>
-    <div class="tijden">${dag.tijden.map((s) => `<button class="tijd" type="button" data-slot="${s.iso}" aria-pressed="${s.iso === staat.slot}">${s.tijd}</button>`).join("")}</div>`, () => {
+    ${dag ? `<p class="daglabel">${esc(t("kiesTijd"))}</p><div class="tijden">${dag.tijden.map((s) => `<button class="tijd" type="button" data-slot="${s.iso}" aria-pressed="${s.iso === staat.slot}">${s.tijd}</button>`).join("")}</div>` : ""}`, () => {
     $("#terug") && ($("#terug").onclick = toonSoorten);
-    $("#zone").onchange = (e) => { staat.zone = e.target.value; opslag.set("boeken-zone", staat.zone); toonMoment(modus); };
+    $("#zone").onchange = (e) => { staat.zone = e.target.value; opslag.set("boeken-zone", staat.zone); staat.dag = null; toonMoment(modus); };
     for (const b of paneel.querySelectorAll("[data-dag]")) b.onclick = () => { staat.dag = b.dataset.dag; toonMoment(modus); };
     for (const b of paneel.querySelectorAll("[data-slot]")) b.onclick = () => { staat.slot = b.dataset.slot; modus === "verzet" ? toonVerzetBevestig() : toonGegevens(); };
     paneel.querySelector('.dag[aria-pressed="true"]')?.scrollIntoView({ block: "nearest", inline: "nearest" });
@@ -218,7 +227,25 @@ function eindVan(startIso) {
   return new Date(Date.parse(startIso) + soortVan(staat.soort).minuten * 60000).toISOString();
 }
 
+// Productie zonder Google-sleutels: niet echt boeken, maar het gekozen moment via het contactformulier aanvragen.
+function toonAanvraag() {
+  const s = soortVan(staat.soort);
+  const moment = momentTekst(staat.slot, eindVan(staat.slot));
+  const domein = staat.vooraf.domein ? `, ${staat.vooraf.domein}` : "";
+  const onderwerp = `${t("aanvraagOnderwerp")}: ${soortTitel(s)}, ${moment} (${staat.zone})${domein}`;
+  const href = `https://socialnow.nl${staat.taal === "nl" ? "/nl" : ""}/contact?onderwerp=${encodeURIComponent(onderwerp)}`;
+  toon(`
+    <button class="terug" type="button" id="terug">${TERUG}${esc(t("terug"))}</button>
+    <h2>${esc(t("aanvraagKop"))}</h2>
+    <div class="samenvatting"><strong>${esc(soortTitel(s))}, ${s.minuten} ${esc(t("min"))}</strong><span>${esc(moment)}</span><span>${esc(staat.zone.replace(/_/g, " "))}</span>${staat.vooraf.domein ? `<span>${esc(t("domein"))}: ${esc(staat.vooraf.domein)}</span>` : ""}</div>
+    <p class="sub">${esc(t("aanvraagUitleg"))}</p>
+    <div class="knoppen"><a class="knop" href="${esc(href)}"><span>${esc(t("aanvraag"))}</span><i>${PIJL}</i></a></div>`, () => {
+    $("#terug").onclick = () => toonMoment();
+  });
+}
+
 function toonGegevens(melding = "") {
+  if (staat.info?.alleenKijken) return toonAanvraag();
   const s = soortVan(staat.soort);
   const v = staat.vooraf;
   const velden = veldenVoor(s);
@@ -371,14 +398,14 @@ function nieuweBoeking() {
 
 // Staat iemand langer dan een minuut op de tijdenkeuze, dan halen we de vrije tijden stil opnieuw op.
 async function ververs() {
-  if (!staat.soort || !paneel.querySelector(".tijden") || Date.now() - (staat.opgehaald || 0) < 60_000) return;
+  if (!staat.soort || !paneel.querySelector(".dagen") || Date.now() - (staat.opgehaald || 0) < 60_000) return;
   const j = await api(`/api/slots?type=${encodeURIComponent(staat.soort)}`);
-  if (!j.ok || !paneel.querySelector(".tijden")) return;
+  if (!j.ok || !paneel.querySelector(".dagen")) return;
   staat.slots = j.slots || [];
   staat.opgehaald = Date.now();
   if (staat.slot && !staat.slots.includes(staat.slot)) staat.slot = null;
   const dagen = groepeerPerDag(staat.slots, staat.zone);
-  if (!dagen.some((d) => d.datum === staat.dag)) staat.dag = dagen[0]?.datum || null;
+  if (!dagen.some((d) => d.datum === staat.dag)) staat.dag = null;
   toonMoment(staat.modus);
 }
 setInterval(ververs, 15_000);

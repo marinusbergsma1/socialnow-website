@@ -1,6 +1,5 @@
-import config from "../config.mjs";
 import { boek } from "../lib/boek.mjs";
-import { instellingen, kiesAgenda } from "../lib/omgeving.mjs";
+import { instellingen, kiesAgenda, effectieveConfig } from "../lib/omgeving.mjs";
 import { maakBeheerToken } from "../lib/sleutel.mjs";
 import { basis, binnenLimiet, fout, ip, lichaam, basisUrlVan } from "../lib/http.mjs";
 
@@ -12,9 +11,10 @@ export default async function handler(req, res) {
   if (b.website) return res.status(400).json({ ok: false, reden: "invoer" }); // honingpot voor bots
   if (!binnenLimiet(`boek:${ip(req)}`)) return res.status(429).json({ ok: false, reden: "limiet" });
 
-  const agenda = kiesAgenda();
-  if (!agenda) return res.status(503).json({ ok: false, reden: "niet-ingesteld" });
   const ins = instellingen();
+  const agenda = kiesAgenda();
+  if (!agenda || ins.alleenKijken) return res.status(503).json({ ok: false, reden: "niet-ingesteld" });
+  const config = await effectieveConfig();
   const taal = b.taal === "nl" ? "nl" : "en";
   const basisUrl = basisUrlVan(req, ins);
   const beheerUrl = ins.geheim ? (id) => `${basisUrl}/?beheer=${encodeURIComponent(maakBeheerToken(id, ins.geheim))}&lang=${taal}` : null;

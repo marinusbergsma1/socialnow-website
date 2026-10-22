@@ -1,6 +1,5 @@
-import config from "../config.mjs";
 import { berekenSlots, venster } from "../lib/slots.mjs";
-import { instellingen, kiesAgenda } from "../lib/omgeving.mjs";
+import { instellingen, kiesAgenda, effectieveConfig } from "../lib/omgeving.mjs";
 import { basis, fout } from "../lib/http.mjs";
 
 // GET /api/slots            → soorten calls en instellingen voor de pagina
@@ -8,11 +7,14 @@ import { basis, fout } from "../lib/http.mjs";
 export default async function handler(req, res) {
   if (!basis(req, res, ["GET"])) return;
   const ins = instellingen();
+  const config = await effectieveConfig();
   const algemeen = {
     tijdzone: config.tijdzone,
     standaardSoort: config.standaardSoort,
     soorten: Object.entries(config.soorten).map(([id, s]) => ({ id, minuten: s.minuten, titel: s.titel, uitleg: s.uitleg, vraag: s.vraag, velden: s.velden })),
     demo: ins.demo,
+    echt: ins.heeftGoogle,
+    alleenKijken: ins.alleenKijken,
     noodroute: ins.noodroute || null,
   };
   const type = String(req.query?.type || "");

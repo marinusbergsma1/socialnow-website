@@ -1,8 +1,7 @@
 import { timingSafeEqual, createHash } from "node:crypto";
-import config from "../config.mjs";
 import { berekenSlots } from "../lib/slots.mjs";
 import { isoMetOffset, datumInZone, plusDagen, zoneNaarUtc } from "../lib/tijd.mjs";
-import { kiesAgenda } from "../lib/omgeving.mjs";
+import { kiesAgenda, effectieveConfig } from "../lib/omgeving.mjs";
 import { basis, binnenLimiet, fout, ip } from "../lib/http.mjs";
 
 // Privé-overzicht voor Marinus (het SocialNow OS leest dit server-side). Contract in LEESMIJ.md.
@@ -24,6 +23,7 @@ export default async function handler(req, res) {
 
   const agenda = kiesAgenda();
   if (!agenda) return res.status(503).json({ ok: false, reden: "niet-ingesteld" });
+  const config = await effectieveConfig();
   const tz = config.tijdzone;
   const nu = new Date();
   const datum = (w) => (/^\d{4}-\d\d-\d\d$/.test(String(w || "")) ? String(w) : null);

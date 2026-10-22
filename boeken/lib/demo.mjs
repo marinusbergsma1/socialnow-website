@@ -6,7 +6,7 @@ import { datumInZone, plusDagen, weekdag, zoneNaarUtc } from "./tijd.mjs";
 // Een paar vaste bezette blokken per weekdag, zodat de pagina eruitziet als een gewone week.
 const VOORBEELD = { 1: [["10:00", "11:00"], ["14:00", "15:00"]], 2: [["09:00", "10:30"]], 3: [["13:00", "14:30"]], 4: [["11:00", "12:00"], ["15:00", "16:00"]], 5: [["09:30", "10:30"]] };
 
-export function demoAgenda(tz = "Europe/Amsterdam") {
+export function demoAgenda(tz = "Europe/Amsterdam", { voorbeeldBezet: metVoorbeeld = true } = {}) {
   const afspraken = new Map();
   let volgnummer = 0;
   const overlapt = (a, b, c, d) => a < d && c < b;
@@ -23,7 +23,7 @@ export function demoAgenda(tz = "Europe/Amsterdam") {
   return {
     demo: true,
     async bezet(van, tot) {
-      return [...voorbeeldBezet(van, tot), ...actief()].filter((b) => overlapt(b.start, b.eind, +van, +tot)).map(({ start, eind }) => ({ start, eind }));
+      return [...(metVoorbeeld ? voorbeeldBezet(van, tot) : []), ...actief()].filter((b) => overlapt(b.start, b.eind, +van, +tot)).map(({ start, eind }) => ({ start, eind }));
     },
     async boekingen(van, tot) {
       return actief().filter((a) => overlapt(a.start, a.eind, +van, +tot));

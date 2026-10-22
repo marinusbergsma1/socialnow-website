@@ -46,10 +46,14 @@ export function kandidaten(config, soortId, nu = new Date()) {
   for (let i = 0; i <= config.maximaleDagenVooruit; i++) {
     const datum = plusDagen(vandaag, i);
     if (vrij.has(datum)) continue;
-    for (const [van, tot] of config.werktijden[DAGEN[weekdag(datum)]] || []) {
+    // Een datum uit de beschikbaarheid van het OS gaat voor de gewone weekdag.
+    const dag = config.datums && Object.hasOwn(config.datums, datum) ? config.datums[datum] : config.werktijden[DAGEN[weekdag(datum)]];
+    for (const [van, tot] of dag || []) {
       for (let m = minutenVan(van); m + duur <= minutenVan(tot); m += stap) {
-        const start = zoneNaarUtc(datum, tijdVan(m), tz);
-        if (+start >= vroegst) uit.push(+start);
+        const start = +zoneNaarUtc(datum, tijdVan(m), tz);
+        if (start < vroegst) continue;
+        if ((config.dicht || []).some((p) => overlapt(start, start + duur * MINUUT, p.start, p.eind))) continue;
+        uit.push(start);
       }
     }
   }

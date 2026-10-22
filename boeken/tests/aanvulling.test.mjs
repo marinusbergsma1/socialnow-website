@@ -118,7 +118,7 @@ test("privacy: het publieke antwoord bevat alleen vrije begintijden, niets over 
   zetProefAgenda(null);
   assert.equal(res.code, 200);
   assert.equal(res.headers["cache-control"], "no-store");
-  const toegestaan = new Set(["ok", "tijdzone", "standaardSoort", "soorten", "demo", "noodroute", "soort", "slots"]);
+  const toegestaan = new Set(["ok", "tijdzone", "standaardSoort", "soorten", "demo", "echt", "alleenKijken", "noodroute", "soort", "slots"]);
   assert.deepEqual(Object.keys(res.body).filter((k) => !toegestaan.has(k)), []);
   assert.ok(res.body.slots.every((s) => typeof s === "string" && /^\d{4}-\d\d-\d\dT\d\d:\d\d:00\.000Z$/.test(s)));
   const tekst = JSON.stringify(res.body);
