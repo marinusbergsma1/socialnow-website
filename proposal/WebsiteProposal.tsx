@@ -49,7 +49,7 @@ let allPosts: typeof import("../data/posts").allPosts = [];
 let brandMeta: typeof import("../scripts/brand-meta.mjs").brandMeta | null = null;
 import { MotionProvider } from "./motion";
 import LanguageSwitch from "./LanguageSwitch";
-import { HeaderCall, NAV_LINKS, PRODUCTEN, ProductenMenu } from "./Producten";
+import { DIENSTEN, DienstenMenu, HeaderCall, Kleurwoord, NAV_LINKS, PRODUCTEN, ProductenMenu } from "./Producten";
 import { PlanCallHost, openPlanCall } from "./PlanCall";
 import { LanguageProvider, LANGUAGES, languagePrefix, type Language, useLanguage } from "./i18n/context";
 const PrivacyPage = later(() => import("../components/PrivacyPage").then((m) => m.default));
@@ -226,7 +226,7 @@ function ProposalShell() {
           </Link>
           <nav className="h-desktop-nav" aria-label="Hoofdnavigatie">
             <ProductenMenu />
-            {nav.map(([path, title]) => (
+            {nav.map(([path, title]) => path === "/diensten" ? <DienstenMenu key={path} /> : (
               <NavLink key={path} to={path}>
                 {title}
               </NavLink>
@@ -259,14 +259,27 @@ function ProposalShell() {
           hidden={!menuOpen}
         >
           <NavLink end to="/" onClick={() => setMenuOpen(false)}>Home<ArrowUpRight size={17} /></NavLink>
+          {/* 22 oktober 2026 (Marinus): ook op mobiel OS en Connect in kleur, als kaarten met dezelfde onderregel als het
+              desktopmenu, en de diensten net zo. Grote tikvlakken, niets over de rand. */}
           <p className="h-mobile-groep">Producten</p>
-          {PRODUCTEN.map((p) => {
-            const inhoud = <><span translate="no">SocialNow {p.naam}</span><ArrowUpRight size={17} /></>;
-            return "naar" in p
-              ? <NavLink key={p.soort} className="h-mobile-product" to={p.naar} onClick={() => setMenuOpen(false)}>{inhoud}</NavLink>
-              : <a key={p.soort} className="h-mobile-product" href={p.href}>{inhoud}</a>;
-          })}
-          {nav.map(([path, title]) => (
+          <div className="h-mobile-kaarten">
+            {PRODUCTEN.map((p) => {
+              const inhoud = <><b translate="no">SocialNow <i className={p.soort}>{p.naam}</i></b><span>{p.regel}</span><ArrowUpRight size={17} aria-hidden="true" /></>;
+              return "naar" in p
+                ? <NavLink key={p.soort} className="h-mobile-product" to={p.naar} onClick={() => setMenuOpen(false)}>{inhoud}</NavLink>
+                : <a key={p.soort} className="h-mobile-product" href={p.href}>{inhoud}</a>;
+            })}
+          </div>
+          {nav.map(([path, title]) => path === "/diensten" ? (
+            <React.Fragment key={path}>
+              <p className="h-mobile-groep">{title}</p>
+              <div className="h-mobile-kaarten">
+                {DIENSTEN.map((d) => <Link key={d.soort} className="h-mobile-product" to={d.naar} onClick={() => setMenuOpen(false)}>
+                  <b translate="no"><Kleurwoord tekst={d.titel} /></b><span>{d.regel}</span><ArrowUpRight size={17} aria-hidden="true" />
+                </Link>)}
+              </div>
+            </React.Fragment>
+          ) : (
             <NavLink
               key={path}
               to={path}
