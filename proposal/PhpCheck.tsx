@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
 import { ArrowUpRight, Check } from "lucide-react";
-import { useLanguage } from "./i18n/context";
-import { CONTACT_MAIL, conceptLink } from "./aanvragen";
+import { languagePrefix, useLanguage } from "./i18n/context";
+import { CONTACT_MAIL, boekExtern, boekLink, conceptLink } from "./aanvragen";
 import "./php-check.css";
 
-// Gratis php2shell-check (22 oktober 2026, Marinus): "Take the free check at socialnow.nl".
+// Gratis php2shell-check op /check (22 oktober 2026, Marinus): "Take the free check at socialnow.nl". De advertentie
+// stuurt alle bezoekers hierheen; /php-check verwijst door (vercel.json).
 // De check zelf draait in api/php-check.js (server/php-check.mjs): één gewone GET op de homepage,
 // passief, niets bewaard. Deze pagina belooft daarom nooit "veilig": groen betekent alleen dat de
 // versie die de server laat zien de fix bevat. Bij twijfel zegt de check "onbekend" en bieden we
@@ -104,7 +105,7 @@ export function PhpCheckPage() {
         "geen-patchnummer": "Je server meldt PHP {versie}, zonder het laatste cijfer. Daaraan zien we niet of de fix erin zit.",
       };
       return {
-        kop: t("Dit kunnen we van buitenaf niet zeker zeggen."),
+        kop: t("Van buitenaf niet te zeggen."),
         uitleg: invul(t(oranje[r] || "Je server meldt PHP {versie} uit een pakket waarvan we de fixversie nog niet kennen. Zulke pakketten krijgen de fix vaak zonder dat het nummer verandert."), w) + " " + handmatig,
       };
     }
@@ -155,15 +156,15 @@ export function PhpCheckPage() {
   const u = uitslag?.ok ? uitslag : null;
   const uitleg = u ? tekst(u) : null;
   const kleur = u?.uitslag || "onbekend";
+  const boek = boekLink(language, u?.domein || domein.trim());
+  const pre = languagePrefix(language);
+  const boekDoel = boekExtern ? { target: "_blank", rel: "noopener" } : {};
 
   return (
     <div className="pc">
       <section className="pc-hero h-wrap">
         <p className="h-eyebrow pc-eyebrow"><i aria-hidden="true" /> Gratis php2shell-check</p>
         <h1 className="pc-kop">Is je website veilig?</h1>
-        <p className="pc-intro">
-          Op 21 oktober 2026 werd php2shell bekend, een ernstig lek in PHP (CVE-2026-109618 en CVE-2026-109619). Vul je domein in. We bezoeken je homepage één keer, zoals een gewone bezoeker, en lezen welke PHP-versie je server laat zien.
-        </p>
 
         <form className="pc-check" onSubmit={start} noValidate>
           <label className="pc-veld">
@@ -196,10 +197,7 @@ export function PhpCheckPage() {
         <div className="pc-uitslag-plek" aria-live="polite">
           {u && uitleg && (
             <div className={`pc-uitslag pc-${kleur}`} ref={uitslagRef} tabIndex={-1}>
-              <p className="pc-label">
-                <i aria-hidden="true" />
-                {LABEL[kleur]}
-              </p>
+              <p className="pc-label"><i aria-hidden="true" />{LABEL[kleur]}</p>
               <h2>{uitleg.kop}</h2>
               <p>{uitleg.uitleg}</p>
               <dl className="pc-gegevens">
@@ -207,37 +205,84 @@ export function PhpCheckPage() {
                 <div><dt>PHP-versie</dt><dd translate="no">{u.phpVersie || "-"}</dd></div>
                 <div><dt>Hersteld vanaf</dt><dd translate="no">{u.hersteldVanaf || "-"}</dd></div>
               </dl>
-              <a className="pc-knop pc-knop-wit" href="#handmatig">
-                <span>{kleur === "rood" ? "Laat ons gratis updaten" : "Vraag de gratis handmatige check aan"}</span>
-                <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
-              </a>
+              {/* 22 oktober 2026 (Marinus): bij elke uitslag dezelfde disclaimer en de boekknop. */}
+              <div className="pc-disclaimer">
+                <p>Deze check leest alleen openbare informatie van je website. Het is een snelle indicatie, geen volledige beveiligingsaudit en geen garantie. Wil je zekerheid? Plan een gratis call met ons team.</p>
+                <div className="pc-knoppen">
+                  <a className="pc-knop" href={boek} {...boekDoel}>
+                    <span>Plan een gratis call</span>
+                    <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
+                  </a>
+                  <a className="pc-knop pc-knop-wit" href="#handmatig">
+                    <span>{kleur === "rood" ? "Laat ons gratis updaten" : "Vraag de gratis check aan"}</span>
+                    <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
+                  </a>
+                </div>
+              </div>
             </div>
           )}
         </div>
       </section>
 
-      <section className="h-section h-wrap pc-uitleg">
-        <h2 className="pc-sectiekop">Wat deze check doet.</h2>
+      <section className="h-section h-wrap">
+        <h2 className="pc-sectiekop">Drie niveaus van zekerheid.</h2>
         <ol className="pc-tegels">
           <li>
-            <span>01</span>
-            <h3>Eén bezoek.</h3>
-            <p>We vragen je homepage één keer op, net als een browser. Redirects volgen we tot vijf keer, maximaal acht seconden.</p>
+            <span>01 / Gratis en direct</span>
+            <h3>Publieke scan.</h3>
+            <p>Wat je hierboven doet. We lezen de PHP-versie die je server zelf aan iedere bezoeker laat zien. Snel, maar alleen zo zeker als wat je server openbaar maakt.</p>
           </li>
           <li>
-            <span>02</span>
-            <h3>Alleen lezen.</h3>
-            <p>We lezen de versie die je server zelf meestuurt. Geen aanval, geen poortscan, geen inlogpogingen.</p>
+            <span>02 / Na eigendomsbewijs</span>
+            <h3>Verdiepte scan.</h3>
+            <p>Je bewijst dat de site van jou is met een klein PHP-bestand dat alleen de versie, SAPI en builddatum teruggeeft, of met een DNS TXT-record. Dan lezen we de exacte versie, ook als je server die verbergt.</p>
           </li>
           <li>
-            <span>03</span>
-            <h3>Eerlijk oordeel.</h3>
-            <p>Rood zeggen we alleen met bewijs in de versie zelf. Groen betekent dat de getoonde versie de fix heeft, niet dat je hele site veilig is.</p>
+            <span>03 / Door ons team</span>
+            <h3>Audit.</h3>
+            <p>Een specialist kijkt in de pakketchangelog van je server of vraagt je host om een schriftelijke bevestiging. Alleen zo is een teruggezette fix echt te bewijzen.</p>
           </li>
         </ol>
-        <p className="pc-klein pc-versies">
-          Hersteld vanaf PHP 8.5.12, 8.4.27, 8.3.36 en 8.2.35. PHP 8.1 en ouder krijgen geen fix meer.
-        </p>
+        <p className="pc-intro pc-onder">We doen de check en de updates gratis. Wil je dieper gaan, dan bespreken we de scope met je.</p>
+      </section>
+
+      <section className="h-section h-wrap pc-wat">
+        <h2 className="pc-sectiekop">Wat is php2shell?</h2>
+        <div className="pc-kolommen">
+          <p>Op 21 oktober 2026 werden twee ernstige lekken in PHP bekend, CVE-2026-109618 en CVE-2026-109619. Via een gewoon verzoek kan een aanvaller zonder in te loggen code op een server uitvoeren. De fix zit in PHP 8.5.12, 8.4.27, 8.3.36 en 8.2.35. PHP 8.1 en ouder krijgen geen officiële fix meer.</p>
+          <p>Het raakt veel websites: ongeveer 70% van de websites waarvan de servertaal bekend is, draait op PHP.<sup>1</sup> Overheden in Nederland, Duitsland, Finland, België en Frankrijk haalden websites offline, net als de Wikimedia Foundation.<sup>2</sup> Ook Nintendo zette diensten uit.<sup>3</sup></p>
+        </div>
+        <ol className="pc-bronnen">
+          <li>W3Techs, gebruik van servertalen, stand augustus 2026. <a href="https://w3techs.com/technologies/details/pl-PHP" target="_blank" rel="noopener">w3techs.com</a></li>
+          <li>The Next Web, 21 oktober 2026. <a href="https://thenextweb.com/news/europe-governments-websites-offline-php-security-flaws" target="_blank" rel="noopener">thenextweb.com</a></li>
+          <li>The Record, 21 oktober 2026. <a href="https://therecord.media/php-script-vulnerabilities-warnings" target="_blank" rel="noopener">therecord.media</a></li>
+        </ol>
+      </section>
+
+      <section className="h-section h-wrap pc-data">
+        <h2 className="pc-sectiekop">Zo gaan we met je data om.</h2>
+        <div className="pc-kolommen">
+          <p>Bij SocialNow werkt AI samen met echte specialisten. De check zelf bewaart niets: geen domein, geen uitslag, geen profiel. Je IP-adres telt alleen tien minuten mee in het geheugen, zodat niemand de check misbruikt om sites te bestoken.</p>
+          <p>Vraag je een handmatige check aan, dan zien alleen de mensen die hem uitvoeren je gegevens, en alleen voor deze check. Lees meer op onze pagina over <a href={`${pre}/veiligheid`}>veiligheid</a> en in ons <a href={`${pre}/privacy`}>privacybeleid</a>.</p>
+        </div>
+        <div className="pc-faq">
+          <details>
+            <summary>Wat ziet de scan wel en niet?</summary>
+            <p>We doen één gewone GET op je homepage, zoals een browser, en volgen tot vijf redirects. We lezen de headers, de cookies en de HTML van die pagina. We proberen geen aanval, scannen geen poorten en openen geen andere paden. Wat je server niet openbaar maakt, zien wij ook niet.</p>
+          </details>
+          <details>
+            <summary>Waarom krijg ik "onbekend"?</summary>
+            <p>Veel servers verbergen hun PHP-versie, en dat is verstandig. Dan kunnen wij van buitenaf niet zien of de fix erin zit. De verdiepte scan of een audit door ons team geeft dan uitsluitsel.</p>
+          </details>
+          <details>
+            <summary>Wat betekent oranje?</summary>
+            <p>Je server meldt een versie onder de fix, maar zonder bewijs dat hij kwetsbaar is. Sommige hosts zetten de fix terug en houden het oude nummer. Waarschijnlijk is hij niet gepatcht: laat je host het schriftelijk bevestigen.</p>
+          </details>
+          <details>
+            <summary>Is groen een garantie?</summary>
+            <p>Nee. Groen betekent dat de versie die je server laat zien de fix bevat. Het zegt niets over een eerdere inbraak, andere PHP-versies op dezelfde server of de rest van je website.</p>
+          </details>
+        </div>
       </section>
 
       <section className="h-section h-wrap pc-handmatig" id="handmatig">
@@ -249,6 +294,10 @@ export function PhpCheckPage() {
             <li>We zetten de update klaar of voeren hem uit</li>
             <li>Je hoort binnen twee werkdagen van ons</li>
           </ul>
+          <a className="pc-knop" href={boek} {...boekDoel}>
+            <span>Plan een gratis call</span>
+            <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
+          </a>
         </div>
         {aanvraag === "verstuurd" ? (
           <div className="pc-formulier">
@@ -277,7 +326,7 @@ export function PhpCheckPage() {
               <span className="pc-knop-icoon" aria-hidden="true"><ArrowUpRight size={16} /></span>
             </button>
             <p className="pc-klein">
-              Je aanvraag gaat als e-mail naar ons team. We gebruiken je gegevens alleen voor deze check. Lees ons <a href="/privacy">privacybeleid</a>.
+              Je aanvraag gaat als e-mail naar ons team. We gebruiken je gegevens alleen voor deze check. Lees ons <a href={`${pre}/privacy`}>privacybeleid</a>.
             </p>
           </form>
         )}

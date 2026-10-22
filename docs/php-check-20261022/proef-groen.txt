@@ -1,12 +1,19 @@
-GROEN  route /php-check bestaat (en /nl/php-check via de taalprefix)
-GROEN  postbuild maakt dist/php-check/index.html met eigen titel en omschrijving
+GROEN  route /check bestaat (en /nl/check via de taalprefix)
+GROEN  postbuild maakt dist/check/index.html met eigen titel en omschrijving, en zet hem in de sitemap
+GROEN  /php-check verwijst door naar /check
+GROEN  boekknop uit één configwaarde (BOEK_URL), anders het contactformulier
+GROEN  disclaimer en boekknop bij elke uitslag, niet alleen rood
+GROEN  drie niveaus: publieke scan, verdiepte scan, audit
+GROEN  cijfers over php2shell met bronnen in een voetnoot
+GROEN  FAQ met minstens vier vragen
 GROEN  kop "Is je website veilig?"
 GROEN  vinkje: mijn site of toestemming
 GROEN  formulier voor de gratis handmatige check en updates
 GROEN  aanvraag als ingevuld concept (aanvragen.ts), de site slaat niets op
 GROEN  EN-kop is "Is your website safe?"
 GROEN  EN-zin over gratis check en scope klopt letterlijk
-GROEN  elke zin op de pagina heeft een Engelse vertaling (90 zinnen)
+GROEN  EN-disclaimer en knop "Book a free call" letterlijk
+GROEN  elke zin op de pagina heeft een Engelse vertaling (116 zinnen)
 GROEN  EN-titel voor de metadata
 GROEN  zwarte grond
 GROEN  geen ligaturen

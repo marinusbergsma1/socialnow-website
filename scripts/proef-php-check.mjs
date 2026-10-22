@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Proef: de gratis php2shell-check (22 oktober 2026). Rood op main, groen op feat/php-check.
+// Proef: de gratis php2shell-check op /check (22 oktober 2026). Rood op main, groen op feat/php-check.
 // De volledige meting tegen nagebootste servers staat in /Volumes/WORK/02-SOCIALNOW/php-check/testbank
 // (npm run meet); deze proef bewaakt in de repo zelf de pagina, de vertaling, de SSRF-grens en de
 // beslisregel "rood alleen met bewijs".
@@ -16,8 +16,16 @@ const tsx = lees("proposal/PhpCheck.tsx");
 const css = lees("proposal/php-check.css");
 const app = lees("proposal/WebsiteProposal.tsx");
 const post = lees("scripts/postbuild.mjs");
-eis(/<Route path="\/php-check" element={<PhpCheckPage \/>} \/>/.test(app), "route /php-check bestaat (en /nl/php-check via de taalprefix)");
-eis(/'php-check': \{title: /.test(post), "postbuild maakt dist/php-check/index.html met eigen titel en omschrijving");
+eis(/<Route path="\/check" element={<PhpCheckPage \/>} \/>/.test(app), "route /check bestaat (en /nl/check via de taalprefix)");
+eis(/\n  check: \{title: /.test(post), "postbuild maakt dist/check/index.html met eigen titel en omschrijving, en zet hem in de sitemap");
+eis(/"source": "\/php-check",\s*"destination": "\/check"/.test(lees("vercel.json")), "/php-check verwijst door naar /check");
+const aanvragen = lees("proposal/aanvragen.ts");
+eis(/export const BOEK_URL = /.test(aanvragen) && /\/contact\?onderwerp=/.test(aanvragen), "boekknop uit één configwaarde (BOEK_URL), anders het contactformulier");
+const disclaimer = tsx.indexOf("Deze check leest alleen openbare informatie van je website.");
+eis(disclaimer > tsx.indexOf('className={`pc-uitslag') && disclaimer < tsx.indexOf("</div>\n          )}\n        </div>"), "disclaimer en boekknop bij elke uitslag, niet alleen rood");
+eis(/Drie niveaus/.test(tsx) && /Verdiepte scan/.test(tsx) && /Audit\./.test(tsx), "drie niveaus: publieke scan, verdiepte scan, audit");
+eis(/w3techs\.com/.test(tsx) && /thenextweb\.com/.test(tsx) && /therecord\.media/.test(tsx), "cijfers over php2shell met bronnen in een voetnoot");
+eis((tsx.match(/<details>/g) || []).length >= 4, "FAQ met minstens vier vragen");
 eis(/<h1[^>]*>Is je website veilig\?<\/h1>/.test(tsx), "kop \"Is je website veilig?\"");
 eis(/type="checkbox"/.test(tsx) && /Dit is mijn website, of ik heb toestemming/.test(tsx), "vinkje: mijn site of toestemming");
 eis(/We doen de check en de updates gratis\. Wil je dieper gaan, dan bespreken we de scope met je\./.test(tsx), "formulier voor de gratis handmatige check en updates");
@@ -27,6 +35,7 @@ eis(/conceptLink\(/.test(tsx) && !/fetch\([^)]*aanvraag/i.test(tsx), "aanvraag a
 const en = JSON.parse(lees("proposal/i18n/en.json") || "{}");
 eis(en["Is je website veilig?"] === "Is your website safe?", "EN-kop is \"Is your website safe?\"");
 eis(en["We doen de check en de updates gratis. Wil je dieper gaan, dan bespreken we de scope met je."] === "We do the check and the updates for free. If you want to go deeper, we'll discuss the scope with you.", "EN-zin over gratis check en scope klopt letterlijk");
+eis(en["Deze check leest alleen openbare informatie van je website. Het is een snelle indicatie, geen volledige beveiligingsaudit en geen garantie. Wil je zekerheid? Plan een gratis call met ons team."] === "This check only reads public information from your website. It is a quick indication, not a full security audit or a guarantee. Want certainty? Book a free call with our team." && en["Plan een gratis call"] === "Book a free call", "EN-disclaimer en knop \"Book a free call\" letterlijk");
 const zinnen = new Set();
 const jsx = tsx.slice(tsx.indexOf('<div className="pc">'));
 for (const m of jsx.matchAll(/>\s*([^<>{}]*[A-Za-zÀ-ž][^<>{}]*?)\s*</g)) zinnen.add(m[1].replace(/\s+/g, " ").trim());

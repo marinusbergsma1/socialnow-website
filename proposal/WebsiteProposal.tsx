@@ -74,7 +74,7 @@ const paginaTitels: Record<string, string> = {
   "/blog": "Blog",
   "/contact": "Contact",
   "/audit": "Gratis Google Ads audit",
-  "/php-check": "Gratis php2shell-check",
+  "/check": "Gratis php2shell-check",
   "/gratis-website": "Gratis website aanvragen",
   "/gratis-os-demo": "Gratis OS-demo",
   "/antwoord-aanvragen": "Antwoord op aanvragen",
@@ -296,7 +296,9 @@ function ProposalShell() {
           <Route path="/prijzen" element={<Navigate to="/diensten#prijzen" replace />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/audit" element={<AuditPage />} />
-          <Route path="/php-check" element={<PhpCheckPage />} />
+          {/* 22 oktober 2026: de campagnepagina van de php2shell-advertentie. /php-check is een alias. */}
+          <Route path="/check" element={<PhpCheckPage />} />
+          <Route path="/php-check" element={<Navigate to="/check" replace />} />
           <Route path="/vacatures" element={<VacaturesPage />} />
           {/* 28 september 2026 (Marinus): investeerders doen een aanvraag naar invest@. /investors is een alias. */}
           <Route path="/investeerders" element={<InvesteerdersPage />} />

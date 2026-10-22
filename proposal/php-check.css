@@ -137,7 +137,30 @@
 :root .sn-site .pc-formulier label { display: block; font-size: 12px; color: #cacacf; margin-top: 16px; }
 :root .sn-site .pc-rij { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
+/* Disclaimer bij elke uitslag, met de boekknop (22 oktober 2026). */
+:root .sn-site .pc-disclaimer { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--pc-rand); }
+:root .sn-site .pc-disclaimer > p { font-size: 14px; line-height: 1.55; color: #b8b8bd; }
+:root .sn-site .pc-knoppen { display: flex; flex-wrap: wrap; gap: 12px; }
+:root .sn-site .pc-knoppen .pc-knop { margin-top: 16px; }
+
+/* Drie niveaus, php2shell, data en FAQ */
+:root .sn-site .pc-onder { margin-top: 26px; }
+:root .sn-site .pc-kolommen { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 28px; }
+:root .sn-site .pc-kolommen p { font-size: 16px; line-height: 1.6; color: #d6d6da; }
+:root .sn-site .pc-kolommen a, :root .sn-site .pc-bronnen a { color: var(--pc-groen); }
+:root .sn-site .pc-kolommen sup { font-size: 11px; color: var(--pc-groen); margin-left: 1px; }
+:root .sn-site .pc-bronnen { list-style: decimal; margin: 28px 0 0; padding-left: 18px; font-size: 13px; line-height: 1.6; color: #8e8e93; border-top: 1px solid var(--pc-rand); padding-top: 14px; }
+:root .sn-site .pc-faq { margin-top: 40px; border-top: 1px solid var(--pc-rand); }
+:root .sn-site .pc-faq details { border-bottom: 1px solid var(--pc-rand); padding: 18px 0; }
+:root .sn-site .pc-faq summary { cursor: pointer; font-size: 17px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+:root .sn-site .pc-faq summary::-webkit-details-marker { display: none; }
+:root .sn-site .pc-faq summary::after { content: "+"; color: var(--pc-groen); font-weight: 400; font-size: 22px; line-height: 1; }
+:root .sn-site .pc-faq details[open] summary::after { content: "–"; }
+:root .sn-site .pc-faq details p { margin-top: 12px; font-size: 15px; line-height: 1.6; color: #cacacf; max-width: 760px; }
+:root .sn-site .pc-handmatig-tekst .pc-knop { margin-top: 28px; }
+
 @media (max-width: 999px) {
+  :root .sn-site .pc-kolommen { grid-template-columns: 1fr; gap: 16px; }
   :root .sn-site .pc-handmatig { grid-template-columns: 1fr; gap: 36px; }
   :root .sn-site .pc-tegels { grid-template-columns: 1fr; }
 }

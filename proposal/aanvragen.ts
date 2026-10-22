@@ -58,3 +58,13 @@ export const conceptLink = (onderwerp: string, bericht: string) =>
   heeftWhatsApp
     ? `https://wa.me/${WHATSAPP_NUMMER}?text=${encodeURIComponent(`${onderwerp}\n\n${bericht}`)}`
     : `mailto:${CONTACT_MAIL}?subject=${encodeURIComponent(onderwerp)}&body=${encodeURIComponent(bericht)}`;
+
+// 22 oktober 2026 (Marinus): de knop "Book a free call" op /check. Eén configwaarde: vul hier de boekingspagina in zodra
+// book.socialnow.nl live staat (PR #144): https://book.socialnow.nl/?type=security. Taal en het gecheckte domein gaan mee
+// als &lang= en &vraag=. Leeg: de knop opent het contactformulier met het onderwerp al ingevuld.
+export const BOEK_URL = "";
+export const boekLink = (taal: Language, domein = "") =>
+  /^https:\/\//.test(BOEK_URL)
+    ? `${BOEK_URL}${BOEK_URL.includes("?") ? "&" : "?"}lang=${taal === "nl" ? "nl" : "en"}${domein ? `&vraag=${encodeURIComponent(domein)}` : ""}`
+    : `${taal === "en" ? "" : `/${taal}`}/contact?onderwerp=${encodeURIComponent("Gratis call over de php2shell-check")}`;
+export const boekExtern = /^https:\/\//.test(BOEK_URL);
