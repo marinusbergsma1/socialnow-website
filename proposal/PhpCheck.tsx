@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ArrowUp, ArrowUpRight, CalendarDays, Check, Copy, Mail, ShieldCheck } from "lucide-react";
+import { ArrowUp, ArrowUpRight, CalendarDays, Check, Copy, FileDown, Linkedin, Mail, MessageCircle, Share2, ShieldCheck } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 import { boekExtern, boekLink, conceptLink } from "./aanvragen";
 import { people } from "./content";
@@ -414,6 +414,46 @@ function Bento() {
   );
 }
 
+// 22 oktober 2026, 16.30 (Marinus): de uitslag bewaren of delen. Pdf via het printvenster (alleen de uitslag, zie
+// @media print in php-check.css), WhatsApp, LinkedIn, e-mail, kopiëren, en op telefoons het deelmenu van het toestel
+// (daarmee ook Instagram en andere apps; Instagram heeft zelf geen deellink voor het web).
+const DEEL_URL = "https://socialnow.nl/security";
+function Delen({ u }: { u: Uitslag }) {
+  const { t } = useLanguage();
+  const [gekopieerd, zetGekopieerd] = useState(false);
+  const [kanDelen, zetKanDelen] = useState(false);
+  useEffect(() => { zetKanDelen(typeof navigator !== "undefined" && typeof navigator.share === "function"); }, []);
+  const kop = phpTekst(u, t).kop;
+  const tekst = `${invul(t("Securityscan van {domein}: {uitslag}"), { domein: u.domein || "", uitslag: kop })}${u.phpVersie ? ` (PHP ${u.phpVersie})` : ""}. ${t("Doe ook de gratis securityscan:")} ${DEEL_URL}`;
+  const kopieer = async () => {
+    try { await navigator.clipboard.writeText(tekst); }
+    catch {
+      const veld = document.createElement("textarea");
+      veld.value = tekst; veld.setAttribute("readonly", ""); veld.style.position = "fixed"; veld.style.opacity = "0";
+      document.body.appendChild(veld); veld.select();
+      try { document.execCommand("copy"); } catch { /* niet gelukt */ }
+      veld.remove();
+    }
+    zetGekopieerd(true);
+    window.setTimeout(() => zetGekopieerd(false), 2000);
+  };
+  const deel = async () => { try { await navigator.share({ title: t("Gratis securityscan"), text: tekst, url: DEEL_URL }); } catch { /* geannuleerd */ } };
+  return (
+    <div className="pc-delen">
+      <p>Bewaar of deel je uitslag.</p>
+      <div className="pc-delen-knoppen">
+        <button type="button" onClick={() => window.print()}><FileDown size={16} aria-hidden="true" /><span>Opslaan als pdf</span></button>
+        <a href={`https://wa.me/?text=${encodeURIComponent(tekst)}`} target="_blank" rel="noopener"><MessageCircle size={16} aria-hidden="true" /><span translate="no">WhatsApp</span></a>
+        <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(DEEL_URL)}`} target="_blank" rel="noopener"><Linkedin size={16} aria-hidden="true" /><span translate="no">LinkedIn</span></a>
+        <a href={`mailto:?subject=${encodeURIComponent(t("Gratis securityscan"))}&body=${encodeURIComponent(tekst)}`}><Mail size={16} aria-hidden="true" /><span>E-mail</span></a>
+        <button type="button" onClick={kopieer}>{gekopieerd ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}<span>{gekopieerd ? "Gekopieerd" : "Kopieer"}</span></button>
+        {kanDelen && <button type="button" onClick={deel}><Share2 size={16} aria-hidden="true" /><span>Meer apps</span></button>}
+      </div>
+      <p className="pc-print-voet" aria-hidden="true">socialnow.nl/security · {new Date().toLocaleDateString()}</p>
+    </div>
+  );
+}
+
 export function PhpCheckPage() {
   const { t, language } = useLanguage();
   const [domein, zetDomein] = useState("");
@@ -475,12 +515,13 @@ export function PhpCheckPage() {
           daaronder de bento met wie werd geraakt en wie risico loopt, en direct Steef en Michelle. */}
       <Film />
 
-      <section className="pc-wit" id="scan">
+      <section className="pc-scan" id="scan">
       <div className="pc-hero h-wrap">
         <p className="h-eyebrow pc-eyebrow"><i aria-hidden="true" /> Gratis securityscan</p>
         <h1 className="pc-kop">Is je website veilig?</h1>
 
-        <form className="pc-check" onSubmit={start} noValidate>
+        <form className={`pc-check${bezig ? " pc-bezig" : ""}`} onSubmit={start} noValidate>
+          <span className="pc-laad" aria-hidden="true" />
           <label className="pc-veld">
             <span>Je domein</span>
             <input
@@ -508,6 +549,7 @@ export function PhpCheckPage() {
             <div className="pc-uitslag" ref={uitslagRef} tabIndex={-1}>
               {/* Eerst PHP, groot en compleet; pas daaronder de vijf punten, dan Steef en Michelle. */}
               <PhpBlok u={u} />
+              <Delen u={u} />
               {u.domein && <CheckRapport domein={u.domein} ronde={ronde} />}
               {u.uitslag !== "rood" && u.uitslag !== "oranje" && <Mensen domein={u.domein || ""} />}
               <p className="pc-disclaimer">Deze scan leest alleen openbare informatie van je website. Het is een snelle indicatie, geen volledige beveiligingsaudit en geen garantie. Wil je zekerheid? Plan een gratis call met ons team.</p>

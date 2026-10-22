@@ -3239,5 +3239,11 @@
   "Claim je gratis update.": "Sichere dir dein kostenloses Update.",
   "van de websites draait op PHP": "der Websites laufen auf PHP",
   "Naar de scan": "Zum Scan",
-  "Securityvideo: is je website veilig?": "Security-Video: Ist deine Website sicher?"
+  "Securityvideo: is je website veilig?": "Security-Video: Ist deine Website sicher?",
+  "Bewaar of deel je uitslag.": "Speichere oder teile dein Ergebnis.",
+  "Opslaan als pdf": "Als PDF speichern",
+  "Kopieer": "Kopieren",
+  "Meer apps": "Weitere Apps",
+  "Securityscan van {domein}: {uitslag}": "Security-Scan von {domein}: {uitslag}",
+  "Doe ook de gratis securityscan:": "Mach auch den kostenlosen Security-Scan:"
 }
