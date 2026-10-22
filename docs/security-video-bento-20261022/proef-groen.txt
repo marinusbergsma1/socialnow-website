@@ -1,0 +1,37 @@
+GROEN  /security is de securityscan (niet meer een alias van /veiligheid)
+GROEN  in de app: /check en /php-check naar /security, met ?domein= en #aanvraag
+GROEN  vercel.json: /check, /nl/check (alle talen) en /php-check permanent (308) naar /security
+GROEN  postbuild: /security met eigen titel, description en kruimel; /check heeft geen eigen pagina meer
+GROEN  titel (69 tekens) en description (151 tekens) passen in Google
+GROEN  titel en description vertaald (EN "security scan" en acht andere talen)
+GROEN  eigen deelbeeld 1200x630 (1200x630) voor og:image en twitter:image, alt-tekst vertaald
+GROEN  aanvraagmail noemt socialnow.nl/security
+GROEN  de pagina heet Securityscan / Security scan, nergens meer "check"
+GROEN  volgorde: film, witte sectie met scan en documenten, bento (geraakt en risico), Steef en Michelle, dan de stappen
+GROEN  bentogrid met geraakt, risico en aandeel PHP (met bron); scansectie wit
+GROEN  nieuwe securityvideo (9:16, onder 16 MB) met poster
+GROEN  nieuwe teksten vertaald in EN en acht andere talen
+GROEN  geraakt: Nintendo en Wikipedia met hun logo uit public/
+GROEN  geraakt: vier overheden met vlag en de naam uit de film (ITZBund, Valtori, Foreign Affairs, Overheid.nl), geen banken
+GROEN  nooit een overheidslogo of wapen: vlaggen tekenen we zelf
+GROEN  risico: WordPress, WooCommerce, Magento, Joomla, Drupal, PrestaShop en Laravel met logo
+GROEN  elk logo en elke vlag linkt naar een bron (https), in een nieuw tabblad met rel=noopener
+GROEN  externe links gemarkeerd voor schermlezers
+GROEN  kleine regel: geen klanten of partners (NL en EN letterlijk)
+GROEN  risico: oproep letterlijk, en eerlijk dat een moderne host die PHP bijwerkt minder risico geeft
+GROEN  bronnen per naam in de voetnoot
+GROEN  regels over gratis updates en PHP 8.1 letterlijk in EN en vertaald in alle talen
+GROEN  NL oranje PHP 5.2.12: regel gratis updates boven Steef en Michelle, regel PHP 8.1 en ouder
+GROEN  EN oranje PHP 5.2.12: regel gratis updates boven Steef en Michelle, regel PHP 8.1 en ouder
+GROEN  NL oranje PHP 8.4.26: regel gratis updates boven Steef en Michelle
+GROEN  EN oranje PHP 8.4.26: regel gratis updates boven Steef en Michelle
+GROEN  NL rood PHP 8.1.2 Ubuntu: regel gratis updates boven Steef en Michelle, regel PHP 8.1 en ouder
+GROEN  EN rood PHP 8.1.2 Ubuntu: regel gratis updates boven Steef en Michelle, regel PHP 8.1 en ouder
+GROEN  NL groen PHP 8.5.12: geen regel gratis updates
+GROEN  EN groen PHP 8.5.12: geen regel gratis updates
+GROEN  NL afgeschermd: geen regel gratis updates
+GROEN  EN afgeschermd: geen regel gratis updates
+GROEN  bij oranje en rood staan Steef en Michelle in het PHP-blok, niet nog eens onder het rapport
+GROEN  #aanvraag scrolt naar het formulier, ook als de pagina na het laden nog opbouwt
+
+alles groen

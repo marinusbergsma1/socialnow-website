@@ -186,7 +186,6 @@
 :root .sn-site .pc-afsluiter .pc-knop { margin-top: 10px; }
 
 :root .sn-site p.pc-disclaimer { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--pc-rand); font-size: 14px; line-height: 1.55; color: #b8b8bd; }
-:root .sn-site .pc-documenten { background: #fff; color: #111; padding: 48px 0; margin: 24px 0; }
 :root .sn-site .pc-documenten h2 { margin: 0; font-size: 22px; line-height: 1.2; color: #111; }
 :root .sn-site .pc-docs { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
 :root .sn-site .pc-docs a { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 52px; padding: 12px 16px; border: 1px solid #e3e3e6; border-radius: 12px; background: #fff; color: #111; font-size: 15px; line-height: 1.35; text-decoration: none; }
@@ -195,7 +194,6 @@
 :root .sn-site .pc-faq-blok .pc-faq { margin-top: 24px; }
 
 :root .sn-site .pc-film { padding-top: 130px; }
-:root .sn-site .pc-film + .pc-hero { padding-top: 48px; }
 :root .sn-site .pc-video { display: block; width: 100%; max-width: 1100px; aspect-ratio: 16 / 9; border-radius: 18px; border: 1px solid var(--pc-rand); background: #000; }
 /* 9:16 op mobiel: zo breed als het scherm, maar nooit hoger dan het scherm zodat de check er direct onder begint. */
 :root .sn-site .pc-video-9x16 { aspect-ratio: 9 / 16; width: auto; max-width: 100%; height: min(78svh, calc((100vw - 32px) * 16 / 9)); max-height: 78svh; margin: 0 auto; }
@@ -263,13 +261,11 @@
 }
 @media (max-width: 760px) {
   :root .sn-site .pc-film { padding-top: 96px; }
-  :root .sn-site .pc-film + .pc-hero { padding-top: 32px; }
   :root .sn-site .pc-php { padding: 20px 18px 6px; border-left-width: 5px; }
   :root .sn-site .pc-mensen ul { grid-template-columns: 1fr; }
   :root .sn-site .pc-mens img { width: 72px; height: 72px; }
   :root .sn-site .pc-meer { margin-left: 0; }
   :root .sn-site .pc-docs { grid-template-columns: 1fr; }
-  :root .sn-site .pc-documenten { padding: 36px 0; }
   :root .sn-site .pc-acties { grid-template-columns: 1fr; gap: 14px; }
   :root .sn-site .pc-hero { padding-top: 32px; }
   :root .sn-site .pc-hero.h-wrap, :root .sn-site .pc .h-wrap { width: calc(100% - 32px); }
@@ -313,4 +309,69 @@
   :root .sn-site .pc-logo-link { padding: 14px; }
   :root .sn-site .pc-logo { height: 32px; }
   :root .sn-site .pc-logos-platform .pc-logo { height: 26px; }
+}
+
+/* 22 oktober 2026, 15.45 (Marinus): de scan met de documenten in een witte sectie, zodat die het meest opvalt. De uitslag
+   blijft een donker vlak (PHP-kleuren en rapport zijn op zwart gemeten); formulier en documenten worden licht. */
+:root .sn-site .pc-video-9x16 { height: min(80svh, 760px); max-height: 80svh; }
+:root .sn-site .pc-wit { background: #fff; color: #111; margin-top: 56px; padding: 72px 0 64px; }
+:root .sn-site .pc-wit .pc-hero { padding-top: 0; }
+:root .sn-site .pc-wit .pc-eyebrow { color: #3a3a3c; }
+:root .sn-site .pc-wit .pc-kop { color: #111; }
+:root .sn-site .pc-wit .pc-check { background: #f5f5f7; border-color: #e3e3e6; box-shadow: none; }
+:root .sn-site .pc-wit .pc-veld span { color: #3a3a3c; }
+:root .sn-site .pc-wit .pc-check input { background: #fff; color: #111; border-color: #c7c7cc; }
+:root .sn-site .pc-wit .pc-check input::placeholder { color: #8e8e93; }
+:root .sn-site .pc-wit .pc-check input:focus-visible { outline-color: var(--pc-vlak); }
+:root .sn-site .pc-wit .pc-hint { color: #3a3a3c; }
+:root .sn-site .pc-wit .pc-uitslag { color: #f5f5f5; }
+:root .sn-site .pc-documenten { margin-top: 40px; padding-top: 28px; border-top: 1px solid #e3e3e6; }
+:root .sn-site .pc-documenten h2 { margin: 0; font-size: 18px !important; line-height: 1.2; color: #111; }
+
+/* Bentogrid: wie werd geraakt en wie loopt risico, onder de scan. Vier kolommen op desktop, twee op mobiel. */
+:root .sn-site .pc-bento-blok { padding-top: 88px; }
+:root .sn-site .pc-bento { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 1100px; }
+:root .sn-site .pc-tegel { min-width: 0; border: 1px solid var(--pc-rand); border-radius: 20px; background: var(--pc-grond); }
+:root .sn-site .pc-tegel > .pc-logo-link { border: 0; background: transparent; border-radius: 20px; padding: 20px; }
+:root .sn-site .pc-tegel-kop { grid-column: span 2; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; background: radial-gradient(120% 140% at 0% 0%, #25d36622, transparent 60%), var(--pc-grond); }
+:root .sn-site .pc-tegel-kop .pc-blokkop { font-size: clamp(28px, 3.4vw, 40px) !important; }
+:root .sn-site .pc-tegel-kop .pc-geen-klant { margin-top: 0; }
+:root .sn-site .pc-tegel-risico { grid-column: span 3; padding: 24px; }
+:root .sn-site .pc-tegel-risico .pc-logos { margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+:root .sn-site .pc-tegel-risico .pc-logo-link { padding: 14px; background: #050505; }
+:root .sn-site .pc-tegel-risico .pc-logos-platform .pc-logo { height: 28px; max-width: 100%; }
+@media (min-width: 1000px) { :root .sn-site .pc-tegel-risico .pc-logos { grid-template-columns: repeat(7, minmax(0, 1fr)); } :root .sn-site .pc-tegel-risico .pc-logo-link { padding: 12px; } :root .sn-site .pc-tegel-risico .pc-logo-naam { font-size: 12px; } }
+:root .sn-site .pc-tegel-cijfer { padding: 24px; display: flex; flex-direction: column; }
+:root .sn-site .pc-cijfer { margin: 0; display: flex; flex-direction: column; gap: 4px; }
+:root .sn-site .pc-cijfer b { font-size: clamp(40px, 5vw, 56px); line-height: 1; letter-spacing: -0.03em; color: #00a3e0; font-variant-numeric: tabular-nums; }
+:root .sn-site .pc-cijfer span { font-size: 15px; color: #cacacf; }
+:root .sn-site .pc-cijfer sup { font-size: 10px; color: var(--pc-groen); margin-left: 2px; }
+:root .sn-site .pc-tegel-cijfer .pc-risico-host { font-size: 14px; margin-top: 18px; }
+:root .sn-site .pc-naar-scan { margin-top: auto; padding-top: 16px; display: inline-flex; align-items: center; gap: 8px; color: #fff; font-size: 15px; font-weight: 600; text-decoration: none; }
+:root .sn-site .pc-naar-scan svg { color: var(--pc-groen); }
+:root .sn-site .pc-naar-scan span { border-bottom: 1px solid var(--pc-groen); }
+:root .sn-site .pc-bento-blok .pc-geraakt-bronnen { margin-top: 16px; }
+
+/* Steef en Michelle direct onder de bento: groot, met gezicht, gesprek plannen of gratis update claimen. */
+:root .sn-site .pc-team { padding-top: 88px; }
+:root .sn-site .pc-mensen-groot { margin-top: 0; padding-top: 0; border-top: 0; max-width: 1100px; }
+:root .sn-site .pc-mensen-groot > p { font-size: 17px; color: #cacacf; margin-top: 14px; }
+:root .sn-site .pc-mensen-groot ul { margin-top: 28px; gap: 12px; }
+:root .sn-site .pc-mensen-groot .pc-mens { padding: 22px; gap: 22px; align-items: center; border-radius: 20px; background: var(--pc-grond); }
+:root .sn-site .pc-mensen-groot .pc-mens img { width: 120px; height: 120px; }
+:root .sn-site .pc-mensen-groot .pc-mens strong { font-size: 20px; }
+:root .sn-site .pc-mensen-groot .pc-mens-wegen { gap: 8px; margin-top: 14px; }
+
+@media (max-width: 999px) {
+  :root .sn-site .pc-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  :root .sn-site .pc-tegel-risico, :root .sn-site .pc-tegel-cijfer { grid-column: span 2; }
+}
+@media (max-width: 760px) {
+  :root .sn-site .pc-wit { margin-top: 32px; padding: 44px 0 40px; }
+  :root .sn-site .pc-bento { gap: 8px; }
+  :root .sn-site .pc-tegel > .pc-logo-link { padding: 14px; }
+  :root .sn-site .pc-tegel-kop, :root .sn-site .pc-tegel-risico, :root .sn-site .pc-tegel-cijfer { padding: 18px; }
+  :root .sn-site .pc-bento-blok, :root .sn-site .pc-team { padding-top: 56px; }
+  :root .sn-site .pc-mensen-groot .pc-mens { padding: 16px; gap: 16px; align-items: flex-start; }
+  :root .sn-site .pc-mensen-groot .pc-mens img { width: 80px; height: 80px; }
 }

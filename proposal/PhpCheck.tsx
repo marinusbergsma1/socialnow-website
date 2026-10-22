@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, CalendarDays, Check, Copy, Mail } from "lucide-react";
+import { ArrowUp, ArrowUpRight, CalendarDays, Check, Copy, Mail, ShieldCheck } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 import { boekExtern, boekLink, conceptLink } from "./aanvragen";
 import { people } from "./content";
@@ -183,13 +183,18 @@ const MENSEN = ["Steef Komen", "Michelle Yang"];
 // versie (oranje of rood) staat deze regel in het PHP-blok, direct boven Steef en Michelle (kort).
 const GRATIS_UPDATE = "Omdat dit ons allemaal raakt, voeren we de essentiële updates tijdelijk gratis uit. Plan een call of stuur een mail.";
 
-function Mensen({ domein = "", kort = false }: { domein?: string; kort?: boolean }) {
+function Mensen({ domein = "", kort = false, groot = false }: { domein?: string; kort?: boolean; groot?: boolean }) {
   const { t, language } = useLanguage();
   const boek = boekLink(language, domein, "uitgebreide-check");
   const onderwerp = encodeURIComponent(domein ? `${t("Securityscan")}: ${domein}` : t("Securityscan"));
   return (
-    <div className={`pc-mensen${kort ? " pc-mensen-kort" : ""}`}>
-      {kort ? <p className="pc-gratis">{t(GRATIS_UPDATE)}</p> : (
+    <div className={`pc-mensen${kort ? " pc-mensen-kort" : ""}${groot ? " pc-mensen-groot" : ""}`}>
+      {kort ? <p className="pc-gratis">{t(GRATIS_UPDATE)}</p> : groot ? (
+        <>
+          <h2 className="pc-sectiekop">Praat met Steef of Michelle.</h2>
+          <p>Plan een diepgaand gesprek of claim de gratis update van je huidige systemen. Omdat dit ons allemaal raakt, voeren we de essentiële updates tijdelijk gratis uit.</p>
+        </>
+      ) : (
         <>
           <h3>Praat met Steef of Michelle.</h3>
           <p>Omdat dit ons allemaal raakt, voeren we de essentiële updates tijdelijk gratis uit. Wil je dieper gaan, dan bespreken we de scope met je.</p>
@@ -198,14 +203,19 @@ function Mensen({ domein = "", kort = false }: { domein?: string; kort?: boolean
       <ul>
         {MENSEN.map((naam) => people.find((p) => p.name === naam)).filter((p): p is (typeof people)[number] => !!p).map((p) => (
           <li key={p.name} className="pc-mens">
-            <img {...klein(p.image, kort ? "56px" : "88px", [96, 160])} alt={p.name} width={kort ? 56 : 88} height={kort ? 56 : 88} loading="lazy" />
+            <img {...klein(p.image, kort ? "56px" : groot ? "120px" : "88px", [96, 160, 240])} alt={p.name} width={kort ? 56 : groot ? 120 : 88} height={kort ? 56 : groot ? 120 : 88} loading="lazy" />
             <div>
               <strong translate="no">{p.name}</strong>
               <small translate="no">{p.role}</small>
               <span className="pc-mens-wegen">
                 <a href={boekExtern ? boek : "#aanvraag"} {...(boekExtern ? { target: "_blank", rel: "noopener" } : {})}>
-                  <CalendarDays size={16} aria-hidden="true" /><span>Plan een call</span>
+                  <CalendarDays size={16} aria-hidden="true" />{groot ? <span>Plan een diepgaand gesprek</span> : <span>Plan een call</span>}
                 </a>
+                {groot && (
+                  <a href="#aanvraag">
+                    <ShieldCheck size={16} aria-hidden="true" /><span>Claim je gratis update</span>
+                  </a>
+                )}
                 <a href={`mailto:${SECURE}?subject=${onderwerp}`}>
                   <Mail size={16} aria-hidden="true" /><span translate="no">{SECURE}</span>
                 </a>
@@ -218,34 +228,21 @@ function Mensen({ domein = "", kort = false }: { domein?: string; kort?: boolean
   );
 }
 
-// 22 oktober 2026 (Marinus): de uitlegfilm (HyperFrames), sinds de middag helemaal bovenaan de pagina, boven de check.
-// Klik om af te spelen, poster als voorbeeldbeeld; op mobiel de 9:16-versie. Ondertitels staan in het beeld, in NL of EN.
-// Sessie check-film maakt een nieuwe Engelse versie; die vervangt check-16x9.mp4 en check-9x16.mp4 met dezelfde namen.
+// 22 oktober 2026, 15.45 (Marinus): de nieuwe securityvideo (HyperFrames, Marinus aan het woord, export v2a) vervangt de
+// uitlegfilm. Eén verticale film, Engels in beeld (security-campagne), dus voor elke taal dezelfde. Klik om af te spelen,
+// poster als voorbeeldbeeld. Komt er een nieuwere export, dan vervangt die security-9x16.mp4 met dezelfde naam.
 function Film() {
-  const { language } = useLanguage();
-  const [hoog, zetHoog] = useState(false);
-  useEffect(() => {
-    const m = window.matchMedia("(max-width: 760px)");
-    const kies = () => zetHoog(m.matches);
-    kies();
-    m.addEventListener("change", kies);
-    return () => m.removeEventListener("change", kies);
-  }, []);
-  const vorm = hoog ? "9x16" : "16x9";
-  // Tekst en ondertitels staan in het beeld zelf: Nederlands op /nl, Engels in alle andere talen.
-  const nl = language === "nl" ? "-nl" : "";
   return (
     <section className="h-wrap pc-film">
       <video
-        key={vorm + nl}
-        className={`pc-video pc-video-${vorm}`}
+        className="pc-video pc-video-9x16"
         controls
         playsInline
         preload="none"
-        poster={`/websitecheck/film/poster-${vorm}${nl}.jpg`}
-        aria-label="Uitlegfilm: zo werkt de securityscan"
+        poster="/security/film/poster-9x16.jpg"
+        aria-label="Securityvideo: is je website veilig?"
       >
-        <source src={`/websitecheck/film/check-${vorm}${nl}.mp4`} type="video/mp4" />
+        <source src="/security/film/security-9x16.mp4" type="video/mp4" />
       </video>
     </section>
   );
@@ -368,13 +365,19 @@ function Extern({ href, children, className }: { href: string; children: React.R
   );
 }
 
-function Geraakt() {
+// 22 oktober 2026, 15.45 (Marinus): wie werd geraakt en wie loopt risico staan nu onder de scan, als één bentogrid. Eerst de
+// kop, dan Nintendo en Wikipedia, de vier overheden, daarna de platforms en het aandeel PHP (bron W3Techs, zie FAQ).
+const W3TECHS = "https://w3techs.com/technologies/details/pl-PHP";
+function Bento() {
   return (
-    <section className="h-wrap pc-geraakt" aria-labelledby="pc-geraakt-kop">
-      <h2 className="pc-blokkop" id="pc-geraakt-kop">Wie werd geraakt.</h2>
-      <ul className="pc-logos">
+    <section className="h-wrap pc-bento-blok" aria-labelledby="pc-geraakt-kop">
+      <ul className="pc-bento">
+        <li className="pc-tegel pc-tegel-kop">
+          <h2 className="pc-blokkop" id="pc-geraakt-kop">Wie werd geraakt.</h2>
+          <p className="pc-geen-klant">Geen klanten of partners van SocialNow. Gemeld als offline of verstoord tijdens php2shell.</p>
+        </li>
         {GERAAKT.map((g, i) => (
-          <li key={g.naam}>
+          <li key={g.naam} className={`pc-tegel pc-tegel-${g.logo ? "merk" : "land"}`}>
             <Extern href={g.bron} className="pc-logo-link">
               {g.logo
                 ? <span className="pc-merk"><img className="pc-logo" src={g.logo} alt={g.naam} height="48" loading="lazy" /><strong translate="no" aria-hidden="true">{g.naam}</strong></span>
@@ -383,31 +386,30 @@ function Geraakt() {
             </Extern>
           </li>
         ))}
+        <li className="pc-tegel pc-tegel-risico">
+          <h2 className="pc-blokkop" id="pc-risico-kop">Wie loopt risico.</h2>
+          <ul className="pc-logos pc-logos-platform" aria-labelledby="pc-risico-kop">
+            {RISICO.map((p) => (
+              <li key={p.naam}>
+                <Extern href={p.bron} className="pc-logo-link"><img className="pc-logo" src={p.logo} alt={p.naam} height="40" loading="lazy" /><span className="pc-logo-naam" translate="no" aria-hidden="true">{p.naam}</span></Extern>
+              </li>
+            ))}
+          </ul>
+          <p className="pc-risico-oproep">Gebouwd op een van deze en heeft niemand er al een tijdje naar omgekeken? Doe de scan.</p>
+          <p className="pc-geen-klant">Platforms die op PHP draaien. Geen klanten of partners van SocialNow.</p>
+        </li>
+        <li className="pc-tegel pc-tegel-cijfer">
+          <p className="pc-cijfer"><b translate="no">±70%</b><span>van de websites draait op PHP<sup>{GERAAKT.length + 1}</sup></span></p>
+          <p className="pc-risico-host">Een site bij een moderne host die PHP zelf bijwerkt, loopt minder risico.</p>
+          <a className="pc-naar-scan" href="#scan"><ArrowUp size={16} aria-hidden="true" /><span>Naar de scan</span></a>
+        </li>
       </ul>
-      <p className="pc-geen-klant">Geen klanten of partners van SocialNow. Gemeld als offline of verstoord tijdens php2shell.</p>
       <ol className="pc-bronnen pc-geraakt-bronnen">
         {GERAAKT.map((g) => (
           <li key={g.naam}><span>{g.naam}</span>{g.org && <span>, {g.org}</span>}<span aria-hidden="true">: </span><Extern href={g.bron}><span translate="no">{g.uitgever}</span></Extern>{g.bron2 && <><span aria-hidden="true">; </span><Extern href={g.bron2}><span translate="no">{g.uitgever2}</span></Extern></>}</li>
         ))}
+        <li>W3Techs, gebruik van servertalen, stand augustus 2026. <Extern href={W3TECHS}><span translate="no">w3techs.com</span></Extern></li>
       </ol>
-    </section>
-  );
-}
-
-function Risico() {
-  return (
-    <section className="h-wrap pc-risico" aria-labelledby="pc-risico-kop">
-      <h2 className="pc-blokkop" id="pc-risico-kop">Wie loopt risico.</h2>
-      <ul className="pc-logos pc-logos-platform">
-        {RISICO.map((p) => (
-          <li key={p.naam}>
-            <Extern href={p.bron} className="pc-logo-link"><img className="pc-logo" src={p.logo} alt={p.naam} height="40" loading="lazy" /><span className="pc-logo-naam" translate="no" aria-hidden="true">{p.naam}</span></Extern>
-          </li>
-        ))}
-      </ul>
-      <p className="pc-risico-oproep">Gebouwd op een van deze en heeft niemand er al een tijdje naar omgekeken? Doe de scan.</p>
-      <p className="pc-risico-host">Een site bij een moderne host die PHP zelf bijwerkt, loopt minder risico.</p>
-      <p className="pc-geen-klant">Platforms die op PHP draaien. Geen klanten of partners van SocialNow.</p>
     </section>
   );
 }
@@ -469,12 +471,12 @@ export function PhpCheckPage() {
 
   return (
     <div className="pc">
-      {/* 22 oktober 2026, middag (Marinus): de film staat helemaal bovenaan, boven de scan. */}
+      {/* 22 oktober 2026, 15.45 (Marinus): film bovenaan; de scan met de documenten in een witte sectie zodat die opvalt;
+          daaronder de bento met wie werd geraakt en wie risico loopt, en direct Steef en Michelle. */}
       <Film />
-      <Geraakt />
-      <Risico />
 
-      <section className="pc-hero h-wrap">
+      <section className="pc-wit" id="scan">
+      <div className="pc-hero h-wrap">
         <p className="h-eyebrow pc-eyebrow"><i aria-hidden="true" /> Gratis securityscan</p>
         <h1 className="pc-kop">Is je website veilig?</h1>
 
@@ -512,6 +514,27 @@ export function PhpCheckPage() {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Hoe en wat we meten, als pdf in NL (Nederlands) of EN (alle andere talen), als links in de witte sectie. */}
+      {DOCUMENTEN.length > 0 && (
+        <div className="h-wrap pc-documenten">
+          <h2>Hoe en wat we meten.</h2>
+          <ul className="pc-docs">
+            {DOCUMENTEN.map((d) => (
+              <li key={d.bestand}>
+                <a href={`/websitecheck/${d.bestand}-${language === "nl" ? "nl" : "en"}.pdf`} target="_blank" rel="noopener"><span>{d.naam}</span><small>PDF</small></a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      </section>
+
+      <Bento />
+
+      <section className="h-wrap pc-team">
+        <Mensen domein={gecheckt || vooraf} groot />
       </section>
 
       {/* 22 oktober 2026 (Marinus): de hele lijst. De volgorde telt, dus genummerd. */}
@@ -525,23 +548,6 @@ export function PhpCheckPage() {
           <li>NSA-advies over php2shell, zoals gemeld door TweakTown, 22 oktober 2026. <a href="https://www.tweaktown.com/news/114213/nsa-warns-70-percent-of-websites-to-install-the-latest-php-patch-now-or-go-offline/index.html" target="_blank" rel="noopener">tweaktown.com</a></li>
         </ol>
       </section>
-
-      {/* 22 oktober 2026 (Marinus): een witte sectie in het zwart, voor menselijkheid en vertrouwen; de zwarte delen tonen
-          de data en de werking. Klein: hoe en wat we meten, als pdf in NL (Nederlands) of EN (alle andere talen). */}
-      {DOCUMENTEN.length > 0 && (
-        <section className="pc-documenten">
-          <div className="h-wrap">
-            <h2>Hoe en wat we meten.</h2>
-            <ul className="pc-docs">
-              {DOCUMENTEN.map((d) => (
-                <li key={d.bestand}>
-                  <a href={`/websitecheck/${d.bestand}-${language === "nl" ? "nl" : "en"}.pdf`} target="_blank" rel="noopener"><span>{d.naam}</span><small>PDF</small></a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      )}
 
       <section className="h-section h-wrap pc-faq-blok">
         <h2 className="pc-sectiekop">Veelgestelde vragen.</h2>
@@ -565,10 +571,9 @@ export function PhpCheckPage() {
         </ol>
       </section>
 
-      {/* Onderaan: Steef en Michelle, met het korte formulier eronder. De mailing linkt naar #aanvraag. */}
+      {/* Onderaan het korte formulier; Steef en Michelle staan al onder de bento. De mailing linkt naar #aanvraag. */}
       <section className="h-section h-wrap pc-slot" id="aanvraag" ref={aanvraagRef}>
-        <h2 className="pc-sectiekop">Lukt het niet of wil je zekerheid?</h2>
-        <Mensen domein={gecheckt || vooraf} />
+        <h2 className="pc-sectiekop">Claim je gratis update.</h2>
         <Aanvraag kort telefoon soort="uitgebreide-check" domein={gecheckt || vooraf} uitslag={u} key={gecheckt || vooraf || "leeg"} />
       </section>
     </div>
