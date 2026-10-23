@@ -4,6 +4,8 @@ import { CLAIM_URL } from "./os-entry";
 // 5 oktober 2026 (Marinus): "graag bij iedereen Linkedin doorlink". Alleen profielen die zeker van deze persoon zijn
 // (teamonderzoek 4 en 5 oktober); bij de rest volgt de link zodra de juiste URL bevestigd is.
 export const people: { name: string; role: string; image: string; linkedin?: string; sinds?: string; description?: string; quote?: string; instagram?: string }[] = [
+  // 23 oktober 2026 (Marinus): Gijsbert Westeneng is onze nieuwe aanwinst, Full-Stack AI Engineer, bij SocialNow Connect. Nieuwste aanwinst vooraan.
+  { name: "Gijsbert Westeneng", role: "Full-Stack AI Engineer", image: "Gijsbert-Westeneng.webp", linkedin: "https://www.linkedin.com/in/gijsbert-westeneng-804172155/", sinds: "2026-10-23" },
   { name: "Thomas Huijsmans", role: "AI Strategy & Consulting", linkedin: "https://www.linkedin.com/in/thomashuijsmans/", image: "Thomas-Huijsmans.webp", sinds: "2026-10-14" },
   // 19 oktober 2026 (Marinus): "Hossam moet er wel in maar beter op zijn plek gewoon beter in het veld." Eigen uitsnede, hoofd en schouders.
   { name: "Hossam Hassan", role: "Brand and Marketing Consultant", linkedin: "https://www.linkedin.com/in/hossam-hassan-abdelrehim/", image: "Hossam-Hassan-portret.webp", sinds: "2026-10-14" },
@@ -73,7 +75,8 @@ export const people: { name: string; role: string; image: string; linkedin?: str
     role: "Head of Supply Chain & Operations",
     image: "Michelle-Yang-kantoor.webp",
   },
-  // 30 september 2026 (Marinus): nieuw teamlid.
+  // 30 september 2026 (Marinus): nieuw teamlid. 12 oktober 2026 weggehaald; 23 oktober 2026 (Marinus): "Tristan mag er ook weer bij."
+  { name: "Tristan Slobbe", role: "Data & AI Engineer", image: "Tristan-Slobbe.webp", linkedin: "https://www.linkedin.com/in/tristan-slobben-105056159/", sinds: "2026-09-30" },
   // 3 oktober 2026 (Marinus): nieuwe teamleden.
   { name: "Antony Soosaipillaj", role: "Full-Stack AI Developer", image: "Antony-Soosaipillaj.webp", sinds: "2026-10-03" },
   { name: "Ruben Spyckerelle", linkedin: "https://www.linkedin.com/in/ruben-spyckerelle/", role: "Outsourced B2B cold calling & appointment setting · Benelux & DACH", image: "Ruben.webp", description: "Gekwalificeerde afspraken in je agenda.", quote: "Ik bel, zodat jij het niet hoeft te doen.", sinds: "2026-10-12" },
@@ -94,7 +97,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
 // De vakgebieden van Connect met hun mensen, in de volgorde van de homepage en /team.
 export const expertGroepen = [
   { name: "Strategy & guidance", members: ["Albert Deltour", "Hossam Hassan"] },
-  { name: "AI development", members: ["Douwe Kramer", "Thomas Huijsmans"] },
+  { name: "AI development", members: ["Gijsbert Westeneng", "Tristan Slobbe", "Douwe Kramer", "Thomas Huijsmans"] },
   { name: "Web development", members: ["Sid van Kalken", "Antony Soosaipillaj"] },
   { name: "Finance & operations", members: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
   { name: "Ads & search", members: ["Jos Hollenberg", "Nick van Keulen", "Sergio Jovovic"] },
@@ -117,6 +120,10 @@ export const partnerReferences: Record<string, { name: string; url: string }[]> 
     { name: "Attesso", url: "https://www.attesso.com/" },
     { name: "ByteChat", url: "https://bytechat.io/" },
     { name: "ByteVision", url: "https://bytevision.io/" },
+  ],
+  "Tristan Slobbe": [
+    { name: "KLM", url: "https://www.klm.com/" },
+    { name: "BearingPoint", url: "https://www.bearingpoint.com/" },
   ],
   "Steven Goudsblom": [
     { name: "Fincer", url: "https://www.linkedin.com/in/steven-goudsblom-bb3ab0197/" },
