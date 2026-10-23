@@ -9,6 +9,7 @@ import {
   ChevronDown,
   X,
   MessageCircle,
+  Phone,
 } from "lucide-react";
 import { agents, faqs, logos, people } from "./content";
 import type { Language } from "./i18n/context";
@@ -489,6 +490,7 @@ export function MiloGuide() {
   const [vraag, setVraag] = useState("");
   const [denkt, setDenkt] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
+  const launcher = useRef<HTMLButtonElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const lijst = useRef<HTMLDivElement>(null);
   const { language, t } = useLanguage();
@@ -503,9 +505,21 @@ export function MiloGuide() {
 
   useEffect(() => {
     if (open) {
-      dialog.current?.showModal();
+      dialog.current?.show();
       input.current?.focus();
-    } else dialog.current?.close();
+      const escape = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          setOpen(false);
+        }
+      };
+      window.addEventListener("keydown", escape);
+      return () => window.removeEventListener("keydown", escape);
+    }
+    if (dialog.current?.open) {
+      dialog.current.close();
+      launcher.current?.focus({ preventScroll: true });
+    }
   }, [open]);
 
   useEffect(() => {
@@ -533,7 +547,10 @@ export function MiloGuide() {
     <>
       <button
         className="h-milo-launcher"
+        ref={launcher}
         type="button"
+        aria-expanded={open}
+        aria-controls="milo-chat"
         onClick={() => setOpen(true)}
         aria-label="Open de SocialNow-hulp"
       >
@@ -545,13 +562,14 @@ export function MiloGuide() {
       </button>
       <dialog
         className="h-milo-dialog h-milo-gesprek"
+        id="milo-chat"
         ref={dialog}
         onCancel={() => setOpen(false)}
         onClose={() => setOpen(false)}
         aria-labelledby="milo-title"
       >
         <div className="h-milo-top">
-          <img src="/proposal/milo/website.webp" alt="SocialNow" width="64" height="64" />
+          <img src="/proposal/milo/website.webp" alt="Milo" width="64" height="64" />
           <div>
             <h2 id="milo-title">Waar kunnen we je mee helpen?</h2>
             <p>Je wegwijzer bij SocialNow.</p>
@@ -585,7 +603,7 @@ export function MiloGuide() {
             </div>
           ))}
           {denkt && (
-            <div className="h-milo-bericht h-milo-denkt">
+            <div className="h-milo-bericht h-milo-denkt" role="status" aria-label={t("Milo denkt na")}>
               <i />
               <i />
               <i />
@@ -628,13 +646,11 @@ export function MiloGuide() {
           </button>
         </form>
 
-        <p className="h-milo-voetnoot">
-          <a href={MARINUS_BEL_LINK}>Bel Marinus direct</a>{" · "}
-          Milo kan fouten maken.{" "}
-          <Link to="/contact" onClick={() => setOpen(false)}>
-            Praat met het team
-          </Link>
-        </p>
+        <div className="h-milo-contact">
+          <a href={MARINUS_BEL_LINK}><Phone size={14} aria-hidden="true" />Bel Marinus direct</a>
+          <Link to="/contact" onClick={() => setOpen(false)}>Praat met het team</Link>
+        </div>
+        <p className="h-milo-voetnoot">Milo kan fouten maken.</p>
       </dialog>
     </>
   );
