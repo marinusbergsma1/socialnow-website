@@ -46,7 +46,9 @@ function Startbeeld({ label, zinId }: { label: string; zinId: string }) {
         <X className="sn-startbeeld-x" size={12} aria-hidden="true" />
         <img className="sn-startbeeld-partner" src="/images/home-header/uncanny-op-zwart.svg" alt="" width="1365" height="300" decoding="async" />
         <X className="sn-startbeeld-x" size={12} aria-hidden="true" />
-        <img className="sn-startbeeld-partner is-wit" src="/images/home-header/indexworld.png" alt="" width="725" height="176" decoding="async" />
+        {/* 23 oktober 2026 (Marinus): "Hier wil ik graag de logo's gewoon lekker met kleur hebben." Het Indexworld-bestand is
+            alleen zwart; als masker krijgt het beeldmerk hun paars (#50269E, lichter voor zwart) en het woordmerk wit. */}
+        <span className="sn-startbeeld-indexworld" role="img" aria-label="Indexworld" />
       </span>
     </span>
     <span className="sn-startbeeld-midden">

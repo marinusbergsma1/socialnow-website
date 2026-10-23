@@ -440,7 +440,12 @@
 /* 22 oktober 2026, 17.20 (Marinus): wit voor vertrouwen, zwart voor de data. Naast de scankaart zijn ook de kaarten van
    Steef en Michelle en het contactformulier wit; de schakelaar krijgt een dunnere rand. Uitslag, bento en stappen blijven
    donker. */
-:root .sn-site .pc-keuze { border-width: 1.5px; padding: 4px; }
+/* 23 oktober 2026: zakelijke schakelaar, zelfde maat als in header-bestaand.css. */
+:root .sn-site .pc-keuze { gap: 2px; border: 1.5px solid #ffffff52; padding: 4px; background: #0b0d0c; }
+:root .sn-site .pc-keuze button { min-height: 38px; padding: 0 16px; font-size: 14px; font-weight: 600; color: #c9d1cc; }
+:root .sn-site .pc-keuze button.is-aan { color: #fff; }
+:root .sn-site .pc-keuze button:not(.is-aan):hover { background: #ffffff12; color: #fff; }
+@media (max-width: 760px) { :root .sn-site .pc-keuze button { padding: 0 12px; font-size: 13px; } }
 :root .sn-site .pc-keuze-glijder { top: 4px; bottom: 4px; }
 :root .sn-site .pc-mensen-groot .pc-mens { background: #fff; border-color: #fff; }
 :root .sn-site .pc-mensen-groot .pc-mens strong { color: #111; }

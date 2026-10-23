@@ -34,7 +34,9 @@ html:root .sn-site .sn-startbeeld-partnerbalk{--balk-h:calc(var(--logo-h) * .82)
 html:root .sn-site .sn-startbeeld-partnerbalk img{display:block;width:auto}
 html:root .sn-site .sn-startbeeld-partnerbalk .sn-startbeeld-os{height:var(--balk-h)}
 html:root .sn-site .sn-startbeeld-partnerbalk .sn-startbeeld-partner{height:calc(var(--balk-h) * 1.05)}
-html:root .sn-site .sn-startbeeld-komen{height:calc(var(--balk-h) * 1.15);filter:brightness(0) invert(1)}
+html:root .sn-site .sn-startbeeld-komen{height:calc(var(--balk-h) * 1.15)}
+/* 23 oktober 2026: partners in hun eigen kleur. Komen zilver met goud zoals het bestand is, Indexworld paars beeldmerk. */
+html:root .sn-site .sn-startbeeld-indexworld{display:block;height:calc(var(--balk-h) * 1.05);aspect-ratio:725/176;background:linear-gradient(90deg,#8b5cf6 0 25%,#fff 25%);-webkit-mask:url(/images/home-header/indexworld.png) center/contain no-repeat;mask:url(/images/home-header/indexworld.png) center/contain no-repeat}
 html:root .sn-site .sn-startbeeld-attesso{display:inline-flex;align-items:center;gap:6px;color:#fff;white-space:nowrap}
 html:root .sn-site .sn-startbeeld-attesso b{display:grid;place-items:center;height:calc(var(--balk-h) * .95);aspect-ratio:1;border-radius:5px;background:#fff;color:#0b0d0c;font:500 calc(var(--balk-h) * .42)/1 AttessoMono,ui-monospace,Menlo,monospace;letter-spacing:-.04em}
 html:root .sn-site .sn-startbeeld-attesso code{font:400 calc(var(--balk-h) * .62)/1 AttessoMono,ui-monospace,Menlo,monospace;letter-spacing:0;color:#fff}
