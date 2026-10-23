@@ -43,7 +43,7 @@ const MILOS = [{ rol: "website", naam: "Website" }, { rol: "crm", naam: "CRM" },
 
 // 18 oktober 2026 (Marinus): "er moet een switch zijn van normale OS naar Call inplannen for custom os [...] waar je
 // ook de mensen ziet die om de zoveel tijd switched".
-// "Plan een call" opent het boekingspaneel (PlanCall.tsx) met de onderdelen van het gekozen pakket alvast aangevinkt.
+// 23 oktober 2026 (Marinus): de call-knop belt Marinus direct in plaats van een afspraak in te plannen.
 // Daarna: "Bij Custom os liever gewoon de pakketten laten zien of uitspraken van het team." Er staan nog geen echte
 // uitspraken van het team in content.ts (alleen die van Ruben), dus de pakketten: bij elk zit het Custom OS.
 // 19 oktober 2026 (Marinus): de Connect-pakketten uit Pricing.tsx, vanaf €3.000 per maand, bij elk het custom OS.
@@ -150,7 +150,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                   {VEILIG.map(punt => <li key={punt}><Check size={15} strokeWidth={3} aria-hidden="true" />{punt}</li>)}
                 </ul>
                 <div className="action os-account-actions">
-                  <button type="button" className="pill" aria-haspopup="dialog" onClick={() => { meet("custom_os"); openPlanCall({ onderdelen: ONDERDELEN[custom] }); }}><span>Plan een call</span><span className="arrow"><ArrowUpRight size={17} /></span></button>
+                  <button type="button" className="pill" onClick={() => { meet("custom_os"); openPlanCall({ onderdelen: ONDERDELEN[custom] }); }}><span>Bel Marinus direct</span><span className="arrow"><ArrowUpRight size={17} /></span></button>
                 </div>
                 </> : <>
                 <h2>AI-powered management &amp; operations.</h2>

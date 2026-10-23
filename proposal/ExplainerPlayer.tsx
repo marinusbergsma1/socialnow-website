@@ -111,7 +111,7 @@ export default function ExplainerPlayer({ kind = "explainer", compact = false, c
             {paused ? <Play size={20} aria-hidden="true" /> : <Pause size={20} aria-hidden="true" />}{paused ? "Afspelen" : "Pauzeren"}
           </button>
           {connect
-            ? <button type="button" className="sn-pill sn-video-try sn-pill-connect" aria-haspopup="dialog" onClick={() => { dialog.current?.close(); restore(); openPlanCall(); }}><span>Plan een call</span><span className="h-button-icon"><ArrowUpRight size={21} aria-hidden="true" /></span></button>
+            ? <button type="button" className="sn-pill sn-video-try sn-pill-connect" onClick={() => { dialog.current?.close(); restore(); openPlanCall(); }}><span>Bel Marinus direct</span><span className="h-button-icon"><ArrowUpRight size={21} aria-hidden="true" /></span></button>
             : <a className="sn-pill sn-video-try" href="https://app.socialnow.nl/login/" translate="no"><span>Try it yourself</span><span className="h-button-icon"><ArrowUpRight size={21} aria-hidden="true" /></span></a>}
         </header>
         <div className="sn-video-stage">
