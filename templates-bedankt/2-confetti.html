@@ -1,0 +1,37 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#25d366;--p:#a0628f;--bg:#050607}
+*{box-sizing:border-box;margin:0}body{background:var(--bg);color:#fff;font-family:"Plus Jakarta Sans",sans-serif;overflow-x:hidden}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:22px 5vw;position:relative;z-index:5}
+.nav img{height:34px}.nav a.cta{background:var(--g);color:#04140a;padding:12px 20px;border-radius:99px;font-weight:800;text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:14px;padding:18px 18px 18px 30px;border-radius:99px;background:#fff;color:#04140a;font-weight:800;font-size:18px;text-decoration:none;transition:.3s cubic-bezier(.16,1,.3,1)}
+.btn i{width:40px;height:40px;border-radius:50%;background:var(--g);display:grid;place-items:center;font-style:normal;transition:.3s}
+.btn:hover{background:var(--g);transform:translateY(-3px);box-shadow:0 20px 60px #25d36666}.btn:hover i{background:#04140a;color:var(--g);transform:rotate(45deg)}
+.team{display:flex;align-items:center;gap:16px}.team span{display:flex}.team img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--bg);margin-left:-14px}.team img:first-child{margin-left:0}
+.team small{display:block;color:var(--g);letter-spacing:.2em;font-weight:800;font-size:11px}.team b{font-size:18px}
+.video{aspect-ratio:16/9;border-radius:22px;overflow:hidden;border:1px solid #ffffff22;background:#000;box-shadow:0 40px 120px #000,0 0 80px #25d36622}
+.video video{width:100%;height:100%;object-fit:cover;display:block}
+.odoo{display:inline-block;height:1em;width:auto;vertical-align:-.12em}
+@keyframes up{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+.rise{animation:up 1s cubic-bezier(.16,1,.3,1) both}
+</style>
+<title>Bedankt 2 Confetti</title><style>
+canvas{position:fixed;inset:0;pointer-events:none;z-index:1}
+.hero{position:relative;z-index:2;text-align:center;padding:4vh 5vw}
+h1{font-size:12vw;font-weight:800;letter-spacing:-.05em;line-height:.9}
+h1 span{display:inline-block;animation:drop .9s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes drop{from{opacity:0;transform:translateY(-120px) rotate(-12deg)}to{opacity:1;transform:none}}
+h1 .odoo{height:.9em;display:block;margin:.05em auto 0;animation:pop 1s 1s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.o1{transform-origin:224px 271px;animation:spin 3s 2s ease-in-out infinite}@keyframes spin{50%{transform:rotate(180deg) scale(1.1)}}
+p{font-size:22px;color:#fffb;margin:28px auto 34px;max-width:32em}
+.row{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1.4fr;gap:5vw;align-items:center;padding:6vh 5vw}
+@media(max-width:900px){.row{grid-template-columns:1fr}}
+</style><body><div class=nav><img src=../public/images/SocialNow-Logo-2026.webp alt=SocialNow><a class=cta href=https://socialnow.nl/gratis-website>Gratis website ↗</a></div><canvas id=c></canvas>
+<section class=hero><h1><span>T</span><span style="animation-delay:.05s">H</span><span style="animation-delay:.1s">A</span><span style="animation-delay:.15s">N</span><span style="animation-delay:.2s">K</span> <span style="animation-delay:.3s">Y</span><span style="animation-delay:.35s">O</span><span style="animation-delay:.4s">U</span><svg class="odoo" viewBox="140 146 640 250"><path fill="#fff" d="M695,346a75,75,0,1,1,75-75A75,75,0,0,1,695,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,695,315ZM538,346a75,75,0,1,1,75-75A75,75,0,0,1,538,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,538,315Zm-82-45c0,41.9-33.6,76-75,76s-75-34-75-75.9S336.5,196,381,196c16.4,0,31.6,3.5,44,12.6V165.1c0-8.3,7.3-15.1,15.5-15.1s15.5,6.8,15.5,15.1Zm-75,45a44,44,0,1,0-44-44A44,44,0,0,0,381,315Z"/><path class="o1" fill="#a0628f" d="M224,346a75,75,0,1,1,75-75A75,75,0,0,1,224,346Zm0-31a44,44,0,1,0-44-44A44,44,0,0,0,224,315Z"/></svg></h1>
+<p class=rise style="animation-delay:1.2s">Drie dagen, honderden gesprekken en een stand vol energie. Je gratis SocialNow OS staat voor je klaar.</p><a class=btn href=https://app.socialnow.nl/login/>Log in op je gratis OS <i>↗</i></a></section>
+<div class=row><div class=team><span><img src=../public/images/Steef-Komen.webp><img src=../public/images/Sergio-Jovovic.webp><img src=../public/images/Marinus-Bergsma-V2.webp><img src=../public/images/Elian-Coellar-2026-09-26.webp></span><div><small>HET TEAM ACHTER SOCIALNOW</small><b>Steef, Sergio, Marinus en Elian</b></div></div> <div class=video><video src=../public/video/os/os-booth-en.mp4 autoplay muted loop playsinline></video></div></div>
+<script>const c=document.getElementById('c'),x=c.getContext('2d');let W,H;const r=()=>{W=c.width=innerWidth;H=c.height=innerHeight};r();onresize=r;
+const col=['#25d366','#a0628f','#fff','#714b67'];const P=Array.from({length:160},()=>({x:Math.random()*W,y:-Math.random()*H,v:1+Math.random()*3,s:4+Math.random()*6,a:Math.random()*6,c:col[Math.random()*4|0]}));
+(function f(){x.clearRect(0,0,W,H);for(const p of P){p.y+=p.v;p.a+=.05;p.x+=Math.sin(p.a);if(p.y>H)p.y=-10;x.save();x.translate(p.x,p.y);x.rotate(p.a);x.fillStyle=p.c;x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);x.restore()}requestAnimationFrame(f)})();</script></body></html>
