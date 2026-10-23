@@ -36,9 +36,13 @@
 .sn-site .sn-bestaand .bs-zeker a{display:inline-block;min-height:0;min-width:0;padding:12px 0;margin:-12px 0;line-height:20px;border-bottom:0;text-decoration:underline 1px #25d36688;text-underline-offset:4px}
 .sn-site .sn-bestaand .service.connect>.action .pill{width:max-content;max-width:100%;gap:16px;white-space:nowrap}
 .sn-site .sn-bestaand .bs-uitleg-hulp strong{display:block;margin-bottom:4px;color:var(--blue)}
-.sn-site .sn-bestaand .bs-switch{display:inline-flex;gap:4px;margin:14px 0 0;padding:4px;border:1px solid #2a3b31;border-radius:999px;background:#07100b}
-.sn-site .sn-bestaand .bs-switch :is(button,a){text-decoration:none;padding:8px 16px;border:0;border-radius:999px;background:transparent;color:#a8b8af;font-size:13px;font-weight:700;letter-spacing:.02em;cursor:pointer;transition:background .2s,color .2s}
-.sn-site .sn-bestaand .bs-switch button[aria-pressed=true]{background:var(--green);color:#002912}
+/* 23 oktober 2026 (Marinus): "Dit balkje is iets te dik en deze juist weer iets te dun. Ik wil even een zakelijk ontwerp
+   voor alle switches." Eén maat voor elke schakelaar op de site: rand 1,5 px wit op 32%, 4 px binnenrand, knoppen 38 px
+   hoog, 14 px halfvet, actief vlak in merkkleur met witte letters (OS groen, Connect blauw). Zelfde in php-check.css. */
+.sn-site .sn-bestaand .bs-switch{display:inline-flex;gap:2px;margin:14px 0 0;padding:4px;border:1.5px solid #ffffff52;border-radius:999px;background:#0b0d0c}
+.sn-site .sn-bestaand .bs-switch :is(button,a){display:inline-flex;align-items:center;min-height:38px;text-decoration:none;padding:0 16px;border:0;border-radius:999px;background:transparent;color:#c9d1cc;font-size:14px;font-weight:600;letter-spacing:0;white-space:nowrap;cursor:pointer;transition:background .2s,color .2s}
+.sn-site .sn-bestaand .bs-switch :is(button,a):not([aria-pressed=true]):hover{background:#ffffff12;color:#fff}
+.sn-site .sn-bestaand .bs-switch button[aria-pressed=true]{background:#0B7A37;color:#fff}
 .sn-site .sn-bestaand .bs-switch :is(button,a):focus-visible{outline:2px solid #fff;outline-offset:2px}
 .sn-site .sn-bestaand .bs-kop-hulp span{color:#c8d8ce;font-weight:600}
 .sn-site .sn-bestaand .bs-typer{display:block;min-height:2.3em;color:var(--green)}
@@ -81,12 +85,13 @@ html:root .sn-site .sn-choice.sn-bestaand .showcase .video-title h1{max-width:no
    inactief wit met de merkkleur; nooit zwart; op 375 px op één regel. */
 /* 22 oktober 2026 (Marinus, ontwerp A): witte ring, binnenkant open, de andere knop wit icoon en witte tekst. Eén vlak glijdt
    naar de gekozen knop en loopt mee in breedte en kleur: OS groen, Connect blauw. Zonder JS vult de gekozen knop zelf. */
-.sn-site .sn-bestaand .bs-filmkeuze{position:relative;isolation:isolate;display:inline-flex;gap:4px;margin:0 0 12px;padding:3px;border:3px solid #fff;border-radius:999px;background:transparent;max-width:100%}
-.sn-site .sn-bestaand .bs-filmkeuze button{position:relative;z-index:1;display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:0 14px;border:0;border-radius:999px;background:transparent;color:#fff;font-size:13px;font-weight:700;letter-spacing:.01em;white-space:nowrap;cursor:pointer;transition:background .2s,color .2s}
+.sn-site .sn-bestaand .bs-filmkeuze{position:relative;isolation:isolate;display:inline-flex;gap:2px;margin:0 0 12px;padding:4px;border:1.5px solid #ffffff52;border-radius:999px;background:#0b0d0c;max-width:100%}
+.sn-site .sn-bestaand .bs-filmkeuze button{position:relative;z-index:1;display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:0 16px;border:0;border-radius:999px;background:transparent;color:#c9d1cc;font-size:14px;font-weight:600;letter-spacing:0;white-space:nowrap;cursor:pointer;transition:background .2s,color .2s}
 .sn-site .sn-bestaand .bs-filmkeuze .bs-film-os.is-aan{background:#0B7A37;color:#fff}
 .sn-site .sn-bestaand .bs-filmkeuze .bs-film-connect.is-aan{background:#00739E;color:#fff}
-.sn-site .sn-bestaand .bs-filmkeuze button:not(.is-aan):hover{background:#ffffff1a}
-.sn-site .sn-bestaand .bs-film-glijder{position:absolute;z-index:0;top:3px;bottom:3px;left:0;transform:translateX(var(--glijder-x,0));width:var(--glijder-w,0);border-radius:999px;background:#0B7A37;opacity:0;pointer-events:none}
+.sn-site .sn-bestaand .bs-filmkeuze button.is-aan{color:#fff}
+.sn-site .sn-bestaand .bs-filmkeuze button:not(.is-aan):hover{background:#ffffff12;color:#fff}
+.sn-site .sn-bestaand .bs-film-glijder{position:absolute;z-index:0;top:4px;bottom:4px;left:0;transform:translateX(var(--glijder-x,0));width:var(--glijder-w,0);border-radius:999px;background:#0B7A37;opacity:0;pointer-events:none}
 .sn-site .sn-bestaand .bs-filmkeuze[data-film="connect"] .bs-film-glijder{background:#00739E}
 .sn-site .sn-bestaand .bs-filmkeuze[data-glijder] .bs-film-glijder{opacity:1}
 .sn-site .sn-bestaand .bs-filmkeuze[data-glijder] button.is-aan{background:transparent}
@@ -94,4 +99,4 @@ html:root .sn-site .sn-choice.sn-bestaand .showcase .video-title h1{max-width:no
 .sn-site .sn-bestaand .bs-filmkeuze button:focus-visible{outline:2px solid #fff;outline-offset:-5px}
 @media(prefers-reduced-motion:reduce){.sn-site .sn-bestaand .bs-film-glijder{transition:none !important}}
 .sn-site .sn-bestaand .bs-explainer-onder{min-height:3em}
-@media(max-width:600px){.sn-site .sn-bestaand .bs-filmkeuze button{padding:0 11px;font-size:12px;gap:6px}.sn-site .sn-bestaand .bs-explainer-onder{min-height:4.5em}}
+@media(max-width:600px){.sn-site .sn-bestaand :is(.bs-filmkeuze button,.bs-switch :is(button,a)){padding:0 12px;font-size:13px;gap:6px}.sn-site .sn-bestaand .bs-explainer-onder{min-height:4.5em}}
