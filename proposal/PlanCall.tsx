@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { later } from "./later";
 import "./plan-call.css";
+import { MARINUS_BEL_LINK } from "./aanvragen";
 
 // 18 oktober 2026 (Marinus): "Plan een call voor custom OS" in de hero. De knop en de host zitten in het eerste script;
 // het paneel zelf (PlanCallPaneel.tsx) laadt pas bij de eerste klik, samen met de rest van het woordenboek.
@@ -15,7 +16,8 @@ import "./plan-call.css";
 export type CallVoorinvulling = { bedrijf?: string; onderdelen?: string[]; budget?: string; bron?: "os"; ref?: string };
 export const PLAN_CALL_ANKER = "plan-een-call";
 const OPEN = "sn-plan-call";
-export function openPlanCall(voor: CallVoorinvulling = {}) { window.dispatchEvent(new CustomEvent<CallVoorinvulling>(OPEN, { detail: voor })); }
+// De bestaande configurator-knoppen bellen sinds 23 oktober rechtstreeks; de oude voorinvulling blijft compatibel.
+export function openPlanCall(_voor: CallVoorinvulling = {}) { window.location.assign(MARINUS_BEL_LINK); }
 
 const Paneel = later(() => import("./PlanCallPaneel").then((m) => m.default));
 
@@ -33,8 +35,8 @@ function uitAdres(zoek: URLSearchParams): CallVoorinvulling {
 const vanuitAdres = (zoek: URLSearchParams, hash: string) =>
   hash === `#${PLAN_CALL_ANKER}` || zoek.get("call") === "custom-os" || zoek.get("onderwerp") === "custom-os";
 
-export function PlanCallKnop({ className = "pill", label = "Plan een call voor custom OS" }: { className?: string; label?: string }) {
-  return <button type="button" className={className} aria-haspopup="dialog" onClick={() => openPlanCall()}><span>{label}</span><span className="arrow"><ArrowUpRight size={17} /></span></button>;
+export function PlanCallKnop({ className = "pill", label = "Bel Marinus direct" }: { className?: string; label?: string }) {
+  return <a className={className} href={MARINUS_BEL_LINK}><span>{label}</span><span className="arrow"><ArrowUpRight size={17} /></span></a>;
 }
 
 export function PlanCallHost() {

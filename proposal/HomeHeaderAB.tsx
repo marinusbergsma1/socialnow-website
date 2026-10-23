@@ -37,6 +37,7 @@ function meet(gebeurtenis: "header_getoond" | "header_klik", variant: Variant, d
 function doelA(el: HTMLElement): string | null {
   if (el instanceof HTMLButtonElement) return el.getAttribute("aria-haspopup") === "dialog" ? "custom_os" : null;
   const link = el as HTMLAnchorElement;
+  if (link.protocol === "tel:") return "custom_os";
   if (link.href.includes("app.socialnow.nl")) return "gratis_os";
   if (link.href.includes("/connect")) return "connect";
   if (link.closest("#os-explainer")) return "explainer";

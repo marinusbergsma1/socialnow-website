@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { CONTACT_MAIL, heeftWhatsApp, mailLink, whatsappLink } from "./aanvragen";
+import { CONTACT_MAIL, MARINUS_BEL_LINK, heeftWhatsApp, mailLink, whatsappLink } from "./aanvragen";
 import {
   Check,
   ArrowRight,
@@ -629,6 +629,7 @@ export function MiloGuide() {
         </form>
 
         <p className="h-milo-voetnoot">
+          <a href={MARINUS_BEL_LINK}>Bel Marinus direct</a>{" · "}
           Milo kan fouten maken.{" "}
           <Link to="/contact" onClick={() => setOpen(false)}>
             Praat met het team

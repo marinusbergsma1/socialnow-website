@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { CLAIM_URL } from "./os-entry";
-import { Action } from "./ui";
+import { Action, MiloGuide } from "./ui";
 import { useButtonMagnetism } from "./useButtonMagnetism";
 import { Home } from "./pages";
 // 30 september 2026 (Marinus: "WIL ECHT INSTANT LOADING"): elke pagina buiten de homepage is een eigen bestand dat pas
@@ -50,7 +50,7 @@ let brandMeta: typeof import("../scripts/brand-meta.mjs").brandMeta | null = nul
 import { MotionProvider } from "./motion";
 import LanguageSwitch from "./LanguageSwitch";
 import { DIENSTEN, DienstenMenu, HeaderCall, Kleurwoord, NAV_LINKS, PRODUCTEN, ProductenMenu, SecurityLink } from "./Producten";
-import { PlanCallHost, openPlanCall } from "./PlanCall";
+import { MARINUS_BEL_LINK } from "./aanvragen";
 import { LanguageProvider, LANGUAGES, languagePrefix, type Language, useLanguage } from "./i18n/context";
 const PrivacyPage = later(() => import("../components/PrivacyPage").then((m) => m.default));
 const TermsPage = later(() => import("../components/TermsPage").then((m) => m.default));
@@ -296,13 +296,13 @@ function ProposalShell() {
               <ArrowUpRight size={17} />
             </NavLink>
           ))}
-          <button type="button" className="h-mobile-call" aria-haspopup="dialog" onClick={() => { setMenuOpen(false); openPlanCall(); }}>
-            Plan een call voor custom OS
+          <a className="h-mobile-call" href={MARINUS_BEL_LINK} onClick={() => setMenuOpen(false)}>
+            Bel Marinus direct
             <ArrowUpRight size={17} />
-          </button>
+          </a>
         </nav>
       </header>
-      <PlanCallHost />
+      <MiloGuide />
       <main id="inhoud" ref={main} tabIndex={-1}>
         <Suspense fallback={<div aria-hidden="true" style={{ minHeight: "100vh" }} />}>
         <Routes>

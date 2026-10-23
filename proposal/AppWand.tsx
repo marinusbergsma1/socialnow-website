@@ -80,8 +80,8 @@ export default function AppWand() {
       <p className="sn-aw-let-uitleg"><i aria-hidden="true" translate="no">i</i> Vraagt de leverancier eerst goedkeuring of een abonnement, dan zie je dat bij de app.</p></div>
       <div className="sn-aw-mis">
         <div><h3>Mis je een app?</h3><p>Heeft je software een API, dan maken we hem zichtbaar in je OS.</p></div>
-        <button type="button" className="sn-aw-call" aria-haspopup="dialog" onClick={() => openPlanCall({ onderdelen: ["koppelingen"] })}>
-          <span>Plan een call</span><span className="arrow"><ArrowUpRight size={17} /></span>
+        <button type="button" className="sn-aw-call" onClick={() => openPlanCall({ onderdelen: ["koppelingen"] })}>
+          <span>Bel Marinus direct</span><span className="arrow"><ArrowUpRight size={17} /></span>
         </button>
       </div>
     </div>

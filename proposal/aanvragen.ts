@@ -4,6 +4,8 @@ import type { Language } from "./i18n/context";
 // Vul hier Steefs WhatsApp-nummer in (landcode zonder +, bijvoorbeeld 316...). Tot dan loopt alles per e-mail naar Steef.
 export const WHATSAPP_NUMMER = "";
 export const CONTACT_MAIL = "steef@socialnow.nl";
+// 23 oktober 2026 (Marinus): bel mij direct. Nummer uit de bestaande kennismaken-CTA in TeamPage.
+export const MARINUS_BEL_LINK = "tel:+31637404577";
 export const heeftWhatsApp = WHATSAPP_NUMMER !== "";
 export const whatsappLink = (tekst = "") =>
   heeftWhatsApp

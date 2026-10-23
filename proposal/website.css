@@ -1690,7 +1690,7 @@ video {
 .h-milo-launcher {
   position: fixed;
   bottom: 24px;
-  left: 22px;
+  right: 22px;
   z-index: 90;
   background: none;
   border: 0;
@@ -1728,7 +1728,9 @@ video {
   border: 1px solid #444;
   border-radius: 21px;
   padding: 26px;
-  margin: auto;
+  position: fixed;
+  inset: auto 22px 104px auto;
+  margin: 0;
   box-shadow: 0 30px 120px #000;
   font-family:
     TT Norms,
@@ -1772,7 +1774,10 @@ video {
 .h-milo-dialog input {
   font-size: 13px;
 }
-.h-milo-gesprek {
+.h-milo-gesprek:not([open]) {
+  display: none;
+}
+.h-milo-gesprek[open] {
   display: flex;
   flex-direction: column;
   height: min(620px, 85dvh);
@@ -2745,7 +2750,7 @@ video {
     padding-top: 55px;
   }
   .h-milo-launcher {
-    left: 10px;
+    right: 10px;
     bottom: 12px;
   }
   .h-milo-launcher img {
@@ -2757,6 +2762,8 @@ video {
     padding: 8px 11px;
   }
   .h-milo-dialog {
+    right: 16px;
+    bottom: 88px;
     padding: 21px;
   }
   .h-milo-top h2 {

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useMatch } from "react-router-dom";
 import { ArrowUpRight, ChevronDown, ShieldCheck } from "lucide-react";
-import { openPlanCall } from "./PlanCall";
+import { MARINUS_BEL_LINK } from "./aanvragen";
 import { useLanguage } from "./i18n/context";
 import "./hoofdmenu.css";
 
@@ -94,7 +94,7 @@ export function SecurityLink({ mobiel = false, onClick }: { mobiel?: boolean; on
 }
 
 export function HeaderCall() {
-  return <button type="button" className="h-header-call" aria-haspopup="dialog" onClick={() => openPlanCall()}>
-    <span>Plan een call</span><ArrowUpRight size={15} aria-hidden="true" />
-  </button>;
+  return <a className="h-header-call" href={MARINUS_BEL_LINK}>
+    <span>Bel Marinus direct</span><ArrowUpRight size={15} aria-hidden="true" />
+  </a>;
 }
