@@ -4,7 +4,7 @@ import { readFileSync, existsSync } from "node:fs";
 const content = readFileSync("proposal/content.ts", "utf8");
 const trust = readFileSync("proposal/TeamTrust.tsx", "utf8");
 const en = JSON.parse(readFileSync("proposal/i18n/en.json", "utf8"));
-const mensen = [["Gijsbert Westeneng", "Full-Stack AI Engineer"], ["Tristan Slobbe", "Data & AI Engineer"]];
+const mensen = [["Gijsbert Westeneng", "Full-Stack AI Engineer"], ["Tristan Slobben", "Data & AI Engineer"]];
 const fouten = [];
 for (const [naam, rol] of mensen) {
   const stam = naam.replace(" ", "-");

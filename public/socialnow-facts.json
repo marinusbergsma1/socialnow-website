@@ -9,7 +9,9 @@
   "organization": {
     "id": "https://socialnow.nl/#organization",
     "name": "SocialNow",
-    "customWorkOrganizer": "SocialNow B.V.",
+    "legalName": "M. Bergsma h.o.d.n. SocialNow",
+    "chamberOfCommerce": "KvK 77146301",
+    "customWorkOrganizer": "SocialNow",
     "url": "https://socialnow.nl/",
     "location": {
       "city": "Amsterdam",
@@ -57,13 +59,13 @@
   },
   "partnerModel": {
     "partnerStatus": "independentEntrepreneurs",
-    "customWorkOrganizer": "SocialNow B.V.",
-    "partnerPaymentOrganizer": "SocialNow B.V.",
+    "customWorkOrganizer": "SocialNow",
+    "partnerPaymentOrganizer": "M. Bergsma h.o.d.n. SocialNow (KvK 77146301)",
     "customerContactOrganizer": "SocialNow",
     "qualityCoordinator": "SocialNow",
     "description": {
-      "nl": "Partners zijn zelfstandige ondernemers. Bij maatwerk organiseert en betaalt SocialNow B.V. de juiste partners. De klant heeft één aanspreekpunt; SocialNow bewaakt de kwaliteit en houdt persoonlijk contact.",
-      "en": "Partners are independent entrepreneurs. For custom work, SocialNow B.V. organizes and pays the appropriate partners. The customer has one point of contact; SocialNow oversees quality and maintains personal contact."
+      "nl": "Partners zijn zelfstandige ondernemers. Bij maatwerk organiseert en betaalt SocialNow de juiste partners. De klant heeft één aanspreekpunt; SocialNow bewaakt de kwaliteit en houdt persoonlijk contact.",
+      "en": "Partners are independent entrepreneurs. For custom work, SocialNow organizes and pays the appropriate partners. The customer has one point of contact; SocialNow oversees quality and maintains personal contact."
     },
     "sourcePageIds": [
       "home",

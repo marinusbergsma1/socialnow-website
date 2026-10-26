@@ -98,7 +98,7 @@ try {
   // "Deze zijn nu wel écht te lang." De details staan in één uitklapbare tabel.
   eis(diensten.includes('class="prijs-vergelijk"'), "/diensten: vergelijkingstabel ontbreekt");
   // 19 oktober 2026 (Marinus): "AI agents ipv Milo" in de prijzen, en de Connect-pakketten per onderwerp uitgewerkt.
-  eis((diensten.match(/Helft vooraf, helft bij oplevering\./g) || []).length === 2, "/diensten: betaling helft vooraf, helft bij oplevering niet bij website en custom OS");
+  eis((diensten.match(/Helft vooraf bij akkoord, de rest bij oplevering, te betalen binnen 14 dagen na factuurdatum\./g) || []).length === 2, "/diensten: betaling helft vooraf, helft bij oplevering niet bij website en custom OS");
   // "De prijs voor websites moeten er ook staan."
   for (const bedrag of ["€2.000 tot €5.000", "vanaf €10.000"]) eis(diensten.includes(`<strong>${bedrag}</strong>`), `/diensten: losse prijs ${bedrag} niet groot in beeld`);
   eis(!/Dashboard, CRM en Milo/.test(diensten) && diensten.includes("Dashboard, CRM en AI agents"), "/diensten: Milo staat nog in de prijzen");

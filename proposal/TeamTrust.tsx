@@ -56,7 +56,7 @@ const NaamTeken = ({ person }: { person: Persoon }) => person.linkedin ? <NaamMe
 // management er nog bij ook in het onderverdelen terugkomen": het hele team staat hier, ook wie bovenaan al groot staat.
 const FUNCTIES: { functie: string; mensen: string[] }[] = [
   // Marinus staat bij Sales & partnerships; Sid (Web Development & AI Payments) bij Web development.
-  { functie: "AI development", mensen: ["Gijsbert Westeneng", "Tristan Slobbe", "Douwe Kramer"] },
+  { functie: "AI development", mensen: ["Gijsbert Westeneng", "Tristan Slobben", "Douwe Kramer"] },
   { functie: "Web development", mensen: ["Sid van Kalken", "Antony Soosaipillaj"] },
   { functie: "Finance & operations", mensen: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
   { functie: "Ads & search", mensen: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"] },
@@ -71,7 +71,7 @@ const LAGEN: [string, string[]][] = [
   ["Partner", ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer"]],
   ["Board", ["Michelle Yang", "Steven Goudsblom"]],
   ["Head", ["Jos Hollenberg", "Nick van Keulen", "Carmel Boon", "Elian Coellar"]],
-  ["Specialist", ["Gijsbert Westeneng", "Tristan Slobbe", "Isa Zoer", "Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
+  ["Specialist", ["Gijsbert Westeneng", "Tristan Slobben", "Isa Zoer", "Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
   ["Sales & network", ["Ruben Spyckerelle", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
 ];
 

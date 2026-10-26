@@ -187,6 +187,7 @@ function Vergelijk() {
 
 // Losse producten, buiten de abonnementen en pakketten om. 19 oktober 2026 (Marinus): "Helft aanbetaling vooraf andere helft bij
 // oplevering." Dat geldt voor de eenmalige website en het custom OS.
+// 26 oktober 2026: gelijkgetrokken met art. 7 van de algemene voorwaarden (restant binnen 14 dagen na factuurdatum).
 const LOS = [
   { naam: "Demowebsite", prijs: "€0", per: "gratis", tekst: "Een complete website in je merk, klaar om live te gaan. Geen verplichting.", actie: "Vraag je demo aan", to: "/gratis-website", kleur: "var(--prijs-groen)" },
   { naam: "Website realisatie en ontwikkeling", prijs: "€2.000 tot €5.000", per: "eenmalig", tekst: "Ontworpen en gebouwd in je merk. De prijs hangt af van pagina's en koppelingen.", betaling: true, actie: "Bespreek je website", to: "/contact?onderwerp=Website", kleur: "var(--prijs-blauw)" },
@@ -420,12 +421,13 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
         id="os"
         label="01 / Het OS"
         titel="Begin gratis. Betaal pas als je team groeit."
-        tekst="Je software is gratis. Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Bespaar 25% met een jaarabonnement."
+        tekst="Je software is gratis. Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Bespaar 25% met een jaarabonnement ten opzichte van maandelijks betalen."
         pakketten={OS}
         maandelijks={maandelijks}
       >
         {/* 19 oktober 2026 (Marinus): "Ik wil dat je die duurdere prijzen pas ziet bij betaling." Geen schakelaar meer; de maandprijzen
-            (€46,67 en €86,67) staan alleen in de betaalstap van het OS. */}
+            (€46,67 en €86,67) staan alleen in de betaalstap van het OS. Daarom zegt de tekst waartegenover je 25% bespaart
+            (maandelijks betalen) zonder die maandprijs te noemen (26 oktober 2026). */}
         <div className="prijs-usps">
           <p className="prijs-usps-label">Al in je gratis OS</p>
           <ul>
@@ -479,7 +481,7 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
               <h4>{item.naam}</h4>
               <p className="prijs-bedrag"><strong>{item.prijs}</strong><span>{item.per}</span></p>
               <p className="prijs-belofte">{item.tekst}</p>
-              {item.betaling && <p className="prijs-betaling">Helft vooraf, helft bij oplevering.</p>}
+              {item.betaling && <p className="prijs-betaling">Helft vooraf bij akkoord, de rest bij oplevering, te betalen binnen 14 dagen na factuurdatum.</p>}
               {item.call ? (
                 <button type="button" className="sn-pill sn-btn3d h-button h-button-secondary" aria-haspopup="dialog" onClick={() => openPlanCall()}>
                   <span className="sn-btn3d-sheen" />
