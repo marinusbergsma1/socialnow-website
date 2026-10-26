@@ -18,7 +18,7 @@ type ConnectionCopy = {
 const COPY: Record<Language, ConnectionCopy> = {
   nl: {
     title: "Je vraag brengt ons samen.",
-    intro: "SocialNow is een bedrijf en partnernetwerk voor branding, content, marketing en software. Connect verbindt klanten en zelfstandige ondernemers. SocialNow OS is een onderdeel van SocialNow. Voor maatwerk organiseert en betaalt SocialNow B.V. de juiste partners. Je hebt één aanspreekpunt dat de kwaliteit bewaakt, met ruimte voor persoonlijk contact.",
+    intro: "SocialNow is een bedrijf en partnernetwerk voor branding, content, marketing en software. Connect verbindt klanten en zelfstandige ondernemers. SocialNow OS is een onderdeel van SocialNow. Voor maatwerk organiseert en betaalt SocialNow de juiste partners. Je hebt één aanspreekpunt dat de kwaliteit bewaakt, met ruimte voor persoonlijk contact.",
     steps: ["Je vraag", "De juiste zelfstandige partners", "Producten en tools die bij je bedrijf passen"],
     team: "Ontmoet de partners",
     connect: "Open SocialNow / Connect",
@@ -26,7 +26,7 @@ const COPY: Record<Language, ConnectionCopy> = {
   },
   en: {
     title: "Your question brings us together.",
-    intro: "SocialNow is a company and partner network for branding, content, marketing and software. Connect brings customers and independent entrepreneurs together. SocialNow OS is part of SocialNow. For custom work, SocialNow B.V. organises and pays the right partners. You have one point of contact who oversees quality, with room for personal contact.",
+    intro: "SocialNow is a company and partner network for branding, content, marketing and software. Connect brings customers and independent entrepreneurs together. SocialNow OS is part of SocialNow. For custom work, SocialNow organises and pays the right partners. You have one point of contact who oversees quality, with room for personal contact.",
     steps: ["Your question", "The right independent partners", "Products and tools that fit your business"],
     team: "Meet the partners",
     connect: "Open SocialNow / Connect",
@@ -34,7 +34,7 @@ const COPY: Record<Language, ConnectionCopy> = {
   },
   de: {
     title: "Ihre Frage bringt uns zusammen.",
-    intro: "SocialNow ist ein Unternehmen und Partnernetzwerk für Branding, Content, Marketing und Software. Connect verbindet Kunden und selbstständige Unternehmer. SocialNow OS ist ein Teil von SocialNow. Für individuelle Lösungen organisiert und bezahlt SocialNow B.V. die passenden Partner. Sie haben einen Ansprechpartner, der die Qualität im Blick behält und persönlich für Sie da ist.",
+    intro: "SocialNow ist ein Unternehmen und Partnernetzwerk für Branding, Content, Marketing und Software. Connect verbindet Kunden und selbstständige Unternehmer. SocialNow OS ist ein Teil von SocialNow. Für individuelle Lösungen organisiert und bezahlt SocialNow die passenden Partner. Sie haben einen Ansprechpartner, der die Qualität im Blick behält und persönlich für Sie da ist.",
     steps: ["Ihre Frage", "Die passenden selbstständigen Partner", "Produkte und Tools, die zu Ihrem Unternehmen passen"],
     team: "Die Partner kennenlernen",
     connect: "SocialNow / Connect öffnen",
@@ -42,7 +42,7 @@ const COPY: Record<Language, ConnectionCopy> = {
   },
   fr: {
     title: "Votre question nous réunit.",
-    intro: "SocialNow est une entreprise et un réseau de partenaires en branding, contenu, marketing et logiciels. Connect relie clients et entrepreneurs indépendants. SocialNow OS fait partie de SocialNow. Pour le sur-mesure, SocialNow B.V. coordonne et rémunère les partenaires adaptés. Vous avez un interlocuteur unique qui veille à la qualité, avec un contact personnel.",
+    intro: "SocialNow est une entreprise et un réseau de partenaires en branding, contenu, marketing et logiciels. Connect relie clients et entrepreneurs indépendants. SocialNow OS fait partie de SocialNow. Pour le sur-mesure, SocialNow coordonne et rémunère les partenaires adaptés. Vous avez un interlocuteur unique qui veille à la qualité, avec un contact personnel.",
     steps: ["Votre question", "Les bons partenaires indépendants", "Des produits et outils adaptés à votre entreprise"],
     team: "Rencontrer les partenaires",
     connect: "Ouvrir SocialNow / Connect",
@@ -50,7 +50,7 @@ const COPY: Record<Language, ConnectionCopy> = {
   },
   es: {
     title: "Tu pregunta nos une.",
-    intro: "SocialNow es una empresa y una red de socios de branding, contenido, marketing y software. Connect une a clientes y emprendedores independientes. SocialNow OS forma parte de SocialNow. Para el trabajo a medida, SocialNow B.V. coordina y paga a los socios adecuados. Tienes un único interlocutor que supervisa la calidad, con un trato personal.",
+    intro: "SocialNow es una empresa y una red de socios de branding, contenido, marketing y software. Connect une a clientes y emprendedores independientes. SocialNow OS forma parte de SocialNow. Para el trabajo a medida, SocialNow coordina y paga a los socios adecuados. Tienes un único interlocutor que supervisa la calidad, con un trato personal.",
     steps: ["Tu pregunta", "Los socios independientes adecuados", "Productos y herramientas adecuados para tu empresa"],
     team: "Conoce a los socios",
     connect: "Abrir SocialNow / Connect",
@@ -58,7 +58,7 @@ const COPY: Record<Language, ConnectionCopy> = {
   },
   it: {
     title: "La tua domanda ci unisce.",
-    intro: "SocialNow è un’azienda e una rete di partner per branding, contenuti, marketing e software. Connect unisce clienti e imprenditori indipendenti. SocialNow OS è parte di SocialNow. Per i progetti su misura, SocialNow B.V. coordina e paga i partner adatti. Hai un unico referente che segue la qualità, con un contatto personale.",
+    intro: "SocialNow è un’azienda e una rete di partner per branding, contenuti, marketing e software. Connect unisce clienti e imprenditori indipendenti. SocialNow OS è parte di SocialNow. Per i progetti su misura, SocialNow coordina e paga i partner adatti. Hai un unico referente che segue la qualità, con un contatto personale.",
     steps: ["La tua domanda", "I partner indipendenti adatti", "Prodotti e strumenti adatti alla tua azienda"],
     team: "Conosci i partner",
     connect: "Apri SocialNow / Connect",
@@ -66,7 +66,7 @@ const COPY: Record<Language, ConnectionCopy> = {
   },
   pt: {
     title: "A sua pergunta aproxima-nos.",
-    intro: "A SocialNow é uma empresa e uma rede de parceiros de branding, conteúdos, marketing e software. Connect liga clientes e empresários independentes. SocialNow OS faz parte da SocialNow. Nos projetos à medida, a SocialNow B.V. coordena e remunera os parceiros adequados. Tem um único interlocutor que acompanha a qualidade, com espaço para o contacto pessoal.",
+    intro: "A SocialNow é uma empresa e uma rede de parceiros de branding, conteúdos, marketing e software. Connect liga clientes e empresários independentes. SocialNow OS faz parte da SocialNow. Nos projetos à medida, a SocialNow coordena e remunera os parceiros adequados. Tem um único interlocutor que acompanha a qualidade, com espaço para o contacto pessoal.",
     steps: ["A sua pergunta", "Os parceiros independentes adequados", "Produtos e ferramentas adequados à sua empresa"],
     team: "Conheça os parceiros",
     connect: "Abrir SocialNow / Connect",
@@ -74,7 +74,7 @@ const COPY: Record<Language, ConnectionCopy> = {
   },
   pl: {
     title: "Twoje pytanie nas łączy.",
-    intro: "SocialNow to firma i sieć partnerów zajmujących się brandingiem, treściami, marketingiem i oprogramowaniem. Connect łączy klientów i niezależnych przedsiębiorców. SocialNow OS jest częścią SocialNow. Przy projektach na zamówienie SocialNow B.V. koordynuje pracę odpowiednich partnerów i płaci im za nią. Masz jedną osobę kontaktową, która dba o jakość i osobisty kontakt.",
+    intro: "SocialNow to firma i sieć partnerów zajmujących się brandingiem, treściami, marketingiem i oprogramowaniem. Connect łączy klientów i niezależnych przedsiębiorców. SocialNow OS jest częścią SocialNow. Przy projektach na zamówienie SocialNow koordynuje pracę odpowiednich partnerów i płaci im za nią. Masz jedną osobę kontaktową, która dba o jakość i osobisty kontakt.",
     steps: ["Twoje pytanie", "Odpowiedni niezależni partnerzy", "Produkty i narzędzia dopasowane do Twojej firmy"],
     team: "Poznaj partnerów",
     connect: "Otwórz SocialNow / Connect",
@@ -82,7 +82,7 @@ const COPY: Record<Language, ConnectionCopy> = {
   },
   sv: {
     title: "Din fråga för oss samman.",
-    intro: "SocialNow är ett företag och partnernätverk för varumärke, innehåll, marknadsföring och programvara. Connect förbinder kunder och självständiga företagare. SocialNow OS är en del av SocialNow. För skräddarsydda projekt samordnar och betalar SocialNow B.V. rätt partners. Du har en kontaktperson som följer upp kvaliteten, med utrymme för personlig kontakt.",
+    intro: "SocialNow är ett företag och partnernätverk för varumärke, innehåll, marknadsföring och programvara. Connect förbinder kunder och självständiga företagare. SocialNow OS är en del av SocialNow. För skräddarsydda projekt samordnar och betalar SocialNow rätt partners. Du har en kontaktperson som följer upp kvaliteten, med utrymme för personlig kontakt.",
     steps: ["Din fråga", "Rätt självständiga partners", "Produkter och verktyg som passar ditt företag"],
     team: "Möt våra partners",
     connect: "Öppna SocialNow / Connect",
@@ -90,7 +90,7 @@ const COPY: Record<Language, ConnectionCopy> = {
   },
   da: {
     title: "Dit spørgsmål bringer os sammen.",
-    intro: "SocialNow er en virksomhed og et partnernetværk for branding, indhold, marketing og software. Connect forbinder kunder og selvstændige iværksættere. SocialNow OS er en del af SocialNow. Ved skræddersyede projekter organiserer og betaler SocialNow B.V. de rette partnere. Du har én kontaktperson, der følger op på kvaliteten, med plads til personlig kontakt.",
+    intro: "SocialNow er en virksomhed og et partnernetværk for branding, indhold, marketing og software. Connect forbinder kunder og selvstændige iværksættere. SocialNow OS er en del af SocialNow. Ved skræddersyede projekter organiserer og betaler SocialNow de rette partnere. Du har én kontaktperson, der følger op på kvaliteten, med plads til personlig kontakt.",
     steps: ["Dit spørgsmål", "De rette selvstændige partnere", "Produkter og værktøjer, der passer til din virksomhed"],
     team: "Mød partnerne",
     connect: "Åbn SocialNow / Connect",

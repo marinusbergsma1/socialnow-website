@@ -19,7 +19,7 @@ const copy: Record<Language, ConnectionCopy> = {
     links: {
       "/het-os": "Het Operation & Management-systeem",
       "/team": "Zelfstandige partners en ons team",
-      "/diensten": "Maatwerk met SocialNow B.V.",
+      "/diensten": "Maatwerk met SocialNow",
       "/contact": "Persoonlijk contact over jouw vraag",
     },
   },
@@ -29,7 +29,7 @@ const copy: Record<Language, ConnectionCopy> = {
     links: {
       "/het-os": "The Operation & Management system",
       "/team": "Independent partners and our team",
-      "/diensten": "Custom solutions with SocialNow B.V.",
+      "/diensten": "Custom solutions with SocialNow",
       "/contact": "Personal contact about your needs",
     },
   },
@@ -39,7 +39,7 @@ const copy: Record<Language, ConnectionCopy> = {
     links: {
       "/het-os": "Das Operation & Management-System",
       "/team": "Selbstständige Partner und unser Team",
-      "/diensten": "Individuelle Lösungen mit SocialNow B.V.",
+      "/diensten": "Individuelle Lösungen mit SocialNow",
       "/contact": "Persönlicher Kontakt zu deinem Anliegen",
     },
   },
@@ -49,7 +49,7 @@ const copy: Record<Language, ConnectionCopy> = {
     links: {
       "/het-os": "Le système Operation & Management",
       "/team": "Les partenaires indépendants et notre équipe",
-      "/diensten": "Des solutions sur mesure avec SocialNow B.V.",
+      "/diensten": "Des solutions sur mesure avec SocialNow",
       "/contact": "Un échange personnel sur vos besoins",
     },
   },
@@ -59,7 +59,7 @@ const copy: Record<Language, ConnectionCopy> = {
     links: {
       "/het-os": "El sistema Operation & Management",
       "/team": "Socios independientes y nuestro equipo",
-      "/diensten": "Soluciones a medida con SocialNow B.V.",
+      "/diensten": "Soluciones a medida con SocialNow",
       "/contact": "Contacto personal para hablar de tus necesidades",
     },
   },
@@ -69,7 +69,7 @@ const copy: Record<Language, ConnectionCopy> = {
     links: {
       "/het-os": "Il sistema Operation & Management",
       "/team": "Partner indipendenti e il nostro team",
-      "/diensten": "Soluzioni su misura con SocialNow B.V.",
+      "/diensten": "Soluzioni su misura con SocialNow",
       "/contact": "Un contatto personale per le tue esigenze",
     },
   },
@@ -79,7 +79,7 @@ const copy: Record<Language, ConnectionCopy> = {
     links: {
       "/het-os": "O sistema Operation & Management",
       "/team": "Parceiros independentes e a nossa equipa",
-      "/diensten": "Soluções à medida com a SocialNow B.V.",
+      "/diensten": "Soluções à medida com a SocialNow",
       "/contact": "Contacto pessoal sobre as tuas necessidades",
     },
   },
@@ -89,7 +89,7 @@ const copy: Record<Language, ConnectionCopy> = {
     links: {
       "/het-os": "System Operation & Management",
       "/team": "Niezależni partnerzy i nasz zespół",
-      "/diensten": "Rozwiązania na miarę z SocialNow B.V.",
+      "/diensten": "Rozwiązania na miarę z SocialNow",
       "/contact": "Bezpośredni kontakt w sprawie Twoich potrzeb",
     },
   },
@@ -99,7 +99,7 @@ const copy: Record<Language, ConnectionCopy> = {
     links: {
       "/het-os": "Operation & Management-systemet",
       "/team": "Självständiga partner och vårt team",
-      "/diensten": "Skräddarsydda lösningar med SocialNow B.V.",
+      "/diensten": "Skräddarsydda lösningar med SocialNow",
       "/contact": "Personlig kontakt om dina behov",
     },
   },
@@ -109,7 +109,7 @@ const copy: Record<Language, ConnectionCopy> = {
     links: {
       "/het-os": "Operation & Management-systemet",
       "/team": "Selvstændige partnere og vores team",
-      "/diensten": "Skræddersyede løsninger med SocialNow B.V.",
+      "/diensten": "Skræddersyede løsninger med SocialNow",
       "/contact": "Personlig kontakt om dine behov",
     },
   },

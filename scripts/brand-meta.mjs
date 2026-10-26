@@ -14,15 +14,15 @@ const metadata = {
     ],
     '/team': [
       'Meet our people and independent partners | SocialNow',
-      'Meet the people and independent business partners behind SocialNow. SocialNow B.V. coordinates and pays partners for custom projects, with one point of contact.',
+      'Meet the people and independent business partners behind SocialNow. SocialNow coordinates and pays partners for custom projects, with one point of contact.',
     ],
     '/diensten': [
       'Custom software, content and marketing | SocialNow',
-      'Build customer-friendly products with independent SocialNow partners: software, websites, content and marketing. Personal contact and custom work through SocialNow B.V.',
+      'Build customer-friendly products with independent SocialNow partners: software, websites, content and marketing. Personal contact and custom work through SocialNow',
     ],
     '/prijzen': [
       'OS pricing: free start and custom projects | SocialNow',
-      'SocialNow OS is free up to 10 GB storage. Studio tokens and support packages with a custom OS and a free website are monthly, through SocialNow B.V.',
+      'SocialNow OS is free up to 10 GB storage. Studio tokens and support packages with a custom OS and a free website are monthly, through SocialNow',
     ],
     '/contact': [
       'Contact us about the OS or a custom project | SocialNow',
@@ -44,15 +44,15 @@ const metadata = {
     ],
     '/team': [
       'Onze mensen en zelfstandige partners | SocialNow',
-      'Maak kennis met de mensen en zelfstandige ondernemers achter SocialNow. SocialNow B.V. organiseert en betaalt partners voor maatwerk, met één aanspreekpunt.',
+      'Maak kennis met de mensen en zelfstandige ondernemers achter SocialNow. SocialNow organiseert en betaalt partners voor maatwerk, met één aanspreekpunt.',
     ],
     '/diensten': [
       'Maatwerksoftware, content en marketing | SocialNow',
-      'Maak klantvriendelijke producten met zelfstandige SocialNow-partners: software, websites, content en marketing. Persoonlijk contact en maatwerk via SocialNow B.V.',
+      'Maak klantvriendelijke producten met zelfstandige SocialNow-partners: software, websites, content en marketing. Persoonlijk contact en maatwerk via SocialNow',
     ],
     '/prijzen': [
       'OS-prijzen: gratis starten en maatwerk | SocialNow',
-      'SocialNow OS is gratis tot 10 GB opslag. Tokens voor de Studio en hulppakketten met custom OS en gratis website zijn maandelijks, via SocialNow B.V.',
+      'SocialNow OS is gratis tot 10 GB opslag. Tokens voor de Studio en hulppakketten met custom OS en gratis website zijn maandelijks, via SocialNow',
     ],
     '/contact': [
       'Contact over het OS of jouw maatwerkproject | SocialNow',
@@ -74,15 +74,15 @@ const metadata = {
     ],
     '/team': [
       'Unsere Menschen und selbstständigen Partner | SocialNow',
-      'Lernen Sie die Menschen und selbstständigen Unternehmer hinter SocialNow kennen. SocialNow B.V. koordiniert und bezahlt Partner für individuelle Projekte.',
+      'Lernen Sie die Menschen und selbstständigen Unternehmer hinter SocialNow kennen. SocialNow koordiniert und bezahlt Partner für individuelle Projekte.',
     ],
     '/diensten': [
       'Individuelle Software, Inhalte und Marketing | SocialNow',
-      'Kundenfreundliche Produkte mit selbstständigen SocialNow-Partnern: Software, Websites, Inhalte und Marketing. Persönlicher Kontakt und Maßarbeit über SocialNow B.V.',
+      'Kundenfreundliche Produkte mit selbstständigen SocialNow-Partnern: Software, Websites, Inhalte und Marketing. Persönlicher Kontakt und Maßarbeit über SocialNow',
     ],
     '/prijzen': [
       'OS-Preise: kostenloser Einstieg und Maßarbeit | SocialNow',
-      'SocialNow OS ist bis 10 GB Speicher kostenlos. Tokens für das Studio und Hilfspakete mit individuellem OS und kostenloser Website sind monatlich, über SocialNow B.V.',
+      'SocialNow OS ist bis 10 GB Speicher kostenlos. Tokens für das Studio und Hilfspakete mit individuellem OS und kostenloser Website sind monatlich, über SocialNow',
     ],
     '/contact': [
       'Kontakt zum OS und zu individuellen Projekten | SocialNow',
@@ -104,15 +104,15 @@ const metadata = {
     ],
     '/team': [
       'Notre équipe et nos partenaires indépendants | SocialNow',
-      'Découvrez les personnes et entrepreneurs indépendants derrière SocialNow. SocialNow B.V. coordonne et rémunère les partenaires pour les projets sur mesure.',
+      'Découvrez les personnes et entrepreneurs indépendants derrière SocialNow. SocialNow coordonne et rémunère les partenaires pour les projets sur mesure.',
     ],
     '/diensten': [
       'Logiciels sur mesure, contenu et marketing | SocialNow',
-      'Créez des produits pensés pour vos clients avec des partenaires indépendants : logiciels, sites, contenu et marketing. Un interlocuteur chez SocialNow B.V.',
+      'Créez des produits pensés pour vos clients avec des partenaires indépendants : logiciels, sites, contenu et marketing. Un interlocuteur chez SocialNow',
     ],
     '/prijzen': [
       'Tarifs OS : accès gratuit et sur mesure | SocialNow',
-      'SocialNow OS est gratuit jusqu’à 10 Go de stockage. Les tokens du Studio et les forfaits avec OS sur mesure et site web gratuit sont mensuels, via SocialNow B.V.',
+      'SocialNow OS est gratuit jusqu’à 10 Go de stockage. Les tokens du Studio et les forfaits avec OS sur mesure et site web gratuit sont mensuels, via SocialNow',
     ],
     '/contact': [
       'Contact pour l’OS ou votre projet sur mesure | SocialNow',
@@ -134,15 +134,15 @@ const metadata = {
     ],
     '/team': [
       'Nuestro equipo y socios independientes | SocialNow',
-      'Conoce a las personas y emprendedores independientes detrás de SocialNow. SocialNow B.V. coordina y paga a los socios para proyectos a medida.',
+      'Conoce a las personas y emprendedores independientes detrás de SocialNow. SocialNow coordina y paga a los socios para proyectos a medida.',
     ],
     '/diensten': [
       'Software a medida, contenido y marketing | SocialNow',
-      'Crea productos pensados para tus clientes con socios independientes: software, webs, contenido y marketing. Atención personal a través de SocialNow B.V.',
+      'Crea productos pensados para tus clientes con socios independientes: software, webs, contenido y marketing. Atención personal a través de SocialNow',
     ],
     '/prijzen': [
       'Precios del OS: acceso gratuito y a medida | SocialNow',
-      'SocialNow OS es gratis hasta 10 GB de almacenamiento. Los tokens del Studio y los paquetes de ayuda con OS a medida y web gratuita son mensuales, vía SocialNow B.V.',
+      'SocialNow OS es gratis hasta 10 GB de almacenamiento. Los tokens del Studio y los paquetes de ayuda con OS a medida y web gratuita son mensuales, vía SocialNow',
     ],
     '/contact': [
       'Contacto para el OS o tu proyecto a medida | SocialNow',
@@ -164,15 +164,15 @@ const metadata = {
     ],
     '/team': [
       'Il nostro team e i partner indipendenti | SocialNow',
-      'Scopri le persone e gli imprenditori indipendenti dietro SocialNow. SocialNow B.V. coordina e remunera i partner per progetti su misura.',
+      'Scopri le persone e gli imprenditori indipendenti dietro SocialNow. SocialNow coordina e remunera i partner per progetti su misura.',
     ],
     '/diensten': [
       'Software su misura, contenuti e marketing | SocialNow',
-      'Crea prodotti pensati per i clienti con partner indipendenti: software, siti, contenuti e marketing. Un contatto personale tramite SocialNow B.V.',
+      'Crea prodotti pensati per i clienti con partner indipendenti: software, siti, contenuti e marketing. Un contatto personale tramite SocialNow',
     ],
     '/prijzen': [
       'Prezzi OS: accesso gratuito e su misura | SocialNow',
-      'SocialNow OS è gratuito fino a 10 GB di spazio. I token per lo Studio e i pacchetti con OS su misura e sito web gratuito sono mensili, tramite SocialNow B.V.',
+      'SocialNow OS è gratuito fino a 10 GB di spazio. I token per lo Studio e i pacchetti con OS su misura e sito web gratuito sono mensili, tramite SocialNow',
     ],
     '/contact': [
       'Contatti per l’OS o un progetto su misura | SocialNow',
@@ -194,15 +194,15 @@ const metadata = {
     ],
     '/team': [
       'A nossa equipa e os parceiros independentes | SocialNow',
-      'Conheça as pessoas e os empresários independentes por trás da SocialNow. A SocialNow B.V. coordena e paga aos parceiros em projetos à medida.',
+      'Conheça as pessoas e os empresários independentes por trás da SocialNow. A SocialNow coordena e paga aos parceiros em projetos à medida.',
     ],
     '/diensten': [
       'Software à medida, conteúdos e marketing | SocialNow',
-      'Crie produtos pensados para os clientes com parceiros independentes: software, sites, conteúdos e marketing. Contacto pessoal através da SocialNow B.V.',
+      'Crie produtos pensados para os clientes com parceiros independentes: software, sites, conteúdos e marketing. Contacto pessoal através da SocialNow',
     ],
     '/prijzen': [
       'Preços do OS: acesso gratuito e à medida | SocialNow',
-      'O SocialNow OS é gratuito até 10 GB de armazenamento. Os tokens do Studio e os pacotes com OS à medida e website gratuito são mensais, via SocialNow B.V.',
+      'O SocialNow OS é gratuito até 10 GB de armazenamento. Os tokens do Studio e os pacotes com OS à medida e website gratuito são mensais, via SocialNow',
     ],
     '/contact': [
       'Contacto sobre o OS ou um projeto à medida | SocialNow',
@@ -224,15 +224,15 @@ const metadata = {
     ],
     '/team': [
       'Nasz zespół i niezależni partnerzy | SocialNow',
-      'Poznaj ludzi i niezależnych przedsiębiorców stojących za SocialNow. SocialNow B.V. koordynuje i opłaca partnerów przy projektach na miarę.',
+      'Poznaj ludzi i niezależnych przedsiębiorców stojących za SocialNow. SocialNow koordynuje i opłaca partnerów przy projektach na miarę.',
     ],
     '/diensten': [
       'Oprogramowanie na miarę, treści i marketing | SocialNow',
-      'Twórz przyjazne klientom produkty z niezależnymi partnerami: oprogramowanie, strony, treści i marketing. Osobisty kontakt przez SocialNow B.V.',
+      'Twórz przyjazne klientom produkty z niezależnymi partnerami: oprogramowanie, strony, treści i marketing. Osobisty kontakt przez SocialNow',
     ],
     '/prijzen': [
       'Cennik OS: bezpłatny start i system na miarę | SocialNow',
-      'SocialNow OS jest bezpłatny do 10 GB pamięci. Tokeny do Studio i pakiety wsparcia z OS na miarę i darmową stroną są miesięczne, przez SocialNow B.V.',
+      'SocialNow OS jest bezpłatny do 10 GB pamięci. Tokeny do Studio i pakiety wsparcia z OS na miarę i darmową stroną są miesięczne, przez SocialNow',
     ],
     '/contact': [
       'Kontakt w sprawie OS lub projektu na miarę | SocialNow',
@@ -254,15 +254,15 @@ const metadata = {
     ],
     '/team': [
       'Våra människor och självständiga partner | SocialNow',
-      'Möt människorna och de självständiga företagarna bakom SocialNow. SocialNow B.V. samordnar och betalar partner för anpassade projekt.',
+      'Möt människorna och de självständiga företagarna bakom SocialNow. SocialNow samordnar och betalar partner för anpassade projekt.',
     ],
     '/diensten': [
       'Anpassad programvara, innehåll och marknadsföring | SocialNow',
-      'Skapa kundvänliga produkter med självständiga partner: programvara, webbplatser, innehåll och marknadsföring. Personlig kontakt genom SocialNow B.V.',
+      'Skapa kundvänliga produkter med självständiga partner: programvara, webbplatser, innehåll och marknadsföring. Personlig kontakt genom SocialNow',
     ],
     '/prijzen': [
       'OS-priser: gratis start och anpassade system | SocialNow',
-      'SocialNow OS är gratis upp till 10 GB lagring. Tokens för Studio och hjälppaket med skräddarsytt OS och gratis webbplats är månadsvisa, via SocialNow B.V.',
+      'SocialNow OS är gratis upp till 10 GB lagring. Tokens för Studio och hjälppaket med skräddarsytt OS och gratis webbplats är månadsvisa, via SocialNow',
     ],
     '/contact': [
       'Kontakt om OS eller ditt anpassade projekt | SocialNow',
@@ -284,15 +284,15 @@ const metadata = {
     ],
     '/team': [
       'Vores mennesker og selvstændige partnere | SocialNow',
-      'Mød menneskene og de selvstændige erhvervsdrivende bag SocialNow. SocialNow B.V. koordinerer og betaler partnere til skræddersyede projekter.',
+      'Mød menneskene og de selvstændige erhvervsdrivende bag SocialNow. SocialNow koordinerer og betaler partnere til skræddersyede projekter.',
     ],
     '/diensten': [
       'Skræddersyet software, indhold og marketing | SocialNow',
-      'Skab kundevenlige produkter med selvstændige partnere: software, hjemmesider, indhold og marketing. Personlig kontakt gennem SocialNow B.V.',
+      'Skab kundevenlige produkter med selvstændige partnere: software, hjemmesider, indhold og marketing. Personlig kontakt gennem SocialNow',
     ],
     '/prijzen': [
       'OS-priser: gratis start og tilpassede systemer | SocialNow',
-      'SocialNow OS er gratis op til 10 GB lagerplads. Tokens til Studio og hjælpepakker med skræddersyet OS og gratis hjemmeside er månedlige, via SocialNow B.V.',
+      'SocialNow OS er gratis op til 10 GB lagerplads. Tokens til Studio og hjælpepakker med skræddersyet OS og gratis hjemmeside er månedlige, via SocialNow',
     ],
     '/contact': [
       'Kontakt om OS eller dit tilpassede projekt | SocialNow',
