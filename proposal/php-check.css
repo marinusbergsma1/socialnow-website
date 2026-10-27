@@ -463,3 +463,25 @@
 :root .sn-site .pc-keuze-vak .pc-formulier input:-webkit-autofill { -webkit-text-fill-color: #111; box-shadow: 0 0 0 100px #fff inset; }
 :root .sn-site .pc-keuze-vak .pc-formulier .pc-hint { color: #3a3a3c; }
 :root .sn-site .pc-keuze-vak .pc-formulier h3, :root .sn-site .pc-keuze-vak .pc-formulier > p { color: #111; }
+
+/* 27 oktober 2026: kop "Free Website DEMO & Security SCAN." bovenaan /security, met groene punt en twee sprongen. */
+:root .sn-site .pc-top { padding-top: 150px; }
+:root .sn-site .pc-top > * { max-width: 980px; }
+:root .sn-site .pc-topkop { letter-spacing: 0; word-spacing: .24em; margin-top: 0; }
+:root .sn-site .pc-punt { color: #25d366; }
+:root .sn-site .pc-sprongen { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+:root .sn-site .pc-sprong {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px;
+  border: 1.5px solid #ffffff38; border-radius: 999px; color: #fff; text-decoration: none; font-weight: 600;
+}
+:root .sn-site .pc-sprong > svg { color: #25d366; flex: none; }
+:root .sn-site .pc-sprong:hover { border-color: #25d366; }
+:root .sn-site .pc-sprong:focus-visible { outline: 2px solid #25d366; outline-offset: 3px; }
+:root .sn-site .pc-top + .pc-film { padding-top: 56px; }
+:root .sn-site .pc-demo { scroll-margin-top: 85px; }
+:root .sn-site .pc-scan { scroll-margin-top: 85px; }
+:root .sn-site .pc-demo-knop { display: inline-flex; margin-top: 8px; }
+@media (max-width: 650px) {
+  :root .sn-site .pc-top { padding-top: 110px; }
+  :root .sn-site .pc-sprong { width: 100%; justify-content: flex-start; }
+}

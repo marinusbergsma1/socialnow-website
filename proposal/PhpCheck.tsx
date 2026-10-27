@@ -6,6 +6,7 @@ import { people } from "./content";
 import { klein } from "./licht";
 import "./php-check.css";
 import { CheckRapport } from "./CheckRapport";
+import { WebsiteExamples } from "./FreeWebsite";
 
 // Gratis php2shell-check op /check (22 oktober 2026, Marinus): "Take the free check at socialnow.nl". De advertentie
 // stuurt alle bezoekers hierheen; /php-check verwijst door (vercel.json).
@@ -518,6 +519,9 @@ function ContactOfZelf({ domein, uitslag, keuze, zetKeuze }: { domein: string; u
   );
 }
 
+// 27 oktober 2026 (Marinus): de kop van /security, in elke taal gelijk (Engels, zoals het menu-item "Demo & Scan").
+const TOPKOP = "Free Website DEMO & Security SCAN";
+
 export function PhpCheckPage() {
   const { t, language } = useLanguage();
   const [domein, zetDomein] = useState("");
@@ -580,12 +584,23 @@ export function PhpCheckPage() {
     <div className="pc">
       {/* 22 oktober 2026, 15.45 (Marinus): film bovenaan; de scan met de documenten in een witte sectie zodat die opvalt;
           daaronder de bento met wie werd geraakt en wie risico loopt, en direct Steef en Michelle. */}
+      {/* 27 oktober 2026 (Marinus): "Free Website DEMO en Security SCAN" als kop, zodat de PHP-boodschap, de scan en de
+          websitedemo bij elkaar staan. Daaronder twee sprongen: naar de scan en naar de websitedemo. */}
+      <section className="h-wrap pc-top">
+        <h1 className="pc-kop pc-topkop" translate="no">{TOPKOP}<span className="pc-punt">.</span></h1>
+        <p className="pc-intro">Gratis voor iedereen die zijn website wil laten checken of vernieuwen.</p>
+        <div className="pc-sprongen">
+          <a className="pc-sprong" href="#scan"><ShieldCheck size={16} aria-hidden="true" /><span>Doe de gratis securityscan</span></a>
+          <a className="pc-sprong" href="#demo"><ArrowUpRight size={16} aria-hidden="true" /><span>Vraag je gratis websitedemo aan</span></a>
+        </div>
+      </section>
+
       <Film />
 
       <section className="pc-scan" id="scan">
       <div className="pc-hero h-wrap">
         <p className="h-eyebrow pc-eyebrow"><i aria-hidden="true" /> Gratis securityscan</p>
-        <h1 className="pc-kop">Is je website veilig?</h1>
+        <h2 className="pc-kop">Is je website veilig?</h2>
 
         <form className={`pc-check${bezig ? " pc-bezig" : ""}`} onSubmit={start} noValidate>
           <span className="pc-laad" aria-hidden="true" />
@@ -638,6 +653,14 @@ export function PhpCheckPage() {
           </ul>
         </div>
       )}
+      </section>
+
+      {/* 27 oktober 2026: de gratis websitedemo direct onder de scan, met dezelfde websitevoorbeelden als de homepage. */}
+      <section className="sn-free-website pc-demo" id="demo">
+        <div className="h-wrap sn-fw-binnen">
+          <WebsiteExamples />
+          <a className="sn-pill sn-home-cta pc-demo-knop" href="https://website.socialnow.nl">Vraag je gratis websitedemo aan <ArrowUpRight size={18} aria-hidden="true" /></a>
+        </div>
       </section>
 
       <Bento />

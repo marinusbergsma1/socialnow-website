@@ -214,6 +214,10 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
             </div>
             {/* 21 oktober 2026: Connect-film v1 (82-connect-film-v1/werk/02-webtekst.md).
                 22 oktober 2026: de uitlegzin van de OS-film staat nu in het startbeeld van de speler (ExplainerPlayer.tsx), dus niet nog eens hieronder. */}
+            {/* 27 oktober 2026 (Marinus): "onder de video nog een mooie zin: begin met je gratis websitedemo en securityscan", naar /security. */}
+            <Link className="bs-gratis-start" to="/security" onClick={() => meet("veiligheid")}>
+              <ShieldCheck size={16} aria-hidden="true" /><span>Begin met je gratis websitedemo en securityscan<span className="bs-punt">.</span></span><ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
             {film === "connect" && <p className="bs-explainer-onder">In één minuut: zelf je expert kiezen, wat een expert van je ziet, de pakketten en onze groeigarantie. Gesproken in het Engels.</p>}
           </div>
         </section>
