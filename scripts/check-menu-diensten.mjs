@@ -38,7 +38,7 @@ eis(DIENSTEN.filter((d) => /\b(OS|Connect)\b/.test(d.titel)).every((d) => d.soor
 eis(/DIENSTEN\.map/.test(shell) && /PRODUCTEN\.map/.test(shell) && /h-mobile-kaarten/.test(shell) && /<i className=\{p\.soort\}>/.test(shell) && /<span>\{p\.regel\}<\/span>/.test(shell), "mobiel: OS, Connect en de diensten als kaarten met onderregel");
 eis(/a\.h-mobile-product\{[^}]*min-height:(\d+)px/.test(css) && Number(css.match(/a\.h-mobile-product\{[^}]*min-height:(\d+)px/)[1]) >= 48, "mobiel: tikvlak minstens 48 px hoog");
 eis(/\.h-producten-menu[^{]*\{[^}]*font-variant-ligatures:none/.test(css) && /\.h-mobile-nav :is\([^)]*\)\{font-variant-ligatures:none/.test(css), "letters nooit aan elkaar in menu en mobiele kaarten");
-eis(/export const SECURITY_PAD = "\/security";/.test(menu) && /<NavLink to=\{SECURITY_PAD\}/.test(menu) && /<span translate="no">Security<\/span>/.test(menu), "Security: eigen menu-item naar /security, in elke taal \"Security\"");
+eis(/export const SECURITY_PAD = "\/security";/.test(menu) && /<NavLink to=\{SECURITY_PAD\}/.test(menu) && /<span translate="no">Demo &amp; Scan<\/span>/.test(menu), "Demo & Scan (27 okt, was Security): eigen menu-item naar /security, in elke taal gelijk");
 eis(/<DienstenMenu \/><SecurityLink \/>/.test(shell) && /<SecurityLink mobiel/.test(shell), "Security op desktop (na Diensten) en mobiel");
 eis(/ShieldCheck/.test(menu) && !/sn-pill[^"]*h-security|h-security[^"]*sn-pill/.test(menu), "Security: klein schildje, geen pilknop");
 // 2. Woordenboeken
@@ -129,7 +129,7 @@ if (distMap || url) {
         const sec = await page.evaluate(() => { const a = document.querySelector(".h-desktop-nav a.h-security"); if (!a) return null; const cs = getComputedStyle(a), svg = a.querySelector("svg");
           const d = document.querySelector(".h-desktop-nav .h-uitklap-diensten");
           return { href: a.getAttribute("href"), tekst: a.textContent.trim(), schild: svg ? getComputedStyle(svg).color : "", bg: cs.backgroundColor, rand: cs.borderTopWidth, hoogte: Math.round(a.getBoundingClientRect().height), naDiensten: !!d && d.nextElementSibling === a }; });
-        eis(!!sec && sec.href === `${prefix}/security` && sec.tekst === "Security", `${taal} 1440: Security wijst naar ${prefix}/security (${sec?.href})`);
+        eis(!!sec && sec.href === `${prefix}/security` && sec.tekst === "Demo & Scan", `${taal} 1440: Security wijst naar ${prefix}/security (${sec?.href})`);
         eis(!!sec && sec.naDiensten && sec.schild === GROEN && /rgba\(0, 0, 0, 0\)|transparent/.test(sec.bg) && sec.rand === "0px", `${taal} 1440: Security na Diensten, groen schildje, geen pil (${sec?.bg}, rand ${sec?.rand})`);
         const s = await geenScroll(page);
         eis(s.breed <= s.raam, `${taal} 1440: geen horizontale scroll (${s.breed} <= ${s.raam})`);
@@ -166,7 +166,7 @@ if (distMap || url) {
       eis(k.length > 2 && k.every((x) => x.links >= 0 && x.rechts <= 390), `${taal} 390: geen kaart over de rand`);
       eis(k.length > 2 && k.every((x) => x.liga === "none" && x.pijlKleur === GROEN), `${taal} 390: geen ligaturen, groen pijltje`);
       const ms = await page.evaluate(() => { const a = document.querySelector("#mobile-nav a.h-security"); if (!a) return null; const r = a.getBoundingClientRect(); return { href: a.getAttribute("href"), tekst: a.textContent.trim(), hoogte: Math.round(r.height), rechts: Math.round(r.right), schild: getComputedStyle(a.querySelector("svg")).color }; });
-      eis(!!ms && ms.href === `${prefix}/security` && ms.tekst === "Security" && ms.schild === GROEN && ms.hoogte >= 44 && ms.rechts <= 390, `${taal} 390: Security in het mobiele menu, naar ${prefix}/security, groen schildje (${ms?.href}, ${ms?.hoogte} px)`);
+      eis(!!ms && ms.href === `${prefix}/security` && ms.tekst === "Demo & Scan" && ms.schild === GROEN && ms.hoogte >= 44 && ms.rechts <= 390, `${taal} 390: Security in het mobiele menu, naar ${prefix}/security, groen schildje (${ms?.href}, ${ms?.hoogte} px)`);
       const s = await geenScroll(page);
       eis(s.breed <= s.raam, `${taal} 390: geen horizontale scroll (${s.breed} <= ${s.raam})`);
       const bereik = await page.evaluate(() => { const c = document.querySelector("#mobile-nav .h-mobile-call"); if (!c) return null; c.scrollIntoView({ block: "end", behavior: "instant" }); const r = c.getBoundingClientRect(); return Math.round(r.bottom) <= innerHeight; });
