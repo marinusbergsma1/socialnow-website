@@ -231,8 +231,10 @@ function Mensen({ domein = "", kort = false, groot = false }: { domein?: string;
 // 22 oktober 2026, 15.45 (Marinus): de nieuwe securityvideo (HyperFrames, Marinus aan het woord, export v2a) vervangt de
 // uitlegfilm. Eén verticale film, Engels in beeld (security-campagne), dus voor elke taal dezelfde. Klik om af te spelen,
 // poster als voorbeeldbeeld. Komt er een nieuwere export, dan vervangt die security-9x16.mp4 met dezelfde naam.
-// 22 oktober 2026, 16.15 (Marinus): daarnaast een liggende film (1920x1080, animaties beeldvullend, sinds de avond zonder Marinus in beeld) die op
-// desktop speelt; mobiel houdt de verticale film. CSS toont er één; preload="none" laat de andere ongeladen.
+// 22 oktober 2026, 16.15 (Marinus): daarnaast een liggende film (1920x1080) die op desktop speelt; mobiel houdt de verticale
+// film. CSS toont er één; preload="none" laat de andere ongeladen.
+// 27 oktober 2026 (Marinus): liggende film v5, verspreekingen eruit (nieuwe takes "public interest" en "nobody has updated")
+// en Marinus weer sprekend in beeld in het telefoonkader, net als de verticale Instagram-versie. Bron 04-MEDIA/security-video-liggend-2026-10-22.
 function Film() {
   return (
     <section className="h-wrap pc-film">
