@@ -485,3 +485,30 @@
   :root .sn-site .pc-top { padding-top: 110px; }
   :root .sn-site .pc-sprong { width: 100%; justify-content: flex-start; }
 }
+
+/* 27 oktober 2026 (Marinus): Gijsbert en Douwe, code, architectuur en beveiliging, boven Steef en Michelle. Wit zoals hun
+   kaarten, Gijsbert met een groene rand omdat hij de veiligheidscheck doet. Letterafstand 0. */
+:root .sn-site .pc-experts { max-width: 1100px; margin-bottom: 72px; }
+:root .sn-site .pc-experts .pc-sectiekop { letter-spacing: 0; }
+:root .sn-site .pc-experts > p { margin-top: 14px; font-size: 17px; line-height: 1.55; color: #cacacf; max-width: 760px; }
+:root .sn-site .pc-experts ul { list-style: none; padding: 0; margin: 28px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+:root .sn-site .pc-expert { display: flex; gap: 22px; align-items: flex-start; padding: 24px; border: 2px solid #fff; border-radius: 20px; background: #fff; color: #111; min-width: 0; }
+:root .sn-site .pc-expert.is-check { border-color: var(--pc-groen); }
+:root .sn-site .pc-expert img { width: 140px; height: 140px; flex: none; border-radius: 16px; object-fit: cover; object-position: 50% 20%; background: #e5e5ea; }
+:root .sn-site .pc-expert > div { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+:root .sn-site .pc-expert-domein { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: #111; }
+:root .sn-site .pc-expert-domein svg { color: var(--pc-vlak); flex: none; }
+:root .sn-site .pc-expert strong { font-size: 22px; line-height: 1.2; color: #111; }
+:root .sn-site .pc-expert small { font-size: 12px; color: #6e6e73; line-height: 1.45; }
+:root .sn-site .pc-expert p { margin: 10px 0 0; font-size: 15px; line-height: 1.5; color: #3a3a3c; }
+:root .sn-site .pc-expert-check { margin-top: 12px; padding: 4px 10px; border-radius: 999px; background: var(--pc-vlak); color: #fff; font-size: 13px; font-weight: 600; }
+:root .sn-site .pc-expert a { margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; color: #111; font-size: 15px; text-decoration: none; }
+:root .sn-site .pc-expert a span { border-bottom: 1px solid #d1d1d6; }
+:root .sn-site .pc-expert a:hover span { border-bottom-color: var(--pc-vlak); }
+:root .sn-site .pc-expert a:focus-visible { outline: 2px solid var(--pc-vlak); outline-offset: 3px; border-radius: 4px; }
+@media (max-width: 999px) { :root .sn-site .pc-experts ul { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  :root .sn-site .pc-experts { margin-bottom: 48px; }
+  :root .sn-site .pc-expert { flex-direction: column; gap: 16px; padding: 18px; }
+  :root .sn-site .pc-expert img { width: 96px; height: 96px; }
+}

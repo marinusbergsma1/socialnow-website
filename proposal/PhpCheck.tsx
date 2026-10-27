@@ -229,6 +229,39 @@ function Mensen({ domein = "", kort = false, groot = false }: { domein?: string;
   );
 }
 
+// 27 oktober 2026 (Marinus): Gijsbert Westeneng doet de veiligheidscheck die de PHP-mail belooft, dus hij hoort zichtbaar op
+// deze pagina, met Douwe Kramer, en niet alleen Steef en Michelle. Domein en achtergrond uit het plan (plan-site structure.json,
+// 27 oktober): beiden "Code en architectuur, inclusief beveiliging", samen met Marinus en Steef eindverantwoordelijk. Naam,
+// foto en rol komen uit proposal/content.ts, dezelfde rol als in het Connect-organogram op de homepage.
+const EXPERTS: { naam: string; bio: string; check?: boolean }[] = [
+  { naam: "Gijsbert Westeneng", check: true, bio: "AI- en infrastructuur-engineer, eigenaar van ETHUX en sysops engineer bij Bitonic. Gecertificeerd door de Linux Foundation en NVIDIA, met veel kennis van beveiliging en zelf hosten." },
+  { naam: "Douwe Kramer", bio: "Founding engineer bij Attesso, dat autorisatie en ondertekend bewijs bouwt voor betalingen door AI-agents. Bouwde en draaide eerder het product en de infrastructuur van Bytechat." },
+];
+
+function Experts() {
+  return (
+    <div className="pc-experts">
+      <h2 className="pc-sectiekop">Onze experts voor beveiliging.</h2>
+      <p>Gijsbert Westeneng en Douwe Kramer zijn samen met Marinus en Steef eindverantwoordelijk, elk voor een eigen domein. Hun domein is code en architectuur, inclusief beveiliging. Gijsbert doet de veiligheidscheck van je website.</p>
+      <ul>
+        {EXPERTS.map((e) => ({ ...e, p: people.find((p) => p.name === e.naam) })).filter((e) => !!e.p).map(({ naam, bio, check, p }) => (
+          <li key={naam} className={`pc-expert${check ? " is-check" : ""}`}>
+            <img {...klein(p!.image, "(max-width: 760px) 96px, 140px", [160, 320, 480])} alt={naam} width={140} height={140} loading="lazy" />
+            <div>
+              <span className="pc-expert-domein"><ShieldCheck size={14} aria-hidden="true" /><span>Code, architectuur & beveiliging</span></span>
+              <strong translate="no">{naam}</strong>
+              <small translate="no">{p!.role}</small>
+              <p>{bio}</p>
+              {check && <span className="pc-expert-check">Doet je veiligheidscheck</span>}
+              {p!.linkedin && <a href={p!.linkedin} target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><ArrowUpRight size={14} aria-hidden="true" /></a>}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 // 22 oktober 2026, 15.45 (Marinus): de nieuwe securityvideo (HyperFrames, Marinus aan het woord, export v2a) vervangt de
 // uitlegfilm. Eén verticale film, Engels in beeld (security-campagne), dus voor elke taal dezelfde. Klik om af te spelen,
 // poster als voorbeeldbeeld. Komt er een nieuwere export, dan vervangt die security-9x16.mp4 met dezelfde naam.
@@ -667,6 +700,7 @@ export function PhpCheckPage() {
 
       <section className="h-wrap pc-team" id="aanvraag" ref={aanvraagRef}>
         <span id="zelf" className="pc-anker" aria-hidden="true" />
+        <Experts />
         <Mensen domein={gecheckt || vooraf} groot />
         <ContactOfZelf domein={gecheckt || vooraf} uitslag={u} keuze={keuze} zetKeuze={zetKeuze} />
       </section>
