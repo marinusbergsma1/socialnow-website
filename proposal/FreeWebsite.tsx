@@ -17,6 +17,7 @@ export function WebsiteExamples() {
   const region = useRef<HTMLDivElement>(null);
   const pointer = useRef<{ x: number; y: number } | null>(null);
   const dragged = useRef(false);
+  const meetRef = useRef<() => void>(() => {});
   const choose = (next: number) => {
     const target = (next + examples.length) % examples.length;
     setOpened(previous => previous.includes(target) ? previous : [...previous, target]);
@@ -37,10 +38,26 @@ export function WebsiteExamples() {
     const allesLaden = () => { setVisible(true); setOpened(examples.map((_, i) => i)); };
     const start = () => window.setTimeout(allesLaden, 300);
     if (document.readyState === "complete") start(); else window.addEventListener("load", start, { once: true });
-    const tile = element.querySelector(".sn-web-preview");
-    const resize = new ResizeObserver(([entry]) => setPreviewScale(entry.contentRect.width / 1280));
-    if (tile) resize.observe(tile);
-    return () => { observer.disconnect(); resize.disconnect(); window.removeEventListener("load", start); };
+    // 27 oktober 2026 (Marinus: "Gaat niet helemaal goed met VASTIQ.AI"). De schaal hing alleen aan één ResizeObserver op de
+    // eerste tegel; vuurde die niet (herladen, verborgen venster), dan bleef hij 1 en viel de site van 1280 px links en rechts
+    // buiten de tegel. Nu meten we direct, bij elke resize en pageshow, na het laden van elke site en via de observer op het blok.
+    const meet = () => {
+      const breed = element.querySelector<HTMLElement>(".sn-web-tile.is-active .sn-web-preview")?.clientWidth;
+      if (breed) setPreviewScale(breed / 1280);
+    };
+    meet();
+    const frame = requestAnimationFrame(meet);
+    const resize = new ResizeObserver(meet);
+    resize.observe(element);
+    window.addEventListener("resize", meet);
+    window.addEventListener("pageshow", meet);
+    window.addEventListener("load", meet, { once: true });
+    meetRef.current = meet;
+    return () => {
+      observer.disconnect(); resize.disconnect(); cancelAnimationFrame(frame);
+      window.removeEventListener("load", start); window.removeEventListener("load", meet);
+      window.removeEventListener("resize", meet); window.removeEventListener("pageshow", meet);
+    };
   }, []);
   return <div className="sn-fw-examples" ref={region} role="region" aria-label="Live websitevoorbeelden" aria-roledescription="carrousel">
     <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Onze websites</p><h3>Altijd een gratis websitedemo.</h3></div><p>Persoonlijk gemaakt. Geen AI-slop.</p></div>
@@ -71,7 +88,7 @@ export function WebsiteExamples() {
             {active && canEmbed && !loadedFrames[i] && <span className="sn-web-loading" role="status">Website laden…</span>}
             {visible && canEmbed && opened.includes(i) && <iframe src={item.previewUrl || item.url} title={item.name} tabIndex={active ? 0 : -1}
               inert={!active ? true : undefined} aria-hidden={!active ? true : undefined} loading="eager"
-              data-ready={loadedFrames[i] ? "true" : "false"} onLoad={() => setLoadedFrames(previous => ({ ...previous, [i]: true }))}
+              data-ready={loadedFrames[i] ? "true" : "false"} onLoad={() => { meetRef.current(); setLoadedFrames(previous => ({ ...previous, [i]: true })); }}
               referrerPolicy="strict-origin-when-cross-origin"
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" />}
           </div>
