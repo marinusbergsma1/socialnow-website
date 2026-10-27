@@ -174,3 +174,8 @@ html:root .sn-site .cx-connect .cx-org-vaknaam { margin: 0; font-size: 14px; fon
   .sn-site .cx-org-vak ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .sn-site .cx-org-vak .cx-org-persoon img { width: 36px; height: 36px; }
 }
+/* Tussen telefoon en breed scherm passen geen vier naast elkaar: dan 2 x 2, nooit drie plus één los. */
+@media (min-width: 601px) and (max-width: 1100px) {
+  .sn-site .cx-org-rij { max-width: 620px; margin-inline: auto; }
+  .sn-site .cx-org-rij > .cx-org-persoon { flex: 0 1 calc(50% - 5px); }
+}

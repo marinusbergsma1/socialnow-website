@@ -22,6 +22,7 @@ eis(!!foto && Number(foto[1]) <= 64, `foto's klein (${foto ? foto[1] + " px" : "
 const mobiel = [...css.matchAll(/@media \(max-width: (\d+)px\) \{([^@]*)/g)].filter(m => Number(m[1]) <= 640).map(m => m[2]).join("\n");
 const fotoMobiel = [...mobiel.matchAll(/\.cx-org-persoon img\s*\{[^}]*width:\s*(\d+)px/g)].map(m => Number(m[1]));
 eis(fotoMobiel.length > 0 && Math.min(...fotoMobiel) <= 48, "op de telefoon nog kleiner (hoogstens 48 px)");
+eis(/@media \(min-width: 601px\) and \(max-width: 1100px\) \{[^@]*\.cx-org-rij > \.cx-org-persoon \{ flex: 0 1 calc\(50% - 5px\)/.test(css), "middelbreed scherm: lagen van vier als 2 x 2, geen drie plus één");
 eis(/\.cx-org-lijn/.test(css), "verbindingslijnen tussen de lagen, als een organogram");
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(fs.readFileSync(`proposal/i18n/${l}.json`, "utf8"));
