@@ -78,10 +78,11 @@ export function WebsiteExamples() {
         </article>;
       })}
     </div>
+    {/* 27 oktober 2026 (Marinus): de dikke groene cirkels "niet zo mooi"; variant A, dun en strak, zoals in de onboarding. */}
     <div className="sn-web-navigation">
-      <button type="button" aria-label="Vorige website" onClick={() => choose(index - 1)}>←</button>
+      <button type="button" aria-label="Vorige website" onClick={() => choose(index - 1)}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg></button>
       <div className="sn-web-pagination" role="group" aria-label="Kies een website">{examples.map((item, i) => <button type="button" key={item.slug} aria-label={item.name} aria-pressed={i === index} onClick={() => choose(i)}><span /></button>)}</div>
-      <button type="button" aria-label="Volgende website" onClick={() => choose(index + 1)}>→</button>
+      <button type="button" aria-label="Volgende website" onClick={() => choose(index + 1)}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></button>
     </div>
     <p className="sn-web-announcement" aria-live="polite" translate="no">{examples[index].name} · {index + 1} / {examples.length}</p>
   </div>;
