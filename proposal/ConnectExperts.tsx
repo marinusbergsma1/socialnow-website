@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Search } from "lucide-react";
+import { ArrowUpRight, Search } from "lucide-react";
 import { people, expertGroepen } from "./content";
 import { klein } from "./licht";
 import { mailLink } from "./aanvragen";
@@ -23,14 +23,50 @@ const VERSIE = "20261015-team";
 // al." Dus Connect-blauw in plaats van groen, alle experts in één rij die schuift (met pijlen voor de muis), en geen eigen
 // woordmerk meer boven de kop: de Connect-band erboven toont het logo al.
 
+// 27 oktober 2026 (Marinus): "het connect onderdeel meer de structuur krijgt van het laatste plan en architecture. Dus met developers
+// en weer naar beneden zoals het was dus meer een soort bedrijfsstructuur dan slider. Wel alle foto's lekker klein houden."
+// Dus een organogram: bovenaan de vier eindverantwoordelijken uit het plan (plan-site structure.json, 27 oktober), daaronder de
+// developers, daaronder de vakgebieden naast elkaar. Iedereen staat er precies één keer, met een kleine vierkante foto.
+// Proef: scripts/check-connect-structuur.mjs.
+const EINDVERANTWOORDELIJK = ["Marinus Bergsma", "Gijsbert Westeneng", "Douwe Kramer", "Steef Komen"];
+const DEVELOPERS = expertGroepen.filter((g) => g.name === "AI development" || g.name === "Web development").flatMap((g) => g.members).filter((n) => !EINDVERANTWOORDELIJK.includes(n));
+const VAKGEBIEDEN = expertGroepen
+  .filter((g) => g.name !== "AI development" && g.name !== "Web development")
+  .map((g) => ({ naam: g.name, leden: g.members.filter((n) => !EINDVERANTWOORDELIJK.includes(n)) }));
+
+function Persoon({ naam }: { naam: string }) {
+  const persoon = people.find((p) => p.name === naam);
+  if (!persoon) return null;
+  const profiel = persoon.linkedin ?? persoon.instagram;
+  const binnen = <>
+    <img {...klein(persoon.image, "64px", [96, 160], undefined, VERSIE)} alt="" width="64" height="64" loading="lazy" className={persoon.name === "Jelle Ursem" ? "is-jelle" : undefined} />
+    <span className="cx-org-tekst">
+      <strong translate="no">{persoon.name}</strong>
+      <span>{persoon.name === "Ruben Spyckerelle" ? "B2B Cold Calling & Appointment Setting" : persoon.role}</span>
+    </span>
+    <ArrowUpRight className="cx-org-pijl" size={14} aria-hidden="true" />
+  </>;
+  return <li className="cx-org-persoon">
+    {profiel
+      ? <a href={profiel} target="_blank" rel="noopener noreferrer">{binnen}</a>
+      : <Link to="/team">{binnen}</Link>}
+  </li>;
+}
+
 export default function ConnectExperts() {
   const { t } = useLanguage();
   const [zoek, zetZoek] = useState("");
-  const rij = useRef<HTMLUListElement>(null);
-  const schuif = (richting: number) => rij.current?.scrollBy({ left: richting * rij.current.clientWidth * 0.8, behavior: "smooth" });
   const groepVan = (naam: string) => expertGroepen.find((g) => g.members.includes(naam))?.name ?? "";
   const q = zoek.trim().toLowerCase();
-  const lijst = people.filter((p) => !q || `${p.name} ${p.role} ${t(groepVan(p.name))}`.toLowerCase().includes(q));
+  const past = (naam: string) => {
+    if (!q) return true;
+    const p = people.find((x) => x.name === naam);
+    return !!p && `${p.name} ${p.role} ${t(groepVan(p.name))}`.toLowerCase().includes(q);
+  };
+  const top = EINDVERANTWOORDELIJK.filter(past);
+  const devs = DEVELOPERS.filter(past);
+  const vakken = VAKGEBIEDEN.map((v) => ({ ...v, leden: v.leden.filter(past) })).filter((v) => v.leden.length);
+  const leeg = !top.length && !devs.length && !vakken.length;
   return <div className="cx-connect">
     <section id="team" className="sn-cx h-wrap" aria-labelledby="team-titel">
       <div className="cx-boven">
@@ -46,30 +82,29 @@ export default function ConnectExperts() {
           <Search size={18} aria-hidden="true" />
           <input type="search" value={zoek} onChange={(e) => zetZoek(e.target.value)} placeholder="Zoek op naam of vak, bijvoorbeeld Meta Ads" aria-label="Zoek een expert" />
         </label>
-        {/* 20 oktober 2026 (Marinus): "Ik wil nooit meer dan 1 regel met expertises altijd 1 balk en misschien al die vlakjes wel
-            gewoon weg is voor later. Haal maar weg." De vakgebiedknoppen (cx-chips) zijn weg; zoeken op vak kan nog via het zoekveld.
-            Terugzetten kan met ALLES, expertGroepen en de opmaak .cx-chips in connect-experts.css, dan als één schuifbalk. */}
       </div>
-      <div className="cx-pijlen">
-        <button type="button" aria-label="Vorige experts" onClick={() => schuif(-1)}><ArrowLeft size={18} aria-hidden="true" /></button>
-        <button type="button" aria-label="Volgende experts" onClick={() => schuif(1)}><ArrowRight size={18} aria-hidden="true" /></button>
+      <div className="cx-org">
+        {top.length > 0 && <div className="cx-org-laag">
+          <p className="cx-org-kop">Eindverantwoordelijk</p>
+          <ul className="cx-org-rij">{top.map((n) => <Persoon key={n} naam={n} />)}</ul>
+        </div>}
+        {top.length > 0 && devs.length > 0 && <span className="cx-org-lijn" aria-hidden="true" />}
+        {devs.length > 0 && <div className="cx-org-laag">
+          <p className="cx-org-kop">Developers</p>
+          <ul className="cx-org-rij">{devs.map((n) => <Persoon key={n} naam={n} />)}</ul>
+        </div>}
+        {(top.length > 0 || devs.length > 0) && vakken.length > 0 && <span className="cx-org-lijn" aria-hidden="true" />}
+        {vakken.length > 0 && <div className="cx-org-laag">
+          <p className="cx-org-kop">Vakgebieden</p>
+          <div className="cx-org-vakken">
+            {vakken.map((v) => <div key={v.naam} className="cx-org-vak">
+              <p className="cx-org-vaknaam">{v.naam}</p>
+              <ul>{v.leden.map((n) => <Persoon key={n} naam={n} />)}</ul>
+            </div>)}
+          </div>
+        </div>}
       </div>
-      <ul className="cx-raster" ref={rij}>
-        {lijst.map((persoon) => {
-          const profiel = persoon.linkedin ?? persoon.instagram;
-          return <li key={persoon.name}>
-            <img {...klein(persoon.image, "260px", [160, 320], undefined, VERSIE)} alt="" width="260" height="260" loading="lazy" className={persoon.name === "Jelle Ursem" ? "is-jelle" : undefined} />
-            <div>
-              <strong translate="no">{persoon.name}</strong>
-              <span>{persoon.name === "Ruben Spyckerelle" ? "B2B Cold Calling & Appointment Setting" : persoon.role}</span>
-              {profiel
-                ? <a className="cx-profiel" href={profiel} target="_blank" rel="noopener noreferrer">Bekijk profiel <ArrowUpRight size={14} aria-hidden="true" /></a>
-                : <Link className="cx-profiel" to="/team">Bekijk profiel <ArrowUpRight size={14} aria-hidden="true" /></Link>}
-            </div>
-          </li>;
-        })}
-      </ul>
-      {lijst.length === 0 && <p className="cx-leeg">Geen expert gevonden. Probeer een ander woord.</p>}
+      {leeg && <p className="cx-leeg">Geen expert gevonden. Probeer een ander woord.</p>}
       {/* 20 oktober 2026 (Marinus): "Vulling hier blauw met witte tekst. Verder moet er ook een gedeelte komen met vraag een
           opdracht aan." Twee vakken naast elkaar: opdracht aanvragen en aanmelden als expert, elk met een blauwe knop. */}
       <div className="cx-onder">
