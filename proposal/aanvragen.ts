@@ -9,6 +9,10 @@ export const whatsappLink = (tekst = "") =>
   heeftWhatsApp
     ? `https://wa.me/${WHATSAPP_NUMMER}${tekst ? `?text=${encodeURIComponent(tekst)}` : ""}`
     : `mailto:${CONTACT_MAIL}${tekst ? `?body=${encodeURIComponent(tekst)}` : ""}`;
+// 27 oktober 2026 (Marinus): bellen of appen rechtsonder (BelApp.tsx) gaat rechtstreeks naar Marinus, niet via Steef.
+export const MARINUS_NUMMER = "31637404577";
+export const belLink = `tel:+${MARINUS_NUMMER}`;
+export const appLink = (tekst = "") => `https://wa.me/${MARINUS_NUMMER}${tekst ? `?text=${encodeURIComponent(tekst)}` : ""}`;
 export const mailLink = (onderwerp = "") => `mailto:${CONTACT_MAIL}${onderwerp ? `?subject=${encodeURIComponent(onderwerp)}` : ""}`;
 export type AanvraagSoort = "website" | "os";
 
