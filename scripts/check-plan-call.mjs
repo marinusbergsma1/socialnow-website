@@ -19,12 +19,13 @@ eis(/<CustomCall\/>/.test(kop) && /<PlanCallKnop label="Plan een call voor custo
 eis(/Custom OS en een gratis website<\/strong> in elk hulppakket<\/p>/.test(kop) && !/€\s?\d/.test(kop.replace(/\/\/.*$/gm, "")) && !/Hulppakket vanaf|vanaf €10\.000|€10\.000 tot €20\.000/.test(paneel.replace(/\/\/.*$/gm, "")), "hero en paneelkop zonder bedrag, geen €10.000 meer");
 eis(!/custom-call-line/.test(kop), "geen tweede tekstlink Plan een call onder de ondertitel");
 eis(/<PlanCallHost \/>/.test(shell) && !/<PlanCallHost/.test(kop), "paneel-host staat sitebreed in WebsiteProposal.tsx (één keer)");
-// Hoofdnavigatie (18 okt): Producten, Diensten, Resultaten, Prijzen, Team; rechts Plan een call en Inloggen gratis OS.
+// Hoofdnavigatie (18 okt): Producten, Diensten, Resultaten, Prijzen, Team; rechts Inloggen gratis OS.
 eis(/<ProductenMenu \/>/.test(shell) && /const nav = NAV_LINKS/.test(shell), "hoofdnavigatie begint met het Producten-menu");
 // 19 oktober 2026 (Marinus): Prijzen staat op de Dienstenpagina en niet meer in het menu.
 eis(/\["\/diensten", "Diensten"\],\s*\["\/projecten", "Resultaten"\],\s*\["\/team", "Team"\]/.test(menu), "Diensten, Resultaten, Team in die volgorde");
 eis(/"\/het-os"/.test(menu) && /"\/connect\/"/.test(menu), "Producten toont OS en Connect");
-eis(/<HeaderCall \/>/.test(shell) && /openPlanCall/.test(menu), "Plan een call rechts in de header opent het paneel");
+// 27 okt 2026 (Marinus): Plan een call weg uit de header, bellen of appen rechtsonder (scripts/check-bel-app.mjs).
+eis(!/<HeaderCall \/>/.test(shell) && /<BelApp \/>/.test(shell), "header zonder Plan een call, bel of app rechtsonder");
 eis(/h-mobile-call/.test(shell), "mobiel menu heeft Plan een call");
 for (const pad of ["/blog", "/contact", "/het-os"]) eis(new RegExp(`path="${pad}"`).test(shell) && new RegExp(`"${pad}": "`).test(shell), `route ${pad} blijft en houdt een titel`);
 const voet = lees("proposal/BrandFooter.tsx");

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useMatch } from "react-router-dom";
 import { ArrowUpRight, ChevronDown, ShieldCheck } from "lucide-react";
-import { openPlanCall } from "./PlanCall";
 import { useLanguage } from "./i18n/context";
 import "./hoofdmenu.css";
 
@@ -93,8 +92,3 @@ export function SecurityLink({ mobiel = false, onClick }: { mobiel?: boolean; on
   </NavLink>;
 }
 
-export function HeaderCall() {
-  return <button type="button" className="h-header-call" aria-haspopup="dialog" onClick={() => openPlanCall()}>
-    <span>Plan een call</span><ArrowUpRight size={15} aria-hidden="true" />
-  </button>;
-}

@@ -49,8 +49,9 @@ let allPosts: typeof import("../data/posts").allPosts = [];
 let brandMeta: typeof import("../scripts/brand-meta.mjs").brandMeta | null = null;
 import { MotionProvider } from "./motion";
 import LanguageSwitch from "./LanguageSwitch";
-import { DIENSTEN, DienstenMenu, HeaderCall, Kleurwoord, NAV_LINKS, PRODUCTEN, ProductenMenu, SecurityLink } from "./Producten";
+import { DIENSTEN, DienstenMenu, Kleurwoord, NAV_LINKS, PRODUCTEN, ProductenMenu, SecurityLink } from "./Producten";
 import { PlanCallHost, openPlanCall } from "./PlanCall";
+import { BelApp } from "./BelApp";
 import { LanguageProvider, LANGUAGES, languagePrefix, type Language, useLanguage } from "./i18n/context";
 const PrivacyPage = later(() => import("../components/PrivacyPage").then((m) => m.default));
 const TermsPage = later(() => import("../components/TermsPage").then((m) => m.default));
@@ -239,7 +240,7 @@ function ProposalShell() {
             ))}
           </nav>
           <LanguageSwitch />
-          <HeaderCall />
+          {/* 27 oktober 2026 (Marinus): Plan een call weg uit de header; bellen of appen staat rechtsonder (BelApp). */}
           {/* 26 september 2026 (Marinus): geen reclame in de header, rechtsboven de login voor het gratis OS. */}
           <a className="sn-pill h-header-claim" href="https://app.socialnow.nl/login/">
             <span className="h-header-login-full">Inloggen gratis OS</span>
@@ -303,6 +304,7 @@ function ProposalShell() {
         </nav>
       </header>
       <PlanCallHost />
+      <BelApp />
       <main id="inhoud" ref={main} tabIndex={-1}>
         <Suspense fallback={<div aria-hidden="true" style={{ minHeight: "100vh" }} />}>
         <Routes>
