@@ -100,3 +100,11 @@ html:root .sn-site .sn-choice.sn-bestaand .showcase .video-title h1{max-width:no
 @media(prefers-reduced-motion:reduce){.sn-site .sn-bestaand .bs-film-glijder{transition:none !important}}
 .sn-site .sn-bestaand .bs-explainer-onder{min-height:3em}
 @media(max-width:600px){.sn-site .sn-bestaand :is(.bs-filmkeuze button,.bs-switch :is(button,a)){padding:0 12px;font-size:13px;gap:6px}.sn-site .sn-bestaand .bs-explainer-onder{min-height:4.5em}}
+
+/* 27 oktober 2026: zin onder de video naar Demo & Scan (/security). */
+.sn-site .sn-bestaand .bs-gratis-start{display:flex;align-items:center;justify-content:center;gap:10px;margin:18px auto 0;width:fit-content;max-width:100%;font-size:16px;font-weight:600;line-height:1.4;color:#fff;text-decoration:none;text-wrap:balance;text-align:center}
+.sn-site .sn-bestaand .bs-gratis-start>svg{flex:none;color:#25d366}
+.sn-site .sn-bestaand .bs-gratis-start .bs-punt{color:#25d366}
+.sn-site .sn-bestaand .bs-gratis-start:hover>span{text-decoration:underline;text-decoration-color:#25d366;text-underline-offset:4px}
+.sn-site .sn-bestaand .bs-gratis-start:focus-visible{outline:2px solid #25d366;outline-offset:4px;border-radius:6px}
+@media(max-width:600px){.sn-site .sn-bestaand .bs-gratis-start{font-size:15px;gap:8px;text-align:left}.sn-site .sn-bestaand .bs-gratis-start>svg:last-child{display:none}}

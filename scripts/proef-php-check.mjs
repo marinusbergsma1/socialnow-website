@@ -39,7 +39,7 @@ const docs = [...tsx.matchAll(/bestand: "([a-z-]+)"/g)].map((m) => m[1]);
 eis(docs.length === 4 && docs.every((b) => ["nl", "en"].every((t) => fs.existsSync(`public/websitecheck/${b}-${t}.pdf`) && fs.readFileSync(`public/websitecheck/${b}-${t}.pdf`).subarray(0, 5).toString() === "%PDF-")), "vier documenten in NL en EN, elk bestand bestaat en is een pdf (nooit een kapotte link)");
 eis(/\.pc-documenten \{ background: #fff/.test(css), "documenten in een witte sectie");
 eis(/DOCUMENTEN\.length > 0 &&/.test(tsx), "documentenblok verschijnt alleen als er bestanden zijn, nooit een lege link");
-eis(/<h1[^>]*>Is je website veilig\?<\/h1>/.test(tsx), "kop \"Is je website veilig?\"");
+eis(/<h2[^>]*>Is je website veilig\?<\/h2>/.test(tsx), "kop \"Is je website veilig?\" (sinds 27 okt een h2 onder de paginakop Demo & Scan)");
 eis(!/type="checkbox"/.test(tsx) && !/toestemming/i.test(tsx) && !/toestemming/.test(lees("api/php-check.js")), "geen vinkje: de publieke scan is één gewone GET");
 const hero = tsx.slice(tsx.indexOf('<form className="pc-check"'), tsx.indexOf("</form>", tsx.indexOf('<form className="pc-check"')));
 eis(!/pc-klein|Geen aanval|bewaren niets/.test(hero), "onder de knop alleen het veld en de knop, geen geruststellende regels");

@@ -85,10 +85,11 @@ export function DienstenMenu() {
 
 // 22 oktober 2026 (Marinus, via de regie): Security wordt een hoofdpunt in het menu, rustig: een klein groen schildje,
 // geen pil. In elke taal "Security". De pagina /security bouwt de sessie check-fix; /check gaat er met 308 naartoe.
+// 27 oktober 2026 (Marinus): het menu-item heet "Demo & Scan": websitedemo en securityscan staan samen op /security.
 export const SECURITY_PAD = "/security";
 export function SecurityLink({ mobiel = false, onClick }: { mobiel?: boolean; onClick?: () => void }) {
   return <NavLink to={SECURITY_PAD} className={mobiel ? "h-security h-security-mobiel" : "h-security"} onClick={onClick}>
-    <ShieldCheck size={mobiel ? 18 : 14} aria-hidden="true" /><span translate="no">Security</span>{mobiel && <ArrowUpRight size={17} aria-hidden="true" />}
+    <ShieldCheck size={mobiel ? 18 : 14} aria-hidden="true" /><span translate="no">Demo &amp; Scan</span>{mobiel && <ArrowUpRight size={17} aria-hidden="true" />}
   </NavLink>;
 }
 
