@@ -21,7 +21,7 @@ import { HomeConnectBand } from "./HomeHeader";
 import SamenEnVeilig from "./SamenEnVeilig";
 // 18 oktober 2026 (Marinus): "1 VERSIE DIE IK AANGAF WACHT MET AB TESTEN". Dus geen A/B-test meer: variant B
 // (HeaderBestaand) is de header in elke taal. De test zelf (HomeHeaderAB.tsx, server/ab.mjs) blijft staan voor later.
-import HeaderBestaand from "./HeaderBestaand";
+import HomeIntro, { HomeContact } from "./HomeIntro";
 import FreeWebsite from "./FreeWebsite";
 import { Bento, Tegel } from "./Bento";
 import { TextLink } from "./ui";
@@ -65,8 +65,8 @@ function HomeTechniek() {
 export function Home() {
   useLanguage();
   return <div className="sn-simple-home">
-    <section className="h-hero sn-approved-hero" id="home">
-      <HeaderBestaand meet={() => {}} />
+    <HomeIntro />
+    <section className="h-hero sn-approved-hero">
       <SamenEnVeilig />
       <HomeConnectBand />
     </section>
@@ -76,6 +76,7 @@ export function Home() {
     <HomeTechniek />
 
     <OnderDeVouw ruimte={false}><Bereikt /></OnderDeVouw>
+    <HomeContact />
     {/* Het blok met de vier Milo-tegels is weg (Marinus, 19 oktober 2026: "dit gedeelte kan denk ik wel weg"); de onderdelen staan op /het-os. */}
   </div>;
 }

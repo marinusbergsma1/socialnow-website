@@ -33,7 +33,7 @@ function uitAdres(zoek: URLSearchParams): CallVoorinvulling {
 const vanuitAdres = (zoek: URLSearchParams, hash: string) =>
   hash === `#${PLAN_CALL_ANKER}` || zoek.get("call") === "custom-os" || zoek.get("onderwerp") === "custom-os";
 
-export function PlanCallKnop({ className = "pill", label = "Plan een call voor custom OS" }: { className?: string; label?: string }) {
+export function PlanCallKnop({ className = "pill", label = "Plan een kennismaking" }: { className?: string; label?: string }) {
   return <button type="button" className={className} aria-haspopup="dialog" onClick={() => openPlanCall()}><span>{label}</span><span className="arrow"><ArrowUpRight size={17} /></span></button>;
 }
 

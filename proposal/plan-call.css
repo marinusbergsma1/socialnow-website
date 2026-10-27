@@ -84,3 +84,23 @@
   :root .sn-call .sn-call-agenda iframe{height:520px}
   :root .sn-call .pill.sn-call-verder{flex:1;max-width:280px;margin-left:auto}
 }
+
+/* Rustige algemene kennismaking; geen productkeuze of budgetdrempel. */
+:root .sn-call-general{background:#fff;color:#15202a;border-color:#d9e0e4}
+:root .sn-call-general .sn-call-kop{background:#07121c;border:0;padding-bottom:24px;color:#fff}
+:root .sn-call-general .sn-call-kop .sn-call-uitleg{margin-top:14px;color:#b9c6cf}
+:root .sn-call-general .sn-call-inhoud{padding-top:24px;padding-bottom:24px;gap:20px}
+:root .sn-call-general .sn-call-veld{color:#243743}
+:root .sn-call-general .sn-call-veld i,:root .sn-call-general .sn-call-veld small{color:#667681}
+:root .sn-call-general .sn-call-veld input,:root .sn-call-general .sn-call-veld textarea{background:#fff;color:#15202a;border-color:#cbd5dc;border-radius:8px}
+:root .sn-call-general .sn-call-veld :is(input,textarea):focus{outline-color:#1478a9}
+:root .sn-call-general .sn-call-klein,:root .sn-call-general .sn-call-klaar p{color:#536573}
+:root .sn-call-general .sn-call-klein a{color:#15202a}
+:root .sn-call-general .sn-call-voet{background:#f5f7f8;border-color:#d9e0e4}
+:root .sn-call-general .pill{background:#15202a;border-color:#15202a;color:#fff;text-transform:none;letter-spacing:0}
+:root .sn-call-general .pill::before{background:#253e4d}
+:root .sn-call-general .sn-call-direct{display:flex;align-items:center;gap:14px;padding:15px 16px;background:#f3f6f8;border:1px solid #dce3e8;border-radius:10px;text-decoration:none;color:#15202a;font-size:14px;min-width:0}
+:root .sn-call-general .sn-call-direct span{flex:1;min-width:0}
+:root .sn-call-general .sn-call-direct b{display:block;margin-top:3px;overflow-wrap:anywhere}
+:root .sn-call-general .sn-call-terug{color:#243743}
+:root .sn-call-general :is(a,button):focus-visible{outline:3px solid #1478a9;outline-offset:3px}
