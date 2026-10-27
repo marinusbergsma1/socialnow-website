@@ -1,0 +1,41 @@
+/* Homepage: witte inhoud, donkere originele merkbeelden. */
+.sn-site .hb-intro,.sn-site .hb-services,.sn-site .hb-contact{background:#fff;color:#15202a;position:relative;text-align:left}
+.sn-site .hb-wrap{width:min(1280px,calc(100% - 96px));margin:0 auto}
+.sn-site .hb-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding-top:88px;padding-bottom:68px}
+.sn-site .hb-eyebrow{font-size:12px;letter-spacing:.12em;font-weight:600;text-transform:uppercase;color:#5a646c;margin:0 0 24px}
+.sn-site .hb-copy h1{font-family:inherit;font-size:clamp(48px,5.5vw,84px);font-weight:700;letter-spacing:-.045em;line-height:1.02;color:#142029;margin:0 0 28px;max-width:10ch;text-wrap:balance}
+.sn-site .hb-lead{font-size:19px;line-height:1.65;max-width:43ch;color:#53606b;margin:0 0 30px}
+.sn-site .hb-actions{display:flex;align-items:center;flex-wrap:wrap;gap:20px 26px}
+.sn-site .hb-button{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;border:1px solid #15202a;border-radius:999px;background:#15202a;color:#fff;padding:16px 23px;min-height:54px;font:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer;transition:background .2s}
+.sn-site .hb-button:hover{background:#253e4d}
+.sn-site .hb-link{display:inline-flex;align-items:center;gap:12px;color:#15202a;text-decoration:none;font-size:15px;font-weight:600;min-height:44px}
+.sn-site .hb-link:hover{text-decoration:underline;text-underline-offset:5px}
+.sn-site .hb-email{display:flex;flex-wrap:wrap;gap:5px 8px;align-items:center;font-size:13px;color:#5a646c;margin-top:25px;text-decoration:none}
+.sn-site .hb-email span{text-decoration:underline;text-underline-offset:4px}
+.sn-site .hb-film{min-width:0;border-radius:18px;overflow:hidden;background:#03080d;padding:20px;color:#fff;border:1px solid #172837;box-shadow:0 22px 60px #10202a12}
+.sn-site .hb-film-tabs{display:flex;gap:7px;padding:0 0 18px}
+.sn-site .hb-film-tabs button{border:1px solid #ffffff30;border-radius:999px;background:transparent;color:#bbc5cb;padding:10px 18px;font:inherit;font-size:13px;cursor:pointer}
+.sn-site .hb-film-tabs button[aria-pressed=true]{background:#fff;color:#15202a;border-color:#fff}
+.sn-site .hb-film .sn-explainer{margin:0}
+.sn-site .hb-principles{display:flex;flex-wrap:wrap;gap:16px 40px;padding:24px 0;border-top:1px solid #dce1e4;font-size:13px;color:#53606b}
+.sn-site .hb-principles a{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none}
+.sn-site .hb-services{padding:72px 0 90px;border-top:1px solid #e4e8ea}
+.sn-site .hb-section-head{display:grid;grid-template-columns:1fr 2fr;gap:40px;margin-bottom:42px}
+.sn-site .hb-section-head h2,.sn-site .hb-contact h2{font-size:clamp(30px,3.3vw,48px);line-height:1.12;letter-spacing:-.025em;font-weight:600;margin:0;color:#15202a}
+.sn-site .hb-service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
+.sn-site .hb-service-grid article{display:flex;flex-direction:column;align-items:flex-start;border-top:1px solid #ccd5da;padding:22px 0 0}
+.sn-site .hb-number{font-size:12px;color:#737f88;margin-bottom:34px}
+.sn-site .hb-service-grid h3{font-size:24px;line-height:1.25;font-weight:600;color:#15202a;margin:0 0 18px;max-width:18ch}
+.sn-site .hb-service-grid p{font-size:16px;line-height:1.65;color:#53606b;margin:0 0 22px}
+.sn-site .hb-service-grid .hb-link{margin-top:auto}
+.sn-site .hb-contact{padding:85px 0 90px}
+.sn-site .hb-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.sn-site .hb-contact-grid>div>p:not(.hb-eyebrow){font-size:18px;line-height:1.65;color:#53606b;margin:0 0 28px;max-width:48ch}
+.sn-site :is(.hb-intro,.hb-services,.hb-contact) :is(a,button):focus-visible{outline:3px solid #1478a9;outline-offset:5px}
+@media(max-width:1000px){.sn-site .hb-wrap{width:calc(100% - 48px)}.sn-site .hb-hero-grid{gap:32px;padding-top:52px}.sn-site .hb-film{padding:12px}.sn-site .hb-lead{font-size:17px}.sn-site .hb-service-grid{gap:24px}}
+@media(max-width:760px){.sn-site .hb-wrap{width:calc(100% - 40px)}.sn-site .hb-hero-grid,.sn-site .hb-contact-grid,.sn-site .hb-section-head{grid-template-columns:1fr;gap:32px}.sn-site .hb-hero-grid{padding-top:44px;padding-bottom:36px}.sn-site .hb-copy h1{font-size:54px}.sn-site .hb-principles{gap:12px 24px;font-size:12px}.sn-site .hb-services,.sn-site .hb-contact{padding:48px 0}.sn-site .hb-service-grid{grid-template-columns:1fr;gap:28px}.sn-site .hb-number{margin-bottom:18px}.sn-site .hb-service-grid h3{max-width:none}.sn-site .hb-section-head{gap:0}.sn-site .hb-film-tabs{padding-bottom:12px}}
+@media(prefers-reduced-motion:reduce){.sn-site .hb-button{transition:none}}
+/* De bestaande site heeft een globale !important op kopgroottes. Alleen deze nieuwe secties overschrijven die. */
+html:root .sn-site .hb-copy h1{font-size:clamp(48px,5.5vw,84px)!important;letter-spacing:-.035em;line-height:1.02}
+html:root .sn-site .hb-section-head h2,html:root .sn-site .hb-contact h2{font-size:clamp(30px,3.3vw,48px)!important}
+@media(max-width:760px){html:root .sn-site .hb-copy h1{font-size:clamp(42px,10vw,58px)!important}}

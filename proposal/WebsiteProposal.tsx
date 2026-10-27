@@ -297,7 +297,7 @@ function ProposalShell() {
             </NavLink>
           ))}
           <button type="button" className="h-mobile-call" aria-haspopup="dialog" onClick={() => { setMenuOpen(false); openPlanCall(); }}>
-            Plan een call voor custom OS
+            Plan een kennismaking
             <ArrowUpRight size={17} />
           </button>
         </nav>
