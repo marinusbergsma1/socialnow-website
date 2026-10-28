@@ -76,7 +76,7 @@ const ONDERDELEN: Record<string, string[]> = {
 // bedrijf. Mag blijven". Titel terug; de getypte regel zegt nu dat het systeem van jou is, de zin eronder gratis en echt werk.
 // 19 oktober 2026, later (Marinus): "Get more out of your business. En daaronder, more insights, better management everything
 // custom made plug and play". Titel "Haal meer uit je bedrijf."; de getypte regel noemt die vier.
-// 22 oktober 2026 (Marinus): "A trusted growth and cyber security partner." en "Ipv dit en veranderende tekst. Gewoon bam
+// 22 oktober 2026 (Marinus): "A trusted growth and cybersecurity partner." (sinds 28 okt overal als één woord) en "Ipv dit en veranderende tekst. Gewoon bam
 // dat statement". De titel is alleen dat statement; de getypte regel is weg.
 
 // Een keuzegroep zoals een radiogroep hoort te werken: Tab gaat naar de gekozen optie, de pijltjes wisselen.
