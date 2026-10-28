@@ -52,8 +52,8 @@ html:root .sn-site .sn-startbeeld-route>.sn-startbeeld-groep{padding-left:0;bord
 /* 22 okt (Marinus): geen streep tussen Supperclub en Crafture. */
 html:root .sn-site .sn-startbeeld-groep+.sn-startbeeld-route{padding-left:0;border-left:0}
 html:root .sn-site .sn-startbeeld-streep{display:block;flex:none;width:1px;height:calc(var(--merk-h) * 1.3);background:#ffffff26}
-html:root .sn-site .sn-startbeeld-merken img{display:block;height:calc(var(--merk-h) * var(--maat, 1));width:auto;filter:brightness(0) invert(1);opacity:.72}
-html:root .sn-site .sn-startbeeld-merken img.is-kleur{filter:grayscale(1) brightness(1.25) contrast(1.1)}
+/* 28 okt (Marinus): "alle logo's in kleur". Geen wit- of grijsfilter meer: elk merk in zijn eigen kleur, op volle sterkte. */
+html:root .sn-site .sn-startbeeld-merken img{display:block;height:calc(var(--merk-h) * var(--maat, 1));width:auto}
 /* Afspeelknop (Marinus 22 okt): groot, transparante vulling, groene rand, witte tekst, groen pijlrondje en een kleine zwarte outline. */
 html:root .sn-site .sn-startbeeld>.sn-startbeeld-midden>.sn-pill{--sn-pill-height:62px;position:relative;inset:auto;translate:none;width:max-content;max-width:100%;padding-left:28px;gap:22px;background:transparent !important;font-size:14px !important;outline:1.5px solid #000;outline-offset:0}
 /* Pijl donker op het groene rondje, zoals Start for free en Log in links in de hero: contrast 10,6:1 in plaats van 2:1 met wit. */

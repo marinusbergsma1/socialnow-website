@@ -32,7 +32,8 @@ eis(["Universal", "Warner Bros.", "MOJO", "IMAX", "Marvel"].map(n => lijst("VIA_
 
 // Streep en kleur
 eis(/\.sn-startbeeld-streep\{[^}]*width:1px;[^}]*background:#ffffff26/.test(css), "dunne verticale streep tussen Crafture en de vijf merken, zelfde kleur als de streep na Supperclub");
-eis(/\.sn-startbeeld-merken img\{[^}]*filter:brightness\(0\) invert\(1\);opacity:\.72\}/.test(css), "rustig van kleur, zoals de andere logo's");
+// 28 okt 2026 (Marinus): "alle logo's in kleur"; vervangt "rustig van kleur", zie proef-trusted-kleur.mjs.
+eis(/\.sn-startbeeld-merken img\{[^}]*\}/.test(css) && !/\.sn-startbeeld-merken img\{[^}]*filter/.test(css), "Trusted by in kleur");
 // Later op 22 oktober (Marinus): Crafture iets groter dan de rest, zie scripts/proef-software-partners.mjs.
 eis(/naam: "Crafture"[^}]*maat: 2\.1/.test(speler), "Crafture iets groter dan de andere logo's (maat 2,1)");
 

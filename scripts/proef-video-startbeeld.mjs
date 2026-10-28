@@ -60,7 +60,8 @@ eis(["AZ", "Supperclub"].every(n => direct.includes(`naam: "${n}"`)) && ["Univer
 eis(start.includes('{merk(CRAFTURE)}<i className="sn-startbeeld-streep" /><span className="sn-startbeeld-groep">{VIA_CRAFTURE.map(merk)}</span>'), "de route via Crafture staat er eerlijk bij (Crafture-logo, streep, de vijf merken)");
 const bestanden = [...(direct + crafture).matchAll(/src: "([^"]+)"/g)].map(m => m[1]);
 eis(bestanden.length >= 7 && bestanden.every(b => fs.existsSync(`public${b}`)), `alle zeven logo's zijn bestaande bestanden: ${bestanden.filter(b => !fs.existsSync(`public${b}`)).join(", ") || "ja"}`);
-eis(/\.sn-startbeeld-merken img\{[^}]*filter:brightness\(0\) invert\(1\);opacity:\.72\}/.test(css), "Trusted by rustig van kleur");
+// 28 okt 2026 (Marinus): "alle logo's in kleur"; vervangt "rustig van kleur", zie proef-trusted-kleur.mjs.
+eis(/\.sn-startbeeld-merken img\{[^}]*\}/.test(css) && !/\.sn-startbeeld-merken img\{[^}]*filter/.test(css), "Trusted by in kleur");
 
 // 3b. Knop op de Connect-film: zoals de blauwe knoppen links in de hero, met kleine zwarte outline.
 eis(/\.sn-explainer-cover>\.sn-pill\.sn-pill-connect\{[^}]*background:#00000080 !important;border-color:#20afde !important;outline:1\.5px solid #000/.test(css) && /\.sn-explainer-cover>\.sn-pill\.sn-pill-connect \.h-button-icon\{background:#20afde !important;color:#05282e !important\}/.test(css), "Connect-knop: geen blauwe vulling meer, blauwe rand, blauw pijlrondje, kleine zwarte outline");
