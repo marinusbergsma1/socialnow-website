@@ -77,11 +77,11 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   },
   // 30 september 2026 (Marinus): nieuw teamlid. 12 oktober 2026 weggehaald; 23 oktober 2026 (Marinus): "Tristan mag er ook weer bij."
   { name: "Tristan Slobben", role: "Data & AI Engineer", image: "Tristan-Slobben.webp", linkedin: "https://www.linkedin.com/in/tristan-slobben-105056159/", sinds: "2026-09-30" },
-  // 3 oktober 2026 (Marinus): nieuwe teamleden.
+  // 3 oktober 2026 (Marinus): nieuwe teamleden. 28 oktober 2026 (Marinus): "Youri is Client Relations Manager."
   { name: "Antony Soosaipillaj", role: "Full-Stack AI Developer", image: "Antony-Soosaipillaj.webp", sinds: "2026-10-03" },
   { name: "Ruben Spyckerelle", linkedin: "https://www.linkedin.com/in/ruben-spyckerelle/", role: "Outsourced B2B cold calling & appointment setting · Benelux & DACH", image: "Ruben.webp", description: "Gekwalificeerde afspraken in je agenda.", quote: "Ik bel, zodat jij het niet hoeft te doen.", sinds: "2026-10-12" },
   { name: "Aron", role: "Senior Sales", image: "Aren.webp", sinds: "2026-10-03" },
-  { name: "Youri van der Donk", role: "Senior Sales", image: "Youri-van-der-Donk.webp", sinds: "2026-10-03" },
+  { name: "Youri van der Donk", role: "Client Relations Manager", image: "Youri-van-der-Donk.webp", sinds: "2026-10-03" },
   { name: "Isaak Munster", role: "Business Coach", image: "Isaak-Munster.webp", sinds: "2026-10-03" },
   // 3 oktober 2026 (Marinus): "Zet de rest er ook op". Pieter stond klaar op feat/team-pieter-20261001.
   { name: "Pieter Bergsma", role: "Multi sales business owner", image: "Pieter-Bergsma.webp", sinds: "2026-10-03" },
