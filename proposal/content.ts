@@ -5,7 +5,7 @@ import { CLAIM_URL } from "./os-entry";
 // (teamonderzoek 4 en 5 oktober); bij de rest volgt de link zodra de juiste URL bevestigd is.
 export const people: { name: string; role: string; image: string; linkedin?: string; sinds?: string; description?: string; quote?: string; instagram?: string }[] = [
   // 23 oktober 2026 (Marinus): Gijsbert Westeneng is onze nieuwe aanwinst, Full-Stack AI Engineer, bij SocialNow Connect. Nieuwste aanwinst vooraan.
-  { name: "Gijsbert Westeneng", role: "Full-Stack AI Engineer", image: "Gijsbert-Westeneng.webp", linkedin: "https://www.linkedin.com/in/gijsbert-westeneng-804172155/", sinds: "2026-10-23" },
+  { name: "Gijsbert Westeneng", role: "Cybersecurity & Full Stack AI Engineer", image: "Gijsbert-Westeneng.webp", linkedin: "https://www.linkedin.com/in/gijsbert-westeneng-804172155/", sinds: "2026-10-23" },
   { name: "Thomas Huijsmans", role: "AI Strategy & Consulting", linkedin: "https://www.linkedin.com/in/thomashuijsmans/", image: "Thomas-Huijsmans.webp", sinds: "2026-10-14" },
   // 19 oktober 2026 (Marinus): "Hossam moet er wel in maar beter op zijn plek gewoon beter in het veld." Eigen uitsnede, hoofd en schouders.
   { name: "Hossam Hassan", role: "Brand and Marketing Consultant", linkedin: "https://www.linkedin.com/in/hossam-hassan-abdelrehim/", image: "Hossam-Hassan-portret.webp", sinds: "2026-10-14" },
@@ -58,7 +58,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   // 1 oktober 2026 (Marinus): Douwe Kramer, co-founder van Attesso, met Sid het Attesso-team naast Marinus en Steef.
   {
     name: "Douwe Kramer",
-    role: "Co-founder · Attesso",
+    role: "AI & Data Engineer",
     image: "Douwe-Kramer-attesso.webp",
     linkedin: "https://www.linkedin.com/in/douwe-kramer-attesso/",
     sinds: "2026-10-01",

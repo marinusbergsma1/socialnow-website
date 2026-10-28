@@ -36,7 +36,7 @@ const KORTE_ROL: Record<string, string> = {
   "Marinus Bergsma": "Founder & CEO",
   "Steef Komen": "Partner · Finance & Data",
   "Sid van Kalken": "Web Development & AI Payments",
-  "Douwe Kramer": "Co-founder",
+  "Douwe Kramer": "AI & Data Engineer",
   "Michelle Yang": "Supply Chain & Operations",
   "Steven Goudsblom": "Wealth management",
 };
