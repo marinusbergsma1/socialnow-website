@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Proef: de hero van de homepage (HeaderBestaand.tsx).
-// 22 oktober 2026 (Marinus): "Kan jij zorgen dat de slogan op de website word A trusted growth and cyber security partner."
+// 22 oktober 2026 (Marinus): "Kan jij zorgen dat de slogan op de website word A trusted growth and cybersecurity partner."
 // en "Ipv dit en veranderende tekst. Gewoon bam dat statement en de uitlijning by security is verkeerd op mobiele versies."
 // Dus: h1 is alleen het statement, zonder getypte regel, in alle 10 talen vertaald; de link Veilig in de vinkjes staat op
 // een touchscreen op dezelfde lijn als de andere punten (geen 44 px hoge blokbox met de streep eronder).
@@ -9,7 +9,7 @@
 // Gebruik: node scripts/check-hero-titel.mjs [--dist]   (rood op main vóór de wijziging, groen erna)
 import fs from "node:fs";
 const H1 = "Een betrouwbare partner voor groei en cybersecurity.";
-const EN = "A trusted growth and cyber security partner.";
+const EN = "A trusted growth and cybersecurity partner.";
 const OUD = ["Haal meer uit je bedrijf.", "Get more out of your business."];
 const TALEN = ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"];
 const fouten = [];

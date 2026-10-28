@@ -5,7 +5,7 @@
 // Gebruik: node scripts/check-groeipartner-training.mjs [--dist]   (rood op main vóór de wijziging, groen erna)
 import fs from "node:fs";
 // 22 oktober 2026: kop met cybersecurity erbij (Marinus).
-const KOP = "Groei en cybersecurity in het AGI-tijdperk.", KOP_EN = "Growth and cyber security for the AGI era.";
+const KOP = "Groei en cybersecurity in het AGI-tijdperk.", KOP_EN = "Growth and cybersecurity for the AGI era.";
 const OUD = "Veiliger dan je verouderde software en processen.";
 const VORMEN = ["Teamtrainingen", "AI-workshops", "Cursussen"];
 const FOTO = ["800.webp", "1600.webp", "1600.jpg"].map(e => `public/images/beurs/marinus-steef-odoo-experience-${e}`);
