@@ -12,7 +12,8 @@ import "./explainer-player.css";
 //   site zonder schuine streep, bijgesneden en in de blauwtint van de site; met 1,02 x de hoogte van het OS-logo is het woord
 //   SocialNow in beide even breed en dus even groot (gemeten: woordbreedte/hoogte OS 3,955, Connect 3,889).
 //   Midden: de afspeelknop, groot, met daaronder één zin. Onder: Trusted by, eerlijk met de route: AZ en Supperclub direct,
-//   Universal, Warner Bros., MOJO, IMAX en Marvel via Crafture (werkervaring Marinus). Bestaande logobestanden, rustig van kleur, optisch even hoog.
+//   Universal, Warner Bros., MOJO, IMAX en Marvel via Crafture (werkervaring Marinus). Bestaande logobestanden, optisch even hoog.
+//   28 oktober 2026 (Marinus): "alle logo's in kleur". Warner Bros. in het blauw van het schild, Universal en IMAX helder wit.
 //   Later op 22 oktober (Marinus): de route staat er als Crafture-logo, niet als tekst: AZ, Supperclub | Crafture | Universal ... Marvel.
 // Hetzelfde startbeeld ligt in de speler over de film tot die speelt, dus nergens meer het zwembadframe.
 const STARTZIN = "In ruim twee minuten: wat je met het OS doet, wie het bouwt en wat het kost.";
@@ -23,10 +24,10 @@ const DIRECT = [
 // 22 oktober 2026 (Marinus): "Crafture iets groter dan de rest van de logo's".
 const CRAFTURE = { naam: "Crafture", src: "/images/merken/CRAFTURE-LOGO.svg", w: 527, h: 707, maat: 2.1 };
 const VIA_CRAFTURE = [
-  { naam: "Universal", src: "/images/merken/UNIVERSAL-LOGO.svg", w: 128, h: 79, maat: 1.55 },
-  { naam: "Warner Bros.", src: "/images/merken/WARNER-BROS-LOGO.svg", w: 57, h: 80, maat: 1.3 },
+  { naam: "Universal", src: "/images/merken/UNIVERSAL-LOGO-WIT.svg", w: 128, h: 79, maat: 1.55 },
+  { naam: "Warner Bros.", src: "/images/merken/WARNER-BROS-KLEUR.svg", w: 57, h: 80, maat: 1.3 },
   { naam: "MOJO", src: "/images/merken/MOJO-LOGO.webp", w: 441, h: 120, maat: .8 },
-  { naam: "IMAX", src: "/images/merken/IMAX-LOGO.svg", w: 151, h: 33, maat: .7 },
+  { naam: "IMAX", src: "/images/merken/IMAX-LOGO-WIT.svg", w: 151, h: 33, maat: .7 },
   { naam: "Marvel", src: "/images/merken/MARVEL-LOGO.svg", w: 1000, h: 402, kleur: true, maat: .85 },
 ];
 // Optisch even hoog: vierkante merken iets hoger, brede woordmerken iets lager (zelfde aanpak als de Trusted by-balk in content.ts).
