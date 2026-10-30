@@ -956,11 +956,11 @@
   gap: 17px;
   margin-top: 25px;
 }
-/* 16 september 2026 (Marinus): de drie icoontjes in de merkkleuren, roze, blauw en geel. */
-.sn-site .h-footer-socials a { color: #f62961; transition: filter .16s ease, transform .16s ease; }
-.sn-site .h-footer-socials a:nth-child(2) { color: #00a3e0; }
-.sn-site .h-footer-socials a:nth-child(3) { color: #f7e644; }
-.sn-site .h-footer-socials a:hover { filter: brightness(1.15) drop-shadow(0 0 8px currentColor); transform: translateY(-1px); }
+/* 30 oktober 2026 (Marinus): "DEZE HOEFT NIET IN KLEUR OP MIJN SITE". De icoontjes zijn grijs en worden wit bij hover,
+   passend bij de zwarte site. Proef: scripts/proef-socials-wit.mjs. */
+.sn-site .h-footer-socials a { color: #a3a3a3; transition: color .16s ease, transform .16s ease; }
+.sn-site .h-footer-socials a:hover,
+.sn-site .h-footer-socials a:focus-visible { color: #fff; transform: translateY(-1px); }
 .h-footer-partner,
 .h-footer-platforms {
   text-align: center;
