@@ -99,6 +99,14 @@
 :root .sn-site .h-footer-erkend img[alt="Meta Business Partner"] { height: 18px; }
 :root .sn-site .h-footer-erkend b { display: inline-flex; align-items: center; gap: 8px; font-family: var(--v-mono); font-size: 12px; font-weight: 500; color: #fff; }
 :root .sn-site .h-footer-erkend svg { width: 20px; height: 20px; fill: #fff; }
+:root .sn-site .h-footer-erkend > .h-footer-erkend-partners { display: grid; justify-items: center; gap: 12px; margin-top: 8px; opacity: 1; }
+:root .sn-site .h-footer-erkend-partners > span { font-family: var(--v-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #6f7a83; }
+:root .sn-site .h-footer-erkend-partners > div { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px 28px; opacity: .55; transition: opacity .3s ease; }
+:root .sn-site .h-footer-erkend-partners > div:hover { opacity: .85; }
+:root .sn-site .h-footer-erkend-partners a { font-family: var(--v-mono); font-size: 12px; font-weight: 500; color: #fff; text-decoration: none; }
+:root .sn-site .h-footer-erkend-partners a:hover { text-decoration: underline; text-underline-offset: 3px; }
+:root .sn-site .h-footer-erkend-partners img { display: block; width: auto; height: 20px; max-width: 120px; object-fit: contain; filter: grayscale(1); background: none; }
+@media (max-width: 640px) { :root .sn-site .h-footer-erkend-partners a { flex-basis: 100%; text-align: center; } }
 :root .sn-site .h-final-belofte { margin: 4px auto 0; font-family: var(--v-mono); font-size: 12.5px; letter-spacing: .04em; color: #25d366; }
 /* Vier gezichten: de mensen achter elk onderdeel. */
 :root .sn-site .h-os-mensen { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
