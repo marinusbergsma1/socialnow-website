@@ -1,0 +1,12 @@
+{
+  "name": "socialnow-boeken",
+  "private": true,
+  "type": "module",
+  "description": "Eigen boekingspagina van SocialNow, gekoppeld aan Google Agenda",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "dev": "node scripts/dev.mjs",
+    "token": "node scripts/token.mjs"
+  }
+}
