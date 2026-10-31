@@ -100,6 +100,24 @@ export default function BrandFooter() {
                 Google Developers
               </b>
             </div>
+            {/* 31 oktober 2026 (Marinus): "Verder uncanny en Indexworld certificaten etc via partners vermelden." Hun keurmerken
+                staan hier als die van de partners, niet als die van SocialNow; de naam linkt naar hun partnerkaart op de homepage.
+                Claude, Sage en QuickBooks zijn partners van Indexworld en geen keurmerken, die staan alleen op de kaart.
+                Proef: scripts/proef-footer-partnerkeurmerken.mjs. */}
+            <div className="h-footer-erkend-partners">
+              <span>Via onze partners</span>
+              <div>
+                <Link to="/#sn-samen-kop" translate="no">Uncanny</Link>
+                <img src="/images/partners/samen/odoo.svg" alt="Odoo Silver Partner" loading="lazy" />
+                <img src="/images/partners/samen/shopify.svg" alt="Shopify Partners" loading="lazy" />
+                <img src="/images/partners/samen/salesforce.svg" alt="Salesforce ISV-partner" loading="lazy" />
+                <img src="/images/partners/samen/adobe.svg" alt="Adobe Certified Professional" loading="lazy" />
+              </div>
+              <div>
+                <Link to="/#sn-samen-kop" translate="no">Indexworld</Link>
+                <img src="/images/partners/samen/odoo-partner.webp" alt="Odoo-partner" loading="lazy" />
+              </div>
+            </div>
           </div>
           <p>SocialNow · Software, creatie en marketing. Amsterdam · KVK 77146301.</p>
           {/* 19 september 2026: er zijn zeven juridische documenten in plaats van twee. Ze staan
