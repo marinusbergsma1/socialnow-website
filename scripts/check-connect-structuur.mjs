@@ -29,7 +29,7 @@ for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   eis(["Eindverantwoordelijk", "Developers", "Vakgebieden"].every(k => w[k]), `laagnamen vertaald (${l})`);
 }
 if (process.argv.includes("--dist")) {
-  const html = fs.readFileSync("dist/nl/index.html", "utf8");
+  const html = fs.readFileSync("dist/nl/os-connect/index.html", "utf8");
   const s = html.indexOf('class="cx-org"'), blok = s < 0 ? "" : html.slice(s, html.indexOf("cx-onder", s));
   const namen = [...blok.matchAll(/<strong translate="no">([^<]+)<\/strong>/g)].map(m => m[1]);
   eis(namen.length === 30 && new Set(namen).size === namen.length, `gebouwde nl-homepage toont iedereen precies één keer (${namen.length})`);
