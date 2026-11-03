@@ -68,7 +68,7 @@ eis(BESPAAR.test(prijzen), '/diensten: "Bespaar 25%" zonder waartegenover');
 for (const t of TALEN) {
   const w = JSON.parse(lees(`proposal/i18n/${t}.json`));
   eis(Boolean(w[BETALING]) && /14/.test(w[BETALING]), `${t}.json: betaaltekst met 14 dagen niet vertaald`);
-  const sleutel = Object.keys(w).find((k) => BESPAAR.test(k) && k.startsWith("Je software is gratis."));
+  const sleutel = Object.keys(w).find((k) => BESPAAR.test(k) && k.startsWith("Groeit je team"));
   eis(Boolean(sleutel), `${t}.json: "Bespaar 25%"-tekst met uitleg niet vertaald`);
 }
 
