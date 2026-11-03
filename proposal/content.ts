@@ -47,6 +47,9 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   { name: "Nick van Keulen", role: "Head of Google Ads & Search", image: "Nick-VK.webp", linkedin: "https://www.linkedin.com/in/nick-van-keulen-nl/" },
   // 25 september 2026 (Marinus): nieuw teamlid.
   { name: "Elian Coellar", role: "Head of Private Partnerships", image: "Elian-Coellar-2026-09-26.webp" },
+  // 3 november 2026 (Marinus): "meer weg van de standaard sales en meer iedereen focus op Partnership. Fabiana mag wel Head
+  // of new Partnerships worden."
+  { name: "Fabiana Abauna", role: "Head of New Partnerships", image: "Fabiana-Abauna.webp", sinds: "2026-11-03" },
   // 28 september 2026 (Marinus): Sid, Steef en Michelle krijgen betalingen met AI erbij.
   // Sid komt van zijn eigen bedrijf Attesso (linkedin.com/company/attesso).
   {
@@ -103,7 +106,7 @@ export const expertGroepen = [
   { name: "Ads & search", members: ["Jos Hollenberg", "Nick van Keulen", "Sergio Jovovic"] },
   { name: "Video, photo & design", members: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Pepijn Bos", "Armando van Bruggen"] },
   { name: "UGC & social media", members: ["Isa Zoer", "Daniel Schotman"] },
-  { name: "Sales & partnerships", members: ["Marinus Bergsma", "Elian Coellar", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster", "Ruben Spyckerelle"] },
+  { name: "Partnerships", members: ["Marinus Bergsma", "Elian Coellar", "Fabiana Abauna", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster", "Ruben Spyckerelle"] },
 ];
 export const vindMensen = (names: string[]) => names.flatMap(name => {
   const person = people.find(p => p.name === name);

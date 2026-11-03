@@ -55,14 +55,14 @@ const NaamTeken = ({ person }: { person: Persoon }) => person.linkedin ? <NaamMe
 // 5 oktober 2026 (Marinus): de muur per functie, optie D (filterpillen). "zowel ik als Attesso en management moet behalve
 // management er nog bij ook in het onderverdelen terugkomen": het hele team staat hier, ook wie bovenaan al groot staat.
 const FUNCTIES: { functie: string; mensen: string[] }[] = [
-  // Marinus staat bij Sales & partnerships; Sid (Web Development & AI Payments) bij Web development.
+  // Marinus staat bij Partnerships (tot 3 nov 2026 Sales & partnerships); Sid (Web Development & AI Payments) bij Web development.
   { functie: "AI development", mensen: ["Gijsbert Westeneng", "Tristan Slobben", "Douwe Kramer"] },
   { functie: "Web development", mensen: ["Sid van Kalken", "Antony Soosaipillaj"] },
   { functie: "Finance & operations", mensen: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
   { functie: "Ads & search", mensen: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"] },
   { functie: "Video, photo & design", mensen: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Pepijn Bos", "Armando van Bruggen"] },
   { functie: "UGC & social media", mensen: ["Isa Zoer"] },
-  { functie: "Sales & partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Ruben Spyckerelle", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
+  { functie: "Partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Fabiana Abauna", "Ruben Spyckerelle", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
 ];
 
 // 6 oktober 2026 (Marinus): "Hier ook nog even iets van hierarchie", bij optie H3 "liever vierkantjes omdat iedereen een
@@ -70,9 +70,9 @@ const FUNCTIES: { functie: string; mensen: string[] }[] = [
 const LAGEN: [string, string[]][] = [
   ["Partner", ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer"]],
   ["Board", ["Michelle Yang", "Steven Goudsblom"]],
-  ["Head", ["Jos Hollenberg", "Nick van Keulen", "Carmel Boon", "Elian Coellar"]],
+  ["Head", ["Jos Hollenberg", "Nick van Keulen", "Carmel Boon", "Elian Coellar", "Fabiana Abauna"]],
   ["Specialist", ["Gijsbert Westeneng", "Tristan Slobben", "Isa Zoer", "Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
-  ["Sales & network", ["Ruben Spyckerelle", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
+  ["Partnerships", ["Ruben Spyckerelle", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
 ];
 
 function LaagTegel({ naam, laag }: { naam: string; laag: string }) {
