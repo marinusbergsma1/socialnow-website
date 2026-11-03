@@ -188,7 +188,9 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 {/* 19 oktober 2026 (Marinus): "Graag nooit 3 regels onder elkaar. Maximaal 2." De lettergrootte schaalt met de kolom en
                     met de lengte van de titel in de gekozen taal (--tekens), zodat hij in elke taal op twee regels past. */}
                 <h1 style={{ "--tekens": t("Een betrouwbare partner voor groei en cybersecurity.").length } as React.CSSProperties}>Een betrouwbare partner voor groei en cybersecurity.</h1>
-                <p className="pay-line">De software is gratis. Onze experts doen het echte werk.</p>
+                {/* 3 november 2026 (Marinus): "software gratis wil ik in ieder geval als eerste van de live website af" en "Meer iets van focus
+                    op doelgerichte totaaloplossingen met experts en Ai." */}
+                <p className="pay-line">Doelgerichte totaaloplossingen, met experts en AI.</p>
                 <ul className="bs-zeker">
                   {/* 18 oktober 2026 (Marinus): "Die punten eronderaan Gratis website en rebranding, veilig. Eigen beheer en keuzes." */}
                   {/* 22 oktober 2026 (Marinus): "Hier graag growth - security - en eigen beheer en keuzes is wel goed." */}

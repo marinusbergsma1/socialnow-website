@@ -411,7 +411,8 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
             ipv alleen software. Bij ons betaal je voor winst en expertise". Daarna: "Je betaalt voor onze expertise in jouw winstgevend maken." */}
         {/* Variant A "klein en rustig" (Marinus, 19 oktober 2026): wat gratis is klein erboven, waar je voor betaalt groot. */}
         <Kop className="prijs-kop-a">
-          <span className="prijs-kop-r1">Software, Studio, social media, boekhouding en AI agents gratis.</span>
+          {/* 3 november 2026 (Marinus): "software gratis wil ik in ieder geval als eerste van de live website af". */}
+          <span className="prijs-kop-r1">Doelgerichte totaaloplossingen, met experts en AI.</span>
           <em>Je betaalt voor onze expertise om jou winstgevend te maken.</em>
         </Kop>
         <p>Alle bedragen zijn exclusief btw.</p>
@@ -421,7 +422,7 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
         id="os"
         label="01 / Het OS"
         titel="Begin gratis. Betaal pas als je team groeit."
-        tekst="Je software is gratis. Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Bespaar 25% met een jaarabonnement ten opzichte van maandelijks betalen."
+        tekst="Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Bespaar 25% met een jaarabonnement ten opzichte van maandelijks betalen."
         pakketten={OS}
         maandelijks={maandelijks}
       >
