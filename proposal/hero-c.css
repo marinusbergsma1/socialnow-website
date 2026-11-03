@@ -437,7 +437,7 @@
 .sn-site .h-next-erps img { display: block; width: auto; max-width: 74px; }
 
 /* 6 oktober 2026 (Marinus): teamhiërarchie onder All. Iedereen een vierkant; Partners en Board als grotere bovenste rij,
-   daarna Heads, Specialists en Sales & network in dezelfde zeven kolommen. Plus de groei van de afgelopen week. */
+   daarna Heads, Specialists en Partnerships in dezelfde zeven kolommen. Plus de groei van de afgelopen week. */
 .sn-site .h-lagen-muur { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 16px 10px; color: #0b0f12; }
 .sn-site .h-lagen-muur > div { position: relative; }
 .sn-site .h-lagen-muur figure { margin: 0; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: #eef1ef; border: 1px solid #0b0f1214; }

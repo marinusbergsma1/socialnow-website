@@ -32,12 +32,12 @@ if (process.argv.includes("--dist")) {
   const html = fs.readFileSync("dist/nl/index.html", "utf8");
   const s = html.indexOf('class="cx-org"'), blok = s < 0 ? "" : html.slice(s, html.indexOf("cx-onder", s));
   const namen = [...blok.matchAll(/<strong translate="no">([^<]+)<\/strong>/g)].map(m => m[1]);
-  eis(namen.length === 30 && new Set(namen).size === namen.length, `gebouwde nl-homepage toont iedereen precies één keer (${namen.length})`);
+  eis(namen.length === 31 && new Set(namen).size === namen.length, `gebouwde nl-homepage toont iedereen precies één keer (${namen.length})`);
   eis(TOP.every((n, i) => namen[i] === n), "gebouwde pagina begint met de vier eindverantwoordelijken");
   eis(!html.includes('class="cx-raster"'), "gebouwde pagina heeft geen schuifrij meer");
   const fotos = [...blok.matchAll(/<img[^>]*?\ssrc="([^"?]+)/g)].map(m => m[1]);
   const kwijt = fotos.filter(f => !fs.existsSync(`dist${f}`));
-  eis(fotos.length === 30 && kwijt.length === 0, `elke kleine foto bestaat echt (${fotos.length} foto's${kwijt.length ? ", kwijt: " + kwijt.slice(0, 3).join(" ") : ""})`);
+  eis(fotos.length === 31 && kwijt.length === 0, `elke kleine foto bestaat echt (${fotos.length} foto's${kwijt.length ? ", kwijt: " + kwijt.slice(0, 3).join(" ") : ""})`);
 }
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");
 process.exit(fouten.length ? 1 : 0);
