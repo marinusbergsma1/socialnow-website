@@ -29,7 +29,7 @@ for (const t of TALEN) {
 }
 if (process.argv.includes("--dist")) {
   const tekst = f => fs.readFileSync(f, "utf8").replace(/<span class="sn-title-dot">\.<\/span>/g, ".");  // de titelpunt is een eigen span
-  const nl = tekst("dist/nl/index.html"), en = tekst("dist/index.html");
+  const nl = tekst("dist/nl/os-connect/index.html"), en = tekst("dist/os-connect/index.html");
   eis([KOP_IW, KOP_UN].every(k => nl.includes(k)), "gebouwde nl-pagina toont beide koppen");
   eis(Object.values(EN).every(k => en.includes(k)), "gebouwde en-pagina toont beide Engelse koppen");
   eis(Object.values(BALK).flat().every(l => en.includes(`/images/partners/samen/${l}`)), "gebouwde en-pagina toont alle partnerlogo's");

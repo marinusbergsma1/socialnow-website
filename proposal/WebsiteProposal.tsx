@@ -11,7 +11,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { CLAIM_URL } from "./os-entry";
 import { Action } from "./ui";
 import { useButtonMagnetism } from "./useButtonMagnetism";
-import { Home } from "./pages";
+import { Home, OsConnectLanding } from "./pages";
 // 30 september 2026 (Marinus: "WIL ECHT INSTANT LOADING"): elke pagina buiten de homepage is een eigen bestand dat pas
 // laadt als iemand die pagina opent (proposal/later.tsx). Het eerste script draagt alleen de header en de hero.
 import { OnderDeVouw, later } from "./later";
@@ -78,6 +78,7 @@ const nav = NAV_LINKS;
 // Pagina's buiten het menu houden hun eigen titel, ook als je ze rechtstreeks opent.
 const paginaTitels: Record<string, string> = {
   "/het-os": "Het OS",
+  "/os-connect": "SocialNow OS en Connect",
   "/blog": "Blog",
   "/contact": "Contact",
   "/audit": "Gratis Google Ads audit",
@@ -311,6 +312,7 @@ function ProposalShell() {
           <Route path="/" element={<Home />} />
           <Route path="/stijlen" element={<Navigate to="/" replace />} />
           <Route path="/het-os" element={<OsPage />} />
+          <Route path="/os-connect" element={<OsConnectLanding />} />
           <Route path="/projecten" element={<ProjectsPage />} />
           <Route path="/project/:slug" element={<ProjectPage />} />
           <Route path="/diensten" element={<ServicesPage />} />

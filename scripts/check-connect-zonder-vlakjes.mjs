@@ -11,7 +11,7 @@ eis(/HomeConnectBand\(\)\{return <div className="sn-choice" id="connect">/.test(
 const knop = kop.slice(kop.lastIndexOf("<a", kop.indexOf("<span>Bekijk Connect</span>")), kop.indexOf("<span>Bekijk Connect</span>"));
 eis(knop.includes('href="#connect"') && knop.includes('getElementById("connect")') && !knop.includes('href="/connect/"'), "Bekijk Connect springt naar het Connect-blok");
 if (process.argv.includes("--dist")) {
-  for (const f of ["dist/nl/index.html", "dist/index.html"]) {
+  for (const f of ["dist/nl/os-connect/index.html", "dist/os-connect/index.html"]) {
     const h = fs.readFileSync(f, "utf8");
     eis(!h.includes('class="cx-chips"') && h.includes('id="connect"') && /href="#connect"[^>]*>(<span>)?(Bekijk Connect|Explore Connect)/.test(h), `${f}: geen vlakjes, anker en knop naar #connect`);
   }

@@ -18,7 +18,7 @@ for (const t of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   eis(["Heb je een opdracht? Vraag hem aan bij Connect.", "Vraag een opdracht aan", "Opdracht aanvragen bij Connect"].every(k => w[k] && w[k] !== k), `${t}: opdrachtvak vertaald`);
 }
 if (process.argv.includes("--dist")) {
-  const en = fs.readFileSync("dist/index.html", "utf8"), nl = fs.readFileSync("dist/nl/index.html", "utf8");
+  const en = fs.readFileSync("dist/os-connect/index.html", "utf8"), nl = fs.readFileSync("dist/nl/os-connect/index.html", "utf8");
   eis(nl.includes("Vraag een opdracht aan") && en.includes("Request a project"), "gebouwde nl- en en-pagina tonen het opdrachtvak");
 }
 const url = process.argv.slice(2).find(a => a.startsWith("http"));

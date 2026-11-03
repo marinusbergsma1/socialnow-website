@@ -12,7 +12,7 @@ for (const f of readdirSync("proposal/i18n").filter(f => f.endsWith(".json") && 
   if (!t[NL]) fouten.push(`${f} mist de vertaling`);
 }
 if (process.argv.includes("--dist")) {
-  for (const [pad, zin] of [["dist/index.html", "Free for you and 2 team members."], ["dist/nl/index.html", NL]]) {
+  for (const [pad, zin] of [["dist/os-connect/index.html", "Free for you and 2 team members."], ["dist/nl/os-connect/index.html", NL]]) {
     if (!existsSync(pad)) { fouten.push(`${pad} ontbreekt`); continue; }
     const html = readFileSync(pad, "utf8");
     if (!html.includes(zin)) fouten.push(`${pad} mist "${zin}"`);

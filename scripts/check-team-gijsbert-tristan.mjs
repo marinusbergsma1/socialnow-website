@@ -14,8 +14,8 @@ for (const [naam, rol] of mensen) {
   for (const f of [`public/images/${stam}.webp`, ...[96, 160, 320, 480].map((m) => `public/images/klein/${stam}-${m}.webp`)]) if (!existsSync(f)) fouten.push(`${f} ontbreekt`);
   for (const k of [naam, rol]) if (!en[k]) fouten.push(`en.json mist ${k}`);
 }
-if (existsSync("dist/index.html")) {
-  const html = readFileSync("dist/index.html", "utf8");
+if (existsSync("dist/os-connect/index.html")) {
+  const html = readFileSync("dist/os-connect/index.html", "utf8");
   for (const [naam] of mensen) if (!html.includes(naam)) fouten.push(`${naam} niet in de gebouwde homepage`);
 }
 if (fouten.length) { console.error("ROOD\n" + fouten.join("\n")); process.exit(1); }
