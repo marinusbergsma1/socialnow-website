@@ -31,6 +31,7 @@ import { DATA_DOCUMENT, Marks, next } from "./PixelInfrastructure";
 import "./pixel-infrastructure.css";
 import { useLanguage } from "./i18n/context";
 import "./home-simple.css";
+import HomeLanding from "./HomeLanding";
 const Bereikt = later(() => import("./Bereikt").then(m => m.default));
 
 // 19 oktober 2026, avond (Marinus): "websites Technologie met een duidelijke rol en plug and play gedeelte in 1 bentogrid zodat
@@ -62,7 +63,9 @@ function HomeTechniek() {
   </Bento>;
 }
 
-export function Home() {
+// 3 november 2026 (Marinus): "Gooi niet weg dit mag als landingspagina voor het os en voor de connectlaag." De homepage tot
+// die dag staat nu op /os-connect; de nieuwe homepage is HomeLanding.tsx.
+export function OsConnectLanding() {
   useLanguage();
   return <div className="sn-simple-home">
     <section className="h-hero sn-approved-hero" id="home">
@@ -78,4 +81,9 @@ export function Home() {
     <OnderDeVouw ruimte={false}><Bereikt /></OnderDeVouw>
     {/* Het blok met de vier Milo-tegels is weg (Marinus, 19 oktober 2026: "dit gedeelte kan denk ik wel weg"); de onderdelen staan op /het-os. */}
   </div>;
+}
+
+export function Home() {
+  useLanguage();
+  return <HomeLanding />;
 }

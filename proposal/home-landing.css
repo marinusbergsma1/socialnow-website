@@ -1,0 +1,105 @@
+/* 3 november 2026 (Marinus): "alleen een grote titel en de video". De titel gaat daarom bewust boven de vaste kopmaat van
+   de site uit (:root .sn-site h1, max 36 px). */
+/* 3 november 2026: de homepage als landingspagina (HomeLanding.tsx). Puur zwart voor tech (site-helemaal-zwart), wit voor
+   mensen en partners (wit-mens-zwart-tech), dunne lijnen als scheiding, nooit negatieve letterafstand. */
+html:root .sn-site .hl{background:#000;color:#fff}
+html:root .sn-site .hl>svg.filters{position:absolute;width:0;height:0;overflow:hidden}
+html:root .sn-site .hl-wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}
+html:root .sn-site .hl h1{max-width:22ch;margin:0 auto;text-wrap:balance;font-size:clamp(34px,5.4vw,80px) !important;line-height:1.04;font-weight:700;text-align:center;color:#fff}
+html:root .sn-site .hl h2{margin:0;font-size:clamp(28px,3.6vw,50px) !important;line-height:1.1;font-weight:700;color:#fff;max-width:22ch}
+html:root .sn-site .hl-hero{padding:clamp(56px,9vw,120px) 0 clamp(48px,6vw,80px);text-align:center}
+html:root .sn-site .hl-onder{margin:22px auto 0;max-width:46ch;font-size:clamp(17px,1.6vw,21px);line-height:1.5;color:#b9c3cb}
+html:root .sn-site .hl-hero .hl-knoppen{justify-content:center;margin-top:30px}
+html:root .sn-site .hl-video{margin:clamp(36px,5vw,56px) auto 0;max-width:1040px;border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden;container-type:inline-size}
+html:root .sn-site .hl-route{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:28px}
+html:root .sn-site .hl-route a{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:#fff;font-size:15px;text-decoration:none;transition:border-color .2s}
+html:root .sn-site .hl-route a:is(:hover,:focus-visible){border-color:#25d366}
+html:root .sn-site .hl-nr{display:inline-grid;place-items:center;min-width:28px;height:28px;padding:0 6px;border-radius:999px;background:#25d366;color:#000;font-size:12px;font-weight:700;letter-spacing:.04em}
+
+html:root .sn-site .hl-knoppen{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+html:root .sn-site .hl .sn-pill.hl-pill-groen{background:#25d366 !important;color:#000 !important}
+html:root .sn-site .hl .sn-pill.hl-pill-groen .h-button-icon{background:#000 !important;color:#25d366 !important}
+
+html:root .sn-site .hl-stap{padding:clamp(64px,8vw,112px) 0;border-top:1px solid rgba(255,255,255,.12)}
+html:root .sn-site .hl-stapkop{display:grid;gap:16px;margin-bottom:clamp(28px,4vw,44px)}
+html:root .sn-site .hl-label{display:inline-flex;align-items:center;gap:10px;margin:0;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#b9c3cb}
+html:root .sn-site .hl-tekst{margin:0;max-width:58ch;font-size:clamp(17px,1.5vw,20px);line-height:1.55;color:#b9c3cb}
+
+/* Partners en Odoo: wit. */
+html:root .sn-site .hl-wit{background:#fff;color:#111;padding:clamp(64px,8vw,112px) 0}
+html:root .sn-site .hl-wit h2{color:#111}
+html:root .sn-site .hl-wit .hl-label,html:root .sn-site .hl-wit .hl-tekst{color:#4b5563}
+html:root .sn-site .hl-partnerlijst{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:0 0 clamp(28px,4vw,44px);padding:0;list-style:none;border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb}
+html:root .sn-site .hl-partnerlijst li{display:grid;gap:12px;align-content:start;padding:22px 20px;font-size:15px;line-height:1.45;color:#4b5563}
+html:root .sn-site .hl-partnerlijst li+li{border-left:1px solid #e5e7eb}
+html:root .sn-site .hl-partnerlogo{display:flex;align-items:center;height:34px}
+html:root .sn-site .hl-partnerlogo img{height:26px;width:auto;max-width:100%}
+html:root .sn-site .hl-partnerlogo .hl-logo-komen{height:30px;filter:invert(1)}
+html:root .sn-site .hl-logo-indexworld{display:block;height:28px;aspect-ratio:725/176;background:linear-gradient(90deg,#50269e 0 25%,#111 25%);-webkit-mask:url(/images/home-header/indexworld.png) left center/contain no-repeat;mask:url(/images/home-header/indexworld.png) left center/contain no-repeat}
+html:root .sn-site .hl-logo-attesso{font:500 20px/1 AttessoMono,ui-monospace,Menlo,monospace;color:#111}
+html:root .sn-site .hl-films{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+html:root .sn-site .hl-film{margin:0}
+html:root .sn-site .hl-film video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:16px;background:#111}
+html:root .sn-site .hl-film figcaption{margin-top:10px;font-size:14px;color:#4b5563}
+
+/* Stap 1: de websitedeck staat al in free-website.css; hier zonder eigen ruimte en zonder tweede kop. */
+html:root .sn-site .hl-websites{padding:0 !important;background:transparent !important}
+html:root .sn-site .hl-websites .sn-fw-showcase-head{display:none}
+
+/* Stap 2: stippenscène en experts. */
+html:root .sn-site .hl-scene{position:relative;height:clamp(260px,32vw,380px);border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden}
+html:root .sn-site .hl-scene canvas{display:block;width:100%;height:100%}
+html:root .sn-site .hl-bronnen{position:absolute;inset:0 auto 0 16px;margin:0;padding:0;list-style:none}
+html:root .sn-site .hl-bronnen li{position:absolute;left:0;translate:0 -50%;padding:4px 10px;border:1px solid var(--kleur);border-radius:999px;background:#000;font-size:12px;color:#fff;white-space:nowrap}
+html:root .sn-site .hl-scene-os{position:absolute;left:68%;bottom:14px;translate:-50% 0;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:#000;border:1px solid #25d366;font-size:14px;font-weight:600;color:#fff;white-space:nowrap}
+html:root .sn-site .hl-scene-os svg{color:#25d366}
+html:root .sn-site .hl-experts{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;margin:16px 0 0;padding:0;list-style:none}
+html:root .sn-site .hl-experts li{display:flex;gap:16px;align-items:flex-start;padding:20px;border-radius:18px;background:#fff;color:#111}
+html:root .sn-site .hl-experts img{flex:none;width:72px;height:72px;border-radius:14px;object-fit:cover}
+html:root .sn-site .hl-experts .hl-expert-eerst img{width:120px;height:120px}
+html:root .sn-site .hl-experts strong{display:block;font-size:18px;color:#111}
+html:root .sn-site .hl-rol{display:block;margin-top:2px;font-size:13px;color:#6b7280}
+html:root .sn-site .hl-experts p{margin:10px 0 0;font-size:15px;line-height:1.45;color:#374151}
+
+/* Stap 3: de twee lagen. */
+html:root .sn-site .hl-lagen{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+html:root .sn-site .hl-laag{display:grid;gap:16px;align-content:start;padding:28px;border:1px solid rgba(255,255,255,.12);border-radius:18px}
+html:root .sn-site .hl-laag>img{height:30px;width:auto;justify-self:start}
+html:root .sn-site .hl-laag-connect>img{filter:url(#connect-blue)}
+html:root .sn-site .hl-laag-connect{border-color:rgba(0,163,224,.45)}
+html:root .sn-site .hl-prijs{margin:0;font-size:17px;color:#b9c3cb}
+html:root .sn-site .hl-prijs strong{font-size:28px;color:#fff;margin-right:6px}
+html:root .sn-site .hl-laag ul{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+html:root .sn-site .hl-laag li{display:flex;align-items:center;gap:10px;font-size:16px;color:#fff}
+html:root .sn-site .hl-laag li svg{flex:none;color:#25d366}
+html:root .sn-site .hl-laag-connect li svg{color:#00a3e0}
+html:root .sn-site .hl-laag li b{margin-left:auto;font-weight:600}
+html:root .sn-site .hl-meer{display:inline-flex;align-items:center;gap:6px;color:#fff;font-size:15px}
+
+/* Slot. */
+html:root .sn-site .hl-slot{padding:clamp(72px,9vw,128px) 0;border-top:1px solid rgba(255,255,255,.12);text-align:center}
+html:root .sn-site .hl-slot h2{margin:0 auto 32px}
+html:root .sn-site .hl-keuzes{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:880px;margin:0 auto;text-align:left}
+html:root .sn-site .hl-keuze{position:relative;display:grid;gap:8px;padding:28px 64px 28px 28px;border:2px solid rgba(255,255,255,.12);border-radius:18px;color:#fff;text-decoration:none;transition:border-color .2s}
+html:root .sn-site .hl-keuze:first-child{border-color:#25d366}
+html:root .sn-site .hl-keuze:is(:hover,:focus-visible){border-color:#25d366}
+html:root .sn-site .hl-keuze strong{font-size:22px}
+html:root .sn-site .hl-keuze span{font-size:16px;color:#b9c3cb}
+html:root .sn-site .hl-keuze svg{position:absolute;right:24px;top:28px;color:#25d366}
+
+@media (max-width:900px){
+  html:root .sn-site .hl-partnerlijst{grid-template-columns:1fr 1fr}
+  html:root .sn-site .hl-partnerlijst li:nth-child(3){border-left:0}
+  html:root .sn-site .hl-partnerlijst li:nth-child(n+3){border-top:1px solid #e5e7eb}
+  html:root .sn-site .hl-experts,html:root .sn-site .hl-lagen,html:root .sn-site .hl-keuzes{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  /* 19 oktober 2026 (Marinus): "Graag nooit 3 regels onder elkaar. Maximaal 2." Op de telefoon dus kleiner. */
+  html:root .sn-site .hl h1{max-width:none;text-wrap:wrap;font-size:clamp(20px,6.2vw,30px) !important}
+  html:root .sn-site .hl-films{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px}
+  html:root .sn-site .hl-film{scroll-snap-align:start}
+  html:root .sn-site .hl-knoppen>*{flex:1 1 100%;justify-content:space-between}
+  html:root .sn-site .hl-experts .hl-expert-eerst img{width:88px;height:88px}
+  html:root .sn-site .hl-scene-os{left:auto;right:12px;translate:0;font-size:12px}
+  html:root .sn-site .hl-bronnen li{font-size:11px}
+}

@@ -23,6 +23,8 @@ const routeMeta = {
   // OS op maat zakelijk 'vanaf, prijs op aanvraag'; maandpakketten minimaal drie maanden.
   // 18 oktober 2026 (Marinus): geen bedragen meer in de metadata; prijzen pas na een account, /prijzen toont het aanbod.
   'het-os': {title: 'Het OS: de AI-gestuurde persoonlijke werkplek | SocialNow', description: 'De AI-gestuurde persoonlijke werkplek, met échte professionals en menselijk contact. WEBSITE → CONTENT → STUDIO. GRATIS tot 10 GB opslag. Hulppakketten met een custom OS en een gratis website, en tokens voor de Studio. Odoo is een optionele koppeling.'},
+  // 3 november 2026: de homepage tot die dag, nu de landingspagina voor het OS en de Connect-laag.
+  'os-connect': {title: 'SocialNow OS en Connect | SocialNow', description: 'Gratis je eigen OS voor jou en 2 teamleden, en echte experts die het werk doen in je eigen systeem. Een betrouwbare partner voor groei en cybersecurity.'},
   contact: {title: 'Contact: persoonlijk contact met het team | SocialNow', description: 'Bespreek je gratis OS, je OS op maat of een losse opdracht met Marinus en het team. Ben je Odoo-implementatiepartner? Praat met Michelle Yang.'},
   diensten: {title: 'Diensten: van merk tot techniek | SocialNow', description: 'Websites, branding, content, advertenties en development. Human creativity, powered by AI technology.'},
   projecten: {title: 'Uitgelicht werk en cases | SocialNow', description: 'Bekijk websites, video’s en campagnes van SocialNow. Werk voor onder meer RAVEG, Universal, Sony en AZ.'},
@@ -55,6 +57,7 @@ const routeMeta = {
 // Zichtbare kruimel-labels per route (voor de BreadcrumbList). Vul aan waar nodig.
 const crumbLabels = {
   'het-os': 'Het OS',
+  'os-connect': 'OS en Connect',
   contact: 'Contact',
   diensten: 'Diensten',
   projecten: 'Projecten',
