@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { languagePrefix, useLanguage } from "./i18n/context";
 import { aanvraagWhatsApp, heeftWhatsApp, whatsappLink } from "./aanvragen";
+import "./header-algemeen.css";
+import "./home-enthousiast.css";
 import "./gratis-website-wit.css";
 
 // 28 september 2026: de beurs is voorbij. De gratis demowebsite blijft (zie /prijzen), zonder stand C21 en live bouwen.
@@ -59,14 +61,38 @@ export default function GratisWebsite() {
     window.location.href = aanvraagWhatsApp("website", language, { voornaam: a.voornaam, achternaam: a.achternaam, bedrijf: a.bedrijf, email: a.email, mobiel: a.mobiel, website: a.website, voorbeeld, wat: a.wat, nietgoed });
   };
 
-  return <div className="gw2"><div className="gw2-vel">
-    <p className="gw2-label"><i />Website-actie</p>
-    <h1>Wij maken jouw website, gratis<span className="gw2-punt">.</span></h1>
-    <p className="gw2-intro">Vijf korte vragen. Wij lezen je antwoorden zelf en maken een demo die echt bij je past. Gratis en zonder verplichting.</p>
-    <a className="gw2-steef" href={whatsappLink(t("Hoi Steef, ik heb een vraag over de gratis website."))} target="_blank" rel="noopener noreferrer">
-      <img src="/images/Steef-Komen.webp" alt="" width="40" height="40" /><span><strong translate="no">Steef Komen</strong><small>Liever even praten? Stuur Steef een bericht.</small></span><ArrowUpRight size={16} aria-hidden="true" />
-    </a>
-
+  const naarStart = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const doel = document.getElementById("onboarding");
+    if (!doel) return;
+    e.preventDefault();
+    doel.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  // 4 november 2026 (Marinus): "Bij website Actie moet gewoon een hele cleane onboarding komen met nog een zwarte banner met de video
+  // van mij en in 1 header net als de main nu mooi is gedaan waar ik zoals bij de vorige veiligheidsvideo vertel over het belang van
+  // een goeie website samen met het Binance geval. Daaronder gewoon de onboarding." Een video met het Binance-verhaal bestaat nog
+  // niet; tot die er is, staat hier de veiligheidsvideo van /security (Marinus aan het woord, public/security/film/security-9x16.mp4).
+  return <>
+    <section className="sn-alg gw2-kop" aria-labelledby="gw2-kop">
+      <div className="sn-alg-wrap">
+        <div className="sn-alg-tekst">
+          <p className="sn-alg-label"><i />Website-actie</p>
+          <h1 id="gw2-kop">Wij maken jouw website, gratis<span className="sn-alg-punt">.</span></h1>
+          <p className="sn-alg-uitleg"><strong>Een goede website is ook een veilige website.</strong> Vijf korte vragen. Wij lezen je antwoorden zelf en maken een demo die echt bij je past. Gratis en zonder verplichting.</p>
+          <div className="sn-alg-acties">
+            <a className="sn-pill" href="#onboarding" onClick={naarStart}><span>Begin met vraag 1</span><ArrowUpRight size={17} aria-hidden="true" /></a>
+          </div>
+          <a className="gw2-steef" href={whatsappLink(t("Hoi Steef, ik heb een vraag over de gratis website."))} target="_blank" rel="noopener noreferrer">
+            <img src="/images/Steef-Komen.webp" alt="" width="40" height="40" /><span><strong translate="no">Steef Komen</strong><small>Liever even praten? Stuur Steef een bericht.</small></span><ArrowUpRight size={16} aria-hidden="true" />
+          </a>
+        </div>
+        <figure className="sn-blij-film gw2-film">
+          <video controls playsInline preload="none" poster="/security/film/poster-9x16.jpg" aria-label="Marinus over het belang van een veilige website">
+            <source src="/security/film/security-9x16.mp4" type="video/mp4" />
+          </video>
+        </figure>
+      </div>
+    </section>
+    <div className="gw2" id="onboarding"><div className="gw2-vel">
     <div className="gw2-voortgang" aria-hidden="true">{STAPPEN.map((_, i) => <span key={i} className={i <= stap ? "aan" : ""} />)}</div>
 
     <form className="gw2-kaart" onSubmit={verder} noValidate>
@@ -123,5 +149,6 @@ export default function GratisWebsite() {
       </div>
       <p className="gw2-bewaard"><i />Automatisch bewaard</p>
     </form>
-  </div></div>;
+  </div></div>
+  </>;
 }
