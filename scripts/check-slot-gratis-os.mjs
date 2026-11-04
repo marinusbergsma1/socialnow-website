@@ -19,7 +19,9 @@ eis(["Bekijk de pakketten", "Meer nodig? Kies later Business of Enterprise."].ev
 if (process.argv.includes("--dist")) {
   // Het slotblok staat in de footer en wordt in de browser opgebouwd, dus de proef leest de gebouwde scripts.
   const js = fs.readdirSync("dist/assets").filter(f => f.endsWith(".js") && !f.startsWith("_sn-woordenboek")).map(f => fs.readFileSync(`dist/assets/${f}`, "utf8")).join("\n");
-  eis(!js.includes("schrijven we niets af") && js.includes("Meer nodig? Kies later Business of Enterprise.") && js.includes("sn-slot-start"), "gebouwde site heeft het nieuwe slotblok en niet de oude zin");
+  // 4 november 2026 (Marinus): het slot op de homepage werd contactgegevens (ContactSlot.tsx) en het grote slot op de andere pagina's
+  // mocht weg ("Deze mag ook weg."). Closing staat dan niet meer in de bundel; de oude zin mag nog steeds nooit terugkomen.
+  eis(!js.includes("schrijven we niets af") && ((js.includes("Meer nodig? Kies later Business of Enterprise.") && js.includes("sn-slot-start")) || js.includes("sn-contactslot")), "gebouwde site heeft het nieuwe slot (of de contactgegevens) en niet de oude zin");
 }
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");
 process.exit(fouten.length ? 1 : 0);
