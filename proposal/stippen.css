@@ -54,3 +54,9 @@
 
 /* Basis en gekleurde stippen delen na canvasinitialisatie één raster. */
 :root.sn-stipveld-ready body { background-image: none !important; }
+
+/* 4 november 2026 (Marinus): "Verder dottet pattern weer zichtbaar maken." Op de homepage dekten nog twee vlakken het raster af:
+   de zwarte Connect-band (doorzichtig, net als de header) en het witte teamblok van Connect. Dat blijft wit (wit = mens), maar
+   krijgt hetzelfde 32-px-raster in lichtgrijs, zoals het witte teamblok (home-team.css). */
+:root .sn-site .sn-choice .sn-team-product { background: transparent !important; }
+:root .sn-site .cx-connect { background-color: #fff; background-image: radial-gradient(circle at 16px 16px, #cdd1d5 1px, transparent 1.5px); background-size: 32px 32px; }

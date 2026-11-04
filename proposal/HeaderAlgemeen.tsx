@@ -24,8 +24,9 @@ const KEURMERKEN = [
 const STAPPEN = ["Website en branding", "Systemen en operations", "Marketing en sales", "Finance"];
 
 // 4 november 2026 (Marinus): "Deze graag nog erbij. en een knop bekijk de video." Dus de Trusted by-balk uit de oude header
-// (zelfde merken en volgorde als het startbeeld in ExplainerPlayer.tsx) en een knop die de SocialNow-film in een venster afspeelt.
-const FILM = "/video/os/socialnow-os-explainer.mp4?v=20261021-os04";
+// (zelfde merken en volgorde als het startbeeld in ExplainerPlayer.tsx) en een knop die een film in een venster afspeelt.
+// Later die dag: "de video van de Odoo Experience laten zien". De aftermovie is staand (720 x 1280), het venster dus ook.
+const FILM = "/video/odoo-experience/odoo-experience.mp4";
 
 export default function HeaderAlgemeen() {
   const venster = useRef<HTMLDialogElement>(null);
@@ -74,9 +75,9 @@ export default function HeaderAlgemeen() {
           <span className="sn-alg-groep">{merk(CRAFTURE)}<i className="sn-alg-streep" aria-hidden="true" />{VIA_CRAFTURE.map(merk)}</span>
         </div>
       </div>
-      <dialog className="sn-alg-venster" ref={venster} aria-label="SocialNow-film" onClose={() => film.current?.pause()} onClick={e => { if (e.target === venster.current) sluit(); }}>
+      <dialog className="sn-alg-venster" ref={venster} aria-label="Aftermovie Odoo Experience 2026" onClose={() => film.current?.pause()} onClick={e => { if (e.target === venster.current) sluit(); }}>
         <button type="button" className="sn-alg-sluit" onClick={sluit} aria-label="Sluit de film"><X size={20} aria-hidden="true" /></button>
-        <video ref={film} src={FILM} poster="/video/os/socialnow-os-explainer-poster.jpg?v=20261021-os04" controls playsInline preload="none" />
+        <video ref={film} src={FILM} poster="/video/odoo-experience/odoo-experience.jpg" controls playsInline preload="none" />
       </dialog>
     </section>
   );

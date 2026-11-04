@@ -52,9 +52,14 @@ html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px
 @media(max-width:700px){.sn-alg-trusted{--merk-h:22px}.sn-alg-groep+.sn-alg-groep{padding-left:0;border-left:0}.sn-alg-streep{display:none}}
 
 /* Filmvenster. */
-.sn-alg-venster{width:min(1100px,94vw);padding:0;border:1px solid var(--a-lijn);border-radius:16px;background:#000;overflow:visible}
+.sn-alg-venster{width:min(420px,90vw,calc(86vh * 9 / 16));padding:0;border:1px solid var(--a-lijn);border-radius:16px;background:#000;overflow:visible}
 .sn-alg-venster::backdrop{background:#000c}
-.sn-alg-venster video{display:block;width:100%;aspect-ratio:16/9;border-radius:16px;background:#000}
+.sn-alg-venster video{display:block;width:100%;aspect-ratio:9/16;border-radius:16px;background:#000}
 .sn-alg-sluit{position:absolute;right:-12px;top:-12px;z-index:1;display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--a-lijn);border-radius:50%;background:#0b0f12;color:#fff;cursor:pointer}
 .sn-alg-sluit:focus-visible{outline:2px solid #fff;outline-offset:2px}
 
+
+/* 4 november 2026 (Marinus): "de header afbeelding een langzame grow geven". Heel traag inzoomen en terug, niet bij reduced motion. */
+@keyframes sn-alg-grow{from{transform:scale(1)}to{transform:scale(1.08)}}
+.sn-alg-foto img{transform-origin:50% 60%;animation:sn-alg-grow 24s ease-in-out infinite alternate}
+@media(prefers-reduced-motion:reduce){.sn-alg-foto img{animation:none}}
