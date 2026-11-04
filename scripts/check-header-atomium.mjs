@@ -59,6 +59,11 @@ eis(/\.sn-team-product \{ background: transparent !important; \}/.test(stip) && 
 // mag Partners@socialnow.nl zijn en Ben Odoo@socialnow.nl. Zonder gesprek inplannen, ze kunnen wel gewoon een mail sturen of bellen."
 eis([["Marinus Bergsma", "info@socialnow.nl"], ["Steef Komen", "finance@socialnow.nl"], ["Michelle Yang", "partners@socialnow.nl"], ["Ben Sterckx", "odoo@socialnow.nl"]].every(([n, m]) => slot.includes(`naam: "${n}", mail: "${m}"`)) && slot.includes('tel: "+31637404577"') && slot.includes("href={`tel:${c.tel}`}"), "contacttegels: juiste adressen, 06-nummer van Marinus, bellen en mailen");
 eis(kop.includes('href="#contact"') && !kop.includes("openPlanCall") && slot.includes('id="contact"') && !fs.existsSync("proposal/GesprekPaneel.tsx"), "header: Neem contact op springt naar de tegels, geen gesprek inplannen");
+// "Maak dit zakelijker" (contacttegels) en "Lijn dit in het midden uit" (hoofdmenu).
+const ccss = lees("proposal/contact-slot.css");
+eis(/\.sn-contactslot li\{[^}]*align-items:flex-start/.test(ccss) && /\.sn-contactslot li img\{[^}]*grayscale\(1\)/.test(ccss) && /min-height:calc\(2em \* 1\.35\)/.test(ccss) && !/text-decoration-thickness:2px/.test(ccss), "contacttegels zakelijk: bovenaan uitgelijnd, zwart-wit vierkant, links op één hoogte, geen dikke groene streep");
+const menu = lees("proposal/hoofdmenu.css");
+eis(/@media \(min-width:1280px\)\{[^@]*\.h-desktop-nav\{position:absolute;left:50%;top:50%;transform:translate\(-50%,-50%\)/.test(menu) && /\.h-language-current\{line-height:1;display:inline-flex;align-items:center\}/.test(menu), "hoofdmenu in het midden van de header, items en taalknop op één middenlijn");
 // Over het grote slot op de andere pagina's: "Deze mag ook weg."
 eis(!footer.includes("<Closing"), "footer: geen groot slot met Milo's meer");
 const tech = lees("proposal/concept-tech.css");

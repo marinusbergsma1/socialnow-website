@@ -69,3 +69,12 @@
 :root .sn-site .h-mobile-nav a.h-security-mobiel{justify-content:flex-start;gap:10px}
 :root .sn-site .h-mobile-nav a.h-security-mobiel>svg:first-child{flex:none;color:#25d366}
 :root .sn-site .h-mobile-nav a.h-security-mobiel>svg:last-child{margin-left:auto}
+
+/* 4 november 2026 (Marinus): "Lijn dit in het midden uit". Vanaf 1280 px staat de menugroep precies in het midden van de header;
+   logo links, taalknop en inlogpil rechts. Alle items en de taalknop krijgen dezelfde regelhoogte, zodat ze op één middenlijn staan. */
+@media (min-width:1280px){
+  :root .sn-site .h-header .h-nav{position:relative}
+  :root .sn-site .h-header .h-desktop-nav{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;align-items:center}
+  :root .sn-site .h-header .h-desktop-nav+*{margin-left:auto}
+}
+:root .sn-site .h-desktop-nav>a,:root .sn-site .h-desktop-nav .h-producten-knop,:root .sn-site .h-language-current{line-height:1;display:inline-flex;align-items:center}
