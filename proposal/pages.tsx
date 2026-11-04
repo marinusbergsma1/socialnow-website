@@ -17,8 +17,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { OnderDeVouw, later } from "./later";
 import { HomeConnectBand } from "./HomeHeader";
-// 18 oktober 2026: partners en veiligheidsdocumenten direct onder de header, zie SamenEnVeilig.tsx.
-import SamenEnVeilig from "./SamenEnVeilig";
+// 18 oktober 2026: partners en veiligheidsdocumenten stonden direct onder de header; sinds 4 november 2026 in BrandFooter.
 // 18 oktober 2026 (Marinus): "1 VERSIE DIE IK AANGAF WACHT MET AB TESTEN". Dus geen A/B-test meer: variant B
 // (HeaderBestaand) is de header in elke taal. De test zelf (HomeHeaderAB.tsx, server/ab.mjs) blijft staan voor later.
 import HeaderBestaand from "./HeaderBestaand";
@@ -67,7 +66,8 @@ export function Home() {
   return <div className="sn-simple-home">
     <section className="h-hero sn-approved-hero" id="home">
       <HeaderBestaand meet={() => {}} />
-      <SamenEnVeilig />
+      {/* 4 november 2026 (Marinus): "Dit onderdeel moet verwerkt worden in de footer [...] en SocialNow connect gelijk onder de header."
+          Groei en cybersecurity, training, documenten en Samen bouwen staan nu in BrandFooter. */}
       <HomeConnectBand />
     </section>
     <ConnectExperts />
