@@ -40,11 +40,14 @@ eis(/home \? <ContactSlot \/> : <Closing \/>/.test(footer) && ["Marinus Bergsma"
 // "Ik wil graag een Explainers slider met alle verschillende explainer video's." en "Animations and explainers doe maar dan kunnen
 // ze er allemaal gewoon in."
 const slider = lees("proposal/ExplainerSlider.tsx");
-// Later: "Doe hier maar gewoon 1 slider van groot met de mooiste klantwerk animaties". See it in motion gaat daarin op.
-const films = [...slider.matchAll(/src: "([^"?]+)/g)].map((m) => m[1]);
-const lokaal = films.filter((f) => f.startsWith("/"));
-eis(lees("proposal/pages.tsx").includes("<ExplainerSlider") && !lees("proposal/pages.tsx").includes("<ShowcaseFilms") && films.length >= 8 && lokaal.every((f) => fs.existsSync(`public${f}`)), `homepage: één slider met klantwerk (${films.length} films, elk lokaal bestand bestaat), See it in motion niet apart`);
-eis(!/\/video\/(os|connect)\//.test(slider) && /\.sn-explainers-rij>li\{flex:0 0 clamp\(280px,72vw,920px\)/.test(lees("proposal/explainer-slider.css")), "klantwerk-slider: alleen klantwerk, grote tegels");
+// Later: "Doe hier maar gewoon 1 slider van groot met de mooiste klantwerk animaties", daarna over de rijen met beelden "Die
+// pijltjes hier mogen allemaal weg en moet gewoon te sliden zijn op mobiel ook." en "voeg anders die video's hier ook maar aan toe".
+const media = lees("proposal/MediaSliders.tsx");
+const klantwerk = media.slice(media.indexOf("export const klantwerkFilms"), media.indexOf("];", media.indexOf("export const klantwerkFilms")));
+const films = [...klantwerk.matchAll(/src: "([^"?]+)/g)].map((m) => m[1]);
+eis(films.length >= 8 && films.filter((f) => f.startsWith("/")).every((f) => fs.existsSync(`public${f}`)) && /kort \? mengen\(portfolioImages\.slice\(0, 5\), klantwerkFilms/.test(media), `homepage: klantwerk-films (${films.length}) lopen mee in de rijen van Branding en campagnes`);
+eis(!media.includes("h-rail-arrows") && !media.includes("ChevronLeft") && /touch-action: pan-x/.test(lees("proposal/experience.css")), "rijen zonder pijlen, slepen en vegen werkt");
+eis(!lees("proposal/pages.tsx").includes("<ExplainerSlider") && !lees("proposal/pages.tsx").includes("<ShowcaseFilms"), "geen aparte filmslider en geen See it in motion op de homepage");
 // "de header afbeelding een langzame grow geven en de video van de Odoo Experience laten zien."
 const hcss = lees("proposal/header-algemeen.css");
 eis(/\.sn-alg-foto img\{[^}]*animation:sn-alg-grow/.test(hcss) && /prefers-reduced-motion:reduce\)\{\.sn-alg-foto img\{animation:none/.test(hcss), "header: foto zoomt langzaam (niet bij reduced motion)");
@@ -90,7 +93,7 @@ eis(cx.indexOf('className="cx-org"') > 0 && !cx.includes("cx-voorbeelden") && !c
 const acties = header.slice(header.indexOf('className="sn-alg-acties"'), header.indexOf("</div>", header.indexOf('className="sn-alg-acties"')));
 eis((acties.match(/className="sn-pill"/g) || []).length === 2 && !acties.includes("sn-alg-knop"), "headerknoppen hebben dezelfde stijl als Inloggen gratis OS (sn-pill)");
 
-const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "Klantwerk in beweging.", "Van één grachtenpand naar heel Amsterdam"];
+const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin"];
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(lees(`proposal/i18n/${l}.json`) || "{}");
   const mist = nieuw.filter((k) => !w[k] || /[–—]/.test(w[k]));

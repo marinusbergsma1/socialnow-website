@@ -1,6 +1,6 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { X } from "lucide-react";
 import { AmbientVideo, MotionControl, useInView, useMotion } from "./motion";
 import { Heading } from "./ui";
 
@@ -63,6 +63,20 @@ export const portfolioImages: MediaItem[] = [
   },
 ];
 // De oorspronkelijke collectie uit ShortContent.tsx; geen vervangende stockvideo's.
+// 4 november 2026 (Marinus): eerst één grote slider met "de mooiste klantwerk animaties", daarna over de rijen met beelden
+// "voeg anders die video's hier ook maar aan toe". Op de homepage lopen deze films dus mee in de rijen van Branding en campagnes.
+export const klantwerkFilms: MediaItem[] = [
+  { title: "BetCity · Branded motion", src: "https://storage.googleapis.com/video-slider/FEATURED/BetCity-branded%20bumper%20ad%20-%20.mp4", kind: "video" },
+  { title: "Hajenius · Het pand aan het Rokin", src: "/video/hajenius/hajenius-pand.mp4", poster: "/video/hajenius/hajenius-pand-poster.webp", kind: "video" },
+  { title: "VASTIQ · Van één grachtenpand naar heel Amsterdam", src: "/video/vastiq/vastiq-uitzoom.mp4", poster: "/video/vastiq/vastiq-uitzoom-poster.webp", kind: "video" },
+  { title: "VDZ Brigade · Vier specialisten onder één dak", src: "/video/vdz/vdz-animatie.mp4", poster: "/video/vdz/vdz-animatie-poster.webp", kind: "video" },
+  { title: "Il Gordo · Headerfilm", src: "/video/ilgordo/ilgordo-header.mp4", poster: "/video/ilgordo/ilgordo-header-poster.webp", kind: "video" },
+  { title: "Next Gen Webdesign", src: "/videos/nextgen-webdesign.mp4", kind: "video" },
+  { title: "VASTIQ · Inzoomen op een grachtenpand", src: "/video/vastiq/vastiq-inzoom.mp4", poster: "/video/vastiq/vastiq-inzoom-poster.webp", kind: "video" },
+  { title: "VDZ Brigade · Het pand", src: "/video/vdz/vdz-house.mp4", poster: "/video/vdz/vdz-house-poster.jpg", kind: "video" },
+];
+// Beelden en films om en om, zodat elke rij beweegt.
+const mengen = (beelden: MediaItem[], films: MediaItem[]) => beelden.flatMap((b, i) => (films[i] ? [b, films[i]] : [b])).concat(films.slice(beelden.length));
 export const portfolioVideos: MediaItem[] = [
   ["HD/freaky_2_years.mp4", "Freaky · 2 Years"],
   [
@@ -251,15 +265,6 @@ function MediaRail({
       document.removeEventListener("visibilitychange", sync);
     };
   }, [enabled, visible, hover, focused, item, reverse, videoRail]);
-  const move = (direction: number) => {
-    interaction.current = performance.now() + 6000;
-    const step =
-      group.current?.firstElementChild?.getBoundingClientRect().width || 300;
-    ref.current?.scrollBy({
-      left: direction * (step + 20),
-      behavior: enabled ? "smooth" : "instant",
-    });
-  };
   return (
     <div
       className={`h-media-rail${videoRail ? " is-video" : ""}`}
@@ -366,27 +371,9 @@ function MediaRail({
           </div>
         ))}
       </div>
-      <div className="h-rail-controls h-wrap">
-        <span>Sleep of veeg om te ontdekken</span>
-        <div className="h-rail-arrows">
-          <button
-            type="button"
-            onClick={() => move(-1)}
-            aria-label={`Vorige beelden: ${label}`}
-            aria-controls={id}
-          >
-            <ChevronLeft size={18} />
-          </button>
-          <button
-            type="button"
-            onClick={() => move(1)}
-            aria-label={`Volgende beelden: ${label}`}
-            aria-controls={id}
-          >
-            <ChevronRight size={18} />
-          </button>
-        </div>
-      </div>
+      {/* 4 november 2026 (Marinus): "Die pijltjes hier mogen allemaal weg en moet gewoon te sliden zijn op mobiel ook." Geen
+          pijlen meer: slepen met de muis, vegen op de telefoon (de rij scrolt zelf, touch-action pan-x). */}
+      <div className="h-rail-controls h-wrap"><span>Sleep of veeg om te ontdekken</span></div>
       <MediaDialog item={item} close={() => setItem(null)} />
     </div>
   );
@@ -436,11 +423,11 @@ export function ImageSliders({ kort = false }: { kort?: boolean }) {
         </Heading>
       </div>
       <MediaRail
-        items={portfolioImages.slice(0, 5)}
+        items={kort ? mengen(portfolioImages.slice(0, 5), klantwerkFilms.slice(0, 4)) : portfolioImages.slice(0, 5)}
         label="Portfolio bovenste rij"
       />
       <MediaRail
-        items={portfolioImages.slice(5)}
+        items={kort ? mengen(portfolioImages.slice(5), klantwerkFilms.slice(4)) : portfolioImages.slice(5)}
         reverse
         label="Portfolio onderste rij"
       />

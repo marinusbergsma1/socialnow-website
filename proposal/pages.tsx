@@ -22,7 +22,6 @@ import { HomeConnectBand } from "./HomeHeader";
 import HeaderAlgemeen from "./HeaderAlgemeen";
 import FreeWebsite from "./FreeWebsite";
 import { ImageSliders, VideoSlider } from "./MediaSliders";
-import ExplainerSlider from "./ExplainerSlider";
 import { Bento, Tegel } from "./Bento";
 import { TextLink } from "./ui";
 import { ArrowUpRight, Download } from "lucide-react";
@@ -76,9 +75,9 @@ export function Home() {
         "Net als hier maar kortere titels." Dezelfde rijen als op /projecten, met korte koppen. */}
     <ImageSliders kort />
     <VideoSlider kort />
-    {/* 4 november 2026 (Marinus): "Doe hier maar gewoon 1 slider van groot met de mooiste klantwerk animaties". See it in motion
-        (ShowcaseFilms) staat daarom alleen nog op /projecten. */}
-    <ExplainerSlider />
+    {/* 4 november 2026 (Marinus): eerst één grote slider met klantwerk-animaties, daarna "voeg anders die video's hier ook maar aan
+        toe": de films lopen nu mee in de rijen van Branding en campagnes (MediaSliders.tsx, klantwerkFilms). See it in motion staat
+        alleen nog op /projecten. */}
     {/* 19 oktober 2026, avond (Marinus): na Connect de websites, dan technologie en plug and play in één bentogrid, dan resultaten. */}
     <HomeTechniek />
 
