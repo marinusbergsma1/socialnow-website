@@ -1,5 +1,6 @@
 /* HeaderAlgemeen.tsx, concept 4 november 2026: algemene kop met Odoo en ERP voorop. Alles onder .sn-alg. */
-.sn-alg{--a-groen:#25d366;--a-lijn:#ffffff1a;--a-grijs:#8b9691;--a-mono:var(--v-mono,ui-monospace,Menlo,monospace);background:#000;border-bottom:1px solid var(--a-lijn)}
+/* 4 november 2026 (Marinus): "ik wil alleen niet af van de stippenachtergrond." Dus geen eigen zwart vlak: het 32-px-stippenraster van de site loopt door. */
+.sn-alg{--a-groen:#25d366;--a-lijn:#ffffff1a;--a-grijs:#8b9691;--a-mono:var(--v-mono,ui-monospace,Menlo,monospace);background:transparent;border-bottom:1px solid var(--a-lijn)}
 .sn-alg-wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,4vw,64px);align-items:center;max-width:1320px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(16px,4vw,48px) clamp(36px,5vw,72px)}
 .sn-alg-wrap>*{min-width:0}
 @media(max-width:960px){.sn-alg-wrap{grid-template-columns:1fr}}
