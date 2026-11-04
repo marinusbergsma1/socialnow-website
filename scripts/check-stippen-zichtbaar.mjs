@@ -21,9 +21,15 @@ const regel = css.match(/:root \.sn-site :is\(([^)]*)\) \{ background-color: tra
 eis(!!regel && DOORZICHTIG.every((k) => regel[1].includes(k)), `donkere vlakken laten het raster door (${DOORZICHTIG.join(", ")})`);
 eis(/\.h-producten-menu \{[^}]*background-image: radial-gradient\(circle at 16px 16px, rgba\(255, 255, 255, \.26\)[^}]*background-size: 32px 32px/.test(css), "uitklapmenu's: zwart met hetzelfde raster erin");
 
+// "Dit ook weg ik wil die oude kWh site niet meer zien." Geen beeld van de oude kWh Garant-site op de homepage of in de onboarding.
+const zichtbaar = ["proposal/HomeEnthousiast.tsx", "proposal/GratisWebsite.tsx"].map((f) => fs.readFileSync(f, "utf8")).join("\n");
+eis(!/kwhgarant|cases\/kwh/.test(zichtbaar), "geen beeld van de oude kWh Garant-site op de homepage en in de onboarding");
+
 if (process.argv.includes("--dist")) {
   const assets = fs.readdirSync("dist/assets").filter((f) => f.endsWith(".css")).map((f) => fs.readFileSync(`dist/assets/${f}`, "utf8")).join("\n");
   eis(/rgba\(255,\s*255,\s*255,\s*\.26\)\s*1\.25px/.test(assets), "gebouwde css bevat het duidelijke raster");
+  const home = fs.readFileSync("dist/nl/index.html", "utf8");
+  eis(!/kwhgarant/.test(home), "gebouwde homepage zonder het oude kWh-beeld");
 }
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");
 process.exit(fouten.length ? 1 : 0);
