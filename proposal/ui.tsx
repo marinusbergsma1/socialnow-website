@@ -10,7 +10,8 @@ import {
   X,
   MessageCircle,
 } from "lucide-react";
-import { agents, faqs, logos, people } from "./content";
+import { agents, faqs, people } from "./content";
+import { CRAFTURE, DIRECT, VIA_CRAFTURE } from "./ExplainerPlayer";
 import type { Language } from "./i18n/context";
 import TeamTrust from "./TeamTrust";
 import { NaamMetLinkedIn } from "./LinkedInMark";
@@ -287,11 +288,13 @@ export function TeamGrid({ short = false, members = people }: { short?: boolean;
 export function ClientLogos({ kort = false }: { kort?: boolean }) {
   // 25 september 2026 (Marinus): de merken lopen schermvullend als strook door. De rij staat er zes
   // keer in, zodat de lus ook op een breed scherm naadloos is; alleen de eerste rij is voor schermlezers.
+  // 4 november 2026 (Marinus): "Hier dezelfde logo's als ook op de main page." Dus de merken van de Trusted by-balk in de
+  // homepage-header (ExplainerPlayer.tsx), in dezelfde volgorde en verhouding; logos in content.ts blijft staan voor later.
   const rij = (i: number) =>
-    logos.map(([src, name, maat]) => (
+    ([...DIRECT, CRAFTURE, ...VIA_CRAFTURE] as { src: string; naam: string; kleur?: boolean; maat: number }[]).map(({ src, naam: name, kleur, maat }) => (
       <img
         key={`${i}-${src}`}
-        src={`/images/${src}`}
+        src={src}
         alt={i ? "" : name}
         aria-hidden={i ? true : undefined}
         width="220"
@@ -301,8 +304,10 @@ export function ClientLogos({ kort = false }: { kort?: boolean }) {
         // balk begon leeg en logo's verschenen los. In de korte balk laden alle tien bestanden meteen (samen ~70 KB).
         loading={kort ? "eager" : "lazy"}
         decoding="async"
-        className={src.startsWith("AZ-") || src.includes("AZ-LOGO") || src.startsWith("partners/") ? "h-logo-eigen" : undefined}
-        style={maat ? ({ "--logo-maat": String(maat) } as React.CSSProperties) : undefined}
+        translate="no"
+        className={kleur ? "h-logo-eigen" : undefined}
+        // De maat uit de header is voor een 30 px hoge rij; deze strook is 76 px hoog, dus de helft daarvan.
+        style={{ "--logo-maat": String(maat * 0.5) } as React.CSSProperties}
       />
     ));
   return (

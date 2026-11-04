@@ -26,6 +26,7 @@ import ResultatenHero from "./ResultatenHero";
 import { WebsiteTegel } from "./FreeWebsite";
 import ConnectExperts from "./ConnectExperts";
 import HeaderBestaand from "./HeaderBestaand";
+import SamenEnVeilig from "./SamenEnVeilig";
 import { ImageSliders, VideoSlider } from "./MediaSliders";
 import OsEntry, { GRATIS_OS_URL } from "./os-entry";
 import { agents, people, services } from "./content";
@@ -115,6 +116,9 @@ export function OsPage() {
           mag anders wel op de productenpagina oid." Dus die header staat nu hier, op de pagina waar Producten naartoe wijst. */}
       <section className="h-hero sn-approved-hero sn-simple-home" id="producten">
         <HeaderBestaand meet={() => {}} />
+        {/* 4 november 2026 (Marinus) over Groei en cybersecurity in de footer: "Dit uit de footer". Het stond eerst onder deze
+            header op de homepage, dus het staat weer bij de header, nu hier. */}
+        <SamenEnVeilig />
       </section>
       <div className="h-wrap sn-os-start">
         <TeamTrust />
