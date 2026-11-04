@@ -36,7 +36,7 @@ eis(!/google-logo|meta-logo|Google Developers/.test(erkend), "footer: geen Googl
 // Over het slot Start gratis met jouw systeem: "Hier focussen op een formulier of contactgegevens van Steef en Michelle en Ben.",
 // "Doe maar contactgegevens met functies" en "Misschien mij nog erbij".
 const slot = lees("proposal/ContactSlot.tsx");
-eis(/home \? <ContactSlot \/> : <Closing \/>/.test(footer) && ["Marinus Bergsma", "Steef Komen", "Michelle Yang", "Ben Sterckx"].every((n) => slot.includes(`naam: "${n}"`)) && slot.includes("{p.role}"), "homepage-slot: contactgegevens met functie van Marinus, Steef, Michelle en Ben");
+eis(/home && <ContactSlot \/>/.test(footer) && ["Marinus Bergsma", "Steef Komen", "Michelle Yang", "Ben Sterckx"].every((n) => slot.includes(`naam: "${n}"`)) && slot.includes("{p.role}"), "homepage-slot: contactgegevens met functie van Marinus, Steef, Michelle en Ben");
 // "Ik wil graag een Explainers slider met alle verschillende explainer video's." en "Animations and explainers doe maar dan kunnen
 // ze er allemaal gewoon in."
 const slider = lees("proposal/ExplainerSlider.tsx");
