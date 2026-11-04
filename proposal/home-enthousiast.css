@@ -31,3 +31,13 @@ html:root .sn-site .sn-deuren ul{grid-template-columns:repeat(2,minmax(0,1fr))}
 .sn-blij-geluid{position:absolute;right:14px;bottom:14px;z-index:2;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border:0;border-radius:999px;background:#fff;color:#000;font:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px #0008}
 .sn-blij-geluid svg{color:#1a9c4b}
 .sn-blij-geluid:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+/* WebsiteCTA: de gratis nieuwe website, opvallend maar rustig: groene rand en een zachte groene gloed, op het stippenraster. */
+.sn-cta-web{display:flex;align-items:center;justify-content:space-between;gap:24px 40px;margin-block:clamp(20px,3vw,40px);padding:clamp(24px,3.5vw,40px);border:1px solid #25d36699;border-radius:20px;background:radial-gradient(120% 140% at 0% 0%,#25d36624,transparent 60%)}
+.sn-cta-web.is-tweede{margin-block:clamp(40px,5vw,72px) clamp(20px,3vw,40px)}
+@media(max-width:760px){.sn-cta-web{flex-direction:column;align-items:flex-start}}
+html:root .sn-site .sn-cta-web .sn-cta-web-label{display:flex;align-items:center;gap:8px;margin:0;font-family:var(--v-mono,ui-monospace,Menlo,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#25d366}
+.sn-cta-web-label i{flex:0 0 6px;height:6px;border-radius:50%;background:#25d366}
+html:root .sn-site .sn-cta-web h2{margin:10px 0 0;font-size:clamp(30px,3.6vw,48px)!important;font-weight:700;line-height:1.05;letter-spacing:0!important;color:#fff;text-align:left}
+html:root .sn-site .sn-cta-web .sn-cta-web-tekst{max-width:52ch;margin:10px 0 0;font-size:17px;line-height:1.5;color:#b9c2be}
+.sn-cta-web .sn-pill{flex:0 0 auto}

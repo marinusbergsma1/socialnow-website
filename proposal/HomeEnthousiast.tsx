@@ -21,6 +21,22 @@ const DEUREN = [
   { naar: "/diensten", soort: "Diensten", kop: "Van merk tot techniek", tekst: "Websites, branding, content, advertenties en development.", beeld: "/images/cases/vastiq-desktop.webp" },
 ];
 
+// 4 november 2026 (Marinus): "Als CTA ook in de homepage voorkomen is heel belangrijk want daar gaat het nu het meest om nieuwe
+// website maken gratis voor klanten." Een opvallende band direct onder de hero en nog een keer verderop. Een ?ref= in het adres van
+// de homepage gaat mee naar de onboarding, zodat ieder een eigen deellink kan gebruiken (socialnow.nl/?ref=ben).
+function WebsiteCTA({ tweede = false }: { tweede?: boolean }) {
+  const ref = typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("ref") || "";
+  const naar = ref ? `/gratis-website?ref=${encodeURIComponent(ref)}` : "/gratis-website";
+  return <section className={`sn-cta-web h-wrap${tweede ? " is-tweede" : ""}`} aria-label="Gratis nieuwe website">
+    <div>
+      <p className="sn-cta-web-label"><i />Website-actie</p>
+      <h2>Nieuwe website, gratis<span className="sn-alg-punt">.</span></h2>
+      <p className="sn-cta-web-tekst">Wij maken een demo van je nieuwe website, persoonlijk en zonder verplichting. Zes korte vragen.</p>
+    </div>
+    <Link className="sn-pill" to={naar}><span>Vraag je gratis website aan</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
+  </section>;
+}
+
 export default function HomeEnthousiast() {
   const naarContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const doel = document.getElementById("contact");
@@ -45,6 +61,7 @@ export default function HomeEnthousiast() {
       </div>
       <TrustedBy />
     </section>
+    <WebsiteCTA />
     <section className="sn-deuren h-wrap" aria-labelledby="sn-deuren-kop">
       <h2 id="sn-deuren-kop">Waar wil je beginnen?</h2>
       <ul>
@@ -62,5 +79,6 @@ export default function HomeEnthousiast() {
     {/* De websites zelf, direct onder de deuren (FreeWebsite.tsx, dezelfde slider als op /producten). */}
     <WebsiteTegel />
     <ImageSliders kort />
+    <WebsiteCTA tweede />
   </>;
 }

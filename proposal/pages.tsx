@@ -18,8 +18,9 @@ import { Link } from "react-router-dom";
 import { HomeConnectBand } from "./HomeHeader";
 // 18 oktober 2026: partners en veiligheidsdocumenten stonden direct onder de header; sinds 4 november 2026 in BrandFooter.
 // 18 oktober 2026 (Marinus): "1 VERSIE DIE IK AANGAF WACHT MET AB TESTEN". Dus geen A/B-test meer.
-// Sinds 4 november 2026 (concept) is HeaderAlgemeen de homepage-header; HeaderBestaand staat sinds dezelfde dag op /het-os (OsPage in paginas.tsx); de A/B-test (HomeHeaderAB.tsx, server/ab.mjs) blijven staan voor later.
-import HeaderAlgemeen from "./HeaderAlgemeen";
+// Sinds 4 november 2026 is HomeEnthousiast de homepage; HeaderBestaand (de header van daarvoor) staat op /producten en /het-os; de A/B-test (HomeHeaderAB.tsx, server/ab.mjs) blijft staan voor later.
+import HeaderBestaand from "./HeaderBestaand";
+import SamenEnVeilig from "./SamenEnVeilig";
 import FreeWebsite from "./FreeWebsite";
 import { VideoSlider } from "./MediaSliders";
 import HomeEnthousiast from "./HomeEnthousiast";
@@ -76,9 +77,11 @@ export function ProductenPagina() {
   useLanguage();
   return <div className="sn-simple-home">
     <section className="h-hero sn-approved-hero" id="producten-pagina">
-      <HeaderAlgemeen label="Producten · OS · Connect · Odoo" kop="Alles over onze producten en techniek" />
-      {/* 4 november 2026 (Marinus): "Dit onderdeel moet verwerkt worden in de footer [...] en SocialNow connect gelijk onder de header."
-          Groei en cybersecurity, training, documenten en Samen bouwen staan nu in BrandFooter. */}
+      {/* 4 november 2026 (Marinus): "Verder al die partnerinfo die nu weg is en deze Header mag weer terug bij producten daar is dat
+          technische juist heel goed." Dus de homepage-header van vóór #201 (HeaderBestaand: OS met Milo's en downloads, Connect,
+          software partners en Trusted by) en daaronder Groei en cybersecurity met de partners (SamenEnVeilig), net als toen. */}
+      <HeaderBestaand meet={() => {}} />
+      <SamenEnVeilig />
       <HomeConnectBand />
     </section>
     <ConnectExperts />

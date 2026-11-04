@@ -78,3 +78,9 @@
   :root .sn-site .h-header .h-desktop-nav+*{margin-left:auto}
 }
 :root .sn-site .h-desktop-nav>a,:root .sn-site .h-desktop-nav .h-producten-knop,:root .sn-site .h-language-current{line-height:1;display:inline-flex;align-items:center}
+
+/* 4 november 2026 (Marinus) over WEBSITE-ACTIE in de menubalk: "Deze dikgedrukt en met een shine zodat ie nog meer opvalt." Vet, en
+   elke 5 seconden schuift er een groene glans over de letters (wit, #25D366, wit). Bij reduced motion alleen vet en wit. */
+@keyframes sn-glans{0%,72%{background-position:100% 0}100%{background-position:0 0}}
+:root .sn-site .h-desktop-nav a.h-security>span,:root .sn-site .h-mobile-nav a.h-security-mobiel>span{font-weight:800!important;color:#fff;background:linear-gradient(100deg,#fff 0%,#fff 42%,#25d366 50%,#fff 58%,#fff 100%);background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:sn-glans 5s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){:root .sn-site .h-desktop-nav a.h-security>span,:root .sn-site .h-mobile-nav a.h-security-mobiel>span{animation:none;background:none;-webkit-text-fill-color:#fff}}
