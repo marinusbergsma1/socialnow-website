@@ -37,6 +37,18 @@ eis(!/google-logo|meta-logo|Google Developers/.test(erkend), "footer: geen Googl
 // "Doe maar contactgegevens met functies" en "Misschien mij nog erbij".
 const slot = lees("proposal/ContactSlot.tsx");
 eis(/home \? <ContactSlot \/> : <Closing \/>/.test(footer) && ["Marinus Bergsma", "Steef Komen", "Michelle Yang", "Ben Sterckx"].every((n) => slot.includes(`naam: "${n}"`)) && slot.includes("{p.role}"), "homepage-slot: contactgegevens met functie van Marinus, Steef, Michelle en Ben");
+// "Ik wil graag een Explainers slider met alle verschillende explainer video's." en "Animations and explainers doe maar dan kunnen
+// ze er allemaal gewoon in."
+const slider = lees("proposal/ExplainerSlider.tsx");
+const films = [...slider.matchAll(/src: "(\/video\/[^"?]+)/g)].map((m) => m[1]);
+eis(lees("proposal/pages.tsx").includes("<ExplainerSlider") && slider.includes("Animations and explainers") && films.length >= 12 && films.every((f) => fs.existsSync(`public${f}`)), `homepage: slider Animations and explainers met alle films (${films.length}, elk bestand bestaat)`);
+// "de header afbeelding een langzame grow geven en de video van de Odoo Experience laten zien."
+const hcss = lees("proposal/header-algemeen.css");
+eis(/\.sn-alg-foto img\{[^}]*animation:sn-alg-grow/.test(hcss) && /prefers-reduced-motion:reduce\)\{\.sn-alg-foto img\{animation:none/.test(hcss), "header: foto zoomt langzaam (niet bij reduced motion)");
+eis(kop.includes('const FILM = "/video/odoo-experience/odoo-experience.mp4"'), "header: Bekijk de video speelt de aftermovie van Odoo Experience");
+// "Verder dottet pattern weer zichtbaar maken."
+const stip = lees("proposal/stippen.css");
+eis(/\.sn-team-product \{ background: transparent !important; \}/.test(stip) && /\.cx-connect \{[^}]*radial-gradient/.test(stip), "stippen: Connect-band doorzichtig, teamblok wit met stippen");
 const tech = lees("proposal/concept-tech.css");
 eis(!/\.h-footer-erkend img \{[^}]*filter/.test(tech) && !/\.h-footer-erkend > div \{[^}]*opacity/.test(tech) , "footer: logo's in kleur, niet gedimd");
 
@@ -75,7 +87,7 @@ eis(cx.indexOf('className="cx-org"') > 0 && !cx.includes("cx-voorbeelden") && !c
 const acties = header.slice(header.indexOf('className="sn-alg-acties"'), header.indexOf("</div>", header.indexOf('className="sn-alg-acties"')));
 eis((acties.match(/className="sn-pill"/g) || []).length === 2 && !acties.includes("sn-alg-knop"), "headerknoppen hebben dezelfde stijl als Inloggen gratis OS (sn-pill)");
 
-const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op."];
+const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "Zie hoe het werkt.", "OS-onderdeel"];
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(lees(`proposal/i18n/${l}.json`) || "{}");
   const mist = nieuw.filter((k) => !w[k] || /[–—]/.test(w[k]));
