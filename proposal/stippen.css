@@ -8,7 +8,8 @@
 :root body {
   background-color: #000 !important;
   /* 11 okt (Marinus): "stippen te groot, moet meer een achtergrond effect zijn": straal 1 px, zachter. */
-  background-image: radial-gradient(circle at 16px 16px, rgba(255, 255, 255, .1) 1px, transparent 1.5px) !important;
+  /* 4 nov 2026 (Marinus): "DIE FUCKING DOTS OVERAL MEER DUIDELIJK". Zelfde dekking en straal als het canvas in stippen.ts. */
+  background-image: radial-gradient(circle at 16px 16px, rgba(255, 255, 255, .26) 1.25px, transparent 1.75px) !important;
   background-size: 32px 32px !important;
   background-position: 0 0 !important;
 }
@@ -60,3 +61,12 @@
    krijgt hetzelfde 32-px-raster in lichtgrijs, zoals het witte teamblok (home-team.css). */
 :root .sn-site .sn-choice .sn-team-product { background: transparent !important; }
 :root .sn-site .cx-connect { background-color: #fff; background-image: radial-gradient(circle at 16px 16px, #cdd1d5 1px, transparent 1.5px); background-size: 32px 32px; }
+
+/* 4 november 2026 (Marinus): "EN DIE FUCKING DOTS OVERAL MEER DUIDELIJK DAT ZEG IK AL 100X NU". Donkere vlakken met een eigen
+   zwarte vulling dekten het raster af op /producten, /het-os, /team en /diensten. Die zijn nu doorzichtig; de rand blijft. Wit (mens)
+   blijft wit. Proef: scripts/check-stippen-zichtbaar.mjs. */
+:root .sn-site :is(.sn-web-tile, .sn-samen, .sn-samen-blok, .sn-samen-partner, .h-terminal, li.is-mens, .h-verhaal-waarom,
+  .h-partner-uitleg, .h-bedankt, .sn-infrastructure, .sn-infrastructure article, .sn-infra-strip, .prijs-usps, .prijs-kaart,
+  .prijs-vergelijk, .prijs-los li, .sn-explainer-cover) { background-color: transparent !important; }
+/* Uitklapmenu's liggen over de pagina heen en moeten leesbaar blijven: zwart, met hetzelfde raster erin. */
+:root .sn-site .h-producten-menu { background-color: #000 !important; background-image: radial-gradient(circle at 16px 16px, rgba(255, 255, 255, .26) 1.25px, transparent 1.75px) !important; background-size: 32px 32px !important; }
