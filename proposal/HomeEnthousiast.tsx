@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { TrustedBy } from "./HeaderAlgemeen";
+import OdooFilm from "./OdooFilm";
 import { ImageSliders } from "./MediaSliders";
 import { WebsiteTegel } from "./FreeWebsite";
 import "./header-algemeen.css";
@@ -40,9 +41,7 @@ export default function HomeEnthousiast() {
             <a className="sn-pill" href="#contact" onClick={naarContact}><span>Neem contact op</span><ArrowUpRight size={17} aria-hidden="true" /></a>
           </div>
         </div>
-        <figure className="sn-blij-film">
-          <video src="/video/odoo-experience/odoo-experience-kort.mp4" poster="/video/odoo-experience/odoo-experience-kort-poster.webp" autoPlay muted loop playsInline aria-label="Ons team op Odoo Experience 2026 in Brussel" />
-        </figure>
+        <OdooFilm />
       </div>
       <TrustedBy />
     </section>

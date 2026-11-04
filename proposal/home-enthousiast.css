@@ -23,3 +23,11 @@ html:root .sn-site .sn-deuren ul{grid-template-columns:repeat(2,minmax(0,1fr))}
 .sn-deuren li.sn-deur-breed{grid-column:1 / -1}
 @media(min-width:861px){.sn-deur-breed a{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);grid-template-rows:auto auto 1fr;column-gap:8px;padding:0}.sn-deur-breed .sn-deur-beeld{grid-row:1 / 4;aspect-ratio:16/10;margin:0}.sn-deur-breed .sn-deur-soort{margin-top:32px}html:root .sn-site .sn-deuren .sn-deur-breed strong{font-size:30px}.sn-deur-breed a{border-color:#25d36666}}
 @media(max-width:860px){html:root .sn-site .sn-deuren ul{grid-template-columns:1fr}}
+
+/* OdooFilm.tsx: de korte loop en daarna de volledige aftermovie op dezelfde plek, met een knop voor het geluid. */
+.sn-blij-film video{position:absolute;inset:0}
+.sn-blij-film .sn-blij-lang{opacity:0;transition:opacity .6s ease}
+.sn-blij-film.is-lang .sn-blij-lang{opacity:1}
+.sn-blij-geluid{position:absolute;right:14px;bottom:14px;z-index:2;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border:0;border-radius:999px;background:#fff;color:#000;font:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px #0008}
+.sn-blij-geluid svg{color:#1a9c4b}
+.sn-blij-geluid:focus-visible{outline:2px solid #fff;outline-offset:3px}
