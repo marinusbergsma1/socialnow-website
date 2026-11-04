@@ -13,6 +13,15 @@ import "./header-algemeen.css";
 // standfoto met de Odoo-partners staat nu als OdooPartners lager op de homepage. De vorige header met OS en Connect
 // (HeaderBestaand.tsx) blijft staan voor later.
 
+// Samenwerkingen onder de titel, in kleur. Eerst stonden hier Indexworld en Uncanny met hun keurmerken; Marinus: "Haal anders
+// Indexworld en Uncanny maar weg en zet alleen de logo's van samenwerking eronder."
+const KEURMERKEN = [
+  { naam: "Odoo Silver Partner", src: "/images/partners/samen/odoo.svg" },
+  { naam: "Shopify Partners", src: "/images/partners/samen/shopify.svg" },
+  { naam: "Salesforce-partner", src: "/images/partners/samen/salesforce.svg" },
+  { naam: "Adobe-partner", src: "/images/partners/samen/adobe.svg" },
+];
+
 const STAPPEN = ["Website en branding", "Systemen en operations", "Marketing en sales", "Finance"];
 
 // 4 november 2026 (Marinus): "Deze graag nog erbij. en een knop bekijk de video." Dus de Trusted by-balk uit de oude header
@@ -28,11 +37,17 @@ export default function HeaderAlgemeen() {
     <section className="sn-alg" aria-labelledby="sn-alg-kop">
       <div className="sn-alg-wrap">
         <div className="sn-alg-tekst">
-          <p className="sn-alg-label"><i />Odoo · ERP · Websites · AI</p>
+          <p className="sn-alg-label"><i />Management · Operations · Odoo</p>
           {/* 4 november 2026 (Marinus): "Een betrouwbare partner voor groei en cybersecurity. Doelgerichte totaaloplossingen, met experts
               en AI. Veilig lokaal en in eigen beheer." */}
           <h1 id="sn-alg-kop">Een betrouwbare partner voor groei en cybersecurity<span className="sn-alg-punt">.</span></h1>
-          <p className="sn-alg-uitleg">Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
+          {/* 4 november 2026 (Marinus): "Ik wil dat het écht duidelijk is gelijk BAM Ze kunnen mij helpen met management en operations
+              en Odoo." en "zet alleen de logo's van samenwerking eronder. Odoo Silver partner, Shopify Parners SalesForce en Adove
+              Partners onder de header titel." */}
+          <p className="sn-alg-uitleg"><strong>Wij helpen je met management, operations en Odoo.</strong> Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
+          <ul className="sn-alg-keur" aria-label="Partners en specialiteiten">
+            {KEURMERKEN.map(k => <li key={k.naam}><img src={k.src} alt={k.naam} title={k.naam} /></li>)}
+          </ul>
           <ol className="sn-alg-stappen">
             {STAPPEN.map((kop, i) => <li key={kop}><span className="sn-alg-nr">0{i + 1}</span><strong>{kop}</strong></li>)}
           </ol>
@@ -66,31 +81,7 @@ export default function HeaderAlgemeen() {
   );
 }
 
-// 4 november 2026 (Marinus): "die Partners even beter benoemen en ook weer hun certifacaten etc erbij." en daarna "verder alleen de
-// logo's Uncanny en Indexworld met alle certificaties etc erbij." en "En die logo's in kleur graag." Dus per partner alleen het logo
-// en hun keurmerken en partners uit SamenEnVeilig.tsx (nagelezen op hun eigen sites, 19 oktober 2026), in kleur. Het Claude-logo van
-// Indexworld staat hier niet: geen modelnamen in klantgerichte teksten.
-const PARTNERS = [
-  {
-    naam: "Indexworld", href: "https://indexworld.net", logo: "/images/home-header/indexworld.png", wit: true,
-    keur: [
-      { naam: "Odoo-partner", src: "/images/partners/samen/odoo-partner.webp" },
-      { naam: "Sage", src: "/images/partners/samen/sage.svg" },
-      { naam: "QuickBooks", src: "/images/partners/samen/quickbooks.png" },
-    ],
-  },
-  {
-    naam: "Uncanny", href: "https://uncannycs.com", logo: "/images/home-header/uncanny-op-zwart.svg", wit: false,
-    keur: [
-      { naam: "Odoo Silver Partner", src: "/images/partners/samen/odoo.svg" },
-      { naam: "Shopify Partners", src: "/images/partners/samen/shopify.svg" },
-      { naam: "Salesforce ISV-partner", src: "/images/partners/samen/salesforce.svg" },
-      { naam: "Adobe Certified Professional", src: "/images/partners/samen/adobe.svg" },
-    ],
-  },
-];
-
-// De vorige header (standfoto en Odoo-partners) als eigen blok na het team en de voorbeelden. MARINUS: "en dan bij read more bij
+// De vorige header (standfoto, eerst met Odoo-partners) als eigen blok na het team en de voorbeelden. MARINUS: "en dan bij read more bij
 // odoo partners eronder de focus leggen op het blok wat nu in de footer is." Dus Lees meer springt naar Groei en cybersecurity
 // (SamenEnVeilig, #groei) in de footer.
 export function OdooPartners() {
@@ -108,15 +99,6 @@ export function OdooPartners() {
           <p className="sn-alg-label"><i />Odoo en ERP</p>
           <h2 id="sn-odoo-kop">Odoo en ander ERP, met sterke partners<span className="sn-alg-punt">.</span></h2>
           <p className="sn-alg-uitleg">We implementeren Odoo en helpen met andere ERP-systemen, samen met gecertificeerde partners. Met een eigen stand op Odoo Experience 2026 in Brussel.</p>
-          <div className="sn-alg-kaart sn-alg-partners">
-            <p className="sn-alg-klein">Partners en specialiteiten</p>
-            <ul>
-              {PARTNERS.map(p => <li key={p.naam}>
-                <a className="sn-alg-partner-logo" href={p.href} target="_blank" rel="noopener noreferrer"><img className={p.wit ? "is-wit" : undefined} src={p.logo} alt={p.naam} loading="lazy" /></a>
-                <div className="sn-alg-certs">{p.keur.map(k => <img key={k.naam} src={k.src} alt={k.naam} title={k.naam} loading="lazy" />)}</div>
-              </li>)}
-            </ul>
-          </div>
           <a className="sn-alg-meer" href="#groei" onClick={naarGroei}><span>Lees meer</span><ArrowDown size={16} aria-hidden="true" /></a>
         </div>
         <figure className="sn-alg-foto sn-alg-foto-breed">
