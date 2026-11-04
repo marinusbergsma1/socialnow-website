@@ -7,7 +7,9 @@ const fouten = [];
 const eis = (ok, tekst) => { console.log(`${ok ? "GROEN" : "ROOD "}  ${tekst}`); if (!ok) fouten.push(tekst); };
 const pages = fs.readFileSync("proposal/pages.tsx", "utf8");
 const home = pages.slice(pages.indexOf("export function Home()"));
-const volgorde = ["<HeaderBestaand", "<SamenEnVeilig", "<HomeConnectBand", "<ConnectExperts", "<FreeWebsite", "<HomeTechniek", "<Bereikt"];
+// 4 november 2026: de header is HeaderAlgemeen, Groei en cybersecurity (SamenEnVeilig) staat in de footer en de Odoo-partners
+// volgen na het team. Zie scripts/check-header-atomium.mjs.
+const volgorde = ["<HeaderAlgemeen", "<HomeConnectBand", "<ConnectExperts", "<OdooPartners", "<FreeWebsite", "<HomeTechniek", "<Bereikt"];
 const plekken = volgorde.map(v => home.indexOf(v));
 eis(plekken.every(p => p >= 0) && plekken.every((p, i) => i === 0 || p > plekken[i - 1]), `volgorde: ${volgorde.join(" → ").replace(/</g, "")}`);
 eis(!home.includes("Vier gezichten") && !home.includes("agents.map"), "Vier gezichten staat niet meer op de homepage");

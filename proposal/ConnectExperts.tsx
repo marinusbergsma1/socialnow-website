@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, ChevronDown, Search } from "lucide-react";
+import { ArrowUpRight, Search } from "lucide-react";
 import { people, expertGroepen } from "./content";
 import { klein } from "./licht";
 import { mailLink } from "./aanvragen";
@@ -35,23 +35,15 @@ const VAKGEBIEDEN = expertGroepen
   .filter((g) => g.name !== "AI development" && g.name !== "Web development")
   .map((g) => ({ naam: g.name, leden: g.members.filter((n) => !EINDVERANTWOORDELIJK.includes(n)) }));
 
-// 4 november 2026 (Marinus): "Dit moet ook veel compacter en beter." en "Dan een mooie Expertlaag die je uit kan klappen en dan
-// op zo'n soort manier beelden van de verschillende onderdelen waar je naartoe kan en beginnen met nieuw hier? [...] Wij beginnen
-// altijd met een GRATIS WEBSITE DEMO. Daarna kijken we naar de verschillende processen en software." Dus eerst de korte flow,
-// dan één rij beeldkaarten per onderdeel, en het organogram met zoekveld pas na uitklappen. Beelden staan al op de site.
-const STAPPEN = [
-  { kop: "Gratis websitedemo", tekst: "We beginnen altijd met een demo van je nieuwe website en een securityscan.", href: "/security" },
-  { kop: "Processen en software", tekst: "Daarna kijken we samen naar je processen, je ERP en de software die je gebruikt." },
-  { kop: "Je eigen experts", tekst: "De juiste mensen pakken het op, met een vaste prijs per project." },
+// 4 november 2026 (Marinus): "Dit moet ook veel compacter en beter." Eerst kwam er een uitklapbare expertlaag met "Nieuw hier?".
+// Later die dag: "daaronder het team gewoon gelijk bij connect" en "Verder na het team de websites en branding en content
+// voorbeelden". Dus het organogram staat meteen open (de stappen staan nu in de header), en daarna één rij beeldkaarten met werk.
+const VOORBEELDEN = [
+  { kop: "Websites", beeld: "/images/cases/vastiq-desktop.webp", href: "/diensten#development" },
+  { kop: "Branding", beeld: "/images/cases/kwh-merk.webp", href: "/diensten#branding" },
+  { kop: "Video, foto en design", beeld: "/images/social/UNIVERSAL-OPENHEIMER-FRAMES.webp", href: "/diensten#content" },
+  { kop: "Ads en social", beeld: "/images/social/AZ-25-K-Volgers-Post.webp", href: "/diensten#advertising" },
 ];
-const ONDERDELEN = [
-  { kop: "Odoo en ERP", beeld: "/images/odoo-experience-stand.webp", href: "/contact?onderwerp=Odoo%20en%20ERP", groepen: ["Finance & operations", "AI development"] },
-  { kop: "Websites en development", beeld: "/images/cases/vastiq-desktop.webp", href: "/diensten#development", groepen: ["Web development", "AI development"] },
-  { kop: "Ads en vindbaarheid", beeld: "/images/social/AZ-25-K-Volgers-Post.webp", href: "/diensten#advertising", groepen: ["Ads & search"] },
-  { kop: "Video, foto en design", beeld: "/images/social/UNIVERSAL-OPENHEIMER-FRAMES.webp", href: "/diensten#content", groepen: ["Video, photo & design", "UGC & social media"] },
-  { kop: "Strategie en finance", beeld: "/images/verhaal/team-atomium.webp", href: "/diensten#branding", groepen: ["Strategy & guidance", "Finance & operations", "Partnerships"] },
-];
-const aantalIn = (groepen: string[]) => new Set(expertGroepen.filter((g) => groepen.includes(g.name)).flatMap((g) => g.members)).size;
 
 function Persoon({ naam }: { naam: string }) {
   const persoon = people.find((p) => p.name === naam);
@@ -87,30 +79,6 @@ function Leider({ naam }: { naam: string }) {
   </li>;
 }
 
-// 4 november 2026 (Marinus) over het blok met drie stappen: "Dit is heel lelijk ook". Vier opties om uit te kiezen, met ?flow=1 tot 4
-// in de adresbalk; zonder keuze optie 1. Na zijn keuze blijft er één over.
-type Optie = "1" | "2" | "3" | "4";
-const kiesOptie = (): Optie => {
-  const o = typeof window === "undefined" ? null : new URLSearchParams(window.location.search).get("flow");
-  return o === "2" || o === "3" || o === "4" ? o : "1";
-};
-
-function NieuwHier() {
-  const optie = kiesOptie();
-  const titel = (stap: (typeof STAPPEN)[number]) => stap.href ? <Link to={stap.href}>{stap.kop}</Link> : stap.kop;
-  return <div className={`cx-flow cx-flow-${optie}`}>
-    <p className="cx-flow-kop">Nieuw hier? <span>Zo beginnen we.</span></p>
-    <ol>
-      {STAPPEN.map((stap, i) => <li key={stap.kop}>
-        <span className="cx-flow-nr" aria-hidden="true">{optie === "2" ? `0${i + 1}` : i + 1}</span>
-        <span className="cx-flow-tekst"><strong>{titel(stap)}</strong><span>{stap.tekst}</span></span>
-        {optie === "3" && i < STAPPEN.length - 1 && <ArrowRight className="cx-flow-pijl" size={18} aria-hidden="true" />}
-      </li>)}
-    </ol>
-    {optie === "4" && <Link className="cx-flow-knop" to="/security">Start met je gratis websitedemo<ArrowUpRight size={16} aria-hidden="true" /></Link>}
-  </div>;
-}
-
 export default function ConnectExperts() {
   const { t } = useLanguage();
   const [zoek, zetZoek] = useState("");
@@ -131,22 +99,11 @@ export default function ConnectExperts() {
         <h2 id="team-titel">Vind je expert.</h2>
         <p className="cx-team">Echte mensen die je bij naam kent: strategen, developers, designers, ad-specialisten en financiële experts.</p>
       </div>
-      <NieuwHier />
-      <ul className="cx-onderdelen">
-        {ONDERDELEN.map((o) => <li key={o.kop}>
-          <Link to={o.href}>
-            <span className="cx-beeld"><img src={o.beeld} alt="" decoding="async" /></span>
-            <strong>{o.kop}</strong>
-            <span className="cx-aantal">{aantalIn(o.groepen)} experts<ArrowUpRight size={14} aria-hidden="true" /></span>
-          </Link>
-        </li>)}
-      </ul>
-      <details className="cx-laag">
-        <summary><span><strong>{people.length}</strong> experts in <strong>{expertGroepen.length}</strong> vakgebieden</span><span className="cx-laag-knop">Bekijk de expertlaag<ChevronDown size={16} aria-hidden="true" /></span></summary>
-        <label className="cx-zoek">
-          <Search size={18} aria-hidden="true" />
-          <input type="search" value={zoek} onChange={(e) => zetZoek(e.target.value)} placeholder="Zoek op naam of vak, bijvoorbeeld Meta Ads" aria-label="Zoek een expert" />
-        </label>
+      <p className="cx-zin"><strong>{people.length}</strong> experts in <strong>{expertGroepen.length}</strong> vakgebieden. Zoek, vergelijk en kies zelf.</p>
+      <label className="cx-zoek">
+        <Search size={18} aria-hidden="true" />
+        <input type="search" value={zoek} onChange={(e) => zetZoek(e.target.value)} placeholder="Zoek op naam of vak, bijvoorbeeld Meta Ads" aria-label="Zoek een expert" />
+      </label>
       <div className="cx-org">
         {top.length > 0 && <div className="cx-org-laag">
           <p className="cx-org-kop">Eindverantwoordelijk</p>
@@ -163,8 +120,19 @@ export default function ConnectExperts() {
           </div>
         </div>}
       </div>
-        {leeg && <p className="cx-leeg">Geen expert gevonden. Probeer een ander woord.</p>}
-      </details>
+      {leeg && <p className="cx-leeg">Geen expert gevonden. Probeer een ander woord.</p>}
+      <div className="cx-voorbeelden">
+        <p className="cx-org-kop">Websites, branding en content</p>
+        <ul className="cx-onderdelen">
+          {VOORBEELDEN.map((o) => <li key={o.kop}>
+            <Link to={o.href}>
+              <span className="cx-beeld"><img src={o.beeld} alt="" loading="lazy" decoding="async" /></span>
+              <strong>{o.kop}</strong>
+              <span className="cx-aantal">Bekijk voorbeelden<ArrowUpRight size={14} aria-hidden="true" /></span>
+            </Link>
+          </li>)}
+        </ul>
+      </div>
       {/* 20 oktober 2026 (Marinus): "Vulling hier blauw met witte tekst. Verder moet er ook een gedeelte komen met vraag een
           opdracht aan." Twee vakken naast elkaar: opdracht aanvragen en aanmelden als expert, elk met een blauwe knop. */}
       <div className="cx-onder">

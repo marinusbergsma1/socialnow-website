@@ -19,8 +19,8 @@ import { OnderDeVouw, later } from "./later";
 import { HomeConnectBand } from "./HomeHeader";
 // 18 oktober 2026: partners en veiligheidsdocumenten stonden direct onder de header; sinds 4 november 2026 in BrandFooter.
 // 18 oktober 2026 (Marinus): "1 VERSIE DIE IK AANGAF WACHT MET AB TESTEN". Dus geen A/B-test meer.
-// Sinds 4 november 2026 (concept) is HeaderAlgemeen de homepage-header; HeaderBestaand en de A/B-test (HomeHeaderAB.tsx, server/ab.mjs) blijven staan voor later.
-import HeaderAlgemeen from "./HeaderAlgemeen";
+// Sinds 4 november 2026 (concept) is HeaderAlgemeen de homepage-header; HeaderBestaand staat sinds dezelfde dag op /het-os (OsPage in paginas.tsx); de A/B-test (HomeHeaderAB.tsx, server/ab.mjs) blijven staan voor later.
+import HeaderAlgemeen, { OdooPartners } from "./HeaderAlgemeen";
 import FreeWebsite from "./FreeWebsite";
 import { Bento, Tegel } from "./Bento";
 import { TextLink } from "./ui";
@@ -71,6 +71,8 @@ export function Home() {
       <HomeConnectBand />
     </section>
     <ConnectExperts />
+    {/* 4 november 2026 (Marinus): de header met standfoto en Odoo-partners "mag naar een andere plek", na het team en de voorbeelden. */}
+    <OdooPartners />
     <FreeWebsite />
     {/* 19 oktober 2026, avond (Marinus): na Connect de websites, dan technologie en plug and play in één bentogrid, dan resultaten. */}
     <HomeTechniek />

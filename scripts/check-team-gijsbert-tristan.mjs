@@ -16,7 +16,9 @@ for (const [naam, rol] of mensen) {
 }
 if (existsSync("dist/index.html")) {
   const html = readFileSync("dist/index.html", "utf8");
-  for (const [naam] of mensen) if (!html.includes(naam)) fouten.push(`${naam} niet in de gebouwde homepage`);
+  // 4 november 2026 (Marinus): "Haal developers maar gewoon weg." Tristan staat sindsdien alleen nog op /team, Gijsbert blijft
+  // op de homepage als eindverantwoordelijke.
+  if (!html.includes("Gijsbert Westeneng")) fouten.push("Gijsbert Westeneng niet in de gebouwde homepage");
 }
 if (fouten.length) { console.error("ROOD\n" + fouten.join("\n")); process.exit(1); }
 console.log("GROEN: Gijsbert en Tristan staan in team en Connect");

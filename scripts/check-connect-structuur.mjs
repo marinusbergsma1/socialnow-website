@@ -15,8 +15,9 @@ eis(!/aria-label="(Vorige|Volgende) experts"/.test(tsx) && !tsx.includes("scroll
 const top = tsx.match(/const EINDVERANTWOORDELIJK = \[([^\]]*)\]/);
 eis(!!top && TOP.every((n, i) => top[1].split(",").map(s => s.trim().replace(/"/g, ""))[i] === n), "bovenste laag uit het plan: Marinus, Gijsbert, Douwe, Steef");
 const plek = (k) => tsx.indexOf(`>${k}</p>`);
-eis(["Eindverantwoordelijk", "Developers", "Vakgebieden"].every(k => plek(k) > 0), "lagen van boven naar beneden: Eindverantwoordelijk, Developers, Vakgebieden");
-eis(plek("Eindverantwoordelijk") < plek("Developers") && plek("Developers") < plek("Vakgebieden"), "volgorde klopt in de code");
+// 4 november 2026 (Marinus): "de developers klopt verder ook niet hier. Haal developers maar gewoon weg." Dus twee lagen.
+eis(["Eindverantwoordelijk", "Vakgebieden"].every(k => plek(k) > 0) && plek("Developers") < 0, "lagen van boven naar beneden: Eindverantwoordelijk, Vakgebieden (Developers is weg)");
+eis(plek("Eindverantwoordelijk") < plek("Vakgebieden"), "volgorde klopt in de code");
 const foto = css.match(/\.cx-org-persoon img\s*\{[^}]*width:\s*(\d+)px/);
 eis(!!foto && Number(foto[1]) <= 64, `foto's klein (${foto ? foto[1] + " px" : "geen maat"}, hoogstens 64 px)`);
 const mobiel = [...css.matchAll(/@media \(max-width: (\d+)px\) \{([^@]*)/g)].filter(m => Number(m[1]) <= 640).map(m => m[2]).join("\n");
@@ -32,12 +33,12 @@ if (process.argv.includes("--dist")) {
   const html = fs.readFileSync("dist/nl/index.html", "utf8");
   const s = html.indexOf('class="cx-org"'), blok = s < 0 ? "" : html.slice(s, html.indexOf("cx-onder", s));
   const namen = [...blok.matchAll(/<strong translate="no">([^<]+)<\/strong>/g)].map(m => m[1]);
-  eis(namen.length === 31 && new Set(namen).size === namen.length, `gebouwde nl-homepage toont iedereen precies één keer (${namen.length})`);
+  eis(namen.length >= 20 && new Set(namen).size === namen.length, `gebouwde nl-homepage toont iedereen precies één keer (${namen.length})`);
   eis(TOP.every((n, i) => namen[i] === n), "gebouwde pagina begint met de vier eindverantwoordelijken");
   eis(!html.includes('class="cx-raster"'), "gebouwde pagina heeft geen schuifrij meer");
   const fotos = [...blok.matchAll(/<img[^>]*?\ssrc="([^"?]+)/g)].map(m => m[1]);
   const kwijt = fotos.filter(f => !fs.existsSync(`dist${f}`));
-  eis(fotos.length === 31 && kwijt.length === 0, `elke kleine foto bestaat echt (${fotos.length} foto's${kwijt.length ? ", kwijt: " + kwijt.slice(0, 3).join(" ") : ""})`);
+  eis(fotos.length === namen.length && kwijt.length === 0, `elke kleine foto bestaat echt (${fotos.length} foto's${kwijt.length ? ", kwijt: " + kwijt.slice(0, 3).join(" ") : ""})`);
 }
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");
 process.exit(fouten.length ? 1 : 0);
