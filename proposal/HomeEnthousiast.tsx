@@ -16,7 +16,7 @@ import "./home-enthousiast.css";
 // Daarna: "verder producten diensten en website actie oid heel simpel meer focus op die websites" en "Nadruk op veiligheidsscan
 // kan misschien wel veel kleiner." Dus de website-actie voorop en breed, de websites zelf eronder, en geen scan in de deuren.
 const DEUREN = [
-  { naar: "/gratis-website", soort: "Website-actie", kop: "Wij maken jouw website, gratis", tekst: "Vertel ons over je bedrijf en wat je mooi vindt. Wij maken een demo die echt bij je past.", beeld: "/images/cases/kwhgarant-desktop.webp", breed: true },
+  { naar: "/gratis-website", soort: "Website-actie", kop: "Wij maken jouw website, gratis", tekst: "Vertel ons over je bedrijf en wat je mooi vindt. Wij maken een demo die echt bij je past.", beeld: "", breed: true },
   { naar: "/producten", soort: "Producten", kop: "SocialNow OS en Connect", tekst: "Hoe het werkt, wie het bouwt en welke techniek erachter zit.", beeld: "/video/os/os-master-en.webp" },
   { naar: "/diensten", soort: "Diensten", kop: "Van merk tot techniek", tekst: "Websites, branding, content, advertenties en development.", beeld: "/images/cases/vastiq-desktop.webp" },
 ];
@@ -67,7 +67,9 @@ export default function HomeEnthousiast() {
       <ul>
         {DEUREN.map((d) => <li key={d.naar} className={d.breed ? "sn-deur-breed" : undefined}>
           <Link to={d.naar}>
-            <span className="sn-deur-beeld"><img src={d.beeld} alt="" loading="lazy" decoding="async" /></span>
+            {/* 4 november 2026 (Marinus): "ik wil die oude kWh site niet meer zien". De website-actie heeft geen klantbeeld meer, alleen
+                het stippenraster met een groene gloed; klantconcepten horen niet publiek in beeld. */}
+            {d.beeld ? <span className="sn-deur-beeld"><img src={d.beeld} alt="" loading="lazy" decoding="async" /></span> : <span className="sn-deur-beeld sn-deur-raster" aria-hidden="true" />}
             <span className="sn-deur-soort">{d.soort}</span>
             <strong>{d.kop}</strong>
             <span className="sn-deur-tekst">{d.tekst}</span>

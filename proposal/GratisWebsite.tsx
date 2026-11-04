@@ -15,9 +15,9 @@ import "./gratis-website-wit.css";
 // De aanvraag gaat zoals altijd als ingevuld bericht naar Steef (aanvragen.ts).
 
 const OPSLAG = "sn-gratis-website-v2";
+// 4 november 2026 (Marinus): "ik wil die oude kWh site niet meer zien". kWh Garant staat hier niet meer tussen.
 const STIJLEN = [
   { id: "vastiq", naam: "VASTIQ", wat: "Strak en zakelijk", beeld: "/images/cases/vastiq-desktop.webp" },
-  { id: "kwh", naam: "kWh Garant", wat: "Licht en helder", beeld: "/images/cases/kwhgarant-desktop.webp" },
   { id: "vdz", naam: "VDZ Brigade", wat: "Stoer en vakkundig", beeld: "/images/cases/vdz-brigade-desktop.webp" },
   { id: "ilgordo", naam: "Il Gordo", wat: "Warm en sfeervol", beeld: "/images/cases/ilgordo-desktop.webp" },
 ];

@@ -314,10 +314,13 @@ export function siteVeld(): Veld | null {
   document.body.prepend(c);
   // 11 oktober 2026 (Marinus): "De stippen zelf zijn te groot, moet meer een achtergrond effect zijn." Het vaste veld tekent
   // dezelfde kleine stip als het raster in stippen.css (straal 1); oplichten maakt hem iets groter.
-  c.dataset.straal = "1";
+  c.dataset.straal = "1.25";
   // Basis en belichting gebruiken hetzelfde raster; CSS blijft fallback zonder canvas.
   if (!c.getContext("2d")) { c.remove(); return null; }
-  site = new Veld(c, { basis: "rgba(255,255,255,.1)", vast: true, r: 1 });
+  // 4 november 2026 (Marinus): "EN DIE FUCKING DOTS OVERAL MEER DUIDELIJK DAT ZEG IK AL 100X NU". Dekking van .1 naar .26 en straal
+  // van 1 naar 1,25, zodat het raster op een gewone laptop zonder inzoomen duidelijk zichtbaar is. Raster blijft 32 px, geen drift.
+  // Proef: scripts/check-stippen-zichtbaar.mjs.
+  site = new Veld(c, { basis: "rgba(255,255,255,.26)", vast: true, r: 1.25 });
   if (site.W > 0 && site.H > 0) document.documentElement.classList.add("sn-stipveld-ready");
   // A short, soft trail illuminates the existing grid underneath the pointer.
   let laatsteMuis = -Infinity;
