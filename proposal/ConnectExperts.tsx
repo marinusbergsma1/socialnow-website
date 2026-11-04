@@ -53,7 +53,7 @@ function Persoon({ naam }: { naam: string }) {
     <img {...klein(persoon.image, "64px", [96, 160], undefined, VERSIE)} alt="" width="64" height="64" loading="lazy" className={persoon.name === "Jelle Ursem" ? "is-jelle" : undefined} />
     <span className="cx-org-tekst">
       <strong translate="no">{persoon.name}</strong>
-      <span>{persoon.name === "Ruben Spyckerelle" ? "B2B Cold Calling & Appointment Setting" : persoon.role}</span>
+      <span>{persoon.name === "Ruben Spyckerelle" ? "B2B Appointment Setting" : persoon.role}</span>
     </span>
     <ArrowUpRight className="cx-org-pijl" size={14} aria-hidden="true" />
   </>;

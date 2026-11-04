@@ -134,10 +134,11 @@ for (const [route, meta] of Object.entries(routeMeta)) {
         person('Sam van der Sluis', 'Lead Videographer'),
         person('Emma Peperkamp', 'Lead Photographer'),
         person('Isa Zoer', 'UGC & Content Creation · Social Media'),
-        { ...person('Ruben Spyckerelle', 'Outsourced B2B cold calling & appointment setting'), image: `${BASE}/images/Ruben.webp`, sameAs: 'https://www.linkedin.com/in/ruben-spyckerelle/', knowsAbout: ['B2B cold calling', 'Appointment setting', 'Benelux', 'DACH'] },
+        { ...person('Ruben Spyckerelle', 'B2B Appointment Setting'), image: `${BASE}/images/Ruben.webp`, sameAs: 'https://www.linkedin.com/in/ruben-spyckerelle/', knowsAbout: ['Appointment setting', 'Benelux', 'DACH'] },
         person('Nick van Keulen', 'Head of Google Ads & Search'),
         person('Elian Coellar', 'Head of Private Partnerships'),
         person('Fabiana Abauna', 'Head of New Partnerships'),
+        { ...person('Ben Sterckx', 'Partnership Manager België'), image: `${BASE}/images/Ben-Sterckx.webp`, sameAs: 'https://www.linkedin.com/in/bensterckx/' },
         person('Sid van Kalken', 'Head of Web Development & AI Payments'),
         {
           '@type': 'Organization',

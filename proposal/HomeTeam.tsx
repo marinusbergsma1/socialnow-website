@@ -47,7 +47,7 @@ export default function HomeTeam() {
               <img {...klein(person.image, "(max-width: 650px) 45vw, (max-width: 1100px) 22vw, 12vw", [160, 320, 480], undefined, "20261015-team")} alt={person.name} width="320" height="400" loading="lazy" className={person.name === "Jelle Ursem" ? "is-jelle" : undefined} />
               <div className="sn-home-team-info">
                 <strong><span translate="no">{person.name}</span></strong>
-                <span>{person.name === "Ruben Spyckerelle" ? "B2B Cold Calling & Appointment Setting" : person.role}</span>
+                <span>{person.name === "Ruben Spyckerelle" ? "B2B Appointment Setting" : person.role}</span>
                 {person.description ? <details><summary>Focus & aanpak ↗</summary><p>{person.description}<br />Benelux &amp; DACH<br />{person.quote}</p></details> : null}
               </div>
               {url && <span className="sn-home-team-social" aria-hidden="true">{person.linkedin ? <LinkedInMark /> : <InstagramMark />}</span>}

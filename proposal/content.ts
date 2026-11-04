@@ -50,6 +50,9 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   // 3 november 2026 (Marinus): "meer weg van de standaard sales en meer iedereen focus op Partnership. Fabiana mag wel Head
   // of new Partnerships worden."
   { name: "Fabiana Abauna", role: "Head of New Partnerships", image: "Fabiana-Abauna.webp", sinds: "2026-11-03" },
+  // 4 november 2026 (Marinus): Ben Sterckx erbij als Sales & Partnerships, in de groep Partnerships naast Fabiana.
+  // 4 november 2026 (Marinus): de eerste titel van Ben was geen goede titel; Ben is Partnership Manager België.
+  { name: "Ben Sterckx", role: "Partnership Manager België", image: "Ben-Sterckx.webp", linkedin: "https://www.linkedin.com/in/bensterckx/", sinds: "2026-11-04" },
   // 28 september 2026 (Marinus): Sid, Steef en Michelle krijgen betalingen met AI erbij.
   // Sid komt van zijn eigen bedrijf Attesso (linkedin.com/company/attesso).
   {
@@ -83,7 +86,7 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   { name: "Tristan Slobben", role: "Data & AI Engineer", image: "Tristan-Slobben.webp", linkedin: "https://www.linkedin.com/in/tristan-slobben-105056159/", sinds: "2026-09-30" },
   // 3 oktober 2026 (Marinus): nieuwe teamleden. 28 oktober 2026 (Marinus): "Youri is Client Relations Manager."
   { name: "Antony Soosaipillaj", role: "Full-Stack AI Developer", image: "Antony-Soosaipillaj.webp", sinds: "2026-10-03" },
-  { name: "Ruben Spyckerelle", linkedin: "https://www.linkedin.com/in/ruben-spyckerelle/", role: "Outsourced B2B cold calling & appointment setting · Benelux & DACH", image: "Ruben.webp", description: "Gekwalificeerde afspraken in je agenda.", quote: "Ik bel, zodat jij het niet hoeft te doen.", sinds: "2026-10-12" },
+  { name: "Ruben Spyckerelle", linkedin: "https://www.linkedin.com/in/ruben-spyckerelle/", role: "B2B Appointment Setting · Benelux & DACH", image: "Ruben.webp", description: "Gekwalificeerde afspraken in je agenda.", quote: "Ik bel, zodat jij het niet hoeft te doen.", sinds: "2026-10-12" },
   { name: "Aron", role: "Senior Sales", image: "Aren.webp", sinds: "2026-10-03" },
   { name: "Youri van der Donk", role: "Client Relations Manager", image: "Youri-van-der-Donk.webp", sinds: "2026-10-03" },
   { name: "Isaak Munster", role: "Business Coach", image: "Isaak-Munster.webp", sinds: "2026-10-03" },
@@ -107,7 +110,7 @@ export const expertGroepen = [
   { name: "Ads & search", members: ["Jos Hollenberg", "Nick van Keulen", "Sergio Jovovic"] },
   { name: "Video, photo & design", members: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Pepijn Bos", "Armando van Bruggen"] },
   { name: "UGC & social media", members: ["Isa Zoer", "Daniel Schotman"] },
-  { name: "Partnerships", members: ["Marinus Bergsma", "Elian Coellar", "Fabiana Abauna", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster", "Ruben Spyckerelle"] },
+  { name: "Partnerships", members: ["Marinus Bergsma", "Elian Coellar", "Fabiana Abauna", "Ben Sterckx", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster", "Ruben Spyckerelle"] },
 ];
 export const vindMensen = (names: string[]) => names.flatMap(name => {
   const person = people.find(p => p.name === name);
