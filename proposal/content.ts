@@ -51,7 +51,8 @@ export const people: { name: string; role: string; image: string; linkedin?: str
   // of new Partnerships worden."
   { name: "Fabiana Abauna", role: "Head of New Partnerships", image: "Fabiana-Abauna.webp", sinds: "2026-11-03" },
   // 4 november 2026 (Marinus): Ben Sterckx erbij als Sales & Partnerships, in de groep Partnerships naast Fabiana.
-  { name: "Ben Sterckx", role: "Sales & Partnerships", image: "Ben-Sterckx.webp", linkedin: "https://www.linkedin.com/in/bensterckx/", sinds: "2026-11-04" },
+  // 4 november 2026 (Marinus): de eerste titel van Ben was geen goede titel; Ben is Partnership Manager België.
+  { name: "Ben Sterckx", role: "Partnership Manager België", image: "Ben-Sterckx.webp", linkedin: "https://www.linkedin.com/in/bensterckx/", sinds: "2026-11-04" },
   // 28 september 2026 (Marinus): Sid, Steef en Michelle krijgen betalingen met AI erbij.
   // Sid komt van zijn eigen bedrijf Attesso (linkedin.com/company/attesso).
   {
