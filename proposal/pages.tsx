@@ -22,8 +22,8 @@ import { HomeConnectBand } from "./HomeHeader";
 import HeaderBestaand from "./HeaderBestaand";
 import SamenEnVeilig from "./SamenEnVeilig";
 import FreeWebsite from "./FreeWebsite";
-import { VideoSlider } from "./MediaSliders";
-import HomeEnthousiast from "./HomeEnthousiast";
+import { VideoSlider, ImageSliders } from "./MediaSliders";
+import HomeEnthousiast, { WebsiteCTA } from "./HomeEnthousiast";
 import { Bento, Tegel } from "./Bento";
 import { TextLink } from "./ui";
 import { ArrowUpRight, Download } from "lucide-react";
@@ -69,7 +69,15 @@ export function Home() {
   return <div className="sn-simple-home">
     <section className="h-hero sn-approved-hero" id="home">
       <HomeEnthousiast />
+      {/* 4 november 2026 (avond, Marinus): "De landingspagina is wie wij zijn [...] hier moet de connect weer komen met daarna mooi
+          de websites, daarna de mooie sliders en mobiele slider etc daarna mag wel die deze en nog beter gemaakt". */}
+      <HomeConnectBand />
     </section>
+    <ConnectExperts />
+    <FreeWebsite />
+    <ImageSliders kort />
+    <VideoSlider kort />
+    <WebsiteCTA tweede />
   </div>;
 }
 

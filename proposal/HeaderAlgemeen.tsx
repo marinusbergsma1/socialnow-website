@@ -30,11 +30,35 @@ const FILM = "/video/odoo-experience/odoo-experience.mp4";
 // 4 november 2026 (Marinus): "die technische data en huidige landingspagina mag naar producten gaan dan is dit meer enthousiasmering
 // en rest inhoudelijk en technisch." Deze header opent sindsdien /producten; label en kop zijn daar eigen, zodat de homepage
 // (HomeEnthousiast.tsx) de enige h1 "Een betrouwbare partner voor groei en cybersecurity." houdt.
-export default function HeaderAlgemeen({ label = "Management · Operations · Odoo", kop = "Een betrouwbare partner voor groei en cybersecurity" }: { label?: string; kop?: string }) {
+// Ook gebruikt in de homepage-hero (HomeEnthousiast.tsx), onder de knoppen.
+export function PartnerLogos() {
+  return <ul className="sn-alg-keur" aria-label="Partners en specialiteiten">
+    {KEURMERKEN.map(k => <li key={k.naam}><img src={k.src} alt={k.naam} title={k.naam} /></li>)}
+  </ul>;
+}
+
+// De teamfoto bij het Atomium met een langzame zoom; de aftermovie speelt alleen als je op Bekijk de video klikt. Ook op de homepage
+// (HomeEnthousiast.tsx). 4 november 2026 (avond, Marinus): "Doe toch maar gewoon die foto met zoom zoals die was en video alleen als
+// je op afspelen klikt".
+export function AtomiumFoto() {
   const venster = useRef<HTMLDialogElement>(null);
   const film = useRef<HTMLVideoElement>(null);
   const open = () => { venster.current?.showModal(); void film.current?.play().catch(() => {}); };
   const sluit = () => { film.current?.pause(); venster.current?.close(); };
+  return <>
+    <figure className="sn-alg-foto">
+      <img src="/images/verhaal/team-atomium.webp" alt="Ons team bij het Atomium in Brussel" width="900" height="1200" fetchPriority="high" />
+      <figcaption><span className="sn-alg-klein">Odoo Experience 2026 · Brussel</span><strong>Ons team<span className="sn-alg-punt">.</span></strong></figcaption>
+      <button type="button" className="sn-alg-knop-video" aria-haspopup="dialog" onClick={open}><Play size={15} aria-hidden="true" /><span>Bekijk de video</span></button>
+    </figure>
+    <dialog className="sn-alg-venster" ref={venster} aria-label="Aftermovie Odoo Experience 2026" onClose={() => film.current?.pause()} onClick={e => { if (e.target === venster.current) sluit(); }}>
+      <button type="button" className="sn-alg-sluit" onClick={sluit} aria-label="Sluit de film"><X size={20} aria-hidden="true" /></button>
+      <video ref={film} src={FILM} poster="/video/odoo-experience/odoo-experience.jpg" controls playsInline preload="none" />
+    </dialog>
+  </>;
+}
+
+export default function HeaderAlgemeen({ label = "Management · Operations · Odoo", kop = "Een betrouwbare partner voor groei en cybersecurity" }: { label?: string; kop?: string }) {
   const naarContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const doel = document.getElementById("contact");
     if (!doel) return;
@@ -54,9 +78,7 @@ export default function HeaderAlgemeen({ label = "Management · Operations · Od
               en Odoo." en "zet alleen de logo's van samenwerking eronder. Odoo Silver partner, Shopify Parners SalesForce en Adove
               Partners onder de header titel." */}
           <p className="sn-alg-uitleg"><strong>Wij helpen je met management, operations en Odoo.</strong> Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
-          <ul className="sn-alg-keur" aria-label="Partners en specialiteiten">
-            {KEURMERKEN.map(k => <li key={k.naam}><img src={k.src} alt={k.naam} title={k.naam} /></li>)}
-          </ul>
+          <PartnerLogos />
           <ol className="sn-alg-stappen">
             {STAPPEN.map((kop, i) => <li key={kop}><span className="sn-alg-nr">0{i + 1}</span><strong>{kop}</strong></li>)}
           </ol>
@@ -70,17 +92,9 @@ export default function HeaderAlgemeen({ label = "Management · Operations · Od
             <a className="sn-pill" href="#contact" onClick={naarContact}><span>Neem contact op</span><ArrowUpRight size={17} aria-hidden="true" /></a>
           </div>
         </div>
-        <figure className="sn-alg-foto">
-          <img src="/images/verhaal/team-atomium.webp" alt="Ons team bij het Atomium in Brussel" width="900" height="1200" fetchPriority="high" />
-          <figcaption><span className="sn-alg-klein">Odoo Experience 2026 · Brussel</span><strong>Ons team<span className="sn-alg-punt">.</span></strong></figcaption>
-          <button type="button" className="sn-alg-knop-video" aria-haspopup="dialog" onClick={open}><Play size={15} aria-hidden="true" /><span>Bekijk de video</span></button>
-        </figure>
+        <AtomiumFoto />
       </div>
       <TrustedBy />
-      <dialog className="sn-alg-venster" ref={venster} aria-label="Aftermovie Odoo Experience 2026" onClose={() => film.current?.pause()} onClick={e => { if (e.target === venster.current) sluit(); }}>
-        <button type="button" className="sn-alg-sluit" onClick={sluit} aria-label="Sluit de film"><X size={20} aria-hidden="true" /></button>
-        <video ref={film} src={FILM} poster="/video/odoo-experience/odoo-experience.jpg" controls playsInline preload="none" />
-      </dialog>
     </section>
   );
 }

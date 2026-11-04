@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { languagePrefix, useLanguage } from "./i18n/context";
 import { aanvraagWhatsApp, heeftWhatsApp, whatsappLink } from "./aanvragen";
@@ -43,6 +44,12 @@ function laad(): Antwoorden {
   try { const j = JSON.parse(localStorage.getItem(OPSLAG) || "null"); if (j && typeof j === "object" && Array.isArray(j.stijlen)) return { ...LEEG, ...j }; } catch {}
   return LEEG;
 }
+
+const GETROFFEN = [
+  { naam: "Binance", logo: "/security/logos/binance.svg" },
+  { naam: "Nintendo", logo: "/security/logos/nintendo.svg" },
+  { naam: "Wikipedia", logo: "/security/logos/wikipedia.svg" },
+];
 
 export default function GratisWebsite() {
   const { language, t } = useLanguage();
@@ -99,24 +106,35 @@ export default function GratisWebsite() {
   // 4 november 2026 (Marinus): "Bij website Actie moet gewoon een hele cleane onboarding komen met nog een zwarte banner met de video
   // van mij en in 1 header net als de main nu mooi is gedaan waar ik zoals bij de vorige veiligheidsvideo vertel over het belang van
   // een goeie website samen met het Binance geval. Daaronder gewoon de onboarding." Een video met het Binance-verhaal bestaat nog
-  // niet; tot die er is, staat hier de veiligheidsvideo van /security (Marinus aan het woord, public/security/film/security-9x16.mp4).
+  // niet; tot die er is, staat hier de veiligheidsvideo van /security (Marinus aan het woord), sinds 4 november avond de liggende versie.
   return <>
     <section className="sn-alg gw2-kop" aria-labelledby="gw2-kop">
       <div className="sn-alg-wrap">
         <div className="sn-alg-tekst">
           <p className="sn-alg-label"><i />Website-actie</p>
           <h1 id="gw2-kop">Wij maken jouw website, gratis<span className="sn-alg-punt">.</span></h1>
-          <p className="sn-alg-uitleg"><strong>Een goede website is ook een veilige website.</strong> Zes korte vragen. Wij lezen je antwoorden zelf en maken een demo die echt bij je past. Gratis en zonder verplichting.</p>
+          {/* 4 november 2026 (avond, Marinus): "Vraag een veiligheidsrapport aan of krijg een gratis demo van een moderne website op maat." */}
+          <p className="sn-alg-uitleg"><strong>Een goede website is ook een veilige website.</strong> Vraag een veiligheidsrapport aan of krijg een gratis demo van een moderne website op maat.</p>
           <div className="sn-alg-acties">
             <a className="sn-pill" href="#onboarding" onClick={naarStart}><span>Begin met vraag 1</span><ArrowUpRight size={17} aria-hidden="true" /></a>
+            <Link className="sn-pill sn-pill-blauw" to="/security"><span>Vraag een veiligheidsrapport aan</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
+          </div>
+          {/* "een kleine logobar met de logo's van de getroffen bedrijven met daarboven zelfs deze bedrijven zijn getroffen Binance er
+              ook bij". Nintendo en Wikipedia met bron in de securityscan (PhpCheck.tsx, GERAAKT); Binance op verzoek van Marinus. */}
+          <div className="gw2-getroffen">
+            <p>Zelfs deze bedrijven zijn getroffen.</p>
+            <ul aria-label="Getroffen bedrijven">
+              {GETROFFEN.map((g) => <li key={g.naam}><img src={g.logo} alt={g.naam} title={g.naam} /></li>)}
+            </ul>
           </div>
           <a className="gw2-steef" href={whatsappLink(t("Hoi Steef, ik heb een vraag over de gratis website."))} target="_blank" rel="noopener noreferrer">
             <img src="/images/Steef-Komen.webp" alt="" width="40" height="40" /><span><strong translate="no">Steef Komen</strong><small>Liever even praten? Stuur Steef een bericht.</small></span><ArrowUpRight size={16} aria-hidden="true" />
           </a>
         </div>
-        <figure className="sn-blij-film gw2-film">
-          <video controls playsInline preload="none" poster="/security/film/poster-9x16.jpg" aria-label="Marinus over het belang van een veilige website">
-            <source src="/security/film/security-9x16.mp4" type="video/mp4" />
+        {/* "hier de liggende video": de 16:9-versie, speelt alleen als je op afspelen klikt. */}
+        <figure className="sn-blij-film gw2-film is-liggend">
+          <video controls playsInline preload="none" poster="/security/film/poster-16x9.jpg" aria-label="Marinus over het belang van een veilige website">
+            <source src="/security/film/security-16x9.mp4" type="video/mp4" />
           </video>
         </figure>
       </div>
