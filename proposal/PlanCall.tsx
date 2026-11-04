@@ -12,12 +12,14 @@ import "./plan-call.css";
 // Vanuit de custom OS configurator (18 oktober 2026, sessie os-custom): /?bron=os&onderwerp=custom-os&ref=<uuid>#plan-een-call.
 // bron=os en een geldige uuid in ref gaan mee in het bericht aan het team; onbekende waarden vallen weg. Het paneel staat
 // sitebreed (WebsiteProposal.tsx), dus #plan-een-call werkt op elke pagina.
-export type CallVoorinvulling = { bedrijf?: string; onderdelen?: string[]; budget?: string; bron?: "os"; ref?: string };
+// soort "gesprek" (4 november 2026): het korte contactpaneel uit de homepage-header (GesprekPaneel.tsx) in plaats van het custom-OS-paneel.
+export type CallVoorinvulling = { soort?: "gesprek"; bedrijf?: string; onderdelen?: string[]; budget?: string; bron?: "os"; ref?: string };
 export const PLAN_CALL_ANKER = "plan-een-call";
 const OPEN = "sn-plan-call";
 export function openPlanCall(voor: CallVoorinvulling = {}) { window.dispatchEvent(new CustomEvent<CallVoorinvulling>(OPEN, { detail: voor })); }
 
 const Paneel = later(() => import("./PlanCallPaneel").then((m) => m.default));
+const Gesprek = later(() => import("./GesprekPaneel").then((m) => m.default));
 
 function uitAdres(zoek: URLSearchParams): CallVoorinvulling {
   const lijst = (zoek.get("onderdelen") || "").split(",").map((d) => d.trim()).filter(Boolean);
@@ -54,5 +56,5 @@ export function PlanCallHost() {
     zetVoor(null);
     if (window.location.hash === `#${PLAN_CALL_ANKER}`) history.replaceState(history.state, "", window.location.pathname + window.location.search);
   };
-  return <Suspense fallback={null}><Paneel voor={voor} sluit={sluit} /></Suspense>;
+  return <Suspense fallback={null}>{voor.soort === "gesprek" ? <Gesprek sluit={sluit} /> : <Paneel voor={voor} sluit={sluit} />}</Suspense>;
 }

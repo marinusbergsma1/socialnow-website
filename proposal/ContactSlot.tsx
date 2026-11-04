@@ -9,12 +9,12 @@ import "./contact-slot.css";
 // Naam, functie en rol komen uit content.ts. Alleen adressen die echt bestaan: steef@ is het algemene contactadres (aanvragen.ts),
 // michelle@ staat in de mailfooter (MAIL.html, 28 oktober). Voor Ben is nog geen adres bekend, dus bij hem LinkedIn.
 // Daarna: "Misschien mij nog erbij". Marinus voorop, met info@, het adres dat hij zelf leest.
-const CONTACTEN = [
+export const CONTACTEN: readonly { naam: string; mail?: string }[] = [
   { naam: "Marinus Bergsma", mail: "info@socialnow.nl" },
   { naam: "Steef Komen", mail: "steef@socialnow.nl" },
   { naam: "Michelle Yang", mail: "michelle@socialnow.nl" },
   { naam: "Ben Sterckx" },
-] as const;
+];
 
 export default function ContactSlot() {
   return <section className="sn-contactslot" aria-labelledby="contactslot-kop">
@@ -29,7 +29,7 @@ export default function ContactSlot() {
           <div>
             <strong translate="no">{p.name}</strong>
             <span>{p.role}</span>
-            {"mail" in c
+            {c.mail
               ? <a href={`mailto:${c.mail}`}><Mail size={15} aria-hidden="true" /><span translate="no">{c.mail}</span></a>
               : p.linkedin && <a href={p.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={15} aria-hidden="true" /><span>LinkedIn</span></a>}
           </div>

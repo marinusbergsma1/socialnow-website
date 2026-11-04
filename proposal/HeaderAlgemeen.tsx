@@ -56,7 +56,7 @@ export default function HeaderAlgemeen() {
             {/* 4 november 2026 (Marinus): "Deze knoppen wil ik ook met die filling en met die style zoals die", met de knop Inloggen
                 gratis OS rechtsboven als voorbeeld. Dus dezelfde goedgekeurde pillknop (sn-pill, button-design.css). */}
             <Link className="sn-pill" to="/security"><span>Start met een gratis websitedemo</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
-            <button type="button" className="sn-pill" aria-haspopup="dialog" onClick={() => openPlanCall({ onderdelen: ["crm", "dashboard"] })}>
+            <button type="button" className="sn-pill" aria-haspopup="dialog" onClick={() => openPlanCall({ soort: "gesprek" })}>
               <span>Plan een gesprek</span><ArrowUpRight size={17} aria-hidden="true" />
             </button>
           </div>
