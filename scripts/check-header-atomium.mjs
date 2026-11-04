@@ -61,7 +61,7 @@ eis([["Marinus Bergsma", "info@socialnow.nl"], ["Steef Komen", "finance@socialno
 eis(kop.includes('href="#contact"') && !kop.includes("openPlanCall") && slot.includes('id="contact"') && !fs.existsSync("proposal/GesprekPaneel.tsx"), "header: Neem contact op springt naar de tegels, geen gesprek inplannen");
 // "Maak dit zakelijker" (contacttegels) en "Lijn dit in het midden uit" (hoofdmenu).
 const ccss = lees("proposal/contact-slot.css");
-eis(/\.sn-contactslot li\{[^}]*align-items:flex-start/.test(ccss) && /\.sn-contactslot li img\{[^}]*grayscale\(1\)/.test(ccss) && /min-height:calc\(2em \* 1\.35\)/.test(ccss) && !/text-decoration-thickness:2px/.test(ccss), "contacttegels zakelijk: bovenaan uitgelijnd, zwart-wit vierkant, links op één hoogte, geen dikke groene streep");
+eis(/\.sn-contactslot li\{[^}]*align-items:flex-start/.test(ccss) && /\.sn-contactslot li img\{[^}]*object-fit:cover/.test(ccss) && !/\.sn-contactslot li img\{[^}]*grayscale/.test(ccss) && /min-height:calc\(2em \* 1\.35\)/.test(ccss) && !/text-decoration-thickness:2px/.test(ccss), "contacttegels zakelijk: bovenaan uitgelijnd, vierkant in kleur (\"deze weer in kleur\"), links op één hoogte, geen dikke groene streep");
 const menu = lees("proposal/hoofdmenu.css");
 eis(/@media \(min-width:1280px\)\{[^@]*\.h-desktop-nav\{position:absolute;left:50%;top:50%;transform:translate\(-50%,-50%\)/.test(menu) && /\.h-language-current\{line-height:1;display:inline-flex;align-items:center\}/.test(menu), "hoofdmenu in het midden van de header, items en taalknop op één middenlijn");
 // Over het grote slot op de andere pagina's: "Deze mag ook weg."
