@@ -105,6 +105,9 @@ eis(/NAV_LINKS: Array<\[string, string\]> = \[\s*\["\/diensten", "Diensten"\],\s
 eis(blij.indexOf('naar: "/gratis-website"') > 0 && blij.indexOf('naar: "/gratis-website"') < blij.indexOf('naar: "/producten"') && blij.includes("breed: true") && blij.includes("<WebsiteTegel />") && !/securityscan|\/security/.test(blij.replace(/\/\/.*$/gm, "")), "homepage: website-actie voorop en breed, de websites eronder, geen securityscan");
 const gw = lees("proposal/GratisWebsite.tsx"), gwcss = lees("proposal/gratis-website-wit.css");
 eis(/\.gw2\{[^}]*background:#fff/.test(gwcss) && gw.includes("STIJLEN.map") && gw.includes("DOELEN.map") && gw.includes("gw2-voortgang") && (gw.match(/zetStap\(/g) || []).length >= 2 && !/value=\{"[^"]+"\}|defaultValue=/.test(gw), "onboarding: witte pagina, stap voor stap, echte voorbeelden en klikbare antwoorden, geen ingevulde voorbeelddata");
+// "Zet verder de Odoo video achter de header video en zorg dat die ook automatisch daar afspeelt met geluid na 3 seconden."
+const film = lees("proposal/OdooFilm.tsx");
+eis(blij.includes("<OdooFilm />") && film.includes('const LANG = "/video/odoo-experience/odoo-experience.mp4"') && fs.existsSync("public/video/odoo-experience/odoo-experience.mp4") && film.includes("const WACHT = 3000") && /v\.muted = false;\s*try \{ await v\.play\(\)/.test(film) && /catch \{\s*v\.muted = true/.test(film) && film.includes('"Geluid aan"') && film.includes('addEventListener("pointerdown", aan') && film.includes("prefers-reduced-motion"), "homepage: na 3 s de Odoo-aftermovie met geluid, anders gedempt met Geluid aan en geluid bij de eerste klik");
 const seo = lees("scripts/brand-meta.mjs");
 eis((seo.match(/'\/producten': \[/g) || []).length === 10 && lees("scripts/postbuild.mjs").includes("producten: {title:"), "/producten heeft titel en omschrijving in alle 10 talen");
 const sliders = lees("proposal/MediaSliders.tsx");
@@ -121,7 +124,7 @@ eis(cx.indexOf('className="cx-org"') > 0 && !cx.includes("cx-voorbeelden") && !c
 const acties = header.slice(header.indexOf('className="sn-alg-acties"'), header.indexOf("</div>", header.indexOf('className="sn-alg-acties"')));
 eis((acties.match(/className="sn-pill"/g) || []).length === 2 && !acties.includes("sn-alg-knop"), "headerknoppen hebben dezelfde stijl als Inloggen gratis OS (sn-pill)");
 
-const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Neem contact op", "Waar wil je beginnen?", "Alles over onze producten en techniek", "Website-actie", "Welke stijl spreekt je aan?", "Wat moet je website vooral doen?", "Meer aanvragen"];
+const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Neem contact op", "Waar wil je beginnen?", "Alles over onze producten en techniek", "Website-actie", "Welke stijl spreekt je aan?", "Wat moet je website vooral doen?", "Meer aanvragen", "Geluid aan"];
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(lees(`proposal/i18n/${l}.json`) || "{}");
   const mist = nieuw.filter((k) => !w[k] || /[–—]/.test(w[k]));
