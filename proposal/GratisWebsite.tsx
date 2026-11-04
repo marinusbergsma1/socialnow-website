@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { languagePrefix, useLanguage } from "./i18n/context";
 import { aanvraagWhatsApp, heeftWhatsApp, whatsappLink } from "./aanvragen";
+import { people } from "./content";
+import { klein } from "./licht";
 import "./header-algemeen.css";
 import "./home-enthousiast.css";
 import "./gratis-website-wit.css";
@@ -21,8 +23,22 @@ const STIJLEN = [
 ];
 const DOELEN = ["Meer aanvragen", "Professioneler uitstralen", "Beter vindbaar in Google", "Online verkopen", "Afspraken laten maken", "Vacatures vullen"];
 
-type Antwoorden = { wat: string; stijlen: string[]; link: string; doelen: string[]; anders: string; website: string; voornaam: string; achternaam: string; bedrijf: string; email: string; mobiel: string };
-const LEEG: Antwoorden = { wat: "", stijlen: [], link: "", doelen: [], anders: "", website: "", voornaam: "", achternaam: "", bedrijf: "", email: "", mobiel: "" };
+// 4 november 2026 (Marinus): "die website-onboarding waarbij ze nog de persoon kunnen aanvinken via wie ze daar zijn gekomen". Wie
+// de lead aanbracht, telt voor de vergoeding. De mensen uit het team die klanten aanbrengen (leiding en Partnerships, content.ts),
+// plus Iemand anders en Zelf gevonden. Een eigen deellink vult de keuze vooraf in: /gratis-website?ref=ben (voornaam, of de
+// volledige naam met streepjes). De keuze gaat mee in het bericht als "Aangebracht door" (aanvragen.ts).
+const AANBRENGERS = ["Marinus Bergsma", "Steef Komen", "Michelle Yang", "Ben Sterckx", "Fabiana Abauna", "Elian Coellar", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster", "Ruben Spyckerelle"]
+  .map((naam) => people.find((p) => p.name === naam)).filter((p): p is (typeof people)[number] => !!p);
+const ANDERS = "anders", ZELF = "zelf";
+const sleutel = (tekst: string) => tekst.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim().replace(/\s+/g, "-");
+function uitRef(ref: string | null): string {
+  if (!ref) return "";
+  const r = sleutel(ref);
+  return AANBRENGERS.find((p) => sleutel(p.name) === r || sleutel(p.name.split(" ")[0]) === r)?.name || "";
+}
+
+type Antwoorden = { via: string; viaAnders: string; wat: string; stijlen: string[]; link: string; doelen: string[]; anders: string; website: string; voornaam: string; achternaam: string; bedrijf: string; email: string; mobiel: string };
+const LEEG: Antwoorden = { via: "", viaAnders: "", wat: "", stijlen: [], link: "", doelen: [], anders: "", website: "", voornaam: "", achternaam: "", bedrijf: "", email: "", mobiel: "" };
 function laad(): Antwoorden {
   try { const j = JSON.parse(localStorage.getItem(OPSLAG) || "null"); if (j && typeof j === "object" && Array.isArray(j.stijlen)) return { ...LEEG, ...j }; } catch {}
   return LEEG;
@@ -34,15 +50,23 @@ export default function GratisWebsite() {
   const [stap, zetStap] = useState(0);
   const [geladen, zetGeladen] = useState(false);
   const [fout, zetFout] = useState("");
-  useEffect(() => { zetA(laad()); zetGeladen(true); }, []);
+  const [verstuurd, zetVerstuurd] = useState("");
+  useEffect(() => {
+    const opgeslagen = laad();
+    const ref = uitRef(new URLSearchParams(window.location.search).get("ref"));
+    zetA(ref ? { ...opgeslagen, via: ref } : opgeslagen);
+    zetGeladen(true);
+  }, []);
   useEffect(() => { if (geladen) try { localStorage.setItem(OPSLAG, JSON.stringify(a)); } catch {} }, [a, geladen]);
   const zet = <K extends keyof Antwoorden>(k: K, v: Antwoorden[K]) => zetA((x) => ({ ...x, [k]: v }));
   const wissel = (k: "stijlen" | "doelen", v: string) => zet(k, a[k].includes(v) ? a[k].filter((x) => x !== v) : [...a[k], v]);
 
-  const STAPPEN = ["Wat doet je bedrijf?", "Welke stijl spreekt je aan?", "Wat moet je website vooral doen?", "Heb je al een website?", "Hoe bereiken we je?"];
+  const STAPPEN = ["Wat doet je bedrijf?", "Welke stijl spreekt je aan?", "Wat moet je website vooral doen?", "Heb je al een website?", "Via wie ben je bij ons gekomen?", "Hoe bereiken we je?"];
   const laatste = STAPPEN.length - 1;
   const controle = () => {
     if (stap === 0 && !a.wat.trim()) return t("Vertel in één zin wat je bedrijf doet.");
+    if (stap === 4 && !a.via) return t("Kies via wie je bij ons kwam.");
+    if (stap === 4 && a.via === ANDERS && !a.viaAnders.trim()) return t("Vul in via wie je bij ons kwam.");
     if (stap === laatste) {
       if (!a.voornaam.trim() || !a.achternaam.trim()) return t("Vul je voor- en achternaam in.");
       if (!a.bedrijf.trim()) return t("Vul je bedrijfsnaam in.");
@@ -58,7 +82,12 @@ export default function GratisWebsite() {
     if (stap < laatste) { zetStap(stap + 1); return; }
     const voorbeeld = [...a.stijlen.map((id) => STIJLEN.find((s) => s.id === id)?.naam || id), a.link.trim()].filter(Boolean).join(", ");
     const nietgoed = [...a.doelen.map((d) => t(d)), a.anders.trim()].filter(Boolean).join(". ");
-    window.location.href = aanvraagWhatsApp("website", language, { voornaam: a.voornaam, achternaam: a.achternaam, bedrijf: a.bedrijf, email: a.email, mobiel: a.mobiel, website: a.website, voorbeeld, wat: a.wat, nietgoed });
+    const via = a.via === ZELF ? t("Niemand, zelf gevonden") : a.via === ANDERS ? `${t("Iemand anders")}: ${a.viaAnders.trim()}` : a.via;
+    const adres = aanvraagWhatsApp("website", language, { via, voornaam: a.voornaam, achternaam: a.achternaam, bedrijf: a.bedrijf, email: a.email, mobiel: a.mobiel, website: a.website, voorbeeld, wat: a.wat, nietgoed });
+    zetVerstuurd(adres);
+    // Droog in proeven en previews: geautomatiseerde browsers en ?proef in het adres openen nooit een echte mail of WhatsApp.
+    if (navigator.webdriver || new URLSearchParams(window.location.search).has("proef")) return;
+    window.location.href = adres;
   };
 
   const naarStart = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -77,7 +106,7 @@ export default function GratisWebsite() {
         <div className="sn-alg-tekst">
           <p className="sn-alg-label"><i />Website-actie</p>
           <h1 id="gw2-kop">Wij maken jouw website, gratis<span className="sn-alg-punt">.</span></h1>
-          <p className="sn-alg-uitleg"><strong>Een goede website is ook een veilige website.</strong> Vijf korte vragen. Wij lezen je antwoorden zelf en maken een demo die echt bij je past. Gratis en zonder verplichting.</p>
+          <p className="sn-alg-uitleg"><strong>Een goede website is ook een veilige website.</strong> Zes korte vragen. Wij lezen je antwoorden zelf en maken een demo die echt bij je past. Gratis en zonder verplichting.</p>
           <div className="sn-alg-acties">
             <a className="sn-pill" href="#onboarding" onClick={naarStart}><span>Begin met vraag 1</span><ArrowUpRight size={17} aria-hidden="true" /></a>
           </div>
@@ -130,6 +159,21 @@ export default function GratisWebsite() {
       </label>}
 
       {stap === 4 && <>
+        <p className="gw2-uitleg">Zo weten we wie we mogen bedanken.</p>
+        <div className="gw2-mensen">{AANBRENGERS.map((p) => <label key={p.name} className={`gw2-mens${a.via === p.name ? " aan" : ""}`}>
+          <input type="radio" name="gw2-via" checked={a.via === p.name} onChange={() => zet("via", p.name)} />
+          <img {...klein(p.image, "48px", [96, 160])} alt="" width="48" height="48" loading="lazy" />
+          <span><strong translate="no">{p.name}</strong><small>{p.role}</small></span>
+          <i aria-hidden="true"><Check size={14} /></i>
+        </label>)}</div>
+        <div className="gw2-chips gw2-via-rest">
+          <label className={`gw2-chip${a.via === ANDERS ? " aan" : ""}`}><input type="radio" name="gw2-via" checked={a.via === ANDERS} onChange={() => zet("via", ANDERS)} /><Check size={14} aria-hidden="true" /><span>Iemand anders</span></label>
+          <label className={`gw2-chip${a.via === ZELF ? " aan" : ""}`}><input type="radio" name="gw2-via" checked={a.via === ZELF} onChange={() => zet("via", ZELF)} /><Check size={14} aria-hidden="true" /><span>Niemand, zelf gevonden</span></label>
+        </div>
+        {a.via === ANDERS && <label className="gw2-veld"><span>Anders, namelijk</span><input maxLength={120} value={a.viaAnders} onChange={(e) => zet("viaAnders", e.target.value)} /></label>}
+      </>}
+
+      {stap === 5 && <>
         <div className="gw2-rij">
           <label className="gw2-veld"><span>Voornaam</span><input autoComplete="given-name" maxLength={40} value={a.voornaam} onChange={(e) => zet("voornaam", e.target.value)} /></label>
           <label className="gw2-veld"><span>Achternaam</span><input autoComplete="family-name" maxLength={40} value={a.achternaam} onChange={(e) => zet("achternaam", e.target.value)} /></label>
@@ -142,6 +186,7 @@ export default function GratisWebsite() {
         <p className="gw2-klein">{heeftWhatsApp ? "Je aanvraag opent WhatsApp met al je antwoorden. Verstuur het bericht daar zelf naar Steef." : "Je aanvraag opent je e-mailapp met al je antwoorden. Verstuur de mail daar zelf naar Steef."} Lees ons <a href={`${languagePrefix(language)}/privacy/`}>privacybeleid</a>.</p>
       </>}
 
+      {verstuurd && <p className="gw2-klaar" role="status">{heeftWhatsApp ? "WhatsApp opent met je aanvraag. Verstuur het bericht daar, dan nemen we contact op." : "Je e-mailapp opent met je aanvraag. Verstuur de mail daar, dan nemen we contact op."} <a href={verstuurd} data-aanvraag>Opent er niets? Klik hier.</a></p>}
       {fout && <p className="gw2-fout" role="alert">{fout}</p>}
       <div className="gw2-knoppen">
         {stap > 0 && <button type="button" className="gw2-terug" onClick={() => { zetFout(""); zetStap(stap - 1); }}><ArrowLeft size={16} aria-hidden="true" /><span>Terug</span></button>}
