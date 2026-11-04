@@ -6,7 +6,8 @@ import fs from "node:fs";
 const fouten = [];
 const eis = (ok, tekst) => { console.log(`${ok ? "GROEN" : "ROOD "}  ${tekst}`); if (!ok) fouten.push(tekst); };
 const pages = fs.readFileSync("proposal/pages.tsx", "utf8");
-const home = pages.slice(pages.indexOf("export function Home()"));
+// Sinds 4 november 2026 (avond) heeft de homepage zelf ook Connect en de websites; de volgorde hieronder is die van /producten.
+const home = pages.slice(pages.indexOf("export function ProductenPagina"));
 // 4 november 2026: de header is HeaderAlgemeen, Groei en cybersecurity (SamenEnVeilig) staat in de footer; het Odoo-blok dat eerst na het team stond, is weer weg
 // (Marinus: "Deze weg"). Sinds 4 november 2026 avond: /producten (die hier meegelezen wordt) begint weer met HeaderBestaand en
 // SamenEnVeilig ("deze Header mag weer terug bij producten"). Zie scripts/check-header-atomium.mjs.

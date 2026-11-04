@@ -44,3 +44,25 @@ html:root .sn-site .sn-cta-web .sn-cta-web-tekst{max-width:52ch;margin:10px 0 0;
 
 /* Website-actie-deur zonder klantbeeld: het 32-px-raster met een groene gloed. */
 .sn-deur-raster{background-color:#000;background-image:radial-gradient(70% 90% at 30% 40%,#25d36638,transparent 70%),radial-gradient(circle at 16px 16px,rgba(255,255,255,.24) 1.1px,transparent 1.6px);background-size:auto,32px 32px}
+
+/* Hero, 4 november 2026 (avond): tweede knop in Connect-blauw ("2e knop hier graag blauw maken ook"). */
+html:root .sn-site .sn-pill.sn-pill-blauw{--sn-pill-green:#00a3e0;border-color:#00a3e0!important}
+html:root .sn-site .sn-pill.sn-pill-blauw::before{background:#00a3e0!important}
+html:root .sn-site .sn-pill.sn-pill-blauw .h-button-icon,html:root .sn-site .sn-pill.sn-pill-blauw > svg{color:#00a3e0}
+/* Partnerlogo's onder de knoppen: "Hier moeten weer de shopify logo's etc komen." */
+html:root .sn-site .sn-blij .sn-alg-keur{margin-top:30px}
+
+/* WebsiteCTA onderaan, "nog beter gemaakt": tekst en knop links, twee echte websites rechts, groen naar blauw verloop. */
+.sn-cta-web{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"tekst beeld" "knop beeld";align-items:start;column-gap:clamp(24px,4vw,64px);row-gap:24px;min-height:340px;padding:clamp(28px,4vw,56px);border-color:#25d36666;background:radial-gradient(90% 120% at 0% 0%,#25d3662e,transparent 60%),radial-gradient(80% 120% at 100% 100%,#00a3e02a,transparent 60%)}
+.sn-cta-web > div{grid-area:tekst}
+.sn-cta-web > .sn-pill{grid-area:knop;justify-self:start;align-self:end}
+.sn-cta-web-beeld{grid-area:beeld;position:relative;align-self:stretch;min-height:260px}
+.sn-cta-web-beeld img{position:absolute;display:block;border:1px solid #ffffff26;border-radius:12px;box-shadow:0 24px 60px #000c;object-fit:cover;object-position:top}
+@media(max-width:860px){.sn-cta-web{grid-template-columns:1fr;grid-template-areas:"tekst" "beeld" "knop"}.sn-cta-web-beeld{min-height:220px}}
+/* Twee websitetegels, licht over elkaar: de achterste iets hoger en gekanteld, de voorste recht. */
+.sn-cta-web-beeld img{aspect-ratio:16/10;width:74%;transition:transform .5s ease}
+.sn-cta-web-beeld .is-een{right:0;top:0;transform:rotate(2deg)}
+.sn-cta-web-beeld .is-twee{left:0;bottom:0;z-index:1;transform:rotate(-2deg)}
+.sn-cta-web:hover .sn-cta-web-beeld .is-een{transform:rotate(3deg) translateY(-6px)}
+.sn-cta-web:hover .sn-cta-web-beeld .is-twee{transform:rotate(-3deg) translateY(4px)}
+@media(prefers-reduced-motion:reduce){.sn-cta-web-beeld img{transition:none}}

@@ -1,10 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { TrustedBy } from "./HeaderAlgemeen";
-import OdooFilm from "./OdooFilm";
-import { ImageSliders } from "./MediaSliders";
-import { WebsiteTegel } from "./FreeWebsite";
+import { TrustedBy, PartnerLogos, AtomiumFoto } from "./HeaderAlgemeen";
 import "./header-algemeen.css";
 import "./home-enthousiast.css";
 
@@ -15,25 +12,26 @@ import "./home-enthousiast.css";
 // Alleen teksten die Marinus eerder goedkeurde of die al op de site staan.
 // Daarna: "verder producten diensten en website actie oid heel simpel meer focus op die websites" en "Nadruk op veiligheidsscan
 // kan misschien wel veel kleiner." Dus de website-actie voorop en breed, de websites zelf eronder, en geen scan in de deuren.
-const DEUREN = [
-  { naar: "/gratis-website", soort: "Website-actie", kop: "Wij maken jouw website, gratis", tekst: "Vertel ons over je bedrijf en wat je mooi vindt. Wij maken een demo die echt bij je past.", beeld: "", breed: true },
-  { naar: "/producten", soort: "Producten", kop: "SocialNow OS en Connect", tekst: "Hoe het werkt, wie het bouwt en welke techniek erachter zit.", beeld: "/video/os/os-master-en.webp" },
-  { naar: "/diensten", soort: "Diensten", kop: "Van merk tot techniek", tekst: "Websites, branding, content, advertenties en development.", beeld: "/images/cases/vastiq-desktop.webp" },
-];
 
 // 4 november 2026 (Marinus): "Als CTA ook in de homepage voorkomen is heel belangrijk want daar gaat het nu het meest om nieuwe
 // website maken gratis voor klanten." Een opvallende band direct onder de hero en nog een keer verderop. Een ?ref= in het adres van
 // de homepage gaat mee naar de onboarding, zodat ieder een eigen deellink kan gebruiken (socialnow.nl/?ref=ben).
-function WebsiteCTA({ tweede = false }: { tweede?: boolean }) {
+export function WebsiteCTA({ tweede = false }: { tweede?: boolean }) {
   const ref = typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("ref") || "";
   const naar = ref ? `/gratis-website?ref=${encodeURIComponent(ref)}` : "/gratis-website";
-  return <section className={`sn-cta-web h-wrap${tweede ? " is-tweede" : ""}`} aria-label="Gratis nieuwe website">
+  // 4 november 2026 (avond, Marinus): "Deze mobiele vind ik niks je mag daar nog een website tile van maken misschien is 2 wel vet en
+  // focus meer op Gratis veiligheidupdates en websitedemo". Twee echte, live klantwebsites als tegels (geen concepten, geen kWh).
+  return <section className={`sn-cta-web h-wrap${tweede ? " is-tweede" : ""}`} aria-label="Gratis veiligheidsupdates en websitedemo">
     <div>
       <p className="sn-cta-web-label"><i />Website-actie</p>
-      <h2>Nieuwe website, gratis<span className="sn-alg-punt">.</span></h2>
-      <p className="sn-cta-web-tekst">Wij maken een demo van je nieuwe website, persoonlijk en zonder verplichting. Zes korte vragen.</p>
+      <h2>Gratis veiligheidsupdates en websitedemo<span className="sn-alg-punt">.</span></h2>
+      <p className="sn-cta-web-tekst">Wij houden je website veilig met gratis veiligheidsupdates en maken een demo van je nieuwe website op maat. Zes korte vragen, zonder verplichting.</p>
     </div>
     <Link className="sn-pill" to={naar}><span>Vraag je gratis website aan</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
+    <span className="sn-cta-web-beeld" aria-hidden="true">
+      <img className="is-een" src="/images/cases/vastiq-desktop.webp" alt="" loading="lazy" decoding="async" />
+      <img className="is-twee" src="/images/cases/ilgordo-desktop.webp" alt="" loading="lazy" decoding="async" />
+    </span>
   </section>;
 }
 
@@ -53,34 +51,19 @@ export default function HomeEnthousiast() {
           <h1 id="sn-blij-kop">Een betrouwbare partner voor groei en cybersecurity<span className="sn-alg-punt">.</span></h1>
           <p className="sn-alg-uitleg"><strong>Wij helpen je met management, operations en Odoo.</strong> Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
           <div className="sn-alg-acties">
-            <Link className="sn-pill" to="/gratis-website"><span>Start met een gratis websitedemo</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
-            <a className="sn-pill" href="#contact" onClick={naarContact}><span>Neem contact op</span><ArrowUpRight size={17} aria-hidden="true" /></a>
+            {/* 4 november 2026 (avond, Marinus): "2e knop hier graag blauw maken ook en eerste knop mag zijn website actie". */}
+            <Link className="sn-pill" to="/gratis-website"><span>Website-actie</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
+            <a className="sn-pill sn-pill-blauw" href="#contact" onClick={naarContact}><span>Neem contact op</span><ArrowUpRight size={17} aria-hidden="true" /></a>
           </div>
+          {/* 4 november 2026 (Marinus, bij de lege ruimte onder de knoppen): "Hier moeten weer de shopify logo's etc komen." */}
+          <PartnerLogos />
         </div>
-        <OdooFilm />
+        <AtomiumFoto />
       </div>
       <TrustedBy />
     </section>
-    <WebsiteCTA />
-    <section className="sn-deuren h-wrap" aria-labelledby="sn-deuren-kop">
-      <h2 id="sn-deuren-kop">Waar wil je beginnen?</h2>
-      <ul>
-        {DEUREN.map((d) => <li key={d.naar} className={d.breed ? "sn-deur-breed" : undefined}>
-          <Link to={d.naar}>
-            {/* 4 november 2026 (Marinus): "ik wil die oude kWh site niet meer zien". De website-actie heeft geen klantbeeld meer, alleen
-                het stippenraster met een groene gloed; klantconcepten horen niet publiek in beeld. */}
-            {d.beeld ? <span className="sn-deur-beeld"><img src={d.beeld} alt="" loading="lazy" decoding="async" /></span> : <span className="sn-deur-beeld sn-deur-raster" aria-hidden="true" />}
-            <span className="sn-deur-soort">{d.soort}</span>
-            <strong>{d.kop}</strong>
-            <span className="sn-deur-tekst">{d.tekst}</span>
-            <span className="sn-deur-pijl" aria-hidden="true"><ArrowUpRight size={18} /></span>
-          </Link>
-        </li>)}
-      </ul>
-    </section>
-    {/* De websites zelf, direct onder de deuren (FreeWebsite.tsx, dezelfde slider als op /producten). */}
-    <WebsiteTegel />
-    <ImageSliders kort />
-    <WebsiteCTA tweede />
+    {/* 4 november 2026 (avond, Marinus): "De landingspagina is wie wij zijn niet dit en hier moet de connect weer komen met daarna
+        mooi de websites, daarna de mooie sliders en mobiele slider etc daarna mag wel die deze". De drie deuren en
+        de band direct onder de hero zijn weg; de rest van de homepage staat in Home() in pages.tsx. */}
   </>;
 }

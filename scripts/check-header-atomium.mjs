@@ -13,15 +13,15 @@ const lees = (f) => (fs.existsSync(f) ? fs.readFileSync(f, "utf8") : "");
 const kop = lees("proposal/HeaderAlgemeen.tsx");
 const header = kop.slice(kop.indexOf("export default function HeaderAlgemeen"));
 const STAPPEN = ["Website en branding", "Systemen en operations", "Marketing en sales", "Finance"];
-eis(header.includes("/images/verhaal/team-atomium.webp"), "header: het team bij het Atomium is het hoofdbeeld");
+eis(kop.includes("/images/verhaal/team-atomium.webp") && header.includes("<AtomiumFoto"), "header: het team bij het Atomium is het hoofdbeeld");
 const stappen = kop.match(/const STAPPEN = \[([^\]]*)\]/);
 eis(!!stappen && JSON.stringify(stappen[1].split(",").map((s) => s.trim().replace(/"/g, ""))) === JSON.stringify(STAPPEN) && header.includes("STAPPEN.map"), `header: vier stappen ${STAPPEN.join(", ")}`);
 eis(!header.includes("odoo-experience-stand") && !header.includes("PARTNERS"), "header: geen standfoto en geen partnerkaart meer");
-eis(header.includes("Bekijk de video") && header.includes("trusted by"), "header: Bekijk de video en de Trusted by-balk blijven");
+eis(kop.includes("Bekijk de video") && kop.includes("trusted by"), "header: Bekijk de video en de Trusted by-balk blijven");
 // "Ik wil dat het écht duidelijk is gelijk BAM Ze kunnen mij helpen met management en operations en Odoo." en "Haal anders
 // Indexworld en Uncanny maar weg en zet alleen de logo's van samenwerking eronder."
 eis(header.includes("Wij helpen je met management, operations en Odoo.") && header.indexOf("management, operations en Odoo") < header.indexOf("STAPPEN.map"), "header: meteen onder de titel dat we helpen met management, operations en Odoo");
-eis(["Odoo Silver Partner", "Shopify Partners", "Salesforce-partner", "Adobe-partner"].every((n) => kop.includes(`naam: "${n}"`)) && header.includes("KEURMERKEN.map") && header.indexOf("KEURMERKEN.map") < header.indexOf("STAPPEN.map"), "header: logo's van Odoo Silver, Shopify, Salesforce en Adobe onder de titel");
+eis(["Odoo Silver Partner", "Shopify Partners", "Salesforce-partner", "Adobe-partner"].every((n) => kop.includes(`naam: "${n}"`)) && kop.includes("KEURMERKEN.map") && header.includes("<PartnerLogos") && header.indexOf("<PartnerLogos") < header.indexOf("STAPPEN.map"), "header: logo's van Odoo Silver, Shopify, Salesforce en Adobe onder de titel");
 eis(!/(indexworld|uncanny)[^"]*\.(png|svg|webp)/i.test(kop), "Indexworld en Uncanny staan niet meer in de header of het Odoo-blok");
 
 // Het Odoo-blok en de voorbeelden onder het team mochten later die dag weer weg: "Deze weg".
@@ -76,11 +76,13 @@ eis(/background:\s*transparent/.test(basis) && !/background:\s*#0{3,6}\b/.test(b
 
 const pages = lees("proposal/pages.tsx");
 const home = pages.slice(pages.indexOf("export function Home()"));
+// Sinds 4 november 2026 (avond) staan ConnectExperts en de sliders ook op de homepage ("wie wij zijn"); /producten apart meten.
+const prodDeel = pages.slice(pages.indexOf("export function ProductenPagina"));
 // Over Wat we bereikten: "Deze mag weg."
 eis(!home.includes("<Bereikt") && !pages.includes('import("./Bereikt")'), "homepage: geen blok Wat we bereikten meer");
 // "deze Header mag weer terug bij producten daar is dat technische juist heel goed": /producten begint met HeaderBestaand.
-const plek = ["<HeaderBestaand", "<SamenEnVeilig", "<ConnectExperts"].map((v) => home.indexOf(v));
-eis(plek.every((p) => p >= 0) && plek[0] < plek[1] && plek[1] < plek[2] && !home.includes("<OdooPartners"), "/producten: de oude header, de partners (Groei en cybersecurity), dan het team; geen Odoo-blok");
+const plek = ["<HeaderBestaand", "<SamenEnVeilig", "<ConnectExperts"].map((v) => prodDeel.indexOf(v));
+eis(plek.every((p) => p >= 0) && plek[0] < plek[1] && plek[1] < plek[2] && !prodDeel.includes("<OdooPartners"), "/producten: de oude header, de partners (Groei en cybersecurity), dan het team; geen Odoo-blok");
 
 // "Deze onderdelen bedoel ik meer die mag anders wel op de productenpagina oid." De oude header met OS, Connect en partners.
 const paginas = lees("proposal/paginas.tsx");
@@ -89,32 +91,35 @@ eis(!pages.slice(pages.indexOf("export function Home()"), pages.indexOf("export 
 
 eis(osPagina.indexOf("<SamenEnVeilig") > osPagina.indexOf("<HeaderBestaand"), "Groei en cybersecurity staat op /het-os onder de oude header");
 // "Vanuit onder de websites zelf mag er meer content komen vanuit de branding en voorbeelden." en "Net als hier maar kortere titels."
-const naWeb = home.slice(home.indexOf("<FreeWebsite"));
-eis(naWeb.includes("<VideoSlider kort") && lees("proposal/HomeEnthousiast.tsx").includes("<ImageSliders kort"), "branding en campagnes op de homepage, video onder de websites op /producten");
+const naWeb = prodDeel.slice(prodDeel.indexOf("<FreeWebsite"));
+eis(naWeb.includes("<VideoSlider kort") && pages.slice(pages.indexOf("export function Home()"), pages.indexOf("export function ProductenPagina")).includes("<ImageSliders kort"), "branding en campagnes op de homepage, video onder de websites op /producten");
 // "die technische data en huidige landingspagina mag naar producten gaan dan is dit meer enthousiasmering en rest inhoudelijk en
 // technisch. verder wil ik producten diensten en website actie"
 const blij = lees("proposal/HomeEnthousiast.tsx");
 const startHome = pages.slice(pages.indexOf("export function Home()"), pages.indexOf("export function ProductenPagina"));
 const producten = pages.slice(pages.indexOf("export function ProductenPagina"));
-eis(startHome.includes("<HomeEnthousiast />") && !startHome.includes("<ConnectExperts") && !startHome.includes("<HomeTechniek"), "homepage enthousiasmeert: geen team en geen techniek");
-eis(['naar: "/producten"', 'naar: "/diensten"', 'naar: "/gratis-website"'].every((n) => blij.includes(n)) && (blij + lees("proposal/OdooFilm.tsx")).includes("odoo-experience-kort.mp4") && blij.includes("<TrustedBy />") && (blij.match(/<h1 /g) || []).length === 1, "homepage: één kop, de Odoo-film, merken en drie deuren: Producten, Diensten, Website-actie");
+// 4 november 2026 (avond): "Wie wij zijn - wat wij doen - hoe wij onszelf bewijzen." De homepage is wie wij zijn: wel Connect (het team),
+// geen techniek; die staat op /producten (wat wij doen). Zie scripts/check-homepage-wie-wij-zijn.mjs.
+eis(startHome.includes("<HomeEnthousiast />") && startHome.includes("<ConnectExperts") && !startHome.includes("<HomeTechniek"), "homepage is wie wij zijn: het team, geen techniek");
+eis((blij + lees("proposal/OdooFilm.tsx")).includes("odoo-experience-kort.mp4") && blij.includes("<TrustedBy />") && (blij.match(/<h1 /g) || []).length === 1, "homepage: één kop, de Odoo-film en de merken (de drie deuren zijn weg sinds 4 nov avond)");
 eis(["<HeaderBestaand", "<SamenEnVeilig", "<ConnectExperts", "<FreeWebsite", "<HomeTechniek"].every((k) => producten.includes(k)) && /path="\/producten" element=\{<ProductenPagina \/>\}/.test(lees("proposal/WebsiteProposal.tsx")), "/producten: de inhoudelijke en technische landingspagina");
 const menuTsx = lees("proposal/Producten.tsx"), shellTsx = lees("proposal/WebsiteProposal.tsx");
 eis(/NAV_LINKS: Array<\[string, string\]> = \[\s*\["\/diensten", "Diensten"\],\s*\];/.test(menuTsx) && shellTsx.includes('<NavLink to="/producten">Producten</NavLink>') && menuTsx.includes("<span>Website-actie</span>"), "menu: Producten, Diensten, Website-actie");
 // "heel simpel meer focus op die websites. En onboarding graag op een witte pagina met mooiere voorbeelden en leuker om in te vullen.
 // Nadruk op veiligheidsscan kan misschien wel veel kleiner."
-eis(blij.indexOf('naar: "/gratis-website"') > 0 && blij.indexOf('naar: "/gratis-website"') < blij.indexOf('naar: "/producten"') && blij.includes("breed: true") && blij.includes("<WebsiteTegel />") && !/securityscan|\/security/.test(blij.replace(/\/\/.*$/gm, "")), "homepage: website-actie voorop en breed, de websites eronder, geen securityscan");
+eis(startHome.indexOf("<FreeWebsite") > startHome.indexOf("<ConnectExperts") && !/securityscan|\/security/.test(blij.replace(/\/\/.*$/gm, "")), "homepage: de websites onder Connect, geen securityscan");
 const gw = lees("proposal/GratisWebsite.tsx"), gwcss = lees("proposal/gratis-website-wit.css");
 eis(/\.gw2\{[^}]*background:#fff/.test(gwcss) && gw.includes("STIJLEN.map") && gw.includes("DOELEN.map") && gw.includes("gw2-voortgang") && (gw.match(/zetStap\(/g) || []).length >= 2 && !/value=\{"[^"]+"\}|defaultValue=/.test(gw), "onboarding: witte pagina, stap voor stap, echte voorbeelden en klikbare antwoorden, geen ingevulde voorbeelddata");
 // "Zet verder de Odoo video achter de header video en zorg dat die ook automatisch daar afspeelt met geluid na 3 seconden."
 const film = lees("proposal/OdooFilm.tsx");
-eis(blij.includes("<OdooFilm />") && film.includes('const LANG = "/video/odoo-experience/odoo-experience.mp4"') && fs.existsSync("public/video/odoo-experience/odoo-experience.mp4") && film.includes("const WACHT = 3000") && /v\.muted = false;\s*try \{ await v\.play\(\)/.test(film) && /catch \{\s*v\.muted = true/.test(film) && film.includes('"Geluid aan"') && film.includes('addEventListener("pointerdown", aan') && film.includes("prefers-reduced-motion"), "homepage: na 3 s de Odoo-aftermovie met geluid, anders gedempt met Geluid aan en geluid bij de eerste klik");
+// Daarna (avond): "Doe toch maar gewoon die foto met zoom zoals die was en video alleen als je op afspelen klikt". OdooFilm.tsx blijft bestaan.
+eis(blij.includes("<AtomiumFoto />") && !blij.includes("<OdooFilm") && kop.includes("export function AtomiumFoto") && /sn-alg-knop-video[^>]*onClick=\{open\}/.test(kop) && /preload="none"/.test(kop.slice(kop.indexOf("export function AtomiumFoto"))), "homepage: de Atomium-foto met zoom, de aftermovie alleen na klikken op Bekijk de video");
 // Website-actie: "een hele cleane onboarding [...] met nog een zwarte banner met de video van mij en in 1 header net als de main".
-eis(/<section className="sn-alg gw2-kop"/.test(gw) && gw.includes('src="/security/film/security-9x16.mp4"') && fs.existsSync("public/security/film/security-9x16.mp4") && gw.indexOf("gw2-kop") < gw.indexOf('id="onboarding"') && (gw.match(/<h1 /g) || []).length === 1 && !gw.includes("ConnectExperts"), "website-actie: zwarte header met de video van Marinus, direct daaronder de witte onboarding");
+eis(/<section className="sn-alg gw2-kop"/.test(gw) && gw.includes('src="/security/film/security-16x9.mp4"') && fs.existsSync("public/security/film/security-16x9.mp4") && gw.indexOf("gw2-kop") < gw.indexOf('id="onboarding"') && (gw.match(/<h1 /g) || []).length === 1 && !gw.includes("ConnectExperts"), "website-actie: zwarte header met de video van Marinus, direct daaronder de witte onboarding");
 // "die website-onboarding waarbij ze nog de persoon kunnen aanvinken via wie ze daar zijn gekomen + Als CTA ook in de homepage".
 const aanvr = lees("proposal/aanvragen.ts");
 eis(gw.includes("AANBRENGERS.map") && gw.includes('"Iemand anders"'.slice(1, -1)) && gw.includes("Niemand, zelf gevonden") && /get\("ref"\)/.test(gw) && /\[w\.via, gegevens\.via\]/.test(aanvr) && (aanvr.match(/via: "/g) || []).length === 10 && gw.includes("{ via, voornaam"), "onboarding: kies via wie je kwam (foto en naam, Iemand anders, Zelf gevonden), ?ref= vult vooraf in, Aangebracht door gaat mee in de aanvraag");
-eis((blij.match(/<WebsiteCTA/g) || []).length >= 2 && blij.indexOf("<WebsiteCTA />") < blij.indexOf("sn-deuren") && /gratis-website\?ref=/.test(blij), "homepage: CTA gratis nieuwe website direct onder de hero en verderop, ?ref gaat mee");
+eis(startHome.includes("<WebsiteCTA") && startHome.indexOf("<WebsiteCTA") > startHome.indexOf("<VideoSlider") && /gratis-website\?ref=/.test(blij), "homepage: CTA gratis nieuwe website na de sliders, ?ref gaat mee");
 // Website-actie in de menubalk: "Deze dikgedrukt en met een shine zodat ie nog meer opvalt."
 const menuCss = lees("proposal/hoofdmenu.css");
 eis(/a\.h-security>span,[^{]*\{font-weight:800!important;[^}]*background-clip:text;[^}]*animation:sn-glans 5s/.test(menuCss) && /prefers-reduced-motion:reduce\)\{[^{]*a\.h-security>span[^{]*\{animation:none/.test(menuCss) && /#25d366 50%/.test(menuCss), "menu: Website-actie vet met een rustige groene glans (elke 5 s), niet bij reduced motion");
@@ -145,13 +150,13 @@ if (process.argv.includes("--dist")) {
   const nl = lees("dist/nl/index.html");
   const nlProd = lees("dist/nl/producten/index.html");
   eis(/class="[^"]*\bsn-bestaand\b/.test(nlProd) && nlProd.includes('id="groei"') && nlProd.includes('class="cx-org"'), "gebouwde /nl/producten: de oude header, de partners en het team");
-  eis(nl.includes("sn-deuren") && nl.includes("odoo-experience-kort.mp4") && !nl.includes('class="cx-org"'), "gebouwde nl-homepage: deuren en film, geen team");
+  eis(!nl.includes('class="sn-deuren') && nl.includes("team-atomium.webp") && nl.includes('class="cx-org"'), "gebouwde nl-homepage: Atomium-foto en het team, geen deuren");
   eis(!nl.includes('id="groei"') && !nl.includes("odoo-experience-stand") && !nl.includes("cx-voorbeelden") && nl.includes("h-image-showcase") && !nl.includes('id="bereikt"') && nl.includes("sn-contactslot") && nl.includes("partners@socialnow.nl") && nl.includes("tel:+31637404577"), "gebouwde nl-homepage: geen Groei-blok, geen Odoo-blok, wel branding en de contacttegels");
   const os = lees("dist/nl/het-os/index.html");
   const bestaand = /class="[^"]*\bsn-bestaand\b/;  // het element, niet de gedeelde CSS-regel
   eis(bestaand.test(os) && os.includes('id="groei"') && !bestaand.test(nl), "gebouwde /het-os toont de oude header met Groei en cybersecurity, de homepage niet");
   const en = lees("dist/index.html");
-  eis(en.includes("Where would you like to start?") && en.includes("We help you with management, operations and Odoo.") && /class="[^"]*\bsn-bestaand\b/.test(lees("dist/producten/index.html")), "gebouwde en-homepage en /producten zijn vertaald");
+  eis(en.includes("We help you with management, operations and Odoo.") && /class="[^"]*\bsn-bestaand\b/.test(lees("dist/producten/index.html")), "gebouwde en-homepage en /producten zijn vertaald");
 }
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");
 process.exit(fouten.length ? 1 : 0);

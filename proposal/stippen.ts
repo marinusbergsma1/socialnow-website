@@ -321,7 +321,7 @@ export function siteVeld(): Veld | null {
   // van 1 naar 1,25, zodat het raster op een gewone laptop zonder inzoomen duidelijk zichtbaar is. Raster blijft 32 px, geen drift.
   // Daarna (Marinus): "Dots zijn nu te ..." (te sterk). Middenweg tussen vóór en na: dekking .18, straal 1,1.
   // Proef: scripts/check-stippen-zichtbaar.mjs (bewaakt een ondergrens).
-  site = new Veld(c, { basis: "rgba(255,255,255,.18)", vast: true, r: 1.1 });
+  site = new Veld(c, { basis: "rgba(255,255,255,.13)", vast: true, r: 1 });
   if (site.W > 0 && site.H > 0) document.documentElement.classList.add("sn-stipveld-ready");
   // A short, soft trail illuminates the existing grid underneath the pointer.
   let laatsteMuis = -Infinity;
