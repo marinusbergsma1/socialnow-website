@@ -43,4 +43,4 @@ html:root .sn-site .sn-cta-web .sn-cta-web-tekst{max-width:52ch;margin:10px 0 0;
 .sn-cta-web .sn-pill{flex:0 0 auto}
 
 /* Website-actie-deur zonder klantbeeld: het 32-px-raster met een groene gloed. */
-.sn-deur-raster{background-color:#000;background-image:radial-gradient(70% 90% at 30% 40%,#25d36638,transparent 70%),radial-gradient(circle at 16px 16px,rgba(255,255,255,.34) 1.25px,transparent 1.75px);background-size:auto,32px 32px}
+.sn-deur-raster{background-color:#000;background-image:radial-gradient(70% 90% at 30% 40%,#25d36638,transparent 70%),radial-gradient(circle at 16px 16px,rgba(255,255,255,.24) 1.1px,transparent 1.6px);background-size:auto,32px 32px}

@@ -8,8 +8,9 @@
 :root body {
   background-color: #000 !important;
   /* 11 okt (Marinus): "stippen te groot, moet meer een achtergrond effect zijn": straal 1 px, zachter. */
-  /* 4 nov 2026 (Marinus): "DIE FUCKING DOTS OVERAL MEER DUIDELIJK". Zelfde dekking en straal als het canvas in stippen.ts. */
-  background-image: radial-gradient(circle at 16px 16px, rgba(255, 255, 255, .26) 1.25px, transparent 1.75px) !important;
+  /* 4 nov 2026 (Marinus): "DIE FUCKING DOTS OVERAL MEER DUIDELIJK", daarna "Dots zijn nu te ...": middenweg .18 en 1,1 px,
+     zelfde dekking en straal als het canvas in stippen.ts. */
+  background-image: radial-gradient(circle at 16px 16px, rgba(255, 255, 255, .18) 1.1px, transparent 1.6px) !important;
   background-size: 32px 32px !important;
   background-position: 0 0 !important;
 }
@@ -69,4 +70,4 @@
   .h-partner-uitleg, .h-bedankt, .sn-infrastructure, .sn-infrastructure article, .sn-infra-strip, .prijs-usps, .prijs-kaart,
   .prijs-vergelijk, .prijs-los li, .sn-explainer-cover) { background-color: transparent !important; }
 /* Uitklapmenu's liggen over de pagina heen en moeten leesbaar blijven: zwart, met hetzelfde raster erin. */
-:root .sn-site .h-producten-menu { background-color: #000 !important; background-image: radial-gradient(circle at 16px 16px, rgba(255, 255, 255, .26) 1.25px, transparent 1.75px) !important; background-size: 32px 32px !important; }
+:root .sn-site .h-producten-menu { background-color: #000 !important; background-image: radial-gradient(circle at 16px 16px, rgba(255, 255, 255, .18) 1.1px, transparent 1.6px) !important; background-size: 32px 32px !important; }
