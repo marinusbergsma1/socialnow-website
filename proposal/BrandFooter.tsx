@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { services } from "./content";
 import { Closing } from "./ui";
+import SamenEnVeilig from "./SamenEnVeilig";
 export default function BrandFooter() {
   const { pathname } = useLocation();
   const home = /^\/(?:[a-z]{2}(?:-[a-z]{2})?\/?)?$/.test(pathname);
@@ -17,6 +18,10 @@ export default function BrandFooter() {
     <footer className="h-brand-footer">
       <div className="h-wrap">
         <Closing compact={home} />
+      </div>
+      {/* 4 november 2026 (Marinus): het blok onder de homepage-header is de uitgebreide footer geworden, op elke pagina. */}
+      <SamenEnVeilig />
+      <div className="h-wrap">
         <div className="h-footer-links">
           <div>
             <p className="h-eyebrow">Expertise</p>

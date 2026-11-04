@@ -62,9 +62,10 @@ export const people: { name: string; role: string; image: string; linkedin?: str
     linkedin: "https://www.linkedin.com/in/sid-van-kalken-65b486223/",
   },
   // 1 oktober 2026 (Marinus): Douwe Kramer, co-founder van Attesso, met Sid het Attesso-team naast Marinus en Steef.
+  // 4 november 2026 (Marinus): "DOUWE heb ik een andere functie gegeven." Zijn titel komt uit de mailfooter (MAIL.html, 28 okt).
   {
     name: "Douwe Kramer",
-    role: "Co-founder · Attesso",
+    role: "AI & Data Engineer",
     image: "Douwe-Kramer-attesso.webp",
     linkedin: "https://www.linkedin.com/in/douwe-kramer-attesso/",
     sinds: "2026-10-01",

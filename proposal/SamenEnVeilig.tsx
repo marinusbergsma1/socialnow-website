@@ -243,7 +243,7 @@ export default function SamenEnVeilig() {
   const t = TEKST;
   const docs = documenten(language === "nl" ? "nl" : "en");
   return (
-    <section className="sn-samen" aria-labelledby="sn-samen-usp">
+    <section className="sn-samen" id="groei" tabIndex={-1} aria-labelledby="sn-samen-usp">
       {/* Eigen kopie van het blauwfilter uit HomeHeader: variant B rendert dat filter niet. */}
       <svg className="sn-samen-filter" aria-hidden="true"><defs><filter id="samen-connect-blue" colorInterpolationFilters="sRGB"><feComponentTransfer><feFuncR type="linear" slope=".6" intercept=".02" /><feFuncG type="linear" slope=".55" intercept=".43" /><feFuncB type="linear" slope=".45" intercept=".5" /></feComponentTransfer></filter></defs></svg>
       <div className="sn-samen-wrap">

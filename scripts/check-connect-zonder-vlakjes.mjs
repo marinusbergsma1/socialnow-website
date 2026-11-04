@@ -10,10 +10,12 @@ eis(!cx.includes('className="cx-chips"') && cx.includes('className="cx-zoek"'), 
 eis(/HomeConnectBand\(\)\{return <div className="sn-choice" id="connect">/.test(band), "Connect-blok op de homepage heeft het anker #connect");
 const knop = kop.slice(kop.lastIndexOf("<a", kop.indexOf("<span>Bekijk Connect</span>")), kop.indexOf("<span>Bekijk Connect</span>"));
 eis(knop.includes('href="#connect"') && knop.includes('getElementById("connect")') && !knop.includes('href="/connect/"'), "Bekijk Connect springt naar het Connect-blok");
+// Sinds 4 november 2026 staat die header op /het-os, waar geen Connect-blok staat: daar gaat de knop naar de Connect-pagina.
+eis(knop.includes('window.location.assign("/connect/")'), "Bekijk Connect gaat zonder Connect-blok naar /connect/");
 if (process.argv.includes("--dist")) {
-  for (const f of ["dist/nl/index.html", "dist/index.html"]) {
-    const h = fs.readFileSync(f, "utf8");
-    eis(!h.includes('class="cx-chips"') && h.includes('id="connect"') && /href="#connect"[^>]*>(<span>)?(Bekijk Connect|Explore Connect)/.test(h), `${f}: geen vlakjes, anker en knop naar #connect`);
+  for (const [f, os] of [["dist/nl/index.html", "dist/nl/het-os/index.html"], ["dist/index.html", "dist/het-os/index.html"]]) {
+    const h = fs.readFileSync(f, "utf8"), o = fs.readFileSync(os, "utf8");
+    eis(!h.includes('class="cx-chips"') && h.includes('id="connect"') && /href="#connect"[^>]*>(<span>)?(Bekijk Connect|Explore Connect)/.test(o), `${f}: geen vlakjes en het anker #connect; ${os}: knop Bekijk Connect`);
   }
 }
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");

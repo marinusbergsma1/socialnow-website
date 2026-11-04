@@ -25,6 +25,7 @@ import FeaturedWork from "./FeaturedWork";
 import ResultatenHero from "./ResultatenHero";
 import { WebsiteTegel } from "./FreeWebsite";
 import ConnectExperts from "./ConnectExperts";
+import HeaderBestaand from "./HeaderBestaand";
 import { ImageSliders, VideoSlider } from "./MediaSliders";
 import OsEntry, { GRATIS_OS_URL } from "./os-entry";
 import { agents, people, services } from "./content";
@@ -110,17 +111,11 @@ export function OsPage() {
   // 28 september 2026 (Marinus, het verhaal): alle data in één OS, Odoo als laatste sleutel, gratis te gebruiken.
   return (
     <>
-      <PageHeading
-        label="SocialNow OS / Mensen en AI"
-        title={
-          <>
-            Jouw ideeën. Onze mensen.
-            <br />
-            <span>Samen met AI.</span>
-          </>
-        }
-        text="Je wilt iets opbouwen met je bedrijf. Wij brengen je ideeën, de juiste mensen en AI samen. Werk aan je website en content in je eigen OS. Voor richting, creativiteit en maatwerk werk je persoonlijk samen met ons team."
-      />
+      {/* 4 november 2026 (Marinus) over de oude homepage-header met OS, Connect en de partners: "Deze onderdelen bedoel ik meer die
+          mag anders wel op de productenpagina oid." Dus die header staat nu hier, op de pagina waar Producten naartoe wijst. */}
+      <section className="h-hero sn-approved-hero sn-simple-home" id="producten">
+        <HeaderBestaand meet={() => {}} />
+      </section>
       <div className="h-wrap sn-os-start">
         <TeamTrust />
         <div className="sn-os-start-links"><TextLink to="/contact?onderwerp=Samen%20werken%20met%20mensen%20en%20AI">Vertel ons wat je wilt bereiken</TextLink></div>
