@@ -9,13 +9,30 @@ html:root .sn-site .sn-alg h1{max-width:18ch;margin:16px 0 0;font-size:clamp(34p
 .sn-alg-punt{color:var(--a-groen)}
 html:root .sn-site .sn-alg .sn-alg-uitleg{max-width:52ch;margin:18px 0 0;font-size:clamp(16px,1.3vw,19px);line-height:1.5;color:#b9c2be;text-align:left}
 
-/* Vier diensten als korte tegels, Odoo voorop. */
-html:root .sn-site .sn-alg .sn-alg-diensten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:26px 0 0;padding:0;list-style:none}
-@media(max-width:420px){html:root .sn-site .sn-alg .sn-alg-diensten{grid-template-columns:1fr}}
-.sn-alg-diensten li{display:flex;gap:12px;align-items:center;padding:11px 14px;border:1px solid var(--a-lijn);border-radius:12px;background:#06090b}
-.sn-alg-diensten li:first-child{border-color:#25d36655;background:linear-gradient(135deg,#25d36614,#06090b 60%)}
-.sn-alg-diensten li>svg{flex:0 0 auto;color:var(--a-groen)}
+/* Vier diensten, vier opties (?diensten=1..4). Geen tegels meer. */
+html:root .sn-site .sn-alg .sn-alg-diensten{margin:24px 0 0;padding:0;list-style:none}
 .sn-alg-diensten strong{font-size:15px;font-weight:600;color:#fff}
+.sn-alg-diensten li>svg{flex:0 0 auto;color:var(--a-groen)}
+/* 1: één tekstregel met groene stippen ertussen. */
+html:root .sn-site .sn-alg .sn-alg-d1{display:flex;flex-wrap:wrap;gap:6px 0}
+.sn-alg-d1 li{display:flex;align-items:center}
+.sn-alg-d1 li+li::before{content:"";width:5px;height:5px;margin:0 14px;border-radius:50%;background:var(--a-groen)}
+.sn-alg-d1 strong{font-weight:500;color:#dfe6e2}
+/* 2: twee kolommen met vinkjes. */
+html:root .sn-site .sn-alg .sn-alg-d2{display:grid;grid-template-columns:repeat(2,max-content);gap:12px 36px}
+@media(max-width:480px){html:root .sn-site .sn-alg .sn-alg-d2{grid-template-columns:1fr}}
+.sn-alg-d2 li{display:flex;gap:10px;align-items:center}
+/* 3: kleine pillen op één rij. */
+html:root .sn-site .sn-alg .sn-alg-d3{display:flex;flex-wrap:wrap;gap:8px}
+.sn-alg-d3 li{display:inline-flex;gap:8px;align-items:center;padding:7px 14px;border:1px solid var(--a-lijn);border-radius:999px}
+.sn-alg-d3 strong{font-size:14px;font-weight:500}
+/* 4: genummerd, alleen een dunne lijn erboven. */
+html:root .sn-site .sn-alg .sn-alg-d4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 18px}
+@media(max-width:700px){html:root .sn-site .sn-alg .sn-alg-d4{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px}}
+.sn-alg-d4 li{display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px solid #ffffff33}
+.sn-alg-d4 li:first-child{border-top-color:var(--a-groen)}
+.sn-alg-nr{font-family:var(--a-mono);font-size:11px;letter-spacing:.1em;color:var(--a-groen)}
+.sn-alg-d4 strong{font-size:14px;line-height:1.3}
 
 .sn-alg-acties{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .sn-alg-knop{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border:1px solid var(--a-groen);border-radius:999px;background:var(--a-groen);color:#002912;font:inherit;font-size:15px;font-weight:700;text-decoration:none;cursor:pointer;transition:background .2s,color .2s}
@@ -36,7 +53,7 @@ html:root .sn-site .sn-alg .sn-alg-foto figcaption strong{font-family:'TT Norms'
 html:root .sn-site .sn-alg .sn-alg-kaart p{margin:6px 0 0;font-size:13.5px;line-height:1.45;color:#b9c2be;text-align:left}
 html:root .sn-site .sn-alg .sn-alg-kaart .sn-alg-klein{margin:0;font-family:var(--a-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--a-grijs)}
 
-/* Onze Odoo-partners: alleen hun logo en hun keurmerken in wit. */
+/* Onze Odoo-partners: alleen hun logo en hun keurmerken, in kleur (Marinus 4 nov: "die logo's in kleur graag"). */
 html:root .sn-site .sn-alg .sn-alg-partners ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 0;padding:0;list-style:none}
 @media(max-width:560px){html:root .sn-site .sn-alg .sn-alg-partners ul{grid-template-columns:1fr}}
 .sn-alg-partners li{display:flex;flex-direction:column;padding:14px;border:1px solid var(--a-lijn);border-radius:12px;background:#0b0f12}
@@ -44,7 +61,7 @@ html:root .sn-site .sn-alg .sn-alg-partners ul{display:grid;grid-template-column
 .sn-alg-partner-logo img{height:28px;width:auto;max-width:150px;object-fit:contain}
 .sn-alg-partner-logo img.is-wit{filter:brightness(0) invert(1)}
 .sn-alg-certs{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:16px;padding-top:14px;border-top:1px solid var(--a-lijn)}
-.sn-alg-certs img{height:22px;width:auto;max-width:96px;object-fit:contain;filter:brightness(0) invert(1);opacity:.9}
+.sn-alg-certs img{height:22px;width:auto;max-width:96px;object-fit:contain}
 .sn-alg-knop-video{position:absolute;right:16px;bottom:18px;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:#000;font:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px #0008;transition:transform .2s}
 .sn-alg-knop-video:hover{transform:scale(1.04)}
 .sn-alg-knop-video svg{fill:var(--a-groen);color:var(--a-groen)}

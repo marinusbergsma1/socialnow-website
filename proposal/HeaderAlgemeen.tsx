@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Boxes, Globe, Play, ShieldCheck, Workflow, X } from "lucide-react";
+import { ArrowUpRight, Boxes, Check, Globe, Play, ShieldCheck, Workflow, X } from "lucide-react";
 import { openPlanCall } from "./PlanCall";
 import { CRAFTURE, DIRECT, VIA_CRAFTURE, merk } from "./ExplainerPlayer";
 import "./header-algemeen.css";
@@ -51,6 +51,8 @@ export default function HeaderAlgemeen() {
   const film = useRef<HTMLVideoElement>(null);
   const open = () => { venster.current?.showModal(); void film.current?.play().catch(() => {}); };
   const sluit = () => { film.current?.pause(); venster.current?.close(); };
+  const keuze = typeof window === "undefined" ? 1 : Number(new URLSearchParams(window.location.search).get("diensten"));
+  const variant = keuze >= 1 && keuze <= 4 ? keuze : 1;
   return (
     <section className="sn-alg" aria-labelledby="sn-alg-kop">
       <div className="sn-alg-wrap">
@@ -60,8 +62,13 @@ export default function HeaderAlgemeen() {
               en AI. Veilig lokaal en in eigen beheer." */}
           <h1 id="sn-alg-kop">Een betrouwbare partner voor groei en cybersecurity<span className="sn-alg-punt">.</span></h1>
           <p className="sn-alg-uitleg">Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
-          <ul className="sn-alg-diensten">
-            {DIENSTEN.map(({ icoon: Icoon, kop }) => <li key={kop}><Icoon size={18} aria-hidden="true" /><strong>{kop}</strong></li>)}
+          {/* 4 november 2026 (Marinus) over de vier tegels: "Dit moet anders". Vier opties via ?diensten=1..4: 1 tekstregel,
+              2 vinkjes, 3 pillen, 4 genummerd met dunne lijnen. Na zijn keuze blijft er één over. */}
+          <ul className={`sn-alg-diensten sn-alg-d${variant}`}>
+            {DIENSTEN.map(({ icoon: Icoon, kop }, i) => <li key={kop}>
+              {variant === 2 ? <Check size={16} aria-hidden="true" /> : variant === 4 ? <span className="sn-alg-nr">0{i + 1}</span> : variant === 3 ? <Icoon size={15} aria-hidden="true" /> : null}
+              <strong>{kop}</strong>
+            </li>)}
           </ul>
           {/* 4 november 2026 (Marinus): "Wij beginnen altijd met een GRATIS WEBSITE DEMO." Dus dat is de eerste knop. */}
           <div className="sn-alg-acties">
