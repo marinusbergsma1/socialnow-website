@@ -8,7 +8,7 @@ import "./header-algemeen.css";
 // Homepage-header, concept 4 november 2026. MARINUS: "Verder moet de focus bij de header niet liggen op connect en os." en
 // "Meer gewoon mooi algemeen houden en duidelijk Odoo en andere ERP hulp. Wat Odoo content erbij die goed werkt."
 // Dus links één algemene kop met vier diensten, Odoo en ERP voorop; rechts onze stand op Odoo Experience 2026 in Brussel (beeld uit
-// de aftermovie, zie Bereikt.tsx), het resultaat uit Bereikt en onze Odoo-partners met hun keurmerken.
+// de aftermovie, zie Bereikt.tsx) en onze Odoo-partners met hun keurmerken.
 // Uit vier opties koos hij de grote standfoto. De vorige header met OS en Connect (HeaderBestaand.tsx) blijft staan voor later.
 
 const DIENSTEN = [
@@ -74,11 +74,7 @@ export default function HeaderAlgemeen() {
             <figcaption><span className="sn-alg-klein">Odoo Experience 2026 · Brussel</span><strong>Met een eigen stand<span className="sn-alg-punt">.</span></strong></figcaption>
             <button type="button" className="sn-alg-knop-video" aria-haspopup="dialog" onClick={open}><Play size={15} aria-hidden="true" /><span>Bekijk de video</span></button>
           </figure>
-          <div className="sn-alg-kaart sn-alg-zwevend">
-            <p className="sn-alg-klein">Resultaat bij een klant</p>
-            <p className="sn-alg-groot"><b>100</b> leads in één week<span className="sn-alg-punt">.</span></p>
-            <p>Meta en Odoo gekoppeld: elke offerteaanvraag komt direct in hun systeem.</p>
-          </div>
+          {/* 4 november 2026 (Marinus): "Resultaat bij de klant mag weg." */}
           <div className="sn-alg-kaart sn-alg-partners">
             <p className="sn-alg-klein">Onze Odoo-partners</p>
             <ul>
