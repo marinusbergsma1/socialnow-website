@@ -33,6 +33,10 @@ const erkend = footer.slice(footer.indexOf('className="h-footer-erkend"'), foote
 eis(["Odoo Silver Partner", "Shopify Partners", "Salesforce-partner", "Adobe-partner"].every((n) => erkend.includes(`alt="${n}"`)) && !erkend.includes("h-footer-erkend-partners"), "footer: één rij met de partnerlogo's");
 // Over Google, Meta en Google Developers in die rij: "Deze mogen weg".
 eis(!/google-logo|meta-logo|Google Developers/.test(erkend), "footer: geen Google, Meta en Google Developers meer");
+// Over het slot Start gratis met jouw systeem: "Hier focussen op een formulier of contactgegevens van Steef en Michelle en Ben.",
+// "Doe maar contactgegevens met functies" en "Misschien mij nog erbij".
+const slot = lees("proposal/ContactSlot.tsx");
+eis(/home \? <ContactSlot \/> : <Closing \/>/.test(footer) && ["Marinus Bergsma", "Steef Komen", "Michelle Yang", "Ben Sterckx"].every((n) => slot.includes(`naam: "${n}"`)) && slot.includes("{p.role}"), "homepage-slot: contactgegevens met functie van Marinus, Steef, Michelle en Ben");
 const tech = lees("proposal/concept-tech.css");
 eis(!/\.h-footer-erkend img \{[^}]*filter/.test(tech) && !/\.h-footer-erkend > div \{[^}]*opacity/.test(tech) , "footer: logo's in kleur, niet gedimd");
 
@@ -71,7 +75,7 @@ eis(cx.indexOf('className="cx-org"') > 0 && !cx.includes("cx-voorbeelden") && !c
 const acties = header.slice(header.indexOf('className="sn-alg-acties"'), header.indexOf("</div>", header.indexOf('className="sn-alg-acties"')));
 eis((acties.match(/className="sn-pill"/g) || []).length === 2 && !acties.includes("sn-alg-knop"), "headerknoppen hebben dezelfde stijl als Inloggen gratis OS (sn-pill)");
 
-const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion."];
+const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op."];
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(lees(`proposal/i18n/${l}.json`) || "{}");
   const mist = nieuw.filter((k) => !w[k] || /[–—]/.test(w[k]));
@@ -81,7 +85,7 @@ for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
 if (process.argv.includes("--dist")) {
   const nl = lees("dist/nl/index.html");
   eis(nl.includes("team-atomium.webp") && nl.includes("Systemen en operations"), "gebouwde nl-homepage: Atomium-beeld en de vier stappen");
-  eis(!nl.includes('id="groei"') && !nl.includes("odoo-experience-stand") && !nl.includes("cx-voorbeelden") && nl.includes("h-image-showcase") && !nl.includes('id="bereikt"'), "gebouwde nl-homepage: geen Groei-blok in de footer, geen Odoo-blok, wel branding en video onder de websites");
+  eis(!nl.includes('id="groei"') && !nl.includes("odoo-experience-stand") && !nl.includes("cx-voorbeelden") && nl.includes("h-image-showcase") && !nl.includes('id="bereikt"') && nl.includes("sn-contactslot") && nl.includes("michelle@socialnow.nl"), "gebouwde nl-homepage: geen Groei-blok in de footer, geen Odoo-blok, wel branding en video onder de websites");
   const os = lees("dist/nl/het-os/index.html");
   eis(os.includes("sn-bestaand") && os.includes('id="groei"') && !nl.includes("sn-bestaand"), "gebouwde /het-os toont de oude header met Groei en cybersecurity, de homepage niet");
   const en = lees("dist/index.html");
