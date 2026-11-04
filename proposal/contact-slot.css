@@ -1,5 +1,5 @@
 /* ContactSlot.tsx: slot van de homepage met vier contactpersonen, zakelijk en rustig op zwart (4 november 2026).
-   Later die dag (Marinus): "Maak dit zakelijker". Alles bovenaan uitgelijnd, foto's in dezelfde vierkante uitsnede in zwart-wit,
+   Later die dag (Marinus): "Maak dit zakelijker". Alles bovenaan uitgelijnd, foto's in dezelfde vierkante uitsnede (in kleur: "deze weer in kleur"),
    ruimte voor twee regels functie zodat de links in alle tegels op dezelfde hoogte staan, en rustige grijze links met dunne iconen. */
 .sn-contactslot{max-width:1240px;margin:0 auto;padding:clamp(48px,6vw,80px) 0 clamp(36px,4vw,56px);text-align:center}
 html:root .sn-site .sn-contactslot .sn-contactslot-label{display:inline-flex;align-items:center;gap:8px;margin:0;font-family:var(--v-mono,ui-monospace,Menlo,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8b9691}
@@ -9,7 +9,7 @@ html:root .sn-site .sn-contactslot ul{display:grid;grid-template-columns:repeat(
 @media(max-width:1100px){html:root .sn-site .sn-contactslot ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){html:root .sn-site .sn-contactslot ul{grid-template-columns:1fr;max-width:460px;margin-inline:auto}}
 .sn-contactslot li{display:flex;gap:16px;align-items:flex-start;padding:18px;border:1px solid #ffffff1a;border-radius:12px}
-.sn-contactslot li img{flex:0 0 64px;width:64px;height:64px;border-radius:8px;object-fit:cover;object-position:center 18%;filter:grayscale(1) contrast(1.05)}
+.sn-contactslot li img{flex:0 0 64px;width:64px;height:64px;border-radius:8px;object-fit:cover;object-position:center 18%}
 .sn-contactslot li div{display:flex;flex-direction:column;gap:3px;min-width:0}
 html:root .sn-site .sn-contactslot li strong{font-size:16px;font-weight:600;color:#fff}
 html:root .sn-site .sn-contactslot li div>span{min-height:calc(2em * 1.35);margin-bottom:8px;font-size:13.5px;line-height:1.35;color:#9aa6a0}
