@@ -52,6 +52,8 @@ export default function BrandFooter() {
             <Link to="/blog">Blog</Link>
             <Link to="/contact">Contact</Link>
             <Link to="/veiligheid">Veiligheid en sleutelbelofte</Link>
+            {/* 4 november 2026: de securityscan staat niet meer in het menu, wel hier ("Nadruk op veiligheidsscan kan misschien wel veel kleiner"). */}
+            <Link to="/security">Gratis securityscan</Link>
             <Link to="/#uitgelicht-werk">Uitgelicht werk</Link>
           </div>
           <div>

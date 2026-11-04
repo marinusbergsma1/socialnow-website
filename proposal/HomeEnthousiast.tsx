@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { TrustedBy } from "./HeaderAlgemeen";
 import { ImageSliders } from "./MediaSliders";
+import { WebsiteTegel } from "./FreeWebsite";
 import "./header-algemeen.css";
 import "./home-enthousiast.css";
 
@@ -11,10 +12,12 @@ import "./home-enthousiast.css";
 // diensten en website actie". Dus de homepage enthousiasmeert: één kop, de film van Odoo Experience, drie deuren (Producten,
 // Diensten, Website-actie), de merken en het werk. Alle inhoud en techniek staat op /producten (ProductenPagina in pages.tsx).
 // Alleen teksten die Marinus eerder goedkeurde of die al op de site staan.
+// Daarna: "verder producten diensten en website actie oid heel simpel meer focus op die websites" en "Nadruk op veiligheidsscan
+// kan misschien wel veel kleiner." Dus de website-actie voorop en breed, de websites zelf eronder, en geen scan in de deuren.
 const DEUREN = [
+  { naar: "/gratis-website", soort: "Website-actie", kop: "Wij maken jouw website, gratis", tekst: "Vertel ons over je bedrijf en wat je mooi vindt. Wij maken een demo die echt bij je past.", beeld: "/images/cases/kwhgarant-desktop.webp", breed: true },
   { naar: "/producten", soort: "Producten", kop: "SocialNow OS en Connect", tekst: "Hoe het werkt, wie het bouwt en welke techniek erachter zit.", beeld: "/video/os/os-master-en.webp" },
   { naar: "/diensten", soort: "Diensten", kop: "Van merk tot techniek", tekst: "Websites, branding, content, advertenties en development.", beeld: "/images/cases/vastiq-desktop.webp" },
-  { naar: "/security", soort: "Website-actie", kop: "Gratis websitedemo", tekst: "Wij beginnen altijd met een gratis websitedemo en een securityscan.", beeld: "/images/cases/kwhgarant-desktop.webp" },
 ];
 
 export default function HomeEnthousiast() {
@@ -33,7 +36,7 @@ export default function HomeEnthousiast() {
           <h1 id="sn-blij-kop">Een betrouwbare partner voor groei en cybersecurity<span className="sn-alg-punt">.</span></h1>
           <p className="sn-alg-uitleg"><strong>Wij helpen je met management, operations en Odoo.</strong> Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
           <div className="sn-alg-acties">
-            <Link className="sn-pill" to="/security"><span>Start met een gratis websitedemo</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
+            <Link className="sn-pill" to="/gratis-website"><span>Start met een gratis websitedemo</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
             <a className="sn-pill" href="#contact" onClick={naarContact}><span>Neem contact op</span><ArrowUpRight size={17} aria-hidden="true" /></a>
           </div>
         </div>
@@ -46,7 +49,7 @@ export default function HomeEnthousiast() {
     <section className="sn-deuren h-wrap" aria-labelledby="sn-deuren-kop">
       <h2 id="sn-deuren-kop">Waar wil je beginnen?</h2>
       <ul>
-        {DEUREN.map((d) => <li key={d.naar}>
+        {DEUREN.map((d) => <li key={d.naar} className={d.breed ? "sn-deur-breed" : undefined}>
           <Link to={d.naar}>
             <span className="sn-deur-beeld"><img src={d.beeld} alt="" loading="lazy" decoding="async" /></span>
             <span className="sn-deur-soort">{d.soort}</span>
@@ -57,6 +60,8 @@ export default function HomeEnthousiast() {
         </li>)}
       </ul>
     </section>
+    {/* De websites zelf, direct onder de deuren (FreeWebsite.tsx, dezelfde slider als op /producten). */}
+    <WebsiteTegel />
     <ImageSliders kort />
   </>;
 }

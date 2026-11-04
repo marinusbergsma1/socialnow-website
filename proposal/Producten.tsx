@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useMatch } from "react-router-dom";
-import { ArrowUpRight, ChevronDown, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { useLanguage } from "./i18n/context";
 import "./hoofdmenu.css";
 
@@ -87,9 +87,13 @@ export function DienstenMenu() {
 // geen pil. In elke taal "Security". De pagina /security bouwt de sessie check-fix; /check gaat er met 308 naartoe.
 // 27 oktober 2026 (Marinus): het menu-item heet "Demo & Scan": websitedemo en securityscan staan samen op /security.
 export const SECURITY_PAD = "/security";
+// 4 november 2026 (Marinus): "producten diensten en website actie", "meer focus op die websites" en "Nadruk op veiligheidsscan kan
+// misschien wel veel kleiner." Het menu-item heet Website-actie en gaat naar de gratis website (/gratis-website), zonder schildje;
+// /security blijft bereikbaar via de footer en de pagina zelf.
+export const WEBSITE_ACTIE_PAD = "/gratis-website";
 export function SecurityLink({ mobiel = false, onClick }: { mobiel?: boolean; onClick?: () => void }) {
-  return <NavLink to={SECURITY_PAD} className={mobiel ? "h-security h-security-mobiel" : "h-security"} onClick={onClick}>
-    <ShieldCheck size={mobiel ? 18 : 14} aria-hidden="true" /><span>Website-actie</span>{mobiel && <ArrowUpRight size={17} aria-hidden="true" />}
+  return <NavLink to={WEBSITE_ACTIE_PAD} className={mobiel ? "h-security h-security-mobiel" : "h-security"} onClick={onClick}>
+    <span>Website-actie</span>{mobiel && <ArrowUpRight size={17} aria-hidden="true" />}
   </NavLink>;
 }
 

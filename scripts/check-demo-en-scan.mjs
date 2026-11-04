@@ -20,7 +20,9 @@ const pagina = lees("proposal/PhpCheck.tsx");
 const shell = lees("proposal/WebsiteProposal.tsx");
 const zonderCommentaar = pagina.replace(/\{\/\*[\s\S]*?\*\/\}/g, "").replace(/^\s*\/\/.*$/gm, "");
 
-eis(/<span translate="no">Demo &amp; Scan<\/span>/.test(menu) && /<NavLink to=\{SECURITY_PAD\}/.test(menu) && /ShieldCheck/.test(menu), "menu-item \"Demo & Scan\" met groen schildje naar /security");
+// 4 november 2026 (Marinus): "Nadruk op veiligheidsscan kan misschien wel veel kleiner." Het menu-item heet Website-actie en gaat
+// naar de gratis website; /security blijft bestaan en staat in de footer.
+eis(/<span>Website-actie<\/span>/.test(menu) && /<NavLink to=\{WEBSITE_ACTIE_PAD\}/.test(menu) && /WEBSITE_ACTIE_PAD = "\/gratis-website"/.test(menu) && /to="\/security">Gratis securityscan</.test(lees("proposal/BrandFooter.tsx")), "menu-item Website-actie naar de gratis website, securityscan in de footer");
 eis(!/<span translate="no">Security<\/span>/.test(menu), "menu-item heet niet meer \"Security\"");
 eis(/const TOPKOP = "Free Website DEMO & Security SCAN";/.test(pagina) && /<h1 className="pc-kop pc-topkop" translate="no">\{TOPKOP\}<span className="pc-punt">\.<\/span><\/h1>/.test(pagina), "kop \"Free Website DEMO & Security SCAN.\" met groene punt");
 eis((zonderCommentaar.match(/<h1[\s>]/g) || []).length === 1, "precies één h1 op /security");

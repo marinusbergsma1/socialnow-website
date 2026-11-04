@@ -13,7 +13,7 @@ eis(knop.includes('href="#connect"') && knop.includes('getElementById("connect")
 // Sinds 4 november 2026 staat die header op /het-os, waar geen Connect-blok staat: daar gaat de knop naar de Connect-pagina.
 eis(knop.includes('window.location.assign("/connect/")'), "Bekijk Connect gaat zonder Connect-blok naar /connect/");
 if (process.argv.includes("--dist")) {
-  for (const [f, os] of [["dist/nl/index.html", "dist/nl/het-os/index.html"], ["dist/index.html", "dist/het-os/index.html"]]) {
+  for (const [f, os] of [["dist/nl/producten/index.html", "dist/nl/het-os/index.html"], ["dist/producten/index.html", "dist/het-os/index.html"]]  // Connect-band staat sinds 4 nov 2026 op /producten) {
     const h = fs.readFileSync(f, "utf8"), o = fs.readFileSync(os, "utf8");
     eis(!h.includes('class="cx-chips"') && h.includes('id="connect"') && /href="#connect"[^>]*>(<span>)?(Bekijk Connect|Explore Connect)/.test(o), `${f}: geen vlakjes en het anker #connect; ${os}: knop Bekijk Connect`);
   }

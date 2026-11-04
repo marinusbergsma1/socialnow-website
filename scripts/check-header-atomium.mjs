@@ -100,6 +100,11 @@ eis(['naar: "/producten"', 'naar: "/diensten"', 'naar: "/security"'].every((n) =
 eis(["<HeaderAlgemeen", "<ConnectExperts", "<FreeWebsite", "<HomeTechniek"].every((k) => producten.includes(k)) && producten.includes('kop="Alles over onze producten en techniek"') && /path="\/producten" element=\{<ProductenPagina \/>\}/.test(lees("proposal/WebsiteProposal.tsx")), "/producten: de inhoudelijke en technische landingspagina");
 const menuTsx = lees("proposal/Producten.tsx"), shellTsx = lees("proposal/WebsiteProposal.tsx");
 eis(/NAV_LINKS: Array<\[string, string\]> = \[\s*\["\/diensten", "Diensten"\],\s*\];/.test(menuTsx) && shellTsx.includes('<NavLink to="/producten">Producten</NavLink>') && menuTsx.includes("<span>Website-actie</span>"), "menu: Producten, Diensten, Website-actie");
+// "heel simpel meer focus op die websites. En onboarding graag op een witte pagina met mooiere voorbeelden en leuker om in te vullen.
+// Nadruk op veiligheidsscan kan misschien wel veel kleiner."
+eis(blij.indexOf('naar: "/gratis-website"') > 0 && blij.indexOf('naar: "/gratis-website"') < blij.indexOf('naar: "/producten"') && blij.includes("breed: true") && blij.includes("<WebsiteTegel />") && !/securityscan|\/security/.test(blij.replace(/\/\/.*$/gm, "")), "homepage: website-actie voorop en breed, de websites eronder, geen securityscan");
+const gw = lees("proposal/GratisWebsite.tsx"), gwcss = lees("proposal/gratis-website-wit.css");
+eis(/\.gw2\{[^}]*background:#fff/.test(gwcss) && gw.includes("STIJLEN.map") && gw.includes("DOELEN.map") && gw.includes("gw2-voortgang") && (gw.match(/zetStap\(/g) || []).length >= 2 && !/value=\{"[^"]+"\}|defaultValue=/.test(gw), "onboarding: witte pagina, stap voor stap, echte voorbeelden en klikbare antwoorden, geen ingevulde voorbeelddata");
 const seo = lees("scripts/brand-meta.mjs");
 eis((seo.match(/'\/producten': \[/g) || []).length === 10 && lees("scripts/postbuild.mjs").includes("producten: {title:"), "/producten heeft titel en omschrijving in alle 10 talen");
 const sliders = lees("proposal/MediaSliders.tsx");
@@ -116,7 +121,7 @@ eis(cx.indexOf('className="cx-org"') > 0 && !cx.includes("cx-voorbeelden") && !c
 const acties = header.slice(header.indexOf('className="sn-alg-acties"'), header.indexOf("</div>", header.indexOf('className="sn-alg-acties"')));
 eis((acties.match(/className="sn-pill"/g) || []).length === 2 && !acties.includes("sn-alg-knop"), "headerknoppen hebben dezelfde stijl als Inloggen gratis OS (sn-pill)");
 
-const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Neem contact op", "Waar wil je beginnen?", "Alles over onze producten en techniek", "Website-actie"];
+const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Neem contact op", "Waar wil je beginnen?", "Alles over onze producten en techniek", "Website-actie", "Welke stijl spreekt je aan?", "Wat moet je website vooral doen?", "Meer aanvragen"];
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(lees(`proposal/i18n/${l}.json`) || "{}");
   const mist = nieuw.filter((k) => !w[k] || /[–—]/.test(w[k]));

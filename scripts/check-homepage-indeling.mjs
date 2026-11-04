@@ -21,7 +21,8 @@ eis(!fs.readFileSync("proposal/SamenEnVeilig.tsx", "utf8").includes("sn-samen-me
 const cx = fs.readFileSync("proposal/ConnectExperts.tsx", "utf8");
 eis(cx.includes('className="cx-team"'), "Connect vertelt over ons als team");
 if (process.argv.includes("--dist")) {
-  const nl = fs.readFileSync("dist/nl/index.html", "utf8").replace(/<span class="sn-title-dot">\.<\/span>/g, ".");
+  // Sinds 4 november 2026 staat dit op /producten; de homepage enthousiasmeert (Marinus: "die technische data en huidige landingspagina mag naar producten gaan").
+  const nl = fs.readFileSync("dist/nl/producten/index.html", "utf8").replace(/<span class="sn-title-dot">\.<\/span>/g, ".");
   eis(!nl.includes("Samen beter beschermd dan elk apart") && !nl.includes("Vier gezichten"), "gebouwde nl-homepage zonder Developers + AI en Vier gezichten");
   eis(nl.includes('class="cx-team"') && nl.includes("Technologie met een duidelijke rol"), "gebouwde nl-homepage heeft het teamverhaal en de technologie-bento");
 }
