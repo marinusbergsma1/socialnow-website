@@ -144,13 +144,14 @@ for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
 if (process.argv.includes("--dist")) {
   const nl = lees("dist/nl/index.html");
   const nlProd = lees("dist/nl/producten/index.html");
-  eis(nlProd.includes("sn-bestaand") && nlProd.includes('id="groei"') && nlProd.includes('class="cx-org"'), "gebouwde /nl/producten: de oude header, de partners en het team");
+  eis(/class="[^"]*\bsn-bestaand\b/.test(nlProd) && nlProd.includes('id="groei"') && nlProd.includes('class="cx-org"'), "gebouwde /nl/producten: de oude header, de partners en het team");
   eis(nl.includes("sn-deuren") && nl.includes("odoo-experience-kort.mp4") && !nl.includes('class="cx-org"'), "gebouwde nl-homepage: deuren en film, geen team");
   eis(!nl.includes('id="groei"') && !nl.includes("odoo-experience-stand") && !nl.includes("cx-voorbeelden") && nl.includes("h-image-showcase") && !nl.includes('id="bereikt"') && nl.includes("sn-contactslot") && nl.includes("partners@socialnow.nl") && nl.includes("tel:+31637404577"), "gebouwde nl-homepage: geen Groei-blok, geen Odoo-blok, wel branding en de contacttegels");
   const os = lees("dist/nl/het-os/index.html");
-  eis(os.includes("sn-bestaand") && os.includes('id="groei"') && !nl.includes("sn-bestaand"), "gebouwde /het-os toont de oude header met Groei en cybersecurity, de homepage niet");
+  const bestaand = /class="[^"]*\bsn-bestaand\b/;  // het element, niet de gedeelde CSS-regel
+  eis(bestaand.test(os) && os.includes('id="groei"') && !bestaand.test(nl), "gebouwde /het-os toont de oude header met Groei en cybersecurity, de homepage niet");
   const en = lees("dist/index.html");
-  eis(en.includes("Where would you like to start?") && en.includes("We help you with management, operations and Odoo.") && lees("dist/producten/index.html").includes("sn-bestaand"), "gebouwde en-homepage en /producten zijn vertaald");
+  eis(en.includes("Where would you like to start?") && en.includes("We help you with management, operations and Odoo.") && /class="[^"]*\bsn-bestaand\b/.test(lees("dist/producten/index.html")), "gebouwde en-homepage en /producten zijn vertaald");
 }
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");
 process.exit(fouten.length ? 1 : 0);
