@@ -55,12 +55,10 @@ eis(kop.includes('const FILM = "/video/odoo-experience/odoo-experience.mp4"'), "
 // "Verder dottet pattern weer zichtbaar maken."
 const stip = lees("proposal/stippen.css");
 eis(/\.sn-team-product \{ background: transparent !important; \}/.test(stip) && /\.cx-connect \{[^}]*radial-gradient/.test(stip), "stippen: Connect-band doorzichtig, teamblok wit met stippen");
-// Plan een gesprek: "Ik wil gewoon simpel en zakelijk maar ook korte lijntjes dus gewoon onze contactgegevens, email en wachtwoord
-// en onderwerp kiezen en gesprek in kunnen plannen." Eén scherm, het onderwerp kiest de persoon, geen budget of custom OS.
-const gesprek = lees("proposal/GesprekPaneel.tsx");
-eis(kop.includes('openPlanCall({ soort: "gesprek" })') && /voor\.soort === "gesprek" \? <Gesprek/.test(lees("proposal/PlanCall.tsx")), "Plan een gesprek opent het korte contactpaneel");
-eis(gesprek.includes("CONTACTEN.map") && gesprek.includes('type="email"') && gesprek.includes('type="tel"') && gesprek.includes("ONDERWERPEN.map") && gesprek.includes("sn-call-dagen") && !/stap|budget|onderdelen/i.test(gesprek.replace(/\/\/.*$/gm, "")), "contactpaneel: één scherm met onze gegevens, e-mail, telefoon, onderwerp en moment");
-eis([["Odoo en operations", "Michelle Yang"], ["Finance", "Steef Komen"], ["Website, branding en marketing", "Marinus Bergsma"], ["Partnerships en België", "Ben Sterckx"]].every(([o, w]) => new RegExp(`label: "${o}", wie: "${w}"`).test(gesprek)), "onderwerp bepaalt wie het gesprek doet");
+// Contact: "Doe maar gewoon de contactile van mij met info@socialnow.nl met 06 nummer dan Steef met Finance@socialnow.nl, Michelle
+// mag Partners@socialnow.nl zijn en Ben Odoo@socialnow.nl. Zonder gesprek inplannen, ze kunnen wel gewoon een mail sturen of bellen."
+eis([["Marinus Bergsma", "info@socialnow.nl"], ["Steef Komen", "finance@socialnow.nl"], ["Michelle Yang", "partners@socialnow.nl"], ["Ben Sterckx", "odoo@socialnow.nl"]].every(([n, m]) => slot.includes(`naam: "${n}", mail: "${m}"`)) && slot.includes('tel: "+31637404577"') && slot.includes("href={`tel:${c.tel}`}"), "contacttegels: juiste adressen, 06-nummer van Marinus, bellen en mailen");
+eis(kop.includes('href="#contact"') && !kop.includes("openPlanCall") && slot.includes('id="contact"') && !fs.existsSync("proposal/GesprekPaneel.tsx"), "header: Neem contact op springt naar de tegels, geen gesprek inplannen");
 // Over het grote slot op de andere pagina's: "Deze mag ook weg."
 eis(!footer.includes("<Closing"), "footer: geen groot slot met Milo's meer");
 const tech = lees("proposal/concept-tech.css");
@@ -101,7 +99,7 @@ eis(cx.indexOf('className="cx-org"') > 0 && !cx.includes("cx-voorbeelden") && !c
 const acties = header.slice(header.indexOf('className="sn-alg-acties"'), header.indexOf("</div>", header.indexOf('className="sn-alg-acties"')));
 eis((acties.match(/className="sn-pill"/g) || []).length === 2 && !acties.includes("sn-alg-knop"), "headerknoppen hebben dezelfde stijl als Inloggen gratis OS (sn-pill)");
 
-const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Plan een gesprek.", "Odoo en operations", "Je spreekt met"];
+const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Neem contact op"];
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(lees(`proposal/i18n/${l}.json`) || "{}");
   const mist = nieuw.filter((k) => !w[k] || /[–—]/.test(w[k]));
