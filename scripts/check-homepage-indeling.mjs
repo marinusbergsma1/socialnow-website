@@ -8,8 +8,9 @@ const eis = (ok, tekst) => { console.log(`${ok ? "GROEN" : "ROOD "}  ${tekst}`);
 const pages = fs.readFileSync("proposal/pages.tsx", "utf8");
 const home = pages.slice(pages.indexOf("export function Home()"));
 // 4 november 2026: de header is HeaderAlgemeen, Groei en cybersecurity (SamenEnVeilig) staat in de footer; het Odoo-blok dat eerst na het team stond, is weer weg
-// (Marinus: "Deze weg"). Zie scripts/check-header-atomium.mjs.
-const volgorde = ["<HeaderAlgemeen", "<HomeConnectBand", "<ConnectExperts", "<FreeWebsite", "<HomeTechniek"];  // Bereikt is weg (4 nov 2026: "Deze mag weg.")
+// (Marinus: "Deze weg"). Sinds 4 november 2026 avond: /producten (die hier meegelezen wordt) begint weer met HeaderBestaand en
+// SamenEnVeilig ("deze Header mag weer terug bij producten"). Zie scripts/check-header-atomium.mjs.
+const volgorde = ["<HeaderBestaand", "<SamenEnVeilig", "<HomeConnectBand", "<ConnectExperts", "<FreeWebsite", "<HomeTechniek"];  // Bereikt is weg (4 nov 2026: "Deze mag weg.")
 const plekken = volgorde.map(v => home.indexOf(v));
 eis(plekken.every(p => p >= 0) && plekken.every((p, i) => i === 0 || p > plekken[i - 1]), `volgorde: ${volgorde.join(" → ").replace(/</g, "")}`);
 eis(!home.includes("Vier gezichten") && !home.includes("agents.map"), "Vier gezichten staat niet meer op de homepage");

@@ -78,13 +78,14 @@ const pages = lees("proposal/pages.tsx");
 const home = pages.slice(pages.indexOf("export function Home()"));
 // Over Wat we bereikten: "Deze mag weg."
 eis(!home.includes("<Bereikt") && !pages.includes('import("./Bereikt")'), "homepage: geen blok Wat we bereikten meer");
-const plek = ["<HeaderAlgemeen", "<ConnectExperts"].map((v) => home.indexOf(v));
-eis(plek.every((p) => p >= 0) && plek[0] < plek[1] && !home.includes("<OdooPartners"), "homepage: header, dan meteen het team, geen Odoo-blok");
+// "deze Header mag weer terug bij producten daar is dat technische juist heel goed": /producten begint met HeaderBestaand.
+const plek = ["<HeaderBestaand", "<SamenEnVeilig", "<ConnectExperts"].map((v) => home.indexOf(v));
+eis(plek.every((p) => p >= 0) && plek[0] < plek[1] && plek[1] < plek[2] && !home.includes("<OdooPartners"), "/producten: de oude header, de partners (Groei en cybersecurity), dan het team; geen Odoo-blok");
 
 // "Deze onderdelen bedoel ik meer die mag anders wel op de productenpagina oid." De oude header met OS, Connect en partners.
 const paginas = lees("proposal/paginas.tsx");
 const osPagina = paginas.slice(paginas.indexOf("export function OsPage"), paginas.indexOf("export function", paginas.indexOf("export function OsPage") + 10));
-eis(!home.includes("<HeaderBestaand") && osPagina.includes("<HeaderBestaand"), "oude header met OS en Connect staat op /het-os, niet meer op de homepage");
+eis(!pages.slice(pages.indexOf("export function Home()"), pages.indexOf("export function ProductenPagina")).includes("<HeaderBestaand") && osPagina.includes("<HeaderBestaand"), "oude header met OS en Connect staat op /het-os en /producten, niet op de homepage");
 
 eis(osPagina.indexOf("<SamenEnVeilig") > osPagina.indexOf("<HeaderBestaand"), "Groei en cybersecurity staat op /het-os onder de oude header");
 // "Vanuit onder de websites zelf mag er meer content komen vanuit de branding en voorbeelden." en "Net als hier maar kortere titels."
@@ -97,7 +98,7 @@ const startHome = pages.slice(pages.indexOf("export function Home()"), pages.ind
 const producten = pages.slice(pages.indexOf("export function ProductenPagina"));
 eis(startHome.includes("<HomeEnthousiast />") && !startHome.includes("<ConnectExperts") && !startHome.includes("<HomeTechniek"), "homepage enthousiasmeert: geen team en geen techniek");
 eis(['naar: "/producten"', 'naar: "/diensten"', 'naar: "/gratis-website"'].every((n) => blij.includes(n)) && (blij + lees("proposal/OdooFilm.tsx")).includes("odoo-experience-kort.mp4") && blij.includes("<TrustedBy />") && (blij.match(/<h1 /g) || []).length === 1, "homepage: één kop, de Odoo-film, merken en drie deuren: Producten, Diensten, Website-actie");
-eis(["<HeaderAlgemeen", "<ConnectExperts", "<FreeWebsite", "<HomeTechniek"].every((k) => producten.includes(k)) && producten.includes('kop="Alles over onze producten en techniek"') && /path="\/producten" element=\{<ProductenPagina \/>\}/.test(lees("proposal/WebsiteProposal.tsx")), "/producten: de inhoudelijke en technische landingspagina");
+eis(["<HeaderBestaand", "<SamenEnVeilig", "<ConnectExperts", "<FreeWebsite", "<HomeTechniek"].every((k) => producten.includes(k)) && /path="\/producten" element=\{<ProductenPagina \/>\}/.test(lees("proposal/WebsiteProposal.tsx")), "/producten: de inhoudelijke en technische landingspagina");
 const menuTsx = lees("proposal/Producten.tsx"), shellTsx = lees("proposal/WebsiteProposal.tsx");
 eis(/NAV_LINKS: Array<\[string, string\]> = \[\s*\["\/diensten", "Diensten"\],\s*\];/.test(menuTsx) && shellTsx.includes('<NavLink to="/producten">Producten</NavLink>') && menuTsx.includes("<span>Website-actie</span>"), "menu: Producten, Diensten, Website-actie");
 // "heel simpel meer focus op die websites. En onboarding graag op een witte pagina met mooiere voorbeelden en leuker om in te vullen.
@@ -114,6 +115,9 @@ eis(/<section className="sn-alg gw2-kop"/.test(gw) && gw.includes('src="/securit
 const aanvr = lees("proposal/aanvragen.ts");
 eis(gw.includes("AANBRENGERS.map") && gw.includes('"Iemand anders"'.slice(1, -1)) && gw.includes("Niemand, zelf gevonden") && /get\("ref"\)/.test(gw) && /\[w\.via, gegevens\.via\]/.test(aanvr) && (aanvr.match(/via: "/g) || []).length === 10 && gw.includes("{ via, voornaam"), "onboarding: kies via wie je kwam (foto en naam, Iemand anders, Zelf gevonden), ?ref= vult vooraf in, Aangebracht door gaat mee in de aanvraag");
 eis((blij.match(/<WebsiteCTA/g) || []).length >= 2 && blij.indexOf("<WebsiteCTA />") < blij.indexOf("sn-deuren") && /gratis-website\?ref=/.test(blij), "homepage: CTA gratis nieuwe website direct onder de hero en verderop, ?ref gaat mee");
+// Website-actie in de menubalk: "Deze dikgedrukt en met een shine zodat ie nog meer opvalt."
+const menuCss = lees("proposal/hoofdmenu.css");
+eis(/a\.h-security>span,[^{]*\{font-weight:800!important;[^}]*background-clip:text;[^}]*animation:sn-glans 5s/.test(menuCss) && /prefers-reduced-motion:reduce\)\{[^{]*a\.h-security>span[^{]*\{animation:none/.test(menuCss) && /#25d366 50%/.test(menuCss), "menu: Website-actie vet met een rustige groene glans (elke 5 s), niet bij reduced motion");
 const seo = lees("scripts/brand-meta.mjs");
 eis((seo.match(/'\/producten': \[/g) || []).length === 10 && lees("scripts/postbuild.mjs").includes("producten: {title:"), "/producten heeft titel en omschrijving in alle 10 talen");
 const sliders = lees("proposal/MediaSliders.tsx");
@@ -140,13 +144,13 @@ for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
 if (process.argv.includes("--dist")) {
   const nl = lees("dist/nl/index.html");
   const nlProd = lees("dist/nl/producten/index.html");
-  eis(nlProd.includes("team-atomium.webp") && nlProd.includes("Systemen en operations") && nlProd.includes('class="cx-org"'), "gebouwde /nl/producten: Atomium-beeld, de vier stappen en het team");
+  eis(nlProd.includes("sn-bestaand") && nlProd.includes('id="groei"') && nlProd.includes('class="cx-org"'), "gebouwde /nl/producten: de oude header, de partners en het team");
   eis(nl.includes("sn-deuren") && nl.includes("odoo-experience-kort.mp4") && !nl.includes('class="cx-org"'), "gebouwde nl-homepage: deuren en film, geen team");
   eis(!nl.includes('id="groei"') && !nl.includes("odoo-experience-stand") && !nl.includes("cx-voorbeelden") && nl.includes("h-image-showcase") && !nl.includes('id="bereikt"') && nl.includes("sn-contactslot") && nl.includes("partners@socialnow.nl") && nl.includes("tel:+31637404577"), "gebouwde nl-homepage: geen Groei-blok, geen Odoo-blok, wel branding en de contacttegels");
   const os = lees("dist/nl/het-os/index.html");
   eis(os.includes("sn-bestaand") && os.includes('id="groei"') && !nl.includes("sn-bestaand"), "gebouwde /het-os toont de oude header met Groei en cybersecurity, de homepage niet");
   const en = lees("dist/index.html");
-  eis(en.includes("Where would you like to start?") && en.includes("We help you with management, operations and Odoo.") && lees("dist/producten/index.html").includes("Systems and operations"), "gebouwde en-homepage en /producten zijn vertaald");
+  eis(en.includes("Where would you like to start?") && en.includes("We help you with management, operations and Odoo.") && lees("dist/producten/index.html").includes("sn-bestaand"), "gebouwde en-homepage en /producten zijn vertaald");
 }
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");
 process.exit(fouten.length ? 1 : 0);
