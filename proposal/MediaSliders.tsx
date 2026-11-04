@@ -391,14 +391,15 @@ function MediaRail({
     </div>
   );
 }
-export function VideoSlider({ history = false }: { history?: boolean }) {
+// kort: op de homepage, onder de websites (4 november 2026, Marinus: "Net als hier maar kortere titels.").
+export function VideoSlider({ history = false, kort = false }: { history?: boolean; kort?: boolean }) {
   return (
     <section className="h-section h-motion-showcase" id={history ? "creatief-verleden" : undefined}>
       <div className="h-wrap">
         <Heading
           label={history ? "Geschiedenis / Creatief werk" : "Content & motion"}
           title={
-            history ? <>
+            kort ? <>Video en motion.</> : history ? <>
               Creatieve video’s.
               <br />
               <span>Het begin van SocialNow.</span>
@@ -417,14 +418,13 @@ export function VideoSlider({ history = false }: { history?: boolean }) {
     </section>
   );
 }
-export function ImageSliders() {
+export function ImageSliders({ kort = false }: { kort?: boolean }) {
   return (
     <section className="h-section h-image-showcase">
       <div className="h-wrap">
         <Heading
           label="Portfolio / Creatie in de praktijk"
-          title={
-            <>
+          title={kort ? <>Branding en campagnes.</> : <>
               Recent werk.
               <br />
               <span>Een eigen gezicht.</span>

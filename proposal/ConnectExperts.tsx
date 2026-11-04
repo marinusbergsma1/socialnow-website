@@ -35,15 +35,8 @@ const VAKGEBIEDEN = expertGroepen
   .filter((g) => g.name !== "AI development" && g.name !== "Web development")
   .map((g) => ({ naam: g.name, leden: g.members.filter((n) => !EINDVERANTWOORDELIJK.includes(n)) }));
 
-// 4 november 2026 (Marinus): "Dit moet ook veel compacter en beter." Eerst kwam er een uitklapbare expertlaag met "Nieuw hier?".
-// Later die dag: "daaronder het team gewoon gelijk bij connect" en "Verder na het team de websites en branding en content
-// voorbeelden". Dus het organogram staat meteen open (de stappen staan nu in de header), en daarna één rij beeldkaarten met werk.
-const VOORBEELDEN = [
-  { kop: "Websites", beeld: "/images/cases/vastiq-desktop.webp", href: "/diensten#development" },
-  { kop: "Branding", beeld: "/images/cases/kwh-merk.webp", href: "/diensten#branding" },
-  { kop: "Video, foto en design", beeld: "/images/social/UNIVERSAL-OPENHEIMER-FRAMES.webp", href: "/diensten#content" },
-  { kop: "Ads en social", beeld: "/images/social/AZ-25-K-Volgers-Post.webp", href: "/diensten#advertising" },
-];
+// 4 november 2026 (Marinus): "Dit moet ook veel compacter en beter." en later "daaronder het team gewoon gelijk bij connect".
+// Dus het organogram staat meteen open. De rij voorbeelden met werk die daarna kwam, mocht weer weg ("Deze weg").
 
 function Persoon({ naam }: { naam: string }) {
   const persoon = people.find((p) => p.name === naam);
@@ -121,18 +114,6 @@ export default function ConnectExperts() {
         </div>}
       </div>
       {leeg && <p className="cx-leeg">Geen expert gevonden. Probeer een ander woord.</p>}
-      <div className="cx-voorbeelden">
-        <p className="cx-org-kop">Websites, branding en content</p>
-        <ul className="cx-onderdelen">
-          {VOORBEELDEN.map((o) => <li key={o.kop}>
-            <Link to={o.href}>
-              <span className="cx-beeld"><img src={o.beeld} alt="" loading="lazy" decoding="async" /></span>
-              <strong>{o.kop}</strong>
-              <span className="cx-aantal">Bekijk voorbeelden<ArrowUpRight size={14} aria-hidden="true" /></span>
-            </Link>
-          </li>)}
-        </ul>
-      </div>
       {/* 20 oktober 2026 (Marinus): "Vulling hier blauw met witte tekst. Verder moet er ook een gedeelte komen met vraag een
           opdracht aan." Twee vakken naast elkaar: opdracht aanvragen en aanmelden als expert, elk met een blauwe knop. */}
       <div className="cx-onder">

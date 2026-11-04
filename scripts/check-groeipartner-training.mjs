@@ -43,7 +43,8 @@ for (const t of TALEN) {
 }
 if (process.argv.includes("--dist")) {
   const tekst = f => fs.readFileSync(f, "utf8").replace(/<span class="sn-title-dot">\.<\/span>/g, ".");
-  const nl = tekst("dist/nl/index.html"), en = tekst("dist/index.html");
+  // Groei en cybersecurity (SamenEnVeilig) staat sinds 4 november 2026 op /het-os, onder de oude header.
+  const nl = tekst("dist/nl/het-os/index.html"), en = tekst("dist/het-os/index.html");
   eis(nl.includes(KOP) && nl.includes("Volgende lezingen") && nl.includes("Talland College"), "gebouwde nl-pagina toont kop en Volgende lezingen");
   eis(en.includes(KOP_EN) && en.includes("Upcoming talks") && !en.includes("marinus-steef-odoo-experience"), "gebouwde en-pagina toont kop, Upcoming talks en geen beursfoto");
 }
