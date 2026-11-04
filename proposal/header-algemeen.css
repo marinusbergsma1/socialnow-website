@@ -42,3 +42,44 @@ html:root .sn-site .sn-alg .sn-alg-keur ul{display:grid;gap:10px;margin:12px 0 0
 .sn-alg-keur img{height:26px;width:auto;max-width:130px;object-fit:contain}
 .sn-alg-keur small{font-family:var(--a-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--a-grijs);white-space:nowrap}
 .sn-alg-keur img{filter:brightness(0) invert(1)}
+
+/* Opties 2 tot 4 (?header=2..4), 4 november 2026. */
+html:root .sn-site .sn-alg .sn-alg-diensten-kort{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.sn-alg-diensten-kort li{align-items:center;padding:11px 14px}
+.sn-alg-diensten-kort strong{margin:0}
+.sn-alg-foto{position:relative;margin:0;border:1px solid var(--a-lijn);border-radius:16px;overflow:hidden;background:#06090b}
+.sn-alg-foto img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* 2: gecentreerd, diensten in één rij, bewijs als strook eronder. */
+.sn-alg-2 .sn-alg-wrap{grid-template-columns:1fr;gap:28px}
+.sn-alg-2 .sn-alg-tekst{display:flex;flex-direction:column;align-items:center;text-align:center}
+html:root .sn-site .sn-alg-2 h1,html:root .sn-site .sn-alg-2 .sn-alg-uitleg{text-align:center;margin-left:auto;margin-right:auto}
+html:root .sn-site .sn-alg-2 h1{max-width:20ch}
+html:root .sn-site .sn-alg-2 .sn-alg-diensten{grid-template-columns:repeat(4,minmax(0,1fr));margin:0}
+.sn-alg-2 .sn-alg-bewijs{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:12px}
+.sn-alg-2 .sn-alg-foto{min-height:200px}
+@media(max-width:1000px){html:root .sn-site .sn-alg-2 .sn-alg-diensten{grid-template-columns:repeat(2,minmax(0,1fr))}.sn-alg-2 .sn-alg-bewijs{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){html:root .sn-site .sn-alg-2 .sn-alg-diensten,.sn-alg-2 .sn-alg-bewijs{grid-template-columns:1fr}}
+
+/* 3: grote foto van de stand rechts, resultaat zwevend erover. */
+.sn-alg-3 .sn-alg-groot-beeld{position:relative;display:grid;gap:12px}
+.sn-alg-3 .sn-alg-foto{aspect-ratio:4/3}
+.sn-alg-3 figcaption{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:6px;padding:60px 20px 18px;background:linear-gradient(transparent,#000d);font-size:20px;font-weight:600;color:#fff}
+.sn-alg-3 figcaption .sn-alg-klein{font-family:var(--a-mono);font-size:10.5px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:#cfd8d3}
+.sn-alg-3 .sn-alg-zwevend{position:absolute;right:-16px;top:-22px;width:min(270px,60%);box-shadow:0 18px 40px #000a}
+.sn-alg-3 .sn-alg-zwevend .sn-alg-kaart{background:#0b0f12;border-color:#25d36655}
+@media(max-width:960px){.sn-alg-3 .sn-alg-zwevend{position:static;width:auto;box-shadow:none}}
+
+/* 4: de Odoo-apps die we inrichten als tegels. */
+.sn-alg-apps{padding:22px;border:1px solid var(--a-lijn);border-radius:18px;background:#06090b}
+html:root .sn-site .sn-alg .sn-alg-apps>.sn-alg-klein{margin:0;font-family:var(--a-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--a-grijs)}
+html:root .sn-site .sn-alg .sn-alg-apps ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0 0;padding:0;list-style:none}
+.sn-alg-apps li{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px;border:1px solid var(--a-lijn);border-radius:14px;background:#0b0f12;font-size:13px;color:#d6ddda;text-align:center}
+.sn-alg-apps li span{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#714b67,#4a2f44);color:#fff}
+.sn-alg-apps li:nth-child(even) span{background:linear-gradient(135deg,#25d366,#128c47);color:#002912}
+html:root .sn-site .sn-alg .sn-alg-ander{display:flex;gap:10px;align-items:flex-start;margin:14px 0;padding:12px 14px;border:1px dashed #25d36666;border-radius:12px;font-size:14px;line-height:1.45;color:#b9c2be;text-align:left}
+.sn-alg-ander svg{flex:0 0 auto;margin-top:2px;color:var(--a-groen)}
+.sn-alg-ander strong{color:#fff}
+.sn-alg-apps .sn-alg-keur{padding:0;border:0;background:none}
+@media(max-width:480px){html:root .sn-site .sn-alg .sn-alg-apps ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
+html:root .sn-site .sn-alg-3 figcaption strong{font-family:'TT Norms',sans-serif!important;font-size:22px;font-weight:600;letter-spacing:0;color:#fff}
