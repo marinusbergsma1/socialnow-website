@@ -7,10 +7,10 @@ import "./hoofdmenu.css";
 // 18 oktober 2026 (Marinus, via de coordinator): hoofdnavigatie Producten, Diensten, Resultaten, Prijzen, Team, met rechts
 // Plan een call en Inloggen gratis OS. Producten opent een klein menu met de twee producten; Blog en Contact staan in de
 // voettekst. Alle oude routes blijven bestaan. Sinds 22 oktober 2026 opent ook Diensten zo'n menu (DienstenMenu).
+// 4 november 2026 (Marinus): "verder wil ik producten diensten en website actie". Het menu is Producten, Diensten en Website-actie;
+// Resultaten en Team staan in de footer (Ons werk, Ons team).
 export const NAV_LINKS: Array<[string, string]> = [
   ["/diensten", "Diensten"],
-  ["/projecten", "Resultaten"],
-  ["/team", "Team"],
 ];
 // href in plaats van to: Connect is een eigen pagina buiten de app.
 export const PRODUCTEN = [
@@ -89,7 +89,7 @@ export function DienstenMenu() {
 export const SECURITY_PAD = "/security";
 export function SecurityLink({ mobiel = false, onClick }: { mobiel?: boolean; onClick?: () => void }) {
   return <NavLink to={SECURITY_PAD} className={mobiel ? "h-security h-security-mobiel" : "h-security"} onClick={onClick}>
-    <ShieldCheck size={mobiel ? 18 : 14} aria-hidden="true" /><span translate="no">Demo &amp; Scan</span>{mobiel && <ArrowUpRight size={17} aria-hidden="true" />}
+    <ShieldCheck size={mobiel ? 18 : 14} aria-hidden="true" /><span>Website-actie</span>{mobiel && <ArrowUpRight size={17} aria-hidden="true" />}
   </NavLink>;
 }
 

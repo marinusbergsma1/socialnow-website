@@ -27,7 +27,10 @@ const STAPPEN = ["Website en branding", "Systemen en operations", "Marketing en 
 // Later die dag: "de video van de Odoo Experience laten zien". De aftermovie is staand (720 x 1280), het venster dus ook.
 const FILM = "/video/odoo-experience/odoo-experience.mp4";
 
-export default function HeaderAlgemeen() {
+// 4 november 2026 (Marinus): "die technische data en huidige landingspagina mag naar producten gaan dan is dit meer enthousiasmering
+// en rest inhoudelijk en technisch." Deze header opent sindsdien /producten; label en kop zijn daar eigen, zodat de homepage
+// (HomeEnthousiast.tsx) de enige h1 "Een betrouwbare partner voor groei en cybersecurity." houdt.
+export default function HeaderAlgemeen({ label = "Management · Operations · Odoo", kop = "Een betrouwbare partner voor groei en cybersecurity" }: { label?: string; kop?: string }) {
   const venster = useRef<HTMLDialogElement>(null);
   const film = useRef<HTMLVideoElement>(null);
   const open = () => { venster.current?.showModal(); void film.current?.play().catch(() => {}); };
@@ -43,10 +46,10 @@ export default function HeaderAlgemeen() {
     <section className="sn-alg" aria-labelledby="sn-alg-kop">
       <div className="sn-alg-wrap">
         <div className="sn-alg-tekst">
-          <p className="sn-alg-label"><i />Management · Operations · Odoo</p>
+          <p className="sn-alg-label"><i />{label}</p>
           {/* 4 november 2026 (Marinus): "Een betrouwbare partner voor groei en cybersecurity. Doelgerichte totaaloplossingen, met experts
               en AI. Veilig lokaal en in eigen beheer." */}
-          <h1 id="sn-alg-kop">Een betrouwbare partner voor groei en cybersecurity<span className="sn-alg-punt">.</span></h1>
+          <h1 id="sn-alg-kop">{kop}<span className="sn-alg-punt">.</span></h1>
           {/* 4 november 2026 (Marinus): "Ik wil dat het écht duidelijk is gelijk BAM Ze kunnen mij helpen met management en operations
               en Odoo." en "zet alleen de logo's van samenwerking eronder. Odoo Silver partner, Shopify Parners SalesForce en Adove
               Partners onder de header titel." */}
@@ -73,18 +76,22 @@ export default function HeaderAlgemeen() {
           <button type="button" className="sn-alg-knop-video" aria-haspopup="dialog" onClick={open}><Play size={15} aria-hidden="true" /><span>Bekijk de video</span></button>
         </figure>
       </div>
-      <div className="sn-alg-trusted">
-        {/* 4 november 2026 (Marinus): "Verder mag er wel our branding en advertisement is trusted by". */}
-        <span translate="no">Our branding and advertising is trusted by</span>
-        <div className="sn-alg-merken">
-          <span className="sn-alg-groep">{DIRECT.map(merk)}</span>
-          <span className="sn-alg-groep">{merk(CRAFTURE)}<i className="sn-alg-streep" aria-hidden="true" />{VIA_CRAFTURE.map(merk)}</span>
-        </div>
-      </div>
+      <TrustedBy />
       <dialog className="sn-alg-venster" ref={venster} aria-label="Aftermovie Odoo Experience 2026" onClose={() => film.current?.pause()} onClick={e => { if (e.target === venster.current) sluit(); }}>
         <button type="button" className="sn-alg-sluit" onClick={sluit} aria-label="Sluit de film"><X size={20} aria-hidden="true" /></button>
         <video ref={film} src={FILM} poster="/video/odoo-experience/odoo-experience.jpg" controls playsInline preload="none" />
       </dialog>
     </section>
   );
+}
+
+// 4 november 2026 (Marinus): "Verder mag er wel our branding en advertisement is trusted by". Ook op de homepage (HomeEnthousiast.tsx).
+export function TrustedBy() {
+  return <div className="sn-alg-trusted">
+    <span translate="no">Our branding and advertising is trusted by</span>
+    <div className="sn-alg-merken">
+      <span className="sn-alg-groep">{DIRECT.map(merk)}</span>
+      <span className="sn-alg-groep">{merk(CRAFTURE)}<i className="sn-alg-streep" aria-hidden="true" />{VIA_CRAFTURE.map(merk)}</span>
+    </div>
+  </div>;
 }

@@ -36,7 +36,7 @@ eis(!/google-logo|meta-logo|Google Developers/.test(erkend), "footer: geen Googl
 // Over het slot Start gratis met jouw systeem: "Hier focussen op een formulier of contactgegevens van Steef en Michelle en Ben.",
 // "Doe maar contactgegevens met functies" en "Misschien mij nog erbij".
 const slot = lees("proposal/ContactSlot.tsx");
-eis(/home && <ContactSlot \/>/.test(footer) && ["Marinus Bergsma", "Steef Komen", "Michelle Yang", "Ben Sterckx"].every((n) => slot.includes(`naam: "${n}"`)) && slot.includes("{p.role}"), "homepage-slot: contactgegevens met functie van Marinus, Steef, Michelle en Ben");
+eis(/metContact && <ContactSlot \/>/.test(footer) && ["Marinus Bergsma", "Steef Komen", "Michelle Yang", "Ben Sterckx"].every((n) => slot.includes(`naam: "${n}"`)) && slot.includes("{p.role}"), "homepage-slot: contactgegevens met functie van Marinus, Steef, Michelle en Ben");
 // "Ik wil graag een Explainers slider met alle verschillende explainer video's." en "Animations and explainers doe maar dan kunnen
 // ze er allemaal gewoon in."
 const slider = lees("proposal/ExplainerSlider.tsx");
@@ -89,7 +89,19 @@ eis(!home.includes("<HeaderBestaand") && osPagina.includes("<HeaderBestaand"), "
 eis(osPagina.indexOf("<SamenEnVeilig") > osPagina.indexOf("<HeaderBestaand"), "Groei en cybersecurity staat op /het-os onder de oude header");
 // "Vanuit onder de websites zelf mag er meer content komen vanuit de branding en voorbeelden." en "Net als hier maar kortere titels."
 const naWeb = home.slice(home.indexOf("<FreeWebsite"));
-eis(["<ImageSliders kort", "<VideoSlider kort"].every((k) => naWeb.includes(k)), "homepage: onder de websites recent werk en video");
+eis(naWeb.includes("<VideoSlider kort") && lees("proposal/HomeEnthousiast.tsx").includes("<ImageSliders kort"), "branding en campagnes op de homepage, video onder de websites op /producten");
+// "die technische data en huidige landingspagina mag naar producten gaan dan is dit meer enthousiasmering en rest inhoudelijk en
+// technisch. verder wil ik producten diensten en website actie"
+const blij = lees("proposal/HomeEnthousiast.tsx");
+const startHome = pages.slice(pages.indexOf("export function Home()"), pages.indexOf("export function ProductenPagina"));
+const producten = pages.slice(pages.indexOf("export function ProductenPagina"));
+eis(startHome.includes("<HomeEnthousiast />") && !startHome.includes("<ConnectExperts") && !startHome.includes("<HomeTechniek"), "homepage enthousiasmeert: geen team en geen techniek");
+eis(['naar: "/producten"', 'naar: "/diensten"', 'naar: "/security"'].every((n) => blij.includes(n)) && blij.includes("odoo-experience-kort.mp4") && blij.includes("<TrustedBy />") && (blij.match(/<h1 /g) || []).length === 1, "homepage: één kop, de Odoo-film, merken en drie deuren: Producten, Diensten, Website-actie");
+eis(["<HeaderAlgemeen", "<ConnectExperts", "<FreeWebsite", "<HomeTechniek"].every((k) => producten.includes(k)) && producten.includes('kop="Alles over onze producten en techniek"') && /path="\/producten" element=\{<ProductenPagina \/>\}/.test(lees("proposal/WebsiteProposal.tsx")), "/producten: de inhoudelijke en technische landingspagina");
+const menuTsx = lees("proposal/Producten.tsx"), shellTsx = lees("proposal/WebsiteProposal.tsx");
+eis(/NAV_LINKS: Array<\[string, string\]> = \[\s*\["\/diensten", "Diensten"\],\s*\];/.test(menuTsx) && shellTsx.includes('<NavLink to="/producten">Producten</NavLink>') && menuTsx.includes("<span>Website-actie</span>"), "menu: Producten, Diensten, Website-actie");
+const seo = lees("scripts/brand-meta.mjs");
+eis((seo.match(/'\/producten': \[/g) || []).length === 10 && lees("scripts/postbuild.mjs").includes("producten: {title:"), "/producten heeft titel en omschrijving in alle 10 talen");
 const sliders = lees("proposal/MediaSliders.tsx");
 eis(sliders.includes("kort ? <>Branding en campagnes.</>") && sliders.includes("kort ? <>Video en motion.</>"), "homepage-rijen hebben korte koppen");
 // "Hier dezelfde logo's als ook op de main page." De logostrook op /projecten gebruikt de Trusted by-merken uit de header.
@@ -104,7 +116,7 @@ eis(cx.indexOf('className="cx-org"') > 0 && !cx.includes("cx-voorbeelden") && !c
 const acties = header.slice(header.indexOf('className="sn-alg-acties"'), header.indexOf("</div>", header.indexOf('className="sn-alg-acties"')));
 eis((acties.match(/className="sn-pill"/g) || []).length === 2 && !acties.includes("sn-alg-knop"), "headerknoppen hebben dezelfde stijl als Inloggen gratis OS (sn-pill)");
 
-const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Neem contact op"];
+const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Neem contact op", "Waar wil je beginnen?", "Alles over onze producten en techniek", "Website-actie"];
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(lees(`proposal/i18n/${l}.json`) || "{}");
   const mist = nieuw.filter((k) => !w[k] || /[–—]/.test(w[k]));
@@ -113,12 +125,14 @@ for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
 
 if (process.argv.includes("--dist")) {
   const nl = lees("dist/nl/index.html");
-  eis(nl.includes("team-atomium.webp") && nl.includes("Systemen en operations"), "gebouwde nl-homepage: Atomium-beeld en de vier stappen");
-  eis(!nl.includes('id="groei"') && !nl.includes("odoo-experience-stand") && !nl.includes("cx-voorbeelden") && nl.includes("h-image-showcase") && !nl.includes('id="bereikt"') && nl.includes("sn-contactslot") && nl.includes("partners@socialnow.nl") && nl.includes("tel:+31637404577"), "gebouwde nl-homepage: geen Groei-blok in de footer, geen Odoo-blok, wel branding en video onder de websites");
+  const nlProd = lees("dist/nl/producten/index.html");
+  eis(nlProd.includes("team-atomium.webp") && nlProd.includes("Systemen en operations") && nlProd.includes('class="cx-org"'), "gebouwde /nl/producten: Atomium-beeld, de vier stappen en het team");
+  eis(nl.includes("sn-deuren") && nl.includes("odoo-experience-kort.mp4") && !nl.includes('class="cx-org"'), "gebouwde nl-homepage: deuren en film, geen team");
+  eis(!nl.includes('id="groei"') && !nl.includes("odoo-experience-stand") && !nl.includes("cx-voorbeelden") && nl.includes("h-image-showcase") && !nl.includes('id="bereikt"') && nl.includes("sn-contactslot") && nl.includes("partners@socialnow.nl") && nl.includes("tel:+31637404577"), "gebouwde nl-homepage: geen Groei-blok, geen Odoo-blok, wel branding en de contacttegels");
   const os = lees("dist/nl/het-os/index.html");
   eis(os.includes("sn-bestaand") && os.includes('id="groei"') && !nl.includes("sn-bestaand"), "gebouwde /het-os toont de oude header met Groei en cybersecurity, de homepage niet");
   const en = lees("dist/index.html");
-  eis(en.includes("Systems and operations") && en.includes("We help you with management, operations and Odoo."), "gebouwde en-homepage is vertaald");
+  eis(en.includes("Where would you like to start?") && en.includes("We help you with management, operations and Odoo.") && lees("dist/producten/index.html").includes("Systems and operations"), "gebouwde en-homepage en /producten zijn vertaald");
 }
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");
 process.exit(fouten.length ? 1 : 0);

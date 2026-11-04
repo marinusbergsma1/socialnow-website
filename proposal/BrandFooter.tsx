@@ -13,12 +13,14 @@ import ContactSlot from "./ContactSlot";
 export default function BrandFooter() {
   const { pathname } = useLocation();
   const home = /^\/(?:[a-z]{2}(?:-[a-z]{2})?\/?)?$/.test(pathname);
+  // Ook op /producten: de knop Neem contact op in die header springt naar dezelfde tegels.
+  const metContact = home || /^\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?producten\/?$/.test(pathname);
   return (
     <footer className="h-brand-footer">
       <div className="h-wrap">
         {/* 4 november 2026 (Marinus): op de homepage het slot met contactpersonen in plaats van Start gratis met jouw systeem. Het
             grote slot op de andere pagina's (Milo's, One operation and management system) mocht ook weg: "Deze mag ook weg." */}
-        {home && <ContactSlot />}
+        {metContact && <ContactSlot />}
       </div>
       {/* 4 november 2026 (Marinus): Groei en cybersecurity stond hier even, op elke pagina. Later die dag: "Dit uit de footer en
           hier meer een geheel." Het blok staat nu op /het-os, onder de header met OS en Connect (paginas.tsx). */}
