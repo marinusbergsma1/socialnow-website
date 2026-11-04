@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ChevronDown, Search } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown, Search } from "lucide-react";
 import { people, expertGroepen } from "./content";
 import { klein } from "./licht";
 import { mailLink } from "./aanvragen";
@@ -29,7 +29,8 @@ const VERSIE = "20261015-team";
 // developers, daaronder de vakgebieden naast elkaar. Iedereen staat er precies één keer, met een kleine vierkante foto.
 // Proef: scripts/check-connect-structuur.mjs.
 const EINDVERANTWOORDELIJK = ["Marinus Bergsma", "Gijsbert Westeneng", "Douwe Kramer", "Steef Komen"];
-const DEVELOPERS = expertGroepen.filter((g) => g.name === "AI development" || g.name === "Web development").flatMap((g) => g.members).filter((n) => !EINDVERANTWOORDELIJK.includes(n));
+// 4 november 2026 (Marinus): "de developers klopt verder ook niet hier. Haal developers maar gewoon weg." De laag Developers is weg;
+// AI development en Web development staan dus ook niet als vakgebied in het organogram.
 const VAKGEBIEDEN = expertGroepen
   .filter((g) => g.name !== "AI development" && g.name !== "Web development")
   .map((g) => ({ naam: g.name, leden: g.members.filter((n) => !EINDVERANTWOORDELIJK.includes(n)) }));
@@ -71,6 +72,45 @@ function Persoon({ naam }: { naam: string }) {
   </li>;
 }
 
+// 4 november 2026: de vier eindverantwoordelijken als vierkante portretten, groter dan de rest van het organogram.
+function Leider({ naam }: { naam: string }) {
+  const persoon = people.find((p) => p.name === naam);
+  if (!persoon) return null;
+  const profiel = persoon.linkedin ?? persoon.instagram;
+  const binnen = <>
+    <span className="cx-leider-foto"><img {...klein(persoon.image, "240px", [240, 480], undefined, VERSIE)} alt="" width="240" height="240" loading="lazy" /></span>
+    <strong translate="no">{persoon.name}</strong>
+    <span>{persoon.role}</span>
+  </>;
+  return <li className="cx-leider">
+    {profiel ? <a href={profiel} target="_blank" rel="noopener noreferrer">{binnen}</a> : <Link to="/team">{binnen}</Link>}
+  </li>;
+}
+
+// 4 november 2026 (Marinus) over het blok met drie stappen: "Dit is heel lelijk ook". Vier opties om uit te kiezen, met ?flow=1 tot 4
+// in de adresbalk; zonder keuze optie 1. Na zijn keuze blijft er één over.
+type Optie = "1" | "2" | "3" | "4";
+const kiesOptie = (): Optie => {
+  const o = typeof window === "undefined" ? null : new URLSearchParams(window.location.search).get("flow");
+  return o === "2" || o === "3" || o === "4" ? o : "1";
+};
+
+function NieuwHier() {
+  const optie = kiesOptie();
+  const titel = (stap: (typeof STAPPEN)[number]) => stap.href ? <Link to={stap.href}>{stap.kop}</Link> : stap.kop;
+  return <div className={`cx-flow cx-flow-${optie}`}>
+    <p className="cx-flow-kop">Nieuw hier? <span>Zo beginnen we.</span></p>
+    <ol>
+      {STAPPEN.map((stap, i) => <li key={stap.kop}>
+        <span className="cx-flow-nr" aria-hidden="true">{optie === "2" ? `0${i + 1}` : i + 1}</span>
+        <span className="cx-flow-tekst"><strong>{titel(stap)}</strong><span>{stap.tekst}</span></span>
+        {optie === "3" && i < STAPPEN.length - 1 && <ArrowRight className="cx-flow-pijl" size={18} aria-hidden="true" />}
+      </li>)}
+    </ol>
+    {optie === "4" && <Link className="cx-flow-knop" to="/security">Start met je gratis websitedemo<ArrowUpRight size={16} aria-hidden="true" /></Link>}
+  </div>;
+}
+
 export default function ConnectExperts() {
   const { t } = useLanguage();
   const [zoek, zetZoek] = useState("");
@@ -82,9 +122,8 @@ export default function ConnectExperts() {
     return !!p && `${p.name} ${p.role} ${t(groepVan(p.name))}`.toLowerCase().includes(q);
   };
   const top = EINDVERANTWOORDELIJK.filter(past);
-  const devs = DEVELOPERS.filter(past);
   const vakken = VAKGEBIEDEN.map((v) => ({ ...v, leden: v.leden.filter(past) })).filter((v) => v.leden.length);
-  const leeg = !top.length && !devs.length && !vakken.length;
+  const leeg = !top.length && !vakken.length;
   return <div className="cx-connect">
     <section id="team" className="sn-cx h-wrap" aria-labelledby="team-titel">
       <div className="cx-boven">
@@ -92,15 +131,7 @@ export default function ConnectExperts() {
         <h2 id="team-titel">Vind je expert.</h2>
         <p className="cx-team">Echte mensen die je bij naam kent: strategen, developers, designers, ad-specialisten en financiële experts.</p>
       </div>
-      <div className="cx-nieuw">
-        <p className="cx-nieuw-kop">Nieuw hier?</p>
-        <ol className="cx-stappen">
-          {STAPPEN.map((stap) => <li key={stap.kop}>
-            <strong>{stap.href ? <Link to={stap.href}>{stap.kop}<ArrowUpRight size={14} aria-hidden="true" /></Link> : stap.kop}</strong>
-            <span>{stap.tekst}</span>
-          </li>)}
-        </ol>
-      </div>
+      <NieuwHier />
       <ul className="cx-onderdelen">
         {ONDERDELEN.map((o) => <li key={o.kop}>
           <Link to={o.href}>
@@ -119,14 +150,9 @@ export default function ConnectExperts() {
       <div className="cx-org">
         {top.length > 0 && <div className="cx-org-laag">
           <p className="cx-org-kop">Eindverantwoordelijk</p>
-          <ul className="cx-org-rij">{top.map((n) => <Persoon key={n} naam={n} />)}</ul>
+          <ul className="cx-leiders">{top.map((n) => <Leider key={n} naam={n} />)}</ul>
         </div>}
-        {top.length > 0 && devs.length > 0 && <span className="cx-org-lijn" aria-hidden="true" />}
-        {devs.length > 0 && <div className="cx-org-laag">
-          <p className="cx-org-kop">Developers</p>
-          <ul className="cx-org-rij">{devs.map((n) => <Persoon key={n} naam={n} />)}</ul>
-        </div>}
-        {(top.length > 0 || devs.length > 0) && vakken.length > 0 && <span className="cx-org-lijn" aria-hidden="true" />}
+        {top.length > 0 && vakken.length > 0 && <span className="cx-org-lijn" aria-hidden="true" />}
         {vakken.length > 0 && <div className="cx-org-laag">
           <p className="cx-org-kop">Vakgebieden</p>
           <div className="cx-org-vakken">
