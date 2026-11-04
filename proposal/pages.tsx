@@ -21,7 +21,8 @@ import { HomeConnectBand } from "./HomeHeader";
 // Sinds 4 november 2026 (concept) is HeaderAlgemeen de homepage-header; HeaderBestaand staat sinds dezelfde dag op /het-os (OsPage in paginas.tsx); de A/B-test (HomeHeaderAB.tsx, server/ab.mjs) blijven staan voor later.
 import HeaderAlgemeen from "./HeaderAlgemeen";
 import FreeWebsite from "./FreeWebsite";
-import { ImageSliders, VideoSlider } from "./MediaSliders";
+import { VideoSlider } from "./MediaSliders";
+import HomeEnthousiast from "./HomeEnthousiast";
 import { Bento, Tegel } from "./Bento";
 import { TextLink } from "./ui";
 import { ArrowUpRight, Download } from "lucide-react";
@@ -60,11 +61,22 @@ function HomeTechniek() {
   </Bento>;
 }
 
+// 4 november 2026 (Marinus): "die technische data en huidige landingspagina mag naar producten gaan dan is dit meer enthousiasmering
+// en rest inhoudelijk en technisch." De homepage is HomeEnthousiast; wat hier tot dan toe stond, is de pagina /producten.
 export function Home() {
   useLanguage();
   return <div className="sn-simple-home">
     <section className="h-hero sn-approved-hero" id="home">
-      <HeaderAlgemeen />
+      <HomeEnthousiast />
+    </section>
+  </div>;
+}
+
+export function ProductenPagina() {
+  useLanguage();
+  return <div className="sn-simple-home">
+    <section className="h-hero sn-approved-hero" id="producten-pagina">
+      <HeaderAlgemeen label="Producten · OS · Connect · Odoo" kop="Alles over onze producten en techniek" />
       {/* 4 november 2026 (Marinus): "Dit onderdeel moet verwerkt worden in de footer [...] en SocialNow connect gelijk onder de header."
           Groei en cybersecurity, training, documenten en Samen bouwen staan nu in BrandFooter. */}
       <HomeConnectBand />
@@ -73,7 +85,7 @@ export function Home() {
     <FreeWebsite />
     {/* 4 november 2026 (Marinus): "Vanuit onder de websites zelf mag er meer content komen vanuit de branding en voorbeelden." en
         "Net als hier maar kortere titels." Dezelfde rijen als op /projecten, met korte koppen. */}
-    <ImageSliders kort />
+    {/* Branding en campagnes staat sinds 4 november 2026 op de homepage (HomeEnthousiast); hier de video's. */}
     <VideoSlider kort />
     {/* 4 november 2026 (Marinus): eerst één grote slider met klantwerk-animaties, daarna "voeg anders die video's hier ook maar aan
         toe": de films lopen nu mee in de rijen van Branding en campagnes (MediaSliders.tsx, klantwerkFilms). See it in motion staat

@@ -20,9 +20,10 @@ eis(/Custom OS en een gratis website<\/strong> in elk hulppakket<\/p>/.test(kop)
 eis(!/custom-call-line/.test(kop), "geen tweede tekstlink Plan een call onder de ondertitel");
 eis(/<PlanCallHost \/>/.test(shell) && !/<PlanCallHost/.test(kop), "paneel-host staat sitebreed in WebsiteProposal.tsx (één keer)");
 // Hoofdnavigatie (18 okt): Producten, Diensten, Resultaten, Prijzen, Team; rechts Inloggen gratis OS.
-eis(/<ProductenMenu \/>/.test(shell) && /const nav = NAV_LINKS/.test(shell), "hoofdnavigatie begint met het Producten-menu");
+// 4 november 2026 (Marinus): "verder wil ik producten diensten en website actie". Producten is een eigen pagina.
+eis(/<NavLink to="\/producten">Producten<\/NavLink>/.test(shell) && /const nav = NAV_LINKS/.test(shell), "hoofdnavigatie begint met Producten");
 // 19 oktober 2026 (Marinus): Prijzen staat op de Dienstenpagina en niet meer in het menu.
-eis(/\["\/diensten", "Diensten"\],\s*\["\/projecten", "Resultaten"\],\s*\["\/team", "Team"\]/.test(menu), "Diensten, Resultaten, Team in die volgorde");
+eis(/NAV_LINKS: Array<\[string, string\]> = \[\s*\["\/diensten", "Diensten"\],\s*\];/.test(menu), "daarna Diensten; Resultaten en Team staan in de footer");
 eis(/"\/het-os"/.test(menu) && /"\/connect\/"/.test(menu), "Producten toont OS en Connect");
 // 27 okt 2026 (Marinus): Plan een call weg uit de header, bellen of appen rechtsonder (scripts/check-bel-app.mjs).
 eis(!/<HeaderCall \/>/.test(shell) && /<BelApp \/>/.test(shell), "header zonder Plan een call, bel of app rechtsonder");

@@ -11,7 +11,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { CLAIM_URL } from "./os-entry";
 import { Action } from "./ui";
 import { useButtonMagnetism } from "./useButtonMagnetism";
-import { Home } from "./pages";
+import { Home, ProductenPagina } from "./pages";
 // 30 september 2026 (Marinus: "WIL ECHT INSTANT LOADING"): elke pagina buiten de homepage is een eigen bestand dat pas
 // laadt als iemand die pagina opent (proposal/later.tsx). Het eerste script draagt alleen de header en de hero.
 import { OnderDeVouw, later } from "./later";
@@ -49,7 +49,7 @@ let allPosts: typeof import("../data/posts").allPosts = [];
 let brandMeta: typeof import("../scripts/brand-meta.mjs").brandMeta | null = null;
 import { MotionProvider } from "./motion";
 import LanguageSwitch from "./LanguageSwitch";
-import { DIENSTEN, DienstenMenu, Kleurwoord, NAV_LINKS, PRODUCTEN, ProductenMenu, SecurityLink } from "./Producten";
+import { DIENSTEN, DienstenMenu, Kleurwoord, NAV_LINKS, PRODUCTEN, SecurityLink } from "./Producten";
 import { PlanCallHost, openPlanCall } from "./PlanCall";
 import { BelApp } from "./BelApp";
 import { LanguageProvider, LANGUAGES, languagePrefix, type Language, useLanguage } from "./i18n/context";
@@ -232,7 +232,8 @@ function ProposalShell() {
             />
           </Link>
           <nav className="h-desktop-nav" aria-label="Hoofdnavigatie">
-            <ProductenMenu />
+            {/* 4 november 2026 (Marinus): "verder wil ik producten diensten en website actie". Producten is een eigen pagina. */}
+            <NavLink to="/producten">Producten</NavLink>
             {nav.map(([path, title]) => path === "/diensten" ? <React.Fragment key={path}><DienstenMenu /><SecurityLink /></React.Fragment> : (
               <NavLink key={path} to={path}>
                 {title}
@@ -268,7 +269,7 @@ function ProposalShell() {
           <NavLink end to="/" onClick={() => setMenuOpen(false)}>Home<ArrowUpRight size={17} /></NavLink>
           {/* 22 oktober 2026 (Marinus): ook op mobiel OS en Connect in kleur, als kaarten met dezelfde onderregel als het
               desktopmenu, en de diensten net zo. Grote tikvlakken, niets over de rand. */}
-          <p className="h-mobile-groep">Producten</p>
+          <NavLink className="h-mobile-groep" to="/producten" onClick={() => setMenuOpen(false)}>Producten</NavLink>
           <div className="h-mobile-kaarten">
             {PRODUCTEN.map((p) => {
               const inhoud = <><b translate="no">SocialNow <i className={p.soort}>{p.naam}</i></b><span>{p.regel}</span><ArrowUpRight size={17} aria-hidden="true" /></>;
@@ -309,6 +310,7 @@ function ProposalShell() {
         <Suspense fallback={<div aria-hidden="true" style={{ minHeight: "100vh" }} />}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/producten" element={<ProductenPagina />} />
           <Route path="/stijlen" element={<Navigate to="/" replace />} />
           <Route path="/het-os" element={<OsPage />} />
           <Route path="/projecten" element={<ProjectsPage />} />

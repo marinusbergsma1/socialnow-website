@@ -14,8 +14,9 @@ for (const [naam, rol] of mensen) {
   for (const f of [`public/images/${stam}.webp`, ...[96, 160, 320, 480].map((m) => `public/images/klein/${stam}-${m}.webp`)]) if (!existsSync(f)) fouten.push(`${f} ontbreekt`);
   for (const k of [naam, rol]) if (!en[k]) fouten.push(`en.json mist ${k}`);
 }
-if (existsSync("dist/index.html")) {
-  const html = readFileSync("dist/index.html", "utf8");
+// Sinds 4 november 2026 staat het team op /producten (Marinus: "die technische data en huidige landingspagina mag naar producten gaan").
+if (existsSync("dist/producten/index.html")) {
+  const html = readFileSync("dist/producten/index.html", "utf8");
   // 4 november 2026 (Marinus): "Haal developers maar gewoon weg." Tristan staat sindsdien alleen nog op /team, Gijsbert blijft
   // op de homepage als eindverantwoordelijke.
   if (!html.includes("Gijsbert Westeneng")) fouten.push("Gijsbert Westeneng niet in de gebouwde homepage");

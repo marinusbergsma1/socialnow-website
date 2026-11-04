@@ -1,0 +1,25 @@
+/* HomeEnthousiast.tsx: de homepage sinds 4 november 2026. Zelfde huisstijl als de header (header-algemeen.css), op het stippenraster. */
+.sn-blij-film{position:relative;justify-self:center;width:min(100%,400px);aspect-ratio:9/16;max-height:640px;margin:0;border:1px solid var(--a-lijn);border-radius:16px;overflow:hidden;background:#06090b}
+.sn-blij-film video{display:block;width:100%;height:100%;object-fit:cover}
+@media(max-width:960px){.sn-blij-film{width:min(100%,360px);max-height:none}}
+
+.sn-deuren{padding-block:clamp(48px,6vw,88px)}
+html:root .sn-site .sn-deuren h2{margin:0;font-size:clamp(28px,3vw,40px)!important;font-weight:600;line-height:1.1;letter-spacing:0!important;color:#fff;text-align:left}
+html:root .sn-site .sn-deuren ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:28px 0 0;padding:0;list-style:none}
+
+.sn-deuren a{position:relative;display:flex;flex-direction:column;gap:6px;height:100%;padding:0 0 20px;border:1px solid #ffffff1a;border-radius:16px;overflow:hidden;color:#fff;text-decoration:none;transition:border-color .2s}
+.sn-deuren a:hover{border-color:#25d366}
+.sn-deuren a:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.sn-deur-beeld{display:block;aspect-ratio:16/10;margin-bottom:10px;overflow:hidden;background:#06090b}
+.sn-deur-beeld img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .4s ease}
+.sn-deuren a:hover .sn-deur-beeld img{transform:scale(1.04)}
+html:root .sn-site .sn-deuren .sn-deur-soort{padding:0 20px;font-family:var(--v-mono,ui-monospace,Menlo,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#25d366}
+html:root .sn-site .sn-deuren strong{padding:0 20px;font-size:22px;font-weight:600;line-height:1.2}
+html:root .sn-site .sn-deuren .sn-deur-tekst{padding:0 64px 0 20px;font-size:15px;line-height:1.45;color:#b9c2be}
+.sn-deur-pijl{position:absolute;right:16px;bottom:18px;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#25d366;color:#002912}
+
+/* De website-actie voorop en breed: beeld links, tekst rechts. */
+html:root .sn-site .sn-deuren ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sn-deuren li.sn-deur-breed{grid-column:1 / -1}
+@media(min-width:861px){.sn-deur-breed a{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);grid-template-rows:auto auto 1fr;column-gap:8px;padding:0}.sn-deur-breed .sn-deur-beeld{grid-row:1 / 4;aspect-ratio:16/10;margin:0}.sn-deur-breed .sn-deur-soort{margin-top:32px}html:root .sn-site .sn-deuren .sn-deur-breed strong{font-size:30px}.sn-deur-breed a{border-color:#25d36666}}
+@media(max-width:860px){html:root .sn-site .sn-deuren ul{grid-template-columns:1fr}}

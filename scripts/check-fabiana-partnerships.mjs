@@ -21,7 +21,8 @@ eis(!trust.includes('"Sales & network"') && /\["Partnerships", \[/.test(trust), 
 eis(en["Partnerships"] && en["Head of New Partnerships"] && en["Fabiana Abauna"], "Engelse teksten aanwezig");
 eis(postbuild.includes("person('Fabiana Abauna', 'Head of New Partnerships')"), "Fabiana in de gestructureerde teamgegevens");
 if (process.argv.includes("--dist")) {
-  const html = fs.readFileSync("dist/nl/index.html", "utf8");
+  // Sinds 4 november 2026 staat dit op /producten; de homepage enthousiasmeert (Marinus: "die technische data en huidige landingspagina mag naar producten gaan").
+  const html = fs.readFileSync("dist/nl/producten/index.html", "utf8");
   eis(html.includes("Fabiana Abauna") && html.includes("Head of New Partnerships"), "gebouwde homepage toont Fabiana");
   eis(!html.includes(">Sales &amp; partnerships<"), "gebouwde homepage zonder Sales & partnerships");
 }
