@@ -24,6 +24,7 @@ import SamenEnVeilig from "./SamenEnVeilig";
 import FreeWebsite from "./FreeWebsite";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import HomeEnthousiast, { WebsiteCTA } from "./HomeEnthousiast";
+import ExpertsGeloof from "./ExpertsGeloof";
 import { Bento, Tegel } from "./Bento";
 import { TextLink } from "./ui";
 import { ArrowUpRight, Download } from "lucide-react";
@@ -88,7 +89,10 @@ export function ProductenPagina() {
       {/* 4 november 2026 (Marinus): "Verder al die partnerinfo die nu weg is en deze Header mag weer terug bij producten daar is dat
           technische juist heel goed." Dus de homepage-header van vóór #201 (HeaderBestaand: OS met Milo's en downloads, Connect,
           software partners en Trusted by) en daaronder Groei en cybersecurity met de partners (SamenEnVeilig), net als toen. */}
-      <HeaderBestaand meet={() => {}} />
+      {/* 4 november 2026 (avond, Marinus): "Met deze header alleen een andere titel aangezien deze titel al is gebruikt meer op het doel
+          van wat wij doen gefocust". Daaronder ons geloof: experts blijven altijd nodig, met de partners die meebouwen. */}
+      <HeaderBestaand meet={() => {}} kop="Jouw doelen halen, met echte experts en AI." />
+      <ExpertsGeloof />
       <SamenEnVeilig />
       <HomeConnectBand />
     </section>
@@ -106,5 +110,7 @@ export function ProductenPagina() {
 
     {/* 4 november 2026 (Marinus) over Wat we bereikten (Bereikt.tsx): "Deze mag weg." */}
     {/* Het blok met de vier Milo-tegels is weg (Marinus, 19 oktober 2026: "dit gedeelte kan denk ik wel weg"); de onderdelen staan op /het-os. */}
+    {/* "onderaan nog even een zelfde soort website actie blok als wie wij zijn zodat je daar elke keer op uitkomt" */}
+    <WebsiteCTA tweede />
   </div>;
 }
