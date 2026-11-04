@@ -18,18 +18,21 @@ const DIENSTEN = [
   { icoon: ShieldCheck, kop: "Veilige, lokale AI" },
 ];
 
-// 4 november 2026 (Marinus): "die Partners even beter benoemen en ook weer hun certifacaten etc erbij." Naam, wat ze doen, cijfers
-// en keurmerken komen uit SamenEnVeilig.tsx (nagelezen op hun eigen sites, 19 oktober 2026). Claude, Sage en QuickBooks zijn
-// partners van Indexworld en geen keurmerken; die staan hier dus niet.
+// 4 november 2026 (Marinus): "die Partners even beter benoemen en ook weer hun certifacaten etc erbij." en daarna "verder alleen de
+// logo's Uncanny en Indexworld met alle certificaties etc erbij." Dus per partner alleen het logo en hun keurmerken en partners uit
+// SamenEnVeilig.tsx (nagelezen op hun eigen sites, 19 oktober 2026), zonder tekst of cijfers. Het Claude-logo van Indexworld staat
+// hier niet: geen modelnamen in klantgerichte teksten.
 const PARTNERS = [
   {
     naam: "Indexworld", href: "https://indexworld.net", logo: "/images/home-header/indexworld.png", wit: true,
-    tekst: "Odoo-partner met boekhouding en ERP als kern.", cijfers: ["150+ klanten", "3 continenten"],
-    keur: [{ naam: "Odoo-partner", src: "/images/partners/samen/odoo-partner.webp" }],
+    keur: [
+      { naam: "Odoo-partner", src: "/images/partners/samen/odoo-partner.webp" },
+      { naam: "Sage", src: "/images/partners/samen/sage.svg" },
+      { naam: "QuickBooks", src: "/images/partners/samen/quickbooks.png" },
+    ],
   },
   {
     naam: "Uncanny", href: "https://uncannycs.com", logo: "/images/home-header/uncanny-op-zwart.svg", wit: false,
-    tekst: "Odoo Silver Partner en Shopify-partner.", cijfers: ["135+ klanten", "250+ projecten"],
     keur: [
       { naam: "Odoo Silver Partner", src: "/images/partners/samen/odoo.svg" },
       { naam: "Shopify Partners", src: "/images/partners/samen/shopify.svg" },
@@ -79,11 +82,7 @@ export default function HeaderAlgemeen() {
             <p className="sn-alg-klein">Onze Odoo-partners</p>
             <ul>
               {PARTNERS.map(p => <li key={p.naam}>
-                <div className="sn-alg-partner-kop">
-                  <a href={p.href} target="_blank" rel="noopener noreferrer"><img className={p.wit ? "is-wit" : undefined} src={p.logo} alt={p.naam} /></a>
-                  <span className="sn-alg-cijfers">{p.cijfers.map(c => <span key={c}>{c}</span>)}</span>
-                </div>
-                <p>{p.tekst}</p>
+                <a className="sn-alg-partner-logo" href={p.href} target="_blank" rel="noopener noreferrer"><img className={p.wit ? "is-wit" : undefined} src={p.logo} alt={p.naam} /></a>
                 <div className="sn-alg-certs">{p.keur.map(k => <img key={k.naam} src={k.src} alt={k.naam} title={k.naam} loading="lazy" />)}</div>
               </li>)}
             </ul>

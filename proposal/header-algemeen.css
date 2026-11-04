@@ -36,18 +36,15 @@ html:root .sn-site .sn-alg .sn-alg-foto figcaption strong{font-family:'TT Norms'
 html:root .sn-site .sn-alg .sn-alg-kaart p{margin:6px 0 0;font-size:13.5px;line-height:1.45;color:#b9c2be;text-align:left}
 html:root .sn-site .sn-alg .sn-alg-kaart .sn-alg-klein{margin:0;font-family:var(--a-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--a-grijs)}
 
-/* Onze Odoo-partners: logo, cijfers, één zin en hun keurmerken in wit. */
+/* Onze Odoo-partners: alleen hun logo en hun keurmerken in wit. */
 html:root .sn-site .sn-alg .sn-alg-partners ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 0;padding:0;list-style:none}
 @media(max-width:560px){html:root .sn-site .sn-alg .sn-alg-partners ul{grid-template-columns:1fr}}
 .sn-alg-partners li{display:flex;flex-direction:column;padding:14px;border:1px solid var(--a-lijn);border-radius:12px;background:#0b0f12}
-.sn-alg-partner-kop{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.sn-alg-partner-kop a{display:flex;border-radius:4px}
-.sn-alg-partner-kop img{height:24px;width:auto;max-width:130px;object-fit:contain}
-.sn-alg-partner-kop img.is-wit{filter:brightness(0) invert(1)}
-.sn-alg-cijfers{display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-family:var(--a-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--a-groen);white-space:nowrap}
-html:root .sn-site .sn-alg .sn-alg-partners li p{margin:10px 0 0;font-size:13px}
-.sn-alg-certs{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:auto;padding-top:12px}
-.sn-alg-certs img{height:20px;width:auto;max-width:96px;object-fit:contain;filter:brightness(0) invert(1);opacity:.9}
+.sn-alg-partner-logo{display:flex;align-self:flex-start;border-radius:4px}
+.sn-alg-partner-logo img{height:28px;width:auto;max-width:150px;object-fit:contain}
+.sn-alg-partner-logo img.is-wit{filter:brightness(0) invert(1)}
+.sn-alg-certs{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:16px;padding-top:14px;border-top:1px solid var(--a-lijn)}
+.sn-alg-certs img{height:22px;width:auto;max-width:96px;object-fit:contain;filter:brightness(0) invert(1);opacity:.9}
 .sn-alg-knop-video{position:absolute;right:16px;bottom:18px;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:#000;font:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px #0008;transition:transform .2s}
 .sn-alg-knop-video:hover{transform:scale(1.04)}
 .sn-alg-knop-video svg{fill:var(--a-groen);color:var(--a-groen)}
