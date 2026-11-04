@@ -55,7 +55,7 @@ if (process.argv.includes("--dist")) {
   eis(nl.includes('href="#groei"') && nl.includes('id="groei"'), "gebouwde nl-homepage: Lees meer en het anker in de footer");
   const os = lees("dist/nl/het-os/index.html");
   eis(os.includes("sn-bestaand") && !nl.includes("sn-bestaand"), "gebouwde /het-os toont de oude header, de homepage niet");
-  const en = lees("dist/en/index.html");
+  const en = lees("dist/index.html");
   eis(en.includes("Systems and operations") && en.includes("We help you with management, operations and Odoo."), "gebouwde en-homepage is vertaald");
 }
 console.log(fouten.length ? `\n${fouten.length} eis(en) rood` : "\nalles groen");

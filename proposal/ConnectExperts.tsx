@@ -70,7 +70,7 @@ function Leider({ naam }: { naam: string }) {
   if (!persoon) return null;
   const profiel = persoon.linkedin ?? persoon.instagram;
   const binnen = <>
-    <span className="cx-leider-foto"><img {...klein(persoon.image, "240px", [240, 480], undefined, VERSIE)} alt="" width="240" height="240" loading="lazy" /></span>
+    <span className="cx-leider-foto"><img {...klein(persoon.image, "240px", [320, 480], undefined, VERSIE)} alt="" width="240" height="240" loading="lazy" /></span>
     <strong translate="no">{persoon.name}</strong>
     <span>{persoon.role}</span>
   </>;

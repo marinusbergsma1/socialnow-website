@@ -36,7 +36,8 @@ for (const t of TALEN) {
 }
 if (process.argv.includes("--dist")) {
   const tekst = f => fs.readFileSync(f, "utf8").replace(/<span class="sn-title-dot">\.<\/span>/g, ".");  // de titelpunt is een eigen span
-  const nl = tekst("dist/nl/index.html"), en = tekst("dist/index.html");
+  // Sinds 4 november 2026 staat deze header op /het-os (Marinus: "die mag anders wel op de productenpagina oid").
+  const nl = tekst("dist/nl/het-os/index.html"), en = tekst("dist/het-os/index.html");
   eis(nl.includes(H1), "gebouwde nl-pagina toont het statement");
   eis(en.includes(EN), "gebouwde en-pagina toont het Engelse statement");
   eis(!en.includes(OUD[1]) && !nl.includes(OUD[0]) && !nl.includes("bs-typer"), "gebouwde pagina's tonen de oude titel en typregel niet meer");

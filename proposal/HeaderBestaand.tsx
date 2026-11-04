@@ -174,7 +174,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
                 <p className="bs-uitleg bs-uitleg-connect">Echte experts doen het werk in je eigen OS, per maand of per opdracht.</p>
                 <div className="action">
                   {/* 20 oktober 2026 (Marinus): "Bekijk Connect mag ook naar dat onderdeel doorverwijzen." Dus naar het Connect-blok op deze pagina, niet naar /connect/. */}
-                  <a className="pill" href="#connect" onClick={event => { meet("connect"); const doel = document.getElementById("connect"); if (doel) { event.preventDefault(); doel.scrollIntoView({ behavior: "smooth", block: "start" }); history.replaceState(history.state, "", "#connect"); } }}><span>Bekijk Connect</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
+                  <a className="pill" href="#connect" onClick={event => { meet("connect"); const doel = document.getElementById("connect"); event.preventDefault(); if (doel) { doel.scrollIntoView({ behavior: "smooth", block: "start" }); history.replaceState(history.state, "", "#connect"); } else window.location.assign("/connect/"); }}><span>Bekijk Connect</span><span className="arrow"><ArrowUpRight size={17} /></span></a>
                   <Link className="pill" to="/team"><span>Bekijk het hele team</span><span className="arrow"><ArrowUpRight size={17} /></span></Link>
                 </div>
               </article>
