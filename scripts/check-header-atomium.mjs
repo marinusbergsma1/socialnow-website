@@ -40,8 +40,11 @@ eis(/home \? <ContactSlot \/> : <Closing \/>/.test(footer) && ["Marinus Bergsma"
 // "Ik wil graag een Explainers slider met alle verschillende explainer video's." en "Animations and explainers doe maar dan kunnen
 // ze er allemaal gewoon in."
 const slider = lees("proposal/ExplainerSlider.tsx");
-const films = [...slider.matchAll(/src: "(\/video\/[^"?]+)/g)].map((m) => m[1]);
-eis(lees("proposal/pages.tsx").includes("<ExplainerSlider") && slider.includes("Animations and explainers") && films.length >= 12 && films.every((f) => fs.existsSync(`public${f}`)), `homepage: slider Animations and explainers met alle films (${films.length}, elk bestand bestaat)`);
+// Later: "Doe hier maar gewoon 1 slider van groot met de mooiste klantwerk animaties". See it in motion gaat daarin op.
+const films = [...slider.matchAll(/src: "([^"?]+)/g)].map((m) => m[1]);
+const lokaal = films.filter((f) => f.startsWith("/"));
+eis(lees("proposal/pages.tsx").includes("<ExplainerSlider") && !lees("proposal/pages.tsx").includes("<ShowcaseFilms") && films.length >= 8 && lokaal.every((f) => fs.existsSync(`public${f}`)), `homepage: één slider met klantwerk (${films.length} films, elk lokaal bestand bestaat), See it in motion niet apart`);
+eis(!/\/video\/(os|connect)\//.test(slider) && /\.sn-explainers-rij>li\{flex:0 0 clamp\(280px,72vw,920px\)/.test(lees("proposal/explainer-slider.css")), "klantwerk-slider: alleen klantwerk, grote tegels");
 // "de header afbeelding een langzame grow geven en de video van de Odoo Experience laten zien."
 const hcss = lees("proposal/header-algemeen.css");
 eis(/\.sn-alg-foto img\{[^}]*animation:sn-alg-grow/.test(hcss) && /prefers-reduced-motion:reduce\)\{\.sn-alg-foto img\{animation:none/.test(hcss), "header: foto zoomt langzaam (niet bij reduced motion)");
@@ -72,7 +75,7 @@ eis(!home.includes("<HeaderBestaand") && osPagina.includes("<HeaderBestaand"), "
 eis(osPagina.indexOf("<SamenEnVeilig") > osPagina.indexOf("<HeaderBestaand"), "Groei en cybersecurity staat op /het-os onder de oude header");
 // "Vanuit onder de websites zelf mag er meer content komen vanuit de branding en voorbeelden." en "Net als hier maar kortere titels."
 const naWeb = home.slice(home.indexOf("<FreeWebsite"));
-eis(["<ImageSliders kort", "<VideoSlider kort", "<ShowcaseFilms"].every((k) => naWeb.includes(k)), "homepage: onder de websites recent werk, video en See it in motion");
+eis(["<ImageSliders kort", "<VideoSlider kort"].every((k) => naWeb.includes(k)), "homepage: onder de websites recent werk en video");
 const sliders = lees("proposal/MediaSliders.tsx");
 eis(sliders.includes("kort ? <>Branding en campagnes.</>") && sliders.includes("kort ? <>Video en motion.</>"), "homepage-rijen hebben korte koppen");
 // "Hier dezelfde logo's als ook op de main page." De logostrook op /projecten gebruikt de Trusted by-merken uit de header.
@@ -87,7 +90,7 @@ eis(cx.indexOf('className="cx-org"') > 0 && !cx.includes("cx-voorbeelden") && !c
 const acties = header.slice(header.indexOf('className="sn-alg-acties"'), header.indexOf("</div>", header.indexOf('className="sn-alg-acties"')));
 eis((acties.match(/className="sn-pill"/g) || []).length === 2 && !acties.includes("sn-alg-knop"), "headerknoppen hebben dezelfde stijl als Inloggen gratis OS (sn-pill)");
 
-const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "Zie hoe het werkt.", "OS-onderdeel"];
+const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "Klantwerk in beweging.", "Van één grachtenpand naar heel Amsterdam"];
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(lees(`proposal/i18n/${l}.json`) || "{}");
   const mist = nieuw.filter((k) => !w[k] || /[–—]/.test(w[k]));

@@ -1,4 +1,4 @@
-/* ExplainerSlider.tsx: alle explainers in één rij die opzij schuift (4 november 2026). */
+/* ExplainerSlider.tsx: één rij grote filmtegels met klantwerk die opzij schuift (4 november 2026). */
 .sn-explainers{padding-block:clamp(48px,6vw,88px)}
 .sn-explainers-kop{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
 html:root .sn-site .sn-explainers .sn-explainers-label{display:flex;align-items:center;gap:8px;margin:0;font-family:var(--v-mono,ui-monospace,Menlo,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8b9691}
@@ -10,14 +10,12 @@ html:root .sn-site .sn-explainers h2{margin:12px 0 0;font-size:clamp(26px,2.6vw,
 @media(max-width:640px){.sn-explainers-pijlen{display:none}}
 html:root .sn-site .sn-explainers .sn-explainers-rij{display:flex;gap:16px;margin:24px 0 0;padding:0 0 8px;list-style:none;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
 .sn-explainers-rij::-webkit-scrollbar{display:none}
-.sn-explainers-rij>li{flex:0 0 clamp(240px,28vw,360px);scroll-snap-align:start}
+.sn-explainers-rij>li{flex:0 0 clamp(280px,72vw,920px);scroll-snap-align:start}
 .sn-explainers-rij button{display:flex;flex-direction:column;gap:4px;width:100%;padding:0;border:0;background:none;color:#fff;font:inherit;text-align:left;cursor:pointer}
-.sn-explainers-beeld{position:relative;display:block;aspect-ratio:16/10;margin-bottom:8px;border:1px solid #ffffff1a;border-radius:14px;overflow:hidden;background:#06090b}
-.sn-explainers-beeld img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
-.sn-explainers-rij button:hover .sn-explainers-beeld img{transform:scale(1.04)}
-.sn-explainers-play{position:absolute;left:14px;bottom:14px;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#25d366;color:#002912}
-.sn-explainers-play svg{fill:currentColor;margin-left:2px}
-.sn-explainers-duur{position:absolute;right:12px;bottom:14px;padding:3px 8px;border-radius:6px;background:#000b;font-family:var(--v-mono,ui-monospace,Menlo,monospace);font-size:11px;color:#fff}
-html:root .sn-site .sn-explainers-rij strong{font-size:16px;font-weight:600}
+.sn-explainers-beeld{position:relative;display:block;aspect-ratio:16/9;margin-bottom:8px;border:1px solid #ffffff1a;border-radius:14px;overflow:hidden;background:#06090b}
+.sn-explainers-beeld>:not(.sn-explainers-groot){position:absolute;inset:0;width:100%;height:100%}
+.sn-explainers-beeld video,.sn-explainers-beeld img{width:100%;height:100%;object-fit:cover}
+.sn-explainers-groot{position:absolute;right:14px;bottom:14px;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#000b;color:#fff;border:1px solid #ffffff33}
+html:root .sn-site .sn-explainers-rij strong{font-size:18px;font-weight:600}
 html:root .sn-site .sn-explainers-rij button>span:last-child{font-size:13.5px;color:#9aa6a0}
 .sn-explainers-rij button:focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:14px}

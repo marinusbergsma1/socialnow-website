@@ -22,7 +22,6 @@ import { HomeConnectBand } from "./HomeHeader";
 import HeaderAlgemeen from "./HeaderAlgemeen";
 import FreeWebsite from "./FreeWebsite";
 import { ImageSliders, VideoSlider } from "./MediaSliders";
-import ShowcaseFilms from "./ShowcaseFilms";
 import ExplainerSlider from "./ExplainerSlider";
 import { Bento, Tegel } from "./Bento";
 import { TextLink } from "./ui";
@@ -77,8 +76,8 @@ export function Home() {
         "Net als hier maar kortere titels." Dezelfde rijen als op /projecten, met korte koppen. */}
     <ImageSliders kort />
     <VideoSlider kort />
-    <ShowcaseFilms />
-    {/* 4 november 2026 (Marinus): "Ik wil graag een Explainers slider met alle verschillende explainer video's." */}
+    {/* 4 november 2026 (Marinus): "Doe hier maar gewoon 1 slider van groot met de mooiste klantwerk animaties". See it in motion
+        (ShowcaseFilms) staat daarom alleen nog op /projecten. */}
     <ExplainerSlider />
     {/* 19 oktober 2026, avond (Marinus): na Connect de websites, dan technologie en plug and play in één bentogrid, dan resultaten. */}
     <HomeTechniek />
