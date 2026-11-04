@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Search } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Search } from "lucide-react";
 import { people, expertGroepen } from "./content";
 import { klein } from "./licht";
 import { mailLink } from "./aanvragen";
@@ -33,6 +33,24 @@ const DEVELOPERS = expertGroepen.filter((g) => g.name === "AI development" || g.
 const VAKGEBIEDEN = expertGroepen
   .filter((g) => g.name !== "AI development" && g.name !== "Web development")
   .map((g) => ({ naam: g.name, leden: g.members.filter((n) => !EINDVERANTWOORDELIJK.includes(n)) }));
+
+// 4 november 2026 (Marinus): "Dit moet ook veel compacter en beter." en "Dan een mooie Expertlaag die je uit kan klappen en dan
+// op zo'n soort manier beelden van de verschillende onderdelen waar je naartoe kan en beginnen met nieuw hier? [...] Wij beginnen
+// altijd met een GRATIS WEBSITE DEMO. Daarna kijken we naar de verschillende processen en software." Dus eerst de korte flow,
+// dan één rij beeldkaarten per onderdeel, en het organogram met zoekveld pas na uitklappen. Beelden staan al op de site.
+const STAPPEN = [
+  { kop: "Gratis websitedemo", tekst: "We beginnen altijd met een demo van je nieuwe website en een securityscan.", href: "/security" },
+  { kop: "Processen en software", tekst: "Daarna kijken we samen naar je processen, je ERP en de software die je gebruikt." },
+  { kop: "Je eigen experts", tekst: "De juiste mensen pakken het op, met een vaste prijs per project." },
+];
+const ONDERDELEN = [
+  { kop: "Odoo en ERP", beeld: "/images/odoo-experience-stand.webp", href: "/contact?onderwerp=Odoo%20en%20ERP", groepen: ["Finance & operations", "AI development"] },
+  { kop: "Websites en development", beeld: "/images/cases/vastiq-desktop.webp", href: "/diensten#development", groepen: ["Web development", "AI development"] },
+  { kop: "Ads en vindbaarheid", beeld: "/images/social/AZ-25-K-Volgers-Post.webp", href: "/diensten#advertising", groepen: ["Ads & search"] },
+  { kop: "Video, foto en design", beeld: "/images/social/UNIVERSAL-OPENHEIMER-FRAMES.webp", href: "/diensten#content", groepen: ["Video, photo & design", "UGC & social media"] },
+  { kop: "Strategie en finance", beeld: "/images/verhaal/team-atomium.webp", href: "/diensten#branding", groepen: ["Strategy & guidance", "Finance & operations", "Partnerships"] },
+];
+const aantalIn = (groepen: string[]) => new Set(expertGroepen.filter((g) => groepen.includes(g.name)).flatMap((g) => g.members)).size;
 
 function Persoon({ naam }: { naam: string }) {
   const persoon = people.find((p) => p.name === naam);
@@ -72,17 +90,32 @@ export default function ConnectExperts() {
       <div className="cx-boven">
         <p className="cx-label">Ons team</p>
         <h2 id="team-titel">Vind je expert.</h2>
-        {/* 19 oktober 2026, avond (Marinus): "verbeterd SocialNow/Connect met meer praten over ons als team". 21 oktober 2026: tweede zin volgt de
-            Connect-film (82-connect-film-v1/werk/02-webtekst.md 1.10): experts zien alleen wat je per opdracht deelt. */}
-        <p className="cx-team">Wij zijn het team achter SocialNow en Connect: strategen, developers, designers, ad-specialisten en financiële experts. Echte mensen die je bij naam kent, en die alleen zien wat jij per opdracht deelt.</p>
-        <p className="cx-zin"><strong>{people.length}</strong> experts in <strong>{expertGroepen.length}</strong> vakgebieden. Zoek, vergelijk en kies zelf.</p>
-        {/* 21 oktober 2026 (Marinus): "Dan moet nog even video eronder eruit ... die moet met switch te changen zijn." De Connect-film
-            staat alleen nog in de header, achter de schakelaar SocialNow OS / SocialNow Connect (HeaderBestaand.tsx). */}
+        <p className="cx-team">Echte mensen die je bij naam kent: strategen, developers, designers, ad-specialisten en financiële experts.</p>
+      </div>
+      <div className="cx-nieuw">
+        <p className="cx-nieuw-kop">Nieuw hier?</p>
+        <ol className="cx-stappen">
+          {STAPPEN.map((stap) => <li key={stap.kop}>
+            <strong>{stap.href ? <Link to={stap.href}>{stap.kop}<ArrowUpRight size={14} aria-hidden="true" /></Link> : stap.kop}</strong>
+            <span>{stap.tekst}</span>
+          </li>)}
+        </ol>
+      </div>
+      <ul className="cx-onderdelen">
+        {ONDERDELEN.map((o) => <li key={o.kop}>
+          <Link to={o.href}>
+            <span className="cx-beeld"><img src={o.beeld} alt="" decoding="async" /></span>
+            <strong>{o.kop}</strong>
+            <span className="cx-aantal">{aantalIn(o.groepen)} experts<ArrowUpRight size={14} aria-hidden="true" /></span>
+          </Link>
+        </li>)}
+      </ul>
+      <details className="cx-laag">
+        <summary><span><strong>{people.length}</strong> experts in <strong>{expertGroepen.length}</strong> vakgebieden</span><span className="cx-laag-knop">Bekijk de expertlaag<ChevronDown size={16} aria-hidden="true" /></span></summary>
         <label className="cx-zoek">
           <Search size={18} aria-hidden="true" />
           <input type="search" value={zoek} onChange={(e) => zetZoek(e.target.value)} placeholder="Zoek op naam of vak, bijvoorbeeld Meta Ads" aria-label="Zoek een expert" />
         </label>
-      </div>
       <div className="cx-org">
         {top.length > 0 && <div className="cx-org-laag">
           <p className="cx-org-kop">Eindverantwoordelijk</p>
@@ -104,7 +137,8 @@ export default function ConnectExperts() {
           </div>
         </div>}
       </div>
-      {leeg && <p className="cx-leeg">Geen expert gevonden. Probeer een ander woord.</p>}
+        {leeg && <p className="cx-leeg">Geen expert gevonden. Probeer een ander woord.</p>}
+      </details>
       {/* 20 oktober 2026 (Marinus): "Vulling hier blauw met witte tekst. Verder moet er ook een gedeelte komen met vraag een
           opdracht aan." Twee vakken naast elkaar: opdracht aanvragen en aanmelden als expert, elk met een blauwe knop. */}
       <div className="cx-onder">

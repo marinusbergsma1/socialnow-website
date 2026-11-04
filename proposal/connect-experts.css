@@ -179,3 +179,36 @@ html:root .sn-site .cx-connect .cx-org-vaknaam { margin: 0; font-size: 14px; fon
   .sn-site .cx-org-rij { max-width: 620px; margin-inline: auto; }
   .sn-site .cx-org-rij > .cx-org-persoon { flex: 0 1 calc(50% - 5px); }
 }
+
+/* 4 november 2026: compacte expertlaag. Eerst "Nieuw hier?" in drie stappen, dan beeldkaarten per onderdeel, het organogram klapt uit. */
+.sn-site .cx-connect .cx-nieuw { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 28px; align-items: start; margin-top: 32px; padding: 20px 22px; border: 1px solid #d6e6ee; border-radius: 16px; background: #f4f9fc; }
+@media (max-width: 760px) { .sn-site .cx-connect .cx-nieuw { grid-template-columns: 1fr; } }
+html:root .sn-site .cx-connect .cx-nieuw-kop { margin: 2px 0 0; font-size: 20px; font-weight: 700; color: #0b0f12; white-space: nowrap; }
+html:root .sn-site .cx-connect .cx-stappen { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: stap; }
+@media (max-width: 760px) { html:root .sn-site .cx-connect .cx-stappen { grid-template-columns: 1fr; } }
+.sn-site .cx-stappen li { position: relative; display: flex; flex-direction: column; gap: 4px; padding-left: 38px; counter-increment: stap; }
+.sn-site .cx-stappen li::before { content: counter(stap); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #00739e; color: #fff; font-size: 13px; font-weight: 700; }
+.sn-site .cx-stappen li:first-child::before { background: #25d366; color: #002912; }
+html:root .sn-site .cx-stappen strong { font-size: 15.5px; color: #0b0f12; }
+.sn-site .cx-stappen strong a { display: inline-flex; align-items: center; gap: 4px; color: #0b0f12; text-decoration: none; border-bottom: 2px solid #25d366; }
+html:root .sn-site .cx-stappen span { font-size: 14px; line-height: 1.45; color: #55616c; }
+
+html:root .sn-site .cx-connect .cx-onderdelen { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin: 28px 0 0; padding: 0; list-style: none; }
+@media (max-width: 1100px) { html:root .sn-site .cx-connect .cx-onderdelen { display: flex; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; padding-bottom: 6px; } .sn-site .cx-onderdelen > li { flex: 0 0 230px; scroll-snap-align: start; } }
+.sn-site .cx-onderdelen a { display: flex; flex-direction: column; gap: 6px; color: #0b0f12; text-decoration: none; }
+.sn-site .cx-beeld { display: block; aspect-ratio: 4 / 3; border-radius: 14px; overflow: hidden; background: #eef2f5; }
+.sn-site .cx-beeld img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.sn-site .cx-onderdelen a:hover .cx-beeld img { transform: scale(1.04); }
+.sn-site .cx-onderdelen a:focus-visible { outline: 2px solid #00739e; outline-offset: 4px; border-radius: 14px; }
+html:root .sn-site .cx-onderdelen strong { margin-top: 6px; font-size: 16.5px; font-weight: 600; line-height: 1.25; }
+.sn-site .cx-aantal { display: inline-flex; align-items: center; gap: 4px; font-family: var(--v-mono, ui-monospace, Menlo, monospace); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #00739e; }
+
+.sn-site .cx-connect .cx-laag { margin-top: 28px; border-top: 1px solid #dfe8ee; border-bottom: 1px solid #dfe8ee; }
+.sn-site .cx-laag > summary { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0; cursor: pointer; list-style: none; font-size: 16px; color: #0b0f12; }
+.sn-site .cx-laag > summary::-webkit-details-marker { display: none; }
+.sn-site .cx-laag-knop { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 2px solid #00a3e0; border-radius: 999px; font-weight: 700; font-size: 14px; color: #00739e; }
+.sn-site .cx-laag-knop svg { transition: transform .25s ease; }
+.sn-site .cx-laag[open] .cx-laag-knop svg { transform: rotate(180deg); }
+.sn-site .cx-laag > summary:focus-visible { outline: 2px solid #00739e; outline-offset: 4px; }
+.sn-site .cx-laag[open] { padding-bottom: 28px; }
+.sn-site .cx-laag .cx-zoek { max-width: 760px; margin-bottom: 8px; }
