@@ -28,6 +28,11 @@ eis(!/(indexworld|uncanny)[^"]*\.(png|svg|webp)/i.test(kop), "Indexworld en Unca
 eis(odoo.includes("odoo-experience-stand") && /href="#groei"/.test(odoo) && odoo.includes("Lees meer"), "Odoo als eigen blok met standfoto en Lees meer naar #groei");
 eis(/<section className="sn-samen" id="groei"/.test(lees("proposal/SamenEnVeilig.tsx")) && lees("proposal/BrandFooter.tsx").includes("<SamenEnVeilig"), "Groei en cybersecurity staat in de footer met anker #groei");
 
+// "ik wil alleen niet af van de stippenachtergrond." De header en het Odoo-blok tekenen geen eigen dicht vlak over het stippenraster.
+const css = lees("proposal/header-algemeen.css");
+const basis = (css.match(/\.sn-alg\{[^}]*\}/) || [""])[0];
+eis(/background:\s*transparent/.test(basis) && !/background:\s*#0{3,6}\b/.test(basis), "stippenachtergrond blijft zichtbaar: .sn-alg heeft geen eigen zwarte achtergrond");
+
 const pages = lees("proposal/pages.tsx");
 const home = pages.slice(pages.indexOf("export function Home()"));
 const plek = ["<HeaderAlgemeen", "<ConnectExperts", "<OdooPartners"].map((v) => home.indexOf(v));
