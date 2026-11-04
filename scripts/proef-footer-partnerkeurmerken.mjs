@@ -12,11 +12,11 @@ const rij = footer.slice(footer.indexOf('className="h-footer-erkend"'), footer.i
 const talen = ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"];
 
 const eisen = [
-  ["één rij Gecertificeerd, erkend en partners", rij.includes("Gecertificeerd, erkend en partners") && !rij.includes("h-footer-erkend-partners")],
+  ["één rij Partners en specialiteiten, zonder Google, Meta en Google Developers", rij.includes("Partners en specialiteiten") && !rij.includes("h-footer-erkend-partners") && !/google-logo|meta-logo|Google Developers/.test(rij)],
   ["keurmerken via partners: Odoo Silver, Shopify, Salesforce en Adobe", ["Odoo Silver Partner", "Shopify Partners", "Salesforce-partner", "Adobe-partner"].every((k) => rij.includes(`alt="${k}"`))],
   ["geen partners van Indexworld als keurmerk", !/claude|sage|quickbooks/i.test(rij)],
   ["logo's in kleur: geen wit- of grijsfilter en niet gedimd", !/\.h-footer-erkend[^{]*img \{[^}]*filter/.test(css) && !/\.h-footer-erkend > div \{[^}]*opacity/.test(css)],
-  ...talen.map((taal) => [`vertaling ${taal}`, /"Gecertificeerd, erkend en partners": "[^"]+"/.test(readFileSync(`proposal/i18n/${taal}.json`, "utf8"))]),
+  ...talen.map((taal) => [`vertaling ${taal}`, /"Partners en specialiteiten": "[^"]+"/.test(readFileSync(`proposal/i18n/${taal}.json`, "utf8"))]),
 ];
 
 let fout = 0;

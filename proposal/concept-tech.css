@@ -90,14 +90,11 @@
 /* Cijfers in tech-font, kleiner. */
 :root .sn-site .h-verhaal-jaren b { font-size: 28px !important; font-family: var(--v-mono) !important; letter-spacing: 0.04em; }
 
-/* 5 oktober 2026: footer-rij Gecertificeerd & erkend (Google Partner, Meta Business Partner, Google Developers). */
+/* Footer-rij met partnerlogo's in eigen kleur (5 oktober 2026 begonnen als Gecertificeerd & erkend; 4 november 2026 alleen partners). */
 :root .sn-site .h-footer-erkend { display: grid; justify-items: center; gap: 16px; margin: 0 auto 28px; }
 :root .sn-site .h-footer-erkend > span { font-family: var(--v-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #6f7a83; }
 :root .sn-site .h-footer-erkend > div { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px 36px; }  /* 4 nov 2026: in kleur, niet meer gedimd */
 :root .sn-site .h-footer-erkend img { display: block; width: auto; height: 22px; max-width: 130px; object-fit: contain; }
-:root .sn-site .h-footer-erkend img[alt="Meta Business Partner"] { height: 18px; }  /* meta-logo-wit.svg: tekst wit, het merk blauw (Marinus 4 nov 2026: "Meta tekst graag wit.") */
-:root .sn-site .h-footer-erkend b { display: inline-flex; align-items: center; gap: 8px; font-family: var(--v-mono); font-size: 12px; font-weight: 500; color: #fff; }
-:root .sn-site .h-footer-erkend svg { width: 20px; height: 20px; }
 :root .sn-site .h-final-belofte { margin: 4px auto 0; font-family: var(--v-mono); font-size: 12.5px; letter-spacing: .04em; color: #25d366; }
 /* Vier gezichten: de mensen achter elk onderdeel. */
 :root .sn-site .h-os-mensen { display: flex; align-items: center; gap: 10px; margin-top: 4px; }

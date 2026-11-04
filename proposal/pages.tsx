@@ -15,7 +15,6 @@ import "./wereldkaart.css";
 import "./resultaten-cijfers.css";
 import React from "react";
 import { Link } from "react-router-dom";
-import { OnderDeVouw, later } from "./later";
 import { HomeConnectBand } from "./HomeHeader";
 // 18 oktober 2026: partners en veiligheidsdocumenten stonden direct onder de header; sinds 4 november 2026 in BrandFooter.
 // 18 oktober 2026 (Marinus): "1 VERSIE DIE IK AANGAF WACHT MET AB TESTEN". Dus geen A/B-test meer.
@@ -32,7 +31,6 @@ import { DATA_DOCUMENT, Marks, next } from "./PixelInfrastructure";
 import "./pixel-infrastructure.css";
 import { useLanguage } from "./i18n/context";
 import "./home-simple.css";
-const Bereikt = later(() => import("./Bereikt").then(m => m.default));
 
 // 19 oktober 2026, avond (Marinus): "websites Technologie met een duidelijke rol en plug and play gedeelte in 1 bentogrid zodat
 // ie korter is". Dus het blok PixelInfrastructure en de bento "Software as a tool" samen in vijf tegels, met hun eigen teksten.
@@ -82,7 +80,7 @@ export function Home() {
     {/* 19 oktober 2026, avond (Marinus): na Connect de websites, dan technologie en plug and play in één bentogrid, dan resultaten. */}
     <HomeTechniek />
 
-    <OnderDeVouw ruimte={false}><Bereikt /></OnderDeVouw>
+    {/* 4 november 2026 (Marinus) over Wat we bereikten (Bereikt.tsx): "Deze mag weg." */}
     {/* Het blok met de vier Milo-tegels is weg (Marinus, 19 oktober 2026: "dit gedeelte kan denk ik wel weg"); de onderdelen staan op /het-os. */}
   </div>;
 }
