@@ -109,7 +109,7 @@ for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
 if (process.argv.includes("--dist")) {
   const nl = lees("dist/nl/index.html");
   eis(nl.includes("team-atomium.webp") && nl.includes("Systemen en operations"), "gebouwde nl-homepage: Atomium-beeld en de vier stappen");
-  eis(!nl.includes('id="groei"') && !nl.includes("odoo-experience-stand") && !nl.includes("cx-voorbeelden") && nl.includes("h-image-showcase") && !nl.includes('id="bereikt"') && nl.includes("sn-contactslot") && nl.includes("michelle@socialnow.nl"), "gebouwde nl-homepage: geen Groei-blok in de footer, geen Odoo-blok, wel branding en video onder de websites");
+  eis(!nl.includes('id="groei"') && !nl.includes("odoo-experience-stand") && !nl.includes("cx-voorbeelden") && nl.includes("h-image-showcase") && !nl.includes('id="bereikt"') && nl.includes("sn-contactslot") && nl.includes("partners@socialnow.nl") && nl.includes("tel:+31637404577"), "gebouwde nl-homepage: geen Groei-blok in de footer, geen Odoo-blok, wel branding en video onder de websites");
   const os = lees("dist/nl/het-os/index.html");
   eis(os.includes("sn-bestaand") && os.includes('id="groei"') && !nl.includes("sn-bestaand"), "gebouwde /het-os toont de oude header met Groei en cybersecurity, de homepage niet");
   const en = lees("dist/index.html");
