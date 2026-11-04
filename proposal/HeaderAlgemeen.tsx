@@ -53,8 +53,10 @@ export default function HeaderAlgemeen() {
       <div className="sn-alg-wrap">
         <div className="sn-alg-tekst">
           <p className="sn-alg-label"><i />Odoo · ERP · Websites · AI</p>
-          <h1 id="sn-alg-kop">Je bedrijf goed ingericht, van Odoo tot website<span className="sn-alg-punt">.</span></h1>
-          <p className="sn-alg-uitleg">We richten Odoo en andere ERP-systemen in, koppelen alles aan elkaar en houden je data veilig. Echte experts, met AI als hulp.</p>
+          {/* 4 november 2026 (Marinus): "Een betrouwbare partner voor groei en cybersecurity. Doelgerichte totaaloplossingen, met experts
+              en AI. Veilig lokaal en in eigen beheer." */}
+          <h1 id="sn-alg-kop">Een betrouwbare partner voor groei en cybersecurity<span className="sn-alg-punt">.</span></h1>
+          <p className="sn-alg-uitleg">Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
           <ul className="sn-alg-diensten">
             {DIENSTEN.map(({ icoon: Icoon, kop }) => <li key={kop}><Icoon size={18} aria-hidden="true" /><strong>{kop}</strong></li>)}
           </ul>
@@ -93,7 +95,8 @@ export default function HeaderAlgemeen() {
         </div>
       </div>
       <div className="sn-alg-trusted">
-        <span translate="no">Trusted by</span>
+        {/* 4 november 2026 (Marinus): "Verder mag er wel our branding en advertisement is trusted by". */}
+        <span translate="no">Our branding and advertising is trusted by</span>
         <div className="sn-alg-merken">
           <span className="sn-alg-groep">{DIRECT.map(merk)}</span>
           <span className="sn-alg-groep">{merk(CRAFTURE)}<i className="sn-alg-streep" aria-hidden="true" />{VIA_CRAFTURE.map(merk)}</span>
