@@ -9,7 +9,6 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { services } from "./content";
-import { Closing } from "./ui";
 import ContactSlot from "./ContactSlot";
 export default function BrandFooter() {
   const { pathname } = useLocation();
@@ -17,8 +16,9 @@ export default function BrandFooter() {
   return (
     <footer className="h-brand-footer">
       <div className="h-wrap">
-        {/* 4 november 2026 (Marinus): op de homepage het slot met contactpersonen in plaats van Start gratis met jouw systeem. */}
-        {home ? <ContactSlot /> : <Closing />}
+        {/* 4 november 2026 (Marinus): op de homepage het slot met contactpersonen in plaats van Start gratis met jouw systeem. Het
+            grote slot op de andere pagina's (Milo's, One operation and management system) mocht ook weg: "Deze mag ook weg." */}
+        {home && <ContactSlot />}
       </div>
       {/* 4 november 2026 (Marinus): Groei en cybersecurity stond hier even, op elke pagina. Later die dag: "Dit uit de footer en
           hier meer een geheel." Het blok staat nu op /het-os, onder de header met OS en Connect (paginas.tsx). */}

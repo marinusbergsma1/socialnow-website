@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Play, X } from "lucide-react";
-import { openPlanCall } from "./PlanCall";
 import { CRAFTURE, DIRECT, VIA_CRAFTURE, merk } from "./ExplainerPlayer";
 import "./header-algemeen.css";
 
@@ -33,6 +32,13 @@ export default function HeaderAlgemeen() {
   const film = useRef<HTMLVideoElement>(null);
   const open = () => { venster.current?.showModal(); void film.current?.play().catch(() => {}); };
   const sluit = () => { film.current?.pause(); venster.current?.close(); };
+  const naarContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const doel = document.getElementById("contact");
+    if (!doel) return;
+    e.preventDefault();
+    doel.scrollIntoView({ behavior: "smooth", block: "center" });
+    doel.focus({ preventScroll: true });
+  };
   return (
     <section className="sn-alg" aria-labelledby="sn-alg-kop">
       <div className="sn-alg-wrap">
@@ -56,9 +62,9 @@ export default function HeaderAlgemeen() {
             {/* 4 november 2026 (Marinus): "Deze knoppen wil ik ook met die filling en met die style zoals die", met de knop Inloggen
                 gratis OS rechtsboven als voorbeeld. Dus dezelfde goedgekeurde pillknop (sn-pill, button-design.css). */}
             <Link className="sn-pill" to="/security"><span>Start met een gratis websitedemo</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
-            <button type="button" className="sn-pill" aria-haspopup="dialog" onClick={() => openPlanCall({ onderdelen: ["crm", "dashboard"] })}>
-              <span>Plan een gesprek</span><ArrowUpRight size={17} aria-hidden="true" />
-            </button>
+            {/* 4 november 2026 (Marinus): "Zonder gesprek inplannen, ze kunnen wel gewoon een mail sturen of bellen." Dus de knop
+                springt naar de contacttegels onderaan de homepage (ContactSlot.tsx). */}
+            <a className="sn-pill" href="#contact" onClick={naarContact}><span>Neem contact op</span><ArrowUpRight size={17} aria-hidden="true" /></a>
           </div>
         </div>
         <figure className="sn-alg-foto">

@@ -36,7 +36,7 @@ eis(!/google-logo|meta-logo|Google Developers/.test(erkend), "footer: geen Googl
 // Over het slot Start gratis met jouw systeem: "Hier focussen op een formulier of contactgegevens van Steef en Michelle en Ben.",
 // "Doe maar contactgegevens met functies" en "Misschien mij nog erbij".
 const slot = lees("proposal/ContactSlot.tsx");
-eis(/home \? <ContactSlot \/> : <Closing \/>/.test(footer) && ["Marinus Bergsma", "Steef Komen", "Michelle Yang", "Ben Sterckx"].every((n) => slot.includes(`naam: "${n}"`)) && slot.includes("{p.role}"), "homepage-slot: contactgegevens met functie van Marinus, Steef, Michelle en Ben");
+eis(/home && <ContactSlot \/>/.test(footer) && ["Marinus Bergsma", "Steef Komen", "Michelle Yang", "Ben Sterckx"].every((n) => slot.includes(`naam: "${n}"`)) && slot.includes("{p.role}"), "homepage-slot: contactgegevens met functie van Marinus, Steef, Michelle en Ben");
 // "Ik wil graag een Explainers slider met alle verschillende explainer video's." en "Animations and explainers doe maar dan kunnen
 // ze er allemaal gewoon in."
 const slider = lees("proposal/ExplainerSlider.tsx");
@@ -55,6 +55,12 @@ eis(kop.includes('const FILM = "/video/odoo-experience/odoo-experience.mp4"'), "
 // "Verder dottet pattern weer zichtbaar maken."
 const stip = lees("proposal/stippen.css");
 eis(/\.sn-team-product \{ background: transparent !important; \}/.test(stip) && /\.cx-connect \{[^}]*radial-gradient/.test(stip), "stippen: Connect-band doorzichtig, teamblok wit met stippen");
+// Contact: "Doe maar gewoon de contactile van mij met info@socialnow.nl met 06 nummer dan Steef met Finance@socialnow.nl, Michelle
+// mag Partners@socialnow.nl zijn en Ben Odoo@socialnow.nl. Zonder gesprek inplannen, ze kunnen wel gewoon een mail sturen of bellen."
+eis([["Marinus Bergsma", "info@socialnow.nl"], ["Steef Komen", "finance@socialnow.nl"], ["Michelle Yang", "partners@socialnow.nl"], ["Ben Sterckx", "odoo@socialnow.nl"]].every(([n, m]) => slot.includes(`naam: "${n}", mail: "${m}"`)) && slot.includes('tel: "+31637404577"') && slot.includes("href={`tel:${c.tel}`}"), "contacttegels: juiste adressen, 06-nummer van Marinus, bellen en mailen");
+eis(kop.includes('href="#contact"') && !kop.includes("openPlanCall") && slot.includes('id="contact"') && !fs.existsSync("proposal/GesprekPaneel.tsx"), "header: Neem contact op springt naar de tegels, geen gesprek inplannen");
+// Over het grote slot op de andere pagina's: "Deze mag ook weg."
+eis(!footer.includes("<Closing"), "footer: geen groot slot met Milo's meer");
 const tech = lees("proposal/concept-tech.css");
 eis(!/\.h-footer-erkend img \{[^}]*filter/.test(tech) && !/\.h-footer-erkend > div \{[^}]*opacity/.test(tech) , "footer: logo's in kleur, niet gedimd");
 
@@ -93,7 +99,7 @@ eis(cx.indexOf('className="cx-org"') > 0 && !cx.includes("cx-voorbeelden") && !c
 const acties = header.slice(header.indexOf('className="sn-alg-acties"'), header.indexOf("</div>", header.indexOf('className="sn-alg-acties"')));
 eis((acties.match(/className="sn-pill"/g) || []).length === 2 && !acties.includes("sn-alg-knop"), "headerknoppen hebben dezelfde stijl als Inloggen gratis OS (sn-pill)");
 
-const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin"];
+const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Neem contact op"];
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(lees(`proposal/i18n/${l}.json`) || "{}");
   const mist = nieuw.filter((k) => !w[k] || /[–—]/.test(w[k]));
@@ -103,7 +109,7 @@ for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
 if (process.argv.includes("--dist")) {
   const nl = lees("dist/nl/index.html");
   eis(nl.includes("team-atomium.webp") && nl.includes("Systemen en operations"), "gebouwde nl-homepage: Atomium-beeld en de vier stappen");
-  eis(!nl.includes('id="groei"') && !nl.includes("odoo-experience-stand") && !nl.includes("cx-voorbeelden") && nl.includes("h-image-showcase") && !nl.includes('id="bereikt"') && nl.includes("sn-contactslot") && nl.includes("michelle@socialnow.nl"), "gebouwde nl-homepage: geen Groei-blok in de footer, geen Odoo-blok, wel branding en video onder de websites");
+  eis(!nl.includes('id="groei"') && !nl.includes("odoo-experience-stand") && !nl.includes("cx-voorbeelden") && nl.includes("h-image-showcase") && !nl.includes('id="bereikt"') && nl.includes("sn-contactslot") && nl.includes("partners@socialnow.nl") && nl.includes("tel:+31637404577"), "gebouwde nl-homepage: geen Groei-blok in de footer, geen Odoo-blok, wel branding en video onder de websites");
   const os = lees("dist/nl/het-os/index.html");
   eis(os.includes("sn-bestaand") && os.includes('id="groei"') && !nl.includes("sn-bestaand"), "gebouwde /het-os toont de oude header met Groei en cybersecurity, de homepage niet");
   const en = lees("dist/index.html");
