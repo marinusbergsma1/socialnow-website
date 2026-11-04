@@ -17,13 +17,13 @@ import "./explainer-player.css";
 //   Later op 22 oktober (Marinus): de route staat er als Crafture-logo, niet als tekst: AZ, Supperclub | Crafture | Universal ... Marvel.
 // Hetzelfde startbeeld ligt in de speler over de film tot die speelt, dus nergens meer het zwembadframe.
 const STARTZIN = "In ruim twee minuten: wat je met het OS doet, wie het bouwt en wat het kost.";
-const DIRECT = [
+export const DIRECT = [
   { naam: "AZ", src: "/images/merken/AZ-LOGO-KLEUR.svg", w: 235, h: 115, kleur: true, maat: 1.15 },
   { naam: "Supperclub", src: "/images/merken/SUPPERCLUB-LOGO.webp", w: 109, h: 120, maat: 1.55 },
 ];
 // 22 oktober 2026 (Marinus): "Crafture iets groter dan de rest van de logo's".
-const CRAFTURE = { naam: "Crafture", src: "/images/merken/CRAFTURE-LOGO.svg", w: 527, h: 707, maat: 2.1 };
-const VIA_CRAFTURE = [
+export const CRAFTURE = { naam: "Crafture", src: "/images/merken/CRAFTURE-LOGO.svg", w: 527, h: 707, maat: 2.1 };
+export const VIA_CRAFTURE = [
   { naam: "Universal", src: "/images/merken/UNIVERSAL-LOGO-WIT.svg", w: 128, h: 79, maat: 1.55 },
   { naam: "Warner Bros.", src: "/images/merken/WARNER-BROS-KLEUR.svg", w: 57, h: 80, maat: 1.3 },
   { naam: "MOJO", src: "/images/merken/MOJO-LOGO.webp", w: 441, h: 120, maat: .8 },
@@ -31,7 +31,7 @@ const VIA_CRAFTURE = [
   { naam: "Marvel", src: "/images/merken/MARVEL-LOGO.svg", w: 1000, h: 402, kleur: true, maat: .85 },
 ];
 // Optisch even hoog: vierkante merken iets hoger, brede woordmerken iets lager (zelfde aanpak als de Trusted by-balk in content.ts).
-const merk = (m: { naam: string; src: string; w: number; h: number; kleur?: boolean; maat: number }) =>
+export const merk = (m: { naam: string; src: string; w: number; h: number; kleur?: boolean; maat: number }) =>
   <img key={m.naam} className={m.kleur ? "is-kleur" : undefined} src={m.src} alt={m.naam} translate="no" width={m.w} height={m.h} loading="lazy" decoding="async" style={{ "--maat": m.maat } as React.CSSProperties} />;
 function Startbeeld({ label, zinId }: { label: string; zinId: string }) {
   return <span className="sn-startbeeld">

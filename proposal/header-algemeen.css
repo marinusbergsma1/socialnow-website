@@ -8,78 +8,68 @@ html:root .sn-site .sn-alg .sn-alg-label{display:flex;align-items:center;gap:8px
 html:root .sn-site .sn-alg h1{max-width:18ch;margin:16px 0 0;font-size:clamp(34px,4.4vw,60px)!important;font-weight:600;line-height:1.04;letter-spacing:0!important;word-spacing:.04em;color:#fff;text-align:left}
 .sn-alg-punt{color:var(--a-groen)}
 html:root .sn-site .sn-alg .sn-alg-uitleg{max-width:52ch;margin:18px 0 0;font-size:clamp(16px,1.3vw,19px);line-height:1.5;color:#b9c2be;text-align:left}
-html:root .sn-site .sn-alg .sn-alg-diensten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:26px 0 0;padding:0;list-style:none}
-@media(max-width:560px){html:root .sn-site .sn-alg .sn-alg-diensten{grid-template-columns:1fr}}
-.sn-alg-diensten li{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1px solid var(--a-lijn);border-radius:12px;background:#06090b;font-size:14px;line-height:1.45;color:#b9c2be}
+
+/* Vier diensten als korte tegels, Odoo voorop. */
+html:root .sn-site .sn-alg .sn-alg-diensten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:26px 0 0;padding:0;list-style:none}
+@media(max-width:420px){html:root .sn-site .sn-alg .sn-alg-diensten{grid-template-columns:1fr}}
+.sn-alg-diensten li{display:flex;gap:12px;align-items:center;padding:11px 14px;border:1px solid var(--a-lijn);border-radius:12px;background:#06090b}
 .sn-alg-diensten li:first-child{border-color:#25d36655;background:linear-gradient(135deg,#25d36614,#06090b 60%)}
-.sn-alg-diensten li>svg{flex:0 0 auto;margin-top:2px;color:var(--a-groen)}
-.sn-alg-diensten strong{display:block;margin-bottom:3px;font-size:15px;font-weight:600;color:#fff}
+.sn-alg-diensten li>svg{flex:0 0 auto;color:var(--a-groen)}
+.sn-alg-diensten strong{font-size:15px;font-weight:600;color:#fff}
+
 .sn-alg-acties{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .sn-alg-knop{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border:1px solid var(--a-groen);border-radius:999px;background:var(--a-groen);color:#002912;font:inherit;font-size:15px;font-weight:700;text-decoration:none;cursor:pointer;transition:background .2s,color .2s}
 .sn-alg-knop:hover{background:#3ee07c}
 .sn-alg-knop-rand{background:transparent;color:#fff}
 .sn-alg-knop-rand:hover{background:#25d3661a}
-.sn-alg-knop:focus-visible,.sn-alg-scan:focus-visible,.sn-alg-film:focus-visible{outline:2px solid #fff;outline-offset:3px}
-.sn-alg-scan{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:14px;font-weight:600;color:#d6ddda;text-decoration:none;border-bottom:1px solid #25d36666;padding-bottom:2px}
-.sn-alg-scan svg:first-child{color:var(--a-groen)}
-.sn-alg-scan:hover{color:#fff}
+.sn-alg-knop:focus-visible,.sn-alg a:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
-/* Rechts: de aftermovie staand, ernaast drie kaarten met Odoo-bewijs. */
-.sn-alg-odoo{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:12px;align-items:stretch}
-@media(max-width:480px){.sn-alg-odoo{grid-template-columns:1fr}}
-.sn-alg-film{position:relative;display:block;aspect-ratio:9/16;border:1px solid var(--a-lijn);border-radius:16px;overflow:hidden;background:#06090b}
-@media(max-width:480px){.sn-alg-film{aspect-ratio:4/5}}
-.sn-alg-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sn-alg-film-label{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;background:#000000b3;font-family:var(--a-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#fff}
-.sn-alg-kaarten{display:grid;grid-template-rows:auto auto 1fr;gap:12px}
+/* Rechts: grote foto van de stand, resultaat zwevend erover, partners eronder. */
+.sn-alg-beeld{position:relative;display:grid;gap:12px}
+.sn-alg-foto{position:relative;aspect-ratio:4/3;margin:0;border:1px solid var(--a-lijn);border-radius:16px;overflow:hidden;background:#06090b}
+.sn-alg-foto img{display:block;width:100%;height:100%;object-fit:cover}
+.sn-alg-foto figcaption{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:6px;padding:60px 20px 18px;background:linear-gradient(transparent,#000d)}
+.sn-alg-foto figcaption .sn-alg-klein{font-family:var(--a-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#cfd8d3}
+html:root .sn-site .sn-alg .sn-alg-foto figcaption strong{font-family:'TT Norms',sans-serif!important;font-size:22px;font-weight:600;letter-spacing:0;color:#fff}
+
 .sn-alg-kaart{padding:16px 16px 18px;border:1px solid var(--a-lijn);border-radius:14px;background:#06090b}
 html:root .sn-site .sn-alg .sn-alg-kaart p{margin:6px 0 0;font-size:13.5px;line-height:1.45;color:#b9c2be;text-align:left}
 html:root .sn-site .sn-alg .sn-alg-kaart .sn-alg-klein{margin:0;font-family:var(--a-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--a-grijs)}
 html:root .sn-site .sn-alg .sn-alg-kaart .sn-alg-groot{margin-top:8px;font-size:17px;font-weight:600;line-height:1.25;color:#fff}
 .sn-alg-groot b{font-size:26px;font-weight:700;color:var(--a-groen)}
-html:root .sn-site .sn-alg .sn-alg-keur ul{display:grid;gap:10px;margin:12px 0 0;padding:0;list-style:none}
-.sn-alg-keur li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--a-lijn);border-radius:10px;background:#0b0f12}
-.sn-alg-keur img{height:26px;width:auto;max-width:130px;object-fit:contain}
-.sn-alg-keur small{font-family:var(--a-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--a-grijs);white-space:nowrap}
-.sn-alg-keur img{filter:brightness(0) invert(1)}
+.sn-alg-zwevend{position:absolute;right:-16px;top:-22px;width:min(270px,60%);background:#0b0f12;border-color:#25d36655;box-shadow:0 18px 40px #000a}
+@media(max-width:960px){.sn-alg-zwevend{position:static;width:auto;box-shadow:none}}
 
-/* Opties 2 tot 4 (?header=2..4), 4 november 2026. */
-html:root .sn-site .sn-alg .sn-alg-diensten-kort{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.sn-alg-diensten-kort li{align-items:center;padding:11px 14px}
-.sn-alg-diensten-kort strong{margin:0}
-.sn-alg-foto{position:relative;margin:0;border:1px solid var(--a-lijn);border-radius:16px;overflow:hidden;background:#06090b}
-.sn-alg-foto img{display:block;width:100%;height:100%;object-fit:cover}
+/* Onze Odoo-partners: logo, cijfers, één zin en hun keurmerken in wit. */
+html:root .sn-site .sn-alg .sn-alg-partners ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 0;padding:0;list-style:none}
+@media(max-width:560px){html:root .sn-site .sn-alg .sn-alg-partners ul{grid-template-columns:1fr}}
+.sn-alg-partners li{display:flex;flex-direction:column;padding:14px;border:1px solid var(--a-lijn);border-radius:12px;background:#0b0f12}
+.sn-alg-partner-kop{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sn-alg-partner-kop a{display:flex;border-radius:4px}
+.sn-alg-partner-kop img{height:24px;width:auto;max-width:130px;object-fit:contain}
+.sn-alg-partner-kop img.is-wit{filter:brightness(0) invert(1)}
+.sn-alg-cijfers{display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-family:var(--a-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--a-groen);white-space:nowrap}
+html:root .sn-site .sn-alg .sn-alg-partners li p{margin:10px 0 0;font-size:13px}
+.sn-alg-certs{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:auto;padding-top:12px}
+.sn-alg-certs img{height:20px;width:auto;max-width:96px;object-fit:contain;filter:brightness(0) invert(1);opacity:.9}
+.sn-alg-knop-video{position:absolute;right:16px;bottom:18px;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:#000;font:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px #0008;transition:transform .2s}
+.sn-alg-knop-video:hover{transform:scale(1.04)}
+.sn-alg-knop-video svg{fill:var(--a-groen);color:var(--a-groen)}
+.sn-alg-knop-video:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
-/* 2: gecentreerd, diensten in één rij, bewijs als strook eronder. */
-.sn-alg-2 .sn-alg-wrap{grid-template-columns:1fr;gap:28px}
-.sn-alg-2 .sn-alg-tekst{display:flex;flex-direction:column;align-items:center;text-align:center}
-html:root .sn-site .sn-alg-2 h1,html:root .sn-site .sn-alg-2 .sn-alg-uitleg{text-align:center;margin-left:auto;margin-right:auto}
-html:root .sn-site .sn-alg-2 h1{max-width:20ch}
-html:root .sn-site .sn-alg-2 .sn-alg-diensten{grid-template-columns:repeat(4,minmax(0,1fr));margin:0}
-.sn-alg-2 .sn-alg-bewijs{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:12px}
-.sn-alg-2 .sn-alg-foto{min-height:200px}
-@media(max-width:1000px){html:root .sn-site .sn-alg-2 .sn-alg-diensten{grid-template-columns:repeat(2,minmax(0,1fr))}.sn-alg-2 .sn-alg-bewijs{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){html:root .sn-site .sn-alg-2 .sn-alg-diensten,.sn-alg-2 .sn-alg-bewijs{grid-template-columns:1fr}}
+/* Trusted by, dezelfde merken als in het startbeeld van de film. */
+.sn-alg-trusted{--merk-h:30px;display:flex;flex-direction:column;align-items:center;gap:18px;max-width:1320px;margin:0 auto;padding:22px clamp(16px,4vw,48px) clamp(32px,4vw,48px)}
+.sn-alg-trusted>span{font-family:var(--a-mono);font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#9aa6a0}
+.sn-alg-merken{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px 34px}
+.sn-alg-groep{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px 34px}
+.sn-alg-groep+.sn-alg-groep{padding-left:34px;border-left:1px solid #ffffff26}
+.sn-alg-streep{display:block;width:1px;height:40px;background:#ffffff26}
+.sn-alg-merken img{display:block;height:calc(var(--merk-h) * var(--maat,1));width:auto}
+@media(max-width:700px){.sn-alg-trusted{--merk-h:22px}.sn-alg-groep+.sn-alg-groep{padding-left:0;border-left:0}.sn-alg-streep{display:none}}
 
-/* 3: grote foto van de stand rechts, resultaat zwevend erover. */
-.sn-alg-3 .sn-alg-groot-beeld{position:relative;display:grid;gap:12px}
-.sn-alg-3 .sn-alg-foto{aspect-ratio:4/3}
-.sn-alg-3 figcaption{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:6px;padding:60px 20px 18px;background:linear-gradient(transparent,#000d);font-size:20px;font-weight:600;color:#fff}
-.sn-alg-3 figcaption .sn-alg-klein{font-family:var(--a-mono);font-size:10.5px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:#cfd8d3}
-.sn-alg-3 .sn-alg-zwevend{position:absolute;right:-16px;top:-22px;width:min(270px,60%);box-shadow:0 18px 40px #000a}
-.sn-alg-3 .sn-alg-zwevend .sn-alg-kaart{background:#0b0f12;border-color:#25d36655}
-@media(max-width:960px){.sn-alg-3 .sn-alg-zwevend{position:static;width:auto;box-shadow:none}}
-
-/* 4: de Odoo-apps die we inrichten als tegels. */
-.sn-alg-apps{padding:22px;border:1px solid var(--a-lijn);border-radius:18px;background:#06090b}
-html:root .sn-site .sn-alg .sn-alg-apps>.sn-alg-klein{margin:0;font-family:var(--a-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--a-grijs)}
-html:root .sn-site .sn-alg .sn-alg-apps ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0 0;padding:0;list-style:none}
-.sn-alg-apps li{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px;border:1px solid var(--a-lijn);border-radius:14px;background:#0b0f12;font-size:13px;color:#d6ddda;text-align:center}
-.sn-alg-apps li span{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#714b67,#4a2f44);color:#fff}
-.sn-alg-apps li:nth-child(even) span{background:linear-gradient(135deg,#25d366,#128c47);color:#002912}
-html:root .sn-site .sn-alg .sn-alg-ander{display:flex;gap:10px;align-items:flex-start;margin:14px 0;padding:12px 14px;border:1px dashed #25d36666;border-radius:12px;font-size:14px;line-height:1.45;color:#b9c2be;text-align:left}
-.sn-alg-ander svg{flex:0 0 auto;margin-top:2px;color:var(--a-groen)}
-.sn-alg-ander strong{color:#fff}
-.sn-alg-apps .sn-alg-keur{padding:0;border:0;background:none}
-@media(max-width:480px){html:root .sn-site .sn-alg .sn-alg-apps ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
-html:root .sn-site .sn-alg-3 figcaption strong{font-family:'TT Norms',sans-serif!important;font-size:22px;font-weight:600;letter-spacing:0;color:#fff}
+/* Filmvenster. */
+.sn-alg-venster{width:min(1100px,94vw);padding:0;border:1px solid var(--a-lijn);border-radius:16px;background:#000;overflow:visible}
+.sn-alg-venster::backdrop{background:#000c}
+.sn-alg-venster video{display:block;width:100%;aspect-ratio:16/9;border-radius:16px;background:#000}
+.sn-alg-sluit{position:absolute;right:-12px;top:-12px;z-index:1;display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--a-lijn);border-radius:50%;background:#0b0f12;color:#fff;cursor:pointer}
+.sn-alg-sluit:focus-visible{outline:2px solid #fff;outline-offset:2px}
