@@ -89,7 +89,9 @@ function pijltjes(e: React.KeyboardEvent<HTMLElement>, ids: string[], nu: string
   (e.currentTarget.querySelector(`[data-id="${volgende}"]`) as HTMLElement | null)?.focus();
 }
 
-export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void }) {
+// 4 november 2026 (avond, Marinus): op /producten "deze header alleen een andere titel aangezien deze titel al is gebruikt", dus de
+// titel is een prop; /het-os houdt de oude titel.
+export default function HeaderBestaand({ meet, kop = "Een betrouwbare partner voor groei en cybersecurity." }: { meet: (doel: Doel) => void; kop?: string }) {
   const { language, t } = useLanguage();
   const [modus, setModus] = useState<"os" | "custom">("os");
   // 21 oktober 2026 (Marinus): "kleine switch boven de explainer video in de header wat een beeld geeft hoe ze m kunnen switchen
@@ -187,7 +189,7 @@ export default function HeaderBestaand({ meet }: { meet: (doel: Doel) => void })
               <div className="video-title">
                 {/* 19 oktober 2026 (Marinus): "Graag nooit 3 regels onder elkaar. Maximaal 2." De lettergrootte schaalt met de kolom en
                     met de lengte van de titel in de gekozen taal (--tekens), zodat hij in elke taal op twee regels past. */}
-                <h1 style={{ "--tekens": t("Een betrouwbare partner voor groei en cybersecurity.").length } as React.CSSProperties}>Een betrouwbare partner voor groei en cybersecurity.</h1>
+                <h1 style={{ "--tekens": t(kop).length } as React.CSSProperties}>{kop}</h1>
                 {/* 3 november 2026 (Marinus): "software gratis wil ik in ieder geval als eerste van de live website af" en "Meer iets van focus
                     op doelgerichte totaaloplossingen met experts en Ai." */}
                 <p className="pay-line">Doelgerichte totaaloplossingen, met experts en AI.</p>
