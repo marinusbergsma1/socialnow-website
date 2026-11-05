@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, Play, X } from "lucide-react";
 import { CRAFTURE, DIRECT, VIA_CRAFTURE, merk } from "./ExplainerPlayer";
 import "./header-algemeen.css";
+import Diepte3D from "./Diepte3D";
 
 // Homepage-header, 4 november 2026. MARINUS: "Verder moet de focus bij de header niet liggen op connect en os." en
 // "Meer gewoon mooi algemeen houden en duidelijk Odoo en andere ERP hulp."
@@ -48,6 +49,8 @@ export function AtomiumFoto() {
   return <>
     <figure className="sn-alg-foto">
       <img src="/images/verhaal/team-atomium.webp" alt="Ons team bij het Atomium in Brussel" width="900" height="1200" fetchPriority="high" />
+      {/* 5 november 2026: 3D zoals Apple's ruimtelijke foto's ("Of een 3D effect zoals Apple nu ook heeft met die foto's"). */}
+      <Diepte3D src="/images/verhaal/team-atomium.webp" diepte="/images/verhaal/team-atomium-diepte.webp" />
       <figcaption><span className="sn-alg-klein">Odoo Experience 2026 · Brussel</span><strong>Ons team<span className="sn-alg-punt">.</span></strong></figcaption>
       <button type="button" className="sn-alg-knop-video" aria-haspopup="dialog" onClick={open}><Play size={15} aria-hidden="true" /><span>Bekijk de video</span></button>
     </figure>

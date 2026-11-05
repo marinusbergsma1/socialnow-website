@@ -32,8 +32,15 @@ eis(!!grow && +grow[1] <= 16, `zoom iets sneller: hoogstens 16 s (nu ${grow ? gr
 // Website-actie: "hier de liggende video [...] een kleine logobar met de logo's van de getroffen bedrijven met daarboven zelfs deze
 // bedrijven zijn getroffen Binance er ook bij. Vraag een veiligheidsrapport aan of krijg een gratis demo van een moderne website op maat."
 const gw = fs.readFileSync("proposal/GratisWebsite.tsx", "utf8");
-eis(gw.includes("security-16x9.mp4") && !gw.includes("security-9x16.mp4") && /gw2-film[^"]*"[^>]*>\s*<video controls playsInline preload="none"/.test(gw), "website-actie: liggende video, speelt pas na klikken");
-eis(gw.includes("Zelfs deze bedrijven zijn getroffen.") && ["binance", "nintendo", "wikipedia"].every((n) => gw.includes(`/security/logos/${n}.svg`) && fs.existsSync(`public/security/logos/${n}.svg`)), "website-actie: logobalk getroffen bedrijven met Binance");
+// Daarna (5 nov): "Video misschien zelfs ook wel weg. Why an ai website is more safe and secure? Oid en dan naar een blog".
+const posts = JSON.parse(fs.readFileSync("data/posts.json", "utf8"));
+const blog = posts.find((p) => p.slug === "waarom-een-ai-website-veiliger-is");
+eis(!/<video/.test(gw) && gw.includes('to="/blog/waarom-een-ai-website-veiliger-is"') && !!blog && blog.title === "Waarom een AI-website veiliger is", "website-actie: geen video maar een tegel naar het blog Waarom een AI-website veiliger is");
+eis(!!blog && !/\bClaude\b|GPT|Gemini/.test(blog.body) && /Verizon/.test(blog.body) && /developer/.test(blog.body), "blog: feiten met bron, developer controleert, geen modelnamen");
+// Daarna (5 nov): "de wordpress en binance en wikipedia logo's mogen weg. Hou het positief". Geen getroffen bedrijven meer.
+eis(!gw.includes("gw2-getroffen") && !/binance|wikipedia|nintendo|wordpress/i.test(gw.replace(/\/\/.*$|\{\/\*[^]*?\*\/\}/gm, "")), "website-actie: positief, geen logo's van getroffen bedrijven");
+// "Op Mobiel is het logo niet mooi uitgelicht met het menu": het logo staat verticaal in het midden van de balk.
+eis(/\.h-header \.h-brand\{display:flex!important;align-items:center\}/.test(fs.readFileSync("proposal/hoofdmenu.css", "utf8")), "menubalk: logo verticaal in het midden");
 eis(gw.includes("Vraag een veiligheidsrapport aan of krijg een gratis demo van een moderne website op maat.") && gw.includes('to="/security"'), "website-actie: veiligheidsrapport of gratis demo, met knop naar het rapport");
 if (process.argv.includes("--dist")) {
   const nl = fs.readFileSync("dist/nl/index.html", "utf8");
