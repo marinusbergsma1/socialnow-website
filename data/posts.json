@@ -21,5 +21,28 @@
         "answer": "Nee. De testomgeving laat je onderdelen en inzichten verkennen. Automatiseringen worden afzonderlijk afgesproken, ingericht en getest."
       }
     ]
+  },
+  {
+    "slug": "waarom-een-ai-website-veiliger-is",
+    "title": "Waarom een AI-website veiliger is",
+    "excerpt": "AI vindt fouten sneller en helpt gaten sneller dichten. Met een developer die meeleest wordt je website veilig, en blijft hij dat ook.",
+    "date": "2026-11-05",
+    "coverImage": "images/cases/vastiq-desktop.webp",
+    "readTime": "4 min",
+    "tags": [
+      "AI website",
+      "Veiligheid"
+    ],
+    "body": "## Veilig begint bij de basis\n\nEen website is tegenwoordig de voordeur van je bedrijf. Klanten vinden je daar, laten hun gegevens achter en nemen contact op. Een goede website is daarom ook een veilige website. Het goede nieuws: met AI en een developer samen wordt een website sneller veilig, en blijft hij dat ook.\n\n## Software is de grootste ingang\n\nVolgens het Verizon Data Breach Investigations Report 2026 begint 31% van de datalekken bij een kwetsbaarheid in software. Dat is nu de nummer één ingang, nog vóór gestolen wachtwoorden. Wie zijn software bijhoudt, sluit dus de belangrijkste deur.\n\n## Wat AI daaraan doet\n\n- AI vindt fouten die mensen missen. Google liet AI testcode schrijven en vond zo 26 nieuwe kwetsbaarheden, waaronder een fout in OpenSSL die vermoedelijk twintig jaar onopgemerkt bleef (Google Security Blog, 2024).\n- AI helpt gaten sneller dichten. Met AI-voorstellen losten developers beveiligingsmeldingen op in 28 minuten (mediaan), tegen anderhalf uur met de hand (GitHub, 2024).\n- Een moderne website met minder losse onderdelen heeft minder plekken die je moet bijhouden.\n\n## Waarom er altijd een developer bij hoort\n\nAI schrijft ook zelf fouten. In onderzoek van NYU was ongeveer 40% van de code die een AI-assistent schreef kwetsbaar (Pearce e.a., IEEE S&P 2022). Daarom laten we AI het nooit alleen doen: AI zoekt en stelt voor, een developer controleert en beslist. Samen zijn ze sneller en grondiger dan elk apart.\n\n> AI helpt, mensen beslissen.\n\n## Zo werken wij\n\nBij SocialNow bouwen we moderne websites met AI en echte developers. Wij houden je website bij met gratis veiligheidsupdates, en je kunt altijd een veiligheidsrapport van je huidige website aanvragen.\n\n## Zelf beginnen\n\nWil je weten hoe jouw nieuwe website eruit kan zien? Vraag een gratis demo aan via de website-actie. Zes korte vragen, zonder verplichting.",
+    "faqs": [
+      {
+        "question": "Is AI alleen genoeg om een website veilig te maken?",
+        "answer": "Nee. AI vindt fouten sneller, maar schrijft ze ook. Daarom controleert bij ons altijd een developer wat AI voorstelt."
+      },
+      {
+        "question": "Wat kost een veiligheidsrapport?",
+        "answer": "Niets. Je vraagt het aan via de website-actie of de securityscan op onze site."
+      }
+    ]
   }
 ]

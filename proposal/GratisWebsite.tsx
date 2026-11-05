@@ -45,11 +45,6 @@ function laad(): Antwoorden {
   return LEEG;
 }
 
-const GETROFFEN = [
-  { naam: "Binance", logo: "/security/logos/binance.svg" },
-  { naam: "Nintendo", logo: "/security/logos/nintendo.svg" },
-  { naam: "Wikipedia", logo: "/security/logos/wikipedia.svg" },
-];
 
 export default function GratisWebsite() {
   const { language, t } = useLanguage();
@@ -106,7 +101,7 @@ export default function GratisWebsite() {
   // 4 november 2026 (Marinus): "Bij website Actie moet gewoon een hele cleane onboarding komen met nog een zwarte banner met de video
   // van mij en in 1 header net als de main nu mooi is gedaan waar ik zoals bij de vorige veiligheidsvideo vertel over het belang van
   // een goeie website samen met het Binance geval. Daaronder gewoon de onboarding." Een video met het Binance-verhaal bestaat nog
-  // niet; tot die er is, staat hier de veiligheidsvideo van /security (Marinus aan het woord), sinds 4 november avond de liggende versie.
+  // niet; eerst stond hier de veiligheidsvideo van /security, sinds 5 november een tegel naar het blog.
   return <>
     <section className="sn-alg gw2-kop" aria-labelledby="gw2-kop">
       <div className="sn-alg-wrap">
@@ -119,24 +114,23 @@ export default function GratisWebsite() {
             <a className="sn-pill" href="#onboarding" onClick={naarStart}><span>Begin met vraag 1</span><ArrowUpRight size={17} aria-hidden="true" /></a>
             <Link className="sn-pill sn-pill-blauw" to="/security"><span>Vraag een veiligheidsrapport aan</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
           </div>
-          {/* "een kleine logobar met de logo's van de getroffen bedrijven met daarboven zelfs deze bedrijven zijn getroffen Binance er
-              ook bij". Nintendo en Wikipedia met bron in de securityscan (PhpCheck.tsx, GERAAKT); Binance op verzoek van Marinus. */}
-          <div className="gw2-getroffen">
-            <p>Zelfs deze bedrijven zijn getroffen.</p>
-            <ul aria-label="Getroffen bedrijven">
-              {GETROFFEN.map((g) => <li key={g.naam}><img src={g.logo} alt={g.naam} title={g.naam} /></li>)}
-            </ul>
-          </div>
+          {/* De logobalk met getroffen bedrijven is weg. 5 november 2026 (Marinus): "de wordpress en binance en wikipedia logo's mogen
+              weg. Hou het positief". */}
           <a className="gw2-steef" href={whatsappLink(t("Hoi Steef, ik heb een vraag over de gratis website."))} target="_blank" rel="noopener noreferrer">
             <img src="/images/Steef-Komen.webp" alt="" width="40" height="40" /><span><strong translate="no">Steef Komen</strong><small>Liever even praten? Stuur Steef een bericht.</small></span><ArrowUpRight size={16} aria-hidden="true" />
           </a>
         </div>
-        {/* "hier de liggende video": de 16:9-versie, speelt alleen als je op afspelen klikt. */}
-        <figure className="sn-blij-film gw2-film is-liggend">
-          <video controls playsInline preload="none" poster="/security/film/poster-16x9.jpg" aria-label="Marinus over het belang van een veilige website">
-            <source src="/security/film/security-16x9.mp4" type="video/mp4" />
-          </video>
-        </figure>
+        {/* 5 november 2026 (Marinus): "Video misschien zelfs ook wel weg. Why an ai website is more safe and secure? Oid en dan naar
+            een blog". Een positieve tegel naar het blog (data/posts.json), met een echte klantwebsite als beeld. */}
+        <Link className="gw2-blog" to="/blog/waarom-een-ai-website-veiliger-is">
+          <span className="gw2-blog-beeld"><img src="/images/cases/vastiq-desktop.webp" alt="" loading="lazy" decoding="async" /></span>
+          <span className="gw2-blog-tekst">
+            <span className="gw2-blog-label">Blog · 4 min</span>
+            <strong>Waarom een AI-website veiliger is<span className="sn-alg-punt">.</span></strong>
+            <span>AI vindt fouten sneller, een developer controleert. Zo wordt je website veilig en blijft hij dat.</span>
+            <span className="gw2-blog-lees">Lees het artikel <ArrowUpRight size={16} aria-hidden="true" /></span>
+          </span>
+        </Link>
       </div>
     </section>
     <div className="gw2" id="onboarding"><div className="gw2-vel">

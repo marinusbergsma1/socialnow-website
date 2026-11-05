@@ -92,10 +92,19 @@ html:root .sn-site .gw2 .gw2-klaar{margin:16px 0 0;padding:12px 14px;border-radi
 .gw2-klaar a{color:#0b0f12;font-weight:600}
 html:root .sn-site .gw2-mens small{font-family:"TT Norms",system-ui,sans-serif!important;letter-spacing:0!important}
 
-/* 4 november 2026 (avond): de liggende video (16:9) in de header en een kleine logobalk "Zelfs deze bedrijven zijn getroffen." */
+/* 4 november 2026 (avond): de liggende video (16:9) in de header. */
 @media(min-width:961px){.gw2-kop .sn-alg-wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)!important;align-items:center}}
 .gw2-film.is-liggend{width:100%;max-width:720px;aspect-ratio:16/9;max-height:none}
-.gw2-getroffen{margin-top:28px}
-html:root .sn-site .gw2-kop .gw2-getroffen p{margin:0 0 12px;font-family:var(--a-mono,ui-monospace,Menlo,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9aa6a0}
-.gw2-getroffen ul{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin:0;padding:0;list-style:none}
-.gw2-getroffen img{display:block;height:24px;width:auto;max-width:120px;object-fit:contain;opacity:.9}
+html:root .sn-site .gw2-kop /* 5 november 2026: tegel naar het blog "Waarom een AI-website veiliger is" in plaats van de video. */
+.gw2-blog{display:flex;flex-direction:column;width:100%;max-width:640px;justify-self:center;border:1px solid #25d36666;border-radius:20px;overflow:hidden;color:#fff;text-decoration:none;background:radial-gradient(120% 100% at 100% 0%,#00a3e022,transparent 60%);transition:border-color .2s,transform .3s}
+.gw2-blog:hover{border-color:#25d366;transform:translateY(-3px)}
+.gw2-blog:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.gw2-blog-beeld{display:block;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid #ffffff1a}
+.gw2-blog-beeld img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s ease}
+.gw2-blog:hover .gw2-blog-beeld img{transform:scale(1.04)}
+.gw2-blog-tekst{display:flex;flex-direction:column;gap:8px;padding:22px 24px 24px}
+html:root .sn-site .gw2-blog .gw2-blog-label{font-family:var(--a-mono,ui-monospace,Menlo,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#25d366}
+html:root .sn-site .gw2-blog strong{font-size:clamp(24px,2.4vw,32px);font-weight:700;line-height:1.1}
+html:root .sn-site .gw2-blog-tekst > span:not([class]){font-size:16px;line-height:1.5;color:#b9c2be}
+html:root .sn-site .gw2-blog .gw2-blog-lees{display:inline-flex;align-items:center;gap:6px;margin-top:4px;font-weight:600;color:#fff}
+@media(prefers-reduced-motion:reduce){.gw2-blog,.gw2-blog-beeld img{transition:none}}
