@@ -6,7 +6,7 @@
 // in een frame laden, de site zelf wel; en op de belangrijkste pagina's komt geen enkele CSP-overtreding voor.
 // Leest dist/, dus eerst npm run build. PLAYWRIGHT_CORE kan naar een aanwezige playwright-core wijzen.
 import { createServer } from "node:http";
-import { existsSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 
 if (!existsSync("dist/index.html")) { console.error("Geen dist/index.html: draai eerst npm run build."); process.exit(1); }
@@ -22,6 +22,18 @@ const rw = (config.rewrites || []).find((r) => r.source === "/.well-known/securi
 const st = existsSync("dist/security.txt") ? readFileSync("dist/security.txt", "utf8") : "";
 eisen.push([`vercel.json: /.well-known/security.txt serveert ${rw ? rw.destination : "niets"}`, rw?.destination === "/security.txt" && /^Contact: /m.test(st)]);
 eisen.push(["security.txt noemt beide adressen als Canonical", /^Canonical: https:\/\/socialnow\.nl\/\.well-known\/security\.txt$/m.test(st) && /^Canonical: https:\/\/socialnow\.nl\/security\.txt$/m.test(st)]);
+// Gauntlet r1: frame-ancestors zonder wildcard als https: of *, en een inhouds-CSP op elke HTML-pagina.
+const bronnen = (csp.match(/frame-ancestors ([^;]*)/)?.[1] || "").trim().split(/\s+/);
+eisen.push([`frame-ancestors alleen eigen adressen (${bronnen.join(" ")})`, bronnen.length > 0 && bronnen.every((b) => ["'self'", "https://socialnow.nl", "https://*.socialnow.nl"].includes(b))]);
+const htmls = [];
+const loop = (d) => { for (const f of readdirSync(d, { withFileTypes: true })) { const p = path.join(d, f.name); if (f.isDirectory()) loop(p); else if (f.name.endsWith(".html") && !f.name.startsWith("._")) htmls.push(p); } };
+// ._-bestanden zijn macOS-bijbestanden op externe schijven, geen pagina's.
+loop("dist");
+const zonderCsp = htmls.filter((f) => !/http-equiv="Content-Security-Policy"\s+content="[^"]*default-src/.test(readFileSync(f, "utf8")));
+eisen.push([`elke HTML-pagina heeft een inhouds-CSP (${htmls.length} pagina's, ${zonderCsp.length} zonder${zonderCsp.length ? `: ${zonderCsp.slice(0, 3).join(", ")}` : ""})`, htmls.length > 300 && zonderCsp.length === 0]);
+const meta = readFileSync("dist/index.html", "utf8").match(/http-equiv="Content-Security-Policy"\s+content="([^"]*)"/)?.[1] || "";
+const connectSrc = meta.match(/connect-src ([^;]*)/)?.[1] || "";
+eisen.push([`connect-src zonder wildcard-domein (${connectSrc})`, connectSrc !== "" && !/\*/.test(connectSrc)]);
 eisen.push([`vercel.json: X-Frame-Options (${kop("X-Frame-Options") || "ontbreekt"})`, kop("X-Frame-Options") === "SAMEORIGIN"]);
 
 const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".woff2": "font/woff2", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".json": "application/json", ".mp4": "video/mp4" };
@@ -74,7 +86,7 @@ try {
   const eigenOk = eigen ? await eigen.evaluate(() => /Coming/.test(document.body.innerText)).catch(() => false) : false;
   eisen.push(["de site zelf mag zichzelf wel in een frame laden", eigenOk]);
 
-  for (const route of ["/", "/nl/", "/connect", "/security/", "/team/", "/diensten/"]) {
+  for (const route of ["/", "/nl/", "/connect", "/security/", "/team/", "/diensten/", "/voorstel/", "/voorstel/diensten/", "/voorstellen/header-variaties/", "/voorstellen/header-variaties/drie-opties.html", "/404.html"]) {
     await page.goto(`${base}${route}`, { waitUntil: "load" });
     await page.waitForTimeout(1200);
     const v = await page.evaluate(() => window.__csp);

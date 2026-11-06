@@ -1,5 +1,6 @@
 // Proef M8 (Indexworld, 5 november 2026): "On your first visit the site asks milo-chat.socialnow-marinus.workers.dev for
 // your country." Eis: geen landvraag meer naar buiten; de taalkeuze blijft gelijk voor wie een sitetaal in de browser heeft.
+// Gauntlet r1: ook een omweg naar een andere landdienst of een latere fetch wordt rood (allowlist, 8 s na networkidle).
 // Leest dist/, dus eerst npm run build. PLAYWRIGHT_CORE kan naar een aanwezige playwright-core wijzen.
 import { createServer } from "node:http";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
@@ -30,11 +31,16 @@ const browser = await chromium.launch({ headless: true, ...(process.env.BROWSER_
 try {
   for (const [locale, verwacht] of GEVALLEN) {
     const context = await browser.newContext({ locale, viewport: { width: 1280, height: 800 } });
+    // Elk extern verzoek telt (gauntlet r1: een omweg via ipapi.co of een latere fetch moet ook rood worden). Toegestaan zijn
+    // alleen de documenten van iframes: de live klantsites in de websitecarrousel. Al het andere bij het eerste bezoek is rood.
     const buiten = new Set();
+    const nietToegestaan = new Set();
     await context.route("**/*", (r) => {
-      const u = new URL(r.request().url());
+      const q = r.request();
+      const u = new URL(q.url());
       if (u.origin === base) return r.continue();
       buiten.add(u.host);
+      if (!(q.resourceType() === "document" && q.frame() !== q.frame().page().mainFrame())) nietToegestaan.add(`${q.resourceType()} ${u.host}${u.pathname}`);
       return r.abort();
     });
     const page = await context.newPage();
@@ -43,10 +49,12 @@ try {
     // Hydratiefouten van React (#418, #423, #424) komen als console.error, niet als pageerror.
     page.on("console", (m) => { if (m.type() === "error" && !/Failed to load resource|ERR_FAILED/.test(m.text())) fouten.push(m.text()); });
     await page.goto(`${base}/`, { waitUntil: "load" });
-    await page.waitForTimeout(1800);
+    await page.waitForLoadState("networkidle").catch(() => {});
+    await page.waitForTimeout(8000);
     const pad = new URL(page.url()).pathname;
     const workers = [...buiten].filter((h) => /workers\.dev$/.test(h));
     eisen.push([`${locale}: geen sn-land-cookie zonder echte keuze`, !(await context.cookies()).some((c) => c.name === "sn-land")]);
+    eisen.push([`${locale}: geen extern verzoek buiten de carrousel-frames binnen 8 s na laden${nietToegestaan.size ? ` (${[...nietToegestaan].slice(0, 2).join(", ")})` : ""}`, nietToegestaan.size === 0]);
     eisen.push([`${locale}: geen verzoek naar workers.dev bij het eerste bezoek${workers.length ? ` (${workers.join(", ")})` : ""}`, workers.length === 0]);
     eisen.push([`${locale}: taal ${pad} (verwacht ${verwacht})`, pad === verwacht]);
     eisen.push([`${locale}: ${fouten.length} paginafouten${fouten.length ? ` (${fouten[0].slice(0, 80)})` : ""}`, fouten.length === 0]);
