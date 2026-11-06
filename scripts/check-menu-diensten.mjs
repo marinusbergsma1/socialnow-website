@@ -29,7 +29,8 @@ const PRODUCTEN = [{ naam: "OS", regel: "AI-powered management & operations.", s
 eis(DIENSTEN.length >= 3, `Producten.tsx: DIENSTEN met kaarten voor het Diensten-menu (${DIENSTEN.length})`);
 eis(/function Uitklapmenu\(/.test(menu) && /<Uitklapmenu naam="producten"/.test(menu) && /<Uitklapmenu naam="diensten"/.test(menu), "Producten en Diensten delen één uitklapmenu: zelfde opmaak, animatie, toetsen en focus");
 eis(/path === "\/diensten" \? (<React\.Fragment key=\{path\}>)?<DienstenMenu/.test(shell), "desktop: Diensten in de hoofdnavigatie is het uitklapmenu");
-const ankers = new Set([...pricing.matchAll(/<Rij\s+id="(\w+)"/g)].map((m) => `prijs-${m[1]}-titel`).concat(pricing.includes('id="prijs-los-titel"') ? ["prijs-los-titel"] : [], pricing.includes('id="prijzen"') ? ["prijzen"] : [], experts.includes('id="team"') ? ["team"] : []));
+// 6 november 2026: Pricing.tsx zet de ankers nu ook letterlijk (id="prijs-os-titel", id="prijs-maat-titel").
+const ankers = new Set([...pricing.matchAll(/<Rij\s+id="(\w+)"/g)].map((m) => `prijs-${m[1]}-titel`).concat([...pricing.matchAll(/id="(prijs-[\w-]+-titel)"/g)].map((m) => m[1]),pricing.includes('id="prijs-los-titel"') ? ["prijs-los-titel"] : [], pricing.includes('id="prijzen"') ? ["prijzen"] : [], experts.includes('id="team"') ? ["team"] : []));
 for (const d of DIENSTEN) eis(d.naar.startsWith("/diensten#") && ankers.has(d.naar.split("#")[1]), `kaart "${d.titel}" wijst naar een bestaand anker op /diensten (${d.naar})`);
 // Geen nieuwe beweringen: elke onderregel staat al op /diensten (op een slotpunt na).
 const dienstenBron = pricing + experts;

@@ -230,6 +230,9 @@ function ProposalShell() {
               width="200"
               height="38"
             />
+            {/* 6 november 2026 (Marinus): "het SocialNow 5 YEARS logo inzetten". Het witte label uit de eindtitel van de
+                5-jaarfilm (83-vijf-jaar-socialnow): rechts onder het woordmerk, zwarte letters op wit. */}
+            <span className="h-brand-jaren" translate="no">5 YEARS</span>
           </Link>
           <nav className="h-desktop-nav" aria-label="Hoofdnavigatie">
             {/* 4 november 2026 (Marinus): "verder wil ik producten diensten en website actie". Producten is een eigen pagina. */}

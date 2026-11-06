@@ -122,7 +122,8 @@ eis(gw.includes("AANBRENGERS.map") && gw.includes('"Iemand anders"'.slice(1, -1)
 eis(startHome.includes("<WebsiteCTA") && startHome.indexOf("<WebsiteCTA") > startHome.indexOf("<VideoSlider") && /gratis-website\?ref=/.test(blij), "homepage: CTA gratis nieuwe website na de sliders, ?ref gaat mee");
 // Website-actie in de menubalk: "Deze dikgedrukt en met een shine zodat ie nog meer opvalt."
 const menuCss = lees("proposal/hoofdmenu.css");
-eis(/a\.h-security>span,[^{]*\{font-weight:800!important;[^}]*background-clip:text;[^}]*animation:sn-glans 5s/.test(menuCss) && /prefers-reduced-motion:reduce\)\{[^{]*a\.h-security>span[^{]*\{animation:none/.test(menuCss) && /#25d366 50%/.test(menuCss), "menu: Website-actie vet met een rustige groene glans (elke 5 s), niet bij reduced motion");
+// 6 november 2026 (Marinus): "de groene glow weg bij website-actie". De glans van 4 november is dus weg.
+eis(/a\.h-security>span,[^{]*\{font-weight:800!important;[^}]*animation:none/.test(menuCss) && !/#25d366 50%/.test(menuCss), "menu: Website-actie vet en wit, zonder groene glans");
 const seo = lees("scripts/brand-meta.mjs");
 eis((seo.match(/'\/producten': \[/g) || []).length === 10 && lees("scripts/postbuild.mjs").includes("producten: {title:"), "/producten heeft titel en omschrijving in alle 10 talen");
 const sliders = lees("proposal/MediaSliders.tsx");
