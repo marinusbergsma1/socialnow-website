@@ -733,3 +733,17 @@ html:root .sn-site .prijs-start .prijs-bedrag span { font-size: 14px; color: #7d
 .sn-site .prijs-start .prijs-bedrag { display: flex; align-items: baseline; gap: 10px; }
 @media (min-width: 981px) { .sn-site .prijs-maat-lijst > li { grid-template-columns: 56px minmax(0, 1fr) minmax(0, 1.1fr) 270px; } }
 .sn-site .prijs-maat-actie .h-button, .sn-site .prijs-maat-actie .h-button span { white-space: nowrap; }
+/* 6 november 2026: contactkaart in plaats van pilknop. Steef bij Cybersecurity en ERP & CRM, Marinus bij Growth. */
+.sn-site .prijs-maat-actie { align-items: stretch; }
+.sn-site .prijs-maat-label { align-self: flex-end; }
+.sn-site .prijs-contact { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 14px 10px 10px; border: 1px solid #ffffff1f; border-radius: 12px; background: #0a0c0e; color: inherit; font: inherit; text-align: left; text-decoration: none; cursor: pointer; transition: border-color .2s ease, background-color .2s ease; }
+.sn-site .prijs-contact:hover, .sn-site .prijs-contact:focus-visible { border-color: #ffffff55; background: #111417; }
+.sn-site .prijs-contact img { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 8px; object-fit: cover; }
+.sn-site .prijs-contact-tekst { display: grid; gap: 2px; min-width: 0; }
+html:root .sn-site .prijs-contact-tekst b { font-size: 14.5px; font-weight: 700; color: #fff; }
+html:root .sn-site .prijs-contact-tekst .prijs-contact-rol { font-size: 12px; color: #8f99a1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sn-site .prijs-contact-actie { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; font-size: 12.5px; font-weight: 600; color: #dfe5e9; }
+.sn-site .prijs-contact:hover .prijs-contact-actie { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 980px) { .sn-site .prijs-maat-actie { align-items: stretch; } .sn-site .prijs-contact { max-width: 340px; } }
+@media (max-width: 760px) { .sn-site .prijs-contact { max-width: none; } }
+html:root .sn-site .prijs-contact-tekst .prijs-contact-rol { font-family: inherit; letter-spacing: 0; text-transform: none; white-space: normal; overflow: visible; line-height: 1.35; }
