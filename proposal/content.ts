@@ -4,6 +4,10 @@ import { CLAIM_URL } from "./os-entry";
 // 5 oktober 2026 (Marinus): "graag bij iedereen Linkedin doorlink". Alleen profielen die zeker van deze persoon zijn
 // (teamonderzoek 4 en 5 oktober); bij de rest volgt de link zodra de juiste URL bevestigd is.
 export const people: { name: string; role: string; image: string; linkedin?: string; sinds?: string; description?: string; quote?: string; instagram?: string }[] = [
+  // 6 november 2026 (Marinus): Yvo Overhoff en Maurits Poppelaars van Signal Flow Systems komen erbij in een eigen tak
+  // Lead Flow optimisation onder ERP & CRM. Titels: optie 2 (Lead Flow Engineer en Lead Flow Analyst).
+  { name: "Yvo Overhoff", role: "Lead Flow Engineer · Signal Flow", image: "Yvo-Overhoff.webp", sinds: "2026-11-06" },
+  { name: "Maurits Poppelaars", role: "Lead Flow Analyst · Signal Flow", image: "Maurits-Poppelaars.webp", sinds: "2026-11-06" },
   // 23 oktober 2026 (Marinus): Gijsbert Westeneng is onze nieuwe aanwinst, Full-Stack AI Engineer, bij SocialNow Connect. Nieuwste aanwinst vooraan.
   { name: "Gijsbert Westeneng", role: "Full-Stack AI Engineer", image: "Gijsbert-Westeneng.webp", linkedin: "https://www.linkedin.com/in/gijsbert-westeneng-804172155/", sinds: "2026-10-23" },
   { name: "Thomas Huijsmans", role: "AI Strategy & Consulting", linkedin: "https://www.linkedin.com/in/thomashuijsmans/", image: "Thomas-Huijsmans.webp", sinds: "2026-10-14" },
@@ -110,7 +114,10 @@ export const expertGroepen = [
   { name: "Ads & search", members: ["Jos Hollenberg", "Nick van Keulen", "Sergio Jovovic"] },
   { name: "Video, photo & design", members: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Pepijn Bos", "Armando van Bruggen"] },
   { name: "UGC & social media", members: ["Isa Zoer", "Daniel Schotman"] },
-  { name: "Partnerships", members: ["Marinus Bergsma", "Elian Coellar", "Fabiana Abauna", "Ben Sterckx", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster", "Ruben Spyckerelle"] },
+  // 6 november 2026 (Marinus): onderscheid tussen sales en partnerships, en een eigen groep voor Signal Flow.
+  { name: "Sales", members: ["Aron", "Youri van der Donk", "Ruben Spyckerelle"] },
+  { name: "Partnerships", members: ["Marinus Bergsma", "Elian Coellar", "Fabiana Abauna", "Ben Sterckx", "Pieter Bergsma", "Isaak Munster"] },
+  { name: "Lead Flow optimisation", members: ["Yvo Overhoff", "Maurits Poppelaars"] },
 ];
 export const vindMensen = (names: string[]) => names.flatMap(name => {
   const person = people.find(p => p.name === name);
@@ -137,6 +144,8 @@ export const partnerReferences: Record<string, { name: string; url: string }[]> 
     { name: "ABN AMRO", url: "https://www.abnamro.nl/" },
   ],
   "Armando van Bruggen": [{ name: "Bruggn Design", url: "https://www.bruggndesign.nl/" }],
+  "Yvo Overhoff": [{ name: "Signal Flow Systems", url: "https://signalflow-systems.com/" }],
+  "Maurits Poppelaars": [{ name: "Signal Flow Systems", url: "https://signalflow-systems.com/" }],
 };
 export const agents = [
   {

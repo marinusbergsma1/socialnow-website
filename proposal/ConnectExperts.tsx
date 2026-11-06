@@ -31,9 +31,26 @@ const VERSIE = "20261015-team";
 const EINDVERANTWOORDELIJK = ["Marinus Bergsma", "Gijsbert Westeneng", "Douwe Kramer", "Steef Komen"];
 // 4 november 2026 (Marinus): "de developers klopt verder ook niet hier. Haal developers maar gewoon weg." De laag Developers is weg;
 // AI development en Web development staan dus ook niet als vakgebied in het organogram.
+// 6 november 2026 (Marinus): "Belangrijkste onderdelen zijn Cybersecurity - ERP & CRM en Growth", als drie takken naast elkaar
+// onder de eindverantwoordelijken. Cybersecurity: Douwe en Gijsbert. ERP & CRM: Steef, Douwe en Gijsbert met Indexworld als bedrijf,
+// en daaronder Lead Flow optimisation (Yvo en Maurits van Signal Flow). Growth krijgt subkoppen per vak, met sales en partnerships
+// apart. Hier mogen de eindverantwoordelijken wél terugkomen: dit is hun tak. "Zo moet de hierarchie er ook uitzien."
+// Proef: scripts/check-connect-takken.mjs.
+const GROWTH = ["Ads & search", "Video, photo & design", "UGC & social media", "Sales", "Partnerships"];
+const leden = (groep: string) => (expertGroepen.find((g) => g.name === groep)?.members ?? []).filter((n) => !EINDVERANTWOORDELIJK.includes(n));
+type Deel = { kop?: string; leden: string[]; bedrijven?: { naam: string; href: string; logo: string }[] };
+const TAKKEN: { naam: string; delen: Deel[] }[] = [
+  { naam: "Cybersecurity", delen: [{ leden: ["Douwe Kramer", "Gijsbert Westeneng"] }] },
+  { naam: "ERP & CRM", delen: [
+    { leden: ["Steef Komen", "Douwe Kramer", "Gijsbert Westeneng"], bedrijven: [{ naam: "Indexworld", href: "https://indexworld.net", logo: "/images/home-header/indexworld.png" }] },
+    { kop: "Lead Flow optimisation", leden: leden("Lead Flow optimisation") },
+  ] },
+  { naam: "Growth", delen: GROWTH.map((g) => ({ kop: g, leden: leden(g) })) },
+];
+const IN_TAK = new Set(["Lead Flow optimisation", ...GROWTH]);
 const VAKGEBIEDEN = expertGroepen
-  .filter((g) => g.name !== "AI development" && g.name !== "Web development")
-  .map((g) => ({ naam: g.name, leden: g.members.filter((n) => !EINDVERANTWOORDELIJK.includes(n)) }));
+  .filter((g) => g.name !== "AI development" && g.name !== "Web development" && !IN_TAK.has(g.name))
+  .map((g) => ({ naam: g.name, leden: leden(g.name) }));
 
 // 4 november 2026 (Marinus): "Dit moet ook veel compacter en beter." en later "daaronder het team gewoon gelijk bij connect".
 // Dus het organogram staat meteen open. De rij voorbeelden met werk die daarna kwam, mocht weer weg ("Deze weg").
@@ -83,8 +100,9 @@ export default function ConnectExperts() {
     return !!p && `${p.name} ${p.role} ${t(groepVan(p.name))}`.toLowerCase().includes(q);
   };
   const top = EINDVERANTWOORDELIJK.filter(past);
+  const takken = TAKKEN.map((t) => ({ ...t, delen: t.delen.map((d) => ({ ...d, leden: d.leden.filter(past), bedrijven: (d.bedrijven ?? []).filter((b) => !q || b.naam.toLowerCase().includes(q)) })).filter((d) => d.leden.length || d.bedrijven.length) })).filter((t) => t.delen.length);
   const vakken = VAKGEBIEDEN.map((v) => ({ ...v, leden: v.leden.filter(past) })).filter((v) => v.leden.length);
-  const leeg = !top.length && !vakken.length;
+  const leeg = !top.length && !takken.length && !vakken.length;
   return <div className="cx-connect">
     <section id="team" className="sn-cx h-wrap" aria-labelledby="team-titel">
       <div className="cx-boven">
@@ -102,7 +120,31 @@ export default function ConnectExperts() {
           <p className="cx-org-kop">Eindverantwoordelijk</p>
           <ul className="cx-leiders">{top.map((n) => <Leider key={n} naam={n} />)}</ul>
         </div>}
-        {top.length > 0 && vakken.length > 0 && <span className="cx-org-lijn" aria-hidden="true" />}
+        {top.length > 0 && takken.length > 0 && <span className="cx-org-lijn" aria-hidden="true" />}
+        {takken.length > 0 && <div className="cx-org-laag">
+          <p className="cx-org-kop">Kernonderdelen</p>
+          <div className="cx-takken">
+            {takken.map((t) => <div key={t.naam} className={`cx-tak${t.naam === "Growth" ? " is-groot" : ""}`}>
+              <p className="cx-tak-naam">{t.naam}</p>
+              <div className="cx-tak-delen">
+                {t.delen.map((d, i) => <div key={d.kop ?? i} className={`cx-tak-deel${d.kop && t.naam !== "Growth" ? " is-onder" : ""}`}>
+                  {d.kop && <p className="cx-org-vaknaam">{d.kop}</p>}
+                  <ul>
+                    {d.leden.map((n) => <Persoon key={n} naam={n} />)}
+                    {d.bedrijven.map((b) => <li key={b.naam} className="cx-org-persoon is-bedrijf">
+                      <a href={b.href} target="_blank" rel="noopener noreferrer">
+                        <span className="cx-bedrijf-logo"><img src={b.logo} alt="" width="40" height="40" loading="lazy" /></span>
+                        <span className="cx-org-tekst"><strong translate="no">{b.naam}</strong><span>Odoo-partner · bouwt SocialNow OS</span></span>
+                        <ArrowUpRight className="cx-org-pijl" size={14} aria-hidden="true" />
+                      </a>
+                    </li>)}
+                  </ul>
+                </div>)}
+              </div>
+            </div>)}
+          </div>
+        </div>}
+        {(top.length > 0 || takken.length > 0) && vakken.length > 0 && <span className="cx-org-lijn" aria-hidden="true" />}
         {vakken.length > 0 && <div className="cx-org-laag">
           <p className="cx-org-kop">Vakgebieden</p>
           <div className="cx-org-vakken">
