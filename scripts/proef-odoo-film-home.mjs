@@ -12,7 +12,7 @@ eis(/import OdooFilm from "\.\/OdooFilm"/.test(home) && /<OdooFilm \/>/.test(hom
 eis(/sn-hero-films/.test(home) && home.indexOf("<VijfJaarFilm />") < home.indexOf("<OdooFilm />"), "Odoo-film naast (na) de 5-jaarfilm in de hero");
 eis(/muted/.test(odoo) && /loop/.test(odoo) && /playsInline/.test(odoo), "gedempt, inline en in een lus");
 eis(!/setTimeout/.test(odoo), "geen automatische wissel na 3 seconden: geluid alleen na een klik");
-eis(/sn-odoo-geluid/.test(odoo) && /Geluid aan/.test(odoo) && /aria-pressed/.test(odoo), "duidelijke geluidsknop");
+eis(/sn-film-geluid/.test(odoo) && /Geluid aan/.test(odoo) && /aria-pressed/.test(odoo), "duidelijke geluidsknop (rond icoon in de video)");
 eis(/prefers-reduced-motion: reduce/.test(odoo) && /addEventListener\("load"/.test(odoo) && /preload="none"/.test(odoo), "lazy en niets vanzelf bij minder beweging");
 eis(/\.sn-odoo-film\{[^}]*aspect-ratio:9\/16/.test(css) && /\.sn-odoo-film\{[^}]*background:#000/.test(css), "vaste 9:16-maat op zwart");
 for (const t of ["Geluid aan", "Geluid uit", "Aftermovie Odoo Experience 2026"]) for (const taal of ["en", "de", "fr"])

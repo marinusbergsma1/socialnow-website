@@ -19,10 +19,10 @@ eis(/preload="none"/.test(film) && /addEventListener\("load"/.test(film), "film 
 for (const f of ["vijf-jaar.mp4", "vijf-jaar-hevc.mp4", "vijf-jaar.webm", "vijf-jaar-mobiel.mp4", "vijf-jaar-mobiel-hevc.mp4", "vijf-jaar-poster.webp", "vijf-jaar-poster-mobiel.webp"])
   eis(fs.existsSync(`public/video/vijf-jaar/${f}`), `webversie aanwezig: ${f}`);
 eis(/codecs="hvc1"/.test(film) && /video\/webm/.test(film), "bronnen: hevc, webm en mp4");
-eis(/<button[^>]*sn-vijf-geluid/.test(film) && /Bekijk met geluid/.test(film), "duidelijke knop voor de hele film met geluid");
-eis(/<dialog[^>]*sn-alg-venster/.test(film) && /controls/.test(film), "venster speelt de hele film met bediening en geluid");
-eis(/\.sn-vijf-film\{[^}]*aspect-ratio:9\/16/.test(css) && /\.sn-vijf-film\{[^}]*background:#000/.test(css), "vaste 9:16-maat op puur zwart: geen verschuiving");
-for (const t of ["Bekijk met geluid", "5 jaar SocialNow"]) for (const taal of ["en", "de", "fr"])
+// Sinds de avond van 6 november: geen witte knop met venster meer, maar een rond geluidsicoon in de video (scripts/proef-geluid-icoon.mjs).
+eis(/<button[^>]*sn-film-geluid/.test(film) && /v\.currentTime = 0;\s*v\.muted = false;/.test(film), "geluidsknop speelt de hele film met geluid vanaf het begin");
+eis(/\.sn-vijf-film[^{]*\{[^}]*aspect-ratio:9\/16[^}]*background:#000/.test(css), "vaste 9:16-maat op puur zwart: geen verschuiving");
+for (const t of ["Geluid aan", "5 jaar SocialNow"]) for (const taal of ["en", "de", "fr"])
   eis(t in JSON.parse(lees(`proposal/i18n/${taal}.json`) || "{}"), `vertaling ${taal}: ${t}`);
 // Terugzetten blijft makkelijk: de oude onderdelen staan er nog.
 eis(/export function AtomiumFoto/.test(kop) && fs.existsSync("public/images/verhaal/team-atomium.webp"), "teamfoto en AtomiumFoto blijven bewaard");

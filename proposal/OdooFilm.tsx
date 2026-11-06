@@ -4,7 +4,7 @@ import { Volume2, VolumeX } from "lucide-react";
 // 6 november 2026 (Marinus): "Doe daarnaast maar de Odoo video nog op de website." De film van Odoo Experience 2026 staat in de
 // homepage-hero naast de 5-jaarfilm (die blijft de hoofdvideo). Eerder (4 en 5 november) wilde hij hem "automatisch afspelen met
 // geluid", maar browsers staan geluid pas na een klik toe. Dus: de korte loop speelt gedempt vanzelf, en de knop Geluid aan start op
-// dezelfde plek de volledige aftermovie (38 s) met geluid. Na afloop keert de stille loop terug. Lazy: poster eerst, film na het
+// dezelfde plek de volledige aftermovie (38 s) met geluid; de knop is een rond icoon rechtsonder in de video. Na afloop keert de stille loop terug. Lazy: poster eerst, film na het
 // laden van de pagina; bij minder beweging blijft de poster staan.
 // Terugzetten: tag bewaard/2026-11-06/voor-odoo-film.
 const MAP = "/video/odoo-experience/";
@@ -67,12 +67,11 @@ export default function OdooFilm() {
       </video>
       <video ref={lang} className="sn-odoo-lang" src={LANG} playsInline preload="none" onEnded={klaar}
         aria-hidden={fase === "kort"} aria-label="Aftermovie Odoo Experience 2026" />
-    </figure>
-    <div className="sn-odoo-onder">
-      <p><span className="sn-alg-klein">Brussel</span><strong>Odoo Experience 2026<span className="sn-alg-punt">.</span></strong></p>
-      <button type="button" className="sn-odoo-geluid" onClick={wissel} aria-pressed={!stil}>
-        {stil ? <VolumeX size={16} aria-hidden="true" /> : <Volume2 size={16} aria-hidden="true" />}<span>{stil ? "Geluid aan" : "Geluid uit"}</span>
+      {/* 6 november 2026 (Marinus): "Geluid icoon mag rechtsonder hier bij de video net als bij de andere". */}
+      <button type="button" className="sn-film-geluid" onClick={wissel} aria-pressed={!stil} aria-label={stil ? "Geluid aan" : "Geluid uit"}>
+        {stil ? <VolumeX size={18} aria-hidden="true" /> : <Volume2 size={18} aria-hidden="true" />}
       </button>
-    </div>
+    </figure>
+    <p className="sn-film-titel"><span className="sn-alg-klein">Brussel</span><strong>Odoo Experience 2026<span className="sn-alg-punt">.</span></strong></p>
   </div>;
 }
