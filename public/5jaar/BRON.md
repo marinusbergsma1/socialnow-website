@@ -14,5 +14,5 @@ De zwarte filmondergrond valt in de header weg met `mix-blend-mode: screen`; de 
 
 - Alles in één keer terug naar de stand van vóór dit logo: `git revert -m 1 <merge-commit van deze PR>` en pushen naar main.
 - De bewaarde stand staat als tag: `bewaard/2026-11-06/voor-5years-logo` (main op d1e2427, vóór deze wijziging).
-- Alleen de intro uit, logo houden: in `proposal/WebsiteProposal.tsx` `const logoIntro` op `false` zetten.
-- Weggooien: deze map `public/5jaar/` plus het blok `5 YEARS-logo uit de film` in `proposal/hoofdmenu.css` en `proposal/WebsiteProposal.tsx`.
+- Alleen de intro uit, logo houden: in `proposal/Logo5Jaar.tsx` `useState(() => thuis)` vervangen door `useState(false)`.
+- Weggooien: deze map `public/5jaar/` , `proposal/Logo5Jaar.tsx`, het blok `5 YEARS-logo uit de film` in `proposal/hoofdmenu.css` en de regel `<Logo5Jaar …/>` in `proposal/WebsiteProposal.tsx`.
