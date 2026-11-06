@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Action } from "./ui";
 import { GRATIS_OS_URL } from "./os-entry";
 import { useLanguage } from "./i18n/context";
@@ -258,6 +259,7 @@ const OP_MAAT = [
     punten: ["Eigen AI-modellen, lokaal te draaien", "Toegang die jij bepaalt en altijd kunt intrekken", "Securityscan van je website en systemen"],
     actie: "Vraag een scan aan",
     onderwerp: "Cybersecurity op maat",
+    contact: "steef",
   },
   {
     id: "erp-crm",
@@ -266,7 +268,8 @@ const OP_MAAT = [
     belofte: "Je eigen OS, gekoppeld aan je ERP of compleet custom gebouwd.",
     punten: ["Koppeling met Odoo, Exact, AFAS, Salesforce en meer", "Custom OS rond je bedrijf en je processen", "Finance en administratie op orde"],
     actie: "Plan een call",
-    call: true
+    call: true,
+    contact: "steef"
   },
   {
     id: "growth",
@@ -275,11 +278,27 @@ const OP_MAAT = [
     belofte: "Meer leads en betere marketing, gedaan door échte mensen.",
     punten: ["Branding, website en content in je merk", "Meta en Google Ads met leads direct in je CRM", "Sales en leadopvolging zonder dat er iets blijft liggen"],
     actie: "Bespreek je groei",
-    onderwerp: "Growth op maat"
+    onderwerp: "Growth op maat",
+    contact: "marinus"
   },
 ];
 
 const GRATIS = OS[0];
+
+function Contactkaart({ onderdeel }: { onderdeel: (typeof OP_MAAT)[number] }) {
+  const lid = TEAM[onderdeel.contact];
+  const binnen = <>
+    <img src={fotoVan(lid.foto)} alt="" width="48" height="48" loading="lazy" />
+    <span className="prijs-contact-tekst">
+      <b translate="no">{lid.naam}</b>
+      <span className="prijs-contact-rol">{lid.rol}</span>
+      <span className="prijs-contact-actie">{onderdeel.actie}<ArrowUpRight size={13} aria-hidden="true" /></span>
+    </span>
+  </>;
+  return onderdeel.call
+    ? <button type="button" className="prijs-contact" aria-haspopup="dialog" onClick={() => openPlanCall()}>{binnen}</button>
+    : <Link className="prijs-contact" to={`/contact?onderwerp=${encodeURIComponent(onderdeel.onderwerp!)}`}>{binnen}</Link>;
+}
 // Wat er in het gratis OS zit, één keer per punt (eerder overlapten de kaart en de lijst eronder).
 const GRATIS_PUNTEN = ["Nodig 2 mensen uit", "10 GB opslag", "Gratis website en rebranding", "Gratis Studio", "5.000 stockfoto's", "Social media management", "Boekhoudpakket", "Dashboard, CRM en AI agents"];
 
@@ -330,15 +349,9 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
               </ul>
               <div className="prijs-maat-actie">
                 <span className="prijs-maat-label">Op aanvraag</span>
-                {onderdeel.call ? (
-                  <button type="button" className="sn-pill sn-btn3d h-button h-button-secondary" aria-haspopup="dialog" onClick={() => openPlanCall()}>
-                    <span className="sn-btn3d-sheen" />
-                    <span>{onderdeel.actie}</span>
-                    <span className="h-button-icon"><ArrowUpRight size={16} aria-hidden="true" /></span>
-                  </button>
-                ) : (
-                  <Action to={`/contact?onderwerp=${encodeURIComponent(onderdeel.onderwerp!)}`} secondary>{onderdeel.actie}</Action>
-                )}
+                {/* 6 november 2026 (Marinus): "Die knoppen zijn wat lomp ik wil graag de Cards met Steef voor die onderdelen en
+                    voor Growth ik en zakelijker." Dus een rustige contactkaart met foto, naam en functie in plaats van een pilknop. */}
+                <Contactkaart onderdeel={onderdeel} />
               </div>
             </li>
           ))}
