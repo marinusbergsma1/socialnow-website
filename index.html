@@ -98,16 +98,6 @@
     <link rel="dns-prefetch" href="https://storage.googleapis.com" />
 
     <script>
-      window.addEventListener("error", (e) => {
-        if (
-          e.message ===
-          "ResizeObserver loop completed with undelivered notifications"
-        ) {
-          if (e.stopImmediatePropagation) {
-            e.stopImmediatePropagation();
-          }
-        }
-      });
       window.addEventListener("unhandledrejection", function (e) {
         console.warn("[SocialNow] Unhandled promise rejection:", e.reason);
       });

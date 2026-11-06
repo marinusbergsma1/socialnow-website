@@ -21,7 +21,7 @@ const en = lees("dist/index.html");
 const de = lees("dist/de/index.html");
 const fr = lees("dist/fr/index.html");
 const sitemap = lees("dist/sitemap.xml");
-const paden = [...new Set([...sitemap.matchAll(/<loc>https:\/\/socialnow\.nl([^<]*)<\/loc>/g)].map((m) => m[1] || "/"))];
+const paden = [...new Set([...sitemap.matchAll(/<loc>https:\/\/socialnow\.nl([^<]*)<\/loc>/g)].map((m) => m[1] || "/"))].filter((pad) => pad !== "/connect"); // 6 nov 2026: /connect is een losse pagina buiten de app (M10)
 const bestand = (pad) => `dist${pad === "/" ? "" : pad.replace(/\/$/, "")}/index.html`;
 const zonderInhoud = paden.filter((pad) => !/<div id="root" data-prerender="[a-z]{2}">(<div[^>]*>){0,2}<div class="sn-site"/.test(lees(bestand(pad))));
 const index = lees("index.tsx");

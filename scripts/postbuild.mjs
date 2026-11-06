@@ -399,3 +399,13 @@ await import("./localize-build.mjs");
 // 30 september 2026: daarna krijgt elke route-HTML de echte inhoud van de app (zie prerender.mjs).
 await import("./prerender.mjs");
 await import("./apply-brand-seo.mjs");
+
+// 6 november 2026 (Indexworld M10): /connect is een losse pagina in public/connect, buiten de app. Pas hier in de sitemap,
+// ná prerender en localize-build, want die lezen de sitemap en verwachten bij elke url een app-pagina met een lege root.
+{
+  const kaart = readFileSync('dist/sitemap.xml', 'utf8');
+  const connect = `${BASE}/connect`;
+  if (!kaart.includes(`<loc>${connect}</loc>`)) {
+    writeFileSync('dist/sitemap.xml', kaart.replace('</urlset>', `<url><loc>${connect}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>\n</urlset>`));
+  }
+}
