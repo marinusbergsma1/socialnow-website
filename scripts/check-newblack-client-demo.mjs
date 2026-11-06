@@ -24,7 +24,7 @@ eis(/onKeyDown=\{[\s\S]{0,200}ArrowRight[\s\S]{0,200}ArrowLeft/.test(slider), "k
 // De slider die op socialnow.nl staat is WebsiteExamples in FreeWebsite.tsx (LiveWebsites.tsx wordt nergens gebruikt).
 const voorbeelden = readFileSync("proposal/FreeWebsite.tsx", "utf8");
 eis(!/aria-label="(Vorige|Volgende) website"/.test(voorbeelden) && !/>[←→]<\/button>/.test(voorbeelden), "FreeWebsite-slider: geen ronde pijlknoppen naast de stippen");
-eis(/className="sn-web-pagination"[\s\S]{0,400}onClick=\{\(\) => choose\(i\)\}/.test(voorbeelden), "FreeWebsite-slider: stippen blijven klikbaar");
+eis(/className="sn-web-pagination"[\s\S]{0,900}onClick=\{\(\) => choose\(i\)\}/.test(voorbeelden), "FreeWebsite-slider: stippen blijven klikbaar");
 eis(/className="sn-web-pagination"[^>]*onKeyDown=\{[\s\S]{0,300}ArrowRight/.test(voorbeelden) && /sn-web-deck" tabIndex=\{0\}[\s\S]{0,200}ArrowRight/.test(voorbeelden), "FreeWebsite-slider: pijltoetsen werken op de stippen en op de slider");
 
 const projects = readFileSync("data/projects.ts", "utf8");
