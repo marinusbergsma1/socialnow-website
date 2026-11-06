@@ -137,7 +137,7 @@ export const webShowcaseProjects: Project[] = [
     image: `${import.meta.env.BASE_URL}screenshots/newblack-hero.webp`,
     fullPageScreenshot: `${import.meta.env.BASE_URL}screenshots/newblack-full.webp`,
     align: 'left',
-    url: "https://newblack.netlify.app/",
+    url: "https://newblack-demo.socialnow.nl/",
     gallery: [],
     metrics: [
       { label: "Brand Awareness", value: "+320%", color: "#00A3E0" },
