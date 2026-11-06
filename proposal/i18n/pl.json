@@ -3301,5 +3301,7 @@
   "Is AI alleen genoeg om een website veilig te maken?": "Czy samo AI wystarczy, by strona była bezpieczna?",
   "Nee. AI vindt fouten sneller, maar schrijft ze ook. Daarom controleert bij ons altijd een developer wat AI voorstelt.": "Nie. AI szybciej znajduje błędy, ale też je pisze. Dlatego deweloper zawsze sprawdza, co proponuje AI.",
   "Wat kost een veiligheidsrapport?": "Ile kosztuje raport bezpieczeństwa?",
-  "Niets. Je vraagt het aan via de website-actie of de securityscan op onze site.": "Nic. Zamawiasz go w ramach akcji stron lub skanu bezpieczeństwa na naszej stronie."
+  "Niets. Je vraagt het aan via de website-actie of de securityscan op onze site.": "Nic. Zamawiasz go w ramach akcji stron lub skanu bezpieczeństwa na naszej stronie.",
+  "Kernonderdelen": "Główne działy",
+  "Odoo-partner · bouwt SocialNow OS": "Partner Odoo · buduje SocialNow OS"
 }

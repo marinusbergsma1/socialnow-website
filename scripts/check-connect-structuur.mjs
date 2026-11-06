@@ -34,7 +34,9 @@ if (process.argv.includes("--dist")) {
   const html = fs.readFileSync("dist/nl/producten/index.html", "utf8");
   const s = html.indexOf('class="cx-org"'), blok = s < 0 ? "" : html.slice(s, html.indexOf("cx-onder", s));
   const namen = [...blok.matchAll(/<strong translate="no">([^<]+)<\/strong>/g)].map(m => m[1]);
-  eis(namen.length >= 20 && new Set(namen).size === namen.length, `gebouwde nl-homepage toont iedereen precies één keer (${namen.length})`);
+  // 6 november 2026: Douwe, Gijsbert en Steef staan ook in hun eigen kernonderdeel (check-connect-takken.mjs); Indexworld is een bedrijf.
+  const dubbel = namen.filter((n, i) => namen.indexOf(n) !== i && !TOP.includes(n));
+  eis(namen.length >= 20 && dubbel.length === 0, `gebouwde pagina toont iedereen buiten de eindverantwoordelijken precies één keer (${namen.length}${dubbel.length ? ", dubbel: " + dubbel.join(", ") : ""})`);
   eis(TOP.every((n, i) => namen[i] === n), "gebouwde pagina begint met de vier eindverantwoordelijken");
   eis(!html.includes('class="cx-raster"'), "gebouwde pagina heeft geen schuifrij meer");
   const fotos = [...blok.matchAll(/<img[^>]*?\ssrc="([^"?]+)/g)].map(m => m[1]);

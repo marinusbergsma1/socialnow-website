@@ -34,6 +34,8 @@ const BOARD = ["Michelle Yang", "Steven Goudsblom"];
 const KORTE_ROL: Record<string, string> = {
   // 4 november 2026 (Marinus): bellen weg uit de functie van Ruben, alleen nog appointment setting.
   "Ruben Spyckerelle": "B2B Appointment Setting",
+  "Yvo Overhoff": "Lead Flow Engineer",
+  "Maurits Poppelaars": "Lead Flow Analyst",
   "Marinus Bergsma": "Founder & CEO",
   "Steef Komen": "Partner · Finance & Data",
   "Sid van Kalken": "Web Development & AI Payments",
@@ -63,7 +65,10 @@ const FUNCTIES: { functie: string; mensen: string[] }[] = [
   { functie: "Ads & search", mensen: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"] },
   { functie: "Video, photo & design", mensen: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Pepijn Bos", "Armando van Bruggen"] },
   { functie: "UGC & social media", mensen: ["Isa Zoer"] },
-  { functie: "Partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Fabiana Abauna", "Ben Sterckx", "Ruben Spyckerelle", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"] },
+  // 6 november 2026 (Marinus): sales en partnerships apart, Signal Flow als Lead Flow optimisation.
+  { functie: "Lead Flow optimisation", mensen: ["Yvo Overhoff", "Maurits Poppelaars"] },
+  { functie: "Sales", mensen: ["Ruben Spyckerelle", "Aron", "Youri van der Donk"] },
+  { functie: "Partnerships", mensen: ["Marinus Bergsma", "Elian Coellar", "Fabiana Abauna", "Ben Sterckx", "Pieter Bergsma", "Isaak Munster"] },
 ];
 
 // 6 oktober 2026 (Marinus): "Hier ook nog even iets van hierarchie", bij optie H3 "liever vierkantjes omdat iedereen een
@@ -72,7 +77,7 @@ const LAGEN: [string, string[]][] = [
   ["Partner", ["Marinus Bergsma", "Steef Komen", "Sid van Kalken", "Douwe Kramer"]],
   ["Board", ["Michelle Yang", "Steven Goudsblom"]],
   ["Head", ["Jos Hollenberg", "Nick van Keulen", "Carmel Boon", "Elian Coellar", "Fabiana Abauna"]],
-  ["Specialist", ["Gijsbert Westeneng", "Tristan Slobben", "Isa Zoer", "Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen"]],
+  ["Specialist", ["Gijsbert Westeneng", "Tristan Slobben", "Isa Zoer", "Sergio Jovovic", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Antony Soosaipillaj", "Pepijn Bos", "Armando van Bruggen", "Yvo Overhoff", "Maurits Poppelaars"]],
   ["Partnerships", ["Ben Sterckx", "Ruben Spyckerelle", "Aron", "Youri van der Donk", "Pieter Bergsma", "Isaak Munster"]],
 ];
 

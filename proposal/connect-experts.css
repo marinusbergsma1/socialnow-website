@@ -193,3 +193,27 @@ html:root .sn-site .cx-leider strong { font-size: 16px; font-weight: 600; }
 html:root .sn-site .cx-leider span:not(.cx-leider-foto) { font-size: 13.5px; line-height: 1.35; color: #55616c; }
 html:root .sn-site .cx-connect .cx-zin { margin: 18px 0 12px; font-size: 16px; color: #3c4752; }
 html:root .sn-site .cx-connect .cx-zin strong { color: #0b0f12; }
+
+/* 6 november 2026: drie kernonderdelen naast elkaar (Cybersecurity, ERP & CRM, Growth). Growth is het grootst en krijgt
+   subkoppen in twee kolommen; Lead Flow optimisation hangt als subtak onder ERP & CRM. */
+.sn-site .cx-takken { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr); gap: 14px; align-items: start; }
+.sn-site .cx-tak { display: flex; flex-direction: column; gap: 12px; padding: 14px; border: 1px solid #e1e7ec; border-top: 2px solid #00a3e0; border-radius: 14px; background: #fff; }
+html:root .sn-site .cx-connect .cx-tak-naam { margin: 0; font-size: 16px; font-weight: 700; color: #0b0f12; }
+.sn-site .cx-tak-delen { display: flex; flex-direction: column; gap: 14px; }
+.sn-site .cx-tak.is-groot .cx-tak-delen { display: block; columns: 2; column-gap: 14px; }
+.sn-site .cx-tak.is-groot .cx-tak-deel { break-inside: avoid; margin-bottom: 14px; }
+.sn-site .cx-tak-deel { display: flex; flex-direction: column; gap: 8px; }
+.sn-site .cx-tak-deel ul { display: grid; gap: 5px; }
+.sn-site .cx-tak-deel.is-onder { position: relative; padding: 12px 0 0 14px; border-left: 1px solid #00a3e0; }
+.sn-site .cx-tak .cx-org-persoon > a { padding: 4px 8px 4px 4px; border-radius: 10px; }
+.sn-site .cx-tak .cx-org-persoon img { width: 40px; height: 40px; border-radius: 7px; }
+.sn-site .cx-bedrijf-logo { display: grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; border-radius: 7px; background: #000; }
+.sn-site .cx-bedrijf-logo img { width: 30px !important; height: auto !important; object-fit: contain; border-radius: 0 !important; }
+@media (max-width: 1100px) { .sn-site .cx-takken { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .sn-site .cx-tak.is-groot { grid-column: 1 / -1; } }
+@media (max-width: 600px) {
+  .sn-site .cx-takken { grid-template-columns: 1fr; gap: 10px; }
+  .sn-site .cx-tak { padding: 12px 10px; }
+  .sn-site .cx-tak.is-groot .cx-tak-delen { columns: 1; }
+  .sn-site .cx-tak-deel ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sn-site .cx-tak .cx-org-persoon img, .sn-site .cx-bedrijf-logo { width: 36px; height: 36px; flex-basis: 36px; }
+}

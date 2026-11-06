@@ -142,6 +142,8 @@ for (const [route, meta] of Object.entries(routeMeta)) {
         person('Elian Coellar', 'Head of Private Partnerships'),
         person('Fabiana Abauna', 'Head of New Partnerships'),
         { ...person('Ben Sterckx', 'Partnership Manager België'), image: `${BASE}/images/Ben-Sterckx.webp`, sameAs: 'https://www.linkedin.com/in/bensterckx/' },
+        { ...person('Yvo Overhoff', 'Lead Flow Engineer'), image: `${BASE}/images/Yvo-Overhoff.webp` },
+        { ...person('Maurits Poppelaars', 'Lead Flow Analyst'), image: `${BASE}/images/Maurits-Poppelaars.webp` },
         person('Sid van Kalken', 'Head of Web Development & AI Payments'),
         {
           '@type': 'Organization',

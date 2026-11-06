@@ -3300,5 +3300,7 @@
   "Is AI alleen genoeg om een website veilig te maken?": "Räcker AI ensamt för att göra en webbplats säker?",
   "Nee. AI vindt fouten sneller, maar schrijft ze ook. Daarom controleert bij ons altijd een developer wat AI voorstelt.": "Nej. AI hittar fel snabbare, men skriver också fel. Därför kontrollerar en utvecklare alltid det som AI föreslår.",
   "Wat kost een veiligheidsrapport?": "Vad kostar en säkerhetsrapport?",
-  "Niets. Je vraagt het aan via de website-actie of de securityscan op onze site.": "Ingenting. Du begär den via webbplatserbjudandet eller säkerhetsskanningen på vår webbplats."
+  "Niets. Je vraagt het aan via de website-actie of de securityscan op onze site.": "Ingenting. Du begär den via webbplatserbjudandet eller säkerhetsskanningen på vår webbplats.",
+  "Kernonderdelen": "Kärnområden",
+  "Odoo-partner · bouwt SocialNow OS": "Odoo-partner · bygger SocialNow OS"
 }
