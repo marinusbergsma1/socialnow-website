@@ -61,7 +61,7 @@ const FUNCTIES: { functie: string; mensen: string[] }[] = [
   // Marinus staat bij Partnerships (tot 3 nov 2026 Sales & partnerships); Sid (Web Development & AI Payments) bij Web development.
   { functie: "AI development", mensen: ["Gijsbert Westeneng", "Tristan Slobben", "Douwe Kramer"] },
   { functie: "Web development", mensen: ["Sid van Kalken", "Antony Soosaipillaj"] },
-  { functie: "Finance & operations", mensen: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
+  { functie: "Wealth Management", mensen: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
   { functie: "Ads & search", mensen: ["Jos Hollenberg", "Sergio Jovovic", "Nick van Keulen"] },
   { functie: "Video, photo & design", mensen: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Pepijn Bos", "Armando van Bruggen"] },
   { functie: "UGC & social media", mensen: ["Isa Zoer"] },
