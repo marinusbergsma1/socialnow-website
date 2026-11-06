@@ -17,6 +17,11 @@ const kop = (naam) => alles.find((h) => h.key.toLowerCase() === naam.toLowerCase
 const csp = kop("Content-Security-Policy") || "";
 eisen.push([`vercel.json: frame-ancestors op elk pad (${csp || "ontbreekt"})`, /frame-ancestors 'self'/.test(csp)]);
 eisen.push(["vercel.json: CSP-header bevat alleen frame-ancestors (de inhoudsregels blijven in de meta-CSP)", csp !== "" && csp.split(";").map((d) => d.trim()).filter(Boolean).every((d) => d.startsWith("frame-ancestors"))]);
+// security.txt op de vaste plek van RFC 9116 (kon niet op GitHub Pages, wel op Vercel).
+const rw = (config.rewrites || []).find((r) => r.source === "/.well-known/security.txt");
+const st = existsSync("dist/security.txt") ? readFileSync("dist/security.txt", "utf8") : "";
+eisen.push([`vercel.json: /.well-known/security.txt serveert ${rw ? rw.destination : "niets"}`, rw?.destination === "/security.txt" && /^Contact: /m.test(st)]);
+eisen.push(["security.txt noemt beide adressen als Canonical", /^Canonical: https:\/\/socialnow\.nl\/\.well-known\/security\.txt$/m.test(st) && /^Canonical: https:\/\/socialnow\.nl\/security\.txt$/m.test(st)]);
 eisen.push([`vercel.json: X-Frame-Options (${kop("X-Frame-Options") || "ontbreekt"})`, kop("X-Frame-Options") === "SAMEORIGIN"]);
 
 const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".woff2": "font/woff2", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".json": "application/json", ".mp4": "video/mp4" };
