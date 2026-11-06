@@ -15,3 +15,28 @@ html:root .sn-site .sn-vijf-onder strong{font-family:'TT Norms',sans-serif!impor
 .sn-vijf-geluid svg{color:#0B7A37}
 .sn-vijf-geluid:focus-visible{outline:2px solid #fff;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){.sn-vijf-film video{transition:none}.sn-vijf-geluid{transition:none}.sn-vijf-geluid:hover{transform:none}}
+
+/* OdooFilm.tsx, 6 november 2026: de Odoo Experience-film naast de 5-jaarfilm. Op de computer kleiner ernaast; op mobiel een compacte
+   rij onder de 5-jaarfilm (film links, tekst en geluidsknop rechts), zodat de hero niet twee keer zo lang wordt. */
+.sn-hero-films{display:flex;align-items:flex-start;justify-content:center;gap:16px;min-width:0}
+.sn-hero-films .sn-vijf{width:min(100%,calc(min(560px,66vh) * 9 / 16))}
+.sn-odoo{display:grid;gap:14px;width:calc(min(560px,66vh) * 9 / 16 * .62);margin-top:calc(min(560px,66vh) * .19)}
+.sn-odoo-film{position:relative;aspect-ratio:9/16;margin:0;border:1px solid var(--a-lijn,#ffffff1a);border-radius:14px;overflow:hidden;background:#000}
+.sn-odoo-film img,.sn-odoo-film video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;background:#000}
+.sn-odoo-film video{opacity:0;transition:opacity .4s ease}
+.sn-odoo-film.speelt video:not(.sn-odoo-lang),.sn-odoo-film.is-lang .sn-odoo-lang{opacity:1}
+.sn-odoo-film.is-lang video:not(.sn-odoo-lang){opacity:0}
+.sn-odoo-onder{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.sn-odoo-onder p{display:flex;flex-direction:column;gap:4px;margin:0}
+.sn-odoo-onder .sn-alg-klein{font-family:var(--a-mono,ui-monospace,Menlo,monospace);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#cfd8d3}
+html:root .sn-site .sn-odoo-onder strong{font-family:'TT Norms',sans-serif!important;font-size:15px;font-weight:600;letter-spacing:0;color:#fff}
+.sn-odoo-geluid{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border:0;border-radius:999px;background:#fff;color:#000;font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:transform .2s}
+.sn-odoo-geluid:hover{transform:scale(1.04)}
+.sn-odoo-geluid svg{color:#0B7A37}
+.sn-odoo-geluid:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(max-width:960px){
+  .sn-hero-films{flex-direction:column;align-items:center}
+  .sn-hero-films .sn-vijf{width:min(100%,380px)}
+  .sn-odoo{grid-template-columns:112px minmax(0,1fr);align-items:center;width:min(100%,380px);margin-top:0}
+}
+@media(prefers-reduced-motion:reduce){.sn-odoo-film video{transition:none}.sn-odoo-geluid{transition:none}.sn-odoo-geluid:hover{transform:none}}
