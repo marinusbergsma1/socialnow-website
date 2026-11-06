@@ -150,7 +150,9 @@ export default function ConnectExperts() {
         {(top.length > 0 || takken.length > 0) && vakken.length > 0 && <span className="cx-org-lijn" aria-hidden="true" />}
         {vakken.length > 0 && <div className="cx-org-laag">
           <p className="cx-org-kop">Vakgebieden</p>
-          <div className="cx-org-vakken">
+          {/* 7 november 2026 (Marinus): "Graag 1 blok dus", net als Wealth Management. Staat er één vakgebied, dan loopt het
+              blok over de volle breedte met de mensen in twee kolommen naast elkaar. */}
+          <div className={`cx-org-vakken${vakken.length === 1 ? " is-een" : ""}`}>
             {vakken.map((v) => <div key={v.naam} className="cx-org-vak">
               <p className="cx-org-vaknaam">{v.naam}</p>
               <ul>{v.leden.map((n) => <Persoon key={n} naam={n} />)}</ul>
