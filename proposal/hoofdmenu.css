@@ -100,3 +100,15 @@ html:root .sn-site>.h-header .h-brand{display:flex!important;align-items:center}
 @keyframes h5jaarVangnet{to{opacity:1}}
 @keyframes h5jaarWeg{to{opacity:0;visibility:hidden}}
 @media (prefers-reduced-motion:reduce){:root .sn-site .h-brand-intro{display:none}:root .sn-site .h-brand-5jaar.is-intro>img{opacity:1;animation:none}}
+/* 6 november 2026 (Marinus, na het live zetten): "Groene streep rechts zodat SocialNow mooi uitlijnt kan worden en 5 YEARS eronder."
+   - De groene gloed van de onderlijn zit rechts in plaats van links onder het logo (zelfde verloop, gespiegeld).
+   - Het woordmerk staat op de middenlijn van het menu: het logo zakt 17,9 % van zijn hoogte, (1/2 - 113/352), want het woordmerk is
+     de bovenste 113 van de 176 beeldpunten. Alleen verschoven (translate), dus de menubalk zelf beweegt niet. De intro zakt evenveel
+     (17,9 % × 176/240 = 13,13 % van haar eigen hoogte), zodat ze precies over het logo blijft vallen.
+   - 5 YEARS hangt eronder: de header is hoger, zodat er minstens 8 px tot de streep overblijft (desktop 96 px, mobiel 72-80 px).
+   Proef: scripts/proef-header-5years-uitlijning.mjs. */
+html:root .sn-site>.h-header::after{background:linear-gradient(270deg,#25d366 0%,rgba(37,211,102,.35) 22%,transparent 58%)}
+html:root .sn-site .h-brand-5jaar>img{translate:0 17.9%}
+html:root .sn-site .h-brand-5jaar .h-brand-intro{translate:0 13.13%}
+html:root .sn-site>.h-header{padding-top:16px;padding-bottom:16px}
+@media(max-width:760px){html:root .sn-site>.h-header{padding-top:8px;padding-bottom:8px}}
