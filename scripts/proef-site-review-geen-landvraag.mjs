@@ -23,7 +23,8 @@ await new Promise((r) => server.listen(0, "127.0.0.1", r));
 const base = `http://127.0.0.1:${server.address().port}`;
 
 // Browsertaal -> verwacht pad na het laden. ja-JP en en-US houden Engels, regio zonder sitetaal ook.
-const GEVALLEN = [["en-US", "/"], ["nl-NL", "/nl/"], ["de-CH", "/de/"], ["fr-BE", "/fr/"], ["ja-JP", "/"], ["pt-BR", "/pt/"]];
+// ru-BE, tr-CH en zh-Hant-TW hebben geen sitetaal: daar beslist alleen de regio uit de browsertaal (browserLand).
+const GEVALLEN = [["en-US", "/"], ["nl-NL", "/nl/"], ["de-CH", "/de/"], ["fr-BE", "/fr/"], ["ja-JP", "/"], ["pt-BR", "/pt/"], ["ru-BE", "/nl/"], ["tr-CH", "/de/"], ["zh-Hant-TW", "/"]];
 const { chromium } = await import(process.env.PLAYWRIGHT_CORE || "playwright-core");
 const browser = await chromium.launch({ headless: true, ...(process.env.BROWSER_CHANNEL ? { channel: process.env.BROWSER_CHANNEL } : {}) });
 try {
@@ -39,10 +40,13 @@ try {
     const page = await context.newPage();
     const fouten = [];
     page.on("pageerror", (e) => fouten.push(String(e.message)));
+    // Hydratiefouten van React (#418, #423, #424) komen als console.error, niet als pageerror.
+    page.on("console", (m) => { if (m.type() === "error" && !/Failed to load resource|ERR_FAILED/.test(m.text())) fouten.push(m.text()); });
     await page.goto(`${base}/`, { waitUntil: "load" });
     await page.waitForTimeout(1800);
     const pad = new URL(page.url()).pathname;
     const workers = [...buiten].filter((h) => /workers\.dev$/.test(h));
+    eisen.push([`${locale}: geen sn-land-cookie zonder echte keuze`, !(await context.cookies()).some((c) => c.name === "sn-land")]);
     eisen.push([`${locale}: geen verzoek naar workers.dev bij het eerste bezoek${workers.length ? ` (${workers.join(", ")})` : ""}`, workers.length === 0]);
     eisen.push([`${locale}: taal ${pad} (verwacht ${verwacht})`, pad === verwacht]);
     eisen.push([`${locale}: ${fouten.length} paginafouten${fouten.length ? ` (${fouten[0].slice(0, 80)})` : ""}`, fouten.length === 0]);

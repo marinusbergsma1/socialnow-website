@@ -20,12 +20,13 @@ eisen.push(["vercel.json: CSP-header bevat alleen frame-ancestors (de inhoudsreg
 eisen.push([`vercel.json: X-Frame-Options (${kop("X-Frame-Options") || "ontbreekt"})`, kop("X-Frame-Options") === "SAMEORIGIN"]);
 
 const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".woff2": "font/woff2", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".json": "application/json", ".mp4": "video/mp4" };
+let metKoppen = true; // de positieve controle zet de headers even uit
 const server = createServer((req, res) => {
   let p = path.join("dist", decodeURIComponent(new URL(req.url, "http://x").pathname));
   if (existsSync(p) && statSync(p).isDirectory()) p = path.join(p, "index.html");
   if (!existsSync(p)) { res.writeHead(404); res.end(); return; }
   const koppen = { "content-type": types[path.extname(p)] || "application/octet-stream" };
-  for (const h of alles) koppen[h.key] = h.value;
+  if (metKoppen) for (const h of alles) koppen[h.key] = h.value;
   res.writeHead(200, koppen);
   res.end(readFileSync(p));
 });
@@ -44,11 +45,22 @@ try {
   await context.addInitScript(() => { window.__csp = []; document.addEventListener("securitypolicyviolation", (e) => window.__csp.push(`${e.effectiveDirective} ${e.blockedURI}`)); });
   const page = await context.newPage();
 
-  await page.goto(`${vreemdBase}/`, { waitUntil: "load" });
-  await page.waitForTimeout(1200);
-  const kind = page.frames().find((f) => f !== page.mainFrame());
-  const geladen = kind ? await kind.evaluate(() => Boolean(document.querySelector("#root"))).catch(() => false) : false;
-  eisen.push([`vreemde site kan socialnow.nl niet in een frame laden (frame: ${kind ? kind.url() : "geen"})`, !geladen]);
+  // Frame van de vreemde site: geeft true als de app erin echt geladen is.
+  const framed = async () => {
+    await page.goto(`${vreemdBase}/`, { waitUntil: "load" });
+    const kind = page.frames().find((f) => f !== page.mainFrame());
+    if (!kind) return { geladen: false, url: "geen" };
+    await kind.waitForLoadState("load").catch(() => {});
+    await page.waitForTimeout(800);
+    return { geladen: await kind.evaluate(() => Boolean(document.querySelector("#root"))).catch(() => false), url: kind.url() };
+  };
+  // Positieve controle: zonder de headers moet hetzelfde frame wél laden, anders zegt de echte toets niets.
+  metKoppen = false;
+  const zonder = await framed();
+  metKoppen = true;
+  eisen.push([`controle: zonder headers laadt het frame wel (${zonder.url})`, zonder.geladen]);
+  const met = await framed();
+  eisen.push([`vreemde site kan socialnow.nl niet in een frame laden (frame: ${met.url})`, zonder.geladen && !met.geladen]);
 
   await page.goto(`${base}/`, { waitUntil: "load" });
   await page.evaluate((b) => { const f = document.createElement("iframe"); f.src = `${b}/connect`; f.id = "eigen"; document.body.append(f); }, base);

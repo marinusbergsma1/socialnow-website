@@ -54,11 +54,10 @@ export function detectVisitorLanguage(): void {
   const uitBrowser = saved ? null : browserTaal();
   if (uitBrowser) language = uitBrowser;
   else if (!saved) {
+    // Het land uit de browser bepaalt alleen de taal; sn-land schrijft alleen een echte keuze (ConsentPopup), zoals de
+    // cookieverklaring zegt.
     const country = browserLand();
-    if (country) {
-      writePreference('sn-land', country);
-      language = languageForCountry(country, navigator.languages || [navigator.language]);
-    }
+    if (country) language = languageForCountry(country, navigator.languages || [navigator.language]);
   }
   if (language !== 'en') {
     // Update before mounting the router; retain the requested page, query and anchor.

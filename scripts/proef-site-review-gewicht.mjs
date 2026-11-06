@@ -12,7 +12,9 @@ const html = readFileSync(`${DIST}/index.html`, "utf8");
 const scripts = [...new Set([...html.matchAll(/(?:src|href)="(\/assets\/[^"]+\.js)"/g)].map((m) => m[1]))];
 const maat = scripts.map((s) => { const b = readFileSync(`${DIST}${s}`); return { s, raw: b.length, br: brotliCompressSync(b).length, tekst: b.toString("utf8") }; });
 const vendor = maat.find((m) => /\/vendor-/.test(m.s));
+// Het sitebrede bestand: het grootste dat de homepage meteen laadt en dat niet vendor, ui of het kleine startscript is.
 const site = maat.filter((m) => !/\/(vendor|ui|index)-/.test(m.s)).sort((a, b) => b.raw - a.raw)[0];
+if (!site || !vendor) { console.log(`ROOD  homepage laadt geen ${!vendor ? "vendor" : "sitebreed"} script`); process.exit(1); }
 const totaalBr = maat.reduce((n, m) => n + m.br, 0);
 const kb = (n) => `${(n / 1024).toFixed(1)} KB`;
 // react-dom-client herken je aan de scheduler die hij aanroept (unstable_scheduleCallback).
