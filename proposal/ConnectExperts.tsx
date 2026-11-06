@@ -46,8 +46,11 @@ const TAKKEN: { naam: string; delen: Deel[] }[] = [
     { kop: "Lead Flow optimisation", leden: leden("Lead Flow optimisation") },
   ] },
   { naam: "Growth", delen: GROWTH.map((g) => ({ kop: g, leden: leden(g) })) },
+  // 6 november 2026 (Marinus): "Finance & operations Moet Wealth Management zijn en zet onder erp en Cybersecurity".
+  // Op een breed scherm staat dit vak onder Cybersecurity en ERP & CRM, naast de hoge Growth-kolom (zie .cx-tak.is-wealth).
+  { naam: "Wealth Management", delen: [{ leden: leden("Wealth Management") }] },
 ];
-const IN_TAK = new Set(["Lead Flow optimisation", ...GROWTH]);
+const IN_TAK = new Set(["Lead Flow optimisation", "Wealth Management", ...GROWTH]);
 const VAKGEBIEDEN = expertGroepen
   .filter((g) => g.name !== "AI development" && g.name !== "Web development" && !IN_TAK.has(g.name))
   .map((g) => ({ naam: g.name, leden: leden(g.name) }));
@@ -124,7 +127,7 @@ export default function ConnectExperts() {
         {takken.length > 0 && <div className="cx-org-laag">
           <p className="cx-org-kop">Kernonderdelen</p>
           <div className="cx-takken">
-            {takken.map((t) => <div key={t.naam} className={`cx-tak${t.naam === "Growth" ? " is-groot" : ""}`}>
+            {takken.map((t) => <div key={t.naam} className={`cx-tak${t.naam === "Growth" ? " is-groot" : ""}${t.naam === "Wealth Management" ? " is-wealth" : ""}`}>
               <p className="cx-tak-naam">{t.naam}</p>
               <div className="cx-tak-delen">
                 {t.delen.map((d, i) => <div key={d.kop ?? i} className={`cx-tak-deel${d.kop && t.naam !== "Growth" ? " is-onder" : ""}`}>

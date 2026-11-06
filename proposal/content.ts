@@ -110,7 +110,8 @@ export const expertGroepen = [
   { name: "Strategy & guidance", members: ["Albert Deltour", "Hossam Hassan"] },
   { name: "AI development", members: ["Gijsbert Westeneng", "Tristan Slobben", "Douwe Kramer", "Thomas Huijsmans"] },
   { name: "Web development", members: ["Sid van Kalken", "Antony Soosaipillaj"] },
-  { name: "Finance & operations", members: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
+  // 6 november 2026 (Marinus): "Finance & operations Moet Wealth Management zijn en zet onder erp en Cybersecurity".
+  { name: "Wealth Management", members: ["Steef Komen", "Michelle Yang", "Steven Goudsblom"] },
   { name: "Ads & search", members: ["Jos Hollenberg", "Nick van Keulen", "Sergio Jovovic"] },
   { name: "Video, photo & design", members: ["Carmel Boon", "Jelle Ursem", "Sam van der Sluis", "Emma Peperkamp", "Femke Oostendorp", "Pepijn Bos", "Armando van Bruggen"] },
   { name: "UGC & social media", members: ["Isa Zoer", "Daniel Schotman"] },
