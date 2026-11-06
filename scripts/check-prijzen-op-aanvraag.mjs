@@ -24,7 +24,8 @@ eis(!/€35|€65|35 €|65 €/.test(faq), "FAQ noemt geen Business- en Enterpr
 eis(!/Business €35|Enterprise €65|Start €3\.000|€2\.000 tot €5\.000|vanaf €10\.000/.test(llms), "llms.txt noemt geen pakketprijzen meer");
 const security = nav.match(/a\.h-security>span,[^{]*\{([^}]*)\}/g)?.join("") ?? "";
 eis(security.length > 0 && !/sn-glans|#25d366/.test(security), "Website-actie zonder groene glans");
-eis(/className="h-brand-jaren"[^>]*>5 YEARS</.test(header) && /\.h-brand-jaren\{[^}]*background:#fff;color:#000/.test(nav), "SocialNow-logo met wit 5 YEARS-label");
+// 6 nov (later): het CSS-label is vervangen door het echte 5 YEARS-logo uit de film (proposal/Logo5Jaar.tsx, scripts/proef-5years-logo-intro.mjs).
+eis(/<Logo5Jaar /.test(header) && /alt="SocialNow 5 YEARS"/.test(fs.readFileSync("proposal/Logo5Jaar.tsx", "utf8")), "SocialNow-logo met wit 5 YEARS-label");
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(fs.readFileSync(`proposal/i18n/${l}.json`, "utf8"));
   eis(["De rest bouwen we rond jouw bedrijf.", "Op aanvraag", "Connect op maat", "Gratis OS"].every(k => w[k]), `nieuwe teksten vertaald (${l})`);

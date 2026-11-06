@@ -88,7 +88,15 @@
 /* 5 november 2026 (Marinus): "Op Mobiel is het logo niet mooi uitgelicht met het menu." Het logo hing bovenin zijn 44 px hoge vak
    (11 px hoger dan vlag, Inloggen en menu); nu verticaal in het midden, net als de rest van de balk. */
 html:root .sn-site>.h-header .h-brand{display:flex!important;align-items:center}
-/* 6 november 2026: het SocialNow 5 YEARS-logo. Label rechts onder het woordmerk, zoals in de eindtitel van de 5-jaarfilm. */
-:root .sn-site .h-nav .h-brand{display:inline-flex;flex-direction:column;align-items:flex-end;gap:3px;line-height:1}
-:root .sn-site .h-brand-jaren{display:inline-flex;align-items:center;height:14px;padding:0 5px;border-radius:3px;background:#fff;color:#000;font-family:"TT Norms Pro","TTNorms",var(--h-font,system-ui),sans-serif;font-weight:700;font-size:8.5px;letter-spacing:.08em;white-space:nowrap}
-@media(max-width:600px){:root .sn-site .h-brand-jaren{height:12px;padding:0 4px;font-size:7.5px}}
+/* 6 november 2026 (Marinus): 5 YEARS-logo uit de film. Het eindbeeld van de 5-jaarfilm (logo + wit 5 YEARS-badge) staat als één
+   beeld in de header; op de homepage speelt eerst de beeldmerk-animatie uit de film eroverheen (proposal/Logo5Jaar.tsx,
+   public/5jaar/BRON.md). De video ligt absoluut over het logo, dus niets verschuift; de zwarte filmondergrond valt weg (screen).
+   Uitsnede video 800×240, logo daarin op x 150, y 48, 624×176: links -150/624, boven -48/176, breedte 800/624, hoogte 240/176. */
+:root .sn-site .h-brand-5jaar{position:relative;display:block;line-height:0}
+:root .sn-site .h-brand-intro{position:absolute;left:-24.04%;top:-27.27%;width:128.21%;height:136.36%;z-index:1;pointer-events:none;mix-blend-mode:screen}
+:root .sn-site .h-brand-intro video{display:block;width:100%;height:100%;object-fit:fill}
+:root .sn-site .h-brand-5jaar.is-intro>img{opacity:0;animation:h5jaarVangnet 0s 6s forwards}
+:root .sn-site .h-brand-5jaar.is-intro .h-brand-intro{animation:h5jaarWeg .3s 6s forwards}
+@keyframes h5jaarVangnet{to{opacity:1}}
+@keyframes h5jaarWeg{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){:root .sn-site .h-brand-intro{display:none}:root .sn-site .h-brand-5jaar.is-intro>img{opacity:1;animation:none}}

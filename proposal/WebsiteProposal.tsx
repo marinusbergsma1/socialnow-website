@@ -11,6 +11,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { CLAIM_URL } from "./os-entry";
 import { Action } from "./ui";
 import { useButtonMagnetism } from "./useButtonMagnetism";
+import { Logo5Jaar } from "./Logo5Jaar";
 import { Home, ProductenPagina } from "./pages";
 // 30 september 2026 (Marinus: "WIL ECHT INSTANT LOADING"): elke pagina buiten de homepage is een eigen bestand dat pas
 // laadt als iemand die pagina opent (proposal/later.tsx). Het eerste script draagt alleen de header en de hero.
@@ -224,15 +225,8 @@ function ProposalShell() {
             to="/"
             aria-label="SocialNow, naar de homepage"
           >
-            <img
-              src="/images/SocialNow-Logo-2026.webp"
-              alt="SocialNow"
-              width="200"
-              height="38"
-            />
-            {/* 6 november 2026 (Marinus): "het SocialNow 5 YEARS logo inzetten". Het witte label uit de eindtitel van de
-                5-jaarfilm (83-vijf-jaar-socialnow): rechts onder het woordmerk, zwarte letters op wit. */}
-            <span className="h-brand-jaren" translate="no">5 YEARS</span>
+            {/* 6 november 2026 (Marinus): het 5 YEARS-logo uit de 5-jaarfilm, met de beeldmerk-animatie als korte intro. */}
+            <Logo5Jaar thuis={location.pathname === "/"} />
           </Link>
           <nav className="h-desktop-nav" aria-label="Hoofdnavigatie">
             {/* 4 november 2026 (Marinus): "verder wil ik producten diensten en website actie". Producten is een eigen pagina. */}
