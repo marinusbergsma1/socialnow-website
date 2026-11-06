@@ -95,10 +95,16 @@ export function WebsiteExamples() {
         </article>;
       })}
     </div>
+    {/* 6 november 2026 (Marinus): "Pijltjes weg". Alleen de stippen; klikken, slepen en de pijltoetsen bladeren nog. */}
     <div className="sn-web-navigation">
-      <button type="button" aria-label="Vorige website" onClick={() => choose(index - 1)}>←</button>
-      <div className="sn-web-pagination" role="group" aria-label="Kies een website">{examples.map((item, i) => <button type="button" key={item.slug} aria-label={item.name} aria-pressed={i === index} onClick={() => choose(i)}><span /></button>)}</div>
-      <button type="button" aria-label="Volgende website" onClick={() => choose(index + 1)}>→</button>
+      <div className="sn-web-pagination" role="group" aria-label="Kies een website" onKeyDown={event => {
+        const stap = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+        if (!stap) return;
+        event.preventDefault();
+        const volgende = (index + stap + examples.length) % examples.length;
+        choose(volgende);
+        (event.currentTarget.children[volgende] as HTMLElement | undefined)?.focus();
+      }}>{examples.map((item, i) => <button type="button" key={item.slug} aria-label={item.name} aria-pressed={i === index} onClick={() => choose(i)}><span /></button>)}</div>
     </div>
     <p className="sn-web-announcement" aria-live="polite" translate="no">{examples[index].name} · {index + 1} / {examples.length}</p>
   </div>;

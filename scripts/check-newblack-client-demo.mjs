@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Proef (6 nov 2026, Marinus over de websiteslider: "Pijltjes weg" en "gwn DE JUISTE TITEL VAN NEW BLACK EN CLIENT
 // DEMO.SOCIALNOW.NL ALS ADRES OID ZODAT ZE ZIEN DAT HET EEN DEMO IS").
-// Eisen: 1) de slider in proposal/LiveWebsites.tsx heeft geen pijlknoppen (vorige/volgende) meer; de keuzeknoppen
+// Eisen: 1) de slider op socialnow.nl (WebsiteExamples in FreeWebsite.tsx) en LiveWebsites.tsx hebben geen pijlknoppen (vorige/volgende) meer; de keuzeknoppen
 //           per website blijven, met klik en toetsenbord (pijltoetsen links/rechts);
 //        2) het project heet NEW BLACK (merknaam zoals in het logo), ook als klantnaam en in alle woordenboeken;
 //        3) het adres is https://newblack.client-demo.socialnow.nl/: dat staat in projects.ts en dus in de adresbalk
@@ -20,6 +20,12 @@ eis(!/h-rail-arrows/.test(slider) && !/Vorige website|Volgende website/.test(sli
   "geen pijlknoppen onder de websiteslider");
 eis(/className="h-site-thumbnails"/.test(slider) && /onClick=\{\(\) => choose\(itemIndex\)\}/.test(slider), "keuzeknoppen per website blijven (klik)");
 eis(/onKeyDown=\{[\s\S]{0,200}ArrowRight[\s\S]{0,200}ArrowLeft/.test(slider), "keuzeknoppen werken met pijltoetsen links/rechts");
+
+// De slider die op socialnow.nl staat is WebsiteExamples in FreeWebsite.tsx (LiveWebsites.tsx wordt nergens gebruikt).
+const voorbeelden = readFileSync("proposal/FreeWebsite.tsx", "utf8");
+eis(!/aria-label="(Vorige|Volgende) website"/.test(voorbeelden) && !/>[←→]<\/button>/.test(voorbeelden), "FreeWebsite-slider: geen ronde pijlknoppen naast de stippen");
+eis(/className="sn-web-pagination"[\s\S]{0,900}onClick=\{\(\) => choose\(i\)\}/.test(voorbeelden), "FreeWebsite-slider: stippen blijven klikbaar");
+eis(/className="sn-web-pagination"[^>]*onKeyDown=\{[\s\S]{0,300}ArrowRight/.test(voorbeelden) && /sn-web-deck" tabIndex=\{0\}[\s\S]{0,200}ArrowRight/.test(voorbeelden), "FreeWebsite-slider: pijltoetsen werken op de stippen en op de slider");
 
 const projects = readFileSync("data/projects.ts", "utf8");
 const start = projects.indexOf('slug: "newblack-website"');
