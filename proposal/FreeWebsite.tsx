@@ -84,7 +84,7 @@ export function WebsiteExamples() {
           <div className="sn-web-preview" role={active ? undefined : "button"} tabIndex={active ? undefined : 0} aria-label={active ? undefined : item.name}
             onKeyDown={event => { if (!active && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); choose(i); } }}
             onClick={event => { if ((!dragged.current || event.detail === 0) && !active) choose(i); }}>
-            <img className="sn-web-thumbnail" src={item.image} alt="" aria-hidden="true" width="1280" height="800" decoding="async" />
+            <img className="sn-web-thumbnail" src={item.image} alt="" aria-hidden="true" width="1280" height="800" loading="lazy" decoding="async" />
             {active && canEmbed && !loadedFrames[i] && <span className="sn-web-loading" role="status">Website laden…</span>}
             {visible && canEmbed && opened.includes(i) && <iframe src={item.previewUrl || item.url} title={item.name} tabIndex={active ? 0 : -1}
               inert={!active ? true : undefined} aria-hidden={!active ? true : undefined} loading="eager"

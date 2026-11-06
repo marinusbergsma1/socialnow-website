@@ -98,16 +98,9 @@
     <link rel="dns-prefetch" href="https://storage.googleapis.com" />
 
     <script>
-      window.addEventListener("error", (e) => {
-        if (
-          e.message ===
-          "ResizeObserver loop completed with undelivered notifications"
-        ) {
-          if (e.stopImmediatePropagation) {
-            e.stopImmediatePropagation();
-          }
-        }
-      });
+      // 6 november 2026 (Indexworld M12): het script dat de ResizeObserver-fout wegdrukte is weg. Het deed al niets
+      // (Chrome eindigt de melding met een punt, het script vergeleek zonder) en in de browser treedt de fout nergens op:
+      // scripts/proef-site-review-resizeobserver.mjs.
       window.addEventListener("unhandledrejection", function (e) {
         console.warn("[SocialNow] Unhandled promise rejection:", e.reason);
       });
