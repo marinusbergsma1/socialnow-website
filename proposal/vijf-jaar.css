@@ -1,0 +1,17 @@
+/* VijfJaarFilm.tsx, 6 november 2026: de 5-jaarfilm in de homepage-hero, op de plek van de teamfoto. De film is staand (9:16) met
+   ondertitels onderin, dus een vaste 9:16-lijst zonder overlay over het beeld; de knop en het bijschrift staan eronder. */
+.sn-vijf{display:grid;gap:14px;justify-self:center;width:min(100%,calc(min(620px,70vh) * 9 / 16))}
+@media(max-width:960px){.sn-vijf{width:min(100%,380px)}}
+.sn-vijf-film{position:relative;aspect-ratio:9/16;margin:0;border:1px solid var(--a-lijn,#ffffff1a);border-radius:16px;overflow:hidden;background:#000}
+.sn-vijf-film img,.sn-vijf-film video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;background:#000}
+.sn-vijf-film video{opacity:0;transition:opacity .4s ease}
+.sn-vijf-film.speelt video{opacity:1}
+.sn-vijf-onder{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:46px}
+.sn-vijf-onder p{display:flex;flex-direction:column;gap:4px;margin:0}
+.sn-vijf-onder .sn-alg-klein{font-family:var(--a-mono,ui-monospace,Menlo,monospace);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#cfd8d3}
+html:root .sn-site .sn-vijf-onder strong{font-family:'TT Norms',sans-serif!important;font-size:19px;font-weight:600;letter-spacing:0;color:#fff}
+.sn-vijf-geluid{display:inline-flex;flex:0 0 auto;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:#000;font:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:transform .2s}
+.sn-vijf-geluid:hover{transform:scale(1.04)}
+.sn-vijf-geluid svg{color:#0B7A37}
+.sn-vijf-geluid:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.sn-vijf-film video{transition:none}.sn-vijf-geluid{transition:none}.sn-vijf-geluid:hover{transform:none}}

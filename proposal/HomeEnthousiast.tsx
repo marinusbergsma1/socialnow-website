@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { TrustedBy, PartnerLogos, AtomiumFoto } from "./HeaderAlgemeen";
+import { TrustedBy, PartnerLogos } from "./HeaderAlgemeen";
+import VijfJaarFilm from "./VijfJaarFilm";
 import "./header-algemeen.css";
 import "./home-enthousiast.css";
 
@@ -58,7 +59,9 @@ export default function HomeEnthousiast() {
           {/* 4 november 2026 (Marinus, bij de lege ruimte onder de knoppen): "Hier moeten weer de shopify logo's etc komen." */}
           <PartnerLogos />
         </div>
-        <AtomiumFoto />
+        {/* 6 november 2026 (Marinus): de 5-jaarfilm als hoofdvideo, op de plek waar de teamfoto stond (VijfJaarFilm.tsx). De teamfoto
+            (AtomiumFoto in HeaderAlgemeen.tsx) blijft bestaan; terugzetten = hier weer AtomiumFoto plaatsen, of tag bewaard/2026-11-06/voor-5years-video. */}
+        <VijfJaarFilm />
       </div>
       <TrustedBy />
     </section>
