@@ -1,0 +1,59 @@
+// Proef M8 (Indexworld, 5 november 2026): "On your first visit the site asks milo-chat.socialnow-marinus.workers.dev for
+// your country." Eis: geen landvraag meer naar buiten; de taalkeuze blijft gelijk voor wie een sitetaal in de browser heeft.
+// Leest dist/, dus eerst npm run build. PLAYWRIGHT_CORE kan naar een aanwezige playwright-core wijzen.
+import { createServer } from "node:http";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+import path from "node:path";
+
+if (!existsSync("dist/index.html")) { console.error("Geen dist/index.html: draai eerst npm run build."); process.exit(1); }
+const eisen = [];
+const js = readdirSync("dist/assets").filter((f) => f.endsWith(".js")).map((f) => readFileSync(`dist/assets/${f}`, "utf8")).join("\n");
+eisen.push(["geen cdn-cgi/trace in de gebouwde scripts", !/cdn-cgi\/trace/.test(js)]);
+eisen.push(["geen landvraag in dist/index.html", !/cdn-cgi\/trace|__snLand/.test(readFileSync("dist/index.html", "utf8"))]);
+
+const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".woff2": "font/woff2", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".json": "application/json", ".mp4": "video/mp4" };
+const server = createServer((req, res) => {
+  let p = path.join("dist", decodeURIComponent(new URL(req.url, "http://x").pathname));
+  if (existsSync(p) && statSync(p).isDirectory()) p = path.join(p, "index.html");
+  if (!existsSync(p)) { res.writeHead(404); res.end(); return; }
+  res.writeHead(200, { "content-type": types[path.extname(p)] || "application/octet-stream" });
+  res.end(readFileSync(p));
+});
+await new Promise((r) => server.listen(0, "127.0.0.1", r));
+const base = `http://127.0.0.1:${server.address().port}`;
+
+// Browsertaal -> verwacht pad na het laden. ja-JP en en-US houden Engels, regio zonder sitetaal ook.
+const GEVALLEN = [["en-US", "/"], ["nl-NL", "/nl/"], ["de-CH", "/de/"], ["fr-BE", "/fr/"], ["ja-JP", "/"], ["pt-BR", "/pt/"]];
+const { chromium } = await import(process.env.PLAYWRIGHT_CORE || "playwright-core");
+const browser = await chromium.launch({ headless: true, ...(process.env.BROWSER_CHANNEL ? { channel: process.env.BROWSER_CHANNEL } : {}) });
+try {
+  for (const [locale, verwacht] of GEVALLEN) {
+    const context = await browser.newContext({ locale, viewport: { width: 1280, height: 800 } });
+    const buiten = new Set();
+    await context.route("**/*", (r) => {
+      const u = new URL(r.request().url());
+      if (u.origin === base) return r.continue();
+      buiten.add(u.host);
+      return r.abort();
+    });
+    const page = await context.newPage();
+    const fouten = [];
+    page.on("pageerror", (e) => fouten.push(String(e.message)));
+    await page.goto(`${base}/`, { waitUntil: "load" });
+    await page.waitForTimeout(1800);
+    const pad = new URL(page.url()).pathname;
+    const workers = [...buiten].filter((h) => /workers\.dev$/.test(h));
+    eisen.push([`${locale}: geen verzoek naar workers.dev bij het eerste bezoek${workers.length ? ` (${workers.join(", ")})` : ""}`, workers.length === 0]);
+    eisen.push([`${locale}: taal ${pad} (verwacht ${verwacht})`, pad === verwacht]);
+    eisen.push([`${locale}: ${fouten.length} paginafouten${fouten.length ? ` (${fouten[0].slice(0, 80)})` : ""}`, fouten.length === 0]);
+    await context.close();
+  }
+} finally {
+  await browser.close();
+  server.close();
+}
+
+let fout = 0;
+for (const [naam, ok] of eisen) { console.log(`${ok ? "groen" : "ROOD "} ${naam}`); if (!ok) fout++; }
+console.log(fout ? `${fout} van ${eisen.length} rood` : `alles groen (${eisen.length} eisen)`);
+process.exit(fout ? 1 : 0);

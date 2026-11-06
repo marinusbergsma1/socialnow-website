@@ -18,18 +18,6 @@
     />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <script>/* 6 oktober 2026: concept-label alleen op concept.socialnow.nl (zie proposal/concept.css). */if(location.hostname.indexOf("concept.")===0)document.documentElement.classList.add("is-concept");</script>
-    <script>
-      // 30 september 2026: bij een eerste bezoek zonder taal in het pad vraagt de site het land op
-      // (proposal/i18n/detect.ts). Die vraag start hier al, tijdens het laden van het script, in plaats van erna.
-      (function () {
-        try {
-          if (/^\/(nl|de|fr|es|it|pt|pl|sv|da)(\/|$)/.test(location.pathname) || /(?:^|;\s*)sn-taal=(en|nl|de|fr|es|it|pt|pl|sv|da)(?:;|$)/.test(document.cookie) || sessionStorage.getItem("sn-detected-country")) return;
-          var c = new AbortController();
-          window.__snLand = { c: c, p: fetch("https://milo-chat.socialnow-marinus.workers.dev/cdn-cgi/trace", { signal: c.signal, credentials: "omit", referrerPolicy: "no-referrer" }).then(function (r) { return r.ok ? r.text() : ""; }) };
-          window.__snLand.p.catch(function () {});
-        } catch (e) {}
-      })();
-    </script>
     <link rel="preconnect" href="https://feeds.behold.so" crossorigin />
     <link rel="preconnect" href="https://storage.googleapis.com" />
     <meta
