@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   ArrowUpRight,
-  ChevronLeft,
-  ChevronRight,
   ExternalLink,
   Monitor,
   Smartphone,
@@ -220,22 +218,6 @@ export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
         </div>
       </div>
       <div className="h-live-bottom">
-        <div className="h-rail-arrows">
-          <button
-            type="button"
-            onClick={() => choose(index - 1)}
-            aria-label="Vorige website"
-          >
-            <ChevronLeft size={19} />
-          </button>
-          <button
-            type="button"
-            onClick={() => choose(index + 1)}
-            aria-label="Volgende website"
-          >
-            <ChevronRight size={19} />
-          </button>
-        </div>
         {live && <button ref={control} type="button" className="h-text-link" aria-pressed={interactive}
           onClick={interactive ? stopInteraction : startInteraction}>
           {interactive ? "Verder op deze pagina" : "Website bedienen"}
@@ -246,6 +228,15 @@ export default function LiveWebsites({ demo = false }: { demo?: boolean }) {
         className="h-site-thumbnails"
         role="group"
         aria-label="Kies een website"
+        onKeyDown={(event) => {
+          // Pijlknoppen zijn weg (6 nov 2026); de pijltoetsen bladeren nog wel door de websites.
+          const stap = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+          if (!stap) return;
+          event.preventDefault();
+          const volgende = (index + stap + sites.length) % sites.length;
+          choose(volgende);
+          (event.currentTarget.children[volgende] as HTMLElement | undefined)?.focus();
+        }}
       >
         {sites.map((item, itemIndex) => (
           <button

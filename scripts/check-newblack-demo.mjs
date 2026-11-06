@@ -12,7 +12,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 
-const DEMO = "https://newblack-demo.socialnow.nl/";
+const DEMO = "https://newblack.client-demo.socialnow.nl/"; // sinds 6 nov 2026; newblack-demo.socialnow.nl geeft een 301
 const fouten = [];
 const eis = (ok, tekst) => { console.log(`${ok ? "GROEN" : "ROOD "}  ${tekst}`); if (!ok) fouten.push(tekst); };
 
