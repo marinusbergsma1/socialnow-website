@@ -82,9 +82,13 @@
 /* 4 november 2026 (Marinus) over WEBSITE-ACTIE in de menubalk: "Deze dikgedrukt en met een shine zodat ie nog meer opvalt." Vet, en
    elke 5 seconden schuift er een groene glans over de letters (wit, #25D366, wit). Bij reduced motion alleen vet en wit. */
 @keyframes sn-glans{0%,72%{background-position:100% 0}100%{background-position:0 0}}
-:root .sn-site .h-desktop-nav a.h-security>span,:root .sn-site .h-mobile-nav a.h-security-mobiel>span{font-weight:800!important;color:#fff;background:linear-gradient(100deg,#fff 0%,#fff 42%,#25d366 50%,#fff 58%,#fff 100%);background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:sn-glans 5s ease-in-out infinite}
-@media(prefers-reduced-motion:reduce){:root .sn-site .h-desktop-nav a.h-security>span,:root .sn-site .h-mobile-nav a.h-security-mobiel>span{animation:none;background:none;-webkit-text-fill-color:#fff}}
+/* 6 november 2026 (Marinus): "de groene glow weg bij website-actie". Gewoon wit en vet, zonder glans. */
+:root .sn-site .h-desktop-nav a.h-security>span,:root .sn-site .h-mobile-nav a.h-security-mobiel>span{font-weight:800!important;color:#fff;background:none;-webkit-text-fill-color:#fff;animation:none}
 
 /* 5 november 2026 (Marinus): "Op Mobiel is het logo niet mooi uitgelicht met het menu." Het logo hing bovenin zijn 44 px hoge vak
    (11 px hoger dan vlag, Inloggen en menu); nu verticaal in het midden, net als de rest van de balk. */
 html:root .sn-site>.h-header .h-brand{display:flex!important;align-items:center}
+/* 6 november 2026: het SocialNow 5 YEARS-logo. Label rechts onder het woordmerk, zoals in de eindtitel van de 5-jaarfilm. */
+:root .sn-site .h-nav .h-brand{display:inline-flex;flex-direction:column;align-items:flex-end;gap:3px;line-height:1}
+:root .sn-site .h-brand-jaren{display:inline-flex;align-items:center;height:14px;padding:0 5px;border-radius:3px;background:#fff;color:#000;font-family:"TT Norms Pro","TTNorms",var(--h-font,system-ui),sans-serif;font-weight:700;font-size:8.5px;letter-spacing:.08em;white-space:nowrap}
+@media(max-width:600px){:root .sn-site .h-brand-jaren{height:12px;padding:0 4px;font-size:7.5px}}

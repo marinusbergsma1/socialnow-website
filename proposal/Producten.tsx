@@ -22,9 +22,9 @@ export const PRODUCTEN = [
 // Alleen wat /diensten al zegt (Pricing.tsx en ConnectExperts.tsx), en elke kaart wijst naar een anker dat daar al staat.
 // Kleur alleen waar het over OS (groen) of Connect (blauw) gaat; Kleurwoord kleurt die woorden na het vertalen.
 export const DIENSTEN = [
-  { naar: "/diensten#prijs-os-titel", titel: "OS-pakketten", regel: "Begin gratis. Betaal pas als je team groeit.", soort: "os" },
-  { naar: "/diensten#prijs-connect-titel", titel: "Connect-pakketten", regel: "Wij doen het werk, met échte mensen.", soort: "connect" },
-  { naar: "/diensten#prijs-los-titel", titel: "Liever één ding?", regel: "Een website of alleen je eigen systeem, voor een vaste prijs vooraf.", soort: "los" },
+  // 6 november 2026 (Marinus): na het gratis OS geen pakketten en prijzen meer, alles op aanvraag en custom.
+  { naar: "/diensten#prijs-os-titel", titel: "Gratis OS", regel: "Begin gratis met je eigen OS.", soort: "os" },
+  { naar: "/diensten#prijs-maat-titel", titel: "Connect op maat", regel: "De rest bouwen we rond jouw bedrijf.", soort: "connect" },
   { naar: "/diensten#team", titel: "Vind je expert", regel: "Zoek, vergelijk en kies zelf.", soort: "team" },
 ] as const;
 

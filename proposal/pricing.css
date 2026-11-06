@@ -677,3 +677,59 @@
 /* 19 oktober 2026: kopvariant A, klein en rustig. */
 :root .sn-site .prijs-diensten-kop .prijs-kop-a { display: grid; gap: 10px; font-size: clamp(32px, 4.4vw, 56px) !important; line-height: 1.05; }
 :root .sn-site .prijs-diensten-kop .prijs-kop-a .prijs-kop-r1 { font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; line-height: 1.25; color: #d6dbe0; }
+
+/* 6 november 2026 (Marinus): "Maak die pagina mooi zakelijk en stijlvol." Alleen het gratis OS met prijs, de rest op aanvraag.
+   Rustig en zakelijk: dunne lijnen, veel ruimte, geen gloed en geen gekleurde vlakken. */
+.sn-site .prijs-zakelijk .prijs-diensten-kop { margin-bottom: clamp(32px, 4vw, 56px); }
+.sn-site .prijs-start {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(24px, 5vw, 72px); align-items: start;
+  padding: clamp(28px, 4vw, 48px); border: 1px solid var(--prijs-rand); border-radius: 20px; background: #050608;
+}
+.sn-site .prijs-start-links { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+html:root .sn-site .prijs-start h3 { margin: 6px 0 0; font-size: clamp(26px, 2.6vw, 38px) !important; line-height: 1.1; color: #fff; }
+.sn-site .prijs-start .prijs-bedrag { margin: 8px 0 0; }
+.sn-site .prijs-start .prijs-belofte { margin: 0 0 8px; color: #a3adb5; }
+.sn-site .prijs-start-punten { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; }
+.sn-site .prijs-start-punten li { display: flex; gap: 10px; align-items: baseline; padding: 13px 0; border-bottom: 1px solid #ffffff14; font-size: 15px; line-height: 1.4; color: #dfe5e9; }
+.sn-site .prijs-start-punten li::before { content: ""; flex: 0 0 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--prijs-groen); transform: translateY(-2px); }
+
+.sn-site .prijs-maat { margin-top: clamp(56px, 7vw, 96px); }
+.sn-site .prijs-maat-kop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 5vw, 72px); align-items: end; padding-bottom: 28px; border-bottom: 1px solid #ffffff2b; }
+html:root .sn-site .prijs-maat-kop h3 { margin: 10px 0 0; font-size: clamp(28px, 3vw, 44px) !important; line-height: 1.08; color: #fff; }
+html:root .sn-site .prijs-maat-kop > p { margin: 0; max-width: 52ch; font-size: 16px; line-height: 1.55; color: #a3adb5; }
+.sn-site .prijs-maat-lijst { list-style: none; margin: 0; padding: 0; }
+.sn-site .prijs-maat-lijst > li {
+  display: grid; grid-template-columns: 64px minmax(0, 1.1fr) minmax(0, 1.3fr) auto; gap: clamp(16px, 3vw, 40px); align-items: start;
+  padding: clamp(26px, 3vw, 36px) 0; border-bottom: 1px solid #ffffff1c; scroll-margin-top: 120px;
+}
+.sn-site .prijs-maat-nummer { font-family: var(--h-mono, ui-monospace, monospace); font-size: 13px; letter-spacing: .14em; color: #7d878f; padding-top: 6px; }
+html:root .sn-site .prijs-maat-tekst h4 { margin: 0; font-size: clamp(22px, 2vw, 28px); font-weight: 700; color: #fff; }
+html:root .sn-site .prijs-maat-tekst p { margin: 8px 0 0; font-size: 15.5px; line-height: 1.5; color: #a3adb5; }
+.sn-site .prijs-maat-punten { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; padding-top: 4px; }
+.sn-site .prijs-maat-punten li { position: relative; padding-left: 18px; font-size: 14.5px; line-height: 1.45; color: #dfe5e9; }
+.sn-site .prijs-maat-punten li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 1px; background: #ffffff80; }
+.sn-site .prijs-maat-actie { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+.sn-site .prijs-maat-label { font-family: var(--h-mono, ui-monospace, monospace); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #a3adb5; }
+.sn-site .prijs-maat-actie .h-button { white-space: nowrap; cursor: pointer; }
+.sn-site .prijs-zakelijk .prijs-uniek { margin-top: clamp(40px, 5vw, 64px); }
+.sn-site .prijs-btw { margin: 20px 0 0; font-size: 13px; color: #7d878f; }
+@media (max-width: 980px) {
+  .sn-site .prijs-maat-lijst > li { grid-template-columns: 48px minmax(0, 1fr); }
+  .sn-site .prijs-maat-punten, .sn-site .prijs-maat-actie { grid-column: 2; }
+  .sn-site .prijs-maat-actie { flex-direction: row; align-items: center; justify-content: space-between; }
+}
+@media (max-width: 760px) {
+  .sn-site .prijs-start, .sn-site .prijs-maat-kop { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .prijs-start-punten { grid-template-columns: minmax(0, 1fr); }
+  .sn-site .prijs-maat-lijst > li { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .sn-site .prijs-maat-punten, .sn-site .prijs-maat-actie { grid-column: 1; }
+  .sn-site .prijs-maat-actie { flex-direction: column; align-items: stretch; }
+  .sn-site .prijs-maat-actie .h-button { width: 100%; }
+}
+/* Vaste kolommen, zodat punten en knoppen in elke rij recht onder elkaar staan; €0 groot en rustig. */
+@media (min-width: 981px) { .sn-site .prijs-maat-lijst > li { grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1.1fr) 230px; } }
+html:root .sn-site .prijs-start .prijs-bedrag strong { font-size: clamp(44px, 4.4vw, 64px); line-height: 1; font-weight: 700; color: #fff; }
+html:root .sn-site .prijs-start .prijs-bedrag span { font-size: 14px; color: #7d878f; }
+.sn-site .prijs-start .prijs-bedrag { display: flex; align-items: baseline; gap: 10px; }
+@media (min-width: 981px) { .sn-site .prijs-maat-lijst > li { grid-template-columns: 56px minmax(0, 1fr) minmax(0, 1.1fr) 270px; } }
+.sn-site .prijs-maat-actie .h-button, .sn-site .prijs-maat-actie .h-button span { white-space: nowrap; }
