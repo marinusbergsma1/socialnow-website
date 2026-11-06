@@ -8,10 +8,10 @@ import "./vijf-jaar.css";
 // gedempt, inline en in een lus. Later die avond: "Geluid icoon mag rechtsonder hier bij de video net als bij de andere dan heb je
 // mooi Odoo Experience en 5 Jaar SocialNow naast elkaar." Dus geen witte knop en geen venster meer, maar een rond geluidsicoon in de
 // video: de eerste klik start de film met geluid vanaf het begin, de volgende zet het geluid weer uit.
-// Versie 2: eindrender van 6 november 18:59 (websites in 4K, ERP-logo's, swooshes).
+// Versie 3: eindrender van 6 november 19:13 (websites in 4K, ERP-logo's, swooshes, kWh-kaart niet meer wit).
 // Terugzetten: tag bewaard/2026-11-06/voor-5years-video (vóór de film) of bewaard/2026-11-06/voor-geluid-icoon (vóór deze versie).
 const MAP = "/video/vijf-jaar/";
-const VERSIE = 2;
+const VERSIE = 3;
 
 type Bron = { src: string; type: string };
 function bronnen(mobiel: boolean): Bron[] {
