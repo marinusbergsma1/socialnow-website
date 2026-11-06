@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { TrustedBy, PartnerLogos } from "./HeaderAlgemeen";
 import VijfJaarFilm from "./VijfJaarFilm";
+import OdooFilm from "./OdooFilm";
 import "./header-algemeen.css";
 import "./home-enthousiast.css";
 
@@ -61,7 +62,12 @@ export default function HomeEnthousiast() {
         </div>
         {/* 6 november 2026 (Marinus): de 5-jaarfilm als hoofdvideo, op de plek waar de teamfoto stond (VijfJaarFilm.tsx). De teamfoto
             (AtomiumFoto in HeaderAlgemeen.tsx) blijft bestaan; terugzetten = hier weer AtomiumFoto plaatsen, of tag bewaard/2026-11-06/voor-5years-video. */}
-        <VijfJaarFilm />
+        {/* 6 november 2026 (Marinus): "Doe daarnaast maar de Odoo video nog op de website." De Odoo Experience-film staat naast de
+            5-jaarfilm (OdooFilm.tsx); terugzetten met tag bewaard/2026-11-06/voor-odoo-film. */}
+        <div className="sn-hero-films">
+          <VijfJaarFilm />
+          <OdooFilm />
+        </div>
       </div>
       <TrustedBy />
     </section>

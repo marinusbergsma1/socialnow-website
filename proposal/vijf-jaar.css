@@ -1,17 +1,37 @@
-/* VijfJaarFilm.tsx, 6 november 2026: de 5-jaarfilm in de homepage-hero, op de plek van de teamfoto. De film is staand (9:16) met
-   ondertitels onderin, dus een vaste 9:16-lijst zonder overlay over het beeld; de knop en het bijschrift staan eronder. */
-.sn-vijf{display:grid;gap:14px;justify-self:center;width:min(100%,calc(min(620px,70vh) * 9 / 16))}
-@media(max-width:960px){.sn-vijf{width:min(100%,380px)}}
-.sn-vijf-film{position:relative;aspect-ratio:9/16;margin:0;border:1px solid var(--a-lijn,#ffffff1a);border-radius:16px;overflow:hidden;background:#000}
-.sn-vijf-film img,.sn-vijf-film video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;background:#000}
-.sn-vijf-film video{opacity:0;transition:opacity .4s ease}
+/* VijfJaarFilm.tsx en OdooFilm.tsx, 6 november 2026: twee staande films (9:16) in de homepage-hero, op de plek van de teamfoto. De
+   5-jaarfilm is de hoofdvideo en groter; de Odoo Experience-film staat ernaast. Beide hebben een rond geluidsicoon rechtsonder in de
+   video ("net als bij de andere") en eronder een titel; de onderkanten en titels staan op één lijn, ook op mobiel. Vaste 9:16-lijsten op
+   puur zwart, dus geen verschuiving. */
+.sn-hero-films{display:flex;align-items:flex-end;justify-content:center;gap:16px;min-width:0}
+.sn-vijf,.sn-odoo{display:grid;gap:12px;min-width:0}
+.sn-vijf{width:calc(min(560px,66vh) * 9 / 16)}
+.sn-odoo{width:calc(min(560px,66vh) * 9 / 16 * .62)}
+.sn-vijf-film,.sn-odoo-film{position:relative;aspect-ratio:9/16;margin:0;border:1px solid var(--a-lijn,#ffffff1a);border-radius:16px;overflow:hidden;background:#000}
+.sn-odoo-film{border-radius:14px}
+.sn-vijf-film img,.sn-vijf-film video,.sn-odoo-film img,.sn-odoo-film video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;background:#000}
+.sn-vijf-film video,.sn-odoo-film video{opacity:0;transition:opacity .4s ease}
 .sn-vijf-film.speelt video{opacity:1}
-.sn-vijf-onder{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:46px}
-.sn-vijf-onder p{display:flex;flex-direction:column;gap:4px;margin:0}
-.sn-vijf-onder .sn-alg-klein{font-family:var(--a-mono,ui-monospace,Menlo,monospace);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#cfd8d3}
-html:root .sn-site .sn-vijf-onder strong{font-family:'TT Norms',sans-serif!important;font-size:19px;font-weight:600;letter-spacing:0;color:#fff}
-.sn-vijf-geluid{display:inline-flex;flex:0 0 auto;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:#000;font:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:transform .2s}
-.sn-vijf-geluid:hover{transform:scale(1.04)}
-.sn-vijf-geluid svg{color:#0B7A37}
-.sn-vijf-geluid:focus-visible{outline:2px solid #fff;outline-offset:3px}
-@media(prefers-reduced-motion:reduce){.sn-vijf-film video{transition:none}.sn-vijf-geluid{transition:none}.sn-vijf-geluid:hover{transform:none}}
+.sn-odoo-film.speelt video:not(.sn-odoo-lang),.sn-odoo-film.is-lang .sn-odoo-lang{opacity:1}
+.sn-odoo-film.is-lang video:not(.sn-odoo-lang){opacity:0}
+
+/* Rond geluidsicoon rechtsonder in de video, in de stijl van de andere films op de site (donker glas, dunne rand, groen bij focus). */
+.sn-film-geluid{position:absolute;right:12px;bottom:12px;z-index:2;display:grid;place-items:center;width:40px;height:40px;padding:0;border:1px solid #ffffff33;border-radius:50%;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;cursor:pointer;transition:border-color .2s,transform .2s}
+.sn-film-geluid:hover{border-color:#25d366;transform:scale(1.06)}
+.sn-film-geluid:focus-visible{outline:2px solid #fff;outline-offset:2px;border-color:#25d366}
+.sn-film-geluid[aria-pressed="true"]{border-color:#25d366;color:#25d366}
+
+/* Titels onder de films, even hoog zodat ze naast elkaar op één lijn staan. */
+.sn-film-titel{display:flex;flex-direction:column;gap:4px;min-height:44px;margin:0}
+.sn-film-titel .sn-alg-klein{font-family:var(--a-mono,ui-monospace,Menlo,monospace);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#cfd8d3}
+html:root .sn-site .sn-film-titel strong{font-family:'TT Norms',sans-serif!important;font-size:17px;font-weight:600;line-height:1.2;letter-spacing:0;color:#fff}
+
+@media(max-width:960px){
+  .sn-hero-films{gap:12px;width:min(100%,420px);margin-inline:auto}
+  .sn-vijf{width:auto;flex:1.6 1 0}
+  .sn-odoo{width:auto;flex:1 1 0}
+  .sn-film-titel{min-height:52px}
+  html:root .sn-site .sn-film-titel strong{font-size:14px}
+  .sn-film-titel .sn-alg-klein{font-size:9.5px}
+  .sn-film-geluid{right:8px;bottom:8px;width:36px;height:36px}
+}
+@media(prefers-reduced-motion:reduce){.sn-vijf-film video,.sn-odoo-film video{transition:none}.sn-film-geluid{transition:none}.sn-film-geluid:hover{transform:none}}
