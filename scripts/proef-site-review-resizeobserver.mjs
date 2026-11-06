@@ -15,6 +15,7 @@ const PADEN = ["dist/index.html", "dist/nl/index.html", "dist/team/index.html", 
 for (const p of PADEN) {
   const html = readFileSync(p, "utf8");
   eisen.push([`${p}: geen script dat de ResizeObserver-fout wegdrukt`, !/ResizeObserver loop/.test(html)]);
+  eisen.push([`${p}: geen ontwikkelcommentaar over deze review in de gepubliceerde HTML`, !/Indexworld M\d/.test(html)]);
 }
 
 const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".woff2": "font/woff2", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".json": "application/json", ".mp4": "video/mp4" };

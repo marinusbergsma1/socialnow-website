@@ -9,7 +9,8 @@ const zichtbaar = html.replace(/<!--[\s\S]*?-->/g, "").replace(/<style[\s\S]*?<\
 const eisen = [
   ["lang is en", /<html lang="en">/.test(html)],
   ["canonical naar https://socialnow.nl/connect", /<link rel="canonical" href="https:\/\/socialnow\.nl\/connect" \/>/.test(html)],
-  ["niet op noindex (anders hoort hij niet in de sitemap)", !/noindex/.test(html.replace(/<!--[\s\S]*?-->/g, ""))],
+  ["niet op noindex of none, ook niet voor googlebot (anders hoort hij niet in de sitemap)", !/<meta\s+name="(?:robots|googlebot)"\s+content="[^"]*\b(?:noindex|none)\b/i.test(html.replace(/<!--[\s\S]*?-->/g, ""))],
+  ["geen ontwikkelcommentaar over deze review in de gepubliceerde HTML", !/Indexworld M\d/.test(html)],
   ["staat in de sitemap", kaart.includes("<loc>https://socialnow.nl/connect</loc>")],
   ["sitemap blijft geldige xml (één urlset)", (kaart.match(/<\/urlset>/g) || []).length === 1],
   ["geen negatieve letterafstand", !/letter-spacing:\s*-/.test(html)],
