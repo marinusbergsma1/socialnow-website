@@ -1,6 +1,7 @@
 import { isLanguage, languagePrefix, type Language } from './context';
 
-const TRACE_URL = 'https://milo-chat.socialnow-marinus.workers.dev/cdn-cgi/trace';
+// 6 november 2026 (Indexworld M8): geen landvraag meer bij een externe dienst. Het land komt alleen nog uit de
+// regiocode van de browsertaal (nl-BE geeft BE), zonder netwerk en zonder IP-adres.
 const COUNTRY_LANGUAGES: Record<string, Language[]> = {
   NL: ['nl'], SR: ['nl'], AW: ['nl'], CW: ['nl'],
   DE: ['de'], AT: ['de'], LI: ['de'], FR: ['fr'], MC: ['fr'],
@@ -35,50 +36,28 @@ function browserTaal(): Language | null {
 export function rememberLanguage(language: Language) {
   writePreference('sn-taal', language);
 }
-function languageInPath(): boolean {
-  const code = location.pathname.match(/^\/([a-z]{2})(?:\/|$)/)?.[1];
-  return Boolean(code && code !== 'en' && isLanguage(code));
+// De regio uit de browsertaal (de-CH geeft CH, pt-BR geeft BR), als die er is.
+function browserLand(): string | null {
+  const talen = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]).filter(Boolean);
+  for (const locale of talen) {
+    const regio = locale.match(/-([A-Za-z]{2})(?:-|$)/)?.[1];
+    if (regio) return regio.toUpperCase();
+  }
+  return null;
 }
-// 30 september 2026: de pagina komt voorgerenderd binnen. Alleen een bezoeker zonder taal in het pad,
-// zonder bewaarde keuze en zonder bekend land moet op het netwerk wachten; de rest weet index.tsx meteen.
-export function needsCountryLookup(): boolean {
-  if (languageInPath()) return false;
-  const saved = document.cookie.match(/(?:^|;\s*)sn-taal=([a-z]{2})(?:;|$)/)?.[1];
-  if (saved && isLanguage(saved)) return false;
-  if (browserTaal()) return false;
-  try { if (sessionStorage.getItem('sn-detected-country')) return false; } catch {}
-  return true;
-}
-export async function detectVisitorLanguage(): Promise<void> {
+export function detectVisitorLanguage(): void {
   // Explicit language links always win, including shared links to a specific language.
   if (/^\/(nl|de|fr|es|it|pt|pl|sv|da)(?:\/|$)/.test(location.pathname)) return;
+  // Volgorde (22 oktober 2026, Marinus): eerder gekozen taal, dan de browsertaal, dan het land, anders Engels.
   const saved = document.cookie.match(/(?:^|;\s*)sn-taal=(en|nl|de|fr|es|it|pt|pl|sv|da)(?:;|$)/)?.[1];
   let language: Language = saved && isLanguage(saved) ? saved : 'en';
   const uitBrowser = saved ? null : browserTaal();
   if (uitBrowser) language = uitBrowser;
   else if (!saved) {
-    const browserLanguages = navigator.languages || [navigator.language];
-    let country: string | null = null;
-    try { country = sessionStorage.getItem('sn-detected-country'); } catch {}
-    if (!country) {
-      // 30 september 2026: index.html start deze vraag al tijdens het laden van het script (window.__snLand).
-      // De grens blijft 1,2 seconde vanaf hier; alleen de wachttijd op het netwerk valt weg.
-      const vroeg = (window as Window & { __snLand?: { c: AbortController; p: Promise<string> } }).__snLand;
-      const controller = vroeg?.c ?? new AbortController();
-      const timer = window.setTimeout(() => controller.abort(), 1200);
-      try {
-        const tekst = vroeg ? await vroeg.p : await fetch(TRACE_URL, { signal: controller.signal, credentials: 'omit', referrerPolicy: 'no-referrer' }).then((response) => (response.ok ? response.text() : ''));
-        country = tekst.match(/^loc=([A-Z]{2})$/m)?.[1] || null;
-      } catch { /* Browser language is the fallback when country lookup is unavailable. */ }
-      finally { window.clearTimeout(timer); }
-    }
-    if (country) {
-      try { sessionStorage.setItem('sn-detected-country', country); } catch {}
-      writePreference('sn-land', country);
-      language = languageForCountry(country, browserLanguages);
-    } else {
-      language = browserLanguages.map(value => value.toLowerCase().split('-')[0]).find(isLanguage) || 'en';
-    }
+    // Het land uit de browser bepaalt alleen de taal; sn-land schrijft alleen een echte keuze (ConsentPopup), zoals de
+    // cookieverklaring zegt.
+    const country = browserLand();
+    if (country) language = languageForCountry(country, navigator.languages || [navigator.language]);
   }
   if (language !== 'en') {
     // Update before mounting the router; retain the requested page, query and anchor.
