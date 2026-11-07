@@ -245,6 +245,39 @@ function Knop({ pakket, maandelijks = false }: { pakket: Pakket; maandelijks?: b
   return <Action to={`/contact?onderwerp=${encodeURIComponent(pakket.onderwerp ?? pakket.naam)}`} secondary={secundair}>{pakket.actie}</Action>;
 }
 
+function Kaart({ pakket }: { pakket: Pakket }) {
+  return (
+    <article className={`prijs-kaart${pakket.vlag ? " is-top" : ""}`} style={{ "--kleur": pakket.kleur } as React.CSSProperties}>
+      {pakket.vlag && <span className="prijs-vlag">{pakket.vlag}</span>}
+      <div className="prijs-kop">
+        <h3>{pakket.naam}</h3>
+        <p className="prijs-bedrag">
+          <strong>{pakket.prijs}</strong>
+          <span>{pakket.per}</span>
+        </p>
+        <p className="prijs-belofte">{pakket.belofte}</p>
+        {pakket.tokens && (
+          <div className={`prijs-tokenbox${pakket.tokens.waarde ? "" : " is-leeg"}`}>
+            <p>
+              <b>{pakket.tokens.aantal}</b>
+              {pakket.tokens.waarde && <span>{pakket.tokens.waarde}</span>}
+            </p>
+            <p className="prijs-tokenbox-uitleg">{pakket.tokens.goedVoor}</p>
+          </div>
+        )}
+      </div>
+      <ul className="prijs-punten">
+        {pakket.punten.map((punt) => (
+          <li key={punt.tekst} className={punt.uit ? "is-uit" : punt.erfenis ? "is-erfenis" : punt.sterk ? "is-sterk" : undefined}>{punt.tekst}</li>
+        ))}
+      </ul>
+      <div className="prijs-voet">
+        <Knop pakket={pakket} />
+      </div>
+    </article>
+  );
+}
+
 // 6 november 2026 (Marinus): "Haal ook na de standaard OS de rest van de pakketten en prijzen weg dat is allemaal op aanvraag en
 // custom namelijk. Maak die pagina mooi zakelijk en stijlvol." Dus alleen het gratis OS met een prijs; Business, Enterprise, de
 // Connect-pakketten, de vergelijkingstabel en de losse prijzen zijn weg. Daaronder drie onderdelen op maat, zonder bedragen, met
@@ -283,8 +316,6 @@ const OP_MAAT = [
   },
 ];
 
-const GRATIS = OS[0];
-
 function Contactkaart({ onderdeel }: { onderdeel: (typeof OP_MAAT)[number] }) {
   const lid = TEAM[onderdeel.contact];
   const binnen = <>
@@ -299,8 +330,6 @@ function Contactkaart({ onderdeel }: { onderdeel: (typeof OP_MAAT)[number] }) {
     ? <button type="button" className="prijs-contact" aria-haspopup="dialog" onClick={() => openPlanCall()}>{binnen}</button>
     : <Link className="prijs-contact" to={`/contact?onderwerp=${encodeURIComponent(onderdeel.onderwerp!)}`}>{binnen}</Link>;
 }
-// Wat er in het gratis OS zit, één keer per punt (eerder overlapten de kaart en de lijst eronder).
-const GRATIS_PUNTEN = ["Nodig 2 mensen uit", "10 GB opslag", "Gratis website en rebranding", "Gratis Studio", "5.000 stockfoto's", "Social media management", "Boekhoudpakket", "Dashboard, CRM en AI agents"];
 
 export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
   useLanguage();
@@ -315,17 +344,19 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
         </Kop>
       </div>
 
-      <section className="prijs-start" aria-labelledby="prijs-os-titel">
-        <div className="prijs-start-links">
-          <p className="h-eyebrow">Het OS</p>
-          <h3 id="prijs-os-titel">Begin gratis met je eigen OS.</h3>
-          <p className="prijs-bedrag"><strong>{GRATIS.prijs}</strong><span>{GRATIS.per}</span></p>
-          <p className="prijs-belofte">{GRATIS.belofte}</p>
-          <Knop pakket={{ ...GRATIS, vlag: "start" }} />
+      {/* 7 november 2026 (Marinus): "wel bij het GRATIS OS de pakketten laten zien". Dus het OS-blok toont weer Gratis, Business en
+          Enterprise naast elkaar; alles daarna (Cybersecurity, ERP & CRM, Growth) blijft op aanvraag. */}
+      <section className="prijs-pakketten prijs-rij prijs-os-pakketten" aria-labelledby="prijs-os-titel">
+        <div className="prijs-pakketten-kop">
+          <div>
+            <p className="h-eyebrow">Het OS</p>
+            <h3 id="prijs-os-titel">Begin gratis met je eigen OS.</h3>
+          </div>
+          <p>Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Bespaar 25% met een jaarabonnement ten opzichte van maandelijks betalen.</p>
         </div>
-        <ul className="prijs-start-punten">
-          {GRATIS_PUNTEN.map((punt) => <li key={punt}>{punt}</li>)}
-        </ul>
+        <div className="prijs-raster prijs-raster-drie">
+          {OS.map((pakket) => <Kaart key={pakket.id} pakket={pakket} />)}
+        </div>
       </section>
 
       <section className="prijs-maat" aria-labelledby="prijs-maat-titel">
@@ -366,7 +397,7 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
           </li>
         ))}
       </ul>
-      <p className="prijs-btw">Het OS is gratis. Voorstellen op maat zijn exclusief btw.</p>
+      <p className="prijs-btw">Alle bedragen zijn exclusief btw. Het gratis OS blijft gratis.</p>
     </div>
   );
 }
