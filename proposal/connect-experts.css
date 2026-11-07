@@ -230,3 +230,10 @@ html:root .sn-site .cx-connect .cx-tak-naam { margin: 0; font-size: 16px; font-w
   .sn-site .cx-tak.is-groot { order: 1; }
 }
 @media (min-width: 1101px) { .sn-site .cx-takken { grid-template-rows: auto 1fr; } .sn-site .cx-tak.is-wealth { align-self: start; } }
+
+/* 7 november 2026 (Marinus): "Graag 1 blok dus", zoals Wealth Management. Eén vakgebied (nu Strategy & guidance) loopt over de
+   volle breedte, met de mensen in twee kolommen en dezelfde kopmaat als de kernonderdelen. */
+.sn-site .cx-org-vakken.is-een { columns: 1; }
+.sn-site .cx-org-vakken.is-een .cx-org-vak { gap: 12px; margin-bottom: 0; }
+.sn-site .cx-org-vakken.is-een .cx-org-vak ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+html:root .sn-site .cx-connect .cx-org-vakken.is-een .cx-org-vaknaam { font-size: 16px; }

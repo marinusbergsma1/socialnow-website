@@ -1,13 +1,15 @@
 /* VijfJaarFilm.tsx en OdooFilm.tsx, 6 november 2026: twee staande films (9:16) in de homepage-hero, op de plek van de teamfoto. De
-   5-jaarfilm is de hoofdvideo en groter; de Odoo Experience-film staat ernaast. Beide hebben een rond geluidsicoon rechtsonder in de
+   5-jaarfilm is de hoofdvideo; de Odoo Experience-film staat ernaast. 7 november 2026 (Marinus): "Odoo Brussels graag even groot
+   als de 5 years", dus beide films zijn nu even breed en even hoog. Beide hebben een rond geluidsicoon rechtsonder in de
    video ("net als bij de andere") en eronder een titel; de onderkanten en titels staan op één lijn, ook op mobiel. Vaste 9:16-lijsten op
    puur zwart, dus geen verschuiving. */
 .sn-hero-films{display:flex;align-items:flex-end;justify-content:center;gap:16px;min-width:0}
 .sn-vijf,.sn-odoo{display:grid;gap:12px;min-width:0}
 .sn-vijf{width:calc(min(560px,66vh) * 9 / 16)}
-.sn-odoo{width:calc(min(560px,66vh) * 9 / 16 * .62)}
+.sn-odoo{width:calc(min(560px,66vh) * 9 / 16)}
+.sn-vijf,.sn-odoo{flex:0 1 auto}
+.sn-odoo-film{border-radius:16px}
 .sn-vijf-film,.sn-odoo-film{position:relative;aspect-ratio:9/16;margin:0;border:1px solid var(--a-lijn,#ffffff1a);border-radius:16px;overflow:hidden;background:#000}
-.sn-odoo-film{border-radius:14px}
 .sn-vijf-film img,.sn-vijf-film video,.sn-odoo-film img,.sn-odoo-film video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;background:#000}
 .sn-vijf-film video,.sn-odoo-film video{opacity:0;transition:opacity .4s ease}
 .sn-vijf-film.speelt video{opacity:1}
@@ -27,8 +29,7 @@ html:root .sn-site .sn-film-titel strong{font-family:'TT Norms',sans-serif!impor
 
 @media(max-width:960px){
   .sn-hero-films{gap:12px;width:min(100%,420px);margin-inline:auto}
-  .sn-vijf{width:auto;flex:1.6 1 0}
-  .sn-odoo{width:auto;flex:1 1 0}
+  .sn-vijf,.sn-odoo{width:auto;flex:1 1 0}
   .sn-film-titel{min-height:52px}
   html:root .sn-site .sn-film-titel strong{font-size:14px}
   .sn-film-titel .sn-alg-klein{font-size:9.5px}
