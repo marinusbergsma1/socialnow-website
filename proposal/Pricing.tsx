@@ -397,7 +397,7 @@ export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
           </li>
         ))}
       </ul>
-      <p className="prijs-btw">Alle bedragen zijn exclusief btw. Het gratis OS blijft gratis.</p>
+      <p className="prijs-btw">Alle bedragen zijn exclusief btw.</p>
     </div>
   );
 }
