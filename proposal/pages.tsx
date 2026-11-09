@@ -22,6 +22,7 @@ import { HomeConnectBand } from "./HomeHeader";
 import HeaderBestaand from "./HeaderBestaand";
 import SamenEnVeilig from "./SamenEnVeilig";
 import FreeWebsite from "./FreeWebsite";
+import CustomerReviews from "./CustomerReviews";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import HomeEnthousiast, { WebsiteCTA } from "./HomeEnthousiast";
 import ExpertsGeloof from "./ExpertsGeloof";
@@ -76,6 +77,7 @@ export function Home() {
     </section>
     <ConnectExperts />
     <FreeWebsite />
+    <CustomerReviews />
     <ImageSliders kort />
     <VideoSlider kort />
     <WebsiteCTA tweede />
