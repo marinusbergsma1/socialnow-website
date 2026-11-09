@@ -1877,7 +1877,7 @@ html {
 }
 .sn-site .h-review-cards {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
   gap: 18px;
 }
 .sn-site .h-review-cards figure {
