@@ -50,6 +50,11 @@
       "permanent": true
     },
     {
+      "source": "/afspraak",
+      "destination": "https://script.google.com/macros/s/AKfycbyqZR6y-lWrbKO-lrkgcwfhH-GAxTlcTrpRHSNy8sI_kSfU2z5A3DTV_CIkhSPBvq2L/exec",
+      "permanent": false
+    },
+    {
       "source": "/prijzen",
       "destination": "/diensten#prijzen",
       "permanent": true

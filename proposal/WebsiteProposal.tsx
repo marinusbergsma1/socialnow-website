@@ -51,7 +51,7 @@ let brandMeta: typeof import("../scripts/brand-meta.mjs").brandMeta | null = nul
 import { MotionProvider } from "./motion";
 import LanguageSwitch from "./LanguageSwitch";
 import { DIENSTEN, DienstenMenu, Kleurwoord, NAV_LINKS, SecurityLink } from "./Producten";
-import { PlanCallHost, openPlanCall } from "./PlanCall";
+import { boekingsPlannerUrl, PlanCallHost } from "./PlanCall";
 import { BelApp } from "./BelApp";
 import { LanguageProvider, LANGUAGES, languagePrefix, type Language, useLanguage } from "./i18n/context";
 const PrivacyPage = later(() => import("../components/PrivacyPage").then((m) => m.default));
@@ -284,10 +284,10 @@ function ProposalShell() {
               <ArrowUpRight size={17} />
             </NavLink>
           ))}
-          <button type="button" className="h-mobile-call" aria-haspopup="dialog" onClick={() => { setMenuOpen(false); openPlanCall(); }}>
+          <a className="h-mobile-call" href={boekingsPlannerUrl} onClick={() => setMenuOpen(false)}>
             Plan een call voor custom OS
             <ArrowUpRight size={17} />
-          </button>
+          </a>
         </nav>
       </header>
       <PlanCallHost />
