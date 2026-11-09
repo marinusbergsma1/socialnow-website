@@ -14,8 +14,15 @@ import "./plan-call.css";
 // sitebreed (WebsiteProposal.tsx), dus #plan-een-call werkt op elke pagina.
 export type CallVoorinvulling = { bedrijf?: string; onderdelen?: string[]; budget?: string; bron?: "os"; ref?: string };
 export const PLAN_CALL_ANKER = "plan-een-call";
+export const boekingsPlannerUrl = "/afspraak";
 const OPEN = "sn-plan-call";
-export function openPlanCall(voor: CallVoorinvulling = {}) { window.dispatchEvent(new CustomEvent<CallVoorinvulling>(OPEN, { detail: voor })); }
+export function openPlanCall(voor: CallVoorinvulling = {}) {
+  if (Object.keys(voor).length === 0) {
+    window.location.assign(boekingsPlannerUrl);
+    return;
+  }
+  window.dispatchEvent(new CustomEvent<CallVoorinvulling>(OPEN, { detail: voor }));
+}
 
 const Paneel = later(() => import("./PlanCallPaneel").then((m) => m.default));
 
@@ -34,7 +41,7 @@ const vanuitAdres = (zoek: URLSearchParams, hash: string) =>
   hash === `#${PLAN_CALL_ANKER}` || zoek.get("call") === "custom-os" || zoek.get("onderwerp") === "custom-os";
 
 export function PlanCallKnop({ className = "pill", label = "Plan een call voor custom OS" }: { className?: string; label?: string }) {
-  return <button type="button" className={className} aria-haspopup="dialog" onClick={() => openPlanCall()}><span>{label}</span><span className="arrow"><ArrowUpRight size={17} /></span></button>;
+  return <a className={className} href={boekingsPlannerUrl}><span>{label}</span><span className="arrow"><ArrowUpRight size={17} /></span></a>;
 }
 
 export function PlanCallHost() {
