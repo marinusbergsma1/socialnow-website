@@ -278,6 +278,17 @@ export const allProjects: Project[] = [
       { label: "Oppervlakte", value: "400m\u00B2", color: "#F7E644" },
       { label: "Materialen", value: "15+", color: "#00A3E0" }
     ]
+  },
+  {
+    id: 15,
+    slug: "light-art-collection",
+    title: "Light Art Collection",
+    category: "Presentatieontwerp en visualisatie",
+    client: "Light Art Collection",
+    services: ["Presentatieontwerp", "Artist impressions"],
+    description: "Marinus en zijn team ontwierpen internationale presentaties voor Light Art Collection. Met artist impressions maakten ze ook zichtbaar hoe lichtkunstinstallaties eruitzien op locatie.",
+    image: `${import.meta.env.BASE_URL}images/Light-Art-Collection.webp`,
+    align: 'right',
   }
 ];
 

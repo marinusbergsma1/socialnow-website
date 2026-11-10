@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 // Een dieptekaart (scripts/maak-dieptekaart.mjs, licht = dichtbij) laat voorgrond en achtergrond tegen elkaar in bewegen als je de
 // muis beweegt; op touch beweegt het rustig vanzelf. Het canvas ligt over de gewone <img> (alt-tekst en terugval) en neemt die pas
 // over als alles geladen is. Niets bij prefers-reduced-motion of zonder WebGL. Buiten beeld staat de animatie stil.
-type Props = { src: string; diepte: string; positie?: [number, number]; sterkte?: number };
+type Props = { src: string; diepte: string; positie?: [number, number]; sterkte?: number; actief?: boolean };
 
 const VS = `attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;v.y=1.-v.y;gl_Position=vec4(p,0.,1.);}`;
 // Cover-passing zoals object-fit: cover met object-position, iets ingezoomd zodat de randen nooit leeg trekken. De verschuiving
@@ -18,8 +18,16 @@ function laad(src: string) {
   return new Promise<HTMLImageElement>((ok, nee) => { const i = new Image(); i.decoding = "async"; i.onload = () => ok(i); i.onerror = nee; i.src = src; });
 }
 
-export default function Diepte3D({ src, diepte, positie = [0.5, 0.6], sterkte = 0.028 }: Props) {
+export default function Diepte3D({ src, diepte, positie = [0.5, 0.6], sterkte = 0.028, actief = true }: Props) {
   const doek = useRef<HTMLCanvasElement>(null);
+  const wisselActiviteit = useRef<(actief: boolean) => void>(() => {});
+  const actiefRef = useRef(actief);
+
+  useEffect(() => {
+    actiefRef.current = actief;
+    wisselActiviteit.current(actief);
+  }, [actief]);
+
   useEffect(() => {
     const c = doek.current;
     if (!c || typeof window === "undefined") return;
@@ -69,7 +77,7 @@ export default function Diepte3D({ src, diepte, positie = [0.5, 0.6], sterkte = 
     };
     const teken = (t: number) => {
       raf = 0;
-      if (weg || !zichtbaar) return;
+      if (weg || !zichtbaar || !actiefRef.current) return;
       if (vanzelf) { doel.x = Math.sin(t / 2600) * 0.7; doel.y = Math.cos(t / 3400) * 0.45; }
       nu.x += (doel.x - nu.x) * 0.06; nu.y += (doel.y - nu.y) * 0.06;
       maat();
@@ -77,7 +85,11 @@ export default function Diepte3D({ src, diepte, positie = [0.5, 0.6], sterkte = 
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       raf = requestAnimationFrame(teken);
     };
-    const start = () => { if (!raf && zichtbaar && foto) raf = requestAnimationFrame(teken); };
+    const start = () => { if (!raf && zichtbaar && foto && actiefRef.current) raf = requestAnimationFrame(teken); };
+    wisselActiviteit.current = aan => {
+      if (aan) start();
+      else if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    };
     const muis = (e: PointerEvent) => {
       const b = figuur.getBoundingClientRect();
       doel.x = Math.max(-1, Math.min(1, ((e.clientX - (b.left + b.width / 2)) / (b.width / 2)) * 0.8));
@@ -103,6 +115,7 @@ export default function Diepte3D({ src, diepte, positie = [0.5, 0.6], sterkte = 
 
     return () => {
       weg = true;
+      wisselActiviteit.current = () => {};
       if (raf) cancelAnimationFrame(raf);
       io.disconnect();
       window.removeEventListener("pointermove", muis);

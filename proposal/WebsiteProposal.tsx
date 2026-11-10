@@ -236,8 +236,8 @@ function ProposalShell() {
             ))}
           </nav>
           <LanguageSwitch />
-          <a className="sn-pill h-header-claim" href={boekingsPlannerUrl}>
-            <span>Plan een call in</span>
+          <a className="sn-pill sn-pill-blauw h-header-claim" href={boekingsPlannerUrl}>
+            <span>Plan een call</span>
             <ArrowUpRight size={15} aria-hidden="true" />
           </a>
           <button
@@ -281,7 +281,7 @@ function ProposalShell() {
             </NavLink>
           ))}
           <a className="h-mobile-call" href={boekingsPlannerUrl} onClick={() => setMenuOpen(false)}>
-            Plan een call voor custom OS
+            Plan een call
             <ArrowUpRight size={17} />
           </a>
         </nav>

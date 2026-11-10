@@ -40,8 +40,8 @@ function uitAdres(zoek: URLSearchParams): CallVoorinvulling {
 const vanuitAdres = (zoek: URLSearchParams, hash: string) =>
   hash === `#${PLAN_CALL_ANKER}` || zoek.get("call") === "custom-os" || zoek.get("onderwerp") === "custom-os";
 
-export function PlanCallKnop({ className = "pill", label = "Plan een call voor custom OS" }: { className?: string; label?: string }) {
-  return <a className={className} href={boekingsPlannerUrl}><span>{label}</span><span className="arrow"><ArrowUpRight size={17} /></span></a>;
+export function PlanCallKnop({ className = "sn-pill sn-pill-blauw", label = "Plan een call voor custom OS" }: { className?: string; label?: string }) {
+  return <a className={className} href={boekingsPlannerUrl}><span>{label}</span><ArrowUpRight size={17} aria-hidden="true" /></a>;
 }
 
 export function PlanCallHost() {

@@ -2,8 +2,6 @@
 .sn-site .sn-choice .showcase .os-custom-call{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:14px;padding-top:14px;border-top:1px solid #ffffff14}
 .sn-site .sn-choice .showcase .os-custom-call>p{margin:0;font-size:14px;line-height:1.45;color:#afc0b6}
 .sn-site .sn-choice .showcase .os-custom-call>p strong{color:#fff;font-weight:700}
-.sn-site .sn-choice .showcase .os-custom-call .pill{width:max-content;min-width:0;max-width:100%;gap:16px;border-color:#25d36699}
-.sn-site .sn-choice .showcase .os-custom-call .pill>span:not(.arrow){position:relative;z-index:1}
 @media(max-width:760px){.sn-site .sn-choice .showcase .os-custom-call{gap:10px}}
 
 /* Het paneel: een modale dialoog, op mobiel een vel over het hele scherm. */
