@@ -126,6 +126,34 @@ teller++;
 console.error = fouterror;
 
 // 6. De pagina: huidige gegevens als standaard, gastheer uit het antwoord, v= naar de API
+
+// Testomgeving (10 november 2026): alleen buiten productie mogen de adressen naar een testversie wijzen.
+{
+  const testPlanner = "https://script.google.com/macros/s/AKfycb_PROEF-testversie_0123456789/exec";
+  const testSales = "https://sales-terminal-test.vercel.app";
+  const slots = async () => ({ status: "available", slots: [] });
+  const oud = { ...process.env };
+  Object.assign(process.env, { VERCEL_ENV: "preview", TEST_PLANNER_URL: testPlanner, TEST_SALES_URL: testSales });
+  teller++;
+  const preview = await verzoek({ operation: "slots" }, { planner: slots });
+  eis(preview.verzoeken[0]?.url === testPlanner, "op een preview gaat de planner-aanvraag naar TEST_PLANNER_URL");
+  teller++;
+  const ticket = await verzoek({ operation: "slots", mailTicket: "a".repeat(55) },
+    { sales: async () => Response.json({ status: "available", slots: [] }) });
+  eis(ticket.verzoeken[0]?.url === testSales + "/api/signalflow-agenda-web", "en de persoonlijke link naar TEST_SALES_URL");
+  process.env.VERCEL_ENV = "production";
+  teller++;
+  const live = await verzoek({ operation: "slots" }, { planner: slots });
+  eis(live.verzoeken[0]?.url !== testPlanner && plannerUrl.test(live.verzoeken[0]?.url || ""), "in productie tellen de testadressen niet");
+  process.env.VERCEL_ENV = "preview";
+  process.env.TEST_PLANNER_URL = "https://evil.example/exec";
+  process.env.TEST_SALES_URL = "http://sales-terminal-test.vercel.app";
+  teller++;
+  const fout = await verzoek({ operation: "slots" }, { planner: slots });
+  eis(fout.verzoeken[0]?.url !== "https://evil.example/exec" && plannerUrl.test(fout.verzoeken[0]?.url || ""), "een adres buiten script.google.com wordt genegeerd");
+  for (const k of ["VERCEL_ENV", "TEST_PLANNER_URL", "TEST_SALES_URL"]) { if (k in oud) process.env[k] = oud[k]; else delete process.env[k]; }
+}
+
 const html = lees("public/afspraak/index.html");
 eis(html.includes('src="/images/klein/marinus-profiel-blauw-320.webp" alt="Marinus Bergsma"') &&
   html.includes('href="tel:+31637404577"') && html.includes('href="https://wa.me/31637404577"') &&
