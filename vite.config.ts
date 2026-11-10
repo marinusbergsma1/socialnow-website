@@ -5,6 +5,16 @@ import react from "@vitejs/plugin-react";
 import { startVastiqPreview } from "./scripts/vastiq-preview.mjs";
 import woordenboekSplit from "./scripts/woordenboek-split.mjs";
 
+function koppelAfspraak({ middlewares }: { middlewares: import("vite").Connect.Server }) {
+  middlewares.use((req, _res, next) => {
+    const url = req.url ?? "";
+    if (/^\/afspraak\/?(?:\?|$)/.test(url)) {
+      req.url = url.replace(/^\/afspraak\/?/, "/afspraak/index.html");
+    }
+    next();
+  });
+}
+
 export default defineConfig({
   base: "/",
   server: {
@@ -29,7 +39,7 @@ export default defineConfig({
     // Zonder dit gaf een lokale preview HTML terug op /api/php-check en zag de bezoeker "De check lukte niet".
     (() => {
       const koppel = (middlewares: { use: (pad: string, fn: (req: any, res: any) => void) => void }) => {
-        for (const naam of ["php-check", "check-aanvraag", "check-rapport"]) {
+        for (const naam of ["php-check", "check-aanvraag", "check-rapport", "afspraak"]) {
           middlewares.use(`/api/${naam}`, async (req, res) => {
             const stukken: Buffer[] = [];
             for await (const s of req) stukken.push(s as Buffer);
@@ -45,6 +55,11 @@ export default defineConfig({
       };
       return { name: "local-check-api", configureServer: (server: any) => koppel(server.middlewares), configurePreviewServer: (server: any) => koppel(server.middlewares) };
     })(),
+    {
+      name: "socialnow-local-afspraak",
+      configureServer: koppelAfspraak,
+      configurePreviewServer: koppelAfspraak,
+    },
     {
       name: "socialnow-preview-routes",
       configureServer(server) {

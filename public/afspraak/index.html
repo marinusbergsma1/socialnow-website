@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan een kennismaking met Marinus | SocialNow</title>
+<meta name="referrer" content="no-referrer">
+<style>
+:root{color-scheme:light;--ink:#172c40;--muted:#506278;--accent:#1760cc;--line:#dce4ed;--pale:#edf5ff}
+*{box-sizing:border-box}
+body{display:grid;grid-template-rows:minmax(min-content,1fr) auto;place-items:center;position:relative;min-height:100vh;margin:0;background:#fff;color:var(--ink);font:16px/1.45 "Avenir Next",Avenir,sans-serif}
+.brand-globes{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.brand-globe{position:absolute;width:clamp(260px,37vw,550px);height:auto}
+.globe-top{right:-105px;top:-115px}
+.globe-bottom{left:-110px;bottom:-125px;transform:rotate(26deg)}
+.planner-shell{position:relative;isolation:isolate;width:min(960px,calc(100% - 32px));margin:24px auto}
+main{position:relative;display:grid;grid-template-columns:300px minmax(0,1fr);background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 42px #1c477218;overflow:hidden;z-index:1}
+header{padding:30px 27px;border-right:1px solid var(--line)}
+.portrait{display:block;width:116px;height:116px;object-fit:cover;border-radius:6px;margin:0 0 13px}
+.kicker{margin:0;color:var(--muted);font-size:14px;font-weight:700}
+h1{font-size:29px;line-height:1.15;letter-spacing:-.035em;margin:7px 0 18px}
+.meta{display:grid;gap:8px;color:var(--muted);font-size:14px;margin:0}
+.meta span{display:flex;align-items:center;gap:8px}
+.meta svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6}
+.contact{display:grid;gap:5px;margin:17px 0 0;padding:0;font-size:14px;font-style:normal}
+.contact a{width:fit-content;color:var(--accent);text-underline-offset:3px}
+.intro{color:var(--muted);font-size:14px;margin:17px 0 0}
+.booking-panel{position:relative;padding:28px 26px;min-width:0}
+.booking-progress{display:none;position:absolute;inset:0 auto auto 0;width:66.6667%;height:1px;background:#168a42;pointer-events:none}
+.booking-panel:has(#booking:not([hidden]) #guest-step:not([hidden])) .booking-progress{display:block}
+h2{margin:0 0 15px;font-size:22px;letter-spacing:-.025em}
+fieldset{border:0;padding:0;margin:0 0 20px;min-width:0}
+legend{padding:0;margin:0 0 9px;font-size:16px;font-weight:700}
+.schedule{display:grid;grid-template-columns:minmax(180px,1fr) minmax(145px,.62fr);gap:18px}
+.monthbar{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:9px}
+.monthbar strong{text-transform:capitalize;font-size:15px}
+.monthbar button{display:grid;place-items:center;width:32px;height:32px;padding:0;border:0;border-radius:50%;background:var(--pale);color:var(--accent);font-size:20px}
+.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center}
+.weekday{padding:4px 0;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase}
+.calendar button{width:100%;aspect-ratio:1;padding:0;border:0;border-radius:50%;background:var(--pale);color:var(--accent);font-size:13px}
+.calendar button:disabled{background:transparent;color:#707f90;opacity:1}
+.calendar button[aria-pressed=true]{background:var(--accent);color:white}
+.time-heading{font-size:14px;font-weight:700;margin:6px 0 10px}
+.options{display:grid;gap:6px}
+.option{display:flex;position:relative;align-items:center;justify-content:center;min-height:41px;border:1px solid #a5c5f2;border-radius:5px;color:var(--accent);font-size:14px;font-weight:700;cursor:pointer}
+button.option{background:#fff}
+.option[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.details label{display:grid;gap:5px;font-size:14px;font-weight:700}
+.details input,.details textarea{width:100%;padding:10px;border:1px solid #b9c8d7;border-radius:5px;background:#fff;font:inherit}
+.details textarea{min-height:85px;resize:vertical}
+.details .wide{grid-column:1/-1}
+.details label small{font-size:12px;color:var(--muted);font-weight:400}
+.step-summary{margin:0 0 17px;padding:9px 12px;border-radius:5px;background:var(--pale);font-size:14px;color:var(--ink)}
+.guest-welcome{margin:0 0 4px;color:var(--muted);font-size:12px;font-weight:700}
+#guest-step .controls{margin-top:16px}
+#guest-title:focus,#date-title:focus{outline:none}
+button,.action{display:inline-block;border:0;border-radius:5px;background:var(--accent);color:#fff;font:inherit;font-weight:700;padding:9px 14px;cursor:pointer;text-decoration:none}
+button:disabled{opacity:.45;cursor:default}
+button.secondary{background:#fff;color:var(--accent);border:1px solid var(--line);font-size:14px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.controls{display:flex;gap:8px;flex-wrap:wrap}
+#status{margin:12px 0 0;color:var(--muted)}
+#status[data-error]{color:#8c3128}
+#done{display:grid;min-height:340px;align-content:center;position:relative;text-align:left;padding:22px 0 0}
+body:has(#done:not([hidden])) header .intro{display:none}
+.booking-panel:has(#done:not([hidden])){position:relative;display:grid;align-items:center}
+.website-shortcut{display:inline-flex;gap:4px;align-items:center;justify-self:end;position:absolute;top:-10px;right:0;font-size:13px;font-weight:600;color:var(--accent)}
+.website-shortcut svg,.arrow{width:12px;height:12px;flex:none}
+.confirmation-body{width:min(100%,455px);margin:0}
+.confirmation-logo{display:block;width:150px;height:auto;margin:0 0 15px;padding:7px 10px;border-radius:7px;background:#080c10;translate:0 -6px}
+.booking-card{padding:13px 16px;margin:0 0 13px;border:1px solid #c8e3d0;border-left:3px solid #40946b;border-radius:7px;background:#edf8f0}
+#booked-date{font-size:19px;font-weight:700;margin:0 0 8px}
+#booked-date::first-letter{text-transform:uppercase}
+.booking-details{margin:0}
+.booking-details div{display:flex;gap:12px}
+.booking-details dt{flex:0 0 72px;color:var(--muted)}
+.booking-details dd{margin:0;font-weight:600}
+.booking-details a{color:var(--accent)}
+#invite-status{color:var(--muted);margin:0 0 13px}
+.site{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;text-decoration:none;padding:9px 13px;border:1px solid var(--line);border-radius:5px}
+.actions{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px}
+.calendar-action-group{display:grid;gap:6px;max-width:100%}
+.calendar-action{max-width:100%}
+#calendar-direct[hidden]{display:none}
+.calendar-action-group[data-mobile] summary{
+  padding:4px 0;border-color:transparent;background:transparent;color:var(--accent);font-size:12px
+}
+.calendar-action-group[data-mobile] summary .arrow{width:9px;height:9px}
+.calendar-action summary{cursor:pointer;list-style:none}
+.calendar-action summary::-webkit-details-marker{display:none}
+.calendar-action .arrow{rotate:90deg}
+.calendar-action[open] .arrow{rotate:-90deg}
+.calendar-drawer{display:grid;grid-template-rows:1fr;contain:inline-size}
+.calendar-drawer-content{min-height:0;overflow:hidden}
+.calendar-services{
+  display:grid;gap:2px;margin-top:7px;padding:4px;
+  border:1px solid var(--line);border-radius:6px;background:#fff;
+}
+.calendar-services a:focus-visible{outline-offset:-2px}
+@media(prefers-reduced-motion:no-preference){
+  .calendar-action[open] .calendar-drawer{animation:calendar-unfold .44s cubic-bezier(.2,.65,.25,1) both}
+}
+@keyframes calendar-unfold{from{grid-template-rows:0fr;opacity:0}to{grid-template-rows:1fr;opacity:1}}
+.calendar-services a{padding:6px 9px;border-radius:4px;color:var(--ink);font-size:13px;text-decoration:none}
+.calendar-services a:hover{background:#edf5ff;color:var(--accent)}
+.site{background:var(--accent);border-color:var(--accent);color:#fff}
+.whatsapp{display:inline-flex;background:#00844b;border-color:#00844b;color:#fff}
+.whatsapp-icon{width:18px;height:18px;flex:none;filter:brightness(0) invert(1)}
+
+.confetti{position:absolute;z-index:0;inset:0;pointer-events:none}
+.confetti i{position:absolute;left:var(--x);top:var(--y);width:var(--size);height:var(--height);border-radius:var(--radius);background:var(--color);opacity:0}
+.calendar .unavailable{text-decoration:line-through;text-decoration-color:#8493a5}
+.calendar-skeleton{margin-top:14px}
+.calendar-skeleton .calendar span{display:block;aspect-ratio:1;border-radius:50%;margin:5px;background:#edf2f7}
+.calendar-skeleton .option{border-color:transparent;background:#edf2f7}
+.calendar-skeleton .monthbar span{height:13px;width:45%;border-radius:6px;background:#edf2f7;margin:9px auto}
+.calendar-skeleton .options{margin-top:31px}
+@media(prefers-reduced-motion:no-preference){
+  .calendar button,.calendar-skeleton .calendar span{animation:slot-arrival .32s ease-out var(--enter,0ms) both}
+  .options .option{animation:slot-arrival .3s ease-out var(--enter,0ms) both}
+  #guest-step > :is(.guest-welcome, h2, .step-summary, .details, .controls){
+    animation:guest-arrival .52s cubic-bezier(.22,.7,.3,1) var(--guest-delay,0ms) backwards
+  }
+  #guest-step h2{--guest-delay:35ms}
+  #guest-step .step-summary{--guest-delay:75ms}
+  #guest-step .details{--guest-delay:120ms}
+  #guest-step .controls{--guest-delay:165ms}
+  .booking-progress{animation:guest-progress-in .42s ease-out backwards}
+  .planner-shell.is-confirmed header > *{animation:confirmed-in .72s ease-in-out var(--arrival,0ms) both;--from:-32px}
+  .planner-shell.is-confirmed :is(.confirmation-body > *, .website-shortcut){animation:confirmed-in .72s ease-in-out var(--arrival,0ms) both;--from:32px}
+  .planner-shell.is-confirmed :is(.kicker,.confirmation-logo){--arrival:65ms}
+  .planner-shell.is-confirmed :is(h1,.booking-card){--arrival:125ms}
+  .planner-shell.is-confirmed :is(.meta,#invite-status){--arrival:185ms}
+  .planner-shell.is-confirmed :is(.contact,.actions,.website-shortcut){--arrival:245ms}
+  .confetti i{animation:confetti-pop var(--flight) var(--launch) cubic-bezier(.16,.76,.26,1) 1 both}
+  .website-shortcut .arrow{animation:arrow-bounce .5s .86s ease-out both}
+}
+@keyframes slot-arrival{from{opacity:0;translate:-4px -5px}to{opacity:1;translate:0 0}}
+@keyframes guest-arrival{from{opacity:0;translate:0 8px}to{opacity:1;translate:none}}
+@keyframes guest-progress-in{from{opacity:0}to{opacity:1}}
+@keyframes confirmed-in{from{opacity:0;transform:translateX(var(--from));filter:blur(5px) brightness(var(--brightness,1))}to{opacity:1;transform:none;filter:blur(0) brightness(var(--brightness,1))}}
+@keyframes confetti-pop{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.45)}
+  18%{opacity:1;transform:translate(calc(-50% + var(--dx) * .66),calc(-50% + var(--dy) * .66)) rotate(45deg)}
+  62%{opacity:1}
+  to{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--spin))}
+}
+@keyframes arrow-bounce{0%,100%{transform:translateX(0)}43%{transform:translateX(4px)}72%{transform:translateX(-1px)}}
+@media(max-width:430px){#done{padding-top:31px;min-height:0}.website-shortcut{top:0}}
+.trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.credit{position:relative;display:flex;justify-content:center;padding:0 0 17px}
+.credit a{display:inline-flex;align-items:center;gap:6px;color:#24262b;font-size:12px;font-weight:600;text-decoration:none}
+.credit img{display:block;height:22px;width:auto;padding:4px 6px;border-radius:4px;background:#080c10}
+[hidden]{display:none!important}
+@media(max-width:760px){.planner-shell{max-width:530px}main{grid-template-columns:1fr}header{border-right:0;border-bottom:1px solid var(--line)}header,.booking-panel{padding:21px}}
+@media(max-width:430px){.schedule,.details{grid-template-columns:1fr}.calendar button{max-height:38px}.options{grid-template-columns:1fr 1fr}.booking-details dt{flex-basis:60px}}
+</style>
+</head>
+<body>
+<div class="brand-globes" aria-hidden="true">
+  <canvas class="brand-globe globe-top" width="550" height="550"></canvas>
+  <canvas class="brand-globe globe-bottom" width="550" height="550"></canvas>
+</div>
+<div class="planner-shell">
+<div class="confetti" aria-hidden="true"></div>
+<main>
+  <header>
+    <img class="portrait" src="/images/klein/marinus-profiel-blauw-320.webp" alt="Marinus Bergsma" width="116" height="116">
+    <p class="kicker">Marinus Bergsma · SocialNow</p>
+    <h1>Kennismaking</h1>
+    <p class="meta">
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>30 minuten</span>
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg>Google Meet</span>
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg>Nederlandse tijd</span>
+    </p>
+    <address class="contact">
+      <a href="mailto:info@socialnow.nl">info@socialnow.nl</a>
+      <a href="tel:+31637404577">06 37 40 45 77</a>
+    </address>
+    <p class="intro">U ontvangt de agenda-uitnodiging met Meet-link per e-mail.</p>
+  </header>
+  <div class="booking-panel">
+  <div class="booking-progress" aria-hidden="true"></div>
+  <form id="booking" autocomplete="on">
+    <input type="hidden" name="token">
+    <div id="date-step">
+    <h2 id="date-title" tabindex="-1">Datum en tijd</h2>
+    <div class="schedule calendar-skeleton" id="calendar-skeleton" aria-hidden="true">
+      <div><div class="monthbar"><span></span></div><div class="calendar"></div></div>
+      <div class="options"><div class="option"></div><div class="option"></div><div class="option"></div></div>
+    </div>
+    <fieldset id="schedule" hidden>
+      <div class="schedule">
+        <div>
+          <div class="monthbar">
+            <button id="previous" type="button" aria-label="Vorige maand">‹</button>
+            <strong id="month-label"></strong>
+            <button id="next" type="button" aria-label="Volgende maand">›</button>
+          </div>
+          <div id="calendar" class="calendar" aria-label="Beschikbare datums"></div>
+        </div>
+        <div>
+          <p id="selected-day" class="time-heading" aria-live="polite"></p>
+          <div class="options" id="options" aria-labelledby="selected-day"></div>
+        </div>
+      </div>
+    </fieldset>
+    <div class="controls">
+      <button id="refresh" class="secondary" type="button" hidden>Opnieuw proberen</button>
+    </div>
+    </div>
+    <fieldset id="guest-step" hidden disabled>
+      <p class="guest-welcome">Ik kijk ernaar uit!</p>
+      <h2 id="guest-title" tabindex="-1">Wat zijn uw gegevens?</h2>
+      <p id="step-summary" class="step-summary"></p>
+      <div class="details">
+        <label>Voornaam <input name="firstName" required autocomplete="section-booking given-name" maxlength="100"></label>
+        <label>Achternaam <input name="lastName" required autocomplete="section-booking family-name" maxlength="100"></label>
+        <label class="wide">E-mailadres <input name="email" type="email" required autocomplete="section-booking email" maxlength="254"></label>
+        <label class="wide">Bedrijf <input name="company" required autocomplete="section-booking organization" maxlength="100"></label>
+        <label class="wide"><span>Opmerking of vraag <small>(optioneel)</small></span><textarea name="note" maxlength="500" rows="3"></textarea></label>
+      </div>
+      <label class="trap" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+      <div class="controls">
+        <button id="back" class="secondary" type="button">Terug</button>
+        <button id="submit" type="submit">Afspraak plannen</button>
+      </div>
+    </fieldset>
+  </form>
+  <p id="status" role="status" aria-live="polite"></p>
+  <section id="done" tabindex="-1" aria-label="Afspraakbevestiging" hidden>
+    <a class="website-shortcut" href="https://socialnow.nl/nl/" target="_blank" rel="noopener">Bezoek onze website <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 2 4 4-4 4"/></svg></a>
+    <div class="confirmation-body">
+      <img class="confirmation-logo" src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="719" height="132">
+      <div class="booking-card">
+        <p id="booked-date"></p>
+        <dl class="booking-details" aria-label="Afspraakgegevens">
+          <div><dt>Tijd</dt><dd id="booked-time"></dd></div>
+          <div><dt>Gesprek</dt><dd>Kennismaking met Marinus Bergsma</dd></div>
+          <div><dt>Locatie</dt><dd><span id="location-label">Google Meet</span><a id="meeting" target="_blank" rel="noopener noreferrer" hidden>Google Meet openen</a></dd></div>
+        </dl>
+      </div>
+      <p id="invite-status">We kijken ernaar uit!</p>
+            <div class="actions">
+              <div class="calendar-action-group">
+                <a class="site" id="calendar-direct" hidden>Zet in je agenda</a>
+                <details class="calendar-action">
+                  <summary class="site"><span class="calendar-label">Zet in je agenda</span> <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 2 4 4-4 4"/></svg></summary>
+                  <div class="calendar-drawer">
+                    <div class="calendar-drawer-content">
+                      <div class="calendar-services">
+                        <a id="calendar-google" target="_blank" rel="noopener">Google Agenda</a>
+                        <a id="calendar-outlook" target="_blank" rel="noopener">Outlook</a>
+                        <a id="calendar-ics" download="socialnow-kennismaking.ics">Apple Agenda / .ics</a>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+              </div>
+              <a class="site whatsapp" href="https://wa.me/31637404577" target="_blank" rel="noopener" aria-label="Even appen via WhatsApp">
+                <img class="whatsapp-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYwIiBoZWlnaHQ9IjM2MiIgdmlld0JveD0iMCAwIDM2MCAzNjIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMzA3LjU0NiA1Mi41NjU1QzI3My43MDkgMTguNjg1IDIyOC43MDYgMC4wMTcxODk1IDE4MC43NTYgMEM4MS45NTEgMCAxLjUzODQ2IDgwLjQwNCAxLjUwNDA4IDE3OS4yMzVDMS40ODY4OSAyMTAuODI5IDkuNzQ2NDYgMjQxLjY2NyAyNS40MzE5IDI2OC44NDRMMCAzNjEuNzM2TDk1LjAyMzYgMzM2LjgxMUMxMjEuMjAzIDM1MS4wOTYgMTUwLjY4MyAzNTguNjE2IDE4MC42NzkgMzU4LjYyNUgxODAuNzU2QzI3OS41NDQgMzU4LjYyNSAzNTkuOTY2IDI3OC4yMTIgMzYwIDE3OS4zODFDMzYwLjAxNyAxMzEuNDgzIDM0MS4zOTIgODYuNDU0NyAzMDcuNTQ2IDUyLjU3NDFWNTIuNTY1NVpNMTgwLjc1NiAzMjguMzU0SDE4MC42OTZDMTUzLjk2NiAzMjguMzQ2IDEyNy43NDQgMzIxLjE2IDEwNC44NjUgMzA3LjU4OUw5OS40MjQyIDMwNC4zNThMNDMuMDM0IDMxOS4xNDlMNTguMDgzNCAyNjQuMTY4TDU0LjU0MjMgMjU4LjUzQzM5LjYzMDQgMjM0LjgwOSAzMS43NDkgMjA3LjM5MSAzMS43NjYyIDE3OS4yNDRDMzEuODAwNiA5Ny4xMDM2IDk4LjYzMzQgMzAuMjcwNyAxODAuODE3IDMwLjI3MDdDMjIwLjYxIDMwLjI4NzkgMjU4LjAxNSA0NS44MDE1IDI4Ni4xNDUgNzMuOTY2NUMzMTQuMjc2IDEwMi4xMjMgMzI5Ljc1NSAxMzkuNTYyIDMyOS43MzggMTc5LjM2NEMzMjkuNzAzIDI2MS41MTMgMjYyLjg3MSAzMjguMzQ2IDE4MC43NTYgMzI4LjM0NlYzMjguMzU0Wk0yNjIuNDc1IDIxNi43NzdDMjU3Ljk5NyAyMTQuNTM0IDIzNS45NzggMjAzLjcwNCAyMzEuODY5IDIwMi4yMDlDMjI3Ljc2MSAyMDAuNzEzIDIyNC43NzkgMTk5Ljk2NiAyMjEuNzk2IDIwNC40NTJDMjE4LjgxNCAyMDguOTM5IDIxMC4yMjggMjE5LjAyOSAyMDcuNjE1IDIyMi4wMTFDMjA1LjAwMiAyMjUuMDAyIDIwMi4zODkgMjI1LjM3MiAxOTcuOTExIDIyMy4xMjhDMTkzLjQzNCAyMjAuODg1IDE3OS4wMDMgMjE2LjE1OCAxNjEuODkxIDIwMC45MDJDMTQ4LjU3OCAxODkuMDI0IDEzOS41ODcgMTc0LjM2MiAxMzYuOTc1IDE2OS44NzVDMTM0LjM2MiAxNjUuMzg5IDEzNi43IDE2Mi45NjUgMTM4LjkzNCAxNjAuNzM5QzE0MC45NDUgMTU4LjcyOCAxNDMuNDEyIDE1NS41MDUgMTQ1LjY1NSAxNTIuODkyQzE0Ny44OTkgMTUwLjI3OSAxNDguNjM4IDE0OC40MDYgMTUwLjEzMyAxNDUuNDIzQzE1MS42MjkgMTQyLjQzMiAxNTAuODgxIDEzOS44MiAxNDkuNzY0IDEzNy41NzZDMTQ4LjY0NiAxMzUuMzMzIDEzOS42OTEgMTEzLjI4NyAxMzUuOTUyIDEwNC4zMjNDMTMyLjMxNiA5NS41OTA5IDEyOC42MjEgOTYuNzc3IDEyNS44NzkgOTYuNjMwOUMxMjMuMjY2IDk2LjUwMTkgMTIwLjI4NCA5Ni40NzYyIDExNy4yOTMgOTYuNDc2MkMxMTQuMzAyIDk2LjQ3NjIgMTA5LjQ1NCA5Ny41OTM1IDEwNS4zNDYgMTAyLjA4QzEwMS4yMzggMTA2LjU2NiA4OS42NjkxIDExNy40MDQgODkuNjY5MSAxMzkuNDQxQzg5LjY2OTEgMTYxLjQ3OCAxMDUuNzE2IDE4Mi43ODUgMTA3Ljk1OSAxODUuNzc2QzExMC4yMDIgMTg4Ljc2NyAxMzkuNTQ0IDIzNC4wMDEgMTg0LjQ2OSAyNTMuNDA4QzE5NS4xNTMgMjU4LjAyMyAyMDMuNDk4IDI2MC43ODIgMjEwLjAwNCAyNjIuODQ1QzIyMC43MzEgMjY2LjI1NyAyMzAuNDk0IDI2NS43NzYgMjM4LjIxMiAyNjQuNjI0QzI0Ni44MTYgMjYzLjMzNSAyNjQuNzEgMjUzLjc4NiAyNjguNDQgMjQzLjMyNkMyNzIuMTcgMjMyLjg2NiAyNzIuMTcgMjIzLjg5MyAyNzEuMDUzIDIyMi4wMjhDMjY5LjkzNiAyMjAuMTYzIDI2Ni45NDUgMjE5LjAzNyAyNjIuNDY3IDIxNi43OTRMMjYyLjQ3NSAyMTYuNzc3WiIgZmlsbD0iIzI1RDM2NiIvPgo8L3N2Zz4K" alt="" width="16" height="16">
+                Even appen?
+              </a>
+            </div>
+    </div>
+  </section>
+  </div>
+</main>
+</div>
+<footer class="credit">
+  <a href="https://socialnow.nl/" target="_blank" rel="noopener noreferrer">
+    <span lang="en">Made by</span>
+    <img src="/images/SocialNow-Logo-2026.webp" alt="SocialNow">
+  </a>
+</footer>
+<script>
+const form = document.querySelector('#booking');
+const options = document.querySelector('#options');
+const dateStep = document.querySelector('#date-step');
+const guestStep = document.querySelector('#guest-step');
+const bookingToken = form.elements.token;
+const backButton = document.querySelector('#back');
+const status = document.querySelector('#status');
+const submit = document.querySelector('#submit');
+const refresh = document.querySelector('#refresh');
+const done = document.querySelector('#done');
+const meeting = document.querySelector('#meeting');
+const timeZone = 'Europe/Amsterdam';
+const dateFormat = new Intl.DateTimeFormat('nl-NL', {weekday:'long', day:'numeric', month:'long', timeZone});
+const bookedDateFormat = new Intl.DateTimeFormat('nl-NL', {weekday:'long', day:'numeric', month:'long', year:'numeric', timeZone});
+const timeFormat = new Intl.DateTimeFormat('nl-NL', {hour:'2-digit', minute:'2-digit', hourCycle:'h23', timeZone});
+
+function setStatus(text, error = false) {
+  status.textContent = text;
+  status.toggleAttribute('data-error', error);
+}
+
+const confetti = document.querySelector('.confetti');
+const colors = ['#1760cc', '#00a3e0', '#16a764', '#ffab23', '#e4407c'];
+
+function makeConfetti() {
+  const pieces = document.createDocumentFragment();
+  const count = 94;
+  for (let index = 0; index < count; index++) {
+    const angle = index / count * Math.PI * 2;
+    const x = Math.cos(angle);
+    const y = Math.sin(angle);
+    const edge = Math.max(Math.abs(x), Math.abs(y));
+    const spread = 13 + Math.random() * 75;
+    const size = 6 + Math.random() * 5;
+    const piece = document.createElement('i');
+    piece.style.setProperty('--x', (50 + 50 * x / edge) + '%');
+    piece.style.setProperty('--y', (50 + 50 * y / edge) + '%');
+    piece.style.setProperty('--dx', (x * spread + (Math.random() - .5) * 24) + 'px');
+    piece.style.setProperty('--dy', (y * spread + (Math.random() - .5) * 24) + 'px');
+    piece.style.setProperty('--size', size + 'px');
+    piece.style.setProperty('--height', size * (index % 3 === 0 ? 1 : 1.5) + 'px');
+    piece.style.setProperty('--radius', index % 3 === 0 ? '50%' : '2px');
+    piece.style.setProperty('--color', colors[index % colors.length]);
+    piece.style.setProperty('--spin', ((Math.random() - .5) * 700) + 'deg');
+    piece.style.setProperty('--launch', (300 + Math.random() * 80) + 'ms');
+    piece.style.setProperty('--flight', (1750 + Math.random() * 420) + 'ms');
+    pieces.append(piece);
+  }
+  confetti.replaceChildren(pieces);
+}
+
+function playConfirmation() {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  makeConfetti();
+  document.querySelector('.planner-shell').classList.add('is-confirmed');
+  setTimeout(() => confetti.replaceChildren(), 2750);
+}
+
+function labelTime(start, end) {
+  const date = new Date(start);
+  const finish = end ? new Date(end) : new Date(date.getTime() + 30 * 60 * 1000);
+  return [dateFormat.format(date), timeFormat.format(date) + ' – ' + timeFormat.format(finish)];
+}
+
+const calendar = document.querySelector('#calendar');
+const skeleton = document.querySelector('#calendar-skeleton');
+for (let index = 0; index < 35; index++) {
+  const cell = document.createElement('span');
+  cell.style.setProperty('--enter', (index % 7 + Math.floor(index / 7)) * 21 + 'ms');
+  skeleton.querySelector('.calendar').append(cell);
+}
+const schedule = document.querySelector('#schedule');
+const previous = document.querySelector('#previous');
+const next = document.querySelector('#next');
+const monthLabel = document.querySelector('#month-label');
+const selectedDay = document.querySelector('#selected-day');
+const monthFormat = new Intl.DateTimeFormat('nl-NL', {month:'long', year:'numeric', timeZone:'UTC'});
+const dayKey = new Intl.DateTimeFormat('sv-SE', {year:'numeric',month:'2-digit',day:'2-digit',timeZone});
+let days = new Map();
+let crossedDays = new Set();
+let months = [];
+let monthIndex = 0;
+
+function addSlot(slot, index) {
+  const [,hours] = labelTime(slot.start, slot.end);
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'option';
+  button.style.setProperty('--enter', index * 55 + 'ms');
+  button.textContent = hours;
+  button.setAttribute('aria-pressed', 'false');
+  button.addEventListener('click', () => {
+    options.querySelector('[aria-pressed="true"]')?.setAttribute('aria-pressed', 'false');
+    button.setAttribute('aria-pressed', 'true');
+    bookingToken.value = slot.token;
+    document.querySelector('#step-summary').textContent = selectedDay.textContent + ' · ' + hours;
+    setStatus('');
+    showBookingStep(true);
+  });
+  options.append(button);
+}
+
+function showTimes(day) {
+  options.replaceChildren();
+  bookingToken.value = '';
+  const slots = days.get(day) || [];
+  selectedDay.textContent = slots.length ? dateFormat.format(new Date(slots[0].start)) : 'Geen vrije momenten in deze maand.';
+  slots.forEach(addSlot);
+  for (const button of calendar.querySelectorAll('button[data-day]')) {
+    button.setAttribute('aria-pressed', String(button.dataset.day === day));
+  }
+}
+
+function drawCalendar() {
+  const month = months[monthIndex];
+  const start = new Date(month + '-01T00:00:00Z');
+  monthLabel.textContent = monthFormat.format(start);
+  previous.disabled = monthIndex === 0;
+  next.disabled = monthIndex === months.length - 1;
+  calendar.replaceChildren();
+  for (const weekday of ['ma','di','wo','do','vr','za','zo']) {
+    const label = document.createElement('span');
+    label.className = 'weekday';
+    label.textContent = weekday;
+    calendar.append(label);
+  }
+  const padding = (start.getUTCDay() + 6) % 7;
+  for (let i = 0; i < padding; i++) calendar.append(document.createElement('span'));
+  const numberOfDays = new Date(Date.UTC(start.getUTCFullYear(),start.getUTCMonth()+1,0)).getUTCDate();
+  for (let i = 1; i <= numberOfDays; i++) {
+    const day = month + '-' + String(i).padStart(2,'0');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = i;
+    button.disabled = !days.has(day);
+    const gridIndex = padding + i - 1;
+    button.style.setProperty('--enter', (gridIndex % 7 + Math.floor(gridIndex / 7)) * 24 + 'ms');
+    if (button.disabled) {
+      button.setAttribute('aria-label', dateFormat.format(new Date(day + 'T12:00:00Z')) + ', niet beschikbaar');
+      if (crossedDays.has(day)) button.classList.add('unavailable');
+    }
+    if (!button.disabled) {
+      button.dataset.day = day;
+      button.setAttribute('aria-label', dateFormat.format(new Date(days.get(day)[0].start)));
+      button.addEventListener('click', () => showTimes(day));
+    }
+    calendar.append(button);
+  }
+  showTimes([...days.keys()].find(day => day.startsWith(month)));
+}
+
+previous.addEventListener('click', () => { monthIndex--; drawCalendar(); });
+next.addEventListener('click', () => { monthIndex++; drawCalendar(); });
+
+function showSlots(slots) {
+  days = new Map();
+  for (const slot of slots) {
+    const day = dayKey.format(new Date(slot.start));
+    if (!days.has(day)) days.set(day,[]);
+    days.get(day).push(slot);
+  }
+  crossedDays = new Set();
+  const today = Date.parse(dayKey.format(new Date()) + 'T00:00:00Z');
+  const month = new Date(today);
+  const nextMonth = new Date(Date.UTC(month.getUTCFullYear(), month.getUTCMonth() + 1, 1));
+  const end = Date.UTC(month.getUTCFullYear(), month.getUTCMonth() + 2, 1);
+  const unavailableWeeks = new Map();
+  for (let time = today + 86400000; time < end; time += 86400000) {
+    const date = new Date(time);
+    const weekday = date.getUTCDay();
+    if (weekday < 1 || weekday > 5) continue;
+    const day = date.toISOString().slice(0, 10);
+    const week = +date - (weekday - 1) * 86400000;
+    if (days.has(day)) continue;
+    if (!unavailableWeeks.has(week)) unavailableWeeks.set(week, []);
+    unavailableWeeks.get(week).push(day);
+  }
+  for (const [week, unavailable] of unavailableWeeks) {
+    const seed = Math.imul(Math.floor(week / 604800000), 2654435761) >>> 0;
+    const count = Math.min(unavailable.length, 1 + (seed >>> 31));
+    const first = seed % unavailable.length;
+    for (let i = 0; i < count; i++) crossedDays.add(unavailable[(first + i) % unavailable.length]);
+  }
+  months = [month.toISOString().slice(0, 7), nextMonth.toISOString().slice(0, 7)];
+  monthIndex = 0;
+  schedule.hidden = false;
+  drawCalendar();
+}
+
+async function plannerRequest(operation, input) {
+  const response = await fetch('/api/afspraak', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ operation, ...input }),
+  });
+  if (!response.ok) throw new Error('De planner is tijdelijk onbereikbaar.');
+  return response.json();
+}
+
+function loadSlots(message = '') {
+  options.replaceChildren();
+  schedule.hidden = true;
+  bookingToken.value = '';
+  refresh.hidden = true;
+  skeleton.hidden = false;
+  form.setAttribute('aria-busy', 'true');
+  setStatus(message);
+  plannerRequest('slots')
+    .then(slots => {
+      if (!Array.isArray(slots)) throw new Error('De agenda is tijdelijk onbereikbaar.');
+      skeleton.hidden = true;
+      form.removeAttribute('aria-busy');
+      showSlots(slots);
+      setStatus(slots.length ? '' : 'Er zijn momenteel geen vrije momenten. Mail gerust naar info@socialnow.nl.');
+    })
+    .catch(() => {
+      skeleton.hidden = true;
+      form.removeAttribute('aria-busy');
+      refresh.hidden = false;
+      setStatus('De agenda is tijdelijk onbereikbaar. Probeer het zo opnieuw.', true);
+    });
+}
+
+function showBookingStep(details) {
+  dateStep.hidden = details;
+  guestStep.hidden = !details;
+  guestStep.disabled = !details;
+  document.querySelector(details ? '#guest-title' : '#date-title').focus();
+}
+
+if (new URLSearchParams(location.search).get('bron') === 'mail') {
+  const { company } = form.elements;
+  company.closest('label').hidden = true;
+  company.disabled = true;
+}
+
+refresh.addEventListener('click', () => loadSlots());
+backButton.addEventListener('click', () => {
+  setStatus('');
+  showBookingStep(false);
+});
+
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  if (guestStep.hidden || !bookingToken.value || submit.disabled) return;
+  const input = Object.fromEntries(new FormData(form));
+  input.firstName = input.firstName.trim();
+  input.lastName = input.lastName.trim();
+  input.viaMail = form.elements.company.disabled;
+  if (!input.viaMail) input.company = input.company.trim();
+  form.elements.firstName.value = input.firstName;
+  form.elements.lastName.value = input.lastName;
+  if (!input.viaMail) form.elements.company.value = input.company;
+  if (!form.reportValidity()) return;
+  submit.disabled = true;
+  guestStep.disabled = true;
+  setStatus('Uw afspraak wordt ingepland…');
+  plannerRequest('book', input)
+    .then(result => {
+      submit.disabled = false;
+      guestStep.disabled = false;
+      if (result.status === 'taken' || result.status === 'expired') {
+        showBookingStep(false);
+        loadSlots('Dit moment is niet meer beschikbaar. We halen nieuwe momenten op.');
+        return;
+      }
+      if (result.status !== 'booked') {
+        setStatus(result.status === 'invalid' ? 'Controleer uw gegevens.' :
+          result.status === 'pending' ? 'Uw tijd is gereserveerd. Google Meet wordt nog aangemaakt. Probeer hetzelfde moment opnieuw.' :
+          'Probeer het over een ogenblik opnieuw.', true);
+        return;
+      }
+      toonBevestigdeAfspraak(result);
+    })
+    .catch(() => {
+      submit.disabled = false;
+      guestStep.disabled = false;
+      setStatus('We konden de boeking nog niet bevestigen. Probeer hetzelfde moment opnieuw.', true);
+    });
+});
+
+function toonBevestigdeAfspraak(result) {
+  form.hidden = true;
+  setStatus('');
+  document.querySelector('#booked-date').textContent = bookedDateFormat.format(new Date(result.start));
+  document.querySelector('#booked-time').textContent = labelTime(result.start, result.end)[1] + ' · Nederlandse tijd';
+  if (result.meet) {
+    meeting.href = result.meet;
+    meeting.hidden = false;
+    document.querySelector('#location-label').hidden = true;
+  }
+  setCalendarLinks(result);
+  done.hidden = false;
+  playConfirmation();
+  done.focus();
+}
+
+function setCalendarLinks(result) {
+  const start = new Date(result.start);
+  const end = new Date(result.end || +start + 30 * 60 * 1000);
+  const title = 'Kennismaking met Marinus Bergsma';
+  const location = result.meet || 'Google Meet';
+  const calendarDate = date => date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+
+  const google = new URL('https://calendar.google.com/calendar/render');
+  google.search = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: title,
+    dates: calendarDate(start) + '/' + calendarDate(end),
+    location,
+  });
+  document.querySelector('#calendar-google').href = google;
+
+  const outlook = new URL('https://outlook.live.com/calendar/0/deeplink/compose');
+  outlook.search = new URLSearchParams({
+    path: '/calendar/action/compose',
+    rru: 'addevent',
+    subject: title,
+    startdt: start.toISOString(),
+    enddt: end.toISOString(),
+    location,
+  });
+  document.querySelector('#calendar-outlook').href = outlook;
+
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//SocialNow//Afspraakbevestiging//NL',
+    'BEGIN:VEVENT',
+    'UID:' + (/^[\w.@-]+$/.test(result.uid || '') ? result.uid : 'socialnow-' + calendarDate(start) + '@socialnow.nl'),
+    'DTSTAMP:' + calendarDate(new Date()),
+    'DTSTART:' + calendarDate(start),
+    'DTEND:' + calendarDate(end),
+    'SUMMARY:' + title,
+    'LOCATION:' + location,
+    'END:VEVENT',
+    'END:VCALENDAR',
+    '',
+  ].join('\r\n');
+  const calendarFile = document.querySelector('#calendar-ics');
+  calendarFile.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  const isAppleMobile = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (!isAndroid && !isAppleMobile) return;
+
+  const direct = document.querySelector('#calendar-direct');
+  if (isAndroid) {
+    direct.href = google;
+    direct.target = '_blank';
+    direct.rel = 'noopener';
+  } else {
+    direct.href = calendarFile.href;
+    direct.download = calendarFile.download;
+  }
+  direct.hidden = false;
+  document.querySelector('.calendar-action-group').setAttribute('data-mobile', '');
+  document.querySelector('.calendar-label').textContent = 'Andere agenda kiezen';
+}
+
+// Match the blue sphere and Fibonacci point layout of SocialNow's BrandGlobe.
+function drawBrandGlobes() {
+  const contexts = Array.from(document.querySelectorAll('.brand-globe'), canvas => canvas.getContext('2d')).filter(Boolean);
+  if (!contexts.length) return;
+
+  const [primary, ...mirrors] = contexts;
+  const center = primary.canvas.width / 2;
+  const radius = center - 10;
+  const pointCount = 750;
+  const points = Array.from({ length: pointCount }, (_, index) => {
+    const y = 1 - 2 * index / (pointCount - 1);
+    const ring = Math.sqrt(1 - y * y);
+    const angle = 2.399963229728653 * index;
+    return { x: Math.cos(angle) * ring, y, z: Math.sin(angle) * ring };
+  });
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let previousFrame;
+  let frame;
+
+  function render(time) {
+    const angle = reducedMotion.matches ? 0 : time % 54000 / 54000 * 2 * Math.PI;
+    const sin = Math.sin(angle);
+    const cos = Math.cos(angle);
+    primary.clearRect(0, 0, primary.canvas.width, primary.canvas.height);
+    primary.fillStyle = '#00A3E0';
+    for (const point of points) {
+      const depth = point.z * cos - point.x * sin;
+      if (depth < 0) continue;
+      const x = point.x * cos + point.z * sin;
+      primary.globalAlpha = .24 + depth * .38;
+      primary.beginPath();
+      primary.arc(center + x * radius, center - point.y * radius, 1.4 + depth * .9, 0, Math.PI * 2);
+      primary.fill();
+    }
+    for (const mirror of mirrors) {
+      mirror.clearRect(0, 0, mirror.canvas.width, mirror.canvas.height);
+      mirror.drawImage(primary.canvas, 0, 0);
+    }
+  }
+
+  function nextFrame(time) {
+    if (previousFrame === undefined || time - previousFrame >= 32) {
+      render(time);
+      previousFrame = time;
+    }
+    frame = requestAnimationFrame(nextFrame);
+  }
+
+  function syncMotion() {
+    cancelAnimationFrame(frame);
+    if (reducedMotion.matches) {
+      render(0);
+    } else {
+      previousFrame = undefined;
+      frame = requestAnimationFrame(nextFrame);
+    }
+  }
+
+  render(0);
+  syncMotion();
+  reducedMotion.addEventListener('change', syncMotion);
+}
+requestAnimationFrame(drawBrandGlobes);
+loadSlots();
+</script>
+</body>
+</html>
