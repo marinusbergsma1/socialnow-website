@@ -39,9 +39,8 @@ export function PartnerLogos() {
 }
 
 const BEURSFOTOS = [
-  { bestand: "team-atomium", alt: "Ons team bij het Atomium in Brussel", kop: "Met een deel van ons team" },
-  { bestand: "beurs-marinus", alt: "Marinus in gesprek aan tafel", kop: "In gesprek op de beurs" },
-  { bestand: "beurs-steef", alt: "Steef aan tafel met bezoekers rond een laptop", kop: "Samen over de laptop" },
+  { bestand: "beurs-marinus", alt: "Marinus in gesprek aan tafel" },
+  { bestand: "beurs-steef", alt: "Steef aan tafel met bezoekers rond een laptop" },
 ];
 
 export function AtomiumFoto() {
@@ -76,7 +75,10 @@ export function AtomiumFoto() {
           <Diepte3D src={`${basis}.webp`} diepte={`${basis}-diepte.webp`} actief={foto === index && !filmOpen} />
         </div>;
       })}
-      <figcaption><span className="sn-alg-klein">Odoo Experience 2026 · Hoogtepunt</span><strong>{BEURSFOTOS[foto].kop}<span className="sn-alg-punt">.</span></strong></figcaption>
+      <figcaption>
+        <span className="sn-alg-klein" lang="en" translate="no">Presenting at the Odoo Experience 2026</span>
+        <strong>In gesprek op de beurs<span className="sn-alg-punt">.</span></strong>
+      </figcaption>
       <button type="button" className="sn-alg-knop-fotos" aria-label={speelt ? "Pauzeer de fotowissel" : "Speel de fotowissel af"} onClick={() => zetSpeelt(!speelt)}>
         {speelt ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
       </button>
