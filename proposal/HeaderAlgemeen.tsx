@@ -133,10 +133,12 @@ export default function HeaderAlgemeen({ label = "Management · Operations · Od
 // 4 november 2026 (Marinus): "Verder mag er wel our branding en advertisement is trusted by". Ook op de homepage (HomeEnthousiast.tsx).
 export function TrustedBy() {
   return <div className="sn-alg-trusted">
-    <span translate="no">Our branding and advertising is trusted by</span>
-    <div className="sn-alg-merken">
-      <span className="sn-alg-groep">{DIRECT.map(merk)}</span>
-      <span className="sn-alg-groep">{merk(CRAFTURE)}<i className="sn-alg-streep" aria-hidden="true" />{VIA_CRAFTURE.map(merk)}</span>
+    <span id="sn-alg-trusted-label" translate="no">Our branding and advertising is trusted by</span>
+    <div className="sn-alg-merken" role="group" aria-labelledby="sn-alg-trusted-label" tabIndex={0}>
+      <div className="sn-alg-merken-rij">
+        <span className="sn-alg-groep">{DIRECT.map(merk)}</span>
+        <span className="sn-alg-groep">{merk(CRAFTURE)}<i className="sn-alg-streep" aria-hidden="true" />{VIA_CRAFTURE.map(merk)}</span>
+      </div>
     </div>
   </div>;
 }
