@@ -239,6 +239,7 @@ body:has(#done:not([hidden])) header .intro{display:none}
           <div><dt>Tijd</dt><dd id="booked-time"></dd></div>
           <div><dt>Gesprek</dt><dd>Kennismaking met Marinus Bergsma</dd></div>
           <div><dt>Locatie</dt><dd><span id="location-label">Google Meet</span><a id="meeting" target="_blank" rel="noopener noreferrer" hidden>Google Meet openen</a></dd></div>
+          <div id="meeting-code-row" hidden><dt>Meet-code</dt><dd><code id="meeting-code"></code></dd></div>
         </dl>
       </div>
       <p id="invite-status">We kijken ernaar uit!</p>
@@ -592,11 +593,13 @@ function toonBevestigdeAfspraak(result) {
   setStatus('');
   document.querySelector('#booked-date').textContent = bookedDateFormat.format(new Date(result.start));
   document.querySelector('#booked-time').textContent = labelTime(result.start, result.end)[1] + ' · Nederlandse tijd';
-  if (result.meet) {
-    meeting.href = result.meet;
-    meeting.hidden = false;
-    document.querySelector('#location-label').hidden = true;
-  }
+  const meet = /^https:\/\/meet\.google\.com\/([a-z]{3}-[a-z]{4}-[a-z]{3})$/i.exec(result.meet || '');
+  meeting.hidden = !meet;
+  document.querySelector('#location-label').hidden = Boolean(meet);
+  document.querySelector('#meeting-code-row').hidden = !meet;
+  if (meet) meeting.href = meet[0];
+  else meeting.removeAttribute('href');
+  document.querySelector('#meeting-code').textContent = meet?.[1] || '';
   setCalendarLinks(result);
   done.hidden = false;
   playConfirmation();
