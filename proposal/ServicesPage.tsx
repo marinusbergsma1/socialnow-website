@@ -51,9 +51,9 @@ function Punten({ punten }: { punten: readonly string[] }) {
   ))}</ul>;
 }
 
-function Bedrag({ prijs, grondslag, vanaf = true }: { prijs: string; grondslag: string; vanaf?: boolean }) {
-  return <p className={vanaf ? "svc-price svc-price-start" : "svc-price"}>
-    {vanaf && <span className="svc-from">Vanaf</span>}
+function Bedrag({ prijs, grondslag }: { prijs: string; grondslag: string }) {
+  return <p className="svc-price">
+    <span className="svc-from">Vanaf</span>
     <strong>{prijs}</strong>
     <span className="svc-unit">{grondslag}</span>
   </p>;
@@ -148,9 +148,9 @@ export default function ServicesPage() {
           <article className="svc-feature svc-website">
             <div className="svc-feature-copy">
               <h3>Website op maat</h3>
-              <Bedrag prijs="€2.000–€5.000" grondslag="per project" vanaf={false} />
+              <Bedrag prijs="€2.000,-" grondslag="per project" />
               <Punten punten={["Ontwerp en bouw voor desktop en mobiel", "Contactformulier en technische SEO-basis", "Oplevering met uitleg voor je team"]} />
-              <p>Het aantal pagina’s en de gewenste koppelingen bepalen waar je in de bandbreedte uitkomt. Hosting, onderhoud en licenties spreken we apart af.</p>
+              <p>De prijs hangt af van het aantal pagina’s en de koppelingen. Hosting, onderhoud en licenties spreken we apart af.</p>
               <a className="svc-link" href={boekingsPlannerUrl}>Bespreek je website <ArrowUpRight size={17} aria-hidden="true" /></a>
             </div>
             <figure>
