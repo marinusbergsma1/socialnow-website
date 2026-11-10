@@ -26,14 +26,12 @@ import { AuditTeaser } from "./AuditPage";
 import FeaturedWork from "./FeaturedWork";
 import ResultatenHero from "./ResultatenHero";
 import { WebsiteTegel } from "./FreeWebsite";
-import ConnectExperts from "./ConnectExperts";
 import HeaderBestaand from "./HeaderBestaand";
 import SamenEnVeilig from "./SamenEnVeilig";
 import { ImageSliders, VideoSlider } from "./MediaSliders";
 import OsEntry, { GRATIS_OS_URL } from "./os-entry";
-import { agents, people, services } from "./content";
+import { agents, people } from "./content";
 import { projects } from "./projecten";
-import Pricing from "./Pricing";
 import { PlanCallKnop } from "./PlanCall";
 import TeamTrust from "./TeamTrust";
 import OsPeople from "./OsPeople";
@@ -287,26 +285,6 @@ export function ProjectPage() {
   return <ProjectCase key={project.slug} project={project} next={next} />;
 }
 
-// 19 oktober 2026 (Marinus): "Bij diensten moeten de pakketten boven de regels nikszeggende diensten komen. Nikszeggende diensten
-// misschien zelfs helemaal weg of in een horizontale slider." De prijzen openen de pagina; de diensten zijn een smalle strook
-// eronder. De ankers (/diensten#development enz. uit de footer) blijven op de kaarten staan.
-export function ServicesPage() {
-  return (
-    <>
-      <Pricing bovenaan />
-      {/* 19 oktober 2026 (Marinus): "Deze graag meer algemeen connect focussed. Net als op de homepagina." Dezelfde Connect-sectie
-          als op de homepage. De oude ankers uit de footer (/diensten#development enz.) landen hier. */}
-      <div className="h-dienst-ankers">
-        {services.map((service) => <span key={service.id} id={service.id} />)}
-        <ConnectExperts />
-      </div>
-      <section className="h-section h-wrap h-faq-layout">
-        <Heading label="Voor we beginnen" title="Duidelijke afspraken." />
-        <Questions />
-      </section>
-    </>
-  );
-}
 export function TeamPage() {
   const vind = (namen: string[]) => namen
     .map(name => people.find(person => person.name === name))

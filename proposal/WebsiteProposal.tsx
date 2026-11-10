@@ -22,7 +22,7 @@ const NotFound = later(() => import("./paginas").then((m) => m.NotFound));
 const OsPage = later(() => import("./paginas").then((m) => m.OsPage));
 const ProjectPage = later(() => import("./paginas").then((m) => m.ProjectPage));
 const ProjectsPage = later(() => import("./paginas").then((m) => m.ProjectsPage));
-const ServicesPage = later(() => import("./paginas").then((m) => m.ServicesPage));
+const ServicesPage = later(() => import("./ServicesPage").then((m) => m.default));
 const TeamPage = later(() => import("./paginas").then((m) => m.TeamPage));
 const AuditPage = later(() => import("./AuditPage").then((m) => m.AuditPage));
 // 22 oktober 2026: gratis php2shell-check (api/php-check.js).
@@ -32,6 +32,7 @@ const InvesteerdersPage = later(() => import("./InvesteerdersPage").then((m) => 
 // Opmaak blijft statisch, op de plek van voorheen (zie pages.tsx).
 import "./gratis-website.css";
 import "./antwoord-pagina.css";
+import "./services.css";
 const GratisWebsite = later(() => import("./GratisWebsite").then((m) => m.default));
 const GratisOsDemo = later(() => import("./GratisOsDemo").then((m) => m.default));
 const AntwoordPagina = later(() => import("./AntwoordPagina").then((m) => m.default));
@@ -49,7 +50,7 @@ let allPosts: typeof import("../data/posts").allPosts = [];
 let brandMeta: typeof import("../scripts/brand-meta.mjs").brandMeta | null = null;
 import { MotionProvider } from "./motion";
 import LanguageSwitch from "./LanguageSwitch";
-import { DIENSTEN, DienstenMenu, Kleurwoord, NAV_LINKS, SecurityLink } from "./Producten";
+import { DIENSTEN, DienstenMenu, NAV_LINKS, SecurityLink } from "./Producten";
 import { boekingsPlannerUrl, PlanCallHost } from "./PlanCall";
 import { BelApp } from "./BelApp";
 import { LanguageProvider, LANGUAGES, languagePrefix, type Language, useLanguage } from "./i18n/context";
@@ -264,7 +265,7 @@ function ProposalShell() {
               <p className="h-mobile-groep">{title}</p>
               <div className="h-mobile-kaarten">
                 {DIENSTEN.map((d) => <Link key={d.soort} className="h-mobile-product" to={d.naar} onClick={() => setMenuOpen(false)}>
-                  <b translate="no"><Kleurwoord tekst={d.titel} /></b><span>{d.regel}</span><ArrowUpRight size={17} aria-hidden="true" />
+                  <b>{d.titel}</b><span>{d.regel}</span><ArrowUpRight size={17} aria-hidden="true" />
                 </Link>)}
               </div>
               <SecurityLink mobiel onClick={() => setMenuOpen(false)} />
@@ -352,7 +353,7 @@ function ProposalShell() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         {["/het-os"].includes(location.pathname) && <BrandFaq />}
-        {["/het-os", "/team", "/diensten", "/contact", "/vacatures"].includes(location.pathname) && <ConnectionLinks />}
+        {["/het-os", "/team", "/contact", "/vacatures"].includes(location.pathname) && <ConnectionLinks />}
         <NaLaden key={location.pathname} klaar={() => {
           zetMeta();
           if (location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ block: "start" });

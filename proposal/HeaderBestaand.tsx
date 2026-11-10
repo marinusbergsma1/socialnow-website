@@ -129,7 +129,7 @@ export default function HeaderBestaand({ meet, kop = "Een betrouwbare partner vo
                 <div className="bs-switch" role="group" aria-label="Kies OS of Custom OS">
                   <button type="button" aria-pressed={modus === "os"} onClick={() => setModus("os")}>OS</button>
                   {/* 19 oktober 2026 (Marinus): "Dit klopt niet. Wijs gewoon door naar de Dienstenpagina." */}
-                  <Link to="/diensten#prijzen" onClick={() => meet("custom_os")}>Custom OS</Link>
+                  <Link to="/diensten#management-operations" onClick={() => meet("custom_os")}>Custom OS</Link>
                 </div>
                 {modus === "custom" ? <>
                 <h2>Je eigen OS, gebouwd rond je bedrijf.</h2>

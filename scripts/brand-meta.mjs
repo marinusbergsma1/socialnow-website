@@ -21,8 +21,8 @@ const metadata = {
       'Meet the people and independent business partners behind SocialNow. SocialNow coordinates and pays partners for custom projects, with one point of contact.',
     ],
     '/diensten': [
-      'Custom software, content and marketing | SocialNow',
-      'Build customer-friendly products with independent SocialNow partners: software, websites, content and marketing. Personal contact and custom work through SocialNow',
+      'Growth, cybersecurity, websites and operations | SocialNow',
+      'Explore growth advice, marketing packages, cybersecurity, website projects and hands-on operations support from SocialNow.',
     ],
     '/prijzen': [
       'OS pricing: free start and custom projects | SocialNow',
@@ -55,8 +55,8 @@ const metadata = {
       'Maak kennis met de mensen en zelfstandige ondernemers achter SocialNow. SocialNow organiseert en betaalt partners voor maatwerk, met één aanspreekpunt.',
     ],
     '/diensten': [
-      'Maatwerksoftware, content en marketing | SocialNow',
-      'Maak klantvriendelijke producten met zelfstandige SocialNow-partners: software, websites, content en marketing. Persoonlijk contact en maatwerk via SocialNow',
+      'Groei, cybersecurity, websites en operations | SocialNow',
+      'Bekijk persoonlijk groeiadvies, marketingpakketten, cybersecurity, websiteprojecten en begeleiding bij management en operations.',
     ],
     '/prijzen': [
       'OS-prijzen: gratis starten en maatwerk | SocialNow',
