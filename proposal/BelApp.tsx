@@ -7,7 +7,7 @@ import "./bel-app.css";
 // en zakelijk mij kan bellen of appen." Eén vaste pil rechtsonder, twee helften, rechtstreeks naar Marinus.
 export function BelApp() {
   return <nav className="sn-bel-app" aria-label="Bel of app Marinus">
-    <a href={boekingsPlannerUrl}><CalendarDays size={15} aria-hidden="true" /><span>Plan een call</span></a>
+    <a className="sn-bel-app-call" href={boekingsPlannerUrl}><CalendarDays size={15} aria-hidden="true" /><span>Plan een call</span></a>
     <a href={belLink}><Phone size={15} aria-hidden="true" /><span>Bellen</span></a>
     <a href={appLink()} target="_blank" rel="noopener noreferrer"><MessageCircle size={15} aria-hidden="true" /><span translate="no">WhatsApp</span></a>
   </nav>;

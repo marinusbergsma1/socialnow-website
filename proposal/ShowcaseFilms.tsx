@@ -4,7 +4,7 @@ import { AmbientVideo } from "./motion";
 import { MediaDialog, type MediaItem } from "./MediaSliders";
 import { Bento, Tegel } from "./Bento";
 export const showcaseFilms = [
- {title:"Meet SocialNow OS",src:"/video/os/os-master-en.mp4",poster:"/video/os/os-master-en.webp",caption:"Productrichting / Voorbeeldomgeving",color:"#25d366"},
+ {title:"VDZ Brigade · 3D",src:"/video/vdz/vdz-house.mp4",poster:"/video/vdz/vdz-house-poster.jpg",caption:"VDZ Brigade / 3D",color:"#25d366"},
  {title:"Next Gen Webdesign",src:"/videos/nextgen-webdesign.mp4",caption:"Websites / Design & development",color:"#00A3E0"},
  {title:"Motion Design",src:"https://storage.googleapis.com/video-slider/FEATURED/BetCity-branded%20bumper%20ad%20-%20.mp4",caption:"BetCity / Branded motion",color:"#F7E644"},
 ];

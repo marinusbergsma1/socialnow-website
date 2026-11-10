@@ -209,7 +209,7 @@ function Mensen({ domein = "", kort = false, groot = false }: { domein?: string;
               <strong translate="no">{p.name}</strong>
               <small translate="no">{p.role}</small>
               <span className="pc-mens-wegen">
-                <a href={boekExtern ? boek : "#aanvraag"} {...(boekExtern ? { target: "_blank", rel: "noopener" } : {})}>
+                <a className="pc-call-link" href={boekExtern ? boek : "#aanvraag"} {...(boekExtern ? { target: "_blank", rel: "noopener" } : {})}>
                   <CalendarDays size={16} aria-hidden="true" />{groot ? <span>Plan een diepgaand gesprek</span> : <span>Plan een call</span>}
                 </a>
                 {groot && (

@@ -56,8 +56,8 @@
 :root .sn-site .h-mobile-nav a.h-mobile-product>b>i.connect{color:#20afde}
 :root .sn-site .h-mobile-nav a.h-mobile-product>span{grid-column:1;font-family:"TT Norms",Arial,sans-serif;font-size:14px;font-weight:400;line-height:1.4;color:#a9b8af}
 :root .sn-site .h-mobile-nav a.h-mobile-product>svg{grid-column:2;grid-row:1/span 2;color:#25d366}
-:root .sn-site .h-mobile-nav .h-mobile-call{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;margin-top:18px;padding:0 18px;border:1.5px solid #25d366;border-radius:999px;background:#0c1510;color:#fff;cursor:pointer;font-family:inherit;font-size:16px;font-weight:600;text-align:left}
-:root .sn-site .h-mobile-nav .h-mobile-call>svg{color:#25d366;flex:none}
+:root .sn-site .h-mobile-nav .h-mobile-call{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;margin-top:18px;padding:0 18px;border:1.5px solid #00a3e0;border-radius:999px;background:#0b1620;color:#fff;cursor:pointer;font-family:inherit;font-size:16px;font-weight:600;text-align:left}
+:root .sn-site .h-mobile-nav .h-mobile-call>svg{color:#00a3e0;flex:none}
 
 /* 22 oktober 2026 (Marinus): letters nooit aan elkaar, ook niet in de uitklapmenu's en de mobiele kaarten. */
 :root .sn-site .h-producten-menu,:root .sn-site .h-producten-menu :is(a,b,i,span),:root .sn-site .h-mobile-nav,:root .sn-site .h-mobile-nav :is(a,b,i,span,p){font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0,"dlig" 0,"hlig" 0}

@@ -46,9 +46,6 @@ html:root .sn-site .sn-cta-web .sn-cta-web-tekst{max-width:52ch;margin:10px 0 0;
 .sn-deur-raster{background-color:#000;background-image:radial-gradient(70% 90% at 30% 40%,#25d36638,transparent 70%),radial-gradient(circle at 16px 16px,rgba(255,255,255,.24) 1.1px,transparent 1.6px);background-size:auto,32px 32px}
 
 /* Hero, 4 november 2026 (avond): tweede knop in Connect-blauw ("2e knop hier graag blauw maken ook"). */
-html:root .sn-site .sn-pill.sn-pill-blauw{--sn-pill-green:#00a3e0;border-color:#00a3e0!important}
-html:root .sn-site .sn-pill.sn-pill-blauw::before{background:#00a3e0!important}
-html:root .sn-site .sn-pill.sn-pill-blauw .h-button-icon,html:root .sn-site .sn-pill.sn-pill-blauw > svg{color:#00a3e0}
 /* Partnerlogo's onder de knoppen: "Hier moeten weer de shopify logo's etc komen." */
 html:root .sn-site .sn-blij .sn-alg-keur{margin-top:30px}
 
@@ -66,3 +63,11 @@ html:root .sn-site .sn-blij .sn-alg-keur{margin-top:30px}
 .sn-cta-web:hover .sn-cta-web-beeld .is-een{transform:rotate(3deg) translateY(-6px)}
 .sn-cta-web:hover .sn-cta-web-beeld .is-twee{transform:rotate(-3deg) translateY(4px)}
 @media(prefers-reduced-motion:reduce){.sn-cta-web-beeld img{transition:none}}
+
+.sn-site .h-review-cases{display:grid;gap:16px;padding-block:20px 30px;scroll-margin-top:100px}
+.sn-site .h-review-case{min-height:0;margin:0;row-gap:20px;padding:clamp(22px,3.25vw,44px)}
+.sn-site .h-review-case .sn-cta-web-beeld{display:grid;place-items:center;min-height:0}
+.sn-site .h-review-case .sn-cta-web-beeld img{position:static;width:100%;transform:rotate(1.5deg)}
+.sn-site .h-review-case:nth-child(even) .sn-cta-web-beeld img{transform:rotate(-1.5deg)}
+.sn-site .h-review-case .sn-cta-web-tekst strong{font:inherit;font-weight:700;color:#fff}
+@media(max-width:860px){.sn-site .h-review-case .sn-cta-web-beeld img{transform:none}}

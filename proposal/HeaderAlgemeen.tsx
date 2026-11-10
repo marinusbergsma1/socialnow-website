@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Play, X } from "lucide-react";
+import { ArrowUpRight, Pause, Play, X } from "lucide-react";
 import { CRAFTURE, DIRECT, VIA_CRAFTURE, merk } from "./ExplainerPlayer";
 import "./header-algemeen.css";
 import Diepte3D from "./Diepte3D";
@@ -38,23 +38,51 @@ export function PartnerLogos() {
   </ul>;
 }
 
-// De teamfoto bij het Atomium met een langzame zoom; de aftermovie speelt alleen als je op Bekijk de video klikt. Ook op de homepage
-// (HomeEnthousiast.tsx). 4 november 2026 (avond, Marinus): "Doe toch maar gewoon die foto met zoom zoals die was en video alleen als
-// je op afspelen klikt".
+const BEURSFOTOS = [
+  { bestand: "team-atomium", alt: "Ons team bij het Atomium in Brussel", kop: "Met een deel van ons team" },
+  { bestand: "beurs-marinus", alt: "Marinus in gesprek aan tafel", kop: "In gesprek op de beurs" },
+  { bestand: "beurs-steef", alt: "Steef aan tafel met bezoekers rond een laptop", kop: "Samen over de laptop" },
+];
+
 export function AtomiumFoto() {
   const venster = useRef<HTMLDialogElement>(null);
   const film = useRef<HTMLVideoElement>(null);
-  const open = () => { venster.current?.showModal(); void film.current?.play().catch(() => {}); };
-  const sluit = () => { film.current?.pause(); venster.current?.close(); };
+  const [foto, zetFoto] = useState(0);
+  const [speelt, zetSpeelt] = useState(() => !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const [filmOpen, zetFilmOpen] = useState(false);
+  const open = () => {
+    venster.current?.showModal();
+    zetFilmOpen(true);
+    void film.current?.play().catch(() => {});
+  };
+  const sluit = () => venster.current?.close();
+  const naSluiten = () => {
+    film.current?.pause();
+    zetFilmOpen(false);
+  };
+
+  useEffect(() => {
+    if (!speelt || filmOpen) return;
+    const timer = window.setInterval(() => zetFoto(vorige => (vorige + 1) % BEURSFOTOS.length), 3000);
+    return () => window.clearInterval(timer);
+  }, [speelt, filmOpen]);
+
   return <>
-    <figure className="sn-alg-foto">
-      <img src="/images/verhaal/team-atomium.webp" alt="Ons team bij het Atomium in Brussel" width="900" height="1200" fetchPriority="high" />
-      {/* 5 november 2026: 3D zoals Apple's ruimtelijke foto's ("Of een 3D effect zoals Apple nu ook heeft met die foto's"). */}
-      <Diepte3D src="/images/verhaal/team-atomium.webp" diepte="/images/verhaal/team-atomium-diepte.webp" />
-      <figcaption><span className="sn-alg-klein">Odoo Experience 2026 · Hoogtepunt</span><strong>Met een deel van ons team<span className="sn-alg-punt">.</span></strong></figcaption>
+    <figure className="sn-alg-foto" id="odoo-experience" data-draait={speelt && !filmOpen}>
+      {BEURSFOTOS.map(({ bestand, alt }, index) => {
+        const basis = `/images/verhaal/${bestand}`;
+        return <div key={bestand} className={bestand === "beurs-marinus" ? "sn-alg-dia is-gesprek" : "sn-alg-dia"} data-actief={foto === index} aria-hidden={foto !== index}>
+          <img src={`${basis}.webp`} alt={alt} width="900" height="1200" fetchPriority={index === 0 ? "high" : "low"} />
+          <Diepte3D src={`${basis}.webp`} diepte={`${basis}-diepte.webp`} actief={foto === index && !filmOpen} />
+        </div>;
+      })}
+      <figcaption><span className="sn-alg-klein">Odoo Experience 2026 · Hoogtepunt</span><strong>{BEURSFOTOS[foto].kop}<span className="sn-alg-punt">.</span></strong></figcaption>
+      <button type="button" className="sn-alg-knop-fotos" aria-label={speelt ? "Pauzeer de fotowissel" : "Speel de fotowissel af"} onClick={() => zetSpeelt(!speelt)}>
+        {speelt ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
+      </button>
       <button type="button" className="sn-alg-knop-video" aria-haspopup="dialog" onClick={open}><Play size={15} aria-hidden="true" /><span>Bekijk de video</span></button>
     </figure>
-    <dialog className="sn-alg-venster" ref={venster} aria-label="Aftermovie Odoo Experience 2026" onClose={() => film.current?.pause()} onClick={e => { if (e.target === venster.current) sluit(); }}>
+    <dialog className="sn-alg-venster" ref={venster} aria-label="Aftermovie Odoo Experience 2026" onClose={naSluiten} onClick={e => { if (e.target === venster.current) sluit(); }}>
       <button type="button" className="sn-alg-sluit" onClick={sluit} aria-label="Sluit de film"><X size={20} aria-hidden="true" /></button>
       <video ref={film} src={FILM} poster="/video/odoo-experience/odoo-experience.jpg" controls playsInline preload="none" />
     </dialog>

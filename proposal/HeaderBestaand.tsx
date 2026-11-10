@@ -152,7 +152,7 @@ export default function HeaderBestaand({ meet, kop = "Een betrouwbare partner vo
                   {VEILIG.map(punt => <li key={punt}><Check size={15} strokeWidth={3} aria-hidden="true" />{punt}</li>)}
                 </ul>
                 <div className="action os-account-actions">
-                  <button type="button" className="pill" aria-haspopup="dialog" onClick={() => { meet("custom_os"); openPlanCall({ onderdelen: ONDERDELEN[custom] }); }}><span>Plan een call</span><span className="arrow"><ArrowUpRight size={17} /></span></button>
+                  <button type="button" className="sn-pill sn-pill-blauw" aria-haspopup="dialog" onClick={() => { meet("custom_os"); openPlanCall({ onderdelen: ONDERDELEN[custom] }); }}><span>Plan een call</span><ArrowUpRight size={17} aria-hidden="true" /></button>
                 </div>
                 </> : <>
                 <h2>AI-powered management &amp; operations.</h2>

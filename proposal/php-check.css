@@ -485,3 +485,6 @@
   :root .sn-site .pc-top { padding-top: 110px; }
   :root .sn-site .pc-sprong { width: 100%; justify-content: flex-start; }
 }
+
+:root .sn-site .pc-mens-wegen .pc-call-link svg { color: #00a3e0; }
+:root .sn-site .pc-mens-wegen .pc-call-link:focus-visible { outline-color: #00a3e0; }

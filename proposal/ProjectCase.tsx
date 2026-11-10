@@ -6,8 +6,13 @@ import {AmbientVideo} from "./motion";
 import {MediaDialog, type MediaItem} from "./MediaSliders";
 import {useLanguage} from "./i18n/context";
 import InstagramWork from "./InstagramWork";
+import LightArtStrook from "./LightArtStrook";
 
 const stories: Record<string, {title:string; text:string}[]> = {
+  "light-art-collection": [
+    {title:"Internationale presentaties",text:"Marinus en zijn team gaven de internationale presentaties van Light Art Collection vorm."},
+    {title:"Lichtkunst op locatie",text:"Met een artist impression laat je zien hoe een installatie en de omgeving er samen uit kunnen zien. Hieronder zie je Eternal Sundown."},
+  ],
   "raveg-branding": [
     {title:"Een herkenbaar vertrekpunt",text:"De merkidentiteit vormde de basis. Van het logo en de visuele stijl tot de manier waarop RAVEG zijn producten presenteert."},
     {title:"Van merk naar product",text:"Die identiteit komt terug in het Hyperpower-verpakkingsontwerp: typografie, productbeelden en informatie vormen samen één geheel."},
@@ -33,8 +38,8 @@ export default function ProjectCase({project,next}:{project:Project;next:Project
     <header className="h-wrap h-project-heading">
       <TextLink to="/projecten">Alle projecten</TextLink>
       <div className="h-project-title-row">
-        <div><p className="h-eyebrow">{project.client} / {project.year}</p><h1>{project.title}</h1><p className="h-intro">{project.description}</p></div>
-        <dl className="h-project-facts"><div><dt>Klant</dt><dd>{project.client}</dd></div><div><dt>Jaar</dt><dd>{project.year}</dd></div><div><dt>Onze bijdrage</dt><dd>{project.services?.map((service,index)=><React.Fragment key={service}>{index>0 && " · "}<span>{service}</span></React.Fragment>)}</dd></div></dl>
+        <div><p className="h-eyebrow">{project.client}{project.year && <> / {project.year}</>}</p><h1>{project.title}</h1><p className="h-intro">{project.description}</p></div>
+        <dl className="h-project-facts"><div><dt>Klant</dt><dd>{project.client}</dd></div>{project.year && <div><dt>Jaar</dt><dd>{project.year}</dd></div>}<div><dt>Onze bijdrage</dt><dd>{project.services?.map((service,index)=><React.Fragment key={service}>{index>0 && " · "}<span>{service}</span></React.Fragment>)}</dd></div></dl>
       </div>
     </header>
     <section className="h-wrap h-project-body" aria-label="Projectuitwerking">
@@ -51,6 +56,7 @@ export default function ProjectCase({project,next}:{project:Project;next:Project
         <div>{(stories[project.slug] || [{title:"Het project",text:project.description}]).map(part=><article key={part.title}><h3>{part.title}</h3><p>{part.text}</p></article>)}</div>
       </div>
       {isVdz && <InstagramWork project="vdz" />}
+      {project.slug === "light-art-collection" && <LightArtStrook />}
       {!isVdz && gallery.length>0 && <section className="h-project-selection" aria-labelledby="case-work-title"><div className="h-project-selection-heading"><h2 id="case-work-title">Het werk van dichtbij.</h2><p>Klik op een beeld of video om het volledig te bekijken.</p></div>
         <div className="h-project-media-grid">{gallery.map((src,index)=>{
           const video=/\.(mp4|webm)(?:\?|$)/i.test(src);

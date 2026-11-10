@@ -138,3 +138,5 @@ html:root .sn-site .sn-pill.h-dock-demo { margin: 12px; width: calc(100% - 24px)
   html:root .sn-site .h-nav .h-brand img { width: 92px; }
   html:root .sn-site .sn-pill.h-header-claim { padding: 0 10px !important; }
 }
+
+html:root .sn-site .sn-pill.sn-pill-blauw { --sn-pill-green: #00a3e0; }

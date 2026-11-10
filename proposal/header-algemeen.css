@@ -24,7 +24,22 @@ html:root .sn-site .sn-alg-acties .sn-pill{--sn-pill-height:50px;gap:14px;paddin
 
 /* Rechts: de grote foto. */
 .sn-alg-beeld{position:relative;display:grid;gap:12px}
-.sn-alg-foto{position:relative;aspect-ratio:4/5;max-height:640px;margin:0;border:1px solid var(--a-lijn);border-radius:16px;overflow:hidden;background:#06090b}
+.sn-alg-foto{position:relative;aspect-ratio:4/5;max-height:640px;scroll-margin-top:105px;margin:0;border:1px solid var(--a-lijn);border-radius:16px;overflow:hidden;background:#06090b}
+.sn-alg-dia{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity 0s .48s}
+.sn-alg-dia.is-gesprek{transform:scale(1.12);transform-origin:34% 60%}
+@media(prefers-reduced-motion:no-preference){
+  .sn-alg-foto{animation:sn-alg-turn 8s ease-in-out infinite alternate;animation-play-state:paused}
+  .sn-alg-foto[data-draait="true"]{animation-play-state:running}
+}
+@keyframes sn-alg-turn{
+  from{transform:perspective(1200px) rotateY(-2deg) rotateX(.6deg)}
+  to{transform:perspective(1200px) rotateY(2deg) rotateX(-.6deg)}
+}
+.sn-alg-dia[data-actief="true"]{opacity:1;z-index:1;transition:opacity .48s ease}
+.sn-alg-foto figcaption,.sn-alg-knop-video,.sn-alg-knop-fotos{z-index:2}
+.sn-alg-knop-fotos{position:absolute;left:16px;bottom:18px;display:grid;place-items:center;width:42px;height:42px;border:1px solid #ffffff66;border-radius:50%;background:#050706d9;color:#fff;cursor:pointer}
+.sn-alg-knop-fotos:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.sn-alg-dia,.sn-alg-dia[data-actief="true"]{transition:none}}
 .sn-alg-foto img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
 @media(max-width:960px){.sn-alg-foto{aspect-ratio:4/3}}
 .sn-alg-foto figcaption{position:absolute;inset:0 0 auto;display:flex;flex-direction:column;gap:6px;padding:18px 20px 48px;background:linear-gradient(#000d,transparent);pointer-events:none}
@@ -42,14 +57,14 @@ html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px
 .sn-alg-knop-video:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 /* Trusted by, dezelfde merken als in het startbeeld van de film. */
-.sn-alg-trusted{--merk-h:30px;display:flex;flex-direction:column;align-items:center;gap:18px;max-width:1320px;margin:0 auto;padding:22px clamp(16px,4vw,48px) clamp(32px,4vw,48px)}
-.sn-alg-trusted>span{font-family:var(--a-mono);font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#9aa6a0}
-.sn-alg-merken{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px 34px}
-.sn-alg-groep{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px 34px}
-.sn-alg-groep+.sn-alg-groep{padding-left:34px;border-left:1px solid #ffffff26}
-.sn-alg-streep{display:block;width:1px;height:40px;background:#ffffff26}
+.sn-alg-trusted{--merk-h:19px;display:flex;flex-direction:column;align-items:center;gap:9px;max-width:1040px;margin:0 auto;padding:10px 16px 18px}
+.sn-alg-trusted>span{font-family:var(--a-mono);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-align:center;color:#9aa6a0}
+.sn-alg-merken{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 19px}
+.sn-alg-groep{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 19px}
+.sn-alg-groep+.sn-alg-groep{padding-left:19px;border-left:1px solid #ffffff26}
+.sn-alg-streep{display:block;width:1px;height:24px;background:#ffffff26}
 .sn-alg-merken img{display:block;height:calc(var(--merk-h) * var(--maat,1));width:auto}
-@media(max-width:700px){.sn-alg-trusted{--merk-h:22px}.sn-alg-groep+.sn-alg-groep{padding-left:0;border-left:0}.sn-alg-streep{display:none}}
+@media(max-width:700px){.sn-alg-trusted{--merk-h:15px}.sn-alg-groep+.sn-alg-groep{padding-left:0;border-left:0}.sn-alg-streep{display:none}}
 
 /* Filmvenster. */
 .sn-alg-venster{width:min(420px,90vw,calc(86vh * 9 / 16));padding:0;border:1px solid var(--a-lijn);border-radius:16px;background:#000;overflow:visible}
@@ -66,5 +81,5 @@ html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px
 
 /* Diepte3D.tsx: het canvas ligt over de foto, met dezelfde langzame zoom, en neemt het beeld over zodra het klaar is. */
 .sn-alg-foto .sn-diepte3d{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;pointer-events:none;transform-origin:50% 60%;animation:sn-alg-grow 14s ease-in-out infinite alternate;transition:opacity .5s ease}
-.sn-alg-foto.is-3d .sn-diepte3d{opacity:1}
+.sn-alg-dia.is-3d .sn-diepte3d{opacity:1}
 @media(prefers-reduced-motion:reduce){.sn-alg-foto .sn-diepte3d{display:none}}
