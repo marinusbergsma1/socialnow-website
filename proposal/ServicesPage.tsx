@@ -154,15 +154,17 @@ export default function ServicesPage() {
               <a className="svc-link" href={boekingsPlannerUrl}>Bespreek je website <ArrowUpRight size={17} aria-hidden="true" /></a>
             </div>
             <figure>
-              <iframe
-                title="Live website van kWh Garant"
-                src="https://kwhgarant.nl/"
-                loading="lazy"
-                tabIndex={-1}
-                aria-hidden="true"
-                sandbox="allow-scripts allow-same-origin"
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
+              <div className="svc-live-preview">
+                <iframe
+                  title="Live website van kWh Garant"
+                  src="https://kwhgarant.nl/"
+                  loading="lazy"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  sandbox="allow-scripts allow-same-origin"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              </div>
               <figcaption><a className="svc-link" href="https://kwhgarant.nl/" target="_blank" rel="noopener noreferrer">Bekijk kWh Garant live <ArrowUpRight size={17} aria-hidden="true" /></a></figcaption>
             </figure>
           </article>
