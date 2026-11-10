@@ -464,11 +464,18 @@ function showSlots(slots) {
   drawCalendar();
 }
 
+const plannerParams = new URLSearchParams(location.search);
+const mailTickets = plannerParams.getAll('ticket');
+const viaMail = plannerParams.get('bron') === 'mail';
+const mailTicket = viaMail && mailTickets.length === 1 && /^[a-zA-Z0-9_-]{40,1100}$/.test(mailTickets[0])
+  ? mailTickets[0] : '';
+
 async function plannerRequest(operation, input) {
+  if (mailTickets.length && !mailTicket) return { status: 'expired' };
   const response = await fetch('/api/afspraak', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ operation, ...input }),
+    body: JSON.stringify({ operation, ...input, ...(mailTicket ? { mailTicket } : {}) }),
   });
   if (!response.ok) throw new Error('De planner is tijdelijk onbereikbaar.');
   return response.json();
@@ -483,10 +490,28 @@ function loadSlots(message = '') {
   form.setAttribute('aria-busy', 'true');
   setStatus(message);
   plannerRequest('slots')
-    .then(slots => {
-      if (!Array.isArray(slots)) throw new Error('De agenda is tijdelijk onbereikbaar.');
+    .then(result => {
       skeleton.hidden = true;
       form.removeAttribute('aria-busy');
+      if (mailTicket && result?.status === 'booked') {
+        toonBevestigdeAfspraak(result);
+        return;
+      }
+      if (result?.status === 'expired') {
+        setStatus('Deze uitnodiging is ongeldig of verlopen. Vraag een nieuwe uitnodiging aan.', true);
+        return;
+      }
+      if (mailTicket && result?.status === 'taken') {
+        setStatus('Er staat al een afspraak bij deze uitnodiging. Neem contact met ons op.', true);
+        return;
+      }
+      if (mailTicket && result?.status === 'pending') {
+        refresh.hidden = false;
+        setStatus('Uw tijd is gereserveerd. Google Meet wordt nog aangemaakt.', true);
+        return;
+      }
+      const slots = mailTicket && result?.status === 'available' ? result.slots : result;
+      if (!Array.isArray(slots)) throw new Error('De agenda is tijdelijk onbereikbaar.');
       showSlots(slots);
       setStatus(slots.length ? '' : 'Er zijn momenteel geen vrije momenten. Mail gerust naar info@socialnow.nl.');
     })
@@ -505,10 +530,16 @@ function showBookingStep(details) {
   document.querySelector(details ? '#guest-title' : '#date-title').focus();
 }
 
-if (new URLSearchParams(location.search).get('bron') === 'mail') {
-  const { company } = form.elements;
+if (viaMail) {
+  const { company, email, note } = form.elements;
   company.closest('label').hidden = true;
   company.disabled = true;
+  if (mailTicket) {
+    email.closest('label').hidden = true;
+    email.disabled = true;
+    note.closest('label').hidden = true;
+    note.disabled = true;
+  }
 }
 
 refresh.addEventListener('click', () => loadSlots());
