@@ -54,7 +54,7 @@ button.option{background:#fff}
 .step-summary{margin:0 0 17px;padding:9px 12px;border-radius:5px;background:var(--pale);font-size:14px;color:var(--ink)}
 .guest-welcome{margin:0 0 4px;color:var(--muted);font-size:12px;font-weight:700}
 #guest-step .controls{margin-top:16px}
-#guest-title:focus,#date-title:focus{outline:none}
+#guest-title:focus,#date-title:focus,#confirmation-title:focus{outline:none}
 button,.action{display:inline-block;border:0;border-radius:5px;background:var(--accent);color:#fff;font:inherit;font-weight:700;padding:9px 14px;cursor:pointer;text-decoration:none}
 button:disabled{opacity:.45;cursor:default}
 button.secondary{background:#fff;color:var(--accent);border:1px solid var(--line);font-size:14px}
@@ -68,7 +68,6 @@ body:has(#done:not([hidden])) header .intro{display:none}
 .website-shortcut{display:inline-flex;gap:4px;align-items:center;justify-self:end;position:absolute;top:-10px;right:0;font-size:13px;font-weight:600;color:var(--accent)}
 .website-shortcut svg,.arrow{width:12px;height:12px;flex:none}
 .confirmation-body{width:min(100%,455px);margin:0}
-.confirmation-logo{display:block;width:150px;height:auto;margin:0 0 15px;padding:7px 10px;border-radius:7px;background:#080c10;translate:0 -6px}
 .booking-card{padding:13px 16px;margin:0 0 13px;border:1px solid #c8e3d0;border-left:3px solid #40946b;border-radius:7px;background:#edf8f0}
 #booked-date{font-size:19px;font-weight:700;margin:0 0 8px}
 #booked-date::first-letter{text-transform:uppercase}
@@ -129,7 +128,7 @@ body:has(#done:not([hidden])) header .intro{display:none}
   .booking-progress{animation:guest-progress-in .42s ease-out backwards}
   .planner-shell.is-confirmed header > *{animation:confirmed-in .72s ease-in-out var(--arrival,0ms) both;--from:-32px}
   .planner-shell.is-confirmed :is(.confirmation-body > *, .website-shortcut){animation:confirmed-in .72s ease-in-out var(--arrival,0ms) both;--from:32px}
-  .planner-shell.is-confirmed :is(.kicker,.confirmation-logo){--arrival:65ms}
+  .planner-shell.is-confirmed :is(.kicker,#confirmation-title){--arrival:65ms}
   .planner-shell.is-confirmed :is(h1,.booking-card){--arrival:125ms}
   .planner-shell.is-confirmed :is(.meta,#invite-status){--arrival:185ms}
   .planner-shell.is-confirmed :is(.contact,.actions,.website-shortcut){--arrival:245ms}
@@ -149,9 +148,10 @@ body:has(#done:not([hidden])) header .intro{display:none}
 @keyframes arrow-bounce{0%,100%{transform:translateX(0)}43%{transform:translateX(4px)}72%{transform:translateX(-1px)}}
 @media(max-width:430px){#done{padding-top:31px;min-height:0}.website-shortcut{top:0}}
 .trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
-.credit{position:relative;display:flex;justify-content:center;padding:0 0 17px}
-.credit a{display:inline-flex;align-items:center;gap:6px;color:#24262b;font-size:12px;font-weight:600;text-decoration:none}
-.credit img{display:block;height:22px;width:auto;padding:4px 6px;border-radius:4px;background:#080c10}
+.credit{position:relative;justify-self:stretch;display:flex;justify-content:center;padding:14px 16px;background:#101e30}
+.credit a{display:inline-flex;align-items:center;gap:6px;color:#fff;font-size:12px;font-weight:600;text-decoration:none}
+.credit a:focus-visible{outline-color:#fff}
+.credit img{display:block;height:20px;width:auto}
 [hidden]{display:none!important}
 @media(max-width:760px){.planner-shell{max-width:530px}main{grid-template-columns:1fr}header{border-right:0;border-bottom:1px solid var(--line)}header,.booking-panel{padding:21px}}
 @media(max-width:430px){.schedule,.details{grid-template-columns:1fr}.calendar button{max-height:38px}.options{grid-template-columns:1fr 1fr}.booking-details dt{flex-basis:60px}}
@@ -229,10 +229,10 @@ body:has(#done:not([hidden])) header .intro{display:none}
     </fieldset>
   </form>
   <p id="status" role="status" aria-live="polite"></p>
-  <section id="done" tabindex="-1" aria-label="Afspraakbevestiging" hidden>
+  <section id="done" aria-labelledby="confirmation-title" hidden>
     <a class="website-shortcut" href="https://socialnow.nl/nl/" target="_blank" rel="noopener">Bezoek onze website <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 2 4 4-4 4"/></svg></a>
     <div class="confirmation-body">
-      <img class="confirmation-logo" src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="719" height="132">
+      <h2 id="confirmation-title" tabindex="-1">Afspraak bevestigd</h2>
       <div class="booking-card">
         <p id="booked-date"></p>
         <dl class="booking-details" aria-label="Afspraakgegevens">
@@ -569,7 +569,7 @@ function toonBevestigdeAfspraak(result) {
   setCalendarLinks(result);
   done.hidden = false;
   playConfirmation();
-  done.focus();
+  document.querySelector('#confirmation-title').focus();
 }
 
 function setCalendarLinks(result) {
