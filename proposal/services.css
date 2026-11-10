@@ -164,6 +164,7 @@
   font-variant-numeric: tabular-nums;
 }
 .sn-site .svc-price strong { color: var(--svc-ink); font-size: clamp(24px, 2.5vw, 34px); font-weight: 650; letter-spacing: -.025em; }
+.sn-site .svc-price-start strong { font-size: clamp(19px, 1.65vw, 22px); }
 .sn-site .svc-from, .sn-site .svc-unit { color: var(--svc-muted); font-size: 14px; }
 .sn-site .svc-link {
   display: inline-flex;

@@ -52,7 +52,7 @@ function Punten({ punten }: { punten: readonly string[] }) {
 }
 
 function Bedrag({ prijs, grondslag, vanaf = true }: { prijs: string; grondslag: string; vanaf?: boolean }) {
-  return <p className="svc-price">
+  return <p className={vanaf ? "svc-price svc-price-start" : "svc-price"}>
     {vanaf && <span className="svc-from">Vanaf</span>}
     <strong>{prijs}</strong>
     <span className="svc-unit">{grondslag}</span>
