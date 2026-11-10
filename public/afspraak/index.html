@@ -208,6 +208,7 @@ body:has(#done:not([hidden])) header .intro{display:none}
     </fieldset>
     <div class="controls">
       <button id="refresh" class="secondary" type="button" hidden>Opnieuw proberen</button>
+      <button id="cancel" class="secondary" type="button" hidden>Afspraak annuleren</button>
     </div>
     </div>
     <fieldset id="guest-step" hidden disabled>
@@ -237,7 +238,7 @@ body:has(#done:not([hidden])) header .intro{display:none}
         <p id="booked-date"></p>
         <dl class="booking-details" aria-label="Afspraakgegevens">
           <div><dt>Tijd</dt><dd id="booked-time"></dd></div>
-          <div><dt>Gesprek</dt><dd>Kennismaking met Marinus Bergsma</dd></div>
+          <div><dt>Gesprek</dt><dd id="booked-host">Kennismaking met Marinus Bergsma</dd></div>
           <div><dt>Locatie</dt><dd><span id="location-label">Google Meet</span><a id="meeting" target="_blank" rel="noopener noreferrer" hidden>Google Meet openen</a></dd></div>
           <div id="meeting-code-row" hidden><dt>Meet-code</dt><dd><code id="meeting-code"></code></dd></div>
         </dl>
@@ -285,6 +286,7 @@ const backButton = document.querySelector('#back');
 const status = document.querySelector('#status');
 const submit = document.querySelector('#submit');
 const refresh = document.querySelector('#refresh');
+const cancel = document.querySelector('#cancel');
 const done = document.querySelector('#done');
 const meeting = document.querySelector('#meeting');
 const timeZone = 'Europe/Amsterdam';
@@ -470,13 +472,38 @@ const mailTickets = plannerParams.getAll('ticket');
 const viaMail = plannerParams.get('bron') === 'mail';
 const mailTicket = viaMail && mailTickets.length === 1 && /^[a-zA-Z0-9_-]{40,1100}$/.test(mailTickets[0])
   ? mailTickets[0] : '';
+// ?v=<verkoper>: de gastheer van de kennismaking. Zonder v= geldt de standaard uit de planner.
+const gastheerSleutel = /^[a-z0-9-]{1,32}$/.test(plannerParams.get('v') || '') ? plannerParams.get('v') : '';
+let gastheerNaam = 'Marinus Bergsma';
+
+function telefoonTekst(nummer) {
+  const mobiel = /^\+316(\d{2})(\d{2})(\d{2})(\d{2})$/.exec(nummer);
+  return mobiel ? '06 ' + mobiel.slice(1).join(' ') : nummer;
+}
+
+// Naam, foto, telefoon en WhatsApp van de gastheer uit het API-antwoord; de pagina toont standaard Marinus.
+function toonGastheer(gastheer) {
+  if (!gastheer || typeof gastheer.naam !== 'string' || !gastheer.naam.trim() || gastheer.naam.length > 100) return;
+  gastheerNaam = gastheer.naam.trim();
+  const portret = document.querySelector('header .portrait');
+  if (/^\/images\/[\w/.-]+\.(webp|jpe?g|png)$/.test(gastheer.foto || '')) portret.src = gastheer.foto;
+  portret.alt = gastheerNaam;
+  document.querySelector('header .kicker').textContent = gastheerNaam + ' · SocialNow';
+  document.querySelector('#booked-host').textContent = 'Kennismaking met ' + gastheerNaam;
+  const telefoon = document.querySelector('header .contact a[href^="tel:"]');
+  if (/^\+\d{8,15}$/.test(gastheer.telefoon || '')) {
+    telefoon.href = 'tel:' + gastheer.telefoon;
+    telefoon.textContent = telefoonTekst(gastheer.telefoon);
+  }
+  if (/^\d{8,15}$/.test(gastheer.whatsapp || '')) document.querySelector('a.whatsapp').href = 'https://wa.me/' + gastheer.whatsapp;
+}
 
 async function plannerRequest(operation, input) {
   if (mailTickets.length && !mailTicket) return { status: 'expired' };
   const response = await fetch('/api/afspraak', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ operation, ...input, ...(mailTicket ? { mailTicket } : {}) }),
+    body: JSON.stringify({ operation, ...input, ...(mailTicket ? { mailTicket } : { gastheer: gastheerSleutel }) }),
   });
   if (!response.ok) throw new Error('De planner is tijdelijk onbereikbaar.');
   return response.json();
@@ -487,6 +514,7 @@ function loadSlots(message = '') {
   schedule.hidden = true;
   bookingToken.value = '';
   refresh.hidden = true;
+  cancel.hidden = true;
   skeleton.hidden = false;
   form.setAttribute('aria-busy', 'true');
   setStatus(message);
@@ -511,10 +539,15 @@ function loadSlots(message = '') {
         setStatus('Uw tijd is gereserveerd. Google Meet wordt nog aangemaakt.', true);
         return;
       }
-      const slots = mailTicket && result?.status === 'available' ? result.slots : result;
+      if (result?.gastheer) toonGastheer(result.gastheer);
+      const slots = Array.isArray(result) ? result : result?.status === 'available' ? result.slots : null;
       if (!Array.isArray(slots)) throw new Error('De agenda is tijdelijk onbereikbaar.');
       showSlots(slots);
-      setStatus(slots.length ? '' : 'Er zijn momenteel geen vrije momenten. Mail gerust naar info@socialnow.nl.');
+      // Met de link uit de bevestiging kiest de klant een nieuwe tijd of annuleert hij.
+      const verzetten = Boolean(mailTicket) && result?.verzetten === true;
+      cancel.hidden = !verzetten;
+      setStatus(!slots.length ? 'Er zijn momenteel geen vrije momenten. Mail gerust naar info@socialnow.nl.' :
+        verzetten ? 'Kies een nieuwe datum en tijd voor uw afspraak.' : '');
     })
     .catch(() => {
       skeleton.hidden = true;
@@ -544,6 +577,27 @@ if (viaMail) {
 }
 
 refresh.addEventListener('click', () => loadSlots());
+cancel.addEventListener('click', () => {
+  if (cancel.disabled || !confirm('Weet u zeker dat u uw afspraak wilt annuleren?')) return;
+  cancel.disabled = true;
+  setStatus('Uw afspraak wordt geannuleerd…');
+  plannerRequest('cancel')
+    .then(result => {
+      cancel.disabled = false;
+      if (result?.status === 'cancelled') {
+        form.hidden = true;
+        setStatus('Uw afspraak is geannuleerd. U ontvangt hiervan een bericht van Google Agenda.');
+        return;
+      }
+      setStatus(result?.status === 'taken' || result?.status === 'expired'
+        ? 'Deze link is niet meer geldig. Neem contact met ons op via info@socialnow.nl.'
+        : 'Annuleren lukt nu niet. Probeer het zo opnieuw.', true);
+    })
+    .catch(() => {
+      cancel.disabled = false;
+      setStatus('Annuleren lukt nu niet. Probeer het zo opnieuw.', true);
+    });
+});
 backButton.addEventListener('click', () => {
   setStatus('');
   showBookingStep(false);
@@ -571,6 +625,16 @@ form.addEventListener('submit', event => {
       if (result.status === 'taken' || result.status === 'expired') {
         showBookingStep(false);
         loadSlots('Dit moment is niet meer beschikbaar. We halen nieuwe momenten op.');
+        return;
+      }
+      if (result.status === 'bestaat') {
+        setStatus(result.opnieuwVerstuurd
+          ? 'Er staat al een afspraak op dit e-mailadres. We hebben de bevestiging opnieuw gestuurd, met een link om die afspraak te verzetten of te annuleren.'
+          : 'Er staat al een afspraak op dit e-mailadres. In uw bevestigingsmail staat een link om die afspraak te verzetten of te annuleren.', true);
+        return;
+      }
+      if (result.status === 'limiet') {
+        setStatus('Er worden nu veel afspraken gepland. Probeer het later opnieuw of mail naar info@socialnow.nl.', true);
         return;
       }
       if (result.status !== 'booked') {
@@ -609,7 +673,7 @@ function toonBevestigdeAfspraak(result) {
 function setCalendarLinks(result) {
   const start = new Date(result.start);
   const end = new Date(result.end || +start + 30 * 60 * 1000);
-  const title = 'Kennismaking met Marinus Bergsma';
+  const title = 'Kennismaking met ' + gastheerNaam;
   const location = result.meet || 'Google Meet';
   const calendarDate = date => date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
 
