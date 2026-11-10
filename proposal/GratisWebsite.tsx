@@ -98,10 +98,6 @@ export default function GratisWebsite() {
     e.preventDefault();
     doel.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-  // 4 november 2026 (Marinus): "Bij website Actie moet gewoon een hele cleane onboarding komen met nog een zwarte banner met de video
-  // van mij en in 1 header net als de main nu mooi is gedaan waar ik zoals bij de vorige veiligheidsvideo vertel over het belang van
-  // een goeie website samen met het Binance geval. Daaronder gewoon de onboarding." Een video met het Binance-verhaal bestaat nog
-  // niet; eerst stond hier de veiligheidsvideo van /security, sinds 5 november een tegel naar het blog.
   return <>
     <section className="sn-alg gw2-kop" aria-labelledby="gw2-kop">
       <div className="sn-alg-wrap">
@@ -120,17 +116,16 @@ export default function GratisWebsite() {
             <img src="/images/Steef-Komen.webp" alt="" width="40" height="40" /><span><strong translate="no">Steef Komen</strong><small>Liever even praten? Stuur Steef een bericht.</small></span><ArrowUpRight size={16} aria-hidden="true" />
           </a>
         </div>
-        {/* 5 november 2026 (Marinus): "Video misschien zelfs ook wel weg. Why an ai website is more safe and secure? Oid en dan naar
-            een blog". Een positieve tegel naar het blog (data/posts.json), met een echte klantwebsite als beeld. */}
-        <Link className="gw2-blog" to="/blog/waarom-een-ai-website-veiliger-is">
-          <span className="gw2-blog-beeld"><img src="/images/cases/vastiq-desktop.webp" alt="" loading="lazy" decoding="async" /></span>
-          <span className="gw2-blog-tekst">
-            <span className="gw2-blog-label">Blog · 4 min</span>
-            <strong>Waarom een AI-website veiliger is<span className="sn-alg-punt">.</span></strong>
-            <span>AI vindt fouten sneller, een developer controleert. Zo wordt je website veilig en blijft hij dat.</span>
-            <span className="gw2-blog-lees">Lees het artikel <ArrowUpRight size={16} aria-hidden="true" /></span>
-          </span>
-        </Link>
+        <div className="gw2-voorbeelden" aria-label="Websitevoorbeelden">
+          <Link className="gw2-voorbeeld" to="/project/kwh-garant-website">
+            <img src="/screenshots/kwhgarant-hero.webp" alt="" width="1440" height="900" loading="lazy" decoding="async" />
+            <span><span><small>Websiteconcept</small><strong>kWh Garant</strong></span><ArrowUpRight size={17} aria-hidden="true" /></span>
+          </Link>
+          <Link className="gw2-voorbeeld" to="/project/divine-machines-website">
+            <img src="/screenshots/divine-machines-hero.webp" alt="" width="1440" height="900" loading="lazy" decoding="async" />
+            <span><span><small>Website</small><strong>Divine Machines</strong></span><ArrowUpRight size={17} aria-hidden="true" /></span>
+          </Link>
+        </div>
       </div>
     </section>
     <div className="gw2" id="onboarding"><div className="gw2-vel">
