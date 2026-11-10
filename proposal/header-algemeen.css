@@ -42,9 +42,10 @@ html:root .sn-site .sn-alg-acties .sn-pill{--sn-pill-height:50px;gap:14px;paddin
 @media(prefers-reduced-motion:reduce){.sn-alg-dia,.sn-alg-dia[data-actief="true"]{transition:none}}
 .sn-alg-foto img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
 @media(max-width:960px){.sn-alg-foto{aspect-ratio:4/3}}
-.sn-alg-foto figcaption{position:absolute;inset:0 0 auto;display:flex;flex-direction:column;gap:6px;padding:18px 20px 48px;background:linear-gradient(#000d,transparent);pointer-events:none}
-.sn-alg-foto figcaption .sn-alg-klein{font-family:var(--a-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#cfd8d3}
-html:root .sn-site .sn-alg .sn-alg-foto figcaption strong{font-family:'TT Norms',sans-serif!important;font-size:22px;font-weight:600;letter-spacing:0;color:#fff}
+.sn-alg-foto figcaption{position:absolute;inset:0 0 auto;display:flex;flex-direction:column;gap:2px;padding:18px 20px 48px;background:linear-gradient(#000d,transparent);pointer-events:none}
+.sn-alg-foto figcaption .sn-alg-klein{font-family:var(--a-mono);font-size:10.5px;line-height:1.15;letter-spacing:.1em;text-transform:uppercase;color:#cfd8d3}
+html:root .sn-site .sn-alg .sn-alg-foto figcaption strong{font-family:'TT Norms',sans-serif!important;font-size:22px;font-weight:600;line-height:1.15;letter-spacing:0;color:#fff}
+@media(max-width:1024px),(hover:none) and (pointer:coarse){.sn-alg-foto figcaption{display:none}}
 
 
 /* Samenwerkingen onder de titel, in kleur. */
