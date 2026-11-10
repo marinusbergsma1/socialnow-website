@@ -286,7 +286,7 @@
   .sn-site .svc-operations .svc-feature-copy + .svc-feature-copy { border-left: 0; border-top: 1px solid var(--svc-line); }
   .sn-site .svc-case-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
   .sn-site .svc-website figure { grid-template-rows: auto auto; }
-  .sn-site .svc-live-preview { aspect-ratio: 3 / 2; }
+  .sn-site .svc-live-preview { aspect-ratio: 1; }
   .sn-site .svc-live-preview iframe { width: 135%; height: 135%; transform: scale(.740741); }
 }
 @media (prefers-reduced-motion: reduce) {
