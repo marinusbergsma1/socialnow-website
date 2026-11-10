@@ -11,7 +11,6 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { CLAIM_URL } from "./os-entry";
 import { Action } from "./ui";
 import { useButtonMagnetism } from "./useButtonMagnetism";
-import { Logo5Jaar } from "./Logo5Jaar";
 import { Home, ProductenPagina } from "./pages";
 // 30 september 2026 (Marinus: "WIL ECHT INSTANT LOADING"): elke pagina buiten de homepage is een eigen bestand dat pas
 // laadt als iemand die pagina opent (proposal/later.tsx). Het eerste script draagt alleen de header en de hero.
@@ -225,8 +224,7 @@ function ProposalShell() {
             to="/"
             aria-label="SocialNow, naar de homepage"
           >
-            {/* 6 november 2026 (Marinus): het 5 YEARS-logo uit de 5-jaarfilm, met de beeldmerk-animatie als korte intro. */}
-            <Logo5Jaar thuis={location.pathname === "/"} />
+            <img src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="200" height="31" />
           </Link>
           <nav className="h-desktop-nav" aria-label="Hoofdnavigatie">
             <NavLink to="/projecten" translate="no">Client Cases</NavLink>
@@ -237,12 +235,9 @@ function ProposalShell() {
             ))}
           </nav>
           <LanguageSwitch />
-          {/* 27 oktober 2026 (Marinus): Plan een call weg uit de header; bellen of appen staat rechtsonder (BelApp). */}
-          {/* 26 september 2026 (Marinus): geen reclame in de header, rechtsboven de login voor het gratis OS. */}
-          <a className="sn-pill h-header-claim" href="https://app.socialnow.nl/login/">
-            <span className="h-header-login-full">Inloggen gratis OS</span>
-            <span className="h-header-login-short">Inloggen</span>
-            <ArrowUpRight size={15} />
+          <a className="sn-pill h-header-claim" href={boekingsPlannerUrl}>
+            <span>Plan een call in</span>
+            <ArrowUpRight size={15} aria-hidden="true" />
           </a>
           <button
             className="h-menu-toggle"

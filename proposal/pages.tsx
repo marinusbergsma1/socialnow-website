@@ -71,11 +71,7 @@ export function Home() {
   return <div className="sn-simple-home">
     <section className="h-hero sn-approved-hero" id="home">
       <HomeEnthousiast />
-      {/* 4 november 2026 (avond, Marinus): "De landingspagina is wie wij zijn [...] hier moet de connect weer komen met daarna mooi
-          de websites, daarna de mooie sliders en mobiele slider etc daarna mag wel die deze en nog beter gemaakt". */}
-      <HomeConnectBand />
     </section>
-    <ConnectExperts />
     <FreeWebsite />
     <CustomerReviews />
     <ImageSliders kort />

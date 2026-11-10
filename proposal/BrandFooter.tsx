@@ -36,6 +36,7 @@ export default function BrandFooter() {
           </div>
           <div>
             <p className="h-eyebrow">Het OS</p>
+            <a href="https://app.socialnow.nl/login/">Log in op je OS</a>
             <Link to="/het-os">Ontdek hoe het werkt</Link>
             <Link to="/het-os#website">Website</Link>
             <Link to="/het-os#crm">CRM</Link>

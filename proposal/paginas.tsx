@@ -1,6 +1,8 @@
 import AdvisoryPartner from "./AdvisoryPartner";
 import Verhaal from "./Verhaal";
 import HomeTeam from "./HomeTeam";
+import TeamCallTile from "./TeamCallTile";
+import { HomeConnectBand } from "./HomeHeader";
 import PixelInfrastructure from "./PixelInfrastructure";
 import NulNaarBedrijf from "./NulNaarBedrijf";
 import MensEnAI from "./MensEnAI";
@@ -334,6 +336,9 @@ export function TeamPage() {
         }
         text="SocialNow begon in november 2021. Sindsdien groeiden we uit tot een team van specialisten in creatie, marketing, data en techniek. Samen bouwen we één OS dat je bedrijf ontzorgt, en het persoonlijke contact blijft."
       />
+      <div className="sn-team-connect-band"><HomeConnectBand /></div>
+      <ConnectExperts />
+      <div className="h-wrap"><TeamCallTile /></div>
       {/* 22 oktober 2026 (Marinus): redesign van team en mijn story. Eerst mijn story met de film en de samenwerking met
           Indexworld en Uncanny, daarna het team. De losse oprichtersblok viel weg: dat verhaal staat nu in de story. */}
       <Verhaal />

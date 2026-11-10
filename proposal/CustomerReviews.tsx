@@ -12,8 +12,8 @@ const customerReviews = [
     text: "Wij zijn heel erg blij met Marinus. Denkt goed mee en levert op tijd. Topper!",
   },
   {
-    name: "VDZ Brigade",
-    company: "Website en huisstijl",
+    name: "Mike Bregman",
+    company: "VDZ Brigade",
     image: "/images/klantlogos/vdz-beeldmerk.svg",
     logo: true,
     text: "Zeer tevreden over dit bedrijf. Wat deze mannen neerzetten in zo’n korte tijd ongelofelijk. Wij gaan zomaar niet weg. Echt een aanrader. Inmiddels al zakenrelaties doorgestuurd. Ga zo door!!",
@@ -23,6 +23,13 @@ const customerReviews = [
     company: "Divine Machines",
     image: "/images/Hussein.webp",
     text: "Erg tevreden met de ervaring en kennis van de team van socialnow. Via via zijn wij in contact gekomen en sindsdien is socialnow de designer van Divine Machines. Ga zo door!",
+  },
+  {
+    name: "Albert Deltour",
+    company: "Light Art Collection",
+    image: "/images/klein/Albert-Deltour-160.webp",
+    language: "en",
+    text: "From ambitious and talented intern to a reliable partner is how I would describe Marinus.",
   },
 ];
 export default function CustomerReviews() {
@@ -56,7 +63,7 @@ export default function CustomerReviews() {
         {customerReviews.map((review) => (
           <figure key={review.name}>
             <Quote size={24} aria-hidden="true" />
-            <blockquote lang="nl">
+            <blockquote lang={review.language ?? "nl"}>
               {review.text}
             </blockquote>
             <figcaption>

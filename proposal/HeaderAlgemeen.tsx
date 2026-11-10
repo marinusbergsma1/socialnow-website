@@ -51,7 +51,7 @@ export function AtomiumFoto() {
       <img src="/images/verhaal/team-atomium.webp" alt="Ons team bij het Atomium in Brussel" width="900" height="1200" fetchPriority="high" />
       {/* 5 november 2026: 3D zoals Apple's ruimtelijke foto's ("Of een 3D effect zoals Apple nu ook heeft met die foto's"). */}
       <Diepte3D src="/images/verhaal/team-atomium.webp" diepte="/images/verhaal/team-atomium-diepte.webp" />
-      <figcaption><span className="sn-alg-klein">Odoo Experience 2026 · Brussel</span><strong>Ons team<span className="sn-alg-punt">.</span></strong></figcaption>
+      <figcaption><span className="sn-alg-klein">Odoo Experience 2026 · Hoogtepunt</span><strong>Met een deel van ons team<span className="sn-alg-punt">.</span></strong></figcaption>
       <button type="button" className="sn-alg-knop-video" aria-haspopup="dialog" onClick={open}><Play size={15} aria-hidden="true" /><span>Bekijk de video</span></button>
     </figure>
     <dialog className="sn-alg-venster" ref={venster} aria-label="Aftermovie Odoo Experience 2026" onClose={() => film.current?.pause()} onClick={e => { if (e.target === venster.current) sluit(); }}>

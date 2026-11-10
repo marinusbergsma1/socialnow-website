@@ -27,7 +27,7 @@ html:root .sn-site .sn-alg-acties .sn-pill{--sn-pill-height:50px;gap:14px;paddin
 .sn-alg-foto{position:relative;aspect-ratio:4/5;max-height:640px;margin:0;border:1px solid var(--a-lijn);border-radius:16px;overflow:hidden;background:#06090b}
 .sn-alg-foto img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
 @media(max-width:960px){.sn-alg-foto{aspect-ratio:4/3}}
-.sn-alg-foto figcaption{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:6px;padding:60px 20px 18px;background:linear-gradient(transparent,#000d)}
+.sn-alg-foto figcaption{position:absolute;inset:0 0 auto;display:flex;flex-direction:column;gap:6px;padding:18px 20px 48px;background:linear-gradient(#000d,transparent);pointer-events:none}
 .sn-alg-foto figcaption .sn-alg-klein{font-family:var(--a-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#cfd8d3}
 html:root .sn-site .sn-alg .sn-alg-foto figcaption strong{font-family:'TT Norms',sans-serif!important;font-size:22px;font-weight:600;letter-spacing:0;color:#fff}
 
