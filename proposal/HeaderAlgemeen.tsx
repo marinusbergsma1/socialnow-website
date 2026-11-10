@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Pause, Play, X } from "lucide-react";
+import { ArrowUpRight, Play, X } from "lucide-react";
 import { CRAFTURE, DIRECT, VIA_CRAFTURE, merk } from "./ExplainerPlayer";
 import "./header-algemeen.css";
 import Diepte3D from "./Diepte3D";
@@ -82,9 +82,7 @@ export function AtomiumFoto() {
           <strong>In gesprek op de beurs<span className="sn-alg-punt">.</span></strong>
         </figcaption>
       )}
-      <button type="button" className="sn-alg-knop-fotos" aria-label={speelt ? "Pauzeer de fotowissel" : "Speel de fotowissel af"} onClick={() => zetSpeelt(!speelt)}>
-        {speelt ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
-      </button>
+      <button type="button" className="sn-alg-knop-fotos" aria-label={speelt ? "Pauzeer de fotowissel" : "Speel de fotowissel af"} onClick={() => zetSpeelt(vorige => !vorige)} />
       <button type="button" className="sn-alg-knop-video" aria-haspopup="dialog" onClick={open}><Play size={15} aria-hidden="true" /><span>Bekijk de video</span></button>
     </figure>
     <dialog className="sn-alg-venster" ref={venster} aria-label="Aftermovie Odoo Experience 2026" onClose={naSluiten} onClick={e => { if (e.target === venster.current) sluit(); }}>
