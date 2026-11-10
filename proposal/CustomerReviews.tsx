@@ -10,7 +10,6 @@ const customerReviews = [
     name: "Ellen Sluijs",
     company: "kWh Garant",
     slug: "kwh-garant-website",
-    caseImage: "/images/cases/kwhgarant-desktop.webp",
     work: "Voor kWh Garant maakten we Odoo overzichtelijker, verzorgden we de volledige branding en contentstrategie en bouwden we vanuit een gratis websitedemo een nieuwe website.",
     result: "Dat leverde in de eerste week 100 leads op.",
     website: "https://kwhgarant.nl/",
@@ -21,7 +20,6 @@ const customerReviews = [
     name: "Mike Bregman",
     company: "VDZ Brigade",
     slug: "vdz-brigade-website",
-    caseImage: "/screenshots/vdz-brigade-hero.webp",
     work: "Samen met Mike bouwden we de online zichtbaarheid van VDZ Brigade vanaf nul op, met een nieuwe website, een herkenbare huisstijl en een duidelijke groeistrategie.",
     result: "VDZ Brigade behaalde € 100.000 omzet in één maand.",
     website: "https://vdz-brigade.nl/",
@@ -33,7 +31,6 @@ const customerReviews = [
     name: "Hussein Awqati",
     company: "Divine Machines",
     slug: "divine-machines-website",
-    caseImage: "/screenshots/divine-machines-hero.webp",
     work: "Samen met Jacinto en Hussein bouwden we voor Divine Machines een website die laat zien wat hun eiwitautomaten kunnen en hoe ze werken.",
     website: "https://divinemachines.nl/",
     image: "/images/Hussein.webp",
@@ -43,7 +40,6 @@ const customerReviews = [
     name: "Albert Deltour",
     company: "Light Art Collection",
     slug: "light-art-collection",
-    caseImage: "/images/Light-Art-Collection.webp",
     work: "Wat begon tijdens Marinus’ stage groeide uit tot een jarenlange samenwerking met Albert. We maken internationale presentaties en laten met artist impressions zien hoe lichtkunst op locatie tot leven komt.",
     website: "https://lightart-collection.com/",
     image: "/images/klein/Albert-Deltour-160.webp",
@@ -55,25 +51,31 @@ export default function CustomerReviews({ resultaten = false }: { resultaten?: b
   const Heading = resultaten ? "h1" : "h2";
 
   return (
-    <section className="h-wrap h-customer-reviews" id="ervaring" aria-labelledby="customer-reviews-title">
-      <header className="h-reviews-heading">
-        <div>
-          <p className="h-review-label">Uit de praktijk</p>
-          <Heading id="customer-reviews-title">Ons werk en wat klanten zeggen</Heading>
-        </div>
-        <a className="h-review-link" href={REVIEWS_URL} target="_blank" rel="noopener noreferrer">
-          Bekijk de reviews op Google <ArrowUpRight size={16} aria-hidden="true" />
-        </a>
-      </header>
-      <div className="h-review-cases" id="klantcases">
-        {customerReviews.map(review => (
-          <article key={review.slug} className="sn-cta-web h-review-case" aria-labelledby={`case-${review.slug}`}>
-            <div className="h-review-case-copy">
-              <p className="sn-cta-web-label"><i aria-hidden="true" />Case</p>
-              <h3 id={`case-${review.slug}`} translate="no">{review.company}</h3>
-              <p className="sn-cta-web-tekst">{review.work}{review.result && <> <strong>{review.result}</strong></>}</p>
+    <section className="h-customer-reviews" id="ervaring" aria-labelledby="customer-reviews-title">
+      <div className="h-wrap">
+        <header className="h-reviews-heading">
+          <div>
+            <p className="h-review-label">Uit de praktijk</p>
+            <Heading id="customer-reviews-title">Ons werk en wat klanten zeggen</Heading>
+          </div>
+          <a className="h-review-link" href={REVIEWS_URL} target="_blank" rel="noopener noreferrer">
+            Bekijk de reviews op Google <ArrowUpRight size={16} aria-hidden="true" />
+          </a>
+        </header>
+        <div className="h-review-cards" id="klantcases">
+          {customerReviews.map(review => (
+            <article key={review.slug} className="h-review-card">
+              <div className="h-review-work">
+                <div className="h-review-card-heading">
+                  <h3 id={`review-${review.slug}`} translate="no">{review.company}</h3>
+                  <a className="h-review-link" href={review.website} aria-labelledby={`website-${review.slug} review-${review.slug}`}>
+                    <span id={`website-${review.slug}`}>Website</span> <ArrowUpRight size={13} aria-hidden="true" />
+                  </a>
+                </div>
+                <p>{review.work}{review.result && <> <strong>{review.result}</strong></>}</p>
+              </div>
               <figure>
-                <Quote size={18} aria-hidden="true" />
+                <Quote size={20} aria-hidden="true" />
                 <blockquote lang={language}>{review.text}</blockquote>
                 <figcaption>
                   <img
@@ -87,18 +89,12 @@ export default function CustomerReviews({ resultaten = false }: { resultaten?: b
                   <strong translate="no">{review.name}</strong>
                 </figcaption>
               </figure>
-              <Link className="sn-pill" to={`/project/${review.slug}`} aria-labelledby={`open-case-${review.slug} case-${review.slug}`}>
-                <span id={`open-case-${review.slug}`}>Bekijk de case</span><ArrowUpRight size={17} aria-hidden="true" />
+              <Link className="h-review-link" to={`/project/${review.slug}`} aria-labelledby={`open-case-${review.slug} review-${review.slug}`}>
+                <span id={`open-case-${review.slug}`}>Bekijk de case</span> <ArrowUpRight size={16} aria-hidden="true" />
               </Link>
-            </div>
-            <div className="h-review-case-media">
-              <a className="h-review-link" href={review.website} aria-labelledby={`website-${review.slug} case-${review.slug}`}>
-                <span id={`website-${review.slug}`}>Website</span> <ArrowUpRight size={13} aria-hidden="true" />
-              </a>
-              <img src={review.caseImage} alt="" width="1440" height="900" loading="lazy" decoding="async" />
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

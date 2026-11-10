@@ -63,24 +63,3 @@ html:root .sn-site .sn-blij .sn-alg-keur{margin-top:30px}
 .sn-cta-web:hover .sn-cta-web-beeld .is-een{transform:rotate(3deg) translateY(-6px)}
 .sn-cta-web:hover .sn-cta-web-beeld .is-twee{transform:rotate(-3deg) translateY(4px)}
 @media(prefers-reduced-motion:reduce){.sn-cta-web-beeld img{transition:none}}
-
-.sn-site .h-review-cases{display:grid;gap:16px;scroll-margin-top:100px}
-.sn-site .h-review-case{grid-template-areas:"tekst beeld";align-items:center;min-height:0;margin:0;padding:clamp(22px,3vw,40px)}
-html:root .sn-site .h-review-case h3{margin:8px 0 0;font-size:clamp(28px,3.5vw,46px)!important;font-weight:700;line-height:1.05;color:#fff}
-html:root .sn-site .h-review-case .sn-cta-web-tekst{font-size:16px}
-.sn-site .h-review-case .sn-cta-web-tekst strong{font:inherit;font-weight:700;color:#fff}
-.sn-site .h-review-case figure{margin:17px 0 18px;padding-top:14px;border-top:1px solid #ffffff24}
-.sn-site .h-review-case figure > svg{display:block;margin-bottom:4px;color:#25d366}
-.sn-site .h-review-case blockquote{margin:0;color:#edf1ef;font-size:15px;line-height:1.55}
-.sn-site .h-review-case figcaption{display:flex;align-items:center;gap:9px;margin-top:10px;color:#fff;font-size:13px}
-.sn-site .h-review-case figcaption img{flex:none;width:38px;height:38px;border-radius:50%;object-fit:cover}
-.sn-site .h-review-case figcaption .h-review-logo{border-radius:3px;object-fit:contain}
-.sn-site .h-review-case-media{grid-area:beeld;display:grid;gap:15px;align-content:center;min-width:0}
-.sn-site .h-review-case-media .h-review-link{justify-self:end}
-.sn-site .h-review-case-media > img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;border:1px solid #ffffff26;border-radius:12px;box-shadow:0 18px 36px #0009;transform:rotate(1.25deg)}
-.sn-site .h-review-case:nth-child(even) .h-review-case-media > img{transform:rotate(-1.25deg)}
-@media(max-width:860px){
-  .sn-site .h-review-case{position:relative;grid-template-areas:"tekst" "beeld";row-gap:18px}
-  .sn-site .h-review-case-media .h-review-link{position:absolute;inset:23px 22px auto auto}
-  .sn-site .h-review-case .h-review-case-media > img{transform:none}
-}
