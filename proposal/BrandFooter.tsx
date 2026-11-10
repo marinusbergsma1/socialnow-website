@@ -8,7 +8,7 @@ import {
   MessageCircle,
   RotateCcw,
 } from "lucide-react";
-import { services } from "./content";
+import { DIENSTEN } from "./Producten";
 import ContactSlot from "./ContactSlot";
 export default function BrandFooter() {
   const { pathname } = useLocation();
@@ -28,9 +28,9 @@ export default function BrandFooter() {
         <div className="h-footer-links">
           <div>
             <p className="h-eyebrow">Expertise</p>
-            {services.map((service) => (
-              <Link key={service.id} to={`/diensten#${service.id}`}>
-                {service.title}
+            {DIENSTEN.map((service) => (
+              <Link key={service.soort} to={service.naar}>
+                {service.titel}
               </Link>
             ))}
           </div>
@@ -42,7 +42,7 @@ export default function BrandFooter() {
             <Link to="/het-os#crm">CRM</Link>
             <Link to="/het-os#content">Studio</Link>
             <Link to="/het-os#ads">Advertenties</Link>
-            <Link to="/diensten#prijzen">Aanbod & inrichting</Link>
+            <Link to="/diensten#prijs-os-titel">OS-abonnementen</Link>
           </div>
           <div>
             <p className="h-eyebrow">SocialNow</p>

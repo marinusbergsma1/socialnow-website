@@ -18,14 +18,12 @@ export const PRODUCTEN = [
   { href: "/connect/", naam: "Connect", regel: "De juiste experts voor jouw bedrijf.", soort: "connect" },
 ] as const;
 
-// 22 oktober 2026 (Marinus): "Diensten" krijgt hetzelfde uitklapmenu als Producten, omdat dat het verhaal duidelijker maakt.
-// Alleen wat /diensten al zegt (Pricing.tsx en ConnectExperts.tsx), en elke kaart wijst naar een anker dat daar al staat.
-// Kleur alleen waar het over OS (groen) of Connect (blauw) gaat; Kleurwoord kleurt die woorden na het vertalen.
+// Eén bron voor het Diensten-menu, de footer en de inhoudsopgave op /diensten.
 export const DIENSTEN = [
-  // 6 november 2026 (Marinus): na het gratis OS geen pakketten en prijzen meer, alles op aanvraag en custom.
-  { naar: "/diensten#prijs-os-titel", titel: "Gratis OS", regel: "Begin gratis met je eigen OS.", soort: "os" },
-  { naar: "/diensten#prijs-maat-titel", titel: "Connect op maat", regel: "De rest bouwen we rond jouw bedrijf.", soort: "connect" },
-  { naar: "/diensten#team", titel: "Vind je expert", regel: "Zoek, vergelijk en kies zelf.", soort: "team" },
+  { naar: "/diensten#groei", titel: "Groei", regel: "Persoonlijk advies en marketing die leads oplevert.", soort: "groei" },
+  { naar: "/diensten#cybersecurity", titel: "Cybersecurity", regel: "Vind kwetsbaarheden en pak de belangrijkste aan.", soort: "cybersecurity" },
+  { naar: "/diensten#websites", titel: "Websites", regel: "Een website die past bij je merk en aanvragen oplevert.", soort: "websites" },
+  { naar: "/diensten#management-operations", titel: "Management & Operations", regel: "Meer grip op je processen, systemen en cijfers.", soort: "management-operations" },
 ] as const;
 
 export function Kleurwoord({ tekst }: { tekst: string }) {
@@ -78,7 +76,7 @@ export function DienstenMenu() {
   const actief = Boolean(useMatch("/diensten/*"));
   return <Uitklapmenu naam="diensten" label="Diensten" actief={actief}>
     {(sluit) => DIENSTEN.map((d) => <Link key={d.soort} to={d.naar} onClick={sluit}>
-      <b translate="no"><Kleurwoord tekst={d.titel} /></b><span>{d.regel}</span><ArrowUpRight size={16} aria-hidden="true" />
+      <b>{d.titel}</b><span>{d.regel}</span><ArrowUpRight size={16} aria-hidden="true" />
     </Link>)}
   </Uitklapmenu>;
 }

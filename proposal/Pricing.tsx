@@ -1,11 +1,7 @@
 import React from "react";
-import { ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Action } from "./ui";
 import { GRATIS_OS_URL } from "./os-entry";
-import { useLanguage } from "./i18n/context";
 import "./pricing.css";
-import { openPlanCall } from "./PlanCall";
 
 // 23 september tot 18 oktober 2026: /prijzen groeide van gratis plus vier maandpakketten naar opslag, tokens per maand en
 // pakketten van €4.000 tot €6.000. Marinus vond dat op 19 oktober "nog totaal niet duidelijk".
@@ -125,14 +121,6 @@ const OS: Pakket[] = [
     href: `${GRATIS_OS_URL}?pakket=enterprise&periode=jaar`,
     vlag: "Meeste waarde",
   },
-];
-
-
-// Wat ons anders maakt dan losse software (positionering 29 september 2026: draait op Odoo, met échte professionals).
-const UNIEK = [
-  { titel: "Echte mensen achter je OS", tekst: "Experts uit ons team kijken mee, met de toegang die jij bepaalt." },
-  { titel: "Je data blijft van jou", tekst: "Je eigen gegevens, je eigen AI, altijd in te trekken." },
-  { titel: "Draait op Odoo", tekst: "Je administratie blijft waar hij hoort; wij bouwen erbovenop." },
 ];
 
 
@@ -278,126 +266,16 @@ function Kaart({ pakket }: { pakket: Pakket }) {
   );
 }
 
-// 6 november 2026 (Marinus): "Haal ook na de standaard OS de rest van de pakketten en prijzen weg dat is allemaal op aanvraag en
-// custom namelijk. Maak die pagina mooi zakelijk en stijlvol." Dus alleen het gratis OS met een prijs; Business, Enterprise, de
-// Connect-pakketten, de vergelijkingstabel en de losse prijzen zijn weg. Daaronder drie onderdelen op maat, zonder bedragen, met
-// één gesprek als volgende stap. De drie kernonderdelen volgen Connect: Cybersecurity, ERP & CRM en Growth.
-// Proef: scripts/check-prijzen-op-aanvraag.mjs.
-const OP_MAAT = [
-  {
-    id: "cybersecurity",
-    nummer: "01",
-    naam: "Cybersecurity",
-    belofte: "Lokaal en veilig, met je eigen AI en je data in eigen huis.",
-    punten: ["Eigen AI-modellen, lokaal te draaien", "Toegang die jij bepaalt en altijd kunt intrekken", "Securityscan van je website en systemen"],
-    actie: "Vraag een scan aan",
-    onderwerp: "Cybersecurity op maat",
-    contact: "steef",
-  },
-  {
-    id: "erp-crm",
-    nummer: "02",
-    naam: "ERP & CRM",
-    belofte: "Je eigen OS, gekoppeld aan je ERP of compleet custom gebouwd.",
-    punten: ["Koppeling met Odoo, Exact, AFAS, Salesforce en meer", "Custom OS rond je bedrijf en je processen", "Finance en administratie op orde"],
-    actie: "Plan een call",
-    call: true,
-    contact: "steef"
-  },
-  {
-    id: "growth",
-    nummer: "03",
-    naam: "Growth",
-    belofte: "Meer leads en betere marketing, gedaan door échte mensen.",
-    punten: ["Branding, website en content in je merk", "Meta en Google Ads met leads direct in je CRM", "Sales en leadopvolging zonder dat er iets blijft liggen"],
-    actie: "Bespreek je groei",
-    onderwerp: "Growth op maat",
-    contact: "marinus"
-  },
-];
-
-function Contactkaart({ onderdeel }: { onderdeel: (typeof OP_MAAT)[number] }) {
-  const lid = TEAM[onderdeel.contact];
-  const binnen = <>
-    <img src={fotoVan(lid.foto)} alt="" width="48" height="48" loading="lazy" />
-    <span className="prijs-contact-tekst">
-      <b translate="no">{lid.naam}</b>
-      <span className="prijs-contact-rol">{lid.rol}</span>
-      <span className="prijs-contact-actie">{onderdeel.actie}<ArrowUpRight size={13} aria-hidden="true" /></span>
-    </span>
-  </>;
-  return onderdeel.call
-    ? <button type="button" className="prijs-contact" aria-haspopup="dialog" onClick={() => openPlanCall()}>{binnen}</button>
-    : <Link className="prijs-contact" to={`/contact?onderwerp=${encodeURIComponent(onderdeel.onderwerp!)}`}>{binnen}</Link>;
-}
-
-export default function Pricing({ bovenaan = false }: { bovenaan?: boolean }) {
-  useLanguage();
-  const Kop = bovenaan ? "h1" : "h2";
+// Zelfde abonnementen, inhoud en aanmeldlinks als voorheen, achter een aparte productingang.
+export function OsPakketten() {
   return (
-    <div id="prijzen" className={`prijs prijs-diensten prijs-zakelijk h-wrap${bovenaan ? " is-bovenaan" : ""}`}>
-      <div className="prijs-diensten-kop">
-        <p className="h-eyebrow prijs-groen-tekst">Diensten</p>
-        <Kop className="prijs-kop-a">
-          <span className="prijs-kop-r1">Doelgerichte totaaloplossingen, met experts en AI.</span>
-          <em>Je betaalt voor onze expertise om jou winstgevend te maken.</em>
-        </Kop>
-      </div>
-
-      {/* 7 november 2026 (Marinus): "wel bij het GRATIS OS de pakketten laten zien". Dus het OS-blok toont weer Gratis, Business en
-          Enterprise naast elkaar; alles daarna (Cybersecurity, ERP & CRM, Growth) blijft op aanvraag. */}
-      <section className="prijs-pakketten prijs-rij prijs-os-pakketten" aria-labelledby="prijs-os-titel">
-        <div className="prijs-pakketten-kop">
-          <div>
-            <p className="h-eyebrow">Het OS</p>
-            <h3 id="prijs-os-titel">Begin gratis met je eigen OS.</h3>
-          </div>
-          <p>Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Bespaar 25% met een jaarabonnement ten opzichte van maandelijks betalen.</p>
-        </div>
+    <div className="prijs prijs-diensten prijs-zakelijk">
+      <div className="prijs-pakketten prijs-rij prijs-os-pakketten">
+        <p>Groeit je team, dan krijg je meer plek, meer opslag en elke maand tokens voor je Studio. Bespaar 25% met een jaarabonnement ten opzichte van maandelijks betalen.</p>
         <div className="prijs-raster prijs-raster-drie">
           {OS.map((pakket) => <Kaart key={pakket.id} pakket={pakket} />)}
         </div>
-      </section>
-
-      <section className="prijs-maat" aria-labelledby="prijs-maat-titel">
-        <div className="prijs-maat-kop">
-          <div>
-            <p className="h-eyebrow">Op maat</p>
-            <h3 id="prijs-maat-titel">De rest bouwen we rond jouw bedrijf.</h3>
-          </div>
-          <p>Elk traject is anders, dus we werken niet met vaste pakketten. Na een kort gesprek krijg je een voorstel op maat, met de mensen die eraan werken.</p>
-        </div>
-        <ol className="prijs-maat-lijst">
-          {OP_MAAT.map((onderdeel) => (
-            <li key={onderdeel.id} id={`prijs-${onderdeel.id}`}>
-              <span className="prijs-maat-nummer" aria-hidden="true">{onderdeel.nummer}</span>
-              <div className="prijs-maat-tekst">
-                <h4>{onderdeel.naam}</h4>
-                <p>{onderdeel.belofte}</p>
-              </div>
-              <ul className="prijs-maat-punten">
-                {onderdeel.punten.map((punt) => <li key={punt}>{punt}</li>)}
-              </ul>
-              <div className="prijs-maat-actie">
-                <span className="prijs-maat-label">Op aanvraag</span>
-                {/* 6 november 2026 (Marinus): "Die knoppen zijn wat lomp ik wil graag de Cards met Steef voor die onderdelen en
-                    voor Growth ik en zakelijker." Dus een rustige contactkaart met foto, naam en functie in plaats van een pilknop. */}
-                <Contactkaart onderdeel={onderdeel} />
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <ul className="prijs-uniek" aria-label="Wat ons anders maakt">
-        {UNIEK.map((punt) => (
-          <li key={punt.titel}>
-            <b>{punt.titel}</b>
-            <span>{punt.tekst}</span>
-          </li>
-        ))}
-      </ul>
-      <p className="prijs-btw">Alle bedragen zijn exclusief btw.</p>
+      </div>
     </div>
   );
 }
