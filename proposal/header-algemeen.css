@@ -57,14 +57,14 @@ html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px
 .sn-alg-knop-video:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 /* Trusted by, dezelfde merken als in het startbeeld van de film. */
-.sn-alg-trusted{--merk-h:19px;display:flex;flex-direction:column;align-items:center;gap:9px;max-width:1040px;margin:0 auto;padding:10px 16px 18px}
-.sn-alg-trusted>span{font-family:var(--a-mono);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-align:center;color:#9aa6a0}
-.sn-alg-merken{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 19px}
-.sn-alg-groep{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 19px}
-.sn-alg-groep+.sn-alg-groep{padding-left:19px;border-left:1px solid #ffffff26}
-.sn-alg-streep{display:block;width:1px;height:24px;background:#ffffff26}
+.sn-alg-trusted{--merk-h:25px;display:flex;flex-direction:column;align-items:center;gap:13px;max-width:1160px;margin:0 auto;padding:16px 18px 24px}
+.sn-alg-trusted>span{font-family:var(--a-mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-align:center;color:#9aa6a0}
+.sn-alg-merken{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 23px}
+.sn-alg-groep{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 23px}
+.sn-alg-groep+.sn-alg-groep{padding-left:23px;border-left:1px solid #ffffff26}
+.sn-alg-streep{display:block;width:1px;height:30px;background:#ffffff26}
 .sn-alg-merken img{display:block;height:calc(var(--merk-h) * var(--maat,1));width:auto}
-@media(max-width:700px){.sn-alg-trusted{--merk-h:15px}.sn-alg-groep+.sn-alg-groep{padding-left:0;border-left:0}.sn-alg-streep{display:none}}
+@media(max-width:700px){.sn-alg-trusted{--merk-h:18px}.sn-alg-groep+.sn-alg-groep{padding-left:0;border-left:0}.sn-alg-streep{display:none}}
 
 /* Filmvenster. */
 .sn-alg-venster{width:min(420px,90vw,calc(86vh * 9 / 16));padding:0;border:1px solid var(--a-lijn);border-radius:16px;background:#000;overflow:visible}

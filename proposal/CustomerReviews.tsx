@@ -52,34 +52,28 @@ const customerReviews = [
 ];
 export default function CustomerReviews({ resultaten = false }: { resultaten?: boolean }) {
   const { language } = useLanguage();
+  const Heading = resultaten ? "h1" : "h2";
 
-  return <>
-    <section className="h-customer-reviews" id="ervaring" aria-labelledby="customer-reviews-title">
-      <div className="h-wrap">
-        <header className="h-reviews-heading">
-          <div>
-            <p className="h-review-label">Uit de praktijk</p>
-            {resultaten
-              ? <h1 id="customer-reviews-title">Ons werk en wat klanten zeggen</h1>
-              : <h2 id="customer-reviews-title">Ons werk en wat klanten zeggen</h2>}
-          </div>
-          <a className="h-review-link" href={REVIEWS_URL} target="_blank" rel="noopener noreferrer">
-            Bekijk de reviews op Google <ArrowUpRight size={16} aria-hidden="true" />
-          </a>
-        </header>
-        <div className="h-review-cards">
-          {customerReviews.map((review) => (
-            <article key={review.slug} className="h-review-card">
-              <div className="h-review-work">
-                <div className="h-review-card-heading">
-                  <h3 id={`review-${review.slug}`} translate="no">{review.company}</h3>
-                  <a className="h-review-link" href={review.website} aria-labelledby={`website-${review.slug} review-${review.slug}`}>
-                    <span id={`website-${review.slug}`}>Website</span> <ArrowUpRight size={13} aria-hidden="true" />
-                  </a>
-                </div>
-              </div>
+  return (
+    <section className="h-wrap h-customer-reviews" id="ervaring" aria-labelledby="customer-reviews-title">
+      <header className="h-reviews-heading">
+        <div>
+          <p className="h-review-label">Uit de praktijk</p>
+          <Heading id="customer-reviews-title">Ons werk en wat klanten zeggen</Heading>
+        </div>
+        <a className="h-review-link" href={REVIEWS_URL} target="_blank" rel="noopener noreferrer">
+          Bekijk de reviews op Google <ArrowUpRight size={16} aria-hidden="true" />
+        </a>
+      </header>
+      <div className="h-review-cases" id="klantcases">
+        {customerReviews.map(review => (
+          <article key={review.slug} className="sn-cta-web h-review-case" aria-labelledby={`case-${review.slug}`}>
+            <div className="h-review-case-copy">
+              <p className="sn-cta-web-label"><i aria-hidden="true" />Case</p>
+              <h3 id={`case-${review.slug}`} translate="no">{review.company}</h3>
+              <p className="sn-cta-web-tekst">{review.work}{review.result && <> <strong>{review.result}</strong></>}</p>
               <figure>
-                <Quote size={20} aria-hidden="true" />
+                <Quote size={18} aria-hidden="true" />
                 <blockquote lang={language}>{review.text}</blockquote>
                 <figcaption>
                   <img
@@ -93,28 +87,19 @@ export default function CustomerReviews({ resultaten = false }: { resultaten?: b
                   <strong translate="no">{review.name}</strong>
                 </figcaption>
               </figure>
-
-            </article>
-          ))}
-        </div>
+              <Link className="sn-pill" to={`/project/${review.slug}`} aria-labelledby={`open-case-${review.slug} case-${review.slug}`}>
+                <span id={`open-case-${review.slug}`}>Bekijk de case</span><ArrowUpRight size={17} aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="h-review-case-media">
+              <a className="h-review-link" href={review.website} aria-labelledby={`website-${review.slug} case-${review.slug}`}>
+                <span id={`website-${review.slug}`}>Website</span> <ArrowUpRight size={13} aria-hidden="true" />
+              </a>
+              <img src={review.caseImage} alt="" width="1440" height="900" loading="lazy" decoding="async" />
+            </div>
+          </article>
+        ))}
       </div>
     </section>
-    <section className="h-wrap h-review-cases" id="klantcases" aria-label="Klantcases">
-      {customerReviews.map(review => (
-        <article key={review.slug} className="sn-cta-web h-review-case" aria-labelledby={`case-${review.slug}`}>
-          <div>
-            <p className="sn-cta-web-label"><i aria-hidden="true" />Case</p>
-            <h2 id={`case-${review.slug}`} translate="no">{review.company}</h2>
-            <p className="sn-cta-web-tekst">{review.work}{review.result && <> <strong>{review.result}</strong></>}</p>
-          </div>
-          <Link className="sn-pill" to={`/project/${review.slug}`} aria-labelledby={`open-case-${review.slug} case-${review.slug}`}>
-            <span id={`open-case-${review.slug}`}>Bekijk de case</span><ArrowUpRight size={17} aria-hidden="true" />
-          </Link>
-          <span className="sn-cta-web-beeld" aria-hidden="true">
-            <img src={review.caseImage} alt="" width="1440" height="900" loading="lazy" decoding="async" />
-          </span>
-        </article>
-      ))}
-    </section>
-  </>;
+  );
 }
