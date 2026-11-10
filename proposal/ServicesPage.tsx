@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowDown, ArrowUpRight, Check, ChevronDown, Globe2, Layers3, ShieldCheck, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { DIENSTEN } from "./Producten";
-import { OsPakketten } from "./Pricing";
+import { GroeiPakketten, OsPakketten } from "./Pricing";
 import { boekingsPlannerUrl } from "./PlanCall";
 import { Action, ProjectCard, TextLink } from "./ui";
 import { projects } from "./projecten";
@@ -11,29 +11,6 @@ type Pakket = {
   naam: string;
   punten: readonly string[];
 };
-
-const marketing: Pakket[] = [
-  {
-    naam: "Merk & boodschap",
-    punten: ["Kernboodschap en visuele richting", "Bewerkbare templates"],
-  },
-  {
-    naam: "Content & social",
-    punten: ["Een contentplan voor je kanalen", "Posts, fotografie en korte video’s"],
-  },
-  {
-    naam: "SEO & vindbaarheid",
-    punten: ["Startscan en prioriteiten", "Nieuwe of verbeterde pagina’s"],
-  },
-  {
-    naam: "Google of Meta Ads",
-    punten: ["Campagnes opzetten en beheren", "Meten welke campagnes aanvragen opleveren"],
-  },
-  {
-    naam: "Leadopvolging in je CRM",
-    punten: ["Je belangrijkste leadbronnen koppelen", "Opvolging inrichten, testen en overdragen"],
-  },
-];
 
 const cybersecurity: Pakket[] = [
   {
@@ -74,9 +51,9 @@ function Punten({ punten }: { punten: readonly string[] }) {
   ))}</ul>;
 }
 
-function Bedrag({ prijs, grondslag, vanaf = true }: { prijs: string; grondslag: string; vanaf?: boolean }) {
+function Bedrag({ prijs, grondslag }: { prijs: string; grondslag: string }) {
   return <p className="svc-price">
-    {vanaf && <span className="svc-from">Vanaf</span>}
+    <span className="svc-from">Vanaf</span>
     <strong>{prijs}</strong>
     <span className="svc-unit">{grondslag}</span>
   </p>;
@@ -139,13 +116,13 @@ export default function ServicesPage() {
               <p className="svc-kicker">Uitsluitend met Marinus</p>
               <h3>Persoonlijke groei</h3>
               <p>Marinus werkt zelf met je aan je aanbod, verkoop en groeikeuzes. Je eindigt met een plan voor de komende 90 dagen en weet welke acties eerst komen.</p>
-              <Bedrag prijs="€3.000" grondslag="per traject" />
+              <Bedrag prijs="€3.000,-" grondslag="per maandelijks traject" />
               <a className="svc-link" href={boekingsPlannerUrl}>Bespreek je groeivraag <ArrowUpRight size={17} aria-hidden="true" /></a>
             </div>
           </article>
 
           <h3 className="svc-subheading">Marketingpakketten</h3>
-          <Pakketten pakketten={marketing} />
+          <GroeiPakketten />
           <div className="svc-section-foot">
             <p>Mediabudget, betaalde tools en extra producties vallen buiten de pakketprijs. De omvang en looptijd spreken we vooraf af.</p>
             <a className="svc-link" href={boekingsPlannerUrl}>Bespreek je marketing <ArrowUpRight size={17} aria-hidden="true" /></a>
@@ -171,14 +148,24 @@ export default function ServicesPage() {
           <article className="svc-feature svc-website">
             <div className="svc-feature-copy">
               <h3>Website op maat</h3>
-              <Bedrag prijs="€2.000–€5.000" grondslag="per project" vanaf={false} />
+              <Bedrag prijs="€2.000,-" grondslag="per project" />
               <Punten punten={["Ontwerp en bouw voor desktop en mobiel", "Contactformulier en technische SEO-basis", "Oplevering met uitleg voor je team"]} />
-              <p>Het aantal pagina’s en de gewenste koppelingen bepalen waar je in de bandbreedte uitkomt. Hosting, onderhoud en licenties spreken we apart af.</p>
+              <p>De prijs hangt af van het aantal pagina’s en de koppelingen. Hosting, onderhoud en licenties spreken we apart af.</p>
               <a className="svc-link" href={boekingsPlannerUrl}>Bespreek je website <ArrowUpRight size={17} aria-hidden="true" /></a>
             </div>
             <figure>
-              <img src="/screenshots/kwhgarant-hero.webp" alt="Websiteconcept voor kWh Garant" width="1440" height="900" loading="lazy" decoding="async" />
-              <figcaption><TextLink to="/project/kwh-garant-website">Bekijk de case kWh Garant</TextLink></figcaption>
+              <div className="svc-live-preview">
+                <iframe
+                  title="Live website van kWh Garant"
+                  src="https://kwhgarant.nl/"
+                  loading="lazy"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  sandbox="allow-scripts allow-same-origin"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              </div>
+              <figcaption><a className="svc-link" href="https://kwhgarant.nl/" target="_blank" rel="noopener noreferrer">Bekijk kWh Garant live <ArrowUpRight size={17} aria-hidden="true" /></a></figcaption>
             </figure>
           </article>
         </section>

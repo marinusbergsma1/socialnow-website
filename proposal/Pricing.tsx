@@ -1,4 +1,5 @@
 import React from "react";
+import { ChevronDown } from "lucide-react";
 import { Action } from "./ui";
 import { GRATIS_OS_URL } from "./os-entry";
 import "./pricing.css";
@@ -233,6 +234,34 @@ function Knop({ pakket, maandelijks = false }: { pakket: Pakket; maandelijks?: b
   return <Action to={`/contact?onderwerp=${encodeURIComponent(pakket.onderwerp ?? pakket.naam)}`} secondary={secundair}>{pakket.actie}</Action>;
 }
 
+function Team({ ids }: { ids: string[] }) {
+  const leden = ids.map((id) => TEAM[id]);
+  return (
+    <details className="prijs-team">
+      <summary>
+        <span className="prijs-rondjes" aria-hidden="true">
+          {leden.map((lid) => (
+            <img key={lid.foto} src={fotoVan(lid.foto)} alt="" width="28" height="28" loading="lazy" />
+          ))}
+        </span>
+        <span className="prijs-namen" translate="no">{leden.map((lid) => lid.naam.split(" ")[0]).join(" · ")}</span>
+        <ChevronDown className="prijs-pijl" size={15} aria-hidden="true" />
+      </summary>
+      <ul className="prijs-leden">
+        {leden.map((lid) => (
+          <li key={lid.foto}>
+            <img src={fotoVan(lid.foto)} alt="" width="30" height="30" />
+            <span>
+              <b translate="no">{lid.naam}</b>
+              <small>{lid.rol}</small>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </details>
+  );
+}
+
 function Kaart({ pakket }: { pakket: Pakket }) {
   return (
     <article className={`prijs-kaart${pakket.vlag ? " is-top" : ""}`} style={{ "--kleur": pakket.kleur } as React.CSSProperties}>
@@ -243,6 +272,7 @@ function Kaart({ pakket }: { pakket: Pakket }) {
           <strong>{pakket.prijs}</strong>
           <span>{pakket.per}</span>
         </p>
+        {pakket.team && <p className="prijs-teamsoort">{pakket.team.length > 1 ? "Met specialistenteam" : "Marinus als aanspreekpunt"}</p>}
         <p className="prijs-belofte">{pakket.belofte}</p>
         {pakket.tokens && (
           <div className={`prijs-tokenbox${pakket.tokens.waarde ? "" : " is-leeg"}`}>
@@ -259,6 +289,7 @@ function Kaart({ pakket }: { pakket: Pakket }) {
           <li key={punt.tekst} className={punt.uit ? "is-uit" : punt.erfenis ? "is-erfenis" : punt.sterk ? "is-sterk" : undefined}>{punt.tekst}</li>
         ))}
       </ul>
+      {pakket.team && <Team ids={pakket.team} />}
       <div className="prijs-voet">
         <Knop pakket={pakket} />
       </div>
@@ -275,6 +306,16 @@ export function OsPakketten() {
         <div className="prijs-raster prijs-raster-drie">
           {OS.map((pakket) => <Kaart key={pakket.id} pakket={pakket} />)}
         </div>
+      </div>
+    </div>
+  );
+}
+
+export function GroeiPakketten() {
+  return (
+    <div className="prijs svc-groeipakketten">
+      <div className="prijs-raster">
+        {CONNECT.map((pakket) => <Kaart key={pakket.id} pakket={pakket} />)}
       </div>
     </div>
   );

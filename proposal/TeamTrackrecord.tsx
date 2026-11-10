@@ -20,7 +20,7 @@ const NAMEN = [
 export default function TeamTrackrecord() {
   const rij = NAMEN.flatMap((naam) => people.filter((x) => x.name === naam));
   return (
-    <Bento id="team-trackrecord" className="sn-team-trackrecord" label="Trackrecord van ons team" swipe>
+    <Bento id="team-trackrecord" className="sn-team-trackrecord" swipe>
       {rij.map((p) => (
         <Tegel key={p.name} breed={3} className="sn-trackrecord-tegel">
           <div className="sn-trackrecord-wie">
