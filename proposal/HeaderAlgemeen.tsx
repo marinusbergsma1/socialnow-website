@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Pause, Play, X } from "lucide-react";
+import { ArrowUpRight, Play, X } from "lucide-react";
 import { CRAFTURE, DIRECT, VIA_CRAFTURE, merk } from "./ExplainerPlayer";
 import "./header-algemeen.css";
 import Diepte3D from "./Diepte3D";
@@ -41,6 +41,7 @@ export function PartnerLogos() {
 const BEURSFOTOS = [
   { bestand: "beurs-marinus", alt: "Marinus in gesprek aan tafel" },
   { bestand: "beurs-steef", alt: "Steef aan tafel met bezoekers rond een laptop" },
+  { bestand: "team-atomium", alt: "Ons team bij het Atomium in Brussel" },
 ];
 
 export function AtomiumFoto() {
@@ -75,13 +76,13 @@ export function AtomiumFoto() {
           <Diepte3D src={`${basis}.webp`} diepte={`${basis}-diepte.webp`} actief={foto === index && !filmOpen} />
         </div>;
       })}
-      <figcaption>
-        <span className="sn-alg-klein" lang="en" translate="no">Presenting at the Odoo Experience 2026</span>
-        <strong>In gesprek op de beurs<span className="sn-alg-punt">.</span></strong>
-      </figcaption>
-      <button type="button" className="sn-alg-knop-fotos" aria-label={speelt ? "Pauzeer de fotowissel" : "Speel de fotowissel af"} onClick={() => zetSpeelt(!speelt)}>
-        {speelt ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
-      </button>
+      {BEURSFOTOS[foto].bestand !== "team-atomium" && (
+        <figcaption>
+          <span className="sn-alg-klein" lang="en" translate="no">Presenting at the Odoo Experience 2026</span>
+          <strong>In gesprek op de beurs<span className="sn-alg-punt">.</span></strong>
+        </figcaption>
+      )}
+      <button type="button" className="sn-alg-knop-fotos" aria-label={speelt ? "Pauzeer de fotowissel" : "Speel de fotowissel af"} onClick={() => zetSpeelt(vorige => !vorige)} />
       <button type="button" className="sn-alg-knop-video" aria-haspopup="dialog" onClick={open}><Play size={15} aria-hidden="true" /><span>Bekijk de video</span></button>
     </figure>
     <dialog className="sn-alg-venster" ref={venster} aria-label="Aftermovie Odoo Experience 2026" onClose={naSluiten} onClick={e => { if (e.target === venster.current) sluit(); }}>

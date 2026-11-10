@@ -9,14 +9,16 @@ import { boekingsPlannerUrl } from "./PlanCall";
 import "./team-call-tile.css";
 
 const marinus = "Marinus Bergsma";
-const team = [...people].sort((a, b) => a.name.localeCompare(b.name, "nl"));
+const gesprekspartners = CONTACTEN
+  .map(({ naam }) => people.find((lid) => lid.name === naam))
+  .filter((lid) => lid !== undefined);
 
 export default function TeamCallTile({ toonTeamlink = false }: { toonTeamlink?: boolean }) {
   const titelId = useId();
   const keuzeId = useId();
   const [naam, zetNaam] = useState(marinus);
   const { t } = useLanguage();
-  const persoon = team.find((lid) => lid.name === naam)!;
+  const persoon = gesprekspartners.find((lid) => lid.name === naam)!;
   const direct = naam === marinus;
   const adres = CONTACTEN.find((lid) => lid.naam === naam)?.mail ?? "info@socialnow.nl";
   const onderwerp = encodeURIComponent(`${t("Kennismaking met")} ${naam}`);
@@ -33,7 +35,7 @@ export default function TeamCallTile({ toonTeamlink = false }: { toonTeamlink?: 
       <div className="sn-team-call-kaart">
         <label htmlFor={keuzeId}>Jouw gesprekspartner</label>
         <select id={keuzeId} value={naam} onChange={(event) => zetNaam(event.target.value)} translate="no">
-          {team.map((lid) => <option key={lid.name} value={lid.name}>{lid.name}</option>)}
+          {gesprekspartners.map((lid) => <option key={lid.name} value={lid.name}>{lid.name}</option>)}
         </select>
         <div className="sn-team-call-profiel" key={naam} aria-live="polite">
           <img {...klein(persoon.image, "56px", [96, 160])} width="56" height="56" alt="" loading="lazy" />
