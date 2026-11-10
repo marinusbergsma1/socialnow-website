@@ -51,7 +51,7 @@ const customerReviews = [
   },
 ];
 export default function CustomerReviews({ resultaten = false }: { resultaten?: boolean }) {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
 
   return <>
     <section className="h-customer-reviews" id="ervaring" aria-labelledby="customer-reviews-title">
@@ -72,9 +72,9 @@ export default function CustomerReviews({ resultaten = false }: { resultaten?: b
             <article key={review.slug} className="h-review-card">
               <div className="h-review-work">
                 <div className="h-review-card-heading">
-                  <h3 translate="no">{review.company}</h3>
-                  <a className="h-review-link" href={review.website} aria-label={`${t("Website")} · ${review.company}`}>
-                    Website <ArrowUpRight size={13} aria-hidden="true" />
+                  <h3 id={`review-${review.slug}`} translate="no">{review.company}</h3>
+                  <a className="h-review-link" href={review.website} aria-labelledby={`website-${review.slug} review-${review.slug}`}>
+                    <span id={`website-${review.slug}`}>Website</span> <ArrowUpRight size={13} aria-hidden="true" />
                   </a>
                 </div>
               </div>
@@ -107,8 +107,8 @@ export default function CustomerReviews({ resultaten = false }: { resultaten?: b
             <h2 id={`case-${review.slug}`} translate="no">{review.company}</h2>
             <p className="sn-cta-web-tekst">{review.work}{review.result && <> <strong>{review.result}</strong></>}</p>
           </div>
-          <Link className="sn-pill" to={`/project/${review.slug}`} aria-label={`${t("Bekijk de case")} · ${review.company}`}>
-            <span>Bekijk de case</span><ArrowUpRight size={17} aria-hidden="true" />
+          <Link className="sn-pill" to={`/project/${review.slug}`} aria-labelledby={`open-case-${review.slug} case-${review.slug}`}>
+            <span id={`open-case-${review.slug}`}>Bekijk de case</span><ArrowUpRight size={17} aria-hidden="true" />
           </Link>
           <span className="sn-cta-web-beeld" aria-hidden="true">
             <img src={review.caseImage} alt="" width="1440" height="900" loading="lazy" decoding="async" />
