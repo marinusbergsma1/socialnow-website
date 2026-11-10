@@ -25,7 +25,7 @@ html:root .sn-site .sn-alg-acties .sn-pill{--sn-pill-height:50px;gap:14px;paddin
 /* Rechts: de grote foto. */
 .sn-alg-beeld{position:relative;display:grid;gap:12px}
 .sn-alg-foto{position:relative;aspect-ratio:4/5;max-height:640px;scroll-margin-top:105px;margin:0;border:1px solid var(--a-lijn);border-radius:16px;overflow:hidden;background:#06090b}
-.sn-alg-dia{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity 0s .48s}
+.sn-alg-dia{position:absolute;inset:0;opacity:0;pointer-events:none}
 .sn-alg-dia.is-gesprek{transform:scale(1.12);transform-origin:34% 60%}
 @media(prefers-reduced-motion:no-preference){
   .sn-alg-foto{animation:sn-alg-turn 8s ease-in-out infinite alternate;animation-play-state:paused}
