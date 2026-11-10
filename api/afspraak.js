@@ -1,5 +1,11 @@
-const plannerUrl = 'https://script.google.com/macros/s/AKfycbyqZR6y-lWrbKO-lrkgcwfhH-GAxTlcTrpRHSNy8sI_kSfU2z5A3DTV_CIkhSPBvq2L/exec';
-const salesUrl = 'https://sales.socialnow.nl/api/';
+// Alleen buiten productie mogen TEST_PLANNER_URL en TEST_SALES_URL naar een testomgeving wijzen; live staat vast.
+const buitenProductie = process.env.VERCEL_ENV !== 'production';
+const testPlanner = process.env.TEST_PLANNER_URL || '';
+const testSales = process.env.TEST_SALES_URL || '';
+const plannerUrl = buitenProductie && /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(testPlanner)
+  ? testPlanner : 'https://script.google.com/macros/s/AKfycbyqZR6y-lWrbKO-lrkgcwfhH-GAxTlcTrpRHSNy8sI_kSfU2z5A3DTV_CIkhSPBvq2L/exec';
+const salesUrl = (buitenProductie && /^https:\/\/[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(testSales)
+  ? testSales : 'https://sales.socialnow.nl') + '/api/';
 const uur = 60 * 60 * 1000;
 
 // Standaardgastheer zolang de planner (Apps Script) nog geen gastheer meestuurt. Gelijk aan de pagina.
