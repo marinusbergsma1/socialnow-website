@@ -38,10 +38,11 @@ export function PartnerLogos() {
   </ul>;
 }
 
+// 12 november 2026 (Marinus): "Begin altijd met deze foto": de wissel start met het team bij het Atomium.
 const BEURSFOTOS = [
+  { bestand: "team-atomium", alt: "Ons team bij het Atomium in Brussel" },
   { bestand: "beurs-marinus", alt: "Marinus in gesprek aan tafel" },
   { bestand: "beurs-steef", alt: "Steef aan tafel met bezoekers rond een laptop" },
-  { bestand: "team-atomium", alt: "Ons team bij het Atomium in Brussel" },
 ];
 
 export function AtomiumFoto() {
