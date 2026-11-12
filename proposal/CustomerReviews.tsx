@@ -17,7 +17,7 @@ const customerReviews = [
     text: "Wij zijn heel erg blij met Marinus. Denkt goed mee en levert op tijd. Topper!",
   },
   {
-    name: "Mike Bregman",
+    name: "Mike Breggeman",
     company: "VDZ Brigade",
     slug: "vdz-brigade-website",
     work: "Samen met Mike bouwden we de online zichtbaarheid van VDZ Brigade vanaf nul op, met een nieuwe website, een herkenbare huisstijl en een duidelijke groeistrategie.",

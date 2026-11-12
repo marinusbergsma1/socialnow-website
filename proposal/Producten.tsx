@@ -9,8 +9,10 @@ import "./hoofdmenu.css";
 // voettekst. Alle oude routes blijven bestaan. Sinds 22 oktober 2026 opent ook Diensten zo'n menu (DienstenMenu).
 // 4 november 2026 (Marinus): "verder wil ik producten diensten en website actie". Het menu is Producten, Diensten en Website-actie;
 // Resultaten en Team staan in de footer (Ons werk, Ons team).
+// 12 november 2026 (Marinus): "Hier wil ik graag nog even team". Team staat in het menu na Website-actie.
 export const NAV_LINKS: Array<[string, string]> = [
   ["/diensten", "Diensten"],
+  ["/team", "Team"],
 ];
 // href in plaats van to: Connect is een eigen pagina buiten de app.
 export const PRODUCTEN = [
