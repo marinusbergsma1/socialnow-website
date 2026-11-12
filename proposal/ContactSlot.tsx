@@ -12,7 +12,7 @@ import "./contact-slot.css";
 // Steef met Finance@socialnow.nl, Michelle mag Partners@socialnow.nl zijn en Ben Odoo@socialnow.nl. Zonder gesprek inplannen, ze
 // kunnen wel gewoon een mail sturen of bellen." en "Zoek op whatsapp even hun 06 nummer op." Het nummer van Marinus staat in zijn
 // mailhandtekening (MAIL.html, 28 oktober), dat van Steef in WhatsApp. Van Michelle en Ben toont WhatsApp geen nummer, dus nog niet.
-export default function ContactSlot() {
+export default function ContactSlot({ toonTeamlink = true }: { toonTeamlink?: boolean }) {
   return <section className="sn-contactslot" id="contact" tabIndex={-1} aria-labelledby="contactslot-kop">
     <p className="sn-contactslot-label"><i />Contact</p>
     <h2 id="contactslot-kop">Neem contact met ons op.</h2>
@@ -31,6 +31,6 @@ export default function ContactSlot() {
         </li>;
       })}
     </ul>
-    <TeamCallTile toonTeamlink />
+    <TeamCallTile toonTeamlink={toonTeamlink} />
   </section>;
 }
