@@ -137,7 +137,8 @@ export default function Verhaal() {
     <>
       <section className="h-section h-wrap vs-story" id="verhaal" aria-labelledby="vs-story-titel">
         <p className="h-eyebrow">Het verhaal achter SocialNow</p>
-        <h2 id="vs-story-titel">Van grafisch vormgever<br /><span>tot jouw OS.</span></h2>
+        {/* 12 november 2026 (Marinus): "Van designer tot Art Director en Consultant. Is dat niet beter?" */}
+        <h2 id="vs-story-titel">Van designer<br /><span>tot Art Director en Consultant.</span></h2>
         <div className="vs-raster">
           <figure className="vs-portret">
             <img {...klein("marinus-profiel-blauw.webp", "(max-width: 760px) 92vw, 420px", [320, 480, 800])} alt="Marinus Bergsma, oprichter van SocialNow" width="640" height="680" loading="lazy" decoding="async" />
