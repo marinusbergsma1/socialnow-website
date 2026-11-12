@@ -60,9 +60,16 @@ export function bouwMail(a, { naar = process.env.CHECK_MAIL_NAAR || "security@so
   };
 }
 
+// Staan de SMTP-gegevens in env? Alleen namen, nooit waarden. Op 22 oktober 2026 ontbrak CHECK_SMTP_PASS: het formulier
+// gaf "Ontvangen" maar er kwam niets aan. GET /api/check-aanvraag laat dit zien, scripts/proef-check-mail.mjs bewaakt het.
+export function mailStatus(env = process.env) {
+  const ontbreekt = ["CHECK_SMTP_USER", "CHECK_SMTP_PASS"].filter((n) => !String(env[n] || "").trim());
+  return { klaar: ontbreekt.length === 0, ontbreekt };
+}
+
 let transportGemaakt = null;
 async function standaardTransport() {
-  if (!process.env.CHECK_SMTP_USER || !process.env.CHECK_SMTP_PASS) return null;
+  if (!mailStatus().klaar) return null;
   if (!transportGemaakt) {
     const { default: nodemailer } = await import("nodemailer");
     const poort = Number(process.env.CHECK_SMTP_PORT || 465);
@@ -81,7 +88,7 @@ async function standaardTransport() {
 export async function verstuurAanvraag(a, { transport, log = console } = {}) {
   const mail = bouwMail(a);
   const t = transport || (await standaardTransport());
-  let laatsteFout = t ? "" : "geen SMTP-gegevens in env (CHECK_SMTP_USER, CHECK_SMTP_PASS)";
+  let laatsteFout = t ? "" : `geen SMTP-gegevens in env (ontbreekt: ${mailStatus().ontbreekt.join(", ") || "?"})`;
   for (let poging = 1; t && poging <= 2; poging++) {
     try {
       await t.sendMail(mail);

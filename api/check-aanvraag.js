@@ -1,8 +1,9 @@
 import { binnenLimiet } from "../server/php-check.mjs";
-import { controleerAanvraag, leesAanvraag, verstuurAanvraag } from "../server/check-aanvraag.mjs";
+import { controleerAanvraag, leesAanvraag, mailStatus, verstuurAanvraag } from "../server/check-aanvraag.mjs";
 
 // POST /api/check-aanvraag  { naam, email, domein, uitslag?, phpVersie?, telefoon?, hosting?, vraag?, taal?, website2 (honeypot) }
 //   → 200 { ok: true }  ook als de mail niet weg kon: dan staat de aanvraag in de logs (server/check-aanvraag.mjs).
+// GET /api/check-aanvraag  → 200 { mail: "klaar" | "onvolledig" }  of de SMTP-gegevens in env staan (geen namen, geen waarden).
 // De mail gaat vóór res.json() de deur uit: op Vercel stopt de functie zodra het antwoord weg is.
 const HERKOMST = /^https:\/\/((www\.)?socialnow\.nl|socialnow-check-preview\.vercel\.app|socialnow-(website|check-preview)-[a-z0-9-]+-socialnowmarinus-4115s-projects\.vercel\.app)$/;
 const LOKAAL = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
@@ -11,7 +12,8 @@ const VELD = { naam: "naam", email: "email", domein: "domein" };
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
   res.setHeader("X-Robots-Tag", "noindex");
-  if (req.method !== "POST") { res.setHeader("Allow", "POST"); return res.status(405).json({ ok: false, reden: "methode" }); }
+  if (req.method === "GET") return res.status(200).json({ mail: mailStatus().klaar ? "klaar" : "onvolledig" });
+  if (req.method !== "POST") { res.setHeader("Allow", "GET, POST"); return res.status(405).json({ ok: false, reden: "methode" }); }
   const origin = String(req.headers.origin || "");
   if (!origin || (!HERKOMST.test(origin) && !LOKAAL.test(origin))) return res.status(403).json({ ok: false, reden: "herkomst" });
 
