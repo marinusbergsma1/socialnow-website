@@ -1,10 +1,7 @@
-import AdvisoryPartner from "./AdvisoryPartner";
 import Verhaal from "./Verhaal";
-import HomeTeam from "./HomeTeam";
 import ContactSlot from "./ContactSlot";
 import ConnectExperts from "./ConnectExperts";
 import { HomeConnectBand } from "./HomeHeader";
-import PixelInfrastructure from "./PixelInfrastructure";
 import NulNaarBedrijf from "./NulNaarBedrijf";
 import MensEnAI from "./MensEnAI";
 import { Integraties } from "./TeamTrust";
@@ -23,7 +20,6 @@ import ProjectCase from "./ProjectCase";
 import ShowcaseFilms from "./ShowcaseFilms";
 import { translate, useLanguage } from "./i18n/context";
 import { Bento, Tegel } from "./Bento";
-import { AuditTeaser } from "./AuditPage";
 import FeaturedWork from "./FeaturedWork";
 import ResultatenHero from "./ResultatenHero";
 import { WebsiteTegel } from "./FreeWebsite";
@@ -40,8 +36,6 @@ import { ProductOffer, ProductRoute } from "./ProductStart";
 import { allPosts } from "../data/posts";
 import InstagramWork from "./InstagramWork";
 import PartnerMichelle from "./PartnerMichelle";
-import PartnerIntro from "./PartnerIntro";
-import { PartnerKoppen } from "./TeamTrust";
 import {
   Action,
   AgentCards,
@@ -50,7 +44,6 @@ import {
   PageHeading,
   ProjectCard,
   Questions,
-  TeamGrid,
   TextLink,
   VideoBlock,
 } from "./ui";
@@ -287,21 +280,6 @@ export function ProjectPage() {
 }
 
 export function TeamPage() {
-  const vind = (namen: string[]) => namen
-    .map(name => people.find(person => person.name === name))
-    .filter((person): person is NonNullable<typeof person> => Boolean(person));
-  // 1 oktober 2026 (Marinus): "de eerste laag mij en Steef met daarnaast Attesso, Sid en Douwe" en "Het punt moet zijn dat
-  // Sid en ik spreken en de sterke teams ik en Steef samen met Sid en Douwe samen zijn."
-  const socialnow = vind(["Marinus Bergsma", "Steef Komen"]);
-  const attesso = vind(["Sid van Kalken", "Douwe Kramer"]);
-  const fincer = vind(["Steven Goudsblom"]);
-  const inTeams = [...socialnow, ...attesso, ...fincer].map(person => person.name);
-  // Michelle staat vooraan bij de zelfstandige partners.
-  const specialists = [
-    ...vind(["Michelle Yang"]),
-    ...people.filter(person => !inTeams.includes(person.name) && person.name !== "Michelle Yang"),
-  ];
-
   return (
     <>
       <PageHeading
@@ -322,91 +300,8 @@ export function TeamPage() {
       <Verhaal />
       <div className="sn-team-connect-band"><HomeConnectBand /></div>
       <ConnectExperts />
-      <div className="h-wrap sn-team-contact"><ContactSlot /></div>
-      <section className="h-section h-wrap h-sterke-teams vs-team">
-        <Heading
-          label="SocialNow × Attesso × Fincer"
-          title={
-            <>
-              Sterke partners.
-              <br />
-              <span>Samen bouwen we het.</span>
-            </>
-          }
-        />
-        <PartnerIntro />
-        <div className="h-teams-duo">
-          <div className="h-team-duo is-socialnow">
-            <p className="h-team-duo-label" translate="no"><PartnerKoppen soort="sn" /></p>
-            <TeamGrid members={socialnow} />
-          </div>
-          <div className="h-team-duo is-attesso">
-            <p className="h-team-duo-label" translate="no"><PartnerKoppen soort="attesso" /></p>
-            <TeamGrid members={attesso} />
-          </div>
-          <div className="h-team-duo is-fincer">
-            <p className="h-team-duo-label" translate="no"><PartnerKoppen soort="fincer" /></p>
-            <div className="sn-wealth-body">
-              <TeamGrid members={fincer} />
-              <div className="sn-wealth-copy">
-                <strong>Vermogensbeheer, met persoonlijk contact.</strong>
-                <p>Steven Goudsblom is oprichter van Fincer en onze partner voor vermogensbeheer. Hij denkt mee met SocialNow en ondernemers in ons netwerk.</p>
-                <p>Persoonlijk contact staat centraal. Zo verbinden we de juiste expertise aan de vragen die bij je bedrijf en vermogen horen.</p>
-              </div>
-            </div>
-          </div>
-          <AdvisoryPartner />
-        </div>
-        <p className="h-footnote">
-          Marinus en Steef bouwen het OS en maken het schaalbaar. Sid en Douwe van Attesso werken aan veilige agentic payments. Steven van Fincer is onze partner voor vermogensbeheer. Marinus en Sid spreken samen: live demo&apos;s, talks en workshops, overal ter wereld.
-        </p>
-      </section>
-      {/* 28 september 2026 (Marinus): een groot en duidelijk bedankje aan alle bedrijven waarmee we samen
-          de developers- en datakant van het OS hebben doorgevoerd. */}
-      <section className="h-section h-wrap h-bedankt" aria-labelledby="h-bedankt-titel">
-        <p className="h-eyebrow">Dank je wel</p>
-        <h2 id="h-bedankt-titel">
-          Gebouwd met sterke partners.
-          <br />
-          <span>Bedankt.</span>
-        </h2>
-        <p className="h-bedankt-tekst">
-          Het OS bouwen we niet alleen. Samen met bedrijven met ervaren developers en dataspecialisten hebben we de techniek, de koppelingen en de data goed doorgevoerd. En Odoo-implementatiepartners brengen het OS nu naar hun klanten. Aan al die bedrijven en mensen: dank je wel.
-        </p>
-        <div className="h-bedankt-rij">
-          <div className="h-bedankt-kaart">
-            <b translate="no"><a href="https://www.komenconsultancy.com/" target="_blank" rel="noopener noreferrer">Komen Consultancy</a></b>
-            <span>Accountancy, Odoo en data, met Steef Komen en Michelle Yang. Samen maken we het OS schaalbaar.</span>
-          </div>
-          <div className="h-bedankt-kaart">
-            <b>Onze developers</b>
-            <span>Die de koppelingen met Odoo, Meta, Google en de website bouwden en testten</span>
-          </div>
-          <div className="h-bedankt-kaart">
-            <b>Onze dataspecialisten</b>
-            <span>Die zorgden dat je eigen data veilig en kloppend in het OS terechtkomt</span>
-          </div>
-        </div>
-      </section>
-      <section className="h-section h-wrap">
-        <Heading
-          label="Zelfstandige partners"
-          title={
-            <>
-              Ieder een eigen vak.
-              <br />
-              <span>Persoonlijk voor je klaar.</span>
-            </>
-          }
-        />
-        {/* Zelfstandige partners brengen hun eigen expertise mee; SocialNow verbindt en bewaakt de kwaliteit. */}
-        <p className="h-partners-tekst">
-          Iedere partner brengt eigen expertise mee: van creatie en marketing tot data en techniek. SocialNow verbindt die expertise met jouw vraag en bewaakt de kwaliteit.
-        </p>
-        <HomeTeam />
-        <PixelInfrastructure />
-        <AuditTeaser />
-      </section>
+      {/* 12 november 2026 (Marinus): "Hier mag team stoppen alles eronder is dubbel op." De pagina eindigt bij de contacttegels. */}
+      <div className="h-wrap sn-team-contact"><ContactSlot toonTeamlink={false} /></div>
     </>
   );
 }

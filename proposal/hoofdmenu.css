@@ -112,3 +112,9 @@ html:root .sn-site .h-brand-5jaar>img{translate:0 17.9%}
 html:root .sn-site .h-brand-5jaar .h-brand-intro{translate:0 13.13%}
 html:root .sn-site>.h-header{padding-top:16px;padding-bottom:16px}
 @media(max-width:760px){html:root .sn-site>.h-header{padding-top:8px;padding-bottom:8px}}
+
+/* 12 november 2026 (Marinus): "Bij switchen naar team springt menu over naar kapitalen dat wil ik nooit." Het menu ziet er op
+   elke pagina uit als op de homepage: gewone letters, zelfde maat en kleur. */
+:root .sn-site>.h-header .h-desktop-nav{gap:28px}
+:root .sn-site>.h-header .h-desktop-nav a,:root .sn-site>.h-header .h-desktop-nav .h-producten-knop{font-size:13px!important;letter-spacing:.04em!important;text-transform:none;font-weight:400!important;color:#b9c8c0}
+:root .sn-site>.h-header .h-desktop-nav a:hover,:root .sn-site>.h-header .h-desktop-nav a.active,:root .sn-site>.h-header .h-desktop-nav .h-producten-knop:hover,:root .sn-site>.h-header .h-desktop-nav .h-producten-knop.active{color:#fff}
