@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Plan een kennismaking met Marinus | SocialNow</title>
 <meta name="referrer" content="no-referrer">
+<script>if(!/[?&]ticket=/.test(location.search))window.vroegeTijden=fetch('/api/afspraak').then(r=>r.ok?r.json():Promise.reject()).catch(()=>null)</script>
 <style>
 :root{color-scheme:light;--ink:#172c40;--muted:#506278;--accent:#1760cc;--line:#dce4ed;--pale:#edf5ff}
 *{box-sizing:border-box}
@@ -482,7 +483,7 @@ async function plannerRequest(operation, input) {
   return response.json();
 }
 
-function loadSlots(message = '') {
+function loadSlots(message = '', vers = false) {
   options.replaceChildren();
   schedule.hidden = true;
   bookingToken.value = '';
@@ -490,7 +491,10 @@ function loadSlots(message = '') {
   skeleton.hidden = false;
   form.setAttribute('aria-busy', 'true');
   setStatus(message);
-  plannerRequest('slots')
+  // Eerste keer: de tijden die de kop al ophaalde (CDN of browser). Lukt dat niet, of is vers nodig, dan rechtstreeks.
+  const vroeg = !vers && !mailTicket && window.vroegeTijden;
+  window.vroegeTijden = null;
+  Promise.resolve(vroeg).then(tijden => Array.isArray(tijden) ? tijden : plannerRequest('slots'))
     .then(result => {
       skeleton.hidden = true;
       form.removeAttribute('aria-busy');
@@ -543,7 +547,7 @@ if (viaMail) {
   }
 }
 
-refresh.addEventListener('click', () => loadSlots());
+refresh.addEventListener('click', () => loadSlots('', true));
 backButton.addEventListener('click', () => {
   setStatus('');
   showBookingStep(false);
@@ -570,7 +574,7 @@ form.addEventListener('submit', event => {
       guestStep.disabled = false;
       if (result.status === 'taken' || result.status === 'expired') {
         showBookingStep(false);
-        loadSlots('Dit moment is niet meer beschikbaar. We halen nieuwe momenten op.');
+        loadSlots('Dit moment is niet meer beschikbaar. We halen nieuwe momenten op.', true);
         return;
       }
       if (result.status !== 'booked') {
