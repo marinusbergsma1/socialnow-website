@@ -44,9 +44,33 @@ export function PlanCallKnop({ className = "sn-pill sn-pill-blauw", label = "Pla
   return <a className={className} href={boekingsPlannerUrl}><span>{label}</span><ArrowUpRight size={17} aria-hidden="true" /></a>;
 }
 
+// 17 november 2026 (Marinus: "call inplannen moet sneller"). Zodra iemand een afspraaklink aanwijst, aanraakt of er met
+// het toetsenbord op komt, halen we de pagina en de vrije tijden alvast op. De tijden staan dan 30 s in de browser en
+// ruim 4 minuten in de CDN (api/afspraak.js), zodat de agenda er direct staat.
+function warmAfspraakOp() {
+  let laatst = 0;
+  const warm = (e: Event) => {
+    const doel = e.target instanceof Element ? e.target.closest(`a[href^="${boekingsPlannerUrl}"]`) : null;
+    if (!doel || Date.now() - laatst < 25000) return;
+    laatst = Date.now();
+    if (!document.querySelector("link[data-afspraak]")) {
+      const link = document.createElement("link");
+      link.rel = "prefetch";
+      link.href = boekingsPlannerUrl;
+      link.dataset.afspraak = "";
+      document.head.append(link);
+    }
+    fetch("/api/afspraak").catch(() => {});
+  };
+  const soorten = ["pointerover", "touchstart", "focusin"] as const;
+  for (const soort of soorten) document.addEventListener(soort, warm, { passive: true });
+  return () => { for (const soort of soorten) document.removeEventListener(soort, warm); };
+}
+
 export function PlanCallHost() {
   const [voor, zetVoor] = useState<CallVoorinvulling | null>(null);
   const { search, hash } = useLocation();
+  useEffect(warmAfspraakOp, []);
   useEffect(() => {
     const open = (e: Event) => zetVoor((e as CustomEvent<CallVoorinvulling>).detail || {});
     window.addEventListener(OPEN, open);

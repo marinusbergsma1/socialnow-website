@@ -1,10 +1,35 @@
 const plannerUrl = 'https://script.google.com/macros/s/AKfycbyqZR6y-lWrbKO-lrkgcwfhH-GAxTlcTrpRHSNy8sI_kSfU2z5A3DTV_CIkhSPBvq2L/exec';
 const salesUrl = 'https://sales.socialnow.nl/api/';
 
+// 17 november 2026 (Marinus: "call inplannen moet sneller"). Google Apps Script doet 1,4 tot 2,1 s over de vrije tijden.
+// GET geeft daarom de openbare tijden uit een korte tussenopslag: 30 s vers in de CDN, daarna nog 4 minuten direct
+// het oude antwoord terwijl de CDN ververst, plus 30 s in de browser. Een tijd is 15 minuten boekbaar na uitgifte
+// (Planner.gs), dus er blijft altijd ruim 9 minuten over. Boeken en opnieuw ophalen (POST) blijven altijd vers.
+async function openbareTijden(req, res) {
+  if (req.headers['sec-fetch-site'] === 'cross-site') return res.status(403).json({ status: 'invalid' });
+  try {
+    const upstream = await fetch(plannerUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ operation: 'website-slots' }),
+      signal: AbortSignal.timeout(22000),
+    });
+    if (!upstream.ok) throw new Error('Planner unavailable');
+    const tijden = await upstream.json();
+    if (!Array.isArray(tijden)) throw new Error('Planner unavailable');
+    res.setHeader('Vercel-CDN-Cache-Control', 's-maxage=30, stale-while-revalidate=240');
+    res.setHeader('Cache-Control', 'private, max-age=30');
+    return res.status(200).json(tijden);
+  } catch {
+    return res.status(502).json({ status: 'retry' });
+  }
+}
+
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
+  if (req.method === 'GET') return openbareTijden(req, res);
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
+    res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ status: 'invalid' });
   }
   if (req.headers['sec-fetch-site'] === 'cross-site' ||
