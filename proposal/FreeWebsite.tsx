@@ -2,15 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import "./free-website.css";
 import { webShowcaseProjects } from "../data/projects";
 
+const productionEmbeds = new Set(["vastiq-website", "kwh-garant-website"]);
+
 const examples = webShowcaseProjects
-  .filter(project => project.slug !== "kwh-garant-website" && project.slug !== "vintage-watches-website" && project.url && (!project.offline || project.previewUrl))
+  .filter(project => project.slug !== "vintage-watches-website" && project.url && (!project.offline || project.previewUrl))
   .map(project => ({ name: project.title, url: project.url!, slug: project.slug,
     previewUrl: project.previewUrl || (project.slug === "vdz-brigade-website" ? "https://www.vdz-brigade.nl/" : undefined), image: project.image }));
 
 export function WebsiteExamples() {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(false);
-  const [productionHost, setProductionHost] = useState(true);
+  const [productionHost, setProductionHost] = useState(false);
   const [opened, setOpened] = useState<number[]>([0]);
   const [loadedFrames, setLoadedFrames] = useState<Record<number, boolean>>({});
   const [previewScale, setPreviewScale] = useState(1);
@@ -24,7 +26,7 @@ export function WebsiteExamples() {
     setIndex(target);
   };
   useEffect(() => {
-    setProductionHost(["socialnow.nl", "www.socialnow.nl"].includes(window.location.hostname));
+    setProductionHost(["https://socialnow.nl", "https://www.socialnow.nl"].includes(window.location.origin));
     const element = region.current;
     if (!element) return;
     // 18 oktober 2026 (Marinus): "En de website-tiles gelijk laden." Zodra het blok in de buurt komt, laden alle
@@ -75,7 +77,7 @@ export function WebsiteExamples() {
         let offset = (i - index + examples.length) % examples.length;
         if (offset > examples.length / 2) offset -= examples.length;
         const active = offset === 0;
-        const canEmbed = item.slug !== "vastiq-website" || productionHost;
+        const canEmbed = productionHost || !productionEmbeds.has(item.slug);
         return <article key={item.slug} className={`sn-web-tile${active ? " is-active" : ""}`} data-offset={offset}
           style={{ "--offset": offset, "--distance": Math.abs(offset), "--preview-scale": previewScale } as import("react").CSSProperties}>
           <div className="sn-web-address"><span className="sn-web-lights" aria-hidden="true"><i /><i /><i /></span><span className="sn-web-host" translate="no">{new URL(item.url).hostname.replace(/^www\./, "")}</span>
