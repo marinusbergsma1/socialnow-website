@@ -94,6 +94,14 @@
 @media(max-width:850px){.sn-site .sn-fw-showcase-head{align-items:start}.sn-site .sn-fw-showcase-head>p{max-width:600px}}
 /* Stable website previews: instant side images, live websites kept after first visit. */
 .sn-site .sn-web-preview .sn-web-thumbnail{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;pointer-events:none}
+.sn-site .sn-web-preview .sn-web-recording {
+  object-fit: contain;
+  object-position: center;
+  background: #efebe2;
+}
+.sn-site .sn-web-preview video.sn-web-recording {
+  pointer-events: auto;
+}
 .sn-site .sn-web-preview iframe{position:absolute;left:0;top:0;opacity:0;transition:opacity .2s}
 /* 20 oktober 2026 (Marinus): "Deze moeten ALTIJD ALLEMAAL LADEN IK WIL NOOIT NAAR EEN SCREENSHOT KIJKEN." Elke geladen site is
    zichtbaar, ook in de kaarten naast de middelste; het screenshot is alleen nog wat er staat zolang de site laadt. */

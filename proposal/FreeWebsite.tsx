@@ -1,13 +1,43 @@
 import { useEffect, useRef, useState } from "react";
 import "./free-website.css";
 import { webShowcaseProjects } from "../data/projects";
+import { useInView, useMotion } from "./motion";
 
-const productionEmbeds = new Set(["vastiq-website", "kwh-garant-website"]);
+const productionEmbeds = new Set(["kwh-garant-website"]);
+const vastiqRecording = `${import.meta.env.BASE_URL}video/vastiq/website-demo-20261123`;
 
 const examples = webShowcaseProjects
   .filter(project => project.slug !== "vintage-watches-website" && project.url && (!project.offline || project.previewUrl))
   .map(project => ({ name: project.title, url: project.url!, slug: project.slug,
     previewUrl: project.previewUrl || (project.slug === "vdz-brigade-website" ? "https://www.vdz-brigade.nl/" : undefined), image: project.image }));
+
+function VastiqRecording() {
+  const { ref, visible } = useInView<HTMLVideoElement>();
+  const { enabled } = useMotion();
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video || !visible || !enabled) return;
+    void video.play().catch(() => {});
+    return () => video.pause();
+  }, [ref, visible, enabled]);
+
+  return (
+    <video
+      ref={ref}
+      className="sn-web-recording"
+      src={`${vastiqRecording}.mp4`}
+      poster={`${vastiqRecording}.webp`}
+      aria-label="Schermopname van de VASTIQ-website"
+      preload="none"
+      controls
+      muted
+      playsInline
+      loop
+      onKeyDown={event => event.stopPropagation()}
+    />
+  );
+}
 
 export function WebsiteExamples() {
   const [index, setIndex] = useState(0);
@@ -77,7 +107,8 @@ export function WebsiteExamples() {
         let offset = (i - index + examples.length) % examples.length;
         if (offset > examples.length / 2) offset -= examples.length;
         const active = offset === 0;
-        const canEmbed = productionHost || !productionEmbeds.has(item.slug);
+        const hasRecording = item.slug === "vastiq-website";
+        const canEmbed = !hasRecording && (productionHost || !productionEmbeds.has(item.slug));
         return <article key={item.slug} className={`sn-web-tile${active ? " is-active" : ""}`} data-offset={offset}
           style={{ "--offset": offset, "--distance": Math.abs(offset), "--preview-scale": previewScale } as import("react").CSSProperties}>
           <div className="sn-web-address"><span className="sn-web-lights" aria-hidden="true"><i /><i /><i /></span><span className="sn-web-host" translate="no">{new URL(item.url).hostname.replace(/^www\./, "")}</span>
@@ -86,7 +117,11 @@ export function WebsiteExamples() {
           <div className="sn-web-preview" role={active ? undefined : "button"} tabIndex={active ? undefined : 0} aria-label={active ? undefined : item.name}
             onKeyDown={event => { if (!active && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); choose(i); } }}
             onClick={event => { if ((!dragged.current || event.detail === 0) && !active) choose(i); }}>
-            <img className="sn-web-thumbnail" src={item.image} alt="" aria-hidden="true" width="1280" height="800" loading="lazy" decoding="async" />
+            {hasRecording && active ? <VastiqRecording /> : (
+              <img className={`sn-web-thumbnail${hasRecording ? " sn-web-recording" : ""}`}
+                src={hasRecording ? `${vastiqRecording}.webp` : item.image}
+                alt="" width="1280" height="800" loading="lazy" decoding="async" />
+            )}
             {active && canEmbed && !loadedFrames[i] && <span className="sn-web-loading" role="status">Website laden…</span>}
             {visible && canEmbed && opened.includes(i) && <iframe src={item.previewUrl || item.url} title={item.name} tabIndex={active ? 0 : -1}
               inert={!active ? true : undefined} aria-hidden={!active ? true : undefined} loading="eager"
