@@ -48,7 +48,7 @@ export default function HomeEnthousiast() {
       <div className="sn-alg-wrap">
         <div className="sn-alg-tekst">
           <p className="sn-alg-label"><i />Management · Operations · Odoo</p>
-          <h1 id="sn-blij-kop">Een betrouwbare partner voor groei en cybersecurity<span className="sn-alg-punt">.</span></h1>
+          <h1 id="sn-blij-kop">Een betrouwbare partner voor groei<span className="sn-alg-punt">.</span></h1>
           <p className="sn-alg-uitleg"><strong>Wij helpen je met management, operations en Odoo.</strong> Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
           <div className="sn-alg-acties">
             {/* 4 november 2026 (avond, Marinus): "2e knop hier graag blauw maken ook en eerste knop mag zijn website actie". */}

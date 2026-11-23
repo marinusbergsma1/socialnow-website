@@ -4,8 +4,7 @@
 // teamtrainingen, AI-workshops en cursussen, de twee bevestigde sessies met vlag, en een echte beursfoto van Marinus en Steef.
 // Gebruik: node scripts/check-groeipartner-training.mjs [--dist]   (rood op main vóór de wijziging, groen erna)
 import fs from "node:fs";
-// 22 oktober 2026: kop met cybersecurity erbij (Marinus).
-const KOP = "Groei en cybersecurity in het AGI-tijdperk.", KOP_EN = "Growth and cybersecurity for the AGI era.";
+const KOP = "Samen werken aan groei.", KOP_EN = "Working together for growth.";
 const OUD = "Veiliger dan je verouderde software en processen.";
 const VORMEN = ["Teamtrainingen", "AI-workshops", "Cursussen"];
 const FOTO = ["800.webp", "1600.webp", "1600.jpg"].map(e => `public/images/beurs/marinus-steef-odoo-experience-${e}`);
@@ -16,9 +15,9 @@ const eis = (ok, tekst) => { console.log(`${ok ? "GROEN" : "ROOD "}  ${tekst}`);
 const src = fs.readFileSync("proposal/SamenEnVeilig.tsx", "utf8");
 const css = fs.readFileSync("proposal/samen-en-veilig.css", "utf8");
 const veld = naam => (src.match(new RegExp(`\\b${naam}: "([^"]*)"`)) || [])[1] || "";
-eis(veld("uspKop") === KOP, "kop is de groeipartner in het AGI-tijdperk");
+eis(veld("uspLabel") === "Groei" && veld("uspKop") === KOP, "label en kop richten zich op groei");
 eis(!src.includes(`uspKop: "${OUD}"`), "de oude veiligheidskop staat niet meer bovenaan");
-eis(/échte taken/.test(veld("uspUitleg")) && /cybersecurity-experts/.test(veld("uspUitleg")), "echte taken en doelen, cybersecurity-experts die je data beschermen (22 okt)");
+eis(veld("uspUitleg") === "Onze experts helpen je groeien met branding, content, marketing en software.", "de uitleg benoemt hoe experts helpen bij groei");
 eis(/honderden euro/.test(veld("probleem")) && /bezit en zelf host/.test(veld("oplossing")), "probleem honderden euro's; oplossing: kopen, bezitten en zelf hosten (22 okt)");
 eis(!!veld("probleem") && !!veld("oplossing") && src.includes("{t.probleemLabel}") && src.includes("{t.oplossingLabel}"), "probleem en oplossing staan er concreet en zichtbaar");
 eis(/volledige AI-training/.test(veld("tUitleg")) && /pakket op maat/.test(veld("tUitleg")), "volledige AI-training bij elk pakket op maat");
@@ -43,7 +42,7 @@ for (const t of TALEN) {
 }
 if (process.argv.includes("--dist")) {
   const tekst = f => fs.readFileSync(f, "utf8").replace(/<span class="sn-title-dot">\.<\/span>/g, ".");
-  // Groei en cybersecurity (SamenEnVeilig) staat sinds 4 november 2026 op /het-os, onder de oude header.
+  // Het groeiblok staat op /het-os, onder de header.
   const nl = tekst("dist/nl/het-os/index.html"), en = tekst("dist/het-os/index.html");
   eis(nl.includes(KOP) && nl.includes("Volgende lezingen") && nl.includes("Talland College"), "gebouwde nl-pagina toont kop en Volgende lezingen");
   eis(en.includes(KOP_EN) && en.includes("Upcoming talks") && !en.includes("marinus-steef-odoo-experience"), "gebouwde en-pagina toont kop, Upcoming talks en geen beursfoto");

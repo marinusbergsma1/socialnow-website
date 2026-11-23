@@ -89,7 +89,7 @@ const paginas = lees("proposal/paginas.tsx");
 const osPagina = paginas.slice(paginas.indexOf("export function OsPage"), paginas.indexOf("export function", paginas.indexOf("export function OsPage") + 10));
 eis(!pages.slice(pages.indexOf("export function Home()"), pages.indexOf("export function ProductenPagina")).includes("<HeaderBestaand") && osPagina.includes("<HeaderBestaand"), "oude header met OS en Connect staat op /het-os en /producten, niet op de homepage");
 
-eis(osPagina.indexOf("<SamenEnVeilig") > osPagina.indexOf("<HeaderBestaand"), "Groei en cybersecurity staat op /het-os onder de oude header");
+eis(osPagina.indexOf("<SamenEnVeilig") > osPagina.indexOf("<HeaderBestaand"), "Het groeiblok staat op /het-os onder de header");
 // "Vanuit onder de websites zelf mag er meer content komen vanuit de branding en voorbeelden." en "Net als hier maar kortere titels."
 const naWeb = prodDeel.slice(prodDeel.indexOf("<FreeWebsite"));
 eis(naWeb.includes("<VideoSlider kort") && pages.slice(pages.indexOf("export function Home()"), pages.indexOf("export function ProductenPagina")).includes("<ImageSliders kort"), "branding en campagnes op de homepage, video onder de websites op /producten");
@@ -140,7 +140,7 @@ eis(cx.indexOf('className="cx-org"') > 0 && !cx.includes("cx-voorbeelden") && !c
 const acties = header.slice(header.indexOf('className="sn-alg-acties"'), header.indexOf("</div>", header.indexOf('className="sn-alg-acties"')));
 eis((acties.match(/className="sn-pill"/g) || []).length === 2 && !acties.includes("sn-alg-knop"), "headerknoppen hebben dezelfde stijl als Inloggen gratis OS (sn-pill)");
 
-const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Neem contact op", "Waar wil je beginnen?", "Alles over onze producten en techniek", "Website-actie", "Welke stijl spreekt je aan?", "Wat moet je website vooral doen?", "Meer aanvragen", "Geluid aan", "Begin met vraag 1", "Een goede website is ook een veilige website.", "Via wie ben je bij ons gekomen?", "Nieuwe website, gratis", "Vraag je gratis website aan"];
+const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Neem contact op", "Waar wil je beginnen?", "Alles over onze producten en techniek", "Website-actie", "Welke stijl spreekt je aan?", "Wat moet je website vooral doen?", "Meer aanvragen", "Geluid aan", "Begin met vraag 1", "Een goede website is ook een veilige website.", "Via wie ben je bij ons gekomen?", "Nieuwe website, gratis", "Vraag je gratis website aan"];
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(lees(`proposal/i18n/${l}.json`) || "{}");
   const mist = nieuw.filter((k) => !w[k] || /[–—]/.test(w[k]));
@@ -155,7 +155,7 @@ if (process.argv.includes("--dist")) {
   eis(!nl.includes('id="groei"') && !nl.includes("odoo-experience-stand") && !nl.includes("cx-voorbeelden") && nl.includes("h-image-showcase") && !nl.includes('id="bereikt"') && nl.includes("sn-contactslot") && nl.includes("partners@socialnow.nl") && nl.includes("tel:+31637404577"), "gebouwde nl-homepage: geen Groei-blok, geen Odoo-blok, wel branding en de contacttegels");
   const os = lees("dist/nl/het-os/index.html");
   const bestaand = /class="[^"]*\bsn-bestaand\b/;  // het element, niet de gedeelde CSS-regel
-  eis(bestaand.test(os) && os.includes('id="groei"') && !bestaand.test(nl), "gebouwde /het-os toont de oude header met Groei en cybersecurity, de homepage niet");
+  eis(bestaand.test(os) && os.includes('id="groei"') && !bestaand.test(nl), "gebouwde /het-os toont de header met het groeiblok");
   const en = lees("dist/index.html");
   eis(en.includes("We help you with management, operations and Odoo.") && /class="[^"]*\bsn-bestaand\b/.test(lees("dist/producten/index.html")), "gebouwde en-homepage en /producten zijn vertaald");
 }

@@ -35,10 +35,10 @@ const TEKST = {
   // 22 oktober 2026 (Marinus): "meer focus op hoe wij behalve groeipartner die échte taken uitvoeren en klantdoelen behalen ook
   // cybersecurity experts zijn die je gegevens en data écht beschermen en de software die je koopt en daarna ook bezit en zelf host
   // niet elke maand huurt." En bij het probleem honderden euro's in plaats van tientallen.
-  uspLabel: "Groei en cybersecurity",
-  uspKop: "Groei en cybersecurity in het AGI-tijdperk.",
+  uspLabel: "Groei",
+  uspKop: "Samen werken aan groei.",
   // 20 oktober 2026, later (Marinus): "Dit mag iets korter en misschien naast elkaar."
-  uspUitleg: "Onze experts voeren échte taken uit en halen je doelen. Als cybersecurity-experts beschermen we je gegevens en data écht.",
+  uspUitleg: "Onze experts helpen je groeien met branding, content, marketing en software.",
   probleemLabel: "Het probleem",
   // Zelfde dag (Marinus): "Het probleem, je betaald 10tallen euro's voor abbonementen op software en diensten die niet samenwerken."
   probleem: "Je betaalt honderden euro's aan abonnementen op software en diensten die niet met elkaar samenwerken.",
