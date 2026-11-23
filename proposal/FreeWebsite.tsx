@@ -1,43 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import "./free-website.css";
 import { webShowcaseProjects } from "../data/projects";
-import { useInView, useMotion } from "./motion";
+import { AmbientVideo } from "./motion";
 
 const productionEmbeds = new Set(["kwh-garant-website"]);
 const vastiqRecording = `${import.meta.env.BASE_URL}video/vastiq/website-demo-20261123`;
+const vastiqPoster = `${vastiqRecording}.webp`;
 
 const examples = webShowcaseProjects
   .filter(project => project.slug !== "vintage-watches-website" && project.url && (!project.offline || project.previewUrl))
   .map(project => ({ name: project.title, url: project.url!, slug: project.slug,
     previewUrl: project.previewUrl || (project.slug === "vdz-brigade-website" ? "https://www.vdz-brigade.nl/" : undefined), image: project.image }));
-
-function VastiqRecording() {
-  const { ref, visible } = useInView<HTMLVideoElement>();
-  const { enabled } = useMotion();
-
-  useEffect(() => {
-    const video = ref.current;
-    if (!video || !visible || !enabled) return;
-    void video.play().catch(() => {});
-    return () => video.pause();
-  }, [ref, visible, enabled]);
-
-  return (
-    <video
-      ref={ref}
-      className="sn-web-recording"
-      src={`${vastiqRecording}.mp4`}
-      poster={`${vastiqRecording}.webp`}
-      aria-label="Schermopname van de VASTIQ-website"
-      preload="none"
-      controls
-      muted
-      playsInline
-      loop
-      onKeyDown={event => event.stopPropagation()}
-    />
-  );
-}
 
 export function WebsiteExamples() {
   const [index, setIndex] = useState(0);
@@ -117,9 +90,12 @@ export function WebsiteExamples() {
           <div className="sn-web-preview" role={active ? undefined : "button"} tabIndex={active ? undefined : 0} aria-label={active ? undefined : item.name}
             onKeyDown={event => { if (!active && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); choose(i); } }}
             onClick={event => { if ((!dragged.current || event.detail === 0) && !active) choose(i); }}>
-            {hasRecording && active ? <VastiqRecording /> : (
+            {hasRecording && active ? (
+              <AmbientVideo className="sn-web-recording" src={`${vastiqRecording}.mp4`}
+                poster={vastiqPoster} label="Schermopname van de VASTIQ-website" />
+            ) : (
               <img className={`sn-web-thumbnail${hasRecording ? " sn-web-recording" : ""}`}
-                src={hasRecording ? `${vastiqRecording}.webp` : item.image}
+                src={hasRecording ? vastiqPoster : item.image}
                 alt="" width="1280" height="800" loading="lazy" decoding="async" />
             )}
             {active && canEmbed && !loadedFrames[i] && <span className="sn-web-loading" role="status">Website laden…</span>}
