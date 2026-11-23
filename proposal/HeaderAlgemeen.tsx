@@ -30,7 +30,7 @@ const FILM = "/video/odoo-experience/odoo-experience.mp4";
 
 // 4 november 2026 (Marinus): "die technische data en huidige landingspagina mag naar producten gaan dan is dit meer enthousiasmering
 // en rest inhoudelijk en technisch." Deze header opent sindsdien /producten; label en kop zijn daar eigen, zodat de homepage
-// (HomeEnthousiast.tsx) de enige h1 "Een betrouwbare partner voor groei en cybersecurity." houdt.
+// (HomeEnthousiast.tsx) de h1 "Een betrouwbare partner voor groei." gebruikt.
 // Ook gebruikt in de homepage-hero (HomeEnthousiast.tsx), onder de knoppen.
 export function PartnerLogos() {
   return <ul className="sn-alg-keur" aria-label="Partners en specialiteiten">
@@ -93,7 +93,7 @@ export function AtomiumFoto() {
   </>;
 }
 
-export default function HeaderAlgemeen({ label = "Management · Operations · Odoo", kop = "Een betrouwbare partner voor groei en cybersecurity" }: { label?: string; kop?: string }) {
+export default function HeaderAlgemeen({ label = "Management · Operations · Odoo", kop = "Een betrouwbare partner voor groei" }: { label?: string; kop?: string }) {
   const naarContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const doel = document.getElementById("contact");
     if (!doel) return;

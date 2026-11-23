@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Proef: de hero van de homepage (HeaderBestaand.tsx).
+// Proef: de hero van /het-os (HeaderBestaand.tsx).
 // 22 oktober 2026 (Marinus): "Kan jij zorgen dat de slogan op de website word A trusted growth and cybersecurity partner."
 // en "Ipv dit en veranderende tekst. Gewoon bam dat statement en de uitlijning by security is verkeerd op mobiele versies."
 // Dus: h1 is alleen het statement, zonder getypte regel, in alle 10 talen vertaald; de link Veilig in de vinkjes staat op
@@ -8,15 +8,15 @@
 // en Eigen beheer en keuzes; in het Engels Growth, Security en Your own control and choices.
 // Gebruik: node scripts/check-hero-titel.mjs [--dist]   (rood op main vóór de wijziging, groen erna)
 import fs from "node:fs";
-const H1 = "Een betrouwbare partner voor groei en cybersecurity.";
-const EN = "A trusted growth and cybersecurity partner.";
+const H1 = "Een betrouwbare partner voor groei.";
+const EN = "A trusted growth partner.";
 const OUD = ["Haal meer uit je bedrijf.", "Get more out of your business."];
 const TALEN = ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"];
 const fouten = [];
 const eis = (ok, tekst) => { console.log(`${ok ? "GROEN" : "ROOD "}  ${tekst}`); if (!ok) fouten.push(tekst); };
 const kop = fs.readFileSync("proposal/HeaderBestaand.tsx", "utf8");
 const css = fs.readFileSync("proposal/header-bestaand.css", "utf8");
-eis(new RegExp(`<h1( [^>]*)?>${H1.replace(/[.]/g, "\\.")}</h1>`).test(kop), `h1 is alleen "${H1}"`);
+eis(kop.includes(`kop = "${H1}"`) && kop.includes("{kop}</h1>"), `h1 gebruikt standaard "${H1}"`);
 eis(!/<Typer|function Typer|const ZINNEN/.test(kop), "geen getypte, wisselende regel meer");
 eis(!OUD.some(x => kop.includes(`>${x}`)), "oude titel staat niet meer in de hero");
 eis(/\.bs-zeker a\{[^}]*min-height:\s*0/.test(css) && /\.bs-zeker a\{[^}]*border-bottom:\s*0/.test(css), "link Veilig heeft geen 44 px blokhoogte en geen losse streep");

@@ -91,7 +91,7 @@ function pijltjes(e: React.KeyboardEvent<HTMLElement>, ids: string[], nu: string
 
 // 4 november 2026 (avond, Marinus): op /producten "deze header alleen een andere titel aangezien deze titel al is gebruikt", dus de
 // titel is een prop; /het-os houdt de oude titel.
-export default function HeaderBestaand({ meet, kop = "Een betrouwbare partner voor groei en cybersecurity." }: { meet: (doel: Doel) => void; kop?: string }) {
+export default function HeaderBestaand({ meet, kop = "Een betrouwbare partner voor groei." }: { meet: (doel: Doel) => void; kop?: string }) {
   const { language, t } = useLanguage();
   const [modus, setModus] = useState<"os" | "custom">("os");
   // 21 oktober 2026 (Marinus): "kleine switch boven de explainer video in de header wat een beeld geeft hoe ze m kunnen switchen
