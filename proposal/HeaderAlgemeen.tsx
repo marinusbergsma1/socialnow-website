@@ -67,6 +67,9 @@ export const BEURSFOTOS = [
 // Daarna (Marinus): "Hij is terug en ik zie nogsteeds niet de explainer video op mijn homepage." Dus bij binnenkomst staat de
 // explainer (startbeeld met knop) in het kader; de fotowissel komt pas na afloop, en Bekijk de video start de film daarna opnieuw.
 // De naam AtomiumFoto blijft, omdat HomeEnthousiast.tsx hem zo importeert.
+// 25 november 2026 (Marinus): "Deze foto mag in die slider weg omdat ie daaronder al staat." De Atomium-foto staat lager (Stappenplan).
+const DIAS = BEURSFOTOS.filter((f) => f.bestand !== "team-atomium");
+
 export function AtomiumFoto() {
   const film = useRef<HTMLVideoElement>(null);
   const [foto, zetFoto] = useState(0);
@@ -77,7 +80,7 @@ export function AtomiumFoto() {
 
   useEffect(() => {
     if (!draait || filmAan) return;
-    const timer = window.setInterval(() => zetFoto(vorige => (vorige + 1) % BEURSFOTOS.length), 3000);
+    const timer = window.setInterval(() => zetFoto(vorige => (vorige + 1) % DIAS.length), 3000);
     return () => window.clearInterval(timer);
   }, [draait, filmAan]);
 
@@ -112,14 +115,14 @@ export function AtomiumFoto() {
   return (
     <div className="sn-alg-filmblok" data-speelt={speelt}>
     <figure className="sn-alg-foto is-vijfvier" id="explainer" data-draait={draait && !filmAan} data-film={filmAan}>
-      {BEURSFOTOS.map(({ bestand, alt }, index) => {
+      {DIAS.map(({ bestand, alt }, index) => {
         const basis = `/images/verhaal/${bestand}`;
         return <div key={bestand} className={bestand === "beurs-marinus" ? "sn-alg-dia is-gesprek" : "sn-alg-dia"} data-actief={foto === index && !filmAan} aria-hidden={foto !== index || filmAan}>
           <img src={`${basis}.webp`} alt={alt} width="900" height="1200" fetchPriority={index === 0 ? "high" : "low"} />
           <Diepte3D src={`${basis}.webp`} diepte={`${basis}-diepte.webp`} actief={foto === index && !filmAan} />
         </div>;
       })}
-      {!filmAan && BEURSFOTOS[foto].bestand !== "team-atomium" && (
+      {!filmAan && (
         <figcaption>
           <span className="sn-alg-klein" lang="en" translate="no">Presenting at the Odoo Experience 2026</span>
           <strong>In gesprek op de beurs<span className="sn-alg-punt">.</span></strong>
