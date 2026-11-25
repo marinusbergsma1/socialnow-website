@@ -100,14 +100,7 @@ export function AtomiumFoto() {
   };
 
   const knop = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (gestart) {                // tweede klik: naar het contactblok op deze pagina, anders gewoon naar de afsprakenplanner
-      const doel = document.getElementById("contact");
-      if (!doel) return;
-      e.preventDefault();
-      doel.scrollIntoView({ behavior: "smooth", block: "center" });
-      doel.focus({ preventScroll: true });
-      return;
-    }
+    if (gestart) return;          // tweede klik: naar Call inplannen met Marinus (Marinus 25 nov: "doorlinken naar Call inplannen met mij")
     e.preventDefault();
     zetGestart(true);
     zetVers(true);

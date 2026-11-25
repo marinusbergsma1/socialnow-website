@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check, ChevronDown, Mail, Phone } from "lucide-react";
+import { boekingsPlannerUrl } from "./PlanCall";
+import { CONTACTEN } from "./contacten";
 import { languagePrefix, useLanguage } from "./i18n/context";
 import { aanvraagWhatsApp, heeftWhatsApp, whatsappLink } from "./aanvragen";
 import { people } from "./content";
@@ -108,23 +110,24 @@ export default function GratisWebsite() {
           <p className="sn-alg-uitleg"><strong>Een goede website is ook een veilige website.</strong> Vraag een veiligheidsrapport aan of krijg een gratis demo van een moderne website op maat.</p>
           <div className="sn-alg-acties">
             <a className="sn-pill" href="#onboarding" onClick={naarStart}><span>Begin met vraag 1</span><ArrowUpRight size={17} aria-hidden="true" /></a>
-            <Link className="sn-pill sn-pill-blauw" to="/security"><span>Vraag een veiligheidsrapport aan</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
+            {/* 25 november 2026 (Marinus): "Neem Contact op en Veiligheidsrapport. Beide moeten gewoon doorlinken naar Call inplannen met mij." */}
+            <a className="sn-pill sn-pill-blauw" href={boekingsPlannerUrl}><span>Vraag een veiligheidsrapport aan</span><ArrowUpRight size={17} aria-hidden="true" /></a>
           </div>
           {/* De logobalk met getroffen bedrijven is weg. 5 november 2026 (Marinus): "de wordpress en binance en wikipedia logo's mogen
               weg. Hou het positief". */}
-          <a className="gw2-steef" href={whatsappLink(t("Hoi Steef, ik heb een vraag over de gratis website."))} target="_blank" rel="noopener noreferrer">
-            <img src="/images/Steef-Komen.webp" alt="" width="40" height="40" /><span><strong translate="no">Steef Komen</strong><small>Liever even praten? Stuur Steef een bericht.</small></span><ArrowUpRight size={16} aria-hidden="true" />
-          </a>
+          {/* 25 november 2026 (Marinus): "Steef mag daaronder een simpelere tekst finance en dan bij klikken contactgegevens en op
+              diezelfde manier ook Michelle en Ben verwerken." Gegevens uit contacten.ts. */}
+          <div className="gw2-contacten">
+            <ContactKnop naam="Steef Komen" tekst="Finance" foto="Steef-Komen.webp" />
+            <ContactKnop naam="Michelle Yang" tekst="Partners" foto="Michelle-Yang.webp" />
+            <ContactKnop naam="Ben Sterckx" tekst="België" foto="Ben-Sterckx.webp" />
+          </div>
         </div>
-        <div className="gw2-voorbeelden" aria-label="Websitevoorbeelden">
-          <Link className="gw2-voorbeeld" to="/project/kwh-garant-website">
-            <img src="/screenshots/kwhgarant-hero.webp" alt="" width="1440" height="900" loading="lazy" decoding="async" />
-            <span><span><small>Websiteconcept</small><strong>kWh Garant</strong></span><ArrowUpRight size={17} aria-hidden="true" /></span>
-          </Link>
-          <Link className="gw2-voorbeeld" to="/project/divine-machines-website">
-            <img src="/screenshots/divine-machines-hero.webp" alt="" width="1440" height="900" loading="lazy" decoding="async" />
-            <span><span><small>Website</small><strong>Divine Machines</strong></span><ArrowUpRight size={17} aria-hidden="true" /></span>
-          </Link>
+        {/* 25 november 2026 (Marinus): "de 2 tiles gewoon niet projecten maar die eerst op de homepage over elkaar heen stonden hoeft ook
+            geen tekst bij maar mag gewoon lekker groot van dit is wat we doen." */}
+        <div className="gw2-stapel" aria-hidden="true">
+          <img className="is-een" src="/images/cases/vastiq-desktop.webp" alt="" loading="lazy" decoding="async" />
+          <img className="is-twee" src="/images/cases/ilgordo-desktop.webp" alt="" loading="lazy" decoding="async" />
         </div>
       </div>
     </section>
@@ -203,4 +206,19 @@ export default function GratisWebsite() {
     </form>
   </div></div>
   </>;
+}
+
+// Contactpersoon als knop: naam en één woord; een klik klapt mail en telefoon open.
+function ContactKnop({ naam, tekst, foto }: { naam: string; tekst: string; foto: string }) {
+  const [open, zetOpen] = useState(false);
+  const c = CONTACTEN.find((x) => x.naam === naam);
+  return <div className="gw2-contact" data-open={open || undefined}>
+    <button type="button" className="gw2-steef" aria-expanded={open} onClick={() => zetOpen((o) => !o)}>
+      <img src={`/images/${foto}`} alt="" width="40" height="40" /><span><strong translate="no">{naam}</strong><small>{tekst}</small></span><ChevronDown size={16} aria-hidden="true" />
+    </button>
+    {open && c && <div className="gw2-contact-info">
+      <a href={`mailto:${c.mail}`}><Mail size={14} aria-hidden="true" />{c.mail}</a>
+      {c.tel && <a href={`tel:${c.tel}`}><Phone size={14} aria-hidden="true" />{c.telTekst}</a>}
+    </div>}
+  </div>;
 }

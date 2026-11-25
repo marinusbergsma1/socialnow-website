@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import { boekingsPlannerUrl } from "./PlanCall";
 import { AtomiumFoto, TrustedBy, PartnerLogos } from "./HeaderAlgemeen";
 import "./header-algemeen.css";
 import "./home-enthousiast.css";
@@ -36,13 +37,6 @@ export function WebsiteCTA({ tweede = false }: { tweede?: boolean }) {
 }
 
 export default function HomeEnthousiast() {
-  const naarContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const doel = document.getElementById("contact");
-    if (!doel) return;
-    e.preventDefault();
-    doel.scrollIntoView({ behavior: "smooth", block: "center" });
-    doel.focus({ preventScroll: true });
-  };
   return <>
     <section className="sn-alg sn-blij" aria-labelledby="sn-blij-kop">
       <div className="sn-alg-wrap">
@@ -56,7 +50,7 @@ export default function HomeEnthousiast() {
           <div className="sn-alg-acties">
             {/* 4 november 2026 (avond, Marinus): "2e knop hier graag blauw maken ook en eerste knop mag zijn website actie". */}
             <Link className="sn-pill" to="/gratis-website"><span>Website-actie</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
-            <a className="sn-pill sn-pill-blauw" href="#contact" onClick={naarContact}><span>Neem contact op</span><ArrowUpRight size={17} aria-hidden="true" /></a>
+            <a className="sn-pill sn-pill-blauw" href={boekingsPlannerUrl}><span>Neem contact op</span><ArrowUpRight size={17} aria-hidden="true" /></a>
           </div>
           {/* 4 november 2026 (Marinus, bij de lege ruimte onder de knoppen): "Hier moeten weer de shopify logo's etc komen." */}
           <PartnerLogos />
