@@ -144,7 +144,8 @@ function Punten({ items }: { items: string[] }) {
 
 // Later die dag (Marinus, bij de foto van stap 03): "Deze foto mag constant veranderen op dezelfde manier als ie dat al deed bij de
 // header." Dezelfde beursfoto's, elke 3 seconden een overvloei en een langzame zoom; begint bij Steef aan tafel. Stopt bij reduced motion.
-const STAP3_FOTOS = [...BEURSFOTOS.filter((f) => f.bestand === "beurs-steef"), ...BEURSFOTOS.filter((f) => f.bestand !== "beurs-steef")];
+// 25 november 2026 (Marinus): "Deze mag uit de slider had ik al gezegd": de Atomium-teamfoto staat al elders, dus niet in deze wissel.
+const STAP3_FOTOS = [...BEURSFOTOS.filter((f) => f.bestand === "beurs-steef"), ...BEURSFOTOS.filter((f) => f.bestand !== "beurs-steef" && f.bestand !== "team-atomium")];
 
 function Fotowissel() {
   const [foto, zetFoto] = useState(0);
