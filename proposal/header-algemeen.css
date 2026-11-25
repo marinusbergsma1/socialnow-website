@@ -49,8 +49,14 @@ html:root .sn-site .sn-alg .sn-alg-foto figcaption strong{font-family:'TT Norms'
 
 
 /* Samenwerkingen onder de titel, in kleur. */
-html:root .sn-site .sn-alg .sn-alg-keur{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin:22px 0 0;padding:0;list-style:none}
+/* 25 november 2026 (Marinus): "Kan dit een slider zijn?" De logo's lopen als band; bij hover staat hij stil. */
+html:root .sn-site .sn-alg .sn-alg-keur,.sn-alg-keur{display:block;margin:22px 0 0;padding:0;overflow:hidden}
+.sn-alg-keur-baan{display:flex;align-items:center;width:max-content;margin:0;padding:0;list-style:none;animation:sn-alg-keur-loop 24s linear infinite}
+.sn-alg-keur:hover .sn-alg-keur-baan{animation-play-state:paused}
+.sn-alg-keur-baan li{flex:none;margin-right:48px}
 .sn-alg-keur img{display:block;height:26px;width:auto;max-width:150px;object-fit:contain}
+@keyframes sn-alg-keur-loop{to{transform:translateX(calc(-100% / 3))}}
+@media(prefers-reduced-motion:reduce){.sn-alg-keur-baan{animation:none;flex-wrap:wrap;width:auto;row-gap:14px}.sn-alg-keur-baan li[aria-hidden="true"]{display:none}}
 html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px;font-size:clamp(19px,1.7vw,24px);font-weight:600;line-height:1.3;color:#fff}
 .sn-alg-knop-video{position:absolute;right:16px;bottom:18px;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:#000;font:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px #0008;transition:transform .2s}
 .sn-alg-knop-video:hover{transform:scale(1.04)}
@@ -100,25 +106,33 @@ html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px
 
 /* 25 november 2026, avond (Marinus): afspeelknop onder de video, even breed, en na de klik een groene veeg naar "Plan een call". */
 .sn-alg-filmblok{display:flex;flex-direction:column;gap:12px;min-width:0}
-.sn-alg-filmknop{position:relative;display:block;width:100%;height:64px;overflow:hidden;isolation:isolate;border-radius:16px;border:1px solid var(--a-lijn);background:#0b0e0d;color:#fff;text-decoration:none;font-size:18px;font-weight:700;cursor:pointer;
-  transition:border-color .5s ease,box-shadow .6s ease,transform .2s ease}
-.sn-alg-filmknop:hover{transform:translateY(-1px);border-color:#25d36680}
-.sn-alg-filmknop:focus-visible{outline:2px solid #fff;outline-offset:3px}
-/* de vulling: groen veegt van links naar rechts over de knop, met een lichte glans die er achteraan schuift */
-.sn-alg-filmknop::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,#1fb85a 0%,#25d366 55%,#3ae27c 100%);transform:scaleX(0);transform-origin:0 50%;transition:transform .75s cubic-bezier(.7,0,.2,1)}
-.sn-alg-filmknop::after{content:"";position:absolute;top:0;bottom:0;left:0;width:38%;z-index:-1;background:linear-gradient(100deg,transparent,#ffffff59,transparent);transform:translateX(-120%);opacity:0}
-.sn-alg-filmknop[data-stand="call"]::before{transform:scaleX(1)}
-.sn-alg-filmknop[data-stand="call"]::after{animation:sn-alg-glans 1s .55s cubic-bezier(.4,0,.2,1) both}
-.sn-alg-filmknop[data-stand="call"]{border-color:#25d366;animation:sn-alg-klop 1.6s 1.1s ease-out both}
-@keyframes sn-alg-glans{0%{opacity:1;transform:translateX(-120%)}100%{opacity:1;transform:translateX(320%)}}
-@keyframes sn-alg-klop{0%{box-shadow:0 0 0 0 #25d36680}70%{box-shadow:0 0 0 16px #25d36600}100%{box-shadow:0 0 0 0 #25d36600}}
-/* de labels: Bekijk de video schuift omhoog weg, Plan een call komt van onder in (witte tekst op groen) */
-.sn-alg-filmknop .lb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:12px;transition:transform .6s cubic-bezier(.7,0,.2,1),opacity .45s ease}
-.sn-alg-filmknop .lb svg{flex:none}
-.sn-alg-filmknop .lb-video svg{fill:#25d366;color:#25d366}
-.sn-alg-filmknop .lb-call{transform:translateY(110%);opacity:0;color:#fff}
-.sn-alg-filmknop .lb-call .pijl{transition:transform .3s ease}
-.sn-alg-filmknop:hover .lb-call .pijl{transform:translate(2px,-2px)}
+.sn-alg-filmknop{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;height:58px;padding:5px 5px 5px 28px;overflow:hidden;isolation:isolate;border-radius:999px;border:2px solid #fff;background:#0b0e0d;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
+  transition:color .35s ease,border-color .7s ease}
+.sn-alg-filmknop:focus-visible{outline:2px solid #fff;outline-offset:4px}
+/* wit vult bij hover van links naar rechts (zoals de groene pil) */
+.sn-alg-filmknop::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:#fff;transform:translateX(-101%);transition:transform .5s cubic-bezier(.23,1,.32,1)}
+.sn-alg-filmknop:is(:hover,:focus-visible)::before{transform:translateX(0)}
+.sn-alg-filmknop[data-stand="video"]:is(:hover,:focus-visible){color:#0b0e0d}
+/* na de klik: groen komt van rechts naar links, het wit trekt zich tegelijk terug */
+.sn-alg-filmknop::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:#25d366;transform:translateX(101%);transition:transform .85s cubic-bezier(.7,0,.2,1)}
+.sn-alg-filmknop[data-stand="call"]::after{transform:translateX(0)}
+.sn-alg-filmknop[data-stand="call"]::before{transform:translateX(-101%);transition:transform .85s cubic-bezier(.7,0,.2,1)}
+.sn-alg-filmknop[data-stand="call"]{border-color:#25d366;color:#fff}
+/* tekst: Speel video af schuift omhoog weg, Neem contact op komt van onder */
+.sn-alg-filmknop .tekst{position:relative;flex:1;height:100%;min-width:0}
+.sn-alg-filmknop .lb{position:absolute;inset:0;display:flex;align-items:center;white-space:nowrap;transition:transform .6s cubic-bezier(.7,0,.2,1),opacity .4s ease}
+.sn-alg-filmknop .lb-call{transform:translateY(110%);opacity:0}
 .sn-alg-filmknop[data-stand="call"] .lb-video{transform:translateY(-110%);opacity:0}
-.sn-alg-filmknop[data-stand="call"] .lb-call{transform:translateY(0);opacity:1;transition-delay:.28s}
-@media(prefers-reduced-motion:reduce){.sn-alg-filmknop,.sn-alg-filmknop::before,.sn-alg-filmknop .lb{transition:none}.sn-alg-filmknop[data-stand="call"],.sn-alg-filmknop[data-stand="call"]::after{animation:none}}
+.sn-alg-filmknop[data-stand="call"] .lb-call{transform:translateY(0);opacity:1;transition-delay:.3s}
+/* rond icoon rechts: wit met donker afspeelteken, bij hover donker; na de klik wit met groene pijl, zoals Website-actie */
+.sn-alg-filmknop .rond{position:relative;display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;background:#fff;color:#0b0e0d;transition:background-color .35s ease,color .35s ease}
+.sn-alg-filmknop[data-stand="video"]:is(:hover,:focus-visible) .rond{background:#0b0e0d;color:#fff}
+.sn-alg-filmknop[data-stand="call"] .rond{background:#fff;color:#25d366}
+.sn-alg-filmknop .ic{position:absolute;transition:transform .6s cubic-bezier(.7,0,.2,1),opacity .35s ease}
+.sn-alg-filmknop .ic-video{fill:currentColor;margin-left:2px}
+.sn-alg-filmknop .ic-call{transform:scale(.4) rotate(-45deg);opacity:0}
+.sn-alg-filmknop[data-stand="call"] .ic-video{transform:scale(.4) rotate(45deg);opacity:0}
+.sn-alg-filmknop[data-stand="call"] .ic-call{transform:none;opacity:1;transition-delay:.35s}
+.sn-alg-filmknop[data-stand="call"]:hover .ic-call{transform:translate(2px,-2px)}
+@media(max-width:560px){.sn-alg-filmknop{height:54px;padding-left:22px;font-size:12px}.sn-alg-filmknop .rond{width:42px;height:42px}}
+@media(prefers-reduced-motion:reduce){.sn-alg-filmknop,.sn-alg-filmknop::before,.sn-alg-filmknop::after,.sn-alg-filmknop .lb,.sn-alg-filmknop .ic{transition:none}}
