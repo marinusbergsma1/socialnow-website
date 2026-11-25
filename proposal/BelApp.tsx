@@ -8,7 +8,8 @@ import "./bel-app.css";
 export function BelApp() {
   return <nav className="sn-bel-app" aria-label="Bel of app Marinus">
     <a className="sn-bel-app-call" href={boekingsPlannerUrl}><CalendarDays size={15} aria-hidden="true" /><span>Plan een call</span></a>
-    <a href={belLink}><Phone size={15} aria-hidden="true" /><span>Bellen</span></a>
+    {/* 25 november 2026 (Marinus): "Op mobiel mag dit plan een Call en Whatsapp zijn." Bellen alleen op grotere schermen. */}
+    <a className="sn-bel-app-bel" href={belLink}><Phone size={15} aria-hidden="true" /><span>Bellen</span></a>
     <a href={appLink()} target="_blank" rel="noopener noreferrer"><MessageCircle size={15} aria-hidden="true" /><span translate="no">WhatsApp</span></a>
   </nav>;
 }
