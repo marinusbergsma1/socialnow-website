@@ -88,3 +88,10 @@ html:root .sn-site .st-kaart.is-breed .st-knoppen{margin-top:24px}
   html:root .sn-site .st-kaart.is-breed{grid-template-columns:1fr}
   html:root .sn-site .st-kaart.is-breed .st-kaart-beeld{border-right:0;border-bottom:1px solid var(--st-lijn);aspect-ratio:4/3;min-height:0}
 }
+
+/* Fotowissel in stap 03, zoals de header (sn-alg-dia en sn-alg-grow in header-algemeen.css): overvloeien en langzaam inzoomen. */
+html:root .sn-site .st-wissel img{opacity:0;transition:opacity .48s ease;transform-origin:50% 60%;animation:st-grow 14s ease-in-out infinite alternate}
+html:root .sn-site .st-wissel img[data-actief="true"]{opacity:1}
+html:root .sn-site .st-wissel img.is-gesprek{object-position:34% 60%}
+@keyframes st-grow{from{transform:scale(1)}to{transform:scale(1.08)}}
+@media(prefers-reduced-motion:reduce){html:root .sn-site .st-wissel img{animation:none;transition:none}}

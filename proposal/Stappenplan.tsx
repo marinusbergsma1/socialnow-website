@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Play } from "lucide-react";
 import { people } from "./content";
 import { klein } from "./licht";
+import { BEURSFOTOS } from "./HeaderAlgemeen";
 import "./stappenplan.css";
 
 // Homepage als stappenplan, 25 november 2026. MARINUS bij "Onze websites / Altijd een gratis websitedemo": "Kan deze tekst meer op
@@ -94,6 +95,23 @@ function Punten({ items }: { items: string[] }) {
   return <ul className="st-punten">{items.map((p) => <li key={p}>{p}</li>)}</ul>;
 }
 
+// Later die dag (Marinus, bij de foto van stap 03): "Deze foto mag constant veranderen op dezelfde manier als ie dat al deed bij de
+// header." Dezelfde beursfoto's, elke 3 seconden een overvloei en een langzame zoom; begint bij Steef aan tafel. Stopt bij reduced motion.
+const STAP3_FOTOS = [...BEURSFOTOS.filter((f) => f.bestand === "beurs-steef"), ...BEURSFOTOS.filter((f) => f.bestand !== "beurs-steef")];
+
+function Fotowissel() {
+  const [foto, zetFoto] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => zetFoto((vorige) => (vorige + 1) % STAP3_FOTOS.length), 3000);
+    return () => window.clearInterval(timer);
+  }, []);
+  return <div className="st-kaart-beeld st-wissel">
+    {STAP3_FOTOS.map(({ bestand, alt }, index) => <img key={bestand} src={`/images/verhaal/${bestand}.webp`} alt={alt} width="900" height="1200" loading="lazy"
+      data-actief={foto === index} aria-hidden={foto !== index} className={bestand === "beurs-marinus" ? "is-gesprek" : undefined} />)}
+  </div>;
+}
+
 export function StappenSlot() {
   const film = useRef<HTMLVideoElement>(null);
   const [speelt, zetSpeelt] = useState(false);
@@ -105,9 +123,7 @@ export function StappenSlot() {
   };
   return <section className="st-wrap st-geheel" aria-label="Stap 03 tot en met 05">
     <article className="st-kaart" id="stap-operations">
-      <div className="st-kaart-beeld">
-        <img src="/images/verhaal/beurs-steef.webp" alt="Steef aan tafel met bezoekers rond een laptop" width="900" height="1200" loading="lazy" />
-      </div>
+      <Fotowissel />
       <div className="st-kaart-tekst">
         <p className="st-label"><i />Stap 03 · Management en operations</p>
         <h3>Grip op je processen, systemen en cijfers.</h3>
