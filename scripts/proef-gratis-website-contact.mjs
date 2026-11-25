@@ -12,9 +12,8 @@ const css = fs.readFileSync("proposal/gratis-website-wit.css", "utf8");
 eis(/STAP3_FOTOS = [^;]*f\.bestand !== "team-atomium"/.test(st), "Atomium-foto niet in de slider van stap 04");
 eis(/gw2-stapel/.test(gw) && /vastiq-desktop\.webp/.test(gw) && /ilgordo-desktop\.webp/.test(gw) && !/gw2-voorbeeld"/.test(gw), "twee overlappende websitetegels zonder tekst in plaats van projecttegels");
 eis(/\.gw2-stapel\{[^}]*max-width:(7\d\d|8\d\d|9\d\d)px/.test(css), "tegels lekker groot");
-eis(/<Link className="sn-pill sn-pill-blauw" to="\/security">/.test(gw) === false && /sn-pill sn-pill-blauw" href=\{boekingsPlannerUrl\}><span>Vraag een veiligheidsrapport aan/.test(gw), "veiligheidsrapport linkt naar call inplannen");
+// Sinds 25 nov (later): rapportknop en contactknoppen vervangen door één Plan een call, zie proef-gratis-website-plan-call.mjs.
 eis(/sn-pill sn-pill-blauw" href=\{boekingsPlannerUrl\}><span>Neem contact op/.test(home), "Neem contact op linkt naar call inplannen");
 eis(!/getElementById\("contact"\)/.test(ha.slice(ha.indexOf("const knop"), ha.indexOf("const knop") + 600)), "videoknop Neem contact op gaat ook naar de planner");
-eis(/<ContactKnop naam="Steef Komen" tekst="Finance"/.test(gw) && /<ContactKnop naam="Michelle Yang"/.test(gw) && /<ContactKnop naam="Ben Sterckx"/.test(gw), "Steef (Finance), Michelle en Ben als contactknop");
-eis(/aria-expanded=\{open\}/.test(gw) && /CONTACTEN/.test(gw), "klik toont contactgegevens uit contacten.ts");
+// Sinds 25 nov (later): rapportknop en contactknoppen vervangen door één Plan een call, zie proef-gratis-website-plan-call.mjs.
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");
