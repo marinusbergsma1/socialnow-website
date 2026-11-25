@@ -121,7 +121,7 @@ eis(/<section className="sn-alg gw2-kop"/.test(gw) && gw.includes('to="/blog/waa
 const aanvr = lees("proposal/aanvragen.ts");
 eis(gw.includes("AANBRENGERS.map") && gw.includes('"Iemand anders"'.slice(1, -1)) && gw.includes("Niemand, zelf gevonden") && /get\("ref"\)/.test(gw) && /\[w\.via, gegevens\.via\]/.test(aanvr) && (aanvr.match(/via: "/g) || []).length === 10 && gw.includes("{ via, voornaam"), "onboarding: kies via wie je kwam (foto en naam, Iemand anders, Zelf gevonden), ?ref= vult vooraf in, Aangebracht door gaat mee in de aanvraag");
 // 25 november 2026 (Marinus): "en daarna gwn de contactpagina". De homepage eindigt sinds dan met stap 05 (StapContact) naar /contact.
-eis(startHome.includes("<StapContact") && startHome.indexOf("<StapContact") > startHome.indexOf("<VideoSlider"), "homepage: eindigt na de sliders met de stap naar contact");
+eis(startHome.includes("<StappenSlot") && startHome.indexOf("<StappenSlot") > startHome.indexOf("<VideoSlider"), "homepage: eindigt na de sliders met de stappen naar contact");
 // Website-actie in de menubalk: "Deze dikgedrukt en met een shine zodat ie nog meer opvalt."
 const menuCss = lees("proposal/hoofdmenu.css");
 // 6 november 2026 (Marinus): "de groene glow weg bij website-actie". De glans van 4 november is dus weg.

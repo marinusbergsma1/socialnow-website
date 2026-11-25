@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, Play } from "lucide-react";
 import { people } from "./content";
 import { klein } from "./licht";
-import OdooFilm from "./OdooFilm";
-import "./vijf-jaar.css";
 import "./stappenplan.css";
 
 // Homepage als stappenplan, 25 november 2026. MARINUS bij "Onze websites / Altijd een gratis websitedemo": "Kan deze tekst meer op
@@ -32,8 +30,12 @@ const naar = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
 };
 
 // Teamslider boven de websitestap: alle mensen uit content.ts in een rustig doorlopende rij; stopt bij aanwijzen en bij reduced motion.
+// 25 november 2026 (Marinus, bij de foto van Femke Oostendorp): "Kan deze weg van de slider?" Alleen uit de slider; /team blijft gelijk.
+const NIET_IN_SLIDER = ["Femke Oostendorp"];
+
 export function TeamSlider() {
-  const rij = [...people, ...people];
+  const mensen = people.filter((p) => !NIET_IN_SLIDER.includes(p.name));
+  const rij = [...mensen, ...mensen];
   return <section className="st-team" aria-labelledby="st-team-kop">
     <div className="st-wrap st-team-kop">
       <div>
@@ -44,7 +46,7 @@ export function TeamSlider() {
     </div>
     <div className="st-team-baan">
       <ul className="st-team-rij">
-        {rij.map((p, i) => <li key={`${p.name}-${i}`} aria-hidden={i >= people.length}>
+        {rij.map((p, i) => <li key={`${p.name}-${i}`} aria-hidden={i >= mensen.length}>
           <img {...klein(p.image, "180px", [160, 320])} alt="" width="180" height="225" loading="lazy" />
           <strong translate="no">{p.name}</strong>
           <span>{p.role}</span>
@@ -81,32 +83,18 @@ export function StapKop({ nr, titel, kop, tekst }: { nr: string; titel: string; 
   </header>;
 }
 
-export function StapOperations() {
-  return <section className="st-wrap st-blok" id="stap-operations" aria-labelledby="st-ops-kop">
-    <div className="st-blok-tekst">
-      <p className="st-label"><i />Stap 03 · Management en operations</p>
-      <h2 id="st-ops-kop">Grip op je processen, systemen en cijfers.</h2>
-      <p className="st-intro">Je CRM, sales en finance komen samen op een stevige basis, zoals Odoo, AFAS, Exact of HubSpot. Wij richten het in rond hoe jouw bedrijf werkt en blijven verantwoordelijk tot het loopt.</p>
-      <ul className="st-punten">
-        <li>Doorlichting van processen, rollen en knelpunten</li>
-        <li>Werkafspraken en een overzicht van de cijfers</li>
-        <li>Invoering en begeleiding van je team</li>
-      </ul>
-      <Link className="sn-pill" to="/contact?onderwerp=management-operations"><span>Bespreek je operatie</span><ArrowUpRight size={16} aria-hidden="true" /></Link>
-    </div>
-    <div className="st-blok-film">
-      <OdooFilm />
-      <p className="st-onderschrift">Ons team op Odoo Experience 2026 in Brussel.</p>
-    </div>
-  </section>;
+// 25 november 2026 (Marinus, bij stap 03 met de staande Odoo-film en veel lege ruimte): "Deze en de stappen eronder wil ik graag met
+// de afbeeldingen die eerste bij de header stonden en meer als 1 geheel. Nu ziet het er erg lelijk uit." Stap 03, 04 en 05 zijn daarom
+// één blok van kaarten: 03 met Steef aan tafel, 04 met de nieuwe OS- en Connect-film (87-custom-os-connect-20261125: zonder gratis
+// onderdelen, prijzen of Odoo), 05 breed met het team bij het Atomium. Dezelfde beursfoto's als de fotowissel in de header.
+const FILM_OS_CONNECT = "/video/explainer/socialnow-os-connect.mp4";
+const POSTER_OS_CONNECT = "/video/explainer/socialnow-os-connect.jpg";
+
+function Punten({ items }: { items: string[] }) {
+  return <ul className="st-punten">{items.map((p) => <li key={p}>{p}</li>)}</ul>;
 }
 
-// De OS- en Connect-explainer. De bestaande OS-film noemt nog het gratis aanbod en Odoo; Marinus wil hier een film zonder. Zolang die
-// nieuwe film er niet is, staat FILM_OS_CONNECT op null en toont deze stap alleen tekst. Zet hier het pad zodra de film klaar is.
-const FILM_OS_CONNECT: string | null = null;
-const POSTER_OS_CONNECT = "";
-
-export function StapOsConnect() {
+export function StappenSlot() {
   const film = useRef<HTMLVideoElement>(null);
   const [speelt, zetSpeelt] = useState(false);
   const wissel = () => {
@@ -115,34 +103,48 @@ export function StapOsConnect() {
     if (v.paused) void v.play().catch(() => {});
     else v.pause();
   };
-  return <section className={`st-wrap st-blok${FILM_OS_CONNECT ? " is-omgekeerd" : ""}`} id="stap-os" aria-labelledby="st-os-kop">
-    <div className="st-blok-tekst">
-      <p className="st-label"><i />Stap 04 · Eén OS met Connect</p>
-      <h2 id="st-os-kop">Je hele bedrijf in één systeem.</h2>
-      <p className="st-intro">Website, marketing, CRM en finance komen samen in één eigen, lokaal AI-systeem op maat. Met SocialNow Connect schakel je daarin echte experts in, en jij bepaalt tot welke informatie zij toegang krijgen.</p>
-      <ul className="st-punten">
-        <li>Custom OS rond jouw bedrijf, veilig en in eigen beheer</li>
-        <li>Je team en AI-agents werken op één plek</li>
-        <li>Connect: experts uit ons netwerk, met toegang die jij kiest</li>
-      </ul>
-      <Link className="sn-pill" to="/contact?onderwerp=os"><span>Bespreek je Custom OS</span><ArrowUpRight size={16} aria-hidden="true" /></Link>
-    </div>
-    {FILM_OS_CONNECT && <figure className="st-film" data-speelt={speelt}>
-      <video ref={film} src={FILM_OS_CONNECT} poster={POSTER_OS_CONNECT} playsInline preload="metadata" aria-label="Uitleg: SocialNow OS en Connect"
-        onClick={wissel} onPlay={() => zetSpeelt(true)} onPause={() => zetSpeelt(false)} onEnded={() => zetSpeelt(false)} />
-      {!speelt && <button type="button" className="sn-alg-knop-video st-film-knop" onClick={wissel}><Play size={15} aria-hidden="true" /><span>Bekijk de uitleg</span></button>}
-    </figure>}
-  </section>;
-}
+  return <section className="st-wrap st-geheel" aria-label="Stap 03 tot en met 05">
+    <article className="st-kaart" id="stap-operations">
+      <div className="st-kaart-beeld">
+        <img src="/images/verhaal/beurs-steef.webp" alt="Steef aan tafel met bezoekers rond een laptop" width="900" height="1200" loading="lazy" />
+      </div>
+      <div className="st-kaart-tekst">
+        <p className="st-label"><i />Stap 03 · Management en operations</p>
+        <h3>Grip op je processen, systemen en cijfers.</h3>
+        <p>Je CRM, sales en finance komen samen op een stevige basis, zoals Odoo, AFAS, Exact of HubSpot. Wij richten het in rond hoe jouw bedrijf werkt en blijven verantwoordelijk tot het loopt.</p>
+        <Punten items={["Doorlichting van processen, rollen en knelpunten", "Werkafspraken en een overzicht van de cijfers", "Invoering en begeleiding van je team"]} />
+        <Link className="sn-pill" to="/contact?onderwerp=management-operations"><span>Bespreek je operatie</span><ArrowUpRight size={16} aria-hidden="true" /></Link>
+      </div>
+    </article>
 
-export function StapContact() {
-  return <section className="st-wrap st-slot" id="stap-contact" aria-labelledby="st-slot-kop">
-    <p className="st-label"><i />Stap 05 · Kennismaken</p>
-    <h2 id="st-slot-kop">Benieuwd wat dit voor jou betekent?</h2>
-    <p className="st-intro">Plan een gesprek en we bespreken samen alle details. Alles is maatwerk: je krijgt vooraf een voorstel met een vaste prijs.</p>
-    <div className="st-knoppen">
-      <Link className="sn-pill" to="/contact"><span>Neem contact op</span><ArrowUpRight size={16} aria-hidden="true" /></Link>
-      <a className="sn-pill sn-pill-blauw" href="/afspraak"><span>Plan een call</span><ArrowUpRight size={16} aria-hidden="true" /></a>
-    </div>
+    <article className="st-kaart is-film" id="stap-os">
+      <figure className="st-kaart-beeld st-film" data-speelt={speelt}>
+        <video ref={film} src={FILM_OS_CONNECT} poster={POSTER_OS_CONNECT} playsInline preload="metadata" aria-label="Uitleg: SocialNow OS en Connect"
+          onClick={wissel} onPlay={() => zetSpeelt(true)} onPause={() => zetSpeelt(false)} onEnded={() => zetSpeelt(false)} />
+        {!speelt && <button type="button" className="sn-alg-knop-video st-film-knop" onClick={wissel}><Play size={15} aria-hidden="true" /><span>Bekijk de uitleg</span></button>}
+      </figure>
+      <div className="st-kaart-tekst">
+        <p className="st-label"><i />Stap 04 · Eén OS met Connect</p>
+        <h3>Je hele bedrijf in één systeem.</h3>
+        <p>Website, marketing, CRM en finance komen samen in één eigen, lokaal AI-systeem op maat. Met SocialNow Connect schakel je daarin echte experts in, en jij bepaalt tot welke informatie zij toegang krijgen.</p>
+        <Punten items={["Custom OS rond jouw bedrijf, veilig en in eigen beheer", "Je team en AI-agents werken op één plek", "Connect: experts uit ons netwerk, met toegang die jij kiest"]} />
+        <Link className="sn-pill" to="/contact?onderwerp=os"><span>Bespreek je Custom OS</span><ArrowUpRight size={16} aria-hidden="true" /></Link>
+      </div>
+    </article>
+
+    <article className="st-kaart is-breed" id="stap-contact">
+      <div className="st-kaart-beeld">
+        <img src="/images/verhaal/team-atomium.webp" alt="Ons team bij het Atomium in Brussel" width="900" height="1200" loading="lazy" />
+      </div>
+      <div className="st-kaart-tekst">
+        <p className="st-label"><i />Stap 05 · Kennismaken</p>
+        <h3>Benieuwd wat dit voor jou betekent?</h3>
+        <p>Plan een gesprek en we bespreken samen alle details. Alles is maatwerk: je krijgt vooraf een voorstel met een vaste prijs.</p>
+        <div className="st-knoppen">
+          <Link className="sn-pill" to="/contact"><span>Neem contact op</span><ArrowUpRight size={16} aria-hidden="true" /></Link>
+          <a className="sn-pill sn-pill-blauw" href="/afspraak"><span>Plan een call</span><ArrowUpRight size={16} aria-hidden="true" /></a>
+        </div>
+      </div>
+    </article>
   </section>;
 }
