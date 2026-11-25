@@ -4,21 +4,22 @@ import React, { useEffect, useRef } from "react";
 // Een dieptekaart (scripts/maak-dieptekaart.mjs, licht = dichtbij) laat voorgrond en achtergrond tegen elkaar in bewegen als je de
 // muis beweegt; op touch beweegt het rustig vanzelf. Het canvas ligt over de gewone <img> (alt-tekst en terugval) en neemt die pas
 // over als alles geladen is. Niets bij prefers-reduced-motion of zonder WebGL. Buiten beeld staat de animatie stil.
-type Props = { src: string; diepte: string; positie?: [number, number]; sterkte?: number; actief?: boolean };
+// anker: welke diepte stil blijft staan (.45 = midden; laag = achtergrond staat stil en alleen de voorgrond beweegt).
+type Props = { src: string; diepte: string; positie?: [number, number]; sterkte?: number; actief?: boolean; anker?: number };
 
 const VS = `attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;v.y=1.-v.y;gl_Position=vec4(p,0.,1.);}`;
 // Cover-passing zoals object-fit: cover met object-position, iets ingezoomd zodat de randen nooit leeg trekken. De verschuiving
 // wordt drie keer bijgesteld (eenvoudige parallax-occlusie), zodat randen van mensen strak blijven.
-const FS = `precision mediump float;varying vec2 v;uniform sampler2D uFoto;uniform sampler2D uDiepte;uniform vec2 uMuis;uniform vec2 uSchaal;uniform vec2 uPos;uniform float uSterkte;
+const FS = `precision mediump float;varying vec2 v;uniform sampler2D uFoto;uniform sampler2D uDiepte;uniform vec2 uMuis;uniform vec2 uSchaal;uniform vec2 uPos;uniform float uSterkte;uniform float uAnker;
 vec2 dek(vec2 t){return (t-uPos)*uSchaal*.94+uPos;}
-void main(){vec2 uv=dek(v);vec2 q=uv;for(int i=0;i<3;i++){float d=texture2D(uDiepte,q).r;q=uv+uMuis*(d-.45)*uSterkte;}
+void main(){vec2 uv=dek(v);vec2 q=uv;for(int i=0;i<3;i++){float d=texture2D(uDiepte,q).r;q=uv+uMuis*(d-uAnker)*uSterkte;}
 gl_FragColor=texture2D(uFoto,clamp(q,0.,1.));}`;
 
 function laad(src: string) {
   return new Promise<HTMLImageElement>((ok, nee) => { const i = new Image(); i.decoding = "async"; i.onload = () => ok(i); i.onerror = nee; i.src = src; });
 }
 
-export default function Diepte3D({ src, diepte, positie = [0.5, 0.6], sterkte = 0.028, actief = true }: Props) {
+export default function Diepte3D({ src, diepte, positie = [0.5, 0.6], sterkte = 0.028, actief = true, anker = 0.45 }: Props) {
   const doek = useRef<HTMLCanvasElement>(null);
   const wisselActiviteit = useRef<(actief: boolean) => void>(() => {});
   const actiefRef = useRef(actief);
@@ -106,6 +107,7 @@ export default function Diepte3D({ src, diepte, positie = [0.5, 0.6], sterkte = 
       gl.uniform1i(u("uFoto"), 0); gl.uniform1i(u("uDiepte"), 1);
       gl.uniform2f(u("uPos"), positie[0], positie[1]);
       gl.uniform1f(u("uSterkte"), sterkte);
+      gl.uniform1f(u("uAnker"), anker);
       maat();
       gl.uniform2f(u("uMuis"), 0, 0);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -121,6 +123,6 @@ export default function Diepte3D({ src, diepte, positie = [0.5, 0.6], sterkte = 
       window.removeEventListener("pointermove", muis);
       figuur.classList.remove("is-3d");
     };
-  }, [src, diepte, positie[0], positie[1], sterkte]);
+  }, [src, diepte, positie[0], positie[1], sterkte, anker]);
   return <canvas ref={doek} className="sn-diepte3d" aria-hidden="true" />;
 }

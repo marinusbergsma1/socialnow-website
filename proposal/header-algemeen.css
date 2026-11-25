@@ -104,14 +104,17 @@ html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px
 .sn-alg-foto .sn-alg-film{position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover;background:#000;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .35s ease}
 .sn-alg-foto[data-film="true"] .sn-alg-film{opacity:1;pointer-events:auto}
 .sn-alg-foto .sn-alg-knop-video{z-index:3}
+.sn-alg-foto .sn-alg-filmstart{position:absolute;inset:0;z-index:3;pointer-events:none;transition:opacity .5s ease}
+.sn-alg-filmstart.is-3d .sn-diepte3d{opacity:1}
+.sn-alg-filmstart[data-weg]{opacity:0}
 .sn-alg-foto .sn-alg-filmwaas{position:absolute;inset:0;z-index:3;background:#000;opacity:.38;pointer-events:none;transition:opacity .5s ease}
 .sn-alg-foto .sn-alg-filmwaas[data-weg]{opacity:0}
 @media(max-width:960px){.sn-alg-foto.is-vierkant{aspect-ratio:1/1}}
 
 /* 25 november 2026, avond (Marinus): afspeelknop onder de video, even breed, en na de klik een groene veeg naar "Plan een call". */
 .sn-alg-filmblok{display:flex;flex-direction:column;gap:12px;min-width:0}
-.sn-alg-filmknop{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;width:min(100%,340px);align-self:center;height:58px;padding:5px 5px 5px 28px;overflow:hidden;isolation:isolate;border-radius:999px;border:2px solid #fff;background:#0b0e0d;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
-  transition:color .35s ease,border-color .7s ease}
+.sn-alg-filmknop{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;width:180px;max-width:100%;align-self:flex-end;margin-left:auto;height:46px;padding:4px 4px 4px 20px;overflow:hidden;isolation:isolate;border-radius:999px;border:2px solid #fff;background:#0b0e0d;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
+  transition:color .35s ease,border-color .7s ease,width .6s cubic-bezier(.7,0,.2,1)}
 .sn-alg-filmknop:focus-visible{outline:2px solid #fff;outline-offset:4px}
 /* wit vult bij hover van links naar rechts (zoals de groene pil) */
 .sn-alg-filmknop::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:#fff;transform:translateX(-101%);transition:transform .5s cubic-bezier(.23,1,.32,1)}
@@ -124,7 +127,7 @@ html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px
 .sn-alg-filmknop[data-stand="call"]::after{animation:sn-alg-veeg 1.9s both}
 @keyframes sn-alg-veeg{0%{transform:translateX(101%)}0%,55%{animation-timing-function:cubic-bezier(.7,0,.2,1)}40%{transform:translateX(0)}55%{transform:translateX(0)}100%{transform:translateX(101%)}}
 .sn-alg-filmknop[data-stand="call"]::before{transform:translateX(-101%);background:#25d366;transition:transform .85s cubic-bezier(.7,0,.2,1),background-color .4s ease}
-.sn-alg-filmknop[data-stand="call"]{border-color:#25d366;background:#0b0e0d;color:#fff}
+.sn-alg-filmknop[data-stand="call"]{width:202px;border-color:#25d366;background:#0b0e0d;color:#fff}
 /* daarna gedraagt hij zich als de groene pil: hover vult groen van links (pas als je na de klik eerst van de knop af bent gegaan) */
 .sn-alg-filmknop[data-stand="call"]:not([data-vers]):is(:hover,:focus-visible)::before{transform:translateX(0);transition:transform .5s cubic-bezier(.23,1,.32,1)}
 /* tekst: Speel video af schuift omhoog weg, Neem contact op komt van onder */
@@ -134,7 +137,7 @@ html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px
 .sn-alg-filmknop[data-stand="call"] .lb-video{transform:translateY(-110%);opacity:0}
 .sn-alg-filmknop[data-stand="call"] .lb-call{transform:translateY(0);opacity:1;transition-delay:.3s}
 /* rond icoon rechts: wit met donker afspeelteken, bij hover donker; na de klik wit met groene pijl, zoals Website-actie */
-.sn-alg-filmknop .rond{position:relative;display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;background:#fff;color:#0b0e0d;transition:background-color .35s ease,color .35s ease}
+.sn-alg-filmknop .rond{position:relative;display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:#fff;color:#0b0e0d;transition:background-color .35s ease,color .35s ease}
 .sn-alg-filmknop[data-stand="video"]:is(:hover,:focus-visible) .rond{background:#0b0e0d;color:#fff}
 .sn-alg-filmknop[data-stand="call"] .rond{background:#25d366;color:#fff}
 .sn-alg-filmknop[data-stand="call"]:not([data-vers]):is(:hover,:focus-visible) .rond{background:#fff;color:#25d366}
@@ -144,5 +147,5 @@ html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px
 .sn-alg-filmknop[data-stand="call"] .ic-video{transform:scale(.4) rotate(45deg);opacity:0}
 .sn-alg-filmknop[data-stand="call"] .ic-call{transform:none;opacity:1;transition-delay:.35s}
 .sn-alg-filmknop[data-stand="call"]:hover .ic-call{transform:translate(2px,-2px)}
-@media(max-width:560px){.sn-alg-filmknop{height:54px;padding-left:22px;font-size:12px}.sn-alg-filmknop .rond{width:42px;height:42px}}
+/* 25 november 2026 (Marinus): "Deze mag nog iets kleiner gwn een normale knop en rechts van het blok uitlijnen." Daarna: "Nog kleiner gwn zoals die andere knoppen." Zelfde maat als Website-actie en Neem contact op. */
 @media(prefers-reduced-motion:reduce){.sn-alg-filmknop,.sn-alg-filmknop::before,.sn-alg-filmknop::after,.sn-alg-filmknop .lb,.sn-alg-filmknop .ic{transition:none}.sn-alg-filmknop[data-stand="call"]::after{animation:none}}

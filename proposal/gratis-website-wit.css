@@ -114,15 +114,6 @@ html:root .sn-site .gw2-mens small{font-family:"TT Norms",system-ui,sans-serif!i
 .gw2-stapel .is-twee{left:0;bottom:0;z-index:1;transform:rotate(-2deg)}
 .gw2-stapel:hover .is-een{transform:rotate(3deg) translateY(-6px)}
 .gw2-stapel:hover .is-twee{transform:rotate(-3deg) translateY(4px)}
-/* Steef, Michelle en Ben: knop met één woord, klik toont mail en telefoon. */
-.gw2-contacten{display:flex;flex-wrap:wrap;align-items:flex-start;gap:10px;margin-top:20px}
-.gw2-contact{display:grid;gap:8px}
-html:root .sn-site .gw2-kop .gw2-contacten .gw2-steef{margin-top:0;background:transparent;font:inherit;cursor:pointer;text-align:left}
-.gw2-contact .gw2-steef svg{transition:transform .3s ease}
-.gw2-contact[data-open] .gw2-steef{border-color:#25d366}
-.gw2-contact[data-open] .gw2-steef svg{transform:rotate(180deg)}
-.gw2-contact-info{display:grid;gap:6px;padding:10px 14px;border:1px solid #ffffff26;border-radius:14px}
-.gw2-contact-info a{display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:13px;text-decoration:none}
-.gw2-contact-info a:hover{color:#25d366}
-.gw2-contact-info svg{color:#25d366;flex:none}
-@media(prefers-reduced-motion:reduce){.gw2-stapel img,.gw2-contact .gw2-steef svg{transition:none}}
+/* 25 november 2026 (Marinus): onder de groene Plan een call een kleine witte tekst "Vul de onboarding in". */
+.gw2-onboarding{display:inline-block;margin-top:14px;color:#fff;font-size:13px;text-decoration:underline;text-decoration-color:#ffffff59;text-underline-offset:4px;transition:text-decoration-color .2s}
+.gw2-onboarding:hover,.gw2-onboarding:focus-visible{text-decoration-color:#25d366}
