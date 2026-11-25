@@ -12,7 +12,7 @@ const examples = webShowcaseProjects
   .map(project => ({ name: project.title, url: project.url!, slug: project.slug,
     previewUrl: project.previewUrl || (project.slug === "vdz-brigade-website" ? "https://www.vdz-brigade.nl/" : undefined), image: project.image }));
 
-export function WebsiteExamples() {
+export function WebsiteExamples({ stap = false }: { stap?: boolean }) {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(false);
   const [productionHost, setProductionHost] = useState(false);
@@ -65,7 +65,11 @@ export function WebsiteExamples() {
     };
   }, []);
   return <div className="sn-fw-examples" ref={region} role="region" aria-label="Live websitevoorbeelden" aria-roledescription="carrousel">
-    <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Onze websites</p><h3>Altijd een gratis websitedemo.</h3></div><p>Persoonlijk gemaakt. Geen AI-slop.</p></div>
+    {/* 25 november 2026 (Marinus): "Kan deze tekst meer op basis van de stappen vanuit de video zelf?" Op de homepage is dit stap 01 van
+        het stappenplan (Stappenplan.tsx); elders blijft de oude kop. */}
+    {stap
+      ? <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Stap 01 · Website en branding</p><h3>We beginnen bij je website en je merk.</h3></div><p>Vertrouwen en herkenning zijn je sterkste kracht. Daarom maken we altijd eerst een gratis websitedemo, persoonlijk en zonder AI-slop.</p></div>
+      : <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Onze websites</p><h3>Altijd een gratis websitedemo.</h3></div><p>Persoonlijk gemaakt. Geen AI-slop.</p></div>}
     <div className="sn-web-deck" tabIndex={0} aria-label="Websitevoorbeelden. Gebruik de pijltjestoetsen om te bladeren."
       onKeyDown={event => { if (event.key === "ArrowRight" || event.key === "ArrowLeft") { event.preventDefault(); choose(index + (event.key === "ArrowRight" ? 1 : -1)); } }}
       onPointerDown={event => { pointer.current = { x: event.clientX, y: event.clientY }; dragged.current = false; }}
@@ -130,10 +134,10 @@ export function WebsiteTegel() {
   </section>;
 }
 
-export default function FreeWebsite() {
-  return <section id="free-website" className="sn-free-website" aria-labelledby="free-website-titel">
+export default function FreeWebsite({ stap = false }: { stap?: boolean }) {
+  return <section id={stap ? "stap-website" : "free-website"} className="sn-free-website" aria-labelledby="free-website-titel">
     <div className="h-wrap sn-fw-binnen">
-      <WebsiteExamples />
+      <WebsiteExamples stap={stap} />
       {/* 20 oktober 2026 (Marinus): "Apps is misschien iets voor os zelf niet voor de homepage." De appwand staat niet meer op de
           homepage; AppWand.tsx, apps.ts en public/images/apps blijven voor het OS. */}
     </div>

@@ -1,0 +1,63 @@
+/* Homepage als stappenplan, 25 november 2026 (Stappenplan.tsx). */
+html:root .sn-site :is(.st-team,.st-wrap){--st-groen:#25d366;--st-lijn:#ffffff1a;--st-grijs:#9aa6a0;--st-vlak:#0b0e0d;--st-mono:var(--v-mono,ui-monospace,Menlo,monospace)}
+html:root .sn-site .st-wrap{max-width:1320px;margin-left:auto;margin-right:auto;padding-left:clamp(16px,4vw,48px);padding-right:clamp(16px,4vw,48px)}
+html:root .sn-site .st-label{display:flex;align-items:center;gap:8px;margin:0;font-family:var(--st-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--st-grijs)}
+html:root .sn-site .st-label i{flex:0 0 6px;height:6px;border-radius:50%;background:var(--st-groen)}
+html:root .sn-site :is(.st-team,.st-wrap) h2{margin:14px 0 0;max-width:860px;font-family:"TT Norms",Arial,sans-serif;font-size:clamp(30px,3.6vw,48px);font-weight:700;line-height:1.08;letter-spacing:-.02em;text-transform:none;color:#fff}
+html:root .sn-site .st-intro{max-width:720px;margin:16px 0 0;font-size:clamp(16px,1.4vw,19px);line-height:1.55;color:var(--st-grijs)}
+html:root .sn-site .st-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--st-mono);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--st-groen);text-decoration:none;white-space:nowrap}
+html:root .sn-site .st-link:hover{color:#fff}
+
+/* teamslider */
+html:root .sn-site .st-team{padding:clamp(56px,7vw,96px) 0 0}
+html:root .sn-site .st-team-kop{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+html:root .sn-site .st-team-baan{margin-top:32px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+html:root .sn-site .st-team-rij{display:flex;gap:16px;width:max-content;margin:0;padding:0;list-style:none;animation:st-team-loop 90s linear infinite}
+html:root .sn-site .st-team-baan:hover .st-team-rij{animation-play-state:paused}
+@keyframes st-team-loop{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 8px))}}
+html:root .sn-site .st-team-rij li{display:flex;flex-direction:column;gap:4px;width:180px;flex:none}
+html:root .sn-site .st-team-rij img{width:180px;height:225px;object-fit:cover;border-radius:16px;border:1px solid var(--st-lijn);background:var(--st-vlak);margin-bottom:8px}
+html:root .sn-site .st-team-rij strong{font-family:"TT Norms",Arial,sans-serif;font-size:16px;color:#fff}
+html:root .sn-site .st-team-rij span{font-size:13px;line-height:1.35;color:var(--st-grijs)}
+@media(prefers-reduced-motion:reduce){html:root .sn-site .st-team-baan{overflow-x:auto}html:root .sn-site .st-team-rij{animation:none}}
+
+/* overzicht */
+html:root .sn-site .st-overzicht{padding-top:clamp(72px,9vw,120px)}
+html:root .sn-site .st-lijst{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:36px 0 0;padding:0;list-style:none;counter-reset:none}
+html:root .sn-site .st-lijst a{display:flex;flex-direction:column;gap:8px;height:100%;padding:22px 20px;border:1px solid var(--st-lijn);border-radius:16px;background:var(--st-vlak);color:#fff;text-decoration:none;transition:border-color .2s,transform .2s}
+html:root .sn-site .st-lijst a:hover{border-color:#25d36699;transform:translateY(-2px)}
+html:root .sn-site .st-lijst li:last-child a{border-color:#25d36666}
+html:root .sn-site .st-nr{font-family:var(--st-mono);font-size:12px;letter-spacing:.1em;color:var(--st-groen)}
+html:root .sn-site .st-lijst b{font-family:"TT Norms",Arial,sans-serif;font-size:18px;font-weight:700;line-height:1.2}
+html:root .sn-site .st-lijst span:not(.st-nr){font-size:14px;line-height:1.45;color:var(--st-grijs)}
+
+/* stapkop boven een bestaande sectie */
+html:root .sn-site .st-stapkop{padding-top:clamp(72px,9vw,120px);scroll-margin-top:90px}
+html:root .sn-site #stap-website{scroll-margin-top:90px}
+
+/* blokken met film */
+html:root .sn-site .st-blok{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(28px,5vw,72px);align-items:center;padding-top:clamp(72px,9vw,120px);scroll-margin-top:90px}
+html:root .sn-site .st-blok.is-omgekeerd{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+html:root .sn-site .st-punten{display:grid;gap:10px;margin:22px 0 28px;padding:0;list-style:none}
+html:root .sn-site .st-punten li{position:relative;padding-left:20px;font-size:16px;line-height:1.45;color:#dfe6e2}
+html:root .sn-site .st-punten li::before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--st-groen)}
+html:root .sn-site .st-blok-film{display:grid;justify-items:center;gap:10px}
+html:root .sn-site .st-onderschrift{margin:0;font-size:13px;color:var(--st-grijs)}
+html:root .sn-site .st-film{position:relative;margin:0;aspect-ratio:16/9;border:1px solid var(--st-lijn);border-radius:18px;overflow:clip;background:#000}
+html:root .sn-site .st-film video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer}
+html:root .sn-site .st-film .st-film-knop{position:absolute;right:16px;bottom:16px;z-index:2}
+
+/* slot */
+html:root .sn-site .st-slot{padding-top:clamp(72px,9vw,120px);padding-bottom:clamp(40px,6vw,72px);scroll-margin-top:90px}
+html:root .sn-site .st-knoppen{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+@media(max-width:1060px){
+  html:root .sn-site .st-lijst{grid-template-columns:repeat(2,minmax(0,1fr))}
+  html:root .sn-site .st-lijst li:last-child{grid-column:1/-1}
+  html:root .sn-site .st-blok,html:root .sn-site .st-blok.is-omgekeerd{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  html:root .sn-site .st-lijst{grid-template-columns:1fr}
+  html:root .sn-site .st-team-rij li{width:140px}
+  html:root .sn-site .st-team-rij img{width:140px;height:175px}
+}

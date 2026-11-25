@@ -52,12 +52,14 @@ const BEURSFOTOS = [
 // dat als je op de video klikt de video op pauze gaat." en "Nadat de video eindigt wil ik graag dat de slider weer komt. Verder mag de
 // video ook vierkant worden gemaakt." Dus: het kader is vierkant en toont de fotowissel. Bekijk de video speelt de explainer in hetzelfde
 // kader, zonder bedieningsbalk; een klik op de film pauzeert of speelt verder. Als de film afloopt, komt de fotowissel terug.
+// Daarna (Marinus): "Hij is terug en ik zie nogsteeds niet de explainer video op mijn homepage." Dus bij binnenkomst staat de
+// explainer (startbeeld met knop) in het kader; de fotowissel komt pas na afloop, en Bekijk de video start de film daarna opnieuw.
 // De naam AtomiumFoto blijft, omdat HomeEnthousiast.tsx hem zo importeert.
 export function AtomiumFoto() {
   const film = useRef<HTMLVideoElement>(null);
   const [foto, zetFoto] = useState(0);
   const [draait, zetDraait] = useState(() => !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  const [filmAan, zetFilmAan] = useState(false);
+  const [filmAan, zetFilmAan] = useState(true);
   const [speelt, zetSpeelt] = useState(false);
 
   useEffect(() => {
