@@ -92,9 +92,17 @@ function Leider({ naam }: { naam: string }) {
   </li>;
 }
 
-export default function ConnectExperts() {
+// 25 november 2026 (Marinus, bij een schermafdruk van /team): "bij Team gewoon vanaf hier beginnen. Maar verbeter Vind je Expert."
+// /team opent nu met dit blok (paginaKop: de kop is dan de h1). Verbeterd: snelfilters per kernonderdeel onder het zoekveld, een
+// teller hoeveel experts er gevonden zijn, en de inleiding zonder "ad-" die op een breed scherm midden in het woord afbrak.
+// Proef: scripts/proef-team-vind-expert.mjs.
+const FILTERS = ["Cybersecurity", "ERP & CRM", "Growth", "Wealth Management"];
+
+export default function ConnectExperts({ paginaKop = false }: { paginaKop?: boolean }) {
   const { t } = useLanguage();
   const [zoek, zetZoek] = useState("");
+  const [filter, zetFilter] = useState("");
+  const Kop = paginaKop ? "h1" : "h2";
   const groepVan = (naam: string) => expertGroepen.find((g) => g.members.includes(naam))?.name ?? "";
   const q = zoek.trim().toLowerCase();
   const past = (naam: string) => {
@@ -102,22 +110,28 @@ export default function ConnectExperts() {
     const p = people.find((x) => x.name === naam);
     return !!p && `${p.name} ${p.role} ${t(groepVan(p.name))}`.toLowerCase().includes(q);
   };
-  const top = EINDVERANTWOORDELIJK.filter(past);
-  const takken = TAKKEN.map((t) => ({ ...t, delen: t.delen.map((d) => ({ ...d, leden: d.leden.filter(past), bedrijven: (d.bedrijven ?? []).filter((b) => !q || b.naam.toLowerCase().includes(q)) })).filter((d) => d.leden.length || d.bedrijven.length) })).filter((t) => t.delen.length);
-  const vakken = VAKGEBIEDEN.map((v) => ({ ...v, leden: v.leden.filter(past) })).filter((v) => v.leden.length);
+  const top = filter ? [] : EINDVERANTWOORDELIJK.filter(past);
+  const takken = TAKKEN.filter((t) => !filter || t.naam === filter).map((t) => ({ ...t, delen: t.delen.map((d) => ({ ...d, leden: d.leden.filter(past), bedrijven: (d.bedrijven ?? []).filter((b) => !q || b.naam.toLowerCase().includes(q)) })).filter((d) => d.leden.length || d.bedrijven.length) })).filter((t) => t.delen.length);
+  const vakken = filter ? [] : VAKGEBIEDEN.map((v) => ({ ...v, leden: v.leden.filter(past) })).filter((v) => v.leden.length);
   const leeg = !top.length && !takken.length && !vakken.length;
+  const gevonden = new Set([...top, ...takken.flatMap((t) => t.delen.flatMap((d) => d.leden)), ...vakken.flatMap((v) => v.leden)]).size;
   return <div className="cx-connect">
-    <section id="team" className="sn-cx h-wrap" aria-labelledby="team-titel">
+    <section id="team" className={`sn-cx h-wrap${paginaKop ? " is-pagina" : ""}`} aria-labelledby="team-titel">
       <div className="cx-boven">
         <p className="cx-label">Ons team</p>
-        <h2 id="team-titel">Vind je expert.</h2>
-        <p className="cx-team">Echte mensen die je bij naam kent: strategen, developers, designers, ad-specialisten en financiële experts.</p>
+        <Kop id="team-titel">Vind je expert<span className="cx-punt">.</span></Kop>
+        <p className="cx-team">Echte mensen die je bij naam kent: strategen, developers, designers, specialisten in advertenties en financiële experts.</p>
       </div>
       <p className="cx-zin"><strong>{people.length}</strong> experts in <strong>{expertGroepen.length}</strong> vakgebieden. Zoek, vergelijk en kies zelf.</p>
       <label className="cx-zoek">
         <Search size={18} aria-hidden="true" />
         <input type="search" value={zoek} onChange={(e) => zetZoek(e.target.value)} placeholder="Zoek op naam of vak, bijvoorbeeld Meta Ads" aria-label="Zoek een expert" />
       </label>
+      <div className="cx-filters" role="group" aria-label="Filter op kernonderdeel">
+        <button type="button" className="cx-filter" aria-pressed={!filter} onClick={() => zetFilter("")}>Alle experts</button>
+        {FILTERS.map((f) => <button key={f} type="button" className="cx-filter" aria-pressed={filter === f} onClick={() => zetFilter(filter === f ? "" : f)}><span translate="no">{f}</span></button>)}
+        {(q || filter) && !leeg && <p className="cx-aantal" aria-live="polite"><strong>{gevonden}</strong> <span>{gevonden === 1 ? "expert gevonden" : "experts gevonden"}</span></p>}
+      </div>
       <div className="cx-org">
         {top.length > 0 && <div className="cx-org-laag">
           <p className="cx-org-kop">Eindverantwoordelijk</p>

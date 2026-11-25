@@ -1,7 +1,5 @@
-import Verhaal from "./Verhaal";
 import ContactSlot from "./ContactSlot";
 import ConnectExperts from "./ConnectExperts";
-import { HomeConnectBand } from "./HomeHeader";
 import NulNaarBedrijf from "./NulNaarBedrijf";
 import MensEnAI from "./MensEnAI";
 import { Integraties } from "./TeamTrust";
@@ -280,27 +278,11 @@ export function ProjectPage() {
 }
 
 export function TeamPage() {
+  // 25 november 2026 (Marinus, bij een schermafdruk van "Vind je expert"): "bij Team gewoon vanaf hier beginnen". De paginakop,
+  // het verhaal en de Connect-band erboven zijn weg; de pagina opent met het expertblok en eindigt bij de contacttegels.
   return (
     <>
-      <PageHeading
-        label="Het team"
-        title={
-          <>
-            Human Connection.
-            <br />
-            <span translate="no">Powered by AI Technology.</span>
-          </>
-        }
-        text="SocialNow begon in november 2021. Sindsdien groeiden we uit tot een team van specialisten in creatie, marketing, data en techniek. Samen bouwen we één OS dat je bedrijf ontzorgt, en het persoonlijke contact blijft."
-      />
-      {/* 22 oktober 2026 (Marinus): redesign van team en mijn story. Eerst mijn story met de film en de samenwerking met
-          Indexworld en Uncanny, daarna het team. De losse oprichtersblok viel weg: dat verhaal staat nu in de story. */}
-      {/* 12 november 2026 (Marinus): "die connect sectie die eerst op de homepage stond maar wel met founder erboven en met get
-          in contact eronder met de tiles zoals op de homepage". Dus: founder (Verhaal), Connect, en dan de contacttegels. */}
-      <Verhaal />
-      <div className="sn-team-connect-band"><HomeConnectBand /></div>
-      <ConnectExperts />
-      {/* 12 november 2026 (Marinus): "Hier mag team stoppen alles eronder is dubbel op." De pagina eindigt bij de contacttegels. */}
+      <ConnectExperts paginaKop />
       <div className="h-wrap sn-team-contact"><ContactSlot toonTeamlink={false} /></div>
     </>
   );
