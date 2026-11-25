@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, CalendarDays, Play } from "lucide-react";
+import { ArrowUpRight, Play } from "lucide-react";
 import { boekingsPlannerUrl } from "./PlanCall";
 import { CRAFTURE, DIRECT, VIA_CRAFTURE, merk } from "./ExplainerPlayer";
 import "./header-algemeen.css";
@@ -44,9 +44,13 @@ const FILM_POSTER = "/video/explainer/socialnow-explainer-5x4-thumb.jpg";
 // (HomeEnthousiast.tsx) de enige h1 "Een betrouwbare partner voor groei en cybersecurity." houdt.
 // Ook gebruikt in de homepage-hero (HomeEnthousiast.tsx), onder de knoppen.
 export function PartnerLogos() {
-  return <ul className="sn-alg-keur" aria-label="Partners en specialiteiten">
-    {KEURMERKEN.map(k => <li key={k.naam}><img src={k.src} alt={k.naam} title={k.naam} /></li>)}
-  </ul>;
+  // 25 november 2026 (Marinus): "Kan dit een slider zijn?" De logo's lopen als band; drie gelijke sets, de band schuift één set op.
+  return <div className="sn-alg-keur" role="region" aria-label="Partners en specialiteiten">
+    <ul className="sn-alg-keur-baan">
+      {[0, 1, 2].flatMap(set => KEURMERKEN.map(k => <li key={`${set}-${k.naam}`} aria-hidden={set > 0 || undefined}>
+        <img src={k.src} alt={set > 0 ? "" : k.naam} title={k.naam} /></li>))}
+    </ul>
+  </div>;
 }
 
 // 12 november 2026 (Marinus): "Begin altijd met deze foto": de wissel start met het team bij het Atomium.
@@ -92,7 +96,14 @@ export function AtomiumFoto() {
   };
 
   const knop = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (gestart) return;          // tweede klik: gewoon naar de afsprakenplanner
+    if (gestart) {                // tweede klik: naar het contactblok op deze pagina, anders gewoon naar de afsprakenplanner
+      const doel = document.getElementById("contact");
+      if (!doel) return;
+      e.preventDefault();
+      doel.scrollIntoView({ behavior: "smooth", block: "center" });
+      doel.focus({ preventScroll: true });
+      return;
+    }
     e.preventDefault();
     zetGestart(true);
     wissel();
@@ -118,10 +129,15 @@ export function AtomiumFoto() {
       <video ref={film} className="sn-alg-film" src={FILM} poster={FILM_POSTER} playsInline preload="metadata" aria-label="Explainer: dit is SocialNow" aria-hidden={!filmAan}
         onClick={wissel} onPlay={() => zetSpeelt(true)} onPause={() => zetSpeelt(false)} onEnded={klaar} />
     </figure>
+    {/* 25 november 2026, avond (Marinus): de pil zoals Website-actie, maar wit. Hover vult wit; na de klik trekt het wit terug en
+        veegt groen van rechts naar links erover, en Speel video af wordt Neem contact op. */}
     <a className="sn-alg-filmknop" href={boekingsPlannerUrl} onClick={knop} data-stand={gestart ? "call" : "video"}
-      aria-label={gestart ? "Plan een call" : "Bekijk de video"}>
-      <span className="lb lb-video" aria-hidden="true"><Play size={17} />Bekijk de video</span>
-      <span className="lb lb-call" aria-hidden="true"><CalendarDays size={18} />Plan een call<ArrowUpRight size={18} className="pijl" /></span>
+      aria-label={gestart ? "Neem contact op" : "Speel video af"}>
+      <span className="tekst" aria-hidden="true">
+        <span className="lb lb-video">Speel video af</span>
+        <span className="lb lb-call">Neem contact op</span>
+      </span>
+      <span className="rond" aria-hidden="true"><Play size={16} className="ic ic-video" /><ArrowUpRight size={18} className="ic ic-call" /></span>
     </a>
     </div>
   );
