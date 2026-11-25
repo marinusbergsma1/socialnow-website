@@ -28,8 +28,11 @@ const STAPPEN = ["Website en branding", "Systemen en operations", "Marketing en 
 // Later die dag: "de video van de Odoo Experience laten zien". De aftermovie is staand (720 x 1280).
 // 25 november 2026 (Marinus): "Kan je voor nu vooral even deze op de homepage zetten waar nu de Odoo video staat?" Dus hier nu de
 // lange explainer (06-SocialNow-lang, 2:18, 07_MARKETING/EXPLAINER-VIDEO-MARINUS-20261124), liggend 16:9.
-const FILM = "/video/explainer/socialnow-explainer.mp4";
-const FILM_POSTER = "/video/explainer/socialnow-explainer.jpg";
+// 25 november 2026, avond (Marinus): "Zet deze maar alvast live op socialnow.nl als versie. Ipv die er nu live staat." Dus nu de lange
+// explainer in 5:4 met hem in beeld, tegels en OS-schermen (19-SocialNow-OS-Connect-lang-5x4-eigen-beeld-animatie-v1, 2:25, bron
+// 04_OS-VIDEO/video-project/92-os-connect-lang-beeld-animatie). Het kader is daarom 5:4 (is-vijfvier), zodat er niets wegvalt.
+const FILM = "/video/explainer/socialnow-explainer-5x4.mp4";
+const FILM_POSTER = "/video/explainer/socialnow-explainer-5x4.jpg";
 
 // 4 november 2026 (Marinus): "die technische data en huidige landingspagina mag naar producten gaan dan is dit meer enthousiasmering
 // en rest inhoudelijk en technisch." Deze header opent sindsdien /producten; label en kop zijn daar eigen, zodat de homepage
@@ -83,7 +86,7 @@ export function AtomiumFoto() {
   };
 
   return (
-    <figure className="sn-alg-foto is-vierkant" id="explainer" data-draait={draait && !filmAan} data-film={filmAan}>
+    <figure className="sn-alg-foto is-vijfvier" id="explainer" data-draait={draait && !filmAan} data-film={filmAan}>
       {BEURSFOTOS.map(({ bestand, alt }, index) => {
         const basis = `/images/verhaal/${bestand}`;
         return <div key={bestand} className={bestand === "beurs-marinus" ? "sn-alg-dia is-gesprek" : "sn-alg-dia"} data-actief={foto === index && !filmAan} aria-hidden={foto !== index || filmAan}>
