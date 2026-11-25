@@ -118,3 +118,10 @@ html:root .sn-site>.h-header{padding-top:16px;padding-bottom:16px}
 :root .sn-site>.h-header .h-desktop-nav{gap:28px}
 :root .sn-site>.h-header .h-desktop-nav a,:root .sn-site>.h-header .h-desktop-nav .h-producten-knop{font-size:13px!important;letter-spacing:.04em!important;text-transform:none;font-weight:400!important;color:#b9c8c0}
 :root .sn-site>.h-header .h-desktop-nav a:hover,:root .sn-site>.h-header .h-desktop-nav a.active,:root .sn-site>.h-header .h-desktop-nav .h-producten-knop:hover,:root .sn-site>.h-header .h-desktop-nav .h-producten-knop.active{color:#fff}
+
+/* 25 november 2026 (Marinus): "Diensten mag dus wel als mooie hover en duidelijk de verschillende onderdelen" en "eventueel een uitleg
+   dat alles maatwerk is". Onderaan het Diensten-menu een regel over maatwerk met een link naar /contact. */
+:root .sn-site .h-uitklap-diensten .h-producten-menu{width:360px}
+:root .sn-site .h-producten-menu .h-diensten-maatwerk{display:flex;flex-direction:column;gap:8px;margin:4px 6px 4px;padding:14px 8px 6px;border-top:1px solid #ffffff1a;font-family:"TT Norms",Arial,sans-serif;font-size:13px;line-height:1.45;letter-spacing:0;text-transform:none;color:#9aa6a0}
+:root .sn-site .h-desktop-nav .h-producten-menu .h-diensten-maatwerk a{display:inline-flex;width:max-content;padding:0;border-radius:0;background:none;font-family:ui-monospace,Menlo,monospace;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#25d366}
+:root .sn-site .h-desktop-nav .h-producten-menu .h-diensten-maatwerk a:hover{background:none;color:#fff}

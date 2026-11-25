@@ -24,6 +24,7 @@ import SamenEnVeilig from "./SamenEnVeilig";
 import FreeWebsite from "./FreeWebsite";
 import CustomerReviews from "./CustomerReviews";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
+import FeaturedWork from "./FeaturedWork";
 import HomeEnthousiast, { WebsiteCTA } from "./HomeEnthousiast";
 import ExpertsGeloof from "./ExpertsGeloof";
 import { Bento, Tegel } from "./Bento";
@@ -75,6 +76,8 @@ export function Home() {
     <FreeWebsite />
     <CustomerReviews />
     <ImageSliders kort />
+    {/* 25 november 2026 (Marinus): "Verder boven video en motion nog deze 2 tiles met bekijk onze projecten oid. Client Cases." */}
+    <FeaturedWork kop={false} alleen={["universal-sony-banners", "az-alkmaar-socials"]} eind={{ tekst: "Meer werk en resultaten van onze klanten.", knop: "Bekijk onze Client Cases" }} />
     <VideoSlider kort />
     <WebsiteCTA tweede />
   </div>;

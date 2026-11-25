@@ -28,8 +28,9 @@ export default function BrandFooter() {
         <div className="h-footer-links">
           <div>
             <p className="h-eyebrow">Expertise</p>
+            {/* 25 november 2026: alles is maatwerk, dus de diensten in de footer openen /contact met dat onderwerp. */}
             {DIENSTEN.map((service) => (
-              <Link key={service.soort} to={service.naar}>
+              <Link key={service.soort} to={service.contact}>
                 {service.titel}
               </Link>
             ))}

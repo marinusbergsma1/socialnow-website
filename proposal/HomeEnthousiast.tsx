@@ -47,9 +47,12 @@ export default function HomeEnthousiast() {
     <section className="sn-alg sn-blij" aria-labelledby="sn-blij-kop">
       <div className="sn-alg-wrap">
         <div className="sn-alg-tekst">
-          <p className="sn-alg-label"><i />Management · Operations · Odoo</p>
-          <h1 id="sn-blij-kop">Een betrouwbare partner voor groei en cybersecurity<span className="sn-alg-punt">.</span></h1>
-          <p className="sn-alg-uitleg"><strong>Wij helpen je met management, operations en Odoo.</strong> Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
+          {/* 25 november 2026 (Marinus), bij "Management · Operations · Odoo": "Die mag misschien ook weg of beter aansluiten." De zin onder
+              de kop noemt management en operations al, dus het label zegt nu hoe: end-to-end, met experts en AI. */}
+          <p className="sn-alg-label"><i />End-to-end · Experts en AI</p>
+          {/* 25 november 2026 (Marinus), bij "Een betrouwbare partner voor groei en cybersecurity.": "Doe maar een betrouwbare groeipartner." */}
+          <h1 id="sn-blij-kop">Een betrouwbare groeipartner<span className="sn-alg-punt">.</span></h1>
+          <p className="sn-alg-uitleg"><strong>Wij helpen je met management en operations.</strong> Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
           <div className="sn-alg-acties">
             {/* 4 november 2026 (avond, Marinus): "2e knop hier graag blauw maken ook en eerste knop mag zijn website actie". */}
             <Link className="sn-pill" to="/gratis-website"><span>Website-actie</span><ArrowUpRight size={17} aria-hidden="true" /></Link>

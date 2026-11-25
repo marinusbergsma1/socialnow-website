@@ -1,27 +1,29 @@
-/* 14 oktober 2026: goedgekeurde pillknop, groene fill, pijl rechtsboven, geen glow. */
+/* 14 oktober 2026: goedgekeurde pillknop, groene fill, pijl rechtsboven, geen glow.
+   25 november 2026 (Marinus): "Deze knoppen zijn iets te groot en lomp. Kunnen ze overal iets kleiner gemaakt worden?" Dus
+   54 naar 46 px hoog, kleinere letters en minder letterafstand, en de tekst blijft zo veel mogelijk op één regel. */
 html:root .sn-site .sn-pill {
   --sn-pill-green: #25d366;
-  --sn-pill-height: 54px;
+  --sn-pill-height: 46px;
   position: relative;
   isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 12px;
   min-height: var(--sn-pill-height);
   height: auto;
   max-width: 100%;
-  padding: 5px 5px 5px 24px;
+  padding: 4px 4px 4px 20px;
   border: 2px solid var(--sn-pill-green) !important;
   border-radius: 999px !important;
   background: #101113 !important;
   background-image: none !important;
   color: #fff !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 12px !important;
-  line-height: 1.35;
+  font-size: 11px !important;
+  line-height: 1.3;
   font-weight: 800 !important;
-  letter-spacing: .13em !important;
+  letter-spacing: .1em !important;
   text-transform: uppercase !important;
   text-decoration: none;
   text-shadow: none !important;
@@ -60,9 +62,9 @@ html:root .sn-site .sn-pill :is(.h-button-icon, .h-dock-arrow),
 html:root .sn-site .sn-pill > svg:last-child {
   display: grid !important;
   place-items: center;
-  width: calc(var(--sn-pill-height) - 14px) !important;
-  height: calc(var(--sn-pill-height) - 14px) !important;
-  min-width: calc(var(--sn-pill-height) - 14px);
+  width: calc(var(--sn-pill-height) - 12px) !important;
+  height: calc(var(--sn-pill-height) - 12px) !important;
+  min-width: calc(var(--sn-pill-height) - 12px);
   flex-shrink: 0;
   border: 0 !important;
   border-radius: 50%;
@@ -75,8 +77,8 @@ html:root .sn-site .sn-pill > svg:last-child {
   opacity: 1 !important;
   transition: background-color .3s ease, color .3s ease;
 }
-html:root .sn-site .sn-pill > svg:last-child { padding: 11px; }
-html:root .sn-site .sn-pill :is(.h-button-icon, .h-dock-arrow) svg { width: 18px; height: 18px; color: inherit !important; }
+html:root .sn-site .sn-pill > svg:last-child { padding: 9px; }
+html:root .sn-site .sn-pill :is(.h-button-icon, .h-dock-arrow) svg { width: 16px; height: 16px; color: inherit !important; }
 html:root .sn-site .sn-pill:is(:hover, :focus-visible) :is(.h-button-icon, .h-dock-arrow),
 html:root .sn-site .sn-pill:is(:hover, :focus-visible) > svg:last-child { background: #fff !important; color: var(--sn-pill-green) !important; }
 html:root .sn-site .sn-explainer-cover:is(:hover, :focus-visible) > .sn-pill .h-button-icon { background: #fff !important; color: var(--sn-pill-green) !important; }
@@ -106,13 +108,13 @@ html:root .sn-site .h-os-dock .h-dock-arrow svg { width: 22px; height: 22px; }
 html:root .sn-site .sn-pill.h-header-claim { --sn-pill-height: 46px; padding-left: 16px; gap: 10px; font-size: 10px !important; }
 html:root .sn-site .sn-pill.h-header-claim > svg:last-child { padding: 8px; }
 html:root .sn-site .sn-pill.h-header-claim > span { font: inherit; letter-spacing: inherit; flex-shrink: 0; }
-html:root .sn-site .sn-pill.sn-home-cta { --sn-pill-height: 60px; }
-html:root .sn-site .sn-pill.sn-home-cta > svg:last-child { padding: 13px; }
-html:root .sn-site .sn-pill.h-sprekers-knop { --sn-pill-height: 58px; }
+html:root .sn-site .sn-pill.sn-home-cta { --sn-pill-height: 52px; }
+html:root .sn-site .sn-pill.sn-home-cta > svg:last-child { padding: 11px; }
+html:root .sn-site .sn-pill.h-sprekers-knop { --sn-pill-height: 50px; }
 html:root .sn-site .sn-pill.h-dock-demo { margin: 12px; width: calc(100% - 24px); }
 @media(max-width: 600px) {
-  html:root .sn-site .sn-pill { --sn-pill-height: 50px; gap: 10px; padding-left: 18px; font-size: 11px !important; letter-spacing: .1em !important; }
-  html:root .sn-site .sn-pill > svg:last-child { padding: 9px; }
+  html:root .sn-site .sn-pill { --sn-pill-height: 44px; gap: 10px; padding-left: 16px; font-size: 10.5px !important; letter-spacing: .08em !important; }
+  html:root .sn-site .sn-pill > svg:last-child { padding: 8px; }
   html:root .sn-site .h-os-dock .sn-pill.h-dock-login { --sn-pill-height: 60px; font-size: 13px !important; padding-left: 18px; }
   html:root .sn-site .sn-pill.h-header-claim { padding-left: 12px; gap: 8px; font-size: 9px !important; letter-spacing: .05em !important; }
 }

@@ -17,7 +17,8 @@ import { Home, ProductenPagina } from "./pages";
 import { OnderDeVouw, later } from "./later";
 const BlogPage = later(() => import("./paginas").then((m) => m.BlogPage));
 const BlogPostPage = later(() => import("./paginas").then((m) => m.BlogPostPage));
-const ContactPage = later(() => import("./paginas").then((m) => m.ContactPage));
+// 25 november 2026: /contact is de nieuwe pagina met maatwerk, onderwerpkeuze en het team (ContactNieuw.tsx).
+const ContactPage = later(() => import("./ContactNieuw").then((m) => m.default));
 const NotFound = later(() => import("./paginas").then((m) => m.NotFound));
 const OsPage = later(() => import("./paginas").then((m) => m.OsPage));
 const ProjectPage = later(() => import("./paginas").then((m) => m.ProjectPage));
@@ -264,7 +265,7 @@ function ProposalShell() {
             <React.Fragment key={path}>
               <p className="h-mobile-groep">{title}</p>
               <div className="h-mobile-kaarten">
-                {DIENSTEN.map((d) => <Link key={d.soort} className="h-mobile-product" to={d.naar} onClick={() => setMenuOpen(false)}>
+                {DIENSTEN.map((d) => <Link key={d.soort} className="h-mobile-product" to={d.contact} onClick={() => setMenuOpen(false)}>
                   <b>{d.titel}</b><span>{d.regel}</span><ArrowUpRight size={17} aria-hidden="true" />
                 </Link>)}
               </div>

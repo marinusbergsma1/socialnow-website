@@ -13,14 +13,15 @@ const lees = (f) => (fs.existsSync(f) ? fs.readFileSync(f, "utf8") : "");
 const kop = lees("proposal/HeaderAlgemeen.tsx");
 const header = kop.slice(kop.indexOf("export default function HeaderAlgemeen"));
 const STAPPEN = ["Website en branding", "Systemen en operations", "Marketing en sales", "Finance"];
-eis(kop.includes("/images/verhaal/team-atomium.webp") && header.includes("<AtomiumFoto"), "header: het team bij het Atomium is het hoofdbeeld");
+// 25 november 2026 (Marinus): "Doe maar even alleen de video ipv die slideshow." Het hoofdbeeld is sindsdien de explainer.
+eis(kop.includes("/video/explainer/socialnow-explainer.mp4") && header.includes("<AtomiumFoto"), "header: de explainer is het hoofdbeeld");
 const stappen = kop.match(/const STAPPEN = \[([^\]]*)\]/);
 eis(!!stappen && JSON.stringify(stappen[1].split(",").map((s) => s.trim().replace(/"/g, ""))) === JSON.stringify(STAPPEN) && header.includes("STAPPEN.map"), `header: vier stappen ${STAPPEN.join(", ")}`);
 eis(!header.includes("odoo-experience-stand") && !header.includes("PARTNERS"), "header: geen standfoto en geen partnerkaart meer");
 eis(kop.includes("Bekijk de video") && kop.includes("trusted by"), "header: Bekijk de video en de Trusted by-balk blijven");
 // "Ik wil dat het écht duidelijk is gelijk BAM Ze kunnen mij helpen met management en operations en Odoo." en "Haal anders
 // Indexworld en Uncanny maar weg en zet alleen de logo's van samenwerking eronder."
-eis(header.includes("Wij helpen je met management, operations en Odoo.") && header.indexOf("management, operations en Odoo") < header.indexOf("STAPPEN.map"), "header: meteen onder de titel dat we helpen met management, operations en Odoo");
+eis(header.includes("Wij helpen je met management en operations.") && header.indexOf("management en operations") < header.indexOf("STAPPEN.map"), "header: meteen onder de titel dat we helpen met management en operations");
 eis(["Odoo Silver Partner", "Shopify Partners", "Salesforce-partner", "Adobe-partner"].every((n) => kop.includes(`naam: "${n}"`)) && kop.includes("KEURMERKEN.map") && header.includes("<PartnerLogos") && header.indexOf("<PartnerLogos") < header.indexOf("STAPPEN.map"), "header: logo's van Odoo Silver, Shopify, Salesforce en Adobe onder de titel");
 eis(!/(indexworld|uncanny)[^"]*\.(png|svg|webp)/i.test(kop), "Indexworld en Uncanny staan niet meer in de header of het Odoo-blok");
 
@@ -57,7 +58,7 @@ const stip = lees("proposal/stippen.css");
 eis(/\.sn-team-product \{ background: transparent !important; \}/.test(stip) && /\.cx-connect \{[^}]*radial-gradient/.test(stip), "stippen: Connect-band doorzichtig, teamblok wit met stippen");
 // Contact: "Doe maar gewoon de contactile van mij met info@socialnow.nl met 06 nummer dan Steef met Finance@socialnow.nl, Michelle
 // mag Partners@socialnow.nl zijn en Ben Odoo@socialnow.nl. Zonder gesprek inplannen, ze kunnen wel gewoon een mail sturen of bellen."
-eis([["Marinus Bergsma", "info@socialnow.nl"], ["Steef Komen", "finance@socialnow.nl"], ["Michelle Yang", "partners@socialnow.nl"], ["Ben Sterckx", "odoo@socialnow.nl"]].every(([n, m]) => slot.includes(`naam: "${n}", mail: "${m}"`)) && slot.includes('tel: "+31637404577"') && slot.includes("href={`tel:${c.tel}`}"), "contacttegels: juiste adressen, 06-nummer van Marinus, bellen en mailen");
+eis([["Marinus Bergsma", "info@socialnow.nl"], ["Steef Komen", "finance@socialnow.nl"], ["Michelle Yang", "partners@socialnow.nl"], ["Ben Sterckx", "ben@socialnow.nl"]].every(([n, m]) => slot.includes(`naam: "${n}", mail: "${m}"`)) && slot.includes('tel: "+31637404577"') && slot.includes("href={`tel:${c.tel}`}"), "contacttegels: juiste adressen, 06-nummer van Marinus, bellen en mailen");
 eis(kop.includes('href="#contact"') && !kop.includes("openPlanCall") && slot.includes('id="contact"') && !fs.existsSync("proposal/GesprekPaneel.tsx"), "header: Neem contact op springt naar de tegels, geen gesprek inplannen");
 // "Maak dit zakelijker" (contacttegels) en "Lijn dit in het midden uit" (hoofdmenu).
 const ccss = lees("proposal/contact-slot.css");
@@ -113,7 +114,7 @@ eis(/\.gw2\{[^}]*background:#fff/.test(gwcss) && gw.includes("STIJLEN.map") && g
 // "Zet verder de Odoo video achter de header video en zorg dat die ook automatisch daar afspeelt met geluid na 3 seconden."
 const film = lees("proposal/OdooFilm.tsx");
 // Daarna (avond): "Doe toch maar gewoon die foto met zoom zoals die was en video alleen als je op afspelen klikt". OdooFilm.tsx blijft bestaan.
-eis(blij.includes("<AtomiumFoto />") && !blij.includes("<OdooFilm") && kop.includes("export function AtomiumFoto") && /sn-alg-knop-video[^>]*onClick=\{open\}/.test(kop) && /preload="none"/.test(kop.slice(kop.indexOf("export function AtomiumFoto"))), "homepage: de Atomium-foto met zoom, de aftermovie alleen na klikken op Bekijk de video");
+eis(blij.includes("<AtomiumFoto />") && !blij.includes("<OdooFilm") && kop.includes("export function AtomiumFoto") && /sn-alg-knop-video[^>]*onClick=\{wissel\}/.test(kop) && /preload="metadata"/.test(kop.slice(kop.indexOf("export function AtomiumFoto"))), "homepage: de explainer met startbeeld, speelt pas na klikken op Bekijk de video");
 // Website-actie: "een hele cleane onboarding [...] met nog een zwarte banner met de video van mij en in 1 header net als de main".
 eis(/<section className="sn-alg gw2-kop"/.test(gw) && gw.includes('to="/blog/waarom-een-ai-website-veiliger-is"') && gw.indexOf("gw2-kop") < gw.indexOf('id="onboarding"') && (gw.match(/<h1 /g) || []).length === 1 && !gw.includes("ConnectExperts"), "website-actie: zwarte header (sinds 5 nov met de blogtegel in plaats van de video), direct daaronder de witte onboarding");
 // "die website-onboarding waarbij ze nog de persoon kunnen aanvinken via wie ze daar zijn gekomen + Als CTA ook in de homepage".
@@ -140,7 +141,7 @@ eis(cx.indexOf('className="cx-org"') > 0 && !cx.includes("cx-voorbeelden") && !c
 const acties = header.slice(header.indexOf('className="sn-alg-acties"'), header.indexOf("</div>", header.indexOf('className="sn-alg-acties"')));
 eis((acties.match(/className="sn-pill"/g) || []).length === 2 && !acties.includes("sn-alg-knop"), "headerknoppen hebben dezelfde stijl als Inloggen gratis OS (sn-pill)");
 
-const nieuw = [...STAPPEN, "Een betrouwbare partner voor groei en cybersecurity", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management, operations en Odoo.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Neem contact op", "Waar wil je beginnen?", "Alles over onze producten en techniek", "Website-actie", "Welke stijl spreekt je aan?", "Wat moet je website vooral doen?", "Meer aanvragen", "Geluid aan", "Begin met vraag 1", "Een goede website is ook een veilige website.", "Via wie ben je bij ons gekomen?", "Nieuwe website, gratis", "Vraag je gratis website aan"];
+const nieuw = [...STAPPEN, "Een betrouwbare groeipartner", "Start met een gratis websitedemo", "Ons team bij het Atomium in Brussel", "Wij helpen je met management en operations.", "Salesforce-partner", "Partners en specialiteiten", "Branding en campagnes.", "Video en motion.", "Neem contact met ons op.", "VASTIQ · Van één grachtenpand naar heel Amsterdam", "Hajenius · Het pand aan het Rokin", "Neem contact op", "Waar wil je beginnen?", "Alles over onze producten en techniek", "Website-actie", "Welke stijl spreekt je aan?", "Wat moet je website vooral doen?", "Meer aanvragen", "Geluid aan", "Begin met vraag 1", "Een goede website is ook een veilige website.", "Via wie ben je bij ons gekomen?", "Nieuwe website, gratis", "Vraag je gratis website aan"];
 for (const l of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {
   const w = JSON.parse(lees(`proposal/i18n/${l}.json`) || "{}");
   const mist = nieuw.filter((k) => !w[k] || /[–—]/.test(w[k]));

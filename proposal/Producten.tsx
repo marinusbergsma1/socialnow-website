@@ -10,9 +10,14 @@ import "./hoofdmenu.css";
 // 4 november 2026 (Marinus): "verder wil ik producten diensten en website actie". Het menu is Producten, Diensten en Website-actie;
 // Resultaten en Team staan in de footer (Ons werk, Ons team).
 // 12 november 2026 (Marinus): "Hier wil ik graag nog even team". Team staat in het menu na Website-actie.
+// 25 november 2026 (Marinus): "liever gewoon even alleen client cases en contact en website actie zien. Diensten mag dus wel als
+// mooie hover en duidelijk de verschillende onderdelen maar zowel in de footer als header kom je bij contact". Het menu is nu
+// Client Cases, Diensten (uitklapmenu), Website-actie, Team en Contact. Het team staat ook groot op /contact.
+// Later die dag (Marinus, bij het menu): "Ik mis hier team." Team staat weer tussen Website-actie en Contact.
 export const NAV_LINKS: Array<[string, string]> = [
   ["/diensten", "Diensten"],
   ["/team", "Team"],
+  ["/contact", "Contact"],
 ];
 // href in plaats van to: Connect is een eigen pagina buiten de app.
 export const PRODUCTEN = [
@@ -21,11 +26,13 @@ export const PRODUCTEN = [
 ] as const;
 
 // Eén bron voor het Diensten-menu, de footer en de inhoudsopgave op /diensten.
+// `naar` is het anker op /diensten (inhoudsopgave daar); menu en footer gebruiken sinds 25 november 2026 `contact`: alles is
+// maatwerk, dus elke dienst opent /contact met dat onderwerp al gekozen (ContactNieuw.tsx).
 export const DIENSTEN = [
-  { naar: "/diensten#groei", titel: "Groei", regel: "Persoonlijk advies en marketing die leads oplevert.", soort: "groei" },
-  { naar: "/diensten#cybersecurity", titel: "Cybersecurity", regel: "Vind kwetsbaarheden en pak de belangrijkste aan.", soort: "cybersecurity" },
-  { naar: "/diensten#websites", titel: "Websites", regel: "Een website die past bij je merk en aanvragen oplevert.", soort: "websites" },
-  { naar: "/diensten#management-operations", titel: "Management & Operations", regel: "Meer grip op je processen, systemen en cijfers.", soort: "management-operations" },
+  { naar: "/diensten#management-operations", contact: "/contact?onderwerp=management-operations", titel: "Management & Operations", regel: "Meer grip op je processen, systemen en cijfers.", soort: "management-operations" },
+  { naar: "/diensten#groei", contact: "/contact?onderwerp=groei", titel: "Groei", regel: "Persoonlijk advies en marketing die leads oplevert.", soort: "groei" },
+  { naar: "/diensten#websites", contact: "/contact?onderwerp=websites", titel: "Websites", regel: "Een website die past bij je merk en aanvragen oplevert.", soort: "websites" },
+  { naar: "/diensten#cybersecurity", contact: "/contact?onderwerp=cybersecurity", titel: "Cybersecurity", regel: "Vind kwetsbaarheden en pak de belangrijkste aan.", soort: "cybersecurity" },
 ] as const;
 
 export function Kleurwoord({ tekst }: { tekst: string }) {
@@ -77,9 +84,12 @@ export function ProductenMenu() {
 export function DienstenMenu() {
   const actief = Boolean(useMatch("/diensten/*"));
   return <Uitklapmenu naam="diensten" label="Diensten" actief={actief}>
-    {(sluit) => DIENSTEN.map((d) => <Link key={d.soort} to={d.naar} onClick={sluit}>
-      <b>{d.titel}</b><span>{d.regel}</span><ArrowUpRight size={16} aria-hidden="true" />
-    </Link>)}
+    {(sluit) => <>
+      {DIENSTEN.map((d) => <Link key={d.soort} to={d.contact} onClick={sluit}>
+        <b>{d.titel}</b><span>{d.regel}</span><ArrowUpRight size={16} aria-hidden="true" />
+      </Link>)}
+      <p className="h-diensten-maatwerk"><span>Alles is maatwerk. Je krijgt vooraf een voorstel met een vaste prijs.</span><Link to="/contact" onClick={sluit}>Neem contact op</Link></p>
+    </>}
   </Uitklapmenu>;
 }
 
