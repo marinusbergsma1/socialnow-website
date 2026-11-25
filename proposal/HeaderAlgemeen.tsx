@@ -73,7 +73,9 @@ export const BEURSFOTOS = [
 // explainer (startbeeld met knop) in het kader; de fotowissel komt pas na afloop, en Bekijk de video start de film daarna opnieuw.
 // De naam AtomiumFoto blijft, omdat HomeEnthousiast.tsx hem zo importeert.
 // 25 november 2026 (Marinus): "Deze foto mag in die slider weg omdat ie daaronder al staat." De Atomium-foto staat lager (Stappenplan).
-const DIAS = BEURSFOTOS.filter((f) => f.bestand !== "team-atomium");
+// 25 november 2026, laat (Marinus), bij de fotowissel na de film: "Dit hoeft niet te veranderen zo." "Of doe maar naar deze
+// afbeelding" (het team bij het Atomium). Dus na de film één stilstaande foto, geen wissel en geen pauzeknop.
+const DIAS = BEURSFOTOS.filter((f) => f.bestand === "team-atomium");
 
 export function AtomiumFoto() {
   const film = useRef<HTMLVideoElement>(null);
@@ -85,7 +87,7 @@ export function AtomiumFoto() {
   const [vers, zetVers] = useState(false);   // net geklikt: hover vult pas weer na eerst weggaan
 
   useEffect(() => {
-    if (!draait || filmAan) return;
+    if (!draait || filmAan || DIAS.length < 2) return;
     const timer = window.setInterval(() => zetFoto(vorige => (vorige + 1) % DIAS.length), 3000);
     return () => window.clearInterval(timer);
   }, [draait, filmAan]);
@@ -124,11 +126,11 @@ export function AtomiumFoto() {
       })}
       {!filmAan && (
         <figcaption>
-          <span className="sn-alg-klein" lang="en" translate="no">Presenting at the Odoo Experience 2026</span>
-          <strong>In gesprek op de beurs<span className="sn-alg-punt">.</span></strong>
+          <span className="sn-alg-klein">Odoo Experience 2026 · Brussel</span>
+          <strong>Ons team<span className="sn-alg-punt">.</span></strong>
         </figcaption>
       )}
-      {!filmAan && <button type="button" className="sn-alg-knop-fotos" aria-label={draait ? "Pauzeer de fotowissel" : "Speel de fotowissel af"} onClick={() => zetDraait(vorige => !vorige)} />}
+      {!filmAan && DIAS.length > 1 && <button type="button" className="sn-alg-knop-fotos" aria-label={draait ? "Pauzeer de fotowissel" : "Speel de fotowissel af"} onClick={() => zetDraait(vorige => !vorige)} />}
       <video ref={film} className="sn-alg-film" src={FILM} poster={FILM_POSTER} playsInline preload="metadata" aria-label="Explainer: dit is SocialNow" aria-hidden={!filmAan}
         onClick={wissel} onPlay={() => zetSpeelt(true)} onPause={() => zetSpeelt(false)} onEnded={klaar} />
       {/* 25 november 2026 (Marinus): "Er mag wel een zwarte overlay over de foto heen nog." Alleen over het startbeeld, weg zodra de film loopt. */}
