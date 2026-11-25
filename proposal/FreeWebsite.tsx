@@ -68,7 +68,7 @@ export function WebsiteExamples({ stap = false }: { stap?: boolean }) {
     {/* 25 november 2026 (Marinus): "Kan deze tekst meer op basis van de stappen vanuit de video zelf?" Op de homepage is dit stap 01 van
         het stappenplan (Stappenplan.tsx); elders blijft de oude kop. */}
     {stap
-      ? <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Stap 01 · Website en branding</p><h3>We beginnen bij je website en je merk.</h3></div><p>Vertrouwen en herkenning zijn je sterkste kracht. Daarom maken we altijd eerst een gratis websitedemo, persoonlijk en zonder AI-slop.</p></div>
+      ? <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Stap 02 · Website en branding</p><h3>We beginnen bij je website en je merk.</h3></div><p>Vertrouwen en herkenning zijn je sterkste kracht. Daarom maken we altijd eerst een gratis websitedemo, persoonlijk en zonder AI-slop.</p></div>
       : <div className="sn-fw-showcase-head"><div><p className="sn-fw-label">Onze websites</p><h3>Altijd een gratis websitedemo.</h3></div><p>Persoonlijk gemaakt. Geen AI-slop.</p></div>}
     <div className="sn-web-deck" tabIndex={0} aria-label="Websitevoorbeelden. Gebruik de pijltjestoetsen om te bladeren."
       onKeyDown={event => { if (event.key === "ArrowRight" || event.key === "ArrowLeft") { event.preventDefault(); choose(index + (event.key === "ArrowRight" ? 1 : -1)); } }}

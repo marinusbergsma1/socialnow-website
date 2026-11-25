@@ -17,7 +17,7 @@ eis(fs.existsSync(THUMB) && fs.statSync(THUMB).size < 250_000, "startbeeld klein
 eis(/\.sn-alg-filmknop\{[^}]*border-radius:999px/.test(css) && /\.sn-alg-filmknop\{[^}]*text-transform:uppercase/.test(css), "knop is een pil zoals Website-actie, hoofdletters");
 eis(/\.sn-alg-filmknop\{[^}]*width:100%/.test(css) && /\.sn-alg-filmknop\{[^}]*border:2px solid #fff/.test(css), "witte variant, even breed als de video");
 eis(/\.sn-alg-filmknop:is\(:hover,:focus-visible\)::before\{[^}]*translateX\(0\)/.test(css) && /\.sn-alg-filmknop::before\{[^}]*background:#fff/.test(css), "bij hover vult hij met wit");
-eis(/\[data-stand="call"\]::after\{[^}]*translateX\(0\)/.test(css) && /\.sn-alg-filmknop::after\{[^}]*translateX\(101%\)/.test(css) && /\.sn-alg-filmknop::after\{[^}]*#25d366/.test(css), "na de klik veegt groen van rechts naar links over de knop");
+eis(/\[data-stand="call"\]::after\{[^}]*animation:sn-alg-veeg/.test(css) && /\.sn-alg-filmknop::after\{[^}]*translateX\(101%\)/.test(css) && /\.sn-alg-filmknop::after\{[^}]*#25d366/.test(css), "na de klik veegt groen van rechts naar links over de knop");
 eis(/\[data-stand="call"\]::before\{[^}]*translateX\(-101%\)/.test(css), "het wit trekt zich terug terwijl het groen komt");
 eis(/Speel video af/.test(tsx) && /Neem contact op/.test(tsx), "tekst Speel video af wordt Neem contact op");
 eis(/className="rond"/.test(tsx) && /\.sn-alg-filmknop \.rond\{[^}]*border-radius:50%/.test(css), "rond icoon rechts in de pil");
