@@ -66,7 +66,7 @@ html:root .sn-site .cx-wit .cx-keuze .h-button .h-button-icon { flex: none; marg
 .sn-site .cx-boven { display: grid; gap: 16px; max-width: 760px; }
 html:root .sn-site .cx-connect .cx-merk { margin: 0; font-size: 18px; font-weight: 900; color: #0b0f12; }
 .sn-site .cx-connect .cx-merk b { color: #00739e; }
-html:root .sn-site .cx-connect h2 { margin: 0; font-size: clamp(34px, 4.4vw, 60px) !important; line-height: 1.02; color: #0b0f12 !important; }
+html:root .sn-site .cx-connect :is(h1, h2)#team-titel, html:root .sn-site .cx-connect h2 { margin: 0; font-size: clamp(34px, 4.4vw, 60px) !important; line-height: 1.02; color: #0b0f12 !important; }
 html:root .sn-site .cx-connect .cx-zin { margin: 0; font-size: 18px; color: #3c4752; }
 html:root .sn-site .cx-connect .cx-zin strong { color: #0b0f12; }
 .sn-site .cx-zoek { display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 18px; border-radius: 999px; background: #fff; border: 2px solid #00a3e0; color: #55616c; }
@@ -238,3 +238,22 @@ html:root .sn-site .cx-connect .cx-tak-naam { margin: 0; font-size: 16px; font-w
 .sn-site .cx-org-vakken.is-een .cx-org-vak { gap: 12px; margin-bottom: 0; }
 .sn-site .cx-org-vakken.is-een .cx-org-vak ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 html:root .sn-site .cx-connect .cx-org-vakken.is-een .cx-org-vaknaam { font-size: 16px; }
+
+/* 25 november 2026 (Marinus): "verbeter Vind je Expert". Snelfilters per kernonderdeel, teller, punt in Connect-blauw,
+   en meer lucht bovenin als het blok de pagina /team opent. */
+html:root .sn-site .cx-connect .cx-punt { color: #00a3e0; }
+.sn-site .cx-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0 0; }
+html:root .sn-site .cx-connect .cx-filter { appearance: none; cursor: pointer; padding: 9px 16px; border: 1px solid #cfdbe3; border-radius: 999px; background: #fff;
+  font: inherit; font-size: 15px; font-weight: 600; line-height: 1.2; color: #0b0f12; transition: background-color .15s, border-color .15s, color .15s; }
+html:root .sn-site .cx-connect .cx-filter:hover { border-color: #00a3e0; }
+html:root .sn-site .cx-connect .cx-filter[aria-pressed="true"] { background: #00739e; border-color: #00739e; color: #fff; }
+html:root .sn-site .cx-connect .cx-filter:focus-visible { outline: 2px solid #00739e; outline-offset: 3px; }
+html:root .sn-site .cx-connect .cx-aantal { margin: 0 0 0 auto; font-size: 15px; color: #4f5b66; }
+html:root .sn-site .cx-connect .cx-aantal strong { color: #0b0f12; }
+.sn-site .sn-cx.is-pagina { padding-top: clamp(112px, 12vw, 168px); }
+@media (max-width: 760px) {
+  .sn-site .cx-filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -20px; padding-inline: 20px; }
+  .sn-site .cx-filters::-webkit-scrollbar { display: none; }
+  html:root .sn-site .cx-connect .cx-filter { flex: none; }
+  html:root .sn-site .cx-connect .cx-aantal { flex: none; margin-left: 4px; }
+}
