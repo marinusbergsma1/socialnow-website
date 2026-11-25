@@ -9,7 +9,7 @@ const lees = (p) => (fs.existsSync(p) ? fs.readFileSync(p, "utf8") : "");
 const tsx = lees("proposal/HeaderAlgemeen.tsx"), css = lees("proposal/header-algemeen.css");
 const FILM = "public/video/explainer/socialnow-explainer-5x4.mp4", POSTER = "public/video/explainer/socialnow-explainer-5x4.jpg";
 eis(/const FILM = "\/video\/explainer\/socialnow-explainer-5x4\.mp4"/.test(tsx), "homepage speelt de nieuwe 5:4-explainer af");
-eis(/const FILM_POSTER = "\/video\/explainer\/socialnow-explainer-5x4\.jpg"/.test(tsx), "startbeeld komt uit de nieuwe film");
+// Startbeeld: sinds 25 nov de foto van Marinus (zie proef-explainer-knop-wit.mjs), niet meer een frame uit de film.
 eis(fs.existsSync(FILM) && fs.statSync(FILM).size < 35_000_000, "filmbestand staat in public/ en is kleiner dan 35 MB");
 eis(fs.existsSync(POSTER) && fs.statSync(POSTER).size < 300_000, "startbeeld staat in public/ en is kleiner dan 300 KB");
 if (fs.existsSync(FILM)) {

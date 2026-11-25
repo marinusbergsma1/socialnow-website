@@ -81,7 +81,7 @@ export function Home() {
     <StappenOverzicht />
     <FreeWebsite stap />
     <CustomerReviews />
-    <StapKop nr="02" titel="Marketing en advertenties" kop="Content en advertenties die werken." tekst="We kijken naar je social media en advertenties, doen onderzoek en leveren doorlopend nieuwe creatives met onze designers, marketeers en developers. Wat rendeert, schalen we op, altijd met menselijke feedback." />
+    <StapKop nr="03" titel="Marketing en advertenties" kop="Content en advertenties die werken." tekst="We kijken naar je social media en advertenties, doen onderzoek en leveren doorlopend nieuwe creatives met onze designers, marketeers en developers. Wat rendeert, schalen we op, altijd met menselijke feedback." />
     <ImageSliders kort />
     {/* 25 november 2026 (Marinus): "Verder boven video en motion nog deze 2 tiles met bekijk onze projecten oid. Client Cases." */}
     <FeaturedWork kop={false} alleen={["universal-sony-banners", "az-alkmaar-socials"]} eind={{ tekst: "Meer werk en resultaten van onze klanten.", knop: "Bekijk onze Client Cases" }} />

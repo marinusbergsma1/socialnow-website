@@ -77,6 +77,7 @@ export function AtomiumFoto() {
   const [filmAan, zetFilmAan] = useState(true);
   const [speelt, zetSpeelt] = useState(false);
   const [gestart, zetGestart] = useState(false);
+  const [vers, zetVers] = useState(false);   // net geklikt: hover vult pas weer na eerst weggaan
 
   useEffect(() => {
     if (!draait || filmAan) return;
@@ -109,6 +110,7 @@ export function AtomiumFoto() {
     }
     e.preventDefault();
     zetGestart(true);
+    zetVers(true);
     wissel();
   };
 
@@ -131,10 +133,12 @@ export function AtomiumFoto() {
       {!filmAan && <button type="button" className="sn-alg-knop-fotos" aria-label={draait ? "Pauzeer de fotowissel" : "Speel de fotowissel af"} onClick={() => zetDraait(vorige => !vorige)} />}
       <video ref={film} className="sn-alg-film" src={FILM} poster={FILM_POSTER} playsInline preload="metadata" aria-label="Explainer: dit is SocialNow" aria-hidden={!filmAan}
         onClick={wissel} onPlay={() => zetSpeelt(true)} onPause={() => zetSpeelt(false)} onEnded={klaar} />
+      {/* 25 november 2026 (Marinus): "Er mag wel een zwarte overlay over de foto heen nog." Alleen over het startbeeld, weg zodra de film loopt. */}
+      {filmAan && <span className="sn-alg-filmwaas" data-weg={speelt || gestart || undefined} aria-hidden="true" />}
     </figure>
     {/* 25 november 2026, avond (Marinus): de pil zoals Website-actie, maar wit. Hover vult wit; na de klik trekt het wit terug en
         veegt groen van rechts naar links erover, en Speel video af wordt Neem contact op. */}
-    <a className="sn-alg-filmknop" href={boekingsPlannerUrl} onClick={knop} data-stand={gestart ? "call" : "video"}
+    <a className="sn-alg-filmknop" href={boekingsPlannerUrl} onClick={knop} onMouseLeave={() => zetVers(false)} data-stand={gestart ? "call" : "video"} data-vers={vers || undefined}
       aria-label={gestart ? "Neem contact op" : "Speel video af"}>
       <span className="tekst" aria-hidden="true">
         <span className="lb lb-video">Speel video af</span>

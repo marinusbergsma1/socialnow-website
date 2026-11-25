@@ -16,11 +16,12 @@ import "./stappenplan.css";
 // krijgen alleen een stapkop. Volgorde staat in Home() in pages.tsx.
 
 export const STAPPEN = [
-  { nr: "01", id: "stap-website", titel: "Website en branding", regel: "We beginnen bij je website en je merk. Altijd eerst een gratis websitedemo." },
-  { nr: "02", id: "stap-marketing", titel: "Marketing en advertenties", regel: "Content en advertenties die werken. Wat rendeert, schalen we op." },
-  { nr: "03", id: "stap-operations", titel: "Management en operations", regel: "CRM, processen en cijfers op een stevige basis." },
-  { nr: "04", id: "stap-os", titel: "Eén OS met Connect", regel: "Je hele bedrijf in één systeem, met de juiste experts erbij." },
-  { nr: "05", id: "stap-contact", titel: "Kennismaken", regel: "Een gesprek over jouw situatie. Alles is maatwerk." },
+  // 25 november 2026 (Marinus): "Kennismaken moet op 1." Eerst het gesprek, daarna de vier vakgebieden.
+  { nr: "01", id: "stap-contact", titel: "Kennismaken", regel: "Een gesprek over jouw situatie. Alles is maatwerk." },
+  { nr: "02", id: "stap-website", titel: "Website en branding", regel: "We beginnen bij je website en je merk. Altijd eerst een gratis websitedemo." },
+  { nr: "03", id: "stap-marketing", titel: "Marketing en advertenties", regel: "Content en advertenties die werken. Wat rendeert, schalen we op." },
+  { nr: "04", id: "stap-operations", titel: "Management en operations", regel: "CRM, processen en cijfers op een stevige basis." },
+  { nr: "05", id: "stap-os", titel: "Eén OS met Connect", regel: "Je hele bedrijf in één systeem, met de juiste experts erbij." },
 ] as const;
 
 const naar = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -60,9 +61,9 @@ export function TeamSlider() {
 // 25 november 2026 (Marinus, via een andere sessie): "Hier is teveel tekst op een klein stuk. Maak van die 5 punten mini animaties
 // zodat er minder tekst nodig is en elke stap duidelijk is." Elke kaart heeft nu een kleine, rustige loop in SVG (stippen, groen,
 // zwart) met alleen nummer en titel; de animatie toont de stap. Bij reduced motion staat het eindbeeld stil (zie stappenplan.css).
-function Mini({ nr }: { nr: string }) {
+function Mini({ id }: { id: string }) {
   const lijn = "#ffffff38", vlak = "#ffffff12", groen = "#25d366";
-  if (nr === "01") return <svg viewBox="0 0 160 100" className="st-mini st-mini-web" aria-hidden="true">
+  if (id === "stap-website") return <svg viewBox="0 0 160 100" className="st-mini st-mini-web" aria-hidden="true">
     <rect x="16" y="10" width="128" height="80" rx="8" fill="none" stroke={lijn} />
     <line x1="16" y1="24" x2="144" y2="24" stroke={lijn} />
     <circle cx="25" cy="17" r="2" fill={lijn} /><circle cx="32" cy="17" r="2" fill={lijn} /><circle cx="39" cy="17" r="2" fill={lijn} />
@@ -71,7 +72,7 @@ function Mini({ nr }: { nr: string }) {
     <rect className="st-a3" x="26" y="60" width="34" height="11" rx="5.5" fill={groen} />
     <rect className="st-a4" x="104" y="33" width="30" height="40" rx="5" fill={vlak} stroke={lijn} />
   </svg>;
-  if (nr === "02") return <svg viewBox="0 0 160 100" className="st-mini st-mini-ads" aria-hidden="true">
+  if (id === "stap-marketing") return <svg viewBox="0 0 160 100" className="st-mini st-mini-ads" aria-hidden="true">
     <rect x="16" y="12" width="56" height="76" rx="8" fill={vlak} stroke={lijn} />
     <rect x="24" y="20" width="40" height="34" rx="4" fill="#ffffff1f" />
     <rect x="24" y="60" width="30" height="5" rx="2.5" fill={lijn} /><rect x="24" y="70" width="22" height="5" rx="2.5" fill={lijn} />
@@ -79,7 +80,7 @@ function Mini({ nr }: { nr: string }) {
     <polyline className="st-a-lijn" points="88,76 102,68 114,72 126,50 140,30" fill="none" stroke={groen} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" pathLength={1} />
     <circle className="st-a-punt" cx="140" cy="30" r="4" fill={groen} />
   </svg>;
-  if (nr === "03") return <svg viewBox="0 0 160 100" className="st-mini st-mini-crm" aria-hidden="true">
+  if (id === "stap-operations") return <svg viewBox="0 0 160 100" className="st-mini st-mini-crm" aria-hidden="true">
     {[0, 1, 2, 3].map((i) => <g key={i} transform={`translate(0 ${16 + i * 19})`}>
       <circle cx="26" cy="6" r="5" fill={vlak} stroke={lijn} />
       <rect x="38" y="3" width="90" height="6" rx="3" fill={vlak} />
@@ -87,7 +88,7 @@ function Mini({ nr }: { nr: string }) {
       <circle className={`st-a-vink st-r${i}`} cx="140" cy="6" r="4" fill={groen} />
     </g>)}
   </svg>;
-  if (nr === "04") return <svg viewBox="0 0 160 100" className="st-mini st-mini-os" aria-hidden="true">
+  if (id === "stap-os") return <svg viewBox="0 0 160 100" className="st-mini st-mini-os" aria-hidden="true">
     <rect className="st-a-kader" x="50" y="18" width="60" height="64" rx="10" fill="none" stroke={groen} strokeOpacity=".6" />
     <rect className="st-a-blok st-b0" x="58" y="26" width="20" height="20" rx="4" fill="#fff" opacity=".85" />
     <rect className="st-a-blok st-b1" x="82" y="26" width="20" height="20" rx="4" fill={groen} />
@@ -111,7 +112,7 @@ export function StappenOverzicht() {
     <ol className="st-lijst">
       {STAPPEN.map((s) => <li key={s.id}>
         <a href={`#${s.id}`} onClick={naar(s.id)} title={s.regel}>
-          <Mini nr={s.nr} />
+          <Mini id={s.id} />
           <span className="st-nr">{s.nr}</span>
           <b>{s.titel}</b>
         </a>
@@ -167,11 +168,11 @@ export function StappenSlot() {
     if (v.paused) void v.play().catch(() => {});
     else v.pause();
   };
-  return <section className="st-wrap st-geheel" aria-label="Stap 03 tot en met 05">
+  return <section className="st-wrap st-geheel" aria-label="Management, het OS met Connect en kennismaken">
     <article className="st-kaart" id="stap-operations">
       <Fotowissel />
       <div className="st-kaart-tekst">
-        <p className="st-label"><i />Stap 03 · Management en operations</p>
+        <p className="st-label"><i />Stap 04 · Management en operations</p>
         <h3>Grip op je processen, systemen en cijfers.</h3>
         <p>Je CRM, sales en finance komen samen op een stevige basis, zoals Odoo, AFAS, Exact of HubSpot. Wij richten het in rond hoe jouw bedrijf werkt en blijven verantwoordelijk tot het loopt.</p>
         <Punten items={["Doorlichting van processen, rollen en knelpunten", "Werkafspraken en een overzicht van de cijfers", "Invoering en begeleiding van je team"]} />
@@ -186,7 +187,7 @@ export function StappenSlot() {
         {!speelt && <button type="button" className="sn-alg-knop-video st-film-knop" onClick={wissel}><Play size={15} aria-hidden="true" /><span>Bekijk de uitleg</span></button>}
       </figure>
       <div className="st-kaart-tekst">
-        <p className="st-label"><i />Stap 04 · Eén OS met Connect</p>
+        <p className="st-label"><i />Stap 05 · Eén OS met Connect</p>
         <h3>Je hele bedrijf in één systeem.</h3>
         <p>Website, marketing, CRM en finance komen samen in één eigen, lokaal AI-systeem op maat. Met SocialNow Connect schakel je daarin echte experts in, en jij bepaalt tot welke informatie zij toegang krijgen.</p>
         <Punten items={["Custom OS rond jouw bedrijf, veilig en in eigen beheer", "Je team en AI-agents werken op één plek", "Connect: experts uit ons netwerk, met toegang die jij kiest"]} />
@@ -199,7 +200,7 @@ export function StappenSlot() {
         <img src="/images/verhaal/team-atomium.webp" alt="Ons team bij het Atomium in Brussel" width="900" height="1200" loading="lazy" />
       </div>
       <div className="st-kaart-tekst">
-        <p className="st-label"><i />Stap 05 · Kennismaken</p>
+        <p className="st-label"><i />Stap 01 · Kennismaken</p>
         <h3>Benieuwd wat dit voor jou betekent?</h3>
         <p>Plan een gesprek en we bespreken samen alle details. Alles is maatwerk: je krijgt vooraf een voorstel met een vaste prijs.</p>
         <div className="st-knoppen">
