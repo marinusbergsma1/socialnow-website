@@ -3,7 +3,7 @@ html:root .sn-site :is(.st-team,.st-wrap){--st-groen:#25d366;--st-lijn:#ffffff1a
 html:root .sn-site .st-wrap{max-width:1320px;margin-left:auto;margin-right:auto;padding-left:clamp(16px,4vw,48px);padding-right:clamp(16px,4vw,48px)}
 html:root .sn-site .st-label{display:flex;align-items:center;gap:8px;margin:0;font-family:var(--st-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--st-grijs)}
 html:root .sn-site .st-label i{flex:0 0 6px;height:6px;border-radius:50%;background:var(--st-groen)}
-html:root .sn-site :is(.st-team,.st-wrap) h2{margin:14px 0 0;max-width:860px;font-family:"TT Norms",Arial,sans-serif;font-size:clamp(30px,3.6vw,48px);font-weight:700;line-height:1.08;letter-spacing:-.02em;text-transform:none;color:#fff}
+html:root .sn-site :is(.st-team,.st-wrap) h2{margin:14px 0 0;max-width:860px;font-family:"TT Norms",Arial,sans-serif;font-size:clamp(30px,3.6vw,48px);font-weight:700;line-height:1.08;letter-spacing:0;text-transform:none;color:#fff}
 html:root .sn-site .st-intro{max-width:720px;margin:16px 0 0;font-size:clamp(16px,1.4vw,19px);line-height:1.55;color:var(--st-grijs)}
 html:root .sn-site .st-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--st-mono);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--st-groen);text-decoration:none;white-space:nowrap}
 html:root .sn-site .st-link:hover{color:#fff}
@@ -57,7 +57,10 @@ html:root .sn-site .st-knoppen{display:flex;flex-wrap:wrap;gap:12px;margin-top:2
   html:root .sn-site .st-blok,html:root .sn-site .st-blok.is-omgekeerd{grid-template-columns:1fr}
 }
 @media(max-width:600px){
-  html:root .sn-site .st-lijst{grid-template-columns:1fr}
+  html:root .sn-site .st-lijst{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:clamp(16px,4vw,48px);margin-inline:calc(-1 * clamp(16px,4vw,48px));padding:0 clamp(16px,4vw,48px) 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  html:root .sn-site .st-lijst::-webkit-scrollbar{display:none}
+  html:root .sn-site .st-lijst li{flex:0 0 80%;scroll-snap-align:start}
+  html:root .sn-site .st-lijst li:last-child{grid-column:auto}
   html:root .sn-site .st-team-rij li{width:140px}
   html:root .sn-site .st-team-rij img{width:140px;height:175px}
 }
@@ -73,7 +76,7 @@ html:root .sn-site .st-kaart-beeld img{position:absolute;inset:0;display:block;w
 html:root .sn-site .st-kaart.is-film .st-kaart-beeld{aspect-ratio:16/9;border-radius:0;border-width:0 0 1px}
 html:root .sn-site .st-kaart.is-film video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer}
 html:root .sn-site .st-kaart-tekst{display:flex;flex-direction:column;align-items:flex-start;padding:clamp(22px,2.4vw,34px)}
-html:root .sn-site .st-kaart-tekst h3{margin:12px 0 0;font-family:"TT Norms",Arial,sans-serif;font-size:clamp(22px,2vw,28px);font-weight:700;line-height:1.15;letter-spacing:-.015em;color:#fff;text-transform:none}
+html:root .sn-site .st-kaart-tekst h3{margin:12px 0 0;font-family:"TT Norms",Arial,sans-serif;font-size:clamp(22px,2vw,28px);font-weight:700;line-height:1.15;letter-spacing:0;color:#fff;text-transform:none}
 html:root .sn-site .st-kaart-tekst>p:not(.st-label){margin:12px 0 0;font-size:16px;line-height:1.55;color:var(--st-grijs)}
 html:root .sn-site .st-kaart-tekst .st-punten{margin:18px 0 24px}
 html:root .sn-site .st-kaart-tekst .sn-pill{margin-top:auto}
@@ -88,3 +91,50 @@ html:root .sn-site .st-kaart.is-breed .st-knoppen{margin-top:24px}
   html:root .sn-site .st-kaart.is-breed{grid-template-columns:1fr}
   html:root .sn-site .st-kaart.is-breed .st-kaart-beeld{border-right:0;border-bottom:1px solid var(--st-lijn);aspect-ratio:4/3;min-height:0}
 }
+
+/* Fotowissel in stap 03, zoals de header (sn-alg-dia en sn-alg-grow in header-algemeen.css): overvloeien en langzaam inzoomen. */
+html:root .sn-site .st-wissel img{opacity:0;transition:opacity .48s ease;transform-origin:50% 60%;animation:st-grow 14s ease-in-out infinite alternate}
+html:root .sn-site .st-wissel img[data-actief="true"]{opacity:1}
+html:root .sn-site .st-wissel img.is-gesprek{object-position:34% 60%}
+@keyframes st-grow{from{transform:scale(1)}to{transform:scale(1.08)}}
+@media(prefers-reduced-motion:reduce){html:root .sn-site .st-wissel img{animation:none;transition:none}}
+
+/* Mini-animaties per stap ("Zo werken we"), 25 november 2026. Standaard staat het eindbeeld; de loop speelt alleen zonder reduced motion. */
+html:root .sn-site .st-lijst a{gap:6px}
+html:root .sn-site .st-mini{display:block;width:100%;height:auto;aspect-ratio:16/10;margin:-4px 0 10px;border-radius:12px;background:#060807;border:1px solid #ffffff10;
+  background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:10px 10px}
+html:root .sn-site .st-mini *{transform-box:fill-box}
+@media(prefers-reduced-motion:no-preference){
+  /* 01 website bouwt zich op */
+  html:root .sn-site .st-mini-web :is(.st-a1,.st-a2,.st-a3,.st-a4){transform-origin:left center;animation:st-bouw 4.8s ease-in-out infinite}
+  html:root .sn-site .st-mini-web .st-a2{animation-delay:.25s}
+  html:root .sn-site .st-mini-web .st-a3{animation-delay:.5s}
+  html:root .sn-site .st-mini-web .st-a4{animation-delay:.75s;transform-origin:center}
+  /* 02 lijn stijgt */
+  html:root .sn-site .st-mini-ads .st-a-lijn{stroke-dasharray:1;animation:st-teken 4.8s ease-in-out infinite}
+  html:root .sn-site .st-mini-ads .st-a-punt{transform-origin:center;animation:st-punt 4.8s ease-in-out infinite}
+  /* 03 rijen vullen */
+  html:root .sn-site .st-mini-crm .st-a-rij{transform-origin:left center;animation:st-bouw 4.8s ease-in-out infinite}
+  html:root .sn-site .st-mini-crm .st-a-vink{transform-origin:center;animation:st-punt 4.8s ease-in-out infinite}
+  html:root .sn-site .st-mini-crm .st-r1{animation-delay:.3s}
+  html:root .sn-site .st-mini-crm .st-r2{animation-delay:.6s}
+  html:root .sn-site .st-mini-crm .st-r3{animation-delay:.9s}
+  /* 04 losse blokken komen samen */
+  html:root .sn-site .st-mini-os .st-a-blok{animation:st-samen 4.8s cubic-bezier(.16,1,.3,1) infinite}
+  html:root .sn-site .st-mini-os .st-b0{--x:-38px;--y:-14px}
+  html:root .sn-site .st-mini-os .st-b1{--x:38px;--y:-14px}
+  html:root .sn-site .st-mini-os .st-b2{--x:-38px;--y:14px}
+  html:root .sn-site .st-mini-os .st-b3{--x:38px;--y:14px}
+  html:root .sn-site .st-mini-os .st-a-kader{animation:st-kader 4.8s ease-in-out infinite}
+  /* 05 gesprek */
+  html:root .sn-site .st-mini-chat .st-a-bel1{animation:st-bel 4.8s ease-in-out infinite}
+  html:root .sn-site .st-mini-chat .st-a-bel2{animation:st-bel 4.8s ease-in-out infinite;animation-delay:.9s}
+  html:root .sn-site .st-mini-chat .st-a-typen{animation:st-typen 1.2s ease-in-out infinite}
+}
+@keyframes st-bouw{0%,8%{transform:scaleX(0);opacity:0}24%,82%{transform:scaleX(1);opacity:1}96%,100%{transform:scaleX(1);opacity:0}}
+@keyframes st-teken{0%,8%{stroke-dashoffset:1}50%,84%{stroke-dashoffset:0;opacity:1}96%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes st-punt{0%,40%{transform:scale(0)}52%{transform:scale(1.4)}60%,84%{transform:scale(1)}96%,100%{transform:scale(0)}}
+@keyframes st-samen{0%,10%{transform:translate(var(--x),var(--y));opacity:.35}42%,84%{transform:translate(0,0);opacity:1}100%{transform:translate(var(--x),var(--y));opacity:.35}}
+@keyframes st-kader{0%,30%{opacity:0}46%,84%{opacity:1}100%{opacity:0}}
+@keyframes st-bel{0%,6%{transform:translateY(8px);opacity:0}20%,84%{transform:translateY(0);opacity:1}96%,100%{opacity:0}}
+@keyframes st-typen{0%,100%{opacity:.3}50%{opacity:1}}
