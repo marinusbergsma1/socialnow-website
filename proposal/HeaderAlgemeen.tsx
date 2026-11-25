@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Play } from "lucide-react";
+import { ArrowUpRight, CalendarDays, Play } from "lucide-react";
+import { boekingsPlannerUrl } from "./PlanCall";
 import { CRAFTURE, DIRECT, VIA_CRAFTURE, merk } from "./ExplainerPlayer";
 import "./header-algemeen.css";
 import Diepte3D from "./Diepte3D";
@@ -32,7 +33,11 @@ const STAPPEN = ["Website en branding", "Systemen en operations", "Marketing en 
 // explainer in 5:4 met hem in beeld, tegels en OS-schermen (19-SocialNow-OS-Connect-lang-5x4-eigen-beeld-animatie-v1, 2:25, bron
 // 04_OS-VIDEO/video-project/92-os-connect-lang-beeld-animatie). Het kader is daarom 5:4 (is-vijfvier), zodat er niets wegvalt.
 const FILM = "/video/explainer/socialnow-explainer-5x4.mp4";
-const FILM_POSTER = "/video/explainer/socialnow-explainer-5x4.jpg";
+// 25 november 2026, avond (Marinus): "Graag deze als thumbnail met de knop voor afspelen onder de video met de breedte van de video en
+// die transitioneert op een hele mooie animatie manier [...] nadat je klikt met een mooie filling of slide naar een plan een call in."
+// Dus: startbeeld = Marinus die naar beneden wijst (naar de knop), de knop staat onder het kader, even breed. Na de klik start de film,
+// veegt een groene vulling over de knop en schuift "Bekijk de video" omhoog weg en "Plan een call" van onder in (link naar /afspraak).
+const FILM_POSTER = "/video/explainer/socialnow-explainer-5x4-thumb.jpg";
 
 // 4 november 2026 (Marinus): "die technische data en huidige landingspagina mag naar producten gaan dan is dit meer enthousiasmering
 // en rest inhoudelijk en technisch." Deze header opent sindsdien /producten; label en kop zijn daar eigen, zodat de homepage
@@ -64,6 +69,7 @@ export function AtomiumFoto() {
   const [draait, zetDraait] = useState(() => !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [filmAan, zetFilmAan] = useState(true);
   const [speelt, zetSpeelt] = useState(false);
+  const [gestart, zetGestart] = useState(false);
 
   useEffect(() => {
     if (!draait || filmAan) return;
@@ -85,7 +91,15 @@ export function AtomiumFoto() {
     if (film.current) film.current.currentTime = 0;
   };
 
+  const knop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (gestart) return;          // tweede klik: gewoon naar de afsprakenplanner
+    e.preventDefault();
+    zetGestart(true);
+    wissel();
+  };
+
   return (
+    <div className="sn-alg-filmblok" data-speelt={speelt}>
     <figure className="sn-alg-foto is-vijfvier" id="explainer" data-draait={draait && !filmAan} data-film={filmAan}>
       {BEURSFOTOS.map(({ bestand, alt }, index) => {
         const basis = `/images/verhaal/${bestand}`;
@@ -103,10 +117,13 @@ export function AtomiumFoto() {
       {!filmAan && <button type="button" className="sn-alg-knop-fotos" aria-label={draait ? "Pauzeer de fotowissel" : "Speel de fotowissel af"} onClick={() => zetDraait(vorige => !vorige)} />}
       <video ref={film} className="sn-alg-film" src={FILM} poster={FILM_POSTER} playsInline preload="metadata" aria-label="Explainer: dit is SocialNow" aria-hidden={!filmAan}
         onClick={wissel} onPlay={() => zetSpeelt(true)} onPause={() => zetSpeelt(false)} onEnded={klaar} />
-      {!speelt && (
-        <button type="button" className="sn-alg-knop-video" onClick={wissel}><Play size={15} aria-hidden="true" /><span>Bekijk de video</span></button>
-      )}
     </figure>
+    <a className="sn-alg-filmknop" href={boekingsPlannerUrl} onClick={knop} data-stand={gestart ? "call" : "video"}
+      aria-label={gestart ? "Plan een call" : "Bekijk de video"}>
+      <span className="lb lb-video" aria-hidden="true"><Play size={17} />Bekijk de video</span>
+      <span className="lb lb-call" aria-hidden="true"><CalendarDays size={18} />Plan een call<ArrowUpRight size={18} className="pijl" /></span>
+    </a>
+    </div>
   );
 }
 
