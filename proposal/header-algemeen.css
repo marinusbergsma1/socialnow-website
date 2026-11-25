@@ -110,7 +110,7 @@ html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px
 
 /* 25 november 2026, avond (Marinus): afspeelknop onder de video, even breed, en na de klik een groene veeg naar "Plan een call". */
 .sn-alg-filmblok{display:flex;flex-direction:column;gap:12px;min-width:0}
-.sn-alg-filmknop{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;height:58px;padding:5px 5px 5px 28px;overflow:hidden;isolation:isolate;border-radius:999px;border:2px solid #fff;background:#0b0e0d;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
+.sn-alg-filmknop{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;width:min(100%,340px);align-self:center;height:58px;padding:5px 5px 5px 28px;overflow:hidden;isolation:isolate;border-radius:999px;border:2px solid #fff;background:#0b0e0d;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
   transition:color .35s ease,border-color .7s ease}
 .sn-alg-filmknop:focus-visible{outline:2px solid #fff;outline-offset:4px}
 /* wit vult bij hover van links naar rechts (zoals de groene pil) */
