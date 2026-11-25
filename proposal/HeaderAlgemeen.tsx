@@ -38,6 +38,9 @@ const FILM = "/video/explainer/socialnow-explainer-5x4.mp4";
 // Dus: startbeeld = Marinus die naar beneden wijst (naar de knop), de knop staat onder het kader, even breed. Na de klik start de film,
 // veegt een groene vulling over de knop en schuift "Bekijk de video" omhoog weg en "Plan een call" van onder in (link naar /afspraak).
 const FILM_POSTER = "/video/explainer/socialnow-explainer-5x4-thumb.jpg";
+// 25 november 2026 (Marinus): "Kan je deze weer 3D maken en reageren op mousemovements maar iets meer aanwezig nog dan die andere
+// versie." Dieptekaart via scripts/maak-dieptekaart.mjs; sterkte bijna twee keer die van de beursfoto's.
+const FILM_DIEPTE = "/video/explainer/socialnow-explainer-5x4-thumb-diepte.webp";
 
 // 4 november 2026 (Marinus): "die technische data en huidige landingspagina mag naar producten gaan dan is dit meer enthousiasmering
 // en rest inhoudelijk en technisch." Deze header opent sindsdien /producten; label en kop zijn daar eigen, zodat de homepage
@@ -134,6 +137,9 @@ export function AtomiumFoto() {
       <video ref={film} className="sn-alg-film" src={FILM} poster={FILM_POSTER} playsInline preload="metadata" aria-label="Explainer: dit is SocialNow" aria-hidden={!filmAan}
         onClick={wissel} onPlay={() => zetSpeelt(true)} onPause={() => zetSpeelt(false)} onEnded={klaar} />
       {/* 25 november 2026 (Marinus): "Er mag wel een zwarte overlay over de foto heen nog." Alleen over het startbeeld, weg zodra de film loopt. */}
+      {filmAan && <div className="sn-alg-filmstart" data-weg={speelt || gestart || undefined} aria-hidden="true">
+        <Diepte3D src={FILM_POSTER} diepte={FILM_DIEPTE} positie={[0.5, 0.45]} actief={!speelt && !gestart} sterkte={0.052} />
+      </div>}
       {filmAan && <span className="sn-alg-filmwaas" data-weg={speelt || gestart || undefined} aria-hidden="true" />}
     </figure>
     {/* 25 november 2026, avond (Marinus): de pil zoals Website-actie, maar wit. Hover vult wit; na de klik trekt het wit terug en
