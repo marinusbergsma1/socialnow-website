@@ -61,3 +61,30 @@ html:root .sn-site .st-knoppen{display:flex;flex-wrap:wrap;gap:12px;margin-top:2
   html:root .sn-site .st-team-rij li{width:140px}
   html:root .sn-site .st-team-rij img{width:140px;height:175px}
 }
+
+/* Stap 03 tot en met 05 als één geheel (StappenSlot), 25 november 2026. Rij 1: 03 (foto) en 04 (film) even hoog via subgrid;
+   rij 2: 05 breed met de teamfoto links. Dezelfde kaarttaal als de rest van de homepage. */
+html:root .sn-site .st-geheel{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:auto auto auto;gap:18px;padding-top:clamp(72px,9vw,120px);padding-bottom:clamp(40px,6vw,72px)}
+html:root .sn-site .st-kaart{display:grid;grid-template-rows:subgrid;grid-row:span 2;border:1px solid var(--st-lijn);border-radius:22px;background:var(--st-vlak);overflow:clip;scroll-margin-top:90px;row-gap:0}
+html:root .sn-site .st-kaart:nth-child(1){grid-column:span 5}
+html:root .sn-site .st-kaart.is-film{grid-column:span 7}
+html:root .sn-site .st-kaart-beeld{position:relative;margin:0;min-height:0;border-bottom:1px solid var(--st-lijn);background:#000}
+html:root .sn-site .st-kaart-beeld img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+html:root .sn-site .st-kaart.is-film .st-kaart-beeld{aspect-ratio:16/9;border-radius:0;border-width:0 0 1px}
+html:root .sn-site .st-kaart.is-film video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer}
+html:root .sn-site .st-kaart-tekst{display:flex;flex-direction:column;align-items:flex-start;padding:clamp(22px,2.4vw,34px)}
+html:root .sn-site .st-kaart-tekst h3{margin:12px 0 0;font-family:"TT Norms",Arial,sans-serif;font-size:clamp(22px,2vw,28px);font-weight:700;line-height:1.15;letter-spacing:-.015em;color:#fff;text-transform:none}
+html:root .sn-site .st-kaart-tekst>p:not(.st-label){margin:12px 0 0;font-size:16px;line-height:1.55;color:var(--st-grijs)}
+html:root .sn-site .st-kaart-tekst .st-punten{margin:18px 0 24px}
+html:root .sn-site .st-kaart-tekst .sn-pill{margin-top:auto}
+html:root .sn-site .st-kaart.is-breed{grid-column:1/-1;grid-row:auto;grid-template-rows:none;grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+html:root .sn-site .st-kaart.is-breed .st-kaart-beeld{border-bottom:0;border-right:1px solid var(--st-lijn);min-height:320px}
+html:root .sn-site .st-kaart.is-breed .st-kaart-tekst{justify-content:center}
+html:root .sn-site .st-kaart.is-breed .st-knoppen{margin-top:24px}
+@media(max-width:960px){
+  html:root .sn-site .st-geheel{grid-template-columns:1fr;grid-template-rows:none}
+  html:root .sn-site .st-kaart,html:root .sn-site .st-kaart:nth-child(1),html:root .sn-site .st-kaart.is-film{grid-column:1/-1;grid-row:auto;grid-template-rows:auto auto}
+  html:root .sn-site .st-kaart:nth-child(1) .st-kaart-beeld{aspect-ratio:4/3}
+  html:root .sn-site .st-kaart.is-breed{grid-template-columns:1fr}
+  html:root .sn-site .st-kaart.is-breed .st-kaart-beeld{border-right:0;border-bottom:1px solid var(--st-lijn);aspect-ratio:4/3;min-height:0}
+}

@@ -25,7 +25,7 @@ import FreeWebsite from "./FreeWebsite";
 import CustomerReviews from "./CustomerReviews";
 import { VideoSlider, ImageSliders } from "./MediaSliders";
 import FeaturedWork from "./FeaturedWork";
-import { TeamSlider, StappenOverzicht, StapKop, StapOperations, StapOsConnect, StapContact } from "./Stappenplan";
+import { TeamSlider, StappenOverzicht, StapKop, StappenSlot } from "./Stappenplan";
 import HomeEnthousiast, { WebsiteCTA } from "./HomeEnthousiast";
 import ExpertsGeloof from "./ExpertsGeloof";
 import { Bento, Tegel } from "./Bento";
@@ -76,7 +76,7 @@ export function Home() {
     </section>
     {/* 25 november 2026 (Marinus): de homepage is een stappenplan langs de stappen uit de explainer (Stappenplan.tsx), met het team als
         slider boven de websitestap. De bestaande secties blijven; ze zijn nu stap 01 (websites) en stap 02 (branding, cases, video).
-        Stap 03 is Management en operations met de Odoo Experience, stap 04 het OS met Connect, en het slot gaat naar /contact. */}
+        Stap 03 tot en met 05 (management en operations, het OS met Connect en kennismaken) staan samen in StappenSlot. */}
     <TeamSlider />
     <StappenOverzicht />
     <FreeWebsite stap />
@@ -86,9 +86,7 @@ export function Home() {
     {/* 25 november 2026 (Marinus): "Verder boven video en motion nog deze 2 tiles met bekijk onze projecten oid. Client Cases." */}
     <FeaturedWork kop={false} alleen={["universal-sony-banners", "az-alkmaar-socials"]} eind={{ tekst: "Meer werk en resultaten van onze klanten.", knop: "Bekijk onze Client Cases" }} />
     <VideoSlider kort />
-    <StapOperations />
-    <StapOsConnect />
-    <StapContact />
+    <StappenSlot />
   </div>;
 }
 
