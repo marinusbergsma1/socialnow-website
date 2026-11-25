@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Play, X } from "lucide-react";
+import { ArrowUpRight, Play } from "lucide-react";
 import { CRAFTURE, DIRECT, VIA_CRAFTURE, merk } from "./ExplainerPlayer";
 import "./header-algemeen.css";
 import Diepte3D from "./Diepte3D";
@@ -25,8 +25,11 @@ const STAPPEN = ["Website en branding", "Systemen en operations", "Marketing en 
 
 // 4 november 2026 (Marinus): "Deze graag nog erbij. en een knop bekijk de video." Dus de Trusted by-balk uit de oude header
 // (zelfde merken en volgorde als het startbeeld in ExplainerPlayer.tsx) en een knop die een film in een venster afspeelt.
-// Later die dag: "de video van de Odoo Experience laten zien". De aftermovie is staand (720 x 1280), het venster dus ook.
-const FILM = "/video/odoo-experience/odoo-experience.mp4";
+// Later die dag: "de video van de Odoo Experience laten zien". De aftermovie is staand (720 x 1280).
+// 25 november 2026 (Marinus): "Kan je voor nu vooral even deze op de homepage zetten waar nu de Odoo video staat?" Dus hier nu de
+// lange explainer (06-SocialNow-lang, 2:18, 07_MARKETING/EXPLAINER-VIDEO-MARINUS-20261124), liggend 16:9.
+const FILM = "/video/explainer/socialnow-explainer.mp4";
+const FILM_POSTER = "/video/explainer/socialnow-explainer.jpg";
 
 // 4 november 2026 (Marinus): "die technische data en huidige landingspagina mag naar producten gaan dan is dit meer enthousiasmering
 // en rest inhoudelijk en technisch." Deze header opent sindsdien /producten; label en kop zijn daar eigen, zodat de homepage
@@ -45,52 +48,61 @@ const BEURSFOTOS = [
   { bestand: "beurs-steef", alt: "Steef aan tafel met bezoekers rond een laptop" },
 ];
 
+// 25 november 2026 (Marinus): eerst "Doe maar even alleen de video ipv die slideshow", daarna "Dit balkje wil ik niet. Ik wil gewoon
+// dat als je op de video klikt de video op pauze gaat." en "Nadat de video eindigt wil ik graag dat de slider weer komt. Verder mag de
+// video ook vierkant worden gemaakt." Dus: het kader is vierkant en toont de fotowissel. Bekijk de video speelt de explainer in hetzelfde
+// kader, zonder bedieningsbalk; een klik op de film pauzeert of speelt verder. Als de film afloopt, komt de fotowissel terug.
+// De naam AtomiumFoto blijft, omdat HomeEnthousiast.tsx hem zo importeert.
 export function AtomiumFoto() {
-  const venster = useRef<HTMLDialogElement>(null);
   const film = useRef<HTMLVideoElement>(null);
   const [foto, zetFoto] = useState(0);
-  const [speelt, zetSpeelt] = useState(() => !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  const [filmOpen, zetFilmOpen] = useState(false);
-  const open = () => {
-    venster.current?.showModal();
-    zetFilmOpen(true);
-    void film.current?.play().catch(() => {});
-  };
-  const sluit = () => venster.current?.close();
-  const naSluiten = () => {
-    film.current?.pause();
-    zetFilmOpen(false);
-  };
+  const [draait, zetDraait] = useState(() => !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const [filmAan, zetFilmAan] = useState(false);
+  const [speelt, zetSpeelt] = useState(false);
 
   useEffect(() => {
-    if (!speelt || filmOpen) return;
+    if (!draait || filmAan) return;
     const timer = window.setInterval(() => zetFoto(vorige => (vorige + 1) % BEURSFOTOS.length), 3000);
     return () => window.clearInterval(timer);
-  }, [speelt, filmOpen]);
+  }, [draait, filmAan]);
 
-  return <>
-    <figure className="sn-alg-foto" id="odoo-experience" data-draait={speelt && !filmOpen}>
+  const wissel = () => {
+    const v = film.current;
+    if (!v) return;
+    zetFilmAan(true);
+    if (v.paused) void v.play().catch(() => {});
+    else v.pause();
+  };
+  const klaar = () => {
+    zetSpeelt(false);
+    zetFilmAan(false);
+    zetFoto(0);
+    if (film.current) film.current.currentTime = 0;
+  };
+
+  return (
+    <figure className="sn-alg-foto is-vierkant" id="explainer" data-draait={draait && !filmAan} data-film={filmAan}>
       {BEURSFOTOS.map(({ bestand, alt }, index) => {
         const basis = `/images/verhaal/${bestand}`;
-        return <div key={bestand} className={bestand === "beurs-marinus" ? "sn-alg-dia is-gesprek" : "sn-alg-dia"} data-actief={foto === index} aria-hidden={foto !== index}>
+        return <div key={bestand} className={bestand === "beurs-marinus" ? "sn-alg-dia is-gesprek" : "sn-alg-dia"} data-actief={foto === index && !filmAan} aria-hidden={foto !== index || filmAan}>
           <img src={`${basis}.webp`} alt={alt} width="900" height="1200" fetchPriority={index === 0 ? "high" : "low"} />
-          <Diepte3D src={`${basis}.webp`} diepte={`${basis}-diepte.webp`} actief={foto === index && !filmOpen} />
+          <Diepte3D src={`${basis}.webp`} diepte={`${basis}-diepte.webp`} actief={foto === index && !filmAan} />
         </div>;
       })}
-      {BEURSFOTOS[foto].bestand !== "team-atomium" && (
+      {!filmAan && BEURSFOTOS[foto].bestand !== "team-atomium" && (
         <figcaption>
           <span className="sn-alg-klein" lang="en" translate="no">Presenting at the Odoo Experience 2026</span>
           <strong>In gesprek op de beurs<span className="sn-alg-punt">.</span></strong>
         </figcaption>
       )}
-      <button type="button" className="sn-alg-knop-fotos" aria-label={speelt ? "Pauzeer de fotowissel" : "Speel de fotowissel af"} onClick={() => zetSpeelt(vorige => !vorige)} />
-      <button type="button" className="sn-alg-knop-video" aria-haspopup="dialog" onClick={open}><Play size={15} aria-hidden="true" /><span>Bekijk de video</span></button>
+      {!filmAan && <button type="button" className="sn-alg-knop-fotos" aria-label={draait ? "Pauzeer de fotowissel" : "Speel de fotowissel af"} onClick={() => zetDraait(vorige => !vorige)} />}
+      <video ref={film} className="sn-alg-film" src={FILM} poster={FILM_POSTER} playsInline preload="metadata" aria-label="Explainer: dit is SocialNow" aria-hidden={!filmAan}
+        onClick={wissel} onPlay={() => zetSpeelt(true)} onPause={() => zetSpeelt(false)} onEnded={klaar} />
+      {!speelt && (
+        <button type="button" className="sn-alg-knop-video" onClick={wissel}><Play size={15} aria-hidden="true" /><span>Bekijk de video</span></button>
+      )}
     </figure>
-    <dialog className="sn-alg-venster" ref={venster} aria-label="Aftermovie Odoo Experience 2026" onClose={naSluiten} onClick={e => { if (e.target === venster.current) sluit(); }}>
-      <button type="button" className="sn-alg-sluit" onClick={sluit} aria-label="Sluit de film"><X size={20} aria-hidden="true" /></button>
-      <video ref={film} src={FILM} poster="/video/odoo-experience/odoo-experience.jpg" controls playsInline preload="none" />
-    </dialog>
-  </>;
+  );
 }
 
 export default function HeaderAlgemeen({ label = "Management · Operations · Odoo", kop = "Een betrouwbare partner voor groei en cybersecurity" }: { label?: string; kop?: string }) {
@@ -112,7 +124,7 @@ export default function HeaderAlgemeen({ label = "Management · Operations · Od
           {/* 4 november 2026 (Marinus): "Ik wil dat het écht duidelijk is gelijk BAM Ze kunnen mij helpen met management en operations
               en Odoo." en "zet alleen de logo's van samenwerking eronder. Odoo Silver partner, Shopify Parners SalesForce en Adove
               Partners onder de header titel." */}
-          <p className="sn-alg-uitleg"><strong>Wij helpen je met management, operations en Odoo.</strong> Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
+          <p className="sn-alg-uitleg"><strong>Wij helpen je met management en operations.</strong> Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
           <PartnerLogos />
           <ol className="sn-alg-stappen">
             {STAPPEN.map((kop, i) => <li key={kop}><span className="sn-alg-nr">0{i + 1}</span><strong>{kop}</strong></li>)}

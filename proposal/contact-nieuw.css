@@ -1,0 +1,101 @@
+/* /contact, 25 november 2026 (ContactNieuw.tsx): maatwerk, onderwerp kiezen met de juiste persoon, hoe we werken, wat we doen, team groot. */
+html:root .sn-site .cn{--c-groen:#25d366;--c-lijn:#ffffff1a;--c-lijn2:#ffffff2e;--c-grijs:#9aa6a0;--c-vlak:#0b0e0d;--c-mono:var(--v-mono,ui-monospace,Menlo,monospace);color:#fff;padding-bottom:40px}
+html:root .sn-site .cn-wrap{max-width:1320px;margin:0 auto;padding-left:clamp(16px,4vw,48px);padding-right:clamp(16px,4vw,48px)}
+html:root .sn-site .cn .sn-alg-label{display:flex;align-items:center;gap:8px;margin:0;font-family:var(--c-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-grijs)}
+html:root .sn-site .cn .sn-alg-label i{flex:0 0 6px;height:6px;border-radius:50%;background:var(--c-groen)}
+html:root .sn-site .cn h1,html:root .sn-site .cn h2,html:root .sn-site .cn h3{font-family:"TT Norms",Arial,sans-serif;font-weight:700;letter-spacing:-.02em;text-transform:none;color:#fff;margin:0}
+
+/* kop */
+html:root .sn-site .cn-kop{padding-top:clamp(48px,7vw,96px);padding-bottom:clamp(28px,4vw,48px)}
+html:root .sn-site .cn-kop h1{margin-top:18px;max-width:900px;font-size:clamp(38px,5.4vw,72px);line-height:1.04}
+html:root .sn-site .cn-kop h1 span{color:#7d8984}
+html:root .sn-site .cn-intro{max-width:720px;margin:22px 0 0;font-size:clamp(17px,1.5vw,20px);line-height:1.55;color:var(--c-grijs)}
+
+/* onderwerp kiezen + paneel */
+html:root .sn-site .cn-keuze{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,430px);gap:24px;align-items:start;scroll-margin-top:100px}
+html:root .sn-site .cn-klein-kop{font-size:15px !important;font-family:var(--c-mono) !important;font-weight:400 !important;letter-spacing:.1em !important;text-transform:uppercase !important;color:var(--c-grijs) !important;margin-bottom:14px !important}
+html:root .sn-site .cn-onderwerpen{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+html:root .sn-site .cn-onderwerp{display:grid;gap:4px;text-align:left;padding:18px 20px;border:1px solid var(--c-lijn);border-radius:14px;background:var(--c-vlak);color:#fff;font:inherit;cursor:pointer;transition:border-color .2s,background .2s}
+html:root .sn-site .cn-onderwerp:hover{border-color:var(--c-lijn2)}
+html:root .sn-site .cn-onderwerp[aria-checked="true"]{border-color:#25d36699;background:linear-gradient(90deg,#25d36612,transparent 70%),var(--c-vlak)}
+html:root .sn-site .cn-onderwerp b{font-family:"TT Norms",Arial,sans-serif;font-size:17px;font-weight:700}
+html:root .sn-site .cn-onderwerp span{font-size:14px;line-height:1.4;color:var(--c-grijs)}
+html:root .sn-site .cn-onderwerp small{margin-top:6px;font-family:var(--c-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#6b7671}
+html:root .sn-site .cn-onderwerp[aria-checked="true"] small{color:var(--c-groen)}
+html:root .sn-site .cn-onderwerp:focus-visible{outline:2px solid var(--c-groen);outline-offset:2px}
+
+html:root .sn-site .cn-paneel{position:sticky;top:96px;border:1px solid var(--c-lijn2);border-radius:20px;background:#060807;overflow:hidden}
+html:root .sn-site .cn-persoon{display:flex;align-items:center;gap:16px;padding:22px 24px;border-bottom:1px solid var(--c-lijn)}
+html:root .sn-site .cn-persoon img{width:72px;height:72px;border-radius:16px;object-fit:cover;flex:none}
+html:root .sn-site .cn-persoon strong{display:block;font-family:"TT Norms",Arial,sans-serif;font-size:19px}
+html:root .sn-site .cn-persoon span{font-size:14px;color:var(--c-grijs)}
+html:root .sn-site .cn-direct{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--c-lijn)}
+html:root .sn-site .cn-direct a{display:flex;align-items:center;gap:8px;min-width:0;padding:13px 18px;font-size:14px;color:#dfe6e2;text-decoration:none}
+html:root .sn-site .cn-direct a+a{border-left:1px solid var(--c-lijn)}
+html:root .sn-site .cn-direct a span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html:root .sn-site .cn-direct a:hover{color:var(--c-groen)}
+html:root .sn-site .cn-form{display:grid;gap:12px;padding:22px 24px}
+html:root .sn-site .cn-twee{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+html:root .sn-site .cn-form label{display:grid;gap:6px;font-family:var(--c-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--c-grijs)}
+html:root .sn-site .cn-form :is(input,textarea){width:100%;font:inherit;font-family:"TT Norms",Arial,sans-serif;font-size:16px;letter-spacing:0;text-transform:none;color:#fff;background:#111514;border:1px solid var(--c-lijn);border-radius:10px;padding:11px 13px;outline:none}
+html:root .sn-site .cn-form :is(input,textarea):focus{border-color:var(--c-groen)}
+html:root .sn-site .cn-form textarea{resize:vertical;min-height:100px}
+html:root .sn-site .cn-form .sn-pill{width:100%;margin-top:4px;cursor:pointer}
+html:root .sn-site .cn-noot{margin:0;font-size:13px;line-height:1.5;color:#7d8984}
+html:root .sn-site .cn-noot a{color:var(--c-groen)}
+
+/* secties */
+html:root .sn-site .cn-sectie{margin-top:clamp(72px,9vw,120px)}
+html:root .sn-site .cn-sectie>h2{margin-top:16px;max-width:820px;font-size:clamp(30px,3.6vw,48px);line-height:1.08}
+html:root .sn-site .cn-stappen{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:40px 0 0;padding:0;border:1px solid var(--c-lijn);border-radius:18px;overflow:hidden}
+html:root .sn-site .cn-stappen li{padding:28px 24px;background:var(--c-vlak)}
+html:root .sn-site .cn-stappen li+li{border-left:1px solid var(--c-lijn)}
+html:root .sn-site .cn-nr{font-family:var(--c-mono);font-size:12px;letter-spacing:.1em;color:var(--c-groen)}
+html:root .sn-site .cn-stappen h3{margin-top:14px;font-size:20px}
+html:root .sn-site .cn-stappen p{margin:8px 0 0;font-size:15px;line-height:1.5;color:var(--c-grijs)}
+
+html:root .sn-site .cn-onderdelen{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:40px}
+html:root .sn-site .cn-onderdeel{display:flex;flex-direction:column;padding:26px 24px;border:1px solid var(--c-lijn);border-radius:18px;background:var(--c-vlak)}
+html:root .sn-site .cn-onderdeel.is-kern{border-color:#25d36680;background:linear-gradient(180deg,#25d36610,transparent 60%),var(--c-vlak)}
+html:root .sn-site .cn-onderdeel h3{font-size:21px}
+html:root .sn-site .cn-onderdeel>p{margin:8px 0 0;font-size:15px;line-height:1.5;color:var(--c-grijs)}
+html:root .sn-site .cn-onderdeel ul{list-style:none;display:grid;gap:10px;margin:20px 0 22px;padding:0;flex:1}
+html:root .sn-site .cn-onderdeel li{position:relative;padding-left:18px;font-size:15px;line-height:1.45;color:#dfe6e2}
+html:root .sn-site .cn-onderdeel li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;background:var(--c-groen)}
+html:root .sn-site .cn-link{display:inline-flex;align-items:center;gap:6px;width:max-content;padding:0;border:0;background:none;font-family:var(--c-mono);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--c-groen);text-decoration:none;cursor:pointer}
+html:root .sn-site .cn-link:hover{color:#fff}
+
+html:root .sn-site .cn-team{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin:40px 0 0;padding:0}
+html:root .sn-site .cn-team li{display:flex;flex-direction:column;border:1px solid var(--c-lijn);border-radius:20px;background:var(--c-vlak);overflow:hidden}
+html:root .sn-site .cn-team img{width:100%;aspect-ratio:4/5;height:auto;object-fit:cover;display:block}
+html:root .sn-site .cn-team li>div{display:flex;flex-direction:column;gap:6px;padding:22px 22px 24px;flex:1}
+html:root .sn-site .cn-team strong{font-family:"TT Norms",Arial,sans-serif;font-size:22px}
+html:root .sn-site .cn-rol{font-family:var(--c-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--c-groen)}
+html:root .sn-site .cn-team p{margin:6px 0 10px;font-size:15px;line-height:1.5;color:var(--c-grijs);flex:1}
+html:root .sn-site .cn-team a{display:flex;align-items:center;gap:8px;font-size:14px;color:#dfe6e2;text-decoration:none}
+html:root .sn-site .cn-team a:hover{color:var(--c-groen)}
+html:root .sn-site .cn-teamlink{margin-top:24px}
+
+html:root .sn-site .cn-adres{display:flex;flex-wrap:wrap;gap:16px 40px;margin-top:clamp(64px,8vw,100px);padding-top:28px;padding-bottom:28px;border-top:1px solid var(--c-lijn);border-bottom:1px solid var(--c-lijn);font-size:15px;color:#dfe6e2}
+html:root .sn-site .cn-adres div{display:flex;align-items:flex-start;gap:10px}
+html:root .sn-site .cn-adres svg{color:var(--c-groen);flex:none;margin-top:2px}
+html:root .sn-site .cn-adres a{color:inherit;text-decoration:none}
+html:root .sn-site .cn-adres a:hover{color:var(--c-groen)}
+
+@media(max-width:1060px){
+  html:root .sn-site .cn-keuze{grid-template-columns:1fr}
+  html:root .sn-site .cn-paneel{position:static}
+  html:root .sn-site .cn-stappen,html:root .sn-site .cn-onderdelen,html:root .sn-site .cn-team{grid-template-columns:repeat(2,minmax(0,1fr))}
+  html:root .sn-site .cn-stappen li:nth-child(3){border-left:0}
+  html:root .sn-site .cn-stappen li:nth-child(n+3){border-top:1px solid var(--c-lijn)}
+}
+@media(max-width:600px){
+  html:root .sn-site .cn-onderwerpen,html:root .sn-site .cn-twee,html:root .sn-site .cn-stappen,html:root .sn-site .cn-onderdelen{grid-template-columns:1fr}
+  html:root .sn-site .cn-stappen li{border-left:0 !important}
+  html:root .sn-site .cn-stappen li+li{border-top:1px solid var(--c-lijn)}
+  html:root .sn-site .cn-team{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  html:root .sn-site .cn-team li>div{padding:14px}
+  html:root .sn-site .cn-team strong{font-size:17px}
+  html:root .sn-site .cn-team p{display:none}
+  html:root .sn-site .cn-team a span{font-size:12px;overflow:hidden;text-overflow:ellipsis}
+}

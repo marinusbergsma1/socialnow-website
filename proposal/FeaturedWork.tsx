@@ -48,7 +48,10 @@ const selections = [
 ];
 
 // kop={false}: op /projecten opent ResultatenHero de pagina, dan staat hier geen tweede intro (18 oktober 2026).
-export default function FeaturedWork({ kop = true }: { kop?: boolean }) {
+// 25 november 2026 (Marinus): "Verder boven video en motion nog deze 2 tiles met bekijk onze projecten oid. Client Cases." Daarom
+// kan de homepage met `alleen` een paar cases kiezen (Universal/Sony en AZ) en met `eind` de knop onderaan naar Client Cases zetten.
+export default function FeaturedWork({ kop = true, alleen, eind }: { kop?: boolean; alleen?: string[]; eind?: { tekst: string; knop: string } }) {
+  const gekozen = alleen ? selections.filter((s) => alleen.includes(s.slug)) : selections;
   const [selected, setSelected] = useState<MediaItem | null>(null);
   return (
     <section
@@ -72,11 +75,11 @@ export default function FeaturedWork({ kop = true }: { kop?: boolean }) {
 
       </Heading>}
       <div className="h-featured-cases">
-        {selections.map((selection, index) => {
+        {gekozen.map((selection, index) => {
           const project = projects.find(
             (item) => item.slug === selection.slug,
           )!;
-          const motion = index === 0;
+          const motion = selection.slug === "raveg-branding";
           const sources = motion
             ? project.gallery!
             : [project.image, ...project.gallery!];
@@ -163,9 +166,9 @@ export default function FeaturedWork({ kop = true }: { kop?: boolean }) {
         })}
       </div>
       <div className="h-featured-end">
-        <p>Van dit oog voor detail naar jouw eigen OS.</p>
+        <p>{eind?.tekst ?? "Van dit oog voor detail naar jouw eigen OS."}</p>
         <Action to="/projecten" secondary>
-          Bekijk al ons werk
+          {eind?.knop ?? "Bekijk al ons werk"}
         </Action>
       </div>
       <MediaDialog item={selected} close={() => setSelected(null)} />
