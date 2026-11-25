@@ -57,17 +57,63 @@ export function TeamSlider() {
   </section>;
 }
 
+// 25 november 2026 (Marinus, via een andere sessie): "Hier is teveel tekst op een klein stuk. Maak van die 5 punten mini animaties
+// zodat er minder tekst nodig is en elke stap duidelijk is." Elke kaart heeft nu een kleine, rustige loop in SVG (stippen, groen,
+// zwart) met alleen nummer en titel; de animatie toont de stap. Bij reduced motion staat het eindbeeld stil (zie stappenplan.css).
+function Mini({ nr }: { nr: string }) {
+  const lijn = "#ffffff38", vlak = "#ffffff12", groen = "#25d366";
+  if (nr === "01") return <svg viewBox="0 0 160 100" className="st-mini st-mini-web" aria-hidden="true">
+    <rect x="16" y="10" width="128" height="80" rx="8" fill="none" stroke={lijn} />
+    <line x1="16" y1="24" x2="144" y2="24" stroke={lijn} />
+    <circle cx="25" cy="17" r="2" fill={lijn} /><circle cx="32" cy="17" r="2" fill={lijn} /><circle cx="39" cy="17" r="2" fill={lijn} />
+    <rect className="st-a1" x="26" y="33" width="70" height="8" rx="3" fill="#fff" opacity=".85" />
+    <rect className="st-a2" x="26" y="46" width="50" height="5" rx="2.5" fill={lijn} />
+    <rect className="st-a3" x="26" y="60" width="34" height="11" rx="5.5" fill={groen} />
+    <rect className="st-a4" x="104" y="33" width="30" height="40" rx="5" fill={vlak} stroke={lijn} />
+  </svg>;
+  if (nr === "02") return <svg viewBox="0 0 160 100" className="st-mini st-mini-ads" aria-hidden="true">
+    <rect x="16" y="12" width="56" height="76" rx="8" fill={vlak} stroke={lijn} />
+    <rect x="24" y="20" width="40" height="34" rx="4" fill="#ffffff1f" />
+    <rect x="24" y="60" width="30" height="5" rx="2.5" fill={lijn} /><rect x="24" y="70" width="22" height="5" rx="2.5" fill={lijn} />
+    <line x1="84" y1="84" x2="146" y2="84" stroke={lijn} /><line x1="84" y1="20" x2="84" y2="84" stroke={lijn} />
+    <polyline className="st-a-lijn" points="88,76 102,68 114,72 126,50 140,30" fill="none" stroke={groen} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" pathLength={1} />
+    <circle className="st-a-punt" cx="140" cy="30" r="4" fill={groen} />
+  </svg>;
+  if (nr === "03") return <svg viewBox="0 0 160 100" className="st-mini st-mini-crm" aria-hidden="true">
+    {[0, 1, 2, 3].map((i) => <g key={i} transform={`translate(0 ${16 + i * 19})`}>
+      <circle cx="26" cy="6" r="5" fill={vlak} stroke={lijn} />
+      <rect x="38" y="3" width="90" height="6" rx="3" fill={vlak} />
+      <rect className={`st-a-rij st-r${i}`} x="38" y="3" width={[80, 56, 70, 44][i]} height="6" rx="3" fill={i === 3 ? groen : "#ffffff59"} />
+      <circle className={`st-a-vink st-r${i}`} cx="140" cy="6" r="4" fill={groen} />
+    </g>)}
+  </svg>;
+  if (nr === "04") return <svg viewBox="0 0 160 100" className="st-mini st-mini-os" aria-hidden="true">
+    <rect className="st-a-kader" x="50" y="18" width="60" height="64" rx="10" fill="none" stroke={groen} strokeOpacity=".6" />
+    <rect className="st-a-blok st-b0" x="58" y="26" width="20" height="20" rx="4" fill="#fff" opacity=".85" />
+    <rect className="st-a-blok st-b1" x="82" y="26" width="20" height="20" rx="4" fill={groen} />
+    <rect className="st-a-blok st-b2" x="58" y="54" width="20" height="20" rx="4" fill="#ffffff59" />
+    <rect className="st-a-blok st-b3" x="82" y="54" width="20" height="20" rx="4" fill="#ffffff2e" stroke={lijn} />
+  </svg>;
+  return <svg viewBox="0 0 160 100" className="st-mini st-mini-chat" aria-hidden="true">
+    <rect className="st-a-bel1" x="18" y="18" width="78" height="22" rx="11" fill={vlak} stroke={lijn} />
+    <rect className="st-a-bel1" x="28" y="27" width="44" height="4" rx="2" fill={lijn} />
+    <rect className="st-a-bel2" x="64" y="48" width="78" height="22" rx="11" fill={groen} />
+    <rect className="st-a-bel2" x="74" y="57" width="50" height="4" rx="2" fill="#03140a" opacity=".6" />
+    <g className="st-a-typen"><circle cx="30" cy="86" r="3" fill={lijn} /><circle cx="40" cy="86" r="3" fill={lijn} /><circle cx="50" cy="86" r="3" fill={lijn} /></g>
+  </svg>;
+}
+
 export function StappenOverzicht() {
   return <section className="st-wrap st-overzicht" aria-labelledby="st-overzicht-kop">
     <p className="st-label"><i />Zo werken we</p>
     <h2 id="st-overzicht-kop">Van je website tot één systeem voor je hele bedrijf.</h2>
-    <p className="st-intro">Software alleen laat je bedrijf niet groeien; duidelijkheid en samenwerking wel. Daarom nemen we als team verantwoordelijkheid voor de hele oplossing, in vijf stappen.</p>
+    <p className="st-intro">Vijf stappen, één team dat verantwoordelijk is voor het geheel.</p>
     <ol className="st-lijst">
       {STAPPEN.map((s) => <li key={s.id}>
-        <a href={`#${s.id}`} onClick={naar(s.id)}>
+        <a href={`#${s.id}`} onClick={naar(s.id)} title={s.regel}>
+          <Mini nr={s.nr} />
           <span className="st-nr">{s.nr}</span>
           <b>{s.titel}</b>
-          <span>{s.regel}</span>
         </a>
       </li>)}
     </ol>
