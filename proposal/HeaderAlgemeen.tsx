@@ -104,7 +104,8 @@ export function AtomiumFoto() {
   const [mobiel, zetMobiel] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width:700px)").matches);
   useEffect(() => {
     // /#black-friday: de pagina wordt pas na de hash opgebouwd, dus zelf naar de video scrollen.
-    if (window.location.hash === "#black-friday") window.setTimeout(() => document.getElementById("black-friday")?.scrollIntoView({ block: "start" }), 300);
+    // De router zet de scroll na het laden terug naar boven, dus twee keer proberen.
+    if (window.location.hash === "#black-friday") for (const ms of [400, 1200]) window.setTimeout(() => document.getElementById("black-friday")?.scrollIntoView({ block: "start" }), ms);
     const m = window.matchMedia("(max-width:700px)");
     const bij = () => zetMobiel(m.matches);
     m.addEventListener("change", bij);
