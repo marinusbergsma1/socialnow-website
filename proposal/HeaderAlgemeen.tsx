@@ -100,17 +100,23 @@ export function AtomiumFoto() {
   const [vers, zetVers] = useState(false);   // net geklikt: hover vult pas weer na eerst weggaan
   const { language } = useLanguage();
   const deal = useRef<HTMLVideoElement>(null);
-  const [modus, zetModus] = useState<Modus>(() => typeof window !== "undefined" && window.location.hash === "#black-friday" ? "deal" : "explainer");
+  const [modus, zetModus] = useState<Modus>("explainer");
   const [dealGestart, zetDealGestart] = useState(false);
   const [mobiel, zetMobiel] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width:700px)").matches);
   useEffect(() => {
-    // /#black-friday: de pagina wordt pas na de hash opgebouwd, dus zelf naar de video scrollen.
-    // De router zet de scroll na het laden terug naar boven, dus twee keer proberen.
-    if (window.location.hash === "#black-friday") for (const ms of [400, 1200]) window.setTimeout(() => document.getElementById("black-friday")?.scrollIntoView({ block: "start" }), ms);
+    // /#black-friday: na het laden (de prerender toont eerst de explainer) en bij een hashwissel op dezelfde pagina de deal kiezen
+    // en naar de video scrollen. De router zet de scroll na het laden terug naar boven, dus twee keer proberen.
+    const naarDeal = () => {
+      if (window.location.hash !== "#black-friday") return;
+      zetModus("deal");
+      for (const ms of [400, 1200]) window.setTimeout(() => document.getElementById("black-friday")?.scrollIntoView({ block: "start" }), ms);
+    };
+    naarDeal();
+    window.addEventListener("hashchange", naarDeal);
     const m = window.matchMedia("(max-width:700px)");
     const bij = () => zetMobiel(m.matches);
     m.addEventListener("change", bij);
-    return () => m.removeEventListener("change", bij);
+    return () => { m.removeEventListener("change", bij); window.removeEventListener("hashchange", naarDeal); };
   }, []);
   const dealFilm = mobiel ? DEAL_FILM_9X16 || DEAL_FILM_5X4 : DEAL_FILM_5X4 || DEAL_FILM_9X16;
   const kies = (nieuw: Modus) => {
