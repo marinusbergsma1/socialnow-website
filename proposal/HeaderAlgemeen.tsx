@@ -5,6 +5,7 @@ import { boekingsPlannerUrl } from "./PlanCall";
 import { CRAFTURE, DIRECT, VIA_CRAFTURE, merk } from "./ExplainerPlayer";
 import "./header-algemeen.css";
 import Diepte3D from "./Diepte3D";
+import { languagePrefix, useLanguage } from "./i18n/context";
 
 // Homepage-header, 4 november 2026. MARINUS: "Verder moet de focus bij de header niet liggen op connect en os." en
 // "Meer gewoon mooi algemeen houden en duidelijk Odoo en andere ERP hulp."
@@ -43,6 +44,17 @@ const FILM_POSTER = "/video/explainer/socialnow-explainer-5x4-thumb.jpg";
 // (anker op de diepte van de muur), microfoon en hand niet verder naar voren dan het lichaam, zachte randen, en een kwart van de
 // toenmalige sterkte.
 const FILM_DIEPTE = "/video/explainer/socialnow-explainer-5x4-thumb-diepte.webp";
+
+// 26 november 2026 (Black Friday campagne, 07_MARKETING/BLACK-FRIDAY-20261126/BRIEF.md): boven de video een switch Explainer |
+// Black Friday Deal. De deal speelt de nieuwe film: 4:5 op desktop, 9:16 op mobiel, met de thumbnail als startbeeld. Zolang de film er
+// nog niet is (leeg pad), staat er een placeholder met de dealkop en de knop naar /gratis-website. Zodra sessie 4 en 5 de film
+// opleveren: zet de bestanden in public/video/black-friday/ en vul de drie paden hieronder in. Een link naar /#black-friday opent
+// direct de deal (voor ads en mails).
+const DEAL_FILM_4X5 = "";   // "/video/black-friday/socialnow-black-friday-4x5.mp4"
+const DEAL_FILM_9X16 = "";  // "/video/black-friday/socialnow-black-friday-9x16.mp4"
+const DEAL_POSTER = "";     // "/video/black-friday/socialnow-black-friday-thumb.jpg"
+const DEAL_PAD = "/gratis-website";
+type Modus = "explainer" | "deal";
 
 // 4 november 2026 (Marinus): "die technische data en huidige landingspagina mag naar producten gaan dan is dit meer enthousiasmering
 // en rest inhoudelijk en technisch." Deze header opent sindsdien /producten; label en kop zijn daar eigen, zodat de homepage
@@ -85,6 +97,26 @@ export function AtomiumFoto() {
   const [speelt, zetSpeelt] = useState(false);
   const [gestart, zetGestart] = useState(false);
   const [vers, zetVers] = useState(false);   // net geklikt: hover vult pas weer na eerst weggaan
+  const { language } = useLanguage();
+  const deal = useRef<HTMLVideoElement>(null);
+  const [modus, zetModus] = useState<Modus>(() => typeof window !== "undefined" && window.location.hash === "#black-friday" ? "deal" : "explainer");
+  const [dealGestart, zetDealGestart] = useState(false);
+  const [mobiel, zetMobiel] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width:700px)").matches);
+  useEffect(() => {
+    const m = window.matchMedia("(max-width:700px)");
+    const bij = () => zetMobiel(m.matches);
+    m.addEventListener("change", bij);
+    return () => m.removeEventListener("change", bij);
+  }, []);
+  const dealFilm = mobiel ? DEAL_FILM_9X16 || DEAL_FILM_4X5 : DEAL_FILM_4X5 || DEAL_FILM_9X16;
+  const kies = (nieuw: Modus) => {
+    if (nieuw === modus) return;
+    film.current?.pause();
+    deal.current?.pause();
+    zetSpeelt(false);
+    zetVers(false);
+    zetModus(nieuw);
+  };
 
   useEffect(() => {
     if (!draait || filmAan || DIAS.length < 2) return;
@@ -106,7 +138,21 @@ export function AtomiumFoto() {
     if (film.current) film.current.currentTime = 0;
   };
 
+  const dealWissel = () => {
+    const v = deal.current;
+    if (!v) return;
+    if (v.paused) void v.play().catch(() => {}); else v.pause();
+  };
+  const naCall = modus === "deal" ? dealGestart || !dealFilm : gestart;
   const knop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (modus === "deal") {
+      if (dealGestart || !dealFilm) return;   // zonder film, of na de start: gewoon naar de deal
+      e.preventDefault();
+      zetDealGestart(true);
+      zetVers(true);
+      void deal.current?.play().catch(() => {});
+      return;
+    }
     if (gestart) return;          // tweede klik: naar Call inplannen met Marinus (Marinus 25 nov: "doorlinken naar Call inplannen met mij")
     e.preventDefault();
     zetGestart(true);
@@ -115,8 +161,12 @@ export function AtomiumFoto() {
   };
 
   return (
-    <div className="sn-alg-filmblok" data-speelt={speelt}>
-    <figure className="sn-alg-foto is-vijfvier" id="explainer" data-draait={draait && !filmAan} data-film={filmAan}>
+    <div className="sn-alg-filmblok" id="black-friday" data-speelt={speelt}>
+    <div className="sn-alg-switch" role="group" aria-label="Kies een video">
+      <button type="button" aria-pressed={modus === "explainer"} onClick={() => kies("explainer")}>Explainer</button>
+      <button type="button" aria-pressed={modus === "deal"} onClick={() => kies("deal")}>Black Friday Deal</button>
+    </div>
+    <figure className="sn-alg-foto is-vijfvier" id="explainer" data-draait={draait && !filmAan && modus === "explainer"} data-film={filmAan} data-modus={modus} data-dealfilm={!!dealFilm}>
       {DIAS.map(({ bestand, alt }, index) => {
         const basis = `/images/verhaal/${bestand}`;
         return <div key={bestand} className={bestand === "beurs-marinus" ? "sn-alg-dia is-gesprek" : "sn-alg-dia"} data-actief={foto === index && !filmAan} aria-hidden={foto !== index || filmAan}>
@@ -124,7 +174,7 @@ export function AtomiumFoto() {
           <Diepte3D src={`${basis}.webp`} diepte={`${basis}-diepte.webp`} actief={foto === index && !filmAan} />
         </div>;
       })}
-      {!filmAan && (
+      {!filmAan && modus === "explainer" && (
         <figcaption>
           <span className="sn-alg-klein">Odoo Experience 2026 · Brussel</span>
           <strong>Ons team<span className="sn-alg-punt">.</span></strong>
@@ -138,14 +188,26 @@ export function AtomiumFoto() {
         <Diepte3D src={FILM_POSTER} diepte={FILM_DIEPTE} positie={[0.5, 0.45]} actief={!speelt && !gestart} sterkte={0.014} anker={0.06} />
       </div>}
       {filmAan && <span className="sn-alg-filmwaas" data-weg={speelt || gestart || undefined} aria-hidden="true" />}
+      {modus === "deal" && (dealFilm
+        ? <video ref={deal} key={dealFilm} className="sn-alg-dealfilm" src={dealFilm} poster={DEAL_POSTER || undefined} playsInline preload="metadata"
+            aria-label="Black Friday Deal: dit is de deal" onClick={dealWissel} onPlay={() => zetSpeelt(true)} onPause={() => zetSpeelt(false)}
+            onEnded={() => { zetSpeelt(false); if (deal.current) deal.current.currentTime = 0; }} />
+        : <div className="sn-alg-deal-wacht">
+            <p className="sn-alg-label"><i />Black Friday Deal</p>
+            <strong>Je nieuwe website, gratis gemaakt<span className="sn-alg-punt">.</span></strong>
+            <span>De Black Friday-film komt eraan. Claim de deal alvast hieronder.</span>
+          </div>)}
     </figure>
     {/* 25 november 2026, avond (Marinus): de pil zoals Website-actie, maar wit. Hover vult wit; na de klik trekt het wit terug en
         veegt groen van rechts naar links erover, en Speel video af wordt Neem contact op. */}
-    <a className="sn-alg-filmknop" href={boekingsPlannerUrl} onClick={knop} onMouseLeave={() => zetVers(false)} data-stand={gestart ? "call" : "video"} data-vers={vers || undefined}
-      aria-label={gestart ? "Neem contact op" : "Speel video af"}>
+    {/* 26 november 2026 (Black Friday): in de dealstand speelt de knop de dealfilm en wordt daarna Claim de Black Friday Deal
+        (naar /gratis-website); zonder film staat hij meteen op Claim. */}
+    <a className="sn-alg-filmknop" href={modus === "deal" ? `${languagePrefix(language)}${DEAL_PAD}` : boekingsPlannerUrl} onClick={knop} onMouseLeave={() => zetVers(false)}
+      data-stand={naCall ? "call" : "video"} data-vers={vers || undefined} data-modus={modus}
+      aria-label={modus === "deal" ? (naCall ? "Claim de Black Friday Deal" : "Bekijk de Black Friday-film") : (naCall ? "Neem contact op" : "Speel video af")}>
       <span className="tekst" aria-hidden="true">
-        <span className="lb lb-video">Speel video af</span>
-        <span className="lb lb-call">Neem contact op</span>
+        <span className="lb lb-video">{modus === "deal" ? "Bekijk de Black Friday-film" : "Speel video af"}</span>
+        <span className="lb lb-call">{modus === "deal" ? "Claim de Black Friday Deal" : "Neem contact op"}</span>
       </span>
       <span className="rond" aria-hidden="true"><Play size={16} className="ic ic-video" /><ArrowUpRight size={18} className="ic ic-call" /></span>
     </a>

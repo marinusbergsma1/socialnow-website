@@ -103,7 +103,7 @@ export default function GratisWebsite() {
     <section className="sn-alg gw2-kop" aria-labelledby="gw2-kop">
       <div className="sn-alg-wrap">
         <div className="sn-alg-tekst">
-          <p className="sn-alg-label"><i />Website-actie</p>
+          <p className="sn-alg-label"><i />Black Friday Deal</p>
           <h1 id="gw2-kop">Wij maken jouw website, gratis<span className="sn-alg-punt">.</span></h1>
           {/* 4 november 2026 (avond, Marinus): "Vraag een veiligheidsrapport aan of krijg een gratis demo van een moderne website op maat." */}
           <p className="sn-alg-uitleg"><strong>Een goede website is ook een veilige website.</strong> Vraag een veiligheidsrapport aan of krijg een gratis demo van een moderne website op maat.</p>

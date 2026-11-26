@@ -24,11 +24,11 @@ export function WebsiteCTA({ tweede = false }: { tweede?: boolean }) {
   // focus meer op Gratis veiligheidupdates en websitedemo". Twee echte, live klantwebsites als tegels (geen concepten, geen kWh).
   return <section className={`sn-cta-web h-wrap${tweede ? " is-tweede" : ""}`} aria-label="Gratis veiligheidsupdates en websitedemo">
     <div>
-      <p className="sn-cta-web-label"><i />Website-actie</p>
+      <p className="sn-cta-web-label"><i />Black Friday Deal</p>
       <h2>Gratis veiligheidsupdates en websitedemo<span className="sn-alg-punt">.</span></h2>
       <p className="sn-cta-web-tekst">Wij houden je website veilig met gratis veiligheidsupdates en maken een demo van je nieuwe website op maat. Zes korte vragen, zonder verplichting.</p>
     </div>
-    <Link className="sn-pill" to={naar}><span>Vraag je gratis website aan</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
+    <Link className="sn-pill" to={naar}><span>Claim de Black Friday Deal</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
     <span className="sn-cta-web-beeld" aria-hidden="true">
       <img className="is-een" src="/images/cases/vastiq-desktop.webp" alt="" loading="lazy" decoding="async" />
       <img className="is-twee" src="/images/cases/ilgordo-desktop.webp" alt="" loading="lazy" decoding="async" />
@@ -49,7 +49,8 @@ export default function HomeEnthousiast() {
           <p className="sn-alg-uitleg"><strong>Wij helpen je met management en operations.</strong> Doelgerichte totaaloplossingen, met experts en AI. Veilig, lokaal en in eigen beheer.</p>
           <div className="sn-alg-acties">
             {/* 4 november 2026 (avond, Marinus): "2e knop hier graag blauw maken ook en eerste knop mag zijn website actie". */}
-            <Link className="sn-pill" to="/gratis-website"><span>Website-actie</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
+            {/* 26 november 2026 (Black Friday campagne): de Website-actie heet nu Black Friday Deal. */}
+            <Link className="sn-pill" to="/gratis-website"><span>Black Friday Deal</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
             <a className="sn-pill sn-pill-blauw" href={boekingsPlannerUrl}><span>Neem contact op</span><ArrowUpRight size={17} aria-hidden="true" /></a>
           </div>
           {/* 4 november 2026 (Marinus, bij de lege ruimte onder de knoppen): "Hier moeten weer de shopify logo's etc komen." */}
