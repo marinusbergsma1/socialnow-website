@@ -55,8 +55,9 @@ const DEAL_FILM_5X4: string = "/video/black-friday/socialnow-black-friday-5x4-nl
 const DEAL_FILM_9X16: string = "";  // "/video/black-friday/socialnow-black-friday-9x16.mp4"
 const DEAL_POSTER = "/video/black-friday/socialnow-black-friday-5x4-nl-thumb.jpg";
 // 27 november 2026 (Marinus): "Graag de thumbnail video gebruiken die ik heb gestuurd. Kies hier een mooi stukje uit en maak er een loop
-// van." Uit IMG_1671 (SDR-versie) 0,1-1,6 s: hij kijkt in de camera en wijst naar beneden, naar de knop. Vooruit en terug = naadloze
-// loop van 3 s, 5:4, zonder geluid, 1 MB. Speelt stil als startbeeld tot iemand de film start; bij reduced motion alleen de stilstaande foto.
+// van." Daarna: "Vanaf 19 tot 22 en even color graden nog" en "misschien gwn opnieuw laten afspelen in een loop". Dus IMG_1671 (SDR-versie)
+// 19-22 s, gegraded met de SocialNow-rooftop-LUT, gewoon vooruit in een loop: 3 s, 5:4, zonder geluid, 1,1 MB. Speelt stil als startbeeld
+// tot iemand de film start; bij reduced motion alleen de stilstaande foto.
 const DEAL_LOOP = "/video/black-friday/socialnow-black-friday-loop.mp4";
 const DEAL_LOOP_POSTER = "/video/black-friday/socialnow-black-friday-loop-poster.jpg";
 const DEAL_PAD = "/gratis-website";
