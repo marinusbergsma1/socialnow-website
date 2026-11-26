@@ -103,6 +103,8 @@ export function AtomiumFoto() {
   const [dealGestart, zetDealGestart] = useState(false);
   const [mobiel, zetMobiel] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width:700px)").matches);
   useEffect(() => {
+    // /#black-friday: de pagina wordt pas na de hash opgebouwd, dus zelf naar de video scrollen.
+    if (window.location.hash === "#black-friday") window.setTimeout(() => document.getElementById("black-friday")?.scrollIntoView({ block: "start" }), 300);
     const m = window.matchMedia("(max-width:700px)");
     const bij = () => zetMobiel(m.matches);
     m.addEventListener("change", bij);
