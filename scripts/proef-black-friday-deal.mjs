@@ -30,6 +30,11 @@ eis(/\.sn-alg-switch\{/.test(css) && /\.sn-alg-foto\[data-modus="deal"\]/.test(c
 eis(!/letter-spacing:\s*-/.test(css), "geen negatieve letterafstand");
 eis(!/€/.test(kop) && !/€/.test(lees("../../../../../07_MARKETING/BLACK-FRIDAY-20261126/copy/DEAL-EN-PITCH.md")), "geen prijzen in de deal");
 
+// 27 nov (Marinus): "Graag de thumbnail video gebruiken die ik heb gestuurd. Kies hier een mooi stukje uit en maak er een loop van."
+const LOOP_BF = "public/video/black-friday/socialnow-black-friday-loop.mp4";
+eis(/const DEAL_LOOP = "\/video\/black-friday\/socialnow-black-friday-loop\.mp4"/.test(kop) && fs.existsSync(LOOP_BF) && fs.statSync(LOOP_BF).size < 2_000_000, "bewegend startbeeld: loop uit de gestuurde video, kleiner dan 2 MB");
+eis(/className="sn-alg-dealloop"[^>]*muted loop playsInline/.test(kop) && /!dealGestart && <video className="sn-alg-dealloop"/.test(kop), "loop speelt stil en verdwijnt zodra de film start");
+eis(/className="sn-alg-dealloop" src=\{draait \? DEAL_LOOP : undefined\}/.test(kop), "bij reduced motion geen bewegend startbeeld");
 const NIEUW = ["Black Friday Deal", "Kies een video", "Explainer", "Bekijk de Black Friday-film", "Claim de Black Friday Deal",
   "Je nieuwe website, gratis gemaakt", "De Black Friday-film komt eraan. Claim de deal alvast hieronder.", "Black Friday Deal: dit is de deal"];
 for (const taal of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {

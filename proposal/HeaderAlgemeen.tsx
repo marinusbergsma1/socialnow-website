@@ -54,6 +54,11 @@ const FILM_DIEPTE = "/video/explainer/socialnow-explainer-5x4-thumb-diepte.webp"
 const DEAL_FILM_5X4: string = "/video/black-friday/socialnow-black-friday-5x4-nl.mp4";
 const DEAL_FILM_9X16: string = "";  // "/video/black-friday/socialnow-black-friday-9x16.mp4"
 const DEAL_POSTER = "/video/black-friday/socialnow-black-friday-5x4-nl-thumb.jpg";
+// 27 november 2026 (Marinus): "Graag de thumbnail video gebruiken die ik heb gestuurd. Kies hier een mooi stukje uit en maak er een loop
+// van." Uit IMG_1671 (SDR-versie) 0,1-1,6 s: hij kijkt in de camera en wijst naar beneden, naar de knop. Vooruit en terug = naadloze
+// loop van 3 s, 5:4, zonder geluid, 1 MB. Speelt stil als startbeeld tot iemand de film start; bij reduced motion alleen de stilstaande foto.
+const DEAL_LOOP = "/video/black-friday/socialnow-black-friday-loop.mp4";
+const DEAL_LOOP_POSTER = "/video/black-friday/socialnow-black-friday-loop-poster.jpg";
 const DEAL_PAD = "/gratis-website";
 type Modus = "explainer" | "deal";
 
@@ -154,13 +159,12 @@ export function AtomiumFoto() {
     if (v.paused) void v.play().catch(() => {}); else v.pause();
   };
   const naCall = modus === "deal" ? dealGestart || !dealFilm : gestart;
+  const startDeal = () => { zetDealGestart(true); zetVers(true); void deal.current?.play().catch(() => {}); };
   const knop = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (modus === "deal") {
       if (dealGestart || !dealFilm) return;   // zonder film, of na de start: gewoon naar de deal
       e.preventDefault();
-      zetDealGestart(true);
-      zetVers(true);
-      void deal.current?.play().catch(() => {});
+      startDeal();
       return;
     }
     if (gestart) return;          // tweede klik: naar Call inplannen met Marinus (Marinus 25 nov: "doorlinken naar Call inplannen met mij")
@@ -198,6 +202,8 @@ export function AtomiumFoto() {
         <Diepte3D src={FILM_POSTER} diepte={FILM_DIEPTE} positie={[0.5, 0.45]} actief={!speelt && !gestart} sterkte={0.014} anker={0.06} />
       </div>}
       {filmAan && <span className="sn-alg-filmwaas" data-weg={speelt || gestart || undefined} aria-hidden="true" />}
+      {modus === "deal" && dealFilm && !dealGestart && <video className="sn-alg-dealloop" src={draait ? DEAL_LOOP : undefined} poster={DEAL_LOOP_POSTER}
+        autoPlay={draait} muted loop playsInline preload={draait ? "auto" : "none"} aria-hidden="true" onClick={startDeal} />}
       {modus === "deal" && (dealFilm
         ? <video ref={deal} key={dealFilm} className="sn-alg-dealfilm" src={dealFilm} poster={DEAL_POSTER || undefined} playsInline preload="metadata"
             aria-label="Black Friday Deal: dit is de deal" onClick={dealWissel} onPlay={() => zetSpeelt(true)} onPause={() => zetSpeelt(false)}
