@@ -16,7 +16,13 @@ eis(!/<i \/>Website-actie</.test(gratis) && /<i \/>Black Friday Deal</.test(grat
 eis(!/5 JAAR/.test(team), "geen 5 JAAR SOCIALNOW-actie meer in de oude teamcode");
 eis(/role="group"[^>]*aria-label="Kies een video"/.test(kop) && /aria-pressed=\{modus === "explainer"\}/.test(kop) && /aria-pressed=\{modus === "deal"\}/.test(kop), "switch Explainer | Black Friday Deal boven de video");
 eis(/<\/?div className="sn-alg-switch"[\s\S]{0,1200}<figure/.test(kop), "switch staat boven het videokader");
-eis(/DEAL_FILM_4X5/.test(kop) && /DEAL_FILM_9X16/.test(kop) && /DEAL_POSTER/.test(kop), "deal heeft een 4:5-film, een 9:16-film en een poster");
+eis(/DEAL_FILM_5X4/.test(kop) && /DEAL_FILM_9X16/.test(kop) && /DEAL_POSTER/.test(kop), "deal heeft een 5:4-film, een plek voor 9:16 en een poster");
+// 27 nov: de goedgekeurde NL-film (5:4) staat erin, webversie met faststart, poster klein.
+const FILM_BF = "public/video/black-friday/socialnow-black-friday-5x4-nl.mp4", POSTER_BF = "public/video/black-friday/socialnow-black-friday-5x4-nl-thumb.jpg";
+eis(/const DEAL_FILM_5X4(?:: string)? = "\/video\/black-friday\/socialnow-black-friday-5x4-nl\.mp4"/.test(kop) && fs.existsSync(FILM_BF) && fs.statSync(FILM_BF).size < 12_000_000, "dealfilm NL 5:4 staat in public/ en is kleiner dan 12 MB");
+eis(fs.existsSync(FILM_BF) && fs.readFileSync(FILM_BF).subarray(0, 64).includes("moov"), "dealfilm heeft faststart (moov vooraan)");
+eis(/const DEAL_POSTER = "\/video\/black-friday\/socialnow-black-friday-5x4-nl-thumb\.jpg"/.test(kop) && fs.existsSync(POSTER_BF) && fs.statSync(POSTER_BF).size < 250_000, "poster staat in public/ en is kleiner dan 250 KB");
+eis(/\[data-staand="true"\]\{aspect-ratio:9\/16\}/.test(css) && !/\[data-dealfilm="true"\]\{aspect-ratio:9\/16\}/.test(css), "een liggende film krijgt op mobiel geen 9:16-kader");
 eis(/max-width:700px/.test(kop) && /DEAL_FILM_9X16/.test(kop), "op mobiel speelt de 9:16-versie");
 eis(/sn-alg-deal-wacht/.test(kop) && /sn-alg-deal-wacht/.test(css), "placeholder zolang de Black Friday-film er niet is");
 eis(/#black-friday/.test(kop), "een link naar #black-friday opent direct de deal");

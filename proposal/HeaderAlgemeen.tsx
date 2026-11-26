@@ -46,13 +46,14 @@ const FILM_POSTER = "/video/explainer/socialnow-explainer-5x4-thumb.jpg";
 const FILM_DIEPTE = "/video/explainer/socialnow-explainer-5x4-thumb-diepte.webp";
 
 // 26 november 2026 (Black Friday campagne, 07_MARKETING/BLACK-FRIDAY-20261126/BRIEF.md): boven de video een switch Explainer |
-// Black Friday Deal. De deal speelt de nieuwe film: 4:5 op desktop, 9:16 op mobiel, met de thumbnail als startbeeld. Zolang de film er
-// nog niet is (leeg pad), staat er een placeholder met de dealkop en de knop naar /gratis-website. Zodra sessie 4 en 5 de film
-// opleveren: zet de bestanden in public/video/black-friday/ en vul de drie paden hieronder in. Een link naar /#black-friday opent
-// direct de deal (voor ads en mails).
-const DEAL_FILM_4X5 = "";   // "/video/black-friday/socialnow-black-friday-4x5.mp4"
-const DEAL_FILM_9X16 = "";  // "/video/black-friday/socialnow-black-friday-9x16.mp4"
-const DEAL_POSTER = "";     // "/video/black-friday/socialnow-black-friday-thumb.jpg"
+// Black Friday Deal. Zonder film (leeg pad) staat er een placeholder met de dealkop en de knop naar /gratis-website. Een link naar
+// /#black-friday opent direct de deal; de Black Friday-mail aan leads linkt daarheen (Marinus, 27 nov).
+// 27 november 2026: de goedgekeurde NL-film 90-black-friday-5x4-NL-v4 (1350x1080, 5:4 liggend, 27,6 s), webversie 9 MB met faststart.
+// Hij past precies in het 5:4-kader. Er is nog geen 9:16 en nog geen EN-versie: alle talen tonen nu deze NL-film en mobiel valt
+// terug op de 5:4. Komt er een 9:16, vul DEAL_FILM_9X16 in; dan wordt het mobiele kader 9:16.
+const DEAL_FILM_5X4: string = "/video/black-friday/socialnow-black-friday-5x4-nl.mp4";
+const DEAL_FILM_9X16: string = "";  // "/video/black-friday/socialnow-black-friday-9x16.mp4"
+const DEAL_POSTER = "/video/black-friday/socialnow-black-friday-5x4-nl-thumb.jpg";
 const DEAL_PAD = "/gratis-website";
 type Modus = "explainer" | "deal";
 
@@ -111,7 +112,7 @@ export function AtomiumFoto() {
     m.addEventListener("change", bij);
     return () => m.removeEventListener("change", bij);
   }, []);
-  const dealFilm = mobiel ? DEAL_FILM_9X16 || DEAL_FILM_4X5 : DEAL_FILM_4X5 || DEAL_FILM_9X16;
+  const dealFilm = mobiel ? DEAL_FILM_9X16 || DEAL_FILM_5X4 : DEAL_FILM_5X4 || DEAL_FILM_9X16;
   const kies = (nieuw: Modus) => {
     if (nieuw === modus) return;
     film.current?.pause();
@@ -169,7 +170,7 @@ export function AtomiumFoto() {
       <button type="button" aria-pressed={modus === "explainer"} onClick={() => kies("explainer")}>Explainer</button>
       <button type="button" aria-pressed={modus === "deal"} onClick={() => kies("deal")}>Black Friday Deal</button>
     </div>
-    <figure className="sn-alg-foto is-vijfvier" id="explainer" data-draait={draait && !filmAan && modus === "explainer"} data-film={filmAan} data-modus={modus} data-dealfilm={!!dealFilm}>
+    <figure className="sn-alg-foto is-vijfvier" id="explainer" data-draait={draait && !filmAan && modus === "explainer"} data-film={filmAan} data-modus={modus} data-dealfilm={!!dealFilm} data-staand={!!dealFilm && dealFilm === DEAL_FILM_9X16}>
       {DIAS.map(({ bestand, alt }, index) => {
         const basis = `/images/verhaal/${bestand}`;
         return <div key={bestand} className={bestand === "beurs-marinus" ? "sn-alg-dia is-gesprek" : "sn-alg-dia"} data-actief={foto === index && !filmAan} aria-hidden={foto !== index || filmAan}>

@@ -151,7 +151,7 @@ html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px
 @media(prefers-reduced-motion:reduce){.sn-alg-filmknop,.sn-alg-filmknop::before,.sn-alg-filmknop::after,.sn-alg-filmknop .lb,.sn-alg-filmknop .ic{transition:none}.sn-alg-filmknop[data-stand="call"]::after{animation:none}}
 
 /* 26 november 2026 (Black Friday campagne): switch Explainer | Black Friday Deal boven de video. Zwart, actieve kant met groen
-   randje, geen sale-stickers. Desktop: het kader blijft 5:4 en de 4:5-film staat er passend in op zwart. Mobiel: het kader wordt 9:16. */
+   randje, geen sale-stickers. Het kader blijft 5:4; de 5:4-film vult het precies. Alleen een echte 9:16-film maakt het mobiele kader 9:16. */
 .sn-alg-filmblok{scroll-margin-top:105px}
 .sn-alg-switch{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border:1px solid var(--a-lijn);border-radius:14px;background:#050706}
 .sn-alg-switch button{min-height:44px;border:0;border-radius:10px;background:transparent;color:#ffffffa6;font:inherit;font-size:15px;font-weight:700;letter-spacing:0;cursor:pointer;transition:background .25s ease,color .25s ease,box-shadow .25s ease}
@@ -167,5 +167,5 @@ html:root .sn-site .sn-alg .sn-alg-deal-wacht strong{font-family:'TT Norms',sans
 .sn-alg-deal-wacht>span{color:#ffffffb3;font-size:15px;line-height:1.45;max-width:36ch}
 .sn-alg-deal-wacht .sn-alg-label{margin:0}
 .sn-alg-filmknop[data-modus="deal"],.sn-alg-filmknop[data-modus="deal"][data-stand="call"]{width:300px}
-@media(max-width:700px){.sn-alg-foto.is-vijfvier[data-modus="deal"][data-dealfilm="true"]{aspect-ratio:9/16}}
+@media(max-width:700px){.sn-alg-foto.is-vijfvier[data-modus="deal"][data-staand="true"]{aspect-ratio:9/16}}
 @media(prefers-reduced-motion:reduce){.sn-alg-switch button{transition:none}}
