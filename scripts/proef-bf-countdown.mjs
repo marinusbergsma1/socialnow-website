@@ -88,7 +88,7 @@ const he = lees("proposal/HomeEnthousiast.tsx"), hcss = lees("proposal/header-al
 eis(fs.existsSync("public/images/growth-package-deal.webp"), "sticker Growth Package Deal staat in public/images");
 eis(/<div className="sn-alg-tekst">\s*<GrowthDealSticker \/>/.test(gw), "sticker linksboven in de kop van /gratis-website");
 eis(/<GrowthDealSticker naar="\/black-friday" \/>\s*<p className="sn-alg-label">/.test(he), "sticker linksboven op de homepage, linkt naar de deal");
-eis(/\.sn-gpd\{[^}]*width:clamp\(190px,24vw,340px\)/.test(hcss), "sticker groot (tot 340 px)");
+eis(/\.sn-gpd\{position:absolute[^}]*right:[^}]*rotate\(9deg\)/.test(hcss), "sticker los rechtsboven de kop, schuin als sticker");
 // 27 nov (Marinus): "zelfde soort effect als bij de titel zelf met het selecteren etc en misschien als sectie kaart over de onboarding laten
 // schuiven als je verder scrollt. En teksten ook infaden."
 const kopSrc = lees("proposal/BlackFridayKop.tsx");
@@ -104,7 +104,7 @@ eis(/aria-hidden="true"><b>FREE<\/b> <b>FREE<\/b> <b>FREE<\/b>/.test(kg), "FREE 
 eis(/prefers-reduced-motion:reduce\)\{\.gw2-held-vak :is\(h1,h2\)\{animation:none!important/.test(css), "geen glitch bij reduced motion");
 // 27 nov (Marinus): "Kan je de https://socialnow.nl/nl/gratis-website BLACK-FRIDAY maken?"
 const wp = lees("proposal/WebsiteProposal.tsx"), pb = lees("scripts/postbuild.mjs");
-eis(/<Route path="\/black-friday" element=\{<GratisWebsite \/>\} \/>/.test(wp) && /<Route path="\/gratis-website"/.test(wp), "pagina op /black-friday, /gratis-website blijft werken");
+eis(/<Route path="\/black-friday" element=\{<GratisWebsite \/>\} \/>/.test(wp) && /<Route path="\/gratis-website" element=\{<NaarBlackFriday \/>\} \/>/.test(wp) && /Navigate to=\{`\/black-friday\$\{search\}/.test(wp), "/black-friday is het echte adres, /gratis-website gaat erheen (met ?ref)");
 eis(/'black-friday': \{title: 'BLACK FRIDAY DEAL/.test(pb), "/black-friday wordt voorgerenderd met titel en meta");
 eis(/WEBSITE_ACTIE_PAD = "\/black-friday"/.test(lees("proposal/Producten.tsx")) && /DEAL_PAD = "\/black-friday"/.test(lees("proposal/HeaderAlgemeen.tsx")) && !/"\/gratis-website"/.test(lees("proposal/HomeEnthousiast.tsx")), "menu, switch en homepage linken naar /black-friday");
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");

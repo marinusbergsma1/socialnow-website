@@ -76,6 +76,13 @@ function NaarSecurity() {
   return <Navigate to={`/security${search}${hash}`} replace />;
 }
 
+// 27 nov (Marinus): "socialnow.nl/BLACK-FRIDAY. Dit moet m nu zijn. Moet écht de titel zijn ook niet alleen verwijzen." /black-friday is het
+// echte adres; /gratis-website (oude mails, deellinks met ?ref=) gaat erheen, met zoekdeel en anker.
+function NaarBlackFriday() {
+  const { search, hash } = useLocation();
+  return <Navigate to={`/black-friday${search}${hash}`} replace />;
+}
+
 const nav = NAV_LINKS;
 // Pagina's buiten het menu houden hun eigen titel, ook als je ze rechtstreeks opent.
 const paginaTitels: Record<string, string> = {
@@ -314,7 +321,7 @@ function ProposalShell() {
           {/* 28 september 2026 (Marinus): investeerders doen een aanvraag naar invest@. /investors is een alias. */}
           <Route path="/investeerders" element={<InvesteerdersPage />} />
           <Route path="/investors" element={<Navigate to="/investeerders" replace />} />
-          <Route path="/gratis-website" element={<GratisWebsite />} />
+          <Route path="/gratis-website" element={<NaarBlackFriday />} />
           {/* 27 nov (Marinus): de Black Friday-pagina ook als /black-friday; /gratis-website blijft werken (mails en deellinks). */}
           <Route path="/black-friday" element={<GratisWebsite />} />
           <Route path="/gratis-os-demo" element={<GratisOsDemo />} />
