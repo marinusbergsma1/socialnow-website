@@ -164,7 +164,7 @@ export default function GratisWebsite() {
       </div>
     </section>
     <div className="gw2" id="onboarding"><div className="gw2-vel" ref={vel}>
-    <div className="gw2-voortgang" aria-hidden="true">{STAPPEN.map((_, i) => <span key={i} className={i <= stap ? "aan" : ""} />)}</div>
+    <div className="gw2-voortgang" aria-hidden="true"><span style={{ width: `${((stap + 1) / STAPPEN.length) * 100}%` }} /></div>
 
     <form className="gw2-kaart" onSubmit={verder} noValidate>
       <p className="gw2-stap">Vraag {stap + 1} van {STAPPEN.length}</p>

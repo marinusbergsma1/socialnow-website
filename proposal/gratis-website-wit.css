@@ -20,9 +20,8 @@ html:root .sn-site .gw2-steef strong{font-size:14px}
 html:root .sn-site .gw2-steef small{font-size:12.5px;color:#55616c}
 .gw2-steef svg{color:#1a9c4b}
 
-.gw2-voortgang{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:36px 0 14px}
-.gw2-voortgang span{height:4px;border-radius:4px;background:#e6ebef;transition:background .3s}
-.gw2-voortgang span.aan{background:#25d366}
+.gw2-voortgang{height:4px;border-radius:4px;background:#e6ebef;overflow:hidden;margin:36px 0 14px}
+.gw2-voortgang span{display:block;height:100%;border-radius:4px;background:#25d366;transition:width .4s ease}
 .gw2-kaart{padding:clamp(22px,4vw,36px);border:1px solid #e3e8ec;border-radius:20px;background:#fff;box-shadow:0 18px 50px #0b0f120f}
 html:root .sn-site .gw2 .gw2-stap{margin:0;font-family:var(--v-mono,ui-monospace,Menlo,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#1a9c4b}
 html:root .sn-site .gw2 .gw2-kaart h2{margin:8px 0 18px;font-size:clamp(24px,3vw,30px)!important;font-weight:700;line-height:1.15;letter-spacing:0!important;color:#0b0f12;text-align:left}
@@ -252,3 +251,16 @@ html:root .sn-site .gw2-held-knoppen .gw2-klein-link{color:#fff;text-decoration:
 @keyframes gw2-spraak-puls{70%{box-shadow:0 0 0 10px #e5397a00}0%{box-shadow:0 0 0 0 #e5397a88}}
 html:root .sn-site .gw2 .gw2-spraak-tip{margin:6px 0 0;font-size:12.5px;color:#7a858f}
 @media(prefers-reduced-motion:reduce){.gw2-spraak[aria-pressed="true"]{animation:none}}
+/* 27 nov (Marinus): "Hier liever deze row." De portfoliorijen van de homepage, passend in de kolom onder de film. */
+.gw2-bf-rails{width:100%;max-width:100%;overflow:hidden;contain:layout paint;padding:0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.gw2-bf-rails .h-media-rail{width:100%}
+.gw2-bf-rails .h-media-card{flex-basis:300px;width:300px;height:190px;border-radius:14px}
+.gw2-bf-rails .h-rail-controls{display:none}
+.gw2-bf-rails .h-media-rail + .h-media-rail{margin-top:10px}
+@media(max-width:700px){.gw2-bf-rails .h-media-card{flex-basis:220px;width:220px;height:140px}}
+/* 27 nov (Marinus, met pijl): sticker naar de lege plek rechts boven de kop. */
+/* 27 nov (Marinus, met pijl): "Probeer dit eens." Sticker op de linkerbovenhoek van de film. */
+.gw2-kop .sn-alg-wrap{position:relative;align-items:center}
+.gw2-kop .sn-alg-tekst{position:static;align-self:center}
+.gw2-kop .sn-gpd{position:absolute;z-index:6;margin:0;left:calc(50% - 150px);top:0;bottom:auto;right:auto;width:clamp(160px,18vw,230px);transform:rotate(-8deg)}
+@media(max-width:700px){.gw2-kop .sn-gpd{position:relative;left:auto;top:auto;width:150px;margin:0 0 12px;transform:rotate(6deg)}}

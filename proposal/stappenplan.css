@@ -120,6 +120,12 @@ html:root .sn-site .st-mini *{transform-box:fill-box}
   html:root .sn-site .st-mini-crm .st-r2{animation-delay:.6s}
   html:root .sn-site .st-mini-crm .st-r3{animation-delay:.9s}
   /* 04 losse blokken komen samen */
+  html:root .sn-site .st-mini-groei .st-a-staaf{transform-origin:center bottom;animation:st-staaf 4.8s cubic-bezier(.16,1,.3,1) infinite}
+  html:root .sn-site .st-mini-groei .st-s1{animation-delay:.2s}
+  html:root .sn-site .st-mini-groei .st-s2{animation-delay:.4s}
+  html:root .sn-site .st-mini-groei .st-s3{animation-delay:.6s}
+  html:root .sn-site .st-mini-groei .st-a-lijn{stroke-dasharray:1;animation:st-teken 4.8s ease-in-out infinite;animation-delay:.6s}
+  html:root .sn-site .st-mini-groei .st-a-punt{transform-origin:center;animation:st-punt 4.8s ease-in-out infinite;animation-delay:.6s}
   html:root .sn-site .st-mini-os .st-a-blok{animation:st-samen 4.8s cubic-bezier(.16,1,.3,1) infinite}
   html:root .sn-site .st-mini-os .st-b0{--x:-38px;--y:-14px}
   html:root .sn-site .st-mini-os .st-b1{--x:38px;--y:-14px}
@@ -137,4 +143,5 @@ html:root .sn-site .st-mini *{transform-box:fill-box}
 @keyframes st-samen{0%,10%{transform:translate(var(--x),var(--y));opacity:.35}42%,84%{transform:translate(0,0);opacity:1}100%{transform:translate(var(--x),var(--y));opacity:.35}}
 @keyframes st-kader{0%,30%{opacity:0}46%,84%{opacity:1}100%{opacity:0}}
 @keyframes st-bel{0%,6%{transform:translateY(8px);opacity:0}20%,84%{transform:translateY(0);opacity:1}96%,100%{opacity:0}}
+@keyframes st-staaf{0%,6%{transform:scaleY(0);opacity:0}30%,84%{transform:scaleY(1);opacity:1}96%,100%{transform:scaleY(1);opacity:0}}
 @keyframes st-typen{0%,100%{opacity:.3}50%{opacity:1}}

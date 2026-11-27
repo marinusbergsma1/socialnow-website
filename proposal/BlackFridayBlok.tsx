@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Play } from "lucide-react";
+import { MediaRail, mengen, portfolioImages, klantwerkFilms } from "./MediaSliders";
 
 // 27 november 2026 (Marinus): "Ik wil graag ook hier de contentsliders etc BLACK FRIDAY LOGO met een countdown timer." Einde gekozen door
 // Marinus: 31 december 23:59. Vervangt op /gratis-website de twee websitetegels. Sinds 27 nov (later) staat de film op de plek van de
@@ -51,7 +52,10 @@ export default function BlackFridayBlok() {
       {!speelt && <button type="button" className="gw2-bf-speel" onClick={wissel} aria-label="Speel de Black Friday-film af">
         <Play size={22} aria-hidden="true" /><span>Bekijk de film</span></button>}
     </div>
-    {/* 27 nov (Marinus): "Hier verder 1 row van maken." Content en websites om en om in één rij. */}
-    <Rij beelden={RIJ_WERK.flatMap((b, i) => RIJ_SITES[i] ? [b, RIJ_SITES[i]] : [b]).concat(RIJ_SITES.slice(RIJ_WERK.length))} soort="werk" />
+    {/* 27 nov (Marinus): "Hier liever deze row." De twee portfoliorijen van de homepage (beelden en films om en om). */}
+    <div className="gw2-bf-rails h-image-showcase">
+      {/* 27 nov: "Graag 1 slide en die mag wat sneller gaan." */}
+      <MediaRail items={mengen(portfolioImages, klantwerkFilms)} label="Portfolio" snelheid={45} doorlopen />
+    </div>
   </div>;
 }
