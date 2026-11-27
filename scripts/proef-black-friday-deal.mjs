@@ -45,6 +45,10 @@ eis(/useState<Modus>\("deal"\)/.test(kop), "Black Friday Deal staat standaard op
 eis(/aria-pressed=\{modus === "deal"\}[\s\S]{0,200}aria-pressed=\{modus === "explainer"\}/.test(kop), "Black Friday Deal staat als eerste in de switch");
 // 27 nov (Marinus): "Kunnen deze logo's op de website iets kleiner?" Partnerlogo's van 26 px naar 20 px hoog.
 eis(/\.sn-alg-keur img\{[^}]*height:20px[^}]*max-width:116px/.test(css), "partnerlogo's zijn 20 px hoog (was 26 px)");
+// 27 nov (Marinus koos optie C): compacte pil, links, met een pulserende groene stip bij de deal.
+eis(/\.sn-alg-switch\{[^}]*display:inline-flex[^}]*border-radius:999px/.test(css), "switch is een compacte pil (optie C)");
+eis(/className="sn-alg-stip"[^>]*aria-hidden/.test(kop) && /\.sn-alg-stip\{[^}]*animation:sn-alg-stip/.test(css), "groene live-stip bij Black Friday Deal");
+eis(/prefers-reduced-motion:reduce\)\{.{0,80}\.sn-alg-stip\{animation:none/.test(css), "stip pulseert niet bij reduced motion");
 const NIEUW = ["Black Friday Deal", "Kies een video", "Explainer", "Bekijk de Black Friday-film", "Claim de Black Friday Deal",
   "Je nieuwe website, gratis gemaakt", "De Black Friday-film komt eraan. Claim de deal alvast hieronder.", "Black Friday Deal: dit is de deal"];
 for (const taal of ["en", "de", "fr", "es", "it", "pt", "pl", "sv", "da"]) {

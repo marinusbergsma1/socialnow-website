@@ -153,10 +153,13 @@ html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px
 /* 26 november 2026 (Black Friday campagne): switch Explainer | Black Friday Deal boven de video. Zwart, actieve kant met groen
    randje, geen sale-stickers. Het kader blijft 5:4; de 5:4-film vult het precies. Alleen een echte 9:16-film maakt het mobiele kader 9:16. */
 .sn-alg-filmblok{scroll-margin-top:105px}
-.sn-alg-switch{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border:1px solid var(--a-lijn);border-radius:14px;background:#050706}
-.sn-alg-switch button{min-height:44px;border:0;border-radius:10px;background:transparent;color:#ffffffa6;font:inherit;font-size:15px;font-weight:700;letter-spacing:0;cursor:pointer;transition:background .25s ease,color .25s ease,box-shadow .25s ease}
+/* 27 november 2026 (Marinus koos optie C): compacte pil, links uitgelijnd, groene live-stip bij de deal. */
+.sn-alg-switch{display:inline-flex;align-self:flex-start;gap:4px;padding:4px;border:1px solid var(--a-lijn);border-radius:999px;background:#0a0d0c}
+.sn-alg-switch button{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border:0;border-radius:999px;background:transparent;color:#ffffffa6;font:inherit;font-size:14px;font-weight:700;letter-spacing:0;cursor:pointer;transition:background .25s ease,color .25s ease}
 .sn-alg-switch button:hover{color:#fff}
-.sn-alg-switch button[aria-pressed="true"]{background:#0f1412;color:#fff;box-shadow:inset 0 0 0 1px #25d36699}
+.sn-alg-switch button[aria-pressed="true"]{background:#ffffff14;color:#fff}
+.sn-alg-stip{flex:none;width:8px;height:8px;border-radius:50%;background:#25d366;box-shadow:0 0 0 0 #25d36699;animation:sn-alg-stip 1.8s infinite}
+@keyframes sn-alg-stip{70%{box-shadow:0 0 0 8px #25d36600}100%{box-shadow:0 0 0 0 #25d36600}}
 .sn-alg-switch button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .sn-alg-foto[data-modus="deal"]{animation:none}
 .sn-alg-foto[data-modus="deal"] :is(.sn-alg-film,.sn-alg-dia,.sn-alg-filmstart,.sn-alg-filmwaas){opacity:0;pointer-events:none}
@@ -168,6 +171,6 @@ html:root .sn-site .sn-alg .sn-alg-deal-wacht strong{font-family:'TT Norms',sans
 .sn-alg-deal-wacht .sn-alg-label{margin:0}
 .sn-alg-filmknop[data-modus="deal"],.sn-alg-filmknop[data-modus="deal"][data-stand="call"]{width:300px}
 @media(max-width:700px){.sn-alg-foto.is-vijfvier[data-modus="deal"][data-staand="true"]{aspect-ratio:9/16}}
-@media(prefers-reduced-motion:reduce){.sn-alg-switch button{transition:none}}
+@media(prefers-reduced-motion:reduce){.sn-alg-switch button{transition:none}.sn-alg-stip{animation:none}}
 /* 27 november 2026 (Marinus): bewegend startbeeld (loop uit IMG_1671) boven de dealfilm, weg zodra de film start. */
 .sn-alg-foto .sn-alg-dealloop{position:absolute;inset:0;z-index:5;width:100%;height:100%;object-fit:cover;background:#000;cursor:pointer}

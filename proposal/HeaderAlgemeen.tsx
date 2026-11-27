@@ -183,7 +183,7 @@ export function AtomiumFoto() {
     <div className="sn-alg-filmblok" id="black-friday" data-speelt={speelt}>
     <div className="sn-alg-switch" role="group" aria-label="Kies een video">
       {/* 27 nov (Marinus): "Black Friday Deal mag als eerste afbeelding." Deal standaard open en links. */}
-      <button type="button" aria-pressed={modus === "deal"} onClick={() => kies("deal")}>Black Friday Deal</button>
+      <button type="button" aria-pressed={modus === "deal"} onClick={() => kies("deal")}><span className="sn-alg-stip" aria-hidden="true" />Black Friday Deal</button>
       <button type="button" aria-pressed={modus === "explainer"} onClick={() => kies("explainer")}>Explainer</button>
     </div>
     <figure className="sn-alg-foto is-vijfvier" id="explainer" data-draait={draait && !filmAan && modus === "explainer"} data-film={filmAan} data-modus={modus} data-dealfilm={!!dealFilm} data-staand={!!dealFilm && dealFilm === DEAL_FILM_9X16}>
