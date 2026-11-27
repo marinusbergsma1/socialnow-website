@@ -179,7 +179,7 @@ html:root .sn-site .sn-alg .sn-alg-deal-wacht strong{font-family:'TT Norms',sans
 /* 27 nov (Marinus): "het logo wat meer rechtsboven die teksten ... Alsof ie er echt als sticker mooi bijstaat." Los rechtsboven de kop,
    schuin, half over de tekst heen, met een witte stickerrand en schaduw. */
 .sn-alg-tekst{position:relative;z-index:5}
-.sn-gpd{position:absolute;z-index:4;top:auto;bottom:-24px;left:min(60%,420px);right:auto;display:block;width:clamp(140px,12vw,180px);margin:0;transform:rotate(9deg);transform-origin:center;transition:transform .3s ease}
+.sn-gpd{position:absolute;z-index:4;top:-114px;bottom:auto;left:56%;right:auto;display:block;width:clamp(130px,10.5vw,155px);margin:0;transform:rotate(9deg);transform-origin:center;transition:transform .3s ease}
 a.sn-gpd:hover{transform:rotate(4deg) scale(1.05)}
 .sn-gpd-sticker{display:block;width:100%;height:auto;filter:drop-shadow(0 0 0 #fff) drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 18px 30px #000c)}
 .sn-gpd .h-ambient-video{height:auto;aspect-ratio:1;overflow:visible}
