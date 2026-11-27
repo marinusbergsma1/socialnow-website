@@ -25,4 +25,10 @@ eis(/className="sn-alg-dealfilm"[\s\S]{0,400}onEnded=\{\(\) => \{[^}]*\.load\(\)
 // 27 nov (Marinus): "Bellen mag wel weg hier. Gewoon Plan een Call of Whatsapp." Zwevende balk: alleen Plan een call en WhatsApp.
 const belapp = lees("proposal/BelApp.tsx");
 eis(!/<span>Bellen<\/span>/.test(belapp) && !/belLink/.test(belapp) && /sn-bel-app-call" href=\{boekingsPlannerUrl\}/.test(belapp) && /href=\{appLink\(\)\}/.test(belapp), "zwevende balk: alleen Plan een call en WhatsApp");
+// 27 nov (Marinus): "De COPY MOET VEEL BETER AANSLUITEN OP de video zelf, we doen namelijk veel meer dan alleen de websites."
+// In de video: AI en menselijke experts samen voor groei; heel december naast de gratis websitedemo ook gratis rebranding en ad creatives;
+// alleen voor bedrijven die serieus zijn over groei; plan een call.
+eis(/<h1 id="gw2-kop">Gratis websitedemo, rebranding en ad creatives<span className="sn-alg-punt">\.<\/span><\/h1>/.test(gw), "kop noemt websitedemo, rebranding en ad creatives");
+eis(/Heel december, alleen voor bedrijven die serieus zijn over groei\./.test(gw) && /AI en menselijke experts/.test(gw), "uitleg volgt de video: heel december, serieus over groei, AI en experts");
+eis(!/Wij maken jouw website, gratis/.test(gw), "oude websitekop is weg");
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");

@@ -105,9 +105,11 @@ export default function GratisWebsite() {
       <div className="sn-alg-wrap">
         <div className="sn-alg-tekst">
           <p className="sn-alg-label"><i />Black Friday Deal</p>
-          <h1 id="gw2-kop">Wij maken jouw website, gratis<span className="sn-alg-punt">.</span></h1>
+          {/* 27 november 2026 (Marinus): "De COPY MOET VEEL BETER AANSLUITEN OP de video zelf, we doen namelijk veel meer dan alleen de
+              websites." Kop en uitleg volgen nu de Black Friday-film. */}
+          <h1 id="gw2-kop">Gratis websitedemo, rebranding en ad creatives<span className="sn-alg-punt">.</span></h1>
           {/* 4 november 2026 (avond, Marinus): "Vraag een veiligheidsrapport aan of krijg een gratis demo van een moderne website op maat." */}
-          <p className="sn-alg-uitleg"><strong>Een goede website is ook een veilige website.</strong> Vraag een veiligheidsrapport aan of krijg een gratis demo van een moderne website op maat.</p>
+          <p className="sn-alg-uitleg"><strong>Heel december, alleen voor bedrijven die serieus zijn over groei.</strong> Bij SocialNow werken AI en menselijke experts samen aan de groei van jouw bedrijf. Naast onze gratis websitedemo krijg je deze maand ook rebranding en ad creatives gratis erbij.</p>
           {/* 25 november 2026 (Marinus): "Doe maar gewoon alleen een groene plan een call in en daaronder een kleine witte tekst, vul
               de onboarding in." De rapportknop en de contactknoppen van Steef, Michelle en Ben zijn daarmee weg. */}
           <div className="sn-alg-acties">
