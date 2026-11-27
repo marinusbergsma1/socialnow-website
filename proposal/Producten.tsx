@@ -100,10 +100,11 @@ export const SECURITY_PAD = "/security";
 // 4 november 2026 (Marinus): "producten diensten en website actie", "meer focus op die websites" en "Nadruk op veiligheidsscan kan
 // misschien wel veel kleiner." Het menu-item heet Website-actie en gaat naar de gratis website (/gratis-website), zonder schildje;
 // /security blijft bereikbaar via de footer en de pagina zelf.
+// 26 november 2026 (Black Friday campagne, BRIEF.md): het menu-item Website-actie heet nu Black Friday Deal, zelfde pagina.
 export const WEBSITE_ACTIE_PAD = "/gratis-website";
 export function SecurityLink({ mobiel = false, onClick }: { mobiel?: boolean; onClick?: () => void }) {
   return <NavLink to={WEBSITE_ACTIE_PAD} className={mobiel ? "h-security h-security-mobiel" : "h-security"} onClick={onClick}>
-    <span>Website-actie</span>{mobiel && <ArrowUpRight size={17} aria-hidden="true" />}
+    <span>Black Friday Deal</span>{mobiel && <ArrowUpRight size={17} aria-hidden="true" />}
   </NavLink>;
 }
 

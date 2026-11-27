@@ -106,15 +106,11 @@ const AnniversaryCountdown: React.FC = () => {
   return (
     <div className="sn-warp-tile inline-flex items-center gap-3 md:gap-4 rounded-full px-5 md:px-7 py-2.5 md:py-3 max-w-full">
       <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-white whitespace-nowrap">
-        <span className="text-[#F7E644]">5 JAAR</span> SOCIALNOW
+        <span className="text-[#25D366]">BLACK FRIDAY</span> DEAL
       </span>
       <span className="h-3 w-px bg-white/20 shrink-0" aria-hidden="true"></span>
       <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-white/60 whitespace-nowrap">
-        {daysLeft > 0 ? (
-          <>nog <span className="text-[#25D366] font-black">{daysLeft}</span> dagen</>
-        ) : (
-          <>sinds november 2021</>
-        )}
+        gratis websitedemo
       </span>
     </div>
   );
