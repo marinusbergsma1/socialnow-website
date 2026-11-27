@@ -110,4 +110,6 @@ eis(/WEBSITE_ACTIE_PAD = "\/black-friday"/.test(lees("proposal/Producten.tsx")) 
 eis(/\.sn-pill\.gw2-groot\{min-height:58px!important[^}]*font-weight:800/.test(css) && !/\.sn-pill\.gw2-groot\{background:#25d366/.test(css), "knop in Plan een call-stijl, groen, groter en bolder, niet gevuld");
 eis(/"source": "\/BLACK-FRIDAY", "destination": "\/nl\/black-friday"/.test(lees("vercel.json")), "socialnow.nl/BLACK-FRIDAY werkt");
 eis(/<SpraakKnop tekst=\{a\.wat\}/.test(gw) && /<SpraakKnop tekst=\{a\.anders\}/.test(gw) && /webkitSpeechRecognition/.test(lees("proposal/SpraakKnop.tsx")), "spraakoptie bij de open vragen van het formulier");
+eis(/gw2-held-woord"><W i=\{0\}>GROWTH<\/W> <W i=\{1\}>PACKAGE<\/W><\/span>/.test(lees("proposal/BlackFridayKop.tsx")), "GROWTH PACKAGE wordt altijd samen geselecteerd");
+eis(/max-width:1200px\)\{\.sn-gpd\{position:relative;top:auto/.test(hcss), "op mobiel en tablet staat de sticker boven de tekst");
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");
