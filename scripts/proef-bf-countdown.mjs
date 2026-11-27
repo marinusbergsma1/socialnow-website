@@ -9,7 +9,7 @@ const lees = (p) => (fs.existsSync(p) ? fs.readFileSync(p, "utf8") : "");
 const gw = lees("proposal/GratisWebsite.tsx"), bf = lees("proposal/BlackFridayBlok.tsx"), css = lees("proposal/gratis-website-wit.css");
 
 eis(/<BlackFridayBlok \/>/.test(gw) && !/className="gw2-stapel"/.test(gw), "/gratis-website toont het Black Friday-blok in plaats van de twee websitetegels");
-eis(/BLACK FRIDAY DEAL/.test(bf) && /Social-Now-Logo-Breed-Wit\.webp/.test(bf), "blok heeft het SocialNow-logo met BLACK FRIDAY DEAL");
+eis(/BLACK FRIDAY DEAL/.test(bf) && /SocialNow-Logo-2026\.webp/.test(bf) && !/Social-Now-Logo-Breed-Wit/.test(bf), "blok heeft het glanzende SocialNow-logo (2026) met BLACK FRIDAY DEAL; niet het platte logo (Marinus 27 nov)");
 eis(/2026-12-31T23:59:59\+01:00/.test(bf), "countdown loopt tot 31 december 2026 23:59 (Amsterdam)");
 eis(/setInterval\([^,]+,\s*1000\)/.test(bf) && /Dagen/.test(bf) && /Uren/.test(bf) && /Min/.test(bf) && /Sec/.test(bf), "countdown telt per seconde: dagen, uren, minuten, seconden");
 eis(/useState<number \| null>\(null\)/.test(bf), "countdown pas na laden berekend (geen verschil met de prerender)");
@@ -28,7 +28,25 @@ eis(!/<span>Bellen<\/span>/.test(belapp) && !/belLink/.test(belapp) && /sn-bel-a
 // 27 nov (Marinus): "De COPY MOET VEEL BETER AANSLUITEN OP de video zelf, we doen namelijk veel meer dan alleen de websites."
 // In de video: AI en menselijke experts samen voor groei; heel december naast de gratis websitedemo ook gratis rebranding en ad creatives;
 // alleen voor bedrijven die serieus zijn over groei; plan een call.
-eis(/<h1 id="gw2-kop">Gratis websitedemo, rebranding en ad creatives<span className="sn-alg-punt">\.<\/span><\/h1>/.test(gw), "kop noemt websitedemo, rebranding en ad creatives");
+eis(/GRATIS\s+WEBSITEDEMO/.test(lees("proposal/BlackFridayKop.tsx").replace(/<[^>]+>/g, " ")), "kop noemt websitedemo, rebranding en ad creatives");
 eis(/Heel december, alleen voor bedrijven die serieus zijn over groei\./.test(gw) && /AI en menselijke experts/.test(gw), "uitleg volgt de video: heel december, serieus over groei, AI en experts");
 eis(!/Wij maken jouw website, gratis/.test(gw), "oude websitekop is weg");
+// 27 nov (Marinus), bij "Welke stijl spreekt je aan?": "Hier mogen nog meer websites staan doe ook maar de Black.." (NEW BLACK).
+const stijlen = (gw.match(/const STIJLEN = \[([\s\S]*?)\];/) || [, ""])[1];
+const ids = [...stijlen.matchAll(/id: "([^"]+)"/g)].map(m => m[1]);
+eis(ids.includes("newblack") && ids.length >= 8, `stijlvraag toont minstens 8 websites, met NEW BLACK (nu ${ids.length})`);
+eis(!/kwh/i.test(stijlen), "geen kWh-site in de stijlvraag (Marinus 4 nov)");
+for (const b of [...stijlen.matchAll(/beeld: "([^"]+)"/g)].map(m => m[1])) eis(fs.existsSync("public" + b), `stijlbeeld bestaat: ${b}`);
+// 27 nov (Marinus): "Verder 6 vragen 10 vragen van maken en iets over branding ook erbij."
+const stappen = (gw.match(/const STAPPEN = \[([^\]]*)\]/) || [, ""])[1];
+eis((stappen.match(/"[^"]+"/g) || []).length === 10, `onboarding heeft 10 vragen (nu ${(stappen.match(/"[^"]+"/g) || []).length})`);
+eis(/Wat wil je deze december/.test(stappen) && /merk/.test(stappen) && /adverteren/.test(stappen), "vragen over de deal, het merk (branding) en adverteren");
+eis(/extra\?: \[string, string\]\[\]/.test(lees("proposal/aanvragen.ts")) && /extra:/.test(gw), "nieuwe antwoorden gaan mee in de aanvraag");
+// 27 nov (Marinus): "gekke teksten zoals de video, FLINK BLACK, AI MOUSE ICONEN DIE AF EN TOE IETS SELECTEREN, EEN TEKST DIE INFADE,
+// KAPITALS ... ÉN REBRANDING ÉN AD CREATIVES!"
+const held = lees("proposal/BlackFridayKop.tsx"), heldTekst = held.replace(/<[^>]+>/g, "");
+eis(/<BlackFridayKop \/>/.test(gw) && /ÉN REBRANDING/.test(heldTekst) && /ÉN AD CREATIVES/.test(heldTekst), "kop in kapitalen: websitedemo, ÉN REBRANDING, ÉN AD CREATIVES");
+eis(/gw2-muis/.test(held) && /gw2-muis/.test(css) && /gekozen/.test(held), "AI-muisjes die af en toe een woord selecteren");
+eis(/@keyframes gw2-kop-in/.test(css) && /prefers-reduced-motion:reduce\)\{[\s\S]{0,400}gw2-muis\{display:none/.test(css), "tekst fadet in; bij reduced motion geen muisjes");
+eis(/\.gw2-held-woord\.gekozen\{[^}]*color:#fff/.test(css), "geselecteerd woord: witte tekst op groen");
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");

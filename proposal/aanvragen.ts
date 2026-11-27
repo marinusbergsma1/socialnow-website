@@ -31,7 +31,8 @@ const woorden: Record<Language, { via: string; website: string; os: string; firs
 
 // issue heet sinds 4 november 2026 "Wat de website vooral moet doen": de vraag in de onboarding (GratisWebsite.tsx) is veranderd.
 // via (4 november 2026, Marinus): "de persoon kunnen aanvinken via wie ze daar zijn gekomen". Nodig voor de vergoedingen.
-export type AanvraagGegevens = { via?: string; voornaam?: string; achternaam?: string; email?: string; mobiel?: string; bedrijf?: string; website?: string; voorbeeld?: string; wat?: string; nietgoed?: string };
+// extra (27 november 2026): de Black Friday-vragen (deal, merk, adverteren) uit de onboarding, als [label, antwoord], al vertaald.
+export type AanvraagGegevens = { via?: string; voornaam?: string; achternaam?: string; email?: string; mobiel?: string; bedrijf?: string; website?: string; voorbeeld?: string; wat?: string; nietgoed?: string; extra?: [string, string][] };
 
 export function aanvraagBericht(soort: AanvraagSoort, taal: Language, gegevens: AanvraagGegevens = {}): string {
   const w = woorden[taal];
@@ -40,6 +41,7 @@ export function aanvraagBericht(soort: AanvraagSoort, taal: Language, gegevens: 
     for (const [label, value] of [[w.via, gegevens.via], [w.company, gegevens.bedrijf], [w.phone, gegevens.mobiel], [w.site, gegevens.website], [w.example, gegevens.voorbeeld], [w.what, gegevens.wat], [w.issue, gegevens.nietgoed]]) {
       if (value?.trim()) regels.push(`${label}: ${value.trim()}`);
     }
+    for (const [label, value] of gegevens.extra || []) if (value?.trim()) regels.push(`${label}: ${value.trim()}`);
   }
   return regels.join("\n");
 }
