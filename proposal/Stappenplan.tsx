@@ -88,13 +88,13 @@ function Mini({ id }: { id: string }) {
       <circle className={`st-a-vink st-r${i}`} cx="140" cy="6" r="4" fill={groen} />
     </g>)}
   </svg>;
-  // 27 nov (Marinus): stap 05 heet "Groei en opschalen"; de animatie toont groei: staven die om de beurt oplopen en een groene pijl omhoog.
+  // 27 nov (Marinus): stap 05 heet "Groei en opschalen"; de animatie toont groei: staven die om de beurt oplopen en een gebogen lijn die omhoog loopt.
   if (id === "stap-os") return <svg viewBox="0 0 160 100" className="st-mini st-mini-groei" aria-hidden="true">
     <line x1="22" y1="84" x2="138" y2="84" stroke={lijn} />
     {[18, 30, 44, 62].map((h, i) => <rect key={i} className={`st-a-staaf st-s${i}`} x={30 + i * 22} y={84 - h} width="14" height={h} rx="3"
       fill={i === 3 ? groen : ["#ffffff2e", "#ffffff45", "#ffffff66"][i]} />)}
-    <polyline className="st-a-lijn" points="37,58 59,46 81,32 103,16" fill="none" stroke={groen} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" pathLength={1} />
-    <path className="st-a-punt" d="M128 30 L128 12 M121 19 L128 12 L135 19" fill="none" stroke={groen} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path className="st-a-lijn" d="M28 56 C 66 54, 94 34, 132 10" fill="none" stroke={groen} strokeWidth="2.5" strokeLinecap="round" pathLength={1} />
+    <circle className="st-a-punt" cx="132" cy="10" r="4" fill={groen} />
   </svg>;
   return <svg viewBox="0 0 160 100" className="st-mini st-mini-chat" aria-hidden="true">
     <rect className="st-a-bel1" x="18" y="18" width="78" height="22" rx="11" fill={vlak} stroke={lijn} />
