@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
-import { boekingsPlannerUrl } from "./PlanCall";
 import { languagePrefix, useLanguage } from "./i18n/context";
 import { aanvraagWhatsApp, heeftWhatsApp, whatsappLink } from "./aanvragen";
 import { people } from "./content";
@@ -129,11 +128,8 @@ export default function GratisWebsite() {
           <BlackFridayKop />
           {/* 4 november 2026 (avond, Marinus): "Vraag een veiligheidsrapport aan of krijg een gratis demo van een moderne website op maat." */}
           <p className="sn-alg-uitleg"><strong>Heel december, alleen voor bedrijven die serieus zijn over groei.</strong> Bij SocialNow werken AI en menselijke experts samen aan de groei van jouw bedrijf. Naast onze gratis websitedemo krijg je deze maand ook rebranding en ad creatives gratis erbij.</p>
-          {/* 25 november 2026 (Marinus): "Doe maar gewoon alleen een groene plan een call in en daaronder een kleine witte tekst, vul
-              de onboarding in." De rapportknop en de contactknoppen van Steef, Michelle en Ben zijn daarmee weg. */}
-          <div className="sn-alg-acties">
-            <a className="sn-pill" href={boekingsPlannerUrl}><span>Plan een call</span><ArrowUpRight size={17} aria-hidden="true" /></a>
-          </div>
+          {/* 27 november 2026 (Marinus): "Verder Plan een Cal mag verder weg." Alleen de link naar de onboarding blijft; Plan een
+              call staat nog in de zwevende balk rechtsonder. */}
           <a className="gw2-onboarding" href="#onboarding" onClick={naarStart}>Vul de onboarding in</a>
         </div>
         {/* 27 november 2026 (Marinus): de twee websitetegels maken plaats voor het Black Friday-blok: logo, countdown en rijen werk. */}

@@ -144,14 +144,19 @@ html:root .sn-site .gw2-mens small{font-family:"TT Norms",system-ui,sans-serif!i
 /* 27 november 2026 (Marinus): kop zoals de film. Kapitalen en zwaar, regels faden na elkaar in, AI-muisjes selecteren af en toe een woord. */
 .gw2-held-vak{position:relative}
 html:root .sn-site .sn-alg h1.gw2-held{display:flex;flex-direction:column;gap:.04em;margin:0;font-size:clamp(30px,3.9vw,60px);font-weight:900;line-height:1.02;white-space:nowrap;letter-spacing:.01em;text-transform:uppercase;color:#fff}
-.gw2-held-regel{display:block;opacity:0;transform:translateY(14px);filter:blur(6px);animation:gw2-kop-in .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i) * .28s + .1s)}
+.gw2-held-regel{display:block}
+/* Infaden zoals de koppen op de ELT-site: per woord vanuit blur en iets lager, met een kleine vertraging per woord. */
+.gw2-bw{display:inline-block;opacity:0;filter:blur(10px);transform:translateY(.12em);animation:gw2-kop-in .7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i) * 110ms + .15s)}
 @keyframes gw2-kop-in{to{opacity:1;transform:none;filter:none}}
 html:root .sn-site .sn-alg h1.gw2-held :is(.gw2-held-regel,.gw2-held-woord){color:#fff}
-.gw2-held-woord{border-radius:6px;padding:0 .06em;margin:0 -.06em;transition:background .3s ease,box-shadow .3s ease}
-.gw2-held-woord.gekozen{background:var(--muiskleur,#25d366);color:#fff;box-shadow:0 0 0 2px var(--muiskleur,#25d366)}
-.gw2-muis{position:absolute;left:0;top:0;z-index:2;display:flex;align-items:flex-start;gap:2px;pointer-events:none;opacity:0;transform:translate(40%,120%);transition:transform .7s cubic-bezier(.45,.05,.2,1),opacity .4s ease}
+.gw2-held-woord{border-radius:6px;padding:0 .06em;margin:0 -.06em;background:linear-gradient(var(--selectie,#25d366),var(--selectie,#25d366)) no-repeat left center;background-size:0% 100%;transition:background-size .5s ease}
+.gw2-held-woord.gekozen{background-size:100% 100%;color:#fff;transition:background-size 1.2s linear}
+.gw2-muis{position:absolute;left:0;top:0;z-index:2;display:block;pointer-events:none;opacity:0;transform:translate(40%,120%)}
 .gw2-muis[data-zichtbaar="true"]{opacity:1}
-.gw2-muis svg{flex:none;filter:drop-shadow(0 2px 4px #0008)}
-.gw2-muis b{margin-top:16px;padding:3px 8px;border-radius:6px;color:#fff;font-size:12px;font-weight:700;letter-spacing:0;white-space:nowrap}
+.gw2-muis svg{position:absolute;display:block;filter:drop-shadow(0 1px 3px #0009)}
+.gw2-muis .gw2-pijl{left:0;top:0}
+.gw2-muis .gw2-ibeam{left:-8px;top:-13px;display:none}
+.gw2-muis[data-vorm="tekst"] .gw2-pijl{display:none}
+.gw2-muis[data-vorm="tekst"] .gw2-ibeam{display:block}
 @media(max-width:900px){html:root .sn-site .sn-alg h1.gw2-held{font-size:min(8.6vw,56px)}}
-@media(prefers-reduced-motion:reduce){.gw2-held-regel{animation:none;opacity:1;transform:none;filter:none}.gw2-muis{display:none}}
+@media(prefers-reduced-motion:reduce){.gw2-bw{animation:none;opacity:1;transform:none;filter:none}.gw2-muis{display:none}}
