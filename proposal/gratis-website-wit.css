@@ -211,3 +211,11 @@ html:root .sn-site .gw2-showcase h2#gw2-showcase-kop :is(.gw2-held-regel,.gw2-he
 .gw2-showcase.in-beeld .gw2-showcase-open{transition-delay:.85s}
 @media(max-width:900px){html:root .sn-site .gw2-showcase h2#gw2-showcase-kop{white-space:normal}}
 @media(prefers-reduced-motion:reduce){.gw2-vel{position:static}.gw2-showcase :is(.gw2-showcase-label,.gw2-showcase-sub,.gw2-showcase-venster,.gw2-showcase-open){opacity:1;filter:none;transform:none;transition:none}}
+
+/* 27 november 2026 (Marinus): één grote knop FREE GROWTH PACKAGE!, daaronder klein Bekijk de showcase. Witte tekst. */
+html:root .sn-site .gw2-held-knoppen{flex-direction:column;align-items:flex-start;gap:14px}
+html:root .sn-site .gw2-held-knoppen .sn-pill.gw2-groot{min-height:72px;padding-left:34px;font-size:clamp(17px,1.5vw,21px)!important;letter-spacing:.06em;color:#fff;gap:22px;padding-right:8px}
+html:root .sn-site .gw2-held-knoppen .sn-pill.gw2-groot span{font-size:inherit!important}
+html:root .sn-site .gw2-held-knoppen .sn-pill.gw2-groot svg{width:54px;height:54px;padding:15px}
+html:root .sn-site .gw2-held-knoppen .gw2-klein-link{display:inline-flex;align-items:center;gap:6px;margin-left:34px;font-family:var(--a-mono,ui-monospace,Menlo,monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#ffffffb3;text-decoration:underline;text-decoration-color:#ffffff40;text-underline-offset:5px}
+html:root .sn-site .gw2-held-knoppen .gw2-klein-link:hover{color:#fff;text-decoration-color:#25d366}
