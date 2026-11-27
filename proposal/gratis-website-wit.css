@@ -117,3 +117,26 @@ html:root .sn-site .gw2-mens small{font-family:"TT Norms",system-ui,sans-serif!i
 /* 25 november 2026 (Marinus): onder de groene Plan een call een kleine witte tekst "Vul de onboarding in". */
 .gw2-onboarding{display:inline-block;margin-top:14px;color:#fff;font-size:13px;text-decoration:underline;text-decoration-color:#ffffff59;text-underline-offset:4px;transition:text-decoration-color .2s}
 .gw2-onboarding:hover,.gw2-onboarding:focus-visible{text-decoration-color:#25d366}
+
+/* 27 november 2026 (Marinus): Black Friday-blok op /gratis-website. Logo met BLACK FRIDAY DEAL, countdown tot 31 december 23:59
+   en twee schuivende rijen werk (content en websites). Vervangt de twee websitetegels. */
+.gw2-bf{display:flex;flex-direction:column;align-items:center;gap:18px;width:100%;max-width:780px;min-width:0;justify-self:center}
+.gw2-bf-merk{display:flex;flex-direction:column;align-items:center;gap:12px}
+.gw2-bf-merk img{display:block;width:min(300px,62vw);height:auto}
+.gw2-bf-deal{display:inline-block;padding:9px 18px;border:1px solid #ffffff33;border-radius:10px;background:#000;color:#fff;font-size:clamp(18px,2.2vw,26px);font-weight:900;letter-spacing:.06em;line-height:1}
+.gw2-bf-klok{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;width:min(460px,100%)}
+.gw2-bf-vak{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 6px 12px;border:1px solid #ffffff1f;border-radius:14px;background:#0a0d0c}
+.gw2-bf-vak strong{font-family:var(--v-mono,ui-monospace,Menlo,monospace);font-size:clamp(26px,3.4vw,40px);font-weight:700;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.gw2-bf-vak small{font-family:var(--v-mono,ui-monospace,Menlo,monospace);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#25d366}
+.gw2-bf-tot{margin:-4px 0 4px;font-size:13px;color:#a5b6ad}
+.gw2-bf-rij{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.gw2-bf-baan{display:flex;width:max-content;margin:0;padding:0;list-style:none;animation:gw2-bf-loop 40s linear infinite}
+.gw2-bf-rij.is-sites .gw2-bf-baan{animation-direction:reverse;animation-duration:48s}
+.gw2-bf-rij:hover .gw2-bf-baan{animation-play-state:paused}
+.gw2-bf-baan li{flex:none;margin-right:12px}
+.gw2-bf-baan img{display:block;height:150px;width:auto;border:1px solid #ffffff1f;border-radius:12px;object-fit:cover}
+.gw2-bf-rij.is-werk img{aspect-ratio:1/1}
+.gw2-bf-rij.is-sites img{height:130px;aspect-ratio:16/10;object-position:top}
+@keyframes gw2-bf-loop{to{transform:translateX(-50%)}}
+@media(max-width:700px){.gw2-bf-baan img{height:112px}.gw2-bf-rij.is-sites img{height:100px}}
+@media(prefers-reduced-motion:reduce){.gw2-bf-baan{animation:none}}

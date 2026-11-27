@@ -22,7 +22,7 @@ eis(/export const WHATSAPP_NUMMER = "";/.test(aanvragen), "Steef-route (WHATSAPP
 eis(/belLink/.test(aanvragen) && /tel:\+\$\{MARINUS_NUMMER\}/.test(aanvragen), "aanvragen.ts: belLink naar tel:+31637404577");
 eis(/appLink/.test(aanvragen) && /wa\.me\/\$\{MARINUS_NUMMER\}/.test(aanvragen), "aanvragen.ts: appLink naar wa.me/31637404577");
 eis(/<BelApp \/>/.test(shell), "BelApp staat sitebreed in WebsiteProposal.tsx");
-eis(/Bellen/.test(knop) && /translate="no">WhatsApp/.test(knop), "pil heeft Bellen en WhatsApp (WhatsApp niet vertaald)");
+eis(!/<span>Bellen<\/span>/.test(knop) && /translate="no">WhatsApp/.test(knop), "pil heeft Plan een call en WhatsApp, geen Bellen (Marinus 27 nov; WhatsApp niet vertaald)");
 eis(/Phone/.test(knop) && /MessageCircle/.test(knop), "iconen Phone en MessageCircle");
 eis(/position:\s*fixed/.test(css) && /right:/.test(css) && /bottom:/.test(css), "pil staat vast rechtsonder");
 eis(/#25d366/i.test(css) && /border-radius:\s*999px/.test(css), "groene iconen, ronde pil");
