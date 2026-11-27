@@ -185,3 +185,14 @@ html:root .sn-site .sn-alg.gw2-kop .sn-alg-uitleg strong{font-size:clamp(17px,1.
 .gw2-bf-speel{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:10px;padding:12px 20px 12px 16px;border:0;border-radius:999px;background:#25d366;color:#fff;font:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 10px 30px #0008;transition:background .2s,transform .2s}
 .gw2-bf-speel:hover{background:#1fc05c;transform:translateX(-50%) translateY(-2px)}
 .gw2-bf-speel:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+/* 27 november 2026 (Marinus): showcase op zwart, groter, kop GROWTH PACKAGE SHOWCASE. Zwart vlak over de volle breedte met het stippenraster. */
+html:root .sn-site .gw2-showcase{position:relative;isolation:isolate;max-width:1400px;padding:110px 20px 120px;color:#fff}
+.gw2-showcase::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);background:#000 radial-gradient(#ffffff21 1px,transparent 1px) 0 0/32px 32px}
+html:root .sn-site .gw2-showcase .gw2-showcase-label{margin:0;font-family:var(--v-mono,ui-monospace,Menlo,monospace);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#25d366}
+html:root .sn-site .gw2-showcase h2#gw2-showcase-kop{margin:12px 0 14px;font-size:clamp(40px,7vw,104px)!important;line-height:1;letter-spacing:.01em;word-spacing:.24em;text-transform:uppercase;color:#fff}
+html:root .sn-site .gw2-showcase .gw2-showcase-sub{margin:0;max-width:720px;font-size:clamp(15px,1.4vw,18px);line-height:1.5;color:#ffffffb3}
+html:root .sn-site .gw2-showcase .gw2-showcase-venster{margin-top:40px;border-color:#ffffff26;box-shadow:0 40px 100px #000}
+html:root .sn-site .gw2-showcase .gw2-showcase-venster iframe{height:min(86vh,920px)}
+html:root .sn-site .gw2-showcase .gw2-showcase-open{color:#fff;text-decoration-color:#ffffff4d}
+

@@ -1,3 +1,4 @@
+import GrowthDealSticker from "./GrowthDealSticker";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
@@ -127,6 +128,7 @@ export default function GratisWebsite() {
     <section className="sn-alg gw2-kop" aria-labelledby="gw2-kop">
       <div className="sn-alg-wrap">
         <div className="sn-alg-tekst">
+          <GrowthDealSticker />
           <p className="sn-alg-label"><i />Black Friday Deal</p>
           {/* 27 november 2026 (Marinus): "De COPY MOET VEEL BETER AANSLUITEN OP de video zelf, we doen namelijk veel meer dan alleen de
               websites." Kop en uitleg volgen nu de Black Friday-film. */}
@@ -251,9 +253,10 @@ export default function GratisWebsite() {
     {/* 27 november 2026 (Marinus): de presentatie die op 26 november naar Albert (ELT Live) ging, als showcase zonder reviewoptie, als
         live tegel onder de vragen. Bron: 01-KLANTEN/elt-live/02_WERK/2026-11-26-website-branding/presentatie/_bouw/showcase.py. */}
     <section className="gw2-showcase" id="showcase" aria-labelledby="gw2-showcase-kop">
-      <p className="gw2-stap">Showcase</p>
-      <h2 id="gw2-showcase-kop">ELT Live: branding, e-mail, website en ad creatives<span className="gw2-punt">.</span></h2>
-      <p className="gw2-uitleg">Zo ziet een demopakket eruit. Scroll erdoorheen, of open de website vanuit de presentatie.</p>
+      {/* 27 nov (Marinus): "De Showcase mag op een zwarte achtergrond en nog groter met BLACK teksten GROWTH PACKAGE SHOWCASE!" */}
+      <p className="gw2-showcase-label" translate="no">Black Friday Deal</p>
+      <h2 id="gw2-showcase-kop" translate="no">Growth Package Showcase<span className="gw2-punt">.</span></h2>
+      <p className="gw2-showcase-sub">ELT Live: branding, e-mail, website en ad creatives. Zo ziet een demopakket eruit. Scroll erdoorheen, of open de website vanuit de presentatie.</p>
       <div className="gw2-showcase-venster">
         <div className="gw2-showcase-balk" aria-hidden="true"><i /><i /><i /><span translate="no">socialnow.nl/showcase/elt-live</span></div>
         <iframe src="/showcase/elt-live/index.html" title="Showcase ELT Live: branding, e-mail, website en ad creatives" loading="lazy" />
