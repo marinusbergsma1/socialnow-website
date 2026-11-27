@@ -87,7 +87,10 @@ export default defineConfig({
       input: { index: "index.html", voorstel: "voorstel.html" },
       output: {
         manualChunks: {
-          vendor: ["react", "react-dom", "react-router-dom"],
+          // 6 november 2026 (Indexworld M7): react-dom/client en scheduler horen bij vendor. Ze stonden in het sitebrede
+          // bestand (408 KB, waarvan ~190 KB React), dat bij elke publicatie een nieuwe naam krijgt; nu blijft React in de
+          // cache van terugkerende bezoekers. Zelfde code, zelfde volgorde, alleen een andere bestandsindeling.
+          vendor: ["react", "react-dom", "react-dom/client", "scheduler", "react-router-dom"],
           ui: ["lucide-react"],
         },
       },

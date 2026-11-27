@@ -15,7 +15,7 @@ import "./proposal/language-menu.css";
 import "./proposal/stippen.css";
 import "./proposal/knopgroen.css";
 import "./proposal/button-design.css";
-import { detectVisitorLanguage, needsCountryLookup } from "./proposal/i18n/detect";
+import { detectVisitorLanguage } from "./proposal/i18n/detect";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
@@ -37,31 +37,21 @@ function site(language: Language) {
 }
 // 30 september 2026 (Marinus: "WIL ECHT INSTANT LOADING"): scripts/prerender.mjs zet de pagina al als
 // echte HTML in #root, met de taal in data-prerender. Klopt die taal met de taal van deze bezoeker, dan
-// hydrateert React die HTML en is er niets opnieuw te tekenen. Een bezoeker op een pad zonder taal en
-// zonder bewaarde keuze ziet meteen de Engelse pagina; zegt de landopzoeking daarna een andere taal,
-// dan wisselt de pagina alsnog, zoals vroeger. Zonder prerender (404) bouwt React de pagina zelf op.
+// hydrateert React die HTML en is er niets opnieuw te tekenen. Wijst de taal van de bezoeker naar een andere taal dan de
+// voorgerenderde, dan tekent React de pagina in die taal. Zonder prerender (404) bouwt React de pagina zelf op.
 // 30 september 2026: een Duitse of Franse pagina haalt eerst de kern van haar woordenboek op, vóór het tekenen en vóór het
 // hydrateren (zie scripts/woordenboek-split.mjs); Engels en Nederlands gaan meteen door.
 async function start() {
+  // 6 november 2026 (Indexworld M8): de taal volgt zonder netwerk uit pad, bewaarde keuze en browser (proposal/i18n/detect.ts).
+  detectVisitorLanguage();
   const prerendered = rootElement!.dataset.prerender;
-  const lookup = needsCountryLookup();
-  if (!lookup) await detectVisitorLanguage();
   const language = pageLanguage();
+  await laadWoordenboek(language, "kern");
   if (prerendered === language) {
-    await laadWoordenboek(language, "kern");
-    const root = ReactDOM.hydrateRoot(rootElement!, site(language));
-    if (!lookup) return;
-    await detectVisitorLanguage();
-    const detected = pageLanguage();
-    await laadWoordenboek(detected, "kern");
-    // 11 oktober 2026: als transition, zodat React eerst de voorgerenderde HTML hydrateert. Direct renderen gaf bij een
-    // Nederlandse browser op / React-fout #424 (update vóór de hydratie klaar was; daarna alles opnieuw getekend).
-    if (detected !== language) React.startTransition(() => root.render(site(detected)));
+    ReactDOM.hydrateRoot(rootElement!, site(language));
     return;
   }
-  await detectVisitorLanguage();
-  await laadWoordenboek(pageLanguage(), "kern");
-  ReactDOM.createRoot(rootElement!).render(site(pageLanguage()));
+  ReactDOM.createRoot(rootElement!).render(site(language));
 }
 void start();
 // Het lichtgevende stippenveld (golven bij hover en klik) laadt pas als de browser even vrij is: niet in het eerste script.

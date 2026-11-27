@@ -81,8 +81,9 @@ eis(!/\{t\(stap\)\}/.test(tsx), "stappen niet dubbel vertaald (anders faalt de p
 
 // Taal: eerder gekozen taal, dan browsertaal, dan land, anders Engels; keuze onthouden met try/catch.
 const det = lees("proposal/i18n/detect.ts");
-const detStart = det.indexOf("export async function detectVisitorLanguage");
-eis(detStart > 0 && det.indexOf("const uitBrowser = saved ? null : browserTaal();", detStart) > detStart && det.indexOf("const uitBrowser", detStart) < det.indexOf("TRACE_URL", detStart)
+// 6 november 2026 (Indexworld M8): het land komt niet meer van een externe dienst maar uit de browserregio (browserLand).
+const detStart = det.indexOf("export function detectVisitorLanguage");
+eis(detStart > 0 && det.indexOf("const uitBrowser = saved ? null : browserTaal();", detStart) > detStart && det.indexOf("const uitBrowser", detStart) < det.indexOf("browserLand()", detStart)
   && /try \{ document\.cookie = /.test(det) && /rememberLanguage\(code\)/.test(lees("proposal/LanguageSwitch.tsx")) && /if \(\/\^\\\/\(nl\|de/.test(det),
   "taal: eerder gekozen taal wint, dan browsertaal, dan land, anders Engels; geen lus op /nl/check; taalkiezer onthoudt");
 
