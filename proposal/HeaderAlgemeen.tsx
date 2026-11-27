@@ -110,7 +110,7 @@ export function AtomiumFoto() {
   const [vers, zetVers] = useState(false);   // net geklikt: hover vult pas weer na eerst weggaan
   const { language } = useLanguage();
   const deal = useRef<HTMLVideoElement>(null);
-  const [modus, zetModus] = useState<Modus>("explainer");
+  const [modus, zetModus] = useState<Modus>("deal");
   const [dealGestart, zetDealGestart] = useState(false);
   const [mobiel, zetMobiel] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width:700px)").matches);
   useEffect(() => {
@@ -182,8 +182,9 @@ export function AtomiumFoto() {
   return (
     <div className="sn-alg-filmblok" id="black-friday" data-speelt={speelt}>
     <div className="sn-alg-switch" role="group" aria-label="Kies een video">
-      <button type="button" aria-pressed={modus === "explainer"} onClick={() => kies("explainer")}>Explainer</button>
+      {/* 27 nov (Marinus): "Black Friday Deal mag als eerste afbeelding." Deal standaard open en links. */}
       <button type="button" aria-pressed={modus === "deal"} onClick={() => kies("deal")}>Black Friday Deal</button>
+      <button type="button" aria-pressed={modus === "explainer"} onClick={() => kies("explainer")}>Explainer</button>
     </div>
     <figure className="sn-alg-foto is-vijfvier" id="explainer" data-draait={draait && !filmAan && modus === "explainer"} data-film={filmAan} data-modus={modus} data-dealfilm={!!dealFilm} data-staand={!!dealFilm && dealFilm === DEAL_FILM_9X16}>
       {DIAS.map(({ bestand, alt }, index) => {
