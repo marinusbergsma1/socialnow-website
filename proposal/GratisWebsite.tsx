@@ -1,3 +1,4 @@
+import SpraakKnop from "./SpraakKnop";
 import GrowthDealSticker from "./GrowthDealSticker";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -170,7 +171,8 @@ export default function GratisWebsite() {
       <h2>{STAPPEN[stap]}</h2>
 
       {stap === S.wat && <label className="gw2-veld"><span className="gw2-verborgen">{STAPPEN[0]}</span>
-        <textarea rows={3} maxLength={600} value={a.wat} onChange={(e) => zet("wat", e.target.value)} placeholder="Bijvoorbeeld: wij installeren zonnepanelen voor bedrijven in de regio Utrecht." />
+        <div className="gw2-spraak-veld"><textarea rows={3} maxLength={600} value={a.wat} onChange={(e) => zet("wat", e.target.value)} placeholder="Bijvoorbeeld: wij installeren zonnepanelen voor bedrijven in de regio Utrecht." /><SpraakKnop tekst={a.wat} zet={(t) => zet("wat", t.slice(0, 600))} /></div>
+        <p className="gw2-spraak-tip">Liever praten? Tik op de microfoon en vertel het.</p>
       </label>}
 
       {stap === S.deal && <>
@@ -218,7 +220,7 @@ export default function GratisWebsite() {
           <input type="checkbox" checked={a.doelen.includes(d)} onChange={() => wissel("doelen", d)} /><Check size={14} aria-hidden="true" /><span>{d}</span>
         </label>)}</div>
         <label className="gw2-veld"><span>Nog iets wat je mist? <em>(optioneel)</em></span>
-          <textarea rows={2} maxLength={800} value={a.anders} onChange={(e) => zet("anders", e.target.value)} placeholder="Bijvoorbeeld: klanten moeten makkelijk een offerte kunnen aanvragen." />
+          <div className="gw2-spraak-veld"><textarea rows={2} maxLength={800} value={a.anders} onChange={(e) => zet("anders", e.target.value)} placeholder="Bijvoorbeeld: klanten moeten makkelijk een offerte kunnen aanvragen." /><SpraakKnop tekst={a.anders} zet={(t) => zet("anders", t.slice(0, 800))} /></div>
         </label>
       </>}
 

@@ -237,9 +237,18 @@ html:root .sn-site .gw2-held-knoppen .sn-pill.gw2-groot svg{width:54px;height:54
 html:root .sn-site .gw2-held-knoppen .gw2-klein-link{display:inline-flex;align-items:center;gap:6px;margin-left:34px;font-family:var(--a-mono,ui-monospace,Menlo,monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#ffffffb3;text-decoration:underline;text-decoration-color:#ffffff40;text-underline-offset:5px}
 html:root .sn-site .gw2-held-knoppen .gw2-klein-link:hover{color:#fff;text-decoration-color:#25d366}
 
-/* 27 nov (Marinus): "En deze tekst in de groene knop en een witte link eronder voor de showcase." */
-html:root .sn-site .gw2-held-knoppen .sn-pill.gw2-groot{background:#25d366!important;border-color:#25d366!important;color:#fff!important}
-html:root .sn-site .gw2-held-knoppen .sn-pill.gw2-groot span{color:#fff}
-html:root .sn-site .gw2-held-knoppen .sn-pill.gw2-groot svg{background:#fff;color:#25d366;border-radius:50%}
-html:root .sn-site .gw2-held-knoppen .sn-pill.gw2-groot:hover{background:#1fc05c!important;border-color:#1fc05c!important}
+/* 27 nov (Marinus): "KNOP KLEINER ... Ik wil gwn zo'n stijl" (de Plan een call-pil) "iets boldere tekst en groter en wel groen." */
+html:root .sn-site .gw2-held-knoppen .sn-pill.gw2-groot{min-height:58px!important;padding-left:26px;padding-right:6px;gap:16px;font-size:16px!important;font-weight:800;letter-spacing:.06em}
+html:root .sn-site .gw2-held-knoppen .sn-pill.gw2-groot span{font-size:inherit!important;font-weight:800}
+html:root .sn-site .gw2-held-knoppen .sn-pill.gw2-groot svg{width:44px;height:44px;padding:12px}
 html:root .sn-site .gw2-held-knoppen .gw2-klein-link{color:#fff;text-decoration:underline;text-decoration-color:#ffffff66;text-underline-offset:5px}
+/* 27 nov (Marinus): "Geef de mensen ook een audio optie bij het invullen van het formulier." Microfoonknop bij de open vragen. */
+.gw2-spraak-veld{position:relative}
+.gw2-spraak-veld textarea{padding-right:58px}
+.gw2-spraak{position:absolute;right:10px;bottom:10px;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:0;border-radius:50%;background:#25d366;color:#fff;cursor:pointer;transition:background .2s,transform .2s}
+.gw2-spraak:hover{background:#1fc05c}
+.gw2-spraak[aria-pressed="true"]{background:#e5397a;animation:gw2-spraak-puls 1.4s infinite}
+.gw2-spraak:focus-visible{outline:2px solid #0b0f12;outline-offset:3px}
+@keyframes gw2-spraak-puls{70%{box-shadow:0 0 0 10px #e5397a00}0%{box-shadow:0 0 0 0 #e5397a88}}
+html:root .sn-site .gw2 .gw2-spraak-tip{margin:6px 0 0;font-size:12.5px;color:#7a858f}
+@media(prefers-reduced-motion:reduce){.gw2-spraak[aria-pressed="true"]{animation:none}}

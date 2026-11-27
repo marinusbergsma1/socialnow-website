@@ -87,7 +87,7 @@ eis(/\.gw2-showcase h2#gw2-showcase-kop\{[^}]*color:#fff/.test(css) && !/\.gw2-s
 const he = lees("proposal/HomeEnthousiast.tsx"), hcss = lees("proposal/header-algemeen.css");
 eis(fs.existsSync("public/images/growth-package-deal.webp"), "sticker Growth Package Deal staat in public/images");
 eis(/<div className="sn-alg-tekst">\s*<GrowthDealSticker \/>/.test(gw), "sticker linksboven in de kop van /gratis-website");
-eis(/<GrowthDealSticker naar="\/black-friday" \/>\s*<p className="sn-alg-label">/.test(he), "sticker linksboven op de homepage, linkt naar de deal");
+eis(!/GrowthDealSticker/.test(he), "geen sticker op de homepage (Marinus: \"deze graag op de Homepage weg\")");
 eis(/\.sn-gpd\{position:absolute[^}]*right:[^}]*rotate\(9deg\)/.test(hcss), "sticker los rechtsboven de kop, schuin als sticker");
 // 27 nov (Marinus): "zelfde soort effect als bij de titel zelf met het selecteren etc en misschien als sectie kaart over de onboarding laten
 // schuiven als je verder scrollt. En teksten ook infaden."
@@ -107,5 +107,7 @@ const wp = lees("proposal/WebsiteProposal.tsx"), pb = lees("scripts/postbuild.mj
 eis(/<Route path="\/black-friday" element=\{<GratisWebsite \/>\} \/>/.test(wp) && /<Route path="\/gratis-website" element=\{<NaarBlackFriday \/>\} \/>/.test(wp) && /Navigate to=\{`\/black-friday\$\{search\}/.test(wp), "/black-friday is het echte adres, /gratis-website gaat erheen (met ?ref)");
 eis(/'black-friday': \{title: 'BLACK FRIDAY DEAL/.test(pb), "/black-friday wordt voorgerenderd met titel en meta");
 eis(/WEBSITE_ACTIE_PAD = "\/black-friday"/.test(lees("proposal/Producten.tsx")) && /DEAL_PAD = "\/black-friday"/.test(lees("proposal/HeaderAlgemeen.tsx")) && !/"\/gratis-website"/.test(lees("proposal/HomeEnthousiast.tsx")), "menu, switch en homepage linken naar /black-friday");
-eis(/\.sn-pill\.gw2-groot\{background:#25d366[^}]*color:#fff/.test(css) && /\.gw2-klein-link\{color:#fff/.test(css), "FREE GROWTH PACKAGE! in een groene knop met witte tekst, witte showcase-link eronder");
+eis(/\.sn-pill\.gw2-groot\{min-height:58px!important[^}]*font-weight:800/.test(css) && !/\.sn-pill\.gw2-groot\{background:#25d366/.test(css), "knop in Plan een call-stijl, groen, groter en bolder, niet gevuld");
+eis(/"source": "\/BLACK-FRIDAY", "destination": "\/nl\/black-friday"/.test(lees("vercel.json")), "socialnow.nl/BLACK-FRIDAY werkt");
+eis(/<SpraakKnop tekst=\{a\.wat\}/.test(gw) && /<SpraakKnop tekst=\{a\.anders\}/.test(gw) && /webkitSpeechRecognition/.test(lees("proposal/SpraakKnop.tsx")), "spraakoptie bij de open vragen van het formulier");
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");

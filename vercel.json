@@ -43,6 +43,12 @@
     }
   ],
   "redirects": [
+    { "source": "/BLACK-FRIDAY", "destination": "/nl/black-friday", "permanent": false },
+    { "source": "/BLACK-FRIDAY/", "destination": "/nl/black-friday", "permanent": false },
+    { "source": "/Black-Friday", "destination": "/nl/black-friday", "permanent": false },
+    { "source": "/BlackFriday", "destination": "/nl/black-friday", "permanent": false },
+    { "source": "/blackfriday", "destination": "/nl/black-friday", "permanent": false },
+    { "source": "/BLACKFRIDAY", "destination": "/nl/black-friday", "permanent": false },
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "security.socialnow.nl" }],
