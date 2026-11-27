@@ -160,3 +160,21 @@ html:root .sn-site .sn-alg h1.gw2-held :is(.gw2-held-regel,.gw2-held-woord){colo
 .gw2-muis[data-vorm="tekst"] .gw2-ibeam{display:block}
 @media(max-width:900px){html:root .sn-site .sn-alg h1.gw2-held{font-size:min(8.6vw,56px)}}
 @media(prefers-reduced-motion:reduce){.gw2-bw{animation:none;opacity:1;transform:none;filter:none}.gw2-muis{display:none}}
+
+/* 27 november 2026 (Marinus): "Deze tekst mag verder kleiner." De uitleg onder de Black Friday-kop. */
+html:root .sn-site .sn-alg.gw2-kop .sn-alg-uitleg{font-size:15px;line-height:1.55;max-width:48ch}
+html:root .sn-site .sn-alg.gw2-kop .sn-alg-uitleg strong{font-size:clamp(17px,1.4vw,20px)}
+.gw2-kop .sn-alg-uitleg{font-size:15px}
+.gw2-held-knoppen{display:flex;flex-wrap:wrap;gap:12px}
+
+/* 27 november 2026 (Marinus): showcase van ELT Live als live tegel onder de vragen. */
+.gw2-showcase{max-width:1100px;margin:0 auto;padding:72px 20px 96px;scroll-margin-top:90px}
+.gw2-showcase h2{margin:6px 0 8px;font-size:clamp(24px,3vw,38px);line-height:1.15;color:#0b0f12}
+.gw2-punt{color:#25d366}
+.gw2-showcase-venster{margin-top:22px;border:1px solid #0b0f1226;border-radius:16px;overflow:hidden;background:#0b0f12;box-shadow:0 30px 70px #0b0f1226}
+.gw2-showcase-balk{display:flex;align-items:center;gap:7px;height:38px;padding:0 14px;background:#15191c}
+.gw2-showcase-balk i{width:10px;height:10px;border-radius:50%;background:#ffffff33}
+.gw2-showcase-balk span{margin-left:10px;font-family:var(--v-mono,ui-monospace,Menlo,monospace);font-size:12px;color:#ffffff99}
+.gw2-showcase-venster iframe{display:block;width:100%;height:min(78vh,780px);border:0;background:#000}
+.gw2-showcase-open{display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:#0b0f12;font-size:14px;font-weight:600;text-decoration:underline;text-decoration-color:#0b0f1240;text-underline-offset:4px}
+.gw2-showcase-open:hover{text-decoration-color:#25d366}

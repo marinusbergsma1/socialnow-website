@@ -111,6 +111,12 @@ export default function GratisWebsite() {
     window.location.href = adres;
   };
 
+  const naarShowcase = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const doel = document.getElementById("showcase");
+    if (!doel) return;
+    e.preventDefault();
+    doel.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   const naarStart = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const doel = document.getElementById("onboarding");
     if (!doel) return;
@@ -130,7 +136,11 @@ export default function GratisWebsite() {
           <p className="sn-alg-uitleg"><strong>Heel december, alleen voor bedrijven die serieus zijn over groei.</strong> Bij SocialNow werken AI en menselijke experts samen aan de groei van jouw bedrijf. Naast onze gratis websitedemo krijg je deze maand ook rebranding en ad creatives gratis erbij.</p>
           {/* 27 november 2026 (Marinus): "Verder Plan een Cal mag verder weg." Alleen de link naar de onboarding blijft; Plan een
               call staat nog in de zwevende balk rechtsonder. */}
-          <a className="gw2-onboarding" href="#onboarding" onClick={naarStart}>Vul de onboarding in</a>
+          {/* 27 november 2026 (Marinus): "een bekijk Showcase knop ... of een Vraag jouw Gratis Demo Pakket aan. 2 knoppen." */}
+          <div className="sn-alg-acties gw2-held-knoppen">
+            <a className="sn-pill" href="#onboarding" onClick={naarStart}><span>Vraag jouw gratis demopakket aan</span><ArrowUpRight size={17} aria-hidden="true" /></a>
+            <a className="sn-pill sn-pill-blauw" href="#showcase" onClick={naarShowcase}><span>Bekijk de showcase</span><ArrowUpRight size={17} aria-hidden="true" /></a>
+          </div>
         </div>
         {/* 27 november 2026 (Marinus): de twee websitetegels maken plaats voor het Black Friday-blok: logo, countdown en rijen werk. */}
         <BlackFridayBlok />
@@ -237,6 +247,19 @@ export default function GratisWebsite() {
       </div>
       <p className="gw2-bewaard"><i />Automatisch bewaard</p>
     </form>
-  </div></div>
+  </div>
+    {/* 27 november 2026 (Marinus): de presentatie die op 26 november naar Albert (ELT Live) ging, als showcase zonder reviewoptie, als
+        live tegel onder de vragen. Bron: 01-KLANTEN/elt-live/02_WERK/2026-11-26-website-branding/presentatie/_bouw/showcase.py. */}
+    <section className="gw2-showcase" id="showcase" aria-labelledby="gw2-showcase-kop">
+      <p className="gw2-stap">Showcase</p>
+      <h2 id="gw2-showcase-kop">ELT Live: branding, e-mail, website en ad creatives<span className="gw2-punt">.</span></h2>
+      <p className="gw2-uitleg">Zo ziet een demopakket eruit. Scroll erdoorheen, of open de website vanuit de presentatie.</p>
+      <div className="gw2-showcase-venster">
+        <div className="gw2-showcase-balk" aria-hidden="true"><i /><i /><i /><span translate="no">socialnow.nl/showcase/elt-live</span></div>
+        <iframe src="/showcase/elt-live/index.html" title="Showcase ELT Live: branding, e-mail, website en ad creatives" loading="lazy" />
+      </div>
+      <a className="gw2-showcase-open" href="/showcase/elt-live/index.html" target="_blank" rel="noopener">Open de showcase in een nieuw venster<ArrowUpRight size={15} aria-hidden="true" /></a>
+    </section>
+  </div>
   </>;
 }

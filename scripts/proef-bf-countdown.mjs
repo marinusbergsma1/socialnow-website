@@ -60,4 +60,15 @@ eis(/\.gw2-held-woord\{[^}]*background-size:0% 100%/.test(css) && /\.gw2-held-wo
 eis(!/className="sn-pill" href=\{boekingsPlannerUrl\}/.test(gw), "geen Plan een call-knop in de kop van /gratis-website");
 eis(/@keyframes gw2-kop-in/.test(css) && /prefers-reduced-motion:reduce\)\{[\s\S]{0,400}gw2-muis\{display:none/.test(css), "tekst fadet in; bij reduced motion geen muisjes");
 eis(/\.gw2-held-woord\.gekozen\{[^}]*color:#fff/.test(css), "geselecteerd woord: witte tekst op groen");
+// 27 nov (Marinus): "Vervolgens wil ik een showcase en dat mag de versie zijn die ik gister naar Albert heb gestuurd." "Maar dan zonder
+// reviewoptie als showcase versie en als live tile naast of boven het onboardingsformulier." "Verder misschien een bekijk Showcase knop
+// ... of een Vraag jouw Gratis Demo Pakket aan. 2 knoppen dan de showcase onder de vragen." "Deze tekst mag verder kleiner."
+const SC = "public/showcase/elt-live/index.html", sc = lees(SC);
+eis(fs.existsSync(SC) && /noindex/.test(sc) && /Showcase · SocialNow/.test(sc), "showcase ELT Live staat in public/, noindex");
+const scBody = sc.split("</head>")[1] || "";
+eis(!/data-fb|ELT_FB|feedback\.php|Geef je feedback|fbband/.test(scBody), "showcase zonder reviewoptie (geen feedbacklaag)");
+eis(fs.existsSync("public/showcase/elt-live/website/index.html") && !/feedback\.js/.test(lees("public/showcase/elt-live/website/index.html")), "website in de showcase zonder feedbacklaag");
+eis(/id="showcase"/.test(gw) && /<iframe[^>]*src="\/showcase\/elt-live\/index\.html"/.test(gw) && gw.indexOf('id="showcase"') > gw.indexOf("</form>"), "live tegel met de showcase onder de vragen");
+eis(/href="#showcase"[^>]*>[\s\S]{0,80}Bekijk de showcase/.test(gw) && /href="#onboarding"[^>]*>[\s\S]{0,80}Vraag jouw gratis demopakket aan/.test(gw), "twee knoppen: Bekijk de showcase en Vraag jouw gratis demopakket aan");
+eis(/\.gw2-kop \.sn-alg-uitleg\{[^}]*font-size:15px/.test(css), "uitleg onder de kop is kleiner");
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");
