@@ -73,7 +73,7 @@ const scBody = sc.split("</head>")[1] || "";
 eis(!/data-fb|ELT_FB|feedback\.php|Geef je feedback|fbband/.test(scBody), "showcase zonder reviewoptie (geen feedbacklaag)");
 eis(fs.existsSync("public/showcase/elt-live/website/index.html") && !/feedback\.js/.test(lees("public/showcase/elt-live/website/index.html")), "website in de showcase zonder feedbacklaag");
 eis(/id="showcase"/.test(gw) && /<iframe[^>]*src="\/showcase\/elt-live\/index\.html"/.test(gw) && gw.indexOf('id="showcase"') > gw.indexOf("</form>"), "live tegel met de showcase onder de vragen");
-eis(/href="#showcase"[^>]*>[\s\S]{0,80}Bekijk de showcase/.test(gw) && /href="#onboarding"[^>]*>[\s\S]{0,80}Vraag jouw gratis demopakket aan/.test(gw), "twee knoppen: Bekijk de showcase en Vraag jouw gratis demopakket aan");
+eis(/className="sn-pill gw2-groot" href="#onboarding"[^>]*>[\s\S]{0,60}Free Growth Package!/.test(gw) && /className="gw2-klein-link" href="#showcase"[^>]*>Bekijk de showcase/.test(gw) && !/Vraag jouw gratis demopakket aan/.test(gw), "grote knop FREE GROWTH PACKAGE!, daaronder klein Bekijk de showcase");
 eis(/\.gw2-kop \.sn-alg-uitleg\{[^}]*font-size:15px/.test(css), "uitleg onder de kop is kleiner");
 // 27 nov (Marinus): "En pagina moet heten BLACKFRIDAY DEAL." en, bij de knop Volgende: "Hier graag witte tekst".
 eis(/"\/gratis-website": "BLACK FRIDAY DEAL"/.test(lees("proposal/WebsiteProposal.tsx")) && /'gratis-website': \{title: 'BLACK FRIDAY DEAL \| SocialNow'/.test(lees("scripts/postbuild.mjs")), "paginatitel is BLACK FRIDAY DEAL");
@@ -107,4 +107,5 @@ const wp = lees("proposal/WebsiteProposal.tsx"), pb = lees("scripts/postbuild.mj
 eis(/<Route path="\/black-friday" element=\{<GratisWebsite \/>\} \/>/.test(wp) && /<Route path="\/gratis-website" element=\{<NaarBlackFriday \/>\} \/>/.test(wp) && /Navigate to=\{`\/black-friday\$\{search\}/.test(wp), "/black-friday is het echte adres, /gratis-website gaat erheen (met ?ref)");
 eis(/'black-friday': \{title: 'BLACK FRIDAY DEAL/.test(pb), "/black-friday wordt voorgerenderd met titel en meta");
 eis(/WEBSITE_ACTIE_PAD = "\/black-friday"/.test(lees("proposal/Producten.tsx")) && /DEAL_PAD = "\/black-friday"/.test(lees("proposal/HeaderAlgemeen.tsx")) && !/"\/gratis-website"/.test(lees("proposal/HomeEnthousiast.tsx")), "menu, switch en homepage linken naar /black-friday");
+eis(/\.sn-pill\.gw2-groot\{background:#25d366[^}]*color:#fff/.test(css) && /\.gw2-klein-link\{color:#fff/.test(css), "FREE GROWTH PACKAGE! in een groene knop met witte tekst, witte showcase-link eronder");
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");
