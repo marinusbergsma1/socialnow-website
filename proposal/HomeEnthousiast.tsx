@@ -1,4 +1,3 @@
-import GrowthDealSticker from "./GrowthDealSticker";
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
@@ -44,7 +43,6 @@ export default function HomeEnthousiast() {
         <div className="sn-alg-tekst">
           {/* 25 november 2026 (Marinus), bij "Management · Operations · Odoo": "Die mag misschien ook weg of beter aansluiten." De zin onder
               de kop noemt management en operations al, dus het label zegt nu hoe: end-to-end, met experts en AI. */}
-          <GrowthDealSticker naar="/black-friday" />
           <p className="sn-alg-label"><i />End-to-end · Experts en AI</p>
           {/* 25 november 2026 (Marinus), bij "Een betrouwbare partner voor groei en cybersecurity.": "Doe maar een betrouwbare groeipartner." */}
           <h1 id="sn-blij-kop">Een betrouwbare groeipartner<span className="sn-alg-punt">.</span></h1>
