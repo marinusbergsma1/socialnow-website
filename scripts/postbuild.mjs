@@ -31,7 +31,7 @@ const routeMeta = {
   prijzen: {title: 'Aanbod: gratis OS, tokens en hulppakketten | SocialNow', description: 'De AI-gestuurde persoonlijke werkplek, met échte professionals en menselijk contact. WEBSITE → CONTENT → STUDIO. GRATIS tot 10 GB opslag. Hulppakketten met een custom OS en een gratis website, en tokens voor de Studio. Odoo is een optionele koppeling.'},
   privacy: {title: 'Privacybeleid | SocialNow', description: 'Lees hoe SocialNow omgaat met persoonsgegevens en welke rechten je hebt.'},
   voorwaarden: {title: 'Algemene voorwaarden | SocialNow', description: 'De algemene voorwaarden van SocialNow, inclusief het gebruik van SocialNow OS.'},
-  'gratis-website': {title: 'Gratis website aanvragen | SocialNow', description: 'Vraag je gratis website aan via WhatsApp. Je gegevens staan alvast in het bericht.'},
+  'gratis-website': {title: 'BLACK FRIDAY DEAL | SocialNow', description: 'Heel december: gratis websitedemo, rebranding en ad creatives. Alleen voor bedrijven die serieus zijn over groei.'},
   'gratis-os-demo': {title: 'Gratis OS-demo | SocialNow', description: 'Vraag een gratis demo van SocialNow OS aan via WhatsApp met je naam en e-mailadres.'},
   'antwoord-aanvragen': {title: 'Antwoord op aanvragen | SocialNow', description: 'Persoonlijke antwoordpagina voor aanvragen via WhatsApp.'},
   audit: {title: 'Gratis Google Ads audit | SocialNow', description: 'Nick van Keulen loopt je Google Ads handmatig door: tracking, structuur, biedstrategie en productfeed. Met actieplan en videocall. Gratis.'},

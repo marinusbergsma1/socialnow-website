@@ -84,7 +84,7 @@ const paginaTitels: Record<string, string> = {
   "/contact": "Contact",
   "/audit": "Gratis Google Ads audit",
   "/security": "Free Website DEMO & Security SCAN",
-  "/gratis-website": "Gratis website aanvragen",
+  "/gratis-website": "BLACK FRIDAY DEAL",   // 27 nov (Marinus): "En pagina moet heten BLACKFRIDAY DEAL."
   "/gratis-os-demo": "Gratis OS-demo",
   "/antwoord-aanvragen": "Antwoord op aanvragen",
   "/juridisch": "Juridisch en compliance",

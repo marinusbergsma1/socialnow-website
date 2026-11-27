@@ -9,10 +9,12 @@ const lees = (p) => (fs.existsSync(p) ? fs.readFileSync(p, "utf8") : "");
 const gw = lees("proposal/GratisWebsite.tsx"), bf = lees("proposal/BlackFridayBlok.tsx"), css = lees("proposal/gratis-website-wit.css");
 
 eis(/<BlackFridayBlok \/>/.test(gw) && !/className="gw2-stapel"/.test(gw), "/gratis-website toont het Black Friday-blok in plaats van de twee websitetegels");
-eis(/BLACK FRIDAY DEAL/.test(bf) && /SocialNow-Logo-2026\.webp/.test(bf) && !/Social-Now-Logo-Breed-Wit/.test(bf), "blok heeft het glanzende SocialNow-logo (2026) met BLACK FRIDAY DEAL; niet het platte logo (Marinus 27 nov)");
-eis(/2026-12-31T23:59:59\+01:00/.test(bf), "countdown loopt tot 31 december 2026 23:59 (Amsterdam)");
-eis(/setInterval\([^,]+,\s*1000\)/.test(bf) && /Dagen/.test(bf) && /Uren/.test(bf) && /Min/.test(bf) && /Sec/.test(bf), "countdown telt per seconde: dagen, uren, minuten, seconden");
-eis(/useState<number \| null>\(null\)/.test(bf), "countdown pas na laden berekend (geen verschil met de prerender)");
+// 27 nov (Marinus): "Die moet ook ipv de timer mijn video laten zien. Dus video en daaronder die slider." De timer en het losse logo
+// zijn weg; de Black Friday-film (met de thumbnail als startbeeld, die het logo al heeft) staat erboven.
+eis(/const FILM = "\/video\/black-friday\/socialnow-black-friday-5x4-nl\.mp4"/.test(bf) && /const POSTER = "\/video\/black-friday\/socialnow-black-friday-thumbnail\.jpg"/.test(bf) && /<video[^>]*src=\{FILM\} poster=\{POSTER\}/.test(bf), "blok toont de Black Friday-film met de thumbnail als startbeeld");
+eis(!/gw2-bf-klok|2026-12-31T23:59/.test(bf), "geen countdown meer in het blok");
+eis(/\.load\(\)/.test(bf) && /onEnded/.test(bf), "film eindigt weer op de thumbnail");
+eis(bf.indexOf("<video") < bf.indexOf("<Rij "), "video boven de slider");
 const rij = (bf.match(/const RIJ_(WERK|SITES)\s*=\s*\[([\s\S]*?)\];/g) || []);
 eis(rij.length === 2, "twee rijen: content en websites");
 for (const p of [...bf.matchAll(/"(\/(?:images|screenshots)\/[^"]+\.webp)"/g)].map(m => m[1])) eis(fs.existsSync("public" + p), `beeld bestaat: ${p}`);
@@ -53,7 +55,9 @@ eis((held.match(/className="gw2-muis"/g) || []).length === 1 && !/Developer|Desi
 // bij het ELT project." en "na selecteren moet ie weer terug veranderen in een muis."
 eis(/width="16"/.test(held) && /gw2-pijl/.test(held) && /dataset\.vorm = "pijl"/.test(held) && /dataset\.vorm = "tekst"/.test(held), "kleine cursor: pijl onderweg, I-beam bij selecteren, daarna weer pijl");
 eis((held.match(/#[0-9a-f]{6}/gi) || []).filter((k, i, a) => a.indexOf(k) === i).length >= 4 && /KLEUREN/.test(held), "selecteren in meerdere kleuren (logokleuren)");
-eis(/RUST = (\d+)/.test(held) && Number(held.match(/RUST = (\d+)/)[1]) >= 2500, "rustig tempo: minstens 2,5 s rust tussen selecties");
+// 27 nov (Marinus): "Het selecteren van de woorden mag nog iets sneller gaan."
+const getal = (n) => Number((held.match(new RegExp(n + " = (\\d+)")) || [])[1]);
+eis(getal("BEWEEG") <= 750 && getal("SLEEP") <= 800 && getal("RUST") >= 1500 && getal("RUST") <= 2200, `sneller selecteren (beweeg ${getal("BEWEEG")}, sleep ${getal("SLEEP")}, rust ${getal("RUST")} ms)`);
 eis(/className="gw2-bw"/.test(held) && /\.gw2-bw\{[^}]*filter:blur\(10px\)/.test(css), "woorden faden in met blur, zoals ELT");
 eis(/\.gw2-held-woord\{[^}]*background-size:0% 100%/.test(css) && /\.gw2-held-woord\.gekozen\{[^}]*background-size:100% 100%/.test(css), "selectie groeit van links naar rechts, zoals slepen");
 // 27 nov (Marinus): "Verder Plan een Cal mag verder weg." Geen Plan een call-knop meer in de kop van /gratis-website.
@@ -71,4 +75,7 @@ eis(fs.existsSync("public/showcase/elt-live/website/index.html") && !/feedback\.
 eis(/id="showcase"/.test(gw) && /<iframe[^>]*src="\/showcase\/elt-live\/index\.html"/.test(gw) && gw.indexOf('id="showcase"') > gw.indexOf("</form>"), "live tegel met de showcase onder de vragen");
 eis(/href="#showcase"[^>]*>[\s\S]{0,80}Bekijk de showcase/.test(gw) && /href="#onboarding"[^>]*>[\s\S]{0,80}Vraag jouw gratis demopakket aan/.test(gw), "twee knoppen: Bekijk de showcase en Vraag jouw gratis demopakket aan");
 eis(/\.gw2-kop \.sn-alg-uitleg\{[^}]*font-size:15px/.test(css), "uitleg onder de kop is kleiner");
+// 27 nov (Marinus): "En pagina moet heten BLACKFRIDAY DEAL." en, bij de knop Volgende: "Hier graag witte tekst".
+eis(/"\/gratis-website": "BLACK FRIDAY DEAL"/.test(lees("proposal/WebsiteProposal.tsx")) && /'gratis-website': \{title: 'BLACK FRIDAY DEAL \| SocialNow'/.test(lees("scripts/postbuild.mjs")), "paginatitel is BLACK FRIDAY DEAL");
+eis(/\.gw2-verder\{[^}]*color:#fff[;}]/.test(css), "knop Volgende: witte tekst op groen");
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");

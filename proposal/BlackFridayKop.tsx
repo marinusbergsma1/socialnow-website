@@ -7,7 +7,8 @@ import React, { useEffect, useRef } from "react";
 // "na selecteren moet ie weer terug veranderen in een muis." Dus: één kleine cursor. Onderweg een muispijl; bij het woord wordt het
 // een I-beam die van begin naar eind sleept, terwijl de selectie meegroeit in een van de logokleuren; daarna weer een pijl.
 // De woorden faden in met blur, zoals de koppen op de ELT-site (blur-kop .bw). Bij reduced motion: alleen de tekst.
-const BEWEEG = 1000, OMSLAG = 220, SLEEP = 1200, RUST = 2800;
+// 27 nov (Marinus): "Het selecteren van de woorden mag nog iets sneller gaan."
+const BEWEEG = 700, OMSLAG = 160, SLEEP = 750, RUST = 1900;
 const KLEUREN = ["#25d366", "#00a3e0", "#e5397a", "#f59e0b"];   // groen, en blauw, roze en oranje uit het SocialNow-logo
 
 function Pijl() {
