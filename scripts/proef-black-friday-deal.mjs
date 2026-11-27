@@ -21,7 +21,12 @@ eis(/DEAL_FILM_5X4/.test(kop) && /DEAL_FILM_9X16/.test(kop) && /DEAL_POSTER/.tes
 const FILM_BF = "public/video/black-friday/socialnow-black-friday-5x4-nl.mp4", POSTER_BF = "public/video/black-friday/socialnow-black-friday-5x4-nl-thumb.jpg";
 eis(/const DEAL_FILM_5X4(?:: string)? = "\/video\/black-friday\/socialnow-black-friday-5x4-nl\.mp4"/.test(kop) && fs.existsSync(FILM_BF) && fs.statSync(FILM_BF).size < 12_000_000, "dealfilm NL 5:4 staat in public/ en is kleiner dan 12 MB");
 eis(fs.existsSync(FILM_BF) && fs.readFileSync(FILM_BF).subarray(0, 64).includes("moov"), "dealfilm heeft faststart (moov vooraan)");
-eis(/const DEAL_POSTER = "\/video\/black-friday\/socialnow-black-friday-5x4-nl-thumb\.jpg"/.test(kop) && fs.existsSync(POSTER_BF) && fs.statSync(POSTER_BF).size < 250_000, "poster staat in public/ en is kleiner dan 250 KB");
+eis(fs.existsSync(POSTER_BF) && fs.statSync(POSTER_BF).size < 250_000, "oude poster staat nog in public/ en is kleiner dan 250 KB");
+// 27 nov 11:45 (Marinus): "Dit mag de Thumbnail zijn ook op het BLACK FRIDAY ONDERDEEL OP DE WEBSITE."
+const THUMB_BF = "public/video/black-friday/socialnow-black-friday-thumbnail.jpg", MAILPOSTER_BF = "public/video/black-friday/socialnow-black-friday-5x4-nl-poster-mail.jpg";
+eis(/const DEAL_POSTER = "\/video\/black-friday\/socialnow-black-friday-thumbnail\.jpg"/.test(kop) && fs.existsSync(THUMB_BF) && fs.statSync(THUMB_BF).size < 250_000, "gekozen thumbnail is poster en startbeeld van de dealfilm, kleiner dan 250 KB");
+eis(fs.existsSync(THUMB_BF) && fs.existsSync(MAILPOSTER_BF) && fs.readFileSync(THUMB_BF).equals(fs.readFileSync(MAILPOSTER_BF)), "poster-mail.jpg is hetzelfde gekozen beeld");
+eis(/DEAL_LOOP_AAN: boolean = false/.test(kop) && /DEAL_LOOP_AAN && dealFilm && !dealGestart/.test(kop), "loop staat uit, zodat de thumbnail het startbeeld is");
 eis(/\[data-staand="true"\]\{aspect-ratio:9\/16\}/.test(css) && !/\[data-dealfilm="true"\]\{aspect-ratio:9\/16\}/.test(css), "een liggende film krijgt op mobiel geen 9:16-kader");
 eis(/max-width:700px/.test(kop) && /DEAL_FILM_9X16/.test(kop), "op mobiel speelt de 9:16-versie");
 eis(/sn-alg-deal-wacht/.test(kop) && /sn-alg-deal-wacht/.test(css), "placeholder zolang de Black Friday-film er niet is");

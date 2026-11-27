@@ -53,7 +53,11 @@ const FILM_DIEPTE = "/video/explainer/socialnow-explainer-5x4-thumb-diepte.webp"
 // terug op de 5:4. Komt er een 9:16, vul DEAL_FILM_9X16 in; dan wordt het mobiele kader 9:16.
 const DEAL_FILM_5X4: string = "/video/black-friday/socialnow-black-friday-5x4-nl.mp4";
 const DEAL_FILM_9X16: string = "";  // "/video/black-friday/socialnow-black-friday-9x16.mp4"
-const DEAL_POSTER = "/video/black-friday/socialnow-black-friday-5x4-nl-thumb.jpg";
+// 27 november 2026, 11:45 (Marinus, bij de gekozen thumbnail): "Dit mag de Thumbnail zijn ook op het BLACK FRIDAY ONDERDEEL OP DE
+// WEBSITE." Dus dit beeld (logo, BLACK FRIDAY DEAL, Marinus en klantwerk; 07_MARKETING/.../thumbnail/gekozen-20261127) is het startbeeld
+// en de poster van de dealfilm. De loop hieronder staat daarom uit (DEAL_LOOP_AAN); terugzetten = true.
+const DEAL_POSTER = "/video/black-friday/socialnow-black-friday-thumbnail.jpg";
+const DEAL_LOOP_AAN: boolean = false;
 // 27 november 2026 (Marinus): "Graag de thumbnail video gebruiken die ik heb gestuurd. Kies hier een mooi stukje uit en maak er een loop
 // van." Daarna: "Vanaf 19 tot 22 en even color graden nog" en "misschien gwn opnieuw laten afspelen in een loop". Dus IMG_1671 (SDR-versie)
 // 19-22 s, gegraded met de SocialNow-rooftop-LUT, gewoon vooruit in een loop: 3 s, 5:4, zonder geluid, 1,1 MB. Speelt stil als startbeeld
@@ -203,7 +207,7 @@ export function AtomiumFoto() {
         <Diepte3D src={FILM_POSTER} diepte={FILM_DIEPTE} positie={[0.5, 0.45]} actief={!speelt && !gestart} sterkte={0.014} anker={0.06} />
       </div>}
       {filmAan && <span className="sn-alg-filmwaas" data-weg={speelt || gestart || undefined} aria-hidden="true" />}
-      {modus === "deal" && dealFilm && !dealGestart && <video className="sn-alg-dealloop" src={draait ? DEAL_LOOP : undefined} poster={DEAL_LOOP_POSTER}
+      {modus === "deal" && DEAL_LOOP_AAN && dealFilm && !dealGestart && <video className="sn-alg-dealloop" src={draait ? DEAL_LOOP : undefined} poster={DEAL_LOOP_POSTER}
         autoPlay={draait} muted loop playsInline preload={draait ? "auto" : "none"} aria-hidden="true" onClick={startDeal} />}
       {modus === "deal" && (dealFilm
         ? <video ref={deal} key={dealFilm} className="sn-alg-dealfilm" src={dealFilm} poster={DEAL_POSTER || undefined} playsInline preload="metadata"
