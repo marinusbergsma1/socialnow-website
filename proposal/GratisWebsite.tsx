@@ -6,6 +6,7 @@ import { languagePrefix, useLanguage } from "./i18n/context";
 import { aanvraagWhatsApp, heeftWhatsApp, whatsappLink } from "./aanvragen";
 import { people } from "./content";
 import { klein } from "./licht";
+import BlackFridayBlok from "./BlackFridayBlok";
 import "./header-algemeen.css";
 import "./home-enthousiast.css";
 import "./gratis-website-wit.css";
@@ -114,12 +115,8 @@ export default function GratisWebsite() {
           </div>
           <a className="gw2-onboarding" href="#onboarding" onClick={naarStart}>Vul de onboarding in</a>
         </div>
-        {/* 25 november 2026 (Marinus): "de 2 tiles gewoon niet projecten maar die eerst op de homepage over elkaar heen stonden hoeft ook
-            geen tekst bij maar mag gewoon lekker groot van dit is wat we doen." */}
-        <div className="gw2-stapel" aria-hidden="true">
-          <img className="is-een" src="/images/cases/vastiq-desktop.webp" alt="" loading="lazy" decoding="async" />
-          <img className="is-twee" src="/images/cases/ilgordo-desktop.webp" alt="" loading="lazy" decoding="async" />
-        </div>
+        {/* 27 november 2026 (Marinus): de twee websitetegels maken plaats voor het Black Friday-blok: logo, countdown en rijen werk. */}
+        <BlackFridayBlok />
       </div>
     </section>
     <div className="gw2" id="onboarding"><div className="gw2-vel">

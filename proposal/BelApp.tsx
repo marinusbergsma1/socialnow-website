@@ -1,5 +1,5 @@
-import { CalendarDays, MessageCircle, Phone } from "lucide-react";
-import { appLink, belLink } from "./aanvragen";
+import { CalendarDays, MessageCircle } from "lucide-react";
+import { appLink } from "./aanvragen";
 import { boekingsPlannerUrl } from "./PlanCall";
 import "./bel-app.css";
 
@@ -8,8 +8,7 @@ import "./bel-app.css";
 export function BelApp() {
   return <nav className="sn-bel-app" aria-label="Bel of app Marinus">
     <a className="sn-bel-app-call" href={boekingsPlannerUrl}><CalendarDays size={15} aria-hidden="true" /><span>Plan een call</span></a>
-    {/* 25 november 2026 (Marinus): "Op mobiel mag dit plan een Call en Whatsapp zijn." Bellen alleen op grotere schermen. */}
-    <a className="sn-bel-app-bel" href={belLink}><Phone size={15} aria-hidden="true" /><span>Bellen</span></a>
+    {/* 27 november 2026 (Marinus): "Bellen mag wel weg hier. Gewoon Plan een Call of Whatsapp." Ook op grote schermen geen Bellen meer. */}
     <a href={appLink()} target="_blank" rel="noopener noreferrer"><MessageCircle size={15} aria-hidden="true" /><span translate="no">WhatsApp</span></a>
   </nav>;
 }

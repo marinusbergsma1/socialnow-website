@@ -213,7 +213,7 @@ export function AtomiumFoto() {
       {modus === "deal" && (dealFilm
         ? <video ref={deal} key={dealFilm} className="sn-alg-dealfilm" src={dealFilm} poster={DEAL_POSTER || undefined} playsInline preload="metadata"
             aria-label="Black Friday Deal: dit is de deal" onClick={dealWissel} onPlay={() => zetSpeelt(true)} onPause={() => zetSpeelt(false)}
-            onEnded={() => { zetSpeelt(false); if (deal.current) deal.current.currentTime = 0; }} />
+            onEnded={() => { zetSpeelt(false); deal.current?.load(); /* 27 nov (Marinus): "Eindig de Nederlandse versie weer gwn op de Thumbnail." */ }} />
         : <div className="sn-alg-deal-wacht">
             <p className="sn-alg-label"><i />Black Friday Deal</p>
             <strong>Je nieuwe website, gratis gemaakt<span className="sn-alg-punt">.</span></strong>
