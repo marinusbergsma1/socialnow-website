@@ -185,5 +185,6 @@ a.sn-gpd:hover{transform:rotate(4deg) scale(1.05)}
 .sn-gpd .h-ambient-video{height:auto;aspect-ratio:1;overflow:visible}
 .sn-gpd .h-ambient-video>video,.sn-gpd .h-ambient-video>img{object-fit:contain}
 .sn-gpd .h-ambient-video[data-playing="true"]>img{opacity:0}
-@media(max-width:900px){.sn-gpd{bottom:auto;top:-30px;left:auto;right:0;width:120px}}
+/* 27 nov (Marinus): "bij mobiele versies wel gwn erboven." Onder 1200 px staat de sticker in de flow boven het label. */
+@media(max-width:1200px){.sn-gpd{position:relative;top:auto;bottom:auto;left:auto;right:auto;width:clamp(120px,22vw,160px);margin:0 0 14px;transform:rotate(6deg)}}
 @media(prefers-reduced-motion:reduce){.sn-gpd,a.sn-gpd:hover{transition:none}}

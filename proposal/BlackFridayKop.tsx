@@ -137,7 +137,8 @@ export function ShowcaseKop() {
   return <div className="gw2-held-vak gw2-showcase-vak" ref={vak} style={{ "--pix": "url(#gw2-pix-showcase)" } as React.CSSProperties}>
     <Glitchlaag id="gw2-pix-showcase" />
     <h2 id="gw2-showcase-kop" translate="no">
-      <span className="gw2-held-regel"><span className="gw2-held-woord"><W i={0}>GROWTH</W></span> <span className="gw2-held-woord"><W i={1}>PACKAGE</W></span></span>
+      {/* 27 nov (Marinus): "Altijd GROWTH PACKAGE samen selecteren." */}
+      <span className="gw2-held-regel"><span className="gw2-held-woord"><W i={0}>GROWTH</W> <W i={1}>PACKAGE</W></span></span>
       <span className="gw2-held-regel"><span className="gw2-held-woord"><W i={2}>SHOWCASE</W></span><W i={3}><span className="gw2-punt">.</span></W></span>
     </h2>
     <span className="gw2-muis" data-vorm="pijl" aria-hidden="true"><Pijl /><IBeam /></span>
