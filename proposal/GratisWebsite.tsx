@@ -7,6 +7,7 @@ import { aanvraagWhatsApp, heeftWhatsApp, whatsappLink } from "./aanvragen";
 import { people } from "./content";
 import { klein } from "./licht";
 import BlackFridayBlok from "./BlackFridayBlok";
+import BlackFridayKop from "./BlackFridayKop";
 import "./header-algemeen.css";
 import "./home-enthousiast.css";
 import "./gratis-website-wit.css";
@@ -23,7 +24,19 @@ const STIJLEN = [
   { id: "vastiq", naam: "VASTIQ", wat: "Strak en zakelijk", beeld: "/images/cases/vastiq-desktop.webp" },
   { id: "vdz", naam: "VDZ Brigade", wat: "Stoer en vakkundig", beeld: "/images/cases/vdz-brigade-desktop.webp" },
   { id: "ilgordo", naam: "Il Gordo", wat: "Warm en sfeervol", beeld: "/images/cases/ilgordo-desktop.webp" },
+  // 27 november 2026 (Marinus): "Hier mogen nog meer websites staan doe ook maar de Black.." Vijf websites erbij, waaronder NEW BLACK.
+  { id: "newblack", naam: "NEW BLACK", wat: "Luxe en internationaal", beeld: "/screenshots/newblack-hero.webp" },
+  { id: "divine", naam: "Divine Machines", wat: "Fris en productgericht", beeld: "/screenshots/divine-machines-hero.webp" },
+  { id: "primefone", naam: "Primefone", wat: "Helder en verkopend", beeld: "/screenshots/primefone-hero.webp" },
+  { id: "raveg", naam: "RAVEG", wat: "Zacht en premium", beeld: "/screenshots/raveg-bounce-hero.webp" },
+  { id: "vintage", naam: "Vintage Watches", wat: "Klassiek en exclusief", beeld: "/screenshots/vintage-watches-hero.webp" },
 ];
+// 27 november 2026 (Marinus): "Verder 6 vragen 10 vragen van maken en iets over branding ook erbij." Vier nieuwe vragen, simpel en
+// zonder vaktermen: wat je deze december wilt, hoe je merk er nu bij staat, hoe het moet voelen, en waar je wilt adverteren.
+const DEAL = ["Gratis websitedemo", "Rebranding", "Ad creatives"];
+const MERK_NU = ["Logo en huisstijl zijn klaar", "Het mag frisser", "We beginnen vanaf nul"];
+const MERK_GEVOEL = ["Zakelijk", "Luxe", "Speels", "Stoer", "Warm", "Modern", "Duurzaam", "Vertrouwd"];
+const KANALEN = ["Instagram", "Facebook", "LinkedIn", "TikTok", "Google", "YouTube", "Weet ik nog niet"];
 const DOELEN = ["Meer aanvragen", "Professioneler uitstralen", "Beter vindbaar in Google", "Online verkopen", "Afspraken laten maken", "Vacatures vullen"];
 
 // 4 november 2026 (Marinus): "die website-onboarding waarbij ze nog de persoon kunnen aanvinken via wie ze daar zijn gekomen". Wie
@@ -40,10 +53,10 @@ function uitRef(ref: string | null): string {
   return AANBRENGERS.find((p) => sleutel(p.name) === r || sleutel(p.name.split(" ")[0]) === r)?.name || "";
 }
 
-type Antwoorden = { via: string; viaAnders: string; wat: string; stijlen: string[]; link: string; doelen: string[]; anders: string; website: string; voornaam: string; achternaam: string; bedrijf: string; email: string; mobiel: string };
-const LEEG: Antwoorden = { via: "", viaAnders: "", wat: "", stijlen: [], link: "", doelen: [], anders: "", website: "", voornaam: "", achternaam: "", bedrijf: "", email: "", mobiel: "" };
+type Antwoorden = { deal: string[]; merkNu: string; gevoel: string[]; kanalen: string[]; via: string; viaAnders: string; wat: string; stijlen: string[]; link: string; doelen: string[]; anders: string; website: string; voornaam: string; achternaam: string; bedrijf: string; email: string; mobiel: string };
+const LEEG: Antwoorden = { deal: [...DEAL], merkNu: "", gevoel: [], kanalen: [], via: "", viaAnders: "", wat: "", stijlen: [], link: "", doelen: [], anders: "", website: "", voornaam: "", achternaam: "", bedrijf: "", email: "", mobiel: "" };
 function laad(): Antwoorden {
-  try { const j = JSON.parse(localStorage.getItem(OPSLAG) || "null"); if (j && typeof j === "object" && Array.isArray(j.stijlen)) return { ...LEEG, ...j }; } catch {}
+  try { const j = JSON.parse(localStorage.getItem(OPSLAG) || "null"); if (j && typeof j === "object" && Array.isArray(j.stijlen)) return { ...LEEG, ...j, deal: Array.isArray(j.deal) ? j.deal : LEEG.deal, gevoel: Array.isArray(j.gevoel) ? j.gevoel : [], kanalen: Array.isArray(j.kanalen) ? j.kanalen : [] }; } catch {}
   return LEEG;
 }
 
@@ -63,14 +76,18 @@ export default function GratisWebsite() {
   }, []);
   useEffect(() => { if (geladen) try { localStorage.setItem(OPSLAG, JSON.stringify(a)); } catch {} }, [a, geladen]);
   const zet = <K extends keyof Antwoorden>(k: K, v: Antwoorden[K]) => zetA((x) => ({ ...x, [k]: v }));
-  const wissel = (k: "stijlen" | "doelen", v: string) => zet(k, a[k].includes(v) ? a[k].filter((x) => x !== v) : [...a[k], v]);
+  const wissel = (k: "stijlen" | "doelen" | "deal" | "gevoel" | "kanalen", v: string) => zet(k, a[k].includes(v) ? a[k].filter((x) => x !== v) : [...a[k], v]);
 
-  const STAPPEN = ["Wat doet je bedrijf?", "Welke stijl spreekt je aan?", "Wat moet je website vooral doen?", "Heb je al een website?", "Via wie ben je bij ons gekomen?", "Hoe bereiken we je?"];
+  const STAPPEN = ["Wat doet je bedrijf?", "Wat wil je deze december?", "Welke stijl spreekt je aan?", "Wat moet je website vooral doen?", "Heb je al een website?",
+    "Hoe staat je merk er nu bij?", "Hoe moet je merk voelen?", "Waar wil je adverteren?", "Via wie ben je bij ons gekomen?", "Hoe bereiken we je?"];
+  // Vaste nummers per vraag, zodat de volgorde op één plek staat.
+  const S = { wat: 0, deal: 1, stijl: 2, doel: 3, site: 4, merkNu: 5, gevoel: 6, kanalen: 7, via: 8, contact: 9 };
   const laatste = STAPPEN.length - 1;
   const controle = () => {
-    if (stap === 0 && !a.wat.trim()) return t("Vertel in één zin wat je bedrijf doet.");
-    if (stap === 4 && !a.via) return t("Kies via wie je bij ons kwam.");
-    if (stap === 4 && a.via === ANDERS && !a.viaAnders.trim()) return t("Vul in via wie je bij ons kwam.");
+    if (stap === S.wat && !a.wat.trim()) return t("Vertel in één zin wat je bedrijf doet.");
+    if (stap === S.deal && !a.deal.length) return t("Kies minstens één onderdeel.");
+    if (stap === S.via && !a.via) return t("Kies via wie je bij ons kwam.");
+    if (stap === S.via && a.via === ANDERS && !a.viaAnders.trim()) return t("Vul in via wie je bij ons kwam.");
     if (stap === laatste) {
       if (!a.voornaam.trim() || !a.achternaam.trim()) return t("Vul je voor- en achternaam in.");
       if (!a.bedrijf.trim()) return t("Vul je bedrijfsnaam in.");
@@ -87,7 +104,8 @@ export default function GratisWebsite() {
     const voorbeeld = [...a.stijlen.map((id) => STIJLEN.find((s) => s.id === id)?.naam || id), a.link.trim()].filter(Boolean).join(", ");
     const nietgoed = [...a.doelen.map((d) => t(d)), a.anders.trim()].filter(Boolean).join(". ");
     const via = a.via === ZELF ? t("Niemand, zelf gevonden") : a.via === ANDERS ? `${t("Iemand anders")}: ${a.viaAnders.trim()}` : a.via;
-    const adres = aanvraagWhatsApp("website", language, { via, voornaam: a.voornaam, achternaam: a.achternaam, bedrijf: a.bedrijf, email: a.email, mobiel: a.mobiel, website: a.website, voorbeeld, wat: a.wat, nietgoed });
+    const adres = aanvraagWhatsApp("website", language, { via, voornaam: a.voornaam, achternaam: a.achternaam, bedrijf: a.bedrijf, email: a.email, mobiel: a.mobiel, website: a.website, voorbeeld, wat: a.wat, nietgoed,
+      extra: [[t("Black Friday Deal"), a.deal.map((x) => t(x)).join(", ")], [t("Merk nu"), a.merkNu ? t(a.merkNu) : ""], [t("Gevoel van het merk"), a.gevoel.map((x) => t(x)).join(", ")], [t("Adverteren op"), a.kanalen.map((x) => t(x)).join(", ")]] });
     zetVerstuurd(adres);
     // Droog in proeven en previews: geautomatiseerde browsers en ?proef in het adres openen nooit een echte mail of WhatsApp.
     if (navigator.webdriver || new URLSearchParams(window.location.search).has("proef")) return;
@@ -107,7 +125,8 @@ export default function GratisWebsite() {
           <p className="sn-alg-label"><i />Black Friday Deal</p>
           {/* 27 november 2026 (Marinus): "De COPY MOET VEEL BETER AANSLUITEN OP de video zelf, we doen namelijk veel meer dan alleen de
               websites." Kop en uitleg volgen nu de Black Friday-film. */}
-          <h1 id="gw2-kop">Gratis websitedemo, rebranding en ad creatives<span className="sn-alg-punt">.</span></h1>
+          {/* 27 november 2026 (Marinus): kop zoals de film, in kapitalen met AI-muisjes (BlackFridayKop.tsx). */}
+          <BlackFridayKop />
           {/* 4 november 2026 (avond, Marinus): "Vraag een veiligheidsrapport aan of krijg een gratis demo van een moderne website op maat." */}
           <p className="sn-alg-uitleg"><strong>Heel december, alleen voor bedrijven die serieus zijn over groei.</strong> Bij SocialNow werken AI en menselijke experts samen aan de groei van jouw bedrijf. Naast onze gratis websitedemo krijg je deze maand ook rebranding en ad creatives gratis erbij.</p>
           {/* 25 november 2026 (Marinus): "Doe maar gewoon alleen een groene plan een call in en daaronder een kleine witte tekst, vul
@@ -128,11 +147,39 @@ export default function GratisWebsite() {
       <p className="gw2-stap">Vraag {stap + 1} van {STAPPEN.length}</p>
       <h2>{STAPPEN[stap]}</h2>
 
-      {stap === 0 && <label className="gw2-veld"><span className="gw2-verborgen">{STAPPEN[0]}</span>
+      {stap === S.wat && <label className="gw2-veld"><span className="gw2-verborgen">{STAPPEN[0]}</span>
         <textarea rows={3} maxLength={600} value={a.wat} onChange={(e) => zet("wat", e.target.value)} placeholder="Bijvoorbeeld: wij installeren zonnepanelen voor bedrijven in de regio Utrecht." />
       </label>}
 
-      {stap === 1 && <>
+      {stap === S.deal && <>
+        <p className="gw2-uitleg">Heel december krijg je ze alle drie gratis. Haal weg wat je niet nodig hebt.</p>
+        <div className="gw2-chips">{DEAL.map((d) => <label key={d} className={`gw2-chip${a.deal.includes(d) ? " aan" : ""}`}>
+          <input type="checkbox" checked={a.deal.includes(d)} onChange={() => wissel("deal", d)} /><Check size={14} aria-hidden="true" /><span>{d}</span>
+        </label>)}</div>
+      </>}
+
+      {stap === S.merkNu && <>
+        <p className="gw2-uitleg">Je merk is je naam, logo, kleuren en hoe je overkomt.</p>
+        <div className="gw2-chips">{MERK_NU.map((d) => <label key={d} className={`gw2-chip${a.merkNu === d ? " aan" : ""}`}>
+          <input type="radio" name="gw2-merknu" checked={a.merkNu === d} onChange={() => zet("merkNu", d)} /><Check size={14} aria-hidden="true" /><span>{d}</span>
+        </label>)}</div>
+      </>}
+
+      {stap === S.gevoel && <>
+        <p className="gw2-uitleg">Kies er gerust meer. Zo maken we iets dat bij je past.</p>
+        <div className="gw2-chips">{MERK_GEVOEL.map((d) => <label key={d} className={`gw2-chip${a.gevoel.includes(d) ? " aan" : ""}`}>
+          <input type="checkbox" checked={a.gevoel.includes(d)} onChange={() => wissel("gevoel", d)} /><Check size={14} aria-hidden="true" /><span>{d}</span>
+        </label>)}</div>
+      </>}
+
+      {stap === S.kanalen && <>
+        <p className="gw2-uitleg">Hier maken we je ad creatives voor. Kies er gerust meer.</p>
+        <div className="gw2-chips">{KANALEN.map((d) => <label key={d} className={`gw2-chip${a.kanalen.includes(d) ? " aan" : ""}`}>
+          <input type="checkbox" checked={a.kanalen.includes(d)} onChange={() => wissel("kanalen", d)} /><Check size={14} aria-hidden="true" /><span>{d}</span>
+        </label>)}</div>
+      </>}
+
+      {stap === S.stijl && <>
         <p className="gw2-uitleg">Kies er gerust meer. Dit is werk dat we eerder maakten.</p>
         <div className="gw2-stijlen">{STIJLEN.map((s) => <label key={s.id} className={`gw2-stijl${a.stijlen.includes(s.id) ? " aan" : ""}`}>
           <input type="checkbox" checked={a.stijlen.includes(s.id)} onChange={() => wissel("stijlen", s.id)} />
@@ -144,7 +191,7 @@ export default function GratisWebsite() {
         </label>
       </>}
 
-      {stap === 2 && <>
+      {stap === S.doel && <>
         <div className="gw2-chips">{DOELEN.map((d) => <label key={d} className={`gw2-chip${a.doelen.includes(d) ? " aan" : ""}`}>
           <input type="checkbox" checked={a.doelen.includes(d)} onChange={() => wissel("doelen", d)} /><Check size={14} aria-hidden="true" /><span>{d}</span>
         </label>)}</div>
@@ -153,12 +200,12 @@ export default function GratisWebsite() {
         </label>
       </>}
 
-      {stap === 3 && <label className="gw2-veld"><span>Link naar je huidige website <em>(optioneel)</em></span>
+      {stap === S.site && <label className="gw2-veld"><span>Link naar je huidige website <em>(optioneel)</em></span>
         <input value={a.website} maxLength={200} inputMode="url" autoCapitalize="none" autoCorrect="off" onChange={(e) => zet("website", e.target.value)} placeholder="https://" />
         <small>Nog geen website? Laat dit leeg, dan beginnen we vanaf nul.</small>
       </label>}
 
-      {stap === 4 && <>
+      {stap === S.via && <>
         <p className="gw2-uitleg">Zo weten we wie we mogen bedanken.</p>
         <div className="gw2-mensen">{AANBRENGERS.map((p) => <label key={p.name} className={`gw2-mens${a.via === p.name ? " aan" : ""}`}>
           <input type="radio" name="gw2-via" checked={a.via === p.name} onChange={() => zet("via", p.name)} />
@@ -173,7 +220,7 @@ export default function GratisWebsite() {
         {a.via === ANDERS && <label className="gw2-veld"><span>Anders, namelijk</span><input maxLength={120} value={a.viaAnders} onChange={(e) => zet("viaAnders", e.target.value)} /></label>}
       </>}
 
-      {stap === 5 && <>
+      {stap === S.contact && <>
         <div className="gw2-rij">
           <label className="gw2-veld"><span>Voornaam</span><input autoComplete="given-name" maxLength={40} value={a.voornaam} onChange={(e) => zet("voornaam", e.target.value)} /></label>
           <label className="gw2-veld"><span>Achternaam</span><input autoComplete="family-name" maxLength={40} value={a.achternaam} onChange={(e) => zet("achternaam", e.target.value)} /></label>

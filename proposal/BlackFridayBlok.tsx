@@ -46,7 +46,7 @@ export default function BlackFridayBlok() {
   const labels = ["Dagen", "Uren", "Min", "Sec"];
   return <div className="gw2-bf">
     <div className="gw2-bf-merk">
-      <img src="/images/Social-Now-Logo-Breed-Wit.webp" alt="SocialNow" width="1920" height="433" />
+      <img src="/images/SocialNow-Logo-2026.webp" alt="SocialNow" width="1556" height="240" />
       <span className="gw2-bf-deal">BLACK FRIDAY DEAL</span>
     </div>
     <div className="gw2-bf-klok" role="timer" aria-label="Tijd tot het einde van de Black Friday Deal">
