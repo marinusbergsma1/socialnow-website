@@ -49,6 +49,12 @@ eis(/<BlackFridayKop \/>/.test(gw) && /ÉN REBRANDING/.test(heldTekst) && /ÉN A
 eis(/gw2-muis/.test(held) && /gw2-muis/.test(css) && /gekozen/.test(held), "cursor die af en toe een woord selecteert");
 // 27 nov (Marinus): "Doe maar 1 pijltje die elke keer een ander stuk tekst selecteerd. Deze." (de I-beam-tekstcursor)
 eis((held.match(/className="gw2-muis"/g) || []).length === 1 && !/Developer|Designer/.test(held) && /gw2-ibeam/.test(held), "één I-beam-tekstcursor, geen naamlabels");
+// 27 nov (Marinus): "Deze niet zo groot en iets rustiger selecteren en het selecteren in meerdere kleuren en infaden zoals de teksten
+// bij het ELT project." en "na selecteren moet ie weer terug veranderen in een muis."
+eis(/width="16"/.test(held) && /gw2-pijl/.test(held) && /dataset\.vorm = "pijl"/.test(held) && /dataset\.vorm = "tekst"/.test(held), "kleine cursor: pijl onderweg, I-beam bij selecteren, daarna weer pijl");
+eis((held.match(/#[0-9a-f]{6}/gi) || []).filter((k, i, a) => a.indexOf(k) === i).length >= 4 && /KLEUREN/.test(held), "selecteren in meerdere kleuren (logokleuren)");
+eis(/RUST = (\d+)/.test(held) && Number(held.match(/RUST = (\d+)/)[1]) >= 2500, "rustig tempo: minstens 2,5 s rust tussen selecties");
+eis(/className="gw2-bw"/.test(held) && /\.gw2-bw\{[^}]*filter:blur\(10px\)/.test(css), "woorden faden in met blur, zoals ELT");
 eis(/\.gw2-held-woord\{[^}]*background-size:0% 100%/.test(css) && /\.gw2-held-woord\.gekozen\{[^}]*background-size:100% 100%/.test(css), "selectie groeit van links naar rechts, zoals slepen");
 // 27 nov (Marinus): "Verder Plan een Cal mag verder weg." Geen Plan een call-knop meer in de kop van /gratis-website.
 eis(!/className="sn-pill" href=\{boekingsPlannerUrl\}/.test(gw), "geen Plan een call-knop in de kop van /gratis-website");
