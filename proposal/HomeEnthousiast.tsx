@@ -20,7 +20,7 @@ import "./home-enthousiast.css";
 // de homepage gaat mee naar de onboarding, zodat ieder een eigen deellink kan gebruiken (socialnow.nl/?ref=ben).
 export function WebsiteCTA({ tweede = false }: { tweede?: boolean }) {
   const ref = typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("ref") || "";
-  const naar = ref ? `/gratis-website?ref=${encodeURIComponent(ref)}` : "/gratis-website";
+  const naar = ref ? `/black-friday?ref=${encodeURIComponent(ref)}` : "/black-friday";
   // 4 november 2026 (avond, Marinus): "Deze mobiele vind ik niks je mag daar nog een website tile van maken misschien is 2 wel vet en
   // focus meer op Gratis veiligheidupdates en websitedemo". Twee echte, live klantwebsites als tegels (geen concepten, geen kWh).
   return <section className={`sn-cta-web h-wrap${tweede ? " is-tweede" : ""}`} aria-label="Gratis veiligheidsupdates en websitedemo">
@@ -44,7 +44,7 @@ export default function HomeEnthousiast() {
         <div className="sn-alg-tekst">
           {/* 25 november 2026 (Marinus), bij "Management · Operations · Odoo": "Die mag misschien ook weg of beter aansluiten." De zin onder
               de kop noemt management en operations al, dus het label zegt nu hoe: end-to-end, met experts en AI. */}
-          <GrowthDealSticker naar="/gratis-website" />
+          <GrowthDealSticker naar="/black-friday" />
           <p className="sn-alg-label"><i />End-to-end · Experts en AI</p>
           {/* 25 november 2026 (Marinus), bij "Een betrouwbare partner voor groei en cybersecurity.": "Doe maar een betrouwbare groeipartner." */}
           <h1 id="sn-blij-kop">Een betrouwbare groeipartner<span className="sn-alg-punt">.</span></h1>
@@ -52,7 +52,7 @@ export default function HomeEnthousiast() {
           <div className="sn-alg-acties">
             {/* 4 november 2026 (avond, Marinus): "2e knop hier graag blauw maken ook en eerste knop mag zijn website actie". */}
             {/* 26 november 2026 (Black Friday campagne): de Website-actie heet nu Black Friday Deal. */}
-            <Link className="sn-pill" to="/gratis-website"><span>Black Friday Deal</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
+            <Link className="sn-pill" to="/black-friday"><span>Black Friday Deal</span><ArrowUpRight size={17} aria-hidden="true" /></Link>
             <a className="sn-pill sn-pill-blauw" href={boekingsPlannerUrl}><span>Neem contact op</span><ArrowUpRight size={17} aria-hidden="true" /></a>
           </div>
           {/* 4 november 2026 (Marinus, bij de lege ruimte onder de knoppen): "Hier moeten weer de shopify logo's etc komen." */}

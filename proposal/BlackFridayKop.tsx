@@ -71,10 +71,45 @@ function useSelectie(vak: React.RefObject<HTMLDivElement | null>, actief = true)
   }, [vak, actief]);
 }
 
+// 27 november 2026 (Marinus): "GLITCH EFFECT NET ALS IN DE VIDEO MET PIXELATION EN FREE FREE FREE bij zowel GROWTH PACKAGE SHOWCASE als
+// GRATIS WEBSITEDEMO ÉN REBRANDING ÉN AD CREATIVES!" Om de paar seconden: kleurscheiding en verspringende stroken, het pixel-filter uit
+// de film (90-black-friday-5x4-nl, #pix: blokken van groot naar scherp in stappen) en een flits FREE FREE FREE.
+const PIX_STAPPEN = [16, 12, 8, 5, 3, 1];
+function useGlitch(vak: React.RefObject<HTMLDivElement | null>, actief = true) {
+  useEffect(() => {
+    const root = vak.current;
+    if (!actief || !root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const blok = root.querySelector<SVGFECompositeElement>(".gw2-pix-c"), dik = root.querySelector<SVGFEMorphologyElement>(".gw2-pix-m");
+    const timers: number[] = [];
+    const later = (f: () => void, ms: number) => timers.push(window.setTimeout(f, ms));
+    const pixel = (n: number) => { blok?.setAttribute("width", String(n)); blok?.setAttribute("height", String(n)); dik?.setAttribute("radius", String(Math.max(.5, n / 2))); };
+    const ronde = () => {
+      root.dataset.glitch = "aan";
+      root.dataset.pix = "aan";
+      PIX_STAPPEN.forEach((n, i) => later(() => pixel(n), i * 70));
+      later(() => { root.dataset.pix = "uit"; }, PIX_STAPPEN.length * 70);
+      later(() => { root.dataset.glitch = "uit"; }, 760);
+      later(ronde, 5200 + Math.random() * 2600);
+    };
+    later(ronde, 2600);
+    return () => timers.forEach((t) => window.clearTimeout(t));
+  }, [vak, actief]);
+}
+function Glitchlaag({ id }: { id: string }) {
+  return <>
+    <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true"><filter id={id} x="0" y="0" width="1" height="1">
+      <feFlood x="4" y="4" height="2" width="2" /><feComposite className="gw2-pix-c" width="28" height="28" /><feTile result="a" />
+      <feComposite in="SourceGraphic" in2="a" operator="in" /><feMorphology className="gw2-pix-m" operator="dilate" radius="14" /></filter></svg>
+    <span className="gw2-free" aria-hidden="true"><b>FREE</b> <b>FREE</b> <b>FREE</b></span>
+  </>;
+}
+
 export default function BlackFridayKop() {
   const vak = useRef<HTMLDivElement>(null);
   useSelectie(vak);
-  return <div className="gw2-held-vak" ref={vak}>
+  useGlitch(vak);
+  return <div className="gw2-held-vak" ref={vak} style={{ "--pix": "url(#gw2-pix-kop)" } as React.CSSProperties}>
+    <Glitchlaag id="gw2-pix-kop" />
     <h1 id="gw2-kop" className="gw2-held">
       <span className="gw2-held-regel"><span className="gw2-held-woord"><W i={0}>GRATIS</W></span></span>
       <span className="gw2-held-regel"><span className="gw2-held-woord"><W i={1}>WEBSITEDEMO</W></span></span>
@@ -98,7 +133,9 @@ export function ShowcaseKop() {
     return () => io.disconnect();
   }, []);
   useSelectie(vak, inBeeld);
-  return <div className="gw2-held-vak gw2-showcase-vak" ref={vak}>
+  useGlitch(vak, inBeeld);
+  return <div className="gw2-held-vak gw2-showcase-vak" ref={vak} style={{ "--pix": "url(#gw2-pix-showcase)" } as React.CSSProperties}>
+    <Glitchlaag id="gw2-pix-showcase" />
     <h2 id="gw2-showcase-kop" translate="no">
       <span className="gw2-held-regel"><span className="gw2-held-woord"><W i={0}>GROWTH</W></span> <span className="gw2-held-woord"><W i={1}>PACKAGE</W></span></span>
       <span className="gw2-held-regel"><span className="gw2-held-woord"><W i={2}>SHOWCASE</W></span><W i={3}><span className="gw2-punt">.</span></W></span>
