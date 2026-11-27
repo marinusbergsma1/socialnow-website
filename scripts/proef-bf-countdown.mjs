@@ -46,7 +46,12 @@ eis(/extra\?: \[string, string\]\[\]/.test(lees("proposal/aanvragen.ts")) && /ex
 // KAPITALS ... ÉN REBRANDING ÉN AD CREATIVES!"
 const held = lees("proposal/BlackFridayKop.tsx"), heldTekst = held.replace(/<[^>]+>/g, "");
 eis(/<BlackFridayKop \/>/.test(gw) && /ÉN REBRANDING/.test(heldTekst) && /ÉN AD CREATIVES/.test(heldTekst), "kop in kapitalen: websitedemo, ÉN REBRANDING, ÉN AD CREATIVES");
-eis(/gw2-muis/.test(held) && /gw2-muis/.test(css) && /gekozen/.test(held), "AI-muisjes die af en toe een woord selecteren");
+eis(/gw2-muis/.test(held) && /gw2-muis/.test(css) && /gekozen/.test(held), "cursor die af en toe een woord selecteert");
+// 27 nov (Marinus): "Doe maar 1 pijltje die elke keer een ander stuk tekst selecteerd. Deze." (de I-beam-tekstcursor)
+eis((held.match(/className="gw2-muis"/g) || []).length === 1 && !/Developer|Designer/.test(held) && /gw2-ibeam/.test(held), "één I-beam-tekstcursor, geen naamlabels");
+eis(/\.gw2-held-woord\{[^}]*background-size:0% 100%/.test(css) && /\.gw2-held-woord\.gekozen\{[^}]*background-size:100% 100%/.test(css), "selectie groeit van links naar rechts, zoals slepen");
+// 27 nov (Marinus): "Verder Plan een Cal mag verder weg." Geen Plan een call-knop meer in de kop van /gratis-website.
+eis(!/className="sn-pill" href=\{boekingsPlannerUrl\}/.test(gw), "geen Plan een call-knop in de kop van /gratis-website");
 eis(/@keyframes gw2-kop-in/.test(css) && /prefers-reduced-motion:reduce\)\{[\s\S]{0,400}gw2-muis\{display:none/.test(css), "tekst fadet in; bij reduced motion geen muisjes");
 eis(/\.gw2-held-woord\.gekozen\{[^}]*color:#fff/.test(css), "geselecteerd woord: witte tekst op groen");
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");
