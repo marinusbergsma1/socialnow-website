@@ -1,5 +1,5 @@
 import GrowthDealSticker from "./GrowthDealSticker";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { languagePrefix, useLanguage } from "./i18n/context";
@@ -7,7 +7,7 @@ import { aanvraagWhatsApp, heeftWhatsApp, whatsappLink } from "./aanvragen";
 import { people } from "./content";
 import { klein } from "./licht";
 import BlackFridayBlok from "./BlackFridayBlok";
-import BlackFridayKop from "./BlackFridayKop";
+import BlackFridayKop, { ShowcaseKop } from "./BlackFridayKop";
 import "./header-algemeen.css";
 import "./home-enthousiast.css";
 import "./gratis-website-wit.css";
@@ -62,6 +62,19 @@ function laad(): Antwoorden {
 
 
 export default function GratisWebsite() {
+  // 27 november 2026 (Marinus): "misschien als sectie kaart over de onboarding laten schuiven als je verder scrollt." Het formulier blijft
+  // staan (sticky) met zijn onderkant in beeld, de zwarte showcase-kaart schuift eroverheen.
+  const vel = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = vel.current;
+    if (!el) return;
+    const zet = () => el.style.setProperty("--vel-top", `${Math.min(0, window.innerHeight - el.offsetHeight)}px`);
+    zet();
+    const ro = new ResizeObserver(zet);
+    ro.observe(el);
+    window.addEventListener("resize", zet);
+    return () => { ro.disconnect(); window.removeEventListener("resize", zet); };
+  }, []);
   const { language, t } = useLanguage();
   const [a, zetA] = useState<Antwoorden>(LEEG);
   const [stap, zetStap] = useState(0);
@@ -148,7 +161,7 @@ export default function GratisWebsite() {
         <BlackFridayBlok />
       </div>
     </section>
-    <div className="gw2" id="onboarding"><div className="gw2-vel">
+    <div className="gw2" id="onboarding"><div className="gw2-vel" ref={vel}>
     <div className="gw2-voortgang" aria-hidden="true">{STAPPEN.map((_, i) => <span key={i} className={i <= stap ? "aan" : ""} />)}</div>
 
     <form className="gw2-kaart" onSubmit={verder} noValidate>
@@ -255,7 +268,7 @@ export default function GratisWebsite() {
     <section className="gw2-showcase" id="showcase" aria-labelledby="gw2-showcase-kop">
       {/* 27 nov (Marinus): "De Showcase mag op een zwarte achtergrond en nog groter met BLACK teksten GROWTH PACKAGE SHOWCASE!" */}
       <p className="gw2-showcase-label" translate="no">Black Friday Deal</p>
-      <h2 id="gw2-showcase-kop" translate="no">Growth Package Showcase<span className="gw2-punt">.</span></h2>
+      <ShowcaseKop />
       <p className="gw2-showcase-sub">ELT Live: branding, e-mail, website en ad creatives. Zo ziet een demopakket eruit. Scroll erdoorheen, of open de website vanuit de presentatie.</p>
       <div className="gw2-showcase-venster">
         <div className="gw2-showcase-balk" aria-hidden="true"><i /><i /><i /><span translate="no">socialnow.nl/showcase/elt-live</span></div>

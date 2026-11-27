@@ -50,7 +50,7 @@ const held = lees("proposal/BlackFridayKop.tsx"), heldTekst = held.replace(/<[^>
 eis(/<BlackFridayKop \/>/.test(gw) && /ÉN REBRANDING/.test(heldTekst) && /ÉN AD CREATIVES/.test(heldTekst), "kop in kapitalen: websitedemo, ÉN REBRANDING, ÉN AD CREATIVES");
 eis(/gw2-muis/.test(held) && /gw2-muis/.test(css) && /gekozen/.test(held), "cursor die af en toe een woord selecteert");
 // 27 nov (Marinus): "Doe maar 1 pijltje die elke keer een ander stuk tekst selecteerd. Deze." (de I-beam-tekstcursor)
-eis((held.match(/className="gw2-muis"/g) || []).length === 1 && !/Developer|Designer/.test(held) && /gw2-ibeam/.test(held), "één I-beam-tekstcursor, geen naamlabels");
+eis(((held.split("export function ShowcaseKop")[0]).match(/className="gw2-muis"/g) || []).length === 1 && !/Developer|Designer/.test(held) && /gw2-ibeam/.test(held), "één I-beam-tekstcursor, geen naamlabels");
 // 27 nov (Marinus): "Deze niet zo groot en iets rustiger selecteren en het selecteren in meerdere kleuren en infaden zoals de teksten
 // bij het ELT project." en "na selecteren moet ie weer terug veranderen in een muis."
 eis(/width="16"/.test(held) && /gw2-pijl/.test(held) && /dataset\.vorm = "pijl"/.test(held) && /dataset\.vorm = "tekst"/.test(held), "kleine cursor: pijl onderweg, I-beam bij selecteren, daarna weer pijl");
@@ -79,7 +79,7 @@ eis(/\.gw2-kop \.sn-alg-uitleg\{[^}]*font-size:15px/.test(css), "uitleg onder de
 eis(/"\/gratis-website": "BLACK FRIDAY DEAL"/.test(lees("proposal/WebsiteProposal.tsx")) && /'gratis-website': \{title: 'BLACK FRIDAY DEAL \| SocialNow'/.test(lees("scripts/postbuild.mjs")), "paginatitel is BLACK FRIDAY DEAL");
 eis(/\.gw2-verder\{[^}]*color:#fff[;}]/.test(css), "knop Volgende: witte tekst op groen");
 // 27 nov (Marinus): "De Showcase mag op een zwarte achtergrond en nog groter met BLACK teksten GROWTH PACKAGE SHOWCASE!"
-eis(/Growth Package Showcase<span className="gw2-punt">\.<\/span>/.test(gw), "showcase-kop: GROWTH PACKAGE SHOWCASE met groene punt");
+eis(/<ShowcaseKop \/>/.test(gw) && /GROWTH<\/W>[\s\S]{0,120}PACKAGE<\/W>[\s\S]{0,160}SHOWCASE<\/W>[\s\S]{0,60}gw2-punt/.test(lees("proposal/BlackFridayKop.tsx")), "showcase-kop: GROWTH PACKAGE SHOWCASE met groene punt");
 eis(/\.gw2-showcase::before\{[^}]*width:100vw[^}]*background:#000/.test(css), "showcase op zwart over de volle breedte");
 eis(/\.gw2-showcase\{[^}]*max-width:1400px/.test(css) && /\.gw2-showcase h2#gw2-showcase-kop\{[^}]*font-size:clamp\(40px/.test(css), "showcase groter: breder vlak en grote kop");
 eis(/\.gw2-showcase h2#gw2-showcase-kop\{[^}]*color:#fff/.test(css) && !/\.gw2-showcase[^{]*\{[^}]*letter-spacing:-/.test(css), "kop wit, geen negatieve letterafstand");
@@ -89,4 +89,11 @@ eis(fs.existsSync("public/images/growth-package-deal.webp"), "sticker Growth Pac
 eis(/<div className="sn-alg-tekst">\s*<GrowthDealSticker \/>/.test(gw), "sticker linksboven in de kop van /gratis-website");
 eis(/<GrowthDealSticker naar="\/gratis-website" \/>\s*<p className="sn-alg-label">/.test(he), "sticker linksboven op de homepage, linkt naar de deal");
 eis(/\.sn-gpd\{[^}]*width:clamp\(190px,24vw,340px\)/.test(hcss), "sticker groot (tot 340 px)");
+// 27 nov (Marinus): "zelfde soort effect als bij de titel zelf met het selecteren etc en misschien als sectie kaart over de onboarding laten
+// schuiven als je verder scrollt. En teksten ook infaden."
+const kopSrc = lees("proposal/BlackFridayKop.tsx");
+eis(/export function ShowcaseKop[\s\S]*useSelectie\(vak, inBeeld\)/.test(kopSrc) && /gw2-held-woord/.test(kopSrc.split("export function ShowcaseKop")[1] || ""), "showcase-kop: zelfde selectie-cursor, start in beeld");
+eis(/\.gw2-vel\{position:sticky;top:var\(--vel-top/.test(css) && /--vel-top/.test(gw), "onboarding blijft staan, showcase schuift er als kaart overheen");
+eis(/\.gw2-showcase::before\{[^}]*border-radius:36px 36px 0 0/.test(css), "showcase-kaart met ronde bovenhoeken");
+eis(/\.gw2-showcase\.in-beeld :is\([^)]*gw2-showcase-sub/.test(css) && /\.gw2-showcase:not\(\.in-beeld\) \.gw2-bw/.test(css), "teksten faden in zodra de showcase in beeld komt");
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");

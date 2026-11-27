@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // 27 november 2026 (Marinus): "Dit mogen ook nog wel even wat meer gekke teksten zijn zoals de video ... KAPITALS ... ÉN REBRANDING
 // EN AD CREATIVES!" Kop in kapitalen en zwaar.
@@ -27,11 +27,11 @@ function IBeam() {
 const W = ({ i, children }: { i: number; children: React.ReactNode }) =>
   <span className="gw2-bw" style={{ "--i": i } as React.CSSProperties}>{children}</span>;
 
-export default function BlackFridayKop() {
-  const vak = useRef<HTMLDivElement>(null);
+// De cursor die steeds een ander woord selecteert. Start pas als `actief` waar is (de showcase: zodra hij in beeld komt).
+function useSelectie(vak: React.RefObject<HTMLDivElement | null>, actief = true) {
   useEffect(() => {
     const root = vak.current;
-    if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!actief || !root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const woorden = [...root.querySelectorAll<HTMLElement>(".gw2-held-woord")];
     const muis = root.querySelector<HTMLElement>(".gw2-muis");
     if (!muis || !woorden.length) return;
@@ -68,7 +68,12 @@ export default function BlackFridayKop() {
     };
     later(ronde, 1800);   // eerst de tekst laten infaden
     return () => timers.forEach((t) => window.clearTimeout(t));
-  }, []);
+  }, [vak, actief]);
+}
+
+export default function BlackFridayKop() {
+  const vak = useRef<HTMLDivElement>(null);
+  useSelectie(vak);
   return <div className="gw2-held-vak" ref={vak}>
     <h1 id="gw2-kop" className="gw2-held">
       <span className="gw2-held-regel"><span className="gw2-held-woord"><W i={0}>GRATIS</W></span></span>
@@ -76,6 +81,28 @@ export default function BlackFridayKop() {
       <span className="gw2-held-regel"><W i={2}>ÉN</W> <span className="gw2-held-woord"><W i={3}>REBRANDING</W></span></span>
       <span className="gw2-held-regel"><W i={4}>ÉN</W> <span className="gw2-held-woord"><W i={5}>AD CREATIVES</W></span><W i={6}><span className="sn-alg-punt">!</span></W></span>
     </h1>
+    <span className="gw2-muis" data-vorm="pijl" aria-hidden="true"><Pijl /><IBeam /></span>
+  </div>;
+}
+
+// 27 november 2026 (Marinus), bij GROWTH PACKAGE SHOWCASE: "Nog meer BLACK zelfde soort effect als bij de titel zelf met het selecteren
+// etc ... En teksten ook infaden." Zelfde cursor en blur-fade, maar pas als de showcase in beeld komt.
+export function ShowcaseKop() {
+  const vak = useRef<HTMLDivElement>(null);
+  const [inBeeld, zetInBeeld] = useState(false);
+  useEffect(() => {
+    const sectie = vak.current?.closest<HTMLElement>(".gw2-showcase");
+    if (!sectie) return;
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { sectie.classList.add("in-beeld"); zetInBeeld(true); io.disconnect(); } }, { rootMargin: "0px 0px -25% 0px" });
+    io.observe(sectie);
+    return () => io.disconnect();
+  }, []);
+  useSelectie(vak, inBeeld);
+  return <div className="gw2-held-vak gw2-showcase-vak" ref={vak}>
+    <h2 id="gw2-showcase-kop" translate="no">
+      <span className="gw2-held-regel"><span className="gw2-held-woord"><W i={0}>GROWTH</W></span> <span className="gw2-held-woord"><W i={1}>PACKAGE</W></span></span>
+      <span className="gw2-held-regel"><span className="gw2-held-woord"><W i={2}>SHOWCASE</W></span><W i={3}><span className="gw2-punt">.</span></W></span>
+    </h2>
     <span className="gw2-muis" data-vorm="pijl" aria-hidden="true"><Pijl /><IBeam /></span>
   </div>;
 }

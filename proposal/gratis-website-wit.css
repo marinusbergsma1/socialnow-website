@@ -188,7 +188,7 @@ html:root .sn-site .sn-alg.gw2-kop .sn-alg-uitleg strong{font-size:clamp(17px,1.
 
 /* 27 november 2026 (Marinus): showcase op zwart, groter, kop GROWTH PACKAGE SHOWCASE. Zwart vlak over de volle breedte met het stippenraster. */
 html:root .sn-site .gw2-showcase{position:relative;isolation:isolate;max-width:1400px;padding:110px 20px 120px;color:#fff}
-.gw2-showcase::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);background:#000 radial-gradient(#ffffff21 1px,transparent 1px) 0 0/32px 32px}
+.gw2-showcase::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);border-radius:36px 36px 0 0;background:#000 radial-gradient(#ffffff21 1px,transparent 1px) 0 0/32px 32px;box-shadow:0 -30px 80px #0b0f1240}
 html:root .sn-site .gw2-showcase .gw2-showcase-label{margin:0;font-family:var(--v-mono,ui-monospace,Menlo,monospace);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#25d366}
 html:root .sn-site .gw2-showcase h2#gw2-showcase-kop{margin:12px 0 14px;font-size:clamp(40px,7vw,104px)!important;line-height:1;letter-spacing:.01em;word-spacing:.24em;text-transform:uppercase;color:#fff}
 html:root .sn-site .gw2-showcase .gw2-showcase-sub{margin:0;max-width:720px;font-size:clamp(15px,1.4vw,18px);line-height:1.5;color:#ffffffb3}
@@ -196,3 +196,18 @@ html:root .sn-site .gw2-showcase .gw2-showcase-venster{margin-top:40px;border-co
 html:root .sn-site .gw2-showcase .gw2-showcase-venster iframe{height:min(86vh,920px)}
 html:root .sn-site .gw2-showcase .gw2-showcase-open{color:#fff;text-decoration-color:#ffffff4d}
 
+
+/* 27 november 2026 (Marinus): "als sectie kaart over de onboarding laten schuiven als je verder scrollt. En teksten ook infaden." */
+.gw2-vel{position:sticky;top:var(--vel-top,0px);z-index:0}
+html:root .sn-site .gw2-showcase{z-index:1}
+.gw2-showcase-vak{margin:12px 0 14px}
+html:root .sn-site .gw2-showcase h2#gw2-showcase-kop{display:flex;flex-direction:column;gap:.04em;margin:0;font-weight:900;white-space:nowrap}
+html:root .sn-site .gw2-showcase h2#gw2-showcase-kop :is(.gw2-held-regel,.gw2-held-woord){color:#fff}
+.gw2-showcase:not(.in-beeld) .gw2-bw{animation-play-state:paused}
+.gw2-showcase :is(.gw2-showcase-label,.gw2-showcase-sub,.gw2-showcase-venster,.gw2-showcase-open){opacity:0;filter:blur(10px);transform:translateY(24px);transition:opacity .8s ease,filter .8s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.gw2-showcase.in-beeld :is(.gw2-showcase-label,.gw2-showcase-sub,.gw2-showcase-venster,.gw2-showcase-open){opacity:1;filter:none;transform:none}
+.gw2-showcase.in-beeld .gw2-showcase-sub{transition-delay:.45s}
+.gw2-showcase.in-beeld .gw2-showcase-venster{transition-delay:.65s}
+.gw2-showcase.in-beeld .gw2-showcase-open{transition-delay:.85s}
+@media(max-width:900px){html:root .sn-site .gw2-showcase h2#gw2-showcase-kop{white-space:normal}}
+@media(prefers-reduced-motion:reduce){.gw2-vel{position:static}.gw2-showcase :is(.gw2-showcase-label,.gw2-showcase-sub,.gw2-showcase-venster,.gw2-showcase-open){opacity:1;filter:none;transform:none;transition:none}}
