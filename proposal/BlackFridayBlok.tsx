@@ -51,7 +51,7 @@ export default function BlackFridayBlok() {
       {!speelt && <button type="button" className="gw2-bf-speel" onClick={wissel} aria-label="Speel de Black Friday-film af">
         <Play size={22} aria-hidden="true" /><span>Bekijk de film</span></button>}
     </div>
-    <Rij beelden={RIJ_WERK} soort="werk" />
-    <Rij beelden={RIJ_SITES} soort="sites" />
+    {/* 27 nov (Marinus): "Hier verder 1 row van maken." Content en websites om en om in één rij. */}
+    <Rij beelden={RIJ_WERK.flatMap((b, i) => RIJ_SITES[i] ? [b, RIJ_SITES[i]] : [b]).concat(RIJ_SITES.slice(RIJ_WERK.length))} soort="werk" />
   </div>;
 }

@@ -16,7 +16,7 @@ eis(!/gw2-bf-klok|2026-12-31T23:59/.test(bf), "geen countdown meer in het blok")
 eis(/\.load\(\)/.test(bf) && /onEnded/.test(bf), "film eindigt weer op de thumbnail");
 eis(bf.indexOf("<video") < bf.indexOf("<Rij "), "video boven de slider");
 const rij = (bf.match(/const RIJ_(WERK|SITES)\s*=\s*\[([\s\S]*?)\];/g) || []);
-eis(rij.length === 2, "twee rijen: content en websites");
+eis((bf.match(/<Rij /g) || []).length === 1 && /RIJ_WERK[\s\S]{0,120}RIJ_SITES/.test(bf), "één rij: content en websites om en om (Marinus: \"1 row\")");
 for (const p of [...bf.matchAll(/"(\/(?:images|screenshots)\/[^"]+\.webp)"/g)].map(m => m[1])) eis(fs.existsSync("public" + p), `beeld bestaat: ${p}`);
 eis(/@keyframes gw2-bf-loop/.test(css) && /prefers-reduced-motion:reduce\)\{[\s\S]{0,200}gw2-bf-baan\{animation:none/.test(css), "rijen schuiven, en staan stil bij reduced motion");
 eis(!/letter-spacing:\s*-/.test(css), "geen negatieve letterafstand");
@@ -78,4 +78,15 @@ eis(/\.gw2-kop \.sn-alg-uitleg\{[^}]*font-size:15px/.test(css), "uitleg onder de
 // 27 nov (Marinus): "En pagina moet heten BLACKFRIDAY DEAL." en, bij de knop Volgende: "Hier graag witte tekst".
 eis(/"\/gratis-website": "BLACK FRIDAY DEAL"/.test(lees("proposal/WebsiteProposal.tsx")) && /'gratis-website': \{title: 'BLACK FRIDAY DEAL \| SocialNow'/.test(lees("scripts/postbuild.mjs")), "paginatitel is BLACK FRIDAY DEAL");
 eis(/\.gw2-verder\{[^}]*color:#fff[;}]/.test(css), "knop Volgende: witte tekst op groen");
+// 27 nov (Marinus): "De Showcase mag op een zwarte achtergrond en nog groter met BLACK teksten GROWTH PACKAGE SHOWCASE!"
+eis(/Growth Package Showcase<span className="gw2-punt">\.<\/span>/.test(gw), "showcase-kop: GROWTH PACKAGE SHOWCASE met groene punt");
+eis(/\.gw2-showcase::before\{[^}]*width:100vw[^}]*background:#000/.test(css), "showcase op zwart over de volle breedte");
+eis(/\.gw2-showcase\{[^}]*max-width:1400px/.test(css) && /\.gw2-showcase h2#gw2-showcase-kop\{[^}]*font-size:clamp\(40px/.test(css), "showcase groter: breder vlak en grote kop");
+eis(/\.gw2-showcase h2#gw2-showcase-kop\{[^}]*color:#fff/.test(css) && !/\.gw2-showcase[^{]*\{[^}]*letter-spacing:-/.test(css), "kop wit, geen negatieve letterafstand");
+// 27 nov (Marinus): "KNAL DEZE nog even groot linksboven" en "Zelfde verhaal op de homepage".
+const he = lees("proposal/HomeEnthousiast.tsx"), hcss = lees("proposal/header-algemeen.css");
+eis(fs.existsSync("public/images/growth-package-deal.webp"), "sticker Growth Package Deal staat in public/images");
+eis(/<div className="sn-alg-tekst">\s*<GrowthDealSticker \/>/.test(gw), "sticker linksboven in de kop van /gratis-website");
+eis(/<GrowthDealSticker naar="\/gratis-website" \/>\s*<p className="sn-alg-label">/.test(he), "sticker linksboven op de homepage, linkt naar de deal");
+eis(/\.sn-gpd\{[^}]*width:clamp\(190px,24vw,340px\)/.test(hcss), "sticker groot (tot 340 px)");
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");
