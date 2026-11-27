@@ -53,11 +53,11 @@ html:root .sn-site .sn-alg .sn-alg-foto figcaption strong{font-family:'TT Norms'
 html:root .sn-site .sn-alg .sn-alg-keur,.sn-alg-keur{display:block;margin:22px 0 0;padding:0;overflow:hidden}
 /* 25 november 2026 (Marinus): "alleen een slider op mobiel". Op desktop één stille rij, op mobiel loopt de band. */
 .sn-alg-keur-baan{display:flex;flex-wrap:wrap;align-items:center;gap:14px 0;margin:0;padding:0;list-style:none}
-.sn-alg-keur-baan li{flex:none;margin-right:36px}
+.sn-alg-keur-baan li{flex:none;margin-right:30px}
 .sn-alg-keur-baan li[aria-hidden="true"]{display:none}
-.sn-alg-keur img{display:block;height:26px;width:auto;max-width:150px;object-fit:contain}
+.sn-alg-keur img{display:block;height:20px;width:auto;max-width:116px;object-fit:contain}
 @keyframes sn-alg-keur-loop{to{transform:translateX(calc(-100% / 3))}}
-@media(max-width:760px){.sn-alg-keur-baan{flex-wrap:nowrap;width:max-content;animation:sn-alg-keur-loop 22s linear infinite}.sn-alg-keur-baan li{margin-right:44px}.sn-alg-keur-baan li[aria-hidden="true"]{display:block}}
+@media(max-width:760px){.sn-alg-keur-baan{flex-wrap:nowrap;width:max-content;animation:sn-alg-keur-loop 22s linear infinite}.sn-alg-keur-baan li{margin-right:36px}.sn-alg-keur-baan li[aria-hidden="true"]{display:block}}
 @media(max-width:760px) and (prefers-reduced-motion:reduce){.sn-alg-keur-baan{animation:none;flex-wrap:wrap;width:auto}.sn-alg-keur-baan li[aria-hidden="true"]{display:none}}
 html:root .sn-site .sn-alg .sn-alg-uitleg strong{display:block;margin-bottom:6px;font-size:clamp(19px,1.7vw,24px);font-weight:600;line-height:1.3;color:#fff}
 .sn-alg-knop-video{position:absolute;right:16px;bottom:18px;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:#000;font:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px #0008;transition:transform .2s}
