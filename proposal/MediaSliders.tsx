@@ -76,7 +76,7 @@ export const klantwerkFilms: MediaItem[] = [
   { title: "VDZ Brigade · Het pand", src: "/video/vdz/vdz-house.mp4", poster: "/video/vdz/vdz-house-poster.jpg", kind: "video" },
 ];
 // Beelden en films om en om, zodat elke rij beweegt.
-const mengen = (beelden: MediaItem[], films: MediaItem[]) => beelden.flatMap((b, i) => (films[i] ? [b, films[i]] : [b])).concat(films.slice(beelden.length));
+export const mengen = (beelden: MediaItem[], films: MediaItem[]) => beelden.flatMap((b, i) => (films[i] ? [b, films[i]] : [b])).concat(films.slice(beelden.length));
 export const portfolioVideos: MediaItem[] = [
   ["HD/freaky_2_years.mp4", "Freaky · 2 Years"],
   [
@@ -185,14 +185,18 @@ export function MediaDialog({
     </dialog>
   );
 }
-function MediaRail({
+export function MediaRail({
   items,
   reverse = false,
   label,
+  snelheid,
+  doorlopen = false,
 }: {
   items: MediaItem[];
   reverse?: boolean;
   label: string;
+  snelheid?: number;
+  doorlopen?: boolean;
 }) {
   const { enabled } = useMotion();
   const { ref, visible } = useInView<HTMLDivElement>();
@@ -227,7 +231,7 @@ function MediaRail({
     return () => observer.disconnect();
   }, []);
   useEffect(() => {
-    if (!enabled || !visible || hover || focused || item) return;
+    if (!enabled || !visible || item || (!doorlopen && (hover || focused))) return;
     const viewport = ref.current;
     if (!viewport) return;
     let frame = 0;
@@ -237,12 +241,12 @@ function MediaRail({
       if (
         !document.hidden &&
         !drag.current.active &&
-        time > interaction.current &&
+        (doorlopen || time > interaction.current) &&
         width.current
       ) {
         const step =
           Math.min(last ? (time - last) / 1000 : 0, 0.05) *
-          (videoRail ? 22 : 18);
+          (snelheid ?? (videoRail ? 22 : 18));
         position.current += reverse ? -step : step;
         if (position.current >= width.current * 2)
           position.current -= width.current;
@@ -264,7 +268,7 @@ function MediaRail({
       cancelAnimationFrame(frame);
       document.removeEventListener("visibilitychange", sync);
     };
-  }, [enabled, visible, hover, focused, item, reverse, videoRail]);
+  }, [enabled, visible, hover, focused, item, reverse, videoRail, snelheid, doorlopen]);
   return (
     <div
       className={`h-media-rail${videoRail ? " is-video" : ""}`}

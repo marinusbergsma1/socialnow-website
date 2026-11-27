@@ -21,7 +21,7 @@ export const STAPPEN = [
   { nr: "02", id: "stap-website", titel: "Website en branding", regel: "We beginnen bij je website en je merk. Altijd eerst een gratis websitedemo." },
   { nr: "03", id: "stap-marketing", titel: "Marketing en advertenties", regel: "Content en advertenties die werken. Wat rendeert, schalen we op." },
   { nr: "04", id: "stap-operations", titel: "Management en operations", regel: "CRM, processen en cijfers op een stevige basis." },
-  { nr: "05", id: "stap-os", titel: "Eén OS met Connect", regel: "Je hele bedrijf in één systeem, met de juiste experts erbij." },
+  { nr: "05", id: "stap-os", titel: "Groei en opschalen", regel: "Je hele bedrijf in één systeem met Connect, zodat je kunt opschalen met de juiste experts erbij." },
 ] as const;
 
 const naar = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -88,12 +88,13 @@ function Mini({ id }: { id: string }) {
       <circle className={`st-a-vink st-r${i}`} cx="140" cy="6" r="4" fill={groen} />
     </g>)}
   </svg>;
-  if (id === "stap-os") return <svg viewBox="0 0 160 100" className="st-mini st-mini-os" aria-hidden="true">
-    <rect className="st-a-kader" x="50" y="18" width="60" height="64" rx="10" fill="none" stroke={groen} strokeOpacity=".6" />
-    <rect className="st-a-blok st-b0" x="58" y="26" width="20" height="20" rx="4" fill="#fff" opacity=".85" />
-    <rect className="st-a-blok st-b1" x="82" y="26" width="20" height="20" rx="4" fill={groen} />
-    <rect className="st-a-blok st-b2" x="58" y="54" width="20" height="20" rx="4" fill="#ffffff59" />
-    <rect className="st-a-blok st-b3" x="82" y="54" width="20" height="20" rx="4" fill="#ffffff2e" stroke={lijn} />
+  // 27 nov (Marinus): stap 05 heet "Groei en opschalen"; de animatie toont groei: staven die om de beurt oplopen en een groene pijl omhoog.
+  if (id === "stap-os") return <svg viewBox="0 0 160 100" className="st-mini st-mini-groei" aria-hidden="true">
+    <line x1="22" y1="84" x2="138" y2="84" stroke={lijn} />
+    {[18, 30, 44, 62].map((h, i) => <rect key={i} className={`st-a-staaf st-s${i}`} x={30 + i * 22} y={84 - h} width="14" height={h} rx="3"
+      fill={i === 3 ? groen : ["#ffffff2e", "#ffffff45", "#ffffff66"][i]} />)}
+    <polyline className="st-a-lijn" points="37,58 59,46 81,32 103,16" fill="none" stroke={groen} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" pathLength={1} />
+    <path className="st-a-punt" d="M128 30 L128 12 M121 19 L128 12 L135 19" fill="none" stroke={groen} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>;
   return <svg viewBox="0 0 160 100" className="st-mini st-mini-chat" aria-hidden="true">
     <rect className="st-a-bel1" x="18" y="18" width="78" height="22" rx="11" fill={vlak} stroke={lijn} />
@@ -188,7 +189,7 @@ export function StappenSlot() {
         {!speelt && <button type="button" className="sn-alg-knop-video st-film-knop" onClick={wissel}><Play size={15} aria-hidden="true" /><span>Bekijk de uitleg</span></button>}
       </figure>
       <div className="st-kaart-tekst">
-        <p className="st-label"><i />Stap 05 · Eén OS met Connect</p>
+        <p className="st-label"><i />Stap 05 · Groei en opschalen</p>
         <h3>Je hele bedrijf in één systeem.</h3>
         <p>Website, marketing, CRM en finance komen samen in één eigen, lokaal AI-systeem op maat. Met SocialNow Connect schakel je daarin echte experts in, en jij bepaalt tot welke informatie zij toegang krijgen.</p>
         <Punten items={["Custom OS rond jouw bedrijf, veilig en in eigen beheer", "Je team en AI-agents werken op één plek", "Connect: experts uit ons netwerk, met toegang die jij kiest"]} />
