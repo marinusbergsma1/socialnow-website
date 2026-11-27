@@ -153,8 +153,9 @@ export default function GratisWebsite() {
               call staat nog in de zwevende balk rechtsonder. */}
           {/* 27 november 2026 (Marinus): "een bekijk Showcase knop ... of een Vraag jouw Gratis Demo Pakket aan. 2 knoppen." */}
           <div className="sn-alg-acties gw2-held-knoppen">
-            <a className="sn-pill" href="#onboarding" onClick={naarStart}><span>Vraag jouw gratis demopakket aan</span><ArrowUpRight size={17} aria-hidden="true" /></a>
-            <a className="sn-pill sn-pill-blauw" href="#showcase" onClick={naarShowcase}><span>Bekijk de showcase</span><ArrowUpRight size={17} aria-hidden="true" /></a>
+            {/* 27 nov (Marinus): "Graag hier gwn FREE GROWTH PACKAGE! Grote knop en daaronder klein BEKIJK DE SHOWCASE" */}
+            <a className="sn-pill gw2-groot" href="#onboarding" onClick={naarStart}><span translate="no">Free Growth Package!</span><ArrowUpRight size={22} aria-hidden="true" /></a>
+            <a className="gw2-klein-link" href="#showcase" onClick={naarShowcase}>Bekijk de showcase<ArrowUpRight size={15} aria-hidden="true" /></a>
           </div>
         </div>
         {/* 27 november 2026 (Marinus): de twee websitetegels maken plaats voor het Black Friday-blok: logo, countdown en rijen werk. */}
