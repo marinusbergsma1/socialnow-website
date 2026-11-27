@@ -87,7 +87,7 @@ eis(/\.gw2-showcase h2#gw2-showcase-kop\{[^}]*color:#fff/.test(css) && !/\.gw2-s
 const he = lees("proposal/HomeEnthousiast.tsx"), hcss = lees("proposal/header-algemeen.css");
 eis(fs.existsSync("public/images/growth-package-deal.webp"), "sticker Growth Package Deal staat in public/images");
 eis(/<div className="sn-alg-tekst">\s*<GrowthDealSticker \/>/.test(gw), "sticker linksboven in de kop van /gratis-website");
-eis(/<GrowthDealSticker naar="\/gratis-website" \/>\s*<p className="sn-alg-label">/.test(he), "sticker linksboven op de homepage, linkt naar de deal");
+eis(/<GrowthDealSticker naar="\/black-friday" \/>\s*<p className="sn-alg-label">/.test(he), "sticker linksboven op de homepage, linkt naar de deal");
 eis(/\.sn-gpd\{[^}]*width:clamp\(190px,24vw,340px\)/.test(hcss), "sticker groot (tot 340 px)");
 // 27 nov (Marinus): "zelfde soort effect als bij de titel zelf met het selecteren etc en misschien als sectie kaart over de onboarding laten
 // schuiven als je verder scrollt. En teksten ook infaden."
@@ -96,4 +96,15 @@ eis(/export function ShowcaseKop[\s\S]*useSelectie\(vak, inBeeld\)/.test(kopSrc)
 eis(/\.gw2-vel\{position:sticky;top:var\(--vel-top/.test(css) && /--vel-top/.test(gw), "onboarding blijft staan, showcase schuift er als kaart overheen");
 eis(/\.gw2-showcase::before\{[^}]*border-radius:36px 36px 0 0/.test(css), "showcase-kaart met ronde bovenhoeken");
 eis(/\.gw2-showcase\.in-beeld :is\([^)]*gw2-showcase-sub/.test(css) && /\.gw2-showcase:not\(\.in-beeld\) \.gw2-bw/.test(css), "teksten faden in zodra de showcase in beeld komt");
+// 27 nov (Marinus): "GLITCH EFFECT NET ALS IN DE VIDEO MET PIXELATION EN FREE FREE FREE" op beide koppen.
+const kg = lees("proposal/BlackFridayKop.tsx");
+eis((kg.match(/  useGlitch\(vak/g) || []).length === 2 && (kg.match(/<Glitchlaag id=/g) || []).length === 2, "glitch op de hoofdkop en op GROWTH PACKAGE SHOWCASE");
+eis(/feComposite className="gw2-pix-c"/.test(kg) && /feMorphology className="gw2-pix-m" operator="dilate"/.test(kg) && /data-pix="aan"\] :is\(h1,h2\)\{filter:var\(--pix\)/.test(css), "pixel-filter zoals in de film");
+eis(/aria-hidden="true"><b>FREE<\/b> <b>FREE<\/b> <b>FREE<\/b>/.test(kg), "FREE FREE FREE flitst mee, verborgen voor schermlezers");
+eis(/prefers-reduced-motion:reduce\)\{\.gw2-held-vak :is\(h1,h2\)\{animation:none!important/.test(css), "geen glitch bij reduced motion");
+// 27 nov (Marinus): "Kan je de https://socialnow.nl/nl/gratis-website BLACK-FRIDAY maken?"
+const wp = lees("proposal/WebsiteProposal.tsx"), pb = lees("scripts/postbuild.mjs");
+eis(/<Route path="\/black-friday" element=\{<GratisWebsite \/>\} \/>/.test(wp) && /<Route path="\/gratis-website"/.test(wp), "pagina op /black-friday, /gratis-website blijft werken");
+eis(/'black-friday': \{title: 'BLACK FRIDAY DEAL/.test(pb), "/black-friday wordt voorgerenderd met titel en meta");
+eis(/WEBSITE_ACTIE_PAD = "\/black-friday"/.test(lees("proposal/Producten.tsx")) && /DEAL_PAD = "\/black-friday"/.test(lees("proposal/HeaderAlgemeen.tsx")) && !/"\/gratis-website"/.test(lees("proposal/HomeEnthousiast.tsx")), "menu, switch en homepage linken naar /black-friday");
 if (fouten.length) { console.log(`\n${fouten.length} rood`); process.exit(1); } else console.log("\nAlles groen");

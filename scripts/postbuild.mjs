@@ -32,6 +32,8 @@ const routeMeta = {
   privacy: {title: 'Privacybeleid | SocialNow', description: 'Lees hoe SocialNow omgaat met persoonsgegevens en welke rechten je hebt.'},
   voorwaarden: {title: 'Algemene voorwaarden | SocialNow', description: 'De algemene voorwaarden van SocialNow, inclusief het gebruik van SocialNow OS.'},
   'gratis-website': {title: 'BLACK FRIDAY DEAL | SocialNow', description: 'Heel december: gratis websitedemo, rebranding en ad creatives. Alleen voor bedrijven die serieus zijn over groei.'},
+  // 27 nov (Marinus): "Kan je de https://socialnow.nl/nl/gratis-website BLACK-FRIDAY maken?" Zelfde pagina onder /black-friday.
+  'black-friday': {title: 'BLACK FRIDAY DEAL | SocialNow', description: 'Heel december: gratis websitedemo, rebranding en ad creatives. Alleen voor bedrijven die serieus zijn over groei.'},
   'gratis-os-demo': {title: 'Gratis OS-demo | SocialNow', description: 'Vraag een gratis demo van SocialNow OS aan via WhatsApp met je naam en e-mailadres.'},
   'antwoord-aanvragen': {title: 'Antwoord op aanvragen | SocialNow', description: 'Persoonlijke antwoordpagina voor aanvragen via WhatsApp.'},
   audit: {title: 'Gratis Google Ads audit | SocialNow', description: 'Nick van Keulen loopt je Google Ads handmatig door: tracking, structuur, biedstrategie en productfeed. Met actieplan en videocall. Gratis.'},
@@ -67,6 +69,7 @@ const crumbLabels = {
   team: 'Team',
   vacatures: 'Vacatures',
   'gratis-website': 'Gratis website-upgrade',
+  'black-friday': 'Black Friday Deal',
   'gratis-os-demo': 'Gratis OS-demo',
   'antwoord-aanvragen': 'Antwoord op aanvragen',
   audit: 'Gratis Google Ads audit',

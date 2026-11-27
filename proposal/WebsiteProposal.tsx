@@ -84,7 +84,8 @@ const paginaTitels: Record<string, string> = {
   "/contact": "Contact",
   "/audit": "Gratis Google Ads audit",
   "/security": "Free Website DEMO & Security SCAN",
-  "/gratis-website": "BLACK FRIDAY DEAL",   // 27 nov (Marinus): "En pagina moet heten BLACKFRIDAY DEAL."
+  "/gratis-website": "BLACK FRIDAY DEAL",
+  "/black-friday": "BLACK FRIDAY DEAL",   // 27 nov (Marinus): "En pagina moet heten BLACKFRIDAY DEAL."
   "/gratis-os-demo": "Gratis OS-demo",
   "/antwoord-aanvragen": "Antwoord op aanvragen",
   "/juridisch": "Juridisch en compliance",
@@ -314,6 +315,8 @@ function ProposalShell() {
           <Route path="/investeerders" element={<InvesteerdersPage />} />
           <Route path="/investors" element={<Navigate to="/investeerders" replace />} />
           <Route path="/gratis-website" element={<GratisWebsite />} />
+          {/* 27 nov (Marinus): de Black Friday-pagina ook als /black-friday; /gratis-website blijft werken (mails en deellinks). */}
+          <Route path="/black-friday" element={<GratisWebsite />} />
           <Route path="/gratis-os-demo" element={<GratisOsDemo />} />
           <Route path="/antwoord-aanvragen" element={<AntwoordPagina />} />
           {/* 28 september 2026: veiligheidsvideo en sleutelbelofte. Sinds 22 oktober 2026 is /security de securityscan. */}

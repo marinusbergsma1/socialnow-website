@@ -211,3 +211,21 @@ html:root .sn-site .gw2-showcase h2#gw2-showcase-kop :is(.gw2-held-regel,.gw2-he
 .gw2-showcase.in-beeld .gw2-showcase-open{transition-delay:.85s}
 @media(max-width:900px){html:root .sn-site .gw2-showcase h2#gw2-showcase-kop{white-space:normal}}
 @media(prefers-reduced-motion:reduce){.gw2-vel{position:static}.gw2-showcase :is(.gw2-showcase-label,.gw2-showcase-sub,.gw2-showcase-venster,.gw2-showcase-open){opacity:1;filter:none;transform:none;transition:none}}
+
+/* 27 november 2026 (Marinus): glitch zoals in de film, met pixelation en FREE FREE FREE, op beide Black Friday-koppen. */
+.gw2-held-vak :is(h1,h2){position:relative}
+.gw2-held-vak[data-glitch="aan"] :is(h1,h2){animation:gw2-glitch .76s steps(1) both}
+.gw2-held-vak[data-pix="aan"] :is(h1,h2){filter:var(--pix)}
+@keyframes gw2-glitch{
+  0%{text-shadow:-4px 0 #00a3e0,4px 0 #e5397a;transform:translate(0)}
+  12%{text-shadow:6px 0 #00a3e0,-6px 0 #e5397a;transform:translate(-5px,1px);clip-path:inset(8% 0 62% 0)}
+  24%{text-shadow:-3px 0 #25d366,3px 0 #e5397a;transform:translate(4px,0);clip-path:inset(48% 0 18% 0)}
+  36%{text-shadow:none;transform:translate(0);clip-path:none}
+  48%{text-shadow:-5px 0 #00a3e0,5px 0 #f59e0b;transform:translate(-3px,-1px);clip-path:inset(30% 0 40% 0)}
+  60%{text-shadow:2px 0 #00a3e0,-2px 0 #e5397a;transform:translate(2px,0);clip-path:none}
+  72%,100%{text-shadow:none;transform:none;clip-path:none}}
+.gw2-free{position:absolute;inset:0;z-index:3;display:flex;flex-wrap:wrap;align-content:center;gap:0 .3em;pointer-events:none;opacity:0;font-weight:900;font-size:clamp(34px,6vw,110px);line-height:.95;letter-spacing:.02em;word-spacing:.24em;color:#25d366;text-shadow:3px 0 #e5397a,-3px 0 #00a3e0;mix-blend-mode:screen}
+.gw2-free b{font-weight:900}
+.gw2-held-vak[data-glitch="aan"] .gw2-free{animation:gw2-free .76s steps(1) both}
+@keyframes gw2-free{0%,8%{opacity:0}10%{opacity:1;transform:translate(-6px,0)}20%{opacity:0}30%{opacity:1;transform:translate(5px,2px)}38%{opacity:.2}46%{opacity:1;transform:none}58%,100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.gw2-held-vak :is(h1,h2){animation:none!important;filter:none!important}.gw2-free{display:none}}

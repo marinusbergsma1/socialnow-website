@@ -64,7 +64,7 @@ const DEAL_LOOP_AAN: boolean = false;
 // tot iemand de film start; bij reduced motion alleen de stilstaande foto.
 const DEAL_LOOP = "/video/black-friday/socialnow-black-friday-loop.mp4";
 const DEAL_LOOP_POSTER = "/video/black-friday/socialnow-black-friday-loop-poster.jpg";
-const DEAL_PAD = "/gratis-website";
+const DEAL_PAD = "/black-friday";
 type Modus = "explainer" | "deal";
 
 // 4 november 2026 (Marinus): "die technische data en huidige landingspagina mag naar producten gaan dan is dit meer enthousiasmering

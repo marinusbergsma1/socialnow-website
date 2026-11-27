@@ -230,7 +230,7 @@ export default function ConsentPopup() {
   };
   const akkoord = () => { try { localStorage.setItem(SLEUTEL, LEGAL_VERSION); } catch {} zetCookies(gekozen.code, gekozen.taal); setOpen(false); };
   const g = GEGEVENS[language] || GEGEVENS.en;
-  const naarWebsite = () => { akkoord(); window.location.href = `${languagePrefix(gekozen.taal)}/gratis-website/`; };
+  const naarWebsite = () => { akkoord(); window.location.href = `${languagePrefix(gekozen.taal)}/black-friday/`; };
   const naarDemo = () => { akkoord(); window.location.href = aanvraagWhatsApp("os", gekozen.taal, { voornaam, achternaam, email }); };
   const verstuur = (e: React.FormEvent) => {
     e.preventDefault();
