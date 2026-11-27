@@ -179,11 +179,11 @@ html:root .sn-site .sn-alg .sn-alg-deal-wacht strong{font-family:'TT Norms',sans
 /* 27 nov (Marinus): "het logo wat meer rechtsboven die teksten ... Alsof ie er echt als sticker mooi bijstaat." Los rechtsboven de kop,
    schuin, half over de tekst heen, met een witte stickerrand en schaduw. */
 .sn-alg-tekst{position:relative;z-index:5}
-.sn-gpd{position:absolute;z-index:4;top:clamp(-170px,-10vw,-80px);right:clamp(20px,9vw,160px);display:block;width:clamp(160px,14vw,220px);margin:0;transform:rotate(9deg);transform-origin:center;transition:transform .3s ease}
+.sn-gpd{position:absolute;z-index:4;top:auto;bottom:-24px;left:min(60%,420px);right:auto;display:block;width:clamp(140px,12vw,180px);margin:0;transform:rotate(9deg);transform-origin:center;transition:transform .3s ease}
 a.sn-gpd:hover{transform:rotate(4deg) scale(1.05)}
 .sn-gpd-sticker{display:block;width:100%;height:auto;filter:drop-shadow(0 0 0 #fff) drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 18px 30px #000c)}
 .sn-gpd .h-ambient-video{height:auto;aspect-ratio:1;overflow:visible}
 .sn-gpd .h-ambient-video>video,.sn-gpd .h-ambient-video>img{object-fit:contain}
 .sn-gpd .h-ambient-video[data-playing="true"]>img{opacity:0}
-@media(max-width:900px){.sn-alg-tekst{padding-top:120px}.sn-gpd{top:-10px;right:0;width:150px}}
+@media(max-width:900px){.sn-gpd{bottom:auto;top:-30px;left:auto;right:0;width:120px}}
 @media(prefers-reduced-motion:reduce){.sn-gpd,a.sn-gpd:hover{transition:none}}
